@@ -33,10 +33,14 @@ module Repositories
         write_rich_texts("Orm::Essential", essentials, essential_ids)
 
         exercises += essentials.flat_map { |essential| essential.exercises.map { |node| node.with(essential_id: essential_ids.fetch(essential.slug)) } }
-        exercise_ids = reserve_ids(Orm::Exercise, exercises.size)
+        # Les exercices de toute la leçon viennent après ceux des notions : sans notion, ils prennent la leçon de leur cours (ADR-0113 §4.1).
+        lesson_wide = courses.flat_map { |course| course.exercises.map { |node| [ node, course_ids.fetch(course.slug) ] } }
+        exercises += lesson_wide.map(&:first)
         course_of = course_ids_of(exercises)
-        positions = course_positions(exercises, course_of)
-        copy("exercises", EXERCISE_COLUMNS, exercises.zip(exercise_ids, positions).map { |node, id, position| exercise_row(id, node, course_of.fetch(node.essential_id), position) })
+        owners = exercises.first(exercises.size - lesson_wide.size).map { course_of.fetch(it.essential_id) } + lesson_wide.map(&:last)
+        exercise_ids = reserve_ids(Orm::Exercise, exercises.size)
+        positions = course_positions(owners)
+        copy("exercises", EXERCISE_COLUMNS, exercises.zip(exercise_ids, owners, positions).map { |node, id, owner, position| exercise_row(id, node, owner, position) })
 
         questions = exercises.zip(exercise_ids).flat_map { |exercise, exercise_id| exercise.questions.map { |node| [ exercise_id, node ] } }
         question_ids = reserve_ids(Orm::Question, questions.size)
@@ -110,15 +114,12 @@ module Repositories
       end
 
       # La leçon de chaque notion qui porte un exercice (les fiches viennent d'être écrites, dans la même transaction).
-      def course_ids_of(exercises) = Orm::Essential.where(id: exercises.map(&:essential_id).uniq).pluck(:id, :course_id).to_h
+      def course_ids_of(exercises) = Orm::Essential.where(id: exercises.filter_map(&:essential_id).uniq).pluck(:id, :course_id).to_h
 
-      # La position est unique par leçon : elle suit la dernière de la leçon, dans l'ordre des fiches puis des exercices.
-      def course_positions(exercises, course_of)
-        last = Orm::Exercise.where(course_id: course_of.values.uniq).group(:course_id).maximum(:position)
-        exercises.map do |node|
-          course_id = course_of.fetch(node.essential_id)
-          last[course_id] = last.fetch(course_id, 0) + 1
-        end
+      # La position est unique par leçon : elle suit la dernière de la leçon, dans l'ordre des exercices (notions, puis toute la leçon).
+      def course_positions(owners)
+        last = Orm::Exercise.where(course_id: owners.uniq).group(:course_id).maximum(:position)
+        owners.map { |course_id| last[course_id] = last.fetch(course_id, 0) + 1 }
       end
 
       # Dans l'ordre d'EXERCISE_COLUMNS.

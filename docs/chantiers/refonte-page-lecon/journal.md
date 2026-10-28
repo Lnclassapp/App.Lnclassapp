@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-10-28 | Contenu Thalès v2 : 4 exercices de notion en Fixation (un par notion), 4 exercices de toute la leçon en Évaluation (problèmes en contexte). Touré a relu et validé les 8 sujets et leurs questions. | Q11 : le type suit ce que l'exercice travaille ; une notion se fixe, la leçon entière s'évalue. | Non |
 
 ## Ce qui a dérapé
 

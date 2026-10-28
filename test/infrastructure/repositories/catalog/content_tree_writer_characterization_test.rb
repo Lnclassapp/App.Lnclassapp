@@ -32,14 +32,29 @@ module Repositories
         )
       end
 
-      # Chaque cours est validé comme le moteur le fait, puis les 4 sont écrits en un seul lot.
+      # Chaque cours est validé comme le moteur le fait (format 1 : l'adaptateur n'en lit plus les exercices), puis les 4 sont écrits en
+      # un seul lot. Les exercices des notions sont rendus au plan tels que l'adaptateur d'avant le format 2 les lisait : c'est
+      # l'écriture des exercices que ce test garde (ADR-0113).
       def import_lessons
         subject = adapter
-        context = subject.prepare(target: nil)
-        items = LESSONS.flat_map { |file| JSON.parse(file.read).fetch("courses") }.each_with_index.map do |root, index|
-          subject.validate_root(root:, path: "courses[#{index}]", context:).tap { |item| assert item.valid?, item.errors.inspect }
+        prepared = subject.prepare(target: nil)
+        context = prepared.with(data: prepared.data.merge(version: 1))
+        roots = LESSONS.flat_map { |file| JSON.parse(file.read).fetch("courses") }
+        items = roots.each_with_index.map do |root, index|
+          item = subject.validate_root(root:, path: "courses[#{index}]", context:).tap { |validated| assert validated.valid?, validated.errors.inspect }
+          item.with(plan: item.plan.with(essentials: item.plan.essentials.zip(root["essentials"]).map { |node, raw| node.with(exercises: legacy_exercises(raw)) }))
         end
         subject.write(items:, author_id: @author.id, at: Time.zone.parse("2026-09-30 08:00"))
+      end
+
+      def legacy_exercises(essential)
+        Array(essential["exercises"]).each_with_index.map do |exercise, index|
+          Ports::Catalog::ContentTreeWriterPort::ExerciseNode.new(
+            public_id: SecureRandom.base58(14), essential_id: nil, title: (exercise["title"] || exercise["name"]).squish,
+            statement: exercise["description"].to_s.strip.presence, exercise_type: exercise["exercise_type"], position: index + 1,
+            questions: exercise["questions"].each_with_index.map { |question, rank| Ports::Catalog::ContentTreeWriterPort::QuestionNode.from_import(question, position: rank + 1) }
+          )
+        end
       end
 
       # Lignes créées par ce test, dans l'ordre des id.

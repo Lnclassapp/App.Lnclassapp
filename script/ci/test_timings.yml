@@ -1,7 +1,6 @@
 # Seconds per test file, summed from `-v` runs. Written by script/ci/record_timings, read by script/ci/plan.rb
 # to balance the parts of a sharded group, and by script/ci/system_budget.rb: a chantier adds at most 15 s to
 # test/system (ADR-0069 §9). Stale values only unbalance the parts; they never skip a test.
-test/performance/assessment/import_exercises_performance_test.rb: 56.0
 test/performance/catalog/import_course_tree_performance_test.rb: 38.0
 test/performance/catalog/import_essentials_performance_test.rb: 42.0
 test/performance/classroom/generate_missing_classrooms_performance_test.rb: 31.0
@@ -9,7 +8,6 @@ test/performance/school/import_schools_performance_test.rb: 38.0
 test/performance/school/regenerate_codes_in_bulk_performance_test.rb: 39.0
 test/system/assessment/exercise_page_test.rb: 10.3
 test/system/assessment/exercise_session_test.rb: 8.0
-test/system/assessment/import_exercises_test.rb: 4.3
 test/system/assessment/question_image_test.rb: 5.2
 test/system/assessment/question_matching_test.rb: 4.9
 test/system/assessment/question_numeric_test.rb: 2.8
@@ -22,7 +20,7 @@ test/system/catalog/course_catalog_test.rb: 17.6
 test/system/catalog/course_sheet_browser_test.rb: 14.5
 test/system/catalog/essential_images_test.rb: 4.6
 test/system/catalog/essential_page_test.rb: 8.7
-test/system/catalog/import_course_tree_test.rb: 9.3
+test/system/catalog/import_course_tree_test.rb: 14.0
 test/system/catalog/import_essentials_test.rb: 3.9
 test/system/catalog/public_level_pages_test.rb: 2.2
 test/system/catalog/public_material_pages_test.rb: 4.0

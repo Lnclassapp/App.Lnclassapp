@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -30,7 +30,10 @@ module Ports
       end
       ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions)
       EssentialNode = Data.define(:slug, :course_id, :name, :subtitle, :content, :position, :exercises)
-      CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials)
+      # exercises : les exercices de toute la leçon, sans notion (ADR-0113) ; ceux d'une notion sont portés par sa fiche.
+      CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials, :exercises) do
+        def initialize(exercises: [], **) = super
+      end
 
       # Appelé dans une transaction ; une table après l'autre, parents d'abord (insert_all ou COPY, ADR-0068) ; lève si la base refuse.
       # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées)

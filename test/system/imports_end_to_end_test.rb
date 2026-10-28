@@ -116,9 +116,8 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
         assert_text "Terminé"
         assert_counters(imported: 1, skipped: 0, errors: 0, total: 1)
         assert_text "Fiches de révision créées : 1"
-        assert_text "Exercices créés : 1"
-        assert_text "Questions créées : 2"
-        assert_text "Propositions créées : 4"
+        assert_text "Exercices créés : 0"
+        assert_text "Exercices ignorés (format v1) : 1"
       end
       close_tracking
     end
@@ -130,9 +129,9 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
       assert_selector "li", text: /#{COURSE}.*Brouillon/m
       click_on COURSE
     end
-    within "#course_essentials" do
-      assert_selector "li", text: /#{ESSENTIAL}.*Brouillon/m
-    end
+    # La page du cours n'a plus de liste de notions (ADR-0113, refonte de la page de la leçon) : la notion est en base, en brouillon.
+    assert_selector "h1", text: COURSE
+    assert_equal [ [ ESSENTIAL, "draft" ] ], Orm::Essential.pluck(:name, :status)
 
     open_sidebar_entry "Imports"
     assert_selector "#imports tr", count: 2

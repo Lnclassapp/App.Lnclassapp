@@ -14,7 +14,7 @@ module Entities
 
       test "les erreurs d'enveloppe rejettent tout le fichier" do
         assert ImportError.new(path: "$.version", code: "version_unsupported").blocking?
-        assert_equal 25, ImportError::CODES.size # + national_code_taken (ADR-0063), taken et no_latin_character (ADR-0066), duplicate_in_files (ADR-0068), forbidden et not_enqueued (ADR-0096), image_slot_malformed et image_slots_unreadable (ADR-0105)
+        assert_equal 27, ImportError::CODES.size # + national_code_taken (ADR-0063), taken et no_latin_character (ADR-0066), duplicate_in_files (ADR-0068), forbidden et not_enqueued (ADR-0096), image_slot_malformed et image_slots_unreadable (ADR-0105), essential_exercise_count et lesson_exercise_count (ADR-0113)
       end
 
       # ADR-0066 : un nom de DRENA déjà pris sous un autre slug est une erreur de la ligne.

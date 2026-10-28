@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Import des cours complets, version 2 (ADR-0113, ADR-0039, UDR-0038)",
+  "description": "Enveloppe { format, version, courses[] }. Chaque cours porte toute sa descendance : essentials[] → exercises[] → questions[] → answers[], et exercises[] pour les exercices de toute la leçon. Un exercice a un titre (title), un sujet (statement), un type (exercise_type) et des questions ; name et description ne sont plus admis. Les clés de l'ancienne application pour le cours (nom, sous_titre) et la proposition (is_correct) sont acceptées. La règle (un exercice par notion, quatre exercices de toute la leçon), la présence des noms et des sujets, le référentiel et la structure des questions sont vérifiés par l'adaptateur, pour que l'erreur soit notée à la clé canonique et nomme la leçon. tolerance (marge d’une question numeric) et match (côté droit d’une paire matching) sont facultatives (ADR-0091). La clé status est ignorée : tout naît en brouillon.",
+  "type": "object",
+  "required": ["format", "version", "courses"],
+  "additionalProperties": false,
+  "properties": {
+    "format": { "const": "lnclass.course-tree" },
+    "version": { "const": 2 },
+    "courses": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/course" }
+    }
+  },
+  "$defs": {
+    "text": { "type": ["string", "null"] },
+    "essential_content": { "description": "Texte d'une fiche : 200 Ko (204800 caractères) au plus (ADR-0105, menace.md n° 13).", "type": ["string", "null"], "maxLength": 204800 },
+    "course": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "nom": { "$ref": "#/$defs/text" },
+        "subtitle": { "$ref": "#/$defs/text" },
+        "sous_titre": { "$ref": "#/$defs/text" },
+        "content": { "$ref": "#/$defs/text" },
+        "level_name": { "$ref": "#/$defs/text" },
+        "material_name": { "$ref": "#/$defs/text" },
+        "series_name": { "$ref": "#/$defs/text" },
+        "status": { "$ref": "#/$defs/text" },
+        "statut": { "$ref": "#/$defs/text" },
+        "essentials": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/essential" }
+        },
+        "exercises": {
+          "description": "Les exercices de toute la leçon, sans notion : exactement quatre (ADR-0113 §4.4).",
+          "type": "array",
+          "items": { "$ref": "#/$defs/exercise" }
+        }
+      }
+    },
+    "essential": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "name": { "$ref": "#/$defs/text" },
+        "subtitle": { "$ref": "#/$defs/text" },
+        "content": { "$ref": "#/$defs/essential_content" },
+        "status": { "$ref": "#/$defs/text" },
+        "exercises": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/exercise" }
+        }
+      }
+    },
+    "exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "title": { "$ref": "#/$defs/text" },
+        "statement": { "$ref": "#/$defs/text" },
+        "exercise_type": { "$ref": "#/$defs/text" },
+        "status": { "$ref": "#/$defs/text" },
+        "questions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/question" }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": { "$ref": "#/$defs/text" },
+        "question_type": { "$ref": "#/$defs/text" },
+        "explanation": { "$ref": "#/$defs/text" },
+        "tolerance": { "type": ["number", "null"], "minimum": 0, "maximum": 99999999.9999 },
+        "answers": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/answer" }
+        },
+        "image": { "$ref": "#/$defs/question_image" }
+      }
+    },
+    "question_image": {
+      "description": "ADR-0105 §4.6 : l'image annoncée d'une question, jamais l'image. Facultative ; un fichier sans elle reste valide.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1, "maxLength": 150 }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": { "type": ["string", "null"], "maxLength": 500 },
+        "correct": { "type": ["boolean", "null"] },
+        "is_correct": { "type": ["boolean", "null"] },
+        "match": { "type": ["string", "null"], "maxLength": 500 }
+      }
+    }
+  }
+}

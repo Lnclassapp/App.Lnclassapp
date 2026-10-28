@@ -30,9 +30,10 @@ module Repositories
                                 exercises: [ exercise("Quiz #{slug}", position: 1), exercise("Défi #{slug}", position: 2) ])
       end
 
-      def course(slug, content:)
+      def course(slug, content:, exercises: [])
         Port::CourseNode.new(slug:, name: "Cours #{slug}", subtitle: "Sous-titre", content:, level_id: @level.id, series_id: nil,
-                             material_id: @material.id, essentials: [ essential("#{slug}-a", position: 1), essential("#{slug}-b", position: 2) ])
+                             material_id: @material.id, essentials: [ essential("#{slug}-a", position: 1), essential("#{slug}-b", position: 2) ],
+                             exercises:)
       end
 
       test "écrit deux cours complets, parents d'abord, tout en draft, et compte les lignes créées" do
@@ -52,6 +53,29 @@ module Repositories
           assert_equal [ [ "draft", @author.id, @at ] ], model.distinct.pluck(:status, :author_id, :created_at), model
         end
         assert_equal [ @at ], Orm::Answer.distinct.pluck(:updated_at)
+      end
+
+      # ADR-0113 §4.1 : un exercice de toute la leçon n'a pas de notion ; il prend la leçon du cours et suit les exercices des notions.
+      test "les exercices de toute la leçon n'ont pas de notion, portent la leçon du cours et se placent après ceux des notions" do
+        lesson_wide = [ exercise("Bilan 1"), exercise("Bilan 2") ]
+
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ course("genetique", content: nil, exercises: lesson_wide),
+                                                                          course("ecologie", content: nil, exercises: [ exercise("Bilan écologie") ]) ])
+
+        assert_equal({ courses: 2, essentials: 4, exercises: 11, questions: 22, answers: 44 }, counts)
+        genetique = Orm::Course.find_by!(slug: "genetique")
+        assert_equal [ [ 1, "Quiz genetique-a" ], [ 2, "Défi genetique-a" ], [ 3, "Quiz genetique-b" ], [ 4, "Défi genetique-b" ], [ 5, "Bilan 1" ], [ 6, "Bilan 2" ] ],
+                     Orm::Exercise.where(course_id: genetique.id).order(:position).pluck(:position, :title)
+        assert_equal [ [ nil, "draft" ], [ nil, "draft" ] ], Orm::Exercise.where(course_id: genetique.id, title: [ "Bilan 1", "Bilan 2" ]).pluck(:essential_id, :status)
+        assert_equal [ [ 5, "Bilan écologie" ] ], Orm::Exercise.where(course_id: Orm::Course.find_by!(slug: "ecologie").id, essential_id: nil).pluck(:position, :title)
+        assert_equal [ 2, 2 ], Orm::Exercise.find_by!(title: "Bilan 1").questions.then { [ it.count, it.first.answers.count ] }
+      end
+
+      test "des exercices de toute la leçon dans un cours sans notion s'écrivent aussi" do
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ course("seul", content: nil, exercises: [ exercise("Bilan") ]).with(essentials: []) ])
+
+        assert_equal({ courses: 1, essentials: 0, exercises: 1, questions: 2, answers: 4 }, counts)
+        assert_equal [ [ 1, nil ] ], Orm::Exercise.pluck(:position, :essential_id)
       end
 
       test "le contenu riche est assaini ; un contenu vide ne crée pas de ligne" do

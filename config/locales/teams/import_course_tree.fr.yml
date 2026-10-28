@@ -1,15 +1,17 @@
-# Import des cours complets (plan boucle-pedagogique, Lot I1) — ADR-0035, ADR-0039, UDR-0038, UDR-0007
+# Import des cours complets (plan boucle-pedagogique, Lot I1) — ADR-0035, ADR-0039, ADR-0113, UDR-0038, UDR-0007
 fr:
   teams:
     imports:
       kinds:
         course_tree:
           title: "Format du fichier"
-          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.course-tree</code>, version 1. Chaque élément de <code class=\"font-mono text-xs text-ink\">courses</code> est une fiche de cours avec toute sa descendance : fiches de révision, exercices, questions et propositions. Une fiche de cours entre entière, ou pas du tout."
+          intro_html: "Un fichier JSON au format <code class=\"font-mono text-xs text-ink\">lnclass.course-tree</code>, version 2. Chaque élément de <code class=\"font-mono text-xs text-ink\">courses</code> est une fiche de cours avec toute sa descendance : notions, exercices, questions et propositions. Une fiche de cours entre entière, ou pas du tout."
+          exercise_rule: "La règle des exercices : un exercice par notion (dans les exercices de la notion) et quatre exercices pour l'ensemble de la fiche de cours (dans les exercices de la fiche de cours elle-même). Chacun a un sujet, le texte que l'élève lit avant ses questions. Une fiche de cours qui ne tient pas la règle est refusée entière, la notion en cause nommée."
+          legacy_version: "Le format précédent (version 1) est encore lu : la fiche de cours et ses notions entrent, mais ses exercices sont ignorés et comptés dans le rapport."
           multiple: "Vous pouvez choisir jusqu'à %{files} fichiers : ils forment un seul import, avec un bilan par fichier. Une même fiche de cours dans deux fichiers n'est importée dans aucun des deux."
           nodes:
             course: "Fiche de cours"
-            essential: "Fiche de révision"
+            essential: "Notion"
             exercise: "Exercice"
             question: "Question"
             answer: "Proposition"
@@ -27,15 +29,16 @@ fr:
               level_name: "Niveau, par son nom ou son slug. Obligatoire."
               series_name: "Série, par son nom. Facultative ; donnée, elle doit être proposée pour ce niveau."
               material_name: "Matière, par son nom, son slug ou son abrégé. Obligatoire."
-              essentials: "Ses fiches de révision, dans l'ordre."
+              essentials: "Ses notions, dans l'ordre."
+              exercises: "Ses quatre exercices portant sur l'ensemble de la fiche de cours, dans l'ordre. Exactement quatre."
             essential:
-              name: "Nom de la fiche de révision. Obligatoire, 150 caractères au plus, unique dans sa fiche de cours."
+              name: "Nom de la notion. Obligatoire, 150 caractères au plus, unique dans sa fiche de cours."
               subtitle: "Sous-titre. Facultatif, 150 caractères au plus."
               content: "Contenu HTML. Facultatif ; le HTML est assaini."
-              exercises: "Ses exercices, dans l'ordre."
+              exercises: "Son exercice. Exactement un par notion."
             exercise:
               title: "Titre de l'exercice. Obligatoire, 150 caractères au plus."
-              description: "Consigne. Facultative."
+              statement: "Sujet de l'exercice : le texte que l'élève lit avant ses questions. Obligatoire."
               exercise_type: "fixation ou evaluation. Obligatoire."
               questions: "Ses questions, dans l'ordre. Au moins une."
             question:
@@ -49,6 +52,7 @@ fr:
               correct: "true si la proposition est correcte ; false par défaut. Inutile hors choix : chaque élément y est juste."
               match: "matching seulement : le côté droit de la paire, content étant le côté gauche. 500 caractères au plus."
           example: "Exemple minimal"
+          example_hint: "Les points de suspension et la ligne commençant par // marquent ce qu'il reste à écrire : un fichier JSON ne contient ni l'un ni l'autre. Il faut quatre exercices pour l'ensemble de la fiche de cours, chacun avec ses questions."
           drafts: "Tout arrive en brouillon, quelle que soit la clé status du fichier : relisez, puis publiez. Une fiche de cours déjà présente (même nom, niveau, matière et série, sans tenir compte des accents, de la casse ni des espaces) est ignorée et comptée ; elle n'est jamais modifiée."
           referential: "Noms acceptés du référentiel"
           referential_hint: "Les noms sont comparés sans accents ni casse : « Physique Chimie » désigne Physique-Chimie. Un nom inconnu met la fiche de cours en erreur ; rien n'est créé dans le référentiel."
@@ -61,5 +65,6 @@ fr:
         details:
           essentials_created: "Fiches de révision créées"
           exercises_created: "Exercices créés"
+          exercises_ignored_v1: "Exercices ignorés (format v1)"
           questions_created: "Questions créées"
           answers_created: "Propositions créées"

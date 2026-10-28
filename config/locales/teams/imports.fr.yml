@@ -56,6 +56,8 @@ fr:
         duplicate_in_files: "Cette fiche de cours est aussi dans %{other} : aucune des deux n'est importée."
         image_slots_unreadable: "Texte trop complexe à relire : simplifiez la mise en forme."
         image_slot_malformed: "Emplacement d'image mal écrit (%{count}) : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 1 à 150 caractères."
+        essential_exercise_count: "Fiche de cours « %{course} », notion « %{name} » : il faut exactement un exercice par notion (reçus : %{count})."
+        lesson_exercise_count: "Fiche de cours « %{course} » : il faut exactement quatre exercices pour l'ensemble de la fiche de cours (reçus : %{count})."
       # Erreurs de schéma, par mot-clé json_schemer (Teams::ImportsHelper) ; les autres prennent error_codes.schema.
       schema_keywords:
         schema: "Clé inconnue : ce format ne la prévoit pas."
@@ -97,7 +99,6 @@ fr:
           schools: "Importer des établissements"
           course_tree: "Importer des fiches de cours complètes"
           essentials: "Importer des fiches de révision"
-          exercises: "Importer des exercices"
           drenas: "Importer des DRENA"
         file: "Fichier JSON"
         limits: "Un fichier .json de %{megabytes} Mo au plus, avec %{roots} éléments au plus."
