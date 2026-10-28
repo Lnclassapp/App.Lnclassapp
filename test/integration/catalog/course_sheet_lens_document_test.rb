@@ -30,7 +30,7 @@ class Catalog::CourseSheetLensDocumentTest < ActionDispatch::IntegrationTest
     document = @document.merge("pages" => [ { "sections" => [ { "title" => "Essai", "blocks" => blocks } ] } ])
     Orm::CourseSheet.create!(course: @course, theme: "teal", document:)
     sign_in_as create_student_for(@course)
-    get course_sheet_path(@course.slug)
+    get course_path(@course.slug)
     assert_response :success
   end
 
@@ -64,7 +64,7 @@ class Catalog::CourseSheetLensDocumentTest < ActionDispatch::IntegrationTest
     sign_out
     sign_in_as create_student_for(@course)
 
-    get course_sheet_path(@course.slug)
+    get course_path(@course.slug)
 
     assert_response :success
     assert_select "[data-screen-label]", 3
