@@ -18,6 +18,7 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
   def less = I18n.t("catalog.courses.show.revision_less")
   def shown = I18n.t("catalog.courses.show.revision_shown")
   def requests = page.evaluate_script("performance.getEntriesByType('resource').filter((e) => ['fetch', 'xmlhttprequest'].includes(e.initiatorType)).length")
+  def focused_in_rest? = page.evaluate_script("document.activeElement.matches(\"[data-catalog--revision-more-target='rest']\")")
   def focused_button? = page.evaluate_script("document.activeElement === document.querySelector(\"#{BUTTON}\")")
 
   def sheet_document
@@ -50,6 +51,7 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
       assert_selector BUTTON, text: less
       assert_equal "true", find(BUTTON)["aria-expanded"]
       assert_no_selector ".revision-fade"
+      assert focused_in_rest?, "le focus va au premier élément déplié"
       assert_equal shown, find("[data-catalog--revision-more-target='status']", visible: :all)[:textContent]
       assert_equal before, requests, "« Voir plus » n'envoie aucune requête"
     end

@@ -20,6 +20,22 @@ module Entities
         assert_equal 3, RevisionPreview.count_words("un **deux** *trois*")
       end
 
+      test "a glossary mark with a several-word label counts every word of the label" do
+        assert_equal 4, RevisionPreview.count_words("Un [[angle_droit|angle droit]] ici")
+      end
+
+      test "an escaped dollar sign is a price, not a formula" do
+        assert_equal 4, RevisionPreview.count_words("Il coûte 5 \\$ ici")
+        assert_equal 5, RevisionPreview.count_words("1 \\$ puis $x$ et 2 \\$")
+      end
+
+      test "every type of block of a sheet document goes through for_sheet" do
+        SheetDocument::BLOCK_TYPES.each do |type|
+          assert_nothing_raised { preview({ "type" => type }) }
+        end
+        assert_raises(ArgumentError) { preview({ "type" => "inconnu" }) }
+      end
+
       test "the cut falls after the first block that brings the total to 150 or more, at the end of the block" do
         sheet = preview(paragraph(100), paragraph(60), paragraph(10), paragraph(10))
 

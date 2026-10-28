@@ -13,7 +13,7 @@ module Entities
 
       # Les mots du texte seul : une formule `$…$` vaut un mot, une marque du lexique son mot, le balisage gras / italique rien.
       def self.count_words(text)
-        plain = text.to_s.gsub("\\$", "").gsub(MATH, " x ").gsub(GLOSSARY_MARK, '\1').delete("*")
+        plain = text.to_s.gsub("\\$", "").gsub(MATH, " x ").gsub(GLOSSARY_MARK, '\1')
         plain.split.count { it.match?(/[[:alnum:]]/) }
       end
 
@@ -60,7 +60,8 @@ module Entities
         when "box" then count_words(block["label"]) + block.fetch("paragraphs", []).sum { count_words(it) }
         when "steps" then count_words(block["label"]) + block.fetch("items", []).sum { count_words(it) }
         when "table" then table_words(block)
-        else 0
+        when "figure", "media", "exercise", "practice", "writing" then 0
+        else raise ArgumentError, "unknown block type: #{block["type"].inspect}"
         end
       end
 

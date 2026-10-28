@@ -53,6 +53,8 @@
     <% end %>
     <%= controls %>
   <% end %>
-<% else %>
+<% when :empty %>
   <%= ui_empty_state title: t("catalog.courses.show.revision_empty"), icon: "document-text" %>
+<% else %>
+  <% raise ArgumentError, "unknown revision kind: #{revision.kind.inspect}" %>
 <% end %>

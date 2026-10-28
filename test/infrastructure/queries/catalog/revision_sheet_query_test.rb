@@ -57,16 +57,59 @@ module Queries
         assert_nil revision.cut
       end
 
-      test "le texte est coupé à la fin d'un paragraphe, une figure ne compte aucun mot" do
+      test "le texte est coupé à la fin d'un paragraphe" do
         course = create_course(content: "<p>#{words(100)}</p><p>#{words(60)}</p>")
-        create_essential(course:, name: "Notion", content: "<p>suite</p><figure><img src='x'></figure>")
+        create_essential(course:, name: "Notion", content: "<p>suite</p>")
 
         cut = call(course).cut
 
         assert_predicate cut, :cut?
         assert_not cut.rest?(0, 1)
         assert cut.rest?(1, 0)
-        assert cut.rest?(1, 1)
+      end
+
+      test "une figure de pièce jointe ne compte aucun mot, même légendée" do
+        figure = "<figure class=\"attachment attachment--file\"><figcaption class=\"attachment__caption\">" \
+                 "<span class=\"attachment__name\">#{words(100)}</span></figcaption></figure>"
+        course = create_course(content: "<p>#{words(100)}</p>#{figure}<p>#{words(60)}</p><p>suite</p>")
+
+        revision = call(course)
+
+        assert_includes revision.texts.first[:blocks][1], "<figure"
+        assert_includes revision.texts.first[:blocks][1], "attachment__name"
+        assert_not revision.cut.rest?(0, 2), "la figure n'avance pas la coupe : elle tombe après le paragraphe de 60 mots"
+        assert revision.cut.rest?(0, 3)
+      end
+
+      test "le texte saisi dans l'éditeur (un seul div, paragraphes séparés par deux br) est coupé à chaque paragraphe" do
+        course = create_course(content: "<div>#{words(100)}<br><br>#{words(60)}<br> <br>suite</div>")
+
+        revision = call(course)
+        blocks = revision.texts.first[:blocks]
+
+        assert_equal 3, blocks.size
+        assert_equal [ "<div>#{words(100)}</div>", "<div>#{words(60)}</div>", "<div>suite</div>" ], blocks.map(&:to_s)
+        assert_predicate revision.cut, :cut?
+        assert_not revision.cut.rest?(0, 1)
+        assert revision.cut.rest?(0, 2)
+      end
+
+      test "un seul br reste dans son paragraphe, trois br ne laissent pas de bloc vide" do
+        course = create_course(content: "<div>a<br>b<br><br><br>c</div>")
+
+        blocks = call(course).texts.first[:blocks].map(&:to_s)
+
+        assert_equal [ "<div>a<br>b</div>", "<div>c</div>" ], blocks
+      end
+
+      test "une notion archivée n'apparaît pas dans la fiche" do
+        course = create_course(content: "<p>Intro.</p>")
+        create_essential(course:, name: "Archivée", status: "archived", content: "<p>Texte archivé.</p>")
+
+        revision = call(course)
+
+        assert_equal [ nil ], revision.texts.map { it[:title] }
+        assert_not_includes revision.texts.to_s, "Texte archivé"
       end
 
       test "une notion sans texte n'a pas d'intertitre" do

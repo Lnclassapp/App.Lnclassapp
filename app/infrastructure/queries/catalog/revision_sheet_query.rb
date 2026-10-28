@@ -41,7 +41,7 @@ module Queries
       # quand une notion n'a pas de texte).
       def essential_entries(course_id)
         rows = Orm::Essential.where(course_id:, status: "published").order(:position).pluck(:id, :name)
-        bodies = ActionText::RichText.where(record_type: "Orm::Essential", record_id: rows.map(&:first), name: "content")
+        bodies = ActionText::RichText.where(record_type: Orm::Essential.polymorphic_name, record_id: rows.map(&:first), name: "content")
                                      .index_by(&:record_id)
         rows.map { |id, name| text_entry(name, bodies[id]) }
       end
@@ -57,7 +57,37 @@ module Queries
 
       def blocks_of(html)
         fragment = Nokogiri::HTML5.fragment(html)
-        (fragment.at_css("div.trix-content") || fragment).children.reject { it.text? && it.text.strip.empty? }
+        children = (fragment.at_css("div.trix-content") || fragment).children.reject { it.text? && it.text.strip.empty? }
+        children.flat_map { paragraphs_of(it) }
+      end
+
+      # Trix enregistre les paragraphes saisis dans un seul `<div>…<br><br>…</div>` : chaque suite de deux `br` (ou plus, blancs
+      # tolérés entre eux) coupe l'élément en autant d'éléments de même balise. Un élément sans suite de `br` reste tel quel.
+      def paragraphs_of(node)
+        return [ node ] unless node.element? && node.children.any? { it.name == "br" }
+
+        chunks = [ [] ]
+        run = [] # des br et des blancs qui se suivent : le séparateur possible
+        flush = lambda do
+          if run.count { it.name == "br" } >= 2 then chunks << []
+          else chunks.last.concat(run)
+          end
+          run = []
+        end
+        node.children.each do |child|
+          if child.name == "br" || (child.text? && child.text.strip.empty?)
+            run << child
+          else
+            flush.call
+            chunks.last << child
+          end
+        end
+        flush.call
+        return [ node ] if chunks.size == 1
+
+        chunks.reject { |nodes| nodes.all? { it.name == "br" || (it.text? && it.text.strip.empty?) } }.map do |nodes|
+          node.dup(0).tap { |copy| nodes.each { copy.add_child(it) } }
+        end
       end
     end
   end
