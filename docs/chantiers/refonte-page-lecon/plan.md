@@ -24,13 +24,13 @@ Lot E — Entrées, redirections, lectures et retrait de l'ancien      (Touré, 
 |---|---|---|
 | 1 | **Lot 0** — socle | prépare le contenu Thalès v2 (8 sujets, 8 exercices) pour le Lot D : il ne dépend pas du code |
 | 2 | **Lot B** — Prépare interros · **Lot C** — copie à rendre | **Lot A** — fiche de révision · **Lot D** — import v2 et contenu Thalès |
-| 3 | challenger des lots A et D | **Lot E** — entrées, redirections, retraits · challenger des lots B et C |
+| 3 | test des lots A, D et E dans `Develop`, après leur fusion | **Lot E** — entrées, redirections, retraits |
 
 - Chaque pilote lance un agent `executant-lot` par lot et relit son résultat ; les deux lots d'une même personne tournent en parallèle, dans deux worktrees.
-- Le challenger d'un lot n'en est jamais le pilote : chacun met à l'épreuve les lots de l'autre (parcours nominal et un chemin d'erreur, dans l'application).
+- **Aucun lot n'est challengé avant sa fusion** (porteur, 2026-10-28, environnements de PR désactivés). Chaque lot fusionne dans `Develop` sur la preuve de `bin/ci-quiet` et les revues ; le porteur teste ensuite les lots dans `Develop`, et un écart ouvre un correctif.
 - Charge : porteur = Lot 0, B, C ; Touré = A, D, E et le contenu.
 
-Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refonte-page-lecon` ; une seule PR vers `Develop`, assignée au porteur.
+Règle « une PR, un pilote » : **une PR par lot vers `Develop`** (porteur, 2026-10-28, après la fusion du Lot 0 par #332), assignée au pilote du lot, qui seul pousse sur sa branche. Chaque lot part de `Develop` à jour ; la ligne de preuve de `bin/ci-quiet` et les revues se font PR par PR.
 
 ---
 
@@ -60,7 +60,7 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 - **Done quand**   : `bin/rails db:migrate` passe sur une base semée ; tous les exercices existants sont archivés ; la page d'une leçon montre « Fiche de révision » et « Prépare interros » à l'état vide ; les ports sont gelés et la suite existante est verte (l'ancien écran de réponse marche encore)
 
 > **Le Lot 0 gèle les contrats.** Les lots verticaux implémentent les ports et complètent les squelettes ; ils ne redéfinissent ni un port, ni une signature de query, ni une clé de texte. Un lot qui en a besoin **s'arrête** : le Lot 0 rouvre.
-> **Aucun lot parallèle ne démarre avant que le Lot 0 soit fusionné** dans `feature/refonte-page-lecon`.
+> **Aucun lot parallèle ne démarre avant que le Lot 0 soit fusionné** dans `Develop` (fait : #332).
 
 ---
 
@@ -79,6 +79,9 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/entities/catalog/revision_preview_test.rb` (150 mots, fin de bloc, formule = 1 mot, figure = 0) · `test/infrastructure/queries/catalog/revision_sheet_query_test.rb` · `test/integration/catalog/revision_sheet_test.rb` (CA-01, CA-02, CA-03, CA-04, CA-05, CA-09) · `test/system/catalog/revision_sheet_test.rb` (Voir plus / Voir moins, figure interactive dépliée)
 - **Done quand**   : sur la leçon Thalès, élève à 390 px et sur ordinateur, la fiche s'arrête après le premier bloc qui passe 150 mots, « Voir plus » la déplie entière sans requête et « Voir moins » la replie ; sans JavaScript, toute la fiche se lit ; une leçon sans fiche cahier montre ses notions en intertitres ; captures envoyées au porteur
+- **Reprise de la revue du Lot 0** (#332) :
+  - réactiver les deux tests mis en `skip` par le Lot 0 : la sanitisation du texte de la leçon au rendu (`test/controllers/catalog/courses_controller_test.rb`, son nom cite le CA-04 d'un ancien PRD, à renommer) et la pièce jointe Action Text affichée par son nom sans adresse (`test/integration/identity/rich_text_attachment_test.rb:8`, ADR-0060) ;
+  - remettre dans `test/system/catalog/course_catalog_test.rb` le rendu des formules (KaTeX) et le rendu après morphing, retirés par le Lot 0 qui ne vérifie plus que la base.
 
 ---
 
@@ -92,6 +95,10 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/infrastructure/queries/catalog/prepare_interros_query_test.rb` (ordre, états, priorité des états) · `test/integration/catalog/prepare_interros_test.rb` (CA-06, CA-10, CA-11) · `test/integration/classroom/assign_from_lesson_test.rb` (CA-07, CA-08) · `test/controllers/classroom/classroom_courses_controller_test.rb` · `test/integration/classroom/assignment_follow_up_copies_test.rb` (CA-24) · `test/system/catalog/prepare_interros_test.rb` (l'enseignant assigne sans recharger)
 - **Done quand**   : un enseignant de 3ème ouvre la leçon Thalès, voit 8 exercices (4 de notion, 4 de toute la leçon), clique « Assigner » pour la 3ème 1 et la ligne passe à « Assignée » sans rechargement ; un élève y voit « À rendre jeudi », « 14/20 » ou « À revoir » ; la page de la leçon dans la classe montre les mêmes sections ; captures envoyées au porteur
+- **Reprise de la revue du Lot 0** (#332) :
+  - un exercice de toute la leçon (`essential_id` nul) est exclu des jointures internes sur `essential` : passer par `exercises.course_id` avec `left_joins(:essential)` dans `app/infrastructure/queries/catalog/course_level_query.rb:12-14`, `app/infrastructure/queries/assessment/exercise_detail_query.rb:29`, `app/infrastructure/queries/assessment/daily_exercise_query.rb:63`, `app/infrastructure/queries/classroom/student_home_query.rb:164`, `app/infrastructure/queries/catalog/team_home_query.rb:34` et `app/infrastructure/repositories/classroom/assignment_repository.rb:62` (`record.essential.course` lève une erreur), avec un test « exercice sans notion » par requête ; test de refus : un élève d'un autre niveau reçoit 404 sur `GET /exercises/:public_id` et `GET /sessions/:public_id` d'un exercice de toute la leçon, un élève du bon niveau 200 ;
+  - `for_course` (`app/infrastructure/repositories/assessment/exercise_repository.rb:19-22`) rend les exercices de tout statut : la requête de l'élève filtre `published`, `archived_at IS NULL` et parents publiés (ADR-0028) ; tests : l'élève ne voit dans « Prépare interros » ni brouillon, ni archivé, ni exercice d'une autre leçon, et `targets` reste vide hors enseignant ;
+  - tester `parents_published` pour un exercice de toute la leçon d'un cours en brouillon, et `next_positions` avec deux notions sœurs dans le même appel.
 
 ---
 
@@ -113,6 +120,7 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/assessment/submit_exercise_copy_test.rb` (CA-15, CA-16, CA-17, CA-18, CA-19) · `test/domain/use_cases/assessment/close_exercise_session_test.rb` (CA-21, CA-22) · `test/infrastructure/repositories/assessment/exercise_session_repository_test.rb` (`record_copy`, contrainte `unanswered`) · `test/controllers/assessment/exercises_controller_test.rb` (CA-13 : aucune bonne réponse dans le HTML) · `test/controllers/assessment/exercise_sessions_controller_test.rb` (CA-14) · `test/controllers/assessment/exercise_copies_controller_test.rb` (303, 422, 403, archivé) · `test/system/assessment/exercise_copy_test.rb` (CA-20 : remplir, recharger, rendre ; confirmation des questions vides) · `test/system/assessment/remediation_test.rb` (CA-23, 2e partie : la remédiation ouvre une copie)
 - **Done quand**   : un élève, à 390 px, ouvre un exercice de Thalès, lit le sujet et ses questions numérotées, « Faire l'exercice », répond à 4 questions sur 5, recharge et retrouve ses réponses, « Rendre ma copie », confirme, et lit sa note sur 20 avec la question vide marquée « Sans réponse » ; l'exercice de notion raté ouvre « Notion à revoir », celui de toute la leçon non ; captures envoyées au porteur
+- **Reprise de la revue du Lot 0** (#332) : la contrainte `unanswered` (une ligne vide acceptée avec `unanswered = true`, refusée avec `false`) a son test dans ce lot.
 
 ---
 
@@ -129,6 +137,10 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/catalog/import_course_tree_test.rb` (CA-26, CA-27, CA-28) · `test/system/catalog/import_course_tree_test.rb` (rapport d'un refus) · *supprimés* : `test/domain/use_cases/assessment/import_exercises_test.rb`, `test/system/assessment/import_exercises_test.rb`
 - **Done quand**   : l'équipe importe le fichier Thalès v2 et le rapport annonce 1 leçon, 4 notions, 8 exercices ; un fichier avec une notion sans exercice est refusé entier, la notion nommée ; un fichier v1 importe la leçon et avertit « exercices ignorés : format v1 » ; Touré a relu les 8 sujets (trace dans `journal.md`)
+- **Reprise de la revue du Lot 0** (#332) :
+  - `content_tree_writer` recalcule les positions par leçon (`course_positions`) et ignore `node.position`, que `import_exercises.rb:50-51` calcule pour rien : l'import v2 fait respecter l'ordre du fichier (`node.position`) ou retire le calcul, avec un test d'import dans une leçon qui a déjà des exercices sur deux notions ;
+  - l'import v2 crée les premiers exercices de toute la leçon : il suppose les jointures du Lot B corrigées ;
+  - `EssentialOutsideCourse` (`exercise_repository.rb:101`) n'est rattrapé nulle part : le lot qui laisse un appelant fournir à la fois la leçon et la notion le traduit en erreur `:invalid`, avec son test.
 
 ---
 
@@ -153,14 +165,14 @@ Règle « une PR, un pilote » : tous les lots se fusionnent dans `feature/refon
 ## Dispatch
 
 ```
-Vague 1 : Lot 0                                → 1 agent, séquentiel, fusionné dans feature/refonte-page-lecon
+Vague 1 : Lot 0                                → 1 agent, séquentiel, fusionné dans Develop (#332)
 Vague 2 : Lot A ‖ Lot B ‖ Lot C ‖ Lot D        → 4 agents, worktrees isolés
-Vague 3 : Lot E                                → 1 agent, après la fusion de A, B, C et D
+Vague 3 : Lot E                                → 1 agent, après la fusion de A, B, C et D dans Develop
 ```
 
 ```bash
-git switch -c feature/refonte-page-lecon Develop
-git worktree add ../lnclass-refonte-page-lecon-lot-a -b feature/refonte-page-lecon-lot-a feature/refonte-page-lecon
+git fetch origin Develop
+git worktree add ../lnclass-refonte-page-lecon-lot-a -b feature/refonte-page-lecon-lot-a origin/Develop
 ```
 
 Un worktree par lot de la vague 2, de même forme (`-lot-b`, `-lot-c`, `-lot-d`). Agents : `executant-lot` (Sonnet) par lot ; `verificateur-ci` (Haiku) pour la preuve.
@@ -232,11 +244,13 @@ Résultat au 2026-10-28 : sortie vide.
 - [ ] Lot 0 mergé et ports gelés avant tout lot parallèle
 - [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [ ] Le porteur a exécuté, dans `Develop` après fusion, le parcours nominal + un chemin d'erreur de chaque lot (plus de challenge avant fusion, 2026-10-28)
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
-- [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
+- [ ] Une PR par lot vers `Develop`, chacune référençant chantier + ADR + UDR
 - [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
 
 > **Challenger empirique — non négociable.** Un rôle **distinct de celui qui a écrit le code** exécute : il lance les tests, ouvre l'application, refait le parcours nominal *et* un chemin d'erreur, mesure. **Il ne relit pas le code, il le met à l'épreuve.** Un reviewer qui lit du code ne prouve rien.
+>
+> *Dérogation du porteur (2026-10-28) : environnements de PR désactivés, le challenge a lieu dans `Develop` après la fusion de chaque lot, et non plus avant.*
 >
 > Pour ce chantier : parcours nominal = un enseignant assigne un exercice de Thalès depuis la page de la leçon, un élève le fait sur téléphone (390 px) et rend sa copie ; chemin d'erreur = rendre avec deux questions vides, puis renvoyer la même copie (une seule note), puis rendre une copie dont le nombre vaut « douze » (422). Il remplit aussi la colonne « Après » des mesures du PRD §7.
