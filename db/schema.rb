@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -268,6 +268,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.string "status", default: "draft", null: false
     t.string "subtitle", limit: 150
     t.datetime "updated_at", null: false
+    t.jsonb "figures", default: [], null: false
+    t.string "sheet_theme", default: "blue", null: false
     t.index ["author_id"], name: "index_courses_on_author_id"
     t.index ["level_id", "material_id", "name"], name: "index_courses_unique_without_series", unique: true, where: "(series_id IS NULL)"
     t.index ["level_id", "material_id", "series_id", "name"], name: "index_courses_unique_with_series", unique: true, where: "(series_id IS NOT NULL)"
@@ -275,6 +277,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.index ["series_id"], name: "index_courses_on_series_id"
     t.index ["slug"], name: "index_courses_on_slug", unique: true
     t.index ["status"], name: "index_courses_on_status"
+    t.check_constraint "jsonb_typeof(figures) = 'array'::text", name: "courses_figures_array"
+    t.check_constraint "sheet_theme::text = ANY (ARRAY['blue'::character varying, 'teal'::character varying, 'burgundy'::character varying]::text[])", name: "courses_sheet_theme_known"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying::text, 'published'::character varying::text, 'archived'::character varying::text])", name: "courses_status_values"
   end
 
@@ -330,11 +334,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.string "status", default: "draft", null: false
     t.string "subtitle", limit: 150
     t.datetime "updated_at", null: false
+    t.jsonb "sheet"
     t.index ["author_id"], name: "index_essentials_on_author_id"
     t.index ["course_id", "name"], name: "index_essentials_on_course_id_and_name", unique: true
     t.index ["course_id", "position"], name: "index_essentials_on_course_id_and_position", unique: true
     t.index ["slug"], name: "index_essentials_on_slug", unique: true
     t.index ["status"], name: "index_essentials_on_status"
+    t.check_constraint "sheet IS NULL OR jsonb_typeof(sheet) = 'object'::text", name: "essentials_sheet_object"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying::text, 'published'::character varying::text, 'archived'::character varying::text])", name: "essentials_status_values"
   end
 
@@ -402,6 +408,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.datetime "updated_at", null: false
     t.bigint "course_id", null: false
     t.jsonb "statement_blocks"
+    t.string "figure_key"
     t.index ["author_id"], name: "index_exercises_on_author_id"
     t.index ["course_id", "position"], name: "index_exercises_on_course_id_and_position", unique: true
     t.index ["course_id"], name: "index_exercises_on_course_id"
@@ -435,7 +442,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.index ["kind", "created_at"], name: "index_import_reports_on_kind_and_created_at"
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY (ARRAY[('queued'::character varying)::text, ('validating'::character varying)::text, ('importing'::character varying)::text]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
-    t.check_constraint "(kind::text = ANY (ARRAY['classrooms'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])) OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
+    t.check_constraint "(kind::text = ANY (ARRAY['classrooms'::character varying::text, 'school_codes'::character varying::text, 'classroom_links'::character varying::text])) OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
     t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying, 'course_sheet'::character varying]::text[])", name: "import_reports_kind_values"
     t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying::text, 'validating'::character varying::text, 'importing'::character varying::text, 'completed'::character varying::text, 'rejected'::character varying::text, 'failed'::character varying::text])", name: "import_reports_status_values"
@@ -460,7 +467,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.index ["kind", "contact"], name: "index_invitations_one_pending", unique: true, where: "((accepted_at IS NULL) AND (revoked_at IS NULL))"
     t.index ["school_id"], name: "index_invitations_on_school_id"
     t.index ["token_digest"], name: "index_invitations_on_token_digest", unique: true
-    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying, 'deputy'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "invitations_position_values"
+    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying::text, 'deputy'::character varying::text, 'educator'::character varying::text, 'secretary'::character varying::text])", name: "invitations_position_values"
     t.check_constraint "contact::text ~ '^0[157][0-9]{8}$'::text", name: "invitations_contact_format"
     t.check_constraint "kind::text <> 'school_staff'::text OR \"position\" IS NOT NULL", name: "invitations_staff_has_position"
     t.check_constraint "kind::text <> 'school_staff'::text OR school_id IS NOT NULL", name: "invitations_staff_has_school"
@@ -642,7 +649,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.index ["public_id"], name: "index_question_images_on_public_id", unique: true
     t.index ["question_id"], name: "index_question_images_on_question_id", unique: true, where: "(question_id IS NOT NULL)"
     t.check_constraint "byte_size >= 1 AND byte_size <= 307200", name: "question_images_byte_size"
-    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "question_images_content_type_values"
+    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying::text, 'image/png'::character varying::text, 'image/webp'::character varying::text])", name: "question_images_content_type_values"
     t.check_constraint "width >= 1 AND width <= 1200 AND height >= 1 AND height <= 1200", name: "question_images_sides"
   end
 
@@ -726,7 +733,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_28_100000) do
     t.index ["school_id"], name: "index_school_staffs_one_active_head", unique: true, where: "(((\"position\")::text = 'head'::text) AND (archived_at IS NULL))"
     t.index ["user_id"], name: "index_school_staffs_on_user_id", unique: true
     t.check_constraint "(archived_at IS NULL) = (archived_by_id IS NULL)", name: "school_staffs_archived_together"
-    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying, 'deputy'::character varying, 'educator'::character varying, 'secretary'::character varying]::text[])", name: "school_staffs_position_values"
+    t.check_constraint "\"position\"::text = ANY (ARRAY['head'::character varying::text, 'deputy'::character varying::text, 'educator'::character varying::text, 'secretary'::character varying::text])", name: "school_staffs_position_values"
     t.check_constraint "joined_via::text = ANY (ARRAY['invitation'::character varying::text, 'code'::character varying::text])", name: "school_staffs_joined_via_values"
   end
 
