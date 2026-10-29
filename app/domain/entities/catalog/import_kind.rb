@@ -5,11 +5,9 @@ module Entities
   module Catalog
     module ImportKind
       VERSION = 1
-      # Cours complets (ADR-0113 §4.4) : le format 2 porte les exercices de la leçon ; le format 1 reste toléré.
-      COURSE_TREE_VERSION = 2
-      # Format 3 (ADR-XXXX §4.1) : fiche par notion et figures. Le Lot A (use case d'import) en fera COURSE_TREE_VERSION, avec
-      # legacy_versions: [] (formats 1 et 2 refusés en format_retired), puis supprimera cette constante.
-      COURSE_TREE_V3 = 3
+      # Leçons complètes (ADR-XXXX §4.1) : le format 3 porte la fiche de chaque notion et les figures ; les formats 1 et 2 sont
+      # retirés (refus du fichier, raison format_retired).
+      COURSE_TREE_VERSION = 3
       # Par fichier. Un envoi de plusieurs fichiers a aussi son plafond total (max_total_bytes).
       MAX_BYTES = 20 * 1024 * 1024
       MAX_ERRORS = 1_000
@@ -39,7 +37,7 @@ module Entities
                        target_key: "drena", target_required: false, max_roots: 5_000,
                        policy: Policies::School::ManageSchoolPolicy),
         Definition.new(kind: "course_tree", format: "lnclass.course-tree", version: COURSE_TREE_VERSION, roots_key: "courses",
-                       target_key: nil, target_required: false, max_roots: 500, legacy_versions: [ VERSION ],
+                       target_key: nil, target_required: false, max_roots: 500,
                        policy: Policies::Catalog::ManageContentPolicy, max_files: 50, max_total_bytes: 50 * 1024 * 1024),
         Definition.new(kind: "essentials", format: "lnclass.essentials", version: VERSION, roots_key: "essentials",
                        target_key: "course", target_required: true, max_roots: 2_000,

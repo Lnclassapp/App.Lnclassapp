@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::CourseRepository
 # Rôle : traduit Orm::Course et son contenu riche (Action Text) ↔ Entities::Catalog::Course ; slug figé à la création
-# ADR  : 0029, 0035, 0039, 0075
+# ADR  : 0029, 0035, 0039, 0075, XXXX
 module Repositories
   module Catalog
     class CourseRepository
@@ -55,6 +55,15 @@ module Repositories
 
       def taken_slugs
         Orm::Course.pluck(:slug).to_set
+      end
+
+      # ADR-XXXX §4.4 : la leçon et ses notions et exercices sont lus sous verrou (FOR UPDATE), dans la transaction de l'appelant.
+      def status_for_update(id:)
+        course = Orm::Course.lock.find_by(id:)
+        return if course.nil?
+
+        contents = Orm::Essential.where(course_id: id).lock.pluck(:status) + Orm::Exercise.where(course_id: id).lock.pluck(:status)
+        { course: course.status, contents: }
       end
 
       # Lecture d'intégrité dans le contexte classroom (ADR-0075 §5) : une ligne par classe, quel que soit le nombre de

@@ -114,7 +114,10 @@ if missing.any?
     users: Repositories::Identity::UserRepository.new, audit_log: Repositories::Identity::AuditLogRepository.new,
     transaction:, clock:
   ).call(report_id: started.value.id)
-  log.call("import : #{Orm::ImportReport.find(started.value.id).attributes.slice("status", "imported_count", "error_count").compact}")
+  imported = Orm::ImportReport.find(started.value.id)
+  log.call("import : #{imported.attributes.slice("status", "imported_count", "error_count").compact}")
+  # Ces fichiers sont au format 1, retiré (ADR-XXXX) : le Lot P2 les remplace par des leçons v3.
+  raise "import refusé (#{imported.import_errors.first&.fetch('code', nil)}) : les leçons de Tle D attendent leur réécriture au format 3" unless imported.status == "completed" && imported.error_count.zero?
 end
 courses = names.map { |name| Orm::Course.find_by!(name:, level: tle, series: series_d) }
 cascade_dependencies = { audit_log: Repositories::Identity::AuditLogRepository.new, transaction: Repositories::Shared::Transaction.new,

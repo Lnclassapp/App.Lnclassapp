@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0039 §7, CA-08, ADR-0113: 200 complete courses (8 essentials with 1 exercise each + 4 lesson-wide exercises, 10 questions, 4 answers) run through the
+# ADR-0039 §7, CA-08, ADR-XXXX: 200 complete v3 lessons (2 notions with 1 exercise each + 4 problems, 5 questions, 2 answers) run through the
 # complete RunImport on PostgreSQL, in under 120 s. Skipped without PERF=1 (out of CI, played before acceptance).
 # The rows written, the time and the peak memory are logged.
 class Catalog::ImportCourseTreePerformanceTest < ActiveSupport::TestCase
@@ -20,9 +20,12 @@ class Catalog::ImportCourseTreePerformanceTest < ActiveSupport::TestCase
   end
 
   test "200 complete courses and their descendants are imported in under two minutes" do
+    course = revision_sheet_document.fetch("courses").first
+    document = { "format" => "lnclass.course-tree", "version" => 3,
+                 "courses" => Array.new(COURSES) { course.merge("name" => "Racines carrées #{it + 1}") } }
     report = create_import_report(kind: "course_tree")
     Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(filename: "cours.json",
-                                                      io: StringIO.new(course_tree_v2_document(courses: COURSES, essentials: 8, questions: 10, answers: 4).to_json)) ])
+                                                      io: StringIO.new(document.to_json)) ])
 
     started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
     Catalog::ImportCourseTreeJob.perform_now(report.id)
@@ -30,11 +33,11 @@ class Catalog::ImportCourseTreePerformanceTest < ActiveSupport::TestCase
 
     report.reload
     counts = [ Orm::Course, Orm::Essential, Orm::Exercise, Orm::Question, Orm::Answer ].map(&:count)
-    puts format("\n[PERF] import de %d cours : %d fiches, %d exercices, %d questions, %d propositions en %.1f s, mémoire max du processus %s Mo",
+    puts format("\n[PERF] import de %d cours : %d notions, %d exercices, %d questions, %d propositions en %.1f s, mémoire max du processus %s Mo",
                 *counts, elapsed, peak_memory_mb)
     assert_equal [ "completed", COURSES, 0 ], report.values_at(:status, :imported_count, :error_count)
-    assert_equal [ COURSES, COURSES * 8, COURSES * 12, COURSES * 120, COURSES * 480 ], counts
-    assert_equal COURSES * 480, report.details["answers_created"]
+    assert_equal [ COURSES, COURSES * 2, COURSES * 6, COURSES * 30, COURSES * 60 ], counts
+    assert_equal COURSES * 60, report.details["answers_created"]
     assert_operator elapsed, :<, BUDGET_SECONDS
   end
 end

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, XXXX
 module Entities
   module Catalog
     module ContentNode
@@ -35,6 +35,68 @@ module Entities
         return errors << error("#{path}.questions", "blank") if questions.empty?
 
         errors + questions.each_with_index.flat_map { |question, index| question_errors(question, "#{path}.questions[#{index}]") }
+      end
+
+      # Format 3 (ADR-XXXX §4.1) : la leçon sans ses enfants, qu'ImportCourseTree valide un à un.
+      def self.validate_lesson(hash, path:, lookup:)
+        return [ error(path, "schema") ] unless hash.is_a?(Hash)
+
+        text(hash, "name", Course::NAME_MAX, path) + text(hash, "subtitle", Course::SUBTITLE_MAX, path, required: false) +
+          taxonomy(hash, path, lookup)
+      end
+
+      # Une notion v3 : son nom et sa fiche au gabarit (NotionSheet). La figure citée et l'exercice sont vérifiés à part.
+      def self.validate_notion(hash, path:)
+        return [ error(path, "schema") ] unless hash.is_a?(Hash)
+
+        text(hash, "name", Essential::NAME_MAX, path) +
+          NotionSheet.errors_for(hash).map { |sub_path, code| error("#{path}.#{sub_path}", code) }
+      end
+
+      # Les figures de la leçon : chacune valide (Figure), clés uniques. → Array<ImportError>
+      def self.validate_figures(figures, path)
+        return [] unless figures.is_a?(Array)
+
+        seen = Set.new
+        figures.each_with_index.flat_map do |figure, index|
+          figure_path = "#{path}.figures[#{index}]"
+          found = Figure.errors_for(figure).map { |sub_path, code, params| error(sub_path == "$" ? figure_path : "#{figure_path}.#{sub_path}", code, **params) }
+          duplicate = figure.is_a?(Hash) && figure["key"].is_a?(String) && !seen.add?(figure["key"])
+          duplicate ? found << error("#{figure_path}.key", "figure_invalid", param: "key") : found
+        end
+      end
+
+      # Une figure citée par une notion ou un exercice doit être dans la leçon. → Array<ImportError>
+      def self.validate_figure_citation(key, keys, path)
+        return [] if key.nil? || key.to_s.empty? || keys.include?(key)
+
+        [ error(path, "figure_missing", key: key.to_s) ]
+      end
+
+      # Un exercice v3 : les règles de l'exercice, 5 à 30 questions (le plafond est celui du schéma) et la correction rédigée de
+      # chaque question, de 20 à 2 000 caractères.
+      def self.validate_exercise_v3(hash, path:)
+        errors = validate_exercise(hash, path:)
+        return errors unless hash.is_a?(Hash)
+
+        questions = Array(hash["questions"])
+        if questions.size.between?(1, QUESTIONS_MIN - 1)
+          errors << error("#{path}.questions", "too_few_questions", title: hash["title"].to_s.squish, count: questions.size,
+                                                                     min: QUESTIONS_MIN)
+        end
+        errors + questions.each_with_index.flat_map { |question, index| explanation_errors(question, "#{path}.questions[#{index}]") }
+      end
+
+      def self.explanation_errors(question, path)
+        return [] unless question.is_a?(Hash)
+
+        explanation = question["explanation"].to_s.squish
+        key = "#{path}.explanation"
+        return [ error(key, "blank") ] if explanation.empty?
+        return [ error(key, "invalid_value", value: explanation) ] if explanation.length < EXPLANATION_RANGE.min
+        return [ error(key, "too_long", max: EXPLANATION_RANGE.max) ] if explanation.length > EXPLANATION_RANGE.max
+
+        []
       end
 
       # ADR-0115, menace I9 : le sujet en blocs est lu comme un fichier hostile avant d'être écrit. Dix blocs au plus, de types
@@ -124,6 +186,8 @@ module Entities
                     starter_not_allowed: "starter", starter_too_long: "starter", criteria_not_allowed: "criteria",
                     criteria_too_many: "criteria", criteria_too_long: "criteria", criteria_blank: "criteria",
                     explanation_required: "explanation" }.freeze
+      QUESTIONS_MIN = 5
+      EXPLANATION_RANGE = (20..2_000)
       STATEMENT_BLOCK_TYPES = SheetDocument::STATEMENT_BLOCK_TYPES
       STATEMENT_BLOCKS_MAX = SheetDocument::STATEMENT_BLOCKS_MAX
 
@@ -178,7 +242,7 @@ module Entities
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
       private_class_method :question_errors, :typing_errors, :statement_blocks_errors, :misplaced_keys, :structure_errors, :image_errors, :image_slot_errors, :taxonomy,
-                           :series_errors, :text, :children, :error
+                           :series_errors, :text, :children, :error, :explanation_errors
     end
   end
 end

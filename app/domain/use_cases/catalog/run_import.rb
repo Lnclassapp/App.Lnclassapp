@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Catalog::RunImport
 # Rôle : moteur d'import partiel d'un envoi de 1 à N fichiers : refus par fichier, validation de tout l'envoi, doublons,
 #         écriture par lots rejoués, bilan par fichier
-# ADR  : 0028, 0039, 0050, 0068, 0113
+# ADR  : 0028, 0039, 0050, 0068, 0113, XXXX
 module UseCases
   module Catalog
     class RunImport
@@ -174,10 +174,17 @@ module UseCases
 
       def envelope_errors(source, document, kind)
         return [ format_mismatch(source, document, kind) ] unless document.is_a?(Hash) && document["format"] == kind.format
-        return [ error(source, "version", "version_unsupported", expected: kind.version) ] unless kind.accepts?(document["version"])
+        return [] if kind.accepts?(document["version"])
 
-        []
+        received = document["version"]
+        # Un format plus ancien que celui du type est retiré (ADR-XXXX §4.1) : l'équipe doit passer à la version courante.
+        return [ error(source, "version", "format_retired", expected: kind.version, received:) ] if retired?(received, kind)
+
+        [ error(source, "version", "version_unsupported", expected: kind.version) ]
       end
+
+      # Un entier de 1 à la version du type exclue : un format que ce type a lu et ne lit plus.
+      def retired?(received, kind) = received.is_a?(Integer) && received.between?(Entities::Catalog::ImportKind::VERSION, kind.version - 1)
 
       # Tout l'envoi est validé avant la moindre écriture. Un doublon de la base, ou d'un élément plus haut dans le même
       # fichier, est ignoré ; la progression compte les éléments de tous les fichiers.
