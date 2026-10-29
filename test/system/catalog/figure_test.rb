@@ -8,8 +8,9 @@ class Catalog::FigureSystemTest < ApplicationSystemTestCase
                   { "id" => "D", "x" => 4, "y" => 0, "draggable" => true }, { "id" => "E", "x" => 0, "y" => 3 } ],
     "segments" => [ [ "A", "B" ], [ "B", "C" ], [ "C", "A" ], [ "D", "E" ] ],
     "angles" => [ { "vertex" => "A", "from" => "B", "to" => "C", "mark" => "right" } ],
-    "constraints" => [ { "point" => "D", "on" => "AB" } ],
-    "labels" => [ { "from" => "A", "to" => "D", "text" => "x" }, { "from" => "A", "to" => "B", "text" => "8" } ]
+    "constraints" => [ { "point" => "D", "on" => "AB" }, { "point" => "E", "on" => "AC", "parallel_to" => "BC", "through" => "D" } ],
+    "labels" => [ { "from" => "A", "to" => "D", "text" => "x" }, { "from" => "A", "to" => "B", "text" => "8" },
+                  { "from" => "A", "to" => "E", "text" => "y" }, { "from" => "A", "to" => "C", "text" => "6" } ]
   }.freeze
 
   def figure(kind:, params:, controls: [])
@@ -45,6 +46,39 @@ class Catalog::FigureSystemTest < ApplicationSystemTestCase
     assert_selector "[aria-live='polite']", text: /AD\/AB/, visible: :all
   end
 
+  test "the derived point E follows D and keeps the Thales ratios" do
+    mount(figure(kind: "geometry", params: THALES))
+
+    assert_selector "#host svg [data-dot='E']", visible: :all
+    assert_no_selector "#host svg [data-point='E']", visible: :all
+    assert_selector "#host svg text", text: /AE\/AC = 0,50/
+    before = page.evaluate_script("Number(document.querySelector('#host [data-dot=E]').getAttribute('cy'))")
+    find("#host svg [data-point='D']").send_keys(:arrow_right, :arrow_right)
+
+    assert_selector "#host svg text", text: /AD\/AB = 0,75/
+    assert_selector "#host svg text", text: /AE\/AC = 0,75/
+    assert_selector "#host svg text", text: /AE = 4,5/
+    after = page.evaluate_script("Number(document.querySelector('#host [data-dot=E]').getAttribute('cy'))")
+
+    assert_operator after, :<, before
+  end
+
+  test "length labels do not overlap point names" do
+    mount(figure(kind: "geometry", params: THALES))
+    assert_selector "#host svg [data-length]", count: 4, visible: :all
+
+    script = <<~JS
+      const rect = (n) => n.getBoundingClientRect()
+      const hit = (a, b) => a.left < b.right && b.left < a.right && a.top < b.bottom && b.top < a.bottom
+      const names = [...document.querySelectorAll("#host [data-name]")].map(rect)
+      return [...document.querySelectorAll("#host [data-length]")].some((n) => names.some((m) => hit(rect(n), m)))
+    JS
+    assert_equal false, page.evaluate_script("(() => { #{script} })()")
+    find("#host svg [data-point='D']").send_keys(:arrow_right, :arrow_right, :arrow_right)
+
+    assert_equal false, page.evaluate_script("(() => { #{script} })()")
+  end
+
   test "a draggable point stays on its segment under the pointer" do
     mount(figure(kind: "geometry", params: THALES))
     handle = find("#host svg [data-point='D']")
@@ -64,6 +98,21 @@ class Catalog::FigureSystemTest < ApplicationSystemTestCase
 
     assert_selector "#host svg [data-tick]", count: 15, visible: :all
     assert_selector "#host svg [data-interval]", count: 1, visible: :all
+  end
+
+  test "a number line leaves no large gap under its axis" do
+    mount(figure(kind: "number_line", params: { "min" => -5, "max" => 5, "step" => 1 }))
+    assert_selector "#host svg [data-tick]", count: 11, visible: :all
+
+    gap = page.evaluate_script(<<~JS)
+      (() => {
+        const svg = document.querySelector("#host svg").getBoundingClientRect()
+        const lowest = Math.max(...[...document.querySelectorAll("#host svg text")].map((n) => n.getBoundingClientRect().bottom))
+        return svg.bottom - lowest
+      })()
+    JS
+
+    assert_operator gap, :<=, 14
   end
 
   test "without JavaScript or for an unknown kind, the description alone remains" do

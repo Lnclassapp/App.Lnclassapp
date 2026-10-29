@@ -103,8 +103,9 @@ Texte en ligne : balisage restreint d'ADR-0110 (`$…$`, `**gras**`, `*italique*
 | | `segments`, `lines` | `["A","B"]` |
 | | `circles` | `{"center","r"}` |
 | | `angles` | `{"vertex","from","to","mark"}` (`right` ou `arc`) |
-| | `labels` | `{"from","to","text"}` : `text` est posé au milieu du segment ; la longueur de chaque segment étiqueté et le rapport des étiquettes deux à deux (1re sur 2e, 3e sur 4e…) sont recalculés en direct |
+| | `labels` | `{"from","to","text"}` : `text` est posé au milieu du segment, décalé perpendiculairement, du côté opposé aux noms de ses extrémités ; la longueur de chaque segment étiqueté et le rapport des étiquettes deux à deux (1re sur 2e, 3e sur 4e…) sont recalculés en direct |
 | | `constraints` | `{"point","on":"AB"}` : le point reste sur le segment dont « AB » colle les deux identifiants |
+| | `constraints` (point dérivé) | `{"point":"E","on":"AC","parallel_to":"BC","through":"D"}` : E est l'intersection de (AC) et de la parallèle à (BC) passant par D, recalculée quand D bouge (Thalès : AD/AB = AE/AC). La contrainte est écrite après celle de D ; deux droites parallèles laissent E où il est. E n'est jamais `draggable` |
 | `coordinate_plane` | `points` · `vectors` · `lines` · `segments` | `{"id","x","y"}` · `{"label","dx","dy","ox","oy"}` · `{"a","b"}` (y = ax + b) · `{"x1","y1","x2","y2"}` |
 | `number_line` | `points` · `intervals` | `{"value","label"}` · `{"from","to","from_open","to_open"}` (un bout absent va à l'infini) |
 | `stat_chart` | `series` · `labels` | nombres · textes, dans le même ordre |

@@ -8,6 +8,7 @@
 |---|---|---|---|
 | 2026-10-29 | Lot A : le schéma v3 refuse d'abord (5 questions, explanation 20-2000, 4 problèmes, 1 exercice par notion) ; le rapport donne alors le code `schema` au chemin de l'élément. Les raisons propres (`too_few_questions`, `lesson_exercise_count`…) restent dans l'adaptateur, pour un appel sans schéma. | Le moteur valide le schéma avant l'adaptateur ; les deux disent le même chemin. | Non |
 | 2026-10-29 | Lot A : `replace_draft` garde l'auteur de la leçon (le port n'a pas d'`author_id`) ; les séances de remédiation hors leçon dont la lacune disparaît deviennent ordinaires. | Pas de port à changer ; la base impose `remediation ⇔ lacune`. | Non |
+| 2026-10-29 | Lot F2 : le point dérivé (Thalès) est une contrainte `{"point","on","parallel_to","through"}` recalculée à chaque tracé ; le volume du solide est affiché en `V ≈` sans unité ; le solide se recadre à chaque curseur (pas d'échelle fixe). | Aucun curseur sur geometry (Lot 0 bis) : le point déplaçable D commande E ; la sortie de `solid` reste lisible sans connaître le maximum du curseur. | Non (forme ajoutée à l'ADR §4.2) |
 
 ## Ce qui a dérapé
 
