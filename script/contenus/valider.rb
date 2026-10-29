@@ -102,21 +102,9 @@ module Contenus
           fail_at("#{path}.figures[#{i}].#{sub_path}", code, "paramètre « #{detail[:param]} » hors règle (voir ADR §4.2)")
         end
       end
-      list.each_with_index { |figure, i| control_targets(figure, "#{path}.figures[#{i}]") }
       keys = list.filter_map { it["key"] if it.is_a?(Hash) && it["key"].is_a?(String) }
       duplicates(keys).each { fail_at("#{path}.figures", "duplicate", "clé de figure répétée : #{it}") }
       keys
-    end
-
-    # Un curseur règle une clé numérique de premier niveau de `params` (conseil : l'import ne le contrôle pas encore).
-    def control_targets(figure, path)
-      return unless figure.is_a?(Hash) && figure["controls"].is_a?(Array) && figure["params"].is_a?(Hash)
-
-      figure["controls"].each_with_index do |control, i|
-        next unless control.is_a?(Hash) && !figure["params"][control["param"]].is_a?(Numeric)
-
-        warn_at("#{path}.controls[#{i}].param", "« #{control['param']} » n'est pas une clé numérique de premier niveau de params (en geometry, utiliser des points draggable)")
-      end
     end
 
     def notion(notion, path, figures)

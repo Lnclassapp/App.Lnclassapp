@@ -32,7 +32,7 @@ module Factories
         "params" => { "points" => [ { "id" => "A", "x" => 0, "y" => 0 }, { "id" => "B", "x" => 8, "y" => 0, "label" => "B" },
                                     { "id" => "C", "x" => 0, "y" => 6 }, { "id" => "D", "x" => 4, "y" => 0, "draggable" => true } ],
                       "segments" => [ [ "A", "B" ], [ "B", "C" ], [ "C", "A" ] ] },
-        "controls" => [ { "param" => "a", "min" => 1, "max" => 9, "step" => 0.5, "label" => "côté a" } ] }
+        "controls" => [] }
     end
 
     # Une leçon : 2 notions, 1 figure, 1 exercice par notion, 4 problèmes, 5 questions chacun. Retourne l'enveloppe complète ;
