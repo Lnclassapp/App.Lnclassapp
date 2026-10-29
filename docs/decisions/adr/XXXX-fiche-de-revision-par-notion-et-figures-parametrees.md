@@ -93,7 +93,24 @@ Texte en ligne : balisage restreint d'ADR-0110 (`$…$`, `**gras**`, `*italique*
 | `stat_chart` | Statistique | `chart` (`bars`, `histogram`, `pie`), `series` (≤ 20 valeurs), `labels` |
 | `solid` | Pyramides et cônes | `shape` (`pyramid`, `cone`), dimensions, `base` (carrée, rectangulaire, triangulaire), perspective cavalière |
 
-`controls` (0 à 4) rend la figure interactive : chaque contrôle est un curseur sur un paramètre numérique ; dans `geometry`, un point peut être déclaré `draggable` (dans ses contraintes). Une figure sans contrôle est fixe. Une sorte nouvelle (un niveau suivant en aura besoin) = une ligne de cette table, un schéma, un module de rendu : un amendement de cet ADR, jamais une figure d'une leçon.
+`controls` (0 à 4) rend la figure interactive : chaque contrôle est un curseur sur un paramètre numérique. `controls[].param` désigne une **clé numérique de premier niveau** de `params` (ex. `solid.height`, `number_line.min`) ; seules les clés que la sorte déclare réglables dans `FigureKinds` (type nombre) sont acceptées, le rendu ignorant les autres (porteur, 2026-10-29). En `geometry`, aucune clé n'est numérique : l'interaction passe par les points `draggable`, sans curseur. Une figure sans contrôle est fixe.
+
+**Formes des éléments** (contrat lu par les modules de rendu et écrit dans le prompt de rédaction) :
+
+| `kind` | Liste | Forme d'un élément |
+|---|---|---|
+| `geometry` | `points` | `{"id","x","y","label"?,"draggable"?}` |
+| | `segments`, `lines` | `["A","B"]` |
+| | `circles` | `{"center","r"}` |
+| | `angles` | `{"vertex","from","to","mark"}` (`right` ou `arc`) |
+| | `labels` | `{"from","to","text"}` : `text` est posé au milieu du segment ; la longueur de chaque segment étiqueté et le rapport des étiquettes deux à deux (1re sur 2e, 3e sur 4e…) sont recalculés en direct |
+| | `constraints` | `{"point","on":"AB"}` : le point reste sur le segment dont « AB » colle les deux identifiants |
+| `coordinate_plane` | `points` · `vectors` · `lines` · `segments` | `{"id","x","y"}` · `{"label","dx","dy","ox","oy"}` · `{"a","b"}` (y = ax + b) · `{"x1","y1","x2","y2"}` |
+| `number_line` | `points` · `intervals` | `{"value","label"}` · `{"from","to","from_open","to_open"}` (un bout absent va à l'infini) |
+| `stat_chart` | `series` · `labels` | nombres · textes, dans le même ordre |
+| `solid` | dimensions seules | `pyramid` : `base`, `height`, `side` ou `width`+`depth` ; `cone` : `radius`, `height` |
+
+Une sorte nouvelle (un niveau suivant en aura besoin) = une ligne de cette table, un schéma, un module de rendu : un amendement de cet ADR, jamais une figure d'une leçon.
 
 Rendu : un seul, côté navigateur, en SVG, par le contrôleur Stimulus `figure`, qui charge par `import()` le module de la sorte (`app/javascript/lib/figures/<kind>.js`) : rien dans le JS commun. Sans JavaScript, la `description` est affichée. Les mesures affichées (longueurs, rapports) sont recalculées en direct.
 
