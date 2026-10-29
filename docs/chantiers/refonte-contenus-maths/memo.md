@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-29 |
 | **Branche** | `feature/refonte-contenus-maths` |
 | **Programme** | — |
@@ -54,7 +54,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 | Quelles sortes de figures génériques ? | Pas de catalogue fixé à l'avance : **chaque figure présente dans une leçon est générée avec son paramétrage**, pour être réutilisable dans la fiche de révision et dans les exercices. | La figure devient un contenu paramétré (sorte + paramètres), décrit dans le fichier de la leçon et citable depuis la fiche comme depuis un exercice. Les sortes de figures naissent des leçons de 3e au fil de la rédaction ; chaque nouvelle sorte demande son rendu → le catalogue des sortes est un livrable du chantier (ADR). |
 | Les 3 fiches illustrées existantes (Thalès, Lentilles, Texte argumentatif) ? | **Supprimées** ; leurs figures sont reprises en figures génériques réutilisables (fiches de révision et exercices) si besoin. | Les fiches illustrées, leurs données de démarrage et les figures propres à une leçon sortent de l'application. Thalès et les lentilles deviennent des sortes de figures paramétrées. |
 | Qui relit le pilote, et quand ? | **Juste après la génération**, dans l'application : la leçon importée attend une **validation avant publication**. | On s'appuie sur le circuit existant brouillon → publication par l'équipe : l'import crée des leçons en brouillon, rien n'est visible des élèves avant validation. La relecture se fait dans l'application (pas d'export à part). L'aperçu en brouillon doit montrer fiche, figures, exercices **et corrections** pour être relu. |
-| Réimport d'une leçon déjà importée ? | **On refuse.** | Message clair qui nomme la leçon déjà présente ; rien n'est modifié. Corriger une leçon passe par sa suppression (remise à zéro) ou par l'édition dans l'application, pas par un réimport. |
+| Réimport d'une leçon déjà importée ? | **On refuse.** Précisé en phase 2 : refus si la leçon a déjà été publiée ; une leçon **encore en brouillon** est remplacée par le réimport. | Message clair qui nomme la leçon publiée ; rien n'est modifié. Une erreur trouvée à la relecture se corrige dans le fichier, qu'on réimporte tant que la leçon est en brouillon (les écrans d'édition des exercices n'existent plus). |
 
 ## Cas limites identifiés
 
@@ -64,7 +64,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 - Fichier de l'ancien format présenté à l'import : refus avec message clair, rien d'importé.
 - Fichier partiellement valide (une notion sans exercice, un problème de moins de 5 questions) : refus total, aucune leçon à moitié importée.
 - Figure générique mal décrite (sorte inconnue, données incohérentes) : refusée au contrôle, jamais une figure cassée à l'écran.
-- Réimport d'une leçon déjà importée : refusé, message nommant la leçon, rien de modifié.
+- Réimport d'une leçon déjà publiée (ou archivée) : refusé, message nommant la leçon, rien de modifié. Leçon en brouillon : remplacée entière.
 - Figure citée par un exercice mais absente de la leçon : refusée au contrôle.
 
 ## Questions encore ouvertes
