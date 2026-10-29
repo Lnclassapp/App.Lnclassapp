@@ -127,13 +127,15 @@ export function create(canvas, params, hooks = {}) {
     if (xs.length === 0) throw new Error("geometry : aucun point")
 
     const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
-    // Une bande en haut pour les mesures : la figure ne passe jamais dessous.
-    const rows = model.labels.length + Math.floor(model.labels.length / 2)
-    const band = rows > 0 ? rows * 20 + 8 : 0
-    const scale = Math.min((WIDTH - 2 * PAD) / (maxX - minX || 1), (HEIGHT - band - 2 * PAD) / (maxY - minY || 1), 60)
+    // Une bande en haut pour les mesures, sur deux colonnes, ajoutée à la hauteur : la figure garde toute sa place.
+    const rows = Math.ceil((model.labels.length + Math.floor(model.labels.length / 2)) / 2)
+    const band = rows > 0 ? rows * 24 + 8 : 0
+    const height = HEIGHT + band
+    svg.setAttribute("viewBox", `0 0 ${WIDTH} ${height}`)
+    const scale = Math.min((WIDTH - 2 * PAD) / (maxX - minX || 1), (HEIGHT - 2 * PAD) / (maxY - minY || 1), 60)
     const offsetX = (WIDTH - (maxX - minX) * scale) / 2
-    const offsetY = (HEIGHT - band - (maxY - minY) * scale) / 2
-    return { scale, minX, maxX, minY, maxY, px: (x) => offsetX + (x - minX) * scale, py: (y) => HEIGHT - offsetY - (y - minY) * scale }
+    const offsetY = (HEIGHT - (maxY - minY) * scale) / 2
+    return { scale, minX, maxX, minY, maxY, px: (x) => offsetX + (x - minX) * scale, py: (y) => height - offsetY - (y - minY) * scale }
   }
 
   function draw() {
@@ -260,7 +262,7 @@ export function create(canvas, params, hooks = {}) {
       const [mx, my] = [px((a.x + b.x) / 2) + 14 * normal.x, py((a.y + b.y) / 2) + 14 * normal.y]
       label(parent, mx, my + 4, item.text, { tone: "muted", size: 12 }).setAttribute("data-length", `${item.from}${item.to}`)
     })
-    lines(at).forEach((text, index) => label(parent, 10, 22 + index * 20, text, { anchor: "start", tone: "primary", size: 14 }))
+    lines(at).forEach((text, index) => label(parent, 10 + (index % 2) * (WIDTH / 2), 24 + Math.floor(index / 2) * 24, text, { anchor: "start", tone: "primary", size: 14 }))
   }
 
   function announce() {

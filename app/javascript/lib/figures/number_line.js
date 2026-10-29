@@ -49,10 +49,19 @@ export function create(canvas, params) {
     }
 
     intervals.forEach((range, index) => drawInterval(svg, range, index, { x, min, max }))
-    points.forEach((point) => {
+    // Une étiquette qui chevaucherait la précédente de son rang monte d'un rang (2 rangs ; largeur comptée au texte agrandi, × 1,4).
+    const ordered = [...points].sort((a, b) => a.value - b.value)
+    const rights = [-Infinity, -Infinity]
+    ordered.forEach((point) => {
       const group = el("g", { "data-point": point.value }, svg)
       el("circle", { cx: round(x(point.value)), cy: AXIS_Y, r: 5, fill: "accent", stroke: "paper", "stroke-width": 1.5 }, group)
-      if (typeof point.label === "string" && point.label) label(group, x(point.value), AXIS_Y - 14, point.label, { tone: "accent", size: 14 })
+      if (typeof point.label !== "string" || !point.label) return
+
+      const half = point.label.length * 6 + 3
+      const free = rights.findIndex((right) => x(point.value) - half >= right)
+      const row = free === -1 ? (rights[0] <= rights[1] ? 0 : 1) : free
+      label(group, x(point.value), AXIS_Y - 14 - row * 20, point.label, { tone: "accent", size: 14 })
+      rights[row] = x(point.value) + half
     })
 
     state.svg?.remove()

@@ -1,0 +1,1259 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Équations et inéquations dans ℝ",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "solution-inferieure-3",
+          "kind": "number_line",
+          "description": "Une droite graduée de −3 à 6, pas de 1. Un intervalle est colorié à gauche de 3 : ce sont les solutions de l'inéquation x < 3. Le point 3 est marqué par une borne ouverte, car l'inégalité est stricte : 3 lui-même n'est pas une solution.",
+          "params": {
+            "min": -3,
+            "max": 6,
+            "step": 1,
+            "points": [
+              {
+                "value": 3,
+                "label": "3"
+              }
+            ],
+            "intervals": [
+              {
+                "to": 3,
+                "to_open": true
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "solution-fermee-6",
+          "kind": "number_line",
+          "description": "Une droite graduée de −2 à 9, pas de 1. Un intervalle est colorié à gauche de 6, borne 6 incluse : ce sont les solutions de l'inéquation 14 000 + 6 000x ≤ 50 000, soit x ≤ 6. Le point 6 est marqué par une borne fermée, car l'inégalité est large.",
+          "params": {
+            "min": -2,
+            "max": 9,
+            "step": 1,
+            "points": [
+              {
+                "value": 6,
+                "label": "6"
+              }
+            ],
+            "intervals": [
+              {
+                "to": 6,
+                "to_open": false
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "solution-bornee-0-20",
+          "kind": "number_line",
+          "description": "Une droite graduée de −5 à 25, pas de 5. Un intervalle est colorié entre 0 et 20 : la borne 0 est fermée (une consommation nulle est possible) et la borne 20 est ouverte (à 20 mètres cubes, les deux formules coûtent le même prix). C'est l'ensemble des valeurs où la formule A est la moins chère.",
+          "params": {
+            "min": -5,
+            "max": 25,
+            "step": 5,
+            "points": [
+              {
+                "value": 0,
+                "label": "0"
+              },
+              {
+                "value": 20,
+                "label": "20"
+              }
+            ],
+            "intervals": [
+              {
+                "from": 0,
+                "to": 20,
+                "from_open": false,
+                "to_open": true
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Résoudre une équation du premier degré",
+          "remember": "Une **équation du premier degré** à une inconnue se ramène à la forme $ax = b$ avec $a \\neq 0$. Sa solution est $x = \\frac{b}{a}$. Les solutions ne changent pas si on ajoute ou retranche le même nombre aux deux membres, ou si on les multiplie ou divise par le même nombre **non nul**. Dans $\\mathbb{R}$, l'ensemble des solutions se note $S$, par exemple $S = \\{3\\}$.",
+          "method": [
+            "Développer et réduire chaque membre de l'équation.",
+            "Regrouper les termes en $x$ dans un membre et les nombres dans l'autre, en changeant le signe d'un terme qui change de membre.",
+            "Réduire chaque membre pour obtenir la forme $ax = b$.",
+            "Diviser les deux membres par $a$ (avec $a \\neq 0$) pour obtenir $x$.",
+            "Vérifier la solution dans l'équation de départ, puis écrire l'ensemble des solutions $S$."
+          ],
+          "example": {
+            "statement": "Résoudre dans $\\mathbb{R}$ l'équation $2(x + 3) - 4 = 5x - 7$.",
+            "steps": [
+              "Développer et réduire : $2x + 6 - 4 = 5x - 7$, soit $2x + 2 = 5x - 7$.",
+              "Regrouper : $2x - 5x = -7 - 2$ (le $5x$ et le $+2$ ont changé de membre et de signe).",
+              "Réduire : $-3x = -9$.",
+              "Diviser les deux membres par $-3$ : $x = \\frac{-9}{-3} = 3$.",
+              "Vérifier : $2 \\times (3 + 3) - 4 = 8$ et $5 \\times 3 - 7 = 8$. Donc $S = \\{3\\}$."
+            ]
+          },
+          "pitfall": "L'erreur fréquente : déplacer un terme **sans changer son signe**. Exemple : pour $2x + 3 = 11$, l'élève écrit $x = \\frac{11 + 3}{2} = 7$. Vérification : $2 \\times 7 + 3 = 17$, pas $11$. La bonne méthode donne $2x = 11 - 3 = 8$, donc $x = 4$ : $2 \\times 4 + 3 = 11$. Pour l'éviter, fais toujours l'étape « Vérifier ».",
+          "figure": null,
+          "exercise": {
+            "title": "Résoudre des équations du premier degré",
+            "statement": "Dans cet exercice, tu résous des équations du premier degré avec la méthode de la fiche, dans des situations de la vie d'une famille.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $3x + 5 = 20$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Développer et réduire : il n'y a ni parenthèse ni terme à réduire. Étape 2 — Regrouper : $3x = 20 - 5$ (le $+5$ passe de l'autre côté en devenant $-5$). Étape 3 — Réduire : $3x = 15$. Étape 4 — Diviser les deux membres par $3$ : $x = 5$. Étape 5 — Vérifier : $3 \\times 5 + 5 = 20$, donc $S = \\{5\\}$. La réponse $\\frac{25}{3}$ vient d'une erreur de signe : on a écrit $20 + 5$ au lieu de $20 - 5$.",
+                "answers": [
+                  {
+                    "content": "$x = \\frac{25}{3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 15$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = -5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 5$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $5x - 7 = 2x + 11$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Développer et réduire : rien à développer. Étape 2 — Regrouper les termes en $x$ à gauche et les nombres à droite : $5x - 2x = 11 + 7$. Étape 3 — Réduire : $3x = 18$. Étape 4 — Diviser par $3$ : $x = 6$. Étape 5 — Vérifier : $5 \\times 6 - 7 = 23$ et $2 \\times 6 + 11 = 23$, donc $S = \\{6\\}$. Si on oublie de changer le signe du $-7$, on obtient $3x = 4$ et $x = \\frac{4}{3}$, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "$x = 2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x = \\frac{4}{3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = \\frac{18}{7}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $4(x - 2) = 2x + 6$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Développer : $4(x - 2) = 4x - 8$, l'équation devient $4x - 8 = 2x + 6$. Étape 2 — Regrouper : $4x - 2x = 6 + 8$. Étape 3 — Réduire : $2x = 14$. Étape 4 — Diviser par $2$ : $x = 7$. Étape 5 — Vérifier : $4 \\times (7 - 2) = 20$ et $2 \\times 7 + 6 = 20$, donc $S = \\{7\\}$. Si on écrit $4(x-2) = 4x - 2$ (on oublie de multiplier le $-2$ par $4$), on trouve $x = 4$, qui est faux.",
+                "answers": [
+                  {
+                    "content": "$x = 4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = -1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 14$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 7$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces propositions, lesquelles sont des équations qui ont les mêmes solutions que $6x - 5 = 2x + 7$ ? (deux bonnes propositions)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : $6x - 2x = 7 + 5$. Étape 3 — Réduire : $4x = 12$, première bonne proposition. Étape 4 — Diviser par $4$ : $x = 3$, seconde bonne proposition. Étape 5 — Vérifier : $6 \\times 3 - 5 = 13$ et $2 \\times 3 + 7 = 13$. Les propositions $4x = 2$ (on a calculé $7 - 5$ au lieu de $7 + 5$) et $8x = 12$ (on a additionné $2x$ au lieu de le retrancher) ne sont pas équivalentes, et $x = 2$ ne vérifie pas l'équation.",
+                "answers": [
+                  {
+                    "content": "$x = 3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4x = 2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8x = 12$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4x = 12$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $\\frac{x}{3} + 2 = 5$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Développer et réduire : il n'y a pas de parenthèse ; $\\frac{x}{3}$ signifie « $x$ divisé par $3$ ». Étape 2 — Regrouper : $\\frac{x}{3} = 5 - 2$. Étape 3 — Réduire : $\\frac{x}{3} = 3$. Étape 4 — Diviser (ici multiplier par $3$ les deux membres) : $x = 9$. Étape 5 — Vérifier : $\\frac{9}{3} + 2 = 5$, donc $S = \\{9\\}$. La réponse $21$ vient de l'erreur $\\frac{x}{3} = 5 + 2$.",
+                "answers": [
+                  {
+                    "content": "$x = 21$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 9$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour résoudre $2x + 3 = 11$, Koffi écrit : « $x = \\frac{11 + 3}{2} = 7$ ». Sa résolution est-elle correcte ?",
+                "question_type": "true_false",
+                "explanation": "Elle est fausse. Étape 2 — Regrouper : le $+3$ passe de l'autre côté en devenant $-3$, donc $2x = 11 - 3$. Étape 3 — Réduire : $2x = 8$. Étape 4 — Diviser par $2$ : $x = 4$. Étape 5 — Vérifier : avec $x = 7$, $2 \\times 7 + 3 = 17$, qui n'est pas $11$ ; avec $x = 4$, $2 \\times 4 + 3 = 11$. Koffi a oublié de changer le signe du terme qu'il a déplacé.",
+                "answers": [
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résoudre une équation produit nul",
+          "remember": "Un produit de facteurs est nul si et seulement si **l'un au moins** de ses facteurs est nul : $A \\times B = 0$ équivaut à $A = 0$ ou $B = 0$. Ainsi l'équation $(ax + b)(cx + d) = 0$, avec $a \\neq 0$ et $c \\neq 0$, a pour solutions $x = -\\frac{b}{a}$ et $x = -\\frac{d}{c}$. Cette règle ne marche que lorsque le produit est égal à **zéro**.",
+          "method": [
+            "Se ramener à $0$ dans un membre et factoriser l'autre membre en un produit de facteurs du premier degré.",
+            "Écrire que l'un des facteurs est nul : $A = 0$ ou $B = 0$.",
+            "Résoudre chaque équation du premier degré obtenue.",
+            "Conclure en écrivant l'ensemble $S$ des solutions."
+          ],
+          "example": {
+            "statement": "Résoudre dans $\\mathbb{R}$ l'équation $(x + 1)(2x - 4) = (x + 1)(x + 3)$.",
+            "steps": [
+              "Se ramener à $0$ et factoriser : $(x + 1)(2x - 4) - (x + 1)(x + 3) = (x + 1)[(2x - 4) - (x + 3)] = (x + 1)(x - 7) = 0$.",
+              "Écrire que l'un des facteurs est nul : $x + 1 = 0$ ou $x - 7 = 0$.",
+              "Résoudre chaque équation : $x = -1$ ou $x = 7$.",
+              "Conclure : $S = \\{-1 ; 7\\}$. Vérification pour $x = 7$ : $8 \\times 10 = 80$ et $8 \\times 10 = 80$."
+            ]
+          },
+          "pitfall": "L'erreur fréquente : **diviser par un facteur qui contient $x$**, ce qui fait perdre une solution. Exemple : pour $x(x - 5) = 2x$, on divise par $x$ et on trouve seulement $x = 7$. Pourtant $x = 0$ convient : $0 \\times (-5) = 0$ et $2 \\times 0 = 0$. La bonne méthode : $x(x - 5) - 2x = x(x - 7) = 0$, donc $S = \\{0 ; 7\\}$. Ne divise jamais par $x$ : factorise.",
+          "figure": null,
+          "exercise": {
+            "title": "Résoudre des équations produit nul",
+            "statement": "Dans cet exercice, tu résous des équations où un produit de facteurs est égal à zéro, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $(x - 3)(x + 4) = 0$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Se ramener à $0$ et factoriser : le produit est déjà égal à $0$ et déjà factorisé. Étape 2 — Écrire que l'un des facteurs est nul : $x - 3 = 0$ ou $x + 4 = 0$. Étape 3 — Résoudre chaque équation : $x = 3$ ou $x = -4$. Étape 4 — Conclure : $S = \\{3 ; -4\\}$. L'ensemble $\\{-3 ; 4\\}$ vient d'une erreur de signe : $x - 3 = 0$ donne $x = 3$ et non $-3$.",
+                "answers": [
+                  {
+                    "content": "$S = \\{-3 ; 4\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{3 ; 4\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{-12\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{3 ; -4\\}$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $(2x - 8)(3x + 6) = 0$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Se ramener à $0$ et factoriser : c'est déjà fait. Étape 2 — Écrire que l'un des facteurs est nul : $2x - 8 = 0$ ou $3x + 6 = 0$. Étape 3 — Résoudre chaque équation : $2x = 8$ donc $x = 4$ ; $3x = -6$ donc $x = -2$. Étape 4 — Conclure : $S = \\{4 ; -2\\}$. L'ensemble $\\{8 ; -6\\}$ oublie de diviser par les coefficients $2$ et $3$.",
+                "answers": [
+                  {
+                    "content": "$S = \\{4 ; 2\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{4 ; -2\\}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$S = \\{8 ; -6\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{-4 ; 2\\}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $x(2x - 5) = 0$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Se ramener à $0$ et factoriser : le produit de $x$ et de $2x - 5$ est déjà égal à $0$. Étape 2 — Écrire que l'un des facteurs est nul : $x = 0$ ou $2x - 5 = 0$. Étape 3 — Résoudre : $2x = 5$ donc $x = \\frac{5}{2}$. Étape 4 — Conclure : $S = \\left\\{0 ; \\frac{5}{2}\\right\\}$. Oublier la solution $0$ est une erreur fréquente : le facteur $x$ peut lui aussi être nul.",
+                "answers": [
+                  {
+                    "content": "$S = \\left\\{\\frac{5}{2}\\right\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\left\\{0 ; -\\frac{5}{2}\\right\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{0 ; 5\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\left\\{0 ; \\frac{5}{2}\\right\\}$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'équation $(x + 2)(x - 1) = (x + 2)(3x - 5)$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Se ramener à $0$ et factoriser : $(x + 2)(x - 1) - (x + 2)(3x - 5) = (x + 2)[(x - 1) - (3x - 5)] = (x + 2)(-2x + 4) = 0$. Étape 2 — Écrire que l'un des facteurs est nul : $x + 2 = 0$ ou $-2x + 4 = 0$. Étape 3 — Résoudre : $x = -2$ ou $-2x = -4$, donc $x = 2$. Étape 4 — Conclure : $S = \\{-2 ; 2\\}$. Vérification : pour $x = 2$, $4 \\times 1 = 4$ et $4 \\times 1 = 4$ ; pour $x = -2$, les deux membres valent $0$. La réponse $\\{2\\}$ vient d'une division par $x + 2$, qui fait perdre la solution $-2$.",
+                "answers": [
+                  {
+                    "content": "$S = \\left\\{1 ; \\frac{5}{3}\\right\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{-2 ; 2\\}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$S = \\{2\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{-2\\}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux solutions de l'équation $(x - 5)(2x + 3) = 0$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Se ramener à $0$ et factoriser : c'est déjà fait. Étape 2 — Écrire que l'un des facteurs est nul : $x - 5 = 0$ ou $2x + 3 = 0$. Étape 3 — Résoudre : $x = 5$ ; $2x = -3$ donc $x = -\\frac{3}{2}$. Étape 4 — Conclure : $S = \\left\\{5 ; -\\frac{3}{2}\\right\\}$. Les propositions $-5$ et $\\frac{3}{2}$ sont des erreurs de signe, et $3$ cumule une erreur de signe et l'oubli de la division par $2$.",
+                "answers": [
+                  {
+                    "content": "$-5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-\\frac{3}{2}$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour résoudre $x(x - 4) = 5x$, Aminata divise les deux membres par $x$, trouve $x - 4 = 5$ et conclut $S = \\{9\\}$. Sa résolution est-elle correcte ?",
+                "question_type": "true_false",
+                "explanation": "Elle est fausse. Étape 1 — Se ramener à $0$ et factoriser : $x(x - 4) - 5x = x(x - 4 - 5) = x(x - 9) = 0$. Étape 2 — Écrire que l'un des facteurs est nul : $x = 0$ ou $x - 9 = 0$. Étape 3 — Résoudre : $x = 0$ ou $x = 9$. Étape 4 — Conclure : $S = \\{0 ; 9\\}$. En divisant par $x$, Aminata a perdu la solution $0$ : pour $x = 0$, $0 \\times (-4) = 0$ et $5 \\times 0 = 0$, donc $0$ est bien solution.",
+                "answers": [
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résoudre une inéquation du premier degré",
+          "remember": "Pour une **inéquation** (avec $<$, $>$, $\\leq$ ou $\\geq$), on peut ajouter ou retrancher le même nombre aux deux membres sans changer le sens. Si on multiplie ou divise par un nombre **positif**, le sens est conservé ; par un nombre **négatif**, le sens est **inversé**. Les solutions forment un intervalle : $x > 2$ s'écrit $]2 ; +\\infty[$, $x \\leq -1$ s'écrit $]-\\infty ; -1]$. Le crochet est ouvert si la borne est exclue ($<$ ou $>$), fermé si elle est incluse ($\\leq$ ou $\\geq$).",
+          "method": [
+            "Développer et réduire chaque membre de l'inéquation.",
+            "Regrouper les termes en $x$ dans un membre et les nombres dans l'autre, en changeant le signe d'un terme qui change de membre.",
+            "Réduire chaque membre pour obtenir la forme $ax < b$ (ou avec $>$, $\\leq$, $\\geq$).",
+            "Diviser les deux membres par $a$ : garder le sens si $a > 0$, inverser le sens si $a < 0$.",
+            "Écrire l'ensemble des solutions sous forme d'intervalle et le représenter sur la droite graduée."
+          ],
+          "example": {
+            "statement": "Résoudre dans $\\mathbb{R}$ l'inéquation $5 - 2(x + 1) > x - 6$ et représenter ses solutions.",
+            "steps": [
+              "Développer et réduire : $5 - 2x - 2 > x - 6$, soit $3 - 2x > x - 6$.",
+              "Regrouper : $-2x - x > -6 - 3$.",
+              "Réduire : $-3x > -9$.",
+              "Diviser par $-3$ (nombre négatif) : le sens s'inverse, donc $x < 3$.",
+              "Écrire l'intervalle : $S = ]-\\infty ; 3[$. Sur la droite graduée, on colorie à gauche de $3$ avec une borne ouverte en $3$, car l'inégalité est stricte."
+            ]
+          },
+          "pitfall": "L'erreur fréquente : **ne pas inverser le sens** en divisant par un nombre négatif. Exemple : pour $-2x > 6$, l'élève écrit $x > -3$. Vérification avec $x = 0$ : $-2 \\times 0 = 0$, et $0 > 6$ est faux, alors que $0 > -3$. La bonne réponse est $x < -3$ : pour $x = -4$, $-2 \\times (-4) = 8 > 6$. Pour l'éviter, regarde toujours le signe de $a$ avant de diviser.",
+          "figure": "solution-inferieure-3",
+          "exercise": {
+            "title": "Résoudre des inéquations du premier degré",
+            "statement": "Dans cet exercice, tu résous des inéquations du premier degré et tu écris leurs solutions sous forme d'intervalle, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'inéquation $2x + 3 < 11$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : $2x < 11 - 3$. Étape 3 — Réduire : $2x < 8$. Étape 4 — Diviser par $2$ (nombre positif, le sens ne change pas) : $x < 4$. Étape 5 — Écrire l'intervalle : $S = ]-\\infty ; 4[$, borne ouverte car l'inégalité est stricte. Vérification : $x = 0$ donne $3 < 11$. La réponse $x < 7$ vient d'une erreur de signe : $2x < 11 + 3$ au lieu de $2x < 11 - 3$.",
+                "answers": [
+                  {
+                    "content": "$x > 4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x < 7$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x < 14$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x < 4$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'inéquation $5 - 3x \\leq -4$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : $-3x \\leq -4 - 5$. Étape 3 — Réduire : $-3x \\leq -9$. Étape 4 — Diviser par $-3$ (nombre négatif) : le sens s'inverse, donc $x \\geq 3$. Étape 5 — Intervalle : $S = [3 ; +\\infty[$, borne fermée car l'inégalité est large. Vérification : $x = 4$ donne $5 - 12 = -7 \\leq -4$. La réponse $x \\leq 3$ oublie d'inverser le sens.",
+                "answers": [
+                  {
+                    "content": "$x \\leq -3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x \\geq 3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x \\leq 3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x \\geq -\\frac{1}{3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel intervalle représente l'ensemble des nombres réels $x$ tels que $x \\leq -1$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 5 — Écrire l'ensemble des solutions sous forme d'intervalle. Les nombres cherchés sont inférieurs ou égaux à $-1$ : l'intervalle va de $-\\infty$ jusqu'à $-1$. Comme l'inégalité est **large** ($\\leq$), la borne $-1$ est incluse : le crochet est fermé en $-1$. Donc $S = ]-\\infty ; -1]$. Le crochet est toujours ouvert en $-\\infty$. L'intervalle $]-\\infty ; -1[$ serait la réponse pour $x < -1$.",
+                "answers": [
+                  {
+                    "content": "$]-\\infty ; -1[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[-1 ; +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]-1 ; +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]-\\infty ; -1]$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résoudre dans $\\mathbb{R}$ l'inéquation $3(x - 2) \\geq 5x + 2$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Développer : $3x - 6 \\geq 5x + 2$. Étape 2 — Regrouper : $3x - 5x \\geq 2 + 6$. Étape 3 — Réduire : $-2x \\geq 8$. Étape 4 — Diviser par $-2$ : le sens s'inverse, donc $x \\leq -4$. Étape 5 — Intervalle : $S = ]-\\infty ; -4]$. Vérification : $x = -5$ donne $-21 \\geq -23$. La réponse $x \\geq -4$ oublie d'inverser le sens, et $x \\leq -2$ vient d'un développement faux ($3x - 2$).",
+                "answers": [
+                  {
+                    "content": "$x \\geq 4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x \\leq -4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x \\geq -4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x \\leq -2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux nombres solutions de l'inéquation $-2x + 1 < 7$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Regrouper : $-2x < 7 - 1$. Étape 3 — Réduire : $-2x < 6$. Étape 4 — Diviser par $-2$ : le sens s'inverse, donc $x > -3$. Étape 5 — Intervalle : $S = ]-3 ; +\\infty[$, borne ouverte. Les nombres $-2$ et $0$ sont plus grands que $-3$ : par exemple $-2 \\times 0 + 1 = 1 < 7$. Le nombre $-3$ n'est pas solution (l'inégalité est stricte : $7 < 7$ est faux), et $-4$ et $-5$ sont plus petits que $-3$.",
+                "answers": [
+                  {
+                    "content": "$-2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-3$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour résoudre $-4x < 12$, Fatou divise les deux membres par $-4$ et garde le sens : elle trouve $x < -3$. Sa résolution est-elle correcte ?",
+                "question_type": "true_false",
+                "explanation": "Elle est fausse. Étape 4 — Diviser les deux membres par $-4$ : comme $-4$ est négatif, le sens de l'inégalité s'inverse, donc $x > -3$. Étape 5 — Intervalle : $S = ]-3 ; +\\infty[$. Vérification : $x = 0$ donne $0 < 12$ (vrai), alors que $0$ n'est pas dans $x < -3$ ; $x = -4$ donne $16 < 12$, faux, alors que $-4$ est dans $x < -3$. Fatou a oublié la règle du nombre négatif.",
+                "answers": [
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mettre un problème en équation ou en inéquation",
+          "remember": "Pour résoudre un problème, on **choisit une inconnue**, on **traduit** l'énoncé par une équation (une égalité) ou une inéquation (une comparaison, par exemple « au plus », « au moins »), on la résout, puis on vérifie que la solution **convient au contexte** : nombre positif, entier si on compte des objets, unité correcte.",
+          "method": [
+            "Choisir l'inconnue : dire clairement ce que représente $x$ et son unité.",
+            "Traduire l'énoncé par une équation ou une inéquation en $x$.",
+            "Résoudre l'équation ou l'inéquation avec la méthode de la fiche correspondante.",
+            "Vérifier que la solution convient au problème : valeur positive, entière si nécessaire, énoncé respecté.",
+            "Conclure par une phrase de réponse, avec l'unité."
+          ],
+          "example": {
+            "statement": "Mme Kouassi achète $4$ cahiers identiques et un cartable à $6\\,000$ F. Elle paie $8\\,800$ F au total. Quel est le prix d'un cahier ?",
+            "steps": [
+              "Choisir l'inconnue : soit $x$ le prix d'un cahier, en francs.",
+              "Traduire : $4$ cahiers coûtent $4x$ et le cartable $6\\,000$, donc $4x + 6\\,000 = 8\\,800$.",
+              "Résoudre : $4x = 8\\,800 - 6\\,000 = 2\\,800$, donc $x = 700$.",
+              "Vérifier : $4 \\times 700 + 6\\,000 = 8\\,800$, et $700$ est un prix positif qui convient.",
+              "Conclure : un cahier coûte $700$ F."
+            ]
+          },
+          "pitfall": "L'erreur fréquente : donner la solution mathématique **sans la confronter au contexte**. Exemple : avec $23\\,000$ F et des sacs de riz à $5\\,000$ F, l'inéquation $5\\,000x \\leq 23\\,000$ donne $x \\leq 4,6$. Mais on ne peut pas acheter $4,6$ sacs, et $5$ sacs coûteraient $25\\,000$ F : la réponse est $4$ sacs au plus. Pour l'éviter, relis la question à l'étape « Vérifier » : le nombre doit être entier, positif, avec la bonne unité.",
+          "figure": null,
+          "exercise": {
+            "title": "Mettre en équation des situations de la famille",
+            "statement": "Dans cet exercice, tu résous des problèmes de budget de la famille en suivant les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un ménage paie une facture d'eau de $8\\,000$ F. Elle comprend $3\\,500$ F de frais fixes, plus $450$ F par mètre cube consommé. On note $x$ le nombre de mètres cubes. Quelle équation traduit la situation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de mètres cubes consommés. Étape 2 — Traduire : le prix à payer est la somme des frais fixes et de $450$ F par mètre cube, soit $3\\,500 + 450x$, et il vaut $8\\,000$. L'équation est donc $450x + 3\\,500 = 8\\,000$. L'équation $3\\,500x + 450 = 8\\,000$ échange les frais fixes et le prix par mètre cube, ce qui n'a pas de sens ici.",
+                "answers": [
+                  {
+                    "content": "$3\\,500x + 450 = 8\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$450x - 3\\,500 = 8\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(450 + 3\\,500)x = 8\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$450x + 3\\,500 = 8\\,000$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une facture d'eau de $8\\,000$ F comprend $3\\,500$ F de frais fixes plus $450$ F par mètre cube. Combien de mètres cubes le ménage a-t-il consommés ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de mètres cubes. Étape 2 — Traduire : $450x + 3\\,500 = 8\\,000$. Étape 3 — Résoudre : $450x = 8\\,000 - 3\\,500 = 4\\,500$, donc $x = \\frac{4\\,500}{450} = 10$. Étape 4 — Vérifier : $450 \\times 10 + 3\\,500 = 8\\,000$, et $10$ est un nombre positif qui convient. Étape 5 — Conclure : le ménage a consommé $10$ m³. La valeur $4\\,500$ est le résultat avant l'étape de division.",
+                "answers": [
+                  {
+                    "content": "$5$ m³",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10$ m³",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4\\,500$ m³",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{230}{9}$ m³",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une famille dispose de $20\\,000$ F. Elle a déjà dépensé $4\\,000$ F et veut acheter des cahiers à $800$ F l'un. Quel est le nombre maximal de cahiers qu'elle peut acheter ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de cahiers. Étape 2 — Traduire : la dépense totale ne doit pas dépasser le budget, donc $4\\,000 + 800x \\leq 20\\,000$. Étape 3 — Résoudre : $800x \\leq 16\\,000$, donc $x \\leq 20$. Étape 4 — Vérifier : $4\\,000 + 800 \\times 20 = 20\\,000$, le budget est respecté. Étape 5 — Conclure : la famille peut acheter au plus $20$ cahiers. La réponse $25$ oublie les $4\\,000$ F déjà dépensés.",
+                "answers": [
+                  {
+                    "content": "$25$ cahiers",
+                    "correct": false
+                  },
+                  {
+                    "content": "$30$ cahiers",
+                    "correct": false
+                  },
+                  {
+                    "content": "$16$ cahiers",
+                    "correct": false
+                  },
+                  {
+                    "content": "$20$ cahiers",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une mère a $36$ ans et son fils a $8$ ans. Dans combien d'années l'âge de la mère sera-t-il le triple de l'âge de son fils ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre d'années à attendre. Étape 2 — Traduire : dans $x$ ans, la mère aura $36 + x$ ans et le fils $8 + x$ ans, donc $36 + x = 3(8 + x)$. Étape 3 — Résoudre : $36 + x = 24 + 3x$, donc $12 = 2x$ et $x = 6$. Étape 4 — Vérifier : dans $6$ ans, la mère aura $42$ ans et le fils $14$ ans, et $3 \\times 14 = 42$. Étape 5 — Conclure : dans $6$ ans. La réponse $12$ s'arrête à $2x = 12$, avant la division par $2$.",
+                "answers": [
+                  {
+                    "content": "Dans $4$ ans",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans $6$ ans",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans $12$ ans",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans $-6$ ans",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour ses déplacements, une famille dispose de $7\\,000$ F. Un trajet en gbaka coûte $600$ F. Quel est le nombre maximal de trajets qu'elle peut payer ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de trajets. Étape 2 — Traduire : $600x \\leq 7\\,000$. Étape 3 — Résoudre : $x \\leq \\frac{7\\,000}{600} \\approx 11,67$. Étape 4 — Vérifier que la solution convient au problème : un nombre de trajets est un entier, et $12$ trajets coûteraient $7\\,200$ F, ce qui dépasse le budget. Étape 5 — Conclure : au plus $11$ trajets ($6\\,600$ F). Arrondir à $12$ ou répondre $11,67$ est l'erreur du piège : on oublie de confronter la solution au contexte.",
+                "answers": [
+                  {
+                    "content": "$12$ trajets",
+                    "correct": false
+                  },
+                  {
+                    "content": "$11,67$ trajets",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7\\,000$ trajets",
+                    "correct": false
+                  },
+                  {
+                    "content": "$11$ trajets",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le budget mensuel de la famille Koffi",
+          "statement": "La famille Koffi gère son budget du mois. Les questions de cet exercice sont indépendantes les unes des autres. Résous-les en suivant les méthodes des fiches.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le ménage Koffi doit résoudre dans $\\mathbb{R}$ l'équation $7x - 4 = 3x + 20$. Quelle est sa solution ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la fiche « équation du premier degré ». Étape 1 — Développer et réduire : rien à développer. Étape 2 — Regrouper les termes en $x$ à gauche et les nombres à droite : $7x - 3x = 20 + 4$. Étape 3 — Réduire : $4x = 24$. Étape 4 — Diviser par $4$ : $x = 6$. Étape 5 — Vérifier : $7 \\times 6 - 4 = 38$ et $3 \\times 6 + 20 = 38$. Donc $S = \\{6\\}$. La réponse $\\frac{8}{5}$ vient de $7x + 3x = 20 - 4$ : les termes $3x$ et $-4$ ont changé de membre sans changer de signe.",
+              "answers": [
+                {
+                  "content": "$x = -6$",
+                  "correct": false
+                },
+                {
+                  "content": "$x = 6$",
+                  "correct": true
+                },
+                {
+                  "content": "$x = \\frac{8}{5}$",
+                  "correct": false
+                },
+                {
+                  "content": "$x = 4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chaque mois, le ménage Koffi dépense $x$ F pour l'électricité et le triple de cette somme pour l'alimentation. Ces deux dépenses font ensemble $60\\,000$ F. Quelle est la dépense d'électricité ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode « mettre un problème en équation ». Étape 1 — Choisir l'inconnue : $x$ est la dépense d'électricité, en francs. Étape 2 — Traduire : l'alimentation vaut $3x$, donc $x + 3x = 60\\,000$. Étape 3 — Résoudre : $4x = 60\\,000$, donc $x = 15\\,000$. Étape 4 — Vérifier : l'alimentation vaut $45\\,000$ F et $15\\,000 + 45\\,000 = 60\\,000$. Étape 5 — Conclure : l'électricité coûte $15\\,000$ F. La réponse $20\\,000$ divise par $3$ au lieu de $4$ : elle oublie que $x + 3x = 4x$.",
+              "answers": [
+                {
+                  "content": "$20\\,000$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$45\\,000$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$12\\,000$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$15\\,000$ F",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Résoudre dans $\\mathbb{R}$ l'équation $(x - 4)(2x + 10) = 0$.",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la fiche « équation produit nul ». Étape 1 — Se ramener à $0$ et factoriser : c'est déjà fait. Étape 2 — Écrire que l'un des facteurs est nul : $x - 4 = 0$ ou $2x + 10 = 0$. Étape 3 — Résoudre : $x = 4$ ; $2x = -10$ donc $x = -5$. Étape 4 — Conclure : $S = \\{4 ; -5\\}$. La réponse $\\{4 ; -10\\}$ oublie de diviser $-10$ par le coefficient $2$.",
+              "answers": [
+                {
+                  "content": "$S = \\{4 ; -10\\}$",
+                  "correct": false
+                },
+                {
+                  "content": "$S = \\{4 ; -5\\}$",
+                  "correct": true
+                },
+                {
+                  "content": "$S = \\{-4 ; 5\\}$",
+                  "correct": false
+                },
+                {
+                  "content": "$S = \\{4 ; 5\\}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Résoudre dans $\\mathbb{R}$ l'inéquation $4 - 3x < 13$.",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la fiche « inéquation du premier degré ». Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : $-3x < 13 - 4$. Étape 3 — Réduire : $-3x < 9$. Étape 4 — Diviser par $-3$, nombre négatif : le sens s'inverse, donc $x > -3$. Étape 5 — Intervalle : $S = ]-3 ; +\\infty[$, borne ouverte car l'inégalité est stricte. Si on garde le sens, on trouve $x < -3$, ce qui est faux : $x = -4$ donne $4 + 12 = 16$, qui n'est pas inférieur à $13$.",
+              "answers": [
+                {
+                  "content": "$x < -3$",
+                  "correct": false
+                },
+                {
+                  "content": "$x > 3$",
+                  "correct": false
+                },
+                {
+                  "content": "$x < 3$",
+                  "correct": false
+                },
+                {
+                  "content": "$x > -3$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les trois nombres solutions de l'inéquation $4 - 3x < 13$ ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 à 4 de la méthode des inéquations : $-3x < 9$, puis, en divisant par $-3$ et en inversant le sens, $x > -3$. Étape 5 : $S = ]-3 ; +\\infty[$. Les nombres $-2$, $0$ et $5$ sont strictement plus grands que $-3$ : par exemple $4 - 3 \\times 5 = -11 < 13$. Le nombre $-3$ n'est pas solution : $4 + 9 = 13$ et $13 < 13$ est faux. Les nombres $-4$ et $-10$ sont plus petits que $-3$ : $4 + 12 = 16$ et $4 + 30 = 34$ dépassent $13$.",
+              "answers": [
+                {
+                  "content": "$-3$",
+                  "correct": false
+                },
+                {
+                  "content": "$-4$",
+                  "correct": false
+                },
+                {
+                  "content": "$-10$",
+                  "correct": false
+                },
+                {
+                  "content": "$-2$",
+                  "correct": true
+                },
+                {
+                  "content": "$0$",
+                  "correct": true
+                },
+                {
+                  "content": "$5$",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le budget de la rentrée des Diallo",
+          "statement": "La famille Diallo dispose de 50 000 F pour la rentrée. Elle achète un uniforme à 14 000 F, puis des livres à 6 000 F l'un. La droite graduée représente l'ensemble des solutions de l'inéquation du problème. Les questions sont indépendantes.",
+          "exercise_type": "fixation",
+          "figure": "solution-fermee-6",
+          "questions": [
+            {
+              "content": "La famille Diallo dispose de $50\\,000$ F. Elle achète un uniforme à $14\\,000$ F, puis $x$ livres à $6\\,000$ F l'un. Elle ne veut pas dépasser son budget. Quelle inéquation traduit la situation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode « mettre un problème en inéquation ». Étape 1 — Choisir l'inconnue : $x$ est le nombre de livres. Étape 2 — Traduire : la dépense totale est $14\\,000 + 6\\,000x$ ; elle ne doit pas dépasser $50\\,000$, donc $14\\,000 + 6\\,000x \\leq 50\\,000$. Le signe est $\\leq$ (et non $\\geq$) car « ne pas dépasser » signifie « au plus ». L'inéquation $6\\,000x \\leq 50\\,000$ oublie l'uniforme.",
+              "answers": [
+                {
+                  "content": "$14\\,000x + 6\\,000 \\leq 50\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$14\\,000 + 6\\,000x \\geq 50\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$6\\,000x \\leq 50\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$14\\,000 + 6\\,000x \\leq 50\\,000$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Résoudre dans $\\mathbb{R}$ l'inéquation $14\\,000 + 6\\,000x \\leq 50\\,000$.",
+              "question_type": "single_choice",
+              "explanation": "Méthode « inéquation du premier degré ». Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : $6\\,000x \\leq 50\\,000 - 14\\,000$. Étape 3 — Réduire : $6\\,000x \\leq 36\\,000$. Étape 4 — Diviser par $6\\,000$, nombre positif : le sens est conservé, donc $x \\leq 6$. Étape 5 — Intervalle : $S = ]-\\infty ; 6]$, borne fermée car l'inégalité est large. La réponse $x \\leq \\frac{25}{3}$ oublie de retrancher l'uniforme.",
+              "answers": [
+                {
+                  "content": "$x \\leq \\frac{32}{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$x \\leq 6$",
+                  "correct": true
+                },
+                {
+                  "content": "$x \\geq 6$",
+                  "correct": false
+                },
+                {
+                  "content": "$x \\leq \\frac{25}{3}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une famille dispose de $50\\,000$ F. Elle achète un uniforme à $14\\,000$ F, puis des livres à $6\\,000$ F l'un. Combien de livres peut-elle acheter au maximum ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de livres. Étape 2 — Traduire : $14\\,000 + 6\\,000x \\leq 50\\,000$. Étape 3 — Résoudre : $6\\,000x \\leq 36\\,000$, donc $x \\leq 6$. Étape 4 — Vérifier : $14\\,000 + 6 \\times 6\\,000 = 50\\,000$, le budget est respecté ; le nombre de livres est un entier positif. Étape 5 — Conclure : au plus $6$ livres. Les réponses $8$ et $10$ viennent d'une inéquation fausse (uniforme oublié ou ajouté au budget).",
+              "answers": [
+                {
+                  "content": "$8$ livres",
+                  "correct": false
+                },
+                {
+                  "content": "$10$ livres",
+                  "correct": false
+                },
+                {
+                  "content": "$36$ livres",
+                  "correct": false
+                },
+                {
+                  "content": "$6$ livres",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel intervalle représente l'ensemble des nombres réels $x$ qui vérifient $14\\,000 + 6\\,000x \\leq 50\\,000$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étapes 2 à 4 de la méthode des inéquations : $6\\,000x \\leq 36\\,000$, donc $x \\leq 6$ (le sens est conservé car $6\\,000 > 0$). Étape 5 — Écrire l'intervalle : les solutions vont de $-\\infty$ jusqu'à $6$, et l'inégalité est large, donc la borne $6$ est incluse : $S = ]-\\infty ; 6]$. Sur la droite graduée, on colorie à gauche de $6$ avec un crochet fermé en $6$. Le crochet en $-\\infty$ est toujours ouvert.",
+              "answers": [
+                {
+                  "content": "$]6 ; +\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$]-\\infty ; 6]$",
+                  "correct": true
+                },
+                {
+                  "content": "$]-\\infty ; 6[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[6 ; +\\infty[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La famille Diallo dispose de $50\\,000$ F, achète un uniforme à $14\\,000$ F, puis $7$ livres à $6\\,000$ F l'un. Elle dépasse son budget.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Choisir l'inconnue : $x = 7$ livres. Étape 2 — Traduire : la dépense est $14\\,000 + 6\\,000 \\times 7$. Étape 3 — Calculer : $14\\,000 + 42\\,000 = 56\\,000$ F. Étape 4 — Vérifier : $56\\,000 > 50\\,000$, donc le budget est dépassé de $6\\,000$ F. C'est cohérent avec la résolution de $14\\,000 + 6\\,000x \\leq 50\\,000$, qui donne $x \\leq 6$ : $7$ n'est pas solution. Étape 5 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le partage d'une somme entre trois enfants",
+          "statement": "Une famille partage 90 000 F entre trois enfants. Aya reçoit x francs, Bintou reçoit 2 000 F de plus qu'Aya, et Cissé reçoit le double de la part d'Aya. Résous les questions en justifiant chaque étape comme dans un devoir.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Aya reçoit $x$ F, Bintou reçoit $2\\,000$ F de plus qu'Aya, Cissé reçoit le double d'Aya, et la somme partagée est de $90\\,000$ F. Quelle équation traduit la situation ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir l'inconnue : $x$ est la part d'Aya, en francs. Étape 2 — Traduire : la part de Bintou est $x + 2\\,000$, celle de Cissé est $2x$, et le total des trois parts vaut $90\\,000$ F. L'équation est $x + (x + 2\\,000) + 2x = 90\\,000$. L'équation $x + 2\\,000x + 2x = 90\\,000$ confond « $2\\,000$ F de plus » avec « $2\\,000$ fois plus ».",
+              "answers": [
+                {
+                  "content": "$x + (x + 2\\,000) + x^2 = 90\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$x + (x + 2\\,000) + 2x = 90\\,000$",
+                  "correct": true
+                },
+                {
+                  "content": "$x + 2\\,000x + 2x = 90\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$x + (x - 2\\,000) + 2x = 90\\,000$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aya reçoit $x$ F, Bintou $2\\,000$ F de plus qu'Aya, Cissé le double d'Aya, et l'ensemble fait $90\\,000$ F. Quelle est la part d'Aya ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir l'inconnue : $x$ est la part d'Aya. Étape 2 — Traduire : $x + (x + 2\\,000) + 2x = 90\\,000$. Étape 3 — Résoudre : on développe et on réduit, $4x + 2\\,000 = 90\\,000$, puis $4x = 88\\,000$ et $x = 22\\,000$. Étape 4 — Vérifier : $22\\,000$ est positif, et $22\\,000 + 24\\,000 + 44\\,000 = 90\\,000$. Étape 5 — Conclure : Aya reçoit $22\\,000$ F. La réponse $22\\,500$ vient de $\\frac{90\\,000}{4}$ : elle oublie les $2\\,000$ F supplémentaires de Bintou.",
+              "answers": [
+                {
+                  "content": "$22\\,500$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$88\\,000$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$44\\,000$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$22\\,000$ F",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Aya reçoit $22\\,000$ F, Bintou $2\\,000$ F de plus qu'Aya, et Cissé le double de la part d'Aya. Quelle est la part de Cissé ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : une fois la part d'Aya connue, on traduit chaque phrase de l'énoncé en calcul. Étape 1 — Inconnue : la part d'Aya vaut $22\\,000$ F. Étape 2 — Traduire : la part de Cissé est le double de celle d'Aya, soit $2x$. Étape 3 — Calculer : $2 \\times 22\\,000 = 44\\,000$. Étape 4 — Vérifier : $44\\,000 > 0$. Étape 5 — Conclure : Cissé reçoit $44\\,000$ F. La réponse $24\\,000$ F est la part de Bintou ($22\\,000 + 2\\,000$).",
+              "answers": [
+                {
+                  "content": "$45\\,000$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$44\\,000$ F",
+                  "correct": true
+                },
+                {
+                  "content": "$22\\,000$ F",
+                  "correct": false
+                },
+                {
+                  "content": "$24\\,000$ F",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aya reçoit $22\\,000$ F, Bintou $24\\,000$ F et Cissé $44\\,000$ F. Ces trois parts font bien un total de $90\\,000$ F.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Vérifier que la solution convient à l'énoncé : on additionne les trois parts, $22\\,000 + 24\\,000 + 44\\,000 = 90\\,000$. Le total est bien celui de l'énoncé. On contrôle aussi les deux relations : Bintou a $2\\,000$ F de plus qu'Aya ($24\\,000 - 22\\,000 = 2\\,000$) et Cissé a le double d'Aya ($2 \\times 22\\,000 = 44\\,000$). L'affirmation est donc vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux solutions de l'équation $(x - 22)(x - 24) = 0$ ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode « équation produit nul ». Étape 1 — Se ramener à $0$ et factoriser : le produit est déjà égal à $0$. Étape 2 — Écrire que l'un des facteurs est nul : $x - 22 = 0$ ou $x - 24 = 0$. Étape 3 — Résoudre : $x = 22$ ou $x = 24$. Étape 4 — Conclure : $S = \\{22 ; 24\\}$. Les propositions $-22$ et $-24$ sont des erreurs de signe, et $46$ est la somme des solutions, qui n'est pas une solution.",
+              "answers": [
+                {
+                  "content": "$-24$",
+                  "correct": false
+                },
+                {
+                  "content": "$46$",
+                  "correct": false
+                },
+                {
+                  "content": "$22$",
+                  "correct": true
+                },
+                {
+                  "content": "$24$",
+                  "correct": true
+                },
+                {
+                  "content": "$-22$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aya reçoit $x$ F et Cissé reçoit $2x$ F. Pour quelles valeurs de $x$ la part de Cissé dépasse-t-elle strictement $40\\,000$ F ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode « inéquation du premier degré ». Étape 1 — Développer et réduire : rien à faire. Étape 2 — Traduire puis regrouper : $2x > 40\\,000$. Étape 3 — Réduire : c'est déjà la forme $ax > b$. Étape 4 — Diviser par $2$, nombre positif : le sens est conservé, donc $x > 20\\,000$. Étape 5 — Intervalle : $S = ]20\\,000 ; +\\infty[$, borne ouverte car « strictement ». La réponse $x > 40\\,000$ oublie de diviser par $2$, et $x < 20\\,000$ inverse le sens sans raison.",
+              "answers": [
+                {
+                  "content": "$x < 20\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$x > 80\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$x > 40\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$x > 20\\,000$",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux formules d'abonnement d'eau",
+          "statement": "Une famille compare deux formules pour sa facture d'eau. Formule A : 2 000 F de frais fixes plus 300 F par mètre cube. Formule B : 5 000 F de frais fixes plus 150 F par mètre cube. On note x le nombre de mètres cubes consommés. La droite graduée représente les valeurs de x pour lesquelles la formule A est strictement moins chère.",
+          "exercise_type": "evaluation",
+          "figure": "solution-bornee-0-20",
+          "questions": [
+            {
+              "content": "Formule A : $2\\,000$ F de frais fixes plus $300$ F par mètre cube. Formule B : $5\\,000$ F de frais fixes plus $150$ F par mètre cube. On note $x$ le nombre de mètres cubes. Quelle équation exprime que les deux formules coûtent le même prix ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de mètres cubes consommés. Étape 2 — Traduire : le prix de la formule A est $2\\,000 + 300x$ et celui de la formule B est $5\\,000 + 150x$. Dire qu'ils sont égaux donne $2\\,000 + 300x = 5\\,000 + 150x$. L'équation $2\\,000x + 300 = 5\\,000x + 150$ échange les frais fixes et le prix par mètre cube.",
+              "answers": [
+                {
+                  "content": "$300x = 150x$",
+                  "correct": false
+                },
+                {
+                  "content": "$2\\,000 + 300x = 5\\,000 + 150x$",
+                  "correct": true
+                },
+                {
+                  "content": "$2\\,000x + 300 = 5\\,000x + 150$",
+                  "correct": false
+                },
+                {
+                  "content": "$2\\,000 + 150x = 5\\,000 + 300x$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Résoudre dans $\\mathbb{R}$ l'équation $2\\,000 + 300x = 5\\,000 + 150x$.",
+              "question_type": "single_choice",
+              "explanation": "Méthode « équation du premier degré ». Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : $300x - 150x = 5\\,000 - 2\\,000$. Étape 3 — Réduire : $150x = 3\\,000$. Étape 4 — Diviser par $150$ : $x = 20$. Étape 5 — Vérifier : $2\\,000 + 300 \\times 20 = 8\\,000$ et $5\\,000 + 150 \\times 20 = 8\\,000$. Donc $S = \\{20\\}$. La réponse $\\frac{140}{3}$ vient de $150x = 7\\,000$ : les frais fixes ont changé de membre sans changer de signe.",
+              "answers": [
+                {
+                  "content": "$x = \\frac{140}{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$x = 10$",
+                  "correct": false
+                },
+                {
+                  "content": "$x = \\frac{140}{9}$",
+                  "correct": false
+                },
+                {
+                  "content": "$x = 20$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Formule A : $2\\,000$ F plus $300$ F par mètre cube. Formule B : $5\\,000$ F plus $150$ F par mètre cube. Pour $15$ m³ consommés, quelle formule est la moins chère ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : on remplace $x$ par $15$ dans chaque expression. Formule A : $2\\,000 + 300 \\times 15 = 2\\,000 + 4\\,500 = 6\\,500$ F. Formule B : $5\\,000 + 150 \\times 15 = 5\\,000 + 2\\,250 = 7\\,250$ F. Comme $6\\,500 < 7\\,250$, la formule A est la moins chère. Cela est cohérent avec la résolution de l'équation : les deux formules coûtent autant pour $20$ m³, et en dessous de $20$ m³ la formule A est avantageuse grâce à ses frais fixes plus faibles.",
+              "answers": [
+                {
+                  "content": "On ne peut pas comparer sans connaître $x$",
+                  "correct": false
+                },
+                {
+                  "content": "La formule A ($6\\,500$ F contre $7\\,250$ F)",
+                  "correct": true
+                },
+                {
+                  "content": "La formule B ($6\\,500$ F contre $7\\,250$ F)",
+                  "correct": false
+                },
+                {
+                  "content": "Elles coûtent le même prix",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour quelles valeurs de $x$ la formule A ($2\\,000 + 300x$) est-elle strictement moins chère que la formule B ($5\\,000 + 150x$) ? On résout $2\\,000 + 300x < 5\\,000 + 150x$.",
+              "question_type": "single_choice",
+              "explanation": "Méthode « inéquation du premier degré ». Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : $300x - 150x < 5\\,000 - 2\\,000$. Étape 3 — Réduire : $150x < 3\\,000$. Étape 4 — Diviser par $150$, nombre positif : le sens est conservé, donc $x < 20$. Étape 5 — Intervalle : $]-\\infty ; 20[$, borne ouverte car l'inégalité est stricte. La réponse $x \\leq 20$ inclut $20$, or pour $20$ m³ les deux prix sont égaux ($8\\,000$ F), donc A n'est pas strictement moins chère.",
+              "answers": [
+                {
+                  "content": "$x > 20$",
+                  "correct": false
+                },
+                {
+                  "content": "$x \\leq 20$",
+                  "correct": false
+                },
+                {
+                  "content": "$x < \\frac{140}{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$x < 20$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une consommation d'eau est un nombre positif ou nul. La formule A est strictement moins chère pour $x < 20$. Quel intervalle décrit les consommations $x$ possibles pour lesquelles A est strictement moins chère ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 5 de la méthode des inéquations : on combine $x < 20$ (A moins chère) et $x \\geq 0$ (une consommation ne peut pas être négative). L'ensemble est $0 \\leq x < 20$, c'est-à-dire l'intervalle $[0 ; 20[$. Le crochet est fermé en $0$ car $0$ est possible (inégalité large) et ouvert en $20$ car l'inégalité est stricte. L'intervalle $[0 ; 20]$ inclurait $20$, où les prix sont égaux ; $]0 ; 20[$ exclurait une consommation nulle.",
+              "answers": [
+                {
+                  "content": "$]0 ; 20]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[0 ; 20[$",
+                  "correct": true
+                },
+                {
+                  "content": "$[0 ; 20]$",
+                  "correct": false
+                },
+                {
+                  "content": "$]0 ; 20[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $20$ m³ consommés, les deux formules coûtent exactement le même prix, $8\\,000$ F.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 de la méthode de mise en équation : on remplace $x$ par $20$. Formule A : $2\\,000 + 300 \\times 20 = 2\\,000 + 6\\,000 = 8\\,000$ F. Formule B : $5\\,000 + 150 \\times 20 = 5\\,000 + 3\\,000 = 8\\,000$ F. Les deux prix sont égaux, ce qui confirme la solution $x = 20$ de l'équation $2\\,000 + 300x = 5\\,000 + 150x$. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

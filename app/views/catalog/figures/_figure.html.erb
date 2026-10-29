@@ -5,7 +5,7 @@
 <%= tag.figure class: (app_frame ? "rounded-card border border-line bg-paper p-3" : "sheet-figure"),
       data: { controller: "figure", figure_kind_value: figure.kind, figure_params_value: figure.params.to_json,
               figure_controls_value: figure.controls.to_json } do %>
-  <%= tag.div class: (app_frame ? "aspect-video w-full" : "sheet-figure-canvas"), role: "img", aria: { label: figure.description },
+  <%= tag.div class: (app_frame ? "mx-auto aspect-video w-full max-w-[520px] has-[svg]:aspect-auto" : "sheet-figure-canvas"), role: "img", aria: { label: figure.description },
               data: { figure_target: "canvas" } %>
   <%= tag.div class: (app_frame ? "mt-3 space-y-3" : "sheet-fields"), data: { figure_target: "controls" } %>
   <%= tag.figcaption figure.description, class: (app_frame ? "mt-2 text-sm text-mute" : "sheet-muted"), data: { figure_target: "fallback" } %>

@@ -46,6 +46,17 @@ class Catalog::FigureSystemTest < ApplicationSystemTestCase
     assert_selector "[aria-live='polite']", text: /AD\/AB/, visible: :all
   end
 
+  test "six measures do not crush the figure: the band is added above, on two columns" do
+    labels = %w[AD AB AE AC DE BC].map { |pair| { "from" => pair[0], "to" => pair[1], "text" => pair } }
+    mount(figure(kind: "geometry", params: THALES.merge("labels" => labels)))
+
+    assert_selector "#host svg text", text: /DE\/BC = 0,50/
+    view = page.evaluate_script("document.querySelector('#host svg').getAttribute('viewBox')").split.map(&:to_f)
+    triangle = page.evaluate_script("['A', 'C'].map((id) => Number(document.querySelector(`#host [data-dot=${id}]`).getAttribute('cy')))")
+    assert_operator view[3], :>, 320
+    assert_operator triangle[0] - triangle[1], :>=, 200, "le triangle garde sa hauteur sous la bande des mesures"
+  end
+
   test "the derived point E follows D and keeps the Thales ratios" do
     mount(figure(kind: "geometry", params: THALES))
 
