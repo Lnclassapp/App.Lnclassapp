@@ -76,6 +76,7 @@ div.sheet-screen  data-sheet-theme=<theme>  data-seyes="true"  data-embedded="tr
 
 - **Une seule page de cahier** par leçon, quelle que soit la longueur ; la coupe des 150 mots fait le reste.
 - **Nouveau ton `pitfall`** dans `course_sheet.css` : même gabarit que `remember` et `method`, couleur dérivée des jetons de thème existants (`--sheet-error` pour l'étiquette et le filet, fond à 8 % de cette couleur). Aucun autre ajout à la feuille, hors `.sheet-figure` (§3.3) et les retraits de §4.
+- **Ton `remember` par jeton `--sheet-remember`** (porteur, 2026-10-29) : `--sheet-success` par défaut ; dans le thème `teal`, où « La méthode » (`--sheet-note`, teinte 175) et le vert de succès (teinte 155) se confondaient, « À retenir » passe au bleu `oklch(0.48 0.13 255)`. Les quatre blocs ont ainsi quatre couleurs distinctes dans les trois thèmes.
 - Libellés : `catalog.revision_sheets.sheet.{eyebrow,remember,method,example,pitfall,step}` (fr).
 - Texte : helper `sheet_text(text)` existant, **sans** l'argument `glossary` (le lexique `[[…]]` n'est plus accepté). Jamais `raw` ni `html_safe` sur la donnée.
 - Thème : `theme` du fichier de la leçon ; absent → `blue`.
