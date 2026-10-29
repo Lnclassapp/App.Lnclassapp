@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié — memo, PRD, ADR, UDR et plan validés par le porteur le 2026-10-28 |
+| **Statut** | livré (6 PR vers `Develop` et les retouches d'affichage, 2026-10-29), clos |
 | **Ouvert le** | 2026-10-28 |
 | **Pilote** | le porteur, qui cadre lui-même depuis le 2026-10-28 (issue #350) |
 | **Branche** | une branche et une PR par lot, depuis `Develop` (`feature/correction-<lot>`). La branche `feature/correction-comme-en-classe` de Touré (`67c36f94`, `b56a0168`) porte un premier cadrage remplacé par celui-ci : elle ne se fusionne pas |

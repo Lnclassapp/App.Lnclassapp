@@ -160,9 +160,9 @@ La phrase de pause sur la page du résultat (CA-34, côté résultat) est posée
 
 ## Portes de sortie
 
-- [ ] Tous les lots sont `Done`
-- [ ] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application)
-- [ ] Pureté du domaine, rubocop, tests, parcours système : au vert
-- [ ] ADR et UDR à jour et indexés
-- [ ] `journal.md` complété
-- [ ] Revues `security-reviewer` et `silent-failure-hunter` sur les Lots 0, C et D (téléversement d'import, texte libre, use cases)
+- [x] Tous les lots sont `Done`
+- [x] Un rôle distinct de l'auteur a **exécuté** le résultat (tests lancés, parcours refait dans l'application)
+- [x] Pureté du domaine, rubocop, tests, parcours système : au vert
+- [x] ADR et UDR à jour et indexés
+- [x] `journal.md` complété
+- [x] Revues `security-reviewer` et `silent-failure-hunter` sur les Lots 0, C et D (téléversement d'import, texte libre, use cases)

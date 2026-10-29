@@ -12,7 +12,7 @@ problematique: La feuille ne sait pas poser un devoir de 3e et le résultat ne d
 | **Date** | 2026-10-28 |
 | **Chantier** | `docs/chantiers/correction-comme-en-classe` |
 | **ADR lié** | ADR-0115 |
-| **Remplace** | UDR-0023 sur « jamais les bonnes réponses à l'élève » ; UDR-0138 sur le nom du bouton (« Rendre ma copie ») |
+| **Remplace** | UDR-0023 sur « jamais les bonnes réponses à l'élève » ; UDR-0138 sur le nom du bouton (« Rendre ma copie ») et le titre de la confirmation (« Rendre ta copie ? ») |
 | **Remplacé par** | — |
 
 ---
@@ -39,9 +39,12 @@ des boutons « Vérifier » par exercice et une durée, que le porteur écarte (
 ## 3. Règles d'implémentation
 
 **Structure de la feuille** (`app/views/assessment/exercise_sessions/show.html.erb`)
-- Sujet : le texte (`simple_format`, inchangé), puis les blocs du sujet rendus par
-  `render "catalog/course_sheets/blocks/#{block["type"]}"` pour `paragraph`, `box` et `table`. Le tableau défile dans son
-  propre conteneur (`overflow-x-auto`), jamais la page.
+- Sujet : le texte (`simple_format`, inchangé), puis les blocs du sujet rendus par le partiel
+  `assessment/statement_blocks/_blocks` pour `paragraph`, `box` et `table`, le même sur la feuille, le résultat et la page
+  de l'exercice. Pas les partiels `catalog/course_sheets/blocks/*` : ils lisent `@sheet.glossary` et `course_sheet.css`,
+  que les écrans d'exercice ne chargent pas (précisé à la clôture, Lot E). Texte par `sheet_text`, 10 blocs au plus, un bloc
+  inconnu n'est pas rendu et laisse une ligne de journal. Le tableau défile dans son propre conteneur (`overflow-x-auto`),
+  jamais la page.
 - Points : quand au moins une question n'est pas à 1 point, chaque légende de question finit par
   `t(".points", count:)` (« (2 points) », « (1,5 point) », nombre au format `fr`). Sinon, aucun point.
 - Aucune durée, nulle part.
