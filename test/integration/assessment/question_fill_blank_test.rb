@@ -26,15 +26,23 @@ class Assessment::QuestionFillBlankTest < ActionDispatch::IntegrationTest
     assert_no_match(/Abidjan|Babi|Yamoussoukro/, response.body)
   end
 
-  test "CA-4 : « ABIDJAN  » est juste, enregistré tel quel ; le verdict le redit sans rien d'autre" do
+  test "CA-4, ADR-0115 D1 : « ABIDJAN  » est juste, enregistré tel quel ; la copie vérifiée redit le texte et montre les réponses acceptées ; avant, rien" do
     sign_in_as @student
+    # Copie ouverte : pas de correction, et rien des réponses acceptées dans la page où l'on revient.
+    get exercise_session_result_path(@session.public_id)
+    assert_redirected_to exercise_session_path(@session.public_id)
+    follow_redirect!
+    assert_no_match(/Abidjan|Babi|Yamoussoukro/, response.body)
+    assert_select "[data-correct]", 0
+
     answer "ABIDJAN  "
 
     assert_redirected_to exercise_session_result_path(@session.public_id)
     assert_equal [ true, "ABIDJAN", [] ], Orm::QuestionAttempt.find_by!(question: @question).values_at(:correct, :response_text, :selected_answer_ids)
     follow_redirect!
     assert_select "#question_review_#{@question.id} strong", text: "ABIDJAN"
-    assert_no_match(/Abidjan|Babi|Yamoussoukro/, response.body)
+    # ADR-0115 D1 : la copie est vérifiée, les réponses acceptées sont montrées et marquées.
+    assert_select "#question_review_#{@question.id} [data-correct]", text: /Abidjan ; Babi/
   end
 
   test "CA-4 : une faute de frappe est fausse ; un blanc vide est « sans réponse », jamais refusé" do
@@ -48,10 +56,12 @@ class Assessment::QuestionFillBlankTest < ActionDispatch::IntegrationTest
     post exercise_session_copy_path(other.public_id), params: { copy: { answers: { @question.id.to_s => { response_text: "Abidjn" } } } }
     assert_equal [ false, "Abidjn" ], Orm::QuestionAttempt.find_by!(exercise_session: other, question: @question).values_at(:correct, :response_text)
     follow_redirect!
-    assert_no_match(/Abidjan|Babi|Yamoussoukro/, response.body)
+    # ADR-0115 D1 : la faute est redite, et les réponses acceptées montrées une fois la copie vérifiée.
+    assert_select "#question_review_#{@question.id} strong", text: "Abidjn"
+    assert_select "#question_review_#{@question.id} [data-correct]", text: /Abidjan ; Babi/
   end
 
-  test "la correction de l'élève redit son texte ; celle de l'enseignant ajoute les réponses acceptées" do
+  test "ADR-0115 D1 : la correction de l'élève (copie vérifiée) redit son texte et montre les réponses acceptées, comme celle de l'enseignant ; un autre élève ne la lit pas" do
     Orm::QuestionAttempt.create!(exercise_session: @session, question: @question, correct: false, selected_answer_ids: [],
                                  response_text: "Abidjn", answered_at: Time.current)
     @session.update!(status: "completed", score_percent: 0, completed_at: Time.current)
@@ -59,6 +69,11 @@ class Assessment::QuestionFillBlankTest < ActionDispatch::IntegrationTest
     sign_in_as @student
     get exercise_session_result_path(@session.public_id)
     assert_select "#question_review_#{@question.id} strong", text: "Abidjn"
+    assert_select "#question_review_#{@question.id} [data-correct]", text: /Abidjan ; Babi/
+
+    sign_in_as create_student_for(@exercise.essential.course)
+    get exercise_session_result_path(@session.public_id)
+    assert_not response.successful?
     assert_no_match(/Abidjan|Babi/, response.body)
 
     sign_in_as create_team_member
