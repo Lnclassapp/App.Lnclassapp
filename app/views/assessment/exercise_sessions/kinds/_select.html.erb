@@ -5,6 +5,7 @@
 <% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
 <% before, after = question.content.split(marker, 2) %>
 <% inline = question.content.include?(marker) %>
+<% glued, after = after.to_s.match(/\A(\S*)(.*)\z/m).captures %>
 <% picked = Array(values[:display_order]).first.to_s %>
 <% field = capture do %>
   <%= select_tag "#{f.object_name}[display_order][]",
@@ -15,7 +16,7 @@
                                     inline ? "mx-1 max-w-full" : "w-full") %>
 <% end %>
 <% if inline %>
-  <div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= before %><%= field %><%= after %></div>
+  <div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= before %><span data-gap class="whitespace-nowrap"><%= field %><%= glued %></span><%= after %></div>
 <% else %>
   <%= field %>
 <% end %>

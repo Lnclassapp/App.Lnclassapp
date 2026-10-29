@@ -1,5 +1,5 @@
 // ⚡ FRONT · lib/assessment/copy_sheet — la logique de la copie de l'élève, chargée à la demande par assessment/copy_controller
-// Rôle : brouillon dans `localStorage[key]`, compteur des questions répondues, confirmation « Rendre ta copie ? » des questions vides
+// Rôle : brouillon dans `localStorage[key]`, compteur des questions répondues, confirmation « Vérifier ta copie ? » des questions vides
 // UDR  : 0138 §3.2 · ADR : 0051 (import dynamique), 0112 §4.5 · le contrôleur Stimulus lui prête ses cibles et ses valeurs
 const ANSWER_FIELDS = /^copy\[answers\]/
 

@@ -201,6 +201,11 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#question_review_#{@first.id} li[data-correct]", text: /#{right(@first).content}/, count: 1
     assert_select "#question_review_#{@first.id} li[data-selected]", text: /#{wrong(@first).content}/, count: 1
     assert_select "#question_review_#{@first.id}", text: /#{I18n.t("#{scope}.question_review.correct")}/
+    # retouche : les étiquettes passent à la ligne sous le texte, jamais de troncature
+    assert_select "#question_review_#{@first.id} li[data-correct].flex-wrap > [data-answer-labels].flex-wrap", 1
+    assert_select "#question_review_#{@first.id} li .truncate", 0
+    # retouche : les tuiles ne se coupent pas (2×2 dans la colonne de 340 px)
+    assert_select "#session_result dl:not([class~='sm:grid-cols-4']) > div.whitespace-nowrap", 4
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
   end
 
