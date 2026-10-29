@@ -116,7 +116,7 @@ Elles entreront dans l'amendement de l'UDR-0058 §3.2 ; elles ne sont pas codée
 **Page de la classe — bloc « Exercices assignés »** (`classroom/classrooms/_assigned_exercises`, `#assigned_exercises`), **à la place de « Cours assignés »** :
 - Une ligne par assignation **active** d'exercice, triée par `due_on` croissant (sans échéance à la fin), puis du plus récent au plus ancien.
 - Une ligne (`li#assignment_<public_id>`, lien étiré vers la page de suivi) : titre de l'exercice, `ui_subject_badge`, `due_for_teacher(due_on)` ; dessous, `text-sm` : « 18 faits, dont 3 en retard · 7 pas encore faits ». « dont N en retard » n'apparaît que si N > 0 et que l'exercice a une échéance. Chevron à droite.
-- Vide : `ui_empty_state` « Aucun exercice assigné », « Ouvrez un cours ci-dessous pour assigner un exercice à cette classe. », icône `clipboard-document-list`.
+- Vide : `ui_empty_state` « Aucun exercice assigné », « Ouvrez une fiche de cours dans « Cours » pour assigner un exercice à cette classe. », icône `clipboard-document-list`. Pour l'enseignant, bouton « Voir les cours » (`secondary`, icône `book-open`) vers `courses_path` ; les autres rôles gardent le texte sans bouton. *(Amendé le 2026-10-29 : « ci-dessous » ne menait nulle part depuis le retrait du bloc « Cours », UDR-0134.)*
 
 **Page de la classe — bloc « Cours »** (`classroom/classrooms/_courses`, `#classroom_courses`) — **retenu le 2026-10-02 par l'orchestrateur, sur recommandation, révisable par le porteur** (memo, Q18) :
 - Les cours **publiés** du niveau et de la série de la classe, de la matière de l'enseignant (`teacher_profiles.material_id`) ; l'équipe voit toutes les matières.
