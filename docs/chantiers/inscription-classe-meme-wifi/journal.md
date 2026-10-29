@@ -38,7 +38,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-29 |
+| **PR** | #365 |
+| **ADR produits** | ADR-0085 §4.7 (amendement) |
+| **UDR produits** | — |
+
+- **2026-10-29 · Vérifié sur Develop** (déploiement de c9f262b) : la sortie du conteneur tourne sur une vingtaine d'adresses, d'où un essai en volume, en moins de 5 s. 200 envois d'inscription par lien : 200 × 422 (formulaire incomplet, voulu), aucun 429. Témoin sans lien, même rafale : 102 × 422 puis 98 × 429, soit environ 5 par adresse. Le plafond de la voie standard tient, celui du lien ne bloque plus une classe. 200 ouvertures du lien : 200 × 200.
