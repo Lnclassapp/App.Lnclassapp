@@ -2,148 +2,103 @@ require "test_helper"
 
 module Queries
   module Catalog
-    # UDR-0139 §3.2 : la fiche cahier de la leçon, sinon son texte puis celui de ses notions publiées, coupés après 150 mots.
+    # UDR-0141 §3.1 : la fiche de révision d'une leçon v3 : ses notions publiées (toutes pour l'équipe) au gabarit des quatre blocs.
     class RevisionSheetQueryTest < ActiveSupport::TestCase
+      def call(course, actor: nil) = RevisionSheetQuery.new.call(course_slug: course.slug, actor:)
+
       def words(count) = Array.new(count) { "mot" }.join(" ")
-      def call(course) = RevisionSheetQuery.new.call(course_slug: course.slug, actor: nil)
 
-      def document(*paragraphs)
-        { "pages" => [ { "sections" => [ { "title" => "Titre", "blocks" => paragraphs.map { { "type" => "paragraph", "text" => words(it) } } } ] } ],
-          "glossary" => {} }
+      def lesson(figures: [ revision_figure ], name: "Racines carrées", **attributes)
+        create_course(name:, subtitle: "Calculer et simplifier", figures:, **attributes)
       end
 
-      test "le contrat porte kind, sheet, texts et cut" do
-        assert_equal %i[kind sheet texts cut], RevisionSheetQuery::Revision.members
+      def add_notion(course, notion = revision_notion("Simplifier une racine carrée", figure: "triangle-thales"), **attributes)
+        sheet = { "remember" => notion["remember"], "method" => notion["method"], "example" => notion["example"],
+                  "pitfall" => notion["pitfall"], "figure_key" => notion["figure"] }
+        create_essential(course:, name: notion["name"], sheet:, **attributes)
       end
 
-      test "une leçon avec une fiche cahier rend la fiche et sa coupe" do
-        course = create_course
-        create_course_sheet(course:, document: document(100, 60, 10))
+      test "le contrat porte kind, sheet et cut" do
+        assert_equal %i[kind sheet cut], RevisionSheetQuery::Revision.members
+      end
+
+      test "une leçon v3 rend ses notions publiées dans l'ordre, avec leur fiche, leur figure, le thème et l'en-tête" do
+        course = lesson(sheet_theme: "teal")
+        add_notion(course, revision_notion("Seconde"), position: 2)
+        add_notion(course, revision_notion("Première", figure: "triangle-thales"), position: 1)
+        add_notion(course, revision_notion("Brouillon"), position: 3, status: "draft")
 
         revision = call(course)
 
         assert_equal :sheet, revision.kind
-        assert_equal course.slug, revision.sheet.course.slug
-        assert_equal [], revision.texts
-        assert_predicate revision.cut, :cut?
-        assert revision.cut.rest?(0, 0, 2)
-        assert_not revision.cut.rest?(0, 0, 1)
-      end
-
-      test "une fiche cahier courte n'a pas de coupe" do
-        course = create_course
-        create_course_sheet(course:, document: document(50))
-
-        assert_nil call(course).cut
-      end
-
-      test "sans fiche cahier : le texte de la leçon, puis celui de chaque notion publiée, dans l'ordre" do
-        course = create_course(content: "<p>Intro de la leçon.</p>")
-        create_essential(course:, name: "Seconde", position: 2, content: "<p>Texte de la seconde.</p>")
-        create_essential(course:, name: "Première", position: 1, content: "<p>Premier paragraphe.</p><p>Second paragraphe.</p>")
-        create_essential(course:, name: "Brouillon", position: 3, status: "draft", content: "<p>Pas encore.</p>")
-
-        revision = call(course)
-
-        assert_equal :texts, revision.kind
-        assert_nil revision.sheet
-        assert_equal [ nil, "Première", "Seconde" ], revision.texts.map { it[:title] }
-        assert_equal 1, revision.texts[0][:blocks].size
-        assert_equal 2, revision.texts[1][:blocks].size
-        assert_includes revision.texts[1][:blocks][1], "Second paragraphe."
-        assert_includes revision.texts[1][:html], "Premier paragraphe."
-        assert_includes revision.texts[1][:html], "Second paragraphe."
-        assert_not_includes revision.texts.to_s, "Pas encore"
+        assert_equal "Racines carrées", revision.sheet.name
+        assert_equal "Calculer et simplifier", revision.sheet.subtitle
+        assert_equal "teal", revision.sheet.theme
+        assert_equal course.material.name, revision.sheet.material
+        assert_equal course.level.name, revision.sheet.level
+        assert_equal %w[Première Seconde], revision.sheet.notions.map(&:name)
+        first = revision.sheet.notions.first
+        assert_equal "notion-#{first.slug}", first.anchor
+        assert_kind_of Entities::Catalog::NotionSheet, first.sheet
+        assert_equal 3, first.sheet.method_steps.size
+        assert_equal "triangle-thales", first.figure.key
+        assert_kind_of Entities::Catalog::Figure, first.figure
+        assert_nil revision.sheet.notions.last.figure
         assert_nil revision.cut
       end
 
-      test "le texte est coupé à la fin d'un paragraphe" do
-        course = create_course(content: "<p>#{words(100)}</p><p>#{words(60)}</p>")
-        create_essential(course:, name: "Notion", content: "<p>suite</p>")
+      test "l'équipe lit toutes les notions, brouillon compris, mais pas les archivées" do
+        course = lesson(status: "draft")
+        add_notion(course, revision_notion("Brouillon"), status: "draft")
+        add_notion(course, revision_notion("Publiée"))
+        add_notion(course, revision_notion("Archivée"), status: "archived")
+
+        names = call(course, actor: Entities::Identity::Actor.new(user_id: 1, role: :team, team_role: "content")).sheet.notions.map(&:name)
+
+        assert_equal %w[Brouillon Publiée], names
+      end
+
+      test "un élève ne lit que les notions publiées" do
+        course = lesson
+        add_notion(course, revision_notion("Brouillon"), status: "draft")
+        add_notion(course, revision_notion("Publiée"))
+
+        assert_equal %w[Publiée], call(course, actor: Entities::Identity::Actor.new(user_id: create_student_for(course).id, role: :student)).sheet.notions.map(&:name)
+      end
+
+      test "une notion qui cite une figure inconnue de la leçon n'a pas de figure" do
+        course = lesson(figures: [])
+        add_notion(course)
+
+        assert_nil call(course).sheet.notions.first.figure
+      end
+
+      test "une notion sans fiche (ancien contenu) n'est pas montrée : l'état est vide" do
+        course = lesson
+        create_essential(course:, name: "Ancienne")
+
+        assert_equal RevisionSheetQuery::EMPTY, call(course)
+      end
+
+      test "une leçon inconnue est vide" do
+        assert_equal RevisionSheetQuery::EMPTY, RevisionSheetQuery.new.call(course_slug: "inconnue", actor: nil)
+      end
+
+      test "une fiche longue porte la coupe des 150 mots, une courte n'en a pas" do
+        course = lesson
+        notion = revision_notion("Longue").merge("remember" => words(160))
+        add_notion(course, notion)
+        add_notion(course, revision_notion("Autre"))
 
         cut = call(course).cut
 
         assert_predicate cut, :cut?
-        assert_not cut.rest?(0, 1)
-        assert cut.rest?(1, 0)
-      end
+        assert cut.rest?(0, Entities::Catalog::RevisionPreview::METHOD)
+        assert cut.rest?(1)
+        short = lesson(name: "Courte")
+        add_notion(short, revision_notion("Courte"))
 
-      test "une figure de pièce jointe ne compte aucun mot, même légendée" do
-        figure = "<figure class=\"attachment attachment--file\"><figcaption class=\"attachment__caption\">" \
-                 "<span class=\"attachment__name\">#{words(100)}</span></figcaption></figure>"
-        course = create_course(content: "<p>#{words(100)}</p>#{figure}<p>#{words(60)}</p><p>suite</p>")
-
-        revision = call(course)
-
-        assert_includes revision.texts.first[:blocks][1], "<figure"
-        assert_includes revision.texts.first[:blocks][1], "attachment__name"
-        assert_not revision.cut.rest?(0, 2), "la figure n'avance pas la coupe : elle tombe après le paragraphe de 60 mots"
-        assert revision.cut.rest?(0, 3)
-      end
-
-      test "le texte saisi dans l'éditeur (un seul div, paragraphes séparés par deux br) est coupé à chaque paragraphe" do
-        course = create_course(content: "<div>#{words(100)}<br><br>#{words(60)}<br> <br>suite</div>")
-
-        revision = call(course)
-        blocks = revision.texts.first[:blocks]
-
-        assert_equal 3, blocks.size
-        assert_equal [ "<div>#{words(100)}</div>", "<div>#{words(60)}</div>", "<div>suite</div>" ], blocks.map(&:to_s)
-        assert_predicate revision.cut, :cut?
-        assert_not revision.cut.rest?(0, 1)
-        assert revision.cut.rest?(0, 2)
-      end
-
-      test "un seul br reste dans son paragraphe, trois br ne laissent pas de bloc vide" do
-        course = create_course(content: "<div>a<br>b<br><br><br>c</div>")
-
-        blocks = call(course).texts.first[:blocks].map(&:to_s)
-
-        assert_equal [ "<div>a<br>b</div>", "<div>c</div>" ], blocks
-      end
-
-      test "un élément qui n'a qu'un seul br reste un seul bloc" do
-        course = create_course(content: "<div>a<br>b</div>")
-
-        assert_equal [ "<div>a<br>b</div>" ], call(course).texts.first[:blocks].map(&:to_s)
-      end
-
-      test "une notion archivée n'apparaît pas dans la fiche" do
-        course = create_course(content: "<p>Intro.</p>")
-        create_essential(course:, name: "Archivée", status: "archived", content: "<p>Texte archivé.</p>")
-
-        revision = call(course)
-
-        assert_equal [ nil ], revision.texts.map { it[:title] }
-        assert_not_includes revision.texts.to_s, "Texte archivé"
-      end
-
-      test "une notion sans texte n'a pas d'intertitre" do
-        course = create_course(content: "")
-        create_essential(course:, name: "Vide", content: "")
-        create_essential(course:, name: "Rédigée", content: "<p>Du texte.</p>")
-
-        assert_equal [ "Rédigée" ], call(course).texts.map { it[:title] }
-      end
-
-      test "du texte brut sans balise reste un paragraphe" do
-        course = create_course(content: "Texte seul")
-
-        assert_equal [ "Texte seul" ], call(course).texts.first[:blocks].map { Nokogiri::HTML5.fragment(it).text.strip }
-      end
-
-      test "une leçon sans fiche, sans texte et sans notion rédigée est vide" do
-        course = create_course(content: "")
-
-        revision = call(course)
-
-        assert_equal [ :empty, nil, [], nil ], [ revision.kind, revision.sheet, revision.texts, revision.cut ]
-      end
-
-      test "une leçon inconnue est vide" do
-        revision = RevisionSheetQuery.new.call(course_slug: "inconnue", actor: nil)
-
-        assert_equal :empty, revision.kind
+        assert_nil call(short).cut
       end
     end
   end

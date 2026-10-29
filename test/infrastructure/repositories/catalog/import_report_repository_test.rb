@@ -48,7 +48,7 @@ module Repositories
 
       test "fail_stale passe failed les rapports sans signe de vie depuis la limite, et eux seuls" do
         stale = create_import_report(kind: "schools", status: "importing", started_at: @at - 11.minutes, updated_at: @at - 11.minutes)
-        fresh = create_import_report(kind: "essentials", status: "validating", started_at: @at - 5.minutes, updated_at: @at - 5.minutes)
+        fresh = create_import_report(kind: "drenas", status: "validating", started_at: @at - 5.minutes, updated_at: @at - 5.minutes)
         other = create_import_report(kind: "exercises", status: "importing", started_at: @at - 2.hours, updated_at: @at - 2.hours)
 
         assert_equal 1, @repository.fail_stale(kind: "schools", before: @at - 10.minutes, at: @at)
@@ -90,10 +90,10 @@ module Repositories
 
       test "fail_stale passe aussi failed un rapport resté en file au-delà de la limite (job jamais pris)" do
         never_claimed = create_import_report(kind: "schools", status: "queued", created_at: @at - 11.minutes)
-        waiting = create_import_report(kind: "essentials", status: "queued", created_at: @at - 5.minutes)
+        waiting = create_import_report(kind: "drenas", status: "queued", created_at: @at - 5.minutes)
 
         assert_equal 1, @repository.fail_stale(kind: "schools", before: @at - 10.minutes, at: @at)
-        assert_equal 0, @repository.fail_stale(kind: "essentials", before: @at - 10.minutes, at: @at)
+        assert_equal 0, @repository.fail_stale(kind: "drenas", before: @at - 10.minutes, at: @at)
         assert_equal [ "failed", @at ], never_claimed.reload.attributes.values_at("status", "finished_at")
         assert_equal "queued", waiting.reload.status
       end
@@ -141,7 +141,7 @@ module Repositories
 
         assert_equal [ [ "a.json", 10, "pending" ], [ "b.json", 3, "pending" ] ], report.files.map { [ it.name, it.byte_size, it.status ] }
 
-        reason = ImportError.new(path: "$", code: "format_mismatch", params: { expected: "lnclass.course-tree", received: "lnclass.essentials" })
+        reason = ImportError.new(path: "$", code: "format_mismatch", params: { expected: "lnclass.course-tree", received: "lnclass.schools" })
         files = [ FileReport.new(name: "a.json", byte_size: 10, status: "read", imported: 2, skipped: 1, errors: 1),
                   FileReport.new(name: "b.json", byte_size: 3, status: "rejected", reason:) ]
         errors = [ ImportError.new(path: "courses[1].name", code: "blank", file: "a.json") ]

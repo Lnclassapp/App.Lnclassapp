@@ -82,24 +82,13 @@ module Repositories
       end
 
       # ADR-0074 §7 : les cours, les fiches et les imports n'admettent jamais d'image ; seul l'adaptateur des articles le fait.
-      test "seuls les adaptateurs des articles et des fiches passent image_ids (ADR-0105)" do
+      test "seul l'adaptateur des articles passe image_ids (ADR-0105)" do
         callers = Rails.root.glob("{app,lib}/**/*.rb").select { it.read.match?(/RichTextSanitizer\.call\([^)]*image_ids:/m) }
-        allowed = %w[communication/article_repository.rb catalog/essential_repository.rb]
+        allowed = %w[communication/article_repository.rb]
                   .map { Rails.root.join("app/infrastructure/repositories", it) }
 
         assert_includes callers, allowed.first
         assert_empty callers - allowed
-      end
-
-      test "ADR-0105 : en mode fiche, seule une image de fiche admise reste ; une image d'article part" do
-        essential_image = Orm::EssentialImage.create!(content_type: "image/webp", byte_size: 2048, width: 1200, height: 900)
-        article = article_image
-        html = attachment(essential_image) + attachment(article)
-
-        kept = RichTextSanitizer.call(html, image_ids: Set[essential_image.id, article.id], image_model: "Orm::EssentialImage")
-
-        assert_includes kept, essential_image.attachable_sgid
-        assert_not_includes kept, article.attachable_sgid
       end
 
       private

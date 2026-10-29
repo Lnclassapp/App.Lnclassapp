@@ -1,7 +1,6 @@
 require "test_helper"
 
-# CA-08, ADR-0039: a file of the old application, once enveloped, is imported whole and in draft; the HTML of its
-# courses and essentials is sanitized before it enters their rich text.
+# CA-1, CA-2, ADR-0039, ADR-0116: a v3 lesson, once enveloped, is imported whole and in draft by the job; the retired formats are refused.
 class Catalog::ImportCourseTreeJobTest < ActiveJob::TestCase
   setup do
     seed_referential
@@ -10,49 +9,31 @@ class Catalog::ImportCourseTreeJobTest < ActiveJob::TestCase
 
   def import(document)
     report = create_import_report(kind: "course_tree", imported_by: @author)
-    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json), filename: "svt_tle_d.json") ])
+    Repositories::Catalog::ImportFileStore.new.attach(report_id: report.id, files: [ import_upload(io: StringIO.new(document.to_json), filename: "maths_3eme.json") ])
 
     Catalog::ImportCourseTreeJob.perform_now(report.id)
 
     report.reload
   end
 
-  # ADR-0113 §4.4 : l'extrait est au format 1, dont les exercices sont ignorés et comptés ; le reste de l'arbre est écrit.
-  test "the real extract of the old application is written with its notions, in draft, its exercises ignored, and the report is completed" do
-    report = import(import_sample("course_tree_tle_d_sample"))
+  test "a v3 lesson is written with its notions, exercises and figures, in draft, and the report is completed" do
+    report = import(revision_sheet_document)
 
-    assert_equal [ "completed", 2, 2, 0, 0 ], report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
-    assert_equal({ "essentials_created" => 6, "exercises_created" => 0, "questions_created" => 0, "answers_created" => 0,
-                   "exercises_ignored_v1" => 24 }, report.details)
-    assert_equal [ 2, 6, 0, 0, 0 ], [ Orm::Course, Orm::Essential, Orm::Exercise, Orm::Question, Orm::Answer ].map(&:count)
-    course = Orm::Course.find_by!(name: "Génétique et Évolution")
-    assert_equal [ "tle", "d", "svt", "draft", @author.id ],
-                 [ course.level.slug, course.series.slug, course.material.slug, course.status, course.author_id ]
-    assert_equal [ "Brassage génétique par la méiose", "Mutation et diversité", "Sélection naturelle et dérive" ],
-                 course.essentials.order(:position).pluck(:name)
-    assert_includes course.content.to_plain_text, "Transmission des caractères héréditaires"
+    assert_equal [ "completed", 1, 1, 0, 0 ], report.values_at(:status, :total_count, :imported_count, :skipped_count, :error_count)
+    assert_equal({ "essentials_created" => 2, "exercises_created" => 6, "questions_created" => 30, "answers_created" => 60 }, report.details)
+    course = Orm::Course.find_by!(name: "Racines carrées")
+    assert_equal [ "3eme", "mathematiques", "draft", @author.id, "blue" ],
+                 [ course.level.slug, course.material.slug, course.status, course.author_id, course.sheet_theme ]
+    assert_equal [ "Simplifier une racine carrée", "Calculer avec des racines" ], course.essentials.order(:position).pluck(:name)
     assert_equal [ "draft" ], Orm::Essential.distinct.pluck(:status)
   end
 
-  test "imported HTML is sanitized: no script, no event attribute, no javascript: link; bold, lists and formulas are kept" do
-    dirty = <<~HTML
-      <p onclick="steal()">La loi <strong>d'Ohm</strong> : $U = R \\times I$<script>alert("x")</script></p>
-      <ul><li>tension</li><li><a href="javascript:alert(1)">intensité</a></li></ul>
-    HTML
-    document = course_tree_document(courses: 1, essentials: 1, exercises: 1, questions: 1, answers: 2, material_name: "Physique Chimie")
-    document["courses"][0]["content"] = dirty
-    document["courses"][0]["essentials"][0]["content"] = dirty
+  test "the real extract of the old application (format 1) is refused whole as retired" do
+    report = import(import_sample("course_tree_tle_d_sample"))
 
-    report = import(document)
-
-    assert_equal [ "completed", 1 ], report.values_at(:status, :imported_count)
-    [ Orm::Course.sole, Orm::Essential.sole ].each do |record|
-      html = record.content.body.to_html
-      assert_no_match(/script|alert|onclick|steal|javascript:/, html, record.class.name)
-      assert_includes html, "<strong>d'Ohm</strong>"
-      assert_includes html, "$U = R \\times I$"
-      assert_match(%r{<ul>\s*<li>tension</li>\s*<li><a>intensité</a></li>\s*</ul>}, html)
-    end
+    assert_equal "rejected", report.status
+    assert_equal [ [ "version", "format_retired" ] ], report.import_errors.map { it.values_at("path", "code") }
+    assert_equal 0, Orm::Course.count
   end
 
   test "it runs the course tree adapter" do

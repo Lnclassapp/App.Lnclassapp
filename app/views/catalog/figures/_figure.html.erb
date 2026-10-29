@@ -1,0 +1,12 @@
+<%# 🌐 UI · catalog/figures/_figure — une figure paramétrée de la leçon : cadre, valeurs Stimulus, description de repli sans JavaScript %>
+<%# Rôle : `figure` (kind, params, controls, description) ; `frame:` :sheet (cahier, défaut) ou :app (page d'exercice, corrigé) %>
+<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.3, §3.4 %>
+<% app_frame = local_assigns.fetch(:frame, :sheet).to_sym == :app %>
+<%= tag.figure class: (app_frame ? "rounded-card border border-line bg-paper p-3" : "sheet-figure"),
+      data: { controller: "figure", figure_kind_value: figure.kind, figure_params_value: figure.params.to_json,
+              figure_controls_value: figure.controls.to_json } do %>
+  <%= tag.div class: (app_frame ? "figure-canvas" : "sheet-figure-canvas"), role: "img", aria: { label: figure.description },
+              data: { figure_target: "canvas" } %>
+  <%= tag.div class: (app_frame ? "mt-3 space-y-3" : "sheet-fields"), data: { figure_target: "controls" } %>
+  <%= tag.figcaption figure.description, class: (app_frame ? "mt-2 text-sm text-mute" : "sheet-muted"), data: { figure_target: "fallback" } %>
+<% end %>

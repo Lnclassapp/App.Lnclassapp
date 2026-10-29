@@ -1,9 +1,13 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116
 module Ports
   module Catalog
     module ContentTreeWriterPort
+      # Nom (dernier segment) de l'exception levée par replace_draft quand un contenu n'est plus en brouillon : le moteur d'import la
+      # reconnaît à ce nom (clé `exception` de l'échec d'écriture) et note lesson_already_published.
+      NOT_DRAFT = "NotDraft".freeze
+
       # Nœuds que remplissent les imports I1 à I3. slug et public_id sont tirés par le domaine avant l'insertion.
       # course_id (resp. essential_id) vaut nil pour un nœud porté par son parent, l'id du parent existant sinon.
       AnswerNode = Data.define(:position, :content, :correct, :match_content) do
@@ -34,9 +38,14 @@ module Ports
       end
       # position : indicative ; l'écrivain numérote les exercices par leçon, dans l'ordre où il les reçoit.
       # statement_blocks : le sujet en blocs, déjà validé par l'adaptateur (ADR-0115) ; nil sans blocs.
-      ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions, :statement_blocks) do
-        def initialize(statement_blocks: nil, **) = super
+      # figure_key (v3, ADR-0116 §4.3) : la clé de la figure de la leçon citée par l'exercice ; nil sans figure.
+      ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions, :statement_blocks,
+                                 :figure_key) do
+        def initialize(statement_blocks: nil, figure_key: nil, **) = super
       end
+      # Une notion v3 (ADR-0116 §4.1, §4.3) : sheet est la fiche au gabarit fixe, { remember:, method: [], example: { statement:, steps: [] },
+      # pitfall:, figure_key: } (clés texte, jsonb tel quel) ; exercises : l'exercice de la notion. Pas de content (retiré).
+      NotionNode = Data.define(:slug, :course_id, :name, :position, :sheet, :exercises)
       # existing_id : l'id de la notion déjà en base d'une leçon réimportée (ADR-0113 §4.4) ; nil pour une notion à créer.
       EssentialNode = Data.define(:slug, :course_id, :name, :subtitle, :content, :position, :exercises, :existing_id) do
         def initialize(existing_id: nil, **) = super
@@ -44,15 +53,26 @@ module Ports
       # exercises : les exercices de toute la leçon, sans notion (ADR-0113) ; ceux d'une notion sont portés par sa fiche.
       # existing_id : l'id d'une leçon déjà en base, réimportée : ni elle ni ses notions ne sont écrites, ses exercices sont archivés
       # puis remplacés par ceux du nœud ; nil pour une leçon à créer.
+      # v3 : figures (Array<Hash> clés texte, jsonb tel quel), sheet_theme ("blue", "teal" ou "burgundy") et notions (NotionNode) ;
+      # un nœud v3 laisse essentials vide.
       CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials, :exercises,
-                               :existing_id) do
-        def initialize(exercises: [], existing_id: nil, **) = super
+                               :existing_id, :figures, :sheet_theme, :notions) do
+        def initialize(exercises: [], existing_id: nil, figures: [], sheet_theme: "blue", notions: [], **) = super
       end
 
       # Appelé dans une transaction ; une table après l'autre, parents d'abord (insert_all ou COPY, ADR-0068) ; lève si la base refuse.
-      # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées), archived: les exercices archivés des leçons réimportées
+      # → { courses:, essentials:, exercises:, questions:, answers:, archived: } : lignes créées, et nombre d'exercices archivés des nœuds
+      # portant existing_id (ADR-0113, anciens formats). Un nœud v3 réimporté passe par replace_draft, qui ne rend pas `archived`.
       def write(author_id:, at:, courses: [], essentials: [], exercises: [])
         raise NotImplementedError, "#{self.class} doit implémenter #write"
+      end
+
+      # ADR-0116 §4.4 : remplace entière une leçon encore en brouillon, dans la transaction de l'appelant, la leçon verrouillée (FOR UPDATE) :
+      # exercices, questions, réponses, séances et tentatives sur ces exercices, notions et leurs lectures, puis réécriture depuis `tree`
+      # (CourseNode v3 avec existing_id: course_id). La leçon garde son id et son slug. Lève si un contenu n'est plus en brouillon.
+      # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées)
+      def replace_draft(course_id:, tree:)
+        raise NotImplementedError, "#{self.class} doit implémenter #replace_draft"
       end
     end
   end

@@ -26,6 +26,33 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
   def assignments_href(slug) = "/courses/#{slug}/assignments"
 
+  # CA-12 : l'ancienne adresse de la fiche mène à la fiche de révision (301) ; mêmes refus que la page, sans rien révéler.
+  test "CA-12: /fiche of a draft lesson answers 404 to a student" do
+    draft = create_course(name: "Brouillon fiche", level: @tle, material: @svt, status: "draft")
+    sign_in_as create_student_for(draft)
+
+    get course_fiche_path(draft.slug)
+
+    assert_response :not_found
+  end
+
+  test "CA-12: /fiche of a published lesson of another level answers 404 to a student" do
+    sign_in_as create_student_for(@published)
+
+    get course_fiche_path(create_course(name: "Autre niveau", level: @seconde, material: @svt).slug)
+
+    assert_response :not_found
+  end
+
+  test "CA-12: /fiche of a published lesson of the student's level redirects permanently to its revision sheet" do
+    sign_in_as create_student_for(@course)
+
+    get course_fiche_path(@course.slug)
+
+    assert_response :moved_permanently
+    assert_redirected_to course_path(@course.slug, anchor: "fiche-de-revision")
+  end
+
   # ADR-0103 §4.6: no list in the current school (a rejected request lost to the migration, then nothing inherited).
   test "a teacher without any subject in the current school is invited to choose them, with no broken subtitle" do
     teacher = create_teacher(school: create_school, classrooms: [ create_classroom(level: @tle) ])
@@ -707,7 +734,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # ── Page d'un cours ────────────────────────────────────────────────────────
 
   test "a student reads a published course: back link, badges, then « Fiche de révision » and « Prépare interros »" do
-    meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions")
+    meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions", sheet: notion_sheet("Deux divisions successives."))
     create_exercise(essential: meiose)
     create_essential(course: @course, name: "Fiche en brouillon", status: "draft")
     sign_in_as create_student_for(@course)
@@ -725,12 +752,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_header", text: including("Du gène à l'espèce")
     assert_select "#course_header", text: including("Tle D")
     assert_select "#course_header", text: including("SVT")
-    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; sans fiche cahier, la fiche de révision est le texte
-    # de la leçon puis celui de ses notions publiées (Lot A, UDR-0139 §3.2) ; « Prépare interros » liste l'exercice de la notion (Lot B).
+    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; la fiche de révision montre les notions publiées au
+    # gabarit des quatre blocs (UDR-0141 fiche de révision) ; « Prépare interros » liste l'exercice de la notion (Lot B).
     assert_select "#course_essentials", 0
     assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
-    assert_select "section#fiche-de-revision", text: including("ADN et gènes")
-    assert_select "section#fiche-de-revision h3", text: "La méiose"
+    assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
+    assert_select "section#fiche-de-revision h4", text: "1. La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
     assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
     assert_select "section#prepare-interros #notion-#{meiose.slug} h3", text: "La méiose"
@@ -777,8 +804,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       # CA-29, ADR-0113 §4.6 : plus de « Nouvelle notion » ni de « Nouvel exercice » ; la leçon se réimporte.
       assert_select "a[href='/teams/courses/#{@draft.slug}/essentials/new']", 0
       assert_select "[role=menu] a", text: /Nouvelle (fiche|notion)|Nouvel exercice/, count: 0
-      assert_select modal_link(new_teams_import_path(kind: "essentials", course: @draft.slug)),
-                    text: tl("role_actions.import_essentials")
+      # Refonte des contenus de maths : l'import de notions est retiré, le corrigé de l'équipe le remplace.
+      assert_select "a[href*='kind=essentials']", 0
+      assert_select "a[role=menuitem][href='#{answer_key_teams_course_path(@draft.slug)}']"
     end
     assert_select "#course_essentials", 0
     assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
@@ -838,17 +866,22 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_sheet_link", 0
   end
 
-  # Le texte de la leçon est rendu par la fiche de révision (Lot A) : ce qu'il contient d'exécutable n'arrive pas dans la page.
-  test "the lesson text is sanitised on render: no script tag, no event attribute, no javascript link" do
-    Orm::Course.find(@course.id).update!(
-      content: "<p onclick=\"alert(1)\">Texte <strong>gras</strong></p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
-    )
+  # La fiche de révision est du texte brut (ADR-0116 fiche de révision) : ce qu'un bloc contient d'exécutable est échappé.
+  test "the revision sheet escapes its text: no script tag, no event attribute, no javascript link" do
+    create_essential(course: @course, name: "Notion piégée", sheet: notion_sheet(
+      "<p onclick=\"alert(1)\">Texte</p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
+    ))
     sign_in_as create_student_for(@course)
 
     get course_path(@course.slug)
 
-    assert_select "#fiche-de-revision strong", text: "gras"
-    assert_no_match(/<script>alert|onclick|javascript:alert/, response.body)
+    assert_select "#fiche-de-revision", text: including("<script>alert(2)</script>")
+    assert_select "#fiche-de-revision script, #fiche-de-revision [onclick], #fiche-de-revision a[href^=javascript]", 0
+  end
+
+  def notion_sheet(remember)
+    notion = revision_notion("Notion")
+    { "remember" => remember, "method" => notion["method"], "example" => notion["example"], "pitfall" => notion["pitfall"] }
   end
 
   test "no page loads a script or a stylesheet from a third-party host (TR-41)" do

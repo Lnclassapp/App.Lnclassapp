@@ -1,28 +1,10 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, 0116
 module Entities
   module Catalog
     module ContentNode
       # Clés JSON (chaînes) de l'ancienne application ; la clé status est ignorée : tout naît draft.
-      def self.validate_course(hash, path:, lookup:)
-        return [ error(path, "schema") ] unless hash.is_a?(Hash)
-
-        text(hash, "name", Course::NAME_MAX, path) +
-          text(hash, "subtitle", Course::SUBTITLE_MAX, path, required: false) +
-          taxonomy(hash, path, lookup) +
-          children(hash, "essentials", path) { |essential, child_path| validate_essential(essential, path: child_path) }
-      end
-
-      def self.validate_essential(hash, path:)
-        return [ error(path, "schema") ] unless hash.is_a?(Hash)
-
-        text(hash, "name", Essential::NAME_MAX, path) +
-          text(hash, "subtitle", Essential::SUBTITLE_MAX, path, required: false) +
-          image_slot_errors(hash["content"], path) +
-          children(hash, "exercises", path) { |exercise, child_path| validate_exercise(exercise, path: child_path) }
-      end
-
       def self.validate_exercise(hash, path:)
         return [ error(path, "schema") ] unless hash.is_a?(Hash)
 
@@ -37,20 +19,83 @@ module Entities
         errors + questions.each_with_index.flat_map { |question, index| question_errors(question, "#{path}.questions[#{index}]") }
       end
 
-      # ADR-0115, menace I9 : le sujet en blocs est lu comme un fichier hostile avant d'être écrit. Dix blocs au plus, de types
-      # paragraph, box et table ; chaque bloc passe par les règles des fiches (SheetDocument : texte sans HTML ni lien, tailles).
-      # Aucun lexique : une marque [[clé|texte]] n'a pas de sens dans un sujet. Une liste vide vaut l'absence de blocs.
-      def self.statement_blocks_errors(blocks, path)
-        return [] if blocks.nil? || blocks == []
+      # Format 3 (ADR-0116 §4.1) : la leçon sans ses enfants, qu'ImportCourseTree valide un à un.
+      def self.validate_lesson(hash, path:, lookup:)
+        return [ error(path, "schema") ] unless hash.is_a?(Hash)
 
+        text(hash, "name", Course::NAME_MAX, path) + text(hash, "subtitle", Course::SUBTITLE_MAX, path, required: false) +
+          taxonomy(hash, path, lookup)
+      end
+
+      # Une notion v3 : son nom et sa fiche au gabarit (NotionSheet). La figure citée et l'exercice sont vérifiés à part.
+      def self.validate_notion(hash, path:)
+        return [ error(path, "schema") ] unless hash.is_a?(Hash)
+
+        text(hash, "name", Essential::NAME_MAX, path) +
+          NotionSheet.errors_for(hash).map { |sub_path, code| error("#{path}.#{sub_path}", code) }
+      end
+
+      # Les figures de la leçon : chacune valide (Figure), clés uniques. → Array<ImportError>
+      def self.validate_figures(figures, path)
+        return [] unless figures.is_a?(Array)
+
+        seen = Set.new
+        figures.each_with_index.flat_map do |figure, index|
+          figure_path = "#{path}.figures[#{index}]"
+          found = Figure.errors_for(figure).map { |sub_path, code, params| error(sub_path == "$" ? figure_path : "#{figure_path}.#{sub_path}", code, **params) }
+          duplicate = figure.is_a?(Hash) && figure["key"].is_a?(String) && !seen.add?(figure["key"])
+          duplicate ? found << error("#{figure_path}.key", "figure_invalid", param: "key") : found
+        end
+      end
+
+      # Une figure citée par une notion ou un exercice doit être dans la leçon. → Array<ImportError>
+      def self.validate_figure_citation(key, keys, path)
+        return [] if key.nil? || key.to_s.empty? || keys.include?(key)
+
+        [ error(path, "figure_missing", key: key.to_s) ]
+      end
+
+      # Un exercice v3 : les règles de l'exercice, 5 à 30 questions (le plafond est celui du schéma) et la correction rédigée de
+      # chaque question, de 20 à 2 000 caractères.
+      def self.validate_exercise_v3(hash, path:)
+        errors = validate_exercise(hash, path:)
+        return errors unless hash.is_a?(Hash)
+
+        questions = Array(hash["questions"])
+        if questions.size < QUESTIONS_MIN
+          # Aucune question : « trop peu », pas « vide » (la raison de validate_exercise est remplacée).
+          errors = errors.reject { it.path == "#{path}.questions" && it.code == "blank" }
+          errors << error("#{path}.questions", "too_few_questions", title: hash["title"].to_s.squish, count: questions.size,
+                                                                     min: QUESTIONS_MIN)
+        elsif questions.size > QUESTIONS_MAX
+          errors << error("#{path}.questions", "invalid_count")
+        end
+        errors + questions.each_with_index.flat_map { |question, index| explanation_errors(question, "#{path}.questions[#{index}]") }
+      end
+
+      def self.explanation_errors(question, path)
+        return [] unless question.is_a?(Hash)
+
+        explanation = question["explanation"].to_s.squish
+        key = "#{path}.explanation"
+        return [ error(key, "blank") ] if explanation.empty?
+        return [ error(key, "too_short", min: EXPLANATION_RANGE.min) ] if explanation.length < EXPLANATION_RANGE.min
+        return [ error(key, "too_long", max: EXPLANATION_RANGE.max) ] if explanation.length > EXPLANATION_RANGE.max
+
+        []
+      end
+
+      # ADR-0115, menace I9 : le sujet en blocs est lu comme un fichier hostile avant d'être écrit (StatementBlocks : dix blocs au
+      # plus, de types paragraph, box et table, texte sans HTML ni lien). Une liste vide vaut l'absence de blocs.
+      def self.statement_blocks_errors(blocks, path)
         key = "#{path}.statement_blocks"
-        SheetDocument.statement_errors(blocks).map do |found|
-          if found.page.nil? && found.position.nil?
+        StatementBlocks.errors(blocks).map do |found|
+          if found.position.nil?
             error(key, "schema")
-          elsif found.page.nil? && found.reason == :unknown_type
+          elsif found.reason == :unknown_type
             error("#{key}[#{found.position - 1}].type", "invalid_value", value: found.detail)
           else
-            error(found.position ? "#{key}[#{found.position - 1}]" : key, "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
+            error("#{key}[#{found.position - 1}]", "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
           end
         end
       end
@@ -94,14 +139,6 @@ module Entities
         text(image, "description", nil, "#{path}.image")
       end
 
-      # ADR-0105 §4.3 : un « [[image: » que le motif ne reconnaît pas ne serait jamais compté ; l'élève le lirait tel quel.
-      def self.image_slot_errors(content, path)
-        malformed = ImageSlot.malformed_count(content)
-        malformed.positive? ? [ error("#{path}.content", "image_slot_malformed", count: malformed) ] : []
-      rescue ImageSlot::Unreadable
-        [ error("#{path}.content", "image_slots_unreadable") ]
-      end
-
       # ADR-0091 §4.5 : tolerance n'a de sens que pour un nombre, match que pour relier ; ailleurs, une clé ignorée
       # tromperait l'équipe : elle est refusée à sa place.
       def self.misplaced_keys(hash, raw_answers, path)
@@ -124,8 +161,11 @@ module Entities
                     starter_not_allowed: "starter", starter_too_long: "starter", criteria_not_allowed: "criteria",
                     criteria_too_many: "criteria", criteria_too_long: "criteria", criteria_blank: "criteria",
                     explanation_required: "explanation" }.freeze
-      STATEMENT_BLOCK_TYPES = SheetDocument::STATEMENT_BLOCK_TYPES
-      STATEMENT_BLOCKS_MAX = SheetDocument::STATEMENT_BLOCKS_MAX
+      QUESTIONS_MIN = 5
+      QUESTIONS_MAX = 30
+      EXPLANATION_RANGE = (20..2_000)
+      STATEMENT_BLOCK_TYPES = StatementBlocks::TYPES
+      STATEMENT_BLOCKS_MAX = StatementBlocks::MAX
 
       def self.structure_errors(hash, answers, path)
         question_type = hash["question_type"]
@@ -177,8 +217,8 @@ module Entities
 
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
-      private_class_method :question_errors, :typing_errors, :statement_blocks_errors, :misplaced_keys, :structure_errors, :image_errors, :image_slot_errors, :taxonomy,
-                           :series_errors, :text, :children, :error
+      private_class_method :question_errors, :typing_errors, :statement_blocks_errors, :misplaced_keys, :structure_errors, :image_errors, :taxonomy,
+                           :series_errors, :text, :children, :error, :explanation_errors
     end
   end
 end

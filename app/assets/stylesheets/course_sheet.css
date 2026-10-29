@@ -3,14 +3,11 @@
   Rôle : jetons des maquettes en variables CSS, 3 thèmes, papier Seyès, composants communs `.sheet-*`. Chargé seulement sur
          l'écran de la fiche (stylesheet_link_tag "course_sheet"), servi tel quel par Propshaft, sans Tailwind.
   ADR  : 0110-fiche-de-cours-en-donnees-importees · source des valeurs : docs/design/fiches-cours/ (gabarit <x-dc>).
-  Règle d'un lot : une règle propre à un kind s'écrit dans course_sheet/<kind>.css, importé ici, jamais dans ce fichier.
+  Amendé par UDR-0141-fiche-de-revision-en-quatre-blocs §4 : lexique, explication simple, exercices dans la page et tableau
+  sont retirés ; l'habillage cahier reste. Les règles de lecture sont dans course_sheet/reading.css.
 */
 
 @import url("./course_sheet/reading.css");
-@import url("./course_sheet/exercises.css");
-@import url("./course_sheet/thales_figure.css");
-@import url("./course_sheet/argument.css");
-@import url("./course_sheet/lens.css");
 
 /* ---- Polices hébergées par Lnclass (OFL, sous-ensemble latin) : ADR-0049 interdit toute police tierce ---------------- */
 
@@ -59,6 +56,7 @@
   --sheet-muted: #6a6d80;
   --sheet-white: #fff;
   --sheet-success: oklch(0.52 0.13 155);
+  --sheet-remember: var(--sheet-success);
   --sheet-error: oklch(0.53 0.19 27);
   --sheet-pending: #6a6d80;
   --sheet-margin-line: oklch(0.6 0.17 20 / 0.55);
@@ -97,6 +95,8 @@
   --sheet-note: oklch(0.5 0.12 175);
   --sheet-note-deep: oklch(0.45 0.11 175);
   --sheet-note-bg: oklch(0.95 0.03 175);
+  /* « La méthode » est déjà vert d'eau : « À retenir » passe au bleu pour s'en distinguer (décision du porteur) */
+  --sheet-remember: oklch(0.48 0.13 255);
   --sheet-shadow-tint: 20 50 50;
   --sheet-page-width: 880px;
   --sheet-page-min-height: 1245px;
@@ -138,6 +138,7 @@
 }
 
 /* Le fond du thème couvre tout l'écran, pas seulement la colonne du shell où vit la fiche */
+
 .sheet-screen::before {
   content: "";
   position: fixed;
@@ -167,6 +168,7 @@
 }
 
 /* Papier Seyès : marge rouge à 74 px, lignes fines tous les 8 px, lignes marquées tous les 32 px */
+
 .sheet-page::before {
   content: "";
   position: absolute;
@@ -305,6 +307,18 @@
   background: var(--sheet-note);
 }
 
+/* Ton « piège à éviter » : l'erreur du thème pour l'étiquette et le filet, son fond à 8 % (UDR-0141 §3.2) */
+
+.sheet-box[data-tone="pitfall"] {
+  padding: 18px 22px 12px;
+  border-color: var(--sheet-error);
+  background: color-mix(in oklch, var(--sheet-error) 8%, var(--sheet-card));
+}
+
+.sheet-box[data-tone="pitfall"] .sheet-box-label {
+  background: var(--sheet-error);
+}
+
 .sheet-steps {
   display: flex;
   flex-direction: column;
@@ -314,177 +328,7 @@
   text-wrap: pretty;
 }
 
-/* ---- Explications simples (bascule violette) -------------------------------------------------------------------------- */
-
-.sheet-simple {
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-  padding: 10px 14px;
-  border-radius: var(--sheet-radius-box);
-  background: var(--sheet-note-bg);
-  font-size: 15.5px;
-  line-height: 1.5;
-  text-wrap: pretty;
-}
-
-.sheet-simple-label {
-  flex: none;
-  font-family: var(--sheet-font-title);
-  font-weight: 700;
-  font-size: 17px;
-  color: var(--sheet-note-deep);
-}
-
-.sheet-screen[data-simple="false"] .sheet-simple {
-  display: none;
-}
-
-.sheet-toolbar {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px 16px;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: 12px;
-  padding: 8px 12px;
-  border: 1.5px solid color-mix(in oklch, var(--sheet-note) 40%, transparent);
-  border-radius: var(--sheet-radius-box);
-  background: var(--sheet-card);
-  font-size: 14.5px;
-}
-
-.sheet-toolbar-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.sheet-toggle {
-  padding: 2px 12px;
-  border: 1.5px solid var(--sheet-note);
-  border-radius: var(--sheet-radius-field);
-  background: transparent;
-  color: var(--sheet-note);
-  font-family: var(--sheet-font-title);
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.sheet-toggle[aria-pressed="true"] {
-  background: var(--sheet-note);
-  color: var(--sheet-white);
-}
-
-/* ---- Lexique : mot souligné en pointillés et bulle --------------------------------------------------------------------- */
-
-.sheet-word {
-  border: 0;
-  border-bottom: 2px dotted var(--sheet-note);
-  background: transparent;
-  padding: 0;
-  color: inherit;
-  font: inherit;
-  cursor: help;
-}
-
-.sheet-word:hover {
-  background: color-mix(in oklch, var(--sheet-note) 12%, transparent);
-}
-
-.sheet-bubble {
-  position: fixed;
-  z-index: 50;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  box-sizing: border-box;
-  width: 310px;
-  max-height: 70vh;
-  overflow: auto;
-  padding: 12px 14px;
-  border: 2px solid var(--sheet-note);
-  border-radius: var(--sheet-radius-panel);
-  background: var(--sheet-card);
-  box-shadow: var(--sheet-shadow-panel);
-  color: var(--sheet-ink);
-  font-family: var(--sheet-font-body);
-  font-size: 15px;
-  line-height: 1.45;
-}
-
-.sheet-bubble[hidden] {
-  display: none;
-}
-
-.sheet-bubble-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.sheet-bubble-title {
-  font-family: var(--sheet-font-title);
-  font-weight: 700;
-  font-size: 20px;
-  color: var(--sheet-note-deep);
-}
-
-.sheet-bubble-close {
-  padding: 0 4px;
-  border: 0;
-  background: transparent;
-  color: var(--sheet-muted);
-  font-size: 18px;
-  cursor: pointer;
-}
-
-.sheet-bubble-example {
-  font-style: italic;
-  color: var(--sheet-ink-secondary);
-}
-
-/* ---- Boutons --------------------------------------------------------------------------------------------------------- */
-
-.sheet-btn {
-  padding: 2px 12px;
-  border: 1.5px solid var(--sheet-primary);
-  border-radius: var(--sheet-radius-field);
-  background: transparent;
-  color: var(--sheet-primary);
-  font-family: var(--sheet-font-title);
-  font-size: 15px;
-  cursor: pointer;
-}
-
-.sheet-btn:hover {
-  background: color-mix(in oklch, var(--sheet-primary) 8%, transparent);
-}
-
-.sheet-btn[data-variant="primary"] {
-  background: var(--sheet-primary);
-  color: var(--sheet-white);
-}
-
-.sheet-btn[data-variant="primary"]:hover {
-  background: var(--sheet-primary-deep);
-}
-
-.sheet-btn:focus-visible,
-.sheet-toggle:focus-visible,
-.sheet-word:focus-visible,
-.sheet-input:focus-visible {
-  outline: 2px solid var(--sheet-accent);
-  outline-offset: 2px;
-}
-
-.sheet-actions {
-  display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-/* ---- Carte d'exercice, champs et retours ------------------------------------------------------------------------------- */
+/* ---- Carte et champs ------------------------------------------------------------------------------- */
 
 .sheet-card {
   display: flex;
@@ -514,102 +358,6 @@
   color: var(--sheet-primary-deep);
 }
 
-.sheet-field {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.sheet-input {
-  width: 64px;
-  border: 0;
-  border-bottom: 2px dashed var(--sheet-primary);
-  background: var(--sheet-white);
-  color: inherit;
-  font: inherit;
-  text-align: center;
-  outline: none;
-}
-
-.sheet-feedback {
-  font-size: 14px;
-  color: var(--sheet-pending);
-}
-
-.sheet-feedback[data-state="correct"] {
-  color: var(--sheet-success);
-}
-
-.sheet-feedback[data-state="wrong"] {
-  color: var(--sheet-error);
-}
-
-.sheet-message {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--sheet-pending);
-}
-
-.sheet-message[data-state="correct"] {
-  color: var(--sheet-success);
-}
-
-.sheet-message[data-state="wrong"] {
-  color: var(--sheet-error);
-}
-
-.sheet-hint {
-  font-size: 14px;
-  color: var(--sheet-note);
-}
-
-.sheet-correction {
-  padding-top: 6px;
-  border-top: 1px dashed var(--sheet-dashed);
-  font-family: var(--sheet-font-title);
-  font-size: 17px;
-  line-height: 1.45;
-  color: var(--sheet-primary-deep);
-}
-
-.sheet-correction b {
-  color: var(--sheet-accent);
-}
-
-.sheet-hint[hidden],
-.sheet-correction[hidden] {
-  display: none;
-}
-
-.sheet-score {
-  font-family: var(--sheet-font-title);
-  font-size: 18px;
-  color: var(--sheet-primary);
-}
-
-/* ---- Tableau ------------------------------------------------------------------------------------------------------- */
-
-.sheet-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: var(--sheet-card);
-  font-size: 15px;
-}
-
-.sheet-table th,
-.sheet-table td {
-  padding: 6px 10px;
-  border: 1.5px solid var(--sheet-field-border);
-  text-align: left;
-}
-
-.sheet-table th {
-  background: var(--sheet-card-border);
-  font-family: var(--sheet-font-title);
-  font-weight: 700;
-  color: var(--sheet-primary);
-}
-
 /* ---- Figure : cadre commun --------------------------------------------------------------------------------------------- */
 
 .sheet-figure {
@@ -617,6 +365,25 @@
   border: 1.5px solid var(--sheet-field-border);
   border-radius: var(--sheet-radius-box);
   background: var(--sheet-card);
+}
+
+/* Le canvas d'une figure : vide tant que le dessin n'est pas posé, la description (figcaption) reste alors lue à sa place */
+
+.sheet-figure-canvas {
+  width: 100%;
+  max-width: 520px; /* sur ordinateur, la figure ne dépasse pas une demi-page : texte et hauteur restent mesurés */
+  margin-inline: auto;
+  aspect-ratio: 4 / 3;
+}
+
+.sheet-figure-canvas:empty {
+  display: none;
+}
+
+/* Une fois dessinée, la figure prend la hauteur de son dessin : une droite graduée ne laisse pas un grand vide sous elle */
+
+.sheet-figure-canvas:has(svg) {
+  aspect-ratio: auto;
 }
 
 .sheet-figure svg {
@@ -646,6 +413,7 @@
   }
 
   /* Marge rouge rapprochée du bord : 8 px au lieu de 74 px */
+
   .sheet-page::before {
     background-image:
       linear-gradient(to right, transparent 8px, var(--sheet-margin-line) 8px, var(--sheet-margin-line) 10px, transparent 10px),
@@ -659,9 +427,16 @@
   }
 
   .sheet-page,
-  .sheet-page-body > * {
+.sheet-page-body > * {
     min-width: 0;
     overflow-wrap: anywhere;
+  }
+
+  /* La figure prend presque toute la largeur : son cadre s'amincit et déborde sur la marge intérieure, sans couvrir la marge rouge */
+
+  .sheet-figure {
+    padding: 4px;
+    margin-inline: -6px;
   }
 
   .sheet-h1 {
@@ -683,16 +458,16 @@
   }
 
   .sheet-page img,
-  .sheet-page video,
-  .sheet-page svg {
+.sheet-page video,
+.sheet-page svg {
     max-width: 100%;
     height: auto;
   }
 
   .sheet-box,
-  .sheet-box[data-tone="method"],
-  .sheet-box[data-tone="remember"],
-  .sheet-practice {
+.sheet-box[data-tone="method"],
+.sheet-box[data-tone="remember"],
+.sheet-box[data-tone="pitfall"] {
     padding: 20px 16px 14px;
   }
 
@@ -707,124 +482,6 @@
   }
 
   /* Cibles tactiles : 44 px au moins */
-  .sheet-btn,
-  .sheet-toggle,
-  .sheet-bubble-term {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: var(--sheet-touch);
-    min-height: var(--sheet-touch);
-    padding-block: 4px;
-  }
-
-  .sheet-input {
-    box-sizing: border-box;
-    min-width: var(--sheet-touch);
-    min-height: var(--sheet-touch);
-    font-size: 18px;
-  }
-
-  .sheet-toolbar {
-    justify-content: flex-start;
-  }
-
-  .sheet-toolbar-actions,
-  .sheet-actions,
-  .sheet-choices {
-    flex-wrap: wrap;
-  }
-}
-
-/* ---- Sous 640 px : le lexique devient un tiroir (écrit après la bulle de base, qu'il remplace) ------------------------- */
-
-@media (max-width: 639px) {
-  /* Pleine largeur en bas de l'écran, coins supérieurs de 20 px, poignée de 44 x 5 px */
-  .sheet-bubble {
-    left: 0;
-    right: 0;
-    top: auto;
-    bottom: 0;
-    width: auto;
-    max-height: 60vh;
-    padding: 24px 16px max(16px, env(safe-area-inset-bottom));
-    border-width: 2px 0 0;
-    border-radius: 20px 20px 0 0;
-  }
-
-  .sheet-bubble::before {
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 50%;
-    width: 44px;
-    height: 5px;
-    margin-left: -22px;
-    border-radius: 3px;
-    background: var(--sheet-field-border);
-  }
-
-  .sheet-bubble-head {
-    align-items: center;
-  }
-
-  .sheet-bubble-close {
-    flex: none;
-    min-width: var(--sheet-touch);
-    min-height: var(--sheet-touch);
-    font-size: 24px;
-  }
-}
-
-/* ---- Sous 640 px : tableau en cartes (une carte par ligne ; l'en-tête devient le libellé) ----------------- */
-
-@media (max-width: 639px) {
-  .sheet-table,
-  .sheet-table tbody,
-  .sheet-table tr,
-  .sheet-table td,
-  .sheet-table caption {
-    display: block;
-  }
-
-  .sheet-table {
-    background: transparent;
-  }
-
-  .sheet-table thead {
-    display: none;
-  }
-
-  .sheet-table tbody {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .sheet-table tr {
-    overflow: hidden;
-    border: 1.5px solid var(--sheet-field-border);
-    border-radius: var(--sheet-radius-box);
-    background: var(--sheet-card);
-  }
-
-  .sheet-table td {
-    padding: 8px 12px;
-    border: 0;
-  }
-
-  .sheet-table td + td {
-    border-top: 1px dashed var(--sheet-dashed);
-  }
-
-  .sheet-table td::before {
-    content: attr(data-label);
-    display: block;
-    font-family: var(--sheet-font-title);
-    font-weight: 700;
-    font-size: 15px;
-    color: var(--sheet-primary);
-  }
 }
 
 /* ---- Dans la page de la leçon (UDR-0139 §3.2) ------------------------------------------------------------------------------
