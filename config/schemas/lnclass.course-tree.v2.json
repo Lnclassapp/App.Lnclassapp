@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "title": "Import des cours complets, version 2 (ADR-0113, ADR-0039, UDR-0038)",
-  "description": "Enveloppe { format, version, courses[] }. Chaque cours porte toute sa descendance : essentials[] → exercises[] → questions[] → answers[], et exercises[] pour les exercices de toute la leçon. Un exercice a un titre (title), un sujet (statement), un type (exercise_type) et des questions ; name et description ne sont plus admis. Les clés de l'ancienne application pour le cours (nom, sous_titre) et la proposition (is_correct) sont acceptées. La règle (un exercice par notion, quatre exercices de toute la leçon), la présence des noms et des sujets, le référentiel et la structure des questions sont vérifiés par l'adaptateur, pour que l'erreur soit notée à la clé canonique et nomme la leçon. tolerance (marge d’une question numeric) et match (côté droit d’une paire matching) sont facultatives (ADR-0091). La clé status est ignorée : tout naît en brouillon.",
+  "description": "Enveloppe { format, version, courses[] }. Chaque cours porte toute sa descendance : essentials[] → exercises[] → questions[] → answers[], et exercises[] pour les exercices de toute la leçon. Un exercice a un titre (title), un sujet (statement), un type (exercise_type) et des questions ; name et description ne sont plus admis. Une question porte aussi, facultatifs, points, unit (numeric), starter et criteria (written) ; les types select, written et notebook s'ajoutent aux types connus ; un exercice porte statement_blocks (ADR-0115). Les clés de l'ancienne application pour le cours (nom, sous_titre) et la proposition (is_correct) sont acceptées. La règle (un exercice par notion, quatre exercices de toute la leçon), la présence des noms et des sujets, le référentiel et la structure des questions sont vérifiés par l'adaptateur, pour que l'erreur soit notée à la clé canonique et nomme la leçon. tolerance (marge d’une question numeric) et match (côté droit d’une paire matching) sont facultatives (ADR-0091). La clé status est ignorée : tout naît en brouillon.",
   "type": "object",
   "required": ["format", "version", "courses"],
   "additionalProperties": false,
@@ -66,6 +66,12 @@
         "statement": { "$ref": "#/$defs/statement" },
         "exercise_type": { "$ref": "#/$defs/text" },
         "status": { "$ref": "#/$defs/text" },
+        "statement_blocks": {
+          "description": "Le sujet en blocs (ADR-0115) : dix blocs au plus, objets ; leurs types et leurs textes sont vérifiés par l'adaptateur (paragraph, box, table).",
+          "type": ["array", "null"],
+          "maxItems": 10,
+          "items": { "type": "object" }
+        },
         "questions": {
           "description": "Trente questions au plus par exercice (menace-import-v2 Q1).",
           "type": "array",
@@ -82,6 +88,15 @@
         "question_type": { "$ref": "#/$defs/text" },
         "explanation": { "$ref": "#/$defs/text" },
         "tolerance": { "type": ["number", "null"], "minimum": 0, "maximum": 99999999.9999 },
+        "points": { "description": "Points de la question (ADR-0115) : de 0,5 à 20, par demi-point ; 1 sans la clé.", "type": ["number", "null"], "minimum": 0.5, "maximum": 20, "multipleOf": 0.5 },
+        "unit": { "description": "Unité d'une question numeric : 10 caractères au plus.", "type": ["string", "null"], "maxLength": 10 },
+        "starter": { "description": "Début de phrase d'une question written : 150 caractères au plus.", "type": ["string", "null"], "maxLength": 150 },
+        "criteria": {
+          "description": "Grille de vérification d'une question written : huit critères de 150 caractères au plus.",
+          "type": ["array", "null"],
+          "maxItems": 8,
+          "items": { "type": "string", "maxLength": 150 }
+        },
         "answers": {
           "description": "Dix propositions au plus par question (menace-import-v2 Q1).",
           "type": "array",

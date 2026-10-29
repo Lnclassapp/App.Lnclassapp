@@ -921,6 +921,317 @@ module UseCases
         assert_equal "failed", report.status
         assert_equal [ 0, 0, 0, 0, 0 ], tree_counts
       end
+
+      # ---- Lot D, correction-comme-en-classe : points, unité, début de phrase, grille, types, blocs du sujet (CA-26, CA-27) ----
+
+      QUESTION_PATH = "courses[0].essentials[0].exercises[0].questions[0]".freeze
+
+      # Une leçon dont la seule question de la première notion est `question`.
+      def with_question(question, name: "Nouvelle question")
+        node = course(name)
+        node["essentials"][0]["exercises"][0]["questions"] = [ question ]
+        node
+      end
+
+      def select_question(**overrides)
+        { "content" => "Choisis ___.", "question_type" => "select", "explanation" => "Parce que.",
+          "answers" => [ { "content" => "A", "correct" => true }, { "content" => "B", "correct" => false } ] }.merge(overrides.transform_keys(&:to_s))
+      end
+
+      def written_question(**overrides)
+        { "content" => "Explique.", "question_type" => "written", "explanation" => "Corrigé type." }.merge(overrides.transform_keys(&:to_s))
+      end
+
+      def numeric_question(**overrides)
+        { "content" => "Combien ?", "question_type" => "numeric", "answers" => [ { "content" => "4" } ] }.merge(overrides.transform_keys(&:to_s))
+      end
+
+      def rule_pairs(report) = report.import_errors.map { [ it["path"], it["code"], it["params"]["rule"] ] }
+
+      def import_one(question, name: "Nouvelle question") = run_import(document(with_question(question, name:)))
+
+      test "the Devoir Thalès file is imported in draft with every new element" do
+        report = run_import(import_sample("course_tree_v2_devoir_thales"))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        devoir = Orm::Exercise.find_by!(title: "Devoir")
+        assert_equal "draft", devoir.status
+        assert_equal %w[box table], devoir.statement_blocks.map { it["type"] }
+        questions = devoir.questions.order(:position).to_a
+        assert_equal %w[select numeric written notebook], questions.map(&:question_type)
+        assert_equal [ 1, 2, 3.5, 1.5 ], questions.map { it.points.to_f }
+        assert_equal "cm", questions[1].unit
+        assert_equal "Les droites sont parallèles car", questions[2].starter
+        assert_equal [ "J'ai cité la réciproque de Thalès", "J'ai comparé deux rapports" ], questions[2].criteria
+        assert_equal [ true, false, false ], questions[0].answers.order(:position).map(&:correct)
+        assert_empty questions[2].answers
+        assert_empty questions[3].answers
+      end
+
+      test "the Devoir Thalès file reimported on an existing lesson: the new draft carries its blocks and points, the old one is archived" do
+        lesson = create_course(name: "La propriété de Thalès", level: Orm::Level.find_by!(name: "3ème"),
+                               material: Orm::Material.find_by!(name: "Mathématiques"))
+        create_essential(course: lesson, name: "La propriété de Thalès")
+        old = create_lesson_wide_exercise(course: lesson, title: "Devoir")
+
+        report = run_import(import_sample("course_tree_v2_devoir_thales"))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal "archived", old.reload.status
+        devoir = exercises_of(lesson).where(title: "Devoir", status: "draft").sole
+        assert_equal %w[box table], devoir.statement_blocks.map { it["type"] }
+        assert_equal [ 1, 2, 3.5, 1.5 ], devoir.questions.order(:position).map { it.points.to_f }
+      end
+
+      test "criteria with quotes, a backslash, a comma, braces and a line break are read back identical" do
+        criteria = [ 'Il écrit "MN = 4"', 'a\\b', "x, y", "{z}", "deux\nlignes" ]
+
+        report = import_one(written_question("criteria" => criteria))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal criteria, Orm::Question.find_by!(question_type: "written").criteria
+      end
+
+      test "a lesson with a valid question and an invalid one writes nothing" do
+        node = course("Mixte")
+        node["essentials"][0]["exercises"][0]["questions"] = [ written_question, written_question("criteria" => [ "Un", "  " ]) ]
+        before = [ Orm::Course.count, Orm::Question.count ]
+
+        report = run_import(document(node))
+
+        assert_equal [ [ "courses[0].essentials[0].exercises[0].questions[1].criteria", "question_structure" ] ],
+                     report.import_errors.map { it.values_at("path", "code") }
+        assert_equal before, [ Orm::Course.count, Orm::Question.count ]
+      end
+
+      test "an old file gets the defaults: 1 point, no unit, no starter, no criteria, no blocks" do
+        run_import(document(course))
+
+        assert_equal [ [ BigDecimal("1"), nil, nil, [] ] ], Orm::Question.distinct.pluck(:points, :unit, :starter, :criteria)
+        assert_equal [ nil ], Orm::Exercise.distinct.pluck(:statement_blocks)
+      end
+
+      test "an empty starter and an empty unit are written as null" do
+        report = run_import(document(with_question(written_question("starter" => "   ")), with_question(numeric_question("unit" => ""), name: "Autre")))
+
+        assert_equal [ 2, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal [ nil ], Orm::Question.where(question_type: "written").pluck(:starter)
+        assert_equal [ nil ], Orm::Question.where(question_type: "numeric").pluck(:unit)
+      end
+
+      test "points: 0.5, 7 and 20 are imported, anything else is refused by the schema at its path" do
+        { 0.5 => true, 20 => true, 7 => true, 0 => false, 0.3 => false, 0.25 => false, 20.5 => false, 21 => false, -1 => false }.each do |points, ok|
+          report = import_one(select_question("points" => points))
+          if ok
+            assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count), "points #{points}"
+          else
+            assert_equal [ [ "#{QUESTION_PATH}.points", "schema" ] ], schema_pairs(report).uniq, "points #{points}"
+          end
+          Orm::Course.destroy_all
+        end
+      end
+
+      test "points that are not a number are refused by the schema" do
+        [ "3", true, [ 1 ], {} ].each do |points|
+          assert_equal [ [ "#{QUESTION_PATH}.points", "schema" ] ], schema_pairs(import_one(select_question("points" => points))), points.inspect
+        end
+      end
+
+      test "the domain refuses points out of range too, with the rule named, when the schema is bypassed" do
+        subject = adapter
+        item = subject.validate_root(root: with_question(select_question("points" => 0.3)), path: "courses[0]", context: subject.prepare(target: nil))
+
+        assert_equal [ [ "#{QUESTION_PATH}.points", "question_structure" ] ], error_pairs(item)
+        assert_equal :points_out_of_range, item.errors.first.params[:rule]
+      end
+
+      test "the domain refuses a points value or a unit of the wrong type when the schema is bypassed" do
+        subject = adapter
+        [ { "points" => "3" }, { "points" => Float::INFINITY }, { "unit" => 5 }, { "starter" => [ "a" ] }, { "criteria" => "a" }, { "criteria" => [ 1 ] } ].each do |keys|
+          item = subject.validate_root(root: with_question(written_question.merge(keys)), path: "courses[0]", context: subject.prepare(target: nil))
+
+          assert item.errors.any?, keys.inspect
+          assert_nil item.plan, keys.inspect
+        end
+      end
+
+      test "the unit: 10 characters are imported, 11 are refused by the schema" do
+        assert_equal [ 1, 0 ], import_one(numeric_question("unit" => "a" * 10)).values_at(:imported_count, :error_count)
+        assert_equal "a" * 10, Orm::Question.find_by!(question_type: "numeric").unit
+
+        assert_equal [ [ "#{QUESTION_PATH}.unit", "schema" ] ], schema_pairs(import_one(numeric_question("unit" => "a" * 11), name: "Trop longue"))
+      end
+
+      test "a unit with a digit, a sign or a decimal separator is refused, naming the rule" do
+        [ "0", "m2", "-", "+", ",", ".", "cm.5" ].each do |unit|
+          assert_equal [ [ "#{QUESTION_PATH}.unit", "question_structure", "unit_invalid" ] ], rule_pairs(import_one(numeric_question("unit" => unit))), unit
+        end
+      end
+
+      test "a unit on a question that is not numeric is refused, naming the rule" do
+        assert_equal [ [ "#{QUESTION_PATH}.unit", "question_structure", "unit_not_allowed" ] ], rule_pairs(import_one(select_question("unit" => "cm")))
+      end
+
+      test "a unit that is not a text is refused by the schema" do
+        assert_equal [ [ "#{QUESTION_PATH}.unit", "schema" ] ], schema_pairs(import_one(numeric_question("unit" => 5)))
+      end
+
+      test "the starter: 150 characters are imported, 151 are refused by the schema" do
+        assert_equal [ 1, 0 ], import_one(written_question("starter" => "a" * 150)).values_at(:imported_count, :error_count)
+
+        assert_equal [ [ "#{QUESTION_PATH}.starter", "schema" ] ], schema_pairs(import_one(written_question("starter" => "a" * 151), name: "Trop long"))
+      end
+
+      test "a starter on a question that is not written is refused, naming the rule" do
+        [ select_question("starter" => "Début"), numeric_question("starter" => "Début") ].each do |question|
+          assert_equal [ [ "#{QUESTION_PATH}.starter", "question_structure", "starter_not_allowed" ] ], rule_pairs(import_one(question))
+        end
+      end
+
+      test "the criteria: 8 of 150 characters are imported, 9 or 151 are refused by the schema" do
+        assert_equal [ 1, 0 ], import_one(written_question("criteria" => Array.new(8) { "c" * 150 })).values_at(:imported_count, :error_count)
+        assert_equal 8, Orm::Question.find_by!(question_type: "written").criteria.size
+
+        too_many = import_one(written_question("criteria" => Array.new(9) { "c" }), name: "Neuf")
+        assert_equal [ [ "#{QUESTION_PATH}.criteria", "schema" ] ], schema_pairs(too_many)
+
+        too_long = import_one(written_question("criteria" => [ "c" * 151 ]), name: "Long")
+        assert_equal [ [ "#{QUESTION_PATH}.criteria[0]", "schema" ] ], schema_pairs(too_long)
+      end
+
+      test "criteria that are not a list of texts are refused by the schema" do
+        [ "un critère", [ 1 ], [ nil ], [ [ "a" ] ] ].each do |criteria|
+          report = import_one(written_question("criteria" => criteria))
+
+          assert_equal "schema", report.import_errors.first["code"], criteria.inspect
+          assert report.import_errors.first["path"].start_with?("#{QUESTION_PATH}.criteria"), criteria.inspect
+        end
+      end
+
+      test "a blank criterion is refused, naming the rule" do
+        report = import_one(written_question("criteria" => [ "Un critère", "   " ]))
+
+        assert_equal [ [ "#{QUESTION_PATH}.criteria", "question_structure", "criteria_blank" ] ], rule_pairs(report)
+      end
+
+      test "criteria on a question that is not written are refused, naming the rule" do
+        report = import_one(select_question("criteria" => [ "Un critère" ]))
+
+        assert_equal [ [ "#{QUESTION_PATH}.criteria", "question_structure", "criteria_not_allowed" ] ], rule_pairs(report)
+      end
+
+      test "a select question needs 2 to 10 options, exactly one correct, distinct and filled, with at most one blank" do
+        options = ->(count, correct: 1) { Array.new(count) { |index| { "content" => "Option #{index}", "correct" => index < correct } } }
+        refused = [
+          [ "options_count", "answers", select_question("answers" => options.call(1)) ],
+          [ "wrong_correct_count", "answers", select_question("answers" => options.call(3, correct: 0)) ],
+          [ "wrong_correct_count", "answers", select_question("answers" => options.call(3, correct: 2)) ],
+          [ "blank_marker", "content", select_question("content" => "___ et ___", "answers" => options.call(3)) ],
+          [ "blank_option", "answers", select_question("answers" => options.call(3).tap { it[1]["content"] = "  " }) ],
+          [ "duplicate_options", "answers", select_question("answers" => options.call(3).tap { it[2]["content"] = "OPTION 0" }) ]
+        ]
+        refused.each do |rule, key, question|
+          assert_includes rule_pairs(import_one(question)), [ "#{QUESTION_PATH}.#{key}", "question_structure", rule ], rule
+        end
+        # Onze propositions : le schéma les refuse avant la règle (dix au plus par question).
+        assert_equal [ [ "#{QUESTION_PATH}.answers", "schema" ] ], schema_pairs(import_one(select_question("answers" => options.call(11))))
+        [ 2, 10 ].each do |count|
+          assert_equal [ 1, 0 ], import_one(select_question("content" => "Sans trou", "answers" => options.call(count))).values_at(:imported_count, :error_count), count.to_s
+          Orm::Course.destroy_all
+        end
+      end
+
+      test "written and notebook questions need a model answer and take no option" do
+        %w[written notebook].each do |type|
+          missing = import_one({ "content" => "Fais.", "question_type" => type })
+          assert_equal [ [ "#{QUESTION_PATH}.explanation", "question_structure", "explanation_required" ] ], rule_pairs(missing), type
+
+          with_options = import_one({ "content" => "Fais.", "question_type" => type, "explanation" => "Corrigé", "answers" => [ { "content" => "A" } ] })
+          assert_equal [ [ "#{QUESTION_PATH}.answers", "question_structure", "answers_not_allowed" ] ], rule_pairs(with_options), type
+        end
+      end
+
+      test "a notebook question takes no starter and no criteria" do
+        report = import_one({ "content" => "Fais.", "question_type" => "notebook", "explanation" => "Corrigé", "starter" => "Début", "criteria" => [ "Un" ] })
+
+        assert_equal [ [ "#{QUESTION_PATH}.starter", "question_structure", "starter_not_allowed" ],
+                       [ "#{QUESTION_PATH}.criteria", "question_structure", "criteria_not_allowed" ] ], rule_pairs(report)
+      end
+
+      test "an unknown question type is refused at its path, whatever its spelling" do
+        %w[essay Select WRITTEN dropdown].each do |type|
+          assert_equal [ [ "#{QUESTION_PATH}.question_type", "invalid_value" ] ], schema_pairs(import_one(select_question("question_type" => type))), type
+        end
+      end
+
+      test "a lesson whose questions no machine grades is imported in draft, but cannot be published" do
+        report = import_one(written_question)
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        exercise = Repositories::Assessment::ExerciseRepository.new.find_by_public_id(public_id: Orm::Exercise.find_by!(title: "Exercice 1").public_id)
+        assert_equal "draft", exercise.status
+        assert_not exercise.publishable?
+      end
+
+      test "the statement blocks: 10 are imported, 11 are refused by the schema" do
+        blocks = ->(count) { Array.new(count) { |index| { "type" => "paragraph", "text" => "Bloc #{index}" } } }
+        exact = course("Dix blocs")
+        exact["exercises"][1]["statement_blocks"] = blocks.call(10)
+        over = course("Onze blocs")
+        over["exercises"][1]["statement_blocks"] = blocks.call(11)
+
+        report = run_import(document(exact, over))
+
+        assert_equal [ [ "courses[1].exercises[1].statement_blocks", "schema" ] ], schema_pairs(report)
+        assert_equal 10, Orm::Exercise.find_by!(title: "Bilan 2").statement_blocks.size
+      end
+
+      test "hostile statement blocks are refused at their exercise, and nothing is written" do
+        hostile = {
+          "raw HTML" => [ { "type" => "paragraph", "text" => "<script>alert(1)</script>" } ],
+          "a link" => [ { "type" => "paragraph", "text" => "voir https://exemple.test" } ],
+          "a media" => [ { "type" => "media", "kind" => "thales_figure" } ],
+          "an exercise block" => [ { "type" => "exercise", "id" => "x" } ],
+          "a block that is not an object" => [ "texte" ],
+          "a missing type" => [ { "text" => "x" } ],
+          "an unknown key" => [ { "type" => "paragraph", "text" => "x", "onclick" => "y" } ],
+          "a table of the wrong width" => [ { "type" => "table", "headers" => %w[a b], "rows" => [ %w[1] ] } ],
+          "an unknown mark" => [ { "type" => "paragraph", "text" => "[[inconnue|x]]" } ]
+        }
+        hostile.each do |label, blocks|
+          node = course(label)
+          node["exercises"][1]["statement_blocks"] = blocks
+          report = run_import(document(node))
+
+          assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count), label
+          assert report.import_errors.first["path"].start_with?("courses[0].exercises[1].statement_blocks"), label
+          assert_equal 0, Orm::Course.count, label
+        end
+      end
+
+      test "statement blocks that are not a list are refused by the schema" do
+        [ "texte", { "type" => "paragraph" }, 3 ].each do |blocks|
+          node = course
+          node["exercises"][1]["statement_blocks"] = blocks
+
+          assert_equal [ [ "courses[0].exercises[1].statement_blocks", "schema" ] ], schema_pairs(run_import(document(node))), blocks.inspect
+        end
+      end
+
+      test "every rule that a question can break has its own sentence for the team" do
+        rules = %i[points_out_of_range unit_not_allowed unit_too_long unit_invalid starter_not_allowed starter_too_long criteria_not_allowed
+                   criteria_too_many criteria_too_long criteria_blank explanation_required options_count blank_option duplicate_options
+                   answers_not_allowed wrong_correct_count blank_marker]
+
+        assert_empty rules.reject { I18n.exists?("teams.imports.question_rules.#{it}", :fr) }
+      end
+
+      test "the new keys are unknown to the version 1 schema" do
+        node = v1_course
+        node["essentials"][0]["exercises"][0]["questions"][0]["points"] = 2
+
+        assert_equal "schema", run_import(document(node, version: 1)).import_errors.first["code"]
+      end
     end
   end
 end

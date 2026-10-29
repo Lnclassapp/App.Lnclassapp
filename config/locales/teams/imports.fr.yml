@@ -4,6 +4,14 @@ fr:
     imports:
       question_examples:
         title: "Exemples des autres types de questions"
+        labels:
+          fill_blank: "Texte à trous"
+          numeric: "Réponse en nombre"
+          ordering: "Remettre dans l'ordre"
+          matching: "Relier"
+          select: "Choix dans une liste"
+          written: "Réponse rédigée"
+          notebook: "Travail sur le cahier"
       # Une phrase par règle de structure d'une question (Question.structure_errors_for, ADR-0039 et ADR-0091).
       question_rules:
         true_false_needs_two_answers: "Une question Vrai / Faux a exactement 2 propositions."
@@ -24,6 +32,21 @@ fr:
         duplicate_match: "Deux paires ont le même côté droit : chacun doit être unique."
         duplicate_left: "Deux paires ont le même côté gauche : chacun doit être unique."
         match_not_allowed: "Le côté droit (match) ne vaut que pour une question matching."
+        points_out_of_range: "Les points vont de 0,5 à 20, par demi-point."
+        unit_not_allowed: "L'unité (unit) ne vaut que pour une question numeric."
+        unit_too_long: "L'unité compte 10 caractères au plus."
+        unit_invalid: "L'unité ne contient ni chiffre, ni signe, ni virgule, ni point."
+        starter_not_allowed: "Le début de phrase (starter) ne vaut que pour une question written."
+        starter_too_long: "Le début de phrase compte 150 caractères au plus."
+        criteria_not_allowed: "La grille (criteria) ne vaut que pour une question written."
+        criteria_too_many: "La grille compte 8 critères au plus."
+        criteria_too_long: "Un critère compte 150 caractères au plus."
+        criteria_blank: "Un critère de la grille est vide."
+        explanation_required: "Cette question demande un corrigé type (explanation)."
+        options_count: "Une question select a de 2 à 10 propositions."
+        blank_option: "Une proposition est vide."
+        duplicate_options: "Deux propositions sont identiques (sans compter majuscules, accents et espaces)."
+        answers_not_allowed: "Cette question ne prend aucune proposition (answers)."
       statuses:
         queued: "En file d'attente"
         validating: "Vérification"
