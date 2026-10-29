@@ -65,6 +65,29 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
     assert_selector "#question_review_#{@questions.first.id} [data-correct]", text: right(@questions.first).content
   end
 
+  # Régression : un 422 venu de la confirmation re-rend la page par morphing ; la boîte restait modale (page inerte, « 0/5 »).
+  test "copie refusée après la confirmation : la boîte se referme, l'élève corrige et rend, compteur juste" do
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    visit exercise_session_path(session.public_id)
+    @questions.first(4).each_with_index { |question, index| answer(question, index.even?) }
+    page.execute_script("document.querySelector('#question-1 input:checked').value = '99'")
+
+    click_on "Vérifier ma copie"
+    within("dialog#copy-confirm[open]") { click_on "Vérifier quand même" }
+
+    assert_selector "#copy-errors"
+    assert_no_selector "dialog#copy-confirm[open]"
+    assert_not page.evaluate_script("document.querySelector('#copy-confirm').matches(':modal')"),
+               "la confirmation reste dans la couche supérieure : la page est inerte"
+
+    answer(@questions.last, true)
+    assert_selector "#copy-counter", text: "5"
+
+    answer(@questions.first, true)
+    click_on "Vérifier ma copie"
+    assert_selector "#session_grade"
+  end
+
   test "« Continuer ma copie » referme la confirmation et ne rend rien ; Échap fait de même" do
     session = create_exercise_session(student: @student, exercise: @exercise)
     visit exercise_session_path(session.public_id)

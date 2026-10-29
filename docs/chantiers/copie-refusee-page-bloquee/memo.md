@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | cadrage |
+| **Statut** | en cours |
 | **Ouvert le** | 2026-10-29 |
 | **Branche** | `fix/copie-refusee-page-bloquee` |
 | **Programme** | — |
@@ -44,11 +44,11 @@ Attendu (UDR-0138 §3.3, lignes « Réponse illisible » et « Erreur ») : la c
 - [x] Symptôme et étapes de reproduction écrits dans `memo.md`
 - [x] Bug reproduit **à la main** dans l'application avant toute ligne de code
 - [x] Rapport root cause rendu : fichier, ligne, chaîne d'appels, raison du trou de test
-- [ ] Test de reproduction écrit **avant** le correctif
-- [ ] Test lancé et **rouge**, pour la bonne raison (message vérifié)
-- [ ] Correctif appliqué dans la couche de la **cause**, pas du symptôme
-- [ ] Test au vert · suite du contexte borné au vert
-- [ ] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
+- [x] Test de reproduction écrit **avant** le correctif
+- [x] Test lancé et **rouge**, pour la bonne raison (message vérifié)
+- [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
+- [x] Test au vert · suite du contexte borné au vert
+- [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
 - [ ] Données déjà corrompues : réparées, ou dette explicitement notée au journal
 - [ ] Challenger a rejoué les étapes de reproduction dans l'application
 - [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`

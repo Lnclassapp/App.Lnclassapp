@@ -13,9 +13,13 @@ export class CopySheet {
     this.dialog = this.c.element.querySelector("#copy-confirm")
     this.resume = () => this.focusFirstEmpty()
     this.dialog?.addEventListener("close", this.resume)
+    // Un 422 re-rend la copie par morphing : le serveur réécrit le compteur (« 0 »), on le recale sur les réponses réaffichées.
+    this.refresh = () => this.update()
+    document.addEventListener("turbo:morph", this.refresh)
   }
 
   destroy() {
+    document.removeEventListener("turbo:morph", this.refresh)
     this.dialog?.removeEventListener("close", this.resume)
   }
 

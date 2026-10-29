@@ -32,6 +32,12 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 **Effet de bord à surveiller** : toute autre `ui_modal` ouverte lors d'un rendu par morphing (formulaire en 422 soumis depuis une boîte hors frame `modal`) avait le même risque ; le correctif dans `connect` les couvre toutes.
 
+### Correctif et test (Lot A)
+
+- **Test comblé** : `exercise_copy_test.rb`, « copie refusée après la confirmation… » (système : `showModal()` et morphing réels). Rouge d'abord : `la confirmation reste dans la couche supérieure : la page est inerte` (`#copy-confirm` toujours `:modal`). Vert après correctif.
+- **Correctif** : `modal_controller#connect` appelle `syncOpen()` ; `copy_sheet` écoute `turbo:morph` (`update()`, retiré dans `destroy`). Les réponses réaffichées par le serveur restent cochées : aucun `restore()` rejoué au morphing.
+- **Effets de bord écartés** : suites `test/system/assessment/` et tous les tests système mentionnant une modale relancés, voir verdict dans le rapport de lot.
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
