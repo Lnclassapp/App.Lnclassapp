@@ -28,6 +28,7 @@
 - La garde de vocabulaire (`test/i18n/locale_files_test.rb`) a fait échouer la CI du Lot A : les deux phrases du PRD (CA-10) qui disent « leçon » sont entrées dans sa liste blanche.
 - Un worktree en HEAD détaché a fait croire à un push du Lot D qui n'avait rien envoyé : pousser avec `git push origin HEAD:<branche>`.
 - Les tests parallèles butent parfois sur `PG::TRDeadlockDetected` quand plusieurs worktrees partagent la base : `PARALLEL_WORKERS=1` les fait passer.
+- #358 posait `whitespace-nowrap` sur toute la tuile du résultat : l'infobulle de la maîtrise, ouverte, en héritait et faisait déborder la page à 390 px (FU-53, rouge sur `Develop`). Le `bin/ci-quiet` de #358 ne jouait pas ce test système, que la vue ne désigne pas. Corrigé avec le masquage de « Refaire » : seules les valeurs ne se coupent pas.
 - Le dump de `db/schema.rb` par la version locale de PostgreSQL réécrit des contraintes sans rapport (`::character varying::text`) : le schéma du lot est repris à la main du schéma de `Develop`, seules les lignes du lot changent.
 
 ## Ce qu'on a appris sur la codebase
