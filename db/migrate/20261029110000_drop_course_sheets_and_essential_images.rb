@@ -1,5 +1,6 @@
 # ADR-0116 §4.3 et §4.5 (refonte-contenus-maths, Lot R) : la fiche cahier, les images de notions, le texte riche des notions et les
 # types de rapport « fiche de cours » et « notions » n'existent plus. Pas de reprise de données : la base est remise à zéro.
+# migration-en-deux-temps: les tables ne sont recréées que par `down`, pour le retour arrière ; rien ne les lit plus et la base est remise à zéro (pas d'utilisateurs réels).
 class DropCourseSheetsAndEssentialImages < ActiveRecord::Migration[8.1]
   KINDS = %w[schools course_tree exercises classrooms drenas school_codes classroom_links].freeze
 
