@@ -3,8 +3,12 @@
 <%# ADR  : 0115 (menace I9) · UDR : 0140 §3 %>
 <% tones = { "property" => "border-brand", "remember" => "border-success", "method" => "border-team" } %>
 <% allowed = Entities::Catalog::SheetDocument::STATEMENT_BLOCK_TYPES %>
-<% Array(blocks).each do |block| %>
-  <% next unless block.is_a?(Hash) && allowed.include?(block["type"]) %>
+<%# Un bloc ignoré laisse une trace (type tronqué à 40 caractères, jamais le texte), et dix blocs au plus sont rendus. %>
+<% Array(blocks).first(Entities::Catalog::SheetDocument::STATEMENT_BLOCKS_MAX).each do |block| %>
+  <% unless block.is_a?(Hash) && allowed.include?(block["type"]) %>
+    <% Rails.logger.warn("statement_blocks: bloc ignoré (type #{(block.is_a?(Hash) ? block["type"] : block.class).to_s[0, 40].inspect})") %>
+    <% next %>
+  <% end %>
   <% case block["type"] %>
   <% when "paragraph" %>
     <p class="max-w-prose text-ink"><%= sheet_text(block["text"]) %></p>
@@ -38,5 +42,7 @@
         </tbody>
       </table>
     </div>
+  <% else %>
+    <% Rails.logger.warn("statement_blocks: bloc ignoré, sans rendu (type #{block["type"].to_s[0, 40].inspect})") %>
   <% end %>
 <% end %>

@@ -64,7 +64,7 @@ module Entities
         return [ statement_error(:too_many) ] if blocks.size > STATEMENT_BLOCKS_MAX
 
         unknown = blocks.each_with_index.filter_map do |block, index|
-          type = block["type"] || block[:type]
+          type = block["type"]
           statement_error(:unknown_type, type.to_s[0, 40], index + 1) unless STATEMENT_BLOCK_TYPES.include?(type)
         end
         return unknown if unknown.any?

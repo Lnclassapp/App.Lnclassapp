@@ -394,6 +394,25 @@ module Entities
         assert_equal [ :wrong_type ], SheetDocument.statement_errors([ "paragraph" ]).map(&:reason)
       end
 
+      test "un sujet signale chaque type inconnu à sa position" do
+        errors = SheetDocument.statement_errors([ { "type" => "iframe" }, { "type" => "paragraph", "text" => "x" }, { "type" => "script" } ])
+
+        assert_equal [ :unknown_type, :unknown_type ], errors.map(&:reason)
+        assert_equal [ 1, 3 ], errors.map(&:position)
+      end
+
+      test "un sujet de onze blocs inconnus ne signale que le nombre de blocs" do
+        errors = SheetDocument.statement_errors(Array.new(11) { { "type" => "iframe" } })
+
+        assert_equal [ :too_many ], errors.map(&:reason)
+      end
+
+      test "un type inconnu trop long est tronqué à 40 caractères dans l'erreur" do
+        errors = SheetDocument.statement_errors([ { "type" => "a" * 100 } ])
+
+        assert_equal "a" * 40, errors.first.detail
+      end
+
       test "un sujet vide ou absent est valide" do
         assert_empty SheetDocument.statement_errors(nil)
         assert_empty SheetDocument.statement_errors([])

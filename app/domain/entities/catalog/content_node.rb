@@ -44,18 +44,14 @@ module Entities
         return [] if blocks.nil? || blocks == []
 
         key = "#{path}.statement_blocks"
-        return [ error(key, "schema") ] unless blocks.is_a?(Array) && blocks.size <= STATEMENT_BLOCKS_MAX && blocks.all?(Hash)
-
-        wrong_type = blocks.each_with_index.filter_map do |block, index|
-          next if STATEMENT_BLOCK_TYPES.include?(block["type"])
-
-          error("#{key}[#{index}].type", "invalid_value", value: block["type"].to_s[0, 40])
-        end
-        return wrong_type if wrong_type.any?
-
-        document = { "pages" => [ { "sections" => [ { "title" => "Sujet", "blocks" => blocks } ] } ], "glossary" => {} }
-        SheetDocument.new(document).errors.map do |found|
-          error(found.position ? "#{key}[#{found.position - 1}]" : key, "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
+        SheetDocument.statement_errors(blocks).map do |found|
+          if found.page.nil? && found.position.nil?
+            error(key, "schema")
+          elsif found.page.nil? && found.reason == :unknown_type
+            error("#{key}[#{found.position - 1}].type", "invalid_value", value: found.detail)
+          else
+            error(found.position ? "#{key}[#{found.position - 1}]" : key, "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
+          end
         end
       end
 
