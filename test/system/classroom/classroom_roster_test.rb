@@ -55,7 +55,7 @@ class Classroom::ClassroomRosterTest < ApplicationSystemTestCase
     assert_no_page_reload do
       click_on "classroom_roster_badge_gold"
       assert_selector "#classroom_roster_list li[id^=student_]", count: 1
-      assert_selector "#student_#{@koffi.public_id}", text: "Or · 16/20"
+      assert_selector "#student_#{@koffi.public_id}", text: "Moyenne 16/20 · Or"
       click_on "classroom_roster_badge_none"
       assert_selector "#classroom_roster_count", text: "30 sur 65"
       click_on I18n.t("classroom.classrooms.roster.more", count: 30)
