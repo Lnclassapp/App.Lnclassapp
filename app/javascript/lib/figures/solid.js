@@ -33,11 +33,28 @@ function read(params) {
 const VISIBLE_FACES = [[0, 1, "a"], [1, 2, "a"]]
 const isHidden = (a, b) => !VISIBLE_FACES.some((face) => face.includes(a) && face.includes(b))
 
-export function create(canvas, params) {
-  const state = { svg: null }
+// Les points qui bornent le solide (cavalière) : servent à calculer le cadrage une fois pour toutes.
+function pyramidGeometry({ base, side, width, depth, height }) {
+  const [w, d] = base === "rectangular" ? [width, depth] : base === "triangular" ? [side, side * Math.sqrt(3) / 2] : [side, side]
+  const project = (x, z, y) => ({ x: x + y * SLOPE, y: z + y * SLOPE })
+  const ground = base === "triangular" ? [[0, 0], [w, 0], [w / 2, d]] : [[0, 0], [w, 0], [w, d], [0, d]]
+  const centre = base === "triangular" ? [w / 2, d / 3] : [w / 2, d / 2]
+  const corners = ground.map(([x, y]) => project(x, 0, y))
+  return { w, d, centre, corners, apex: project(centre[0], height, centre[1]) }
+}
+
+function extent(dims) {
+  if (dims.shape === "cone") return [{ x: -dims.radius, y: -dims.radius / 2 }, { x: dims.radius, y: dims.radius / 2 }, { x: 0, y: dims.height }]
+  const { corners, apex } = pyramidGeometry(dims)
+  return [...corners, apex]
+}
+
+export function create(canvas, params, { controls = [] } = {}) {
+  const state = { svg: null, frame: null }
 
   function draw(next) {
     const dims = read(next)
+    state.frame ||= frameFor(dims)
     const svg = root(WIDTH, HEIGHT)
     const volume = dims.shape === "cone" ? drawCone(svg, dims) : drawPyramid(svg, dims)
     label(svg, 10, 22, `V ≈ ${fixed(volume, 1)}`, { anchor: "start", tone: "primary", size: 14 })
@@ -46,25 +63,30 @@ export function create(canvas, params) {
     state.svg = svg
   }
 
-  // Un cadrage commun : le solide tient dans la zone sous la mesure, centré, à l'échelle la plus grande qui convient.
-  function fit(points) {
+  // Le cadrage est calculé une seule fois, sur le solide où chaque dimension réglée par un curseur vaut son maximum :
+  // l'échelle ne bouge plus ensuite, donc faire varier un curseur se voit à l'écran.
+  function frameFor(dims) {
+    const largest = { ...dims }
+    controls.forEach((control) => {
+      const { param, max } = control ?? {}
+      if (param in largest && finite(max)) largest[param] = Math.min(MAX, Math.max(largest[param], max))
+    })
+    const points = extent(largest)
     const xs = points.map((p) => p.x)
     const ys = points.map((p) => p.y)
     const [minX, maxX, minY, maxY] = [Math.min(...xs), Math.max(...xs), Math.min(...ys), Math.max(...ys)]
     const scale = Math.min((WIDTH - 2 * PAD) / (maxX - minX), (HEIGHT - 2 * PAD - 20) / (maxY - minY))
-    const [dx, dy] = [(WIDTH - (maxX - minX) * scale) / 2, 20 + (HEIGHT - 20 - (maxY - minY) * scale) / 2]
+    return { minX, minY, scale, dx: (WIDTH - (maxX - minX) * scale) / 2, dy: 20 + (HEIGHT - 20 - (maxY - minY) * scale) / 2 }
+  }
+
+  function fit() {
+    const { minX, minY, scale, dx, dy } = state.frame
     return (p) => ({ x: round(dx + (p.x - minX) * scale), y: round(HEIGHT - dy - (p.y - minY) * scale), scale })
   }
 
   function drawPyramid(svg, { base, side, width, depth, height }) {
-    const [w, d] = base === "rectangular" ? [width, depth] : base === "triangular" ? [side, side * Math.sqrt(3) / 2] : [side, side]
-    const project = (x, z, y) => ({ x: x + y * SLOPE, y: z + y * SLOPE })
-    const ground = base === "triangular" ? [[0, 0], [w, 0], [w / 2, d]] : [[0, 0], [w, 0], [w, d], [0, d]]
-    const centre = base === "triangular" ? [w / 2, d / 3] : [w / 2, d / 2]
-    const corners = ground.map(([x, y]) => project(x, 0, y))
-    const apex = project(centre[0], height, centre[1])
-    const plan = [...corners, apex]
-    const at = fit(plan)
+    const { w, d, centre, corners, apex } = pyramidGeometry({ base, side, width, depth, height })
+    const at = fit()
     const edges = []
     corners.forEach((_, index) => edges.push([index, (index + 1) % corners.length]))
     corners.forEach((_, index) => edges.push([index, "a"]))
@@ -87,7 +109,7 @@ export function create(canvas, params) {
     const minor = radius / 2
     const reach = height > minor ? radius * Math.sqrt(1 - (minor / height) ** 2) : radius
     const touch = height > minor ? (minor * minor) / height : 0
-    const at = fit([{ x: -radius, y: -minor }, { x: radius, y: minor }, { x: 0, y: height }])
+    const at = fit()
     const c = at({ x: 0, y: 0 })
     const apex = at({ x: 0, y: height })
     const [rx, ry] = [round(radius * c.scale), round(minor * c.scale)]

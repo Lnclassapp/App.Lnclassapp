@@ -87,6 +87,22 @@ class Catalog::FigureKindsSystemTest < ApplicationSystemTestCase
     assert_selector "#host svg text", text: /V ≈ 48,0/
   end
 
+  test "a pyramid keeps a fixed scale so the height slider visibly grows it on screen" do
+    params = { "shape" => "pyramid", "base" => "square", "side" => 4, "height" => 6 }
+    mount(figure(kind: "solid", params:, controls: [ slider("height", 3, 12, "hauteur") ]))
+    on_screen = "document.querySelector('#host svg [data-height]').getBoundingClientRect().height"
+
+    assert_selector "#host svg [data-height]", visible: :all
+    find("input[type=range]").set(3)
+    assert_selector "#host svg text", text: /V ≈ 16,0/
+    low = page.evaluate_script(on_screen)
+    find("input[type=range]").set(12)
+    assert_selector "#host svg text", text: /V ≈ 64,0/
+    high = page.evaluate_script(on_screen)
+
+    assert_operator high, :>, low * 2.5
+  end
+
   test "a triangular pyramid has a single hidden edge and a rectangular one uses width and depth" do
     mount(figure(kind: "solid", params: { "shape" => "pyramid", "base" => "triangular", "side" => 4, "height" => 5 }))
 
