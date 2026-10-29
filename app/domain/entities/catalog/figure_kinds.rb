@@ -10,7 +10,8 @@ module Entities
         def initialize(max: nil, range: nil, values: nil, **) = super
       end
       # item_range : bornes de tout nombre porté par un élément de liste (coordonnées, rayons, valeurs).
-      Kind = Data.define(:name, :params, :item_range)
+      # adjustable : clés numériques de premier niveau de `params` qu'un curseur (`controls[].param`) peut régler.
+      Kind = Data.define(:name, :params, :item_range, :adjustable)
 
       TEXT_MAX = 60
       ITEM_ARRAY_MAX = 4
@@ -27,19 +28,19 @@ module Entities
       def self.enum(*values) = Param.new(type: :enum, values:)
 
       ALL = {
-        "geometry" => Kind.new(name: "geometry", item_range: (-20..20),
+        "geometry" => Kind.new(name: "geometry", item_range: (-20..20), adjustable: [].freeze,
                                params: { "points" => list(12), "segments" => list(30), "lines" => list(12), "circles" => list(6),
                                          "angles" => list(12), "labels" => list(20), "constraints" => list(12) }),
-        "coordinate_plane" => Kind.new(name: "coordinate_plane", item_range: (-50..50),
+        "coordinate_plane" => Kind.new(name: "coordinate_plane", item_range: (-50..50), adjustable: %w[xmin xmax ymin ymax].freeze,
                                        params: { "xmin" => number(-50..50), "xmax" => number(-50..50), "ymin" => number(-50..50),
                                                  "ymax" => number(-50..50), "points" => list(12), "vectors" => list(8),
                                                  "lines" => list(6), "segments" => list(12) }),
-        "number_line" => Kind.new(name: "number_line", item_range: (-100..100),
+        "number_line" => Kind.new(name: "number_line", item_range: (-100..100), adjustable: %w[min max step].freeze,
                                   params: { "min" => number(-100..100), "max" => number(-100..100), "step" => number(0.01..50),
                                             "points" => list(12), "intervals" => list(6) }),
-        "stat_chart" => Kind.new(name: "stat_chart", item_range: (-1_000_000..1_000_000),
+        "stat_chart" => Kind.new(name: "stat_chart", item_range: (-1_000_000..1_000_000), adjustable: [].freeze,
                                  params: { "chart" => enum("bars", "histogram", "pie"), "series" => list(20), "labels" => list(20) }),
-        "solid" => Kind.new(name: "solid", item_range: (0.5..50),
+        "solid" => Kind.new(name: "solid", item_range: (0.5..50), adjustable: %w[height side width depth radius].freeze,
                             params: { "shape" => enum("pyramid", "cone"), "base" => enum("square", "rectangular", "triangular"),
                                       "height" => number(0.5..50), "side" => number(0.5..50), "width" => number(0.5..50),
                                       "depth" => number(0.5..50), "radius" => number(0.5..50) })

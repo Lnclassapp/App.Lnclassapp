@@ -5,6 +5,7 @@ module Entities
   module Catalog
     class FigureTest < ActiveSupport::TestCase
       def raw(**changes) = revision_figure.merge(changes.stringify_keys)
+      def solid(**changes) = raw(kind: "solid", params: { "shape" => "cone", "height" => 4, "radius" => 3 }, **changes)
       def reasons(figure) = Figure.errors_for(figure).map { it.first(2) }
 
       test "la figure de la fabrique est valide" do
@@ -55,19 +56,31 @@ module Entities
         assert_equal [ [ "params.shape", "figure_invalid" ] ], reasons(raw(kind: "solid", params: { "shape" => "cube" }))
       end
 
+      test "un curseur vise une clé numérique de premier niveau que la sorte déclare réglable et que params contient" do
+        control = { "param" => "height", "min" => 1, "max" => 9, "step" => 0.5, "label" => "hauteur" }
+        cone = solid(controls: [ control ])
+        assert_empty Figure.errors_for(cone)
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(cone.merge("params" => { "shape" => "cone", "radius" => 3 }))
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(cone.merge("controls" => [ control.merge("param" => "shape") ]))
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(raw(controls: [ control.merge("param" => "points") ]))
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(raw(controls: [ control.merge("param" => "inconnu") ]))
+        assert_equal [ "controls[0].param", "figure_invalid", { param: "controls[0].param" } ], Figure.errors_for(raw(controls: [ control ])).first
+        assert_empty FigureKinds.fetch("geometry").adjustable
+      end
+
       test "controls : 0 à 4, bornes cohérentes, libellé court" do
-        control = { "param" => "a", "min" => 1, "max" => 9, "step" => 1, "label" => "côté a" }
-        assert_empty Figure.errors_for(raw(controls: []))
-        assert_equal [ [ "controls", "figure_invalid" ] ], reasons(raw(controls: Array.new(5) { control }))
-        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(raw(controls: [ control.merge("max" => 0) ]))
-        assert_equal [ [ "controls[0].step", "figure_invalid" ] ], reasons(raw(controls: [ control.merge("step" => 0) ]))
-        assert_equal [ [ "controls[0].label", "figure_invalid" ] ], reasons(raw(controls: [ control.merge("label" => "") ]))
+        control = { "param" => "height", "min" => 1, "max" => 9, "step" => 1, "label" => "hauteur" }
+        assert_empty Figure.errors_for(solid(controls: []))
+        assert_equal [ [ "controls", "figure_invalid" ] ], reasons(solid(controls: Array.new(5) { control }))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(solid(controls: [ control.merge("max" => 0) ]))
+        assert_equal [ [ "controls[0].step", "figure_invalid" ] ], reasons(solid(controls: [ control.merge("step" => 0) ]))
+        assert_equal [ [ "controls[0].label", "figure_invalid" ] ], reasons(solid(controls: [ control.merge("label" => "") ]))
       end
 
       test "from_raw construit la figure" do
         figure = Figure.from_raw(raw)
 
-        assert_equal [ "triangle-thales", "geometry", 1 ], [ figure.key, figure.kind, figure.controls.size ]
+        assert_equal [ "triangle-thales", "geometry", 0 ], [ figure.key, figure.kind, figure.controls.size ]
       end
     end
   end

@@ -65,7 +65,8 @@ class ContenusValiderTest < ActiveSupport::TestCase
     assert_refused mutated { it["figures"][0]["kind"] = "hologram" }, "figure_invalid", "figures[0].kind"
     assert_refused mutated { it["figures"][0]["params"]["points"][0]["x"] = 99 }, "figure_invalid", "figures[0].params.points[0]"
     assert_refused mutated { it["figures"][0]["description"] = "" }, "figure_invalid", "figures[0].description"
-    assert_refused mutated { it["figures"][0]["controls"][0]["max"] = 5_000 }, "figure_invalid", "figures[0].controls[0].max"
+    assert_refused mutated { it["figures"][0]["controls"] = [ { "param" => "height", "min" => 1, "max" => 5_000, "step" => 1, "label" => "h" } ]
+                             it["figures"][0]["kind"] = "solid"; it["figures"][0]["params"] = { "shape" => "cone", "height" => 4, "radius" => 3 } }, "figure_invalid", "figures[0].controls[0].max"
   end
 
   test "CA-9 : un exercice ou une notion qui cite une figure absente" do
@@ -73,14 +74,14 @@ class ContenusValiderTest < ActiveSupport::TestCase
     assert_refused mutated { it["notions"][1]["figure"] = "inconnue" }, "figure_missing", "notions[1].figure"
   end
 
-  test "avertit si un curseur ne règle pas une clé numérique de params" do
-    result = check(mutated { it["figures"][0]["controls"][0]["param"] = "inconnu" })
-    assert(result.warnings.any? { it.include?("controls[0].param") })
+  test "refuse un curseur qui ne règle pas une clé réglable présente dans params, avec la raison de l'import" do
+    control = { "param" => "inconnu", "min" => 1, "max" => 9, "step" => 1, "label" => "x" }
+    assert_refused mutated { it["figures"][0]["controls"] = [ control ] }, "figure_invalid", "figures[0].controls[0].param"
+    assert_refused mutated { it["figures"][0]["controls"] = [ control.merge("param" => "points") ] }, "figure_invalid", "figures[0].controls[0].param"
     solid = { "key" => "cone", "kind" => "solid", "description" => "x" * 150, "params" => { "shape" => "cone", "height" => 4, "radius" => 3 },
               "controls" => [ { "param" => "height", "min" => 1, "max" => 9, "step" => 0.5, "label" => "hauteur" } ] }
     ok = check(mutated { it["figures"] << solid })
     assert_empty ok.errors
-    assert(ok.warnings.none? { it.include?("figures[1].controls") })
   end
 
   test "thème inconnu, notions en double, figures en double" do

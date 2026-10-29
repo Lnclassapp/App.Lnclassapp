@@ -22,7 +22,7 @@ module Entities
         else
           errors << violation("kind", "kind")
         end
-        errors.concat(controls_errors(raw["controls"]))
+        errors.concat(controls_errors(raw["controls"], raw))
       end
 
       def self.violation(path, param) = [ path, REASON, { param: } ]
@@ -72,26 +72,33 @@ module Entities
         end
       end
 
-      def self.controls_errors(controls)
+      def self.controls_errors(controls, raw)
         return [] if controls.nil?
         return [ violation("controls", "controls") ] unless controls.is_a?(Array) && controls.size <= FigureKinds::CONTROLS_MAX
 
-        controls.each_with_index.flat_map { |control, index| control_errors(control, "controls[#{index}]") }
+        controls.each_with_index.flat_map { |control, index| control_errors(control, "controls[#{index}]", raw) }
       end
 
-      def self.control_errors(control, path)
+      def self.control_errors(control, path, raw)
         return [ violation(path, path) ] unless control.is_a?(Hash)
 
         bound = (-FigureKinds::CONTROL_BOUND..FigureKinds::CONTROL_BOUND)
         min, max, step = control.values_at("min", "max", "step")
         errors = []
-        errors << violation("#{path}.param", "#{path}.param") unless control["param"].is_a?(String) && FigureKinds::PARAM_PATTERN.match?(control["param"])
+        errors << violation("#{path}.param", "#{path}.param") unless control["param"].is_a?(String) && FigureKinds::PARAM_PATTERN.match?(control["param"]) && adjustable?(raw, control["param"])
         errors << violation("#{path}.min", "#{path}.min") unless number?(min) && bound.cover?(min)
         errors << violation("#{path}.max", "#{path}.max") unless number?(max) && bound.cover?(max) && (!number?(min) || max > min)
         errors << violation("#{path}.step", "#{path}.step") unless number?(step) && step.positive? && (!number?(min) || !number?(max) || max <= min || step <= max - min)
         label = control["label"]
         errors << violation("#{path}.label", "#{path}.label") unless label.is_a?(String) && (1..FigureKinds::LABEL_MAX).cover?(label.length)
         errors
+      end
+
+      # La clé est déclarée réglable par la sorte et présente dans `params` avec une valeur numérique.
+      def self.adjustable?(raw, name)
+        return true unless FigureKinds.known?(raw["kind"]) && raw["params"].is_a?(Hash)
+
+        FigureKinds.fetch(raw["kind"]).adjustable.include?(name) && number?(raw["params"][name])
       end
 
       def self.number?(value) = value.is_a?(Numeric)
