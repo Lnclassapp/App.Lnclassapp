@@ -48,6 +48,12 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #recent_completions"
       end
 
+      # Comme recent_completions, pour plusieurs exercices en une requête (l'accueil) : les `limit` dernières fins par exercice.
+      # → { exercise_id => [Time] } (un exercice sans copie terminée n'a pas de clé)
+      def recent_completions_by_exercise(student_id:, exercise_ids:, limit: Entities::Assessment::RestartPause::STREAK)
+        raise NotImplementedError, "#{self.class} doit implémenter #recent_completions_by_exercise"
+      end
+
       # UPDATE … WHERE status = 'started' : pose completed, score_percent et completed_at. → true
       def complete(id:, score_percent:, at:)
         raise NotImplementedError, "#{self.class} doit implémenter #complete"
