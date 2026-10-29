@@ -36,7 +36,7 @@ export default class extends Controller {
 
     try {
       this.values = { ...this.paramsValue }
-      this.figure = module.create(this.canvasTarget, this.values, { announce: (text) => this.announce(text) })
+      this.figure = module.create(this.canvasTarget, this.values, { announce: (text) => this.announce(text), controls: this.controlsValue })
       this.buildControls()
     } catch (error) {
       return this.fail(error)
