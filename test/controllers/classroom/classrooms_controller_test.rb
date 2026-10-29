@@ -296,6 +296,19 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#assigned_exercises_empty", text: /#{I18n.t("#{scope}.assigned_exercises.empty_title")}/
     assert_select "#assigned_exercises_empty", text: /#{I18n.t("#{scope}.assigned_exercises.empty_description")}/
+    assert_select "#assigned_exercises_empty", text: /dans « Cours »/
+    assert_no_match(/ci-dessous/, response.body)
+    assert_select "#assigned_exercises_empty a[href='#{courses_path}']", text: /Voir les cours/, count: 1
+  end
+
+  # Seul l'enseignant assigne : l'équipe voit la page, pas le bouton.
+  test "aucun exercice assigné : l'équipe voit le texte sans le bouton « Voir les cours »" do
+    sign_in_as create_team_member
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#assigned_exercises_empty", text: /dans « Cours »/
+    assert_select "#assigned_exercises_empty a", count: 0
   end
 
   # UDR enseignant sans répétition : les cours s'ouvrent depuis les niveaux de l'accueil et l'onglet Cours, plus depuis la classe.
