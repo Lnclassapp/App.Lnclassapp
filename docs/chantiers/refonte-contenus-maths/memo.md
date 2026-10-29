@@ -70,4 +70,5 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 
 ## Questions encore ouvertes
 
-- Critère de sortie du pilote 3e avant d'ouvrir les autres niveaux (proposition : toutes les leçons de 3e validées et publiées par l'équipe, sans erreur de fond relevée).
+- ~~Critère de sortie du pilote 3e~~ → **tranché par le porteur** : les 10 leçons de 3e s'importent sans erreur, et leur contenu respecte les spécifications du plan (gabarit des 4 blocs, 1 exercice par notion + 4 problèmes, ≥ 5 questions, correction rédigée qui suit la méthode, figures paramétrées).
+- **Thème teal (porteur)** : « À retenir » et « La méthode » ne partagent plus le même vert ; chaque bloc a sa couleur (UDR §3.2).
