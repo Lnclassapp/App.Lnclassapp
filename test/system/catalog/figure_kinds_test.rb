@@ -8,8 +8,9 @@ class Catalog::FigureKindsSystemTest < ApplicationSystemTestCase
                                   description: Factories::RevisionSheet::FIGURE_DESCRIPTION)
   end
 
-  def mount(figure)
-    html = ApplicationController.render(partial: "catalog/figures/figure", locals: { figure: })
+  def mount(figure) = mount_html(ApplicationController.render(partial: "catalog/figures/figure", locals: { figure: }))
+
+  def mount_html(html)
     visit new_session_path
     page.execute_script(<<~JS, html)
       document.getElementById("host")?.remove()
@@ -34,6 +35,18 @@ class Catalog::FigureKindsSystemTest < ApplicationSystemTestCase
 
     assert_selector "#host [data-figure-target=canvas][style*='--figure-text: 1.40']", visible: :all
     assert_operator font_px("svg text"), :>, wide * 0.6, "à 280 px de large, le texte n'est pas réduit dans la même proportion que la figure"
+  end
+
+  # La valeur est posée dans le HTML après coup : l'entité Figure refuserait 1,7e308 (et JSON de Ruby ne sait pas l'écrire), alors que
+  # la page peut recevoir n'importe quoi. Sans garde, la boucle des graduations ne finissait jamais.
+  test "a stat chart series far above one million shows the description alone and does not freeze the page" do
+    mount_html(ApplicationController.render(partial: "catalog/figures/figure",
+                                            locals: { figure: figure(kind: "stat_chart", params: { "chart" => "bars", "series" => [ 123_456 ] }) })
+                                    .sub("&quot;series&quot;:[123456]", "&quot;series&quot;:[1.7e308]"))
+
+    assert_selector "#host [data-figure-state=error]", visible: :all
+    assert_no_selector "#host svg"
+    assert_equal 4, page.evaluate_script("1 + 3")
   end
 
   test "close labels on a number line take two rows instead of overlapping" do

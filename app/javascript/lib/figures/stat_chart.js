@@ -1,5 +1,5 @@
 // ⚡ FRONT · lib/figures/stat_chart — le diagramme statistique : bâtons, histogramme ou circulaire
-// Rôle : lit `chart` (bars, histogram, pie), `series` (nombres positifs ou nuls) et `labels` (textes, dans le même ordre) ; revérifie les valeurs avant de dessiner
+// Rôle : lit `chart` (bars, histogram, pie), `series` (nombres de 0 à 1 000 000) et `labels` (textes, dans le même ordre) ; revérifie les valeurs avant de dessiner
 // ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, fixed, round } from "./svg"
@@ -12,6 +12,8 @@ const RIGHT = 16
 const TOP = 28
 const BOTTOM = 52
 const MAX_VALUES = 20
+const RANGE = 1_000_000
+const MAX_TICKS = 50
 const CHARTS = ["bars", "histogram", "pie"]
 const TONES = ["primary", "accent", "success", "muted", "ink"]
 
@@ -22,8 +24,8 @@ function read(params) {
   const series = params.series ?? []
   const names = params.labels ?? []
   if (!CHARTS.includes(chart)) throw new Error("stat_chart : sorte de diagramme inconnue")
-  if (!Array.isArray(series) || series.length === 0 || series.length > MAX_VALUES || !series.every((value) => finite(value) && value >= 0)) {
-    throw new Error("stat_chart : série invalide (nombres positifs ou nuls, 20 au plus)")
+  if (!Array.isArray(series) || series.length === 0 || series.length > MAX_VALUES || !series.every((value) => finite(value) && value >= 0 && value <= RANGE)) {
+    throw new Error("stat_chart : série invalide (nombres de 0 à 1 000 000, 20 au plus)")
   }
   if (!Array.isArray(names) || names.length > MAX_VALUES) throw new Error("stat_chart : étiquettes hors limites")
   if (chart === "pie" && series.reduce((sum, value) => sum + value, 0) <= 0) throw new Error("stat_chart : total nul")
@@ -57,7 +59,8 @@ export function create(canvas, params) {
     const { unit, max } = niceMax(Math.max(...series))
     const height = HEIGHT - TOP - BOTTOM
     const y = (value) => round(TOP + height - (value / max) * height)
-    for (let value = 0; value <= max + 1e-9; value += unit) {
+    // Garde : au plus 50 graduations, quoi qu'il arrive aux nombres (une boucle sans fin figerait la page).
+    for (let value = 0, ticks = 0; value <= max + 1e-9 && ticks < MAX_TICKS; value += unit, ticks++) {
       el("line", { x1: LEFT, y1: y(value), x2: WIDTH - RIGHT, y2: y(value), stroke: "grid", "stroke-width": 0.75 }, svg)
       label(svg, LEFT - 6, y(value) + 4, fixed(value), { anchor: "end", tone: "muted", size: 11 })
     }

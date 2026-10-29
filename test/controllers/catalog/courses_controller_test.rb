@@ -26,6 +26,33 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
   def assignments_href(slug) = "/courses/#{slug}/assignments"
 
+  # CA-12 : l'ancienne adresse de la fiche mène à la fiche de révision (301) ; mêmes refus que la page, sans rien révéler.
+  test "CA-12: /fiche of a draft lesson answers 404 to a student" do
+    draft = create_course(name: "Brouillon fiche", level: @tle, material: @svt, status: "draft")
+    sign_in_as create_student_for(draft)
+
+    get course_fiche_path(draft.slug)
+
+    assert_response :not_found
+  end
+
+  test "CA-12: /fiche of a published lesson of another level answers 404 to a student" do
+    sign_in_as create_student_for(@published)
+
+    get course_fiche_path(create_course(name: "Autre niveau", level: @seconde, material: @svt).slug)
+
+    assert_response :not_found
+  end
+
+  test "CA-12: /fiche of a published lesson of the student's level redirects permanently to its revision sheet" do
+    sign_in_as create_student_for(@course)
+
+    get course_fiche_path(@course.slug)
+
+    assert_response :moved_permanently
+    assert_redirected_to course_path(@course.slug, anchor: "fiche-de-revision")
+  end
+
   # ADR-0103 §4.6: no list in the current school (a rejected request lost to the migration, then nothing inherited).
   test "a teacher without any subject in the current school is invited to choose them, with no broken subtitle" do
     teacher = create_teacher(school: create_school, classrooms: [ create_classroom(level: @tle) ])

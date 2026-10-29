@@ -58,6 +58,9 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
   end
 
   CASES = {
+    "schéma : méthode absente" => [ ->(c) { c["notions"][0].delete("method") }, "schema" ],
+    "schéma : étapes de l'exemple absentes" => [ ->(c) { c["notions"][0]["example"].delete("steps") }, "schema" ],
+    "schéma : figures n'est pas une liste" => [ ->(c) { c["figures"] = {} }, "schema" ],
     "CA-3 notion sans exercice" => [ ->(c) { c["notions"][1].delete("exercise") }, "essential_exercise_count" ],
     "CA-3 notion avec exercice null" => [ ->(c) { c["notions"][1]["exercise"] = nil }, "essential_exercise_count" ],
     "CA-3 notion avec deux exercices" => [ ->(c) { c["notions"][0]["exercise"] = [ c["notions"][0]["exercise"], c["notions"][0]["exercise"] ] }, "essential_exercise_count" ],
