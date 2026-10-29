@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré, clos |
 | **Ouvert le** | 2026-10-29 |
 | **Branche** | `fix/classe-vide-lien-cours` |
 | **Programme** | — |
@@ -39,5 +39,5 @@ Attendu : l'état vide dit où trouver les cours et y mène.
 
 - [x] Test rouge puis vert (texte, bouton pour l'enseignant, pas de bouton pour un autre rôle)
 - [x] UDR-0062 amendée
-- [ ] Captures 390 px et ordinateur envoyées au porteur
-- [ ] `bin/ci-quiet` vert, ligne de preuve dans la PR
+- [x] Captures 390 px et ordinateur envoyées au porteur
+- [x] `bin/ci-quiet` vert, ligne de preuve dans la PR

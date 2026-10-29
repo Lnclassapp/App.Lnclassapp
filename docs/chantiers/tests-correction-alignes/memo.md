@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix (tests) |
-| **Statut** | en cours |
+| **Statut** | livré, clos |
 | **Ouvert le** | 2026-10-29 |
 | **Branche** | `fix/tests-correction-alignes` |
 | **Programme** | — |
@@ -36,4 +36,4 @@ Aucun code applicatif ne change. Si un test révèle un vrai écart au code par 
 - [x] Les 10 tests verts, chacun prouvant la décision en vigueur
 - [x] Preuve « rien avant la vérification » gardée
 - [x] `test/integration/assessment` entier vert
-- [ ] `bin/ci-quiet` vert, ligne de preuve dans la PR
+- [x] `bin/ci-quiet` vert, ligne de preuve dans la PR

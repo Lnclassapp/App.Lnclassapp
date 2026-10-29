@@ -12,3 +12,4 @@
   - `question_matching` « aide de l'import » : visait `essentials` + 4 exemples -> `course_tree` : 7 exemples (dont `"tolerance": 0.1` et `"match": "3x + 3"`) ; `essentials` n'est plus un import connu (404, sans aide).
   - `question_ordering` « étape mal placée » : `[data-correct]` absent -> l'ordre de l'élève reste rendu tel quel et le bon ordre est montré à part, marqué.
   - `question_ordering` « correction ne marque aucune solution » : renommé ; copie ouverte sans solution (gardé), copie vérifiée avec bon ordre marqué.
+- **2026-10-29 · Clôture** : PR #368 fusionnée dans `Develop` (0dee9d3), preuve `bin/ci-quiet` dans la PR. Sur `Develop` fusionné, `test/integration/assessment` : 30 tests, 206 assertions, 0 échec.
