@@ -316,7 +316,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_text "Aya Kouassi"
       # Maquette 10 : la ligne dit ses exercices faits et le badge de classe de l'élève (un 100 % sans faute : Diamant, 20/20).
       assert_text "1 fait sur 1"
-      assert_text "Diamant · 20/20"
+      assert_text "Moyenne 20/20 · Diamant"
     end
     assert_no_page_reload do
       issue_recovery_code_from_roster("[id='student_#{student.public_id}']")

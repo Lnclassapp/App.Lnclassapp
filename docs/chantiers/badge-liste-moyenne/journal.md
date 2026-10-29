@@ -1,0 +1,4 @@
+# Journal — Liste de la classe : le badge dit qu'il vient de la moyenne
+
+- **2026-10-29 · Cadrage** : constat de la simulation des 45 élèves (Daniel Tanoh, Bronze à Thalès, « Pas encore » dans la liste, moyenne 7/20). D'abord classé conforme (UDR-0134 §3.2) ; le porteur demande la correction : le libellé de la liste dit désormais la moyenne, comme la fiche.
+- **2026-10-29 · Lot A** : tests d'abord (contrôleur : « Moyenne 17/20 · Or », « Moyenne x/20 · Pas encore » sous le seuil, « Pas encore » sans exercice) ; rouge constaté (« Or · 17/20 » obtenu). Vue `_roster` + clés `badge_grade` / `average_none` ; UDR-0134 §3.5 amendée ; tests système `classroom_roster_test` et `boucle_pedagogique_test` alignés sur le nouveau libellé. Les 10 échecs de `test/integration/assessment/question_*` ne touchent pas la liste.
