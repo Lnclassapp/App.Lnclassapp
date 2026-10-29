@@ -17,6 +17,7 @@
 | 2026-10-29 | Lot C (revue) : le texte rédigé ramène `\r\n` à `\n` avant de compter ; la règle « comptée dans les répondues » tient dans `SessionPlayQuery::Question#counted?` ; la clé `invalid_text`, inatteignable (le DTO refuse d'abord), est retirée. | Le navigateur compte 2 000 là où le serveur comptait plus ; une liste de types écrite en dur dans la vue divergeait. | Non |
 | 2026-10-29 | Lot E : partiel `assessment/statement_blocks/_blocks` propre aux écrans d'exercice au lieu des partiels des fiches (UDR-0140 §3 précisée) ; une seule validation des blocs, `SheetDocument.statement_errors`, que l'import appelle ; au rendu, 10 blocs au plus et une ligne de journal pour un bloc ignoré. | Les partiels des fiches lisent `@sheet.glossary` et `course_sheet.css`, absents des écrans d'exercice ; deux validations divergeaient déjà. | Non (UDR-0140 précisée) |
 | 2026-10-29 | Retouches après les captures : tuiles du résultat, réponse d'une liste qui n'est plus tronquée à 390 px, ponctuation collée au trou d'une liste. L'ordre des boutons de la confirmation, qui diffère entre téléphone et ordinateur, est voulu (porteur). | Défauts vus sur les captures du parcours complet. | Non |
+| 2026-10-29 | Correctif `ExerciseSessionRepository#start` : sans session ouverte à relire après un `RecordNotUnique`, l'exception d'origine remonte au lieu d'un `nil` (le use case répondait un succès sans session). | Un `nil` silencieux masquait une collision de `public_id` ou une session close entre-temps ; l'erreur remonte jusqu'à la 500 gérée. | Non |
 
 ## Ce qui a dérapé
 
@@ -43,7 +44,6 @@
 ## Ce qui reste ouvert
 
 - Sur l'accueil de l'élève, les boutons « Refaire » restent visibles pendant la pause (le démarrage la refuse, la page de l'exercice la dit).
-- `ExerciseSessionRepository#start` peut renvoyer `nil` après un `RecordNotUnique` (antérieur au chantier).
 - La note d'une copie se calcule sur les questions actuelles de l'exercice : une leçon réimportée entre deux copies peut changer le total (cas accepté au cadrage).
 - Le contenu « Lentilles » de la maquette de Konan n'est pas importé : seul Thalès sert de contenu de référence.
 - L'heure de reprise de la pause s'affiche à l'heure du serveur (UTC), juste pour la Côte d'Ivoire.

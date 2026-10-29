@@ -14,7 +14,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #started_for"
       end
 
-      # Une session started existe déjà (index partiel) : la renvoie. → ExerciseSession
+      # Une session started existe déjà (index partiel) : la renvoie. → ExerciseSession, jamais nil (violation d'unicité sans
+      # session ouverte à renvoyer : l'erreur remonte).
       def start(session:)
         raise NotImplementedError, "#{self.class} doit implémenter #start"
       end
