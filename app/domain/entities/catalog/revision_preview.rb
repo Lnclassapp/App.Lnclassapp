@@ -1,12 +1,19 @@
 # 🧠 DOMAINE · Entities::Catalog::RevisionPreview
 # Rôle : la coupe de la « Fiche de révision » d'une leçon : 150 mots de texte, puis la fin du bloc qui atteint le seuil
-# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113 · UDR : 0139 §3.2
+# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113, XXXX-fiche-de-revision-par-notion · UDR : 0139 §3.2, XXXX-fiche-de-revision-en-quatre-blocs §3.1
 module Entities
   module Catalog
     class RevisionPreview
       LIMIT = 150
 
       MATH = /\$[^$]+\$/
+      # Les blocs d'une notion, dans l'ordre de lecture ; la figure se place entre La méthode et l'exemple.
+      REMEMBER = 0
+      METHOD = 1
+      FIGURE = 2
+      EXAMPLE = 3
+      PITFALL = 4
+
       GLOSSARY_MARK = /\[\[[a-z0-9_]{1,40}\|([^\[\]|]{1,60})\]\]/
 
       attr_reader :total, :limit
@@ -43,6 +50,20 @@ module Entities
             units << [ [ section_index, block_index ], carry + count_words(text) ]
             carry = 0
           end
+        end
+        new(units, limit:)
+      end
+
+      # sheets : [NotionSheet] dans l'ordre de la leçon. Clés des blocs : [notion, REMEMBER | METHOD | FIGURE | EXAMPLE | PITFALL] ; la
+      # figure (présente quand la notion en cite une) ne porte aucun mot.
+      def self.for_notions(sheets, limit: LIMIT)
+        units = []
+        sheets.each_with_index do |sheet, index|
+          units << [ [ index, REMEMBER ], count_words(sheet.remember) ]
+          units << [ [ index, METHOD ], sheet.method_steps.sum { count_words(it) } ]
+          units << [ [ index, FIGURE ], 0 ] if sheet.figure_key
+          units << [ [ index, EXAMPLE ], count_words(sheet.example_statement) + sheet.example_steps.sum { count_words(it) } ]
+          units << [ [ index, PITFALL ], count_words(sheet.pitfall) ]
         end
         new(units, limit:)
       end

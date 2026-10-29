@@ -1,0 +1,71 @@
+<%# 🌐 UI · catalog/revision_sheets/_sheet — la fiche de révision d'une leçon : une page de cahier, une section par notion, quatre blocs au gabarit fixe %>
+<%# Rôle : `sheet` (RevisionSheetQuery::Lesson) ; `cut` (RevisionPreview, nil sans coupe) marque la suite (`rest`) ; sans JavaScript tout se lit %>
+<%# ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees · UDR : XXXX-fiche-de-revision-en-quatre-blocs §3.2, 0137, 0139 §3.2 %>
+<% cut = local_assigns[:cut] %>
+<% rest_data = { catalog__revision_more_target: "rest" } %>
+<% preview = Entities::Catalog::RevisionPreview %>
+<%# Un bloc après la coupe porte la cible `rest` ; une notion entièrement après elle la porte sur sa section. %>
+<% rest_for = ->(notion_index, block) { cut&.rest?(notion_index) ? {} : (cut&.rest?(notion_index, block) ? rest_data : {}) } %>
+<%= tag.div class: "sheet-screen", data: { sheet_theme: sheet.theme.presence || "blue", seyes: "true", embedded: "true", controller: "math" } do %>
+  <article class="sheet-page">
+    <div class="sheet-page-body">
+      <header class="sheet-header">
+        <div class="sheet-eyebrow">
+          <span><%= t(".eyebrow_left", material: sheet.material, level: sheet.level) %></span><span><%= t(".eyebrow") %></span>
+        </div>
+        <h3 class="sheet-h1"><%= sheet.name %></h3>
+        <div class="sheet-rule"></div>
+        <div class="sheet-rule-thin"></div>
+        <% if sheet.subtitle.present? %><p class="sheet-intro"><%= sheet.subtitle %></p><% end %>
+      </header>
+
+      <% sheet.notions.each_with_index do |notion, index| %>
+        <% content = notion.sheet %>
+        <%= tag.section id: notion.anchor, class: "sheet-section", aria: { labelledby: "#{notion.anchor}-title" },
+                        data: (cut&.rest?(index) ? rest_data : {}) do %>
+          <h4 class="sheet-h2" id="<%= notion.anchor %>-title"><span class="sheet-h2-number"><%= index + 1 %>.</span> <%= notion.name %></h4>
+
+          <%= tag.div class: "sheet-box", data: { tone: "remember", **rest_for.(index, preview::REMEMBER) } do %>
+            <span class="sheet-box-label"><%= t(".remember") %></span>
+            <div class="sheet-text"><%= sheet_text(content.remember) %></div>
+          <% end %>
+
+          <%= tag.div class: "sheet-box", data: { tone: "method", **rest_for.(index, preview::METHOD) } do %>
+            <span class="sheet-box-label"><%= t(".method") %></span>
+            <ol class="sheet-steps">
+              <% content.method_steps.each_with_index do |step, step_index| %>
+                <li><span class="sr-only"><%= t(".step", number: step_index + 1) %></span> <%= sheet_text(step) %></li>
+              <% end %>
+            </ol>
+          <% end %>
+
+          <% if notion.figure %>
+            <% figure_html = render("catalog/figures/figure", figure: notion.figure) %>
+            <%= rest_for.(index, preview::FIGURE).any? ? tag.div(figure_html, data: rest_for.(index, preview::FIGURE)) : figure_html %>
+          <% end %>
+
+          <%= tag.div class: "sheet-card", data: rest_for.(index, preview::EXAMPLE) do %>
+            <p class="sheet-card-title"><%= t(".example") %></p>
+            <p class="sheet-text"><%= sheet_text(content.example_statement) %></p>
+            <ol class="sheet-steps" data-applies="method">
+              <% content.example_steps.each_with_index do |step, step_index| %>
+                <li><span class="sr-only"><%= t(".step", number: step_index + 1) %></span> <%= sheet_text(step) %></li>
+              <% end %>
+            </ol>
+          <% end %>
+
+          <%= tag.div class: "sheet-box", data: { tone: "pitfall", **rest_for.(index, preview::PITFALL) } do %>
+            <span class="sheet-box-label"><%= t(".pitfall") %></span>
+            <div class="sheet-text"><%= sheet_text(content.pitfall) %></div>
+          <% end %>
+        <% end %>
+      <% end %>
+
+      <footer class="sheet-page-footer"><%= sheet.name %></footer>
+    </div>
+  </article>
+  <%# Le dégradé sous la partie visible : masqué par le serveur, montré par le contrôleur quand la fiche est repliée. %>
+  <% if cut %>
+    <div class="revision-fade" data-catalog--revision-more-target="fade" hidden></div>
+  <% end %>
+<% end %>

@@ -305,6 +305,17 @@
   background: var(--sheet-note);
 }
 
+/* Ton « piège à éviter » : l'erreur du thème pour l'étiquette et le filet, son fond à 8 % (UDR-XXXX §3.2) */
+.sheet-box[data-tone="pitfall"] {
+  padding: 18px 22px 12px;
+  border-color: var(--sheet-error);
+  background: color-mix(in oklch, var(--sheet-error) 8%, var(--sheet-card));
+}
+
+.sheet-box[data-tone="pitfall"] .sheet-box-label {
+  background: var(--sheet-error);
+}
+
 .sheet-steps {
   display: flex;
   flex-direction: column;
@@ -619,6 +630,16 @@
   background: var(--sheet-card);
 }
 
+/* Le canvas d'une figure : vide tant que le dessin n'est pas posé, la description (figcaption) reste alors lue à sa place */
+.sheet-figure-canvas {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+}
+
+.sheet-figure-canvas:empty {
+  display: none;
+}
+
 .sheet-figure svg {
   display: block;
   width: 100%;
@@ -692,6 +713,7 @@
   .sheet-box,
   .sheet-box[data-tone="method"],
   .sheet-box[data-tone="remember"],
+  .sheet-box[data-tone="pitfall"],
   .sheet-practice {
     padding: 20px 16px 14px;
   }
