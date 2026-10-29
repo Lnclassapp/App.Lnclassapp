@@ -204,8 +204,10 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     # retouche : les étiquettes passent à la ligne sous le texte, jamais de troncature
     assert_select "#question_review_#{@first.id} li[data-correct].flex-wrap > [data-answer-labels].flex-wrap", 1
     assert_select "#question_review_#{@first.id} li .truncate", 0
-    # retouche : les tuiles ne se coupent pas (2×2 dans la colonne de 340 px)
-    assert_select "#session_result dl:not([class~='sm:grid-cols-4']) > div.whitespace-nowrap", 4
+    # retouche : les valeurs des tuiles ne se coupent pas (2×2 dans la colonne de 340 px) ; la tuile elle-même ne bloque
+    # pas le retour à la ligne, sinon l'infobulle de la maîtrise, ouverte, déborde à 390 px.
+    assert_select "#session_result dl:not([class~='sm:grid-cols-4']) > div > dd.whitespace-nowrap", 4
+    assert_select "#session_result dl > div.whitespace-nowrap", 0
     assert_select "form[action='#{exercise_sessions_path(@exercise.public_id)}']", 0
   end
 

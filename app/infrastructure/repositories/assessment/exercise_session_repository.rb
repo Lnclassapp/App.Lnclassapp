@@ -91,6 +91,17 @@ module Repositories
                             .order(completed_at: :desc).limit(Entities::Assessment::RestartPause::STREAK).pluck(:completed_at)
       end
 
+      # Une seule requête : ROW_NUMBER() par exercice, on garde les `limit` premières fins.
+      def recent_completions_by_exercise(student_id:, exercise_ids:, limit: Entities::Assessment::RestartPause::STREAK)
+        return {} if exercise_ids.empty?
+
+        ranked = Orm::ExerciseSession.where(student_id:, exercise_id: exercise_ids, status: "completed").where.not(completed_at: nil)
+                                     .select("exercise_id, completed_at, ROW_NUMBER() OVER (PARTITION BY exercise_id ORDER BY completed_at DESC) AS rank")
+        Orm::ExerciseSession.unscoped.from(ranked, :ranked).where("ranked.rank <= ?", limit)
+                            .order("ranked.exercise_id", "ranked.completed_at DESC").pluck("ranked.exercise_id", "ranked.completed_at")
+                            .group_by(&:first).transform_values { |rows| rows.map(&:last) }
+      end
+
       def complete(id:, score_percent:, at:)
         Orm::ExerciseSession.where(id:, status: "started")
                             .update_all(status: "completed", score_percent:, completed_at: at, updated_at: at)

@@ -200,6 +200,26 @@ module Repositories
                      @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
       end
 
+      test "recent_completions_by_exercise : les 3 dernières fins de chaque exercice, en une requête, sans copie abandonnée ni autre élève" do
+        other = create_exercise(essential: @exercise.essential) if @exercise.respond_to?(:essential)
+        other ||= create_exercise
+        [ 40, 30, 20, 10 ].each { |minutes| create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - minutes.minutes) }
+        create_exercise_session(student: @student, exercise: other, status: "completed", completed_at: @at)
+        create_exercise_session(student: @student, exercise: other, status: "abandoned", completed_at: @at - 1.minute)
+
+        result = nil
+        queries = []
+        counter = ->(*, payload) { queries << payload[:sql] unless payload[:name] == "SCHEMA" }
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record") do
+          result = @repository.recent_completions_by_exercise(student_id: @student.id, exercise_ids: [ @exercise.id, other.id ])
+        end
+
+        assert_equal 1, queries.size
+        assert_equal [ @at - 10.minutes, @at - 20.minutes, @at - 30.minutes ], result[@exercise.id]
+        assert_equal [ @at ], result[other.id]
+        assert_empty @repository.recent_completions_by_exercise(student_id: @student.id, exercise_ids: [])
+      end
+
       test "recent_completions : aucune copie terminée, une liste vide" do
         assert_empty @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
       end

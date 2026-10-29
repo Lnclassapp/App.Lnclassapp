@@ -30,7 +30,18 @@ module Classroom
     private
 
     def render_history
-      render partial: "history", locals: { sessions: query.recent_sessions(student_id: current_actor.user_id) }
+      sessions = query.recent_sessions(student_id: current_actor.user_id)
+      render partial: "history", locals: { sessions:, paused_exercise_ids: paused_exercise_ids(sessions.first(3)) }
+    end
+
+    # ADR-0115 : les exercices en pause de « Recommencer » parmi les lignes affichées ; les copies récentes de tous sont lues en
+    # une requête, la règle reste Entities::Assessment::RestartPause.
+    def paused_exercise_ids(sessions)
+      completions = Repositories::Assessment::ExerciseSessionRepository.new
+                                                                       .recent_completions_by_exercise(student_id: current_actor.user_id,
+                                                                                                       exercise_ids: sessions.map(&:exercise_id).uniq)
+      now = Time.zone.now
+      completions.select { |_, times| Entities::Assessment::RestartPause.resume_at(completions: times, now:) }.keys.to_set
     end
 
     def query = Queries::Classroom::StudentHomeQuery.new

@@ -1,7 +1,7 @@
 <%# 🌐 UI · classroom/student_homes/_history — contenu du frame différé de l'Historique de l'accueil %>
 <%# Rôle : les 3 dernières sessions terminées, groupées par jour (rond de la matière, titre, matière, note) ; sous 10/20, « Refaire » ; « Voir plus » mène à Mon historique %>
 <%# UDR  : XXXX accueil élève §3.5, §3.7 · 0058 §3.3 (une seule forme de la note), 0084 §3.8 (verte dès 14/20, à l'encre dessous, jamais rouge) %>
-<%# locals: (sessions:) -%>
+<%# locals: (sessions:, paused_exercise_ids:) -%>
 <% shown = 3 %>
 <%= turbo_frame_tag Classroom::StudentHomesController::RECENT_ACTIVITY_FRAME, target: "_top" do %>
   <% if sessions.empty? %>
@@ -31,7 +31,8 @@
                 <span data-grade class="<%= class_names("shrink-0 font-display text-base font-medium",
                                                         grading.reaches?(session.score_percent, grading::MASTERY_THRESHOLD) ? "text-success" : "text-ink") %>"><%= grade_label(session.score_percent) %></span>
               <% end %>
-              <% if grading.grade_on_20(session.score_percent) < 10 %>
+              <%# Pendant la pause de « Recommencer » (ADR-0115), pas de bouton : la ligne mène au résultat, la page de l'exercice dit l'heure de reprise. %>
+              <% if grading.grade_on_20(session.score_percent) < 10 && paused_exercise_ids.exclude?(session.exercise_id) %>
                 <%= button_to exercise_sessions_path(session.exercise_public_id), form_class: "shrink-0",
                               class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm], ComponentsHelper::BUTTON_VARIANTS[:secondary]),
                               "aria-label": t("classroom.student_homes.history.redo_label", title: session.exercise_title) do %>
