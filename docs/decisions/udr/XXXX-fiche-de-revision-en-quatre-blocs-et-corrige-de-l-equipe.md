@@ -93,7 +93,7 @@ div.sheet-screen  data-sheet-theme=<theme>  data-seyes="true"  data-embedded="tr
 <% end %>
 ```
 
-- Dans la fiche, la figure prend les classes du cahier (`.sheet-figure` existe : cadre, fond `--sheet-card`). Dans une page d'exercice ou le corrigé (hors cahier), le même partial reçoit `frame: :app` et rend `figure.rounded-xl.border.border-line.bg-paper.p-3`, canvas `aspect-[4/3] w-full`.
+- Dans la fiche, la figure prend les classes du cahier (`.sheet-figure` existe : cadre, fond `--sheet-card`). Dans une page d'exercice ou le corrigé (hors cahier), le même partial reçoit `frame: :app` et rend `figure.rounded-card.border.border-line.bg-paper.p-3`, canvas `aspect-video w-full`.
 - Contrôleur `app/javascript/controllers/figure_controller.js` : `static values = { kind: String, params: Object, controls: Array }` ; `connect()` charge `import(\`../lib/figures/${kind}.js\`)` parmi les seules sortes de l'ADR (liste blanche dans le contrôleur), dessine dans `canvas`, crée un curseur par contrôle, puis masque `fallback` et le remplace par une légende `sr-only` (la description reste lue).
 - **Curseur** : libellé visible (texte du contrôle + valeur courante), `input[type=range]` pleine largeur, cible de 48 px de haut, `aria-valuetext` avec l'unité. Chaque changement redessine et met à jour les mesures ; une région `aria-live="polite"` annonce la mesure principale au relâchement.
 - **Point déplaçable** (`geometry`) : poignée de 48×48 px de cible, au doigt et à la souris (`pointer` events), au clavier (flèches, pas de 0,5) après focus ; contour de focus visible.
@@ -121,7 +121,7 @@ pour chaque exercice, dans l'ordre de « Prépare interros » :
       p.font-medium     « Question n · <points> pt » puis l'énoncé
       ul                propositions : bonne(s) avec icône check-circle text-success + « Bonne réponse » en sr-only ; autres text-mute
                         (numeric : valeur attendue et unité ; written / notebook : corrigé type)
-      div.rounded-lg.bg-mist.p-3   « Correction » puis explanation
+      div.rounded-card.bg-mist.p-3   « Correction » puis explanation
 ```
 
 - Aucun bouton d'édition (ADR-0113 §4.6). Impression : `print:` masque la navigation, `print:break-inside-avoid` par exercice.
