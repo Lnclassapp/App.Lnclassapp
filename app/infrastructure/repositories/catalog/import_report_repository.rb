@@ -52,7 +52,6 @@ module Repositories
       end
 
       def finish(id:, status:, counts:, details:, errors:, at:, files: nil)
-        log_unreadable(id, errors)
         changes = { status:, **counts.slice(:total_count, :imported_count, :skipped_count, :error_count), details:,
                     import_errors: errors.first(Kind::MAX_ERRORS).map { |error| error.to_h.transform_keys(&:to_s) },
                     finished_at: at, updated_at: at }
@@ -61,12 +60,6 @@ module Repositories
       end
 
       private
-
-      # Un texte trop complexe à relire (menace.md, n° 13) : le rapport et le chemin sont nommés au journal, jamais le contenu.
-      def log_unreadable(id, errors)
-        paths = errors.select { it.code == "image_slots_unreadable" }.map(&:path)
-        Rails.logger.warn("[ImportReportRepository] image_slots_unreadable report=#{id} paths=#{paths.first(20)}") if paths.any?
-      end
 
       def map_to_entity(record)
         Entities::Catalog::ImportReport.new(

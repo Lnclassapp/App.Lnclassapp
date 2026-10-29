@@ -121,8 +121,8 @@ module Repositories
         assert_equal [ nil ], (created("questions").map { it["numeric_tolerance"] } + created("answers").map { it["match_content"] }).uniq
         assert_equal [ BigDecimal("1"), nil, nil, "{}" ], %w[points unit starter criteria].map { |column| created("questions").map { it[column] }.uniq.sole }
         assert_equal [ nil ], created("exercises").map { it["statement_blocks"] }.uniq
-        assert_equal [ [ "[]" ], [ "blue" ], [ nil ], [ nil ] ],
-                     [ created("courses").pluck("figures").uniq, created("courses").pluck("sheet_theme").uniq, created("essentials").pluck("sheet").uniq,
+        assert_equal [ [ "[]" ], [ "blue" ], [ {} ], [ nil ] ],
+                     [ created("courses").pluck("figures").uniq, created("courses").pluck("sheet_theme").uniq, created("essentials").pluck("sheet").uniq.map { it.is_a?(String) ? JSON.parse(it) : it },
                        created("exercises").pluck("figure_key").uniq ]
         assert_equal 4, written.fetch(:imported)
         assert_equal [ @author.id ], %w[courses essentials exercises].flat_map { |table| created(table).map { it["author_id"] } }.uniq

@@ -9,16 +9,6 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #find_by_slug"
       end
 
-      # position = max + 1. → Result(Essential) | failure(:conflict, errors: { name: [:taken] })
-      def create(essential:)
-        raise NotImplementedError, "#{self.class} doit implémenter #create"
-      end
-
-      # → Result(Essential) | failure(:conflict, errors: { name: [:taken] })
-      def update(essential:)
-        raise NotImplementedError, "#{self.class} doit implémenter #update"
-      end
-
       # Verrouille la ligne jusqu'à la fin de la transaction en cours (publication contre modification). → true
       def lock(id:)
         raise NotImplementedError, "#{self.class} doit implémenter #lock"

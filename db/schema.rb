@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_29_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_29_110000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -244,17 +244,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_100000) do
     t.check_constraint "status::text = ANY (ARRAY['active'::character varying::text, 'archived'::character varying::text])", name: "classrooms_status_values"
   end
 
-  create_table "course_sheets", force: :cascade do |t|
-    t.bigint "course_id", null: false
-    t.string "theme", null: false
-    t.jsonb "document", null: false
-    t.integer "format_version", default: 1, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_course_sheets_on_course_id", unique: true
-    t.check_constraint "theme::text = ANY (ARRAY['blue'::character varying, 'teal'::character varying, 'burgundy'::character varying]::text[])", name: "course_sheets_theme_values"
-  end
-
   create_table "courses", force: :cascade do |t|
     t.datetime "archived_at"
     t.bigint "author_id", null: false
@@ -293,23 +282,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_100000) do
     t.index ["slug"], name: "index_drenas_on_slug", unique: true
   end
 
-  create_table "essential_images", force: :cascade do |t|
-    t.string "public_id", limit: 14, null: false
-    t.bigint "essential_id"
-    t.string "alt", limit: 150
-    t.string "content_type", null: false
-    t.integer "byte_size", null: false
-    t.integer "width", null: false
-    t.integer "height", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["essential_id"], name: "index_essential_images_on_essential_id"
-    t.index ["public_id"], name: "index_essential_images_on_public_id", unique: true
-    t.check_constraint "byte_size >= 1 AND byte_size <= 307200", name: "essential_images_byte_size"
-    t.check_constraint "content_type::text = ANY (ARRAY['image/jpeg'::character varying, 'image/png'::character varying, 'image/webp'::character varying]::text[])", name: "essential_images_content_type_values"
-    t.check_constraint "width >= 1 AND width <= 1200 AND height >= 1 AND height <= 1200", name: "essential_images_sides"
-  end
-
   create_table "essential_reads", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.bigint "essential_id", null: false
@@ -334,13 +306,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_100000) do
     t.string "status", default: "draft", null: false
     t.string "subtitle", limit: 150
     t.datetime "updated_at", null: false
-    t.jsonb "sheet"
+    t.jsonb "sheet", default: {}, null: false
     t.index ["author_id"], name: "index_essentials_on_author_id"
     t.index ["course_id", "name"], name: "index_essentials_on_course_id_and_name", unique: true
     t.index ["course_id", "position"], name: "index_essentials_on_course_id_and_position", unique: true
     t.index ["slug"], name: "index_essentials_on_slug", unique: true
     t.index ["status"], name: "index_essentials_on_status"
-    t.check_constraint "sheet IS NULL OR jsonb_typeof(sheet) = 'object'::text", name: "essentials_sheet_object"
+    t.check_constraint "jsonb_typeof(sheet) = 'object'::text", name: "essentials_sheet_object"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying::text, 'published'::character varying::text, 'archived'::character varying::text])", name: "essentials_status_values"
   end
 
@@ -443,7 +415,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_100000) do
     t.index ["kind"], name: "index_import_reports_one_running_per_kind", unique: true, where: "((status)::text = ANY (ARRAY[('queued'::character varying)::text, ('validating'::character varying)::text, ('importing'::character varying)::text]))"
     t.index ["public_id"], name: "index_import_reports_on_public_id", unique: true
     t.check_constraint "(kind::text = ANY (ARRAY['classrooms'::character varying::text, 'school_codes'::character varying::text, 'classroom_links'::character varying::text])) OR checksum_sha256 IS NOT NULL", name: "import_reports_checksum_unless_generation"
-    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'essentials'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying, 'course_sheet'::character varying]::text[])", name: "import_reports_kind_values"
+    t.check_constraint "kind::text = ANY (ARRAY['schools'::character varying, 'course_tree'::character varying, 'exercises'::character varying, 'classrooms'::character varying, 'drenas'::character varying, 'school_codes'::character varying, 'classroom_links'::character varying]::text[])", name: "import_reports_kind_values"
     t.check_constraint "status::text <> 'completed'::text OR total_count = (imported_count + skipped_count + error_count)", name: "import_reports_completed_counts_add_up"
     t.check_constraint "status::text = ANY (ARRAY['queued'::character varying::text, 'validating'::character varying::text, 'importing'::character varying::text, 'completed'::character varying::text, 'rejected'::character varying::text, 'failed'::character varying::text])", name: "import_reports_status_values"
   end
@@ -1083,12 +1055,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_100000) do
   add_foreign_key "classrooms", "levels", on_delete: :restrict
   add_foreign_key "classrooms", "schools", on_delete: :restrict
   add_foreign_key "classrooms", "series", on_delete: :restrict
-  add_foreign_key "course_sheets", "courses", on_delete: :restrict
   add_foreign_key "courses", "levels", on_delete: :restrict
   add_foreign_key "courses", "materials", on_delete: :restrict
   add_foreign_key "courses", "series", on_delete: :restrict
   add_foreign_key "courses", "users", column: "author_id", on_delete: :restrict
-  add_foreign_key "essential_images", "essentials", on_delete: :restrict
   add_foreign_key "essential_reads", "essentials", on_delete: :cascade
   add_foreign_key "essential_reads", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "essentials", "courses", on_delete: :restrict

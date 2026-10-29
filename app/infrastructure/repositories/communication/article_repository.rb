@@ -8,7 +8,7 @@ module Repositories
 
       ATTACHMENT = Repositories::Shared::RichTextSanitizer::ATTACHMENT
       IMAGE_MODEL = "Orm::ArticleImage"
-      FOREIGN_IMAGE_MODELS = %w[Orm::EssentialImage Orm::QuestionImage].freeze
+      FOREIGN_IMAGE_MODELS = %w[Orm::QuestionImage].freeze
       SLUG_INDEX = "index_articles_on_slug"
       # Deux collisions de slug concurrentes de suite, ou une image prise entre-temps par un autre article : le geste se
       # refait (il trouvera un slug libre ; l'image prise ne sera plus admise).

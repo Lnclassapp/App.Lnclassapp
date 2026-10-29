@@ -19,7 +19,7 @@ module Repositories
       # pour qu'un <script> ne laisse pas son code en texte ; la liste blanche de Rails règle ensuite les attributs.
       # Une seule analyse (ADR-0068 §4) : les deux filtres passent sur le même fragment.
       # image_ids : nil (aucune pièce jointe, comportement des cours) ou Set des id admis de image_model
-      # (« Orm::ArticleImage » pour un article, « Orm::EssentialImage » pour une fiche).
+      # (« Orm::ArticleImage » pour un article).
       def self.call(html, image_ids: nil, image_model: ArticleScrubber::IMAGE_MODEL)
         return html if html.nil?
         return Loofah.html5_fragment(html).scrub!(:prune).scrub!(SCRUBBER).to_s unless image_ids

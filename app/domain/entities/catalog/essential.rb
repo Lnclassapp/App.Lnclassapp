@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::Essential
 # Rôle : une fiche essentielle d'un cours ; lisible si elle et son cours sont publiés
-# ADR  : 0035, 0037, 0105
+# ADR  : 0035, 0037, XXXX (la fiche de la notion est en jsonb, lue par RevisionSheetQuery)
 module Entities
   module Catalog
     class Essential
@@ -8,15 +8,8 @@ module Entities
 
       NAME_MAX = 150
       SUBTITLE_MAX = 150
-      # Plafond anti-abus du texte d'une fiche, en caractères (200 Ko) : une fiche de cours en tient dix fois moins. Il borne
-      # le temps des motifs qui relisent le texte (menace.md, n° 13) ; le schéma d'import en porte le même chiffre.
-      CONTENT_MAX = 200 * 1024
-
-      attr_accessor :id, :slug, :course_id, :position, :author_id, :status, :published_at, :archived_at,
-                    :content, :course_status
+      attr_accessor :id, :slug, :course_id, :position, :author_id, :status, :published_at, :archived_at, :course_status
       attr_reader :name, :subtitle
-      # images : [Shared::ContentImage], celles que cite le texte, dans son ordre, chacune avec son alt (ADR-0105).
-      attr_writer :images
 
       validates :name, presence: true, length: { maximum: NAME_MAX }
       validates :subtitle, length: { maximum: SUBTITLE_MAX }
@@ -29,26 +22,6 @@ module Entities
 
       def subtitle=(value)
         @subtitle = value&.squish.presence
-      end
-
-      def images = @images || []
-      # Les emplacements annoncés par l'import et pas encore remplacés par une image (ADR-0105 §4.3).
-      def image_slots = ImageSlot.scan(content)
-
-      # Ce qui empêche de publier : texte trop complexe à relire, emplacements mal écrits, emplacements restants et images
-      # sans texte de remplacement → { Symbol => valeur }. Un texte illisible est le seul motif rendu : on ne sait rien de plus.
-      def image_publish_errors
-        errors = {}
-        begin
-          malformed = ImageSlot.malformed_count(content)
-        rescue ImageSlot::Unreadable
-          return { image_slots_unreadable: true }
-        end
-        errors[:image_slots_malformed] = malformed if malformed.positive?
-        errors[:image_slots_left] = image_slots.size if image_slots.any?
-        missing = images.reject(&:alt?).map(&:public_id)
-        errors[:image_alts_blank] = missing if missing.any?
-        errors
       end
 
       def published? = status == "published"

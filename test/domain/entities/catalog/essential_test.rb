@@ -29,25 +29,6 @@ module Entities
         assert_not build(course_status: "draft").readable_chain_published?
         assert_not build(status: "archived").readable_chain_published?
       end
-
-      # ADR-0105 §4.3-§4.4 : emplacements restants et images sans texte de remplacement empêchent de publier.
-      test "image_publish_errors" do
-        image = ->(id, alt) { Entities::Shared::ContentImage.new(public_id: id, alt:) }
-
-        assert_empty build(content: "<p>Texte</p>").image_publish_errors
-        assert_equal({ image_slots_left: 2 }, build(content: "<p>[[image: a]]</p><p>[[image: b]]</p>").image_publish_errors)
-        assert_equal({ image_slots_malformed: 1, image_slots_left: 1 },
-                     build(content: "<p>[[image: a]]</p><ul><li>[[image: b]]</li></ul>").image_publish_errors)
-        with_images = build(content: "<p>x</p>")
-        with_images.images = [ image.("ok", "Une pile"), image.("ko", "") ]
-        assert_equal({ image_alts_blank: [ "ko" ] }, with_images.image_publish_errors)
-        assert_empty build.images
-      end
-
-      # Menace n° 13 : un texte trop complexe à relire est un motif à part, jamais « 1 emplacement mal écrit ».
-      test "image_publish_errors : un texte trop complexe à relire est refusé pour lui-même, sans autre motif" do
-        assert_equal({ image_slots_unreadable: true }, build(content: "<p>" * 40_000).image_publish_errors)
-      end
     end
   end
 end

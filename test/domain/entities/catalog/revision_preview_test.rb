@@ -30,7 +30,7 @@ module Entities
       end
 
       test "every type of block of a sheet document goes through for_sheet" do
-        SheetDocument::BLOCK_TYPES.each do |type|
+        %w[paragraph box simple steps table figure media exercise practice writing].each do |type|
           assert_nothing_raised { preview({ "type" => type }) }
         end
         assert_raises(ArgumentError) { preview({ "type" => "inconnu" }) }

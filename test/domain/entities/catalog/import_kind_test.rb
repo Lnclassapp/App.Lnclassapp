@@ -3,9 +3,11 @@ require "test_helper"
 module Entities
   module Catalog
     class ImportKindTest < ActiveSupport::TestCase
-      test "cinq types fermés, dont les DRENA (ADR-0066) et la fiche de cours en blocs ; les exercices seuls sont retirés (ADR-0113)" do
-        assert_equal %w[schools course_tree essentials drenas course_sheet], ImportKind::KINDS
+      test "trois types fermés, dont les DRENA (ADR-0066) ; les exercices seuls, les notions et la fiche de cours en blocs sont retirés (ADR-0113, ADR-XXXX)" do
+        assert_equal %w[schools course_tree drenas], ImportKind::KINDS
         assert_not ImportKind.valid?("exercises")
+        assert_not ImportKind.valid?("essentials")
+        assert_not ImportKind.valid?("course_sheet")
         assert_raises(ArgumentError) { ImportKind.fetch("exercises") }
         assert ImportKind.valid?("drenas")
         assert ImportKind.valid?(:schools)
@@ -27,7 +29,6 @@ module Entities
                      [ schools.format, schools.version, schools.roots_key, schools.target_key, schools.target_required, schools.max_roots ]
         assert_nil ImportKind.fetch("course_tree").target_key
         assert_equal 500, ImportKind.fetch("course_tree").max_roots
-        assert_equal [ "course", true, 2_000 ], ImportKind.fetch("essentials").then { [ it.target_key, it.target_required, it.max_roots ] }
         assert_equal [ 20 * 1024 * 1024, 1_000, 100 ], [ ImportKind::MAX_BYTES, ImportKind::MAX_ERRORS, ImportKind::BATCH_SIZE ]
       end
 
@@ -43,12 +44,11 @@ module Entities
       end
 
       # ADR-0068 : seuls les cours complets acceptent plusieurs fichiers.
-      test "plafonds de l'envoi : 50 fichiers et 50 Mo pour les cours complets, 1 fichier de 20 Mo ailleurs, 1 Mo pour une fiche en blocs" do
+      test "plafonds de l'envoi : 50 fichiers et 50 Mo pour les cours complets, 1 fichier de 20 Mo ailleurs" do
         course_tree = ImportKind.fetch("course_tree")
 
         assert_equal [ 50, 50 * 1024 * 1024, true ], [ course_tree.max_files, course_tree.max_total_bytes, course_tree.multiple_files? ]
-        assert_equal [ 1, 1024 * 1024, false ], ImportKind.fetch("course_sheet").then { [ it.max_files, it.max_total_bytes, it.multiple_files? ] }
-        (ImportKind::KINDS - %w[course_tree course_sheet]).each do |kind|
+        (ImportKind::KINDS - %w[course_tree]).each do |kind|
           assert_equal [ 1, ImportKind::MAX_BYTES, false ], ImportKind.fetch(kind).then { [ it.max_files, it.max_total_bytes, it.multiple_files? ] }
         end
       end
@@ -66,7 +66,7 @@ module Entities
         teacher = Identity::Actor.new(user_id: 2, role: :teacher)
 
         assert_equal Policies::School::ManageSchoolPolicy, ImportKind.fetch("schools").policy
-        assert_equal Policies::Catalog::ManageContentPolicy, ImportKind.fetch("essentials").policy
+        assert_equal Policies::Catalog::ManageContentPolicy, ImportKind.fetch("course_tree").policy
         assert ImportKind.fetch("course_tree").authorize(actor: team).success?
         assert_equal :forbidden, ImportKind.fetch("schools").authorize(actor: teacher).code
       end
@@ -77,7 +77,7 @@ module Entities
 
         assert_equal "classrooms", ImportKind::CLASSROOM_GENERATION
         assert_not ImportKind.valid?("classrooms")
-        assert_equal %w[schools course_tree essentials drenas course_sheet classrooms school_codes classroom_links], ImportKind::REPORT_KINDS
+        assert_equal %w[schools course_tree drenas classrooms school_codes classroom_links], ImportKind::REPORT_KINDS
         assert ImportKind.authorize_report(kind: "classrooms", actor: team).success?
         assert_equal :forbidden, ImportKind.authorize_report(kind: "classrooms", actor: teacher).code
         # Les rapports des imports d'exercices seuls, faits avant leur retrait, restent lisibles par l'équipe de contenu.

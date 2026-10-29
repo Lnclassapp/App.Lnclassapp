@@ -35,7 +35,7 @@ module Queries
 
       def notions_of(course_id, figures, statuses:)
         by_key = Array(figures).to_h { [ it["key"], Entities::Catalog::Figure.from_raw(it) ] }
-        Orm::Essential.where(course_id:, status: statuses).where.not(sheet: nil).order(:position).pluck(:slug, :name, :sheet).map do |slug, name, raw|
+        Orm::Essential.where(course_id:, status: statuses).where.not(sheet: {}).order(:position).pluck(:slug, :name, :sheet).map do |slug, name, raw|
           sheet = Entities::Catalog::NotionSheet.from_raw(raw.merge("figure" => raw["figure_key"]))
           Notion.new(slug:, name:, sheet:, figure: by_key[sheet.figure_key])
         end

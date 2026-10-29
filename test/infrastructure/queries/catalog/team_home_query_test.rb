@@ -101,7 +101,7 @@ class Queries::Catalog::TeamHomeQueryTest < ActiveSupport::TestCase
     member = create_team_member(second_factor: false)
     # One running import per kind (ADR-0039): queued, importing and validating each get their own kind.
     statuses = { "queued" => "schools", "completed" => "schools", "rejected" => "exercises", "failed" => "exercises",
-                 "importing" => "course_tree", "validating" => "essentials" }
+                 "importing" => "course_tree", "validating" => "drenas" }
     reports = statuses.each_with_index.map do |(status, kind), index|
       report = create_import_report(status:, kind:, imported_by: member)
       report.update!(files: [ { "name" => "etablissements.json", "byte_size" => 2, "status" => "pending" } ]) if index.zero?

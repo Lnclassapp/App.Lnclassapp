@@ -22,7 +22,7 @@ module Entities
                                too_many_roots too_large].freeze
     ImportError::ELEMENT = %w[schema blank too_long unknown_level unknown_series unknown_material unknown_drena
                               series_not_allowed invalid_value question_structure write_failed national_code_taken taken no_latin_character
-                              duplicate_in_files image_slot_malformed image_slots_unreadable forbidden not_enqueued essential_exercise_count
+                              duplicate_in_files forbidden not_enqueued essential_exercise_count
                               lesson_exercise_count essential_not_in_lesson essential_missing_from_file
                               essential_name_ambiguous lesson_already_published too_few_questions example_steps_mismatch
                               figure_invalid figure_missing invalid_count].freeze

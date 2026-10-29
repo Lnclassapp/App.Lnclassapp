@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::EssentialsController
 # Rôle : notions d'une leçon : publication (seule ou avec ses exercices) et archivage ; plus de création ni de modification à l'écran (CA-29)
-# ADR  : 0026, 0028, 0035, 0105, 0113 (§4.6) · UDR : 0006, 0007, 0129
+# ADR  : 0026, 0028, 0035, 0113 (§4.6) · UDR : 0006, 0007, 0129
 module Teams
   class EssentialsController < BaseController
     include PublishCascade
@@ -12,14 +12,12 @@ module Teams
 
     def cascade_root = :essential
 
-    # Refus (cours non publié, transition interdite, image manquante) : 422 et toast d'erreur, le panneau de statut reste tel
-    # quel. Sans Turbo, retour à la page d'où le bouton a été cliqué. @reason_count : emplacements d'image restants (ADR-0105).
+    # Refus (cours non publié, transition interdite) : 422 et toast d'erreur, le panneau de statut reste tel quel. Sans Turbo,
+    # retour à la page d'où le bouton a été cliqué.
     def transition(use_case)
       result = use_case.call(actor: current_actor, slug: params[:slug])
       @reason = result.errors.fetch(:base).first if result.code == :conflict
-      @reason_count = result.errors[:count]
-      log_unreadable_text(slug: params[:slug]) if @reason == :image_slots_unreadable
-      return respond_transition(:unprocessable_entity, alert: t("teams.essentials.transition.#{@reason}", count: @reason_count)) if @reason
+      return respond_transition(:unprocessable_entity, alert: t("teams.essentials.transition.#{@reason}")) if @reason
 
       render_result result, success: lambda { |essential|
         @essential = essential

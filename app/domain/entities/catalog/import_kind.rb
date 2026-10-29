@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportKind
-# Rôle : registre fermé des cinq types d'import (format, racines, cible, plafonds, policy) et des types de rapport
+# Rôle : registre fermé des trois types d'import (format, racines, cible, plafonds, policy) et des types de rapport
 # ADR  : 0028, 0039, 0056, 0066, 0068, 0096, 0113, XXXX
 module Entities
   module Catalog
@@ -39,16 +39,9 @@ module Entities
         Definition.new(kind: "course_tree", format: "lnclass.course-tree", version: COURSE_TREE_VERSION, roots_key: "courses",
                        target_key: nil, target_required: false, max_roots: 500,
                        policy: Policies::Catalog::ManageContentPolicy, max_files: 50, max_total_bytes: 50 * 1024 * 1024),
-        Definition.new(kind: "essentials", format: "lnclass.essentials", version: VERSION, roots_key: "essentials",
-                       target_key: "course", target_required: true, max_roots: 2_000,
-                       policy: Policies::Catalog::ManageContentPolicy),
         Definition.new(kind: "drenas", format: "lnclass.drenas", version: VERSION, roots_key: "drenas",
                        target_key: nil, target_required: false, max_roots: 500,
-                       policy: Policies::School::ManageSchoolPolicy),
-        # Une fiche de cours en blocs : un seul document par fichier, 1 Mo au plus (ADR-0110, #318). max_roots compte le contenu de l'enveloppe.
-        Definition.new(kind: "course_sheet", format: "lnclass.course-sheet", version: VERSION, roots_key: "sheet",
-                       target_key: "course", target_required: true, max_roots: 1,
-                       policy: Policies::Catalog::ManageContentPolicy, max_total_bytes: 1024 * 1024)
+                       policy: Policies::School::ManageSchoolPolicy)
       ].index_by(&:kind).freeze
       KINDS = ALL.keys.freeze
 

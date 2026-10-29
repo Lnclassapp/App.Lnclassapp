@@ -51,17 +51,12 @@ class PrEnvironmentSeedsTest < ActiveSupport::TestCase
     assert Orm::School.exists?(name: "Lycée Moderne de Treichville")
     assert Orm::User.find_by!(contact: "0531000001").authenticate_pin("2468")
     assert Orm::User.find_by!(contact: "0731000001").authenticate_pin("2468")
-    LESSONS.each do |path|
+    # Seules les leçons au format 3 s'importent ; les autres attendent leur conversion (refonte-contenus-maths, lot P2).
+    LESSONS.select { JSON.parse(it.read)["version"] == 3 }.each do |path|
       course = Orm::Course.find_by!(name: JSON.parse(path.read)["courses"].first["name"])
-      exercises = Orm::Exercise.where(course_id: course.id)
       assert_equal "published", course.status, path.to_s
       assert_operator course.essentials.where(status: "published").count, :>=, 1, path.to_s
-      # Ces leçons sont au format 1 : leurs exercices sont ignorés à l'import (ADR-0113), le contenu v2 viendra du chantier contenu.
-      assert_empty exercises, path.to_s
     end
-    first_a = JSON.parse(LESSONS.last.read)["courses"].first["name"]
-    assert_equal %w[A1 A2], Orm::Course.joins(:series).where(name: first_a).order("series.name").pluck("series.name"),
-                 "une leçon de 1ère A, en A1 et en A2 dans le contenu"
   end
 
   test "a second run creates nothing" do

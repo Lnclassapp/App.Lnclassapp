@@ -10,9 +10,6 @@ module UseCases
       # Le moteur autorise l'auteur par le registre des types (ImportKind) ; c'est la même policy.
       POLICY = Policies::Catalog::ManageContentPolicy
       PUBLIC_ID_LENGTH = 14
-      # Clé canonique → clés acceptées, la première présente l'emporte (ADR-0039). Plus lu ici (format 3 : title seul) ;
-      # ImportEssentials et la vue de son aide s'en servent encore (jusqu'au Lot R).
-      EXERCISE_ALIASES = { "title" => %w[title name] }.freeze
       # ADR-XXXX §4.1 : un exercice par notion, quatre problèmes pour toute la leçon.
       LESSON_EXERCISES = 4
       DEFAULT_THEME = "blue"

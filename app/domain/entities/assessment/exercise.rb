@@ -13,7 +13,7 @@ module Entities
 
       attr_accessor :id, :public_id, :course_id, :essential_id, :exercise_type, :position, :author_id, :status,
                     :published_at, :archived_at, :parents_published
-      # ADR-0115 : le sujet en blocs (document, tableau), facultatif ; sa validation (SheetDocument) est au Lot E.
+      # ADR-0115 : le sujet en blocs (document, tableau), facultatif ; sa validation (StatementBlocks) est au Lot E.
       attr_accessor :statement_blocks
       attr_writer :questions
       attr_reader :title, :statement

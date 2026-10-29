@@ -85,8 +85,7 @@ module Repositories
 
         assert_equal "<p>Hérédité <strong>forte</strong></p>", Orm::Course.find_by!(slug: "genetique").content.body.to_html
         assert_nil ActionText::RichText.find_by(record: Orm::Course.find_by!(slug: "ecologie"))
-        assert_equal "<p>Fiche ecologie-a</p>", Orm::Essential.find_by!(slug: "ecologie-a").content.body.to_html
-        assert_equal [ "Orm::Course", "Orm::Essential" ], ActionText::RichText.distinct.order(:record_type).pluck(:record_type)
+        assert_equal [ "Orm::Course" ], ActionText::RichText.distinct.order(:record_type).pluck(:record_type)
       end
 
       # ADR-0068 §4 : deux chemins d'écriture des contenus riches, Orm::RichTextRow pour l'import, le modèle Action Text

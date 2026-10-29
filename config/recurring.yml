@@ -23,11 +23,7 @@ production:
     class: Communication::PurgeOrphanArticleImagesJob
     queue: default
     schedule: every day at 3:30am
-  # ADR-0105 §4.7 : sheet and question images uploaded then never saved are deleted after 48 h, file purged.
-  purge_orphan_essential_images:
-    class: Catalog::PurgeOrphanEssentialImagesJob
-    queue: default
-    schedule: every day at 3:40am
+  # ADR-0105 §4.7 : question images uploaded then never saved are deleted after 48 h, file purged.
   purge_orphan_question_images:
     class: Assessment::PurgeOrphanQuestionImagesJob
     queue: default
