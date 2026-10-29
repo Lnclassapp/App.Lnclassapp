@@ -22,7 +22,7 @@ class Assessment::ExerciseFigureTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#exercise-sheet figure[data-controller=figure][data-figure-kind-value=geometry]", 1
-    assert_select "#exercise-sheet figure.rounded-xl", 1
+    assert_select "#exercise-sheet figure.rounded-card", 1
     assert_select "#exercise-sheet figcaption", text: /triangle ABC rectangle en A/
   end
 
@@ -32,7 +32,7 @@ class Assessment::ExerciseFigureTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#copy-statement figure[data-controller=figure]", 1
-    assert_select "#copy-statement figure.rounded-xl", 1
+    assert_select "#copy-statement figure.rounded-card", 1
   end
 
   test "sans figure citée, aucun emplacement de figure" do
