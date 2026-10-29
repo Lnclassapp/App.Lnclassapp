@@ -47,7 +47,7 @@ Les 213 leçons livrées sont au format v1, dont l'import jette les exercices (A
 ```json
 { "format": "lnclass.course-tree", "version": 3,
   "courses": [{
-    "name": "Racines carrées", "subtitle": "…", "level_name": "3ème", "material_name": "Mathématiques",
+    "name": "Racines carrées", "subtitle": "…", "level_name": "3ème", "material_name": "Mathématiques", "theme": "blue",
     "figures": [{ "key": "carre-aire", "kind": "geometry", "description": "Un carré de côté a et d'aire a².",
                   "params": { "…": "…" }, "controls": [{ "param": "a", "min": 1, "max": 9, "step": 0.5, "label": "côté a" }] }],
     "notions": [{
@@ -69,6 +69,7 @@ Règles (toutes contrôlées à l'import, refus de la leçon entière, raison et
 | Élément | Règle |
 |---|---|
 | Version | 3 seulement ; v1 et v2 : refus du fichier, raison `format_retired` |
+| `theme` | facultatif, `blue`, `teal` ou `burgundy` (habillage cahier, UDR-0137) ; absent → `blue` |
 | `notions` | 1 à 12, noms uniques dans la leçon |
 | `remember`, `pitfall` | texte non vide, 1 200 caractères au plus |
 | `method` | 2 à 8 étapes, 300 caractères au plus chacune |
@@ -99,7 +100,7 @@ Rendu : un seul, côté navigateur, en SVG, par le contrôleur Stimulus `figure`
 ### 4.3 Stockage
 
 - `essentials.sheet` (`jsonb`, non nul) : `{remember, method[], example{statement, steps[]}, pitfall, figure_key}`. Le texte riche `content` des notions est supprimé.
-- `courses.figures` (`jsonb`, non nul, `[]` par défaut) : la liste des figures de la leçon. Le texte riche de la leçon n'est plus importé (colonne laissée, plus affichée).
+- `courses.figures` (`jsonb`, non nul, `[]` par défaut) : la liste des figures de la leçon ; `courses.sheet_theme` (`string`, non nul, `blue` par défaut, contrainte sur les 3 thèmes). Le texte riche de la leçon n'est plus importé (colonne laissée, plus affichée).
 - `exercises.figure_key` (`string`, nul) : la figure citée par l'exercice ; rendue sous le sujet.
 - Supprimés : `course_sheets`, `essential_images` ; les kinds `course_sheet` et `essentials` de `import_reports`.
 
@@ -114,7 +115,7 @@ Le remplacement partiel v2 (notions gardées, exercices archivés) disparaît.
 
 ### 4.5 Retraits
 
-Use cases `ImportCourseSheet`, `ImportEssentials`, `UploadEssentialImage`, `ReadEssentialImage` ; entité `CourseSheet`, `SheetDocument` ; ports et repositories de fiche cahier et d'images de notions ; jobs d'import correspondants et `PurgeOrphanEssentialImagesJob` ; schémas `lnclass.course-tree.v1/v2`, `lnclass.course-sheet.v1` ; vues `catalog/course_sheets/*`, `catalog/essentials/_body_image` ; contrôleurs Stimulus `course_sheet/*` et `lib/course_sheet/*` ; routes d'images de notions et `courses/:course_slug/fiche` (la redirection vers `#fiche-de-revision` reste, servie par le contrôleur de la leçon) ; données de démarrage `db/seeds/data/course_sheets/` et `db/seeds/demo/fiches_de_cours.rb` (remplacées par une leçon v3 de démonstration). Les images de **questions** (ADR-0105) restent.
+Use cases `ImportCourseSheet`, `ImportEssentials`, `UploadEssentialImage`, `ReadEssentialImage` ; entité `CourseSheet`, `SheetDocument` ; ports et repositories de fiche cahier et d'images de notions ; jobs d'import correspondants et `PurgeOrphanEssentialImagesJob` ; schémas `lnclass.course-tree.v1/v2`, `lnclass.course-sheet.v1` ; vues `catalog/course_sheets/*` (remplacées par `catalog/revision_sheets/*`, même habillage), `catalog/essentials/_body_image` ; contrôleurs Stimulus `course_sheet/*` et `lib/course_sheet/*` ; dans `course_sheet.css`, les seules classes du lexique, de l'explication simple et des exercices dans la page (UDR-XXXX §4). **L'habillage cahier reste** : feuille `course_sheet.css`, polices Kalam et Source Serif 4, Seyès, 3 thèmes, encadrés (porteur, 2026-10-29) ; routes d'images de notions et `courses/:course_slug/fiche` (la redirection vers `#fiche-de-revision` reste, servie par le contrôleur de la leçon) ; données de démarrage `db/seeds/data/course_sheets/` et `db/seeds/demo/fiches_de_cours.rb` (remplacées par une leçon v3 de démonstration). Les images de **questions** (ADR-0105) restent.
 
 ### Menace écrite d'abord (fichier importé)
 
@@ -139,7 +140,7 @@ Use cases `ImportCourseSheet`, `ImportEssentials`, `UploadEssentialImage`, `Read
 
 ### 🔴 Coûts consentis
 
-- Le rendu riche de la fiche cahier (lexique en bulle, explications simples, exercices dans la page, rédaction libre) disparaît ; Thalès et les lentilles perdent leurs figures sur mesure jusqu'à leur réécriture en sortes génériques.
+- Le cahier garde son habillage mais perd ses blocs libres (lexique en bulle, explications simples, tableaux, exercices dans la page, rédaction libre) ; Thalès et les lentilles perdent leurs figures sur mesure jusqu'à leur réécriture en sortes génériques.
 - Cinq modules de rendu SVG à écrire et maintenir ; une sorte manquante bloque une leçon jusqu'à l'amendement de cet ADR.
 - Sans JavaScript, l'élève ne voit qu'une description, pas la figure.
 - La qualité de la méthode reste une affaire de relecture : la machine vérifie la forme (étapes, présence des corrections), pas la justesse.

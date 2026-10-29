@@ -116,6 +116,7 @@ CA-12
 Étant donné une leçon publiée de 3e
 Quand un élève de 3e l'ouvre
 Alors la section « Fiche de révision » montre chaque notion dans l'ordre, avec ses 4 blocs dans l'ordre À retenir, La méthode, Un exemple corrigé, Le piège à éviter
+Et la fiche garde l'habillage cahier (papier Seyès, titres manuscrits, thème de la leçon)
 Et les étapes de La méthode sont numérotées
 Et chaque étape de l'exemple corrigé porte le numéro de l'étape qu'elle applique
 
@@ -169,7 +170,7 @@ Et chacune s'importe en brouillon sur une base vide
 | Domaine | `Entities::Catalog::NotionSheet` (4 blocs, règle étapes de l'exemple = étapes de la méthode) ; `Entities::Catalog::Figure` + `FigureKinds` (liste fermée, paramètres bornés par sorte) ; `ImportKind::COURSE_TREE_VERSION = 3`, v1/v2 retirées ; `ImportCourseTree` réécrit (≥ 5 questions, correction obligatoire, figures, réimport du brouillon) ; `ContentTreeWriterPort` : remplacement d'une leçon en brouillon ; query de lecture du corrigé. Retrait : `ImportCourseSheet`, `ImportEssentials`, `UploadEssentialImage`, `ReadEssentialImage`, `CourseSheet`, port d'images de notions |
 | Infrastructure | Migration : `essentials.sheet` (jsonb), `courses.figures` (jsonb), `exercises.figure_key` ; suppression de `course_sheets`, `essential_images`, du texte riche des notions ; kinds `course_sheet` et `essentials` retirés des rapports d'import. Schéma `lnclass.course-tree.v3.json` ; v1, v2 et `course-sheet.v1` supprimés. `ContentTreeWriter` (remplacement en transaction). `RevisionSheetQuery` réécrite ; `LessonAnswerKeyQuery` (corrigé) |
 | Delivery | Route équipe `GET /teams/courses/:slug/answer-key` (`Teams::AnswerKeysController#show`, `ManageContentPolicy`) ; retrait des routes d'images de notions et de l'ancienne adresse de fiche |
-| UI | `catalog/courses/_revision_sheet` réécrit (notions au gabarit) ; partial `catalog/figures/_figure` ; contrôleur Stimulus `figure` (chargé à la demande) et un module de rendu par sorte ; vue `teams/answer_keys/show` ; lien « Corrigé » dans l'en-tête de la leçon pour l'équipe. Retrait : `course_sheets/*`, contrôleurs `course_sheet/*`, CSS de la fiche cahier |
+| UI | Habillage cahier gardé (`course_sheet.css`, Kalam, Source Serif 4, Seyès, 3 thèmes) ; `catalog/courses/_revision_sheet` réécrit, `catalog/revision_sheets/_sheet` (une page de cahier, une section par notion au gabarit) ; partial `catalog/figures/_figure` ; contrôleur Stimulus `figure` (chargé à la demande) et un module de rendu par sorte ; vue `teams/answer_keys/show` ; lien « Corrigé » dans l'en-tête de la leçon pour l'équipe. Retrait : `course_sheets/*`, contrôleurs `course_sheet/*`, classes du lexique, de l'explication simple et des exercices dans la page |
 | Contenus | `docs/contenus/prompt-redaction.md` réécrit (v3), `script/contenus/valider.rb` (v3), 10 fichiers de leçons de 3e sous `docs/contenus/lecons-traitees/3eme/mathematiques/` |
 
 ## 6. Décisions rattachées
