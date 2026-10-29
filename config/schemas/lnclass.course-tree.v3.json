@@ -101,10 +101,8 @@
           }
         },
         "exercises": {
-          "description": "Les problèmes de toute la leçon : exactement quatre.",
+          "description": "Les problèmes de toute la leçon : exactement quatre, compté par l'adaptateur (raison lesson_exercise_count).",
           "type": "array",
-          "minItems": 4,
-          "maxItems": 4,
           "items": {
             "$ref": "#/$defs/exercise"
           }
@@ -112,6 +110,7 @@
       }
     },
     "figure": {
+      "description": "La forme seulement : la sorte, la description, les paramètres et les curseurs sont vérifiés par l'adaptateur (Entities::Catalog::Figure), qui note chaque faute à sa raison figure_invalid.",
       "type": "object",
       "additionalProperties": false,
       "required": [
@@ -122,166 +121,22 @@
       ],
       "properties": {
         "key": {
-          "type": "string",
-          "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+          "type": "string"
         },
         "kind": {
-          "enum": [
-            "geometry",
-            "coordinate_plane",
-            "number_line",
-            "stat_chart",
-            "solid"
-          ]
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "minLength": 150,
-          "maxLength": 600
+          "type": "string"
         },
         "params": {
           "type": "object"
         },
         "controls": {
           "type": "array",
-          "maxItems": 4,
           "items": {
-            "$ref": "#/$defs/control"
+            "type": "object"
           }
-        }
-      },
-      "allOf": [
-        {
-          "if": {
-            "properties": {
-              "kind": {
-                "const": "geometry"
-              }
-            },
-            "required": [
-              "kind"
-            ]
-          },
-          "then": {
-            "properties": {
-              "params": {
-                "$ref": "#/$defs/geometry_params"
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "kind": {
-                "const": "coordinate_plane"
-              }
-            },
-            "required": [
-              "kind"
-            ]
-          },
-          "then": {
-            "properties": {
-              "params": {
-                "$ref": "#/$defs/coordinate_plane_params"
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "kind": {
-                "const": "number_line"
-              }
-            },
-            "required": [
-              "kind"
-            ]
-          },
-          "then": {
-            "properties": {
-              "params": {
-                "$ref": "#/$defs/number_line_params"
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "kind": {
-                "const": "stat_chart"
-              }
-            },
-            "required": [
-              "kind"
-            ]
-          },
-          "then": {
-            "properties": {
-              "params": {
-                "$ref": "#/$defs/stat_chart_params"
-              }
-            }
-          }
-        },
-        {
-          "if": {
-            "properties": {
-              "kind": {
-                "const": "solid"
-              }
-            },
-            "required": [
-              "kind"
-            ]
-          },
-          "then": {
-            "properties": {
-              "params": {
-                "$ref": "#/$defs/solid_params"
-              }
-            }
-          }
-        }
-      ]
-    },
-    "control": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "param",
-        "min",
-        "max",
-        "step",
-        "label"
-      ],
-      "properties": {
-        "param": {
-          "type": "string",
-          "pattern": "^[a-z][a-z0-9_]{0,29}$"
-        },
-        "min": {
-          "type": "number",
-          "minimum": -1000,
-          "maximum": 1000
-        },
-        "max": {
-          "type": "number",
-          "minimum": -1000,
-          "maximum": 1000
-        },
-        "step": {
-          "type": "number",
-          "exclusiveMinimum": 0,
-          "maximum": 2000
-        },
-        "label": {
-          "type": "string",
-          "minLength": 1,
-          "maxLength": 40
         }
       }
     },
@@ -293,8 +148,7 @@
         "remember",
         "method",
         "example",
-        "pitfall",
-        "exercise"
+        "pitfall"
       ],
       "properties": {
         "name": {
@@ -351,7 +205,13 @@
           "$ref": "#/$defs/figure_key"
         },
         "exercise": {
-          "$ref": "#/$defs/exercise"
+          "description": "Un exercice exactement par notion : un objet est vérifié ici, tout autre valeur (absente, null, liste) est refusée par l'adaptateur (raison essential_exercise_count).",
+          "if": {
+            "type": "object"
+          },
+          "then": {
+            "$ref": "#/$defs/exercise"
+          }
         }
       }
     },
@@ -361,8 +221,7 @@
       "required": [
         "title",
         "statement",
-        "exercise_type",
-        "questions"
+        "exercise_type"
       ],
       "properties": {
         "title": {
@@ -395,10 +254,8 @@
           }
         },
         "questions": {
-          "description": "Cinq à trente questions par exercice (ADR-XXXX §4.1).",
+          "description": "Cinq à trente questions par exercice (ADR-XXXX §4.1), comptées par l'adaptateur (raisons too_few_questions et invalid_count).",
           "type": "array",
-          "minItems": 5,
-          "maxItems": 30,
           "items": {
             "$ref": "#/$defs/question"
           }
@@ -420,10 +277,8 @@
           "maxLength": 40
         },
         "explanation": {
-          "description": "La correction rédigée, obligatoire pour toute question (ADR-XXXX §4.1) : 20 à 2 000 caractères.",
-          "type": "string",
-          "minLength": 20,
-          "maxLength": 2000
+          "description": "La correction rédigée, obligatoire pour toute question (ADR-XXXX §4.1) : 20 à 2 000 caractères, vérifiés par l'adaptateur (raisons blank, too_short, too_long).",
+          "type": "string"
         },
         "points": {
           "description": "Points de la question (ADR-0115) : de 0,5 à 20, par demi-point ; 1 sans la clé.",
@@ -486,7 +341,6 @@
       "required": [
         "content",
         "question_type",
-        "explanation",
         "answers"
       ]
     },
@@ -534,491 +388,6 @@
             "null"
           ],
           "maxLength": 500
-        }
-      }
-    },
-    "geometry_item": {
-      "description": "Élément de liste de geometry : nombre, texte, tableau de 4 valeurs au plus ou objet de valeurs simples.",
-      "oneOf": [
-        {
-          "type": "number",
-          "minimum": -20,
-          "maximum": 20
-        },
-        {
-          "type": "string",
-          "maxLength": 60
-        },
-        {
-          "type": "array",
-          "maxItems": 4,
-          "items": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -20,
-                "maximum": 20
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        },
-        {
-          "type": "object",
-          "maxProperties": 12,
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -20,
-                "maximum": 20
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "geometry_params": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "points": {
-          "type": "array",
-          "maxItems": 12,
-          "items": {
-            "$ref": "#/$defs/geometry_item"
-          }
-        },
-        "segments": {
-          "type": "array",
-          "maxItems": 30,
-          "items": {
-            "$ref": "#/$defs/geometry_item"
-          }
-        },
-        "lines": {
-          "type": "array",
-          "maxItems": 12,
-          "items": {
-            "$ref": "#/$defs/geometry_item"
-          }
-        },
-        "circles": {
-          "type": "array",
-          "maxItems": 6,
-          "items": {
-            "$ref": "#/$defs/geometry_item"
-          }
-        },
-        "angles": {
-          "type": "array",
-          "maxItems": 12,
-          "items": {
-            "$ref": "#/$defs/geometry_item"
-          }
-        },
-        "labels": {
-          "type": "array",
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/$defs/geometry_item"
-          }
-        },
-        "constraints": {
-          "type": "array",
-          "maxItems": 12,
-          "items": {
-            "$ref": "#/$defs/geometry_item"
-          }
-        }
-      }
-    },
-    "coordinate_plane_item": {
-      "description": "Élément de liste de coordinate_plane : nombre, texte, tableau de 4 valeurs au plus ou objet de valeurs simples.",
-      "oneOf": [
-        {
-          "type": "number",
-          "minimum": -50,
-          "maximum": 50
-        },
-        {
-          "type": "string",
-          "maxLength": 60
-        },
-        {
-          "type": "array",
-          "maxItems": 4,
-          "items": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -50,
-                "maximum": 50
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        },
-        {
-          "type": "object",
-          "maxProperties": 12,
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -50,
-                "maximum": 50
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "coordinate_plane_params": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "xmin": {
-          "type": "number",
-          "minimum": -50,
-          "maximum": 50
-        },
-        "xmax": {
-          "type": "number",
-          "minimum": -50,
-          "maximum": 50
-        },
-        "ymin": {
-          "type": "number",
-          "minimum": -50,
-          "maximum": 50
-        },
-        "ymax": {
-          "type": "number",
-          "minimum": -50,
-          "maximum": 50
-        },
-        "points": {
-          "type": "array",
-          "maxItems": 12,
-          "items": {
-            "$ref": "#/$defs/coordinate_plane_item"
-          }
-        },
-        "vectors": {
-          "type": "array",
-          "maxItems": 8,
-          "items": {
-            "$ref": "#/$defs/coordinate_plane_item"
-          }
-        },
-        "lines": {
-          "type": "array",
-          "maxItems": 6,
-          "items": {
-            "$ref": "#/$defs/coordinate_plane_item"
-          }
-        },
-        "segments": {
-          "type": "array",
-          "maxItems": 12,
-          "items": {
-            "$ref": "#/$defs/coordinate_plane_item"
-          }
-        }
-      }
-    },
-    "number_line_item": {
-      "description": "Élément de liste de number_line : nombre, texte, tableau de 4 valeurs au plus ou objet de valeurs simples.",
-      "oneOf": [
-        {
-          "type": "number",
-          "minimum": -100,
-          "maximum": 100
-        },
-        {
-          "type": "string",
-          "maxLength": 60
-        },
-        {
-          "type": "array",
-          "maxItems": 4,
-          "items": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -100,
-                "maximum": 100
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        },
-        {
-          "type": "object",
-          "maxProperties": 12,
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -100,
-                "maximum": 100
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "number_line_params": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "min": {
-          "type": "number",
-          "minimum": -100,
-          "maximum": 100
-        },
-        "max": {
-          "type": "number",
-          "minimum": -100,
-          "maximum": 100
-        },
-        "step": {
-          "type": "number",
-          "minimum": 0.01,
-          "maximum": 50
-        },
-        "points": {
-          "type": "array",
-          "maxItems": 12,
-          "items": {
-            "$ref": "#/$defs/number_line_item"
-          }
-        },
-        "intervals": {
-          "type": "array",
-          "maxItems": 6,
-          "items": {
-            "$ref": "#/$defs/number_line_item"
-          }
-        }
-      }
-    },
-    "stat_chart_item": {
-      "description": "Élément de liste de stat_chart : nombre, texte, tableau de 4 valeurs au plus ou objet de valeurs simples.",
-      "oneOf": [
-        {
-          "type": "number",
-          "minimum": -1000000,
-          "maximum": 1000000
-        },
-        {
-          "type": "string",
-          "maxLength": 60
-        },
-        {
-          "type": "array",
-          "maxItems": 4,
-          "items": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -1000000,
-                "maximum": 1000000
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        },
-        {
-          "type": "object",
-          "maxProperties": 12,
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": -1000000,
-                "maximum": 1000000
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "stat_chart_params": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "chart": {
-          "enum": [
-            "bars",
-            "histogram",
-            "pie"
-          ]
-        },
-        "series": {
-          "type": "array",
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/$defs/stat_chart_item"
-          }
-        },
-        "labels": {
-          "type": "array",
-          "maxItems": 20,
-          "items": {
-            "$ref": "#/$defs/stat_chart_item"
-          }
-        }
-      }
-    },
-    "solid_item": {
-      "description": "Élément de liste de solid : nombre, texte, tableau de 4 valeurs au plus ou objet de valeurs simples.",
-      "oneOf": [
-        {
-          "type": "number",
-          "minimum": 0.5,
-          "maximum": 50
-        },
-        {
-          "type": "string",
-          "maxLength": 60
-        },
-        {
-          "type": "array",
-          "maxItems": 4,
-          "items": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": 0.5,
-                "maximum": 50
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        },
-        {
-          "type": "object",
-          "maxProperties": 12,
-          "additionalProperties": {
-            "oneOf": [
-              {
-                "type": "string",
-                "maxLength": 60
-              },
-              {
-                "type": "number",
-                "minimum": 0.5,
-                "maximum": 50
-              },
-              {
-                "type": "boolean"
-              }
-            ]
-          }
-        }
-      ]
-    },
-    "solid_params": {
-      "type": "object",
-      "additionalProperties": false,
-      "properties": {
-        "shape": {
-          "enum": [
-            "pyramid",
-            "cone"
-          ]
-        },
-        "base": {
-          "enum": [
-            "square",
-            "rectangular",
-            "triangular"
-          ]
-        },
-        "height": {
-          "type": "number",
-          "minimum": 0.5,
-          "maximum": 50
-        },
-        "side": {
-          "type": "number",
-          "minimum": 0.5,
-          "maximum": 50
-        },
-        "width": {
-          "type": "number",
-          "minimum": 0.5,
-          "maximum": 50
-        },
-        "depth": {
-          "type": "number",
-          "minimum": 0.5,
-          "maximum": 50
-        },
-        "radius": {
-          "type": "number",
-          "minimum": 0.5,
-          "maximum": 50
         }
       }
     }

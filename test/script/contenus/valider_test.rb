@@ -33,14 +33,14 @@ class ContenusValiderTest < ActiveSupport::TestCase
   end
 
   test "CA-3 : une notion sans exercice ou avec deux exercices, et le rapport la nomme" do
-    assert_refused mutated { it["notions"][1].delete("exercise") }, "invalid_count", "notions[1].exercise"
+    assert_refused mutated { it["notions"][1].delete("exercise") }, "essential_exercise_count", "notions[1].exercise"
     two = mutated { it["notions"][0]["exercise"] = [ it["notions"][0]["exercise"], it["notions"][0]["exercise"] ] }
-    assert_refused two, "invalid_count", "notions[0].exercise"
+    assert_refused two, "essential_exercise_count", "notions[0].exercise"
   end
 
   test "CA-4 : trois ou cinq problèmes" do
-    assert_refused mutated { it["exercises"].pop }, "invalid_count", "exercises"
-    assert_refused mutated { it["exercises"] << it["exercises"].first }, "invalid_count", "exercises"
+    assert_refused mutated { it["exercises"].pop }, "lesson_exercise_count", "exercises"
+    assert_refused mutated { it["exercises"] << it["exercises"].first }, "lesson_exercise_count", "exercises"
   end
 
   test "CA-5 : un exercice de 4 questions" do
@@ -58,7 +58,7 @@ class ContenusValiderTest < ActiveSupport::TestCase
   test "CA-7 : La méthode a 4 étapes et l'exemple corrigé 3" do
     document = mutated { it["notions"][0]["method"] << "Vérifier le résultat avec une calculatrice." }
     assert_refused document, "example_steps_mismatch", "notions[0].example.steps"
-    assert_refused mutated { it["notions"][0]["method"] = [ "Une seule étape." ] }, "invalid_count", "notions[0].method"
+    assert_refused mutated { it["notions"][0]["method"] = [ "Une seule étape." ] }, "schema", "notions[0].method"
   end
 
   test "CA-8 : figure de sorte inconnue, paramètre hors bornes ou sans description" do
@@ -85,22 +85,20 @@ class ContenusValiderTest < ActiveSupport::TestCase
   end
 
   test "thème inconnu, notions en double, figures en double" do
-    assert_refused mutated { it["theme"] = "pink" }, "invalid_value", "theme"
-    assert_refused mutated { it["notions"][1]["name"] = it["notions"][0]["name"] }, "duplicate"
-    assert_refused mutated { it["figures"] << it["figures"][0] }, "duplicate"
+    assert_refused mutated { it["theme"] = "pink" }, "schema", "theme"
+    assert_refused mutated { it["notions"][1]["name"] = it["notions"][0]["name"] }, "invalid_value", "notions[1].name"
+    assert_refused mutated { it["figures"] << it["figures"][0] }, "figure_invalid", "figures[1].key"
   end
 
-  test "mêmes raisons que l'entité NotionSheet pour le gabarit" do
+  test "mêmes raisons que l'entité NotionSheet pour le gabarit, hors bornes de taille que le schéma refuse d'abord" do
     notion = revision_notion("Simplifier")
-    notion["method"] = [ "Une.", "Deux.", "Trois." ]
-    notion["example"]["steps"] = [ "Un seul pas." ]
-    notion["pitfall"] = ""
-    notion["remember"] = "x" * 1_201
+    notion["example"]["steps"] = [ "Un seul pas.", "Deux pas." ]
+    notion["pitfall"] = "  "
     expected = Entities::Catalog::NotionSheet.errors_for(notion).map(&:last).uniq.sort
+    assert_equal %w[blank example_steps_mismatch], expected
 
     document = mutated { it["notions"] = [ notion.merge("exercise" => revision_exercise("Exercice")) ] }
-    got = check(document).reasons.map(&:last) & expected
-    assert_equal expected, got.uniq.sort
+    assert_equal expected, check(document).reasons.map(&:last).uniq.sort
   end
 
   test "avertit si la correction d'une notion ne cite pas la méthode, et se tait si elle la cite" do

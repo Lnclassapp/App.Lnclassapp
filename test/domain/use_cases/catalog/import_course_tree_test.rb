@@ -119,14 +119,18 @@ module UseCases
       test "a notion without exercise, or with two, is refused and the report names the notion" do
         missing = lesson
         missing["notions"][1].delete("exercise")
-        two = lesson
-        two["notions"][0]["exercises"] = [ two["notions"][0]["exercise"], two["notions"][0]["exercise"] ]
+        two = lesson("name" => "Autre")
+        two["notions"][0]["exercise"] = [ two["notions"][0]["exercise"], two["notions"][0]["exercise"] ]
 
-        report = run_import(envelope(missing, two.merge("name" => "Autre")))
+        report = run_import(envelope(missing, two))
 
         assert_equal [ 0, 2 ], report.values_at(:imported_count, :error_count)
-        assert_equal [ [ "courses[0].notions[1].exercise", "schema" ], [ "courses[1].notions[0].exercises", "schema" ] ], report_pairs(report)
+        assert_equal [ [ "courses[0].notions[1].exercise", "essential_exercise_count" ], [ "courses[1].notions[0].exercise", "essential_exercise_count" ] ],
+                     report_pairs(report)
         assert_equal [ 0, 0, 0, 0, 0 ], tree_counts
+        item = validate(missing)
+        assert_equal({ course: "Racines carrées", name: "Calculer avec des racines", count: 0 }, item.errors.first.params)
+        assert_equal 2, validate(two).errors.first.params[:count]
       end
 
       # CA-4
@@ -135,7 +139,7 @@ module UseCases
           report = run_import(envelope(lesson("exercises" => Array.new(count) { revision_exercise("Problème #{it}") })))
 
           assert_equal [ 0, 1 ], report.values_at(:imported_count, :error_count), count
-          assert_equal [ [ "courses[0].exercises", "schema" ] ], report_pairs(report), count
+          assert_equal [ [ "courses[0].exercises", "lesson_exercise_count" ] ], report_pairs(report), count
         end
         item = validate(lesson("exercises" => Array.new(3) { revision_exercise("Problème #{it}") }))
         assert_equal [ [ "courses[0].exercises", "lesson_exercise_count" ] ], pairs(item)
@@ -143,7 +147,7 @@ module UseCases
       end
 
       # CA-5
-      test "an exercise of 4 questions is refused, the report names the exercise" do
+      test "an exercise of fewer than 5 or more than 30 questions is refused, the report names the exercise" do
         short = lesson
         short["notions"][1]["exercise"]["questions"].pop
         problem = lesson("name" => "Autre")
@@ -151,11 +155,18 @@ module UseCases
 
         report = run_import(envelope(short, problem))
 
-        assert_equal [ [ "courses[0].notions[1].exercise.questions", "schema" ], [ "courses[1].exercises[2].questions", "schema" ] ], report_pairs(report)
+        assert_equal [ [ "courses[0].notions[1].exercise.questions", "too_few_questions" ], [ "courses[1].exercises[2].questions", "too_few_questions" ] ],
+                     report_pairs(report)
         item = validate(short)
         assert_equal [ [ "courses[0].notions[1].exercise.questions", "too_few_questions" ] ], pairs(item)
         assert_equal({ title: "Exercice sur Calculer avec des racines", count: 4, min: 5 }, item.errors.first.params)
         assert_equal [ [ "courses[0].exercises[2].questions", "too_few_questions" ] ], pairs(validate(problem))
+        none = lesson
+        none["exercises"][0]["questions"] = []
+        assert_equal [ [ "courses[0].exercises[0].questions", "too_few_questions" ] ], pairs(validate(none))
+        many = lesson
+        many["exercises"][0]["questions"] = Array.new(31) { revision_question(it + 1) }
+        assert_equal [ [ "courses[0].exercises[0].questions", "invalid_count" ] ], report_pairs(run_import(envelope(many)))
       end
 
       # CA-6
@@ -164,18 +175,20 @@ module UseCases
         empty["notions"][0]["exercise"]["questions"][3]["explanation"] = ""
         missing = lesson("name" => "B")
         missing["exercises"][1]["questions"][4].delete("explanation")
+        short = lesson("name" => "C")
+        short["exercises"][0]["questions"][0]["explanation"] = "Trop court."
+        long = lesson("name" => "D")
+        long["exercises"][0]["questions"][0]["explanation"] = "a" * 2_001
 
-        assert_equal [ [ "courses[0].notions[0].exercise.questions[3].explanation", "schema" ] ], report_pairs(run_import(envelope(empty)))
-        assert_equal [ [ "courses[0].exercises[1].questions[4].explanation", "schema" ] ], report_pairs(run_import(envelope(missing)))
+        assert_equal [ [ "courses[0].notions[0].exercise.questions[3].explanation", "blank" ] ], report_pairs(run_import(envelope(empty)))
+        assert_equal [ [ "courses[0].exercises[1].questions[4].explanation", "blank" ] ], report_pairs(run_import(envelope(missing)))
+        assert_equal [ [ "courses[0].exercises[0].questions[0].explanation", "too_short" ] ], report_pairs(run_import(envelope(short)))
+        assert_equal [ [ "courses[0].exercises[0].questions[0].explanation", "too_long" ] ], report_pairs(run_import(envelope(long)))
 
         blank = lesson
         blank["notions"][0]["exercise"]["questions"][1]["explanation"] = "   "
         assert_equal [ [ "courses[0].notions[0].exercise.questions[1].explanation", "blank" ] ], pairs(validate(blank))
-        short = lesson
-        short["exercises"][0]["questions"][0]["explanation"] = "Trop court."
-        assert_equal [ [ "courses[0].exercises[0].questions[0].explanation", "invalid_value" ] ], pairs(validate(short))
-        long = lesson
-        long["exercises"][0]["questions"][0]["explanation"] = "a" * 2_001
+        assert_equal [ [ "courses[0].exercises[0].questions[0].explanation", "too_short" ] ], pairs(validate(short))
         assert_equal [ [ "courses[0].exercises[0].questions[0].explanation", "too_long" ] ], pairs(validate(long))
       end
 

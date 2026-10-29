@@ -197,7 +197,7 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
 
 ## Après la rédaction : script puis relecture IA indépendante
 
-1. **Script.** Lance `ruby script/contenus/valider.rb <fichier>`. Il refuse le fichier avec les mêmes raisons que l'import (`example_steps_mismatch`, `too_few_questions`, `figure_invalid`, `figure_missing`, `invalid_count`, `blank`…) et avertit des défauts de rédaction (correction qui ne cite pas la méthode, mots interdits, questions dépendantes). Corrige toutes les erreurs et tous les avertissements, jusqu'à un fichier sans erreur (3 tours au plus).
+1. **Script.** Lance `ruby script/contenus/valider.rb <fichier>`. Il refuse le fichier avec les mêmes raisons que l'import (`example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`, `too_short`, `blank`…) et avertit des défauts de rédaction (correction qui ne cite pas la méthode, mots interdits, questions dépendantes). Corrige toutes les erreurs et tous les avertissements, jusqu'à un fichier sans erreur (3 tours au plus).
 2. **Relecture IA indépendante.** Un **autre** modèle (jamais l'auteur), qui n'a pas vu la rédaction, ouvre le fichier et **refait chaque calcul** : chaque exemple, chaque question, chaque correction. Il vérifie que la bonne proposition est la bonne, que chaque correction suit les étapes de la méthode, que les propositions fausses le sont, et que rien n'est hors programme. Il rend la liste des défauts avec leur chemin (`courses[0].notions[1].exercise.questions[3]`), sans réécrire. L'auteur corrige, puis le script est relancé.
 3. Le fichier est alors importé en brouillon, relu dans l'application par l'équipe, puis publié.
 

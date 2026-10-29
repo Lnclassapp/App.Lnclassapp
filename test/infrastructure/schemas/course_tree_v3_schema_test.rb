@@ -38,9 +38,17 @@ module Schemas
       refute valid?(with_course(notions: Array.new(13) { revision_notion("N#{it}") }))
     end
 
-    test "exercises : exactement quatre" do
-      refute valid?(with_course(exercises: Array.new(3) { revision_exercise("P") }))
-      refute valid?(with_course(exercises: Array.new(5) { revision_exercise("P") }))
+    test "exercises : le nombre est compté par l'adaptateur (lesson_exercise_count), pas par le schéma" do
+      assert valid?(with_course(exercises: Array.new(3) { revision_exercise("P") }))
+      assert valid?(with_course(exercises: Array.new(5) { revision_exercise("P") }))
+      refute valid?(with_course(exercises: "P"))
+    end
+
+    test "exercise d'une notion : absent, null ou liste passent au schéma (essential_exercise_count) ; un objet est vérifié" do
+      assert valid?(with_course(notions: [ revision_notion("N").except("exercise") ]))
+      assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => nil) ]))
+      assert valid?(with_course(notions: [ revision_notion("N").merge("exercise" => []) ]))
+      refute valid?(with_course(notions: [ revision_notion("N").merge("exercise" => { "title" => "T" }) ]))
     end
 
     test "method : 2 à 8 étapes de 300 caractères au plus" do
@@ -56,33 +64,27 @@ module Schemas
       refute valid?(with_course(notions: [ notion.merge("pitfall" => "") ]))
     end
 
-    test "questions : 5 à 30 par exercice, explication de 20 à 2 000 caractères obligatoire" do
+    test "questions : le nombre et la correction sont vérifiés par l'adaptateur (too_few_questions, invalid_count, blank, too_short, too_long)" do
       exercise = revision_exercise("E")
-      refute valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => exercise["questions"].first(4)) }))
-      refute valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => Array.new(31) { revision_question }) }))
+      assert valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => exercise["questions"].first(4)) }))
+      assert valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => Array.new(31) { revision_question }) }))
+      assert valid?(with_course(exercises: Array.new(4) { exercise.except("questions") }))
       no_explanation = exercise["questions"].map { it.except("explanation") }
-      refute valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => no_explanation) }))
+      assert valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => no_explanation) }))
       short = exercise["questions"].map { it.merge("explanation" => "Trop court.") }
-      refute valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => short) }))
+      assert valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => short) }))
+      refute valid?(with_course(exercises: Array.new(4) { exercise.merge("questions" => exercise["questions"].map { it.merge("explanation" => 3) }) }))
     end
 
-    test "figures : 12 au plus, sorte de la liste fermée, description de 150 à 600 caractères, contrôles 4 au plus" do
+    test "figures : 12 au plus ; la forme seulement, le reste est jugé par l'adaptateur (figure_invalid)" do
       refute valid?(with_course(figures: Array.new(13) { revision_figure(key: "f#{it}") }))
-      refute valid?(with_course(figures: [ revision_figure.merge("kind" => "hologram") ]))
-      refute valid?(with_course(figures: [ revision_figure.merge("description" => "courte") ]))
-      refute valid?(with_course(figures: [ revision_figure.merge("description" => "a" * 601) ]))
-      control = { "param" => "a", "min" => 1, "max" => 9, "step" => 1, "label" => "a" }
-      refute valid?(with_course(figures: [ revision_figure.merge("controls" => Array.new(5) { control }) ]))
-    end
-
-    test "figures : paramètres bornés par la sorte" do
+      refute valid?(with_course(figures: [ revision_figure.except("params") ]))
+      refute valid?(with_course(figures: [ revision_figure.merge("params" => "x") ]))
+      refute valid?(with_course(figures: [ revision_figure.merge("extra" => 1) ]))
+      assert valid?(with_course(figures: [ revision_figure.merge("kind" => "hologram") ]))
+      assert valid?(with_course(figures: [ revision_figure.merge("description" => "courte") ]))
       far = revision_figure.merge("params" => { "points" => [ { "id" => "A", "x" => 99, "y" => 0 } ] })
-      refute valid?(with_course(figures: [ far ]))
-      many = revision_figure.merge("params" => { "points" => Array.new(13) { { "id" => "P#{it}", "x" => 0, "y" => 0 } } })
-      refute valid?(with_course(figures: [ many ]))
-      unknown = revision_figure.merge("params" => { "script" => "x" })
-      refute valid?(with_course(figures: [ unknown ]))
-      refute valid?(with_course(figures: [ revision_figure.merge("kind" => "stat_chart", "params" => { "chart" => "radar" }) ]))
+      assert valid?(with_course(figures: [ far ]))
     end
 
     test "figure citée : une chaîne ou null" do

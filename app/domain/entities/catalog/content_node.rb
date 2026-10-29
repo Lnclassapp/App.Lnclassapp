@@ -62,9 +62,13 @@ module Entities
         return errors unless hash.is_a?(Hash)
 
         questions = Array(hash["questions"])
-        if questions.size.between?(1, QUESTIONS_MIN - 1)
+        if questions.size < QUESTIONS_MIN
+          # Aucune question : « trop peu », pas « vide » (la raison de validate_exercise est remplacée).
+          errors = errors.reject { it.path == "#{path}.questions" && it.code == "blank" }
           errors << error("#{path}.questions", "too_few_questions", title: hash["title"].to_s.squish, count: questions.size,
                                                                      min: QUESTIONS_MIN)
+        elsif questions.size > QUESTIONS_MAX
+          errors << error("#{path}.questions", "invalid_count")
         end
         errors + questions.each_with_index.flat_map { |question, index| explanation_errors(question, "#{path}.questions[#{index}]") }
       end
@@ -75,7 +79,7 @@ module Entities
         explanation = question["explanation"].to_s.squish
         key = "#{path}.explanation"
         return [ error(key, "blank") ] if explanation.empty?
-        return [ error(key, "invalid_value", value: explanation) ] if explanation.length < EXPLANATION_RANGE.min
+        return [ error(key, "too_short", min: EXPLANATION_RANGE.min) ] if explanation.length < EXPLANATION_RANGE.min
         return [ error(key, "too_long", max: EXPLANATION_RANGE.max) ] if explanation.length > EXPLANATION_RANGE.max
 
         []
@@ -158,6 +162,7 @@ module Entities
                     criteria_too_many: "criteria", criteria_too_long: "criteria", criteria_blank: "criteria",
                     explanation_required: "explanation" }.freeze
       QUESTIONS_MIN = 5
+      QUESTIONS_MAX = 30
       EXPLANATION_RANGE = (20..2_000)
       STATEMENT_BLOCK_TYPES = StatementBlocks::TYPES
       STATEMENT_BLOCKS_MAX = StatementBlocks::MAX
