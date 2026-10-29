@@ -1,0 +1,21 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_select — choix dans une liste : un menu natif à la place du trou, ou sous la question %>
+<%# Rôle : la phrase coupée sur `___` comme _fill_blank ; propositions dans le mélange de la session, valeur = indice d'affichage (jamais l'id) ; aucune bonne réponse dans la page %>
+<%# ADR  : 0091 §4.4, 0115 · UDR : 0087 §3.4, §3.10, 0140 §3 (select natif, première option vide, aria-label = la phrase avec « blanc ») · sans JavaScript, le menu marche tel quel %>
+<%# locals: (f:, question:, number:, values: {}) -%>
+<% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
+<% before, after = question.content.split(marker, 2) %>
+<% inline = question.content.include?(marker) %>
+<% picked = Array(values[:display_order]).first.to_s %>
+<% field = capture do %>
+  <%= select_tag "#{f.object_name}[display_order][]",
+                 options_for_select(question.answers.map { [ it.content, it.index ] }, (picked.to_i if picked.match?(/\A\d+\z/))),
+                 include_blank: t("assessment.exercise_sessions.kinds.select.choose"), id: "q#{number}-display_order",
+                 "aria-label": question.content.sub(marker, t("assessment.exercise_sessions.kinds.select.blank")),
+                 class: class_names("min-h-tap rounded-ln border-2 border-brand-strong bg-brand-soft px-3 py-1 font-medium text-ink focus:outline-2 focus:outline-offset-2 focus:outline-brand",
+                                    inline ? "mx-1 max-w-full" : "w-full") %>
+<% end %>
+<% if inline %>
+  <div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= before %><%= field %><%= after %></div>
+<% else %>
+  <%= field %>
+<% end %>

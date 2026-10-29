@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/kinds/_numeric — réponse en nombre : un grand champ et le bouton « ± » %>
 <%# Rôle : clavier décimal, virgule acceptée, « ± » pour le moins que le clavier Android n'a pas toujours ; aucune valeur attendue dans la page %>
-<%# ADR  : 0091 §4.3, §4.4, 0112 · UDR : 0087 §3.4, §3.10, 0138 §3.2 · Stimulus : assessment--numeric, une instance par question (sans JavaScript, un champ simple ; le serveur lit la saisie) %>
+<%# ADR  : 0091 §4.3, §4.4, 0112, 0115 (unité) · UDR : 0087 §3.4, §3.10, 0138 §3.2, 0140 §3 (l'unité suit le champ) · Stimulus : assessment--numeric, une instance par question (sans JavaScript, un champ simple ; le serveur lit la saisie) %>
 <%# locals: (f:, question:, number:, values: {}) -%>
 <% scope = "assessment.exercise_sessions.kinds.numeric" %>
 <div class="space-y-2" data-controller="assessment--numeric" data-assessment--numeric-invalid-value="<%= t("#{scope}.invalid") %>">
@@ -9,9 +9,12 @@
     <button type="button" data-action="assessment--numeric#toggleSign" aria-label="<%= t("#{scope}.sign") %>"
             class="grid size-16 shrink-0 cursor-pointer place-items-center rounded-ln border-2 border-line bg-white font-display text-2xl font-medium text-ink hover:bg-mist focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand">±</button>
     <%= f.text_field :response_text, value: values[:response_text], id: "q#{number}-response_text", inputmode: "decimal", autocomplete: "off", spellcheck: false,
-                                     maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX, "aria-describedby": "q#{number}-numeric-hint",
+                                     maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX, "aria-describedby": [ "q#{number}-numeric-hint", ("q#{number}-numeric-unit" if question.unit.present?) ].compact.join(" "),
                                      data: { assessment__numeric_target: "input", action: "input->assessment--numeric#validate" },
                                      class: "h-16 min-w-0 flex-1 rounded-ln border-2 border-line bg-white px-4 font-display text-3xl font-medium text-ink tabular-nums focus:border-brand-strong focus:outline-none" %>
+    <% if question.unit.present? %>
+      <span id="q<%= number %>-numeric-unit" class="flex shrink-0 items-center font-display text-2xl font-medium text-ink"><%= question.unit %></span>
+    <% end %>
   </div>
   <p id="q<%= number %>-numeric-hint" class="text-sm text-mute"><%= t("#{scope}.hint") %></p>
 </div>

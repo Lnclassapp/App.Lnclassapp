@@ -11,7 +11,7 @@ module Entities
         CRITERIA_MAX = 8
         CRITERION_MAX = 150
         INPUT = :response_text
-        INVALID = { response_text: [ :invalid_text ] }.freeze
+        INVALID = { response_text: [ :invalid ] }.freeze
 
         # Corrigé type (le champ explication) obligatoire, aucune proposition, grille de 8 critères de 150 caractères au plus.
         def self.structure_errors(answers:, explanation:, starter: nil, criteria: [], **)
@@ -31,7 +31,7 @@ module Entities
         end
 
         # Du texte UTF-8 sans octet nul (PostgreSQL le refuse), de 2 000 caractères au plus ; le texte vide est permis.
-        # Le texte n'est jamais transformé ni nettoyé : c'est la vue qui l'échappe.
+        # Seuls les espaces de bord et les fins de ligne (\r\n devient \n) sont normalisés avant ce contrôle ; la vue échappe le texte.
         def self.well_formed?(_question, text)
           text.is_a?(String) && text.encoding == Encoding::UTF_8 && text.valid_encoding? && text.length <= TEXT_MAX && !text.include?("\0")
         end

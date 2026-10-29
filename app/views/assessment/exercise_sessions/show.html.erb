@@ -5,17 +5,21 @@
 <% play = @play %>
 <% posted = @posted || {} %>
 <% errors = @copy_errors || {} %>
+<%# UDR-0140 §3 : les points suivent chaque légende, sauf si toutes les questions valent 1 point. %>
+<% weighted = play.questions.any? { it.points != 1 } %>
+<%# Une réponse rédigée ou du cahier ne se compte pas parmi les questions « répondues » : une copie sans elles part sans demande de confirmation. %>
+<% counted = play.questions.count(&:counted?) %>
 <% page_title t(".page_title", title: play.exercise_title) %>
 <% content_for :nav_key, "courses" %>
 <%= ui_back_link play.exercise_title, href: exercise_path(play.exercise_public_id) %>
 <div class="mx-auto w-full max-w-180"
      data-controller="assessment--copy" data-assessment--copy-key-value="lnclass:copy:<%= play.session_public_id %>"
-     data-assessment--copy-total-value="<%= play.question_count %>"
+     data-assessment--copy-total-value="<%= counted %>"
      data-assessment--copy-counter-value="<%= t(".counter", answered: "%{answered}", total: "%{total}") %>"
      data-assessment--copy-missing-one-value="<%= t(".missing", count: 1) %>"
      data-assessment--copy-missing-other-value="<%= t(".missing", count: 2).sub("2", "%{count}") %>">
   <div class="sticky top-0 z-10 flex items-center justify-between gap-3 bg-paper py-3">
-    <p id="copy-counter" class="text-sm font-medium text-ink tabular-nums" aria-live="polite" data-assessment--copy-target="counter"><%= t(".counter", answered: 0, total: play.question_count) %></p>
+    <p id="copy-counter" class="text-sm font-medium text-ink tabular-nums" aria-live="polite" data-assessment--copy-target="counter"><%= t(".counter", answered: 0, total: counted) %></p>
     <a href="#copy-statement" class="inline-flex min-h-tap items-center gap-1.5 text-sm font-medium text-brand underline-offset-2 hover:underline focus-visible:outline-2 focus-visible:outline-brand">
       <%= ui_icon "document-text", variant: :mini, size: :sm %><%= t(".review_statement") %>
     </a>
@@ -49,8 +53,12 @@
       <% play.questions.each do |question| %>
         <% number = question.number %>
         <% problem = errors[number] %>
+        <%# L'énoncé d'un texte à trous, ou d'une liste dont le trou est dans la phrase, est la phrase, qui porte le champ : la légende en est la consigne (UDR-0087 §3.4, 0140 §3). %>
+        <% legend = if question.kind_name == "fill_blank" then t("assessment.exercise_sessions.kinds.fill_blank.legend")
+                    elsif question.kind_name == "select" && question.content.include?(Entities::Assessment::QuestionKinds::FillBlank::MARKER) then t("assessment.exercise_sessions.kinds.select.legend")
+                    else question.content end %>
         <li id="question-<%= number %>">
-          <%= ui_card data: { assessment__copy_target: "question", controller: "math" } do %>
+          <%= ui_card data: { assessment__copy_target: ("question" if question.counted?), controller: "math" }.compact do %>
             <%= fields_for "copy[answers][#{question.id}]" do |f| %>
               <%# UDR-0105 : l'image se lit au-dessus de l'énoncé. %>
               <% if (image = question.image) %>
@@ -61,7 +69,7 @@
                 <legend class="mb-2">
                   <span class="block text-xs font-medium tracking-wide text-mute uppercase"><%= t(".question", number:) %></span>
                   <%# L'énoncé d'un texte à trous est la phrase, qui porte le champ : la légende en est la consigne (UDR-0087 §3.4). %>
-                  <span class="mt-1 block font-display text-xl font-medium text-balance whitespace-pre-line text-ink"><%= question.kind_name == "fill_blank" ? t("assessment.exercise_sessions.kinds.fill_blank.legend") : question.content %></span>
+                  <span class="mt-1 block font-display text-xl font-medium text-balance whitespace-pre-line text-ink"><%= legend %><% if weighted %> <span class="font-body text-base font-normal text-mute"><%= t(".points", count: question.points, points: number_with_precision(question.points, precision: 1, strip_insignificant_zeros: true)) %></span><% end %></span>
                 </legend>
                 <%= render "assessment/exercise_sessions/kinds/#{question.kind_name}", f:, question:, number:,
                            values: (posted[question.id.to_s] || {}).with_indifferent_access %>
