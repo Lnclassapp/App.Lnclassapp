@@ -31,14 +31,15 @@ module Entities
         assert_equal [ 20 * 1024 * 1024, 1_000, 100 ], [ ImportKind::MAX_BYTES, ImportKind::MAX_ERRORS, ImportKind::BATCH_SIZE ]
       end
 
-      # ADR-0113 §4.4 : le format 2 est lu ; le format 1 est toléré (la leçon et ses notions, sans exercices). Les autres types n'ont qu'une version.
-      test "les cours complets lisent le format 2 et tolèrent le format 1" do
+      # ADR-XXXX §4.1 : les leçons complètes ne lisent que le format 3 ; les formats 1 et 2 sont retirés. Les autres types n'ont qu'une version.
+      test "les cours complets ne lisent que le format 3" do
         course_tree = ImportKind.fetch("course_tree")
 
-        assert_equal [ "lnclass.course-tree", 2, [ 1 ] ], [ course_tree.format, course_tree.version, course_tree.legacy_versions ]
-        assert_equal [ true, true, false, false ], [ 2, 1, 3, 0 ].map { course_tree.accepts?(it) }
+        assert_equal [ "lnclass.course-tree", 3, [] ], [ course_tree.format, course_tree.version, course_tree.legacy_versions ]
+        assert_equal [ true, false, false, false ], [ 3, 2, 1, 0 ].map { course_tree.accepts?(it) }
         assert_equal [ true, false ], [ ImportKind.fetch("schools").accepts?(1), ImportKind.fetch("schools").accepts?(2) ]
         assert_equal [ 1 ], (ImportKind::KINDS - %w[course_tree]).map { ImportKind.fetch(it).version }.uniq
+        assert_not ImportKind.const_defined?(:COURSE_TREE_V3)
       end
 
       # ADR-0068 : seuls les cours complets acceptent plusieurs fichiers.
