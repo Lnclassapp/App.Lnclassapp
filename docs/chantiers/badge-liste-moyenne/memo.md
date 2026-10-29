@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré, clos |
 | **Ouvert le** | 2026-10-29 |
 | **Branche** | `fix/badge-liste-moyenne` |
 | **Programme** | — |
@@ -38,6 +38,6 @@ UDR-0134 §3.5, ligne `_roster` : la pastille devient **« Moyenne 15/20 · Or �
 
 - [x] Test rouge puis vert (ligne avec badge, ligne « Pas encore » avec moyenne, ligne sans exercice fait)
 - [x] UDR-0134 amendée
-- [ ] Captures 390 px et ordinateur envoyées au porteur
-- [ ] `bin/ci-quiet` vert, ligne de preuve dans la PR
-- [ ] Vérifié sur Develop après fusion
+- [x] Captures 390 px et ordinateur envoyées au porteur
+- [x] `bin/ci-quiet` vert, ligne de preuve dans la PR
+- [x] Vérifié sur Develop après fusion
