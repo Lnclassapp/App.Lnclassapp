@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::StudentRegistrationsController
 # Rôle : inscription élève publique en trois étapes : classe donnée par son code, par le jeton d'un lien ou choisie dans la cascade ; succès : session, accueil élève
-# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6) · UDR : 0079, 0081, 0135
+# ADR  : 0026, 0028, 0050, 0062, 0085, 0109 (§4.5, §4.6, §4.7) · UDR : 0079, 0081, 0135
 module Classroom
   class StudentRegistrationsController < ApplicationController
     include ClassPicker
@@ -12,12 +12,16 @@ module Classroom
                        classroom_public_id].freeze
 
     allow_unauthenticated_access
-    # Deux plafonds, les deux gardés : ADR code-de-classe §4.5, l'envoi compte dans le même débit que /c/<jeton> et la
+    # ADR-0085 §4.7 : un envoi qui porte un jeton de lien de forme valide compte dans le seul compteur du lien de classe
+    # (60 par minute et par adresse, partagé avec /c/<jeton>) : une classe s'inscrit derrière une seule adresse.
+    rate_limit **Classroom::JoinsController::CLASS_LINK_RATE_LIMIT, only: :create, if: :link_send?, by: -> { request.remote_ip },
+                                                                    with: -> { refuse_too_many_posts }
+    # Sans jeton de lien, deux plafonds, les deux gardés : ADR code-de-classe §4.5, l'envoi compte dans le même débit que la
     # vérification d'un code (10 par minute et par adresse), taper des codes dans l'inscription étant la même devinette ;
     # ADR-0085 §4.6, l'envoi seul est limité à 5 par minute et par adresse. Même réponse « Trop de tentatives » pour les deux.
-    rate_limit **Classroom::JoinsController::LINK_RATE_LIMIT, only: :create, by: -> { request.remote_ip },
+    rate_limit **Classroom::JoinsController::LINK_RATE_LIMIT, only: :create, unless: :link_send?, by: -> { request.remote_ip },
                                                               with: -> { refuse_too_many_posts }
-    rate_limit to: 5, within: 1.minute, only: :create, name: "signup", by: -> { request.remote_ip },
+    rate_limit to: 5, within: 1.minute, only: :create, name: "signup", unless: :link_send?, by: -> { request.remote_ip },
                                                          with: -> { refuse_too_many_posts }
 
     def new
@@ -67,6 +71,16 @@ module Classroom
       @preview = @form.link_token && Queries::Classroom::JoinPreviewQuery.new.link(token: @form.link_token)
       @link_invalid = @form.link_token.present? && @preview.nil?
       render :new, status: :too_many_requests
+    end
+
+    # Le jeton posté, de forme valide (12 hexadécimaux), sans code : l'envoi vient d'un lien de classe (ADR-0085 §4.7).
+    # Avec un code posté, les deux plafonds restent : RegisterStudent retombe sur le code quand le jeton ne résout rien,
+    # et un faux jeton ne doit pas ouvrir la devinette de codes à 60 par minute.
+    def link_send?
+      posted = params.permit(student_registration: %i[link_token join_code])[:student_registration]
+      return false if posted.blank? || posted[:join_code].present?
+
+      Dtos::Classroom::StudentRegistrationInput.normalize_link_token(posted[:link_token]).present?
     end
 
     def form_input
