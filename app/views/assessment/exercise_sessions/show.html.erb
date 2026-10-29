@@ -32,6 +32,10 @@
     <% if play.statement_blocks.present? %>
       <div id="copy-statement-blocks" class="mt-4 space-y-4"><%= render "assessment/statement_blocks/blocks", blocks: play.statement_blocks %></div>
     <% end %>
+    <%# Refonte contenus maths, CA-13 : la figure citée, juste sous le sujet ; aucun emplacement sans figure. %>
+    <% if (figure = play.figure) %>
+      <div id="copy-statement-figure" class="mt-4"><%= render "catalog/figures/figure", figure:, frame: :app %></div>
+    <% end %>
   <% end %>
 
   <%= form_with url: exercise_session_copy_path(play.session_public_id), scope: :copy, method: :post, id: "copy-form",

@@ -43,6 +43,10 @@
       <% if exercise.statement_blocks.present? %>
         <div id="exercise_statement_blocks" class="mt-4 space-y-4"><%= render "assessment/statement_blocks/blocks", blocks: exercise.statement_blocks %></div>
       <% end %>
+      <%# Refonte contenus maths, CA-13 : la figure citée, juste sous le sujet ; aucun emplacement sans figure. %>
+      <% if (figure = @detail.figure) %>
+        <div id="exercise_figure" class="mt-4"><%= render "catalog/figures/figure", figure:, frame: :app %></div>
+      <% end %>
       <ol id="exercise_questions" class="mt-6 list-none space-y-6">
         <% @detail.questions.each_with_index do |question, index| %>
           <% blank = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
