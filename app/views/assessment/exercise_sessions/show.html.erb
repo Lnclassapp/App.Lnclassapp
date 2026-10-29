@@ -28,6 +28,10 @@
   <%= tag.details id: "copy-statement", open: true, class: "mb-6 rounded-card border border-line bg-white p-5 shadow-card", data: { controller: "math" } do %>
     <summary class="min-h-tap cursor-pointer font-display text-lg font-medium"><%= t(".statement") %></summary>
     <div class="mt-3 max-w-prose text-ink"><%= simple_format(play.statement) %></div>
+    <%# ADR-0115 : le sujet en blocs (document encadré, tableau), après le texte. %>
+    <% if play.statement_blocks.present? %>
+      <div id="copy-statement-blocks" class="mt-4 space-y-4"><%= render "assessment/statement_blocks/blocks", blocks: play.statement_blocks %></div>
+    <% end %>
   <% end %>
 
   <%= form_with url: exercise_session_copy_path(play.session_public_id), scope: :copy, method: :post, id: "copy-form",

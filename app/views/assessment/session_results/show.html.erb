@@ -14,7 +14,7 @@
     dans une colonne de 340 px collante à gauche, la correction à droite. %>
 <div id="session_result_layout"
      class="mx-auto grid w-full max-w-180 grid-cols-1 gap-6 lg:max-w-none lg:grid-cols-side-main lg:items-start">
-  <div id="session_result_side" class="grid grid-cols-1 gap-4 lg:sticky lg:top-sticky-below-bar">
+  <div id="session_result_side" class="grid grid-cols-1 gap-4 lg:sticky lg:top-sticky-below-bar <%= "lg:row-span-2" if result.exercise.statement_blocks.present? %>">
     <section id="session_result" aria-labelledby="session_result_title"
              class="rounded-card border border-line bg-white p-5 text-center shadow-card sm:p-6"
              <%= tag.attributes(data: { controller: "assessment--confetti" }) if @owner && tone == :success %>>
@@ -112,8 +112,17 @@
     <%= ui_button t(".back_to_lesson"), href: lesson_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
   </div>
 
+  <%# ADR-0115, CA-25 : le sujet en blocs, rendu au-dessus de la correction pour la lire avec lui. %>
+  <% if result.exercise.statement_blocks.present? %>
+    <section id="session_statement" aria-labelledby="session_statement_title" data-controller="math"
+             class="rounded-card border border-line bg-white p-5 shadow-card sm:p-6 lg:col-start-2">
+      <h2 id="session_statement_title" class="mb-3 font-display text-xl font-medium"><%= t("assessment.exercise_sessions.show.statement") %></h2>
+      <div class="space-y-4"><%= render "assessment/statement_blocks/blocks", blocks: result.exercise.statement_blocks %></div>
+    </section>
+  <% end %>
+
   <%= tag.section id: "session_review", "aria-labelledby": "session_review_title",
-                  class: "rounded-card border border-line bg-white p-5 shadow-card sm:p-6",
+                  class: "rounded-card border border-line bg-white p-5 shadow-card sm:p-6 lg:col-start-2",
                   data: (ui_reveal_data(step: 3) if @owner) do %>
     <div class="mb-2">
       <h2 id="session_review_title" class="font-display text-xl font-medium"><%= t(".review_title") %></h2>

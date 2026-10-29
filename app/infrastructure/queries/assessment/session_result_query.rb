@@ -16,7 +16,8 @@ module Queries
       Points = Data.define(:earned, :graded, :manual, :weighted)
       # trend : Comprehension.trend_for ; les trois notes sur 20, du premier, du meilleur et du dernier score (cette session).
       Progress = Data.define(:trend, :first_grade, :best_grade, :current_grade)
-      ExerciseRow = Data.define(:public_id, :title)
+      # statement_blocks : le sujet en blocs de l'exercice (ADR-0115), nil sans blocs.
+      ExerciseRow = Data.define(:public_id, :title, :statement_blocks)
       GapFacts = Data.define(:id, :status, :source_session_id, :resolved_by_session_id)
       EssentialRow = Data.define(:slug, :name, :course_slug)
       # correct : verdict de la tentative (nil sans tentative) ; unanswered : la question est restée vide à la copie (UDR-0138 §3.4,
@@ -43,14 +44,14 @@ module Queries
 
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id users.first_name
                            users.last_name exercise_sessions.score_percent exercise_sessions.correct_count
-                           exercise_sessions.question_count exercises.id exercises.public_id exercises.title essentials.slug
+                           exercise_sessions.question_count exercises.id exercises.public_id exercises.title exercises.statement_blocks essentials.slug
                            essentials.name courses.slug exercise_sessions.completed_at exercise_sessions.kind
                            exercise_sessions.knowledge_gap_id].freeze
 
       # reveal : décidé en amont par RevealCorrectionPolicy. → Row | nil
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
-          exercise_public_id, title, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id =
+          exercise_public_id, title, statement_blocks, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id =
           Orm::ExerciseSession.joins(:student, exercise: :course)
                               .joins("LEFT OUTER JOIN essentials ON essentials.id = exercises.essential_id")
                               .where(public_id:).pick(*SESSION_COLUMNS)
@@ -58,7 +59,7 @@ module Queries
 
         review = review(id, exercise_id, reveal)
         Row.new(session_public_id: public_id, student_id:, student_name: "#{first_name} #{last_name}",
-                exercise: ExerciseRow.new(public_id: exercise_public_id, title:),
+                exercise: ExerciseRow.new(public_id: exercise_public_id, title:, statement_blocks:),
                 essential: (EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:) if essential_slug), course_slug:,
                 correct_count:, question_count:, **grading(score_percent),
                 earned_now: Orm::ExerciseBadge.exists?(exercise_session_id: id),

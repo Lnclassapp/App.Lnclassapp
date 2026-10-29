@@ -362,6 +362,61 @@ module Entities
         assert_equal SheetDocument::FIGURE_KINDS, defs.dig("block_figure", "properties", "kind", "enum")
         assert_equal CourseSheet::THEMES, json.dig("properties", "theme", "enum")
       end
+
+      # ADR-0115, menace I9 : le sujet d'un exercice, une liste de blocs de fiche (paragraph, box, table), dix au plus.
+      def statement_blocks(count = 1) = Array.new(count) { { "type" => "paragraph", "text" => "Un énoncé" } }
+
+      test "un sujet de dix blocs est accepté, de onze refusé" do
+        assert_empty SheetDocument.statement_errors(statement_blocks(10))
+        assert_equal [ :too_many ], SheetDocument.statement_errors(statement_blocks(11)).map(&:reason)
+      end
+
+      test "un sujet accepte le document encadré et le tableau" do
+        blocks = [ { "type" => "box", "label" => "Voir de près et de loin", "paragraphs" => [ "Un texte." ] },
+                   { "type" => "table", "caption" => "Mesures", "headers" => %w[a b c d], "rows" => [ %w[1 2 3 4], %w[5 6 7 8] ] } ]
+
+        assert_empty SheetDocument.statement_errors(blocks)
+      end
+
+      test "un sujet refuse un type de bloc hors paragraph, box et table" do
+        %w[steps figure media exercise practice writing simple inconnu].each do |type|
+          errors = SheetDocument.statement_errors([ { "type" => type, "text" => "x" } ])
+
+          assert_equal [ :unknown_type ], errors.map(&:reason), type
+          assert_equal 1, errors.first.position
+        end
+      end
+
+      test "un sujet refuse du HTML, un lien et ce qui n'est pas une liste de blocs" do
+        assert_equal [ :html_forbidden ], SheetDocument.statement_errors([ { "type" => "paragraph", "text" => "<script>x</script>" } ]).map(&:reason)
+        assert_equal [ :url_forbidden ], SheetDocument.statement_errors([ { "type" => "paragraph", "text" => "http://x.fr" } ]).map(&:reason)
+        assert_equal [ :wrong_type ], SheetDocument.statement_errors("paragraph").map(&:reason)
+        assert_equal [ :wrong_type ], SheetDocument.statement_errors([ "paragraph" ]).map(&:reason)
+      end
+
+      test "un sujet signale chaque type inconnu à sa position" do
+        errors = SheetDocument.statement_errors([ { "type" => "iframe" }, { "type" => "paragraph", "text" => "x" }, { "type" => "script" } ])
+
+        assert_equal [ :unknown_type, :unknown_type ], errors.map(&:reason)
+        assert_equal [ 1, 3 ], errors.map(&:position)
+      end
+
+      test "un sujet de onze blocs inconnus ne signale que le nombre de blocs" do
+        errors = SheetDocument.statement_errors(Array.new(11) { { "type" => "iframe" } })
+
+        assert_equal [ :too_many ], errors.map(&:reason)
+      end
+
+      test "un type inconnu trop long est tronqué à 40 caractères dans l'erreur" do
+        errors = SheetDocument.statement_errors([ { "type" => "a" * 100 } ])
+
+        assert_equal "a" * 40, errors.first.detail
+      end
+
+      test "un sujet vide ou absent est valide" do
+        assert_empty SheetDocument.statement_errors(nil)
+        assert_empty SheetDocument.statement_errors([])
+      end
     end
   end
 end

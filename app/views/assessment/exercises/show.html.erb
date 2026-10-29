@@ -39,6 +39,10 @@
       <% if exercise.statement.present? %>
         <div id="exercise_statement" class="max-w-prose text-ink"><%= simple_format(exercise.statement) %></div>
       <% end %>
+      <%# ADR-0115 : le sujet en blocs (document encadré, tableau), après le texte. %>
+      <% if exercise.statement_blocks.present? %>
+        <div id="exercise_statement_blocks" class="mt-4 space-y-4"><%= render "assessment/statement_blocks/blocks", blocks: exercise.statement_blocks %></div>
+      <% end %>
       <ol id="exercise_questions" class="mt-6 list-none space-y-6">
         <% @detail.questions.each_with_index do |question, index| %>
           <% blank = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>

@@ -44,18 +44,14 @@ module Entities
         return [] if blocks.nil? || blocks == []
 
         key = "#{path}.statement_blocks"
-        return [ error(key, "schema") ] unless blocks.is_a?(Array) && blocks.size <= STATEMENT_BLOCKS_MAX && blocks.all?(Hash)
-
-        wrong_type = blocks.each_with_index.filter_map do |block, index|
-          next if STATEMENT_BLOCK_TYPES.include?(block["type"])
-
-          error("#{key}[#{index}].type", "invalid_value", value: block["type"].to_s[0, 40])
-        end
-        return wrong_type if wrong_type.any?
-
-        document = { "pages" => [ { "sections" => [ { "title" => "Sujet", "blocks" => blocks } ] } ], "glossary" => {} }
-        SheetDocument.new(document).errors.map do |found|
-          error(found.position ? "#{key}[#{found.position - 1}]" : key, "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
+        SheetDocument.statement_errors(blocks).map do |found|
+          if found.page.nil? && found.position.nil?
+            error(key, "schema")
+          elsif found.page.nil? && found.reason == :unknown_type
+            error("#{key}[#{found.position - 1}].type", "invalid_value", value: found.detail)
+          else
+            error(found.position ? "#{key}[#{found.position - 1}]" : key, "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
+          end
         end
       end
 
@@ -128,8 +124,8 @@ module Entities
                     starter_not_allowed: "starter", starter_too_long: "starter", criteria_not_allowed: "criteria",
                     criteria_too_many: "criteria", criteria_too_long: "criteria", criteria_blank: "criteria",
                     explanation_required: "explanation" }.freeze
-      STATEMENT_BLOCK_TYPES = %w[paragraph box table].freeze
-      STATEMENT_BLOCKS_MAX = 10
+      STATEMENT_BLOCK_TYPES = SheetDocument::STATEMENT_BLOCK_TYPES
+      STATEMENT_BLOCKS_MAX = SheetDocument::STATEMENT_BLOCKS_MAX
 
       def self.structure_errors(hash, answers, path)
         question_type = hash["question_type"]
