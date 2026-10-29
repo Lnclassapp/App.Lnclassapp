@@ -139,9 +139,20 @@ Ordre intra-lot (code) : test rouge → `app/domain/` → `app/infrastructure/` 
                      `app/javascript/lib/figures/stat_chart.js`
                      `app/javascript/lib/figures/solid.js`
                      `test/system/catalog/figure_kinds_test.rb`
+                     *ajoutés après F1* : `app/javascript/lib/figures/geometry.js` (point dérivé : contrainte `{"point":"E","on":"AC","parallel_to":"BC","through":"D"}` — E suit D, rapports de Thalès complets ; étiquettes de longueur qui ne chevauchent pas les noms de points), `app/javascript/lib/figures/number_line.js` (pas de vide entre la droite et le curseur), `test/system/catalog/figure_test.rb`, l'ADR §4.2 (forme de la contrainte dérivée)
 - **Dépend de**    : Lot F1
 - **Test associé** : `test/system/catalog/figure_kinds_test.rb`
 - **Done quand**   : un repère avec vecteur réglable au curseur, un diagramme en bâtons et un circulaire, une pyramide et un cône en perspective cavalière s'affichent et réagissent à leurs curseurs ; captures envoyées
+
+---
+
+## Lot 0 bis — Curseurs vérifiés à l'import (réouverture du Lot 0)
+
+- **Couche**       : domaine + outillage
+- **Fichiers**     : `app/domain/entities/catalog/figure.rb` (`controls[].param` = clé numérique de premier niveau déclarée réglable par la sorte, sinon `figure_invalid`) · `app/domain/entities/catalog/figure_kinds.rb` (clés réglables par sorte) · `test/support/factories/revision_sheet.rb` (geometry sans curseur, point draggable) · `test/domain/entities/catalog/figure_test.rb` · `script/contenus/valider.rb` et `test/script/contenus/valider_test.rb` (l'avertissement devient erreur)
+- **Dépend de**    : Lot A, Lot F1 (séquentiel, après la vague 2)
+- **Test associé** : `test/domain/entities/catalog/figure_test.rb`
+- **Done quand**   : un fichier dont un curseur vise une clé absente ou non réglable est refusé à l'import et par le script, avec la même raison ; la fabrique passe
 
 ---
 
@@ -228,7 +239,7 @@ Ordre intra-lot (code) : test rouge → `app/domain/` → `app/infrastructure/` 
 ```
 Vague 1 : Lot 0                                   → 1 agent (executant-lot, Sonnet), séquentiel
 Vague 2 : Lot A ‖ Lot B ‖ Lot C ‖ Lot D ‖ Lot F1 ‖ Lot V → 6 agents, worktrees isolés
-Vague 3 : Lot F2 ‖ Lot R                          → 2 agents
+Vague 3 : Lot 0 bis, puis Lot F2 ‖ Lot R          → 1 puis 2 agents
 Vague 4 : Lot P1 ‖ Lot P2                         → 2 agents rédacteurs + 1 relecteur IA indépendant par lot
 ```
 
