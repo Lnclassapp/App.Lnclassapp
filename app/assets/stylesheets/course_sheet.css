@@ -371,11 +371,19 @@
 
 .sheet-figure-canvas {
   width: 100%;
+  max-width: 520px; /* sur ordinateur, la figure ne dépasse pas une demi-page : texte et hauteur restent mesurés */
+  margin-inline: auto;
   aspect-ratio: 4 / 3;
 }
 
 .sheet-figure-canvas:empty {
   display: none;
+}
+
+/* Une fois dessinée, la figure prend la hauteur de son dessin : une droite graduée ne laisse pas un grand vide sous elle */
+
+.sheet-figure-canvas:has(svg) {
+  aspect-ratio: auto;
 }
 
 .sheet-figure svg {
@@ -422,6 +430,13 @@
 .sheet-page-body > * {
     min-width: 0;
     overflow-wrap: anywhere;
+  }
+
+  /* La figure prend presque toute la largeur : son cadre s'amincit et déborde sur la marge intérieure, sans couvrir la marge rouge */
+
+  .sheet-figure {
+    padding: 4px;
+    margin-inline: -6px;
   }
 
   .sheet-h1 {

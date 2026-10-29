@@ -23,6 +23,30 @@ class Catalog::FigureKindsSystemTest < ApplicationSystemTestCase
 
   def slider(param, min, max, label) = { "param" => param, "min" => min, "max" => max, "step" => 1, "label" => label }
 
+  def font_px(selector) = page.evaluate_script("document.querySelector('#host #{selector}').getBoundingClientRect().height")
+
+  test "a figure shown narrow on a phone enlarges its text, up to 1.4 times; a wide one keeps it" do
+    mount(figure(kind: "stat_chart", params: { "chart" => "bars", "series" => [ 4, 8 ], "labels" => %w[Lun Mar] }))
+    assert_selector "#host [data-figure-target=canvas][style*='--figure-text: 1.00']", visible: :all
+    wide = font_px("svg text")
+
+    page.execute_script("document.getElementById('host').style.maxWidth = '280px'")
+
+    assert_selector "#host [data-figure-target=canvas][style*='--figure-text: 1.40']", visible: :all
+    assert_operator font_px("svg text"), :>, wide * 0.6, "à 280 px de large, le texte n'est pas réduit dans la même proportion que la figure"
+  end
+
+  test "close labels on a number line take two rows instead of overlapping" do
+    points = [ [ 1.41, "√2" ], [ 1.73, "√3" ], [ 2, "2" ], [ 4, "4" ] ].map { |value, label| { "value" => value, "label" => label } }
+    mount(figure(kind: "number_line", params: { "min" => 0, "max" => 5, "step" => 1, "points" => points }))
+    assert_selector "#host svg [data-point] text", count: 4, visible: :all
+
+    rows = page.evaluate_script("[...document.querySelectorAll('#host svg [data-point] text')].map((t) => Number(t.getAttribute('y')))")
+    assert_equal 4, rows.size
+    assert_equal [ rows[0], rows[2], rows[3] ].uniq.size, 1, "√2, 2 et 4 restent au premier rang"
+    assert_operator rows[1], :<, rows[0], "√3, trop près de √2, monte d'un rang"
+  end
+
   test "a coordinate plane draws a vector and its slider changes the visible window" do
     params = { "xmin" => -5, "xmax" => 5, "ymin" => -5, "ymax" => 5,
                "points" => [ { "id" => "A", "x" => 1, "y" => 1 } ],

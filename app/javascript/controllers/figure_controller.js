@@ -41,6 +41,9 @@ export default class extends Controller {
     } catch (error) {
       return this.fail(error)
     }
+    this.fit()
+    this.resize = new ResizeObserver(() => this.fit())
+    this.resize.observe(this.canvasTarget)
 
     // Une figure dont les points se déplacent expose ses poignées : le cadre n'est plus une image opaque.
     this.canvasTarget.setAttribute("role", this.figure.interactive ? "group" : "img")
@@ -54,6 +57,8 @@ export default class extends Controller {
   }
 
   clear() {
+    this.resize?.disconnect()
+    this.resize = null
     this.figure?.destroy()
     this.figure = null
     this.controlsTarget.replaceChildren()
@@ -68,6 +73,16 @@ export default class extends Controller {
     this.clear()
     this.canvasTarget.replaceChildren()
     this.element.dataset.figureState = "error"
+  }
+
+  // Le texte garde une taille lisible : une figure affichée plus étroite que son viewBox agrandit ses étiquettes, jusqu'à 1,4 fois.
+  fit() {
+    const svg = this.canvasTarget.querySelector("svg")
+    const width = svg?.getBoundingClientRect().width
+    if (!width) return
+
+    const ratio = Math.min(1.4, Math.max(1, svg.viewBox.baseVal.width / width))
+    this.canvasTarget.style.setProperty("--figure-text", ratio.toFixed(2))
   }
 
   // Un curseur par contrôle admis : clé numérique de premier niveau déclarée réglable par la sorte, bornes finies, au plus 4.

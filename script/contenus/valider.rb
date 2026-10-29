@@ -49,6 +49,7 @@ module Contenus
     # Comme l'import : si le schéma refuse la leçon, l'adaptateur ne la lit pas, et le rapport ne contient que les erreurs « schema ».
     def call
       check
+      escapes(@document, "$")
       found = @schema.empty? ? @adapter : @schema
       @reasons = found.map { |path, code, _| [ path, code ] }
       @errors = found.map { |path, code, detail| "#{path} : #{code}#{" — #{detail}" if detail}" }
@@ -56,6 +57,18 @@ module Contenus
     end
 
     private
+
+    # Un \n, \t, \f, \b ou \r du JSON coupe une commande LaTeX (\neq, \times, \frac, \beta, \rho) : le texte reçoit un
+    # caractère de contrôle et la formule est cassée. L'import ne le refuse pas, le script le signale (relecture leçon 2).
+    LATEX_BREAK = /[\x00-\x08\x0b-\x1f]|[\n\t](?=[a-z]{2})/
+
+    def escapes(node, path)
+      case node
+      when Hash then node.each { |key, value| escapes(value, "#{path}.#{key}") }
+      when Array then node.each_with_index { |value, index| escapes(value, "#{path}[#{index}]") }
+      when String then warn_at(path.delete_prefix("$."), "caractère de contrôle : commande LaTeX à doubler (\\\\neq, \\\\frac, \\\\times)") if node.match?(LATEX_BREAK)
+      end
+    end
 
     def check
       return fail_at("format", "format_mismatch", "attendu : lnclass.course-tree version 3") unless @document.is_a?(Hash) && @document["format"] == "lnclass.course-tree"

@@ -176,9 +176,6 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 
 | Fichier | Cours | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|
-| `mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 12 | 63 |
-| `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 4 | 12 | 66 |
-| `mathematiques/racines-carrees.json` | Racines carrées | 4 | 12 | 72 |
 | `physique-chimie/masse-et-poids-d-un-corps.json` | Masse et poids d'un corps | 4 | 12 | 71 |
 | `physique-chimie/les-forces.json` | Les forces | 4 | 12 | 68 |
 | `physique-chimie/equilibre-d-un-solide-soumis-a-deux-forces.json` | Équilibre d'un solide soumis à deux forces | 4 | 12 | 71 |
@@ -196,7 +193,7 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 | `edhc/les-organisations-humanitaires.json` | Les organisations humanitaires | 4 | 12 | 60 |
 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-violences-faites-aux-personnes-vulnerables.json` | Les instruments et les mécanismes de protection contre les violences faites aux personnes vulnérables | 4 | 12 | 72 |
 
-Les 18 fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par fiche. Chacun a passé `script/contenus/valider.rb`, puis une relecture par un second rédacteur, qui a refait les calculs et vérifié les faits. Les défauts trouvés ont été corrigés. Importés ensemble sur une base jetable par la vraie chaîne d'import : **18 cours, 72 fiches, 216 exercices, 1 194 questions, 4 370 propositions, sans erreur**, une fois la matière EDHC créée. Sans elle, les 3 cours d'EDHC sont rejetés (`unknown_material`) et les 15 autres passent. Aucun enseignant ne les a encore relus.
+Les 3 leçons de mathématiques de ce lot ont depuis été réécrites au format 3 (section suivante). Les 15 autres fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par fiche. Chacun a passé `script/contenus/valider.rb`, puis une relecture par un second rédacteur, qui a refait les calculs et vérifié les faits. Les défauts trouvés ont été corrigés. Importés ensemble sur une base jetable par la vraie chaîne d'import : **18 cours, 72 fiches, 216 exercices, 1 194 questions, 4 370 propositions, sans erreur**, une fois la matière EDHC créée. Sans elle, les 3 cours d'EDHC sont rejetés (`unknown_material`) et les 15 autres passent. Aucun enseignant ne les a encore relus.
 
 À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
 
@@ -208,6 +205,25 @@ Les 18 fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par 
 - **Français** : l'opposition et la concession (« bien que », « même si ») dans la leçon 1, convaincre et persuader et « certes… mais » dans la leçon 3. Les actes de parole et le dialogue écrit ne sont pas traités.
 - **Histoire-Géographie** : les « atouts institutionnels » (OHADA, BCEAO, code des investissements), et les dates de la leçon sur l'indépendance (loi-cadre de 1956, référendum de 1958, indépendance du 7 août 1960, présidence fin 1960). L'AOF et les traités de protectorat sont cités sans date.
 - **EDHC** : aucun article de loi, aucune date, aucun numéro d'urgence. Les noms des conventions et chartes citées (femmes, personnes handicapées, enfant, Protocole de Maputo) sont écrits de mémoire, et la ratification par la Côte d'Ivoire n'est pas affirmée. La matière EDHC n'existe pas dans le référentiel : il faut la créer avant d'importer les 3 cours.
+
+### 3ème, mathématiques au format 3 — le pilote (chantier `refonte-contenus-maths`)
+
+Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un exercice. La leçon a en plus 4 problèmes de 5 questions ou plus.
+
+| # | Fichier | Cours | Notions | Figures | Exercices | Questions |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 0 | 8 | 54 |
+| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 2 | 7 | 40 |
+| 3 | `mathematiques/racines-carrees.json` | Racines carrées | 6 | 2 | 10 | 52 |
+| 4 | `mathematiques/triangle-rectangle.json` | Triangle rectangle | 4 | 5 | 8 | 46 |
+| 5 | `mathematiques/calcul-numerique.json` | Calcul numérique | 4 | 1 | 8 | 41 |
+| 6 | `mathematiques/angles-inscrits.json` | Angles inscrits | 4 | 6 | 8 | 48 |
+| 7 | `mathematiques/vecteurs.json` | Vecteurs | 4 | 7 | 8 | 40 |
+| 8 | `mathematiques/equations-et-inequations-dans-r.json` | Équations et inéquations dans ℝ | 4 | 3 | 8 | 45 |
+| 9 | `mathematiques/pyramides-et-cones.json` | Pyramides et cônes | 4 | 4 | 8 | 40 |
+| 10 | `mathematiques/statistique.json` | Statistique | 5 | 4 | 9 | 49 |
+
+Au total : 42 notions, 34 figures, 82 exercices et 455 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
 
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 

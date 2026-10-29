@@ -26,6 +26,14 @@ class ContenusValiderTest < ActiveSupport::TestCase
     assert_empty result.reasons
   end
 
+  test "avertit d'une commande LaTeX coupée par un échappement JSON (\\neq écrit \\n + eq)" do
+    document = mutated { |course| course["notions"][0]["pitfall"] = "On a $a \neq b$ et $\frac{1}{2}$." }
+
+    warnings = check(document).warnings
+
+    assert(warnings.any? { it.include?("notions[0].pitfall") && it.include?("LaTeX") }, warnings.inspect)
+  end
+
   test "refuse les formats v1 et v2 en format_retired" do
     [ 1, 2 ].each do |version|
       assert_refused revision_sheet_document.merge("version" => version), "format_retired"

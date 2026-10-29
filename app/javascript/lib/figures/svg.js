@@ -41,6 +41,8 @@ export function root(width, height) {
 export function label(parent, x, y, text, { anchor = "middle", tone = "ink", size = 13 } = {}) {
   const node = el("text", { x: round(x), y: round(y), "text-anchor": anchor, "font-size": size, fill: tone, text }, parent)
   node.style.paintOrder = "stroke"
+  // Le contrôleur agrandit le texte quand la figure est affichée petite (téléphone) : --figure-text, de 1 à 1,4.
+  node.style.fontSize = `calc(${size}px * var(--figure-text, 1))`
   node.style.stroke = COLOR.paper
   node.style.strokeWidth = "3px"
   node.style.fontFamily = "inherit"
