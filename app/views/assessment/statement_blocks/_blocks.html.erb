@@ -1,0 +1,42 @@
+<%# 🌐 UI · assessment/statement_blocks/_blocks — le sujet d'un exercice en blocs : paragraphe, document encadré, tableau %>
+<%# Rôle : `blocks` (liste de Hash lue de exercises.statement_blocks) ; texte toujours échappé (sheet_text, jamais raw), type inconnu ignoré, tableau qui défile seul à 390 px %>
+<%# ADR  : 0115 (menace I9) · UDR : 0140 §3 %>
+<% tones = { "property" => "border-brand", "remember" => "border-success", "method" => "border-team" } %>
+<% allowed = Entities::Catalog::SheetDocument::STATEMENT_BLOCK_TYPES %>
+<% Array(blocks).each do |block| %>
+  <% next unless block.is_a?(Hash) && allowed.include?(block["type"]) %>
+  <% case block["type"] %>
+  <% when "paragraph" %>
+    <p class="max-w-prose text-ink"><%= sheet_text(block["text"]) %></p>
+  <% when "box" %>
+    <%# Le document encadré : son étiquette porte le titre. %>
+    <div class="rounded-card border-2 bg-white p-4 <%= tones.fetch(block["tone"].to_s, tones["property"]) %>" data-statement-block="box">
+      <p class="mb-2 font-display text-base font-medium text-ink"><%= block["label"] %></p>
+      <div class="max-w-prose space-y-2 text-ink">
+        <% Array(block["paragraphs"]).each do |paragraph| %>
+          <p><%= sheet_text(paragraph) %></p>
+        <% end %>
+      </div>
+    </div>
+  <% when "table" %>
+    <% headers = Array(block["headers"]) %>
+    <%# Le tableau défile dans son conteneur, jamais la page (UDR-0140 §3) ; focalisable pour défiler au clavier. %>
+    <div class="overflow-x-auto rounded-card border border-line" tabindex="0" role="region" aria-label="<%= block["caption"].presence || t("assessment.exercise_sessions.show.statement") %>" data-statement-block="table">
+      <table class="min-w-full border-collapse bg-white text-left text-sm">
+        <% if block["caption"].present? %><caption class="px-3 py-2 text-left font-medium text-ink"><%= block["caption"] %></caption><% end %>
+        <thead class="bg-mist">
+          <tr>
+            <% headers.each do |header| %><th scope="col" class="border-b border-line px-3 py-2 font-medium text-ink"><%= header %></th><% end %>
+          </tr>
+        </thead>
+        <tbody>
+          <% Array(block["rows"]).each do |row| %>
+            <tr class="border-t border-line">
+              <% Array(row).each do |cell| %><td class="px-3 py-2 text-ink"><%= sheet_text(cell) %></td><% end %>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% end %>
+<% end %>

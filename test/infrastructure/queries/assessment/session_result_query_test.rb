@@ -23,6 +23,15 @@ module Queries
 
       def result(reveal: false, session: @session) = SessionResultQuery.new.call(public_id: session.public_id, reveal:)
 
+      test "le sujet en blocs de l'exercice est exposé (CA-25), nil sans blocs" do
+        assert_nil result.exercise.statement_blocks
+
+        blocks = [ { "type" => "table", "headers" => %w[a b], "rows" => [ %w[1 2] ] } ]
+        @exercise.update!(statement_blocks: blocks)
+
+        assert_equal blocks, result.exercise.statement_blocks
+      end
+
       # Chaque session est terminée une minute après la précédente : l'ordre de completed_at est celui de création.
       def history(*scores, student: @student, **attributes)
         scores.map do |score_percent|

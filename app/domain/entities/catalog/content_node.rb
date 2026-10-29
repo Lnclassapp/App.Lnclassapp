@@ -128,8 +128,8 @@ module Entities
                     starter_not_allowed: "starter", starter_too_long: "starter", criteria_not_allowed: "criteria",
                     criteria_too_many: "criteria", criteria_too_long: "criteria", criteria_blank: "criteria",
                     explanation_required: "explanation" }.freeze
-      STATEMENT_BLOCK_TYPES = %w[paragraph box table].freeze
-      STATEMENT_BLOCKS_MAX = 10
+      STATEMENT_BLOCK_TYPES = SheetDocument::STATEMENT_BLOCK_TYPES
+      STATEMENT_BLOCKS_MAX = SheetDocument::STATEMENT_BLOCKS_MAX
 
       def self.structure_errors(hash, answers, path)
         question_type = hash["question_type"]

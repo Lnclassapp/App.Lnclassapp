@@ -19,6 +19,10 @@ module Entities
       BOX_TONES = %w[property remember method].freeze
       INPUTS = %w[numeric choice].freeze
 
+      # Le sujet d'un exercice (ADR-0115) : des blocs de fiche, mais ces trois types seulement, dix au plus.
+      STATEMENT_BLOCK_TYPES = %w[paragraph box table].freeze
+      STATEMENT_BLOCKS_MAX = 10
+
       SIZE_MAX = 1024 * 1024
       PAGES_MAX = 10
       SECTIONS_MAX = 12
@@ -51,6 +55,27 @@ module Entities
       MARK = /\A([a-z0-9_]{1,40})\|([^\[\]|]{1,60})\z/
       # Aucun lien sortant ni ressource distante (menace de l'ADR). « (MN) // (BC) » s'écrit librement : seul « :// » est un schéma.
       URL = %r{://|www\.|mailto:|javascript:|data:}i
+
+      # Menace I9 : les blocs du sujet d'un exercice se lisent comme un fichier hostile, avec les règles des fiches (texte sans HTML ni
+      # lien, tailles). Aucun lexique : une marque [[clé|texte]] n'a pas de sens dans un sujet. nil ou [] : pas de sujet en blocs. → [Error]
+      def self.statement_errors(blocks)
+        return [] if blocks.nil? || blocks == []
+        return [ statement_error(:wrong_type) ] unless blocks.is_a?(Array) && blocks.all?(Hash)
+        return [ statement_error(:too_many) ] if blocks.size > STATEMENT_BLOCKS_MAX
+
+        unknown = blocks.each_with_index.filter_map do |block, index|
+          type = block["type"] || block[:type]
+          statement_error(:unknown_type, type.to_s[0, 40], index + 1) unless STATEMENT_BLOCK_TYPES.include?(type)
+        end
+        return unknown if unknown.any?
+
+        new({ "pages" => [ { "sections" => [ { "title" => "Sujet", "blocks" => blocks } ] } ], "glossary" => {} }).errors
+      end
+
+      def self.statement_error(reason, detail = "statement_blocks", position = nil)
+        Error.new(page: nil, section: nil, position:, reason:, detail:)
+      end
+      private_class_method :statement_error
 
       def initialize(document)
         @document = deep_stringify(document)
