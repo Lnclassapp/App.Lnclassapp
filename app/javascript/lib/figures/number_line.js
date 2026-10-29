@@ -5,9 +5,9 @@
 import { el, root, label, fixed, round, clamp } from "./svg"
 
 const WIDTH = 440
-const HEIGHT = 130
+const HEIGHT = 88
 const MARGIN = 28
-const AXIS_Y = 78
+const AXIS_Y = 52
 const MAX_TICKS = 200
 const MAX_LABELS = 11
 const LIMITS = { points: 12, intervals: 6 }

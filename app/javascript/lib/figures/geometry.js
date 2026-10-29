@@ -6,6 +6,7 @@
 //   point       { id, x, y, label?, draggable? }       segment, droite  [id, id]       cercle  { center, r }
 //   angle       { vertex, from, to, mark: "right" | "arc" }                             longueur  { from, to, text }
 //   contrainte  { point, on: "AB" } : le point reste sur le segment dont « AB » colle les deux identifiants
+//   point dérivé  { point, on: "AC", parallel_to: "BC", through: "D" } : le point est l'intersection de (AC) et de la parallèle à (BC) passant par D (Thalès), recalculée quand D bouge
 
 import { el, root, label, fixed, round, clamp, hitRadius } from "./svg"
 
@@ -70,8 +71,12 @@ export function create(canvas, params, hooks = {}) {
     model.points.forEach((point) => {
       at[point.id] = moved.get(point.id) ?? { x: point.x, y: point.y }
     })
-    model.constraints.forEach((rule) => {
+    model.constraints.filter((rule) => !derived(rule)).forEach((rule) => {
       if (at[rule?.point] && draggableIds().has(rule.point)) at[rule.point] = constrain(at[rule.point], rule, at)
+    })
+    model.constraints.filter(derived).forEach((rule) => {
+      const spot = parallelPoint(rule, at)
+      if (at[rule.point] && spot) at[rule.point] = spot
     })
     return at
   }
@@ -84,6 +89,22 @@ export function create(canvas, params, hooks = {}) {
       if (valid(at[a]) && valid(at[b])) return [at[a], at[b]]
     }
     return null
+  }
+
+  const derived = (rule) => typeof rule?.parallel_to === "string" && typeof rule?.through === "string"
+
+  // L'intersection de la droite « on » et de la parallèle à « parallel_to » passant par « through » ; null si elles sont parallèles.
+  function parallelPoint(rule, at) {
+    const [line, guide, through] = [ends(rule.on, at), ends(rule.parallel_to, at), at[rule.through]]
+    if (!line || !guide || !valid(through)) return null
+
+    const [d, v] = [sub(line[1], line[0]), sub(guide[1], guide[0])]
+    const det = d.x * v.y - d.y * v.x
+    if (Math.abs(det) < 1e-9) return null
+
+    const w = sub(through, line[0])
+    const k = (w.x * v.y - w.y * v.x) / det
+    return { x: line[0].x + k * d.x, y: line[0].y + k * d.y }
   }
 
   function constrain(point, rule, at) {
@@ -125,6 +146,15 @@ export function create(canvas, params, hooks = {}) {
       const all = Object.values(at)
       return { x: all.reduce((s, p) => s + px(p.x), 0) / all.length, y: all.reduce((s, p) => s + py(p.y), 0) / all.length }
     })()
+    // Le sens dans lequel un nom de point s'écarte de la figure (unitaire).
+    const awayOf = (id) => {
+      const p = P(id)
+      if (!p) return { x: 0, y: 0 }
+
+      const away = { x: p.x - centroid.x, y: p.y - centroid.y }
+      const norm = Math.hypot(away.x, away.y) || 1
+      return { x: away.x / norm, y: away.y / norm }
+    }
 
     model.circles.forEach((circle) => {
       const c = P(circle?.center)
@@ -149,16 +179,15 @@ export function create(canvas, params, hooks = {}) {
       const p = P(point.id)
       if (!p) return
 
-      const away = { x: p.x - centroid.x, y: p.y - centroid.y }
-      const norm = Math.hypot(away.x, away.y) || 1
+      const away = awayOf(point.id)
       const name = typeof point.label === "string" && point.label ? point.label : point.id
       const spot = el("g", {}, next)
       el("circle", { cx: round(p.x), cy: round(p.y), r: handles.has(point.id) ? 6.5 : 4, fill: handles.has(point.id) ? "accent" : "ink", stroke: "paper", "stroke-width": 1.5, "data-dot": point.id }, spot)
-      label(spot, p.x + (16 * away.x) / norm, p.y + (16 * away.y) / norm + 4, name, { size: 15 })
+      label(spot, p.x + 16 * away.x, p.y + 16 * away.y + 4, name, { size: 15 }).setAttribute("data-name", point.id)
       if (handles.has(point.id)) drawHandle(spot, point, at[point.id], p, rendered)
     })
 
-    drawMeasures(next, at, { px, py })
+    drawMeasures(next, at, { px, py, awayOf })
     if (drag) svg.querySelector(`[data-point="${CSS.escape(drag)}"]`)?.focus({ preventScroll: true })
   }
 
@@ -217,10 +246,19 @@ export function create(canvas, params, hooks = {}) {
   }
 
   // Le texte de l'étiquette, posé au milieu de son segment ; les mesures, dans la bande du haut.
-  function drawMeasures(parent, at, { px, py }) {
+  // Le texte de l'étiquette est décalé perpendiculairement au segment, du côté opposé aux noms de ses extrémités : il ne les recouvre pas.
+  function drawMeasures(parent, at, { px, py, awayOf }) {
     model.labels.forEach((item) => {
       const [a, b] = [at[item?.from], at[item?.to]]
-      if (valid(a) && valid(b) && typeof item.text === "string" && item.text) label(parent, px((a.x + b.x) / 2), py((a.y + b.y) / 2) + 16, item.text, { tone: "muted", size: 12 })
+      if (!valid(a) || !valid(b) || typeof item.text !== "string" || !item.text) return
+
+      const [dx, dy] = [px(b.x) - px(a.x), py(b.y) - py(a.y)]
+      const norm = Math.hypot(dx, dy) || 1
+      let normal = { x: -dy / norm, y: dx / norm }
+      const [from, to] = [awayOf(item.from), awayOf(item.to)]
+      if (normal.x * (from.x + to.x) + normal.y * (from.y + to.y) > 0) normal = { x: -normal.x, y: -normal.y }
+      const [mx, my] = [px((a.x + b.x) / 2) + 14 * normal.x, py((a.y + b.y) / 2) + 14 * normal.y]
+      label(parent, mx, my + 4, item.text, { tone: "muted", size: 12 }).setAttribute("data-length", `${item.from}${item.to}`)
     })
     lines(at).forEach((text, index) => label(parent, 10, 22 + index * 20, text, { anchor: "start", tone: "primary", size: 14 }))
   }
