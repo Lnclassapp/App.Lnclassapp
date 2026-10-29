@@ -130,6 +130,36 @@ module Entities
         assert_not_predicate RevisionPreview.for_sheet([]), :cut?
         assert_not_predicate RevisionPreview.for_texts([]), :cut?
       end
+
+      def notion_sheet(remember: "un", steps: %w[a b], statement: "x", example_steps: %w[c d], pitfall: "p", figure: nil)
+        NotionSheet.new(remember:, method_steps: steps, example_statement: statement, example_steps:, pitfall:, figure_key: figure)
+      end
+
+      test "notions: the blocks of the template are counted in reading order, a formula is one word, a figure none" do
+        sheet = notion_sheet(remember: "Pour $a$ et $b$ positifs", steps: [ words(2), words(3) ], statement: words(4), example_steps: [ words(1), words(1) ],
+                             pitfall: words(5), figure: "f")
+        preview = RevisionPreview.for_notions([ sheet ])
+
+        assert_equal 5 + 5 + 4 + 2 + 5, preview.total
+      end
+
+      test "notions: the cut falls after the first block that reaches 150 words and the rest is keyed by notion and block" do
+        long = notion_sheet(remember: words(100), steps: [ words(30), words(30) ], figure: "f")
+        other = notion_sheet(remember: words(10))
+        preview = RevisionPreview.for_notions([ long, other ])
+
+        assert_predicate preview, :cut?
+        assert_not preview.rest?(0, RevisionPreview::REMEMBER)
+        assert_not preview.rest?(0, RevisionPreview::METHOD), "le bloc qui passe le seuil reste entier"
+        assert preview.rest?(0, RevisionPreview::FIGURE)
+        assert preview.rest?(0, RevisionPreview::EXAMPLE)
+        assert preview.rest?(0, RevisionPreview::PITFALL)
+        assert preview.rest?(1), "la notion entière après la coupe"
+      end
+
+      test "notions: a short lesson has no cut" do
+        assert_not_predicate RevisionPreview.for_notions([ notion_sheet, notion_sheet ]), :cut?
+      end
     end
   end
 end
