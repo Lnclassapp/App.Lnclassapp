@@ -841,7 +841,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
 
   # La fiche de révision est du texte brut (ADR-XXXX fiche de révision) : ce qu'un bloc contient d'exécutable est échappé.
   test "the revision sheet escapes its text: no script tag, no event attribute, no javascript link" do
-    create_essential(course: @course, name: "Notion piégée", content: "", sheet: notion_sheet(
+    create_essential(course: @course, name: "Notion piégée", sheet: notion_sheet(
       "<p onclick=\"alert(1)\">Texte</p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
     ))
     sign_in_as create_student_for(@course)

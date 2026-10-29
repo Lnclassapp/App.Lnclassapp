@@ -35,7 +35,6 @@ module Repositories
 
         essentials += courses.flat_map { |course| course.essentials.map { |node| node.with(course_id: course_ids.fetch(course.slug)) } }
         essential_ids = ids_by(insert(Orm::Essential, essentials.map { |node| essential_row(node) }), "slug")
-        write_rich_texts("Orm::Essential", essentials, essential_ids)
 
         # Les notions v3 (fiche en jsonb) sont des lignes de la même table ; leurs exercices suivent ceux des fiches.
         notions = courses.flat_map { |course| course.notions.map { |node| node.with(course_id: course_ids.fetch(course.slug)) } }
@@ -130,8 +129,6 @@ module Repositories
         Orm::Question.where(id: question_ids).delete_all
         Orm::Exercise.where(id: exercise_ids).delete_all
         Orm::EssentialRead.where(essential_id: essential_ids).delete_all
-        Orm::EssentialImage.where(essential_id: essential_ids).find_each(&:destroy)
-        Orm::RichTextRow.where(record_type: "Orm::Essential", record_id: essential_ids).delete_all
         Orm::Essential.where(id: essential_ids).delete_all
       end
 

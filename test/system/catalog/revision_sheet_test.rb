@@ -13,7 +13,7 @@ class Catalog::RevisionSheetSystemTest < ApplicationSystemTestCase
     long = revision_notion("Notion longue").merge("remember" => Array.new(160) { "mot" }.join(" "))
     [ long, revision_notion("Seconde notion") ].each do |notion|
       sheet = { "remember" => notion["remember"], "method" => notion["method"], "example" => notion["example"], "pitfall" => notion["pitfall"] }
-      create_essential(course: @course, name: notion["name"], content: "", sheet:)
+      create_essential(course: @course, name: notion["name"], sheet:)
     end
   end
 

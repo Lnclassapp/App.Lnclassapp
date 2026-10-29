@@ -5,24 +5,6 @@ module Entities
   module Catalog
     module ContentNode
       # Clés JSON (chaînes) de l'ancienne application ; la clé status est ignorée : tout naît draft.
-      def self.validate_course(hash, path:, lookup:)
-        return [ error(path, "schema") ] unless hash.is_a?(Hash)
-
-        text(hash, "name", Course::NAME_MAX, path) +
-          text(hash, "subtitle", Course::SUBTITLE_MAX, path, required: false) +
-          taxonomy(hash, path, lookup) +
-          children(hash, "essentials", path) { |essential, child_path| validate_essential(essential, path: child_path) }
-      end
-
-      def self.validate_essential(hash, path:)
-        return [ error(path, "schema") ] unless hash.is_a?(Hash)
-
-        text(hash, "name", Essential::NAME_MAX, path) +
-          text(hash, "subtitle", Essential::SUBTITLE_MAX, path, required: false) +
-          image_slot_errors(hash["content"], path) +
-          children(hash, "exercises", path) { |exercise, child_path| validate_exercise(exercise, path: child_path) }
-      end
-
       def self.validate_exercise(hash, path:)
         return [ error(path, "schema") ] unless hash.is_a?(Hash)
 
@@ -99,20 +81,17 @@ module Entities
         []
       end
 
-      # ADR-0115, menace I9 : le sujet en blocs est lu comme un fichier hostile avant d'être écrit. Dix blocs au plus, de types
-      # paragraph, box et table ; chaque bloc passe par les règles des fiches (SheetDocument : texte sans HTML ni lien, tailles).
-      # Aucun lexique : une marque [[clé|texte]] n'a pas de sens dans un sujet. Une liste vide vaut l'absence de blocs.
+      # ADR-0115, menace I9 : le sujet en blocs est lu comme un fichier hostile avant d'être écrit (StatementBlocks : dix blocs au
+      # plus, de types paragraph, box et table, texte sans HTML ni lien). Une liste vide vaut l'absence de blocs.
       def self.statement_blocks_errors(blocks, path)
-        return [] if blocks.nil? || blocks == []
-
         key = "#{path}.statement_blocks"
-        SheetDocument.statement_errors(blocks).map do |found|
-          if found.page.nil? && found.position.nil?
+        StatementBlocks.errors(blocks).map do |found|
+          if found.position.nil?
             error(key, "schema")
-          elsif found.page.nil? && found.reason == :unknown_type
+          elsif found.reason == :unknown_type
             error("#{key}[#{found.position - 1}].type", "invalid_value", value: found.detail)
           else
-            error(found.position ? "#{key}[#{found.position - 1}]" : key, "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
+            error("#{key}[#{found.position - 1}]", "invalid_value", value: [ found.reason, found.detail ].compact.join(" : "))
           end
         end
       end
@@ -156,14 +135,6 @@ module Entities
         text(image, "description", nil, "#{path}.image")
       end
 
-      # ADR-0105 §4.3 : un « [[image: » que le motif ne reconnaît pas ne serait jamais compté ; l'élève le lirait tel quel.
-      def self.image_slot_errors(content, path)
-        malformed = ImageSlot.malformed_count(content)
-        malformed.positive? ? [ error("#{path}.content", "image_slot_malformed", count: malformed) ] : []
-      rescue ImageSlot::Unreadable
-        [ error("#{path}.content", "image_slots_unreadable") ]
-      end
-
       # ADR-0091 §4.5 : tolerance n'a de sens que pour un nombre, match que pour relier ; ailleurs, une clé ignorée
       # tromperait l'équipe : elle est refusée à sa place.
       def self.misplaced_keys(hash, raw_answers, path)
@@ -188,8 +159,8 @@ module Entities
                     explanation_required: "explanation" }.freeze
       QUESTIONS_MIN = 5
       EXPLANATION_RANGE = (20..2_000)
-      STATEMENT_BLOCK_TYPES = SheetDocument::STATEMENT_BLOCK_TYPES
-      STATEMENT_BLOCKS_MAX = SheetDocument::STATEMENT_BLOCKS_MAX
+      STATEMENT_BLOCK_TYPES = StatementBlocks::TYPES
+      STATEMENT_BLOCKS_MAX = StatementBlocks::MAX
 
       def self.structure_errors(hash, answers, path)
         question_type = hash["question_type"]
@@ -241,7 +212,7 @@ module Entities
 
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
-      private_class_method :question_errors, :typing_errors, :statement_blocks_errors, :misplaced_keys, :structure_errors, :image_errors, :image_slot_errors, :taxonomy,
+      private_class_method :question_errors, :typing_errors, :statement_blocks_errors, :misplaced_keys, :structure_errors, :image_errors, :taxonomy,
                            :series_errors, :text, :children, :error, :explanation_errors
     end
   end

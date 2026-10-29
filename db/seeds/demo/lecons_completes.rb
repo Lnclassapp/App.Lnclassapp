@@ -20,9 +20,10 @@ course_for = lambda do |course|
              .find_by(name: course["name"], levels: { name: course["level_name"] }, materials: { name: course["material_name"] },
                       series: { name: course["series_name"] })
 end
-lessons = LESSON_PATHS.map do |path|
+# Seules les leçons au format 3 s'importent ; les autres attendent leur conversion (lot P2 de refonte-contenus-maths).
+lessons = LESSON_PATHS.filter_map do |path|
   document = JSON.parse(path.read)
-  [ path, document, document["courses"].first ]
+  [ path, document, document["courses"].first ] if document["version"] == Entities::Catalog::ImportKind::COURSE_TREE_VERSION
 end
 missing = lessons.reject { |_path, _document, course| course_for.(course) }
 

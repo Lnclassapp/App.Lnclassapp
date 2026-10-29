@@ -1,11 +1,9 @@
-# Images des fiches de révision et des questions (chantier images-dans-les-cours) — ADR-0105, UDR-0129. Toutes les clés des lots A à D.
+# Images des questions (chantier images-dans-les-cours) — ADR-0105, UDR-0129. Les images de fiches de révision sont retirées (ADR-XXXX §4.5).
 fr:
   activemodel:
     attributes:
       dtos/shared/content_image_input:
         file: "Image"
-      dtos/catalog/essential_input:
-        image_alts: "Textes de remplacement"
     errors:
       models:
         # Mêmes raisons côté serveur et côté navigateur (UDR-0129 §3.1, image_messages).
@@ -18,23 +16,7 @@ fr:
               too_large: "L'image dépasse %{count} pixels de côté."
               unreadable: "Ce fichier n'est pas une image lisible."
               too_many: "%{count} images au plus par fiche de révision."
-        dtos/catalog/essential_input:
-          image_alt_blank: "Saisissez le texte de remplacement de l'image %{number} : il est obligatoire pour publier."
   teams:
-    essentials:
-      transition:
-        image_slots_unreadable: "Le texte de cette fiche de révision est trop complexe à relire : simplifiez la mise en forme (listes, blocs imbriqués), puis réessayez."
-        image_slots_malformed:
-          one: "Un emplacement d'image de cette fiche de révision est mal écrit : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-le ou retirez-le avant de publier."
-          other: "%{count} emplacements d'image de cette fiche de révision sont mal écrits : « [[image: description]] » doit être seul dans son paragraphe, avec une description de 150 caractères au plus. Corrigez-les ou retirez-les avant de publier."
-        image_slots_left:
-          one: "Il reste 1 image à insérer dans cette fiche de révision."
-          other: "Il reste %{count} images à insérer dans cette fiche de révision."
-        image_alts_blank: "Une image de cette fiche de révision n'a pas de texte de remplacement : complétez-le avant de publier."
-    courses:
-      transition:
-        essential_unreadable: "Le texte de la fiche de révision « %{name} » est trop complexe à relire : simplifiez sa mise en forme. Rien n'a été publié."
-        essential_not_ready: "La fiche de révision « %{name} » n'est pas prête : il lui manque une image ou un texte de remplacement. Rien n'a été publié."
     exercises:
       question_fields:
         image_messages:

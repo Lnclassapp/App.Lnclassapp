@@ -16,7 +16,7 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
   def add_notion(notion, **attributes)
     sheet = { "remember" => notion["remember"], "method" => notion["method"], "example" => notion["example"],
               "pitfall" => notion["pitfall"], "figure_key" => notion["figure"] }
-    create_essential(course: @course, name: notion["name"], content: "", sheet:, **attributes)
+    create_essential(course: @course, name: notion["name"], sheet:, **attributes)
   end
 
   def open_course(user = @student)
@@ -121,7 +121,7 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
   end
 
   test "a lesson without any notion sheet (old content) says the sheet is coming" do
-    create_essential(course: @course, name: "Ancienne", content: "<p>Texte libre.</p>")
+    create_essential(course: @course, name: "Ancienne")
 
     open_course
 
@@ -143,7 +143,7 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
   test "CA-14: a draft lesson answers 404 to a student and to a teacher" do
     draft = create_course(name: "Brouillon", status: "draft", figures: [ revision_figure ])
     sheet = { "remember" => "r", "method" => %w[a b], "example" => { "statement" => "s", "steps" => %w[c d] }, "pitfall" => "p" }
-    create_essential(course: draft, name: "N", content: "", sheet:)
+    create_essential(course: draft, name: "N", sheet:)
 
     [ create_student_for(draft), create_teacher ].each do |user|
       sign_in_as user

@@ -23,58 +23,6 @@ module Entities
 
       def codes(errors) = errors.map { [ it.path, it.code ] }
 
-      test "un cours complet de l'ancienne application est valide, statut ignoré" do
-        assert_empty ContentNode.validate_course(course, path: "courses[0]", lookup: @lookup)
-        assert_empty ContentNode.validate_course(course("series_name" => nil, "level_name" => "3ème"), path: "c", lookup: @lookup)
-      end
-
-      test "référentiel : niveau, matière, série inconnus ou non liés" do
-        errors = ContentNode.validate_course(course("level_name" => "Terminale", "material_name" => "Chimie",
-                                                    "series_name" => "B"), path: "courses[3]", lookup: @lookup)
-
-        assert_equal [ [ "courses[3].level_name", "unknown_level" ], [ "courses[3].material_name", "unknown_material" ],
-                       [ "courses[3].series_name", "unknown_series" ] ], codes(errors)
-        assert_equal({ value: "Terminale" }, errors.first.params)
-        assert_equal [ [ "c.series_name", "series_not_allowed" ] ],
-                     codes(ContentNode.validate_course(course("series_name" => "A"), path: "c", lookup: @lookup))
-        assert_equal [ [ "c.level_name", "unknown_level" ] ],
-                     codes(ContentNode.validate_course(course("level_name" => nil, "series_name" => "A"), path: "c", lookup: @lookup))
-      end
-
-      test "noms présents et bornés, erreurs localisées jusqu'aux propositions" do
-        tree = course("name" => " ", "subtitle" => "a" * 151,
-                      "essentials" => [ { "name" => "ADN", "exercises" => [ exercise, exercise("title" => "a" * 151) ] } ])
-        errors = ContentNode.validate_course(tree, path: "courses[3]", lookup: @lookup)
-
-        assert_equal [ [ "courses[3].name", "blank" ], [ "courses[3].subtitle", "too_long" ],
-                       [ "courses[3].essentials[0].exercises[1].title", "too_long" ] ], codes(errors)
-        assert_equal({ max: 150 }, errors.last.params)
-      end
-
-      test "une fiche : nom et exercices" do
-        errors = ContentNode.validate_essential({ "name" => nil, "exercises" => [ exercise("exercise_type" => "examen") ] }, path: "essentials[2]")
-
-        assert_equal [ [ "essentials[2].name", "blank" ], [ "essentials[2].exercises[0].exercise_type", "invalid_value" ] ], codes(errors)
-      end
-
-      # ADR-0105 §4.3 : un emplacement que le motif ne lit pas ne serait compté nulle part ; l'import le refuse à sa place.
-      test "une fiche : un emplacement d'image trop long, dans une liste ou vide est refusé, un emplacement bien écrit passe" do
-        content = "<p>[[image: une pile]]</p><p>[[image: #{'a' * 151}]]</p><ul><li>[[image: une lampe]]</li></ul><p>[[image: ]]</p>"
-
-        errors = ContentNode.validate_essential({ "name" => "Le circuit", "content" => content }, path: "essentials[0]")
-
-        assert_equal [ [ "essentials[0].content", "image_slot_malformed" ] ], codes(errors)
-        assert_equal({ count: 3 }, errors.first.params)
-        assert_empty ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>[[image: une pile]]</p>" }, path: "f")
-      end
-
-      # Menace n° 13 : un texte trop complexe à relire a son motif, pas celui d'un emplacement mal écrit.
-      test "une fiche : un texte trop complexe à relire est refusé avec son propre motif" do
-        errors = ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>" * 40_000 }, path: "essentials[1]")
-
-        assert_equal [ [ "essentials[1].content", "image_slots_unreadable" ] ], codes(errors)
-      end
-
       test "un exercice : au moins une question, cohérence de l'ADR-0039" do
         assert_empty ContentNode.validate_exercise(exercise("questions" => [ question("true_false"), question("multiple_correct_2", answers: answers(true, true, false)) ]), path: "e")
         assert_equal [ [ "e.questions", "blank" ] ], codes(ContentNode.validate_exercise(exercise("questions" => nil), path: "e"))
@@ -89,8 +37,6 @@ module Entities
       end
 
       test "un nœud qui n'est pas un objet est une erreur de schéma" do
-        assert_equal [ [ "c", "schema" ] ], codes(ContentNode.validate_course("texte", path: "c", lookup: @lookup))
-        assert_equal [ [ "f", "schema" ] ], codes(ContentNode.validate_essential(nil, path: "f"))
         assert_equal [ [ "e", "schema" ] ], codes(ContentNode.validate_exercise([], path: "e"))
         assert_equal [ [ "e.questions[0]", "schema" ], [ "e.questions[1].answers", "schema" ] ],
                      codes(ContentNode.validate_exercise(exercise("questions" => [ "q", question(answers: [ "a" ]) ]), path: "e"))

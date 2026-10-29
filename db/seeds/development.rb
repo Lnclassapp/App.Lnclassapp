@@ -49,14 +49,19 @@ course = Orm::Course.find_by(name: "La cellule", level: tle, series: series_d, m
                              **published)
 essential = Orm::Essential.find_by(course:, name: "La membrane plasmique") ||
             Orm::Essential.create!(course:, name: "La membrane plasmique", position: 1, author: member,
-                                   content: "<p>La membrane plasmique délimite la cellule et contrôle les échanges.</p>", **published)
+                                   sheet: { "remember" => "La membrane plasmique délimite la cellule et contrôle les échanges.",
+                                            "method" => [ "Repérer la limite de la cellule.", "Nommer cette limite." ],
+                                            "example" => { "statement" => "Quelle structure délimite la cellule ?",
+                                                           "steps" => [ "La structure qui entoure la cellule est la membrane plasmique." ] },
+                                            "pitfall" => "Ne pas confondre la membrane plasmique et la paroi des cellules végétales.",
+                                            "figure_key" => nil }, **published)
 unless Orm::Exercise.exists?(essential:)
   exercise = Orm::Exercise.create!(course:, essential:, title: "Reconnaître la membrane", position: 1, author: member, **published)
   [ [ "La membrane plasmique délimite la cellule.", [ [ "Vrai", true ], [ "Faux", false ] ], "true_false" ],
     [ "Quel est son rôle principal ?", [ [ "Contrôler les échanges", true ], [ "Produire l'énergie", false ],
                                          [ "Stocker l'ADN", false ], [ "Digérer les déchets", false ] ], "single_choice" ] ]
     .each.with_index(1) do |(content, answers, question_type), position|
-      # Un énoncé est du texte brut (UDR-0017) ; seuls le cours et la fiche sont du texte riche.
+      # Un énoncé est du texte brut (UDR-0017) ; seul le cours est du texte riche.
       question = exercise.questions.create!(position:, content:, question_type:)
       answers.each.with_index(1) { |(text, correct), rank| question.answers.create!(position: rank, content: text, correct:) }
     end

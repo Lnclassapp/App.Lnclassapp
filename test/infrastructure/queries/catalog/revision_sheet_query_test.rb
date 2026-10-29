@@ -15,7 +15,7 @@ module Queries
       def add_notion(course, notion = revision_notion("Simplifier une racine carrée", figure: "triangle-thales"), **attributes)
         sheet = { "remember" => notion["remember"], "method" => notion["method"], "example" => notion["example"],
                   "pitfall" => notion["pitfall"], "figure_key" => notion["figure"] }
-        create_essential(course:, name: notion["name"], content: "", sheet:, **attributes)
+        create_essential(course:, name: notion["name"], sheet:, **attributes)
       end
 
       test "le contrat porte kind, sheet et cut" do
@@ -75,16 +75,9 @@ module Queries
 
       test "une notion sans fiche (ancien contenu) n'est pas montrée : l'état est vide" do
         course = lesson
-        create_essential(course:, name: "Ancienne", content: "<p>Texte libre.</p>")
+        create_essential(course:, name: "Ancienne")
 
         assert_equal RevisionSheetQuery::EMPTY, call(course)
-      end
-
-      test "l'ancienne fiche cahier n'est plus lue" do
-        course = lesson
-        create_course_sheet(course:, document: { "pages" => [ { "sections" => [ { "title" => "T", "blocks" => [ { "type" => "paragraph", "text" => "x" } ] } ] } ], "glossary" => {} })
-
-        assert_equal :empty, call(course).kind
       end
 
       test "une leçon inconnue est vide" do

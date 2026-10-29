@@ -37,11 +37,12 @@ class DesignTokensTest < ActiveSupport::TestCase
   # token de point de rupture. Seule cette variante est admise ; toute autre valeur entre crochets reste refusée.
   SANCTIONED_VARIANT = /(?<![\w-])min-\[700px\]:/
 
-  # UDR-0137 (contenu-en-blocs, #318) : l'écran de la fiche de cours reprend les maquettes (Seyès, Kalam, Source Serif 4,
-  # graisse 700) dans un habillage à part. L'exception ne vaut que pour ces trois endroits et seulement pour les règles
+  # UDR-0137 (contenu-en-blocs, #318), maintenue par UDR-XXXX-fiche-de-revision-en-quatre-blocs : la fiche de révision reprend
+  # les maquettes (Seyès, Kalam, Source Serif 4, graisse 700) dans un habillage à part. L'exception ne vaut que pour la feuille
+  # `course_sheet.css` (et son dossier) et le partial `catalog/revision_sheets/`, et seulement pour les règles
   # « une seule police », « palette froide » et « graisse 500 » : couleurs hexadécimales, attribut `style`, valeurs
   # arbitraires, palette par défaut, rayons, ombres et échelle d'espacement restent refusés partout, ces dossiers compris.
-  SHEET_EXCEPTION = %r{\A(?:app/views/catalog/course_sheets/|app/javascript/controllers/course_sheet/|app/assets/stylesheets/course_sheet(?:/|\.css\z))}
+  SHEET_EXCEPTION = %r{\A(?:app/views/catalog/revision_sheets/|app/assets/stylesheets/course_sheet(?:/|\.css\z))}
   SHEET_FONTS = /Kalam|Source Serif/i
 
   def self.sheet_exception?(relative_path) = SHEET_EXCEPTION.match?(relative_path.to_s)
@@ -138,14 +139,13 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert_nil SPACING.match("size-7")
   end
 
-  test "the sheet exception covers the three places of the sheet and nothing else" do
-    %w[app/views/catalog/course_sheets/show.html.erb app/views/catalog/course_sheets/blocks/_box.html.erb
-       app/javascript/controllers/course_sheet/glossary_controller.js app/assets/stylesheets/course_sheet.css
-       app/assets/stylesheets/course_sheet/lens.css].each { assert self.class.sheet_exception?(it), it }
+  test "the sheet exception covers the sheet stylesheet and the revision sheet partial, and nothing else" do
+    %w[app/views/catalog/revision_sheets/_sheet.html.erb app/assets/stylesheets/course_sheet.css
+       app/assets/stylesheets/course_sheet/reading.css].each { assert self.class.sheet_exception?(it), it }
 
-    %w[app/views/catalog/courses/show.html.erb app/views/catalog/course_sheets_extra/show.html.erb
-       app/views/catalog/essentials/show.html.erb app/views/homepage/index.html.erb app/helpers/catalog/course_sheet_text_helper.rb
-       app/javascript/controllers/course_sheets/x_controller.js app/javascript/controllers/glossary_controller.js
+    %w[app/views/catalog/courses/show.html.erb app/views/catalog/revision_sheets_extra/show.html.erb
+       app/views/catalog/essentials/show.html.erb app/views/homepage/index.html.erb app/helpers/catalog/sheet_text_helper.rb
+       app/javascript/controllers/glossary_controller.js
        app/assets/stylesheets/course_sheet_other.css app/assets/stylesheets/application.tailwind.css
        app/views/layouts/application.html.erb].each { assert_not self.class.sheet_exception?(it), it }
   end
@@ -184,7 +184,7 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert_includes css, "transparent 74px"
     assert_includes css, "transparent 1px 32px"
     assert_includes css, "transparent 1px 8px"
-    %w[.sheet-page .sheet-h1 .sheet-h2 .sheet-box .sheet-btn .sheet-feedback .sheet-bubble].each { assert_includes css, "#{it} {", it }
+    %w[.sheet-page .sheet-h1 .sheet-h2 .sheet-box .sheet-card .sheet-figure].each { assert_includes css, "#{it} {", it }
 
     fonts = css.scan(%r{url\("/([^"/]+\.woff2)"\)}).flatten.grep(/kalam|source-serif/)
     assert_equal %w[kalam-latin-400-normal kalam-latin-700-normal source-serif-4-latin-wght-italic source-serif-4-latin-wght-normal],
@@ -200,13 +200,12 @@ class DesignTokensTest < ActiveSupport::TestCase
     assert_not_includes STYLESHEET, "Kalam"
   end
 
-  test "the sheet imports one file per kind family, written by its own lot" do
+  test "the sheet imports its reading rules and nothing else" do
     css = Rails.root.join("app/assets/stylesheets/course_sheet.css").read
 
     imports = css.scan(/@import url\("([^"]+)"\);/).flatten
-    assert_equal %w[./course_sheet/argument.css ./course_sheet/exercises.css ./course_sheet/lens.css ./course_sheet/reading.css
-                    ./course_sheet/thales_figure.css], imports.sort
-    # Une feuille importée mais absente part en 404 sur chaque fiche : le lot qui livre une famille ajoute son import.
+    assert_equal %w[./course_sheet/reading.css], imports.sort
+    # Une feuille importée mais absente part en 404 sur chaque fiche.
     imports.each { assert Rails.root.join("app/assets/stylesheets", it).file?, "#{it} est importée mais n'existe pas" }
     assert_operator css.index("@import"), :<, css.index("@font-face")
   end

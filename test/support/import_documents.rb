@@ -3,7 +3,7 @@
 module ImportDocuments
   ActiveSupport::TestCase.include(self)
 
-  ROOT_KEYS = { "lnclass.schools" => "schools", "lnclass.course-tree" => "courses", "lnclass.essentials" => "essentials" }.freeze
+  ROOT_KEYS = { "lnclass.schools" => "schools", "lnclass.course-tree" => "courses" }.freeze
   # Clé du nom de chaque élément racine : c'est elle que `mixed` vide pour rendre l'élément invalide.
   NAME_KEYS = { "schools" => "name", "courses" => "name", "essentials" => "name" }.freeze
   SCHOOL_TYPES = { "public" => "public", "private" => "privée", "mixed" => "mixte" }.freeze
@@ -26,25 +26,6 @@ module ImportDocuments
         "essentials" => essential_nodes(essentials, exercises:, questions:, answers:) }
     end
     envelope("lnclass.course-tree", "courses" => roots)
-  end
-
-  # Format 2 (ADR-0113) : un exercice par notion (`statement` est le sujet) et `lesson_exercises` exercices de toute la leçon.
-  def course_tree_v2_document(courses:, essentials: 4, lesson_exercises: 4, questions: 2, answers: 3, level_name: "Tle",
-                              material_name: "SVT", series_name: "D")
-    roots = Array.new(courses) do |index|
-      { "name" => "Cours #{index + 1}", "subtitle" => "Sous-titre #{index + 1}", "content" => "<p>Cours #{index + 1}</p>",
-        "level_name" => level_name, "material_name" => material_name, "series_name" => series_name,
-        "essentials" => Array.new(essentials) do |rank|
-          { "name" => "Fiche #{rank + 1}", "subtitle" => "Résumé #{rank + 1}", "content" => "<p>Fiche #{rank + 1}</p>",
-            "exercises" => exercise_nodes(1, questions:, answers:, statement_key: "statement") }
-        end,
-        "exercises" => exercise_nodes(lesson_exercises, questions:, answers:, statement_key: "statement", title: "Bilan") }
-    end
-    { "format" => "lnclass.course-tree", "version" => 2, "courses" => roots }
-  end
-
-  def essentials_document(course:, essentials:, exercises: 2, questions: 10, answers: 4)
-    envelope("lnclass.essentials", "course" => course, "essentials" => essential_nodes(essentials, exercises:, questions:, answers:))
   end
 
   # invalid_at : index des éléments dont le nom est vidé ; duplicate_of : { index => index copié }.

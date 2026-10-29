@@ -38,6 +38,17 @@ module Catalog
                     success: ->(_) { load_status_record; load_lesson_sections; record_reads }
     end
 
+    # CA-12 : l'ancienne adresse de la fiche de cours mène à la fiche de révision de la page de la leçon (301) ; mêmes refus
+    # que la page (404, rien de révélé).
+    def fiche
+      detail = Queries::Catalog::CourseDetailQuery.new.call(slug: params[:course_slug], actor: current_actor)
+      return render_not_found if detail.nil?
+      return if refuse_out_of_level(course_slug: params[:course_slug])
+
+      render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: detail.course),
+                    success: ->(_) { redirect_to course_path(params[:course_slug], anchor: "fiche-de-revision"), status: :moved_permanently }
+    end
+
     private
 
     # UDR page de la leçon : les deux sections, lues pour le rôle courant (squelettes du Lot 0).
