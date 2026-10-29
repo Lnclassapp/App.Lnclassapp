@@ -198,6 +198,21 @@ module Queries
         ActiveSupport::Notifications.subscribed(counter, "sql.active_record", &)
         count
       end
+
+      test "la figure citée est résolue dans les figures de la leçon, nil sans clé ou clé introuvable" do
+        assert_nil detail(reveal: false).figure
+
+        @exercise.course.update!(figures: [ revision_figure ])
+        assert_nil detail(reveal: false).figure
+
+        @exercise.update!(figure_key: "triangle-thales")
+        figure = detail(reveal: false).figure
+        assert_instance_of Entities::Catalog::Figure, figure
+        assert_equal [ "triangle-thales", "geometry" ], [ figure.key, figure.kind ]
+
+        @exercise.update!(figure_key: "inconnue")
+        assert_nil detail(reveal: true).figure
+      end
     end
   end
 end

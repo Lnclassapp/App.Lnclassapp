@@ -6,7 +6,8 @@ module Queries
   module Assessment
     class ExerciseDetailQuery
       # essential : nil pour un exercice de toute la leçon.
-      Row = Data.define(:exercise, :essential, :course, :questions)
+      # figure : la figure de la leçon citée par l'exercice (Entities::Catalog::Figure), nil sinon.
+      Row = Data.define(:exercise, :essential, :course, :questions, :figure)
       # statement_blocks : le sujet en blocs (ADR-0115), nil sans blocs.
       ExerciseRow = Data.define(:id, :public_id, :title, :statement, :exercise_type, :status, :statement_blocks)
       EssentialRow = Data.define(:slug, :name)
@@ -29,7 +30,7 @@ module Queries
 
       EXERCISE_COLUMNS = %w[exercises.id exercises.public_id exercises.title exercises.statement exercises.exercise_type
                             exercises.status exercises.statement_blocks essentials.slug essentials.name courses.slug courses.name levels.name series.name
-                            materials.name materials.category].freeze
+                            materials.name materials.category courses.figures exercises.figure_key].freeze
       QUESTION_COLUMNS = %i[id position content question_type points unit starter].freeze
       ANSWER_COLUMNS = %i[question_id id position content].freeze
 
@@ -41,8 +42,9 @@ module Queries
                                    .where(public_id:).pick(*EXERCISE_COLUMNS)
         return if id.nil?
 
+        *values, figures, figure_key = values
         exercise, essential, course = split(id, values)
-        Row.new(exercise:, essential:, course:, questions: questions(id, reveal))
+        Row.new(exercise:, essential:, course:, questions: questions(id, reveal), figure: SessionPlayQuery.figure_for(figures, figure_key))
       end
 
       private
