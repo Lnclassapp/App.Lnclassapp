@@ -52,15 +52,16 @@ class Assessment::QuestionOrderingTest < ActionDispatch::IntegrationTest
     assert_equal [ true, @question.answers.order(:position).map(&:id) ], [ attempt.correct, attempt.selected_answer_ids ]
   end
 
-  test "CA-7, CA-10 : une étape mal placée est fausse ; « Ton choix » rend l'ordre de l'élève et pas le bon" do
+  test "CA-7, CA-10, ADR-0115 D1 : une étape mal placée est fausse ; « Ton choix » rend l'ordre de l'élève, la correction le bon ordre à part" do
     answer %w[Métaphase Prophase Anaphase Télophase]
 
     assert_equal false, Orm::QuestionAttempt.find_by!(question: @question).correct
     follow_redirect!
-    assert_select "#question_review_#{@question.id} ol li" do |items|
-      assert_equal %w[Métaphase Prophase Anaphase Télophase], items.map { it.css("span").text }
+    assert_equal %w[Métaphase Prophase Anaphase Télophase],
+                 css_select("#question_review_#{@question.id} ol").first.css("li span").map(&:text)
+    assert_select "#question_review_#{@question.id} [data-correct] ol li" do |items|
+      assert_equal STEPS, items.map { it.css("span").text }
     end
-    assert_select "[data-correct]", 0
   end
 
   test "des indices incomplets ou en double sont refusés (422), rien n'est écrit" do
@@ -76,9 +77,15 @@ class Assessment::QuestionOrderingTest < ActionDispatch::IntegrationTest
     Orm::Answer.where(question_id: @question.id).pluck(:id).each { assert_no_match(/\b#{it}\b/, response.body) }
   end
 
-  test "la correction de l'élève ne marque aucune solution" do
-    answer %w[Métaphase Prophase Anaphase Télophase]
+  test "ADR-0115 D1 : la correction de l'élève (copie vérifiée) marque le bon ordre ; avant la vérification, aucune solution" do
+    get exercise_session_result_path(@session.public_id)
+    assert_redirected_to exercise_session_path(@session.public_id)
     follow_redirect!
     assert_select "[data-correct]", 0
+
+    answer %w[Métaphase Prophase Anaphase Télophase]
+    follow_redirect!
+    assert_select "#question_review_#{@question.id} [data-correct]", 1
+    assert_select "#question_review_#{@question.id} [data-correct] ol li", STEPS.size
   end
 end
