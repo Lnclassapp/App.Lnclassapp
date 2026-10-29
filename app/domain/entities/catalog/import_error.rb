@@ -25,7 +25,7 @@ module Entities
                               duplicate_in_files image_slot_malformed image_slots_unreadable forbidden not_enqueued essential_exercise_count
                               lesson_exercise_count essential_not_in_lesson essential_missing_from_file
                               essential_name_ambiguous lesson_already_published too_few_questions example_steps_mismatch
-                              figure_invalid figure_missing invalid_count].freeze
+                              figure_invalid figure_missing invalid_count too_short].freeze
     ImportError::CODES = (ImportError::BLOCKING + ImportError::ELEMENT).freeze
   end
 end

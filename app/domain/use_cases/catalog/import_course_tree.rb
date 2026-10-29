@@ -93,17 +93,20 @@ module UseCases
         notions = Array(course["notions"])
         Entities::Catalog::ContentNode.validate_lesson(course, path:, lookup:) +
           Entities::Catalog::ContentNode.validate_figures(figures, path) +
-          notions.each_with_index.flat_map { |notion, index| notion_errors(notion, "#{path}.notions[#{index}]", keys) } +
+          notions.each_with_index.flat_map { |notion, index| notion_errors(notion, "#{path}.notions[#{index}]", keys, course["name"]) } +
           repeated_notions(notions, path) + problem_errors(course, path, keys)
       end
 
-      def notion_errors(notion, path, figure_keys)
+      def notion_errors(notion, path, figure_keys, course_name)
         errors = Entities::Catalog::ContentNode.validate_notion(notion, path:)
         return errors unless notion.is_a?(Hash)
 
         errors += Entities::Catalog::ContentNode.validate_figure_citation(notion["figure"], figure_keys, "#{path}.figure")
         exercise = notion["exercise"]
-        return errors << rule_error("#{path}.exercise", "schema") unless exercise.is_a?(Hash)
+        unless exercise.is_a?(Hash)
+          count = exercise.is_a?(Array) ? exercise.size : 0
+          return errors << rule_error("#{path}.exercise", "essential_exercise_count", course: course_name.to_s.squish, name: notion["name"].to_s.squish, count:)
+        end
 
         errors + exercise_errors(exercise, "#{path}.exercise", figure_keys)
       end
