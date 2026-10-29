@@ -44,6 +44,16 @@ class Assessment::ExerciseSessionsNewKindsTest < ActionDispatch::IntegrationTest
     assert_equal [ "", "0", "1", "2" ], css_select("#{sheet(@select)} option").pluck("value")
   end
 
+  test "retouche : la ponctuation qui suit le trou reste collée à la liste, dans le même élément" do
+    get exercise_session_path(@session.public_id)
+
+    assert_select "#{sheet(@select)} [data-gap].whitespace-nowrap" do |gaps|
+      assert_equal 1, gaps.size
+      assert_equal 1, gaps.first.css("select").size
+      assert_equal ".", gaps.first.text.strip.delete_prefix(gaps.first.css("select").text.strip)[-1]
+    end
+  end
+
   test "le compteur ne compte ni la rédigée ni le cahier" do
     get exercise_session_path(@session.public_id)
 

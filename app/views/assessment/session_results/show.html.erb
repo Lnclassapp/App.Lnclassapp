@@ -6,7 +6,7 @@
     « Ma classe » et de l'accueil (68 % s'affiche 14/20). %>
 <% grading = Entities::Assessment::Grading %>
 <% tone = grading.reaches?(result.score_percent, grading::MASTERY_THRESHOLD) ? :success : :error %>
-<% tile = "rounded-ln bg-mist px-3 py-3 text-center" %>
+<% tile = "rounded-ln bg-mist px-3 py-3 text-center whitespace-nowrap" %>
 <% label = "text-2xs font-medium tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>
 <% lesson_href = course_path(result.course_slug, anchor: (result.essential ? "notion-#{result.essential.slug}" : "toute-la-lecon")) %>
@@ -33,7 +33,7 @@
       </div>
 
       <%# L'élève lit sa note sur 20, forme unique de la note (UDR-0023, 2026-10-02) ; l'enseignant et l'équipe gardent les 4 termes. %>
-      <dl class="mt-6 grid grid-cols-2 gap-3 <%= "sm:grid-cols-4" unless @owner %>">
+      <dl class="mt-6 grid grid-cols-2 gap-3 <%= "sm:max-lg:grid-cols-4" unless @owner %>">
         <div class="<%= tile %>">
           <dt class="<%= label %>"><%= t(".grade") %></dt>
           <dd id="session_grade" class="mt-1 font-display text-3xl font-medium tabular-nums <%= "text-success" if tone == :success %>"><%= grade_label(result.score_percent) %></dd>
