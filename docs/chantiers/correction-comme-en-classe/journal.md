@@ -17,7 +17,9 @@
 | 2026-10-29 | Lot C (revue) : le texte rédigé ramène `\r\n` à `\n` avant de compter ; la règle « comptée dans les répondues » tient dans `SessionPlayQuery::Question#counted?` ; la clé `invalid_text`, inatteignable (le DTO refuse d'abord), est retirée. | Le navigateur compte 2 000 là où le serveur comptait plus ; une liste de types écrite en dur dans la vue divergeait. | Non |
 | 2026-10-29 | Lot E : partiel `assessment/statement_blocks/_blocks` propre aux écrans d'exercice au lieu des partiels des fiches (UDR-0140 §3 précisée) ; une seule validation des blocs, `SheetDocument.statement_errors`, que l'import appelle ; au rendu, 10 blocs au plus et une ligne de journal pour un bloc ignoré. | Les partiels des fiches lisent `@sheet.glossary` et `course_sheet.css`, absents des écrans d'exercice ; deux validations divergeaient déjà. | Non (UDR-0140 précisée) |
 | 2026-10-29 | Retouches après les captures : tuiles du résultat, réponse d'une liste qui n'est plus tronquée à 390 px, ponctuation collée au trou d'une liste. L'ordre des boutons de la confirmation, qui diffère entre téléphone et ordinateur, est voulu (porteur). | Défauts vus sur les captures du parcours complet. | Non |
+| 2026-10-29 | Correctif `ExerciseSessionRepository#start` : sans session ouverte à relire après un `RecordNotUnique`, l'exception d'origine remonte au lieu d'un `nil` (le use case répondait un succès sans session). | Un `nil` silencieux masquait une collision de `public_id` ou une session close entre-temps ; l'erreur remonte jusqu'à la 500 gérée. | Non |
 | 2026-10-29 | Accueil élève : « Refaire » (seule entrée de relance hors pages exercice/résultat, dans `student_homes/_history`) est masqué pendant la pause ; les copies récentes des exercices affichés sont lues en une requête (`recent_completions_by_exercise`, ROW_NUMBER), la règle reste `RestartPause`. La ligne garde son lien vers le résultat, sans nouvelle phrase. | Le démarrage refusait déjà la pause : le bouton menait à un refus. | Non |
+| 2026-10-29 | La note d'une copie se calcule sur les questions actuelles de l'exercice : une leçon réimportée entre deux copies peut changer le total. | Cas accepté au cadrage ; classé en décision à la clôture plutôt qu'en point ouvert. | Non |
 
 ## Ce qui a dérapé
 
@@ -33,6 +35,7 @@
 - `test/infrastructure/repositories/catalog/content_tree_writer_characterization_test.rb` compare toutes les colonnes écrites à un instantané : toute colonne nouvelle d'`exercises` ou de `questions` doit entrer dans `ADDED_LATER`.
 - Un texte aux octets invalides faisait lever `strip` et la regex de l'octet nul (500 possible hors Rails, qui refuse déjà les paramètres mal encodés) : `AttemptInput` et `CopyInput` le refusent proprement (menace W4).
 - `QuestionKinds::Written::INVALID` renvoyait `:invalid_text`, mais le DTO refuse d'abord un texte mal encodé : le code n'était jamais atteint. Il vaut `[:invalid]` depuis la revue du Lot C.
+- L'heure de reprise de la pause est à l'heure d'Abidjan : `config.time_zone = "Africa/Abidjan"` et `pluck(:completed_at)` rend des heures dans ce fuseau. Ce n'était pas un défaut.
 - La garde de vocabulaire refuse « leçon » dans les locales, sauf valeurs exactes listées : toute phrase de PRD qui le dit doit y entrer.
 
 ## Preuve
@@ -43,7 +46,4 @@
 
 ## Ce qui reste ouvert
 
-- `ExerciseSessionRepository#start` peut renvoyer `nil` après un `RecordNotUnique` (antérieur au chantier).
-- La note d'une copie se calcule sur les questions actuelles de l'exercice : une leçon réimportée entre deux copies peut changer le total (cas accepté au cadrage).
 - Le contenu « Lentilles » de la maquette de Konan n'est pas importé : seul Thalès sert de contenu de référence.
-- L'heure de reprise de la pause s'affiche à l'heure du serveur (UTC), juste pour la Côte d'Ivoire.

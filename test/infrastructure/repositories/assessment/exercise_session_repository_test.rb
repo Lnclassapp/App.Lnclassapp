@@ -36,6 +36,18 @@ module Repositories
         assert_equal 1, Orm::ExerciseSession.where(student: @student).count
       end
 
+      test "une violation d'unicité sans session ouverte remonte au lieu de renvoyer nil" do
+        colliding = Orm::ExerciseSession.new
+        colliding.define_singleton_method(:save!) { raise ActiveRecord::RecordNotUnique, "public_id" }
+
+        Orm::ExerciseSession.define_singleton_method(:new) { |*| colliding }
+        begin
+          assert_raises(ActiveRecord::RecordNotUnique) { @repository.start(session: session) }
+        ensure
+          Orm::ExerciseSession.singleton_class.remove_method(:new)
+        end
+      end
+
       test "record_copy écrit toute la copie d'un coup, avec la contrainte unanswered, et tient les compteurs" do
         started = @repository.start(session: session)
         first, second, third = @exercise.questions.to_a
