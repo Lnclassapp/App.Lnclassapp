@@ -109,7 +109,8 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
     assert_equal 6, Orm::Exercise.count
   end
 
-  # CA-3 : une notion sans exercice refuse la leçon, la notion est nommée par son chemin, rien n'est écrit.
+  # CA-3 : une notion sans exercice refuse la leçon avec la raison de l'import (`essential_exercise_count`, CA-18), la notion
+  # nommée par son chemin ; rien n'est écrit.
   test "CA-3 a notion without exercise: the report names the notion by its path, and nothing is written" do
     document = lessons_document(1)
     document["courses"][0]["notions"][1].delete("exercise")
@@ -128,7 +129,7 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
       assert_selector "#import_counter_imported", text: "0"
       assert_selector "#import_counter_errors", text: "1"
       assert_selector "#import_errors li", count: 1
-      assert_selector "#import_errors li", text: /courses\[0\]\.notions\[1\]\.exercise\s+Clé obligatoire manquante\./
+      assert_selector "#import_errors li", text: /courses\[0\]\.notions\[1\].*il faut exactement un exercice par notion \(reçus : 0\)/m
     end
     assert_equal [ 0, 0 ], [ Orm::Course.count, Orm::Exercise.count ]
   end

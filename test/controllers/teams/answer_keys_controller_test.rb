@@ -39,6 +39,22 @@ class Teams::AnswerKeysControllerTest < ActionDispatch::IntegrationTest
     assert_select "p", text: tl("show.empty")
   end
 
+  test "CA-16: a visitor who is not signed in is sent to the sign-in page, without the correction" do
+    get answer_key_teams_course_path(@course.slug)
+
+    assert_redirected_to new_session_path
+    assert_no_match(/Correction rédigée/, response.body)
+  end
+
+  test "CA-16: a school administration account receives 404" do
+    sign_in_as create_school_admin
+
+    get answer_key_teams_course_path(@course.slug)
+
+    assert_response :not_found
+    assert_no_match(/Correction rédigée/, response.body)
+  end
+
   test "CA-16: a student and a teacher receive 404" do
     [ create_student, create_teacher ].each do |user|
       sign_in_as user
@@ -62,6 +78,7 @@ class Teams::AnswerKeysControllerTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
+    assert_response :success
     assert_select "#course-actions-menu a[href='#{answer_key_teams_course_path(@course.slug)}']", text: tl("menu")
     assert_select "#course-actions-menu a[href*='kind=essentials']", 0
   end

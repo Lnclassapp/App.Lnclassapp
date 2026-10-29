@@ -25,6 +25,8 @@ lessons = LESSON_PATHS.filter_map do |path|
   document = JSON.parse(path.read)
   [ path, document, document["courses"].first ] if document["version"] == Entities::Catalog::ImportKind::COURSE_TREE_VERSION
 end
+skipped = LESSON_PATHS.size - lessons.size
+log.call("#{skipped} fichier(s) écarté(s) : pas au format #{Entities::Catalog::ImportKind::COURSE_TREE_VERSION}") if skipped.positive?
 missing = lessons.reject { |_path, _document, course| course_for.(course) }
 
 if missing.any?

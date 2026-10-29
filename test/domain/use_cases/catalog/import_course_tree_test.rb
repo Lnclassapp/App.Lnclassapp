@@ -217,6 +217,19 @@ module UseCases
         assert_equal [ [ "courses[0].notions[1].name", "invalid_value" ] ], pairs(validate(twice))
       end
 
+      test "a figure the browser would refuse (missing required parameter, inverted bounds) is refused at the figure path" do
+        missing = lesson("name" => "Sans bornes")
+        missing["figures"][0].merge!("kind" => "coordinate_plane", "params" => { "xmin" => -5, "xmax" => 5, "ymin" => -5 })
+        inverted = lesson("name" => "Inversée")
+        inverted["figures"][0].merge!("kind" => "number_line", "params" => { "min" => 5, "max" => 1, "step" => 1 })
+
+        item = validate(missing)
+        assert_equal [ [ "courses[0].figures[0].params.ymax", "figure_invalid" ] ], pairs(item)
+        assert_equal({ param: "ymax" }, item.errors.first.params)
+        assert_equal [ [ "courses[0].figures[0].params.max", "figure_invalid" ] ], pairs(validate(inverted))
+        assert_equal 2, run_import(envelope(missing, inverted)).error_count
+      end
+
       # CA-8
       test "a figure of unknown kind, a parameter out of bounds or without description is refused, naming the figure and the parameter" do
         unknown = lesson
@@ -312,6 +325,25 @@ module UseCases
         report = run_import(envelope(lesson))
 
         assert_equal [ [ "courses[0]", "lesson_already_published" ] ], report_pairs(report)
+      end
+
+      test "a draft lesson published between the validation and the writing is reported as already published, not as a write failure" do
+        run_import(envelope(lesson))
+        course = Orm::Course.find_by!(slug: "racines-carrees")
+        racing = Class.new(SimpleDelegator) do
+          define_method(:replace_draft) do |**args|
+            Orm::Course.where(id: args.fetch(:course_id)).update_all(status: "published", published_at: Time.current)
+            super(**args)
+          end
+        end.new(Repositories::Catalog::ContentTreeWriter.new)
+        before = tree_counts
+
+        report = run_import(envelope(lesson("subtitle" => "Nouveau")), adapter: adapter(writer: racing))
+
+        assert_equal [ "completed", 0, 1 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal [ [ "courses[0]", "lesson_already_published" ] ], report_pairs(report)
+        assert_equal({ "course" => "Racines carrées" }, report.import_errors.first["params"])
+        assert_equal [ before, "Calculer et simplifier" ], [ tree_counts, course.reload.subtitle ]
       end
 
       # CA-11

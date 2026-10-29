@@ -251,10 +251,21 @@ module UseCases
       end
 
       def write_one(report, entry, at)
-        written = @transaction.attempt { @adapter.write(items: [ entry.item ], author_id: report.imported_by_id, at:) }
+        written = @transaction.attempt_with_cause { @adapter.write(items: [ entry.item ], author_id: report.imported_by_id, at:) }
         return @tally.add(written.value, [ entry ]) if written.success?
 
-        @tally.invalid([ error(@sources.fetch(entry.file_index), entry.item.path, "write_failed") ], entry.file_index)
+        @tally.invalid([ write_error(@sources.fetch(entry.file_index), entry, written) ], entry.file_index)
+      end
+
+      # Une leçon publiée entre la validation et l'écriture : l'écrivain le dit par la classe de l'exception (clé `exception`), le moteur
+      # rend la même raison que la validation (ADR-XXXX §4.4) au lieu d'un échec d'écriture générique.
+      def write_error(source, entry, written)
+        raised = written.errors[:exception]&.first.to_s.split("::").last
+        if raised == Ports::Catalog::ContentTreeWriterPort::NOT_DRAFT && entry.item.plan.respond_to?(:name)
+          return error(source, entry.item.path, "lesson_already_published", course: entry.item.plan.name.squish)
+        end
+
+        error(source, entry.item.path, "write_failed")
       end
 
       def progress(report, status, processed_count)

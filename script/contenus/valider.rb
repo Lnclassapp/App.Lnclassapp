@@ -129,7 +129,10 @@ module Contenus
     # → liste des clés de figures déclarées. Les contrôles de forme sont ceux de Entities::Catalog::Figure (même code qu'à l'import).
     def figures(path, raw)
       list = raw.nil? ? [] : raw
-      return schema_at("#{path}.figures", "liste attendue") && [] unless list.is_a?(Array)
+      unless list.is_a?(Array)
+        schema_at("#{path}.figures", "liste attendue")
+        return []
+      end
 
       schema_at("#{path}.figures", "0 à 12 figures, trouvé #{list.size}") unless FIGURES.cover?(list.size)
       list.each_with_index do |figure, i|
@@ -200,7 +203,10 @@ module Contenus
     end
 
     def step_list(path, value)
-      return schema_at(path, "liste de 2 à 8 étapes attendue") && [] unless value.is_a?(Array)
+      unless value.is_a?(Array)
+        schema_at(path, "liste de 2 à 8 étapes attendue")
+        return []
+      end
 
       schema_at(path, "2 à 8 étapes, trouvé #{value.size}") unless METHOD_STEPS.cover?(value.size)
       value.each_with_index { |step, i| long_text("#{path}[#{i}]", step, STEP_MAX) }
@@ -284,8 +290,6 @@ module Contenus
         words.size >= 2 && text.include?(words.join(" "))
       end
     end
-
-    def normalize(string) = string.downcase.delete("$*").gsub(/\s+/, " ").strip
 
     def normalize(string) = string.downcase.delete("$*").gsub(/\s+/, " ").strip
 

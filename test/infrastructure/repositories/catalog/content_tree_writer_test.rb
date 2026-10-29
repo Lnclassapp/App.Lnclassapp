@@ -291,6 +291,11 @@ module Repositories
         end
       end
 
+      test "l'exception NotDraft porte le nom que le moteur d'import reconnaît" do
+        assert_equal Ports::Catalog::ContentTreeWriterPort::NOT_DRAFT, ContentTreeWriter::NotDraft.name.split("::").last
+        assert_operator ContentTreeWriter::NotDraft, :<, ActiveRecord::CheckViolation
+      end
+
       test "replace_draft rend unique le slug d'une notion pris par une autre leçon" do
         @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines"), v3_course("autre", notion_slug: "pris") ])
         course = Orm::Course.find_by!(slug: "racines")

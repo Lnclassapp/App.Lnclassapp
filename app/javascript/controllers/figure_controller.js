@@ -20,8 +20,11 @@ export default class extends Controller {
   static targets = ["canvas", "controls", "fallback"]
   static values = { kind: String, params: Object, controls: Array }
 
+  // Jeton de génération : un connect() dont le module arrive après un disconnect() (ou un second connect()) ne dessine rien.
+  generation = 0
+
   async connect() {
-    this.connected = true
+    const run = ++this.generation
     this.clear()
     this.element.dataset.figureState = "loading"
     if (!KINDS.includes(this.kindValue)) return this.fail(new Error(`figure : sorte inconnue « ${this.kindValue} »`))
@@ -32,7 +35,7 @@ export default class extends Controller {
     } catch (error) {
       return this.fail(error)
     }
-    if (!this.connected) return
+    if (run !== this.generation) return
 
     try {
       this.values = { ...this.paramsValue }
@@ -52,7 +55,7 @@ export default class extends Controller {
   }
 
   disconnect() {
-    this.connected = false
+    this.generation++
     this.clear()
   }
 

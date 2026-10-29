@@ -59,7 +59,8 @@ module Repositories
         raise NotDraft, "la leçon #{course.slug} ou l'un de ses contenus n'est plus en brouillon" unless draft?(course)
 
         stamp(course.author_id, Time.current)
-        delete_content(course_id)
+        deleted = delete_content(course_id)
+        Rails.logger.info("[import] leçon remplacée : course_id=#{course_id} slug=#{course.slug} lignes supprimées #{deleted.to_json}")
         course.update_columns(name: tree.name, subtitle: tree.subtitle, figures: tree.figures, sheet_theme: tree.sheet_theme, updated_at: @at)
 
         taken = Orm::Essential.pluck(:slug).to_set
@@ -108,28 +109,33 @@ module Repositories
 
       # Du plus dépendant au moins dépendant (toutes les clés étrangères sont RESTRICT) : lacunes, copies, séances, badges, questions,
       # exercices, puis notions, leurs lectures, images et texte riche. Les images (fichiers stockés) sont détruites pour être purgées.
+      # → nombre de lignes supprimées par table.
       def delete_content(course_id)
         exercise_ids = Orm::Exercise.where(course_id:).pluck(:id)
         essential_ids = Orm::Essential.where(course_id:).pluck(:id)
         question_ids = Orm::Question.where(exercise_id: exercise_ids).pluck(:id)
         session_ids = Orm::ExerciseSession.where(exercise_id: exercise_ids).pluck(:id)
+        deleted = {}
 
         gap_ids = Orm::KnowledgeGap.where(essential_id: essential_ids).or(Orm::KnowledgeGap.where(source_session_id: session_ids))
                                    .or(Orm::KnowledgeGap.where(resolved_by_session_id: session_ids)).pluck(:id)
         # Une séance de remédiation (la base veut une lacune avec elle) devient une séance ordinaire quand sa lacune disparaît ; celles des
         # exercices supprimés partent ensuite avec eux.
         Orm::ExerciseSession.where(knowledge_gap_id: gap_ids).update_all(kind: "standard", knowledge_gap_id: nil)
-        Orm::KnowledgeGap.where(id: gap_ids).delete_all
-        Orm::ExerciseBadge.where(exercise_id: exercise_ids).delete_all
-        Orm::QuestionAttempt.where(exercise_session_id: session_ids).or(Orm::QuestionAttempt.where(question_id: question_ids)).delete_all
-        Orm::ExerciseSession.where(id: session_ids).delete_all
-        Orm::ClassroomAssignment.where(assignable_type: "Exercise", assignable_id: exercise_ids).delete_all
-        Orm::QuestionImage.where(question_id: question_ids).find_each(&:destroy)
-        Orm::Answer.where(question_id: question_ids).delete_all
-        Orm::Question.where(id: question_ids).delete_all
-        Orm::Exercise.where(id: exercise_ids).delete_all
-        Orm::EssentialRead.where(essential_id: essential_ids).delete_all
-        Orm::Essential.where(id: essential_ids).delete_all
+        deleted[:knowledge_gaps] = Orm::KnowledgeGap.where(id: gap_ids).delete_all
+        deleted[:exercise_badges] = Orm::ExerciseBadge.where(exercise_id: exercise_ids).delete_all
+        deleted[:question_attempts] = Orm::QuestionAttempt.where(exercise_session_id: session_ids).or(Orm::QuestionAttempt.where(question_id: question_ids)).delete_all
+        deleted[:exercise_sessions] = Orm::ExerciseSession.where(id: session_ids).delete_all
+        deleted[:classroom_assignments] = Orm::ClassroomAssignment.where(assignable_type: "Exercise", assignable_id: exercise_ids).delete_all
+        images = Orm::QuestionImage.where(question_id: question_ids)
+        deleted[:question_images] = images.count
+        images.find_each(&:destroy!)
+        deleted[:answers] = Orm::Answer.where(question_id: question_ids).delete_all
+        deleted[:questions] = Orm::Question.where(id: question_ids).delete_all
+        deleted[:exercises] = Orm::Exercise.where(id: exercise_ids).delete_all
+        deleted[:essential_reads] = Orm::EssentialRead.where(essential_id: essential_ids).delete_all
+        deleted[:essentials] = Orm::Essential.where(id: essential_ids).delete_all
+        deleted
       end
 
       # insert_all saute les callbacks : le repository pose les horodatages. → lignes créées (id et clés naturelles)

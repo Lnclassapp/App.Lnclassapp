@@ -76,7 +76,7 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
     assert_select "section.sheet-section figure.sheet-figure[data-controller='figure']", count: 1
     assert_select "figure.sheet-figure figcaption", text: Factories::RevisionSheet::FIGURE_DESCRIPTION
     order = css_select("section.sheet-section > *").map { it["data-tone"] || it.name }
-    assert_equal %w[h4 remember method figure div pitfall], order.map { it == "pitfall" ? "pitfall" : it }
+    assert_equal %w[h4 remember method figure div pitfall], order
   end
 
   test "the text of a notion is escaped: no HTML from the file reaches the page, no glossary" do
@@ -150,6 +150,16 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
       get course_path(draft.slug)
 
       assert_response :not_found
+      sign_out
     end
+  end
+
+  test "CA-14: a draft lesson answers a visitor who is not signed in with the sign-in page, never its content" do
+    draft = create_course(name: "Brouillon", status: "draft", figures: [ revision_figure ])
+
+    get course_path(draft.slug)
+
+    assert_redirected_to new_session_path
+    assert_no_match(/Brouillon/, response.body)
   end
 end

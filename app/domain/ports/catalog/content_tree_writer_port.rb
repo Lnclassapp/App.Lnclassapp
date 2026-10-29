@@ -4,6 +4,10 @@
 module Ports
   module Catalog
     module ContentTreeWriterPort
+      # Nom (dernier segment) de l'exception levée par replace_draft quand un contenu n'est plus en brouillon : le moteur d'import la
+      # reconnaît à ce nom (clé `exception` de l'échec d'écriture) et note lesson_already_published.
+      NOT_DRAFT = "NotDraft".freeze
+
       # Nœuds que remplissent les imports I1 à I3. slug et public_id sont tirés par le domaine avant l'insertion.
       # course_id (resp. essential_id) vaut nil pour un nœud porté par son parent, l'id du parent existant sinon.
       AnswerNode = Data.define(:position, :content, :correct, :match_content) do
@@ -57,7 +61,8 @@ module Ports
       end
 
       # Appelé dans une transaction ; une table après l'autre, parents d'abord (insert_all ou COPY, ADR-0068) ; lève si la base refuse.
-      # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées), archived: les exercices archivés des leçons réimportées
+      # → { courses:, essentials:, exercises:, questions:, answers:, archived: } : lignes créées, et nombre d'exercices archivés des nœuds
+      # portant existing_id (ADR-0113, anciens formats). Un nœud v3 réimporté passe par replace_draft, qui ne rend pas `archived`.
       def write(author_id:, at:, courses: [], essentials: [], exercises: [])
         raise NotImplementedError, "#{self.class} doit implémenter #write"
       end
