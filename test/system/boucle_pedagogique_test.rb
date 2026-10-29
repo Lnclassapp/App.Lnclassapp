@@ -390,7 +390,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     session = Orm::ExerciseSession.sole
     assert_current_path exercise_session_result_path(session.public_id)
     assert_equal [ "completed", 100 ], session.reload.values_at(:status, :score_percent)
-    assert_selector "h1", text: t("assessment.session_results.show.headline.success")
+    assert_selector "h1", text: t("assessment.session_results.show.headline.very_good")
     assert_text "20/20"
     assert_selector "#session_badge[aria-label='#{t('assessment.session_results.badge.label', level: 'Diamant')}']"
     assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")

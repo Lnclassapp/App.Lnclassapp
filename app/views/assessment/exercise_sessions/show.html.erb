@@ -1,6 +1,6 @@
-<%# 🌐 UI · assessment/exercise_sessions/show — la copie de l'élève : le sujet, toutes les questions, « Rendre ma copie » %>
+<%# 🌐 UI · assessment/exercise_sessions/show — la copie de l'élève : le sujet, toutes les questions, « Vérifier ma copie » %>
 <%# Rôle : sujet repliable, compteur « n/T répondues », une carte par question (fieldset), bouton collé en bas, confirmation des questions vides ; 422 : résumé et message par question %>
-<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105, 0112 · UDR : 0007, 0087 §3.4, 0129, 0138 §3.2, §3.3, §3.7 · Stimulus : math, assessment--copy, modal %>
+<%# ADR  : 0054, 0091 §4.4 (aucune correction, aucun id révélateur), 0105, 0112, 0115 · UDR : 0007, 0087 §3.4, 0129, 0138 §3.2, §3.3, §3.7, 0140 · Stimulus : math, assessment--copy, modal %>
 <%# Sans JavaScript : le formulaire part tel quel, sans confirmation ni brouillon ; les questions vides comptent fausses. %>
 <% play = @play %>
 <% posted = @posted || {} %>
@@ -79,6 +79,7 @@
 
     <%# Collé en bas, au-dessus de la zone sûre (UDR-0087 §3.2). %>
     <div class="sticky bottom-0 z-10 -mx-gutter mt-6 bg-paper px-gutter pt-4 pb-safe-action min-[700px]:mx-0 min-[700px]:px-0">
+      <p class="mb-3 text-sm text-mute"><%= t(".lock_warning") %></p>
       <%= ui_button t(".submit"), type: :submit, variant: :brand, size: :lg, full: true, data: { turbo_submits_with: t(".submitting") } %>
     </div>
 

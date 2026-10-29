@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::StartExerciseSession
 # Rôle : l'élève démarre ou reprend un exercice publié ; « Recommencer » abandonne la session ouverte et en ouvre une autre
-# ADR  : 0026, 0028, 0043, 0048, 0054
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0115
 module UseCases
   module Assessment
     class StartExerciseSession
@@ -16,7 +16,7 @@ module UseCases
       end
 
       # → Result(ExerciseSession) | :not_found (exercice absent, ou non publié : le brouillon n'existe pas pour l'élève)
-      #   | :forbidden
+      #   | :forbidden | :conflict (en pause après 3 copies d'affilée, ADR-0115 : errors base [:paused] et resume_at, l'heure de reprise)
       def call(actor:, exercise_public_id:, restart: false)
         exercise = @exercises.find_by_public_id(public_id: exercise_public_id)
         return Shared::Result.failure(:not_found) if exercise.nil?
@@ -25,16 +25,29 @@ module UseCases
         return Shared::Result.failure(:not_found) if allowed.errors.fetch(:base, []).include?(:not_published)
         return allowed if allowed.failure?
 
-        @transaction.call { Shared::Result.success(open_session(actor, exercise, restart)) }
+        @transaction.call { open_session(actor, exercise, restart) }
       end
 
       private
 
       # L'index partiel tranche un double clic : start renvoie alors la session déjà ouverte.
+      # Reprendre la copie ouverte n'est pas une nouvelle copie : la pause ne la touche pas.
       def open_session(actor, exercise, restart)
         current = @sessions.started_for(student_id: actor.user_id, exercise_id: exercise.id)
-        return current if current && !restart
+        return Shared::Result.success(current) if current && !restart
 
+        resume_at = paused_until(actor, exercise)
+        return Shared::Result.failure(:conflict, errors: { base: [ :paused ], resume_at: }) if resume_at
+
+        Shared::Result.success(begin_session(actor, exercise, current))
+      end
+
+      def paused_until(actor, exercise)
+        completions = @sessions.recent_completions(student_id: actor.user_id, exercise_id: exercise.id)
+        Entities::Assessment::RestartPause.resume_at(completions:, now: @clock.now)
+      end
+
+      def begin_session(actor, exercise, current)
         @sessions.abandon(id: current.id, at: @clock.now) if current
         @sessions.start(session: new_session(actor, exercise))
       end
