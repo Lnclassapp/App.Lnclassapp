@@ -16,6 +16,8 @@ fr:
             response_text:
               blank: "Écris ta réponse."
               too_long: "Ta réponse est trop longue : %{count} caractères au plus."
+              text_too_long: "Ta réponse est trop longue : 2 000 caractères au plus."
+              invalid_text: "Ta réponse rédigée ne se lit pas : retire les caractères spéciaux et recommence."
               blank_text: "Écris ta réponse dans le blanc."
               invalid: "Ta réponse contient un caractère interdit."
               not_a_number: "Écris un nombre, par exemple -3,5."
@@ -33,6 +35,10 @@ fr:
         statement: "Sujet"
         review_statement: "Revoir le sujet"
         question: "Question %{number}"
+        # UDR-0140 §3 : « (2 points) », « (1,5 point) » ; seulement quand l'exercice n'est pas tout à 1 point.
+        points:
+          one: "(%{points} point)"
+          other: "(%{points} points)"
         submit: "Vérifier ma copie"
         submitting: "Vérification…"
         # UDR-0140 : la phrase juste au-dessus du bouton ; la copie part d'un seul envoi.
@@ -54,6 +60,15 @@ fr:
           sign: "Changer le signe"
           hint: "± pour un nombre négatif ; virgule pour les décimales."
           invalid: "Écris un nombre, par exemple -3,5."
+        select:
+          legend: "Choisis dans la liste."
+          choose: "— choisir —"
+          blank: "blanc"
+        written:
+          label: "Ta réponse"
+          counter: "%{count} / %{max}"
+        notebook:
+          to_do: "À faire sur ton cahier"
         ordering:
           hint: "Utilise les flèches pour ranger les étapes, de la première à la dernière."
           steps: "Étapes"

@@ -269,4 +269,82 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
                  [ Orm::KnowledgeGap.count, Orm::KnowledgeGap.sole.essential_id, Orm::KnowledgeGap.sole.student_id ]
     assert_select "#session_gap_outcome a[href='#{course_path(@course.slug, anchor: "notion-#{@exercise.essential.slug}")}']"
   end
+
+  # ADR-0115 (Lot C) : un devoir avec une liste, une réponse rédigée et du cahier.
+  def devoir
+    exercise = create_exercise(title: "Devoir", questions: 0, essential: @exercise.essential, exercise_type: "evaluation")
+    list = exercise.questions.create!(position: 1, content: "Les points sont ___.", question_type: "select")
+    [ "parallèles", "alignés" ].each_with_index { |text, rank| list.answers.create!(position: rank + 1, content: text, correct: rank == 1) }
+    written = exercise.questions.create!(position: 2, content: "Justifie.", question_type: "written", explanation: "Corrigé : oui.", points: 2)
+    notebook = exercise.questions.create!(position: 3, content: "Trace.", question_type: "notebook", explanation: "Corrigé du cahier.", points: 2)
+    [ exercise, create_exercise_session(student: @student, exercise:), list, written, notebook ]
+  end
+
+  test "ADR-0115 : la liste poste l'indice d'affichage d'une proposition ; la bonne est juste, la réponse rédigée et le cahier ne comptent pas" do
+    exercise, session, list, written, notebook = devoir
+    sign_in_as @student
+
+    copy({ list.id.to_s => { display_order: displayed(list, list.answers.find_by(correct: true).id, session:) },
+           written.id.to_s => { response_text: "Oui." }, notebook.id.to_s => { response_text: "ignoré" } }, session:)
+
+    assert_redirected_to exercise_session_result_path(session.public_id)
+    attempts = Orm::QuestionAttempt.where(exercise_session: session).index_by(&:question_id)
+    assert_equal [ true, false, false ], [ list, written, notebook ].map { attempts.fetch(it.id).correct }
+    assert_equal [ "Oui.", nil ], [ attempts.fetch(written.id).response_text, attempts.fetch(notebook.id).response_text ]
+    assert_equal 100, session.reload.score_percent
+    assert_equal exercise.questions.count, attempts.size
+  end
+
+  # CA-13, menace W1 : le texte de l'élève est lu en clair, jamais comme du HTML, par l'élève comme par l'équipe.
+  test "CA-13 : « Non, car <b>AM/AB</b> » est rendu échappé à l'élève et à l'équipe, sans balise ni script" do
+    _exercise, session, list, written, _notebook = devoir
+    text = "Non, car <b>AM/AB</b> <script>alert(1)</script>"
+    sign_in_as @student
+    copy({ written.id.to_s => { response_text: text } }, session:)
+
+    [ @student, create_team_member ].each do |reader|
+      sign_in_as reader
+      get exercise_session_result_path(session.public_id)
+
+      assert_response :success
+      assert_select "#question_review_#{written.id} [data-written-answer]", text: text
+      assert_select "#question_review_#{written.id} [data-written-answer] b, #question_review_#{written.id} script", 0
+      assert_includes response.body, "Non, car &lt;b&gt;AM/AB&lt;/b&gt;"
+      assert_not_includes response.body, "<script>alert(1)</script>"
+    end
+    assert list
+  end
+
+  # CA-22, menace W2 : la zone n'accepte pas plus, et le serveur refuse quand même 2 001 caractères.
+  test "CA-22 : une réponse rédigée de 2 001 caractères : 422, message du champ, la zone garde le texte, rien n'est écrit" do
+    _exercise, session, _list, written, _notebook = devoir
+    sign_in_as @student
+
+    copy({ written.id.to_s => { response_text: "é" * 2001 } }, session:)
+
+    assert_response :unprocessable_entity
+    assert_select "#question-2-error", text: /2 000 caractères/
+    assert_select "textarea[maxlength='2000']"
+    assert_equal [ 0, "started" ], [ Orm::QuestionAttempt.count, session.reload.status ]
+  end
+
+  test "CA-22 : 2 000 caractères sont rendus et gardés" do
+    _exercise, session, _list, written, _notebook = devoir
+    sign_in_as @student
+
+    copy({ written.id.to_s => { response_text: "é" * 2000 } }, session:)
+
+    assert_redirected_to exercise_session_result_path(session.public_id)
+    assert_equal 2000, Orm::QuestionAttempt.find_by!(question: written).response_text.length
+  end
+
+  test "menace W3 : un octet nul dans la réponse rédigée : 422, rien n'est écrit" do
+    _exercise, session, _list, written, _notebook = devoir
+    sign_in_as @student
+
+    copy({ written.id.to_s => { response_text: "a\0b" } }, session:)
+
+    assert_response :unprocessable_entity
+    assert_equal 0, Orm::QuestionAttempt.count
+  end
 end

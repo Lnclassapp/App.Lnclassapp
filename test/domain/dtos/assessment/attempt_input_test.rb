@@ -39,7 +39,8 @@ module Dtos
         assert_equal "Abidjan", input(response_text: "  Abidjan ").response_text
         assert input(response_text: " ").invalid?
         assert input(response_text: " ").tap(&:validate).errors.added?(:response_text, :blank)
-        assert input(response_text: "x" * 201).tap(&:validate).errors.added?(:response_text, :too_long, count: 200)
+        assert input(response_text: "x" * 2000).valid?
+        assert input(response_text: "x" * 2001).tap(&:validate).errors.added?(:response_text, :text_too_long, count: 2000)
         assert_nil input.response_text
         assert_nil input(response_text: nil).response_text
         assert input(response_text: "Abi\0djan").tap(&:validate).errors.added?(:response_text, :invalid, value: "Abi\0djan")

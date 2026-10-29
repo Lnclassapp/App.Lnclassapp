@@ -1,0 +1,14 @@
+<%# 🌐 UI · assessment/exercise_sessions/kinds/_written — réponse rédigée : une zone de texte, le début de phrase en exemple %>
+<%# Rôle : 6 lignes, 2 000 caractères au plus, compteur « 1 234 / 2 000 » ; le début de phrase est un placeholder, jamais une valeur (menace W7) ; ni corrigé ni grille ici %>
+<%# ADR  : 0115 · UDR : 0140 §3 · Stimulus : assessment--counter (sans JavaScript, pas de compteur) %>
+<%# locals: (f:, question:, number:, values: {}) -%>
+<% scope = "assessment.exercise_sessions.kinds.written" %>
+<% max = Dtos::Assessment::AttemptInput::WRITTEN_TEXT_MAX %>
+<div class="space-y-2" data-controller="assessment--counter" data-assessment--counter-max-value="<%= max %>">
+  <%= f.label :response_text, t("#{scope}.label"), for: "q#{number}-response_text", class: "sr-only" %>
+  <%= f.text_area :response_text, value: values[:response_text], id: "q#{number}-response_text", rows: 6, maxlength: max,
+                  placeholder: question.starter, "aria-describedby": "q#{number}-counter",
+                  data: { assessment__counter_target: "input", action: "input->assessment--counter#update" },
+                  class: class_names(ComponentsHelper::FIELD_INPUT, "min-h-tap py-3", ComponentsHelper::FIELD_STATES[:valid]) %>
+  <p id="q<%= number %>-counter" hidden class="text-sm text-mute tabular-nums" data-assessment--counter-target="output"><%= t("#{scope}.counter", count: number_with_delimiter(values[:response_text].to_s.length), max: number_with_delimiter(max)) %></p>
+</div>

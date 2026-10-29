@@ -248,6 +248,95 @@ module UseCases
         assert_equal [ [ STUDENT, 5, nil ] ], @close.calls
       end
 
+      # ADR-0115 : un devoir avec les trois nouveaux types (menace W2 à W4, W7).
+      def devoir
+        questions = [
+          Question.new(id: 1, position: 1, content: "Les points sont ___.", explanation: nil, question_type: "select",
+                       answers: [ Answer.new(id: 11, position: 1, content: "parallèles", correct: false),
+                                  Answer.new(id: 12, position: 2, content: "alignés", correct: true),
+                                  Answer.new(id: 13, position: 3, content: "proportionnelles", correct: false) ]),
+          Question.new(id: 2, position: 2, content: "Justifie.", explanation: "Corrigé", question_type: "written", answers: [],
+                       starter: "Non, car…", points: BigDecimal("2")),
+          Question.new(id: 3, position: 3, content: "Trace sur ton cahier.", explanation: "Corrigé", question_type: "notebook", answers: [])
+        ]
+        Entities::Assessment::Exercise.new(id: 40, public_id: "ExErCiCe000040", course_id: 3, essential_id: 9, title: "Devoir",
+                                           exercise_type: "evaluation", status: "published", parents_published: true, questions:)
+      end
+
+      def attempts_of(result_answers)
+        submit(result_answers, exercise: devoir)
+        @sessions.copies.sole[:attempts].to_h { [ it[:question_id], it ] }
+      end
+
+      test "ADR-0115 : un choix dans une liste poste l'indice d'affichage de la proposition ; il est corrigé comme un choix" do
+        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: 5, question_id: 1, ids: [ 11, 12, 13 ])
+
+        right = attempts_of({ "1" => { display_order: [ shuffled.index(12).to_s ] } })[1]
+        wrong = attempts_of({ "1" => { display_order: [ shuffled.index(11).to_s ] } })[1]
+
+        assert_equal [ [ 12 ], true, false ], [ right[:selected_answer_ids], right[:correct], right[:unanswered] ]
+        assert_equal [ [ 11 ], false, false ], [ wrong[:selected_answer_ids], wrong[:correct], wrong[:unanswered] ]
+        assert_equal true, attempts_of({ "1" => { display_order: [ "" ] } })[1][:unanswered]
+      end
+
+      test "ADR-0115 : un identifiant de proposition (et non un indice) posté pour la liste est refusé" do
+        result = submit({ "1" => { display_order: [ "99" ] } }, exercise: devoir)
+
+        assert_equal [ :invalid, { answer_ids: [ :wrong_selection ] } ], [ result.code, result.errors[1] ]
+        assert_empty @sessions.copies
+      end
+
+      test "CA-21 : une réponse rédigée de 2 000 caractères est gardée telle quelle, jamais corrigée" do
+        text = "Non, car <b>AM/AB</b> ≠ AN/AC. " + ("é" * 1969)
+        attempt = attempts_of({ "2" => { response_text: text } })[2]
+
+        assert_equal 2000, text.length
+        assert_equal [ [], text, false, false ], [ attempt[:selected_answer_ids], attempt[:response_text], attempt[:correct], attempt[:unanswered] ]
+      end
+
+      test "CA-22 menace W2 : 2 001 caractères refusent la copie entière, rien n'est écrit" do
+        result = submit({ "2" => { response_text: "a" * 2001 } }, exercise: devoir)
+
+        assert_equal [ :invalid, { response_text: [ :text_too_long ] } ], [ result.code, result.errors[2] ]
+        assert_empty @sessions.copies
+        assert_empty @close.calls
+      end
+
+      test "menace W3 : un octet nul dans une réponse rédigée refuse la copie" do
+        result = submit({ "2" => { response_text: "a\0b" } }, exercise: devoir)
+
+        assert_equal [ :invalid, { response_text: [ :invalid ] } ], [ result.code, result.errors[2] ]
+        assert_empty @sessions.copies
+      end
+
+      test "menace W4 : un texte mal encodé est refusé, rien n'est écrit" do
+        result = submit({ "2" => { response_text: "a\xFFb".dup.force_encoding(Encoding::UTF_8) } }, exercise: devoir)
+
+        assert result.failure?
+        assert_empty @sessions.copies
+      end
+
+      test "ADR-0115 : au-delà de 200 caractères, une réponse courte (nombre, trous) reste refusée" do
+        result = submit({ "2" => { response_text: "1" * 201 } }, exercise: exercise)
+
+        assert_equal [ { response_text: [ :too_long ] } ], [ result.errors[2] ]
+      end
+
+      test "menace W7 : le début de phrase n'est jamais une réponse ; une zone vide est sans réponse" do
+        attempt = attempts_of({})[2]
+
+        assert_equal [ nil, [], true, false ], [ attempt[:response_text], attempt[:selected_answer_ids], attempt[:unanswered], attempt[:correct] ]
+        blank = attempts_of({ "2" => { response_text: "   " } })[2]
+        assert_equal [ nil, true ], [ blank[:response_text], blank[:unanswered] ]
+      end
+
+      test "ADR-0115 : le travail sur le cahier n'a pas de réponse : ce qui est posté est ignoré, aucun verdict" do
+        attempt = attempts_of({ "3" => { response_text: "x" * 5000, answer_ids: [ "12" ], display_order: [ "0" ] } })[3]
+
+        assert_equal [ [], nil, false ], [ attempt[:selected_answer_ids], attempt[:response_text], attempt[:correct] ]
+        assert_equal 1, @close.calls.size
+      end
+
       test "session inconnue : :not_found" do
         sessions = FakeSessions.new(session)
         use_case = SubmitExerciseCopy.new(sessions:, exercises: FakeExercises.new(exercise), policy: Policies::Assessment::SubmitAttemptPolicy.new,
