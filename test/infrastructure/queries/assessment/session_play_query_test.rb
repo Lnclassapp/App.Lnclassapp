@@ -229,6 +229,39 @@ module Queries
         assert_equal 4, statements.size
       end
 
+      # ADR-0115 : la copie porte les points, l'unité, le début de phrase, la liste de choix et le sujet en blocs, jamais le corrigé ni la grille.
+      test "copy : points, unité, début de phrase, sujet en blocs et liste de choix, sans corrigé ni grille" do
+        @exercise.update!(statement_blocks: [ { "type" => "table", "headers" => %w[a b], "rows" => [ %w[1 2] ] } ])
+        numeric = create_kind_question(exercise: @exercise, question_type: "numeric", answers: [ "4" ], explanation: "4 cm")
+        numeric.update!(points: "2.5", unit: "cm")
+        written = create_kind_question(exercise: @exercise, question_type: "written", answers: [], explanation: "Corrigé type")
+        written.update!(points: "3.5", starter: "Car…", criteria: [ "Je cite" ])
+        notebook = create_kind_question(exercise: @exercise, question_type: "notebook", answers: [], explanation: "Corrigé cahier")
+        select = create_kind_question(exercise: @exercise, question_type: "select", answers: %w[A B C], explanation: "Parce que.")
+        select.answers.where.not(content: "A").update_all(correct: false)
+        @session.update!(question_count: 7)
+
+        statements = []
+        collector = ->(*, payload) { statements << payload[:sql] unless payload[:name] == "SCHEMA" }
+        copy = ActiveSupport::Notifications.subscribed(collector, "sql.active_record") { SessionPlayQuery.new.copy(public_id: @session.public_id) }
+
+        assert_equal [ { "type" => "table", "headers" => %w[a b], "rows" => [ %w[1 2] ] } ], copy.statement_blocks
+        by_id = copy.questions.index_by(&:id)
+        assert_equal [ BigDecimal("1"), nil, nil ], by_id[@questions.first.id].to_h.values_at(:points, :unit, :starter)
+        assert_equal [ BigDecimal("2.5"), "cm" ], by_id[numeric.id].to_h.values_at(:points, :unit)
+        assert_equal [ BigDecimal("3.5"), "Car…" ], by_id[written.id].to_h.values_at(:points, :starter)
+        assert_equal [ BigDecimal("1") ], [ by_id[notebook.id].points ]
+        assert_equal %w[A B C], by_id[select.id].answers.map(&:content).sort
+        assert_equal select.answers.map(&:id).sort, by_id[select.id].answers.map(&:id).sort
+        assert_equal "select", by_id[select.id].kind_name
+        assert statements.none? { it.match?(/correct|explanation|criteria/) }, "une colonne de correction a été lue"
+        assert_equal 4, statements.size
+      end
+
+      test "copy : sans sujet en blocs, la clé est nil" do
+        assert_nil SessionPlayQuery.new.copy(public_id: @session.public_id).statement_blocks
+      end
+
       test "copy : le mélange suit la session, stable à chaque lecture ; une session inconnue donne nil" do
         other = create_exercise_session(exercise: @exercise)
         reads = Array.new(2) { SessionPlayQuery.new.copy(public_id: @session.public_id).questions.first.answers.map(&:id) }

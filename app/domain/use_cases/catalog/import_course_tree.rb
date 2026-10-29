@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des cours complets (notions, exercices, questions, propositions), tout en draft ; format 2 lu, format 1 toléré
-# ADR  : 0035, 0039, 0105, 0113 · UDR : 0038
+# ADR  : 0035, 0039, 0105, 0113, 0115 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -189,6 +189,7 @@ module UseCases
         Node::ExerciseNode.new(
           public_id: SecureRandom.base58(PUBLIC_ID_LENGTH), essential_id: nil, title: exercise["title"].squish,
           statement: exercise["statement"].to_s.strip, exercise_type: exercise["exercise_type"], position: nil,
+          statement_blocks: exercise["statement_blocks"].presence,
           questions: exercise["questions"].each_with_index.map { |question, rank| Node::QuestionNode.from_import(question, position: rank + 1) }
         )
       end

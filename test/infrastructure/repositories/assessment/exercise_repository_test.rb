@@ -94,6 +94,58 @@ module Repositories
         assert_equal [ BigDecimal("1") ], found.questions.map(&:points).uniq
       end
 
+      def devoir_questions
+        [ Question.new(id: nil, position: nil, content: "Calcule MN.", explanation: "4 cm", question_type: "numeric", points: BigDecimal("2.5"),
+                       unit: "cm", answers: [ Answer.new(id: nil, position: nil, content: "4", correct: true) ]),
+          Question.new(id: nil, position: nil, content: "Explique.", explanation: "Corrigé", question_type: "written", points: BigDecimal("3.5"),
+                       starter: "Car…", criteria: [ "Je cite", "Je compare" ], answers: []),
+          Question.new(id: nil, position: nil, content: "Construis.", explanation: "Corrigé", question_type: "notebook", points: BigDecimal("1.5"), answers: []),
+          Question.new(id: nil, position: nil, content: "Choisis ___.", explanation: "Parce que.", question_type: "select",
+                       answers: [ Answer.new(id: nil, position: nil, content: "A", correct: true), Answer.new(id: nil, position: nil, content: "B", correct: false) ]) ]
+      end
+
+      test "écrit et relit à l'identique les points, l'unité, le début de phrase, la grille et le sujet en blocs" do
+        blocks = [ { "type" => "paragraph", "text" => "Sujet" } ]
+
+        created = @repository.create(exercise: exercise(questions: devoir_questions, statement_blocks: blocks))
+        found = @repository.find(id: created.id)
+
+        assert_equal blocks, found.statement_blocks
+        assert_equal [ [ "numeric", BigDecimal("2.5"), "cm", nil, [] ], [ "written", BigDecimal("3.5"), nil, "Car…", [ "Je cite", "Je compare" ] ],
+                       [ "notebook", BigDecimal("1.5"), nil, nil, [] ], [ "select", BigDecimal("1"), nil, nil, [] ] ],
+                     found.questions.map { [ it.question_type, it.points, it.unit, it.starter, it.criteria ] }
+        assert_equal [ [ "A", true ], [ "B", false ] ], found.questions.last.answers.map { [ it.content, it.correct ] }
+      end
+
+      test "un début de phrase vide, une unité vide et des critères vides sont écrits comme absents" do
+        blank = Question.new(id: nil, position: nil, content: "Explique.", explanation: "Corrigé", question_type: "written", starter: "  ",
+                             criteria: [ "", " Je cite ", "  " ], answers: [])
+
+        found = @repository.create(exercise: exercise(questions: [ blank ])).questions.first
+
+        assert_nil found.starter
+        assert_equal [ "Je cite" ], found.criteria
+        assert_equal [ nil ], Orm::Question.where(id: found.id).pluck(:starter)
+      end
+
+      test "remplacer les questions réécrit leurs points et ne touche pas au sujet en blocs" do
+        blocks = [ { "type" => "paragraph", "text" => "Sujet" } ]
+        created = @repository.create(exercise: exercise(questions: devoir_questions, statement_blocks: blocks))
+        edited = @repository.find(id: created.id)
+        edited.questions = [ devoir_questions.first.with(points: BigDecimal("4")) ]
+        edited.statement_blocks = nil
+
+        updated = @repository.update(exercise: edited, replace_questions: true)
+
+        assert_equal [ BigDecimal("4") ], updated.questions.map(&:points)
+        assert_equal blocks, updated.statement_blocks
+      end
+
+      test "la base refuse des points hors bornes ou une unité trop longue écrits par le dépôt" do
+        assert_raises(ActiveRecord::StatementInvalid) { @repository.create(exercise: exercise(questions: [ devoir_questions.first.with(points: BigDecimal("0.3")) ])) }
+        assert_raises(ActiveRecord::StatementInvalid) { @repository.create(exercise: exercise(questions: [ devoir_questions.first.with(unit: "a" * 11) ])) }
+      end
+
       test "met à jour l'exercice seul, ou remplace aussi ses questions" do
         created = @repository.create(exercise: exercise)
         created.title = "Quiz révisé"

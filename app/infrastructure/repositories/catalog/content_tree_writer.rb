@@ -1,15 +1,16 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115
 module Repositories
   module Catalog
     class ContentTreeWriter
       include Ports::Catalog::ContentTreeWriterPort
 
       NATURAL_KEYS = { "Orm::Course" => %w[slug], "Orm::Essential" => %w[slug], "Orm::RichTextRow" => [] }.freeze
-      EXERCISE_COLUMNS = %w[id public_id course_id essential_id title statement exercise_type position author_id status created_at updated_at].freeze
-      QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type numeric_tolerance image_description created_at
-                            updated_at].freeze
+      EXERCISE_COLUMNS = %w[id public_id course_id essential_id title statement statement_blocks exercise_type position author_id status
+                            created_at updated_at].freeze
+      QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type numeric_tolerance image_description points unit
+                            starter criteria created_at updated_at].freeze
       ANSWER_COLUMNS = %w[question_id position content correct match_content created_at updated_at].freeze
       # Format texte de COPY : ces quatre caractères seraient lus comme séparateurs ou échappements.
       COPY_ESCAPES = { "\\" => "\\\\", "\t" => "\\t", "\n" => "\\n", "\r" => "\\r" }.freeze
@@ -142,14 +143,20 @@ module Repositories
 
       # Dans l'ordre d'EXERCISE_COLUMNS.
       def exercise_row(id, node, course_id, position)
-        [ id, node.public_id, course_id, node.essential_id, node.title, node.statement, node.exercise_type, position, @author_id, "draft",
-          @copy_at, @copy_at ]
+        [ id, node.public_id, course_id, node.essential_id, node.title, node.statement, node.statement_blocks&.to_json, node.exercise_type,
+          position, @author_id, "draft", @copy_at, @copy_at ]
       end
 
-      # Dans l'ordre de QUESTION_COLUMNS.
+      # Dans l'ordre de QUESTION_COLUMNS. Chaînes vides → null, critères vides retirés (ADR-0115) ; la base refuse le reste.
       def question_row(id, exercise_id, node)
         [ id, exercise_id, node.position, node.content, node.explanation, node.question_type, node.numeric_tolerance, node.image_description,
-          @copy_at, @copy_at ]
+          node.points, node.unit.presence, node.starter.presence, copy_array(node.criteria), @copy_at, @copy_at ]
+      end
+
+      # Un tableau de textes au format COPY d'une colonne PostgreSQL array : {"a","b"}, chaque texte entre guillemets.
+      def copy_array(items)
+        quoted = Array(items).map(&:to_s).map(&:strip).reject(&:empty?).map { %("#{it.gsub(/["\\]/) { |char| "\\#{char}" }}") }
+        "{#{quoted.join(',')}}"
       end
 
       # Dans l'ordre d'ANSWER_COLUMNS.

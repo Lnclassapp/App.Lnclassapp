@@ -1,14 +1,15 @@
 <%# 🌐 UI · teams/imports/_question_examples — un exemple de question par nouveau type, dans l'aide des trois imports %>
-<%# Rôle : texte à trous, nombre (tolerance), ordre, relier (match) ; chaque exemple est le partial kinds/_<type>_example de son lot %>
-<%# ADR  : 0091 §4.5 · UDR : 0040, 0087 §3.7 · rien n'est rendu tant qu'aucun exemple n'est livré %>
-<% kinds = %w[fill_blank numeric ordering matching].select { lookup_context.exists?("kinds/#{it}_example", [ "teams/imports" ], true) } %>
+<%# Rôle : texte à trous, nombre (tolerance, unit), ordre, relier (match) ; avec extended (cours complets) : liste, rédigée, cahier %>
+<%# ADR  : 0091 §4.5, 0115 · UDR : 0040, 0087 §3.7 · rien n'est rendu tant qu'aucun exemple n'est livré %>
+<% names = %w[fill_blank numeric ordering matching] + (local_assigns[:extended] ? %w[select written notebook] : []) %>
+<% kinds = names.select { lookup_context.exists?("kinds/#{it}_example", [ "teams/imports" ], true) } %>
 <% if kinds.any? %>
   <details id="import-help-question-kinds" class="rounded-ln border border-line bg-white">
     <summary class="flex min-h-tap cursor-pointer items-center gap-2 px-3 font-medium text-ink"><%= t("teams.imports.question_examples.title") %></summary>
     <div class="space-y-3 px-3 pb-3">
       <% kinds.each do |kind| %>
         <div class="space-y-1">
-          <p class="text-mute"><%= t("teams.exercises.question_types.#{kind}") %> <code class="font-mono text-xs text-ink"><%= kind %></code></p>
+          <p class="text-mute"><%= t("teams.imports.question_examples.labels.#{kind}") %> <code class="font-mono text-xs text-ink"><%= kind %></code></p>
           <pre class="overflow-x-auto rounded-ln bg-mist p-3 font-mono text-xs text-ink"><code><%= render("teams/imports/kinds/#{kind}_example").strip %></code></pre>
         </div>
       <% end %>

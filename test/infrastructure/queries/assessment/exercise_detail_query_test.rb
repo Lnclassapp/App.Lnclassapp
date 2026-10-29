@@ -137,6 +137,61 @@ module Queries
         assert_nil detail(reveal: true, public_id: "inconnu")
       end
 
+      # ADR-0115 : points, unité, début de phrase et sujet en blocs se lisent partout ; la grille et le corrigé type avec reveal seulement.
+      def add_devoir
+        @exercise.update!(statement_blocks: [ { "type" => "paragraph", "text" => "Sujet" } ])
+        @exercise.questions.create!(position: 3, content: "Calcule MN.", question_type: "numeric", explanation: "4 cm", points: "2.5", unit: "cm")
+                 .answers.create!(position: 1, content: "4", correct: true)
+        @exercise.questions.create!(position: 4, content: "Explique.", question_type: "written", explanation: "Corrigé type", points: "3.5",
+                                    starter: "Car…", criteria: [ "Je cite", "Je compare" ])
+        @exercise.questions.create!(position: 5, content: "Construis.", question_type: "notebook", explanation: "Corrigé cahier", points: "1.5")
+        select = @exercise.questions.create!(position: 6, content: "Choisis ___.", question_type: "select", explanation: "Parce que.")
+        [ [ "A", true ], [ "B", false ], [ "C", false ] ].each_with_index { |(text, correct), rank| select.answers.create!(position: rank + 1, content: text, correct:) }
+      end
+
+      test "ADR-0115 : points, unité, début de phrase et sujet en blocs sont lus sans reveal ; la grille et le corrigé type jamais" do
+        add_devoir
+
+        row = detail(reveal: false)
+
+        assert_equal [ { "type" => "paragraph", "text" => "Sujet" } ], row.exercise.statement_blocks
+        by_position = row.questions.index_by(&:position)
+        assert_equal [ BigDecimal("1"), nil, nil, [] ], by_position[1].to_h.values_at(:points, :unit, :starter, :criteria)
+        assert_equal [ BigDecimal("2.5"), "cm", nil, [] ], by_position[3].to_h.values_at(:points, :unit, :starter, :criteria)
+        assert_equal [ BigDecimal("3.5"), nil, "Car…", [] ], by_position[4].to_h.values_at(:points, :unit, :starter, :criteria)
+        assert_equal [ BigDecimal("1.5") ], [ by_position[5].points ]
+        assert_equal [ nil, nil, nil, nil ], by_position.values_at(3, 4, 5, 6).map(&:explanation)
+      end
+
+      test "ADR-0115 : avec reveal, la grille et le corrigé type des nouveaux types sont lus" do
+        add_devoir
+
+        by_position = detail(reveal: true).questions.index_by(&:position)
+
+        assert_equal [ "Je cite", "Je compare" ], by_position[4].criteria
+        assert_equal [ "Corrigé type", "Corrigé cahier" ], [ by_position[4].explanation, by_position[5].explanation ]
+      end
+
+      test "ADR-0115 : une liste (select) montre ses propositions mélangées, sans marque de correction sans reveal" do
+        add_devoir
+
+        shown = detail(reveal: false).questions.find { it.question_type == "select" }
+
+        assert_equal %w[A B C], shown.answers.map(&:content).sort
+        assert_equal [ nil ], shown.answers.map(&:correct).uniq
+        assert_equal [ true, false, false ], detail(reveal: true).questions.find { it.question_type == "select" }.answers.sort_by(&:position).map(&:correct)
+      end
+
+      test "ADR-0115 : sans reveal, aucune colonne de correction n'est lue pour les nouveaux types non plus" do
+        add_devoir
+        statements = []
+        collector = ->(*, payload) { statements << payload[:sql] unless payload[:name] == "SCHEMA" }
+
+        ActiveSupport::Notifications.subscribed(collector, "sql.active_record") { detail(reveal: false) }
+
+        assert statements.none? { it.match?(/correct|explanation|criteria/) }, "une colonne de correction a été lue : #{statements.join("\n")}"
+      end
+
       def count_queries(&)
         count = 0
         counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }

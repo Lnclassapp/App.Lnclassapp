@@ -1,0 +1,131 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 2,
+  "courses": [
+    {
+      "name": "La propriété de Thalès",
+      "subtitle": "Interrogation et devoir",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "content": "<p>Proportionnalité des longueurs dans un triangle.</p>",
+      "essentials": [
+        {
+          "name": "La propriété de Thalès",
+          "subtitle": "Énoncé et calcul",
+          "content": "<p>Si (MN) // (BC) alors AM/AB = AN/AC.</p>",
+          "exercises": [
+            {
+              "title": "Je m'entraîne",
+              "statement": "Réponds à la question.",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un triangle ABC, (MN) // (BC) avec M sur [AB] et N sur [AC]. Quelle égalité est vraie ?",
+                  "question_type": "single_choice",
+                  "answers": [
+                    { "content": "AM/AB = AN/AC", "correct": true },
+                    { "content": "AM/AB = MN/AN", "correct": false }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Interrogation",
+          "statement": "Réponds aux questions.",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Complète : le côté [BC] est ___ au segment [MN].",
+              "question_type": "select",
+              "explanation": "(MN) // (BC) : les droites sont parallèles.",
+              "answers": [
+                { "content": "parallèle", "correct": true },
+                { "content": "perpendiculaire", "correct": false },
+                { "content": "sécant", "correct": false }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Devoir",
+          "statement": "Les points M et N sont sur les côtés [AB] et [AC] du triangle ABC, avec (MN) parallèle à (BC).",
+          "exercise_type": "evaluation",
+          "statement_blocks": [
+            { "type": "box", "label": "Document", "tone": "property", "paragraphs": [ "Si (MN) // (BC), alors AM/AB = AN/AC = MN/BC." ] },
+            { "type": "table", "caption": "Mesures", "headers": [ "Segment", "Longueur (cm)" ], "rows": [ [ "AB", "6" ], [ "AM", "3" ], [ "BC", "8" ] ] }
+          ],
+          "questions": [
+            {
+              "content": "Quelle propriété utilise-t-on ? ___",
+              "question_type": "select",
+              "points": 1,
+              "explanation": "On utilise la propriété de Thalès.",
+              "answers": [
+                { "content": "la propriété de Thalès", "correct": true },
+                { "content": "le théorème de Pythagore", "correct": false },
+                { "content": "la réciproque de Thalès", "correct": false }
+              ]
+            },
+            {
+              "content": "Calcule MN.",
+              "question_type": "numeric",
+              "points": 2,
+              "unit": "cm",
+              "tolerance": 0.1,
+              "explanation": "MN = 8 × 3 / 6 = 4 cm.",
+              "answers": [ { "content": "4" } ]
+            },
+            {
+              "content": "Explique pourquoi les droites (MN) et (BC) sont parallèles.",
+              "question_type": "written",
+              "points": 3.5,
+              "starter": "Les droites sont parallèles car ",
+              "explanation": "Les rapports AM/AB et AN/AC sont égaux : réciproque de Thalès.",
+              "criteria": [ "J'ai cité la réciproque de Thalès", "J'ai comparé deux rapports" ]
+            },
+            {
+              "content": "Construis la figure sur ton cahier.",
+              "question_type": "notebook",
+              "points": 1.5,
+              "explanation": "Un triangle ABC, M sur [AB] et N sur [AC] avec (MN) // (BC)."
+            }
+          ]
+        },
+        {
+          "title": "Révision",
+          "statement": "Réponds à la question.",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "Si (MN) // (BC), AM/AB est égal à quoi ?",
+              "question_type": "single_choice",
+              "answers": [
+                { "content": "AN/AC", "correct": true },
+                { "content": "MN/AN", "correct": false }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Bilan",
+          "statement": "Réponds à la question.",
+          "exercise_type": "fixation",
+          "questions": [
+            {
+              "content": "La propriété de Thalès s'applique à deux droites parallèles.",
+              "question_type": "true_false",
+              "answers": [
+                { "content": "Vrai", "correct": true },
+                { "content": "Faux", "correct": false }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

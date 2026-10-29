@@ -28,7 +28,7 @@ module Repositories
         record = Orm::Exercise.create!(
           public_id: exercise.public_id, course_id:, essential_id: exercise.essential_id, author_id: exercise.author_id,
           position: exercise.position || next_course_position(course_id),
-          status: exercise.status || "draft", **editable_attributes(exercise)
+          status: exercise.status || "draft", statement_blocks: exercise.statement_blocks.presence, **editable_attributes(exercise)
         )
         write_questions(record.id, exercise.questions)
         find_by_public_id(public_id: record.public_id)
@@ -109,13 +109,21 @@ module Repositories
         questions.each_with_index do |question, index|
           record = Orm::Question.create!(exercise_id:, position: question.position || index + 1, content: question.content,
                                          explanation: question.explanation, question_type: question.question_type,
-                                         numeric_tolerance: question.numeric_tolerance, image_description: question.image_description)
+                                         numeric_tolerance: question.numeric_tolerance, image_description: question.image_description,
+                                         **correction_attributes(question))
           attach_image(record.id, question.image)
           question.answers.each_with_index do |answer, rank|
             Orm::Answer.create!(question_id: record.id, position: answer.position || rank + 1, content: answer.content,
                                 correct: answer.correct, match_content: answer.match_content)
           end
         end
+      end
+
+      # ADR-0115 : chaînes vides → null, critères vides retirés. Le sujet en blocs n'est écrit qu'à la création : une modification
+      # (qui ne le porte pas) le laisse tel quel. Les bornes de points et d'unité sont celles de la base.
+      def correction_attributes(question)
+        { points: question.points, unit: question.unit.to_s.strip.presence, starter: question.starter.to_s.strip.presence,
+          criteria: Array(question.criteria).map { it.to_s.strip }.reject(&:empty?) }
       end
 
       # Seule une image qui n'est à aucune question se rattache : une image d'une autre question reste où elle est, et
