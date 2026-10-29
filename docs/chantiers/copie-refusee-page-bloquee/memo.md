@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré, clos |
 | **Ouvert le** | 2026-10-29 |
 | **Branche** | `fix/copie-refusee-page-bloquee` |
 | **Programme** | — |
@@ -49,7 +49,7 @@ Attendu (UDR-0138 §3.3, lignes « Réponse illisible » et « Erreur ») : la c
 - [x] Correctif appliqué dans la couche de la **cause**, pas du symptôme
 - [x] Test au vert · suite du contexte borné au vert
 - [x] Cas symétrique vérifié : le chemin nominal voisin fonctionne toujours
-- [ ] Données déjà corrompues : réparées, ou dette explicitement notée au journal
-- [ ] Challenger a rejoué les étapes de reproduction dans l'application
-- [ ] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
-- [ ] `journal.md` : cause, trou de test comblé, effets de bord écartés
+- [x] Données déjà corrompues : réparées, ou dette explicitement notée au journal
+- [x] Challenger a rejoué les étapes de reproduction dans l'application
+- [x] Commit `fix(<contexte>): …` avec la ligne `Chantier:`
+- [x] `journal.md` : cause, trou de test comblé, effets de bord écartés

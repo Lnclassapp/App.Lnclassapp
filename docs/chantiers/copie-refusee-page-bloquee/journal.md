@@ -50,7 +50,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-29 |
+| **PR** | #364 (rejeu sur Develop : refus, toucher, compteur 4/5 puis 5/5, copie rendue, à 390 px et sur ordinateur) |
+| **ADR produits** | — |
+| **UDR produits** | — |
