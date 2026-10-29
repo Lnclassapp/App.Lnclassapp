@@ -104,6 +104,70 @@ module Queries
         assert_empty second.answers
       end
 
+      # ADR-0115 : le corrigé type et la grille d'une réponse rédigée ou du cahier ne sortent qu'avec reveal.
+      test "sans reveal : ni corrigé type ni grille pour une réponse rédigée ou le cahier ; avec reveal, les deux" do
+        exercise = create_exercise(questions: 0)
+        %w[written notebook].each do |type|
+          exercise.questions.create!(position: exercise.questions.count + 1, content: "Rédige #{type}", question_type: type,
+                                     explanation: "Corrigé #{type}", criteria: [ "Cite le noyau" ], points: BigDecimal("2"))
+        end
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+
+        result(session:).review.each do |question|
+          assert_nil question.explanation
+          assert_empty question.criteria
+        end
+        revealed = result(reveal: true, session:).review
+        assert_equal [ "Corrigé written", "Corrigé notebook" ], revealed.map(&:explanation)
+        assert_equal [ [ "Cite le noyau" ] ] * 2, revealed.map(&:criteria)
+      end
+
+      test "choix dans une liste : sans reveal la proposition choisie seule, correct nil ; avec reveal la correcte porte correct: true" do
+        exercise = create_exercise(questions: 0)
+        question = exercise.questions.create!(position: 1, content: "Choisis", question_type: "select")
+        right = question.answers.create!(position: 1, content: "Bonne", correct: true)
+        wrong = question.answers.create!(position: 2, content: "Mauvaise", correct: false)
+        question.answers.create!(position: 3, content: "Autre", correct: false)
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+        Orm::QuestionAttempt.create!(exercise_session: session, question:, correct: false, selected_answer_ids: [ wrong.id ],
+                                     answered_at: Time.current)
+
+        hidden = result(session:).review.sole
+        assert_equal [ [ "Mauvaise", true, nil ] ], hidden.answers.map { [ it.content, it.selected, it.correct ] }
+
+        shown = result(reveal: true, session:).review.sole
+        assert_equal [ [ "Bonne", false, true ], [ "Mauvaise", true, false ], [ "Autre", false, false ] ],
+                     shown.answers.map { [ it.content, it.selected, it.correct ] }
+        assert_equal right.id, shown.answers.find(&:correct).id
+      end
+
+      test "points : earned et graded des seules questions corrigées, manual du rédigé, weighted avec un poids décimal" do
+        exercise = create_exercise(questions: 0)
+        good = create_kind_question(exercise:, question_type: "fill_blank", answers: %w[Abidjan])
+        bad = create_kind_question(exercise:, question_type: "numeric", answers: [ "3,5" ])
+        good.update!(points: BigDecimal("1"))
+        bad.update!(points: BigDecimal("2.5"))
+        exercise.questions.create!(position: 3, content: "Rédige", question_type: "written", points: BigDecimal("1.5"))
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 30)
+        Orm::QuestionAttempt.create!(exercise_session: session, question: good, correct: true, selected_answer_ids: [], response_text: "Abidjan", answered_at: Time.current)
+        Orm::QuestionAttempt.create!(exercise_session: session, question: bad, correct: false, selected_answer_ids: [], response_text: "9", answered_at: Time.current)
+
+        points = result(session:).points
+
+        assert_equal [ BigDecimal("1"), BigDecimal("3.5"), BigDecimal("1.5"), true ],
+                     [ points.earned, points.graded, points.manual, points.weighted ]
+        assert_not result.points.weighted
+      end
+
+      test "appréciation : une question corrigée automatiquement sans tentative est à revoir" do
+        Orm::QuestionAttempt.where(question: @second).delete_all
+
+        appreciation = result.appreciation
+
+        assert_equal [ 1, 2 ], appreciation.weak_numbers
+        assert appreciation.review?
+      end
+
       # ADR-0091 §4.4 : « Ton choix » par type ; la solution seulement avec reveal.
       def kind_review(reveal:)
         exercise = create_exercise(questions: 0)
