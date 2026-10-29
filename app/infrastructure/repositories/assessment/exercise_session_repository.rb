@@ -28,6 +28,8 @@ module Repositories
       end
 
       # L'index partiel refuse une seconde session ouverte : on renvoie celle qui existe.
+      # Si la violation vient d'ailleurs (public_id déjà pris) ou si la session concurrente n'est plus ouverte, il n'y a rien à
+      # renvoyer : l'exception d'origine remonte (500 gérée) plutôt qu'un nil que l'appelant prendrait pour une session.
       def start(session:)
         record = Orm::ExerciseSession.new(
           public_id: session.public_id, student_id: session.student_id, exercise_id: session.exercise_id, status: "started",
@@ -38,7 +40,7 @@ module Repositories
         Orm::ExerciseSession.transaction(requires_new: true) { record.save! }
         map_to_entity(record)
       rescue ActiveRecord::RecordNotUnique
-        started_for(student_id: session.student_id, exercise_id: session.exercise_id)
+        started_for(student_id: session.student_id, exercise_id: session.exercise_id) || raise
       end
 
       def abandon(id:, at:)
