@@ -1,13 +1,17 @@
 # 🌐 DELIVERY · Classroom::JoinsController
 # Rôle : /c/<jeton> ouvre l'inscription élève, la classe déjà choisie, ou l'entrée de l'élève sans classe ; tout autre paramètre (ancien code compris), la voie standard avec l'alerte
-# ADR  : 0026, 0028, 0040, 0041, 0050, 0085, 0088, 0095 · UDR : 0081, 0083, 0102
+# ADR  : 0026, 0028, 0040, 0041, 0050, 0085 (§4.7), 0088, 0095 · UDR : 0081, 0083, 0102
 module Classroom
   class JoinsController < ApplicationController
     allow_unauthenticated_access
     # ADR-0041, ADR-0085 §4.1 : l'aperçu et l'entrée partagent le compteur ; au-delà, rien n'est révélé. La confirmation
-    # d'un changement par lien (StudentClassroomChangesController) compte dans le même compteur.
+    # d'un changement par lien (StudentClassroomChangesController) et l'envoi d'une inscription qui porte un jeton de lien
+    # (StudentRegistrationsController) comptent dans le même compteur.
+    # ADR-0085 §4.7 : le lien d'une classe a son compteur, large (60 par minute et par adresse) : une classe entière s'inscrit
+    # derrière une seule adresse. LINK_RATE_LIMIT (10) reste celui de la devinette de codes et de la voie standard.
     LINK_RATE_LIMIT = { to: 10, within: 1.minute, scope: "classroom/joins" }.freeze
-    rate_limit **LINK_RATE_LIMIT, by: -> { request.remote_ip }, with: -> { refuse_too_many }
+    CLASS_LINK_RATE_LIMIT = { to: 60, within: 1.minute, scope: "classroom/links" }.freeze
+    rate_limit **CLASS_LINK_RATE_LIMIT, by: -> { request.remote_ip }, with: -> { refuse_too_many }
     before_action :refuse_other_roles
     # UDR-0102 §3.3 : l'élève déjà dans une classe active va à la confirmation du changement ; son envoi ici reste
     # refusé par JoinAsStudent, en 403 (IL-18).

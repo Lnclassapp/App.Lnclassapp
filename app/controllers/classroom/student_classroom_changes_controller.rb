@@ -12,9 +12,9 @@ module Classroom
     allow_roles :student
     # ADR-0095 §4.4 : 5 envois par minute et par compte, comme l'inscription.
     rate_limit to: 5, within: 1.minute, only: :create, by: -> { current_actor.user_id }, with: -> { refuse_too_many }
-    # ADR-0085 §4.1 : la confirmation par lien dit si un jeton ouvre une classe ; elle partage le compteur de /c/<jeton>.
-    rate_limit **JoinsController::LINK_RATE_LIMIT, only: :confirm, if: :link?, by: -> { request.remote_ip },
-                                                   with: -> { refuse_too_many }
+    # ADR-0085 §4.1 : la confirmation par lien dit si un jeton ouvre une classe ; elle partage le compteur du lien de classe (/c/<jeton>, 60 par minute, §4.7).
+    rate_limit **JoinsController::CLASS_LINK_RATE_LIMIT, only: :confirm, if: :link?, by: -> { request.remote_ip },
+                                                         with: -> { refuse_too_many }
     # L'élève sans classe active choisit la sienne par « Choisis ta classe » (JoinAsStudent).
     before_action :load_current, only: %i[new confirm]
 
