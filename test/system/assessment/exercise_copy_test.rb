@@ -46,6 +46,25 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
     assert_equal [ "completed", 2 ], [ session.status, session.correct_count ]
   end
 
+  # CA-01, CA-03, CA-09 (UDR-0140) : le parcours nominal, de la feuille remplie au résultat corrigé.
+  test "l'élève vérifie sa copie, confirme, puis lit l'appréciation, ce qu'il doit revoir et une bonne réponse" do
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    visit exercise_session_path(session.public_id)
+    @questions.first(4).each_with_index { |question, index| answer(question, index != 3) }
+
+    click_on "Vérifier ma copie"
+    within("dialog#copy-confirm[open]") do
+      assert_text "Vérifier ta copie ?"
+      click_on "Vérifier quand même"
+    end
+
+    assert_selector "#session_grade"
+    assert_selector "h1", text: I18n.t("assessment.session_results.show.headline.good")
+    assert_selector "#session_to_review", text: /À revoir.*questions 4 et 5/
+    click_on I18n.t("components.reveal.more")
+    assert_selector "#question_review_#{@questions.first.id} [data-correct]", text: right(@questions.first).content
+  end
+
   test "« Continuer ma copie » referme la confirmation et ne rend rien ; Échap fait de même" do
     session = create_exercise_session(student: @student, exercise: @exercise)
     visit exercise_session_path(session.public_id)

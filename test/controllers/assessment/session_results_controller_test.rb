@@ -550,9 +550,9 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
   end
 
   # CA-15 : 11 points corrigés automatiquement, une réponse rédigée de 4 points.
-  test "CA-15 : « 8 points sur 11 corrigés automatiquement » et « 4 points à comparer au corrigé »" do
+  test "CA-15 : « 6 points sur 11 corrigés automatiquement » et « 4 points à comparer au corrigé »" do
     session = create_exercise_session(student: @student, exercise: @exercise, status: "completed", score_percent: 72)
-    # @first (1 pt) et @second (1 pt) existent déjà : on porte l'exercice à 11 points corrigés, dont 8 justes.
+    # @first (1 pt) et @second (1 pt) existent déjà : on porte l'exercice à 11 points corrigés, dont 6 justes (3 + 3).
     @first.update!(points: 3)
     @second.update!(points: 3)
     create_attempt(session:, question: @first, correct: true)
@@ -661,6 +661,65 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
       assert_select "input, textarea", 0
     end
     assert_select "#session_to_review", text: /question 1\z/
+  end
+
+  # CA-03 : l'élève propriétaire d'une copie vérifiée lit la solution de chaque type.
+  def wrong_attempt(session:, question:, ids: [], text: nil)
+    Orm::QuestionAttempt.create!(exercise_session: session, question:, correct: false, selected_answer_ids: ids, response_text: text,
+                                 answered_at: Time.current)
+  end
+
+  def kind_session(question_type:, answers:)
+    exercise = create_exercise(essential: @essential, questions: 0)
+    question = create_kind_question(exercise:, question_type:, answers:)
+    [ question, create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0) ]
+  end
+
+  test "CA-03 : un texte à trous montre les réponses acceptées" do
+    question, session = kind_session(question_type: "fill_blank", answers: %w[Abidjan Yamoussoukro])
+    wrong_attempt(session:, question:, text: "Paris")
+    sign_in_as @student
+
+    show session
+
+    assert_select "#question_review_#{question.id} [data-correct]", text: /Abidjan ; Yamoussoukro/
+  end
+
+  test "CA-03 : un ordre montre le bon ordre" do
+    question, session = kind_session(question_type: "ordering", answers: %w[Premier Deuxième Troisième])
+    wrong_attempt(session:, question:, ids: question.answers.order(:position).map(&:id).reverse)
+    sign_in_as @student
+
+    show session
+
+    assert_select "#question_review_#{question.id} [data-correct] li", count: 3
+    assert_select "#question_review_#{question.id} [data-correct]", text: /1\.\s*Premier.*2\.\s*Deuxième.*3\.\s*Troisième/m
+  end
+
+  test "CA-03 : une association montre les bonnes paires" do
+    question, session = kind_session(question_type: "matching", answers: [ %w[chat miaou], %w[chien aboie] ])
+    wrong_attempt(session:, question:, ids: question.answers.order(:position).map(&:id).reverse)
+    sign_in_as @student
+
+    show session
+
+    assert_select "#question_review_#{question.id} [data-correct] li", count: 2
+    assert_select "#question_review_#{question.id} [data-correct]", text: /chat → miaou.*chien → aboie/m
+  end
+
+  test "CA-03 : un choix dans une liste montre la proposition correcte" do
+    exercise = create_exercise(essential: @essential, questions: 0)
+    question = exercise.questions.create!(position: 1, content: "Choisis", question_type: "select")
+    question.answers.create!(position: 1, content: "Proposition juste", correct: true)
+    mistaken = question.answers.create!(position: 2, content: "Proposition fausse", correct: false)
+    session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 0)
+    wrong_attempt(session:, question:, ids: [ mistaken.id ])
+    sign_in_as @student
+
+    show session
+
+    assert_select "#question_review_#{question.id} [data-correct]", text: /Proposition juste/
+    assert_select "#question_review_#{question.id} [data-correct]", text: /Proposition fausse/, count: 0
   end
 
   test "CA-03 : une réponse chiffrée en cm montre la valeur attendue suivie de « cm »" do

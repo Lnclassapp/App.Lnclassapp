@@ -24,7 +24,7 @@ module Queries
       # d'un choix, étapes d'un ordre dans l'ordre de l'élève), response_text (trous, nombre), pairs (relier). solution et
       # numeric_tolerance ne sont remplis qu'avec reveal, pour les quatre nouveaux types.
       # ADR-0115 : points, unit (réponse chiffrée), criteria (grille d'une réponse rédigée, avec reveal seulement). Pour une
-      # réponse rédigée ou du cahier, explanation est le corrigé type : sans reveal, la query ne le lit pas.
+      # réponse rédigée ou du cahier, explanation est le corrigé type : sans reveal, la query ne le rend pas.
       ReviewQuestion = Data.define(:id, :number, :content, :explanation, :correct, :answers, :question_type, :response_text,
                                    :pairs, :solution, :numeric_tolerance, :unanswered, :points, :unit, :criteria) do
         def initialize(question_type: "single_choice", response_text: nil, pairs: [], solution: [], numeric_tolerance: nil,
@@ -133,7 +133,7 @@ module Queries
         elements = elements(kinds.reject { |_, kind| CHOICE_KINDS.include?(kind) || WRITTEN_KINDS.include?(kind) || !(reveal || ELEMENT_KINDS.include?(kind)) }.keys)
         questions.each_with_index.map do |(id, content, explanation, question_type, points, unit, criteria, tolerance), index|
           correct, selected, response_text, unanswered = attempts.fetch(id, [ nil, [], nil, false ])
-          # Le corrigé type d'une réponse rédigée ou du cahier ne se lit qu'avec reveal ; la grille aussi.
+          # Le corrigé type d'une réponse rédigée ou du cahier ne se rend qu'avec reveal ; la grille aussi.
           written = WRITTEN_KINDS.include?(kind_name(question_type))
           ReviewQuestion.new(id:, number: index + 1, content:, explanation: (explanation if reveal || !written), correct:, question_type:,
                              response_text:, unanswered:, points:, unit:, criteria: (reveal ? criteria : []),
