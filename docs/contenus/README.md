@@ -5,37 +5,33 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | Fichier | Rôle |
 |---|---|
 | [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 fiches de cours sans fiche de révision), à importer depuis **Imports → Fiches de cours complètes**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
-| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche de révision, 3 exercices par fiche de révision, images annoncées et leur style, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : la fiche de cours, ses fiches de révision et leurs exercices |
-| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour un niveau et une série (Tle D, 1ère D, 3ème…), il prend les 3 premières leçons de chaque matière du niveau (jusqu’à 18), les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture indépendante) et les range dans `lecons-traitees/`. Un appel = un niveau |
-| [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle mécanique d’un fichier de leçon contre les règles du prompt : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s’il y a une erreur |
+| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon de mathématiques au **format v3** : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
+| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour un niveau (3ème…), il prend les leçons de mathématiques de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = un niveau |
+| [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
 | [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Français, Histoire-Géographie et EDHC) |
 
 ## Le principe
 
-La force de Lnclass, c'est que l'élève comprend du premier coup. Chaque notion passe par une **image du quotidien** que l'élève connaît déjà, avant la définition exacte, dans cet ordre :
+L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il doit **comprendre une méthode et savoir la réappliquer seul**. La même méthode, en étapes numérotées, sert trois fois : dans « La méthode » de la notion, dans l'exemple corrigé (l'étape *n* applique l'étape *n*) et dans la correction de chaque question d'exercice, avec les mêmes mots.
 
-1. l'image ;
-2. le pont entre l'image et la notion ;
-3. la notion exacte ;
-4. la limite de l'image.
+## Le pipeline d'une leçon
 
-Exemple de référence, le théorème des gendarmes : deux policiers tiennent un prisonnier par les bras. S'ils arrivent tous les deux au commissariat, le prisonnier y arrive aussi.
+**rédaction → script → relecture IA → import en brouillon → validation équipe → publication**
 
-## Utiliser le prompt
+1. **Rédiger.** Copier `prompt-redaction.md`, remplir son bloc **ENTRÉE** (intitulé exact de la progression, niveau, rang). Le résultat est un fichier JSON `lnclass.course-tree` version 3 : les versions 1 et 2 sont **retirées** et refusées à l'import (`format_retired`).
+2. **Contrôler avec le script.** `ruby script/contenus/valider.rb fichier.json`. Il refuse ce que l'import refuserait (gabarit, `example_steps_mismatch`, un exercice par notion, 4 problèmes, `too_few_questions`, correction absente, figures hors règles) et avertit des défauts de rédaction : correction qui ne cite aucune étape de La méthode, mots interdits, question qui dépend d'un élément absent. Il ne vérifie pas les calculs.
+3. **Relecture IA indépendante.** Un autre modèle que l'auteur refait chaque calcul et vérifie que chaque correction suit la méthode. Les défauts sont corrigés, puis le script est relancé.
+4. **Importer en brouillon** depuis l'écran **Imports**. Rien n'est visible des élèves. Une leçon encore en brouillon peut être réimportée (elle garde son adresse) ; une leçon publiée est refusée.
+5. **Validation par l'équipe** dans l'application : la fiche de révision, les figures, les exercices et leurs corrections. Pour le pilote 3ème, un enseignant de mathématiques relit avant publication.
+6. **Publier.**
 
-1. **Rédiger.** Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression. Le JSON obtenu annonce ses images : `<p>[[image: description]]</p>` dans le texte d'une fiche de révision, `"image": { "description": "…" }` sur une question (voir « Les images » dans le prompt).
-2. **Importer** le JSON depuis **Imports → Fiches de cours complètes**. **Un seul import** crée la fiche de cours, ses fiches de révision et les exercices de chaque fiche de révision, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 fiches de cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Une même fiche de cours présente dans deux fichiers de l'envoi n'est importé dans aucun des deux. L'import ne crée aucune image : il garde les emplacements et les descriptions.
-3. **Produire chaque image dans Claude Design**, à partir de sa description et du style du prompt (ludique, lisible sur téléphone, symboles justes), puis l'exporter en **PNG ou WebP**. L'image est allégée par le navigateur à l'envoi (300 Ko et 1200 pixels de côté au plus).
-4. **Insérer chaque image.** Dans une fiche de révision : l'ouvrir en modification, placer le curseur dans l'emplacement « Image à insérer : … » et cliquer **Insérer une image** ; l'image remplace l'emplacement et son texte de remplacement est pré-rempli avec la description. Dans une question : modifier l'exercice et cliquer **Ajouter l'image** sur la question. On peut aussi ajouter une image non annoncée, ou retirer un emplacement inutile.
-5. **Faire relire, puis publier.** Un enseignant de la discipline relit le texte **et les images**. Une fiche de révision ou un exercice ne se publie pas tant qu'il reste un emplacement vide, une question qui attend son image, ou une image sans texte de remplacement.
+Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
+Les leçons déjà rangées dans `lecons-traitees/` au format v1 (Tle D, 3ème, etc.) ne sont plus importables : elles seront réécrites en v3, mathématiques d'abord (chantier `refonte-contenus-maths`).
 
-**Leçons rédigées avant les images** (ADR-0105) : elles restent en texte seul, sans reprise en masse, puisqu'un import ne met jamais à jour une fiche de cours existante. C'est le cas de toutes les leçons de `lecons-traitees/` à ce jour et de toute leçon importée avant le 2026-10-10. Une image peut toujours s'y ajouter à la main, dans l'éditeur de la fiche de révision.
+## Ordre des imports (historique, formats v1)
 
-Pour toutes les matières d’un niveau d’un coup, utiliser plutôt [`prompt-redaction-lot.md`](prompt-redaction-lot.md).
-
-## Ordre des imports
+> Cette section décrit les imports v1 des leçons rangées avant la refonte. Le format v3 remplace ce mode d'emploi pour les mathématiques : voir « Le pipeline d'une leçon ».
 
 Un import ne met jamais à jour l'existant : une fiche de cours déjà présente (même nom, niveau, matière et série) est **ignorée** comme doublon, fiches de révision comprises. D'où l'ordre :
 
