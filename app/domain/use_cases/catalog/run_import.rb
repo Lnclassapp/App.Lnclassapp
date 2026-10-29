@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Catalog::RunImport
 # Rôle : moteur d'import partiel d'un envoi de 1 à N fichiers : refus par fichier, validation de tout l'envoi, doublons,
 #         écriture par lots rejoués, bilan par fichier
-# ADR  : 0028, 0039, 0050, 0068, 0113, XXXX
+# ADR  : 0028, 0039, 0050, 0068, 0113, 0116
 module UseCases
   module Catalog
     class RunImport
@@ -177,7 +177,7 @@ module UseCases
         return [] if kind.accepts?(document["version"])
 
         received = document["version"]
-        # Un format plus ancien que celui du type est retiré (ADR-XXXX §4.1) : l'équipe doit passer à la version courante.
+        # Un format plus ancien que celui du type est retiré (ADR-0116 §4.1) : l'équipe doit passer à la version courante.
         return [ error(source, "version", "format_retired", expected: kind.version, received:) ] if retired?(received, kind)
 
         [ error(source, "version", "version_unsupported", expected: kind.version) ]
@@ -258,7 +258,7 @@ module UseCases
       end
 
       # Une leçon publiée entre la validation et l'écriture : l'écrivain le dit par la classe de l'exception (clé `exception`), le moteur
-      # rend la même raison que la validation (ADR-XXXX §4.4) au lieu d'un échec d'écriture générique.
+      # rend la même raison que la validation (ADR-0116 §4.4) au lieu d'un échec d'écriture générique.
       def write_error(source, entry, written)
         raised = written.errors[:exception]&.first.to_s.split("::").last
         if raised == Ports::Catalog::ContentTreeWriterPort::NOT_DRAFT && entry.item.plan.respond_to?(:name)

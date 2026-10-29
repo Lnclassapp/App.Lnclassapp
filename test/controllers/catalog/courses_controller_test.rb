@@ -753,7 +753,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_header", text: including("Tle D")
     assert_select "#course_header", text: including("SVT")
     # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; la fiche de révision montre les notions publiées au
-    # gabarit des quatre blocs (UDR-XXXX fiche de révision) ; « Prépare interros » liste l'exercice de la notion (Lot B).
+    # gabarit des quatre blocs (UDR-0141 fiche de révision) ; « Prépare interros » liste l'exercice de la notion (Lot B).
     assert_select "#course_essentials", 0
     assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
     assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
@@ -866,7 +866,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_sheet_link", 0
   end
 
-  # La fiche de révision est du texte brut (ADR-XXXX fiche de révision) : ce qu'un bloc contient d'exécutable est échappé.
+  # La fiche de révision est du texte brut (ADR-0116 fiche de révision) : ce qu'un bloc contient d'exécutable est échappé.
   test "the revision sheet escapes its text: no script tag, no event attribute, no javascript link" do
     create_essential(course: @course, name: "Notion piégée", sheet: notion_sheet(
       "<p onclick=\"alert(1)\">Texte</p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"

@@ -18,7 +18,7 @@ module Repositories
       # ADR-0091 : colonnes venues après l'instantané ; ces leçons n'ont que des choix, elles restent vides (vérifié à part).
       # ADR-0115 : points (1 par défaut), unit, starter, criteria et statement_blocks viennent aussi après l'instantané ; l'import
       # d'aujourd'hui ne les écrit pas encore (Lot D), les lignes gardent leurs valeurs par défaut (vérifié à part).
-      # ADR-XXXX : figures, sheet_theme, sheet et figure_key (format 3) viennent aussi après lui ; ces nœuds d'avant les laissent à leur défaut.
+      # ADR-0116 : figures, sheet_theme, sheet et figure_key (format 3) viennent aussi après lui ; ces nœuds d'avant les laissent à leur défaut.
       ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key].freeze
 
       setup do
@@ -31,7 +31,7 @@ module Repositories
 
       Port = Ports::Catalog::ContentTreeWriterPort
 
-      # Le format 1 n'est plus lu à l'import (ADR-XXXX) : les nœuds d'avant (fiche à texte riche, exercices des notions) sont bâtis ici
+      # Le format 1 n'est plus lu à l'import (ADR-0116) : les nœuds d'avant (fiche à texte riche, exercices des notions) sont bâtis ici
       # depuis les fichiers, comme l'adaptateur d'alors les bâtissait ; c'est l'écriture, pas la lecture, que ce test garde.
       def course_node(root, lookup, taken_courses, taken_essentials)
         name = root["name"].squish

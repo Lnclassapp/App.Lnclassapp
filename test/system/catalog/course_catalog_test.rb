@@ -22,7 +22,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
 
   def t(key, **) = I18n.t(key, **)
 
-  # La fiche de révision v3 d'une notion : une formule dans « À retenir », rendue par KaTeX (ADR-XXXX §4.3).
+  # La fiche de révision v3 d'une notion : une formule dans « À retenir », rendue par KaTeX (ADR-0116 §4.3).
   def formula_sheet(formula)
     { "remember" => "Retenir : #{formula}.", "method" => [ "Lire l'énoncé.", "Appliquer la formule." ],
       "example" => { "statement" => "Appliquer.", "steps" => [ "On applique la formule.", "On conclut." ] },

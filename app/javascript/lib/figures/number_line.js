@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/number_line — la droite graduée : graduation, points, intervalles ouverts ou fermés
 // Rôle : lit `min`, `max`, `step`, `points` [{value, label}] et `intervals` [{from, to, from_open, to_open}] ; revérifie les bornes avant de dessiner
-// ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, fixed, round, clamp } from "./svg"
 

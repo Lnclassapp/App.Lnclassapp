@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::PublishEssential
 # Rôle : l'équipe publie une fiche brouillon ou archivée, seulement si son cours est publié ; inscrit au journal
-# ADR  : 0026, 0028, 0035, 0050, XXXX
+# ADR  : 0026, 0028, 0035, 0050, 0116
 module UseCases
   module Catalog
     class PublishEssential

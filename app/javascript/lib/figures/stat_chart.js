@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/stat_chart — le diagramme statistique : bâtons, histogramme ou circulaire
 // Rôle : lit `chart` (bars, histogram, pie), `series` (nombres de 0 à 1 000 000) et `labels` (textes, dans le même ordre) ; revérifie les valeurs avant de dessiner
-// ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, fixed, round } from "./svg"
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, XXXX
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -38,12 +38,12 @@ module Ports
       end
       # position : indicative ; l'écrivain numérote les exercices par leçon, dans l'ordre où il les reçoit.
       # statement_blocks : le sujet en blocs, déjà validé par l'adaptateur (ADR-0115) ; nil sans blocs.
-      # figure_key (v3, ADR-XXXX §4.3) : la clé de la figure de la leçon citée par l'exercice ; nil sans figure.
+      # figure_key (v3, ADR-0116 §4.3) : la clé de la figure de la leçon citée par l'exercice ; nil sans figure.
       ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions, :statement_blocks,
                                  :figure_key) do
         def initialize(statement_blocks: nil, figure_key: nil, **) = super
       end
-      # Une notion v3 (ADR-XXXX §4.1, §4.3) : sheet est la fiche au gabarit fixe, { remember:, method: [], example: { statement:, steps: [] },
+      # Une notion v3 (ADR-0116 §4.1, §4.3) : sheet est la fiche au gabarit fixe, { remember:, method: [], example: { statement:, steps: [] },
       # pitfall:, figure_key: } (clés texte, jsonb tel quel) ; exercises : l'exercice de la notion. Pas de content (retiré).
       NotionNode = Data.define(:slug, :course_id, :name, :position, :sheet, :exercises)
       # existing_id : l'id de la notion déjà en base d'une leçon réimportée (ADR-0113 §4.4) ; nil pour une notion à créer.
@@ -67,7 +67,7 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #write"
       end
 
-      # ADR-XXXX §4.4 : remplace entière une leçon encore en brouillon, dans la transaction de l'appelant, la leçon verrouillée (FOR UPDATE) :
+      # ADR-0116 §4.4 : remplace entière une leçon encore en brouillon, dans la transaction de l'appelant, la leçon verrouillée (FOR UPDATE) :
       # exercices, questions, réponses, séances et tentatives sur ces exercices, notions et leurs lectures, puis réécriture depuis `tree`
       # (CourseNode v3 avec existing_id: course_id). La leçon garde son id et son slug. Lève si un contenu n'est plus en brouillon.
       # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées)

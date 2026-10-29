@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Teams::AnswerKeysController
 # Rôle : le corrigé d'une leçon pour l'équipe, page pleine en lecture seule ; tout autre acteur, comme une leçon inconnue, reçoit 404
-# ADR  : 0028, 0113 (§4.6), 0115 · UDR : XXXX-fiche-de-revision-en-quatre-blocs §3.5
+# ADR  : 0028, 0113 (§4.6), 0115 · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.5
 module Teams
   class AnswerKeysController < AuthenticatedController
     def show

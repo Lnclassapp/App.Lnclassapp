@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, XXXX
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -51,7 +51,7 @@ module Repositories
         { courses: courses.size, essentials: essentials.size + notions.size, **counts, archived: }
       end
 
-      # ADR-XXXX §4.4 : remplace une leçon encore en brouillon, dans la transaction de l'appelant, la leçon verrouillée. Elle garde son id,
+      # ADR-0116 §4.4 : remplace une leçon encore en brouillon, dans la transaction de l'appelant, la leçon verrouillée. Elle garde son id,
       # son slug et son auteur (les lignes réécrites lui appartiennent). → { courses:, essentials:, exercises:, questions:, answers: }
       def replace_draft(course_id:, tree:)
         connection.execute("SET LOCAL enable_seqscan = off")

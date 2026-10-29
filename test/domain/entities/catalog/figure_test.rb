@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX §4.2 : sortes fermées, paramètres bornés, contrôles de 0 à 4.
+# ADR-0116 §4.2 : sortes fermées, paramètres bornés, contrôles de 0 à 4.
 module Entities
   module Catalog
     class FigureTest < ActiveSupport::TestCase

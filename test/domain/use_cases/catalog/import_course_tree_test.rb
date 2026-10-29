@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-1 à CA-11, ADR-XXXX (fiche de révision, format v3) : l'adaptateur des leçons complètes sur le vrai moteur et les vrais dépôts.
+# CA-1 à CA-11, ADR-0116 (fiche de révision, format v3) : l'adaptateur des leçons complètes sur le vrai moteur et les vrais dépôts.
 # Une leçon arrive avec toute sa descendance, en brouillon, ou pas du tout. Le schéma refuse d'abord (chemin du rapport) ; l'adaptateur
 # garde ses propres règles, que les tests unitaires (validate) exercent sans le schéma.
 module UseCases

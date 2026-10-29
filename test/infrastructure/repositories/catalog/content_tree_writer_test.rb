@@ -210,7 +210,7 @@ module Repositories
         assert_equal [ [ nil ], [ "tab\tA" ] ], written.map { it.answers.map(&:match_content) }
       end
 
-      # --- Format 3 (ADR-XXXX §4.3, §4.4) ---
+      # --- Format 3 (ADR-0116 §4.3, §4.4) ---
 
       def v3_exercise(title, figure_key: nil)
         Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id: nil, title:, statement: "Sujet", exercise_type: "fixation",

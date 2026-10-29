@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::StatementBlocks
 # Rôle : valide le sujet en blocs d'un exercice (paragraph, box, table ; dix au plus), lu comme un fichier hostile
-# ADR  : 0115 (menace I9), XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.5)
+# ADR  : 0115 (menace I9), 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.5)
 module Entities
   module Catalog
     class StatementBlocks

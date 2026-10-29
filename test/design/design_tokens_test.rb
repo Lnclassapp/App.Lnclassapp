@@ -37,7 +37,7 @@ class DesignTokensTest < ActiveSupport::TestCase
   # token de point de rupture. Seule cette variante est admise ; toute autre valeur entre crochets reste refusée.
   SANCTIONED_VARIANT = /(?<![\w-])min-\[700px\]:/
 
-  # UDR-0137 (contenu-en-blocs, #318), maintenue par UDR-XXXX-fiche-de-revision-en-quatre-blocs : la fiche de révision reprend
+  # UDR-0137 (contenu-en-blocs, #318), maintenue par UDR-0141-fiche-de-revision-en-quatre-blocs : la fiche de révision reprend
   # les maquettes (Seyès, Kalam, Source Serif 4, graisse 700) dans un habillage à part. L'exception ne vaut que pour la feuille
   # `course_sheet.css` (et son dossier) et le partial `catalog/revision_sheets/`, et seulement pour les règles
   # « une seule police », « palette froide » et « graisse 500 » : couleurs hexadécimales, attribut `style`, valeurs

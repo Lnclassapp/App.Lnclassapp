@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX §4.1 : le schéma v3 accepte la leçon de la fabrique et refuse chaque borne qu'il porte.
+# ADR-0116 §4.1 : le schéma v3 accepte la leçon de la fabrique et refuse chaque borne qu'il porte.
 module Schemas
   class CourseTreeV3SchemaTest < ActiveSupport::TestCase
     SCHEMA = JSONSchemer.schema(Rails.root.join("config/schemas/lnclass.course-tree.v3.json").read)

@@ -149,6 +149,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0138](./0138-exercice-sur-feuille-et-copie-a-rendre.md) | Exercice sur feuille et copie à rendre | Accepté | 2026-10-28 | 0112 | L'élève répond une question à la fois sans voir de sujet ; un exercice doit se lire comme une feuille, puis se remplir et se rendre en une fois sur un téléphone. |
 | [0139](./0139-page-de-la-lecon-fiche-de-revision-et-prepare-interros.md) | Page de la leçon : fiche de révision et Prépare interros | Accepté | 2026-10-28 | 0113 | La fiche est cachée derrière un bouton et les exercices dispersés sur des pages de notion ; la page d'une leçon doit tout montrer, la fiche en aperçu et les exercices assignables. |
 | [0140](./0140-feuille-et-resultat-corriges-comme-en-classe.md) | Feuille d'un devoir et résultat corrigé comme en classe | Accepté | 2026-10-28 | [0115](../adr/0115-correction-complete-note-en-points-et-types-de-questions.md) | La feuille ne sait pas poser un devoir de 3e et le résultat ne dit ni la bonne réponse ni quoi revoir |
+| [0141](./0141-fiche-de-revision-en-quatre-blocs-et-corrige-de-l-equipe.md) | Fiche de révision en quatre blocs et corrigé de l'équipe | Accepté | 2026-10-29 | XXXX-fiche-de-revision-par-notion-et-figures-parametrees | Montrer chaque notion d'une leçon de la même façon partout, sur le cahier, avec ses figures, et laisser l'équipe relire toutes les corrections avant publication. |
 <!-- index:end -->
 
 ---

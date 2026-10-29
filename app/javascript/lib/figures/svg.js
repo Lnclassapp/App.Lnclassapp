@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/svg — les nœuds SVG des figures : createElementNS et textContent, couleurs lues dans les variables CSS
 // Rôle : `el` crée un nœud, `fixed` écrit un nombre à la française, `hitRadius` donne une zone de toucher de 48 px à l'écran
-// ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2, menace) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3, §3.6)
+// ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2, menace) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3, §3.6)
 
 const NS = "http://www.w3.org/2000/svg"
 

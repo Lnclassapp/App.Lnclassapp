@@ -1,6 +1,6 @@
 # 🌐 UI · Catalog::SheetTextHelper — le balisage en ligne d'un texte de fiche de révision ou de sujet d'exercice
 # Rôle : `sheet_text` échappe tout, puis ne rend que `**gras**` et `*italique*` ; `$…$` reste à KaTeX ; une marque `[[clé|mot]]` ne laisse que son mot
-# ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.5, lexique retiré) · UDR : 0137, XXXX-fiche-de-revision-en-quatre-blocs
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.5, lexique retiré) · UDR : 0137, 0141-fiche-de-revision-en-quatre-blocs
 module Catalog
   module SheetTextHelper
     MATH = /(\$[^$]+\$)/

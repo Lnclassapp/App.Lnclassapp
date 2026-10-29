@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX §4.1 : le gabarit d'une notion, une règle par test.
+# ADR-0116 §4.1 : le gabarit d'une notion, une règle par test.
 module Entities
   module Catalog
     class NotionSheetTest < ActiveSupport::TestCase

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Essential
 # Rôle : table essentials, notions d'une leçon (fiche de révision en jsonb) ; slug tiré du cours puis de la notion
-# ADR  : 0029, 0035, XXXX
+# ADR  : 0029, 0035, 0116
 module Orm
   class Essential < ApplicationRecord
     include HasFrozenSlug

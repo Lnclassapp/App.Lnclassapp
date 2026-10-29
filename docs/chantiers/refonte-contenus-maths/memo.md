@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré ([#362](https://github.com/Lnclassapp/App.Lnclassapp/pull/362) vers `Develop`, 2026-10-29), clos |
 | **Ouvert le** | 2026-10-29 |
 | **Branche** | `feature/refonte-contenus-maths` |
 | **Programme** | — |

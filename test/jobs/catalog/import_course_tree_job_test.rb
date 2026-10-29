@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-1, CA-2, ADR-0039, ADR-XXXX: a v3 lesson, once enveloped, is imported whole and in draft by the job; the retired formats are refused.
+# CA-1, CA-2, ADR-0039, ADR-0116: a v3 lesson, once enveloped, is imported whole and in draft by the job; the retired formats are refused.
 class Catalog::ImportCourseTreeJobTest < ActiveJob::TestCase
   setup do
     seed_referential

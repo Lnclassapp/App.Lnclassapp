@@ -2,7 +2,7 @@ require "test_helper"
 
 module Queries
   module Catalog
-    # UDR-XXXX §3.1 : la fiche de révision d'une leçon v3 : ses notions publiées (toutes pour l'équipe) au gabarit des quatre blocs.
+    # UDR-0141 §3.1 : la fiche de révision d'une leçon v3 : ses notions publiées (toutes pour l'équipe) au gabarit des quatre blocs.
     class RevisionSheetQueryTest < ActiveSupport::TestCase
       def call(course, actor: nil) = RevisionSheetQuery.new.call(course_slug: course.slug, actor:)
 

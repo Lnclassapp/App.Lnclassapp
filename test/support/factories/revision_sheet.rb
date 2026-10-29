@@ -1,4 +1,4 @@
-# Leçon v3 valide (ADR-XXXX fiche de révision, refonte-contenus-maths) : le document que tous les lots importent, vérifient et dérivent.
+# Leçon v3 valide (ADR-0116 fiche de révision, refonte-contenus-maths) : le document que tous les lots importent, vérifient et dérivent.
 module Factories
   module RevisionSheet
     ActiveSupport::TestCase.include(self)

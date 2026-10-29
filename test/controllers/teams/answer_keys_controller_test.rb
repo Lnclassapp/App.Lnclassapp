@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-XXXX §3.5, CA-15 et CA-16 : le corrigé d'une leçon est réservé à l'équipe ; tout autre acteur reçoit 404.
+# UDR-0141 §3.5, CA-15 et CA-16 : le corrigé d'une leçon est réservé à l'équipe ; tout autre acteur reçoit 404.
 class Teams::AnswerKeysControllerTest < ActionDispatch::IntegrationTest
   setup do
     @course = create_course(name: "Racines carrées", status: "draft", figures: [ revision_figure ])

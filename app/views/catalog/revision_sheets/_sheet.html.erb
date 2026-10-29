@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/revision_sheets/_sheet — la fiche de révision d'une leçon : une page de cahier, une section par notion, quatre blocs au gabarit fixe %>
 <%# Rôle : `sheet` (RevisionSheetQuery::Lesson) ; `cut` (RevisionPreview, nil sans coupe) marque la suite (`rest`) ; sans JavaScript tout se lit %>
-<%# ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees · UDR : XXXX-fiche-de-revision-en-quatre-blocs §3.2, 0137, 0139 §3.2 %>
+<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.2, 0137, 0139 §3.2 %>
 <% cut = local_assigns[:cut] %>
 <% rest_data = { catalog__revision_more_target: "rest" } %>
 <% preview = Entities::Catalog::RevisionPreview %>

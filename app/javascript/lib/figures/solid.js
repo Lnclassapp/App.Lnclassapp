@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/solid — la pyramide ou le cône en perspective cavalière, arêtes cachées en pointillés, volume recalculé en direct
 // Rôle : lit `shape` (pyramid, cone), `base` (square, rectangular, triangular), `height`, `side`, `width`, `depth`, `radius` ; revérifie les dimensions (0,5 à 50) avant de dessiner
-// ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
 //
 // Perspective cavalière : la face avant est en vraie grandeur ; la profondeur fuit vers le haut et la droite, à 45 °, réduite de moitié.
 

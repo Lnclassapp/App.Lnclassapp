@@ -3,7 +3,7 @@
   Rôle : jetons des maquettes en variables CSS, 3 thèmes, papier Seyès, composants communs `.sheet-*`. Chargé seulement sur
          l'écran de la fiche (stylesheet_link_tag "course_sheet"), servi tel quel par Propshaft, sans Tailwind.
   ADR  : 0110-fiche-de-cours-en-donnees-importees · source des valeurs : docs/design/fiches-cours/ (gabarit <x-dc>).
-  Amendé par UDR-XXXX-fiche-de-revision-en-quatre-blocs §4 : lexique, explication simple, exercices dans la page et tableau
+  Amendé par UDR-0141-fiche-de-revision-en-quatre-blocs §4 : lexique, explication simple, exercices dans la page et tableau
   sont retirés ; l'habillage cahier reste. Les règles de lecture sont dans course_sheet/reading.css.
 */
 
@@ -307,7 +307,7 @@
   background: var(--sheet-note);
 }
 
-/* Ton « piège à éviter » : l'erreur du thème pour l'étiquette et le filet, son fond à 8 % (UDR-XXXX §3.2) */
+/* Ton « piège à éviter » : l'erreur du thème pour l'étiquette et le filet, son fond à 8 % (UDR-0141 §3.2) */
 
 .sheet-box[data-tone="pitfall"] {
   padding: 18px 22px 12px;

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::NotionSheet
 # Rôle : la fiche au gabarit fixe d'une notion (À retenir · La méthode · Un exemple corrigé · Le piège à éviter) et ses règles de forme
-# ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §6) · UDR : XXXX-fiche-de-revision-en-quatre-blocs
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §6) · UDR : 0141-fiche-de-revision-en-quatre-blocs
 module Entities
   module Catalog
     NotionSheet = Data.define(:remember, :method_steps, :example_statement, :example_steps, :pitfall, :figure_key) do

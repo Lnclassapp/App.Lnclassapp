@@ -65,7 +65,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  # UDR-0130 §3, ADR-XXXX §4.5: only the complete lessons are offered; the notions and the course sheet imports are retired.
+  # UDR-0130 §3, ADR-0116 §4.5: only the complete lessons are offered; the notions and the course sheet imports are retired.
   test "the import menu offers the complete lessons and no retired kind" do
     sign_in_as @member
 

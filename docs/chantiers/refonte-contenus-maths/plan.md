@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Décisions : [PRD](prd.md), ADR-XXXX-fiche-de-revision-par-notion-et-figures-parametrees, UDR-XXXX-fiche-de-revision-en-quatre-blocs-et-corrige-de-l-equipe.
+> Décisions : [PRD](prd.md), ADR-0116, UDR-0141.
 
 ## Graphe
 

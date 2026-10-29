@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-0039 §7, CA-08, ADR-XXXX: 200 complete v3 lessons (2 notions with 1 exercise each + 4 problems, 5 questions, 2 answers) run through the
+# ADR-0039 §7, CA-08, ADR-0116: 200 complete v3 lessons (2 notions with 1 exercise each + 4 problems, 5 questions, 2 answers) run through the
 # complete RunImport on PostgreSQL, in under 120 s. Skipped without PERF=1 (out of CI, played before acceptance).
 # The rows written, the time and the peak memory are logged.
 class Catalog::ImportCourseTreePerformanceTest < ActiveSupport::TestCase

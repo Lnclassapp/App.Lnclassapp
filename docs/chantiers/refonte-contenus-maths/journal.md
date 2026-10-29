@@ -48,7 +48,9 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-29 |
+| **PR** | [#362](https://github.com/Lnclassapp/App.Lnclassapp/pull/362) vers `Develop` |
+| **ADR produits** | [ADR-0116](../../decisions/adr/0116-fiche-de-revision-par-notion-et-figures-parametrees.md) |
+| **UDR produits** | [UDR-0141](../../decisions/udr/0141-fiche-de-revision-en-quatre-blocs-et-corrige-de-l-equipe.md) |
+
+**Challenger (2026-10-29)** : tout vert. Import d'une leçon pilote en 1,1 s ; page élève à 390 px : premier octet 123 ms, chargement ≈ 440 ms ; le glisser du point D au doigt garde les rapports égaux ; réimport d'une leçon publiée refusé ; v2 rejetée « format retiré » ; corrigé de l'équipe en 404 pour un élève. Figures mesurées à 390 px et 1 280 px : texte agrandi jusqu'à ×1,4 sur téléphone, bande des mesures sans écrasement.

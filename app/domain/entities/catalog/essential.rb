@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::Essential
 # Rôle : une fiche essentielle d'un cours ; lisible si elle et son cours sont publiés
-# ADR  : 0035, 0037, XXXX (la fiche de la notion est en jsonb, lue par RevisionSheetQuery)
+# ADR  : 0035, 0037, 0116 (la fiche de la notion est en jsonb, lue par RevisionSheetQuery)
 module Entities
   module Catalog
     class Essential

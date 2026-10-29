@@ -2,7 +2,7 @@ require "test_helper"
 
 module Queries
   module Catalog
-    # UDR-XXXX §3.5, CA-15 : tous les exercices de la leçon, dans l'ordre de « Prépare interros », avec bonnes réponses et corrections.
+    # UDR-0141 §3.5, CA-15 : tous les exercices de la leçon, dans l'ordre de « Prépare interros », avec bonnes réponses et corrections.
     class LessonAnswerKeyQueryTest < ActiveSupport::TestCase
       setup do
         @course = create_course(status: "draft", figures: [ revision_figure ])

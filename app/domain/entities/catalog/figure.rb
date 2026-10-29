@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::Figure
 # Rôle : une figure paramétrée d'une leçon (clé, sorte, description, paramètres bornés, 0 à 4 curseurs) et ses règles de forme
-# ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3)
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3)
 module Entities
   module Catalog
     Figure = Data.define(:key, :kind, :description, :params, :controls) do

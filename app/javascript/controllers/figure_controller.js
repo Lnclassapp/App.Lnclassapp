@@ -1,6 +1,6 @@
 // ⚡ FRONT · figure_controller — une figure paramétrée de la leçon : charge le module de sa sorte, dessine, crée les curseurs
 // Rôle : liste blanche des 5 sortes ; `lib/figures/<kind>` chargé par import(), à la demande (rien dans le JS commun) ; curseurs accessibles ; sans JavaScript, ou en cas d'erreur, la description reste affichée
-// ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2, menace), 0114 (budget du point d'entrée commun) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3, §3.6)
+// ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2, menace), 0114 (budget du point d'entrée commun) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3, §3.6)
 import { Controller } from "@hotwired/stimulus"
 
 const KINDS = ["geometry", "coordinate_plane", "number_line", "stat_chart", "solid"]

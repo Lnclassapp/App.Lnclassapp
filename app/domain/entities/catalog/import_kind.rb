@@ -1,11 +1,11 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportKind
 # Rôle : registre fermé des trois types d'import (format, racines, cible, plafonds, policy) et des types de rapport
-# ADR  : 0028, 0039, 0056, 0066, 0068, 0096, 0113, XXXX
+# ADR  : 0028, 0039, 0056, 0066, 0068, 0096, 0113, 0116
 module Entities
   module Catalog
     module ImportKind
       VERSION = 1
-      # Leçons complètes (ADR-XXXX §4.1) : le format 3 porte la fiche de chaque notion et les figures ; les formats 1 et 2 sont
+      # Leçons complètes (ADR-0116 §4.1) : le format 3 porte la fiche de chaque notion et les figures ; les formats 1 et 2 sont
       # retirés (refus du fichier, raison format_retired).
       COURSE_TREE_VERSION = 3
       # Par fichier. Un envoi de plusieurs fichiers a aussi son plafond total (max_total_bytes).

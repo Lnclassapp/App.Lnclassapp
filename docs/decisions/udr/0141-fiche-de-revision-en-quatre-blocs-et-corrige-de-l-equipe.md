@@ -1,4 +1,4 @@
-# UDR-XXXX : Fiche de révision en quatre blocs par notion, sur l'habillage cahier, et corrigé de l'équipe
+# UDR-0141 : Fiche de révision en quatre blocs par notion, sur l'habillage cahier, et corrigé de l'équipe
 <!-- index
 titre: Fiche de révision en quatre blocs et corrigé de l'équipe
 statut: Accepté
@@ -11,7 +11,7 @@ problematique: Montrer chaque notion d'une leçon de la même façon partout, su
 | **Statut** | Proposé |
 | **Date** | 2026-10-29 |
 | **Chantier** | `docs/chantiers/refonte-contenus-maths` |
-| **ADR lié** | ADR-XXXX-fiche-de-revision-par-notion-et-figures-parametrees |
+| **ADR lié** | ADR-0116 |
 | **Remplacé par** | — |
 
 Amende UDR-0137 (habillage cahier gardé, contenu ramené au gabarit) et UDR-0139 §3.2 (contenu du partial `_revision_sheet`). La structure de la page (UDR-0139 §3.1), la coupe des 150 mots et le contrôleur `catalog--revision-more` (§3.2, §3.3) restent.

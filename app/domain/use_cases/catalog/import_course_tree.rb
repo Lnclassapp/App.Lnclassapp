@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des leçons v3 (figures, notions à fiche, exercices, questions), tout en brouillon ; réimport d'un brouillon seulement
-# ADR  : 0035, 0039, 0105, 0113, 0115, XXXX · UDR : 0038
+# ADR  : 0035, 0039, 0105, 0113, 0115, 0116 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -10,7 +10,7 @@ module UseCases
       # Le moteur autorise l'auteur par le registre des types (ImportKind) ; c'est la même policy.
       POLICY = Policies::Catalog::ManageContentPolicy
       PUBLIC_ID_LENGTH = 14
-      # ADR-XXXX §4.1 : un exercice par notion, quatre problèmes pour toute la leçon.
+      # ADR-0116 §4.1 : un exercice par notion, quatre problèmes pour toute la leçon.
       LESSON_EXERCISES = 4
       DEFAULT_THEME = "blue"
       # Lignes écrites par ContentTreeWriter → clé du détail du rapport (une notion est une ligne de la table des fiches).
@@ -50,7 +50,7 @@ module UseCases
       end
 
       # Tout le lot dans la transaction du moteur. Les leçons neuves s'écrivent en masse ; chaque brouillon réimporté est remplacé
-      # entier (la leçon verrouillée, ses contenus relus sous verrou : ADR-XXXX §4.4).
+      # entier (la leçon verrouillée, ses contenus relus sous verrou : ADR-0116 §4.4).
       def write(items:, author_id:, at:)
         fresh, replaced = items.map(&:plan).partition { it.existing_id.nil? }
         created = @writer.write(courses: fresh, author_id:, at:)
@@ -70,7 +70,7 @@ module UseCases
           lookup.resolve_material(course["material_name"]).id, series_id(course["series_name"], lookup) ]
       end
 
-      # ADR-XXXX §4.4 : une leçon déjà en base est remplacée si elle et tout son contenu sont encore en brouillon, refusée sinon.
+      # ADR-0116 §4.4 : une leçon déjà en base est remplacée si elle et tout son contenu sont encore en brouillon, refusée sinon.
       # La clé n'est pas celle d'existing_keys : le moteur ne l'ignore pas comme un doublon.
       def replacement_item(course, path, lookup, key, existing_id)
         unless replaceable?(@courses.status_for_update(id: existing_id))

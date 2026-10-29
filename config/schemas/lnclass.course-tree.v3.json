@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "Import des leçons, version 3 : fiche de révision par notion et figures paramétrées (ADR-XXXX, ADR-0039, UDR-XXXX)",
+  "title": "Import des leçons, version 3 : fiche de révision par notion et figures paramétrées (ADR-0116, ADR-0039, UDR-0141)",
   "description": "Enveloppe { format, version: 3, courses[] }. Une leçon porte ses figures (0 à 12), ses notions (1 à 12, chacune avec sa fiche au gabarit fixe et son exercice) et ses quatre problèmes. Les règles qui comparent deux éléments (example.steps autant que method, noms de notions uniques, clés de figures uniques et citées) sont vérifiées par les entités, pour noter l'erreur à sa raison propre. Aucune URL, aucun HTML. La clé status n'existe plus : tout naît en brouillon.",
   "type": "object",
   "required": [
@@ -254,7 +254,7 @@
           }
         },
         "questions": {
-          "description": "Cinq à trente questions par exercice (ADR-XXXX §4.1), comptées par l'adaptateur (raisons too_few_questions et invalid_count).",
+          "description": "Cinq à trente questions par exercice (ADR-0116 §4.1), comptées par l'adaptateur (raisons too_few_questions et invalid_count).",
           "type": "array",
           "items": {
             "$ref": "#/$defs/question"
@@ -277,7 +277,7 @@
           "maxLength": 40
         },
         "explanation": {
-          "description": "La correction rédigée, obligatoire pour toute question (ADR-XXXX §4.1) : 20 à 2 000 caractères, vérifiés par l'adaptateur (raisons blank, too_short, too_long).",
+          "description": "La correction rédigée, obligatoire pour toute question (ADR-0116 §4.1) : 20 à 2 000 caractères, vérifiés par l'adaptateur (raisons blank, too_short, too_long).",
           "type": "string"
         },
         "points": {

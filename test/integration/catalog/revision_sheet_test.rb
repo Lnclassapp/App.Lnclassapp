@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-12, CA-13 (description) et CA-14 — UDR-XXXX §3.1, §3.2 et UDR-0139 §3.2. La fiche de révision d'une leçon v3 dans la page de la
+# CA-12, CA-13 (description) et CA-14 — UDR-0141 §3.1, §3.2 et UDR-0139 §3.2. La fiche de révision d'une leçon v3 dans la page de la
 # leçon : une page de cahier, une section par notion, quatre blocs dans l'ordre, étapes numérotées, coupe des 150 mots toute présente
 # dans le HTML.
 class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest

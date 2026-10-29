@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::LessonAnswerKeyQuery
 # Rôle : le corrigé d'une leçon pour l'équipe : tous les exercices non archivés, tous statuts, dans l'ordre de « Prépare interros », avec bonnes réponses et corrections
-# ADR  : 0113 (§4.6), 0115 · UDR : XXXX-fiche-de-revision-en-quatre-blocs §3.5
+# ADR  : 0113 (§4.6), 0115 · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.5
 module Queries
   module Catalog
     class LessonAnswerKeyQuery

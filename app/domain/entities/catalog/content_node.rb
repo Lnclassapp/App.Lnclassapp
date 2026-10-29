@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, XXXX
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, 0116
 module Entities
   module Catalog
     module ContentNode
@@ -19,7 +19,7 @@ module Entities
         errors + questions.each_with_index.flat_map { |question, index| question_errors(question, "#{path}.questions[#{index}]") }
       end
 
-      # Format 3 (ADR-XXXX §4.1) : la leçon sans ses enfants, qu'ImportCourseTree valide un à un.
+      # Format 3 (ADR-0116 §4.1) : la leçon sans ses enfants, qu'ImportCourseTree valide un à un.
       def self.validate_lesson(hash, path:, lookup:)
         return [ error(path, "schema") ] unless hash.is_a?(Hash)
 

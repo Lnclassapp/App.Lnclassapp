@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX (fiche de révision, figures paramétrées) §4.2 et menace : les modules de figures sont ceux des sortes de la liste fermée,
+# ADR-0116 (fiche de révision, figures paramétrées) §4.2 et menace : les modules de figures sont ceux des sortes de la liste fermée,
 # créent leurs nœuds par createElementNS et textContent (jamais innerHTML), et ne portent aucune couleur en dur.
 class FiguresStructureTest < ActiveSupport::TestCase
   LIB = Rails.root.join("app/javascript/lib/figures")

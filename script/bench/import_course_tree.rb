@@ -1,4 +1,4 @@
-# Banc de l'import des leçons complètes (chantier import-cours-multiple, ADR-0068 §1 et §7, PRD §7, IM-14 ; format 3, ADR-XXXX).
+# Banc de l'import des leçons complètes (chantier import-cours-multiple, ADR-0068 §1 et §7, PRD §7, IM-14 ; format 3, ADR-0116).
 #
 #   bin/rails runner script/bench/import_course_tree.rb            # 200 puis 500 cours
 #   bin/rails runner script/bench/import_course_tree.rb 40 200     # tailles au choix

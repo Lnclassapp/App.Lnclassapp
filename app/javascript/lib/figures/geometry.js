@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/geometry — la figure de géométrie : points, segments, droites, cercles, angles, longueurs, contraintes, points déplaçables
 // Rôle : lit `points`, `segments`, `lines`, `circles`, `angles`, `labels`, `constraints` ; un point `draggable` se déplace au pointeur et aux flèches, les mesures se recalculent en direct
-// ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3, §3.6) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3, §3.6) · chargé par import() depuis controllers/figure_controller
 //
 // Formes lues (contrat de l'ADR §4.2, « Formes des éléments » ; les clés absentes sont ignorées, jamais interprétées) :
 //   point       { id, x, y, label?, draggable? }       segment, droite  [id, id]       cercle  { center, r }

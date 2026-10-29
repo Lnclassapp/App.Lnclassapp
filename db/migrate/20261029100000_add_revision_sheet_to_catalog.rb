@@ -1,4 +1,4 @@
-# ADR-XXXX §4.3 (refonte-contenus-maths, Lot 0) : la fiche de révision d'une notion, les figures et le thème d'une leçon, la figure
+# ADR-0116 §4.3 (refonte-contenus-maths, Lot 0) : la fiche de révision d'une notion, les figures et le thème d'une leçon, la figure
 # d'un exercice. N'ajoute que : rien n'est retiré ici (le retrait des anciens contenus est le Lot R).
 # essentials.sheet reste NULL-able tant que l'ancien texte riche existe ; le Lot R le passera en non nul avec le retrait de `content`.
 class AddRevisionSheetToCatalog < ActiveRecord::Migration[8.1]

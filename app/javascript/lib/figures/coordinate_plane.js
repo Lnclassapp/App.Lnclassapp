@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/coordinate_plane — le repère orthogonal : axes gradués, points, vecteurs, droites y = ax + b, segments
 // Rôle : lit `xmin`, `xmax`, `ymin`, `ymax`, `points`, `vectors`, `lines`, `segments` ; revérifie les bornes avant de dessiner ; repère orthonormé, centré dans le cadre
-// ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
 //
 // Formes lues (contrat de l'ADR §4.2) :
 //   point  { id, x, y }     vecteur  { label, dx, dy, ox, oy }     droite  { a, b } (y = ax + b)     segment  { x1, y1, x2, y2 }

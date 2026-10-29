@@ -1,4 +1,4 @@
-# ADR-XXXX : La fiche de révision est faite de notions au gabarit fixe et de figures paramétrées, importées au format v3
+# ADR-0116 : La fiche de révision est faite de notions au gabarit fixe et de figures paramétrées, importées au format v3
 <!-- index
 titre: Fiche de révision par notion et figures paramétrées (format v3)
 statut: Accepté

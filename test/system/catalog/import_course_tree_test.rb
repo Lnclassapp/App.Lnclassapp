@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# CA-1 à CA-3, ADR-0039, ADR-XXXX, UDR-0038: the team opens the lesson (v3) import, reads its help, uploads a mixed file and follows
+# CA-1 à CA-3, ADR-0039, ADR-0116, UDR-0038: the team opens the lesson (v3) import, reads its help, uploads a mixed file and follows
 # it to its exact report, without a page reload. The real job runs as soon as it is enqueued.
 class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
   include ActiveJob::TestHelper

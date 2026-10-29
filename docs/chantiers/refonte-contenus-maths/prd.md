@@ -175,8 +175,8 @@ Et chacune s'importe en brouillon sur une base vide
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-fiche-de-revision-par-notion-et-figures-parametrees — format v3, gabarit des notions, figures paramétrées, retraits, réimport du brouillon. Remplace ADR-0110, amende ADR-0113 §4.4 (v1 et réimport) et ADR-0105 (images des notions).
-- UDR-XXXX-fiche-de-revision-en-quatre-blocs-et-corrige-de-l-equipe — rendu de la fiche, des figures et du corrigé. Amende UDR-0139 §3.2, remplace UDR-0137.
+- ADR-0116 — format v3, gabarit des notions, figures paramétrées, retraits, réimport du brouillon. Remplace ADR-0110, amende ADR-0113 §4.4 (v1 et réimport) et ADR-0105 (images des notions).
+- UDR-0141 — rendu de la fiche, des figures et du corrigé. Amende UDR-0139 §3.2, remplace UDR-0137.
 
 ## 7. Mesures
 

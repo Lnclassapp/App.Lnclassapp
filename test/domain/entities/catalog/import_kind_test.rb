@@ -3,7 +3,7 @@ require "test_helper"
 module Entities
   module Catalog
     class ImportKindTest < ActiveSupport::TestCase
-      test "trois types fermés, dont les DRENA (ADR-0066) ; les exercices seuls, les notions et la fiche de cours en blocs sont retirés (ADR-0113, ADR-XXXX)" do
+      test "trois types fermés, dont les DRENA (ADR-0066) ; les exercices seuls, les notions et la fiche de cours en blocs sont retirés (ADR-0113, ADR-0116)" do
         assert_equal %w[schools course_tree drenas], ImportKind::KINDS
         assert_not ImportKind.valid?("exercises")
         assert_not ImportKind.valid?("essentials")
@@ -32,7 +32,7 @@ module Entities
         assert_equal [ 20 * 1024 * 1024, 1_000, 100 ], [ ImportKind::MAX_BYTES, ImportKind::MAX_ERRORS, ImportKind::BATCH_SIZE ]
       end
 
-      # ADR-XXXX §4.1 : les leçons complètes ne lisent que le format 3 ; les formats 1 et 2 sont retirés. Les autres types n'ont qu'une version.
+      # ADR-0116 §4.1 : les leçons complètes ne lisent que le format 3 ; les formats 1 et 2 sont retirés. Les autres types n'ont qu'une version.
       test "les cours complets ne lisent que le format 3" do
         course_tree = ImportKind.fetch("course_tree")
 

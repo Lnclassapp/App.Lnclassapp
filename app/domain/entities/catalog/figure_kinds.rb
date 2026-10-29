@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::FigureKinds
 # Rôle : liste fermée des cinq sortes de figures d'une leçon et bornes de leurs paramètres (une sorte nouvelle = un amendement de l'ADR)
-# ADR  : XXXX-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : XXXX-fiche-de-revision-en-quatre-blocs
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs
 module Entities
   module Catalog
     module FigureKinds
