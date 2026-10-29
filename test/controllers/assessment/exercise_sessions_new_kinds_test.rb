@@ -41,7 +41,15 @@ class Assessment::ExerciseSessionsNewKindsTest < ActionDispatch::IntegrationTest
     end
     assert_select "#{sheet(@select)} option", text: "alignés"
     assert_select "#{sheet(@select)} [data-correct], #{sheet(@select)} [checked]", 0
-    assert_no_match(/value="#{@select.answers.find_by(correct: true).id}"/, response.body)
+    assert_equal [ "", "0", "1", "2" ], css_select("#{sheet(@select)} option").pluck("value")
+  end
+
+  test "le compteur ne compte ni la rédigée ni le cahier" do
+    get exercise_session_path(@session.public_id)
+
+    assert_select "[data-assessment--copy-total-value='3']"
+    assert_select "[data-assessment--copy-target='question']", 3
+    [ @written, @notebook ].each { assert_select "#{sheet(it)} [data-assessment--copy-target='question'], #{sheet(it)}[data-assessment--copy-target='question']", 0 }
   end
 
   test "CA-19 : sans trou, la liste est sous la question, en pleine largeur" do

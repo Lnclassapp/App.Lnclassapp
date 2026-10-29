@@ -12,7 +12,7 @@ module Entities
         test "jamais corrigée automatiquement, jamais juste" do
           assert_not Written::AUTO_GRADED
           assert_equal :response_text, Written::INPUT
-          assert_equal({ response_text: [ :invalid_text ] }, Written::INVALID)
+          assert_equal({ response_text: [ :invalid ] }, Written::INVALID)
           assert_equal Written, Question.kind_for("written")
           assert_equal "written", Question.kind_name_for("written")
           assert_not question.auto_graded?

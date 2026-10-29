@@ -35,7 +35,8 @@ module Dtos
       def response_text=(value)
         text = value.nil? ? nil : value.to_s
         # Un texte aux octets invalides ne se nettoie pas (strip lèverait) : il est gardé tel quel et refusé à la validation.
-        @response_text = text&.valid_encoding? ? text.strip : text
+        # Le navigateur poste \r\n (2 caractères) là où maxlength et le compteur en comptent 1 : on compte comme eux.
+        @response_text = text&.valid_encoding? ? text.gsub("\r\n", "\n").strip : text
       end
 
       attr_reader :response_text

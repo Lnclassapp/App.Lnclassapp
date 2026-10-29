@@ -325,7 +325,30 @@ class Assessment::ExerciseCopiesControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "#question-2-error", text: /2 000 caractères/
     assert_select "textarea[maxlength='2000']"
+    assert_select "#q2-response_text", text: "é" * 2001
     assert_equal [ 0, "started" ], [ Orm::QuestionAttempt.count, session.reload.status ]
+  end
+
+  test "CA-22 : après un 422, la liste reprend le choix posté et la zone échappe le texte renvoyé" do
+    _exercise, session, list, written, _notebook = devoir
+    sign_in_as @student
+
+    copy({ list.id.to_s => { display_order: [ "1" ] }, written.id.to_s => { response_text: "Non, car <b>AM/AB</b> " + "é" * 2001 } }, session:)
+
+    assert_response :unprocessable_entity
+    assert_select "#q1-display_order option[selected]", 1
+    assert_select "#q1-display_order option[selected][value='1']"
+    assert_includes response.body, "Non, car &lt;b&gt;AM/AB&lt;/b&gt;"
+    assert_select "#q2-response_text b", 0
+  end
+
+  test "CA-22 : 2 000 caractères avec des retours à la ligne (\\r\\n) ne sont pas refusés" do
+    _exercise, session, _list, written, _notebook = devoir
+    sign_in_as @student
+
+    copy({ written.id.to_s => { response_text: "x" * 995 + "\r\n" * 10 + "x" * 995 } }, session:)
+
+    assert_redirected_to exercise_session_result_path(session.public_id)
   end
 
   test "CA-22 : 2 000 caractères sont rendus et gardés" do

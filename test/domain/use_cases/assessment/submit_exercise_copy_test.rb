@@ -312,8 +312,23 @@ module UseCases
       test "menace W4 : un texte mal encodé est refusé, rien n'est écrit" do
         result = submit({ "2" => { response_text: "a\xFFb".dup.force_encoding(Encoding::UTF_8) } }, exercise: devoir)
 
-        assert result.failure?
+        assert_equal [ :invalid, { response_text: [ :invalid ] } ], [ result.code, result.errors[2] ]
         assert_empty @sessions.copies
+      end
+
+      test "ADR-0115 : un texte à trous de plus de 200 caractères est refusé, rien n'est écrit ; 200 est accepté" do
+        gap = Question.new(id: 2, position: 1, content: "Le point est ___.", explanation: nil, question_type: "fill_blank",
+                           answers: [ Answer.new(id: 20, position: 1, content: "aligné", correct: true) ])
+        texts = Entities::Assessment::Exercise.new(id: 40, public_id: "ExErCiCe000040", course_id: 3, essential_id: 9, title: "Trous",
+                                                   exercise_type: "fixation", status: "published", parents_published: true, questions: [ gap ])
+
+        refused = submit({ "2" => { response_text: "a" * 201 } }, exercise: texts)
+        assert_equal [ :invalid, { response_text: [ :too_long ] } ], [ refused.code, refused.errors[1] ]
+        assert_empty @sessions.copies
+
+        accepted = submit({ "2" => { response_text: "a" * 200 } }, exercise: texts)
+        assert accepted.success?
+        assert_equal 200, @sessions.copies.sole[:attempts].sole[:response_text].length
       end
 
       test "ADR-0115 : au-delà de 200 caractères, une réponse courte (nombre, trous) reste refusée" do

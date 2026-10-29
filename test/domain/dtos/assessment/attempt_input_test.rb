@@ -46,6 +46,15 @@ module Dtos
         assert input(response_text: "Abi\0djan").tap(&:validate).errors.added?(:response_text, :invalid, value: "Abi\0djan")
       end
 
+      test "les retours à la ligne postés (\\r\\n) comptent pour un caractère, comme maxlength et le compteur" do
+        text = "x" * 995 + "\r\n" * 10 + "x" * 995
+        dto = input(response_text: text)
+
+        assert dto.valid?
+        assert_equal 2000, dto.response_text.length
+        assert_equal "a\nb", input(response_text: "a\r\nb").response_text
+      end
+
       test "les indices d'affichage gardent leur ordre et leurs doublons ; un indice illisible reste, en -1" do
         form = input(display_order: [ "2", "0", "1", "0", "x", "" ])
 

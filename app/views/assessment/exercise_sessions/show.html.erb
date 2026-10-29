@@ -8,7 +8,7 @@
 <%# UDR-0140 §3 : les points suivent chaque légende, sauf si toutes les questions valent 1 point. %>
 <% weighted = play.questions.any? { it.points != 1 } %>
 <%# Une réponse rédigée ou du cahier ne se compte pas parmi les questions « répondues » : une copie sans elles part sans demande de confirmation. %>
-<% counted = play.questions.count { %w[written notebook].exclude?(it.kind_name) } %>
+<% counted = play.questions.count(&:counted?) %>
 <% page_title t(".page_title", title: play.exercise_title) %>
 <% content_for :nav_key, "courses" %>
 <%= ui_back_link play.exercise_title, href: exercise_path(play.exercise_public_id) %>
@@ -58,7 +58,7 @@
                     elsif question.kind_name == "select" && question.content.include?(Entities::Assessment::QuestionKinds::FillBlank::MARKER) then t("assessment.exercise_sessions.kinds.select.legend")
                     else question.content end %>
         <li id="question-<%= number %>">
-          <%= ui_card data: { assessment__copy_target: ("question" if %w[written notebook].exclude?(question.kind_name)), controller: "math" }.compact do %>
+          <%= ui_card data: { assessment__copy_target: ("question" if question.counted?), controller: "math" }.compact do %>
             <%= fields_for "copy[answers][#{question.id}]" do |f| %>
               <%# UDR-0105 : l'image se lit au-dessus de l'énoncé. %>
               <% if (image = question.image) %>
