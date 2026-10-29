@@ -65,7 +65,7 @@ module Queries
         rows.map do |id, position, content, question_type, points, unit, starter, explanation, numeric_tolerance, criteria|
           kind = Entities::Assessment::Question.kind_name_for(question_type)
           QuestionRow.new(id:, position:, content:, question_type:, explanation:, numeric_tolerance:, image: images[id],
-                          points:, unit:, starter:, criteria: criteria || [],
+                          points:, unit:, starter:, criteria: reveal ? (criteria || []) : [],
                           answers: shuffle_choices(exercise_id, id, kind, answers.fetch(id, [])),
                           **sheet(exercise_id, id, kind, elements.fetch(id, [])))
         end

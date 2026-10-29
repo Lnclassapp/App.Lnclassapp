@@ -968,6 +968,42 @@ module UseCases
         assert_empty questions[3].answers
       end
 
+      test "the Devoir Thalès file reimported on an existing lesson: the new draft carries its blocks and points, the old one is archived" do
+        lesson = create_course(name: "La propriété de Thalès", level: Orm::Level.find_by!(name: "3ème"),
+                               material: Orm::Material.find_by!(name: "Mathématiques"))
+        create_essential(course: lesson, name: "La propriété de Thalès")
+        old = create_lesson_wide_exercise(course: lesson, title: "Devoir")
+
+        report = run_import(import_sample("course_tree_v2_devoir_thales"))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal "archived", old.reload.status
+        devoir = exercises_of(lesson).where(title: "Devoir", status: "draft").sole
+        assert_equal %w[box table], devoir.statement_blocks.map { it["type"] }
+        assert_equal [ 1, 2, 3.5, 1.5 ], devoir.questions.order(:position).map { it.points.to_f }
+      end
+
+      test "criteria with quotes, a backslash, a comma, braces and a line break are read back identical" do
+        criteria = [ 'Il écrit "MN = 4"', 'a\\b', "x, y", "{z}", "deux\nlignes" ]
+
+        report = import_one(written_question("criteria" => criteria))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count)
+        assert_equal criteria, Orm::Question.find_by!(question_type: "written").criteria
+      end
+
+      test "a lesson with a valid question and an invalid one writes nothing" do
+        node = course("Mixte")
+        node["essentials"][0]["exercises"][0]["questions"] = [ written_question, written_question("criteria" => [ "Un", "  " ]) ]
+        before = [ Orm::Course.count, Orm::Question.count ]
+
+        report = run_import(document(node))
+
+        assert_equal [ [ "courses[0].essentials[0].exercises[0].questions[1].criteria", "question_structure" ] ],
+                     report.import_errors.map { it.values_at("path", "code") }
+        assert_equal before, [ Orm::Course.count, Orm::Question.count ]
+      end
+
       test "an old file gets the defaults: 1 point, no unit, no starter, no criteria, no blocks" do
         run_import(document(course))
 

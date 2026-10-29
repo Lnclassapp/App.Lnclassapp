@@ -31,6 +31,14 @@ module Dtos
         assert_equal [ BigDecimal("2.5"), nil, nil, [ "Un", "Deux" ] ], [ built.points, built.unit, built.starter, built.criteria ]
       end
 
+      # Comportement voulu du formulaire : un critère vide est écarté en silence (l'import, lui, le refuse : criteria_blank).
+      test "a blank criterion in the form is dropped, not refused" do
+        input = QuestionInput.from_params(content: "Q", question_type: "written", criteria: [ "", "Un", " " ])
+
+        assert input.valid?
+        assert_equal [ "Un" ], input.to_entity(position: 1).criteria
+      end
+
       test "points that are not a number are invalid" do
         input = QuestionInput.from_params(content: "Q", question_type: "written", points: "beaucoup")
 

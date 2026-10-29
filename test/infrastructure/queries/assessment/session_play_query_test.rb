@@ -258,6 +258,26 @@ module Queries
         assert_equal 4, statements.size
       end
 
+      test "copy : la copie sérialisée d'un select et d'un écrit ne porte ni corrigé, ni grille, ni marque de bonne réponse" do
+        exercise = create_exercise(questions: 0)
+        select = create_kind_question(exercise:, question_type: "select", answers: %w[A B C], explanation: "Parce que.")
+        written = create_kind_question(exercise:, question_type: "written", answers: [], explanation: "Corrigé type")
+        written.update!(criteria: [ "Je cite", "Je compare" ])
+        session = create_exercise_session(exercise:, question_count: 2)
+
+        statements = []
+        collector = ->(*, payload) { statements << payload[:sql] unless payload[:name] == "SCHEMA" }
+        copy = ActiveSupport::Notifications.subscribed(collector, "sql.active_record") { SessionPlayQuery.new.copy(public_id: session.public_id) }
+
+        assert_equal [ select.id, written.id ], copy.questions.map(&:id)
+        hashes = copy.questions.map(&:to_h)
+        assert hashes.none? { it.key?(:criteria) || it.key?(:explanation) || it.key?(:correct) }, hashes.inspect
+        selected = copy.questions.find { it.id == select.id }
+        assert_equal 3, selected.answers.size
+        assert selected.answers.none? { it.to_h.key?(:correct) || it.respond_to?(:correct) }
+        assert statements.none? { it.match?(/correct|explanation|criteria/) }, statements.join("\n")
+      end
+
       test "copy : sans sujet en blocs, la clé est nil" do
         assert_nil SessionPlayQuery.new.copy(public_id: @session.public_id).statement_blocks
       end
