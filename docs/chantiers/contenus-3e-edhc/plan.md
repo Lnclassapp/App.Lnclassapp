@@ -39,9 +39,9 @@ Pas de Lot 0 : aucun contrat, aucune table, aucune route.
 - [x] UDR écrite pour **chaque** vue créée ou modifiée — sans objet
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle — sans objet
-- [ ] Chaque critère d'acceptation a son test (contrôle, relecture, challenger)
+- [x] Chaque critère d'acceptation a son test (contrôle, relecture, challenger)
 - [x] En-tête HITL sur chaque fichier créé dans `app/` — sans objet
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
-- [ ] Pureté domaine · rubocop · tests · brakeman : au vert
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Pureté domaine · rubocop · tests · brakeman : au vert
 - [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)
