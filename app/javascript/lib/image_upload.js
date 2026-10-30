@@ -61,7 +61,7 @@ export async function shrinkImage(file, { maxSide, maxBytes = Infinity, qualitie
 
 // XMLHttpRequest: the only way to follow the progress of an upload. 201 { public_id, sgid, url, width, height }.
 // A network error, no answer within timeout (ms) or an aborted request is a failure.
-// field: the form name of the file, « article_image[file] » for the blog, « essential_image[file] » or « question_image[file] ».
+// field: the form name of the file, « article_image[file] » for the blog, « question_image[file] ».
 export function uploadImage(file, { url, field = "article_image[file]", onProgress = () => {}, timeout = UPLOAD_TIMEOUT }) {
   return new Promise((resolve, reject) => {
     const request = new XMLHttpRequest()

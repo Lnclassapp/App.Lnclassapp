@@ -25,16 +25,13 @@ module Queries
       COLUMNS = %w[courses.slug courses.name courses.subtitle levels.name series.name materials.name materials.category
                    courses.status materials.slug materials.position].freeze
       # ADR-0090 §4.2 : l'élève lit les matières dans l'ordre du programme ; une matière sans rang vient après, par nom.
-      PROGRAM_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name", "courses.name", "courses.id" ].freeze
-      CATALOG_ORDER = [ "materials.name", "levels.position", "courses.name", "courses.id" ].freeze
+      MATERIAL_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name" ].freeze
       # UDR enseignant §3.7 : la progression, dans l'ordre des leçons (« Leçon 2 · Progression… » dans le sous-titre) ; un cours
       # sans numéro de leçon vient après, par nom.
       LESSON_NUMBER = Arel.sql("(substring(courses.subtitle from '(?i)leçon\\s+(\\d+)'))::integer ASC NULLS LAST")
-      TEACHER_ORDER = [ "materials.name", "levels.position", LESSON_NUMBER, "courses.name", "courses.id" ].freeze
-      # CA-E14 : sur ordinateur, les leçons de l'élève suivent le même ordre du programme (Leçon 2 avant Leçon 10) ; le
-      # Cours du téléphone, sans fiches, garde PROGRAM_ORDER.
-      STUDENT_LESSON_ORDER = [ Arel.sql("materials.position ASC NULLS LAST"), "materials.name", LESSON_NUMBER,
-                               "courses.name", "courses.id" ].freeze
+      # Chantier ordre-lecons-progression : partout, dans une matière, Leçon 2 avant Leçon 10, puis les leçons sans numéro par nom.
+      PROGRAM_ORDER = [ *MATERIAL_ORDER, LESSON_NUMBER, "courses.name", "courses.id" ].freeze
+      CATALOG_ORDER = [ "materials.name", "levels.position", LESSON_NUMBER, "courses.name", "courses.id" ].freeze
 
       # level, material : slugs. Un filtre vide est ignoré, un slug inconnu ne donne aucun cours.
       # series : slug, appliqué seulement avec un niveau (UDR-0069 §3.4) : cours sans série et cours de cette série.
@@ -54,7 +51,7 @@ module Queries
         total_count = grouped ? material_counts.values.sum : scope.count
         pages = [ total_count.fdiv(PER_PAGE).ceil, 1 ].max
         page = page.to_s.to_i.clamp(1, pages)
-        order = order_for(actor, student_id:, group_by_material:, with_essentials:)
+        order = order_for(student_id:, group_by_material:)
         rows = scope.order(*order).offset((page - 1) * PER_PAGE).limit(PER_PAGE).pluck("courses.id", *COLUMNS)
         progress = student_id ? progress_by_course(student_id, rows.map(&:first)) : {}
         with_essentials ||= actor.teacher?
@@ -67,19 +64,16 @@ module Queries
       # c'est l'ordre de la grille de l'accueil. Une requête. → [MaterialRow]
       def student_materials(audience:)
         Orm::Course.joins(:material).merge(AudienceFilter.courses(audience)).where(status: "published").distinct
-                   .order(*PROGRAM_ORDER.first(2)).pluck("materials.slug", "materials.name", "materials.position")
+                   .order(*MATERIAL_ORDER).pluck("materials.slug", "materials.name", "materials.position")
                    .map { |slug, name, _position| MaterialRow.new(slug:, name:) }
       end
 
       private
 
-      # L'élève : l'ordre du programme, avec le numéro de leçon quand il lit les leçons (CA-E14) ; l'enseignant de plusieurs
-      # matières, comme l'élève ; l'enseignant d'une matière, la progression ; les autres, le catalogue.
-      def order_for(actor, student_id:, group_by_material:, with_essentials:)
-        return with_essentials ? STUDENT_LESSON_ORDER : PROGRAM_ORDER if student_id
-        return PROGRAM_ORDER if group_by_material
-
-        actor.teacher? ? TEACHER_ORDER : CATALOG_ORDER
+      # L'élève et l'enseignant de plusieurs matières : l'ordre du programme (CA-E14) ; l'enseignant d'une matière et les
+      # autres : le catalogue, par matière et niveau. Dans les deux, les leçons suivent leur numéro.
+      def order_for(student_id:, group_by_material:)
+        student_id || group_by_material ? PROGRAM_ORDER : CATALOG_ORDER
       end
 
       def filtered(actor:, level: nil, series: nil, material: nil, search: nil, audience: nil, material_ids: nil)

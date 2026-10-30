@@ -1,0 +1,1103 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Calcul numérique",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "encadrement-droite",
+          "kind": "number_line",
+          "description": "Une droite graduée de 7,2 à 7,3 avec un pas de 0,01. Le nombre x = 7,2864 est placé, sur la droite, entre les deux graduations consécutives 7,28 et 7,29. L'intervalle de 7,28 à 7,29 représente l'encadrement au centième : 7,28 est la valeur par défaut, 7,29 la valeur par excès.",
+          "params": {
+            "min": 7.2,
+            "max": 7.3,
+            "step": 0.01,
+            "points": [
+              {
+                "value": 7.2864,
+                "label": "x"
+              }
+            ],
+            "intervals": [
+              {
+                "from": 7.28,
+                "to": 7.29,
+                "from_open": false,
+                "to_open": false
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Calculer avec des puissances de 10",
+          "remember": "Pour un entier $n \\geq 1$ : $10^n = 10 \\times 10 \\times \\dots \\times 10$ ($n$ facteurs), $10^0 = 1$ et $10^{-n} = \\dfrac{1}{10^n}$. Pour tous entiers relatifs $m$ et $n$ : $10^m \\times 10^n = 10^{m+n}$ ; $\\dfrac{10^m}{10^n} = 10^{m-n}$ ; $(10^m)^n = 10^{m \\times n}$.",
+          "method": [
+            "Repérer les nombres décimaux et les puissances de 10 du calcul.",
+            "Regrouper d'un côté les nombres décimaux, de l'autre les puissances de 10.",
+            "Appliquer la règle des exposants : additionner pour un produit, soustraire pour un quotient, multiplier pour une puissance de puissance.",
+            "Écrire le résultat sous la forme d'un nombre multiplié par $10^n$."
+          ],
+          "example": {
+            "statement": "Calculer $A = 4 \\times 10^5 \\times 3 \\times 10^{-2}$.",
+            "steps": [
+              "Repérer : les nombres décimaux sont 4 et 3, les puissances de 10 sont $10^5$ et $10^{-2}$.",
+              "Regrouper : $A = (4 \\times 3) \\times (10^5 \\times 10^{-2})$.",
+              "Appliquer : $4 \\times 3 = 12$ et $10^5 \\times 10^{-2} = 10^{5 + (-2)} = 10^3$.",
+              "Écrire : $A = 12 \\times 10^3$."
+            ]
+          },
+          "pitfall": "Dans un produit de puissances de 10, on **additionne** les exposants, on ne les multiplie pas. Contre-exemple : $10^2 \\times 10^3 = 100 \\times 1\\,000 = 100\\,000 = 10^5$, et non $10^6$. On multiplie les exposants seulement pour une puissance de puissance, comme $(10^2)^3 = 10^6$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer avec des puissances de 10",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour calculer avec des puissances de 10.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est le résultat de $10^3 \\times 10^4$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : il n'y a que deux puissances de 10, $10^3$ et $10^4$. Étape 2 — Regrouper : rien à regrouper. Étape 3 — Appliquer : pour un produit, on additionne les exposants, $10^3 \\times 10^4 = 10^{3+4} = 10^7$. Étape 4 — Écrire : $10^7$. L'erreur $10^{12}$ vient d'une multiplication des exposants, qui n'est valable que pour une puissance de puissance.",
+                "answers": [
+                  {
+                    "content": "$10^7$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$10^{12}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10^{1}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$100^7$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'écriture décimale de $10^{-3}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la puissance de 10 est $10^{-3}$, d'exposant négatif. Étape 2 — Regrouper : il n'y a rien d'autre. Étape 3 — Appliquer la définition : $10^{-3} = \\dfrac{1}{10^3} = \\dfrac{1}{1\\,000}$. Étape 4 — Écrire : $0{,}001$. Un exposant négatif ne rend pas le nombre négatif : il donne un nombre positif plus petit que 1.",
+                "answers": [
+                  {
+                    "content": "$-1\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}001$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-0{,}001$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}0003$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles égalités sont vraies ? (deux bonnes propositions)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on compare chaque expression à $10^4$. Étape 3 — Appliquer les règles : $10^6 \\times 10^{-2} = 10^{6+(-2)} = 10^4$ (vrai) ; $(10^2)^2 = 10^{2 \\times 2} = 10^4$ (vrai) ; $10^2 + 10^2 = 100 + 100 = 200$, ce n'est pas $10^4$ : la règle des exposants ne s'applique qu'à un produit ou un quotient, pas à une somme ; $\\dfrac{10^{12}}{10^3} = 10^{12-3} = 10^9$, pas $10^4$. Étape 4 — Écrire : les deux égalités vraies sont $10^6 \\times 10^{-2} = 10^4$ et $(10^2)^2 = 10^4$.",
+                "answers": [
+                  {
+                    "content": "$10^6 \\times 10^{-2} = 10^4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(10^2)^2 = 10^4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$10^2 + 10^2 = 10^4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{10^{12}}{10^3} = 10^4$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le résultat de $\\dfrac{10^5}{10^{-2}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est un quotient de deux puissances de 10, d'exposants 5 et $-2$. Étape 2 — Regrouper : rien à regrouper. Étape 3 — Appliquer : pour un quotient, on soustrait les exposants, $\\dfrac{10^5}{10^{-2}} = 10^{5 - (-2)} = 10^{5+2} = 10^7$. Étape 4 — Écrire : $10^7$. L'erreur $10^3$ vient d'un oubli du signe : soustraire $-2$ revient à ajouter 2.",
+                "answers": [
+                  {
+                    "content": "$10^3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10^{-7}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10^7$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$10^{-3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le résultat de $(2 \\times 10^3) \\times (5 \\times 10^4)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les décimaux sont 2 et 5, les puissances de 10 sont $10^3$ et $10^4$. Étape 2 — Regrouper : $(2 \\times 5) \\times (10^3 \\times 10^4)$. Étape 3 — Appliquer : $2 \\times 5 = 10$ et $10^3 \\times 10^4 = 10^7$. Étape 4 — Écrire : $10 \\times 10^7 = 10^8$. Attention : $10^7$ oublie le facteur 10, et $10^{13}$ vient d'une multiplication des exposants.",
+                "answers": [
+                  {
+                    "content": "$10^7$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10^{13}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7 \\times 10^7$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10^8$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : $10^2 \\times 10^3 = 10^6$.",
+                "question_type": "true_false",
+                "explanation": "Faux. Étape 3 — Appliquer : dans un produit, on additionne les exposants, donc $10^2 \\times 10^3 = 10^{2+3} = 10^5$. Vérification chiffrée : $100 \\times 1\\,000 = 100\\,000 = 10^5$. Le résultat $10^6$ vient de la multiplication $2 \\times 3$, une erreur fréquente.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire un nombre en notation scientifique",
+          "remember": "Un nombre décimal positif est en écriture scientifique s'il s'écrit $a \\times 10^n$ avec $1 \\leq a < 10$ et $n$ entier relatif. Exemples : $5{,}2 \\times 10^3 = 5\\,200$ et $3{,}5 \\times 10^{-3} = 0{,}0035$.",
+          "method": [
+            "Repérer le premier chiffre non nul du nombre et la place de la virgule.",
+            "Déplacer la virgule pour obtenir un nombre $a$ tel que $1 \\leq a < 10$, en comptant les rangs déplacés.",
+            "Déterminer l'exposant : positif si le nombre de départ est supérieur ou égal à 10, négatif s'il est inférieur à 1, nul s'il est compris entre 1 et 10 (10 exclu).",
+            "Écrire $a \\times 10^n$ et vérifier en revenant au nombre de départ."
+          ],
+          "example": {
+            "statement": "Écrire $45\\,600\\,000$ en écriture scientifique.",
+            "steps": [
+              "Repérer : le premier chiffre non nul est 4 et la virgule est après le dernier 0 (nombre entier).",
+              "Déplacer : on place la virgule après le 4, ce qui donne $a = 4{,}56$ ; on a déplacé la virgule de 7 rangs vers la gauche.",
+              "Déterminer : $45\\,600\\,000$ est supérieur à 10, l'exposant est donc positif : $n = 7$.",
+              "Écrire : $45\\,600\\,000 = 4{,}56 \\times 10^7$. Vérification : $4{,}56 \\times 10\\,000\\,000 = 45\\,600\\,000$."
+            ]
+          },
+          "pitfall": "Un nombre comme $12 \\times 10^3$ n'est pas en écriture scientifique : le facteur 12 n'est pas compris entre 1 et 10. Contre-exemple : $12 \\times 10^3 = 12\\,000 = 1{,}2 \\times 10^4$. Pour un nombre inférieur à 1, l'exposant est négatif : $0{,}0035 = 3{,}5 \\times 10^{-3}$, et non $3{,}5 \\times 10^3$.",
+          "figure": null,
+          "exercise": {
+            "title": "Écrire en notation scientifique",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour écrire des nombres en notation scientifique.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'écriture scientifique de $3\\,200\\,000$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le premier chiffre non nul est 3, la virgule est à la fin du nombre. Étape 2 — Déplacer : $a = 3{,}2$, la virgule a été déplacée de 6 rangs vers la gauche. Étape 3 — Déterminer : le nombre est supérieur à 10, l'exposant est positif, $n = 6$. Étape 4 — Écrire : $3\\,200\\,000 = 3{,}2 \\times 10^6$. Vérification : $3{,}2 \\times 1\\,000\\,000 = 3\\,200\\,000$. L'écriture $32 \\times 10^5$ est exacte mais pas scientifique, car 32 n'est pas compris entre 1 et 10.",
+                "answers": [
+                  {
+                    "content": "$32 \\times 10^5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3{,}2 \\times 10^5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3{,}2 \\times 10^6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0{,}32 \\times 10^7$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'écriture scientifique de $0{,}00072$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le premier chiffre non nul est 7. Étape 2 — Déplacer : $a = 7{,}2$, la virgule a été déplacée de 4 rangs vers la droite. Étape 3 — Déterminer : le nombre est inférieur à 1, l'exposant est négatif, $n = -4$. Étape 4 — Écrire : $0{,}00072 = 7{,}2 \\times 10^{-4}$. Vérification : $7{,}2 \\times 0{,}0001 = 0{,}00072$. L'écriture $7{,}2 \\times 10^4$ donnerait 72 000, un nombre très grand.",
+                "answers": [
+                  {
+                    "content": "$7{,}2 \\times 10^{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7{,}2 \\times 10^{-3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$72 \\times 10^{-5}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7{,}2 \\times 10^{-4}$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'écriture scientifique de $54{,}8 \\times 10^3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le facteur $54{,}8$ n'est pas compris entre 1 et 10. Étape 2 — Déplacer : $54{,}8 = 5{,}48 \\times 10$, on a déplacé la virgule d'un rang vers la gauche. Étape 3 — Déterminer : on ajoute 1 à l'exposant, $n = 3 + 1 = 4$. Étape 4 — Écrire : $54{,}8 \\times 10^3 = 5{,}48 \\times 10 \\times 10^3 = 5{,}48 \\times 10^4$. Vérification : $54{,}8 \\times 1\\,000 = 54\\,800 = 5{,}48 \\times 10\\,000$.",
+                "answers": [
+                  {
+                    "content": "$5{,}48 \\times 10^3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$548 \\times 10^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5{,}48 \\times 10^4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$5{,}48 \\times 10^5$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels nombres sont écrits en notation scientifique ? (deux bonnes propositions)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on regarde le facteur placé devant la puissance de 10. Étape 2 — Déplacer : il faut $1 \\leq a < 10$. $6{,}1 \\times 10^{-3}$ : 6,1 est compris entre 1 et 10, c'est bon. $9{,}99 \\times 10^8$ : 9,99 est inférieur à 10, c'est bon. $0{,}5 \\times 10^4$ : 0,5 est inférieur à 1, ce n'est pas bon ($0{,}5 \\times 10^4 = 5 \\times 10^3$). $15 \\times 10^2$ : 15 est supérieur à 10, ce n'est pas bon ($15 \\times 10^2 = 1{,}5 \\times 10^3$). Étape 4 — Écrire : les deux écritures scientifiques sont $6{,}1 \\times 10^{-3}$ et $9{,}99 \\times 10^8$.",
+                "answers": [
+                  {
+                    "content": "$6{,}1 \\times 10^{-3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0{,}5 \\times 10^{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$9{,}99 \\times 10^{8}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$15 \\times 10^{2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : $0{,}8 \\times 10^5$ est une écriture scientifique.",
+                "question_type": "true_false",
+                "explanation": "Faux. Étape 2 — Déplacer : pour une écriture scientifique, il faut $1 \\leq a < 10$. Ici $a = 0{,}8$ est inférieur à 1. On déplace la virgule d'un rang vers la droite : $0{,}8 = 8 \\times 10^{-1}$. Étape 3 — Déterminer l'exposant : $n = 5 - 1 = 4$. Étape 4 — Écrire : $0{,}8 \\times 10^5 = 8 \\times 10^4$. Vérification : $0{,}8 \\times 100\\,000 = 80\\,000 = 8 \\times 10\\,000$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Encadrer un nombre et donner une valeur approchée",
+          "remember": "Encadrer un nombre à $10^{-p}$ près, c'est l'écrire entre deux valeurs consécutives qui ont $p$ chiffres après la virgule : la plus petite est la **valeur approchée par défaut**, la plus grande est la **valeur approchée par excès**. L'**arrondi** est celle des deux qui est la plus proche du nombre. L'écart entre les deux bornes s'appelle l'**amplitude** de l'encadrement.",
+          "method": [
+            "Repérer la précision demandée (dixième, centième, millième…) et le chiffre de ce rang.",
+            "Encadrer le nombre entre deux valeurs consécutives de cette précision : la valeur par défaut et la valeur par excès.",
+            "Regarder le chiffre qui suit le rang demandé : de 0 à 4, garder la valeur par défaut ; de 5 à 9, prendre la valeur par excès.",
+            "Conclure en écrivant l'encadrement ou l'arrondi, avec sa précision."
+          ],
+          "example": {
+            "statement": "Encadrer $x = 7{,}2864$ au centième, puis donner son arrondi au centième.",
+            "steps": [
+              "Repérer : on veut le centième, donc deux chiffres après la virgule : on garde 7,28.",
+              "Encadrer : $7{,}28 < 7{,}2864 < 7{,}29$. La valeur par défaut est 7,28 et la valeur par excès est 7,29.",
+              "Regarder : le chiffre qui suit le centième est 6, donc on prend la valeur par excès 7,29.",
+              "Conclure : $7{,}28 < x < 7{,}29$ est un encadrement au centième d'amplitude $0{,}01$, et l'arrondi de $x$ au centième est 7,29."
+            ]
+          },
+          "pitfall": "On arrondit en **une seule fois**, en regardant seulement le chiffre qui suit le rang demandé. Contre-exemple : $2{,}449$ arrondi au dixième. Si on arrondit en deux fois, $2{,}449 \\to 2{,}45 \\to 2{,}5$, c'est faux. Le chiffre qui suit le dixième est 4, donc l'arrondi correct est $2{,}4$.",
+          "figure": "encadrement-droite",
+          "exercise": {
+            "title": "Encadrer et arrondir un nombre",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour encadrer des nombres et donner des valeurs approchées.",
+            "exercise_type": "fixation",
+            "figure": "encadrement-droite",
+            "questions": [
+              {
+                "content": "Quel est l'encadrement de $5{,}372$ au centième ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le centième demande deux chiffres après la virgule, on garde 5,37. Étape 2 — Encadrer : la valeur par défaut est 5,37 et la valeur par excès est 5,38, donc $5{,}37 < 5{,}372 < 5{,}38$. Étape 3 — Regarder : le chiffre suivant est 2, on garderait la valeur par défaut pour l'arrondi. Étape 4 — Conclure : l'encadrement est $5{,}37 < 5{,}372 < 5{,}38$. L'encadrement entre 5,3 et 5,4 est une précision au dixième, pas au centième.",
+                "answers": [
+                  {
+                    "content": "$5{,}37 < 5{,}372 < 5{,}38$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$5{,}3 < 5{,}372 < 5{,}4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5{,}36 < 5{,}372 < 5{,}37$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5{,}38 < 5{,}372 < 5{,}39$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'arrondi de $12{,}3456$ au centième ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le centième demande deux chiffres après la virgule, on garde 12,34. Étape 2 — Encadrer : $12{,}34 < 12{,}3456 < 12{,}35$. Étape 3 — Regarder : le chiffre qui suit le centième est 5, donc on prend la valeur par excès 12,35. Étape 4 — Conclure : l'arrondi au centième est 12,35. Le résultat 12,34 est la valeur par défaut, il oublie la règle du chiffre 5.",
+                "answers": [
+                  {
+                    "content": "$12{,}34$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$12{,}3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$12{,}36$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$12{,}35$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la valeur approchée par défaut de $0{,}6666$ au millième ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le millième demande trois chiffres après la virgule, on garde 0,666. Étape 2 — Encadrer : $0{,}666 < 0{,}6666 < 0{,}667$. La valeur par défaut est 0,666 et la valeur par excès est 0,667. Étape 3 — Regarder : le chiffre suivant est 6, donc l'arrondi serait 0,667, mais l'énoncé demande la valeur par défaut. Étape 4 — Conclure : la valeur approchée par défaut au millième est 0,666.",
+                "answers": [
+                  {
+                    "content": "$0{,}667$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}66$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}666$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0{,}67$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $x = 4{,}0968$. Quelles sont des valeurs approchées de $x$ à $0{,}01$ près ? (deux bonnes propositions)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : la précision est $0{,}01$, le centième. Étape 2 — Encadrer : $4{,}09 < 4{,}0968 < 4{,}10$. Les deux bornes, 4,09 (par défaut) et 4,10 (par excès), sont des valeurs approchées à $0{,}01$ près, car leur écart avec $x$ est inférieur à $0{,}01$ ($4{,}0968 - 4{,}09 = 0{,}0068$ et $4{,}10 - 4{,}0968 = 0{,}0032$). Étape 4 — Conclure : 4,08 est trop loin ($0{,}0168$) et 4,11 aussi ($0{,}0132$). Les bonnes propositions sont 4,09 et 4,10.",
+                "answers": [
+                  {
+                    "content": "$4{,}09$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4{,}10$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4{,}11$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4{,}08$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : l'arrondi de $2{,}449$ au dixième est $2{,}5$.",
+                "question_type": "true_false",
+                "explanation": "Faux. Étape 1 — Repérer : le dixième demande un chiffre après la virgule, on garde 2,4. Étape 2 — Encadrer : $2{,}4 < 2{,}449 < 2{,}5$. Étape 3 — Regarder : le chiffre qui suit le dixième est 4, donc on garde la valeur par défaut. Étape 4 — Conclure : l'arrondi est $2{,}4$. Le résultat $2{,}5$ vient d'un arrondi en deux fois ($2{,}45$ puis $2{,}5$), qu'il ne faut jamais faire.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer un ordre de grandeur",
+          "remember": "Un **ordre de grandeur** d'un nombre est une valeur simple, proche de ce nombre, qui permet de contrôler un calcul de tête. On l'obtient en écrivant le nombre en écriture scientifique $a \\times 10^n$ et en remplaçant $a$ par l'entier le plus proche. Exemple : $4\\,830 = 4{,}83 \\times 10^3$ a pour ordre de grandeur $5 \\times 10^3$.",
+          "method": [
+            "Écrire chaque nombre en écriture scientifique $a \\times 10^n$.",
+            "Remplacer chaque nombre $a$ par l'entier le plus proche.",
+            "Effectuer le calcul avec ces valeurs simples : calculer les entiers, puis appliquer la règle des exposants.",
+            "Écrire l'ordre de grandeur sous la forme d'un entier multiplié par une puissance de 10."
+          ],
+          "example": {
+            "statement": "Donner un ordre de grandeur de $A = 4\\,830 \\times 0{,}0021$.",
+            "steps": [
+              "Écrire : $4\\,830 = 4{,}83 \\times 10^3$ et $0{,}0021 = 2{,}1 \\times 10^{-3}$.",
+              "Remplacer : $4{,}83$ devient 5 et $2{,}1$ devient 2, ce qui donne $5 \\times 10^3$ et $2 \\times 10^{-3}$.",
+              "Effectuer : $(5 \\times 2) \\times (10^3 \\times 10^{-3}) = 10 \\times 10^0 = 10$.",
+              "Écrire : un ordre de grandeur de $A$ est $1 \\times 10^1$, soit 10. (Le calcul exact donne $10{,}143$.)"
+            ]
+          },
+          "pitfall": "On remplace $a$ par l'entier **le plus proche**, pas par la partie entière. Contre-exemple : $2{,}6 \\times 10^4 = 26\\,000$ est plus proche de $30\\,000$ que de $20\\,000$, donc l'ordre de grandeur est $3 \\times 10^4$ et non $2 \\times 10^4$.",
+          "figure": null,
+          "exercise": {
+            "title": "Déterminer un ordre de grandeur",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour trouver des ordres de grandeur.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est un ordre de grandeur de $48\\,000$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $48\\,000 = 4{,}8 \\times 10^4$. Étape 2 — Remplacer : 4,8 est plus proche de 5 que de 4, on obtient $5 \\times 10^4$. Étape 3 — Effectuer : il n'y a pas de calcul à faire pour un seul nombre. Étape 4 — Écrire : l'ordre de grandeur est $5 \\times 10^4$, soit $50\\,000$. Le choix $4 \\times 10^4$ garde seulement la partie entière de 4,8, une troncature.",
+                "answers": [
+                  {
+                    "content": "$4 \\times 10^4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5 \\times 10^3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$48 \\times 10^3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5 \\times 10^4$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est un ordre de grandeur de $0{,}0062$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $0{,}0062 = 6{,}2 \\times 10^{-3}$. Étape 2 — Remplacer : 6,2 est plus proche de 6 que de 7, on obtient $6 \\times 10^{-3}$. Étape 3 — Effectuer : pas de calcul pour un seul nombre. Étape 4 — Écrire : l'ordre de grandeur est $6 \\times 10^{-3}$. Un exposant négatif est indispensable, car le nombre est inférieur à 1 : $6 \\times 10^{3}$ vaudrait 6 000.",
+                "answers": [
+                  {
+                    "content": "$6 \\times 10^{-2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6 \\times 10^{3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6 \\times 10^{-3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$62 \\times 10^{-4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est un ordre de grandeur de $19\\,800 \\times 0{,}0031$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $19\\,800 = 1{,}98 \\times 10^4$ et $0{,}0031 = 3{,}1 \\times 10^{-3}$. Étape 2 — Remplacer : 1,98 devient 2 et 3,1 devient 3, ce qui donne $2 \\times 10^4$ et $3 \\times 10^{-3}$. Étape 3 — Effectuer : $(2 \\times 3) \\times (10^4 \\times 10^{-3}) = 6 \\times 10^1$. Étape 4 — Écrire : l'ordre de grandeur est $60$. (Le calcul exact donne $61{,}38$.) Les réponses 600 ou 6 viennent d'une erreur sur les exposants : $4 + (-3) = 1$.",
+                "answers": [
+                  {
+                    "content": "$600$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$60$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0{,}6$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est un ordre de grandeur de $\\dfrac{6\\,200\\,000}{2\\,100}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $6\\,200\\,000 = 6{,}2 \\times 10^6$ et $2\\,100 = 2{,}1 \\times 10^3$. Étape 2 — Remplacer : 6,2 devient 6 et 2,1 devient 2. Étape 3 — Effectuer : $\\dfrac{6 \\times 10^6}{2 \\times 10^3} = \\dfrac{6}{2} \\times 10^{6-3} = 3 \\times 10^3$. Étape 4 — Écrire : l'ordre de grandeur est $3 \\times 10^3$, soit $3\\,000$. (Le calcul exact donne environ $2\\,952$.) La réponse $3 \\times 10^9$ vient d'une addition des exposants ($6 + 3 = 9$) au lieu d'une soustraction.",
+                "answers": [
+                  {
+                    "content": "$3 \\times 10^{9}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3 \\times 10^{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3 \\times 10^{3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4 \\times 10^{3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : un ordre de grandeur de $2{,}6 \\times 10^4$ est $2 \\times 10^4$.",
+                "question_type": "true_false",
+                "explanation": "Faux. Étape 1 — Écrire : le nombre est déjà en écriture scientifique, $a = 2{,}6$ et $n = 4$. Étape 2 — Remplacer : l'entier le plus proche de 2,6 est 3, car 2,6 est plus proche de 3 que de 2. Étape 4 — Écrire : l'ordre de grandeur est $3 \\times 10^4$. Vérification : $2{,}6 \\times 10^4 = 26\\,000$ est plus proche de $30\\,000$ que de $20\\,000$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le forfait internet d'Awa",
+          "statement": "Awa a un forfait internet de 3,6 Go. On compte 1 Go = $10^9$ octets. Une photo envoyée par messagerie pèse 2 400 000 octets, soit $2{,}4 \\times 10^6$ octets.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Awa a un forfait de 3,6 Go, avec 1 Go = $10^9$ octets. Quelle est la taille de son forfait en octets, en écriture scientifique ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Calculer avec des puissances de 10 ». Étape 1 — Repérer : le décimal est 3,6 et la puissance de 10 est $10^9$. Étape 2 — Regrouper : il n'y a qu'un produit, $3{,}6 \\times 10^9$. Étape 3 — Appliquer : aucune règle d'exposants n'est nécessaire. Étape 4 — Écrire : $3{,}6 \\times 10^9$ octets, et 3,6 est compris entre 1 et 10, donc c'est bien une écriture scientifique. Les autres propositions déplacent mal la virgule ou l'exposant.",
+              "answers": [
+                {
+                  "content": "$3{,}6 \\times 10^{8}$",
+                  "correct": false
+                },
+                {
+                  "content": "$3{,}6 \\times 10^{9}$",
+                  "correct": true
+                },
+                {
+                  "content": "$36 \\times 10^{9}$",
+                  "correct": false
+                },
+                {
+                  "content": "$3{,}6 \\times 10^{10}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un forfait contient $3{,}6 \\times 10^9$ octets et une photo pèse $2{,}4 \\times 10^6$ octets. Combien de photos Awa peut-elle envoyer au maximum ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : c'est le quotient $\\dfrac{3{,}6 \\times 10^9}{2{,}4 \\times 10^6}$. Étape 2 — Regrouper : $\\dfrac{3{,}6}{2{,}4} \\times \\dfrac{10^9}{10^6}$. Étape 3 — Appliquer : $\\dfrac{3{,}6}{2{,}4} = 1{,}5$ et $\\dfrac{10^9}{10^6} = 10^{9-6} = 10^3$. Étape 4 — Écrire : $1{,}5 \\times 10^3 = 1\\,500$ photos. Si on additionnait les exposants au lieu de les soustraire, on trouverait $10^{15}$, un nombre absurde.",
+              "answers": [
+                {
+                  "content": "$1\\,500$ photos",
+                  "correct": true
+                },
+                {
+                  "content": "$150$ photos",
+                  "correct": false
+                },
+                {
+                  "content": "$15\\,000$ photos",
+                  "correct": false
+                },
+                {
+                  "content": "$1{,}5 \\times 10^{15}$ photos",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un forfait de $3{,}6 \\times 10^9$ octets sert à envoyer des photos de $2{,}4 \\times 10^6$ octets. Quel est un ordre de grandeur du nombre de photos ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Déterminer un ordre de grandeur ». Étape 1 — Écrire : $3{,}6 \\times 10^9$ et $2{,}4 \\times 10^6$ sont déjà en écriture scientifique. Étape 2 — Remplacer : 3,6 devient 4 et 2,4 devient 2. Étape 3 — Effectuer : $\\dfrac{4 \\times 10^9}{2 \\times 10^6} = 2 \\times 10^3$. Étape 4 — Écrire : l'ordre de grandeur est $2 \\times 10^3$, soit 2 000 photos, ce qui est cohérent avec le résultat exact de 1 500.",
+              "answers": [
+                {
+                  "content": "$2 \\times 10^{3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$2 \\times 10^{15}$",
+                  "correct": false
+                },
+                {
+                  "content": "$2 \\times 10^{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$4 \\times 10^{3}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa utilise une application qui consomme $7{,}5 \\times 10^7$ octets par jour. Son forfait est de $3{,}6 \\times 10^9$ octets. Pendant combien de jours le forfait suffit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on calcule le quotient $\\dfrac{3{,}6 \\times 10^9}{7{,}5 \\times 10^7}$. Étape 2 — Regrouper : $\\dfrac{3{,}6}{7{,}5} \\times \\dfrac{10^9}{10^7}$. Étape 3 — Appliquer : $\\dfrac{3{,}6}{7{,}5} = 0{,}48$ et $\\dfrac{10^9}{10^7} = 10^2$. Étape 4 — Écrire : $0{,}48 \\times 10^2 = 48$ jours. Vérification : $48 \\times 7{,}5 \\times 10^7 = 360 \\times 10^7 = 3{,}6 \\times 10^9$. Les valeurs 4,8 ou 480 viennent d'une erreur sur l'exposant ou sur la virgule.",
+              "answers": [
+                {
+                  "content": "$4{,}8$ jours",
+                  "correct": false
+                },
+                {
+                  "content": "$480$ jours",
+                  "correct": false
+                },
+                {
+                  "content": "$48$ jours",
+                  "correct": true
+                },
+                {
+                  "content": "$0{,}48$ jour",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le temps de réponse du réseau d'Awa est de $0{,}000045$ seconde. Quelle est son écriture scientifique ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Écrire un nombre en notation scientifique ». Étape 1 — Repérer : le premier chiffre non nul est 4. Étape 2 — Déplacer : $a = 4{,}5$, la virgule est déplacée de 5 rangs vers la droite. Étape 3 — Déterminer : le nombre est inférieur à 1, l'exposant est négatif, $n = -5$. Étape 4 — Écrire : $0{,}000045 = 4{,}5 \\times 10^{-5}$ seconde. Vérification : $4{,}5 \\times 0{,}00001 = 0{,}000045$.",
+              "answers": [
+                {
+                  "content": "$4{,}5 \\times 10^{5}$",
+                  "correct": false
+                },
+                {
+                  "content": "$4{,}5 \\times 10^{-4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$4{,}5 \\times 10^{-5}$",
+                  "correct": true
+                },
+                {
+                  "content": "$45 \\times 10^{-6}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les transferts de mobile money",
+          "statement": "Un opérateur de mobile money traite chaque jour $3{,}2 \\times 10^6$ transferts. Un transfert moyen est de $1{,}8 \\times 10^4$ F CFA, avec des frais moyens de 150 F.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un opérateur traite $3{,}2 \\times 10^6$ transferts par jour, de $1{,}8 \\times 10^4$ F en moyenne. Quel est le montant total transféré par jour, en écriture scientifique ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Calculer avec des puissances de 10 ». Étape 1 — Repérer : décimaux 3,2 et 1,8 ; puissances $10^6$ et $10^4$. Étape 2 — Regrouper : $(3{,}2 \\times 1{,}8) \\times (10^6 \\times 10^4)$. Étape 3 — Appliquer : $3{,}2 \\times 1{,}8 = 5{,}76$ et $10^6 \\times 10^4 = 10^{10}$. Étape 4 — Écrire : $5{,}76 \\times 10^{10}$ F, et 5,76 est compris entre 1 et 10, donc c'est l'écriture scientifique. Avec $10^{24}$, on aurait multiplié les exposants.",
+              "answers": [
+                {
+                  "content": "$5{,}76 \\times 10^{24}$",
+                  "correct": false
+                },
+                {
+                  "content": "$5{,}76 \\times 10^{10}$",
+                  "correct": true
+                },
+                {
+                  "content": "$57{,}6 \\times 10^{9}$",
+                  "correct": false
+                },
+                {
+                  "content": "$5{,}76 \\times 10^{2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un opérateur traite $3{,}2 \\times 10^6$ transferts par jour, avec des frais moyens de $1{,}5 \\times 10^2$ F par transfert. Quel est le total des frais par jour ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : décimaux 3,2 et 1,5 ; puissances $10^6$ et $10^2$. Étape 2 — Regrouper : $(3{,}2 \\times 1{,}5) \\times (10^6 \\times 10^2)$. Étape 3 — Appliquer : $3{,}2 \\times 1{,}5 = 4{,}8$ et $10^6 \\times 10^2 = 10^{8}$. Étape 4 — Écrire : $4{,}8 \\times 10^8$ F, soit 480 millions de francs. L'erreur $10^{12}$ vient d'une multiplication des exposants.",
+              "answers": [
+                {
+                  "content": "$4{,}8 \\times 10^{12}$",
+                  "correct": false
+                },
+                {
+                  "content": "$4{,}8 \\times 10^{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$4{,}8 \\times 10^{8}$",
+                  "correct": true
+                },
+                {
+                  "content": "$48 \\times 10^{8}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le montant total transféré par jour est $5{,}76 \\times 10^{10}$ F. Quel est un ordre de grandeur de ce montant ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Déterminer un ordre de grandeur ». Étape 1 — Écrire : le nombre est déjà en écriture scientifique, $a = 5{,}76$ et $n = 10$. Étape 2 — Remplacer : l'entier le plus proche de 5,76 est 6, et non 5 (qui serait la partie entière). Étape 3 — Effectuer : il n'y a pas de calcul. Étape 4 — Écrire : l'ordre de grandeur est $6 \\times 10^{10}$ F.",
+              "answers": [
+                {
+                  "content": "$5 \\times 10^{10}$",
+                  "correct": false
+                },
+                {
+                  "content": "$6 \\times 10^{9}$",
+                  "correct": false
+                },
+                {
+                  "content": "$6 \\times 10^{10}$",
+                  "correct": true
+                },
+                {
+                  "content": "$6 \\times 10^{11}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un transfert est de 18 452 F. Quel est l'encadrement de ce montant à 100 F près ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Encadrer un nombre et donner une valeur approchée ». Étape 1 — Repérer : la précision est 100 F, on s'intéresse au chiffre des centaines (4). Étape 2 — Encadrer : $18\\,400 < 18\\,452 < 18\\,500$. La valeur par défaut est 18 400 et la valeur par excès est 18 500. Étape 3 — Regarder : le chiffre suivant est 5, l'arrondi à la centaine est donc 18 500. Étape 4 — Conclure : l'encadrement à 100 F près est $18\\,400 < 18\\,452 < 18\\,500$. L'encadrement à 1 000 F près serait $18\\,000 < 18\\,452 < 19\\,000$.",
+              "answers": [
+                {
+                  "content": "$18\\,000 < 18\\,452 < 19\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$18\\,300 < 18\\,452 < 18\\,400$",
+                  "correct": false
+                },
+                {
+                  "content": "$18\\,400 < 18\\,452 < 18\\,500$",
+                  "correct": true
+                },
+                {
+                  "content": "$18\\,450 < 18\\,452 < 18\\,460$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les frais moyens d'un transfert sont de $147{,}86$ F. Quel est l'arrondi de ce nombre au dixième ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le dixième demande un chiffre après la virgule, on garde 147,8. Étape 2 — Encadrer : $147{,}8 < 147{,}86 < 147{,}9$. Étape 3 — Regarder : le chiffre qui suit le dixième est 6, donc on prend la valeur par excès 147,9. Étape 4 — Conclure : l'arrondi au dixième est 147,9 F. La réponse 147,8 oublie la règle des chiffres de 5 à 9.",
+              "answers": [
+                {
+                  "content": "$147{,}8$",
+                  "correct": false
+                },
+                {
+                  "content": "$147{,}9$",
+                  "correct": true
+                },
+                {
+                  "content": "$148$",
+                  "correct": false
+                },
+                {
+                  "content": "$147{,}86$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La consommation de données d'un opérateur",
+          "statement": "Un opérateur compte $3{,}6 \\times 10^6$ abonnés. Chaque abonné consomme en moyenne $2{,}5 \\times 10^{-1}$ Go par jour. On rappelle que 1 Go = $10^9$ octets. Dans cet exercice, rédige chaque calcul avec les étapes des fiches.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un opérateur compte $3{,}6 \\times 10^6$ abonnés, chacun consommant $2{,}5 \\times 10^{-1}$ Go par jour. Quelle est la consommation totale par jour, en Go ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Calculer avec des puissances de 10 ». Étape 1 — Repérer : décimaux 3,6 et 2,5 ; puissances $10^6$ et $10^{-1}$. Étape 2 — Regrouper : $(3{,}6 \\times 2{,}5) \\times (10^6 \\times 10^{-1})$. Étape 3 — Appliquer : $3{,}6 \\times 2{,}5 = 9$ et $10^6 \\times 10^{-1} = 10^{6 + (-1)} = 10^5$. Étape 4 — Écrire : $9 \\times 10^5$ Go, soit $900\\,000$ Go. L'erreur $10^7$ vient de la soustraction $6 - (-1)$ au lieu d'une addition des exposants dans un produit.",
+              "answers": [
+                {
+                  "content": "$9 \\times 10^{7}$",
+                  "correct": false
+                },
+                {
+                  "content": "$9 \\times 10^{5}$",
+                  "correct": true
+                },
+                {
+                  "content": "$9 \\times 10^{6}$",
+                  "correct": false
+                },
+                {
+                  "content": "$9 \\times 10^{-6}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La consommation totale d'un opérateur est de $9 \\times 10^5$ Go par jour, avec 1 Go = $10^9$ octets. Combien d'octets cela représente-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : décimal 9 ; puissances $10^5$ et $10^9$. Étape 2 — Regrouper : $9 \\times (10^5 \\times 10^9)$. Étape 3 — Appliquer : pour un produit, on additionne les exposants, $10^5 \\times 10^9 = 10^{14}$. Étape 4 — Écrire : $9 \\times 10^{14}$ octets, et 9 est compris entre 1 et 10, donc c'est une écriture scientifique. La valeur $9 \\times 10^{45}$ viendrait d'une multiplication des exposants.",
+              "answers": [
+                {
+                  "content": "$9 \\times 10^{45}$",
+                  "correct": false
+                },
+                {
+                  "content": "$9 \\times 10^{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$9 \\times 10^{13}$",
+                  "correct": false
+                },
+                {
+                  "content": "$9 \\times 10^{14}$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'opérateur consomme $9 \\times 10^5$ Go par jour. Quelle est sa consommation sur 30 jours, en écriture scientifique ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on calcule $30 \\times 9 \\times 10^5$. Étape 2 — Regrouper : $(30 \\times 9) \\times 10^5 = 270 \\times 10^5$. Cette écriture n'est pas scientifique, car 270 n'est pas compris entre 1 et 10. Méthode de la notion « Écrire un nombre en notation scientifique » — Étape 2 : $270 = 2{,}7 \\times 10^2$. Étape 3 : on ajoute 2 à l'exposant, $n = 5 + 2 = 7$. Étape 4 : $270 \\times 10^5 = 2{,}7 \\times 10^7$ Go. Vérification : $270 \\times 100\\,000 = 27\\,000\\,000 = 2{,}7 \\times 10^7$.",
+              "answers": [
+                {
+                  "content": "$2{,}7 \\times 10^{6}$",
+                  "correct": false
+                },
+                {
+                  "content": "$27 \\times 10^{6}$",
+                  "correct": false
+                },
+                {
+                  "content": "$2{,}7 \\times 10^{7}$",
+                  "correct": true
+                },
+                {
+                  "content": "$2{,}7 \\times 10^{8}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un centre de données stocke $4{,}5 \\times 10^{15}$ octets. L'opérateur en consomme $9 \\times 10^{14}$ chaque jour. Pendant combien de jours le stockage suffit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on calcule le quotient $\\dfrac{4{,}5 \\times 10^{15}}{9 \\times 10^{14}}$. Étape 2 — Regrouper : $\\dfrac{4{,}5}{9} \\times \\dfrac{10^{15}}{10^{14}}$. Étape 3 — Appliquer : $\\dfrac{4{,}5}{9} = 0{,}5$ et $\\dfrac{10^{15}}{10^{14}} = 10^{15-14} = 10^1$. Étape 4 — Écrire : $0{,}5 \\times 10 = 5$ jours. Vérification : $5 \\times 9 \\times 10^{14} = 45 \\times 10^{14} = 4{,}5 \\times 10^{15}$.",
+              "answers": [
+                {
+                  "content": "$0{,}5$ jour",
+                  "correct": false
+                },
+                {
+                  "content": "$50$ jours",
+                  "correct": false
+                },
+                {
+                  "content": "$5$ jours",
+                  "correct": true
+                },
+                {
+                  "content": "$500$ jours",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles écritures sont des écritures scientifiques ? (deux bonnes propositions)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode de la notion « Écrire un nombre en notation scientifique ». Étape 1 — Repérer : on regarde le facteur devant la puissance de 10. Étape 2 — Vérifier que $1 \\leq a < 10$ : $9 \\times 10^{14}$ convient (9 est entre 1 et 10) ; $2{,}7 \\times 10^{7}$ convient (2,7 est entre 1 et 10) ; $27 \\times 10^{6}$ ne convient pas (27 est supérieur à 10, et $27 \\times 10^6 = 2{,}7 \\times 10^7$) ; $0{,}9 \\times 10^{15}$ ne convient pas (0,9 est inférieur à 1, et $0{,}9 \\times 10^{15} = 9 \\times 10^{14}$). Étape 4 — Écrire : les deux bonnes propositions sont $9 \\times 10^{14}$ et $2{,}7 \\times 10^{7}$.",
+              "answers": [
+                {
+                  "content": "$9 \\times 10^{14}$",
+                  "correct": true
+                },
+                {
+                  "content": "$27 \\times 10^{6}$",
+                  "correct": false
+                },
+                {
+                  "content": "$2{,}7 \\times 10^{7}$",
+                  "correct": true
+                },
+                {
+                  "content": "$0{,}9 \\times 10^{15}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le partage d'un envoi de mobile money",
+          "statement": "Adjoua reçoit 100 000 F par mobile money et veut les partager entre plusieurs personnes. Elle utilise sa calculatrice, qui affiche beaucoup de chiffres : elle doit donc les arrondir et contrôler ses résultats. Dans cet exercice, rédige chaque réponse avec les étapes des fiches.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Adjoua partage 100 000 F en 3 parts égales. Le calcul donne $\\dfrac{100\\,000}{3} = 33\\,333{,}333\\dots$ Quelle est la valeur approchée par défaut de ce montant au centième ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Encadrer un nombre et donner une valeur approchée ». Étape 1 — Repérer : le centième demande deux chiffres après la virgule, on garde 33 333,33. Étape 2 — Encadrer : $33\\,333{,}33 < 33\\,333{,}333\\dots < 33\\,333{,}34$. La valeur par défaut est 33 333,33 et la valeur par excès est 33 333,34. Étape 3 — Regarder : le chiffre suivant est 3, l'arrondi serait aussi 33 333,33. Étape 4 — Conclure : la valeur approchée par défaut au centième est 33 333,33 F.",
+              "answers": [
+                {
+                  "content": "$33\\,333{,}34$",
+                  "correct": false
+                },
+                {
+                  "content": "$33\\,333{,}33$",
+                  "correct": true
+                },
+                {
+                  "content": "$33\\,333{,}3$",
+                  "correct": false
+                },
+                {
+                  "content": "$33\\,333$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le calcul $\\dfrac{100\\,000}{7}$ donne $14\\,285{,}714\\dots$ Quel est l'arrondi de ce nombre au dixième ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le dixième demande un chiffre après la virgule, on garde 14 285,7. Étape 2 — Encadrer : $14\\,285{,}7 < 14\\,285{,}714\\dots < 14\\,285{,}8$. Étape 3 — Regarder : le chiffre qui suit le dixième est 1, donc on garde la valeur par défaut. Étape 4 — Conclure : l'arrondi au dixième est 14 285,7. La réponse 14 285,8 oublie la règle (de 0 à 4, on garde la valeur par défaut), et 14 286 est un arrondi à l'unité.",
+              "answers": [
+                {
+                  "content": "$14\\,285{,}8$",
+                  "correct": false
+                },
+                {
+                  "content": "$14\\,286$",
+                  "correct": false
+                },
+                {
+                  "content": "$14\\,285{,}7$",
+                  "correct": true
+                },
+                {
+                  "content": "$14\\,285{,}71$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le calcul $\\dfrac{100\\,000}{7}$ donne environ $14\\,285{,}714$. Quel est un ordre de grandeur de ce montant ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Déterminer un ordre de grandeur ». Étape 1 — Écrire : $14\\,285{,}714 = 1{,}4285714 \\times 10^4$. Étape 2 — Remplacer : l'entier le plus proche de 1,43 est 1 (1,43 est plus proche de 1 que de 2). Étape 3 — Effectuer : il n'y a pas de calcul à faire. Étape 4 — Écrire : l'ordre de grandeur est $1 \\times 10^4$, soit $10\\,000$. La proposition $2 \\times 10^4$ arrondirait 1,43 vers le haut, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "$2 \\times 10^{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$1 \\times 10^{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$1 \\times 10^{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$1 \\times 10^{5}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une entreprise envoie $10^5$ F à chacune de $10^3$ personnes. Quel est le montant total envoyé ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Calculer avec des puissances de 10 ». Étape 1 — Repérer : les deux puissances de 10 sont $10^5$ et $10^3$. Étape 2 — Regrouper : il n'y a pas de décimaux autres que 1. Étape 3 — Appliquer : pour un produit, on additionne les exposants, $10^5 \\times 10^3 = 10^{5+3} = 10^8$. Étape 4 — Écrire : $10^8$ F, soit 100 millions de francs. L'erreur $10^{15}$ vient d'une multiplication des exposants.",
+              "answers": [
+                {
+                  "content": "$10^{15}$",
+                  "correct": false
+                },
+                {
+                  "content": "$10^{8}$",
+                  "correct": true
+                },
+                {
+                  "content": "$10^{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$10^{53}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les frais représentent $10^{-2}$ d'un montant total de $10^8$ F. Quel est le montant des frais ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on multiplie $10^8$ par $10^{-2}$ (les frais valent $10^{-2} = 0{,}01$ du total, soit 1 %). Étape 2 — Regrouper : il n'y a que des puissances de 10. Étape 3 — Appliquer : $10^8 \\times 10^{-2} = 10^{8 + (-2)} = 10^6$. Étape 4 — Écrire : $10^6$ F, soit un million de francs. Vérification : 1 % de 100 000 000 est 1 000 000. L'erreur $10^{10}$ vient d'un oubli du signe de l'exposant $-2$.",
+              "answers": [
+                {
+                  "content": "$10^{10}$",
+                  "correct": false
+                },
+                {
+                  "content": "$10^{-16}$",
+                  "correct": false
+                },
+                {
+                  "content": "$10^{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$10^{6}$",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

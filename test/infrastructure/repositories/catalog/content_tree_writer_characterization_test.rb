@@ -1,7 +1,7 @@
 require "test_helper"
 
 # IM-13, ADR-0068 §4 : l'écriture accélérée des arbres de contenu écrit exactement ce qu'écrivait l'écrivain d'avant.
-# Les 4 leçons de Tle D passent par la vraie chaîne (adaptateur ImportCourseTree, puis ContentTreeWriter) ; toutes les
+# Les 4 leçons de Tle D (nœuds d'avant le format 3) passent par ContentTreeWriter#write ; toutes les
 # lignes écrites sont comparées, champ par champ, à l'instantané pris AVANT l'optimisation
 # (test/fixtures/files/content_tree_snapshot.json). Cet instantané ne se régénère pas : si ce test rougit, c'est
 # l'implémentation qu'on corrige.
@@ -16,7 +16,10 @@ module Repositories
       # Identifiants, horodatages de création et auteur : ils changent d'une base à l'autre, pas le contenu.
       IGNORED = %w[id public_id created_at updated_at author_id record_id].freeze
       # ADR-0091 : colonnes venues après l'instantané ; ces leçons n'ont que des choix, elles restent vides (vérifié à part).
-      ADDED_LATER = %w[numeric_tolerance match_content].freeze
+      # ADR-0115 : points (1 par défaut), unit, starter, criteria et statement_blocks viennent aussi après l'instantané ; l'import
+      # d'aujourd'hui ne les écrit pas encore (Lot D), les lignes gardent leurs valeurs par défaut (vérifié à part).
+      # ADR-0116 : figures, sheet_theme, sheet et figure_key (format 3) viennent aussi après lui ; ces nœuds d'avant les laissent à leur défaut.
+      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key].freeze
 
       setup do
         seed_referential
@@ -26,33 +29,40 @@ module Repositories
 
       def connection = ActiveRecord::Base.connection
 
-      def adapter
-        UseCases::Catalog::ImportCourseTree.new(
-          courses: CourseRepository.new, essentials: EssentialRepository.new, taxonomy: TaxonomyRepository.new, writer: ContentTreeWriter.new
-        )
+      Port = Ports::Catalog::ContentTreeWriterPort
+
+      # Le format 1 n'est plus lu à l'import (ADR-0116) : les nœuds d'avant (fiche à texte riche, exercices des notions) sont bâtis ici
+      # depuis les fichiers, comme l'adaptateur d'alors les bâtissait ; c'est l'écriture, pas la lecture, que ce test garde.
+      def course_node(root, lookup, taken_courses, taken_essentials)
+        name = root["name"].squish
+        essentials = root["essentials"].each_with_index.map do |essential, index|
+          Port::EssentialNode.new(slug: Entities::Catalog::Slug.unique("#{name} #{essential['name'].squish}", taken: taken_essentials), course_id: nil,
+                                  name: essential["name"].squish, subtitle: essential["subtitle"].to_s.squish.presence, content: essential["content"],
+                                  position: index + 1, exercises: legacy_exercises(essential))
+        end
+        series = lookup.resolve_series(root["series_name"])
+        Port::CourseNode.new(slug: Entities::Catalog::Slug.unique(name, taken: taken_courses), name:, subtitle: root["subtitle"].to_s.squish.presence,
+                             content: root["content"], level_id: lookup.resolve_level(root["level_name"]).id, series_id: series&.id,
+                             material_id: lookup.resolve_material(root["material_name"]).id, essentials:)
       end
 
-      # Chaque cours est validé comme le moteur le fait (format 1 : l'adaptateur n'en lit plus les exercices), puis les 4 sont écrits en
-      # un seul lot. Les exercices des notions sont rendus au plan tels que l'adaptateur d'avant le format 2 les lisait : c'est
-      # l'écriture des exercices que ce test garde (ADR-0113).
+      # Les 4 leçons sont écrites en un seul lot.
       def import_lessons
-        subject = adapter
-        prepared = subject.prepare(target: nil)
-        context = prepared.with(data: prepared.data.merge(version: 1))
+        lookup = TaxonomyRepository.new.lookup
+        taken_courses = Set.new
+        taken_essentials = Set.new
         roots = LESSONS.flat_map { |file| JSON.parse(file.read).fetch("courses") }
-        items = roots.each_with_index.map do |root, index|
-          item = subject.validate_root(root:, path: "courses[#{index}]", context:).tap { |validated| assert validated.valid?, validated.errors.inspect }
-          item.with(plan: item.plan.with(essentials: item.plan.essentials.zip(root["essentials"]).map { |node, raw| node.with(exercises: legacy_exercises(raw)) }))
-        end
-        subject.write(items:, author_id: @author.id, at: Time.zone.parse("2026-09-30 08:00"))
+        courses = roots.map { |root| course_node(root, lookup, taken_courses, taken_essentials) }
+        counts = ContentTreeWriter.new.write(courses:, author_id: @author.id, at: Time.zone.parse("2026-09-30 08:00"))
+        { imported: counts.fetch(:courses) }
       end
 
       def legacy_exercises(essential)
         Array(essential["exercises"]).each_with_index.map do |exercise, index|
-          Ports::Catalog::ContentTreeWriterPort::ExerciseNode.new(
+          Port::ExerciseNode.new(
             public_id: SecureRandom.base58(14), essential_id: nil, title: (exercise["title"] || exercise["name"]).squish,
             statement: exercise["description"].to_s.strip.presence, exercise_type: exercise["exercise_type"], position: index + 1,
-            questions: exercise["questions"].each_with_index.map { |question, rank| Ports::Catalog::ContentTreeWriterPort::QuestionNode.from_import(question, position: rank + 1) }
+            questions: exercise["questions"].each_with_index.map { |question, rank| Port::QuestionNode.from_import(question, position: rank + 1) }
           )
         end
       end
@@ -109,6 +119,11 @@ module Repositories
           expected.fetch(table).zip(actual.fetch(table)).each { |want, got| assert_equal want, got, "#{table} #{want['path']}" }
         end
         assert_equal [ nil ], (created("questions").map { it["numeric_tolerance"] } + created("answers").map { it["match_content"] }).uniq
+        assert_equal [ BigDecimal("1"), nil, nil, "{}" ], %w[points unit starter criteria].map { |column| created("questions").map { it[column] }.uniq.sole }
+        assert_equal [ nil ], created("exercises").map { it["statement_blocks"] }.uniq
+        assert_equal [ [ "[]" ], [ "blue" ], [ {} ], [ nil ] ],
+                     [ created("courses").pluck("figures").uniq, created("courses").pluck("sheet_theme").uniq, created("essentials").pluck("sheet").uniq.map { it.is_a?(String) ? JSON.parse(it) : it },
+                       created("exercises").pluck("figure_key").uniq ]
         assert_equal 4, written.fetch(:imported)
         assert_equal [ @author.id ], %w[courses essentials exercises].flat_map { |table| created(table).map { it["author_id"] } }.uniq
       end

@@ -1,13 +1,15 @@
 <%# 🌐 UI · classroom/classrooms/_assigned_exercises — bloc « Exercices assignés » de la page d'une classe, au format de « Cette semaine » %>
 <%# Rôle : une ligne par assignation active : titre vers le suivi, matière et échéance, barre « 20 / 27 faits », pastille « 7 en retard » ou « 7 pas encore » ; trois lignes puis « Voir plus » %>
-<%# ADR  : 0048, 0072, 0079 · UDR : enseignant §3.3 et §3.5, 0062 (§3.4), 0077 (§3.4 : 3 lignes puis « Voir plus ») · comptes et lien seulement sous FollowAssignmentPolicy %>
+<%# ADR  : 0048, 0072, 0079 · UDR : enseignant §3.3 et §3.5, 0062 (§3.4, vide : lien vers « Cours »), 0077 (§3.4 : 3 lignes puis « Voir plus ») · comptes et lien seulement sous FollowAssignmentPolicy %>
 <%# locals: (classroom:, assignments:) -%>
 <%= tag.section id: "assigned_exercises", "aria-labelledby": "assigned_exercises_title", class: "min-w-0",
                 data: (ui_reveal_data if assignments.any?) do %>
   <h2 id="assigned_exercises_title" class="mb-4 font-display text-xl font-medium"><%= t(".title") %></h2>
   <% if assignments.empty? %>
     <div id="assigned_exercises_empty">
-      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "clipboard-document-list" %>
+      <%# Seul l'enseignant assigne : l'équipe lit le texte sans le bouton (UDR-0062, 2026-10-29). %>
+      <%= ui_empty_state title: t(".empty_title"), description: t(".empty_description"), icon: "clipboard-document-list",
+                         action: ({ label: t(".empty_action"), href: courses_path, variant: :secondary, icon: "book-open" } if current_actor.teacher?) %>
     </div>
   <% else %>
     <ul class="divide-y divide-line border-y border-line">

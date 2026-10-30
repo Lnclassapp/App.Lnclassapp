@@ -43,37 +43,44 @@ class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
     assert_equal [ "", "0", "1", "2" ], css_select("#{matching}select").first.css("option").map { it["value"].to_s }
   end
 
-  test "CA-8 : trois paires justes, juste ; « Ton choix » rend les paires" do
+  test "CA-8, ADR-0115 D1 : trois paires justes, juste ; « Ton choix » rend les paires et la correction les bonnes paires" do
     answer PAIRS.map(&:last)
 
     assert_equal [ true, @question.answers.order(:position).map(&:id) ],
                  Orm::QuestionAttempt.find_by!(question: @question).values_at(:correct, :selected_answer_ids)
     follow_redirect!
-    assert_select "#question_review_#{@question.id} ul li", 3
+    # Deux listes : « Ta réponse » (3 paires) puis, copie vérifiée, les bonnes paires (3), marquées.
+    assert_equal 3, css_select("#question_review_#{@question.id} ul").first.css("li").size
     assert_select "#question_review_#{@question.id} li", text: /3\(x\+1\)\s*→.*3x\+3/
+    assert_select "#question_review_#{@question.id} [data-correct] li", 3
   end
 
-  test "une paire fausse : faux, sans rien marquer ; un élément de gauche non relié : 422, rien n'est écrit" do
+  test "ADR-0115 D1 : un élément de gauche non relié : 422, rien n'est écrit ni montré ; une paire fausse : faux, et les bonnes paires sont montrées" do
     answer PAIRS.map(&:last), [ "", "0", "1" ]
     assert_response :unprocessable_entity
     assert_equal 0, Orm::QuestionAttempt.count
+    assert_select "[data-correct]", 0
 
     answer [ "2x-8", "3x+3", "10+5x" ]
     assert_equal false, Orm::QuestionAttempt.find_by!(question: @question).correct
     follow_redirect!
     assert_select "#question_review_#{@question.id} li", text: /3\(x\+1\)\s*→.*2x-8/
-    assert_select "[data-correct]", 0
+    assert_select "#question_review_#{@question.id} [data-correct] li", 3 do |good|
+      assert_equal PAIRS.map { |left, right| "#{left} → #{right}" }, good.map { it.text.strip }
+    end
   end
 
-  test "l'aide de l'import montre les quatre nouveaux types" do
+  test "l'aide de l'import des cours complets montre les sept exemples ; l'import « essentials » est retiré, sans aide" do
     sign_in_as create_team_member
 
-    %w[essentials course_tree].each do |kind|
-      get new_teams_import_path(kind:)
-      assert_select "#import-help-question-kinds pre", 4
-      assert_select "#import-help-question-kinds", text: /"tolerance": 0.1/
-      assert_select "#import-help-question-kinds", text: /"match": "3x \+ 3"/
-    end
+    get new_teams_import_path(kind: "course_tree")
+    assert_select "#import-help-question-kinds pre", 7
+    assert_select "#import-help-question-kinds", text: /"tolerance": 0.1/
+    assert_select "#import-help-question-kinds", text: /"match": "3x \+ 3"/
+
+    get new_teams_import_path(kind: "essentials")
+    assert_response :not_found
+    assert_select "#import-help-question-kinds", 0
   end
 
   test "aucun id de cette question n'apparaît dans la page, où que ce soit" do
@@ -82,9 +89,15 @@ class Assessment::QuestionMatchingTest < ActionDispatch::IntegrationTest
     Orm::Answer.where(question_id: @question.id).pluck(:id).each { assert_no_match(/\b#{it}\b/, response.body) }
   end
 
-  test "la correction de l'élève ne marque aucune solution" do
-    answer [ "2x-8", "3x+3", "10+5x" ]
+  test "ADR-0115 D1 : la correction de l'élève (copie vérifiée) marque les bonnes paires ; avant la vérification, aucune solution" do
+    get exercise_session_result_path(@session.public_id)
+    assert_redirected_to exercise_session_path(@session.public_id)
     follow_redirect!
     assert_select "[data-correct]", 0
+
+    answer [ "2x-8", "3x+3", "10+5x" ]
+    follow_redirect!
+    assert_select "#question_review_#{@question.id} [data-correct]", 1
+    assert_select "#question_review_#{@question.id} [data-correct] li", text: /3\(x\+1\)\s*→\s*3x\+3/
   end
 end

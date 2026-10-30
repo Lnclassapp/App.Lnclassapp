@@ -266,10 +266,10 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     assert_empty moves
   end
 
-  test "ADR-0095 §4.4: the eleventh link confirmation of a minute receives 429, without anything of the classroom" do
+  test "ADR-0095 §4.4: the 61st link confirmation of a minute receives 429, without anything of the classroom" do
     sign_in_as @student
 
-    10.times { get confirm_student_classroom_change_path, params: { link_token: "cccccccccccc" } }
+    60.times { get confirm_student_classroom_change_path, params: { link_token: "cccccccccccc" } }
 
     assert_redirected_to new_student_classroom_change_path
 
@@ -281,10 +281,10 @@ class Classroom::StudentClassroomChangesControllerTest < ActionDispatch::Integra
     assert_no_match(/#{@c.public_id}|#{@c.link_token}|2nde C/, response.body)
   end
 
-  test "ADR-0085 §4.1: the link confirmation shares the counter of /c/<jeton>" do
+  test "ADR-0085 §4.1: the link confirmation shares the link counter (60 a minute) of /c/<jeton>" do
     sign_in_as @student
 
-    10.times { get join_classroom_path("cccccccccccc") }
+    60.times { get join_classroom_path("cccccccccccc") }
     get confirm_student_classroom_change_path, params: { link_token: @c.link_token }
 
     assert_response :too_many_requests

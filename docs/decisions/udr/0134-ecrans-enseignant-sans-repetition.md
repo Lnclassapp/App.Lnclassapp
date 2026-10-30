@@ -155,7 +155,7 @@ Option A du porteur (2026-10-24, maquettes en gris à 1440 et 1024 px) : « Mes 
 - `_gaps` (Fiches à revoir) : inchangé, après les exercices.
 - `_roster_title` : « 20 élèves », **sans « sur 80 »** ni plafond expliqué.
 - **Sur ordinateur (≥ lg)** : deux colonnes égales — à gauche « Inscrire vos élèves », exercices assignés, Fiches à revoir ; à droite « 20 élèves », recherche, filtres et liste. « Mes classes » est actif dans la barre latérale.
-- `_roster` : recherche inchangée ; **filtres par badge** à la place des groupes de notes : puces « Tous · Bronze · Argent · Or · Diamant · Pas encore » (34 px de haut, zone tactile 44 px, défilement horizontal, puce active `bg-brand-strong text-white`), paramètre `badge=` dans le frame `classroom_roster_list`. Ligne : initiales 36 px, nom 14 px, « 9 faits sur 18 » 13 px (+ « · 1 en retard » `text-warning`), pastille du badge à droite « Or · 15/20 » (§3.1) ou « Pas encore » `text-mute`.
+- `_roster` : recherche inchangée ; **filtres par badge** à la place des groupes de notes : puces « Tous · Bronze · Argent · Or · Diamant · Pas encore » (34 px de haut, zone tactile 44 px, défilement horizontal, puce active `bg-brand-strong text-white`), paramètre `badge=` dans le frame `classroom_roster_list`. Ligne : initiales 36 px, nom 14 px, « 9 faits sur 18 » 13 px (+ « · 1 en retard » `text-warning`), pastille du badge à droite, qui dit qu'elle vient de la moyenne (amendé le 2026-10-29) : « Moyenne 15/20 · Or » (§3.1, trophée du palier, pastille neutre) ; avec au moins un exercice fait sous le seuil, « Moyenne 7/20 · Pas encore » `text-mute` ; sans exercice fait, « Pas encore » seul. La règle du badge (§3.2) ne change pas.
 
 ### 3.6 Fiche d'un élève (`classroom/classroom_students/show.html.erb`)
 

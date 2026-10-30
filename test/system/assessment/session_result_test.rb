@@ -2,7 +2,7 @@ require "application_system_test_case"
 
 # AS-11, AS-12, AS-13 (UDR-0023) : le résultat d'une session. 10/10 : « Diamant », « Nouveau badge ! » et des confettis
 # pendant 3 s ; 9/10 : « Or », jamais Diamant, et « Refaire l'exercice » ouvre une nouvelle session (changement de page), l'ancienne
-# gardant son score ; sous le seuil : « Courage ! », sans confettis. Sur un bureau comme à 390 px.
+# gardant son score ; sous le seuil : « À retravailler », sans confettis. Sur un bureau comme à 390 px.
 class Assessment::SessionResultTest < ApplicationSystemTestCase
   SCOPE = "assessment.session_results".freeze
   GRADING = Entities::Assessment::Grading
@@ -34,7 +34,7 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
 
     visit exercise_session_result_path(session.public_id)
 
-    assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.success")
+    assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.very_good")
     assert_selector "#session_badge[aria-label='#{badge('Diamant')}']", text: I18n.t("#{SCOPE}.badge.new")
     assert_text "20/20"
     assert_selector "#confetti span", visible: :all
@@ -104,12 +104,12 @@ class Assessment::SessionResultTest < ApplicationSystemTestCase
     assert_no_button I18n.t("components.reveal.more")
   end
 
-  test "sous le seuil : « Courage ! », « Pas encore de badge », aucun confetti" do
+  test "sous le seuil : « À retravailler », « Pas encore de badge », aucun confetti" do
     session = completed_session(correct: 4)
 
     visit exercise_session_result_path(session.public_id)
 
-    assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.error")
+    assert_selector "h1", text: I18n.t("#{SCOPE}.show.headline.needs_work")
     assert_selector "#session_badge[aria-label='#{I18n.t("#{SCOPE}.badge.none")}']"
     assert_text I18n.t("assessment.badges.mastery.struggling")
     assert_no_selector "#confetti", visible: :all

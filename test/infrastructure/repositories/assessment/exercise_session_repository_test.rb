@@ -36,6 +36,18 @@ module Repositories
         assert_equal 1, Orm::ExerciseSession.where(student: @student).count
       end
 
+      test "une violation d'unicité sans session ouverte remonte au lieu de renvoyer nil" do
+        colliding = Orm::ExerciseSession.new
+        colliding.define_singleton_method(:save!) { raise ActiveRecord::RecordNotUnique, "public_id" }
+
+        Orm::ExerciseSession.define_singleton_method(:new) { |*| colliding }
+        begin
+          assert_raises(ActiveRecord::RecordNotUnique) { @repository.start(session: session) }
+        ensure
+          Orm::ExerciseSession.singleton_class.remove_method(:new)
+        end
+      end
+
       test "record_copy écrit toute la copie d'un coup, avec la contrainte unanswered, et tient les compteurs" do
         started = @repository.start(session: session)
         first, second, third = @exercise.questions.to_a
@@ -156,6 +168,60 @@ module Repositories
 
         assert_equal [ "completed", 80, @at ], [ completed.status, completed.score_percent, completed.completed_at ]
         assert_nil @repository.started_for(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      # ADR-0115 §4 : les fins des 3 dernières copies terminées de l'élève sur l'exercice, toutes sortes confondues.
+      test "recent_completions : les 3 dernières fins, de la plus récente à la plus ancienne" do
+        [ 50, 40, 30, 20, 10 ].each { |minutes| create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - minutes.minutes) }
+
+        assert_equal [ @at - 10.minutes, @at - 20.minutes, @at - 30.minutes ],
+                     @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      test "recent_completions : ni les copies abandonnées ou en cours, ni un autre exercice, ni un autre élève" do
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at)
+        create_exercise_session(student: @student, exercise: @exercise, status: "abandoned", completed_at: @at - 3.minutes)
+        create_exercise_session(student: @student, exercise: @exercise, status: "started")
+        create_exercise_session(student: @student, exercise: create_exercise, status: "completed", completed_at: @at - 1.minute)
+        create_exercise_session(student: create_student, exercise: @exercise, status: "completed", completed_at: @at - 2.minutes)
+
+        assert_equal [ @at ], @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      test "recent_completions : toutes sortes de copies comptent (libre, devoir, remédiation)" do
+        gap = create_gap(student: @student, essential: @exercise.essential)
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 20.minutes)
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 10.minutes, gap:)
+
+        create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - 5.minutes,
+                                classroom_assignment_id: create_assignment(assignable: @exercise).id)
+
+        assert_equal [ @at - 5.minutes, @at - 10.minutes, @at - 20.minutes ],
+                     @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
+      end
+
+      test "recent_completions_by_exercise : les 3 dernières fins de chaque exercice, en une requête, sans copie abandonnée ni autre élève" do
+        other = create_exercise(essential: @exercise.essential) if @exercise.respond_to?(:essential)
+        other ||= create_exercise
+        [ 40, 30, 20, 10 ].each { |minutes| create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: @at - minutes.minutes) }
+        create_exercise_session(student: @student, exercise: other, status: "completed", completed_at: @at)
+        create_exercise_session(student: @student, exercise: other, status: "abandoned", completed_at: @at - 1.minute)
+
+        result = nil
+        queries = []
+        counter = ->(*, payload) { queries << payload[:sql] unless payload[:name] == "SCHEMA" }
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record") do
+          result = @repository.recent_completions_by_exercise(student_id: @student.id, exercise_ids: [ @exercise.id, other.id ])
+        end
+
+        assert_equal 1, queries.size
+        assert_equal [ @at - 10.minutes, @at - 20.minutes, @at - 30.minutes ], result[@exercise.id]
+        assert_equal [ @at ], result[other.id]
+        assert_empty @repository.recent_completions_by_exercise(student_id: @student.id, exercise_ids: [])
+      end
+
+      test "recent_completions : aucune copie terminée, une liste vide" do
+        assert_empty @repository.recent_completions(student_id: @student.id, exercise_id: @exercise.id)
       end
 
       test "abandonne une session ouverte" do

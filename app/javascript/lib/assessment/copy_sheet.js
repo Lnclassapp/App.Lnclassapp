@@ -1,5 +1,5 @@
 // ⚡ FRONT · lib/assessment/copy_sheet — la logique de la copie de l'élève, chargée à la demande par assessment/copy_controller
-// Rôle : brouillon dans `localStorage[key]`, compteur des questions répondues, confirmation « Rendre ta copie ? » des questions vides
+// Rôle : brouillon dans `localStorage[key]`, compteur des questions répondues, confirmation « Vérifier ta copie ? » des questions vides
 // UDR  : 0138 §3.2 · ADR : 0051 (import dynamique), 0112 §4.5 · le contrôleur Stimulus lui prête ses cibles et ses valeurs
 const ANSWER_FIELDS = /^copy\[answers\]/
 
@@ -13,9 +13,13 @@ export class CopySheet {
     this.dialog = this.c.element.querySelector("#copy-confirm")
     this.resume = () => this.focusFirstEmpty()
     this.dialog?.addEventListener("close", this.resume)
+    // Un 422 re-rend la copie par morphing : le serveur réécrit le compteur (« 0 »), on le recale sur les réponses réaffichées.
+    this.refresh = () => this.update()
+    document.addEventListener("turbo:morph", this.refresh)
   }
 
   destroy() {
+    document.removeEventListener("turbo:morph", this.refresh)
     this.dialog?.removeEventListener("close", this.resume)
   }
 

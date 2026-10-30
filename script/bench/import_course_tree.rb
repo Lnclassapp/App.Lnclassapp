@@ -1,13 +1,12 @@
-# Banc de l'import des cours complets (chantier import-cours-multiple, ADR-0068 §1 et §7, PRD §7, IM-14).
+# Banc de l'import des leçons complètes (chantier import-cours-multiple, ADR-0068 §1 et §7, PRD §7, IM-14 ; format 3, ADR-0116).
 #
 #   bin/rails runner script/bench/import_course_tree.rb            # 200 puis 500 cours
 #   bin/rails runner script/bench/import_course_tree.rb 40 200     # tailles au choix
 #   BENCH_RUNS=5 bin/rails runner script/bench/import_course_tree.rb 500
 #
 # Sur la base de développement, qui porte le référentiel de db/seeds (Tle, série D, Mathématiques, Physique-Chimie,
-# SVT) et au moins un membre de l'équipe. Pour chaque taille N, le banc fabrique N cours en clonant les 4 leçons de
-# docs/contenus/lecons-traitees/tle-d/ (noms suffixés « — banc i »), rangés par fichiers de FILE_COURSES cours au plus
-# (≈ 11 Mo, sous la limite de 20 Mo par fichier). Il les importe par la vraie chaîne : UseCases::Catalog::StartImport,
+# SVT) et au moins un membre de l'équipe. Pour chaque taille N, le banc fabrique N leçons v3 synthétiques (3 notions à fiche,
+# 4 problèmes, 6 questions par exercice, noms « Leçon banc i »), rangées par fichiers de FILE_COURSES leçons au plus. Il les importe par la vraie chaîne : UseCases::Catalog::StartImport,
 # puis Catalog::ImportCourseTreeJob.perform_now. Si l'envoi accepte plusieurs fichiers, c'est un seul import ; sinon,
 # un import par fichier, l'un après l'autre, et les durées s'additionnent. Il fait BENCH_RUNS passages (3 par défaut)
 # et affiche la médiane de chaque phase :
@@ -15,7 +14,7 @@
 #   schéma      ImportSchemaValidator#validate (json_schemer)
 #   métier      ImportCourseTree#validate_root (ContentNode, taxonomie, slugs)
 #   écriture    ImportCourseTree#write, donc ContentTreeWriter#write, dans la transaction du lot
-#     dont HTML   RichTextSanitizer.call, compté dans l'écriture
+#     dont HTML   RichTextSanitizer.call, compté dans l'écriture (nul en v3 : aucune notion n'a de texte riche)
 #   reste       lecture du fichier, analyse JSON, rapport, transactions
 #   traitement  le job, du lancement au rapport « Terminé » (la mesure de l'IM-14)
 #
@@ -23,9 +22,6 @@
 # y compris les rapports d'import, leurs fichiers et leurs événements d'audit. Hors CI : la mesure dépend de la machine.
 
 module ImportCourseTreeBench
-  LESSONS = %w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools
-               svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes]
-            .map { Rails.root.join("docs/contenus/lecons-traitees/tle-d/#{it}.json") }.sort_by { File.basename(it) }
   SIZES = ARGV.any? ? ARGV.map { Integer(it) } : [ 200, 500 ]
   RUNS = Integer(ENV.fetch("BENCH_RUNS", 3))
   FILE_COURSES = 200
@@ -63,12 +59,32 @@ module ImportCourseTreeBench
     Repositories::Shared::RichTextSanitizer.singleton_class.prepend(Module.new { def call(...) = ImportCourseTreeBench.timed(:sanitize) { super } })
   end
 
-  # → [Upload], un fichier lnclass.course-tree par tranche de FILE_COURSES cours.
+  def question(rank)
+    { "content" => "Question #{rank} : combien font 2 + 2 ?", "question_type" => "single_choice",
+      "explanation" => "On additionne les deux termes : 2 + 2 = 4, la bonne réponse est donc 4.",
+      "answers" => [ { "content" => "4", "correct" => true }, { "content" => "5", "correct" => false }, { "content" => "3", "correct" => false } ] }
+  end
+
+  def exercise(title)
+    { "title" => title, "statement" => "Résous les questions suivantes.", "exercise_type" => "fixation", "questions" => Array.new(6) { question(it + 1) } }
+  end
+
+  def notion(name)
+    { "name" => name, "remember" => "À retenir pour #{name}.", "method" => %w[Première\ étape. Deuxième\ étape.],
+      "example" => { "statement" => "Un exemple.", "steps" => %w[Première\ application. Deuxième\ application.] },
+      "pitfall" => "Le piège de #{name}.", "exercise" => exercise("Exercice #{name}") }
+  end
+
+  def lesson(index)
+    { "name" => "Leçon banc #{index}", "level_name" => "Tle", "series_name" => "D", "material_name" => "Mathématiques",
+      "notions" => Array.new(3) { notion("Notion #{it + 1} de la leçon #{index}") }, "exercises" => Array.new(4) { exercise("Problème #{it + 1}") } }
+  end
+
+  # → [Upload], un fichier lnclass.course-tree par tranche de FILE_COURSES leçons.
   def files(size)
-    roots = LESSONS.flat_map { |file| JSON.parse(file.read).fetch("courses") }
-    courses = Array.new(size) { |index| roots[index % roots.size].merge("name" => "#{roots[index % roots.size]['name']} — banc #{index + 1}") }
+    courses = Array.new(size) { lesson(it + 1) }
     courses.each_slice(FILE_COURSES).with_index(1).map do |slice, rank|
-      Upload.new(io: StringIO.new(JSON.generate("format" => "lnclass.course-tree", "version" => 1, "courses" => slice)),
+      Upload.new(io: StringIO.new(JSON.generate("format" => "lnclass.course-tree", "version" => 3, "courses" => slice)),
                  filename: "banc-#{size}-cours-#{rank}.json")
     end
   end

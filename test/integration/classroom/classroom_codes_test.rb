@@ -96,16 +96,16 @@ class Classroom::ClassroomCodesTest < ActionDispatch::IntegrationTest
     assert_no_match(/3e B/, response.body)
   end
 
-  test "CA-B4: the counter is shared with /c/<token>: 5 link openings and 5 checks, then the 11th request is refused" do
+  # ADR-0085 §4.7: the code check keeps its 10 a minute; the link of a class has its own counter and stays open.
+  test "CA-B4: ten checks of a code, then the 11th is refused, while the link of a class still opens" do
     token = @classroom.link_token
-    5.times { get join_classroom_path(token) }
-    5.times { check "zzzzzz" }
+    10.times { check "zzzzzz" }
 
     check
     assert_response :too_many_requests
 
     get join_classroom_path(token)
-    assert_response :too_many_requests
+    assert_response :success
   end
 
   test "CA-B4: another address has its own counter" do

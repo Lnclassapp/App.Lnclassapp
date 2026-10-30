@@ -430,6 +430,7 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "the history shows 3 lines by day, then « Voir plus » to Mon historique; yesterday has its own title" do
+    travel_to Time.zone.now.change(hour: 12) # les heures de copie ne passent pas minuit, quelle que soit l'heure du test
     exercise = create_exercise(essential: @essential, title: "Méiose")
     3.times { |index| create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 90, completed_at: (index + 1).hours.ago) }
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 90, completed_at: 1.day.ago - 1.hour)
@@ -447,7 +448,8 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
 
   test "a grade of 14/20 or more is green, a lower one in ink, never red; under 10/20, « Refaire » starts the exercise again" do
     exercise = create_exercise(essential: @essential, title: "Méiose")
-    [ 70, 65, 20, 68 ].each_with_index { |score, index| complete(exercise, score:).update!(completed_at: (index + 1).minutes.ago) }
+    # Les trois dernières copies ne tiennent pas dans 30 minutes : pas de pause, le bouton reste.
+    [ 70, 65, 20, 68 ].zip([ 1, 2, 40, 50 ]).each { |score, minutes| complete(exercise, score:).update!(completed_at: minutes.minutes.ago) }
     sign_in_as @student
 
     get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
@@ -458,6 +460,40 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "turbo-frame#student_home_recent_activity [class*=error], turbo-frame#student_home_recent_activity [class*=warning]", 0
     assert_select "turbo-frame#student_home_recent_activity form[action=?] button.ui-button-secondary", exercise_sessions_path(exercise.public_id),
                   text: tl("history.redo"), count: 1
+  end
+
+  test "pause: 3 copies rendered within 30 minutes hide « Refaire » for that exercise only, and it returns once the pause is over" do
+    paused = create_exercise(essential: @essential, title: "Pause test")
+    other = create_exercise(essential: @essential, title: "Hors pause")
+    [ 3, 2, 1 ].each { |minutes| complete(paused, score: 20).update!(completed_at: minutes.minutes.ago) }
+    complete(other, score: 20).update!(completed_at: 30.seconds.ago)
+    sign_in_as @student
+
+    get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
+
+    assert_select "turbo-frame#student_home_recent_activity form[action=?]", exercise_sessions_path(paused.public_id), 0
+    assert_select "turbo-frame#student_home_recent_activity form[action=?] button", exercise_sessions_path(other.public_id), text: tl("history.redo"), count: 1
+    assert_select "turbo-frame#student_home_recent_activity a[href=?]", exercise_session_result_path(Orm::ExerciseSession.where(exercise_id: paused.id).order(completed_at: :desc).first.public_id), minimum: 1
+
+    travel_to 31.minutes.from_now do
+      get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
+
+      assert_select "turbo-frame#student_home_recent_activity form[action=?]", exercise_sessions_path(paused.public_id), minimum: 1
+    end
+  end
+
+  test "pause: the history reads the recent copies of every exercise in one query" do
+    exercises = Array.new(3) { |i| create_exercise(essential: @essential, title: "Ex #{i}") }
+    exercises.each { |exercise| complete(exercise, score: 20).update!(completed_at: 1.minute.ago) }
+    sign_in_as @student
+    sql = []
+    counter = ->(*, payload) { sql << payload[:sql] if payload[:sql].match?(/"exercise_sessions"/) && payload[:sql].match?(/ROW_NUMBER|completed_at/) && payload[:name] != "SCHEMA" }
+
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") do
+      get student_home_path, headers: { "Turbo-Frame" => "student_home_recent_activity" }
+    end
+
+    assert_equal 1, sql.count { it.include?("ROW_NUMBER") }
   end
 
   test "no completed session: the empty history, without « Voir plus »" do

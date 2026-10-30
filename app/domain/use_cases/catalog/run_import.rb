@@ -1,7 +1,7 @@
 # 🧠 DOMAINE · UseCases::Catalog::RunImport
 # Rôle : moteur d'import partiel d'un envoi de 1 à N fichiers : refus par fichier, validation de tout l'envoi, doublons,
 #         écriture par lots rejoués, bilan par fichier
-# ADR  : 0028, 0039, 0050, 0068, 0113
+# ADR  : 0028, 0039, 0050, 0068, 0113, 0116
 module UseCases
   module Catalog
     class RunImport
@@ -174,10 +174,17 @@ module UseCases
 
       def envelope_errors(source, document, kind)
         return [ format_mismatch(source, document, kind) ] unless document.is_a?(Hash) && document["format"] == kind.format
-        return [ error(source, "version", "version_unsupported", expected: kind.version) ] unless kind.accepts?(document["version"])
+        return [] if kind.accepts?(document["version"])
 
-        []
+        received = document["version"]
+        # Un format plus ancien que celui du type est retiré (ADR-0116 §4.1) : l'équipe doit passer à la version courante.
+        return [ error(source, "version", "format_retired", expected: kind.version, received:) ] if retired?(received, kind)
+
+        [ error(source, "version", "version_unsupported", expected: kind.version) ]
       end
+
+      # Un entier de 1 à la version du type exclue : un format que ce type a lu et ne lit plus.
+      def retired?(received, kind) = received.is_a?(Integer) && received.between?(Entities::Catalog::ImportKind::VERSION, kind.version - 1)
 
       # Tout l'envoi est validé avant la moindre écriture. Un doublon de la base, ou d'un élément plus haut dans le même
       # fichier, est ignoré ; la progression compte les éléments de tous les fichiers.
@@ -244,10 +251,21 @@ module UseCases
       end
 
       def write_one(report, entry, at)
-        written = @transaction.attempt { @adapter.write(items: [ entry.item ], author_id: report.imported_by_id, at:) }
+        written = @transaction.attempt_with_cause { @adapter.write(items: [ entry.item ], author_id: report.imported_by_id, at:) }
         return @tally.add(written.value, [ entry ]) if written.success?
 
-        @tally.invalid([ error(@sources.fetch(entry.file_index), entry.item.path, "write_failed") ], entry.file_index)
+        @tally.invalid([ write_error(@sources.fetch(entry.file_index), entry, written) ], entry.file_index)
+      end
+
+      # Une leçon publiée entre la validation et l'écriture : l'écrivain le dit par la classe de l'exception (clé `exception`), le moteur
+      # rend la même raison que la validation (ADR-0116 §4.4) au lieu d'un échec d'écriture générique.
+      def write_error(source, entry, written)
+        raised = Array(written.errors[:exception]).first.to_s.split("::").last
+        if raised == Ports::Catalog::ContentTreeWriterPort::NOT_DRAFT && entry.item.plan.respond_to?(:name)
+          return error(source, entry.item.path, "lesson_already_published", course: entry.item.plan.name.squish)
+        end
+
+        error(source, entry.item.path, "write_failed")
       end
 
       def progress(report, status, processed_count)

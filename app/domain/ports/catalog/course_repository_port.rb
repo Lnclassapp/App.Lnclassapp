@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::CourseRepositoryPort
 # Rôle : contrat de persistance des cours, un seul agrégat pour lire et écrire
-# ADR  : 0029, 0035, 0039, 0075
+# ADR  : 0029, 0035, 0039, 0075, 0116
 module Ports
   module Catalog
     module CourseRepositoryPort
@@ -37,6 +37,12 @@ module Ports
       # Slugs déjà pris, pour les calculer avant une insertion en masse (Entities::Catalog::Slug). → Set[String]
       def taken_slugs
         raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"
+      end
+
+      # ADR-0116 §4.4 : le statut de la leçon et de ses contenus (notions, exercices), lus sous verrou (FOR UPDATE) dans la transaction
+      # de l'appelant, pour décider un réimport. → { course: "draft" | "published" | "archived", contents: Array<String> } ; nil sans leçon.
+      def status_for_update(id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #status_for_update"
       end
 
       # ADR-0075 : une entrée par classe où un exercice d'une fiche du cours est assigné (assignation active).

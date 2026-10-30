@@ -1,0 +1,32 @@
+<%# 🌐 UI · assessment/session_results/kinds/_written_review — une réponse rédigée, dans la correction %>
+<%# Rôle : le texte de l'élève, en clair, échappé (menace W1 : jamais raw ni html_safe) ; avec reveal, le corrigé type et la grille de vérification %>
+<%# ADR  : 0115 · UDR : 0140 §3 · la grille se coche à l'écran, sans nom de champ : rien n'est envoyé ni enregistré · locals: (question:, reveal:) -%>
+<div class="text-sm text-mute">
+  <p><%= t("assessment.session_results.question_review.selected") %> :</p>
+  <% if question.response_text.present? %>
+    <p class="mt-1 rounded-ln border border-line px-4 py-3 whitespace-pre-line text-ink" data-written-answer><%= question.response_text %></p>
+  <% else %>
+    <p class="mt-1 text-ink"><%= t("assessment.session_results.question_review.nothing_written") %></p>
+  <% end %>
+</div>
+<% if reveal && question.explanation.present? %>
+  <div class="mt-3 rounded-ln bg-mist px-4 py-3">
+    <p class="text-sm font-medium text-ink"><%= t("assessment.session_results.question_review.model_answer") %></p>
+    <p class="mt-1 text-ink whitespace-pre-line"><%= question.explanation %></p>
+  </div>
+<% end %>
+<% if reveal && question.criteria.any? %>
+  <fieldset class="mt-3">
+    <legend class="text-sm font-medium text-ink"><%= t("assessment.session_results.question_review.criteria") %></legend>
+    <ul class="mt-1">
+      <% question.criteria.each do |criterion| %>
+        <li>
+          <label class="flex min-h-tap items-center gap-3 text-ink">
+            <input type="checkbox" class="size-5 shrink-0 accent-brand">
+            <span><%= criterion %></span>
+          </label>
+        </li>
+      <% end %>
+    </ul>
+  </fieldset>
+<% end %>

@@ -265,11 +265,9 @@ class Classroom::StudentRegistrationsControllerTest < ActionDispatch::Integratio
     assert_select "fieldset[data-step='1'] #student-registration-refusal[role=alert]", text: I18n.t("#{ERRORS}.base.classroom_full")
   end
 
-  # CA-B4: the sign-up shares the counter « classroom/joins » (10 a minute and per address) with /c/<token> and the check of a code.
-  test "CA-B4: five checks of a code and five openings of a link make the sign-up receive 429, with the code message at step 1" do
-    token = @classroom.reload.link_token
-    5.times { get classroom_code_path("abcdef") }
-    5.times { get join_classroom_path(token) }
+  # CA-B4: the sign-up shares the counter « classroom/joins » (10 a minute and per address) with the check of a code; a link has its own (§4.7).
+  test "CA-B4: ten checks of a code make the sign-up receive 429, with the code message at step 1" do
+    10.times { get classroom_code_path("abcdef") }
 
     register
 
@@ -641,6 +639,52 @@ end
     assert_not Orm::User.exists?(contact: "0701020309")
   end
 
+  # ADR-0085 §4.7: a whole class signs up through its link from one address (school wifi); the link has its own counter
+  # « classroom/links » (60 a minute and per address) which replaces the two others for a send carrying a link token.
+  def register_by_link(index, token)
+    post student_registrations_path, params: { student_registration: registration_params(
+      link_token: token, drena_public_id: nil, school_public_id: nil, level_slug: nil, classroom_public_id: nil,
+      contact: format("07%08d", index)
+    ) }
+  end
+
+  test "ADR-0085 §4.7: 45 students of one class sign up by its link from the same address in a minute, no 429" do
+    @classroom.update!(max_students: 60)
+    token = @classroom.reload.link_token
+
+    45.times do |i|
+      register_by_link(i, token)
+      assert_redirected_to student_home_path, "sign-up #{i + 1} was refused (#{response.status})"
+      sign_out
+    end
+
+    assert_equal 45, Orm::ClassroomStudent.where(classroom_id: @classroom.id).count
+  end
+
+  test "ADR-0085 §4.7: the 61st send by link in a minute from the same address receives 429, no account" do
+    @classroom.update!(max_students: 100)
+    token = @classroom.reload.link_token
+    60.times do |i|
+      register_by_link(i, token)
+      sign_out
+    end
+    accounts = Orm::User.count
+
+    register_by_link(60, token)
+
+    assert_response :too_many_requests
+    assert_equal accounts, Orm::User.count
+  end
+
+  test "ADR-0085 §4.7: a made-up link token posted with a code keeps the standard limits, the 11th send receives 429" do
+    10.times { register(link_token: "abcdef012345", join_code: "zzzzzz", pin_confirmation: "1357") }
+
+    register(link_token: "abcdef012345", join_code: "zzzzzz")
+
+    assert_response :too_many_requests
+    assert_not Orm::User.exists?(contact: "0701020304")
+  end
+
   test "IL-23: past the limit, a valid code does not show the class recap" do
     code = @classroom.reload.join_code
     10.times { register(join_code: code, pin_confirmation: "1357") }
@@ -655,7 +699,7 @@ end
 
   test "IL-23: past the limit, a valid link keeps its banner" do
     token = @classroom.reload.link_token
-    10.times { register(link_token: token, pin_confirmation: "1357") }
+    60.times { register(link_token: token, pin_confirmation: "1357") }
 
     register(link_token: token)
 

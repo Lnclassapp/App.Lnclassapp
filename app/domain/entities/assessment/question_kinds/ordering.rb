@@ -1,11 +1,12 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Ordering
 # Rôle : remettre dans l'ordre : juste seulement si toutes les étapes sont à leur place, sans points partiels
-# ADR  : 0091 (§4.2 : trois à six étapes, dans le bon ordre par position ; §4.3 ; §4.4 : indices d'affichage)
+# ADR  : 0091 (§4.2 : trois à six étapes, dans le bon ordre par position ; §4.3 ; §4.4 : indices d'affichage), 0115
 module Entities
   module Assessment
     module QuestionKinds
       class Ordering
         STEPS = (3..6)
+        AUTO_GRADED = true
         INPUT = :display_order
         INVALID = { display_order: [ :wrong_order ] }.freeze
 

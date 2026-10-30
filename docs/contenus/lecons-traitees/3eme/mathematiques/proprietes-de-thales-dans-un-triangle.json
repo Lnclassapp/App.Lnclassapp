@@ -1,583 +1,882 @@
 {
   "format": "lnclass.course-tree",
-  "version": 2,
+  "version": 3,
   "courses": [
     {
       "name": "Propriétés de Thalès dans un triangle",
       "subtitle": "Leçon 2 — progression DPFC 2026-2027",
       "level_name": "3ème",
       "material_name": "Mathématiques",
-      "essentials": [
+      "theme": "teal",
+      "figures": [
         {
-          "name": "La propriété de Thalès",
-          "subtitle": "Les rapports de longueurs quand deux droites sont parallèles",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître la configuration de Thalès dans un triangle.</li><li>Écrire les trois rapports égaux de la propriété de Thalès.</li><li>Savoir quelle longueur se place en haut et quelle longueur se place en bas de chaque rapport.</li></ul><h2>L'image pour comprendre</h2><p><strong>L'ombre du mât du drapeau.</strong> Dans la cour de l'école, le mât du drapeau est planté bien droit. Le soleil l'éclaire et son ombre au sol mesure 12 m. Tu plantes ton bâton de 1,5 m, bien droit lui aussi, sur cette ombre, à l'endroit où l'ombre du bâton se termine exactement au bout de l'ombre du mât. L'ombre du bâton mesure 2 m. Comme 2 m est le sixième de 12 m, la hauteur du bâton est aussi le sixième de celle du mât : le mât mesure donc 9 m.</p><p><em>Le pont.</em> Le bout des deux ombres, c'est le point $A$. Le pied du mât est $B$ et son sommet est $C$. Le pied du bâton est $M$ et son sommet est $N$. Le mât et le bâton sont tous les deux droits, donc les droites $(MN)$ et $(BC)$ sont <strong>parallèles</strong> (elles ne se coupent jamais). Le rayon de soleil qui passe par le sommet du mât et par le sommet du bâton, c'est la droite $(AC)$ : le point $N$ est bien sur $(AC)$. Le petit triangle $AMN$ est le bâton avec son ombre ; le grand triangle $ABC$ est le mât avec son ombre.</p><p><em>Où l'image s'arrête.</em> Cela marche seulement parce que le bâton est parallèle au mât. Si tu penches ton bâton, le petit triangle n'est plus une copie réduite du grand. Et la propriété compare des longueurs entre elles (des rapports) : elle ne dit pas que les longueurs sont égales.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Propriété de Thalès.</strong> Soit $ABC$ un triangle. Soit $M$ un point de la droite $(AB)$ et $N$ un point de la droite $(AC)$, tous les deux différents de $A$. Si les droites $(MN)$ et $(BC)$ sont parallèles, alors $$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}.$$</p><p><strong>Comment lire cette égalité.</strong></p><ul><li>Un <strong>rapport</strong> est une fraction de deux longueurs. Le numérateur est le nombre du haut, le dénominateur celui du bas.</li><li>En haut, on met une longueur du petit triangle $AMN$ ; en bas, la longueur correspondante du grand triangle $ABC$.</li><li>Les sommets se correspondent : $A$ avec $A$, $M$ avec $B$, $N$ avec $C$.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Dans le triangle $ABC$, $M$ est sur le segment $[AB]$ et $N$ sur le segment $[AC]$. On sait que $(MN) \\parallel (BC)$, $AM = 4$ cm, $AB = 10$ cm et $AN = 6$ cm. Calcule $AC$.</p><ol><li>$M$ est sur $(AB)$, $N$ est sur $(AC)$ et $(MN) \\parallel (BC)$ : on peut appliquer la propriété de Thalès.</li><li>On écrit l'égalité : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.</li><li>On garde les deux rapports dont on connaît des longueurs : $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$, soit $\\dfrac{4}{10} = \\dfrac{6}{AC}$.</li><li>Le rapport $\\dfrac{4}{10}$ vaut $\\dfrac{2}{5}$ : $AN$ est les deux cinquièmes de $AC$. Donc $AC = 6 \\times \\dfrac{5}{2} = 15$ cm.</li></ol><h2>Le piège à éviter</h2><p>Écrire $\\dfrac{AM}{MB} = \\dfrac{AN}{AC}$ ou $\\dfrac{AB}{AM} = \\dfrac{AN}{AC}$. Dans le premier cas, tu compares un morceau ($AM$) au reste ($MB$) au lieu de le comparer à l'ensemble ($AB$). Dans le second, tu as retourné une seule des deux fractions.</p><p>Comment le repérer : dans chaque fraction, le petit triangle $AMN$ est en haut et le grand triangle $ABC$ est en bas. Les deux fractions doivent se ressembler : même rôle en haut, même rôle en bas.</p><h2>En une phrase</h2><p>Quand $(MN) \\parallel (BC)$ dans le triangle $ABC$, les rapports $\\dfrac{AM}{AB}$, $\\dfrac{AN}{AC}$ et $\\dfrac{MN}{BC}$ sont égaux : petit triangle en haut, grand triangle en bas.</p>",
-          "exercises": [
-            {
-              "title": "Reconnaître la configuration et écrire les rapports",
-              "statement": "Dans le triangle $ABC$, le point $M$ est sur le segment $[AB]$ et le point $N$ est sur le segment $[AC]$. Les droites $(MN)$ et $(BC)$ sont parallèles.\n\nOn donne : $AM = 3$ cm, $AB = 7{,}5$ cm, $AN = 4$ cm, $AC = 10$ cm, $MN = 2{,}4$ cm et $BC = 6$ cm.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Quel est le petit triangle de cette configuration ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le petit triangle a pour sommets $A$, $M$ et $N$ : il est une copie réduite du grand triangle $ABC$.",
-                  "answers": [
-                    {
-                      "content": "$AMN$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$ABC$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$MBN$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$AMC$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle égalité donne la propriété de Thalès ?",
-                  "question_type": "single_choice",
-                  "explanation": "En haut, une longueur du petit triangle $AMN$ ; en bas, la longueur correspondante du grand triangle $ABC$.",
-                  "answers": [
-                    {
-                      "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\dfrac{AM}{MB} = \\dfrac{AN}{NC} = \\dfrac{MN}{BC}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\dfrac{AB}{AM} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\dfrac{AM}{AB} = \\dfrac{AC}{AN} = \\dfrac{BC}{MN}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Calcule le rapport $\\dfrac{AM}{AB}$ et écris-le en nombre décimal.",
-                  "question_type": "numeric",
-                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{3}{7{,}5} = 0{,}4$.",
-                  "answers": [
-                    {
-                      "content": "0,4",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Quels rapports sont aussi égaux à $0{,}4$ ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "$\\dfrac{AN}{AC} = \\dfrac{4}{10} = 0{,}4$ et $\\dfrac{MN}{BC} = \\dfrac{2{,}4}{6} = 0{,}4$. $\\dfrac{AB}{AM}$ est le rapport retourné ($2{,}5$) et $\\dfrac{MB}{AB} = \\dfrac{4{,}5}{7{,}5} = 0{,}6$.",
-                  "answers": [
-                    {
-                      "content": "$\\dfrac{AN}{AC}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\dfrac{MN}{BC}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\dfrac{AB}{AM}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\dfrac{MB}{AB}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "La propriété de Thalès dit que $AM = AN$.",
-                  "question_type": "true_false",
-                  "explanation": "Elle dit que des rapports sont égaux, pas des longueurs : ici $AM = 3$ cm et $AN = 4$ cm.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                }
+          "key": "thales-direct",
+          "kind": "geometry",
+          "description": "Un triangle ABC avec le point D, mobile sur le côté AB. La droite parallèle à BC passant par D coupe le côté AC en E, qui se déplace avec D. On lit les longueurs AD, AB, AE, AC, DE, BC et les rapports AD/AB, AE/AC, DE/BC : ils restent égaux.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 13,
+                "y": 1
+              },
+              {
+                "id": "C",
+                "x": 5,
+                "y": 10
+              },
+              {
+                "id": "D",
+                "x": 7,
+                "y": 1,
+                "draggable": true
+              },
+              {
+                "id": "E",
+                "x": 3,
+                "y": 5.5
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "A"
+              ],
+              [
+                "D",
+                "E"
               ]
-            }
-          ]
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "D",
+                "text": "AD"
+              },
+              {
+                "from": "A",
+                "to": "B",
+                "text": "AB"
+              },
+              {
+                "from": "A",
+                "to": "E",
+                "text": "AE"
+              },
+              {
+                "from": "A",
+                "to": "C",
+                "text": "AC"
+              },
+              {
+                "from": "D",
+                "to": "E",
+                "text": "DE"
+              },
+              {
+                "from": "B",
+                "to": "C",
+                "text": "BC"
+              }
+            ],
+            "constraints": [
+              {
+                "point": "D",
+                "on": "AB"
+              },
+              {
+                "point": "E",
+                "on": "AC",
+                "parallel_to": "BC",
+                "through": "D"
+              }
+            ]
+          },
+          "controls": []
         },
         {
-          "name": "Calculer une longueur avec Thalès",
-          "subtitle": "Produit en croix, configuration classique et configuration en papillon",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer une longueur inconnue avec le produit en croix.</li><li>Reconnaître la configuration en papillon.</li><li>Calculer $MB$ sans confondre la configuration classique et le papillon.</li></ul><h2>L'image pour comprendre</h2><p><strong>1. Le zoom de la photo.</strong> Tu photographies avec ton téléphone un coin triangulaire du terrain de jeu. Tu écartes deux doigts pour zoomer : toute l'image grossit, et chaque longueur est multipliée par le même nombre, par exemple 2,5. L'image ne se déforme pas, elle est seulement agrandie.</p><p><em>Le pont.</em> La photo avant le zoom, c'est le petit triangle $AMN$ ; après le zoom, c'est le grand triangle $ABC$. Le nombre du zoom, c'est le rapport commun : $AB = 2{,}5 \\times AM$, $AC = 2{,}5 \\times AN$ et $BC = 2{,}5 \\times MN$. Pour trouver une longueur manquante, on utilise l'égalité de ces rapports avec le produit en croix.</p><p><em>Où l'image s'arrête.</em> Un vrai zoom garde toujours la forme. Ici, le petit triangle est une copie réduite du grand seulement si $(MN) \\parallel (BC)$. Sans cette condition, la méthode ne marche pas.</p><p><strong>2. Le portail extensible.</strong> Au portail de la cour, deux barres métalliques se croisent en un point $A$ et forment un X. Une barre horizontale ferme le haut du X, une autre le bas. Elles restent parallèles quand on ouvre ou ferme le portail. En haut, les barres obliques et la barre du haut forment un petit triangle ; en bas, elles forment un grand triangle, retourné tête-bêche.</p><p><em>Le pont.</em> Le croisement des barres, c'est $A$. Une barre oblique porte les points $M$, $A$, $B$ (dans cet ordre), l'autre porte les points $N$, $A$, $C$. La barre du haut est $[MN]$, celle du bas est $[BC]$. C'est la configuration <strong>en papillon</strong> : $A$ est entre $M$ et $B$, et entre $N$ et $C$.</p><p><em>Où l'image s'arrête.</em> Sur un portail symétrique, les deux triangles ont la même taille. En mathématiques, l'un peut être beaucoup plus petit que l'autre : seules les égalités de rapports comptent.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Produit en croix.</strong> Si $\\dfrac{a}{b} = \\dfrac{c}{d}$, avec $b$ et $d$ différents de $0$, alors $a \\times d = b \\times c$. Pour trouver l'inconnue $x$ dans $\\dfrac{a}{b} = \\dfrac{c}{x}$, on obtient $x = \\dfrac{b \\times c}{a}$.</p><p><strong>Deux configurations, la même propriété.</strong> Si $(MN) \\parallel (BC)$, alors $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$.</p><ul><li>Configuration classique : $M$ est sur $[AB]$ et $N$ sur $[AC]$. Alors $MB = AB - AM$.</li><li>Configuration en papillon : $A$ est entre $M$ et $B$, et entre $N$ et $C$. Alors $MB = AM + AB$.</li></ul><p><strong>Méthode.</strong></p><ol><li>Vérifier que $(MN) \\parallel (BC)$ est donné.</li><li>Écrire l'égalité de Thalès.</li><li>Garder deux rapports : celui dont on connaît les deux longueurs, et celui qui contient l'inconnue.</li><li>Faire le produit en croix.</li><li>Conclure avec l'unité.</li></ol></blockquote><h2>Exemple résolu</h2><p><strong>Cas classique.</strong> $M \\in [AB]$, $N \\in [AC]$, $(MN) \\parallel (BC)$, $AM = 3$ cm, $AB = 7{,}5$ cm, $AN = 4$ cm et $MN = 5$ cm. Calcule $AC$ et $BC$.</p><ol><li>Le parallélisme est donné : d'après la propriété de Thalès, $\\dfrac{3}{7{,}5} = \\dfrac{4}{AC} = \\dfrac{5}{BC}$.</li><li>Pour $AC$ : $\\dfrac{3}{7{,}5} = \\dfrac{4}{AC}$. Produit en croix : $AC = \\dfrac{4 \\times 7{,}5}{3} = \\dfrac{30}{3} = 10$ cm.</li><li>Pour $BC$ : $\\dfrac{3}{7{,}5} = \\dfrac{5}{BC}$, donc $BC = \\dfrac{5 \\times 7{,}5}{3} = \\dfrac{37{,}5}{3} = 12{,}5$ cm.</li></ol><p><strong>Cas du papillon.</strong> $A$ est entre $M$ et $B$, et entre $N$ et $C$. On a $(MN) \\parallel (BC)$, $AM = 2$ cm, $AB = 5$ cm, $AN = 3$ cm et $MN = 4$ cm. Calcule $AC$, $BC$ et $MB$.</p><ol><li>D'après la propriété de Thalès : $\\dfrac{2}{5} = \\dfrac{3}{AC} = \\dfrac{4}{BC}$.</li><li>$AC = \\dfrac{3 \\times 5}{2} = 7{,}5$ cm.</li><li>$BC = \\dfrac{4 \\times 5}{2} = 10$ cm.</li><li>$A$ est entre $M$ et $B$, donc on additionne : $MB = AM + AB = 2 + 5 = 7$ cm.</li></ol><h2>Le piège à éviter</h2><p>Dans le papillon, écrire $MB = AB - AM = 3$ cm. C'est faux : $A$ est entre $M$ et $B$, donc il faut additionner. Autre erreur fréquente : au produit en croix, croiser les mauvais nombres et trouver une longueur absurde.</p><p>Comment le repérer : fais un petit croquis. Si $A$ est entre $M$ et $B$, les longueurs $AM$ et $AB$ s'ajoutent. Si $M$ est sur $[AB]$, ce sont $AM$ et $MB$ qui s'ajoutent pour faire $AB$. Contrôle aussi ton résultat : quand $M$ est sur $[AB]$, la longueur $AC$ doit être plus grande que $AN$.</p><h2>En une phrase</h2><p>Quand $(MN) \\parallel (BC)$, on garde deux rapports de l'égalité de Thalès et on fait le produit en croix ; en papillon, on additionne $AM$ et $AB$ pour obtenir $MB$.</p>",
-          "exercises": [
-            {
-              "title": "Calculer une longueur, classique ou papillon",
-              "statement": "Figure 1. Dans le triangle $ABC$, le point $M$ est sur $[AB]$ et le point $N$ est sur $[AC]$, avec $(MN) \\parallel (BC)$. On donne $AM = 4$ cm, $AB = 10$ cm, $AN = 3$ cm et $BC = 8$ cm.\n\nFigure 2. Les droites $(MB)$ et $(NC)$ se coupent en $A$. Le point $A$ est entre $M$ et $B$, et entre $N$ et $C$ (configuration en papillon), avec $(MN) \\parallel (BC)$. On donne $AM = 2$ cm, $AB = 5$ cm, $MN = 3$ cm et $AC = 7{,}5$ cm.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Figure 1. Calcule $AC$, en cm.",
-                  "question_type": "numeric",
-                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ donne $\\dfrac{4}{10} = \\dfrac{3}{AC}$, donc $AC = \\dfrac{10 \\times 3}{4} = 7{,}5$ cm.",
-                  "answers": [
-                    {
-                      "content": "7,5",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Figure 1. Calcule $MN$, en cm.",
-                  "question_type": "numeric",
-                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$ donne $\\dfrac{4}{10} = \\dfrac{MN}{8}$, donc $MN = \\dfrac{4 \\times 8}{10} = 3{,}2$ cm.",
-                  "answers": [
-                    {
-                      "content": "3,2",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Figure 1. Calcule $MB$, en cm.",
-                  "question_type": "numeric",
-                  "explanation": "$M$ est entre $A$ et $B$ : $MB = AB - AM = 10 - 4 = 6$ cm.",
-                  "answers": [
-                    {
-                      "content": "6",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Figure 2. Calcule $BC$, en cm.",
-                  "question_type": "numeric",
-                  "explanation": "La propriété s'écrit de la même façon : $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$ donne $\\dfrac{2}{5} = \\dfrac{3}{BC}$, donc $BC = \\dfrac{5 \\times 3}{2} = 7{,}5$ cm.",
-                  "answers": [
-                    {
-                      "content": "7,5",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Figure 2. Calcule $MB$, en cm.",
-                  "question_type": "numeric",
-                  "explanation": "Dans le papillon, $A$ est entre $M$ et $B$ : on additionne, $MB = AM + AB = 2 + 5 = 7$ cm.",
-                  "answers": [
-                    {
-                      "content": "7",
-                      "correct": true
-                    }
-                  ]
-                }
+          "key": "reciproque-thales",
+          "kind": "geometry",
+          "description": "Un triangle ABC avec le point D, mobile sur le côté AB, et le point E, mobile sur le côté AC. Déplace D et E : les rapports AD/AB et AE/AC sont recalculés en direct. Quand ils sont égaux, la droite DE est parallèle à BC ; sinon, elle ne l'est pas.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 13,
+                "y": 1
+              },
+              {
+                "id": "C",
+                "x": 5,
+                "y": 10
+              },
+              {
+                "id": "D",
+                "x": 5,
+                "y": 1,
+                "draggable": true
+              },
+              {
+                "id": "E",
+                "x": 3,
+                "y": 5.5,
+                "draggable": true
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "A"
+              ],
+              [
+                "D",
+                "E"
               ]
-            }
-          ]
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "D",
+                "text": "AD"
+              },
+              {
+                "from": "A",
+                "to": "B",
+                "text": "AB"
+              },
+              {
+                "from": "A",
+                "to": "E",
+                "text": "AE"
+              },
+              {
+                "from": "A",
+                "to": "C",
+                "text": "AC"
+              }
+            ],
+            "constraints": [
+              {
+                "point": "D",
+                "on": "AB"
+              },
+              {
+                "point": "E",
+                "on": "AC"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Calculer une longueur avec la propriété de Thalès",
+          "remember": "Dans un triangle $ABC$, si $D$ est un point de la droite $(AB)$, si $E$ est un point de la droite $(AC)$ et si $(DE) \\parallel (BC)$, alors : $$\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$$ Chaque rapport compare une longueur du petit triangle $ADE$ à la longueur correspondante du grand triangle $ABC$. Les longueurs des deux triangles sont proportionnelles.",
+          "method": [
+            "Repérer le triangle $ABC$, les points $D$ et $E$ sur deux côtés, et vérifier que $(DE)$ est parallèle au troisième côté $(BC)$.",
+            "Écrire l'égalité de Thalès $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$, en partant du sommet commun $A$.",
+            "Remplacer les longueurs connues et choisir les deux rapports qui contiennent l'inconnue.",
+            "Calculer l'inconnue avec le produit en croix, puis écrire le résultat avec son unité."
+          ],
+          "example": {
+            "statement": "Sur un chantier, une traverse $[DE]$ est posée parallèlement à la poutre $[BC]$ d'une ferme triangulaire $ABC$, avec $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 4$ m, $AB = 10$ m et $AC = 15$ m. Calculer $AE$.",
+            "steps": [
+              "Repérer : le triangle est $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$.",
+              "Écrire : d'après la propriété de Thalès, $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$.",
+              "Remplacer : $AE$ est dans le deuxième rapport, on garde les deux premiers : $\\frac{4}{10} = \\frac{AE}{15}$.",
+              "Calculer : $AE = \\frac{4 \\times 15}{10} = 6$ m."
+            ]
+          },
+          "pitfall": "Ne mélange pas les côtés qui ne se correspondent pas. Chaque longueur du petit triangle se compare à la longueur *correspondante* du grand triangle : $DE$ avec $BC$, jamais avec $AC$. Contre-exemple : avec $AD = 4$, $AB = 10$, $AC = 15$ et $BC = 12$, la bonne égalité $\\frac{AD}{AB} = \\frac{DE}{BC}$ donne $DE = 4{,}8$. Écrire $\\frac{AD}{AB} = \\frac{DE}{AC}$ donnerait $DE = 6$, ce qui est faux. Pour éviter l'erreur, vérifie que les trois numérateurs sont dans le petit triangle et les trois dénominateurs dans le grand.",
+          "figure": "thales-direct",
+          "exercise": {
+            "title": "Calculer des longueurs avec Thalès",
+            "statement": "Dans cet exercice, tu calcules des longueurs dans un triangle coupé par une parallèle, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "thales-direct",
+            "questions": [
+              {
+                "content": "Dans le triangle $ABC$, $D$ est un point de $[AB]$, $E$ un point de $[AC]$ et $(DE) \\parallel (BC)$. On peut écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le triangle est $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$ : toutes les conditions sont réunies. Étape 2 — Écrire : d'après la propriété de Thalès, $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$. L'égalité proposée est donc vraie. Chaque rapport compare une longueur du petit triangle $ADE$ à la longueur correspondante de $ABC$, en partant du sommet $A$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$. On donne $AD = 3$ cm, $AB = 12$ cm et $AE = 2$ cm. Combien mesure $AC$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$, $(DE) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$. Étape 3 — Remplacer : $\\frac{3}{12} = \\frac{2}{AC}$. Étape 4 — Calculer : $AC = \\frac{2 \\times 12}{3} = 8$ cm. Le piège tentant, $11$ cm, vient d'un raisonnement par différence ($12 - 3 = 9$ puis $2 + 9$) : Thalès parle de proportions, pas de différences.",
+                "answers": [
+                  {
+                    "content": "$11$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$24$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6$ cm",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$. On donne $AD = 6$ cm, $AB = 9$ cm et $BC = 12$ cm. Combien mesure $DE$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$ dans le triangle $ABC$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{DE}{BC}$. Étape 3 — Remplacer : $\\frac{6}{9} = \\frac{DE}{12}$. Étape 4 — Calculer : $DE = \\frac{6 \\times 12}{9} = 8$ cm. La réponse $18$ cm vient d'un rapport retourné ($\\frac{12 \\times 9}{6}$) : $DE$ est une longueur du petit triangle, elle doit être plus petite que $BC$.",
+                "answers": [
+                  {
+                    "content": "$8$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$18$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$9$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6$ cm",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$. On donne $AD = 5$ cm, $AB = 20$ cm et $AC = 24$ cm. Combien mesure $EC$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$ dans le triangle $ABC$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$. Étape 3 — Remplacer : $\\frac{5}{20} = \\frac{AE}{24}$. Étape 4 — Calculer : $AE = \\frac{5 \\times 24}{20} = 6$ cm. Mais on demande $EC$ : comme $E$ est sur $[AC]$, $EC = AC - AE = 24 - 6 = 18$ cm. La réponse $6$ cm est celle de $AE$, pas de $EC$.",
+                "answers": [
+                  {
+                    "content": "$6$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$19$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$18$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$120$ cm",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$. Quelles sont les deux égalités vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Écrire : la propriété de Thalès donne $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$ ; les deux premières égalités sont donc vraies. Les deux autres sont fausses : dans $\\frac{AD}{AB} = \\frac{DE}{AC}$, la longueur $DE$ est comparée à $AC$ alors qu'elle correspond à $BC$ ; dans $\\frac{AD}{AB} = \\frac{EC}{AC}$, on compare un morceau $EC$ du grand côté, qui ne correspond à rien dans le petit triangle.",
+                "answers": [
+                  {
+                    "content": "$\\frac{AD}{AB} = \\frac{AE}{AC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{AE}{AC} = \\frac{DE}{BC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{AD}{AB} = \\frac{DE}{AC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{AD}{AB} = \\frac{EC}{AC}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$. On donne $AD = 4$ cm, $AB = 10$ cm, $AC = 15$ cm et $BC = 12$ cm. Un élève écrit $\\frac{AD}{AB} = \\frac{DE}{AC}$. Quelle est la vraie valeur de $DE$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire : la bonne égalité est $\\frac{AD}{AB} = \\frac{DE}{BC}$, car $DE$ correspond à $BC$. Étape 3 — Remplacer : $\\frac{4}{10} = \\frac{DE}{12}$. Étape 4 — Calculer : $DE = \\frac{4 \\times 12}{10} = 4{,}8$ cm. L'élève, lui, obtiendrait $DE = \\frac{4 \\times 15}{10} = 6$ cm : c'est faux, car il compare $DE$ à $AC$ au lieu de $BC$.",
+                "answers": [
+                  {
+                    "content": "$6$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4{,}8$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$30$ cm",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
-          "name": "La réciproque de Thalès",
-          "subtitle": "Démontrer que deux droites sont parallèles",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître quand utiliser la réciproque de la propriété de Thalès.</li><li>Comparer deux rapports pour démontrer que deux droites sont parallèles.</li><li>Conclure aussi quand les droites ne sont pas parallèles.</li></ul><h2>L'image pour comprendre</h2><p><strong>Les files d'élèves du cours de sport.</strong> Dans la cour, le professeur de sport se tient au point $A$. Deux files d'élèves partent de lui : l'une vers le poteau $B$, l'autre vers le poteau $C$. Un élève $M$ de la première file s'arrête aux trois cinquièmes du chemin vers $B$. Un élève $N$ de la seconde file s'arrête lui aussi aux trois cinquièmes du chemin vers $C$. Les deux élèves ont avancé au même rythme : la ligne qui joint $M$ et $N$ est alors parallèle à la ligne qui joint $B$ et $C$.</p><p><em>Le pont.</em> Le professeur, c'est le point $A$. Les deux files, ce sont les droites $(AB)$ et $(AC)$. La fraction du chemin parcourue, ce sont les rapports $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$. Avancer au même rythme, c'est avoir des rapports égaux. Et la conclusion, c'est $(MN) \\parallel (BC)$.</p><p><em>Où l'image s'arrête.</em> Les deux élèves doivent avancer chacun vers son poteau. Si $M$ avance vers $B$ mais que $N$ part dans le sens opposé à $C$, ils ont peut-être parcouru la même fraction du chemin, mais la ligne $(MN)$ n'est pas parallèle à $(BC)$. C'est pourquoi la réciproque exige que les points soient dans le même ordre.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Réciproque de la propriété de Thalès.</strong> Soit $ABC$ un triangle, $M$ un point de la droite $(AB)$ et $N$ un point de la droite $(AC)$. Si $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ et si les points $A$, $M$, $B$ d'une part, et $A$, $N$, $C$ d'autre part, sont alignés dans le même ordre, alors $(MN) \\parallel (BC)$.</p><p><strong>Dans le même ordre.</strong> Soit $M$ est du même côté de $A$ que $B$ et $N$ du même côté de $A$ que $C$ (par exemple $M \\in [AB]$ et $N \\in [AC]$). Soit $A$ est entre $M$ et $B$ et entre $N$ et $C$ (papillon).</p><p><strong>Cas où les droites ne sont pas parallèles.</strong> Si $\\dfrac{AM}{AB} \\neq \\dfrac{AN}{AC}$, alors $(MN)$ et $(BC)$ ne sont pas parallèles : si elles l'étaient, la propriété de Thalès donnerait l'égalité.</p><p><strong>Comparer deux fractions.</strong> On peut les écrire en nombres décimaux, ou comparer les produits en croix : $\\dfrac{a}{b} = \\dfrac{c}{d}$ exactement quand $a \\times d = b \\times c$.</p></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé 1.</strong> $M \\in [AB]$, $N \\in [AC]$, $AM = 3$ cm, $AB = 5$ cm, $AN = 4{,}2$ cm et $AC = 7$ cm. Les droites $(MN)$ et $(BC)$ sont-elles parallèles ?</p><ol><li>On calcule $\\dfrac{AM}{AB} = \\dfrac{3}{5} = 0{,}6$.</li><li>On calcule $\\dfrac{AN}{AC} = \\dfrac{4{,}2}{7} = 0{,}6$.</li><li>Les deux rapports sont égaux, et $M \\in [AB]$, $N \\in [AC]$ : les points sont dans le même ordre.</li><li>D'après la réciproque de la propriété de Thalès, $(MN) \\parallel (BC)$.</li></ol><p><strong>Énoncé 2.</strong> Même situation avec $AM = 2$ cm, $AB = 6$ cm, $AN = 3$ cm et $AC = 10$ cm.</p><ol><li>$\\dfrac{AM}{AB} = \\dfrac{2}{6} = \\dfrac{1}{3}$ et $\\dfrac{AN}{AC} = \\dfrac{3}{10}$.</li><li>Produits en croix : $2 \\times 10 = 20$ et $3 \\times 6 = 18$. Ils sont différents, donc les rapports sont différents.</li><li>Si $(MN)$ était parallèle à $(BC)$, la propriété de Thalès donnerait deux rapports égaux. Ce n'est pas le cas : $(MN)$ n'est pas parallèle à $(BC)$.</li></ol><h2>Le piège à éviter</h2><p>Écrire « $(MN) \\parallel (BC)$, donc $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ » pour démontrer le parallélisme. Tu pars de ce que tu dois démontrer ! Avec la propriété directe, on suppose le parallélisme ; avec la réciproque, on le démontre. Autre oubli fréquent : ne pas vérifier l'ordre des points.</p><p>Comment le repérer : si l'énoncé te demande de « montrer que » ou « démontrer que » deux droites sont parallèles, calcule deux rapports et compare-les. N'écris jamais le parallélisme au début.</p><h2>En une phrase</h2><p>Si les rapports $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$ sont égaux, avec les points dans le même ordre, alors $(MN) \\parallel (BC)$ ; s'ils sont différents, les droites ne sont pas parallèles.</p>",
-          "exercises": [
-            {
-              "title": "Démontrer un parallélisme, ou le réfuter",
-              "statement": "Cas 1. Dans le triangle $ABC$, le point $M$ est sur $[AB]$ et le point $N$ est sur $[AC]$. On donne $AM = 3$ cm, $AB = 5$ cm, $AN = 4{,}2$ cm et $AC = 7$ cm.\n\nCas 2. Dans le triangle $EFG$, le point $R$ est sur $[EF]$ et le point $S$ est sur $[EG]$. On donne $ER = 2$ cm, $EF = 6$ cm, $ES = 3$ cm et $EG = 8$ cm.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Cas 1. Calcule $\\dfrac{AM}{AB}$ en nombre décimal.",
-                  "question_type": "numeric",
-                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{3}{5} = 0{,}6$.",
-                  "answers": [
-                    {
-                      "content": "0,6",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Cas 1. Calcule $\\dfrac{AN}{AC}$ en nombre décimal.",
-                  "question_type": "numeric",
-                  "explanation": "$\\dfrac{AN}{AC} = \\dfrac{4{,}2}{7} = 0{,}6$.",
-                  "answers": [
-                    {
-                      "content": "0,6",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Cas 1. Que peut-on conclure ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les rapports sont égaux et les points $A$, $M$, $B$ et $A$, $N$, $C$ sont dans le même ordre : la réciproque permet de conclure au parallélisme.",
-                  "answers": [
-                    {
-                      "content": "$(MN) \\parallel (BC)$, d'après la réciproque de la propriété de Thalès",
-                      "correct": true
-                    },
-                    {
-                      "content": "$(MN) \\parallel (BC)$, d'après la propriété de Thalès",
-                      "correct": false
-                    },
-                    {
-                      "content": "$(MN)$ et $(BC)$ ne sont pas parallèles",
-                      "correct": false
-                    },
-                    {
-                      "content": "On ne peut rien conclure",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Que faut-il vérifier pour utiliser la réciproque de la propriété de Thalès ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La réciproque demande deux choses : l'égalité des rapports et le même ordre des points.",
-                  "answers": [
-                    {
-                      "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les points $A$, $M$, $B$ et $A$, $N$, $C$ sont alignés dans le même ordre",
-                      "correct": true
-                    },
-                    {
-                      "content": "$MN = BC$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le triangle $ABC$ est rectangle",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Cas 2. Quels produits en croix compare-t-on pour $\\dfrac{ER}{EF}$ et $\\dfrac{ES}{EG}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On multiplie en croix : $2 \\times 8 = 16$ et $6 \\times 3 = 18$.",
-                  "answers": [
-                    {
-                      "content": "$ER \\times EG = 16$ et $EF \\times ES = 18$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$ER \\times ES = 6$ et $EF \\times EG = 48$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$ER \\times EF = 12$ et $ES \\times EG = 24$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Cas 2. Les droites $(RS)$ et $(FG)$ sont parallèles.",
-                  "question_type": "true_false",
-                  "explanation": "$16 \\neq 18$, donc $\\dfrac{ER}{EF} \\neq \\dfrac{ES}{EG}$. Si les droites étaient parallèles, la propriété de Thalès donnerait l'égalité : elles ne le sont donc pas.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "name": "Démontrer que deux droites sont parallèles (réciproque)",
+          "remember": "Dans un triangle $ABC$, soient $D$ un point de $(AB)$ et $E$ un point de $(AC)$. Si les points $A$, $D$, $B$ sont alignés dans le même ordre que les points $A$, $E$, $C$ et si $\\frac{AD}{AB} = \\frac{AE}{AC}$, alors les droites $(DE)$ et $(BC)$ sont parallèles. C'est la réciproque de la propriété de Thalès : on part de l'égalité des rapports pour prouver le parallélisme.",
+          "method": [
+            "Vérifier que $D$ et $E$ sont sur $(AB)$ et $(AC)$, dans le même ordre à partir de $A$.",
+            "Calculer séparément les rapports $\\frac{AD}{AB}$ et $\\frac{AE}{AC}$.",
+            "Comparer les deux rapports : sont-ils égaux ?",
+            "Conclure en citant la réciproque de la propriété de Thalès."
+          ],
+          "example": {
+            "statement": "Sur un chantier, un menuisier veut vérifier que la traverse $[DE]$ d'un portique est parallèle au sol $[BC]$ du triangle $ABC$, avec $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 6$ m, $AB = 9$ m, $AE = 8$ m et $AC = 12$ m.",
+            "steps": [
+              "Vérifier : $D$ est entre $A$ et $B$, $E$ est entre $A$ et $C$ : les points sont dans le même ordre à partir de $A$.",
+              "Calculer : $\\frac{AD}{AB} = \\frac{6}{9} = \\frac{2}{3}$ et $\\frac{AE}{AC} = \\frac{8}{12} = \\frac{2}{3}$.",
+              "Comparer : $\\frac{AD}{AB} = \\frac{AE}{AC}$, les deux rapports sont égaux.",
+              "Conclure : d'après la réciproque de la propriété de Thalès, $(DE) \\parallel (BC)$."
+            ]
+          },
+          "pitfall": "Compare toujours *partie sur tout* avec *partie sur tout* : $\\frac{AD}{AB}$ avec $\\frac{AE}{AC}$, jamais $\\frac{AD}{DB}$ avec $\\frac{AE}{AC}$. Contre-exemple : avec $AD = 3$, $DB = 6$, $AE = 4$ et $AC = 12$, on a $AB = 9$ et les droites sont parallèles car $\\frac{3}{9} = \\frac{4}{12}$. Mais $\\frac{AD}{DB} = \\frac{1}{2}$ n'est pas égal à $\\frac{AE}{AC} = \\frac{1}{3}$ : une comparaison mal posée conduirait à la fausse conclusion « pas parallèles ». N'oublie pas non plus l'ordre des points.",
+          "figure": "reciproque-thales",
+          "exercise": {
+            "title": "Prouver un parallélisme avec la réciproque",
+            "statement": "Dans cet exercice, tu prouves que deux droites sont parallèles avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "reciproque-thales",
+            "questions": [
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 2$ cm, $AB = 5$ cm, $AE = 3$ cm et $AC = 7{,}5$ cm. Les droites $(DE)$ et $(BC)$ sont parallèles.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : $D$ et $E$ sont sur les côtés $[AB]$ et $[AC]$, dans le même ordre à partir de $A$. Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{2}{5} = 0{,}4$ et $\\frac{AE}{AC} = \\frac{3}{7{,}5} = 0{,}4$. Étape 3 — Comparer : les deux rapports sont égaux. Étape 4 — Conclure : d'après la réciproque de la propriété de Thalès, $(DE) \\parallel (BC)$. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 3$ cm, $AB = 9$ cm, $AE = 4$ cm et $AC = 12$ cm. Que peut-on dire de $(DE)$ et $(BC)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : $D \\in [AB]$ et $E \\in [AC]$, dans le même ordre à partir de $A$. Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{3}{9} = \\frac{1}{3}$ et $\\frac{AE}{AC} = \\frac{4}{12} = \\frac{1}{3}$. Étape 3 — Comparer : ils sont égaux. Étape 4 — Conclure : d'après la réciproque de la propriété de Thalès, $(DE) \\parallel (BC)$. Comparer $3$ avec $4$ ou $9$ avec $12$ n'a pas de sens : ce sont les rapports qu'on compare.",
+                "answers": [
+                  {
+                    "content": "Elles ne sont pas parallèles, car $3 \\neq 4$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles sont parallèles, car $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{1}{3}$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles ne sont pas parallèles, car $9 \\neq 12$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas conclure sans mesurer les angles.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 2{,}5$ cm, $AB = 10$ cm, $AE = 3$ cm et $AC = 12$ cm. Que peut-on dire de $(DE)$ et $(BC)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : $D$ et $E$ sont dans le même ordre à partir de $A$. Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{2{,}5}{10} = 0{,}25$ et $\\frac{AE}{AC} = \\frac{3}{12} = 0{,}25$. Étape 3 — Comparer : les rapports sont égaux. Étape 4 — Conclure : par la réciproque de Thalès, $(DE) \\parallel (BC)$. Les différences $10 - 2{,}5 = 7{,}5$ et $12 - 3 = 9$ ne servent pas ici.",
+                "answers": [
+                  {
+                    "content": "Elles ne sont pas parallèles, car $2{,}5 \\neq 3$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles ne sont pas parallèles, car $10 \\neq 12$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles sont parallèles, car les deux rapports valent $0{,}25$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles sont parallèles, car $7{,}5$ et $9$ sont proches.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 4$ cm, $AB = 10$ cm, $AE = 6$ cm et $AC = 15$ cm. Quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{4}{10} = \\frac{2}{5}$ et $\\frac{AE}{AC} = \\frac{6}{15} = \\frac{2}{5}$. Ces deux affirmations sont vraies. Étape 3 — Comparer : les rapports sont égaux, donc l'affirmation « ils sont différents » est fausse. Étape 4 — Conclure : $(DE) \\parallel (BC)$ d'après la réciproque de Thalès, donc dire que $(DE)$ n'est pas parallèle à $(BC)$ est faux. Attention : $\\frac{6}{15}$ se simplifie en $\\frac{2}{5}$ et non en $\\frac{3}{5}$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{AD}{AB} = \\frac{2}{5}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{AE}{AC} = \\frac{2}{5}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{AD}{AB} \\neq \\frac{AE}{AC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(DE)$ n'est pas parallèle à $(BC)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{AE}{AC} = \\frac{3}{5}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$ : $D$ est sur $[AB]$ avec $AD = 2$ cm et $AB = 6$ cm ; $E$ est sur la droite $(AC)$ de l'autre côté de $A$ par rapport à $C$ (donc $A$ est entre $E$ et $C$), avec $AE = 1$ cm et $AC = 3$ cm. On remarque $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{1}{3}$. Peut-on conclure que $(DE) \\parallel (BC)$ avec la réciproque de Thalès ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : la réciproque exige que $D$ et $E$ soient dans le même ordre que $B$ et $C$ à partir de $A$. Ici $D$ est du côté de $B$, mais $E$ est de l'autre côté de $A$ par rapport à $C$ : l'ordre n'est pas le même. Les étapes suivantes (calculer et comparer les rapports) ne suffisent donc pas : on ne peut pas conclure avec la réciproque. L'égalité des rapports seule ne suffit pas, il faut aussi l'ordre des points.",
+                "answers": [
+                  {
+                    "content": "Non, car $E$ et $C$ ne sont pas du même côté de $A$ : l'ordre des points n'est pas respecté.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, car $\\frac{AD}{AB} = \\frac{AE}{AC}$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, car $2 + 1 = 3$ et $6 - 3 = 3$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car $AE \\neq AD$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 3$ cm, $DB = 6$ cm, $AE = 4$ cm et $AC = 12$ cm. Un élève compare $\\frac{AD}{DB}$ et $\\frac{AE}{AC}$ et dit que les droites ne sont pas parallèles. Quelle est la bonne démarche et la bonne conclusion ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : $D \\in [AB]$ et $E \\in [AC]$ dans le même ordre. Étape 2 — Calculer : $AB = AD + DB = 3 + 6 = 9$ cm, puis $\\frac{AD}{AB} = \\frac{3}{9} = \\frac{1}{3}$ et $\\frac{AE}{AC} = \\frac{4}{12} = \\frac{1}{3}$. Étape 3 — Comparer : égaux. Étape 4 — Conclure : $(DE) \\parallel (BC)$. L'élève a comparé $\\frac{AD}{DB} = \\frac{1}{2}$ à $\\frac{AE}{AC} = \\frac{1}{3}$ : ces deux rapports n'ont pas le même rôle (partie sur partie contre partie sur tout), sa comparaison ne prouve rien.",
+                "answers": [
+                  {
+                    "content": "Elles ne sont pas parallèles, car $\\frac{AD}{DB} = \\frac{1}{2} \\neq \\frac{1}{3}$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles ne sont pas parallèles, car $DB \\neq AC$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas conclure : il manque $BC$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On calcule $AB = 9$ cm, puis $\\frac{AD}{AB} = \\frac{1}{3} = \\frac{AE}{AC}$ : elles sont parallèles.",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
-          "name": "Directe ou réciproque : bien rédiger",
-          "subtitle": "Choisir la propriété et rédiger. À compléter : triangles semblables (à confirmer)",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Choisir entre la propriété de Thalès et sa réciproque.</li><li>Rédiger une démonstration en quatre temps.</li><li>Enchaîner la réciproque puis la propriété directe dans un même exercice.</li></ul><h2>L'image pour comprendre</h2><p><strong>Tracer une ligne sur le terrain de jeu.</strong> Le maître veut une ligne parallèle à la ligne de fond du terrain de jeu. Deux situations se présentent. <strong>Première situation :</strong> la ligne est déjà tracée et on te garantit qu'elle est parallèle. Tu peux alors prévoir à l'avance les distances le long des cordes. <strong>Seconde situation :</strong> on a seulement posé deux piquets et on veut savoir si la ligne qui les relie est bien parallèle. On mesure les distances, on compare les fractions et on décide.</p><p><em>Le pont.</em> Le terrain, c'est le triangle $ABC$ ; les deux piquets, ce sont $M$ et $N$. Dans la première situation, on part du parallélisme et on en déduit des longueurs : c'est la propriété directe. Dans la seconde, on part des longueurs et on en déduit le parallélisme : c'est la réciproque.</p><p><em>Où l'image s'arrête.</em> Sur le terrain, « prévoir » et « vérifier » semblent proches. En mathématiques, ce sont deux propriétés différentes, avec deux rôles différents : on ne peut jamais utiliser l'une à la place de l'autre.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Propriété directe.</strong> On sait que $(MN) \\parallel (BC)$. On en déduit l'égalité des rapports $\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = \\dfrac{MN}{BC}$. Elle sert à <strong>calculer une longueur</strong>.</p><p><strong>Réciproque.</strong> On connaît des longueurs et l'ordre des points, et on montre que $\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$. On en déduit que $(MN) \\parallel (BC)$. Elle sert à <strong>démontrer un parallélisme</strong>.</p><p><strong>Rédaction en quatre temps.</strong></p><ol><li>La situation : « Dans le triangle $ABC$, $M$ est sur $(AB)$ et $N$ est sur $(AC)$. »</li><li>Ce que l'on sait : « $(MN) \\parallel (BC)$ », ou bien « les points sont dans le même ordre et les rapports sont égaux ».</li><li>Le nom de la propriété : « d'après la propriété de Thalès » ou « d'après la réciproque de la propriété de Thalès ».</li><li>Le calcul et la conclusion, avec l'unité.</li></ol></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Dans le triangle $ABC$, $AB = 6$ cm, $AC = 9$ cm et $BC = 7{,}5$ cm. Le point $M$ est sur $[AB]$ avec $AM = 4$ cm, et le point $N$ est sur $[AC]$ avec $AN = 6$ cm. 1) Démontre que $(MN) \\parallel (BC)$. 2) Calcule $MN$.</p><p><strong>1) Le parallélisme.</strong></p><ol><li>Dans le triangle $ABC$, $M \\in [AB]$ et $N \\in [AC]$ : les points sont dans le même ordre.</li><li>$\\dfrac{AM}{AB} = \\dfrac{4}{6} = \\dfrac{2}{3}$ et $\\dfrac{AN}{AC} = \\dfrac{6}{9} = \\dfrac{2}{3}$.</li><li>Les rapports sont égaux : d'après la réciproque de la propriété de Thalès, $(MN) \\parallel (BC)$.</li></ol><p><strong>2) La longueur.</strong></p><ol><li>Le parallélisme est maintenant démontré : d'après la propriété de Thalès, $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{2}{3} = \\dfrac{MN}{7{,}5}$.</li><li>$MN = \\dfrac{2 \\times 7{,}5}{3} = \\dfrac{15}{3} = 5$ cm.</li></ol><h2>Le piège à éviter</h2><p>Utiliser la propriété de Thalès alors que l'énoncé ne dit pas que les droites sont parallèles, parce que « ça se voit sur la figure ». Un dessin peut tromper : deux droites qui semblent parallèles ne le sont pas forcément.</p><p>Comment le repérer : cherche le mot « parallèle » dans l'énoncé. S'il est donné, tu peux calculer avec la propriété directe. S'il est demandé (« montre que »), utilise la réciproque. Et s'il faut les deux, commence toujours par la réciproque.</p><h2>En une phrase</h2><p>Si le parallélisme est donné, on utilise la propriété de Thalès pour calculer une longueur ; s'il est demandé, on utilise la réciproque en comparant deux rapports.</p>",
-          "exercises": [
-            {
-              "title": "Choisir la propriété et rédiger",
-              "statement": "Dans le triangle $ABC$, on donne $AB = 8$ cm, $AC = 10$ cm et $BC = 12$ cm. Le point $M$ est sur $[AB]$ avec $AM = 6$ cm, et le point $N$ est sur $[AC]$ avec $AN = 7{,}5$ cm.\n\nOn veut d'abord démontrer que $(MN) \\parallel (BC)$, puis calculer $MN$.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Pour démontrer que $(MN) \\parallel (BC)$, quelle propriété utilises-tu ?",
-                  "question_type": "single_choice",
-                  "explanation": "On part de longueurs pour arriver à un parallélisme : c'est le rôle de la réciproque.",
-                  "answers": [
-                    {
-                      "content": "La réciproque de la propriété de Thalès",
-                      "correct": true
-                    },
-                    {
-                      "content": "La propriété de Thalès",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aucune : il suffit de regarder la figure",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC} = 0{,}75$.",
-                  "question_type": "true_false",
-                  "explanation": "$\\dfrac{6}{8} = 0{,}75$ et $\\dfrac{7{,}5}{10} = 0{,}75$.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une fois $(MN) \\parallel (BC)$ démontré, quelle propriété permet de calculer $MN$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On part du parallélisme pour en déduire une longueur : c'est la propriété directe. Le produit en croix n'est que le calcul qui suit.",
-                  "answers": [
-                    {
-                      "content": "La propriété de Thalès",
-                      "correct": true
-                    },
-                    {
-                      "content": "La réciproque de la propriété de Thalès",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le produit en croix, sans citer de propriété",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Calcule $MN$, en cm.",
-                  "question_type": "numeric",
-                  "explanation": "$\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$ donne $\\dfrac{6}{8} = \\dfrac{MN}{12}$, donc $MN = \\dfrac{6 \\times 12}{8} = 9$ cm.",
-                  "answers": [
-                    {
-                      "content": "9",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans quel ordre rédige-t-on chaque démonstration ?",
-                  "question_type": "single_choice",
-                  "explanation": "La rédaction se fait en quatre temps : la situation, ce que l'on sait, la propriété utilisée, puis le calcul et la conclusion avec l'unité.",
-                  "answers": [
-                    {
-                      "content": "La situation, ce que l'on sait, le nom de la propriété, le calcul et la conclusion",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le calcul, la conclusion, puis le nom de la propriété",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le nom de la propriété, la conclusion, puis la situation",
-                      "correct": false
-                    },
-                    {
-                      "content": "La conclusion seule, avec l'unité",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "name": "Montrer que deux droites ne sont pas parallèles",
+          "remember": "Dans un triangle $ABC$, avec $D \\in (AB)$ et $E \\in (AC)$ : si $(DE) \\parallel (BC)$, alors $\\frac{AD}{AB} = \\frac{AE}{AC}$ (propriété de Thalès). Donc, si $\\frac{AD}{AB} \\neq \\frac{AE}{AC}$, les droites $(DE)$ et $(BC)$ ne sont pas parallèles. Pour comparer deux fractions sans erreur, on utilise les produits en croix : $\\frac{a}{b} = \\frac{c}{d}$ si et seulement si $a \\times d = b \\times c$.",
+          "method": [
+            "Repérer le triangle $ABC$, les points $D$ et $E$, et la question : $(DE)$ est-elle parallèle à $(BC)$ ?",
+            "Calculer séparément les rapports $\\frac{AD}{AB}$ et $\\frac{AE}{AC}$.",
+            "Comparer les deux rapports avec les produits en croix : ils sont différents.",
+            "Conclure par l'absurde : si $(DE)$ était parallèle à $(BC)$, Thalès donnerait deux rapports égaux ; ce n'est pas le cas."
+          ],
+          "example": {
+            "statement": "Dans la charpente d'un hangar, un apprenti a posé une traverse $[DE]$ avec $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 4$ m, $AB = 10$ m, $AE = 5$ m et $AC = 15$ m. La traverse $(DE)$ est-elle parallèle à la poutre $(BC)$ ?",
+            "steps": [
+              "Repérer : le triangle est $ABC$, $D \\in [AB]$, $E \\in [AC]$ ; on teste si $(DE) \\parallel (BC)$.",
+              "Calculer : $\\frac{AD}{AB} = \\frac{4}{10} = \\frac{2}{5}$ et $\\frac{AE}{AC} = \\frac{5}{15} = \\frac{1}{3}$.",
+              "Comparer : $2 \\times 3 = 6$ et $5 \\times 1 = 5$ ; comme $6 \\neq 5$, les deux rapports sont différents.",
+              "Conclure : si $(DE)$ était parallèle à $(BC)$, Thalès donnerait $\\frac{AD}{AB} = \\frac{AE}{AC}$ ; ce n'est pas le cas, donc $(DE)$ n'est pas parallèle à $(BC)$."
+            ]
+          },
+          "pitfall": "Ne compare pas des valeurs arrondies : deux rapports différents peuvent donner la même valeur arrondie. Contre-exemple : $\\frac{3}{7} \\approx 0{,}43$ et $\\frac{4}{9} \\approx 0{,}44$ donnent tous deux $0{,}4$ à $0{,}1$ près, et pourtant $3 \\times 9 = 27$ et $7 \\times 4 = 28$ : ils sont différents, les droites ne sont pas parallèles. Utilise les fractions exactes et les produits en croix. Et ne fais pas confiance au dessin : deux droites peuvent sembler parallèles sans l'être.",
+          "figure": "reciproque-thales",
+          "exercise": {
+            "title": "Prouver que deux droites ne sont pas parallèles",
+            "statement": "Dans cet exercice, tu montres que deux droites ne sont pas parallèles avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "reciproque-thales",
+            "questions": [
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 2$ cm, $AB = 5$ cm, $AE = 3$ cm et $AC = 7$ cm. Les droites $(DE)$ et $(BC)$ sont parallèles.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on se demande si $(DE) \\parallel (BC)$. Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{2}{5}$ et $\\frac{AE}{AC} = \\frac{3}{7}$. Étape 3 — Comparer : $2 \\times 7 = 14$ et $5 \\times 3 = 15$ (produits en croix), donc $\\frac{2}{5} \\neq \\frac{3}{7}$. Étape 4 — Conclure : si les droites étaient parallèles, Thalès donnerait des rapports égaux ; ce n'est pas le cas, donc elles ne sont pas parallèles. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 2$ cm, $AB = 8$ cm, $AE = 3$ cm et $AC = 15$ cm. Que peut-on dire de $(DE)$ et $(BC)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on teste si $(DE) \\parallel (BC)$. Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{2}{8} = \\frac{1}{4}$ et $\\frac{AE}{AC} = \\frac{3}{15} = \\frac{1}{5}$. Étape 3 — Comparer : $\\frac{1}{4} \\neq \\frac{1}{5}$. Étape 4 — Conclure : si $(DE)$ était parallèle à $(BC)$, Thalès donnerait $\\frac{AD}{AB} = \\frac{AE}{AC}$ ; c'est faux, donc $(DE)$ n'est pas parallèle à $(BC)$. Dire que $2 < 8$ et $3 < 15$ ne prouve rien.",
+                "answers": [
+                  {
+                    "content": "Elles ne sont pas parallèles, car $\\frac{1}{4} \\neq \\frac{1}{5}$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles sont parallèles, car $2 < 8$ et $3 < 15$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles sont parallèles, car les rapports sont proches.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles ne sont pas parallèles, car $8 \\neq 15$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$ avec $AD = 4$ cm, $AB = 10$ cm, $AE = 5$ cm et $AC = 15$ cm. Quelle conclusion est correctement rédigée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{4}{10} = \\frac{2}{5}$ et $\\frac{AE}{AC} = \\frac{5}{15} = \\frac{1}{3}$. Étape 3 — Comparer : ils sont différents. Étape 4 — Conclure par l'absurde : si $(DE)$ était parallèle à $(BC)$, on aurait $\\frac{AD}{AB} = \\frac{AE}{AC}$ d'après Thalès ; ce n'est pas le cas, donc elles ne sont pas parallèles. La phrase « rapports différents donc parallèles » est l'inverse de la vérité.",
+                "answers": [
+                  {
+                    "content": "Les rapports sont différents, donc $(DE)$ est parallèle à $(BC)$ d'après la réciproque.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les rapports $\\frac{2}{5}$ et $\\frac{1}{3}$ sont proches, donc on ne peut pas conclure.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Si $(DE)$ était parallèle à $(BC)$, Thalès donnerait $\\frac{AD}{AB} = \\frac{AE}{AC}$. Or $\\frac{2}{5} \\neq \\frac{1}{3}$, donc $(DE)$ n'est pas parallèle à $(BC)$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les rapports sont différents, donc le dessin est faux.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans chaque cas, $D \\in [AB]$ et $E \\in [AC]$. Cas A : $AD = 2$, $AB = 6$, $AE = 3$, $AC = 9$. Cas B : $AD = 3$, $AB = 5$, $AE = 6$, $AC = 10$. Cas C : $AD = 1$, $AB = 4$, $AE = 2$, $AC = 7$. Cas D : $AD = 4$, $AB = 6$, $AE = 6$, $AC = 9$. Cas E : $AD = 5$, $AB = 8$, $AE = 3$, $AC = 5$. Dans quels deux cas $(DE)$ n'est-elle pas parallèle à $(BC)$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Calculer, puis Étape 3 — Comparer chaque cas. Cas A : $\\frac{2}{6} = \\frac{1}{3}$ et $\\frac{3}{9} = \\frac{1}{3}$, égaux. Cas B : $\\frac{3}{5}$ et $\\frac{6}{10} = \\frac{3}{5}$, égaux. Cas C : $\\frac{1}{4}$ et $\\frac{2}{7}$, et $1 \\times 7 = 7 \\neq 8 = 4 \\times 2$ : différents. Cas D : $\\frac{4}{6} = \\frac{2}{3}$ et $\\frac{6}{9} = \\frac{2}{3}$, égaux. Cas E : $\\frac{5}{8}$ et $\\frac{3}{5}$, et $5 \\times 5 = 25 \\neq 24 = 8 \\times 3$ : différents. Étape 4 — Conclure : seuls les cas C et E donnent des droites non parallèles.",
+                "answers": [
+                  {
+                    "content": "Cas A",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cas C",
+                    "correct": true
+                  },
+                  {
+                    "content": "Cas E",
+                    "correct": true
+                  },
+                  {
+                    "content": "Cas B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cas D",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 3$ cm, $AB = 8$ cm, $AE = 5$ cm et $AC = 12$ cm. Que peut-on dire de $(DE)$ et $(BC)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{3}{8}$ et $\\frac{AE}{AC} = \\frac{5}{12}$. Étape 3 — Comparer avec les produits en croix : $3 \\times 12 = 36$ et $8 \\times 5 = 40$. Comme $36 \\neq 40$, les rapports sont différents. Étape 4 — Conclure : si $(DE)$ était parallèle à $(BC)$, Thalès donnerait des rapports égaux ; ce n'est pas le cas, donc $(DE)$ n'est pas parallèle à $(BC)$. Additionner $3 + 8 = 11$ et $5 + 12 = 17$ ne compare rien d'utile.",
+                "answers": [
+                  {
+                    "content": "Elles sont parallèles, car $\\frac{3}{8}$ et $\\frac{5}{12}$ sont tous deux inférieurs à $\\frac{1}{2}$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles sont parallèles, car $3 + 8 = 11$ et $5 + 12 = 17$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles ne sont pas parallèles, car $AD \\neq AE$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles ne sont pas parallèles, car $3 \\times 12 = 36$ et $8 \\times 5 = 40$ sont différents.",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$ avec $AD = 3$ cm, $AB = 7$ cm, $AE = 4$ cm et $AC = 9$ cm. Un élève arrondit à $0{,}1$ près, trouve $0{,}4$ et $0{,}4$, et dit que $(DE) \\parallel (BC)$. A-t-il raison ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{3}{7}$ et $\\frac{AE}{AC} = \\frac{4}{9}$. Étape 3 — Comparer sans arrondir : $3 \\times 9 = 27$ et $7 \\times 4 = 28$, donc $\\frac{3}{7} \\neq \\frac{4}{9}$. Étape 4 — Conclure : les rapports sont différents, donc $(DE)$ n'est pas parallèle à $(BC)$. Les valeurs arrondies $0{,}4$ étaient égales par hasard : $\\frac{3}{7} \\approx 0{,}4286$ et $\\frac{4}{9} \\approx 0{,}4444$. Une égalité de valeurs arrondies ne prouve jamais une égalité de rapports.",
+                "answers": [
+                  {
+                    "content": "Oui : les deux rapports valent $0{,}4$ à $0{,}1$ près.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : $3 \\times 9 = 27$ et $7 \\times 4 = 28$, les rapports sont différents, donc les droites ne sont pas parallèles.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : une valeur approchée suffit pour appliquer la réciproque.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : car $AB \\neq AC$.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
         }
       ],
       "exercises": [
         {
-          "title": "Problème 1 — La hauteur de l'arbre de la cour",
-          "statement": "Pour connaître la hauteur d'un arbre de la cour, Awa plante un bâton bien droit dans l'ombre de l'arbre, à l'endroit où l'ombre du bâton se termine exactement au bout de l'ombre de l'arbre.\n\nLe bout des deux ombres est le point $A$. Le pied de l'arbre est $B$ et son sommet est $C$. Le pied du bâton est $M$ et son sommet est $N$ : $M$ est sur $[AB]$ et $N$ est sur $[AC]$.\n\nAwa mesure : $AM = 1{,}6$ m, $MN = 1{,}2$ m, $AN = 2$ m et $AB = 12$ m.",
-          "exercise_type": "evaluation",
+          "title": "La ferme du hangar",
+          "statement": "Sur un chantier, un charpentier monte la ferme d'un hangar : un triangle $ABC$. Il fixe des traverses $[DE]$ ou $[MN]$ avec $D$ et $M$ sur $[AB]$, $E$ et $N$ sur $[AC]$. Chaque question rappelle ses données.",
+          "exercise_type": "fixation",
+          "figure": "thales-direct",
           "questions": [
             {
-              "content": "Pourquoi les droites $(MN)$ et $(BC)$ sont-elles parallèles ?",
+              "content": "Dans le triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$. On donne $AD = 2$ m, $AB = 5$ m et $AC = 7{,}5$ m. Combien mesure $AE$ ?",
               "question_type": "single_choice",
-              "explanation": "Deux droites perpendiculaires à une même droite (le sol) sont parallèles entre elles.",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$ dans le triangle $ABC$, la propriété de Thalès s'applique. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$. Étape 3 — Remplacer : $\\frac{2}{5} = \\frac{AE}{7{,}5}$. Étape 4 — Calculer : $AE = \\frac{2 \\times 7{,}5}{5} = 3$ m. La réponse $5{,}5$ m vient d'une soustraction ($7{,}5 - 2$) qui n'a aucun lien avec les proportions.",
               "answers": [
                 {
-                  "content": "Le bâton et l'arbre sont tous les deux perpendiculaires au sol",
+                  "content": "$3$ m",
                   "correct": true
                 },
                 {
-                  "content": "Les deux ombres se terminent au même point $A$",
+                  "content": "$5{,}5$ m",
                   "correct": false
                 },
                 {
-                  "content": "Le bâton est plus petit que l'arbre",
+                  "content": "$18{,}75$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$4{,}5$ m",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Calcule la hauteur $BC$ de l'arbre, en m.",
-              "question_type": "numeric",
-              "explanation": "D'après la propriété de Thalès, $\\dfrac{AM}{AB} = \\dfrac{MN}{BC}$, soit $\\dfrac{1{,}6}{12} = \\dfrac{1{,}2}{BC}$, donc $BC = \\dfrac{12 \\times 1{,}2}{1{,}6} = 9$ m.",
+              "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On donne $AB = 6$ m, $AM = 4$ m et $BC = 9$ m. Combien mesure $MN$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(MN) \\parallel (BC)$ dans le triangle $ABC$. Étape 2 — Écrire : $\\frac{AM}{AB} = \\frac{MN}{BC}$. Étape 3 — Remplacer : $\\frac{4}{6} = \\frac{MN}{9}$. Étape 4 — Calculer : $MN = \\frac{4 \\times 9}{6} = 6$ m. La réponse $13{,}5$ m vient d'un rapport retourné : $MN$ est plus petit que $BC$.",
               "answers": [
                 {
-                  "content": "9",
+                  "content": "$13{,}5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$6$ m",
                   "correct": true
+                },
+                {
+                  "content": "$4$ m",
+                  "correct": false
                 }
               ]
             },
             {
-              "content": "Calcule la longueur $AC$ du rayon de soleil, du bout de l'ombre au sommet de l'arbre, en m.",
-              "question_type": "numeric",
-              "explanation": "$\\dfrac{AM}{AB} = \\dfrac{AN}{AC}$ donne $\\dfrac{1{,}6}{12} = \\dfrac{2}{AC}$, donc $AC = \\dfrac{12 \\times 2}{1{,}6} = 15$ m.",
-              "answers": [
-                {
-                  "content": "15",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "content": "Quelle distance $MB$ sépare le bâton de l'arbre, en m ?",
-              "question_type": "numeric",
-              "explanation": "$M$ est entre $A$ et $B$ : $MB = AB - AM = 12 - 1{,}6 = 10{,}4$ m.",
-              "answers": [
-                {
-                  "content": "10,4",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "content": "Si Awa penchait son bâton, elle pourrait encore utiliser la propriété de Thalès.",
+              "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 3$ m, $AB = 7{,}5$ m, $AE = 4$ m et $AC = 10$ m. Les droites $(DE)$ et $(BC)$ sont parallèles.",
               "question_type": "true_false",
-              "explanation": "Un bâton penché n'est plus parallèle à l'arbre : sans $(MN) \\parallel (BC)$, la propriété ne s'applique pas.",
+              "explanation": "Étape 1 — Vérifier : $D$ et $E$ sont dans le même ordre à partir de $A$. Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{3}{7{,}5} = 0{,}4$ et $\\frac{AE}{AC} = \\frac{4}{10} = 0{,}4$. Étape 3 — Comparer : égaux. Étape 4 — Conclure : d'après la réciproque de la propriété de Thalès, $(DE) \\parallel (BC)$. L'affirmation est vraie.",
               "answers": [
                 {
                   "content": "Vrai",
-                  "correct": false
+                  "correct": true
                 },
                 {
                   "content": "Faux",
-                  "correct": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Problème 2 — Le portail extensible",
-          "statement": "Au portail de l'école, deux barres métalliques $[MB]$ et $[NC]$ se croisent au point $A$. Le point $A$ est entre $M$ et $B$, et entre $N$ et $C$. La barre du haut est $[MN]$, celle du bas est $[BC]$.\n\nOn mesure : $AM = 1{,}5$ m, $AB = 2{,}5$ m, $AN = 1{,}2$ m, $AC = 2$ m et $BC = 3$ m.",
-          "exercise_type": "evaluation",
-          "questions": [
-            {
-              "content": "Quelle est la configuration de la figure ?",
-              "question_type": "single_choice",
-              "explanation": "$A$ est entre $M$ et $B$, et entre $N$ et $C$ : les deux triangles sont tête-bêche, c'est le papillon.",
-              "answers": [
-                {
-                  "content": "Une configuration en papillon",
-                  "correct": true
-                },
-                {
-                  "content": "Une configuration classique, avec $M$ sur $[AB]$",
-                  "correct": false
-                },
-                {
-                  "content": "Ce n'est pas une configuration de Thalès",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Quelles égalités sont justes ?",
+              "content": "Dans le triangle $ABC$, $M \\in [AB]$ et $N \\in [AC]$. On donne $AM = 1{,}5$ m, $AB = 4$ m, $AN = 2$ m et $AC = 6$ m. Que peut-on dire de $(MN)$ et $(BC)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on teste si $(MN) \\parallel (BC)$. Étape 2 — Calculer : $\\frac{AM}{AB} = \\frac{1{,}5}{4}$ et $\\frac{AN}{AC} = \\frac{2}{6} = \\frac{1}{3}$. Étape 3 — Comparer avec les produits en croix : $1{,}5 \\times 6 = 9$ et $4 \\times 2 = 8$. Étape 4 — Conclure : les rapports sont différents, donc, si $(MN)$ était parallèle à $(BC)$, Thalès serait contredit : elles ne sont pas parallèles.",
+              "answers": [
+                {
+                  "content": "Elles sont parallèles, car $1{,}5 < 2$ et $4 < 6$.",
+                  "correct": false
+                },
+                {
+                  "content": "Elles ne sont pas parallèles, car $1{,}5 \\times 6 = 9$ et $4 \\times 2 = 8$.",
+                  "correct": true
+                },
+                {
+                  "content": "Elles sont parallèles, car $\\frac{1{,}5}{4}$ et $\\frac{1}{3}$ sont proches.",
+                  "correct": false
+                },
+                {
+                  "content": "Elles ne sont pas parallèles, car $4 \\neq 6$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$ et $(DE) \\parallel (BC)$. On donne $AD = 2$ m, $AB = 8$ m et $AC = 12$ m. Quelles sont les deux affirmations vraies ?",
               "question_type": "multiple_correct_2",
-              "explanation": "$\\dfrac{1{,}5}{2{,}5} = 0{,}6$ et $\\dfrac{1{,}2}{2} = 0{,}6$.",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$. Étape 3 — Remplacer : $\\frac{2}{8} = \\frac{AE}{12}$. Étape 4 — Calculer : $AE = \\frac{2 \\times 12}{8} = 3$ m. Puis $EC = AC - AE = 12 - 3 = 9$ m. Les valeurs $AE = 6$ m (moitié de $AC$), $EC = 3$ m (confusion avec $AE$) et $AE = 2$ m (recopie de $AD$) sont fausses.",
               "answers": [
                 {
-                  "content": "$\\dfrac{AM}{AB} = 0{,}6$",
-                  "correct": true
-                },
-                {
-                  "content": "$\\dfrac{AN}{AC} = 0{,}6$",
-                  "correct": true
-                },
-                {
-                  "content": "$\\dfrac{AM}{AB} = 0{,}4$",
+                  "content": "$AE = 6$ m",
                   "correct": false
                 },
                 {
-                  "content": "$\\dfrac{AN}{AC} = 1{,}2$",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Les barres $[MN]$ et $[BC]$ sont-elles parallèles ?",
-              "question_type": "single_choice",
-              "explanation": "Les rapports sont égaux et les points sont dans le même ordre (papillon) : la réciproque conclut.",
-              "answers": [
-                {
-                  "content": "Oui, $(MN) \\parallel (BC)$ d'après la réciproque de la propriété de Thalès",
+                  "content": "$AE = 3$ m",
                   "correct": true
                 },
                 {
-                  "content": "Oui, $(MN) \\parallel (BC)$ d'après la propriété de Thalès",
+                  "content": "$EC = 9$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$EC = 3$ m",
                   "correct": false
                 },
                 {
-                  "content": "Non, car les deux triangles n'ont pas la même taille",
+                  "content": "$AE = 2$ m",
                   "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Calcule la longueur $MN$ de la barre du haut, en m.",
-              "question_type": "numeric",
-              "explanation": "Les droites sont parallèles, donc d'après la propriété de Thalès $\\dfrac{MN}{BC} = \\dfrac{AM}{AB} = 0{,}6$, soit $MN = 0{,}6 \\times 3 = 1{,}8$ m.",
-              "answers": [
-                {
-                  "content": "1,8",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "content": "Calcule la longueur de la barre $[MB]$, en m.",
-              "question_type": "numeric",
-              "explanation": "$A$ est entre $M$ et $B$ : $MB = AM + AB = 1{,}5 + 2{,}5 = 4$ m.",
-              "answers": [
-                {
-                  "content": "4",
-                  "correct": true
                 }
               ]
             }
           ]
         },
         {
-          "title": "Problème 3 — La poutre du préau",
-          "statement": "La charpente du préau forme un triangle $ABC$ avec $AB = 9$ m, $AC = 12$ m et $BC = 10{,}5$ m. Un menuisier fixe une poutre entre le point $M$ de $[AB]$, avec $AM = 6$ m, et le point $N$ de $[AC]$, avec $AN = 7{,}5$ m.\n\nIl voudrait que sa poutre soit parallèle à $[BC]$.",
-          "exercise_type": "evaluation",
+          "title": "Dans l'atelier de menuiserie",
+          "statement": "Dans son atelier, Adama découpe des pièces triangulaires. Dans chaque question, $M$ est un point de $[AB]$ et $N$ un point de $[AC]$ d'un triangle $ABC$, et les données sont rappelées.",
+          "exercise_type": "fixation",
+          "figure": null,
           "questions": [
             {
-              "content": "La poutre $[MN]$ est parallèle à $[BC]$.",
+              "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On donne $AM = 4$ cm, $AB = 12$ cm et $MN = 5$ cm. Combien mesure $BC$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(MN) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AM}{AB} = \\frac{MN}{BC}$. Étape 3 — Remplacer : $\\frac{4}{12} = \\frac{5}{BC}$. Étape 4 — Calculer : $BC = \\frac{12 \\times 5}{4} = 15$ cm. La réponse $13$ cm vient d'un raisonnement par différence ($5 + 12 - 4$), faux ici.",
+              "answers": [
+                {
+                  "content": "$15$ cm",
+                  "correct": true
+                },
+                {
+                  "content": "$13$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$60$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$7$ cm",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$, $M \\in [AB]$, $N \\in [AC]$ et $(MN) \\parallel (BC)$. On donne $AB = 10$ cm, $AN = 9$ cm et $AC = 15$ cm. Combien mesure $AM$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(MN) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AM}{AB} = \\frac{AN}{AC}$. Étape 3 — Remplacer : $\\frac{AM}{10} = \\frac{9}{15}$. Étape 4 — Calculer : $AM = \\frac{10 \\times 9}{15} = 6$ cm. La réponse $4$ cm est $AB - AM$, c'est-à-dire $MB$ : on ne cherche pas cette longueur.",
+              "answers": [
+                {
+                  "content": "$4$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$13{,}5$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$6$ cm",
+                  "correct": true
+                },
+                {
+                  "content": "$5$ cm",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$, $M \\in [AB]$ et $N \\in [AC]$. On donne $AM = 3$ cm, $MB = 2$ cm, $AN = 4{,}5$ cm et $NC = 3$ cm. Que peut-on dire de $(MN)$ et $(BC)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Vérifier : $M \\in [AB]$ et $N \\in [AC]$ dans le même ordre. Étape 2 — Calculer les rapports « partie sur tout » : $AB = 3 + 2 = 5$ cm et $AC = 4{,}5 + 3 = 7{,}5$ cm, donc $\\frac{AM}{AB} = \\frac{3}{5} = 0{,}6$ et $\\frac{AN}{AC} = \\frac{4{,}5}{7{,}5} = 0{,}6$. Étape 3 — Comparer : égaux. Étape 4 — Conclure : $(MN) \\parallel (BC)$ d'après la réciproque de Thalès. Comparer $\\frac{3}{2}$ avec $\\frac{4{,}5}{7{,}5}$ serait mélanger partie et tout.",
+              "answers": [
+                {
+                  "content": "Elles sont parallèles, car $\\frac{AM}{AB} = \\frac{AN}{AC} = 0{,}6$.",
+                  "correct": true
+                },
+                {
+                  "content": "Elles ne sont pas parallèles, car $\\frac{AM}{MB} = \\frac{3}{2} \\neq \\frac{4{,}5}{7{,}5}$.",
+                  "correct": false
+                },
+                {
+                  "content": "Elles ne sont pas parallèles, car $3 \\neq 4{,}5$.",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas conclure sans connaître $BC$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$, $M \\in [AB]$ et $N \\in [AC]$. On donne $AM = 2$ cm, $AB = 6$ cm, $AN = 3$ cm et $AC = 10$ cm. Les droites $(MN)$ et $(BC)$ sont parallèles.",
               "question_type": "true_false",
-              "explanation": "$\\dfrac{AM}{AB} = \\dfrac{6}{9} \\approx 0{,}67$ et $\\dfrac{AN}{AC} = \\dfrac{7{,}5}{12} = 0{,}625$ : les rapports sont différents.",
+              "explanation": "Étape 1 — Repérer : on teste si $(MN) \\parallel (BC)$. Étape 2 — Calculer : $\\frac{AM}{AB} = \\frac{2}{6} = \\frac{1}{3}$ et $\\frac{AN}{AC} = \\frac{3}{10}$. Étape 3 — Comparer : $1 \\times 10 = 10$ et $3 \\times 3 = 9$, donc les rapports sont différents. Étape 4 — Conclure : si les droites étaient parallèles, Thalès donnerait deux rapports égaux ; elles ne sont donc pas parallèles. L'affirmation est fausse.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -590,140 +889,232 @@
               ]
             },
             {
-              "content": "Quel calcul le prouve ?",
-              "question_type": "single_choice",
-              "explanation": "On compare $\\dfrac{AM}{AB}$ et $\\dfrac{AN}{AC}$ par les produits en croix : $6 \\times 12 = 72$ et $9 \\times 7{,}5 = 67{,}5$.",
-              "answers": [
-                {
-                  "content": "$AM \\times AC = 72$ et $AB \\times AN = 67{,}5$ : les produits en croix sont différents",
-                  "correct": true
-                },
-                {
-                  "content": "$AM + AC = 18$ et $AB + AN = 16{,}5$ : les sommes sont différentes",
-                  "correct": false
-                },
-                {
-                  "content": "$MN$ est plus petit que $BC$",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Le menuisier garde le point $M$ et déplace l'autre bout en un point $P$ de $[AC]$. Quelle longueur $AP$, en m, rend la poutre $[MP]$ parallèle à $[BC]$ ?",
-              "question_type": "numeric",
-              "explanation": "Il faut $\\dfrac{AP}{AC} = \\dfrac{AM}{AB}$, soit $\\dfrac{AP}{12} = \\dfrac{6}{9}$, donc $AP = \\dfrac{12 \\times 6}{9} = 8$ m.",
-              "answers": [
-                {
-                  "content": "8",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "content": "Avec $AP = 8$ m, quelle propriété justifie que $(MP) \\parallel (BC)$ ?",
-              "question_type": "single_choice",
-              "explanation": "Les rapports sont égaux et les points sont dans le même ordre : c'est la réciproque qui donne le parallélisme.",
-              "answers": [
-                {
-                  "content": "La réciproque de la propriété de Thalès",
-                  "correct": true
-                },
-                {
-                  "content": "La propriété de Thalès",
-                  "correct": false
-                },
-                {
-                  "content": "Le produit en croix",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Calcule alors la longueur $MP$ de la poutre, en m.",
-              "question_type": "numeric",
-              "explanation": "D'après la propriété de Thalès, $\\dfrac{MP}{BC} = \\dfrac{AM}{AB}$, soit $MP = \\dfrac{6 \\times 10{,}5}{9} = 7$ m.",
-              "answers": [
-                {
-                  "content": "7",
-                  "correct": true
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Problème 4 — Deux situations, deux propriétés",
-          "statement": "Situation A. Dans le triangle $RST$, le point $U$ est sur $[RS]$ et le point $V$ est sur $[RT]$, avec $(UV) \\parallel (ST)$. On donne $RU = 3$ cm, $RS = 5$ cm, $ST = 6$ cm et $RV = 2{,}4$ cm.\n\nSituation B. Dans le triangle $DEF$, le point $G$ est sur $[DE]$ et le point $H$ est sur $[DF]$. On donne $DG = 2{,}8$ cm, $DE = 4$ cm, $DH = 3{,}5$ cm et $DF = 5$ cm.",
-          "exercise_type": "evaluation",
-          "questions": [
-            {
-              "content": "Situation A. Quelle propriété utilises-tu pour calculer des longueurs ?",
-              "question_type": "single_choice",
-              "explanation": "On sait que $(UV) \\parallel (ST)$ et on cherche des longueurs : c'est la propriété directe.",
-              "answers": [
-                {
-                  "content": "La propriété de Thalès",
-                  "correct": true
-                },
-                {
-                  "content": "La réciproque de la propriété de Thalès",
-                  "correct": false
-                },
-                {
-                  "content": "Aucune : les données ne suffisent pas",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Situation A. Calcule $UV$, en cm.",
-              "question_type": "numeric",
-              "explanation": "$\\dfrac{RU}{RS} = \\dfrac{UV}{ST}$ donne $\\dfrac{3}{5} = \\dfrac{UV}{6}$, donc $UV = \\dfrac{3 \\times 6}{5} = 3{,}6$ cm.",
-              "answers": [
-                {
-                  "content": "3,6",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "content": "Situation A. Calcule $RT$, en cm.",
-              "question_type": "numeric",
-              "explanation": "$\\dfrac{RU}{RS} = \\dfrac{RV}{RT}$ donne $\\dfrac{3}{5} = \\dfrac{2{,}4}{RT}$, donc $RT = \\dfrac{5 \\times 2{,}4}{3} = 4$ cm.",
-              "answers": [
-                {
-                  "content": "4",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "content": "Situation B. Quelles phrases appartiennent à une rédaction correcte pour montrer que $(GH) \\parallel (EF)$ ?",
+              "content": "Dans le triangle $ABC$, $M \\in [AB]$ et $N \\in [AC]$. On donne $AM = 4$ cm, $AB = 10$ cm, $AN = 6$ cm et $AC = 15$ cm. Quelles sont les trois affirmations vraies ?",
               "question_type": "multiple_correct_3",
-              "explanation": "On démontre un parallélisme à partir de longueurs : c'est la réciproque, jamais la propriété directe.",
+              "explanation": "Étape 2 — Calculer : $\\frac{AM}{AB} = \\frac{4}{10} = \\frac{2}{5}$ et $\\frac{AN}{AC} = \\frac{6}{15} = \\frac{2}{5}$. Étape 3 — Comparer : égaux. Étape 4 — Conclure : $(MN) \\parallel (BC)$ d'après la réciproque de Thalès. Les trois affirmations vraies sont donc les deux rapports et le parallélisme. Les affirmations « rapports différents » et « non parallèles » sont fausses, et $\\frac{6}{15}$ vaut $\\frac{2}{5}$, pas $\\frac{3}{5}$.",
               "answers": [
                 {
-                  "content": "Dans le triangle $DEF$, $G$ est sur $[DE]$ et $H$ est sur $[DF]$.",
+                  "content": "$\\frac{AM}{AB} \\neq \\frac{AN}{AC}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{AM}{AB} = \\frac{2}{5}$",
                   "correct": true
                 },
                 {
-                  "content": "$\\dfrac{DG}{DE} = \\dfrac{2{,}8}{4} = 0{,}7$ et $\\dfrac{DH}{DF} = \\dfrac{3{,}5}{5} = 0{,}7$.",
+                  "content": "$\\frac{AN}{AC} = \\frac{2}{5}$",
                   "correct": true
                 },
                 {
-                  "content": "Les points $D$, $G$, $E$ et $D$, $H$, $F$ sont dans le même ordre, donc d'après la réciproque de la propriété de Thalès, $(GH) \\parallel (EF)$.",
+                  "content": "$(MN) \\parallel (BC)$",
                   "correct": true
                 },
                 {
-                  "content": "D'après la propriété de Thalès, $(GH) \\parallel (EF)$ car les rapports sont égaux.",
+                  "content": "$(MN)$ n'est pas parallèle à $(BC)$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{AN}{AC} = \\frac{3}{5}$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le portique du chantier",
+          "statement": "Sur un chantier, un portique a la forme d'un triangle $ABC$ avec $AB = 12$ m, $AC = 9$ m et $BC = 15$ m. Le charpentier pose des traverses parallèles à $[BC]$. Chaque question rappelle ses données.",
+          "exercise_type": "evaluation",
+          "figure": "thales-direct",
+          "questions": [
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 12$ m, $AC = 9$ m et $BC = 15$ m, on place $D \\in [AB]$ avec $AD = 4$ m et $E \\in [AC]$ tel que $(DE) \\parallel (BC)$. Combien mesure $AE$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : triangle $ABC$, $D \\in [AB]$, $E \\in [AC]$, $(DE) \\parallel (BC)$ : Thalès s'applique. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$. Étape 3 — Remplacer : $\\frac{4}{12} = \\frac{AE}{9}$. Étape 4 — Calculer : $AE = \\frac{4 \\times 9}{12} = 3$ m. La réponse $5$ m est la longueur de $DE$, qu'on calcule avec un autre rapport.",
+              "answers": [
+                {
+                  "content": "$5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$2{,}25$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$6$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$3$ m",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 12$ m, $AC = 9$ m et $BC = 15$ m, on place $D \\in [AB]$ avec $AD = 4$ m et $E \\in [AC]$ tel que $(DE) \\parallel (BC)$. Combien mesure $DE$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{DE}{BC}$. Étape 3 — Remplacer : $\\frac{4}{12} = \\frac{DE}{15}$. Étape 4 — Calculer : $DE = \\frac{4 \\times 15}{12} = 5$ m. La réponse $3$ m est $AE$, et $6$ m est $EC$ ; le mauvais rapport $\\frac{DE}{AC}$ donnerait aussi $3$ m : $DE$ correspond à $BC$.",
+              "answers": [
+                {
+                  "content": "$5$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$3$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$6$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$45$ m",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Situation B. Une fois $(GH) \\parallel (EF)$ démontré, les données suffisent pour calculer $GH$.",
+              "content": "Dans le triangle $ABC$ avec $AB = 12$ m, $AC = 9$ m et $BC = 15$ m, on place $D \\in [AB]$ avec $AD = 4$ m et $E \\in [AC]$ tel que $(DE) \\parallel (BC)$. Combien mesure $EC$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$. Étape 3 — Remplacer : $\\frac{4}{12} = \\frac{AE}{9}$. Étape 4 — Calculer : $AE = 3$ m. Comme $E \\in [AC]$, $EC = AC - AE = 9 - 3 = 6$ m. La réponse $3$ m est $AE$, pas $EC$.",
+              "answers": [
+                {
+                  "content": "$3$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$6$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$8$ m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 12$ m, $AC = 9$ m et $BC = 15$ m, on place $D \\in [AB]$ avec $AD = 4$ m et $E \\in [AC]$ avec $AE = 3$ m, $DE = 5$ m. Le charpentier découpe un panneau en forme de trapèze $DECB$. Quel est son périmètre ?",
+              "question_type": "single_choice",
+              "explanation": "On a vu que les longueurs sont proportionnelles (Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$). Il faut les quatre côtés du trapèze $DECB$ : $DB = AB - AD = 12 - 4 = 8$ m, $BC = 15$ m, $CE = AC - AE = 9 - 3 = 6$ m et $ED = 5$ m. Le périmètre est $8 + 15 + 6 + 5 = 34$ m. La réponse $26$ m oublie le côté $DB$ ; la réponse $28$ m oublie le côté $CE$.",
+              "answers": [
+                {
+                  "content": "$26$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$28$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$34$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$21$ m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 12$ m et $AC = 9$ m, on place $G \\in [AB]$ avec $AG = 6$ m et $F \\in [AC]$ avec $AF = 4{,}5$ m. Les droites $(FG)$ et $(BC)$ sont parallèles.",
               "question_type": "true_false",
-              "explanation": "La propriété de Thalès donne $GH = 0{,}7 \\times EF$, mais la longueur $EF$ n'est pas donnée.",
+              "explanation": "Étape 1 — Vérifier : $G \\in [AB]$ et $F \\in [AC]$, dans le même ordre à partir de $A$. Étape 2 — Calculer : $\\frac{AG}{AB} = \\frac{6}{12} = \\frac{1}{2}$ et $\\frac{AF}{AC} = \\frac{4{,}5}{9} = \\frac{1}{2}$. Étape 3 — Comparer : égaux. Étape 4 — Conclure : d'après la réciproque de la propriété de Thalès, $(FG) \\parallel (BC)$. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 12$ m et $AC = 9$ m, on place $H \\in [AB]$ avec $AH = 9$ m et $K \\in [AC]$ avec $AK = 6$ m. Que peut-on dire de $(HK)$ et $(BC)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on teste si $(HK) \\parallel (BC)$. Étape 2 — Calculer : $\\frac{AH}{AB} = \\frac{9}{12} = \\frac{3}{4}$ et $\\frac{AK}{AC} = \\frac{6}{9} = \\frac{2}{3}$. Étape 3 — Comparer avec les produits en croix : $3 \\times 3 = 9$ et $4 \\times 2 = 8$, donc les rapports sont différents. Étape 4 — Conclure : si $(HK)$ était parallèle à $(BC)$, Thalès donnerait deux rapports égaux ; ce n'est pas le cas, donc elles ne sont pas parallèles. Les différences $12 - 9 = 3$ et $9 - 6 = 3$ sont égales, mais cela ne prouve rien.",
+              "answers": [
+                {
+                  "content": "Elles ne sont pas parallèles, car $\\frac{3}{4} \\neq \\frac{2}{3}$.",
+                  "correct": true
+                },
+                {
+                  "content": "Elles sont parallèles, car $12 - 9 = 9 - 6 = 3$.",
+                  "correct": false
+                },
+                {
+                  "content": "Elles sont parallèles, car $\\frac{3}{4}$ et $\\frac{2}{3}$ sont proches.",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas conclure sans connaître $BC$.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le toit de l'abri",
+          "statement": "Pour couvrir un abri, un menuisier utilise une ferme triangulaire $ABC$ avec $AB = 7{,}5$ m, $AC = 10$ m et $BC = 12{,}5$ m. Il fixe une traverse $[DE]$ avec $D \\in [AB]$ et $E \\in [AC]$, telle que $AD = 3$ m. Chaque question rappelle ses données.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 7{,}5$ m, $AC = 10$ m et $BC = 12{,}5$ m, on a $D \\in [AB]$, $E \\in [AC]$, $AD = 3$ m et $(DE) \\parallel (BC)$. Combien mesure $AE$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$ dans le triangle $ABC$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$. Étape 3 — Remplacer : $\\frac{3}{7{,}5} = \\frac{AE}{10}$. Étape 4 — Calculer : $AE = \\frac{3 \\times 10}{7{,}5} = 4$ m. Le rapport $\\frac{3}{7{,}5}$ vaut $0{,}4$, donc $AE = 0{,}4 \\times 10 = 4$ m. La réponse $5$ m est $DE$, pas $AE$.",
+              "answers": [
+                {
+                  "content": "$5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$4$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$2{,}25$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$6{,}5$ m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 7{,}5$ m, $AC = 10$ m et $BC = 12{,}5$ m, on a $D \\in [AB]$, $E \\in [AC]$, $AD = 3$ m et $(DE) \\parallel (BC)$. Combien mesure $DE$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{DE}{BC}$. Étape 3 — Remplacer : $\\frac{3}{7{,}5} = \\frac{DE}{12{,}5}$. Étape 4 — Calculer : $DE = 0{,}4 \\times 12{,}5 = 5$ m. La réponse $4$ m est $AE$, une autre longueur du petit triangle ; la réponse $7{,}5$ m est $AB$ recopié : $DE$ correspond à $BC$, pas à $AB$.",
+              "answers": [
+                {
+                  "content": "$4$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$7{,}5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$5$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$31{,}25$ m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 7{,}5$ m, $AC = 10$ m, on a $D \\in [AB]$, $E \\in [AC]$, $AD = 3$ m et $AE = 4{,}2$ m. Les droites $(DE)$ et $(BC)$ sont parallèles.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : on teste si $(DE) \\parallel (BC)$. Étape 2 — Calculer : $\\frac{AD}{AB} = \\frac{3}{7{,}5} = 0{,}4$ et $\\frac{AE}{AC} = \\frac{4{,}2}{10} = 0{,}42$. Étape 3 — Comparer : $0{,}4 \\neq 0{,}42$. Étape 4 — Conclure : si $(DE)$ était parallèle à $(BC)$, Thalès donnerait deux rapports égaux ; ce n'est pas le cas, donc elles ne sont pas parallèles. L'affirmation est fausse : un écart de $0{,}2$ m suffit à casser le parallélisme.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -732,6 +1123,83 @@
                 {
                   "content": "Faux",
                   "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$, $D \\in [AB]$ avec $AD = 3$ m et $DB = 4{,}5$ m, et $E \\in [AC]$ avec $AE = 4$ m et $EC = 6$ m. Un apprenti compare $\\frac{AD}{DB} = \\frac{2}{3}$ et $\\frac{AE}{AC} = \\frac{2}{5}$ et dit que $(DE)$ n'est pas parallèle à $(BC)$. Quelle est la bonne démarche ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Vérifier : $D$ et $E$ sont dans le même ordre à partir de $A$. Étape 2 — Calculer : $AB = 3 + 4{,}5 = 7{,}5$ m et $AC = 4 + 6 = 10$ m, donc $\\frac{AD}{AB} = \\frac{3}{7{,}5} = \\frac{2}{5}$ et $\\frac{AE}{AC} = \\frac{4}{10} = \\frac{2}{5}$. Étape 3 — Comparer : égaux. Étape 4 — Conclure : $(DE) \\parallel (BC)$ d'après la réciproque de Thalès. L'apprenti compare « partie sur partie » à « partie sur tout » : sa conclusion est donc fausse.",
+              "answers": [
+                {
+                  "content": "Il a raison : $\\frac{2}{3} \\neq \\frac{2}{5}$, donc elles ne sont pas parallèles.",
+                  "correct": false
+                },
+                {
+                  "content": "Il faut mesurer $BC$ pour conclure.",
+                  "correct": false
+                },
+                {
+                  "content": "Calculer $AB = 7{,}5$ m et $AC = 10$ m, comparer $\\frac{AD}{AB} = \\frac{2}{5}$ et $\\frac{AE}{AC} = \\frac{2}{5}$ : les droites sont parallèles.",
+                  "correct": true
+                },
+                {
+                  "content": "Il a tort, car $\\frac{2}{3}$ et $\\frac{2}{5}$ sont égaux.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 7{,}5$ m, $AC = 10$ m et $BC = 12{,}5$ m, on a $D \\in [AB]$, $E \\in [AC]$, $AD = 3$ m et $(DE) \\parallel (BC)$. Quelles sont les trois longueurs correctes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC} = \\frac{3}{7{,}5} = 0{,}4$. Étape 3 — Remplacer et Étape 4 — Calculer : $AE = 0{,}4 \\times 10 = 4$ m et $DE = 0{,}4 \\times 12{,}5 = 5$ m. Puis $EC = AC - AE = 10 - 4 = 6$ m. Les propositions $AE = 6$ m, $DE = 7{,}5$ m et $EC = 4$ m inversent ou recopient des longueurs sans les calculer.",
+              "answers": [
+                {
+                  "content": "$AE = 6$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$DE = 7{,}5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$AE = 4$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$DE = 5$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$EC = 6$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$EC = 4$ m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $ABC$ avec $AB = 7{,}5$ m, $AC = 10$ m et $BC = 12{,}5$ m, on a $D \\in [AB]$, $E \\in [AC]$, $AD = 3$ m et $(DE) \\parallel (BC)$. Combien mesure le périmètre du triangle $ADE$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $(DE) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AD}{AB} = \\frac{AE}{AC} = \\frac{DE}{BC}$, de valeur $0{,}4$. Étape 3 — Remplacer et Étape 4 — Calculer : $AE = 0{,}4 \\times 10 = 4$ m et $DE = 0{,}4 \\times 12{,}5 = 5$ m. Le périmètre de $ADE$ est $AD + DE + AE = 3 + 5 + 4 = 12$ m. La réponse $20{,}5$ m est le périmètre de $ABC$ privé de $BC$ ($3 + 7{,}5 + 10$), qui ne correspond à aucun triangle de la figure.",
+              "answers": [
+                {
+                  "content": "$12$ m",
+                  "correct": true
+                },
+                {
+                  "content": "$8$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$20{,}5$ m",
+                  "correct": false
+                },
+                {
+                  "content": "$30$ m",
+                  "correct": false
                 }
               ]
             }
