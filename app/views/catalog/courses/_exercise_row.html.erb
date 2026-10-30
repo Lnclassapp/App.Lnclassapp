@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_exercise_row — un exercice de « Prépare interros », en carte %>
 <%# Rôle : la carte d'exercice commune (titre, type, questions, état de l'élève ou statut de l'équipe, verbe) ; enseignant : une bascule d'assignation par classe sous la carte %>
-<%# ADR  : 0113 · UDR : 0145 (§3.1, §3.2), 0139 §3.4, 0134 (§3.13) · locals: (exercise:, targets:, classrooms:, material_slug:, team: false) %>
+<%# ADR  : 0113 · UDR : 0145 (§3.1, §3.2, §3.2 bis), 0139 §3.4, 0134 (§3.13) · locals: (exercise:, targets:, classrooms:, material_slug:, team: false, anchor: nil) %>
 <% card = exercise_card_for_lesson(exercise, material_slug:, team: team.present?, student: current_actor&.student? || false) %>
 <% extra = capture do %>
   <% if exercise.status == "published" && classrooms.any? %>
@@ -19,4 +19,4 @@
     </ul>
   <% end %>
 <% end %>
-<%= render "assessment/exercises/card", card:, extra: %>
+<%= render "assessment/exercises/card", card:, extra:, anchor: local_assigns[:anchor] %>

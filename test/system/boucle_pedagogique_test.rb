@@ -291,7 +291,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_selector "#prepare-interros"
 
     # La notion n'a plus de page (ADR-0113) : « Prépare interros » de la leçon porte l'exercice, et chaque classe y a son « Assigner ».
-    assert_selector "#notion-#{Orm::Essential.find_by!(name: ESSENTIAL).slug}", text: EXERCISE
+    # UDR-0145 §3.2 bis : l'ancre de la notion est sur la première carte de la grille.
+    assert_selector "#prepare-interros-grid li:has(> #notion-#{Orm::Essential.find_by!(name: ESSENTIAL).slug})", text: EXERCISE
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
