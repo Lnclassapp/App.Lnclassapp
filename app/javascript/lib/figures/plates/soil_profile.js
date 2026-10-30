@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/soil_profile — la planche du profil de sol (coupe verticale en bandes)
 // Rôle : déclare le titre, les 6 parties (nom français, ancre) et trace litière, horizon humifère, horizon d'accumulation, roche mère altérée, roche mère et racines, chaque horizon avec son motif
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Profil de sol"
 

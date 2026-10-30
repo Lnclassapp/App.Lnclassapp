@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/root_hairs — la planche de la racine et des poils absorbants (médaillon : un poil entre les particules de sol)
 // Rôle : déclare le titre, les 9 parties (nom français, ancre) et trace le plant (collet), la racine (coiffe, zone d'allongement, zone pilifère), ses racines secondaires et un médaillon agrandi
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Racine et poils absorbants"
 

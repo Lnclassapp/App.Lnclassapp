@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/diagram — le schéma fléché : enchaînement (flow), arbre (tree) ou cycle, calculé, jamais placé à la main
 // Rôle : lit `layout`, `direction`, `nodes`, `edges`, `legend` et revérifie leurs formes avant de dessiner ; nœuds de 4 lignes au plus, retour à la ligne entre deux mots seulement, jamais d'ellipse : un libellé qui ne tient pas devient un numéro, texte entier en légende, flèches par <marker> propre à la figure
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : XXXX-figures-des-matieres-de-3eme (§3) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2) · UDR : 0142-dessin-des-figures-de-3eme (§3) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, round } from "./svg"
 

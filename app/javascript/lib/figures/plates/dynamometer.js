@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/dynamometer — la planche du dynamomètre à ressort (vue de face, vertical, anneau en haut)
 // Rôle : déclare le titre, les 7 parties (nom français, ancre) et trace l'anneau, le tube, le ressort, la graduation en N, l'index devant la graduation, le crochet et le corps suspendu
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Dynamomètre à ressort"
 

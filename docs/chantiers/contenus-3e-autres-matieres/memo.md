@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | programme |
-| **Statut** | en cours (vague 1 et vague 2 lancées) |
+| **Statut** | livré, clos (5 vagues fusionnées dans `Develop`, #373 à #377, 2026-10-30) |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `feature/contenus-3e-autres-matieres` |
 | **Programme** | — *(ce dossier est le programme `contenus-3e-autres-matieres`)* |

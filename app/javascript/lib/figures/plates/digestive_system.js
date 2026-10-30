@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/digestive_system — la planche de l'appareil digestif (vue de face, côté droit du sujet à gauche de l'image)
 // Rôle : déclare le titre, les 11 parties (nom français, ancre) et trace le tube digestif continu bouche → anus avec ses glandes annexes
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Appareil digestif"
 

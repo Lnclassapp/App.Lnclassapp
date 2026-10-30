@@ -35,26 +35,27 @@ Vague 5  contenus-3e-edhc                aucune sorte nouvelle (schéma, carte, 
 
 | Décision | Options | Recommandation | Bloque | Tranchée par | Statut |
 |---|---|---|---|---|---|
-| Sortes de figures nouvelles, leurs paramètres, leurs listes fermées | voir l'ADR §3 | A : sortes à identifiants fermés | vagues 2, 3, 4 | ADR-XXXX-figures-des-matieres-de-3eme | Accepté (porteur, 2026-10-30) |
-| Dessin des sortes nouvelles (catégories teinte + motif, numérotation de repli) | — | — | vagues 2, 3, 4 | UDR-XXXX-figures-des-matieres-de-3eme | Accepté (porteur, 2026-10-30) |
+| Sortes de figures nouvelles, leurs paramètres, leurs listes fermées | voir l'ADR §3 | A : sortes à identifiants fermés | vagues 2, 3, 4 | ADR-0117 | Accepté (porteur, 2026-10-30) |
+| Dessin des sortes nouvelles (catégories teinte + motif, numérotation de repli) | — | — | vagues 2, 3, 4 | UDR-0142 | Accepté (porteur, 2026-10-30) |
 | Textes de Français : œuvres et droits | textes originaux · une œuvre · plusieurs œuvres en courtes citations | plusieurs œuvres, courtes citations référencées, textes longs du domaine public ou originaux (porteur) | vague 1 | memo, grill | Tranché |
 
 ## Registre des contradictions
 
 | Sources | Écart | Tranché par |
 |---|---|---|
-| ADR-0116 §4.2 (« liste fermée de 5 sortes ») ↔ besoin des matières | la liste est trop courte | ADR-XXXX-figures-des-matieres-de-3eme, qui amende ADR-0116 §4.2 |
+| ADR-0116 §4.2 (« liste fermée de 5 sortes ») ↔ besoin des matières | la liste est trop courte | ADR-0117, qui amende ADR-0116 §4.2 |
 | `valider.rb` (4 types à choix) ↔ import (tous les types de question) | le script refuse des questions que l'import accepte | vague 1 : le script reprend la règle de l'import (`Entities::Assessment::Question`) |
 | CLAUDE.md « une PR par chantier » ↔ « matière par matière » | une seule PR ne livre pas matière par matière | programme : un chantier, donc une PR, par matière |
 
 ## Portes du programme
 
-- [ ] Vague 1 livrée : 10 fichiers de Français envoyés au porteur
+- [x] Vague 1 livrée : 10 fichiers de Français envoyés au porteur (#373)
 - [x] ADR et UDR des figures acceptés avant le Lot 0 de la vague 2 (porteur, 2026-10-30)
-- [ ] Vagues 2 à 4 : code en production, 10 fichiers chacune, figures `ready` à 390 px et sur ordinateur (captures envoyées)
-- [ ] Vague 5 livrée
-- [ ] 50 leçons rangées dans `docs/contenus/lecons-traitees/3eme/`, README des contenus à jour
-- [ ] `journal.md` du programme clos
+- [x] Vagues 2 à 4 : 10 fichiers chacune, figures `ready` à 390 px et sur ordinateur (captures envoyées) (#374, #376, #377)
+- [ ] Vagues 2 à 4 : code en production — reste ouverte tant que le train `Staging` → `main` n'est pas passé
+- [x] Vague 5 livrée (#375)
+- [x] 50 leçons rangées dans `docs/contenus/lecons-traitees/3eme/`, README des contenus à jour
+- [x] `journal.md` du programme clos (2026-10-30)
 
 ## Challenger empirique — par vague, non négociable
 

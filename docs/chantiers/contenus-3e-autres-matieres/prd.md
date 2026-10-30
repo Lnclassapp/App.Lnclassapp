@@ -116,8 +116,8 @@ Fonctionnalité: Les 50 leçons
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-figures-des-matieres-de-3eme — six sortes de figures et une courbe ; amende ADR-0116 §4.2.
-- UDR-XXXX-figures-des-matieres-de-3eme — dessin des six sortes ; complète UDR-0141 §3.3. Aucune vue nouvelle.
+- ADR-0117 — six sortes de figures et une courbe ; amende ADR-0116 §4.2.
+- UDR-0142 — dessin des six sortes ; complète UDR-0141 §3.3. Aucune vue nouvelle.
 
 ## 7. Mesures
 

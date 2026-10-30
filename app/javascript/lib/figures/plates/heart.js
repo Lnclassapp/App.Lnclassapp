@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/heart — la planche du cœur (coupe longitudinale, vue de face : le côté droit du cœur est à gauche de l'image)
 // Rôle : déclare le titre, les 12 parties (nom français, ancre) et trace oreillettes, ventricules (paroi gauche plus épaisse), cloison, valvules, gros vaisseaux
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Cœur (coupe longitudinale)"
 

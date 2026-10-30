@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/maps/world — fond de carte « world » de la figure `map` : chemins SVG déjà projetés, noms français
 // Rôle : AREAS (aires nommées), PLACES (lieux), OUTLINE (tracés sans identifiant) ; généré par script/contenus/fonds_de_carte.rb, ne pas modifier à la main
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.3) · UDR : XXXX-figures-des-matieres-de-3eme (§3) · chargé par import() depuis lib/figures/map
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.3) · UDR : 0142-dessin-des-figures-de-3eme (§3) · chargé par import() depuis lib/figures/map
 
 export const VIEWBOX = [640, 360]
 export const ATTRIBUTION = ""

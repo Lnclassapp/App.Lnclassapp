@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plate — la planche légendée : un dessin fixe de manuel, des étiquettes à gauche et à droite reliées à leur partie, le surlignage
 // Rôle : lit `plate`, `labels` (≤ 12), `highlight` (≤ 4), `numbering` (names, numbers) ; revérifie la planche et les parties avant de dessiner ; le tracé vient de plates/<planche>.js
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · chargé par import() depuis controllers/figure_controller
 //
 // Le dessin occupe la zone centrale (x 170 à 470) ; les étiquettes se rangent dans les marges, du côté de l'ancre de leur partie, sans se chevaucher.
 

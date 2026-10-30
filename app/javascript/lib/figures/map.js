@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/map — la carte : un fond (Côte d'Ivoire, Afrique, monde), des aires par catégorie, des lieux, des routes
 // Rôle : lit `base`, `areas`, `places`, `routes`, `legend`, charge le fond par import() (liste blanche), revérifie chaque identifiant, dessine teinte + motif et numérote les étiquettes qui se chevauchent
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2, §4.3, menace) · UDR : XXXX-figures-des-matieres-de-3eme (§3) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2, §4.3, menace) · UDR : 0142-dessin-des-figures-de-3eme (§3) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, round, COLOR } from "./svg"
 

@@ -1,7 +1,7 @@
 # Plan d'exécution — Les 10 premières leçons de Physique-Chimie de 3ème
 
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Contrat des sortes : ADR-XXXX-figures-des-matieres-de-3eme §4.2 ; dessin : UDR-XXXX-figures-des-matieres-de-3eme §3.
+> Contrat des sortes : ADR-0117 §4.2 ; dessin : UDR-0142 §3.
 
 ## Graphe
 
@@ -106,8 +106,8 @@ Consignes O et M : tant que le Lot D n'est pas fait, `Entities::Catalog::Figure`
 - [x] `memo.md` complet, section `Hors périmètre` non vide
 - [x] Grill fait : ≥ 1 ligne dans `Ce que le grill a révélé`
 - [x] `prd.md` : critères d'acceptation en Gherkin, tous testables
-- [x] ADR écrit si un port / une table / un contrat apparaît (ADR-XXXX-figures-des-matieres-de-3eme, accepté)
-- [x] UDR écrite pour **chaque** vue créée ou modifiée (UDR-XXXX-figures-des-matieres-de-3eme, acceptée ; aucune vue nouvelle)
+- [x] ADR écrit si un port / une table / un contrat apparaît (ADR-0117, accepté)
+- [x] UDR écrite pour **chaque** vue créée ou modifiée (UDR-0142, acceptée ; aucune vue nouvelle)
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [ ] Lot 0 mergé et ports gelés avant tout lot parallèle (sans objet : contrat de l'ADR)
 - [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord

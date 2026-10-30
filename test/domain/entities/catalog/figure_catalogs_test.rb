@@ -1,7 +1,7 @@
 require "test_helper"
 require "open3"
 
-# ADR-XXXX-figures-des-matieres-de-3eme §4.2 : listes fermées des aires et des lieux de chaque fond de carte.
+# ADR-0117 §4.2 : listes fermées des aires et des lieux de chaque fond de carte.
 module Entities
   module Catalog
     class FigureCatalogsTest < ActiveSupport::TestCase

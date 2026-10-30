@@ -108,8 +108,8 @@ Fonctionnalité: Les 10 leçons d'Histoire-Géographie
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-figures-des-matieres-de-3eme (§4.1 à §4.3, menace) — accepté.
-- UDR-XXXX-figures-des-matieres-de-3eme — accepté. Aucune vue nouvelle.
+- ADR-0117 (§4.1 à §4.3, menace) — accepté.
+- UDR-0142 — accepté. Aucune vue nouvelle.
 
 ## 7. Mesures
 

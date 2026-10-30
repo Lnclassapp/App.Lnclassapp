@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/electrolyser — la planche de l'électrolyseur de laboratoire (cuve, deux électrodes, deux tubes de recueil)
 // Rôle : déclare le titre, les 9 parties (nom français, ancre) et trace le générateur, la cuve et son électrolyte, l'anode (+) et la cathode (−) sous leurs tubes retournés, avec deux fois plus de dihydrogène que de dioxygène
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Électrolyseur (électrolyse de l'eau)"
 
