@@ -1,0 +1,63 @@
+<%# 🌐 UI · catalog/courses/sheets/_exercise — un exercice de la feuille : énoncé, figure, questions, indice, barre d'actions, résultat %>
+<%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; élève : champs et « Vérifier ma réponse » ; exercice déjà corrigé : correction et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
+<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0091 §4.4 (aucune correction avant la vérification) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 · Stimulus : prepare-sheet, math %>
+<%# locals: (exercise:, mode:, targets: nil, classrooms: []) -%>
+<% fields = %i[student visitor].include?(mode) %>
+<% copy = exercise.copy %>
+<% checked = !copy.nil? %>
+<% frame_data = { prepare_sheet_target: ("exercise" if fields), exercise_id: exercise.public_id, checked: checked, copy: copy&.session_public_id }.compact %>
+<%# Le formulaire n'existe que pour qui répond : les bascules de l'enseignant sont des formulaires, qui ne s'imbriquent pas. %>
+<% body = capture do %>
+  <div class="ps-exercise-top">
+    <div class="ps-exercise-main">
+      <div class="ps-exercise-head">
+        <b><%= t("catalog.courses.sheets.exercise", number: exercise.number) %></b>
+        <span class="ps-status" data-ps="done" <%= tag.attributes(hidden: !checked) %>><%= t("catalog.courses.sheets.#{copy.passed ? :passed : :to_review}") if checked %></span>
+      </div>
+      <% if exercise.statement.present? %>
+        <div class="ps-statement" data-controller="math"><%= simple_format(exercise.statement) %></div>
+      <% end %>
+      <% if exercise.statement_blocks.present? %>
+        <div class="space-y-3"><%= render "assessment/statement_blocks/blocks", blocks: exercise.statement_blocks %></div>
+      <% end %>
+    </div>
+    <% if exercise.figure %>
+      <div class="ps-figure w-48 [&_figure]:rounded-none [&_figure]:border-0 [&_figure]:bg-transparent [&_figure]:p-0"><%= render "catalog/figures/figure", figure: exercise.figure, frame: :app %></div>
+    <% end %>
+  </div>
+  <% exercise.questions.each do |question| %>
+    <%= render "catalog/courses/sheets/question", question:, fields:, checked: %>
+  <% end %>
+  <% if fields && exercise.hint.present? %>
+    <div id="hint-<%= exercise.public_id %>" class="ps-hint" data-ps="hint" hidden><b><%= t("catalog.courses.sheets.hint_label") %></b> <%= exercise.hint %></div>
+  <% end %>
+  <div class="ps-actions">
+    <% if fields %>
+      <% if mode == :visitor %>
+        <%= link_to t("catalog.courses.sheets.check"), new_session_path, class: "ps-btn ps-btn--primary", data: { ps: "blank" } %>
+      <% else %>
+        <%= tag.button t("catalog.courses.sheets.check"), type: :submit, class: "ps-btn ps-btn--primary",
+                        data: { ps: "blank", turbo_submits_with: t("catalog.courses.sheets.checking") }, hidden: checked %>
+      <% end %>
+      <% if exercise.hint.present? %>
+        <%= tag.button t("catalog.courses.sheets.hint"), type: :button, class: "ps-btn ps-btn--hint", hidden: checked,
+                        aria: { expanded: false, controls: "hint-#{exercise.public_id}" },
+                        data: { ps: "blank", action: "prepare-sheet#hint", label_show: t("catalog.courses.sheets.hint"), label_hide: t("catalog.courses.sheets.hide_hint") } %>
+      <% end %>
+      <%= tag.button t("catalog.courses.sheets.redo"), type: :button, class: "ps-btn ps-btn--redo", hidden: !checked,
+                      data: { ps: "done", action: "prepare-sheet#redo" } %>
+    <% elsif mode == :teacher %>
+      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms: %>
+    <% end %>
+  </div>
+<% end %>
+<%= turbo_frame_tag "sheet-exercise-#{exercise.public_id}", class: "ps-exercise", data: frame_data do %>
+  <% if fields %>
+    <%= form_with url: exercise_sheet_check_path(exercise.public_id), method: :post, class: "contents", html: { novalidate: true } do %><%= body %><% end %>
+  <% else %>
+    <%= body %>
+  <% end %>
+  <% if checked %>
+    <%= render "catalog/courses/sheets/result", exercise: %>
+  <% end %>
+<% end %>

@@ -1,0 +1,29 @@
+<%# 🌐 UI · catalog/courses/sheets/_result — le résultat d'un exercice corrigé : note sur 10, mention, détail, puis la correction question par question %>
+<%# Rôle : recopié de la maquette ; lu par la page (dernière copie terminée) et par la réponse de la vérification ; « Ta note » reçoit le focus à la réponse %>
+<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Résultat, aria-live polite) %>
+<%# locals: (exercise:) -%>
+<%# exercise : PrepareSheetsQuery::SheetExercise avec une copie %>
+<% grade = exercise.copy.grade %>
+<% score = number_with_precision(grade.score, precision: 1, strip_insignificant_zeros: true) %>
+<div class="ps-result" data-ps="done" aria-live="polite">
+  <div class="ps-result-head">
+    <b id="sheet-grade-<%= exercise.public_id %>" class="ps-result-grade" tabindex="-1"><%= t("catalog.courses.sheets.grade", score:) %></b>
+    <b class="ps-result-mention"><%= t("catalog.courses.sheets.mention", mention: t("assessment.sheet_checks.mention.#{grade.mention}")) %></b>
+    <span class="ps-result-detail"><%= t("assessment.sheet_checks.detail", **grade.detail) %></span>
+  </div>
+  <b class="ps-correction-title"><%= t("catalog.courses.sheets.correction") %></b>
+  <% exercise.questions.each do |question| %>
+    <div class="ps-correction-item">
+      <div class="ps-correction-line">
+        <b><%= (96 + question.number).chr %>.</b>
+        <% if question.verdict %><b><%= t("catalog.courses.sheets.verdict.#{question.verdict}") %></b><% end %>
+        <% if question.good_answer.present? %>
+          <span><%= t("catalog.courses.sheets.good_answer") %> <b><%= question.good_answer %></b></span>
+        <% end %>
+      </div>
+      <% if question.explanation.present? %>
+        <span><i><%= t("catalog.courses.sheets.explanation") %></i> <%= question.explanation %></span>
+      <% end %>
+    </div>
+  <% end %>
+</div>

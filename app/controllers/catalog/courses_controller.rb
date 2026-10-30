@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
 # Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière, et sur ordinateur ses leçons par matière (la dernière touchée, gardée en session) ; enseignant : une de ses matières à la fois, au niveau du rond de l'accueil
-# ADR  : 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis, 0144 parcours matière → exercice §3
+# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis, 0144 parcours matière → exercice §3, XXXX feuilles-prepare-interros-et-devoirs §3
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -55,7 +55,7 @@ module Catalog
     # UDR page de la leçon : les deux sections, lues pour le rôle courant (squelettes du Lot 0).
     def load_lesson_sections
       @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:slug], actor: current_actor)
-      @prepare = Queries::Catalog::PrepareInterrosQuery.new.call(course_slug: params[:slug], actor: current_actor)
+      @prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug: params[:slug], actor: current_actor)
     end
 
     # UDR parcours matière → exercice §3 : la carte « Prochain exercice » de la leçon, pour l'élève seulement.

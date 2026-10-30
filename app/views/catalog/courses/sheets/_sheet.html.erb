@@ -1,0 +1,34 @@
+<%# 🌐 UI · catalog/courses/sheets/_sheet — une feuille de cahier : « Prépare interros » (une notion) ou « Prépare devoirs » (un sujet) %>
+<%# Rôle : cartouche, titre et progression, encadré « À retenir » / « Notions mobilisées », exercices, pied et « Recommencer… » ; aucune variable d'instance, aucune requête : tout vient des locals (rendu aussi par « Ma classe ») %>
+<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 · Stimulus : prepare-sheet (élève et visiteur seulement) %>
+<%# `mode` et `targets` ne servent qu'aux exercices ; la progression se calcule sur `exercises` ; son repère est `sheet-progress-<sheet_id>` (la réponse de la vérification le remplace) %>
+<%# kind : :interros | :devoirs ; exercises : [PrepareSheetsQuery::SheetExercise] ; mode : :student | :visitor | :teacher | :team ; subtitle : ligne sous la progression (« À rendre le … ») %>
+<%# locals: (kind:, material:, header_left:, header_right:, title:, exercises:, footer:, reset_label:, sheet_id:, subtitle: nil, box_label: nil, box_text: nil, mode: :student, targets: nil, classrooms: []) -%>
+<% interactive = %i[student visitor].include?(mode) %>
+<% data = interactive ? { controller: "prepare-sheet" } : {} %>
+<% passed = exercises.count { it.copy&.passed } %>
+<%= tag.div id: sheet_id, class: "ps-sheet", data: data do %>
+  <div class="ps-header">
+    <b class="ps-header-title"><%= t("catalog.courses.sheets.#{kind}_title") %></b>
+    <b class="ps-header-title ps-header-title--right"><%= material.to_s.upcase %></b>
+    <span><%= header_left %></span>
+    <span class="ps-header-right"><%= header_right %></span>
+  </div>
+  <div class="ps-title-block">
+    <b class="ps-title"><%= title %></b>
+    <i id="sheet-progress-<%= sheet_id %>" class="ps-progress" aria-live="polite"><%= t("catalog.courses.sheets.progress", count: passed, total: exercises.size) %></i>
+    <% if subtitle.present? %><span class="ps-progress"><%= subtitle %></span><% end %>
+  </div>
+  <% if box_text.present? %>
+    <div class="ps-remember"><b><%= box_label %></b> <%= box_text %></div>
+  <% end %>
+  <% exercises.each do |exercise| %>
+    <%= render "catalog/courses/sheets/exercise", exercise:, mode:, targets:, classrooms: %>
+  <% end %>
+  <div class="ps-footer">
+    <span><%= footer %></span>
+    <% if interactive %>
+      <button type="button" class="ps-link-button" data-action="prepare-sheet#resetAll"><%= reset_label %></button>
+    <% end %>
+  </div>
+<% end %>
