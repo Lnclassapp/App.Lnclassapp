@@ -1,0 +1,24 @@
+<%# 🌐 UI · catalog/courses/_next_exercise — la carte « Prochain exercice » de la vue d'une matière et de la page d'une leçon %>
+<%# Rôle : le titre de l'exercice et un bouton qui ouvre sa feuille (commencer, ou reprendre à la question N) ; rien sans exercice à proposer %>
+<%# ADR  : 0035 · UDR : XXXX parcours matière → exercice §3 · locals: (next_exercise:, scope:, id:) — scope vaut :material ou :lesson %>
+<% if next_exercise %>
+  <% resume = next_exercise.kind == :resume %>
+  <section id="<%= id %>" aria-labelledby="<%= id %>_title" data-turbo-prefetch="false" class="mb-6">
+    <%= ui_card padding: :md do %>
+      <p class="text-xs font-medium tracking-wide text-mute uppercase"><%= t("catalog.courses.next_exercise.label") %></p>
+      <h2 id="<%= id %>_title" class="mt-1 line-clamp-2 font-display text-base font-medium"><%= next_exercise.title %></h2>
+      <% if scope == :material %>
+        <p class="mt-1 text-sm text-mute"><%= next_exercise.lesson_name %></p>
+      <% end %>
+      <%= render "classroom/student_homes/next_step/start",
+                 public_id: next_exercise.exercise_public_id, session_id: next_exercise.session_public_id,
+                 label: t(resume ? "catalog.courses.next_exercise.resume" : "catalog.courses.next_exercise.start", number: next_exercise.resume_number),
+                 aria: t(resume ? "catalog.courses.next_exercise.resume_aria" : "catalog.courses.next_exercise.start_aria",
+                         title: next_exercise.title, number: next_exercise.resume_number) %>
+      <% if scope == :lesson %>
+        <%= link_to t("catalog.courses.next_exercise.all"), "#prepare-interros",
+                    class: "mt-1 inline-flex min-h-tap items-center text-sm font-medium text-brand-strong focus-visible:outline-2 focus-visible:outline-brand" %>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>

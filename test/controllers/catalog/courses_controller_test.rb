@@ -389,8 +389,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # PRD §7 : le nombre de requêtes de la page ne dépend ni du nombre de cours ni des lectures. Au plus 18 : Lot O5 y ajoute
-  # les matières de l'élève (1) et les leçons de la matière avec leurs fiches (4), lues pour l'ordinateur.
-  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 18" do
+  # les matières de l'élève (1) et les leçons de la matière avec leurs fiches (4), lues pour l'ordinateur ; la carte « Prochain
+  # exercice » en ajoute deux au plus (UDR parcours-matiere-exercice §4), d'où 20.
+  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 20" do
     student = create_student_for(@course)
     sign_in_as student
     paths = [ courses_path, courses_path(q: "e"), courses_path(material: @svt.slug) ]
@@ -403,7 +404,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     many = paths.map { queries_of(it) }
 
     assert_equal few, many
-    assert(many.all? { it <= 18 }, many.inspect)
+    assert(many.all? { it <= 20 }, many.inspect)
   end
 
   test "an unknown subject in the student's address gives the « Cours » title and no course, never an error" do
@@ -1113,6 +1114,86 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "nav#lesson_materials", 0
       assert_select "#student_lessons", 0
       assert_select "#student_courses", 0
+    end
+  end
+
+  # UDR parcours-matiere-exercice §3 : la carte « Prochain exercice » de la matière (téléphone et ordinateur) et de la leçon.
+  def with_exercises
+    @first = create_lesson_wide_exercise(course: @course, title: "Premier exercice")
+    @second = create_lesson_wide_exercise(course: @course, title: "Second exercice")
+    @student = create_student_for(@course)
+    sign_in_as @student
+  end
+
+  test "CA-1: the student sees the next exercise on both blocks of the subject view, with a POST button, and not inside the frame" do
+    with_exercises
+
+    get courses_path(material: @svt.slug)
+
+    assert_response :success
+    %w[material_next_exercise lesson_material_next_exercise].each do |id|
+      assert_select "section##{id}[aria-labelledby='#{id}_title'][data-turbo-prefetch=false]" do
+        assert_select "##{id}_title", text: "Premier exercice"
+        assert_select "p", text: @course.name
+        assert_select "form[action='#{exercise_sessions_path(@first.public_id)}'][method=post] button", text: including(tl("next_exercise.start"))
+        assert_select "button[aria-label=?]", tl("next_exercise.start_aria", title: "Premier exercice")
+      end
+    end
+    assert_select "#material_next_exercise ~ #courses-filters", 1
+
+    get courses_path(material: @svt.slug), headers: { "Turbo-Frame" => "courses" }
+
+    assert_select "#material_next_exercise", 0
+  end
+
+  test "CA-2: a session in progress is resumed at the next question, by a link to the session" do
+    with_exercises
+    session = create_exercise_session(student: @student, exercise: @second, answered_count: 1)
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "#material_next_exercise" do
+      assert_select "#material_next_exercise_title", text: "Second exercice"
+      assert_select "a[href='#{exercise_session_path(session.public_id)}']", text: including(tl("next_exercise.resume", number: 2))
+      assert_select "form", 0
+    end
+  end
+
+  test "CA-4: with nothing to propose, no card is rendered" do
+    with_exercises
+    [ @first, @second ].each { create_exercise_session(student: @student, exercise: it, status: "completed") }
+
+    get courses_path(material: @svt.slug)
+    assert_select "#material_next_exercise, #lesson_material_next_exercise", 0
+
+    get course_path(@course.slug)
+    assert_select "#lesson_next_exercise", 0
+  end
+
+  test "CA-5: the lesson page shows the card under the header and before the revision sheet, with a link to all exercises" do
+    with_exercises
+    create_lesson_wide_exercise(course: @published, title: "D'une autre leçon")
+
+    get course_path(@course.slug)
+
+    assert_select "#course_header ~ #lesson_next_exercise ~ div #fiche-de-revision", 1
+    assert_select "#lesson_next_exercise" do
+      assert_select "#lesson_next_exercise_title", text: "Premier exercice"
+      assert_select "p", text: @course.name, count: 0
+      assert_select "a[href='#prepare-interros']", text: tl("next_exercise.all")
+      assert_select "form[action='#{exercise_sessions_path(@first.public_id)}']"
+    end
+  end
+
+  test "CA-7: the teacher and the team see no card on the subject view nor on the lesson" do
+    create_lesson_wide_exercise(course: @course, title: "Premier exercice")
+    [ create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ]), create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path(material: @svt.slug)
+      get course_path(@course.slug)
+
+      assert_select "#material_next_exercise, #lesson_material_next_exercise, #lesson_next_exercise", 0
     end
   end
 end
