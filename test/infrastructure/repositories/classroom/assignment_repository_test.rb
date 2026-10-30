@@ -20,9 +20,13 @@ module Repositories
         Assignable.new(type: "Exercise", id: record.id, key: record.public_id, name:)
       end
 
-      def assignment_of(assignable, due_on: nil)
+      def assignment_of(assignable, due_on: nil, batch_public_id: nil)
         Entities::Classroom::Assignment.new(id: nil, public_id: nil, classroom_id: @classroom.id, assignable:, status: "active",
-                                            assigned_by_id: @teacher.id, assigned_at: @at, archived_at: nil, due_on:)
+                                            assigned_by_id: @teacher.id, assigned_at: @at, archived_at: nil, due_on:, batch_public_id:)
+      end
+
+      def batch_of(*exercises, batch_public_id: "Ab3dEf5hJk7mNp")
+        exercises.map { assignment_of(exercise_assignable(it, name: it.title), batch_public_id:) }
       end
 
       test "assigne un exercice, puis le relit actif et par public_id" do
@@ -39,6 +43,53 @@ module Repositories
                      found.assignable.to_h.values_at(:type, :id, :key, :name)
         assert found.active?
         assert_equal [ @teacher.id, @at ], [ found.assigned_by_id, found.assigned_at ]
+      end
+
+      test "écrit et relit l'envoi d'une assignation, nul pour un exercice assigné seul" do
+        alone = @repository.create(assignment: assignment_of(exercise_assignable)).value
+        other = create_exercise(essential: @essential, title: "Quiz méiose")
+        batched = @repository.create(assignment: batch_of(other).first).value
+
+        assert_nil @repository.find_by_public_id(public_id: alone.public_id).batch_public_id
+        assert_equal "Ab3dEf5hJk7mNp", @repository.find_by_public_id(public_id: batched.public_id).batch_public_id
+      end
+
+      # ADR sujets-de-devoir (ajout du 2026-10-30) : un envoi, une transaction, une ligne par exercice.
+      test "un envoi crée une assignation par exercice, dans l'ordre reçu, du même envoi" do
+        exercises = [ @exercise, create_exercise(essential: @essential, title: "B"), create_exercise(essential: @essential, title: "C") ]
+
+        result = @repository.create_batch(assignments: batch_of(*exercises))
+
+        assert result.success?
+        assert_equal exercises.map(&:public_id), result.value.created.map { it.assignable.key }
+        assert_empty result.value.skipped
+        assert_equal [ "Ab3dEf5hJk7mNp" ], result.value.created.map(&:batch_public_id).uniq
+        assert_equal 3, Orm::ClassroomAssignment.where(classroom_id: @classroom.id, batch_public_id: "Ab3dEf5hJk7mNp").count
+      end
+
+      test "un exercice déjà assigné est écarté et nommé, les autres partent" do
+        other = create_exercise(essential: @essential, title: "B")
+        third = create_exercise(essential: @essential, title: "C")
+        create_assignment(classroom: Orm::Classroom.find(@classroom.id), assignable: other, by: @teacher)
+
+        result = @repository.create_batch(assignments: batch_of(@exercise, other, third))
+
+        assert result.success?
+        assert_equal [ @exercise.public_id, third.public_id ], result.value.created.map { it.assignable.key }
+        assert_equal [ "B" ], result.value.skipped.map(&:name)
+        assert_equal 2, Orm::ClassroomAssignment.where(batch_public_id: "Ab3dEf5hJk7mNp").count
+      end
+
+      test "tous déjà assignés : rien n'est créé" do
+        other = create_exercise(essential: @essential, title: "B")
+        [ @exercise, other ].each { create_assignment(classroom: Orm::Classroom.find(@classroom.id), assignable: it, by: @teacher) }
+
+        result = @repository.create_batch(assignments: batch_of(@exercise, other))
+
+        assert result.success?
+        assert_empty result.value.created
+        assert_equal %w[Quiz\ mitose B], result.value.skipped.map(&:name)
+        assert_equal 0, Orm::ClassroomAssignment.where(batch_public_id: "Ab3dEf5hJk7mNp").count
       end
 
       # ADR-0072 §4.1 : la contrainte de la base refuse une ligne de cours ou de fiche, même écrite hors du domaine.

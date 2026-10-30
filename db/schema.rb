@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_30_100100) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -161,11 +161,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_100100) do
     t.string "public_id", limit: 14, null: false
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
+    t.string "batch_public_id", limit: 14
     t.index ["archived_by_id"], name: "index_classroom_assignments_on_archived_by_id"
     t.index ["assignable_type", "assignable_id"], name: "idx_on_assignable_type_assignable_id_89cda988b0"
     t.index ["assigned_at"], name: "index_classroom_assignments_on_assigned_at"
     t.index ["assigned_by_id"], name: "index_classroom_assignments_on_assigned_by_id"
     t.index ["classroom_id", "assignable_type", "assignable_id"], name: "index_classroom_assignments_one_active", unique: true, where: "((status)::text = 'active'::text)"
+    t.index ["classroom_id", "batch_public_id"], name: "index_classroom_assignments_on_classroom_and_batch"
     t.index ["classroom_id"], name: "index_classroom_assignments_on_classroom_id"
     t.index ["public_id"], name: "index_classroom_assignments_on_public_id", unique: true
     t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "classroom_assignments_archived_at_iff_archived"

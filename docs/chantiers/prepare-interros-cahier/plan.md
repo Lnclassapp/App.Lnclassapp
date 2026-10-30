@@ -128,13 +128,14 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 - **Fichiers**     : `db/migrate/<ts>_add_batch_public_id_to_classroom_assignments.rb` · `db/schema.rb`
                      `app/infrastructure/orm/classroom_assignment.rb`
                      `app/domain/entities/classroom/assignment.rb` *(attribut `batch_public_id`)*
-                     `app/domain/ports/classroom/assignment_repository_port.rb` *(créer un envoi)*
+                     `app/domain/ports/classroom/assignment_repository_port.rb` *(créer un envoi : `create_batch`)*
+                     `app/infrastructure/repositories/classroom/assignment_repository.rb` *(`create_batch`, `batch_public_id` lu et écrit ; passé du Lot E au Lot 0b le 2026-10-30)*
                      `config/routes/classroom.rb` *(`POST /classrooms/:classroom_public_id/assignment_batches`)*
                      `config/locales/classroom/assignments.fr.yml` · `config/locales/classroom/student_classrooms.fr.yml`
                      `test/support/factories/classroom.rb` *(`batch_public_id:`)*
 - **Dépend de**    : Lot 0
-- **Test associé** : `test/domain/entities/classroom/assignment_test.rb`
-- **Done quand**   : la migration passe, une assignation porte son envoi, le contrat du port est gelé
+- **Test associé** : `test/domain/entities/classroom/assignment_test.rb` · `test/db/classroom_assignments_batch_test.rb` · `test/infrastructure/repositories/classroom/assignment_repository_test.rb`
+- **Done quand**   : la migration passe, une assignation porte son envoi, le contrat du port est gelé et son adaptateur l'implémente
 
 ---
 
@@ -142,7 +143,6 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 
 - **Couche**       : domaine + infrastructure + delivery + ui
 - **Fichiers**     : `app/domain/use_cases/classroom/assign_exercise_batch.rb`
-                     `app/infrastructure/repositories/classroom/assignment_repository.rb`
                      `app/controllers/classroom/assignment_batches_controller.rb`
                      `app/views/classroom/assignment_batches/create.turbo_stream.erb`
                      `app/views/catalog/courses/sheets/_batch_bar.html.erb` · `app/views/catalog/courses/sheets/_teacher_bar.html.erb`
@@ -185,6 +185,7 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 | `test/system/catalog/prepare_interros_test.rb` | Lot D |
 | `test/integration/catalog/prepare_interros_test.rb` | Lot B |
 | `config/routes/classroom.rb`, `config/locales/classroom/*.fr.yml` | Lot 0b |
+| `app/infrastructure/repositories/classroom/assignment_repository.rb` et son test | Lot 0b (le Lot E l'appelle sans le modifier) |
 | `app/views/catalog/courses/sheets/_teacher_bar.html.erb` | Lot B le crée, Lot D le remplit, Lot E y ajoute « Choisir » (séquentiel) |
 | `app/views/catalog/courses/sheets/_sheet.html.erb` | Lot B (les lots E et F le rendent sans le modifier) |
 

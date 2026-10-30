@@ -1,6 +1,6 @@
 # Assignation d'un exercice à une classe : bascule, modale des jours de séance et streams (plan boucle-pedagogique, Lot D5 ;
 # fonctions-espace-eleve, Lot C ; reorganisation-equipe-enseignant, Lot F) — ADR-0048, ADR-0072, UDR-0007, UDR-0028, UDR-0062 §3.4,
-# UDR-0069 §3.8, UDR enseignant §3.13 (« Plus tard » retiré)
+# UDR-0069 §3.8, UDR enseignant §3.13 (« Plus tard » retiré), UDR feuilles-prepare-interros-et-devoirs (devoir composé, 2026-10-30)
 fr:
   classroom:
     assignments:
@@ -47,3 +47,16 @@ fr:
         other_level: "Ce contenu n'est pas du niveau de la classe : ses élèves ne pourraient pas l'ouvrir."
         already_archived: "Déjà retiré de cette classe"
         invalid: "Ce type de contenu ne s'assigne pas à une classe."
+      # Devoir composé par l'enseignant (Lot E) : la case « Choisir », le bandeau et le compte rendu de l'envoi.
+      batch:
+        choose: "Choisir"
+        chosen:
+          one: "%{count} exercice choisi"
+          other: "%{count} exercices choisis"
+        clear: "Vider"
+        submit: "Envoyer à %{classroom}"
+        done:
+          one: "Devoir envoyé à %{classroom} : %{count} exercice."
+          other: "Devoir envoyé à %{classroom} : %{count} exercices."
+        already_assigned: "Déjà assigné : %{titles}."
+        invalid_count: "Choisis entre 1 et 10 exercices."
