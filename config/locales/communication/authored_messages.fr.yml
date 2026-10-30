@@ -39,6 +39,9 @@ fr:
             audio:
               unsupported: "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A."
               too_large: "Ce fichier est trop lourd (%{count} Mo au plus)."
+              # ADR « annonces audio dix secondes » : la durée est mesurée dans les octets (14,2 = lue, 10 = la borne)
+              too_long: "Cet audio dure %{duration} s : %{count} secondes au plus. Raccourcissez l'enregistrement."
+              unreadable: "La durée de cet audio ne se lit pas. Exportez l'enregistrement en MP3 ou M4A."
             published_at:
               invalid: "Saisissez une date valide."
               past: "Choisissez une date à venir, ou laissez vide pour publier dès l'envoi."
@@ -103,7 +106,7 @@ fr:
           body: "140 caractères au plus. Les détails peuvent aller dans l'audio."
           classrooms: "Les élèves de ces classes la verront."
           image: "PNG, JPEG ou WebP, 2 Mo au plus. Elle remplace l'illustration."
-          audio: "MP3 ou M4A, 10 Mo au plus. Un enregistrement de téléphone convient."
+          audio: "MP3 ou M4A, 10 secondes et 1 Mo au plus. Un enregistrement de téléphone convient."
           published_at: "Laissez vide pour publier dès l'envoi."
         lasts: "L'annonce reste visible 30 jours."
         # UDR-0075 §3.3 : le décompte (contrôleur communication--character-count de l'UDR-0067) ; %{count} et %{max}

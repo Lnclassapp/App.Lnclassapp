@@ -46,6 +46,11 @@ module Entities
     Message::BODY_MAX = 140
     # Le plus grand côté d'une image jointe, en pixels : une photo de téléphone (4032 px) passe (ADR-0060).
     Message::IMAGE_MAX_SIDE = 4096
+    # ADR « annonces audio dix secondes » §4.1 : l'audio dure 10 s au plus, avec 0,3 s de marge d'encodeur (délai de début,
+    # dernière trame complétée), et pèse 1 Mo au plus (10 s à 320 kbit/s = 400 Ko).
+    Message::AUDIO_MAX_SECONDS = 10
+    Message::AUDIO_SLACK_SECONDS = 0.3
+    Message::AUDIO_MAX_MEGABYTES = 1
     # ADR-0081 §4.2, UDR-0075 §3.1 : la liste fermée des thèmes, dans cet ordre ; libellés communication.themes.<clé>.
     Message::THEMES = %w[ciel lagune menthe citron mangue corail hibiscus lavande indigo nuit].freeze
     Message::DEFAULT_THEME = "ciel"

@@ -10,7 +10,7 @@ module UseCases
     class CreateMessageTest < ActiveSupport::TestCase
       NOW = Time.zone.local(2026, 10, 1, 10)
       Clock = Data.define(:now)
-      MP3 = ("ID3".b + ("\x00".b * 64)).freeze
+      MP3 = Rails.root.join("test/fixtures/files/audio/trame.mp3").binread.freeze # a real MP3 of 1 s (fixtures README.txt)
 
       setup do
         @lauriers = create_school(name: "Collège Les Lauriers")
@@ -222,7 +222,7 @@ module UseCases
       test "AN-18 — an audio of 12 MB is refused, and nothing is written" do
         result = create(@kamate, audience: "students", audio: StringIO.new(MP3 + ("\x00".b * (12 * 1024 * 1024))))
 
-        assert_equal({ audio: [ "Ce fichier est trop lourd (10 Mo au plus)." ] }, result.errors)
+        assert_equal({ audio: [ "Ce fichier est trop lourd (1 Mo au plus)." ] }, result.errors)
         assert_equal 0, Orm::Message.count
       end
 

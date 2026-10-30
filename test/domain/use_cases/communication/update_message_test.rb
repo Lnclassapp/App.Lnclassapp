@@ -10,7 +10,7 @@ module UseCases
     class UpdateMessageTest < ActiveSupport::TestCase
       NOW = Time.zone.local(2026, 10, 3, 9)
       Clock = Data.define(:now)
-      MP3 = ("ID3".b + ("\x00".b * 64)).freeze
+      MP3 = Rails.root.join("test/fixtures/files/audio/trame.mp3").binread.freeze # a real MP3 of 1 s (fixtures README.txt)
 
       # Reads the announcement, then lets another request change it before the use case writes (ADR-0078 §4.2); once.
       class Racing < SimpleDelegator
