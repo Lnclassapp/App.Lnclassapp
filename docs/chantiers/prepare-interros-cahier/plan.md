@@ -34,6 +34,9 @@ Vague 1 : Lot 0 → 1 agent · Vague 2 : Lot A ‖ Lot B → 2 agents · Vague 3
                      `config/locales/catalog/courses.fr.yml` · `config/locales/assessment/sheet_checks.fr.yml`
                      `app/assets/stylesheets/prepare_sheet.css` *(les styles des maquettes, classes `.ps-*`)*
                      `test/support/factories/catalog.rb` · `test/support/factories/assessment.rb` *(`create_subject`, `hint:`)*
+                     `app/infrastructure/repositories/assessment/exercise_repository.rb` *(`map_to_entity` : `hint`, `subject_id`)* · `test/infrastructure/repositories/assessment/exercise_repository_test.rb`
+                     `test/infrastructure/orm/models_test.rb` *(49 modèles)* · `test/infrastructure/repositories/catalog/content_tree_writer_characterization_test.rb` *(`ADDED_LATER`)*
+                     `test/design/design_tokens_test.rb` *(`SHEET_EXCEPTION` accepte `prepare_sheet.css`)*
 - **Dépend de**    : —
 - **Test associé** : `test/domain/entities/assessment/sheet_grade_test.rb` · `test/domain/entities/catalog/subject_test.rb`
 - **Done quand**   : les migrations passent, `SheetGrade` rend 8 / 10 « Très bien » pour 4 justes sur 5, la contrainte
@@ -52,6 +55,16 @@ Vague 1 : Lot 0 → 1 agent · Vague 2 : Lot A ‖ Lot B → 2 agents · Vague 3
 - **Test associé** : `test/domain/use_cases/catalog/import_course_tree_test.rb` · `test/infrastructure/repositories/catalog/content_tree_writer_test.rb`
 - **Done quand**   : l'équipe importe la leçon Thalès avec indices et 3 sujets ; un sujet dont un exercice a une notion est
                      refusé avec une erreur qui nomme le sujet (CA-9)
+
+**Menace écrite d'abord** (le lot lit un fichier envoyé, CLAUDE.md) : le fichier `course_tree` n'est envoyé que par
+l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL).
+- **Texte piégé** (`<script>`, HTML) dans `hint`, `title` ou `notions` : stocké brut, rendu échappé par ERB, jamais `html_safe`
+  ni `raw` ; un test d'import puis de rendu le prouve.
+- **Volume** : `hint` de 1 à 400 caractères après `strip`, `title` de 1 à 200, `notions` de 1 à 600 ; au plus 10 sujets par
+  cours et 10 exercices par sujet. Au-delà : erreur d'import nommée, rien n'est écrit (la transaction de l'import d'aujourd'hui).
+- **Types** : une clé de type inattendu (nombre, liste, objet à la place d'un texte) est refusée par le validateur de
+  schéma, jamais convertie en silence.
+- **Rattachement** : un exercice de sujet avec une notion est refusé (CA-9) ; la contrainte de base le garantit aussi.
 
 ---
 
@@ -114,6 +127,8 @@ Vague 1 : Lot 0 → 1 agent · Vague 2 : Lot A ‖ Lot B → 2 agents · Vague 3
 | `app/assets/stylesheets/prepare_sheet.css` | Lot 0 |
 | `app/infrastructure/orm/exercise.rb`, `orm/course.rb`, `orm/subject.rb` | Lot 0 |
 | `test/support/factories/catalog.rb`, `factories/assessment.rb` | Lot 0 |
+| `app/infrastructure/repositories/assessment/exercise_repository.rb` et son test | Lot 0 |
+| `test/infrastructure/orm/models_test.rb`, `content_tree_writer_characterization_test.rb`, `test/design/design_tokens_test.rb` | Lot 0 |
 | `app/views/catalog/courses/sheets/_exercise.html.erb`, `_result.html.erb` | Lot B (le Lot C les rend sans les modifier) |
 | `app/views/catalog/courses/sheets/_teacher_bar.html.erb` | Lot B le crée vide, Lot D le remplit |
 | `test/system/catalog/prepare_interros_test.rb` | Lot D |

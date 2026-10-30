@@ -1,0 +1,21 @@
+# Vérifier un exercice sur la feuille de la leçon — ADR-XXXX sujets-de-devoir (§4), UDR-XXXX feuilles-prepare-interros-et-devoirs (§3)
+# Mentions et détail de la note sur 10 (Entities::Assessment::SheetGrade rend des symboles) ; messages d'erreur de l'exercice,
+# affichés dans un `p role="alert"`, réponses gardées.
+fr:
+  assessment:
+    sheet_checks:
+      # Mention de la maquette : 9 et plus, 7 et plus, 5 et plus, sinon.
+      mention:
+        excellent: "Excellent"
+        very_good: "Très bien"
+        fair: "Assez bien"
+        needs_work: "À retravailler"
+      # « x bonne(s) réponse(s) sur n. » : 0 et 1 s'écrivent au singulier.
+      detail:
+        one: "%{count} bonne réponse sur %{total}."
+        other: "%{count} bonnes réponses sur %{total}."
+      errors:
+        # time : « 10 h 50 ».
+        paused: "Tu as rendu 3 copies d'affilée. Tu pourras recommencer à %{time}."
+        archived: "Cet exercice n'existe plus."
+        failed: "La copie n'est pas partie. Réessaie."

@@ -19,7 +19,7 @@ module Repositories
       # ADR-0115 : points (1 par défaut), unit, starter, criteria et statement_blocks viennent aussi après l'instantané ; l'import
       # d'aujourd'hui ne les écrit pas encore (Lot D), les lignes gardent leurs valeurs par défaut (vérifié à part).
       # ADR-0116 : figures, sheet_theme, sheet et figure_key (format 3) viennent aussi après lui ; ces nœuds d'avant les laissent à leur défaut.
-      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key].freeze
+      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key hint subject_id].freeze
 
       setup do
         seed_referential

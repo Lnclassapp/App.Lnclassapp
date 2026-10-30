@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Exercise
 # Rôle : un exercice d'une leçon (de notion ou de toute la leçon), son sujet, ses questions et les faits de publication de ses parents
-# ADR  : 0035, 0036, 0054, 0105, 0113, 0115
+# ADR  : 0035, 0036, 0054, 0105, 0113, 0115, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
 module Entities
   module Assessment
     class Exercise
@@ -10,16 +10,22 @@ module Entities
       TITLE_MAX = 150
       # Le sujet est envoyé à chaque élève qui ouvre l'exercice : borné comme le schéma de l'import (menace-import-v2, Q2).
       STATEMENT_MAX = 5000
+      HINT_MAX = 400
 
       attr_accessor :id, :public_id, :course_id, :essential_id, :exercise_type, :position, :author_id, :status,
                     :published_at, :archived_at, :parents_published
       # ADR-0115 : le sujet en blocs (document, tableau), facultatif ; sa validation (StatementBlocks) est au Lot E.
       attr_accessor :statement_blocks
+      # ADR-XXXX sujets-de-devoir : l'indice, une phrase montrée avant la vérification ; nil sans indice. subject_id : le sujet de
+      # devoir de l'exercice ; nil pour un exercice de notion ou de toute la leçon.
+      attr_accessor :subject_id
+      attr_reader :hint
       attr_writer :questions
       attr_reader :title, :statement
 
       validates :title, presence: true, length: { maximum: TITLE_MAX }
       validates :statement, length: { maximum: STATEMENT_MAX }
+      validates :hint, length: { maximum: HINT_MAX }
       validates :course_id, presence: true
       validates :exercise_type, inclusion: { in: TYPES }
       validates :status, inclusion: { in: Entities::Shared::ContentStatus::VALUES }
@@ -30,6 +36,10 @@ module Entities
 
       def statement=(value)
         @statement = value&.strip.presence
+      end
+
+      def hint=(value)
+        @hint = value&.strip.presence
       end
 
       # essential_id nil : exercice de toute la leçon.

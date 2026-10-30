@@ -115,6 +115,55 @@ fr:
         due_today: "À rendre aujourd'hui"
         to_review: "À revoir"
         assign_targets_none: "Aucune de vos classes n'est en %{level}."
+      # ADR-XXXX sujets-de-devoir, UDR-XXXX feuilles-prepare-interros-et-devoirs : les libellés des feuilles « Prépare interros » et
+      # « Prépare devoirs » de la page d'une leçon, recopiés des maquettes. Clés absolues (catalog.courses.sheets.*), partagées par
+      # _prepare_sheets, sheets/_sheet, _exercise et _result. Les mentions et le détail de la note sont dans assessment.sheet_checks.
+      # « TOUTE LA LEÇON » : catalog.courses.show.lesson_wide_title (« Toute la leçon »), mis en capitales par .ps-title.
+      sheets:
+        interros_title: "PRÉPARE INTERROS"
+        devoirs_title: "PRÉPARE DEVOIRS"
+        interros_section: "Prépare interros"
+        devoirs_section: "Prépare devoirs"
+        brand_line: "Lnclass · %{course}"
+        notion_position: "Classe de %{level} · Notion %{number} / %{total}"
+        subject_position: "Classe de %{level} · Sujet %{number} / %{total}"
+        remember: "À retenir :"
+        notions: "Notions mobilisées :"
+        exercise: "Exercice %{number}"
+        passed: "Réussi"
+        to_review: "À revoir"
+        # x / n exercice(s) réussi(s) : 0 et 1 réussi s'écrivent au singulier, comme dans la maquette.
+        progress:
+          one: "%{count} / %{total} exercice réussi"
+          other: "%{count} / %{total} exercices réussis"
+        kinds:
+          mcq: "QCM"
+          true_false: "Vrai ou faux"
+          fill_in: "Complète"
+          calculation: "Calcul"
+        choice_true: "Vrai"
+        choice_false: "Faux"
+        hint_label: "Indice :"
+        hint: "Indice"
+        hide_hint: "Masquer l'indice"
+        check: "Vérifier ma réponse"
+        checking: "Vérification…"
+        redo: "Refaire l'exercice"
+        reset_notion: "Recommencer cette notion"
+        reset_subject: "Recommencer ce sujet"
+        footer_notion: "Lnclass · Prépare interros · Notion %{number}"
+        footer_subject: "Lnclass · Prépare devoirs · Sujet %{number}"
+        grade: "Ta note : %{score} / 10"
+        mention: "Mention : %{mention}"
+        correction: "Correction"
+        verdict:
+          correct: "✓ Juste"
+          wrong: "✗ Faux"
+          empty: "✗ Sans réponse"
+        good_answer: "Bonne réponse :"
+        explanation: "Explication :"
+        assign: "Assigner à %{classroom}"
+        assigned: "✓ Assigné à %{classroom}"
       role_actions:
         menu: "Actions sur la fiche de cours « %{name} »"
         edit: "Modifier"

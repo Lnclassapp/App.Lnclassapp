@@ -87,6 +87,17 @@ module Repositories
         assert found.publishable?
       end
 
+      # ADR-XXXX sujets-de-devoir : l'indice et le sujet de devoir sont relus ; un exercice de notion n'a ni l'un ni l'autre.
+      test "relit l'indice et le sujet de devoir d'un exercice de sujet" do
+        subject = create_subject(course: @essential.course)
+        record = create_exercise(subject:, hint: "Écris les côtés.")
+
+        found = @repository.find(id: record.id)
+
+        assert_equal [ "Écris les côtés.", subject.id ], [ found.hint, found.subject_id ]
+        assert_equal [ nil, nil ], [ @repository.find(id: create_exercise(essential: @essential).id) ].flat_map { [ it.hint, it.subject_id ] }
+      end
+
       test "un exercice existant relu garde 1 point par question et aucun sujet en blocs" do
         found = @repository.find(id: create_exercise(essential: @essential).id)
 
