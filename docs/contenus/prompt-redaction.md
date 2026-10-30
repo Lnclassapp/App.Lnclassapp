@@ -259,7 +259,7 @@ Si aucune sorte ne convient, **n'invente pas de sorte** : n'utilise pas de figur
 
 - Formules en KaTeX : `$…$` dans une ligne, `$$…$$` pour une formule seule. Dans le JSON, chaque `\` s'écrit `\\`.
 - `name`, `subtitle` et les titres d'exercices : 150 caractères au plus, **sans formule**.
-- Pas de tableau, pas d'image, pas de HTML : le balisage est `$…$`, et `**gras**`, `*italique*` dans la fiche de révision et l'énoncé d'un exercice seulement (pas dans les questions).
+- Pas de tableau, pas d'image, pas de HTML : le balisage est `$…$`, et `**gras**`, `*italique*` dans la fiche de révision seulement (ni dans l'énoncé d'un exercice, affiché en texte brut, ni dans les questions).
 - Vocabulaire Lnclass : dire « fiche de révision », « exercice », « proposition » ; jamais « quiz », « habileté », « notion clé » ni « conforme au programme ».
 - Le contenu suit la **progression nationale** (l'intitulé exact) et le programme officiel du niveau, sans notion hors programme. Les acquis des classes précédentes sont permis ; une notion des leçons suivantes ne l'est pas. Si tu n'es pas certain qu'une notion figure au programme, ne l'écris pas.
 - Aucune invention : pas de valeur, de théorème, de propriété, de date, de chiffre, de citation ni d'auteur dont tu ne sois sûr. Les règles de textes et de faits de « Selon la matière » s'appliquent.
