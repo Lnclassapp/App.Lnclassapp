@@ -93,7 +93,7 @@ Vague 1 : Lot 0 → 1 agent · Vague 2 : Lot A ‖ Lot B → 2 agents · Vague 3
 
 - **Couche**       : ui
 - **Fichiers**     : `app/views/catalog/courses/sheets/_teacher_bar.html.erb`
-                     `app/views/classroom/assignments/toggle.turbo_stream.erb`
+                     `app/views/classroom/assignments/_toggle.html.erb` *(libellé « Assigner à <classe> » dans la feuille)*
 - **Dépend de**    : Lot B
 - **Test associé** : `test/system/catalog/prepare_interros_test.rb` *(adapté : « Assigner à <classe> » dans la feuille)*
 - **Done quand**   : l'enseignant voit la feuille sans champ ni « Vérifier », clique « Assigner à 3e 1 » et lit
