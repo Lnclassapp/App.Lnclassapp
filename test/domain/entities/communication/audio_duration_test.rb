@@ -86,11 +86,49 @@ module Entities
 
         assert_in_delta base, mp3(frames(3)), 0.0001
         assert_in_delta base, mp3(frames(3) + zeros(40)), 0.0001
-        assert_in_delta base, mp3(frames(3) + "TAG".b + ("a".b * 125)), 0.0001
-        assert_in_delta base, mp3(frames(3) + "APETAGEX".b + ("a".b * 24)), 0.0001
+        assert_in_delta base, mp3(frames(3) + id3v1), 0.0001
         assert_nil mp3(frames(3) + "RIFF".b + zeros(40))
         assert_nil mp3(frames(3) + zeros(4) + "\x01".b)
         assert_nil mp3(frames(3) + "\xFF".b)
+      end
+
+      def id3v1(size = 128) = "TAG".b + ("a".b * (size - 3))
+
+      # Étiquette APEv2 : éléments, pied de 32 octets (version, taille 12..15, nombre, drapeaux 20..23, réservé) ; avec en-tête
+      # optionnel de 32 octets (même forme, drapeau « en-tête » bit 31 et « c'est l'en-tête » bit 29), la taille l'exclut.
+      def ape_part(size, flags) = "APETAGEX".b + [ 2000, size, 1, flags, 0, 0 ].pack("V6")
+
+      def ape(items = "a".b * 20, header: false, size: items.bytesize + 32)
+        (header ? ape_part(size, (1 << 31) | (1 << 29)) : "".b) + items + ape_part(size, header ? (1 << 31) : 0)
+      end
+
+      test "an APEv2 tag must reach the end of the file, alone or followed by exactly one ID3v1 tag" do
+        base = 0.036 * 3
+
+        [ ape, ape(header: true) ].each do |tag|
+          assert_in_delta base, mp3(frames(3) + tag), 0.0001
+          assert_in_delta base, mp3(frames(3) + tag + id3v1), 0.0001
+          assert_nil mp3(frames(3) + tag + "a".b), "bytes after"
+          assert_nil mp3(frames(3) + tag + id3v1(127)), "ID3v1 of 127"
+          assert_nil mp3(frames(3) + tag + id3v1(129)), "ID3v1 of 129"
+          assert_nil mp3(frames(3) + tag + frames(1000))
+        end
+      end
+
+      test "an APEv2 tag whose size does not match its extent, or that is too short, is refused" do
+        assert_nil mp3(frames(3) + ape(size: 60)), "footer size too small"
+        assert_nil mp3(frames(3) + ape(size: 90)), "footer size too large"
+        assert_nil mp3(frames(3) + ape(header: true, size: 60)), "header size too small"
+        assert_nil mp3(frames(3) + ape(header: true, size: 90)), "header size too large"
+        assert_nil mp3(frames(3) + ape_part(32, 1 << 31)), "footer announcing a header that is missing"
+        assert_nil mp3(frames(3) + "APETAGEX".b + ("a".b * 24)), "24 bytes"
+        assert_nil mp3(frames(3) + "a".b * 40 + "APETAGEX".b + ("a".b * 24)), "footer cut"
+      end
+
+      test "M2 — TAG or APETAGEX followed by frames the player would resynchronise on is refused" do
+        assert_nil mp3(frames(3) + "TAG".b + ("a".b * 125) + frames(1000))
+        assert_nil mp3(frames(3) + "APETAGEX".b + ("a".b * 24) + frames(1000))
+        assert_nil mp3(frames(3) + id3v1 + zeros(10))
       end
 
       test "a last frame cut by the end of the file is counted" do
@@ -147,8 +185,12 @@ module Entities
 
       def stts(*entries, count: entries.size) = box("stts", [ 0, count ].pack("N2") + entries.flatten.pack("N*"))
 
-      def track(timescale:, duration:, entries: nil, version: 0, count: nil)
-        stbl = entries ? box("stbl", stts(*entries, count: count || entries.size)) : "".b
+      # stsz (taille par défaut, nombre) ou stz2 (champ de 16 bits, nombre) : le nombre d'échantillons de la piste.
+      def sizes(samples, kind: "stsz") = box(kind, [ 0, kind == "stsz" ? 0 : 16, samples ].pack("N3"))
+
+      def track(timescale:, duration:, entries: nil, version: 0, count: nil, samples: nil, size_kind: "stsz")
+        samples ||= entries&.sum(&:first)
+        stbl = entries ? box("stbl", stts(*entries, count: count || entries.size) + (samples ? sizes(samples, kind: size_kind) : "".b)) : "".b
         box("trak", box("mdia", header_box("mdhd", timescale:, duration:, version:) + box("minf", stbl)))
       end
 
@@ -228,8 +270,26 @@ module Entities
         inflated = track(timescale: 1000, duration: 1000, entries: [ [ 1000, 3 ] ], count: 2**32 - 1)
         started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
 
-        assert_in_delta 3.0, mp4(file(movie(inflated))), 0.0001
+        assert_nil mp4(file(movie(inflated)))
         assert_operator Process.clock_gettime(Process::CLOCK_MONOTONIC) - started, :<, 1
+      end
+
+      test "M6 — an stts that does not cover the samples of its track (stsz or stz2), or has no stsz, is unreadable" do
+        assert_nil mp4(file(movie(track(timescale: 1000, duration: 1000, entries: [ [ 1, 10 ] ], samples: 500)))), "one sample for 500"
+        assert_nil mp4(file(movie(track(timescale: 1000, duration: 1000, entries: [ [ 600, 10 ] ], samples: 500)))), "600 for 500"
+        assert_nil mp4(file(movie(track(timescale: 1000, duration: 1000, entries: [ [ 1, 10 ] ], samples: 500, size_kind: "stz2"))))
+        assert_nil mp4(file(movie(box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1000) +
+                                                          box("minf", box("stbl", stts([ 5, 10 ])))))))), "stts without stsz"
+        assert_nil mp4(file(movie(track(timescale: 1000, duration: 1000, entries: [ [ 5, 10 ] ], count: 2)))), "count above the bytes"
+        assert_nil mp4(file(movie(track(timescale: 1000, duration: 1000, entries: [ [ 5, 10 ], [ 5, 10 ] ], count: 1)))), "count below the bytes"
+        assert_in_delta 0.1, mp4(file(movie(track(timescale: 1000, duration: 100, entries: [ [ 5, 10 ], [ 5, 10 ] ], size_kind: "stz2")))), 0.0001
+      end
+
+      test "an stsz box cut before its sample count is unreadable" do
+        short = box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1000) +
+                                        box("minf", box("stbl", stts([ 5, 10 ]) + box("stsz", zeros(8))))))
+
+        assert_nil mp4(file(movie(short)))
       end
 
       test "an stts box without its header is unreadable" do

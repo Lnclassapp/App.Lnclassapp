@@ -49,8 +49,8 @@ La durée d'un fichier se lit dans ses octets, et un fichier téléversé est un
 
 ### 4.2 Mesure
 
-- **MP3** : on saute les étiquettes ID3v2 (taille *syncsafe*) et le remplissage nul, puis on parcourt **toutes** les trames ; chaque trame donne ses échantillons et sa fréquence. L'en-tête Xing/Info/VBRI n'est jamais cru. La fin admise : la fin du fichier, des octets nuls, une étiquette `TAG` (ID3v1) ou `APETAGEX`. Tout autre octet entre deux trames, ou aucune trame : illisible.
-- **M4A** : on parcourt les boîtes de premier niveau jusqu'à `moov` ; la durée est le **maximum** de `mvhd`, de chaque `mdhd` et de la somme de chaque table `stts` (échantillons × durée, sur l'échelle de sa piste). Un fichier fragmenté (`moof` ou `mvex`), sans `moov`, avec une échelle de temps nulle ou une boîte de taille incohérente : illisible.
+- **MP3** : on saute les étiquettes ID3v2 (taille *syncsafe*) et le remplissage nul, puis on parcourt **toutes** les trames ; chaque trame donne ses échantillons et sa fréquence. L'en-tête Xing/Info/VBRI n'est jamais cru. La fin admise, et elle seule : la fin du fichier ; des octets nuls jusqu'au bout ; un ID3v1 (exactement 128 octets, commençant par `TAG`, finissant le fichier) ; une étiquette APEv2 dont l'étendue va jusqu'à la fin du fichier (pied `APETAGEX` de 32 octets dont la taille, petit-boutiste aux octets 12..15, inclut le pied mais pas l'en-tête optionnel de 32 octets ; ou en-tête `APETAGEX` + taille), éventuellement suivie d'un ID3v1. Un `TAG` ou un `APETAGEX` suivi d'autre chose (des trames qu'un lecteur rejouerait), tout autre octet entre deux trames, ou aucune trame : illisible.
+- **M4A** : on parcourt les boîtes de premier niveau jusqu'à `moov` ; la durée est le **maximum** de `mvhd`, de chaque `mdhd` et de la somme de chaque table `stts` (échantillons × durée, sur l'échelle de sa piste). La table `stts` doit couvrir la piste : la somme de ses `sample_count` égale celui de `stsz` (ou `stz2`) de la même piste, et le nombre d'entrées annoncé correspond exactement aux octets de la boîte ; sinon, ou sans `stsz`/`stz2`, illisible. Un fichier fragmenté (`moof` ou `mvex`), sans `moov`, avec une échelle de temps nulle ou une boîte de taille incohérente : illisible.
 
 ### 4.3 Téléchargement
 
@@ -61,11 +61,11 @@ La durée d'un fichier se lit dans ses octets, et un fichier téléversé est un
 | # | Menace | Parade | Test |
 |---|---|---|---|
 | M1 | Un MP3 annonce une durée courte dans son en-tête Xing et contient 60 s de trames | Le Xing n'est pas lu : on additionne les trames | `audio_duration_test` : Xing menteur |
-| M2 | Une trame valide, des octets inconnus, puis des trames que le lecteur resynchronise | Tout octet inconnu entre deux trames rend la durée illisible | `audio_duration_test` : octets entre trames |
-| M3 | Un M4A dont `mvhd` dit 1 s et dont la piste dure 60 s | Maximum de `mvhd`, `mdhd` et `stts` | `audio_duration_test` : `mvhd` menteur |
+| M2 | Une trame valide, des octets inconnus, puis des trames que le lecteur resynchronise | Tout octet inconnu entre deux trames rend la durée illisible ; `TAG`/`APETAGEX` n'est admis qu'en fin de fichier exacte (ID3v1 de 128 octets, APEv2 jusqu'au bout) | `audio_duration_test` : octets entre trames |
+| M3 | Un M4A dont `mvhd` dit 1 s et dont la piste dure 60 s | Maximum de `mvhd`, `mdhd` et `stts`, `stts` vérifiée contre `stsz`/`stz2` (un `stts` d'un échantillon sur 500 est illisible) | `audio_duration_test` : `mvhd` menteur |
 | M4 | Fragmenté : la durée réelle est dans des `moof` que l'en-tête ignore | Fragmenté = illisible | `audio_duration_test` : `mvex` |
 | M5 | Boucle infinie : boîte de taille 0 ou < 8, trame de longueur nulle | Toute boîte avance de 8 octets au moins ou rend illisible ; le débit « libre » est refusé (`AudioHeader`) ; une trame mesure au moins 24 octets | `audio_duration_test` : taille 3 |
-| M6 | Table `stts` qui annonce 2³² entrées | Le nombre d'entrées est borné par les octets de la boîte | `audio_duration_test` : `stts` gonflée |
+| M6 | Table `stts` qui annonce 2³² entrées | Le nombre d'entrées annoncé doit correspondre exactement aux octets de la boîte, sinon illisible | `audio_duration_test` : `stts` gonflée |
 | M7 | Mémoire, processeur | Poids vérifié avant toute lecture (1 Mo) ; parcours linéaire, ≤ 1 Mo / 24 o ≈ 44 000 trames | `message_input_test` : 1 Mo + 1 non lu |
 | M8 | Contournement du contrôle du navigateur | Le serveur mesure toujours | `authored_messages_controller_test` |
 | M9 | Téléchargement hors droit, ou mis en cache | Même use case et policy ; `private, no-store` gardé | `message_files_controller_test` |

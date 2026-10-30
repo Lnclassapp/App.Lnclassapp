@@ -18,6 +18,7 @@ module Communication
       render_card
 
       assert_select "p img.size-5.shrink-0.rounded-sm.object-cover[alt=''][width='20'][height='20'][src*='logo/lnclass']"
+      assert_select "p:has(img[src*='logo/lnclass'])", text: /Lnclass/
       assert_select "img[src*='lnclass/icon']", 0
     end
 

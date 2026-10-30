@@ -28,8 +28,14 @@ module Entities
         FRAME_HEADER_BYTES = 4
         ID3V2_HEADER_BYTES = 10
         ID3V2_FOOTER_FLAG = 0x10
-        # Fins admises après la dernière trame : ID3v1 et APE. Tout autre octet est illisible.
-        TRAILERS = [ "TAG".b, "APETAGEX".b ].freeze
+        # Fins admises après la dernière trame : des octets nuls, un ID3v1 (128 octets) et/ou une étiquette APEv2 qui va
+        # jusqu'à la fin du fichier (ou jusqu'à l'ID3v1). Tout autre octet est illisible.
+        ID3V1_BYTES = 128
+        APE_MARK = "APETAGEX".b
+        APE_PART_BYTES = 32
+        APE_SIZE_OFFSET = 12
+        APE_FLAGS_OFFSET = 20
+        APE_HEADER_FLAG = 31
         # [famille de version (1 : MPEG-1, 2 : MPEG-2 et 2,5), couche] → débits en kbit/s, indexés par les 4 bits de l'en-tête
         # (l'index 0, « libre », et 15, réservé, sont refusés avant la lecture).
         BITRATES = {
@@ -98,13 +104,35 @@ module Entities
           Frame.new(length:, seconds: samples.fdiv(hertz))
         end
 
-        # Ce qui suit la dernière trame : des octets nuls jusqu'au bout, ou une étiquette de fin.
+        # Ce qui suit la dernière trame : des octets nuls jusqu'au bout, ou [APEv2] puis [ID3v1], rien d'autre.
         def self.clean_end?(bytes, pos)
           rest = bytes.byteslice(pos..)
-          TRAILERS.any? { rest.start_with?(it) } || !rest.match?(NOT_NULL)
+          return true unless rest.match?(NOT_NULL)
+
+          rest = rest.byteslice(0, rest.bytesize - ID3V1_BYTES) if id3v1?(rest)
+          rest.empty? || ape_to_end?(rest)
         end
 
-        private_class_method :after_id3v2, :frame_at, :measure, :clean_end?
+        def self.id3v1?(rest)
+          rest.bytesize >= ID3V1_BYTES && rest.byteslice(-ID3V1_BYTES, 3) == "TAG".b
+        end
+
+        # rest est exactement une étiquette APEv2 : avec en-tête (il ouvre rest) ou sans (le pied la ferme). La taille
+        # (petit-boutiste, octets 12..15) inclut le pied mais pas l'en-tête optionnel de 32 octets.
+        def self.ape_to_end?(rest)
+          if rest.start_with?(APE_MARK)
+            size = rest.unpack1("V", offset: APE_SIZE_OFFSET)
+            size >= APE_PART_BYTES && rest.bytesize == APE_PART_BYTES + size
+          else
+            return false if rest.bytesize < APE_PART_BYTES
+
+            footer = rest.byteslice(-APE_PART_BYTES, APE_PART_BYTES)
+            footer.start_with?(APE_MARK) && !footer.unpack1("V", offset: APE_FLAGS_OFFSET).anybits?(1 << APE_HEADER_FLAG) &&
+              footer.unpack1("V", offset: APE_SIZE_OFFSET) == rest.bytesize
+          end
+        end
+
+        private_class_method :after_id3v2, :frame_at, :measure, :clean_end?, :id3v1?, :ape_to_end?
       end
 
       # MP4 : les boîtes de premier niveau, puis moov → mvhd, trak/mdia/mdhd, trak/mdia/minf/stbl/stts.
@@ -115,6 +143,7 @@ module Entities
         SIZE_64_BITS = 1
         ENTRY_BYTES = 8
         STTS_HEADER_BYTES = 8
+        SIZES_BYTES = 12
         HEADER_V0_BYTES = 20
         HEADER_V1_BYTES = 32
 
@@ -169,9 +198,19 @@ module Entities
 
           timescale, duration = header(bytes, *mdhd)
           seconds = [ duration.fdiv(timescale) ]
-          stts = descend(bytes, from, to, %w[mdia minf stbl stts])
-          seconds << (ticks(bytes, *stts).fdiv(timescale)) if stts
+          stbl = descend(bytes, from, to, %w[mdia minf stbl])
+          stts = stbl && descend(bytes, *stbl, %w[stts])
+          seconds << ticks(bytes, *stts, sample_count(bytes, *stbl)).fdiv(timescale) if stts
           seconds
+        end
+
+        # Le nombre d'échantillons de la piste : stsz ou stz2 (version et drapeaux, taille, nombre). Sans l'un des deux, la
+        # table stts n'est pas vérifiable : illisible.
+        def self.sample_count(bytes, from, to)
+          sizes = descend(bytes, from, to, %w[stsz]) || descend(bytes, from, to, %w[stz2])
+          throw :unreadable if sizes.nil? || sizes.last - sizes.first < SIZES_BYTES
+
+          bytes.unpack1("N", offset: sizes.first + 8)
         end
 
         # La première boîte du chemin (type par type), ou nil.
@@ -202,15 +241,19 @@ module Entities
           duration.fdiv(timescale)
         end
 
-        # La somme (échantillons × durée) de la table stts ; le nombre d'entrées annoncé est borné par les octets de la boîte.
-        def self.ticks(bytes, from, to)
+        # La somme (échantillons × durée) de la table stts. Le nombre d'entrées annoncé doit correspondre exactement aux octets
+        # de la boîte, et les échantillons comptés doivent être ceux de la piste (stsz) : sinon illisible.
+        def self.ticks(bytes, from, to, expected_samples)
           throw :unreadable if to - from < STTS_HEADER_BYTES
+          throw :unreadable unless bytes.unpack1("N", offset: from + 4) * ENTRY_BYTES == to - from - STTS_HEADER_BYTES
 
-          count = [ bytes.unpack1("N", offset: from + 4), (to - from - STTS_HEADER_BYTES) / ENTRY_BYTES ].min
-          bytes.byteslice(from + STTS_HEADER_BYTES, count * ENTRY_BYTES).unpack("N*").each_slice(2).sum { |samples, delta| samples * delta }
+          entries = bytes.byteslice(from + STTS_HEADER_BYTES, to - from - STTS_HEADER_BYTES).unpack("N*").each_slice(2).to_a
+          throw :unreadable unless entries.sum(&:first) == expected_samples
+
+          entries.sum { |samples, delta| samples * delta }
         end
 
-        private_class_method :each_box, :movie_seconds, :track_seconds, :descend, :header, :header_seconds, :ticks
+        private_class_method :each_box, :movie_seconds, :track_seconds, :descend, :header, :header_seconds, :ticks, :sample_count
       end
     end
   end

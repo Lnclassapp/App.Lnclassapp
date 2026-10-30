@@ -7,30 +7,38 @@ export default class extends Controller {
   static targets = ["input", "status"]
   static values = { max: Number, message: String }
 
+  connect() {
+    this.stale = false
+  }
+
   disconnect() {
-    this.release()
+    this.stale = true
   }
 
   check() {
-    this.release()
     this.clear()
     const file = this.inputTarget.files[0]
     if (!file) return
 
-    this.url = URL.createObjectURL(file)
+    // Chaque contrôle a sa propre URL d'objet, révoquée par ses seuls écouteurs : un contrôle périmé ne révoque pas la suivante.
+    const url = URL.createObjectURL(file)
     const player = document.createElement("audio")
+    const release = () => URL.revokeObjectURL(url)
     player.preload = "metadata"
-    player.addEventListener("loadedmetadata", () => this.measured(player, file))
-    player.addEventListener("error", () => this.release())
-    player.src = this.url
+    player.addEventListener("loadedmetadata", () => {
+      release()
+      this.measured(player, file)
+    })
+    player.addEventListener("error", release)
+    player.src = url
+    player.load()
   }
 
   measured(player, file) {
-    // Un autre fichier a été choisi entre-temps : cette mesure est périmée.
-    if (this.inputTarget.files[0] !== file) return
+    // Un autre fichier a été choisi entre-temps (ou le champ a quitté la page) : cette mesure est périmée.
+    if (this.stale || this.inputTarget.files[0] !== file) return
 
     const seconds = player.duration
-    this.release()
     if (!Number.isFinite(seconds) || seconds <= this.maxValue) return
 
     const shown = (Math.round(seconds * 10) / 10).toString().replace(".", ",")
@@ -43,10 +51,5 @@ export default class extends Controller {
   clear() {
     this.statusTarget.textContent = ""
     this.inputTarget.setCustomValidity("")
-  }
-
-  release() {
-    if (this.url) URL.revokeObjectURL(this.url)
-    this.url = null
   }
 }
