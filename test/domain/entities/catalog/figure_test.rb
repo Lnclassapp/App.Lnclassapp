@@ -12,8 +12,8 @@ module Entities
         assert_empty Figure.errors_for(raw)
       end
 
-      test "la liste des sortes est fermée : neuf sortes" do
-        assert_equal %w[coordinate_plane diagram geometry map number_line plate solid stat_chart timeline], FigureKinds::ALL.keys.sort
+      test "la liste des sortes est fermée : onze sortes" do
+        assert_equal %w[coordinate_plane diagram geometry map molecule number_line optics plate solid stat_chart timeline], FigureKinds::ALL.keys.sort
         assert_equal [ "kind", "figure_invalid", { param: "kind" } ], Figure.errors_for(raw(kind: "hologram")).first
       end
 
@@ -484,6 +484,183 @@ module Entities
         assert_equal %w[params.nodes params.edges], paths(diagram(nodes: "x", edges: 2))
         assert_equal %w[params.layout], paths(raw(kind: "diagram", params: { "layout" => "x", "nodes" => [ { "id" => "a", "label" => "A" } ] }))
         assert_equal %w[params.nodes[1]], paths(diagram(layout: "tree", nodes: [ { "id" => "a", "label" => "A" }, "b" ], edges: []))
+      end
+
+      LENS = { "mode" => "lens", "lens" => "convergent", "focal" => 4, "object_distance" => 12, "object_height" => 2 }.freeze
+      WATER = { "mode" => "custom",
+                "atoms" => [ { "id" => "o", "element" => "O", "x" => 6, "y" => 6 }, { "id" => "h1", "element" => "H", "x" => 3, "y" => 8 },
+                             { "id" => "h2", "element" => "H", "x" => 9, "y" => 8 } ],
+                "bonds" => [ [ "o", "h1", 1 ], [ "o", "h2", 1 ] ] }.freeze
+      def optics(**params) = raw(kind: "optics", params: LENS.merge(params.transform_keys(&:to_s)))
+      def eye(**params) = raw(kind: "optics", params: { "mode" => "eye", "defect" => "myopia" }.merge(params.transform_keys(&:to_s)))
+      def alkane(**params) = raw(kind: "molecule", params: { "mode" => "alkane", "carbons" => 3, "display" => "developed" }.merge(params.transform_keys(&:to_s)))
+      def custom(**params) = raw(kind: "molecule", params: WATER.merge(params.transform_keys(&:to_s)))
+      def atom(id, element, x = 0, y = 0) = { "id" => id, "element" => element, "x" => x, "y" => y }
+
+      test "optics : une figure bien formée de chaque mode est valide, avec ses curseurs" do
+        assert_empty Figure.errors_for(optics)
+        assert_empty Figure.errors_for(optics(lens: "divergent", focal: 0.5, object_distance: 60, object_height: 10))
+        assert_empty Figure.errors_for(eye)
+        assert_empty Figure.errors_for(eye(defect: "none"))
+        assert_empty Figure.errors_for(eye(defect: "hyperopia", correction: "convergent"))
+        assert_empty Figure.errors_for(eye(correction: "none"))
+        slider = ->(param, min, max) { { "param" => param, "min" => min, "max" => max, "step" => 1, "label" => "réglage" } }
+        controls = [ slider.("focal", 1, 20), slider.("object_distance", 1, 60), slider.("object_height", 1, 10) ]
+        assert_empty Figure.errors_for(optics.merge("controls" => controls))
+        assert_equal %w[focal object_distance object_height], FigureKinds.fetch("optics").adjustable
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(optics.merge("controls" => [ slider.("focal", 1, 21) ]))
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(eye.merge("controls" => [ slider.("focal", 1, 5) ]))
+      end
+
+      test "optics : le mode lens exige lens, focal, object_distance et object_height" do
+        assert_equal %w[params.mode], paths(raw(kind: "optics", params: {}))
+        assert_equal %w[params.lens params.focal params.object_distance params.object_height], paths(raw(kind: "optics", params: { "mode" => "lens" }))
+        %w[lens focal object_distance object_height].each do |name|
+          assert_equal [ [ "params.#{name}", "figure_invalid", { param: name } ] ], Figure.errors_for(raw(kind: "optics", params: LENS.except(name)))
+        end
+      end
+
+      test "optics : le mode eye exige defect ; correction n'existe qu'en mode eye" do
+        assert_equal [ [ "params.defect", "figure_invalid", { param: "defect" } ] ], Figure.errors_for(raw(kind: "optics", params: { "mode" => "eye" }))
+        assert_equal %w[params.correction], paths(optics(correction: "divergent"))
+        assert_equal %w[params.correction], paths(optics(correction: "none"))
+        assert_equal %w[params.correction], paths(eye(correction: "lens"))
+      end
+
+      test "optics : bornes et listes fermées" do
+        assert_equal %w[params.mode], paths(optics(mode: "prism"))
+        assert_equal %w[params.lens], paths(optics(lens: "plane"))
+        assert_equal %w[params.focal], paths(optics(focal: 0.4))
+        assert_equal %w[params.focal], paths(optics(focal: 21))
+        assert_equal %w[params.object_distance], paths(optics(object_distance: 61))
+        assert_equal %w[params.object_height], paths(optics(object_height: 10.5))
+        assert_equal %w[params.focal], paths(optics(focal: "4"))
+        assert_equal %w[params.defect], paths(eye(defect: "astigmatism"))
+        assert_equal %w[params.correction], paths(eye(correction: "plane"))
+        assert_equal %w[params.points], paths(optics(points: []))
+      end
+
+      test "optics : l'œil refuse les clés de la lentille" do
+        { "focal" => 4, "object_distance" => 12, "object_height" => 2, "lens" => "convergent" }.each do |name, value|
+          assert_equal [ [ "params.#{name}", "figure_invalid", { param: name } ] ], Figure.errors_for(eye(name => value)), name
+        end
+      end
+
+      test "molecule : un alcane et une molécule libre bien formés sont valides, carbons est réglable" do
+        assert_empty Figure.errors_for(alkane)
+        assert_empty Figure.errors_for(alkane(carbons: 10, display: "raw"))
+        assert_empty Figure.errors_for(custom)
+        assert_equal %w[carbons], FigureKinds.fetch("molecule").adjustable
+        slider = { "param" => "carbons", "min" => 1, "max" => 10, "step" => 1, "label" => "atomes de carbone" }
+        assert_empty Figure.errors_for(alkane.merge("controls" => [ slider ]))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(alkane.merge("controls" => [ slider.merge("max" => 11) ]))
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(custom.merge("controls" => [ slider ]))
+      end
+
+      test "molecule : un alcane exige carbons (entier de 1 à 10) et display" do
+        assert_equal %w[params.mode], paths(raw(kind: "molecule", params: {}))
+        assert_equal %w[params.carbons params.display], paths(raw(kind: "molecule", params: { "mode" => "alkane" }))
+        assert_equal [ [ "params.carbons", "figure_invalid", { param: "carbons" } ] ], Figure.errors_for(raw(kind: "molecule", params: { "mode" => "alkane", "display" => "raw" }))
+        assert_equal [ [ "params.display", "figure_invalid", { param: "display" } ] ], Figure.errors_for(raw(kind: "molecule", params: { "mode" => "alkane", "carbons" => 2 }))
+        assert_equal %w[params.carbons], paths(alkane(carbons: 0))
+        assert_equal %w[params.carbons], paths(alkane(carbons: 11))
+        assert_equal %w[params.carbons], paths(alkane(carbons: 2.5))
+        assert_equal %w[params.display], paths(alkane(display: "skeletal"))
+        assert_equal %w[params.mode], paths(alkane(mode: "ring"))
+      end
+
+      test "molecule : une molécule libre exige atoms et bonds" do
+        assert_equal %w[params.atoms params.bonds], paths(raw(kind: "molecule", params: { "mode" => "custom" }))
+        assert_equal %w[params.atoms], paths(custom(atoms: []))
+      end
+
+      test "molecule : bonds: [] est accepté (un atome seul), mais la clé reste obligatoire" do
+        assert_empty Figure.errors_for(custom(atoms: [ atom("fe", "Fe") ], bonds: []))
+        assert_equal %w[params.bonds], paths(raw(kind: "molecule", params: WATER.except("bonds")))
+      end
+
+      test "molecule : une liaison en double, dans un sens ou dans l'autre, est refusée" do
+        two = [ atom("a", "C"), atom("b", "C") ]
+        assert_equal %w[params.bonds[1]], paths(custom(atoms: two, bonds: [ [ "a", "b", 1 ], [ "a", "b", 1 ] ]))
+        assert_equal %w[params.bonds[1]], paths(custom(atoms: two, bonds: [ [ "a", "b", 1 ], [ "b", "a", 2 ] ]))
+      end
+
+      test "molecule : les clés d'un autre mode sont refusées" do
+        assert_equal %w[params.atoms params.bonds], paths(alkane(atoms: [], bonds: []))
+        assert_equal %w[params.carbons params.display], paths(custom(carbons: 3, display: "raw"))
+      end
+
+      test "molecule : 50 000 atomes et liaisons sont refusés vite, sans calcul quadratique" do
+        atoms = Array.new(50_000) { atom("a#{it}", "Fe") }
+        bonds = Array.new(50_000) { [ "a0", "a1", 1 ] }
+        errors = nil
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        errors = Figure.errors_for(custom(atoms:, bonds:))
+        elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
+
+        assert_operator elapsed, :<, 0.5
+        assert_includes errors.map(&:first), "params.atoms"
+        assert_includes errors.map(&:first), "params.bonds"
+      end
+
+      test "molecule : le pas, le minimum et le maximum du curseur carbons sont des entiers" do
+        slider = { "param" => "carbons", "min" => 1, "max" => 10, "step" => 1, "label" => "atomes de carbone" }
+        assert_equal [ [ "controls[0].step", "figure_invalid" ] ], reasons(alkane.merge("controls" => [ slider.merge("step" => 0.5) ]))
+        assert_equal [ [ "controls[0].min", "figure_invalid" ] ], reasons(alkane.merge("controls" => [ slider.merge("min" => 1.5) ]))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(alkane.merge("controls" => [ slider.merge("max" => 9.5) ]))
+      end
+
+      test "molecule : identifiants uniques, élément connu, position entière sur la grille" do
+        pair = [ [ "h", "g", 1 ] ]
+        others = [ atom("h", "H"), atom("g", "H") ]
+        assert_equal %w[params.atoms[2].id], paths(custom(atoms: [ atom("h", "H"), atom("g", "H"), atom("h", "H") ], bonds: pair))
+        assert_equal %w[params.atoms[0].id], paths(custom(atoms: [ atom("", "O") ] + others, bonds: pair))
+        assert_equal %w[params.atoms[0].id], paths(custom(atoms: [ atom(4, "O") ] + others, bonds: pair))
+        assert_equal %w[params.atoms[0].element], paths(custom(atoms: [ atom("x", "Xe") ] + others, bonds: pair))
+        assert_empty Figure.errors_for(custom(atoms: [ atom("fe", "Fe"), atom("na", "Na") ], bonds: [ [ "fe", "na", 3 ] ]))
+        assert_equal %w[params.atoms[0].x], paths(custom(atoms: [ atom("o", "O", 13, 0) ] + others, bonds: pair))
+        assert_equal %w[params.atoms[0].y], paths(custom(atoms: [ atom("o", "O", 0, 2.5) ] + others, bonds: pair))
+        assert_equal %w[params.atoms[0].x], paths(custom(atoms: [ atom("o", "O", 1.5, 0) ] + others, bonds: pair))
+        assert_equal %w[params.atoms[0].x], paths(custom(atoms: [ { "id" => "o", "element" => "O", "y" => 1 } ] + others, bonds: pair))
+        assert_equal %w[params.atoms[0]], paths(custom(atoms: [ "o" ] + others, bonds: pair))
+      end
+
+      test "molecule : une liaison relie deux atomes existants et distincts, d'ordre 1 à 3" do
+        two = [ atom("a", "C"), atom("b", "C") ]
+        assert_equal %w[params.bonds[0][1]], paths(custom(atoms: two, bonds: [ [ "a", "z", 1 ] ]))
+        assert_equal %w[params.bonds[0][0]], paths(custom(atoms: two, bonds: [ [ "z", "b", 1 ] ]))
+        assert_equal %w[params.bonds[0][0] params.bonds[0][1]], paths(custom(atoms: two, bonds: [ [ "y", "z", 1 ] ]))
+        assert_equal %w[params.bonds[0][1]], paths(custom(atoms: two, bonds: [ [ "a", "a", 1 ] ]))
+        assert_equal %w[params.bonds[0][2]], paths(custom(atoms: two, bonds: [ [ "a", "b", 4 ] ]))
+        assert_equal %w[params.bonds[0][2]], paths(custom(atoms: two, bonds: [ [ "a", "b", 0 ] ]))
+        assert_equal %w[params.bonds[0][2]], paths(custom(atoms: two, bonds: [ [ "a", "b", 1.5 ] ]))
+        assert_equal %w[params.bonds[0]], paths(custom(atoms: two, bonds: [ "ab" ]))
+        assert_equal %w[params.bonds[0]], paths(custom(atoms: two, bonds: [ [ "a", "b" ] ]))
+        assert_equal %w[params.bonds[0]], paths(custom(atoms: two, bonds: [ [ "a", "b", 1, 1 ] ]))
+        assert_equal [ [ "params.bonds[0][1]", "figure_invalid", { param: "bonds[0][1]" } ] ], Figure.errors_for(custom(atoms: two, bonds: [ [ "a", "z", 1 ] ]))
+        assert_empty Figure.errors_for(custom(atoms: two, bonds: [ [ "a", "b", 3 ] ]))
+      end
+
+      test "molecule : la valence de C 4, H 1, O 2, N 3, Cl 1 est respectée (Fe et Na non contrôlés)" do
+        around = ->(count, element) { [ atom("x", element) ] + Array.new(count) { atom("h#{it}", "H") } }
+        links = ->(count) { Array.new(count) { [ "x", "h#{it}", 1 ] } }
+        { "C" => 4, "O" => 2, "N" => 3, "Cl" => 1 }.each do |element, valence|
+          assert_empty Figure.errors_for(custom(atoms: around.(valence, element), bonds: links.(valence))), element
+          assert_equal %w[params.atoms[0]], paths(custom(atoms: around.(valence + 1, element), bonds: links.(valence + 1))), element
+        end
+        assert_equal %w[params.atoms[0] params.atoms[1]], paths(custom(atoms: [ atom("a", "O"), atom("h", "H") ], bonds: [ [ "a", "h", 3 ] ]))
+        assert_empty Figure.errors_for(custom(atoms: [ atom("a", "C"), atom("b", "C") ], bonds: [ [ "a", "b", 3 ] ]))
+        assert_equal [ [ "params.atoms[1]", "figure_invalid", { param: "atoms[1]" } ] ], Figure.errors_for(custom(atoms: [ atom("a", "O"), atom("h", "H") ], bonds: [ [ "a", "h", 2 ] ]))
+        assert_empty Figure.errors_for(custom(atoms: around.(6, "Fe"), bonds: links.(6)))
+        assert_empty Figure.errors_for(custom(atoms: around.(3, "Na"), bonds: links.(3)))
+      end
+
+      test "molecule : plus de 20 atomes ou 24 liaisons, listes qui n'en sont pas, ne lèvent pas" do
+        many = Array.new(21) { atom("a#{it}", "Fe") }
+        assert_equal %w[params.atoms], paths(custom(atoms: many, bonds: [ [ "a0", "a1", 1 ] ]))
+        assert_equal %w[params.bonds], paths(custom(atoms: [ atom("fe", "Fe"), atom("na", "Na") ], bonds: Array.new(25) { [ "fe", "na", 1 ] }))
+        assert_equal %w[params.atoms params.bonds], paths(custom(atoms: "x", bonds: {}))
+        assert_equal %w[params.atoms], paths(custom(atoms: [], bonds: [ [ "o", "h1", 1 ] ]))
       end
 
       test "from_raw construit la figure" do

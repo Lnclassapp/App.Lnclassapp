@@ -1,9 +1,9 @@
 // ⚡ FRONT · figure_controller — une figure paramétrée de la leçon : charge le module de sa sorte, dessine, crée les curseurs
-// Rôle : liste blanche des 9 sortes ; `lib/figures/<kind>` chargé par import(), à la demande (rien dans le JS commun) ; curseurs accessibles ; sans JavaScript, ou en cas d'erreur, la description reste affichée
+// Rôle : liste blanche des 11 sortes ; `lib/figures/<kind>` chargé par import(), à la demande (rien dans le JS commun) ; curseurs accessibles ; sans JavaScript, ou en cas d'erreur, la description reste affichée
 // ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2, menace), XXXX-figures-des-matieres-de-3eme (§4.2), 0114 (budget du point d'entrée commun) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3, §3.6)
 import { Controller } from "@hotwired/stimulus"
 
-const KINDS = ["geometry", "coordinate_plane", "number_line", "stat_chart", "solid", "timeline", "map", "diagram", "plate"]
+const KINDS = ["geometry", "coordinate_plane", "number_line", "stat_chart", "solid", "timeline", "map", "diagram", "plate", "optics", "molecule"]
 // Les seules clés numériques de premier niveau qu'un curseur peut régler, par sorte (ADR §4.2) : les clés `adjustable` de FigureKinds.
 const RANGE_PARAMS = {
   geometry: [],
@@ -14,7 +14,9 @@ const RANGE_PARAMS = {
   timeline: ["start", "end"],
   map: [],
   diagram: [],
-  plate: []
+  plate: [],
+  optics: ["focal", "object_distance", "object_height"],
+  molecule: ["carbons"]
 }
 const MAX_CONTROLS = 4
 
@@ -44,7 +46,7 @@ export default class extends Controller {
     try {
       this.values = { ...this.paramsValue }
       // Un module peut charger ses données (fond de carte) par import() avant de dessiner : on attend, puis on revérifie le jeton.
-      const figure = await module.create(this.canvasTarget, this.values, { announce: (text) => this.announce(text), controls: this.controlsValue })
+      const figure = await module.create(this.canvasTarget, this.values, { announce: (text) => this.remember(text), controls: this.controlsValue })
       if (run !== this.generation) return figure?.destroy?.()
 
       this.figure = figure
@@ -75,6 +77,7 @@ export default class extends Controller {
     this.controlsTarget.replaceChildren()
     this.live?.remove()
     this.live = null
+    this.sliding = false
     this.fallbackTarget.classList.remove("sr-only")
   }
 
@@ -137,18 +140,31 @@ export default class extends Controller {
     input.addEventListener("input", () => {
       show()
       this.values = { ...this.values, [param]: Number(input.value) }
+      this.spoken = null
+      this.sliding = true
       try {
         this.figure.redraw(this.values)
       } catch (error) {
         this.fail(error)
       }
     })
-    input.addEventListener("change", () => this.announce(show()))
+    // Au relâchement, la mesure que la figure vient de dire l'emporte sur le libellé du curseur ; sans mesure, on dit le libellé.
+    input.addEventListener("change", () => {
+      this.sliding = false
+      this.announce(this.spoken ?? show())
+    })
     wrapper.append(caption, input)
     return wrapper
   }
 
+  // Ce que la figure dit d'elle-même (module) : retenu pour le relâchement du curseur ; hors geste de curseur (poignée déplacée), dit tout de suite.
+  remember(text) {
+    this.spoken = text
+    if (!this.sliding && this.live) this.live.textContent = text
+  }
+
   announce(text) {
+    this.spoken = text
     if (this.live) this.live.textContent = text
   }
 }

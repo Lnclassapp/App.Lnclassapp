@@ -47,11 +47,14 @@ module Entities
       def self.required_errors(kind, params)
         return [] unless params.is_a?(Hash)
 
-        missing = kind.required.call(params).reject { filled?(params[it]) }
+        missing = kind.required.call(params).reject { filled?(params[it]) || (EMPTY_LIST_OK.include?(it) && params[it].is_a?(Array)) }
         return missing.map { violation("params.#{it}", it) } if missing.any?
 
         send(:"#{kind.name}_errors", params)
       end
+
+      # Des paramètres obligatoires qui peuvent être une liste vide (molecule.js : un atome seul n'a aucune liaison).
+      EMPTY_LIST_OK = %w[bonds].freeze
 
       def self.filled?(value) = value.is_a?(Array) ? value.any? : !value.nil?
 
@@ -279,6 +282,84 @@ module Entities
         parents[seen.last].nil?
       end
 
+      # optics.js : la correction n'existe qu'en mode œil (le mode et les paramètres exigés sont déjà contrôlés par `required`).
+      def self.optics_errors(params)
+        return foreign_errors(params, OPTICS_LENS_KEYS) if params["mode"] == "eye"
+
+        params["correction"].nil? ? [] : [ violation("params.correction", "correction") ]
+      end
+
+      OPTICS_LENS_KEYS = %w[focal object_distance object_height lens].freeze
+      MOLECULE_ALKANE_KEYS = %w[carbons display].freeze
+      MOLECULE_CUSTOM_KEYS = %w[atoms bonds].freeze
+
+      # Les clés d'un autre mode n'ont aucun effet : on les refuse plutôt que de les laisser traîner.
+      def self.foreign_errors(params, keys) = keys.select { params.key?(it) }.map { violation("params.#{it}", it) }
+
+      # molecule.js : un alcane a un nombre entier de carbones ; un dessin libre a des atomes uniques sur la grille et des liaisons valides.
+      # Au-delà des bornes de listes, params_errors a déjà refusé : on ne calcule rien de plus (pas de coût quadratique sur une liste énorme).
+      def self.molecule_errors(params)
+        if params["mode"] == "alkane"
+          errors = params["carbons"].is_a?(Integer) ? [] : [ violation("params.carbons", "carbons") ]
+          return errors + foreign_errors(params, MOLECULE_CUSTOM_KEYS)
+        end
+
+        return [] unless params["mode"] == "custom"
+
+        atoms = list_of(params, "atoms")
+        bonds = list_of(params, "bonds")
+        limits = FigureKinds.fetch("molecule").params
+        return [] if atoms.size > limits["atoms"].max || bonds.size > limits["bonds"].max
+
+        firsts = {}
+        atoms.each_with_index { |atom, index| firsts[atom["id"]] ||= index if atom.is_a?(Hash) }
+        errors = atoms.each_with_index.flat_map { |atom, index| atom_errors(atom, index, firsts) }
+        ids = firsts.keys.to_set
+        seen = Set.new
+        errors.concat(bonds.each_with_index.flat_map { |bond, index| bond_errors(bond, index, ids, seen) })
+        errors.concat(valence_errors(atoms, bonds)) if errors.empty?
+        errors.concat(foreign_errors(params, MOLECULE_ALKANE_KEYS))
+      end
+
+      def self.atom_errors(atom, index, firsts)
+        path = "params.atoms[#{index}]"
+        return [ violation(path, "atoms[#{index}]") ] unless atom.is_a?(Hash)
+
+        errors = []
+        errors << violation("#{path}.id", "atoms[#{index}].id") unless text?(atom["id"]) && firsts[atom["id"]] == index
+        errors << violation("#{path}.element", "atoms[#{index}].element") unless FigureKinds::MOLECULE_ELEMENTS.include?(atom["element"])
+        %w[x y].each { |axis| errors << violation("#{path}.#{axis}", "atoms[#{index}].#{axis}") unless atom[axis].is_a?(Integer) && FigureKinds::MOLECULE_GRID.cover?(atom[axis]) }
+        errors
+      end
+
+      # `seen` : les paires d'atomes déjà reliées (dans un sens ou dans l'autre) ; une seconde liaison entre les mêmes atomes est refusée.
+      def self.bond_errors(bond, index, ids, seen)
+        path = "params.bonds[#{index}]"
+        return [ violation(path, "bonds[#{index}]") ] unless bond.is_a?(Array) && bond.size == 3
+
+        errors = (0..1).reject { ids.include?(bond[it]) }.map { violation("#{path}[#{it}]", "bonds[#{index}][#{it}]") }
+        if errors.empty?
+          if bond[0] == bond[1] then errors << violation("#{path}[1]", "bonds[#{index}][1]")
+          elsif !seen.add?(Set[bond[0], bond[1]]) then errors << violation(path, "bonds[#{index}]")
+          end
+        end
+        errors << violation("#{path}[2]", "bonds[#{index}][2]") unless bond[2].is_a?(Integer) && FigureKinds::BOND_ORDERS.cover?(bond[2])
+        errors
+      end
+
+      # La somme des ordres des liaisons d'un atome ne dépasse pas sa valence (Fe et Na ne sont pas contrôlés).
+      def self.valence_errors(atoms, bonds)
+        used = Hash.new(0)
+        bonds.each do |a, b, order|
+          used[a] += order
+          used[b] += order
+        end
+        atoms.each_with_index.filter_map do |atom, index|
+          max = FigureKinds::MOLECULE_VALENCE[atom["element"]]
+          violation("params.atoms[#{index}]", "atoms[#{index}]") if max && used[atom["id"]] > max
+        end
+      end
+
       def self.list_of(params, name) = params[name].is_a?(Array) ? params[name] : []
       def self.text?(value) = value.is_a?(String) && !value.strip.empty?
       def self.within?(value, span) = number?(value) && span.cover?(value)
@@ -335,14 +416,17 @@ module Entities
         errors = []
         errors << violation("#{path}.param", "#{path}.param") unless control["param"].is_a?(String) && FigureKinds::PARAM_PATTERN.match?(control["param"]) && adjustable?(raw, control["param"])
         range = adjusted_range(raw, control["param"])
-        errors << violation("#{path}.min", "#{path}.min") unless number?(min) && bound.cover?(min) && (range.nil? || range.cover?(min))
-        errors << violation("#{path}.max", "#{path}.max") unless number?(max) && bound.cover?(max) && (!number?(min) || max > min) && (range.nil? || range.cover?(max))
-        errors << violation("#{path}.step", "#{path}.step") unless number?(step) && step.positive? && (!number?(min) || !number?(max) || max <= min || step <= max - min)
+        errors << violation("#{path}.min", "#{path}.min") unless number?(min) && whole?(control, min) && bound.cover?(min) && (range.nil? || range.cover?(min))
+        errors << violation("#{path}.max", "#{path}.max") unless number?(max) && whole?(control, max) && bound.cover?(max) && (!number?(min) || max > min) && (range.nil? || range.cover?(max))
+        errors << violation("#{path}.step", "#{path}.step") unless number?(step) && whole?(control, step) && step.positive? && (!number?(min) || !number?(max) || max <= min || step <= max - min)
         label = control["label"]
         errors << violation("#{path}.label", "#{path}.label") unless label.is_a?(String) && (1..FigureKinds::LABEL_MAX).cover?(label.length)
         errors.concat(timeline_control_errors(control, path, raw)) if errors.empty?
         errors
       end
+
+      # Le curseur du nombre de carbones n'a que des valeurs entières (molecule.js refuse un nombre à virgule).
+      def self.whole?(control, value) = control["param"] != "carbons" || value.is_a?(Integer)
 
       # Frise : aux extrêmes du curseur, end reste après start et les graduations restent au plus MAX_TICKS.
       def self.timeline_control_errors(control, path, raw)

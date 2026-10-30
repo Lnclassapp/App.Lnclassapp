@@ -44,7 +44,7 @@ module Entities
         "world" => { areas: WORLD_AREAS, places: WORLD_PLACES }.freeze
       }.freeze
 
-      # Parties de chaque planche de SVT (PRD contenus-3e-svt §5), dans l'ordre de lib/figures/plates/<planche>.js (test de parité).
+      # Parties de chaque planche : SVT (PRD contenus-3e-svt §5) puis PC (PRD contenus-3e-physique-chimie §4), dans l'ordre de lib/figures/plates/<planche>.js (test de parité).
       PLATES = {
         "digestive_system" => %w[mouth salivary_glands oesophagus stomach liver gallbladder pancreas small_intestine large_intestine rectum anus].freeze,
         "blood_smear" => %w[red_blood_cell neutrophil lymphocyte monocyte platelet plasma].freeze,
@@ -54,7 +54,10 @@ module Entities
         "female_reproductive_system" => %w[ovary oviduct infundibulum uterus endometrium cervix vagina].freeze,
         "hiv_virus" => %w[envelope gp120 gp41 matrix capsid rna reverse_transcriptase].freeze,
         "soil_profile" => %w[litter humus_horizon accumulation_horizon weathered_rock bedrock roots].freeze,
-        "root_hairs" => %w[collar main_root lateral_root root_hair_zone elongation_zone root_cap root_hair soil_particle soil_water].freeze
+        "root_hairs" => %w[collar main_root lateral_root root_hair_zone elongation_zone root_cap root_hair soil_particle soil_water].freeze,
+        "dynamometer" => %w[ring tube spring scale pointer hook load].freeze,
+        "electrolyser" => %w[generator vessel electrolyte anode cathode oxygen_tube hydrogen_tube oxygen hydrogen].freeze,
+        "eudiometer" => %w[tube scale electrodes spark gas_mixture water trough].freeze
       }.freeze
 
       # → Array<String> ; vide pour un fond inconnu.

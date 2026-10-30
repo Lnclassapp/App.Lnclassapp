@@ -54,14 +54,20 @@ module Entities
         assert_equal "[]", output.strip
       end
 
-      test "huit planches de SVT, leurs parties uniques et figées, et la sorte plate ne propose que celles-là" do
-        assert_equal %w[blood_smear digestive_system double_circulation female_reproductive_system heart hiv_virus root_hairs soil_profile], FigureCatalogs::PLATES.keys.sort
+      test "onze planches (huit de SVT, trois de PC), leurs parties uniques et figées, et la sorte plate ne propose que celles-là" do
+        assert_equal %w[blood_smear digestive_system double_circulation dynamometer electrolyser eudiometer female_reproductive_system heart hiv_virus root_hairs soil_profile], FigureCatalogs::PLATES.keys.sort
         assert_equal FigureCatalogs::PLATES.keys.sort, FigureKinds.fetch("plate").params["plate"].values.sort
-        assert_equal [ 11, 6, 12, 8, 7, 7, 6, 9 ], FigureCatalogs::PLATES.values_at(*%w[digestive_system blood_smear heart double_circulation female_reproductive_system hiv_virus soil_profile root_hairs]).map(&:size)
+        assert_equal [ 11, 6, 12, 8, 7, 7, 6, 9, 7, 9, 7 ], FigureCatalogs::PLATES.values_at(*%w[digestive_system blood_smear heart double_circulation female_reproductive_system hiv_virus soil_profile root_hairs dynamometer electrolyser eudiometer]).map(&:size)
         FigureCatalogs::PLATES.each_value do |parts|
           assert_equal parts.uniq, parts
           assert_predicate parts, :frozen?
         end
+      end
+
+      test "les parties des planches de PC, dans l'ordre du dessin" do
+        assert_equal %w[ring tube spring scale pointer hook load], FigureCatalogs.parts("dynamometer")
+        assert_equal %w[generator vessel electrolyte anode cathode oxygen_tube hydrogen_tube oxygen hydrogen], FigureCatalogs.parts("electrolyser")
+        assert_equal %w[tube scale electrodes spark gas_mixture water trough], FigureCatalogs.parts("eudiometer")
       end
 
       test "les parties d'une planche, vides pour une planche inconnue" do

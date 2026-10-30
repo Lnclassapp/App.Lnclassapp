@@ -1,884 +1,1050 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Équilibre d'un solide soumis à deux forces",
       "subtitle": "Leçon 3 — progression DPFC 2026-2027",
       "level_name": "3ème",
       "material_name": "Physique-Chimie",
-      "essentials": [
+      "theme": "burgundy",
+      "figures": [
         {
-          "name": "Les trois conditions d'équilibre de deux forces",
-          "subtitle": "Même droite d'action, même valeur, sens contraires",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître qu'un solide immobile soumis à deux forces est en équilibre.</li><li>Énoncer les trois conditions que les deux forces vérifient.</li><li>Trouver une force inconnue à partir de l'autre.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le tir à la corde de la fête du village.</strong> Un ruban rouge est noué au milieu de la corde. Il ne bouge pas : l'équipe de gauche tire vers la gauche, l'équipe de droite tire vers la droite, et elles tirent aussi fort l'une que l'autre. Les deux équipes tirent le long de la même corde bien tendue. Ici, on regarde seulement la corde, dont on néglige le poids.</p><p><strong>Le pont.</strong> La corde est le <strong>solide</strong>. Chaque équipe exerce sur elle une <strong>force</strong>. « Tirer le long de la même corde », c'est avoir la <strong>même droite d'action</strong> (la droite qui porte le vecteur force). « Tirer aussi fort », c'est avoir la <strong>même valeur</strong> (la même intensité en newtons). « L'une à gauche, l'autre à droite », ce sont des <strong>sens contraires</strong>. Le ruban qui reste immobile, c'est l'<strong>équilibre</strong>.</p><p><strong>La limite de l'image.</strong> Dans le vrai jeu, une équipe finit par l'emporter : une corde qui part du repos est tirée par deux forces qui ne sont plus égales. De plus, le solide étudié est la corde, pas les enfants.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Un solide est en <strong>équilibre</strong> quand il reste immobile. Si un solide soumis à deux forces $\\vec{F_1}$ et $\\vec{F_2}$ est en équilibre, alors les deux forces ont :</p><ul><li>la <strong>même droite d'action</strong> ;</li><li>la <strong>même valeur</strong> : $F_1 = F_2$ ;</li><li>des <strong>sens contraires</strong>.</li></ul><p>Ces trois conditions vont ensemble : si une seule manque, le solide n'est plus en équilibre.</p></blockquote><h2>Exemple résolu</h2><p>La corde est immobile. L'équipe de gauche exerce une force de $900\\ \\text{N}$ vers la gauche, le long de la corde. Quelle force exerce l'équipe de droite ?</p><ol><li>La corde est immobile et soumise à deux forces : elle est <strong>en équilibre</strong>.</li><li>Les deux forces ont donc la même droite d'action : c'est la corde.</li><li>Elles ont la même valeur : $F_2 = F_1 = 900\\ \\text{N}$.</li><li>Elles ont des sens contraires : l'équipe de droite tire <strong>vers la droite</strong>.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'il suffit que les deux forces aient la même valeur. Deux enfants qui tirent chacun $100\\ \\text{N}$ sur un bâton, en sens contraires, mais sur deux droites parallèles différentes, font tourner le bâton. Deux forces égales qui tirent dans le même sens ne s'équilibrent pas non plus.</p><p>Vérifie toujours les trois conditions, l'une après l'autre.</p><h2>En une phrase</h2><p>Un solide immobile soumis à deux forces est en équilibre : les deux forces ont la même droite d'action, la même valeur et des sens contraires.</p>",
-          "exercises": [
+          "key": "deux-forces-opposees",
+          "kind": "coordinate_plane",
+          "description": "Un plan quadrillé de 0 à 10 en abscisse et de 0 à 6 en ordonnée. Un solide est représenté par le point G(5 ; 3). Deux flèches partent de G : la force F1 va vers la droite et la force F2 vers la gauche. Elles sont portées par la même droite horizontale et ont la même longueur : 3 carreaux, à l'échelle de 1 carreau pour 1 N, soit 3 N chacune.",
+          "params": {
+            "xmin": 0,
+            "xmax": 10,
+            "ymin": 0,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "G",
+                "x": 5,
+                "y": 3
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F1",
+                "dx": 3,
+                "dy": 0,
+                "ox": 5,
+                "oy": 3
+              },
+              {
+                "label": "F2",
+                "dx": -3,
+                "dy": 0,
+                "ox": 5,
+                "oy": 3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "forces-inegales",
+          "kind": "coordinate_plane",
+          "description": "Un plan quadrillé de 0 à 10 en abscisse et de 0 à 6 en ordonnée. Un solide est représenté par le point G(5 ; 3). Deux flèches partent de G sur la même droite horizontale : la force F1 vers la droite mesure 4 carreaux (4 N) et la force F2 vers la gauche mesure 2 carreaux (2 N), à l'échelle de 1 carreau pour 1 N. Les longueurs sont différentes.",
+          "params": {
+            "xmin": 0,
+            "xmax": 10,
+            "ymin": 0,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "G",
+                "x": 5,
+                "y": 3
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F1",
+                "dx": 4,
+                "dy": 0,
+                "ox": 5,
+                "oy": 3
+              },
+              {
+                "label": "F2",
+                "dx": -2,
+                "dy": 0,
+                "ox": 5,
+                "oy": 3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lampe-suspendue",
+          "kind": "coordinate_plane",
+          "description": "Un plan quadrillé de 0 à 6 en abscisse et de 0 à 6 en ordonnée. Une lampe de 2 kg, suspendue à un fil, est représentée par son centre G(3 ; 3). Deux flèches verticales partent de G : le poids P vers le bas et la tension T du fil vers le haut. Chacune mesure 2 carreaux, à l'échelle de 1 carreau pour 10 N, soit 20 N.",
+          "params": {
+            "xmin": 0,
+            "xmax": 6,
+            "ymin": 0,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "G",
+                "x": 3,
+                "y": 3
+              }
+            ],
+            "vectors": [
+              {
+                "label": "T",
+                "dx": 0,
+                "dy": 2,
+                "ox": 3,
+                "oy": 3
+              },
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -2,
+                "ox": 3,
+                "oy": 3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "sac-pose",
+          "kind": "coordinate_plane",
+          "description": "Un plan quadrillé de 0 à 6 en abscisse et de 0 à 8 en ordonnée. Un sac de 3 kg, posé sur une table, est représenté par son centre G(3 ; 4). Deux flèches verticales partent de G : le poids P vers le bas et la réaction R de la table vers le haut. Chacune mesure 3 carreaux, à l'échelle de 1 carreau pour 10 N, soit 30 N.",
+          "params": {
+            "xmin": 0,
+            "xmax": 6,
+            "ymin": 0,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "G",
+                "x": 3,
+                "y": 4
+              }
+            ],
+            "vectors": [
+              {
+                "label": "R",
+                "dx": 0,
+                "dy": 3,
+                "ox": 3,
+                "oy": 4
+              },
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -3,
+                "ox": 3,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "regime-bananes",
+          "kind": "coordinate_plane",
+          "description": "Un plan quadrillé de 0 à 6 en abscisse et de 0 à 12 en ordonnée. Un régime de bananes de 12 kg, accroché à un peson, est représenté par son centre G(3 ; 6). Deux flèches verticales partent de G : le poids P vers le bas et la tension T du crochet vers le haut. Chacune mesure 6 carreaux, à l'échelle de 1 carreau pour 20 N, soit 120 N.",
+          "params": {
+            "xmin": 0,
+            "xmax": 6,
+            "ymin": 0,
+            "ymax": 12,
+            "points": [
+              {
+                "id": "G",
+                "x": 3,
+                "y": 6
+              }
+            ],
+            "vectors": [
+              {
+                "label": "T",
+                "dx": 0,
+                "dy": 6,
+                "ox": 3,
+                "oy": 6
+              },
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -6,
+                "ox": 3,
+                "oy": 6
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les conditions d'équilibre de deux forces",
+          "remember": "Un solide est en **équilibre** quand il reste immobile. Un solide soumis à **deux forces** $\\vec{F_1}$ et $\\vec{F_2}$ est en équilibre quand ces deux forces ont : la **même droite d'action**, des **sens contraires** et la **même intensité**, $F_1 = F_2$. On écrit aussi $\\vec{F_1} + \\vec{F_2} = \\vec{0}$ : les effets des deux forces se compensent. Il faut les **trois** conditions ensemble : si une seule manque, le solide n'est pas en équilibre. L'intensité d'une force se mesure en newtons (N) avec un dynamomètre.",
+          "method": [
+            "Repérer les deux forces exercées sur le solide et lire leurs caractéristiques : droite d'action, sens, intensité.",
+            "Comparer les droites d'action : sont-elles confondues, c'est-à-dire la même droite ?",
+            "Comparer les sens : sont-ils contraires ?",
+            "Comparer les intensités : sont-elles égales, avec la même unité ?",
+            "Conclure : le solide est en équilibre si les trois conditions sont vérifiées, sinon il ne l'est pas."
+          ],
+          "example": {
+            "statement": "Un sac est tiré par deux cordes horizontales. La corde de droite exerce une force $\\vec{F_1}$ de 30 N vers la droite ; la corde de gauche exerce une force $\\vec{F_2}$ de 30 N vers la gauche. Les deux forces sont portées par la même droite horizontale. Le sac est-il en équilibre ?",
+            "steps": [
+              "Repérer : $\\vec{F_1}$ vaut 30 N vers la droite, $\\vec{F_2}$ vaut 30 N vers la gauche, toutes deux sur la même droite horizontale.",
+              "Comparer les droites d'action : c'est la même droite horizontale. Condition vérifiée.",
+              "Comparer les sens : droite et gauche sont des sens contraires. Condition vérifiée.",
+              "Comparer les intensités : $F_1 = 30$ N et $F_2 = 30$ N, donc $F_1 = F_2$. Condition vérifiée.",
+              "Conclure : les trois conditions sont vérifiées, donc le sac est en équilibre."
+            ]
+          },
+          "pitfall": "Ne crois pas que deux forces de même intensité suffisent. Contre-exemple : deux forces de 5 N qui tirent toutes les deux vers la droite ont la même intensité, mais pas des sens contraires : elles s'ajoutent (10 N) et le solide se met en mouvement. Et deux forces de 5 N de sens contraires, mais portées par deux droites parallèles différentes, font tourner le solide. Avant de conclure, vérifie toujours les trois conditions, l'une après l'autre.",
+          "figure": "deux-forces-opposees",
+          "exercise": {
+            "title": "Reconnaître l'équilibre de deux forces",
+            "statement": "Dans cet exercice, tu décides si un solide soumis à deux forces est en équilibre, avec la méthode de la fiche : repérer, comparer les droites d'action, les sens et les intensités, puis conclure.",
+            "exercise_type": "fixation",
+            "figure": "forces-inegales",
+            "questions": [
+              {
+                "content": "Quelles sont les trois conditions pour qu'un solide soumis à deux forces soit en équilibre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer les droites d'action : les deux forces doivent être portées par la même droite. Étape 3 — Comparer les sens : ils doivent être contraires. Étape 4 — Comparer les intensités : elles doivent être égales, $F_1 = F_2$. Seule la première proposition réunit les trois conditions. Avec le même sens, les deux forces s'ajoutent et mettent le solide en mouvement. Avec des intensités différentes, la plus grande l'emporte. Avec des droites d'action différentes, les forces font tourner le solide.",
+                "answers": [
+                  {
+                    "content": "Même droite d'action, sens contraires, même intensité",
+                    "correct": true
+                  },
+                  {
+                    "content": "Même droite d'action, même sens, même intensité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Même droite d'action, sens contraires, intensités quelconques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Droites d'action différentes, sens contraires, même intensité",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide est soumis à deux forces de 8 N chacune, portées par la même droite et dirigées dans le même sens. Il est en équilibre.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $F_1 = F_2 = 8$ N, même droite d'action, même sens. Étape 2 — Droites d'action : elles sont confondues, condition vérifiée. Étape 3 — Sens : ils sont identiques alors qu'il faut des sens contraires, condition non vérifiée. Étape 4 — Intensités : elles sont égales, condition vérifiée. Étape 5 — Conclure : une condition manque, donc le solide n'est pas en équilibre. L'erreur tentante est de croire que deux intensités égales suffisent : ici les deux forces s'ajoutent et valent 16 N dans le même sens.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour savoir si un solide soumis à deux forces est en équilibre.",
+                "question_type": "ordering",
+                "explanation": "L'ordre suit la méthode de la fiche. Étape 1 — Repérer les deux forces et leurs caractéristiques. Étape 2 — Comparer les droites d'action. Étape 3 — Comparer les sens. Étape 4 — Comparer les intensités. Étape 5 — Conclure. On ne peut conclure qu'à la fin, car il faut avoir vérifié les trois conditions avant de décider.",
+                "answers": [
+                  {
+                    "content": "Repérer les deux forces et lire leurs caractéristiques."
+                  },
+                  {
+                    "content": "Comparer les droites d'action."
+                  },
+                  {
+                    "content": "Comparer les sens."
+                  },
+                  {
+                    "content": "Comparer les intensités."
+                  },
+                  {
+                    "content": "Conclure sur l'équilibre du solide."
+                  }
+                ]
+              },
+              {
+                "content": "Un solide est soumis à deux forces. Choisis les deux cas où il est en équilibre.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer chaque cas. Étape 2 — Droites d'action : elles sont confondues dans les quatre cas. Étape 3 — Sens : contraires dans les cas 1, 2 et 3 ; identiques dans le cas 4, donc le cas 4 est exclu. Étape 4 — Intensités : égales dans les cas 1 (6 N et 6 N) et 3 (10 N et 10 N) ; différentes dans le cas 2 (6 N et 4 N), donc le cas 2 est exclu. Étape 5 — Conclure : seuls les cas 1 et 3 sont en équilibre.",
+                "answers": [
+                  {
+                    "content": "F1 = 6 N vers la droite et F2 = 6 N vers la gauche, sur la même droite horizontale",
+                    "correct": true
+                  },
+                  {
+                    "content": "F1 = 6 N vers la droite et F2 = 4 N vers la gauche, sur la même droite horizontale",
+                    "correct": false
+                  },
+                  {
+                    "content": "F1 = 10 N vers le haut et F2 = 10 N vers le bas, sur la même droite verticale",
+                    "correct": true
+                  },
+                  {
+                    "content": "F1 = 5 N vers le haut et F2 = 5 N vers le haut, sur la même droite verticale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide est soumis à deux forces portées par la même droite horizontale : F1 de 4 N vers la droite et F2 de 2 N vers la gauche. Que peut-on dire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $F_1 = 4$ N vers la droite, $F_2 = 2$ N vers la gauche, même droite horizontale. Étape 2 — Droites d'action : confondues, condition vérifiée. Étape 3 — Sens : contraires, condition vérifiée. Étape 4 — Intensités : $4 \\neq 2$, condition non vérifiée. Étape 5 — Conclure : une condition manque, le solide n'est pas en équilibre ; la force de 4 N l'emporte et le solide part vers la droite. C'est le piège de la fiche : deux conditions sur trois ne suffisent pas.",
+                "answers": [
+                  {
+                    "content": "Il n'est pas en équilibre, car les intensités sont différentes (4 N et 2 N)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est en équilibre, car les sens sont contraires",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est en équilibre, car les droites d'action sont confondues",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'est pas en équilibre, car les sens sont les mêmes",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Corps suspendu à un fil ou à un ressort",
+          "remember": "Un corps immobile suspendu à un fil (ou à un ressort) est soumis à deux forces : son **poids** $\\vec{P}$, vertical vers le bas, et la **tension** $\\vec{T}$, force exercée par le fil (ou le ressort) sur le corps, verticale vers le haut. À l'équilibre, ces deux forces ont la même droite d'action (la verticale), des sens contraires et la même intensité : $T = P$. Comme $P = m \\times g$ ($P$ en N, $m$ en kg, $g = 10$ N/kg), on a $T = m \\times g$. Un dynamomètre qui porte le corps indique cette valeur.",
+          "method": [
+            "Faire le bilan des forces : nommer le poids $\\vec{P}$ et la tension $\\vec{T}$ exercées sur le corps.",
+            "Écrire la condition d'équilibre : même droite d'action verticale, sens contraires, donc $T = P$.",
+            "Calculer le poids $P = m \\times g$, avec la masse $m$ convertie en kilogrammes.",
+            "Conclure : donner l'intensité de $\\vec{T}$ avec son unité, sa direction et son sens."
+          ],
+          "example": {
+            "statement": "Une lampe de masse $m = 2$ kg est suspendue à un fil et reste immobile. On prend $g = 10$ N/kg. Calculer la tension $T$ du fil.",
+            "steps": [
+              "Faire le bilan : la lampe subit son poids $\\vec{P}$ (vertical, vers le bas) et la tension $\\vec{T}$ du fil (verticale, vers le haut).",
+              "Écrire la condition d'équilibre : les deux forces ont la même droite d'action verticale et des sens contraires, donc $T = P$.",
+              "Calculer le poids : $P = m \\times g = 2 \\times 10 = 20$ N.",
+              "Conclure : $T = P = 20$ N ; $\\vec{T}$ est verticale et dirigée vers le haut."
+            ]
+          },
+          "pitfall": "Ne confonds pas la masse et le poids, et n'oublie pas l'unité. Contre-exemple : une lampe de 2 kg suspendue à un fil a une tension $T = 20$ N, pas 2 N. Écrire $T = 2$ est faux : 2 est la masse en kg, pas une force en N. Pense aussi à convertir la masse : 500 g = 0,5 kg, donc $P = 0{,}5 \\times 10 = 5$ N, et non 5 000 N.",
+          "figure": "lampe-suspendue",
+          "exercise": {
+            "title": "Calculer la tension d'un fil ou d'un ressort",
+            "statement": "Dans cet exercice, tu calcules la tension d'un fil ou d'un ressort qui porte un corps immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. On prend g = 10 N/kg.",
+            "exercise_type": "fixation",
+            "figure": "lampe-suspendue",
+            "questions": [
+              {
+                "content": "Un corps immobile est suspendu à un fil. Quelles sont les deux forces qu'il subit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Faire le bilan des forces : le corps subit son poids $\\vec{P}$, exercé par la Terre, vertical et dirigé vers le bas, et la tension $\\vec{T}$ du fil, verticale et dirigée vers le haut. Étape 2 — Pour que le corps reste immobile, les deux forces doivent avoir des sens contraires. Les propositions avec deux forces vers le bas, ou avec le poids vers le haut, sont donc fausses. La masse n'est pas une force : elle se mesure en kilogrammes, pas en newtons.",
+                "answers": [
+                  {
+                    "content": "Son poids, vertical vers le bas, et la tension du fil, verticale vers le haut",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son poids, vertical vers le bas, et la tension du fil, verticale vers le bas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa masse, vers le bas, et la tension du fil, vers le haut",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son poids, vertical vers le haut, et la tension du fil, verticale vers le bas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un corps de masse 1,5 kg est suspendu à un ressort et reste immobile. On prend g = 10 N/kg. Quelle est l'intensité de la force exercée par le ressort sur le corps ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Faire le bilan : le corps subit son poids $\\vec{P}$ (vers le bas) et la force $\\vec{T}$ du ressort (vers le haut). Étape 2 — Condition d'équilibre : même droite verticale, sens contraires, donc $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 1{,}5 \\times 10 = 15$ N. Étape 4 — Conclure : $T = P = 15$ N, force verticale vers le haut. Répondre 1,5 serait confondre la masse en kg avec une force en N.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ],
+                "unit": "N",
+                "tolerance": 0
+              },
+              {
+                "content": "Un seau de masse 500 g est suspendu à une corde et reste immobile. On prend g = 10 N/kg. Quelle est la tension de la corde ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Faire le bilan : le seau subit son poids $\\vec{P}$ et la tension $\\vec{T}$ de la corde. Étape 2 — Condition d'équilibre : $T = P$. Étape 3 — Calculer le poids, après conversion de la masse : $500$ g $= 0{,}5$ kg, donc $P = 0{,}5 \\times 10 = 5$ N. Étape 4 — Conclure : $T = 5$ N, verticale vers le haut. Si tu oublies de convertir, tu trouves $500 \\times 10 = 5\\,000$ N, valeur absurde pour un seau.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "unit": "N",
+                "tolerance": 0
+              },
+              {
+                "content": "Un corps est suspendu à un fil et reste immobile. L'intensité de la tension du fil est ___ à l'intensité du poids du corps.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Faire le bilan : le corps subit son poids $\\vec{P}$ et la tension $\\vec{T}$ du fil. Étape 2 — Condition d'équilibre : même droite d'action, sens contraires et même intensité, donc $T = P$. La tension est égale au poids. Si elle était supérieure, le corps monterait ; si elle était inférieure, il descendrait : il ne resterait pas immobile.",
+                "answers": [
+                  {
+                    "content": "égale",
+                    "correct": true
+                  },
+                  {
+                    "content": "supérieure",
+                    "correct": false
+                  },
+                  {
+                    "content": "inférieure",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lampe de masse 4 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. La tension du fil vaut 4 N.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Faire le bilan : poids $\\vec{P}$ vers le bas, tension $\\vec{T}$ vers le haut. Étape 2 — Condition d'équilibre : $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 4 \\times 10 = 40$ N. Étape 4 — Conclure : $T = 40$ N, donc l'affirmation « 4 N » est fausse. Le nombre 4 est la masse en kilogrammes, pas une force en newtons : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Objet posé sur un support horizontal",
+          "remember": "Un objet immobile posé sur un support horizontal (table, sol) est soumis à deux forces : son **poids** $\\vec{P}$, vertical vers le bas, et la **réaction** $\\vec{R}$ du support, force exercée par le support sur l'objet. Si l'on néglige les frottements, $\\vec{R}$ est perpendiculaire au support, donc verticale, et dirigée vers le haut. À l'équilibre, les deux forces ont la même droite d'action, des sens contraires et la même intensité : $R = P = m \\times g$.",
+          "method": [
+            "Faire le bilan des forces : nommer le poids $\\vec{P}$ et la réaction $\\vec{R}$ du support.",
+            "Écrire la condition d'équilibre : $\\vec{R}$ verticale vers le haut, $\\vec{P}$ verticale vers le bas, donc $R = P$.",
+            "Calculer le poids $P = m \\times g$, avec la masse $m$ convertie en kilogrammes.",
+            "Conclure : donner l'intensité de $\\vec{R}$ avec son unité, sa direction et son sens."
+          ],
+          "example": {
+            "statement": "Un sac de riz de masse $m = 25$ kg est posé et immobile sur le sol horizontal. On néglige les frottements et on prend $g = 10$ N/kg. Calculer la réaction $R$ du sol.",
+            "steps": [
+              "Faire le bilan : le sac subit son poids $\\vec{P}$ (vertical, vers le bas) et la réaction $\\vec{R}$ du sol.",
+              "Écrire la condition d'équilibre : $\\vec{R}$ est verticale vers le haut et $\\vec{P}$ verticale vers le bas, donc $R = P$.",
+              "Calculer le poids : $P = m \\times g = 25 \\times 10 = 250$ N.",
+              "Conclure : $R = P = 250$ N ; $\\vec{R}$ est verticale et dirigée vers le haut."
+            ]
+          },
+          "pitfall": "Ne dessine jamais la réaction vers le bas, et ne la confonds pas avec la masse. Contre-exemple : un sac de 6 kg a un poids de 60 N vers le bas. Sa réaction vaut 60 N vers le haut, pas 6 N. Si $\\vec{R}$ était dirigée vers le bas, les deux forces auraient le même sens : elles s'ajouteraient (120 N vers le bas) et le sac s'enfoncerait dans la table. La réaction est toujours de sens contraire au poids.",
+          "figure": "sac-pose",
+          "exercise": {
+            "title": "Calculer la réaction d'un support",
+            "statement": "Dans cet exercice, tu calcules la réaction d'un support qui porte un objet immobile, avec la méthode de la fiche : faire le bilan des forces, écrire la condition d'équilibre, calculer le poids, conclure. Les frottements sont négligés et on prend g = 10 N/kg.",
+            "exercise_type": "fixation",
+            "figure": "sac-pose",
+            "questions": [
+              {
+                "content": "Un livre immobile est posé sur une table horizontale (frottements négligés). Quelle est la réaction de la table sur le livre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Faire le bilan : le livre subit son poids $\\vec{P}$ (vertical, vers le bas) et la réaction $\\vec{R}$ de la table. Étape 2 — Condition d'équilibre : $\\vec{R}$ a la même droite d'action (la verticale), le sens contraire (vers le haut) et la même intensité, $R = P$. Vers le bas, elle aurait le même sens que le poids. Horizontale, elle ne compenserait pas le poids. D'intensité nulle, elle laisserait le livre tomber.",
+                "answers": [
+                  {
+                    "content": "Verticale, dirigée vers le haut, de même intensité que le poids du livre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Verticale, dirigée vers le bas, de même intensité que le poids du livre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Horizontale, de même intensité que le poids du livre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Verticale, dirigée vers le haut, d'intensité nulle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sac de masse 3 kg est posé et immobile sur une table horizontale. On prend g = 10 N/kg. Quelle est l'intensité de la réaction de la table ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Faire le bilan : le sac subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ de la table. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids : $P = m \\times g = 3 \\times 10 = 30$ N. Étape 4 — Conclure : $R = 30$ N, verticale et dirigée vers le haut. Répondre 3 N serait confondre la masse (3 kg) avec la force.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ],
+                "unit": "N",
+                "tolerance": 0
+              },
+              {
+                "content": "Une brique de masse 800 g est posée et immobile sur le sol horizontal. On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Faire le bilan : la brique subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ du sol. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids, après conversion : $800$ g $= 0{,}8$ kg, donc $P = 0{,}8 \\times 10 = 8$ N. Étape 4 — Conclure : $R = 8$ N, verticale vers le haut. Sans conversion, on obtiendrait 8 000 N, valeur absurde pour une brique.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "unit": "N",
+                "tolerance": 0
+              },
+              {
+                "content": "Un seau de masse 6 kg est posé et immobile sur le sol horizontal. On prend g = 10 N/kg. Choisis les deux affirmations vraies.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Faire le bilan : le seau subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ du sol. Étape 2 — Condition d'équilibre : $R = P$, avec des sens contraires ; le poids étant vers le bas, $\\vec{R}$ est dirigée vers le haut. Étape 3 — Calculer le poids : $P = 6 \\times 10 = 60$ N. Étape 4 — Conclure : $R = 60$ N vers le haut. L'affirmation « 6 N » confond la masse et la force. L'affirmation « vers le bas » donnerait deux forces de même sens, sans équilibre.",
+                "answers": [
+                  {
+                    "content": "La réaction du sol vaut 60 N",
+                    "correct": true
+                  },
+                  {
+                    "content": "La réaction du sol vaut 6 N",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réaction du sol est dirigée vers le haut",
+                    "correct": true
+                  },
+                  {
+                    "content": "La réaction du sol est dirigée vers le bas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément d'un sac immobile posé sur une table à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Faire le bilan : deux forces s'exercent sur le sac. Le poids $\\vec{P}$ est exercé par la Terre, vertical et dirigé vers le bas. La réaction $\\vec{R}$ est exercée par la table, verticale et dirigée vers le haut. Étape 2 — Condition d'équilibre : même droite d'action, sens contraires, donc $R = P$. Ne confonds pas les deux forces : elles n'ont pas le même auteur et pas le même sens.",
+                "answers": [
+                  {
+                    "content": "Le poids P du sac",
+                    "match": "Verticale, vers le bas, exercée par la Terre"
+                  },
+                  {
+                    "content": "La réaction R de la table",
+                    "match": "Verticale, vers le haut, exercée par la table"
+                  },
+                  {
+                    "content": "La condition d'équilibre du sac",
+                    "match": "R = P"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer une force ou une masse inconnue",
+          "remember": "Quand un solide est en équilibre sous l'action de deux forces, ces forces ont la **même intensité**. Si l'une est connue (lue sur un dynamomètre ou calculée), on en déduit l'autre. Comme le poids vaut $P = m \\times g$, on peut aussi retrouver une masse : $m = \\dfrac{P}{g}$ ($m$ en kg, $P$ en N, $g = 10$ N/kg). Un dynamomètre auquel on suspend un corps immobile indique la tension $T = P$.",
+          "method": [
+            "Identifier la force connue, la force inconnue et la grandeur demandée (une force ou une masse).",
+            "Écrire l'égalité des intensités des deux forces, valable à l'équilibre.",
+            "Calculer la force inconnue, puis la masse avec $m = P / g$ si on la demande.",
+            "Conclure par une phrase qui donne le résultat avec son unité (N ou kg)."
+          ],
+          "example": {
+            "statement": "Au marché, un peson (dynamomètre) auquel est accroché un régime de bananes immobile indique 120 N. On prend $g = 10$ N/kg. Quelle est la masse du régime ?",
+            "steps": [
+              "Identifier : la force connue est la tension $T = 120$ N du peson ; la force inconnue est le poids $P$ du régime ; on demande la masse $m$.",
+              "Écrire l'égalité des intensités : le régime est en équilibre, donc $P = T = 120$ N.",
+              "Calculer la masse : $m = P / g = 120 / 10 = 12$ kg.",
+              "Conclure : le régime de bananes a une masse de 12 kg."
+            ]
+          },
+          "pitfall": "Ne lis pas une force comme une masse. Contre-exemple : un peson indique 120 N ; la masse n'est pas 120 kg, mais $120 / 10 = 12$ kg. Et si la masse est donnée en grammes, convertis avant de calculer le poids : 250 g = 0,25 kg, donc $P = 0{,}25 \\times 10 = 2{,}5$ N, et non 2 500 N. Le newton mesure une force, le kilogramme une masse : relis toujours l'unité de ta réponse.",
+          "figure": "regime-bananes",
+          "exercise": {
+            "title": "Trouver une force ou une masse inconnue",
+            "statement": "Dans cet exercice, tu utilises l'équilibre de deux forces pour trouver une force ou une masse inconnue, avec la méthode de la fiche : identifier, écrire l'égalité des intensités, calculer, conclure. On prend g = 10 N/kg.",
+            "exercise_type": "fixation",
+            "figure": "regime-bananes",
+            "questions": [
+              {
+                "content": "Un peson auquel est accroché un sac de maïs immobile indique 60 N. On prend g = 10 N/kg. Quelle est la masse du sac, en kilogrammes ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 60$ N du peson ; la force inconnue est le poids $P$ du sac ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : le sac est en équilibre, donc $P = T = 60$ N. Étape 3 — Calculer la masse : $m = P / g = 60 / 10 = 6$ kg. Étape 4 — Conclure : le sac a une masse de 6 kg. Répondre 60 kg serait lire la force comme une masse.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "unit": "kg",
+                "tolerance": 0
+              },
+              {
+                "content": "Un dynamomètre auquel est suspendu un corps immobile indique 25 N. On prend g = 10 N/kg. Quelle est la masse du corps, en kilogrammes ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 25$ N ; la force inconnue est le poids $P$ ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, $P = T = 25$ N. Étape 3 — Calculer la masse : $m = P / g = 25 / 10 = 2{,}5$ kg. Étape 4 — Conclure : le corps a une masse de 2,5 kg. Répondre 25 kg oublie de diviser par $g$.",
+                "answers": [
+                  {
+                    "content": "2,5",
+                    "correct": true
+                  }
+                ],
+                "unit": "kg",
+                "tolerance": 0
+              },
+              {
+                "content": "Un corps de masse 8 kg est suspendu à un dynamomètre et reste immobile. On prend g = 10 N/kg. Le dynamomètre indique ___ N.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : la force inconnue est la tension $T$ lue sur le dynamomètre ; la force connue se calcule : c'est le poids $P$. Étape 2 — Écrire l'égalité des intensités : à l'équilibre, $T = P$. Étape 3 — Calculer : $P = m \\times g = 8 \\times 10 = 80$ N, donc $T = 80$ N. Étape 4 — Conclure : le dynamomètre indique 80 N. La réponse 8 confond la masse en kg et la force en N.",
+                "answers": [
+                  {
+                    "content": "80",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour trouver la masse d'un corps immobile suspendu à un dynamomètre.",
+                "question_type": "ordering",
+                "explanation": "L'ordre suit la méthode de la fiche. Étape 1 — Identifier la force connue, la force inconnue et la grandeur demandée. Étape 2 — Écrire l'égalité des intensités, valable à l'équilibre. Étape 3 — Calculer la force inconnue, puis la masse avec $m = P / g$. Étape 4 — Conclure avec l'unité. On ne peut pas calculer avant d'avoir écrit l'égalité qui relie les deux forces.",
+                "answers": [
+                  {
+                    "content": "Identifier la force connue, la force inconnue et la grandeur demandée."
+                  },
+                  {
+                    "content": "Écrire l'égalité des intensités des deux forces."
+                  },
+                  {
+                    "content": "Calculer la force inconnue, puis la masse avec m = P / g."
+                  },
+                  {
+                    "content": "Conclure par une phrase avec le résultat et son unité."
+                  }
+                ]
+              },
+              {
+                "content": "Un peson indique 120 N quand on lui suspend un régime de bananes immobile. On prend g = 10 N/kg. La masse du régime est 120 kg.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 120$ N ; la force inconnue est le poids $P$ ; on demande la masse. Étape 2 — Écrire l'égalité des intensités : $P = T = 120$ N. Étape 3 — Calculer la masse : $m = P / g = 120 / 10 = 12$ kg. Étape 4 — Conclure : la masse est 12 kg, donc l'affirmation « 120 kg » est fausse. Le piège est de lire en kilogrammes une valeur donnée en newtons.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La lampe de l'atelier",
+          "statement": "Dans l'atelier de Kofi, une lampe de masse 2 kg est suspendue au plafond par un fil. Elle reste immobile. On prend g = 10 N/kg.",
+          "exercise_type": "fixation",
+          "figure": "lampe-suspendue",
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître un solide en équilibre",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Une lampe de masse 2 kg est suspendue à un fil et reste immobile. Quelles forces subit-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Faire le bilan des forces : la lampe subit son poids $\\vec{P}$, exercé par la Terre, vertical vers le bas, et la tension $\\vec{T}$ du fil, verticale vers le haut. Étape 2 — Si le poids était la seule force, la lampe tomberait : puisqu'elle reste immobile, une seconde force de sens contraire la retient. C'est la tension du fil. Les propositions avec deux forces vers le bas ou avec le poids vers le haut sont impossibles.",
+              "answers": [
                 {
-                  "content": "Dans un tir à la corde, le ruban noué au milieu reste immobile. Que peut-on dire de la corde ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un solide immobile est en équilibre. Il n'est pas sans force : les deux équipes exercent chacune une force, et ces deux forces se compensent exactement.",
-                  "answers": [
-                    { "content": "Elle est en équilibre", "correct": true },
-                    { "content": "Elle n'est soumise à aucune force", "correct": false },
-                    { "content": "Les deux forces qui s'exercent sur elle ont le même sens", "correct": false },
-                    { "content": "L'équipe la plus lourde est en train de gagner", "correct": false }
-                  ]
+                  "content": "Son poids, vers le bas, et la tension du fil, vers le haut",
+                  "correct": true
                 },
                 {
-                  "content": "Un solide soumis à deux forces est en équilibre. Quelles conditions ces deux forces vérifient-elles ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les trois conditions sont : même droite d'action, même valeur, sens contraires. Elles n'ont pas besoin d'être appliquées au même point : les deux équipes tirent aux deux bouts de la corde.",
-                  "answers": [
-                    { "content": "Elles ont la même droite d'action", "correct": true },
-                    { "content": "Elles ont la même valeur", "correct": true },
-                    { "content": "Elles ont des sens contraires", "correct": true },
-                    { "content": "Elles ont le même sens", "correct": false },
-                    { "content": "Leurs valeurs peuvent être différentes", "correct": false },
-                    { "content": "Elles sont obligatoirement appliquées au même point du solide", "correct": false }
-                  ]
+                  "content": "Son poids, vers le bas, et la tension du fil, vers le bas",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux ? Deux forces de même valeur qui s'exercent sur un solide le mettent toujours en équilibre.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Il faut aussi la même droite d'action et des sens contraires. Deux équipes qui tirent la corde du même côté, avec la même force, ne la maintiennent pas immobile.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Seulement son poids, vers le bas",
+                  "correct": false
                 },
                 {
-                  "content": "Dans l'image du tir à la corde, que représente le fait que les deux équipes tirent « aussi fort l'une que l'autre » ?",
-                  "question_type": "single_choice",
-                  "explanation": "Tirer aussi fort, c'est exercer des forces de même intensité, donc de même valeur en newtons. La droite d'action est la corde elle-même, et les sens contraires sont gauche et droite.",
-                  "answers": [
-                    { "content": "Les deux forces ont la même valeur", "correct": true },
-                    { "content": "Les deux forces ont la même droite d'action", "correct": false },
-                    { "content": "Les deux forces ont des sens contraires", "correct": false },
-                    { "content": "Les deux forces ont le même point d'application", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Que désigne la droite d'action d'une force ?",
-                  "question_type": "single_choice",
-                  "explanation": "La droite d'action est la droite qui porte le vecteur force. Dans le tir à la corde, c'est la corde tendue. Elle ne donne ni la valeur ni le sens de la force.",
-                  "answers": [
-                    { "content": "La droite qui porte le vecteur force", "correct": true },
-                    { "content": "La longueur du vecteur force", "correct": false },
-                    { "content": "La valeur de la force en newtons", "correct": false },
-                    { "content": "La droite horizontale du sol", "correct": false }
-                  ]
-                },
-                {
-                  "content": "La corde est immobile. Puis l'équipe de droite tire plus fort que l'équipe de gauche. Que devient la corde ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les deux valeurs ne sont plus égales : l'équilibre est rompu. La corde, qui part du repos, se déplace du côté de la plus grande force, donc vers l'équipe de droite.",
-                  "answers": [
-                    { "content": "L'équilibre est rompu : la corde part vers l'équipe de droite", "correct": true },
-                    { "content": "L'équilibre reste, car les sens sont toujours contraires", "correct": false },
-                    { "content": "L'équilibre est rompu : la corde part vers l'équipe de gauche", "correct": false },
-                    { "content": "L'équilibre reste, car la corde est toujours tendue", "correct": false }
-                  ]
+                  "content": "Son poids, vers le haut, et la tension du fil, vers le bas",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Utiliser les trois conditions",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Une lampe de masse 2 kg est suspendue à un fil. On prend g = 10 N/kg. Calcule l'intensité de son poids.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Formule : $P = m \\times g$, avec $m$ en kilogrammes et $g = 10$ N/kg. Étape 2 — Application numérique : $P = 2 \\times 10 = 20$ N. Le poids est une force : il s'exprime en newtons, pas en kilogrammes. Répondre 2 confondrait la masse et le poids.",
+              "answers": [
                 {
-                  "content": "Une corde tendue est immobile. L'équipe de gauche exerce sur elle une force de 650 N, le long de la corde. Quelle est la valeur de la force exercée par l'équipe de droite ?",
-                  "question_type": "single_choice",
-                  "explanation": "La corde est en équilibre : les deux forces ont la même valeur, 650 N. Additionner les deux équipes (1 300 N) ou prendre la moitié (325 N) sont des erreurs courantes.",
-                  "answers": [
-                    { "content": "650 N", "correct": true },
-                    { "content": "1 300 N", "correct": false },
-                    { "content": "325 N", "correct": false },
-                    { "content": "0 N", "correct": false }
-                  ]
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "Une lampe de masse 2 kg est suspendue à un fil et reste immobile. On prend g = 10 N/kg. Calcule l'intensité de la tension du fil.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Faire le bilan des forces : poids $\\vec{P}$ et tension $\\vec{T}$. Étape 2 — Écrire la condition d'équilibre : même droite d'action verticale, sens contraires, donc $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 2 \\times 10 = 20$ N. Étape 4 — Conclure : $T = 20$ N, verticale vers le haut. Répondre 2 N serait donner la masse en kilogrammes.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "La tension du fil qui retient la lampe est dirigée vers le bas, comme le poids.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Faire le bilan : le poids $\\vec{P}$ est dirigé vers le bas. Étape 2 — Condition d'équilibre : pour que la lampe reste immobile, la tension doit avoir un sens contraire à celui du poids, donc être dirigée vers le haut. Si elle était dirigée vers le bas, les deux forces s'ajouteraient (40 N vers le bas) et la lampe tomberait. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Un solide est soumis à deux forces. Dans quel cas peut-il être en équilibre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il faut la même droite d'action, la même valeur et des sens contraires : seul le premier cas réunit les trois. Les autres en violent une : le sens, la valeur ou la droite d'action.",
-                  "answers": [
-                    { "content": "50 N vers le haut et 50 N vers le bas, sur la même droite verticale", "correct": true },
-                    { "content": "50 N vers le haut et 50 N vers le haut, sur la même droite verticale", "correct": false },
-                    { "content": "50 N vers la droite et 80 N vers la gauche, sur la même droite horizontale", "correct": false },
-                    { "content": "50 N vers la droite et 50 N vers la gauche, sur deux droites parallèles distinctes", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Deux enfants tirent chacun avec 100 N sur un bâton, en sens contraires, mais sur deux droites parallèles différentes. Le bâton reste immobile.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Les valeurs et les sens conviennent, mais les droites d'action sont différentes : le bâton se met à tourner. Les trois conditions sont nécessaires ensemble.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
-                },
-                {
-                  "content": "Une équipe tire la corde vers la gauche avec 900 N. L'autre équipe tire vers la droite avec 700 N, sur la même droite. Que se passe-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les sens sont contraires mais les valeurs sont différentes : il n'y a pas d'équilibre. La corde se déplace du côté de la plus grande force, vers la gauche.",
-                  "answers": [
-                    { "content": "La corde se déplace vers la gauche", "correct": true },
-                    { "content": "La corde se déplace vers la droite", "correct": false },
-                    { "content": "La corde reste immobile, car les sens sont contraires", "correct": false },
-                    { "content": "La corde reste immobile, car les deux forces sont sur la même droite", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide est soumis à deux forces de 40 N chacune, sur la même droite d'action, toutes les deux dirigées vers la droite. Est-il en équilibre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Non : la même valeur et la même droite d'action ne suffisent pas. Il faut aussi des sens contraires. Ici le solide est poussé du même côté par les deux forces.",
-                  "answers": [
-                    { "content": "Non, car les sens ne sont pas contraires", "correct": true },
-                    { "content": "Oui, car les valeurs sont égales", "correct": false },
-                    { "content": "Oui, car les deux forces sont sur la même droite", "correct": false },
-                    { "content": "Non, car 40 N est une valeur trop petite", "correct": false }
-                  ]
+                  "content": "Faux",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Le tir à la corde à l'équilibre",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Une lampe de 2 kg est suspendue à un fil et reste immobile. Justifie, avec les trois conditions d'équilibre, que le poids de la lampe et la tension du fil se compensent.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : la lampe subit deux forces, son poids $\\vec{P}$ et la tension $\\vec{T}$ du fil. Elles sont portées par la même droite, la verticale. Le poids est dirigé vers le bas et la tension vers le haut : leurs sens sont contraires. Le poids vaut $P = m \\times g = 2 \\times 10 = 20$ N et la tension $T = P = 20$ N : leurs intensités sont égales. Les trois conditions sont vérifiées, donc la lampe est en équilibre. Barème sur 2 : droite d'action et sens (0,5 chacun), intensités avec le calcul (0,5), conclusion (0,5).",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Droite d'action : les deux forces sont portées par la même verticale",
+                "Sens : le poids vers le bas, la tension vers le haut, donc contraires",
+                "Intensité : T = P = 20 N, les deux forces sont égales",
+                "Conclusion : les trois conditions sont vérifiées, donc la lampe est en équilibre"
+              ],
+              "starter": "La lampe subit deux forces : ..."
+            }
+          ]
+        },
+        {
+          "title": "Le sac sur la table",
+          "statement": "Dans la maison, Awa pose un sac de masse 3 kg sur une table horizontale. Le sac reste immobile. On néglige les frottements et on prend g = 10 N/kg.",
+          "exercise_type": "fixation",
+          "figure": "sac-pose",
+          "questions": [
+            {
+              "content": "Un sac de masse 3 kg est posé sur une table. On prend g = 10 N/kg. Calcule l'intensité du poids du sac.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Formule : $P = m \\times g$, avec $m$ en kilogrammes. Étape 2 — Application numérique : $P = 3 \\times 10 = 30$ N. Répondre 3 N confondrait la masse (en kg) et le poids (en N).",
+              "answers": [
                 {
-                  "content": "Une corde est immobile. L'équipe A exerce sur elle 750 N vers la gauche, le long de la corde. Quelle est la force exercée par l'équipe B ?",
-                  "question_type": "single_choice",
-                  "explanation": "À l'équilibre : même droite, même valeur (750 N), sens contraires, donc vers la droite. 750 N vers la gauche aurait le même sens que A ; 1 500 N additionne les deux équipes.",
-                  "answers": [
-                    { "content": "750 N vers la droite", "correct": true },
-                    { "content": "750 N vers la gauche", "correct": false },
-                    { "content": "1 500 N vers la droite", "correct": false },
-                    { "content": "375 N vers la droite", "correct": false }
-                  ]
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "Un sac de masse 3 kg est posé et immobile sur une table horizontale. On prend g = 10 N/kg. Calcule l'intensité de la réaction de la table.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Faire le bilan des forces : poids $\\vec{P}$ et réaction $\\vec{R}$ de la table. Étape 2 — Écrire la condition d'équilibre : même droite d'action verticale, sens contraires, donc $R = P$. Étape 3 — Calculer le poids : $P = 3 \\times 10 = 30$ N. Étape 4 — Conclure : $R = 30$ N, verticale vers le haut.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "Un sac est posé et immobile sur une table horizontale (frottements négligés). Quelles sont les caractéristiques de la réaction de la table ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Faire le bilan : le sac subit son poids $\\vec{P}$ et la réaction $\\vec{R}$. Étape 2 — Condition d'équilibre : $\\vec{R}$ est sur la même droite que $\\vec{P}$ (la verticale), de sens contraire (vers le haut) et de même intensité, $R = P$. Vers le bas, elle aurait le sens du poids. Horizontale, elle ne compenserait pas le poids. Égale à la masse en kg, elle mélangerait une force et une masse.",
+              "answers": [
+                {
+                  "content": "Droite d'action verticale, sens vers le haut, intensité égale à celle du poids",
+                  "correct": true
                 },
                 {
-                  "content": "Dans quels cas un solide soumis à ces deux forces peut-il être en équilibre ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les trois premiers cas réunissent les trois conditions. Le quatrième a des valeurs différentes, le cinquième le même sens, le sixième deux droites d'action distinctes.",
-                  "answers": [
-                    { "content": "20 N vers le haut et 20 N vers le bas, sur la même droite verticale", "correct": true },
-                    { "content": "35 N vers la gauche et 35 N vers la droite, sur la même droite horizontale", "correct": true },
-                    { "content": "60 N vers le nord et 60 N vers le sud, sur la même droite", "correct": true },
-                    { "content": "20 N vers le haut et 30 N vers le bas, sur la même droite verticale", "correct": false },
-                    { "content": "40 N vers la droite et 40 N vers la droite, sur la même droite", "correct": false },
-                    { "content": "50 N et 50 N de sens contraires, sur deux droites parallèles distinctes", "correct": false }
-                  ]
+                  "content": "Droite d'action verticale, sens vers le bas, intensité égale à celle du poids",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux ? Une corde immobile est tirée par une équipe avec 800 N. Si l'équipe adverse tire avec 600 N seulement, la corde reste immobile.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Une corde qui part du repos est tirée par deux forces de valeurs différentes : 800 N et 600 N. L'équilibre exige des valeurs égales, donc la corde part du côté de l'équipe qui tire 800 N.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Droite d'action horizontale, sens vers la droite, intensité égale à celle du poids",
+                  "correct": false
                 },
                 {
-                  "content": "Un élève dit : « La corde est immobile, donc aucune force ne s'exerce sur elle. » Que lui répondre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Immobile ne veut pas dire sans force. Deux forces s'exercent sur la corde, mais elles se compensent. Souviens-toi du ruban qui ne bouge pas alors que les deux équipes tirent.",
-                  "answers": [
-                    { "content": "Deux forces s'exercent sur elle, mais elles se compensent", "correct": true },
-                    { "content": "Il a raison : un solide immobile n'est soumis à aucune force", "correct": false },
-                    { "content": "Il a raison, mais seulement si les équipes tirent moins de 100 N", "correct": false },
-                    { "content": "Une seule force s'exerce sur elle, celle de l'équipe la plus forte", "correct": false }
-                  ]
+                  "content": "Droite d'action verticale, sens vers le haut, intensité égale à la masse en kg",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le sac est en équilibre : la réaction R de la table et le ___ P du sac ont la même intensité.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Faire le bilan : le sac subit deux forces, la réaction $\\vec{R}$ de la table et son poids $\\vec{P}$. Étape 2 — Condition d'équilibre : $R = P$. Le mot attendu est donc « poids ». La masse n'est pas une force : on ne peut pas comparer une force en newtons à une masse en kilogrammes.",
+              "answers": [
+                {
+                  "content": "poids",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa ajoute un livre de 1 kg dans le sac de 3 kg. Le sac, avec son contenu, reste immobile sur la table horizontale. On prend g = 10 N/kg. Quelle est maintenant l'intensité de la réaction de la table ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Faire le bilan : poids $\\vec{P}$ de l'ensemble et réaction $\\vec{R}$ de la table. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids de l'ensemble : la masse totale est $3 + 1 = 4$ kg, donc $P = 4 \\times 10 = 40$ N. Étape 4 — Conclure : $R = 40$ N, verticale vers le haut. Garder 30 N oublierait le livre : la table doit porter une masse plus grande.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            }
+          ]
+        },
+        {
+          "title": "Le régime de bananes au marché",
+          "statement": "Au marché, un vendeur suspend un régime de bananes au crochet d'un peson (dynamomètre). Quand le régime est immobile, le peson indique 120 N. On prend g = 10 N/kg.",
+          "exercise_type": "evaluation",
+          "figure": "regime-bananes",
+          "questions": [
+            {
+              "content": "Un régime de bananes est suspendu au crochet d'un peson et reste immobile. Quelles forces subit le régime ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Faire le bilan des forces : le régime est en contact avec le crochet du peson, qui le retient : tension $\\vec{T}$ vers le haut. Il subit aussi son poids $\\vec{P}$, exercé par la Terre, vers le bas. Il n'est pas en contact avec le sol : il n'y a pas de réaction du sol. Une tension vers le bas ne retiendrait pas le régime. Si la tension était la seule force, le régime monterait.",
+              "answers": [
+                {
+                  "content": "Son poids, vers le bas, et la tension du crochet, vers le haut",
+                  "correct": true
                 },
                 {
-                  "content": "Le ruban se met à glisser vers l'équipe de droite. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La corde bouge : plus d'équilibre, donc les valeurs ne sont plus égales. Elle se déplace du côté de la plus grande force, ici la force de l'équipe de droite.",
-                  "answers": [
-                    { "content": "Les deux forces n'ont plus la même valeur", "correct": true },
-                    { "content": "La force exercée par l'équipe de droite est la plus grande", "correct": true },
-                    { "content": "La corde est toujours en équilibre", "correct": false },
-                    { "content": "Les deux forces ont maintenant le même sens", "correct": false },
-                    { "content": "La force exercée par l'équipe de gauche est la plus grande", "correct": false }
-                  ]
+                  "content": "Son poids, vers le bas, et la réaction du sol, vers le haut",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux ? La corde est immobile. L'équipe de gauche lâche brusquement la corde, alors que l'équipe de droite continue de tirer avec la même force. La corde reste en équilibre.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Il ne reste plus qu'une force : la deuxième est devenue nulle. Les deux valeurs ne sont plus égales, donc la corde part du côté de l'équipe de droite.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Son poids, vers le bas, et la tension du crochet, vers le bas",
+                  "correct": false
+                },
+                {
+                  "content": "Seulement la tension du crochet, vers le haut",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le peson indique 120 N quand le régime de bananes est immobile. On prend g = 10 N/kg. Quelle est la masse du régime, en kilogrammes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : la force connue est la tension $T = 120$ N ; la force inconnue est le poids $P$ ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : le régime est en équilibre, donc $P = T = 120$ N. Étape 3 — Calculer la masse : $m = P / g = 120 / 10 = 12$ kg. Étape 4 — Conclure : le régime a une masse de 12 kg. Répondre 120 kg lirait la force comme une masse.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "kg",
+              "tolerance": 0
+            },
+            {
+              "content": "Le vendeur coupe une main de bananes de 2 kg : il reste un régime de 10 kg, immobile au crochet du peson. On prend g = 10 N/kg. Quelle est maintenant l'indication du peson ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Faire le bilan : le régime restant subit son poids $\\vec{P}$ et la tension $\\vec{T}$ du crochet. Étape 2 — Condition d'équilibre : $T = P$. Étape 3 — Calculer le poids : $P = m \\times g = 10 \\times 10 = 100$ N. Étape 4 — Conclure : le peson indique 100 N. On peut vérifier : 120 N moins le poids de la main enlevée ($2 \\times 10 = 20$ N) donne bien 100 N.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "Le peson indique 120 N, le régime étant immobile. Choisis les trois caractéristiques de la tension du crochet sur le régime.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Faire le bilan : le régime subit son poids $\\vec{P}$ et la tension $\\vec{T}$. Étape 2 — Condition d'équilibre : $\\vec{T}$ a la même droite d'action que $\\vec{P}$, donc verticale ; un sens contraire, donc vers le haut ; la même intensité. Étape 3 — Intensité : le peson l'indique directement, $T = 120$ N, et $P = 12 \\times 10 = 120$ N. Étape 4 — Conclure : droite verticale, vers le haut, 120 N. « Vers le bas » est le sens du poids. « 12 N » mélange la masse du régime (12 kg) et sa tension.",
+              "answers": [
+                {
+                  "content": "Sa droite d'action est verticale",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est dirigée vers le haut",
+                  "correct": true
+                },
+                {
+                  "content": "Son intensité est 120 N",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est dirigée vers le bas",
+                  "correct": false
+                },
+                {
+                  "content": "Son intensité est 12 N",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un peson indique 120 N quand un régime de bananes est immobile à son crochet. On prend g = 10 N/kg. Rédige la démarche complète qui permet de trouver la masse du régime.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : le régime est immobile, il est donc en équilibre sous l'action de deux forces : son poids $\\vec{P}$ et la tension $\\vec{T}$ du crochet. Elles ont la même droite d'action, des sens contraires et la même intensité, donc $P = T = 120$ N. Comme $P = m \\times g$, on a $m = P / g = 120 / 10 = 12$ kg. Le régime a une masse de 12 kg. Barème sur 3 : forces nommées (0,5), égalité justifiée par l'équilibre (1), calcul avec unités (1), conclusion (0,5).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Les deux forces sont nommées : poids et tension du crochet",
+                "L'égalité P = T = 120 N est justifiée par l'équilibre",
+                "Le calcul m = P / g = 12 kg est posé avec les unités",
+                "La conclusion est une phrase avec l'unité kg"
+              ],
+              "starter": "Le régime est immobile, donc..."
+            },
+            {
+              "content": "Le peson indique 120 N, donc le régime de bananes a une masse de 120 kg.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : 120 N est une force (la tension $T$), et non une masse. Étape 2 — Écrire l'égalité : $P = T = 120$ N. Étape 3 — Calculer la masse : $m = P / g = 120 / 10 = 12$ kg. Étape 4 — Conclure : la masse est 12 kg. Le newton mesure une force et le kilogramme une masse : lire 120 kg est l'erreur de la fiche.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
                 }
               ]
             }
           ]
         },
         {
-          "name": "Un solide suspendu à un fil",
-          "subtitle": "Le poids et la force du fil s'équilibrent",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Nommer les deux forces qui s'exercent sur un solide suspendu à un fil.</li><li>Calculer la force exercée par le fil à partir de la masse du solide.</li><li>Retrouver la masse d'un solide à partir de la force du fil.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le régime de bananes plantain du kiosque.</strong> Pour la fête du village, on a accroché un régime à la poutre du kiosque avec une corde. Il pend, immobile. La Terre le tire vers le bas. La corde le retient vers le haut. Si on coupe la corde, le régime tombe.</p><p><strong>Le pont.</strong> Le régime est le <strong>solide</strong>. La Terre qui le tire vers le bas, c'est son <strong>poids</strong> $\\vec{P}$. La corde qui le retient, c'est la <strong>force exercée par le fil</strong> $\\vec{T}$ (on l'appelle aussi la tension du fil). Le régime est immobile : il est <strong>en équilibre</strong>, donc ces deux forces suivent les trois conditions de la fiche essentielle précédente.</p><p><strong>La limite de l'image.</strong> Une corde plus épaisse ne tire pas plus fort sur le régime : elle exerce exactement la force qui équilibre le poids. Si le poids dépasse ce que la corde supporte, elle casse.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Un solide immobile suspendu à un fil est soumis à <strong>deux forces</strong> :</p><ul><li>son <strong>poids</strong> $\\vec{P}$, appliqué au centre de gravité G, vertical, dirigé vers le bas, de valeur $P = m \\times g$ ;</li><li>la <strong>force du fil</strong> $\\vec{T}$, appliquée au point d'attache du fil.</li></ul><p>À l'équilibre : $\\vec{T}$ et $\\vec{P}$ ont la même droite d'action (le fil est vertical et son prolongement passe par G), des sens contraires ($\\vec{T}$ est dirigée vers le haut) et la même valeur : $T = P$.</p></blockquote><h2>Exemple résolu</h2><p>Un régime de masse $12\\ \\text{kg}$ est suspendu immobile à une corde. On prend $g = 10\\ \\text{N/kg}$. Décris la force exercée par la corde.</p><ol><li>Poids : $P = m \\times g = 12 \\times 10 = 120\\ \\text{N}$.</li><li>Le régime est en équilibre sous deux forces : $T = P = 120\\ \\text{N}$.</li><li>La force de la corde est verticale et dirigée vers le haut.</li></ol><p>Dans l'autre sens : un sac immobile est suspendu à un fil qui exerce $300\\ \\text{N}$. Alors $P = 300\\ \\text{N}$ et $m = P \\div g = 300 \\div 10 = 30\\ \\text{kg}$.</p><h2>Le piège à éviter</h2><p>Écrire que la force du fil est égale à la masse : « $T = 12$ » pour un régime de $12\\ \\text{kg}$. La masse est en kilogrammes, la force en newtons. Il faut passer par le poids : $P = m \\times g$.</p><p>Autre erreur : croire que le fil exerce une force plus grande que le poids pour « porter » le solide. Il exerce exactement la même valeur.</p><h2>En une phrase</h2><p>Un solide immobile suspendu à un fil est soumis à son poids et à la force du fil : elles sont verticales, de sens contraires et de même valeur, $T = P = m \\times g$.</p>",
-          "exercises": [
+          "title": "La caisse à outils du menuisier",
+          "statement": "Dans son atelier, un menuisier suspend une caisse à outils à un ressort fixé au plafond. La caisse est immobile et un dynamomètre placé sur le ressort indique 45 N. Le menuisier pose ensuite la même caisse sur un établi horizontal, où elle reste immobile. On néglige les frottements et on prend g = 10 N/kg.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Les deux forces sur un solide suspendu",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Une caisse à outils est suspendue à un ressort et reste immobile ; le dynamomètre indique 45 N. On prend g = 10 N/kg. Quelle est la masse de la caisse, en kilogrammes ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : la force connue est la force du ressort sur la caisse, $T = 45$ N ; la force inconnue est le poids $P$ ; on demande la masse $m$. Étape 2 — Écrire l'égalité des intensités : la caisse est en équilibre, donc $P = T = 45$ N. Étape 3 — Calculer la masse : $m = P / g = 45 / 10 = 4{,}5$ kg. Étape 4 — Conclure : la caisse a une masse de 4,5 kg. Répondre 45 kg lirait la force comme une masse.",
+              "answers": [
                 {
-                  "content": "Un régime de bananes pend, immobile, au bout d'une corde. Quelles forces s'exercent sur lui ?",
-                  "question_type": "single_choice",
-                  "explanation": "Deux forces : son poids, qui le tire vers le bas, et la force de la corde, qui le retient vers le haut. Immobile ne veut pas dire que la corde ne fait rien.",
-                  "answers": [
-                    { "content": "Son poids et la force exercée par la corde", "correct": true },
-                    { "content": "Son poids seulement", "correct": false },
-                    { "content": "Son poids, la force de la corde et une force qui le fait bouger", "correct": false },
-                    { "content": "La force de la corde seulement", "correct": false }
-                  ]
+                  "content": "4,5",
+                  "correct": true
+                }
+              ],
+              "unit": "kg",
+              "tolerance": 0
+            },
+            {
+              "content": "Une caisse à outils de masse 4,5 kg est suspendue à un ressort et reste immobile ; le dynamomètre indique 45 N. Montre que la caisse est en équilibre : nomme les deux forces et donne leurs caractéristiques.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : la caisse subit deux forces. Son poids $\\vec{P}$ est vertical, dirigé vers le bas, d'intensité $P = 4{,}5 \\times 10 = 45$ N. La force $\\vec{T}$ du ressort est verticale, dirigée vers le haut, d'intensité $T = 45$ N. Les deux forces ont la même droite d'action, des sens contraires et la même intensité : les trois conditions sont vérifiées, donc la caisse est en équilibre. Barème sur 3 : forces nommées (0,5), droite d'action (0,5), sens (1), intensités avec le calcul (1).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Les deux forces sont nommées : poids et force du ressort",
+                "Droite d'action commune : la verticale",
+                "Sens contraires : poids vers le bas, ressort vers le haut",
+                "Intensités égales : P = T = 45 N"
+              ],
+              "starter": "La caisse subit deux forces : ..."
+            },
+            {
+              "content": "La même caisse, de masse 4,5 kg, est posée et immobile sur un établi horizontal (frottements négligés). On prend g = 10 N/kg. Quelle est l'intensité de la réaction de l'établi ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Faire le bilan : la caisse subit son poids $\\vec{P}$ et la réaction $\\vec{R}$ de l'établi. Étape 2 — Condition d'équilibre : même droite verticale, sens contraires, donc $R = P$. Étape 3 — Calculer le poids : $P = 4{,}5 \\times 10 = 45$ N. Étape 4 — Conclure : $R = 45$ N, verticale vers le haut.",
+              "answers": [
+                {
+                  "content": "45",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "Le menuisier pose sur l'établi la caisse de 4,5 kg, puis ajoute dedans des outils de 1,5 kg. L'ensemble reste immobile. On prend g = 10 N/kg. Quelle est maintenant l'intensité de la réaction de l'établi ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Faire le bilan : poids $\\vec{P}$ de l'ensemble et réaction $\\vec{R}$ de l'établi. Étape 2 — Condition d'équilibre : $R = P$. Étape 3 — Calculer le poids de l'ensemble : la masse totale est $4{,}5 + 1{,}5 = 6$ kg, donc $P = 6 \\times 10 = 60$ N. Étape 4 — Conclure : $R = 60$ N, verticale vers le haut. Garder 45 N oublierait les outils.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "unit": "N",
+              "tolerance": 0
+            },
+            {
+              "content": "La caisse de 4,5 kg est posée et immobile sur l'établi horizontal. Choisis les deux affirmations vraies.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Faire le bilan : poids $\\vec{P}$ et réaction $\\vec{R}$. Étape 2 — Condition d'équilibre : $\\vec{R}$ est sur la même droite que $\\vec{P}$ (la verticale), de sens contraire (vers le haut) et de même intensité. Étape 3 — Calculer : $P = 4{,}5 \\times 10 = 45$ N, donc $R = 45$ N et non 4,5 N (valeur de la masse en kg). Étape 4 — Conclure : les affirmations vraies sont « vers le haut » et « même intensité que le poids ». Une réaction horizontale ne compenserait pas le poids.",
+              "answers": [
+                {
+                  "content": "La réaction de l'établi est dirigée vers le haut",
+                  "correct": true
                 },
                 {
-                  "content": "Parmi ces propositions, lesquelles décrivent correctement le poids d'un solide suspendu immobile ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le poids s'applique au centre de gravité G et il est vertical vers le bas. Le point d'attache du fil est celui de la force du fil, pas du poids.",
-                  "answers": [
-                    { "content": "Il est vertical et dirigé vers le bas", "correct": true },
-                    { "content": "Il est appliqué au centre de gravité G", "correct": true },
-                    { "content": "Il est dirigé vers le haut", "correct": false },
-                    { "content": "Il est appliqué au point d'attache du fil", "correct": false },
-                    { "content": "Il est horizontal", "correct": false }
-                  ]
+                  "content": "La réaction de l'établi vaut 4,5 N",
+                  "correct": false
                 },
                 {
-                  "content": "Un solide est suspendu, immobile, à un fil. Quelles propositions décrivent correctement la force exercée par le fil ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "À l'équilibre, la force du fil a la même droite d'action que le poids, un sens contraire (vers le haut) et la même valeur. Elle n'est pas nulle : sans elle, le solide tomberait.",
-                  "answers": [
-                    { "content": "Elle est verticale, comme le poids", "correct": true },
-                    { "content": "Elle est dirigée vers le haut", "correct": true },
-                    { "content": "Elle a la même valeur que le poids", "correct": true },
-                    { "content": "Elle est dirigée vers le bas", "correct": false },
-                    { "content": "Elle est plus grande que le poids", "correct": false },
-                    { "content": "Elle est nulle, car le solide ne bouge pas", "correct": false }
-                  ]
+                  "content": "La réaction de l'établi a la même intensité que le poids de la caisse",
+                  "correct": true
                 },
                 {
-                  "content": "Vrai ou faux ? Le fil auquel est suspendu un solide immobile est vertical.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Le poids est vertical, et la force du fil doit avoir la même droite d'action : le fil est donc sur la verticale qui passe par le centre de gravité.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Dans l'image du régime accroché, que représente « la Terre qui tire le régime vers le bas » ?",
-                  "question_type": "single_choice",
-                  "explanation": "La Terre attire le régime : c'est son poids. La corde qui le retient est la force du fil. L'équilibre est le résultat des deux, pas une force.",
-                  "answers": [
-                    { "content": "Le poids du régime", "correct": true },
-                    { "content": "La force exercée par le fil", "correct": false },
-                    { "content": "La masse du régime", "correct": false },
-                    { "content": "L'équilibre du régime", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide est suspendu, immobile, à un fil. On coupe le fil. Que devient l'équilibre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans le fil, il ne reste que le poids : une seule force ne peut pas équilibrer le solide, qui tombe. Le poids, lui, ne disparaît jamais.",
-                  "answers": [
-                    { "content": "Il disparaît : il ne reste que le poids et le solide tombe", "correct": true },
-                    { "content": "Il reste, grâce au poids", "correct": false },
-                    { "content": "Il reste, car le poids disparaît en même temps que le fil", "correct": false },
-                    { "content": "Il disparaît, car le poids devient nul", "correct": false }
-                  ]
+                  "content": "La réaction de l'établi est horizontale",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer la force exercée par le fil",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un sac de masse 8 kg est suspendu, immobile, à un fil. On prend g = 10 N/kg. Quelle est la valeur de la force exercée par le fil ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = m × g = 8 × 10 = 80 N, et à l'équilibre T = P = 80 N. Garder 8 revient à confondre la masse en kg et la force en N.",
-                  "answers": [
-                    { "content": "80 N", "correct": true },
-                    { "content": "8 N", "correct": false },
-                    { "content": "0,8 N", "correct": false },
-                    { "content": "800 N", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un seau est suspendu, immobile, à un fil qui exerce sur lui une force de 150 N. On prend g = 10 N/kg. Quelle est la masse du seau ?",
-                  "question_type": "single_choice",
-                  "explanation": "À l'équilibre, P = T = 150 N. Comme P = m × g, on a m = P ÷ g = 150 ÷ 10 = 15 kg. Écrire 150 kg oublie de diviser par g.",
-                  "answers": [
-                    { "content": "15 kg", "correct": true },
-                    { "content": "150 kg", "correct": false },
-                    { "content": "1 500 kg", "correct": false },
-                    { "content": "1,5 kg", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un fil peut exercer au plus 200 N sans casser. Avec g = 10 N/kg, quelle est la plus grande masse qu'on peut y suspendre, immobile, sans qu'il casse ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le fil doit exercer T = P. Au maximum, P = 200 N, donc m = 200 ÷ 10 = 20 kg. Dire 200 kg confond newtons et kilogrammes.",
-                  "answers": [
-                    { "content": "20 kg", "correct": true },
-                    { "content": "200 kg", "correct": false },
-                    { "content": "2 kg", "correct": false },
-                    { "content": "2 000 kg", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide de poids 45 N pend, immobile, au bout d'un fil. Quelle est la force exercée par le fil ?",
-                  "question_type": "single_choice",
-                  "explanation": "À l'équilibre, la force du fil a la même valeur que le poids (45 N), la même droite d'action (verticale) et un sens contraire : vers le haut.",
-                  "answers": [
-                    { "content": "45 N, verticale, vers le haut", "correct": true },
-                    { "content": "45 N, verticale, vers le bas", "correct": false },
-                    { "content": "4,5 N, verticale, vers le haut", "correct": false },
-                    { "content": "90 N, verticale, vers le haut", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Un solide de masse 5 kg et un solide de masse 10 kg sont suspendus, immobiles, chacun à un fil. Avec g = 10 N/kg, le fil du second exerce une force deux fois plus grande que le fil du premier.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Premier fil : T = 5 × 10 = 50 N. Second fil : T = 10 × 10 = 100 N. Le poids est proportionnel à la masse, donc la force du fil aussi.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide de masse 4 kg pend, immobile, à un fil. On prend g = 10 N/kg. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "P = 4 × 10 = 40 N, et T = P = 40 N. La force du fil n'est pas nulle parce que le solide ne bouge pas : au contraire, c'est elle qui l'empêche de tomber.",
-                  "answers": [
-                    { "content": "Le poids du solide vaut 40 N", "correct": true },
-                    { "content": "La force exercée par le fil vaut 40 N", "correct": true },
-                    { "content": "La force exercée par le fil vaut 4 N", "correct": false },
-                    { "content": "La force exercée par le fil vaut 0 N, car le solide est immobile", "correct": false },
-                    { "content": "Le poids du solide vaut 4 N", "correct": false }
-                  ]
-                }
-              ]
+              "content": "Un élève affirme : « La caisse de 4,5 kg est posée sur l'établi, donc la réaction de l'établi est de 4,5 N. » Explique l'erreur de l'élève et donne la bonne valeur. On prend g = 10 N/kg.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : l'élève a pris la masse, 4,5 kg, pour une force en newtons. La caisse est immobile sur l'établi : elle est en équilibre sous l'action de son poids $\\vec{P}$ et de la réaction $\\vec{R}$ de l'établi, de même intensité, donc $R = P$. Le poids vaut $P = m \\times g = 4{,}5 \\times 10 = 45$ N. La réaction de l'établi vaut donc 45 N, verticale et dirigée vers le haut, et non 4,5 N. Barème sur 4 : erreur identifiée (1), condition d'équilibre (1), calcul du poids (1), conclusion avec l'unité (1).",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "L'erreur est identifiée : l'élève confond la masse en kg et une force en N",
+                "La condition d'équilibre R = P est énoncée",
+                "Le calcul P = m × g = 4,5 × 10 = 45 N est posé",
+                "La conclusion R = 45 N, verticale vers le haut, est donnée avec l'unité"
+              ],
+              "starter": "L'élève confond la masse et ..."
             },
             {
-              "title": "S'évaluer — Un lampion suspendu pour la fête",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "La force exercée par le ressort sur la caisse suspendue (45 N) a la même intensité que la réaction de l'établi sur la même caisse posée.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Faire le bilan : dans les deux cas, la caisse subit son poids $\\vec{P}$ et une autre force qui la retient. Étape 2 — Condition d'équilibre : suspendue, $T = P$ ; posée, $R = P$. Étape 3 — Calculer : le poids de la même caisse est $P = 4{,}5 \\times 10 = 45$ N dans les deux cas. Étape 4 — Conclure : $T = R = 45$ N. L'affirmation est vraie : le poids ne dépend pas de la façon dont la caisse est retenue.",
+              "answers": [
                 {
-                  "content": "Un lampion de masse 2,5 kg est suspendu, immobile, par un fil à la poutre du kiosque. On prend g = 10 N/kg. Quelle est la description correcte de la force exercée par le fil ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 2,5 × 10 = 25 N. À l'équilibre, la force du fil vaut 25 N, elle est verticale et dirigée vers le haut. Le sens vers le bas serait celui du poids.",
-                  "answers": [
-                    { "content": "25 N, verticale, vers le haut", "correct": true },
-                    { "content": "25 N, verticale, vers le bas", "correct": false },
-                    { "content": "2,5 N, verticale, vers le haut", "correct": false },
-                    { "content": "250 N, verticale, vers le haut", "correct": false }
-                  ]
+                  "content": "Vrai",
+                  "correct": true
                 },
                 {
-                  "content": "Le poids d'un régime de masse 12 kg est représenté avec l'échelle « 1 cm pour 40 N ». On prend g = 10 N/kg. Quelle est la longueur de la flèche du poids ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 12 × 10 = 120 N, puis 120 ÷ 40 = 3 cm. On divise l'intensité par la valeur d'un centimètre. 480 cm viendrait de 12 × 40 : la masse a été multipliée par l'échelle.",
-                  "answers": [
-                    { "content": "3 cm", "correct": true },
-                    { "content": "12 cm", "correct": false },
-                    { "content": "480 cm", "correct": false },
-                    { "content": "0,3 cm", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide de masse 6 kg est suspendu, immobile, à un fil. On prend g = 10 N/kg. Quelles affirmations sont correctes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "P = 6 × 10 = 60 N. À l'équilibre, la force du fil vaut 60 N et se trouve sur la même verticale que le poids. Elle est de sens contraire, donc vers le haut.",
-                  "answers": [
-                    { "content": "Le poids du solide vaut 60 N", "correct": true },
-                    { "content": "La force du fil vaut 60 N", "correct": true },
-                    { "content": "Le fil et le poids ont la même droite d'action, verticale", "correct": true },
-                    { "content": "La force du fil vaut 6 N", "correct": false },
-                    { "content": "La force du fil est dirigée vers le bas, comme le poids", "correct": false },
-                    { "content": "Le fil est incliné d'un angle quelconque", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un fil casse dès qu'il doit exercer plus de 350 N. Un élève veut y suspendre, immobile, un sac de 36 kg. On prend g = 10 N/kg. Le fil va-t-il casser ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 36 × 10 = 360 N. Le fil doit exercer T = 360 N, donc plus de 350 N : il casse. Comparer 36 à 350 mélange des kilogrammes et des newtons.",
-                  "answers": [
-                    { "content": "Oui, car il doit exercer 360 N, plus que 350 N", "correct": true },
-                    { "content": "Non, car 36 est bien inférieur à 350", "correct": false },
-                    { "content": "Non, car le fil n'a qu'à compenser la moitié du poids", "correct": false },
-                    { "content": "On ne peut pas savoir sans connaître la longueur du fil", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Un solide immobile est suspendu à un fil. Si on le remplace par un fil plus épais, la force exercée par le fil sur le solide devient plus grande.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Le solide reste immobile : la force du fil reste égale au poids. Un fil plus épais est seulement plus résistant, il n'exerce pas une force plus grande.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
-                },
-                {
-                  "content": "Un élève dit : « Le solide est suspendu et immobile, donc la force du fil est égale à sa masse en kilogrammes. » Quelle est son erreur ?",
-                  "question_type": "single_choice",
-                  "explanation": "La force du fil est égale au poids, P = m × g, en newtons. La masse en kilogrammes n'est pas une force. Pour 5 kg et g = 10 N/kg, la force du fil est 50 N, pas 5.",
-                  "answers": [
-                    { "content": "La force du fil est égale au poids P = m × g, pas à la masse", "correct": true },
-                    { "content": "Il a raison : masse et poids sont la même grandeur", "correct": false },
-                    { "content": "La force du fil est nulle, car le solide est immobile", "correct": false },
-                    { "content": "La force du fil est égale au double du poids", "correct": false }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Un solide posé sur un support",
-          "subtitle": "Le poids et la réaction du support s'équilibrent",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Nommer les deux forces qui s'exercent sur un solide posé sur un support horizontal.</li><li>Décrire la réaction du support : direction, sens et valeur.</li></ul><h2>L'image pour comprendre</h2><p><strong>La marmite de sauce sur la table du buffet.</strong> Pour la fête, on a posé une grosse marmite pleine sur une table. Elle ne bouge pas. Si tu la poses sur une planche mince posée sur deux briques, la planche se courbe : elle pousse la marmite vers le haut. Sur une table fragile qui s'effondre, la marmite tomberait. On suppose la table très lisse : elle ne fait que pousser, sans retenir la marmite sur les côtés (pas de frottement).</p><p><strong>Le pont.</strong> La marmite est le <strong>solide</strong>. La Terre qui l'attire vers le bas, c'est son <strong>poids</strong> $\\vec{P}$. La table qui la soutient, c'est la <strong>réaction du support</strong> $\\vec{R}$ : la force que le support exerce sur le solide. La marmite est immobile : elle est <strong>en équilibre</strong>.</p><p><strong>La limite de l'image.</strong> Une table solide ne se courbe pas visiblement, mais elle pousse quand même la marmite. De plus, $R = P$ n'est vrai que parce que la marmite est immobile et soumise à ces deux seules forces.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Un solide immobile posé sur un support <strong>horizontal</strong>, <strong>sans frottement</strong>, est soumis à <strong>deux forces</strong> :</p><ul><li>son <strong>poids</strong> $\\vec{P}$, vertical, vers le bas, de valeur $P = m \\times g$ ;</li><li>la <strong>réaction du support</strong> $\\vec{R}$, perpendiculaire à la surface du support : elle est donc verticale.</li></ul><p>À l'équilibre : $\\vec{R}$ et $\\vec{P}$ ont la même droite d'action (la verticale passant par G), des sens contraires ($\\vec{R}$ est dirigée vers le haut) et la même valeur : $R = P$.</p></blockquote><h2>Exemple résolu</h2><p>Une marmite de masse $15\\ \\text{kg}$ est posée, immobile, sur une table horizontale sans frottement. On prend $g = 10\\ \\text{N/kg}$. Décris la réaction de la table.</p><ol><li>Poids : $P = m \\times g = 15 \\times 10 = 150\\ \\text{N}$, vertical, vers le bas.</li><li>La marmite est en équilibre sous deux forces : $R = P = 150\\ \\text{N}$.</li><li>La réaction est perpendiculaire à la table, donc verticale, dirigée vers le haut.</li></ol><h2>Le piège à éviter</h2><p>Penser que la table n'exerce aucune force sur la marmite « parce qu'elle ne bouge pas ». Un support immobile exerce quand même une force : c'est elle qui empêche le solide de tomber.</p><p>Autre erreur : dessiner la réaction oblique ou lui donner la masse en kilogrammes comme valeur. Elle est perpendiculaire au support, et sa valeur en newtons est celle du poids.</p><h2>En une phrase</h2><p>Un solide immobile posé sur un support horizontal sans frottement est soumis à son poids et à la réaction du support : verticales, de sens contraires et de même valeur, $R = P$.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Les deux forces sur un solide posé",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Une marmite est posée, immobile, sur une table horizontale sans frottement. Quelles forces s'exercent sur elle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Deux forces : le poids, qui la tire vers le bas, et la réaction de la table, qui la pousse vers le haut. Sans la table, la marmite tomberait : la table exerce donc bien une force.",
-                  "answers": [
-                    { "content": "Son poids et la réaction de la table", "correct": true },
-                    { "content": "Son poids seulement", "correct": false },
-                    { "content": "Son poids et la force d'une main invisible qui la maintient", "correct": false },
-                    { "content": "La réaction de la table seulement", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Une table immobile n'exerce aucune force sur la marmite posée dessus.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Être immobile ne veut pas dire ne rien exercer. La table pousse la marmite vers le haut, comme la planche qui se courbe : c'est la réaction du support.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
-                },
-                {
-                  "content": "Un solide est posé, immobile, sur un support horizontal sans frottement. Quelles propositions décrivent correctement la réaction du support ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La réaction est perpendiculaire au support horizontal, donc verticale. Elle est dirigée vers le haut, car elle équilibre le poids, et elle a la même valeur que lui. Elle n'est jamais nulle.",
-                  "answers": [
-                    { "content": "Elle est verticale", "correct": true },
-                    { "content": "Elle est dirigée vers le haut", "correct": true },
-                    { "content": "Elle a la même valeur que le poids", "correct": true },
-                    { "content": "Elle est dirigée vers le bas", "correct": false },
-                    { "content": "Elle est nulle, car le solide ne bouge pas", "correct": false },
-                    { "content": "Elle est horizontale", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Dans l'image de la marmite, que représente la planche mince qui se courbe et repousse la marmite vers le haut ?",
-                  "question_type": "single_choice",
-                  "explanation": "La planche joue le rôle du support : elle pousse le solide vers le haut. C'est la réaction du support. Le poids, lui, est la force de la Terre qui tire la marmite vers le bas.",
-                  "answers": [
-                    { "content": "La réaction du support", "correct": true },
-                    { "content": "Le poids de la marmite", "correct": false },
-                    { "content": "La masse de la marmite", "correct": false },
-                    { "content": "La force exercée par un fil", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un support n'exerce aucun frottement sur le solide posé dessus. Quelle est la direction de la réaction par rapport à la surface du support ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans frottement, le support ne peut que pousser perpendiculairement à sa surface. Une réaction parallèle ou oblique supposerait une force qui retient le solide sur les côtés, donc un frottement.",
-                  "answers": [
-                    { "content": "Perpendiculaire à la surface", "correct": true },
-                    { "content": "Parallèle à la surface", "correct": false },
-                    { "content": "Oblique, à 45° de la surface", "correct": false },
-                    { "content": "Elle n'a pas de direction fixe", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide est posé, immobile, sur un support horizontal sans frottement. Quelles sont les deux forces qui s'équilibrent ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le poids du solide et la réaction du support s'équilibrent. La masse n'est pas une force, le frottement est supposé nul et il n'y a pas de fil dans cette situation.",
-                  "answers": [
-                    { "content": "Le poids du solide", "correct": true },
-                    { "content": "La réaction du support", "correct": true },
-                    { "content": "La masse du solide", "correct": false },
-                    { "content": "Le frottement du support", "correct": false },
-                    { "content": "La force d'un fil", "correct": false }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Calculer la réaction du support",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un sac de riz de masse 25 kg est posé, immobile, sur une table horizontale sans frottement. On prend g = 10 N/kg. Quelle est la valeur de la réaction de la table ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 25 × 10 = 250 N, et à l'équilibre R = P = 250 N. Garder 25 confond la masse en kg et la force en N ; 0 N oublie que la table pousse.",
-                  "answers": [
-                    { "content": "250 N", "correct": true },
-                    { "content": "25 N", "correct": false },
-                    { "content": "2,5 N", "correct": false },
-                    { "content": "0 N", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Une valise est posée, immobile, sur un sol horizontal sans frottement. Le sol exerce sur elle une réaction de 180 N. On prend g = 10 N/kg. Quelle est la masse de la valise ?",
-                  "question_type": "single_choice",
-                  "explanation": "À l'équilibre, P = R = 180 N. Comme P = m × g, m = 180 ÷ 10 = 18 kg. Écrire 180 kg oublie de diviser par g.",
-                  "answers": [
-                    { "content": "18 kg", "correct": true },
-                    { "content": "180 kg", "correct": false },
-                    { "content": "1,8 kg", "correct": false },
-                    { "content": "1 800 kg", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un livre est posé, immobile, sur une table horizontale sans frottement. Quelle est la direction et le sens de la réaction de la table ?",
-                  "question_type": "single_choice",
-                  "explanation": "La réaction est perpendiculaire à la table horizontale, donc verticale. Elle équilibre le poids, qui est vers le bas : elle est donc dirigée vers le haut.",
-                  "answers": [
-                    { "content": "Verticale, vers le haut", "correct": true },
-                    { "content": "Verticale, vers le bas", "correct": false },
-                    { "content": "Horizontale, vers la droite", "correct": false },
-                    { "content": "Horizontale, vers la gauche", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Un solide de masse 3 kg est posé, immobile, sur une table horizontale sans frottement. Avec g = 10 N/kg, la réaction de la table vaut 3 N.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. P = 3 × 10 = 30 N, donc R = 30 N. La valeur de la réaction est celle du poids, en newtons, pas la masse en kilogrammes.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
-                },
-                {
-                  "content": "Un sac de 10 kg et un sac de 20 kg sont posés, chacun immobile, sur un sol horizontal sans frottement. Comment se comparent les réactions du sol sur chaque sac ?",
-                  "question_type": "single_choice",
-                  "explanation": "Pour le premier, R = 10 × 10 = 100 N ; pour le second, R = 20 × 10 = 200 N. La réaction suit le poids, donc elle est deux fois plus grande sur le sac de 20 kg.",
-                  "answers": [
-                    { "content": "Elle est deux fois plus grande sur le sac de 20 kg", "correct": true },
-                    { "content": "Elle est la même sur les deux sacs", "correct": false },
-                    { "content": "Elle est plus grande sur le sac de 10 kg", "correct": false },
-                    { "content": "On ne peut pas la comparer sans connaître la taille des sacs", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Une boîte de masse 4 kg est posée, immobile, sur une table horizontale sans frottement. On prend g = 10 N/kg. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "P = 4 × 10 = 40 N et R = P = 40 N. Additionner les deux forces (80 N) est une erreur : elles se compensent, elles ne s'ajoutent pas.",
-                  "answers": [
-                    { "content": "Le poids de la boîte vaut 40 N", "correct": true },
-                    { "content": "La réaction de la table vaut 40 N", "correct": true },
-                    { "content": "La réaction de la table vaut 4 N", "correct": false },
-                    { "content": "La réaction de la table vaut 0 N", "correct": false },
-                    { "content": "La réaction de la table vaut 80 N", "correct": false }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Des objets posés sur le buffet",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Un bidon de masse 30 kg est posé, immobile, sur un sol plan et horizontal, sans frottement. On prend g = 10 N/kg. Quelle est la bonne description de la réaction du sol ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 30 × 10 = 300 N, donc R = 300 N. Elle est perpendiculaire au sol horizontal, donc verticale, et dirigée vers le haut pour équilibrer le poids.",
-                  "answers": [
-                    { "content": "300 N, verticale, vers le haut", "correct": true },
-                    { "content": "300 N, verticale, vers le bas", "correct": false },
-                    { "content": "30 N, verticale, vers le haut", "correct": false },
-                    { "content": "300 N, horizontale", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un seau de masse 5 kg est posé, immobile, sur une table horizontale sans frottement. Les forces sont représentées avec l'échelle « 1 cm pour 25 N ». On prend g = 10 N/kg. Quelle est la longueur de la flèche de la réaction ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 5 × 10 = 50 N, donc R = 50 N, puis 50 ÷ 25 = 2 cm. Écrire 5 cm utilise la masse comme si c'était l'intensité, sans passer par le poids ni l'échelle.",
-                  "answers": [
-                    { "content": "2 cm", "correct": true },
-                    { "content": "5 cm", "correct": false },
-                    { "content": "50 cm", "correct": false },
-                    { "content": "0,5 cm", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide de masse 8 kg est posé, immobile, sur un support horizontal sans frottement. On prend g = 10 N/kg. Quelles affirmations sont correctes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "P = 8 × 10 = 80 N, donc R = 80 N. Les deux forces sont de sens contraires, vers le bas et vers le haut. Sans frottement, la réaction n'est pas horizontale.",
-                  "answers": [
-                    { "content": "Le poids du solide vaut 80 N", "correct": true },
-                    { "content": "La réaction du support vaut 80 N", "correct": true },
-                    { "content": "Le poids et la réaction ont des sens contraires", "correct": true },
-                    { "content": "La réaction du support vaut 8 N", "correct": false },
-                    { "content": "La réaction du support est horizontale", "correct": false },
-                    { "content": "La réaction du support est dirigée vers le bas", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Pour un solide immobile posé sur un support horizontal sans frottement, la valeur de la réaction en newtons est égale à la masse du solide en kilogrammes.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. La réaction est égale au poids, P = m × g. Avec g = 10 N/kg, la valeur en newtons est dix fois celle de la masse en kilogrammes.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
-                },
-                {
-                  "content": "Pour une marmite posée, immobile, sur une table horizontale sans frottement, un élève trace le poids avec une flèche de 3 cm vers le bas et la réaction avec une flèche de 2 cm vers le haut, avec la même échelle. Que penser de son schéma ?",
-                  "question_type": "single_choice",
-                  "explanation": "À l'équilibre, les deux forces ont la même valeur, donc les deux flèches ont la même longueur. Une réaction plus courte signifierait que la marmite s'enfonce dans la table.",
-                  "answers": [
-                    { "content": "Il est faux : les deux flèches doivent avoir la même longueur", "correct": true },
-                    { "content": "Il est juste : la table ne porte jamais tout le poids", "correct": false },
-                    { "content": "Il est faux : la flèche de la réaction doit être plus longue", "correct": false },
-                    { "content": "Il est juste : la réaction est toujours plus courte que le poids", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un régime est suspendu, immobile, à un fil. Une marmite de même poids est posée, immobile, sur une table horizontale sans frottement. Qu'ont en commun les deux situations ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans les deux cas, le solide est en équilibre sous deux forces : le poids est équilibré par une force verticale vers le haut, de même valeur. C'est celle du fil ou du support.",
-                  "answers": [
-                    { "content": "Le poids est équilibré par une force verticale, vers le haut, de même valeur", "correct": true },
-                    { "content": "La force vers le haut vaut le double du poids", "correct": false },
-                    { "content": "La force vers le haut est nulle", "correct": false },
-                    { "content": "Le solide est soumis à trois forces", "correct": false }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Mesurer et représenter deux forces qui s'équilibrent",
-          "subtitle": "Lire un dynamomètre, tracer deux forces à l'échelle. À compléter : frottements, plan incliné (rattachement à valider)",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Lire la valeur d'une force sur un dynamomètre en équilibre.</li><li>Représenter à l'échelle deux forces qui s'équilibrent.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le dynamomètre dans la corde.</strong> Pour mesurer la force des équipes, l'organisateur de la fête coupe la corde au milieu et y accroche un dynamomètre : un appareil à ressort, de poids négligeable. Chaque équipe tire sur un bout. Le ruban reste immobile et l'aiguille du dynamomètre s'arrête sur 600 N. L'organisateur dit : « Chaque équipe tire avec 600 N », et non « 1 200 N au total ».</p><p><strong>Le pont.</strong> Le dynamomètre est le <strong>solide</strong> en équilibre. Chaque équipe exerce sur lui une force à un de ses bouts. Les deux forces ont la même droite d'action, la même valeur et des sens contraires. La graduation indique la valeur de <strong>l'une</strong> de ces deux forces.</p><p><strong>La limite de l'image.</strong> Le dynamomètre se lit à l'équilibre, quand la corde est immobile. Et il ne mesure pas plus que sa graduation maximale.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Un dynamomètre immobile est soumis à <strong>deux forces</strong> de même droite d'action, de même valeur et de sens contraires. Il indique la valeur de <strong>chacune</strong> d'elles, pas leur somme.</p><p>Pour les représenter à l'échelle, on trace deux vecteurs sur la même droite, de même longueur, avec des pointes opposées. La longueur d'un vecteur est : intensité $\\div$ valeur d'un centimètre.</p></blockquote><h2>Exemple résolu</h2><p>Le dynamomètre immobile indique $600\\ \\text{N}$. Représente les deux forces avec l'échelle « 1 cm pour 200 N ».</p><ol><li>Le dynamomètre est en équilibre : chaque équipe exerce $600\\ \\text{N}$ sur lui.</li><li>Longueur de chaque flèche : $600 \\div 200 = 3\\ \\text{cm}$.</li><li>Tracé : deux flèches de $3\\ \\text{cm}$ sur la même droite horizontale, l'une partant d'un bout du dynamomètre vers la gauche, l'autre partant de l'autre bout vers la droite.</li></ol><p>Dans l'autre sens : une flèche de $2{,}5\\ \\text{cm}$ avec l'échelle « 1 cm pour 40 N » représente $2{,}5 \\times 40 = 100\\ \\text{N}$.</p><h2>Le piège à éviter</h2><p>Additionner les deux forces : lire $600\\ \\text{N}$ et dire « les équipes exercent $600 + 600 = 1\\ 200\\ \\text{N}$ ». Le dynamomètre indique la valeur de chaque force, pas leur somme.</p><p>Autre cas utile : si le dynamomètre est attaché à un arbre d'un côté et tiré par une équipe avec $500\\ \\text{N}$ de l'autre, il indique $500\\ \\text{N}$. L'arbre joue le rôle de la deuxième équipe.</p><h2>En une phrase</h2><p>Un dynamomètre en équilibre indique la valeur de chacune des deux forces égales qui le tirent, et on les représente par deux flèches de même longueur, sur la même droite, de sens contraires.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Ce que lit le dynamomètre",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un dynamomètre est placé entre deux équipes qui tirent chacune sur un bout, et il reste immobile. Qu'indique sa graduation ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il indique la valeur de la force exercée à une extrémité, c'est-à-dire la force d'une équipe. Il n'indique ni la somme des deux, ni la différence qui vaut zéro à l'équilibre.",
-                  "answers": [
-                    { "content": "La valeur de la force exercée par une équipe", "correct": true },
-                    { "content": "La somme des forces des deux équipes", "correct": false },
-                    { "content": "La différence des forces des deux équipes", "correct": false },
-                    { "content": "La masse de la corde", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Un dynamomètre immobile, de poids négligeable, est soumis à deux forces de même valeur.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Le dynamomètre est un solide en équilibre soumis à deux forces, une à chaque bout : elles ont donc la même droite d'action, la même valeur et des sens contraires.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Sur quelle propriété du ressort repose le fonctionnement du dynamomètre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le ressort s'allonge d'autant plus que la force est grande : c'est la déformation du ressort qui permet de lire la valeur de la force. Il ne garde pas la même longueur.",
-                  "answers": [
-                    { "content": "Il s'allonge d'autant plus que la force est grande", "correct": true },
-                    { "content": "Il garde toujours la même longueur", "correct": false },
-                    { "content": "Il s'allonge d'autant plus que le solide est immobile", "correct": false },
-                    { "content": "Il se raccourcit quand la force augmente", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Deux vecteurs représentent les forces des deux équipes sur un dynamomètre immobile. Quelles propriétés vérifient-ils ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les deux forces ont la même droite d'action, la même valeur et des sens contraires. Les vecteurs sont donc alignés, de même longueur et de pointes opposées.",
-                  "answers": [
-                    { "content": "Ils sont sur la même droite", "correct": true },
-                    { "content": "Ils ont la même longueur", "correct": true },
-                    { "content": "Leurs pointes sont opposées", "correct": true },
-                    { "content": "Leurs pointes sont dirigées dans le même sens", "correct": false },
-                    { "content": "L'un des deux est deux fois plus long que l'autre", "correct": false },
-                    { "content": "Ils sont tracés sur deux droites parallèles distinctes", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Avec l'échelle « 1 cm pour 100 N », que représente une flèche de 4 cm ?",
-                  "question_type": "single_choice",
-                  "explanation": "On multiplie la longueur par la valeur d'un centimètre : 4 × 100 = 400 N. Diviser 100 par 4 donnerait 25 N, ce qui est faux.",
-                  "answers": [
-                    { "content": "Une force de 400 N", "correct": true },
-                    { "content": "Une force de 25 N", "correct": false },
-                    { "content": "Une force de 4 N", "correct": false },
-                    { "content": "Une force de 104 N", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Dans l'image du tir à la corde, quel rôle joue le dynamomètre inséré dans la corde ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dynamomètre est le solide en équilibre soumis à deux forces, celles des deux équipes. Ce n'est ni l'une des forces, ni l'échelle des vecteurs.",
-                  "answers": [
-                    { "content": "Le rôle du solide en équilibre soumis à deux forces", "correct": true },
-                    { "content": "Le rôle de l'une des deux forces", "correct": false },
-                    { "content": "Le rôle de l'échelle du schéma", "correct": false },
-                    { "content": "Le rôle de la force de la Terre", "correct": false }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Lire et tracer à l'échelle",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un dynamomètre immobile, de poids négligeable, est tiré par deux équipes. Il indique 450 N. Quelle force chaque équipe exerce-t-elle sur lui ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dynamomètre est en équilibre : les deux forces sont égales, et la lecture est la valeur de chacune. 900 N additionne les deux équipes ; 225 N les partage.",
-                  "answers": [
-                    { "content": "450 N", "correct": true },
-                    { "content": "900 N", "correct": false },
-                    { "content": "225 N", "correct": false },
-                    { "content": "0 N", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Une force de 450 N est représentée avec l'échelle « 1 cm pour 150 N ». Quelle est la longueur de sa flèche ?",
-                  "question_type": "single_choice",
-                  "explanation": "On divise l'intensité par la valeur d'un centimètre : 450 ÷ 150 = 3 cm. Écrire 450 cm ignore l'échelle ; 0,33 cm divise dans le mauvais sens.",
-                  "answers": [
-                    { "content": "3 cm", "correct": true },
-                    { "content": "450 cm", "correct": false },
-                    { "content": "0,33 cm", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Une flèche mesure 2,5 cm avec l'échelle « 1 cm pour 40 N ». Quelle est la valeur de la force représentée ?",
-                  "question_type": "single_choice",
-                  "explanation": "On multiplie la longueur par la valeur d'un centimètre : 2,5 × 40 = 100 N. Diviser 40 par 2,5 donne 16, ce qui est une erreur d'opération.",
-                  "answers": [
-                    { "content": "100 N", "correct": true },
-                    { "content": "16 N", "correct": false },
-                    { "content": "42,5 N", "correct": false },
-                    { "content": "10 N", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Avec l'échelle « 1 cm pour 200 N », deux forces de 800 N qui s'équilibrent sont représentées par deux flèches de 4 cm.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. 800 ÷ 200 = 4 cm pour chaque force. Les deux flèches ont la même longueur, sont sur la même droite et ont des pointes opposées.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un solide est en équilibre sous deux forces. La première est représentée par une flèche de 5 cm vers la droite, avec l'échelle « 1 cm pour 20 N ». Quelle est la deuxième force et comment la représente-t-on avec la même échelle ?",
-                  "question_type": "single_choice",
-                  "explanation": "La première force vaut 5 × 20 = 100 N. La deuxième a la même valeur, la même droite d'action et un sens contraire : 100 N, soit une flèche de 5 cm vers la gauche.",
-                  "answers": [
-                    { "content": "100 N, flèche de 5 cm vers la gauche", "correct": true },
-                    { "content": "100 N, flèche de 2,5 cm vers la gauche", "correct": false },
-                    { "content": "100 N, flèche de 5 cm vers la droite", "correct": false },
-                    { "content": "200 N, flèche de 10 cm vers la gauche", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un dynamomètre immobile indique 300 N. On représente les forces avec l'échelle « 1 cm pour 100 N ». Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Chaque équipe exerce 300 N, et 300 ÷ 100 = 3 cm pour chaque flèche. Les deux forces sont égales à l'équilibre : on ne les partage pas et l'une n'est pas nulle.",
-                  "answers": [
-                    { "content": "Chaque équipe exerce 300 N", "correct": true },
-                    { "content": "Chaque flèche mesure 3 cm", "correct": true },
-                    { "content": "Chaque flèche mesure 6 cm", "correct": false },
-                    { "content": "Une équipe exerce 300 N et l'autre 0 N", "correct": false },
-                    { "content": "Chaque équipe exerce 150 N", "correct": false }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Mesurer la force des équipes",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Un dynamomètre de poids négligeable est inséré dans une corde horizontale immobile. L'équipe de gauche exerce 700 N sur la corde. Que lit-on sur le dynamomètre ?",
-                  "question_type": "single_choice",
-                  "explanation": "À l'équilibre, l'équipe de droite exerce aussi 700 N. Le dynamomètre indique la valeur de chaque force, soit 700 N. 1 400 N est la somme ; 350 N un partage qui n'existe pas.",
-                  "answers": [
-                    { "content": "700 N", "correct": true },
-                    { "content": "1 400 N", "correct": false },
-                    { "content": "350 N", "correct": false },
-                    { "content": "0 N", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un dynamomètre immobile, de poids négligeable, indique 800 N. On utilise l'échelle « 1 cm pour 200 N ». Quelle représentation des forces qui s'exercent sur lui convient ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque force vaut 800 N, soit 800 ÷ 200 = 4 cm. Les deux flèches de 4 cm sont sur la même droite, avec des pointes opposées. Une seule flèche de 8 cm additionnerait les deux forces.",
-                  "answers": [
-                    { "content": "Deux flèches de 4 cm sur la même droite, de sens contraires", "correct": true },
-                    { "content": "Une seule flèche de 8 cm", "correct": false },
-                    { "content": "Deux flèches de 4 cm sur la même droite, de même sens", "correct": false },
-                    { "content": "Deux flèches de 4 cm sur deux droites parallèles distinctes", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un dynamomètre immobile, de poids négligeable, indique 500 N. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le dynamomètre est en équilibre : chaque bout subit 500 N, sur la même droite et en sens contraires. Il n'indique pas 1 000 N, qui serait la somme des deux forces.",
-                  "answers": [
-                    { "content": "Chaque bout du dynamomètre subit une force de 500 N", "correct": true },
-                    { "content": "Les deux forces ont des sens contraires", "correct": true },
-                    { "content": "Les deux forces ont la même droite d'action", "correct": true },
-                    { "content": "Une des forces vaut 250 N et l'autre 250 N", "correct": false },
-                    { "content": "Les deux forces ont le même sens", "correct": false },
-                    { "content": "Il indique 1 000 N, car il y a deux équipes", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un élève trace deux flèches de 3 cm pour les deux forces qui s'exercent sur un dynamomètre immobile indiquant 750 N. Quelle échelle a-t-il utilisée ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque force vaut 750 N, représentée par 3 cm : 750 ÷ 3 = 250 N pour 1 cm. Choisir « 1 cm pour 500 N » vient de la somme des forces (1 500 ÷ 3).",
-                  "answers": [
-                    { "content": "1 cm pour 250 N", "correct": true },
-                    { "content": "1 cm pour 125 N", "correct": false },
-                    { "content": "1 cm pour 500 N", "correct": false },
-                    { "content": "1 cm pour 2 250 N", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux ? Un dynamomètre gradué jusqu'à 500 N est placé entre deux équipes qui tirent chacune avec 400 N. Il peut mesurer cette force sans dépasser sa graduation, même si la somme des deux forces (800 N) dépasse 500 N.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Le dynamomètre indique la valeur de chaque force, 400 N, qui est inférieure à 500 N. La somme des deux forces n'est jamais lue sur le cadran.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un dynamomètre est attaché à un arbre d'un côté. De l'autre côté, une équipe le tire avec 500 N et il reste immobile. Que lit-on sur le dynamomètre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dynamomètre est en équilibre : l'arbre exerce sur lui une force de 500 N, de sens contraire à celle de l'équipe. L'arbre joue le rôle de la deuxième équipe, le dynamomètre indique 500 N.",
-                  "answers": [
-                    { "content": "500 N", "correct": true },
-                    { "content": "1 000 N", "correct": false },
-                    { "content": "250 N", "correct": false },
-                    { "content": "0 N, car l'arbre ne tire pas", "correct": false }
-                  ]
+                  "content": "Faux",
+                  "correct": false
                 }
               ]
             }

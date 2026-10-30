@@ -11,7 +11,7 @@ class PlatesStructureTest < ActiveSupport::TestCase
 
   PARTS = Entities::Catalog::FigureCatalogs::PLATES
 
-  test "the plate module and the eight plates exist" do
+  test "the plate module and the eleven plates exist" do
     assert_path_exists LIB.join("plate.js")
     assert_path_exists INDEX
     assert_equal PARTS.keys.sort, MODULES.map { File.basename(it, ".js") }.sort

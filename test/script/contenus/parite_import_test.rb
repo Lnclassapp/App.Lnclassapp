@@ -54,6 +54,13 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
                    "labels" => [ { "part" => "right_atrium" }, { "part" => "aorta", "text" => "Aorte" } ] }.freeze
   TREE_PARAMS = { "layout" => "tree", "nodes" => %w[r a b].map { { "id" => it, "label" => it } }, "edges" => [ { "from" => "r", "to" => "a" }, { "from" => "r", "to" => "b" } ] }.freeze
 
+  LENS_PARAMS = { "mode" => "lens", "lens" => "convergent", "focal" => 4, "object_distance" => 12, "object_height" => 2 }.freeze
+  ALKANE_PARAMS = { "mode" => "alkane", "carbons" => 3, "display" => "developed" }.freeze
+  WATER_PARAMS = { "mode" => "custom",
+                   "atoms" => [ { "id" => "o", "element" => "O", "x" => 6, "y" => 6 }, { "id" => "a", "element" => "H", "x" => 3, "y" => 8 },
+                                { "id" => "b", "element" => "H", "x" => 9, "y" => 8 } ],
+                   "bonds" => [ [ "o", "a", 1 ], [ "o", "b", 1 ] ] }.freeze
+
   def explanation(document_course, value) = (document_course["exercises"][0]["questions"][0]["explanation"] = value)
 
   test "la leçon de la fabrique : ni l'import ni le script ne refusent" do
@@ -68,11 +75,31 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     assert_empty script_pairs(document)
   end
 
+  test "un tracé optique et une molécule bien formés passent l'import et le script" do
+    [ figure_of("optics", LENS_PARAMS), figure_of("optics", { "mode" => "eye", "defect" => "myopia", "correction" => "divergent" }),
+      figure_of("molecule", ALKANE_PARAMS), figure_of("molecule", WATER_PARAMS) ].each do |figure|
+      document = mutated { it["figures"][0] = figure }
+
+      assert_empty import_pairs(document), figure["kind"]
+      assert_empty script_pairs(document), figure["kind"]
+    end
+  end
+
   test "une planche bien formée passe l'import et le script" do
     document = mutated { it["figures"][0] = figure_of("plate", PLATE_PARAMS) }
 
     assert_empty import_pairs(document)
     assert_empty script_pairs(document)
+  end
+
+  test "les trois planches de PC bien formées passent l'import et le script" do
+    %w[dynamometer electrolyser eudiometer].each do |plate|
+      params = { "plate" => plate, "numbering" => "numbers", "labels" => Entities::Catalog::FigureCatalogs.parts(plate).map { { "part" => it } } }
+      document = mutated { it["figures"][0] = figure_of("plate", params) }
+
+      assert_empty import_pairs(document), plate
+      assert_empty script_pairs(document), plate
+    end
   end
 
   test "parité : version retirée, version inconnue, autre format" do
@@ -130,11 +157,34 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     "légende de carte faite d'un nombre" => [ ->(c) { c["figures"][0] = figure_of("map", MAP_PARAMS.merge("legend" => [ 3, "Savane" ])) }, "figure_invalid" ],
     "curseur de frise dont le max atteint end" => [ ->(c) { c["figures"][0] = figure_of("timeline", TIMELINE_PARAMS).merge("controls" => [ { "param" => "start", "min" => 1850, "max" => 1960, "step" => 5, "label" => "début" } ]) }, "figure_invalid" ],
     "planche inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("plate" => "skeleton")) }, "figure_invalid" ],
+    "planche de PC dont une partie est inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", { "plate" => "electrolyser", "numbering" => "names", "labels" => [ { "part" => "piston" } ] }) }, "figure_invalid" ],
+    "planche de PC dont une étiquette porte une partie d'une autre planche" => [ ->(c) { c["figures"][0] = figure_of("plate", { "plate" => "eudiometer", "numbering" => "names", "labels" => [ { "part" => "anode" } ] }) }, "figure_invalid" ],
     "planche dont une étiquette porte une partie d'une autre planche" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "liver" } ])) }, "figure_invalid" ],
     "planche dont une partie surlignée est inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("highlight" => %w[aorta liver])) }, "figure_invalid" ],
     "planche dont une partie est étiquetée deux fois" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta" }, { "part" => "aorta" } ])) }, "figure_invalid" ],
     "planche dont une étiquette porte une clé inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta", "texte" => "Aorte" } ])) }, "figure_invalid" ],
     "planche dont un texte d'étiquette est nul" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta", "text" => nil } ])) }, "figure_invalid" ],
+    "lentille sans focale" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("focal")) }, "figure_invalid" ],
+    "lentille sans nature" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("lens")) }, "figure_invalid" ],
+    "lentille sans distance d'objet" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("object_distance")) }, "figure_invalid" ],
+    "lentille sans hauteur d'objet" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("object_height")) }, "figure_invalid" ],
+    "œil sans défaut" => [ ->(c) { c["figures"][0] = figure_of("optics", { "mode" => "eye" }) }, "figure_invalid" ],
+    "correction d'une lentille" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.merge("correction" => "divergent")) }, "figure_invalid" ],
+    "tracé optique sans mode" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("mode")) }, "figure_invalid" ],
+    "alcane sans carbones" => [ ->(c) { c["figures"][0] = figure_of("molecule", ALKANE_PARAMS.except("carbons")) }, "figure_invalid" ],
+    "alcane sans affichage" => [ ->(c) { c["figures"][0] = figure_of("molecule", ALKANE_PARAMS.except("display")) }, "figure_invalid" ],
+    "alcane de 2,5 carbones" => [ ->(c) { c["figures"][0] = figure_of("molecule", ALKANE_PARAMS.merge("carbons" => 2.5)) }, "figure_invalid" ],
+    "molécule libre sans atomes" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.except("atoms")) }, "figure_invalid" ],
+    "molécule libre sans liaisons" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.except("bonds")) }, "figure_invalid" ],
+    "atome d'identifiant dupliqué" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("atoms" => WATER_PARAMS["atoms"].map { it.merge("id" => "o") })) }, "figure_invalid" ],
+    "liaison vers un atome absent" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("bonds" => [ [ "o", "z", 1 ] ])) }, "figure_invalid" ],
+    "liaison d'ordre 4" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("bonds" => [ [ "o", "a", 4 ] ])) }, "figure_invalid" ],
+    "élément inconnu" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("atoms" => [ { "id" => "o", "element" => "Xe", "x" => 6, "y" => 6 } ] + WATER_PARAMS["atoms"].drop(1))) }, "figure_invalid" ],
+    "atome hors de la grille" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("atoms" => [ { "id" => "o", "element" => "O", "x" => 13, "y" => 6 } ] + WATER_PARAMS["atoms"].drop(1))) }, "figure_invalid" ],
+    "valence de l'oxygène dépassée" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("bonds" => [ [ "o", "a", 1 ], [ "o", "b", 2 ] ])) }, "figure_invalid" ],
+    "carbone lié à cinq hydrogènes" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("atoms" => [ { "id" => "c", "element" => "C", "x" => 6, "y" => 6 } ] + Array.new(5) { |i| { "id" => "h#{i}", "element" => "H", "x" => i, "y" => 0 } }, "bonds" => Array.new(5) { |i| [ "c", "h#{i}", 1 ] })) }, "figure_invalid" ],
+    "hydrogène lié par une liaison double" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("atoms" => [ { "id" => "o", "element" => "O", "x" => 6, "y" => 6 }, { "id" => "h", "element" => "H", "x" => 3, "y" => 8 } ], "bonds" => [ [ "o", "h", 2 ] ])) }, "figure_invalid" ],
+    "liaison en double entre deux atomes" => [ ->(c) { c["figures"][0] = figure_of("molecule", WATER_PARAMS.merge("bonds" => [ [ "o", "a", 1 ], [ "a", "o", 1 ] ])) }, "figure_invalid" ],
     "CA-9 problème qui cite une figure absente" => [ ->(c) { c["exercises"][0]["figure"] = "inconnue" }, "figure_missing" ],
     "CA-9 notion qui cite une figure absente" => [ ->(c) { c["notions"][1]["figure"] = "inconnue" }, "figure_missing" ],
     "type de question inconnu" => [ ->(c) { c["exercises"][0]["questions"][0]["question_type"] = "oracle" }, "invalid_value" ],

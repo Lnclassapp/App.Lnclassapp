@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Entities::Catalog::FigureKinds
-# Rôle : liste fermée des neuf sortes de figures d'une leçon et bornes de leurs paramètres (une sorte nouvelle = un amendement de l'ADR)
+# Rôle : liste fermée des onze sortes de figures d'une leçon et bornes de leurs paramètres (une sorte nouvelle = un amendement de l'ADR)
 # ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2), XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs
 defined?(Entities::Catalog::FigureCatalogs) || require_relative("figure_catalogs")
 
@@ -45,6 +45,28 @@ module Entities
         end
       end
 
+      # optics.js : la lentille veut sa nature, sa focale, la distance et la hauteur de l'objet ; l'œil veut son défaut.
+      OPTICS_REQUIRED = lambda do |params|
+        case params["mode"]
+        when "lens" then %w[lens focal object_distance object_height]
+        when "eye" then %w[defect]
+        else %w[mode]
+        end
+      end
+
+      # molecule.js : un alcane veut son nombre de carbones et son affichage ; un dessin libre veut ses atomes et ses liaisons.
+      MOLECULE_REQUIRED = lambda do |params|
+        case params["mode"]
+        when "alkane" then %w[carbons display]
+        when "custom" then %w[atoms bonds]
+        else %w[mode]
+        end
+      end
+      MOLECULE_ELEMENTS = %w[C H O N Cl Fe Na].freeze
+      MOLECULE_VALENCE = { "C" => 4, "H" => 1, "O" => 2, "N" => 3, "Cl" => 1 }.freeze # Fe et Na : non contrôlés
+      MOLECULE_GRID = (0..12)
+      BOND_ORDERS = (1..3)
+
       ALL = {
         "geometry" => Kind.new(name: "geometry", item_range: (-20..20), adjustable: [].freeze, required: ->(_) { %w[points] },
                                params: { "points" => list(12), "segments" => list(30), "lines" => list(12), "circles" => list(6),
@@ -75,7 +97,14 @@ module Entities
                                         "nodes" => list(12), "edges" => list(16), "legend" => list(4) }),
         "plate" => Kind.new(name: "plate", item_range: (0..1), adjustable: [].freeze, required: ->(_) { %w[plate labels numbering] },
                             params: { "plate" => enum(*FigureCatalogs::PLATES.keys), "labels" => list(12), "highlight" => list(4),
-                                      "numbering" => enum("names", "numbers") })
+                                      "numbering" => enum("names", "numbers") }),
+        "optics" => Kind.new(name: "optics", item_range: (0.5..60), adjustable: %w[focal object_distance object_height].freeze, required: OPTICS_REQUIRED,
+                             params: { "mode" => enum("lens", "eye"), "lens" => enum("convergent", "divergent"), "focal" => number(0.5..20),
+                                       "object_distance" => number(0.5..60), "object_height" => number(0.5..10),
+                                       "defect" => enum("none", "myopia", "hyperopia"), "correction" => enum("none", "convergent", "divergent") }),
+        "molecule" => Kind.new(name: "molecule", item_range: MOLECULE_GRID, adjustable: %w[carbons].freeze, required: MOLECULE_REQUIRED,
+                               params: { "mode" => enum("alkane", "custom"), "carbons" => number(1..10),
+                                         "display" => enum("developed", "semi_developed", "raw"), "atoms" => list(20), "bonds" => list(24) })
       }.freeze
       NAMES = ALL.keys.freeze
 

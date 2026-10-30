@@ -10,6 +10,9 @@ import * as female_reproductive_system from "./female_reproductive_system"
 import * as hiv_virus from "./hiv_virus"
 import * as soil_profile from "./soil_profile"
 import * as root_hairs from "./root_hairs"
+import * as dynamometer from "./dynamometer"
+import * as electrolyser from "./electrolyser"
+import * as eudiometer from "./eudiometer"
 
 export const PLATES = {
   digestive_system,
@@ -19,5 +22,8 @@ export const PLATES = {
   female_reproductive_system,
   hiv_virus,
   soil_profile,
-  root_hairs
+  root_hairs,
+  dynamometer,
+  electrolyser,
+  eudiometer
 }
