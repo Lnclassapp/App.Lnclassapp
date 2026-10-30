@@ -20,8 +20,8 @@ module Queries
       # ADR cases §4 : blanks, le nombre de cases (1 à 6, la plus haute case des réponses plus un) ; has_hint : la question a un indice
       # (jamais son texte : il n'est dans la page qu'après l'ouverture, Lot B).
       Question = Data.define(:id, :number, :content, :question_type, :answers, :items, :prompts, :image, :points, :unit, :starter,
-                             :blanks, :has_hint) do
-        def initialize(items: [], prompts: [], image: nil, points: BigDecimal("1"), unit: nil, starter: nil, blanks: 1, has_hint: false, **) = super
+                             :blanks, :has_hint, :hint) do
+        def initialize(items: [], prompts: [], image: nil, points: BigDecimal("1"), unit: nil, starter: nil, blanks: 1, has_hint: false, hint: nil, **) = super
         def hint? = has_hint
         # Plusieurs cases : la phrase porte un champ par `___` (Assessment::BlanksHelper#blank_segments).
         def multi_blank? = blanks > 1
@@ -97,6 +97,8 @@ module Queries
         return if id.nil?
 
         rows = Orm::Question.where(exercise_id:).order(:position, :id).pluck(:id, :content, :question_type, :points, :unit, :starter, Arel.sql("hint IS NOT NULL"))
+        # Le texte d'un indice n'entre dans la copie que pour les questions dont l'ouverture est enregistrée (UDR §3.8).
+        hints = Orm::Question.where(id: hinted_question_ids).pluck(:id, :hint).to_h
         answers = Orm::Answer.where(question_id: rows.map(&:first)).order(:question_id, :position, :id)
                              .pluck(:question_id, :id, :content, :match_content, :blank).group_by(&:first)
         images = Orm::QuestionImage.where(question_id: rows.map(&:first)).pluck(:question_id, :public_id, :alt, :width, :height)
@@ -104,7 +106,7 @@ module Queries
         questions = rows.each_with_index.map do |(question_id, content, question_type, points, unit, starter, has_hint), index|
           rows_of = answers.fetch(question_id, []).map { it.drop(1) }
           Question.new(id: question_id, number: index + 1, content:, question_type:, answers: [], image: images[question_id], points:, unit:, starter:,
-                       blanks: (rows_of.map(&:last).max || 0) + 1, has_hint:, **sheet(id, question_id, kind_name(question_type), rows_of))
+                       blanks: (rows_of.map(&:last).max || 0) + 1, has_hint:, hint: hints[question_id], **sheet(id, question_id, kind_name(question_type), rows_of))
         end
         Copy.new(session_public_id: public_id, student_id:, status:, exercise_public_id:, exercise_title: title, statement:, question_count:,
                  questions:, statement_blocks:, figure: self.class.figure_for(figures, figure_key), hinted_question_ids:)

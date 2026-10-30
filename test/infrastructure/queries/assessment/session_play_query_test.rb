@@ -301,16 +301,18 @@ module Queries
         [ [ "mange", true, 0 ], [ "dort", false, 0 ], [ "sort", true, 1 ], [ "boit", false, 1 ] ].each_with_index do |(text, correct, blank), rank|
           select.answers.create!(position: rank + 1, content: text, correct:, blank:)
         end
-        plain = exercise.questions.create!(position: 3, content: "Simple ___", question_type: "fill_blank")
+        plain = exercise.questions.create!(position: 3, content: "Simple ___", question_type: "fill_blank", hint: "Secret fermé : le piège.")
         plain.answers.create!(position: 1, content: "x", correct: true)
         session = create_exercise_session(exercise:, hinted_question_ids: [ numeric.id ])
 
         copy = SessionPlayQuery.new.copy(public_id: session.public_id)
 
-        assert_equal [ [ 2, true ], [ 2, false ], [ 1, false ] ], copy.questions.map { [ it.blanks, it.hint? ] }
+        assert_equal [ [ 2, true ], [ 2, false ], [ 1, true ] ], copy.questions.map { [ it.blanks, it.hint? ] }
         assert_equal [ [ 0, 0, 1, 1 ] ], [ copy.questions[1].answers.sort_by(&:index).map(&:blank).sort ]
         assert_equal [ numeric.id ], copy.hinted_question_ids
-        assert_not_includes copy.questions.map(&:to_h).to_s, "Secret"
+        assert_equal "Secret : le coefficient.", copy.questions.first.hint
+        assert_nil copy.questions.last.hint
+        assert_not_includes copy.questions.map(&:to_h).to_s, "Secret fermé"
         assert_equal [ %w[mange dort sort boit].sort ], [ copy.questions[1].answers.map(&:content).sort ]
         assert copy.questions.first.multi_blank?
         assert_not copy.questions.last.multi_blank?
