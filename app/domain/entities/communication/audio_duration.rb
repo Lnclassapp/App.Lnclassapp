@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Communication::AudioDuration
 # Rôle : mesure la durée d'un audio MP3 ou M4A dans ses octets (trame par trame, boîte par boîte), sans bibliothèque
-# ADR  : XXXX-annonces-audio-dix-secondes (§4.2, menace §4.4), 0045, 0078 · UDR : 0071 (§3.8)
+# ADR  : 0118 (§4.2, menace §4.4), 0045, 0078 · UDR : 0071 (§3.8)
 module Entities
   module Communication
     # Un fichier téléversé est une entrée hostile : on ne croit aucune durée déclarée (Xing, VBRI, mvhd seul), on mesure ce

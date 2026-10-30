@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Communication::MessageInput
 # Rôle : la saisie d'une annonce : titre (60), texte (140), destinataires, thème, illustration, image et audio lus dans leurs octets, parution
-# ADR  : 0045, 0060, 0078, 0081, XXXX-annonces-audio-dix-secondes · UDR : 0071, 0075
+# ADR  : 0045, 0060, 0078, 0081, 0118 · UDR : 0071, 0075
 module Dtos
   module Communication
     class MessageInput

@@ -1,6 +1,6 @@
 // ⚡ FRONT · communication/audio_duration_controller — la durée de l'audio d'une annonce, lue avant l'envoi
 // Rôle : au choix d'un fichier, lit sa durée (<audio> sur une URL d'objet) ; au-delà du maximum : message sous le champ et champ invalide
-// UDR  : 0071 (§3.8, amendement du 2026-10-30) · ADR : XXXX-annonces-audio-dix-secondes · le serveur mesure toujours : durée illisible = rien de bloqué ici
+// UDR  : 0071 (§3.8, amendement du 2026-10-30) · ADR : 0118 · le serveur mesure toujours : durée illisible = rien de bloqué ici
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
