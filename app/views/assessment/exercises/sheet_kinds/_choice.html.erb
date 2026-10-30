@@ -1,10 +1,7 @@
-<%# 🌐 UI · assessment/exercises/sheet_kinds/_choice — Vrai / Faux, choix unique, 2 ou 3 propositions correctes, sur la feuille %>
-<%# Rôle : propositions A., B., C… dans le mélange de l'exercice ; « Plusieurs réponses » si 2 ou 3 sont correctes ; la bonne est marquée pour qui a reveal seul %>
-<%# ADR  : 0091 §4.4, 0112 · UDR : 0138 §3.1 %>
+<%# 🌐 UI · assessment/exercises/sheet_kinds/_choice — Vrai / Faux, choix unique, 2 ou 3 propositions correctes, dans la carte de la question %>
+<%# Rôle : propositions A., B., C… dans le mélange de l'exercice ; le format (« Plusieurs réponses ») est dit par la carte, jamais ici ; la bonne est marquée pour qui a reveal seul %>
+<%# ADR  : 0091 §4.4, 0112 · UDR : 0138 §3.1, 0145 (§3.3) %>
 <%# locals: (question:, reveal:) -%>
-<% if %w[multiple_correct_2 multiple_correct_3].include?(question.question_type) %>
-  <p class="mb-2 text-sm text-mute"><%= t("assessment.exercises.show.several_answers") %></p>
-<% end %>
 <ul class="space-y-1.5" aria-label="<%= t("assessment.exercises.questions_preview.answers") %>">
   <% question.answers.each_with_index do |answer, index| %>
     <% correct = reveal && answer.correct %>
