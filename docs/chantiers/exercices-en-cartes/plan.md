@@ -53,7 +53,7 @@ Un seul lot : la carte, son helper et ses quatre branchements partagent le parti
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle — sans objet
 - [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
 - [x] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert *(rubocop et tests du lot verts ; bin/ci-quiet et brakeman : vérificateur)*
 - [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

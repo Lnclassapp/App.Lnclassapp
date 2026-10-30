@@ -7,7 +7,7 @@ module Queries
       # groups : [Group] dans l'ordre des notions ; lesson_wide : [ExerciseRow] par position ;
       # targets : Queries::Classroom::CatalogAssignmentTargetsQuery::Targets pour un enseignant, nil pour tout autre rôle ;
       # bare : [Bare] les notions lisibles par ce rôle qui n'ont aucun exercice visible (leur ancre « notion-<slug> » reste la cible des liens).
-      # material_slug : la matière du cours, pour la pastille de chaque carte d'exercice (UDR-XXXX exercices en cartes).
+      # material_slug : la matière du cours, pour la pastille de chaque carte d'exercice (UDR-0145).
       Prepare = Data.define(:groups, :lesson_wide, :targets, :bare, :material_slug)
       Bare = Data.define(:essential_slug, :title)
       Group = Data.define(:essential_slug, :title, :exercises)

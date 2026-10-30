@@ -93,7 +93,7 @@ Et une question à 3 propositions correctes dit « Plusieurs réponses », jamai
 ## 6. Décisions rattachées
 
 - ADR : aucun — ni port, ni table, ni contrat de domaine ; un champ de lecture ajouté à trois `Data` de queries.
-- UDR-XXXX-exercices-et-questions-en-cartes — la carte d'exercice et la carte de question.
+- UDR-0145 — la carte d'exercice et la carte de question.
 
 ## 7. Mesures
 

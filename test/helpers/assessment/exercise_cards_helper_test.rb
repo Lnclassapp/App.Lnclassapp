@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-XXXX-exercices-et-questions-en-cartes §3.1 : une `Card` par source de lecture, construite par un seul helper.
+# UDR-0145 §3.1 : une `Card` par source de lecture, construite par un seul helper.
 module Assessment
   class ExerciseCardsHelperTest < ActionView::TestCase
     helper ComponentsHelper, DueDateHelper, BadgesHelper, Catalog::ContentStatusHelper

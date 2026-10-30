@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/sheet_kinds/_choice — Vrai / Faux, choix unique, 2 ou 3 propositions correctes, dans la carte de la question %>
 <%# Rôle : propositions A., B., C… dans le mélange de l'exercice ; le format (« Plusieurs réponses ») est dit par la carte, jamais ici ; la bonne est marquée pour qui a reveal seul %>
-<%# ADR  : 0091 §4.4, 0112 · UDR : 0138 §3.1, XXXX-exercices-et-questions-en-cartes (§3.3) %>
+<%# ADR  : 0091 §4.4, 0112 · UDR : 0138 §3.1, 0145 (§3.3) %>
 <%# locals: (question:, reveal:) -%>
 <ul class="space-y-1.5" aria-label="<%= t("assessment.exercises.questions_preview.answers") %>">
   <% question.answers.each_with_index do |answer, index| %>

@@ -1,4 +1,4 @@
-# UDR-XXXX : Les exercices et les questions en cartes
+# UDR-0145 : Les exercices et les questions en cartes
 <!-- index
 titre: Exercices et questions en cartes
 statut: Accepté

@@ -130,7 +130,7 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/Gauche2 → Droite2/, response.body)
   end
 
-  # CA-8, UDR-XXXX-exercices-et-questions-en-cartes §3.3 : chaque question est une carte numérotée qui dit son format.
+  # CA-8, UDR-0145 §3.3 : chaque question est une carte numérotée qui dit son format.
   test "chaque question est une carte numérotée qui dit son format, jamais le nombre de bonnes propositions" do
     exercise = create_exercise(essential: @essential, questions: 0, statement: "Deux divisions successives.")
     formats = { "true_false" => "Vrai ou faux", "single_choice" => "Une seule réponse", "multiple_correct_2" => "Plusieurs réponses",

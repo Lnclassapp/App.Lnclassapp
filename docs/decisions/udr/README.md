@@ -153,6 +153,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0142](./0142-dessin-des-figures-de-3eme.md) | Dessin des figures des matières de 3ème | Accepté | 2026-10-30 | [0117](../adr/0117-figures-des-matieres-de-3eme.md) | Six sortes de figures nouvelles doivent se lire au téléphone, sans couleur et sans JavaScript, dans le cahier comme dans une page d'exercice. |
 | [0143](./0143-carrousel-classes-enseignant.md) | Carrousel des classes de l'enseignant : boutons précédent et suivant dès lg | Accepté | 2026-10-30 | — | À la souris, la bande des classes de l'accueil enseignant ne défile pas (molette verticale, barre masquée) et ne revient pas au début ; deux boutons ronds encadrent les points dès lg, annoncés grisés à leur bout. Complète l'UDR enseignant §3.3 |
 | [0144](./0144-parcours-matiere-exercice-raccourcis.md) | Parcours matière → exercice : carte Prochain exercice dans la matière et la leçon | Accepté | 2026-10-30 | — | De la grille des matières à un exercice, l'élève fait 4 clics et lit 461 mots avant le premier lien d'exercice de la leçon ; il doit voir tout de suite où cliquer. |
+| [0145](./0145-exercices-et-questions-en-cartes.md) | Exercices et questions en cartes | Accepté | 2026-10-30 | — | Un exercice s'affiche en quatre lignes différentes, sans matière ici, sans type là, sans action écrite ; les questions d'un exercice se suivent sans cadre ni format annoncé. |
 <!-- index:end -->
 
 ---

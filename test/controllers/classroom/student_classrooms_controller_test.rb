@@ -221,7 +221,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_select "#student_classroom_treated[data-controller=reveal]" do
       assert_select "li", 4
       assert_select "li:not([hidden])", 3
-      # UDR-XXXX-exercices-et-questions-en-cartes : la carte entière mène au résultat ; la note et « Voir ma copie » y sont écrits.
+      # UDR-0145 : la carte entière mène au résultat ; la note et « Voir ma copie » y sont écrits.
       assert_select "li:first-child a[href=?]", exercise_session_result_path(last.public_id), text: "Refait"
       assert_select "li:first-child", text: including("16/20")
       assert_select "li:first-child", text: including("Voir ma copie")

@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/_card — la carte d'un exercice listé : de quoi s'agit-il, où j'en suis, que faire %>
 <%# Rôle : un <li> par exercice (pastille de la matière, « Matière · Type », titre, état, verbe) ; toute la carte est le lien du titre ; `extra` (HTML déjà rendu, facultatif) passe sous la carte, au-dessus du lien étiré %>
-<%# ADR  : 0072, 0113 · UDR : XXXX-exercices-et-questions-en-cartes (§3.1) · locals: (card:, index: nil, extra: nil) · se nourrit d'une Assessment::ExerciseCardsHelper::Card %>
+<%# ADR  : 0072, 0113 · UDR : 0145 (§3.1) · locals: (card:, index: nil, extra: nil) · se nourrit d'une Assessment::ExerciseCardsHelper::Card %>
 <% index = local_assigns[:index] %>
 <% extra = local_assigns[:extra] %>
 <% reveal = index ? ui_reveal_item(index) : {} %>

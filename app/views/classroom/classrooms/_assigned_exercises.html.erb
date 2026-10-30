@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classrooms/_assigned_exercises — bloc « Exercices assignés » de la page d'une classe, au format de « Cette semaine » %>
 <%# Rôle : une carte par assignation active (matière, type, échéance, barre « 20 / 27 faits », pastille « 7 en retard » ou « 7 pas encore », « Voir le suivi ») ; trois cartes puis « Voir plus » %>
-<%# ADR  : 0048, 0072, 0079 · UDR : enseignant §3.3 et §3.5, 0062 (§3.4, vide : lien vers « Cours »), 0077 (§3.4 : 3 puis « Voir plus »), XXXX-exercices-et-questions-en-cartes (§3.1, §3.2 : la carte d'exercice) · comptes et lien seulement sous FollowAssignmentPolicy %>
+<%# ADR  : 0048, 0072, 0079 · UDR : enseignant §3.3 et §3.5, 0062 (§3.4, vide : lien vers « Cours »), 0077 (§3.4 : 3 puis « Voir plus »), 0145 (§3.1, §3.2 : la carte d'exercice) · comptes et lien seulement sous FollowAssignmentPolicy %>
 <%# locals: (classroom:, assignments:) -%>
 <%= tag.section id: "assigned_exercises", "aria-labelledby": "assigned_exercises_title", class: "min-w-0",
                 data: (ui_reveal_data if assignments.any?) do %>

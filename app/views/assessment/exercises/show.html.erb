@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/show — le sujet d'un exercice : la feuille telle qu'on la distribuerait en classe (AS-02) %>
 <%# Rôle : énoncé et questions numérotées, rien à remplir ; « Faire l'exercice » pour l'élève, bascules d'assignation pour l'enseignant, statut et transitions pour l'équipe (plus de « Modifier » : l'exercice se réimporte, ADR-0113 §4.6) %>
-<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113, 0115 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1, XXXX-exercices-et-questions-en-cartes (§3.3 : une carte par question) · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
+<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113, 0115 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1, 0145 (§3.3 : une carte par question) · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
@@ -34,7 +34,7 @@
       <%= ui_empty_state title: t(".no_questions"), icon: "question-mark-circle" %>
     </div>
   <% else %>
-    <%# UDR-XXXX-exercices-et-questions-en-cartes §3.3 : la feuille est une région sans cadre ; l'énoncé a sa carte, chaque question la sienne. %>
+    <%# UDR-0145 §3.3 : la feuille est une région sans cadre ; l'énoncé a sa carte, chaque question la sienne. %>
     <%= tag.div id: "exercise-sheet", role: "region", "aria-labelledby": "sheet_title", class: "space-y-4", data: { controller: "math", bleed_keep: "" } do %>
       <h2 id="sheet_title" class="sr-only"><%= t(".sheet_title") %></h2>
       <% figure = @detail.figure %>

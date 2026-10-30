@@ -1,6 +1,6 @@
 # 🌐 UI · Assessment::ExerciseCardsHelper — traduit chaque ligne de lecture d'un exercice en une même `Card`
 # Rôle : seul endroit où un exercice listé devient titre, matière, type, état et verbe d'action ; le partial assessment/exercises/_card la rend
-# ADR  : 0072, 0113 · UDR : XXXX-exercices-et-questions-en-cartes (§3.1) · le domaine ne connaît pas la carte : elle ne lit que des lignes de queries
+# ADR  : 0072, 0113 · UDR : 0145 (§3.1) · le domaine ne connaît pas la carte : elle ne lit que des lignes de queries
 module Assessment
   module ExerciseCardsHelper
     # dom_id : l'id du <li> (ou nil) · href : la destination (nil : carte sans lien ni action) · material_name : nil si la page le dit déjà

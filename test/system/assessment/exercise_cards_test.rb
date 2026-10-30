@@ -1,6 +1,6 @@
 require "application_system_test_case"
 
-# UDR-XXXX-exercices-et-questions-en-cartes — CA-1, CA-3 : « Ma classe » montre des cartes d'exercice ; CA-8 : l'écran d'un
+# UDR-0145 — CA-1, CA-3 : « Ma classe » montre des cartes d'exercice ; CA-8 : l'écran d'un
 # exercice montre une carte par question avec son format. Toute la carte est le lien.
 class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
   setup do
