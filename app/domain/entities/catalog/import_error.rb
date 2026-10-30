@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportError
 # Rôle : une erreur d'import localisée par son chemin JSON, avec un motif d'une liste fermée
-# ADR  : 0039, 0063, 0066, 0068, 0096, 0105, 0113, 0116
+# ADR  : 0039, 0063, 0066, 0068, 0096, 0105, 0113, 0116, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
 module Entities
   module Catalog
     # path : notation JSON (« schools[412].type », « $ » pour le fichier) ; params : valeurs pour le message ;
@@ -25,7 +25,8 @@ module Entities
                               duplicate_in_files forbidden not_enqueued essential_exercise_count
                               lesson_exercise_count essential_not_in_lesson essential_missing_from_file
                               essential_name_ambiguous lesson_already_published too_few_questions example_steps_mismatch
-                              figure_invalid figure_missing invalid_count too_short].freeze
+                              figure_invalid figure_missing invalid_count too_short subject_exercise_with_notion
+                              too_many_subjects too_many_subject_exercises].freeze
     ImportError::CODES = (ImportError::BLOCKING + ImportError::ELEMENT).freeze
   end
 end

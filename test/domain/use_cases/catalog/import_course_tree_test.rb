@@ -526,6 +526,71 @@ module UseCases
         assert_not source.match?(/html_safe|\braw\(/), "le texte importé ne doit jamais être marqué sûr"
       end
 
+      # CA-9, de bout en bout par RunImport (schéma, adaptateur, moteur, base)
+      test "the Thalès lesson with hints and 3 subjects is imported by the engine, in draft, and the report counts the subjects" do
+        report = run_import(revision_thales_document)
+
+        assert_equal [ "completed", 1, 1, 0 ], report.values_at(:status, :total_count, :imported_count, :error_count)
+        assert_equal({ "essentials_created" => 2, "exercises_created" => 18, "questions_created" => 90, "answers_created" => 180,
+                       "subjects_created" => 3 }, report.details)
+        course = Orm::Course.find_by!(slug: "thales")
+        assert_equal [ "Sujet 1 · Thalès", "Sujet 2 · Thalès", "Sujet 3 · Thalès" ], course.subjects.order(:position).pluck(:title)
+        assert_equal [ "Théorème de Thalès · proportionnalité" ], course.subjects.pluck(:notions).uniq
+        assert_equal [ 4, 4, 4 ], course.subjects.order(:position).map { it.exercises.count }
+        assert_equal [ "Sujet 3 · Thalès · exercice 1", "Sujet 3 · Thalès · exercice 4" ],
+                     course.subjects.find_by!(position: 3).exercises.pluck(:title).values_at(0, 3)
+        assert_equal [ "Commence par repérer les deux droites parallèles." ], Orm::Exercise.where(course_id: course.id).where.not(hint: nil).pluck(:hint).uniq
+        assert_equal 2, Orm::Exercise.where(course_id: course.id).where.not(hint: nil).count
+        assert_equal [ nil ], Orm::Exercise.where.not(subject_id: nil).pluck(:essential_id).uniq
+        assert_equal [ "draft" ], Orm::Exercise.distinct.pluck(:status)
+      end
+
+      test "a lesson without subject keeps its report as before, a reimport replaces the subjects and recounts them" do
+        assert_equal({ "essentials_created" => 2, "exercises_created" => 6, "questions_created" => 30, "answers_created" => 60 },
+                     run_import(revision_thales_document(subjects: [])).details)
+        report = run_import(revision_thales_document(subjects: [ revision_subject("Sujet unique", exercises: 2) ]))
+
+        assert_equal [ "completed", true ], [ report.status, report.details.key?("subjects_created") ]
+        assert_equal [ 1, [ "Sujet unique" ] ], [ report.details["subjects_created"], Orm::Subject.pluck(:title) ]
+        assert_equal 2 + 4 + 2, Orm::Exercise.count
+      end
+
+      # CA-9
+      test "a subject exercise with a notion is refused by the engine, the error names the subject and nothing is written" do
+        document = revision_thales_document
+        document["courses"].first["subjects"][1]["exercises"][2]["notion"] = "Théorème de Thalès"
+
+        report = run_import(document)
+
+        assert_equal [ "completed", 0, 1 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal [ [ "courses[0].subjects[1].exercises[2].notion", "subject_exercise_with_notion" ] ], report_pairs(report)
+        assert_equal({ "subject" => "Sujet 2 · Thalès" }, report.import_errors.first["params"])
+        error = Entities::Catalog::ImportError.new(path: "courses[0]", code: "subject_exercise_with_notion", params: { subject: "Sujet 2 · Thalès" })
+        assert_includes ApplicationController.helpers.extend(Teams::ImportsHelper).import_error_message(error), "Sujet 2 · Thalès"
+        assert_equal [ 0, 0, 0, 0, 0, 0 ], tree_counts + [ Orm::Subject.count ]
+      end
+
+      test "the engine refuses a wrong type, a long text and too many subjects with a named error, and writes nothing" do
+        typed = revision_thales_document
+        typed["courses"].first["subjects"][0]["exercises"][0]["hint"] = 5
+        assert_equal [ [ "courses[0].subjects[0].exercises[0].hint", "schema" ] ], report_pairs(run_import(typed))
+
+        long = revision_thales_document
+        long["courses"].first["notions"][0]["exercise"]["hint"] = "é" * 401
+        assert_equal [ [ "courses[0].notions[0].exercise.hint", "too_long" ] ], report_pairs(run_import(long))
+
+        many = revision_thales_document(subjects: Array.new(11) { revision_subject("S#{it}", exercises: 1) })
+        report = run_import(many)
+        assert_equal [ [ "courses[0].subjects", "too_many_subjects" ] ], report_pairs(report)
+        assert_equal({ "course" => "Thalès", "max" => 10 }, report.import_errors.first["params"])
+
+        wide = revision_thales_document(subjects: [ revision_subject("Sujet large", exercises: 11) ])
+        report = run_import(wide)
+        assert_equal [ [ "courses[0].subjects[0].exercises", "too_many_subject_exercises" ] ], report_pairs(report)
+        assert_equal({ "subject" => "Sujet large", "max" => 10 }, report.import_errors.first["params"])
+        assert_equal [ 0, 0, 0, 0, 0, 0 ], tree_counts + [ Orm::Subject.count ]
+      end
+
       # CA-11
       test "a draft lesson is replaced whole, keeps its id and slug, and loses the team sessions on its old exercises" do
         run_import(envelope(lesson))

@@ -37,13 +37,12 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
   la leçon ; `replace_draft` supprime puis réécrit les sujets et rend `subjects:`. `write` garde sa forme (pas de clé `subjects`).
 - Un exercice « avec une notion » = un exercice de sujet portant une clé `notion` non vide (le fichier n'a pas d'autre moyen de citer une
   notion) ; l'erreur est notée à `subjects[i].exercises[j].notion` et porte `subject:` (le titre).
-- Bloqué hors fiche, à reprendre par l'orchestrateur : (1) `config/schemas/lnclass.course-tree.v3.json` (`additionalProperties: false`)
-  refuse encore `hint`, `subjects` et `notion` : l'import par le moteur échoue au schéma tant qu'il n'est pas étendu ; (2)
-  `Entities::Catalog::ImportError::ELEMENT` est une liste fermée : les motifs `subject_exercise_with_notion`, `too_many_subjects` et
-  `too_many_subject_exercises` n'existent pas, les règles prennent `invalid_value` / `too_long` (constantes `NOTION_IN_SUBJECT`,
-  `TOO_MANY_SUBJECTS`, `TOO_MANY_SUBJECT_EXERCISES` de `ImportCourseTree`, à changer en une ligne) ; (3) leurs phrases
-  (`teams.imports.error_codes`), les libellés d'aide (`teams.imports.kinds.course_tree.keys.exercise.hint`, nœud `subject`) et le détail
-  du rapport `subjects_created` sont à ajouter aux locales ; (4) la fixture d'import partagée n'a pas de sujets.
+- Fichiers ajoutés au lot par accord de l'orchestrateur : schéma `lnclass.course-tree.v3.json` (`hint`, `subjects`, `subject_exercise` avec
+  la clé `notion` ; formes seulement, les bornes restent à l'adaptateur pour que l'erreur soit nommée ; pas de v4 nécessaire), motifs
+  `subject_exercise_with_notion`, `too_many_subjects`, `too_many_subject_exercises` dans `ImportError::ELEMENT` (leurs phrases citent le
+  sujet ou la leçon), libellés de l'aide, `subjects_created` au rapport (noté seulement quand la leçon porte des sujets), fabrique
+  `revision_thales_document`. Un test par `RunImport` couvre l'import Thalès (indices, 3 sujets), CA-9, un type inattendu, un texte trop
+  long et le volume.
 
 ## Dette laissée derrière
 

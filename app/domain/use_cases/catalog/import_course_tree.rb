@@ -20,15 +20,15 @@ module UseCases
       SUBJECT_NOTIONS_MAX = Entities::Catalog::Subject::NOTIONS_MAX
       SUBJECTS_MAX = 10
       SUBJECT_EXERCISES_MAX = 10
-      # Motifs des règles de sujet. ImportError::CODES est une liste fermée, hors de ce lot : en attendant les motifs dédiés
-      # (subject_exercise_with_notion, too_many_subjects, too_many_subject_exercises, avec leur phrase), ils prennent les motifs
-      # génériques ; les params (subject, course, max) portent déjà le nom que la phrase citera.
-      NOTION_IN_SUBJECT = "invalid_value"
-      TOO_MANY_SUBJECTS = "too_long"
-      TOO_MANY_SUBJECT_EXERCISES = "too_long"
+      # Motifs des règles de sujet ; leurs params (subject, course, max) sont cités par la phrase du motif.
+      NOTION_IN_SUBJECT = "subject_exercise_with_notion"
+      TOO_MANY_SUBJECTS = "too_many_subjects"
+      TOO_MANY_SUBJECT_EXERCISES = "too_many_subject_exercises"
       # Lignes écrites par ContentTreeWriter → clé du détail du rapport (une notion est une ligne de la table des fiches).
       DETAILS = { essentials: "essentials_created", exercises: "exercises_created", questions: "questions_created",
                   answers: "answers_created" }.freeze
+      # Les sujets de devoir écrits : notés au rapport seulement quand la leçon en porte (le détail d'une leçon sans sujet ne change pas).
+      SUBJECTS_DETAIL = "subjects_created"
       Node = Ports::Catalog::ContentTreeWriterPort
 
       def initialize(courses:, essentials:, taxonomy:, writer:)
@@ -68,10 +68,13 @@ module UseCases
         fresh, replaced = items.map(&:plan).partition { it.existing_id.nil? }
         created = @writer.write(courses: fresh, author_id:, at:)
         details = DETAILS.to_h { |rows, detail| [ detail, created.fetch(rows) ] }
+        subjects = fresh.sum { it.subjects.size }
         replaced.each do |node|
           counts = @writer.replace_draft(course_id: node.existing_id, tree: node)
           DETAILS.each { |rows, detail| details[detail] += counts.fetch(rows) }
+          subjects += counts.fetch(:subjects)
         end
+        details[SUBJECTS_DETAIL] = subjects if subjects.positive?
         { imported: items.size, details: }
       end
 
