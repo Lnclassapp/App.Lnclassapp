@@ -4,7 +4,7 @@ module Communication
   # UDR-0071 §3.5: the announcements of the student's home, in a native scroll-snap band. Its plugging into the new
   # student home (UDR-0058, on Develop) comes after the merge of Develop: the partial is tested alone here.
   class CarouselTest < ActionView::TestCase
-    helper ComponentsHelper, Communication::IllustrationsHelper, Communication::MessagesHelper
+    helper ComponentsHelper, Communication::IllustrationsHelper, Communication::MessagesHelper, BrandHelper
 
     Card = Queries::Communication::InboxQuery::MessageCard
     Carousel = Queries::Communication::InboxQuery::Carousel
@@ -17,7 +17,12 @@ module Communication
                edited: false, dismissed: false)
     end
 
-    def carousel(cards, **) = render(partial: "communication/messages/carousel", locals: { carousel: Carousel.new(cards:, any_readable: true), ** })
+    # current_actor et lnclass_app viennent des concerns du contrôleur : aucun lecteur ici.
+    def carousel(cards, **)
+      view.define_singleton_method(:current_actor) { nil }
+      view.define_singleton_method(:lnclass_app) { nil }
+      render(partial: "communication/messages/carousel", locals: { carousel: Carousel.new(cards:, any_readable: true), ** })
+    end
 
     test "AN-10 — a section titled for screen readers, one card per item of the band, in the given order" do
       carousel([ card("d", "Devoirs communs", author_role: :school_admin), card("f", "Nouvelles fiches"), card("r", "Rentrée", author_role: :team) ])

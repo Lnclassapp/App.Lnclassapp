@@ -531,7 +531,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     get student_home_path
     assert_select "#student_home_announcements #announcement_#{message.public_id}" do
       assert_select "p", text: "Chapitre 4 en ligne."
-      assert_select "*", text: I18n.t("communication.card.edited")
+      assert_select "*", text: "Modifiée", count: 0
     end
   end
 
