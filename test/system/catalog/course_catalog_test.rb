@@ -128,7 +128,10 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     assert_no_match(/<script>window\.hacked|onclick=|javascript:/, page.html)
 
     # The content is unchanged this time: after the morph, its formula is still rendered, not left as raw « $…$ ».
-    assert page.evaluate_script("window.morphs > 0"), "la page n'a pas été rafraîchie par morphing"
+    # The refresh is broadcast after the toast: wait for its morph instead of reading the counter once.
+    page.document.synchronize do
+      raise Capybara::ExpectationNotMet, "la page n'a pas été rafraîchie par morphing" unless page.evaluate_script("window.morphs > 0")
+    end
     assert_no_page_reload do
       find("button[aria-controls=course-actions-menu]").click
       click_on t("catalog.courses.role_actions.edit")
