@@ -1,12 +1,13 @@
 <%# 🌐 UI · teams/imports/kinds/_course_tree — aide de l'import des cours complets, dans la modale de téléversement %>
 <%# Rôle : format 3, clés acceptées à chaque étage de l'arbre, exemple minimal, noms de niveaux, séries et matières acceptés %>
-<%# ADR  : 0035, 0039, 0091, 0068, 0113, 0116 · UDR : 0038, 0055 %>
+<%# ADR  : 0035, 0039, 0091, 0068, 0113, 0116, XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : 0038, 0055 %>
 <% referential = Queries::Catalog::ReferentialOptionsQuery.new.call %>
 <% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
-<% tree = { "course" => own.("name", "subtitle", "level_name", "series_name", "material_name", "theme", "figures", "notions", "exercises"),
+<% tree = { "course" => own.("name", "subtitle", "level_name", "series_name", "material_name", "theme", "figures", "notions", "exercises", "subjects"),
             "figure" => own.("key", "kind", "description", "params", "controls"),
             "notion" => own.("name", "remember", "method", "example", "pitfall", "figure", "exercise"),
-            "exercise" => own.("title", "statement", "exercise_type", "figure", "questions"),
+            "exercise" => own.("title", "statement", "exercise_type", "figure", "hint", "questions"),
+            "subject" => own.("title", "notions", "exercises"),
             "question" => own.("content", "question_type", "explanation", "tolerance", "answers"),
             "answer" => { "content" => %w[content], "correct" => %w[correct is_correct], "match" => %w[match] } } %>
 <section id="import-help-course_tree" aria-labelledby="import-help-course_tree-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
@@ -61,6 +62,7 @@
             "title": "Simplifier des racines",
             "statement": "Réponds aux questions suivantes.",
             "exercise_type": "fixation",
+            "hint": "Facultatif : un indice de 1 à 400 caractères, montré avant la vérification.",
             "questions": [
               { "content": "$\\sqrt{50} = 5\\sqrt{2}$.",
                 "question_type": "true_false",
@@ -75,6 +77,12 @@
       "exercises": [
         { "title": "Problème 1", "statement": "...", "exercise_type": "evaluation", "questions": [ ... ] }
         // trois autres problèmes pour toute la leçon
+      ],
+      "subjects": [
+        { "title": "Sujet 1 · Racines carrées",
+          "notions": "Simplifier une racine carrée · Calculer avec des racines",
+          "exercises": [ { "title": "Exercice 1", "statement": "...", "exercise_type": "evaluation", "questions": [ ... ] } ] }
+        // facultatif : 10 sujets au plus, 10 exercices au plus par sujet, sans notion
       ] }
   ]
 }</code></pre>

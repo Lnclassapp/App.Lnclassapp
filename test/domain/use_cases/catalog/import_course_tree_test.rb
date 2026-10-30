@@ -375,6 +375,222 @@ module UseCases
         assert_equal [ before, "Calculer et simplifier" ], [ tree_counts, course.reload.subtitle ]
       end
 
+      # --- ADR-XXXX sujets-de-devoir §4, CA-9 : l'indice d'un exercice et les sujets de devoir ---
+
+      def subject_of(title, exercises: 4, notions: "Thalès · proportionnalité", **extra)
+        { "title" => title, "notions" => notions, "exercises" => Array.new(exercises) { revision_exercise("#{title} · exercice #{it + 1}") } }.merge(extra)
+      end
+
+      def lesson_with_subjects(count = 3, **extra)
+        hinted = revision_notion("Simplifier").tap { it["exercise"]["hint"] = "  Pense à factoriser par un carré parfait.  " }
+        lesson(notions: [ hinted, revision_notion("Additionner") ], subjects: Array.new(count) { subject_of("Sujet #{it + 1} · Thalès") }, **extra)
+      end
+
+      def write_item(item, adapter: self.adapter)
+        adapter.write(items: [ item ], author_id: @author.id, at: Time.zone.parse("2026-10-30 10:00"))
+      end
+
+      test "a lesson with hints and 3 subjects is planned: hints stripped, subjects numbered from 1, exercises in order" do
+        item = validate(lesson_with_subjects)
+
+        assert item.valid?, item.errors.inspect
+        node = item.plan
+        assert_equal [ "Pense à factoriser par un carré parfait.", nil ], node.notions.map { it.exercises.first.hint }
+        assert_equal [ [ 1, "Sujet 1 · Thalès", "Thalès · proportionnalité", nil ], [ 2, "Sujet 2 · Thalès", "Thalès · proportionnalité", nil ],
+                       [ 3, "Sujet 3 · Thalès", "Thalès · proportionnalité", nil ] ],
+                     node.subjects.map { [ it.position, it.title, it.notions, it.course_id ] }
+        assert_equal [ 4, 4, 4 ], node.subjects.map { it.exercises.size }
+        assert_equal [ "Sujet 1 · Thalès · exercice 1", "Sujet 1 · Thalès · exercice 2" ], node.subjects.first.exercises.first(2).map(&:title)
+        assert_equal [ [ nil ] * 4 ], [ node.exercises.map(&:hint) ]
+        assert_empty validate(lesson).plan.subjects
+      end
+
+      test "a lesson with hints and 3 subjects is written: hints, subjects, their 12 exercises without notion, in order" do
+        written = write_item(validate(lesson_with_subjects))
+
+        assert_equal 1, written[:imported]
+        course = Orm::Course.find_by!(slug: "racines-carrees")
+        assert_equal [ [ 1, "Sujet 1 · Thalès", "Thalès · proportionnalité" ], [ 2, "Sujet 2 · Thalès", "Thalès · proportionnalité" ],
+                       [ 3, "Sujet 3 · Thalès", "Thalès · proportionnalité" ] ],
+                     Orm::Subject.where(course_id: course.id).order(:position).pluck(:position, :title, :notions)
+        assert_equal [ "Pense à factoriser par un carré parfait." ], Orm::Exercise.where(course_id: course.id).where.not(hint: nil).pluck(:hint)
+        subject = Orm::Subject.find_by!(course_id: course.id, position: 2)
+        assert_equal [ [ "Sujet 2 · Thalès · exercice 1", nil ], [ "Sujet 2 · Thalès · exercice 2", nil ], [ "Sujet 2 · Thalès · exercice 3", nil ],
+                       [ "Sujet 2 · Thalès · exercice 4", nil ] ],
+                     subject.exercises.pluck(:title, :essential_id)
+        assert_equal 2 + 4 + 12, Orm::Exercise.where(course_id: course.id).count
+        assert_equal (1..18).to_a, Orm::Exercise.where(course_id: course.id).order(:position).pluck(:position)
+        assert_equal [ "draft" ], Orm::Exercise.distinct.pluck(:status)
+      end
+
+      test "a draft lesson reimported with other subjects replaces them, and the subject rows follow" do
+        write_item(validate(lesson_with_subjects))
+        course = Orm::Course.find_by!(slug: "racines-carrees")
+
+        item = validate(lesson_with_subjects(1, "subtitle" => "Nouveau"))
+        assert item.valid?, item.errors.inspect
+        assert_equal [ :replace ], item.key.first(1)
+        assert_equal [ course.id ], item.plan.subjects.map(&:course_id)
+        write_item(item)
+
+        assert_equal [ [ "Sujet 1 · Thalès" ] ], [ Orm::Subject.where(course_id: course.id).pluck(:title) ]
+        assert_equal 2 + 4 + 4, Orm::Exercise.where(course_id: course.id).count
+      end
+
+      # CA-9
+      test "a subject whose exercise has a notion is refused, and the error names the subject" do
+        bad = subject_of("Sujet 2 · Pythagore").tap { it["exercises"][1]["notion"] = "Simplifier une racine carrée" }
+        item = validate(lesson(subjects: [ subject_of("Sujet 1 · Thalès"), bad ]))
+
+        assert_not item.valid?
+        assert_equal [ [ "courses[0].subjects[1].exercises[1].notion", ImportCourseTree::NOTION_IN_SUBJECT ] ], pairs(item)
+        assert_equal({ subject: "Sujet 2 · Pythagore" }, item.errors.first.params)
+        assert_nil item.plan
+        blank = subject_of("Sujet 1").tap { it["exercises"][0]["notion"] = "  " }
+        assert validate(lesson(subjects: [ blank ])).valid?
+        assert_equal 0, tree_counts.sum
+      end
+
+      test "hint, title and notions outside their bounds are refused with a named error, nothing is written" do
+        long = ->(size) { "é" * size }
+        cases = {
+          [ "courses[0].subjects[0].exercises[0].hint", "blank" ] => subject_of("S").tap { it["exercises"][0]["hint"] = "  " },
+          [ "courses[0].subjects[0].exercises[0].hint", "too_long" ] => subject_of("S").tap { it["exercises"][0]["hint"] = long.(401) },
+          [ "courses[0].subjects[0].title", "blank" ] => subject_of(" "),
+          [ "courses[0].subjects[0].title", "too_long" ] => subject_of("S").merge("title" => long.(201)),
+          [ "courses[0].subjects[0].notions", "blank" ] => subject_of("S", notions: " "),
+          [ "courses[0].subjects[0].notions", "too_long" ] => subject_of("S", notions: long.(601)),
+          [ "courses[0].subjects[0].exercises", "blank" ] => subject_of("S", exercises: 0)
+        }
+        cases.each do |pair, bounded|
+          assert_equal [ pair ], pairs(validate(lesson(subjects: [ bounded ]))), pair.inspect
+        end
+        edge = subject_of("S", notions: long.(600)).tap { it["exercises"][0]["hint"] = long.(400); it["title"] = long.(200) }
+        assert validate(lesson(subjects: [ edge ])).valid?
+        too_long_notion_hint = revision_notion("Simplifier").tap { it["exercise"]["hint"] = long.(401) }
+        assert_equal [ [ "courses[0].notions[0].exercise.hint", "too_long" ] ], pairs(validate(lesson(notions: [ too_long_notion_hint ])))
+        assert_equal 0, tree_counts.sum
+      end
+
+      test "more than 10 subjects, or more than 10 exercises in a subject, are refused with a named error" do
+        many = validate(lesson(subjects: Array.new(11) { subject_of("S#{it}", exercises: 1) }))
+        assert_equal [ [ "courses[0].subjects", ImportCourseTree::TOO_MANY_SUBJECTS ] ], pairs(many)
+        assert_equal({ course: "Racines carrées", max: 10 }, many.errors.first.params)
+        assert validate(lesson(subjects: Array.new(10) { subject_of("S#{it}", exercises: 1) })).valid?
+
+        long = validate(lesson(subjects: [ subject_of("Sujet 1 · Thalès", exercises: 11) ]))
+        assert_equal [ [ "courses[0].subjects[0].exercises", ImportCourseTree::TOO_MANY_SUBJECT_EXERCISES ] ], pairs(long)
+        assert_equal({ subject: "Sujet 1 · Thalès", max: 10 }, long.errors.first.params)
+        assert validate(lesson(subjects: [ subject_of("S", exercises: 10) ])).valid?
+        assert_equal 0, tree_counts.sum
+      end
+
+      test "a key of an unexpected type is refused, never converted" do
+        typed = ->(subject) { pairs(validate(lesson(subjects: [ subject ]))) }
+
+        assert_equal [ [ "courses[0].subjects", "schema" ] ], pairs(validate(lesson(subjects: "Sujet 1")))
+        assert_equal [ [ "courses[0].subjects", "schema" ] ], pairs(validate(lesson(subjects: { "title" => "S" })))
+        assert_equal [ [ "courses[0].subjects[0]", "schema" ] ], typed.([ "Sujet 1" ])
+        assert_equal [ [ "courses[0].subjects[0].title", "schema" ] ], typed.(subject_of("S").merge("title" => 12))
+        assert_equal [ [ "courses[0].subjects[0].title", "schema" ] ], typed.(subject_of("S").merge("title" => [ "S" ]))
+        assert_equal [ [ "courses[0].subjects[0].notions", "schema" ] ], typed.(subject_of("S").merge("notions" => { "a" => 1 }))
+        assert_equal [ [ "courses[0].subjects[0].exercises", "schema" ] ], typed.(subject_of("S").merge("exercises" => "x"))
+        assert_equal [ [ "courses[0].subjects[0].exercises[0]", "schema" ] ], typed.(subject_of("S").merge("exercises" => [ 3 ]))
+        hint = ->(value) { subject_of("S").tap { it["exercises"][0]["hint"] = value } }
+        [ 5, [ "x" ], { "a" => 1 }, true ].each do |value|
+          assert_equal [ [ "courses[0].subjects[0].exercises[0].hint", "schema" ] ], typed.(hint.(value)), value.inspect
+        end
+        assert_equal [ [ "courses[0].subjects[0].exercises", "blank" ] ], typed.(subject_of("S").except("exercises"))
+        assert validate(lesson(subjects: nil)).valid?
+        assert validate(lesson(subjects: [])).valid?
+        assert typed.(hint.(nil)).empty?
+        assert_equal 0, tree_counts.sum
+      end
+
+      test "a trapped text is stored raw and rendered escaped, never html_safe" do
+        trap = "<script>alert('x')</script><b>gras</b>"
+        subject = subject_of(trap, notions: trap).tap { it["exercises"][0]["hint"] = trap }
+        write_item(validate(lesson(subjects: [ subject ])))
+
+        stored = Orm::Subject.first
+        hint = Orm::Exercise.where.not(hint: nil).pick(:hint)
+        assert_equal [ trap, trap, trap ], [ stored.title, stored.notions, hint ]
+        assert_equal [ false, false, false ], [ stored.title, stored.notions, hint ].map(&:html_safe?)
+        html = ApplicationController.render(inline: "<p><%= title %></p><p><%= notions %></p><p><%= hint %></p>",
+                                            locals: { title: stored.title, notions: stored.notions, hint: })
+        assert_not_includes html, "<script>"
+        assert_not_includes html, "<b>"
+        assert_equal 3, html.scan("&lt;script&gt;").size
+        files = %w[app/domain/use_cases/catalog/import_course_tree.rb app/infrastructure/repositories/catalog/content_tree_writer.rb]
+        source = files.flat_map { Rails.root.join(it).readlines }.reject { it.strip.start_with?("#") }.join
+        assert_not source.match?(/html_safe|\braw\(/), "le texte importé ne doit jamais être marqué sûr"
+      end
+
+      # CA-9, de bout en bout par RunImport (schéma, adaptateur, moteur, base)
+      test "the Thalès lesson with hints and 3 subjects is imported by the engine, in draft, and the report counts the subjects" do
+        report = run_import(revision_thales_document)
+
+        assert_equal [ "completed", 1, 1, 0 ], report.values_at(:status, :total_count, :imported_count, :error_count)
+        assert_equal({ "essentials_created" => 2, "exercises_created" => 18, "questions_created" => 90, "answers_created" => 180,
+                       "subjects_created" => 3 }, report.details)
+        course = Orm::Course.find_by!(slug: "thales")
+        assert_equal [ "Sujet 1 · Thalès", "Sujet 2 · Thalès", "Sujet 3 · Thalès" ], course.subjects.order(:position).pluck(:title)
+        assert_equal [ "Théorème de Thalès · proportionnalité" ], course.subjects.pluck(:notions).uniq
+        assert_equal [ 4, 4, 4 ], course.subjects.order(:position).map { it.exercises.count }
+        assert_equal [ "Sujet 3 · Thalès · exercice 1", "Sujet 3 · Thalès · exercice 4" ],
+                     course.subjects.find_by!(position: 3).exercises.pluck(:title).values_at(0, 3)
+        assert_equal [ "Commence par repérer les deux droites parallèles." ], Orm::Exercise.where(course_id: course.id).where.not(hint: nil).pluck(:hint).uniq
+        assert_equal 2, Orm::Exercise.where(course_id: course.id).where.not(hint: nil).count
+        assert_equal [ nil ], Orm::Exercise.where.not(subject_id: nil).pluck(:essential_id).uniq
+        assert_equal [ "draft" ], Orm::Exercise.distinct.pluck(:status)
+      end
+
+      test "a lesson without subject keeps its report as before, a reimport replaces the subjects and recounts them" do
+        assert_equal({ "essentials_created" => 2, "exercises_created" => 6, "questions_created" => 30, "answers_created" => 60 },
+                     run_import(revision_thales_document(subjects: [])).details)
+        report = run_import(revision_thales_document(subjects: [ revision_subject("Sujet unique", exercises: 2) ]))
+
+        assert_equal [ "completed", true ], [ report.status, report.details.key?("subjects_created") ]
+        assert_equal [ 1, [ "Sujet unique" ] ], [ report.details["subjects_created"], Orm::Subject.pluck(:title) ]
+        assert_equal 2 + 4 + 2, Orm::Exercise.count
+      end
+
+      # CA-9
+      test "a subject exercise with a notion is refused by the engine, the error names the subject and nothing is written" do
+        document = revision_thales_document
+        document["courses"].first["subjects"][1]["exercises"][2]["notion"] = "Théorème de Thalès"
+
+        report = run_import(document)
+
+        assert_equal [ "completed", 0, 1 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal [ [ "courses[0].subjects[1].exercises[2].notion", "subject_exercise_with_notion" ] ], report_pairs(report)
+        assert_equal({ "subject" => "Sujet 2 · Thalès" }, report.import_errors.first["params"])
+        error = Entities::Catalog::ImportError.new(path: "courses[0]", code: "subject_exercise_with_notion", params: { subject: "Sujet 2 · Thalès" })
+        assert_includes ApplicationController.helpers.extend(Teams::ImportsHelper).import_error_message(error), "Sujet 2 · Thalès"
+        assert_equal [ 0, 0, 0, 0, 0, 0 ], tree_counts + [ Orm::Subject.count ]
+      end
+
+      test "the engine refuses a wrong type, a long text and too many subjects with a named error, and writes nothing" do
+        typed = revision_thales_document
+        typed["courses"].first["subjects"][0]["exercises"][0]["hint"] = 5
+        assert_equal [ [ "courses[0].subjects[0].exercises[0].hint", "schema" ] ], report_pairs(run_import(typed))
+
+        long = revision_thales_document
+        long["courses"].first["notions"][0]["exercise"]["hint"] = "é" * 401
+        assert_equal [ [ "courses[0].notions[0].exercise.hint", "too_long" ] ], report_pairs(run_import(long))
+
+        many = revision_thales_document(subjects: Array.new(11) { revision_subject("S#{it}", exercises: 1) })
+        report = run_import(many)
+        assert_equal [ [ "courses[0].subjects", "too_many_subjects" ] ], report_pairs(report)
+        assert_equal({ "course" => "Thalès", "max" => 10 }, report.import_errors.first["params"])
+
+        wide = revision_thales_document(subjects: [ revision_subject("Sujet large", exercises: 11) ])
+        report = run_import(wide)
+        assert_equal [ [ "courses[0].subjects[0].exercises", "too_many_subject_exercises" ] ], report_pairs(report)
+        assert_equal({ "subject" => "Sujet large", "max" => 10 }, report.import_errors.first["params"])
+        assert_equal [ 0, 0, 0, 0, 0, 0 ], tree_counts + [ Orm::Subject.count ]
+      end
+
       # CA-11
       test "a draft lesson is replaced whole, keeps its id and slug, and loses the team sessions on its old exercises" do
         run_import(envelope(lesson))
