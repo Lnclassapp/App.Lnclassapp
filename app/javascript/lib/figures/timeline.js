@@ -1,4 +1,4 @@
-// ⚡ FRONT · lib/figures/timeline — la frise chronologique : axe gradué, périodes en bandes, événements en quinconce
+// ⚡ FRONT · lib/figures/timeline — la frise chronologique : axe gradué, périodes en bandes, événements en quinconce, numéros de repli
 // Rôle : lit `start`, `end`, `step`, `unit`, `periods` [{from, to, label}] et `events` [{at, label}] ; revérifie bornes et formes avant de dessiner ; les curseurs `start`/`end` zooment
 // ADR  : XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : XXXX-figures-des-matieres-de-3eme (§3 timeline) · chargé par import() depuis controllers/figure_controller
 
@@ -13,7 +13,8 @@ const BAND_TOP = 8
 const BAND_HEIGHT = 32
 const ROWS = [112, 138]
 const LEGEND_TOP = 172
-const LEGEND_LINE = 18
+const LEGEND_LINE = 21
+const LEGEND_CHARS = Math.floor((WIDTH - 16) / 10.5)
 const MAX_TICKS = 200
 const RANGE = { min: -3000, max: 2100 }
 const LIMITS = { periods: 8, events: 16 }
@@ -73,12 +74,23 @@ function definePatterns(svg, prefix, used) {
   })
 }
 
-// Un texte tronqué à `room` unités avec « … », ou vide s'il n'y tient pas.
-function fit(value, room) {
-  const chars = Math.floor(room / CHAR)
-  if (chars < 1) return ""
-  if (value.length <= chars) return value
-  return chars < 2 ? "" : `${value.slice(0, chars - 1)}…`
+// Un libellé de période tient dans sa bande si son texte entier y entre ; sinon il devient un numéro, jamais une ellipse.
+const fits = (value, room) => value.length * CHAR <= room
+
+// Découpe une ligne de légende aux espaces, jamais au milieu d'un mot.
+function wrap(value) {
+  const lines = []
+  let line = ""
+  for (const word of value.split(/\s+/)) {
+    if (line && `${line} ${word}`.length > LEGEND_CHARS) {
+      lines.push(line)
+      line = word
+    } else {
+      line = line ? `${line} ${word}` : word
+    }
+  }
+  lines.push(line)
+  return lines
 }
 
 export function create(canvas, params) {
@@ -91,11 +103,22 @@ export function create(canvas, params) {
     const shown = events.filter((event) => event.at >= start && event.at <= end).sort((a, b) => a.at - b.at)
     const visible = periods.filter((period) => period.to > start && period.from < end)
     const layout = arrange(shown, x)
-    const height = layout.numbered ? LEGEND_TOP + shown.length * LEGEND_LINE : HEIGHT
+    // Les numéros : d'abord les périodes dont le libellé ne tient pas dans leur bande, puis (si besoin) tous les événements.
+    const notes = []
+    const numbers = new Map()
+    visible.forEach((period) => {
+      if (fits(period.label, x(period.to) - x(period.from) - 8)) return
+      notes.push(`${notes.length + 1}. ${fixed(period.from)}–${fixed(period.to)} : ${period.label}`)
+      numbers.set(period, notes.length)
+    })
+    const first = notes.length
+    if (layout.numbered) shown.forEach((event) => notes.push(`${notes.length + 1}. ${fixed(event.at)} : ${event.label}`))
+    const entries = notes.map(wrap)
+    const height = entries.length > 0 ? LEGEND_TOP + entries.reduce((sum, lines) => sum + lines.length * LEGEND_LINE, 0) : HEIGHT
     const svg = root(WIDTH, height)
 
     definePatterns(svg, prefix, visible.map((_, index) => (index % CATEGORIES) + 1))
-    visible.forEach((period, index) => drawPeriod(svg, period, (index % CATEGORIES) + 1, x))
+    visible.forEach((period, index) => drawPeriod(svg, period, (index % CATEGORIES) + 1, x, numbers.get(period)))
     drawAxis(svg, { start, end, step, unit, x })
 
     shown.forEach((event, index) => {
@@ -103,9 +126,9 @@ export function create(canvas, params) {
       const group = el("g", { "data-event": index }, svg)
       el("line", { x1: round(x(event.at)), y1: AXIS_Y, x2: round(x(event.at)), y2: ROWS[slot.row] - 16, stroke: "muted", "stroke-width": 1.5 }, group)
       el("circle", { cx: round(x(event.at)), cy: AXIS_Y, r: 5, fill: "accent", stroke: "paper", "stroke-width": 1.5 }, group)
-      label(group, slot.center, ROWS[slot.row], layout.numbered ? String(index + 1) : event.label, { tone: "accent", size: 13 })
+      label(group, slot.center, ROWS[slot.row], layout.numbered ? String(first + index + 1) : event.label, { tone: "accent", size: 13 })
     })
-    if (layout.numbered) drawLegend(svg, shown)
+    if (entries.length > 0) drawLegend(svg, entries)
 
     state.svg?.remove()
     canvas.appendChild(svg)
@@ -137,15 +160,18 @@ export function create(canvas, params) {
     return { numbered: true, slots: numbers ?? shown.map((event, index) => ({ row: index % 2, center: x(event.at) })) }
   }
 
-  function drawPeriod(svg, period, category, x) {
+  function drawPeriod(svg, period, category, x, number) {
     const left = x(period.from)
     const width = x(period.to) - left
     const group = el("g", { "data-period": category }, svg)
     const attrs = { x: round(left), y: BAND_TOP, width: round(width), height: BAND_HEIGHT, rx: 4, stroke: "grid", "stroke-width": 1.5 }
     if (SOLIDS[category]) el("rect", { ...attrs, fill: SOLIDS[category], "fill-opacity": 0.35 }, group)
     else el("rect", attrs, group).style.setProperty("fill", `url(#${prefix}-pat-${category})`)
-    const caption = fit(period.label, width - 8)
-    if (caption) label(group, left + width / 2, BAND_TOP + BAND_HEIGHT / 2 + 5, caption)
+    const caption = label(group, left + width / 2, BAND_TOP + BAND_HEIGHT / 2 + 5, number ? String(number) : period.label)
+    if (number) {
+      group.setAttribute("data-note", String(number))
+      caption.style.fontWeight = "700"
+    }
   }
 
   function drawAxis(svg, { start, end, step, unit, x }) {
@@ -163,10 +189,14 @@ export function create(canvas, params) {
     if (UNITS[unit]) label(svg, AXIS_RIGHT + 18, AXIS_Y + 5, UNITS[unit], { anchor: "start", tone: "muted", size: 12 })
   }
 
-  function drawLegend(svg, shown) {
-    const group = el("g", { "data-legend": shown.length }, svg)
-    shown.forEach((event, index) => {
-      label(group, 8, LEGEND_TOP + index * LEGEND_LINE, `${index + 1}. ${event.at} : ${event.label}`, { anchor: "start", size: 12 })
+  // La légende des numéros : un <text> par entrée, un <tspan> par ligne.
+  function drawLegend(svg, entries) {
+    const group = el("g", { "data-legend": entries.length }, svg)
+    let top = LEGEND_TOP
+    entries.forEach((lines) => {
+      const text = label(group, 8, top, "", { anchor: "start", size: 13 })
+      lines.forEach((line, index) => el("tspan", { x: 8, y: top + index * LEGEND_LINE, text: line }, text))
+      top += lines.length * LEGEND_LINE
     })
   }
 

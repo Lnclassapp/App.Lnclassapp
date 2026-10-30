@@ -1,5 +1,5 @@
 // ⚡ FRONT · lib/figures/diagram — le schéma fléché : enchaînement (flow), arbre (tree) ou cycle, calculé, jamais placé à la main
-// Rôle : lit `layout`, `direction`, `nodes`, `edges`, `legend` et revérifie leurs formes avant de dessiner ; nœuds de 3 lignes au plus (texte tronqué par « … », texte complet en <title>), flèches par <marker> propre à la figure
+// Rôle : lit `layout`, `direction`, `nodes`, `edges`, `legend` et revérifie leurs formes avant de dessiner ; nœuds de 4 lignes au plus, retour à la ligne entre deux mots seulement, jamais d'ellipse : un libellé qui ne tient pas devient un numéro, texte entier en légende, flèches par <marker> propre à la figure
 // ADR  : XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : XXXX-figures-des-matieres-de-3eme (§3) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, round } from "./svg"
@@ -18,7 +18,8 @@ const CHAR = 9 // unités par caractère : 13 px agrandis jusqu'à 1,4 fois au t
 const LINE = 18
 const PAD_X = 8
 const PAD_Y = 6
-const MAX_LINES = 3
+const MAX_LINES = 4
+const NOTE_LINE = 18
 const GAP_X = 32
 const GAP_Y = 44
 const LEGEND_ROW = 22
@@ -62,14 +63,15 @@ function read(params) {
   return { layout, direction, nodes: cleanNodes, edges: cleanEdges, legend: legend.map((entry) => entry.trim()) }
 }
 
-// Le texte d'un nœud : césure aux espaces, 3 lignes au plus ; au-delà, la dernière ligne finit par « … ».
+// Le texte d'un nœud : retour à la ligne entre deux mots, jamais au milieu d'un mot. `ok` est faux si un mot dépasse la boîte ou si
+// 4 lignes ne suffisent pas : le nœud passe alors en numéro (jamais d'ellipse).
 function wrap(content, width) {
   const chars = Math.max(3, Math.floor((width - 2 * PAD_X) / CHAR))
-  const words = content.split(/\s+/).flatMap((word) => word.match(new RegExp(`.{1,${chars}}`, "gu")) ?? [])
+  const words = content.split(/\s+/)
   const lines = []
   let current = ""
   for (const word of words) {
-    if (current && `${current} ${word}`.length > chars) {
+    if (current && [...`${current} ${word}`].length > chars) {
       lines.push(current)
       current = word
     } else {
@@ -77,20 +79,22 @@ function wrap(content, width) {
     }
   }
   if (current) lines.push(current)
-  if (lines.length <= MAX_LINES) return { lines, cut: false }
-
-  const last = lines[MAX_LINES - 1]
-  return { lines: [...lines.slice(0, MAX_LINES - 1), `${last.slice(0, chars - 1).trimEnd()}…`], cut: true }
+  return { lines, ok: lines.length <= MAX_LINES && words.every((word) => [...word].length <= chars) }
 }
+
+const widest = (nodes) => Math.max(...nodes.flatMap((node) => node.text.split(/\s+/).map((word) => [...word].length)))
+// La largeur qu'il faut au moins pour qu'aucun mot ne soit coupé.
+const wordFloor = (nodes) => Math.min(MAX_NODE_WIDTH, widest(nodes) * CHAR + 2 * PAD_X)
 
 // Tous les nœuds ont la même taille : largeur donnée, hauteur de la plus haute pile de lignes.
 function measure(nodes, width) {
-  const wrapped = new Map(nodes.map((node) => [node.id, wrap(node.label, width)]))
+  const wrapped = new Map(nodes.map((node) => [node.id, wrap(node.text, width)]))
   const lines = Math.max(...[...wrapped.values()].map((item) => item.lines.length))
-  return { wrapped, height: Math.max(36, lines * LINE + 2 * PAD_Y) }
+  const misfits = nodes.filter((node) => !wrapped.get(node.id).ok).map((node) => node.id)
+  return { wrapped, misfits, height: Math.max(36, lines * LINE + 2 * PAD_Y) }
 }
 
-const naturalWidth = (nodes) => Math.min(MAX_NODE_WIDTH, Math.max(...nodes.map((node) => node.label.length)) * CHAR + 2 * PAD_X)
+const naturalWidth = (nodes) => Math.min(MAX_NODE_WIDTH, Math.max(...nodes.map((node) => node.text.length)) * CHAR + 2 * PAD_X)
 const rowWidth = (count, gap, width) => count * width + (count - 1) * gap
 const clampWidth = (value, ceiling) => Math.max(MIN_NODE_WIDTH, Math.min(ceiling, Math.floor(value)))
 
@@ -107,12 +111,12 @@ function flow({ nodes, direction }, available) {
   let sizes = measure(nodes, width)
   if (direction === "right") {
     columns = count
-    while (columns > 1 && (INNER - (columns - 1) * GAP_X) / columns < Math.min(natural, 110)) columns--
+    while (columns > 1 && (INNER - (columns - 1) * GAP_X) / columns < Math.max(Math.min(natural, 110), wordFloor(nodes))) columns--
   } else {
     const perColumn = Math.max(1, Math.floor((available + GAP_Y) / (sizes.height + GAP_Y)))
     columns = Math.ceil(count / perColumn)
   }
-  width = clampWidth(Math.min(natural, (INNER - (columns - 1) * GAP_X) / columns), MAX_NODE_WIDTH)
+  width = clampWidth(Math.max(wordFloor(nodes), Math.min(natural, (INNER - (columns - 1) * GAP_X) / columns)), MAX_NODE_WIDTH)
   sizes = measure(nodes, width)
   const lanes = Math.ceil(count / columns)
   const boxes = new Map()
@@ -121,7 +125,7 @@ function flow({ nodes, direction }, available) {
     const [column, row] = direction === "right" ? [index % columns, Math.floor(index / columns)] : [Math.floor(index / lanes), index % lanes]
     place(boxes, node, left + column * (width + GAP_X) + width / 2, row * (sizes.height + GAP_Y) + sizes.height / 2, width, sizes.height, sizes.wrapped.get(node.id))
   })
-  return { boxes, height: lanes * sizes.height + (lanes - 1) * GAP_Y }
+  return { boxes, misfits: sizes.misfits, height: lanes * sizes.height + (lanes - 1) * GAP_Y }
 }
 
 // tree : une racine, un parent par nœud, aucun cycle ; les niveaux se suivent dans `direction`.
@@ -157,7 +161,7 @@ function tree(figure, available) {
 
   if (direction === "right") {
     const gap = 48
-    const width = clampWidth(Math.min(natural, 150, (INNER - (levels.length - 1) * gap) / levels.length), MAX_NODE_WIDTH)
+    const width = clampWidth(Math.max(wordFloor(nodes), Math.min(natural, 150, (INNER - (levels.length - 1) * gap) / levels.length)), MAX_NODE_WIDTH)
     const sizes = measure(nodes, width)
     const tallest = Math.max(...levels.map((level) => level.length))
     const height = tallest * sizes.height + (tallest - 1) * 24
@@ -165,10 +169,10 @@ function tree(figure, available) {
       const top = (height - (level.length * sizes.height + (level.length - 1) * 24)) / 2
       level.forEach((node, index) => place(boxes, node, MARGIN + depth * (width + gap) + width / 2, top + index * (sizes.height + 24) + sizes.height / 2, width, sizes.height, sizes.wrapped.get(node.id)))
     })
-    return { boxes, height }
+    return { boxes, misfits: sizes.misfits, height }
   }
 
-  const width = clampWidth(Math.min(natural, 150), MAX_NODE_WIDTH)
+  const width = clampWidth(Math.max(wordFloor(nodes), Math.min(natural, 150)), MAX_NODE_WIDTH)
   const sizes = measure(nodes, width)
   const capacity = Math.max(1, Math.floor((INNER + 24) / (width + 24)))
   let row = 0
@@ -181,7 +185,7 @@ function tree(figure, available) {
       items.forEach((node, index) => place(boxes, node, left + index * (width + 24) + width / 2, row * (sizes.height + GAP_Y) + sizes.height / 2, width, sizes.height, sizes.wrapped.get(node.id)))
     }
   })
-  return { boxes, height: row * sizes.height + (row - 1) * GAP_Y }
+  return { boxes, misfits: sizes.misfits, height: row * sizes.height + (row - 1) * GAP_Y }
 }
 
 const intersects = (a, b, pad = 6) => Math.abs(a.cx - b.cx) < (a.w + b.w) / 2 + pad && Math.abs(a.cy - b.cy) < (a.h + b.h) / 2 + pad
@@ -190,7 +194,8 @@ const intersects = (a, b, pad = 6) => Math.abs(a.cx - b.cx) < (a.w + b.w) / 2 + 
 function cycle({ nodes }, available) {
   const natural = naturalWidth(nodes)
   const count = nodes.length
-  for (let width = clampWidth(Math.min(natural, 150), MAX_NODE_WIDTH); width >= MIN_NODE_WIDTH; width -= 8) {
+  const floor = Math.max(MIN_NODE_WIDTH, wordFloor(nodes))
+  for (let width = clampWidth(Math.max(floor, Math.min(natural, 150)), MAX_NODE_WIDTH); width >= floor; width -= 8) {
     const sizes = measure(nodes, width)
     const rx = Math.min(WIDTH / 2 - MARGIN - width / 2, 130 + 20 * count)
     const ry = Math.max(20, Math.min(rx * 0.8, (available - sizes.height) / 2))
@@ -200,7 +205,7 @@ function cycle({ nodes }, available) {
       place(boxes, node, WIDTH / 2 + rx * Math.cos(angle), ry + sizes.height / 2 + ry * Math.sin(angle), width, sizes.height, sizes.wrapped.get(node.id))
     })
     const list = [...boxes.values()]
-    if (!list.some((box, index) => list.slice(index + 1).some((other) => intersects(box, other)))) return { boxes, height: 2 * ry + sizes.height }
+    if (!list.some((box, index) => list.slice(index + 1).some((other) => intersects(box, other)))) return { boxes, misfits: sizes.misfits, height: 2 * ry + sizes.height }
   }
   throw new Error("diagram : cycle trop chargé")
 }
@@ -273,17 +278,48 @@ export function create(canvas, params) {
   const key = `d${++sequence}`
   const state = { svg: null }
 
-  function draw(next) {
-    const figure = read(next)
+  // Une mise en page avec les nœuds de `numbered` remplacés par leur numéro ; le texte entier va dans `notes`, sous la légende.
+  function arrange(figure, numbered) {
+    const notes = []
+    const nodes = figure.nodes.map((node) => {
+      if (!numbered.has(node.id)) return { ...node, text: node.label }
+      notes.push({ id: node.id, number: notes.length + 1, lines: wrap(`${notes.length + 1}. ${node.label}`, WIDTH - 2 * MARGIN + 2 * PAD_X).lines })
+      return { ...node, text: String(notes.length), number: notes.length }
+    })
     const legendHeight = figure.legend.length > 0 ? figure.legend.length * LEGEND_ROW + 12 : 0
-    const available = MAX_HEIGHT - 2 * MARGIN - legendHeight
-    const { boxes, height } = { flow, tree, cycle }[figure.layout](figure, available)
+    const notesHeight = notes.reduce((sum, note) => sum + note.lines.length * NOTE_LINE + 4, notes.length > 0 ? 8 : 0)
+    const available = MAX_HEIGHT - 2 * MARGIN - legendHeight - notesHeight
+    const { boxes, height, misfits } = { flow, tree, cycle }[figure.layout]({ ...figure, nodes }, available)
     if (height > available) throw new Error("diagram : schéma trop haut")
     for (const box of boxes.values()) {
       if (box.cx - box.w / 2 < 0 || box.cx + box.w / 2 > WIDTH) throw new Error("diagram : schéma trop large")
     }
+    return { boxes, height, misfits, notes, legendHeight, notesHeight }
+  }
 
-    const total = Math.ceil(MARGIN + height + legendHeight + MARGIN)
+  // Jamais d'ellipse : un nœud qui ne tient pas passe en numéro ; si le schéma ne tient toujours pas, tous les nœuds sont numérotés.
+  function plan(figure) {
+    const numbered = new Set(figure.nodes.filter((node) => !wrap(node.label, MAX_NODE_WIDTH).ok).map((node) => node.id))
+    for (;;) {
+      let arranged = null
+      try {
+        arranged = arrange(figure, numbered)
+      } catch (error) {
+        if (numbered.size === figure.nodes.length) throw error
+        figure.nodes.forEach((node) => numbered.add(node.id))
+        continue
+      }
+      const crowded = arranged.misfits.filter((id) => !numbered.has(id))
+      if (crowded.length === 0) return arranged
+      crowded.forEach((id) => numbered.add(id))
+    }
+  }
+
+  function draw(next) {
+    const figure = read(next)
+    const { boxes, height, notes, legendHeight, notesHeight } = plan(figure)
+
+    const total = Math.ceil(MARGIN + height + legendHeight + notesHeight + MARGIN)
     const svg = root(WIDTH, total)
     const layer = el("g", { transform: `translate(0 ${MARGIN})` }, svg)
     const categories = new Set([...figure.nodes.map((node) => node.category).filter((value) => value !== null), ...figure.legend.map((_, index) => index + 1)])
@@ -293,6 +329,7 @@ export function create(canvas, params) {
     drawEdges(layer, figure, boxes, height + MARGIN)
     for (const box of boxes.values()) drawNode(layer, box)
     drawLegend(svg, figure.legend, MARGIN + height + 12)
+    drawNotes(svg, notes, MARGIN + height + legendHeight + 8)
 
     state.svg?.remove()
     canvas.appendChild(svg)
@@ -313,14 +350,31 @@ export function create(canvas, params) {
   }
 
   function drawNode(layer, box) {
-    const { node, cx, cy, w, h, lines, cut } = box
+    const { node, cx, cy, w, h, lines } = box
     const group = el("g", { "data-node": node.id }, layer)
-    if (cut) el("title", { text: node.label }, group)
+    if (node.number) {
+      group.setAttribute("data-note", String(node.number))
+      el("title", { text: node.label }, group)
+    }
     const geometry = { x: round(cx - w / 2), y: round(cy - h / 2), width: round(w), height: round(h), rx: 8, ry: 8 }
     el("rect", { ...geometry, fill: "paper", stroke: node.category === null ? "grid" : "ink", "stroke-width": 1.5, "data-box": "" }, group)
     paint(group, node.category, geometry, key)
     const top = cy - (lines.length * LINE) / 2
-    lines.forEach((line, index) => label(group, cx, top + index * LINE + LINE / 2 + 4.5, line, { tone: "ink", size: 13 }))
+    // Un seul <text> par nœud, un <tspan> par ligne : un mot n'est jamais réparti sur deux tspans.
+    const text = label(group, cx, top + LINE / 2 + 4.5, "", { tone: "ink", size: 13 })
+    if (node.number) text.style.fontWeight = "700"
+    lines.forEach((line, index) => el("tspan", { x: round(cx), y: round(top + index * LINE + LINE / 2 + 4.5), text: line }, text))
+  }
+
+  // Les numéros de repli : le texte entier, sous la légende (ligne par ligne, retour entre deux mots).
+  function drawNotes(svg, notes, top) {
+    let y = top
+    for (const { number, lines } of notes) {
+      const row = el("g", { "data-legend-note": number }, svg)
+      const text = label(row, MARGIN, y + 13, "", { anchor: "start", tone: "ink", size: 13 })
+      lines.forEach((line, index) => el("tspan", { x: MARGIN, y: round(y + 13 + index * NOTE_LINE), text: line }, text))
+      y += lines.length * NOTE_LINE + 4
+    }
   }
 
   function drawLegend(svg, legend, top) {

@@ -85,11 +85,59 @@ class Catalog::FigureTimelineSystemTest < ApplicationSystemTestCase
 
   test "crowded long labels are replaced by numbers explained in a legend, without overlap" do
     events = (1940..1944).map { |year| { "at" => year, "label" => "Événement très long de l'année #{year}" } }
-    mount(figure(params: PARAMS.merge("events" => events)))
+    mount(figure(params: PARAMS.merge("events" => events, "periods" => [])))
 
     assert_selector "#host svg [data-event]", count: 5, visible: :all
     assert_selector "#host svg [data-legend] text", count: 5, visible: :all
     assert_equal %w[1 2 3 4 5], page.evaluate_script("[...document.querySelectorAll('#host svg [data-event] text')].map((t) => t.textContent)")
+    assert_empty overlapping_label_pairs
+  end
+
+  # La frise de la leçon sur l'ONU : « ONUCI en Côte d'Ivoire » ne tient pas dans sa bande étroite à 390 px.
+  ONU = {
+    "start" => 1940, "end" => 2020, "step" => 10, "unit" => "year",
+    "periods" => [ { "from" => 1940, "to" => 1945, "label" => "Seconde Guerre mondiale (jusqu'en 1945)" }, { "from" => 2004, "to" => 2017, "label" => "ONUCI en Côte d'Ivoire" } ],
+    "events" => [ { "at" => 1941, "label" => "Charte de l'Atlantique" }, { "at" => 1945, "label" => "Création de l'ONU" },
+                  { "at" => 1948, "label" => "Déclaration universelle des droits de l'homme" }, { "at" => 1960, "label" => "La Côte d'Ivoire entre à l'ONU" },
+                  { "at" => 1994, "label" => "Conseil de tutelle suspendu" }, { "at" => 2004, "label" => "Début de l'ONUCI" }, { "at" => 2017, "label" => "Fin de l'ONUCI" } ]
+  }.freeze
+
+  # Ce que la frise écrit : chaque texte dessiné (hors légende) et le texte de la légende numérotée.
+  def drawn_and_legend
+    page.evaluate_script(<<~JS)
+      (() => ({
+        drawn: [...document.querySelectorAll("#host svg text")].filter((t) => !t.closest("[data-legend]")).map((t) => t.textContent),
+        legend: [...document.querySelectorAll("#host svg [data-legend] text")].map((t) => [...t.querySelectorAll("tspan")].map((line) => line.textContent).join(" "))
+      }))()
+    JS
+  end
+
+  # Un libellé de période ou d'événement visible entre `from` et la fin de la frise : dessiné en entier ou entier dans la légende.
+  def assert_whole_timeline_labels(params, label, from: params["start"])
+    found = drawn_and_legend
+    periods = params["periods"].select { |period| period["to"] > from }
+    events = params["events"].select { |event| event["at"] >= from }
+
+    refute_includes (found["drawn"] + found["legend"]).join, "…", "#{label} : un libellé est tronqué"
+    (periods + events).each do |item|
+      assert(found["drawn"].include?(item["label"]) || found["legend"].any? { it.include?(item["label"]) },
+             "#{label} : « #{item["label"]} » n'est ni dessiné ni dans la légende")
+    end
+  end
+
+  test "the United Nations timeline on a phone truncates no period or event label, before and after moving the cursor" do
+    mount(figure(params: ONU, controls: [ { "param" => "start", "min" => 1940, "max" => 1990, "step" => 10, "label" => "Début de la frise" } ]))
+
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    assert_whole_timeline_labels(ONU, "ONU à 390 px")
+    assert_empty overlapping_label_pairs
+
+    find("#host input[type=range]").set(1990)
+
+    assert_selector "#host svg [data-tick]", count: 4, visible: :all
+    assert_whole_timeline_labels(ONU, "ONU à 390 px, curseur à 1990", from: 1990)
+    assert_equal 1, page.evaluate_script("document.querySelectorAll('#host svg [data-period]').length")
+    assert_selector "#host svg [data-period][data-note]", visible: :all
     assert_empty overlapping_label_pairs
   end
 

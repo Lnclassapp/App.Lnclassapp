@@ -98,16 +98,28 @@ function paint(node, category, key) {
 const overlaps = (a, b) => a.x0 < b.x1 && b.x0 < a.x1 && a.y0 < b.y1 && b.y0 < a.y1
 const inside = (box, bounds) => box.x0 >= 0 && box.y0 >= 0 && box.x1 <= bounds.width && box.y1 <= bounds.height
 
+// La boîte réelle d'un texte, mesurée sur la police rendue : ~0,5 em par caractère (0,58 par prudence), 1 em au-dessus de la ligne de base,
+// 0,33 em en dessous (jambages), plus 1 unité de marge. Une boîte plus petite que celle-ci laissait deux étiquettes se toucher.
+function textBox(anchor, x, baseline, width, em) {
+  const x0 = anchor === "start" ? x - 1 : anchor === "end" ? x - width : x - width / 2
+  return { x0, x1: x0 + width + 1, y0: baseline - em - 1, y1: baseline + em * 0.33 + 1 }
+}
+
+// Quatre positions autour du point : à droite, à gauche, au-dessus, en dessous.
 function candidates(x, y, text, em) {
   const width = [...text].length * 0.58 * em + 4
   const gap = DOT + 3
-  const high = em * 0.65
-  const low = em * 0.45
+  const right = x + gap
+  const left = x - gap
+  const level = y + em * 0.35
+  const above = y - gap - em * 0.33
+  const below = y + gap + em + 1
+  const place = (anchor, px, baseline) => ({ anchor, x: px, y: baseline, box: textBox(anchor, px, baseline, width, em) })
   return [
-    { anchor: "start", x: x + gap, y: y + em * 0.35, box: { x0: x + gap - 2, x1: x + gap + width, y0: y - high, y1: y + low } },
-    { anchor: "end", x: x - gap, y: y + em * 0.35, box: { x0: x - gap - width, x1: x - gap + 2, y0: y - high, y1: y + low } },
-    { anchor: "middle", x, y: y - gap - 2, box: { x0: x - width / 2, x1: x + width / 2, y0: y - gap - 2 - em * 0.95, y1: y - gap + 1 } },
-    { anchor: "middle", x, y: y + gap + em * 0.85, box: { x0: x - width / 2, x1: x + width / 2, y0: y + gap - 1, y1: y + gap + em * 1.2 } }
+    place("start", right, level),
+    place("end", left, level),
+    place("middle", x, above),
+    place("middle", x, below)
   ]
 }
 
@@ -150,7 +162,11 @@ function layout({ places, routes, legend }, data, scale) {
 
     const number = notes.length + 1
     notes.push({ number, text })
-    const marked = fit(x, y, String(number), em, taken, bounds) ?? candidates(x, y, String(number), em)[0]
+    let marked = fit(x, y, String(number), em, taken, bounds)
+    if (!marked) {
+      marked = candidates(x, y, String(number), em)[0]
+      taken.push(marked.box)
+    }
     texts.push({ kind, id, text: String(number), number, ...marked })
   }
 

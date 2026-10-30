@@ -172,8 +172,14 @@ class Catalog::FigureMapSystemTest < ApplicationSystemTestCase
     notes = page.evaluate_script("document.querySelectorAll('#host svg [data-legend-note]').length")
     assert_equal notes, page.evaluate_script("document.querySelectorAll('#host svg text[data-note]').length"), "chaque numéro posé renvoie à une ligne de légende"
 
+    assert_equal 4, assert_no_overlap.size
+  end
+
+  # Mesure en pixels d'écran : aucune paire d'étiquettes (lieux, routes, numéros) ni aucun point ne se recoupe, et aucune étiquette ne
+  # recouvre un point. Renvoie les boîtes des étiquettes.
+  def assert_no_overlap
     boxes = page.evaluate_script(<<~JS)
-      [...document.querySelectorAll('#host svg [data-place-label]')].map((node) => {
+      [...document.querySelectorAll('#host svg [data-place-label], #host svg [data-route-label]')].map((node) => {
         const box = node.getBoundingClientRect()
         return [box.left, box.top, box.right, box.bottom]
       })
@@ -181,15 +187,37 @@ class Catalog::FigureMapSystemTest < ApplicationSystemTestCase
     dots = page.evaluate_script(<<~JS)
       [...document.querySelectorAll('#host svg [data-place]')].map((node) => {
         const box = node.getBoundingClientRect()
-        return [(box.left + box.right) / 2, (box.top + box.bottom) / 2]
+        return [box.left, box.top, box.right, box.bottom]
       })
     JS
-    assert_equal 4, boxes.size
-    boxes.combination(2).each do |a, b|
-      assert(a[2] <= b[0] || b[2] <= a[0] || a[3] <= b[1] || b[3] <= a[1], "deux étiquettes se chevauchent : #{a.inspect} et #{b.inspect}")
-    end
-    boxes.product(dots).each do |box, (x, y)|
-      assert(x < box[0] || x > box[2] || y < box[1] || y > box[3], "une étiquette recouvre un point : #{box.inspect} #{[ x, y ].inspect}")
-    end
+    apart = ->(a, b) { a[2] <= b[0] || b[2] <= a[0] || a[3] <= b[1] || b[3] <= a[1] }
+    boxes.combination(2).each { |a, b| assert apart.call(a, b), "deux étiquettes se chevauchent : #{a.inspect} et #{b.inspect}" }
+    dots.combination(2).each { |a, b| assert apart.call(a, b), "deux points se chevauchent : #{a.inspect} et #{b.inspect}" }
+    boxes.product(dots).each { |box, dot| assert apart.call(box, dot), "une étiquette recouvre un point : #{box.inspect} #{dot.inspect}" }
+    boxes
+  end
+
+  def assert_legend_matches_numbers
+    notes = page.evaluate_script("document.querySelectorAll('#host svg [data-legend-note]').length")
+    assert_equal notes, page.evaluate_script("document.querySelectorAll('#host svg text[data-note]').length"), "chaque numéro posé renvoie à une ligne de légende"
+  end
+
+  test "the United Nations world map on a phone has no overlapping label or point, whatever is numbered" do
+    mount({ "base" => "world", "legend" => [ "Membre permanent du Conseil de sécurité", "Côte d'Ivoire (membre depuis 1960)" ],
+            "areas" => %w[chn usa fra gbr rus].map { |id| { "id" => id, "category" => 1 } } + [ { "id" => "civ", "category" => 2 } ],
+            "places" => [ { "id" => "new_york", "label" => "New York (siège)" }, { "id" => "geneva", "label" => "Genève (office de l'ONU)" },
+                          { "id" => "the_hague", "label" => "La Haye (CIJ)" }, { "id" => "san_francisco", "label" => "San Francisco (Charte, 1945)" } ] }, width: 350)
+
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    assert_equal 4, assert_no_overlap.size
+    assert_legend_matches_numbers
+  end
+
+  test "Lagos and Douala, close on the Africa map, do not overlap on a phone" do
+    mount({ "base" => "africa", "places" => [ { "id" => "lagos" }, { "id" => "douala" }, { "id" => "abidjan" }, { "id" => "accra" } ] }, width: 350)
+
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    assert_equal 4, assert_no_overlap.size
+    assert_legend_matches_numbers
   end
 end

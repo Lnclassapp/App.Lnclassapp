@@ -125,16 +125,69 @@ class Catalog::FigureDiagramSystemTest < ApplicationSystemTestCase
     end
   end
 
-  test "a label that is too long is cut with an ellipsis and its full text is kept in a title" do
-    full = "Conférence de Berlin sur le partage colonial de l'Afrique centrale et occidentale en 1885"
-    mount("layout" => "flow", "nodes" => [ { "id" => "a", "label" => full }, { "id" => "b", "label" => "Fin" } ],
-          "edges" => [ { "from" => "a", "to" => "b" } ])
+  # La figure « cycle » de la leçon sur l'économie de l'Afrique : cinq libellés longs, dont « Infrastructures » coupé en deux à 390 px.
+  CYCLE_AFRIQUE = {
+    "layout" => "cycle", "direction" => "down",
+    "nodes" => [ { "id" => "exp", "label" => "Exportation de matières premières brutes" },
+                 { "id" => "rev", "label" => "Revenus instables (prix mondiaux)" },
+                 { "id" => "dette", "label" => "Peu d'argent à investir, endettement" },
+                 { "id" => "infra", "label" => "Infrastructures et usines insuffisantes" },
+                 { "id" => "transf", "label" => "Faible transformation sur place" } ],
+    "edges" => [ %w[exp rev], %w[rev dette], %w[dette infra], %w[infra transf], %w[transf exp] ].map { |from, to| { "from" => from, "to" => to } }
+  }.freeze
 
-    assert_selector "#host [data-figure-state=ready]", visible: :all
-    assert_selector "#host [data-node=a] text", text: /…/, visible: :all
-    assert_equal full, page.evaluate_script("document.querySelector('#host [data-node=a] title').textContent")
-    assert_no_selector "#host [data-node=b] title", visible: :all
-    assert_empty collisions["spilled"]
+  # Pour chaque nœud : ses tspans (une ligne chacun), son numéro de repli s'il en a un, et la ligne de légende correspondante.
+  def node_texts
+    page.evaluate_script(<<~JS)
+      [...document.querySelectorAll("#host [data-node]")].map((node) => ({
+        id: node.dataset.node, note: node.dataset.note ?? null, text: [...node.querySelectorAll("text")].map((line) => line.textContent).join(" "),
+        tspans: [...node.querySelectorAll("tspan")].map((line) => line.textContent),
+        legend: node.dataset.note ? [...document.querySelectorAll(`#host [data-legend-note="${node.dataset.note}"] tspan`)].map((line) => line.textContent).join(" ") : null
+      }))
+    JS
+  end
+
+  # Ni « … », ni mot coupé : chaque mot du libellé est entier dans un seul tspan, ou le nœud est un numéro dont la légende porte le texte entier.
+  def assert_whole_labels(params, label)
+    shown = node_texts.index_by { it["id"] }
+    params["nodes"].each do |node|
+      found = shown.fetch(node["id"])
+
+      refute_includes found["text"], "…", "#{label} : « #{node["id"]} » est tronqué"
+      if found["note"]
+        assert_includes found["legend"], node["label"], "#{label} : la légende doit porter le texte entier de « #{node["id"]} »"
+      else
+        words = found["tspans"].flat_map { it.split(" ") }
+
+        node["label"].split.each { |word| assert_includes words, word, "#{label} : le mot « #{word} » est coupé" }
+        assert_equal node["label"].split, words, "#{label} : les mots ne sont ni coupés ni perdus"
+      end
+    end
+  end
+
+  test "the cycle of the African economy lesson keeps whole words, no ellipsis and no overlap on a phone and on a desktop" do
+    each_viewport do |size|
+      mount(CYCLE_AFRIQUE)
+      assert_laid_out(nodes: 5, edges: 5, label: "cycle Afrique à #{size}")
+      assert_whole_labels(CYCLE_AFRIQUE, "cycle Afrique à #{size}")
+    end
+  end
+
+  test "a word wider than any box turns the node into a number, and the legend keeps the full text without ellipsis" do
+    full = "Conférence de Berlin sur le partage colonial de l'Afrique centrale et occidentale en 1885 Anticonstitutionnellement"
+    params = { "layout" => "flow", "nodes" => [ { "id" => "a", "label" => full }, { "id" => "b", "label" => "Fin" } ],
+               "edges" => [ { "from" => "a", "to" => "b" } ] }
+    each_viewport do |size|
+      mount(params)
+
+      assert_selector "#host [data-figure-state=ready]", visible: :all
+      assert_selector "#host [data-node=a][data-note='1']", visible: :all
+      assert_whole_labels(params, "mot trop long à #{size}")
+      assert_equal full, page.evaluate_script("document.querySelector('#host [data-node=a] title').textContent")
+      assert_no_selector "#host [data-node=b] title", visible: :all
+      assert_empty collisions["spilled"]
+      assert_operator viewbox.last, :<=, 640
+    end
   end
 
   test "category 4 is filled with its hatch pattern and the legend is drawn" do

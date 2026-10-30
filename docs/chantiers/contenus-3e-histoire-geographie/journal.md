@@ -24,6 +24,16 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Lot B : la bande littorale, calculée comme enveloppe convexe de la côte relevée de 0,23°, a d'abord pris la frontière est (lon −2,6) pour de la côte et coupé le pays en diagonale. Corrigé en n'échantillonnant que les longitudes où le pays touche la mer (lat < 5,8).
 - Lot B : un seul `d` par zone exige de fusionner les morceaux convexes ; les ponts dégénérés de Sutherland-Hodgman (sur un sujet concave) s'annulent comme les frontières internes, par suppression des arêtes parcourues dans les deux sens.
 
+### Corrections d'affichage à 390 px, constatées sur captures
+
+Lot H. Les captures de la vraie fiche à 390 px contredisaient l'UDR §3 et §5 (aucune étiquette coupée ni chevauchée, numérotation de repli).
+
+- `map` : la boîte d'étiquette sous-estimait la hauteur du texte rendu (0,45 em sous la ligne de base au lieu de ~0,33 em + jambages mesurés à 1,3 em au total) : « La Haye » et « Genève » se touchaient. Boîtes recalculées sur le texte rendu ; un numéro qui ne trouve aucune place est désormais enregistré parmi les boîtes prises. Les tests mesurent des boîtes en pixels d'écran, points compris (carte ONU, Lagos et Douala).
+- `diagram` : plus d'ellipse ni de coupure au milieu d'un mot. Retour à la ligne entre deux mots seulement, boîte élargie au mot le plus long, 4 lignes au plus ; sinon le nœud devient un numéro (texte entier en légende sous le schéma, hauteur recalculée, ≤ 640). Un `<text>` par nœud, un `<tspan>` par ligne.
+- `timeline` : un libellé de période qui ne tient pas dans sa bande devient un numéro (légende sous la frise, numérotée avant les événements) ; la légende est découpée aux espaces, en 13 px.
+- Un test ancien du schéma (« libellé trop long coupé par une ellipse ») affirmait le contraire de l'UDR : remplacé. Un test de frise perd sa période « Guerre » (devenue un numéro) pour rester centré sur les événements.
+- Reste : la taille effective du texte à 390 px est de ~10 px (13 px × 1,4 × 350/640), pas 13 px : le plafond de `--figure-text` (1,4, `figure_controller`) n'est pas dans ce lot. Flèche diagonale du schéma `flow` : non traitée (optionnel).
+
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
