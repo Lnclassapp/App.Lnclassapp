@@ -1,0 +1,24 @@
+<%# 🌐 UI · catalog/courses/sheets/_batch_bar — le bandeau du devoir composé : « n exercices choisis · Vider · Envoyer à <classe> » %>
+<%# Rôle : collé au bas de l'écran, caché tant qu'aucun exercice n'est choisi ; un bouton « Envoyer à <classe> » par classe de l'enseignant pour ce niveau (POST des exercices choisis, ajoutés par Stimulus au moment de l'envoi) ; #sheet-batch-status reçoit le compte rendu de l'envoi (Turbo Stream) %>
+<%# ADR  : 0048, sujets-de-devoir (ajout du 2026-10-30) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Devoir composé par l'enseignant) · Stimulus : assignment-batch %>
+<%# locals: (classrooms:) -%>
+<%# Les exemples « 1 exercice choisi » / « 2 exercices choisis » servent de gabarits : Stimulus remplace le nombre. %>
+<%= tag.div id: "sheet-batch-bar", class: "ps-batch", hidden: true,
+            data: { controller: "assignment-batch", assignment_batch_key_value: "lnclass-batch-#{current_actor.user_id}",
+                    assignment_batch_max_value: UseCases::Classroom::AssignExerciseBatch::MAX_EXERCISES,
+                    assignment_batch_one_value: t("classroom.assignments.batch.chosen", count: 1),
+                    assignment_batch_other_value: t("classroom.assignments.batch.chosen", count: 2) } do %>
+  <div class="ps-batch-card">
+    <div id="sheet-batch-status" class="ps-batch-status" role="status" aria-live="polite" data-assignment-batch-target="status" hidden></div>
+    <p class="ps-batch-limit" role="status" data-assignment-batch-target="limit" hidden><%= t("classroom.assignments.batch.invalid_count") %></p>
+    <div class="ps-batch-row" data-assignment-batch-target="selection" hidden>
+      <span class="ps-batch-count" data-assignment-batch-target="count"></span>
+      <button type="button" class="ps-link-button" data-action="assignment-batch#clear"><%= t("classroom.assignments.batch.clear") %></button>
+      <% classrooms.each do |target| %>
+        <%= form_with url: classroom_assignment_batches_path(target.public_id), class: "contents", data: { action: "formdata->assignment-batch#fill" } do %>
+          <%= tag.button t("classroom.assignments.batch.submit", classroom: target.name), type: :submit, class: "ps-btn ps-btn--primary" %>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

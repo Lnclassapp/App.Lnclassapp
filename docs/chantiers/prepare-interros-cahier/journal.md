@@ -74,6 +74,28 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
   classe sans jour rend donc un instant la ligne compacte, puis le rafraîchissement par morphing (`@days_saved`) remet la feuille.
 - Les gabarits d'`exercises/show` (page de l'exercice) restent en ligne compacte : le mode `sheet` ne les touche pas.
 
+### Lot E — composer un devoir
+
+- `AssignExerciseBatch` : les identifiants du navigateur ne sont jamais crus. Liste lue seulement si c'est un tableau de 50 éléments au plus ;
+  texte seulement, espaces retirés, doublons écartés ; 1 à 10 exercices, sinon `:invalid` (`invalid_count`) avant toute lecture. Les droits
+  (`AssignPolicy`) sont vérifiés avant de lire un exercice. Un exercice inconnu, non publié ou à parent non publié refuse tout l'envoi
+  (`unknown_exercise`), un exercice d'un autre niveau aussi (`other_level`) : rien n'est écrit. Un enseignant sans jours de séance pour la
+  classe est refusé (`weekdays`) au lieu d'une échéance muette ; l'équipe envoie sans échéance. Un exercice déjà actif pour la classe est
+  écarté par `create_batch` (Lot 0b, appelé tel quel) et nommé.
+- Fichiers ajoutés au lot, hors fiche : `config/locales/classroom/assignments.fr.yml` (3 clés : `batch.choose_label`, `batch.unknown_exercise`,
+  `batch.needs_session_days`) ; `app/assets/stylesheets/prepare_sheet.css` (Lot 0) reçoit `.ps-btn--choose` et `.ps-batch*`, les styles de la
+  case et du bandeau que les maquettes ne portent pas (UDR, devoir composé) ; `script/ci/test_timings.yml` (durée du test système, exigée par
+  `SystemBudgetTest`).
+- Le bandeau est rendu une fois par page, par la première `_teacher_bar` (`@batch_bar_rendered`), parce que `_sheet.html.erb` n'est pas au lot ;
+  il est fixe en bas de l'écran. Le Turbo Stream de l'envoi remplace `#sheet-batch-status` (pas le bandeau) : le compte rendu porte
+  `data-sent`, que Stimulus lit pour vider la sélection ; un refus (422) n'est qu'un toast, la sélection reste.
+- Budget système (ADR-0069 §9) : un seul test système, `assignment_batch_test.rb` (CA-12 et CA-15 d'un même parcours, dix identifiants préremplis
+  dans `localStorage` pour le plafond, au lieu de onze clics), 10,8 s enregistrées. Le chantier atteint 17,5 s pour 15 s de budget : les
+  autres cas (case réservée à l'enseignant, refus, doublons, bornes) sont au niveau contrôleur et domaine. Le porteur doit relever le budget
+  ou écarter ce parcours.
+- Le test de reproduction rouge d'abord n'a pas pu être constaté dans cette reprise : le travail avait été écrit avant l'interruption de
+  l'agent précédent, sans commit.
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.

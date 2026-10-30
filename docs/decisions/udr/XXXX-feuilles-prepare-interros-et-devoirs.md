@@ -57,8 +57,10 @@ UDR-0145 §3.2. La seule adaptation est la vue de l'enseignant, que la maquette 
   visible dès un exercice choisi : « n exercice(s) choisi(s) » · « Vider » (lien souligné) · « Envoyer à <classe> »
   (bouton noir), un par classe de l'enseignant pour ce niveau. Sélection gardée dans `localStorage`
   (`lnclass-batch-<teacher>`), elle suit l'enseignant d'une leçon à l'autre.
-- Après l'envoi (Turbo Stream sur `#sheet-batch-bar`) : « Devoir envoyé à 3e 1 : n exercices. » et, s'il y en a, « Déjà
-  assigné : <titres>. » (`role="status"`) ; la sélection est vidée.
+- Après l'envoi (Turbo Stream sur `#sheet-batch-status`, le bandeau reste en place) : « Devoir envoyé à 3e 1 : n exercices. » et, s'il
+  y en a, « Déjà assigné : <titres>. » (`role="status"`) ; la sélection est vidée et les exercices envoyés passent à « ✓ Assigné à <classe> ».
+  Un refus (liste vide ou de plus de 10, exercice inconnu ou d'un autre niveau, jours de séance non donnés) s'affiche en toast et
+  garde la sélection. Au plus 10 exercices : le onzième n'est pas coché, le bandeau dit « Choisis entre 1 et 10 exercices. ».
 
 **Devoirs reçus par l'élève** (`app/views/classroom/student_classrooms/_assigned_sheets.html.erb`, à la place de la liste
 des `_assigned_exercise`)
