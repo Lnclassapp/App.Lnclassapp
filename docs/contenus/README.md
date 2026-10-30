@@ -5,8 +5,8 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | Fichier | Rôle |
 |---|---|
 | [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 fiches de cours sans fiche de révision), à importer depuis **Imports → Fiches de cours complètes**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
-| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon de mathématiques au **format v3** : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
-| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour un niveau (3ème…), il prend les leçons de mathématiques de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = un niveau |
+| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
+| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
 | [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Français, Histoire-Géographie et EDHC) |
 
@@ -183,9 +183,6 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 | `svt/les-aliments-et-l-homme.json` | Les aliments et l'Homme | 4 | 12 | 69 |
 | `svt/la-digestion-des-aliments.json` | La digestion des aliments | 4 | 12 | 60 |
 | `svt/le-sang.json` | Le sang | 4 | 12 | 68 |
-| `francais/l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json` | L'expression des circonstances dans la phrase simple et dans la phrase complexe | 4 | 12 | 72 |
-| `francais/le-dialogue-oral.json` | Le dialogue oral | 4 | 12 | 65 |
-| `francais/le-texte-argumentatif.json` | Le texte argumentatif | 4 | 12 | 72 |
 | `histoire-geographie/histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire.json` | Histoire — Le mouvement impérialiste et la colonisation en Côte d'Ivoire | 4 | 12 | 60 |
 | `histoire-geographie/geographie-les-atouts-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les atouts du développement économique de la Côte d'Ivoire | 4 | 12 | 65 |
 | `histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance.json` | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 4 | 12 | 60 |
@@ -193,7 +190,7 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 | `edhc/les-organisations-humanitaires.json` | Les organisations humanitaires | 4 | 12 | 60 |
 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-violences-faites-aux-personnes-vulnerables.json` | Les instruments et les mécanismes de protection contre les violences faites aux personnes vulnérables | 4 | 12 | 72 |
 
-Les 3 leçons de mathématiques de ce lot ont depuis été réécrites au format 3 (section suivante). Les 15 autres fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par fiche. Chacun a passé `script/contenus/valider.rb`, puis une relecture par un second rédacteur, qui a refait les calculs et vérifié les faits. Les défauts trouvés ont été corrigés. Importés ensemble sur une base jetable par la vraie chaîne d'import : **18 cours, 72 fiches, 216 exercices, 1 194 questions, 4 370 propositions, sans erreur**, une fois la matière EDHC créée. Sans elle, les 3 cours d'EDHC sont rejetés (`unknown_material`) et les 15 autres passent. Aucun enseignant ne les a encore relus.
+Les 3 leçons de mathématiques et les 3 de Français de ce lot ont depuis été réécrites au format 3 (sections suivantes). Les 15 autres fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par fiche. Chacun a passé `script/contenus/valider.rb`, puis une relecture par un second rédacteur, qui a refait les calculs et vérifié les faits. Les défauts trouvés ont été corrigés. Importés ensemble sur une base jetable par la vraie chaîne d'import : **18 cours, 72 fiches, 216 exercices, 1 194 questions, 4 370 propositions, sans erreur**, une fois la matière EDHC créée. Sans elle, les 3 cours d'EDHC sont rejetés (`unknown_material`) et les 15 autres passent. Aucun enseignant ne les a encore relus.
 
 À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
 
@@ -202,7 +199,6 @@ Les 3 leçons de mathématiques de ce lot ont depuis été réécrites au format
 - **Physique-Chimie, Les lentilles** : leçon rédigée sans programme sous les yeux, au niveau graphique (trois rayons particuliers, image réelle ou virtuelle, loupe, projecteur, appareil photo, œil réduit et défauts de la vue) ; aucune formule de conjugaison. Elle attend la relecture du porteur ou de Touré avant d'être présentée à des élèves. Les nombres de ses exercices (distances en cm, constructions à l'échelle) ont été recalculés.
 - **Physique-Chimie** : la fiche « réaction du support » (équilibre) est peut-être de niveau lycée. g vaut 10 N/kg partout, et 1,6 N/kg sur la Lune. Le contact localisé et réparti, et le mot « tension du fil », sont à confirmer.
 - **SVT** : les valeurs énergétiques 17 / 17 / 38 kJ par gramme, les tests de Fehling et du biuret, les noms d'enzymes et leurs conditions d'action, la fibrine, la phagocytose et la coagulation.
-- **Français** : l'opposition et la concession (« bien que », « même si ») dans la leçon 1, convaincre et persuader et « certes… mais » dans la leçon 3. Les actes de parole et le dialogue écrit ne sont pas traités.
 - **Histoire-Géographie** : les « atouts institutionnels » (OHADA, BCEAO, code des investissements), et les dates de la leçon sur l'indépendance (loi-cadre de 1956, référendum de 1958, indépendance du 7 août 1960, présidence fin 1960). L'AOF et les traités de protectorat sont cités sans date.
 - **EDHC** : aucun article de loi, aucune date, aucun numéro d'urgence. Les noms des conventions et chartes citées (femmes, personnes handicapées, enfant, Protocole de Maputo) sont écrits de mémoire, et la ratification par la Côte d'Ivoire n'est pas affirmée. La matière EDHC n'existe pas dans le référentiel : il faut la créer avant d'importer les 3 cours.
 
@@ -224,6 +220,32 @@ Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le
 | 10 | `mathematiques/statistique.json` | Statistique | 5 | 4 | 9 | 49 |
 
 Au total : 42 notions, 34 figures, 82 exercices et 455 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
+
+### 3ème, Français au format 3 (chantier `contenus-3e-francais`)
+
+Les 10 premières leçons de Français de la progression DPFC 2026-2027, rédigées le 2026-10-30 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 du même intitulé. Aucune figure. Chaque leçon a au moins 77 % de questions corrigées automatiquement. Les autres questions sont rédigées : chacune a un corrigé modèle, un barème et des critères. Les textes supports sont écrits pour Lnclass. Les œuvres réelles ne sont citées que par de courtes références paraphrasées, avec auteur, titre et date.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `francais/l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json` | L'expression des circonstances dans la phrase simple et dans la phrase complexe | 4 | 8 | 54 | 81 % |
+| 2 | `francais/le-dialogue-oral.json` | Le dialogue oral | 4 | 8 | 51 | 80 % |
+| 3 | `francais/le-texte-argumentatif.json` | Le texte argumentatif | 4 | 8 | 52 | 81 % |
+| 4 | `francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 4 | 8 | 53 | 81 % |
+| 5 | `francais/orthographe-lexicale.json` | Orthographe lexicale | 3 | 7 | 51 | 80 % |
+| 6 | `francais/la-coordination.json` | La coordination | 4 | 8 | 51 | 80 % |
+| 7 | `francais/le-resume-du-texte-argumentatif.json` | Le résumé du texte argumentatif | 4 | 8 | 50 | 80 % |
+| 8 | `francais/le-groupe-nominal-la-pronominalisation.json` | Le groupe nominal : la pronominalisation | 4 | 8 | 52 | 79 % |
+| 9 | `francais/le-verbe-l-infinitif-et-le-participe.json` | Le verbe : l'infinitif et le participe | 3 | 7 | 47 | 79 % |
+| 10 | `francais/l-expose-oral.json` | L'exposé oral | 4 | 8 | 52 | 77 % |
+
+Au total : 38 notions, 78 exercices et 513 questions. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second rédacteur, et les défauts trouvés ont été corrigés : règles de grammaire fausses, faits d'œuvre inexacts, fautes de langue, réponses justes refusées.
+
+À faire valider par un enseignant :
+
+- **Leçon 4** : les faits cités sur *Une vie de boy* (Ferdinand Oyono, 1956) et *L'Enfant noir* (Camara Laye, 1953). Le choix des œuvres reste à aligner sur la liste de l'établissement.
+- **Leçon 7** : la façon de compter les mots d'un résumé (trait d'union, « c'est-à-dire », chiffres). La leçon la soumet à la consigne du sujet.
+- **Leçons 8 et 9** : l'ordre des pronoms à l'impératif, la distinction entre participe présent et adjectif verbal, et les propositions infinitive et participiale, seulement citées.
+- **Questions rédigées** : les barèmes, de 3 à 8 points.
 
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 
