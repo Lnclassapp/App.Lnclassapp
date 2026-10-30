@@ -143,9 +143,11 @@ Le même POST sans en-tête `Turbo-Frame` rend une page pleine (layout de l'appl
 
 ```
 turbo-frame#hint_<question.id>
-  form  action=exercise_session_hints_path(session.public_id)  method=post
-    input[type=hidden name=question_id]
-    button[type=submit]  ui_button variant: :ghost, size: :sm, icon: "light-bulb"   « Indice »
+  button[type=submit form="hint-form-<question.id>"]  ui_button variant: :ghost, size: :sm, icon: "light-bulb"   « Indice »
+
+(après le form de la copie, jamais dedans : HTML interdit les formulaires imbriqués)
+form#hint-form-<question.id>  action=exercise_session_hints_path(session.public_id)  method=post  data-turbo-frame=hint_<question.id>
+  input[type=hidden name=question_id]
 ```
 
   La réponse (Turbo Stream `replace hint_<id>`) rend `div.rounded-ln.bg-mist.p-3.text-sm` avec `p` « Indice : <texte> », sans bouton. Une copie rechargée montre les indices déjà ouverts, lus dans `hinted_question_ids`. Sans JavaScript, le POST redirige vers la copie à l'ancre `#question-<n>`, l'indice ouvert.
