@@ -84,7 +84,7 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
 - Le verbe est `aria-hidden` : le nom accessible du lien reste le titre seul (la destination ne change pas avec le verbe ; les tests et les lecteurs d'écran trouvent l'exercice par son titre).
 - Un seul lien par carte. Rien d'interactif hors du bloc ; le bloc est `relative z-10` pour passer au-dessus du lien étiré.
 
-**Conteneur** — la liste qui accueille des cartes est un `<ul class="grid gap-3 sm:grid-cols-2">` (deux colonnes dès 640 px) ; trois colonnes (`lg:grid-cols-3`) seulement en pleine largeur (« Exercices assignés » de la classe de l'enseignant, sur ordinateur, reste à 2 : il partage la ligne). Plus de `divide-y`, plus de cadre bordé autour de la liste.
+**Conteneur** — la liste qui accueille des cartes est un `<ul class="grid gap-3 sm:grid-cols-2">` (deux colonnes dès 640 px) ; en pleine largeur, la grille s'élargit avec l'écran : `xl:grid-cols-3 2xl:grid-cols-4` (page d'une leçon, §3.2 bis) ; « Exercices assignés » de la classe de l'enseignant, sur ordinateur, reste à 2 : il partage la ligne. Plus de `divide-y`, plus de cadre bordé autour de la liste.
 
 **Le helper** — `app/helpers/assessment/exercise_cards_helper.rb`, une méthode par source :
 
@@ -108,7 +108,16 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
 ### 3.2 Les branchements
 
 - `classroom/student_classrooms/_assigned_exercise` et `_treated_exercise` : rendent `assessment/exercises/card` avec la carte du helper et `index` ; la liste de `student_classrooms/show` passe en grille.
-- `catalog/courses/_exercise_row` : rend la carte (`exercise_card_for_lesson`) ; les bascules d'assignation passent dans le bloc. `_prepare_interros` : seule la classe de la liste change (grille) et `material_slug` vient de `prepare.material_slug`.
+- `catalog/courses/_exercise_row` : rend la carte (`exercise_card_for_lesson`) ; les bascules d'assignation passent dans le bloc. `_prepare_interros` : `material_slug` vient de `prepare.material_slug`.
+
+### 3.2 bis — « Prépare interros » en une seule grille (amendement du 2026-10-30, demande du porteur sur capture)
+
+Le titre de notion au-dessus de chaque carte répétait le titre de l'exercice, qui nomme déjà la notion. Il disparaît.
+
+- Un seul `<ul id="prepare-interros-grid" class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">` pour tous les exercices de la leçon, dans l'ordre de la page : notions dans leur ordre, puis ceux de toute la leçon. 1 colonne au téléphone, 2 dès 640 px, 3 dès 1 280 px, 4 dès 1 536 px.
+- Plus de `<h3>` de notion ni de « Toute la leçon » au-dessus des cartes. Le type de la carte (« Évaluation ») distingue les exercices de toute la leçon.
+- Les ancres restent (UDR-0139 §3.7) : le `<li>` de la **première** carte d'une notion porte, en premier enfant, `<span id="notion-<slug>" class="block scroll-mt-24" tabindex="-1" aria-label="<nom de la notion>"></span>` ; celui de la première carte de toute la leçon, `<span id="toute-la-lecon" …>` de même. Le partial de carte reçoit ce repère par un local facultatif `anchor: { id:, label: }`.
+- Les notions sans exercice gardent leur bloc (titre + « pas encore d'exercice »), sous la grille.
 - `classroom/classrooms/_assigned_exercises` : chaque assignation rend la carte (`exercise_card_for_assignment`).
 
 ### 3.3 La carte de question — `assessment/exercises/show`

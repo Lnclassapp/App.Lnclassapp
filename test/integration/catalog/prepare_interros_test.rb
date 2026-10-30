@@ -26,8 +26,12 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select "#prepare-interros li[id^=exercise-]", 8
     titles = css_select("#prepare-interros li[id^=exercise-] h3 a").map { it.text.squish }
     assert_equal @by_notion.map(&:title) + @wide.map(&:title), titles
-    assert_select "#prepare-interros h3", text: "Notion 1"
-    assert_select "#prepare-interros #toute-la-lecon h3", text: tl("lesson_wide_title")
+    assert_select "ul#prepare-interros-grid.grid[class~='sm:grid-cols-2'][class~='xl:grid-cols-3'][class~='2xl:grid-cols-4']", 1
+    assert_select "#prepare-interros-grid > li[id^=exercise-]", 8
+    assert_select "#prepare-interros-grid > li:first-child > span#notion-#{@notions.first.slug}[aria-label='Notion 1']", 1
+    assert_select "#prepare-interros-grid > li > span#toute-la-lecon[aria-label=?]", tl("lesson_wide_title")
+    assert_select "#prepare-interros h3", text: "Notion 1", count: 0
+    assert_select "#prepare-interros h3", text: tl("lesson_wide_title"), count: 0
     assert_select row(@by_notion.first), text: including("Fixation")
     assert_select row(@by_notion.first), text: including(tl("question_count", count: 2))
     assert_select row(@wide.first), text: including("Évaluation")
