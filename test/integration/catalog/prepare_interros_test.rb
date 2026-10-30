@@ -83,6 +83,16 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select row(@by_notion[1]), text: including(tl("due_today"))
   end
 
+  # CA-5
+  test "a teacher reads « Voir l'exercice » on each card, never « Commencer »" do
+    sign_in_as @teacher
+
+    get course_path(@course.slug)
+
+    assert_select row(@by_notion.first), text: including("Voir l'exercice")
+    assert_select row(@by_notion.first), text: including("Commencer"), count: 0
+  end
+
   test "the team reads the status of each exercise, draft included, and has no toggle" do
     create_exercise(essential: @notions[0], title: "Brouillon", status: "draft", position: 90)
     sign_in_as create_team_member

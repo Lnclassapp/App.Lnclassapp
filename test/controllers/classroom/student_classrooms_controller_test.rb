@@ -63,6 +63,18 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score).tap { it.update!(completed_at: at) }
   end
 
+  # CA-2 : un exercice commencé dit « Reprendre », jamais « Commencer ».
+  test "an assigned exercise with a session in progress says « Reprendre »" do
+    exercise = assign("En cours", course: course_named("Génétique"))
+    create_exercise_session(student: @student, exercise:, status: "started")
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_select "#exercise-#{exercise.public_id}", text: including("Reprendre")
+    assert_select "#exercise-#{exercise.public_id}", text: including("Commencer"), count: 0
+  end
+
   def sections = css_select("#student_classroom [id^=student_classroom_]:not([id$=_title])").map { it["id"] }
 
   # UDR-0076 §3.2, UDR-0086 §3.4 : la classe, puis « Cours assignés », « Exercices assignés », « Exercices traités », les

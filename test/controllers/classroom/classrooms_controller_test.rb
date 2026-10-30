@@ -180,7 +180,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#assigned_exercises h2", text: I18n.t("#{scope}.assigned_exercises.title")
     assert_select "#assignment_#{assignment.public_id}" do
       assert_select "a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']", text: "La méiose"
-      assert_select "p", text: /\ASVT · /
+      assert_select "p", text: "SVT · Fixation"
+      assert_select "span[aria-hidden=true]", text: "Voir le suivi"
       assert_select "span", text: "Pour jeu. 8 oct."
       assert_select "span", text: "7 en retard"
     end

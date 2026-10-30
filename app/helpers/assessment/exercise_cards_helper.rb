@@ -50,7 +50,12 @@ module Assessment
 
     def card_t(key, **) = t("#{CARD_SCOPE}.#{key}", **)
 
-    def exercise_type_label(type) = (t("assessment.exercises.show.exercise_types.#{type}") if type.present?)
+    # Un type manquant lève : « exercise_types. » se résoudrait au groupe entier et afficherait un Hash.
+    def exercise_type_label(type)
+      raise ArgumentError, "exercise_type manquant" if type.blank?
+
+      t("assessment.exercises.show.exercise_types.#{type}")
+    end
 
     def grade_tag(score) = tag.span(grade_label(score), class: class_names("font-display font-medium tabular-nums", grade_class(score)))
 

@@ -43,7 +43,7 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
 - `dom_id` : l'`id` du `<li>`, celui qu'avait la ligne remplacée (`exercise-<public_id>`, `assignment_<public_id>`, ou `nil`).
 - `href` : la destination, ou `nil` (carte sans lien ni action).
 - `material_name` : `nil` sur la page d'une leçon (déjà dite dans l'en-tête de la page).
-- `material_slug` : la pastille ; `nil` → pas de pastille.
+- `material_slug` : la pastille ; `nil` ou inconnu → l'illustration de repli (une carte montre toujours une pastille).
 - `type_label` : « Fixation » ou « Évaluation » (`assessment.exercises.show.exercise_types.*`), ou `nil`.
 - `meta` : texte court facultatif (« 6 questions »).
 - `status` : HTML déjà rendu (un `ui_badge`, un `due_badge`, une note), ou `nil`.
@@ -58,7 +58,7 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
                   [si href] transition hover:border-brand/40 hover:shadow-lift has-[a:focus-visible]:outline-2
                   has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand">
     <div class="flex items-start gap-3">
-      [si material_slug] <span class="grid size-11 shrink-0 place-items-center rounded-full {tint}" aria-hidden> <img 28 px> </span>
+      <span class="grid size-11 shrink-0 place-items-center rounded-full {tint}" aria-hidden> <img 28 px> </span>
       <div class="min-w-0 flex-1 space-y-1">
         [si material_name ou type_label] <p class="text-meta text-mute">Matière · Type</p>   (séparateur « · »)
         <h3 class="text-[15px] leading-snug font-medium text-ink line-clamp-2 break-words">

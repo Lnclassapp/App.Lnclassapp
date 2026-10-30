@@ -17,9 +17,12 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
     4.times { |rank| question.answers.create!(position: rank + 1, content: "Choix #{rank + 1}", correct: rank < 3) }
     create_assignment(classroom: @classroom, assignable: @todo)
     done = create_exercise(essential:, title: "Le bilan")
-    create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
+    @copy = create_exercise_session(student: @student, exercise: done, status: "completed", score_percent: 80)
     sign_in_as @student
   end
+
+  # Un vrai clic à la position du verbe : le lien étiré le reçoit (Selenium refuse de cliquer l'élément lui-même, qu'il recouvre).
+  def click_at_center(element) = page.driver.browser.action.move_to(element.native).click.perform
 
   test "CA-1, CA-3 : « Ma classe » : la carte à faire dit Commencer, la carte traitée dit 16/20 et Voir ma copie" do
     visit student_classroom_path
@@ -28,15 +31,17 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
       assert_text "La fixation du CO2"
       assert_text "SVT · Fixation"
       assert_text "Commencer"
-      click_link "La fixation du CO2"
+      # Toute la carte est le lien : le verbe (aria-hidden) mène à l'exercice comme le titre.
+      click_at_center(find("span", text: "Commencer"))
     end
 
     assert_selector "h1", text: "La fixation du CO2"
     visit student_classroom_path
     within "#student_classroom_treated" do
       assert_text "16/20"
-      assert_text "Voir ma copie"
+      click_at_center(find("span", text: "Voir ma copie"))
     end
+    assert_current_path exercise_session_result_path(@copy.public_id)
   end
 
   test "CA-8 : l'écran d'un exercice : une carte numérotée par question, avec son format" do

@@ -125,11 +125,22 @@ module Assessment
       assert_equal "Voir l'exercice", card.action
     end
 
-    test "leçon : une seule question se dit au singulier ; sans slug, pas de pastille" do
-      card = exercise_card_for_lesson(lesson(count: 1), material_slug: nil, team: false, student: true)
+    test "leçon : une seule question se dit au singulier" do
+      card = exercise_card_for_lesson(lesson(count: 1), material_slug: "svt", team: false, student: true)
 
       assert_equal "1 question", card.meta
-      assert_nil card.material_slug
+    end
+
+    # grade_on_20 arrondit : 48 % fait déjà 10/20, 47 % fait 9/20.
+    test "le seuil de Refaire est 10/20 : 48 % → Commencer, 47 % → Refaire" do
+      at_ten = exercise_card_for_lesson(lesson(state: state(:score, score_percent: 48)), material_slug: "svt", team: false, student: true)
+      below = exercise_card_for_lesson(lesson(state: state(:score, score_percent: 47)), material_slug: "svt", team: false, student: true)
+
+      assert_equal [ "Commencer", "Refaire" ], [ at_ten.action, below.action ]
+    end
+
+    test "traité à 70 % : 14/20 en vert" do
+      assert_includes exercise_card_for_treated(treated(70)).status, "text-success"
     end
 
     test "assignation suivie, en retard : date absolue, N en retard, progression, Voir le suivi (CA-6)" do
@@ -153,10 +164,27 @@ module Assessment
       assert_equal "Sans date limite", text(done.status)
     end
 
-    test "une ligne sans type n'écrit pas de type" do
+    test "une ligne sans type lève : un type manquant ne se tait pas" do
       row = assignment.with(exercise_type: nil)
 
-      assert_nil exercise_card_for_assignment(row, classroom_public_id: "cl1").type_label
+      assert_raises(ArgumentError) { exercise_card_for_assignment(row, classroom_public_id: "cl1") }
+    end
+
+    test "chaque type de question et d'exercice a son libellé en français" do
+      Entities::Assessment::Question::TYPES.each do |type|
+        assert I18n.exists?("assessment.exercises.show.question_formats.#{type}", :fr), type
+      end
+      Entities::Assessment::Exercise::TYPES.each do |type|
+        assert I18n.exists?("assessment.exercises.show.exercise_types.#{type}", :fr), type
+      end
+    end
+
+    test "une carte montre toujours une illustration, de repli sans matière connue" do
+      card = exercise_card_for_lesson(lesson, material_slug: nil, team: false, student: true)
+
+      html = Nokogiri::HTML.fragment(render(partial: "assessment/exercises/card", locals: { card: })).css("li span[aria-hidden] img")
+
+      assert_equal 1, html.size
     end
 
     test "assignation sans droit de suivi : ni lien, ni action, ni progression" do

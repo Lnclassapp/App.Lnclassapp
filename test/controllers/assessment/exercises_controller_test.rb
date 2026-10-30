@@ -154,11 +154,10 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_questions li.question", expected.size
     expected.each_with_index do |label, index|
       assert_select "#sheet-question-#{index + 1}.rounded-card"
-      assert_select "#sheet-question-#{index + 1} > div:first-child", text: /#{index + 1}/
+      assert_select "#sheet-question-#{index + 1} > div:first-child > span:first-child", text: "#{index + 1}"
       assert_select "#sheet-question-#{index + 1}-format", text: label
       assert_select "#sheet-question-#{index + 1} .sr-only", text: "Question #{index + 1},"
     end
-    assert_select "#exercise_questions", text: /Plusieurs réponses/, count: 1
     assert_equal 2, response.body.scan(">Plusieurs réponses<").size
     assert_no_match(/\d propositions? correctes?/, response.body)
   end

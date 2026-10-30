@@ -5,17 +5,15 @@
 <% extra = local_assigns[:extra] %>
 <% reveal = index ? ui_reveal_item(index) : {} %>
 <% attrs = reveal.merge(data: (reveal[:data] || {}).merge(bleed_keep: "")) %>
-<% illustration = (subject_illustration(card.material_slug) if card.material_slug) %>
+<% illustration = subject_illustration(card.material_slug) %>
 <% context = safe_join([ card.material_name, card.type_label ].compact_blank, t("assessment.exercises.card.separator")) %>
 <%= tag.li id: card.dom_id, class: "min-w-0 #{"scroll-mt-24" if card.dom_id}", **attrs do %>
   <article class="<%= class_names("group relative flex h-full flex-col gap-3 rounded-card border border-line bg-white p-4 shadow-card",
                                   "transition hover:border-brand/40 hover:shadow-lift has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand" => card.href) %>">
     <div class="flex items-start gap-3">
-      <% if illustration %>
-        <span class="<%= class_names("grid size-11 shrink-0 place-items-center rounded-full", illustration.tint) %>" aria-hidden="true">
-          <%= image_tag illustration.path, alt: "", class: "size-7", loading: "lazy" %>
-        </span>
-      <% end %>
+      <span class="<%= class_names("grid size-11 shrink-0 place-items-center rounded-full", illustration.tint) %>" aria-hidden="true">
+        <%= image_tag illustration.path, alt: "", class: "size-7", loading: "lazy" %>
+      </span>
       <div class="min-w-0 flex-1 space-y-1">
         <% if context.present? %>
           <p class="text-meta text-mute"><%= context %></p>
