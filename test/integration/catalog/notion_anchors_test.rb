@@ -22,6 +22,18 @@ class Catalog::NotionAnchorsTest < ActionDispatch::IntegrationTest
     assert_select "#notion-#{@without.slug}[hidden]", 0
   end
 
+  test "the anchor sits on the first card of the notion only, as the first child of its grid item" do
+    create_exercise(essential: @with, questions: 1, title: "Second exercice")
+    sign_in_as @student
+
+    get course_path(@course.slug)
+
+    assert_select "#prepare-interros-grid li[id^=exercise-]", 2
+    assert_select "#notion-#{@with.slug}", 1
+    assert_select "#prepare-interros-grid > li:first-child > span#notion-#{@with.slug}[aria-label='Énoncé'][tabindex='-1']", 1
+    assert_select "#prepare-interros-grid > li:nth-child(2) span[id^=notion-]", 0
+  end
+
   test "the anchor of a notion with no exercise is there even when the lesson has no exercise at all" do
     Orm::Exercise.where(essential_id: @with.id).update_all(status: "draft")
     sign_in_as @student

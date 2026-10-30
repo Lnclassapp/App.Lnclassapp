@@ -65,7 +65,7 @@ class Communication::StudentAnnouncementsTest < ApplicationSystemTestCase
 
     # UDR-0071 and UDR-0054, amendments of 2026-10-06: no « Toutes les annonces » on her home; the list, open by its
     # address, brings her back to « Accueil ».
-    within("#student_home_announcements") { assert_no_link tc("inboxes.carousel.all") }
+    within("#student_home_announcements") { assert_no_link "Toutes les annonces" }
     visit announcements_path
 
     assert_equal [ "Nouvelles fiches", "Rentrée numérique", "Devoirs communs" ], list_titles

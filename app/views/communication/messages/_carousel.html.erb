@@ -1,24 +1,24 @@
 <%# 🌐 UI · communication/messages/_carousel — les annonces de l'accueil élève, en bande défilante (UDR-0071 §3.5) %>
-<%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage), dismissible: (croix), link: (« Toutes les annonces ») %>
-<%# ADR  : 0078 · UDR : 0005, 0071 (amendement du 2026-10-06 : l'élève, sans lien), 0074 (§3.10 : accueil de la direction, sans croix) · Stimulus : communication--carousel %>
+<%# Rôle : locaux carousel: (InboxQuery::Carousel, au moins une lisible), refocus: (réponse au masquage), dismissible: (croix), student: (accueil élève : carte blanche dès lg) ; jamais de lien « Toutes les annonces » %>
+<%# ADR  : 0078 · UDR : 0005, 0071 (amendements du 2026-10-06 et du 2026-10-30 : plus de lien), 0074 (§3.10 : accueil de la direction, sans croix) · Stimulus : communication--carousel %>
 <% refocus = local_assigns.fetch(:refocus, false) %>
 <%# UDR-0074 §3.10 : l'accueil de la direction passe dismissible: false ; l'élève garde la croix des annonces non officielles. %>
 <% dismissible = local_assigns.fetch(:dismissible, true) %>
-<%# UDR-0071, amendement du 2026-10-06 : l'accueil élève et les réponses au masquage passent link: false. Sans carte ni
-    lien, la section reste dans la page pour les seuls lecteurs d'écran (sr-only) : « Annuler » garde une cible à
-    remplacer, et le titre peut encore reprendre le focus quand la dernière carte part. %>
-<% link = local_assigns.fetch(:link, true) %>
-<% empty = !link && carousel.cards.none? %>
+<%# UDR-0071, amendement du 2026-10-30 : plus de lien « Toutes les annonces », nulle part. L'accueil élève et les réponses au
+    masquage passent student: true. Sans carte, la section reste dans la page pour les seuls lecteurs d'écran (sr-only) :
+    « Annuler » garde une cible à remplacer, et le titre peut encore reprendre le focus quand la dernière carte part. %>
+<% student = local_assigns.fetch(:student, false) %>
+<% empty = student && carousel.cards.none? %>
 <%# min-w-0 : dans la grille de l'accueil, la section prendrait sinon la largeur de sa bande et la page défilerait en largeur. %>
-<%# CA-D10 (Lot O1) : dès lg, deux cartes sont en vue pour tous les rôles ; l'accueil élève (link: false) devient en plus une carte
+<%# CA-D10 (Lot O1) : dès lg, deux cartes sont en vue pour tous les rôles ; l'accueil élève (student: true) devient en plus une carte
     blanche à filet sur le fond mist de la page. Les cartes restent sur le fond bg-brand-soft ; rien ne change sous lg. %>
 <%= tag.section id: "student_home_announcements", "aria-labelledby": "student_home_announcements_title",
                 class: (empty ? "sr-only" : class_names("min-w-0 rounded-card bg-mist p-2.5 max-sm:-mx-gutter max-sm:rounded-none max-sm:px-gutter",
-                                                  "lg:border lg:border-line lg:bg-paper lg:p-4 lg:shadow-card" => !link)),
+                                                  "lg:border lg:border-line lg:bg-paper lg:p-4 lg:shadow-card" => student)),
                 data: { controller: "communication--carousel", communication__carousel_refocus_value: (true if refocus) } do %>
   <h2 id="student_home_announcements_title" class="sr-only" tabindex="-1"><%= t("shared.home.sections.announcements.title") %></h2>
   <% if empty %><p><%= t("communication.inboxes.carousel.all_dismissed") %></p><% end %>
-  <%# Toutes masquées : ni bande ni points ; le lien reste, s'il y en a un. %>
+  <%# Toutes masquées : ni bande ni points. %>
   <% if carousel.cards.any? %>
     <%# Dès lg : pas d'écart entre les cartes, chacune porte sa demi-gouttière, pour que deux cartes tiennent exactement dans la bande. %>
     <ul class="scrollbar-none flex snap-x snap-mandatory gap-2 overflow-x-auto motion-safe:scroll-smooth lg:-mx-1.5 lg:gap-0"
@@ -36,12 +36,5 @@
               data-communication--carousel-target="dot"></span>
       <% end %>
     </div>
-  <% end %>
-  <% if link %>
-    <p class="flex justify-end">
-      <%= link_to announcements_path, class: "inline-flex min-h-tap items-center gap-1 px-2 text-sm font-medium text-brand-strong" do %>
-        <%= t("communication.inboxes.carousel.all") %><%= ui_icon "arrow-right", variant: :mini, size: :sm %>
-      <% end %>
-    </p>
   <% end %>
 <% end %>

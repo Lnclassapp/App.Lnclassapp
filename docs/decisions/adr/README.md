@@ -127,6 +127,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0115](./0115-correction-complete-note-en-points-et-types-de-questions.md) | Correction complète, note en points, choix dans une liste, réponse rédigée, cahier, pause | Accepté | 2026-10-28 | L'élève ne voit jamais la bonne réponse, chaque question vaut 1 point et la feuille ne sait pas poser les questions d'un devoir de 3e |
 | [0116](./0116-fiche-de-revision-par-notion-et-figures-parametrees.md) | Fiche de révision par notion et figures paramétrées (format v3) | Accepté | 2026-10-29 | Un seul support de révision par leçon, produit par l'IA pour des centaines de leçons, sans code propre à une leçon. |
 | [0117](./0117-figures-des-matieres-de-3eme.md) | Figures des matières de 3ème (frise, carte, schéma, tracé optique, planche, molécule) | Accepté | 2026-10-30 | Les leçons de SVT, Physique-Chimie, Histoire-Géographie et EDHC ont besoin de figures que les cinq sortes des mathématiques ne dessinent pas. |
+| [0118](./0118-annonces-audio-dix-secondes.md) | Annonces : un audio de 10 secondes au plus, mesuré sans bibliothèque | Accepté | 2026-10-30 | L'audio d'une annonce n'avait qu'une borne de poids (10 Mo) ; il doit durer 10 s au plus, vérifié au serveur sans dépendance. |
 <!-- index:end -->
 
 ---

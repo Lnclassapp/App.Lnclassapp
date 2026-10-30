@@ -24,10 +24,14 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#prepare-interros li[id^=exercise-]", 8
-    titles = css_select("#prepare-interros li[id^=exercise-] a span.font-medium").map { it.text.squish }
+    titles = css_select("#prepare-interros li[id^=exercise-] h3 a").map { it.text.squish }
     assert_equal @by_notion.map(&:title) + @wide.map(&:title), titles
-    assert_select "#prepare-interros h3", text: "Notion 1"
-    assert_select "#prepare-interros #toute-la-lecon h3", text: tl("lesson_wide_title")
+    assert_select "ul#prepare-interros-grid.grid[class~='sm:grid-cols-2'][class~='xl:grid-cols-3'][class~='2xl:grid-cols-4']", 1
+    assert_select "#prepare-interros-grid > li[id^=exercise-]", 8
+    assert_select "#prepare-interros-grid > li:first-child > span#notion-#{@notions.first.slug}[aria-label='Notion 1']", 1
+    assert_select "#prepare-interros-grid > li > span#toute-la-lecon[aria-label=?]", tl("lesson_wide_title")
+    assert_select "#prepare-interros h3", text: "Notion 1", count: 0
+    assert_select "#prepare-interros h3", text: tl("lesson_wide_title"), count: 0
     assert_select row(@by_notion.first), text: including("Fixation")
     assert_select row(@by_notion.first), text: including(tl("question_count", count: 2))
     assert_select row(@wide.first), text: including("Évaluation")
@@ -62,7 +66,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select row(@by_notion[0]), text: including(tl("due", day: "jeudi"))
     assert_select row(@by_notion[1]), text: including("14/20")
     assert_select row(@by_notion[2]), text: including(tl("to_review"))
-    assert_select row(@by_notion[3]), text: /\A\s*#{Regexp.escape(@by_notion[3].title)}\s+Fixation\s+2 questions\s*\z/
+    assert_select row(@by_notion[3]), text: /\A\s*Fixation\s+#{Regexp.escape(@by_notion[3].title)}\s+2 questions\s+Commencer\s*\z/
     assert_equal "jeudi", I18n.l(assignment.due_on, format: "%A")
   end
 
@@ -81,6 +85,16 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     assert_select row(@by_notion[0]), text: including("18/20")
     assert_select row(@by_notion[1]), text: including(tl("due_today"))
+  end
+
+  # CA-5
+  test "a teacher reads « Voir l'exercice » on each card, never « Commencer »" do
+    sign_in_as @teacher
+
+    get course_path(@course.slug)
+
+    assert_select row(@by_notion.first), text: including("Voir l'exercice")
+    assert_select row(@by_notion.first), text: including("Commencer"), count: 0
   end
 
   test "the team reads the status of each exercise, draft included, and has no toggle" do

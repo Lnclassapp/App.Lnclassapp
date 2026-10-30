@@ -25,8 +25,9 @@ module Queries
       def student_actor(student) = Actor.new(user_id: student.id, role: :student)
       def states(prepare) = (prepare.groups.flat_map(&:exercises) + prepare.lesson_wide).to_h { [ it.title, it.student_state ] }
 
-      test "le contrat porte groups, lesson_wide, targets et bare" do
-        assert_equal %i[groups lesson_wide targets bare], PrepareInterrosQuery::Prepare.members
+      test "le contrat porte groups, lesson_wide, targets, bare et la matière du cours" do
+        assert_equal %i[groups lesson_wide targets bare material_slug], PrepareInterrosQuery::Prepare.members
+        assert_equal @course.material.slug, call(nil).material_slug
       end
 
       test "les exercices publiés sont groupés par notion dans l'ordre des notions, puis ceux de toute la leçon par position" do

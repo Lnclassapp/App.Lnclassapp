@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_classrooms/show — « Ma classe » de l'élève (CL-22, CL-10 volet élève), redessinée (chantier ma-classe-eleve) %>
 <%# Rôle : une colonne (pleine, 720 px dès 700 px, 960 px au plus dès 1 024 px) : classe en dégradé, invitation sans enseignant, cours, puis exercices à faire et fiches à revoir (2/3), traités (1/3) dès 1 024 px %>
-<%# ADR  : 0028, 0048, 0072, 0076, 0089 §4.3 · UDR : 0011, 0057, 0062, 0071 §3.5, 0076 §3.2, 0081 §3.8, 0084, 0086, XXXX écrans élève sans répétition §3.6 bis, CA-E3 (mvp-teacher-student) · sans lien « Accueil », sans nom d'élève %>
+<%# ADR  : 0028, 0048, 0072, 0076, 0089 §4.3 · UDR : 0011, 0057, 0062, 0071 §3.5, 0076 §3.2, 0081 §3.8, 0084, 0086, XXXX écrans élève sans répétition §3.6 bis, CA-E3 (mvp-teacher-student), 0145 (§3.2 : grilles de cartes ; les traités restent sur une colonne dès 1 024 px, tiers de largeur) · sans lien « Accueil », sans nom d'élève %>
 <% page_title t(".page_title") %>
 
 <%# max-w-180 (720 px) ne borne rien sous 700 px, où la colonne prend toute la largeur moins les marges (UDR-0086 §3.5). %>
@@ -28,7 +28,7 @@
             <%= ui_empty_state title: t(".assigned_empty"), description: t(".assigned_empty_description"),
                                icon: "clipboard-document-check" %>
           <% else %>
-            <ul class="divide-y divide-line">
+            <ul class="grid gap-3 sm:grid-cols-2">
               <% assigned.each_with_index do |exercise, index| %>
                 <%= render "assigned_exercise", exercise:, index: %>
               <% end %>
@@ -46,7 +46,7 @@
         <% if treated.empty? %>
           <%= ui_empty_state title: t(".treated_empty"), description: t(".treated_empty_description"), icon: "check-circle" %>
         <% else %>
-          <ul class="divide-y divide-line">
+          <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
             <% treated.each_with_index do |exercise, index| %>
               <%= render "treated_exercise", exercise:, index: %>
             <% end %>
