@@ -182,6 +182,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_announcements li article h3", text: "Conseil de classe"
     assert_select "#student_home_announcements", text: including("Pour les élèves"), count: 0
     assert_select "#student_home_announcements form[action*='dismissal']", 0
+    assert_select "#student_home_announcements a[href=?]", announcements_path, 0
   end
 
   test "CA-2: neither an announcement of another school, nor one to the direction, reaches the teacher's home" do
