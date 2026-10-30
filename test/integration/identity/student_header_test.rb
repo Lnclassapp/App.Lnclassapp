@@ -42,8 +42,9 @@ class Identity::StudentHeaderTest < ActionDispatch::IntegrationTest
     end
     tone = ComponentsHelper::AVATAR_TONES.values[student.public_id.sum % ComponentsHelper::AVATAR_TONES.size]
     assert_select "#{AVATAR} [role=img][class*='#{tone}']"
-    # Lot O1: the left menu (lg and wider) has no profile card any more: the avatar is in the header, the menu is the navigation.
-    assert_select "aside [role=img]", 0
+    # carte-profil-eleve (UDR-0132 §3.1, amended): the left menu (lg and wider) opens on the profile card, the initials in the
+    # header's colour, then the navigation.
+    assert_select "aside > div.rounded-card [role=img][aria-label='Awa Koné'][class*='#{tone}']", text: "AK"
     assert_select "aside > nav.bg-white a", 3
     # The name is never written in the header, outside the menu; no role badge, no account panel, no old account menu.
     assert_select "header > div.flex > div > span", text: "Awa Koné", count: 0
