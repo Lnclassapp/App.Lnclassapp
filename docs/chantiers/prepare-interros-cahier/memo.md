@@ -1,9 +1,9 @@
-# Memo — « Prépare interros » à l'identique de la maquette cahier
+# Memo — « Prépare interros » et « Prépare devoirs » à l'identique des maquettes cahier
 
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | cadrage |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `feature/prepare-interros-cahier` |
 | **Programme** | — |
@@ -24,6 +24,14 @@ La maquette de Touré (« Prépare interros Thalès », projet de design, 2026-1
   de chaque question, puis « Refaire l'exercice » ;
 - une progression : combien d'exercices sont réussis.
 
+La seconde maquette (« Prépare devoirs Thalès ») reprend exactement la même feuille pour des **sujets** de devoir : trois
+sujets de quatre exercices qui mélangent les notions de la leçon, avec « Notions mobilisées » à la place de « À retenir ».
+L'application ne connaît pas de sujet de devoir aujourd'hui.
+
+**Règle du chantier (Touré, 2026-10-30) : le design des deux maquettes s'applique tel quel.** Cadre, typographie, couleurs,
+disposition, libellés et boutons sont repris sans changement, sur téléphone comme sur ordinateur. Les maquettes de
+référence sont dans [`maquettes/`](maquettes/).
+
 ## Pour qui
 
 - **L'élève**, qui révise une leçon avant une interrogation.
@@ -36,31 +44,42 @@ chantier `correction-comme-en-classe` est clos : la feuille, la correction compl
 
 ## Hors périmètre
 
-- « Prépare devoirs » (la seconde maquette, trois sujets de quatre exercices) : un autre chantier.
-- Le design « cahier noir et blanc » des sujets assignés hors de cette page (issue #390), en attente du porteur.
-- …
+- Le design « cahier noir et blanc » de la feuille d'un exercice assigné, hors de la page de la leçon (issue #390), en
+  attente du porteur.
+- « Signaler une erreur » de la maquette (un envoi par e-mail à l'équipe) : un autre chantier, il demande un envoi côté serveur.
+- La note de l'enseignant sur les réponses rédigées (ADR-0115, option E).
+- Ce que voient le parent, la direction et l'équipe : la page de la leçon ne change pas pour eux, sauf l'équipe qui voit
+  la feuille comme l'enseignant, sans « Assigner ».
 
 ## Ce que le grill a révélé
 
 > Rempli après la session de questions adverses. Un memo qui sort du grill inchangé signifie que le grill a été mal fait.
 
-Touré demande la maquette telle quelle (2026-10-30). Les réponses ci-dessous sont les propositions de Claude, faites là où la
-maquette contredit une règle de l'application ; Touré les valide, puis le porteur.
+Touré demande les maquettes telles quelles (2026-10-30) et ajoute « Prépare devoirs » au chantier. Là où une maquette
+contredit une règle de l'application, la ligne dit ce qui est retenu ; le porteur tranche les écarts marqués **(porteur)**.
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
-| Q1. « Vérifier ma réponse » sous un exercice rend-il une vraie copie (note vue par l'enseignant, maîtrise, badge, pause de 3 copies) ? | Proposé : oui, comme aujourd'hui | Aucune règle de note ne change. La page de la leçon rend la copie sans en sortir : l'exercice se remplace par sa version corrigée |
-| Q2. La maquette note sur 10, avec « Excellent » dès 9. L'application note sur 20, avec « Très bien » dès 16 (ADR-0115). Laquelle ? | Proposé : la note sur 20 et l'appréciation de l'application, dans le cadre et la typographie de la maquette | L'élève lit la même note que l'enseignant et que la page de résultat. Écart assumé avec la maquette sur ce seul chiffre |
-| Q3. « Indice » : l'application ne connaît pas d'indice | Proposé : un indice par exercice, facultatif, écrit dans le fichier d'import ; sans indice, pas de bouton | Donnée nouvelle sur l'exercice et dans l'import |
-| Q4. « Recommencer cette notion » remet à zéro trois exercices d'un coup, alors que la pause bloque après 3 copies | Proposé : retiré ; chaque exercice garde « Refaire l'exercice », soumis à la pause | La pause reste la seule règle de recommencement |
-| Q5. Que voit l'enseignant sur cette page ? | Proposé : la même feuille, sans champs de réponse ni « Vérifier », avec « Assigner » sous chaque exercice | Les bascules d'assignation d'aujourd'hui passent dans la feuille |
-| Q6. Quand un exercice est-il « Réussi » dans la progression ? | Proposé : comme la maquette, quand toutes ses questions sont justes à la meilleure copie | Compteur par notion et pour la leçon |
-| Q7. Les exercices d'un type absent de la maquette (association, ordre, liste, rédaction, cahier) | Proposé : rendus dans le même cadre noir et blanc, avec leur interaction d'aujourd'hui | Aucun exercice de la leçon ne disparaît de la page |
+| Q1. « Vérifier ma réponse » sous un exercice rend-il une vraie copie (note vue par l'enseignant, maîtrise, badge, pause de 3 copies) ? | Oui | Aucune règle de note ne change. La page de la leçon rend la copie sans en sortir : l'exercice se remplace par sa version corrigée |
+| Q2. La maquette note sur 10 (« Excellent » dès 9) ; l'application note sur 20 (« Très bien » dès 16, ADR-0115) | Design tel quel : « Ta note : x / 10 », « Mention : … » comme la maquette, calculés sur la même copie **(porteur)** | Seule cette page affiche sur 10 ; la page de résultat et l'enseignant gardent la note sur 20 |
+| Q3. « Indice » : l'application ne connaît pas d'indice | Un indice par exercice, facultatif, écrit dans le fichier d'import ; sans indice, pas de bouton | Donnée nouvelle sur l'exercice et dans l'import |
+| Q4. « Recommencer cette notion » et « Recommencer ce sujet » | Gardés, comme la maquette : ils remettent à blanc les exercices de la feuille ; chaque nouvelle copie reste soumise à la pause | La pause reste la seule limite ; le bouton ne contourne rien |
+| Q5. Que voit l'enseignant ? | La même feuille, sans champs de réponse, avec « Assigner à … » à la place de « Vérifier ma réponse » et « Indice » | Les bascules d'assignation d'aujourd'hui passent dans la feuille |
+| Q6. Quand un exercice est-il « Réussi » ? | Comme la maquette : toutes ses questions justes, à la dernière copie vérifiée | Compteur « x / n exercices réussis » par notion ou par sujet |
+| Q7. Les exercices d'un type absent de la maquette (association, ordre, liste, rédaction, cahier) | Rendus dans le même cadre, avec leur interaction d'aujourd'hui | Aucun exercice de la leçon ne disparaît |
+| Q8. Qu'est-ce qu'un sujet de devoir ? | Un titre, la liste des notions mobilisées et ses exercices dans l'ordre, écrits dans le fichier d'import de la leçon | Donnée nouvelle ; un exercice de sujet n'a pas de notion |
+| Q9. Où va « Prépare devoirs » dans la page ? | Juste sous « Prépare interros », un sujet par feuille ; sans sujet, la section n'apparaît pas | Les exercices « Toute la leçon » sans sujet restent sous « Prépare interros », dans une dernière feuille |
+| Q10. Les réponses tapées avant « Vérifier » survivent-elles à un rechargement ? | Oui, dans le navigateur, comme la maquette | Rien n'est envoyé avant « Vérifier » |
 
 ## Cas limites identifiés
 
-- …
+- Une notion sans exercice : sa feuille n'apparaît pas (son ancre « notion-… » reste, comme aujourd'hui).
+- L'élève en pause (3 copies en 30 minutes) clique « Vérifier ma réponse » ou « Refaire l'exercice » : la feuille dit l'heure
+  de reprise, ses réponses restent dans les champs.
+- Un exercice archivé pendant que la page est ouverte : « Vérifier » répond que l'exercice n'existe plus, sans perdre la page.
+- Un élève non connecté : la feuille se lit, « Vérifier » mène à la connexion.
+- Une notion sans « À retenir » : l'encadré n'apparaît pas.
 
 ## Questions encore ouvertes
 
-- …
+- **(porteur)** Q2 : la note sur 10 de la maquette sur cette seule page, ou la note sur 20 de l'ADR-0115 ?
