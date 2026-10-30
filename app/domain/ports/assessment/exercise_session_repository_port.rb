@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::ExerciseSessionRepositoryPort
 # Rôle : contrat des sessions d'exercice et de leurs tentatives immuables
-# ADR  : 0033, 0043, 0054, 0091, 0112
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115
 module Ports
   module Assessment
     module ExerciseSessionRepositoryPort
@@ -14,7 +14,8 @@ module Ports
         raise NotImplementedError, "#{self.class} doit implémenter #started_for"
       end
 
-      # Une session started existe déjà (index partiel) : la renvoie. → ExerciseSession
+      # Une session started existe déjà (index partiel) : la renvoie. → ExerciseSession, jamais nil (violation d'unicité sans
+      # session ouverte à renvoyer : l'erreur remonte).
       def start(session:)
         raise NotImplementedError, "#{self.class} doit implémenter #start"
       end
@@ -40,6 +41,18 @@ module Ports
       # → [Entities::Assessment::QuestionAttempt]
       def attempts(session_id:)
         raise NotImplementedError, "#{self.class} doit implémenter #attempts"
+      end
+
+      # Les fins (Time) des 3 dernières copies terminées de l'élève sur l'exercice, toutes sortes confondues, de la plus récente
+      # à la plus ancienne ; les copies abandonnées ou en cours n'y sont pas (ADR-0115, RestartPause). → [Time]
+      def recent_completions(student_id:, exercise_id:)
+        raise NotImplementedError, "#{self.class} doit implémenter #recent_completions"
+      end
+
+      # Comme recent_completions, pour plusieurs exercices en une requête (l'accueil) : les `limit` dernières fins par exercice.
+      # → { exercise_id => [Time] } (un exercice sans copie terminée n'a pas de clé)
+      def recent_completions_by_exercise(student_id:, exercise_ids:, limit: Entities::Assessment::RestartPause::STREAK)
+        raise NotImplementedError, "#{self.class} doit implémenter #recent_completions_by_exercise"
       end
 
       # UPDATE … WHERE status = 'started' : pose completed, score_percent et completed_at. → true

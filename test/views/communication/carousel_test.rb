@@ -18,7 +18,6 @@ module Communication
     end
 
     def carousel(cards, **) = render(partial: "communication/messages/carousel", locals: { carousel: Carousel.new(cards:, any_readable: true), ** })
-    def all_link = I18n.t("communication.inboxes.carousel.all")
 
     test "AN-10 — a section titled for screen readers, one card per item of the band, in the given order" do
       carousel([ card("d", "Devoirs communs", author_role: :school_admin), card("f", "Nouvelles fiches"), card("r", "Rentrée", author_role: :team) ])
@@ -34,7 +33,7 @@ module Communication
       assert_select "section[data-communication--carousel-refocus-value]", 0
     end
 
-    # CA-D10 (Lot O1): from lg two cards are in view, side by side, for every role; only the student's band (link: false)
+    # CA-D10 (Lot O1): from lg two cards are in view, side by side, for every role; only the student's band (student: true)
     # becomes a white card on the mist page.
     test "from lg, two cards are in view without a gap that would push the second out of the band, for every role" do
       carousel([ card("a", "Une"), card("b", "Deux"), card("c", "Trois") ])
@@ -46,8 +45,8 @@ module Communication
       assert_select "section#student_home_announcements[class*='lg:bg-paper']", 0
     end
 
-    test "link: false — from lg the band is a white card with a line, on the mist page" do
-      carousel([ card("a", "Une") ], link: false)
+    test "student: true — from lg the band is a white card with a line, on the mist page" do
+      carousel([ card("a", "Une") ], student: true)
 
       assert_select "section#student_home_announcements.bg-mist.lg\\:border.lg\\:border-line.lg\\:bg-paper.lg\\:p-4.lg\\:shadow-card"
     end
@@ -71,28 +70,29 @@ module Communication
       end
     end
 
-    test "AN-22 — the band leads to « Toutes les annonces »" do
+    # LA-8: no « Toutes les annonces » under the band, for any role (the "Reçues" tab keeps its own address).
+    test "AN-22, LA-8 — the band has no « Toutes les annonces » link, by default either" do
       carousel([ card("a", "Une") ])
 
-      assert_select "p.flex.justify-end a.inline-flex.min-h-tap.text-brand-strong[href=?]", announcements_path, text: all_link do
-        assert_select "svg"
-      end
+      assert_select "a[href=?]", announcements_path, 0
+      assert_select "p.flex.justify-end", 0
+      assert_no_match(/Toutes les annonces/, rendered)
     end
 
-    test "AN-12 — every message dismissed: neither band nor dots, the link alone" do
+    test "AN-12 — every message dismissed, not for the student: neither band, dots nor link" do
       carousel([])
 
       assert_select "section#student_home_announcements" do
         assert_select "ul", 0
         assert_select "[data-communication--carousel-target=pager]", 0
-        assert_select "a[href=?]", announcements_path, text: all_link
+        assert_select "a", 0
       end
     end
 
-    # UDR-0071, amendment of 2026-10-06: the student's home has no « Toutes les annonces »; the teacher's and the
-    # direction's homes keep it (default).
-    test "link: false — the band of the student leads nowhere else" do
-      carousel([ card("a", "Une") ], link: false)
+    # UDR-0071, amendments of 2026-10-06 and 2026-10-30: no « Toutes les annonces » anywhere; `student:` only commands
+    # the white card from lg and the sr-only state.
+    test "student: true — the band of the student leads nowhere else" do
+      carousel([ card("a", "Une") ], student: true)
 
       assert_select "section#student_home_announcements.bg-mist:not(.sr-only)" do
         assert_select "li article h3", "Une"
@@ -100,8 +100,8 @@ module Communication
       assert_select "a[href=?]", announcements_path, 0
     end
 
-    test "link: false, every message dismissed: the section stays for screen readers only, target of « Annuler » and of the focus" do
-      carousel([], link: false, refocus: true)
+    test "student: true, every message dismissed: the section stays for screen readers only, target of « Annuler » and of the focus" do
+      carousel([], student: true, refocus: true)
 
       assert_select "section#student_home_announcements.sr-only:not([hidden])[data-communication--carousel-refocus-value=true]" do
         assert_select "h2#student_home_announcements_title[tabindex='-1']"

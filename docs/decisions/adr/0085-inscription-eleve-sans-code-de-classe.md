@@ -104,6 +104,14 @@ Le constat du 2026-10-07 renverse la priorité : **des élèves veulent s'inscri
 - Le stockage du nom en deux colonnes (ADR-0037) ; la saisie suit l'ADR-0083 §4.4.
 - La règle de l'inscription : 5 envois par minute et par adresse.
 
+### 4.7 Débit du lien de classe — *amendement du 2026-10-29*
+
+*(Chantier [`inscription-classe-meme-wifi`](../../chantiers/inscription-classe-meme-wifi/memo.md).)* Une classe s'inscrit ensemble, en classe, derrière **une seule adresse** (wifi de l'école, partage de connexion, NAT de l'opérateur). Le débit de 10 liens et 5 inscriptions par minute et par adresse bloquait la classe à partir du 6e élève (simulation de 45 élèves sur Develop).
+
+- `GET` et `POST /c/:token`, et `POST /student-signup` **quand il porte un jeton de lien**, comptent dans un compteur à part : **60 par minute et par adresse** (`classroom/links`). Pour cet envoi, ce débit remplace les deux autres.
+- La voie standard (cascade) et la vérification d'un code gardent 10 et 5 par minute et par adresse, inchangés : ce sont elles qu'on devine.
+- Pourquoi c'est sûr : le jeton fait 48 bits ; à 60 essais par minute, une adresse en trouve un en des siècles. Le risque accru est le remplissage d'une classe par quelqu'un qui **a** le lien (60 comptes par minute au lieu de 5) : le plafond de la classe le borne, la liste montre les nouveaux arrivés, et le lien se change d'un geste (§4.1). Coût consenti.
+
 ## 5. Conséquences
 
 ### 🟢 Positives

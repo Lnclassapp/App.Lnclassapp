@@ -15,13 +15,19 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     @tle = create_level(name: "Tle", position: 7)
     @svt = create_material(name: "SVT", category: "science")
     @philo = create_material(name: "Philosophie", category: "literature")
-    @course = create_course(name: "Génétique et évolution", level: @tle, material: @svt,
-                            content: "<div>L'aire du disque vaut $\\pi r^2$.</div>")
+    @course = create_course(name: "Génétique et évolution", level: @tle, material: @svt, content: "")
     create_course(name: "La conscience", level: @tle, material: @philo)
-    create_essential(course: @course, name: "La méiose")
+    create_essential(course: @course, name: "La méiose", sheet: formula_sheet("$\\pi r^2$"))
   end
 
   def t(key, **) = I18n.t(key, **)
+
+  # La fiche de révision v3 d'une notion : une formule dans « À retenir », rendue par KaTeX (ADR-0116 §4.3).
+  def formula_sheet(formula)
+    { "remember" => "Retenir : #{formula}.", "method" => [ "Lire l'énoncé.", "Appliquer la formule." ],
+      "example" => { "statement" => "Appliquer.", "steps" => [ "On applique la formule.", "On conclut." ] },
+      "pitfall" => "Ne pas oublier l'unité.", "figure_key" => nil }
+  end
 
   # UDR-0085 §3.1 (CA-2, CA-4) : l'élève n'a plus de liste « Matière » ; il cherche, et les cours trouvés restent sous
   # le titre de leur matière.
@@ -86,6 +92,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
   test "the team edits the content in the rich text editor from the course page, then publishes and archives it, without a page reload" do
     course = create_course(name: "Mutation et diversité", level: @tle, material: @svt, status: "draft",
                            content: "<div>Probabilité : $\\frac{1}{2}$</div>")
+    create_essential(course:, name: "Probabilité", status: "draft", sheet: formula_sheet("$\\frac{1}{2}$"))
     sign_in_as create_team_member
     assert_current_path team_home_path
     visit course_path(course.slug)
@@ -113,7 +120,6 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       end
       assert_toast t("teams.courses.update.updated", name: "Mutation et diversité")
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_selector "#fiche-de-revision strong", text: "Mutation ponctuelle"
       assert_selector "#fiche-de-revision .katex", count: 1
     end
     stored = course.reload.content.body.to_html
@@ -122,7 +128,10 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     assert_no_match(/<script>window\.hacked|onclick=|javascript:/, page.html)
 
     # The content is unchanged this time: after the morph, its formula is still rendered, not left as raw « $…$ ».
-    assert page.evaluate_script("window.morphs > 0"), "la page n'a pas été rafraîchie par morphing"
+    # The refresh is broadcast after the toast: wait for its morph instead of reading the counter once.
+    page.document.synchronize do
+      raise Capybara::ExpectationNotMet, "la page n'a pas été rafraîchie par morphing" unless page.evaluate_script("window.morphs > 0")
+    end
     assert_no_page_reload do
       find("button[aria-controls=course-actions-menu]").click
       click_on t("catalog.courses.role_actions.edit")

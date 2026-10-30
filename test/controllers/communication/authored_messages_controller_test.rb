@@ -6,7 +6,7 @@ require "test_helper"
 # ADR-0081, UDR-0075 §3.3 (annonces-v2): no end to choose (30 days), 3 live per author, the toast names the archived.
 class Communication::AuthoredMessagesControllerTest < ActionDispatch::IntegrationTest
   NOW = Time.zone.local(2026, 10, 4, 12)
-  MP3 = ("ID3".b + ("\x00".b * 64)).freeze
+  MP3 = Rails.root.join("test/fixtures/files/audio/trame.mp3").binread.freeze # a real MP3 of 1 s (fixtures README.txt)
 
   # The teacher's announcements are off for the pilot (pilot flag); these tests prove them as they come back.
   setup do
@@ -200,7 +200,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
       assert_select "input[type=file][name='announcement[image]'][accept='image/png,image/jpeg,image/webp']"
       assert_select "#announcement_image_hint", "PNG, JPEG ou WebP, 2 Mo au plus. Elle remplace l'illustration."
       assert_select "input[type=file][name='announcement[audio]'][accept='audio/mpeg,audio/mp4,.mp3,.m4a']"
-      assert_select "#announcement_audio_hint", "MP3 ou M4A, 10 Mo au plus. Un enregistrement de téléphone convient."
+      assert_select "#announcement_audio_hint", "MP3 ou M4A, 10 secondes et 1 Mo au plus. Un enregistrement de téléphone convient."
       assert_select "input[type=datetime-local][name='announcement[published_at]']"
       assert_select "#announcement_published_at_hint", "Laissez vide pour publier dès l'envoi."
       assert_select "a[href='#{my_announcements_path}']", "Annuler"
@@ -324,7 +324,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     long = upload(MP3 + ("\x00".b * (12 * 1024 * 1024)), "message.mp3", "audio/mpeg")
 
     { { image: pdf } => [ :image, "Ce fichier n'est pas accepté." ], { image: heavy } => [ :image, "Ce fichier est trop lourd (2 Mo au plus)." ],
-      { audio: wav } => [ :audio, "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ], { audio: long } => [ :audio, "Ce fichier est trop lourd (10 Mo au plus)." ] }
+      { audio: wav } => [ :audio, "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ], { audio: long } => [ :audio, "Ce fichier est trop lourd (1 Mo au plus)." ] }
       .each do |file, (field, message)|
       publish(audience: "students", **file)
 
@@ -335,7 +335,42 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
     assert_equal [ 0, 0 ], [ Orm::Message.count, ActiveStorage::Attachment.count ]
   end
 
-  test "AN-18 — a PNG and an MP3 are stored with the announcement (the 2 MB and 10 MB limits: message_input_test)" do
+  # LA-2, LA-3, M8: the browser check is only a comfort; the server measures the audio itself.
+  test "LA-2, LA-3, M8 — an audio of 11 s, or whose duration cannot be read: 422, the message under the field, nothing stored; 9 s is published" do
+    sign_in_as @kamate
+    { "duree-11s.mp3" => "Cet audio dure 11,1 s : 10 secondes au plus. Raccourcissez l'enregistrement.",
+      "duree-11s.m4a" => "Cet audio dure 11,1 s : 10 secondes au plus. Raccourcissez l'enregistrement." }.each do |name, message|
+      publish(audience: "students", audio: upload(file_fixture("audio/#{name}").binread, name, "audio/mpeg"))
+
+      assert_response :unprocessable_entity
+      assert_equal message, field_error(:audio)
+    end
+    publish(audience: "students", audio: upload(MP3 + "\x01\x02\x03".b + MP3, "message.mp3", "audio/mpeg"))
+
+    assert_response :unprocessable_entity
+    assert_equal "La durée de cet audio ne se lit pas. Exportez l'enregistrement en MP3 ou M4A.", field_error(:audio)
+    assert_equal [ 0, 0 ], [ Orm::Message.count, ActiveStorage::Attachment.count ]
+
+    publish(audience: "students", audio: upload(file_fixture("audio/duree-9s.m4a").binread, "9s.m4a", "audio/mp4"))
+
+    assert_redirected_to my_announcements_path
+    assert_equal "audio/mp4", created.audio.content_type
+  end
+
+  test "LA-6 — the form wraps the audio field in the duration check: bound 10,3 s, message with its placeholder, status line" do
+    sign_in_as @kamate
+
+    get new_announcement_path
+
+    assert_select "div[data-controller='communication--audio-duration'][data-communication--audio-duration-max-value='10.3']" do |root|
+      assert_equal "Cet audio dure %{duration} s : 10 secondes au plus. Raccourcissez l'enregistrement.",
+                   root.first["data-communication--audio-duration-message-value"]
+      assert_select "input[type=file][data-communication--audio-duration-target=input][data-action='change->communication--audio-duration#check']"
+      assert_select "p[aria-live=polite][data-communication--audio-duration-target=status]", text: ""
+    end
+  end
+
+  test "AN-18 — a PNG and an MP3 are stored with the announcement (the 2 MB and 1 MB limits: message_input_test)" do
     sign_in_as @kamate
 
     publish(audience: "students", image: upload(file_fixture("photos/photo.png").binread, "affiche.png", "image/png"),

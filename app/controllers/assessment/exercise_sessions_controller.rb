@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::ExerciseSessionsController
 # Rôle : l'élève démarre (exercice de son niveau), reprend ou recommence un exercice, puis remplit sa copie ; terminée → résultat
-# ADR  : 0026, 0028, 0043, 0048, 0054, 0112 · UDR : 0022, 0138 §3.2
+# ADR  : 0026, 0028, 0043, 0048, 0054, 0112, 0115 · UDR : 0022, 0138 §3.2
 module Assessment
   class ExerciseSessionsController < AuthenticatedController
     include ReadsOwnLevel
@@ -13,6 +13,8 @@ module Assessment
 
       result = start_session.call(actor: current_actor, exercise_public_id: params[:exercise_public_id],
                                   restart: params[:restart] == "true")
+      return redirect_paused if paused?(result)
+
       render_result result, success: ->(session) { redirect_to exercise_session_path(session.public_id), status: :see_other }
     end
 
@@ -29,6 +31,14 @@ module Assessment
     end
 
     private
+
+    # ADR-0115 : pause de « Recommencer » ; retour à l'exercice, dont la page dit seule l'heure de reprise (pas de message en double).
+    # Tout autre refus passe par render_result.
+    def paused?(result) = result.failure? && result.errors.fetch(:base, []).include?(:paused)
+
+    def redirect_paused
+      redirect_to exercise_path(params[:exercise_public_id]), status: :see_other
+    end
 
     def start_session
       UseCases::Assessment::StartExerciseSession.new(

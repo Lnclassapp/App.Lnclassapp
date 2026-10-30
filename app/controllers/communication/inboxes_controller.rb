@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Communication::InboxesController
-# Rôle : « Reçues » (enseignant, direction) et « Toutes les annonces » (élève), les annonces lisibles paginées ; l'équipe va à « Mes annonces »
+# Rôle : « Reçues » (enseignant, direction) et « Annonces » (élève), les annonces lisibles paginées ; l'équipe va à « Mes annonces »
 # ADR  : 0078 (§4.3) · UDR : 0071 (§3.7)
 module Communication
   class InboxesController < AuthenticatedController

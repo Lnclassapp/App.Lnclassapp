@@ -1,6 +1,6 @@
 <%# 🌐 UI · communication/authored_messages/_form — le formulaire d'annonce, page entière (nouvelle ou modifiée) %>
 <%# Rôle : titre et texte décomptés, destinataires, thème, illustration (base puis équipe), image, audio, parution, encadré du plafond ; 422 sous les champs %>
-<%# ADR  : 0045, 0078, 0081 · UDR : 0005, 0067, 0071 (§3.8), 0075 (§3.3) · locaux : form:, message: (nil pour une nouvelle), url:, method: %>
+<%# ADR  : 0045, 0078, 0081 · UDR : 0005, 0067, 0071 (§3.8, amendement du 2026-10-30), 0075 (§3.3) · locaux : form:, message: (nil pour une nouvelle), url:, method: %>
 <% caps = Entities::Communication::Message %>
 <% published = message&.status == "published" %>
 <% reselect = form.errors.any? ? " #{t('.reselect')}" : "" %>
@@ -107,8 +107,15 @@
     </div>
   <% end %>
 
-  <%= ui_field f, :audio, type: "file", value: nil, accept: "audio/mpeg,audio/mp4,.mp3,.m4a", hint: t(".hints.audio") + reselect,
-                          class: "cursor-pointer py-2.5 file:mr-3 file:cursor-pointer file:border-0 file:bg-transparent file:font-medium file:text-brand-strong" %>
+  <%# UDR-0071 (amendement du 2026-10-30, §3.8) : le navigateur lit la durée avant l'envoi ; le serveur la mesure toujours. %>
+  <% too_long = t("activemodel.errors.models.dtos/communication/message_input.attributes.audio.too_long", count: caps::AUDIO_MAX_SECONDS, duration: "%{duration}") %>
+  <%= tag.div data: { controller: "communication--audio-duration", "communication--audio-duration-max-value": caps::AUDIO_MAX_SECONDS + caps::AUDIO_SLACK_SECONDS,
+                      "communication--audio-duration-message-value": too_long } do %>
+    <%= ui_field f, :audio, type: "file", value: nil, accept: "audio/mpeg,audio/mp4,.mp3,.m4a", hint: t(".hints.audio") + reselect,
+                            data: { "communication--audio-duration-target": "input", action: "change->communication--audio-duration#check" },
+                            class: "cursor-pointer py-2.5 file:mr-3 file:cursor-pointer file:border-0 file:bg-transparent file:font-medium file:text-brand-strong" %>
+    <p class="mt-1 text-xs text-error" aria-live="polite" data-communication--audio-duration-target="status"></p>
+  <% end %>
   <% if message && edited.audio %>
     <div class="grid gap-3">
       <audio controls preload="none" src="<%= announcement_file_path(message.public_id, kind: "audio") %>" class="w-full"></audio>

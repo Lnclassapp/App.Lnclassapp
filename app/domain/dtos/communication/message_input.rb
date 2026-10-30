@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Communication::MessageInput
 # Rôle : la saisie d'une annonce : titre (60), texte (140), destinataires, thème, illustration, image et audio lus dans leurs octets, parution
-# ADR  : 0045, 0060, 0078, 0081 · UDR : 0071, 0075
+# ADR  : 0045, 0060, 0078, 0081, 0118 · UDR : 0071, 0075
 module Dtos
   module Communication
     class MessageInput
@@ -8,6 +8,7 @@ module Dtos
 
       MESSAGE = Entities::Communication::Message
       IMAGE_HEADER = Entities::Shared::ImageHeader
+      AUDIO_DURATION = Entities::Communication::AudioDuration
       # Une année de plus de 4 chiffres dépasse ce que la base garde : la date est illisible.
       LAST_YEAR = 9999
       # La forme d'un public_id (14 caractères alphanumériques) : la valeur d'une illustration de l'équipe (ADR-0081 §4.3).
@@ -19,7 +20,7 @@ module Dtos
       FILES = {
         image: { megabytes: 2, header: Entities::Shared::ImageHeader,
                  formats: { png: %w[image/png image.png], jpeg: %w[image/jpeg image.jpg], webp: %w[image/webp image.webp] } },
-        audio: { megabytes: 10, header: Entities::Communication::AudioHeader,
+        audio: { megabytes: MESSAGE::AUDIO_MAX_MEGABYTES, header: Entities::Communication::AudioHeader,
                  formats: { mpeg: %w[audio/mpeg audio.mp3], mp4: %w[audio/mp4 audio.m4a] } }
       }.freeze
       # Les formats se lisent dans les 4096 premiers octets : un MP3 de téléphone peut commencer par du remplissage
@@ -42,6 +43,7 @@ module Dtos
       validate :illustration_is_offered
       validate :files_are_accepted
       validate :image_is_clean
+      validate :audio_is_short
       validate :dates_hold
 
       # Le formulaire d'une nouvelle annonce : la première illustration, « Ciel » ; l'équipe venue de la fiche d'un
@@ -154,6 +156,19 @@ module Dtos
         return errors.add(:image, :unsupported) unless facts && clean && clean.metadata == false
 
         errors.add(:image, :too_wide, count: MESSAGE::IMAGE_MAX_SIDE) if [ facts.width, facts.height ].max > MESSAGE::IMAGE_MAX_SIDE
+      end
+
+      # ADR « annonces audio dix secondes » §4 : la durée se mesure dans les octets (1 Mo au plus, déjà vérifiés), jamais
+      # dans ce que le fichier déclare ; une durée qui ne se lit pas est refusée comme une durée trop longue.
+      def audio_is_short
+        return if audio.nil? || errors.include?(:audio)
+
+        audio.rewind
+        seconds = AUDIO_DURATION.seconds_of(audio.read.to_s.b, format: format_of(:audio))
+        return errors.add(:audio, :unreadable) if seconds.nil?
+        return if seconds <= MESSAGE::AUDIO_MAX_SECONDS + MESSAGE::AUDIO_SLACK_SECONDS
+
+        errors.add(:audio, :too_long, duration: seconds.round(1).to_s.tr(".", ","), count: MESSAGE::AUDIO_MAX_SECONDS)
       end
 
       def image_bytes

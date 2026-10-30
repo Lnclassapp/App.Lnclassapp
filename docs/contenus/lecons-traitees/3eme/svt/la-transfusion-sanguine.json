@@ -1,0 +1,1211 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La transfusion sanguine",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "SVT",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "test-groupe-abo",
+          "kind": "diagram",
+          "description": "Arbre de décision du test du groupe ABO sur lame. Au départ, une goutte de sang est mélangée à du sérum anti-A et à du sérum anti-B. Selon l'agglutination observée, on lit le groupe : anti-A seul donne A, anti-B seul donne B, les deux donnent AB, l'absence d'agglutination donne O.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "test",
+                "label": "Test anti-A et anti-B",
+                "category": 1
+              },
+              {
+                "id": "ga",
+                "label": "Groupe A",
+                "category": 2
+              },
+              {
+                "id": "gb",
+                "label": "Groupe B",
+                "category": 2
+              },
+              {
+                "id": "gab",
+                "label": "Groupe AB",
+                "category": 2
+              },
+              {
+                "id": "go",
+                "label": "Groupe O",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "test",
+                "to": "ga",
+                "label": "Agglutination avec anti-A seul"
+              },
+              {
+                "from": "test",
+                "to": "gb",
+                "label": "Agglutination avec anti-B seul"
+              },
+              {
+                "from": "test",
+                "to": "gab",
+                "label": "Agglutination avec les deux"
+              },
+              {
+                "from": "test",
+                "to": "go",
+                "label": "Aucune agglutination"
+              }
+            ],
+            "legend": [
+              "Le test",
+              "Le groupe lu"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "compatibilite-abo",
+          "kind": "diagram",
+          "description": "Schéma des donneurs et receveurs du système ABO. Chaque flèche part d'un groupe donneur vers un groupe receveur qui peut recevoir ses hématies. Le groupe O donne à A, B et AB ; A donne à AB ; B donne à AB. Le groupe AB reçoit de tous et ne donne qu'à AB. Chaque groupe peut aussi donner à son propre groupe (flèche non dessinée).",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "o",
+                "label": "Groupe O",
+                "category": 1
+              },
+              {
+                "id": "a",
+                "label": "Groupe A",
+                "category": 2
+              },
+              {
+                "id": "b",
+                "label": "Groupe B",
+                "category": 2
+              },
+              {
+                "id": "ab",
+                "label": "Groupe AB",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "o",
+                "to": "a"
+              },
+              {
+                "from": "o",
+                "to": "b"
+              },
+              {
+                "from": "o",
+                "to": "ab"
+              },
+              {
+                "from": "a",
+                "to": "ab"
+              },
+              {
+                "from": "b",
+                "to": "ab"
+              }
+            ],
+            "legend": [
+              "Aucun antigène",
+              "Un antigène (A ou B)",
+              "Antigènes A et B"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "sensibilisation-rhesus",
+          "kind": "diagram",
+          "description": "Chaîne d'événements chez un receveur Rh- jamais transfusé. Il reçoit une première fois du sang Rh+, puis fabrique des anticorps anti-Rh. À la seconde transfusion de sang Rh+, ces anticorps se fixent sur les hématies du donneur et les agglutinent. Les cases de situation sont distinguées des réactions de l'organisme.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Receveur Rh- jamais transfusé",
+                "category": 1
+              },
+              {
+                "id": "n2",
+                "label": "1re transfusion de sang Rh+",
+                "category": 1
+              },
+              {
+                "id": "n3",
+                "label": "Production d'anticorps anti-Rh",
+                "category": 2
+              },
+              {
+                "id": "n4",
+                "label": "2e transfusion de sang Rh+",
+                "category": 1
+              },
+              {
+                "id": "n5",
+                "label": "Agglutination des hématies",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "n1",
+                "to": "n2"
+              },
+              {
+                "from": "n2",
+                "to": "n3",
+                "label": "réaction de l'organisme"
+              },
+              {
+                "from": "n3",
+                "to": "n4",
+                "label": "quelque temps plus tard"
+              },
+              {
+                "from": "n4",
+                "to": "n5",
+                "label": "anticorps + antigène Rhésus"
+              }
+            ],
+            "legend": [
+              "Situation",
+              "Réaction de l'organisme"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Déterminer un groupe sanguin du système ABO",
+          "remember": "Les hématies portent à leur surface des molécules appelées **antigènes**. Dans le système ABO, il y a deux antigènes : A et B. Le plasma contient des **anticorps** : des molécules qui se fixent sur un antigène précis. Groupe A : antigène A, anticorps anti-B. Groupe B : antigène B, anticorps anti-A. Groupe AB : antigènes A et B, aucun anticorps. Groupe O : aucun antigène, anticorps anti-A et anti-B. Quand un anticorps rencontre l'antigène qui lui correspond, les hématies se collent en amas : c'est l'**agglutination**. Pour trouver le groupe, on mélange du sang avec un sérum anti-A, puis avec un sérum anti-B (les sérums-tests contiennent ces anticorps).",
+          "method": [
+            "Observer sur la lame si les hématies s'agglutinent avec le sérum anti-A et avec le sérum anti-B.",
+            "Relever les antigènes présents : agglutination avec anti-A, antigène A ; avec anti-B, antigène B.",
+            "Déduire le groupe sanguin d'après les antigènes relevés : A, B, AB ou O.",
+            "Préciser les anticorps du plasma : ce sont ceux qui ne correspondent pas aux antigènes de la personne."
+          ],
+          "example": {
+            "statement": "Lors d'une collecte de sang au quartier, un volontaire est testé. Son sang s'agglutine avec le sérum anti-A, mais pas avec le sérum anti-B. Quel est son groupe et quels anticorps a son plasma ?",
+            "steps": [
+              "Observer : il y a agglutination avec le sérum anti-A, aucune avec le sérum anti-B.",
+              "Relever : l'agglutination avec anti-A montre l'antigène A ; l'absence d'agglutination avec anti-B montre qu'il n'y a pas d'antigène B.",
+              "Déduire : il n'y a que l'antigène A, donc le volontaire est de groupe A.",
+              "Préciser : son plasma contient l'anticorps anti-B, le seul qui ne correspond pas à son antigène A."
+            ]
+          },
+          "pitfall": "Ne confonds pas antigène et anticorps. L'antigène est sur l'hématie, l'anticorps est dans le plasma. Contre-exemple : une personne de groupe A ne peut pas avoir l'anticorps anti-A, car ses propres hématies A s'agglutineraient. Elle a l'anticorps anti-B. Pour ne pas te tromper, écris d'abord les antigènes, puis donne comme anticorps ceux qui ne leur correspondent pas.",
+          "figure": "test-groupe-abo",
+          "exercise": {
+            "title": "Déterminer des groupes sanguins ABO",
+            "statement": "Dans cet exercice, tu lis des résultats de tests sur lame et tu donnes le groupe et les anticorps avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "test-groupe-abo",
+            "questions": [
+              {
+                "content": "Au CNTS, une goutte de sang est mélangée à du sérum anti-A, puis une autre à du sérum anti-B. Les hématies s'agglutinent avec le sérum anti-B seulement. Quel est le groupe sanguin ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : il y a agglutination avec le sérum anti-B, pas avec le sérum anti-A. Étape 2 — Relever : les hématies portent l'antigène B, pas l'antigène A. Étape 3 — Déduire : un seul antigène, le B, donc groupe B. Étape 4 — Préciser : le plasma contient l'anticorps anti-A. Le groupe A serait la bonne réponse si l'agglutination se faisait avec le sérum anti-A : il ne faut pas inverser les sérums.",
+                "answers": [
+                  {
+                    "content": "Groupe B",
+                    "correct": true
+                  },
+                  {
+                    "content": "Groupe A",
+                    "correct": false
+                  },
+                  {
+                    "content": "Groupe AB",
+                    "correct": false
+                  },
+                  {
+                    "content": "Groupe O",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une personne de groupe O porte les antigènes A et B sur ses hématies.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever les antigènes : une personne de groupe O n'a ni antigène A ni antigène B sur ses hématies, c'est justement ce qui définit le groupe O (étape 3 — Déduire le groupe). C'est le groupe AB qui porte les deux antigènes. Ne confonds pas O et AB.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque groupe sanguin aux anticorps présents dans son plasma.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Déduire le groupe, puis étape 4 — Préciser les anticorps : le plasma contient les anticorps qui ne correspondent pas aux antigènes des hématies. Le groupe A porte l'antigène A, donc son plasma a l'anticorps anti-B. Le groupe B a l'anti-A. Le groupe AB porte les deux antigènes, donc n'a aucun anticorps. Le groupe O n'a aucun antigène, donc il a les deux anticorps.",
+                "answers": [
+                  {
+                    "content": "Groupe A",
+                    "match": "Anticorps anti-B"
+                  },
+                  {
+                    "content": "Groupe B",
+                    "match": "Anticorps anti-A"
+                  },
+                  {
+                    "content": "Groupe AB",
+                    "match": "Aucun anticorps anti-A ni anti-B"
+                  },
+                  {
+                    "content": "Groupe O",
+                    "match": "Anticorps anti-A et anti-B"
+                  }
+                ]
+              },
+              {
+                "content": "Une goutte de sang s'agglutine avec le sérum anti-A et avec le sérum anti-B. Son groupe est le groupe ___ (écris les lettres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Observer : agglutination avec les deux sérums. Étape 2 — Relever : les hématies portent l'antigène A et l'antigène B. Étape 3 — Déduire : deux antigènes, donc groupe AB. Étape 4 — Préciser : le plasma ne contient ni anti-A ni anti-B, sinon les hématies s'agglutineraient entre elles.",
+                "answers": [
+                  {
+                    "content": "AB",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les deux propositions vraies pour une personne de groupe O.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Déduire le groupe : le groupe O est celui qui n'a aucun antigène. Étape 4 — Préciser les anticorps : le plasma contient alors les deux anticorps, anti-A et anti-B. Dire que le groupe O porte l'antigène A confond avec le groupe A, et dire qu'il n'a aucun anticorps confond avec le groupe AB.",
+                "answers": [
+                  {
+                    "content": "Ses hématies ne portent ni l'antigène A ni l'antigène B.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son plasma contient les anticorps anti-A et anti-B.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ses hématies portent l'antigène A.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son plasma ne contient aucun anticorps.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour déterminer un groupe sanguin du système ABO.",
+                "question_type": "ordering",
+                "explanation": "La méthode se suit dans cet ordre. Étape 1 — Observer les agglutinations sur la lame. Étape 2 — Relever les antigènes qu'elles révèlent. Étape 3 — Déduire le groupe. Étape 4 — Préciser les anticorps, qui sont ceux que les hématies de la personne ne portent pas comme antigènes. On ne peut pas conclure avant d'avoir observé.",
+                "answers": [
+                  {
+                    "content": "Observer si les hématies s'agglutinent avec le sérum anti-A et avec le sérum anti-B."
+                  },
+                  {
+                    "content": "Relever les antigènes présents d'après les agglutinations."
+                  },
+                  {
+                    "content": "Déduire le groupe sanguin d'après les antigènes."
+                  },
+                  {
+                    "content": "Préciser les anticorps du plasma."
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « Le groupe A a l'antigène A et l'anticorps anti-A. » Pourquoi est-ce impossible ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Préciser les anticorps : on n'écrit que les anticorps qui ne correspondent pas aux antigènes de la personne. Une personne de groupe A porte l'antigène A, donc son plasma contient l'anticorps anti-B. Si elle avait aussi l'anti-A, ses hématies s'agglutineraient dans ses propres vaisseaux. L'antigène est sur l'hématie, l'anticorps est dans le plasma : il ne faut pas les confondre.",
+                "answers": [
+                  {
+                    "content": "Les anticorps anti-A du plasma agglutineraient les propres hématies A de la personne.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le plasma ne contient jamais d'anticorps.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'anticorps anti-A se trouve sur les hématies, pas dans le plasma.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le groupe A ne porte aucun antigène.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Choisir un donneur compatible dans le système ABO",
+          "remember": "Lors d'une transfusion, ce sont surtout les **hématies du donneur** qui passent dans le sang du receveur (les anticorps du donneur sont très dilués : on les néglige). Il y a **agglutination**, donc danger, si le plasma du receveur contient un anticorps qui correspond à un antigène des hématies du donneur. Le groupe O n'a aucun antigène : il peut donner à tous les groupes (**donneur universel**), mais il ne reçoit que du sang O. Le groupe AB n'a aucun anticorps : il peut recevoir de tous les groupes (**receveur universel**). A donne à A et AB ; B donne à B et AB. En pratique, on cherche toujours à donner le même groupe que celui du receveur.",
+          "method": [
+            "Relever le groupe du donneur et celui du receveur : les antigènes des hématies du donneur, les anticorps du plasma du receveur.",
+            "Comparer : chercher si le receveur a un anticorps qui correspond à un antigène des hématies du donneur.",
+            "Conclure : s'il y a correspondance, il y a agglutination et la transfusion est impossible ; sinon elle est compatible."
+          ],
+          "example": {
+            "statement": "À l'hôpital, un patient de groupe A a besoin de sang. Un volontaire de groupe B se propose. La transfusion est-elle possible ?",
+            "steps": [
+              "Relever : le donneur B a l'antigène B sur ses hématies ; le receveur A a l'anticorps anti-B dans son plasma.",
+              "Comparer : l'anticorps anti-B du receveur correspond à l'antigène B du donneur.",
+              "Conclure : il y a correspondance, donc agglutination des hématies du donneur : la transfusion est impossible."
+            ]
+          },
+          "pitfall": "Ne mélange pas le sens donneur et receveur. Pour un donneur, on regarde ses antigènes ; pour un receveur, on regarde ses anticorps. Contre-exemple : le groupe O n'a aucun antigène, donc il donne à tous ; mais il a deux anticorps, donc il ne reçoit que du groupe O. « O reçoit de tous » est faux : le receveur universel est AB.",
+          "figure": "compatibilite-abo",
+          "exercise": {
+            "title": "Choisir des donneurs et des receveurs",
+            "statement": "Dans cet exercice, tu dis si une transfusion est possible, avec la méthode de la fiche : relever, comparer, conclure.",
+            "exercise_type": "fixation",
+            "figure": "compatibilite-abo",
+            "questions": [
+              {
+                "content": "Une personne de groupe AB peut recevoir du sang de groupe A.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le donneur A a l'antigène A ; le receveur AB n'a aucun anticorps. Étape 2 — Comparer : le receveur n'a pas d'anticorps anti-A, donc aucune correspondance avec l'antigène A. Étape 3 — Conclure : pas d'agglutination, la transfusion est compatible. Le groupe AB reçoit de tous les groupes ABO.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un donneur de groupe A veut donner son sang à un receveur de groupe O. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : le donneur A porte l'antigène A ; le receveur O a les anticorps anti-A et anti-B. Étape 2 — Comparer : l'anticorps anti-A du receveur correspond à l'antigène A du donneur. Étape 3 — Conclure : il y a agglutination, la transfusion est impossible. Croire que le groupe O ne réagit à rien est l'erreur classique : le groupe O n'a pas d'antigène, mais il a des anticorps.",
+                "answers": [
+                  {
+                    "content": "Les anticorps anti-A du receveur agglutinent les hématies du donneur : transfusion impossible.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Aucune agglutination, car le groupe O ne réagit à rien.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune agglutination, car le donneur a les anticorps anti-B.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le donneur a l'antigène B, donc il y a agglutination.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un receveur est de groupe A. Choisis les deux groupes de donneurs dont les hématies sont acceptées.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : le receveur A a l'anticorps anti-B. Étape 2 — Comparer : un donneur est refusé si ses hématies portent l'antigène B. Le groupe B porte l'antigène B, le groupe AB aussi : ils sont refusés. Étape 3 — Conclure : les groupes A (antigène A seulement) et O (aucun antigène) sont acceptés.",
+                "answers": [
+                  {
+                    "content": "Groupe A",
+                    "correct": true
+                  },
+                  {
+                    "content": "Groupe O",
+                    "correct": true
+                  },
+                  {
+                    "content": "Groupe B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Groupe AB",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le système ABO, le groupe ___ est appelé donneur universel (écris la lettre).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : les hématies du groupe O n'ont aucun antigène. Étape 2 — Comparer : aucun anticorps d'un receveur ne peut donc correspondre à un antigène du donneur. Étape 3 — Conclure : le groupe O peut donner à tous les groupes ABO, c'est le donneur universel.",
+                "answers": [
+                  {
+                    "content": "O",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un receveur de groupe B peut recevoir du sang de groupe : ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Relever : le receveur B a l'anticorps anti-A. Étape 2 — Comparer : il refuse les hématies qui portent l'antigène A, donc les groupes A et AB. Étape 3 — Conclure : il accepte B (antigène B, qu'il porte) et O (aucun antigène). La proposition « B et AB » oublie que AB porte l'antigène A.",
+                "answers": [
+                  {
+                    "content": "B et O",
+                    "correct": true
+                  },
+                  {
+                    "content": "A et B",
+                    "correct": false
+                  },
+                  {
+                    "content": "B et AB",
+                    "correct": false
+                  },
+                  {
+                    "content": "O seulement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque groupe de receveur aux groupes de donneurs dont il accepte les hématies.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever les anticorps du receveur. Étape 2 — Comparer avec les antigènes de chaque groupe de donneur. Étape 3 — Conclure. Le receveur A (anti-B) refuse B et AB. Le receveur B (anti-A) refuse A et AB. Le receveur AB n'a aucun anticorps et accepte tout. Le receveur O (anti-A et anti-B) refuse A, B et AB : il n'accepte que O.",
+                "answers": [
+                  {
+                    "content": "Receveur A",
+                    "match": "Donneurs A et O"
+                  },
+                  {
+                    "content": "Receveur B",
+                    "match": "Donneurs B et O"
+                  },
+                  {
+                    "content": "Receveur AB",
+                    "match": "Donneurs A, B, AB et O"
+                  },
+                  {
+                    "content": "Receveur O",
+                    "match": "Donneur O seulement"
+                  }
+                ]
+              },
+              {
+                "content": "Une élève affirme : « Le groupe O est receveur universel, car il n'a pas d'antigène. » Quelle est son erreur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : pour un receveur, ce qui compte, ce sont ses anticorps. Étape 2 — Comparer : le receveur O a les anticorps anti-A et anti-B ; ils agglutinent les hématies A, B et AB. Étape 3 — Conclure : il n'accepte que le sang O. L'absence d'antigène fait du groupe O un bon donneur, pas un bon receveur. Le receveur universel du système ABO est le groupe AB.",
+                "answers": [
+                  {
+                    "content": "Le receveur O a des anticorps anti-A et anti-B : il n'accepte que le sang O.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le groupe O a tous les antigènes, donc il reçoit tout.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le groupe O n'a pas de plasma.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le groupe O ne peut pas recevoir de sang du tout.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le facteur Rhésus et le risque d'une seconde transfusion",
+          "remember": "Un autre antigène des hématies s'appelle le **Rhésus**. Une personne **Rh+** a l'antigène Rhésus sur ses hématies ; une personne **Rh-** ne l'a pas. Contrairement aux anticorps du système ABO, un Rh- n'a **pas d'anticorps anti-Rh au départ** : son organisme les fabrique seulement après un contact avec des hématies Rh+, par exemple lors d'une première transfusion. À la transfusion suivante de sang Rh+, ces anticorps agglutinent les hématies reçues. Un receveur Rh+ peut recevoir du sang Rh+ ou Rh- ; un receveur Rh- doit recevoir du sang Rh-. On désigne un groupe complet par exemple A Rh+ ou O Rh-.",
+          "method": [
+            "Relever le Rhésus du donneur, celui du receveur, et si le receveur a déjà reçu du sang Rh+.",
+            "Repérer le risque : donneur Rh+ (antigène Rhésus présent) et receveur Rh- (antigène absent).",
+            "Prévoir la réaction : à la première transfusion, pas d'agglutination immédiate mais fabrication d'anticorps anti-Rh ; à la suivante, agglutination.",
+            "Conclure : un receveur Rh- doit recevoir du sang Rh- ; un receveur Rh+ peut recevoir du sang Rh+ ou Rh-."
+          ],
+          "example": {
+            "statement": "Un homme Rh-, jamais transfusé, reçoit du sang Rh+ après un accident. Plusieurs mois plus tard, on envisage une nouvelle transfusion de sang Rh+. Que faut-il prévoir ?",
+            "steps": [
+              "Relever : le receveur est Rh-, le donneur est Rh+ ; le receveur n'avait jamais reçu de sang auparavant.",
+              "Repérer le risque : le donneur Rh+ porte l'antigène Rhésus que le receveur Rh- n'a pas.",
+              "Prévoir : à la première transfusion, il n'avait pas d'anticorps anti-Rh, donc pas d'agglutination immédiate, mais il en a fabriqué ; à la seconde, ces anticorps agglutineraient les hématies Rh+.",
+              "Conclure : il faut lui donner du sang Rh- pour la nouvelle transfusion."
+            ]
+          },
+          "pitfall": "Ne copie pas la règle du système ABO. Dans le système ABO, les anticorps existent dès la naissance. Pour le Rhésus, un Rh- n'a pas d'anticorps tant qu'il n'a pas été en contact avec du sang Rh+. Contre-exemple : les hématies Rh+ reçues par un patient Rh- jamais transfusé ne sont pas agglutinées tout de suite ; le danger vient de la seconde transfusion. Cela n'autorise pas la première : on donne du sang Rh- à un Rh-.",
+          "figure": "sensibilisation-rhesus",
+          "exercise": {
+            "title": "Le Rhésus et la transfusion",
+            "statement": "Dans cet exercice, tu raisonnes sur le Rhésus avec la méthode de la fiche : relever, repérer le risque, prévoir la réaction, conclure.",
+            "exercise_type": "fixation",
+            "figure": "sensibilisation-rhesus",
+            "questions": [
+              {
+                "content": "Une personne Rh- possède naturellement des anticorps anti-Rh dans son plasma.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le receveur est Rh-, il n'a pas l'antigène Rhésus. Étape 3 — Prévoir la réaction : contrairement aux anticorps du système ABO, les anticorps anti-Rh n'existent pas dès la naissance. Ils ne sont fabriqués qu'après un contact avec des hématies Rh+. Une personne Rh- jamais transfusée n'en a donc pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un patient Rh+ a besoin d'une transfusion. Le CNTS a une poche de sang Rh- compatible en groupe ABO. Peut-on l'utiliser du point de vue du Rhésus ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : donneur Rh-, receveur Rh+. Étape 2 — Repérer le risque : il y a risque quand le donneur est Rh+ et le receveur Rh-, c'est le contraire ici. Étape 4 — Conclure : un receveur Rh+ peut recevoir du sang Rh+ ou Rh-, car les hématies Rh- n'ont pas d'antigène Rhésus. La règle « chacun reçoit son propre Rhésus » ne vaut que pour le receveur Rh-.",
+                "answers": [
+                  {
+                    "content": "Oui : les hématies Rh- n'ont pas d'antigène Rhésus, donc aucun anticorps anti-Rh ne peut les agglutiner.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Non : un receveur Rh+ ne peut recevoir que du sang Rh+.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : le sang Rh- agglutine toujours les hématies du receveur.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, mais seulement à la deuxième transfusion.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un receveur Rh- ne doit recevoir que du sang Rh ___ .",
+                "question_type": "select",
+                "explanation": "Étape 2 — Repérer le risque : donneur Rh+ et receveur Rh-. Étape 4 — Conclure : on évite de donner du sang Rh+ à un receveur Rh-, car il fabriquerait des anticorps anti-Rh. Il reçoit donc du sang Rh négatif.",
+                "answers": [
+                  {
+                    "content": "négatif",
+                    "correct": true
+                  },
+                  {
+                    "content": "positif",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les événements chez un receveur Rh- qui reçoit deux fois du sang Rh+.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Prévoir la réaction : à la première transfusion, le receveur n'a pas d'anticorps anti-Rh, donc pas d'agglutination immédiate, mais son organisme en fabrique. À la seconde transfusion, ces anticorps rencontrent l'antigène Rhésus des hématies reçues et les agglutinent. Les anticorps doivent exister avant l'agglutination.",
+                "answers": [
+                  {
+                    "content": "Le receveur Rh- reçoit une première fois du sang Rh+."
+                  },
+                  {
+                    "content": "Son organisme fabrique des anticorps anti-Rh."
+                  },
+                  {
+                    "content": "Il reçoit une seconde fois du sang Rh+."
+                  },
+                  {
+                    "content": "Les anticorps anti-Rh agglutinent les hématies Rh+ reçues."
+                  }
+                ]
+              },
+              {
+                "content": "Un patient Rh-, jamais transfusé, reçoit pour la première fois du sang Rh+. Choisis les deux propositions vraies.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : receveur Rh- jamais transfusé. Étape 3 — Prévoir la réaction : à la première transfusion, il n'a pas d'anticorps anti-Rh, donc pas d'agglutination immédiate ; mais il en fabrique. Une agglutination immédiate serait possible seulement s'il avait déjà été en contact avec du sang Rh+. Des hématies Rh- ne portent pas l'antigène Rhésus.",
+                "answers": [
+                  {
+                    "content": "Il n'y a pas d'agglutination immédiate, car il n'a pas encore d'anticorps anti-Rh.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son organisme commence à fabriquer des anticorps anti-Rh.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il y a une agglutination immédiate massive.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ses hématies Rh- portent l'antigène Rhésus.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à sa conséquence.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever la situation du receveur. Étape 2 — Repérer le risque : donneur Rh+ et receveur Rh-. Étape 3 — Prévoir la réaction : sans contact antérieur, pas d'anticorps, donc pas d'agglutination immédiate mais une fabrication d'anticorps ; avec des anticorps déjà fabriqués, agglutination. Un receveur Rh+ ne réagit pas contre des hématies Rh-, qui n'ont pas d'antigène Rhésus.",
+                "answers": [
+                  {
+                    "content": "Receveur Rh- jamais transfusé qui reçoit du sang Rh+",
+                    "match": "Pas d'agglutination immédiate ; fabrication d'anticorps anti-Rh"
+                  },
+                  {
+                    "content": "Receveur Rh- déjà immunisé qui reçoit du sang Rh+",
+                    "match": "Agglutination des hématies reçues"
+                  },
+                  {
+                    "content": "Receveur Rh+ qui reçoit du sang Rh-",
+                    "match": "Aucune agglutination due au Rhésus"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dit : « Un Rh- a des anticorps anti-Rh dès la naissance, donc la première transfusion de sang Rh+ est toujours un drame immédiat. » Quelle est la bonne correction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : receveur Rh- jamais transfusé. Étape 3 — Prévoir la réaction : à la première transfusion, il n'y a pas d'anticorps anti-Rh, donc pas d'agglutination immédiate ; son organisme en fabrique ensuite. Étape 4 — Conclure : le danger apparaît à la transfusion suivante, mais on évite quand même de donner du sang Rh+ à un receveur Rh-.",
+                "answers": [
+                  {
+                    "content": "Les anticorps anti-Rh se forment après le premier contact : le danger apparaît surtout à la transfusion suivante.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les anticorps anti-Rh existent dès la naissance, mais ils sont inoffensifs.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un Rh- ne fabrique jamais d'anticorps anti-Rh.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Rhésus n'a aucun effet sur une transfusion.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La collecte de sang du quartier",
+          "statement": "Le CNTS organise une collecte de sang dans ton quartier. Les volontaires sont testés avec un sérum anti-A et un sérum anti-B. Tu appliques les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Lors d'une collecte de sang au quartier, le CNTS teste quatre volontaires avec les sérums anti-A et anti-B : Awa (agglutination avec les deux sérums), Koffi (aucune agglutination), Mariam (agglutination avec anti-B seulement), Yao (agglutination avec anti-A seulement). Relie chaque volontaire à son groupe.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Observer les agglutinations. 2. Relever les antigènes : anti-A révèle A, anti-B révèle B. 3. Déduire le groupe. Awa porte A et B, donc AB. Koffi n'a aucun antigène, donc O. Mariam porte l'antigène B seul, donc B. Yao porte l'antigène A seul, donc A. Attention à ne pas inverser les sérums : l'agglutination avec le sérum anti-B signale l'antigène B.",
+              "answers": [
+                {
+                  "content": "Awa",
+                  "match": "Groupe AB"
+                },
+                {
+                  "content": "Koffi",
+                  "match": "Groupe O"
+                },
+                {
+                  "content": "Mariam",
+                  "match": "Groupe B"
+                },
+                {
+                  "content": "Yao",
+                  "match": "Groupe A"
+                }
+              ]
+            },
+            {
+              "content": "Awa (groupe AB), Koffi (groupe O), Mariam (groupe B) et Yao (groupe A) ont été testés. Lequel peut donner son sang à tous les groupes du système ABO ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Relever les antigènes du donneur. 2. Comparer avec les anticorps de chaque receveur. 3. Conclure. Koffi, de groupe O, n'a aucun antigène : aucun anticorps ne peut agglutiner ses hématies, c'est le donneur universel. Awa (AB) porte A et B : elle ne peut donner qu'au groupe AB. Le groupe AB est receveur universel, et non donneur universel.",
+              "answers": [
+                {
+                  "content": "Koffi, de groupe O",
+                  "correct": true
+                },
+                {
+                  "content": "Awa, de groupe AB",
+                  "correct": false
+                },
+                {
+                  "content": "Mariam, de groupe B",
+                  "correct": false
+                },
+                {
+                  "content": "Yao, de groupe A",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam est de groupe B. Son plasma contient l'anticorps anti-___ (écris la lettre).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : le groupe B porte l'antigène B. Le plasma contient les anticorps qui ne correspondent pas aux antigènes de la personne : ici l'anti-A. Si Mariam avait l'anti-B, ses propres hématies B s'agglutineraient.",
+              "answers": [
+                {
+                  "content": "A",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Yao (groupe A) peut donner son sang à Awa (groupe AB).",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Relever : Yao porte l'antigène A ; Awa (AB) n'a aucun anticorps. 2. Comparer : aucun anticorps d'Awa ne correspond à l'antigène A. 3. Conclure : pas d'agglutination, la transfusion est compatible. Le groupe AB est receveur universel.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi Awa (AB), Koffi (O), Mariam (B) et Yao (A), choisis les deux personnes qui peuvent recevoir du sang de groupe A.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Relever : le donneur A porte l'antigène A. 2. Comparer : Koffi (O) a l'anticorps anti-A et Mariam (B) aussi, donc ils agglutineraient les hématies A. Awa (AB) n'a aucun anticorps, et Yao (A) n'a pas d'anti-A. 3. Conclure : seuls Awa et Yao acceptent le sang A.",
+              "answers": [
+                {
+                  "content": "Awa (groupe AB)",
+                  "correct": true
+                },
+                {
+                  "content": "Yao (groupe A)",
+                  "correct": true
+                },
+                {
+                  "content": "Koffi (groupe O)",
+                  "correct": false
+                },
+                {
+                  "content": "Mariam (groupe B)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao (groupe A) propose de donner son sang à Koffi (groupe O), qui vient de se blesser. Pourquoi est-ce impossible ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Relever : Yao porte l'antigène A ; Koffi (O) a les anticorps anti-A et anti-B. 2. Comparer : l'anti-A de Koffi correspond à l'antigène A de Yao. 3. Conclure : il y a agglutination, la transfusion est impossible. Le groupe O n'a pas d'antigène mais a des anticorps : il ne reçoit que du sang O.",
+              "answers": [
+                {
+                  "content": "Koffi a les anticorps anti-A, qui agglutineraient les hématies A de Yao.",
+                  "correct": true
+                },
+                {
+                  "content": "Koffi n'a aucun anticorps, donc il refuse tout.",
+                  "correct": false
+                },
+                {
+                  "content": "Yao n'a pas d'antigène, donc son sang est inutile.",
+                  "correct": false
+                },
+                {
+                  "content": "Koffi porte l'antigène A, donc il rejette A.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une urgence au centre de santé",
+          "statement": "Une femme est amenée au centre de santé après un accident. Elle a perdu beaucoup de sang. Son groupe est B Rh+. Le centre dispose de quatre poches : A Rh+, B Rh-, O Rh+ et AB Rh-.",
+          "exercise_type": "fixation",
+          "figure": "compatibilite-abo",
+          "questions": [
+            {
+              "content": "Une femme de groupe B Rh+ a perdu beaucoup de sang. Le centre de santé a quatre poches : A Rh+, B Rh-, O Rh+ et AB Rh-. Choisis les deux poches compatibles avec elle.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Relever : la patiente B Rh+ a l'anticorps anti-A et l'antigène Rhésus. 2. Comparer ABO : elle refuse les antigènes A, donc A Rh+ et AB Rh- sont éliminées. 3. Rhésus : elle est Rh+, donc elle accepte Rh+ et Rh-. 4. Conclure : B Rh- et O Rh+ conviennent.",
+              "answers": [
+                {
+                  "content": "B Rh-",
+                  "correct": true
+                },
+                {
+                  "content": "O Rh+",
+                  "correct": true
+                },
+                {
+                  "content": "A Rh+",
+                  "correct": false
+                },
+                {
+                  "content": "AB Rh-",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour la patiente B Rh+ du centre de santé, pourquoi la poche A Rh+ est-elle refusée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Relever : le donneur A porte l'antigène A ; la patiente B a l'anticorps anti-A. 2. Comparer : l'anti-A correspond à l'antigène A. 3. Conclure : agglutination, la poche A Rh+ est refusée. Le Rh+ n'est pas en cause : une receveuse Rh+ accepte le Rh+.",
+              "answers": [
+                {
+                  "content": "Son plasma contient l'anticorps anti-A, qui agglutinerait les hématies A.",
+                  "correct": true
+                },
+                {
+                  "content": "Son plasma contient l'anticorps anti-B.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est Rh+, donc elle refuse le Rh+.",
+                  "correct": false
+                },
+                {
+                  "content": "Le groupe A ne porte aucun antigène.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour une receveuse Rh+, la poche B Rh- ne pose pas de problème de Rhésus.",
+              "question_type": "true_false",
+              "explanation": "Méthode : le risque lié au Rhésus existe quand le donneur est Rh+ et le receveur Rh-. Ici le donneur est Rh- : ses hématies n'ont pas d'antigène Rhésus et la receveuse Rh+ n'a pas d'anticorps anti-Rh. Pas de problème de Rhésus.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi les quatre poches A Rh+, B Rh-, O Rh+ et AB Rh-, combien sont compatibles avec la patiente B Rh+ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Relever les groupes. 2. Éliminer les poches A Rh+ et AB Rh-, qui portent l'antigène A refusé par l'anticorps anti-A de la patiente. 3. Conserver B Rh- et O Rh+ : aucun antigène qu'elle refuse, et le Rhésus ne gêne pas une receveuse Rh+. Il y a donc 2 poches compatibles.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la démarche pour choisir une poche pour un patient.",
+              "question_type": "ordering",
+              "explanation": "On commence par connaître le receveur, puis les poches. On élimine ensuite les poches dangereuses en comparant antigènes et anticorps (ABO) et en appliquant la règle du Rhésus. On choisit enfin parmi les poches restantes, de préférence celle de même groupe que le patient.",
+              "answers": [
+                {
+                  "content": "Relever le groupe ABO et le Rhésus du patient."
+                },
+                {
+                  "content": "Relever le groupe ABO et le Rhésus de chaque poche."
+                },
+                {
+                  "content": "Éliminer les poches qui provoqueraient une agglutination."
+                },
+                {
+                  "content": "Choisir une poche parmi celles qui restent."
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi le centre de santé doit déterminer le groupe sanguin et le Rhésus d'un patient avant de lui faire une transfusion.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Le groupe ABO du patient détermine ses anticorps et le risque d'agglutination",
+                "Le Rhésus doit aussi être pris en compte"
+              ],
+              "explanation": "Corrigé modèle : Avant une transfusion, il faut connaître le groupe ABO du patient, car son plasma contient des anticorps qui agglutineraient des hématies portant l'antigène correspondant. Une poche mal choisie provoque une agglutination, qui est dangereuse. Il faut aussi connaître son Rhésus : un receveur Rh- ne doit pas recevoir de sang Rh+. Barème : 1 point pour le groupe ABO qui détermine les anticorps et le risque d'agglutination, 1 point pour le Rhésus.",
+              "answers": [],
+              "starter": "Avant de transfuser, il faut connaître…"
+            }
+          ]
+        },
+        {
+          "title": "Les deux transfusions de Mme Adjoua",
+          "statement": "Mme Adjoua est de groupe A Rh-. Après un accident, elle a reçu une première transfusion de sang A Rh+, faute de poche Rh- disponible au centre de santé. Elle n'avait jamais été transfusée. Deux mois plus tard, une nouvelle intervention rend une seconde transfusion nécessaire.",
+          "exercise_type": "evaluation",
+          "figure": "sensibilisation-rhesus",
+          "questions": [
+            {
+              "content": "Mme Adjoua est de groupe A Rh-. Elle n'avait jamais été transfusée. Après un accident, faute de poche Rh- disponible, elle reçoit une poche A Rh+. Que se passe-t-il à ce moment ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du Rhésus : 1. Relever : receveuse Rh-, jamais transfusée ; donneur Rh+. 2. Repérer le risque : donneur Rh+ et receveuse Rh-. 3. Prévoir : pas d'anticorps anti-Rh au départ, donc pas d'agglutination immédiate. Le groupe ABO est compatible, car A donne à A. L'erreur serait de croire qu'un Rh- a des anticorps anti-Rh dès la naissance.",
+              "answers": [
+                {
+                  "content": "Pas d'agglutination immédiate, car elle n'a pas encore d'anticorps anti-Rh.",
+                  "correct": true
+                },
+                {
+                  "content": "Agglutination immédiate, car elle est Rh-.",
+                  "correct": false
+                },
+                {
+                  "content": "Agglutination immédiate, car le groupe A refuse le groupe A.",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune conséquence, même plus tard.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après cette transfusion, le plasma de Mme Adjoua contient des anticorps anti-___ (écris le nom de l'antigène visé).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode du Rhésus : 3. Prévoir la réaction. Au contact des hématies Rh+, l'organisme de Mme Adjoua fabrique des anticorps dirigés contre l'antigène Rhésus : les anticorps anti-Rh, ou anti-Rhésus.",
+              "answers": [
+                {
+                  "content": "Rh",
+                  "correct": true
+                },
+                {
+                  "content": "Rhésus",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Deux mois plus tard, Mme Adjoua (A Rh-, anticorps anti-Rh) doit être de nouveau transfusée. Parmi ces poches, choisis les deux qui sont sans danger pour elle.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : ABO : Mme Adjoua a l'anticorps anti-B, donc elle refuse les hématies portant l'antigène B (AB Rh- est éliminée). Rhésus : elle a des anticorps anti-Rh, donc elle refuse tout sang Rh+ (A Rh+ et O Rh+ éliminées). Restent A Rh- (même groupe) et O Rh- (aucun antigène A, B ni Rhésus).",
+              "answers": [
+                {
+                  "content": "A Rh-",
+                  "correct": true
+                },
+                {
+                  "content": "O Rh-",
+                  "correct": true
+                },
+                {
+                  "content": "A Rh+",
+                  "correct": false
+                },
+                {
+                  "content": "AB Rh-",
+                  "correct": false
+                },
+                {
+                  "content": "O Rh+",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les événements qui concernent Mme Adjoua.",
+              "question_type": "ordering",
+              "explanation": "Étape par étape : la première transfusion Rh+ expose Mme Adjoua à l'antigène Rhésus ; son organisme fabrique alors des anticorps ; à la nouvelle transfusion, une poche Rh+ serait agglutinée. On choisit donc une poche Rh-.",
+              "answers": [
+                {
+                  "content": "Elle reçoit une poche A Rh+ lors de l'accident."
+                },
+                {
+                  "content": "Son organisme fabrique des anticorps anti-Rh."
+                },
+                {
+                  "content": "Elle doit être transfusée de nouveau."
+                },
+                {
+                  "content": "Une poche Rh+ serait agglutinée : on choisit une poche Rh-."
+                }
+              ]
+            },
+            {
+              "content": "Si Mme Adjoua avait reçu, lors de l'accident, une poche A Rh-, elle n'aurait pas fabriqué d'anticorps anti-Rh.",
+              "question_type": "true_false",
+              "explanation": "Méthode du Rhésus : les anticorps anti-Rh se fabriquent après un contact avec l'antigène Rhésus. Une poche A Rh- ne porte pas cet antigène, donc il n'y a aucun contact, aucune fabrication d'anticorps.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi une nouvelle transfusion de sang Rh+ serait dangereuse pour Mme Adjoua alors que la première ne l'a pas été immédiatement.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "La première fois, elle n'avait pas d'anticorps anti-Rh",
+                "Le contact avec le sang Rh+ a déclenché leur fabrication",
+                "À la seconde transfusion, les anticorps rencontrent l'antigène Rhésus",
+                "Il y a alors agglutination des hématies"
+              ],
+              "explanation": "Corrigé modèle : Mme Adjoua est Rh-, donc elle n'a pas l'antigène Rhésus et n'a pas d'anticorps anti-Rh au départ. À la première transfusion, il n'y a donc pas d'agglutination immédiate. Mais le contact avec les hématies Rh+ a fait fabriquer à son organisme des anticorps anti-Rh. À la seconde transfusion de sang Rh+, ces anticorps rencontrent l'antigène Rhésus des hématies reçues et les agglutinent, ce qui est dangereux. Barème : 1 point pour l'absence d'anticorps au départ, 1 point pour la fabrication, 1 point pour la rencontre anticorps-antigène et l'agglutination (critères 3 et 4).",
+              "answers": [],
+              "starter": "La première fois, elle n'avait pas encore…"
+            },
+            {
+              "content": "Le CNTS décide de garder des poches O Rh- pour les urgences. Explique pourquoi ce choix est utile.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Le groupe O n'a aucun antigène ABO",
+                "Rh- n'a pas d'antigène Rhésus",
+                "Ces poches conviennent à presque tous les receveurs en urgence"
+              ],
+              "explanation": "Corrigé modèle : Les hématies O n'ont aucun antigène A ni B, donc aucun anticorps ABO ne peut les agglutiner. Étant Rh-, elles n'ont pas non plus d'antigène Rhésus. Une poche O Rh- peut donc être utilisée en urgence quand on ne connaît pas encore le groupe du patient. Barème : 1 point pour l'absence d'antigènes ABO, 0,5 point pour le Rhésus, 0,5 point pour l'urgence.",
+              "answers": [],
+              "starter": "Les hématies O n'ont aucun…"
+            }
+          ]
+        },
+        {
+          "title": "Choisir les poches du CNTS",
+          "statement": "Après la collecte de sang du quartier, le Centre national de transfusion sanguine (CNTS) range cinq poches : poche 1 de groupe O Rh-, poche 2 de groupe A Rh+, poche 3 de groupe B Rh+, poche 4 de groupe AB Rh+, poche 5 de groupe A Rh-. Quatre patients attendent une transfusion : Kouassi (B Rh-), Fatou (AB Rh+), Ibrahim (O Rh+) et Linda (A Rh-). Sujet de type BEPC.",
+          "exercise_type": "evaluation",
+          "figure": "compatibilite-abo",
+          "questions": [
+            {
+              "content": "Le CNTS dispose de cinq poches : poche 1 O Rh-, poche 2 A Rh+, poche 3 B Rh+, poche 4 AB Rh+, poche 5 A Rh-. Kouassi est de groupe B Rh- et n'a jamais été transfusé. Quelle poche lui convient ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Relever : Kouassi B Rh- a l'anticorps anti-A et pas d'antigène Rhésus. 2. ABO : il refuse les poches A et AB (poches 2, 4, 5), il accepte B et O. 3. Rhésus : Rh- reçoit Rh- : la poche 3 (B Rh+) est écartée. 4. Seule la poche 1 (O Rh-) convient. La poche 3 est le piège : bon groupe ABO, mais Rhésus incompatible.",
+              "answers": [
+                {
+                  "content": "La poche 1 (O Rh-)",
+                  "correct": true
+                },
+                {
+                  "content": "La poche 3 (B Rh+)",
+                  "correct": false
+                },
+                {
+                  "content": "La poche 5 (A Rh-)",
+                  "correct": false
+                },
+                {
+                  "content": "La poche 4 (AB Rh+)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fatou est de groupe AB Rh+. Parmi les cinq poches (1 O Rh-, 2 A Rh+, 3 B Rh+, 4 AB Rh+, 5 A Rh-), combien peut-elle en recevoir ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Relever : Fatou AB Rh+ n'a aucun anticorps ABO et a l'antigène Rhésus. 2. ABO : sans anticorps, elle accepte tous les groupes. 3. Rhésus : étant Rh+, elle accepte Rh+ et Rh-. 4. Elle peut donc recevoir les cinq poches.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Linda est de groupe A Rh-. Parmi les cinq poches (1 O Rh-, 2 A Rh+, 3 B Rh+, 4 AB Rh+, 5 A Rh-), choisis les deux qui lui conviennent.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Relever : Linda A Rh- a l'anticorps anti-B et pas d'antigène Rhésus. 2. ABO : elle refuse l'antigène B (poches 3 et 4) ; elle accepte A et O. 3. Rhésus : elle est Rh-, donc elle ne reçoit que du Rh- : la poche 2 (A Rh+) est écartée. 4. Restent les poches 1 et 5.",
+              "answers": [
+                {
+                  "content": "Poche 1 (O Rh-)",
+                  "correct": true
+                },
+                {
+                  "content": "Poche 5 (A Rh-)",
+                  "correct": true
+                },
+                {
+                  "content": "Poche 2 (A Rh+)",
+                  "correct": false
+                },
+                {
+                  "content": "Poche 3 (B Rh+)",
+                  "correct": false
+                },
+                {
+                  "content": "Poche 4 (AB Rh+)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La poche 4 (AB Rh+) peut être donnée à Ibrahim, de groupe O Rh+.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Relever : Ibrahim O Rh+ a les anticorps anti-A et anti-B ; la poche 4 AB porte les antigènes A et B. 2. Comparer : les anticorps d'Ibrahim correspondent aux antigènes de la poche. 3. Conclure : agglutination, transfusion impossible. Son Rh+ n'y change rien : le Rhésus ne protège pas contre une incompatibilité ABO.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces cinq poches, laquelle peut être donnée au plus grand nombre de receveurs ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Relever les antigènes de chaque poche. 2. Comparer avec les anticorps possibles. La poche 1 (O Rh-) n'a ni antigène A ou B, ni antigène Rhésus : aucun anticorps ne l'agglutine. Dans les systèmes ABO et Rhésus, elle est utilisable pour tous les receveurs ; en pratique, on préfère le même groupe. La poche 4 (AB Rh+) porte A, B et le Rhésus : c'est la moins universelle.",
+              "answers": [
+                {
+                  "content": "La poche 1 (O Rh-)",
+                  "correct": true
+                },
+                {
+                  "content": "La poche 4 (AB Rh+)",
+                  "correct": false
+                },
+                {
+                  "content": "La poche 2 (A Rh+)",
+                  "correct": false
+                },
+                {
+                  "content": "La poche 3 (B Rh+)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouassi (B Rh-, jamais transfusé) est compatible en ABO avec la poche 3 (B Rh+). Explique pourquoi le CNTS ne la lui donne pas.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le groupe ABO est compatible",
+                "La poche 3 est Rh+ et Kouassi est Rh-",
+                "Il n'a pas d'anticorps anti-Rh, donc pas d'agglutination immédiate",
+                "Il fabriquerait des anticorps anti-Rh, danger à la transfusion suivante"
+              ],
+              "explanation": "Corrigé modèle : Le groupe ABO est compatible, car Kouassi et la poche sont de groupe B. Mais la poche est Rh+ et Kouassi est Rh- : il n'a pas l'antigène Rhésus. Comme il n'a jamais été transfusé, il n'a pas d'anticorps anti-Rh, donc pas d'agglutination immédiate. Cependant son organisme fabriquerait ces anticorps, ce qui rendrait dangereuse une transfusion de sang Rh+ ultérieure. On lui donne donc du sang Rh-. Barème : 0,5 point pour l'ABO, 0,5 point pour la différence de Rhésus, 1 point pour l'absence d'agglutination immédiate, 1 point pour la fabrication d'anticorps.",
+              "answers": [],
+              "starter": "Le groupe ABO est compatible, mais…"
+            },
+            {
+              "content": "Rédige la démarche complète qui permet de choisir une poche pour Linda (A Rh-) parmi les cinq poches du CNTS.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Relever le groupe ABO et le Rhésus de Linda",
+                "Éliminer les poches portant l'antigène B, car Linda a l'anticorps anti-B",
+                "Éliminer les poches Rh+, car Linda est Rh-",
+                "Conclure : poches 1 et 5, de préférence la poche 5 de même groupe"
+              ],
+              "explanation": "Corrigé modèle : 1. Relever : Linda est de groupe A Rh- ; son plasma contient l'anticorps anti-B et elle n'a pas d'antigène Rhésus. 2. Comparer pour l'ABO : les poches 3 (B Rh+) et 4 (AB Rh+) portent l'antigène B, elles seraient agglutinées. 3. Comparer pour le Rhésus : les poches 2 (A Rh+), 3 et 4 sont Rh+, on les évite pour une receveuse Rh-. 4. Conclure : restent la poche 1 (O Rh-) et la poche 5 (A Rh-), de préférence la poche 5 de même groupe que Linda. Barème : 1 point par étape bien rédigée.",
+              "answers": [],
+              "starter": "Linda est de groupe A Rh-, donc…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

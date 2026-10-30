@@ -59,6 +59,23 @@ module Entities
         assert_equal({ 2 => [ :image_missing ] }, build(questions: [ question(true, false), missing ]).image_errors)
         assert_empty build.image_errors
       end
+
+      # CA-28 (ADR-0115 §4) : un exercice publiable a au moins une question corrigée automatiquement.
+      test "un exercice qui n'a que des réponses rédigées ou du cahier n'est pas publiable" do
+        written = Question.new(id: 2, position: 2, content: "Justifie.", explanation: "Corrigé", question_type: "written", answers: [])
+        notebook = Question.new(id: 3, position: 3, content: "Trace.", explanation: "Corrigé", question_type: "notebook", answers: [])
+
+        assert_not build(questions: [ written ]).publishable?
+        assert_not build(questions: [ written, notebook ]).publishable?
+        assert build(questions: [ written, notebook, question(true, false) ]).publishable?
+        assert_not build(questions: [ written, question(true, true) ]).publishable?
+      end
+
+      test "le sujet en blocs est un attribut facultatif, non validé ici (la validation est au Lot E)" do
+        assert_nil build.statement_blocks
+        assert_equal [ { "type" => "paragraph" } ], build(statement_blocks: [ { "type" => "paragraph" } ]).statement_blocks
+        assert build(statement_blocks: [ { "type" => "inconnu" } ]).valid?
+      end
     end
   end
 end

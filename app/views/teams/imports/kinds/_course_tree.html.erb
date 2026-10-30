@@ -1,18 +1,19 @@
 <%# 🌐 UI · teams/imports/kinds/_course_tree — aide de l'import des cours complets, dans la modale de téléversement %>
-<%# Rôle : clés acceptées à chaque étage de l'arbre, exemple minimal, noms de niveaux, séries et matières acceptés %>
-<%# ADR  : 0035, 0039, 0091, 0068, 0113 · UDR : 0038, 0055 %>
+<%# Rôle : format 3, clés acceptées à chaque étage de l'arbre, exemple minimal, noms de niveaux, séries et matières acceptés %>
+<%# ADR  : 0035, 0039, 0091, 0068, 0113, 0116 · UDR : 0038, 0055 %>
 <% referential = Queries::Catalog::ReferentialOptionsQuery.new.call %>
 <% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
-<% tree = { "course" => UseCases::Catalog::ImportCourseTree::COURSE_ALIASES.merge(own.("content", "level_name", "series_name", "material_name", "essentials", "exercises")),
-            "essential" => own.("name", "subtitle", "content", "exercises"),
-            "exercise" => own.("title", "statement", "exercise_type", "questions"),
+<% tree = { "course" => own.("name", "subtitle", "level_name", "series_name", "material_name", "theme", "figures", "notions", "exercises"),
+            "figure" => own.("key", "kind", "description", "params", "controls"),
+            "notion" => own.("name", "remember", "method", "example", "pitfall", "figure", "exercise"),
+            "exercise" => own.("title", "statement", "exercise_type", "figure", "questions"),
             "question" => own.("content", "question_type", "explanation", "tolerance", "answers"),
             "answer" => { "content" => %w[content], "correct" => %w[correct is_correct], "match" => %w[match] } } %>
 <section id="import-help-course_tree" aria-labelledby="import-help-course_tree-title" class="space-y-4 rounded-ln bg-mist p-4 text-sm">
   <h3 id="import-help-course_tree-title" class="font-medium text-ink"><%= t(".title") %></h3>
   <p class="text-mute"><%= t(".intro_html") %></p>
   <p id="import-help-exercise-rule" class="text-mute"><%= t(".exercise_rule") %></p>
-  <p id="import-help-legacy-version" class="text-mute"><%= t(".legacy_version") %></p>
+  <p id="import-help-retired-version" class="text-mute"><%= t(".legacy_version") %></p>
   <p id="import-help-multiple" class="text-mute"><%= t(".multiple", files: Entities::Catalog::ImportKind.fetch("course_tree").max_files) %></p>
 
   <div id="import-help-keys" class="space-y-2">
@@ -37,39 +38,49 @@
     <h4 class="font-medium text-ink"><%= t(".example") %></h4>
     <pre class="overflow-x-auto rounded-ln border border-line bg-white p-3 font-mono text-xs text-ink"><code>{
   "format": "lnclass.course-tree",
-  "version": 2,
+  "version": 3,
   "courses": [
-    { "name": "Génétique et Évolution",
-      "level_name": "Tle", "series_name": "D",
-      "material_name": "SVT",
-      "essentials": [
-        { "name": "Brassage génétique par la méiose",
-          "exercises": [
-            { "title": "Crossing-over",
-              "statement": "Lors de la prophase I, les chromosomes homologues s'apparient. Répondez aux questions sur le crossing-over.",
-              "exercise_type": "fixation",
-              "questions": [
-                { "content": "Le crossing-over a lieu en prophase I.",
-                  "question_type": "true_false",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ] }
-              ] }
-          ] }
+    { "name": "Racines carrées",
+      "level_name": "3ème", "material_name": "Mathématiques",
+      "theme": "blue",
+      "figures": [
+        { "key": "triangle", "kind": "geometry",
+          "description": "Un triangle ABC rectangle en A, avec un point D mobile sur le côté AB ... (150 à 600 caractères)",
+          "params": { "points": [ { "id": "A", "x": 0, "y": 0 } ], "segments": [ [ "A", "B" ] ] },
+          "controls": [] }
+      ],
+      "notions": [
+        { "name": "Simplifier une racine carrée",
+          "remember": "Pour a ≥ 0 et b ≥ 0 : $\\sqrt{a \\times b} = \\sqrt{a} \\times \\sqrt{b}$.",
+          "method": [ "Décomposer le nombre.", "Séparer la racine.", "Calculer la racine du carré parfait." ],
+          "example": { "statement": "Simplifier $\\sqrt{72}$.",
+                       "steps": [ "$72 = 36 \\times 2$.", "$\\sqrt{72} = \\sqrt{36} \\times \\sqrt{2}$.", "$\\sqrt{72} = 6\\sqrt{2}$." ] },
+          "pitfall": "$\\sqrt{a + b} \\neq \\sqrt{a} + \\sqrt{b}$.",
+          "figure": "triangle",
+          "exercise": {
+            "title": "Simplifier des racines",
+            "statement": "Réponds aux questions suivantes.",
+            "exercise_type": "fixation",
+            "questions": [
+              { "content": "$\\sqrt{50} = 5\\sqrt{2}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 : $50 = 25 \\times 2$ ; étape 3 : $\\sqrt{25} = 5$.",
+                "answers": [
+                  { "content": "Vrai", "correct": true },
+                  { "content": "Faux", "correct": false }
+                ] }
+              // quatre autres questions au moins
+            ] } }
       ],
       "exercises": [
-        { "title": "Bilan de la méiose",
-          "statement": "Un problème qui mobilise toute la leçon.",
-          "exercise_type": "evaluation",
-          "questions": [ ... ] }
-        // trois autres exercices de toute la leçon
+        { "title": "Problème 1", "statement": "...", "exercise_type": "evaluation", "questions": [ ... ] }
+        // trois autres problèmes pour toute la leçon
       ] }
   ]
 }</code></pre>
     <p class="text-mute"><%= t(".example_hint") %></p>
   </div>
-  <%= render "teams/imports/question_examples" %>
+  <%= render "teams/imports/question_examples", extended: true %>
 
   <div class="flex items-start gap-2 text-ink">
     <%= ui_icon "information-circle", variant: :mini, size: :sm, class: "mt-0.5 shrink-0 text-brand" %>

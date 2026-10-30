@@ -39,17 +39,10 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
     document
   end
 
-  # The legacy sample cut down to one course, one essential, one exercise of two true/false questions.
+  # A lesson in format 3: one notion (its sheet and its exercise), four problems for the whole lesson.
   def legacy_course_tree
-    document = import_sample("course_tree_tle_d_sample")
-    course = document["courses"].first
-    essential = course["essentials"].first
-    exercise = essential["exercises"].first
-    exercise["questions"] = exercise["questions"].first(2)
-    essential["exercises"] = [ exercise ]
-    course["essentials"] = [ essential ]
-    document["courses"] = [ course ]
-    document
+    revision_sheet_document("name" => COURSE, "level_name" => "Tle", "series_name" => "D", "material_name" => "SVT", "figures" => [],
+                            "notions" => [ revision_notion(ESSENTIAL) ])
   end
 
   # UDR-0068 : la barre latérale de l'équipe porte deux cartes de navigation ; Imports est dans « Configuration ».
@@ -116,8 +109,7 @@ class ImportsEndToEndTest < ApplicationSystemTestCase
         assert_text "Terminé"
         assert_counters(imported: 1, skipped: 0, errors: 0, total: 1)
         assert_text "Fiches de révision créées : 1"
-        assert_text "Exercices créés : 0"
-        assert_text "Exercices ignorés (format v1) : 1"
+        assert_text "Exercices créés : 5"
       end
       close_tracking
     end

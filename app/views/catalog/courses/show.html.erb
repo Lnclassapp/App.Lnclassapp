@@ -25,6 +25,9 @@
   <% end %>
 </div>
 
+<%# UDR parcours matière → exercice §3 : l'élève voit d'abord où cliquer ; la fiche de révision garde sa place. %>
+<%= render "catalog/courses/next_exercise", next_exercise: @next_exercise, scope: :lesson, id: "lesson_next_exercise" %>
+
 <div class="space-y-10">
   <section id="fiche-de-revision" aria-labelledby="revision_title">
     <h2 id="revision_title" class="mb-4 font-display text-xl font-medium"><%= t(".revision_title") %></h2>

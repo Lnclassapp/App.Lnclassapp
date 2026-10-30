@@ -103,7 +103,9 @@ class Classroom::AssignmentFollowUpsControllerTest < ActionDispatch::Integration
   test "the meta line says « Maths », never « Math », and the question count; one question reads in the singular" do
     maths = create_material(name: "Mathématiques", category: "science", shortname: "Maths")
     exercise = create_exercise(essential: create_essential(course: create_course(material: maths)), questions: 1)
-    assignment = create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, due_on: Date.new(2026, 10, 30))
+    assignment = travel_to(Time.zone.local(2026, 10, 26, 9)) do
+      create_assignment(classroom: @classroom, assignable: exercise, by: @teacher, due_on: Date.new(2026, 10, 30))
+    end
     sign_in_as @teacher
 
     get follow_up_path(assignment)

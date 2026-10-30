@@ -6,9 +6,12 @@ fr:
     session_results:
       show:
         page_title: "Résultat de %{title}"
+        # UDR-0140 : l'appréciation d'un professeur, sur la note sur 20 affichée (Appreciation).
         headline:
-          success: "Félicitations !"
-          error: "Courage !"
+          very_good: "Très bien"
+          good: "Bien"
+          fair: "Assez bien"
+          needs_work: "À retravailler"
         cheers:
           success:
             - "Hum ! Regarde comment ton ❤️ bat. C'est magnifique !"
@@ -39,15 +42,35 @@ fr:
         correct_value: "%{count} sur %{total}"
         restart: "Recommencer"
         review_title: "Correction question par question"
-        review_hint_student: "Pour chaque question : ton choix, le verdict et l'explication."
+        review_hint_student: "Pour chaque question : ta réponse, la bonne réponse et l'explication."
         review_hint_reveal: "Les propositions correctes sont marquées, comme les choix de l'élève."
+        # Points (UDR-0140 §3) : seulement quand l'exercice n'est pas tout à 1 point, ou qu'il a des réponses rédigées.
+        points_graded:
+          one: "%{points} point sur %{total} corrigés automatiquement"
+          other: "%{points} points sur %{total} corrigés automatiquement"
+        points_manual:
+          one: "%{points} point à comparer au corrigé"
+          other: "%{points} points à comparer au corrigé"
+        # « À revoir » (CA-09, CA-10) ; %{questions} : « question 2 » ou « questions 2 et 4 », chaque numéro est un lien.
+        to_review_essential_html: "À revoir : « %{essential} », %{questions}"
+        to_review_lesson_html: "À revoir dans la leçon : %{questions}"
+        review_questions_html:
+          one: "question %{numbers}"
+          other: "questions %{numbers}"
+        whole_lesson: "Toute la leçon"
+        restart_pause: "Tu pourras recommencer à %{time}."
       question_review:
         number: "Question %{number}"
         verdict:
           success: "Bonne réponse"
           error: "Mauvaise réponse"
           none: "Sans réponse"
-        selected: "Ton choix"
+        selected: "Ta réponse"
+        right_answer: "Bonne réponse"
+        compare: "À comparer au corrigé"
+        nothing_written: "Tu n'as rien écrit."
+        model_answer: "Corrigé"
+        criteria: "Grille de vérification"
         accepted: "Réponses acceptées"
         expected: "Valeur attendue"
         right_order: "Bon ordre"

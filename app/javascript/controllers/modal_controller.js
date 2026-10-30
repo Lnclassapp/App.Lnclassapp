@@ -12,6 +12,8 @@ export default class extends Controller {
   connect() {
     this.openObserver = new MutationObserver(() => this.syncOpen())
     this.openObserver.observe(this.dialogTarget, { attributes: true, attributeFilter: ["open"] })
+    // Un contrôleur reconnecté par un morphing Turbo trouve sa boîte dans la couche supérieure sans `open` : il la referme.
+    this.syncOpen()
     if (this.openValue) this.open()
     this.element.addEventListener("turbo:submit-end", this.markStale)
   }

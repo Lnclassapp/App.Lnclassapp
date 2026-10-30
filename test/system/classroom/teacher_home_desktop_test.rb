@@ -68,4 +68,40 @@ class Classroom::TeacherHomeDesktopTest < ApplicationSystemTestCase
     assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                  page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
   end
+
+  # Chantier carrousel-classes-enseignant: with a mouse the track neither scrolls on the wheel nor shows a scrollbar, so the
+  # carousel needs « Classes précédentes » and « Classes suivantes », disabled (but announced) at each end; none on a phone.
+  test "1280 px: « Classes suivantes » then « Classes précédentes » bring the carousel back to the start; no button at 390 px" do
+    school = create_school(sigle: "LCA")
+    level = create_level(name: "Tle", position: 9)
+    classrooms = %w[A B C D E].map { create_classroom(school:, level:, name: "Classe #{it}") }
+    sign_in_as create_teacher(school:, material: create_material(name: "SVT", category: "science"), classrooms:)
+
+    visit teacher_home_path
+
+    scroll_left = -> { page.evaluate_script("document.querySelector('#teacher_home_classrooms ul').scrollLeft") }
+    previous = find("#teacher_home_classrooms button", text: "Classes précédentes")
+    following = find("#teacher_home_classrooms button", text: "Classes suivantes")
+    assert_equal "true", previous["aria-disabled"], "« précédentes » est actif au début"
+    assert_equal "false", following["aria-disabled"]
+    assert_equal "teacher_home_classrooms_track", previous["aria-controls"]
+
+    previous.click
+    assert_equal 0, scroll_left.call, "« précédentes » défile alors qu'on est au début"
+
+    6.times { following["aria-disabled"] == "true" ? break : (following.send_keys(:enter); sleep 0.4) }
+    assert_selector "#teacher_home_classrooms button[aria-disabled='true']", text: "Classes suivantes"
+    assert_operator scroll_left.call, :>, 0
+    assert_equal "false", previous["aria-disabled"]
+    assert_equal following, page.active_element, "le focus quitte « suivantes » au bout"
+
+    6.times { previous["aria-disabled"] == "true" ? break : (previous.send_keys(:enter); sleep 0.4) }
+    assert_selector "#teacher_home_classrooms button[aria-disabled='true']", text: "Classes précédentes"
+    assert_equal 0, scroll_left.call, "le carrousel ne revient pas au début"
+    assert_equal "false", following["aria-disabled"]
+
+    page.current_window.resize_to(390, 844)
+    assert_no_selector "#teacher_home_classrooms button", text: /Classes (précédentes|suivantes)/, visible: :visible
+    assert_selector "#teacher_home_classrooms [data-communication--carousel-target='dot']", visible: :visible
+  end
 end

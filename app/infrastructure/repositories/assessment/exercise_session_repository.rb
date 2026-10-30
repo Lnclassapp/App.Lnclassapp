@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseSessionRepository
 # Rôle : sessions d'exercice et tentatives immuables ; compteurs tenus en SQL, une seule session ouverte par exercice
-# ADR  : 0033, 0043, 0054, 0091, 0112
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115
 module Repositories
   module Assessment
     class ExerciseSessionRepository
@@ -28,6 +28,8 @@ module Repositories
       end
 
       # L'index partiel refuse une seconde session ouverte : on renvoie celle qui existe.
+      # Si la violation vient d'ailleurs (public_id déjà pris) ou si la session concurrente n'est plus ouverte, il n'y a rien à
+      # renvoyer : l'exception d'origine remonte (500 gérée) plutôt qu'un nil que l'appelant prendrait pour une session.
       def start(session:)
         record = Orm::ExerciseSession.new(
           public_id: session.public_id, student_id: session.student_id, exercise_id: session.exercise_id, status: "started",
@@ -38,7 +40,7 @@ module Repositories
         Orm::ExerciseSession.transaction(requires_new: true) { record.save! }
         map_to_entity(record)
       rescue ActiveRecord::RecordNotUnique
-        started_for(student_id: session.student_id, exercise_id: session.exercise_id)
+        started_for(student_id: session.student_id, exercise_id: session.exercise_id) || raise
       end
 
       def abandon(id:, at:)
@@ -82,6 +84,22 @@ module Repositories
                                                     selected_answer_ids: record.selected_answer_ids, correct: record.correct,
                                                     answered_at: record.answered_at, response_text: record.response_text)
         end
+      end
+
+      def recent_completions(student_id:, exercise_id:)
+        Orm::ExerciseSession.where(student_id:, exercise_id:, status: "completed").where.not(completed_at: nil)
+                            .order(completed_at: :desc).limit(Entities::Assessment::RestartPause::STREAK).pluck(:completed_at)
+      end
+
+      # Une seule requête : ROW_NUMBER() par exercice, on garde les `limit` premières fins.
+      def recent_completions_by_exercise(student_id:, exercise_ids:, limit: Entities::Assessment::RestartPause::STREAK)
+        return {} if exercise_ids.empty?
+
+        ranked = Orm::ExerciseSession.where(student_id:, exercise_id: exercise_ids, status: "completed").where.not(completed_at: nil)
+                                     .select("exercise_id, completed_at, ROW_NUMBER() OVER (PARTITION BY exercise_id ORDER BY completed_at DESC) AS rank")
+        Orm::ExerciseSession.unscoped.from(ranked, :ranked).where("ranked.rank <= ?", limit)
+                            .order("ranked.exercise_id", "ranked.completed_at DESC").pluck("ranked.exercise_id", "ranked.completed_at")
+                            .group_by(&:first).transform_values { |rows| rows.map(&:last) }
       end
 
       def complete(id:, score_percent:, at:)

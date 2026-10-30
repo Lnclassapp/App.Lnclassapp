@@ -180,7 +180,8 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#assigned_exercises h2", text: I18n.t("#{scope}.assigned_exercises.title")
     assert_select "#assignment_#{assignment.public_id}" do
       assert_select "a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']", text: "La méiose"
-      assert_select "span", text: "SVT"
+      assert_select "p", text: "SVT · Fixation"
+      assert_select "span[aria-hidden=true]", text: "Voir le suivi"
       assert_select "span", text: "Pour jeu. 8 oct."
       assert_select "span", text: "7 en retard"
     end
@@ -253,7 +254,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   test "sans les comptes (hors FollowAssignmentPolicy), la ligne n'a ni barre, ni « faits », ni lien vers le suivi" do
     row = Queries::Classroom::ClassroomOverviewQuery::AssignmentRow.new(
       public_id: "a1", exercise_title: "La méiose", material_name: "SVT", material_category: "science", due_on: nil,
-      counts: nil, comprehension: nil
+      counts: nil, comprehension: nil, exercise_type: "fixation", material_slug: "svt"
     )
 
     html = ApplicationController.render(partial: "classroom/classrooms/assigned_exercises",
@@ -296,6 +297,19 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
 
     assert_select "#assigned_exercises_empty", text: /#{I18n.t("#{scope}.assigned_exercises.empty_title")}/
     assert_select "#assigned_exercises_empty", text: /#{I18n.t("#{scope}.assigned_exercises.empty_description")}/
+    assert_select "#assigned_exercises_empty", text: /dans « Cours »/
+    assert_no_match(/ci-dessous/, response.body)
+    assert_select "#assigned_exercises_empty a[href='#{courses_path}']", text: /Voir les cours/, count: 1
+  end
+
+  # Seul l'enseignant assigne : l'équipe voit la page, pas le bouton.
+  test "aucun exercice assigné : l'équipe voit le texte sans le bouton « Voir les cours »" do
+    sign_in_as create_team_member
+
+    get classroom_path(@classroom.public_id)
+
+    assert_select "#assigned_exercises_empty", text: /dans « Cours »/
+    assert_select "#assigned_exercises_empty a", count: 0
   end
 
   # UDR enseignant sans répétition : les cours s'ouvrent depuis les niveaux de l'accueil et l'onglet Cours, plus depuis la classe.
@@ -580,7 +594,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   # CA-I2 (UDR enseignant §3.2, §3.5) : « Tous · Bronze · Argent · Or · Diamant · Pas encore », paramètre `badge=`.
   def roster_students(selector = "#classroom_roster_list li[id^=student_]") = css_select(selector).map { it["id"] }
 
-  test "CA-I2 : la ligne d'un élève dit « 2 faits sur 3 », son retard et son badge « Or · 17/20 » ; sans exercice fait, « Pas encore »" do
+  test "CA-I2 : la ligne d'un élève dit « 2 faits sur 3 », son retard et son badge « Moyenne 17/20 · Or » ; sous le seuil « Moyenne x/20 · Pas encore » ; sans exercice fait, « Pas encore »" do
     due = Date.new(2026, 10, 8)
     exercises = Array.new(3) do |index|
       travel_to(Time.zone.local(2026, 10, 5, 9)) do
@@ -591,13 +605,16 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     waiting = create_student(classroom: @classroom, first_name: "Yann", last_name: "Gbagbo")
     hand_in(exercises[0], 90, student: gold, completed_at: Time.zone.local(2026, 10, 7, 10))
     hand_in(exercises[1], 80, student: gold, completed_at: Time.zone.local(2026, 10, 9, 10))
+    below = create_student(classroom: @classroom, first_name: "Paul", last_name: "Zadi")
+    hand_in(exercises[0], 30, student: below, completed_at: Time.zone.local(2026, 10, 7, 10))
     sign_in_as @teacher
 
     get classroom_path(@classroom.public_id)
 
     assert_select "#progress_#{gold.public_id}", text: "2 faits sur 3 · 1 en retard"
     assert_select "#progress_#{gold.public_id} .text-warning", text: /1 en retard/
-    assert_select "#badge_#{gold.public_id}", text: "Or · 17/20"
+    assert_select "#badge_#{gold.public_id}", text: "Moyenne 17/20 · Or"
+    assert_select "#badge_#{below.public_id}.text-mute", text: /\AMoyenne \d+\/20 · Pas encore\z/
     # Sans rien de fait, les trois exercices échus sont en retard.
     assert_select "#progress_#{waiting.public_id}", text: "0 fait sur 3 · 3 en retard"
     assert_select "#badge_#{waiting.public_id}.text-mute", text: "Pas encore"

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::SessionResultsController
 # Rôle : résultat d'une session terminée, pour l'élève propriétaire, l'enseignant d'une de ses classes actives et l'équipe
-# ADR  : 0026, 0028, 0033, 0054, 0094 · UDR : 0007, 0023 · lecture seule, aucun stream
+# ADR  : 0026, 0028, 0033, 0054, 0094, 0115 · UDR : 0007, 0023, 0140 · lecture seule, aucun stream
 module Assessment
   class SessionResultsController < AuthenticatedController
     include ReadsOwnLevel
@@ -24,11 +24,21 @@ module Assessment
       return redirect_to exercise_session_path(session.public_id) unless session.completed?
 
       exercise = Repositories::Assessment::ExerciseRepository.new.find(id: session.exercise_id)
-      # Décision du porteur (881a623) : l'élève ne reçoit jamais les propositions correctes, la query ne les lit pas.
-      @reveal = Policies::Assessment::RevealAnswersPolicy.new.call(actor: current_actor, exercise:).success?
+      # ADR-0115 (amende la décision du porteur 881a623) : l'élève lit la correction de sa copie vérifiée, jamais avant ;
+      # sans accord de la policy, la query ne lit ni bonnes réponses ni corrigés types.
+      @reveal = Policies::Assessment::RevealCorrectionPolicy.new.call(actor: current_actor, exercise:, session:).success?
       @result = query.call(public_id: session.public_id, reveal: @reveal)
       @owner = session.student_id == current_actor.user_id
-      @can_restart = Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
+      @resume_at = restart_resume_at(session) if @owner
+      @can_restart = @resume_at.nil? && Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
+    end
+
+    # L'heure de reprise si l'élève est en pause sur cet exercice (RestartPause), nil sinon. Le refus d'une nouvelle copie
+    # est celui de StartExerciseSession ; ici, on ne fait que le dire.
+    def restart_resume_at(session)
+      completions = Repositories::Assessment::ExerciseSessionRepository.new
+                                                                       .recent_completions(student_id: session.student_id, exercise_id: session.exercise_id)
+      Entities::Assessment::RestartPause.resume_at(completions:, now: Time.current)
     end
 
     def teaches?(session)

@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | livré le 2026-10-28 (dans `Develop`), clos ; reste la relecture du contenu de Lentilles |
+| **Statut** | livré le 2026-10-28 (dans `Develop`), clos ; retiré le 2026-10-29 par `refonte-contenus-maths` (Lot R, #362) |
 | **Ouvert le** | 2026-10-12 |
 | **Revu le** | 2026-10-13 (grill repris avec l'algorithme en 5 étapes : questionner, supprimer, simplifier, accélérer, automatiser) ; 2026-10-27 (périmètre élargi aux maquettes à l'identique, voir ci-dessous) |
 | **Pilote** | Touré (`toure-bangaly`), avec l'accord du porteur |

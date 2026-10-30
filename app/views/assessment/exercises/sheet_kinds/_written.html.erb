@@ -1,0 +1,13 @@
+<%# 🌐 UI · assessment/exercises/sheet_kinds/_written — réponse rédigée sur la feuille : des lignes à remplir, le début de phrase ; avec reveal, la grille %>
+<%# Rôle : le corrigé type est l'explication, montrée sous la question pour qui a reveal ; jamais de champ ni de case à cocher ici %>
+<%# ADR  : 0115 · UDR : 0138 §3.1, 0140 §3 %>
+<%# locals: (question:, reveal:) -%>
+<p class="text-ink"><%= question.starter.presence || "……………………………" %></p>
+<% if reveal && question.criteria.any? %>
+  <div class="mt-3">
+    <p class="text-sm font-medium text-ink"><%= t("assessment.session_results.question_review.criteria") %></p>
+    <ul class="mt-1 list-inside list-disc space-y-0.5 text-sm text-ink">
+      <% question.criteria.each do |criterion| %><li><%= criterion %></li><% end %>
+    </ul>
+  </div>
+<% end %>

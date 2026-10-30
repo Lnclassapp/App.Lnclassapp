@@ -12,7 +12,7 @@ problematique: L'élève répond une question à la fois sans voir de sujet ; un
 | **Date** | 2026-10-28 |
 | **Chantier** | `docs/chantiers/refonte-page-lecon` |
 | **ADR lié** | ADR-0112, ADR-0113 |
-| **Remplacé par** | — |
+| **Remplacé par** | UDR-0140 sur le nom du bouton et le titre de la confirmation (« Vérifier ma copie », « Vérifier ta copie ? ») |
 
 Remplace l'UDR-0087 §3.1 (page de l'exercice), §3.2 (mode concentré), §3.3 (quitter la séance) et §3.5 (retour après « Valider »). Garde l'UDR-0087 §3.4 (saisie par type), §3.6 (résultat, aux changements du §3.4 ci-dessous près) et §3.8 (tokens).
 

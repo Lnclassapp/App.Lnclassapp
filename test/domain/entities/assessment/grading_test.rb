@@ -60,6 +60,42 @@ module Entities
         assert_equal 0, Grading.score_percent(correct: 0, total: 0)
       end
 
+      def points(*pairs) = pairs.map { |value, correct| [ BigDecimal(value.to_s), correct ] }
+
+      # CA-14 : 1 + 2 + 3 points, justes aux questions de 1 et 3 points : 4 sur 6, soit 66 %, soit 13/20.
+      test "points_percent : les points des questions justes sur ceux des questions corrigées, arrondi vers le bas" do
+        score = Grading.points_percent(points([ 1, true ], [ 2, false ], [ 3, true ]))
+
+        assert_equal [ 66, 13 ], [ score, Grading.grade_on_20(score) ]
+        assert_equal 100, Grading.points_percent(points([ 1.5, true ], [ 0.5, true ]))
+        assert_equal 0, Grading.points_percent(points([ 2, false ], [ 0.5, false ]))
+        assert_equal 25, Grading.points_percent(points([ 0.5, true ], [ 1.5, false ]))
+      end
+
+      # CA-15 : 8 points justes sur 11 corrigés automatiquement ; la réponse rédigée de 4 points n'entre pas dans la liste.
+      test "points_percent : 8 points sur 11 donnent 72 et 14/20" do
+        score = Grading.points_percent(points([ 3, true ], [ 5, true ], [ 3, false ]))
+
+        assert_equal [ 72, 14 ], [ score, Grading.grade_on_20(score) ]
+      end
+
+      test "points_percent : sans question corrigée automatiquement, le score est 0, jamais une division par zéro" do
+        assert_equal 0, Grading.points_percent([])
+      end
+
+      # CA-16 : un exercice existant, toutes ses questions à 1 point, garde exactement sa note.
+      test "points_percent à 1 point la question égale l'ancien score, pour 1 à 30 questions" do
+        (1..30).each do |total|
+          (0..total).each do |correct|
+            graded = Array.new(total) { |index| [ BigDecimal("1"), index < correct ] }
+
+            assert_equal Grading.score_percent(correct:, total:), Grading.points_percent(graded), "#{correct}/#{total}"
+          end
+        end
+        assert_equal 70, Grading.points_percent(Array.new(10) { |index| [ BigDecimal("1"), index < 7 ] })
+        assert_equal 14, Grading.grade_on_20(70)
+      end
+
       test "note sur 20 et maîtrise, lues sur la note affichée" do
         assert_equal 14, Grading.grade_on_20(70)
         assert_equal 13, Grading.grade_on_20(66)

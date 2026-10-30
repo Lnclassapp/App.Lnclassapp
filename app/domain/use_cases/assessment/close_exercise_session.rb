@@ -1,14 +1,15 @@
 # 🧠 DOMAINE · UseCases::Assessment::CloseExerciseSession
 # Rôle : seul point qui termine une session : score recalculé des tentatives, badge monté, lacune ouverte ou résolue
-# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune)
+# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune), 0115 (score en points)
 module UseCases
   module Assessment
     class CloseExerciseSession
       # badge_level : palier atteint par cette session (nil sous le seuil) ; earned_now : le badge de l'élève vient de monter.
       Row = Data.define(:score_percent, :badge_level, :earned_now)
 
-      def initialize(sessions:, badges:, gaps:, policy:, transaction:, clock:)
+      def initialize(sessions:, exercises:, badges:, gaps:, policy:, transaction:, clock:)
         @sessions = sessions
+        @exercises = exercises
         @badges = badges
         @gaps = gaps
         @policy = policy
@@ -29,13 +30,20 @@ module UseCases
       private
 
       def close(session, essential_id, now)
-        correct = @sessions.attempts(session_id: session.id).count(&:correct)
-        score_percent = Entities::Assessment::Grading.score_percent(correct:, total: session.question_count)
+        score_percent = Entities::Assessment::Grading.points_percent(graded(session))
         @sessions.complete(id: session.id, score_percent:, at: now)
         badge_level = Entities::Assessment::Grading.badge_for(score_percent)
         earned_now = award(session, badge_level, now)
         settle_gap(session, essential_id, score_percent, now)
         Row.new(score_percent:, badge_level:, earned_now:)
+      end
+
+      # [[points, juste]] des seules questions corrigées automatiquement de l'exercice : une réponse rédigée ou un cahier ne compte
+      # jamais, une question sans tentative est fausse, une tentative d'une autre question est ignorée (menace I11).
+      def graded(session)
+        attempts = @sessions.attempts(session_id: session.id).to_h { [ it.question_id, it ] }
+        @exercises.find(id: session.exercise_id).questions.select(&:auto_graded?)
+                  .map { |question| [ question.points, attempts[question.id]&.correct == true ] }
       end
 
       # Un badge ne monte que vers un palier strictement supérieur (ADR-0033).

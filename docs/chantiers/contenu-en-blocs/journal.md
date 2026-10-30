@@ -120,12 +120,12 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| Relecture du contenu de Lentilles (leçon et fiche) par le porteur ou Touré | Relue par l'agent seul | À faire avant la sortie vers `main` |
+| Relecture du contenu de Lentilles (leçon et fiche) par le porteur ou Touré | Relue par l'agent seul | Sans objet : fiche retirée le 2026-10-29 (#362) |
 | Écarts du Lot F avec la maquette (pastilles, colonnes, exercices à réponse libre, invite de rédaction) | Le contrat gelé du Lot 0 ne les porte pas ; acceptés par le porteur le 2026-10-28 | Une version 2 du format si une autre fiche en a besoin |
 | Conversion des 213 leçons au format des fiches | Hors périmètre (memo) | Chantier de contenu à ouvrir par le porteur |
 | Remplacement d'une fiche déjà en ligne, « Signaler une erreur », éditeur de fiches, serveur MCP | Hors périmètre (memo) | Chantiers à part |
-| Anomalies A, B et C du challenger (état des exercices au retour arrière, coupe « Voir plus », message de l'exercice vide) | Relevées à la clôture ; B tient à la coupe de `refonte-page-lecon` | À trancher par le porteur |
-| En-tête de Thalès sur une base déjà semée (anomalie D) | Le remplacement d'une fiche est hors périmètre | Ré-import à la main, ou le chantier du remplacement |
+| Anomalies A, B et C du challenger (état des exercices au retour arrière, coupe « Voir plus », message de l'exercice vide) | Relevées à la clôture ; B tient à la coupe de `refonte-page-lecon` | A et C : sans objet (blocs retirés, #362) ; B : ticket de suivi |
+| En-tête de Thalès sur une base déjà semée (anomalie D) | Le remplacement d'une fiche est hors périmètre | Sans objet : table et graines retirées (#362) |
 | Budget système de 22 s pour les deux fiches | Dérogation de l'ADR-0069 (2026-10-28) | Toute nouvelle fiche refait le compte |
 
 ## Clôture
@@ -137,4 +137,5 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **ADR produits** | ADR-0110 (fiche en données importées) ; amendement de l'ADR-0069 du 2026-10-28 (22 s) |
 | **UDR produits** | UDR-0137 (fiche à l'identique des maquettes) ; nom à l'écran tranché par l'UDR-0139 (`refonte-page-lecon`) |
 | **Challenger** | voir « Challenger empirique » ci-dessus |
-| **Reste** | Relecture de Lentilles ; train `Develop` → `Staging` → `main` |
+| **Retrait** | Le 2026-10-29, `refonte-contenus-maths` (Lot R, CA-17, #362) retire le format `lnclass.course-sheet`, la table `course_sheets`, les kinds et les trois fiches semées ; il garde l'habillage cahier (`course_sheet.css`, polices, Seyès, thèmes) pour la fiche v3. L'en-tête « Fiche de révision » de cette clôture n'a donc plus de fichier où vivre. |
+| **Suivi** | Anomalies A, C et D du challenger et relecture de Lentilles : sans objet, le code et les fiches sont retirés. Anomalie B (coupe « Voir plus ») : à revérifier sur la fiche v3, voir le ticket de suivi. |

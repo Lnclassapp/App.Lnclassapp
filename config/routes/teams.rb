@@ -69,15 +69,16 @@ scope "teams/blog", as: :teams do
   end
 end
 
-# ADR-0105 §4.7, UDR-0129 §3.0 : envoi d'une image de fiche (paramètre essential : slug, absent à la création) ou de question.
+# ADR-0105 §4.7, UDR-0129 §3.0 : envoi d'une image de question (les images de notions sont retirées, ADR-0116 §4.5).
 scope "teams", as: :teams do
-  post "essential-images", to: "teams/essential_images#create", as: :essential_images
   post "question-images", to: "teams/question_images#create", as: :question_images
 end
 
 namespace :teams do
   resources :courses, only: %i[new create edit update], param: :slug do
     member { patch :publish; patch :archive; patch :publish_all, path: "publish-all" }
+    # UDR-0141 §3.5 : le corrigé de l'équipe (Teams::AnswerKeysController, Lot C) ; route teams_course answer_key.
+    get "answer-key", to: "answer_keys#show", as: :answer_key, on: :member
   end
   # ADR-0113 §4.6 : ni création ni édition d'une notion ou d'un exercice à l'écran ; la leçon se réimporte. Restent les transitions.
   resources :essentials, only: [], param: :slug do

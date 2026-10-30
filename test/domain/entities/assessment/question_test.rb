@@ -48,14 +48,17 @@ module Entities
         assert_equal [ 1, 2 ], copy.answer_ids
       end
 
-      # ADR-0091 §4.3 : huit types ; les quatre de toujours passent par Choice sans changer de comportement.
-      test "huit types, chacun délégué à sa classe de règles" do
-        assert_equal %w[true_false single_choice multiple_correct_2 multiple_correct_3 fill_blank numeric ordering matching],
+      # ADR-0091 §4.3 puis ADR-0115 : onze types ; les quatre de toujours passent par Choice sans changer de comportement.
+      test "onze types, chacun délégué à sa classe de règles" do
+        assert_equal %w[true_false single_choice multiple_correct_2 multiple_correct_3 fill_blank numeric ordering matching
+                        select written notebook],
                      Question::TYPES
         assert_equal [ QuestionKinds::Choice ], Question::TYPES.first(4).map { Question.kind_for(it) }.uniq
-        assert_equal [ QuestionKinds::FillBlank, QuestionKinds::Numeric, QuestionKinds::Ordering, QuestionKinds::Matching ],
-                     Question::TYPES.last(4).map { Question.kind_for(it) }
-        assert_equal %w[choice fill_blank numeric ordering matching], Question::TYPES.map { Question.kind_name_for(it) }.uniq
+        assert_equal [ QuestionKinds::FillBlank, QuestionKinds::Numeric, QuestionKinds::Ordering, QuestionKinds::Matching,
+                       QuestionKinds::Select, QuestionKinds::Written, QuestionKinds::Notebook ],
+                     Question::TYPES.last(7).map { Question.kind_for(it) }
+        assert_equal %w[choice fill_blank numeric ordering matching select written notebook],
+                     Question::TYPES.map { Question.kind_name_for(it) }.uniq
         assert_nil Question.kind_for("open")
         assert_nil Question.kind_name_for(nil)
         assert_equal "choice", question(:true_false, true, false).kind_name
@@ -82,6 +85,48 @@ module Entities
         assert_equal [ :image_alt_blank ], base.with(image: image.(" ")).image_errors
         assert_empty base.with(image_description: "Une pile", image: image.("Une pile")).image_errors
         assert_empty base.with(image_description: "Une pile").structure_errors
+      end
+
+      # ADR-0115 §4 : une question se corrige automatiquement si son type le dit.
+      test "auto_graded? : les six types de réponse corrigée le sont, la réponse rédigée et le cahier non" do
+        { "true_false" => true, "single_choice" => true, "multiple_correct_2" => true, "multiple_correct_3" => true,
+          "fill_blank" => true, "numeric" => true, "ordering" => true, "matching" => true, "select" => true,
+          "written" => false, "notebook" => false, "inconnu" => false }.each do |type, graded|
+          assert_equal graded, question(type).auto_graded?, type
+        end
+      end
+
+      # CA-16 : une question existante vaut 1 point, sans unité, sans début de phrase, sans grille.
+      test "points, unité, début de phrase et grille ont des valeurs par défaut qui ne changent rien" do
+        plain = question("single_choice", true, false)
+
+        assert_equal [ BigDecimal("1"), nil, nil, [] ], [ plain.points, plain.unit, plain.starter, plain.criteria ]
+        assert_empty plain.structure_errors
+        assert_equal [ BigDecimal("2.5"), "cm", "Non, car…", [ "Je cite" ] ],
+                     plain.with(points: BigDecimal("2.5"), unit: "cm", starter: "Non, car…", criteria: [ "Je cite" ])
+                          .then { [ it.points, it.unit, it.starter, it.criteria ] }
+      end
+
+      # PRD §3 « Les nouveaux éléments d'une question » : de 0,5 à 20, par demi-point.
+      test "structure : points de 0,5 à 20 par demi-point" do
+        base = question("single_choice", true, false)
+
+        [ "0.5", "1", "1.5", "7", "19.5", "20" ].each { assert_empty base.with(points: BigDecimal(it)).structure_errors, it }
+        [ "0", "0.3", "0.4999", "20.5", "21", "25", "-1", "1.25", "NaN", "Infinity" ].each do
+          assert_equal [ :points_out_of_range ], base.with(points: BigDecimal(it)).structure_errors, it
+        end
+        assert_empty base.with(points: 3).structure_errors
+        assert_equal [ :points_out_of_range ], base.with(points: nil).structure_errors
+      end
+
+      test "structure : l'unité n'appartient qu'à une réponse chiffrée, le début de phrase et la grille qu'à une réponse rédigée" do
+        choice = question("single_choice", true, false)
+
+        assert_equal [ :unit_not_allowed ], choice.with(unit: "cm").structure_errors
+        assert_equal [ :starter_not_allowed ], choice.with(starter: "Non, car…").structure_errors
+        assert_equal [ :criteria_not_allowed ], choice.with(criteria: [ "Critère" ]).structure_errors
+        assert_empty choice.with(unit: " ", starter: "", criteria: []).structure_errors
+        assert_equal [ :unknown_question_type ], Question.structure_errors_for(question_type: "open", answers: [], points: 99)
       end
     end
   end

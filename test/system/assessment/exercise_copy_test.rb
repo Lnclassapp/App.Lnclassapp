@@ -1,7 +1,7 @@
 require "application_system_test_case"
 
 # UDR-0138 : à 390 px, l'élève ouvre la feuille, « Faire l'exercice », répond à 4 questions sur 5, recharge et retrouve ses
-# réponses, « Rendre ma copie », confirme les questions vides, puis lit sa note sur 20 avec la question vide « Sans réponse ».
+# réponses, « Vérifier ma copie », confirme les questions vides, puis lit sa note sur 20 avec la question vide « Sans réponse ».
 class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
   SCOPE = "assessment.exercise_sessions".freeze
 
@@ -46,6 +46,48 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
     assert_equal [ "completed", 2 ], [ session.status, session.correct_count ]
   end
 
+  # CA-01, CA-03, CA-09 (UDR-0140) : le parcours nominal, de la feuille remplie au résultat corrigé.
+  test "l'élève vérifie sa copie, confirme, puis lit l'appréciation, ce qu'il doit revoir et une bonne réponse" do
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    visit exercise_session_path(session.public_id)
+    @questions.first(4).each_with_index { |question, index| answer(question, index != 3) }
+
+    click_on "Vérifier ma copie"
+    within("dialog#copy-confirm[open]") do
+      assert_text "Vérifier ta copie ?"
+      click_on "Vérifier quand même"
+    end
+
+    assert_selector "#session_grade"
+    assert_selector "h1", text: I18n.t("assessment.session_results.show.headline.good")
+    assert_selector "#session_to_review", text: /À revoir.*questions 4 et 5/
+    click_on I18n.t("components.reveal.more")
+    assert_selector "#question_review_#{@questions.first.id} [data-correct]", text: right(@questions.first).content
+  end
+
+  # Régression : un 422 venu de la confirmation re-rend la page par morphing ; la boîte restait modale (page inerte, « 0/5 »).
+  test "copie refusée après la confirmation : la boîte se referme, l'élève corrige et rend, compteur juste" do
+    session = create_exercise_session(student: @student, exercise: @exercise)
+    visit exercise_session_path(session.public_id)
+    @questions.first(4).each_with_index { |question, index| answer(question, index.even?) }
+    page.execute_script("document.querySelector('#question-1 input:checked').value = '99'")
+
+    click_on "Vérifier ma copie"
+    within("dialog#copy-confirm[open]") { click_on "Vérifier quand même" }
+
+    assert_selector "#copy-errors"
+    assert_no_selector "dialog#copy-confirm[open]"
+    assert_not page.evaluate_script("document.querySelector('#copy-confirm').matches(':modal')"),
+               "la confirmation reste dans la couche supérieure : la page est inerte"
+
+    answer(@questions.last, true)
+    assert_selector "#copy-counter", text: "5"
+
+    answer(@questions.first, true)
+    click_on "Vérifier ma copie"
+    assert_selector "#session_grade"
+  end
+
   test "« Continuer ma copie » referme la confirmation et ne rend rien ; Échap fait de même" do
     session = create_exercise_session(student: @student, exercise: @exercise)
     visit exercise_session_path(session.public_id)
@@ -67,7 +109,7 @@ class Assessment::ExerciseCopyTest < ApplicationSystemTestCase
     assert_current_path exercise_session_path(session.public_id)
   end
 
-  test "à 390 px : « Revoir le sujet » mène au sujet, « Rendre ma copie » colle au bas de l'écran, la page ne déborde pas" do
+  test "à 390 px : « Revoir le sujet » mène au sujet, « Vérifier ma copie » colle au bas de l'écran, la page ne déborde pas" do
     session = create_exercise_session(student: @student, exercise: @exercise)
     with_mobile_viewport do
       visit exercise_session_path(session.public_id)

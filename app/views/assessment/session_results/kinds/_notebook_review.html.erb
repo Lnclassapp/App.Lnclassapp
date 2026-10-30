@@ -1,0 +1,9 @@
+<%# 🌐 UI · assessment/session_results/kinds/_notebook_review — le travail sur le cahier, dans la correction %>
+<%# Rôle : le corrigé type, à comparer à son cahier ; rien sans reveal. Jamais noté, jamais « Juste » ni « Faux » %>
+<%# ADR  : 0115 · UDR : 0140 §3 · locals: (question:, reveal:) -%>
+<% if reveal && question.explanation.present? %>
+  <div class="rounded-ln bg-mist px-4 py-3">
+    <p class="text-sm font-medium text-ink"><%= t("assessment.session_results.question_review.model_answer") %></p>
+    <p class="mt-1 text-ink whitespace-pre-line"><%= question.explanation %></p>
+  </div>
+<% end %>
