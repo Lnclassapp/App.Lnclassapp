@@ -2,3 +2,4 @@
 
 - **2026-10-30 · Cadrage** : trouvé en jouant la suite complète sur `Develop` (6670 tests, 1 erreur). Les autres dates fixes de `due_on` dans `test/` sont déjà sous `travel_to`.
 - **2026-10-30 · Lot A** : rouge avant (`CheckViolation`), vert après : `assignment_follow_ups_controller_test.rb` 30/30, rubocop propre.
+- **2026-10-30 · Clôture** : PR #369 fusionnée dans `Develop` (8cbc18f), preuve `bin/ci-quiet` dans la PR. Sur `Develop` fusionné, le fichier : 30/30 vert.

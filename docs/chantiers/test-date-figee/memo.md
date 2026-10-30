@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix (tests) |
-| **Statut** | en cours |
+| **Statut** | livré, clos |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `fix/test-date-figee` |
 | **Programme** | — |
@@ -25,4 +25,4 @@ Créer l'assignation sous `travel_to(Time.zone.local(2026, 10, 26, 9))`, comme `
 ## Portes de sortie
 
 - [x] Le test rouge avant, vert après ; le fichier entier vert
-- [ ] `bin/ci-quiet` vert, ligne de preuve dans la PR
+- [x] `bin/ci-quiet` vert, ligne de preuve dans la PR
