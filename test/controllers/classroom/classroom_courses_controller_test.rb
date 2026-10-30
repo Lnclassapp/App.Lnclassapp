@@ -32,9 +32,11 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1")
     assert_select "#fiche-de-revision h2", text: "Fiche de révision"
     assert_select "#prepare-interros h2", text: "Prépare interros"
-    assert_select "#prepare-interros #notion-#{@meiose.slug} h3", text: "La méiose"
-    assert_select "#prepare-interros #notion-#{@mitose.slug} li[id^=exercise-]", 1
-    assert_select "#prepare-interros #toute-la-lecon h3", text: tl("lesson_wide_title")
+    assert_select "#prepare-interros ul#prepare-interros-grid > li > span#notion-#{@meiose.slug}[aria-label=?]", "La méiose"
+    assert_select "#prepare-interros #notion-#{@mitose.slug}", 1
+    assert_select "#prepare-interros ul#prepare-interros-grid > li > span#toute-la-lecon[aria-label=?]", tl("lesson_wide_title")
+    assert_select "#prepare-interros h3", text: "La méiose", count: 0
+    assert_select "#prepare-interros h3", text: tl("lesson_wide_title"), count: 0
     assert_select "#prepare-interros li#exercise-#{@ex_wide.public_id}"
     assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id} a[href='#{exercise_path(@ex_meiose.public_id)}']"
     # CA-05 : aucun ancien intitulé.

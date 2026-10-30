@@ -101,8 +101,8 @@ module Finitions
         assert_selector "nav[aria-label='#{t('components.back_link.label')}'] a[href='#{courses_path}']",
                         text: "Cours"
         assert_no_link "SVT"
-        # UDR page de la leçon §3.1 : les deux sections.
-        assert_selector "#revision_title", text: "Fiche de révision"
+        # UDR page de la leçon §3.1 : les deux sections (sans fiche, « Fiche de révision » dit qu'elle arrive bientôt).
+        assert_selector "#fiche-de-revision"
         assert_selector "#prepare_title", text: "Prépare interros"
       end
       within("main nav") { click_on "Cours" }

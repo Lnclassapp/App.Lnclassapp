@@ -1,5 +1,5 @@
 <%# 🌐 UI · catalog/courses/show — page d'une leçon (CA-04, CA-10), pour tous les rôles connectés %>
-<%# Rôle : retour « Cours » (UDR-0054 §3.2), en-tête, actions du rôle, puis deux sections : « Fiche de révision » et « Prépare interros » ; morphing (B2, B4) %>
+<%# Rôle : retour « Cours » (UDR-0054 §3.2), en-tête, actions du rôle, puis deux sections : le bouton « Fiche de révision » (fiche en plein écran) et « Prépare interros » ; morphing (B2, B4) %>
 <%# ADR  : 0028, 0035, 0051, 0090, 0110-fiche-de-cours-en-donnees-importees, 0113 · UDR : 0006, 0007, 0013, 0054, 0139 §3.1 %>
 <% course = @detail.course %>
 <% page_title t(".page_title", name: course.name) %>
@@ -25,10 +25,23 @@
   <% end %>
 </div>
 
+<%# UDR parcours matière → exercice §3 : l'élève voit d'abord où cliquer ; la fiche de révision garde sa place. %>
+<%= render "catalog/courses/next_exercise", next_exercise: @next_exercise, scope: :lesson, id: "lesson_next_exercise" %>
+
 <div class="space-y-10">
-  <section id="fiche-de-revision" aria-labelledby="revision_title">
-    <h2 id="revision_title" class="mb-4 font-display text-xl font-medium"><%= t(".revision_title") %></h2>
-    <%= render "catalog/courses/revision_sheet", course:, revision: @revision %>
+  <%# La fiche n'est pas ouverte d'emblée : un bouton l'ouvre en plein écran, entière (sans « Voir plus »). Une adresse vers
+      #fiche-de-revision ou vers une notion de la fiche l'ouvre à l'arrivée (catalog--revision-dialog). %>
+  <section id="fiche-de-revision" aria-label="<%= t(".revision_title") %>">
+    <% if @revision.kind == :empty %>
+      <%= render "catalog/courses/revision_sheet", course:, revision: @revision %>
+    <% else %>
+      <%= tag.div data: { controller: "catalog--revision-dialog" } do %>
+        <%= ui_modal id: "revision-sheet", title: t(".revision_title"), placement: :full,
+                     trigger: t(".revision_title"), trigger_icon: "document-text" do %>
+          <%= render "catalog/courses/revision_sheet", course:, revision: @revision, whole: true %>
+        <% end %>
+      <% end %>
+    <% end %>
   </section>
 
   <%# Ouvrir la page enregistre la lecture des notions (ADR-XXXX §4.3) : pas de préchargement au survol. %>

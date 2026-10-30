@@ -562,6 +562,38 @@ dialog.dialog-drawer {
   to { transform: translateX(0); }
 }
 
+/* Plein écran (placement: :full) : la <dialog> couvre toute la fenêtre ; son en-tête (titre, croix) reste en haut au défilement. */
+dialog.dialog-full {
+  margin: 0;
+  width: 100%;
+  max-width: none;
+  height: 100vh;
+  height: 100dvh;
+  max-height: none;
+  overflow-y: auto;
+  border-radius: 0;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+dialog.dialog-full > .dialog-head {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding-bottom: 1rem;
+  background: inherit;
+  border-bottom: 1px solid var(--color-line);
+}
+
+/* Le contenu va d'un bord à l'autre : la fiche porte ses propres marges. */
+dialog.dialog-full > .dialog-head + div {
+  padding: 0;
+}
+
+/* Une ancre visée dans la boîte (notion de la fiche) ne passe pas sous l'en-tête collé. */
+dialog.dialog-full [id] {
+  scroll-margin-top: 5rem;
+}
+
 /* Chantier ux-pages-eleve — formules KaTeX lisibles sur téléphone. Hors couche, exprès : l'emporte sur katex.min.css.
    1. Une formule en ligne ne se coupe plus en fin de ligne (« 1 ≤ 2 + / sin x ≤ 3 ») : elle passe entière à la ligne.
    2. Une formule centrée trop large défile dans sa propre largeur au lieu d'élargir la page.

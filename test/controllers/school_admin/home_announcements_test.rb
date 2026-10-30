@@ -27,7 +27,7 @@ class SchoolAdmin::HomeAnnouncementsTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_announcements" do
       assert_select "li", text: /Rentrée numérique/
       assert_select "li", text: /Réunion des directions/
-      assert_select "a[href=?]", announcements_path
+      assert_select "a[href=?]", announcements_path, 0
     end
     assert_no_match(/Ailleurs|Pour les élèves/, css_select("#student_home_announcements").text)
     [ national, own ].each { assert_select "form[action=?]", announcement_dismissal_path(it.public_id), count: 0 }

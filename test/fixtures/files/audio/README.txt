@@ -45,3 +45,23 @@ enregistrement.ogg  Opus dans un conteneur Ogg (« OggS »).
 enregistrement.wav  WAV PCM 16 bits, 8 kHz (« RIFF…WAVE »).
                     ffmpeg -hide_banner -loglevel error -y -f lavfi -i sine=frequency=440:sample_rate=8000:duration=1 \
                       $OUT -c:a pcm_s16le -f wav enregistrement.wav
+
+Durées (chantier annonces-logo-audio, ADR « annonces audio dix secondes », critères LA-2 à LA-4)
+================================================================================================
+
+Quatre fichiers réels, produits le 2026-10-30 avec ffmpeg, mono, petit débit, sans métadonnées. Ils servent à
+Entities::Communication::AudioDuration (mesure dans les octets) et à la saisie d'une annonce (10 s au plus + 0,3 s).
+Mêmes variables IN et OUT que ci-dessus, avec une durée de 9 ou de 11 secondes (D) :
+
+  IN="-hide_banner -loglevel error -y -f lavfi -i sine=frequency=440:sample_rate=16000:duration=D"
+
+duree-9s.mp3   9 s, MPEG-2 couche III, 32 kbit/s, sans ID3 : accepté.
+duree-11s.mp3  11 s : refusé (trop long).
+                 ffmpeg $IN $OUT -c:a libmp3lame -b:a 32k -id3v2_version 0 -f mp3 duree-<D>s.mp3
+
+duree-9s.m4a   9 s, AAC 24 kbit/s dans un MP4 : accepté.
+duree-11s.m4a  11 s : refusé (trop long).
+                 ffmpeg $IN $OUT -c:a aac -b:a 24k -f mp4 duree-<D>s.m4a
+
+Les fichiers forgés des menaces M1 à M6 (Xing menteur, octets entre trames, mvhd menteur, fragmenté, boîte de taille 3,
+stts gonflée) se construisent octet par octet dans test/domain/entities/communication/audio_duration_test.rb.

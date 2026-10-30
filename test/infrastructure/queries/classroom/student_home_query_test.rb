@@ -78,6 +78,7 @@ module Queries
         assert_equal [ "Direct", "Plus ancien" ], titles(row)
         assert_equal [ direct.public_id, older.public_id ], row.assigned_exercises.map(&:public_id)
         assert_equal [ "SVT", "science" ], row.assigned_exercises.last.to_h.values_at(:material_name, :material_category)
+        assert_equal "fixation", row.assigned_exercises.last.exercise_type
       end
 
       # UDR-0062 §3.2, PRD « Accueil élève » : the list of « À faire » sorts by due date, the exercises without one after.

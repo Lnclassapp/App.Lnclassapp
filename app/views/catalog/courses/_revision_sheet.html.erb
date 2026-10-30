@@ -1,7 +1,7 @@
 <%# 🌐 UI · catalog/courses/_revision_sheet — la « Fiche de révision » de la page d'une leçon : une page de cahier, une section par notion ; coupée après 150 mots, « Voir plus » %>
 <%# Rôle : `course`, `revision` (RevisionSheetQuery::Revision) ; le serveur marque la suite (`rest`), catalog--revision-more la masque ; sans JavaScript tout se lit, sans « Voir plus » %>
-<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0137, 0139 §3.2, §3.3, §3.6 %>
-<% cut = revision.cut %>
+<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0137, 0139 §3.2, §3.3, §3.6 · `whole: true` : sans coupe (plein écran) %>
+<% cut = local_assigns[:whole] ? nil : revision.cut %>
 <%# Le contrôleur ne vit que s'il y a une coupe ; ses trois textes lui viennent des locales. %>
 <% more_data = if cut
                  { controller: "catalog--revision-more",

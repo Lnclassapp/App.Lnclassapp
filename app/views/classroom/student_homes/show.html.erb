@@ -20,7 +20,7 @@
     <%# UDR-0071 §3.5 : seulement si l'élève a au moins une annonce lisible, masquées comprises ; toutes masquées, la
         section est rendue cachée (cible d'« Annuler »). %>
     <% if @announcements.any_readable? %>
-      <%= render "communication/messages/carousel", carousel: @announcements, link: false %>
+      <%= render "communication/messages/carousel", carousel: @announcements, student: true %>
     <% end %>
     <%# CA-D10 : dès lg, une carte blanche sur le fond mist. %>
     <section id="student_history" aria-labelledby="student_history_title"

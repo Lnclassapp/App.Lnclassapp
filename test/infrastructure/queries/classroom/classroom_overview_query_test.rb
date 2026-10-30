@@ -62,6 +62,7 @@ module Queries
         assert_equal [ "Pour le 8", "Pour le 12", "Sans date, récent", "Sans date, ancien" ], rows.map(&:exercise_title)
         assert_equal [ "SVT", "science", Date.new(2026, 10, 8) ], rows.first.to_h.values_at(:material_name, :material_category, :due_on)
         assert_equal Orm::ClassroomAssignment.find_by!(due_on: Date.new(2026, 10, 8)).public_id, rows.first.public_id
+        assert_equal [ "fixation", "svt" ], rows.first.to_h.values_at(:exercise_type, :material_slug)
         assert_nil rows.last.due_on
       end
 

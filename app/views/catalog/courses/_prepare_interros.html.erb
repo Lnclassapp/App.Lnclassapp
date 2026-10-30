@@ -1,48 +1,39 @@
 <%# 🌐 UI · catalog/courses/_prepare_interros — les exercices de la page d'une leçon (catalogue et classe) %>
-<%# Rôle : exercices groupés par notion puis « Toute la leçon » ; état vide sans exercice ; enseignant : une bascule par classe sous chaque exercice (la classe donnée seulement, dans sa page de classe) %>
-<%# ADR  : 0113 · UDR : 0139 §3.4, §3.6 · locals: (prepare:, classroom_public_id: nil) %>
+<%# Rôle : tous les exercices dans une seule grille (notions dans l'ordre, puis toute la leçon), repères de notion sur la première carte ; état vide sans exercice ; enseignant : une bascule par classe sous chaque exercice (la classe donnée seulement, dans sa page de classe) %>
+<%# ADR  : 0113 · UDR : 0139 §3.4, §3.6, 0145 (§3.2, §3.2 bis : une seule grille, material_slug) · locals: (prepare:, classroom_public_id: nil) %>
 <% groups = prepare.groups %>
 <% lesson_wide = prepare.lesson_wide %>
 <% targets = prepare.targets %>
 <% if groups.empty? && lesson_wide.empty? %>
   <%= ui_empty_state title: t("catalog.courses.show.exercises_empty"), icon: "pencil-square" %>
 <% end %>
-<%# Les liens et les redirections visent « notion-<slug> » pour toute notion (UDR-0139 §3.7) : celle qui n'a pas d'exercice a son repère. %>
-<% prepare.bare.each do |notion| %>
-  <div id="notion-<%= notion.essential_slug %>" class="mt-6 scroll-mt-24" tabindex="-1">
-    <h3 class="mb-1 font-display text-lg font-medium"><%= notion.title %></h3>
-    <p class="text-sm text-mute"><%= t("catalog.courses.show.notion_without_exercise") %></p>
-  </div>
-<% end %>
+<%# Les liens et les redirections visent « notion-<slug> » pour toute notion (UDR-0139 §3.7) : la première carte de la notion porte le repère ; celle qui n'a pas d'exercice garde son bloc, sous la grille. %>
 <% unless groups.empty? && lesson_wide.empty? %>
   <%# Les lignes se rendent dans l'ordre de la page : le premier « Assigner » est plein (UDR-0134 §3.13). %>
   <% @primary_assign_taken = false %>
   <% only = local_assigns[:classroom_public_id] %>
   <% classrooms = targets ? targets.classrooms.select { only.nil? || it.public_id == only } : [] %>
-  <% list_class = "divide-y divide-line rounded-card border border-line bg-white shadow-card" %>
   <div class="space-y-6">
     <% if targets && classrooms.empty? %>
       <p id="assign_targets_none" class="text-mute"><%= t("catalog.courses.show.assign_targets_none", level: targets.scope_label) %></p>
     <% end %>
-    <% groups.each do |group| %>
-      <div id="notion-<%= group.essential_slug %>" class="scroll-mt-24" tabindex="-1">
-        <h3 class="mb-2 font-display text-lg font-medium"><%= group.title %></h3>
-        <ul class="<%= list_class %>">
-          <% group.exercises.each do |exercise| %>
-            <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, team: current_actor&.team? %>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
-    <% if lesson_wide.any? %>
-      <div id="toute-la-lecon" class="scroll-mt-24">
-        <h3 class="mb-2 font-display text-lg font-medium"><%= t("catalog.courses.show.lesson_wide_title") %></h3>
-        <ul class="<%= list_class %>">
-          <% lesson_wide.each do |exercise| %>
-            <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, team: current_actor&.team? %>
-          <% end %>
-        </ul>
-      </div>
-    <% end %>
+    <ul id="prepare-interros-grid" class="grid gap-3 sm:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4">
+      <% groups.each do |group| %>
+        <% group.exercises.each_with_index do |exercise, index| %>
+          <% anchor = index.zero? ? { id: "notion-#{group.essential_slug}", label: group.title } : nil %>
+          <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, material_slug: prepare.material_slug, team: current_actor&.team?, anchor: %>
+        <% end %>
+      <% end %>
+      <% lesson_wide.each_with_index do |exercise, index| %>
+        <% anchor = index.zero? ? { id: "toute-la-lecon", label: t("catalog.courses.show.lesson_wide_title") } : nil %>
+        <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, material_slug: prepare.material_slug, team: current_actor&.team?, anchor: %>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+<% prepare.bare.each do |notion| %>
+  <div id="notion-<%= notion.essential_slug %>" class="mt-6 scroll-mt-24" tabindex="-1">
+    <h3 class="mb-1 font-display text-lg font-medium"><%= notion.title %></h3>
+    <p class="text-sm text-mute"><%= t("catalog.courses.show.notion_without_exercise") %></p>
   </div>
 <% end %>
