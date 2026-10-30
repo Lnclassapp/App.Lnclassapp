@@ -8,7 +8,7 @@ export const PARTS = {
   ovary: { name: "ovaire", anchor: [194, 254] },
   oviduct: { name: "trompe (oviducte)", anchor: [228, 166] },
   infundibulum: { name: "pavillon", anchor: [194, 214] },
-  uterus: { name: "utérus", anchor: [273, 205] },
+  uterus: { name: "utérus", anchor: [367, 205] },
   endometrium: { name: "muqueuse utérine", anchor: [322, 216] },
   cervix: { name: "col de l'utérus", anchor: [330, 298] },
   vagina: { name: "vagin", anchor: [332, 392] }
