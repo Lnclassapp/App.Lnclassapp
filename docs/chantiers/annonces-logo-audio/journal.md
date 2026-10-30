@@ -25,6 +25,10 @@
 
 ## Dette laissée derrière
 
+### Carte sobre (2026-10-30, après la fusion de la PR #391)
+
+Demande du porteur : sans « Modifiée », texte de 10 mots ou 2 lignes, logo du lecteur (bleu pour l'élève, orange — le « jaune » du porteur — pour l'enseignant). Règle d'affichage seulement : la saisie garde ses 140 caractères. UDR-0071, amendement du 2026-10-30 (second).
+
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Les audios joints avant ce chantier ne sont pas relus | Hors périmètre (memo) | — |
