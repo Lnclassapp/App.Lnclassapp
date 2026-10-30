@@ -59,7 +59,7 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
   end
 
   test "a file whose envelope is wrong is « Rejeté », with its reason" do
-    file = json_file(essentials_document(course: "svt", essentials: 1).to_json)
+    file = json_file(revision_sheet_document.to_json)
 
     with_fake_import_job do
       assert_no_page_reload do
@@ -69,7 +69,7 @@ class Teams::ImportFlowTest < ApplicationSystemTestCase
           assert_text "Rejeté"
           assert_selector "[role=alert]", text: "rejeté en bloc"
           assert_selector "#import_errors li",
-                          text: /\Aformat\s+Ce fichier est un import « Fiches de révision » \(format lnclass\.essentials\), pas un import « Établissements »/
+                          text: /\Aformat\s+Ce fichier est un import « Fiches de cours complètes » \(format lnclass\.course-tree\), pas un import « Établissements »/
         end
       end
     end

@@ -85,8 +85,7 @@ module Repositories
 
         assert_equal "<p>Hérédité <strong>forte</strong></p>", Orm::Course.find_by!(slug: "genetique").content.body.to_html
         assert_nil ActionText::RichText.find_by(record: Orm::Course.find_by!(slug: "ecologie"))
-        assert_equal "<p>Fiche ecologie-a</p>", Orm::Essential.find_by!(slug: "ecologie-a").content.body.to_html
-        assert_equal [ "Orm::Course", "Orm::Essential" ], ActionText::RichText.distinct.order(:record_type).pluck(:record_type)
+        assert_equal [ "Orm::Course" ], ActionText::RichText.distinct.order(:record_type).pluck(:record_type)
       end
 
       # ADR-0068 §4 : deux chemins d'écriture des contenus riches, Orm::RichTextRow pour l'import, le modèle Action Text
@@ -209,6 +208,113 @@ module Repositories
         written = fiche.exercises.sole.questions.order(:position)
         assert_equal [ BigDecimal("0.1"), nil ], written.map(&:numeric_tolerance)
         assert_equal [ [ nil ], [ "tab\tA" ] ], written.map { it.answers.map(&:match_content) }
+      end
+
+      test "le sujet en blocs d'un exercice s'écrit en JSON, sans blocs la colonne reste vide (ADR-0115)" do
+        fiche = create_essential
+        blocks = [ { "type" => "paragraph", "text" => "Un énoncé avec $x$." }, { "type" => "box", "label" => "Retenir", "paragraphs" => [ "Texte." ] } ]
+        with_blocks = Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id: fiche.id, title: "Avec sujet", statement: nil,
+                                             exercise_type: "fixation", position: 1, statement_blocks: blocks,
+                                             questions: [ Port::QuestionNode.new(position: 1, content: "Q", explanation: nil, question_type: "true_false", answers:) ])
+
+        @writer.write(author_id: @author.id, at: @at, exercises: [ with_blocks, exercise("Sans sujet", essential_id: fiche.id, position: 2) ])
+
+        assert_equal [ blocks, nil ], fiche.exercises.order(:position).map(&:statement_blocks)
+      end
+
+      # --- Format 3 (ADR-0116 §4.3, §4.4) ---
+
+      def v3_exercise(title, figure_key: nil)
+        Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id: nil, title:, statement: "Sujet", exercise_type: "fixation",
+                               position: nil, questions: [ 1, 2 ].map { |rank| Port::QuestionNode.new(position: rank, content: "#{title} Q#{rank}", explanation: "x" * 25, question_type: "true_false", answers:) },
+                               figure_key:)
+      end
+
+      def v3_notion(slug, name, position, figure_key: nil)
+        sheet = { "remember" => "À retenir #{name}", "method" => %w[a b], "example" => { "statement" => "e", "steps" => %w[a b] },
+                  "pitfall" => "Piège", "figure_key" => figure_key }
+        Port::NotionNode.new(slug:, course_id: nil, name:, position:, sheet:, exercises: [ v3_exercise("Exercice #{name}", figure_key:) ])
+      end
+
+      def v3_course(slug, existing_id: nil, notion_slug: "#{slug}-n1", notions: nil)
+        figures = [ { "key" => "fig", "kind" => "geometry", "description" => "d" * 160, "params" => {}, "controls" => [] } ]
+        Port::CourseNode.new(slug: (slug unless existing_id), name: "Leçon #{slug}", subtitle: nil, content: nil, level_id: @level.id, series_id: nil,
+                             material_id: @material.id, essentials: [], exercises: [ v3_exercise("Problème 1"), v3_exercise("Problème 2") ],
+                             existing_id:, figures:, sheet_theme: "teal",
+                             notions: notions || [ v3_notion(notion_slug, "Notion 1", 1, figure_key: "fig"), v3_notion("#{notion_slug}-b", "Notion 2", 2) ])
+      end
+
+      test "écrit une leçon v3 : figures, thème, fiche des notions, figure des exercices, exercices de la leçon après ceux des notions" do
+        counts = @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines") ])
+
+        assert_equal({ courses: 1, essentials: 2, exercises: 4, questions: 8, answers: 16, archived: 0 }, counts)
+        course = Orm::Course.find_by!(slug: "racines")
+        assert_equal [ "teal", [ "fig" ] ], [ course.sheet_theme, course.figures.map { it["key"] } ]
+        notion = course.essentials.order(:position).first
+        assert_equal [ "draft", nil, "fig", %w[a b] ], [ notion.status, notion.subtitle, notion.sheet["figure_key"], notion.sheet["method"] ]
+        assert_equal [ [ 1, "Exercice Notion 1", "fig" ], [ 2, "Exercice Notion 2", nil ], [ 3, "Problème 1", nil ], [ 4, "Problème 2", nil ] ],
+                     Orm::Exercise.where(course_id: course.id).order(:position).pluck(:position, :title, :figure_key)
+        assert_equal [ notion.id ], Orm::Exercise.where(course_id: course.id, title: "Exercice Notion 1").pluck(:essential_id)
+      end
+
+      # CA-11
+      test "replace_draft remplace la leçon entière, garde son id, son slug et son auteur, et supprime séances, tentatives, badges et lacunes" do
+        @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines") ])
+        course = Orm::Course.find_by!(slug: "racines")
+        old_notion = course.essentials.order(:position).first
+        old_exercise = Orm::Exercise.find_by!(essential_id: old_notion.id)
+        student = create_student
+        session = create_exercise_session(student:, exercise: old_exercise, status: "completed")
+        create_attempt(session:, question: old_exercise.questions.first)
+        create_badge(student:, exercise: old_exercise, session:)
+        gap = create_gap(student:, essential: old_notion, source_session: session)
+        create_exercise_session(student:, exercise: Orm::Exercise.where(course_id: course.id, essential_id: nil).first, gap:)
+        create_essential_read(student:, essential: old_notion)
+        tree = v3_course("racines", existing_id: course.id, notion_slug: "racines-n1").with(name: "Leçon corrigée", figures: [], sheet_theme: "burgundy")
+
+        counts = @writer.replace_draft(course_id: course.id, tree:)
+
+        assert_equal({ courses: 1, essentials: 2, exercises: 4, questions: 8, answers: 16 }, counts)
+        replaced = Orm::Course.find(course.id)
+        assert_equal [ "racines", "Leçon corrigée", "burgundy", [], @author.id, "draft" ],
+                     [ replaced.slug, replaced.name, replaced.sheet_theme, replaced.figures, replaced.author_id, replaced.status ]
+        assert_equal [ "racines-n1", "racines-n1-b" ], replaced.essentials.order(:position).pluck(:slug)
+        assert_not Orm::Essential.exists?(old_notion.id)
+        assert_equal [ 1, 2, 3, 4 ], Orm::Exercise.where(course_id: course.id).order(:position).pluck(:position)
+        assert_equal [ 4, 8, 16 ], [ Orm::Exercise.count, Orm::Question.count, Orm::Answer.count ]
+        assert_equal [ 0, 0, 0, 0, 0 ], [ Orm::ExerciseSession, Orm::QuestionAttempt, Orm::ExerciseBadge, Orm::KnowledgeGap, Orm::EssentialRead ].map(&:count)
+      end
+
+      test "replace_draft refuse une leçon, une notion ou un exercice qui n'est plus en brouillon, et ne supprime rien" do
+        @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines") ])
+        course = Orm::Course.find_by!(slug: "racines")
+        tree = v3_course("racines", existing_id: course.id)
+        changes = { course: -> { course.update_columns(status: "published", published_at: Time.current) },
+                    essential: -> { course.essentials.first.update_columns(status: "archived", archived_at: Time.current) },
+                    exercise: -> { Orm::Exercise.where(course_id: course.id).first.update_columns(status: "published", published_at: Time.current) } }
+        changes.each do |name, change|
+          Orm::Course.transaction(requires_new: true) do
+            change.call
+            assert_no_difference [ "Orm::Essential.count", "Orm::Exercise.count", "Orm::Question.count" ], name.to_s do
+              assert_raises(ContentTreeWriter::NotDraft, name.to_s) { @writer.replace_draft(course_id: course.id, tree:) }
+            end
+            raise ActiveRecord::Rollback
+          end
+        end
+      end
+
+      test "l'exception NotDraft porte le nom que le moteur d'import reconnaît" do
+        assert_equal Ports::Catalog::ContentTreeWriterPort::NOT_DRAFT, ContentTreeWriter::NotDraft.name.split("::").last
+        assert_operator ContentTreeWriter::NotDraft, :<, ActiveRecord::CheckViolation
+      end
+
+      test "replace_draft rend unique le slug d'une notion pris par une autre leçon" do
+        @writer.write(author_id: @author.id, at: @at, courses: [ v3_course("racines"), v3_course("autre", notion_slug: "pris") ])
+        course = Orm::Course.find_by!(slug: "racines")
+
+        @writer.replace_draft(course_id: course.id, tree: v3_course("racines", existing_id: course.id, notion_slug: "pris"))
+
+        assert_equal [ "pris-2", "pris-b-2" ], course.essentials.order(:position).pluck(:slug)
       end
 
       # Un refus de la base pendant un COPY lève l'erreur qu'ActiveRecord aurait levée : le moteur rejoue alors le lot

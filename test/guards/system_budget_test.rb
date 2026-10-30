@@ -56,16 +56,6 @@ class SystemBudgetTest < Minitest::Test
     refute mixed.within_budget?
   end
 
-  # Amendement du 2026-10-28 : 22 s pour les deux fiches de la phase 2 de contenu-en-blocs, et pour elles seules.
-  def test_the_phase_2_course_sheets_have_twenty_two_seconds_and_no_other_change_borrows_them
-    lens, argument = SystemBudget::GRANTS.fetch("contenu-en-blocs-phase-2")[:files]
-
-    assert_equal 22.0, SystemBudget::GRANTS.fetch("contenu-en-blocs-phase-2")[:budget]
-    assert budget(timings: { lens => 11.5, argument => 10.5 }, touched: [ lens, argument ]).within_budget?, "22 s : accepté"
-    refute budget(timings: { lens => 11.5, argument => 10.6 }, touched: [ lens, argument ]).within_budget?, "22,1 s : au-delà"
-    assert_equal 15.0, budget(timings: { lens => 11.5, "other" => 0.5 }, touched: [ lens, "other" ]).budget
-  end
-
   # Amendement du 2026-10-24 : 50 s pour les seuls fichiers système de mvp-teacher-student ; élargi le 2026-10-26 à ses 53 fichiers.
   def test_mvp_teacher_student_has_fifty_seconds_for_its_own_files_only
     signup, page = %w[test/system/identity/student_signup_steps_test.rb test/system/classroom/classroom_page_test.rb]

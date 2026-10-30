@@ -5,37 +5,33 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | Fichier | Rôle |
 |---|---|
 | [`progressions-2026-2027/`](progressions-2026-2027/) | Les 10 premières leçons de la progression DPFC 2026-2027, par matière, niveau et série : 13 fichiers `lnclass.course-tree` (1 056 fiches de cours sans fiche de révision), à importer depuis **Imports → Fiches de cours complètes**, **après** les leçons traitées. Détail et couverture : [`progressions-2026-2027/README.md`](progressions-2026-2027/README.md) |
-| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt à donner à un modèle pour rédiger une leçon : règle de l'analogie, structure d'une fiche de révision, 3 exercices par fiche de révision, images annoncées et leur style, contraintes de l'application. Il produit **un seul fichier** `lnclass.course-tree` : la fiche de cours, ses fiches de révision et leurs exercices |
-| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour un niveau et une série (Tle D, 1ère D, 3ème…), il prend les 3 premières leçons de chaque matière du niveau (jusqu’à 18), les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture indépendante) et les range dans `lecons-traitees/`. Un appel = un niveau |
-| [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle mécanique d’un fichier de leçon contre les règles du prompt : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s’il y a une erreur |
-| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Français, Histoire-Géographie et EDHC) |
+| [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
+| [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
+| [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
+| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (60 leçons au format 3, les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) |
 
 ## Le principe
 
-La force de Lnclass, c'est que l'élève comprend du premier coup. Chaque notion passe par une **image du quotidien** que l'élève connaît déjà, avant la définition exacte, dans cet ordre :
+L'élève révise une leçon avant une interrogation, un devoir ou le BEPC : il doit **comprendre une méthode et savoir la réappliquer seul**. La même méthode, en étapes numérotées, sert trois fois : dans « La méthode » de la notion, dans l'exemple corrigé (l'étape *n* applique l'étape *n*) et dans la correction de chaque question d'exercice, avec les mêmes mots.
 
-1. l'image ;
-2. le pont entre l'image et la notion ;
-3. la notion exacte ;
-4. la limite de l'image.
+## Le pipeline d'une leçon
 
-Exemple de référence, le théorème des gendarmes : deux policiers tiennent un prisonnier par les bras. S'ils arrivent tous les deux au commissariat, le prisonnier y arrive aussi.
+**rédaction → script → relecture IA → import en brouillon → validation équipe → publication**
 
-## Utiliser le prompt
+1. **Rédiger.** Copier `prompt-redaction.md`, remplir son bloc **ENTRÉE** (intitulé exact de la progression, niveau, rang). Le résultat est un fichier JSON `lnclass.course-tree` version 3 : les versions 1 et 2 sont **retirées** et refusées à l'import (`format_retired`).
+2. **Contrôler avec le script.** `ruby script/contenus/valider.rb fichier.json`. Il refuse ce que l'import refuserait (gabarit, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, correction absente `blank`, `too_short` ou `too_long`, figures hors règles), avec le code que l'import rend (test de parité `test/script/contenus/parite_import_test.rb`) et avertit des défauts de rédaction : correction qui ne cite aucune étape de La méthode, mots interdits, question qui dépend d'un élément absent. Il ne vérifie pas les calculs.
+3. **Relecture IA indépendante.** Un autre modèle que l'auteur refait chaque calcul et vérifie que chaque correction suit la méthode. Les défauts sont corrigés, puis le script est relancé.
+4. **Importer en brouillon** depuis l'écran **Imports**. Rien n'est visible des élèves. Une leçon encore en brouillon peut être réimportée (elle garde son adresse) ; une leçon publiée est refusée.
+5. **Validation par l'équipe** dans l'application : la fiche de révision, les figures, les exercices et leurs corrections. Pour le pilote 3ème, un enseignant de mathématiques relit avant publication.
+6. **Publier.**
 
-1. **Rédiger.** Copier le prompt, puis remplir son bloc **ENTRÉE** : intitulé exact de la leçon (celui de la progression), niveau, série, matière, rang dans la progression. Le JSON obtenu annonce ses images : `<p>[[image: description]]</p>` dans le texte d'une fiche de révision, `"image": { "description": "…" }` sur une question (voir « Les images » dans le prompt).
-2. **Importer** le JSON depuis **Imports → Fiches de cours complètes**. **Un seul import** crée la fiche de cours, ses fiches de révision et les exercices de chaque fiche de révision, en brouillon. On peut choisir **jusqu'à 50 fichiers d'un coup** (50 Mo au total, 500 fiches de cours au plus) : ils forment un seul import, avec une ligne de bilan par fichier. Une même fiche de cours présente dans deux fichiers de l'envoi n'est importé dans aucun des deux. L'import ne crée aucune image : il garde les emplacements et les descriptions.
-3. **Produire chaque image dans Claude Design**, à partir de sa description et du style du prompt (ludique, lisible sur téléphone, symboles justes), puis l'exporter en **PNG ou WebP**. L'image est allégée par le navigateur à l'envoi (300 Ko et 1200 pixels de côté au plus).
-4. **Insérer chaque image.** Dans une fiche de révision : l'ouvrir en modification, placer le curseur dans l'emplacement « Image à insérer : … » et cliquer **Insérer une image** ; l'image remplace l'emplacement et son texte de remplacement est pré-rempli avec la description. Dans une question : modifier l'exercice et cliquer **Ajouter l'image** sur la question. On peut aussi ajouter une image non annoncée, ou retirer un emplacement inutile.
-5. **Faire relire, puis publier.** Un enseignant de la discipline relit le texte **et les images**. Une fiche de révision ou un exercice ne se publie pas tant qu'il reste un emplacement vide, une question qui attend son image, ou une image sans texte de remplacement.
+Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/mathematiques/` et ajouter une ligne au tableau ci-dessous.
 
-Enfin, ranger le fichier dans `lecons-traitees/<niveau>-<série>/<matière>/` (le slug de la matière : `mathematiques`, `physique-chimie`, `svt`, `histoire-geographie`, `philosophie`, `francais`…) et ajouter une ligne au tableau ci-dessous.
+Les leçons déjà rangées dans `lecons-traitees/` au format v1 (Tle D, 3ème, etc.) ne sont plus importables : elles seront réécrites en v3, mathématiques d'abord (chantier `refonte-contenus-maths`).
 
-**Leçons rédigées avant les images** (ADR-0105) : elles restent en texte seul, sans reprise en masse, puisqu'un import ne met jamais à jour une fiche de cours existante. C'est le cas de toutes les leçons de `lecons-traitees/` à ce jour et de toute leçon importée avant le 2026-10-10. Une image peut toujours s'y ajouter à la main, dans l'éditeur de la fiche de révision.
+## Ordre des imports (historique, formats v1)
 
-Pour toutes les matières d’un niveau d’un coup, utiliser plutôt [`prompt-redaction-lot.md`](prompt-redaction-lot.md).
-
-## Ordre des imports
+> Cette section décrit les imports v1 des leçons rangées avant la refonte. Le format v3 remplace ce mode d'emploi pour les mathématiques : voir « Le pipeline d'une leçon ».
 
 Un import ne met jamais à jour l'existant : une fiche de cours déjà présente (même nom, niveau, matière et série) est **ignorée** comme doublon, fiches de révision comprises. D'où l'ordre :
 
@@ -180,9 +176,6 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 
 | Fichier | Cours | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|
-| `mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 12 | 63 |
-| `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 4 | 12 | 66 |
-| `mathematiques/racines-carrees.json` | Racines carrées | 4 | 12 | 72 |
 | `physique-chimie/masse-et-poids-d-un-corps.json` | Masse et poids d'un corps | 4 | 12 | 71 |
 | `physique-chimie/les-forces.json` | Les forces | 4 | 12 | 68 |
 | `physique-chimie/equilibre-d-un-solide-soumis-a-deux-forces.json` | Équilibre d'un solide soumis à deux forces | 4 | 12 | 71 |
@@ -190,9 +183,6 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 | `svt/les-aliments-et-l-homme.json` | Les aliments et l'Homme | 4 | 12 | 69 |
 | `svt/la-digestion-des-aliments.json` | La digestion des aliments | 4 | 12 | 60 |
 | `svt/le-sang.json` | Le sang | 4 | 12 | 68 |
-| `francais/l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json` | L'expression des circonstances dans la phrase simple et dans la phrase complexe | 4 | 12 | 72 |
-| `francais/le-dialogue-oral.json` | Le dialogue oral | 4 | 12 | 65 |
-| `francais/le-texte-argumentatif.json` | Le texte argumentatif | 4 | 12 | 72 |
 | `histoire-geographie/histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire.json` | Histoire — Le mouvement impérialiste et la colonisation en Côte d'Ivoire | 4 | 12 | 60 |
 | `histoire-geographie/geographie-les-atouts-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les atouts du développement économique de la Côte d'Ivoire | 4 | 12 | 65 |
 | `histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance.json` | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 4 | 12 | 60 |
@@ -200,7 +190,7 @@ Les 3 premières leçons de chaque matière de la 3ème (progression DPFC 2026-2
 | `edhc/les-organisations-humanitaires.json` | Les organisations humanitaires | 4 | 12 | 60 |
 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-violences-faites-aux-personnes-vulnerables.json` | Les instruments et les mécanismes de protection contre les violences faites aux personnes vulnérables | 4 | 12 | 72 |
 
-Les 18 fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par fiche. Chacun a passé `script/contenus/valider.rb`, puis une relecture par un second rédacteur, qui a refait les calculs et vérifié les faits. Les défauts trouvés ont été corrigés. Importés ensemble sur une base jetable par la vraie chaîne d'import : **18 cours, 72 fiches, 216 exercices, 1 194 questions, 4 370 propositions, sans erreur**, une fois la matière EDHC créée. Sans elle, les 3 cours d'EDHC sont rejetés (`unknown_material`) et les 15 autres passent. Aucun enseignant ne les a encore relus.
+Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le même nom (sections suivantes) : ce tableau et ses réserves ne décrivent plus que la version 1. En version 1, ces fichiers suivaient le prompt complet : 4 fiches par cours, 3 exercices par fiche. Chacun a passé `script/contenus/valider.rb`, puis une relecture par un second rédacteur, qui a refait les calculs et vérifié les faits. Les défauts trouvés ont été corrigés. Importés ensemble sur une base jetable par la vraie chaîne d'import : **18 cours, 72 fiches, 216 exercices, 1 194 questions, 4 370 propositions, sans erreur**, une fois la matière EDHC créée. Sans elle, les 3 cours d'EDHC sont rejetés (`unknown_material`) et les 15 autres passent. Aucun enseignant ne les a encore relus.
 
 À faire valider par un enseignant (le programme détaillé n'était pas disponible) :
 
@@ -209,9 +199,141 @@ Les 18 fichiers suivent le prompt complet : 4 fiches par cours, 3 exercices par 
 - **Physique-Chimie, Les lentilles** : leçon rédigée sans programme sous les yeux, au niveau graphique (trois rayons particuliers, image réelle ou virtuelle, loupe, projecteur, appareil photo, œil réduit et défauts de la vue) ; aucune formule de conjugaison. Elle attend la relecture du porteur ou de Touré avant d'être présentée à des élèves. Les nombres de ses exercices (distances en cm, constructions à l'échelle) ont été recalculés.
 - **Physique-Chimie** : la fiche « réaction du support » (équilibre) est peut-être de niveau lycée. g vaut 10 N/kg partout, et 1,6 N/kg sur la Lune. Le contact localisé et réparti, et le mot « tension du fil », sont à confirmer.
 - **SVT** : les valeurs énergétiques 17 / 17 / 38 kJ par gramme, les tests de Fehling et du biuret, les noms d'enzymes et leurs conditions d'action, la fibrine, la phagocytose et la coagulation.
-- **Français** : l'opposition et la concession (« bien que », « même si ») dans la leçon 1, convaincre et persuader et « certes… mais » dans la leçon 3. Les actes de parole et le dialogue écrit ne sont pas traités.
 - **Histoire-Géographie** : les « atouts institutionnels » (OHADA, BCEAO, code des investissements), et les dates de la leçon sur l'indépendance (loi-cadre de 1956, référendum de 1958, indépendance du 7 août 1960, présidence fin 1960). L'AOF et les traités de protectorat sont cités sans date.
 - **EDHC** : aucun article de loi, aucune date, aucun numéro d'urgence. Les noms des conventions et chartes citées (femmes, personnes handicapées, enfant, Protocole de Maputo) sont écrits de mémoire, et la ratification par la Côte d'Ivoire n'est pas affirmée. La matière EDHC n'existe pas dans le référentiel : il faut la créer avant d'importer les 3 cours.
+
+### 3ème, mathématiques au format 3 — le pilote (chantier `refonte-contenus-maths`)
+
+Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un exercice. La leçon a en plus 4 problèmes de 5 questions ou plus.
+
+| # | Fichier | Cours | Notions | Figures | Exercices | Questions |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 0 | 8 | 54 |
+| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 2 | 7 | 40 |
+| 3 | `mathematiques/racines-carrees.json` | Racines carrées | 6 | 2 | 10 | 52 |
+| 4 | `mathematiques/triangle-rectangle.json` | Triangle rectangle | 4 | 5 | 8 | 46 |
+| 5 | `mathematiques/calcul-numerique.json` | Calcul numérique | 4 | 1 | 8 | 41 |
+| 6 | `mathematiques/angles-inscrits.json` | Angles inscrits | 4 | 6 | 8 | 48 |
+| 7 | `mathematiques/vecteurs.json` | Vecteurs | 4 | 7 | 8 | 40 |
+| 8 | `mathematiques/equations-et-inequations-dans-r.json` | Équations et inéquations dans ℝ | 4 | 3 | 8 | 45 |
+| 9 | `mathematiques/pyramides-et-cones.json` | Pyramides et cônes | 4 | 4 | 8 | 40 |
+| 10 | `mathematiques/statistique.json` | Statistique | 5 | 4 | 9 | 49 |
+
+Au total : 42 notions, 34 figures, 82 exercices et 455 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
+
+### 3ème, Français au format 3 (chantier `contenus-3e-francais`)
+
+Les 10 premières leçons de Français de la progression DPFC 2026-2027, rédigées le 2026-10-30 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 du même intitulé. Aucune figure. Chaque leçon a au moins 77 % de questions corrigées automatiquement. Les autres questions sont rédigées : chacune a un corrigé modèle, un barème et des critères. Les textes supports sont écrits pour Lnclass. Les œuvres réelles ne sont citées que par de courtes références paraphrasées, avec auteur, titre et date.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto |
+|---:|---|---|---:|---:|---:|---:|
+| 1 | `francais/l-expression-des-circonstances-dans-la-phrase-simple-et-dans-la-phrase-complexe.json` | L'expression des circonstances dans la phrase simple et dans la phrase complexe | 4 | 8 | 54 | 81 % |
+| 2 | `francais/le-dialogue-oral.json` | Le dialogue oral | 4 | 8 | 51 | 80 % |
+| 3 | `francais/le-texte-argumentatif.json` | Le texte argumentatif | 4 | 8 | 52 | 81 % |
+| 4 | `francais/etude-de-l-oeuvre-integrale-n-1.json` | Étude de l'œuvre intégrale n°1 | 4 | 8 | 53 | 81 % |
+| 5 | `francais/orthographe-lexicale.json` | Orthographe lexicale | 3 | 7 | 51 | 80 % |
+| 6 | `francais/la-coordination.json` | La coordination | 4 | 8 | 51 | 80 % |
+| 7 | `francais/le-resume-du-texte-argumentatif.json` | Le résumé du texte argumentatif | 4 | 8 | 50 | 80 % |
+| 8 | `francais/le-groupe-nominal-la-pronominalisation.json` | Le groupe nominal : la pronominalisation | 4 | 8 | 52 | 79 % |
+| 9 | `francais/le-verbe-l-infinitif-et-le-participe.json` | Le verbe : l'infinitif et le participe | 3 | 7 | 47 | 79 % |
+| 10 | `francais/l-expose-oral.json` | L'exposé oral | 4 | 8 | 52 | 77 % |
+
+Au total : 38 notions, 78 exercices et 513 questions. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second rédacteur, et les défauts trouvés ont été corrigés : règles de grammaire fausses, faits d'œuvre inexacts, fautes de langue, réponses justes refusées.
+
+À faire valider par un enseignant :
+
+- **Leçon 4** : les faits cités sur *Une vie de boy* (Ferdinand Oyono, 1956) et *L'Enfant noir* (Camara Laye, 1953). Le choix des œuvres reste à aligner sur la liste de l'établissement.
+- **Leçon 7** : la façon de compter les mots d'un résumé (trait d'union, « c'est-à-dire », chiffres). La leçon la soumet à la consigne du sujet.
+- **Leçons 8 et 9** : l'ordre des pronoms à l'impératif, la distinction entre participe présent et adjectif verbal, et les propositions infinitive et participiale, seulement citées.
+- **Questions rédigées** : les barèmes, de 3 à 8 points.
+
+### 3ème, Histoire-Géographie au format 3 (chantier `contenus-3e-histoire-geographie`)
+
+Les 10 premières leçons d'Histoire-Géographie de la progression DPFC 2026-2027, rédigées le 2026-10-30 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 du même intitulé. Les figures sont les sortes livrées par ce chantier (ADR-0117, UDR-0142) : frise (`timeline`), carte (`map`, fonds `cote_d_ivoire`, `africa`, `world`), schéma (`diagram`) et courbe (`stat_chart line`).
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `histoire-geographie/histoire-le-mouvement-imperialiste-et-la-colonisation-en-cote-d-ivoire.json` | Histoire — Le mouvement impérialiste et la colonisation en Côte d'Ivoire | 5 | 9 | 53 | 81 % | 3 | `map africa`, `map cote_d_ivoire`, `timeline` |
+| 2 | `histoire-geographie/geographie-les-atouts-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les atouts du développement économique de la Côte d'Ivoire | 5 | 9 | 50 | 88 % | 2 | `map cote_d_ivoire`, `stat_chart line` |
+| 3 | `histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance.json` | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 5 | 9 | 46 | 89 % | 2 | `timeline`, `diagram` |
+| 4 | `histoire-geographie/geographie-les-secteurs-d-activites-economiques-de-la-cote-d-ivoire.json` | Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire | 4 | 8 | 48 | 88 % | 3 | `map cote_d_ivoire`, `stat_chart pie` |
+| 5 | `histoire-geographie/histoire-causes-et-caracteres-des-crises-sociopolitiques-de-l-afrique-independante.json` | Histoire — Causes et caractères des crises sociopolitiques de l'Afrique indépendante | 4 | 8 | 45 | 91 % | 2 | `map africa`, `timeline` |
+| 6 | `histoire-geographie/histoire-la-crise-rwandaise-de-la-guerre-au-genocide-des-tutsi-1990-1994.json` | Histoire — La crise rwandaise : de la guerre au génocide des tutsi (1990-1994) | 4 | 8 | 40 | 90 % | 2 | `map africa`, `timeline` |
+| 7 | `histoire-geographie/geographie-les-problemes-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les problèmes du développement économique de la Côte d'Ivoire | 5 | 9 | 47 | 83 % | 2 | `stat_chart line`, `diagram` |
+| 8 | `histoire-geographie/histoire-les-causes-les-caracteres-et-les-consequences-de-la-deuxieme-guerre-mondiale.json` | Histoire — Les causes, les caractères et les conséquences de la deuxième guerre mondiale | 4 | 8 | 49 | 86 % | 2 | `timeline`, `map world` |
+| 9 | `histoire-geographie/geographie-etude-economique-de-l-afrique.json` | Géographie — Etude Economique de l'Afrique | 4 | 8 | 42 | 88 % | 4 | `map africa`, `diagram`, `timeline` |
+| 10 | `histoire-geographie/histoire-l-organisation-des-nations-unies-onu.json` | Histoire — L'Organisation des Nations Unies (ONU) | 4 | 8 | 49 | 84 % | 3 | `timeline`, `diagram`, `map world` |
+
+Au total : 44 notions, 84 exercices, 469 questions et 25 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. À faire relire par un enseignant d'Histoire-Géographie avant publication : dates et chiffres, et le contenu des cartes.
+
+### 3ème, SVT au format 3 (chantier `contenus-3e-svt`)
+
+Les 10 premières leçons de SVT de la progression DPFC 2026-2027, rédigées le 2026-10-30 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 du même intitulé. Les figures ajoutent les planches légendées (`plate`, 8 planches de SVT : appareil digestif, frottis sanguin, cœur, double circulation, appareil génital de la femme, virus du VIH, profil de sol, poils absorbants) aux sortes déjà livrées.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `svt/les-aliments-et-l-homme.json` | Les aliments et l'Homme | 4 | 8 | 53 | 91 % | 3 | `diagram`, `stat_chart pie` |
+| 2 | `svt/la-digestion-des-aliments.json` | La digestion des aliments | 4 | 8 | 60 | 92 % | 3 | `plate digestive_system`, `diagram` |
+| 3 | `svt/le-sang.json` | Le sang | 4 | 8 | 53 | 91 % | 7 | `plate blood_smear`, `stat_chart pie`, `diagram`, `stat_chart line` |
+| 4 | `svt/la-transfusion-sanguine.json` | La transfusion sanguine | 3 | 7 | 47 | 89 % | 3 | `diagram` |
+| 5 | `svt/la-circulation-sanguine.json` | La circulation sanguine | 4 | 8 | 51 | 92 % | 6 | `plate heart`, `plate double_circulation`, `diagram`, `stat_chart line` |
+| 6 | `svt/les-grossesses-precoces-et-les-moyens-de-prevention.json` | Les grossesses précoces et les moyens de prévention | 4 | 8 | 50 | 86 % | 5 | `timeline`, `plate female_reproductive_system`, `diagram` |
+| 7 | `svt/l-infection-au-vih.json` | L'infection au VIH | 3 | 7 | 45 | 91 % | 5 | `plate hiv_virus`, `stat_chart line`, `diagram` |
+| 8 | `svt/les-caracteristiques-d-un-sol.json` | Les caractéristiques d'un sol | 4 | 8 | 53 | 92 % | 5 | `plate soil_profile`, `stat_chart bars` |
+| 9 | `svt/les-relations-sols-plantes.json` | Les relations sols-plantes | 4 | 8 | 52 | 92 % | 9 | `plate root_hairs`, `diagram`, `stat_chart bars`, `plate soil_profile` |
+| 10 | `svt/la-degradation-des-sols.json` | La dégradation des sols | 4 | 8 | 49 | 90 % | 5 | `diagram`, `plate soil_profile`, `stat_chart line` |
+
+Au total : 38 notions, 78 exercices, 513 questions et 51 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
+
+À faire valider par un enseignant de SVT avant publication : les 8 planches (captures envoyées au porteur), le vocabulaire du programme et les valeurs données à titre d'exemple dans les leçons.
+
+### 3ème, Physique-Chimie au format 3 (chantier `contenus-3e-physique-chimie`)
+
+Les 10 premières leçons de Physique-Chimie de la progression DPFC 2026-2027, rédigées le 2026-10-30 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les fichiers antérieurs du même intitulé, dont « Les lentilles ». Les figures ajoutent le tracé optique (`optics`), la molécule (`molecule`) et 3 planches (`dynamometer`, `electrolyser`, `eudiometer`) aux sortes déjà livrées, dont le repère (`coordinate_plane`) des mathématiques.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `physique-chimie/masse-et-poids-d-un-corps.json` | Masse et poids d'un corps | 4 | 8 | 49 | 94 % | 2 | `plate dynamometer`, `coordinate_plane` |
+| 2 | `physique-chimie/les-forces.json` | Les forces | 4 | 8 | 59 | 93 % | 5 | `coordinate_plane`, `plate dynamometer` |
+| 3 | `physique-chimie/equilibre-d-un-solide-soumis-a-deux-forces.json` | Équilibre d'un solide soumis à deux forces | 4 | 8 | 43 | 91 % | 5 | `coordinate_plane` |
+| 4 | `physique-chimie/travail-et-puissance-mecaniques.json` | Travail et puissance mécaniques | 4 | 8 | 61 | 95 % | 4 | `coordinate_plane`, `stat_chart bars` |
+| 5 | `physique-chimie/energie-mecanique.json` | Énergie mécanique | 4 | 8 | 53 | 91 % | 3 | `stat_chart bars`, `coordinate_plane` |
+| 6 | `physique-chimie/electrolyse-et-synthese-de-l-eau.json` | Électrolyse et synthèse de l'eau | 4 | 8 | 56 | 95 % | 6 | `plate electrolyser`, `plate eudiometer`, `molecule` |
+| 7 | `physique-chimie/les-alcanes.json` | Les alcanes | 4 | 8 | 54 | 91 % | 5 | `molecule` |
+| 8 | `physique-chimie/les-lentilles.json` | Les lentilles | 5 | 9 | 63 | 94 % | 3 | `optics` |
+| 9 | `physique-chimie/les-defauts-de-l-oeil-et-leurs-corrections.json` | Les défauts de l'œil et leurs corrections | 4 | 8 | 48 | 94 % | 5 | `optics` |
+| 10 | `physique-chimie/oxydation-des-corps-purs-simples.json` | Oxydation des corps purs simples | 4 | 8 | 54 | 93 % | 4 | `molecule`, `diagram` |
+
+Au total : 41 notions, 81 exercices, 540 questions et 42 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement.
+
+À faire valider par un enseignant de Physique-Chimie avant publication : les 3 planches, et les chiffres des exercices.
+
+### 3ème, EDHC au format 3 (chantier `contenus-3e-edhc`)
+
+Les 10 premières leçons d'EDHC de la progression DPFC 2026-2027, rédigées le 2026-10-30 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 du même intitulé. Les figures sont celles de l'inventaire de l'ADR des figures de 3ème : schémas (`diagram`), graphiques (`stat_chart`, données fictives et dites fictives) et, à la leçon 10, la carte de Côte d'Ivoire des aires culturelles (`map`, fond `cote_d_ivoire`). Le contenu suit les textes en vigueur (Constitution du 8 novembre 2016) ; il est neutre : aucun parti ni personnalité politique réels, des situations et des personnages fictifs.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures |
+|---:|---|---|---:|---:|---:|---:|---|
+| 1 | `edhc/les-devoirs-des-parents.json` | Les devoirs des parents | 4 | 8 | 49 | 82 % | `diagram` |
+| 2 | `edhc/les-organisations-humanitaires.json` | Les organisations humanitaires | 4 | 8 | 51 | 86 % | `diagram` |
+| 3 | `edhc/les-instruments-et-les-mecanismes-de-protection-contre-les-violences-faites-aux-personnes-vulnerables.json` | Les instruments et les mécanismes de protection contre les violences faites aux personnes vulnérables | 4 | 8 | 49 | 92 % | `diagram`, `stat_chart bars` |
+| 4 | `edhc/les-partis-politiques.json` | Les partis politiques | 4 | 8 | 44 | 89 % | `diagram` |
+| 5 | `edhc/les-institutions-juridictionnelles.json` | Les institutions juridictionnelles | 4 | 8 | 41 | 88 % | `diagram` |
+| 6 | `edhc/le-scrutin-electoral.json` | Le scrutin électoral | 5 | 9 | 51 | 92 % | `diagram`, `stat_chart bars`, `stat_chart pie` |
+| 7 | `edhc/le-civisme-fiscal.json` | Le civisme fiscal | 4 | 8 | 44 | 89 % | `diagram`, `stat_chart pie` |
+| 8 | `edhc/la-gestion-des-biens-publics.json` | La gestion des biens publics | 4 | 8 | 45 | 89 % | `diagram`, `stat_chart bars` |
+| 9 | `edhc/le-projet-d-entreprise.json` | Le projet d'entreprise | 5 | 9 | 47 | 91 % | `diagram`, `stat_chart line` |
+| 10 | `edhc/les-alliances-interethniques-les-mande-et-les-gour.json` | Les alliances interethniques : les Mandé et les Gour | 4 | 8 | 42 | 88 % | `diagram`, `map` |
+
+Au total : 42 notions, 82 exercices, 463 questions et 22 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chacun a été relu par un second modèle (Opus) qui n'en était pas l'auteur, et les défauts trouvés ont été corrigés : questions à deux bonnes réponses, faits inexacts (CEDEF, Croix-Rouge), noms à connotation régionale ou ethnique, district oublié sur la carte, corrections qui désignaient une proposition par sa position.
+
+À faire valider par un enseignant :
+
+- **Textes** : aucun numéro d'article n'est cité ; les renvois à la Constitution de 2016 et aux lois (scolarité obligatoire, partis politiques, Code pénal) sont à confirmer dans leur formulation.
+- **Leçon 2** : le rangement de la Croix-Rouge (branche à part, ni ONG ni organisation des États), à aligner sur le manuel en usage.
+- **Leçons 5 et 6** : compétences des tribunaux de commerce, de la Haute Cour de justice et du Conseil constitutionnel ; seule la présidentielle est affirmée pour les résultats définitifs du Conseil constitutionnel.
+- **Leçon 7** : la distinction entre taxe et redevance.
+- **Leçon 10** : le rattachement des peuples aux groupes Mandé et Gour, les termes « toukpê » et « sanankouya », et la carte, qui ne colorie que les districts où un groupe est majoritaire de façon sûre (Montagnes, Vallée du Bandama et Sassandra-Marahoué restent blancs). Aucune alliance précise entre deux peuples réels n'est affirmée.
 
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 

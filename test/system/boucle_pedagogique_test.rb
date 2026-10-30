@@ -24,7 +24,10 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
   # [statement, type, [[answer, correct], …]] — the student picks the correct answer of each.
   QUESTIONS = [
     [ "La méiose produit quatre cellules filles.", "true_false", [ [ "Vrai", true ], [ "Faux", false ] ] ],
-    [ "Combien de chromosomes compte une cellule humaine ?", "single_choice", [ [ "23", false ], [ "46", true ], [ "92", false ] ] ]
+    [ "Combien de chromosomes compte une cellule humaine ?", "single_choice", [ [ "23", false ], [ "46", true ], [ "92", false ] ] ],
+    [ "La méiose se déroule dans les cellules sexuelles.", "true_false", [ [ "Vrai", true ], [ "Faux", false ] ] ],
+    [ "Combien de divisions compte la méiose ?", "single_choice", [ [ "Une", false ], [ "Deux", true ], [ "Trois", false ] ] ],
+    [ "Les cellules produites par la méiose sont-elles identiques à la cellule mère ?", "true_false", [ [ "Oui", false ], [ "Non", true ] ] ]
   ].freeze
 
   setup do
@@ -226,25 +229,20 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_equal [ "published" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
   end
 
-  # Format 2 de l'import `lnclass.course-tree` : la leçon, sa notion et son exercice (QUESTIONS), puis les quatre exercices de
-  # toute la leçon.
+  # Format 3 de l'import `lnclass.course-tree` : la leçon, sa notion (fiche de révision) et son exercice (QUESTIONS, 5 au plus
+  # bas), puis les quatre problèmes de toute la leçon.
   def lesson_document
     questions = QUESTIONS.map do |statement, type, answers|
       { "content" => statement, "question_type" => type,
+        "explanation" => "La bonne réponse est « #{answers.find { |(_, correct)| correct }.first} » : voir le cours sur la méiose.",
         "answers" => answers.map { |content, correct| { "content" => content, "correct" => correct } } }
     end
-    {
-      "format" => "lnclass.course-tree", "version" => 2,
-      "courses" => [ {
-        "name" => COURSE, "subtitle" => "Leçon 1", "content" => "<p>L'ADN porte l'information génétique.</p>",
-        "level_name" => "Tle", "series_name" => "D", "material_name" => "SVT",
-        "essentials" => [ { "name" => ESSENTIAL, "subtitle" => "Quatre cellules", "content" => "<p>La méiose produit quatre cellules haploïdes.</p>",
-                            "exercises" => [ { "title" => EXERCISE, "statement" => "Lis le sujet.", "exercise_type" => "fixation", "questions" => questions } ] } ],
-        "exercises" => Array.new(4) do |index|
-          { "title" => "Bilan #{index + 1}", "statement" => "Sur toute la leçon.", "exercise_type" => "evaluation", "questions" => questions }
-        end
-      } ]
-    }
+    exercise = revision_exercise(EXERCISE).merge("questions" => questions)
+    revision_sheet_document(
+      "name" => COURSE, "subtitle" => "Leçon 1", "level_name" => "Tle", "series_name" => "D", "material_name" => "SVT", "figures" => [],
+      "notions" => [ revision_notion(ESSENTIAL).merge("exercise" => exercise) ],
+      "exercises" => Array.new(4) { |index| revision_exercise("Bilan #{index + 1}").merge("questions" => questions) }
+    )
   end
 
   # ---------------------------------------------------------------------------------------------------------------------
@@ -318,7 +316,7 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
       assert_text "Aya Kouassi"
       # Maquette 10 : la ligne dit ses exercices faits et le badge de classe de l'élève (un 100 % sans faute : Diamant, 20/20).
       assert_text "1 fait sur 1"
-      assert_text "Diamant · 20/20"
+      assert_text "Moyenne 20/20 · Diamant"
     end
     assert_no_page_reload do
       issue_recovery_code_from_roster("[id='student_#{student.public_id}']")

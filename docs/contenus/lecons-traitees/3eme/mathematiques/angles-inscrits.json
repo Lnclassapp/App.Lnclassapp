@@ -1,0 +1,1700 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Angles inscrits",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "cercle-angle-centre",
+          "kind": "geometry",
+          "description": "Un cercle de centre O. Les points A et B sont sur le cercle et le point M aussi, sur le grand arc AB. On voit l'angle au centre AOB (100°) et l'angle inscrit AMB (50°) : ils interceptent le même arc AB. Les mesures des angles sont affichées sur les arcs de la figure.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 4.6985,
+                "y": 1.7101
+              },
+              {
+                "id": "B",
+                "x": -2.5,
+                "y": 4.3301
+              },
+              {
+                "id": "M",
+                "x": -2.8679,
+                "y": -4.0958
+              }
+            ],
+            "segments": [
+              [
+                "O",
+                "A"
+              ],
+              [
+                "O",
+                "B"
+              ],
+              [
+                "M",
+                "A"
+              ],
+              [
+                "M",
+                "B"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "O",
+                "r": 5
+              }
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              },
+              {
+                "vertex": "M",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "meme-arc",
+          "kind": "geometry",
+          "description": "Un cercle de centre O avec deux points A et B, et deux points M et N placés sur le grand arc AB, du même côté de la corde AB. Les angles inscrits AMB et ANB interceptent le même arc AB : la figure affiche leur mesure, 50° chacun, sur les arcs en M et en N.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 4.6985,
+                "y": 1.7101
+              },
+              {
+                "id": "B",
+                "x": -2.5,
+                "y": 4.3301
+              },
+              {
+                "id": "M",
+                "x": -4.0958,
+                "y": -2.8679
+              },
+              {
+                "id": "N",
+                "x": 2.1131,
+                "y": -4.5315
+              }
+            ],
+            "segments": [
+              [
+                "M",
+                "A"
+              ],
+              [
+                "M",
+                "B"
+              ],
+              [
+                "N",
+                "A"
+              ],
+              [
+                "N",
+                "B"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "O",
+                "r": 5
+              }
+            ],
+            "angles": [
+              {
+                "vertex": "M",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              },
+              {
+                "vertex": "N",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "demi-cercle",
+          "kind": "geometry",
+          "description": "Un cercle de centre O et de diamètre AB = 10. Le point C est sur le cercle, avec AC = 6 et BC = 8. Le triangle ABC est inscrit dans le demi-cercle : l'angle en C est droit, marqué par un petit carré. Les longueurs des trois côtés sont affichées.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": -5,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 5,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": -1.4,
+                "y": 4.8
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "A",
+                "C"
+              ],
+              [
+                "C",
+                "B"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "O",
+                "r": 5
+              }
+            ],
+            "angles": [
+              {
+                "vertex": "C",
+                "from": "A",
+                "to": "B",
+                "mark": "right"
+              }
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "C",
+                "text": "6"
+              },
+              {
+                "from": "C",
+                "to": "B",
+                "text": "8"
+              },
+              {
+                "from": "A",
+                "to": "B",
+                "text": "10"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rond-point-bornes",
+          "kind": "geometry",
+          "description": "Le plan d'un rond-point circulaire de centre O. Quatre bornes A, B, M et N sont sur le bord ; M et N sont sur le grand arc AB. La figure affiche l'angle au centre AOB (120°) et les deux angles inscrits AMB et ANB (60° chacun), qui interceptent le même arc AB.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 4.3301,
+                "y": 2.5
+              },
+              {
+                "id": "B",
+                "x": -4.3301,
+                "y": 2.5
+              },
+              {
+                "id": "M",
+                "x": -3.8302,
+                "y": -3.2139
+              },
+              {
+                "id": "N",
+                "x": 3.2139,
+                "y": -3.8302
+              }
+            ],
+            "segments": [
+              [
+                "O",
+                "A"
+              ],
+              [
+                "O",
+                "B"
+              ],
+              [
+                "M",
+                "A"
+              ],
+              [
+                "M",
+                "B"
+              ],
+              [
+                "N",
+                "A"
+              ],
+              [
+                "N",
+                "B"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "O",
+                "r": 5
+              }
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              },
+              {
+                "vertex": "M",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              },
+              {
+                "vertex": "N",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "poteaux-tir",
+          "kind": "geometry",
+          "description": "Le schéma d'un but de football : les poteaux A et B sont sur un cercle de centre O, avec l'angle au centre AOB de 90°. Les joueurs M et N, sur le grand arc AB, voient le but sous le même angle : la figure affiche 45° en M et en N, et 90° en O.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 3.5355,
+                "y": 3.5355
+              },
+              {
+                "id": "B",
+                "x": -3.5355,
+                "y": 3.5355
+              },
+              {
+                "id": "M",
+                "x": -2.5,
+                "y": -4.3301
+              },
+              {
+                "id": "N",
+                "x": 2.5,
+                "y": -4.3301
+              }
+            ],
+            "segments": [
+              [
+                "O",
+                "A"
+              ],
+              [
+                "O",
+                "B"
+              ],
+              [
+                "M",
+                "A"
+              ],
+              [
+                "M",
+                "B"
+              ],
+              [
+                "N",
+                "A"
+              ],
+              [
+                "N",
+                "B"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "O",
+                "r": 5
+              }
+            ],
+            "angles": [
+              {
+                "vertex": "O",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              },
+              {
+                "vertex": "M",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              },
+              {
+                "vertex": "N",
+                "from": "A",
+                "to": "B",
+                "mark": "arc"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rond-central-plan",
+          "kind": "geometry",
+          "description": "Le plan du rond central d'un terrain de football : un cercle de centre O dont le diamètre AB mesure 13. Le joueur C est sur le cercle, avec AC = 5 et BC = 12. L'angle en C du triangle ABC est droit, marqué par un petit carré. Les trois longueurs sont affichées.",
+          "params": {
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": -6.5,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 6.5,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": -4.5769,
+                "y": 4.6154
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "A",
+                "C"
+              ],
+              [
+                "C",
+                "B"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "O",
+                "r": 6.5
+              }
+            ],
+            "angles": [
+              {
+                "vertex": "C",
+                "from": "A",
+                "to": "B",
+                "mark": "right"
+              }
+            ],
+            "labels": [
+              {
+                "from": "A",
+                "to": "C",
+                "text": "5"
+              },
+              {
+                "from": "C",
+                "to": "B",
+                "text": "12"
+              },
+              {
+                "from": "A",
+                "to": "B",
+                "text": "13"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un angle au centre et un angle inscrit",
+          "remember": "Un **angle au centre** a son sommet au centre $O$ du cercle. Un **angle inscrit** a son sommet sur le cercle, et ses deux côtés sont des cordes (une corde est un segment dont les deux extrémités sont sur le cercle). Un angle **intercepte** l'arc de cercle situé à l'intérieur de l'angle, entre ses deux côtés. Si $M$ est sur le grand arc $AB$, l'angle au centre $\\widehat{AOB}$ et l'angle inscrit $\\widehat{AMB}$ interceptent le même arc $AB$.",
+          "method": [
+            "Repérer le sommet de l'angle et dire s'il est au centre du cercle, sur le cercle ou ailleurs.",
+            "Nommer les deux points où les côtés de l'angle coupent le cercle.",
+            "Identifier l'arc intercepté : c'est l'arc compris à l'intérieur de l'angle, entre ces deux points.",
+            "Conclure : sommet au centre, c'est un angle au centre ; sommet sur le cercle avec deux côtés qui sont des cordes, c'est un angle inscrit."
+          ],
+          "example": {
+            "statement": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, et $[MA]$ et $[MB]$ sont des cordes. Reconnaître l'angle $\\widehat{AMB}$ et dire quel arc il intercepte.",
+            "steps": [
+              "Repérer : le sommet de $\\widehat{AMB}$ est $M$. Il est sur le cercle, ce n'est pas le centre $O$.",
+              "Nommer : les côtés de l'angle coupent le cercle en $A$ et en $B$.",
+              "Identifier : l'arc intercepté est l'arc $AB$ situé à l'intérieur de l'angle, celui qui ne contient pas $M$.",
+              "Conclure : le sommet $M$ est sur le cercle et $[MA]$, $[MB]$ sont des cordes, donc $\\widehat{AMB}$ est un angle inscrit qui intercepte l'arc $AB$."
+            ]
+          },
+          "pitfall": "Ne pas se fier aux seuls points $A$ et $B$ : c'est le **sommet** qui décide. Les angles $\\widehat{AOB}$ et $\\widehat{AMB}$ utilisent les mêmes points $A$ et $B$, mais le premier a son sommet au centre $O$ (angle au centre) et le second a son sommet $M$ sur le cercle (angle inscrit). Contre-exemple : si $\\widehat{AOB} = 100°$ et si $M$ est sur le grand arc $AB$, alors $\\widehat{AMB} = 50°$ : ce sont deux angles différents. Pour éviter l'erreur, regarde toujours d'abord où est le sommet.",
+          "figure": "cercle-angle-centre",
+          "exercise": {
+            "title": "Reconnaître des angles au centre et inscrits",
+            "statement": "Dans cet exercice, tu reconnais un angle au centre et un angle inscrit avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un cercle a pour centre $O$ et les points $A$, $B$ et $M$ sont sur le cercle. Quel est l'angle au centre qui intercepte l'arc $AB$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le sommet : un angle au centre a son sommet au centre $O$. Étape 2 — Nommer les points où les côtés coupent le cercle : $A$ et $B$. Étape 3 — Identifier l'arc : il s'agit de l'arc $AB$. Étape 4 — Conclure : l'angle de sommet $O$ dont les côtés passent par $A$ et $B$ est $\\widehat{AOB}$. Les angles $\\widehat{AMB}$ et $\\widehat{OMA}$ (sommet $M$ sur le cercle) et $\\widehat{OAB}$ (sommet $A$) n'ont pas leur sommet au centre : ils ne sont pas des angles au centre.",
+                "answers": [
+                  {
+                    "content": "$\\widehat{AOB}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{AMB}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{OAB}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{OMA}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle et $[MA]$, $[MB]$ sont des cordes. Que dit-on de l'angle $\\widehat{AMB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le sommet de $\\widehat{AMB}$ est $M$, il est sur le cercle et non au centre. Étape 2 — Nommer : les côtés coupent le cercle en $A$ et en $B$. Étape 3 — Identifier : l'arc intercepté est l'arc $AB$ qui ne contient pas $M$. Étape 4 — Conclure : sommet sur le cercle, côtés qui sont des cordes, donc c'est un angle inscrit. Ce n'est pas un angle au centre, car son sommet n'est pas $O$.",
+                "answers": [
+                  {
+                    "content": "C'est un angle inscrit.",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est un angle au centre.",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est un angle plat.",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est un angle droit.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$ et les points $A$, $B$ et $M$ sont sur le cercle. L'angle $\\widehat{AOB}$ est un angle inscrit.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le sommet de $\\widehat{AOB}$ est $O$, le centre du cercle. Étape 2 — Nommer : les côtés coupent le cercle en $A$ et en $B$. Étape 3 — Identifier : l'angle intercepte l'arc $AB$. Étape 4 — Conclure : le sommet est au centre, c'est donc un angle au centre. La proposition est fausse : les points $A$ et $B$ sont sur le cercle, mais c'est le sommet $O$ qui décide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle de centre $O$ passe par les points $A$, $B$, $C$ et $D$. Quels sont les deux angles inscrits parmi les propositions ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer le sommet de chaque angle. $\\widehat{ACB}$ a son sommet $C$ sur le cercle et $\\widehat{ADB}$ a son sommet $D$ sur le cercle. Étape 2 — Nommer : leurs côtés coupent le cercle en $A$ et en $B$. Étape 3 — Identifier : ils interceptent un arc $AB$. Étape 4 — Conclure : sommet sur le cercle et côtés qui sont des cordes, ce sont des angles inscrits. En revanche $\\widehat{AOB}$, $\\widehat{COD}$ et $\\widehat{BOD}$ ont leur sommet en $O$ : ce sont des angles au centre.",
+                "answers": [
+                  {
+                    "content": "$\\widehat{ACB}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{ADB}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{AOB}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{COD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{BOD}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$, les points $A$, $B$ et $M$ sont sur le cercle et $M$ est sur le grand arc $AB$. Quel arc l'angle inscrit $\\widehat{AMB}$ intercepte-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le sommet est $M$, sur le cercle. Étape 2 — Nommer : les côtés coupent le cercle en $A$ et en $B$. Étape 3 — Identifier l'arc intercepté : c'est l'arc compris à l'intérieur de l'angle, entre $A$ et $B$, donc celui qui ne contient pas $M$. L'arc qui contient $M$ est de l'autre côté de l'angle, il n'est pas intercepté. Étape 4 — Conclure : $\\widehat{AMB}$ est un angle inscrit qui intercepte l'arc $AB$ ne contenant pas $M$.",
+                "answers": [
+                  {
+                    "content": "L'arc $AB$ qui ne contient pas $M$",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'arc $AB$ qui contient $M$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le segment $[AB]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cercle entier",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$ et les points $A$, $B$ et $M$ sont sur le cercle. Comme $\\widehat{AOB}$ et $\\widehat{AMB}$ utilisent les mêmes points $A$ et $B$, ce sont deux angles inscrits.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le sommet de chaque angle : $O$ pour $\\widehat{AOB}$, $M$ pour $\\widehat{AMB}$. Étape 2 — Nommer : dans les deux cas, les côtés coupent le cercle en $A$ et en $B$. Étape 3 — Identifier : les deux angles interceptent le même arc $AB$ quand $M$ est sur le grand arc. Étape 4 — Conclure : $\\widehat{AOB}$ a son sommet au centre, c'est un angle au centre ; $\\widehat{AMB}$ est un angle inscrit. La proposition est fausse : le piège est de juger d'après les points $A$ et $B$ au lieu de regarder le sommet.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer avec l'angle au centre et l'angle inscrit",
+          "remember": "Si un angle inscrit et un angle au centre interceptent le même arc, alors l'angle au centre mesure le **double** de l'angle inscrit : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$, donc $\\widehat{AMB} = \\widehat{AOB} \\div 2$. La mesure d'un arc est celle de l'angle au centre qui l'intercepte. Un tour complet de cercle mesure $360°$.",
+          "method": [
+            "Vérifier que l'angle inscrit et l'angle au centre interceptent le même arc.",
+            "Identifier l'angle connu et l'angle cherché : lequel est au centre, lequel est inscrit.",
+            "Écrire la relation : angle au centre $= 2 \\times$ angle inscrit.",
+            "Calculer en doublant (on cherche l'angle au centre) ou en divisant par 2 (on cherche l'angle inscrit)."
+          ],
+          "example": {
+            "statement": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, $M$ sur le grand arc $AB$, et $\\widehat{AOB} = 100°$. Calculer $\\widehat{AMB}$.",
+            "steps": [
+              "Vérifier : $\\widehat{AOB}$ et $\\widehat{AMB}$ interceptent le même arc $AB$, car $M$ est sur le grand arc.",
+              "Identifier : l'angle connu est $\\widehat{AOB} = 100°$ (au centre), l'angle cherché est $\\widehat{AMB}$ (inscrit).",
+              "Écrire la relation : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$.",
+              "Calculer : on cherche l'angle inscrit, donc on divise par 2 : $\\widehat{AMB} = 100° \\div 2 = 50°$."
+            ]
+          },
+          "pitfall": "Ne pas multiplier quand il faut diviser. L'angle inscrit est toujours le **plus petit** des deux : c'est la moitié de l'angle au centre. Contre-exemple : si $\\widehat{AOB} = 80°$, l'angle $\\widehat{AMB}$ vaut $40°$ et non $160°$. Un angle inscrit de $160°$ serait deux fois plus grand que l'angle au centre qui intercepte le même arc : c'est impossible. Pour éviter l'erreur, demande-toi lequel des deux angles est au centre : c'est le plus grand.",
+          "figure": "cercle-angle-centre",
+          "exercise": {
+            "title": "Calculer un angle avec l'angle au centre",
+            "statement": "Dans cet exercice, tu passes de l'angle au centre à l'angle inscrit, et inversement, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, $M$ sur le grand arc $AB$, et $\\widehat{AOB} = 100°$. Que vaut $\\widehat{AMB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : $\\widehat{AOB}$ et $\\widehat{AMB}$ interceptent le même arc $AB$. Étape 2 — Identifier : $\\widehat{AOB} = 100°$ est connu (au centre), $\\widehat{AMB}$ est cherché (inscrit). Étape 3 — Écrire : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. Étape 4 — Calculer : $\\widehat{AMB} = 100° \\div 2 = 50°$. La proposition $200°$ vient d'une multiplication au lieu d'une division, et $80°$ d'une confusion avec l'angle supplémentaire.",
+                "answers": [
+                  {
+                    "content": "$50°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$200°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$100°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$80°$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, $M$ sur le grand arc $AB$, et $\\widehat{AMB} = 35°$. Que vaut $\\widehat{AOB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : les deux angles interceptent le même arc $AB$. Étape 2 — Identifier : $\\widehat{AMB} = 35°$ est connu (inscrit), $\\widehat{AOB}$ est cherché (au centre). Étape 3 — Écrire : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. Étape 4 — Calculer : on cherche l'angle au centre, donc on double : $\\widehat{AOB} = 2 \\times 35° = 70°$. La proposition $17,5°$ vient d'une division à tort.",
+                "answers": [
+                  {
+                    "content": "$70°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$17,5°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$35°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$145°$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, $M$ sur le grand arc $AB$, et $\\widehat{AOB} = 130°$. Que vaut $\\widehat{AMB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : $\\widehat{AOB}$ et $\\widehat{AMB}$ interceptent le même arc $AB$. Étape 2 — Identifier : l'angle au centre $\\widehat{AOB} = 130°$ est connu. Étape 3 — Écrire : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. Étape 4 — Calculer : $\\widehat{AMB} = 130° \\div 2 = 65°$. La proposition $260°$ double au lieu de diviser, et $50°$ vient de $180° - 130°$, un calcul qui n'a aucun rapport avec la méthode.",
+                "answers": [
+                  {
+                    "content": "$65°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$260°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$50°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$130°$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, $M$ sur le grand arc $AB$. Si $\\widehat{AMB} = 40°$, alors $\\widehat{AOB} = 20°$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : les deux angles interceptent le même arc $AB$. Étape 2 — Identifier : $\\widehat{AMB} = 40°$ est l'angle inscrit, $\\widehat{AOB}$ est l'angle au centre. Étape 3 — Écrire : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. Étape 4 — Calculer : $\\widehat{AOB} = 2 \\times 40° = 80°$ et non $20°$. La proposition est fausse : $20°$ s'obtient en divisant par 2 l'angle inscrit, alors que l'angle au centre est le plus grand des deux.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, $M$ sur le grand arc $AB$, avec $\\widehat{AOB} = (5x)°$ et $\\widehat{AMB} = (x + 24)°$. Quelle est la valeur de $x$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : les deux angles interceptent le même arc $AB$. Étape 2 — Identifier : $\\widehat{AOB} = 5x$ est l'angle au centre, $\\widehat{AMB} = x + 24$ est l'angle inscrit. Étape 3 — Écrire : $5x = 2 \\times (x + 24)$. Étape 4 — Calculer : $5x = 2x + 48$, donc $3x = 48$ et $x = 16$. Vérification : $\\widehat{AOB} = 80°$ et $\\widehat{AMB} = 40°$. Si on écrivait $5x = x + 24$ (égalité des deux angles), on trouverait $x = 6$ : c'est l'erreur de celui qui oublie le facteur 2.",
+                "answers": [
+                  {
+                    "content": "$x = 16$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x = 6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 24$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 48$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle a pour centre $O$. Les points $A$, $B$ et $M$ sont sur le cercle, $M$ sur le grand arc $AB$, et $\\widehat{AOB} = 76°$. Quelles sont les deux propositions vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Vérifier : les deux angles interceptent le même arc $AB$. Étape 2 — Identifier : $\\widehat{AOB} = 76°$ est l'angle au centre. Étape 3 — Écrire : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. Étape 4 — Calculer : $\\widehat{AMB} = 76° \\div 2 = 38°$. Les deux propositions vraies sont donc $\\widehat{AMB} = 38°$ et $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. Les propositions $152°$ (on a doublé) et $76°$ (on a recopié) sont fausses, et $104°$ n'a aucun lien avec la méthode.",
+                "answers": [
+                  {
+                    "content": "$\\widehat{AMB} = 38°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{AOB} = 2 \\times \\widehat{AMB}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{AMB} = 152°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{AMB} = 76°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{AMB} = 104°$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Utiliser des angles inscrits qui interceptent le même arc",
+          "remember": "Si deux angles inscrits interceptent le même arc, alors ils ont la **même mesure**. Par exemple, si $M$ et $N$ sont sur le grand arc $AB$, alors $\\widehat{AMB} = \\widehat{ANB}$. Cela vient de la propriété précédente : chacun mesure la moitié de l'angle au centre qui intercepte l'arc $AB$.",
+          "method": [
+            "Repérer les deux angles inscrits et vérifier qu'ils interceptent le même arc, c'est-à-dire que leurs sommets sont du même côté de la corde.",
+            "Citer la propriété : deux angles inscrits qui interceptent le même arc sont égaux.",
+            "Écrire l'égalité des deux angles.",
+            "Remplacer par les mesures connues, puis calculer la mesure cherchée (ou la valeur de $x$)."
+          ],
+          "example": {
+            "statement": "Un cercle contient les points $A$, $B$, $M$ et $N$, avec $M$ et $N$ sur le grand arc $AB$. On donne $\\widehat{AMB} = 50°$. Calculer $\\widehat{ANB}$.",
+            "steps": [
+              "Repérer : $\\widehat{AMB}$ et $\\widehat{ANB}$ sont deux angles inscrits, et $M$ et $N$ sont du même côté de $(AB)$ : ils interceptent le même arc $AB$.",
+              "Citer : deux angles inscrits qui interceptent le même arc sont égaux.",
+              "Écrire : $\\widehat{ANB} = \\widehat{AMB}$.",
+              "Remplacer et calculer : $\\widehat{ANB} = 50°$."
+            ]
+          },
+          "pitfall": "Ne pas appliquer la propriété quand les sommets sont de part et d'autre de la corde : les deux angles n'interceptent alors plus le même arc. Contre-exemple : $\\widehat{AMB} = 50°$ avec $M$ sur le grand arc $AB$ ; si $P$ est sur le petit arc $AB$, l'angle $\\widehat{APB}$ intercepte l'autre arc, de $360° - 100° = 260°$, donc $\\widehat{APB} = 130°$ et non $50°$. Pour éviter l'erreur, vérifie toujours que les deux sommets sont du même côté de la corde.",
+          "figure": "meme-arc",
+          "exercise": {
+            "title": "Utiliser les angles inscrits égaux",
+            "statement": "Dans cet exercice, tu utilises des angles inscrits qui interceptent le même arc, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un cercle contient les points $A$, $B$, $M$ et $N$, avec $M$ et $N$ sur le grand arc $AB$. On donne $\\widehat{AMB} = 50°$. Que vaut $\\widehat{ANB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $\\widehat{AMB}$ et $\\widehat{ANB}$ sont inscrits, et $M$ et $N$ sont du même côté de $(AB)$ : même arc intercepté. Étape 2 — Citer la propriété : deux angles inscrits qui interceptent le même arc sont égaux. Étape 3 — Écrire : $\\widehat{ANB} = \\widehat{AMB}$. Étape 4 — Remplacer : $\\widehat{ANB} = 50°$. Les propositions $100°$ (on a doublé) et $25°$ (on a divisé) confondent cette propriété avec celle de l'angle au centre.",
+                "answers": [
+                  {
+                    "content": "$50°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$100°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$25°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$130°$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle contient les points $A$, $B$, $M$ et $N$, avec $M$ et $N$ sur le grand arc $AB$. On donne $\\widehat{ANB} = 38°$. Que vaut $\\widehat{AMB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les deux angles sont inscrits et interceptent le même arc $AB$, car $M$ et $N$ sont du même côté de $(AB)$. Étape 2 — Citer : deux angles inscrits qui interceptent le même arc sont égaux. Étape 3 — Écrire : $\\widehat{AMB} = \\widehat{ANB}$. Étape 4 — Remplacer : $\\widehat{AMB} = 38°$. Doubler ($76°$) ou diviser ($19°$) serait utile seulement avec un angle au centre.",
+                "answers": [
+                  {
+                    "content": "$38°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$76°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$19°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$142°$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux angles inscrits qui interceptent le même arc ont la même mesure.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer deux angles inscrits qui interceptent le même arc $AB$. Étape 2 — Citer la propriété : ils sont égaux. Étape 3 — Écrire l'égalité : $\\widehat{AMB} = \\widehat{ANB}$. Explication : chacun mesure la moitié de l'angle au centre qui intercepte l'arc $AB$, donc ils ont la même mesure. La proposition est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle de centre $O$ contient les points $A$, $B$, $M$ et $N$, avec $M$ et $N$ sur le grand arc $AB$. On donne $\\widehat{AOB} = 84°$. Quelles sont les deux propositions vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : $M$ et $N$ sont du même côté de $(AB)$, donc $\\widehat{AMB}$ et $\\widehat{ANB}$ interceptent le même arc que $\\widehat{AOB}$. Étape 2 — Citer : chaque angle inscrit vaut la moitié de l'angle au centre. Étape 3 — Écrire : $\\widehat{AMB} = \\widehat{ANB} = \\widehat{AOB} \\div 2$. Étape 4 — Calculer : $84° \\div 2 = 42°$. Les deux propositions vraies sont $\\widehat{AMB} = 42°$ et $\\widehat{ANB} = 42°$. Les propositions $84°$ et $168°$ oublient de diviser ou doublent à tort, et $42°$ n'est pas la somme des deux angles.",
+                "answers": [
+                  {
+                    "content": "$\\widehat{AMB} = 42°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{ANB} = 42°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\widehat{AMB} = 84°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{ANB} = 168°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\widehat{AMB} + \\widehat{ANB} = 42°$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle contient les points $A$, $B$, $M$ et $N$, avec $M$ et $N$ sur le grand arc $AB$. On donne $\\widehat{AMB} = (3x + 5)°$ et $\\widehat{ANB} = (5x - 21)°$. Quelle est la valeur de $x$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les deux angles sont inscrits et interceptent le même arc $AB$. Étape 2 — Citer : deux angles inscrits qui interceptent le même arc sont égaux. Étape 3 — Écrire : $3x + 5 = 5x - 21$. Étape 4 — Calculer : $26 = 2x$, donc $x = 13$. Vérification : $3 \\times 13 + 5 = 44$ et $5 \\times 13 - 21 = 44$. Si on oublie de diviser par 2, on trouve $26$ ; si on se trompe de signe en regroupant, on obtient $2x = -16$, donc $x = -8$.",
+                "answers": [
+                  {
+                    "content": "$x = 13$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x = 26$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = 2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = -8$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cercle contient les points $A$, $B$, $M$ et $P$, avec $M$ sur le grand arc $AB$ et $P$ sur le petit arc $AB$. On donne $\\widehat{AMB} = 50°$. Alors $\\widehat{APB} = 50°$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $M$ et $P$ sont de part et d'autre de la corde $[AB]$, donc les angles n'interceptent pas le même arc. Étape 2 — La propriété des angles inscrits égaux ne s'applique pas. Calcul pour le vérifier : $\\widehat{AMB} = 50°$ donne un angle au centre de $100°$ pour le petit arc $AB$ ; le grand arc mesure $360° - 100° = 260°$, donc $\\widehat{APB} = 260° \\div 2 = 130°$. La proposition est fausse : c'est le piège de la fiche, qui consiste à oublier de vérifier que les sommets sont du même côté de la corde.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Utiliser l'angle inscrit dans un demi-cercle",
+          "remember": "Si $A$, $B$ et $C$ sont sur un cercle et si $[AB]$ est un diamètre, alors le triangle $ABC$ est **rectangle en $C$**. Autrement dit, un angle inscrit qui intercepte un diamètre est un angle droit : l'angle au centre correspondant est plat ($180°$), donc l'angle inscrit mesure $180° \\div 2 = 90°$. Réciproquement, si $ABC$ est rectangle en $C$, son hypoténuse $[AB]$ est un diamètre de son cercle circonscrit, dont le centre est le milieu de $[AB]$.",
+          "method": [
+            "Repérer le cercle, le diamètre et le troisième point du triangle, placé sur le cercle.",
+            "Vérifier que le côté choisi est bien un diamètre, c'est-à-dire qu'il passe par le centre $O$.",
+            "Citer la propriété : un angle inscrit qui intercepte un diamètre est un angle droit.",
+            "Conclure que le triangle est rectangle au troisième point, puis utiliser Pythagore ou la somme des angles pour calculer ce qui est cherché."
+          ],
+          "example": {
+            "statement": "Le point $C$ est sur le cercle de diamètre $[AB]$, avec $AB = 10$ cm et $AC = 6$ cm. Calculer $BC$.",
+            "steps": [
+              "Repérer : le cercle a pour diamètre $[AB]$, et le troisième point du triangle est $C$, sur le cercle.",
+              "Vérifier : $[AB]$ est un diamètre, donc il passe par le centre $O$ du cercle.",
+              "Citer : l'angle inscrit $\\widehat{ACB}$ intercepte le diamètre $[AB]$, c'est donc un angle droit.",
+              "Conclure : $ABC$ est rectangle en $C$. D'après Pythagore, $BC^2 = AB^2 - AC^2 = 100 - 36 = 64$, donc $BC = \\sqrt{64} = 8$ cm."
+            ]
+          },
+          "pitfall": "Ne pas dire « rectangle » quand le côté n'est pas un diamètre. Il faut que $[AB]$ passe par le centre $O$. Contre-exemple : si $[AB]$ est une corde qui ne passe pas par $O$ et si $\\widehat{AOB} = 100°$ et si $C$ est sur le grand arc $AB$, alors $\\widehat{ACB} = 50°$ et non $90°$. Pour éviter l'erreur, vérifie toujours que le côté est un diamètre avant de parler d'angle droit.",
+          "figure": "demi-cercle",
+          "exercise": {
+            "title": "Utiliser le triangle inscrit dans un demi-cercle",
+            "statement": "Dans cet exercice, tu reconnais un triangle rectangle grâce à un diamètre, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Le point $C$ est sur un cercle de diamètre $[AB]$, avec $C$ différent de $A$ et de $B$. Quelle est la nature du triangle $ABC$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le cercle a pour diamètre $[AB]$ et le troisième point est $C$, sur le cercle. Étape 2 — Vérifier : $[AB]$ est un diamètre, il passe par le centre. Étape 3 — Citer : un angle inscrit qui intercepte un diamètre est un angle droit, donc $\\widehat{ACB} = 90°$. Étape 4 — Conclure : $ABC$ est rectangle en $C$, pas en $A$ : l'angle droit est au sommet qui n'est pas sur le diamètre.",
+                "answers": [
+                  {
+                    "content": "Rectangle en $C$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Rectangle en $A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Isocèle en $C$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Équilatéral",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le point $C$ est sur le cercle de diamètre $[AB]$, avec $AB = 13$ cm et $AC = 5$ cm. Quelle est la longueur $BC$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le diamètre est $[AB]$ et le troisième point est $C$. Étape 2 — Vérifier : $[AB]$ passe par le centre, c'est un diamètre. Étape 3 — Citer : l'angle inscrit $\\widehat{ACB}$ intercepte un diamètre, il est droit. Étape 4 — Conclure : $ABC$ est rectangle en $C$, donc $BC^2 = AB^2 - AC^2 = 169 - 25 = 144$ et $BC = 12$ cm. La proposition $8$ cm vient de $13 - 5$ et $18$ cm de $13 + 5$ : on ne calcule pas ainsi un côté d'un triangle rectangle.",
+                "answers": [
+                  {
+                    "content": "$12$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$8$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$18$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sqrt{194}$ cm",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le point $C$ est sur un cercle de rayon $10$ cm dont $[AB]$ est un diamètre, avec $AC = 12$ cm. Quelle est la longueur $BC$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le diamètre est $[AB]$, le troisième point est $C$. Étape 2 — Vérifier : $[AB]$ est un diamètre de longueur $2 \\times 10 = 20$ cm. Étape 3 — Citer : l'angle $\\widehat{ACB}$ est droit. Étape 4 — Conclure : $ABC$ est rectangle en $C$, donc $BC^2 = 20^2 - 12^2 = 400 - 144 = 256$ et $BC = 16$ cm. Le piège est de prendre le rayon $10$ pour l'hypoténuse : on trouverait $\\sqrt{100 - 144}$, qui n'existe pas.",
+                "answers": [
+                  {
+                    "content": "$16$ cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "$8$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sqrt{544}$ cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "$22$ cm",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le segment $[AB]$ est une corde d'un cercle de centre $O$ qui ne passe pas par $O$. Le point $C$ est sur le cercle. Alors le triangle $ABC$ est rectangle en $C$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le cercle, le côté $[AB]$ et le point $C$. Étape 2 — Vérifier : $[AB]$ ne passe pas par le centre $O$, ce n'est pas un diamètre. Étape 3 — La propriété de l'angle droit ne s'applique donc pas. Étape 4 — On ne peut pas conclure que $ABC$ est rectangle. La proposition est fausse : par exemple, si $\\widehat{AOB} = 100°$ et si $C$ est sur le grand arc $AB$, alors $\\widehat{ACB} = 50°$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le triangle $ABC$ est rectangle en $C$ et $AB = 10$ cm. Quelles sont les deux propositions vraies sur le cercle qui passe par $A$, $B$ et $C$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : le triangle est rectangle en $C$, l'hypoténuse est $[AB]$. Étape 2 — Vérifier : par la réciproque, l'hypoténuse $[AB]$ est un diamètre du cercle qui passe par $A$, $B$ et $C$. Étape 3 — Citer : le centre est le milieu de $[AB]$. Étape 4 — Conclure : le rayon est $10 \\div 2 = 5$ cm. Les deux propositions vraies sont donc « son centre est le milieu de $[AB]$ » et « son rayon est $5$ cm ». Le rayon n'est pas $10$ cm, qui est le diamètre.",
+                "answers": [
+                  {
+                    "content": "Son centre est le milieu de $[AB]$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son rayon est $5$ cm.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son rayon est $10$ cm.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son centre est le point $C$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son centre est le milieu de $[AC]$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le point $C$ est sur le cercle de diamètre $[AB]$, avec $C$ différent de $A$ et de $B$, et $\\widehat{ABC} = 35°$. Que vaut $\\widehat{BAC}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le diamètre est $[AB]$, le troisième point est $C$. Étape 2 — Vérifier : $[AB]$ passe par le centre. Étape 3 — Citer : l'angle inscrit $\\widehat{ACB}$ est droit, il mesure $90°$. Étape 4 — Conclure : $ABC$ est rectangle en $C$, et la somme des angles du triangle vaut $180°$, donc $\\widehat{BAC} = 180° - 90° - 35° = 55°$. La proposition $35°$ recopie l'angle donné, et $145°$ vient de $180° - 35°$ en oubliant l'angle droit.",
+                "answers": [
+                  {
+                    "content": "$55°$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$35°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$145°$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$70°$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le rond-point de la mairie",
+          "statement": "Un rond-point circulaire a pour centre O. Quatre bornes A, B, M et N sont placées sur son bord. Les bornes M et N sont sur le grand arc AB, du même côté de la corde AB. L'angle au centre AOB mesure 120°. Tu appliques les fiches de la leçon pour calculer des angles.",
+          "exercise_type": "fixation",
+          "figure": "rond-point-bornes",
+          "questions": [
+            {
+              "content": "Un rond-point a pour centre $O$. Les bornes $A$, $B$ et $M$ sont sur son bord, $M$ sur le grand arc $AB$, et $\\widehat{AOB} = 120°$. Que vaut $\\widehat{AMB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Vérifier que $\\widehat{AOB}$ (au centre) et $\\widehat{AMB}$ (inscrit) interceptent le même arc $AB$ : oui, car $M$ est sur le grand arc. 2) Identifier : l'angle connu est l'angle au centre, l'angle cherché est l'angle inscrit. 3) Écrire la relation : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. 4) Calculer : $\\widehat{AMB} = 120° \\div 2 = 60°$. La proposition $240°$ vient d'un doublement à tort.",
+              "answers": [
+                {
+                  "content": "$60°$",
+                  "correct": true
+                },
+                {
+                  "content": "$240°$",
+                  "correct": false
+                },
+                {
+                  "content": "$120°$",
+                  "correct": false
+                },
+                {
+                  "content": "$30°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les bornes $A$, $B$, $M$ et $N$ sont sur son bord, $M$ et $N$ sur le grand arc $AB$, et $\\widehat{AMB} = 60°$. Que vaut $\\widehat{ANB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : $\\widehat{AMB}$ et $\\widehat{ANB}$ sont deux angles inscrits, et $M$ et $N$ sont du même côté de $(AB)$ : ils interceptent le même arc $AB$. 2) Citer la propriété : deux angles inscrits qui interceptent le même arc sont égaux. 3) Écrire : $\\widehat{ANB} = \\widehat{AMB}$. 4) Remplacer : $\\widehat{ANB} = 60°$. Doubler ($120°$) ou diviser ($30°$) ne s'applique qu'avec un angle au centre.",
+              "answers": [
+                {
+                  "content": "$60°$",
+                  "correct": true
+                },
+                {
+                  "content": "$120°$",
+                  "correct": false
+                },
+                {
+                  "content": "$30°$",
+                  "correct": false
+                },
+                {
+                  "content": "$90°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les bornes $A$ et $B$ sont sur son bord et $\\widehat{AOB} = 120°$. L'arc $AB$ intercepté par cet angle mesure $120°$.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Repérer le sommet : $O$ est le centre, donc $\\widehat{AOB}$ est un angle au centre. 2) Identifier l'arc : il est intercepté entre $A$ et $B$. 3) Citer la règle : la mesure d'un arc est celle de l'angle au centre qui l'intercepte. 4) Conclure : l'arc $AB$ mesure $120°$. La proposition est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les bornes $A$, $B$, $M$ et $N$ sont sur son bord, $M$ et $N$ sur le grand arc $AB$, et $\\widehat{AOB} = 120°$. Quelles sont les deux propositions vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Les angles $\\widehat{AMB}$ et $\\widehat{ANB}$ sont inscrits et interceptent le même arc $AB$ que l'angle au centre $\\widehat{AOB}$. 2) Chaque angle inscrit vaut la moitié de l'angle au centre : $120° \\div 2 = 60°$. 3) Comme les deux angles inscrits interceptent le même arc, ils sont égaux. Les propositions vraies sont donc $\\widehat{AMB} = \\widehat{ANB}$ et $\\widehat{AOB} = 2 \\times \\widehat{AMB}$. Les propositions $\\widehat{AMB} = 120°$, $\\widehat{ANB} = 240°$ et $\\widehat{AMB} + \\widehat{ANB} = 60°$ sont fausses.",
+              "answers": [
+                {
+                  "content": "$\\widehat{AMB} = \\widehat{ANB}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\widehat{AOB} = 2 \\times \\widehat{AMB}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\widehat{AMB} = 120°$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\widehat{ANB} = 240°$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\widehat{AMB} + \\widehat{ANB} = 60°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les bornes $A$ et $B$ sont sur son bord, avec $\\widehat{AOB} = 120°$. La borne $P$ est sur le petit arc $AB$. Que vaut $\\widehat{APB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : $P$ est de l'autre côté de la corde $[AB]$ que le grand arc, donc $\\widehat{APB}$ n'intercepte pas le petit arc, mais le grand arc $AB$. 2) Le grand arc mesure $360° - 120° = 240°$. 3) Un angle inscrit mesure la moitié de l'arc qu'il intercepte. 4) Calculer : $\\widehat{APB} = 240° \\div 2 = 120°$. La proposition $60°$ applique à tort la propriété des angles égaux, alors que $P$ n'est pas du même côté de $(AB)$ que $M$.",
+              "answers": [
+                {
+                  "content": "$120°$",
+                  "correct": true
+                },
+                {
+                  "content": "$60°$",
+                  "correct": false
+                },
+                {
+                  "content": "$240°$",
+                  "correct": false
+                },
+                {
+                  "content": "$30°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les bornes $A$ et $B$ sont sur son bord et $\\widehat{AOB} = 120°$. Que vaut $\\widehat{OAB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : $OA$ et $OB$ sont deux rayons du même cercle, donc $OA = OB$ et le triangle $OAB$ est isocèle en $O$. 2) Citer : dans un triangle isocèle, les angles à la base sont égaux. 3) Écrire : $\\widehat{OAB} = \\widehat{OBA}$ et la somme des angles vaut $180°$. 4) Calculer : $\\widehat{OAB} = (180° - 120°) \\div 2 = 30°$. La proposition $60°$ oublie de partager entre les deux angles de la base.",
+              "answers": [
+                {
+                  "content": "$30°$",
+                  "correct": true
+                },
+                {
+                  "content": "$60°$",
+                  "correct": false
+                },
+                {
+                  "content": "$120°$",
+                  "correct": false
+                },
+                {
+                  "content": "$40°$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le rond central du terrain",
+          "statement": "Sur le plan d'un terrain de football, le rond central est un cercle de centre O dont le diamètre [AB] mesure 13 cm. Le joueur C est placé sur le cercle, avec AC = 5 cm. Tu utilises l'angle inscrit dans un demi-cercle.",
+          "exercise_type": "fixation",
+          "figure": "rond-central-plan",
+          "questions": [
+            {
+              "content": "Sur le plan d'un terrain, le rond central est un cercle de diamètre $[AB]$ et le joueur $C$ est sur le cercle, différent de $A$ et de $B$. Quelle est la nature du triangle $ABC$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer le cercle, le diamètre $[AB]$ et le troisième point $C$ sur le cercle. 2) Vérifier que $[AB]$ est un diamètre : c'est donné, il passe par le centre. 3) Citer la propriété : un angle inscrit qui intercepte un diamètre est un angle droit, donc $\\widehat{ACB} = 90°$. 4) Conclure : $ABC$ est rectangle en $C$. Il n'est pas rectangle en $A$, car l'angle droit est au sommet qui n'est pas sur le diamètre.",
+              "answers": [
+                {
+                  "content": "Rectangle en $C$",
+                  "correct": true
+                },
+                {
+                  "content": "Rectangle en $A$",
+                  "correct": false
+                },
+                {
+                  "content": "Rectangle en $B$",
+                  "correct": false
+                },
+                {
+                  "content": "Équilatéral",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le rond central est un cercle de diamètre $[AB]$ avec $AB = 13$ cm. Le joueur $C$ est sur le cercle, avec $AC = 5$ cm. Quelle est la longueur $BC$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer le diamètre $[AB]$ et le point $C$ sur le cercle. 2) Vérifier : $[AB]$ passe par le centre. 3) Citer : l'angle inscrit $\\widehat{ACB}$ est droit. 4) Conclure : $ABC$ est rectangle en $C$ et, d'après Pythagore, $BC^2 = AB^2 - AC^2 = 169 - 25 = 144$, donc $BC = 12$ cm. La proposition $8$ cm vient de $13 - 5$ et $\\sqrt{194}$ cm de $169 + 25$ : on a additionné les carrés au lieu de les soustraire.",
+              "answers": [
+                {
+                  "content": "$12$ cm",
+                  "correct": true
+                },
+                {
+                  "content": "$8$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$\\sqrt{194}$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$18$ cm",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le rond central est un cercle de diamètre $[AB]$ avec $AB = 13$ cm. Quel est le rayon de ce cercle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : le segment $[AB]$ est un diamètre. 2) Vérifier : il passe par le centre $O$, qui en est le milieu. 3) Citer : le rayon est la moitié du diamètre. 4) Calculer : $13 \\div 2 = 6,5$ cm. La proposition $13$ cm confond rayon et diamètre, et $26$ cm double au lieu de diviser.",
+              "answers": [
+                {
+                  "content": "$6,5$ cm",
+                  "correct": true
+                },
+                {
+                  "content": "$13$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$26$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$5$ cm",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le rond central est un cercle de diamètre $[AB]$ avec $AB = 13$ cm. Le joueur $C$ est sur le cercle, avec $AC = 5$ cm et $BC = 12$ cm. Quelle est l'aire du triangle $ABC$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : le triangle $ABC$ est inscrit dans le cercle de diamètre $[AB]$. 2) Vérifier : $[AB]$ est un diamètre. 3) Citer : l'angle en $C$ est droit, donc $AC$ et $BC$ sont les côtés de l'angle droit, et l'un est la hauteur relative à l'autre. 4) Calculer : aire $= AC \\times BC \\div 2 = 5 \\times 12 \\div 2 = 30$ cm². La proposition $60$ cm² oublie de diviser par 2, et $65$ cm² calcule $5 \\times 13$ : il prend l'hypoténuse $13$ à la place du côté $12$ et oublie de diviser par 2.",
+              "answers": [
+                {
+                  "content": "$30$ cm²",
+                  "correct": true
+                },
+                {
+                  "content": "$60$ cm²",
+                  "correct": false
+                },
+                {
+                  "content": "$65$ cm²",
+                  "correct": false
+                },
+                {
+                  "content": "$17$ cm²",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le rond central est un cercle de centre $O$ et de diamètre $[AB]$. Le point $O$ est le milieu de $[AB]$.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Repérer le diamètre $[AB]$. 2) Vérifier qu'il passe par le centre $O$ : c'est la définition d'un diamètre. 3) Citer : le centre d'un cercle est le milieu de chacun de ses diamètres, puisque $OA = OB$ est égal au rayon. 4) Conclure : $O$ est le milieu de $[AB]$. La proposition est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le rond central est un cercle de diamètre $[AB]$. Les points $C$ et $D$ sont deux joueurs placés sur le cercle, différents de $A$ et de $B$. Quelles sont les deux propositions vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Repérer le diamètre $[AB]$ et les points $C$ et $D$ sur le cercle. 2) Vérifier que $[AB]$ est un diamètre. 3) Citer : un angle inscrit qui intercepte un diamètre est droit, donc $\\widehat{ACB} = 90°$ et $\\widehat{ADB} = 90°$. 4) Conclure : $ABC$ est rectangle en $C$ et $ABD$ est rectangle en $D$. Les propositions « rectangle en $A$ », « rectangle en $B$ » et « équilatéral » sont fausses : un triangle rectangle ne peut pas être équilatéral, ses angles ne sont pas tous de $60°$.",
+              "answers": [
+                {
+                  "content": "$ABC$ est rectangle en $C$.",
+                  "correct": true
+                },
+                {
+                  "content": "$ABD$ est rectangle en $D$.",
+                  "correct": true
+                },
+                {
+                  "content": "$ABC$ est rectangle en $A$.",
+                  "correct": false
+                },
+                {
+                  "content": "$ABC$ est équilatéral.",
+                  "correct": false
+                },
+                {
+                  "content": "$ABD$ est rectangle en $B$.",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les lampadaires du stade",
+          "statement": "Devant un stade, un rond-point circulaire a pour centre O. Quatre lampadaires A, B, M et N sont placés sur son bord, M et N sur le grand arc AB. On mesure l'angle AMB = 50°. Un point D du bord est diamétralement opposé à A, du même côté de (AB) que M et N. Tu rédiges chaque réponse comme à un devoir.",
+          "exercise_type": "evaluation",
+          "figure": "meme-arc",
+          "questions": [
+            {
+              "content": "Un rond-point a pour centre $O$. Quatre lampadaires $A$, $B$, $M$ et $N$ sont sur son bord, $M$ et $N$ sur le grand arc $AB$, et $\\widehat{AMB} = 50°$. Que vaut $\\widehat{ANB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $\\widehat{AMB}$ et $\\widehat{ANB}$ sont deux angles inscrits, et $M$ et $N$ sont du même côté de $(AB)$ : ils interceptent le même arc $AB$. 2) Or deux angles inscrits qui interceptent le même arc sont égaux. 3) Donc $\\widehat{ANB} = \\widehat{AMB} = 50°$. Les propositions $100°$ et $25°$ viennent de la propriété de l'angle au centre, qui ne s'applique pas à deux angles inscrits.",
+              "answers": [
+                {
+                  "content": "$50°$",
+                  "correct": true
+                },
+                {
+                  "content": "$100°$",
+                  "correct": false
+                },
+                {
+                  "content": "$25°$",
+                  "correct": false
+                },
+                {
+                  "content": "$130°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les lampadaires $A$, $B$ et $M$ sont sur son bord, $M$ sur le grand arc $AB$, et $\\widehat{AMB} = 50°$. Que vaut l'angle au centre $\\widehat{AOB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $\\widehat{AOB}$ (au centre) et $\\widehat{AMB}$ (inscrit) interceptent le même arc $AB$. 2) Or l'angle au centre mesure le double de l'angle inscrit qui intercepte le même arc. 3) Donc $\\widehat{AOB} = 2 \\times \\widehat{AMB} = 2 \\times 50° = 100°$. La proposition $25°$ divise à tort : l'angle au centre est le plus grand des deux.",
+              "answers": [
+                {
+                  "content": "$100°$",
+                  "correct": true
+                },
+                {
+                  "content": "$25°$",
+                  "correct": false
+                },
+                {
+                  "content": "$50°$",
+                  "correct": false
+                },
+                {
+                  "content": "$130°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les lampadaires $A$ et $B$ sont sur son bord, avec $\\widehat{AOB} = 100°$. Que vaut $\\widehat{OAB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $OA$ et $OB$ sont deux rayons du cercle, donc $OA = OB$ : le triangle $OAB$ est isocèle en $O$. 2) Ses angles à la base sont égaux : $\\widehat{OAB} = \\widehat{OBA}$. 3) La somme des angles d'un triangle vaut $180°$, donc $\\widehat{OAB} = (180° - 100°) \\div 2 = 40°$. La proposition $80°$ oublie de partager $80°$ entre les deux angles de la base.",
+              "answers": [
+                {
+                  "content": "$40°$",
+                  "correct": true
+                },
+                {
+                  "content": "$80°$",
+                  "correct": false
+                },
+                {
+                  "content": "$50°$",
+                  "correct": false
+                },
+                {
+                  "content": "$100°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les lampadaires $A$ et $B$ sont sur son bord et $D$ est le point du bord diamétralement opposé à $A$. Quelle est la nature du triangle $ABD$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $B$ est sur le cercle de diamètre $[AD]$ : $D$ est diamétralement opposé à $A$, donc $[AD]$ passe par $O$. 2) Or un angle inscrit qui intercepte un diamètre est un angle droit : $\\widehat{ABD} = 90°$. 3) Donc $ABD$ est rectangle en $B$, et non en $D$ : l'angle droit est au sommet qui n'est pas sur le diamètre.",
+              "answers": [
+                {
+                  "content": "Rectangle en $B$",
+                  "correct": true
+                },
+                {
+                  "content": "Rectangle en $D$",
+                  "correct": false
+                },
+                {
+                  "content": "Rectangle en $A$",
+                  "correct": false
+                },
+                {
+                  "content": "Isocèle en $B$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Les lampadaires $A$ et $B$ sont sur son bord, et $D$ est le point du bord diamétralement opposé à $A$, du côté de $(AB)$ du grand arc $AB$. On donne $\\widehat{AMB} = 50°$ pour un point $M$ du grand arc $AB$. Que vaut $\\widehat{ADB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $\\widehat{ADB}$ et $\\widehat{AMB}$ sont deux angles inscrits, et $D$ et $M$ sont tous deux sur le grand arc $AB$ : ils interceptent le même arc $AB$. 2) Deux angles inscrits qui interceptent le même arc sont égaux. 3) Donc $\\widehat{ADB} = \\widehat{AMB} = 50°$. La proposition $90°$ confond $\\widehat{ADB}$ avec l'angle droit $\\widehat{ABD}$ en $B$.",
+              "answers": [
+                {
+                  "content": "$50°$",
+                  "correct": true
+                },
+                {
+                  "content": "$90°$",
+                  "correct": false
+                },
+                {
+                  "content": "$40°$",
+                  "correct": false
+                },
+                {
+                  "content": "$100°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un rond-point a pour centre $O$. Le triangle $ABD$ est rectangle en $B$, avec $\\widehat{ADB} = 50°$. Que vaut $\\widehat{BAD}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) Le triangle $ABD$ est rectangle en $B$, donc $\\widehat{ABD} = 90°$. 2) La somme des angles d'un triangle vaut $180°$. 3) Donc $\\widehat{BAD} = 180° - 90° - 50° = 40°$. On retrouve la valeur de $\\widehat{OAB}$, ce qui est normal : $O$ est sur $[AD]$, donc $\\widehat{OAB} = \\widehat{BAD}$. La proposition $130°$ oublie l'angle droit.",
+              "answers": [
+                {
+                  "content": "$40°$",
+                  "correct": true
+                },
+                {
+                  "content": "$130°$",
+                  "correct": false
+                },
+                {
+                  "content": "$50°$",
+                  "correct": false
+                },
+                {
+                  "content": "$90°$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le tir au but",
+          "statement": "Sur le schéma d'un but de football, les poteaux A et B sont sur un cercle de centre O et de rayon 5 cm, avec l'angle au centre AOB = 90°. Les joueurs M et N sont sur le grand arc AB. Un point R du cercle est diamétralement opposé à A. Tu justifies chaque résultat comme à un devoir du BEPC.",
+          "exercise_type": "evaluation",
+          "figure": "poteaux-tir",
+          "questions": [
+            {
+              "content": "Sur un schéma, les poteaux $A$ et $B$ sont sur un cercle de centre $O$, avec $\\widehat{AOB} = 90°$. Le joueur $M$ est sur le grand arc $AB$. Quelle est la mesure de $\\widehat{AMB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $\\widehat{AOB}$ est un angle au centre et $\\widehat{AMB}$ un angle inscrit ; ils interceptent le même arc $AB$ car $M$ est sur le grand arc. 2) L'angle au centre mesure le double de l'angle inscrit. 3) Donc $\\widehat{AMB} = 90° \\div 2 = 45°$. La proposition $180°$ double à tort, et $90°$ recopie l'angle au centre.",
+              "answers": [
+                {
+                  "content": "$45°$",
+                  "correct": true
+                },
+                {
+                  "content": "$90°$",
+                  "correct": false
+                },
+                {
+                  "content": "$180°$",
+                  "correct": false
+                },
+                {
+                  "content": "$135°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur un schéma, les poteaux $A$ et $B$ sont sur un cercle de centre $O$. Les joueurs $M$ et $N$ sont sur le grand arc $AB$ et $\\widehat{AMB} = 45°$. Que vaut $\\widehat{ANB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $\\widehat{AMB}$ et $\\widehat{ANB}$ sont des angles inscrits, et $M$ et $N$ sont du même côté de $(AB)$ : même arc intercepté. 2) Deux angles inscrits qui interceptent le même arc sont égaux. 3) Donc $\\widehat{ANB} = 45°$. Tous les joueurs placés sur ce grand arc voient le but sous le même angle.",
+              "answers": [
+                {
+                  "content": "$45°$",
+                  "correct": true
+                },
+                {
+                  "content": "$90°$",
+                  "correct": false
+                },
+                {
+                  "content": "$22,5°$",
+                  "correct": false
+                },
+                {
+                  "content": "$135°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur un schéma, les poteaux $A$ et $B$ sont sur un cercle de centre $O$ et de rayon $5$ cm, avec $\\widehat{AOB} = 90°$. Quelle est la longueur $AB$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $OA = OB = 5$ cm, car ce sont des rayons. 2) L'angle au centre $\\widehat{AOB}$ vaut $90°$ : le triangle $OAB$ est rectangle en $O$. 3) D'après Pythagore, $AB^2 = OA^2 + OB^2 = 25 + 25 = 50$. 4) Donc $AB = \\sqrt{50} = 5\\sqrt{2}$ cm. La proposition $10$ cm additionne les rayons, et $50$ cm oublie la racine carrée.",
+              "answers": [
+                {
+                  "content": "$5\\sqrt{2}$ cm",
+                  "correct": true
+                },
+                {
+                  "content": "$10$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$50$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$25\\sqrt{2}$ cm",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur un schéma, les poteaux $A$ et $B$ sont sur un cercle de centre $O$, avec $\\widehat{AOB} = 90°$. Le joueur $P$ est sur le petit arc $AB$. Que vaut $\\widehat{APB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $P$ est sur le petit arc, donc $\\widehat{APB}$ intercepte le grand arc $AB$. 2) Le grand arc mesure $360° - 90° = 270°$. 3) Un angle inscrit mesure la moitié de l'arc qu'il intercepte : $\\widehat{APB} = 270° \\div 2 = 135°$. La proposition $45°$ applique à tort la propriété des angles égaux, alors que $P$ n'est pas du même côté de $(AB)$ que $M$ et $N$.",
+              "answers": [
+                {
+                  "content": "$135°$",
+                  "correct": true
+                },
+                {
+                  "content": "$45°$",
+                  "correct": false
+                },
+                {
+                  "content": "$270°$",
+                  "correct": false
+                },
+                {
+                  "content": "$90°$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur un schéma, les poteaux $A$ et $B$ sont sur un cercle de centre $O$ et de rayon $5$ cm, avec $AB = 5\\sqrt{2}$ cm. Le point $R$ du cercle est diamétralement opposé à $A$. Quelle est la longueur $BR$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée. 1) $[AR]$ est un diamètre, donc $AR = 2 \\times 5 = 10$ cm. 2) Le point $B$ est sur le cercle : l'angle inscrit $\\widehat{ABR}$ intercepte un diamètre, il est droit. 3) Le triangle $ABR$ est rectangle en $B$. 4) D'après Pythagore, $BR^2 = AR^2 - AB^2 = 100 - 50 = 50$, donc $BR = 5\\sqrt{2}$ cm. La proposition $\\sqrt{150}$ cm vient d'une addition des carrés au lieu d'une soustraction.",
+              "answers": [
+                {
+                  "content": "$5\\sqrt{2}$ cm",
+                  "correct": true
+                },
+                {
+                  "content": "$5$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$10$ cm",
+                  "correct": false
+                },
+                {
+                  "content": "$\\sqrt{150}$ cm",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur un schéma, les poteaux $A$ et $B$ sont sur un cercle de centre $O$, avec $\\widehat{AOB} = 90°$. Les joueurs $M$ et $N$ sont sur le grand arc $AB$ et $R$ est diamétralement opposé à $A$. Quelles sont les trois propositions vraies ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode rédigée. 1) $\\widehat{AMB}$ et $\\widehat{ANB}$ interceptent le même arc $AB$ : ils sont égaux, c'est la première proposition vraie. 2) L'angle au centre mesure le double de l'angle inscrit qui intercepte le même arc : $\\widehat{AOB} = 2 \\times \\widehat{AMB}$ est la deuxième. 3) $[AR]$ est un diamètre et $B$ est sur le cercle, donc $ABR$ est rectangle en $B$ : c'est la troisième. Les propositions $\\widehat{AMB} = 90°$ (qui confond angle inscrit et angle au centre) et « $OAB$ est équilatéral » (le triangle $OAB$ est rectangle isocèle en $O$) sont fausses.",
+              "answers": [
+                {
+                  "content": "$\\widehat{AMB} = \\widehat{ANB}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\widehat{AOB} = 2 \\times \\widehat{AMB}$",
+                  "correct": true
+                },
+                {
+                  "content": "$ABR$ est rectangle en $B$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\widehat{AMB} = 90°$",
+                  "correct": false
+                },
+                {
+                  "content": "$OAB$ est équilatéral",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1311 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Oxydation des corps purs simples",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Physique-Chimie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "dioxygene",
+          "kind": "molecule",
+          "description": "La molécule de dioxygène O2, dessinée avec ses deux atomes d'oxygène reliés par une double liaison (O=O). C'est un corps pur simple : il ne contient qu'un seul élément chimique, l'oxygène. L'air en contient environ un cinquième en volume.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "o1",
+                "element": "O",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "o2",
+                "element": "O",
+                "x": 8,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "o1",
+                "o2",
+                2
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "dioxyde-de-carbone",
+          "kind": "molecule",
+          "description": "La molécule de dioxyde de carbone CO2 : un atome de carbone au centre, relié à chacun des deux atomes d'oxygène par une double liaison (O=C=O). Elle contient deux éléments différents : c'est un corps pur composé, l'oxyde formé par la combustion du carbone.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "o1",
+                "element": "O",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "c",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "o2",
+                "element": "O",
+                "x": 10,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "o1",
+                "c",
+                2
+              ],
+              [
+                "c",
+                "o2",
+                2
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-combustion-fer",
+          "kind": "diagram",
+          "description": "Schéma fléché de la combustion vive de la paille de fer. Deux réactifs, le fer Fe et le dioxygène O2, sont reliés par des flèches vers le produit : l'oxyde magnétique de fer Fe3O4. Les réactifs et le produit ont deux couleurs différentes, repérées dans la légende.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "fe",
+                "label": "Fer Fe",
+                "category": 1
+              },
+              {
+                "id": "o2",
+                "label": "Dioxygène O2",
+                "category": 1
+              },
+              {
+                "id": "ox",
+                "label": "Oxyde magnétique Fe3O4",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "fe",
+                "to": "ox",
+                "label": "réactif"
+              },
+              {
+                "from": "o2",
+                "to": "ox",
+                "label": "réactif"
+              }
+            ],
+            "legend": [
+              "Réactifs",
+              "Produit"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "types-oxydation",
+          "kind": "diagram",
+          "description": "Arbre de classement des oxydations. La racine est l'oxydation, réaction avec le dioxygène. Elle se divise en oxydation vive (exemples : charbon de bois qui donne CO2, paille de fer qui donne Fe3O4) et en oxydation lente (exemples : rouille du portail, aluminium couvert d'alumine Al2O3).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Oxydation",
+                "category": 1
+              },
+              {
+                "id": "v",
+                "label": "Oxydation vive",
+                "category": 1
+              },
+              {
+                "id": "l",
+                "label": "Oxydation lente",
+                "category": 1
+              },
+              {
+                "id": "v1",
+                "label": "Charbon de bois : CO2",
+                "category": 2
+              },
+              {
+                "id": "v2",
+                "label": "Paille de fer : Fe3O4",
+                "category": 2
+              },
+              {
+                "id": "l1",
+                "label": "Portail en fer : rouille",
+                "category": 2
+              },
+              {
+                "id": "l2",
+                "label": "Aluminium : alumine",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "v"
+              },
+              {
+                "from": "r",
+                "to": "l"
+              },
+              {
+                "from": "v",
+                "to": "v1"
+              },
+              {
+                "from": "v",
+                "to": "v2"
+              },
+              {
+                "from": "l",
+                "to": "l1"
+              },
+              {
+                "from": "l",
+                "to": "l2"
+              }
+            ],
+            "legend": [
+              "Type d'oxydation",
+              "Exemple"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître une oxydation",
+          "remember": "Un **corps pur simple** ne contient qu'**un seul élément** chimique : le carbone C, le fer Fe, le soufre S, le dioxygène $\\mathrm{O_2}$. Un corps pur composé en contient au moins deux : $\\mathrm{CO_2}$, $\\mathrm{H_2O}$. Une **oxydation** est la réaction d'un corps avec le **dioxygène**. Le produit est un **oxyde** : combinaison du corps avec l'oxygène (le dioxyde de carbone $\\mathrm{CO_2}$ est l'oxyde du carbone). L'air contient environ un cinquième de dioxygène.",
+          "method": [
+            "Repérer les réactifs de la transformation.",
+            "Vérifier si le dioxygène est l'un des réactifs.",
+            "Nommer le produit : c'est un oxyde du corps qui réagit avec le dioxygène.",
+            "Conclure : il s'agit d'une oxydation, et le corps qui réagit avec le dioxygène est oxydé."
+          ],
+          "example": {
+            "statement": "Le charbon de bois (du carbone C) brûle dans le four à attiéké et forme du dioxyde de carbone. Est-ce une oxydation ?",
+            "steps": [
+              "Repérer : les réactifs sont le carbone du charbon de bois et l'air du four.",
+              "Vérifier : l'air contient du dioxygène (environ un cinquième), qui est donc un réactif.",
+              "Nommer : le produit est le dioxyde de carbone $\\mathrm{CO_2}$, oxyde du carbone.",
+              "Conclure : c'est une oxydation, et le carbone est oxydé."
+            ]
+          },
+          "pitfall": "Ne pas confondre le dioxygène et un oxyde. Le dioxygène $\\mathrm{O_2}$ est un corps pur **simple** (un seul élément) ; le dioxyde de carbone $\\mathrm{CO_2}$ est un corps pur **composé** (carbone et oxygène). Contre-exemple : $\\mathrm{CO_2}$ contient 2 éléments différents, donc il n'est pas simple. Pour éviter l'erreur, compte les éléments différents dans la formule.",
+          "figure": "dioxyde-de-carbone",
+          "exercise": {
+            "title": "Reconnaître une oxydation",
+            "statement": "Dans cet exercice, tu reconnais une oxydation avec la méthode de la fiche. Une oxydation est une réaction d'un corps pur simple avec le dioxygène.",
+            "exercise_type": "fixation",
+            "figure": "dioxyde-de-carbone",
+            "questions": [
+              {
+                "content": "Parmi ces corps purs, lequel est un corps pur simple ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on regarde les éléments contenus dans chaque formule. $\\mathrm{Fe}$ contient un seul élément (le fer). $\\mathrm{CO_2}$ en contient deux (C et O), $\\mathrm{H_2O}$ deux (H et O), $\\mathrm{Fe_3O_4}$ deux (Fe et O). Un corps pur simple ne contient qu'un seul élément : c'est le fer. La réponse $\\mathrm{CO_2}$ est tentante parce que la molécule est simple à dessiner, mais elle contient deux éléments : c'est un composé.",
+                "answers": [
+                  {
+                    "content": "Le fer $\\mathrm{Fe}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le dioxyde de carbone $\\mathrm{CO_2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau $\\mathrm{H_2O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'oxyde de fer $\\mathrm{Fe_3O_4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le dioxyde de carbone $\\mathrm{CO_2}$ est un corps pur simple.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la formule $\\mathrm{CO_2}$ contient les éléments carbone (C) et oxygène (O), donc deux éléments. Étape 4 — Conclure : un corps pur simple n'en a qu'un seul, donc $\\mathrm{CO_2}$ est un corps pur composé. C'est l'oxyde du carbone. L'erreur vient de la confusion avec le dioxygène $\\mathrm{O_2}$, qui lui est bien un corps pur simple.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le carbone du charbon de bois brûle avec le dioxygène de l'air et donne du dioxyde de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Nommer le produit : l'oxydation d'un corps donne un oxyde de ce corps. Ici le corps oxydé est le carbone, donc le produit est le dioxyde de carbone $\\mathrm{CO_2}$. Le mot attendu est carbone. Étape 2 — Vérifier : le dioxygène est bien un réactif, donc il s'agit d'une oxydation.",
+                "answers": [
+                  {
+                    "content": "carbone",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles transformations sont des oxydations ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Vérifier si le dioxygène est un réactif. Le charbon qui brûle dans l'air réagit avec le dioxygène : oxydation. Le fer qui brûle dans le dioxygène aussi. Le sucre qui se dissout dans l'eau ne fait pas intervenir le dioxygène : c'est une simple dissolution. La fusion du beurre est un changement d'état, sans réaction chimique.",
+                "answers": [
+                  {
+                    "content": "Le charbon de bois brûle dans l'air.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La paille de fer brûle dans le dioxygène pur.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sucre se dissout dans l'eau.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le beurre fond au soleil.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque formule à son nom.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Nommer : on lit la formule. $\\mathrm{O_2}$ est le dioxygène, $\\mathrm{CO_2}$ le dioxyde de carbone (un atome de carbone, deux d'oxygène), $\\mathrm{SO_2}$ le dioxyde de soufre, $\\mathrm{Fe_3O_4}$ l'oxyde magnétique de fer. Les trois derniers sont des oxydes, car ils contiennent de l'oxygène combiné à un autre élément.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{O_2}$",
+                    "match": "Dioxygène"
+                  },
+                  {
+                    "content": "$\\mathrm{CO_2}$",
+                    "match": "Dioxyde de carbone"
+                  },
+                  {
+                    "content": "$\\mathrm{SO_2}$",
+                    "match": "Dioxyde de soufre"
+                  },
+                  {
+                    "content": "$\\mathrm{Fe_3O_4}$",
+                    "match": "Oxyde magnétique de fer"
+                  }
+                ]
+              },
+              {
+                "content": "Une molécule de dioxyde de carbone $\\mathrm{CO_2}$ contient un atome de carbone et deux atomes d'oxygène. Combien d'atomes contient-elle en tout ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : on lit la formule $\\mathrm{CO_2}$. Le C n'a pas d'indice, donc 1 atome de carbone. Le O a l'indice 2, donc 2 atomes d'oxygène. Étape 3 — Nommer : 1 + 2 = 3 atomes. L'erreur est de ne compter que 2 atomes en oubliant le carbone.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "L'air contient environ un cinquième de dioxygène en volume. Dans 10 L d'air, quel volume de dioxygène y a-t-il environ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Vérifier que le dioxygène est présent dans l'air : il en forme environ un cinquième, soit $\\dfrac{1}{5}$. Volume de dioxygène : $10 \\div 5 = 2$ L. L'erreur est de croire que l'air est du dioxygène pur (10 L) : l'air contient surtout du diazote.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "L"
+              },
+              {
+                "content": "Le fer $\\mathrm{Fe}$ réagit avec le dioxygène et donne l'oxyde magnétique de fer $\\mathrm{Fe_3O_4}$. Quelle conclusion est correcte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer les réactifs : le fer et le dioxygène. Étape 2 — Vérifier : le dioxygène est un réactif. Étape 3 — Nommer : $\\mathrm{Fe_3O_4}$ est un oxyde de fer. Étape 4 — Conclure : c'est une oxydation du fer. Le produit n'est pas du fer 'transformé en autre fer' : c'est un nouveau corps pur, composé de fer et d'oxygène.",
+                "answers": [
+                  {
+                    "content": "C'est une oxydation : le fer est oxydé et le produit est un oxyde.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ce n'est pas une oxydation, car le fer ne brûle pas.",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est une oxydation, mais le produit est du fer pur.",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est une oxydation du dioxygène par le fer.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire l'équation-bilan d'une combustion",
+          "remember": "Une **combustion vive** est une oxydation rapide, avec flamme ou incandescence, qui dégage de la chaleur. Son **équation-bilan** s'écrit avec une flèche : réactifs $\\rightarrow$ produits. Elle est **équilibrée** quand chaque élément a le même nombre d'atomes à gauche et à droite (conservation des atomes). On ajuste les **coefficients** devant les formules, jamais les indices. Exemples : $\\mathrm{C + O_2 \\rightarrow CO_2}$ ; $\\mathrm{S + O_2 \\rightarrow SO_2}$ ; $\\mathrm{3Fe + 2O_2 \\rightarrow Fe_3O_4}$. Le dioxyde de carbone trouble l'eau de chaux.",
+          "method": [
+            "Écrire les formules des réactifs et du produit (le corps simple, le dioxygène $\\mathrm{O_2}$, l'oxyde).",
+            "Compter les atomes de chaque élément de chaque côté de la flèche.",
+            "Ajuster les coefficients devant les formules, sans toucher aux indices.",
+            "Vérifier en recomptant les atomes, puis écrire l'équation équilibrée."
+          ],
+          "example": {
+            "statement": "La paille de fer chauffée brûle dans le dioxygène et donne l'oxyde magnétique de fer $\\mathrm{Fe_3O_4}$. Écrire l'équation-bilan équilibrée.",
+            "steps": [
+              "Écrire : $\\mathrm{Fe + O_2 \\rightarrow  Fe_3O_4}$.",
+              "Compter : à gauche 1 Fe et 2 O ; à droite 3 Fe et 4 O.",
+              "Ajuster : 3 devant $\\mathrm{Fe}$ et 2 devant $\\mathrm{O_2}$, ce qui donne $\\mathrm{3Fe + 2O_2 \\rightarrow  Fe_3O_4}$.",
+              "Vérifier : à gauche 3 Fe et $2 \\times 2 = 4$ O ; à droite 3 Fe et 4 O. L'équation est équilibrée : $\\mathrm{3Fe + 2O_2 \\rightarrow  Fe_3O_4}$."
+            ]
+          },
+          "pitfall": "Ne pas équilibrer en changeant un indice. Pour $\\mathrm{C + O_2 \\rightarrow CO_2}$, écrire $\\mathrm{C + O_2 \\rightarrow CO}$ pour 'faire plus simple' change le produit : $\\mathrm{CO}$ est le monoxyde de carbone, un gaz toxique, et non le dioxyde. Un indice fixe la nature du corps ; on n'ajuste que les coefficients.",
+          "figure": "schema-combustion-fer",
+          "exercise": {
+            "title": "Écrire l'équation-bilan d'une combustion",
+            "statement": "Dans cet exercice, tu écris et tu équilibres des équations-bilans avec la méthode de la fiche. Une équation est équilibrée quand il y a autant d'atomes de chaque élément de chaque côté de la flèche.",
+            "exercise_type": "fixation",
+            "figure": "schema-combustion-fer",
+            "questions": [
+              {
+                "content": "Quelle équation décrit correctement la combustion du carbone dans le dioxygène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les formules : réactifs $\\mathrm{C}$ et $\\mathrm{O_2}$, produit $\\mathrm{CO_2}$, soit $\\mathrm{C + O_2 \\rightarrow  CO_2}$. Étape 2 — Compter : à gauche 1 C et 2 O ; à droite 1 C et 2 O. Étape 3 — Ajuster : rien à ajuster. Étape 4 — Vérifier : c'est équilibré. La proposition $\\mathrm{C + O \\rightarrow  CO_2}$ est fausse : le dioxygène s'écrit $\\mathrm{O_2}$, pas $\\mathrm{O}$.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C + O_2 \\rightarrow  CO_2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C + O \\rightarrow  CO_2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C + O_2 \\rightarrow  CO}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{2C + O_2 \\rightarrow  CO_2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La combustion du soufre S dans le dioxygène s'écrit $\\mathrm{S + O_2 \\rightarrow  }$___. Écris la formule du produit.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire les formules : le soufre est oxydé, son oxyde est le dioxyde de soufre $\\mathrm{SO_2}$. Étape 2 — Compter : à gauche 1 S et 2 O ; à droite 1 S et 2 O. Étape 4 — Vérifier : l'équation $\\mathrm{S + O_2 \\rightarrow  SO_2}$ est équilibrée sans coefficient.",
+                "answers": [
+                  {
+                    "content": "SO2",
+                    "correct": true
+                  },
+                  {
+                    "content": "SO_2",
+                    "correct": true
+                  },
+                  {
+                    "content": "SO₂",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On équilibre $\\mathrm{Fe + O_2 \\rightarrow  Fe_3O_4}$. Quel coefficient faut-il écrire devant $\\mathrm{O_2}$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Compter : à gauche 1 Fe et 2 O ; à droite 3 Fe et 4 O. Étape 3 — Ajuster : 3 devant $\\mathrm{Fe}$ pour avoir 3 Fe. Pour avoir 4 O, il faut 2 molécules $\\mathrm{O_2}$ : coefficient 2. Étape 4 — Vérifier : $\\mathrm{3Fe + 2O_2 \\rightarrow  Fe_3O_4}$ donne 3 Fe et 4 O de chaque côté. Le coefficient 4 vient de l'erreur qui consiste à reprendre l'indice de l'oxyde.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Dans l'équation équilibrée $\\mathrm{3Fe + 2O_2 \\rightarrow  Fe_3O_4}$, combien y a-t-il d'atomes d'oxygène du côté des réactifs ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Compter : le coefficient 2 multiplie l'indice 2 de $\\mathrm{O_2}$ : $2 \\times 2 = 4$ atomes d'oxygène. Étape 4 — Vérifier : le côté des produits, $\\mathrm{Fe_3O_4}$, contient aussi 4 atomes d'oxygène. L'erreur est de ne compter que 2 atomes en oubliant le coefficient.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "On équilibre $\\mathrm{Al + O_2 \\rightarrow  Al_2O_3}$. Quel coefficient faut-il écrire devant $\\mathrm{Al}$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Compter : à gauche 1 Al et 2 O ; à droite 2 Al et 3 O. Étape 3 — Ajuster : pour égaliser les O, on cherche le plus petit multiple commun de 2 et 3, soit 6 : 3 $\\mathrm{O_2}$ et 2 $\\mathrm{Al_2O_3}$. Il y a alors 4 Al à droite, donc 4 devant $\\mathrm{Al}$. Étape 4 — Vérifier : $\\mathrm{4Al + 3O_2 \\rightarrow  2Al_2O_3}$ donne 4 Al et 6 O de chaque côté.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Pour équilibrer une équation, on peut changer l'indice d'une formule, par exemple écrire $\\mathrm{CO}$ à la place de $\\mathrm{CO_2}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Ajuster : on modifie seulement les coefficients devant les formules. Changer un indice change le corps : $\\mathrm{CO}$ est le monoxyde de carbone, un autre corps pur que $\\mathrm{CO_2}$. L'équation ne décrirait plus la même réaction.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour écrire une équation-bilan.",
+                "question_type": "ordering",
+                "explanation": "La méthode suit l'ordre : d'abord écrire les formules (Étape 1), puis compter les atomes (Étape 2), ajuster les coefficients (Étape 3) et enfin vérifier en recomptant (Étape 4). On ne peut pas ajuster avant d'avoir compté, ni vérifier avant d'avoir ajusté.",
+                "answers": [
+                  {
+                    "content": "Écrire les formules des réactifs et du produit."
+                  },
+                  {
+                    "content": "Compter les atomes de chaque élément de chaque côté."
+                  },
+                  {
+                    "content": "Ajuster les coefficients devant les formules."
+                  },
+                  {
+                    "content": "Vérifier en recomptant les atomes."
+                  }
+                ]
+              },
+              {
+                "content": "Lors de la combustion du carbone dans le dioxygène, quel test montre la présence de dioxyde de carbone ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire les formules : le produit est $\\mathrm{CO_2}$. Pour le reconnaître, on fait barboter le gaz dans de l'eau de chaux : elle se trouble (devient laiteuse). Une bûchette incandescente qui se rallume reconnaît le dioxygène, pas le dioxyde de carbone.",
+                "answers": [
+                  {
+                    "content": "L'eau de chaux se trouble.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une bûchette incandescente se rallume.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau de chaux devient bleue.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le gaz s'enflamme avec une petite détonation.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Distinguer oxydation vive et oxydation lente",
+          "remember": "Une oxydation **vive** est rapide et s'accompagne d'une flamme ou d'une incandescence, avec dégagement de chaleur et de lumière : combustion du carbone, du soufre, de la paille de fer. Une oxydation **lente** dure des jours ou des mois, sans flamme : la **rouille** du fer, qui demande dioxygène et humidité, est un oxyde poreux qui s'effrite et laisse le fer se détruire. L'aluminium s'oxyde lentement en une mince couche d'**alumine** $\\mathrm{Al_2O_3}$ qui adhère au métal et le **protège**. On protège le fer par peinture ou graisse.",
+          "method": [
+            "Observer la durée de la transformation et la présence d'une flamme ou d'une incandescence.",
+            "Classer : oxydation vive si elle est rapide avec flamme ou incandescence, lente sinon.",
+            "Nommer l'oxyde formé et décrire son aspect.",
+            "Conclure sur l'effet sur le métal : la couche d'oxyde le protège-t-elle ou le laisse-t-elle se détruire ?"
+          ],
+          "example": {
+            "statement": "Le portail en fer d'une maison se couvre en quelques mois d'une poudre brun-rouge qui s'écaille. Quel est le type d'oxydation et que devient le fer ?",
+            "steps": [
+              "Observer : la transformation dure plusieurs mois et il n'y a aucune flamme.",
+              "Classer : sans flamme et lente, c'est une oxydation lente.",
+              "Nommer : l'oxyde formé est la rouille, un oxyde de fer brun-rouge, poreux, qui s'écaille.",
+              "Conclure : la rouille laisse passer l'air et l'humidité, donc le fer continue de se détruire ; il faut le protéger avec de la peinture."
+            ]
+          },
+          "pitfall": "Ne pas croire que toute couche d'oxyde protège le métal. La rouille du fer est **poreuse** et s'effrite : le fer continue de s'oxyder sous elle jusqu'à être percé. Contre-exemple : l'alumine est mince et adhérente, donc la casserole en aluminium garde son métal intact. Pour éviter l'erreur, demande-toi toujours si l'oxyde reste collé au métal ou s'il s'écaille.",
+          "figure": "types-oxydation",
+          "exercise": {
+            "title": "Distinguer oxydation vive et oxydation lente",
+            "statement": "Dans cet exercice, tu classes des oxydations en vives ou lentes avec la méthode de la fiche, et tu dis ce qui arrive au métal.",
+            "exercise_type": "fixation",
+            "figure": "types-oxydation",
+            "questions": [
+              {
+                "content": "La rouille qui recouvre un portail en fer est le résultat d'une oxydation lente.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : la rouille se forme en plusieurs semaines, sans flamme. Étape 2 — Classer : transformation lente et sans flamme, donc oxydation lente. Étape 3 — Nommer l'oxyde : la rouille est un oxyde de fer brun-rouge.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles conditions faut-il réunir pour que le fer rouille ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : un clou protégé de l'air ne rouille pas, un clou au sec non plus. Le fer rouille en présence de dioxygène (de l'air) et d'humidité (d'eau). Étape 3 — Nommer l'oxyde : c'est la rouille. Il ne faut pas de flamme : ce serait une oxydation vive.",
+                "answers": [
+                  {
+                    "content": "Du dioxygène et de l'humidité.",
+                    "correct": true
+                  },
+                  {
+                    "content": "De la chaleur et une flamme.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement de l'eau, sans air.",
+                    "correct": false
+                  },
+                  {
+                    "content": "De l'azote et du froid.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à l'oxyde qui se forme.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Observer et Étape 3 — Nommer l'oxyde : la paille de fer chauffée à blanc brûle vite et donne l'oxyde magnétique $\\mathrm{Fe_3O_4}$. Le charbon de bois du four à attiéké, qui brûle avec une flamme rouge, donne $\\mathrm{CO_2}$. Ces deux oxydations sont vives. Le portail en fer qui rouille en plusieurs mois donne la rouille et la casserole en aluminium qui se ternit donne l'alumine : ce sont des oxydations lentes, sans flamme.",
+                "answers": [
+                  {
+                    "content": "Paille de fer chauffée à blanc",
+                    "match": "$\\mathrm{Fe_3O_4}$"
+                  },
+                  {
+                    "content": "Charbon de bois dans le four à attiéké",
+                    "match": "$\\mathrm{CO_2}$"
+                  },
+                  {
+                    "content": "Portail en fer qui rouille",
+                    "match": "Rouille"
+                  },
+                  {
+                    "content": "Casserole en aluminium qui se ternit",
+                    "match": "Alumine"
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi une casserole en aluminium ne se détruit-elle pas, alors que l'aluminium s'oxyde ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Nommer l'oxyde : l'aluminium se couvre d'alumine $\\mathrm{Al_2O_3}$. Étape 4 — Conclure : cette couche est très mince et adhère bien au métal. Elle empêche le dioxygène d'atteindre l'aluminium en dessous : elle le protège. La rouille, au contraire, est poreuse et s'effrite. L'idée que l'aluminium ne s'oxyde pas est fausse : il s'oxyde, mais la couche protège.",
+                "answers": [
+                  {
+                    "content": "L'alumine forme une couche mince et adhérente qui protège le métal.",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'aluminium ne réagit jamais avec le dioxygène.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'alumine est poreuse et laisse passer l'air.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'aluminium rouille comme le fer mais plus lentement.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'oxyde d'aluminium $\\mathrm{Al_2O_3}$, qui protège l'aluminium, s'appelle l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Nommer l'oxyde : l'oxyde d'aluminium $\\mathrm{Al_2O_3}$ porte le nom d'alumine. Étape 4 — Conclure : cette couche d'alumine protège le métal, contrairement à la rouille qui laisse le fer se détruire.",
+                "answers": [
+                  {
+                    "content": "alumine",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels moyens protègent un objet en fer contre la rouille ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Conclure : pour éviter la rouille, il faut séparer le fer du dioxygène et de l'humidité. La peinture et la graisse forment une barrière. Laisser l'objet sous la pluie ou le plonger dans l'eau salée l'expose davantage à l'humidité.",
+                "answers": [
+                  {
+                    "content": "Le recouvrir de peinture.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le recouvrir d'une couche de graisse ou d'huile.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le laisser sous la pluie.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le tremper souvent dans l'eau.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le portail en fer d'une cour est rouillé, mais la gouttière en aluminium du même bâtiment est intacte. Explique cette différence en une ou deux phrases.",
+                "question_type": "written",
+                "explanation": "Corrigé modèle. Étape 1 — Observer : le fer et l'aluminium s'oxydent tous les deux lentement à l'air humide. Étape 3 — Nommer l'oxyde : le fer donne la rouille, poreuse et qui s'effrite, qui laisse l'air atteindre le fer et le détruit peu à peu. L'aluminium donne l'alumine, couche mince et adhérente qui protège le métal. Étape 4 — Conclure : la rouille détruit le fer, l'alumine protège l'aluminium. Critères : oxydation lente des deux métaux, rouille poreuse, alumine protectrice.",
+                "answers": [],
+                "points": 2,
+                "criteria": [
+                  "Dit que les deux métaux subissent une oxydation lente",
+                  "Explique que la rouille est poreuse et laisse le fer se détruire",
+                  "Explique que l'alumine est une couche mince qui protège l'aluminium"
+                ],
+                "starter": "Les deux métaux s'oxydent, mais…"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Appliquer la conservation de la masse",
+          "remember": "Dans une réaction chimique faite en **récipient fermé**, la **masse totale se conserve** : la somme des masses des réactifs est égale à la somme des masses des produits (loi de Lavoisier). Pour une oxydation : $m(\\text{corps}) + m(\\text{dioxygène}) = m(\\text{oxyde})$. À l'air libre, un métal qui brûle gagne de la masse (il fixe du dioxygène), alors que le charbon en perd (le gaz $\\mathrm{CO_2}$ s'échappe). Les masses s'expriment en grammes (g).",
+          "method": [
+            "Écrire la relation de conservation : masse des réactifs = masse des produits.",
+            "Remplacer les lettres par les masses connues, en grammes.",
+            "Calculer la masse inconnue, le plus souvent par une soustraction.",
+            "Vérifier que le résultat est positif et cohérent avec la situation."
+          ],
+          "example": {
+            "statement": "Dans un récipient fermé, 10 g de paille de fer brûlent dans le dioxygène et donnent 13,8 g d'oxyde magnétique de fer. Quelle masse de dioxygène a été consommée ?",
+            "steps": [
+              "Écrire la relation : $m(\\text{fer}) + m(\\text{dioxygène}) = m(\\text{oxyde})$.",
+              "Remplacer : $10 + m(\\text{dioxygène}) = 13{,}8$.",
+              "Calculer : $m(\\text{dioxygène}) = 13{,}8 - 10 = 3{,}8$ g.",
+              "Vérifier : 3,8 g est positif, et l'oxyde est plus lourd que le fer, car il a fixé du dioxygène."
+            ]
+          },
+          "pitfall": "Ne pas croire que le métal qui brûle devient plus léger, ni additionner les deux masses données. Contre-exemple : 10 g de paille de fer brûlée donnent 13,8 g d'oxyde : le produit est plus lourd, car il a fixé 3,8 g de dioxygène. Écrire $10 + 13{,}8 = 23{,}8$ g serait faux : on cherche la masse de dioxygène, donc on **soustrait**.",
+          "figure": null,
+          "exercise": {
+            "title": "Appliquer la conservation de la masse",
+            "statement": "Dans cet exercice, tu calcules des masses de dioxygène avec la méthode de la fiche. Les masses sont en grammes (g) et la réaction a lieu dans un récipient fermé.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans un récipient fermé, 8,4 g de fer réagissent avec du dioxygène et donnent 11,6 g d'oxyde magnétique de fer. Quelle masse de dioxygène a été consommée ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire la relation : $m(\\text{fer}) + m(\\text{dioxygène}) = m(\\text{oxyde})$. Étape 2 — Remplacer : $8{,}4 + m(\\text{dioxygène}) = 11{,}6$. Étape 3 — Calculer : $m(\\text{dioxygène}) = 11{,}6 - 8{,}4 = 3{,}2$ g. Étape 4 — Vérifier : le résultat est positif, et l'oxyde est plus lourd que le fer car il a fixé du dioxygène. L'erreur est d'additionner 8,4 + 11,6 = 20 g.",
+                "answers": [
+                  {
+                    "content": "3,2",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0.05,
+                "unit": "g"
+              },
+              {
+                "content": "Le soufre brûle dans le dioxygène en vase clos : 8 g de soufre et 8 g de dioxygène réagissent entièrement. Quelle masse de dioxyde de soufre se forme ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire la relation : $m(\\text{soufre}) + m(\\text{dioxygène}) = m(\\text{dioxyde de soufre})$. Étape 2 — Remplacer : $8 + 8 = m(\\text{dioxyde de soufre})$. Étape 3 — Calculer : $m = 16$ g. Étape 4 — Vérifier : la masse produite est égale à la masse totale des réactifs, ni plus ni moins.",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "g"
+              },
+              {
+                "content": "Dans un récipient fermé, 6 g de carbone et du dioxygène donnent 22 g de dioxyde de carbone. Quelle masse de dioxygène a réagi ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire la relation : $m(\\text{carbone}) + m(\\text{dioxygène}) = m(\\text{dioxyde de carbone})$. Étape 2 — Remplacer : $6 + m(\\text{dioxygène}) = 22$. Étape 3 — Calculer : $m(\\text{dioxygène}) = 22 - 6 = 16$ g. Étape 4 — Vérifier : 16 g est positif et inférieur à 22 g.",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "g"
+              },
+              {
+                "content": "De la paille de fer brûle à l'air libre : la masse du produit solide est plus grande que celle de la paille de fer au départ.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire la relation : le fer fixe du dioxygène pris dans l'air, donc $m(\\text{oxyde}) = m(\\text{fer}) + m(\\text{dioxygène fixé})$. Étape 4 — Vérifier : l'oxyde est plus lourd que le fer de départ. Ce n'est pas une création de matière, c'est le dioxygène de l'air qui s'est ajouté au solide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un morceau de charbon de bois brûle à l'air libre et il ne reste que très peu de cendres. Où est passée la masse du carbone ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire la relation : la masse se conserve, mais à l'air libre le gaz s'échappe. Étape 4 — Vérifier : le carbone s'est transformé en dioxyde de carbone $\\mathrm{CO_2}$, un gaz qui part dans l'air, ce qui explique que le solide semble léger. La masse n'a pas disparu : elle est dans le gaz formé.",
+                "answers": [
+                  {
+                    "content": "Elle est dans le dioxyde de carbone, un gaz qui s'est échappé.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle a disparu : la matière a été détruite.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est restée dans la cendre.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle s'est transformée en eau.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un récipient ___, aucune matière n'entre ni ne sort, donc la masse totale des substances se conserve.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire la relation : elle est vraie dans un récipient clos, c'est-à-dire fermé. Si le récipient est ouvert, un gaz peut entrer (le dioxygène) ou sortir (le dioxyde de carbone), et la balance indique une autre masse.",
+                "answers": [
+                  {
+                    "content": "clos",
+                    "correct": true
+                  },
+                  {
+                    "content": "fermé",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le charbon de bois du four à attiéké",
+          "statement": "Dans une cour d'Abidjan, une vendeuse d'attiéké allume un four avec du charbon de bois, constitué presque uniquement de carbone C. Le charbon brûle en rougeoyant, dans l'air qui contient du dioxygène. On étudie cette combustion vive.",
+          "exercise_type": "fixation",
+          "figure": "dioxyde-de-carbone",
+          "questions": [
+            {
+              "content": "Le charbon de bois (carbone C) brûle dans l'air du four. Pourquoi cette combustion est-elle une oxydation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : on repère les réactifs, on vérifie si le dioxygène en fait partie, on nomme le produit, puis on conclut. Ici les réactifs sont le carbone et le dioxygène de l'air. Le produit est un oxyde, le dioxyde de carbone $\\mathrm{CO_2}$. C'est donc une oxydation du carbone. Dire que c'est une simple fusion est faux : il y a formation d'un nouveau corps.",
+              "answers": [
+                {
+                  "content": "Le carbone réagit avec le dioxygène de l'air et forme un oxyde.",
+                  "correct": true
+                },
+                {
+                  "content": "Le carbone fond sous l'effet de la chaleur.",
+                  "correct": false
+                },
+                {
+                  "content": "Le carbone se dissout dans l'air.",
+                  "correct": false
+                },
+                {
+                  "content": "Le carbone réagit avec l'azote de l'air.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation-bilan de la combustion du carbone dans le dioxygène ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : écrire les formules (réactifs $\\mathrm{C}$ et $\\mathrm{O_2}$, produit $\\mathrm{CO_2}$), compter les atomes (1 C et 2 O de chaque côté), ajuster (rien à ajuster) et vérifier. L'équation est $\\mathrm{C + O_2 \\rightarrow  CO_2}$. La proposition avec $\\mathrm{CO}$ change le produit, et celle avec $\\mathrm{2O}$ n'est pas la formule du dioxygène.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{C + O_2 \\rightarrow  CO}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{C + O_2 \\rightarrow  CO_2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{C + 2O \\rightarrow  CO_2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2C + O_2 \\rightarrow  CO_2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On fait barboter le gaz produit dans de l'eau de chaux. Qu'observe-t-on et que prouve-t-on ?",
+              "question_type": "single_choice",
+              "explanation": "Le dioxyde de carbone trouble l'eau de chaux, qui devient laiteuse. Ce test identifie le $\\mathrm{CO_2}$. Si l'eau de chaux restait limpide, il n'y aurait pas de $\\mathrm{CO_2}$. L'eau de chaux ne détecte pas le dioxygène.",
+              "answers": [
+                {
+                  "content": "L'eau de chaux se trouble : le gaz est du dioxyde de carbone.",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau de chaux reste limpide : le gaz est du dioxyde de carbone.",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau de chaux se trouble : le gaz est du dioxygène.",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau de chaux devient bleue : le gaz est du dioxyde de carbone.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un récipient fermé, 6 g de carbone réagissent entièrement avec 16 g de dioxygène. Quelle masse de dioxyde de carbone se forme ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : écrire la relation $m(\\text{carbone}) + m(\\text{dioxygène}) = m(\\text{dioxyde de carbone})$, remplacer, calculer, vérifier. On obtient $6 + 16 = 22$ g. La masse produite est égale à la somme des masses des réactifs. La valeur 10 g viendrait d'une soustraction, alors qu'ici on cherche le produit.",
+              "answers": [
+                {
+                  "content": "22",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "g"
+            },
+            {
+              "content": "Le dioxyde de carbone $\\mathrm{CO_2}$ est un corps pur simple, car le carbone est un corps pur simple.",
+              "question_type": "true_false",
+              "explanation": "Méthode : compter les éléments de la formule. $\\mathrm{CO_2}$ contient du carbone et de l'oxygène : deux éléments, donc corps pur composé. Un composé formé à partir d'un corps simple n'est pas lui-même simple.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le four contient 5 L d'air. L'air renferme environ un cinquième de dioxygène en volume. Quel volume de dioxygène y a-t-il environ dans le four ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : un cinquième de 5 L se calcule par $5 \\div 5 = 1$ L. Il y a environ 1 L de dioxygène. Les 4 L restants sont surtout du diazote, qui ne participe pas à la combustion.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "L"
+            }
+          ]
+        },
+        {
+          "title": "La paille de fer chez le ferronnier",
+          "statement": "Un ferronnier chauffe un morceau de paille de fer à blanc dans un flacon de dioxygène. La paille de fer devient incandescente, projette des étincelles et se transforme en une poudre noire attirée par un aimant : l'oxyde magnétique de fer $\\mathrm{Fe_3O_4}$.",
+          "exercise_type": "fixation",
+          "figure": "schema-combustion-fer",
+          "questions": [
+            {
+              "content": "La paille de fer chauffée brûle en projetant des étincelles. De quel type d'oxydation s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : observer la durée et la flamme, puis classer. La transformation est rapide, avec incandescence et étincelles : c'est une oxydation vive. Une oxydation lente, comme la rouille, se fait sans flamme en plusieurs semaines.",
+              "answers": [
+                {
+                  "content": "Une oxydation vive.",
+                  "correct": true
+                },
+                {
+                  "content": "Une oxydation lente.",
+                  "correct": false
+                },
+                {
+                  "content": "Ce n'est pas une oxydation.",
+                  "correct": false
+                },
+                {
+                  "content": "Une dissolution.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation-bilan équilibrée de la combustion du fer dans le dioxygène ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : écrire $\\mathrm{Fe + O_2 \\rightarrow  Fe_3O_4}$. Compter : 1 Fe et 2 O à gauche ; 3 Fe et 4 O à droite. Ajuster : 3 devant $\\mathrm{Fe}$, 2 devant $\\mathrm{O_2}$. Vérifier : 3 Fe et 4 O des deux côtés. L'équation $\\mathrm{Fe + O_2 \\rightarrow  Fe_3O_4}$ n'est pas équilibrée.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{3Fe + 2O_2 \\rightarrow  Fe_3O_4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{Fe + O_2 \\rightarrow  Fe_3O_4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{3Fe + O_2 \\rightarrow  Fe_3O_4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2Fe + 3O_2 \\rightarrow  Fe_3O_4}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'équation $\\mathrm{3Fe + 2O_2 \\rightarrow  Fe_3O_4}$, combien y a-t-il d'atomes de fer du côté des produits ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : compter les atomes. L'indice 3 de $\\mathrm{Fe_3O_4}$ indique 3 atomes de fer. Ce nombre est égal au nombre d'atomes de fer des réactifs (le coefficient 3 devant $\\mathrm{Fe}$) : les atomes se conservent.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Dans un récipient fermé, 14 g de fer réagissent avec du dioxygène et donnent 19,3 g d'oxyde magnétique de fer. Quelle masse de dioxygène a réagi ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : $m(\\text{fer}) + m(\\text{dioxygène}) = m(\\text{oxyde})$. On remplace : $14 + m(\\text{dioxygène}) = 19{,}3$. On calcule : $19{,}3 - 14 = 5{,}3$ g. Le résultat est positif et l'oxyde est plus lourd que le fer.",
+              "answers": [
+                {
+                  "content": "5,3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0.05,
+              "unit": "g"
+            },
+            {
+              "content": "Si le ferronnier brûle la paille de fer à l'air libre, la poudre noire obtenue est plus lourde que la paille de fer de départ.",
+              "question_type": "true_false",
+              "explanation": "Méthode : le fer fixe du dioxygène pris dans l'air. Donc $m(\\text{oxyde}) = m(\\text{fer}) + m(\\text{dioxygène fixé})$ : l'oxyde est plus lourd. Il n'y a pas de création de matière : le dioxygène de l'air s'est ajouté.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois phrases ce que le ferronnier observe, puis écris l'équation-bilan de la combustion de la paille de fer.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. La paille de fer chauffée devient incandescente et projette des étincelles : c'est une oxydation vive. Le fer réagit avec le dioxygène et forme une poudre noire, l'oxyde magnétique de fer $\\mathrm{Fe_3O_4}$, attirée par un aimant. L'équation-bilan équilibrée est $\\mathrm{3Fe + 2O_2 \\rightarrow  Fe_3O_4}$ : 3 atomes de fer et 4 atomes d'oxygène de chaque côté. Barème : 1 point pour le type d'oxydation justifié, 1 point pour le produit nommé, 1 point pour l'équation équilibrée.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Dit que c'est une oxydation vive (étincelles, incandescence)",
+                "Nomme l'oxyde magnétique de fer comme produit",
+                "Écrit l'équation 3Fe + 2O2 -> Fe3O4 équilibrée"
+              ],
+              "starter": "La paille de fer devient incandescente…"
+            }
+          ]
+        },
+        {
+          "title": "Le portail rouillé",
+          "statement": "Devant la maison de Koffi, un portail en fer est couvert de rouille après la saison des pluies, alors que la gouttière en aluminium voisine est intacte. Le père de Koffi veut repeindre le portail. On étudie les oxydations lentes de ces deux métaux.",
+          "exercise_type": "evaluation",
+          "figure": "types-oxydation",
+          "questions": [
+            {
+              "content": "Le portail rouille en plusieurs mois, sans flamme. Quel est le type d'oxydation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : observer la durée (plusieurs mois) et l'absence de flamme, puis classer. La transformation est lente et sans flamme : oxydation lente. Une oxydation vive serait rapide, avec flamme ou incandescence.",
+              "answers": [
+                {
+                  "content": "Une oxydation lente.",
+                  "correct": true
+                },
+                {
+                  "content": "Une oxydation vive.",
+                  "correct": false
+                },
+                {
+                  "content": "Une combustion vive du fer.",
+                  "correct": false
+                },
+                {
+                  "content": "Une simple dissolution.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles propriétés de la rouille expliquent que le portail se détruise ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : nommer l'oxyde et décrire son aspect, puis conclure. La rouille est poreuse et laisse passer l'air et l'humidité jusqu'au fer sain. Elle s'écaille aussi, ce qui découvre du fer neuf qui s'oxyde à son tour. Elle n'est pas adhérente comme l'alumine et elle ne protège pas.",
+              "answers": [
+                {
+                  "content": "Elle est poreuse et laisse passer l'air et l'eau.",
+                  "correct": true
+                },
+                {
+                  "content": "Elle s'écaille et découvre du fer neuf.",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est mince et adhérente.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle empêche le dioxygène d'atteindre le fer.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi repeindre le portail le protège-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : conclure sur le métal. La peinture forme une barrière qui empêche le dioxygène et l'humidité d'atteindre le fer. Sans ces deux conditions, il n'y a plus de rouille. La peinture ne transforme pas la rouille en fer.",
+              "answers": [
+                {
+                  "content": "Elle sépare le fer du dioxygène et de l'humidité.",
+                  "correct": true
+                },
+                {
+                  "content": "Elle transforme la rouille en fer.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle apporte du dioxygène au fer.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle chauffe le fer et empêche la rouille.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une barre de fer de 56 g a rouillé en un an. La rouille obtenue (solide brun-rouge) pèse 80 g (on admet que la rouille ne contient que du fer et de l'oxygène). Quelle masse de dioxygène le fer a-t-il fixée ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : écrire $m(\\text{fer}) + m(\\text{dioxygène}) = m(\\text{rouille})$ ; remplacer : $56 + m(\\text{dioxygène}) = 80$ ; calculer : $80 - 56 = 24$ g. Vérifier : le résultat est positif et la rouille est plus lourde que le fer, car elle a fixé du dioxygène.",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "g"
+            },
+            {
+              "content": "On équilibre la formation de l'alumine : $\\mathrm{Al + O_2 \\rightarrow  Al_2O_3}$. Quel coefficient faut-il écrire devant $\\mathrm{O_2}$ ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : compter les atomes ; 1 Al et 2 O à gauche, 2 Al et 3 O à droite. Ajuster : on égalise les atomes O avec le plus petit multiple commun de 2 et 3, soit 6 : 3 $\\mathrm{O_2}$ et 2 $\\mathrm{Al_2O_3}$. Il faut alors 4 $\\mathrm{Al}$. Vérifier : $\\mathrm{4Al + 3O_2 \\rightarrow  2Al_2O_3}$ donne 4 Al et 6 O des deux côtés.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Compare la rouille du portail et la couche d'alumine de la gouttière, puis explique pourquoi l'une détruit le métal et l'autre le protège.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Le fer et l'aluminium subissent tous les deux une oxydation lente avec le dioxygène de l'air humide. La rouille, oxyde de fer brun-rouge, est poreuse et s'écaille : elle laisse l'air et l'eau atteindre le fer en dessous, qui continue de s'oxyder jusqu'à être détruit. L'alumine $\\mathrm{Al_2O_3}$ est une couche mince qui adhère bien au métal : elle empêche le dioxygène d'atteindre l'aluminium, qui est ainsi protégé. Barème : 1 point par critère, 4 points au total.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Dit que les deux métaux subissent une oxydation lente",
+                "Décrit la rouille comme poreuse et qui s'écaille",
+                "Décrit l'alumine comme mince et adhérente",
+                "Conclut : la rouille détruit le fer, l'alumine protège l'aluminium"
+              ],
+              "starter": "Les deux métaux s'oxydent lentement, mais…"
+            }
+          ]
+        },
+        {
+          "title": "Du soufre aux métaux : bilan sur l'oxydation",
+          "statement": "Dans un laboratoire de collège, le professeur fait brûler du soufre (S) dans un flacon de dioxygène : le soufre brûle avec une flamme bleue et forme du dioxyde de soufre $\\mathrm{SO_2}$, gaz à l'odeur piquante. Il rappelle ensuite les oxydations vues en classe : le carbone, le fer, et l'aluminium. Les élèves doivent faire le bilan.",
+          "exercise_type": "evaluation",
+          "figure": "dioxygene",
+          "questions": [
+            {
+              "content": "Pourquoi la combustion du soufre est-elle une oxydation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : repérer les réactifs (le soufre et le dioxygène), vérifier que le dioxygène en est un, nommer le produit (dioxyde de soufre $\\mathrm{SO_2}$, un oxyde), conclure. C'est donc une oxydation du soufre. Dire qu'il se dissout dans le dioxygène est faux : un nouveau corps se forme.",
+              "answers": [
+                {
+                  "content": "Le soufre réagit avec le dioxygène et forme un oxyde.",
+                  "correct": true
+                },
+                {
+                  "content": "Le soufre fond dans le flacon.",
+                  "correct": false
+                },
+                {
+                  "content": "Le soufre se mélange au dioxygène sans réagir.",
+                  "correct": false
+                },
+                {
+                  "content": "Le soufre réagit avec l'azote du flacon.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation-bilan de la combustion du soufre dans le dioxygène ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : écrire $\\mathrm{S + O_2 \\rightarrow  SO_2}$. Compter : 1 S et 2 O de chaque côté. Ajuster : rien. Vérifier : l'équation est équilibrée. Les propositions avec $\\mathrm{SO_3}$ ou $\\mathrm{SO}$ changent le produit : ce ne sont pas les corps formés ici.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{S + O_2 \\rightarrow  SO_2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{S + O_2 \\rightarrow  SO}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2S + O_2 \\rightarrow  SO_2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{S + O_2 \\rightarrow  SO_3}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un récipient fermé, 4 g de soufre réagissent avec 4 g de dioxygène. Quelle masse de dioxyde de soufre se forme ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : $m(\\text{soufre}) + m(\\text{dioxygène}) = m(\\text{dioxyde de soufre})$. Remplacer : $4 + 4 = 8$ g. Vérifier : la masse produite est égale à la somme des masses des réactifs.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "g"
+            },
+            {
+              "content": "Quelles oxydations sont des oxydations vives ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : observer la durée et la flamme, puis classer. Le soufre brûle avec une flamme bleue, le charbon de bois avec une flamme rouge et la paille de fer chauffée avec des étincelles : trois oxydations vives. La rouille du portail et l'alumine sur la gouttière se forment lentement, sans flamme : oxydations lentes.",
+              "answers": [
+                {
+                  "content": "La combustion du soufre.",
+                  "correct": true
+                },
+                {
+                  "content": "La combustion du charbon de bois.",
+                  "correct": true
+                },
+                {
+                  "content": "La combustion de la paille de fer chauffée.",
+                  "correct": true
+                },
+                {
+                  "content": "La formation de la rouille.",
+                  "correct": false
+                },
+                {
+                  "content": "Le ternissement de l'aluminium.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On équilibre $\\mathrm{Al + O_2 \\rightarrow  Al_2O_3}$. Quel coefficient faut-il écrire devant $\\mathrm{Al_2O_3}$ ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : compter 1 Al et 2 O à gauche, 2 Al et 3 O à droite. Ajuster : pour les O, plus petit multiple commun de 2 et 3 = 6 ; il faut donc 3 $\\mathrm{O_2}$ et 2 $\\mathrm{Al_2O_3}$. Alors 4 $\\mathrm{Al}$. Vérifier : $\\mathrm{4Al + 3O_2 \\rightarrow  2Al_2O_3}$ donne 4 Al et 6 O de chaque côté.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Quelle phrase sur la molécule de dioxygène $\\mathrm{O_2}$ est exacte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : compter les éléments. La molécule $\\mathrm{O_2}$ est formée de deux atomes d'oxygène, soit un seul élément : c'est un corps pur simple. Elle n'est pas un oxyde, car un oxyde associe l'oxygène à un autre élément.",
+              "answers": [
+                {
+                  "content": "C'est un corps pur simple formé de deux atomes d'oxygène.",
+                  "correct": true
+                },
+                {
+                  "content": "C'est un oxyde formé de deux éléments.",
+                  "correct": false
+                },
+                {
+                  "content": "C'est un corps pur composé.",
+                  "correct": false
+                },
+                {
+                  "content": "C'est un atome d'oxygène isolé.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À partir de la combustion du soufre, résume en quelques lignes ce qu'est une oxydation, puis écris l'équation-bilan équilibrée de cette combustion.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Une oxydation est la réaction d'un corps avec le dioxygène : le corps est oxydé et le produit est un oxyde. Le soufre, corps pur simple, brûle dans le dioxygène avec une flamme bleue et forme le dioxyde de soufre $\\mathrm{SO_2}$. L'équation-bilan est $\\mathrm{S + O_2 \\rightarrow  SO_2}$ : 1 atome de soufre et 2 atomes d'oxygène de chaque côté, donc les atomes se conservent. Barème : 1 point pour la définition et l'oxyde, 1 point pour l'équation, 1 point pour la conservation des atomes.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Définit l'oxydation comme réaction avec le dioxygène",
+                "Dit que le produit est un oxyde (dioxyde de soufre)",
+                "Écrit S + O2 -> SO2",
+                "Précise que les atomes se conservent"
+              ],
+              "starter": "Une oxydation est la réaction d'un corps avec…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

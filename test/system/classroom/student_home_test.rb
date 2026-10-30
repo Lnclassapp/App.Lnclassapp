@@ -75,7 +75,7 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
   end
 
   # CA-D10 (Lot O1): the page is only measured; the markup rules are in test/controllers/classroom/student_homes_controller_test.rb.
-  test "on a computer (1440 px): 912 px beside a sidebar without profile card, no band, seven subjects on a line, two announcements, mist page" do
+  test "on a computer (1440 px): 912 px beside the sidebar, no band, seven subjects on a line, two announcements, mist page" do
     create_message(author: create_team_member(second_factor: false), title: "Rentrée", audience: "all", published_at: 1.hour.ago)
     create_message(author: create_school_admin(school: @classroom.school, gender: "female", last_name: "Kamaté"), title: "Parents",
                    school: @classroom.school, published_at: 2.hours.ago)
@@ -85,7 +85,6 @@ class Classroom::StudentHomeTest < ApplicationSystemTestCase
 
       assert_selector "header.sticky", visible: :visible
       assert_no_selector "header.student-band", visible: :visible
-      assert_no_selector "aside .ui-avatar", visible: :all
       assert_selector "aside nav a", count: 3
 
       assert_operator find("#student_home").rect.width, :<=, 912

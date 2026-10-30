@@ -30,7 +30,7 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
 
   test "the list shows recent reports, and filters them by kind" do
     create_import_report(kind: "schools", status: "completed", imported_count: 12, total_count: 12)
-    create_import_report(kind: "essentials", status: "rejected")
+    create_import_report(kind: "drenas", status: "rejected")
     sign_in_as @member
 
     get teams_imports_path
@@ -42,11 +42,11 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#imports", text: /Rejeté/
     assert_select "a[data-turbo-frame=modal][href='#{new_teams_import_path(kind: 'course_tree')}']"
 
-    get teams_imports_path(kind: "essentials")
+    get teams_imports_path(kind: "drenas")
 
     assert_select "#imports tr", 1
-    assert_select "#imports", text: /Fiches de révision/
-    assert_select "nav a[aria-current=page]", text: "Fiches de révision"
+    assert_select "#imports", text: /Rejeté/
+    assert_select "nav a[aria-current=page]", text: "DRENA"
   end
 
   # ADR-0113 §4.4 : l'import d'exercices seuls est retiré ; ses rapports passés se lisent encore, il n'est plus proposé.
@@ -65,14 +65,16 @@ class Teams::ImportsControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  # UDR-0130 §3: the import kinds of the course sheets and revision sheets are named by the decision.
-  test "the course sheets and revision sheets imports are named after the sheets" do
+  # UDR-0130 §3, ADR-0116 §4.5: only the complete lessons are offered; the notions and the course sheet imports are retired.
+  test "the import menu offers the complete lessons and no retired kind" do
     sign_in_as @member
 
     get teams_imports_path
 
     assert_select "#new-import-menu a[role=menuitem][href='#{new_teams_import_path(kind: 'course_tree')}']", text: "Fiches de cours complètes"
-    assert_select "#new-import-menu a[role=menuitem][href='#{new_teams_import_path(kind: 'essentials')}']", text: "Fiches de révision"
+    %w[essentials course_sheet].each do |kind|
+      assert_select "#new-import-menu a[href*='kind=#{kind}']", count: 0
+    end
   end
 
   test "an empty list says so" do

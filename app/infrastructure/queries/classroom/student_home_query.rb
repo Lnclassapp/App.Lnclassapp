@@ -18,9 +18,9 @@ module Queries
       Assigner = Data.define(:gender, :last_name)
       ReviewRow = Data.define(:essential_name, :essential_slug, :course_slug, :material_name, :material_slug, :score_percent)
       # badge_level : bronze, silver, gold, diamond ou nil ; started_session_public_id : la session à reprendre, ou nil ;
-      # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée.
+      # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée ; exercise_type : « fixation » ou « evaluation » (carte d'exercice).
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :material_slug, :badge_level,
-                                :best_score_percent, :completed_count, :started_session_public_id, :due_on)
+                                :best_score_percent, :completed_count, :started_session_public_id, :due_on, :exercise_type)
       SessionRow = Data.define(:public_id, :exercise_id, :exercise_public_id, :exercise_title, :material_name, :material_slug, :score_percent,
                                :completed_at)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
@@ -41,7 +41,7 @@ module Queries
       # Un exercice de toute la leçon n'a pas de notion : il suit celles de sa leçon, et le tri Ruby ne compare jamais nil.
       COALESCE_NOTION_POSITION = Arel.sql("COALESCE(essentials.position, 2147483647)")
       EXERCISE_COLUMNS = [ "exercises.id", "exercises.public_id", "exercises.title", "materials.name", "materials.category",
-                           "materials.slug", "courses.id", COALESCE_NOTION_POSITION, "exercises.position" ].freeze
+                           "materials.slug", "exercises.exercise_type", "courses.id", COALESCE_NOTION_POSITION, "exercises.position" ].freeze
 
       # today : la date d'Abidjan (Time.zone), qui dit si une échéance est passée.
       # → Row | nil (aucune classe principale active : l'élève n'a pas d'accueil)
@@ -175,11 +175,11 @@ module Queries
                                         .to_h { |id, best, count| [ id, [ best, count ] ] }
         started = Orm::ExerciseSession.where(student_id:, exercise_id: ids, status: "started").pluck(:exercise_id, :public_id).to_h
         badges = Orm::ExerciseBadge.where(student_id:, exercise_id: ids).pluck(:exercise_id, :level).to_h
-        rows.map do |id, public_id, title, material_name, material_category, material_slug, *program_order|
+        rows.map do |id, public_id, title, material_name, material_category, material_slug, exercise_type, *program_order|
           best_score_percent, completed_count = completed.fetch(id, [ nil, 0 ])
           assigned_at, due_on = assignments.fetch(id)
           row = ExerciseRow.new(public_id:, title:, material_name:, material_category:, material_slug:, badge_level: badges[id],
-                                best_score_percent:, completed_count:, started_session_public_id: started[id], due_on:)
+                                best_score_percent:, completed_count:, started_session_public_id: started[id], due_on:, exercise_type:)
           [ urgency(row, assigned_at, *program_order), material_slug, row ]
         end
       end

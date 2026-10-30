@@ -1,1626 +1,1437 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Le sang",
       "subtitle": "Leçon 3 — progression DPFC 2026-2027",
       "level_name": "3ème",
       "material_name": "SVT",
-      "essentials": [
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "lame-de-sang-noms",
+          "kind": "plate",
+          "description": "Planche d'une lame de sang observée au microscope, avec ses légendes. Sur le fond jaune pâle du plasma, on voit de très nombreuses hématies en petits disques rouges sans noyau, trois sortes de leucocytes à noyau (polynucléaire, lymphocyte, monocyte) et de minuscules plaquettes sanguines.",
+          "params": {
+            "plate": "blood_smear",
+            "labels": [
+              {
+                "part": "red_blood_cell",
+                "text": "hématie (globule rouge)"
+              },
+              {
+                "part": "neutrophil",
+                "text": "polynucléaire"
+              },
+              {
+                "part": "lymphocyte",
+                "text": "lymphocyte"
+              },
+              {
+                "part": "monocyte",
+                "text": "monocyte"
+              },
+              {
+                "part": "platelet",
+                "text": "plaquette sanguine"
+              },
+              {
+                "part": "plasma",
+                "text": "plasma"
+              }
+            ],
+            "highlight": [
+              "red_blood_cell"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "lame-de-sang-numeros",
+          "kind": "plate",
+          "description": "Planche d'une lame de sang observée au microscope. Six éléments sont repérés par les numéros 1 à 6, sans aucune légende : le plasma, un lymphocyte, une hématie, un monocyte, une plaquette sanguine et un polynucléaire. L'élève doit retrouver leur nom d'après la forme, la taille, la couleur et la présence d'un noyau.",
+          "params": {
+            "plate": "blood_smear",
+            "labels": [
+              {
+                "part": "red_blood_cell"
+              },
+              {
+                "part": "neutrophil"
+              },
+              {
+                "part": "platelet"
+              },
+              {
+                "part": "plasma"
+              },
+              {
+                "part": "lymphocyte"
+              },
+              {
+                "part": "monocyte"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "composition-du-sang",
+          "kind": "stat_chart",
+          "description": "Diagramme circulaire de la composition d'un tube de sang centrifugé, en pourcentage du volume : le plasma occupe environ 55, les hématies environ 44, et les leucocytes avec les plaquettes sanguines environ 1. Le plasma est donc le constituant le plus abondant en volume.",
+          "params": {
+            "chart": "pie",
+            "series": [
+              55,
+              44,
+              1
+            ],
+            "labels": [
+              "Plasma",
+              "Hématies",
+              "Leucocytes et plaquettes"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "transport-des-gaz",
+          "kind": "diagram",
+          "description": "Schéma fléché en cycle du transport des gaz par le sang. Les poumons donnent du dioxygène au sang, qui le porte aux organes et le libère. Les organes rejettent du dioxyde de carbone dans le sang, qui le ramène aux poumons, où il est rejeté. Les lieux d'échange et le sang ont deux couleurs.",
+          "params": {
+            "layout": "cycle",
+            "direction": "down",
+            "legend": [
+              "Lieux d'échange",
+              "Sang"
+            ],
+            "nodes": [
+              {
+                "id": "poumons",
+                "label": "Poumons",
+                "category": 1
+              },
+              {
+                "id": "sang_o2",
+                "label": "Sang riche en dioxygène",
+                "category": 2
+              },
+              {
+                "id": "organes",
+                "label": "Organes",
+                "category": 1
+              },
+              {
+                "id": "sang_co2",
+                "label": "Sang riche en dioxyde de carbone",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "poumons",
+                "to": "sang_o2",
+                "label": "dioxygène fixé"
+              },
+              {
+                "from": "sang_o2",
+                "to": "organes",
+                "label": "dioxygène libéré"
+              },
+              {
+                "from": "organes",
+                "to": "sang_co2",
+                "label": "dioxyde de carbone pris"
+              },
+              {
+                "from": "sang_co2",
+                "to": "poumons",
+                "label": "dioxyde de carbone rejeté"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "phagocytose",
+          "kind": "diagram",
+          "description": "Schéma fléché de haut en bas des étapes de la phagocytose : un microbe entre dans l'organisme par une plaie, un leucocyte s'approche et touche le microbe, il l'englobe, puis il le digère. À la fin, le microbe est détruit. Les cinq étapes se suivent dans cet ordre.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "e1",
+                "label": "Un microbe entre par une plaie"
+              },
+              {
+                "id": "e2",
+                "label": "Le leucocyte touche le microbe"
+              },
+              {
+                "id": "e3",
+                "label": "Il l'englobe"
+              },
+              {
+                "id": "e4",
+                "label": "Il le digère"
+              },
+              {
+                "id": "e5",
+                "label": "Le microbe est détruit"
+              }
+            ],
+            "edges": [
+              {
+                "from": "e1",
+                "to": "e2"
+              },
+              {
+                "from": "e2",
+                "to": "e3"
+              },
+              {
+                "from": "e3",
+                "to": "e4"
+              },
+              {
+                "from": "e4",
+                "to": "e5"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "coagulation",
+          "kind": "diagram",
+          "description": "Schéma fléché de haut en bas de la coagulation : un vaisseau sanguin est blessé, les plaquettes forment un bouchon, un réseau de fibrine retient des hématies, ce qui donne un caillot qui bouche la plaie, puis une croûte à la surface de la peau. Les cinq étapes se suivent.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "c1",
+                "label": "Un vaisseau est blessé"
+              },
+              {
+                "id": "c2",
+                "label": "Les plaquettes forment un bouchon"
+              },
+              {
+                "id": "c3",
+                "label": "La fibrine forme un réseau"
+              },
+              {
+                "id": "c4",
+                "label": "Le caillot bouche la plaie"
+              },
+              {
+                "id": "c5",
+                "label": "Une croûte se forme"
+              }
+            ],
+            "edges": [
+              {
+                "from": "c1",
+                "to": "c2"
+              },
+              {
+                "from": "c2",
+                "to": "c3"
+              },
+              {
+                "from": "c3",
+                "to": "c4"
+              },
+              {
+                "from": "c4",
+                "to": "c5"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "evolution-des-leucocytes",
+          "kind": "stat_chart",
+          "description": "Courbe fictive du nombre de leucocytes de Moussa, en milliers par mm³ de sang, du jour 0 au jour 5 : 8 au jour 0, 12 au jour 1, 16 au jour 2, 14 au jour 3, 10 au jour 4 et 8 au jour 5. La courbe monte jusqu'au jour 2, puis redescend.",
+          "params": {
+            "chart": "line",
+            "series": [
+              8,
+              12,
+              16,
+              14,
+              10,
+              8
+            ],
+            "labels": [
+              "J0",
+              "J1",
+              "J2",
+              "J3",
+              "J4",
+              "J5"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
         {
           "name": "La composition du sang",
-          "subtitle": "Un plasma et trois sortes d'éléments qui y flottent",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Nommer les quatre constituants du sang : le plasma, les globules rouges, les globules blancs et les plaquettes.</li><li>Décrire ce qu'on voit quand on observe une goutte de sang au microscope.</li><li>Dire comment se présente un tube de sang laissé au repos.</li></ul><h2>L'image pour comprendre</h2><h3>Image 1 — La bouteille de jus avec sa pulpe</h3><p><strong>L'image.</strong> Une vendeuse du marché presse des oranges. Dans la bouteille, il y a un liquide jaune et de la pulpe. Si tu poses la bouteille sans la secouer, la pulpe descend peu à peu au fond. Le liquide reste au-dessus.</p><p><strong>Le pont.</strong> Au centre de santé, la laborantine (la personne qui fait les analyses) prélève un peu de sang dans une veine du bras, puis le met dans un tube. Le liquide jaune pâle, c'est le <strong>plasma</strong>. La pulpe, ce sont les <strong>globules</strong> et les <strong>plaquettes</strong>, qui flottent dans le plasma. Laissés longtemps au repos, ou centrifugés (le tube tourne très vite dans un appareil), ils tombent au fond du tube.</p><p><strong>Là où l'image s'arrête.</strong> Dans ton corps, le sang circule sans cesse et reste bien mélangé : il ne se sépare pas en couches. Et la laborantine ajoute un produit qui empêche le sang de coaguler (de prendre en masse), sinon la séparation ne se ferait pas. Tu verras la coagulation dans la dernière fiche essentielle de ce cours.</p><h3>Image 2 — La tribune du stade vue d'en haut</h3><p><strong>L'image.</strong> Tu regardes la tribune du stade depuis le toit. Tu vois une énorme foule en maillots rouges. Çà et là, quelques stadiers en gilet blanc, peu nombreux et plus grands que la foule. Par terre, de minuscules confettis.</p><p><strong>Le pont.</strong> La laborantine étale une goutte de sang en couche très mince sur une lame de verre, puis la regarde au <strong>microscope</strong>, un appareil qui grossit beaucoup. La foule en rouge, ce sont les <strong>globules rouges</strong> : de très nombreux petits disques rouges. Les stadiers, ce sont les <strong>globules blancs</strong> : peu nombreux, plus gros, avec un noyau qui se colore en violet quand on teint la lame. Les confettis, ce sont les <strong>plaquettes</strong> : de minuscules fragments.</p><p><strong>Là où l'image s'arrête.</strong> Dans le stade, chacun est un être entier. Dans le sang, les plaquettes ne sont que des morceaux de cellules. Et les globules ne sont pas posés sur un gradin : ils flottent dans le plasma.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>Le <strong>sang</strong> est formé d'un liquide, le <strong>plasma</strong>, dans lequel flottent trois sortes d'éléments : les <strong>globules rouges</strong> (ou hématies), les <strong>globules blancs</strong> (ou leucocytes) et les <strong>plaquettes</strong>.</li><li>Le plasma est un liquide <strong>jaune pâle</strong>, fait surtout d'eau, où sont dissoutes diverses substances.</li><li>Au microscope : les <strong>globules rouges</strong> sont de loin les plus nombreux, ce sont de petits disques aplatis, creusés au centre, sans noyau. Ils contiennent un pigment rouge, l'<strong>hémoglobine</strong>, qui donne sa couleur au sang. Les <strong>globules blancs</strong> sont peu nombreux, plus gros, et ont un noyau. Les <strong>plaquettes</strong> sont de très petits fragments de cellules, sans noyau.</li><li>Un sang qui ne coagule pas, laissé longtemps au repos dans un tube (ou centrifugé), se sépare : le plasma jaune pâle en haut, une couche rouge foncé de globules rouges en bas, et entre les deux une très fine couche claire de globules blancs et de plaquettes.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Un tube de sang, auquel on a ajouté un produit anticoagulant, reste longtemps immobile ou est centrifugé. Décris ce que tu vois et dis ce que contient chaque zone.</p><ol><li><strong>En haut.</strong> Un liquide jaune pâle : c'est le plasma. Il est surtout fait d'eau.</li><li><strong>Au fond.</strong> Une couche épaisse rouge foncé : ce sont les globules rouges, très nombreux, qui sont tombés au fond.</li><li><strong>Entre les deux.</strong> Une fine couche claire : ce sont les globules blancs et les plaquettes.</li><li><strong>Conclusion.</strong> Le sang n'est pas un simple liquide rouge : c'est un plasma qui contient des globules et des plaquettes.</li></ol><h2>Le piège à éviter</h2><p>L'erreur la plus fréquente est de croire que le sang est rouge « de partout » parce que son liquide est rouge. C'est faux : le <strong>plasma est jaune pâle</strong>. Le sang paraît rouge parce que les globules rouges, qui contiennent l'hémoglobine, sont très nombreux.</p><p>Autre erreur : croire que les globules blancs sont les plus nombreux parce qu'on en parle beaucoup. Sur une lame, ce sont les globules rouges qui dominent.</p><h2>En une phrase</h2><p>Le sang est un plasma jaune pâle qui contient de très nombreux globules rouges, quelques globules blancs plus gros et de minuscules plaquettes.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Les constituants du sang",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Comment s'appelle la partie liquide du sang ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le plasma est le liquide jaune pâle dans lequel flottent les globules et les plaquettes, comme le jus de la bouteille. L'hémoglobine est un pigment des globules rouges, et la bile est un suc de la digestion.",
-                  "answers": [
-                    {
-                      "content": "Le plasma",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'hémoglobine",
-                      "correct": false
-                    },
-                    {
-                      "content": "La bile",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles sont les trois sortes d'éléments qui flottent dans le plasma ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les globules rouges, les globules blancs et les plaquettes flottent dans le plasma. Les enzymes digestives agissent dans le tube digestif, et les villosités sont des replis de la paroi de l'intestin grêle : ce ne sont pas des éléments du sang.",
-                  "answers": [
-                    {
-                      "content": "Les globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les enzymes digestives",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les villosités intestinales",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le plasma est un liquide jaune pâle.",
-                  "question_type": "true_false",
-                  "explanation": "Le plasma est jaune pâle. Si le sang paraît rouge, c'est à cause des globules rouges, très nombreux, qui contiennent un pigment rouge.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'image de la bouteille de jus d'orange, à quoi correspond la pulpe ?",
-                  "question_type": "single_choice",
-                  "explanation": "La pulpe flotte dans le jus puis descend au fond : ce sont les globules et les plaquettes, qui flottent dans le plasma. Le jus, lui, représente le plasma.",
-                  "answers": [
-                    {
-                      "content": "Aux globules et aux plaquettes qui flottent dans le plasma",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au plasma",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aux nutriments dissous",
-                      "correct": false
-                    },
-                    {
-                      "content": "À la paroi d'un vaisseau",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel autre nom désigne les globules rouges ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les globules rouges s'appellent aussi les hématies. Les leucocytes sont les globules blancs, et les villosités n'ont rien à voir avec le sang.",
-                  "answers": [
-                    {
-                      "content": "Les hématies",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les leucocytes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les villosités",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles affirmations sur le plasma sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le plasma est fait surtout d'eau et contient des substances dissoutes. Il n'est pas rouge : la couleur rouge vient de l'hémoglobine des globules rouges. Et c'est un liquide, pas un solide.",
-                  "answers": [
-                    {
-                      "content": "Il est fait surtout d'eau",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il contient des substances dissoutes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il est rouge vif à cause de l'hémoglobine",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il est solide",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il contient les noyaux des globules rouges",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Un tube de sang au repos et une lame au microscope",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un tube de sang qui ne coagule pas reste au repos. Où se trouve le plasma ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les globules, plus lourds que le plasma, tombent au fond. Le plasma, jaune pâle, reste au-dessus, comme le jus au-dessus de la pulpe.",
-                  "answers": [
-                    {
-                      "content": "Au-dessus, sous forme d'un liquide jaune pâle",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au fond, sous forme d'un liquide rouge foncé",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au milieu, entre deux couches rouges",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il n'y a pas de plasma dans un tube de sang",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Au fond d'un tube de sang qui ne coagule pas, la laborantine voit une épaisse couche rouge foncé. Qu'est-ce que c'est ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les globules rouges sont de loin les plus nombreux : en tombant au fond, ils forment une grosse couche rouge foncé. Les globules blancs et les plaquettes forment seulement une très fine couche claire.",
-                  "answers": [
-                    {
-                      "content": "Les globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le plasma",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Au microscope, tu vois de très nombreux petits disques rouges sans noyau, creusés au centre. Que sont-ils ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce sont des globules rouges : nombreux, rouges, aplatis, creusés au centre et sans noyau. Les globules blancs ont un noyau et sont peu nombreux.",
-                  "answers": [
-                    {
-                      "content": "Des globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Des globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Des plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Du plasma",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Sur une lame colorée, tu vois quelques grosses cellules avec un noyau violet. Que sont-elles ?",
-                  "question_type": "single_choice",
-                  "explanation": "Seuls les globules blancs sont des cellules complètes avec un noyau qui se colore. Ils sont plus gros que les globules rouges et bien moins nombreux, comme les stadiers de la tribune.",
-                  "answers": [
-                    {
-                      "content": "Des globules blancs",
-                      "correct": true
-                    },
-                    {
-                      "content": "Des globules rouges",
-                      "correct": false
-                    },
-                    {
-                      "content": "Des plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Du plasma",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Sur une lame de sang, les globules blancs sont plus nombreux que les globules rouges.",
-                  "question_type": "true_false",
-                  "explanation": "C'est l'inverse : les globules rouges sont de loin les plus nombreux, comme la foule en rouge. Les globules blancs sont rares, comme les stadiers.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces éléments du sang, lesquels n'ont pas de noyau ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les globules rouges de l'humain n'ont pas de noyau, et les plaquettes, simples fragments de cellules, non plus. Seuls les globules blancs ont un noyau.",
-                  "answers": [
-                    {
-                      "content": "Les globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aucun : tous ont un noyau",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Lire un tube de sang et une lame",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Un tube de sang qui ne coagule pas est resté au repos. De haut en bas, dans quel ordre se présentent les couches ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le plasma, plus léger, est en haut. Les globules rouges, très nombreux et plus lourds, forment la couche rouge du fond. Entre les deux se trouve la fine couche claire des globules blancs et des plaquettes.",
-                  "answers": [
-                    {
-                      "content": "Plasma jaune pâle, fine couche claire, couche rouge foncé",
-                      "correct": true
-                    },
-                    {
-                      "content": "Couche rouge foncé, fine couche claire, plasma jaune pâle",
-                      "correct": false
-                    },
-                    {
-                      "content": "Plasma jaune pâle, couche rouge foncé, fine couche claire",
-                      "correct": false
-                    },
-                    {
-                      "content": "Fine couche claire, plasma jaune pâle, couche rouge foncé",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une laborantine observe une lame de sang normal. Quelles observations est-elle en droit d'attendre ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Une lame normale montre une foule de disques rouges, quelques globules blancs plus gros avec un noyau, et de minuscules plaquettes. Les globules blancs ne sont jamais aussi nombreux que les rouges, et les globules rouges n'ont pas de noyau.",
-                  "answers": [
-                    {
-                      "content": "De très nombreux disques rouges sans noyau",
-                      "correct": true
-                    },
-                    {
-                      "content": "Quelques cellules plus grosses, avec un noyau",
-                      "correct": true
-                    },
-                    {
-                      "content": "De minuscules fragments, les plaquettes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Autant de globules blancs que de globules rouges",
-                      "correct": false
-                    },
-                    {
-                      "content": "Des globules rouges tous munis d'un gros noyau",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un liquide rouge sans aucune cellule",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le plasma est jaune pâle, et pourtant le sang paraît rouge. Pourquoi ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les globules rouges, très nombreux, contiennent l'hémoglobine, un pigment rouge : ils colorent l'ensemble. Le plasma ne devient pas rouge au contact de l'air, et ni les globules blancs ni les plaquettes ne sont rouges.",
-                  "answers": [
-                    {
-                      "content": "Les globules rouges, très nombreux, contiennent un pigment rouge",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le plasma devient rouge au contact de l'air",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules blancs sont rouges",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les plaquettes donnent la couleur rouge",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Observé au microscope, le sang est un liquide homogène, identique en tous ses points.",
-                  "question_type": "true_false",
-                  "explanation": "Au microscope, on voit des globules rouges, des globules blancs et des plaquettes qui flottent dans le plasma. Le sang n'est donc pas homogène.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Un élève dit : « Le sang, c'est seulement un liquide rouge. » Quelles remarques corrigent son idée ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le liquide du sang, le plasma, est jaune pâle, et le sang contient aussi des globules et des plaquettes. Il n'est ni incolore, ni sans plasma.",
-                  "answers": [
-                    {
-                      "content": "Le liquide du sang, le plasma, est jaune pâle",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sang contient aussi des globules et des plaquettes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sang est un liquide incolore",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sang ne contient que des globules rouges, sans plasma",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sang est un solide mou",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "remember": "Le sang est un liquide rouge qui circule dans les vaisseaux sanguins. Il est formé d'un liquide, le **plasma**, et d'éléments qui y flottent : les **hématies** (ou globules rouges), les **leucocytes** (ou globules blancs) et les **plaquettes sanguines**. Le plasma est un liquide jaune pâle, fait surtout d'eau. Les hématies sont très nombreuses : ce sont de petits disques rouges, sans noyau. Les leucocytes sont peu nombreux, plus gros que les hématies, avec un noyau ; on distingue les polynucléaires, les lymphocytes et les monocytes. Les plaquettes sont de très petits fragments de cellules, sans noyau. Dans un tube de sang laissé au repos ou centrifugé (le tube tourne très vite dans un appareil), les cellules tombent au fond et le plasma reste au-dessus.",
+          "method": [
+            "Observer la lame ou le tube : repérer le liquide de fond et les éléments qui y flottent.",
+            "Décrire chaque élément : sa couleur, sa taille, son nombre, la présence ou l'absence de noyau.",
+            "Identifier chaque élément d'après ces caractères : hématie, leucocyte ou plaquette sanguine.",
+            "Conclure : écrire que le sang est formé de plasma dans lequel flottent ces trois sortes d'éléments."
+          ],
+          "example": {
+            "statement": "Au laboratoire d'analyses, la laborantine observe au microscope une goutte de sang étalée sur une lame et colorée. Elle voit un fond jaune pâle, de très nombreux petits disques rouges sans noyau, quelques grosses cellules avec un noyau violet et de minuscules fragments. Présenter ces observations en suivant la méthode.",
+            "steps": [
+              "Observer : le liquide de fond est jaune pâle ; trois sortes d'éléments y flottent : des disques rouges, des grosses cellules à noyau violet et de minuscules fragments.",
+              "Décrire : les disques rouges sont très nombreux, petits et sans noyau ; les grosses cellules sont peu nombreuses et ont un noyau ; les fragments sont minuscules et sans noyau.",
+              "Identifier : les disques rouges sont des hématies, les grosses cellules à noyau des leucocytes, les fragments des plaquettes sanguines ; le liquide jaune pâle est le plasma.",
+              "Conclure : le sang est formé de plasma dans lequel flottent des hématies, des leucocytes et des plaquettes sanguines."
+            ]
+          },
+          "pitfall": "Ne pas croire que le sang est un liquide entièrement rouge, ni que les plaquettes sont de petits globules. Contre-exemple : dans un tube de sang centrifugé, le liquide du dessus est jaune pâle, c'est le plasma ; le rouge vient des hématies, tombées au fond. De même, une plaquette n'est pas une cellule entière : c'est un fragment de cellule, sans noyau, bien plus petit qu'un globule. Avant de nommer un élément, regarde toujours sa taille et son noyau.",
+          "figure": "lame-de-sang-noms",
+          "exercise": {
+            "title": "Observer une lame de sang au laboratoire",
+            "statement": "Dans cet exercice, tu observes du sang comme la laborantine du laboratoire d'analyses, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "lame-de-sang-numeros",
+            "questions": [
+              {
+                "content": "Quels sont les quatre constituants du sang ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : le sang est un liquide dans lequel flottent des éléments. Étape 2 — Décrire : on y trouve des disques rouges très nombreux, des cellules à noyau peu nombreuses et de minuscules fragments. Étape 3 — Identifier : ce sont les hématies, les leucocytes et les plaquettes sanguines. Étape 4 — Conclure : avec le plasma, cela fait quatre constituants. Oublier le plasma ou les plaquettes est l'erreur tentante : le plasma est le liquide de fond et les plaquettes sont bien présentes, même si elles sont minuscules.",
+                "answers": [
+                  {
+                    "content": "Le plasma, les hématies, les leucocytes et les plaquettes sanguines",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les hématies, les leucocytes et les plaquettes sanguines seulement, sans liquide",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le plasma, les hématies et les leucocytes seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le plasma, l'hémoglobine, les hématies et les leucocytes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le liquide jaune pâle du sang, dans lequel flottent les hématies, les leucocytes et les plaquettes, s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Observer : dans un tube de sang centrifugé, le liquide du dessus est jaune pâle. Étape 2 — Décrire : il est limpide, sans cellule visible. Étape 3 — Identifier : ce liquide de fond est le plasma. Étape 4 — Conclure : le sang est du plasma avec des éléments qui y flottent.",
+                "answers": [
+                  {
+                    "content": "plasma",
+                    "correct": true
+                  },
+                  {
+                    "content": "le plasma",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque constituant du sang à ses caractères.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Décrire : on note la couleur, la taille, le nombre et le noyau de chaque élément. Étape 3 — Identifier : les très nombreux disques rouges sans noyau sont des hématies ; les cellules peu nombreuses, plus grosses et à noyau sont des leucocytes ; les minuscules fragments sans noyau sont des plaquettes ; le liquide de fond jaune pâle est le plasma.",
+                "answers": [
+                  {
+                    "content": "Hématie",
+                    "match": "Très nombreuse, en disque rouge, sans noyau"
+                  },
+                  {
+                    "content": "Leucocyte",
+                    "match": "Peu nombreux, plus gros, avec un noyau"
+                  },
+                  {
+                    "content": "Plaquette sanguine",
+                    "match": "Minuscule fragment de cellule, sans noyau"
+                  },
+                  {
+                    "content": "Plasma",
+                    "match": "Liquide jaune pâle, fait surtout d'eau"
+                  }
+                ]
+              },
+              {
+                "content": "Observe la planche de la lame de sang numérotée. Relie chaque numéro à son nom.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Observer : on repère le fond jaune pâle et les éléments qui y flottent. Étape 2 — Décrire : le numéro 1 est un petit disque rouge sans noyau, le numéro 2 une grosse cellule à noyau en plusieurs lobes, le numéro 3 un minuscule fragment, le numéro 4 le liquide de fond, le numéro 5 une cellule à gros noyau rond qui occupe presque toute la cellule. Étape 3 — Identifier : hématie, polynucléaire, plaquette sanguine, plasma, lymphocyte.",
+                "answers": [
+                  {
+                    "content": "Numéro 1",
+                    "match": "Hématie"
+                  },
+                  {
+                    "content": "Numéro 2",
+                    "match": "Polynucléaire"
+                  },
+                  {
+                    "content": "Numéro 3",
+                    "match": "Plaquette sanguine"
+                  },
+                  {
+                    "content": "Numéro 4",
+                    "match": "Plasma"
+                  },
+                  {
+                    "content": "Numéro 5",
+                    "match": "Lymphocyte"
+                  }
+                ]
+              },
+              {
+                "content": "Pour s'entraîner, on centrifuge un tube de 10 mL de sang. Le plasma occupe 5,5 mL du tube. Quel volume occupent les cellules (hématies, leucocytes et plaquettes) ? Réponds en mL.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Observer : après centrifugation, le tube a deux parties, le plasma au-dessus et les cellules au fond. Étape 2 — Décrire : le plasma occupe 5,5 mL sur 10 mL. Étape 3 — Identifier : les cellules occupent tout le reste du tube. Étape 4 — Conclure : 10 − 5,5 = 4,5 mL. Répondre 5,5 mL serait recopier le volume du plasma sans retrancher.",
+                "answers": [
+                  {
+                    "content": "4,5",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "mL"
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour traiter une observation de lame de sang.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Observer d'abord, sans interpréter. Étape 2 — Décrire chaque élément avec des critères précis. Étape 3 — Identifier : on ne nomme qu'après avoir décrit. Étape 4 — Conclure : la composition du sang. Nommer avant de décrire expose à confondre un leucocyte avec une hématie.",
+                "answers": [
+                  {
+                    "content": "Observer le fond et les éléments qui flottent"
+                  },
+                  {
+                    "content": "Décrire la couleur, la taille, le nombre et le noyau de chaque élément"
+                  },
+                  {
+                    "content": "Identifier chaque élément : hématie, leucocyte ou plaquette"
+                  },
+                  {
+                    "content": "Conclure sur la composition du sang"
+                  }
+                ]
+              },
+              {
+                "content": "Les plaquettes sanguines sont de petits globules complets, avec un noyau.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Décrire : une plaquette est minuscule et n'a pas de noyau. Étape 3 — Identifier : c'est un fragment de cellule, pas un globule. Ce sont les leucocytes, plus gros, qui ont un noyau. Croire que la plaquette est un petit globule est l'erreur signalée dans le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
         },
         {
           "name": "Le sang, un moyen de transport",
-          "subtitle": "Le plasma porte les nutriments, les globules rouges portent le dioxygène",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire ce que le plasma transporte : les nutriments et les déchets.</li><li>Expliquer le rôle des globules rouges et de l'hémoglobine dans le transport du dioxygène.</li><li>Suivre le trajet du dioxygène et du dioxyde de carbone entre les poumons et les organes.</li></ul><h2>L'image pour comprendre</h2><h3>Image 1 — Le gbaka</h3><p><strong>L'image.</strong> Le matin, un gbaka prend des passagers à la gare d'Adjamé et les dépose à Yopougon. À l'intérieur, chaque passager s'assoit sur un siège. Le gbaka ne fabrique pas les passagers : il les transporte d'un endroit à un autre.</p><p><strong>Le pont.</strong> Le gbaka, c'est le <strong>globule rouge</strong>. Les passagers sont les molécules de <strong>dioxygène</strong>, le gaz de l'air dont les organes ont besoin pour fonctionner. Les sièges, c'est l'<strong>hémoglobine</strong>, le pigment rouge qui fixe le dioxygène. La gare de départ, ce sont les <strong>poumons</strong>, où le dioxygène de l'air entre dans le sang. La gare d'arrivée, ce sont les <strong>organes</strong> (les muscles, par exemple), où le dioxygène est déposé.</p><p><strong>Là où l'image s'arrête.</strong> Le gbaka a un chauffeur ; le globule rouge n'a pas de chauffeur : il est emporté par le sang. Et le gbaka ne fait qu'un aller ; le sang, lui, est sans cesse en mouvement. Son trajet complet sera étudié plus tard dans l'année.</p><h3>Image 2 — La livreuse à moto du maquis</h3><p><strong>L'image.</strong> Une livreuse du maquis apporte les repas aux maisons du quartier. En repartant, elle ramasse les bouteilles vides et les sacs de déchets.</p><p><strong>Le pont.</strong> La livreuse, c'est le <strong>plasma</strong>. Les repas sont les <strong>nutriments</strong> (glucose, acides aminés…) que l'intestin grêle a fait passer dans le sang : le plasma les apporte à tous les organes. Les bouteilles vides et les sacs sont les <strong>déchets</strong> produits par les organes, que le plasma emporte.</p><p><strong>Là où l'image s'arrête.</strong> Les nutriments ne sont pas transportés dans des récipients : ils sont <strong>dissous</strong> dans le plasma, comme le sucre dans l'eau.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>Le sang est un <strong>moyen de transport</strong> : il circule dans les vaisseaux sanguins et atteint tous les organes.</li><li>Le <strong>plasma</strong> transporte les <strong>nutriments</strong> absorbés par l'intestin grêle vers les organes, et il emporte des <strong>déchets</strong> produits par les organes.</li><li>Les <strong>globules rouges</strong> transportent le <strong>dioxygène</strong>. Il se fixe sur leur <strong>hémoglobine</strong> dans les poumons et il est libéré dans les organes.</li><li>Les organes utilisent le dioxygène et les nutriments pour fonctionner. Ils rejettent du <strong>dioxyde de carbone</strong>, que le sang ramène vers les poumons.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Aya joue au football après avoir mangé du pain. Ses muscles ont besoin de glucose et de dioxygène. Explique comment ils les reçoivent et ce qu'ils rejettent.</p><ol><li><strong>Le glucose.</strong> Le pain a été digéré. Le glucose a traversé la paroi de l'intestin grêle et il est dissous dans le plasma. Le plasma l'apporte aux muscles.</li><li><strong>Le dioxygène.</strong> Aya respire. Dans les poumons, le dioxygène de l'air se fixe sur l'hémoglobine des globules rouges. Le sang l'apporte aux muscles, qui le reçoivent.</li><li><strong>Ce qui est rejeté.</strong> Les muscles produisent du dioxyde de carbone. Le sang le ramène vers les poumons, d'où il est rejeté dans l'air.</li></ol><h2>Le piège à éviter</h2><p>L'erreur la plus fréquente est de croire que le dioxygène voyage dissous dans le plasma, ou porté par les globules blancs. Le transporteur du dioxygène, ce sont les <strong>globules rouges</strong>, grâce à l'<strong>hémoglobine</strong>.</p><p>Autre erreur : croire que le sang transporte des aliments. Parmi les substances venant de l'alimentation, le sang ne transporte que des <strong>nutriments</strong> (aliments digérés et absorbés), pas des aliments.</p><h2>En une phrase</h2><p>Le plasma apporte les nutriments aux organes et emporte des déchets, tandis que les globules rouges portent le dioxygène des poumons vers les organes grâce à l'hémoglobine.</p>",
-          "exercises": [
+          "remember": "Le sang circule dans les vaisseaux sanguins et atteint tous les organes : c'est un moyen de transport. Le **plasma** transporte les nutriments (glucose, acides aminés…) absorbés par l'intestin grêle, et des déchets produits par les organes. Les **hématies** contiennent l'**hémoglobine**, un pigment rouge qui fixe le dioxygène dans les poumons et le libère dans les organes. Les organes utilisent les nutriments et le dioxygène pour fonctionner ; ils rejettent du dioxyde de carbone, que le sang ramène vers les poumons.",
+          "method": [
+            "Identifier ce dont l'organe a besoin et ce qu'il rejette.",
+            "Repérer le lieu de départ, où le sang prend la substance.",
+            "Préciser qui la transporte : le plasma, ou les hématies avec leur hémoglobine pour le dioxygène.",
+            "Conclure en indiquant le lieu d'arrivée, où la substance est utilisée ou rejetée."
+          ],
+          "example": {
+            "statement": "À l'infirmerie du collège, Awa, qui vient de courir, respire vite. Expliquer comment ses muscles reçoivent le dioxygène dont ils ont besoin.",
+            "steps": [
+              "Identifier : les muscles qui travaillent ont besoin de dioxygène et rejettent du dioxyde de carbone.",
+              "Repérer : le dioxygène de l'air entre dans le sang au niveau des poumons, qui sont le lieu de départ.",
+              "Préciser : dans les poumons, le dioxygène se fixe sur l'hémoglobine des hématies, qui le transportent.",
+              "Conclure : le sang emmène le dioxygène jusqu'aux muscles, le lieu d'arrivée, où il est libéré ; le sang ramène le dioxyde de carbone vers les poumons."
+            ]
+          },
+          "pitfall": "Ne pas confondre ce que transportent le plasma et les hématies. Contre-exemple : le glucose absorbé par l'intestin grêle est dissous dans le plasma, alors que le dioxygène est fixé sur l'hémoglobine des hématies. Ne pas croire non plus que le sang n'apporte que ce qui est utile : il emporte aussi les déchets des organes. Avant de répondre, dis toujours d'où part la substance et où elle arrive.",
+          "figure": "transport-des-gaz",
+          "exercise": {
+            "title": "Ce que le sang transporte",
+            "statement": "Dans cet exercice, tu suis le trajet des substances transportées par le sang, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "transport-des-gaz",
+            "questions": [
+              {
+                "content": "Quel pigment rouge des hématies fixe le dioxygène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : l'organe a besoin de dioxygène. Étape 2 — Repérer : le dioxygène entre dans le sang aux poumons. Étape 3 — Préciser : il se fixe sur l'hémoglobine, le pigment rouge des hématies. Étape 4 — Conclure : l'hémoglobine est le bon nom. Le plasma est le liquide du sang, la fibrine sert à la coagulation et le glucose est un nutriment : aucun ne fixe le dioxygène.",
+                "answers": [
+                  {
+                    "content": "L'hémoglobine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le plasma",
+                    "correct": false
+                  },
+                  {
+                    "content": "La fibrine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le glucose",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces propositions, lesquelles sont transportées par le plasma ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : les organes ont besoin de nutriments et rejettent des déchets. Étape 2 — Repérer : les nutriments passent dans le sang au niveau de l'intestin grêle. Étape 3 — Préciser : ils sont dissous dans le plasma, qui emporte aussi des déchets. Les aliments non digérés ou les morceaux d'aliments ne passent pas dans le sang : seuls les nutriments, petits, y passent après la digestion.",
+                "answers": [
+                  {
+                    "content": "Les nutriments absorbés par l'intestin grêle",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des déchets produits par les organes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les aliments non digérés, tels qu'ils sont avalés",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des morceaux d'aliments mâchés",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les organes rejettent un gaz, le dioxyde de ___, que le sang ramène vers les poumons.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : un organe qui fonctionne rejette du dioxyde de carbone. Étape 2 — Repérer : le lieu de départ est l'organe. Étape 3 — Préciser : le sang le transporte. Étape 4 — Conclure : il est ramené vers les poumons, le lieu d'arrivée. Le mot attendu est carbone.",
+                "answers": [
+                  {
+                    "content": "carbone",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le trajet du dioxygène dans le corps.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Repérer : le départ est dans les poumons. Étape 3 — Préciser : le dioxygène se fixe sur l'hémoglobine des hématies. Étape 4 — Conclure : les hématies l'amènent aux organes, où il est libéré. Libérer le dioxygène avant de l'avoir fixé ne respecte pas l'ordre du trajet.",
+                "answers": [
+                  {
+                    "content": "Le dioxygène de l'air entre dans le sang au niveau des poumons"
+                  },
+                  {
+                    "content": "Il se fixe sur l'hémoglobine des hématies"
+                  },
+                  {
+                    "content": "Les hématies sont emportées par le sang jusqu'aux organes"
+                  },
+                  {
+                    "content": "Le dioxygène est libéré dans les organes"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque substance ou rôle à ce qui l'assure dans le sang.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : trois besoins ou rôles différents. Étape 3 — Préciser : le dioxygène se fixe sur l'hémoglobine des hématies ; le glucose est dissous dans le plasma ; l'hémoglobine est le pigment rouge qui fixe le dioxygène. Étape 4 — Conclure : à chaque substance son transporteur.",
+                "answers": [
+                  {
+                    "content": "Apport du dioxygène aux organes",
+                    "match": "Les hématies"
+                  },
+                  {
+                    "content": "Apport du glucose aux organes",
+                    "match": "Le plasma"
+                  },
+                  {
+                    "content": "Pigment qui fixe le dioxygène",
+                    "match": "L'hémoglobine"
+                  }
+                ]
+              },
+              {
+                "content": "Le glucose absorbé par l'intestin grêle est transporté par les hématies.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : le glucose passe dans le sang au niveau de l'intestin grêle. Étape 3 — Préciser : il est dissous dans le plasma ; les hématies, elles, transportent le dioxygène. C'est la confusion annoncée dans le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "D'après le schéma fléché du transport des gaz, où le dioxygène est-il libéré ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : les organes ont besoin de dioxygène. Étape 2 — Repérer : le sang le prend dans les poumons. Étape 3 — Préciser : les hématies le transportent. Étape 4 — Conclure : le lieu d'arrivée est l'organe, où le dioxygène est libéré. Dans les poumons, c'est au contraire là qu'il est fixé.",
+                "answers": [
+                  {
+                    "content": "Dans les organes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans les poumons",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le plasma, qui le garde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans l'intestin grêle",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les leucocytes et la défense de l'organisme",
+          "remember": "Les **leucocytes** (ou globules blancs) sont des cellules peu nombreuses, plus grosses que les hématies, avec un noyau. Ils sont incolores. Leur rôle est de défendre l'organisme contre les microbes (par exemple des bactéries) qui y ont pénétré, par une plaie par exemple. Un de leurs moyens de défense est la **phagocytose** : le leucocyte, un polynucléaire par exemple, touche le microbe (contact), l'entoure (englobement), puis le détruit en le digérant (digestion). En cas d'infection, le nombre de leucocytes augmente souvent : le médecin peut les compter dans une analyse de sang.",
+          "method": [
+            "Observer le document : repérer le microbe, le leucocyte et leur position.",
+            "Décrire les étapes dans l'ordre : contact, englobement, digestion.",
+            "Interpréter : relier chaque étape à ce qui arrive au microbe.",
+            "Conclure : dire le rôle du leucocyte et nommer le phénomène."
+          ],
+          "example": {
+            "statement": "À l'infirmerie du collège, l'infirmière nettoie une plaie au genou de Koffi. Un document montre, au microscope, un polynucléaire tout près d'une bactérie, puis la bactérie à l'intérieur du polynucléaire, puis la bactérie réduite en fragments. Expliquer ce que fait le polynucléaire.",
+            "steps": [
+              "Observer : le document montre une bactérie, qui est un microbe, et un polynucléaire, qui est un leucocyte, placé tout près.",
+              "Décrire : d'abord le polynucléaire touche la bactérie (contact), puis il l'entoure et la fait entrer en lui (englobement), puis la bactérie est réduite en fragments (digestion).",
+              "Interpréter : le polynucléaire ne laisse pas la bactérie tranquille : en la digérant, il la détruit.",
+              "Conclure : le polynucléaire défend l'organisme contre les microbes ; ce phénomène s'appelle la phagocytose."
+            ]
+          },
+          "pitfall": "Ne pas confondre le leucocyte et l'hématie. L'hématie transporte le dioxygène ; le leucocyte défend l'organisme. Ne pas croire non plus que les « globules blancs » rendent le sang blanc : ils sont incolores et peu nombreux. Contre-exemple : sur une lame de sang, on ne voit que quelques leucocytes au milieu de très nombreuses hématies ; ce sont les hématies qui donnent au sang sa couleur rouge. Pour ne pas se tromper, demande-toi : cet élément transporte ou défend ?",
+          "figure": "phagocytose",
+          "exercise": {
+            "title": "Les leucocytes à l'infirmerie",
+            "statement": "Dans cet exercice, tu interprètes des documents sur la défense de l'organisme, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "phagocytose",
+            "questions": [
+              {
+                "content": "Quel est le rôle des leucocytes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : on regarde ce que fait le leucocyte vis-à-vis d'un microbe. Étape 2 — Décrire : il touche le microbe, l'englobe, le digère. Étape 3 — Interpréter : il détruit le microbe. Étape 4 — Conclure : le leucocyte défend l'organisme. Le transport du dioxygène revient aux hématies et le bouchon des plaies aux plaquettes.",
+                "answers": [
+                  {
+                    "content": "Défendre l'organisme contre les microbes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Transporter le dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Boucher les plaies avec un caillot",
+                    "correct": false
+                  },
+                  {
+                    "content": "Transporter les nutriments",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quand un leucocyte englobe un microbe puis le digère, ce phénomène s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Décrire : contact, englobement, digestion. Étape 4 — Conclure : ce phénomène s'appelle la phagocytose. Le nom doit être retenu avec les trois étapes.",
+                "answers": [
+                  {
+                    "content": "phagocytose",
+                    "correct": true
+                  },
+                  {
+                    "content": "la phagocytose",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la défense de l'organisme contre un microbe entré par une plaie.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Observer : le microbe est d'abord dans l'organisme. Étape 2 — Décrire : contact, puis englobement, puis digestion. Étape 3 — Interpréter : la digestion détruit le microbe, elle ne peut venir qu'après l'englobement. Étape 4 — Conclure : c'est la phagocytose.",
+                "answers": [
+                  {
+                    "content": "Le microbe entre par une plaie"
+                  },
+                  {
+                    "content": "Le leucocyte touche le microbe"
+                  },
+                  {
+                    "content": "Le leucocyte englobe le microbe"
+                  },
+                  {
+                    "content": "Le leucocyte digère le microbe"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque rôle à l'élément du sang qui l'assure.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Observer : trois rôles différents. Étape 3 — Interpréter : le dioxygène se fixe sur l'hémoglobine des hématies ; les nutriments sont dissous dans le plasma ; les microbes sont détruits par les leucocytes. Étape 4 — Conclure : se demander si l'élément transporte ou défend évite la confusion.",
+                "answers": [
+                  {
+                    "content": "Transporter le dioxygène",
+                    "match": "Hématie"
+                  },
+                  {
+                    "content": "Détruire les microbes par phagocytose",
+                    "match": "Leucocyte"
+                  },
+                  {
+                    "content": "Transporter les nutriments dissous",
+                    "match": "Plasma"
+                  }
+                ]
+              },
+              {
+                "content": "En cas d'infection, le nombre de leucocytes dans le sang augmente souvent.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : l'organisme est envahi par des microbes. Étape 3 — Interpréter : il faut plus de défenseurs pour les détruire. Étape 4 — Conclure : le nombre de leucocytes augmente souvent, et le médecin peut le vérifier par une analyse de sang.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels caractères permettent de reconnaître un leucocyte sur une lame de sang ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Observer : on regarde chaque élément de la lame. Étape 2 — Décrire : le leucocyte est une cellule peu nombreuse, plus grosse que l'hématie, avec un noyau. Un disque rouge sans noyau est une hématie, un minuscule fragment est une plaquette. Étape 4 — Conclure : noyau et grande taille désignent le leucocyte.",
+                "answers": [
+                  {
+                    "content": "Il possède un noyau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est plus gros qu'une hématie",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est un disque rouge sans noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est un minuscule fragment de cellule",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dit : « Les globules blancs transportent le dioxygène. » Pourquoi se trompe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : l'élève attribue à l'élément un rôle de transport. Étape 3 — Interpréter : le dioxygène se fixe sur l'hémoglobine des hématies ; le leucocyte, lui, englobe et digère les microbes. Étape 4 — Conclure : il confond hématie et leucocyte, c'est l'erreur du piège. Les nutriments sont dissous dans le plasma et les plaquettes ne transportent pas le dioxygène.",
+                "answers": [
+                  {
+                    "content": "Le dioxygène est transporté par les hématies ; les leucocytes défendent l'organisme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les leucocytes transportent les nutriments, pas le dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les leucocytes ne transportent rien parce qu'ils sont blancs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dioxygène est transporté par les plaquettes",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les plaquettes sanguines et la coagulation",
+          "remember": "Les **plaquettes sanguines** sont de très petits fragments de cellules, sans noyau, qui flottent dans le plasma. La **coagulation** est la transformation du sang liquide en une masse solide, le **caillot**, qui bouche une plaie. Ses étapes : (1) un vaisseau sanguin est blessé ; (2) les plaquettes s'accumulent sur la plaie et forment un bouchon ; (3) des filaments de **fibrine**, formés à partir d'une substance dissoute dans le plasma, tissent un réseau qui retient des hématies ; (4) le caillot ainsi formé bouche la plaie. À la surface de la peau, le caillot sèche et forme une croûte. La coagulation limite la perte de sang et gêne l'entrée des microbes par la plaie.",
+          "method": [
+            "Repérer la lésion : quel vaisseau est blessé et ce qui s'écoule.",
+            "Décrire le bouchon : les plaquettes s'accumulent sur la plaie.",
+            "Expliquer le réseau : la fibrine, formée à partir du plasma, retient des hématies.",
+            "Conclure : nommer le caillot, dire son effet et, à la peau, la croûte."
+          ],
+          "example": {
+            "statement": "À l'infirmerie, Fatou se coupe légèrement le doigt avec une feuille de papier. Le sang coule, puis s'arrête. Expliquer pourquoi.",
+            "steps": [
+              "Repérer : un petit vaisseau sanguin du doigt est coupé ; le sang s'écoule par la plaie.",
+              "Décrire : les plaquettes s'accumulent sur la plaie et forment un bouchon provisoire.",
+              "Expliquer : des filaments de fibrine se forment à partir du plasma, tissent un réseau et retiennent des hématies.",
+              "Conclure : le bouchon et le réseau forment le caillot, qui bouche la plaie et arrête le sang ; à la surface de la peau, il sèche en croûte."
+            ]
+          },
+          "pitfall": "Ne pas croire que les plaquettes sont de petits leucocytes, ni que le caillot est fait seulement d'hématies. Contre-exemple : le bouchon est fait de plaquettes, et le réseau de fibrine est formé à partir du plasma. Ne pas confondre non plus coagulation et défense contre les microbes : le caillot bouche la plaie, ce sont les leucocytes qui détruisent les microbes déjà entrés. Une grosse blessure demande des soins : le caillot ne suffit pas.",
+          "figure": "coagulation",
+          "exercise": {
+            "title": "Une coupure à l'infirmerie",
+            "statement": "Dans cet exercice, tu expliques comment le sang arrête de couler, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "coagulation",
+            "questions": [
+              {
+                "content": "Que sont les plaquettes sanguines ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche à identifier l'élément qui agit sur la plaie. Étape 2 — Décrire : les plaquettes s'accumulent sur la plaie ; ce sont de minuscules fragments sans noyau. Un leucocyte a un noyau, une hématie est un disque rouge, et le réseau de filaments est la fibrine.",
+                "answers": [
+                  {
+                    "content": "De très petits fragments de cellules, sans noyau",
+                    "correct": true
+                  },
+                  {
+                    "content": "De petits leucocytes avec un noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des hématies jeunes, en forme de disque",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des filaments qui forment un réseau",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la coagulation.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : tout commence par la lésion du vaisseau. Étape 2 — Décrire : les plaquettes forment un bouchon. Étape 3 — Expliquer : la fibrine tisse un réseau qui retient des hématies. Étape 4 — Conclure : le bouchon et le réseau forment un caillot qui bouche la plaie. Le réseau ne peut se former avant le bouchon dans l'ordre du cours.",
+                "answers": [
+                  {
+                    "content": "Un vaisseau sanguin est blessé"
+                  },
+                  {
+                    "content": "Les plaquettes s'accumulent et forment un bouchon"
+                  },
+                  {
+                    "content": "Un réseau de fibrine retient des hématies"
+                  },
+                  {
+                    "content": "Le caillot bouche la plaie"
+                  }
+                ]
+              },
+              {
+                "content": "Les filaments qui forment un réseau et retiennent des hématies dans un caillot s'appellent la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Expliquer : la fibrine est formée à partir du plasma et tisse un réseau qui retient des hématies. Étape 4 — Conclure : le caillot est le bouchon de plaquettes et ce réseau de fibrine.",
+                "answers": [
+                  {
+                    "content": "fibrine",
+                    "correct": true
+                  },
+                  {
+                    "content": "la fibrine",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La fibrine se forme à partir d'une substance qui se trouve dans le plasma.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : rien ne vient de l'extérieur du corps ; la fibrine est formée à partir d'une substance dissoute dans le plasma. Étape 4 — Conclure : la coagulation utilise ce qui est déjà dans le sang.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une petite plaie cesse de saigner parce qu'un ___ bouche le vaisseau blessé.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : le vaisseau blessé laisse couler le sang. Étape 2 — Décrire : les plaquettes forment un bouchon. Étape 3 — Expliquer : la fibrine forme un réseau. Étape 4 — Conclure : bouchon et réseau forment un caillot. Un polynucléaire détruit les microbes et le plasma est liquide : aucun ne bouche une plaie.",
+                "answers": [
+                  {
+                    "content": "caillot",
+                    "correct": true
+                  },
+                  {
+                    "content": "polynucléaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "plasma",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux effets utiles de la coagulation ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Conclure : le caillot bouche la plaie. Il limite donc la perte de sang et gêne l'entrée des microbes. La destruction des microbes déjà entrés par phagocytose est le travail des leucocytes ; le dioxygène est apporté par les hématies, pas par le caillot.",
+                "answers": [
+                  {
+                    "content": "Elle limite la perte de sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle gêne l'entrée des microbes par la plaie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle détruit les microbes déjà entrés par phagocytose",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle apporte du dioxygène à la plaie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dit : « Ce sont les leucocytes qui forment le caillot. » Quelle est la bonne correction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire : ce sont les plaquettes qui forment le bouchon. Étape 3 — Expliquer : le réseau de fibrine retient des hématies. Étape 4 — Conclure : bouchon et réseau forment le caillot. Les leucocytes défendent contre les microbes : l'élève confond coagulation et défense, c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Le caillot est formé du bouchon de plaquettes et du réseau de fibrine ; les leucocytes détruisent les microbes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le caillot est formé uniquement d'hématies",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le caillot est formé de plasma qui durcit sans plaquettes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le caillot est formé de leucocytes qui se collent à la plaie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une prise de sang au laboratoire d'analyses",
+          "statement": "Au laboratoire d'analyses du centre de santé, la laborantine prélève du sang à Mariam, élève de 3ème, puis centrifuge le tube. Elle obtient deux étages : un liquide jaune pâle au-dessus et une couche rouge au fond. Elle note dans un diagramme circulaire la part de chaque constituant dans le volume du tube : plasma environ 55 %, hématies environ 44 %, leucocytes et plaquettes environ 1 %.",
+          "exercise_type": "fixation",
+          "figure": "composition-du-sang",
+          "questions": [
             {
-              "title": "Comprendre — Qui transporte quoi ?",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Dans un tube de sang centrifugé où le plasma occupe environ 55 % du volume, les hématies environ 44 % et les leucocytes avec les plaquettes environ 1 %, quel constituant est le plus abondant ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Observer les trois parts du diagramme : 55 %, 44 % et 1 %. 2. Comparer ces valeurs : 55 est la plus grande. 3. Nommer le constituant : c'est le plasma. Les hématies sont très nombreuses en nombre d'éléments, mais le plasma occupe le plus grand volume : confondre nombre d'éléments et volume est l'erreur tentante.",
+              "answers": [
                 {
-                  "content": "Comment s'appelle le pigment des globules rouges qui fixe le dioxygène ?",
-                  "question_type": "single_choice",
-                  "explanation": "C'est l'hémoglobine, les « sièges » du gbaka. La fibrine, elle, sert à la coagulation, et le glucose est un nutriment.",
-                  "answers": [
-                    {
-                      "content": "L'hémoglobine",
-                      "correct": true
-                    },
-                    {
-                      "content": "La fibrine",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le glucose",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'amidon",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le plasma",
+                  "correct": true
                 },
                 {
-                  "content": "Le plasma transporte les nutriments absorbés par l'intestin grêle jusqu'aux organes.",
-                  "question_type": "true_false",
-                  "explanation": "Le plasma est comme la livreuse : il apporte aux organes les nutriments dissous. Ce sont des nutriments, pas des aliments entiers.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les hématies",
+                  "correct": false
                 },
                 {
-                  "content": "Dans l'image du gbaka, à quoi correspondent les passagers ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les passagers sont les molécules de dioxygène. Le gbaka est le globule rouge et les sièges sont l'hémoglobine.",
-                  "answers": [
-                    {
-                      "content": "Aux molécules de dioxygène",
-                      "correct": true
-                    },
-                    {
-                      "content": "Aux globules rouges",
-                      "correct": false
-                    },
-                    {
-                      "content": "À l'hémoglobine",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aux poumons",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les leucocytes et les plaquettes",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles substances le plasma transporte-t-il ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le plasma apporte les nutriments aux organes et emporte des déchets. Les aliments non digérés restent dans le tube digestif et sont éliminés avec les selles : ils ne passent pas dans le sang.",
-                  "answers": [
-                    {
-                      "content": "Les nutriments",
-                      "correct": true
-                    },
-                    {
-                      "content": "Des déchets produits par les organes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les aliments non digérés",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les selles",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Où le sang se charge-t-il en dioxygène ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dioxygène de l'air entre dans le sang au niveau des poumons. L'intestin grêle, lui, laisse passer les nutriments, pas le dioxygène.",
-                  "answers": [
-                    {
-                      "content": "Dans les poumons",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans l'intestin grêle",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans les muscles",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans l'estomac",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le dioxyde de carbone produit par les organes est ramené par le sang vers les poumons.",
-                  "question_type": "true_false",
-                  "explanation": "Les organes rejettent du dioxyde de carbone. Le sang le ramène vers les poumons, où il est rejeté dans l'air. Le sang ne transporte donc pas que dans un seul sens.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les leucocytes seuls",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Suivre le dioxygène et les nutriments",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Dans un tube de sang centrifugé, les hématies occupent environ 44 % du volume et le plasma environ 55 %. Quel pourcentage occupent environ les leucocytes et les plaquettes ensemble ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1. Observer : le tube contient le plasma, les hématies, les leucocytes et les plaquettes, soit 100 % du volume. 2. Calculer : 55 + 44 = 99. 3. Conclure : 100 − 99 = 1, donc les leucocytes et les plaquettes occupent environ 1 %. Répondre 99 serait donner le total des deux autres constituants au lieu du reste.",
+              "answers": [
                 {
-                  "content": "Un élève court. Ses muscles manquent de dioxygène. Quel élément du sang le leur apporte ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce sont les globules rouges, grâce à l'hémoglobine. Les globules blancs défendent l'organisme, et les plaquettes servent à boucher les plaies.",
-                  "answers": [
-                    {
-                      "content": "Les globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le plasma seul",
-                      "correct": false
-                    }
-                  ]
+                  "content": "1",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Le liquide du dessus du tube centrifugé est rouge parce qu'il contient les hématies.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Observer le tube : le liquide du dessus est jaune pâle. 2. Décrire : les hématies sont tombées au fond et donnent la couche rouge. 3. Conclure : le plasma est jaune pâle et n'est pas rouge. Croire que tout le sang est rouge est l'erreur du piège de la composition du sang.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Le glucose d'un repas a traversé la paroi de l'intestin grêle. Comment arrive-t-il jusqu'à un muscle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les nutriments sont dissous dans le plasma, qui les apporte aux organes. L'hémoglobine fixe le dioxygène, pas le glucose.",
-                  "answers": [
-                    {
-                      "content": "Il est dissous dans le plasma",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il est fixé sur l'hémoglobine",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il est porté par les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il est transporté par les plaquettes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Si un globule rouge perdait son hémoglobine, que perdrait-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'hémoglobine est le siège qui retient le dioxygène : sans elle, le globule rouge ne peut plus le transporter. La défense contre les microbes et la coagulation sont assurées par d'autres éléments.",
-                  "answers": [
-                    {
-                      "content": "Sa capacité à fixer et à transporter le dioxygène",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sa capacité à défendre contre les microbes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sa capacité à faire coaguler le sang",
-                      "correct": false
-                    },
-                    {
-                      "content": "Rien, car le plasma transporte tout le dioxygène",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le sang arrive dans un muscle qui travaille. Que se passe-t-il ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le sang libère du dioxygène dans le muscle et en reprend du dioxyde de carbone, qu'il ramène vers les poumons. Les échanges se font dans ce sens, pas dans le sens inverse.",
-                  "answers": [
-                    {
-                      "content": "Le sang y laisse du dioxygène",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sang y prend du dioxyde de carbone",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sang y prend du dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sang y laisse du dioxyde de carbone",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sang y dépose des aliments non digérés",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Les globules rouges fabriquent eux-mêmes le dioxygène qu'ils transportent.",
-                  "question_type": "true_false",
-                  "explanation": "Les globules rouges ne fabriquent pas le dioxygène : ils le prennent à l'air dans les poumons et le transportent. Le gbaka ne fabrique pas ses passagers.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Quels trajets sont corrects ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le dioxygène va des poumons vers les organes, le dioxyde de carbone des organes vers les poumons, et les nutriments de l'intestin grêle vers les organes. Les trajets inverses sont faux.",
-                  "answers": [
-                    {
-                      "content": "Dioxygène : des poumons vers les organes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dioxyde de carbone : des organes vers les poumons",
-                      "correct": true
-                    },
-                    {
-                      "content": "Nutriments : de l'intestin grêle vers les organes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dioxygène : des organes vers les poumons",
-                      "correct": false
-                    },
-                    {
-                      "content": "Nutriments : des organes vers l'intestin grêle",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Le sang, un moyen de transport",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le fond du tube centrifugé est rouge à cause des ___ qui s'y trouvent.",
+              "question_type": "select",
+              "explanation": "Méthode : 1. Observer la couche rouge au fond. 2. Décrire : seules les hématies sont des disques rouges très nombreux. 3. Identifier : ce sont donc les hématies qui colorent le fond. Les plaquettes sont minuscules et les polynucléaires sont des leucocytes peu nombreux : ils ne suffisent pas à colorer le fond du tube.",
+              "answers": [
                 {
-                  "content": "Mariam monte en courant les escaliers du centre de santé. Ses muscles utilisent plus de dioxygène. Quel est le bon trajet du dioxygène ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dioxygène de l'air entre dans le sang aux poumons, se fixe sur l'hémoglobine des globules rouges, puis est apporté aux muscles. Ni l'estomac ni l'intestin grêle ne l'absorbent.",
-                  "answers": [
-                    {
-                      "content": "Air, poumons, hémoglobine des globules rouges, muscles",
-                      "correct": true
-                    },
-                    {
-                      "content": "Air, intestin grêle, plasma, muscles",
-                      "correct": false
-                    },
-                    {
-                      "content": "Air, poumons, globules blancs, muscles",
-                      "correct": false
-                    },
-                    {
-                      "content": "Air, estomac, hémoglobine, muscles",
-                      "correct": false
-                    }
-                  ]
+                  "content": "hématies",
+                  "correct": true
                 },
                 {
-                  "content": "Quelles affirmations montrent que le sang est un moyen de transport ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le sang apporte aux organes les nutriments et le dioxygène, et il emporte des déchets. En revanche, il ne fabrique ni les nutriments ni le dioxygène, et il ne digère pas les aliments.",
-                  "answers": [
-                    {
-                      "content": "Il apporte les nutriments aux organes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il apporte le dioxygène aux organes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il emporte des déchets des organes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il fabrique les nutriments à partir de l'air",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il digère les aliments dans les vaisseaux",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il produit le dioxygène dans les muscles",
-                      "correct": false
-                    }
-                  ]
+                  "content": "plaquettes sanguines",
+                  "correct": false
                 },
                 {
-                  "content": "Dans l'image de la livreuse du maquis, que représente le fait qu'elle apporte des repas et ramasse les bouteilles vides ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le plasma apporte les nutriments (les repas) aux organes et emporte des déchets (les bouteilles vides). Ce n'est pas le rôle des globules blancs ni des plaquettes.",
-                  "answers": [
-                    {
-                      "content": "Le plasma apporte les nutriments et emporte des déchets",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules rouges apportent les nutriments",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules blancs apportent les repas",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les plaquettes ramassent les déchets",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le sang qui arrive aux poumons est chargé de dioxyde de carbone ; il en repart chargé de dioxygène.",
-                  "question_type": "true_false",
-                  "explanation": "Aux poumons, le sang se débarrasse du dioxyde de carbone rapporté des organes et se charge en dioxygène, que les globules rouges portent ensuite aux organes.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une personne a très peu d'hémoglobine dans son sang. Quelle conséquence est la plus logique ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'hémoglobine fixe le dioxygène : avec peu d'hémoglobine, les organes reçoivent moins de dioxygène. Elle n'a pas de lien avec la coagulation ni avec la digestion.",
-                  "answers": [
-                    {
-                      "content": "Ses organes reçoivent moins de dioxygène",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son sang ne peut plus coaguler",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle ne digère plus ses aliments",
-                      "correct": false
-                    },
-                    {
-                      "content": "Son plasma devient rouge",
-                      "correct": false
-                    }
-                  ]
+                  "content": "polynucléaires",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Quelles sont les trois sortes d'éléments qui flottent dans le plasma ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Observer un tube ou une lame de sang : un liquide de fond et des éléments qui y flottent. 2. Décrire : disques rouges, cellules à noyau, minuscules fragments. 3. Identifier : hématies, leucocytes et plaquettes sanguines. Les microbes ne font pas partie du sang normal ; les fragments d'aliments restent dans le tube digestif, seuls les nutriments passent dans le sang.",
+              "answers": [
+                {
+                  "content": "Les hématies",
+                  "correct": true
+                },
+                {
+                  "content": "Les leucocytes",
+                  "correct": true
+                },
+                {
+                  "content": "Les plaquettes sanguines",
+                  "correct": true
+                },
+                {
+                  "content": "Des microbes",
+                  "correct": false
+                },
+                {
+                  "content": "Des fragments d'aliments",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Décris ce que la laborantine voit dans le tube de Mariam après centrifugation, puis nomme ce qui forme chacune des deux parties.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les deux parties sont décrites : un liquide jaune pâle au-dessus, une couche rouge au fond",
+                "Le liquide jaune pâle est nommé : le plasma",
+                "Le fond rouge est expliqué par les hématies",
+                "Les leucocytes et les plaquettes sont cités avec les cellules du fond"
+              ],
+              "explanation": "Corrigé modèle : Après centrifugation, le tube présente deux parties. Au-dessus, un liquide jaune pâle : c'est le plasma. Au fond, une couche rouge formée des cellules : surtout des hématies, qui donnent la couleur rouge, avec les leucocytes et les plaquettes sanguines en très petite quantité. Le sang est donc formé de plasma et de trois sortes d'éléments. Barème : 1 point pour la description des deux parties, 1 point pour le plasma, 1 point pour les hématies avec les leucocytes et les plaquettes au fond.",
+              "answers": [],
+              "starter": "Après centrifugation, le tube…"
             }
           ]
         },
         {
-          "name": "Les globules blancs et la défense de l'organisme",
-          "subtitle": "Englober et digérer les microbes : la phagocytose",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire quel est le rôle des globules blancs.</li><li>Décrire la phagocytose, étape par étape.</li><li>Distinguer un globule blanc d'un globule rouge.</li></ul><h2>L'image pour comprendre</h2><h3>Image — Le gardien du centre de santé</h3><p><strong>L'image.</strong> La nuit, un intrus entre dans la cour du centre de santé par un trou dans le mur. Le gardien le repère, court vers lui, l'entoure et l'immobilise. Quand il y a beaucoup d'intrus, d'autres gardiens arrivent en renfort.</p><p><strong>Le pont.</strong> Le gardien, c'est le <strong>globule blanc</strong>. L'intrus, c'est un <strong>microbe</strong> : un être vivant minuscule, visible seulement au microscope. Certains microbes, comme des bactéries, provoquent des maladies. Le trou dans le mur, c'est une plaie par où les microbes entrent. Le gardien qui entoure l'intrus, c'est la <strong>phagocytose</strong> : le globule blanc <strong>englobe</strong> le microbe puis le <strong>digère</strong>, c'est-à-dire le détruit. Les renforts, c'est l'augmentation du nombre de globules blancs quand l'organisme lutte contre une infection.</p><p><strong>Là où l'image s'arrête.</strong> Le gardien immobilise l'intrus mais ne le détruit pas ; le globule blanc, lui, détruit le microbe en le digérant. Et le globule blanc se déplace jusqu'au lieu de l'infection, même hors des vaisseaux sanguins.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>Les <strong>globules blancs</strong> (ou leucocytes) sont des cellules <strong>peu nombreuses</strong>, plus grosses que les globules rouges, <strong>pourvues d'un noyau</strong>. Elles sont incolores.</li><li>Leur rôle est de <strong>défendre l'organisme</strong> contre les microbes qui y ont pénétré.</li><li>La <strong>phagocytose</strong> est l'un de leurs moyens de défense : le globule blanc englobe le microbe, puis le digère.</li><li>En cas d'infection, le nombre de globules blancs augmente souvent. Le médecin peut donc les compter dans une analyse de sang.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Kouamé se pique le pied avec une épine. Des bactéries entrent dans la plaie. Explique comment son sang réagit.</p><ol><li><strong>L'entrée.</strong> Les bactéries pénètrent dans l'organisme par la plaie.</li><li><strong>L'arrivée des défenseurs.</strong> Des globules blancs se rendent jusqu'à la plaie.</li><li><strong>La phagocytose.</strong> Un globule blanc englobe une bactérie, puis la digère.</li><li><strong>S'il y a beaucoup de bactéries.</strong> Le nombre de globules blancs augmente : c'est un signe que l'organisme lutte contre une infection.</li></ol><h2>Le piège à éviter</h2><p>L'erreur la plus fréquente est de confondre le <strong>globule blanc</strong> et le <strong>globule rouge</strong>. Le globule rouge transporte le dioxygène ; le globule blanc défend l'organisme. Ils n'ont pas le même rôle.</p><p>Autre erreur : croire que les globules blancs sont « blancs comme du lait » et qu'ils rendent le sang blanc. Ils sont incolores et peu nombreux : le sang reste rouge.</p><h2>En une phrase</h2><p>Les globules blancs, peu nombreux et pourvus d'un noyau, défendent l'organisme en englobant puis en digérant les microbes : c'est la phagocytose.</p>",
-          "exercises": [
+          "title": "Un match de football et l'infirmerie du collège",
+          "statement": "Après un match de football, Ibrahim, 14 ans, est essoufflé et se repose à l'infirmerie du collège. L'infirmière lui explique que ses muscles ont consommé beaucoup de dioxygène et de glucose. Le glucose vient du pain qu'il a mangé au petit déjeuner.",
+          "exercise_type": "fixation",
+          "figure": "transport-des-gaz",
+          "questions": [
             {
-              "title": "Comprendre — Défendre l'organisme",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Où le sang prend-il le dioxygène qui sera apporté aux muscles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le besoin : les muscles ont besoin de dioxygène. 2. Repérer le lieu de départ : le dioxygène de l'air entre dans le sang au niveau des poumons. 3. Préciser : il se fixe sur l'hémoglobine des hématies. 4. Conclure : le sang le prend aux poumons. L'intestin grêle est le lieu de départ des nutriments, pas du dioxygène.",
+              "answers": [
                 {
-                  "content": "Quel est le rôle des globules blancs ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les globules blancs défendent l'organisme contre les microbes. Le transport du dioxygène est le rôle des globules rouges, et le bouchon de la plaie celui des plaquettes.",
-                  "answers": [
-                    {
-                      "content": "Défendre l'organisme contre les microbes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Transporter le dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Boucher les plaies",
-                      "correct": false
-                    },
-                    {
-                      "content": "Transporter les nutriments",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Au niveau des poumons",
+                  "correct": true
                 },
                 {
-                  "content": "Comment appelle-t-on le fait qu'un globule blanc englobe un microbe puis le digère ?",
-                  "question_type": "single_choice",
-                  "explanation": "C'est la phagocytose. L'absorption intestinale est le passage des nutriments dans le sang, et la coagulation est la formation d'un caillot.",
-                  "answers": [
-                    {
-                      "content": "La phagocytose",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'absorption intestinale",
-                      "correct": false
-                    },
-                    {
-                      "content": "La coagulation",
-                      "correct": false
-                    },
-                    {
-                      "content": "La digestion mécanique",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Au niveau de l'intestin grêle",
+                  "correct": false
                 },
                 {
-                  "content": "Dans le sang, les globules blancs sont plus nombreux que les globules rouges.",
-                  "question_type": "true_false",
-                  "explanation": "Les globules rouges sont de loin les plus nombreux. Les globules blancs sont rares, comme les gardiens, qui sont peu nombreux.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Au niveau des muscles eux-mêmes",
+                  "correct": false
                 },
                 {
-                  "content": "Dans l'image du gardien du centre de santé, que représente l'intrus ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'intrus est le microbe qui est entré par la plaie. Le gardien, lui, représente le globule blanc.",
-                  "answers": [
-                    {
-                      "content": "Un microbe",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un globule blanc",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une plaquette",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un nutriment",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Qu'est-ce qu'un microbe ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un microbe est un être vivant minuscule, visible seulement au microscope ; certains provoquent des maladies. Ce n'est ni une cellule du sang ni un nutriment.",
-                  "answers": [
-                    {
-                      "content": "Un être vivant minuscule, visible seulement au microscope, dont certains provoquent des maladies",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une cellule du sang qui transporte le dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un nutriment issu de la digestion",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un déchet produit par les organes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Les globules blancs sont des cellules pourvues d'un noyau.",
-                  "question_type": "true_false",
-                  "explanation": "Les globules blancs ont un noyau, qui se colore sur une lame. C'est un moyen de les distinguer des globules rouges, qui n'en ont pas.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Au niveau de la bouche",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Les globules blancs en action",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Remets dans l'ordre le trajet du glucose du pain jusqu'aux muscles d'Ibrahim.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Identifier : les muscles ont besoin de glucose. 2. Repérer le départ : le pain est d'abord digéré, puis le glucose passe dans le sang à l'intestin grêle. 3. Préciser : il est dissous dans le plasma, qui le transporte. 4. Conclure : le glucose arrive aux muscles qui l'utilisent. Le transport ne peut commencer avant l'absorption.",
+              "answers": [
                 {
-                  "content": "Un élève se pique le pied avec une épine et des bactéries entrent dans la plaie. Quelles cellules du sang vont s'attaquer à elles ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les globules blancs défendent l'organisme contre les microbes. Les globules rouges transportent le dioxygène. Les plaquettes bouchent la plaie, mais ne détruisent pas les bactéries.",
-                  "answers": [
-                    {
-                      "content": "Les globules blancs",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules rouges",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les cellules de la peau seulement",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le pain est digéré dans le tube digestif"
                 },
                 {
-                  "content": "Au microscope, tu vois une grosse cellule qui entoure une petite bactérie. Que vois-tu ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un globule blanc englobe le microbe : c'est la phagocytose. Il ne s'agit ni d'un transport de dioxygène ni de la coagulation.",
-                  "answers": [
-                    {
-                      "content": "Une phagocytose",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un globule rouge qui transporte du dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une plaquette qui bouche une plaie",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une bactérie qui digère un globule blanc",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le glucose passe dans le sang à travers la paroi de l'intestin grêle"
                 },
                 {
-                  "content": "Une analyse de sang montre beaucoup plus de globules blancs que d'habitude. Quelle explication est la plus probable ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le nombre de globules blancs augmente souvent quand l'organisme lutte contre une infection, comme les renforts des gardiens. Cela n'indique pas un manque de dioxygène ni un problème de coagulation.",
-                  "answers": [
-                    {
-                      "content": "L'organisme lutte contre une infection",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'organisme manque de dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sang ne coagule plus",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le plasma est trop jaune",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le plasma transporte le glucose jusqu'aux muscles"
                 },
                 {
-                  "content": "Quelles caractéristiques décrivent les globules blancs ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les globules blancs sont plus gros que les globules rouges et ont un noyau. Ils sont peu nombreux et ne contiennent pas d'hémoglobine, qui est le pigment des globules rouges.",
-                  "answers": [
-                    {
-                      "content": "Ils sont plus gros que les globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ils ont un noyau",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ils sont plus nombreux que tous les autres éléments du sang",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ils contiennent de l'hémoglobine",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ils transportent le dioxygène",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quand un globule blanc englobe un microbe, il le laisse vivant à l'intérieur de lui.",
-                  "question_type": "true_false",
-                  "explanation": "Le globule blanc digère le microbe, c'est-à-dire qu'il le détruit. Contrairement au gardien qui se contente d'immobiliser l'intrus, il le fait disparaître.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Laquelle de ces fonctions n'est pas assurée par les globules blancs ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le transport du dioxygène est assuré par les globules rouges. Les globules blancs défendent l'organisme, notamment par la phagocytose.",
-                  "answers": [
-                    {
-                      "content": "Le transport du dioxygène",
-                      "correct": true
-                    },
-                    {
-                      "content": "La défense contre les microbes",
-                      "correct": false
-                    },
-                    {
-                      "content": "La phagocytose",
-                      "correct": false
-                    },
-                    {
-                      "content": "La lutte contre une infection",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les muscles utilisent le glucose pour fonctionner"
                 }
               ]
             },
             {
-              "title": "S'évaluer — Défense et analyse de sang",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Dans les hématies, le dioxygène se fixe sur un pigment rouge appelé ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Identifier : les organes ont besoin de dioxygène. 2. Repérer : il entre dans le sang aux poumons. 3. Préciser : il se fixe sur l'hémoglobine, le pigment rouge des hématies. Le plasma ne porte pas ce nom : il s'agit du liquide jaune pâle du sang.",
+              "answers": [
                 {
-                  "content": "Koffi a une plaie infectée au genou. Le médecin du centre de santé demande une analyse de sang. Quelle observation est la plus cohérente ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans une infection, les globules blancs sont souvent plus nombreux. Ils ne disparaissent pas, et les globules rouges n'ont pas de noyau.",
-                  "answers": [
-                    {
-                      "content": "Le nombre de globules blancs est élevé",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs ont disparu",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules rouges ont un noyau",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sang ne contient plus de plasma",
-                      "correct": false
-                    }
-                  ]
+                  "content": "hémoglobine",
+                  "correct": true
                 },
                 {
-                  "content": "Un globule blanc réalise une phagocytose. Quelles propositions décrivent correctement ce qui se passe ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le globule blanc se rend vers le microbe, l'englobe, puis le digère. Il ne le transforme pas en globule rouge, ne le fait pas coaguler et ne l'emmène pas vers les poumons.",
-                  "answers": [
-                    {
-                      "content": "Il se rend jusqu'au microbe",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il englobe le microbe",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il digère le microbe",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il transforme le microbe en globule rouge",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il fait coaguler le microbe",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il emmène le microbe vers les poumons",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle est la limite de l'image du gardien qui attrape un intrus ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le gardien immobilise l'intrus ; le globule blanc, lui, digère le microbe et le détruit. C'est la différence essentielle entre l'image et la phagocytose.",
-                  "answers": [
-                    {
-                      "content": "Le gardien immobilise l'intrus alors que le globule blanc le détruit en le digérant",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le gardien est plus nombreux que les intrus",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le gardien est un globule rouge",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le globule blanc ne se déplace jamais",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un sang qui contiendrait beaucoup de globules rouges mais aucun globule blanc protégerait aussi bien contre les microbes.",
-                  "question_type": "true_false",
-                  "explanation": "Les globules rouges transportent le dioxygène, mais ne détruisent pas les microbes. Sans globules blancs, l'organisme serait mal défendu.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles comparaisons entre globules rouges et globules blancs sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les globules rouges portent le dioxygène et n'ont pas de noyau ; les globules blancs défendent l'organisme et ont un noyau. Ce sont les globules rouges qui contiennent de l'hémoglobine et qui sont les plus nombreux.",
-                  "answers": [
-                    {
-                      "content": "Les globules blancs ont un noyau, pas les globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules rouges transportent le dioxygène, les globules blancs défendent l'organisme",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs sont plus petits et plus nombreux",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules rouges détruisent les microbes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les deux contiennent de l'hémoglobine",
-                      "correct": false
-                    }
-                  ]
+                  "content": "l'hémoglobine",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Le dioxyde de carbone rejeté par les muscles est ramené par le sang jusqu'aux poumons.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier : un muscle qui travaille rejette du dioxyde de carbone. 2. Repérer : le départ est le muscle. 3. Préciser : le sang le prend. 4. Conclure : il le ramène aux poumons, le lieu d'arrivée. Le sang n'apporte donc pas seulement ce qui est utile, il emporte aussi les déchets.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque besoin ou rôle dans le transport à ce qui l'assure dans le sang.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Identifier chaque besoin ou rôle. 2. Repérer le départ de chaque substance. 3. Préciser le transporteur : le dioxygène est apporté par les hématies, le glucose est dissous dans le plasma, l'hémoglobine est le pigment rouge qui fixe le dioxygène. Confondre plasma et hématies est l'erreur du piège de la fiche sur le transport.",
+              "answers": [
+                {
+                  "content": "Apport du dioxygène",
+                  "match": "Les hématies"
+                },
+                {
+                  "content": "Apport du glucose",
+                  "match": "Le plasma"
+                },
+                {
+                  "content": "Pigment qui fixe le dioxygène",
+                  "match": "L'hémoglobine"
+                }
+              ]
+            },
+            {
+              "content": "Explique à Ibrahim, en quatre phrases au plus, comment ses muscles reçoivent le dioxygène et le glucose pendant le match.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le dioxygène est pris dans le sang aux poumons",
+                "Le dioxygène est transporté par les hématies, fixé sur l'hémoglobine",
+                "Le glucose passe dans le sang à l'intestin grêle et est transporté dissous dans le plasma",
+                "Le trajet se termine dans les muscles, qui utilisent ces substances"
+              ],
+              "explanation": "Corrigé modèle : Le dioxygène de l'air entre dans le sang au niveau des poumons. Il se fixe sur l'hémoglobine des hématies, qui l'amènent jusqu'aux muscles et le libèrent. Le glucose du pain, passé dans le sang à l'intestin grêle, est dissous dans le plasma, qui le transporte jusqu'aux muscles. Les muscles utilisent ces deux substances pour fonctionner. Barème : 1 point pour le dioxygène aux poumons, 1 point pour le transport par les hématies, 1 point pour le glucose dans le plasma.",
+              "answers": [],
+              "starter": "Le dioxygène de l'air entre dans le sang…"
             }
           ]
         },
         {
-          "name": "Les plaquettes et la coagulation",
-          "subtitle": "À compléter : fabrication des cellules du sang, anémie, anticorps, hémophilie, composition détaillée du plasma",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire quel est le rôle des plaquettes.</li><li>Décrire les étapes de la coagulation, du bouchon au caillot.</li><li>Expliquer pourquoi une petite coupure finit par s'arrêter de saigner.</li></ul><h2>L'image pour comprendre</h2><h3>Image — Le seau percé</h3><p><strong>L'image.</strong> Le seau de la cour a un petit trou : l'eau fuit. Tu colles d'abord un bout de chiffon sur le trou, et la fuite ralentit. Puis tu étales de la colle sur le chiffon. La colle durcit en formant un réseau solide qui tient l'ensemble en place : la fuite s'arrête.</p><p><strong>Le pont.</strong> L'eau, c'est le sang. Le trou, c'est une plaie qui blesse un petit vaisseau sanguin. Le chiffon, ce sont les <strong>plaquettes</strong> : elles s'accumulent sur la plaie et forment un <strong>bouchon</strong> provisoire. La colle qui durcit, c'est la <strong>fibrine</strong> : des filaments qui forment un réseau et retiennent des globules rouges. Le tout, bouchon et réseau, c'est le <strong>caillot</strong>.</p><p><strong>Là où l'image s'arrête.</strong> Tu apportes la colle de l'extérieur. Pour le sang, rien ne vient de l'extérieur : la fibrine se forme à partir de substances qui se trouvent déjà dans le plasma. Et le caillot ne suffit pas pour une grosse blessure : dans ce cas, il faut des soins.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>Les <strong>plaquettes</strong> sont de très petits fragments de cellules, sans noyau, qui flottent dans le plasma.</li><li>La <strong>coagulation</strong> est la transformation du sang liquide en une masse solide, le <strong>caillot</strong>, qui bouche la plaie.</li><li>Étapes : (1) un vaisseau est blessé ; (2) les plaquettes s'accumulent sur la plaie et forment un bouchon ; (3) des filaments de <strong>fibrine</strong>, formés à partir du plasma, tissent un réseau qui retient des globules rouges ; (4) le caillot ainsi formé bouche la plaie.</li><li>À la surface de la peau, le caillot sèche et forme une <strong>croûte</strong>.</li><li>La coagulation limite la perte de sang et gêne l'entrée des microbes par la plaie.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Fatou se coupe légèrement le doigt avec une feuille de papier. Le sang coule, puis s'arrête. Explique pourquoi.</p><ol><li><strong>La blessure.</strong> Un petit vaisseau sanguin du doigt est coupé : le sang s'écoule.</li><li><strong>Le bouchon.</strong> Les plaquettes s'accumulent sur la plaie et forment un bouchon provisoire.</li><li><strong>Le réseau.</strong> Des filaments de fibrine se forment à partir du plasma et retiennent des globules rouges.</li><li><strong>Le caillot.</strong> Le bouchon et le réseau forment le caillot, qui bouche la plaie : le sang cesse de couler.</li><li><strong>La croûte.</strong> À la surface de la peau, le caillot sèche en croûte.</li></ol><h2>Le piège à éviter</h2><p>L'erreur la plus fréquente est de croire que les plaquettes sont de petits globules blancs, ou que ce sont les globules rouges qui bouchent la plaie. Ce sont les <strong>plaquettes</strong> qui forment le bouchon, puis la <strong>fibrine</strong> qui consolide le caillot.</p><p>Autre erreur : croire que la coagulation n'a lieu que sur la peau. Un sang prélevé dans un tube sans produit anticoagulant coagule aussi : il prend en masse au lieu de se séparer en couches.</p><h2>En une phrase</h2><p>Quand un vaisseau est blessé, les plaquettes forment un bouchon, la fibrine tisse un réseau qui retient des globules rouges, et l'ensemble devient un caillot qui bouche la plaie.</p>",
-          "exercises": [
+          "title": "Un bilan sanguin pour une plaie infectée",
+          "statement": "Au laboratoire d'analyses, Moussa, 14 ans, vient avec de la fièvre et une plaie infectée au pied. Il est suivi pendant cinq jours. La laborantine compte ses leucocytes chaque jour. Résultats fictifs, en milliers de leucocytes par mm³ de sang : jour 0 : 8 ; jour 1 : 12 ; jour 2 : 16 ; jour 3 : 14 ; jour 4 : 10 ; jour 5 : 8.",
+          "exercise_type": "evaluation",
+          "figure": "evolution-des-leucocytes",
+          "questions": [
             {
-              "title": "Comprendre — Plaquettes, fibrine et caillot",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "D'après les résultats fictifs de Moussa (jour 0 : 8 ; jour 1 : 12 ; jour 2 : 16 ; jour 3 : 14 ; jour 4 : 10 ; jour 5 : 8, en milliers de leucocytes par mm³), à quel jour le nombre de leucocytes est-il maximal ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Observer le document : une série de six valeurs. 2. Décrire : les valeurs montent de 8 à 16 puis redescendent à 8. 3. Repérer la plus grande valeur : 16, atteinte au jour 2. Le jour 5 vaut 8, comme le jour 0 : ce n'est pas un maximum.",
+              "answers": [
                 {
-                  "content": "Quel élément du sang forme un bouchon provisoire sur une plaie ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les plaquettes s'accumulent sur la plaie et forment un bouchon, comme le chiffon sur le trou du seau. Les globules blancs, eux, défendent l'organisme contre les microbes.",
-                  "answers": [
-                    {
-                      "content": "Les plaquettes",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'hémoglobine",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le plasma seul",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Au jour 2",
+                  "correct": true
                 },
                 {
-                  "content": "Qu'est-ce que la coagulation ?",
-                  "question_type": "single_choice",
-                  "explanation": "La coagulation est la transformation du sang liquide en caillot solide qui bouche la plaie. Le passage des nutriments dans le sang est l'absorption, et la séparation des couches se fait dans un tube, au repos.",
-                  "answers": [
-                    {
-                      "content": "La transformation du sang liquide en un caillot solide qui bouche la plaie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le passage des nutriments dans le sang",
-                      "correct": false
-                    },
-                    {
-                      "content": "La destruction des microbes par les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "La séparation du plasma et des globules dans un tube",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Au jour 0",
+                  "correct": false
                 },
                 {
-                  "content": "Les plaquettes sont des cellules entières, pourvues d'un gros noyau.",
-                  "question_type": "true_false",
-                  "explanation": "Les plaquettes sont de petits fragments de cellules et n'ont pas de noyau. Les globules blancs sont les cellules à noyau du sang.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Au jour 3",
+                  "correct": false
                 },
                 {
-                  "content": "Dans l'image du seau percé, que représente la colle qui durcit en réseau ?",
-                  "question_type": "single_choice",
-                  "explanation": "La colle durcie représente la fibrine, ce réseau de filaments qui retient des globules rouges. Le chiffon, lui, représente les plaquettes.",
-                  "answers": [
-                    {
-                      "content": "La fibrine",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les microbes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le plasma",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'image du seau percé, que représente le bout de chiffon collé sur le trou ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le chiffon représente le bouchon provisoire formé par les plaquettes. La colle représente la fibrine. Le caillot, c'est le bouchon et le réseau ensemble.",
-                  "answers": [
-                    {
-                      "content": "Le bouchon de plaquettes",
-                      "correct": true
-                    },
-                    {
-                      "content": "La fibrine",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un globule blanc",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le caillot terminé",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles propositions sont vraies à propos d'un caillot ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Un caillot contient un réseau de fibrine qui retient des globules rouges, et il bouche la plaie en limitant la perte de sang. Il n'est pas fabriqué par les globules blancs et il n'est pas du plasma liquide.",
-                  "answers": [
-                    {
-                      "content": "Il contient un réseau de fibrine qui retient des globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il bouche la plaie et limite la perte de sang",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il est fabriqué par les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il est formé uniquement de plasma liquide",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il laisse le sang couler librement",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Au jour 5",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Les étapes de la coagulation",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Moussa a 8 milliers de leucocytes par mm³ au jour 0 et 16 au jour 2. De combien de milliers par mm³ le nombre de leucocytes a-t-il augmenté entre le jour 0 et le jour 2 ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1. Observer les deux valeurs : 8 au jour 0 et 16 au jour 2. 2. Calculer l'écart : 16 − 8 = 8. 3. Conclure : le nombre de leucocytes a augmenté de 8 milliers par mm³. Répondre 16 serait lire la valeur du jour 2 sans retrancher la valeur de départ.",
+              "answers": [
                 {
-                  "content": "Un vaisseau sanguin est blessé. Quelle est la première étape du bouchage de la plaie ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les plaquettes s'accumulent d'abord sur la plaie et forment un bouchon provisoire. La fibrine vient ensuite consolider ce bouchon. Les globules blancs ne bouchent pas les plaies.",
-                  "answers": [
-                    {
-                      "content": "Les plaquettes s'accumulent et forment un bouchon",
-                      "correct": true
-                    },
-                    {
-                      "content": "La fibrine forme un caillot solide avant tout bouchon",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules blancs digèrent la peau",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules rouges forment une croûte",
-                      "correct": false
-                    }
-                  ]
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "milliers"
+            },
+            {
+              "content": "Comment interprète-t-on l'augmentation du nombre de leucocytes de Moussa entre le jour 0 et le jour 2 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Observer la courbe : elle monte de 8 à 16. 2. Décrire : le nombre de leucocytes augmente pendant les deux premiers jours. 3. Interpréter : en cas d'infection, il faut plus de défenseurs pour détruire les microbes par phagocytose. 4. Conclure : l'organisme lutte contre l'infection. Le transport du dioxygène revient aux hématies et le caillot aux plaquettes avec la fibrine.",
+              "answers": [
+                {
+                  "content": "L'organisme lutte contre l'infection : les leucocytes détruisent les microbes par phagocytose",
+                  "correct": true
                 },
                 {
-                  "content": "Quel est le bon ordre des événements après une coupure ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le vaisseau est blessé, les plaquettes forment un bouchon, la fibrine tisse un réseau qui forme le caillot, puis le caillot sèche en croûte à la surface de la peau.",
-                  "answers": [
-                    {
-                      "content": "Plaie, bouchon de plaquettes, réseau de fibrine, caillot, croûte",
-                      "correct": true
-                    },
-                    {
-                      "content": "Plaie, croûte, caillot, bouchon de plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Plaie, réseau de fibrine, croûte, bouchon de plaquettes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Plaie, caillot, bouchon de plaquettes, fibrine",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les leucocytes transportent plus de dioxygène vers la plaie",
+                  "correct": false
                 },
                 {
-                  "content": "Du sang prélevé dans un tube sans produit anticoagulant peut former un caillot.",
-                  "question_type": "true_false",
-                  "explanation": "La coagulation n'a pas besoin de la peau : les plaquettes et le plasma suffisent. Sans anticoagulant, le sang d'un tube prend en masse au lieu de se séparer en couches.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les leucocytes forment le caillot qui bouche la plaie",
+                  "correct": false
                 },
                 {
-                  "content": "Pourquoi une petite coupure finit-elle par arrêter de saigner ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les plaquettes et la fibrine forment un caillot qui bouche la plaie. Le corps ne manque pas de sang à cet endroit, et la peau ne se referme pas instantanément.",
-                  "answers": [
-                    {
-                      "content": "Un caillot de plaquettes et de fibrine bouche la plaie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le corps n'a plus de sang à cet endroit",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules blancs bouchent la plaie",
-                      "correct": false
-                    },
-                    {
-                      "content": "La peau se referme instantanément",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quels éléments du sang, très nombreux, sont surtout retenus dans le réseau de fibrine et donnent au caillot sa couleur rouge foncé ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce sont les globules rouges, les plus nombreux du sang, qui sont retenus dans le réseau de fibrine. Les microbes et les globules blancs n'en sont pas la partie principale.",
-                  "answers": [
-                    {
-                      "content": "Les globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les microbes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les nutriments",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles associations sont correctes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les plaquettes forment le bouchon et la fibrine forme le réseau. Le transport du dioxygène revient aux globules rouges, et la destruction des microbes aux globules blancs.",
-                  "answers": [
-                    {
-                      "content": "Plaquettes : bouchon sur la plaie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Fibrine : réseau qui retient des globules rouges",
-                      "correct": true
-                    },
-                    {
-                      "content": "Plaquettes : transport du dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Fibrine : digestion des microbes",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le sang de Moussa fabrique plus de plasma",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Comprendre une coagulation",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Au jour 5, le nombre de leucocytes de Moussa est revenu à sa valeur du jour 0, ce qui est compatible avec une infection qui cède.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Observer : jour 0 : 8 ; jour 5 : 8. 2. Décrire : le nombre est monté puis redescendu à sa valeur de départ. 3. Interpréter : quand l'infection cède, il y a moins de microbes à détruire et le nombre de leucocytes revient vers sa valeur de départ. 4. Conclure : l'affirmation est vraie.",
+              "answers": [
                 {
-                  "content": "Un élève affirme : « Sans plaquettes, une petite coupure saignerait longtemps. » Pourquoi a-t-il raison ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans plaquettes, le bouchon provisoire se forme mal, donc le caillot aussi. Le plasma contient toujours de l'eau, et les globules blancs ne digèrent pas un caillot.",
-                  "answers": [
-                    {
-                      "content": "Le bouchon de plaquettes se formerait mal, donc le caillot aussi",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le plasma ne contiendrait plus d'eau",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules rouges ne transporteraient plus le dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les globules blancs digéreraient le caillot",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Vrai",
+                  "correct": true
                 },
                 {
-                  "content": "Quels sont les rôles de la coagulation ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le caillot bouche la plaie, limite la perte de sang et gêne l'entrée des microbes. La digestion des microbes revient aux globules blancs, et le transport du dioxygène aux globules rouges.",
-                  "answers": [
-                    {
-                      "content": "Limiter la perte de sang",
-                      "correct": true
-                    },
-                    {
-                      "content": "Boucher la plaie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Gêner l'entrée de microbes par la plaie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Digérer les microbes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Transporter le dioxygène",
-                      "correct": false
-                    },
-                    {
-                      "content": "Fabriquer le plasma",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un laborantin laisse du sang dans un tube propre, sans produit anticoagulant. Il observe une masse solide au lieu de couches. Que s'est-il passé ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le sang a coagulé : les plaquettes et la fibrine ont formé un caillot. Les globules blancs ne digèrent pas le plasma et le plasma ne se transforme pas en globules rouges.",
-                  "answers": [
-                    {
-                      "content": "Le sang a coagulé et formé un caillot",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les globules blancs ont digéré le plasma",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le plasma s'est transformé en globules rouges",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'hémoglobine s'est transformée en fibrine",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "La fibrine est une cellule du sang.",
-                  "question_type": "true_false",
-                  "explanation": "La fibrine n'est pas une cellule : ce sont des filaments qui se forment à partir de substances du plasma. Comme la colle durcie, elle forme un réseau.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est l'ordre correct ? (a) caillot, (b) bouchon de plaquettes, (c) réseau de fibrine, (d) vaisseau blessé.",
-                  "question_type": "single_choice",
-                  "explanation": "Le vaisseau est blessé (d), les plaquettes forment un bouchon (b), la fibrine tisse un réseau (c), et l'ensemble donne le caillot (a).",
-                  "answers": [
-                    {
-                      "content": "d, b, c, a",
-                      "correct": true
-                    },
-                    {
-                      "content": "d, c, b, a",
-                      "correct": false
-                    },
-                    {
-                      "content": "b, d, c, a",
-                      "correct": false
-                    },
-                    {
-                      "content": "d, a, b, c",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Relie chaque observation à son interprétation.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Observer chaque observation. 2. Décrire : montée, descente, englobement puis digestion. 3. Interpréter : une montée indique une lutte contre l'infection, une descente indique que l'infection cède, l'englobement suivi de la digestion est la phagocytose. 4. Conclure : on relie chaque fait à son sens.",
+              "answers": [
+                {
+                  "content": "Le nombre de leucocytes monte de 8 à 16 en deux jours",
+                  "match": "L'organisme lutte contre une infection"
+                },
+                {
+                  "content": "Le nombre de leucocytes redescend de 16 à 8 en trois jours",
+                  "match": "L'infection est en train de céder"
+                },
+                {
+                  "content": "Un polynucléaire englobe une bactérie puis la digère",
+                  "match": "C'est la phagocytose"
+                }
+              ]
+            },
+            {
+              "content": "Rédige l'analyse de la courbe de Moussa en suivant la démarche : décris l'évolution des leucocytes jour après jour, interprète-la, puis conclus.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "La montée jusqu'au jour 2 (de 8 à 16) est décrite",
+                "La descente jusqu'au jour 5 (retour à 8) est décrite",
+                "L'interprétation relie la montée à la lutte contre l'infection",
+                "Le rôle des leucocytes est précisé : détruire les microbes par phagocytose",
+                "Une conclusion claire est donnée"
+              ],
+              "explanation": "Corrigé modèle : Observation : le nombre de leucocytes passe de 8 milliers par mm³ au jour 0 à 16 au jour 2, puis redescend à 8 au jour 5. Interprétation : Moussa a une plaie infectée ; pour lutter, son organisme produit plus de leucocytes, qui détruisent les microbes en les englobant et en les digérant (phagocytose). Quand l'infection cède, il y a moins de microbes et le nombre revient à sa valeur de départ. Conclusion : l'augmentation des leucocytes montre une défense de l'organisme contre l'infection. Barème : 1 point pour la description de la montée et de la descente, 1 point pour l'interprétation (lutte contre l'infection), 1 point pour le rôle des leucocytes (phagocytose), 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "Le nombre de leucocytes de Moussa…"
+            },
+            {
+              "content": "Explique comment un polynucléaire détruit une bactérie entrée par la plaie de Moussa, en citant les étapes dans l'ordre.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le contact entre le polynucléaire et la bactérie est cité",
+                "L'englobement est cité",
+                "La digestion qui détruit la bactérie est citée",
+                "Le mot phagocytose est employé"
+              ],
+              "explanation": "Corrigé modèle : Le polynucléaire, un leucocyte, touche d'abord la bactérie : c'est le contact. Il l'entoure et la fait entrer en lui : c'est l'englobement. Il la digère : la bactérie est détruite. Ce phénomène s'appelle la phagocytose. Barème : 1 point pour le contact et l'englobement, 1 point pour la digestion, 1 point pour le nom du phénomène.",
+              "answers": [],
+              "starter": "Le polynucléaire touche d'abord…"
+            }
+          ]
+        },
+        {
+          "title": "Une chute dans la cour : du saignement à l'infection",
+          "statement": "Fatou, élève de 3ème, tombe dans la cour du collège et s'écorche le genou : la plaie saigne et de la terre y est entrée. À l'infirmerie, l'infirmière nettoie la plaie. Plus tard, au laboratoire d'analyses du centre de santé, une lame de sang de Fatou est observée au microscope : ses éléments sont repérés par des numéros, de 1 à 6.",
+          "exercise_type": "evaluation",
+          "figure": "lame-de-sang-numeros",
+          "questions": [
+            {
+              "content": "Sur la lame de sang de Fatou, relie chaque numéro (1 à 4) au rôle de l'élément qu'il désigne.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Observer la lame : on identifie chaque élément numéroté. 2. Identifier : numéro 1 : hématie ; numéro 2 : polynucléaire, un leucocyte ; numéro 3 : plaquette sanguine ; numéro 4 : plasma. 3. Relier chaque élément à son rôle : l'hématie transporte le dioxygène, le polynucléaire détruit les microbes, la plaquette forme le bouchon, le plasma transporte les nutriments dissous. Confondre hématie et leucocyte est l'erreur la plus fréquente.",
+              "answers": [
+                {
+                  "content": "Numéro 1",
+                  "match": "Transporter le dioxygène"
+                },
+                {
+                  "content": "Numéro 2",
+                  "match": "Détruire les microbes par phagocytose"
+                },
+                {
+                  "content": "Numéro 3",
+                  "match": "Former le bouchon de la coagulation"
+                },
+                {
+                  "content": "Numéro 4",
+                  "match": "Transporter les nutriments dissous"
+                }
+              ]
+            },
+            {
+              "content": "Quel élément du sang s'accumule en premier sur la plaie du genou de Fatou pour former un bouchon ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la lésion : un petit vaisseau du genou est blessé. 2. Décrire : les plaquettes s'accumulent sur la plaie et forment un bouchon provisoire. 3. Conclure : ce sont les plaquettes sanguines. Les polynucléaires défendent contre les microbes, ils ne forment pas le bouchon.",
+              "answers": [
+                {
+                  "content": "Les plaquettes sanguines",
+                  "correct": true
+                },
+                {
+                  "content": "Les polynucléaires",
+                  "correct": false
+                },
+                {
+                  "content": "Les hématies seules",
+                  "correct": false
+                },
+                {
+                  "content": "Le plasma seul",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes qui arrêtent le saignement du genou de Fatou.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Repérer la lésion. 2. Décrire le bouchon de plaquettes. 3. Expliquer le réseau de fibrine, formée à partir du plasma. 4. Conclure : le caillot bouche la plaie et sèche en croûte à la surface de la peau. La croûte vient en dernier : elle est le caillot séché.",
+              "answers": [
+                {
+                  "content": "Un vaisseau du genou est blessé"
+                },
+                {
+                  "content": "Les plaquettes forment un bouchon"
+                },
+                {
+                  "content": "La fibrine forme un réseau qui retient des hématies"
+                },
+                {
+                  "content": "Le caillot sèche en croûte à la surface de la peau"
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois affirmations exactes pour le sang de Fatou ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Identifier chaque élément et son rôle. 2. Les plaquettes forment le bouchon de la coagulation ; les leucocytes détruisent les microbes par phagocytose ; le plasma transporte les nutriments dissous. 3. Les deux autres affirmations sont des confusions : les hématies transportent le dioxygène et ne détruisent pas les bactéries, et les plaquettes ne transportent pas le dioxygène.",
+              "answers": [
+                {
+                  "content": "Les plaquettes participent à la coagulation",
+                  "correct": true
+                },
+                {
+                  "content": "Les leucocytes détruisent les bactéries entrées par la plaie",
+                  "correct": true
+                },
+                {
+                  "content": "Le plasma transporte les nutriments dissous",
+                  "correct": true
+                },
+                {
+                  "content": "Les hématies détruisent les bactéries par phagocytose",
+                  "correct": false
+                },
+                {
+                  "content": "Les plaquettes transportent le dioxygène",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si Fatou a de la fièvre le lendemain à cause d'une infection de la plaie, une analyse de sang peut montrer une augmentation du nombre de leucocytes.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Observer : la plaie souillée peut s'infecter. 2. Interpréter : en cas d'infection, le nombre de leucocytes augmente souvent, car l'organisme lutte contre les microbes. 3. Conclure : une analyse de sang peut le montrer, puisque la laborantine compte les leucocytes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fatou a une plaie au genou, souillée de terre. Rédige un texte organisé qui explique comment son sang arrête le saignement, puis comment il se défend contre les bactéries entrées par la plaie.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "La lésion du vaisseau est repérée",
+                "Le bouchon de plaquettes est décrit",
+                "Le réseau de fibrine et le caillot sont expliqués",
+                "Le contact, l'englobement et la digestion par un leucocyte sont décrits",
+                "Le mot phagocytose est employé",
+                "Le texte est organisé en deux parties claires"
+              ],
+              "explanation": "Corrigé modèle : Partie 1, le saignement. Le genou blessé laisse couler le sang. Les plaquettes s'accumulent sur la plaie et forment un bouchon. Des filaments de fibrine, formés à partir du plasma, tissent un réseau qui retient des hématies. Le bouchon et le réseau forment le caillot, qui bouche la plaie ; à la surface de la peau, il sèche en croûte. Partie 2, la défense. Des bactéries sont entrées avec la terre. Des leucocytes, comme les polynucléaires, touchent une bactérie, l'entourent puis la digèrent : c'est la phagocytose. Barème : 1 point pour la lésion, 1 pour le bouchon de plaquettes, 1 pour le réseau de fibrine et le caillot, 1 pour le contact, l'englobement et la digestion, 1 pour le mot phagocytose, 1 pour l'organisation.",
+              "answers": [],
+              "starter": "Le saignement s'arrête parce que…"
             }
           ]
         }

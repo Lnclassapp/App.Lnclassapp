@@ -96,14 +96,15 @@
                   </div>
                 <% end %>
                 <div class="flex shrink-0 items-center gap-1 sm:gap-3 lg:justify-self-end">
-                  <%# UDR enseignant §3.2, §3.5 : « Or · 15/20 » (trophée du palier sur une pastille neutre) ou « Pas encore » en text-mute. %>
+                  <%# UDR enseignant §3.2, §3.5 : « Moyenne 15/20 · Or » (trophée du palier sur une pastille neutre), « Moyenne 7/20 · Pas encore » en text-mute
+                      sous le seuil, « Pas encore » seul sans exercice fait : la pastille dit qu'elle vient de la moyenne de la classe (amendement 2026-10-29). %>
                   <% if student.badge %>
                     <p id="badge_<%= student.public_id %>" class="<%= Assessment::BadgesHelper::BADGE_PILL %> shrink-0">
                       <%= comprehension_trophy(Assessment::ComprehensionHelper::BADGE_ICON_CLASSES.fetch(student.badge)) %>
                       <%= t(".badge_grade", badge: badge_label(student.badge), grade: student.grade) %>
                     </p>
                   <% else %>
-                    <p id="badge_<%= student.public_id %>" class="ui-badge ui-badge-md shrink-0 bg-mist text-mute"><%= comprehension_box_label(:none) %></p>
+                    <p id="badge_<%= student.public_id %>" class="ui-badge ui-badge-md shrink-0 bg-mist text-mute"><%= student.grade ? t(".average_none", grade: student.grade, badge: comprehension_box_label(:none)) : comprehension_box_label(:none) %></p>
                   <% end %>
                 </div>
                 <%# ≥ lg : la colonne est étroite (UDR enseignant §3.5), « Fait seul » et le dernier score passent sur une seconde ligne, sous le nom ;

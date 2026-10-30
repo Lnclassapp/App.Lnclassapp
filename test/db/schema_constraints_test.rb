@@ -73,7 +73,7 @@ class SchemaConstraintsTest < ActiveSupport::TestCase
     "classroom_students" => { "joined_via" => %w[standard link code] }, # ADR-0085 §4.4
     "referral_shares" => { "channel" => %w[whatsapp sms copy native] },
     "school_join_requests" => { "status" => %w[pending approved rejected], "decided_via" => %w[team sponsor] },
-    "import_reports" => { "kind" => %w[schools course_tree essentials exercises classrooms drenas school_codes classroom_links], # ADR-0096
+    "import_reports" => { "kind" => %w[schools course_tree exercises classrooms drenas school_codes classroom_links], # ADR-0096
                           "status" => %w[queued validating importing completed rejected failed] },
     "classroom_plan_entries" => { "school_type" => %w[public private] },
     "articles" => { "status" => %w[draft published archived], "signature" => %w[team author] }, # ADR-0074 §4.1

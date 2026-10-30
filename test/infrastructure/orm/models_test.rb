@@ -44,7 +44,7 @@ class Orm::ModelsTest < ActiveSupport::TestCase
   end
 
   test "every V1 table has its Orm model with an explicit table name" do
-    assert_equal 50, MODELS.size # + course_sheets (#319), essential_images, question_images (ADR-0105), teacher_school_materials (ADR-0103), essential_reads (ADR-0090), referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065), rich_text_row (ADR-0068), teacher_school_departures (ADR-0071), classroom_session_days (ADR-0072), account_deletion_requests (ADR-0036), articles, article_images (ADR-0074), messages, message_classrooms, message_dismissals (ADR-0078), message_illustrations (ADR-0081)
+    assert_equal 48, MODELS.size # + question_images (ADR-0105), teacher_school_materials (ADR-0103), essential_reads (ADR-0090), referrals, referral_shares, school_join_requests (ADR-0063), school_staffs (ADR-0065), rich_text_row (ADR-0068), teacher_school_departures (ADR-0071), classroom_session_days (ADR-0072), account_deletion_requests (ADR-0036), articles, article_images (ADR-0074), messages, message_classrooms, message_dismissals (ADR-0078), message_illustrations (ADR-0081)
     MODELS.each { |model| assert model.table_name.present? && model.table_exists?, model.name }
   end
 
@@ -142,13 +142,11 @@ class Orm::ModelsTest < ActiveSupport::TestCase
     assert_equal({ "status" => "queued", "import_errors" => [], "files" => [] }, report.attributes.slice("status", "import_errors", "files"))
   end
 
-  test "a course and an essential keep their rich content, rendered in the design tokens" do
+  test "a course keeps its rich content, rendered in the design tokens" do
     graph[:course].update!(content: "<h2>Définition</h2><p>Un nombre <strong>complexe</strong> s'écrit <em>a + ib</em>.</p>")
-    graph[:essential].update!(content: "<ul><li>Module</li><li>Argument</li></ul>")
     course = Orm::Course.find(graph[:course].id)
 
     assert_includes course.content.to_plain_text, "Un nombre complexe s'écrit a + ib."
-    assert_includes Orm::Essential.find(graph[:essential].id).content.body.to_html, "<li>Argument</li>"
     assert_match(/<div class="trix-content[^"]*">.*<strong>complexe<\/strong>/m, course.content.to_s)
   end
 end

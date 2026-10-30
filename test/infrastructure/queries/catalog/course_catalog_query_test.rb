@@ -143,7 +143,7 @@ module Queries
       end
 
       # UDR enseignant §3.7 : les cartes suivent la progression (Leçon 1, 2, 3, 10), non l'ordre alphabétique des noms ; sans
-      # numéro de leçon, par nom, après les autres. L'élève et l'équipe gardent leur ordre.
+      # numéro de leçon, par nom, après les autres. L'élève et l'équipe suivent la même règle (chantier ordre-lecons-progression).
       test "CA-N1: l'enseignant lit les cours d'une matière dans l'ordre des leçons du sous-titre, puis par nom" do
         logarithmes = create_course(name: "Fonctions logarithmes", level: @seconde, material: @philo, subtitle: "Leçon 3 · Progression DPFC 2026-2027")
         limites = create_course(name: "Limites et continuité", level: @seconde, material: @philo, subtitle: "Leçon 1 · Progression DPFC 2026-2027")
@@ -154,7 +154,7 @@ module Queries
         teacher = catalog(:teacher, material: @philo.slug, level: @seconde.slug).map(&:slug)
 
         assert_equal [ limites, derivees, logarithmes, suites, sans ].map(&:slug), teacher
-        assert_equal [ sans, derivees, logarithmes, limites, suites ].map(&:slug), catalog(:team, material: @philo.slug, level: @seconde.slug).map(&:slug)
+        assert_equal [ limites, derivees, logarithmes, suites, sans ].map(&:slug), catalog(:team, material: @philo.slug, level: @seconde.slug).map(&:slug)
       end
 
       test "CA-N1: l'équipe, l'élève et les autres rôles ne reçoivent aucune fiche de révision" do
@@ -197,8 +197,8 @@ module Queries
         assert_equal [ false ], rows.find { it.slug == @conscience.slug }.essentials.map(&:review), "une lacune résolue n'est plus à revoir"
       end
 
-      # CA-E14 : les leçons de l'élève sur ordinateur suivent l'ordre du programme (Leçon 1, 2, 10) ; sans les fiches (le
-      # téléphone), l'ordre des noms reste.
+      # CA-E14 et CA-1 (ordre-lecons-progression) : les leçons de l'élève suivent l'ordre du programme (Leçon 1, 2, 10), avec
+      # ou sans les fiches (ordinateur ou téléphone) ; une leçon sans numéro vient après, par nom.
       test "CA-E14: avec with_essentials, l'élève lit les leçons d'une matière dans l'ordre du sous-titre, puis par nom" do
         suites = create_course(name: "Suites", subtitle: "Leçon 10 · Progression DPFC 2026-2027", level: @tle, material: @philo)
         derivees = create_course(name: "Dérivées", subtitle: "Leçon 2 · Progression DPFC 2026-2027", level: @tle, material: @philo)
@@ -207,7 +207,28 @@ module Queries
         student = create_student
 
         assert_equal [ limites, derivees, suites, sans, @conscience ].map(&:slug), lessons_for(student, material: @philo.slug).map(&:slug)
-        assert_equal [ sans, derivees, @conscience, limites, suites ].map(&:slug), student_catalog(student, material: @philo.slug).map(&:slug)
+        assert_equal [ limites, derivees, suites, sans, @conscience ].map(&:slug), student_catalog(student, material: @philo.slug).map(&:slug)
+      end
+
+      # CA-2 : l'enseignant de plusieurs matières, rangé par matière, lit chaque matière dans l'ordre des leçons.
+      test "CA-2: l'enseignant de plusieurs matières lit les leçons de chaque matière dans l'ordre du sous-titre" do
+        dix = create_course(name: "Alpha", subtitle: "Leçon 10 · Progression", level: @tle, material: @philo)
+        deux = create_course(name: "Zeta", subtitle: "Leçon 2 · Progression", level: @tle, material: @philo)
+        sans = create_course(name: "Annexe", level: @tle, material: @philo)
+        svt_dix = create_course(name: "Alpha SVT", subtitle: "Leçon 10 · Progression", level: @tle, material: @svt)
+        svt_deux = create_course(name: "Zeta SVT", subtitle: "Leçon 2 · Progression", level: @tle, material: @svt)
+
+        slugs = CourseCatalogQuery.new.call(actor: actor(:teacher), material_ids: [ @svt.id, @philo.id ], group_by_material: true, level: @tle.slug).rows.map(&:slug)
+
+        assert_equal [ svt_deux, svt_dix, @genetique, deux, dix, sans, @conscience ].map(&:slug), slugs
+      end
+
+      # CA-3 : l'ordre des matières ne change pas, quel que soit le numéro de leçon de leurs cours.
+      test "CA-3: student_materials garde l'ordre du programme, indépendant des numéros de leçon" do
+        create_course(name: "Alpha", subtitle: "Leçon 1 · Progression", level: @tle, material: @philo)
+        audience = Entities::Catalog::LevelAudience.new(pairs: [ [ @tle.id, @genetique.series_id ] ])
+
+        assert_equal [ "svt", "philosophie" ], CourseCatalogQuery.new.student_materials(audience:).map(&:slug)
       end
 
       test "sans with_essentials, les lignes de l'élève n'ont pas de fiches et la requête reste à trois" do

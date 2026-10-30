@@ -477,6 +477,18 @@
   @apply pointer-events-none -mt-16 h-16 bg-linear-to-t from-white to-transparent;
 }
 
+/* UDR-0141 §3.3 — cadre d'une figure hors fiche (exercice, corrigé) : 16:9 avant le dessin, puis la hauteur du dessin ;
+   520 px au plus sur ordinateur, comme dans la fiche cahier (course_sheet.css). */
+@utility figure-canvas {
+  width: 100%;
+  max-width: 520px;
+  margin-inline: auto;
+  aspect-ratio: 16 / 9;
+  &:has(svg) {
+    aspect-ratio: auto;
+  }
+}
+
 /* UDR-0061 §3.3 — poignée d'une feuille basse (36 × 4 px), décorative : elle signale la feuille, rien de plus. */
 @utility sheet-handle {
   display: block;

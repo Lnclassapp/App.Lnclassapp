@@ -23,58 +23,6 @@ module Entities
 
       def codes(errors) = errors.map { [ it.path, it.code ] }
 
-      test "un cours complet de l'ancienne application est valide, statut ignoré" do
-        assert_empty ContentNode.validate_course(course, path: "courses[0]", lookup: @lookup)
-        assert_empty ContentNode.validate_course(course("series_name" => nil, "level_name" => "3ème"), path: "c", lookup: @lookup)
-      end
-
-      test "référentiel : niveau, matière, série inconnus ou non liés" do
-        errors = ContentNode.validate_course(course("level_name" => "Terminale", "material_name" => "Chimie",
-                                                    "series_name" => "B"), path: "courses[3]", lookup: @lookup)
-
-        assert_equal [ [ "courses[3].level_name", "unknown_level" ], [ "courses[3].material_name", "unknown_material" ],
-                       [ "courses[3].series_name", "unknown_series" ] ], codes(errors)
-        assert_equal({ value: "Terminale" }, errors.first.params)
-        assert_equal [ [ "c.series_name", "series_not_allowed" ] ],
-                     codes(ContentNode.validate_course(course("series_name" => "A"), path: "c", lookup: @lookup))
-        assert_equal [ [ "c.level_name", "unknown_level" ] ],
-                     codes(ContentNode.validate_course(course("level_name" => nil, "series_name" => "A"), path: "c", lookup: @lookup))
-      end
-
-      test "noms présents et bornés, erreurs localisées jusqu'aux propositions" do
-        tree = course("name" => " ", "subtitle" => "a" * 151,
-                      "essentials" => [ { "name" => "ADN", "exercises" => [ exercise, exercise("title" => "a" * 151) ] } ])
-        errors = ContentNode.validate_course(tree, path: "courses[3]", lookup: @lookup)
-
-        assert_equal [ [ "courses[3].name", "blank" ], [ "courses[3].subtitle", "too_long" ],
-                       [ "courses[3].essentials[0].exercises[1].title", "too_long" ] ], codes(errors)
-        assert_equal({ max: 150 }, errors.last.params)
-      end
-
-      test "une fiche : nom et exercices" do
-        errors = ContentNode.validate_essential({ "name" => nil, "exercises" => [ exercise("exercise_type" => "examen") ] }, path: "essentials[2]")
-
-        assert_equal [ [ "essentials[2].name", "blank" ], [ "essentials[2].exercises[0].exercise_type", "invalid_value" ] ], codes(errors)
-      end
-
-      # ADR-0105 §4.3 : un emplacement que le motif ne lit pas ne serait compté nulle part ; l'import le refuse à sa place.
-      test "une fiche : un emplacement d'image trop long, dans une liste ou vide est refusé, un emplacement bien écrit passe" do
-        content = "<p>[[image: une pile]]</p><p>[[image: #{'a' * 151}]]</p><ul><li>[[image: une lampe]]</li></ul><p>[[image: ]]</p>"
-
-        errors = ContentNode.validate_essential({ "name" => "Le circuit", "content" => content }, path: "essentials[0]")
-
-        assert_equal [ [ "essentials[0].content", "image_slot_malformed" ] ], codes(errors)
-        assert_equal({ count: 3 }, errors.first.params)
-        assert_empty ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>[[image: une pile]]</p>" }, path: "f")
-      end
-
-      # Menace n° 13 : un texte trop complexe à relire a son motif, pas celui d'un emplacement mal écrit.
-      test "une fiche : un texte trop complexe à relire est refusé avec son propre motif" do
-        errors = ContentNode.validate_essential({ "name" => "Le circuit", "content" => "<p>" * 40_000 }, path: "essentials[1]")
-
-        assert_equal [ [ "essentials[1].content", "image_slots_unreadable" ] ], codes(errors)
-      end
-
       test "un exercice : au moins une question, cohérence de l'ADR-0039" do
         assert_empty ContentNode.validate_exercise(exercise("questions" => [ question("true_false"), question("multiple_correct_2", answers: answers(true, true, false)) ]), path: "e")
         assert_equal [ [ "e.questions", "blank" ] ], codes(ContentNode.validate_exercise(exercise("questions" => nil), path: "e"))
@@ -88,9 +36,117 @@ module Entities
         assert_equal({ rule: :true_false_needs_two_answers }, errors.first.params)
       end
 
+      test "une leçon : nom obligatoire, sous-titre facultatif, niveau, matière et série du référentiel" do
+        lesson = ->(**changes) { { "name" => "Racines", "level_name" => "Tle", "material_name" => "Physique-Chimie" }.merge(changes.stringify_keys) }
+
+        assert_equal [ [ "l", "schema" ] ], codes(ContentNode.validate_lesson("x", path: "l", lookup: @lookup))
+        assert_empty ContentNode.validate_lesson(lesson.call, path: "l", lookup: @lookup)
+        assert_empty ContentNode.validate_lesson(lesson.call(subtitle: "  ", series_name: "D"), path: "l", lookup: @lookup)
+        assert_equal [ [ "l.subtitle", "too_long" ] ], codes(ContentNode.validate_lesson(lesson.call(subtitle: "a" * 500), path: "l", lookup: @lookup))
+        assert_equal [ [ "l.name", "blank" ], [ "l.level_name", "unknown_level" ], [ "l.material_name", "unknown_material" ] ],
+                     codes(ContentNode.validate_lesson({ "name" => " " }, path: "l", lookup: @lookup))
+      end
+
+      test "une série facultative doit exister et être liée au niveau" do
+        lesson = ->(level, series) { { "name" => "Racines", "level_name" => level, "material_name" => "Physique-Chimie", "series_name" => series } }
+        errors = ->(level, series) { ContentNode.validate_lesson(lesson.call(level, series), path: "l", lookup: @lookup) }
+
+        assert_empty errors.call("Tle", "D")
+        assert_equal [ [ "l.series_name", "unknown_series" ] ], codes(errors.call("Tle", "Z9"))
+        assert_equal({ value: "Z9" }, errors.call("Tle", "Z9").first.params)
+        assert_equal [ [ "l.series_name", "series_not_allowed" ] ], codes(errors.call("3ème", "D"))
+        assert_equal({ value: "D" }, errors.call("3ème", "D").first.params)
+        assert_equal [ [ "l.level_name", "unknown_level" ] ], codes(errors.call("CM2", "D"))
+      end
+
+      test "une notion qui n'est pas un objet est une erreur de schéma" do
+        assert_equal [ [ "n", "schema" ] ], codes(ContentNode.validate_notion([], path: "n"))
+        assert_equal [ [ "n.name", "blank" ] ], codes(ContentNode.validate_notion(revision_notion(" ").except("exercise", "figure"), path: "n"))
+      end
+
+      test "les figures de la leçon : liste, objets valides, clés uniques" do
+        figure = revision_figure
+
+        assert_empty ContentNode.validate_figures(nil, "c")
+        assert_empty ContentNode.validate_figures("x", "c")
+        assert_empty ContentNode.validate_figures([ figure ], "c")
+        assert_equal [ [ "c.figures[1]", "figure_invalid" ] ], codes(ContentNode.validate_figures([ figure, "x" ], "c"))
+        assert_equal [ [ "c.figures[1].key", "figure_invalid" ] ], codes(ContentNode.validate_figures([ figure, figure ], "c"))
+        assert_equal({ param: "key" }, ContentNode.validate_figures([ figure, figure ], "c").first.params)
+        assert_equal [ [ "c.figures[0].description", "figure_invalid" ] ], codes(ContentNode.validate_figures([ figure.merge("description" => "court") ], "c"))
+      end
+
+      test "une figure citée doit être dans la leçon" do
+        assert_empty ContentNode.validate_figure_citation(nil, [], "p")
+        assert_empty ContentNode.validate_figure_citation("", [], "p")
+        assert_empty ContentNode.validate_figure_citation("a", [ "a" ], "p")
+        assert_equal [ [ "p", "figure_missing" ] ], codes(ContentNode.validate_figure_citation("b", [ "a" ], "p"))
+        assert_equal({ key: "b" }, ContentNode.validate_figure_citation("b", [ "a" ], "p").first.params)
+      end
+
+      test "un exercice v3 qui n'est pas un objet est une erreur de schéma, une question qui n'en est pas une est signalée une fois" do
+        assert_equal [ [ "e", "schema" ] ], codes(ContentNode.validate_exercise_v3(nil, path: "e"))
+        questions = Array.new(5) { question } + [ "q" ]
+        errors = ContentNode.validate_exercise_v3(exercise("questions" => questions.map { it.is_a?(Hash) ? it.merge("explanation" => "a" * 25) : it }), path: "e")
+
+        assert_equal [ [ "e.questions[5]", "schema" ] ], codes(errors)
+      end
+
+      test "le sujet en blocs : forme de la liste, type inconnu, règle d'un bloc" do
+        errors = ->(blocks) { ContentNode.validate_exercise(exercise("statement_blocks" => blocks), path: "e") }
+
+        assert_empty errors.call(nil)
+        assert_equal [ [ "e.statement_blocks", "schema" ] ], codes(errors.call("paragraph"))
+        assert_equal [ [ "e.statement_blocks[0].type", "invalid_value" ] ], codes(errors.call([ { "type" => "iframe" } ]))
+        assert_equal({ value: "iframe" }, errors.call([ { "type" => "iframe" } ]).first.params)
+        bad = errors.call([ { "type" => "paragraph", "text" => "ok" }, { "type" => "paragraph", "text" => "<b>x</b>" } ])
+        assert_equal [ [ "e.statement_blocks[1]", "invalid_value" ] ], codes(bad)
+        assert_equal({ value: "html_forbidden : text" }, bad.first.params)
+      end
+
+      test "points, unité, amorce et critères d'une question doivent avoir la forme du schéma" do
+        errors = ->(**changes) { ContentNode.validate_exercise(exercise("questions" => [ question.merge(changes.stringify_keys) ]), path: "e") }
+
+        assert_empty errors.call(question_type: "numeric", answers: [ { "content" => "4,5", "correct" => true } ], points: 2, unit: "cm")
+        assert_empty errors.call(question_type: "written", answers: [], explanation: "Un corrigé type assez long.", starter: "Je pense que", criteria: [ "clarté" ])
+        assert_equal [ [ "e.questions[0].points", "schema" ] ], codes(errors.call(points: "deux"))
+        assert_equal [ [ "e.questions[0].points", "schema" ] ], codes(errors.call(points: Float::INFINITY))
+        assert_equal [ [ "e.questions[0].unit", "schema" ], [ "e.questions[0].starter", "schema" ] ], codes(errors.call(unit: 5, starter: [ "x" ]))
+        assert_equal [ [ "e.questions[0].criteria", "schema" ] ], codes(errors.call(criteria: "clarté"))
+        assert_equal [ [ "e.questions[0].criteria", "schema" ] ], codes(errors.call(criteria: [ 1 ]))
+      end
+
+      test "la description de l'image d'une question ne peut pas être faite d'espaces" do
+        errors = ->(image) { ContentNode.validate_exercise(exercise("questions" => [ question.merge("image" => image) ]), path: "e") }
+
+        assert_empty errors.call(nil)
+        assert_empty errors.call("description" => "Un schéma de la cellule")
+        assert_equal [ [ "e.questions[0].image.description", "blank" ] ], codes(errors.call("description" => "   "))
+      end
+
+      test "tolerance et match sont refusés hors de leur type de question" do
+        errors = ->(**changes) { ContentNode.validate_exercise(exercise("questions" => [ question.merge(changes.stringify_keys) ]), path: "e") }
+        numeric = { "question_type" => "numeric", "answers" => [ { "content" => "4,5", "correct" => true } ] }
+        matching = { "question_type" => "matching", "answers" => %w[a b c].each_with_index.map { |content, index| { "content" => content, "match" => (index + 1).to_s, "correct" => true } } }
+
+        assert_equal [ [ "e.questions[0].tolerance", "question_structure" ] ], codes(errors.call(tolerance: 0.5))
+        assert_equal({ rule: :tolerance_not_allowed }, errors.call(tolerance: 0.5).first.params)
+        assert_empty errors.call(tolerance: nil)
+        assert_empty errors.call(**numeric.symbolize_keys, tolerance: 0.5, points: 2)
+        assert_empty errors.call(**matching.symbolize_keys)
+        misplaced = errors.call(answers: [ { "content" => "a", "match" => "1", "is_correct" => true }, { "content" => "b", "is_correct" => false } ])
+        assert_equal [ [ "e.questions[0].answers[0].match", "question_structure" ] ], codes(misplaced)
+        assert_equal({ rule: :match_not_allowed }, misplaced.first.params)
+      end
+
+      test "un exercice refuse un type inconnu et nomme la valeur" do
+        errors = ContentNode.validate_exercise(exercise("exercise_type" => "devoir"), path: "e")
+
+        assert_equal [ [ "e.exercise_type", "invalid_value" ] ], codes(errors)
+        assert_equal({ value: "devoir" }, errors.first.params)
+      end
+
       test "un nœud qui n'est pas un objet est une erreur de schéma" do
-        assert_equal [ [ "c", "schema" ] ], codes(ContentNode.validate_course("texte", path: "c", lookup: @lookup))
-        assert_equal [ [ "f", "schema" ] ], codes(ContentNode.validate_essential(nil, path: "f"))
         assert_equal [ [ "e", "schema" ] ], codes(ContentNode.validate_exercise([], path: "e"))
         assert_equal [ [ "e.questions[0]", "schema" ], [ "e.questions[1].answers", "schema" ] ],
                      codes(ContentNode.validate_exercise(exercise("questions" => [ "q", question(answers: [ "a" ]) ]), path: "e"))

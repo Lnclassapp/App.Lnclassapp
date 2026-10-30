@@ -23,7 +23,7 @@ module Queries
         def expected_count = Entities::Assessment::Question::EXPECTED.fetch(question_type.to_sym)
         def multiple? = expected_count > 1
         # Compte dans « n/T répondues » : une question corrigée par la machine (ni rédigée ni cahier).
-        def counted? = Entities::Assessment::Question.kind_for(question_type)&.then { it::AUTO_GRADED } || false
+        def counted? = Entities::Assessment::Question.kind_for(question_type)::AUTO_GRADED
       end
       # Jamais de colonne correct : une proposition montrée à l'élève ne dit pas si elle est juste. index : rang d'affichage.
       Answer = Data.define(:id, :content, :index)
@@ -39,10 +39,10 @@ module Queries
       end
 
       # La copie rendue à l'élève (UDR-0138 §3.2) : sujet et toutes les questions, mélange de la session. completed? et started? pour l'aiguillage.
-      # statement_blocks : le sujet en blocs de l'exercice (ADR-0115), nil sans blocs.
+      # statement_blocks : le sujet en blocs de l'exercice (ADR-0115), nil sans blocs ; figure : la figure citée, nil sinon.
       Copy = Data.define(:session_public_id, :student_id, :status, :exercise_public_id, :exercise_title, :statement, :question_count,
-                         :questions, :statement_blocks) do
-        def initialize(statement_blocks: nil, **) = super
+                         :questions, :statement_blocks, :figure) do
+        def initialize(statement_blocks: nil, figure: nil, **) = super
         def completed? = status == "completed"
         def started? = status == "started"
       end
@@ -50,6 +50,14 @@ module Queries
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id exercise_sessions.status
                            exercise_sessions.answered_count exercise_sessions.question_count exercise_sessions.progress_percent
                            exercises.id exercises.public_id exercises.title].freeze
+
+      # La figure de la leçon citée par figure_key, ou nil : sans clé, clé introuvable ou entrée mal formée, jamais d'exception.
+      def self.figure_for(figures, key)
+        return if key.blank?
+
+        raw = Array(figures).find { it.is_a?(Hash) && it["key"] == key }
+        raw && Entities::Catalog::Figure.from_raw(raw)
+      end
 
       # feedback_question_id : question qui vient d'être soumise ; son verdict n'est lu que si elle est tentée.
       # → Row | nil
@@ -69,11 +77,12 @@ module Queries
       # Toute la copie : une requête pour les questions, une pour leurs propositions, une pour leurs images.
       # → Copy | nil. Les identifiants ne servent qu'au mélange, ici, côté serveur (ADR-0091 §4.4).
       def copy(public_id:)
-        id, public_id, student_id, status, question_count, exercise_id, exercise_public_id, title, statement, statement_blocks =
-          Orm::ExerciseSession.joins(:exercise).where(public_id:)
+        id, public_id, student_id, status, question_count, exercise_id, exercise_public_id, title, statement, statement_blocks,
+          figures, figure_key =
+          Orm::ExerciseSession.joins(exercise: :course).where(public_id:)
                               .pick("exercise_sessions.id", "exercise_sessions.public_id", "exercise_sessions.student_id", "exercise_sessions.status",
                                     "exercise_sessions.question_count", "exercises.id", "exercises.public_id", "exercises.title", "exercises.statement",
-                                    "exercises.statement_blocks")
+                                    "exercises.statement_blocks", "courses.figures", "exercises.figure_key")
         return if id.nil?
 
         rows = Orm::Question.where(exercise_id:).order(:position, :id).pluck(:id, :content, :question_type, :points, :unit, :starter)
@@ -86,7 +95,7 @@ module Queries
                        **sheet(id, question_id, kind_name(question_type), answers.fetch(question_id, []).map { it.drop(1) }))
         end
         Copy.new(session_public_id: public_id, student_id:, status:, exercise_public_id:, exercise_title: title, statement:, question_count:,
-                 questions:, statement_blocks:)
+                 questions:, statement_blocks:, figure: self.class.figure_for(figures, figure_key))
       end
 
       private

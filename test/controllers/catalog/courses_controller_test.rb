@@ -26,6 +26,41 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # L'ancien écran « Assigner un cours » (UDR-0030, dépréciée) : sa route n'existe plus.
   def assignments_href(slug) = "/courses/#{slug}/assignments"
 
+  # CA-12 : l'ancienne adresse de la fiche mène à la fiche de révision (301) ; mêmes refus que la page, sans rien révéler.
+  test "CA-12: /fiche of a draft lesson answers 404 to a student" do
+    draft = create_course(name: "Brouillon fiche", level: @tle, material: @svt, status: "draft")
+    sign_in_as create_student_for(draft)
+
+    get course_fiche_path(draft.slug)
+
+    assert_response :not_found
+  end
+
+  test "CA-12: /fiche of an unknown lesson answers 404" do
+    sign_in_as create_student_for(@course)
+
+    get course_fiche_path("lecon-inconnue")
+
+    assert_response :not_found
+  end
+
+  test "CA-12: /fiche of a published lesson of another level answers 404 to a student" do
+    sign_in_as create_student_for(@published)
+
+    get course_fiche_path(create_course(name: "Autre niveau", level: @seconde, material: @svt).slug)
+
+    assert_response :not_found
+  end
+
+  test "CA-12: /fiche of a published lesson of the student's level redirects permanently to its revision sheet" do
+    sign_in_as create_student_for(@course)
+
+    get course_fiche_path(@course.slug)
+
+    assert_response :moved_permanently
+    assert_redirected_to course_path(@course.slug, anchor: "fiche-de-revision")
+  end
+
   # ADR-0103 §4.6: no list in the current school (a rejected request lost to the migration, then nothing inherited).
   test "a teacher without any subject in the current school is invited to choose them, with no broken subtitle" do
     teacher = create_teacher(school: create_school, classrooms: [ create_classroom(level: @tle) ])
@@ -354,8 +389,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   end
 
   # PRD §7 : le nombre de requêtes de la page ne dépend ni du nombre de cours ni des lectures. Au plus 18 : Lot O5 y ajoute
-  # les matières de l'élève (1) et les leçons de la matière avec leurs fiches (4), lues pour l'ordinateur.
-  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 18" do
+  # les matières de l'élève (1) et les leçons de la matière avec leurs fiches (4), lues pour l'ordinateur ; la carte « Prochain
+  # exercice » en ajoute deux au plus (UDR parcours-matiere-exercice §4), d'où 20.
+  test "GET /courses as a student: the same number of queries for 2 courses and for 25 courses with reads, at most 20" do
     student = create_student_for(@course)
     sign_in_as student
     paths = [ courses_path, courses_path(q: "e"), courses_path(material: @svt.slug) ]
@@ -368,7 +404,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     many = paths.map { queries_of(it) }
 
     assert_equal few, many
-    assert(many.all? { it <= 18 }, many.inspect)
+    assert(many.all? { it <= 20 }, many.inspect)
   end
 
   test "an unknown subject in the student's address gives the « Cours » title and no course, never an error" do
@@ -707,7 +743,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
   # ── Page d'un cours ────────────────────────────────────────────────────────
 
   test "a student reads a published course: back link, badges, then « Fiche de révision » and « Prépare interros »" do
-    meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions")
+    meiose = create_essential(course: @course, name: "La méiose", subtitle: "Deux divisions", sheet: notion_sheet("Deux divisions successives."))
     create_exercise(essential: meiose)
     create_essential(course: @course, name: "Fiche en brouillon", status: "draft")
     sign_in_as create_student_for(@course)
@@ -725,12 +761,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_header", text: including("Du gène à l'espèce")
     assert_select "#course_header", text: including("Tle D")
     assert_select "#course_header", text: including("SVT")
-    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; sans fiche cahier, la fiche de révision est le texte
-    # de la leçon puis celui de ses notions publiées (Lot A, UDR-0139 §3.2) ; « Prépare interros » liste l'exercice de la notion (Lot B).
+    # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; la fiche de révision montre les notions publiées au
+    # gabarit des quatre blocs (UDR-0141 fiche de révision) ; « Prépare interros » liste l'exercice de la notion (Lot B).
     assert_select "#course_essentials", 0
     assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
-    assert_select "section#fiche-de-revision", text: including("ADN et gènes")
-    assert_select "section#fiche-de-revision h3", text: "La méiose"
+    assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
+    assert_select "section#fiche-de-revision h4", text: "1. La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
     assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
     assert_select "section#prepare-interros #notion-#{meiose.slug} h3", text: "La méiose"
@@ -777,8 +813,9 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       # CA-29, ADR-0113 §4.6 : plus de « Nouvelle notion » ni de « Nouvel exercice » ; la leçon se réimporte.
       assert_select "a[href='/teams/courses/#{@draft.slug}/essentials/new']", 0
       assert_select "[role=menu] a", text: /Nouvelle (fiche|notion)|Nouvel exercice/, count: 0
-      assert_select modal_link(new_teams_import_path(kind: "essentials", course: @draft.slug)),
-                    text: tl("role_actions.import_essentials")
+      # Refonte des contenus de maths : l'import de notions est retiré, le corrigé de l'équipe le remplace.
+      assert_select "a[href*='kind=essentials']", 0
+      assert_select "a[role=menuitem][href='#{answer_key_teams_course_path(@draft.slug)}']"
     end
     assert_select "#course_essentials", 0
     assert_select "a[href='#{assignments_href(@draft.slug)}']", 0
@@ -838,17 +875,22 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#course_sheet_link", 0
   end
 
-  # Le texte de la leçon est rendu par la fiche de révision (Lot A) : ce qu'il contient d'exécutable n'arrive pas dans la page.
-  test "the lesson text is sanitised on render: no script tag, no event attribute, no javascript link" do
-    Orm::Course.find(@course.id).update!(
-      content: "<p onclick=\"alert(1)\">Texte <strong>gras</strong></p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
-    )
+  # La fiche de révision est du texte brut (ADR-0116 fiche de révision) : ce qu'un bloc contient d'exécutable est échappé.
+  test "the revision sheet escapes its text: no script tag, no event attribute, no javascript link" do
+    create_essential(course: @course, name: "Notion piégée", sheet: notion_sheet(
+      "<p onclick=\"alert(1)\">Texte</p><script>alert(2)</script><a href=\"javascript:alert(3)\">lien</a>"
+    ))
     sign_in_as create_student_for(@course)
 
     get course_path(@course.slug)
 
-    assert_select "#fiche-de-revision strong", text: "gras"
-    assert_no_match(/<script>alert|onclick|javascript:alert/, response.body)
+    assert_select "#fiche-de-revision", text: including("<script>alert(2)</script>")
+    assert_select "#fiche-de-revision script, #fiche-de-revision [onclick], #fiche-de-revision a[href^=javascript]", 0
+  end
+
+  def notion_sheet(remember)
+    notion = revision_notion("Notion")
+    { "remember" => remember, "method" => notion["method"], "example" => notion["example"], "pitfall" => notion["pitfall"] }
   end
 
   test "no page loads a script or a stylesheet from a third-party host (TR-41)" do
@@ -1038,8 +1080,8 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#lessons_empty", text: including(tl("index.no_class_title"))
   end
 
-  # CA-E14 : « dans l'ordre du programme » : Leçon 1, 2, 10 (non 10 avant 2, ordre des noms) ; le téléphone garde l'ordre des noms.
-  test "CA-E14: the lessons of a subject follow the programme order, the phone view keeps the name order" do
+  # CA-E14 : « dans l'ordre du programme » : Leçon 1, 2, 10 (non 10 avant 2, ordre des noms) ; le téléphone suit le même ordre (chantier ordre-lecons-progression).
+  test "CA-E14: the lessons of a subject follow the programme order, the phone view too" do
     suites = create_course(name: "Suites", subtitle: "Leçon 10 · Progression DPFC 2026-2027", level: @tle, series: @course.series, material: @svt)
     derivees = create_course(name: "Dérivées", subtitle: "Leçon 2 · Progression DPFC 2026-2027", level: @tle, series: @course.series, material: @svt)
     limites = create_course(name: "Limites", subtitle: "Leçon 1 · Progression DPFC 2026-2027", level: @tle, series: @course.series, material: @svt)
@@ -1048,7 +1090,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     get courses_path(material: @svt.slug)
 
     assert_equal [ limites, derivees, suites, @course ].map { "lesson_#{it.slug}" }, lesson_ids
-    assert_equal [ derivees, @course, limites, suites ].map { "course_#{it.slug}" }, css_select("#courses_groups li[id^=course_]").map { it["id"] }
+    assert_equal [ limites, derivees, suites, @course ].map { "course_#{it.slug}" }, css_select("#courses_groups li[id^=course_]").map { it["id"] }
   end
 
   # La garde current_actor.teacher? de teacher_scope : l'adresse du Cours de l'enseignant ne lui donne pas son en-tête.
@@ -1072,6 +1114,100 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       assert_select "nav#lesson_materials", 0
       assert_select "#student_lessons", 0
       assert_select "#student_courses", 0
+    end
+  end
+
+  # UDR parcours-matiere-exercice §3 : la carte « Prochain exercice » de la matière (téléphone et ordinateur) et de la leçon.
+  def with_exercises
+    @first = create_lesson_wide_exercise(course: @course, title: "Premier exercice")
+    @second = create_lesson_wide_exercise(course: @course, title: "Second exercice")
+    @student = create_student_for(@course)
+    sign_in_as @student
+  end
+
+  test "CA-1: the student sees the next exercise on both blocks of the subject view, with a POST button, and not inside the frame" do
+    with_exercises
+
+    get courses_path(material: @svt.slug)
+
+    assert_response :success
+    %w[material_next_exercise lesson_material_next_exercise].each do |id|
+      assert_select "section##{id}[aria-labelledby='#{id}_title'][data-turbo-prefetch=false]" do
+        assert_select "##{id}_title", text: "Premier exercice"
+        assert_select "p", text: @course.name
+        assert_select "form[action='#{exercise_sessions_path(@first.public_id)}'][method=post] button", text: including(tl("next_exercise.start"))
+        assert_select "button[aria-label=?]", tl("next_exercise.start_aria", title: "Premier exercice")
+      end
+    end
+    assert_select "#material_next_exercise ~ #courses-filters", 1
+
+    get courses_path(material: @svt.slug), headers: { "Turbo-Frame" => "courses" }
+
+    assert_select "#material_next_exercise", 0
+  end
+
+  test "CA-2: a session in progress is resumed at the next question, by a link to the session" do
+    with_exercises
+    session = create_exercise_session(student: @student, exercise: @second, answered_count: 1)
+
+    get courses_path(material: @svt.slug)
+
+    assert_select "#material_next_exercise" do
+      assert_select "#material_next_exercise_title", text: "Second exercice"
+      assert_select "a[href='#{exercise_session_path(session.public_id)}']", text: including(tl("next_exercise.resume", number: 2))
+      assert_select "a[aria-label=?]", tl("next_exercise.resume_aria", title: "Second exercice", number: 2)
+      assert_select "form", 0
+    end
+  end
+
+  test "the subject view reads the next exercise once when the phone and desktop blocks aim at the same subject" do
+    with_exercises
+    reads = []
+    counter = ->(*, payload) { reads << payload[:sql] if payload[:sql].include?(%("exercise_sessions"."student_id")) && payload[:sql].start_with?("SELECT") && payload[:sql].include?("answered_count") }
+
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { get courses_path(material: @svt.slug) }
+
+    assert_equal 1, reads.size, reads.inspect
+  end
+
+  test "CA-4: with nothing to propose, no card is rendered" do
+    with_exercises
+    [ @first, @second ].each { create_exercise_session(student: @student, exercise: it, status: "completed") }
+
+    get courses_path(material: @svt.slug)
+    assert_select "#material_next_exercise, #lesson_material_next_exercise", 0
+
+    get course_path(@course.slug)
+    assert_select "#lesson_next_exercise", 0
+  end
+
+  test "CA-5: the lesson page shows the card under the header and before the revision sheet, with a link to all exercises" do
+    with_exercises
+    create_lesson_wide_exercise(course: @published, title: "D'une autre leçon")
+
+    get course_path(@course.slug)
+
+    assert_select "#course_header ~ #lesson_next_exercise ~ div #fiche-de-revision", 1
+    assert_select "#lesson_next_exercise" do
+      assert_select "#lesson_next_exercise_title", text: "Premier exercice"
+      assert_select "p", text: @course.name, count: 0
+      assert_select "a[href='#prepare-interros']", text: tl("next_exercise.all")
+      assert_select "form[action='#{exercise_sessions_path(@first.public_id)}']"
+    end
+  end
+
+  test "CA-7: the teacher and the team see no card on the subject view nor on the lesson" do
+    create_lesson_wide_exercise(course: @course, title: "Premier exercice")
+    [ create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ]), create_team_member ].each do |user|
+      sign_in_as user
+
+      get courses_path(material: @svt.slug)
+      assert_response :success
+      assert_select "#material_next_exercise, #lesson_material_next_exercise", count: 0
+
+      get course_path(@course.slug)
+      assert_response :success
+      assert_select "#lesson_next_exercise", count: 0
     end
   end
 end

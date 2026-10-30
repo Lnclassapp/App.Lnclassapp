@@ -1,0 +1,1151 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — Les problèmes du développement économique de la Côte d'Ivoire",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "population-ci",
+          "kind": "stat_chart",
+          "description": "Courbe de la population de la Côte d'Ivoire aux cinq recensements, en millions d'habitants : 6,7 en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014 et 29,4 en 2021. La courbe monte à chaque recensement : la population est de plus en plus nombreuse.",
+          "params": {
+            "chart": "line",
+            "series": [
+              6.7,
+              10.8,
+              15.4,
+              22.7,
+              29.4
+            ],
+            "labels": [
+              "1975",
+              "1988",
+              "1998",
+              "2014",
+              "2021"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "causes-consequences",
+          "kind": "diagram",
+          "description": "Schéma fléché des causes et des conséquences : la chute des cours du cacao et du café entraîne une baisse des recettes d'exportation, puis l'endettement de l'État, puis un programme d'ajustement structurel, qui provoque une baisse des dépenses publiques et moins de moyens pour la santé et l'éducation.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "chute",
+                "label": "Chute des cours du cacao et du café"
+              },
+              {
+                "id": "recettes",
+                "label": "Baisse des recettes d'exportation"
+              },
+              {
+                "id": "dette",
+                "label": "Endettement de l'État"
+              },
+              {
+                "id": "pas",
+                "label": "Ajustement structurel"
+              },
+              {
+                "id": "depenses",
+                "label": "Baisse des dépenses publiques"
+              },
+              {
+                "id": "social",
+                "label": "Moins de moyens pour santé et éducation"
+              }
+            ],
+            "edges": [
+              {
+                "from": "chute",
+                "to": "recettes"
+              },
+              {
+                "from": "recettes",
+                "to": "dette"
+              },
+              {
+                "from": "dette",
+                "to": "pas"
+              },
+              {
+                "from": "pas",
+                "to": "depenses"
+              },
+              {
+                "from": "depenses",
+                "to": "social"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Comprendre la dépendance à l'agriculture d'exportation",
+          "remember": "La Côte d'Ivoire tire une grande partie de ses recettes d'exportation de quelques produits agricoles, historiquement le cacao et le café ; aujourd'hui le cacao reste en tête (avec l'anacarde, le caoutchouc). La Côte d'Ivoire est le premier producteur mondial de cacao. Le **cours mondial** est le prix de ces produits sur les marchés internationaux : le pays ne le fixe pas. Il ne faut pas le confondre avec le **prix payé au planteur**, fixé par l'État (la Caistab hier, le Conseil du Café-Cacao aujourd'hui). Un pays est **dépendant** quand son économie repose sur peu de produits et sur des prix qu'il ne contrôle pas. À la fin des années 1970 et dans les années 1980, les cours du cacao et du café ont fortement chuté : le pays a gagné beaucoup moins en vendant autant.",
+          "method": [
+            "Identifier le produit exporté et son poids dans les recettes du pays.",
+            "Repérer qui fixe son prix : les cours mondiaux.",
+            "Expliquer l'effet d'une variation des cours sur les recettes.",
+            "Dégager les conséquences pour l'État et pour les planteurs."
+          ],
+          "example": {
+            "statement": "Expliquer pourquoi la chute des cours du cacao dans les années 1980 a durement touché la Côte d'Ivoire.",
+            "steps": [
+              "Identifier : le cacao est un produit agricole d'exportation majeur, comme le café : une grande part des recettes du pays en dépend.",
+              "Repérer : le prix du cacao est fixé sur les marchés mondiaux, c'est le cours mondial, et non par la Côte d'Ivoire.",
+              "Expliquer : quand les cours baissent, la même quantité vendue rapporte moins d'argent, même si la récolte reste bonne.",
+              "Dégager : l'État reçoit moins de recettes pour financer écoles et routes, et les planteurs gagnent moins."
+            ]
+          },
+          "pitfall": "Ne confonds pas une baisse des cours avec une baisse de la production. Contre-exemple : un planteur récolte 100 sacs avant la chute des cours et 100 sacs après, mais le prix payé par sac a été baissé : il gagne moins sans avoir produit moins. La chute des cours vient du marché mondial, pas d'une faute des planteurs ivoiriens.",
+          "figure": null,
+          "exercise": {
+            "title": "Comprendre la dépendance aux cours mondiaux",
+            "statement": "Dans cet exercice, tu expliques la dépendance de la Côte d'Ivoire à l'agriculture d'exportation avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Que signifie « dépendre des cours mondiaux » pour la Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le cacao et le café sont des produits d'exportation majeurs. Étape 2 — Repérer : leur prix, le cours mondial, est fixé sur les marchés internationaux. Étape 3 — Expliquer : quand les cours bougent, les recettes bougent aussi. Donc dépendre des cours mondiaux, c'est voir ses recettes varier selon des prix que le pays ne contrôle pas. Dire que la Côte d'Ivoire fixe le prix est faux : elle subit le cours mondial.",
+                "answers": [
+                  {
+                    "content": "Ses recettes varient selon des prix fixés sur les marchés internationaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle fixe elle-même le prix du cacao dans le monde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle ne vend aucun produit à l'étranger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle achète tout son cacao à d'autres pays",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quand les cours mondiaux du cacao chutent, les recettes d'exportation du pays baissent même si la quantité vendue reste la même.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : le cours mondial est fixé sur les marchés internationaux. Étape 3 — Expliquer : si le cours baisse, chaque tonne exportée rapporte moins de recettes au pays. La quantité vendue est la même, mais la somme reçue est plus faible. L'affirmation est vraie. Ne confonds pas ce cours mondial avec le prix payé au planteur, que fixe l'État.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le prix d'un produit comme le cacao sur le marché international s'appelle le ___ mondial.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer : le prix du cacao ou du café est fixé sur les marchés internationaux. On l'appelle le cours mondial. Le mot attendu est « cours ».",
+                "answers": [
+                  {
+                    "content": "cours",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux produits agricoles d'exportation les plus importants de la Côte d'Ivoire dans cette leçon ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : les recettes d'exportation agricoles de la Côte d'Ivoire reposent surtout sur le cacao et le café. Le blé, le raisin et le seigle sont des cultures de climats tempérés ou méditerranéens, qui ne sont pas les produits d'exportation étudiés ici.",
+                "answers": [
+                  {
+                    "content": "Le cacao",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le café",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le blé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le raisin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le seigle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après la chute des cours, un planteur récolte autant de cacao qu'avant mais gagne moins. Quelle est l'explication ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le cacao est un produit d'exportation. Étape 2 — Repérer : son prix dépend du cours mondial. Étape 3 — Expliquer : le planteur récolte autant, mais chaque sac lui est payé moins parce que le cours mondial a chuté et que le prix payé au planteur, fixé par l'État, a été baissé. Étape 4 — Dégager : son revenu diminue. Dire que sa production a baissé est le piège : l'énoncé précise qu'elle est identique.",
+                "answers": [
+                  {
+                    "content": "Les cours mondiaux ont chuté et le prix payé au planteur a été baissé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa production a baissé de moitié",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a vendu son cacao trop tôt dans l'année",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'État ivoirien a fixé un prix mondial plus bas",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer l'endettement et l'ajustement structurel",
+          "remember": "Quand ses recettes baissent, un État peut **emprunter** de l'argent à l'étranger. Cet argent est une **dette** : il faut la rembourser, avec des intérêts. L'endettement a commencé pendant le boom des cours de 1975-1980, quand l'État a beaucoup emprunté pour investir ; il est devenu insoutenable avec la chute des cours, qui a fait baisser les recettes. Pour l'aider, le **FMI** (Fonds monétaire international) et la **Banque mondiale** ont proposé des **programmes d'ajustement structurel** : en échange de leur aide, l'État devait réduire ses dépenses, **privatiser** des entreprises publiques (les vendre à des acteurs privés) et réformer son économie. Ces mesures ont réduit les moyens consacrés aux services publics.",
+          "method": [
+            "Repérer la cause de départ : la baisse des recettes de l'État.",
+            "Expliquer comment le pays comble le manque : il emprunte, donc sa dette augmente.",
+            "Identifier les mesures demandées en échange de l'aide.",
+            "Dégager les conséquences pour les services publics et la population."
+          ],
+          "example": {
+            "statement": "Expliquer pourquoi la Côte d'Ivoire a connu des programmes d'ajustement structurel dans les années 1980.",
+            "steps": [
+              "Repérer : les cours du cacao et du café ont chuté, donc les recettes d'exportation et celles de l'État ont baissé.",
+              "Expliquer : l'État dépense plus qu'il ne reçoit, il emprunte à l'étranger et sa dette augmente.",
+              "Identifier : le FMI et la Banque mondiale demandent, en échange de leur aide, de réduire les dépenses publiques et de privatiser des entreprises de l'État.",
+              "Dégager : l'État a moins d'argent pour l'éducation et la santé, ce qui rend la vie plus difficile pour une partie de la population."
+            ]
+          },
+          "pitfall": "Ne confonds pas un prêt avec un don. Contre-exemple : si l'État emprunte 100 millions de francs CFA, il devra rendre plus de 100 millions à cause des intérêts, alors qu'un don ne se rembourse pas. De même, les programmes d'ajustement structurel viennent du FMI et de la Banque mondiale : ce sont des institutions financières internationales, pas l'Assemblée générale de l'ONU ni l'Union africaine.",
+          "figure": "causes-consequences",
+          "exercise": {
+            "title": "Dette et ajustement structurel",
+            "statement": "Dans cet exercice, tu expliques l'endettement et l'ajustement structurel avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : les recettes sont l'argent que l'État reçoit, et leur baisse est le point de départ. Étape 2 — Expliquer : la dette est une somme empruntée à rembourser avec intérêts. Étape 3 — Identifier : la privatisation est une mesure d'ajustement, la vente d'une entreprise publique à des acteurs privés. L'ajustement structurel est le programme de réformes demandé en échange de l'aide.",
+                "answers": [
+                  {
+                    "content": "Dette",
+                    "match": "Somme empruntée qu'il faut rembourser avec des intérêts"
+                  },
+                  {
+                    "content": "Recettes de l'État",
+                    "match": "Argent que l'État reçoit"
+                  },
+                  {
+                    "content": "Privatisation",
+                    "match": "Vente d'une entreprise publique à des acteurs privés"
+                  },
+                  {
+                    "content": "Ajustement structurel",
+                    "match": "Programme de réformes demandé en échange d'une aide"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes qui mènent à l'ajustement structurel.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : tout part de la chute des cours, qui fait baisser les recettes de l'État. Étape 2 — Expliquer : pour combler le manque, l'État emprunte et sa dette augmente. Étape 3 — Identifier : en échange de l'aide, il accepte un programme d'ajustement structurel. L'ordre est donc cause, baisse des recettes, endettement, ajustement.",
+                "answers": [
+                  {
+                    "content": "Les cours du cacao et du café chutent"
+                  },
+                  {
+                    "content": "Les recettes de l'État baissent"
+                  },
+                  {
+                    "content": "L'État emprunte et sa dette augmente"
+                  },
+                  {
+                    "content": "L'État accepte un programme d'ajustement structurel"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles institutions ont proposé les programmes d'ajustement structurel à la Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Identifier : les mesures d'ajustement sont demandées en échange d'une aide financière. Cette aide vient du FMI (Fonds monétaire international) et de la Banque mondiale. L'ONU, l'UNESCO, l'Union africaine et la CEDEAO ne conduisent pas ces programmes : les confondre est l'erreur du piège. Le Conseil de l'Entente et l'OUA sont aussi faux : le premier est une organisation de coopération entre pays voisins, la seconde une organisation politique africaine, ce ne sont pas des institutions financières qui accordent des prêts conditionnés.",
+                "answers": [
+                  {
+                    "content": "Le FMI et la Banque mondiale",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ONU et l'UNESCO",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Union africaine et la CEDEAO",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Conseil de l'Entente et l'OUA",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un programme d'ajustement structurel est un don d'argent que l'État n'a pas à rembourser.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Expliquer : l'aide liée à l'ajustement structurel s'accompagne de dettes et de conditions. Étape 3 — Identifier : l'État doit réduire ses dépenses et privatiser des entreprises. Ce n'est pas un don gratuit : l'affirmation est fausse. Confondre prêt et don est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Explique en deux ou trois phrases le lien entre la chute des cours du cacao et l'endettement de la Côte d'Ivoire.",
+                "question_type": "written",
+                "points": 2,
+                "criteria": [
+                  "La baisse des cours fait baisser les recettes de l'État",
+                  "L'État emprunte pour combler le manque et la dette augmente",
+                  "L'enchaînement est clair, avec des mots de liaison"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Repérer : quand les cours du cacao et du café chutent, la Côte d'Ivoire gagne moins en exportant, donc les recettes de l'État baissent. Étape 2 — Expliquer : l'État continue à dépenser pour les écoles et les routes, il emprunte à l'étranger pour combler le manque, et sa dette augmente. Points : baisse des recettes (0,5), emprunt et dette (1), enchaînement clair (0,5).",
+                "answers": [],
+                "starter": "Quand les cours chutent…"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser les problèmes humains du développement",
+          "remember": "La population de la Côte d'Ivoire augmente très vite : c'est la **croissance démographique** (6,7 millions d'habitants au recensement de 1975, 29,4 millions en 2021). Beaucoup d'habitants quittent les campagnes pour les villes, c'est l'**exode rural**, et la part de la population qui vit en ville augmente : c'est l'**urbanisation**. **Abidjan**, la plus grande ville du pays, attire le plus de monde. Les besoins en emplois, en écoles et en soins augmentent plus vite que les moyens : d'où le **chômage des jeunes**, la **pauvreté** et l'insuffisance des services de santé et d'éducation.",
+          "method": [
+            "Lire les données du document pour repérer l'évolution de la population.",
+            "Décrire le phénomène : croissance démographique, urbanisation.",
+            "Expliquer l'écart entre les besoins et les moyens disponibles.",
+            "Conclure par les problèmes humains qui en résultent."
+          ],
+          "example": {
+            "statement": "La population passe de 6,7 millions d'habitants (recensement de 1975) à 29,4 millions (recensement de 2021). Expliquer les problèmes humains qui en découlent.",
+            "steps": [
+              "Lire : la population passe de 6,7 millions en 1975 à 29,4 millions en 2021.",
+              "Décrire : elle a été multipliée par plus de quatre, et de nombreux habitants quittent les campagnes pour les villes, surtout Abidjan.",
+              "Expliquer : les emplois, les écoles et les centres de santé n'augmentent pas aussi vite que le nombre d'habitants.",
+              "Conclure : chômage des jeunes, pauvreté, et services de santé et d'éducation insuffisants."
+            ]
+          },
+          "pitfall": "Ne confonds pas croissance démographique et urbanisation. La première est l'augmentation du nombre d'habitants ; la seconde est l'augmentation de la part des habitants qui vivent en ville. Contre-exemple : la population peut augmenter sans que la part des citadins change, et une ville peut grandir parce que des ruraux s'y installent.",
+          "figure": "population-ci",
+          "exercise": {
+            "title": "Analyser les problèmes humains",
+            "statement": "Dans cet exercice, tu lis l'évolution de la population ivoirienne et tu analyses ses conséquences avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "population-ci",
+            "questions": [
+              {
+                "content": "La population de la Côte d'Ivoire est de 15,4 millions d'habitants au recensement de 1998 et de 22,7 millions à celui de 2014. De combien de millions a-t-elle augmenté entre ces deux recensements ?",
+                "question_type": "numeric",
+                "unit": "millions",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : 15,4 millions en 1998 et 22,7 millions en 2014. Étape 2 — Décrire : la population augmente, il faut mesurer l'écart. Calcul : 22,7 − 15,4 = 7,3. La population a augmenté de 7,3 millions d'habitants.",
+                "answers": [
+                  {
+                    "content": "7,3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La population passe de 6,7 millions d'habitants en 1975 à 29,4 millions en 2021. Comment la décrire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : 6,7 millions en 1975 et 29,4 millions en 2021. Étape 2 — Décrire : 4 × 6,7 = 26,8, et 29,4 est supérieur à 26,8, donc la population a été multipliée par plus de quatre. Doubler donnerait seulement 13,4 millions.",
+                "answers": [
+                  {
+                    "content": "Elle a été multipliée par plus de quatre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle a un peu plus que doublé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est restée à peu près stable",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle a diminué après 1998",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Décrire : la croissance démographique est l'augmentation du nombre d'habitants. L'urbanisation est la part croissante de la population en ville. L'exode rural est le départ des campagnes vers les villes. Le chômage est l'absence d'emploi pour qui en cherche. Ne pas confondre croissance démographique et urbanisation est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Croissance démographique",
+                    "match": "Augmentation du nombre d'habitants"
+                  },
+                  {
+                    "content": "Urbanisation",
+                    "match": "Part croissante de la population qui vit en ville"
+                  },
+                  {
+                    "content": "Exode rural",
+                    "match": "Départ des habitants des campagnes vers les villes"
+                  },
+                  {
+                    "content": "Chômage",
+                    "match": "Absence d'emploi pour des personnes qui en cherchent"
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont trois problèmes humains liés à la croissance de la population et à l'urbanisation ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Expliquer : les besoins en emplois, en écoles et en soins augmentent plus vite que les moyens. Étape 4 — Conclure : cela produit chômage des jeunes, pauvreté et services insuffisants. L'érosion des sols est un problème environnemental, et les villes ont au contraire beaucoup d'habitants.",
+                "answers": [
+                  {
+                    "content": "Le chômage des jeunes",
+                    "correct": true
+                  },
+                  {
+                    "content": "La pauvreté",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'insuffisance des services de santé et d'éducation",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'érosion des sols",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le manque d'habitants dans les villes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Explique la différence entre croissance démographique et urbanisation, avec un exemple pour chacune.",
+                "question_type": "written",
+                "points": 2,
+                "criteria": [
+                  "La croissance démographique est définie comme l'augmentation du nombre d'habitants",
+                  "L'urbanisation est définie comme la part croissante de la population en ville",
+                  "Un exemple pertinent est donné pour chaque notion"
+                ],
+                "explanation": "Corrigé modèle : Étape 2 — Décrire : la croissance démographique est l'augmentation du nombre d'habitants, par exemple de 6,7 millions en 1975 à 29,4 millions en 2021. L'urbanisation est l'augmentation de la part des habitants qui vivent en ville, par exemple l'arrivée de familles venues des campagnes à Abidjan. Points : première définition (0,5), seconde définition (0,5), deux exemples (1).",
+                "answers": [],
+                "starter": "La croissance démographique, c'est…"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Identifier les problèmes environnementaux et la faible transformation",
+          "remember": "La **déforestation** est la disparition progressive de la forêt. En Côte d'Ivoire, elle est liée à l'extension des plantations (cacao, café…) et à l'exploitation du bois. Sans arbres, le sol est nu et la pluie l'emporte : c'est l'**érosion des sols**, qui rend la terre moins fertile. Autre problème : la **faible transformation locale**. Une grande partie des matières premières (fèves de cacao, bois…) est exportée brute ou peu transformée. La **valeur ajoutée**, c'est-à-dire la richesse créée par la transformation, et les emplois qui vont avec profitent alors surtout à d'autres pays.",
+          "method": [
+            "Identifier le problème : environnemental, ou économique si la matière première part brute.",
+            "Chercher la cause principale : une activité humaine.",
+            "Expliquer l'effet direct sur le milieu ou sur l'économie.",
+            "Mesurer la conséquence à long terme pour le pays."
+          ],
+          "example": {
+            "statement": "Analyser le recul de la forêt dans le sud de la Côte d'Ivoire.",
+            "steps": [
+              "Identifier : la forêt recule, c'est un problème environnemental, la déforestation.",
+              "Chercher : la cause est humaine, l'extension des plantations de cacao et de café et l'exploitation du bois.",
+              "Expliquer : sans arbres, le sol est nu, la pluie l'emporte : c'est l'érosion des sols.",
+              "Mesurer : les sols perdent leur fertilité, les récoltes risquent de baisser et l'avenir de l'agriculture est menacé."
+            ]
+          },
+          "pitfall": "Ne confonds pas déforestation et érosion. La déforestation est la cause : les arbres disparaissent. L'érosion est la conséquence : la pluie emporte le sol devenu nu. Contre-exemple : une forêt coupée ne produit d'érosion que lorsque la pluie tombe sur le sol nu. Et exporter des fèves de cacao n'est pas les transformer : c'est vendre une matière première brute.",
+          "figure": null,
+          "exercise": {
+            "title": "Environnement et transformation locale",
+            "statement": "Dans cet exercice, tu analyses des problèmes environnementaux et la faible transformation avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque situation au problème qu'elle illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : chaque situation correspond à un problème précis. Les fèves exportées brutes montrent la faible transformation locale. Les arbres coupés illustrent la déforestation. Étape 3 — Expliquer : la pluie qui emporte la terre d'un sol nu est l'érosion des sols, conséquence de la déforestation.",
+                "answers": [
+                  {
+                    "content": "Des fèves de cacao exportées sans transformation",
+                    "match": "Faible transformation locale"
+                  },
+                  {
+                    "content": "Des arbres coupés pour vendre du bois",
+                    "match": "Déforestation"
+                  },
+                  {
+                    "content": "La pluie emporte la terre d'une colline sans arbres",
+                    "match": "Érosion des sols"
+                  }
+                ]
+              },
+              {
+                "content": "Laquelle de ces activités est une cause de la déforestation en Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : la déforestation est la disparition de la forêt. Étape 2 — Chercher : sa cause est humaine, l'extension des plantations et l'exploitation du bois. L'érosion est une conséquence, pas une cause : la proposer est l'erreur du piège. La chute des cours et le chômage sont des problèmes économiques et humains.",
+                "answers": [
+                  {
+                    "content": "L'extension des plantations et l'exploitation du bois",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'érosion des sols",
+                    "correct": false
+                  },
+                  {
+                    "content": "La chute des cours du cacao",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le chômage des jeunes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'érosion des sols est la cause de la déforestation.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher : la cause de la déforestation est humaine (plantations, bois). Étape 3 — Expliquer : c'est ensuite, sur le sol nu, que la pluie provoque l'érosion. L'érosion est donc la conséquence de la déforestation et non sa cause : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quand un pays exporte un produit sans le transformer, il exporte une matière ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : des fèves de cacao ou du bois brut sont des produits non transformés. On les appelle des matières premières, ou des matières brutes. Les mots attendus sont « première » ou « brute ».",
+                "answers": [
+                  {
+                    "content": "première",
+                    "correct": true
+                  },
+                  {
+                    "content": "brute",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes qui mènent à la perte de fertilité des sols.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Chercher : tout commence par une activité humaine qui coupe la forêt. Étape 3 — Expliquer : le sol nu est ensuite emporté par la pluie, c'est l'érosion. Étape 4 — Mesurer : à long terme les sols perdent leur fertilité. L'ordre est cause humaine, sol nu, érosion, perte de fertilité.",
+                "answers": [
+                  {
+                    "content": "On coupe la forêt pour planter ou exploiter le bois"
+                  },
+                  {
+                    "content": "Le sol reste nu, sans arbres"
+                  },
+                  {
+                    "content": "La pluie emporte la terre : c'est l'érosion"
+                  },
+                  {
+                    "content": "Les sols perdent leur fertilité"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Proposer des solutions au développement économique",
+          "remember": "Pour mieux se développer, la Côte d'Ivoire peut agir sur chaque problème. **Diversifier** l'économie : produire et exporter plus de produits différents (autres cultures, produits transformés, services), pour moins dépendre du cacao et du café. **Transformer sur place** les matières premières, par exemple broyer le cacao dans des usines du pays, pour garder plus de valeur ajoutée et créer des emplois. **Former** la population (école, formation professionnelle) pour que les jeunes trouvent du travail. **Protéger les forêts** en reboisant et en limitant la déforestation.",
+          "method": [
+            "Rappeler le problème à résoudre.",
+            "Choisir une solution qui s'attaque à sa cause.",
+            "Expliquer comment cette solution agit.",
+            "Dire l'avantage qu'en tire le pays."
+          ],
+          "example": {
+            "statement": "Proposer une solution à la dépendance de la Côte d'Ivoire envers le cacao et le café.",
+            "steps": [
+              "Rappeler : l'économie dépend du cacao et du café, dont le prix peut chuter.",
+              "Choisir : la diversification, qui consiste à produire et exporter des produits plus variés.",
+              "Expliquer : si le cours d'un produit baisse, les autres produits compensent une partie de la perte de recettes.",
+              "Dire : l'économie est plus stable et crée plus d'emplois."
+            ]
+          },
+          "pitfall": "Ne confonds pas diversifier et produire plus du même produit. Contre-exemple : un pays qui double sa production de cacao reste dépendant du cacao, et si tous les producteurs vendent davantage, le cours peut même baisser. Diversifier, c'est ajouter des produits différents.",
+          "figure": null,
+          "exercise": {
+            "title": "Proposer des solutions",
+            "statement": "Dans cet exercice, tu associes des problèmes à des solutions avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque problème à la solution qui s'y attaque.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Rappeler : chaque problème a une cause. Étape 2 — Choisir : la dépendance se règle par la diversification, l'export brut par la transformation sur place, le chômage par la formation, le recul de la forêt par le reboisement et la protection. Étape 3 — Expliquer : chaque solution agit sur la cause du problème.",
+                "answers": [
+                  {
+                    "content": "Dépendance au cacao et au café",
+                    "match": "Diversifier l'économie"
+                  },
+                  {
+                    "content": "Matières premières exportées brutes",
+                    "match": "Transformer sur place"
+                  },
+                  {
+                    "content": "Chômage des jeunes",
+                    "match": "Former la population"
+                  },
+                  {
+                    "content": "Recul de la forêt",
+                    "match": "Reboiser et protéger les forêts"
+                  }
+                ]
+              },
+              {
+                "content": "Quelle solution réduit le mieux la dépendance de la Côte d'Ivoire aux cours du cacao ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Rappeler : le problème est la dépendance à un produit dont le prix varie. Étape 2 — Choisir : la diversification s'attaque à la cause. Étape 3 — Expliquer : d'autres produits compensent la perte si un cours baisse. Produire plus de cacao est le piège : le pays resterait dépendant. Emprunter augmente la dette, et réduire les écoles aggrave les problèmes humains.",
+                "answers": [
+                  {
+                    "content": "Diversifier les productions et les exportations",
+                    "correct": true
+                  },
+                  {
+                    "content": "Produire encore plus de cacao uniquement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Emprunter davantage à l'étranger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Réduire le nombre d'écoles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Transformer le cacao sur place permet de garder plus de valeur ajoutée et de créer des emplois dans le pays.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : transformer les fèves dans des usines du pays crée de la richesse supplémentaire, la valeur ajoutée, et des emplois sur place. Étape 4 — Dire : le pays en tire un avantage durable. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour que les jeunes trouvent plus facilement un emploi, le pays doit investir dans la ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Rappeler : le problème est le chômage des jeunes. Étape 2 — Choisir : la solution est la formation (école, formation professionnelle). Étape 3 — Expliquer : des jeunes formés ont plus de compétences pour occuper des emplois. La déforestation, la dette et l'export brut ne créent pas d'emplois qualifiés.",
+                "answers": [
+                  {
+                    "content": "formation",
+                    "correct": true
+                  },
+                  {
+                    "content": "déforestation",
+                    "correct": false
+                  },
+                  {
+                    "content": "dette",
+                    "correct": false
+                  },
+                  {
+                    "content": "exportation de fèves brutes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Propose deux solutions pour réduire la dépendance de la Côte d'Ivoire au cacao et au café, et explique comment chacune agit.",
+                "question_type": "written",
+                "points": 3,
+                "criteria": [
+                  "Deux solutions différentes et adaptées sont proposées",
+                  "Chaque solution est expliquée par son effet sur la dépendance",
+                  "Les mots diversification, transformation ou formation sont bien employés"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Rappeler : l'économie dépend du cacao et du café, dont les cours peuvent chuter. Étape 2 — Choisir : première solution, diversifier les cultures et les exportations ; deuxième solution, transformer le cacao sur place. Étape 3 — Expliquer : si un cours baisse, d'autres produits compensent ; la transformation crée de la valeur ajoutée et des emplois. La diversification répond à la dépendance au cacao ; la transformation réduit la dépendance aux fèves brutes et apporte de la valeur ajoutée. Points : deux solutions (1), explication de chacune (1,5), vocabulaire (0,5).",
+                "answers": [],
+                "starter": "Une première solution est de…"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un planteur face à la chute des cours",
+          "statement": "Document : texte écrit pour Lnclass. À la fin des années 1980, un planteur de cacao du sud de la Côte d'Ivoire récolte à peu près la même quantité de cacao qu'avant. Pourtant, ses revenus baissent : après la chute des cours mondiaux, l'État, qui fixe le prix payé aux planteurs, a fortement baissé ce prix garanti. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "D'après le document, pourquoi les revenus du planteur baissent-ils alors que sa récolte reste la même ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : le document décrit un planteur qui récolte autant mais gagne moins. Étape 2 — Dégager l'idée : l'énoncé précise que le prix garanti payé aux planteurs a fortement baissé après la chute des cours mondiaux. Étape 3 — Expliquer : revenu = quantité vendue multipliée par le prix ; si le prix baisse et la quantité reste stable, le revenu baisse. Dire qu'il a produit moins contredit le texte.",
+              "answers": [
+                {
+                  "content": "Le prix payé aux planteurs a été fortement baissé après la chute des cours mondiaux",
+                  "correct": true
+                },
+                {
+                  "content": "Il a produit moins de cacao",
+                  "correct": false
+                },
+                {
+                  "content": "L'État a interdit d'exporter le cacao",
+                  "correct": false
+                },
+                {
+                  "content": "Il a arrêté de vendre son cacao",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La Côte d'Ivoire fixe seule le prix mondial du cacao.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Rappel : le prix du cacao est le cours mondial, qui se décide sur les marchés internationaux. Étape 2 — Conclusion : la Côte d'Ivoire est l'un des plus grands producteurs, mais elle ne fixe pas seule ce prix. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le cacao et le café sont des produits agricoles d'___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Rappel : ces produits sont vendus à l'étranger et fournissent une grande part des recettes d'exportation. On les appelle des produits d'exportation. Le mot attendu est « exportation » (ou « export »).",
+              "answers": [
+                {
+                  "content": "exportation",
+                  "correct": true
+                },
+                {
+                  "content": "export",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux conséquences de la chute des cours du cacao et du café ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Rappel : les cours mondiaux baissent. Étape 2 — Effets : la même quantité rapporte moins, donc l'État reçoit moins de recettes et les planteurs gagnent moins. Les recettes de l'État n'augmentent pas, et le cacao ne disparaît pas : seul son prix baisse.",
+              "answers": [
+                {
+                  "content": "Les recettes de l'État baissent",
+                  "correct": true
+                },
+                {
+                  "content": "Les revenus des planteurs baissent",
+                  "correct": true
+                },
+                {
+                  "content": "Les recettes de l'État augmentent",
+                  "correct": false
+                },
+                {
+                  "content": "Le cacao cesse d'exister",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi dépendre de quelques produits rend l'économie d'un pays fragile.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le prix du produit est fixé par les cours mondiaux, pas par le pays",
+                "Une baisse des cours réduit fortement les recettes",
+                "Une conséquence pour l'État ou les planteurs est citée"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : un pays dépendant de quelques produits d'exportation, comme le cacao et le café, tire de là une grande part de ses recettes. Étape 2 — Repérer : leur prix est le cours mondial, qu'il ne contrôle pas. Étape 3 — Expliquer : si les cours chutent, les recettes baissent beaucoup. Étape 4 — Dégager : l'État a moins d'argent et les planteurs gagnent moins. Points : cours mondiaux (1), baisse des recettes (1), conséquence (1).",
+              "answers": [],
+              "starter": "Quand un pays dépend d'un seul produit…"
+            }
+          ]
+        },
+        {
+          "title": "Des cours qui chutent à l'ajustement structurel",
+          "statement": "Document : texte écrit pour Lnclass. Dans les années 1980, la Côte d'Ivoire doit rembourser de lourdes dettes alors que ses recettes baissent. Le FMI et la Banque mondiale lui proposent un programme d'ajustement structurel. Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les étapes du schéma.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Présenter : le schéma suit une chaîne de causes et de conséquences. Étape 2 — Expliquer : la chute des cours fait baisser les recettes, l'État s'endette, il accepte l'ajustement structurel, et il a moins de moyens pour la santé et l'éducation. Chaque flèche est une conséquence de l'étape précédente.",
+              "answers": [
+                {
+                  "content": "Chute des cours du cacao et du café"
+                },
+                {
+                  "content": "Baisse des recettes d'exportation"
+                },
+                {
+                  "content": "Endettement de l'État"
+                },
+                {
+                  "content": "Ajustement structurel"
+                },
+                {
+                  "content": "Moins de moyens pour santé et éducation"
+                }
+              ]
+            },
+            {
+              "content": "Dans quelle décennie la Côte d'Ivoire a-t-elle commencé à appliquer des programmes d'ajustement structurel ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Situer : la chute des cours a eu lieu à la fin des années 1970 et dans les années 1980, ce qui a conduit à l'endettement. Étape 2 — Conclure : les premiers PAS datent de 1981, donc des années 1980. Les années 1950 et 1920 précèdent l'indépendance, et les années 2000 sont trop tardives.",
+              "answers": [
+                {
+                  "content": "Les années 1980",
+                  "correct": true
+                },
+                {
+                  "content": "Les années 1950",
+                  "correct": false
+                },
+                {
+                  "content": "Les années 2000",
+                  "correct": false
+                },
+                {
+                  "content": "Les années 1920",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux mesures demandées dans un programme d'ajustement structurel ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Rappel : l'aide est donnée en échange de conditions. Étape 2 — Identifier : l'État doit réduire ses dépenses et privatiser des entreprises publiques. Augmenter les dépenses ou recevoir de l'argent sans condition est le contraire de l'ajustement.",
+              "answers": [
+                {
+                  "content": "Réduire les dépenses publiques",
+                  "correct": true
+                },
+                {
+                  "content": "Privatiser des entreprises de l'État",
+                  "correct": true
+                },
+                {
+                  "content": "Augmenter fortement les dépenses publiques",
+                  "correct": false
+                },
+                {
+                  "content": "Donner de l'argent sans condition",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une dette doit être remboursée avec des intérêts.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Rappel : emprunter, c'est recevoir de l'argent qu'il faut rendre. Étape 2 — Précision : on rend la somme empruntée plus des intérêts. L'affirmation est vraie, et c'est ce qui rend l'endettement lourd pour l'État.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi les mesures d'ajustement structurel ont pu rendre la vie plus difficile pour une partie de la population.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les dépenses publiques sont réduites",
+                "Il y a moins de moyens pour la santé et l'éducation",
+                "Le lien avec la vie quotidienne de la population est expliqué"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Rappeler : l'État s'est endetté après la chute des cours. Étape 2 — Identifier : en échange de l'aide, il a dû réduire ses dépenses et privatiser des entreprises publiques. Étape 3 — Dégager : avec moins d'argent, il consacre moins de moyens aux écoles et à la santé, donc les familles trouvent moins de soins et d'écoles bien équipées. Points : réduction des dépenses (1), santé et éducation (1), lien avec la population (1).",
+              "answers": [],
+              "starter": "Avec moins d'argent, l'État…"
+            }
+          ]
+        },
+        {
+          "title": "Une population qui augmente et se concentre en ville",
+          "statement": "Documents : (1) courbe de la population de la Côte d'Ivoire aux recensements, en millions d'habitants : 6,7 en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014, 29,4 en 2021 ; (2) texte écrit pour Lnclass : un jeune de 22 ans quitte son village pour Abidjan à la recherche d'un emploi et ne trouve que de petits travaux mal payés. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": "population-ci",
+          "questions": [
+            {
+              "content": "D'après la courbe, de combien de millions d'habitants la population a-t-elle augmenté entre le recensement de 1975 (6,7 millions) et celui de 1988 (10,8 millions) ?",
+              "question_type": "numeric",
+              "unit": "millions",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : 6,7 millions en 1975 et 10,8 millions en 1988. Étape 2 — Calculer l'écart : 10,8 − 6,7 = 4,1. La population a augmenté de 4,1 millions d'habitants entre les deux recensements.",
+              "answers": [
+                {
+                  "content": "4,1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Entre quels recensements la population a-t-elle le plus augmenté, en millions d'habitants ? (1975 : 6,7 ; 1988 : 10,8 ; 1998 : 15,4 ; 2014 : 22,7 ; 2021 : 29,4)",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : on calcule chaque écart. 1975-1988 : 10,8 − 6,7 = 4,1. 1988-1998 : 15,4 − 10,8 = 4,6. 1998-2014 : 22,7 − 15,4 = 7,3. 2014-2021 : 29,4 − 22,7 = 6,7. Étape 2 — Comparer : le plus grand écart est 7,3 millions, entre 1998 et 2014.",
+              "answers": [
+                {
+                  "content": "Entre 1998 et 2014",
+                  "correct": true
+                },
+                {
+                  "content": "Entre 1975 et 1988",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 1988 et 1998",
+                  "correct": false
+                },
+                {
+                  "content": "Entre 2014 et 2021",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le départ des habitants des campagnes vers les villes s'appelle l'exode ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Définir : quitter la campagne pour la ville est un mouvement des ruraux. Le terme est « exode rural », qui alimente l'urbanisation d'Abidjan. Le mot attendu est « rural ».",
+              "answers": [
+                {
+                  "content": "rural",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi les écoles et les centres de santé deviennent-ils insuffisants dans les grandes villes ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : la population passe de 6,7 à 29,4 millions. Étape 2 — Expliquer : les besoins augmentent plus vite que les moyens, car construire des écoles et des centres de santé prend du temps et coûte cher. Les autres propositions sont des erreurs : les villes comptent beaucoup d'enfants et l'État n'a pas supprimé les écoles. Dire que les habitants refusent d'aller à l'école est faux : la demande d'écoles est au contraire très forte, c'est l'offre (nombre d'écoles et de places) qui manque.",
+              "answers": [
+                {
+                  "content": "Le nombre d'habitants augmente plus vite que le nombre d'écoles et de centres de santé",
+                  "correct": true
+                },
+                {
+                  "content": "Il n'y a plus d'enfants dans les villes",
+                  "correct": false
+                },
+                {
+                  "content": "L'État a supprimé toutes les écoles",
+                  "correct": false
+                },
+                {
+                  "content": "Les habitants refusent d'aller à l'école",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les recensements montrent que la population a diminué entre 2014 et 2021.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : 22,7 millions en 2014 et 29,4 millions en 2021. Étape 2 — Comparer : 29,4 est supérieur à 22,7, donc la population a augmenté de 6,7 millions. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe d'au moins quatre lignes qui présente trois problèmes humains liés à la croissance de la population et à l'urbanisation en Côte d'Ivoire.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Le paragraphe lie la croissance de la population à l'urbanisation",
+                "Trois problèmes humains exacts sont cités (chômage, pauvreté, services insuffisants)",
+                "Chaque problème est expliqué par l'écart entre besoins et moyens",
+                "Le paragraphe est structuré et les phrases sont correctes"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lire : la population ivoirienne est passée de 6,7 millions en 1975 à 29,4 millions en 2021. Étape 2 — Décrire : beaucoup d'habitants quittent les campagnes pour les villes, surtout Abidjan. Étape 3 — Expliquer : les emplois, les écoles et les centres de santé n'augmentent pas aussi vite que la population. Étape 4 — Conclure : cela cause le chômage des jeunes, la pauvreté et l'insuffisance des services de santé et d'éducation. Points : lien population et ville (1), trois problèmes (1,5), explication (1), structure (0,5).",
+              "answers": [],
+              "starter": "Depuis 1975, la population…"
+            }
+          ]
+        },
+        {
+          "title": "Bilan : problèmes et solutions du développement économique",
+          "statement": "Document : texte écrit pour Lnclass. Dans le sud du pays, des planteurs coupent la forêt pour agrandir leurs plantations de cacao. Une grande partie du cacao est exportée en fèves, sans être transformée. Quand les cours baissent, les revenus des familles et les recettes de l'État diminuent. Beaucoup de jeunes cherchent du travail. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "D'après le document, quelle est la cause de la déforestation dans le sud ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : le document décrit la disparition de la forêt, donc la déforestation. Étape 2 — Chercher la cause : le texte dit que les planteurs coupent la forêt pour agrandir leurs plantations. L'érosion est une conséquence de la déforestation, pas sa cause.",
+              "answers": [
+                {
+                  "content": "L'extension des plantations de cacao",
+                  "correct": true
+                },
+                {
+                  "content": "L'érosion des sols",
+                  "correct": false
+                },
+                {
+                  "content": "La chute des cours",
+                  "correct": false
+                },
+                {
+                  "content": "Le chômage des jeunes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux solutions possibles pour réduire la dépendance de la Côte d'Ivoire au cacao exporté brut ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Rappeler : le problème est la dépendance à un produit exporté brut. Étape 2 — Choisir : diversifier et transformer sur place s'attaquent à la cause. Couper plus de forêt pour planter plus aggrave la déforestation et la dépendance, et emprunter augmente la dette.",
+              "answers": [
+                {
+                  "content": "Diversifier les productions",
+                  "correct": true
+                },
+                {
+                  "content": "Transformer le cacao sur place",
+                  "correct": true
+                },
+                {
+                  "content": "Couper davantage de forêt pour planter plus",
+                  "correct": false
+                },
+                {
+                  "content": "Emprunter pour ne rien changer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une usine de broyage du cacao crée de la valeur ajoutée et des ___ dans le pays.",
+              "question_type": "select",
+              "explanation": "Étape 2 — Choisir : transformer sur place est une solution. Étape 3 — Expliquer : une usine emploie des ouvriers et crée de la richesse, la valeur ajoutée. Le mot qui convient est « emplois ».",
+              "answers": [
+                {
+                  "content": "emplois",
+                  "correct": true
+                },
+                {
+                  "content": "dettes",
+                  "correct": false
+                },
+                {
+                  "content": "érosions",
+                  "correct": false
+                },
+                {
+                  "content": "importations de fèves brutes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La chute des cours est un problème environnemental.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : la chute des cours est un problème économique, lié aux prix sur les marchés mondiaux. Les problèmes environnementaux sont la déforestation et l'érosion des sols. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique le lien entre l'agriculture d'exportation et la déforestation en Côte d'Ivoire, puis dis pourquoi l'érosion des sols en est une conséquence.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les plantations d'exportation s'étendent en coupant la forêt",
+                "L'érosion est présentée comme une conséquence, la pluie emportant le sol nu",
+                "La perte de fertilité des sols est citée"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : la déforestation est la disparition de la forêt. Étape 2 — Chercher : pour augmenter la production de cacao et de café, les planteurs agrandissent leurs plantations en coupant la forêt. Étape 3 — Expliquer : sans arbres, le sol est nu et la pluie l'emporte, c'est l'érosion. Étape 4 — Mesurer : les sols perdent leur fertilité. Points : lien avec les plantations (1), érosion conséquence (1), perte de fertilité (1).",
+              "answers": [],
+              "starter": "Pour agrandir leurs plantations, les planteurs…"
+            },
+            {
+              "content": "Rédige un paragraphe de synthèse : présente deux problèmes du développement économique de la Côte d'Ivoire, puis propose une solution pour chacun.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Deux problèmes exacts sont présentés (dépendance, dette, problèmes humains ou environnementaux)",
+                "Une solution adaptée est proposée pour chaque problème",
+                "Le lien entre chaque problème et sa solution est expliqué",
+                "Le paragraphe est organisé et la langue correcte"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Rappeler : la Côte d'Ivoire dépend du cacao et du café dont les cours peuvent chuter, et elle subit la déforestation. Étape 2 — Choisir : pour la dépendance, diversifier l'économie et transformer le cacao sur place ; pour la déforestation, reboiser et protéger les forêts. Étape 3 — Expliquer : d'autres produits et des usines compensent la baisse d'un cours et créent des emplois ; les arbres protègent le sol. Étape 4 — Dire : l'économie devient plus stable. La diversification répond à la dépendance au cacao ; la transformation réduit la dépendance aux fèves brutes et apporte de la valeur ajoutée. Points : deux problèmes (1,5), deux solutions (1,5), liens et organisation (1).",
+              "answers": [],
+              "starter": "Parmi les problèmes du développement, on trouve…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
