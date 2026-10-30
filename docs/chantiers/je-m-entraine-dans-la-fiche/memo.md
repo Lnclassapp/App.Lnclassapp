@@ -33,7 +33,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 
 - Aucune trace de l'entraînement de la fiche : ni copie, ni note, ni maîtrise, ni pause, ni historique (grill 1).
 - L'« Entraînement illimité » des maquettes (valeurs tirées au hasard, « Nouvel exercice », score de séance) : supprimé, sans chantier de suivi (grill 12).
-- Les exercices d'entraînement des 54 leçons de 3e autres que les six leçons pilotes, une par matière (grills 3 et 14 bis).
+- ~~Les exercices d'entraînement des 54 autres leçons de 3e~~ : **réintégrés** par le porteur le 2026-10-30, après le lancement des lots. Les sessions des vagues de contenu les rédigent, matière par matière, sur des branches tirées du Lot D.
 - Le visiteur non connecté : il ne voit jamais « Je m'entraîne » (grill 4).
 - La coupe « Voir plus » au-delà de la place de l'exercice : le #393 reste un /bugfix à part (grill 5).
 - Une question qui mélange plusieurs types (grill 9).
