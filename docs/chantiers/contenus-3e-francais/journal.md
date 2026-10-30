@@ -18,7 +18,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- Le schéma v3 refuse avant l'adaptateur : points hors 0,5-20 ou 1,25, tolérance négative, unité > 10, critères > 8 rendent `schema` (pas `question_structure`) ; une clé inconnue est notée à la clé (`questions[0].criterias`). Une `written`/`notebook` sans explication rend `blank` ET `question_structure` à `explanation`. `script/` n'entre pas dans la couverture SimpleCov du projet : mesurée à part (module `Coverage`, 1 processus).
 
 ## Dette laissée derrière
 
