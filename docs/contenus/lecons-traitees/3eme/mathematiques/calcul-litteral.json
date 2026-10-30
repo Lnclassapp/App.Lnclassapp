@@ -190,6 +190,78 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu développes des expressions en suivant les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Développe et réduis $(3x+2)(x-5)$. Résultat : ___$x^2$ + ___$x$ + ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris les quatre produits avant de réduire, sans oublier les signes.",
+                "explanation": "Étape 1 — Repérer : les facteurs sont $(3x+2)$ et $(x-5)$, de termes $3x$, $+2$ et $x$, $-5$. Étape 2 — Multiplier : $3x \\times x + 3x \\times (-5) + 2 \\times x + 2 \\times (-5)$. Étape 3 — Calculer : $3x^2 - 15x + 2x - 10$. Étape 4 — Réduire : $-15x + 2x = -13x$, donc $3x^2 - 13x - 10$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-13",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "-10",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le développement réduit de $(x-2)(x+6)$ ?",
+                "question_type": "select",
+                "hint": "Fais les quatre produits ; le terme en $x$ regroupe $6x$ et $-2x$.",
+                "explanation": "Étape 1 — Repérer : termes $x$, $-2$ et $x$, $+6$. Étape 2 — Multiplier : $x \\times x + x \\times 6 + (-2) \\times x + (-2) \\times 6$. Étape 3 — Calculer : $x^2 + 6x - 2x - 12$. Étape 4 — Réduire : $6x - 2x = 4x$, donc $x^2 + 4x - 12$. Écrire $x^2 - 12$ oublie deux produits.",
+                "answers": [
+                  {
+                    "content": "$x^2 + 4x - 12$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x^2 - 12$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x^2 - 4x - 12$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x^2 + 8x - 12$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Développe $-4(2x-5)$. Résultat : ___$x$ + ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Moins par moins donne plus.",
+                "explanation": "Étape 1 — Repérer : le facteur $-4$ multiplie les termes $2x$ et $-5$. Étape 2 — Multiplier : $-4 \\times 2x + (-4) \\times (-5)$. Étape 3 — Calculer avec la règle des signes : $-8x + 20$. Étape 4 — Réduire : il n'y a pas de termes semblables, le résultat est $-8x + 20$.",
+                "answers": [
+                  {
+                    "content": "-8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "20",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -395,6 +467,91 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu développes avec les identités remarquables de la fiche.",
+            "questions": [
+              {
+                "content": "Développe $(3x+4)^2$. Résultat : ___$x^2$ + ___$x$ + ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "N'oublie pas le double produit $2ab$.",
+                "explanation": "Étape 1 — Reconnaître : carré d'une somme $(a+b)^2$. Étape 2 — Identifier : $a = 3x$ et $b = 4$. Étape 3 — Appliquer : $(3x)^2 + 2 \\times 3x \\times 4 + 4^2$. Étape 4 — Calculer : $9x^2 + 24x + 16$.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "24",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "16",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le développement de $(x-8)^2$ ?",
+                "question_type": "select",
+                "hint": "Le double produit vaut $2 \\times x \\times 8$ et son signe est celui de la parenthèse.",
+                "explanation": "Étape 1 — Reconnaître : carré d'une différence $(a-b)^2$. Étape 2 — Identifier : $a = x$ et $b = 8$. Étape 3 — Appliquer : $x^2 - 2 \\times x \\times 8 + 8^2$. Étape 4 — Calculer : $x^2 - 16x + 64$. Les autres propositions oublient le double produit, le prennent mal calculé ou changent son signe.",
+                "answers": [
+                  {
+                    "content": "$x^2 - 16x + 64$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x^2 - 64$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x^2 - 8x + 64$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x^2 + 16x + 64$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Développe $(5x+2)(5x-2)$. Résultat : ___$x^2$ + ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Il n'y a pas de terme en $x$ dans ce développement.",
+                "explanation": "Étape 1 — Reconnaître : produit de la somme par la différence $(a+b)(a-b)$. Étape 2 — Identifier : $a = 5x$ et $b = 2$. Étape 3 — Appliquer : $a^2 - b^2 = (5x)^2 - 2^2$. Étape 4 — Calculer : $25x^2 - 4$.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $49^2$ sans calculatrice, en écrivant $49 = 50 - 1$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris les trois termes : $a^2 - 2ab + b^2$.",
+                "explanation": "Étape 1 — Reconnaître : $(50-1)^2$ est un carré d'une différence. Étape 2 — Identifier : $a = 50$ et $b = 1$. Étape 3 — Appliquer : $50^2 - 2 \\times 50 \\times 1 + 1^2$. Étape 4 — Calculer : $2\\,500 - 100 + 1 = 2\\,401$.",
+                "answers": [
+                  {
+                    "content": "2401",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -573,6 +730,102 @@
                   {
                     "content": "$2(6x+9)$",
                     "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu factorises des expressions en cherchant le facteur commun.",
+            "questions": [
+              {
+                "content": "Factorise $8x^2 + 12x$. Résultat : ___$x$(___$x$ + ___)",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Cherche le plus grand nombre qui divise $8$ et $12$.",
+                "explanation": "Étape 1 — Repérer : $8$ et $12$ sont divisibles par $4$, et $x^2$ et $x$ par $x$ : le facteur commun est $4x$. Étape 2 — Écrire : $8x^2 = 4x \\times 2x$ et $12x = 4x \\times 3$. Étape 3 — Mettre en évidence : $4x(2x + 3)$. Étape 4 — Vérifier : $4x(2x+3) = 8x^2 + 12x$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la factorisation de $10x - 15$ ?",
+                "question_type": "select",
+                "hint": "Vérifie chaque proposition en la développant.",
+                "explanation": "Étape 1 — Repérer : le plus grand nombre qui divise $10$ et $15$ est $5$. Étape 2 — Écrire : $10x = 5 \\times 2x$ et $15 = 5 \\times 3$. Étape 3 — Mettre en évidence : $5(2x - 3)$. Étape 4 — Vérifier : $5 \\times 2x - 5 \\times 3 = 10x - 15$. Les autres propositions ne redonnent pas $10x - 15$ en développant.",
+                "answers": [
+                  {
+                    "content": "$5(2x - 3)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$5(2x - 15)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5(2x + 3)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$10(x - 15)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Factorise $9x + 9$. Résultat : ___(___$x$ + ___)",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Que reste-t-il quand tu retires le facteur $9$ du terme $9$ ?",
+                "explanation": "Étape 1 — Repérer : $9$ est présent dans les deux termes. Étape 2 — Écrire : $9x = 9 \\times x$ et $9 = 9 \\times 1$. Étape 3 — Mettre en évidence : $9(x + 1)$. Étape 4 — Vérifier : $9(x+1) = 9x + 9$. Le $1$ ne doit pas être oublié.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Factorise $(x+3)(2x+1) + (x+3)(x+4)$. Résultat : $(x+3)($___$x$ + ___$)$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Mets $(x+3)$ en évidence, puis additionne les deux autres facteurs.",
+                "explanation": "Étape 1 — Repérer : le facteur commun est la parenthèse $(x+3)$. Étape 2 — Écrire : les deux termes sont déjà des produits avec $(x+3)$. Étape 3 — Mettre en évidence : $(x+3)[(2x+1) + (x+4)]$. Étape 4 — Réduire : $2x + 1 + x + 4 = 3x + 5$, donc $(x+3)(3x+5)$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
                   }
                 ]
               }
@@ -781,6 +1034,86 @@
                   },
                   {
                     "content": "$9\\,800$",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu factorises avec les identités remarquables de la fiche.",
+            "questions": [
+              {
+                "content": "Quelle est la factorisation de $16x^2 - 25$ ?",
+                "question_type": "select",
+                "hint": "Écris chaque terme sous la forme $(\\ldots)^2$.",
+                "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins, $a^2 - b^2$. Étape 2 — Identifier : $16x^2 = (4x)^2$ et $25 = 5^2$, donc $a = 4x$ et $b = 5$. Étape 3 — Il n'y a que deux termes, pas de terme du milieu. Étape 4 — Écrire : $(4x-5)(4x+5)$ ; en développant on retrouve $16x^2 - 25$.",
+                "answers": [
+                  {
+                    "content": "$(4x - 5)(4x + 5)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(4x - 5)^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(16x - 25)(16x + 25)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(4x + 5)^2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Factorise $9x^2 - 12x + 4$. Résultat : $($___$x$ - ___$)^2$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Vérifie que le terme du milieu vaut $2ab$.",
+                "explanation": "Étape 1 — Reconnaître : trois termes dont $9x^2$ et $4$ sont des carrés, forme $a^2 - 2ab + b^2$. Étape 2 — Identifier : $9x^2 = (3x)^2$ et $4 = 2^2$, donc $a = 3x$ et $b = 2$. Étape 3 — Vérifier : $2ab = 2 \\times 3x \\times 2 = 12x$, avec le signe $-$. Étape 4 — Écrire : $(3x-2)^2$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Factorise $x^2 - 81$. Résultat : $(x - $___$)(x + $___$)$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Quel nombre multiplié par lui-même donne $81$ ?",
+                "explanation": "Étape 1 — Reconnaître : deux carrés séparés par un signe moins. Étape 2 — Identifier : $x^2 = x^2$ et $81 = 9^2$, donc $a = x$ et $b = 9$. Étape 3 — Il n'y a pas de terme du milieu : c'est $(a+b)(a-b)$. Étape 4 — Écrire : $(x-9)(x+9)$.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $51^2 - 49^2$ sans calculatrice, en le voyant comme $a^2 - b^2$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris $(a-b)(a+b)$ avant de calculer.",
+                "explanation": "Étape 1 — Reconnaître : une différence de deux carrés, $a^2 - b^2$. Étape 2 — Identifier : $a = 51$ et $b = 49$. Étape 3 — Écrire : $(51-49)(51+49)$. Étape 4 — Calculer : $2 \\times 100 = 200$.",
+                "answers": [
+                  {
+                    "content": "200",
                     "correct": true
                   }
                 ]

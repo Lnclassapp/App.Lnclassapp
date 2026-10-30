@@ -270,6 +270,82 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu travailles avec des racines carrées de nombres positifs et des carrés parfaits.",
+            "questions": [
+              {
+                "content": "Calcule les deux racines carrées. $\\sqrt{196}$ = ___   $\\sqrt{225}$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Cherche le nombre positif dont le carré est 196, puis celui dont le carré est 225. Essaie 14 et 15.",
+                "explanation": "Étape 1 — Vérifier : 196 et 225 sont positifs, les racines existent. Étape 2 — Chercher : $14^2 = 196$ et $15^2 = 225$. Étape 3 — Conclure : $\\sqrt{196} = 14$ et $\\sqrt{225} = 15$.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "15",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Complète : $\\sqrt{49}$ vaut ___ et $\\sqrt{-49}$ ___.",
+                "question_type": "select",
+                "hint": "Une racine carrée est toujours positive, et un nombre négatif n'a pas de racine carrée.",
+                "explanation": "Étape 1 — Vérifier : 49 est positif, donc $\\sqrt{49}$ existe ; $-49$ est négatif, donc $\\sqrt{-49}$ n'existe pas. Étape 2 — Chercher : $7^2 = 49$. Étape 3 — Conclure : $\\sqrt{49} = 7$, jamais $-7$ (une racine carrée est positive), et aucun carré n'est négatif. La moitié de 49 ($24{,}5$) est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "$7$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$-7$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$24{,}5$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "n'existe pas",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "vaut $-7$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "vaut $7$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un champ carré a une aire de $400\\ \\text{m}^2$. Calcule la longueur de son côté.",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "hint": "L'aire d'un carré de côté $c$ est $c^2$ : cherche le nombre dont le carré est 400.",
+                "explanation": "Étape 1 — Vérifier : l'aire 400 est positive, la racine existe. Étape 2 — Chercher : le côté $c$ vérifie $c^2 = 400$, et $20^2 = 400$. Étape 3 — Conclure : le côté est $\\sqrt{400} = 20$ m.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -392,6 +468,103 @@
                 "content": "Vrai ou faux : $\\sqrt{36 + 64} = \\sqrt{36} + \\sqrt{64} = 14$.",
                 "question_type": "true_false",
                 "explanation": "Étape 3 — Calculer : $\\sqrt{36 + 64} = \\sqrt{100} = 10$, alors que $\\sqrt{36} + \\sqrt{64} = 6 + 8 = 14$. L'étape 2 (Séparer) n'est permise que pour un **produit**, pas pour une somme. L'affirmation est fausse : le résultat correct est 10.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu simplifies des racines carrées en les écrivant sous la forme $a\\sqrt{b}$, avec $b$ le plus petit possible.",
+            "questions": [
+              {
+                "content": "Simplifie $\\sqrt{72}$. $a$ = ___   $b$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Cherche le plus grand carré parfait qui divise 72 : 4, 9, 36 ?",
+                "explanation": "Étape 1 — Décomposer : $72 = 36 \\times 2$, et 36 est le plus grand carré parfait qui divise 72. Étape 2 — Séparer : $\\sqrt{72} = \\sqrt{36} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{36} = 6$, donc $\\sqrt{72} = 6\\sqrt{2}$, soit $a = 6$ et $b = 2$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Simplifie $\\sqrt{200}$ avec $b$ le plus petit possible. $a$ = ___   $b$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Prends le plus grand carré parfait qui divise 200.",
+                "explanation": "Étape 1 — Décomposer : $200 = 100 \\times 2$, et 100 est un carré parfait. Étape 2 — Séparer : $\\sqrt{200} = \\sqrt{100} \\times \\sqrt{2}$. Étape 3 — Calculer : $\\sqrt{100} = 10$, donc $\\sqrt{200} = 10\\sqrt{2}$, soit $a = 10$ et $b = 2$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour simplifier $\\sqrt{80}$, on écrit $80 = $ ___ $\\times 5$, donc $\\sqrt{80} = $ ___.",
+                "question_type": "select",
+                "hint": "Cherche quel carré parfait multiplié par 5 donne 80.",
+                "explanation": "Étape 1 — Décomposer : $80 = 16 \\times 5$, et 16 est un carré parfait ($8 \\times 5 = 40$ et $4 \\times 5 = 20$ ne font pas 80). Étape 2 — Séparer : $\\sqrt{80} = \\sqrt{16} \\times \\sqrt{5}$. Étape 3 — Calculer : $\\sqrt{16} = 4$, donc $\\sqrt{80} = 4\\sqrt{5}$. La réponse $16\\sqrt{5}$ oublie de calculer la racine de 16.",
+                "answers": [
+                  {
+                    "content": "$16$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$8$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$4$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$4\\sqrt{5}$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$16\\sqrt{5}$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$4 + \\sqrt{5}$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : $\\sqrt{48} = 2\\sqrt{12}$ est la forme simplifiée de $\\sqrt{48}$.",
+                "question_type": "true_false",
+                "hint": "Regarde si le nombre sous la racine, 12, contient encore un carré parfait.",
+                "explanation": "Étape 1 — Décomposer : $48 = 4 \\times 12$ donne $\\sqrt{48} = 2\\sqrt{12}$, mais il reste un carré parfait (4) dans 12. Il fallait choisir le plus grand carré parfait : $48 = 16 \\times 3$. Étape 2 — Séparer : $\\sqrt{48} = \\sqrt{16} \\times \\sqrt{3}$. Étape 3 — Calculer : $\\sqrt{48} = 4\\sqrt{3}$. L'affirmation est fausse.",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -538,6 +711,67 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu additionnes et soustrais des racines carrées après les avoir simplifiées.",
+            "questions": [
+              {
+                "content": "Simplifie chaque racine. $\\sqrt{45}$ = ___$\\sqrt{5}$   $\\sqrt{20}$ = ___$\\sqrt{5}$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Cherche un carré parfait qui divise 45, puis un autre qui divise 20.",
+                "explanation": "Étape 1 — Simplifier : $45 = 9 \\times 5$ donc $\\sqrt{45} = 3\\sqrt{5}$, et $20 = 4 \\times 5$ donc $\\sqrt{20} = 2\\sqrt{5}$. Les deux racines sont maintenant semblables ($\\sqrt{5}$).",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Écris $\\sqrt{45} + \\sqrt{20} - \\sqrt{5}$ sous la forme $a\\sqrt{5}$. $a$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "N'oublie pas que $\\sqrt{5}$ seul vaut $1\\sqrt{5}$.",
+                "explanation": "Étape 1 — Simplifier : $\\sqrt{45} = 3\\sqrt{5}$, $\\sqrt{20} = 2\\sqrt{5}$ et $\\sqrt{5}$ est déjà simple. Étape 2 — Regrouper : $3\\sqrt{5} + 2\\sqrt{5} - 1\\sqrt{5} = (3 + 2 - 1)\\sqrt{5}$. Étape 3 — Calculer : $3 + 2 - 1 = 4$, donc le résultat est $4\\sqrt{5}$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le résultat de $\\sqrt{50} + \\sqrt{2}$ ?",
+                "question_type": "select",
+                "hint": "Simplifie d'abord $\\sqrt{50}$, puis regroupe.",
+                "explanation": "Étape 1 — Simplifier : $\\sqrt{50} = \\sqrt{25} \\times \\sqrt{2} = 5\\sqrt{2}$. Étape 2 — Regrouper : $5\\sqrt{2} + \\sqrt{2} = (5 + 1)\\sqrt{2}$. Étape 3 — Calculer : $5 + 1 = 6$, donc $6\\sqrt{2}$. $\\sqrt{52}$ additionne sous la racine, et $5\\sqrt{2}$ oublie le terme $\\sqrt{2}$.",
+                "answers": [
+                  {
+                    "content": "$6\\sqrt{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\sqrt{52}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5\\sqrt{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sqrt{100}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -668,6 +902,69 @@
                   {
                     "content": "Faux",
                     "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu multiplies et divises des racines carrées, avec ou sans coefficients.",
+            "questions": [
+              {
+                "content": "Calcule. $\\sqrt{2} \\times \\sqrt{8}$ = ___   $\\dfrac{\\sqrt{45}}{\\sqrt{5}}$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Multiplie (ou divise) les nombres sous les racines, puis calcule la racine obtenue.",
+                "explanation": "Étape 1 — Écrire : il n'y a pas de coefficients. Étape 2 — Appliquer : $\\sqrt{2} \\times \\sqrt{8} = \\sqrt{16}$ et $\\dfrac{\\sqrt{45}}{\\sqrt{5}} = \\sqrt{\\dfrac{45}{5}} = \\sqrt{9}$. Étape 3 — Calculer : $\\sqrt{16} = 4$ et $\\sqrt{9} = 3$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $2\\sqrt{3} \\times 5\\sqrt{6}$ et écris le résultat sous la forme $a\\sqrt{b}$ avec $b$ le plus petit possible. $a$ = ___   $b$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Multiplie les coefficients, multiplie les racines, puis simplifie la racine obtenue.",
+                "explanation": "Étape 1 — Écrire : $2\\sqrt{3} \\times 5\\sqrt{6} = (2 \\times 5) \\times (\\sqrt{3} \\times \\sqrt{6})$. Étape 2 — Appliquer : $\\sqrt{3} \\times \\sqrt{6} = \\sqrt{18}$, donc le calcul vaut $10\\sqrt{18}$. Étape 3 — Calculer : $\\sqrt{18} = 3\\sqrt{2}$, donc le résultat est $10 \\times 3\\sqrt{2} = 30\\sqrt{2}$.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour écrire $4\\sqrt{3}$ sous la forme d'une seule racine $\\sqrt{n}$, il faut prendre $n = $ ___.",
+                "question_type": "select",
+                "hint": "Pour faire entrer 4 dans la racine, écris $4 = \\sqrt{16}$.",
+                "explanation": "Étape 1 — Écrire : $4 = \\sqrt{16}$, donc $4\\sqrt{3} = \\sqrt{16} \\times \\sqrt{3}$. Étape 2 — Appliquer la propriété du produit : $\\sqrt{16} \\times \\sqrt{3} = \\sqrt{16 \\times 3}$. Étape 3 — Calculer : $16 \\times 3 = 48$, donc $4\\sqrt{3} = \\sqrt{48}$. Prendre 12 revient à oublier de mettre 4 au carré.",
+                "answers": [
+                  {
+                    "content": "$48$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$12$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7$",
+                    "correct": false
                   }
                 ]
               }
@@ -806,6 +1103,87 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu rends rationnel le dénominateur de quotients qui contiennent une racine carrée.",
+            "questions": [
+              {
+                "content": "Rends rationnel le dénominateur. $\\dfrac{8}{\\sqrt{2}}$ = ___$\\sqrt{2}$   $\\dfrac{9}{\\sqrt{3}}$ = ___$\\sqrt{3}$",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Multiplie le numérateur et le dénominateur par la racine du dénominateur, puis simplifie.",
+                "explanation": "Étape 1 — Repérer : les dénominateurs contiennent $\\sqrt{2}$ et $\\sqrt{3}$. Étape 2 — Multiplier haut et bas : $\\dfrac{8\\sqrt{2}}{\\sqrt{2} \\times \\sqrt{2}}$ et $\\dfrac{9\\sqrt{3}}{\\sqrt{3} \\times \\sqrt{3}}$. Étape 3 — Calculer : $\\dfrac{8\\sqrt{2}}{2} = 4\\sqrt{2}$ et $\\dfrac{9\\sqrt{3}}{3} = 3\\sqrt{3}$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour rendre rationnel le dénominateur de $\\dfrac{7}{\\sqrt{3}}$, on multiplie en haut et en bas par ___ et on obtient ___.",
+                "question_type": "select",
+                "hint": "Il faut multiplier par la même racine en haut et en bas.",
+                "explanation": "Étape 1 — Repérer : le dénominateur contient $\\sqrt{3}$. Étape 2 — Multiplier numérateur et dénominateur par $\\sqrt{3}$ : $\\dfrac{7 \\times \\sqrt{3}}{\\sqrt{3} \\times \\sqrt{3}}$. Étape 3 — Calculer : $\\sqrt{3} \\times \\sqrt{3} = 3$, donc le résultat est $\\dfrac{7\\sqrt{3}}{3}$. Le résultat $\\dfrac{7}{3}$ vient d'une multiplication du seul dénominateur.",
+                "answers": [
+                  {
+                    "content": "$\\sqrt{3}$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$3$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$7$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$\\dfrac{7\\sqrt{3}}{3}$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$\\dfrac{7}{3}$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$7\\sqrt{3}$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Rends rationnel le dénominateur de $\\dfrac{12}{3\\sqrt{2}}$ et écris le résultat sous la forme $a\\sqrt{b}$. $a$ = ___   $b$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Au dénominateur, $3\\sqrt{2} \\times \\sqrt{2} = 3 \\times 2$.",
+                "explanation": "Étape 1 — Repérer : la racine au dénominateur est $\\sqrt{2}$ (le 3 est un coefficient). Étape 2 — Multiplier haut et bas par $\\sqrt{2}$ : $\\dfrac{12\\sqrt{2}}{3\\sqrt{2} \\times \\sqrt{2}}$. Étape 3 — Calculer : $3\\sqrt{2} \\times \\sqrt{2} = 3 \\times 2 = 6$, donc $\\dfrac{12\\sqrt{2}}{6} = 2\\sqrt{2}$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -920,6 +1298,84 @@
                 "content": "Vrai ou faux : comme $3 > 2$, on a $3\\sqrt{2} > 2\\sqrt{5}$.",
                 "question_type": "true_false",
                 "explanation": "Étape 1 — Vérifier : les deux nombres sont positifs. Étape 2 — Calculer les carrés : $(3\\sqrt{2})^2 = 18$ et $(2\\sqrt{5})^2 = 20$. Étape 3 — Comparer : $18 < 20$, donc $3\\sqrt{2} < 2\\sqrt{5}$. Le plus grand coefficient ne donne pas le plus grand nombre. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu compares des nombres positifs écrits avec des racines carrées, grâce à leurs carrés.",
+            "questions": [
+              {
+                "content": "Calcule les carrés. $(4\\sqrt{3})^2$ = ___   $7^2$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Pour $(4\\sqrt{3})^2$, élève 4 au carré et $\\sqrt{3}$ au carré, puis multiplie.",
+                "explanation": "Étape 1 — Vérifier : $4\\sqrt{3}$ et 7 sont positifs. Étape 2 — Calculer les carrés : $(4\\sqrt{3})^2 = 4^2 \\times (\\sqrt{3})^2 = 16 \\times 3 = 48$ et $7^2 = 49$.",
+                "answers": [
+                  {
+                    "content": "48",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "49",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Comme $48$ ___ $49$, on conclut que $4\\sqrt{3}$ ___ $7$.",
+                "question_type": "select",
+                "hint": "Deux nombres positifs sont rangés comme leurs carrés.",
+                "explanation": "Étape 3 — Comparer : $48 < 49$, donc les carrés sont rangés dans le même ordre que les nombres positifs : $4\\sqrt{3} < 7$. Le grand coefficient 4 ne suffit pas pour conclure.",
+                "answers": [
+                  {
+                    "content": "$<$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$>$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$=$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$<$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$>$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$=$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : comme $5 > 3$, on a $5\\sqrt{2} > 3\\sqrt{6}$.",
+                "question_type": "true_false",
+                "hint": "Compare les carrés des deux nombres, pas leurs coefficients.",
+                "explanation": "Étape 1 — Vérifier : les deux nombres sont positifs. Étape 2 — Calculer les carrés : $(5\\sqrt{2})^2 = 25 \\times 2 = 50$ et $(3\\sqrt{6})^2 = 9 \\times 6 = 54$. Étape 3 — Comparer : $50 < 54$, donc $5\\sqrt{2} < 3\\sqrt{6}$. L'affirmation est fausse.",
                 "answers": [
                   {
                     "content": "Vrai",
