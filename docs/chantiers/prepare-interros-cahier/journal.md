@@ -1,4 +1,4 @@
-# Journal — « Prépare interros » à l'identique de la maquette cahier
+# Journal — « Prépare interros » et « Prépare devoirs » à l'identique des maquettes cahier
 
 > Rempli **pendant** le chantier, pas reconstitué à la fin. C'est ici que se capitalise ce qui ne rentre ni dans un ADR ni dans un commit.
 

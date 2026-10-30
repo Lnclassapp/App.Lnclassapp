@@ -122,8 +122,8 @@ Alors aucune feuille ne dépasse de l'écran et chaque bouton fait au moins 44 p
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | `Entities::Assessment::Exercise#hint` ; `Entities::Catalog::Subject` ; `Entities::Assessment::SheetGrade` (note sur 10, mention, détail) ; use case `UseCases::Assessment::CheckExerciseOnSheet` (compose `StartExerciseSession` et `SubmitExerciseCopy`) ; port `Ports::Catalog::SubjectRepositoryPort` |
-| Infrastructure | migrations `exercises.hint`, table `subjects`, `exercises.subject_id` ; `Orm::Catalog::Subject` ; `Repositories::Catalog::SubjectRepository` ; `Queries::Catalog::PrepareSheetsQuery` (remplace `PrepareInterrosQuery`) ; import `course_tree` (indice, sujets) |
+| Domaine | `Entities::Assessment::Exercise#hint` ; `Entities::Catalog::Subject` ; `Entities::Assessment::SheetGrade` (note sur 10, mention, détail) ; use case `UseCases::Assessment::CheckExerciseOnSheet` (compose `StartExerciseSession` et `SubmitExerciseCopy`) ; port `Ports::Catalog::ContentTreeWriterPort` étendu (sujets, indice) |
+| Infrastructure | migrations `exercises.hint`, table `subjects`, `exercises.subject_id` ; `Orm::Subject` ; `Queries::Catalog::PrepareSheetsQuery` (remplace `PrepareInterrosQuery`) ; import `course_tree` (indice, sujets) |
 | Delivery | `POST /exercises/:exercise_public_id/sheet_check` → `Assessment::SheetChecksController#create` (Turbo Stream) |
 | UI | `catalog/courses/_prepare_sheets`, `catalog/courses/sheets/_sheet`, `_exercise`, `_result` ; `app/assets/stylesheets/prepare_sheet.css` ; Stimulus `prepare-sheet` (brouillon local, indice, refaire, recommencer) |
 

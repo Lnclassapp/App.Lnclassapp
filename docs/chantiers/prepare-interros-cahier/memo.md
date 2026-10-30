@@ -56,12 +56,12 @@ chantier `correction-comme-en-classe` est clos : la feuille, la correction compl
 > Rempli après la session de questions adverses. Un memo qui sort du grill inchangé signifie que le grill a été mal fait.
 
 Touré demande les maquettes telles quelles (2026-10-30) et ajoute « Prépare devoirs » au chantier. Là où une maquette
-contredit une règle de l'application, la ligne dit ce qui est retenu ; le porteur tranche les écarts marqués **(porteur)**.
+contredit une règle de l'application, la ligne dit ce qui est retenu ; le porteur a donné son accord (rapporté par Touré, 2026-10-30).
 
 | Question posée | Réponse | Conséquence sur le chantier |
 |---|---|---|
 | Q1. « Vérifier ma réponse » sous un exercice rend-il une vraie copie (note vue par l'enseignant, maîtrise, badge, pause de 3 copies) ? | Oui | Aucune règle de note ne change. La page de la leçon rend la copie sans en sortir : l'exercice se remplace par sa version corrigée |
-| Q2. La maquette note sur 10 (« Excellent » dès 9) ; l'application note sur 20 (« Très bien » dès 16, ADR-0115) | Design tel quel : « Ta note : x / 10 », « Mention : … » comme la maquette, calculés sur la même copie **(porteur)** | Seule cette page affiche sur 10 ; la page de résultat et l'enseignant gardent la note sur 20 |
+| Q2. La maquette note sur 10 (« Excellent » dès 9) ; l'application note sur 20 (« Très bien » dès 16, ADR-0115) | Design tel quel : « Ta note : x / 10 », « Mention : … » comme la maquette, calculés sur la même copie. **Le porteur est d'accord** (rapporté par Touré, 2026-10-30) | Seule cette page affiche sur 10 ; la page de résultat et l'enseignant gardent la note sur 20 |
 | Q3. « Indice » : l'application ne connaît pas d'indice | Un indice par exercice, facultatif, écrit dans le fichier d'import ; sans indice, pas de bouton | Donnée nouvelle sur l'exercice et dans l'import |
 | Q4. « Recommencer cette notion » et « Recommencer ce sujet » | Gardés, comme la maquette : ils remettent à blanc les exercices de la feuille ; chaque nouvelle copie reste soumise à la pause | La pause reste la seule limite ; le bouton ne contourne rien |
 | Q5. Que voit l'enseignant ? | La même feuille, sans champs de réponse, avec « Assigner à … » à la place de « Vérifier ma réponse » et « Indice » | Les bascules d'assignation d'aujourd'hui passent dans la feuille |
@@ -82,4 +82,4 @@ contredit une règle de l'application, la ligne dit ce qui est retenu ; le porte
 
 ## Questions encore ouvertes
 
-- **(porteur)** Q2 : la note sur 10 de la maquette sur cette seule page, ou la note sur 20 de l'ADR-0115 ?
+- Aucune.

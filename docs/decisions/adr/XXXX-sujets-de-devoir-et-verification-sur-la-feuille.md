@@ -1,13 +1,13 @@
 # ADR-XXXX : Le sujet de devoir et l'indice entrent dans le catalogue, et la copie se rend depuis la feuille de la leçon
 <!-- index
 titre: Sujets de devoir, indice et copie rendue depuis la feuille
-statut: Proposé
+statut: Accepté
 problematique: Les maquettes « Prépare interros » et « Prépare devoirs » demandent un sujet de devoir, un indice et une copie vérifiée sans quitter la page de la leçon, que l'application ne connaît pas
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/prepare-interros-cahier` |
 | **Remplace** | — |
@@ -26,7 +26,7 @@ manquent à l'application :
 - **la vérification sur place** : « Vérifier ma réponse » rend une copie et la corrige dans la feuille. Aujourd'hui une
   copie demande deux pages (`POST /exercises/:id/sessions` puis `POST /sessions/:id/copy`) et finit sur la page de résultat.
 
-La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le memo (Q2) laisse ce point au porteur.
+La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le porteur a retenu la note de la maquette sur cette page (memo, Q2).
 
 ## 2. Moteurs de décision
 
@@ -53,7 +53,7 @@ La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le
 > `UseCases::Assessment::CheckExerciseOnSheet`, qui enchaîne `StartExerciseSession` (restart: true) et
 > `SubmitExerciseCopy` dans une transaction et répond en Turbo Stream. La note de la feuille se lit sur la copie par
 > `Entities::Assessment::SheetGrade` : sur 10, au demi-point, mention de la maquette (≥ 9 Excellent, ≥ 7 Très bien,
-> ≥ 5 Assez bien, sinon À retravailler), sous réserve du porteur (memo Q2).**
+> ≥ 5 Assez bien, sinon À retravailler).**
 
 ## 5. Conséquences
 
@@ -66,7 +66,7 @@ La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le
 ### 🔴 Coûts consentis
 
 - Deux migrations et une table de plus ; l'import `course_tree` apprend deux clés (`hint`, `subjects`).
-- Si le porteur garde la maquette, la note s'affiche sur 10 dans la feuille et sur 20 ailleurs, pour la même copie.
+- La note s'affiche sur 10 dans la feuille et sur 20 ailleurs, pour la même copie.
 - Une vérification sur la feuille ouvre et ferme une session dans la même requête : une copie de plus compte pour la pause.
 - `PrepareInterrosQuery` est remplacée par `PrepareSheetsQuery`, qui lit en plus les questions, l'indice, les sujets et la
   dernière copie de l'élève par exercice : la page de la leçon lit plus de données (mesure au PRD §7).
