@@ -69,6 +69,30 @@ class Catalog::FigureMoleculeSystemTest < ApplicationSystemTestCase
     assert inside, "le décane déborde des 640 unités"
   end
 
+  test "the carbons slider announces methane at 1" do
+    mount(alkane(3, "developed", controls: [ { "param" => "carbons", "min" => 1, "max" => 10, "step" => 1, "label" => "atomes de carbone" } ]))
+
+    find("input[type=range]").set(1)
+
+    assert_selector "#host [aria-live=polite]", text: "méthane, CH₄", visible: :all
+  end
+
+  test "the live region is written on release only, never while the slider moves" do
+    mount(alkane(3, "developed", controls: [ { "param" => "carbons", "min" => 1, "max" => 10, "step" => 1, "label" => "atomes de carbone" } ]))
+    live = "document.querySelector('#host [aria-live=polite]').textContent"
+    assert_selector "#host input[type=range]", visible: :all
+
+    page.execute_script(<<~JS)
+      const input = document.querySelector("#host input[type=range]")
+      ;[4, 5, 6].forEach((value) => { input.value = value; input.dispatchEvent(new Event("input", { bubbles: true })) })
+    JS
+    assert_selector "#host svg text[data-name]", text: "hexane", visible: :all
+    assert_equal "", page.evaluate_script(live)
+
+    page.execute_script('document.querySelector("#host input[type=range]").dispatchEvent(new Event("change", { bubbles: true }))')
+    assert_selector "#host [aria-live=polite]", text: "hexane, C₆H₁₄", visible: :all
+  end
+
   test "the semi-developed propane is written as text" do
     mount(alkane(3, "semi_developed"))
 
@@ -110,6 +134,22 @@ class Catalog::FigureMoleculeSystemTest < ApplicationSystemTestCase
 
     assert_selector "#host [data-figure-state=error]", visible: :all
     assert_no_selector "#host svg"
+  end
+
+  test "a bond repeated between the same two atoms shows the description alone" do
+    custom = figure(params: { "mode" => "custom", "atoms" => atoms([ "C", 6, 6 ], [ "O", 2, 6 ], [ "O", 10, 6 ]),
+                              "bonds" => [ [ "a0", "a1", 1 ], [ "a0", "a2", 1 ] ] })
+    tamper(custom, "[&quot;a0&quot;,&quot;a2&quot;,1]", "[&quot;a1&quot;,&quot;a0&quot;,1]")
+
+    assert_selector "#host [data-figure-state=error]", visible: :all
+    assert_no_selector "#host svg"
+  end
+
+  test "a lone iron atom without bonds is drawn" do
+    mount(figure(params: { "mode" => "custom", "atoms" => atoms([ "Fe", 6, 6 ]), "bonds" => [] }))
+
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    assert_selector "#host svg [data-atom=Fe]", count: 1, visible: :all
   end
 
   test "a hydrogen with two bonds shows the description alone" do

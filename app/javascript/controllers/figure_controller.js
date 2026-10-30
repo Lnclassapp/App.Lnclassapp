@@ -46,7 +46,7 @@ export default class extends Controller {
     try {
       this.values = { ...this.paramsValue }
       // Un module peut charger ses données (fond de carte) par import() avant de dessiner : on attend, puis on revérifie le jeton.
-      const figure = await module.create(this.canvasTarget, this.values, { announce: (text) => this.announce(text), controls: this.controlsValue })
+      const figure = await module.create(this.canvasTarget, this.values, { announce: (text) => this.remember(text), controls: this.controlsValue })
       if (run !== this.generation) return figure?.destroy?.()
 
       this.figure = figure
@@ -77,6 +77,7 @@ export default class extends Controller {
     this.controlsTarget.replaceChildren()
     this.live?.remove()
     this.live = null
+    this.sliding = false
     this.fallbackTarget.classList.remove("sr-only")
   }
 
@@ -140,6 +141,7 @@ export default class extends Controller {
       show()
       this.values = { ...this.values, [param]: Number(input.value) }
       this.spoken = null
+      this.sliding = true
       try {
         this.figure.redraw(this.values)
       } catch (error) {
@@ -147,9 +149,18 @@ export default class extends Controller {
       }
     })
     // Au relâchement, la mesure que la figure vient de dire l'emporte sur le libellé du curseur ; sans mesure, on dit le libellé.
-    input.addEventListener("change", () => this.announce(this.spoken ?? show()))
+    input.addEventListener("change", () => {
+      this.sliding = false
+      this.announce(this.spoken ?? show())
+    })
     wrapper.append(caption, input)
     return wrapper
+  }
+
+  // Ce que la figure dit d'elle-même (module) : retenu pour le relâchement du curseur ; hors geste de curseur (poignée déplacée), dit tout de suite.
+  remember(text) {
+    this.spoken = text
+    if (!this.sliding && this.live) this.live.textContent = text
   }
 
   announce(text) {

@@ -540,6 +540,12 @@ module Entities
         assert_equal %w[params.points], paths(optics(points: []))
       end
 
+      test "optics : l'œil refuse les clés de la lentille" do
+        { "focal" => 4, "object_distance" => 12, "object_height" => 2, "lens" => "convergent" }.each do |name, value|
+          assert_equal [ [ "params.#{name}", "figure_invalid", { param: name } ] ], Figure.errors_for(eye(name => value)), name
+        end
+      end
+
       test "molecule : un alcane et une molécule libre bien formés sont valides, carbons est réglable" do
         assert_empty Figure.errors_for(alkane)
         assert_empty Figure.errors_for(alkane(carbons: 10, display: "raw"))
@@ -565,8 +571,43 @@ module Entities
 
       test "molecule : une molécule libre exige atoms et bonds" do
         assert_equal %w[params.atoms params.bonds], paths(raw(kind: "molecule", params: { "mode" => "custom" }))
-        assert_equal %w[params.bonds], paths(custom(bonds: []))
         assert_equal %w[params.atoms], paths(custom(atoms: []))
+      end
+
+      test "molecule : bonds: [] est accepté (un atome seul), mais la clé reste obligatoire" do
+        assert_empty Figure.errors_for(custom(atoms: [ atom("fe", "Fe") ], bonds: []))
+        assert_equal %w[params.bonds], paths(raw(kind: "molecule", params: WATER.except("bonds")))
+      end
+
+      test "molecule : une liaison en double, dans un sens ou dans l'autre, est refusée" do
+        two = [ atom("a", "C"), atom("b", "C") ]
+        assert_equal %w[params.bonds[1]], paths(custom(atoms: two, bonds: [ [ "a", "b", 1 ], [ "a", "b", 1 ] ]))
+        assert_equal %w[params.bonds[1]], paths(custom(atoms: two, bonds: [ [ "a", "b", 1 ], [ "b", "a", 2 ] ]))
+      end
+
+      test "molecule : les clés d'un autre mode sont refusées" do
+        assert_equal %w[params.atoms params.bonds], paths(alkane(atoms: [], bonds: []))
+        assert_equal %w[params.carbons params.display], paths(custom(carbons: 3, display: "raw"))
+      end
+
+      test "molecule : 50 000 atomes et liaisons sont refusés vite, sans calcul quadratique" do
+        atoms = Array.new(50_000) { atom("a#{it}", "Fe") }
+        bonds = Array.new(50_000) { [ "a0", "a1", 1 ] }
+        errors = nil
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        errors = Figure.errors_for(custom(atoms:, bonds:))
+        elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
+
+        assert_operator elapsed, :<, 0.5
+        assert_includes errors.map(&:first), "params.atoms"
+        assert_includes errors.map(&:first), "params.bonds"
+      end
+
+      test "molecule : le pas, le minimum et le maximum du curseur carbons sont des entiers" do
+        slider = { "param" => "carbons", "min" => 1, "max" => 10, "step" => 1, "label" => "atomes de carbone" }
+        assert_equal [ [ "controls[0].step", "figure_invalid" ] ], reasons(alkane.merge("controls" => [ slider.merge("step" => 0.5) ]))
+        assert_equal [ [ "controls[0].min", "figure_invalid" ] ], reasons(alkane.merge("controls" => [ slider.merge("min" => 1.5) ]))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(alkane.merge("controls" => [ slider.merge("max" => 9.5) ]))
       end
 
       test "molecule : identifiants uniques, élément connu, position entière sur la grille" do

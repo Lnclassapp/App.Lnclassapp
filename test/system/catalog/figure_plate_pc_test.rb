@@ -48,6 +48,29 @@ class Catalog::FigurePlatePcSystemTest < ApplicationSystemTestCase
       parts.each { assert_selector "#host svg [data-plate=#{plate}] [data-part=#{it}]", visible: :all }
     end
 
+    test "the leader line of every #{plate} label ends on its part" do
+      mount_html(html(params_for(plate)))
+      assert_selector "#host [data-figure-state=ready]", visible: :all
+
+      ends = page.evaluate_script(<<~JS)
+        [...document.querySelectorAll("#host svg [data-label]")].map((label) => {
+          const line = label.querySelector("line")
+          const boxes = [...document.querySelectorAll(`#host svg [data-part=${label.dataset.label}]`)].map((part) => {
+            const box = part.getBBox()
+            return { left: box.x, right: box.x + box.width, top: box.y, bottom: box.y + box.height }
+          })
+          return { name: label.dataset.label, x: Number(line.getAttribute("x2")), y: Number(line.getAttribute("y2")), boxes }
+        })
+      JS
+      assert_equal parts.size, ends.size
+      ends.each do |e|
+        # Une partie peut avoir plusieurs formes (l'eau de la cuve et celle du tube) : le trait doit finir sur l'une d'elles.
+        on_part = e["boxes"].any? { |b| e["x"] >= b["left"] - 4 && e["x"] <= b["right"] + 4 && e["y"] >= b["top"] - 4 && e["y"] <= b["bottom"] + 4 }
+        assert on_part,
+               "#{plate} : le trait de #{e['name']} finit hors de sa partie : #{e}"
+      end
+    end
+
     test "the #{plate} plate highlights each of its parts" do
       parts.each_slice(4) do |slice|
         mount_html(html(params_for(plate, parts: [ slice.first ], highlight: slice)))

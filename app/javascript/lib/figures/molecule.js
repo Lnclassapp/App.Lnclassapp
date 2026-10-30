@@ -33,7 +33,7 @@ function read(params) {
   throw new Error("molecule : mode inconnu")
 }
 
-// Atomes et liaisons d'un dessin libre : éléments connus, identifiants uniques, liaisons entre atomes présents, valences tenues.
+// Atomes et liaisons d'un dessin libre : éléments connus, identifiants uniques, liaisons entre atomes présents et sans doublon, valences tenues.
 function readGraph({ atoms, bonds }) {
   if (!Array.isArray(atoms) || atoms.length === 0 || atoms.length > MAX_ATOMS) throw new Error("molecule : atomes absents ou trop nombreux")
   if (!Array.isArray(bonds) || bonds.length > MAX_BONDS) throw new Error("molecule : liaisons trop nombreuses")
@@ -45,9 +45,13 @@ function readGraph({ atoms, bonds }) {
     if (![x, y].every((value) => Number.isInteger(value) && value >= 0 && value <= GRID)) throw new Error("molecule : position hors grille")
     byId.set(id, { id, element, x, y, used: 0 })
   })
+  const pairs = new Set()
   const links = bonds.map((bond) => {
     const [a, b, order] = Array.isArray(bond) ? bond : []
     if (!byId.has(a) || !byId.has(b) || a === b) throw new Error("molecule : liaison vers un atome absent")
+    const pair = JSON.stringify([a, b].sort())
+    if (pairs.has(pair)) throw new Error("molecule : liaison en double entre deux atomes")
+    pairs.add(pair)
     if (!Number.isInteger(order) || order < 1 || order > 3) throw new Error("molecule : ordre de liaison hors 1 à 3")
     byId.get(a).used += order
     byId.get(b).used += order
