@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/teacher_homes/show — accueil enseignant (TR-05) : bandeau jaune, classes, niveaux et « Inviter », annonces, « Cette semaine », Historique %>
 <%# Rôle : le bandeau (hors de la colonne, sous lg), puis une colonne (57 rem dès lg sur fond blanc, sans bandeau, classes en carrousel de cartes de 16,5 rem, « Cette semaine » et « Historique » côte à côte) : sections de HOME_SECTIONS[:teacher] sans carte enveloppante ni « Bonjour », collègues en attente ; sans classe, la seule carte « Ajoutez vos classes » %>
-<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0026, 0050, 0069, 0071 §3.5, 0077 §3.1, 0098 §3.3, 0126, écrans enseignant §3.1, §3.3 (« Sur ordinateur »), §3.13 · titre « Accueil · Enseignant · Lnclass » %>
+<%# ADR  : 0026, 0048, 0063, 0076, 0078 · UDR : 0006, 0026, 0050, 0069, 0071 §3.5, 0077 §3.1, 0098 §3.3, 0126, 0143, écrans enseignant §3.1, §3.3 (« Sur ordinateur »), §3.13 · titre « Accueil · Enseignant · Lnclass » %>
 <% page_title t(".page_title") %>
 <%# UDR enseignant §3.3 : ni « Bonjour » ni prénom ; la page garde son titre pour les lecteurs d'écran. %>
 <h1 class="sr-only"><%= t(".page_title") %></h1>
@@ -18,17 +18,28 @@
         <div data-controller="communication--carousel">
           <%# L'espace entre cartes est leur remplissage (px-1.5), repris par -mx-1.5 : trois tiers entiers à partir de 640 px. %>
           <%# Dès lg : des cartes de 16,5 rem (lg:basis-69 : 16,5 rem et leur remplissage), la quatrième coupée au bord ; points dessous dès qu'elles débordent. %>
-          <ul class="scrollbar-none -mx-1.5 flex snap-x snap-mandatory overflow-x-auto motion-safe:scroll-smooth"
+          <ul id="teacher_home_classrooms_track" class="scrollbar-none -mx-1.5 flex snap-x snap-mandatory overflow-x-auto motion-safe:scroll-smooth"
               aria-label="<%= t(".classrooms_title") %>" data-communication--carousel-target="track">
             <% school_label = @home.school_sigle || @home.school_name %>
             <%= render partial: "classroom_card", collection: @home.classrooms, as: :classroom, locals: { school_label: } %>
             <%= render "add_classroom_card", empty: @home.classrooms.empty?, school_label: %>
           </ul>
-          <div class="hidden justify-center gap-1.5 pt-3" aria-hidden="true" data-communication--carousel-target="pager">
-            <% (@home.classrooms.size + 1).times do |index| %>
-              <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
-                    data-communication--carousel-target="dot"></span>
+          <%# Dès lg, « Classes précédentes » et « Classes suivantes » encadrent les points : à la souris, la molette ne fait pas défiler
+              la bande et sa barre est masquée. Au téléphone, le doigt suffit : pas de boutons. Annoncés grisés à leur bout (aria-disabled). %>
+          <div class="hidden items-center justify-center gap-3 pt-3" data-communication--carousel-target="pager">
+            <% [ [ :previous, "chevron-left" ], [ :next, "chevron-right" ] ].each_with_index do |(direction, icon), position| %>
+              <button type="button" aria-controls="teacher_home_classrooms_track" aria-disabled="<%= direction == :previous %>"
+                      class="<%= class_names("hidden size-tap place-items-center rounded-full border border-line bg-white text-brand-strong hover:bg-mist focus-visible:outline-2 focus-visible:outline-brand aria-disabled:cursor-default aria-disabled:opacity-50 aria-disabled:hover:bg-white lg:grid", "order-last" => position == 1) %>"
+                      data-communication--carousel-target="<%= direction %>" data-action="communication--carousel#<%= direction %>">
+                <%= ui_icon icon, variant: :mini, size: :sm %><span class="sr-only"><%= t(".#{direction}_classrooms") %></span>
+              </button>
             <% end %>
+            <span class="flex gap-1.5" aria-hidden="true">
+              <% (@home.classrooms.size + 1).times do |index| %>
+                <span class="<%= index.zero? ? "h-1.5 w-4 rounded-full bg-brand-strong" : "h-1.5 w-1.5 rounded-full bg-line" %>"
+                      data-communication--carousel-target="dot"></span>
+              <% end %>
+            </span>
           </div>
         </div>
       </section>

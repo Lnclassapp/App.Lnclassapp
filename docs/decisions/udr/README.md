@@ -151,6 +151,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0140](./0140-feuille-et-resultat-corriges-comme-en-classe.md) | Feuille d'un devoir et résultat corrigé comme en classe | Accepté | 2026-10-28 | [0115](../adr/0115-correction-complete-note-en-points-et-types-de-questions.md) | La feuille ne sait pas poser un devoir de 3e et le résultat ne dit ni la bonne réponse ni quoi revoir |
 | [0141](./0141-fiche-de-revision-en-quatre-blocs-et-corrige-de-l-equipe.md) | Fiche de révision en quatre blocs et corrigé de l'équipe | Accepté | 2026-10-29 | XXXX-fiche-de-revision-par-notion-et-figures-parametrees | Montrer chaque notion d'une leçon de la même façon partout, sur le cahier, avec ses figures, et laisser l'équipe relire toutes les corrections avant publication. |
 | [0142](./0142-dessin-des-figures-de-3eme.md) | Dessin des figures des matières de 3ème | Accepté | 2026-10-30 | [0117](../adr/0117-figures-des-matieres-de-3eme.md) | Six sortes de figures nouvelles doivent se lire au téléphone, sans couleur et sans JavaScript, dans le cahier comme dans une page d'exercice. |
+| [0143](./0143-carrousel-classes-enseignant.md) | Carrousel des classes de l'enseignant : boutons précédent et suivant dès lg | Accepté | 2026-10-30 | — | À la souris, la bande des classes de l'accueil enseignant ne défile pas (molette verticale, barre masquée) et ne revient pas au début ; deux boutons ronds encadrent les points dès lg, annoncés grisés à leur bout. Complète l'UDR enseignant §3.3 |
 <!-- index:end -->
 
 ---
