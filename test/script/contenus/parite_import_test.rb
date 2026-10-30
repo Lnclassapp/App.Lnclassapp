@@ -92,6 +92,16 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     assert_empty script_pairs(document)
   end
 
+  test "les trois planches de PC bien formées passent l'import et le script" do
+    %w[dynamometer electrolyser eudiometer].each do |plate|
+      params = { "plate" => plate, "numbering" => "numbers", "labels" => Entities::Catalog::FigureCatalogs.parts(plate).map { { "part" => it } } }
+      document = mutated { it["figures"][0] = figure_of("plate", params) }
+
+      assert_empty import_pairs(document), plate
+      assert_empty script_pairs(document), plate
+    end
+  end
+
   test "parité : version retirée, version inconnue, autre format" do
     [ [ 2, "format_retired" ], [ 4, "version_unsupported" ] ].each do |version, code|
       assert_parity("version #{version}", revision_sheet_document.merge("version" => version), code)
@@ -147,6 +157,8 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     "légende de carte faite d'un nombre" => [ ->(c) { c["figures"][0] = figure_of("map", MAP_PARAMS.merge("legend" => [ 3, "Savane" ])) }, "figure_invalid" ],
     "curseur de frise dont le max atteint end" => [ ->(c) { c["figures"][0] = figure_of("timeline", TIMELINE_PARAMS).merge("controls" => [ { "param" => "start", "min" => 1850, "max" => 1960, "step" => 5, "label" => "début" } ]) }, "figure_invalid" ],
     "planche inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("plate" => "skeleton")) }, "figure_invalid" ],
+    "planche de PC dont une partie est inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", { "plate" => "electrolyser", "numbering" => "names", "labels" => [ { "part" => "piston" } ] }) }, "figure_invalid" ],
+    "planche de PC dont une étiquette porte une partie d'une autre planche" => [ ->(c) { c["figures"][0] = figure_of("plate", { "plate" => "eudiometer", "numbering" => "names", "labels" => [ { "part" => "anode" } ] }) }, "figure_invalid" ],
     "planche dont une étiquette porte une partie d'une autre planche" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "liver" } ])) }, "figure_invalid" ],
     "planche dont une partie surlignée est inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("highlight" => %w[aorta liver])) }, "figure_invalid" ],
     "planche dont une partie est étiquetée deux fois" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta" }, { "part" => "aorta" } ])) }, "figure_invalid" ],

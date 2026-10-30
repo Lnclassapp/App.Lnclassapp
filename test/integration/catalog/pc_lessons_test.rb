@@ -18,10 +18,6 @@ class Catalog::PcLessonsTest < ActiveSupport::TestCase
     [ "les-defauts-de-l-oeil-et-leurs-corrections", "Les défauts de l'œil et leurs corrections", 5 ],
     [ "oxydation-des-corps-purs-simples", "Oxydation des corps purs simples", 4 ]
   ].freeze
-  # Les leçons 1, 2 et 6 portent des planches (`plate` : dynamomètre, électrolyseur, eudiomètre), sorte que la vague 3 apporte et que le
-  # Lot P complète. Tant que le Lot P n'est pas fait, le script et l'import les refusent : elles sont attendues au Lot P. Au Lot P, on vide cette liste.
-  AWAITING_LOT_P = %w[masse-et-poids-d-un-corps les-forces electrolyse-et-synthese-de-l-eau].freeze
-  READY = LESSONS.reject { |slug, *| AWAITING_LOT_P.include?(slug) }.freeze
 
   setup do
     seed_referential
@@ -53,7 +49,7 @@ class Catalog::PcLessonsTest < ActiveSupport::TestCase
     end
   end
 
-  READY.each do |slug, name, figures|
+  LESSONS.each do |slug, name, figures|
     test "#{slug} passe le script de contrôle sans erreur ni avertissement" do
       result = Contenus::Valider.new(document(slug)).call
 

@@ -6,7 +6,7 @@
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
-| | | | |
+| 2026-10-30 | Lot P : avec `numbering: "numbers"`, les numéros suivent l'ordre du tableau `labels` (1, 2, 3…), pas celui des parties de la planche. Les 3 leçons à planche sont déjà écrites dans cet ordre. | Règle réelle de `plate.js` (index + 1) | Non |
 
 ## Ce qui a dérapé
 
