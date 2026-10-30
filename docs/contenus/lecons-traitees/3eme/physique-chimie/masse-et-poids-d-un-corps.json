@@ -54,17 +54,6 @@
           "controls": []
         },
         {
-          "key": "dynamometre-numeros",
-          "kind": "plate",
-          "description": "Le même dynamomètre, dont les parties sont seulement numérotées, sans aucun nom : l'anneau, le tube, le ressort, la graduation, le pointeur, le crochet et la charge. C'est à l'élève de retrouver le nom et le rôle de chaque partie, en s'aidant de la fiche de révision et des questions de l'exercice.",
-          "params": {
-            "plate": "dynamometer",
-            "numbering": "numbers",
-            "labels": []
-          },
-          "controls": []
-        },
-        {
           "key": "poids-masse",
           "kind": "coordinate_plane",
           "description": "Un repère où la masse m en kg est en abscisse (de 0 à 5) et le poids P en N en ordonnée (de 0 à 50). La droite P = 10 m passe par l'origine. Trois points sont placés dessus : A (1 kg ; 10 N), B (3 kg ; 30 N) et C (5 kg ; 50 N). Le poids est proportionnel à la masse.",
@@ -128,7 +117,7 @@
               {
                 "content": "Quelle est l'unité de masse du Système international (SI) ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : la grandeur demandée est la masse d'un corps. Étape 2 — Convertir : l'unité du Système international est le kilogramme (kg) ; le gramme n'en est qu'un sous-multiple (1 g = 0,001 kg). Étape 3 — Écrire : l'unité SI de masse est le kilogramme. Le newton (N) est piégeux : c'est l'unité d'une force, comme le poids, pas d'une masse.",
+                "explanation": "Étape 1 — Repérer : la grandeur demandée est la masse d'un corps. Étape 2 — Convertir : rien à convertir ici, l'unité du Système international est le kilogramme (kg) ; le gramme n'en est qu'un sous-multiple (1 g = 0,001 kg). Étape 3 — Écrire : l'unité SI de masse est le kilogramme. Le newton (N) est piégeux : c'est l'unité d'une force, comme le poids, pas d'une masse.",
                 "answers": [
                   {
                     "content": "Le kilogramme (kg)",
@@ -183,6 +172,10 @@
                 "answers": [
                   {
                     "content": "4500",
+                    "correct": true
+                  },
+                  {
+                    "content": "4 500",
                     "correct": true
                   }
                 ]
@@ -249,8 +242,8 @@
           "exercise": {
             "title": "Reconnaître et caractériser un poids",
             "exercise_type": "fixation",
-            "figure": "dynamometre-numeros",
-            "statement": "Sur la figure, les parties d'un dynamomètre sont seulement numérotées. À toi de retrouver leur nom et leur rôle, puis de caractériser un poids comme à la fiche de révision.",
+            "figure": null,
+            "statement": "Les parties d'un dynamomètre et le poids d'un corps sont au programme. À toi de retrouver le rôle de chaque partie, puis de caractériser un poids comme à la fiche de révision.",
             "questions": [
               {
                 "content": "Relie chaque partie d'un dynamomètre à son rôle.",
@@ -760,7 +753,7 @@
             {
               "content": "Le poids d'un sac de riz est une force, alors que sa masse n'en est pas une.",
               "question_type": "true_false",
-              "explanation": "Étape 1 — Repérer : on compare deux grandeurs du sac. Étape 2 — Convertir : le poids s'exprime en newtons (N), la masse en kilogrammes (kg). Étape 3 — Écrire : le poids est la force d'attraction exercée par la Terre sur le sac ; la masse est une quantité de matière. L'affirmation est vraie. Les confondre est l'erreur la plus fréquente à l'interrogation.",
+              "explanation": "Étape 1 — Repérer : on compare deux grandeurs du sac. Étape 2 — Convertir : rien à convertir ; le poids s'exprime en newtons (N), la masse en kilogrammes (kg). Étape 3 — Écrire : le poids est la force d'attraction exercée par la Terre sur le sac ; la masse est une quantité de matière. L'affirmation est vraie. Les confondre est l'erreur la plus fréquente à l'interrogation.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1013,7 +1006,7 @@
               "question_type": "numeric",
               "unit": "N",
               "tolerance": 0,
-              "explanation": "Étape 1 — Relever la masse : m = 25 kg, la même qu'en Terre. Étape 2 — Relever g : 1,6 N/kg sur la Lune. Étape 3 — Calculer : P = m × g = 25 × 1,6 = 40 N (car 25 × 1,6 = 25 + 15 = 40). Étape 4 — Comparer : 40 N sur la Lune contre 250 N sur Terre, pour une masse inchangée de 25 kg.",
+              "explanation": "Étape 1 — Relever la masse : m = 25 kg, la même que sur Terre. Étape 2 — Relever g : 1,6 N/kg sur la Lune. Étape 3 — Calculer : P = m × g = 25 × 1,6 = 40 N (car 25 × 1,6 = 25 + 15 = 40). Étape 4 — Comparer : 40 N sur la Lune contre 250 N sur Terre, pour une masse inchangée de 25 kg.",
               "answers": [
                 {
                   "content": "40",
@@ -1085,7 +1078,7 @@
                 "Explique qu'il a divisé par 10, la valeur de g sur Terre, au lieu de 1,6"
               ],
               "starter": "La masse du sac ne change pas, donc…",
-              "explanation": "Corrigé modèle : Étape 1 — Relever la masse : m = 25 kg en tout lieu, car la masse est une quantité de matière. Étape 2 — Relever g : sur la Lune g = 1,6 N/kg. Étape 3 — Calculer : 40 N est le poids du sac sur la Lune (25 × 1,6 = 40). Étape 4 — Comparer : l'enfant a divisé ce poids par 10, la valeur de g sur Terre, ce qui n'a aucun sens ; 4 n'est de plus pas en kilogrammes. La masse reste 25 kg. Répartition : la masse ne change pas (1 point), 40 N est un poids (1 point), l'erreur de division par 10 (1 point).",
+              "explanation": "Corrigé modèle : Étape 1 — Relever la masse : m = 25 kg en tout lieu, car la masse est une quantité de matière. Étape 2 — Relever g : sur la Lune g = 1,6 N/kg. Étape 3 — Calculer : 40 N est le poids du sac sur la Lune (25 × 1,6 = 40). Étape 4 — Comparer : l'enfant a divisé ce poids par 10, la valeur de g sur Terre, ce qui n'a aucun sens ; De plus, diviser un poids par g donne une masse sur Terre, pas sur la Lune : le résultat 4 n'a pas de sens ici. La masse reste 25 kg. Répartition : la masse ne change pas (1 point), 40 N est un poids (1 point), l'erreur de division par 10 (1 point).",
               "answers": []
             }
           ]

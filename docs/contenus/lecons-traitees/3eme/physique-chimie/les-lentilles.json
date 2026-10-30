@@ -661,7 +661,7 @@
               {
                 "content": "Un objet est placé devant une lentille divergente, à n'importe quelle distance. Quelle est la nature de l'image ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Relever : la lentille est divergente, la distance de l'objet n'a pas d'importance. Étape 2 — Calculer 2f : inutile ici, car la lentille divergente n'a pas de position qui change la nature de l'image. Étape 3 — Comparer : on compare à ce que montre la figure divergente, pour toutes les positions du curseur. Étape 4 — Conclure : l'image est toujours virtuelle, droite et réduite, donc impossible à recueillir sur un écran.",
+                "explanation": "Étape 1 — Relever : la lentille est divergente, la distance de l'objet n'a pas d'importance. Étape 2 — Calculer 2f : inutile ici, car la lentille divergente n'a pas de position qui change la nature de l'image. Étape 3 — Comparer : avec une lentille divergente, les rayons émergents s'écartent toujours, quelle que soit la distance ; seuls leurs prolongements se croisent. Étape 4 — Conclure : l'image est toujours virtuelle, droite et réduite, donc impossible à recueillir sur un écran.",
                 "answers": [
                   {
                     "content": "Réelle, renversée et réduite",
@@ -1098,14 +1098,14 @@
           "figure": "lentille-convergente",
           "questions": [
             {
-              "content": "Le vidéoprojecteur de la classe possède un objectif de vergence 40 δ. Quelle est sa distance focale, en centimètres ?",
+              "content": "Le vidéoprojecteur de la classe possède un objectif de vergence 25 δ. Quelle est sa distance focale, en centimètres ?",
               "question_type": "numeric",
               "unit": "cm",
               "tolerance": 0,
-              "explanation": "Étape 1 — Relever : $C = 40\\ \\delta$. Étape 2 — Convertir : rien à convertir, $f$ sortira en mètres. Étape 3 — Écrire : $f = \\frac{1}{C}$. Étape 4 — Remplacer et calculer : $f = \\frac{1}{40} = 0{,}025\\ \\text{m}$. Étape 5 — Donner : $f = 0{,}025\\ \\text{m} = 2{,}5\\ \\text{cm}$.",
+              "explanation": "Étape 1 — Relever : $C = 25\\ \\delta$. Étape 2 — Convertir : rien à convertir, $f$ sortira en mètres. Étape 3 — Écrire : $f = \\frac{1}{C}$. Étape 4 — Remplacer et calculer : $f = \\frac{1}{25} = 0{,}04\\ \\text{m}$. Étape 5 — Donner : $f = 0{,}04\\ \\text{m} = 4\\ \\text{cm}$.",
               "answers": [
                 {
-                  "content": "2,5",
+                  "content": "4",
                   "correct": true
                 }
               ]
@@ -1193,7 +1193,7 @@
             {
               "content": "Dans ce modèle, si l'image à projeter est placée exactement au foyer objet F (à 4 cm de la lentille), une image nette se forme sur un écran placé à 8 cm.",
               "question_type": "true_false",
-              "explanation": "Étape 1 — Relever : $d = 4\\ \\text{cm} = f$. Étape 2 — Tracer : le rayon issu de B qui passe par F émerge parallèle à l'axe, et le rayon par O est le seul autre rayon. Étape 3 — Repérer : ces deux rayons émergents sont parallèles, ils ne se croisent pas, donc il n'y a pas de B′. Étape 4 — Conclure : la figure indique « image à l'infini ». Aucun écran ne montre d'image nette : l'affirmation est fausse.",
+              "explanation": "Étape 1 — Relever : $d = 4\\ \\text{cm} = f$. Étape 2 — Tracer : le rayon issu de B parallèle à l'axe émerge en passant par F′, et le rayon issu de B qui passe par O n'est pas dévié. Étape 3 — Repérer : ces deux rayons émergents sont parallèles (même pente), ils ne se croisent pas, donc il n'y a pas de B′. Étape 4 — Conclure : la figure indique « image à l'infini ». Aucun écran ne montre d'image nette : l'affirmation est fausse.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1250,14 +1250,14 @@
               ]
             },
             {
-              "content": "La lentille convergente L1 a une distance focale de 8 cm. Quelle est sa vergence, en dioptries ?",
+              "content": "La lentille convergente L1 a une distance focale de 4 cm. Quelle est sa vergence, en dioptries ?",
               "question_type": "numeric",
               "unit": "δ",
               "tolerance": 0,
-              "explanation": "Étape 1 — Relever : $f = 8\\ \\text{cm}$. Étape 2 — Convertir : $8\\ \\text{cm} = 0{,}08\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}08} = 12{,}5$. Étape 5 — Donner : $C = 12{,}5\\ \\delta$.",
+              "explanation": "Étape 1 — Relever : $f = 4\\ \\text{cm}$. Étape 2 — Convertir : $4\\ \\text{cm} = 0{,}04\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}04} = 25$. Étape 5 — Donner : $C = 25\\ \\delta$.",
               "answers": [
                 {
-                  "content": "12,5",
+                  "content": "25",
                   "correct": true
                 }
               ]
@@ -1295,11 +1295,11 @@
               ]
             },
             {
-              "content": "Avec L2 (divergente, objet de 2 cm à 12 cm), la figure donne une image quatre fois plus petite que l'objet. Quelle est la hauteur de l'image ?",
+              "content": "Sur la figure de la lentille divergente L2 (objet de 2 cm à 12 cm), on lit que l'image est quatre fois plus petite que l'objet. Quelle est la hauteur de l'image ?",
               "question_type": "numeric",
               "unit": "cm",
               "tolerance": 0,
-              "explanation": "Étape 1 — Relever : objet de 2 cm à 12 cm de L2. Étape 2 — Tracer : le rayon par O est tout droit ; le rayon parallèle à l'axe émerge en s'écartant, comme s'il venait de F′. Étape 3 — Prolonger : les prolongements se croisent à 3 cm de O, du côté de l'objet, à 0,5 cm de hauteur. Étape 4 — Conclure : $A'B' = \\frac{2}{4} = 0{,}5\\ \\text{cm}$. L'image est virtuelle, droite et réduite.",
+              "explanation": "Étape 1 — Relever : objet de 2 cm à 12 cm de L2, image quatre fois plus petite d'après la figure. Étape 2 — Lire : sur la figure, l'image est du même côté de la lentille que l'objet, droite et réduite. Étape 3 — Calculer : $A'B' = \\frac{2}{4} = 0{,}5\\ \\text{cm}$. Étape 4 — Conclure : $A'B' = 0{,}5\\ \\text{cm}$ ; l'image est virtuelle, droite et réduite.",
               "answers": [
                 {
                   "content": "0,5",

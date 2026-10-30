@@ -96,7 +96,7 @@
         {
           "key": "duel-au-ballon",
           "kind": "coordinate_plane",
-          "description": "Une grille de 0 à 8 carreaux en abscisse et de 0 à 4 en ordonnée, 1 carreau valant 1 cm. Le ballon est au point B(4 ; 2). Le joueur A le pousse avec la force FA, vecteur horizontal de 3 cm vers la droite ; le joueur B le pousse avec la force FB, vecteur horizontal de 2 cm vers la gauche. Échelle : 1 cm pour 20 N.",
+          "description": "Une grille de 0 à 8 carreaux en abscisse et de 0 à 4 en ordonnée, 1 carreau valant 1 cm. Le ballon est au point O(4 ; 2). Le joueur A le pousse avec la force FA, vecteur horizontal de 3 cm vers la droite ; le joueur B le pousse avec la force FB, vecteur horizontal de 2 cm vers la gauche. Échelle : 1 cm pour 20 N.",
           "params": {
             "xmin": 0,
             "xmax": 8,
@@ -104,7 +104,7 @@
             "ymax": 4,
             "points": [
               {
-                "id": "B",
+                "id": "O",
                 "x": 4,
                 "y": 2
               }
@@ -355,7 +355,7 @@
               {
                 "content": "Parmi ces actions, laquelle est une action à distance ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier l'auteur et le receveur de chaque action. Étape 2 — Se demander si l'auteur touche le receveur : le pied, la main et le gardien touchent le ballon (contact) ; la Terre n'a aucun contact avec la mangue ou le ballon qui tombent, elle agit à distance (c'est le poids). Étape 4 — Conclure : la Terre qui attire le ballon est une action à distance. Le pied qui frappe est le piège : il touche le ballon.",
+                "explanation": "Étape 1 — Identifier l'auteur et le receveur de chaque action. Étape 2 — Se demander si l'auteur touche le receveur : le pied, le joueur qui tire la corde et les gants du gardien touchent le receveur (contact) ; la Terre ne touche pas le ballon lancé en l'air, elle agit à distance (c'est le poids). Étape 4 — Conclure : la Terre qui attire le ballon est une action à distance. Le pied qui frappe est le piège : il touche le ballon.",
                 "answers": [
                   {
                     "content": "Le pied d'un joueur frappe un ballon",
@@ -675,7 +675,7 @@
             "steps": [
               "Lire : l'échelle est 1 cm pour 10 N et l'intensité de F est 40 N.",
               "Calculer la longueur : $40 \\div 10 = 4$ cm.",
-              "Placer l'origine du vecteur au centre du ballon, point d'application de F.",
+              "Placer l'origine du vecteur au point de contact entre le pied et le ballon, point d'application de F.",
               "Tracer une flèche horizontale de 4 cm, dirigée vers la droite.",
               "Nommer le vecteur F et noter l'échelle : 1 cm pour 10 N."
             ]
@@ -730,7 +730,7 @@
               {
                 "content": "Un vecteur force mesure 4 cm. L'échelle est 1 cm pour 5 N. Quelle est l'intensité de la force en newton ?",
                 "question_type": "numeric",
-                "explanation": "Étape 1 — Lire : 1 cm représente 5 N, le vecteur mesure 4 cm. Étape 2 — Calculer, en sens inverse : $4 \\times 5 = 20$ N. Répondre 4 N oublie l'échelle ; répondre 1 N ou 0,8 N vient d'une division à la place de la multiplication.",
+                "explanation": "Étape 1 — Lire : 1 cm représente 5 N, le vecteur mesure 4 cm. Étape 2 — Calculer, en sens inverse : $4 \\times 5 = 20$ N. Répondre 4 N oublie l'échelle ; répondre 0,8 N ou 1,25 N vient d'une division à la place de la multiplication.",
                 "answers": [
                   {
                     "content": "20",
@@ -845,7 +845,7 @@
             {
               "content": "Un gardien dégage du pied un ballon posé et immobile. Le ballon part et s'aplatit un instant. Quels sont les deux effets de la force du pied ?",
               "question_type": "multiple_correct_2",
-              "explanation": "Méthode. Étape 1 — Repérer : receveur = le ballon, auteur = le pied. Étape 2 — Comparer avant et après : avant, il est immobile et rond ; après, il roule, et pendant le choc il est aplati. Étape 3 — Nommer les effets : mise en mouvement et déformation. Le ballon n'a pas changé de masse, et il n'était pas en mouvement avant, donc il ne s'agit pas d'une modification de mouvement.",
+              "explanation": "Méthode. Étape 1 — Repérer : receveur = le ballon, auteur = le pied. Étape 2 — Comparer avant et après : avant, il est immobile et rond ; après, il part en l'air, et pendant le choc il est aplati. Étape 3 — Nommer les effets : mise en mouvement et déformation. Le ballon n'a pas changé de masse, et il n'était pas en mouvement avant, donc il ne s'agit pas d'une modification de mouvement.",
               "answers": [
                 {
                   "content": "Il met le ballon en mouvement",
@@ -945,7 +945,7 @@
             {
               "content": "Donne les quatre caractéristiques du poids du ballon quand il est en l'air.",
               "question_type": "written",
-              "explanation": "Corrigé modèle : le point d'application du poids est le centre de gravité G du ballon ; sa droite d'action est la verticale passant par G ; son sens est vers le bas ; son intensité est $P = m \\times g = 0,4 \\times 10 = 4$ N. Barème : 0,5 point par caractéristique correcte, plus 0,5 point pour le calcul avec l'unité, 2 points au total.",
+              "explanation": "Corrigé modèle : le point d'application du poids est le centre de gravité G du ballon ; sa droite d'action est la verticale passant par G ; son sens est vers le bas ; son intensité est $P = m \\times g = 0,4 \\times 10 = 4$ N. Barème : 0,5 point par caractéristique correcte, l'intensité comptant seulement avec son calcul 0,4 × 10 et son unité, 2 points au total.",
               "answers": [],
               "points": 2,
               "criteria": [
@@ -1014,9 +1014,9 @@
               ]
             },
             {
-              "content": "Que représente le point de départ commun des deux vecteurs, le centre du ballon ?",
+              "content": "Que représente le point de départ commun des deux vecteurs, le point O qui représente le ballon ?",
               "question_type": "single_choice",
-              "explanation": "Méthode. Étape 3 — Placer l'origine du vecteur au point d'application de la force. Les deux joueurs touchent le ballon : l'origine commune est le point d'application des deux forces, au centre du ballon. La pointe donne le sens, pas le point d'application.",
+              "explanation": "Méthode. Étape 3 — Placer l'origine du vecteur au point d'application de la force. Les deux joueurs touchent le ballon : l'origine commune est le point d'application des deux forces, le ballon étant assimilé à un point. La pointe donne le sens, pas le point d'application.",
               "answers": [
                 {
                   "content": "Le point d'application des deux forces",
@@ -1039,7 +1039,7 @@
             {
               "content": "Les forces FA et FB ont la même droite d'action (l'horizontale passant par le ballon) mais des sens opposés.",
               "question_type": "true_false",
-              "explanation": "Méthode. Étape 4 — Tracer le vecteur sur la droite d'action. FA et FB sont deux flèches horizontales qui partent de B : même droite d'action. FA va vers la droite, FB vers la gauche : sens opposés. L'affirmation est vraie. Le sens se lit à la pointe de la flèche.",
+              "explanation": "Méthode. Étape 4 — Tracer le vecteur sur la droite d'action. FA et FB sont deux flèches horizontales qui partent de O : même droite d'action. FA va vers la droite, FB vers la gauche : sens opposés. L'affirmation est vraie. Le sens se lit à la pointe de la flèche.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1105,7 +1105,7 @@
                   "correct": true
                 },
                 {
-                  "content": "FA = 6 N, car on divise 20 par 3",
+                  "content": "FA = 0,15 N, car on divise 3 par 20",
                   "correct": false
                 }
               ]
@@ -1319,7 +1319,7 @@
             {
               "content": "Le sac contient seulement des ballons de 0,4 kg chacun. Combien de ballons contient-il ?",
               "question_type": "numeric",
-              "explanation": "Méthode. Étape 1 — La masse totale est 1,2 kg. Étape 2 — Calculer le nombre de ballons : $1,2 \\div 0,4 = 3$. Vérification : $3 \\times 0,4 = 1,2$ kg. Il y a donc 3 ballons.",
+              "explanation": "Méthode. La masse totale est 1,2 kg. On calcule le nombre de ballons : $1,2 \\div 0,4 = 3$. Vérification : $3 \\times 0,4 = 1,2$ kg. Il y a donc 3 ballons.",
               "answers": [
                 {
                   "content": "3",
@@ -1331,7 +1331,7 @@
             {
               "content": "Un autre sac a une masse de 1 800 g. Convertis cette masse en kg, puis calcule son poids en newton.",
               "question_type": "numeric",
-              "explanation": "Méthode. Étape 1 — Convertir : 1 800 g $= 1,8$ kg car 1 000 g font 1 kg. Étape 4 — Déterminer l'intensité : $P = m \\times g = 1,8 \\times 10 = 18$ N. Répondre 18 000 N oublie la conversion en kg.",
+              "explanation": "Méthode. Conversion : 1 800 g $= 1,8$ kg car 1 000 g font 1 kg. Étape 4 — Déterminer l'intensité : $P = m \\times g = 1,8 \\times 10 = 18$ N. Répondre 18 000 N oublie la conversion en kg.",
               "answers": [
                 {
                   "content": "18",
