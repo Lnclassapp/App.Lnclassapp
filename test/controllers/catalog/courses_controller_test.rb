@@ -36,6 +36,14 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
+  test "CA-12: /fiche of an unknown lesson answers 404" do
+    sign_in_as create_student_for(@course)
+
+    get course_fiche_path("lecon-inconnue")
+
+    assert_response :not_found
+  end
+
   test "CA-12: /fiche of a published lesson of another level answers 404 to a student" do
     sign_in_as create_student_for(@published)
 

@@ -260,7 +260,7 @@ module UseCases
       # Une leçon publiée entre la validation et l'écriture : l'écrivain le dit par la classe de l'exception (clé `exception`), le moteur
       # rend la même raison que la validation (ADR-0116 §4.4) au lieu d'un échec d'écriture générique.
       def write_error(source, entry, written)
-        raised = written.errors[:exception]&.first.to_s.split("::").last
+        raised = Array(written.errors[:exception]).first.to_s.split("::").last
         if raised == Ports::Catalog::ContentTreeWriterPort::NOT_DRAFT && entry.item.plan.respond_to?(:name)
           return error(source, entry.item.path, "lesson_already_published", course: entry.item.plan.name.squish)
         end

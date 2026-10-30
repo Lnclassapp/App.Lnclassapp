@@ -63,6 +63,41 @@ module Entities
         assert_equal [ :too_large ], StatementBlocks.errors(blocks).map(&:reason)
       end
 
+      test "un sujet dont le contenu ne se sérialise pas en JSON est refusé sans lever" do
+        errors = StatementBlocks.errors([ { "type" => "paragraph", "text" => Float::NAN } ])
+
+        assert_equal [ [ nil, :wrong_type, "json" ] ], errors.map { [ it.position, it.reason, it.detail ] }
+      end
+
+      test "un texte vide, trop long ou aux marques [[ ]] est refusé à sa position" do
+        paragraph = ->(text) { StatementBlocks.errors([ { "type" => "paragraph", "text" => "ok" }, { "type" => "paragraph", "text" => text } ]) }
+
+        assert_equal [ [ 2, :blank, "text" ] ], paragraph.("   ").map { [ it.position, it.reason, it.detail ] }
+        assert_equal [ [ 2, :too_long, "text" ] ], paragraph.("a" * 2001).map { [ it.position, it.reason, it.detail ] }
+        assert_equal [ [ 2, :malformed_mark, "text" ] ], paragraph.("voir [[x]]").map { [ it.position, it.reason, it.detail ] }
+        assert_equal [ [ 2, :wrong_type, "text" ] ], paragraph.(12).map { [ it.position, it.reason, it.detail ] }
+      end
+
+      test "un bloc box refuse un ton inconnu et des paragraphes absents, vides, trop nombreux ou mal typés" do
+        box = ->(**changes) { StatementBlocks.errors([ { "type" => "box", "label" => "Retenir", "paragraphs" => [ "Un texte." ] }.merge(changes.stringify_keys) ]) }
+
+        assert_empty box.(tone: "remember")
+        assert_equal [ [ :invalid_value, "tone" ] ], box.(tone: "danger").map { [ it.reason, it.detail ] }
+        assert_equal [ [ :wrong_type, "paragraphs" ] ], box.(paragraphs: "Un texte.").map { [ it.reason, it.detail ] }
+        assert_equal [ [ :blank, "paragraphs" ] ], box.(paragraphs: []).map { [ it.reason, it.detail ] }
+        assert_equal [ [ :too_many, "paragraphs" ] ], box.(paragraphs: Array.new(11) { "Un texte." }).map { [ it.reason, it.detail ] }
+      end
+
+      test "un tableau refuse des en-têtes ou des lignes qui ne sont pas des listes, sans lever" do
+        table = ->(headers, rows) { StatementBlocks.errors([ { "type" => "table", "headers" => headers, "rows" => rows } ]).map { [ it.reason, it.detail ] } }
+
+        assert_equal [ [ :wrong_type, "headers" ] ], table.("a", [ %w[1] ])
+        assert_equal [ [ :wrong_type, "rows" ] ], table.(%w[a], "1")
+        assert_equal [ [ :wrong_type, "rows" ] ], table.(%w[a], [ "1" ])
+        assert_equal [ [ :blank, "rows" ] ], table.(%w[a], [ [] ])
+        assert_empty table.(%w[a b], [ [ "1", "" ] ])
+      end
+
       test "un sujet vide ou absent est valide" do
         assert_empty StatementBlocks.errors(nil)
         assert_empty StatementBlocks.errors([])

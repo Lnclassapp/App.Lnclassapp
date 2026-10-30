@@ -211,14 +211,10 @@ module Entities
         []
       end
 
-      def self.children(hash, key, path)
-        Array(hash[key]).each_with_index.flat_map { |child, index| yield(child, "#{path}.#{key}[#{index}]") }
-      end
-
       def self.error(path, code, **params) = ImportError.new(path:, code:, params:)
 
       private_class_method :question_errors, :typing_errors, :statement_blocks_errors, :misplaced_keys, :structure_errors, :image_errors, :taxonomy,
-                           :series_errors, :text, :children, :error, :explanation_errors
+                           :series_errors, :text, :error, :explanation_errors
     end
   end
 end

@@ -42,6 +42,14 @@ module Entities
         assert_equal [ [ "remember", "blank" ] ], NotionSheet.errors_for(raw(remember: 12))
       end
 
+      test "method, example et example.steps qui ne sont pas du bon type sont refusés sans lever" do
+        errors = NotionSheet.errors_for(raw(method: "étapes", example: "exemple"))
+
+        assert_equal [ [ "method", "invalid_count" ], [ "example.statement", "blank" ] ], errors
+        assert_equal [ [ "example.steps", "example_steps_mismatch" ] ],
+                     NotionSheet.errors_for(raw(example: { "statement" => "Simplifier.", "steps" => "étapes" }))
+      end
+
       test "from_raw lit la fiche, avec la clé de la figure citée" do
         sheet = NotionSheet.from_raw(raw.merge("figure" => "triangle-thales"))
 

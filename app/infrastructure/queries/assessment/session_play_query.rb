@@ -23,7 +23,7 @@ module Queries
         def expected_count = Entities::Assessment::Question::EXPECTED.fetch(question_type.to_sym)
         def multiple? = expected_count > 1
         # Compte dans « n/T répondues » : une question corrigée par la machine (ni rédigée ni cahier).
-        def counted? = Entities::Assessment::Question.kind_for(question_type)&.then { it::AUTO_GRADED } || false
+        def counted? = Entities::Assessment::Question.kind_for(question_type)::AUTO_GRADED
       end
       # Jamais de colonne correct : une proposition montrée à l'élève ne dit pas si elle est juste. index : rang d'affichage.
       Answer = Data.define(:id, :content, :index)
