@@ -50,7 +50,7 @@ module Queries
         completed = sessions.select { it[1] == "completed" }
         done = completed.to_set(&:first)
         pending = candidates.reject { done.include?(it.first) }
-        last = completed.max_by { it[5] }
+        last = completed.select { it[5] }.max_by { it[5] }
         index = last && candidates.index { it.first == last.first }
         found = (pending.find { candidates.index(it) > index } if index) || pending.first
         return unless found

@@ -15,6 +15,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - Le bench visait d'abord la carte du téléphone seulement (`#material_next_exercise`) : sur ordinateur il prenait une notion et mesurait 3 clics. Corrigé (`#lesson_material_next_exercise`) ; un mode `MODE=lecon` mesure en plus l'écran de la leçon, que le raccourci de la matière saute.
 - Plus de 2 connexions rapprochées depuis la même adresse butent sur le limiteur (`login_attempts`) : un élève neuf par passage, et 2 passages par série.
 - Les tests contrôleur et système du lot ont été écrits après la vue : seul le test de la query a été vu rouge.
+- Revue : une session `completed` sans `completed_at` faisait planter `max_by` (500) ; gardée dans `done`, écartée du calcul du dernier terminé.
 
 ## Ce qu'on a appris sur la codebase
 

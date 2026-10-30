@@ -1155,8 +1155,19 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#material_next_exercise" do
       assert_select "#material_next_exercise_title", text: "Second exercice"
       assert_select "a[href='#{exercise_session_path(session.public_id)}']", text: including(tl("next_exercise.resume", number: 2))
+      assert_select "a[aria-label=?]", tl("next_exercise.resume_aria", title: "Second exercice", number: 2)
       assert_select "form", 0
     end
+  end
+
+  test "the subject view reads the next exercise once when the phone and desktop blocks aim at the same subject" do
+    with_exercises
+    reads = []
+    counter = ->(*, payload) { reads << payload[:sql] if payload[:sql].include?(%("exercise_sessions"."student_id")) && payload[:sql].start_with?("SELECT") && payload[:sql].include?("answered_count") }
+
+    ActiveSupport::Notifications.subscribed(counter, "sql.active_record") { get courses_path(material: @svt.slug) }
+
+    assert_equal 1, reads.size, reads.inspect
   end
 
   test "CA-4: with nothing to propose, no card is rendered" do
@@ -1191,9 +1202,12 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
       sign_in_as user
 
       get courses_path(material: @svt.slug)
-      get course_path(@course.slug)
+      assert_response :success
+      assert_select "#material_next_exercise, #lesson_material_next_exercise", count: 0
 
-      assert_select "#material_next_exercise, #lesson_material_next_exercise, #lesson_next_exercise", 0
+      get course_path(@course.slug)
+      assert_response :success
+      assert_select "#lesson_next_exercise", count: 0
     end
   end
 end

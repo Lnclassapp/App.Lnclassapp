@@ -43,11 +43,51 @@ module Queries
         assert_equal @b2.public_id, call.exercise_public_id
       end
 
-      test "CA-3: le dernier terminé est le plus récent, pas le plus avancé" do
-        finish(@b2, at: 2.days.ago)
-        finish(@a2, at: 1.day.ago)
+      test "CA-2: la session la plus récente gagne même sur l'exercice le plus tard du programme ; le numéro suit les réponses" do
+        create_exercise_session(student: @student, exercise: @b2, started_at: 3.days.ago, answered_count: 1)
+        recent = create_exercise_session(student: @student, exercise: @a10, started_at: 1.hour.ago, answered_count: 3)
+
+        row = call
+
+        assert_equal [ @a10.public_id, recent.public_id, 4 ], [ row.exercise_public_id, row.session_public_id, row.resume_number ]
+      end
+
+      test "CA-3: seul B2 terminé, on propose l'exercice qui le suit (A10), pas le premier non terminé (A2)" do
+        finish(@b2, at: 1.day.ago)
 
         assert_equal @a10.public_id, call.exercise_public_id
+      end
+
+      test "CA-3: le dernier terminé est le plus récent, pas le plus avancé dans le programme" do
+        c = create_lesson_wide_exercise(course: @lesson10, title: "C10")
+        # Ordre du programme : A2 < B2 < A10 < C10.
+        finish(c, at: 2.days.ago)
+        finish(@a2, at: 1.day.ago)
+
+        assert_equal @b2.public_id, call.exercise_public_id
+      end
+
+      test "un autre élève en cours sur un candidat ne change rien pour cet élève" do
+        create_exercise_session(student: create_student, exercise: @a2, answered_count: 1)
+
+        row = call
+
+        assert_equal [ :start, @a2.public_id, nil ], [ row.kind, row.exercise_public_id, row.session_public_id ]
+      end
+
+      test "une session terminée sans date ne plante pas, garde son exercice terminé et n'est pas le dernier" do
+        finish(@a2, at: nil)
+        finish(@b2, at: 1.day.ago)
+
+        assert_equal @a10.public_id, call.exercise_public_id
+      end
+
+      test "une session abandonnée seule : l'exercice est reproposé à commencer" do
+        create_exercise_session(student: @student, exercise: @a2, status: "abandoned")
+
+        row = call
+
+        assert_equal [ :start, @a2.public_id ], [ row.kind, row.exercise_public_id ]
       end
 
       test "CA-3: rien ne suit le dernier terminé : retour au premier non terminé" do
@@ -62,10 +102,16 @@ module Queries
         assert_nil call
       end
 
-      test "CA-4: aucun candidat, aucune carte et une seule requête évitée" do
+      test "CA-4: aucun candidat, aucune carte, et une seule requête" do
         nothing = create_material(name: "Philosophie")
+        count = 0
+        counter = ->(*, payload) { count += 1 unless payload[:name] == "SCHEMA" }
 
-        assert_nil NextExerciseQuery.new.call(student_id: @student.id, audience: @audience, material: nothing.slug)
+        ActiveSupport::Notifications.subscribed(counter, "sql.active_record") do
+          assert_nil NextExerciseQuery.new.call(student_id: @student.id, audience: @audience, material: nothing.slug)
+        end
+
+        assert_equal 1, count
         assert_nil NextExerciseQuery.new.call(student_id: @student.id, audience: Entities::Catalog::LevelAudience.none, material: @maths.slug)
       end
 
