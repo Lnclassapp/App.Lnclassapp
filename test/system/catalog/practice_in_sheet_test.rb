@@ -15,7 +15,7 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
 
   test "the student checks her box in place : verdict, saisie kept, correction only afterwards, no reload" do
     sign_in_as @student
-    visit course_path(@course.slug)
+    visit course_path(@course.slug, anchor: "fiche-de-revision")
 
     within "turbo-frame#practice_#{@notion.slug}" do
       assert_no_selector "summary", text: pt("correction")
@@ -39,7 +39,7 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
   test "a two-box question gets one verdict per box" do
     notion = create_practice_notion(course: create_course(name: "Thalès", content: "", level: @course.level), questions: [ two_blank_numeric_question ])
     sign_in_as @student
-    visit course_path(notion.course.slug)
+    visit course_path(notion.course.slug, anchor: "fiche-de-revision")
 
     box(0).fill_in(with: "4,8")
     box(1).fill_in(with: "5")
@@ -54,7 +54,7 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
     sign_in_as @student
 
     with_mobile_viewport do
-      visit course_path(@course.slug)
+      visit course_path(@course.slug, anchor: "fiche-de-revision")
       assert no_sideways_scroll?, "la page défile sur le côté"
       assert_operator box(0).native.size.height, :>=, 48
       assert_operator find_button(pt("check")).native.size.height, :>=, 48

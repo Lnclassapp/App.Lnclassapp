@@ -101,7 +101,10 @@ class Catalog::PracticeInSheetTest < ActionDispatch::IntegrationTest
     create_essential(course: @course, name: long["name"], sheet: { "remember" => long["remember"], "method" => long["method"], "example" => long["example"],
                                                                  "pitfall" => long["pitfall"], "practice" => raw_practice(numeric_question) })
 
-    open_course
+    # La coupe des 150 mots vit sur la page de la leçon vue depuis une classe ; la page de la leçon montre la fiche entière.
+    classroom = create_classroom(level: @course.level, series: @course.series)
+    sign_in_as create_teacher(classrooms: [ classroom ])
+    get classroom_course_path(classroom.public_id, @course.slug)
 
     assert_select "[data-tone=practice][data-catalog--revision-more-target=rest]", count: 1
   end
