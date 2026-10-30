@@ -43,11 +43,27 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     assert_includes from_import.map(&:last), expected_code, label if expected_code
   end
 
+  # Une figure d'une sorte nouvelle qui remplace la figure 0 (la leçon la cite : on garde sa clé).
+  def figure_of(kind, params) = revision_figure.merge("kind" => kind, "params" => params)
+
+  MAP_PARAMS = { "base" => "cote_d_ivoire", "legend" => %w[Forêt Savane],
+                 "areas" => [ { "id" => "dense_forest", "category" => 1 }, { "id" => "savanna", "category" => 2 } ],
+                 "places" => [ { "id" => "abidjan", "label" => "Capitale" } ], "routes" => [ { "from" => "abidjan", "to" => "man" } ] }.freeze
+  TIMELINE_PARAMS = { "start" => 1880, "end" => 1960, "step" => 10, "events" => [ { "at" => 1893, "label" => "Colonie" } ] }.freeze
+  TREE_PARAMS = { "layout" => "tree", "nodes" => %w[r a b].map { { "id" => it, "label" => it } }, "edges" => [ { "from" => "r", "to" => "a" }, { "from" => "r", "to" => "b" } ] }.freeze
+
   def explanation(document_course, value) = (document_course["exercises"][0]["questions"][0]["explanation"] = value)
 
   test "la leçon de la fabrique : ni l'import ni le script ne refusent" do
     assert_empty import_pairs(revision_sheet_document)
     assert_empty script_pairs(revision_sheet_document)
+  end
+
+  test "une carte bien formée passe l'import et le script" do
+    document = mutated { it["figures"][0] = figure_of("map", MAP_PARAMS) }
+
+    assert_empty import_pairs(document)
+    assert_empty script_pairs(document)
   end
 
   test "parité : version retirée, version inconnue, autre format" do
@@ -96,6 +112,10 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     "CA-8 figure de sorte inconnue" => [ ->(c) { c["figures"][0]["kind"] = "hologram" }, nil ],
     "CA-8 paramètre hors bornes" => [ ->(c) { c["figures"][0]["params"]["points"][0]["x"] = 99 }, "figure_invalid" ],
     "CA-8 figure sans description" => [ ->(c) { c["figures"][0]["description"] = "" }, nil ],
+    "frise dont un événement est avant start" => [ ->(c) { c["figures"][0] = figure_of("timeline", TIMELINE_PARAMS.merge("events" => [ { "at" => 1850, "label" => "Avant" } ])) }, "figure_invalid" ],
+    "carte dont un lieu n'est pas dans le fond" => [ ->(c) { c["figures"][0] = figure_of("map", MAP_PARAMS.merge("places" => [ { "id" => "paris" } ])) }, "figure_invalid" ],
+    "schéma tree à deux racines" => [ ->(c) { c["figures"][0] = figure_of("diagram", TREE_PARAMS.merge("edges" => [ { "from" => "r", "to" => "a" } ])) }, "figure_invalid" ],
+    "aire de carte au-delà de la légende" => [ ->(c) { c["figures"][0] = figure_of("map", MAP_PARAMS.merge("areas" => [ { "id" => "savanna", "category" => 3 } ])) }, "figure_invalid" ],
     "CA-9 problème qui cite une figure absente" => [ ->(c) { c["exercises"][0]["figure"] = "inconnue" }, "figure_missing" ],
     "CA-9 notion qui cite une figure absente" => [ ->(c) { c["notions"][1]["figure"] = "inconnue" }, "figure_missing" ],
     "type de question inconnu" => [ ->(c) { c["exercises"][0]["questions"][0]["question_type"] = "oracle" }, "invalid_value" ],
