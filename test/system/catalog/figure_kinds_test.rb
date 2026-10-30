@@ -86,6 +86,37 @@ class Catalog::FigureKindsSystemTest < ApplicationSystemTestCase
     assert_in_delta heights[2], heights[0] / 2, 0.1
   end
 
+  test "a line chart draws one point per value on the bars' graduated scale, joined by one polyline" do
+    mount(figure(kind: "stat_chart", params: { "chart" => "line", "series" => [ 4, 8, 2, 6, 0, 10 ], "labels" => %w[a b c d e f] }))
+
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    assert_selector "#host svg [data-point]", count: 6, visible: :all
+    assert_selector "#host svg polyline", count: 1, visible: :all
+    ys = page.evaluate_script("[...document.querySelectorAll('#host [data-point]')].map((n) => Number(n.getAttribute('cy')))")
+    base = ys[4]
+
+    assert_in_delta base - ys[1], 2 * (base - ys[0]), 0.1
+    assert_in_delta base - ys[2], (base - ys[0]) / 2, 0.1
+    assert_in_delta base - ys[5], 2.5 * (base - ys[0]), 0.1
+  end
+
+  test "line chart abscissa labels do not overlap at 390 px" do
+    months = %w[Janvier Février Mars Avril Mai Juin]
+    mount(figure(kind: "stat_chart", params: { "chart" => "line", "series" => [ 4, 8, 2, 6, 3, 10 ], "labels" => months }))
+    page.execute_script("document.getElementById('host').style.maxWidth = '390px'")
+    assert_selector "#host [data-figure-target=canvas][style*='--figure-text']", visible: :all
+
+    boxes = page.evaluate_script(<<~JS)
+      [...document.querySelectorAll('#host svg text')].filter((t) => #{months.to_json}.includes(t.textContent))
+        .map((t) => { const r = t.getBoundingClientRect(); return [r.left, r.right, r.top, r.bottom] })
+    JS
+    assert_equal 6, boxes.size
+    boxes.combination(2).each do |a, b|
+      separate = a[1] <= b[0] + 0.5 || b[1] <= a[0] + 0.5 || a[3] <= b[2] + 0.5 || b[3] <= a[2] + 0.5
+      assert separate, "deux étiquettes d'abscisse se chevauchent : #{a} #{b}"
+    end
+  end
+
   test "a histogram has bars side by side" do
     mount(figure(kind: "stat_chart", params: { "chart" => "histogram", "series" => [ 3, 6, 4 ], "labels" => %w[0-5 5-10 10-15] }))
 
