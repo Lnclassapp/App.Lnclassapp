@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/optics — le tracé d'une lentille mince (image calculée) ou d'un œil réduit avec sa lentille correctrice
 // Rôle : lit `mode` (lens, eye), `lens`, `focal`, `object_distance`, `object_height`, `defect`, `correction` ; revérifie bornes et listes fermées avant de dessiner
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : XXXX-figures-des-matieres-de-3eme (§3) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2) · UDR : 0142-dessin-des-figures-de-3eme (§3) · chargé par import() depuis controllers/figure_controller
 //
 // Lentille : OA = −object_distance, f' = ±focal, 1/OA' = 1/f' + 1/OA, γ = OA'/OA. Le dessin n'a pas la même échelle en long et en haut (comme
 // sur un schéma de cours) : les droites restent des droites, donc les trois rayons particuliers se coupent bien à l'image calculée.

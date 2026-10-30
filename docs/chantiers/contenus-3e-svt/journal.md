@@ -44,5 +44,5 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|
 | **Livré le** | 2026-10-30 (PR prête, fusion par l'orchestrateur) |
 | **PR** | PR unique de `feature/contenus-3e-svt` vers `Develop` |
-| **ADR produits** | aucun (ADR-XXXX-figures-des-matieres-de-3eme du programme, §4.2 `plate`) |
-| **UDR produits** | aucune (UDR-XXXX-figures-des-matieres-de-3eme du programme, §3 `plate`) |
+| **ADR produits** | aucun (ADR-0117 du programme, §4.2 `plate`) |
+| **UDR produits** | aucune (UDR-0142 du programme, §3 `plate`) |

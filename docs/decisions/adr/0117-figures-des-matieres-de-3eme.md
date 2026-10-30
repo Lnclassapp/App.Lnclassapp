@@ -1,4 +1,4 @@
-# ADR-XXXX : Six sortes de figures et une courbe s'ajoutent à la liste fermée, pour les leçons de 3ème hors mathématiques
+# ADR-0117 : Six sortes de figures et une courbe s'ajoutent à la liste fermée, pour les leçons de 3ème hors mathématiques
 <!-- index
 titre: Figures des matières de 3ème (frise, carte, schéma, tracé optique, planche, molécule)
 statut: Accepté

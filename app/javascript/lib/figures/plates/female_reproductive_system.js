@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/female_reproductive_system — la planche de l'appareil reproducteur féminin (vue de face)
 // Rôle : déclare le titre, les 7 parties (nom français, ancre) et trace l'utérus (paroi épaisse, muqueuse), les deux trompes à pavillon frangé, les ovaires, le col et le vagin
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Appareil reproducteur féminin"
 

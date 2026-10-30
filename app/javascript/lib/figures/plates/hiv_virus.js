@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/hiv_virus — la planche du VIH (virion en coupe)
 // Rôle : déclare le titre, les 7 parties (nom français, ancre) et trace l'enveloppe (double trait) hérissée de spicules gp120/gp41, la matrice, la capside conique, l'ARN et la transcriptase inverse
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Virus de l'immunodéficience humaine (VIH)"
 

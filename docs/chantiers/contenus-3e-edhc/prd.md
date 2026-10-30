@@ -5,7 +5,7 @@
 
 ## 1. Contexte
 
-La vague rédige les 10 premières leçons d'EDHC de 3ème de la progression 2026-2027 en fichiers v3 prêts à importer, avec les figures de l'inventaire (ADR-XXXX-figures-des-matieres-de-3eme §4.1) : `diagram`, `stat_chart`, `map` `cote_d_ivoire`. Aucun code.
+La vague rédige les 10 premières leçons d'EDHC de 3ème de la progression 2026-2027 en fichiers v3 prêts à importer, avec les figures de l'inventaire (ADR-0117 §4.1) : `diagram`, `stat_chart`, `map` `cote_d_ivoire`. Aucun code.
 
 ## 2. Acteurs et permissions
 
@@ -69,5 +69,5 @@ Fonctionnalité: Les 10 leçons d'EDHC
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-figures-des-matieres-de-3eme et UDR-XXXX-figures-des-matieres-de-3eme (programme), appliqués sans amendement.
+- ADR-0117 et UDR-0142 (programme), appliqués sans amendement.
 - Aucun ADR ni UDR nouveau : pas de port, de table, de contrat ni de vue.

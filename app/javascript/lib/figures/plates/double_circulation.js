@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/double_circulation — la planche du schéma de la double circulation (cœur droit à gauche de l'image, cœur gauche à droite)
 // Rôle : déclare le titre, les 8 parties (nom français, ancre) et trace poumons, organes, deux cœurs et quatre vaisseaux fléchés ; sang pauvre en O₂ en tirets, sang riche en O₂ en trait plein
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Double circulation"
 

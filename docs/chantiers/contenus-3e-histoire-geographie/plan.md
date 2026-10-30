@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Décisions : ADR-XXXX-figures-des-matieres-de-3eme (§4.2, §4.3, menace) et UDR-XXXX-figures-des-matieres-de-3eme (§3), acceptées.
+> Décisions : ADR-0117 (§4.2, §4.3, menace) et UDR-0142 (§3), acceptées.
 
 ## Graphe
 

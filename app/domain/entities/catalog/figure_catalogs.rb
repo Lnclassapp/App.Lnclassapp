@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::FigureCatalogs
 # Rôle : listes fermées des identifiants (aires et lieux) de chaque fond de carte d'une figure `map` et des parties de chaque planche d'une figure `plate` ; Ruby pur, lu par Figure et par le script de contenus
-# ADR  : XXXX-figures-des-matieres-de-3eme (§4.2, §4.3) · UDR : XXXX-figures-des-matieres-de-3eme (§3)
+# ADR  : 0117-figures-des-matieres-de-3eme (§4.2, §4.3) · UDR : 0142-dessin-des-figures-de-3eme (§3)
 module Entities
   module Catalog
     module FigureCatalogs

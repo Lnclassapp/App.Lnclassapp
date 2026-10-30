@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/index — la liste fermée des planches de la sorte plate
 // Rôle : `PLATES` associe l'identifiant d'une planche à son module (TITLE, PARTS, draw) ; une planche de plus = un fichier et une ligne ici
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 import * as digestive_system from "./digestive_system"
 import * as blood_smear from "./blood_smear"

@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/timeline — la frise chronologique : axe gradué, périodes en bandes, événements en quinconce, numéros de repli
 // Rôle : lit `start`, `end`, `step`, `unit`, `periods` [{from, to, label}] et `events` [{at, label}] ; revérifie bornes et formes avant de dessiner ; les curseurs `start`/`end` zooment
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : XXXX-figures-des-matieres-de-3eme (§3 timeline) · chargé par import() depuis controllers/figure_controller
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2) · UDR : 0142-dessin-des-figures-de-3eme (§3 timeline) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, fixed, round, clamp } from "./svg"
 

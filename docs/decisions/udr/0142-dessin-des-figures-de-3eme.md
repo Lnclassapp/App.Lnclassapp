@@ -1,8 +1,8 @@
-# UDR-XXXX : Le dessin des figures de SVT, Physique-Chimie, Histoire-Géographie et EDHC
+# UDR-0142 : Le dessin des figures de SVT, Physique-Chimie, Histoire-Géographie et EDHC
 <!-- index
 titre: Dessin des figures des matières de 3ème
 statut: Accepté
-adr-lie: [XXXX](../adr/XXXX-figures-des-matieres-de-3eme.md)
+adr-lie: [0117](../adr/0117-figures-des-matieres-de-3eme.md)
 problematique: Six sortes de figures nouvelles doivent se lire au téléphone, sans couleur et sans JavaScript, dans le cahier comme dans une page d'exercice.
 -->
 
@@ -11,7 +11,7 @@ problematique: Six sortes de figures nouvelles doivent se lire au téléphone, s
 | **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/contenus-3e-autres-matieres` |
-| **ADR lié** | ADR-XXXX-figures-des-matieres-de-3eme ; complète UDR-0141 §3.3 |
+| **ADR lié** | ADR-0117 ; complète UDR-0141 §3.3 |
 | **Remplacé par** | — |
 
 ---

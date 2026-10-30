@@ -5,7 +5,7 @@
 
 ## 1. Contexte
 
-La vague ajoute les sortes de figures `optics` et `molecule` et trois planches de la sorte `plate` (créée par la vague 3), exactement selon ADR-XXXX-figures-des-matieres-de-3eme §4.2 et UDR-XXXX-figures-des-matieres-de-3eme §3, puis rédige les 10 premières leçons de Physique-Chimie de 3ème en fichiers v3 prêts à importer.
+La vague ajoute les sortes de figures `optics` et `molecule` et trois planches de la sorte `plate` (créée par la vague 3), exactement selon ADR-0117 §4.2 et UDR-0142 §3, puis rédige les 10 premières leçons de Physique-Chimie de 3ème en fichiers v3 prêts à importer.
 
 ## 2. Acteurs et permissions
 
@@ -127,8 +127,8 @@ Fonctionnalité: Les 10 leçons de Physique-Chimie
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-figures-des-matieres-de-3eme (accepté) : formes et cohérence de `optics`, `molecule`, `plate`. La vague l'applique sans l'amender ; les parties des 3 planches de PC, que l'ADR laisse à la vague, sont fixées dans `plan.md`.
-- UDR-XXXX-figures-des-matieres-de-3eme (acceptée) : dessin des sortes. Aucune vue nouvelle.
+- ADR-0117 (accepté) : formes et cohérence de `optics`, `molecule`, `plate`. La vague l'applique sans l'amender ; les parties des 3 planches de PC, que l'ADR laisse à la vague, sont fixées dans `plan.md`.
+- UDR-0142 (acceptée) : dessin des sortes. Aucune vue nouvelle.
 
 ## 7. Mesures
 

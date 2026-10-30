@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/blood_smear — la planche du frottis sanguin (champ de microscope)
 // Rôle : déclare le titre, les 6 parties (nom français, ancre) et trace des hématies sans noyau, trois leucocytes (noyau plurilobé, rond, en haricot), des plaquettes dans le plasma
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Frottis sanguin (au microscope)"
 

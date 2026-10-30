@@ -1,6 +1,6 @@
 // ⚡ FRONT · lib/figures/plates/eudiometer — la planche de l'eudiomètre (tube gradué retourné sur une cuve à eau)
 // Rôle : déclare le titre, les 7 parties (nom français, ancre) et trace le tube, sa graduation, les électrodes et l'étincelle, le mélange gazeux, l'eau montée dans le tube et la cuve
-// ADR  : XXXX-figures-des-matieres-de-3eme (§4.2 plate) · UDR : XXXX-figures-des-matieres-de-3eme (§3 plate) · lu par lib/figures/plate
+// ADR  : 0117-figures-des-matieres-de-3eme (§4.2 plate) · UDR : 0142-dessin-des-figures-de-3eme (§3 plate) · lu par lib/figures/plate
 
 export const TITLE = "Eudiomètre"
 

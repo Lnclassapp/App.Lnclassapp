@@ -110,5 +110,5 @@ Fonctionnalité: Les 10 leçons de SVT
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-figures-des-matieres-de-3eme (§4.2 `plate`, listes fermées) — accepté ; aucun ADR nouveau : la vague fixe les parties que l'ADR délègue à chaque planche.
-- UDR-XXXX-figures-des-matieres-de-3eme (§3 `plate`) — acceptée ; aucune vue créée ni modifiée.
+- ADR-0117 (§4.2 `plate`, listes fermées) — accepté ; aucun ADR nouveau : la vague fixe les parties que l'ADR délègue à chaque planche.
+- UDR-0142 (§3 `plate`) — acceptée ; aucune vue créée ni modifiée.

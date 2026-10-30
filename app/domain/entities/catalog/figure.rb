@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::Figure
 # Rôle : une figure paramétrée d'une leçon (clé, sorte, description, paramètres bornés, 0 à 4 curseurs) et ses règles de forme
-# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §4.2), XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3)
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §4.2), 0117-figures-des-matieres-de-3eme (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3)
 # script/contenus/valider.rb ne charge que figure_kinds et figure (hors Zeitwerk) : figure.rb amène ses catalogues si personne ne l'a fait.
 defined?(Entities::Catalog::FigureCatalogs) || require_relative("figure_catalogs")
 
