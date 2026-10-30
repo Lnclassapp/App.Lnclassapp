@@ -210,6 +210,18 @@ module Repositories
         assert_equal [ [ nil ], [ "tab\tA" ] ], written.map { it.answers.map(&:match_content) }
       end
 
+      test "le sujet en blocs d'un exercice s'écrit en JSON, sans blocs la colonne reste vide (ADR-0115)" do
+        fiche = create_essential
+        blocks = [ { "type" => "paragraph", "text" => "Un énoncé avec $x$." }, { "type" => "box", "label" => "Retenir", "paragraphs" => [ "Texte." ] } ]
+        with_blocks = Port::ExerciseNode.new(public_id: SecureRandom.base58(14), essential_id: fiche.id, title: "Avec sujet", statement: nil,
+                                             exercise_type: "fixation", position: 1, statement_blocks: blocks,
+                                             questions: [ Port::QuestionNode.new(position: 1, content: "Q", explanation: nil, question_type: "true_false", answers:) ])
+
+        @writer.write(author_id: @author.id, at: @at, exercises: [ with_blocks, exercise("Sans sujet", essential_id: fiche.id, position: 2) ])
+
+        assert_equal [ blocks, nil ], fiche.exercises.order(:position).map(&:statement_blocks)
+      end
+
       # --- Format 3 (ADR-0116 §4.3, §4.4) ---
 
       def v3_exercise(title, figure_key: nil)

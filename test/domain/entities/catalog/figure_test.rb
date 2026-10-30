@@ -114,6 +114,73 @@ module Entities
         assert_equal %w[params.points[0].y], reasons(raw(params: { "points" => [ { "id" => "A", "x" => 0 } ] })).map(&:first)
       end
 
+      test "une figure qui n'est pas un objet est refusée à la racine, sans lever" do
+        [ nil, "figure", 3, [] ].each do |value|
+          assert_equal [ [ "$", "figure_invalid", { param: "$" } ] ], Figure.errors_for(value), value.inspect
+        end
+      end
+
+      test "params qui n'est pas un objet est refusé une seule fois" do
+        assert_equal [ [ "params", "figure_invalid" ] ], reasons(raw(params: "x"))
+        assert_equal [ [ "params", "figure_invalid" ] ], reasons(raw(params: [ 1 ]))
+      end
+
+      test "geometry : points qui n'est pas une liste ou dont un point n'est pas un objet est refusé" do
+        assert_equal [ [ "params.points", "figure_invalid" ] ], reasons(raw(params: { "points" => "A" }))
+        assert_includes reasons(raw(params: { "points" => [ "A" ] })), [ "params.points[0]", "figure_invalid" ]
+        assert_includes reasons(raw(params: { "points" => [ true ] })), [ "params.points[0]", "figure_invalid" ]
+        assert_includes reasons(raw(params: { "points" => [ nil ] })), [ "params.points[0]", "figure_invalid" ]
+      end
+
+      test "un nombre de paramètre hors bornes est refusé et nommé" do
+        errors = Figure.errors_for(raw(kind: "number_line", params: { "min" => 500, "max" => 600, "step" => 1 }))
+
+        assert_includes errors, [ "params.min", "figure_invalid", { param: "min" } ]
+        assert_includes errors, [ "params.max", "figure_invalid", { param: "max" } ]
+        assert_equal [ [ "params.step", "figure_invalid" ] ], reasons(raw(kind: "number_line", params: { "min" => 0, "max" => 10, "step" => 100 }))
+        assert_equal [ [ "params.min", "figure_invalid" ] ], reasons(raw(kind: "number_line", params: { "min" => "a", "max" => 10, "step" => 1 }))
+      end
+
+      test "stat_chart : une série qui n'est pas une liste est refusée une seule fois" do
+        assert_equal [ [ "params.series", "figure_invalid" ] ], reasons(raw(kind: "stat_chart", params: { "chart" => "bars", "series" => 5 }))
+      end
+
+      test "un élément de liste hors bornes, trop long ou de mauvaise forme est refusé" do
+        points = ->(item) { raw(params: { "points" => [ { "id" => "A", "x" => 0, "y" => 0 } ], "labels" => [ item ] }) }
+
+        assert_empty Figure.errors_for(points.(5))
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(points.(21))
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(points.("a" * 61))
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(points.([ 1, 2, 3, 4, 5 ]))
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(points.(true))
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(points.(nil))
+      end
+
+      test "les valeurs imbriquées d'un élément sont bornées et d'un type simple" do
+        nested = ->(item) { raw(params: { "points" => [ { "id" => "A", "x" => 0, "y" => 0 } ], "labels" => [ item ] }) }
+
+        assert_empty Figure.errors_for(nested.([ 1, "a", true, false ]))
+        assert_empty Figure.errors_for(nested.({ "k" => 1, "t" => "a", "flag" => true }))
+        assert_equal [ [ "params.labels[0][1]", "figure_invalid" ] ], reasons(nested.([ 1, 99 ]))
+        assert_equal [ [ "params.labels[0].t", "figure_invalid" ] ], reasons(nested.({ "t" => "a" * 61 }))
+        assert_equal [ [ "params.labels[0][0]", "figure_invalid" ] ], reasons(nested.([ nil ]))
+        assert_equal [ [ "params.labels[0].k", "figure_invalid" ] ], reasons(nested.({ "k" => [ 1 ] }))
+      end
+
+      test "controls absent est valide ; un curseur qui n'est pas un objet est refusé" do
+        assert_empty Figure.errors_for(raw.except("controls"))
+        assert_equal [ [ "controls[0]", "figure_invalid", { param: "controls[0]" } ] ], Figure.errors_for(solid(controls: [ "height" ]))
+        assert_equal [ [ "controls", "figure_invalid", { param: "controls" } ] ], Figure.errors_for(solid(controls: "height"))
+      end
+
+      test "un curseur d'une figure de sorte inconnue ou à clé qui n'est pas un texte ne lève pas" do
+        control = { "param" => "height", "min" => 1, "max" => 9, "step" => 1, "label" => "hauteur" }
+
+        assert_equal [ [ "kind", "figure_invalid" ] ], reasons(raw(kind: "hologram", controls: [ control ]))
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(solid(controls: [ control.merge("param" => 5) ]))
+        assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(solid(controls: [ control.merge("param" => nil) ]))
+      end
+
       test "from_raw construit la figure" do
         figure = Figure.from_raw(raw)
 

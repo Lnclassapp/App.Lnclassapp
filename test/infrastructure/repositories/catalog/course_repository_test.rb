@@ -117,6 +117,18 @@ module Repositories
         assert_equal [ [ @level.id, nil ] ], @repository.assigned_classroom_levels(id: record.id)
       end
 
+      test "status_for_update rend le statut de la leçon et ceux de ses notions et exercices, nil si elle n'existe pas (ADR-0116 §4.4)" do
+        record = create_course(level: @level, material: @material, status: "draft")
+        essential = create_essential(course: record, status: "published")
+        create_exercise(essential:, status: "draft")
+
+        status = @repository.status_for_update(id: record.id)
+
+        assert_equal "draft", status[:course]
+        assert_equal %w[draft published], status[:contents].sort
+        assert_nil @repository.status_for_update(id: record.id + 1_000_000)
+      end
+
       test "donne les clés de doublon et les slugs pris" do
         series = create_series
         record = create_course(level: @level, material: @material, series:, name: "Génétique  et Évolution")

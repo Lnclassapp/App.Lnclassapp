@@ -31,7 +31,7 @@ module Queries
         def initialize(question_type: "single_choice", response_text: nil, pairs: [], solution: [], numeric_tolerance: nil,
                        unanswered: false, points: BigDecimal("1"), unit: nil, criteria: [], **) = super
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
-        def auto_graded? = Entities::Assessment::Question.kind_for(question_type)&.then { it::AUTO_GRADED } || false
+        def auto_graded? = Entities::Assessment::Question.kind_for(question_type)::AUTO_GRADED
       end
       # Sans reveal, correct vaut nil : la colonne n'est pas lue, et seules les propositions cochées le sont.
       ReviewAnswer = Data.define(:id, :content, :selected, :correct)

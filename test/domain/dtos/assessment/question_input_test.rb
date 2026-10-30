@@ -46,6 +46,13 @@ module Dtos
         assert_includes input.errors.attribute_names, :points
       end
 
+      test "an unreadable points input is read as 0, which the question structure refuses" do
+        built = QuestionInput.from_params(content: "Q", question_type: "written", points: "beaucoup", explanation: "x").to_entity(position: 1)
+
+        assert_equal BigDecimal("0"), built.points
+        assert_includes built.structure_errors, :points_out_of_range
+      end
+
       test "points out of range are left to the question structure, which names the rule" do
         built = QuestionInput.from_params(content: "Q", question_type: "written", points: "21", explanation: "x").to_entity(position: 1)
 

@@ -286,6 +286,35 @@ module UseCases
         assert_equal [ 7, 5, 6 ], [ Orm::Level.count, Orm::Series.count, Orm::Material.count ]
       end
 
+      test "a lesson of a level with a linked series is planned with the series and keyed on it" do
+        item = validate(lesson(level_name: "Tle", series_name: "D"))
+
+        assert item.valid?, item.errors.inspect
+        assert_equal id_of(:series, "d"), item.plan.series_id
+        assert_equal [ "racinescarrees", id_of(:levels, "tle"), id_of(:materials, "mathematiques"), id_of(:series, "d") ], item.key
+      end
+
+      test "a root that is not an object is a schema error, without raising" do
+        [ "lecon", nil, [] ].each { |root| assert_equal [ [ "courses[0]", "schema" ] ], pairs(validate(root)), root.inspect }
+      end
+
+      test "a figure, a notion or a problem that is not an object is refused at its path, without raising" do
+        figures = validate(lesson("figures" => [ "x", revision_figure ]))
+        notions = validate(lesson("notions" => [ "x", revision_notion("Simplifier") ]))
+        problems = validate(lesson("exercises" => [ 5, *Array.new(3) { revision_exercise("Problème") } ]))
+
+        assert_includes pairs(figures), [ "courses[0].figures[0]", "figure_invalid" ]
+        assert_includes pairs(notions), [ "courses[0].notions[0]", "schema" ]
+        assert_equal [ [ "courses[0].exercises[0]", "schema" ] ], pairs(problems)
+      end
+
+      test "an exercise without statement is refused at its statement" do
+        broken = lesson
+        broken["exercises"][1]["statement"] = "  "
+
+        assert_equal [ [ "courses[0].exercises[1].statement", "blank" ] ], pairs(validate(broken))
+      end
+
       test "a question of any type keeps the structure rules of the other imports" do
         broken = lesson
         broken["exercises"][0]["questions"][0]["answers"].each { it["correct"] = true }
