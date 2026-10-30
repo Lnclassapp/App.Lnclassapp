@@ -764,12 +764,15 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; la fiche de révision montre les notions publiées au
     # gabarit des quatre blocs (UDR-0141 fiche de révision) ; « Prépare interros » liste l'exercice de la notion (Lot B).
     assert_select "#course_essentials", 0
-    assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
+    # La fiche n'est pas ouverte d'emblée : un bouton « Fiche de révision » ouvre sa <dialog> en plein écran.
+    assert_select "section#fiche-de-revision button[aria-haspopup=dialog][aria-controls=revision-sheet]", text: tl("show.revision_title")
+    assert_select "section#fiche-de-revision dialog#revision-sheet.dialog-full:not([open]) h2", text: tl("show.revision_title")
     assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
     assert_select "section#fiche-de-revision h4", text: "1. La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
     assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
-    assert_select "section#prepare-interros #notion-#{meiose.slug} h3", text: "La méiose"
+    assert_select "section#prepare-interros ul#prepare-interros-grid > li > span#notion-#{meiose.slug}[aria-label=?]", "La méiose"
+    assert_select "section#prepare-interros h3", text: "La méiose", count: 0
     assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
@@ -861,6 +864,76 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#course-actions-menu", 0
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
+  end
+
+  # UDR-0145 §3.2 ter : « Prépare devoirs » porte les évaluations ; chaque repère n'existe qu'une fois sur la page.
+  def prepare_split_fixtures
+    @fix = create_exercise(essential: @split_a = create_essential(course: @course, name: "Notion A", position: 1), title: "Fixation A")
+    @eval_a = create_exercise(essential: @split_a, title: "Devoir A", exercise_type: "evaluation")
+    @split_b = create_essential(course: @course, name: "Notion B", position: 2)
+    @eval_b = create_exercise(essential: @split_b, title: "Devoir B", exercise_type: "evaluation")
+    @eval_wide = create_lesson_wide_exercise(course: @course, title: "Devoir large", exercise_type: "evaluation")
+  end
+
+  def assert_prepare_split
+    assert_select "section#prepare-interros[data-turbo-prefetch=false] ul#prepare-interros-grid li#exercise-#{@fix.public_id}"
+    assert_select "section#prepare-interros li#exercise-#{@eval_a.public_id}", 0
+    assert_select "section#prepare-devoirs[aria-labelledby=prepare_devoirs_title][data-turbo-prefetch=false] h2", text: tl("show.prepare_devoirs_title")
+    assert_select "section#prepare-devoirs", text: including(tl("show.prepare_devoirs_intro"))
+    assert_select "section#prepare-devoirs ul#prepare-devoirs-grid li[id^=exercise-]", 3
+    assert_select "section#prepare-devoirs li#exercise-#{@fix.public_id}", 0
+    assert_select "#notion-#{@split_a.slug}", 1
+    assert_select "#notion-#{@split_b.slug}", 1
+    assert_select "#toute-la-lecon", 1
+    assert_select "section#prepare-interros #notion-#{@split_a.slug}", 1
+    assert_select "section#prepare-devoirs ul#prepare-devoirs-grid > li > span#notion-#{@split_b.slug}", 1
+    assert_select "section#prepare-devoirs ul#prepare-devoirs-grid > li > span#toute-la-lecon", 1
+    assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
+  end
+
+  test "a student reads fixations in « Prépare interros » and evaluations in « Prépare devoirs », each anchor once" do
+    prepare_split_fixtures
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_response :success
+    assert_prepare_split
+  end
+
+  test "a teacher gets the toggles under the evaluation cards of « Prépare devoirs »" do
+    prepare_split_fixtures
+    classroom = create_classroom(level: @tle, series: @course.series)
+    sign_in_as create_teacher(classrooms: [ classroom ])
+
+    get course_path(@course.slug)
+
+    assert_response :success
+    assert_prepare_split
+    assert_select "section#prepare-devoirs li#exercise-#{@eval_a.public_id} [id^='assignment_#{classroom.public_id}_Exercise_']", 1
+    assert_select "section#prepare-interros li#exercise-#{@fix.public_id} [id^='assignment_#{classroom.public_id}_Exercise_']", 1
+    assert_select ".ui-button-primary", 1
+  end
+
+  test "without any evaluation there is no « Prépare devoirs » section" do
+    create_exercise(essential: create_essential(course: @course, name: "Notion A"))
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_select "section#prepare-interros ul#prepare-interros-grid li[id^=exercise-]", 1
+    assert_select "section#prepare-devoirs", 0
+    assert_select "#prepare-devoirs-grid", 0
+  end
+
+  test "with only evaluations « Prépare interros » shows its empty state" do
+    create_lesson_wide_exercise(course: @course, exercise_type: "evaluation")
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_select "#prepare-interros", text: including(tl("show.exercises_empty"))
+    assert_select "#prepare-devoirs-grid li[id^=exercise-]", 1
   end
 
   test "a course without content shows both sections empty, without the former sheet button" do

@@ -63,7 +63,7 @@ class Communication::AnnouncementsV2JourneyTest < ApplicationSystemTestCase
     within("#announcement-cap-notice") { assert_text tc("authored_messages.form.cap.notice", count: 3, title: "Réunion parents") }
     fill_in field(:title), with: "Réunion de rentrée"
     assert_selector "div:has(> div > #announcement_title) > [data-communication--character-count-target=count]", text: "18 / 60"
-    fill_in field(:body), with: "La réunion de rentrée a lieu jeudi à 17 h. Le détail est dans l'audio."
+    fill_in field(:body), with: "Réunion de rentrée jeudi à 17 h."
     tap find("label", text: tc("themes.mangue"))
     assert_selector "fieldset#announcement-illustrations[data-announcement-theme=mangue]"
     tap find("fieldset#announcement-illustrations label", text: "Bus scolaire")

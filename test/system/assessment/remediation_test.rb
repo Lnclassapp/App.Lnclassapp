@@ -32,7 +32,7 @@ class Assessment::RemediationTest < ApplicationSystemTestCase
     end
     # CA-25 : « Revoir la notion » mène à la leçon, sur la notion, où l'exercice est proposé (la notion n'a plus de page).
     assert_current_path course_path(course.slug)
-    within("#notion-#{thales.slug}") { click_on offered.title }
+    within("#prepare-interros-grid") { click_on offered.title }
     click_on I18n.t("assessment.exercises.show.start")
     remediation = play(correct: QUESTIONS)
     assert_equal "remediation", Orm::ExerciseSession.find_by!(public_id: remediation).kind

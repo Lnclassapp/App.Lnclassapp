@@ -123,6 +123,7 @@ module Entities
         assert_nil mp3(frames(3) + ape_part(32, 1 << 31)), "footer announcing a header that is missing"
         assert_nil mp3(frames(3) + "APETAGEX".b + ("a".b * 24)), "24 bytes"
         assert_nil mp3(frames(3) + "a".b * 40 + "APETAGEX".b + ("a".b * 24)), "footer cut"
+        [ 2, 5, 7 ].each { |n| assert_nil mp3(frames(3) + "APETAGEX".b + ("\x01".b * n)), "APETAGEX + #{n} bytes" }
       end
 
       test "M2 — TAG or APETAGEX followed by frames the player would resynchronise on is refused" do
@@ -201,7 +202,7 @@ module Entities
       test "an M4A is measured by the largest of mvhd, each mdhd and the sum of each stts over the timescale of its track" do
         assert_in_delta 5.0, mp4(file(movie(header_box("mvhd", timescale: 1000, duration: 5000)))), 0.0001
         assert_in_delta 7.0, mp4(file(movie(header_box("mvhd", timescale: 1000, duration: 5000, version: 1),
-                                            track(timescale: 100, duration: 700, version: 1)))), 0.0001
+                                            track(timescale: 100, duration: 700, version: 1, entries: [ [ 10, 10 ] ])))), 0.0001
         assert_in_delta 9.0, mp4(file(movie(header_box("mvhd", timescale: 1000, duration: 5000),
                                             track(timescale: 100, duration: 700, entries: [ [ 90, 10 ] ])))), 0.0001
         assert_in_delta 9.0, mp4(file(movie(track(timescale: 100, duration: 700, entries: [ [ 40, 10 ], [ 50, 10 ] ])))), 0.0001
@@ -212,7 +213,7 @@ module Entities
 
         assert_in_delta 60.0, mp4(file(movie(header_box("mvhd", timescale: 1000, duration: 1000), long))), 0.0001
         assert_in_delta 60.0, mp4(file(movie(header_box("mvhd", timescale: 1000, duration: 1000),
-                                             track(timescale: 1000, duration: 60_000)))), 0.0001
+                                             track(timescale: 1000, duration: 60_000, entries: [ [ 10, 10 ] ])))), 0.0001
       end
 
       test "M4 — a fragmented M4A (mvex in moov, or a moof) is unreadable" do
@@ -257,13 +258,26 @@ module Entities
         assert_nil mp4(file(movie(box("mvhd", "\x02\x00\x00\x00".b + zeros(40)))))
       end
 
-      test "a trak without mdhd adds nothing; a track without stts counts by its mdhd" do
-        mvhd = header_box("mvhd", timescale: 1000, duration: 2000)
-        double = box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1500) + header_box("mdhd", timescale: 1000, duration: 9000)))
+      # M9 : une piste dont seule la durée déclarée se lit ne prouve rien ; 60 s de stts derrière 5 s déclarées.
+      test "M9 — a trak without mdhd, or whose stts is not under mdia/minf/stbl, is unreadable" do
+        mvhd = header_box("mvhd", timescale: 1000, duration: 5000)
+        stbl = box("stbl", stts([ 600, 100 ]) + sizes(600))
+        mdhd = header_box("mdhd", timescale: 1000, duration: 5000)
 
-        assert_in_delta 2.0, mp4(file(movie(mvhd, box("trak", box("tkhd", zeros(8)))))), 0.0001
-        assert_in_delta 2.0, mp4(file(movie(mvhd, box("trak", box("mdia", box("minf")))), box("moov"))), 0.0001
-        assert_in_delta 2.0, mp4(file(movie(mvhd, double))), 0.0001
+        assert_nil mp4(file(movie(mvhd, box("trak", box("mdia", box("minf", stbl)))))), "no mdhd"
+        assert_nil mp4(file(movie(mvhd, box("trak", box("mdia", mdhd + stbl))))), "stbl under mdia, no minf"
+        assert_nil mp4(file(movie(mvhd, box("trak", box("mdia", mdhd + box("minf")))))), "no stbl"
+        assert_nil mp4(file(movie(mvhd, box("trak", box("mdia", mdhd + box("minf", box("stbl", sizes(600)))))))), "no stts"
+        assert_nil mp4(file(movie(mvhd, box("trak", box("tkhd", zeros(8)))))), "tkhd only"
+        assert_nil mp4(file(movie(mvhd, track(timescale: 1000, duration: 1000, entries: [ [ 10, 10 ] ]), box("trak")))), "a second, empty trak"
+        assert_in_delta 60.0, mp4(file(movie(mvhd, box("trak", box("mdia", mdhd + box("minf", stbl)))))), 0.0001
+      end
+
+      test "the first mdhd of a track is its header" do
+        double = box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1500) + header_box("mdhd", timescale: 1000, duration: 9000) +
+                                         box("minf", box("stbl", stts([ 10, 10 ]) + sizes(10)))))
+
+        assert_in_delta 2.0, mp4(file(movie(header_box("mvhd", timescale: 1000, duration: 2000), double))), 0.0001
       end
 
       test "M6 — an stts that announces 2^32 entries is bounded by the bytes of its box" do
@@ -292,8 +306,8 @@ module Entities
         assert_nil mp4(file(movie(short)))
       end
 
-      test "an stts box without its header is unreadable" do
-        broken = box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1000) + box("minf", box("stbl", box("stts", zeros(4))))))
+      test "an stts box without its header, in a track with its stsz, is unreadable" do
+        broken = box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1000) + box("minf", box("stbl", box("stts", zeros(4)) + sizes(10)))))
 
         assert_nil mp4(file(movie(broken)))
       end

@@ -63,4 +63,4 @@ Le porteur le demande, et une session parallèle raccourcit le parcours matière
 
 ## Questions encore ouvertes
 
-- Le porteur valide-t-il la lecture « type = fixation / évaluation » ? (posée dans la PR, captures à l'appui)
+- ~~Le porteur valide-t-il la lecture « type = fixation / évaluation » ?~~ Oui (2026-10-30), avec une section « Prépare devoirs » pour les évaluations (UDR-0145 §3.2 ter).

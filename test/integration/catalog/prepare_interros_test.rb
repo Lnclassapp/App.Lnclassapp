@@ -17,22 +17,30 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
   def row(exercise) = "#prepare-interros li#exercise-#{exercise.public_id}"
 
   # CA-06
-  test "a student reads the 8 exercises: the 4 sheets in order, then the 4 of the whole lesson, each with type and question count" do
+  test "a student reads the 4 fixations in « Prépare interros » and the 4 evaluations in « Prépare devoirs », each with type and question count" do
     sign_in_as @student
 
     get course_path(@course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros li[id^=exercise-]", 8
-    titles = css_select("#prepare-interros li[id^=exercise-] h3 a").map { it.text.squish }
-    assert_equal @by_notion.map(&:title) + @wide.map(&:title), titles
-    assert_select "#prepare-interros h3", text: "Notion 1"
-    assert_select "#prepare-interros #toute-la-lecon h3", text: tl("lesson_wide_title")
+    assert_select "#prepare-interros li[id^=exercise-]", 4
+    assert_equal @by_notion.map(&:title), css_select("#prepare-interros li[id^=exercise-] h3 a").map { it.text.squish }
+    assert_equal @wide.map(&:title), css_select("#prepare-devoirs li[id^=exercise-] h3 a").map { it.text.squish }
+    assert_select "ul#prepare-interros-grid.grid[class~='sm:grid-cols-2'][class~='xl:grid-cols-3'][class~='2xl:grid-cols-4']", 1
+    assert_select "ul#prepare-devoirs-grid.grid[class~='sm:grid-cols-2'][class~='xl:grid-cols-3'][class~='2xl:grid-cols-4']", 1
+    assert_select "#prepare-interros-grid > li[id^=exercise-]", 4
+    assert_select "#prepare-devoirs-grid > li[id^=exercise-]", 4
+    assert_select "#prepare-interros-grid > li:first-child > span#notion-#{@notions.first.slug}[aria-label='Notion 1']", 1
+    assert_select "#prepare-devoirs-grid > li > span#toute-la-lecon[aria-label=?]", tl("lesson_wide_title")
+    assert_select "#toute-la-lecon", 1
+    assert_select "#prepare-interros h3", text: "Notion 1", count: 0
+    assert_select "#prepare-devoirs h3", text: tl("lesson_wide_title"), count: 0
     assert_select row(@by_notion.first), text: including("Fixation")
     assert_select row(@by_notion.first), text: including(tl("question_count", count: 2))
-    assert_select row(@wide.first), text: including("Évaluation")
+    assert_select "#prepare-devoirs li#exercise-#{@wide.first.public_id}", text: including("Évaluation")
+    assert_select "#prepare-interros li#exercise-#{@wide.first.public_id}", 0
     assert_select "#{row(@by_notion.first)} a[href='#{exercise_path(@by_notion.first.public_id)}']"
-    assert_select "#prepare-interros form[action*=assignments]", 0
+    assert_select "#prepare-interros form[action*=assignments], #prepare-devoirs form[action*=assignments]", 0
   end
 
   # CA-10
@@ -99,8 +107,9 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
-    assert_select "#prepare-interros li[id^=exercise-]", 9
+    assert_select "#prepare-interros li[id^=exercise-]", 5
+    assert_select "#prepare-devoirs li[id^=exercise-]", 4
     assert_select "#prepare-interros li", text: including("Brouillon")
-    assert_select "#prepare-interros [id^=assignment_]", 0
+    assert_select "#prepare-interros [id^=assignment_], #prepare-devoirs [id^=assignment_]", 0
   end
 end

@@ -95,13 +95,14 @@ module Communication
       end
     end
 
-    test "AN-14 (display) — an edited message is marked « Modifiée »" do
+    test "AN-14 (display) — retired on 2026-10-30: an edited message is not marked « Modifiée »" do
       fiches(edited_at: 5.minutes.ago)
       sign_in_as @awa
 
       get announcements_path
 
-      assert_select "article span", I18n.t("communication.card.edited")
+      assert_select "article"
+      assert_select "article", text: /Modifiée/, count: 0
     end
 
     test "AN-18 — an image replaces the illustration; only a card with an audio has the ▶ button" do
@@ -135,7 +136,7 @@ module Communication
 
     # UDR-0075 §3.1 and §3.2 (annonces-v2, Lot B): a card takes the theme of its message by one attribute, its classes stay
     # those of UDR-0071 §3.2; a drawing of the team is rebuilt in one colour, the strong illustration of the theme.
-    CARD_CLASSES = "relative flex min-h-40 gap-2 rounded-ln bg-brand-soft py-3 pr-2 pl-4 text-school".freeze
+    CARD_CLASSES = "relative flex min-h-32 gap-2 rounded-ln bg-brand-soft py-2 pr-2 pl-4 text-school".freeze
     CIRCLE = { "name" => "circle", "attributes" => { "cx" => "32", "cy" => "32", "r" => "20" }, "children" => [] }.freeze
 
     test "AV-07 — each card carries the theme of its message, « Ciel » by default, with the classes of UDR-0071 unchanged" do
