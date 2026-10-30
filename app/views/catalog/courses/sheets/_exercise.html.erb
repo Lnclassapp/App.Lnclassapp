@@ -1,11 +1,15 @@
 <%# 🌐 UI · catalog/courses/sheets/_exercise — un exercice de la feuille : énoncé, figure, questions, indice, barre d'actions, résultat %>
-<%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; élève : champs et « Vérifier ma réponse » ; exercice déjà corrigé : correction et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
+<%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; élève : champs et « Vérifier ma réponse » (un devoir à rendre : « Ce devoir est à rendre… » à la place) ; exercice déjà corrigé : correction et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
 <%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0091 §4.4 (aucune correction avant la vérification) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 · Stimulus : prepare-sheet, math %>
-<%# locals: (exercise:, mode:, targets: nil, classrooms: []) -%>
+<%# locals: (exercise:, mode:, targets: nil, classrooms: [], assignment_public_id: nil, focus: false) -%>
+<%# focus : la réponse de la vérification marque le frame, prepare-sheet donne alors le focus à « Ta note » (UDR §3, Succès) %>
+<%# assignment_public_id : l'exercice est un devoir à rendre (« Ma classe ») ; exercise.copy y est la copie rendue, nil avant : ni note ni correction avant le rendu %>
 <% fields = %i[student visitor].include?(mode) %>
 <% copy = exercise.copy %>
 <% checked = !copy.nil? %>
-<% frame_data = { prepare_sheet_target: ("exercise" if fields), exercise_id: exercise.public_id, checked: checked, copy: copy&.session_public_id }.compact %>
+<%# Un devoir pas encore rendu : « Rendre à l'enseignant » et le devoir posté ; une fois rendu (ou refait), « Vérifier ma réponse », sans devoir. %>
+<% hand_in = fields && assignment_public_id.present? && !checked %>
+<% frame_data = { prepare_sheet_target: ("exercise" if fields), exercise_id: exercise.public_id, checked: checked, copy: copy&.session_public_id, ps_focus: (true if focus) }.compact %>
 <%# Le formulaire n'existe que pour qui répond : les bascules de l'enseignant sont des formulaires, qui ne s'imbriquent pas. %>
 <% body = capture do %>
   <div class="ps-exercise-top">
@@ -32,11 +36,15 @@
     <div id="hint-<%= exercise.public_id %>" class="ps-hint" data-ps="hint" hidden><b><%= t("catalog.courses.sheets.hint_label") %></b> <%= exercise.hint %></div>
   <% end %>
   <div class="ps-actions">
-    <% if fields %>
+    <% if fields && exercise.due && assignment_public_id.blank? %>
+      <%# CA-17 : un devoir à rendre ne se vérifie pas depuis la leçon ; ni « Vérifier ma réponse », ni « Indice ». %>
+      <%= render "assessment/sheet_checks/error", exercise_public_id: exercise.public_id, code: :assigned_pending, alert: false %>
+    <% elsif fields %>
       <% if mode == :visitor %>
         <%= link_to t("catalog.courses.sheets.check"), new_session_path, class: "ps-btn ps-btn--primary", data: { ps: "blank" } %>
       <% else %>
-        <%= tag.button t("catalog.courses.sheets.check"), type: :submit, class: "ps-btn ps-btn--primary",
+        <%= hidden_field_tag :assignment_public_id, assignment_public_id, id: nil if hand_in %>
+        <%= tag.button t("catalog.courses.sheets.#{hand_in ? :hand_in : :check}"), type: :submit, class: "ps-btn ps-btn--primary",
                         data: { ps: "blank", turbo_submits_with: t("catalog.courses.sheets.checking") }, hidden: checked %>
       <% end %>
       <% if exercise.hint.present? %>
