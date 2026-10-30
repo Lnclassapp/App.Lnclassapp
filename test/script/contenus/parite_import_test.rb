@@ -50,6 +50,8 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
                  "areas" => [ { "id" => "dense_forest", "category" => 1 }, { "id" => "savanna", "category" => 2 } ],
                  "places" => [ { "id" => "abidjan", "label" => "Capitale" } ], "routes" => [ { "from" => "abidjan", "to" => "man" } ] }.freeze
   TIMELINE_PARAMS = { "start" => 1880, "end" => 1960, "step" => 10, "events" => [ { "at" => 1893, "label" => "Colonie" } ] }.freeze
+  PLATE_PARAMS = { "plate" => "heart", "numbering" => "names", "highlight" => %w[aorta],
+                   "labels" => [ { "part" => "right_atrium" }, { "part" => "aorta", "text" => "Aorte" } ] }.freeze
   TREE_PARAMS = { "layout" => "tree", "nodes" => %w[r a b].map { { "id" => it, "label" => it } }, "edges" => [ { "from" => "r", "to" => "a" }, { "from" => "r", "to" => "b" } ] }.freeze
 
   LENS_PARAMS = { "mode" => "lens", "lens" => "convergent", "focal" => 4, "object_distance" => 12, "object_height" => 2 }.freeze
@@ -81,6 +83,13 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
       assert_empty import_pairs(document), figure["kind"]
       assert_empty script_pairs(document), figure["kind"]
     end
+  end
+
+  test "une planche bien formée passe l'import et le script" do
+    document = mutated { it["figures"][0] = figure_of("plate", PLATE_PARAMS) }
+
+    assert_empty import_pairs(document)
+    assert_empty script_pairs(document)
   end
 
   test "parité : version retirée, version inconnue, autre format" do
@@ -137,6 +146,12 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     "frise de 401 unités au pas 2" => [ ->(c) { c["figures"][0] = figure_of("timeline", TIMELINE_PARAMS.merge("start" => 0, "end" => 401, "step" => 2, "events" => [])) }, "figure_invalid" ],
     "légende de carte faite d'un nombre" => [ ->(c) { c["figures"][0] = figure_of("map", MAP_PARAMS.merge("legend" => [ 3, "Savane" ])) }, "figure_invalid" ],
     "curseur de frise dont le max atteint end" => [ ->(c) { c["figures"][0] = figure_of("timeline", TIMELINE_PARAMS).merge("controls" => [ { "param" => "start", "min" => 1850, "max" => 1960, "step" => 5, "label" => "début" } ]) }, "figure_invalid" ],
+    "planche inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("plate" => "skeleton")) }, "figure_invalid" ],
+    "planche dont une étiquette porte une partie d'une autre planche" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "liver" } ])) }, "figure_invalid" ],
+    "planche dont une partie surlignée est inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("highlight" => %w[aorta liver])) }, "figure_invalid" ],
+    "planche dont une partie est étiquetée deux fois" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta" }, { "part" => "aorta" } ])) }, "figure_invalid" ],
+    "planche dont une étiquette porte une clé inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta", "texte" => "Aorte" } ])) }, "figure_invalid" ],
+    "planche dont un texte d'étiquette est nul" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta", "text" => nil } ])) }, "figure_invalid" ],
     "lentille sans focale" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("focal")) }, "figure_invalid" ],
     "lentille sans nature" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("lens")) }, "figure_invalid" ],
     "lentille sans distance d'objet" => [ ->(c) { c["figures"][0] = figure_of("optics", LENS_PARAMS.except("object_distance")) }, "figure_invalid" ],

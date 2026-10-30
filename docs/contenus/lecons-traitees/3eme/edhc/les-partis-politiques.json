@@ -1,0 +1,1050 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les partis politiques",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "EDHC",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "organisation-parti",
+          "kind": "diagram",
+          "description": "Organisation type d'un parti politique fictif, présentée en arbre. Le congrès est au sommet : il élit la direction. La direction anime trois sections de base, qui rassemblent les militants dans les quartiers. Les noms des organes peuvent varier selon les statuts de chaque parti. Organisation fictive, donnée à titre d'exemple.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "congres",
+                "label": "Congrès (délégués de toutes les sections)",
+                "category": 1
+              },
+              {
+                "id": "direction",
+                "label": "Direction (président, secrétaire général, bureau)",
+                "category": 2
+              },
+              {
+                "id": "section_nord",
+                "label": "Section de base : quartier Nord",
+                "category": 3
+              },
+              {
+                "id": "section_centre",
+                "label": "Section de base : quartier Centre",
+                "category": 3
+              },
+              {
+                "id": "section_sud",
+                "label": "Section de base : quartier Sud",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "congres",
+                "to": "direction",
+                "label": "élit"
+              },
+              {
+                "from": "direction",
+                "to": "section_nord",
+                "label": "anime"
+              },
+              {
+                "from": "direction",
+                "to": "section_centre",
+                "label": "anime"
+              },
+              {
+                "from": "direction",
+                "to": "section_sud",
+                "label": "anime"
+              }
+            ],
+            "legend": [
+              "Organe qui décide",
+              "Organe qui dirige",
+              "Organe local"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir un parti politique et ses rôles",
+          "remember": "Un **parti politique** est une association de citoyens qui partagent des idées et un **projet de société**, et qui s'organisent pour participer à la vie politique et chercher à exercer le pouvoir par des moyens légaux. Il a cinq rôles : **former** les citoyens, **animer** la vie politique, **concourir à l'expression du suffrage** (présenter des candidats et mener campagne), **proposer un projet de société** (un programme pour l'ensemble du pays) et **conquérir et exercer le pouvoir** par la voie démocratique. Le pouvoir se conquiert par les élections, jamais par la force.",
+          "method": [
+            "Repérer le groupe, ses membres et ce qu'il fait dans la situation.",
+            "Chercher son but : défend-il un projet pour toute la société et vise-t-il à participer au pouvoir par des moyens légaux ?",
+            "Nommer le rôle exercé : former les citoyens, animer la vie politique, concourir à l'expression du suffrage, proposer un projet de société, conquérir et exercer le pouvoir.",
+            "Conclure : dire s'il s'agit d'un parti politique ou d'une autre association, et justifier."
+          ],
+          "example": {
+            "statement": "Dans un quartier de la ville fictive de Sikoro, le groupe fictif « Horizon Commun » tient une réunion publique. Ses membres expliquent aux habitants leur programme sur l'eau potable et l'école, et annoncent qu'ils présenteront des candidats aux élections locales. Est-ce un parti politique ?",
+            "steps": [
+              "Repérer : le groupe « Horizon Commun » (fictif) tient une réunion publique ; ses membres expliquent un programme sur l'eau potable et l'école.",
+              "Chercher le but : le groupe défend un projet pour toute la commune et annonce des candidats ; il vise donc à participer au pouvoir par des moyens légaux, les élections.",
+              "Nommer le rôle : en expliquant son programme, il forme et informe les citoyens ; en proposant des solutions, il propose un projet de société ; en annonçant des candidats, il concourt à l'expression du suffrage.",
+              "Conclure : c'est un parti politique, car il a un projet pour toute la société et cherche à exercer le pouvoir légalement, ce qu'un club sportif ne fait pas."
+            ]
+          },
+          "pitfall": "Ne pas confondre un parti politique avec n'importe quelle association. Un club de football de quartier rassemble des personnes autour d'une passion : il n'a pas de projet de société et ne cherche pas à exercer le pouvoir. Un groupe devient un parti quand il défend un projet pour tout le pays ou toute la commune et cherche à participer au pouvoir par les élections. Le nombre de membres ou les réunions publiques ne suffisent pas : c'est le **but** qui fait la différence.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître un parti politique et ses rôles",
+            "statement": "Dans cet exercice, tu reconnais un parti politique et ses rôles avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle phrase définit le mieux un parti politique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher le but : un parti défend un projet pour toute la société et vise à exercer le pouvoir par des moyens légaux. Un groupe d'amis qui joue au football n'a pas ce but (c'est le piège : confondre parti et association). Un service de l'État applique les lois, il ne cherche pas à conquérir le pouvoir. Prendre le pouvoir par la force est contraire à la démocratie. La bonne définition réunit donc le projet de société et les moyens légaux.",
+                "answers": [
+                  {
+                    "content": "Une association de citoyens qui partagent des idées et un projet de société, et cherchent à exercer le pouvoir par des moyens légaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un groupe d'amis qui se retrouvent chaque week-end pour jouer au football",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un service de l'État qui fait appliquer les lois dans la commune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un groupe qui prend le pouvoir par la force quand il n'est pas content",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque activité d'un parti au rôle qu'elle illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Nommer le rôle exercé. Expliquer le fonctionnement de la commune informe et forme les citoyens. Un débat public anime la vie politique. Un programme écrit pour l'école et la santé est un projet de société. Présenter des candidats et mener campagne, c'est concourir à l'expression du suffrage. Pour chaque activité, demande-toi ce que le parti cherche à faire : informer, débattre, proposer ou présenter des candidats.",
+                "answers": [
+                  {
+                    "content": "Un parti organise une causerie pour expliquer aux habitants comment fonctionne la commune.",
+                    "match": "Former les citoyens"
+                  },
+                  {
+                    "content": "Un parti organise un débat public sur le prix de l'eau.",
+                    "match": "Animer la vie politique"
+                  },
+                  {
+                    "content": "Un parti publie son programme pour l'école et la santé.",
+                    "match": "Proposer un projet de société"
+                  },
+                  {
+                    "content": "Un parti présente des candidats et mène campagne.",
+                    "match": "Concourir à l'expression du suffrage"
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces missions, lesquelles sont des rôles d'un parti politique ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Nommer le rôle exercé : un parti propose un projet de société et concourt à l'expression du suffrage. Rendre la justice est le rôle des tribunaux, collecter l'impôt celui de l'administration, et commander l'armée celui des institutions de l'État. Ces trois missions ne sont pas des rôles de parti : elles appartiennent à d'autres institutions.",
+                "answers": [
+                  {
+                    "content": "Proposer un projet de société",
+                    "correct": true
+                  },
+                  {
+                    "content": "Concourir à l'expression du suffrage",
+                    "correct": true
+                  },
+                  {
+                    "content": "Rendre la justice à la place des tribunaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Collecter les impôts de la commune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Commander l'armée du pays",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un club de football de quartier est un parti politique, car il rassemble des personnes qui ont une passion commune.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher le but : un club de football n'a pas de projet de société et ne cherche pas à exercer le pouvoir. Étape 4 — Conclure : rassembler des personnes ne suffit pas pour être un parti. C'est le piège de la fiche : c'est le but du groupe, et non le nombre de membres, qui fait un parti politique. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un parti politique cherche à conquérir et à exercer le ___ par des moyens légaux.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Chercher le but : un parti vise à participer au pouvoir par des moyens légaux, c'est-à-dire par les élections. Étape 3 — Ce rôle s'appelle conquérir et exercer le pouvoir. Le mot attendu est « pouvoir ».",
+                "answers": [
+                  {
+                    "content": "pouvoir",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Connaître les conditions de création et de fonctionnement d'un parti",
+          "remember": "La Constitution du 8 novembre 2016 garantit la liberté de créer des partis politiques et de les faire agir, **dans le cadre de la loi** : c'est le **multipartisme**, plusieurs partis peuvent exister. Un groupement qui veut devenir un parti doit : avoir des **statuts** (les règles écrites qui fixent son nom, son but, ses organes, les droits et devoirs de ses membres) ; faire une **déclaration** à l'administration ; **respecter la Constitution et les lois**, l'unité nationale et la démocratie. Un parti ne doit pas s'identifier à une **race, une ethnie, une religion ou une région** : il est ouvert à tous les citoyens, sans distinction d'origine.",
+          "method": [
+            "Repérer le groupement et ce qu'il veut faire dans la situation.",
+            "Rappeler la règle : la Constitution reconnaît le multipartisme, dans le cadre de la loi.",
+            "Vérifier les conditions une à une : statuts, déclaration, respect de la Constitution et des lois, aucune identification à une race, une ethnie, une religion ou une région.",
+            "Conclure : dire si le groupement est en règle et ce qu'il doit corriger."
+          ],
+          "example": {
+            "statement": "Le « Mouvement du Grand Quartier » (fictif) veut devenir un parti. Il a rédigé ses statuts et fait sa déclaration à l'administration, mais il annonce qu'il n'accepte que les habitants d'une seule religion. Est-il en règle ?",
+            "steps": [
+              "Repérer : le « Mouvement du Grand Quartier » (fictif) veut devenir un parti ; il a des statuts et une déclaration, mais il réserve l'adhésion à une seule religion.",
+              "Rappeler la règle : la Constitution reconnaît le multipartisme, donc ce mouvement peut devenir un parti, à condition de rester dans le cadre de la loi.",
+              "Vérifier les conditions : statuts, c'est fait ; déclaration, c'est fait ; mais il s'identifie à une religion, ce qu'un parti ne doit pas faire.",
+              "Conclure : le mouvement n'est pas en règle ; il doit ouvrir l'adhésion à tous les citoyens, sans distinction de religion, pour devenir un parti."
+            ]
+          },
+          "pitfall": "Ne pas croire que le multipartisme veut dire « chacun fait ce qu'il veut, sans règle ». Contre-exemple : dix amis écrivent sur un groupe de messagerie « Nous sommes un parti ». Ils n'ont ni statuts, ni déclaration : ils ne sont pas un parti en règle. La liberté de créer un parti s'exerce **dans le cadre de la loi**, avec des conditions à remplir.",
+          "figure": null,
+          "exercise": {
+            "title": "Vérifier les conditions de création d'un parti",
+            "statement": "Dans cet exercice, tu vérifies les conditions de création et de fonctionnement d'un parti avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "La Constitution ivoirienne de 2016 permet à plusieurs partis politiques d'exister librement : c'est le multipartisme.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Rappeler la règle : la Constitution reconnaît le multipartisme, c'est-à-dire l'existence de plusieurs partis, qui agissent librement dans le cadre de la loi. Le parti unique n'est pas la règle. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles conditions un groupement doit-il remplir pour devenir un parti en règle ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Vérifier les conditions une à une : des statuts écrits, une déclaration à l'administration, le respect de la Constitution et des lois. Aucun parti n'a besoin de l'accord d'un autre parti : le multipartisme est libre. Et rassembler une seule ethnie est interdit, car un parti ne doit pas s'identifier à une ethnie.",
+                "answers": [
+                  {
+                    "content": "Avoir des statuts écrits",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faire une déclaration à l'administration",
+                    "correct": true
+                  },
+                  {
+                    "content": "Respecter la Constitution et les lois",
+                    "correct": true
+                  },
+                  {
+                    "content": "Obtenir l'accord du parti le plus ancien",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rassembler uniquement les habitants d'une même ethnie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le groupement fictif « Les Amis du Fleuve » veut devenir un parti réservé aux habitants d'une seule région. Que lui répond-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Vérifier les conditions : un parti ne doit pas s'identifier à une région, une ethnie ou une religion. Étape 4 — Conclure : ce groupement n'est pas en règle et doit s'ouvrir à tous les citoyens. Dire « chacun fait ce qu'il veut » est le piège de la fiche : la liberté s'exerce dans le cadre de la loi. Changer de nom sans changer l'adhésion ne règle rien.",
+                "answers": [
+                  {
+                    "content": "Il ne peut pas : un parti ne doit pas s'identifier à une région, une ethnie ou une religion",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il peut, car chacun est libre de créer le parti qu'il veut sans condition",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il peut, à condition de payer une cotisation à l'administration",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il doit seulement changer de nom, le reste est sans importance",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les démarches d'un groupement qui devient un parti.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer le groupement : des citoyens se réunissent autour d'un projet. Étape 3 — Vérifier les conditions : on rédige d'abord les statuts, puis on fait la déclaration à l'administration. Enfin le parti fonctionne en respectant ses statuts, la Constitution et les lois. On ne peut pas faire la déclaration avant d'avoir des statuts à présenter.",
+                "answers": [
+                  {
+                    "content": "Réunir des citoyens autour d'un projet commun"
+                  },
+                  {
+                    "content": "Rédiger les statuts"
+                  },
+                  {
+                    "content": "Faire la déclaration à l'administration"
+                  },
+                  {
+                    "content": "Fonctionner en respectant les statuts, la Constitution et les lois"
+                  }
+                ]
+              },
+              {
+                "content": "Dix amis annoncent sur un réseau social « Nous sommes un parti », sans statuts ni déclaration. Ils sont : ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Vérifier les conditions : il manque les statuts et la déclaration. Étape 4 — Conclure : le groupement n'est pas en règle. C'est le piège de la fiche : le multipartisme est une liberté qui s'exerce dans le cadre de la loi, avec des conditions. Annoncer un parti ne le crée pas.",
+                "answers": [
+                  {
+                    "content": "pas en règle, car il manque des conditions",
+                    "correct": true
+                  },
+                  {
+                    "content": "en règle, car il suffit de l'annoncer",
+                    "correct": false
+                  },
+                  {
+                    "content": "en règle, car dix membres suffisent",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Décrire l'organisation type d'un parti politique",
+          "remember": "Un parti s'organise selon ses statuts. Une organisation type comprend trois niveaux. Le **congrès** réunit des délégués de toutes les sections ; il adopte les orientations et élit la direction. La **direction** (président ou secrétaire général, bureau) dirige le parti entre deux congrès, applique les décisions et le représente. Les **sections de base** sont les organes locaux (quartier, village, commune) où se retrouvent les **militants**, c'est-à-dire les membres actifs. Les noms des organes varient d'un parti à l'autre, mais le principe reste le même : le pouvoir est partagé et chacun a un rôle.",
+          "method": [
+            "Lire les statuts ou la situation et repérer les organes cités.",
+            "Situer chaque organe à son niveau : national (congrès, direction) ou local (section de base).",
+            "Dire la fonction de chaque organe : décider, diriger ou relayer sur le terrain.",
+            "Vérifier le lien entre les organes (qui élit, qui anime) et conclure."
+          ],
+          "example": {
+            "statement": "Les statuts du parti fictif « Horizon Commun » disent : le congrès réunit des délégués de toutes les sections et élit la direction ; la direction applique les décisions et représente le parti ; les sections de base accueillent les militants dans les quartiers. Décrire l'organisation.",
+            "steps": [
+              "Lire et repérer les organes : le congrès, la direction et les sections de base.",
+              "Situer les niveaux : le congrès et la direction sont au niveau national ; les sections de base sont au niveau local, dans les quartiers.",
+              "Dire la fonction : le congrès décide des orientations et élit la direction ; la direction dirige et applique ; les sections relaient le parti auprès des habitants et accueillent les militants.",
+              "Vérifier le lien : le congrès élit la direction, la direction anime les sections, et les sections envoient leurs délégués au congrès ; le pouvoir est donc partagé, personne ne décide seul."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un parti, c'est son président et que celui-ci décide de tout. Les statuts répartissent les rôles. Contre-exemple : si le président d'« Horizon Commun » (fictif) change seul le programme du parti, il ne respecte pas les statuts de l'exemple, puisque c'est le congrès, avec les délégués des sections, qui fixe les orientations. Un parti est une organisation collective, pas une personne.",
+          "figure": "organisation-parti",
+          "exercise": {
+            "title": "Décrire l'organisation d'un parti",
+            "statement": "Dans cet exercice, tu décris l'organisation type d'un parti avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque organe d'un parti à sa fonction.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Dire la fonction de chaque organe. Le congrès décide des orientations et élit la direction. La direction dirige entre deux congrès et applique les décisions. La section de base est l'organe local où se retrouvent les militants. Ne confonds pas décider (congrès), diriger (direction) et relayer sur le terrain (section de base).",
+                "answers": [
+                  {
+                    "content": "Le congrès",
+                    "match": "Réunit des délégués, adopte les orientations et élit la direction"
+                  },
+                  {
+                    "content": "La direction",
+                    "match": "Dirige le parti entre deux congrès et applique ses décisions"
+                  },
+                  {
+                    "content": "La section de base",
+                    "match": "Rassemble les militants d'un quartier ou d'un village"
+                  }
+                ]
+              },
+              {
+                "content": "Dans l'organisation type d'un parti, quel organe élit la direction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Vérifier le lien entre les organes : le congrès réunit les délégués des sections et élit la direction. Le président ne s'élit pas tout seul, c'est le piège de la fiche : un parti n'est pas une seule personne. Une section de base envoie des délégués au congrès, elle n'élit pas la direction à elle seule. L'administration ne choisit pas les dirigeants d'un parti.",
+                "answers": [
+                  {
+                    "content": "Le congrès",
+                    "correct": true
+                  },
+                  {
+                    "content": "La section de base la plus proche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le président seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'administration",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre, de la base jusqu'à la direction, les étapes qui mènent à l'élection de la direction d'un parti.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Situer chaque organe à son niveau : on part du niveau local, la section de base. Étape 4 — Vérifier le lien : les sections choisissent des délégués, les délégués forment le congrès, et le congrès élit la direction. Le chemin va donc du plus local au national.",
+                "answers": [
+                  {
+                    "content": "Les militants se retrouvent dans leur section de base"
+                  },
+                  {
+                    "content": "Les sections choisissent des délégués"
+                  },
+                  {
+                    "content": "Les délégués se réunissent en congrès"
+                  },
+                  {
+                    "content": "Le congrès élit la direction"
+                  }
+                ]
+              },
+              {
+                "content": "Dans un parti, le président décide seul de tout, sans tenir compte des statuts.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Vérifier le lien entre les organes : les statuts répartissent le pouvoir entre le congrès, la direction et les sections. C'est le piège de la fiche : croire qu'un parti, c'est son président. Un président qui décide seul de tout ne respecte pas l'organisation du parti. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un parti, la ___ de base est l'organe local qui rassemble les militants d'un quartier ou d'un village.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Situer chaque organe à son niveau : l'organe local d'un parti est la section de base. Étape 3 — Sa fonction est d'accueillir les militants et de relayer le parti sur le terrain. Le mot attendu est « section ».",
+                "answers": [
+                  {
+                    "content": "section",
+                    "correct": true
+                  },
+                  {
+                    "content": "sections",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Distinguer la majorité et l'opposition",
+          "remember": "Dans une assemblée élue, le parti (ou le groupe de partis) qui possède **plus de la moitié des sièges** forme la **majorité** : il soutient l'exécutif (le gouvernement, ou le maire dans une commune) et fait adopter son programme. Les partis qui ne font pas partie de cette majorité forment l'**opposition** : ils critiquent la politique de la majorité avec des arguments, contrôlent son action, proposent d'autres solutions et se préparent à gouverner un jour (c'est l'alternance). Dans une démocratie, l'opposition est légitime : elle a le droit de s'exprimer, et la majorité doit la respecter.",
+          "method": [
+            "Repérer l'assemblée et les groupes ou partis qui y siègent.",
+            "Comparer le nombre de sièges de chaque groupe à la moitié des sièges.",
+            "Nommer la majorité (plus de la moitié des sièges) et l'opposition (les autres groupes).",
+            "Décrire le rôle de chacune et conclure sur le comportement démocratique."
+          ],
+          "example": {
+            "statement": "Dans une assemblée fictive de 30 sièges, le parti Horizon Commun en a 17, le Cercle Nouvelle Rive en a 8 et l'Alliance Solidaire en a 5. Qui forme la majorité ? Qui forme l'opposition ?",
+            "steps": [
+              "Repérer : l'assemblée compte 30 sièges, et trois partis fictifs y siègent.",
+              "Comparer à la moitié : la moitié de 30 est 15 ; Horizon Commun en a 17 (plus de 15), le Cercle 8 et l'Alliance 5 (moins de 15).",
+              "Nommer : Horizon Commun, avec plus de la moitié des sièges, forme la majorité ; le Cercle Nouvelle Rive et l'Alliance Solidaire forment l'opposition.",
+              "Décrire le rôle et conclure : la majorité fait adopter son programme ; l'opposition critique avec des arguments, contrôle et propose d'autres solutions ; chacune doit respecter l'autre."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'opposition est l'ennemie de l'État qui doit tout refuser. Son rôle est de critiquer avec des arguments, de contrôler et de proposer. Contre-exemple : si une mesure de la majorité sert vraiment l'école de la commune, l'opposition peut la voter, et cela ne la trahit pas. Une opposition qui bloque tout ou refuse de reconnaître les résultats n'est plus démocratique.",
+          "figure": null,
+          "exercise": {
+            "title": "Distinguer la majorité et l'opposition",
+            "statement": "Dans cet exercice, tu distingues la majorité et l'opposition avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une assemblée compte 40 sièges. Quel est le nombre minimum de sièges qu'un parti doit avoir pour posséder plus de la moitié des sièges ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : l'assemblée compte 40 sièges. Étape 2 — Comparer à la moitié : la moitié de 40 est 20. Pour avoir plus de la moitié, il faut dépasser 20, donc au moins 21 sièges. Avec 20 sièges, un parti n'a pas plus de la moitié : c'est l'erreur la plus tentante.",
+                "answers": [
+                  {
+                    "content": "21",
+                    "correct": true
+                  }
+                ],
+                "unit": "sièges",
+                "tolerance": 0
+              },
+              {
+                "content": "Dans une assemblée de 20 sièges, le parti X a 11 sièges, le parti Y en a 6 et le parti Z en a 3. Que peut-on dire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer à la moitié : la moitié de 20 est 10 ; X a 11 sièges, donc plus de la moitié. Étape 3 — Nommer : X forme la majorité, et tous les autres partis, Y comme Z, forment l'opposition. Être le deuxième parti ne donne pas la majorité, et l'opposition n'est pas seulement le plus petit parti.",
+                "answers": [
+                  {
+                    "content": "X forme la majorité ; Y et Z forment l'opposition",
+                    "correct": true
+                  },
+                  {
+                    "content": "Y forme la majorité, car il est le deuxième parti",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seul Z forme l'opposition, car il a le moins de sièges",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les trois partis forment l'opposition",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont des rôles légitimes de l'opposition dans une démocratie ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Décrire le rôle de l'opposition : elle critique avec des arguments, contrôle et propose d'autres solutions. Bloquer toutes les décisions, refuser les résultats ou empêcher l'autre de parler ne sont pas des rôles démocratiques : c'est le piège de la fiche, qui fait de l'opposition une ennemie de l'État.",
+                "answers": [
+                  {
+                    "content": "Critiquer la politique de la majorité avec des arguments",
+                    "correct": true
+                  },
+                  {
+                    "content": "Proposer des solutions différentes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Bloquer toutes les décisions, même utiles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Refuser de reconnaître les résultats",
+                    "correct": false
+                  },
+                  {
+                    "content": "Empêcher la majorité de s'exprimer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'opposition est l'ennemie de l'État et doit refuser toutes les décisions de la majorité.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Décrire le rôle et conclure : l'opposition est légitime dans une démocratie. Elle critique, contrôle et propose, et peut approuver une mesure utile. C'est le piège de la fiche : confondre opposition et ennemi. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après des élections, les partis qui n'ont pas plus de la moitié des sièges forment ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Nommer : le groupe qui a plus de la moitié des sièges forme la majorité ; les autres partis forment l'opposition. La majorité soutient le gouvernement, mais ce n'est pas le gouvernement lui-même.",
+                "answers": [
+                  {
+                    "content": "l'opposition",
+                    "correct": true
+                  },
+                  {
+                    "content": "la majorité",
+                    "correct": false
+                  },
+                  {
+                    "content": "le gouvernement",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un parti dans le quartier",
+          "statement": "Dans le quartier fictif de Sikoro Nord, le parti fictif « Horizon Commun » organise trois activités. Mardi, une causerie pour expliquer aux habitants comment fonctionne la commune. Jeudi, un débat public sur le ramassage des ordures. Samedi, une réunion où il présente son programme pour l'école et l'eau potable, et ses candidats aux élections locales. Aya, élève de 3ème, y accompagne sa grand-mère.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque activité du parti fictif Horizon Commun au rôle qu'elle illustre.",
+              "question_type": "matching",
+              "explanation": "Méthode : repérer le groupe et ce qu'il fait ; chercher son but ; nommer le rôle. Étape 3 — Nommer le rôle exercé : expliquer le fonctionnement de la commune forme et informe les citoyens ; un débat public anime la vie politique ; un programme complet pour l'école et l'eau potable est un projet de société. À retenir pour l'interrogation : demande-toi toujours ce que l'activité cherche à faire, informer, débattre ou proposer.",
+              "answers": [
+                {
+                  "content": "Une causerie pour expliquer comment fonctionne la commune",
+                  "match": "Former les citoyens"
+                },
+                {
+                  "content": "Un débat public sur le ramassage des ordures",
+                  "match": "Animer la vie politique"
+                },
+                {
+                  "content": "La présentation d'un programme pour l'école et l'eau potable",
+                  "match": "Proposer un projet de société"
+                }
+              ]
+            },
+            {
+              "content": "Parmi les activités d'Horizon Commun (fictif), laquelle montre que le parti concourt à l'expression du suffrage ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : nommer le rôle exercé. Concourir à l'expression du suffrage, c'est présenter des candidats et mener campagne pour que les citoyens choisissent. La causerie forme les citoyens et le débat anime la vie politique : ce sont d'autres rôles. Ramasser les ordures est un service public ou communal, pas un rôle de parti.",
+              "answers": [
+                {
+                  "content": "Présenter ses candidats aux élections locales",
+                  "correct": true
+                },
+                {
+                  "content": "Expliquer à la grand-mère d'Aya comment fonctionne la commune",
+                  "correct": false
+                },
+                {
+                  "content": "Organiser un débat sur le ramassage des ordures",
+                  "correct": false
+                },
+                {
+                  "content": "Ramasser lui-même les ordures du quartier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le but final d'un parti politique est de conquérir et d'exercer le pouvoir par des moyens légaux.",
+              "question_type": "true_false",
+              "explanation": "Méthode : chercher le but du groupe. Un parti défend un projet de société et cherche à participer au pouvoir, en passant par les élections et jamais par la force. L'affirmation est vraie : c'est ce but qui distingue un parti d'une autre association.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En présentant son programme pour l'école et l'eau potable, le parti propose son ___ de société.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : nommer le rôle exercé. Un programme pour l'ensemble de la commune est un projet de société, l'un des cinq rôles du parti. Le mot attendu est « projet ».",
+              "answers": [
+                {
+                  "content": "projet",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Aya hésite entre le Club Foot de Sikoro (fictif) et le parti Horizon Commun (fictif). Quelles raisons montrent que seul Horizon Commun est un parti politique ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : chercher le but. Seuls un projet pour toute la commune et la volonté de participer au pouvoir par des candidats font un parti. Se réunir, organiser des activités publiques ou avoir des membres de tous âges, un club de football le fait aussi : ce n'est pas ce qui distingue un parti d'une autre association.",
+              "answers": [
+                {
+                  "content": "Il a un projet pour toute la commune",
+                  "correct": true
+                },
+                {
+                  "content": "Il vise à participer au pouvoir en présentant des candidats",
+                  "correct": true
+                },
+                {
+                  "content": "Il se réunit régulièrement",
+                  "correct": false
+                },
+                {
+                  "content": "Il organise des activités ouvertes au public",
+                  "correct": false
+                },
+                {
+                  "content": "Il compte des membres de tous les âges",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le voisin d'Aya dit : « Un parti, c'est comme un club de football, ça sert juste à se retrouver entre amis. » Réponds-lui en deux phrases en citant au moins un rôle d'un parti politique.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Un parti n'est pas un club de football : il a un projet de société pour tous les habitants et cherche à exercer le pouvoir par les élections. Par exemple, il présente un programme et des candidats pour que les citoyens choisissent. » Barème sur 2 : 0,5 pour le projet de société, 1 pour un rôle exact cité, 0,5 pour l'opposition avec le club de football.",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Dit qu'un parti a un projet de société pour tous, pas seulement pour ses membres",
+                "Cite au moins un rôle exact (former, animer, concourir au suffrage, proposer, exercer le pouvoir)",
+                "Oppose le but d'un parti à celui d'un club de football"
+              ],
+              "starter": "Un parti n'est pas un club de football, car…"
+            }
+          ]
+        },
+        {
+          "title": "Créer un parti : ce qui est permis",
+          "statement": "Des habitants de la ville fictive de Tiloko veulent créer le « Mouvement Soleil Levant » (fictif). Leur projet : réunir des personnes de toutes les origines autour d'un programme pour l'emploi des jeunes ; rédiger des statuts qui prévoient un congrès, une direction et des sections ; faire une déclaration à l'administration ; respecter la Constitution et les lois. Une autre bande d'amis annonce, elle, un « parti réservé aux membres d'une seule ethnie ».",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le multipartisme signifie que plusieurs partis politiques peuvent exister librement, dans le cadre de la loi.",
+              "question_type": "true_false",
+              "explanation": "Méthode : rappeler la règle. La Constitution reconnaît le multipartisme : plusieurs partis peuvent exister et agir, mais dans le cadre de la loi, avec des conditions à remplir. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles conditions le Mouvement Soleil Levant (fictif) remplit-il d'après son projet ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : vérifier les conditions une à une. Le projet prévoit des statuts, une déclaration, le respect de la Constitution et l'ouverture à toutes les origines. Avoir déjà des élus n'est pas une condition de création, et aucun parti n'a besoin de l'accord d'un autre parti : le multipartisme est libre.",
+              "answers": [
+                {
+                  "content": "Il prévoit des statuts écrits",
+                  "correct": true
+                },
+                {
+                  "content": "Il prévoit une déclaration à l'administration",
+                  "correct": true
+                },
+                {
+                  "content": "Il s'ouvre à des personnes de toutes les origines",
+                  "correct": true
+                },
+                {
+                  "content": "Il a déjà des élus",
+                  "correct": false
+                },
+                {
+                  "content": "Il a obtenu l'accord du parti le plus ancien",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que faut-il dire à la bande d'amis qui veut créer un « parti réservé aux membres d'une seule ethnie » ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : vérifier les conditions. Un parti ne doit pas s'identifier à une ethnie, une religion ou une région : il est ouvert à tous les citoyens. Déposer une déclaration ne corrige pas ce défaut, et la distinction entre ethnie et religion n'y change rien, les deux sont concernées.",
+              "answers": [
+                {
+                  "content": "Ce projet n'est pas en règle : un parti ne doit pas s'identifier à une ethnie",
+                  "correct": true
+                },
+                {
+                  "content": "Ce projet est en règle, car chacun choisit librement ses membres",
+                  "correct": false
+                },
+                {
+                  "content": "Ce projet est en règle s'ils déposent une déclaration",
+                  "correct": false
+                },
+                {
+                  "content": "Ce projet est en règle, car l'ethnie n'est pas une religion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour exister comme parti, le Mouvement doit d'abord rédiger ses ___, qui fixent son but, ses organes et ses règles de fonctionnement.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : vérifier les conditions. Les statuts sont les règles écrites d'un parti : son nom, son but, ses organes, les droits et devoirs de ses membres. Le mot attendu est « statuts ».",
+              "answers": [
+                {
+                  "content": "statuts",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque condition à son utilité.",
+              "question_type": "matching",
+              "explanation": "Méthode : vérifier les conditions une à une, en comprenant à quoi elles servent. Les statuts organisent le parti. La déclaration le fait connaître à l'administration. Le respect de la Constitution et des lois garantit qu'il agit dans le cadre légal. À retenir : ces conditions sont la contrepartie de la liberté de créer un parti.",
+              "answers": [
+                {
+                  "content": "Les statuts",
+                  "match": "Fixer le but, les organes et les règles de fonctionnement"
+                },
+                {
+                  "content": "La déclaration à l'administration",
+                  "match": "Faire connaître officiellement le groupement"
+                },
+                {
+                  "content": "Le respect de la Constitution et des lois",
+                  "match": "Agir dans le cadre de la loi, sans violence ni haine"
+                }
+              ]
+            },
+            {
+              "content": "Un membre du Mouvement Soleil Levant propose : « Pour gagner, disons que notre parti défend seulement les gens de notre région. » Explique en deux ou trois phrases pourquoi ce n'est pas permis et propose une autre formulation.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Ce n'est pas permis : un parti ne doit pas s'identifier à une région, une ethnie ou une religion. Il doit être ouvert à tous les citoyens et défendre un projet pour toute la société. On peut dire : notre parti défend l'emploi des jeunes dans tout le pays, quelle que soit leur origine. » Barème sur 3 : 1 pour la règle, 1 pour l'ouverture à tous, 1 pour la reformulation.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Dit qu'un parti ne doit pas s'identifier à une région, une ethnie ou une religion",
+                "Explique qu'un parti est ouvert à tous les citoyens et défend un projet pour toute la société",
+                "Propose une formulation ouverte à tous (par exemple le programme pour l'emploi des jeunes)"
+              ],
+              "starter": "Ce n'est pas permis, car un parti…"
+            }
+          ]
+        },
+        {
+          "title": "Le parti et le conseil des délégués",
+          "statement": "Au collège fictif Les Bâtisseurs, les élèves choisissent leurs délégués de classe, qui forment le conseil des délégués de 18 délégués. Trois groupes d'élèves y siègent : la liste Avenir (10 délégués), la liste Entraide (5) et la liste Savoir (3). Pour comprendre la vie politique, le professeur compare ce conseil à un parti : il présente l'organisation du parti fictif Horizon Commun, dont le congrès élit la direction, laquelle anime trois sections de base.",
+          "exercise_type": "evaluation",
+          "figure": "organisation-parti",
+          "questions": [
+            {
+              "content": "Dans l'organisation du parti fictif Horizon Commun (un congrès qui élit une direction, laquelle anime trois sections de base), quel organe se trouve au sommet ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : lire les organes, situer les niveaux, dire la fonction, vérifier le lien. Étape 4 — Vérifier le lien : le congrès élit la direction, il est donc au sommet de l'organisation. La direction dirige entre deux congrès et les sections de base sont des organes locaux. L'administration n'est pas un organe du parti.",
+              "answers": [
+                {
+                  "content": "Le congrès",
+                  "correct": true
+                },
+                {
+                  "content": "La direction",
+                  "correct": false
+                },
+                {
+                  "content": "Une section de base",
+                  "correct": false
+                },
+                {
+                  "content": "L'administration",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cette organisation, les sections de base sont les organes locaux où se retrouvent les militants d'un quartier.",
+              "question_type": "true_false",
+              "explanation": "Méthode : situer chaque organe à son niveau. Les sections de base sont au niveau local, dans les quartiers : elles accueillent les militants et relaient le parti auprès des habitants. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La liste Avenir a 10 délégués sur 18 : elle possède plus de la moitié des sièges et forme la ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : comparer à la moitié. La moitié de 18 est 9, et la liste Avenir en a 10, donc plus de la moitié. Elle forme la majorité. Le mot attendu est « majorité ».",
+              "answers": [
+                {
+                  "content": "majorité",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de délégués forment l'opposition au conseil des délégués (liste Entraide : 5 délégués, liste Savoir : 3 délégués, liste Avenir : 10 délégués) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : nommer la majorité et l'opposition. La liste Avenir (10 sur 18, plus de 9) forme la majorité. L'opposition regroupe les autres listes : 5 + 3 = 8 délégués. Ne compte pas les 10 de la majorité : l'opposition, ce sont les groupes qui n'ont pas la majorité.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "unit": "délégués",
+              "tolerance": 0
+            },
+            {
+              "content": "Que peuvent légitimement faire les délégués de l'opposition au conseil des délégués ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : décrire le rôle de l'opposition. Elle critique avec des arguments, contrôle et propose d'autres solutions. Empêcher de parler, refuser toutes les décisions ou bloquer le conseil ne sont pas des comportements démocratiques : ils font de l'opposition une ennemie, c'est le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "Critiquer une décision avec des arguments",
+                  "correct": true
+                },
+                {
+                  "content": "Proposer une autre solution",
+                  "correct": true
+                },
+                {
+                  "content": "Empêcher les autres de parler",
+                  "correct": false
+                },
+                {
+                  "content": "Refuser d'appliquer toutes les décisions",
+                  "correct": false
+                },
+                {
+                  "content": "Quitter le conseil pour le bloquer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un délégué de la liste Savoir dit : « Nous sommes minoritaires, donc notre avis ne compte pas. » Réponds-lui en trois phrases en expliquant le rôle de l'opposition.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Être minoritaire ne veut pas dire que votre avis ne compte pas : dans une démocratie, l'opposition est légitime. Elle critique avec des arguments, contrôle la majorité et propose d'autres solutions. La majorité doit la respecter, et elle peut devenir majorité un jour. » Barème sur 3 : 1 pour la légitimité, 1 pour deux rôles, 1 pour le respect et l'alternance.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Dit que l'opposition est légitime et que son avis compte",
+                "Cite au moins deux rôles (critiquer avec des arguments, contrôler, proposer)",
+                "Dit que la majorité doit respecter l'opposition et que l'opposition peut devenir majorité un jour (alternance)"
+              ],
+              "starter": "Être minoritaire ne veut pas dire que…"
+            }
+          ]
+        },
+        {
+          "title": "Le Cercle Passerelle et l'assemblée de la ville",
+          "statement": "Dans la ville fictive de Tiloko, le « Cercle Passerelle » (fictif) a rédigé ses statuts, déclaré son existence à l'administration et ouvert des sections de base dans trois quartiers. Il accueille tous les habitants, sans distinction d'origine ni de religion. Son congrès a élu sa direction. Lors d'une réunion publique, ses militants ont expliqué aux habitants leur programme sur la propreté de la ville. L'assemblée de la ville compte 24 sièges : le Cercle Passerelle en a 9, l'Union des Quartiers (fictive) en a 13 et le Groupe Entraide (fictif) en a 2.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels éléments montrent que le Cercle Passerelle (fictif) respecte les conditions de création d'un parti ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : repérer le groupement, rappeler la règle du multipartisme, vérifier les conditions une à une. Les statuts, la déclaration et l'ouverture à tous sans distinction d'origine ni de religion sont des conditions. Le nombre de sections n'est pas une condition de création, et le Cercle n'a d'ailleurs pas la majorité : 9 sièges sur 24 ne dépassent pas la moitié.",
+              "answers": [
+                {
+                  "content": "Il a rédigé des statuts",
+                  "correct": true
+                },
+                {
+                  "content": "Il a déclaré son existence à l'administration",
+                  "correct": true
+                },
+                {
+                  "content": "Il accueille tous les habitants sans distinction d'origine ni de religion",
+                  "correct": true
+                },
+                {
+                  "content": "Il a plus de dix sections de base",
+                  "correct": false
+                },
+                {
+                  "content": "Il a la majorité à l'assemblée de la ville",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En expliquant son programme sur la propreté de la ville aux habitants, quel rôle le Cercle Passerelle exerce-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : nommer le rôle exercé. Un programme présenté aux habitants est un projet de société, et l'expliquer forme aussi les citoyens. Rendre la justice, voter les lois ou collecter les impôts relèvent d'autres institutions, pas d'un parti.",
+              "answers": [
+                {
+                  "content": "Proposer un projet de société",
+                  "correct": true
+                },
+                {
+                  "content": "Rendre la justice",
+                  "correct": false
+                },
+                {
+                  "content": "Voter les lois à la place de l'assemblée",
+                  "correct": false
+                },
+                {
+                  "content": "Collecter les impôts de la ville",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un parti, la direction est élue par le ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : vérifier le lien entre les organes. Le congrès réunit les délégués des sections et élit la direction, comme dans le Cercle Passerelle dont le congrès a élu la direction. Le mot attendu est « congrès ».",
+              "answers": [
+                {
+                  "content": "congrès",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la situation du Cercle Passerelle à l'assemblée de la ville (24 sièges : Cercle 9, Union des Quartiers 13, Groupe Entraide 2) ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : comparer à la moitié, puis nommer. La moitié de 24 est 12 ; l'Union des Quartiers a 13 sièges, donc plus de 12 : elle forme la majorité. Le Cercle (9) et le Groupe Entraide (2) forment l'opposition. Avoir plus de sièges que le plus petit groupe, ou être bien organisé, ne donne pas la majorité.",
+              "answers": [
+                {
+                  "content": "Il est dans l'opposition, car l'Union des Quartiers a plus de la moitié des sièges, soit 13 sur 24",
+                  "correct": true
+                },
+                {
+                  "content": "Il est la majorité, car il est le mieux organisé",
+                  "correct": false
+                },
+                {
+                  "content": "Il est la majorité, car il a plus de sièges que le Groupe Entraide",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'est ni dans la majorité ni dans l'opposition",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au collège, des élèves disent : « Les partis, c'est inutile, ça divise les gens. » Prends position en quatre ou cinq phrases : cite au moins deux rôles d'un parti et la règle qui permet l'existence de plusieurs partis.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Je ne suis pas d'accord : les partis sont utiles à la démocratie. Ils forment les citoyens et proposent un projet de société, ce qui permet aux habitants de comparer plusieurs programmes. La Constitution reconnaît le multipartisme : plusieurs partis peuvent exister librement, dans le cadre de la loi. Débattre n'est pas diviser, c'est animer la vie politique. » Barème sur 4 : 1 pour la prise de position, 1 pour deux rôles, 1 pour la règle du multipartisme, 1 pour une argumentation correcte et neutre.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Prend position clairement sur le comportement ou l'idée proposée",
+                "Cite au moins deux rôles exacts d'un parti (former, animer, concourir au suffrage, proposer un projet, exercer le pouvoir)",
+                "Cite la règle : la Constitution reconnaît le multipartisme, dans le cadre de la loi",
+                "Argumente sans insulte, sans nom de parti réel ni de personnalité"
+              ],
+              "starter": "Je ne suis pas d'accord, car les partis…"
+            },
+            {
+              "content": "Un militant du Cercle Passerelle propose : « Refusons les adhésions de ceux qui ne viennent pas de notre région, pour rester entre nous. » Dis en trois phrases si cette proposition respecte les règles de fonctionnement d'un parti, et justifie.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Cette proposition ne respecte pas les règles de fonctionnement d'un parti. Un parti ne doit pas s'identifier à une région, une ethnie ou une religion. Il doit rester ouvert à tous les citoyens, comme l'indiquent ses statuts. » Barème sur 3 : 1 pour la réponse, 1 pour la règle, 1 pour l'ouverture à tous.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Répond clairement que la proposition ne respecte pas les règles",
+                "Dit qu'un parti ne doit pas s'identifier à une région, une ethnie ou une religion",
+                "Dit qu'un parti est ouvert à tous les citoyens et que cela s'applique à ses statuts"
+              ],
+              "starter": "Cette proposition ne respecte pas les règles, car…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

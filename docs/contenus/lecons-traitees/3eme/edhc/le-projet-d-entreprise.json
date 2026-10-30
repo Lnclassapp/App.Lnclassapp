@@ -1,0 +1,1162 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le projet d'entreprise",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "EDHC",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "etapes-du-projet",
+          "kind": "diagram",
+          "description": "Schéma en flèches des sept étapes d'un projet d'entreprise, de haut en bas : l'idée, l'étude de marché, le plan d'affaires, le financement, la création et les formalités, le lancement, puis le suivi. Chaque étape prépare la suivante : on ne passe pas au financement sans plan, ni au lancement sans avoir cherché l'argent.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "idee",
+                "label": "1. L'idée de l'activité"
+              },
+              {
+                "id": "etude_marche",
+                "label": "2. L'étude de marché"
+              },
+              {
+                "id": "plan_affaires",
+                "label": "3. Le plan d'affaires"
+              },
+              {
+                "id": "financement",
+                "label": "4. Le financement"
+              },
+              {
+                "id": "creation",
+                "label": "5. La création et les formalités"
+              },
+              {
+                "id": "lancement",
+                "label": "6. Le lancement"
+              },
+              {
+                "id": "suivi",
+                "label": "7. Le suivi"
+              }
+            ],
+            "edges": [
+              {
+                "from": "idee",
+                "to": "etude_marche"
+              },
+              {
+                "from": "etude_marche",
+                "to": "plan_affaires"
+              },
+              {
+                "from": "plan_affaires",
+                "to": "financement"
+              },
+              {
+                "from": "financement",
+                "to": "creation"
+              },
+              {
+                "from": "creation",
+                "to": "lancement"
+              },
+              {
+                "from": "lancement",
+                "to": "suivi"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "ventes-mensuelles-bissap",
+          "kind": "stat_chart",
+          "description": "Courbe (données fictives) des recettes mensuelles de Mariam, jeune vendeuse imaginaire de jus de bissap, de janvier à juin, en milliers de francs CFA : janvier 120, février 150, mars 180, avril 160, mai 210, juin 240. La courbe monte, sauf une baisse en avril.",
+          "params": {
+            "chart": "line",
+            "series": [
+              120,
+              150,
+              180,
+              160,
+              210,
+              240
+            ],
+            "labels": [
+              "Janvier",
+              "Février",
+              "Mars",
+              "Avril",
+              "Mai",
+              "Juin"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Distinguer entreprise, entrepreneur et projet d'entreprise",
+          "remember": "Une **entreprise** est une organisation qui produit des **biens** (jus, poulets, vêtements) ou des **services** (réparer un téléphone, transférer de l'argent) pour les vendre et gagner de l'argent. Un **entrepreneur** est la personne qui crée l'entreprise, prend les risques et la dirige. Un **projet d'entreprise** est le plan préparé **avant** de commencer : quoi produire, pour qui, avec quels moyens. Une entreprise peut être très petite. Qualités de l'entrepreneur : esprit d'initiative, persévérance, sens de l'organisation, honnêteté, goût du risque calculé, sens du contact avec les clients.",
+          "method": [
+            "Repérer ce que fait la personne ou le groupe : l'activité, le produit ou le service, les clients.",
+            "Chercher si l'activité produit ou vend un bien ou un service dans le but de gagner de l'argent.",
+            "Nommer chaque élément : l'entreprise, l'entrepreneur, ou le projet si l'activité n'existe pas encore.",
+            "Conclure en citant les qualités de l'entrepreneur que montre la situation."
+          ],
+          "example": {
+            "statement": "Dans la ville fictive de Sikoro, Mariam prépare chaque matin du jus de bissap, le met en sachets et le vend devant l'école. Quand le prix des fleurs a augmenté, elle n'a pas arrêté : elle a trouvé un autre fournisseur. Que peut-on dire de Mariam et de son activité ?",
+            "steps": [
+              "Repérer : Mariam prépare du jus de bissap, le met en sachets et le vend devant l'école.",
+              "Chercher : elle produit un bien, le jus, et le vend pour gagner de l'argent : c'est une activité économique.",
+              "Nommer : son activité est une petite entreprise et Mariam est l'entrepreneure ; elle ne prépare plus un projet, elle l'a déjà lancé.",
+              "Conclure : elle montre de l'initiative (elle a lancé l'activité) et de la persévérance (elle a trouvé un autre fournisseur au lieu d'arrêter)."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une entreprise est forcément grande, avec un grand bâtiment et beaucoup d'employés, ni que seul un adulte riche peut être entrepreneur. Contre-exemple : une jeune qui répare des téléphones sur une table devant la boutique de sa tante et se fait payer pour chaque réparation dirige une petite entreprise. À l'inverse, une idée dont on parle sans la préparer n'est pas encore un projet d'entreprise : il faut la penser, la chiffrer et l'organiser.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître l'entreprise, l'entrepreneur et le projet",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour reconnaître une entreprise, un entrepreneur et un projet d'entreprise dans des situations de vie.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces propositions, laquelle décrit une entreprise ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche ce que fait l'organisation. Étape 2 — Chercher : une entreprise produit ou vend un bien ou un service pour gagner de l'argent. Étape 3 — Nommer : c'est la proposition « une organisation qui produit des biens ou des services pour les vendre et gagner de l'argent ». La taille n'est pas un critère : « un grand bâtiment qui emploie au moins cent personnes » est le piège. Un match gratuit ne vise pas à gagner de l'argent, et une idée jamais préparée n'est pas encore un projet.",
+                "answers": [
+                  {
+                    "content": "Une organisation qui produit des biens ou des services pour les vendre et gagner de l'argent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un grand bâtiment qui emploie au moins cent personnes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une association de quartier qui organise un match gratuit pour les enfants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une idée d'activité dont on parle avec ses amis sans jamais la préparer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on lit le mot et ce qu'il désigne. Étape 3 — Nommer : l'entrepreneur est la personne, l'entreprise est l'organisation qui produit et vend, le projet est le plan préparé avant le lancement. Ne pas mélanger la personne (l'entrepreneur) et l'organisation (l'entreprise) : un projet n'existe plus comme projet une fois l'activité lancée.",
+                "answers": [
+                  {
+                    "content": "Entrepreneur",
+                    "match": "Personne qui crée l'activité, prend les risques et la dirige"
+                  },
+                  {
+                    "content": "Entreprise",
+                    "match": "Organisation qui produit des biens ou des services pour les vendre"
+                  },
+                  {
+                    "content": "Projet d'entreprise",
+                    "match": "Plan préparé avant de lancer l'activité"
+                  }
+                ]
+              },
+              {
+                "content": "Fatou répare des téléphones sur une table devant la boutique de sa tante et se fait payer pour chaque réparation. Elle dirige une petite entreprise.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : Fatou répare des téléphones et se fait payer. Étape 2 — Chercher : elle vend un service pour gagner de l'argent. Étape 3 — Nommer : son activité est une petite entreprise et Fatou est l'entrepreneure. Penser qu'il faut un grand local est le piège : la taille ne change pas la nature de l'entreprise.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Koffi élève 50 poulets. Quand 10 poulets sont morts de maladie, il a recommencé avec des poussins vaccinés, et il note chaque jour ses dépenses et ses ventes. Quelles sont les deux qualités d'entrepreneur que montre cette situation ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : Koffi élève des poulets, il recommence après la perte et il note ses dépenses et ses ventes. Étape 2 — Chercher : il vend un bien pour gagner de l'argent, c'est donc un entrepreneur. Étape 4 — Conclure : recommencer après un échec montre la persévérance, noter ses comptes montre le sens de l'organisation. La peur de tout risque et l'indifférence au gain sont des attitudes contraires à celles qu'il a.",
+                "answers": [
+                  {
+                    "content": "La persévérance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sens de l'organisation",
+                    "correct": true
+                  },
+                  {
+                    "content": "La peur de tout risque",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'indifférence au gain",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dit : « Mon cousin vend des jus avec une glacière sur le trottoir : ce n'est pas une entreprise, car il n'a pas de bâtiment. » Que réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le cousin vend des jus avec une glacière. Étape 2 — Chercher : il vend un bien pour gagner de l'argent. Étape 3 — Nommer : c'est une petite entreprise et le cousin en est l'entrepreneur. Le piège est de croire qu'une entreprise est forcément grande ; la proposition « c'est un projet d'entreprise » est fausse aussi, car l'activité existe déjà : ce n'est plus un simple projet.",
+                "answers": [
+                  {
+                    "content": "Il se trompe : le cousin produit ou vend un bien pour gagner de l'argent, c'est une petite entreprise",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : une entreprise a toujours besoin d'un grand bâtiment",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : seule une personne adulte peut diriger une entreprise",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il se trompe : c'est un projet d'entreprise, car l'activité n'a pas encore commencé",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Placer les étapes d'un projet d'entreprise",
+          "remember": "Un projet d'entreprise se prépare en **sept étapes**, dans cet ordre : **1. l'idée** de l'activité ; **2. l'étude de marché** (qui achètera, en quelle quantité, à quel prix, et qui vend déjà la même chose : les concurrents) ; **3. le plan d'affaires** (le projet écrit : activité, moyens, coûts, recettes prévues) ; **4. le financement** (trouver l'argent) ; **5. la création et les formalités** (déclarer l'activité) ; **6. le lancement** ; **7. le suivi** (noter les ventes et les dépenses, corriger les erreurs). Chaque étape prépare la suivante.",
+          "method": [
+            "Repérer ce que le porteur de projet a déjà fait dans la situation.",
+            "Placer chaque action dans l'étape qui lui correspond parmi les sept étapes.",
+            "Trouver l'étape suivante dans l'ordre des sept étapes.",
+            "Conseiller le porteur de projet : dire ce qu'il doit faire maintenant et pourquoi il ne faut pas sauter d'étape."
+          ],
+          "example": {
+            "statement": "Issa veut réparer des téléphones dans son quartier. Il a remarqué que beaucoup d'habitants cassent leur écran, il a compté les réparateurs proches et il a demandé à vingt voisins combien ils paieraient une réparation. Il n'a encore rien écrit ni acheté. Où en est-il et que doit-il faire ?",
+            "steps": [
+              "Repérer : Issa a remarqué les écrans cassés, compté les réparateurs proches et interrogé vingt voisins sur le prix ; il n'a rien écrit ni acheté.",
+              "Placer : l'idée est de réparer les téléphones ; compter les concurrents et interroger les voisins sur le prix, c'est l'étude de marché.",
+              "Trouver : l'étape qui suit l'étude de marché est le plan d'affaires.",
+              "Conseiller : Issa doit écrire son plan d'affaires (matériel, coûts, recettes prévues) avant de chercher l'argent, pour savoir de combien il a besoin."
+            ]
+          },
+          "pitfall": "Ne pas dépenser avant d'avoir étudié le marché. Contre-exemple : une jeune achète 100 sachets et du sucre pour vendre du jus devant l'école sans demander aux élèves s'ils en veulent ni à quel prix. Si un voisin vend déjà le même jus moins cher, elle ne vend presque rien et perd son argent. L'étude de marché coûte peu de temps et évite de perdre beaucoup. De même, on ne s'arrête pas au lancement : le suivi permet de corriger.",
+          "figure": "etapes-du-projet",
+          "exercise": {
+            "title": "Placer une action dans l'étape du projet",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour placer des actions dans les sept étapes d'un projet d'entreprise.",
+            "exercise_type": "fixation",
+            "figure": "etapes-du-projet",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les six premières étapes d'un projet d'entreprise.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on lit les six étapes proposées. Étape 2 — Placer : l'idée vient d'abord, puis l'étude de marché, le plan d'affaires, le financement, la création et les formalités, et enfin le lancement. Étape 3 — Trouver : après le lancement vient le suivi. Les erreurs courantes sont de mettre le financement avant le plan d'affaires ou le lancement avant les formalités.",
+                "answers": [
+                  {
+                    "content": "L'idée de l'activité"
+                  },
+                  {
+                    "content": "L'étude de marché"
+                  },
+                  {
+                    "content": "Le plan d'affaires"
+                  },
+                  {
+                    "content": "Le financement"
+                  },
+                  {
+                    "content": "La création et les formalités"
+                  },
+                  {
+                    "content": "Le lancement"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque action à l'étape du projet qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on lit ce que fait le porteur de projet. Étape 2 — Placer : compter clients et concurrents est l'étude de marché ; écrire matériel, coûts et recettes prévues est le plan d'affaires ; demander un crédit est le financement ; noter les ventes et dépenses est le suivi. Il ne faut pas confondre le plan d'affaires (écrit avant) et le suivi (après le lancement).",
+                "answers": [
+                  {
+                    "content": "Compter les clients possibles et les concurrents du quartier",
+                    "match": "L'étude de marché"
+                  },
+                  {
+                    "content": "Écrire le matériel nécessaire, les coûts et les recettes prévues",
+                    "match": "Le plan d'affaires"
+                  },
+                  {
+                    "content": "Demander un crédit à une institution de microfinance",
+                    "match": "Le financement"
+                  },
+                  {
+                    "content": "Noter chaque semaine les ventes et les dépenses",
+                    "match": "Le suivi"
+                  }
+                ]
+              },
+              {
+                "content": "Rama veut élever des poulets. Elle a interrogé trente voisins sur leur consommation de poulets et a comparé les prix des vendeurs du quartier. Quelle est l'étape suivante ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : Rama a interrogé des voisins et comparé les prix. Étape 2 — Placer : c'est l'étude de marché. Étape 3 — Trouver : l'étape suivante est le plan d'affaires. Le lancement et le suivi viennent bien plus tard, et l'idée est déjà faite. Étape 4 — Conseiller : Rama doit écrire ses coûts et ses recettes prévues.",
+                "answers": [
+                  {
+                    "content": "Le lancement de la vente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le suivi des ventes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le plan d'affaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'idée de l'activité",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après le lancement, le chef d'entreprise note ses ventes et ses dépenses pour corriger ses erreurs : c'est l'étape du ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : il note ses ventes et ses dépenses après le lancement. Étape 2 — Placer : cette action correspond à la septième étape, le suivi. Étape 3 — Trouver : c'est la dernière étape, qui permet de corriger. Étape 4 — Conseiller : sans suivi, l'entrepreneur ne sait pas s'il gagne ou s'il perd de l'argent.",
+                "answers": [
+                  {
+                    "content": "suivi",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un jeune qui achète d'abord tout son matériel, puis fait l'étude de marché, respecte l'ordre des étapes du projet.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : ce jeune achète avant d'avoir étudié. Étape 2 — Placer : l'achat du matériel suit le plan d'affaires et le financement, et l'étude de marché vient en deuxième position. Étape 3 — Trouver : il saute les étapes. Étape 4 — Conseiller : étudier d'abord le marché évite de dépenser pour un produit que personne n'achète ; c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Choisir une source de financement",
+          "remember": "**Financer** un projet, c'est trouver l'argent nécessaire pour démarrer (matériel, matières premières). Les sources possibles : l'**épargne personnelle** (argent mis de côté par l'entrepreneur) ; l'**aide de la famille et des proches** (don ou prêt) ; la **tontine** (un groupe verse une somme à intervalles réguliers et chaque membre la reçoit à son tour) ; la **microfinance** (institutions qui accordent de petits crédits) ; la **banque** (crédit demandant un dossier solide) ; les **structures publiques d'appui** (organismes de l'État qui conseillent et peuvent aider, selon leurs conditions). Un **crédit** se rembourse avec des **intérêts** : on rend plus que ce qu'on a reçu.",
+          "method": [
+            "Calculer la somme nécessaire au démarrage : le matériel plus les matières premières.",
+            "Compter l'argent que l'entrepreneur possède déjà, puis calculer ce qui manque.",
+            "Chercher les sources possibles pour la somme qui manque, en notant si elles se remboursent et avec ou sans intérêts.",
+            "Choisir la source la plus adaptée et vérifier que l'on pourra rembourser."
+          ],
+          "example": {
+            "statement": "Aïcha veut ouvrir un atelier de couture. Elle doit acheter une machine à coudre d'occasion à 90 000 F et des tissus et des fils pour 30 000 F. Elle a mis de côté 50 000 F. Comment peut-elle financer son projet ?",
+            "steps": [
+              "Calculer : 90 000 + 30 000 = 120 000 F sont nécessaires.",
+              "Compter : elle a 50 000 F d'épargne ; il manque 120 000 − 50 000 = 70 000 F.",
+              "Chercher : pour 70 000 F, elle peut compter sur une tontine (sans intérêts, mais il faut attendre son tour), sur l'aide de sa famille ou sur un petit crédit de microfinance (remboursé avec intérêts).",
+              "Choisir : elle choisit la tontine et l'aide de sa famille, qui ne coûtent pas d'intérêts ; si elle prend un crédit, elle vérifie d'abord que ses recettes prévues lui permettront de rembourser."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un crédit est un cadeau. Contre-exemple : si un crédit de 100 000 F doit être remboursé 110 000 F, l'entrepreneur rend 10 000 F de plus : ce sont les intérêts. Il ne faut donc pas emprunter plus que ce que les recettes permettent de rembourser, car une dette impossible à rembourser peut ruiner l'activité. Avant de signer, on lit toujours la somme totale à rendre.",
+          "figure": null,
+          "exercise": {
+            "title": "Trouver l'argent pour démarrer",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour calculer ce qui manque et choisir une source de financement.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque source de financement à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Chercher : on associe chaque source à ce qu'elle est. L'épargne vient de l'entrepreneur, la tontine fonctionne par tour, la microfinance accorde un crédit à rembourser avec intérêts, les structures publiques d'appui sont des organismes de l'État. Ne pas confondre la tontine (qu'on reçoit à son tour, sans intérêts) et le crédit (qu'on rembourse avec intérêts).",
+                "answers": [
+                  {
+                    "content": "Épargne personnelle",
+                    "match": "Argent mis de côté par l'entrepreneur lui-même"
+                  },
+                  {
+                    "content": "Tontine",
+                    "match": "Groupe dont chaque membre verse une somme régulièrement et la reçoit à son tour"
+                  },
+                  {
+                    "content": "Microfinance",
+                    "match": "Institution qui accorde de petits crédits à rembourser avec intérêts"
+                  },
+                  {
+                    "content": "Structures publiques d'appui",
+                    "match": "Organismes de l'État qui conseillent et peuvent aider un projet"
+                  }
+                ]
+              },
+              {
+                "content": "Un jeune veut ouvrir un atelier de réparation de téléphones. Le matériel coûte 85 000 F et les pièces de rechange 15 000 F. Il a mis de côté 40 000 F. Quelle somme lui manque-t-il ?",
+                "question_type": "numeric",
+                "unit": "F",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : 85 000 + 15 000 = 100 000 F sont nécessaires. Étape 2 — Compter : il possède 40 000 F, donc il manque 100 000 − 40 000 = 60 000 F. Le piège est d'oublier d'ajouter les pièces de rechange (il trouverait 45 000 F) ou d'oublier de retrancher l'épargne (il trouverait 100 000 F).",
+                "answers": [
+                  {
+                    "content": "60000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces sources de financement, laquelle n'a pas à être remboursée à une institution ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Chercher : on regarde pour chaque source si elle se rembourse. Un crédit de microfinance, un crédit de banque et un prêt avec intérêts se remboursent. L'épargne appartient à l'entrepreneur : il n'a rien à rendre. Étape 4 — Choisir : quand il le peut, il commence avec son épargne, ce qui évite les intérêts.",
+                "answers": [
+                  {
+                    "content": "Un crédit de microfinance",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un crédit de banque",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un prêt avec intérêts",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'épargne personnelle de l'entrepreneur",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un crédit de 100 000 F remboursé avec intérêts coûte exactement 100 000 F à l'entrepreneur.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Chercher : un crédit se rembourse avec des intérêts. Étape 4 — Choisir : avant de choisir un crédit, on calcule la somme totale à rendre. Si les intérêts sont de 10 000 F, il faut rendre 110 000 F, donc plus que les 100 000 F reçus. Croire que le crédit est un cadeau ou qu'on rend la même somme est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Awa envisage un crédit de microfinance pour son atelier. Quelles sont les deux précautions à prendre avant de signer ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Compter : on calcule ce qui manque et non pas la plus grande somme possible. Étape 4 — Choisir : on vérifie que les recettes prévues permettront de rembourser, et on lit la somme totale à rendre, intérêts compris. Un crédit n'est pas un don, et emprunter plus que nécessaire augmente les intérêts à rembourser.",
+                "answers": [
+                  {
+                    "content": "Vérifier que ses recettes prévues permettent de rembourser",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lire la somme totale à rembourser, intérêts compris",
+                    "correct": true
+                  },
+                  {
+                    "content": "Prendre le plus grand crédit possible pour être tranquille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ne pas s'inquiéter du remboursement, car c'est un don",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cacher le crédit à sa famille",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer le coût, la recette et le bénéfice",
+          "remember": "Le **coût** est l'ensemble des dépenses de l'entrepreneur : matières premières, transport, location, emballages. La **recette** est l'argent reçu des ventes : **recette = prix de vente × quantité vendue**. Le **bénéfice** est ce qui reste après les dépenses : **bénéfice = recette − coût**. Si le coût dépasse la recette, l'entrepreneur a une **perte** : perte = coût − recette. Le suivi régulier des recettes permet de voir si l'activité progresse, comme le montre la courbe des ventes mensuelles.",
+          "method": [
+            "Relever le prix de vente, la quantité vendue et toutes les dépenses.",
+            "Calculer la recette : prix de vente multiplié par la quantité vendue.",
+            "Calculer le coût : additionner toutes les dépenses.",
+            "Calculer le bénéfice : recette moins coût, puis conclure bénéfice ou perte."
+          ],
+          "example": {
+            "statement": "En une semaine, Rokia vend 100 sachets de jus de bissap à 100 F chacun. Ses dépenses sont : 3 000 F de fleurs, 1 500 F de sucre, 2 500 F de sachets et de glace. Quel est son résultat ?",
+            "steps": [
+              "Relever : le prix de vente est 100 F, 100 sachets sont vendus ; les dépenses sont 3 000 F, 1 500 F et 2 500 F.",
+              "Calculer la recette : 100 × 100 = 10 000 F.",
+              "Calculer le coût : 3 000 + 1 500 + 2 500 = 7 000 F.",
+              "Calculer le bénéfice : 10 000 − 7 000 = 3 000 F. La recette est supérieure au coût : Rokia a un bénéfice de 3 000 F."
+            ]
+          },
+          "pitfall": "Ne pas confondre la recette et le bénéfice. Contre-exemple : Rokia a encaissé 10 000 F, mais elle a dépensé 7 000 F pour préparer ses jus : elle n'a pas gagné 10 000 F, son bénéfice est de 3 000 F. Il faut aussi penser à compter toutes les dépenses, même petites (transport, glace, sachets) : en oublier une fait croire à un bénéfice trop grand.",
+          "figure": "ventes-mensuelles-bissap",
+          "exercise": {
+            "title": "Calculer recette, coût et bénéfice",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour calculer la recette, le coût et le bénéfice d'une petite activité.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un éleveur vend 40 poulets à 2 500 F chacun. Quelle est sa recette, en francs ?",
+                "question_type": "numeric",
+                "unit": "F",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : le prix de vente est 2 500 F et la quantité vendue est 40. Étape 2 — Calculer la recette : 40 × 2 500 = 100 000 F. Le piège serait d'additionner 40 + 2 500 au lieu de multiplier.",
+                "answers": [
+                  {
+                    "content": "100000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un éleveur achète des poussins (30 000 F), de l'aliment (40 000 F) et des soins vétérinaires (10 000 F). Quel est son coût total, en francs ?",
+                "question_type": "numeric",
+                "unit": "F",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : les dépenses sont 30 000 F, 40 000 F et 10 000 F. Étape 3 — Calculer le coût : 30 000 + 40 000 + 10 000 = 80 000 F. En oublier une, par exemple les soins, donnerait 70 000 F, c'est-à-dire un coût trop faible.",
+                "answers": [
+                  {
+                    "content": "80000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un éleveur a une recette de 100 000 F et un coût de 80 000 F. Quel est son bénéfice, en francs ?",
+                "question_type": "numeric",
+                "unit": "F",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : la recette est 100 000 F et le coût 80 000 F. Étape 4 — Calculer le bénéfice : 100 000 − 80 000 = 20 000 F. La recette est supérieure au coût : c'est un bénéfice. Le piège est de croire que le bénéfice est la recette, 100 000 F.",
+                "answers": [
+                  {
+                    "content": "20000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une couturière a une recette de 45 000 F et un coût de 52 000 F. Quel est son résultat ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : la recette est 45 000 F et le coût 52 000 F. Étape 4 — Calculer le bénéfice : 45 000 − 52 000 = −7 000 F. Le coût dépasse la recette : c'est une perte de 7 000 F. Additionner 45 000 et 52 000 serait une erreur de méthode.",
+                "answers": [
+                  {
+                    "content": "Un bénéfice de 7 000 F",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une perte de 7 000 F",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un bénéfice de 97 000 F",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une perte de 45 000 F",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un vendeur de jus encaisse 20 000 F et dépense 14 000 F. Son bénéfice est de 20 000 F.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : la recette est 20 000 F et le coût 14 000 F. Étape 4 — Calculer le bénéfice : 20 000 − 14 000 = 6 000 F. Le bénéfice est de 6 000 F, pas de 20 000 F : 20 000 F est la recette. Confondre recette et bénéfice est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Évaluer le rôle et le civisme de l'entrepreneur",
+          "remember": "L'entreprise joue un rôle dans le développement : elle **crée des emplois et des revenus**, **produit** les biens et les services dont les habitants ont besoin, forme des jeunes et **paie des impôts** qui financent les services publics (écoles, routes, hôpitaux), comme tu l'as vu dans la leçon sur le civisme fiscal. L'entrepreneur doit aussi être **civique** : **déclarer son activité** (accomplir les formalités de création, comme l'inscription au registre du commerce), **payer ses impôts**, être honnête avec ses clients, **respecter les droits de ses employés** (ne pas faire travailler des enfants), et **protéger l'environnement**.",
+          "method": [
+            "Identifier l'activité de l'entreprise et ce qu'elle apporte aux habitants.",
+            "Chercher les règles qui s'appliquent : formalités, impôts, honnêteté, droits des employés, environnement.",
+            "Comparer le comportement de l'entrepreneur à chaque règle.",
+            "Conclure : dire si le comportement est civique ou non et ce que l'entrepreneur doit faire."
+          ],
+          "example": {
+            "statement": "Ibrahim dirige un petit atelier de couture avec deux apprenties. Il ne s'est jamais déclaré, il dit qu'il ne paiera jamais d'impôts parce que son atelier est petit, et il jette ses chutes de tissu dans le caniveau. Son comportement est-il civique ?",
+            "steps": [
+              "Identifier : l'atelier de couture fournit des vêtements aux habitants et du travail à deux apprenties.",
+              "Chercher : les règles sont de déclarer l'activité, de payer les impôts (qui financent écoles, routes et hôpitaux) et de protéger l'environnement.",
+              "Comparer : Ibrahim ne s'est jamais déclaré, refuse de payer et jette ses déchets dans le caniveau : trois règles ne sont pas respectées.",
+              "Conclure : son comportement n'est pas civique ; il doit accomplir les formalités, payer ce que la loi demande et jeter ses déchets aux endroits prévus."
+            ]
+          },
+          "pitfall": "Ne pas croire que le civisme ne concerne que les grandes entreprises. Contre-exemple : si chaque petit vendeur et chaque petit atelier du quartier refusait de se déclarer et de payer ce que la loi demande, il n'y aurait presque plus d'argent pour l'école, la route et le centre de santé dont profitent leurs propres clients. Le montant dû dépend de la taille de l'entreprise, mais un entrepreneur ne décide pas seul de ne rien payer.",
+          "figure": null,
+          "exercise": {
+            "title": "Rôle de l'entreprise et civisme de l'entrepreneur",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche pour juger le comportement d'un entrepreneur et le rôle de l'entreprise.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quels sont les trois rôles d'une entreprise dans le développement d'un pays ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier : on regarde ce que l'entreprise apporte. Elle crée des emplois et des revenus, produit des biens et des services, et paie des impôts qui financent les écoles, les routes et les hôpitaux. Les trois autres propositions sont fausses : une entreprise ne remplace pas l'État, ne dispense personne d'impôts et ne rend pas l'école inutile.",
+                "answers": [
+                  {
+                    "content": "Elle crée des emplois et des revenus",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle produit des biens et des services pour la population",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle paie des impôts qui financent les services publics",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle remplace l'État dans toutes ses missions",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle dispense les habitants de payer des impôts",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle rend l'école inutile",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un entrepreneur civique déclare son activité et paie les impôts qu'il doit.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher : les règles de l'entrepreneur sont de déclarer son activité et de payer ses impôts. Étape 3 — Comparer : un entrepreneur qui fait les deux respecte ces règles. Étape 4 — Conclure : son comportement est civique. Penser que seul un grand patron doit le faire est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque comportement à la règle civique qu'il respecte.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Chercher : on repère la règle civique de chaque comportement. Étape 3 — Comparer : les formalités sont la déclaration de l'activité, le versement aux impôts est le paiement de l'impôt, évacuer les déchets protège l'environnement, payer l'employé comme convenu respecte ses droits. Chaque comportement correspond à une seule règle.",
+                "answers": [
+                  {
+                    "content": "Une couturière accomplit les formalités de création de son atelier",
+                    "match": "Déclarer son activité"
+                  },
+                  {
+                    "content": "Une vendeuse de jus verse ce qu'elle doit aux services des impôts",
+                    "match": "Payer ses impôts"
+                  },
+                  {
+                    "content": "Un éleveur évacue correctement les déchets de son poulailler",
+                    "match": "Protéger l'environnement"
+                  },
+                  {
+                    "content": "Un réparateur paie son employé comme convenu",
+                    "match": "Respecter les droits de ses employés"
+                  }
+                ]
+              },
+              {
+                "content": "À quoi servent en priorité les impôts payés par les entreprises ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher : on se rappelle la règle de la leçon sur le civisme fiscal, l'impôt finance l'intérêt général. Étape 4 — Conclure : les impôts des entreprises financent les services publics dont profitent tous les habitants, y compris les clients. Ils ne paient ni le salaire de l'entrepreneur ni son matériel.",
+                "answers": [
+                  {
+                    "content": "À financer des services publics comme les écoles, les routes et les hôpitaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "À payer uniquement le salaire de l'entrepreneur",
+                    "correct": false
+                  },
+                  {
+                    "content": "À rembourser les dépenses privées des clients",
+                    "correct": false
+                  },
+                  {
+                    "content": "À acheter le matériel de l'entreprise qui les paie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Léna tient un tout petit stand de jus et dit : « Mon stand est trop petit, le civisme ne me concerne pas. » Que peut-on lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : Léna vend des jus, c'est une petite entreprise. Étape 2 — Chercher : les règles de déclaration, d'impôts, d'honnêteté et d'environnement s'appliquent aux entreprises. Étape 3 — Comparer : sa taille ne la dispense pas de ces règles. Étape 4 — Conclure : elle se trompe. Le civisme concerne aussi les petits, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Elle se trompe : petite ou grande, toute entreprise doit respecter les règles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle a raison : seules les grandes entreprises doivent respecter les règles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle a raison : un stand n'est pas une entreprise",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle se trompe : seule la déclaration compte, le reste est facultatif",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Karim ouvre un kiosque de téléphones et de mobile money",
+          "statement": "Dans la ville fictive de Sikoro, Karim veut ouvrir un kiosque où il réparera des téléphones et fera des transferts d'argent par mobile money. Il remarque d'abord que beaucoup de voisins cassent leur écran. Il interroge ensuite 25 voisins et compte les kiosques du quartier. Il écrit alors son plan : le matériel coûtera 60 000 F et les pièces 20 000 F. Il a mis de côté 45 000 F et il lui reste à trouver l'argent qui manque.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une fois son kiosque ouvert, Karim réparera des téléphones contre paiement et fera des transferts d'argent. Que pourra-t-on dire de son activité ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer ce que fera Karim : il réparera des téléphones et fait des transferts d'argent. 2. Chercher si c'est un bien ou un service vendu pour gagner de l'argent : oui, ce sont des services payants. 3. Nommer : une petite entreprise, dont Karim est l'entrepreneur. L'âge et la taille du kiosque ne changent rien : c'est le piège de la notion 1. Aujourd'hui, il prépare encore son projet ; une fois le kiosque ouvert, ce ne sera plus un simple projet.",
+              "answers": [
+                {
+                  "content": "Ce sera un service vendu pour gagner de l'argent : une petite entreprise dont Karim sera l'entrepreneur",
+                  "correct": true
+                },
+                {
+                  "content": "Ce ne sera pas une entreprise, car le kiosque sera petit",
+                  "correct": false
+                },
+                {
+                  "content": "Ce ne sera qu'un projet, car il n'aura pas de grand bâtiment",
+                  "correct": false
+                },
+                {
+                  "content": "Ce ne sera pas une entreprise, car il est jeune",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les actions de Karim.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la notion 2. Étape 1 — Repérer chaque action de Karim. Étape 2 — Placer chacune dans l'étape qui lui correspond : remarquer le besoin est l'idée ; interroger les voisins et compter les concurrents est l'étude de marché ; écrire matériel, coûts et recettes prévues est le plan d'affaires ; chercher l'argent est le financement. Enfin, on range les actions dans l'ordre des sept étapes. Écrire son plan avant de chercher l'argent permet de savoir de combien on a besoin.",
+              "answers": [
+                {
+                  "content": "Il remarque que beaucoup de voisins cassent leur écran"
+                },
+                {
+                  "content": "Il interroge 25 voisins et compte les kiosques du quartier"
+                },
+                {
+                  "content": "Il écrit son plan : matériel, coûts, recettes prévues"
+                },
+                {
+                  "content": "Il cherche l'argent qui lui manque"
+                }
+              ]
+            },
+            {
+              "content": "Le matériel de Karim coûte 60 000 F et les pièces de rechange 20 000 F. Il a mis de côté 45 000 F. Quelle somme lui manque-t-il, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 3. Étape 1 — Calculer : 60 000 + 20 000 = 80 000 F sont nécessaires. Étape 2 — Compter : il a 45 000 F, donc il manque 80 000 − 45 000 = 35 000 F. Oublier les pièces donnerait 15 000 F, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "35000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour les 35 000 F qui lui manquent, Karim prend un petit crédit de microfinance avec intérêts. Il devra rembourser ___ que 35 000 F.",
+              "question_type": "select",
+              "explanation": "Méthode de la notion 3. Un crédit se rembourse avec des intérêts : on rend plus que ce qu'on a reçu. Karim doit donc rendre plus de 35 000 F. Penser qu'on rend exactement la somme reçue, ou moins, est le piège de la fiche. Avant de signer, il doit lire la somme totale à rendre et vérifier que ses recettes prévues lui permettent de rembourser.",
+              "answers": [
+                {
+                  "content": "plus",
+                  "correct": true
+                },
+                {
+                  "content": "moins",
+                  "correct": false
+                },
+                {
+                  "content": "autant",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avant d'interroger ses voisins, Karim avait pensé acheter tout de suite son matériel. Dis en deux phrases ce que tu lui aurais conseillé et pourquoi.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Conseille de faire l'étude de marché avant d'acheter",
+                "Explique le risque de dépenser pour un service que personne n'achète",
+                "Utilise le vocabulaire du projet (étude de marché, clients, concurrents)"
+              ],
+              "explanation": "Corrigé modèle : « Je lui aurais conseillé de faire d'abord l'étude de marché : demander à ses voisins s'ils sont intéressés, combien ils paieraient, et compter les kiosques déjà présents. Sinon, il risquait d'acheter du matériel pour un service que personne n'achète à ce prix, et de perdre son argent. » Barème sur 3 : 1 pour le conseil de faire l'étude de marché d'abord, 1 pour l'explication du risque de perte, 1 pour le vocabulaire du projet.",
+              "answers": [],
+              "starter": "Je lui aurais conseillé de…"
+            }
+          ]
+        },
+        {
+          "title": "Yao élève des poulets",
+          "statement": "Yao, de la ville fictive de Sikoro, élève des poulets. Pour sa première bande, il achète 50 poussins à 600 F l'un, soit 30 000 F, de l'aliment pour 25 000 F et des vaccins pour 5 000 F. À la fin, 5 poulets sont morts et il vend les 45 poulets restants à 2 000 F chacun au marché. Il n'a jamais déclaré son activité.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Yao a payé des poussins (30 000 F), de l'aliment (25 000 F) et des vaccins (5 000 F). Quel est son coût total, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 4. Étape 1 — Relever toutes les dépenses : 30 000 F, 25 000 F et 5 000 F. Étape 3 — Calculer le coût en les additionnant : 30 000 + 25 000 + 5 000 = 60 000 F. En oublier une, par exemple les vaccins, donnerait un coût trop faible.",
+              "answers": [
+                {
+                  "content": "60000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Yao vend 45 poulets à 2 000 F chacun. Quelle est sa recette, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 4. Étape 1 — Relever : le prix de vente est 2 000 F et la quantité vendue est 45, et non 50 puisque 5 poulets sont morts. Étape 2 — Calculer la recette : 45 × 2 000 = 90 000 F. Utiliser 50 poulets donnerait 100 000 F, un résultat faux.",
+              "answers": [
+                {
+                  "content": "90000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La recette de Yao est de 90 000 F et son coût de 60 000 F. Quel est son bénéfice, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 4. Étape 4 — Calculer le bénéfice : recette − coût = 90 000 − 60 000 = 30 000 F. La recette est supérieure au coût : c'est un bénéfice de 30 000 F. Le piège est de confondre le bénéfice avec la recette de 90 000 F.",
+              "answers": [
+                {
+                  "content": "30000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour démarrer sa bande (poussins, aliment et vaccins, soit 60 000 F), Yao n'avait que 35 000 F. Quelles sont les deux sources de financement qu'il pouvait envisager pour la somme manquante ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode de la notion 3. Étape 2 — Compter ce qui manque : 60 000 − 35 000 = 25 000 F. Étape 3 — Chercher les sources réelles : une tontine (sans intérêts, à son tour) et un crédit de microfinance (avec intérêts). Les ventes futures ne sont pas encore de l'argent, la caisse de l'école ne lui appartient pas et une aide non demandée n'existe pas. Étape 4 — Choisir et vérifier qu'il pourra rembourser.",
+              "answers": [
+                {
+                  "content": "Une tontine de son quartier",
+                  "correct": true
+                },
+                {
+                  "content": "Un crédit de microfinance",
+                  "correct": true
+                },
+                {
+                  "content": "Les ventes futures, dépensées avant d'avoir été réalisées",
+                  "correct": false
+                },
+                {
+                  "content": "L'argent de la caisse de l'école, pris sans autorisation",
+                  "correct": false
+                },
+                {
+                  "content": "Une aide qu'on ne lui demande pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao vend ses poulets sans avoir déclaré son activité et dit : « Payer des impôts, c'est seulement pour les gros commerçants. » Prends position en quatre phrases au plus : agit-il en entrepreneur civique ? Justifie.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Répond clairement que Yao n'agit pas en entrepreneur civique",
+                "Dit que même un petit entrepreneur doit déclarer son activité et payer ce que la loi demande",
+                "Explique que les impôts financent les services publics (écoles, routes, hôpitaux)"
+              ],
+              "explanation": "Corrigé modèle : « Yao n'agit pas en entrepreneur civique. Même petit, un entrepreneur doit accomplir les formalités de son activité et payer ce que la loi lui demande ; il ne décide pas seul de ne rien payer. Les impôts financent les écoles, les routes et les hôpitaux dont profitent aussi ses clients. Il doit donc se déclarer. » Barème sur 3 : 1 pour la prise de position, 1 pour la règle, 1 pour l'utilité des impôts.",
+              "answers": [],
+              "starter": "Yao n'agit pas en entrepreneur civique, car…"
+            }
+          ]
+        },
+        {
+          "title": "Aminata et Fanta lancent un atelier de couture",
+          "statement": "Aminata et Fanta, deux amies de la ville fictive de Sikoro, montent un atelier de couture de tenues d'écoliers. Leur plan d'affaires prévoit une machine à coudre d'occasion à 80 000 F et des tissus et des fils pour 30 000 F. Elles ont mis ensemble 45 000 F d'épargne et reçu 40 000 F d'une tontine. Au premier mois, elles vendent 20 tenues à 4 500 F pièce, pour 55 000 F de dépenses (tissus, fils, transport). Une tante leur prête le reste de la somme de départ.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une machine à coudre coûte 80 000 F et les tissus et fils 30 000 F. Quelle somme est nécessaire pour démarrer l'atelier, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 3. Étape 1 — Calculer la somme nécessaire : 80 000 + 30 000 = 110 000 F. Oublier les tissus et fils donnerait 80 000 F, ce qui ne suffirait pas pour commencer à coudre.",
+              "answers": [
+                {
+                  "content": "110000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les amies ont besoin de 110 000 F. Elles ont 45 000 F d'épargne et ont reçu 40 000 F d'une tontine. Quelle somme leur manque-t-il encore, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 3. Étape 1 — La somme nécessaire est 110 000 F. Étape 2 — Compter ce qu'elles possèdent : 45 000 + 40 000 = 85 000 F ; il manque 110 000 − 85 000 = 25 000 F. Étape 3 — Elles peuvent demander l'aide d'un proche ou un petit crédit de microfinance, à rembourser avec intérêts.",
+              "answers": [
+                {
+                  "content": "25000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avant de se lancer, Aminata et Fanta ont interrogé 30 parents d'élèves et noté les prix des tenues chez les couturiers voisins. À quelle étape du projet correspond cette action ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 2. Étape 1 — Repérer : elles interrogent des clients possibles et relèvent les prix des concurrents. Étape 2 — Placer : c'est l'étude de marché, la deuxième étape. Le financement consiste à chercher l'argent, le lancement à commencer à vendre, le suivi à noter les résultats après le lancement.",
+              "answers": [
+                {
+                  "content": "L'étude de marché",
+                  "correct": true
+                },
+                {
+                  "content": "Le financement",
+                  "correct": false
+                },
+                {
+                  "content": "Le lancement",
+                  "correct": false
+                },
+                {
+                  "content": "Le suivi",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au premier mois, les amies vendent 20 tenues à 4 500 F pièce et dépensent 55 000 F. Quel est leur bénéfice, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 4. Étape 1 — Relever : prix 4 500 F, quantité 20, dépenses 55 000 F. Étape 2 — Calculer la recette : 20 × 4 500 = 90 000 F. Étape 3 — Le coût est de 55 000 F. Étape 4 — Calculer le bénéfice : 90 000 − 55 000 = 35 000 F. Le piège est de répondre 90 000 F, qui est la recette.",
+              "answers": [
+                {
+                  "content": "35000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois actions qui feraient d'Aminata et Fanta des entrepreneures civiques ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode de la notion 5. 1. Identifier l'activité : un atelier de couture qui sert les familles. 2. Chercher les règles : déclarer l'activité, payer ses impôts, protéger l'environnement, respecter ses employés. 3. Comparer : accomplir les formalités, payer les impôts et évacuer les chutes de tissu respectent ces règles ; cacher des ventes, payer en retard et attendre sont des comportements non civiques. 4. Conclure : seules ces trois actions (formalités, impôts, chutes de tissu évacuées) sont civiques.",
+              "answers": [
+                {
+                  "content": "Accomplir les formalités de création de l'atelier",
+                  "correct": true
+                },
+                {
+                  "content": "Payer les impôts qu'elles doivent",
+                  "correct": true
+                },
+                {
+                  "content": "Évacuer correctement les chutes de tissu",
+                  "correct": true
+                },
+                {
+                  "content": "Cacher une partie de leurs ventes",
+                  "correct": false
+                },
+                {
+                  "content": "Payer leurs apprenties en retard",
+                  "correct": false
+                },
+                {
+                  "content": "Attendre qu'on le leur demande pour se déclarer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe de quatre ou cinq lignes qui explique comment l'atelier d'Aminata et Fanta contribue au développement de leur commune.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Cite la production de biens utiles aux habitants (tenues d'écoliers)",
+                "Cite la création de revenus et d'emplois ou de formations",
+                "Cite le paiement des impôts qui financent les services publics",
+                "Rédige un paragraphe clair, avec des phrases complètes"
+              ],
+              "explanation": "Corrigé modèle : « L'atelier produit des tenues dont les familles ont besoin pour l'école. Il crée des revenus pour Aminata et Fanta, et du travail ou une formation pour des apprenties. En payant ses impôts, il participe au financement des écoles, des routes et des centres de santé de la commune. Une petite entreprise comme celle-ci fait donc avancer le développement du quartier. » Barème sur 4 : 1 pour la production, 1 pour les revenus ou emplois, 1 pour les impôts, 1 pour la clarté de la rédaction.",
+              "answers": [],
+              "starter": "L'atelier d'Aminata et Fanta contribue au développement, car…"
+            }
+          ]
+        },
+        {
+          "title": "Les ventes de jus de bissap de Mariam",
+          "statement": "Mariam, jeune vendeuse fictive de jus de bissap à Sikoro, suit ses recettes chaque mois. Le graphique donne ses recettes mensuelles de janvier à juin, en milliers de francs CFA (données fictives) : janvier 120, février 150, mars 180, avril 160, mai 210, juin 240. Ses dépenses du mois de juin ont été de 170 000 F. Elle pense demander un crédit de microfinance de 80 000 F pour acheter un congélateur.",
+          "exercise_type": "evaluation",
+          "figure": "ventes-mensuelles-bissap",
+          "questions": [
+            {
+              "content": "Les recettes mensuelles de Mariam (en milliers de francs) sont : janvier 120, février 150, mars 180, avril 160, mai 210, juin 240. Quel mois a connu une baisse par rapport au mois précédent ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Relever les valeurs dans l'ordre : 120, 150, 180, 160, 210, 240. 2. Comparer chaque mois au précédent : février (150 > 120), mars (180 > 150), avril (160 < 180), mai (210 > 160), juin (240 > 210). 3. Seul avril est plus bas que le mois précédent, il passe de 180 à 160. Février, mai et juin sont en hausse.",
+              "answers": [
+                {
+                  "content": "Avril",
+                  "correct": true
+                },
+                {
+                  "content": "Février",
+                  "correct": false
+                },
+                {
+                  "content": "Mai",
+                  "correct": false
+                },
+                {
+                  "content": "Juin",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les recettes de Mariam sont de 120 milliers de francs en janvier, 150 en février et 180 en mars. Quelle est sa recette totale du premier trimestre, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Relever les recettes en milliers de francs : 120, 150 et 180. 2. Additionner : 120 + 150 + 180 = 450 milliers de francs. 3. Convertir : 450 milliers de francs = 450 000 F. Le piège serait d'oublier de convertir en francs et de répondre 450.",
+              "answers": [
+                {
+                  "content": "450000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En juin, la recette de Mariam est de 240 000 F et ses dépenses sont de 170 000 F. Quel est son bénéfice de juin, en francs ?",
+              "question_type": "numeric",
+              "unit": "F",
+              "tolerance": 0,
+              "explanation": "Méthode de la notion 4. Étape 1 — Relever : recette 240 000 F, coût 170 000 F. Étape 4 — Calculer le bénéfice : 240 000 − 170 000 = 70 000 F. La recette est supérieure au coût : c'est un bénéfice. Répondre 240 000 F confondrait recette et bénéfice.",
+              "answers": [
+                {
+                  "content": "70000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Noter chaque mois ses recettes et ses dépenses pour corriger ses erreurs correspond à l'étape appelée ___.",
+              "question_type": "select",
+              "explanation": "Méthode de la notion 2. Étape 1 — Repérer : Mariam note ses recettes et ses dépenses chaque mois, après le début de l'activité. Étape 2 — Placer : c'est la septième étape, le suivi. Le lancement est le début de la vente, le financement la recherche d'argent, l'étude de marché une étape préparatoire.",
+              "answers": [
+                {
+                  "content": "le suivi",
+                  "correct": true
+                },
+                {
+                  "content": "le lancement",
+                  "correct": false
+                },
+                {
+                  "content": "le financement",
+                  "correct": false
+                },
+                {
+                  "content": "l'étude de marché",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam veut demander un crédit de microfinance de 80 000 F pour un congélateur. Que doit-elle faire d'abord ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 3. Étape 2 — Compter : elle a besoin de 80 000 F pour le congélateur. Étape 4 — Choisir et vérifier : un crédit se rembourse avec des intérêts, donc elle doit s'assurer que son bénéfice mensuel permet de rembourser. Ses ventes peuvent baisser, comme en avril. Emprunter plus que nécessaire augmente les intérêts, et un crédit n'est pas un don.",
+              "answers": [
+                {
+                  "content": "Vérifier avec ses recettes et son bénéfice qu'elle pourra rembourser, intérêts compris",
+                  "correct": true
+                },
+                {
+                  "content": "Signer vite, car ses ventes ne baissent jamais",
+                  "correct": false
+                },
+                {
+                  "content": "Demander plus que 80 000 F pour être tranquille",
+                  "correct": false
+                },
+                {
+                  "content": "Ne rien calculer, car un crédit est un don",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une camarade dit : « Pour réussir une entreprise, il suffit d'avoir une bonne idée. » Prends position en un court paragraphe et cite au moins trois étapes d'un projet d'entreprise.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Répond clairement que l'idée ne suffit pas",
+                "Cite au moins trois étapes du projet (étude de marché, plan d'affaires, financement, formalités, lancement, suivi)",
+                "Explique pourquoi une de ces étapes évite une erreur",
+                "Rédige un paragraphe clair, avec des phrases complètes"
+              ],
+              "explanation": "Corrigé modèle : « Je ne suis pas d'accord : une bonne idée est seulement la première étape. Il faut ensuite faire une étude de marché pour savoir si des clients achèteront et à quel prix, écrire un plan d'affaires avec les coûts et les recettes prévues, puis trouver le financement. Après le lancement, le suivi permet de corriger les erreurs. Sans ces étapes, on risque de perdre son argent. » Barème sur 4 : 1 pour la prise de position, 1 pour trois étapes citées, 1 pour l'explication d'une erreur évitée, 1 pour la clarté.",
+              "answers": [],
+              "starter": "Je ne suis pas d'accord, car…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

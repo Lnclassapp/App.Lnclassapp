@@ -1,6 +1,8 @@
 # 🧠 DOMAINE · Entities::Catalog::FigureKinds
-# Rôle : liste fermée des dix sortes de figures d'une leçon et bornes de leurs paramètres (une sorte nouvelle = un amendement de l'ADR)
+# Rôle : liste fermée des onze sortes de figures d'une leçon et bornes de leurs paramètres (une sorte nouvelle = un amendement de l'ADR)
 # ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2), XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs
+defined?(Entities::Catalog::FigureCatalogs) || require_relative("figure_catalogs")
+
 module Entities
   module Catalog
     module FigureKinds
@@ -93,6 +95,9 @@ module Entities
         "diagram" => Kind.new(name: "diagram", item_range: (1..4), adjustable: [].freeze, required: ->(_) { %w[layout nodes] },
                               params: { "layout" => enum("flow", "tree", "cycle"), "direction" => enum("down", "right"),
                                         "nodes" => list(12), "edges" => list(16), "legend" => list(4) }),
+        "plate" => Kind.new(name: "plate", item_range: (0..1), adjustable: [].freeze, required: ->(_) { %w[plate labels numbering] },
+                            params: { "plate" => enum(*FigureCatalogs::PLATES.keys), "labels" => list(12), "highlight" => list(4),
+                                      "numbering" => enum("names", "numbers") }),
         "optics" => Kind.new(name: "optics", item_range: (0.5..60), adjustable: %w[focal object_distance object_height].freeze, required: OPTICS_REQUIRED,
                              params: { "mode" => enum("lens", "eye"), "lens" => enum("convergent", "divergent"), "focal" => number(0.5..20),
                                        "object_distance" => number(0.5..60), "object_height" => number(0.5..10),

@@ -31,7 +31,7 @@ class FiguresStructureTest < ActiveSupport::TestCase
   end
 
   test "the kinds of this lot have their module" do
-    %w[geometry number_line optics molecule].each { assert_includes SOURCES.map { |path| File.basename(path, ".js") }, it }
+    %w[geometry number_line plate optics molecule].each { assert_includes SOURCES.map { |path| File.basename(path, ".js") }, it }
   end
 
   test "the controller announces what the figure says, not only the label of the slider" do

@@ -1,0 +1,1431 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La dégradation des sols",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "SVT",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "causes-et-consequences",
+          "kind": "diagram",
+          "description": "Schéma fléché de gauche à droite, en trois colonnes de couleurs. À gauche, cinq causes : feux de brousse, déforestation, orpaillage, pluies violentes, cultures sans repos. Au centre, l'état du sol : sol nu, érosion, pollution, sol appauvri (les sels épuisés par les cultures sans repos y mènent). À droite, deux conséquences : baisse des rendements, puis abandon des champs.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "legend": [
+              "Causes",
+              "État du sol",
+              "Conséquences"
+            ],
+            "nodes": [
+              {
+                "id": "feux",
+                "label": "Feux de brousse",
+                "category": 1
+              },
+              {
+                "id": "defo",
+                "label": "Déforestation",
+                "category": 1
+              },
+              {
+                "id": "orpa",
+                "label": "Orpaillage",
+                "category": 1
+              },
+              {
+                "id": "pluie",
+                "label": "Pluies violentes",
+                "category": 1
+              },
+              {
+                "id": "cult",
+                "label": "Cultures sans repos",
+                "category": 1
+              },
+              {
+                "id": "nu",
+                "label": "Sol nu",
+                "category": 2
+              },
+              {
+                "id": "eros",
+                "label": "Érosion",
+                "category": 2
+              },
+              {
+                "id": "pollu",
+                "label": "Pollution du sol",
+                "category": 2
+              },
+              {
+                "id": "appau",
+                "label": "Sol appauvri",
+                "category": 2
+              },
+              {
+                "id": "rend",
+                "label": "Baisse des rendements",
+                "category": 3
+              },
+              {
+                "id": "aband",
+                "label": "Abandon des champs",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "feux",
+                "to": "nu",
+                "label": "litière brûlée"
+              },
+              {
+                "from": "defo",
+                "to": "nu",
+                "label": "arbres coupés"
+              },
+              {
+                "from": "orpa",
+                "to": "pollu",
+                "label": "produits toxiques"
+              },
+              {
+                "from": "orpa",
+                "to": "nu",
+                "label": "sol décapé"
+              },
+              {
+                "from": "nu",
+                "to": "eros"
+              },
+              {
+                "from": "pluie",
+                "to": "eros"
+              },
+              {
+                "from": "eros",
+                "to": "appau",
+                "label": "humus emporté"
+              },
+              {
+                "from": "pollu",
+                "to": "appau"
+              },
+              {
+                "from": "cult",
+                "to": "appau",
+                "label": "sels épuisés"
+              },
+              {
+                "from": "appau",
+                "to": "rend"
+              },
+              {
+                "from": "rend",
+                "to": "aband"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "profil-du-sol",
+          "kind": "plate",
+          "description": "Planche d'un profil de sol, vu en coupe, avec ses légendes. En haut, la litière de feuilles mortes ; dessous, l'horizon humifère sombre, riche en humus et traversé par des racines ; puis l'horizon d'accumulation, la roche mère altérée et la roche mère. L'horizon humifère est mis en évidence.",
+          "params": {
+            "plate": "soil_profile",
+            "labels": [
+              {
+                "part": "litter",
+                "text": "litière"
+              },
+              {
+                "part": "humus_horizon",
+                "text": "horizon humifère"
+              },
+              {
+                "part": "accumulation_horizon",
+                "text": "horizon d'accumulation"
+              },
+              {
+                "part": "weathered_rock",
+                "text": "roche mère altérée"
+              },
+              {
+                "part": "bedrock",
+                "text": "roche mère"
+              },
+              {
+                "part": "roots",
+                "text": "racines"
+              }
+            ],
+            "highlight": [
+              "humus_horizon"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "erosion-sol-nu",
+          "kind": "diagram",
+          "description": "Schéma fléché de haut en bas des étapes de l'érosion d'un sol nu en pente : les gouttes de pluie frappent le sol, elles détachent des particules de terre, l'eau ruisselle sur la pente au lieu de s'infiltrer, puis le ruissellement emporte les particules, et l'horizon humifère disparaît peu à peu.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "e1",
+                "label": "La pluie frappe le sol nu"
+              },
+              {
+                "id": "e2",
+                "label": "Des particules sont détachées"
+              },
+              {
+                "id": "e3",
+                "label": "L'eau ruisselle sur la pente"
+              },
+              {
+                "id": "e4",
+                "label": "L'eau emporte la terre"
+              },
+              {
+                "id": "e5",
+                "label": "L'horizon humifère disparaît"
+              }
+            ],
+            "edges": [
+              {
+                "from": "e1",
+                "to": "e2"
+              },
+              {
+                "from": "e2",
+                "to": "e3"
+              },
+              {
+                "from": "e3",
+                "to": "e4"
+              },
+              {
+                "from": "e4",
+                "to": "e5"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rendement-du-champ",
+          "kind": "stat_chart",
+          "description": "Courbe fictive, inventée pour l'exercice, des sacs de maïs récoltés chaque année sur la même parcelle d'un village, de l'année 1 à l'année 5, sans jachère et avec la même pluie : 20 sacs, 17, 13, 10, puis 8. La courbe descend chaque année : les récoltes diminuent régulièrement.",
+          "params": {
+            "chart": "line",
+            "series": [
+              20,
+              17,
+              13,
+              10,
+              8
+            ],
+            "labels": [
+              "Année 1",
+              "Année 2",
+              "Année 3",
+              "Année 4",
+              "Année 5"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "mesures-de-protection",
+          "kind": "diagram",
+          "description": "Schéma fléché en arbre de haut en bas. La racine est « Protéger et restaurer les sols ». Six branches en partent : reboisement, jachère, rotation des cultures, haies et cultures en courbes de niveau, fumure organique, et remise en état des sites d'orpaillage.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "racine",
+                "label": "Protéger et restaurer les sols"
+              },
+              {
+                "id": "m1",
+                "label": "Reboisement"
+              },
+              {
+                "id": "m2",
+                "label": "Jachère"
+              },
+              {
+                "id": "m3",
+                "label": "Rotation des cultures"
+              },
+              {
+                "id": "m4",
+                "label": "Haies et courbes de niveau"
+              },
+              {
+                "id": "m5",
+                "label": "Fumure organique"
+              },
+              {
+                "id": "m6",
+                "label": "Remise en état des sites"
+              }
+            ],
+            "edges": [
+              {
+                "from": "racine",
+                "to": "m1"
+              },
+              {
+                "from": "racine",
+                "to": "m2"
+              },
+              {
+                "from": "racine",
+                "to": "m3"
+              },
+              {
+                "from": "racine",
+                "to": "m4"
+              },
+              {
+                "from": "racine",
+                "to": "m5"
+              },
+              {
+                "from": "racine",
+                "to": "m6"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les causes de la dégradation des sols",
+          "remember": "La **dégradation d'un sol** est la perte de ses qualités : il s'amincit, s'appauvrit en humus et en sels minéraux, et nourrit moins bien les plantes. Les causes sont naturelles ou humaines. Les **pluies violentes** sont une cause naturelle : elles emportent la terre d'un sol nu. Les causes humaines sont les plus importantes : les **feux de brousse** brûlent la litière et une partie de l'humus et tuent les êtres vivants du sol ; la **déforestation** supprime les arbres, dont les racines retiennent la terre et dont les feuilles mortes fabriquent l'humus ; l'**orpaillage** (la recherche artisanale de l'or) creuse et retourne le sol et le pollue avec des produits toxiques ; les cultures répétées sans repos épuisent les sels minéraux du sol.",
+          "method": [
+            "Observer le paysage ou la parcelle : noter l'état du sol et de la végétation.",
+            "Repérer l'action humaine ou le phénomène naturel qui agit sur le sol.",
+            "Expliquer son effet sur le sol : ce qui est détruit, enlevé ou pollué.",
+            "Conclure : nommer la cause de dégradation et dire si elle est humaine ou naturelle."
+          ],
+          "example": {
+            "statement": "Yao revient au village en fin de saison sèche. Sur la colline où sa famille cultive, il voit des herbes noircies, des cendres, des troncs d'arbres brûlés et un sol nu et sombre, sans feuilles mortes. Un voisin lui dit qu'un feu a traversé la colline. Trouver la cause de la dégradation du sol en suivant la méthode.",
+            "steps": [
+              "Observer : la colline est couverte de cendres et de troncs brûlés ; le sol est nu, sombre, et il n'y a plus de feuilles mortes.",
+              "Repérer : le voisin parle d'un feu de brousse, une action humaine qui a traversé la colline pendant la saison sèche.",
+              "Expliquer : le feu a brûlé la litière et une partie de l'humus, et il a tué des êtres vivants du sol ; le sol, nu, n'est plus protégé.",
+              "Conclure : la cause de la dégradation est le feu de brousse, une cause humaine."
+            ]
+          },
+          "pitfall": "Ne pas croire que les feux de brousse enrichissent le sol parce que l'herbe repousse vite après leur passage. Contre-exemple : les cendres apportent un peu de sels minéraux, ce qui fait repousser l'herbe, mais pour peu de temps : légères, elles sont emportées par la première pluie, et la litière et l'humus brûlés ne sont plus renouvelés. Après le feu, le sol est nu et fragile. Pense aussi à distinguer la cause (le feu, la pluie) de la conséquence (le sol nu, la terre emportée).",
+          "figure": "causes-et-consequences",
+          "exercise": {
+            "title": "Trouver la cause de la dégradation d'un sol",
+            "statement": "Dans cet exercice, tu cherches ce qui dégrade le sol autour d'un village, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Au bord d'un village, Awa voit une colline couverte de cendres, sans feuilles mortes, avec un sol nu et noirci. Quelle action a dégradé ce sol ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : cendres, sol nu et noirci, plus de feuilles mortes. Étape 2 — Repérer : ces signes sont ceux d'un feu de brousse. Étape 3 — Expliquer : le feu a brûlé la litière et l'humus et laissé le sol nu. Étape 4 — Conclure : la cause est le feu de brousse. La jachère, le reboisement et le compost protègent le sol au lieu de le dégrader.",
+                "answers": [
+                  {
+                    "content": "Une longue période de jachère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le reboisement de la colline",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un feu de brousse",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'apport de compost",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque cause de dégradation à son effet sur le sol.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Repérer la cause, puis Étape 3 — Expliquer son effet. Les feux de brousse brûlent la litière et l'humus. La déforestation supprime les arbres : leurs racines ne retiennent plus la terre et leurs feuilles ne fabriquent plus d'humus. L'orpaillage creuse, retourne le sol et le pollue avec des produits toxiques. Les pluies violentes frappent un sol nu et emportent ses particules.",
+                "answers": [
+                  {
+                    "content": "Les feux de brousse",
+                    "match": "Ils brûlent la litière et l'humus"
+                  },
+                  {
+                    "content": "La déforestation",
+                    "match": "Elle supprime les racines qui retiennent la terre"
+                  },
+                  {
+                    "content": "L'orpaillage",
+                    "match": "Il creuse le sol et le pollue avec des produits toxiques"
+                  },
+                  {
+                    "content": "Les pluies violentes sur un sol nu",
+                    "match": "Elles emportent les particules de terre"
+                  }
+                ]
+              },
+              {
+                "content": "Les pluies violentes sont une cause humaine de la dégradation des sols.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : il faut dire si la cause est humaine ou naturelle. Les pluies sont un phénomène naturel : c'est une cause naturelle. Elles dégradent surtout les sols que l'homme a laissés nus, par exemple après la déforestation ou un feu de brousse. Les causes humaines sont les feux de brousse, la déforestation, l'orpaillage et les cultures répétées sans repos.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces actions, lesquelles dégradent le sol ? Choisis les deux bonnes réponses.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Repérer l'action, Étape 3 — Expliquer son effet. Les feux de brousse brûlent la litière et l'humus ; l'orpaillage creuse et pollue le sol. Le reboisement, la jachère et le compost, eux, protègent le sol ou lui redonnent de l'humus : ce sont des mesures de protection, pas des causes de dégradation.",
+                "answers": [
+                  {
+                    "content": "Les feux de brousse",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'orpaillage",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le reboisement",
+                    "correct": false
+                  },
+                  {
+                    "content": "La jachère",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'apport de compost",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La suppression des arbres d'une forêt pour en faire des champs ou en vendre le bois s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer l'action : on supprime les arbres d'une forêt. Étape 3 — Expliquer : sans arbres, plus de racines pour retenir la terre et plus de feuilles mortes pour fabriquer l'humus. Étape 4 — Conclure : cette cause humaine s'appelle la déforestation.",
+                "answers": [
+                  {
+                    "content": "déforestation",
+                    "correct": true
+                  },
+                  {
+                    "content": "la déforestation",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après le passage d'un feu, l'herbe repousse verte sur la colline. Kofi en conclut que le feu a enrichi le sol. Que peux-tu lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : l'herbe repousse, mais le sol était nu après le feu. Étape 2 — Repérer : le feu de brousse est une action humaine. Étape 3 — Expliquer : il a brûlé la litière et une partie de l'humus, qui ne sont plus renouvelés ; les cendres apportent un peu de sels minéraux, ce qui fait repousser l'herbe, mais pour peu de temps, car la pluie les emporte. Étape 4 — Conclure : le feu dégrade le sol. L'herbe verte est trompeuse, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Il a raison : la repousse de l'herbe prouve que le sol est plus fertile",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il se trompe : le feu a brûlé la litière et l'humus, et la pluie emportera les cendres du sol nu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il se trompe : le feu est une cause naturelle qui ne touche pas le sol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : les cendres remplacent l'humus pour toujours",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'érosion des sols par la pluie",
+          "remember": "L'**érosion** est l'entraînement des particules du sol par l'eau ou par le vent. Sur un **sol nu**, les gouttes de pluie frappent la terre et détachent des particules. L'eau qui ne s'infiltre pas s'écoule sur la pente : c'est le **ruissellement**. Il emporte les particules, d'abord celles de la surface, c'est-à-dire l'**horizon humifère**, le plus riche en humus et en sels minéraux. Un sol couvert de végétation est protégé : les feuilles amortissent les gouttes, la litière freine l'eau et les racines retiennent la terre. L'érosion est plus forte quand la pente est plus forte et la pluie plus violente.",
+          "method": [
+            "Observer les deux sols comparés : noter la végétation, la pente et la quantité d'eau reçue.",
+            "Comparer ce qui ruisselle et la terre emportée dans chaque cas.",
+            "Interpréter la différence en la reliant à la présence ou à l'absence de végétation.",
+            "Conclure : dire quel sol est protégé, lequel s'érode, et pourquoi."
+          ],
+          "example": {
+            "statement": "Au laboratoire du collège, Adjoua installe deux bacs inclinés. Le bac A est rempli de terre couverte de gazon, le bac B de la même terre, mais nue. Elle verse sur chacun la même quantité d'eau avec un arrosoir et recueille l'eau qui coule en bas dans un récipient. L'eau du bac A est presque claire, avec très peu de terre au fond du récipient. L'eau du bac B est brune et trouble, avec beaucoup de terre au fond. Interpréter l'expérience en suivant la méthode.",
+            "steps": [
+              "Observer : les deux bacs ont la même terre, la même pente et la même quantité d'eau ; seule la végétation change (gazon en A, sol nu en B).",
+              "Comparer : l'eau du bac A est presque claire, avec très peu de terre ; celle du bac B est brune, avec beaucoup de terre au fond du récipient.",
+              "Interpréter : la seule différence est le gazon ; ses feuilles amortissent l'eau et ses racines retiennent la terre, alors que la terre nue est entraînée.",
+              "Conclure : le sol du bac A, couvert de végétation, est protégé ; le sol nu du bac B s'érode."
+            ]
+          },
+          "pitfall": "Ne pas croire que la pluie seule explique l'érosion. Contre-exemple : dans l'expérience, les deux bacs reçoivent exactement la même eau, mais seul le sol nu perd sa terre. L'érosion vient de la pluie qui tombe sur un sol sans protection. Avant de conclure, regarde toujours ce qui change entre les deux sols, et ne l'attribue pas à ce qui est identique.",
+          "figure": "erosion-sol-nu",
+          "exercise": {
+            "title": "Interpréter une expérience sur l'érosion",
+            "statement": "Dans cet exercice, tu expliques comment la pluie érode un sol, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les étapes de l'érosion d'un sol nu en pente.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Observer : le sol est nu et en pente. Étape 2 — Comparer avec un sol couvert : ici, rien n'amortit les gouttes, qui frappent le sol et détachent des particules. Étape 3 — Interpréter : comme le sol nu n'est pas protégé, l'eau ruisselle sur la pente au lieu de s'infiltrer. Étape 4 — Conclure : le ruissellement emporte les particules. L'ordre est donc : la pluie frappe, les particules se détachent, l'eau ruisselle, la terre est emportée.",
+                "answers": [
+                  {
+                    "content": "Les gouttes de pluie frappent le sol nu."
+                  },
+                  {
+                    "content": "Des particules de terre sont détachées."
+                  },
+                  {
+                    "content": "L'eau ruisselle sur la pente."
+                  },
+                  {
+                    "content": "Le ruissellement emporte les particules."
+                  }
+                ]
+              },
+              {
+                "content": "Deux bacs inclinés contiennent la même terre et reçoivent la même quantité d'eau. Le bac A porte du gazon, le bac B est nu. Dans quel bac l'eau recueillie en bas est-elle la plus trouble ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : seule la végétation change entre les deux bacs. Étape 2 — Comparer : l'eau du bac nu emporte beaucoup de terre. Étape 3 — Interpréter : sans gazon, ni feuilles ni racines ne protègent ou ne retiennent la terre. Étape 4 — Conclure : l'eau la plus trouble vient du bac B. Dire que l'eau est la même dans les deux est la tentation du piège : l'eau versée est la même, pas l'eau recueillie.",
+                "answers": [
+                  {
+                    "content": "Dans le bac A, car le gazon rend l'eau sale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le bac B, car la terre nue est emportée par l'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans les deux bacs de la même façon, car l'eau est la même",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans aucun bac, car la pente est trop faible",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les racines des plantes retiennent les particules du sol et limitent l'érosion.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Interpréter : un sol couvert de végétation est protégé parce que ses racines retiennent la terre, ses feuilles amortissent les gouttes et sa litière freine l'eau. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur un sol nu en pente, plus la pluie est violente, ___ la quantité de terre emportée.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Comparer : une pluie violente fait ruisseler plus d'eau, plus vite. Étape 3 — Interpréter : un ruissellement plus fort emporte plus de particules sur un sol nu. Étape 4 — Conclure : la quantité de terre emportée est plus grande.",
+                "answers": [
+                  {
+                    "content": "plus grande est",
+                    "correct": true
+                  },
+                  {
+                    "content": "plus petite est",
+                    "correct": false
+                  },
+                  {
+                    "content": "plus stable est",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'eau qui s'écoule à la surface d'un sol en pente, sans s'infiltrer, s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Comparer : sur un sol nu, une partie de l'eau ne s'infiltre pas et coule sur la pente. Étape 3 — Interpréter : cette eau entraîne les particules de terre. Étape 4 — Conclure : ce phénomène s'appelle le ruissellement.",
+                "answers": [
+                  {
+                    "content": "ruissellement",
+                    "correct": true
+                  },
+                  {
+                    "content": "le ruissellement",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux champs voisins reçoivent la même pluie. Le premier est couvert de plants de manioc et de feuilles mortes, le second vient d'être défriché et reste nu. Awa dit : « La pluie seule explique la terre emportée. » Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : les deux champs reçoivent la même pluie. Étape 2 — Comparer : seul le champ nu perd beaucoup de terre. Étape 3 — Interpréter : la différence vient de la végétation, qui protège le premier champ. Étape 4 — Conclure : la pluie est la même, c'est le sol nu qui s'érode. Attribuer l'érosion à la pluie seule est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Elle a raison : la pluie est la seule cause de l'érosion",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle a raison : le champ défriché reçoit plus de pluie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle se trompe : le champ couvert perd plus de terre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle se trompe : la pluie est la même, c'est l'absence de végétation du champ nu qui explique la terre emportée",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les conséquences de la dégradation des sols",
+          "remember": "L'érosion emporte d'abord l'**horizon humifère**, la couche la plus riche en humus et en sels minéraux. Le sol s'**appauvrit** : il est moins fertile. Les plantes, qui puisent l'eau et les sels minéraux grâce à leurs poils absorbants, poussent mal : les **rendements** (les quantités récoltées) baissent. Les paysans, moins bien nourris et moins riches, peuvent abandonner leurs champs et défricher de nouvelles terres, ce qui dégrade d'autres sols : c'est un cercle vicieux. La terre emportée peut aussi troubler et combler les cours d'eau, et la pollution due à l'orpaillage rend le sol et l'eau dangereux.",
+          "method": [
+            "Lire le document : repérer ce qu'il mesure, l'unité et la période.",
+            "Décrire l'évolution : dire si la valeur augmente, diminue ou reste stable, avec les valeurs lues.",
+            "Expliquer cette évolution par l'état du sol : humus, sels minéraux, horizon humifère.",
+            "Conclure : donner la conséquence de la dégradation pour les plantes et pour les paysans."
+          ],
+          "example": {
+            "statement": "Un paysan cultive du maïs sur la même parcelle de colline, sans jachère. Il note chaque année le nombre de sacs récoltés, avec la même pluie : année 1, 20 sacs ; année 2, 17 ; année 3, 13 ; année 4, 10 ; année 5, 8 (valeurs inventées pour l'exercice). Exploiter ces résultats en suivant la méthode.",
+            "steps": [
+              "Lire : le document donne le nombre de sacs de maïs récoltés chaque année sur la même parcelle, de l'année 1 à l'année 5.",
+              "Décrire : le nombre de sacs diminue chaque année, de 20 sacs à l'année 1 à 8 sacs à l'année 5, soit 12 sacs de moins.",
+              "Expliquer : la pluie est la même chaque année, donc la cause est dans le sol : sur la colline, la terre est emportée et les cultures répétées épuisent les sels minéraux.",
+              "Conclure : la dégradation du sol fait baisser les rendements, ce qui appauvrit le paysan."
+            ]
+          },
+          "pitfall": "Ne pas conclure que la baisse des récoltes vient forcément d'un manque de pluie. Contre-exemple : dans l'exemple, la pluie est la même chaque année et pourtant les récoltes passent de 20 à 8 sacs ; la cause est le sol appauvri. Lis toujours ce qui reste identique dans le document avant d'expliquer ce qui change.",
+          "figure": "profil-du-sol",
+          "exercise": {
+            "title": "Exploiter des résultats de récoltes",
+            "statement": "Dans cet exercice, tu relies l'état d'un sol aux récoltes d'un village, avec les étapes de la fiche. Les valeurs de l'exercice sont inventées.",
+            "exercise_type": "fixation",
+            "figure": "rendement-du-champ",
+            "questions": [
+              {
+                "content": "Quelle couche du sol l'érosion emporte-t-elle en premier, et pourquoi est-ce grave pour les plantes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer par l'état du sol : l'érosion enlève d'abord la surface du sol, c'est-à-dire l'horizon humifère. Cette couche est la plus riche en humus et en sels minéraux. Étape 4 — Conclure : sans elle, le sol est appauvri et les plantes poussent mal. La roche mère et l'horizon d'accumulation sont plus profonds : l'érosion ne les atteint pas en premier.",
+                "answers": [
+                  {
+                    "content": "La roche mère, qui contient les sels minéraux",
+                    "correct": false
+                  },
+                  {
+                    "content": "La roche mère altérée, qui contient la litière",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'horizon humifère, qui est le plus riche en humus et en sels minéraux",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'horizon d'accumulation, qui est la couche la plus fertile",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sol dégradé, appauvri en sels minéraux, donne en général des récoltes plus abondantes.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : les plantes ont besoin de sels minéraux, qu'elles puisent dans le sol avec leurs poils absorbants. Étape 4 — Conclure : un sol appauvri en sels minéraux nourrit moins bien les plantes, donc les rendements baissent. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur une parcelle, la récolte de maïs passe de 20 sacs à l'année 1 à 8 sacs à l'année 5. De combien de sacs la récolte a-t-elle diminué ?",
+                "question_type": "numeric",
+                "unit": "sacs",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : le document donne le nombre de sacs de maïs à l'année 1 et à l'année 5. Étape 2 — Décrire l'évolution avec les valeurs lues : la valeur diminue de 20 à 8. Calcul : 20 − 8 = 12. Étape 3 — Expliquer : cette baisse vient du sol appauvri en humus et en sels minéraux. Étape 4 — Conclure : la récolte a diminué de 12 sacs.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois conséquences de la dégradation des sols ? Choisis les trois bonnes réponses.",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Expliquer par l'état du sol, Étape 4 — Conclure. La dégradation appauvrit le sol en sels minéraux, ce qui fait baisser les rendements, et la terre emportée trouble les cours d'eau. L'humus diminue, il n'augmente pas ; le sol nu laisse l'eau ruisseler au lieu de mieux l'infiltrer ; le sol s'amincit, il ne s'épaissit pas.",
+                "answers": [
+                  {
+                    "content": "Une baisse des rendements",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une augmentation de l'humus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un appauvrissement en sels minéraux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une meilleure infiltration de l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un trouble des cours d'eau par la terre emportée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un sol plus épais",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes du cercle vicieux de la dégradation des sols.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Décrire l'évolution : le sol s'appauvrit d'abord. Étape 3 — Expliquer : un sol appauvri nourrit mal les plantes, donc les récoltes diminuent. Étape 4 — Conclure : le paysan abandonne alors son champ et défriche une nouvelle parcelle, ce qui dégrade un autre sol. L'ordre est : sol appauvri, récoltes en baisse, champ abandonné, nouveau défrichement.",
+                "answers": [
+                  {
+                    "content": "Le sol s'appauvrit."
+                  },
+                  {
+                    "content": "Les récoltes diminuent."
+                  },
+                  {
+                    "content": "Le paysan abandonne son champ."
+                  },
+                  {
+                    "content": "Il défriche une nouvelle parcelle de forêt."
+                  }
+                ]
+              },
+              {
+                "content": "Kouassi cultive la même parcelle depuis cinq ans. La pluie a été la même chaque année, mais ses récoltes baissent. Il dit : « Il n'a pas assez plu. » Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : le document dit que la pluie est la même chaque année. Étape 2 — Décrire : les récoltes diminuent. Étape 3 — Expliquer : si la pluie ne change pas, la cause est dans le sol, appauvri en sels minéraux. Étape 4 — Conclure : la dégradation du sol fait baisser les rendements. Accuser la pluie est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Il a raison : une baisse des récoltes vient toujours d'un manque de pluie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il se trompe : la pluie est la même, la baisse vient du sol appauvri",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il se trompe : la baisse vient d'un excès de pluie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : le sol n'a aucun rôle dans les récoltes",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La protection et la restauration des sols",
+          "remember": "Pour protéger un sol ou lui redonner ses qualités, on choisit la mesure qui agit sur la **cause** de la dégradation. Le **reboisement** (planter des arbres) couvre le sol, et les racines retiennent la terre. La **jachère** laisse un champ au repos : la végétation revient et l'humus se reconstitue. La **rotation des cultures** alterne des plantes différentes d'une année à l'autre, ce qui évite d'épuiser toujours les mêmes sels minéraux. La **fumure organique** (compost, fumier) apporte de l'humus. Des **haies** et des cultures en **courbes de niveau**, perpendiculaires à la pente, freinent le ruissellement. Il faut aussi éviter d'allumer des feux de brousse et remettre en état les sites d'orpaillage.",
+          "method": [
+            "Identifier le problème : la cause de la dégradation et sa conséquence sur le sol.",
+            "Choisir la mesure qui agit sur cette cause.",
+            "Expliquer comment la mesure protège ou restaure le sol.",
+            "Conclure : dire ce que le sol et la récolte y gagnent."
+          ],
+          "example": {
+            "statement": "Adjoua cultive du manioc sur un champ en pente, où le sol reste nu entre les plants. À chaque grosse pluie, l'eau ruisselle et emporte de la terre, et ses récoltes baissent. Que peut-elle faire pour protéger son champ ? Répondre en suivant la méthode.",
+            "steps": [
+              "Identifier : la cause est la pluie qui ruisselle sur un sol nu en pente ; la conséquence est la terre emportée et la baisse des récoltes.",
+              "Choisir : la mesure qui agit sur le ruissellement est de planter des haies et de cultiver en courbes de niveau, perpendiculaires à la pente, et de couvrir le sol.",
+              "Expliquer : les haies et les lignes de culture freinent l'eau, qui s'infiltre au lieu de ruisseler ; les racines et les feuilles retiennent la terre.",
+              "Conclure : le sol garde son horizon humifère et reste fertile, donc les récoltes cessent de baisser."
+            ]
+          },
+          "pitfall": "Ne pas choisir une mesure sans avoir identifié la cause. Contre-exemple : planter des haies freine le ruissellement, mais ne protège pas un champ contre les feux de brousse ; contre le feu, il faut éviter d'allumer des feux et sensibiliser le village. De même, laisser un champ en jachère n'est pas l'abandonner : le sol se repose et sa végétation protège la terre.",
+          "figure": "mesures-de-protection",
+          "exercise": {
+            "title": "Choisir une mesure de protection du sol",
+            "statement": "Dans cet exercice, tu choisis la mesure qui convient à chaque problème de sol d'un village, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque problème de sol à la mesure qui convient le mieux.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier la cause, puis Étape 2 — Choisir la mesure qui agit sur elle. Sur une pente, des haies et des cultures en courbes de niveau freinent le ruissellement. Un champ épuisé a besoin de repos : la jachère. Un sol nu après la déforestation se protège en replantant des arbres. Contre les feux, on évite de les allumer et on sensibilise le village.",
+                "answers": [
+                  {
+                    "content": "La terre est emportée par le ruissellement sur une pente",
+                    "match": "Des haies et des cultures en courbes de niveau"
+                  },
+                  {
+                    "content": "Un champ cultivé chaque année est épuisé",
+                    "match": "La jachère"
+                  },
+                  {
+                    "content": "Une forêt a été coupée et le sol est nu",
+                    "match": "Le reboisement"
+                  },
+                  {
+                    "content": "Des feux de brousse brûlent la litière et l'humus",
+                    "match": "Éviter d'allumer les feux et sensibiliser le village"
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le rôle de la jachère ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : un champ cultivé sans arrêt voit ses sels minéraux s'épuiser. Étape 2 — Choisir : la jachère. Étape 3 — Expliquer : le champ est laissé au repos, la végétation revient et l'humus se reconstitue. Étape 4 — Conclure : le sol retrouve sa fertilité. La jachère n'est pas un abandon définitif, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Laisser le sol au repos pour que la végétation revienne et que l'humus se reconstitue",
+                    "correct": true
+                  },
+                  {
+                    "content": "Abandonner définitivement le champ",
+                    "correct": false
+                  },
+                  {
+                    "content": "Brûler la végétation du champ avant les semis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cultiver deux fois plus de plantes sur la même parcelle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le reboisement protège le sol parce que les racines des arbres retiennent la terre.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer comment la mesure protège le sol : les arbres plantés couvrent le sol, leurs feuilles amortissent les gouttes de pluie et leurs racines retiennent la terre. Étape 4 — Conclure : le reboisement limite l'érosion. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Alterner des cultures différentes sur une même parcelle d'une année à l'autre s'appelle la ___ des cultures.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir la mesure : alterner des plantes différentes d'une année à l'autre sur la même parcelle. Étape 3 — Expliquer : cette pratique évite d'épuiser toujours les mêmes sels minéraux. Étape 4 — Conclure : c'est la rotation des cultures.",
+                "answers": [
+                  {
+                    "content": "rotation",
+                    "correct": true
+                  },
+                  {
+                    "content": "la rotation",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour freiner le ruissellement sur une pente, on plante des haies ___ à la pente.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Choisir : des haies qui barrent le chemin de l'eau. Étape 3 — Expliquer : l'eau descend dans le sens de la pente ; des haies perpendiculaires à la pente la freinent, l'eau s'infiltre et la terre est retenue. Des haies parallèles à la pente laisseraient l'eau couler entre elles.",
+                "answers": [
+                  {
+                    "content": "parallèles",
+                    "correct": false
+                  },
+                  {
+                    "content": "perpendiculaires",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un village, des feux de brousse détruisent chaque année la litière des collines. Le chef propose de planter des haies pour freiner le ruissellement. Cette mesure règle-t-elle le problème ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : la cause est le feu de brousse, qui brûle la litière. Étape 2 — Choisir : la mesure doit agir sur cette cause, donc éviter d'allumer les feux et sensibiliser le village. Étape 3 — Expliquer : les haies freinent le ruissellement mais n'arrêtent pas un feu. Étape 4 — Conclure : la proposition du chef ne règle pas ce problème, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Oui, car des haies protègent contre tous les problèmes de sol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, car les haies empêchent les feux de démarrer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car elle ne vise pas la cause : il faut éviter d'allumer les feux et sensibiliser le village",
+                    "correct": true
+                  },
+                  {
+                    "content": "Non, car les haies dégradent le sol",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le feu de brousse sur la colline du village",
+          "statement": "En fin de saison sèche, un feu de brousse traverse la colline où les paysans d'un village cultivent le maïs et le manioc. Quelques semaines plus tard, la saison des pluies commence. Dans cet exercice, tu suis les conséquences du feu sur le sol, avec les étapes de la fiche.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un feu de brousse a traversé une colline. Quel est l'effet immédiat du feu sur le sol ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : après un feu, la colline est couverte de cendres et le sol est nu. Étape 2 — Repérer : le feu de brousse est une action humaine. Étape 3 — Expliquer : il brûle la litière et une partie de l'humus et tue des êtres vivants du sol. Étape 4 — Conclure : le sol est nu et dégradé. Le feu ne protège pas le sol et ne l'enrichit pas durablement.",
+              "answers": [
+                {
+                  "content": "Il ajoute une couche épaisse d'humus",
+                  "correct": false
+                },
+                {
+                  "content": "Il fait pousser de nouveaux arbres le jour même",
+                  "correct": false
+                },
+                {
+                  "content": "Il protège le sol contre la pluie",
+                  "correct": false
+                },
+                {
+                  "content": "Il brûle la litière et une partie de l'humus et laisse le sol nu",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une cause naturelle, la pluie, peut aggraver la dégradation d'un sol que le feu a laissé nu.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Observer : le feu laisse un sol nu. Étape 2 — Comparer : un sol nu n'est plus protégé par les feuilles, la litière et les racines. Étape 3 — Interpréter : la pluie frappe la terre, l'eau ruisselle sur la pente et emporte les particules. Étape 4 — Conclure : la pluie aggrave la dégradation commencée par le feu.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les événements, du feu à la baisse des récoltes.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Observer la chaîne : le feu est la cause de départ. Étape 2 — Repérer : il brûle la litière et l'humus, donc le sol reste nu. Étape 3 — Expliquer : à la saison des pluies, l'eau ruisselle sur le sol nu et emporte la terre, d'abord l'horizon humifère. Étape 4 — Conclure : le sol appauvri nourrit mal les plantes, donc les récoltes baissent.",
+              "answers": [
+                {
+                  "content": "Le feu brûle la litière et l'humus."
+                },
+                {
+                  "content": "Le sol reste nu."
+                },
+                {
+                  "content": "La pluie ruisselle et emporte la terre."
+                },
+                {
+                  "content": "Le sol perd son humus et ses sels minéraux."
+                },
+                {
+                  "content": "Les récoltes baissent."
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois conséquences possibles du passage du feu et de la pluie sur la colline ? Choisis les trois bonnes réponses.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Repérer la cause, Étape 3 — Expliquer ses effets : sur un sol nu, la pluie emporte la terre ; le sol perd de l'humus et des sels minéraux ; les plantes poussent moins bien, donc les rendements baissent. La litière brûlée n'est pas renouvelée, les racines brûlées ou mortes retiennent moins la terre, et le ruissellement augmente au lieu de l'infiltration.",
+              "answers": [
+                {
+                  "content": "La terre est emportée par le ruissellement",
+                  "correct": true
+                },
+                {
+                  "content": "La litière est renouvelée plus vite",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol s'appauvrit en humus et en sels minéraux",
+                  "correct": true
+                },
+                {
+                  "content": "Les racines retiennent mieux la terre",
+                  "correct": false
+                },
+                {
+                  "content": "Les rendements risquent de baisser",
+                  "correct": true
+                },
+                {
+                  "content": "L'infiltration de l'eau est plus forte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les feux de brousse sont une cause ___ de la dégradation des sols (réponds par un adjectif : naturelle ou humaine).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 2 — Repérer : le feu de brousse est allumé par des personnes, pour chasser, nettoyer un champ ou par imprudence. Étape 4 — Conclure : c'est une cause humaine. Les pluies violentes sont, elles, une cause naturelle.",
+              "answers": [
+                {
+                  "content": "humaine",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le village, un paysan dit : « Après un feu, l'herbe repousse verte, donc le feu rend le sol meilleur. » Explique pourquoi cette idée est fausse.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le feu brûle la litière et l'humus",
+                "Le sol est nu et la pluie peut emporter les cendres et la terre",
+                "L'herbe verte ne prouve pas que le sol est fertile",
+                "La conclusion dit que le feu dégrade le sol"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Observer : après le feu, le sol est nu, sans litière. Étape 3 — Expliquer : le feu a brûlé la litière et une partie de l'humus, qui ne sont plus renouvelés ; les cendres, légères, sont emportées par la pluie et le sol nu s'érode. Étape 4 — Conclure : l'herbe qui repousse ne prouve pas que le sol est meilleur ; le feu de brousse dégrade le sol. Barème : 1 point pour la litière et l'humus brûlés, 1 point pour le sol nu et la pluie, 0,5 point pour l'herbe verte qui ne prouve pas la fertilité, 0,5 point pour la conclusion.",
+              "answers": [],
+              "starter": "Le feu rend le sol moins fertile parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Deux parcelles, une même pluie",
+          "statement": "Yao compare deux parcelles voisines d'un mètre carré, de même pente, qui reçoivent la même pluie. La parcelle A est couverte d'herbes et de feuilles mortes. La parcelle B vient d'être défrichée et reste nue. Après la pluie, il recueille la terre emportée au pied de chaque parcelle : 20 g pour la parcelle A et 180 g pour la parcelle B (valeurs inventées pour l'exercice).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La parcelle A perd 20 g de terre et la parcelle B 180 g, sous la même pluie. Quelle parcelle s'érode le plus ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : même pente, même pluie ; seule la végétation change. Étape 2 — Comparer : A perd 20 g, B perd 180 g. Étape 3 — Interpréter : la parcelle nue ne retient pas sa terre. Étape 4 — Conclure : la parcelle B s'érode le plus. Dire que les deux s'érodent de la même façon parce que la pluie est la même est le piège de l'érosion.",
+              "answers": [
+                {
+                  "content": "La parcelle A, car elle reçoit la même pluie que B",
+                  "correct": false
+                },
+                {
+                  "content": "La parcelle B, car elle perd 180 g, une quantité plus grande que 20 g",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux de la même façon, car la pluie est la même",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune, car la pente est la même",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de grammes de terre de plus la parcelle B a-t-elle perdus que la parcelle A ?",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Observer : A a perdu 20 g et B a perdu 180 g. Étape 2 — Comparer ce qui est emporté dans chaque cas : 180 − 20 = 160. Étape 3 — Interpréter : la parcelle nue perd bien plus de terre, car rien ne la protège. Étape 4 — Conclure : la parcelle B a perdu 160 g de terre de plus que la parcelle A.",
+              "answers": [
+                {
+                  "content": "160",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux raisons qui expliquent que la parcelle A perde peu de terre ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Observer : la pente et la pluie sont les mêmes pour A et B, ce qui élimine les deux propositions sur la pente et la quantité de pluie. Étape 3 — Interpréter par la végétation : la litière et les herbes amortissent les gouttes et freinent l'eau ; les racines retiennent la terre. Étape 4 — Conclure : la végétation protège la parcelle A.",
+              "answers": [
+                {
+                  "content": "Les feuilles mortes et les herbes amortissent la pluie et freinent l'eau",
+                  "correct": true
+                },
+                {
+                  "content": "La parcelle A reçoit moins de pluie que B",
+                  "correct": false
+                },
+                {
+                  "content": "Sa pente est plus faible que celle de B",
+                  "correct": false
+                },
+                {
+                  "content": "Les racines des herbes retiennent la terre",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La parcelle B est ___ à l'érosion parce qu'elle est nue.",
+              "question_type": "select",
+              "explanation": "Étape 3 — Interpréter : sans feuilles, sans litière et sans racines vivantes, la parcelle B n'est pas protégée. Étape 4 — Conclure : elle est plus exposée à l'érosion.",
+              "answers": [
+                {
+                  "content": "plus exposée",
+                  "correct": true
+                },
+                {
+                  "content": "moins exposée",
+                  "correct": false
+                },
+                {
+                  "content": "aussi protégée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cette expérience, la quantité de pluie explique la différence entre les deux parcelles.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Observer : les deux parcelles reçoivent la même pluie et ont la même pente. Étape 3 — Interpréter : une cause identique pour A et B ne peut pas expliquer une différence entre A et B. Étape 4 — Conclure : la différence vient de la végétation. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige la conclusion de Yao : compare les deux parcelles, explique la différence et dis ce qui protège la parcelle A.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les deux parcelles sont comparées avec les valeurs 20 g et 180 g",
+                "La différence est reliée à la végétation (feuilles, litière, racines)",
+                "La conclusion est claire"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Observer : les deux parcelles ont la même pente et reçoivent la même pluie ; seule la végétation change. Étape 2 — Comparer : A perd 20 g de terre, B en perd 180 g, soit 160 g de plus. Étape 3 — Interpréter : la parcelle A est couverte d'herbes et de litière qui amortissent les gouttes et freinent l'eau, et ses racines retiennent la terre ; B est nue. Étape 4 — Conclure : A est protégée, B s'érode. Barème : 1 point pour la comparaison chiffrée, 1 point pour le rôle de la végétation, 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "La parcelle A perd moins de terre que la parcelle B parce que…"
+            }
+          ]
+        },
+        {
+          "title": "L'orpaillage près de la rivière du village",
+          "statement": "Près de la rivière d'un village, des orpailleurs ont creusé de nombreux trous et retourné la terre pour chercher de l'or. L'eau de la rivière est devenue trouble et boueuse. Les champs voisins, dont le sol a été décapé, ne donnent presque plus rien. Le village veut agir. Dans cet exercice, tu analyses la situation et tu proposes des mesures, avec les étapes des fiches.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la cause de dégradation du sol dans ce village ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : de nombreux trous, de la terre retournée, une rivière trouble. Étape 2 — Repérer : l'action est la recherche de l'or, c'est-à-dire l'orpaillage. Étape 3 — Expliquer : il creuse et retourne le sol, détruit l'horizon humifère et peut le polluer avec des produits toxiques. Étape 4 — Conclure : la cause est l'orpaillage, une cause humaine.",
+              "answers": [
+                {
+                  "content": "Un feu de brousse",
+                  "correct": false
+                },
+                {
+                  "content": "Le reboisement",
+                  "correct": false
+                },
+                {
+                  "content": "L'orpaillage",
+                  "correct": true
+                },
+                {
+                  "content": "La jachère",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois conséquences de l'orpaillage décrites ou possibles dans ce village ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Expliquer : le creusage détruit l'horizon humifère ; la terre emportée par l'eau trouble la rivière ; les produits toxiques utilisés par les orpailleurs, comme le mercure, peuvent polluer le sol et l'eau. Étape 4 — Conclure : les champs voisins donnent moins, pas plus. L'humus ne s'enrichit pas et la litière ne s'épaissit pas.",
+              "answers": [
+                {
+                  "content": "L'horizon humifère est détruit par le creusage",
+                  "correct": true
+                },
+                {
+                  "content": "La rivière devient trouble à cause de la terre emportée",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol devient plus riche en humus",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol et l'eau peuvent être pollués par des produits toxiques",
+                  "correct": true
+                },
+                {
+                  "content": "Les champs voisins donnent de meilleures récoltes",
+                  "correct": false
+                },
+                {
+                  "content": "La litière est plus épaisse",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les champs du village ne donnent presque plus rien parce qu'il n'a pas plu.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire le document : rien ne dit qu'il n'a pas plu ; le texte parle de trous, de sol décapé et de rivière boueuse. Étape 3 — Expliquer par l'état du sol : le sol décapé a perdu son horizon humifère et ses sels minéraux. Étape 4 — Conclure : la cause est le sol dégradé, pas un manque de pluie. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la remise en état d'un site d'orpaillage.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Identifier : le site est creusé et dégradé. Étape 2 — Choisir : une remise en état. Étape 3 — Expliquer : on arrête d'abord de creuser, on comble les trous, on remet de la terre fertile, puis on replante pour que les racines retiennent la terre. Étape 4 — Conclure : le site peut de nouveau protéger le sol et retrouver une végétation.",
+              "answers": [
+                {
+                  "content": "Arrêter l'exploitation du site."
+                },
+                {
+                  "content": "Combler les trous."
+                },
+                {
+                  "content": "Remettre de la terre fertile."
+                },
+                {
+                  "content": "Replanter des arbres et de l'herbe."
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque problème du village à la mesure qui convient.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier le problème, Étape 2 — Choisir la mesure qui agit sur la cause. Les trous se comblent par la remise en état du site. Un champ épuisé se repose en jachère. Un sol nu au bord de la rivière se protège en replantant des arbres, dont les racines retiennent la terre.",
+              "answers": [
+                {
+                  "content": "Des trous laissés par l'orpaillage",
+                  "match": "Remettre le site en état"
+                },
+                {
+                  "content": "Un champ épuisé par des cultures répétées",
+                  "match": "La jachère"
+                },
+                {
+                  "content": "Un sol nu au bord de la rivière",
+                  "match": "Le reboisement"
+                }
+              ]
+            },
+            {
+              "content": "Le chef du village te demande de proposer deux mesures pour protéger les champs voisins de la rivière. Pour chaque mesure, dis la cause qu'elle traite et explique comment elle protège le sol.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Une première mesure adaptée est choisie",
+                "Une deuxième mesure adaptée est choisie",
+                "La cause traitée par chaque mesure est nommée",
+                "Le mode d'action sur le sol est expliqué",
+                "La conclusion donne le bénéfice pour la récolte"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : l'orpaillage a décapé et pollué le sol, et la terre part dans la rivière. Étape 2 — Choisir : mesure 1, remettre le site d'orpaillage en état (combler les trous, remettre de la terre fertile) ; mesure 2, reboiser le bord de la rivière. Étape 3 — Expliquer : la remise en état redonne un sol utilisable ; les racines des arbres retiennent la terre et limitent qu'elle trouble la rivière. Étape 4 — Conclure : le sol est protégé et peut retrouver peu à peu sa fertilité ; les récoltes peuvent remonter. Barème : 1 point par mesure adaptée, 1 point pour les causes, 0,5 point pour le mode d'action, 0,5 point pour la conclusion.",
+              "answers": [],
+              "starter": "Première mesure : remettre le site en état, parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Du défrichement de la forêt à la baisse des récoltes",
+          "statement": "Dans un village, des paysans ont défriché une partie de la forêt de la colline pour y cultiver du maïs. Chaque saison sèche, ils brûlent les herbes pour préparer les champs, et ils cultivent la même parcelle chaque année, sans jachère. La pluie est la même d'une année à l'autre. Leurs récoltes de maïs sur une parcelle sont de 24 sacs à l'année 1, 20, 15, 11, puis 9 sacs à l'année 5 (valeurs inventées pour l'exercice). Dans cet exercice de niveau BEPC, tu analyses la situation et tu proposes des mesures.",
+          "exercise_type": "evaluation",
+          "figure": "causes-et-consequences",
+          "questions": [
+            {
+              "content": "Quelles sont les trois causes de dégradation du sol dans ce village ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Observer : le texte parle d'une forêt défrichée, de feux chaque saison sèche et de la même parcelle cultivée sans arrêt. Étape 2 — Repérer : ce sont la déforestation, les feux de brousse et les cultures sans repos, trois causes humaines. Étape 3 — Expliquer : elles laissent le sol nu ou épuisent ses sels minéraux. Étape 4 — Conclure : les trois causes sont la déforestation, les feux et les cultures sans repos. Le reboisement, le compost et la jachère sont des mesures de protection, pas des causes de dégradation.",
+              "answers": [
+                {
+                  "content": "La déforestation de la colline",
+                  "correct": true
+                },
+                {
+                  "content": "Les feux allumés chaque saison sèche",
+                  "correct": true
+                },
+                {
+                  "content": "Le reboisement de la forêt",
+                  "correct": false
+                },
+                {
+                  "content": "Les cultures répétées sur la même parcelle sans jachère",
+                  "correct": true
+                },
+                {
+                  "content": "L'apport de compost",
+                  "correct": false
+                },
+                {
+                  "content": "Une longue période de jachère",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de sacs la récolte a-t-elle diminué entre l'année 1 (24 sacs) et l'année 5 (9 sacs) ?",
+              "question_type": "numeric",
+              "unit": "sacs",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : le document donne les récoltes de l'année 1 et de l'année 5. Étape 2 — Décrire : la valeur diminue de 24 à 9. Calcul : 24 − 9 = 15. Étape 3 — Expliquer : cette baisse vient du sol appauvri et érodé. Étape 4 — Conclure : la récolte a diminué de 15 sacs.",
+              "answers": [
+                {
+                  "content": "15",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La pluie est la même chaque année et les récoltes diminuent. Quelle explication est la bonne ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : le texte précise que la pluie est la même. Étape 2 — Décrire : les récoltes passent de 24 à 9 sacs. Étape 3 — Expliquer : la cause est dans le sol, nu après les feux et la déforestation, qui perd de la terre par ruissellement, et qui est épuisé par les cultures sans repos. Étape 4 — Conclure : le sol appauvri fait baisser les rendements. Accuser la pluie est le piège de la fiche.",
+              "answers": [
+                {
+                  "content": "Le sol s'appauvrit en humus et en sels minéraux, car la terre est emportée et la parcelle est épuisée",
+                  "correct": true
+                },
+                {
+                  "content": "Il pleut trop peu chaque année",
+                  "correct": false
+                },
+                {
+                  "content": "Le maïs pousse mieux quand le sol est nu",
+                  "correct": false
+                },
+                {
+                  "content": "Les racines retiennent trop la terre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le raisonnement qui mène du défrichement à l'abandon du champ.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Observer la situation de départ : forêt défrichée et herbes brûlées. Étape 2 — Repérer l'effet : le sol reste nu. Étape 3 — Expliquer : la pluie ruisselle et emporte la terre, donc le sol s'appauvrit et les récoltes baissent. Étape 4 — Conclure : les paysans abandonnent le champ et défrichent ailleurs, ce qui recommence le cercle vicieux.",
+              "answers": [
+                {
+                  "content": "La forêt est défrichée et les herbes sont brûlées."
+                },
+                {
+                  "content": "Le sol reste nu."
+                },
+                {
+                  "content": "La pluie ruisselle et emporte la terre."
+                },
+                {
+                  "content": "Le sol s'appauvrit et les récoltes baissent."
+                },
+                {
+                  "content": "Les paysans abandonnent le champ et défrichent ailleurs."
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque cause de dégradation observée dans ce village à la mesure qui agit sur elle.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier la cause, Étape 2 — Choisir la mesure qui agit sur elle. Une parcelle épuisée se repose en jachère. Une forêt coupée se remplace par le reboisement. Contre les feux, on évite de les allumer et on sensibilise le village. Contre le ruissellement sur une pente, on installe des haies et des cultures en courbes de niveau.",
+              "answers": [
+                {
+                  "content": "Les cultures répétées sans repos",
+                  "match": "La jachère"
+                },
+                {
+                  "content": "La forêt coupée",
+                  "match": "Le reboisement"
+                },
+                {
+                  "content": "Les feux chaque saison sèche",
+                  "match": "Éviter d'allumer les feux et sensibiliser le village"
+                },
+                {
+                  "content": "Le ruissellement sur la pente",
+                  "match": "Des haies et des cultures en courbes de niveau"
+                }
+              ]
+            },
+            {
+              "content": "Explique en un texte organisé pourquoi les récoltes de ce village baissent, puis propose deux mesures adaptées, en disant comment chacune protège ou restaure le sol.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Au moins deux causes sont repérées dans le texte",
+                "Le sol nu, l'érosion et l'appauvrissement sont expliqués",
+                "La baisse des récoltes est reliée à l'état du sol",
+                "Deux mesures adaptées sont choisies",
+                "Le mode d'action de chaque mesure est expliqué",
+                "Le texte est organisé en deux parties"
+              ],
+              "explanation": "Corrigé modèle : Partie 1, l'explication. Les paysans ont défriché la forêt et brûlent les herbes chaque saison sèche : le sol reste nu, sans litière ni racines pour le protéger. La pluie ruisselle et emporte la terre, d'abord l'horizon humifère, riche en humus et en sels minéraux. Comme la parcelle est cultivée sans jachère, les sels minéraux s'épuisent. Le sol s'appauvrit, et les récoltes baissent de 24 à 9 sacs alors que la pluie est la même. Partie 2, les mesures. Première mesure, la jachère : le champ se repose, la végétation revient et l'humus se reconstitue. Deuxième mesure, le reboisement : les racines retiennent la terre et les feuilles amortissent la pluie. Barème : 1 point pour les causes, 1 point pour le sol nu, l'érosion et l'appauvrissement, 1 point pour le lien avec les récoltes, 1 point par mesure adaptée et expliquée, 1 point pour l'organisation en deux parties.",
+              "answers": [],
+              "starter": "Les récoltes baissent parce que…"
+            },
+            {
+              "content": "Un voisin propose de défricher une autre colline à chaque fois qu'un champ ne produit plus. Explique pourquoi cette solution aggrave le problème.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Le défrichement supprime des arbres et laisse un sol nu ailleurs",
+                "Le cercle vicieux de la dégradation est expliqué"
+              ],
+              "explanation": "Corrigé modèle : Étape 2 — Choisir et vérifier la mesure : défricher une nouvelle colline ne traite pas la cause. Étape 3 — Expliquer : en coupant d'autres arbres, on laisse un autre sol nu, qui sera emporté par la pluie et s'appauvrira à son tour. Étape 4 — Conclure : cette solution étend la dégradation à d'autres sols et recommence le cercle vicieux. Barème : 1 point pour le sol nu ailleurs, 1 point pour le cercle vicieux.",
+              "answers": [],
+              "starter": "Cette solution aggrave le problème parce que…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

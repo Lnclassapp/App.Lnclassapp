@@ -1,0 +1,1412 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les grossesses précoces et les moyens de prévention",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "SVT",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "cycle-menstruel",
+          "kind": "timeline",
+          "description": "Frise des 28 jours d'un cycle menstruel régulier. Le jour 1 est le premier jour des règles. La muqueuse utérine se reconstitue jusqu'au jour 11 environ. La période de fécondité va du jour 11 au jour 15 : quelques jours avant l'ovulation, qui a lieu vers le jour 14, jusqu'au lendemain. Ensuite la muqueuse est prête à accueillir un embryon jusqu'au jour 28.",
+          "params": {
+            "start": 1,
+            "end": 28,
+            "step": 1,
+            "unit": "day",
+            "periods": [
+              {
+                "from": 1,
+                "to": 5,
+                "label": "Règles"
+              },
+              {
+                "from": 5,
+                "to": 11,
+                "label": "La muqueuse utérine se reconstitue"
+              },
+              {
+                "from": 11,
+                "to": 15,
+                "label": "Période de fécondité"
+              },
+              {
+                "from": 15,
+                "to": 28,
+                "label": "La muqueuse est prête à accueillir un embryon"
+              }
+            ],
+            "events": [
+              {
+                "at": 1,
+                "label": "Début des règles"
+              },
+              {
+                "at": 14,
+                "label": "Ovulation"
+              },
+              {
+                "at": 28,
+                "label": "Fin du cycle"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-genital-a-legender",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin vu de face, sans légende, avec des numéros : 1 l'ovaire, 2 l'oviducte (trompe), 3 l'utérus, 4 la muqueuse utérine, 5 le col de l'utérus, 6 le vagin. L'élève retrouve le nom de chaque partie à partir de son numéro.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "labels": [
+              {
+                "part": "ovary"
+              },
+              {
+                "part": "oviduct"
+              },
+              {
+                "part": "uterus"
+              },
+              {
+                "part": "endometrium"
+              },
+              {
+                "part": "cervix"
+              },
+              {
+                "part": "vagina"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "de-la-fecondation-a-la-grossesse",
+          "kind": "diagram",
+          "description": "Schéma fléché de haut en bas en six étapes : un rapport non protégé, les spermatozoïdes déposés dans le vagin, la fécondation dans l'oviducte, l'œuf qui devient un embryon, la nidation dans l'utérus, puis le début de la grossesse.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Rapport non protégé"
+              },
+              {
+                "id": "n2",
+                "label": "Spermatozoïdes dans le vagin"
+              },
+              {
+                "id": "n3",
+                "label": "Fécondation dans l'oviducte"
+              },
+              {
+                "id": "n4",
+                "label": "Œuf, puis embryon"
+              },
+              {
+                "id": "n5",
+                "label": "Nidation dans l'utérus"
+              },
+              {
+                "id": "n6",
+                "label": "Grossesse"
+              }
+            ],
+            "edges": [
+              {
+                "from": "n1",
+                "to": "n2"
+              },
+              {
+                "from": "n2",
+                "to": "n3",
+                "label": "ovule présent"
+              },
+              {
+                "from": "n3",
+                "to": "n4"
+              },
+              {
+                "from": "n4",
+                "to": "n5"
+              },
+              {
+                "from": "n5",
+                "to": "n6"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "consequences-grossesse-precoce",
+          "kind": "diagram",
+          "description": "Schéma en arbre : la grossesse précoce, au sommet, a quatre branches de conséquences. La santé de la jeune fille (anémie, accouchement difficile), la santé de l'enfant (naissance prématurée), la scolarité (abandon des études) et la vie sociale et économique (manque d'argent).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Grossesse précoce"
+              },
+              {
+                "id": "s1",
+                "label": "Santé de la jeune fille"
+              },
+              {
+                "id": "s2",
+                "label": "Santé de l'enfant"
+              },
+              {
+                "id": "s3",
+                "label": "Scolarité"
+              },
+              {
+                "id": "s4",
+                "label": "Vie sociale et économique"
+              },
+              {
+                "id": "c1",
+                "label": "Anémie, accouchement difficile"
+              },
+              {
+                "id": "c2",
+                "label": "Naissance prématurée"
+              },
+              {
+                "id": "c3",
+                "label": "Abandon des études"
+              },
+              {
+                "id": "c4",
+                "label": "Manque d'argent"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "s1"
+              },
+              {
+                "from": "r",
+                "to": "s2"
+              },
+              {
+                "from": "r",
+                "to": "s3"
+              },
+              {
+                "from": "r",
+                "to": "s4"
+              },
+              {
+                "from": "s1",
+                "to": "c1"
+              },
+              {
+                "from": "s2",
+                "to": "c2"
+              },
+              {
+                "from": "s3",
+                "to": "c3"
+              },
+              {
+                "from": "s4",
+                "to": "c4"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "moyens-de-prevention",
+          "kind": "diagram",
+          "description": "Schéma en arbre des moyens de prévention d'une grossesse précoce : l'abstinence, le préservatif, la contraception médicale (pilule et stérilet, prescrits par un professionnel de santé) et l'information, avec le dialogue au centre de santé et au club santé du collège.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Prévenir une grossesse précoce"
+              },
+              {
+                "id": "a",
+                "label": "Abstinence"
+              },
+              {
+                "id": "p",
+                "label": "Préservatif"
+              },
+              {
+                "id": "c",
+                "label": "Contraception médicale"
+              },
+              {
+                "id": "i",
+                "label": "Information et dialogue"
+              },
+              {
+                "id": "c1",
+                "label": "Pilule"
+              },
+              {
+                "id": "c2",
+                "label": "Stérilet"
+              },
+              {
+                "id": "i1",
+                "label": "Centre de santé"
+              },
+              {
+                "id": "i2",
+                "label": "Club santé"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "a"
+              },
+              {
+                "from": "r",
+                "to": "p"
+              },
+              {
+                "from": "r",
+                "to": "c"
+              },
+              {
+                "from": "r",
+                "to": "i"
+              },
+              {
+                "from": "c",
+                "to": "c1"
+              },
+              {
+                "from": "c",
+                "to": "c2"
+              },
+              {
+                "from": "i",
+                "to": "i1"
+              },
+              {
+                "from": "i",
+                "to": "i2"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le cycle menstruel et la période de fécondité",
+          "remember": "Chez la femme, à partir de la puberté, l'ovaire libère en général **un ovule environ une fois par mois** : c'est l'**ovulation**. Le **cycle menstruel** commence le premier jour des **règles** (écoulement de sang par le vagin, qui élimine une partie de la muqueuse utérine) et s'arrête la veille des règles suivantes. Dans un cycle de 28 jours, l'ovulation a lieu vers le 14e jour, soit environ **14 jours avant les règles suivantes**. L'ovule vit environ un jour après l'ovulation, alors que les spermatozoïdes peuvent vivre quelques jours dans les voies génitales féminines. La fécondation n'est donc possible qu'**autour de l'ovulation** : c'est la **période de fécondité**. Chez l'adolescente, les cycles sont souvent irréguliers : la date de l'ovulation est alors difficile à prévoir.",
+          "method": [
+            "Repérer le premier jour des règles (jour 1) et la durée du cycle en jours.",
+            "Calculer le jour de l'ovulation : retrancher 14 jours à la durée du cycle.",
+            "Encadrer ce jour pour situer la période de fécondité : quelques jours avant (vie des spermatozoïdes) et un jour après (vie de l'ovule).",
+            "Conclure : dire si une date donnée est dans la période de fécondité ou éloignée, en rappelant que le calcul est incertain si les cycles sont irréguliers."
+          ],
+          "example": {
+            "statement": "Awa a des cycles réguliers de 30 jours. Le jour 1 est le premier jour de ses règles. Elle se demande si un rapport non protégé au 15e jour et un autre au 3e jour peuvent conduire à une grossesse.",
+            "steps": [
+              "Repérer : le jour 1 est le premier jour des règles et le cycle dure 30 jours.",
+              "Calculer : $30 - 14 = 16$, donc l'ovulation a lieu vers le 16e jour.",
+              "Encadrer : la période de fécondité est autour du 16e jour, quelques jours avant et un jour après.",
+              "Conclure : le 15e jour est dans la période de fécondité, une grossesse est possible ; le 3e jour est éloigné de l'ovulation, mais ce calcul reste incertain si les cycles ne sont pas réguliers."
+            ]
+          },
+          "pitfall": "Ne pas croire que l'ovulation a **toujours** lieu le 14e jour, ni qu'une grossesse est impossible dès qu'on n'est pas « au milieu du cycle ». Contre-exemple : dans un cycle de 30 jours, l'ovulation a lieu vers le 16e jour ($30 - 14 = 16$), pas le 14e. Chez l'adolescente, les cycles changent souvent d'un mois à l'autre : la date calculée peut se tromper. Pour éviter l'erreur, retranche toujours 14 jours à la durée du cycle et garde en tête que ce calcul ne remplace pas une vraie protection.",
+          "figure": "cycle-menstruel",
+          "exercise": {
+            "title": "Situer l'ovulation et la période de fécondité",
+            "statement": "Dans cet exercice, tu situes l'ovulation et la période de fécondité avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "L'ovulation chez la femme est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le cycle commence au premier jour des règles. Étape 2 — Calculer : l'ovulation a lieu environ 14 jours avant les règles suivantes. Étape 3 — Encadrer : c'est à ce moment que la fécondation est possible. Étape 4 — Conclure : l'ovulation est la libération d'un ovule par l'ovaire. Les règles sont un écoulement de sang : il ne faut pas les confondre avec l'ovulation.",
+                "answers": [
+                  {
+                    "content": "la libération d'un ovule par un ovaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'écoulement de sang par le vagin",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'installation de l'embryon dans l'utérus",
+                    "correct": false
+                  },
+                  {
+                    "content": "la rencontre d'un ovule et d'un spermatozoïde",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une élève a des cycles réguliers de 28 jours. Vers quel jour du cycle (le jour 1 étant le premier jour des règles) a lieu son ovulation ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : la durée du cycle est de 28 jours. Étape 2 — Calculer : $28 - 14 = 14$. Étape 3 — Encadrer : la période de fécondité est autour du 14e jour. Étape 4 — Conclure : l'ovulation a lieu vers le 14e jour. Ce n'est pas le 28e jour : c'est à cette date que les règles suivantes commencent.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ],
+                "unit": "jour",
+                "tolerance": 0
+              },
+              {
+                "content": "Une élève a des cycles réguliers de 30 jours. Vers quel jour du cycle (le jour 1 étant le premier jour des règles) a lieu son ovulation ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : la durée du cycle est de 30 jours. Étape 2 — Calculer : $30 - 14 = 16$. Étape 3 — Encadrer : la période de fécondité est autour du 16e jour. Étape 4 — Conclure : l'ovulation a lieu vers le 16e jour. Répondre 14 serait l'erreur du piège : l'ovulation n'est pas toujours le 14e jour.",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ],
+                "unit": "jour",
+                "tolerance": 0
+              },
+              {
+                "content": "Dans un cycle régulier de 32 jours, l'ovulation a lieu vers le 14e jour.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la durée du cycle est de 32 jours. Étape 2 — Calculer : $32 - 14 = 18$, donc l'ovulation a lieu vers le 18e jour. Étape 3 — Encadrer : la période de fécondité est autour du 18e jour. Étape 4 — Conclure : l'affirmation est fausse. Le 14e jour est la date pour un cycle de 28 jours seulement.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans le vocabulaire de la leçon, la libération d'un ___ par l'ovaire s'appelle l'ovulation. (Écris un seul mot.)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on cherche ce que l'ovaire libère. Étape 2 — Calculer : cette libération a lieu une fois par cycle, vers 14 jours avant les règles suivantes. Étape 3 — Encadrer : c'est autour de cette date que la fécondation est possible. Étape 4 — Conclure : l'ovaire libère un ovule. Ce n'est pas un spermatozoïde, qui est produit par l'homme.",
+                "answers": [
+                  {
+                    "content": "ovule",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux raisons pour lesquelles la fécondation n'est possible qu'autour de l'ovulation ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : l'ovulation a lieu une seule fois par cycle. Étape 2 — Calculer : l'ovule libéré vit environ un jour. Étape 3 — Encadrer : les spermatozoïdes vivent quelques jours, donc la période de fécondité commence un peu avant l'ovulation. Étape 4 — Conclure : les deux bonnes raisons sont la courte vie de l'ovule et la survie de quelques jours des spermatozoïdes. Les règles ne détruisent pas les spermatozoïdes et l'ovaire ne libère pas d'ovule chaque jour.",
+                "answers": [
+                  {
+                    "content": "L'ovule vit environ un jour après l'ovulation.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les spermatozoïdes peuvent vivre quelques jours dans les voies génitales féminines.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les règles détruisent tous les spermatozoïdes.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ovaire libère un ovule chaque jour.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour savoir si une date est dans la période de fécondité.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer le jour 1 et la durée du cycle. Étape 2 — Calculer le jour de l'ovulation en retranchant 14 jours. Étape 3 — Encadrer ce jour pour situer la période de fécondité. Étape 4 — Conclure pour la date donnée. On ne peut pas encadrer avant d'avoir calculé, ni calculer avant d'avoir repéré la durée du cycle.",
+                "answers": [
+                  {
+                    "content": "Repérer le premier jour des règles et la durée du cycle."
+                  },
+                  {
+                    "content": "Calculer le jour de l'ovulation en retranchant 14 jours."
+                  },
+                  {
+                    "content": "Encadrer ce jour pour situer la période de fécondité."
+                  },
+                  {
+                    "content": "Conclure pour la date donnée."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "De la fécondation à la grossesse",
+          "remember": "La **fécondation** est la rencontre et la fusion d'un spermatozoïde et d'un ovule. Elle a lieu dans l'**oviducte** (la trompe), après un rapport sexuel pendant la période de fécondité. Elle donne un **œuf**, qui se divise en plusieurs cellules et devient un **embryon** en descendant l'oviducte vers l'utérus. L'embryon s'installe dans la **muqueuse utérine**, qui s'est épaissie pendant le cycle : c'est la **nidation**. Les règles n'ont alors plus lieu : c'est le début de la **grossesse**, qui dure environ neuf mois. Fécondation et nidation sont deux événements différents, à deux endroits différents.",
+          "method": [
+            "Suivre l'ovule : libéré par l'ovaire, il est recueilli par le pavillon et entre dans l'oviducte.",
+            "Situer la fécondation : le spermatozoïde et l'ovule se rencontrent dans l'oviducte.",
+            "Suivre l'œuf : il se divise et descend l'oviducte vers l'utérus.",
+            "Conclure : l'embryon s'installe dans la muqueuse utérine (nidation) et la grossesse commence."
+          ],
+          "example": {
+            "statement": "Un rapport non protégé a lieu le jour de l'ovulation. Expliquer pas à pas comment une grossesse peut commencer.",
+            "steps": [
+              "Suivre l'ovule : l'ovaire libère un ovule, le pavillon le recueille et il entre dans l'oviducte.",
+              "Situer la fécondation : les spermatozoïdes déposés dans le vagin remontent jusqu'à l'oviducte, où un spermatozoïde féconde l'ovule.",
+              "Suivre l'œuf : l'œuf se divise en cellules et devient un embryon qui descend l'oviducte pendant plusieurs jours vers l'utérus.",
+              "Conclure : l'embryon s'installe dans la muqueuse utérine (nidation), les règles n'ont plus lieu et la grossesse commence."
+            ]
+          },
+          "pitfall": "Ne pas dire que la fécondation a lieu dans l'utérus, ni confondre fécondation et nidation. Contre-exemple : l'œuf met plusieurs jours à descendre l'oviducte avant de s'installer dans l'utérus. La fécondation (dans l'oviducte) et la nidation (dans la muqueuse de l'utérus) sont deux événements séparés dans le temps et dans l'espace. Pour éviter l'erreur, retiens deux mots et deux lieux : fécondation, oviducte ; nidation, utérus.",
+          "figure": "de-la-fecondation-a-la-grossesse",
+          "exercise": {
+            "title": "Suivre le trajet de l'ovule jusqu'à la grossesse",
+            "statement": "Dans cet exercice, tu suis le trajet de l'ovule avec la méthode de la fiche. Le schéma numéroté de l'appareil génital féminin t'aide à situer les organes.",
+            "exercise_type": "fixation",
+            "figure": "appareil-genital-a-legender",
+            "questions": [
+              {
+                "content": "Dans quel organe la fécondation a-t-elle lieu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Suivre l'ovule : il est libéré par l'ovaire puis entre dans l'oviducte. Étape 2 — Situer la fécondation : c'est dans l'oviducte que le spermatozoïde rencontre l'ovule. Étape 3 — Suivre l'œuf : il descend ensuite vers l'utérus. Étape 4 — Conclure : la fécondation a lieu dans l'oviducte. L'utérus est le lieu de la nidation, pas de la fécondation.",
+                "answers": [
+                  {
+                    "content": "L'oviducte (la trompe)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'utérus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le vagin",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ovaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les événements qui conduisent d'une ovulation à une grossesse.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Suivre l'ovule : l'ovulation libère l'ovule. Étape 2 — Situer la fécondation dans l'oviducte. Étape 3 — Suivre l'œuf : il se divise et devient un embryon. Étape 4 — Conclure : nidation puis début de la grossesse. L'ordre ne peut pas être inversé : il n'y a pas d'embryon avant la fécondation, ni de grossesse avant la nidation.",
+                "answers": [
+                  {
+                    "content": "Ovulation : l'ovaire libère un ovule."
+                  },
+                  {
+                    "content": "Fécondation dans l'oviducte."
+                  },
+                  {
+                    "content": "Division de l'œuf, qui devient un embryon."
+                  },
+                  {
+                    "content": "Nidation dans la muqueuse utérine."
+                  },
+                  {
+                    "content": "Début de la grossesse."
+                  }
+                ]
+              },
+              {
+                "content": "Sur le schéma numéroté de l'appareil génital féminin, relie chaque numéro à l'organe qu'il désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Suivre l'ovule : il part de l'ovaire, numéro 1. Étape 2 — Situer la fécondation : elle a lieu dans l'oviducte, numéro 2. Étape 3 — Suivre l'œuf : il rejoint l'utérus, numéro 3. Étape 4 — Conclure : le numéro 1 est l'ovaire, le numéro 2 l'oviducte et le numéro 3 l'utérus. L'oviducte relie l'ovaire à l'utérus.",
+                "answers": [
+                  {
+                    "content": "Numéro 1",
+                    "match": "Ovaire"
+                  },
+                  {
+                    "content": "Numéro 2",
+                    "match": "Oviducte (trompe)"
+                  },
+                  {
+                    "content": "Numéro 3",
+                    "match": "Utérus"
+                  }
+                ]
+              },
+              {
+                "content": "Sur le schéma numéroté, le numéro 4 désigne la paroi interne de l'utérus, où l'embryon s'installe. Son nom est : ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Suivre l'ovule : après la fécondation, l'œuf quitte l'oviducte. Étape 2 — Situer la fécondation : elle est déjà faite dans l'oviducte. Étape 3 — Suivre l'œuf : il arrive dans l'utérus. Étape 4 — Conclure : il s'installe dans la muqueuse utérine, numéro 4 : c'est la nidation. Le col est le passage vers le vagin, il ne reçoit pas l'embryon.",
+                "answers": [
+                  {
+                    "content": "la muqueuse utérine",
+                    "correct": true
+                  },
+                  {
+                    "content": "le col de l'utérus",
+                    "correct": false
+                  },
+                  {
+                    "content": "le vagin",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'oviducte",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La fécondation a lieu dans l'utérus.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Suivre l'ovule : il entre dans l'oviducte après l'ovulation. Étape 2 — Situer la fécondation : elle a lieu dans l'oviducte, pas dans l'utérus. Étape 3 — Suivre l'œuf : il arrive ensuite dans l'utérus. Étape 4 — Conclure : l'affirmation est fausse. C'est la nidation, et non la fécondation, qui a lieu dans l'utérus.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'installation de l'embryon dans la muqueuse utérine s'appelle la ___. (Écris un seul mot.)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Suivre l'ovule : il est fécondé dans l'oviducte. Étape 2 — Situer la fécondation : elle a déjà eu lieu. Étape 3 — Suivre l'œuf : devenu embryon, il atteint l'utérus. Étape 4 — Conclure : son installation dans la muqueuse utérine s'appelle la nidation. Il ne faut pas la confondre avec la fécondation.",
+                "answers": [
+                  {
+                    "content": "nidation",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un camarade affirme : « La fécondation et la nidation, c'est la même chose. » Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Suivre l'ovule : il est fécondé dans l'oviducte. Étape 2 — Situer la fécondation : c'est la rencontre ovule-spermatozoïde. Étape 3 — Suivre l'œuf : il descend plusieurs jours avant d'arriver dans l'utérus. Étape 4 — Conclure : la nidation est l'installation de l'embryon dans la muqueuse utérine, bien après la fécondation. Les deux événements sont distincts, comme le montre le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Non : la fécondation a lieu dans l'oviducte, la nidation plus tard dans l'utérus.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : les deux ont lieu dans l'utérus au même moment.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : la nidation a lieu avant la fécondation.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : les deux ont lieu dans l'ovaire.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les conséquences d'une grossesse précoce",
+          "remember": "Une **grossesse précoce** est une grossesse qui survient chez une adolescente, avant que son corps soit entièrement développé et avant qu'elle ait terminé ses études. Ses conséquences se classent en quatre groupes. **Santé de la jeune fille** : risques plus grands d'anémie (baisse du nombre d'hématies), d'hypertension, d'accouchement difficile ou prématuré, danger d'un avortement fait en cachette. **Santé de l'enfant** : naissance prématurée, poids trop faible à la naissance. **Scolarité** : interruption des études et perte de chances d'apprendre un métier. **Vie sociale et économique** : manque d'argent, isolement. Ce sont des faits scientifiques et sociaux, pas un jugement : un suivi médical précoce et la prévention réduisent ces risques.",
+          "method": [
+            "Relever dans le document chaque conséquence citée.",
+            "Classer chaque conséquence dans son groupe : santé de la jeune fille, santé de l'enfant, scolarité, vie sociale et économique.",
+            "Expliquer le lien de cause à effet : pourquoi cette conséquence est liée à une grossesse chez une adolescente.",
+            "Conclure : dire comment la prévention et le suivi au centre de santé permettent de réduire ces conséquences."
+          ],
+          "example": {
+            "statement": "À l'infirmerie du collège, l'infirmière présente un cas fictif : Mariam, 15 ans, est enceinte. Elle est très fatiguée et anémique, elle a quitté l'école au 5e mois, et sa famille manque d'argent pour les soins. Analyser ce cas.",
+            "steps": [
+              "Relever : la fatigue et l'anémie, le départ de l'école, le manque d'argent pour les soins.",
+              "Classer : l'anémie est une conséquence sur la santé de la jeune fille, le départ de l'école concerne la scolarité, le manque d'argent la vie sociale et économique.",
+              "Expliquer : le corps de Mariam, encore en croissance, doit aussi nourrir le bébé, d'où la fatigue et l'anémie ; quitter l'école limite ses chances d'avoir un métier plus tard.",
+              "Conclure : un suivi au centre de santé dès le début de la grossesse aurait aidé à traiter l'anémie ; éviter une grossesse précoce, c'est éviter l'ensemble de ces conséquences."
+            ]
+          },
+          "pitfall": "Ne pas croire que les conséquences ne touchent que la santé de la jeune fille. Contre-exemple : une adolescente peut accoucher sans problème grave et perdre pourtant plusieurs années d'études, tandis que le bébé peut naître prématurément. Pour éviter l'erreur, passe toujours en revue les quatre groupes de conséquences. La responsabilité d'une grossesse est partagée avec le partenaire et l'entourage : la jeune fille n'est pas seule en cause.",
+          "figure": "consequences-grossesse-precoce",
+          "exercise": {
+            "title": "Classer les conséquences d'une grossesse précoce",
+            "statement": "Dans cet exercice, tu relèves et tu classes les conséquences d'une grossesse précoce avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelles sont les trois conséquences possibles d'une grossesse précoce ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Relever les conséquences citées dans la fiche : anémie, arrêt des études, manque d'argent. Étape 2 — Classer : santé, scolarité, vie sociale et économique. Étape 3 — Expliquer : le corps de l'adolescente est encore en croissance et elle doit parfois quitter l'école. Étape 4 — Conclure : les trois bonnes réponses sont l'anémie, l'arrêt des études et le manque d'argent. Une grossesse ne rend pas l'ovulation définitivement impossible et ne guérit aucune maladie.",
+                "answers": [
+                  {
+                    "content": "Un risque d'anémie",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'interruption des études",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des difficultés financières",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une guérison des maladies",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'impossibilité définitive d'ovuler",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque conséquence au groupe auquel elle appartient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever chaque conséquence citée. Étape 2 — Classer : l'abandon des cours relève de la scolarité, l'accouchement difficile de la santé de la jeune fille, la naissance prématurée de la santé de l'enfant, le manque d'argent de la vie sociale et économique. Étape 3 — Expliquer : chaque conséquence touche un domaine différent de la vie. Étape 4 — Conclure : les quatre groupes sont tous touchés.",
+                "answers": [
+                  {
+                    "content": "Abandon des cours",
+                    "match": "Scolarité"
+                  },
+                  {
+                    "content": "Accouchement difficile",
+                    "match": "Santé de la jeune fille"
+                  },
+                  {
+                    "content": "Naissance prématurée",
+                    "match": "Santé de l'enfant"
+                  },
+                  {
+                    "content": "Manque d'argent pour élever l'enfant",
+                    "match": "Vie sociale et économique"
+                  }
+                ]
+              },
+              {
+                "content": "Les conséquences d'une grossesse précoce ne concernent que la santé de la jeune fille.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever les conséquences citées : santé, études, argent. Étape 2 — Classer : elles forment quatre groupes. Étape 3 — Expliquer : la scolarité, le bébé et la vie sociale sont aussi concernés. Étape 4 — Conclure : l'affirmation est fausse. C'est précisément l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un bébé naît avec un poids trop faible. Dans quel groupe de conséquences classe-t-on ce fait ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : le fait est le poids trop faible du bébé. Étape 2 — Classer : il concerne l'enfant et non la mère. Étape 3 — Expliquer : le corps d'une adolescente en croissance peut mal soutenir le développement du bébé. Étape 4 — Conclure : c'est la santé de l'enfant. Ce n'est ni la scolarité ni la vie sociale, qui concernent la jeune fille.",
+                "answers": [
+                  {
+                    "content": "La santé de l'enfant",
+                    "correct": true
+                  },
+                  {
+                    "content": "La scolarité",
+                    "correct": false
+                  },
+                  {
+                    "content": "La vie sociale et économique",
+                    "correct": false
+                  },
+                  {
+                    "content": "La santé de la jeune fille",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une grossesse qui survient chez une adolescente est une grossesse ___. (Écris un seul mot.)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever le mot recherché dans la définition de la fiche. Étape 2 — Classer : on parle d'une grossesse survenue trop tôt. Étape 3 — Expliquer : le corps et les études ne sont pas prêts. Étape 4 — Conclure : c'est une grossesse précoce.",
+                "answers": [
+                  {
+                    "content": "précoce",
+                    "correct": true
+                  },
+                  {
+                    "content": "précoces",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un cas fictif : Fatou, 14 ans, est enceinte. Elle est anémique et elle a arrêté les cours. Cite deux conséquences de sa situation, classe chacune dans son groupe et explique le lien de cause à effet.",
+                "question_type": "written",
+                "explanation": "Corrigé modèle. Étape 1 — Relever : l'anémie et l'arrêt des cours. Étape 2 — Classer : l'anémie relève de la santé de la jeune fille ; l'arrêt des cours relève de la scolarité. Étape 3 — Expliquer : le corps de Fatou, encore en croissance, doit nourrir le bébé, ce qui favorise l'anémie ; en quittant l'école, elle perd des chances d'apprendre un métier. Étape 4 — Conclure : la prévention et un suivi au centre de santé réduisent ces conséquences. Barème (3 points) : 0,5 par conséquence citée et bien classée (1 point), 1 par lien de cause à effet expliqué (2 points). Si les groupes sont donnés sans explication, 1 point au plus.",
+                "answers": [],
+                "points": 3,
+                "criteria": [
+                  "Deux conséquences exactes sont citées",
+                  "Chaque conséquence est classée dans le bon groupe",
+                  "Le lien de cause à effet est expliqué pour chacune",
+                  "Le vocabulaire est correct (anémie, scolarité, santé)"
+                ],
+                "starter": "L'anémie est une conséquence sur… ; l'arrêt des cours est une conséquence sur…"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les moyens de prévention des grossesses précoces",
+          "remember": "Prévenir, c'est agir avant que le problème n'arrive. **L'abstinence** (ne pas avoir de rapport sexuel) est le moyen le plus sûr d'éviter une grossesse et une infection sexuellement transmissible (IST). Si un rapport a lieu, le **préservatif** (masculin ou féminin) retient les spermatozoïdes et protège aussi contre les IST ; il s'utilise une seule fois, correctement. La **contraception médicale** (pilule contraceptive, qui empêche l'ovulation ; stérilet) se prend sur avis et prescription d'un professionnel de santé ; la pilule ne protège pas contre les IST. Les méthodes fondées sur le calendrier sont peu fiables chez l'adolescente, car ses cycles sont irréguliers. La prévention passe aussi par **l'information** et le dialogue avec un adulte de confiance, le centre de santé et le club santé du collège. Personne n'a le droit de forcer quelqu'un : en cas de contrainte, on en parle à un adulte de confiance.",
+          "method": [
+            "Identifier le risque à éviter : une grossesse, une IST, ou les deux.",
+            "Rappeler comment chaque moyen agit : éviter le rapport, retenir les spermatozoïdes ou empêcher l'ovulation.",
+            "Comparer les moyens : protection contre la grossesse, protection contre les IST, fiabilité.",
+            "Conclure : conseiller le moyen adapté et indiquer où demander de l'aide (centre de santé, club santé, adulte de confiance)."
+          ],
+          "example": {
+            "statement": "Au club santé du collège, un élève demande : « Quel moyen protège à la fois d'une grossesse et d'une IST ? » Répondre avec la méthode.",
+            "steps": [
+              "Identifier : il y a deux risques à éviter, la grossesse et les IST.",
+              "Rappeler : l'abstinence évite tout rapport ; le préservatif retient les spermatozoïdes et les microbes ; la pilule empêche l'ovulation.",
+              "Comparer : l'abstinence et le préservatif protègent des deux risques ; la pilule protège de la grossesse seulement ; le calendrier est peu fiable.",
+              "Conclure : l'abstinence est le moyen le plus sûr ; en cas de rapport, le préservatif est le moyen adapté ; pour toute question, on demande conseil à l'infirmier du centre de santé."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un seul moyen protège de tout, ni que le calendrier suffit. Contre-exemple : la pilule empêche l'ovulation, mais elle ne bloque pas les microbes : une jeune fille qui la prend n'est pas protégée contre les IST. Et le calcul de l'ovulation se trompe quand les cycles sont irréguliers, ce qui est fréquent chez l'adolescente. Pour éviter l'erreur, pose-toi deux questions : de quel risque veut-on se protéger ? et ce moyen protège-t-il bien de ce risque ?",
+          "figure": "moyens-de-prevention",
+          "exercise": {
+            "title": "Choisir un moyen de prévention adapté",
+            "statement": "Dans cet exercice, tu compares des moyens de prévention avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est le moyen le plus sûr d'éviter une grossesse précoce et une IST ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier les deux risques : grossesse et IST. Étape 2 — Rappeler : l'abstinence évite tout rapport. Étape 3 — Comparer : la pilule et le calendrier ne protègent pas des IST, le calendrier est peu fiable. Étape 4 — Conclure : l'abstinence est le moyen le plus sûr. Le calendrier est tentant parce qu'il ne coûte rien, mais il est peu fiable.",
+                "answers": [
+                  {
+                    "content": "L'abstinence",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le calendrier des règles",
+                    "correct": false
+                  },
+                  {
+                    "content": "La pilule contraceptive",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun moyen n'existe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque moyen à la façon dont il agit.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le risque : la grossesse. Étape 2 — Rappeler l'action de chaque moyen. Étape 3 — Comparer : l'abstinence évite le rapport, le préservatif retient les spermatozoïdes, la pilule empêche l'ovulation. Étape 4 — Conclure : chaque moyen agit à un endroit différent du chemin qui mène à la grossesse.",
+                "answers": [
+                  {
+                    "content": "Abstinence",
+                    "match": "Évite tout rapport sexuel"
+                  },
+                  {
+                    "content": "Préservatif",
+                    "match": "Retient les spermatozoïdes"
+                  },
+                  {
+                    "content": "Pilule contraceptive",
+                    "match": "Empêche l'ovulation"
+                  }
+                ]
+              },
+              {
+                "content": "La pilule contraceptive protège aussi contre les infections sexuellement transmissibles.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : il y a deux risques, la grossesse et les IST. Étape 2 — Rappeler : la pilule empêche l'ovulation. Étape 3 — Comparer : elle ne bloque pas les microbes. Étape 4 — Conclure : l'affirmation est fausse ; seuls l'abstinence et le préservatif protègent des deux risques, comme le montre le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux moyens qui protègent à la fois d'une grossesse et d'une IST ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier les deux risques. Étape 2 — Rappeler l'action de chaque moyen. Étape 3 — Comparer : l'abstinence évite tout rapport, le préservatif retient spermatozoïdes et microbes. La pilule et le stérilet agissent seulement sur la grossesse, et le calendrier est peu fiable. Étape 4 — Conclure : les deux bonnes réponses sont l'abstinence et le préservatif.",
+                "answers": [
+                  {
+                    "content": "L'abstinence",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le préservatif",
+                    "correct": true
+                  },
+                  {
+                    "content": "La pilule contraceptive",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le calendrier des règles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le stérilet",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le ___ est une barrière qui retient les spermatozoïdes lors d'un rapport. (Écris un seul mot.)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier le risque : la grossesse. Étape 2 — Rappeler : un seul moyen est une barrière qui retient les spermatozoïdes. Étape 3 — Comparer : la pilule agit sur l'ovulation, pas comme une barrière. Étape 4 — Conclure : c'est le préservatif.",
+                "answers": [
+                  {
+                    "content": "préservatif",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une camarade te dit : « Je note la date de mes règles, donc je sais quand je ne risque rien. » Réponds-lui en trois phrases au plus, avec la méthode de la fiche.",
+                "question_type": "written",
+                "explanation": "Corrigé modèle. Étape 1 — Identifier : le risque est une grossesse. Étape 2 — Rappeler : le calendrier cherche à calculer la date de l'ovulation. Étape 3 — Comparer : chez l'adolescente les cycles sont irréguliers, donc ce calcul est peu fiable et ne protège pas des IST. Étape 4 — Conclure : mieux vaut en parler à l'infirmier du centre de santé ou au club santé pour choisir un moyen adapté. Points : 0,5 pour le risque identifié, 0,5 pour la limite du calendrier, 1 pour le conseil.",
+                "answers": [],
+                "points": 2,
+                "criteria": [
+                  "Le risque (grossesse) est identifié",
+                  "La limite du calendrier est expliquée (cycles irréguliers)",
+                  "Un conseil adapté est donné (centre de santé, club santé)"
+                ],
+                "starter": "Le calendrier est peu fiable parce que…"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le cycle d'une élève et le club santé",
+          "statement": "Au club santé du collège, l'infirmière du centre de santé explique le cycle menstruel avec une frise de 28 jours et le trajet qui conduit d'un rapport non protégé à une grossesse. Tu réponds aux questions comme à une interrogation.",
+          "exercise_type": "fixation",
+          "figure": "cycle-menstruel",
+          "questions": [
+            {
+              "content": "Une élève a des cycles réguliers de 26 jours. Le jour 1 est le premier jour des règles. Vers quel jour a lieu son ovulation ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. 1) Repérer : le cycle dure 26 jours. 2) Calculer : l'ovulation a lieu environ 14 jours avant les règles suivantes, donc $26 - 14 = 12$. 3) Encadrer : la période de fécondité est autour du 12e jour. 4) Conclure : l'ovulation a lieu vers le 12e jour. Répondre 14 serait l'erreur la plus tentante : ce jour vaut pour un cycle de 28 jours seulement.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "jour",
+              "tolerance": 0
+            },
+            {
+              "content": "Les règles sont dues à l'élimination d'une partie de ___.",
+              "question_type": "select",
+              "explanation": "Méthode. Les règles sont un écoulement de sang qui accompagne l'élimination d'une partie de la muqueuse de l'utérus, quand il n'y a pas eu de fécondation. L'ovaire libère l'ovule mais ne s'élimine pas ; le col de l'utérus est le passage vers le vagin. Cette connaissance sert à repérer le jour 1 du cycle (étape 1 de la méthode du cycle).",
+              "answers": [
+                {
+                  "content": "la muqueuse utérine",
+                  "correct": true
+                },
+                {
+                  "content": "la paroi du vagin",
+                  "correct": false
+                },
+                {
+                  "content": "la paroi de l'oviducte",
+                  "correct": false
+                },
+                {
+                  "content": "l'ovaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le jour 1 du cycle menstruel est le premier jour des règles.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Repérer : par convention, le cycle commence le premier jour des règles. 2) Il se termine la veille des règles suivantes. 3) On compte donc les jours à partir de ce jour 1. La proposition est vraie. Le jour de l'ovulation, vers le milieu du cycle, n'est pas le début du cycle.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une élève a des cycles réguliers de 28 jours. Elle a un rapport non protégé le 14e jour. Que peut-il se passer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Repérer : cycle de 28 jours. 2) Calculer : $28 - 14 = 14$, l'ovulation a lieu vers le 14e jour. 3) Encadrer : le rapport a lieu dans la période de fécondité. 4) Conclure : la fécondation et une grossesse sont possibles. Dire que le risque est nul serait croire qu'il n'y a de risque que pendant les règles, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "Une fécondation est possible, donc une grossesse.",
+                  "correct": true
+                },
+                {
+                  "content": "Aucun risque, puisque ce n'est pas pendant les règles.",
+                  "correct": false
+                },
+                {
+                  "content": "Une fécondation est impossible avant 18 ans.",
+                  "correct": false
+                },
+                {
+                  "content": "Les règles arrivent forcément le lendemain.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les six étapes qui conduisent d'un rapport non protégé à une grossesse.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Le rapport non protégé a lieu en période de fécondité. 2) Les spermatozoïdes remontent depuis le vagin. 3) Un spermatozoïde féconde l'ovule dans l'oviducte. 4) L'œuf se divise et devient un embryon. 5) L'embryon s'installe dans l'utérus : nidation. 6) La grossesse commence. L'ordre suit le trajet : il n'y a pas d'embryon avant la fécondation.",
+              "answers": [
+                {
+                  "content": "Rapport non protégé"
+                },
+                {
+                  "content": "Spermatozoïdes dans le vagin"
+                },
+                {
+                  "content": "Fécondation dans l'oviducte"
+                },
+                {
+                  "content": "Œuf, puis embryon"
+                },
+                {
+                  "content": "Nidation dans l'utérus"
+                },
+                {
+                  "content": "Grossesse"
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi la fécondation n'est possible qu'autour de l'ovulation et pas à n'importe quel jour du cycle.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. 1) L'ovaire libère un seul ovule par cycle, à l'ovulation. 2) Cet ovule ne vit qu'environ un jour. 3) Les spermatozoïdes vivent quelques jours dans les voies génitales féminines. 4) La rencontre n'est donc possible que si le rapport a lieu dans les quelques jours qui précèdent l'ovulation, le jour même ou le lendemain. Points : 1 pour l'ovule libéré une fois par cycle, 1 pour sa durée de vie courte, 1 pour la survie des spermatozoïdes, avec une conclusion claire. Cette méthode de la période de fécondité est la même que dans la fiche.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Un seul ovule est libéré par cycle",
+                "L'ovule vit environ un jour",
+                "Les spermatozoïdes vivent quelques jours",
+                "La conclusion est formulée clairement"
+              ],
+              "starter": "L'ovaire libère un ovule une seule fois par cycle, donc…"
+            }
+          ]
+        },
+        {
+          "title": "Le schéma de l'appareil génital féminin",
+          "statement": "Au centre de santé du collège, une affiche montre l'appareil génital féminin avec des numéros, sans légende. Tu légendes le schéma et tu expliques le trajet de l'ovule.",
+          "exercise_type": "fixation",
+          "figure": "appareil-genital-a-legender",
+          "questions": [
+            {
+              "content": "Sur le schéma numéroté, le numéro 1 est l'organe qui libère les ovules. Quel est son nom ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Lire le schéma : repérer l'organe numéro 1, situé à l'extrémité de l'oviducte. 2) Se rappeler le rôle : il produit et libère un ovule environ une fois par mois. 3) Conclure : c'est l'ovaire. L'utérus (numéro 3) accueille l'embryon, il ne libère pas d'ovule.",
+              "answers": [
+                {
+                  "content": "L'ovaire",
+                  "correct": true
+                },
+                {
+                  "content": "L'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "Le vagin",
+                  "correct": false
+                },
+                {
+                  "content": "Le col de l'utérus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur le schéma numéroté, le numéro 2 est le conduit où a lieu la fécondation. Son nom est : ___",
+              "question_type": "select",
+              "explanation": "Méthode. 1) Lire le schéma : le numéro 2 relie l'ovaire à l'utérus. 2) Se rappeler le lieu de la fécondation : c'est le conduit qui recueille l'ovule. 3) Conclure : c'est l'oviducte, aussi appelé trompe. Le vagin est le conduit par lequel les spermatozoïdes entrent.",
+              "answers": [
+                {
+                  "content": "l'oviducte",
+                  "correct": true
+                },
+                {
+                  "content": "le vagin",
+                  "correct": false
+                },
+                {
+                  "content": "le col de l'utérus",
+                  "correct": false
+                },
+                {
+                  "content": "la muqueuse utérine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur le schéma numéroté, relie chaque numéro à son nom.",
+              "question_type": "matching",
+              "explanation": "Méthode. 1) Lire le schéma de haut en bas : l'utérus est la grande cavité, numéro 3. 2) Sa paroi interne est la muqueuse utérine, numéro 4. 3) Le passage étroit vers le bas est le col de l'utérus, numéro 5. 4) Le conduit qui s'ouvre vers l'extérieur est le vagin, numéro 6. Le col n'est pas la muqueuse : l'un est un passage, l'autre une paroi.",
+              "answers": [
+                {
+                  "content": "Numéro 3",
+                  "match": "Utérus"
+                },
+                {
+                  "content": "Numéro 4",
+                  "match": "Muqueuse utérine"
+                },
+                {
+                  "content": "Numéro 5",
+                  "match": "Col de l'utérus"
+                },
+                {
+                  "content": "Numéro 6",
+                  "match": "Vagin"
+                }
+              ]
+            },
+            {
+              "content": "Lors d'un rapport, les spermatozoïdes sont déposés dans le ___ (numéro 6 du schéma). (Écris un seul mot.)",
+              "question_type": "fill_blank",
+              "explanation": "Méthode. 1) Lire le schéma : le numéro 6 est le conduit qui s'ouvre vers l'extérieur. 2) Se rappeler : les spermatozoïdes y sont déposés, puis remontent par l'utérus vers l'oviducte. 3) Conclure : il s'agit du vagin.",
+              "answers": [
+                {
+                  "content": "vagin",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sur le schéma numéroté, quel numéro désigne la paroi interne de l'utérus où l'embryon s'installe ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Lire le schéma. 2) Se rappeler : l'embryon s'installe dans la muqueuse utérine, c'est la nidation. 3) Conclure : c'est le numéro 4. Le numéro 2, l'oviducte, est le lieu de la fécondation, pas de la nidation.",
+              "answers": [
+                {
+                  "content": "Numéro 4",
+                  "correct": true
+                },
+                {
+                  "content": "Numéro 2",
+                  "correct": false
+                },
+                {
+                  "content": "Numéro 5",
+                  "correct": false
+                },
+                {
+                  "content": "Numéro 6",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Décris le trajet de l'ovule depuis l'ovulation jusqu'au début de la grossesse, en citant les numéros du schéma.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. 1) L'ovaire (1) libère l'ovule, recueilli par le pavillon et entraîné dans l'oviducte (2). 2) Les spermatozoïdes remontent depuis le vagin (6) et l'utérus (3) jusqu'à l'oviducte, où l'un féconde l'ovule. 3) L'œuf se divise et descend vers l'utérus (3). 4) L'embryon s'installe dans la muqueuse utérine (4) : c'est la nidation, qui marque le début de la grossesse. Points : 1 pour la fécondation dans l'oviducte, 1 pour la descente de l'œuf, 1 pour la nidation dans la muqueuse, 1 pour les numéros exacts. Cette suite reprend la méthode de la fiche.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "La fécondation est située dans l'oviducte (numéro 2)",
+                "La descente de l'œuf vers l'utérus est décrite",
+                "La nidation est située dans la muqueuse utérine (numéro 4)",
+                "Les numéros du schéma sont cités sans erreur"
+              ],
+              "starter": "L'ovaire (1) libère l'ovule, qui…"
+            }
+          ]
+        },
+        {
+          "title": "Le cas d'une élève enceinte",
+          "statement": "Lors d'une séance du club santé, l'infirmière du centre de santé présente un cas fictif : Nadia, 15 ans, est enceinte. Elle est anémique, très fatiguée, et a quitté le collège au 6e mois. Son bébé est né avant terme et sa famille manque d'argent pour les soins. Tu analyses ce cas comme à un devoir.",
+          "exercise_type": "evaluation",
+          "figure": "consequences-grossesse-precoce",
+          "questions": [
+            {
+              "content": "Dans le cas de Nadia, quels sont les trois faits qui concernent la santé ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. 1) Relever les faits du cas : anémie, fatigue, départ du collège, naissance avant terme, manque d'argent. 2) Classer : l'anémie et la fatigue relèvent de la santé de la jeune fille ; la naissance avant terme relève de la santé de l'enfant. 3) Conclure : les trois faits de santé sont l'anémie, la fatigue et la naissance avant terme. Le départ du collège relève de la scolarité et le manque d'argent de la vie sociale et économique.",
+              "answers": [
+                {
+                  "content": "L'anémie",
+                  "correct": true
+                },
+                {
+                  "content": "La fatigue",
+                  "correct": true
+                },
+                {
+                  "content": "La naissance avant terme du bébé",
+                  "correct": true
+                },
+                {
+                  "content": "Le départ du collège",
+                  "correct": false
+                },
+                {
+                  "content": "Le manque d'argent pour les soins",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque fait du cas de Nadia au groupe de conséquences auquel il appartient.",
+              "question_type": "matching",
+              "explanation": "Méthode. 1) Relever les faits. 2) Classer chacun : l'anémie touche la santé de la jeune fille, la naissance avant terme la santé de l'enfant, le départ du collège la scolarité, le manque d'argent la vie sociale et économique. 3) Conclure : les quatre groupes sont concernés. Un fait ne se classe que dans un groupe principal.",
+              "answers": [
+                {
+                  "content": "Anémie",
+                  "match": "Santé de la jeune fille"
+                },
+                {
+                  "content": "Naissance avant terme",
+                  "match": "Santé de l'enfant"
+                },
+                {
+                  "content": "Départ du collège",
+                  "match": "Scolarité"
+                },
+                {
+                  "content": "Manque d'argent pour les soins",
+                  "match": "Vie sociale et économique"
+                }
+              ]
+            },
+            {
+              "content": "Nadia est anémique. Qu'est-ce que l'anémie ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Relever le mot : anémie. 2) Se rappeler la leçon sur le sang : les hématies (globules rouges) transportent le dioxygène. 3) Conclure : l'anémie est une baisse du nombre d'hématies dans le sang, ce qui explique la grande fatigue. Une hausse des leucocytes (globules blancs) n'est pas une anémie.",
+              "answers": [
+                {
+                  "content": "Une baisse du nombre d'hématies dans le sang",
+                  "correct": true
+                },
+                {
+                  "content": "Une hausse du nombre de leucocytes",
+                  "correct": false
+                },
+                {
+                  "content": "Un excès de plasma dans les poumons",
+                  "correct": false
+                },
+                {
+                  "content": "Une absence totale de plaquettes sanguines",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le cas de Nadia, seule la jeune fille est concernée par les conséquences de la grossesse.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Relever les faits : l'anémie de Nadia, mais aussi la naissance avant terme du bébé et le manque d'argent de la famille. 2) Classer : la santé de l'enfant et la famille sont aussi touchées. 3) Conclure : l'affirmation est fausse. C'est l'erreur du piège : croire que seule la santé de la jeune fille est en jeu.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Classe les quatre faits du cas de Nadia (anémie, naissance avant terme, départ du collège, manque d'argent) dans les quatre groupes de conséquences, et explique en une phrase le lien de cause à effet pour le départ du collège.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Méthode : 1) relever les faits ; 2) classer : l'anémie, santé de la jeune fille ; la naissance avant terme, santé de l'enfant ; le départ du collège, scolarité ; le manque d'argent, vie sociale et économique ; 3) expliquer : en quittant le collège, Nadia perd des chances d'obtenir un diplôme et d'apprendre un métier plus tard ; 4) conclure : les conséquences touchent plusieurs domaines. Points : 2 pour les quatre classements (0,5 chacun), 1 pour l'explication.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Les quatre faits sont relevés",
+                "Chaque fait est classé dans le bon groupe",
+                "Le lien de cause à effet du départ du collège est expliqué"
+              ],
+              "starter": "Le départ du collège est une conséquence sur la scolarité parce que…"
+            },
+            {
+              "content": "Explique pourquoi un suivi au centre de santé dès le début de la grossesse est utile pour une adolescente.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. 1) Le suivi permet de détecter tôt une anémie ou une hypertension et de les soigner. 2) L'infirmier ou la sage-femme prépare l'accouchement, plus risqué pour un corps encore en croissance, et peut orienter vers l'hôpital. 3) Il donne des conseils sur l'alimentation et sur la prévention. 4) Il réduit ainsi les risques pour la jeune fille et pour l'enfant. Points : 1 pour la détection des problèmes de santé, 1 pour la préparation de l'accouchement, 1 pour la réduction des risques pour la mère et l'enfant.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "La détection précoce de l'anémie ou de l'hypertension est citée",
+                "La préparation de l'accouchement est citée",
+                "La réduction des risques pour la mère et l'enfant est conclue"
+              ],
+              "starter": "Le suivi au centre de santé permet d'abord de…"
+            }
+          ]
+        },
+        {
+          "title": "La journée de santé du collège",
+          "statement": "Pour la journée de santé du collège, le club santé prépare un exposé avec l'infirmier du centre de santé sur la prévention des grossesses précoces. Les élèves posent des questions et tu y réponds comme à un examen du BEPC.",
+          "exercise_type": "evaluation",
+          "figure": "moyens-de-prevention",
+          "questions": [
+            {
+              "content": "Parmi les moyens suivants, lequel est une barrière qui retient les spermatozoïdes et protège aussi contre les IST lors d'un rapport ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) Identifier les risques : grossesse et IST. 2) Rappeler l'action de chaque moyen : le préservatif retient les spermatozoïdes et les microbes, la pilule empêche l'ovulation, le calendrier calcule l'ovulation. 3) Comparer : seul le préservatif est une barrière qui protège des deux risques. 4) Conclure : c'est le préservatif. La pilule est tentante parce qu'elle est très répandue, mais elle ne protège pas des IST.",
+              "answers": [
+                {
+                  "content": "Le préservatif",
+                  "correct": true
+                },
+                {
+                  "content": "La pilule contraceptive",
+                  "correct": false
+                },
+                {
+                  "content": "Le calendrier des règles",
+                  "correct": false
+                },
+                {
+                  "content": "Le stérilet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque moyen à son principe.",
+              "question_type": "matching",
+              "explanation": "Méthode. 1) Identifier le risque : la grossesse. 2) Rappeler l'action de chaque moyen. 3) Comparer : l'abstinence évite tout rapport ; le préservatif retient les spermatozoïdes ; la pilule empêche l'ovulation ; le calendrier repose sur le calcul de l'ovulation et se trompe quand les cycles sont irréguliers. 4) Conclure : chaque moyen a une limite à connaître.",
+              "answers": [
+                {
+                  "content": "Abstinence",
+                  "match": "Évite tout rapport sexuel"
+                },
+                {
+                  "content": "Préservatif",
+                  "match": "Retient les spermatozoïdes"
+                },
+                {
+                  "content": "Pilule contraceptive",
+                  "match": "Empêche l'ovulation"
+                },
+                {
+                  "content": "Méthode du calendrier",
+                  "match": "Calcule la date de l'ovulation, peu fiable si les cycles sont irréguliers"
+                }
+              ]
+            },
+            {
+              "content": "Une jeune fille ne peut pas être enceinte lors de son premier rapport sexuel.",
+              "question_type": "true_false",
+              "explanation": "Méthode. 1) Identifier le risque : la grossesse. 2) Rappeler : la fécondation dépend de l'ovulation et de la présence de spermatozoïdes, pas du nombre de rapports. 3) Comparer : si le premier rapport a lieu en période de fécondité, une grossesse est possible. 4) Conclure : l'affirmation est fausse. Croire le contraire est une idée reçue dangereuse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la méthode pour conseiller un moyen de prévention.",
+              "question_type": "ordering",
+              "explanation": "Méthode. 1) Identifier le risque à éviter. 2) Rappeler comment chaque moyen agit. 3) Comparer les moyens. 4) Conclure en conseillant le moyen adapté et en indiquant où demander de l'aide. On ne peut pas comparer avant d'avoir rappelé comment agit chaque moyen.",
+              "answers": [
+                {
+                  "content": "Identifier le risque à éviter."
+                },
+                {
+                  "content": "Rappeler comment chaque moyen agit."
+                },
+                {
+                  "content": "Comparer les moyens."
+                },
+                {
+                  "content": "Conclure en conseillant et en indiquant où demander de l'aide."
+                }
+              ]
+            },
+            {
+              "content": "Où une élève peut-elle trouver des informations fiables et de l'aide sur ces questions ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. 1) Identifier le besoin : une information fiable. 2) Rappeler les lieux d'aide cités dans la fiche : le centre de santé et le club santé, ainsi qu'un adulte de confiance. 3) Comparer : les rumeurs, un produit sans avis médical ou le silence ne donnent pas d'information sûre. 4) Conclure : les deux bonnes réponses sont l'infirmier du centre de santé et un adulte de confiance.",
+              "answers": [
+                {
+                  "content": "L'infirmier du centre de santé",
+                  "correct": true
+                },
+                {
+                  "content": "Un adulte de confiance (parent, enseignant)",
+                  "correct": true
+                },
+                {
+                  "content": "Les rumeurs entre camarades",
+                  "correct": false
+                },
+                {
+                  "content": "Un produit acheté sans avis médical",
+                  "correct": false
+                },
+                {
+                  "content": "Personne : il vaut mieux ne rien demander",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un camarade affirme : « La pilule suffit pour tout. » Rédige un paragraphe de quatre à cinq phrases qui répond à cette affirmation : cite le moyen le plus sûr, explique ce que la pilule fait et ne fait pas, et dis où demander conseil.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. 1) Identifier : il y a deux risques, la grossesse et les IST. 2) Rappeler : la pilule empêche l'ovulation, donc il n'y a pas d'ovule à féconder. 3) Comparer : elle ne protège pas des IST, alors que l'abstinence protège des deux risques et que le préservatif aide en cas de rapport. 4) Conclure : l'abstinence est le moyen le plus sûr ; pour toute question, on peut demander conseil à l'infirmier du centre de santé ou au club santé. Points : 1 pour le moyen le plus sûr (abstinence), 1 pour l'action de la pilule, 1 pour sa limite face aux IST, 1 pour le lieu de conseil.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Le moyen le plus sûr (abstinence) est cité",
+                "L'action de la pilule (empêche l'ovulation) est expliquée",
+                "La limite de la pilule face aux IST est expliquée",
+                "Un lieu pour demander conseil est donné",
+                "Le paragraphe est clair et sans jugement"
+              ],
+              "starter": "La pilule empêche l'ovulation, mais…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

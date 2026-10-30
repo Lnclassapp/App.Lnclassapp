@@ -1,0 +1,1258 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les caractéristiques d'un sol",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "SVT",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "profil-sol",
+          "kind": "plate",
+          "description": "Coupe verticale d'un sol, de la surface à la roche dure. De haut en bas : une couche de débris de végétaux, une couche de terre sombre traversée de racines, une couche plus claire, une couche de fragments de roche, puis la roche dure. Chaque couche et les racines sont légendées par leur nom : litière, horizon humifère, horizon d'accumulation, roche mère altérée, roche mère.",
+          "params": {
+            "plate": "soil_profile",
+            "labels": [
+              {
+                "part": "litter"
+              },
+              {
+                "part": "humus_horizon"
+              },
+              {
+                "part": "accumulation_horizon"
+              },
+              {
+                "part": "weathered_rock"
+              },
+              {
+                "part": "bedrock"
+              },
+              {
+                "part": "roots"
+              }
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "profil-sol-numeros",
+          "kind": "plate",
+          "description": "Coupe verticale d'un sol, de la surface à la roche dure. De haut en bas : une couche de débris de végétaux, une couche de terre sombre traversée de racines, une couche plus claire, une couche de fragments de roche, puis la roche dure. Les couches et les racines sont repérées par les numéros 1 à 6, sans légende : c'est à l'élève de les légender en s'aidant de ce qu'il observe.",
+          "params": {
+            "plate": "soil_profile",
+            "labels": [
+              {
+                "part": "litter"
+              },
+              {
+                "part": "humus_horizon"
+              },
+              {
+                "part": "accumulation_horizon"
+              },
+              {
+                "part": "weathered_rock"
+              },
+              {
+                "part": "bedrock"
+              },
+              {
+                "part": "roots"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "granulometrie-champ",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de l'analyse granulométrique d'un échantillon de sol prélevé dans un champ d'igname. La partie minérale contient 70 % de sable, 20 % de limon et 10 % d'argile. Le total fait 100 %. Le sable domine nettement.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              70,
+              20,
+              10
+            ],
+            "labels": [
+              "Sable (%)",
+              "Limon (%)",
+              "Argile (%)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "granulometrie-plantation",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de l'analyse granulométrique d'un échantillon de sol prélevé dans une parcelle de plantation. La partie minérale contient 20 % de sable, 25 % de limon et 55 % d'argile. Le total fait 100 %. L'argile domine.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              20,
+              25,
+              55
+            ],
+            "labels": [
+              "Sable (%)",
+              "Limon (%)",
+              "Argile (%)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "granulometrie-cacaoyere",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de l'analyse granulométrique du sol d'une cacaoyère, prélevé dans l'horizon humifère. La partie minérale contient 25 % de sable, 20 % de limon et 55 % d'argile. Le total fait 100 %. L'argile domine nettement.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              25,
+              20,
+              55
+            ],
+            "labels": [
+              "Sable (%)",
+              "Limon (%)",
+              "Argile (%)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Mettre en évidence les constituants d'un sol",
+          "remember": "Le **sol** est la couche superficielle de la Terre, où les plantes poussent. Il est formé de plusieurs constituants. La **partie minérale** vient de l'altération de la roche : c'est du sable, du limon et de l'argile. La **matière organique**, ou **humus**, vient de la décomposition des débris de plantes et d'animaux. Le sol contient aussi de l'**eau**, de l'**air** et des **êtres vivants** (vers de terre, insectes, champignons, bactéries). Pour les mettre en évidence : en chauffant doucement, l'eau se condense en buée ; dans l'eau, l'air forme des bulles ; en calcinant (chauffer très fort), la matière organique brûle et il reste la partie minérale.",
+          "method": [
+            "Observer l'expérience : dire quel échantillon de sol on utilise et ce qu'on lui fait subir (chauffer, plonger dans l'eau, calciner).",
+            "Décrire ce qu'on constate : buée, bulles, fumée ou noircissement, résidu, variation de masse.",
+            "Interpréter : relier chaque constat à un constituant du sol.",
+            "Conclure en nommant le constituant mis en évidence."
+          ],
+          "example": {
+            "statement": "On chauffe doucement dans un tube à essai de la terre humide prélevée dans un champ d'igname. Quel constituant du sol met-on en évidence ?",
+            "steps": [
+              "Observer : on chauffe doucement un échantillon de terre humide d'un champ d'igname dans un tube à essai.",
+              "Décrire : des gouttelettes de liquide apparaissent sur la paroi froide du haut du tube.",
+              "Interpréter : ces gouttelettes sont de l'eau, qui s'est évaporée de la terre puis s'est condensée sur la paroi froide.",
+              "Conclure : le sol contient de l'eau."
+            ]
+          },
+          "pitfall": "Ne pas confondre ce qui brûle avec ce qui reste. À la calcination, la **matière organique** brûle et disparaît ; ce qui reste est la **partie minérale**. Contre-exemple : 50 g de sol sec donnent 46 g après calcination. Les 4 g perdus sont de la matière organique ; les 46 g restants ne sont pas de l'humus, ils sont minéraux. Pour éviter l'erreur, demande-toi toujours : qu'est-ce qui a disparu, et qu'est-ce qui est resté ?",
+          "figure": null,
+          "exercise": {
+            "title": "Mettre en évidence les constituants d'un sol",
+            "statement": "Dans cet exercice, tu mets en évidence les constituants d'un sol avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On plonge une poignée de sol sec dans un verre d'eau et des bulles remontent à la surface. Que met-on ainsi en évidence ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : on plonge un échantillon de sol sec dans l'eau. Étape 2 — Décrire : des bulles remontent à la surface. Étape 3 — Interpréter : les bulles sont de l'air qui était emprisonné entre les particules du sol et que l'eau a chassé. Étape 4 — Conclure : le sol contient de l'air. L'eau n'est pas mise en évidence : c'est le liquide dans lequel on a plongé le sol, elle était déjà là au départ.",
+                "answers": [
+                  {
+                    "content": "Le sol contient de l'air.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sol contient de l'eau.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sol contient de la matière organique.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sol contient du sable.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On chauffe doucement de la terre humide dans un tube à essai. Des gouttelettes d'___ se forment sur la paroi froide du haut du tube.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Observer : on chauffe doucement la terre humide. Étape 2 — Décrire : des gouttelettes apparaissent sur la paroi froide. Étape 3 — Interpréter : ce liquide est de l'eau, qui s'évapore dans le tube puis se condense sur la paroi froide. Étape 4 — Conclure : le sol contient de l'eau. Le mot attendu est donc « eau ».",
+                "answers": [
+                  {
+                    "content": "eau",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque constat fait sur un échantillon de sol au constituant qu'il met en évidence.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Interpréter : chaque constat se relie à un constituant. La buée sur la paroi froide vient de l'eau du sol. Les bulles dans l'eau viennent de l'air du sol. La matière qui noircit et brûle à la calcination est la matière organique. Le résidu qui ne brûle pas est la partie minérale. Étape 4 — Conclure : on nomme ainsi le constituant mis en évidence par chaque expérience.",
+                "answers": [
+                  {
+                    "content": "Buée sur la paroi froide du tube",
+                    "match": "L'eau"
+                  },
+                  {
+                    "content": "Bulles quand on plonge le sol dans l'eau",
+                    "match": "L'air"
+                  },
+                  {
+                    "content": "Matière qui noircit et brûle à la calcination",
+                    "match": "La matière organique"
+                  },
+                  {
+                    "content": "Résidu qui ne brûle pas à la calcination",
+                    "match": "La partie minérale"
+                  }
+                ]
+              },
+              {
+                "content": "On pèse 50 g de sol sec avant la calcination, puis 46 g de résidu après la calcination. Quelle masse de matière organique a brûlé ? (réponse en grammes)",
+                "question_type": "numeric",
+                "unit": "g",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Observer : on calcine un sol sec, on pèse avant puis après. Étape 2 — Décrire : la masse passe de 50 g à 46 g. Étape 3 — Interpréter : la masse perdue est celle de la matière organique qui a brûlé, soit 50 − 46 = 4 g. Étape 4 — Conclure : 4 g de matière organique ont brûlé. Les 46 g restants sont la partie minérale, qui ne brûle pas.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces éléments, lesquels font partie de la partie minérale d'un sol ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Interpréter : la partie minérale est le résidu qui ne brûle pas ; elle est faite de particules de roche altérée, c'est-à-dire de sable, de limon et d'argile. Étape 4 — Conclure : le sable et l'argile sont les bonnes réponses. L'humus est de la matière organique, le ver de terre est un être vivant et l'eau est un autre constituant du sol.",
+                "answers": [
+                  {
+                    "content": "Le sable",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'argile",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'humus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le ver de terre",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après la calcination d'un échantillon de sol, le résidu qui reste est la matière organique.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Interpréter : c'est l'inverse. La matière organique brûle et disparaît, ce qui explique la perte de masse. Le résidu qui reste est la partie minérale. Contre-exemple : 50 g avant, 46 g après ; les 4 g perdus sont de la matière organique et les 46 g restants sont minéraux. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Lire le profil d'un sol",
+          "remember": "Un **profil de sol** est une coupe verticale dans le sol, de la surface jusqu'à la roche dure. On y distingue des couches appelées **horizons**. De haut en bas : la **litière** (débris de végétaux encore reconnaissables, comme des feuilles mortes) ; l'**horizon humifère** (terre sombre, riche en humus, avec beaucoup de racines et d'êtres vivants) ; l'**horizon d'accumulation** (couche plus claire, plus pauvre en humus) ; la **roche mère altérée** (fragments de roche) ; la **roche mère** (roche dure non altérée, d'où vient la partie minérale du sol).",
+          "method": [
+            "Repérer la surface du sol et la roche mère : un profil se lit de haut en bas.",
+            "Décrire chaque couche : sa couleur, la présence de débris, d'humus, de racines ou de fragments de roche.",
+            "Nommer chaque couche d'après ses caractères.",
+            "Conclure en classant les couches de la surface vers la profondeur."
+          ],
+          "example": {
+            "statement": "Au pied de cacaoyers, on creuse une tranchée. En haut, des feuilles mortes entières. Dessous, une terre brun foncé avec de nombreuses racines fines. Puis une couche plus claire, presque sans racines. Puis des fragments de roche, et tout en bas une roche dure. Légender ce profil.",
+            "steps": [
+              "Repérer : la surface porte les feuilles mortes ; la roche dure tout en bas est la roche mère.",
+              "Décrire : feuilles entières ; terre brun foncé avec des racines ; couche plus claire sans racines ; fragments de roche ; roche dure.",
+              "Nommer : les feuilles entières forment la litière ; la terre brun foncé est l'horizon humifère ; la couche claire est l'horizon d'accumulation ; les fragments de roche sont la roche mère altérée ; la roche dure est la roche mère.",
+              "Conclure : de la surface vers la profondeur, on a la litière, l'horizon humifère, l'horizon d'accumulation, la roche mère altérée, puis la roche mère."
+            ]
+          },
+          "pitfall": "Ne pas confondre la **litière** et l'**horizon humifère**. Dans la litière, on reconnaît encore les feuilles et les tiges ; dans l'horizon humifère, les débris sont décomposés en humus et la terre est sombre. Contre-exemple : dans une tranchée, la couche de feuilles entières est la couche 1 (litière) et la terre noire dessous est la couche 2 (horizon humifère). Pour éviter l'erreur, demande-toi : reconnais-tu encore la feuille ?",
+          "figure": "profil-sol",
+          "exercise": {
+            "title": "Lire le profil d'un sol",
+            "statement": "Dans cet exercice, tu lis un profil de sol avec la méthode de la fiche. Le schéma de l'exercice montre un profil dont les couches sont repérées par des numéros.",
+            "exercise_type": "fixation",
+            "figure": "profil-sol-numeros",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les couches d'un profil de sol, de la surface vers la profondeur.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : la surface est en haut, la roche mère est tout en bas. Étape 2 — Décrire : en haut des débris de végétaux, puis une terre sombre, puis une couche plus claire, puis des fragments de roche, enfin la roche dure. Étape 3 — Nommer : litière, horizon humifère, horizon d'accumulation, roche mère altérée, roche mère. Étape 4 — Conclure : c'est l'ordre de la surface vers la profondeur.",
+                "answers": [
+                  {
+                    "content": "La litière"
+                  },
+                  {
+                    "content": "L'horizon humifère"
+                  },
+                  {
+                    "content": "L'horizon d'accumulation"
+                  },
+                  {
+                    "content": "La roche mère altérée"
+                  },
+                  {
+                    "content": "La roche mère"
+                  }
+                ]
+              },
+              {
+                "content": "Dans une tranchée creusée dans un champ, une couche de terre sombre, riche en humus, est traversée par de nombreuses racines. Comment s'appelle cette couche ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la couche est près de la surface, sous les débris. Étape 2 — Décrire : elle est sombre, riche en humus et pleine de racines. Étape 3 — Nommer : ces caractères sont ceux de l'horizon humifère. Étape 4 — Conclure : c'est l'horizon humifère. La litière est faite de débris encore reconnaissables, et la roche mère est une roche dure, sans humus ni racines.",
+                "answers": [
+                  {
+                    "content": "L'horizon humifère",
+                    "correct": true
+                  },
+                  {
+                    "content": "La litière",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'horizon d'accumulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "La roche mère",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur le schéma numéroté du profil de sol, la couche numéro 3 est la couche plus claire située juste sous l'horizon humifère. Elle s'appelle ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : on lit le profil de haut en bas, la couche 2 est l'horizon humifère. Étape 2 — Décrire : la couche 3 est plus claire, avec moins d'humus. Étape 3 — Nommer : c'est l'horizon d'accumulation. Étape 4 — Conclure : le numéro 3 désigne l'horizon d'accumulation, qui précède la roche mère altérée.",
+                "answers": [
+                  {
+                    "content": "l'horizon d'accumulation",
+                    "correct": true
+                  },
+                  {
+                    "content": "la litière",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'horizon humifère",
+                    "correct": false
+                  },
+                  {
+                    "content": "la roche mère altérée",
+                    "correct": false
+                  },
+                  {
+                    "content": "la roche mère",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque description à la couche du profil qu'elle désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Décrire puis Étape 3 — Nommer : des feuilles mortes encore entières forment la litière ; une terre sombre riche en humus est l'horizon humifère ; une couche plus claire sous l'humus est l'horizon d'accumulation ; des fragments de roche encore reliés à la roche dure forment la roche mère altérée ; la roche dure non altérée est la roche mère.",
+                "answers": [
+                  {
+                    "content": "Feuilles mortes encore entières",
+                    "match": "La litière"
+                  },
+                  {
+                    "content": "Terre sombre riche en humus et en racines",
+                    "match": "L'horizon humifère"
+                  },
+                  {
+                    "content": "Couche plus claire sous l'humus",
+                    "match": "L'horizon d'accumulation"
+                  },
+                  {
+                    "content": "Fragments de roche proches de la roche dure",
+                    "match": "La roche mère altérée"
+                  },
+                  {
+                    "content": "Roche dure non altérée",
+                    "match": "La roche mère"
+                  }
+                ]
+              },
+              {
+                "content": "Dans un profil de sol, une couche de feuilles entières posée sur la terre est l'horizon humifère.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Nommer : une couche de feuilles encore entières est la litière, pas l'horizon humifère. Dans l'horizon humifère, les débris sont décomposés en humus et on ne reconnaît plus les feuilles. Contre-exemple : dans une tranchée, les feuilles entières sont la couche 1 (litière) et la terre noire dessous est la couche 2 (horizon humifère). Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un profil de sol se lit de haut en bas, de la surface jusqu'à la roche ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la surface est en haut et la roche dure en bas. Étape 4 — Conclure : on classe les couches de la surface jusqu'à la roche mère, qui est la couche la plus profonde du profil.",
+                "answers": [
+                  {
+                    "content": "mère",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer la texture d'un sol",
+          "remember": "La partie minérale d'un sol est faite de particules de tailles différentes : le **sable** (les plus grosses), le **limon** (taille intermédiaire) et l'**argile** (les plus fines). La **texture** d'un sol est la proportion de sable, de limon et d'argile. On la détermine par une **analyse granulométrique** : le sol est tamisé ou mis en suspension dans l'eau ; au repos, le sable se dépose en premier, puis le limon, puis l'argile. On nomme la texture d'après le constituant **dominant** : sol sableux, limoneux ou argileux.",
+          "method": [
+            "Lire les données : noter les pourcentages de sable, de limon et d'argile.",
+            "Vérifier que le total des trois pourcentages fait 100 %.",
+            "Comparer les pourcentages et repérer le plus grand.",
+            "Conclure en nommant la texture d'après le constituant dominant."
+          ],
+          "example": {
+            "statement": "L'analyse granulométrique d'un échantillon de sol d'un champ d'igname donne 70 % de sable, 20 % de limon et 10 % d'argile. Quelle est sa texture ?",
+            "steps": [
+              "Lire les données : sable 70 %, limon 20 %, argile 10 %.",
+              "Vérifier : 70 + 20 + 10 = 100 %, les mesures sont cohérentes.",
+              "Comparer : le plus grand pourcentage est 70 %, celui du sable.",
+              "Conclure : le sable domine, c'est un sol sableux."
+            ]
+          },
+          "pitfall": "Ne pas dire qu'un sol est argileux (ou sableux) parce qu'il **contient** de l'argile (ou du sable) : un sol peut contenir de l'argile sans être argileux. C'est le constituant **dominant** qui donne la texture. Contre-exemple : un sol à 70 % de sable et 10 % d'argile contient bien de l'argile, mais c'est un sol sableux. Pour éviter l'erreur, compare toujours les trois pourcentages avant de conclure.",
+          "figure": "granulometrie-champ",
+          "exercise": {
+            "title": "Déterminer la texture d'un sol",
+            "statement": "Dans cet exercice, tu détermines la texture d'un sol avec la méthode de la fiche. Le diagramme de l'exercice montre la composition minérale d'un sol de plantation.",
+            "exercise_type": "fixation",
+            "figure": "granulometrie-plantation",
+            "questions": [
+              {
+                "content": "L'analyse granulométrique d'un sol de champ donne 70 % de sable, 20 % de limon et 10 % d'argile. Quelle est sa texture ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire les données : sable 70 %, limon 20 %, argile 10 %. Étape 2 — Vérifier : 70 + 20 + 10 = 100 %. Étape 3 — Comparer : le plus grand pourcentage est 70 %, celui du sable. Étape 4 — Conclure : le sable domine, c'est un sol sableux. Il n'est pas argileux : l'argile ne représente que 10 %.",
+                "answers": [
+                  {
+                    "content": "Un sol sableux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un sol argileux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un sol limoneux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un sol sans partie minérale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un échantillon de sol contient 45 % de sable et 30 % de limon. Quel est le pourcentage d'argile ? (réponse en pourcentage)",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire les données : sable 45 %, limon 30 %, argile inconnue. Étape 2 — Vérifier que le total fait 100 % : 45 + 30 = 75, donc l'argile est 100 − 75 = 25 %. Étape 3 — Comparer : le sable (45 %) reste le plus abondant. Étape 4 — Conclure : l'argile représente 25 %.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un sol de plantation donne 20 % de sable, 25 % de limon et 55 % d'argile. Quelle est sa texture ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire les données : sable 20 %, limon 25 %, argile 55 %. Étape 2 — Vérifier : 20 + 25 + 55 = 100 %. Étape 3 — Comparer : 55 % est le plus grand pourcentage, celui de l'argile. Étape 4 — Conclure : l'argile domine, c'est un sol argileux. Le sable (20 %) est le moins abondant, ce n'est donc pas un sol sableux.",
+                "answers": [
+                  {
+                    "content": "Un sol argileux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un sol sableux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un sol limoneux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un sol où aucun constituant ne domine",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un mélange de sol et d'eau est laissé au repos dans une éprouvette. Remets dans l'ordre les dépôts, du fond de l'éprouvette vers le haut.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Comparer : les particules les plus grosses tombent les premières et les plus fines les dernières. Le sable est le plus gros, il se dépose au fond. Le limon, de taille intermédiaire, forme la couche du milieu. L'argile, la plus fine, se dépose en dernier, au-dessus. Étape 4 — Conclure : sable, limon, argile, du fond vers le haut.",
+                "answers": [
+                  {
+                    "content": "Le sable, au fond"
+                  },
+                  {
+                    "content": "Le limon, au milieu"
+                  },
+                  {
+                    "content": "L'argile, au-dessus"
+                  }
+                ]
+              },
+              {
+                "content": "Un sol qui contient 10 % d'argile et 70 % de sable est un sol argileux.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : on nomme la texture d'après le constituant dominant, pas d'après la simple présence d'un constituant. Ici 70 % de sable contre 10 % d'argile. Étape 4 — Conclure : c'est un sol sableux, même s'il contient un peu d'argile. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque composition de sol à sa texture.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Comparer puis Étape 4 — Conclure : 70 % de sable donne un sol sableux ; 60 % d'argile donne un sol argileux ; 65 % de limon donne un sol limoneux. À chaque fois, on cherche le pourcentage le plus grand et on nomme la texture d'après ce constituant.",
+                "answers": [
+                  {
+                    "content": "Sable 70 %, limon 20 %, argile 10 %",
+                    "match": "Sol sableux"
+                  },
+                  {
+                    "content": "Sable 15 %, limon 25 %, argile 60 %",
+                    "match": "Sol argileux"
+                  },
+                  {
+                    "content": "Sable 20 %, limon 65 %, argile 15 %",
+                    "match": "Sol limoneux"
+                  }
+                ]
+              },
+              {
+                "content": "Parmi les particules minérales du sol, les plus grosses sont celles du ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Comparer : dans l'ordre des tailles, le sable est le plus gros, puis le limon, puis l'argile, la plus fine. Le mot attendu est « sable ».",
+                "answers": [
+                  {
+                    "content": "sable",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Comparer la perméabilité et la rétention d'eau de deux sols",
+          "remember": "Les propriétés physiques d'un sol dépendent de sa texture. La **perméabilité** est la capacité d'un sol à laisser passer l'eau ; la **rétention d'eau** est sa capacité à garder l'eau. Un **sol sableux** (grosses particules) est perméable : l'eau le traverse vite, il en retient peu et se dessèche vite. Un **sol argileux** (particules très fines) est peu perméable : l'eau le traverse mal, il en retient beaucoup et peut rester gorgé d'eau. Pour comparer, on verse le même volume d'eau sur la même masse de chaque sol sec et on mesure l'eau recueillie : l'eau retenue est l'eau versée moins l'eau recueillie.",
+          "method": [
+            "Repérer les conditions de l'expérience : ce qui est identique (masse de sol, volume d'eau, durée) et ce qui change (la nature du sol).",
+            "Lire les résultats : le volume d'eau recueilli pour chaque sol.",
+            "Comparer : trouver le sol qui laisse passer le plus d'eau et celui qui en retient le plus (eau versée moins eau recueillie).",
+            "Conclure en reliant la perméabilité et la rétention d'eau à la texture de chaque sol."
+          ],
+          "example": {
+            "statement": "On verse 200 mL d'eau sur 200 g de sol sec, pendant 10 minutes, pour deux sols. Le sol A, sableux, laisse passer 160 mL. Le sol B, argileux, laisse passer 60 mL. Comparer les deux sols.",
+            "steps": [
+              "Repérer : la masse de sol (200 g), le volume d'eau (200 mL) et la durée (10 minutes) sont identiques ; seule la nature du sol change.",
+              "Lire : on recueille 160 mL pour le sol A et 60 mL pour le sol B.",
+              "Comparer : A laisse passer le plus d'eau (160 mL contre 60 mL). B en retient le plus : 200 − 60 = 140 mL, contre 200 − 160 = 40 mL pour A.",
+              "Conclure : le sol sableux A est perméable et retient peu d'eau ; le sol argileux B est peu perméable et retient beaucoup d'eau."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'eau **recueillie** avec l'eau **retenue**. Plus un sol laisse passer d'eau, moins il en retient. Contre-exemple : si on verse 200 mL et qu'on en recueille 160 mL, le sol n'a pas retenu 160 mL mais 200 − 160 = 40 mL. Pour éviter l'erreur, calcule toujours l'eau retenue par une soustraction.",
+          "figure": null,
+          "exercise": {
+            "title": "Comparer la perméabilité et la rétention d'eau",
+            "statement": "Dans cet exercice, tu compares la perméabilité et la rétention d'eau de deux sols avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans une expérience, on verse 200 mL d'eau sur un sol et on recueille 150 mL au bout de 10 minutes. Quel volume d'eau le sol a-t-il retenu ? (réponse en mL)",
+                "question_type": "numeric",
+                "unit": "mL",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : 200 mL d'eau sont versés, 150 mL sont recueillis. Étape 2 — Lire les résultats : 150 mL ont traversé le sol. Étape 3 — Comparer : l'eau retenue est celle qui n'a pas traversé, soit 200 − 150 = 50 mL. Étape 4 — Conclure : le sol a retenu 50 mL d'eau. Les 150 mL recueillis sont l'eau qui est passée, pas l'eau retenue.",
+                "answers": [
+                  {
+                    "content": "50",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans deux entonnoirs, on verse le même volume d'eau sur la même masse de deux sols secs. Le sol A laisse passer 160 mL, le sol B laisse passer 60 mL. Quel sol est le plus perméable ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : même masse de sol, même volume d'eau, même durée ; seule la nature du sol change. Étape 2 — Lire : 160 mL pour A, 60 mL pour B. Étape 3 — Comparer : 160 est plus grand que 60, donc l'eau passe plus facilement dans A. Étape 4 — Conclure : le sol A est le plus perméable. Le sol B laisse passer moins d'eau, il en retient davantage.",
+                "answers": [
+                  {
+                    "content": "Le sol A",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sol B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux sols sont aussi perméables",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas comparer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sol argileux est très perméable : l'eau le traverse très vite.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : un sol argileux est fait de particules très fines, serrées entre elles ; l'eau passe difficilement. Étape 4 — Conclure : il est peu perméable et retient beaucoup d'eau. C'est le sol sableux qui est très perméable. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Conclure : la perméabilité est la capacité d'un sol à laisser passer l'eau ; la rétention d'eau est sa capacité à garder l'eau ; la texture est la proportion de sable, de limon et d'argile. La texture explique ensuite les deux autres propriétés.",
+                "answers": [
+                  {
+                    "content": "Perméabilité",
+                    "match": "Capacité d'un sol à laisser passer l'eau"
+                  },
+                  {
+                    "content": "Rétention d'eau",
+                    "match": "Capacité d'un sol à garder l'eau"
+                  },
+                  {
+                    "content": "Texture",
+                    "match": "Proportions de sable, de limon et d'argile"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux propriétés d'un sol sableux ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Conclure en reliant la propriété à la texture : le sable est formé de grosses particules, entre lesquelles l'eau circule vite. Un sol sableux est donc perméable et retient peu l'eau. Les propositions « peu perméable », « retient beaucoup d'eau » et « reste gorgé d'eau » décrivent un sol argileux.",
+                "answers": [
+                  {
+                    "content": "Il est perméable.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il retient peu l'eau.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est peu perméable.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il retient beaucoup d'eau.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il reste gorgé d'eau longtemps.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après une forte pluie, l'eau reste longtemps en flaques sur un sol ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Comparer : l'eau reste en surface si elle s'infiltre mal. Étape 4 — Conclure : un sol argileux est peu perméable, l'eau y stagne ; sur un sol sableux, l'eau s'infiltre vite.",
+                "answers": [
+                  {
+                    "content": "argileux",
+                    "correct": true
+                  },
+                  {
+                    "content": "sableux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sol qui laisse facilement passer l'eau est dit ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : la perméabilité est la capacité à laisser passer l'eau. Un sol qui laisse facilement passer l'eau est dit perméable, comme le sol sableux.",
+                "answers": [
+                  {
+                    "content": "perméable",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le profil d'un sol de champ d'igname",
+          "statement": "Kouassi cultive de l'igname. Au bord de son champ, il creuse une tranchée pour observer le sol. Il observe les couches, puis il fait quelques expériences sur des échantillons de terre.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Au bord d'un champ d'igname, Kouassi creuse une tranchée. Il observe une couche de terre sombre, riche en humus, avec de nombreuses racines et des vers de terre. Comment s'appelle cette couche ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée (Lire le profil d'un sol). 1) Repérer : la couche est près de la surface, sous les débris. 2) Décrire : terre sombre, humus, racines, vers de terre. 3) Nommer : ces caractères sont ceux de l'horizon humifère. 4) Conclure : c'est l'horizon humifère. La litière est faite de débris encore reconnaissables, et la roche mère est une roche dure sans humus ni vers de terre.",
+              "answers": [
+                {
+                  "content": "L'horizon humifère",
+                  "correct": true
+                },
+                {
+                  "content": "La litière",
+                  "correct": false
+                },
+                {
+                  "content": "L'horizon d'accumulation",
+                  "correct": false
+                },
+                {
+                  "content": "La roche mère altérée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur la tranchée de Kouassi, la couche tout en haut est faite de feuilles et de tiges mortes encore entières. Cette couche s'appelle ___.",
+              "question_type": "select",
+              "explanation": "Méthode rédigée (Lire le profil d'un sol). 1) Repérer : la couche est à la surface. 2) Décrire : feuilles et tiges encore reconnaissables. 3) Nommer : des débris encore reconnaissables forment la litière. 4) Conclure : c'est la litière. Dans l'horizon humifère, les débris sont décomposés en humus et on ne les reconnaît plus.",
+              "answers": [
+                {
+                  "content": "la litière",
+                  "correct": true
+                },
+                {
+                  "content": "l'horizon humifère",
+                  "correct": false
+                },
+                {
+                  "content": "l'horizon d'accumulation",
+                  "correct": false
+                },
+                {
+                  "content": "la roche mère",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le profil de Kouassi, la roche mère est la couche la plus proche de la surface.",
+              "question_type": "true_false",
+              "explanation": "Méthode rédigée (Lire le profil d'un sol). 1) Repérer : un profil se lit de haut en bas, de la surface à la roche mère. 2) Décrire : la roche mère est la roche dure non altérée, située tout en bas. 3) Nommer : la couche la plus proche de la surface est la litière. 4) Conclure : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Kouassi chauffe fortement un échantillon de terre sombre de l'horizon humifère. L'échantillon noircit, dégage de la fumée, puis il reste une poudre claire. Quel constituant a brûlé ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée (Mettre en évidence les constituants d'un sol). 1) Observer : on calcine un échantillon. 2) Décrire : noircissement, fumée, puis un résidu clair. 3) Interpréter : ce qui noircit et brûle est la matière organique ; le résidu qui ne brûle pas est la partie minérale. 4) Conclure : la matière organique a brûlé. Ce n'est ni le sable ni l'argile, qui ne brûlent pas.",
+              "answers": [
+                {
+                  "content": "La matière organique",
+                  "correct": true
+                },
+                {
+                  "content": "Le sable",
+                  "correct": false
+                },
+                {
+                  "content": "L'argile",
+                  "correct": false
+                },
+                {
+                  "content": "L'air",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouassi pèse 80 g de terre sèche de l'horizon humifère, puis 72 g de résidu après calcination. Quelle masse de matière organique a brûlé ? (réponse en grammes)",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0,
+              "explanation": "Méthode rédigée (Mettre en évidence les constituants d'un sol). 1) Observer : 80 g avant calcination, 72 g après. 2) Décrire : la masse a diminué. 3) Interpréter : la masse perdue est celle de la matière organique, soit 80 − 72 = 8 g. 4) Conclure : 8 g de matière organique ont brûlé ; les 72 g restants sont la partie minérale.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Kouassi calcine 100 g de terre sèche de l'horizon humifère et 100 g de terre sèche de l'horizon d'accumulation. La première perd plus de masse que la seconde. Explique ce résultat.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Relier la perte de masse à la matière organique qui brûle",
+                "Conclure que l'horizon humifère contient plus d'humus",
+                "Écrire une phrase claire, avec un vocabulaire exact"
+              ],
+              "explanation": "Corrigé modèle : la masse perdue à la calcination est celle de la matière organique qui a brûlé. L'horizon humifère perd plus de masse, donc il contient plus de matière organique, c'est-à-dire plus d'humus, que l'horizon d'accumulation. Cela correspond à sa couleur sombre et à la décomposition des débris de la litière à sa surface. Points : la perte de masse est liée à la matière organique (1 point) ; l'horizon humifère en contient plus, donc plus d'humus (1 point) ; phrase claire, vocabulaire exact (1 point).",
+              "answers": [],
+              "starter": "La perte de masse est celle de…"
+            }
+          ]
+        },
+        {
+          "title": "Deux sols, deux textures",
+          "statement": "Deux familles comparent le sol de leurs champs. On fait l'analyse granulométrique de leurs terres, puis on teste leur capacité à laisser passer l'eau. Le diagramme de l'exercice montre l'analyse du sol d'un champ d'igname.",
+          "exercise_type": "fixation",
+          "figure": "granulometrie-champ",
+          "questions": [
+            {
+              "content": "Un échantillon de sol prélevé dans un champ d'igname contient 70 % de sable, 20 % de limon et 10 % d'argile. Quelle est sa texture ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). 1) Lire : sable 70 %, limon 20 %, argile 10 %. 2) Vérifier : 70 + 20 + 10 = 100 %. 3) Comparer : le plus grand pourcentage est 70 %, celui du sable. 4) Conclure : le sable domine, c'est un sol sableux.",
+              "answers": [
+                {
+                  "content": "Un sol sableux",
+                  "correct": true
+                },
+                {
+                  "content": "Un sol argileux",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol limoneux",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol sans texture",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un autre échantillon contient 30 % de sable et 40 % de limon. Quel est son pourcentage d'argile ? (réponse en pourcentage)",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). 1) Lire : sable 30 %, limon 40 %. 2) Vérifier que le total fait 100 % : 30 + 40 = 70, donc l'argile est 100 − 70 = 30 %. 3) Comparer : le limon (40 %) est le plus abondant. 4) Conclure : l'argile représente 30 %, et le sol est plutôt limoneux.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque composition de sol à sa texture.",
+              "question_type": "matching",
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). Pour chaque ligne : 1) lire les trois pourcentages ; 2) vérifier que leur total fait 100 % ; 3) repérer le plus grand ; 4) nommer la texture d'après ce constituant. 70 % de sable donne un sol sableux ; 55 % d'argile donne un sol argileux ; 65 % de limon donne un sol limoneux.",
+              "answers": [
+                {
+                  "content": "Sable 70 %, limon 20 %, argile 10 %",
+                  "match": "Sol sableux"
+                },
+                {
+                  "content": "Sable 20 %, limon 25 %, argile 55 %",
+                  "match": "Sol argileux"
+                },
+                {
+                  "content": "Sable 20 %, limon 65 %, argile 15 %",
+                  "match": "Sol limoneux"
+                }
+              ]
+            },
+            {
+              "content": "Dans deux entonnoirs, on verse 200 mL d'eau sur la même masse de sol sableux et de sol argileux. Le sol sableux laisse passer 150 mL, le sol argileux 50 mL. Quel sol retient le plus d'eau ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée (Comparer la perméabilité et la rétention d'eau). 1) Repérer : mêmes masse, volume d'eau et durée. 2) Lire : 150 mL et 50 mL recueillis. 3) Comparer : eau retenue par le sol sableux 200 − 150 = 50 mL ; par le sol argileux 200 − 50 = 150 mL. 4) Conclure : le sol argileux retient le plus d'eau. Il est peu perméable.",
+              "answers": [
+                {
+                  "content": "Le sol argileux",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol sableux",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux sols retiennent autant d'eau",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un mélange de terre et d'eau est laissé au repos dans une éprouvette. Remets dans l'ordre les dépôts, du fond vers le haut.",
+              "question_type": "ordering",
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). 1) Lire : les particules les plus grosses tombent les premières ; le sable est le plus gros. 2) Vérifier : il y a bien trois dépôts, sable, limon et argile. 3) Comparer : le sable, plus gros, se dépose au fond ; le limon, de taille intermédiaire, forme la couche du milieu ; l'argile, la plus fine, se dépose au-dessus. 4) Conclure : de bas en haut, sable, limon, argile.",
+              "answers": [
+                {
+                  "content": "Le sable"
+                },
+                {
+                  "content": "Le limon"
+                },
+                {
+                  "content": "L'argile"
+                }
+              ]
+            },
+            {
+              "content": "Un sol contenant 10 % d'argile et 70 % de sable est un sol argileux.",
+              "question_type": "true_false",
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). 1) Lire : 70 % de sable, 10 % d'argile. 2) Vérifier : 70 + 10 = 80, le reste (20 %) est du limon, le total fait bien 100 %. 3) Comparer : le sable domine. 4) Conclure : c'est un sol sableux. Contenir un peu d'argile ne suffit pas à rendre un sol argileux : c'est le constituant dominant qui donne la texture. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Comparer deux parcelles",
+          "statement": "Une famille veut planter de l'igname et hésite entre deux parcelles. Elle fait analyser un échantillon de chaque sol, puis compare leur comportement avec l'eau : on verse 200 mL d'eau sur 250 g de sol sec, pendant 10 minutes. Parcelle 1 : 65 % de sable, 25 % de limon, 10 % d'argile, 170 mL d'eau recueillis. Parcelle 2 : 20 % de sable, 25 % de limon, 55 % d'argile, 50 mL d'eau recueillis.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une famille hésite entre deux parcelles pour planter de l'igname. L'analyse granulométrique de la parcelle 1 donne 65 % de sable, 25 % de limon et 10 % d'argile. Quelle est la texture de la parcelle 1 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). 1) Lire : sable 65 %, limon 25 %, argile 10 %. 2) Vérifier : 65 + 25 + 10 = 100 %. 3) Comparer : le plus grand pourcentage est 65 %, celui du sable. 4) Conclure : c'est un sol sableux.",
+              "answers": [
+                {
+                  "content": "Un sol sableux",
+                  "correct": true
+                },
+                {
+                  "content": "Un sol limoneux",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol argileux",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol dont aucun constituant ne domine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour comparer les deux parcelles, il faut verser le même volume d'eau sur la même masse de sol sec, pendant la même durée.",
+              "question_type": "true_false",
+              "explanation": "Méthode rédigée (Comparer la perméabilité et la rétention d'eau). 1) Repérer : pour qu'une comparaison soit valable, un seul facteur change, la nature du sol. 2) Lire : la masse de sol, le volume d'eau et la durée doivent donc être identiques. 3) Comparer : si un autre facteur changeait, on ne saurait pas lequel explique la différence. 4) Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On verse 200 mL d'eau sur 250 g de sol sec de la parcelle 2. Au bout de 10 minutes, on recueille 50 mL. Quel volume d'eau le sol a-t-il retenu ? (réponse en mL)",
+              "question_type": "numeric",
+              "unit": "mL",
+              "tolerance": 0,
+              "explanation": "Méthode rédigée (Comparer la perméabilité et la rétention d'eau). 1) Repérer : 200 mL versés. 2) Lire : 50 mL recueillis. 3) Comparer : l'eau retenue est l'eau versée moins l'eau recueillie, soit 200 − 50 = 150 mL. 4) Conclure : la parcelle 2 retient 150 mL. Les 50 mL recueillis sont l'eau qui est passée, pas l'eau retenue.",
+              "answers": [
+                {
+                  "content": "150",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans la même expérience, 200 mL d'eau versés, la parcelle 1 laisse passer 170 mL et la parcelle 2 laisse passer 50 mL. Quelles sont les deux conclusions exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode rédigée (Comparer la perméabilité et la rétention d'eau). 1) Repérer : mêmes conditions, seule la nature du sol change. 2) Lire : 170 mL et 50 mL. 3) Comparer : la parcelle 1 laisse passer plus d'eau, donc elle est plus perméable ; elle retient 200 − 170 = 30 mL, la parcelle 2 retient 200 − 50 = 150 mL, donc la parcelle 2 retient plus d'eau. 4) Conclure : les deux bonnes conclusions sont « parcelle 1 plus perméable » et « parcelle 2 retient plus d'eau ». Plus un sol laisse passer d'eau, moins il en retient.",
+              "answers": [
+                {
+                  "content": "La parcelle 1 est plus perméable que la parcelle 2.",
+                  "correct": true
+                },
+                {
+                  "content": "La parcelle 2 retient plus d'eau que la parcelle 1.",
+                  "correct": true
+                },
+                {
+                  "content": "La parcelle 1 retient plus d'eau que la parcelle 2.",
+                  "correct": false
+                },
+                {
+                  "content": "La parcelle 2 est plus perméable que la parcelle 1.",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux parcelles ont la même perméabilité.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La parcelle 2 est argileuse. Après une forte pluie, la parcelle qui risque de rester gorgée d'eau est la ___.",
+              "question_type": "select",
+              "explanation": "Méthode rédigée (Comparer la perméabilité et la rétention d'eau). 1) Repérer : la parcelle 2 est argileuse. 2) Lire : l'expérience montre 150 mL retenus par le sol argileux. 3) Comparer : un sol argileux est peu perméable et retient beaucoup d'eau, alors que le sol sableux de la parcelle 1 laisse l'eau s'infiltrer. 4) Conclure : c'est la parcelle 2 qui risque de rester gorgée d'eau.",
+              "answers": [
+                {
+                  "content": "parcelle 2",
+                  "correct": true
+                },
+                {
+                  "content": "parcelle 1",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un sol dont l'argile domine, on dit que la texture est ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). On nomme la texture d'après le constituant dominant. Quand l'argile domine, le sol est dit argileux. Le mot attendu est « argileuse » ou « argileux » selon l'accord.",
+              "answers": [
+                {
+                  "content": "argileuse",
+                  "correct": true
+                },
+                {
+                  "content": "argileux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Résume en quelques phrases ce que l'étude apprend sur les deux parcelles : texture, perméabilité et rétention d'eau. Appuie-toi sur les résultats : parcelle 1 avec 65 % de sable et 170 mL recueillis, parcelle 2 avec 55 % d'argile et 50 mL recueillis, pour 200 mL versés.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Rappeler que les conditions de l'expérience sont identiques",
+                "Comparer les volumes d'eau recueillis et calculer l'eau retenue",
+                "Nommer la texture de chaque parcelle d'après le constituant dominant",
+                "Relier la perméabilité et la rétention d'eau à la texture"
+              ],
+              "explanation": "Corrigé modèle : on verse le même volume d'eau, 200 mL, sur la même masse de sol : seule la nature du sol change. La parcelle 1 laisse passer 170 mL et retient 30 mL : elle est perméable et retient peu l'eau ; avec 65 % de sable, c'est un sol sableux. La parcelle 2 laisse passer 50 mL et retient 150 mL : elle est peu perméable et retient beaucoup d'eau ; avec 55 % d'argile, c'est un sol argileux. Les propriétés des deux parcelles s'expliquent donc par leur texture. Points : conditions identiques (0,5), lecture et comparaison des volumes (1), calcul de l'eau retenue (0,5), texture nommée (0,5), lien entre texture et propriétés (0,5).",
+              "answers": [],
+              "starter": "Les deux parcelles ont été testées dans les mêmes conditions…"
+            }
+          ]
+        },
+        {
+          "title": "Étude du sol d'une cacaoyère",
+          "statement": "Dans une cacaoyère, un agriculteur creuse une tranchée et étudie le sol. Il observe les couches, il calcine 100 g de terre sèche de deux horizons, il fait l'analyse granulométrique du sol (25 % de sable, 20 % de limon, 55 % d'argile) puis il compare sa perméabilité à celle d'un sol sableux témoin avec 200 mL d'eau versés sur 250 g de sol sec.",
+          "exercise_type": "evaluation",
+          "figure": "granulometrie-cacaoyere",
+          "questions": [
+            {
+              "content": "Dans une cacaoyère, on creuse une tranchée. Remets dans l'ordre les couches observées, de la surface vers la profondeur.",
+              "question_type": "ordering",
+              "explanation": "Méthode rédigée (Lire le profil d'un sol). 1) Repérer : la surface est en haut, la roche mère en bas. 2) Décrire : débris de végétaux, terre sombre, couche plus claire, fragments de roche, roche dure. 3) Nommer : litière, horizon humifère, horizon d'accumulation, roche mère altérée, roche mère. 4) Conclure : c'est l'ordre de la surface vers la profondeur.",
+              "answers": [
+                {
+                  "content": "La litière, faite de feuilles et de cabosses mortes"
+                },
+                {
+                  "content": "L'horizon humifère, terre sombre avec des racines"
+                },
+                {
+                  "content": "L'horizon d'accumulation, couche plus claire"
+                },
+                {
+                  "content": "La roche mère altérée, faite de fragments de roche"
+                },
+                {
+                  "content": "La roche mère, roche dure"
+                }
+              ]
+            },
+            {
+              "content": "On calcine 100 g de terre sèche de l'horizon humifère : il reste 90 g de résidu. Quelle masse de matière organique a brûlé ? (réponse en grammes)",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0,
+              "explanation": "Méthode rédigée (Mettre en évidence les constituants d'un sol). 1) Observer : 100 g avant calcination, 90 g après. 2) Décrire : la masse a diminué. 3) Interpréter : la masse perdue est celle de la matière organique, soit 100 − 90 = 10 g. 4) Conclure : 10 g de matière organique ont brûlé ; les 90 g restants sont la partie minérale.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La même calcination sur 100 g de terre sèche de l'horizon d'accumulation laisse 97 g de résidu. Que conclure en comparant avec l'horizon humifère, qui a perdu 10 g ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée (Mettre en évidence les constituants d'un sol). 1) Observer : deux calcinations sur la même masse de terre. 2) Décrire : perte de 10 g pour l'horizon humifère, perte de 100 − 97 = 3 g pour l'horizon d'accumulation. 3) Interpréter : la masse perdue est la matière organique, donc l'horizon humifère en contient plus. 4) Conclure : l'horizon humifère est plus riche en matière organique, donc en humus.",
+              "answers": [
+                {
+                  "content": "L'horizon humifère contient plus de matière organique.",
+                  "correct": true
+                },
+                {
+                  "content": "L'horizon d'accumulation contient plus de matière organique.",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux horizons contiennent la même quantité de matière organique.",
+                  "correct": false
+                },
+                {
+                  "content": "L'horizon humifère ne contient que de la partie minérale.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'analyse granulométrique du sol de la cacaoyère donne 25 % de sable, 20 % de limon et 55 % d'argile. Quelle est sa texture ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode rédigée (Déterminer la texture d'un sol). 1) Lire : sable 25 %, limon 20 %, argile 55 %. 2) Vérifier : 25 + 20 + 55 = 100 %. 3) Comparer : le plus grand pourcentage est 55 %, celui de l'argile. 4) Conclure : c'est un sol argileux.",
+              "answers": [
+                {
+                  "content": "Un sol argileux",
+                  "correct": true
+                },
+                {
+                  "content": "Un sol sableux",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol limoneux",
+                  "correct": false
+                },
+                {
+                  "content": "Un sol dont aucun constituant ne domine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On verse 200 mL d'eau sur 250 g de ce sol sec et on recueille 70 mL. Quel volume d'eau le sol a-t-il retenu ? (réponse en mL)",
+              "question_type": "numeric",
+              "unit": "mL",
+              "tolerance": 0,
+              "explanation": "Méthode rédigée (Comparer la perméabilité et la rétention d'eau). 1) Repérer : 200 mL versés. 2) Lire : 70 mL recueillis. 3) Comparer : l'eau retenue est 200 − 70 = 130 mL. 4) Conclure : le sol de la cacaoyère retient 130 mL d'eau ; les 70 mL recueillis sont l'eau qui est passée.",
+              "answers": [
+                {
+                  "content": "130",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans la même expérience, un sol sableux témoin laisse passer 160 mL sur 200 mL versés. Quelles sont les trois conclusions exactes sur le sol de la cacaoyère ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode rédigée. 1) Repérer : les conditions sont les mêmes, 200 mL d'eau sur 250 g de sol sec ; seule la nature du sol change. 2) Lire : 70 mL recueillis pour la cacaoyère, 160 mL pour le sol témoin ; la cacaoyère laisse donc passer moins d'eau. 3) Comparer : eau retenue 200 − 70 = 130 mL contre 200 − 160 = 40 mL ; la cacaoyère retient plus d'eau. 4) Conclure en reliant à la texture : 55 % d'argile, c'est un sol argileux. Les propositions « plus perméable que le sol témoin » et « surtout du sable » sont fausses, et la calcination a montré de la matière organique dans l'horizon humifère.",
+              "answers": [
+                {
+                  "content": "Le sol de la cacaoyère laisse passer moins d'eau que le sol témoin.",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol de la cacaoyère retient plus d'eau que le sol témoin.",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol de la cacaoyère est un sol argileux.",
+                  "correct": true
+                },
+                {
+                  "content": "Le sol de la cacaoyère est plus perméable que le sol témoin.",
+                  "correct": false
+                },
+                {
+                  "content": "Sa partie minérale est surtout du sable.",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne contient pas de matière organique.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fais le compte rendu du profil de la cacaoyère : cite les cinq couches de la surface vers la profondeur, puis montre, avec les résultats de la calcination, que l'horizon humifère contient de l'humus.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Citer les cinq couches dans l'ordre, de la surface à la profondeur",
+                "Relier la perte de masse à la matière organique qui brûle",
+                "Comparer les pertes de 10 g et de 3 g",
+                "Conclure que l'horizon humifère est riche en humus"
+              ],
+              "explanation": "Corrigé modèle : le profil comprend, de la surface vers la profondeur, la litière, l'horizon humifère, l'horizon d'accumulation, la roche mère altérée et la roche mère. On calcine 100 g de terre de chaque horizon. L'horizon humifère perd 10 g ; l'horizon d'accumulation perd 3 g. La masse perdue est celle de la matière organique qui a brûlé. L'horizon humifère en contient donc plus : c'est l'horizon riche en humus. Points : les cinq couches dans l'ordre (2), la perte de masse liée à la matière organique (1), les valeurs 10 g et 3 g comparées (0,5), la conclusion sur l'humus (0,5).",
+              "answers": [],
+              "starter": "De la surface vers la profondeur, on trouve…"
+            },
+            {
+              "content": "Explique pourquoi le sol de cette cacaoyère risque de rester gorgé d'eau après de fortes pluies. Appuie-toi sur la texture du sol et sur les résultats de l'expérience.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Nommer la texture du sol d'après l'argile dominante",
+                "Comparer l'eau recueillie avec celle du sol témoin",
+                "Calculer ou citer l'eau retenue",
+                "Conclure sur le risque de sol gorgé d'eau"
+              ],
+              "explanation": "Corrigé modèle : le sol de la cacaoyère est argileux (55 % d'argile). Il est formé de particules très fines et serrées. Dans l'expérience, il laisse passer 70 mL sur 200 mL versés, contre 160 mL pour un sol sableux : il est peu perméable. Il retient 130 mL, contre 40 mL pour le sol sableux : il retient beaucoup d'eau. Après de fortes pluies, l'eau s'infiltre mal et stagne : le sol reste gorgé d'eau. Points : texture argileuse (1), comparaison des volumes recueillis (1), eau retenue (0,5), conclusion sur le sol gorgé d'eau (0,5).",
+              "answers": [],
+              "starter": "Le sol de la cacaoyère est argileux, donc…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
