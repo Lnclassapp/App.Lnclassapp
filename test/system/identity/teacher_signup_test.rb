@@ -72,7 +72,8 @@ class Identity::TeacherSignupTest < ApplicationSystemTestCase
       fill_person(material: false)
       assert_step 2, settle: signup_settle
       select "SVT", from: "teacher_registration[material_slug]"
-      assert_field "teacher_registration[contact]", with: "0701020304"
+      # Step 3 comes 100 ms after the subject: the kept number is read whether step 2 is still shown or already hidden.
+      assert_field "teacher_registration[contact]", with: "0701020304", visible: :all
 
       assert_step 3
       assert_selector "#teacher-registration-submit ~ p a[href='#{terms_path}']"

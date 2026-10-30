@@ -31,6 +31,8 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - Capture de « Prépare interros » : le titre de notion au-dessus de chaque carte répète le titre de l'exercice. Supprimé ; les ancres `notion-<slug>` et `toute-la-lecon` passent sur la première carte de chaque groupe (UDR-0145 §3.2 bis).
 - Grille élargie avec l'écran : 1, 2, 3 puis 4 colonnes (`sm`, `xl`, `2xl`).
 
+- Le porteur valide « type = fixation / évaluation » et demande une section « Prépare devoirs » pour les évaluations : UDR-0145 §3.2 ter. L'intro « Un exercice par notion, puis quatre sur toute la leçon » ne décrivait plus la page : réécrite pour chaque section.
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.

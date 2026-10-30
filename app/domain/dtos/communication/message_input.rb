@@ -40,6 +40,7 @@ module Dtos
       validates :title, presence: true, length: { maximum: MESSAGE::TITLE_MAX }
       validates :body, presence: true, length: { maximum: MESSAGE::BODY_MAX }
       validates :theme, inclusion: { in: MESSAGE::THEMES }
+      validate :body_is_short
       validate :illustration_is_offered
       validate :files_are_accepted
       validate :image_is_clean
@@ -129,6 +130,11 @@ module Dtos
 
       def scheduled? = @live_since.nil? && requested_time.is_a?(Time) && requested_time > @now
       def requested_time = @live_since ? nil : read_time(published_at)
+
+      # Dix mots au plus : la carte n'en montre pas davantage (UDR-0071, amendement du 2026-10-30, troisième).
+      def body_is_short
+        errors.add(:body, :too_many_words, count: MESSAGE::BODY_WORDS_MAX) if body.split.size > MESSAGE::BODY_WORDS_MAX
+      end
 
       # Une clé de base, ou une valeur qui peut désigner un dessin de l'équipe ; rien d'autre (ADR-0081 §4.3).
       def illustration_is_offered

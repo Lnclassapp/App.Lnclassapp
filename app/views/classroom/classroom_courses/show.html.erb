@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/classroom_courses/show — un cours vu depuis une classe (CL-11) %>
-<%# Rôle : en-tête de la leçon, puis « Fiche de révision » et « Prépare interros » avec les bascules d'assignation de cette classe %>
-<%# ADR  : 0048, 0072, 0113 · UDR : 0006, 0007, 0028, 0054, 0062, 0139 §3.4 · retour : la classe %>
+<%# Rôle : en-tête de la leçon, puis « Fiche de révision » et « Prépare interros » et « Prépare devoirs » avec les bascules d'assignation de cette classe %>
+<%# ADR  : 0048, 0072, 0113 · UDR : 0006, 0007, 0028, 0054, 0062, 0139 §3.4, 0145 §3.2 ter · retour : la classe %>
 <%# Une classe archivée n'a plus cette page (404, Lot C de vie-de-la-classe) : plus d'avis « archivée » ici. %>
 <% course = @course.course %>
 <% page_title course.name %>
@@ -33,4 +33,12 @@
     <%# Les bascules de cette classe seulement : une autre classe se gère depuis sa propre page. %>
     <%= render "catalog/courses/prepare_interros", prepare: @prepare, classroom_public_id: @classroom.public_id %>
   </section>
+
+  <% if prepare_any?(@prepare, "evaluation") %>
+    <section id="prepare-devoirs" aria-labelledby="prepare_devoirs_title">
+      <h2 id="prepare_devoirs_title" class="mb-2 font-display text-xl font-medium"><%= t(".prepare_devoirs_title") %></h2>
+      <p class="mb-4 text-mute"><%= t(".prepare_devoirs_intro") %></p>
+      <%= render "catalog/courses/prepare_interros", prepare: @prepare, classroom_public_id: @classroom.public_id, exercise_type: "evaluation" %>
+    </section>
+  <% end %>
 </div>

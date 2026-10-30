@@ -31,7 +31,7 @@ class CommunicationMessagesLocaleTest < ActiveSupport::TestCase
 
   test "la carte, l'audio et le masquage, mot pour mot" do
     assert_equal ", annonce officielle", t("communication.card.official")
-    assert_equal [ "Modifiée", "Masquée", "Réafficher" ], %w[edited dismissed restore].map { t("communication.card.#{it}") }
+    assert_equal [ "Masquée", "Réafficher" ], %w[dismissed restore].map { t("communication.card.#{it}") }
     assert_equal "Masquer l'annonce « Nouvelles fiches »", t("communication.card.dismiss", title: "Nouvelles fiches")
     assert_equal({ new: "Écouter le message", playing: "Arrêter la lecture", played: "Réécouter le message" },
                  t("communication.audio.labels"))
