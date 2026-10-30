@@ -149,7 +149,10 @@ Et un enseignant d'une autre classe ne peut pas envoyer à la 3e 1
 Alors chaque exercice porte « Rendre à l'enseignant » et ni « Vérifier ma réponse » ni note ni correction
 Quand il clique « Rendre à l'enseignant » sur un exercice
 Alors la copie est rattachée à l'assignation, l'enseignant la voit dans son suivi
-Et l'exercice affiche sa note et sa correction, sans « Refaire l'exercice »
+Et l'exercice affiche sa note et sa correction, et « Refaire l'exercice »
+Quand il refait l'exercice
+Alors le bouton est « Vérifier ma réponse », la nouvelle copie n'est pas rattachée au devoir
+Et l'enseignant voit toujours la copie rendue
 
 # CA-17 Pas de raccourci par la leçon
 Étant donné un exercice assigné à l'élève et pas encore rendu

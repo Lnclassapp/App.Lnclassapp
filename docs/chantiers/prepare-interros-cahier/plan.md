@@ -168,7 +168,7 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 - **Dépend de**    : Lot 0b, Lot C
 - **Test associé** : `test/infrastructure/queries/classroom/student_assigned_sheets_query_test.rb` · `test/system/classroom/assigned_sheets_test.rb`
 - **Done quand**   : l'élève voit dans « Ma classe » une feuille par envoi, forme « Prépare devoirs » dès 3 exercices et
-                     « Prépare interros » pour 1 ou 2 ; « Rendre à l'enseignant » rattache la copie au devoir, puis seulement la note et la correction, sans « Refaire » (CA-13, 14, 16)
+                     « Prépare interros » pour 1 ou 2 ; « Rendre à l'enseignant » rattache la copie au devoir, puis seulement la note et la correction ; « Refaire » donne une copie d'entraînement, plus rattachée au devoir (CA-13, 14, 16)
 
 ---
 
