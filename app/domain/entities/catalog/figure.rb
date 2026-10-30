@@ -209,10 +209,12 @@ module Entities
         errors.concat(highlight.each_index.reject { known.include?(highlight[it]) && highlight.index(highlight[it]) == it }.map { violation("params.highlight[#{it}]", "highlight[#{it}]") })
       end
 
+      LABEL_KEYS = %w[part text].freeze
+
       def self.label_part_errors(labels, known)
         labels.each_with_index.flat_map do |label, index|
           path = "params.labels[#{index}]"
-          next [ violation(path, "labels[#{index}]") ] unless label.is_a?(Hash)
+          next [ violation(path, "labels[#{index}]") ] unless label.is_a?(Hash) && (label.keys - LABEL_KEYS).empty?
 
           errors = []
           errors << violation("#{path}.part", "labels[#{index}].part") unless known.include?(label["part"]) && labels.index { it.is_a?(Hash) && it["part"] == label["part"] } == index

@@ -133,6 +133,8 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     "planche dont une étiquette porte une partie d'une autre planche" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "liver" } ])) }, "figure_invalid" ],
     "planche dont une partie surlignée est inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("highlight" => %w[aorta liver])) }, "figure_invalid" ],
     "planche dont une partie est étiquetée deux fois" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta" }, { "part" => "aorta" } ])) }, "figure_invalid" ],
+    "planche dont une étiquette porte une clé inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta", "texte" => "Aorte" } ])) }, "figure_invalid" ],
+    "planche dont un texte d'étiquette est nul" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta", "text" => nil } ])) }, "figure_invalid" ],
     "CA-9 problème qui cite une figure absente" => [ ->(c) { c["exercises"][0]["figure"] = "inconnue" }, "figure_missing" ],
     "CA-9 notion qui cite une figure absente" => [ ->(c) { c["notions"][1]["figure"] = "inconnue" }, "figure_missing" ],
     "type de question inconnu" => [ ->(c) { c["exercises"][0]["questions"][0]["question_type"] = "oracle" }, "invalid_value" ],

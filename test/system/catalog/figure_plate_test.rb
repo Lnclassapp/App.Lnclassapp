@@ -41,6 +41,19 @@ class Catalog::FigurePlateSystemTest < ApplicationSystemTestCase
     assert_selector "#host svg [data-highlight]", visible: :all
     assert_selector "#host svg [data-part=aorta][data-highlight]", visible: :all
     assert_no_selector "#host svg [data-part=septum][data-highlight]", visible: :all
+    assert_selector "#host svg [data-label] line", count: 4, visible: :all
+    # L'aorte est un tube : sa teinte primary à 0,35 est le trait superposé à son contour.
+    tint = page.evaluate_script("[...document.querySelectorAll('#host svg [data-plate] path')].filter((node) => node.style.stroke.includes('--sheet-primary') && node.getAttribute('stroke-opacity') === '0.35').length")
+    assert_equal 1, tint
+  end
+
+  test "a highlighted filled part is tinted primary at 0.35" do
+    mount_html(html(HEART.merge("highlight" => %w[septum])))
+
+    assert_selector "#host svg [data-part=septum][data-highlight]", visible: :all
+    fill, opacity = page.evaluate_script("(() => { const node = document.querySelector('#host svg [data-part=septum][data-highlight]'); return [node.style.fill, node.getAttribute('fill-opacity')] })()")
+    assert_includes fill, "--sheet-primary"
+    assert_equal "0.35", opacity
   end
 
   test "the same plate in numbers shows 1 to 4 and no part name" do
@@ -73,8 +86,30 @@ class Catalog::FigurePlateSystemTest < ApplicationSystemTestCase
     assert_no_selector "#host figcaption.sr-only", visible: :all
   end
 
-  test "a part of another plate shows the description alone" do
-    mount_html(html(HEART).sub("&quot;aorta&quot;", "&quot;liver&quot;"))
+  # Chaque faute est posée dans le HTML après coup : l'entité Figure la refuserait.
+  test "a label of another plate shows the description alone" do
+    mount_html(html(HEART).sub("&quot;part&quot;:&quot;aorta&quot;", "&quot;part&quot;:&quot;liver&quot;"))
+
+    assert_selector "#host [data-figure-state=error]", visible: :all
+    assert_no_selector "#host svg"
+  end
+
+  test "an unknown highlight shows the description alone" do
+    mount_html(html(HEART).sub("&quot;highlight&quot;:[&quot;aorta&quot;]", "&quot;highlight&quot;:[&quot;liver&quot;]"))
+
+    assert_selector "#host [data-figure-state=error]", visible: :all
+    assert_no_selector "#host svg"
+  end
+
+  test "a part labelled twice shows the description alone" do
+    mount_html(html(HEART).sub("&quot;part&quot;:&quot;left_ventricle&quot;", "&quot;part&quot;:&quot;aorta&quot;"))
+
+    assert_selector "#host [data-figure-state=error]", visible: :all
+    assert_no_selector "#host svg"
+  end
+
+  test "a label with an unknown key shows the description alone" do
+    mount_html(html(HEART).sub("&quot;part&quot;:&quot;aorta&quot;", "&quot;part&quot;:&quot;aorta&quot;,&quot;texte&quot;:&quot;Aorte&quot;"))
 
     assert_selector "#host [data-figure-state=error]", visible: :all
     assert_no_selector "#host svg"

@@ -20,6 +20,7 @@ const WRAP = 16
 const MAX_LABELS = 12
 const MAX_HIGHLIGHT = 4
 const MAX_TEXT = 60
+const LABEL_KEYS = ["part", "text"]
 const NUMBERINGS = ["names", "numbers"]
 
 let counter = 0
@@ -37,10 +38,11 @@ function read(params) {
   const { PARTS } = PLATES[plate]
   const seen = new Set()
   labels.forEach((entry) => {
-    const part = entry?.part
+    if (entry === null || typeof entry !== "object" || Object.keys(entry).some((key) => !LABEL_KEYS.includes(key))) throw new Error("plate : étiquette invalide")
+    const part = entry.part
     if (!own(PARTS, part)) throw new Error("plate : partie inconnue")
     if (seen.has(part)) throw new Error("plate : partie en double")
-    if (entry.text !== undefined && (typeof entry.text !== "string" || entry.text.length > MAX_TEXT)) throw new Error("plate : texte d'étiquette invalide")
+    if (entry.text !== undefined && (typeof entry.text !== "string" || [...entry.text].length > MAX_TEXT)) throw new Error("plate : texte d'étiquette invalide")
     seen.add(part)
   })
   highlight.forEach((part) => {

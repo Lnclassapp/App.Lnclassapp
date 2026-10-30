@@ -74,12 +74,14 @@ class PlatesStructureTest < ActiveSupport::TestCase
     end
   end
 
-  test "plate.js builds nodes with the shared helpers and writes text through them" do
+  # Les noms reçus (planche, partie) sont des textes de l'utilisateur : « __proto__ » ou « constructor » ne sont jamais des clés du catalogue.
+  test "plate.js looks every received name up with Object.hasOwn and counts text in code points" do
     source = LIB.join("plate.js").read
 
-    assert_match(/data-plate/, source)
-    assert_match(/data-label/, source)
-    assert_match(/data-highlight/, source)
-    assert_match(/throw new Error/, source)
+    assert_match(/Object\.hasOwn\(object, key\)/, source)
+    assert_match(/own\(PLATES, plate\)/, source)
+    assert_match(/own\(PARTS, part\)/, source)
+    assert_match(/\[\.\.\.entry\.text\]\.length/, source)
+    assert_no_match(/\b(?:PLATES|PARTS)\[(?:plate|part)\]\s*(?:\?|&&|\|\|)/, source)
   end
 end

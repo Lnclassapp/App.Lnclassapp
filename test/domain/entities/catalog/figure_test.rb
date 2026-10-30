@@ -296,12 +296,29 @@ module Entities
         assert_equal [ [ "params.labels[0].text", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "text" => " " } ]))
         assert_equal [ [ "params.labels[0].text", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "text" => "a" * 61 } ]))
         assert_empty Figure.errors_for(plate(labels: [ { "part" => "aorta", "text" => "a" * 60 } ]))
+        assert_empty Figure.errors_for(plate(labels: [ { "part" => "aorta", "text" => "é" * 60 } ]))
+      end
+
+      test "plate : un texte nul est refusé, une clé absente est permise" do
+        assert_equal [ [ "params.labels[0].text", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "text" => nil } ]))
+        assert_empty Figure.errors_for(plate(labels: [ { "part" => "aorta" } ]))
+      end
+
+      test "plate : une étiquette n'admet que part et text" do
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "texte" => "Aorte" } ]))
+        assert_equal [ [ "params.labels[1]", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta" }, { "part" => "septum", "text" => "Cloison", "x" => 1 } ]))
+      end
+
+      test "plate : les noms du prototype ne sont ni une planche ni une partie" do
+        assert_equal [ [ "params.plate", "figure_invalid" ] ], reasons(plate(plate: "__proto__"))
+        assert_equal [ [ "params.labels[0].part", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "constructor" } ]))
+        assert_equal [ [ "params.highlight[0]", "figure_invalid" ] ], reasons(plate(highlight: [ "__proto__" ]))
       end
 
       test "plate : bornes de 12 étiquettes, 4 surlignages et deux numérotations" do
         twelve = FigureCatalogs.parts("heart").map { { "part" => it } }
         assert_empty Figure.errors_for(plate(labels: twelve))
-        assert_includes paths(plate(labels: twelve + [ { "part" => "septum" } ])), "params.labels"
+        assert_equal %w[params.labels params.labels[12].part], paths(plate(labels: twelve + [ { "part" => "septum" } ]))
         assert_equal %w[params.highlight], paths(plate(highlight: %w[aorta septum mitral_valve right_atrium left_atrium]))
         assert_empty Figure.errors_for(plate(numbering: "numbers"))
         assert_equal %w[params.numbering], paths(plate(numbering: "letters"))
