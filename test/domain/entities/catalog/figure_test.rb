@@ -318,7 +318,7 @@ module Entities
       test "plate : bornes de 12 étiquettes, 4 surlignages et deux numérotations" do
         twelve = FigureCatalogs.parts("heart").map { { "part" => it } }
         assert_empty Figure.errors_for(plate(labels: twelve))
-        assert_equal %w[params.labels params.labels[12].part], paths(plate(labels: twelve + [ { "part" => "septum" } ]))
+        assert_equal %w[params.labels], paths(plate(labels: twelve + [ { "part" => "septum" } ]))
         assert_equal %w[params.highlight], paths(plate(highlight: %w[aorta septum mitral_valve right_atrium left_atrium]))
         assert_empty Figure.errors_for(plate(numbering: "numbers"))
         assert_equal %w[params.numbering], paths(plate(numbering: "letters"))
@@ -601,6 +601,49 @@ module Entities
         assert_operator elapsed, :<, 0.5
         assert_includes errors.map(&:first), "params.atoms"
         assert_includes errors.map(&:first), "params.bonds"
+      end
+
+      # Une liste hors borne coupe les contrôles de cohérence : la violation de borne sort en moins de 50 ms, quelle que soit la sorte.
+      def assert_bounded(figure, *bounds)
+        started = Process.clock_gettime(Process::CLOCK_MONOTONIC)
+        errors = Figure.errors_for(figure)
+        elapsed = Process.clock_gettime(Process::CLOCK_MONOTONIC) - started
+
+        assert_operator elapsed, :<, 0.05
+        assert_equal bounds, errors.map(&:first)
+      end
+
+      test "diagram : un arbre en chaîne de 5 000 nœuds est refusé vite, sur les seules bornes de nodes et edges" do
+        nodes = Array.new(5_000) { { "id" => "n#{it}", "label" => "n" } }
+        edges = Array.new(4_999) { { "from" => "n#{it}", "to" => "n#{it + 1}" } }
+
+        assert_bounded diagram(layout: "tree", nodes:, edges:, legend: []), "params.nodes", "params.edges"
+      end
+
+      test "map : 5 000 aires sont refusées vite, sur la seule borne de areas" do
+        areas = Array.new(5_000) { { "id" => it < 2_500 ? "x" : "savanna", "category" => 1 } }
+
+        assert_bounded map(areas:, places: [], routes: []), "params.areas"
+      end
+
+      test "plate : 5 000 étiquettes et surlignages sont refusés vite, sur les seules bornes de labels et highlight" do
+        labels = Array.new(5_000) { { "part" => it < 2_500 ? "x" : "aorta" } }
+        highlight = Array.new(5_000) { it < 2_500 ? "x" : "aorta" }
+
+        assert_bounded plate(labels:, highlight:), "params.highlight", "params.labels"
+      end
+
+      test "geometry : 5 000 points sont refusés vite, sur la seule borne de points" do
+        points = Array.new(5_000) { { "id" => "P", "x" => 0, "y" => 0 } }
+
+        assert_bounded raw(kind: "geometry", params: { "points" => points }), "params.points"
+      end
+
+      test "une liste pile à sa borne garde ses contrôles de cohérence" do
+        points = Array.new(12) { { "id" => "P#{it}", "x" => 0, "y" => 0 } }
+        points[11]["id"] = "P0"
+
+        assert_equal %w[params.points[11].id], reasons(raw(kind: "geometry", params: { "points" => points })).map(&:first)
       end
 
       test "molecule : le pas, le minimum et le maximum du curseur carbons sont des entiers" do
