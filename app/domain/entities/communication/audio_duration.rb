@@ -120,12 +120,12 @@ module Entities
         # rest est exactement une étiquette APEv2 : avec en-tête (il ouvre rest) ou sans (le pied la ferme). La taille
         # (petit-boutiste, octets 12..15) inclut le pied mais pas l'en-tête optionnel de 32 octets.
         def self.ape_to_end?(rest)
+          return false if rest.bytesize < APE_PART_BYTES
+
           if rest.start_with?(APE_MARK)
             size = rest.unpack1("V", offset: APE_SIZE_OFFSET)
             size >= APE_PART_BYTES && rest.bytesize == APE_PART_BYTES + size
           else
-            return false if rest.bytesize < APE_PART_BYTES
-
             footer = rest.byteslice(-APE_PART_BYTES, APE_PART_BYTES)
             footer.start_with?(APE_MARK) && !footer.unpack1("V", offset: APE_FLAGS_OFFSET).anybits?(1 << APE_HEADER_FLAG) &&
               footer.unpack1("V", offset: APE_SIZE_OFFSET) == rest.bytesize
@@ -192,16 +192,15 @@ module Entities
           seconds
         end
 
+        # Une piste sans mdhd ou sans mdia/minf/stbl/stts n'a qu'une durée déclarée, invérifiable : illisible.
         def self.track_seconds(bytes, from, to)
           mdhd = descend(bytes, from, to, %w[mdia mdhd])
-          return [] if mdhd.nil?
-
-          timescale, duration = header(bytes, *mdhd)
-          seconds = [ duration.fdiv(timescale) ]
           stbl = descend(bytes, from, to, %w[mdia minf stbl])
           stts = stbl && descend(bytes, *stbl, %w[stts])
-          seconds << ticks(bytes, *stts, sample_count(bytes, *stbl)).fdiv(timescale) if stts
-          seconds
+          throw :unreadable if mdhd.nil? || stts.nil?
+
+          timescale, duration = header(bytes, *mdhd)
+          [ duration.fdiv(timescale), ticks(bytes, *stts, sample_count(bytes, *stbl)).fdiv(timescale) ]
         end
 
         # Le nombre d'échantillons de la piste : stsz ou stz2 (version et drapeaux, taille, nombre). Sans l'un des deux, la

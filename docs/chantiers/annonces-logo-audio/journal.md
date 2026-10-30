@@ -25,6 +25,13 @@
 
 ## Dette laissée derrière
 
+### Correctif après la revue du train (2026-10-30)
+
+La revue de sécurité du train vers `main` a relevé deux constats de gravité basse dans `AudioDuration`, reproduits :
+
+- `APETAGEX` suivi de 2 à 7 octets après des trames valides : lecture hors de la chaîne, 500 au lieu de 422. Garde de 32 octets en tête de `ape_to_end?` (ADR-0118 M10).
+- Piste M4A sans `mdhd`, ou `stbl` hors de `mdia/minf` : seule la durée déclarée était crue (5 s devant 60 s). Chaque `trak` exige `mdhd` et `mdia/minf/stbl/stts` (ADR-0118 M9).
+
 ### Carte sobre (2026-10-30, après la fusion de la PR #391)
 
 Demande du porteur : sans « Modifiée », texte de 10 mots ou 2 lignes, logo du lecteur (bleu pour l'élève, orange — le « jaune » du porteur — pour l'enseignant). Règle d'affichage seulement : la saisie garde ses 140 caractères. UDR-0071, amendement du 2026-10-30 (second).
