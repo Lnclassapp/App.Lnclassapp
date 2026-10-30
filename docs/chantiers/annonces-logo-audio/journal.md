@@ -36,6 +36,10 @@ La revue de sécurité du train vers `main` a relevé deux constats de gravité 
 
 Demande du porteur : sans « Modifiée », texte de 10 mots ou 2 lignes, logo du lecteur (bleu pour l'élève, orange — le « jaune » du porteur — pour l'enseignant). Règle d'affichage seulement : la saisie garde ses 140 caractères. UDR-0071, amendement du 2026-10-30 (second).
 
+### Carte compacte et dix mots à la saisie (2026-10-30, après la fusion de la PR #399)
+
+Demande du porteur : marges haute et basse réduites sur la carte ; texte bloqué à 10 mots dans le formulaire. Les annonces de démo (`db/seeds/demo/saint_michel.rb`) sont raccourcies à 10 mots. UDR-0071, amendement du 2026-10-30 (troisième).
+
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
 | Les audios joints avant ce chantier ne sont pas relus | Hors périmètre (memo) | — |

@@ -187,7 +187,7 @@ class Communication::AuthoredMessagesControllerTest < ActionDispatch::Integratio
       assert_select "input#announcement_title[maxlength='60'][required]"
       assert_select "#announcement_title_hint", "60 caractères au plus."
       assert_select "textarea#announcement_body[maxlength='140'][rows='3'][required]"
-      assert_select "#announcement_body_hint", "140 caractères au plus. Les détails peuvent aller dans l'audio."
+      assert_select "#announcement_body_hint", "10 mots au plus. Les détails peuvent aller dans l'audio."
       assert_select "fieldset legend", text: /Classes/
       assert_select "input[type=checkbox][name='announcement[classroom_public_ids][]']", count: 2
       assert_select "label", text: "3ème B"

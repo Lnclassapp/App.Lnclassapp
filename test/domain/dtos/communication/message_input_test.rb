@@ -46,6 +46,14 @@ module Dtos
         assert checked(title: "a" * 60, body: "a" * 140).errors.empty?
       end
 
+      test "a text of eleven words is refused, ten words are accepted, whatever the spaces and line breaks" do
+        ten = "Un deux trois quatre cinq six sept huit neuf dix"
+
+        assert_equal({ body: [ "Le texte compte 10 mots au plus." ] }, errors(body: "#{ten} onze"))
+        assert_equal({ body: [ "Le texte compte 10 mots au plus." ] }, errors(body: ten.tr(" ", "\n") + "\nonze"))
+        assert_empty errors(body: "  #{ten.gsub(" ", "   ")}  ")
+      end
+
       test "a line break counts once, as the browser counts it under maxlength" do
         dto = checked(body: "#{'a' * 69}\r\n#{'b' * 70}")
 
