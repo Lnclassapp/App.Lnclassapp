@@ -18,7 +18,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- « Je m'entraîne » a déjà existé : `contenu-en-blocs` (CA-7, CA-8, Lot C) l'avait livré, avec un générateur « Entraînement illimité », une correction dans le navigateur et les réponses dans la page (`data-answer`). Il a été retiré par `refonte-contenus-maths` (#362, commit `da631f6`), et l'ancien code se lit avec `git show da631f6^:<chemin>`. Les maquettes (Thalès, Lentilles, Texte argumentatif) sont toujours dans `docs/design/fiches-cours/fiches/`.
 
 ## Dette laissée derrière
 
