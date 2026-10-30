@@ -35,6 +35,8 @@ module Contenus
     # Type à choix => propositions conseillées (le prompt les conseille, l'import ne les refuse pas).
     CHOICE_ADVICE = { "true_false" => [ 2 ], "single_choice" => [ 3, 4, 5 ], "multiple_correct_2" => [ 4, 5 ], "multiple_correct_3" => [ 5, 6 ] }.freeze
     # Le schéma v3 (question, answer) : clés admises (additionalProperties: false) et bornes.
+    IMAGE_KEYS = %w[description].freeze
+    IMAGE_DESCRIPTION_MAX = 150
     QUESTION_KEYS = %w[content question_type explanation points unit starter criteria answers image tolerance].freeze
     ANSWER_KEYS = %w[content correct is_correct match].freeze
     POINTS = (0.5..20)
@@ -326,7 +328,20 @@ module Contenus
         schema_at("#{path}.criteria[#{i}]", "texte de #{CRITERION_MAX} caractères au plus") unless criterion.is_a?(String) && criterion.length <= CRITERION_MAX
       end
       (question["answers"].is_a?(Array) ? question["answers"] : []).each_with_index { |answer, i| answer_shape(answer, "#{path}.answers[#{i}]") }
+      image_shape(question["image"], "#{path}.image") if question.key?("image")
       @schema.size == before
+    end
+
+    # Le schéma v3 (question_image) : { description } de 1 à 150 caractères, sans autre clé ; l'adaptateur refuse une description d'espaces.
+    def image_shape(image, path)
+      return schema_at(path, "objet { description } attendu") unless image.is_a?(Hash)
+
+      (image.keys - IMAGE_KEYS).each { |key| schema_at("#{path}.#{key}", "clé inconnue") }
+      description = image["description"]
+      if !description.is_a?(String) || description.empty? || description.length > IMAGE_DESCRIPTION_MAX
+        schema_at("#{path}.description", "texte de 1 à #{IMAGE_DESCRIPTION_MAX} caractères attendu")
+      elsif description.strip.empty? then fail_at("#{path}.description", "blank", "description obligatoire")
+      end
     end
 
     def answer_shape(answer, path)

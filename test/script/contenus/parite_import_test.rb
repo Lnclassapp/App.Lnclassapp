@@ -135,6 +135,14 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
                    "unit" => "cm", "answers" => [ { "content" => "4,5" } ] },
     "select" => { "content" => "Le mot ___ est un nom.", "question_type" => "select", "explanation" => EXPLANATION,
                   "answers" => [ { "content" => "maison", "correct" => true }, { "content" => "courir", "correct" => false } ] },
+    "true_false" => { "content" => "Le narrateur est le héros.", "question_type" => "true_false", "explanation" => EXPLANATION,
+                      "answers" => [ { "content" => "Vrai", "correct" => true }, { "content" => "Faux", "correct" => false } ] },
+    "multiple_correct_2" => { "content" => "Quels mots sont des noms ?", "question_type" => "multiple_correct_2", "explanation" => EXPLANATION,
+                              "answers" => [ { "content" => "maison", "correct" => true }, { "content" => "école", "correct" => true },
+                                             { "content" => "courir", "correct" => false } ] },
+    "multiple_correct_3" => { "content" => "Quels mots sont des verbes ?", "question_type" => "multiple_correct_3", "explanation" => EXPLANATION,
+                              "answers" => [ { "content" => "courir", "correct" => true }, { "content" => "lire", "correct" => true },
+                                             { "content" => "chanter", "correct" => true }, { "content" => "maison", "correct" => false } ] },
     "single_choice" => nil
   }.freeze
 
@@ -151,7 +159,9 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
   test "parité : chaque type de question bien formé, aucune erreur des deux côtés" do
     questions = SAMPLES.keys.map { sample(it) } + [ sample("written").merge("points" => 0.5), sample("written").merge("points" => 20),
                                                     sample("written").merge("points" => nil, "unit" => nil, "starter" => nil, "criteria" => nil, "tolerance" => nil),
-                                                    sample("single_choice").merge("points" => 2.5, "is_correct_unused" => nil).except("is_correct_unused") ]
+                                                    sample("single_choice").merge("points" => 2.5),
+                                                    sample("written").merge("image" => { "description" => "Un schéma du texte" }),
+                                                    sample("written").merge("image" => { "description" => "a" * 150 }) ]
     document = mutated { it["exercises"][0]["questions"] = questions }
     assert_empty import_pairs(document)
     assert_empty script_pairs(document)
@@ -164,6 +174,7 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
   end
 
   QUESTION_CASES = {
+    "multiple_correct_3 à deux bonnes réponses" => [ "multiple_correct_3", ->(q) { q["answers"][2]["correct"] = false }, "question_structure" ],
     "written sans explication" => [ "written", ->(q) { q.delete("explanation") }, "question_structure" ],
     "written à explication vide" => [ "written", ->(q) { q["explanation"] = " " }, "question_structure" ],
     "notebook sans explication" => [ "notebook", ->(q) { q.delete("explanation") }, "question_structure" ],
@@ -237,6 +248,13 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     "select : deux trous" => [ "select", ->(q) { q["content"] = "___ et ___" }, "question_structure" ],
     "select : proposition vide" => [ "select", ->(q) { q["answers"][1]["content"] = " " }, "blank" ],
     "select : propositions identiques" => [ "select", ->(q) { q["answers"][1]["content"] = "Maison" }, "question_structure" ],
+    "image en texte" => [ "written", ->(q) { q["image"] = "schema.png" }, "schema" ],
+    "image sans description" => [ "written", ->(q) { q["image"] = {} }, "schema" ],
+    "image : description de 151 caractères" => [ "written", ->(q) { q["image"] = { "description" => "a" * 151 } }, "schema" ],
+    "image : description vide" => [ "written", ->(q) { q["image"] = { "description" => "" } }, "schema" ],
+    "image : description qui n'est pas un texte" => [ "written", ->(q) { q["image"] = { "description" => 3 } }, "schema" ],
+    "image : clé en trop" => [ "written", ->(q) { q["image"] = { "description" => "Un schéma", "url" => "x" } }, "schema" ],
+    "image : description d'espaces" => [ "written", ->(q) { q["image"] = { "description" => "   " } }, "blank" ],
     "énoncé vide" => [ "written", ->(q) { q["content"] = " " }, "blank" ]
   }.freeze
 
