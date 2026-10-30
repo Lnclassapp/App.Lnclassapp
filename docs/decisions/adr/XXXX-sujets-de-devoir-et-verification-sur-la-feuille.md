@@ -23,10 +23,10 @@ manquent à l'application :
 - **le sujet de devoir** : un titre, une phrase « Notions mobilisées » et quatre exercices qui mélangent les notions. Un
   exercice appartient aujourd'hui à une notion ou à « Toute la leçon », rien ne les regroupe en sujet ;
 - **l'indice** : une phrase par exercice, montrée avant la vérification ;
-- **la vérification sur place** : « Vérifier ma réponse » rend une copie et la corrige dans la feuille. Aujourd'hui une
+- **la vérification sur place** : « Vérifier ma réponse » rend une copie en une requête et ouvre la page de résultat. Aujourd'hui une
   copie demande deux pages (`POST /exercises/:id/sessions` puis `POST /sessions/:id/copy`) et finit sur la page de résultat.
 
-La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le porteur a retenu la note de la maquette sur cette page (memo, Q2).
+La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le porteur a d'abord retenu la note de la maquette sur la feuille (memo, Q2), puis décidé que « Vérifier » ouvre la page de résultat existante, sur 20 (memo, Q18, 2026-10-30).
 
 ## 2. Moteurs de décision
 
@@ -51,9 +51,9 @@ La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le
 > exercice de sujet n'a pas de notion) et l'indice d'un exercice (`exercises.hint`, facultatif), tous deux écrits par
 > l'import `course_tree`. La feuille rend une copie par `POST /exercises/:exercise_public_id/sheet_check`, servi par
 > `UseCases::Assessment::CheckExerciseOnSheet`, qui enchaîne `StartExerciseSession` (restart: true) et
-> `SubmitExerciseCopy` dans une transaction et répond en Turbo Stream. La note de la feuille se lit sur la copie par
-> `Entities::Assessment::SheetGrade` : sur 10, au demi-point, mention de la maquette (≥ 9 Excellent, ≥ 7 Très bien,
-> ≥ 5 Assez bien, sinon À retravailler).**
+> `SubmitExerciseCopy` dans une transaction. Le succès redirige (303) vers la page de résultat existante de la copie
+> (`exercise_session_result_path`, note sur 20, ADR-0115), avec ou sans JavaScript ; les refus répondent en Turbo Stream 422
+> sur la feuille. La note est celle de la page de résultat : la feuille n'en calcule pas (`SheetGrade` n'existe plus).**
 
 > **Ajout du 2026-10-30 (Touré, accord du porteur).** **Nous laissons l'enseignant envoyer plusieurs exercices en un
 > devoir : `classroom_assignments.batch_public_id` (14 caractères, nul pour un exercice assigné seul, indexé) relie les
@@ -77,7 +77,7 @@ La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le
 - L'index « une assignation active par exercice et par classe » interdit d'envoyer deux fois le même exercice à la même classe.
 
 - Deux migrations et une table de plus ; l'import `course_tree` apprend deux clés (`hint`, `subjects`).
-- La note s'affiche sur 10 dans la feuille et sur 20 ailleurs, pour la même copie.
+- La feuille n'affiche pas la note ni la correction : l'élève quitte la feuille pour la page de résultat et revient par « Retour à la leçon » (`return_to`, deux cibles) ; une note, sur 20, partout.
 - Une vérification sur la feuille ouvre et ferme une session dans la même requête : une copie de plus compte pour la pause.
 - `PrepareInterrosQuery` est remplacée par `PrepareSheetsQuery`, qui lit en plus les questions, l'indice, les sujets et la
   dernière copie de l'élève par exercice : la page de la leçon lit plus de données (mesure au PRD §7).

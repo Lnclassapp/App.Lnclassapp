@@ -1,5 +1,5 @@
 # 🌐 DELIVERY · Assessment::SheetChecksController
-# Rôle : « Vérifier ma réponse » sur la feuille de la leçon : une copie rendue sans quitter la page (Turbo Stream : l'exercice corrigé et la progression) ; refus dans l'exercice, réponses gardées ; sans JS, retour à la leçon
+# Rôle : « Vérifier ma réponse » sur la feuille de la leçon : une copie rendue, puis la page de résultat de la copie (return_to : le retour vers la feuille ou « Ma classe ») ; refus dans l'exercice en Turbo Stream, réponses gardées ; sans JS, retour à la leçon
 # ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille (§4), 0054, 0091 (§4.4), 0115 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 · sécurité : copy[answers][<id>] lu champ par champ
 module Assessment
   class SheetChecksController < AuthenticatedController
@@ -13,7 +13,7 @@ module Assessment
       result = check_exercise.call(actor: current_actor, exercise_public_id:, answers: posted_answers, assignment_public_id:)
       return render_forbidden if result.code == :forbidden
 
-      result.success? ? corrected : refused(error_code(result), result.errors[:resume_at])
+      result.success? ? show_result(result.value) : refused(error_code(result), result.errors[:resume_at])
     rescue ActiveRecord::ActiveRecordError => error
       # Une panne n'est jamais avalée : elle est signalée, et l'élève relit « Réessaie » avec ses réponses.
       Rails.error.report(error, handled: true, severity: :error, source: "sheet_check")
@@ -38,17 +38,13 @@ module Assessment
       end
     end
 
-    def corrected
-      prepare = Queries::Catalog::PrepareSheetsQuery.new.call(course_slug:, actor: current_actor)
-      @exercise = prepare.exercise(exercise_public_id)
-      @sheet = prepare.sheet_of(exercise_public_id)
-      return back_to_lesson unless @exercise
-
-      respond_to do |format|
-        format.turbo_stream
-        format.html { back_to_lesson }
-      end
+    # La note de la copie est celle de la page de résultat (sur 20) ; le formulaire vise toute la page (data-turbo-frame="_top").
+    def show_result(submitted)
+      redirect_to exercise_session_result_path(submitted.session_public_id, return_to:), status: :see_other
     end
+
+    # Deux retours seulement, jamais une adresse : l'exercice de la feuille, ou « Ma classe » (un devoir rendu, ou une feuille de « Ma classe »).
+    def return_to = (assignment_public_id || params[:return_to] == "class") ? "class" : "sheet"
 
     def refused(code, resume_at = nil)
       @error_code = code

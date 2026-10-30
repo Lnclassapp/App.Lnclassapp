@@ -104,16 +104,19 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
                      `app/views/assessment/sheet_checks/create.turbo_stream.erb`
                      `app/views/assessment/sheet_checks/_error.html.erb`
                      *Ajoutés en cours de lot (2026-10-30, accord de l'orchestrateur ou nécessité) :*
-                     `app/views/catalog/courses/sheets/_exercise.html.erb` *(« Ce devoir est à rendre » ; local `assignment_public_id:` : « Rendre à l'enseignant » ; local `focus:`)*
+                     `app/views/catalog/courses/sheets/_exercise.html.erb` *(« Ce devoir est à rendre » ; local `assignment_public_id:` : « Rendre à l'enseignant » ; Lot C bis : formulaire `_top`, local `return_to:`, « Voir ma correction », plus de bloc de résultat)*
                      `app/views/catalog/courses/sheets/_question.html.erb` *(inchangé : pas de bug, voir le journal)*
                      `app/domain/ports/assessment/pending_assignment_repository_port.rb` · `app/infrastructure/repositories/assessment/pending_assignment_repository.rb` *(« à rendre » : devoir actif de la classe principale, sans copie rendue)*
                      `app/domain/use_cases/assessment/start_exercise_session.rb` *(`attach_assignment: true` : une copie refaite après le rendu n'est pas rattachée)*
-                     `app/infrastructure/queries/catalog/prepare_sheets_query.rb` *(`SheetExercise#due`)* · `app/javascript/controllers/prepare_sheet_controller.js` *(focus sur « Ta note »)*
+                     `app/infrastructure/queries/catalog/prepare_sheets_query.rb` *(`SheetExercise#due`)* · `app/javascript/controllers/prepare_sheet_controller.js` *(retrouvé tel qu'au Lot B : plus de focus)*
+                     *Lot C bis (2026-10-30, Touré, memo Q18) :* `app/controllers/assessment/session_results_controller.rb` · `app/views/assessment/session_results/show.html.erb` · `config/locales/assessment/session_results.fr.yml` *(`return_to` : « Retour à la leçon » vers l'exercice de la feuille, « Retour à Ma classe »)*
+                     *Supprimés (morts)* : `app/views/catalog/courses/sheets/_result.html.erb` · `app/domain/entities/assessment/sheet_grade.rb` et son test · clés `sheets.grade|mention|correction|good_answer|explanation`, `sheet_checks.mention|detail`
+                     *Tests Lot B adaptés* : `test/integration/catalog/prepare_interros_test.rb` · `test/system/catalog/prepare_sheets_test.rb` · `test/infrastructure/queries/catalog/prepare_sheets_query_test.rb`
                      `config/locales/assessment/sheet_checks.fr.yml` · `config/locales/catalog/courses.fr.yml` *(`sheets.hand_in`)* · `script/ci/test_timings.yml`
 - **Dépend de**    : Lot B
 - **Test associé** : `test/domain/use_cases/assessment/check_exercise_on_sheet_test.rb` · `test/controllers/assessment/sheet_checks_controller_test.rb` · `test/system/assessment/sheet_check_test.rb`
                      `test/infrastructure/repositories/assessment/pending_assignment_repository_test.rb` · `test/domain/use_cases/assessment/start_exercise_session_test.rb` · `test/infrastructure/queries/catalog/prepare_sheets_query_test.rb`
-- **Done quand**   : « Vérifier ma réponse » enregistre une copie et remplace l'exercice par sa correction sans changer de page ;
+- **Done quand**   : « Vérifier ma réponse » enregistre une copie et ouvre la page de résultat de la copie (303, avec ou sans JS) ; « Retour à la leçon » ramène à l'exercice sur la feuille ;
                      la pause, l'exercice archivé et la panne affichent leur message, réponses gardées ; depuis la leçon,
                      un exercice assigné et pas encore rendu est refusé sans copie et affiche « Ce devoir est à rendre… » (CA-3, 4, 5, 10, 17)
 - **Contrat pour le Lot F** (CA-16, memo Q17) : `sheets/_exercise` accepte `assignment_public_id:` ; tant que `exercise.copy` est nil (la copie
@@ -121,8 +124,8 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
                      avec un champ caché `assignment_public_id` et ni note ni correction ; une fois `copy` donnée, le résultat et « Refaire l'exercice »,
                      et le bouton refait est « Vérifier ma réponse », sans champ (copie d'entraînement, non rattachée). `POST /exercises/:id/sheet_check`
                      avec `assignment_public_id` : `CheckExerciseOnSheet` exige une assignation active de la classe principale de l'élève, qui porte
-                     l'exercice et pas encore rendue (sinon 403, ou « Ce devoir n'est plus à rendre. ») et y rattache la copie. La réponse remplace le
-                     frame `sheet-exercise-<id>` ; la progression `sheet-progress-<dom_id de la leçon>` n'existe pas dans « Ma classe » : le Lot F
+                     l'exercice et pas encore rendue (sinon 403, ou « Ce devoir n'est plus à rendre. ») et y rattache la copie. La réponse redirige vers la page de
+                     résultat avec `return_to=class` (« Retour à Ma classe ») ; la progression `sheet-progress-<dom_id de la leçon>` n'existe pas dans « Ma classe » : le Lot F
                      donne à sa feuille son propre repère s'il veut la compter.
 
 ---
@@ -200,7 +203,7 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 | `test/support/factories/catalog.rb`, `factories/assessment.rb` | Lot 0 |
 | `app/infrastructure/repositories/assessment/exercise_repository.rb` et son test | Lot 0 |
 | `test/infrastructure/orm/models_test.rb`, `content_tree_writer_characterization_test.rb`, `test/design/design_tokens_test.rb` | Lot 0 |
-| `app/views/catalog/courses/sheets/_exercise.html.erb`, `_result.html.erb` | Lot B (le Lot C les rend sans les modifier) |
+| `app/views/catalog/courses/sheets/_exercise.html.erb` | Lot B (modifié au Lot C, puis C bis, par accord) ; `_result.html.erb` supprimé au Lot C bis |
 | `app/views/catalog/courses/sheets/_teacher_bar.html.erb` | Lot B le crée vide, Lot D le remplit |
 | `test/system/catalog/prepare_interros_test.rb` | Lot D |
 | `test/integration/catalog/prepare_interros_test.rb` | Lot B |

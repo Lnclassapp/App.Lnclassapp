@@ -135,15 +135,15 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     get course_path(@course.slug)
 
     assert_select ".ps-result", 0
+    assert_select "a", text: "Voir ma correction", count: 0
     assert_select "button.ps-btn--redo[hidden]", 4 + 2
     assert_not_includes response.body, "Parce que A."
     assert_not_includes response.body, "Bonne réponse"
   end
 
   # CA-3 / CA-7 (rechargement)
-  test "an exercise already checked by the student is shown corrected, with « Refaire l'exercice »" do
+  test "an exercise already checked by the student shows its status, « Voir ma correction » and « Refaire l'exercice », no grade" do
     exercise = create_exercise(essential: @notions.first, title: "Cinq questions", questions: 5, position: 60)
-    exercise.questions.each { |question| question.update!(explanation: "Explication #{question.position}.") }
     session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 80)
     session.update!(correct_count: 4, question_count: 5)
     exercise.questions.each_with_index do |question, index|
@@ -158,17 +158,10 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select frame(exercise) do
       assert_select "[data-checked=true][data-copy='#{session.public_id}']"
       assert_select ".ps-status", text: "À revoir"
-      assert_select ".ps-result" do
-        assert_select ".ps-result-grade", text: "Ta note : 8 / 10"
-        assert_select ".ps-result-mention", text: "Mention : Très bien"
-        assert_select ".ps-result-detail", text: "4 bonnes réponses sur 5."
-        assert_select ".ps-correction-title", text: "Correction"
-        assert_select ".ps-correction-item", 5
-        assert_select ".ps-correction-item", text: including("Bonne réponse : A. Proposition 1")
-        assert_select ".ps-correction-item", text: including("Explication : Explication 5.")
-        assert_select ".ps-correction-item:last-of-type", text: including("✗ Faux")
-        assert_select ".ps-correction-item:first-of-type", text: including("✓ Juste")
-      end
+      # Lot C bis : ni note ni correction sur la feuille ; la copie a sa page de résultat.
+      assert_select ".ps-result", 0
+      assert_select ".ps-result-grade", 0
+      assert_select "a.ps-btn--redo[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet"), text: "Voir ma correction"
       assert_select "button.ps-btn--redo:not([hidden])", text: "Refaire l'exercice"
       assert_select "button.ps-btn--primary[hidden]"
       assert_select "button.ps-choice[aria-checked=true]", 5

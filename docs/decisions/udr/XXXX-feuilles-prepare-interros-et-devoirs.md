@@ -43,12 +43,13 @@ UDR-0145 §3.2. La seule adaptation est la vue de l'enseignant, que la maquette 
      figure (`figure_key`, partiel d'aujourd'hui) ; chaque question avec son étiquette (QCM, Vrai ou faux, Complète, Calcul ;
      les autres types : leur partiel `exercise_sessions/kinds/*` d'aujourd'hui, dans le même cadre) ; l'encadré pointillé
      « Indice : » ; la barre « Vérifier ma réponse » (noir) · « Indice » (blanc, absent sans indice) ou
-     « Refaire l'exercice » ; puis le résultat (`_result.html.erb`) ;
+     « Refaire l'exercice » ; une fois la copie rendue, « Voir ma correction » (lien vers sa page de résultat) à la place d'un bloc de résultat ;
   5. pied : « Lnclass · Prépare interros · Notion n » ou « … · Sujet n », et le lien souligné « Recommencer cette notion »
      ou « Recommencer ce sujet ».
-- Résultat, recopié de la maquette : « Ta note : x / 10 » (22 px), « Mention : … » (italique), « x bonne(s) réponse(s)
-  sur n. », « CORRECTION », puis par question « a. ✓ Juste | ✗ Faux | ✗ Sans réponse · Bonne réponse : … » et
-  « Explication : » (`questions.explanation`). Note et mention : `Entities::Assessment::SheetGrade`.
+- Résultat (Lot C bis, Touré, 2026-10-30, memo Q18) : la feuille n'a ni « Ta note », ni mention, ni correction. La note sur 20 et la
+  correction sont celles de la page de résultat d'aujourd'hui (`exercise_session_result_path`), inchangée. Au retour, un exercice
+  vérifié porte son statut (« Réussi » ou « À revoir »), les marques ✓ / ✗ de ses questions, « Voir ma correction » (lien vers sa
+  page de résultat) et « Refaire l'exercice » ; la progression « x / n exercices réussis » reste.
 
 **Devoir composé par l'enseignant** (ajout du 2026-10-30)
 - Sous chaque exercice de la feuille, pour l'enseignant : une case « Choisir » (`role="checkbox"`, 44 px), à côté de
@@ -70,8 +71,8 @@ des `_assigned_exercise`)
 - 1 ou 2 exercices : cartouche « PRÉPARE INTERROS », titre = nom de la notion si elle est commune, sinon « DEVOIR DU
   <date> » ; « À retenir : » seulement si la notion est commune et a un « À retenir ».
 - Avant de rendre : le bouton noir est « Rendre à l'enseignant » (même route `sheet_check`, la copie se rattache à
-  l'assignation active) ; « Indice » reste ; ni note ni correction. Après : le résultat comme dans la leçon, avec
-  « Refaire l'exercice » ; l'exercice refait porte « Vérifier ma réponse » et sa copie n'est plus rattachée au devoir
+  l'assignation active) ; « Indice » reste ; ni note ni correction. Après : la page de résultat de la copie (le retour est
+  « Ma classe »), puis, sur la feuille, « Voir ma correction » et « Refaire l'exercice » ; l'exercice refait porte « Vérifier ma réponse » et sa copie n'est plus rattachée au devoir
   (entraînement) ; pas de « Recommencer » sur la feuille d'un devoir reçu (memo Q17).
 - Dans la leçon, un exercice assigné à l'élève et pas encore rendu : à la place de « Vérifier ma réponse » et
   « Indice », `p` « Ce devoir est à rendre : ouvre-le dans Ma classe. » avec le lien vers « Ma classe ».
@@ -85,13 +86,19 @@ des `_assigned_exercise`)
 
 **Comportement**
 - « Vérifier ma réponse » : formulaire `POST /exercises/:exercise_public_id/sheet_check` dans `turbo_frame_tag
-  "sheet-exercise-<public_id>"` ; la réponse remplace ce frame (exercice corrigé) et la progression
-  `#sheet-progress-<feuille>` par Turbo Stream. Sans JS : redirection vers la leçon, ancre `#sheet-exercise-<public_id>`.
+  "sheet-exercise-<public_id>"`, avec `data-turbo-frame="_top"` : le succès redirige (303, avec ou sans JS) vers la page de
+  résultat de la copie, `exercise_session_result_path(…, return_to: "sheet")`. Les refus restent sur la feuille : réponse
+  Turbo Stream 422 qui ajoute `p role="alert"` à la fin de l'exercice, réponses gardées.
+- Retour depuis la page de résultat : le lien « Retour à la leçon » existant mène à `course_path(slug, anchor:
+  "sheet-exercise-<public_id>")` quand l'élève vient de la feuille ; « Retour à Ma classe » pour un devoir rendu depuis « Ma
+  classe » (`return_to=class`). `return_to` ne prend que ces deux valeurs, jamais une adresse ; sinon le retour d'aujourd'hui.
+  Rien d'autre ne change sur cette page.
 - Stimulus `prepare-sheet` (`app/javascript/controllers/prepare_sheet_controller.js`) : garde les réponses non vérifiées
   dans `localStorage` (clé `lnclass-prepare-<exercise_public_id>`, lecture et écriture sous try/catch) ; « Indice »
   montre ou cache l'encadré (`aria-expanded`) ; « Refaire l'exercice » et « Recommencer… » remettent à blanc dans le
   navigateur, sans requête : la prochaine vérification ouvre une nouvelle copie.
-- Rechargement : un exercice dont l'élève a une copie terminée et qui n'a pas été remis à blanc s'affiche corrigé.
+- Rechargement : un exercice dont l'élève a une copie terminée et qui n'a pas été remis à blanc s'affiche vérifié (statut,
+  « Voir ma correction », « Refaire l'exercice »).
 - Vue enseignant : pas de champ ; « Assigner à <classe> » / « ✓ Assigné à <classe> » à la place de « Vérifier ma réponse »
   et « Indice », même style ; la bascule `classroom/assignments/toggle` d'aujourd'hui, une par classe. Équipe : idem, sans
   « Assigner ».
@@ -102,7 +109,8 @@ des `_assigned_exercise`)
 - Chargement : le bouton passe à « Vérification… », `aria-busy="true"` sur le frame, désactivé.
 - Erreur : dans l'exercice, `p role="alert"` : pause « Tu as rendu 3 copies d'affilée. Tu pourras recommencer à HH h MM. » ;
   archivé « Cet exercice n'existe plus. » ; autre « La copie n'est pas partie. Réessaie. ». Les réponses restent.
-- Succès : l'exercice corrigé, focus sur « Ta note ».
+- Succès : la page de résultat de la copie (note sur 20), comme après une copie rendue depuis l'exercice. Pas de focus à gérer
+  sur la feuille : le retour recharge la page à l'ancre de l'exercice.
 
 **Accessibilité**
 - Boutons ≥ 44 px de haut, comme la maquette (exception assumée aux 48 px). Focus visible : contour noir 2 px.

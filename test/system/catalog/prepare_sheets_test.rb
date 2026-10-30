@@ -76,23 +76,23 @@ class Catalog::PrepareSheetsTest < ApplicationSystemTestCase
     visit course_path(@course.slug)
 
     within frame(@exercise) do
-      assert_selector ".ps-result"
+      assert_link "Voir ma correction"
       assert_selector "button[role=radio][aria-checked=true]", text: "AM/AB = AN/AC"
       assert_no_button "Vérifier ma réponse"
       click_button "Refaire l'exercice"
-      assert_no_selector ".ps-result"
+      assert_no_link "Voir ma correction"
       assert_button "Vérifier ma réponse"
       assert_no_selector "button[aria-checked=true]"
       assert_equal "", find("input.ps-input").value
     end
-    assert_selector "#{frame(@second)} .ps-result"
+    assert_selector "#{frame(@second)} a", text: "Voir ma correction"
 
     visit course_path(@course.slug)
     within(frame(@exercise)) { assert_button "Vérifier ma réponse" }
-    assert_selector "#{frame(@second)} .ps-result"
+    assert_selector "#{frame(@second)} a", text: "Voir ma correction"
 
     click_button "Recommencer cette notion"
-    assert_no_selector ".ps-result"
+    assert_no_link "Voir ma correction"
     assert_selector "button.ps-btn--primary", text: "Vérifier ma réponse", count: 2
   end
 

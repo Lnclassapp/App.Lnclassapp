@@ -117,7 +117,7 @@ fr:
         assign_targets_none: "Aucune de vos classes n'est en %{level}."
       # ADR-XXXX sujets-de-devoir, UDR-XXXX feuilles-prepare-interros-et-devoirs : les libellés des feuilles « Prépare interros » et
       # « Prépare devoirs » de la page d'une leçon, recopiés des maquettes. Clés absolues (catalog.courses.sheets.*), partagées par
-      # _prepare_sheets, sheets/_sheet, _exercise et _result. Les mentions et le détail de la note sont dans assessment.sheet_checks.
+      # _prepare_sheets, sheets/_sheet et _exercise. La note et la correction d'une copie sont celles de sa page de résultat (assessment.session_results).
       # « TOUTE LA LEÇON » : catalog.courses.show.lesson_wide_title (« Toute la leçon »), mis en capitales par .ps-title.
       sheets:
         interros_title: "PRÉPARE INTERROS"
@@ -148,21 +148,17 @@ fr:
         hide_hint: "Masquer l'indice"
         check: "Vérifier ma réponse"
         hand_in: "Rendre à l'enseignant"
+        see_correction: "Voir ma correction"
         checking: "Vérification…"
         redo: "Refaire l'exercice"
         reset_notion: "Recommencer cette notion"
         reset_subject: "Recommencer ce sujet"
         footer_notion: "Lnclass · Prépare interros · Notion %{number}"
         footer_subject: "Lnclass · Prépare devoirs · Sujet %{number}"
-        grade: "Ta note : %{score} / 10"
-        mention: "Mention : %{mention}"
-        correction: "Correction"
         verdict:
           correct: "✓ Juste"
           wrong: "✗ Faux"
           empty: "✗ Sans réponse"
-        good_answer: "Bonne réponse :"
-        explanation: "Explication :"
         assign: "Assigner à %{classroom}"
         assigned: "✓ Assigné à %{classroom}"
       role_actions:

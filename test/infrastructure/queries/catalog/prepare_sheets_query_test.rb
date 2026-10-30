@@ -158,7 +158,6 @@ module Queries
         text, mcq = copy.questions
 
         assert_equal [ session.public_id, false ], [ copy.copy.session_public_id, copy.copy.passed ]
-        assert_equal [ 5.0, :fair ], [ copy.copy.grade.score, copy.copy.grade.mention ]
         assert_equal [ :correct, "AC", "AC", "Même droite." ], [ text.verdict, text.response, text.good_answer, text.explanation ]
         assert_equal [ :wrong, "B. Juste", "La B." ], [ mcq.verdict, mcq.good_answer, mcq.explanation ]
         assert_equal [ true, false, false ], mcq.choices.map(&:picked)
