@@ -1,10 +1,15 @@
 # 🔌 INFRA · Repositories::Catalog::EssentialRepository
 # Rôle : traduit Orm::Essential ↔ Entities::Catalog::Essential, avec le statut du cours ; transitions et clés de l'import
-# ADR  : 0029, 0035, 0039, 0116
+# ADR  : 0029, 0035, 0039, 0116, XXXX-entrainement-de-notion-corrige-sans-trace
 module Repositories
   module Catalog
     class EssentialRepository
       include Ports::Catalog::EssentialRepositoryPort
+
+      # La notion lue pour être jugée : ce que ReadPublishedPolicy et ReadOwnLevelPolicy demandent, et son entraînement avec corrigé.
+      PracticeNotion = Data.define(:slug, :name, :status, :course_status, :level_id, :series_id, :practice) do
+        def readable_chain_published? = status == "published" && course_status == "published"
+      end
 
       def find_by_slug(slug:)
         # A single record: no eager loading, which Bullet reports as unused (lot B2). The course costs one query.
@@ -16,6 +21,17 @@ module Repositories
       def lock(id:)
         Orm::Essential.lock.find(id)
         true
+      end
+
+      def practice_for(course_slug:, notion_slug:, statuses:)
+        row = Orm::Essential.joins(:course).where(slug: notion_slug, status: statuses, courses: { slug: course_slug })
+                            .pick("essentials.slug", "essentials.name", "essentials.status", "courses.status", "courses.level_id",
+                                  "courses.series_id", "essentials.sheet")
+        return if row.nil?
+
+        slug, name, status, course_status, level_id, series_id, sheet = row
+        practice = Entities::Catalog::NotionPractice.from_raw(sheet.is_a?(Hash) ? sheet["practice"] : nil)
+        PracticeNotion.new(slug:, name:, status:, course_status:, level_id:, series_id:, practice:) if practice
       end
 
       # La première publication pose published_at ; l'archivage pose archived_at (ADR-0035).
