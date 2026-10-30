@@ -1,7 +1,7 @@
 require "test_helper"
 
 # ADR-0116 §4.2 et ADR « figures des matières de 3ème » (plate) : la planche légendée et ses modules de dessin créent leurs nœuds par
-# createElementNS et textContent, ne chargent aucune ressource, ne portent aucune couleur en dur, et déclarent exactement les parties du PRD.
+# createElementNS et textContent, ne chargent aucune ressource, ne portent aucune couleur en dur, et déclarent exactement les parties de FigureCatalogs::PLATES (parité domaine ↔ navigateur).
 class PlatesStructureTest < ActiveSupport::TestCase
   LIB = Rails.root.join("app/javascript/lib/figures")
   PLATES_DIR = LIB.join("plates")
@@ -9,17 +9,7 @@ class PlatesStructureTest < ActiveSupport::TestCase
   MODULES = Dir[PLATES_DIR.join("*.js")].reject { File.basename(it) == "index.js" }.freeze
   SOURCES = ([ LIB.join("plate.js").to_s, INDEX.to_s ] + MODULES).freeze
 
-  # PRD du chantier contenus-3e-svt, §5 (le Lot D remplacera cette table par la parité avec FigureCatalogs::PLATES).
-  PARTS = {
-    "digestive_system" => %w[mouth salivary_glands oesophagus stomach liver gallbladder pancreas small_intestine large_intestine rectum anus],
-    "blood_smear" => %w[red_blood_cell neutrophil lymphocyte monocyte platelet plasma],
-    "heart" => %w[right_atrium left_atrium right_ventricle left_ventricle septum aorta pulmonary_artery superior_vena_cava inferior_vena_cava pulmonary_veins tricuspid_valve mitral_valve],
-    "double_circulation" => %w[right_heart left_heart lungs organs pulmonary_artery pulmonary_veins aorta vena_cava],
-    "female_reproductive_system" => %w[ovary oviduct infundibulum uterus endometrium cervix vagina],
-    "hiv_virus" => %w[envelope gp120 gp41 matrix capsid rna reverse_transcriptase],
-    "soil_profile" => %w[litter humus_horizon accumulation_horizon weathered_rock bedrock roots],
-    "root_hairs" => %w[collar main_root lateral_root root_hair_zone elongation_zone root_cap root_hair soil_particle soil_water]
-  }.freeze
+  PARTS = Entities::Catalog::FigureCatalogs::PLATES
 
   test "the plate module and the eight plates exist" do
     assert_path_exists LIB.join("plate.js")
@@ -65,7 +55,7 @@ class PlatesStructureTest < ActiveSupport::TestCase
     end
   end
 
-  test "each plate declares exactly the parts of the PRD, in order" do
+  test "each plate declares exactly the parts of FigureCatalogs, in order" do
     PARTS.each do |plate, expected|
       block = PLATES_DIR.join("#{plate}.js").read[/export const PARTS\s*=\s*\{(.*?)\n\}/m, 1]
       declared = block.scan(/^\s*([a-z_0-9]+):\s*\{\s*name:/).flatten

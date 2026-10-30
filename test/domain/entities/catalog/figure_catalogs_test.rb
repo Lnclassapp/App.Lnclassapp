@@ -54,6 +54,22 @@ module Entities
         assert_equal "[]", output.strip
       end
 
+      test "huit planches de SVT, leurs parties uniques et figées, et la sorte plate ne propose que celles-là" do
+        assert_equal %w[blood_smear digestive_system double_circulation female_reproductive_system heart hiv_virus root_hairs soil_profile], FigureCatalogs::PLATES.keys.sort
+        assert_equal FigureCatalogs::PLATES.keys.sort, FigureKinds.fetch("plate").params["plate"].values.sort
+        assert_equal [ 11, 6, 12, 8, 7, 7, 6, 9 ], FigureCatalogs::PLATES.values_at(*%w[digestive_system blood_smear heart double_circulation female_reproductive_system hiv_virus soil_profile root_hairs]).map(&:size)
+        FigureCatalogs::PLATES.each_value do |parts|
+          assert_equal parts.uniq, parts
+          assert_predicate parts, :frozen?
+        end
+      end
+
+      test "les parties d'une planche, vides pour une planche inconnue" do
+        assert_equal %w[ovary oviduct infundibulum uterus endometrium cervix vagina], FigureCatalogs.parts("female_reproductive_system")
+        assert_empty FigureCatalogs.parts("skeleton")
+        assert_empty FigureCatalogs.parts(nil)
+      end
+
       test "un fond inconnu n'a ni aire ni lieu" do
         assert_empty FigureCatalogs.areas("moon")
         assert_empty FigureCatalogs.places(nil)

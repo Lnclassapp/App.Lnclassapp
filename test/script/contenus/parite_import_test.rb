@@ -50,6 +50,8 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
                  "areas" => [ { "id" => "dense_forest", "category" => 1 }, { "id" => "savanna", "category" => 2 } ],
                  "places" => [ { "id" => "abidjan", "label" => "Capitale" } ], "routes" => [ { "from" => "abidjan", "to" => "man" } ] }.freeze
   TIMELINE_PARAMS = { "start" => 1880, "end" => 1960, "step" => 10, "events" => [ { "at" => 1893, "label" => "Colonie" } ] }.freeze
+  PLATE_PARAMS = { "plate" => "heart", "numbering" => "names", "highlight" => %w[aorta],
+                   "labels" => [ { "part" => "right_atrium" }, { "part" => "aorta", "text" => "Aorte" } ] }.freeze
   TREE_PARAMS = { "layout" => "tree", "nodes" => %w[r a b].map { { "id" => it, "label" => it } }, "edges" => [ { "from" => "r", "to" => "a" }, { "from" => "r", "to" => "b" } ] }.freeze
 
   def explanation(document_course, value) = (document_course["exercises"][0]["questions"][0]["explanation"] = value)
@@ -61,6 +63,13 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
 
   test "une carte bien formée passe l'import et le script" do
     document = mutated { it["figures"][0] = figure_of("map", MAP_PARAMS) }
+
+    assert_empty import_pairs(document)
+    assert_empty script_pairs(document)
+  end
+
+  test "une planche bien formée passe l'import et le script" do
+    document = mutated { it["figures"][0] = figure_of("plate", PLATE_PARAMS) }
 
     assert_empty import_pairs(document)
     assert_empty script_pairs(document)
@@ -120,6 +129,10 @@ class ContenusPariteImportTest < ActiveSupport::TestCase
     "frise de 401 unités au pas 2" => [ ->(c) { c["figures"][0] = figure_of("timeline", TIMELINE_PARAMS.merge("start" => 0, "end" => 401, "step" => 2, "events" => [])) }, "figure_invalid" ],
     "légende de carte faite d'un nombre" => [ ->(c) { c["figures"][0] = figure_of("map", MAP_PARAMS.merge("legend" => [ 3, "Savane" ])) }, "figure_invalid" ],
     "curseur de frise dont le max atteint end" => [ ->(c) { c["figures"][0] = figure_of("timeline", TIMELINE_PARAMS).merge("controls" => [ { "param" => "start", "min" => 1850, "max" => 1960, "step" => 5, "label" => "début" } ]) }, "figure_invalid" ],
+    "planche inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("plate" => "skeleton")) }, "figure_invalid" ],
+    "planche dont une étiquette porte une partie d'une autre planche" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "liver" } ])) }, "figure_invalid" ],
+    "planche dont une partie surlignée est inconnue" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("highlight" => %w[aorta liver])) }, "figure_invalid" ],
+    "planche dont une partie est étiquetée deux fois" => [ ->(c) { c["figures"][0] = figure_of("plate", PLATE_PARAMS.merge("labels" => [ { "part" => "aorta" }, { "part" => "aorta" } ])) }, "figure_invalid" ],
     "CA-9 problème qui cite une figure absente" => [ ->(c) { c["exercises"][0]["figure"] = "inconnue" }, "figure_missing" ],
     "CA-9 notion qui cite une figure absente" => [ ->(c) { c["notions"][1]["figure"] = "inconnue" }, "figure_missing" ],
     "type de question inconnu" => [ ->(c) { c["exercises"][0]["questions"][0]["question_type"] = "oracle" }, "invalid_value" ],

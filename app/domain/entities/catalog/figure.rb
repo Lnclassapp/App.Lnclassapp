@@ -199,6 +199,28 @@ module Entities
         item["label"].nil? || text?(item["label"]) ? [] : [ violation("#{path}.label", "#{param}.label") ]
       end
 
+      # plate : parties de la planche (FigureCatalogs) ; une partie au plus une fois dans labels, et une fois dans highlight ; rien à contrôler si la planche est inconnue.
+      def self.plate_errors(params)
+        return [] unless FigureCatalogs::PLATES.key?(params["plate"])
+
+        known = FigureCatalogs.parts(params["plate"])
+        errors = label_part_errors(list_of(params, "labels"), known)
+        highlight = list_of(params, "highlight")
+        errors.concat(highlight.each_index.reject { known.include?(highlight[it]) && highlight.index(highlight[it]) == it }.map { violation("params.highlight[#{it}]", "highlight[#{it}]") })
+      end
+
+      def self.label_part_errors(labels, known)
+        labels.each_with_index.flat_map do |label, index|
+          path = "params.labels[#{index}]"
+          next [ violation(path, "labels[#{index}]") ] unless label.is_a?(Hash)
+
+          errors = []
+          errors << violation("#{path}.part", "labels[#{index}].part") unless known.include?(label["part"]) && labels.index { it.is_a?(Hash) && it["part"] == label["part"] } == index
+          errors << violation("#{path}.text", "labels[#{index}].text") unless label["text"].nil? || text?(label["text"])
+          errors
+        end
+      end
+
       # diagram : nœuds uniques, arêtes entre nœuds existants ; `tree` : une racine, un parent par nœud, pas de cycle ; `cycle` : 3 nœuds au moins.
       def self.diagram_errors(params)
         nodes = list_of(params, "nodes")
