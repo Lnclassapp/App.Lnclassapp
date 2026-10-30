@@ -251,9 +251,9 @@ create_message = UseCases::Communication::CreateMessage.new(
   transaction: Repositories::Shared::Transaction.new, policy: Policies::Communication::PublishPolicy.new, clock:
 )
 math_teacher = teachers.first.first
-[ [ "0710000001", "students", "meeting", "Réunion parents-professeurs", "Samedi 10 octobre à 9 h, salle polyvalente. Les bulletins du mois y seront remis aux parents." ],
-  [ "0710000002", "students", "exam", "Devoirs de niveau de la Tle", "Du 19 au 23 octobre, toutes les matières. Le planning est affiché au tableau de la vie scolaire." ],
-  [ math_teacher.contact, "classrooms", "homework", "Limites : revoir les fiches 1 et 2", "Avant jeudi, refaites les exercices « Appliquer » des fiches 1 et 2. On corrige en classe." ] ]
+[ [ "0710000001", "students", "meeting", "Réunion parents-professeurs", "Samedi 10 octobre, 9 h, salle polyvalente : bulletins remis." ],
+  [ "0710000002", "students", "exam", "Devoirs de niveau de la Tle", "Du 19 au 23 octobre, toutes les matières. Planning affiché." ],
+  [ math_teacher.contact, "classrooms", "homework", "Limites : revoir les fiches 1 et 2", "Avant jeudi, refaites les exercices des fiches 1 et 2." ] ]
   .each_with_index do |(contact, audience, illustration, title, body), rank|
   next if Orm::Message.exists?(title:)
 

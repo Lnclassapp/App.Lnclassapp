@@ -44,6 +44,8 @@ module Entities
     Message::ILLUSTRATIONS = %w[info calendar homework sheets exam meeting celebration holidays].freeze # UDR-0071 §3.3
     Message::TITLE_MAX = 60
     Message::BODY_MAX = 140
+    # UDR-0071, amendement du 2026-10-30 (troisième) : dix mots au plus, comme sur la carte.
+    Message::BODY_WORDS_MAX = 10
     # Le plus grand côté d'une image jointe, en pixels : une photo de téléphone (4032 px) passe (ADR-0060).
     Message::IMAGE_MAX_SIDE = 4096
     # ADR « annonces audio dix secondes » §4.1 : l'audio dure 10 s au plus, avec 0,3 s de marge d'encodeur (délai de début,
