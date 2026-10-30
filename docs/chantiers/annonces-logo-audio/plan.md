@@ -1,4 +1,4 @@
-# Plan d'exécution — Annonces : le logo officiel, un audio de 10 secondes téléchargeable, plus de « Toutes les annonces »
+# Plan d'exécution — Annonces : le logo officiel, un audio de 10 secondes, plus de « Toutes les annonces »
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).

@@ -1,12 +1,10 @@
 # 🌐 DELIVERY · Communication::MessageFilesController
-# Rôle : sert l'image ou l'audio d'une annonce après la règle de lecture, en cache privé no-store, par plage (206), ou en pièce jointe (download) ; sinon 404
-# ADR  : 0047, 0078 (§4.4), annonces-audio-dix-secondes (§4.3) · UDR : 0071 (§3.2, §3.4)
+# Rôle : sert l'image ou l'audio d'une annonce après la règle de lecture, en cache privé no-store, par plage (206) ; sinon 404
+# ADR  : 0047, 0078 (§4.4) · UDR : 0071 (§3.2, §3.4)
 module Communication
   class MessageFilesController < AuthenticatedController
     # Une seule plage d'octets : « bytes=500-999 », « bytes=500- » (jusqu'à la fin), « bytes=-500 » (les 500 derniers).
     RANGE = /\Abytes=(\d*)-(\d*)\z/
-    # Le nom d'une pièce jointe vient du type enregistré, jamais de l'auteur (ADR-0045 §4, M10).
-    EXTENSIONS = { "audio/mpeg" => "mp3", "audio/mp4" => "m4a", "image/png" => "png", "image/jpeg" => "jpg", "image/webp" => "webp" }.freeze
 
     def show
       result = read.call(actor: current_actor, public_id: params[:public_id], kind: params[:kind], range: requested_range)
@@ -20,12 +18,8 @@ module Communication
       response.headers["Cache-Control"] = "private, no-store"
       response.headers["Accept-Ranges"] = "bytes"
       response.headers["Content-Range"] = "bytes #{file.range.begin}-#{file.range.end}/#{file.byte_size}" if file.range
-      send_data file.data, type: file.content_type, status: file.range ? :partial_content : :ok,
-                           **(params[:download] ? { disposition: :attachment, filename: download_name(file) } : { disposition: :inline, filename: params[:kind] })
-    end
-
-    def download_name(file)
-      [ "annonce-#{params[:public_id]}", EXTENSIONS[file.content_type] ].compact.join(".")
+      send_data file.data, type: file.content_type, disposition: :inline, filename: params[:kind],
+                           status: file.range ? :partial_content : :ok
     end
 
     # Toute autre en-tête (absente, plusieurs plages, autre unité, suffixe nul) : le fichier entier. Une plage hors du

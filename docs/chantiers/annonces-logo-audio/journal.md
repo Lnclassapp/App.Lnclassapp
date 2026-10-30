@@ -1,4 +1,4 @@
-# Journal — Annonces : le logo officiel, un audio de 10 secondes téléchargeable, plus de « Toutes les annonces »
+# Journal — Annonces : le logo officiel, un audio de 10 secondes, plus de « Toutes les annonces »
 
 > Rempli **pendant** le chantier, pas reconstitué à la fin. C'est ici que se capitalise ce qui ne rentre ni dans un ADR ni dans un commit.
 
@@ -7,6 +7,7 @@
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
 | 2026-10-30 | Le logo signe toute annonce de l'équipe ; il n'est pas joint comme image aux 3 annonces de `Develop` | Design system §10 ; joint, il prendrait la place de l'illustration et se lirait deux fois | UDR-0071, amendement du 2026-10-30 |
+| 2026-10-30 | Le lien « Télécharger » et le mode pièce jointe de la route sont retirés (LA-7, M9, M10, ADR-0118 §4.3) | Le porteur : « quand j'ai dit rends-le téléchargeable, c'était pour l'avoir en local et non via l'app » ; il voulait les fichiers, pas un lien | UDR-0071 et ADR-0118 amendés |
 | 2026-10-30 | Plafond de l'audio ramené de 10 Mo à 1 Mo | 10 s à 320 kbit/s = 400 Ko ; le serveur ne lit jamais plus d'1 Mo | Oui, ADR-0118 §4.1 |
 | 2026-10-30 | Fin d'un MP3 : ID3v1 de 128 octets exactement, APEv2 dont la taille va jusqu'à la fin ; M4A : `stts` doit couvrir tous les échantillons de `stsz` | Revues sécurité et échecs silencieux : une fausse étiquette `TAG` cachait 36 s de trames derrière 0,1 s mesurée | Oui, ADR §4.2 et §4.4 |
 | 2026-10-30 | Le contrôle du navigateur écrit le message sous le champ et rend le champ invalide, sans bulle `reportValidity` | La bulle redisait le message (« dire chaque chose une seule fois ») ; vu sur la capture à 390 px | Non (UDR déjà conforme) |

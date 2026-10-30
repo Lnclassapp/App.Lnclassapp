@@ -1,8 +1,8 @@
-# ADR-0118 : L'audio d'une annonce dure 10 secondes au plus, mesuré dans ses octets, et se télécharge
+# ADR-0118 : L'audio d'une annonce dure 10 secondes au plus, mesuré dans ses octets, 
 <!-- index
-titre: Annonces : un audio de 10 secondes au plus, mesuré sans bibliothèque, téléchargeable
+titre: Annonces : un audio de 10 secondes au plus, mesuré sans bibliothèque
 statut: Accepté
-problematique: L'audio d'une annonce n'avait qu'une borne de poids (10 Mo) ; il doit durer 10 s au plus, vérifié au serveur sans dépendance, et pouvoir être téléchargé pour être réutilisé.
+problematique: L'audio d'une annonce n'avait qu'une borne de poids (10 Mo) ; il doit durer 10 s au plus, vérifié au serveur sans dépendance.
 -->
 
 | | |
@@ -10,14 +10,14 @@ problematique: L'audio d'une annonce n'avait qu'une borne de poids (10 Mo) ; il 
 | **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | [`docs/chantiers/annonces-logo-audio`](../../chantiers/annonces-logo-audio/prd.md) |
-| **Amende** | [ADR-0078](0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) §4.4 (poids de l'audio, fichier servi) · [ADR-0081](0081-annonces-trois-en-ligne-themes-et-illustrations-de-l-equipe.md) §4.4 (formats inchangés) |
+| **Amende** | [ADR-0078](0078-annonces-trois-auteurs-classes-ciblees-et-retrait.md) §4.4 (poids de l'audio) · [ADR-0081](0081-annonces-trois-en-ligne-themes-et-illustrations-de-l-equipe.md) §4.4 (formats inchangés) |
 | **Remplacé par** | — |
 
 ---
 
 ## 1. Contexte et problématique
 
-Une annonce est une carte de 60 + 140 caractères. Son audio (ADR-0045, ADR-0078 §4.4) n'était borné que par son poids, 10 Mo : plusieurs minutes de son. Le porteur demande le 2026-10-30 un audio de 10 secondes au plus, et téléchargeable pour être réutilisé (WhatsApp, réunion).
+Une annonce est une carte de 60 + 140 caractères. Son audio (ADR-0045, ADR-0078 §4.4) n'était borné que par son poids, 10 Mo : plusieurs minutes de son. Le porteur demande le 2026-10-30 un audio de 10 secondes au plus.
 
 La durée d'un fichier se lit dans ses octets, et un fichier téléversé est une entrée hostile : ses en-têtes peuvent mentir, sa structure peut boucler, sa taille peut viser la mémoire ou le processeur. Le format est déjà lu sans bibliothèque (`AudioHeader`, 4096 premiers octets).
 
@@ -39,7 +39,7 @@ La durée d'un fichier se lit dans ses octets, et un fichier téléversé est un
 
 ## 4. Décision
 
-> **Nous mesurons la durée d'un audio d'annonce en Ruby pur, dans le domaine, sur ses octets (1 Mo au plus) ; nous refusons au-delà de 10 secondes (+ 0,3 s de marge d'encodeur) et toute durée illisible ; le navigateur prévient avant l'envoi ; le fichier se télécharge avec la règle de lecture de l'écoute.**
+> **Nous mesurons la durée d'un audio d'annonce en Ruby pur, dans le domaine, sur ses octets (1 Mo au plus) ; nous refusons au-delà de 10 secondes (+ 0,3 s de marge d'encodeur) et toute durée illisible ; le navigateur prévient avant l'envoi.**
 
 ### 4.1 Bornes
 
@@ -52,9 +52,9 @@ La durée d'un fichier se lit dans ses octets, et un fichier téléversé est un
 - **MP3** : on saute les étiquettes ID3v2 (taille *syncsafe*) et le remplissage nul, puis on parcourt **toutes** les trames ; chaque trame donne ses échantillons et sa fréquence. L'en-tête Xing/Info/VBRI n'est jamais cru. La fin admise, et elle seule : la fin du fichier ; des octets nuls jusqu'au bout ; un ID3v1 (exactement 128 octets, commençant par `TAG`, finissant le fichier) ; une étiquette APEv2 dont l'étendue va jusqu'à la fin du fichier (pied `APETAGEX` de 32 octets dont la taille, petit-boutiste aux octets 12..15, inclut le pied mais pas l'en-tête optionnel de 32 octets ; ou en-tête `APETAGEX` + taille), éventuellement suivie d'un ID3v1. Un `TAG` ou un `APETAGEX` suivi d'autre chose (des trames qu'un lecteur rejouerait), tout autre octet entre deux trames, ou aucune trame : illisible.
 - **M4A** : on parcourt les boîtes de premier niveau jusqu'à `moov` ; la durée est le **maximum** de `mvhd`, de chaque `mdhd` et de la somme de chaque table `stts` (échantillons × durée, sur l'échelle de sa piste). La table `stts` doit couvrir la piste : la somme de ses `sample_count` égale celui de `stsz` (ou `stz2`) de la même piste, et le nombre d'entrées annoncé correspond exactement aux octets de la boîte ; sinon, ou sans `stsz`/`stz2`, illisible. Un fichier fragmenté (`moof` ou `mvex`), sans `moov`, avec une échelle de temps nulle ou une boîte de taille incohérente : illisible.
 
-### 4.3 Téléchargement
+### 4.3 Téléchargement (retiré)
 
-`GET /announcements/:public_id/audio?download=1` (`announcement_file_path(public_id, kind: "audio", download: 1)`) : même use case, même policy (404 hors droit), en-tête `Content-Disposition: attachment; filename="annonce-<public_id>.mp3"` (ou `.m4a`, d'après le type enregistré). Le nom envoyé par l'auteur n'est jamais gardé (ADR-0045 §4) : rien de l'auteur n'entre dans l'en-tête.
+> **Retiré le 2026-10-30, à la demande du porteur** : « quand j'ai dit rends-le téléchargeable, c'était pour l'avoir en local et non via l'app. » La route `announcement_file_path` sert l'audio comme avant le chantier (lecture inline, plage 206, `private, no-store`) ; il n'y a plus de paramètre `download`, ni de nom `annonce-<public_id>.<ext>`, ni de lien sur la carte. Les menaces M9 et M10 qui le couvraient sont retirées avec lui.
 
 ### 4.4 Menace (écrite avant le code)
 
@@ -68,8 +68,6 @@ La durée d'un fichier se lit dans ses octets, et un fichier téléversé est un
 | M6 | Table `stts` qui annonce 2³² entrées | Le nombre d'entrées annoncé doit correspondre exactement aux octets de la boîte, sinon illisible | `audio_duration_test` : `stts` gonflée |
 | M7 | Mémoire, processeur | Poids vérifié avant toute lecture (1 Mo) ; parcours linéaire, ≤ 1 Mo / 24 o ≈ 44 000 trames | `message_input_test` : 1 Mo + 1 non lu |
 | M8 | Contournement du contrôle du navigateur | Le serveur mesure toujours | `authored_messages_controller_test` |
-| M9 | Téléchargement hors droit, ou mis en cache | Même use case et policy ; `private, no-store` gardé | `message_files_controller_test` |
-| M10 | Injection d'en-tête par le nom de fichier | Nom fixé par l'application | `message_files_controller_test` |
 
 Hors menace : le contenu sonore lui-même (ce que dit l'audio) relève de la modération (retrait, ADR-0078 §4.2).
 
@@ -79,7 +77,6 @@ Hors menace : le contenu sonore lui-même (ce que dit l'audio) relève de la mod
 
 - Une borne que l'auteur comprend (« 10 secondes ») au lieu d'un poids.
 - Aucune dépendance ; une durée qui ment est refusée.
-- L'audio se garde et se partage hors de l'application.
 
 ### 🔴 Coûts consentis
 
@@ -87,17 +84,15 @@ Hors menace : le contenu sonore lui-même (ce que dit l'audio) relève de la mod
 - Un MP3 dont les trames sont séparées par des octets non standard (étiquettes exotiques, `LYRICS3`) est refusé.
 - Le plafond tombe de 10 Mo à 1 Mo : un MP3 qui porte une grosse pochette dans son étiquette ID3 est refusé pour son poids.
 - Les audios déjà joints ne sont pas relus : certains durent plus de 10 s jusqu'à leur remplacement.
-- Une fois téléchargé, l'audio échappe à la règle de lecture et au retrait de l'annonce.
 
 ## 6. Notes d'implémentation
 
 - `app/domain/entities/communication/audio_duration.rb` : `AudioDuration.seconds_of(bytes, format:)` → `Float | nil`.
 - `app/domain/entities/communication/message.rb` : `AUDIO_MAX_SECONDS = 10`, `AUDIO_SLACK_SECONDS = 0.3`, `AUDIO_MAX_MEGABYTES = 1`.
 - `app/domain/dtos/communication/message_input.rb` : validation `audio_is_short` (`:too_long`, `:unreadable`) après `files_are_accepted`.
-- `app/controllers/communication/message_files_controller.rb` : `disposition: :attachment` et nom `annonce-<public_id>.<ext>` quand `params[:download]`.
 - `app/javascript/controllers/communication/audio_duration_controller.js` : lit `duration` d'un `<audio>` sur une URL d'objet, `setCustomValidity`.
 
 ## 7. Comment vérifier que la décision est respectée
 
 - `bin/rails test test/domain/entities/communication/audio_duration_test.rb test/domain/dtos/communication/message_input_test.rb` : fichiers réels de 1 s, 9 s et 11 s (MP3, M4A), et fichiers forgés des menaces M1 à M6.
-- `bin/rails test test/controllers/communication/message_files_controller_test.rb` : téléchargement, nom, 404 hors droit.
+- `bin/rails test test/views/communication/card_test.rb` : aucune carte avec audio ne porte de lien « Télécharger » ni d'attribut `download`.

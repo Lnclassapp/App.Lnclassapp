@@ -1,7 +1,7 @@
 require "test_helper"
 
 module Communication
-  # UDR-0071 §3.2 and §3.4 (amendment of 2026-10-30): the team signs with the official logo; « Télécharger » sits under ▶.
+  # UDR-0071 §3.2 and §3.4 (amendment of 2026-10-30): the team signs with the official logo.
   class CardTest < ActionView::TestCase
     helper ComponentsHelper, Communication::IllustrationsHelper, Communication::MessagesHelper
 
@@ -28,23 +28,13 @@ module Communication
       assert_select "img[src*='logo/lnclass']", 0
     end
 
-    test "LA-7 — with an audio, « Télécharger » sits under ▶, downloads without Turbo, and is named after the title" do
+    test "LA-7 — retired: a card with an audio has no « Télécharger » link and no download attribute" do
       render_card(audio: true)
 
-      assert_select "div[data-controller='communication--audio']" do
-        assert_select "a.min-h-tap.text-school.underline[href=?][download][data-turbo=false][aria-label=?]",
-                      announcement_file_path("abc123", kind: "audio", download: 1),
-                      I18n.t("communication.audio.download_label", title: "Rentrée"), text: I18n.t("communication.audio.download") do
-          assert_select "svg[aria-hidden=true]"
-        end
-      end
-    end
-
-    test "LA-7 — without an audio, no « Télécharger »" do
-      render_card
-
+      assert_select "div[data-controller='communication--audio']"
       assert_select "a[download]", 0
-      assert_select "a", text: I18n.t("communication.audio.download"), count: 0
+      assert_select "a[href*='download']", 0
+      assert_select "a", text: "Télécharger", count: 0
     end
   end
 end

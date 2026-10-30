@@ -70,12 +70,6 @@
           <%= link_to t("communication.audio.fallback"), announcement_file_path(card.public_id, kind: "audio"),
                       class: "text-xs font-medium underline" %>
         </noscript>
-        <%# UDR-0071, amendement du 2026-10-30 : le fichier en pièce jointe, hors Turbo ; rien n'est téléchargé avant l'appui. %>
-        <%= link_to announcement_file_path(card.public_id, kind: "audio", download: 1), download: "", data: { turbo: false },
-                    "aria-label": t("communication.audio.download_label", title: card.title),
-                    class: "inline-flex min-h-tap items-center gap-0.5 text-xs font-medium text-school underline focus-visible:outline-2 focus-visible:outline-brand" do %>
-          <%= ui_icon "arrow-down-tray", variant: :mini, size: :sm %><%= t("communication.audio.download") %>
-        <% end %>
       <% end %>
     <% end %>
   </div>
