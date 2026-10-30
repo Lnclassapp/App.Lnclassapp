@@ -1,807 +1,948 @@
 {
   "format": "lnclass.course-tree",
-  "version": 2,
+  "version": 3,
   "courses": [
     {
       "name": "Les lentilles",
       "subtitle": "Leçon 8 — progression DPFC 2026-2027",
       "level_name": "3ème",
       "material_name": "Physique-Chimie",
-      "essentials": [
+      "theme": "teal",
+      "figures": [
         {
-          "name": "Deux familles de lentilles",
-          "subtitle": "Reconnaître une lentille convergente et une lentille divergente",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire ce qu'est une lentille.</li><li>Reconnaître une lentille convergente et une lentille divergente à sa forme.</li><li>Dire ce que chaque lentille fait de la lumière.</li></ul><h2>L'image pour comprendre</h2><p><strong>La goutte d'eau sur la feuille.</strong> Après la pluie, une grosse goutte d'eau est posée sur une feuille de bananier. Elle est bombée au milieu. Si tu regardes les nervures de la feuille à travers la goutte, elles paraissent plus grosses : la goutte se comporte comme une petite loupe.</p><p><em>Le pont.</em> La goutte est plus épaisse au milieu que sur les bords : c'est la forme d'une lentille convergente. Elle rassemble la lumière qui la traverse. Une lentille plus fine au milieu que sur les bords ferait l'inverse : elle écarterait la lumière.</p><p><em>Où l'image s'arrête.</em> Une goutte d'eau est une lentille très imparfaite. Pour étudier la lumière, on utilise du verre ou du plastique bien taillé, et on dessine la lentille par un simple trait avec deux flèches.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Une lentille</strong> est un objet transparent, en verre ou en plastique, qui dévie la lumière qui le traverse. Il y a deux familles de lentilles.</p><ul><li>La lentille <strong>convergente</strong> a les bords <strong>minces</strong> et le centre <strong>épais</strong>. Elle rapproche les rayons lumineux. On la schématise par un trait dont les flèches pointent vers l'extérieur.</li><li>La lentille <strong>divergente</strong> a les bords <strong>épais</strong> et le centre <strong>mince</strong>. Elle écarte les rayons lumineux. On la schématise par un trait dont les flèches pointent vers l'intérieur.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Tu as deux lentilles en main. La lentille A est plus épaisse au milieu que sur les bords. La lentille B est plus fine au milieu que sur les bords. Quelle est la famille de chaque lentille ?</p><ol><li>On compare l'épaisseur au centre et l'épaisseur sur les bords.</li><li>A est plus épaisse au centre : A est une lentille convergente.</li><li>B est plus fine au centre : B est une lentille divergente.</li><li>Pour vérifier, on regarde un texte tout près de la lentille : à travers A il paraît plus grand, à travers B il paraît plus petit.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'une lentille convergente grossit toujours. Elle ne grossit que si l'objet est assez près d'elle. Si tu regardes un objet éloigné à travers une loupe, tu le vois plus petit et à l'envers. Pour reconnaître la famille d'une lentille, regarde d'abord sa forme : centre épais, convergente ; centre mince, divergente.</p><h2>En une phrase</h2><p>Une lentille convergente est plus épaisse au centre et rapproche les rayons ; une lentille divergente est plus mince au centre et les écarte.</p>",
-          "exercises": [
+          "key": "lentille-convergente",
+          "kind": "optics",
+          "description": "Une lentille convergente de distance focale 4 cm, son axe optique et ses foyers F et F'. Un objet AB de 2 cm de haut est placé à gauche. Le curseur règle la distance objet-lentille. La figure trace les rayons et affiche OA', le grandissement et la nature de l'image : réelle, renversée, réduite pour 12 cm.",
+          "params": {
+            "mode": "lens",
+            "lens": "convergent",
+            "focal": 4,
+            "object_distance": 12,
+            "object_height": 2
+          },
+          "controls": [
             {
-              "title": "Reconnaître une lentille convergente ou divergente",
-              "statement": "On te donne des lentilles en verre. Pour chacune, tu observes sa forme vue de profil, puis tu regardes un texte à travers elle.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Quelle phrase décrit une lentille convergente ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une lentille convergente est plus épaisse au centre que sur les bords. C'est la forme de la goutte d'eau bombée.",
-                  "answers": [
-                    {
-                      "content": "Elle a les bords minces et le centre épais.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle a les bords épais et le centre mince.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle est toujours faite en verre.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle ne dévie pas la lumière.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une lentille divergente rapproche les rayons lumineux.",
-                  "question_type": "true_false",
-                  "explanation": "C'est l'inverse : une lentille divergente écarte les rayons lumineux. C'est la lentille convergente qui les rapproche.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Léa regarde un texte de très près à travers une lentille. Le texte paraît plus grand. De quelle famille est cette lentille ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une lentille qui agrandit un texte proche est convergente : c'est l'effet loupe.",
-                  "answers": [
-                    {
-                      "content": "Convergente.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Divergente.",
-                      "correct": false
-                    },
-                    {
-                      "content": "On ne peut pas le savoir.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles propositions décrivent une lentille convergente ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Une lentille convergente est épaisse au centre et fait converger les rayons. Celle qui écarte les rayons ou qui est mince au centre est divergente.",
-                  "answers": [
-                    {
-                      "content": "Elle fait converger les rayons lumineux.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle est plus épaisse au centre que sur les bords.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle écarte les rayons lumineux.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle est plus mince au centre que sur les bords.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Comment schématise-t-on une lentille convergente ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le trait représente la lentille vue de profil. Pour une lentille convergente, les deux flèches pointent vers l'extérieur.",
-                  "answers": [
-                    {
-                      "content": "Un trait dont les flèches pointent vers l'extérieur.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un trait dont les flèches pointent vers l'intérieur.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un cercle.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un trait sans flèche.",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
+              "param": "object_distance",
+              "min": 1,
+              "max": 30,
+              "step": 1,
+              "label": "Distance objet-lentille (cm)"
             }
           ]
         },
         {
-          "name": "Le vocabulaire de la lentille convergente",
-          "subtitle": "Axe optique, centre optique, foyers et distance focale",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Nommer l'axe optique, le centre optique et les deux foyers.</li><li>Dire ce qu'est la distance focale et la lire sur une figure.</li></ul><h2>L'image pour comprendre</h2><p><strong>La loupe au soleil.</strong> Un adulte tient une loupe face au soleil au-dessus d'une feuille de papier. En approchant ou en éloignant la loupe, il trouve une position où la lumière forme un tout petit point très brillant et très chaud. (Ne fais jamais cela seul : le papier peut brûler.)</p><p><em>Le pont.</em> Le soleil est si loin que ses rayons arrivent parallèles entre eux. Ce petit point brillant, c'est le foyer image $F'$. L'écart entre la loupe et la feuille quand le point est le plus petit, c'est la distance focale.</p><p><em>Où l'image s'arrête.</em> Une lentille a deux foyers, un de chaque côté, alors que la loupe au soleil n'en montre qu'un seul.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>L'<strong>axe optique</strong> est la droite perpendiculaire à la lentille qui passe par son centre.</li><li>Le <strong>centre optique</strong> $O$ est le centre de la lentille. Un rayon qui passe par $O$ n'est pas dévié.</li><li>Les rayons parallèles à l'axe optique ressortent de la lentille en passant tous par un même point de l'axe : le <strong>foyer image</strong> $F'$.</li><li>Le <strong>foyer objet</strong> $F$ est le symétrique de $F'$ par rapport à $O$.</li><li>La <strong>distance focale</strong> est la distance $f = OF'$. Plus $f$ est petite, plus la lentille est convergente.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Une lentille convergente a son foyer image $F'$ à 4 cm de son centre optique $O$. Donne sa distance focale, puis la position du foyer objet $F$.</p><ol><li>La distance focale est la distance entre $O$ et $F'$ : $f = OF' = 4$ cm.</li><li>$F$ est le symétrique de $F'$ par rapport à $O$ : il est sur l'axe optique, de l'autre côté de la lentille, à 4 cm de $O$.</li><li>Donc $OF = 4$ cm et la distance entre les deux foyers est $FF' = 8$ cm.</li></ol><h2>Le piège à éviter</h2><p>Confondre la distance focale avec la distance entre les deux foyers. La distance focale se mesure du centre $O$ à <strong>un seul</strong> foyer : $f = OF'$, pas $FF'$. Autre erreur : mesurer depuis le bord de la lentille au lieu de son centre.</p><h2>En une phrase</h2><p>Les rayons parallèles à l'axe optique ressortent en passant par le foyer image $F'$ ; la distance focale est la distance $f = OF'$.</p>",
-          "exercises": [
+          "key": "lentille-loupe",
+          "kind": "optics",
+          "description": "Une lentille convergente de distance focale 5 cm utilisée comme loupe de réparateur de téléphones. L'objet de 2 cm de haut est placé à 2,5 cm de la lentille, entre le centre optique et le foyer. La figure montre une image virtuelle, droite et agrandie. Le curseur fait varier la distance objet-lentille.",
+          "params": {
+            "mode": "lens",
+            "lens": "convergent",
+            "focal": 5,
+            "object_distance": 2.5,
+            "object_height": 2
+          },
+          "controls": [
             {
-              "title": "Axe optique, foyers et distance focale",
-              "statement": "Une lentille convergente a pour centre optique $O$, pour foyer objet $F$ et pour foyer image $F'$. Ses foyers sont sur l'axe optique.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Que représente l'axe optique ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'axe optique est la droite perpendiculaire à la lentille qui passe par son centre $O$ ; les deux foyers sont sur cet axe.",
-                  "answers": [
-                    {
-                      "content": "La droite perpendiculaire à la lentille qui passe par son centre.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le bord de la lentille.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La droite qui passe par les deux bords de la lentille.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le trajet d'un rayon dévié.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le foyer image $F'$ est à 5 cm du centre optique $O$. Quelle est la distance focale $f$, en cm ?",
-                  "question_type": "numeric",
-                  "explanation": "La distance focale est la distance $OF'$ : $f = 5$ cm.",
-                  "answers": [
-                    {
-                      "content": "5",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Un rayon parallèle à l'axe optique ressort de la lentille en passant par le foyer image $F'$.",
-                  "question_type": "true_false",
-                  "explanation": "C'est la définition du foyer image : tous les rayons parallèles à l'axe passent par ce point en sortant de la lentille.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Où se trouve le foyer objet $F$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$F$ est le symétrique de $F'$ par rapport à $O$ : sur l'axe optique, de l'autre côté de la lentille, à la même distance $f$ du centre.",
-                  "answers": [
-                    {
-                      "content": "Sur l'axe optique, du côté opposé à $F'$, à la même distance de $O$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au même endroit que $F'$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sur le bord de la lentille.",
-                      "correct": false
-                    },
-                    {
-                      "content": "À mi-chemin entre $O$ et $F'$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "La lentille A a une distance focale de 2 cm et la lentille B de 8 cm. Laquelle est la plus convergente ?",
-                  "question_type": "single_choice",
-                  "explanation": "Plus la distance focale est petite, plus la lentille est convergente : A, avec $f = 2$ cm, est plus convergente que B.",
-                  "answers": [
-                    {
-                      "content": "La lentille A.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La lentille B.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elles sont aussi convergentes l'une que l'autre.",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
+              "param": "object_distance",
+              "min": 0.5,
+              "max": 10,
+              "step": 0.5,
+              "label": "Distance objet-lentille (cm)"
             }
           ]
         },
         {
-          "name": "L'image donnée par une lentille convergente",
-          "subtitle": "Image réelle, image virtuelle et applications",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire où se forme l'image d'un objet et la décrire : réelle ou virtuelle, droite ou renversée, plus grande ou plus petite.</li><li>Relier la position de l'objet à l'appareil qui l'utilise : appareil photo, projecteur ou loupe.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le vidéoprojecteur et la loupe.</strong> Dans la salle de classe, le vidéoprojecteur envoie sur le mur une grande image que tout le monde voit : on peut la recueillir sur un écran. Avec la loupe d'un commerçant qui lit un petit texte, c'est différent : l'image grossie ne se forme sur aucun écran, on la voit seulement en regardant à travers la loupe.</p><p><em>Le pont.</em> L'image du mur est une image <strong>réelle</strong>. L'image vue dans la loupe est une image <strong>virtuelle</strong>. Ce qui change, c'est la place de l'objet : dans le projecteur il est assez loin de la lentille, dans la loupe il est tout près.</p><p><em>Où l'image s'arrête.</em> « Virtuelle » ne veut pas dire « fausse » : on la voit très bien, mais on ne peut pas la poser sur un écran.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>On note $OA$ la distance entre la lentille et l'objet, et $f$ la distance focale.</p><ul><li><strong>$OA \\gt f$</strong> (l'objet est plus loin que le foyer) : l'image est <strong>réelle</strong> et <strong>renversée</strong>, de l'autre côté de la lentille ; on peut la recueillir sur un écran. Si $OA \\gt 2f$, elle est plus petite que l'objet (appareil photo). Si $f \\lt OA \\lt 2f$, elle est plus grande (projecteur). Si $OA = 2f$, elle a la même taille.</li><li><strong>$OA \\lt f$</strong> (l'objet est entre le foyer et la lentille) : l'image est <strong>virtuelle</strong>, <strong>droite</strong> et <strong>plus grande</strong>, du côté de l'objet ; on ne peut pas la recueillir sur un écran (loupe).</li><li><strong>$OA = f$</strong> (l'objet est au foyer) : les rayons ressortent parallèles, il n'y a pas d'image nette.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Une lentille convergente a une distance focale $f = 3$ cm. Décris l'image d'un objet placé à 12 cm, puis à 2 cm de la lentille.</p><ol><li>À 12 cm : $OA = 12$ cm est plus grand que $2f = 6$ cm. L'image est réelle, renversée et plus petite que l'objet (appareil photo).</li><li>À 2 cm : $OA = 2$ cm est plus petit que $f = 3$ cm. L'image est virtuelle, droite et plus grande que l'objet (loupe).</li></ol><h2>Le piège à éviter</h2><p>Croire qu'on peut recueillir sur un écran l'image donnée par une loupe. Si l'objet est entre la lentille et le foyer, l'image est virtuelle : aucun écran ne la montre. Pour savoir, compare toujours la distance $OA$ à la distance focale $f$.</p><h2>En une phrase</h2><p>Objet plus loin que le foyer : image réelle et renversée ; objet entre le foyer et la lentille : image virtuelle, droite et agrandie, c'est la loupe.</p>",
-          "exercises": [
+          "key": "lentille-divergente",
+          "kind": "optics",
+          "description": "Une lentille divergente de distance focale 4 cm, avec son axe optique. Un objet AB de 2 cm de haut est placé à 12 cm de la lentille. La figure trace les rayons qui divergent après la lentille et affiche OA', le grandissement et la nature de l'image : virtuelle, droite et réduite. Le curseur règle la distance objet-lentille.",
+          "params": {
+            "mode": "lens",
+            "lens": "divergent",
+            "focal": 4,
+            "object_distance": 12,
+            "object_height": 2
+          },
+          "controls": [
             {
-              "title": "Décrire l'image et nommer l'application",
-              "statement": "Une lentille convergente a une distance focale $f = 3$ cm. On place des objets à différentes distances de la lentille.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "L'objet est à 8 cm de la lentille. Comment est l'image ?",
-                  "question_type": "single_choice",
-                  "explanation": "$OA = 8$ cm est plus grand que $f = 3$ cm : l'objet est plus loin que le foyer, l'image est réelle et renversée.",
-                  "answers": [
-                    {
-                      "content": "Réelle et renversée.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Virtuelle et droite.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Réelle et droite.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il n'y a pas d'image nette.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une image virtuelle peut être recueillie sur un écran.",
-                  "question_type": "true_false",
-                  "explanation": "Une image virtuelle ne se forme sur aucun écran : on la voit seulement en regardant à travers la lentille, comme avec une loupe.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel appareil utilise une lentille convergente avec un objet placé entre le foyer et la lentille ?",
-                  "question_type": "single_choice",
-                  "explanation": "Quand l'objet est entre le foyer et la lentille, l'image est virtuelle, droite et agrandie : c'est le principe de la loupe.",
-                  "answers": [
-                    {
-                      "content": "Une loupe.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un appareil photo.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un vidéoprojecteur.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un objet est à 10 cm d'une lentille convergente de distance focale 4 cm. Quelles propositions sont vraies ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "$OA = 10$ cm est plus grand que $2f = 8$ cm : l'image est réelle, renversée et plus petite que l'objet. Elle n'est ni droite ni virtuelle.",
-                  "answers": [
-                    {
-                      "content": "L'image est réelle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'image est renversée.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'image est plus petite que l'objet.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'image est droite.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'image est virtuelle.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une lentille convergente a une distance focale de 5 cm. À partir de quelle distance, en cm, de la lentille l'image d'un objet devient-elle réelle ?",
-                  "question_type": "numeric",
-                  "explanation": "L'image est réelle dès que l'objet est plus loin que le foyer, c'est-à-dire pour $OA \\gt f = 5$ cm. La limite est 5 cm : à cette distance il n'y a pas d'image nette.",
-                  "answers": [
-                    {
-                      "content": "5",
-                      "correct": true
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Construire l'image d'un objet",
-          "subtitle": "Les trois rayons particuliers et la méthode de construction",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Tracer les rayons particuliers qui partent du haut de l'objet.</li><li>Construire l'image d'un objet et la décrire.</li></ul><h2>L'image pour comprendre</h2><p><strong>Retrouver un ami dans la foule.</strong> Pour retrouver un ami à la sortie du stade, tu n'as pas besoin de suivre tous les supporters : deux chemins connus qui se croisent chez lui suffisent à le situer.</p><p><em>Le pont.</em> De la même façon, la lumière qui part du point $B$ de l'objet prend une infinité de chemins à travers la lentille. On n'en suit que quelques-uns, dont on connaît la direction : les rayons particuliers. Là où ils se croisent, on trouve le point image $B'$.</p><p><em>Où l'image s'arrête.</em> Les rayons ne se croisent pas toujours vraiment : pour une image virtuelle, ce sont leurs prolongements, tracés en pointillés, qui se croisent.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Les trois rayons particuliers qui partent de $B$.</strong></p><ul><li><strong>Rayon 1</strong> : un rayon parallèle à l'axe optique ressort en passant par le foyer image $F'$.</li><li><strong>Rayon 2</strong> : un rayon qui passe par le centre optique $O$ n'est pas dévié.</li><li><strong>Rayon 3</strong> : un rayon qui passe par le foyer objet $F$ ressort parallèle à l'axe optique.</li></ul><p>Deux rayons suffisent pour trouver l'image ; le troisième sert à vérifier.</p></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Une lentille convergente a une distance focale $f = 2$ cm. Un objet $AB$ de 2 cm est placé à 6 cm de la lentille. Construis son image. (1 carreau = 1 cm)</p><ol><li>Je trace l'axe optique et la lentille, puis je place $O$, $F$ et $F'$ à l'échelle.</li><li>Je place l'objet $AB$, avec $A$ sur l'axe.</li><li>Je trace le rayon parallèle à l'axe : il ressort par $F'$. Je trace le rayon qui passe par $O$ : il n'est pas dévié.</li><li>Les deux rayons se croisent en $B'$. Je place $A'$ sur l'axe, à la verticale de $B'$.</li><li>Je mesure : $OA' = 3$ cm et $A'B' = 1$ cm. L'image est réelle, renversée et deux fois plus petite que l'objet.</li></ol><h2>Le piège à éviter</h2><p>Faire passer le rayon parallèle à l'axe par $F$ au lieu de $F'$, ou dévier le rayon qui passe par $O$. Autre erreur : s'arrêter à la lentille, sans prolonger le rayon jusqu'à la rencontre avec l'autre rayon.</p><h2>En une phrase</h2><p>Pour construire une image, je trace deux rayons particuliers depuis $B$ ; leur croisement est $B'$, et $A'$ est sur l'axe sous $B'$.</p>",
-          "exercises": [
-            {
-              "title": "Les rayons particuliers et la construction",
-              "statement": "Une lentille convergente a un centre optique $O$, un foyer objet $F$ et un foyer image $F'$. $B$ est le haut de l'objet $AB$, posé sur l'axe optique.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Un rayon issu de $B$ arrive sur la lentille parallèlement à l'axe optique. Que devient-il après la lentille ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un rayon parallèle à l'axe optique ressort en passant par le foyer image $F'$.",
-                  "answers": [
-                    {
-                      "content": "Il passe par le foyer image $F'$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il passe par le foyer objet $F$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il n'est pas dévié.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il ressort parallèle à l'axe.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un rayon issu de $B$ passe par le centre optique $O$. Que devient-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un rayon qui passe par le centre optique n'est pas dévié : il continue en ligne droite.",
-                  "answers": [
-                    {
-                      "content": "Il n'est pas dévié.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il passe par $F'$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il ressort parallèle à l'axe.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il est renvoyé vers l'objet.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quels rayons permettent de trouver l'image de $B$ ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "On utilise le rayon parallèle à l'axe (qui ressort par $F'$) et le rayon qui passe par $O$ (qui n'est pas dévié). Un rayon parallèle à l'axe ne passe pas par $F$ en sortant, et la lentille ne renvoie pas les rayons.",
-                  "answers": [
-                    {
-                      "content": "Le rayon parallèle à l'axe, qui ressort par $F'$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le rayon qui passe par $O$, qui n'est pas dévié.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le rayon parallèle à l'axe, qui ressort par $F$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un rayon qui rebondit sur la lentille.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une lentille convergente a $f = 2$ cm. Un objet $AB$ de 2 cm est à 6 cm de la lentille. Par construction, à quelle distance $OA'$ de la lentille, en cm, se forme l'image ?",
-                  "question_type": "numeric",
-                  "explanation": "Les deux rayons (parallèle à l'axe, puis par $O$) se croisent à 3 cm après la lentille : $OA' = 3$ cm. L'image est réelle et renversée.",
-                  "answers": [
-                    {
-                      "content": "3",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour trouver l'image, il faut obligatoirement tracer les trois rayons particuliers.",
-                  "question_type": "true_false",
-                  "explanation": "Deux rayons suffisent pour trouver $B'$ ; le troisième sert à vérifier la construction.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "L'œil, un système optique",
-          "subtitle": "Le modèle de l'œil réduit, l'accommodation et les défauts de l'œil",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Associer chaque partie de l'œil à un élément du modèle de l'œil réduit.</li><li>Expliquer l'accommodation.</li><li>Reconnaître la myopie, l'hypermétropie et la presbytie, et dire quelle lentille les corrige.</li></ul><h2>L'image pour comprendre</h2><p><strong>L'appareil photo du téléphone.</strong> Quand tu prends une photo, l'objectif laisse entrer la lumière et forme une image sur le capteur. Pour que la photo soit nette, le téléphone règle tout seul la mise au point, selon la distance de ce que tu photographies.</p><p><em>Le pont.</em> Ton œil fonctionne de la même façon. La pupille laisse entrer la lumière, le cristallin joue le rôle de l'objectif et la rétine celui du capteur. L'œil règle lui aussi sa mise au point tout seul.</p><p><em>Où l'image s'arrête.</em> Un appareil photo déplace son objectif pour faire la mise au point ; l'œil, lui, change la forme de son cristallin.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li><strong>Modèle de l'œil réduit</strong> : l'iris et la pupille sont un diaphragme, le cristallin est une lentille convergente, la rétine est un écran.</li><li>Pour voir net, l'image doit se former sur la rétine. Le cristallin se bombe plus ou moins pour y parvenir : c'est l'<strong>accommodation</strong>.</li><li><strong>Myopie</strong> : l'image se forme avant la rétine, on voit flou de loin ; on la corrige avec une lentille <strong>divergente</strong>.</li><li><strong>Hypermétropie</strong> : l'image se forme après la rétine, on voit flou de près ; on la corrige avec une lentille <strong>convergente</strong>.</li><li><strong>Presbytie</strong> : avec l'âge, le cristallin accommode moins bien, on voit flou de près ; on la corrige avec une lentille <strong>convergente</strong>.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Tom voit flou le tableau, mais lit très bien son cahier. L'image du tableau se forme avant sa rétine. Quel est son défaut ? Quelle lentille le corrige ?</p><ol><li>Tom voit flou de loin, et l'image se forme avant la rétine : il est myope.</li><li>L'œil de Tom est trop convergent : il faut écarter un peu les rayons avant qu'ils entrent dans l'œil.</li><li>On le corrige donc avec une lentille divergente.</li></ol><h2>Le piège à éviter</h2><p>Mélanger la myopie et l'hypermétropie, ou leurs corrections. Pour t'y retrouver : le myope voit flou de loin (image avant la rétine, lentille divergente) ; l'hypermétrope et le presbyte voient flou de près (image après la rétine, lentille convergente).</p><h2>En une phrase</h2><p>L'œil se comporte comme un appareil photo : le cristallin est la lentille, la rétine est l'écran, et les défauts de l'œil se corrigent avec des lentilles.</p>",
-          "exercises": [
-            {
-              "title": "L'œil et la correction de ses défauts",
-              "statement": "On étudie l'œil avec le modèle de l'œil réduit : un diaphragme, une lentille convergente et un écran.",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Dans le modèle de l'œil réduit, quel élément représente la rétine ?",
-                  "question_type": "single_choice",
-                  "explanation": "La rétine est la couche sensible au fond de l'œil, où se forme l'image : elle joue le rôle de l'écran.",
-                  "answers": [
-                    {
-                      "content": "L'écran.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La lentille convergente.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le diaphragme.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'axe optique.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel nom donne-t-on au réglage par lequel le cristallin change de forme pour que l'image reste nette sur la rétine ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce réglage automatique de l'œil s'appelle l'accommodation. Elle fonctionne comme la mise au point d'un appareil photo.",
-                  "answers": [
-                    {
-                      "content": "L'accommodation.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La presbytie.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La myopie.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La convergence.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un œil myope voit flou de loin : l'image se forme avant la rétine.",
-                  "question_type": "true_false",
-                  "explanation": "C'est bien la définition de la myopie : l'image des objets éloignés se forme avant la rétine.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle lentille corrige la myopie ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'œil myope est trop convergent : une lentille divergente écarte les rayons et ramène l'image sur la rétine.",
-                  "answers": [
-                    {
-                      "content": "Une lentille divergente.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une lentille convergente.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aucune lentille ne corrige la myopie.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quels défauts de l'œil se corrigent avec une lentille convergente ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'hypermétropie et la presbytie se corrigent avec une lentille convergente. La myopie se corrige avec une lentille divergente ; l'accommodation n'est pas un défaut, c'est le réglage normal de l'œil.",
-                  "answers": [
-                    {
-                      "content": "L'hypermétropie.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La presbytie.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La myopie.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'accommodation.",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
+              "param": "object_distance",
+              "min": 1,
+              "max": 30,
+              "step": 1,
+              "label": "Distance objet-lentille (cm)"
             }
           ]
         }
       ],
+      "notions": [
+        {
+          "name": "Lentilles convergentes et divergentes",
+          "remember": "Une **lentille** est un morceau de verre ou de plastique transparent dont une face au moins est bombée. **Lentille convergente** : bords minces, centre épais ; elle resserre un faisceau de rayons parallèles vers un point. **Lentille divergente** : bords épais, centre mince ; elle écarte les rayons d'un faisceau parallèle, qui semblent venir de F′. Vocabulaire : le **centre optique** O est le centre de la lentille, un rayon qui passe par O n'est pas dévié ; l'**axe optique principal** est la droite perpendiculaire à la lentille qui passe par O ; le **foyer image** F′ est le point où se croisent, après une lentille convergente, les rayons parallèles à l'axe ; le **foyer objet** F est le symétrique de F′ par rapport à O.",
+          "method": [
+            "Observer la forme de la lentille vue de profil.",
+            "Comparer l'épaisseur du centre à l'épaisseur des bords.",
+            "Conclure : centre plus épais que les bords, c'est une lentille convergente ; bords plus épais que le centre, c'est une lentille divergente.",
+            "Placer l'axe optique principal, le centre optique O et les foyers F et F′ si l'énoncé le demande."
+          ],
+          "example": {
+            "statement": "Un réparateur de téléphones prend une loupe. Vue de profil, son verre mesure 6 mm au centre et 2 mm sur les bords. Quelle est la nature de cette lentille et où se trouvent O, F et F′ ?",
+            "steps": [
+              "Observer : le verre est bombé, épais au milieu, mince au bord.",
+              "Comparer : le centre (6 mm) est plus épais que les bords (2 mm).",
+              "Conclure : le centre est plus épais que les bords, donc c'est une lentille convergente.",
+              "Placer : l'axe passe par le centre de la loupe ; O est le centre du verre ; F′ est de l'autre côté de O que la source de lumière et F est son symétrique par rapport à O."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une lentille convergente a les bords épais. Contre-exemple : une lentille mesure 2 mm au centre et 5 mm sur les bords. Elle a le centre mince, donc c'est une lentille divergente, même si son nom peut faire penser le contraire. Une lentille divergente ne concentre pas la lumière en un point : elle ne peut pas enflammer une feuille de papier avec le soleil. Compare toujours le centre et les bords.",
+          "figure": "lentille-convergente",
+          "exercise": {
+            "title": "Reconnaître une lentille convergente ou divergente",
+            "statement": "Dans cet exercice, tu reconnais les deux familles de lentilles et tu utilises le vocabulaire de la fiche : centre optique, axe optique principal, foyers.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle lentille a des bords plus minces que son centre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : on regarde l'épaisseur de la lentille au centre et sur les bords. Étape 2 — Comparer : ici les bords sont plus minces que le centre. Étape 3 — Conclure : centre plus épais que les bords, c'est une lentille convergente. La lentille divergente est l'inverse : ses bords sont plus épais que son centre.",
+                "answers": [
+                  {
+                    "content": "Une lentille convergente",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une lentille divergente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une lentille qui n'a pas de foyer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une lentille dont le centre optique est dévié",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille divergente est plus épaisse au centre que sur les bords.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : une lentille divergente a le centre mince. Étape 2 — Comparer : ses bords sont plus épais que son centre. Étape 3 — Conclure : l'affirmation est fausse. C'est la lentille convergente qui est plus épaisse au centre. Retiens : convergente = bords minces, divergente = bords épais.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Placer : on place sur le dessin l'axe optique principal, le centre optique O et les foyers. Le centre optique est le point où un rayon traverse sans être dévié. L'axe optique principal est la droite perpendiculaire à la lentille qui passe par O. Le foyer image F′ est le point où se croisent les rayons parallèles à l'axe après une lentille convergente.",
+                "answers": [
+                  {
+                    "content": "Centre optique O",
+                    "match": "Point de la lentille par lequel un rayon n'est pas dévié"
+                  },
+                  {
+                    "content": "Axe optique principal",
+                    "match": "Droite perpendiculaire à la lentille qui passe par son centre O"
+                  },
+                  {
+                    "content": "Foyer image F′",
+                    "match": "Point où se croisent, après une lentille convergente, les rayons parallèles à l'axe"
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille mesure 3 mm d'épaisseur au centre et 8 mm sur les bords : c'est une lentille ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Observer : le centre mesure 3 mm, les bords 8 mm. Étape 2 — Comparer : 3 mm est plus petit que 8 mm, donc le centre est plus mince que les bords. Étape 3 — Conclure : c'est une lentille divergente. Choisir convergente serait confondre : une convergente a le centre le plus épais.",
+                "answers": [
+                  {
+                    "content": "divergente",
+                    "correct": true
+                  },
+                  {
+                    "content": "convergente",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles affirmations sont vraies pour une lentille convergente ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Observer : la forme d'une lentille convergente est épaisse au centre et mince sur les bords. Étape 2 — Comparer : ses bords sont donc plus minces que son centre. Étape 3 — Conclure : elle resserre un faisceau parallèle vers F′. Les deux autres propositions décrivent la lentille divergente.",
+                "answers": [
+                  {
+                    "content": "Elle est plus épaisse au centre que sur les bords.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle écarte toujours les rayons d'un faisceau parallèle.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est plus mince au centre que sur les bords.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle fait converger vers le foyer image F′ un faisceau de rayons parallèles à l'axe.",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille dont les bords sont plus épais que le centre est une lentille ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Observer : les bords sont plus épais que le centre. Étape 2 — Comparer : le centre est la partie la plus mince. Étape 3 — Conclure : c'est une lentille divergente. L'erreur fréquente est de croire que « converge » veut dire « bords épais » : c'est l'inverse.",
+                "answers": [
+                  {
+                    "content": "divergente",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Distance focale et vergence",
+          "remember": "La **distance focale** $f$ d'une lentille convergente est la distance $OF'$ entre son centre optique O et son foyer image F′. Elle se mesure en mètres (m) ou en centimètres (cm) : $1\\ \\text{m} = 100\\ \\text{cm}$. La **vergence** $C$ mesure la capacité de la lentille à faire converger la lumière : $C = \\frac{1}{f}$, avec $f$ en **mètres** et $C$ en **dioptries** (symbole δ). On en déduit $f = \\frac{1}{C}$. Plus la distance focale est petite, plus la vergence est grande : la lentille est plus convergente.",
+          "method": [
+            "Relever la distance focale $f$ (ou la vergence $C$) donnée dans l'énoncé.",
+            "Convertir la distance focale en mètres.",
+            "Écrire la formule $C = \\frac{1}{f}$, ou $f = \\frac{1}{C}$ si l'on cherche la distance focale.",
+            "Remplacer par les valeurs, puis calculer.",
+            "Donner le résultat avec son unité : dioptries (δ) pour $C$, mètres ou centimètres pour $f$."
+          ],
+          "example": {
+            "statement": "La loupe d'un réparateur de téléphones est une lentille convergente de distance focale 25 cm. Calculer sa vergence.",
+            "steps": [
+              "Relever : $f = 25\\ \\text{cm}$.",
+              "Convertir : $25\\ \\text{cm} = 0{,}25\\ \\text{m}$.",
+              "Écrire : $C = \\frac{1}{f}$.",
+              "Remplacer et calculer : $C = \\frac{1}{0{,}25} = 4$.",
+              "Donner : $C = 4\\ \\delta$."
+            ]
+          },
+          "pitfall": "Ne pas oublier de convertir la distance focale en mètres avant de calculer. Contre-exemple : $f = 10\\ \\text{cm}$. Si tu écris $C = \\frac{1}{10} = 0{,}1\\ \\delta$, tu utilises des centimètres. En convertissant, $f = 0{,}10\\ \\text{m}$ et $C = \\frac{1}{0{,}10} = 10\\ \\delta$. Le premier résultat est 100 fois trop petit. Convertis toujours $f$ en mètres.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une vergence ou une distance focale",
+            "statement": "Dans cet exercice, tu passes de la distance focale à la vergence et inversement, avec la méthode de la fiche. Rappel : $1\\ \\text{m} = 100\\ \\text{cm}$.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "La distance focale d'une lentille convergente vaut 50 cm. Quelle est sa vergence ?",
+                "question_type": "numeric",
+                "unit": "δ",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $f = 50\\ \\text{cm}$. Étape 2 — Convertir : $50\\ \\text{cm} = 0{,}50\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}50} = 2$. Étape 5 — Donner : $C = 2\\ \\delta$. Si tu calcules $\\frac{1}{50} = 0{,}02$, tu as oublié de convertir en mètres.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente a une distance focale de 20 cm. Quelle est sa vergence, en dioptries ?",
+                "question_type": "numeric",
+                "unit": "δ",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $f = 20\\ \\text{cm}$. Étape 2 — Convertir : $20\\ \\text{cm} = 0{,}20\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}20} = 5$. Étape 5 — Donner : $C = 5\\ \\delta$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un modèle de laboratoire est une lentille convergente de distance focale 4 cm. Quelle est sa vergence, en dioptries ?",
+                "question_type": "numeric",
+                "unit": "δ",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $f = 4\\ \\text{cm}$. Étape 2 — Convertir : $4\\ \\text{cm} = 0{,}04\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}04} = 25$. Étape 5 — Donner : $C = 25\\ \\delta$. Avec $\\frac{1}{4} = 0{,}25$ on aurait trouvé un résultat 100 fois trop petit : la conversion en mètres est indispensable.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La loupe d'un réparateur de téléphones a une vergence de 8 δ. Quelle est sa distance focale, en centimètres ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $C = 8\\ \\delta$ et on cherche $f$. Étape 2 — Convertir : la vergence est déjà en dioptries, donc $f$ sortira en mètres. Étape 3 — Écrire : $f = \\frac{1}{C}$. Étape 4 — Remplacer et calculer : $f = \\frac{1}{8} = 0{,}125\\ \\text{m}$. Étape 5 — Donner : $f = 0{,}125\\ \\text{m} = 12{,}5\\ \\text{cm}$.",
+                "answers": [
+                  {
+                    "content": "12,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente a une vergence de 2,5 δ. Quelle est sa distance focale, en centimètres ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $C = 2{,}5\\ \\delta$. Étape 2 — Convertir : rien à convertir, $f$ sortira en mètres. Étape 3 — Écrire : $f = \\frac{1}{C}$. Étape 4 — Remplacer et calculer : $f = \\frac{1}{2{,}5} = 0{,}4\\ \\text{m}$. Étape 5 — Donner : $f = 0{,}4\\ \\text{m} = 40\\ \\text{cm}$.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quatre lentilles convergentes ont pour distances focales 5 cm, 10 cm, 25 cm et 50 cm. Laquelle est la plus convergente, c'est-à-dire a la plus grande vergence ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : f = 5 cm, 10 cm, 25 cm, 50 cm. Étape 2 — Convertir : 0,05 m ; 0,10 m ; 0,25 m ; 0,50 m. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : 20 δ, 10 δ, 4 δ, 2 δ. Étape 5 — Donner : la plus grande vergence est 20 δ, pour la focale de 5 cm. Plus la distance focale est petite, plus la lentille est convergente.",
+                "answers": [
+                  {
+                    "content": "Celle de 50 cm (2 δ)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Celle de 5 cm (20 δ)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Celle de 25 cm (4 δ)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Celle de 10 cm (10 δ)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente de distance focale 10 cm a une vergence $C = \\frac{1}{10} = 0{,}1\\ \\delta$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : $f = 10\\ \\text{cm}$. Étape 2 — Convertir : $10\\ \\text{cm} = 0{,}10\\ \\text{m}$ ; c'est l'étape oubliée dans l'affirmation. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}10} = 10$. Étape 5 — Donner : $C = 10\\ \\delta$. L'affirmation est donc fausse : 0,1 est 100 fois trop petit.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Construire l'image avec les rayons particuliers",
+          "remember": "Pour un objet AB perpendiculaire à l'axe, avec A sur l'axe, on trace deux rayons particuliers issus de B. Le rayon qui passe par le centre optique O n'est **pas dévié**. Le rayon **parallèle à l'axe** émerge en passant par le foyer image F′. Le rayon qui passe par le foyer objet F émerge **parallèle à l'axe** (il peut servir de vérification). Le point B′, image de B, est à l'intersection des rayons émergents ; A′ est sur l'axe, à la verticale de B′. L'image est **réelle** si les rayons émergents se croisent (on peut la recueillir sur un écran), **virtuelle** si ce sont leurs prolongements qui se croisent.",
+          "method": [
+            "Placer l'axe optique, la lentille, son centre O, puis les foyers F et F′ à la distance $f$ de O.",
+            "Placer l'objet AB perpendiculaire à l'axe, avec A sur l'axe.",
+            "Tracer le rayon issu de B qui passe par O : il n'est pas dévié.",
+            "Tracer le rayon issu de B parallèle à l'axe : il émerge en passant par F′.",
+            "Repérer B′ à l'intersection des rayons émergents (ou de leurs prolongements), puis placer A′ sur l'axe.",
+            "Mesurer OA′ et A′B′ sur le dessin, puis dire si l'image est réelle ou virtuelle, droite ou renversée."
+          ],
+          "example": {
+            "statement": "Une lentille convergente a une distance focale de 4 cm. Un objet AB de 2 cm de haut est à 12 cm de O. Construire l'image à l'échelle 1 et la décrire.",
+            "steps": [
+              "Placer : O au centre ; F à 4 cm à gauche de O et F′ à 4 cm à droite.",
+              "Placer l'objet : AB à 12 cm à gauche de O, B à 2 cm au-dessus de l'axe.",
+              "Tracer le rayon issu de B qui passe par O : il continue tout droit.",
+              "Tracer le rayon issu de B parallèle à l'axe : il émerge en passant par F′.",
+              "Repérer B′ : les rayons émergents se croisent à 6 cm de O, à 1 cm sous l'axe ; A′ est sur l'axe, à 6 cm de O.",
+              "Mesurer : $OA' = 6\\ \\text{cm}$ et $A'B' = 1\\ \\text{cm}$ ; les rayons se croisent vraiment et B′ est sous l'axe, donc l'image est réelle, renversée et réduite."
+            ]
+          },
+          "pitfall": "Ne pas confondre F et F′. Le rayon parallèle à l'axe émerge en passant par F′, de l'autre côté de la lentille. Contre-exemple : $f = 4\\ \\text{cm}$, objet à 12 cm, B à 2 cm de hauteur. Si tu fais passer le rayon par F (à 4 cm côté objet), il croise le rayon par O à 3 cm de la lentille, du côté de l'objet : ce n'est pas la bonne image. Avec F′, tu trouves 6 cm de l'autre côté. Place F′ du côté opposé à l'objet.",
+          "figure": "lentille-convergente",
+          "exercise": {
+            "title": "Construire l'image avec les rayons particuliers",
+            "statement": "Dans cet exercice, tu construis l'image d'un objet avec les rayons particuliers, comme dans la fiche. La figure de la leçon montre la lentille de distance focale 4 cm : règle le curseur pour comparer avec ta construction.",
+            "exercise_type": "fixation",
+            "figure": "lentille-convergente",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les étapes de la construction de l'image d'un objet AB par une lentille convergente.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Placer : on commence par l'axe, la lentille, O, F et F′. Étape 2 — Placer l'objet : AB est perpendiculaire à l'axe. Étape 3 — Tracer le rayon par O. Étape 4 — Tracer le rayon parallèle à l'axe, qui émerge par F′. Étape 5 — Repérer B′ à l'intersection, puis A′. On ne peut pas tracer les rayons avant d'avoir placé la lentille, les foyers et l'objet, ni repérer B′ avant d'avoir tracé les deux rayons.",
+                "answers": [
+                  {
+                    "content": "Placer l'axe optique, la lentille, son centre O et les foyers F et F′."
+                  },
+                  {
+                    "content": "Placer l'objet AB perpendiculaire à l'axe, avec A sur l'axe."
+                  },
+                  {
+                    "content": "Tracer le rayon issu de B qui passe par O."
+                  },
+                  {
+                    "content": "Tracer le rayon issu de B parallèle à l'axe, qui émerge par F′."
+                  },
+                  {
+                    "content": "Repérer B′ à l'intersection des rayons émergents, puis placer A′ sur l'axe."
+                  }
+                ]
+              },
+              {
+                "content": "Un rayon lumineux issu de B passe par le centre optique O d'une lentille convergente. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Tracer le rayon issu de B qui passe par O : au centre optique, les deux faces de la lentille sont parallèles, donc le rayon n'est pas dévié et continue en ligne droite. Il ne passe pas par F′ (c'est le rayon parallèle à l'axe qui émerge par F′) et il n'émerge pas parallèle à l'axe (c'est le rayon qui passe par F).",
+                "answers": [
+                  {
+                    "content": "Il émerge en passant par F′",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il émerge parallèlement à l'axe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est dévié vers le haut",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il traverse la lentille sans être dévié",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles affirmations sont vraies pour une lentille convergente ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Tracer le rayon par O : il continue tout droit, sans déviation. Étape 4 — Tracer un rayon particulier : le rayon qui arrive en passant par F émerge parallèle à l'axe ; le rayon qui arrive parallèle à l'axe émerge en passant par F′. Les deux propositions fausses mélangent ces rayons : le rayon par O ne passe pas par F′ et le rayon parallèle ne passe pas par O.",
+                "answers": [
+                  {
+                    "content": "Le rayon qui passe par le centre optique O n'est pas dévié.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un rayon parallèle à l'axe émerge en passant par O.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le rayon qui passe par le centre optique O émerge en passant par F′.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le rayon qui passe par le foyer objet F émerge parallèlement à l'axe.",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On construit, à l'échelle 1, l'image d'un objet AB de 2 cm de haut, perpendiculaire à l'axe d'une lentille convergente de distance focale 4 cm. A est sur l'axe, à 12 cm de O. À quelle distance de O se forme A′ ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Placer : O, F et F′ à 4 cm de O de chaque côté. Étape 2 — Placer l'objet : AB est à 12 cm à gauche de O, B est à 2 cm au-dessus de l'axe. Étape 3 — Tracer le rayon par O : il va de B vers O et continue tout droit. Étape 4 — Tracer le rayon parallèle à l'axe : il arrive à la lentille à 2 cm de hauteur et émerge en passant par F′. Étape 5 — Repérer B′ : les deux rayons se croisent à 6 cm de O, 1 cm sous l'axe. Étape 6 — Mesurer : $OA' = 6\\ \\text{cm}$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On construit, à l'échelle 1, l'image d'un objet AB de 2 cm de haut, perpendiculaire à l'axe d'une lentille convergente de distance focale 4 cm. A est sur l'axe, à 12 cm de O. Quelle est la hauteur A′B′ de l'image, mesurée sur le dessin ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Placer : O, F et F′ à 4 cm de O. Étape 2 — Placer l'objet : AB mesure 2 cm, à 12 cm de O. Étape 3 — Tracer le rayon par O. Étape 4 — Tracer le rayon parallèle à l'axe, qui émerge par F′. Étape 5 — Repérer B′ : les deux rayons se croisent à 6 cm de O et à 1 cm sous l'axe. Étape 6 — Mesurer : $A'B' = 1\\ \\text{cm}$. L'image est deux fois plus petite que l'objet.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans cette construction (f = 4 cm, objet à 12 cm), les rayons émergents se croisent vraiment après la lentille : l'image est ___.",
+                "question_type": "select",
+                "explanation": "Étape 5 — Repérer B′ : les rayons émergents se coupent réellement, à 6 cm de la lentille. Étape 6 — Lire la nature : quand ce sont les rayons eux-mêmes qui se croisent, l'image est réelle et on peut la recueillir sur un écran. Elle serait virtuelle si seuls leurs prolongements se croisaient.",
+                "answers": [
+                  {
+                    "content": "réelle",
+                    "correct": true
+                  },
+                  {
+                    "content": "virtuelle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour une lentille convergente de distance focale 4 cm, le rayon parallèle à l'axe émerge en passant par un point situé à 4 cm de O, du côté de l'objet.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Placer : F′ est du côté opposé à l'objet, à 4 cm de O ; F est du côté de l'objet. Étape 4 — Tracer le rayon parallèle à l'axe : il émerge en passant par F′, donc de l'autre côté de la lentille. L'affirmation est fausse. Si on le faisait passer par F, on trouverait B′ à 3 cm de O du côté de l'objet, ce qui est impossible pour une image réelle.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Décris en quelques phrases comment tu construis l'image du point B d'un objet AB par une lentille convergente, avec deux rayons particuliers.",
+                "question_type": "written",
+                "points": 3,
+                "criteria": [
+                  "Placer l'axe, la lentille, O, F et F′ avant de tracer",
+                  "Tracer le rayon par O sans déviation",
+                  "Tracer le rayon parallèle à l'axe qui émerge par F′",
+                  "Placer B′ au croisement puis A′ sur l'axe"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Placer : je place l'axe, la lentille, le centre optique O et les foyers F et F′. Étape 2 — Placer l'objet AB perpendiculaire à l'axe. Étape 3 — Tracer le rayon issu de B qui passe par O : il n'est pas dévié. Étape 4 — Tracer le rayon issu de B parallèle à l'axe : il émerge en passant par F′. Étape 5 — Repérer B′ à l'intersection des rayons émergents, puis A′ sur l'axe, sous B′. Barème (3 points) : 1 point pour le matériel placé, 1 point pour les deux rayons corrects, 1 point pour B′ et A′.",
+                "answers": [],
+                "starter": "Je place d'abord…"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Nature de l'image selon la position de l'objet",
+          "remember": "Avec une lentille convergente de distance focale $f$, la nature de l'image dépend de la distance $d$ entre l'objet et le centre optique. Si $d > 2f$ : image **réelle, renversée, réduite**. Si $d = 2f$ : réelle, renversée, de **même taille**. Si $f < d < 2f$ : réelle, renversée, **agrandie**. Si $d = f$ (objet en F) : les rayons émergent parallèles, il n'y a pas d'image nette (image à l'infini). Si $d < f$ (objet entre O et F) : image **virtuelle, droite, agrandie** (effet de loupe). Une image **réelle** se recueille sur un écran ; une image **virtuelle** ne se recueille pas, on la voit en regardant à travers la lentille. Une lentille **divergente** donne toujours une image virtuelle, droite et réduite.",
+          "method": [
+            "Relever la distance $d$ de l'objet à la lentille et la distance focale $f$, en centimètres.",
+            "Calculer $2f$, le double de la distance focale.",
+            "Comparer $d$ à $f$ et à $2f$.",
+            "Conclure : dire si l'image est réelle ou virtuelle, droite ou renversée, agrandie ou réduite."
+          ],
+          "example": {
+            "statement": "Une lentille convergente a une distance focale de 4 cm. Un objet est placé à 6 cm de son centre optique. Donner la nature de l'image.",
+            "steps": [
+              "Relever : $d = 6\\ \\text{cm}$ et $f = 4\\ \\text{cm}$.",
+              "Calculer $2f$ : $2f = 2 \\times 4 = 8\\ \\text{cm}$.",
+              "Comparer : $4\\ \\text{cm} < 6\\ \\text{cm} < 8\\ \\text{cm}$, donc $f < d < 2f$.",
+              "Conclure : l'image est réelle, renversée et agrandie. En réglant le curseur de la figure sur 6 cm, on lit une image à 12 cm de la lentille, deux fois plus grande."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une image agrandie est forcément virtuelle. Contre-exemple : $f = 4\\ \\text{cm}$ et $d = 6\\ \\text{cm}$. L'image est deux fois plus grande que l'objet, mais elle est réelle et renversée : on peut la recevoir sur un écran. L'image est virtuelle, droite et agrandie seulement si l'objet est entre O et F, c'est-à-dire si $d < f$. Compare toujours $d$ à $f$ et à $2f$.",
+          "figure": "lentille-convergente",
+          "exercise": {
+            "title": "Donner la nature de l'image selon la position de l'objet",
+            "statement": "Dans cet exercice, tu donnes la nature de l'image d'un objet selon sa position, avec la méthode de la fiche. Tu peux vérifier tes réponses avec le curseur de la figure, qui représente une lentille convergente de distance focale 4 cm.",
+            "exercise_type": "fixation",
+            "figure": "lentille-convergente",
+            "questions": [
+              {
+                "content": "Une lentille convergente a une distance focale de 4 cm. Un objet est placé à 12 cm de son centre optique. Quelle est la nature de l'image ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $d = 12\\ \\text{cm}$ et $f = 4\\ \\text{cm}$. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : $12\\ \\text{cm}$ est plus grand que $2f = 8\\ \\text{cm}$. Étape 4 — Conclure : l'objet est au-delà de 2f, donc l'image est réelle, renversée et réduite. C'est ce que la figure montre pour 12 cm : l'image est à 6 cm, deux fois plus petite que l'objet. Agrandie serait vrai seulement si l'objet était plus près.",
+                "answers": [
+                  {
+                    "content": "Réelle, renversée et réduite",
+                    "correct": true
+                  },
+                  {
+                    "content": "Réelle, renversée et agrandie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Virtuelle, droite et agrandie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Virtuelle, droite et réduite",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente a une distance focale de 4 cm. Un objet est placé à 2 cm de son centre optique. Quelle est la nature de l'image ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $d = 2\\ \\text{cm}$ et $f = 4\\ \\text{cm}$. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : $2\\ \\text{cm}$ est plus petit que $f = 4\\ \\text{cm}$ : l'objet est entre O et F. Étape 4 — Conclure : l'image est virtuelle, droite et agrandie : c'est l'effet de loupe. Sur la figure, pour 2 cm, l'image est à 4 cm du même côté que l'objet, deux fois plus grande.",
+                "answers": [
+                  {
+                    "content": "Réelle, renversée et agrandie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Réelle, renversée et réduite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Virtuelle, droite et agrandie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Virtuelle, renversée et réduite",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente de distance focale 4 cm donne d'un objet placé à 8 cm de son centre optique une image renversée, de même taille que l'objet. À quelle distance de O se forme cette image ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $d = 8\\ \\text{cm}$ et $f = 4\\ \\text{cm}$. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : $d = 2f$ : l'objet est exactement à 2f de la lentille. Étape 4 — Conclure : l'image est réelle, renversée et de même taille que l'objet. Elle se forme à la même distance de O de l'autre côté, soit 8 cm. Tu peux le vérifier en réglant le curseur de la figure sur 8 cm.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente de distance focale 4 cm donne d'un objet de 2 cm de haut, placé à 6 cm de O, une image deux fois plus grande que l'objet. Quelle est la hauteur de l'image ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $d = 6\\ \\text{cm}$, $f = 4\\ \\text{cm}$ et l'objet mesure 2 cm. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : $4\\ \\text{cm} < 6\\ \\text{cm} < 8\\ \\text{cm}$ : l'objet est entre f et 2f. Étape 4 — Conclure : l'image est réelle, renversée et agrandie, ici deux fois plus grande : $2 \\times 2\\ \\text{cm} = 4\\ \\text{cm}$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente a une distance focale de 4 cm. Pour quelles distances objet-lentille l'image est-elle réelle ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : $f = 4\\ \\text{cm}$ ; les distances proposées sont 2, 3, 6 et 10 cm. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : 2 cm et 3 cm sont plus petits que $f$ : l'objet est entre O et F. 6 cm est entre f et 2f. 10 cm est plus grand que 2f. Étape 4 — Conclure : l'image est réelle quand l'objet est au-delà de F, donc pour 6 cm et pour 10 cm. Pour 2 cm et 3 cm, l'image est virtuelle.",
+                "answers": [
+                  {
+                    "content": "6 cm",
+                    "correct": true
+                  },
+                  {
+                    "content": "3 cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 cm",
+                    "correct": false
+                  },
+                  {
+                    "content": "10 cm",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une lentille convergente a une distance focale de 5 cm. Relie chaque distance objet-lentille à la nature de l'image.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever : $f = 5\\ \\text{cm}$ ; distances : 20, 10, 7 et 3 cm. Étape 2 — Calculer 2f : $2f = 10\\ \\text{cm}$. Étape 3 — Comparer : 20 cm est plus grand que 10 cm ; 10 cm est égal à 2f ; 7 cm est entre 5 et 10 cm ; 3 cm est plus petit que 5 cm. Étape 4 — Conclure : 20 cm : réelle, renversée, réduite. 10 cm : réelle, renversée, de même taille. 7 cm : réelle, renversée, agrandie. 3 cm : virtuelle, droite, agrandie.",
+                "answers": [
+                  {
+                    "content": "20 cm",
+                    "match": "Réelle, renversée, réduite"
+                  },
+                  {
+                    "content": "10 cm",
+                    "match": "Réelle, renversée, de même taille"
+                  },
+                  {
+                    "content": "7 cm",
+                    "match": "Réelle, renversée, agrandie"
+                  },
+                  {
+                    "content": "3 cm",
+                    "match": "Virtuelle, droite, agrandie"
+                  }
+                ]
+              },
+              {
+                "content": "Un objet est placé devant une lentille divergente, à n'importe quelle distance. Quelle est la nature de l'image ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : la lentille est divergente, la distance de l'objet n'a pas d'importance. Étape 2 — Calculer 2f : inutile ici, car la lentille divergente n'a pas de position qui change la nature de l'image. Étape 3 — Comparer : avec une lentille divergente, les rayons émergents s'écartent toujours, quelle que soit la distance ; seuls leurs prolongements se croisent. Étape 4 — Conclure : l'image est toujours virtuelle, droite et réduite, donc impossible à recueillir sur un écran.",
+                "answers": [
+                  {
+                    "content": "Réelle, renversée et réduite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Virtuelle, droite et réduite",
+                    "correct": true
+                  },
+                  {
+                    "content": "Virtuelle, droite et agrandie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Réelle, droite et agrandie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une image agrandie est toujours une image virtuelle.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : prenons $f = 4\\ \\text{cm}$ et $d = 6\\ \\text{cm}$. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : $4\\ \\text{cm} < 6\\ \\text{cm} < 8\\ \\text{cm}$. Étape 4 — Conclure : l'image est agrandie mais réelle et renversée. L'affirmation est fausse : seul un objet placé entre O et F donne une image à la fois virtuelle, droite et agrandie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Loupe, appareil photographique et projecteur",
+          "remember": "Dans le modèle d'une seule lentille convergente : la **loupe** donne, d'un objet placé entre O et F ($d < f$), une image **virtuelle, droite, agrandie** que l'on regarde à travers la lentille. L'**appareil photographique** (l'appareil photo d'un smartphone par exemple) photographie un objet éloigné ($d > 2f$) : l'image est **réelle, renversée, réduite** et se forme sur le capteur. Le **projecteur** (le vidéoprojecteur de la classe) place l'image à projeter entre F et 2f ($f < d < 2f$) : l'image sur l'écran est **réelle, renversée, agrandie**. Un écran ne reçoit qu'une image réelle.",
+          "method": [
+            "Identifier l'instrument et ce que l'on veut : regarder à l'œil, recevoir sur un capteur ou projeter sur un écran.",
+            "Dire si l'image doit être réelle (capteur, écran) ou virtuelle (observation à l'œil).",
+            "En déduire la position de l'objet : $d < f$, $d > 2f$ ou $f < d < 2f$.",
+            "Conclure : nommer l'instrument et décrire l'image (droite ou renversée, agrandie ou réduite)."
+          ],
+          "example": {
+            "statement": "Un réparateur de téléphones observe une carte électronique avec une loupe de distance focale 5 cm. Il place la carte à 3 cm de la lentille. Décrire l'image.",
+            "steps": [
+              "Identifier : une loupe, utilisée pour regarder à travers la lentille.",
+              "Dire : il n'y a pas d'écran, l'image que voit le réparateur est virtuelle.",
+              "En déduire la position : $d = 3\\ \\text{cm}$ est plus petit que $f = 5\\ \\text{cm}$, l'objet est entre O et F.",
+              "Conclure : l'image est virtuelle, droite et agrandie, ce qui permet de voir les petits détails."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un écran peut recevoir une image virtuelle. Contre-exemple : une loupe de distance focale 5 cm, la carte à 3 cm de la lentille. L'image est virtuelle, droite et agrandie : tu la vois en regardant dans la lentille, mais aucun écran, quelle que soit sa position, ne l'affiche. Pour projeter, il faut une image réelle, donc un objet placé au-delà de F ($d > f$).",
+          "figure": "lentille-loupe",
+          "exercise": {
+            "title": "Loupe, appareil photographique et projecteur",
+            "statement": "Dans cet exercice, tu reconnais le rôle de la lentille dans une loupe, dans l'appareil photo d'un smartphone et dans un vidéoprojecteur, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pour qu'une lentille convergente serve de loupe, où faut-il placer l'objet ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : une loupe : on regarde à travers la lentille. Étape 2 — Dire si l'image est réelle ou virtuelle : on voit l'image sans écran, donc elle est virtuelle. Étape 3 — En déduire la position de l'objet : une image virtuelle, droite et agrandie s'obtient quand $d < f$, c'est-à-dire entre O et F. Étape 4 — Conclure : l'objet se place entre O et F. En F il n'y a pas d'image nette ; au-delà de F l'image est réelle et renversée.",
+                "answers": [
+                  {
+                    "content": "Exactement au foyer objet F",
+                    "correct": false
+                  },
+                  {
+                    "content": "Entre F et le point situé à 2f",
+                    "correct": false
+                  },
+                  {
+                    "content": "Très loin de la lentille, au-delà de 2f",
+                    "correct": false
+                  },
+                  {
+                    "content": "Entre le centre optique O et le foyer objet F",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque instrument à l'image qu'il donne dans le modèle d'une seule lentille convergente.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : trois instruments : loupe, appareil photographique, projecteur. Étape 2 — Dire si l'image est réelle ou virtuelle : la loupe se regarde à l'œil nu (virtuelle) ; l'appareil photo et le projecteur forment une image sur un capteur ou un écran (réelle). Étape 3 — En déduire la position de l'objet : loupe : $d < f$ ; appareil photo : $d > 2f$ ; projecteur : $f < d < 2f$. Étape 4 — Conclure : loupe : virtuelle, droite, agrandie ; appareil photo : réelle, renversée, réduite ; projecteur : réelle, renversée, agrandie.",
+                "answers": [
+                  {
+                    "content": "Loupe du réparateur de téléphones",
+                    "match": "Virtuelle, droite, agrandie"
+                  },
+                  {
+                    "content": "Appareil photo du smartphone, objet éloigné",
+                    "match": "Réelle, renversée, réduite"
+                  },
+                  {
+                    "content": "Vidéoprojecteur de la classe",
+                    "match": "Réelle, renversée, agrandie, sur un écran"
+                  }
+                ]
+              },
+              {
+                "content": "L'objectif d'un vidéoprojecteur a une distance focale de 10 cm. L'image à projeter est placée à 15 cm de la lentille. L'image sur l'écran est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : un vidéoprojecteur : on veut une image sur un écran. Étape 2 — Dire si l'image est réelle ou virtuelle : un écran ne reçoit qu'une image réelle. Étape 3 — En déduire la position de l'objet : $f = 10\\ \\text{cm}$, $2f = 20\\ \\text{cm}$ et $d = 15\\ \\text{cm}$ : $f < d < 2f$. Étape 4 — Conclure : l'image est réelle, renversée et agrandie. Réduite correspondrait à $d > 20\\ \\text{cm}$ et de même taille à $d = 20\\ \\text{cm}$.",
+                "answers": [
+                  {
+                    "content": "réduite",
+                    "correct": false
+                  },
+                  {
+                    "content": "agrandie",
+                    "correct": true
+                  },
+                  {
+                    "content": "de même taille",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un smartphone photographie un arbre très éloigné de l'objectif (d plus grand que 2f). Quelles propriétés a l'image formée sur le capteur ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier : l'appareil photo d'un smartphone, qui forme une image sur un capteur. Étape 2 — Dire si l'image est réelle ou virtuelle : le capteur reçoit l'image : elle est donc réelle. Étape 3 — En déduire la position de l'objet : l'arbre est très loin, donc $d > 2f$. Étape 4 — Conclure : pour $d > 2f$ l'image est réelle, renversée et réduite. Les propositions virtuelle, droite et agrandie décrivent l'effet de loupe, qui demande $d < f$.",
+                "answers": [
+                  {
+                    "content": "Agrandie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Droite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Virtuelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Réduite",
+                    "correct": true
+                  },
+                  {
+                    "content": "Renversée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Réelle",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On peut recueillir sur un écran l'image donnée par une loupe.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : une loupe, utilisée pour regarder. Étape 2 — Dire si l'image est réelle ou virtuelle : avec la loupe, l'objet est entre O et F : l'image est virtuelle. Étape 3 — En déduire la position de l'objet : $d < f$. Étape 4 — Conclure : une image virtuelle n'existe pas à l'endroit où l'on pose un écran, donc l'affirmation est fausse. On la voit seulement en regardant à travers la lentille.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une image que l'on ne peut pas recueillir sur un écran est une image ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : l'image est visible à l'œil à travers la lentille. Étape 2 — Dire si l'image est réelle ou virtuelle : pas d'écran possible : elle est virtuelle. Étape 3 — En déduire la position de l'objet : $d < f$ pour une loupe. Étape 4 — Conclure : le mot attendu est virtuelle. Le mot réelle serait faux : une image réelle se recueille sur un écran.",
+                "answers": [
+                  {
+                    "content": "virtuelle",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
       "exercises": [
         {
-          "title": "Problème 1 — La loupe de Koffi",
-          "statement": "Koffi observe un grain de sable avec une loupe. La loupe est une lentille convergente de distance focale $f = 8$ cm. Il place le grain à 5 cm de la loupe.",
-          "exercise_type": "evaluation",
+          "title": "La loupe du réparateur de téléphones",
+          "statement": "Un réparateur de téléphones d'Abidjan utilise une loupe pour regarder un connecteur de 2 cm de long sur une carte électronique. La loupe est une lentille convergente de distance focale 5 cm. La figure montre la lentille, avec la carte placée à 2,5 cm.",
+          "exercise_type": "fixation",
+          "figure": "lentille-loupe",
           "questions": [
             {
-              "content": "Où se trouve le grain de sable par rapport au foyer objet de la loupe ?",
+              "content": "Un réparateur de téléphones utilise une loupe, c'est-à-dire une lentille de distance focale 5 cm. De quel type de lentille s'agit-il ?",
               "question_type": "single_choice",
-              "explanation": "Le grain est à 5 cm de la loupe, et le foyer est à $f = 8$ cm : le grain est entre la lentille et le foyer.",
+              "explanation": "Une loupe grossit : elle ne peut pas être divergente. Étape 1 — Observer : une loupe est bombée, épaisse au centre. Étape 2 — Comparer : le centre est plus épais que les bords. Étape 3 — Conclure : c'est une lentille convergente. Une lentille divergente ne donnerait qu'une image réduite.",
               "answers": [
                 {
-                  "content": "Entre la lentille et le foyer objet.",
+                  "content": "Une lentille convergente",
                   "correct": true
                 },
                 {
-                  "content": "Au foyer objet.",
+                  "content": "Une lentille divergente",
                   "correct": false
                 },
                 {
-                  "content": "Plus loin que le foyer objet.",
+                  "content": "Une lentille qui n'a pas de foyer",
+                  "correct": false
+                },
+                {
+                  "content": "Une lentille à bords épais",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Comment est l'image du grain de sable ?",
-              "question_type": "single_choice",
-              "explanation": "Un objet entre la lentille et le foyer donne une image virtuelle, droite et plus grande que lui : c'est l'effet loupe.",
-              "answers": [
-                {
-                  "content": "Virtuelle, droite et agrandie.",
-                  "correct": true
-                },
-                {
-                  "content": "Réelle, renversée et agrandie.",
-                  "correct": false
-                },
-                {
-                  "content": "Réelle, renversée et plus petite.",
-                  "correct": false
-                },
-                {
-                  "content": "Il n'y a pas d'image nette.",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Koffi peut recueillir cette image sur un écran.",
-              "question_type": "true_false",
-              "explanation": "L'image est virtuelle : on la voit en regardant à travers la loupe, mais on ne peut pas la recueillir sur un écran.",
-              "answers": [
-                {
-                  "content": "Vrai",
-                  "correct": false
-                },
-                {
-                  "content": "Faux",
-                  "correct": true
-                }
-              ]
-            },
-            {
-              "content": "À quelle distance de la loupe, en cm, Koffi devrait-il placer le grain pour que les rayons ressortent parallèles, sans image nette ?",
+              "content": "La loupe du réparateur est une lentille convergente de distance focale 5 cm. Quelle est sa vergence, en dioptries ?",
               "question_type": "numeric",
-              "explanation": "Il n'y a pas d'image nette quand l'objet est au foyer objet, c'est-à-dire à $OA = f = 8$ cm.",
+              "unit": "δ",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $f = 5\\ \\text{cm}$. Étape 2 — Convertir : $5\\ \\text{cm} = 0{,}05\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}05} = 20$. Étape 5 — Donner : $C = 20\\ \\delta$. Avec $\\frac{1}{5} = 0{,}2$, on aurait oublié de convertir.",
               "answers": [
                 {
-                  "content": "8",
+                  "content": "20",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Koffi éloigne le grain à 20 cm de la loupe. Comment devient l'image ?",
+              "content": "Le réparateur observe un connecteur de 2 cm de long placé à 2,5 cm d'une lentille convergente de distance focale 5 cm. Quelle est la nature de l'image ?",
               "question_type": "single_choice",
-              "explanation": "$OA = 20$ cm est plus grand que $2f = 16$ cm : l'image est réelle, renversée et plus petite que l'objet.",
+              "explanation": "Étape 1 — Relever : $d = 2{,}5\\ \\text{cm}$ et $f = 5\\ \\text{cm}$. Étape 2 — Calculer 2f : $2f = 10\\ \\text{cm}$. Étape 3 — Comparer : $2{,}5\\ \\text{cm} < f$, l'objet est entre O et F. Étape 4 — Conclure : l'image est virtuelle, droite et agrandie. C'est ce que montre la figure de la loupe. Une image réelle demanderait $d > f$.",
               "answers": [
                 {
-                  "content": "Réelle, renversée et plus petite.",
+                  "content": "Réelle, renversée et agrandie",
+                  "correct": false
+                },
+                {
+                  "content": "Réelle, renversée et réduite",
+                  "correct": false
+                },
+                {
+                  "content": "Virtuelle, droite et agrandie",
                   "correct": true
                 },
                 {
-                  "content": "Virtuelle, droite et agrandie.",
-                  "correct": false
-                },
-                {
-                  "content": "Réelle, droite et plus grande.",
-                  "correct": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Problème 2 — Le projecteur de la salle",
-          "statement": "Un projecteur a une lentille convergente de distance focale $f = 5$ cm. La diapositive, qui joue le rôle d'objet, est placée à 7 cm de la lentille. L'image se forme sur un écran, au fond de la salle.",
-          "exercise_type": "evaluation",
-          "questions": [
-            {
-              "content": "Où est placée la diapositive par rapport au foyer objet ?",
-              "question_type": "single_choice",
-              "explanation": "$OA = 7$ cm est plus grand que $f = 5$ cm et plus petit que $2f = 10$ cm : la diapositive est plus loin que le foyer, à moins de $2f$.",
-              "answers": [
-                {
-                  "content": "Plus loin que le foyer, à moins de $2f$.",
-                  "correct": true
-                },
-                {
-                  "content": "Entre la lentille et le foyer.",
-                  "correct": false
-                },
-                {
-                  "content": "Plus loin que $2f$.",
+                  "content": "Virtuelle, renversée et réduite",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Comment est l'image sur l'écran ?",
-              "question_type": "single_choice",
-              "explanation": "Pour $f \\lt OA \\lt 2f$, l'image est réelle, renversée et plus grande que l'objet. C'est ce qui permet de projeter.",
-              "answers": [
-                {
-                  "content": "Réelle, renversée et plus grande.",
-                  "correct": true
-                },
-                {
-                  "content": "Virtuelle, droite et agrandie.",
-                  "correct": false
-                },
-                {
-                  "content": "Réelle, renversée et plus petite.",
-                  "correct": false
-                },
-                {
-                  "content": "Réelle, droite et plus grande.",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Pour que l'image sur l'écran soit à l'endroit, il faut placer la diapositive à l'envers.",
-              "question_type": "true_false",
-              "explanation": "L'image est renversée : si on veut la voir à l'endroit, on met la diapositive à l'envers dans le projecteur.",
-              "answers": [
-                {
-                  "content": "Vrai",
-                  "correct": true
-                },
-                {
-                  "content": "Faux",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "À quelle distance de la lentille, en cm, faudrait-il placer la diapositive pour que l'image ait la même taille qu'elle ?",
+              "content": "Le connecteur de 2 cm est à 2,5 cm de la lentille (f = 5 cm). L'image virtuelle est deux fois plus grande que l'objet. Quelle est la hauteur de l'image ?",
               "question_type": "numeric",
-              "explanation": "L'image a la même taille que l'objet quand $OA = 2f = 10$ cm.",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : l'objet mesure 2 cm et l'image est deux fois plus grande. Étape 2 — Calculer : $2 \\times 2\\ \\text{cm} = 4\\ \\text{cm}$. Étape 3 — Vérifier avec la construction : le rayon par O et le prolongement du rayon parallèle se croisent à 4 cm de hauteur. Étape 4 — Conclure : $A'B' = 4\\ \\text{cm}$.",
               "answers": [
                 {
-                  "content": "10",
+                  "content": "4",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "On rapproche la diapositive à 3 cm de la lentille. Que se passe-t-il ?",
-              "question_type": "single_choice",
-              "explanation": "$OA = 3$ cm est plus petit que $f = 5$ cm : l'image est virtuelle et ne se forme plus sur l'écran.",
+              "content": "Avec la construction à l'échelle 1 (objet de 2 cm à 2,5 cm de la lentille, f = 5 cm), à quelle distance de O, du même côté que l'objet, se trouve l'image virtuelle ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Placer : O, F et F′ à 5 cm de O ; l'objet AB à 2,5 cm de O, B à 2 cm de l'axe. Étape 2 — Tracer le rayon par O : il continue tout droit. Étape 3 — Tracer le rayon parallèle à l'axe : il émerge en passant par F′ et diverge. Étape 4 — Prolonger le rayon émergent vers l'arrière : il croise le rayon par O à 5 cm de O, à 4 cm de hauteur. Étape 5 — Mesurer : l'image virtuelle est à 5 cm de O, du côté de l'objet.",
               "answers": [
                 {
-                  "content": "L'image devient virtuelle : elle ne se forme plus sur l'écran.",
+                  "content": "5",
                   "correct": true
-                },
-                {
-                  "content": "L'image reste sur l'écran, mais plus petite.",
-                  "correct": false
-                },
-                {
-                  "content": "L'image est plus nette sur l'écran.",
-                  "correct": false
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "title": "Problème 3 — Les lunettes d'Awa",
-          "statement": "Awa voit flou de près : elle a du mal à lire son livre, mais elle voit net de loin. Le médecin lui explique que l'image se forme après sa rétine et lui prescrit des lunettes. Son grand-père, lui, voit flou de loin et porte aussi des lunettes.",
-          "exercise_type": "evaluation",
-          "questions": [
-            {
-              "content": "Quel défaut de l'œil Awa a-t-elle ?",
-              "question_type": "single_choice",
-              "explanation": "Elle voit flou de près et l'image se forme après la rétine : c'est l'hypermétropie.",
-              "answers": [
-                {
-                  "content": "L'hypermétropie.",
-                  "correct": true
-                },
-                {
-                  "content": "La myopie.",
-                  "correct": false
-                },
-                {
-                  "content": "L'accommodation.",
-                  "correct": false
                 }
               ]
             },
             {
-              "content": "Quelle lentille corrige le défaut d'Awa ?",
-              "question_type": "single_choice",
-              "explanation": "L'œil hypermétrope n'est pas assez convergent : on ajoute une lentille convergente pour ramener l'image sur la rétine.",
-              "answers": [
-                {
-                  "content": "Une lentille convergente.",
-                  "correct": true
-                },
-                {
-                  "content": "Une lentille divergente.",
-                  "correct": false
-                },
-                {
-                  "content": "Une lentille sans courbure.",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Les verres des lunettes d'Awa sont plus minces au centre que sur les bords.",
+              "content": "L'image donnée par la loupe dans cette situation peut être recueillie sur un écran.",
               "question_type": "true_false",
-              "explanation": "Ses verres sont convergents, donc plus épais au centre que sur les bords.",
+              "explanation": "Étape 1 — Relever : l'objet est à $d = 2{,}5\\ \\text{cm}$, avec $f = 5\\ \\text{cm}$. Étape 2 — Comparer : $d < f$. Étape 3 — Conclure : l'image est virtuelle, car les rayons émergents ne se croisent pas : seuls leurs prolongements se croisent. Une image virtuelle ne se recueille pas sur un écran : l'affirmation est fausse.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -814,96 +955,114 @@
               ]
             },
             {
-              "content": "Parmi ces propositions, lesquelles se corrigent avec une lentille convergente ?",
-              "question_type": "multiple_correct_2",
-              "explanation": "L'hypermétropie et la presbytie se corrigent avec une lentille convergente. La myopie demande une lentille divergente ; l'accommodation est le réglage normal de l'œil, pas un défaut.",
-              "answers": [
-                {
-                  "content": "L'hypermétropie.",
-                  "correct": true
-                },
-                {
-                  "content": "La presbytie.",
-                  "correct": true
-                },
-                {
-                  "content": "La myopie.",
-                  "correct": false
-                },
-                {
-                  "content": "L'accommodation.",
-                  "correct": false
-                }
-              ]
-            },
-            {
-              "content": "Le grand-père d'Awa voit flou de loin. Ses lunettes ont des verres :",
-              "question_type": "single_choice",
-              "explanation": "Voir flou de loin, c'est la myopie, que l'on corrige avec une lentille divergente, plus mince au centre.",
-              "answers": [
-                {
-                  "content": "Divergents.",
-                  "correct": true
-                },
-                {
-                  "content": "Convergents.",
-                  "correct": false
-                },
-                {
-                  "content": "Qui ne dévient pas la lumière.",
-                  "correct": false
-                }
-              ]
+              "content": "Le réparateur recule la carte électronique à 12 cm de la lentille convergente (f = 5 cm). Explique pourquoi la lentille ne joue plus le rôle de loupe.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Compare d = 12 cm à 2f = 10 cm",
+                "Donne la nature de l'image : réelle, renversée, réduite",
+                "Conclut que l'image n'est plus droite ni agrandie"
+              ],
+              "explanation": "Corrigé modèle : $f = 5\\ \\text{cm}$ donc $2f = 10\\ \\text{cm}$. Comme $d = 12\\ \\text{cm}$ est plus grand que $2f$, l'image est réelle, renversée et réduite. Elle n'est plus droite ni agrandie, donc la lentille ne permet plus de voir de petits détails comme une loupe. Il faut $d < f = 5\\ \\text{cm}$ pour retrouver une image virtuelle, droite, agrandie. Barème (2 points) : 1 point pour la comparaison de d à 2f, 1 point pour la nature de l'image et la conclusion.",
+              "answers": [],
+              "starter": "Comme d = 12 cm est plus grand que…"
             }
           ]
         },
         {
-          "title": "Problème 4 — L'appareil photo et l'œil",
-          "statement": "Léa photographie son ami avec son téléphone. L'objectif joue le rôle d'une lentille convergente et le capteur celui d'un écran. L'image de son ami se forme nette sur le capteur.",
-          "exercise_type": "evaluation",
+          "title": "L'appareil photo du smartphone",
+          "statement": "On étudie un modèle de l'appareil photo d'un smartphone : l'objectif est une lentille convergente de distance focale 4 cm. Un objet AB de 2 cm de haut, perpendiculaire à l'axe, est placé à 12 cm de la lentille. Le capteur reçoit l'image. La figure représente cette situation.",
+          "exercise_type": "fixation",
+          "figure": "lentille-convergente",
           "questions": [
             {
-              "content": "Comment est l'image qui se forme sur le capteur ?",
-              "question_type": "single_choice",
-              "explanation": "Son ami est plus loin que $2f$ : l'image est réelle (elle se forme sur le capteur), renversée et plus petite que lui.",
+              "content": "L'objectif d'un appareil photographique (modèle de classe) est une lentille convergente de distance focale 4 cm. Quelle est sa vergence, en dioptries ?",
+              "question_type": "numeric",
+              "unit": "δ",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $f = 4\\ \\text{cm}$. Étape 2 — Convertir : $4\\ \\text{cm} = 0{,}04\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}04} = 25$. Étape 5 — Donner : $C = 25\\ \\delta$.",
               "answers": [
                 {
-                  "content": "Réelle et renversée.",
+                  "content": "25",
                   "correct": true
-                },
+                }
+              ]
+            },
+            {
+              "content": "Un objet de 2 cm de haut est placé à 12 cm de l'objectif (lentille convergente, f = 4 cm). Quelle est la nature de l'image ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : $d = 12\\ \\text{cm}$ et $f = 4\\ \\text{cm}$. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : $12\\ \\text{cm} > 8\\ \\text{cm}$, l'objet est au-delà de 2f. Étape 4 — Conclure : l'image est réelle, renversée et réduite. C'est ce qui se passe quand un smartphone photographie un objet éloigné : l'image se forme sur le capteur.",
+              "answers": [
                 {
-                  "content": "Virtuelle et droite.",
+                  "content": "Réelle, renversée et agrandie",
                   "correct": false
                 },
                 {
-                  "content": "Réelle et droite.",
+                  "content": "Réelle, renversée et réduite",
+                  "correct": true
+                },
+                {
+                  "content": "Virtuelle, droite et agrandie",
+                  "correct": false
+                },
+                {
+                  "content": "Virtuelle, droite et réduite",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Quel élément de l'œil joue le rôle du capteur ?",
-              "question_type": "single_choice",
-              "explanation": "L'image se forme sur la rétine : elle joue le rôle de l'écran, comme le capteur de l'appareil photo.",
+              "content": "Avec la construction à l'échelle 1 (objet AB de 2 cm à 12 cm de l'objectif, f = 4 cm), à quelle distance de O se forme l'image A′B′ sur le capteur ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Placer : O, F et F′ à 4 cm de O. Étape 2 — Placer l'objet : AB à 12 cm de O. Étape 3 — Tracer le rayon par O. Étape 4 — Tracer le rayon parallèle à l'axe : il émerge par F′. Étape 5 — Repérer B′ : les rayons se croisent à 6 cm de O. Étape 6 — Mesurer : le capteur doit être à 6 cm de la lentille. La figure donne la même valeur pour 12 cm.",
               "answers": [
                 {
-                  "content": "La rétine.",
+                  "content": "6",
                   "correct": true
-                },
-                {
-                  "content": "Le cristallin.",
-                  "correct": false
-                },
-                {
-                  "content": "La pupille.",
-                  "correct": false
                 }
               ]
             },
             {
-              "content": "Pour photographier un objet plus proche, il faut déplacer l'objectif pour que l'image se forme encore sur le capteur.",
+              "content": "Avec la même construction (AB de 2 cm à 12 cm, f = 4 cm), quelle est la hauteur de l'image A′B′, en centimètres ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Placer : O, F et F′. Étape 2 — Placer l'objet : AB de 2 cm à 12 cm de O. Étape 3 — Tracer le rayon par O. Étape 4 — Tracer le rayon parallèle à l'axe, qui émerge par F′. Étape 5 — Repérer B′ : à 6 cm de O et à 1 cm sous l'axe. Étape 6 — Mesurer : $A'B' = 1\\ \\text{cm}$, soit deux fois moins que l'objet.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la construction de l'image par l'objectif.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Placer le matériel (axe, lentille, O, F, F′). Étape 2 — Placer l'objet AB à 12 cm. Étape 3 — Tracer le rayon par O. Étape 4 — Tracer le rayon parallèle à l'axe, qui émerge par F′. Étape 5 — Repérer B′ à l'intersection, placer A′, mesurer. Le repérage de B′ vient en dernier car il faut les deux rayons pour trouver leur intersection.",
+              "answers": [
+                {
+                  "content": "Placer l'axe, l'objectif, O, F et F′ avec f = 4 cm."
+                },
+                {
+                  "content": "Placer l'objet AB à 12 cm de O."
+                },
+                {
+                  "content": "Tracer le rayon issu de B qui passe par O."
+                },
+                {
+                  "content": "Tracer le rayon issu de B parallèle à l'axe, qui émerge par F′."
+                },
+                {
+                  "content": "Repérer B′ puis A′, et mesurer OA′ et A′B′."
+                }
+              ]
+            },
+            {
+              "content": "Pour que la photo soit nette, le capteur de l'appareil doit être placé à l'endroit où se forme l'image réelle de l'objet.",
               "question_type": "true_false",
-              "explanation": "La position de l'image dépend de la distance de l'objet : on déplace l'objectif pour faire la mise au point.",
+              "explanation": "Étape 1 — Relever : l'objectif forme une image réelle de l'objet éloigné, à 6 cm de O dans ce modèle. Étape 2 — Dire que le capteur reçoit : un capteur est comme un écran, il ne reçoit que des images réelles. Étape 3 — Conclure : il doit être placé exactement là où les rayons se croisent, sinon l'image est floue. L'affirmation est vraie.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -916,50 +1075,265 @@
               ]
             },
             {
-              "content": "Comment s'appelle le réglage que l'œil fait tout seul, comme la mise au point de l'appareil photo ?",
-              "question_type": "single_choice",
-              "explanation": "Le cristallin change de forme pour que l'image reste nette sur la rétine : c'est l'accommodation.",
+              "content": "Si on remplaçait l'objectif par une lentille divergente, l'appareil donnerait une image ___ qu'on ne pourrait pas recevoir sur le capteur.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Relever : une lentille divergente donne toujours une image virtuelle, droite et réduite. Étape 2 — Dire : le capteur ne reçoit que des images réelles. Étape 3 — Conclure : avec une divergente, aucune image ne se forme sur le capteur. Le mot attendu est virtuelle.",
               "answers": [
                 {
-                  "content": "L'accommodation.",
-                  "correct": true
-                },
-                {
-                  "content": "La myopie.",
+                  "content": "réelle",
                   "correct": false
                 },
                 {
-                  "content": "La presbytie.",
+                  "content": "virtuelle",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le vidéoprojecteur de la classe",
+          "statement": "Le vidéoprojecteur de la classe projette un schéma sur l'écran. On modélise son objectif par une lentille convergente. L'image à projeter, de 2 cm de haut, est placée à 6 cm de la lentille, de distance focale 4 cm. Place le curseur de la figure sur 6 cm pour suivre la situation.",
+          "exercise_type": "evaluation",
+          "figure": "lentille-convergente",
+          "questions": [
+            {
+              "content": "Le vidéoprojecteur de la classe possède un objectif de vergence 25 δ. Quelle est sa distance focale, en centimètres ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $C = 25\\ \\delta$. Étape 2 — Convertir : rien à convertir, $f$ sortira en mètres. Étape 3 — Écrire : $f = \\frac{1}{C}$. Étape 4 — Remplacer et calculer : $f = \\frac{1}{25} = 0{,}04\\ \\text{m}$. Étape 5 — Donner : $f = 0{,}04\\ \\text{m} = 4\\ \\text{cm}$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On modélise l'objectif du vidéoprojecteur par une lentille convergente de distance focale 4 cm. L'image à projeter, de 2 cm de haut, est placée à 6 cm de la lentille. Où se trouve l'objet par rapport à F et à 2f ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : $d = 6\\ \\text{cm}$ et $f = 4\\ \\text{cm}$. Étape 2 — Calculer 2f : $2f = 8\\ \\text{cm}$. Étape 3 — Comparer : $4\\ \\text{cm} < 6\\ \\text{cm} < 8\\ \\text{cm}$. Étape 4 — Conclure : l'objet est entre F et 2f. Ce n'est pas entre O et F (6 cm est plus grand que f) ni au-delà de 2f (6 cm est plus petit que 8 cm).",
+              "answers": [
+                {
+                  "content": "Entre F et 2f",
+                  "correct": true
+                },
+                {
+                  "content": "Entre O et F",
+                  "correct": false
+                },
+                {
+                  "content": "Au-delà de 2f",
+                  "correct": false
+                },
+                {
+                  "content": "Exactement en F",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Quelles correspondances entre l'œil et l'appareil photo sont justes ?",
+              "content": "Pour cette position (f = 4 cm, d = 6 cm), quelles propriétés a l'image formée sur l'écran ?",
               "question_type": "multiple_correct_3",
-              "explanation": "L'iris et la pupille jouent le rôle de diaphragme, le cristallin celui de l'objectif et la rétine celui du capteur. La rétine n'est pas la lentille, et le cristallin n'est pas le diaphragme.",
+              "explanation": "Étape 1 — Identifier : un vidéoprojecteur, avec un écran. Étape 2 — Dire : un écran reçoit une image réelle. Étape 3 — En déduire : $f < d < 2f$. Étape 4 — Conclure : l'image est réelle, renversée et agrandie. Les propositions virtuelle, droite et réduite sont fausses : virtuelle et droite demandent $d < f$, réduite demande $d > 2f$.",
               "answers": [
                 {
-                  "content": "L'iris et la pupille : le diaphragme.",
-                  "correct": true
-                },
-                {
-                  "content": "Le cristallin : l'objectif, une lentille convergente.",
-                  "correct": true
-                },
-                {
-                  "content": "La rétine : le capteur.",
-                  "correct": true
-                },
-                {
-                  "content": "La rétine : l'objectif.",
+                  "content": "Réduite",
                   "correct": false
                 },
                 {
-                  "content": "Le cristallin : le diaphragme.",
+                  "content": "Droite",
+                  "correct": false
+                },
+                {
+                  "content": "Virtuelle",
+                  "correct": false
+                },
+                {
+                  "content": "Agrandie",
+                  "correct": true
+                },
+                {
+                  "content": "Renversée",
+                  "correct": true
+                },
+                {
+                  "content": "Réelle",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec la construction à l'échelle 1 (objet de 2 cm à 6 cm de la lentille, f = 4 cm), à quelle distance de O faut-il placer l'écran pour que l'image soit nette ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Placer : O, F et F′ à 4 cm de O. Étape 2 — Placer l'objet : AB de 2 cm à 6 cm de O. Étape 3 — Tracer le rayon par O. Étape 4 — Tracer le rayon parallèle à l'axe, qui émerge par F′. Étape 5 — Repérer B′ : les rayons se croisent à 12 cm de O, à 4 cm sous l'axe. Étape 6 — Mesurer : l'écran est à 12 cm de O. En réglant le curseur de la figure sur 6 cm, on lit la même valeur.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec la même construction (objet de 2 cm à 6 cm, f = 4 cm), quelle est la hauteur de l'image sur l'écran ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Placer : O, F et F′. Étape 2 — Placer l'objet : AB de 2 cm à 6 cm de O. Étape 3 — Tracer le rayon par O. Étape 4 — Tracer le rayon parallèle à l'axe, qui émerge par F′. Étape 5 — Repérer B′ : à 12 cm de O et à 4 cm sous l'axe. Étape 6 — Mesurer : $A'B' = 4\\ \\text{cm}$, soit deux fois plus grande que l'objet.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce modèle, si l'image à projeter est placée exactement au foyer objet F (à 4 cm de la lentille), une image nette se forme sur un écran placé à 8 cm.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : $d = 4\\ \\text{cm} = f$. Étape 2 — Tracer : le rayon issu de B parallèle à l'axe émerge en passant par F′, et le rayon issu de B qui passe par O n'est pas dévié. Étape 3 — Repérer : ces deux rayons émergents sont parallèles (même pente), ils ne se croisent pas, donc il n'y a pas de B′. Étape 4 — Conclure : la figure indique « image à l'infini ». Aucun écran ne montre d'image nette : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans un vidéoprojecteur, l'image sur l'écran est renversée par rapport à l'image placée devant la lentille. Explique pourquoi on doit placer l'image à projeter à l'envers dans l'appareil pour que l'image sur l'écran soit à l'endroit.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que l'image réelle donnée est renversée",
+                "Relie ce fait à la position de l'objet entre F et 2f",
+                "Conclut qu'il faut mettre l'objet à l'envers pour avoir une image droite"
+              ],
+              "explanation": "Corrigé modèle : l'objet est entre F et 2f, donc l'image donnée par la lentille est réelle, renversée et agrandie. Comme la lentille renverse l'image, il faut placer l'image à projeter à l'envers dans l'appareil : l'image renversée une deuxième fois par la lentille apparaît à l'endroit sur l'écran. Barème (2 points) : 1 point pour « l'image est renversée », 1 point pour la conclusion avec l'objet à l'envers.",
+              "answers": [],
+              "starter": "La lentille donne une image…"
+            }
+          ]
+        },
+        {
+          "title": "Comparer deux lentilles au laboratoire",
+          "statement": "Au laboratoire du lycée, Awa compare une lentille convergente L1 et une lentille divergente L2. Elle place successivement un objet de 2 cm de haut à 12 cm de chacune. La figure montre la lentille divergente avec une distance focale de 4 cm.",
+          "exercise_type": "evaluation",
+          "figure": "lentille-divergente",
+          "questions": [
+            {
+              "content": "Au laboratoire du lycée, Awa dispose de deux lentilles. L2 a des bords plus épais que son centre. De quelle lentille s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : L2 a le centre mince et les bords épais. Étape 2 — Comparer : les bords sont plus épais que le centre. Étape 3 — Conclure : c'est une lentille divergente. La lentille L1, qui a les bords minces, est convergente.",
+              "answers": [
+                {
+                  "content": "Une lentille divergente",
+                  "correct": true
+                },
+                {
+                  "content": "Une lentille convergente",
+                  "correct": false
+                },
+                {
+                  "content": "Une lentille sans centre optique",
+                  "correct": false
+                },
+                {
+                  "content": "Une lentille qui forme toujours une image réelle",
                   "correct": false
                 }
               ]
+            },
+            {
+              "content": "La lentille convergente L1 a une distance focale de 4 cm. Quelle est sa vergence, en dioptries ?",
+              "question_type": "numeric",
+              "unit": "δ",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $f = 4\\ \\text{cm}$. Étape 2 — Convertir : $4\\ \\text{cm} = 0{,}04\\ \\text{m}$. Étape 3 — Écrire : $C = \\frac{1}{f}$. Étape 4 — Remplacer et calculer : $C = \\frac{1}{0{,}04} = 25$. Étape 5 — Donner : $C = 25\\ \\delta$.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa place un objet de 2 cm de haut à 12 cm de chaque lentille. L1 est convergente de distance focale 4 cm, L2 est divergente de distance focale 4 cm (en valeur positive). Relie chaque situation à la nature de l'image.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Relever : L1 convergente f = 4 cm, L2 divergente f = 4 cm, d = 12 cm puis 2 cm. Étape 2 — Calculer 2f : 8 cm pour L1. Étape 3 — Comparer : pour L1, 12 cm est plus grand que 8 cm, donc l'image est réelle, renversée, réduite ; 2 cm est plus petit que 4 cm, donc virtuelle, droite, agrandie. Pour L2, divergente, l'image est toujours virtuelle, droite, réduite. Étape 4 — Conclure avec les trois paires.",
+              "answers": [
+                {
+                  "content": "L1, objet à 12 cm",
+                  "match": "Réelle, renversée, réduite"
+                },
+                {
+                  "content": "L2, objet à 12 cm",
+                  "match": "Virtuelle, droite, réduite"
+                },
+                {
+                  "content": "L1, objet rapproché à 2 cm",
+                  "match": "Virtuelle, droite, agrandie"
+                }
+              ]
+            },
+            {
+              "content": "Avec L1, la figure montre une image deux fois plus petite que l'objet de 2 cm (objet à 12 cm, f = 4 cm). Quelle est la hauteur de l'image ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $d = 12\\ \\text{cm}$, $f = 4\\ \\text{cm}$, objet de 2 cm. Étape 2 — Calculer 2f : 8 cm. Étape 3 — Comparer : $12\\ \\text{cm} > 8\\ \\text{cm}$, l'image est réduite. Étape 4 — Conclure : la construction donne $A'B' = 1\\ \\text{cm}$, la moitié de l'objet.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sur la figure de la lentille divergente L2 (objet de 2 cm à 12 cm), on lit que l'image est quatre fois plus petite que l'objet. Quelle est la hauteur de l'image ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : objet de 2 cm à 12 cm de L2, image quatre fois plus petite d'après la figure. Étape 2 — Lire : sur la figure, l'image est du même côté de la lentille que l'objet, droite et réduite. Étape 3 — Calculer : $A'B' = \\frac{2}{4} = 0{,}5\\ \\text{cm}$. Étape 4 — Conclure : $A'B' = 0{,}5\\ \\text{cm}$ ; l'image est virtuelle, droite et réduite.",
+              "answers": [
+                {
+                  "content": "0,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'image donnée par la lentille divergente L2 peut être recueillie sur un écran.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : L2 est une lentille divergente. Étape 2 — Tracer : les rayons émergents s'écartent et ne se croisent pas ; seuls leurs prolongements se croisent. Étape 3 — Conclure : l'image est virtuelle, donc impossible à recueillir sur un écran. L'affirmation est fausse. Une lentille divergente donne toujours une image virtuelle, droite et réduite.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa veut projeter l'image de l'objet de 2 cm sur un écran avec L1 ou L2 (distance focale 4 cm en valeur positive). Quelle lentille choisit-elle et où place-t-elle l'objet pour obtenir une image agrandie ? Justifie.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Choisit la lentille convergente L1",
+                "Explique qu'un écran demande une image réelle, ce que L2 ne donne jamais",
+                "Place l'objet entre F et 2f, soit entre 4 cm et 8 cm"
+              ],
+              "explanation": "Corrigé modèle : Awa choisit la lentille convergente L1. Un écran ne reçoit qu'une image réelle ; la lentille divergente L2 ne donne qu'une image virtuelle, droite et réduite. Avec L1, l'image est réelle si l'objet est au-delà de F (plus de 4 cm). Pour qu'elle soit agrandie, l'objet doit être entre F et 2f, c'est-à-dire entre 4 cm et 8 cm de L1. Barème (3 points) : 1 point pour le choix de L1, 1 point pour la justification par l'image réelle, 1 point pour la position entre F et 2f.",
+              "answers": [],
+              "starter": "Awa choisit…"
             }
           ]
         }

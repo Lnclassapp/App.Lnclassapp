@@ -1,0 +1,1036 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le civisme fiscal",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "EDHC",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "circuit-de-l-impot",
+          "kind": "diagram",
+          "description": "Circuit de l'impôt en cycle : les contribuables (habitants, commerçants, chauffeurs) paient impôts et taxes ; l'administration (impôts, douanes, commune) les collecte ; le Trésor et le budget reçoivent l'argent ; les services publics (écoles, hôpitaux, routes) sont financés et profitent aux contribuables. Schéma simplifié.",
+          "params": {
+            "layout": "cycle",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "contribuables",
+                "label": "Contribuables : habitants, commerçants, chauffeurs",
+                "category": 1
+              },
+              {
+                "id": "administration",
+                "label": "Administration : impôts, douanes, commune",
+                "category": 2
+              },
+              {
+                "id": "tresor_budget",
+                "label": "Trésor public et budget",
+                "category": 2
+              },
+              {
+                "id": "services_publics",
+                "label": "Services publics : écoles, hôpitaux, routes",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "contribuables",
+                "to": "administration",
+                "label": "paient"
+              },
+              {
+                "from": "administration",
+                "to": "tresor_budget",
+                "label": "reversent"
+              },
+              {
+                "from": "tresor_budget",
+                "to": "services_publics",
+                "label": "financent"
+              },
+              {
+                "from": "services_publics",
+                "to": "contribuables",
+                "label": "profitent à"
+              }
+            ],
+            "legend": [
+              "Ceux qui paient",
+              "Ceux qui collectent et gèrent",
+              "Ce qui est financé"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "budget-commune-sikoro",
+          "kind": "stat_chart",
+          "description": "Diagramme circulaire du budget de dépenses de la commune fictive de Sikoro, 20 millions de francs CFA en tout : écoles et centres de santé 8, routes et éclairage 5, marché et propreté 4, administration 3 (en millions de francs). Données fictives, inventées pour l'exercice.",
+          "params": {
+            "chart": "pie",
+            "series": [
+              8,
+              5,
+              4,
+              3
+            ],
+            "labels": [
+              "Écoles et centres de santé",
+              "Routes et éclairage",
+              "Marché et propreté",
+              "Administration"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Distinguer l'impôt et la taxe",
+          "remember": "Un **impôt** est un prélèvement **obligatoire** en argent, versé à l'État ou à une collectivité (la commune, par exemple) pour financer les dépenses publiques. Celui qui le paie est le **contribuable**. L'impôt n'a **pas de contrepartie directe** : il ne paie pas un service précis rendu à celui qui le verse. Une **taxe** est une somme payée en **échange d'un service ou d'un usage précis**, par exemple la place occupée au marché ou l'enlèvement des ordures. Impôt et taxe sont tous deux obligatoires ; un don, lui, est volontaire.",
+          "method": [
+            "Repérer la somme payée, la personne qui paie et celui qui la reçoit.",
+            "Chercher si la somme paie un service précis rendu à celui qui paie.",
+            "Conclure : taxe s'il y a une contrepartie directe, impôt s'il n'y en a pas."
+          ],
+          "example": {
+            "statement": "À Sikoro, ville fictive, Mme Awa paie chaque jour 300 francs à la mairie pour garder sa place au marché. Son voisin M. Yao, propriétaire d'une boutique, paie chaque année l'impôt foncier sur son local. Classe chaque paiement.",
+            "steps": [
+              "Repérer : Mme Awa verse 300 francs à la mairie ; M. Yao verse une somme à l'administration pour son local.",
+              "Chercher : les 300 francs paient un service précis, la place au marché ; l'impôt foncier de M. Yao ne paie aucun service précis pour lui.",
+              "Conclure : le paiement de Mme Awa est une taxe, celui de M. Yao est un impôt."
+            ]
+          },
+          "pitfall": "Ne pas croire que payer un impôt, c'est acheter un service pour soi seul. Contre-exemple : M. Yao n'envoie aucun enfant à l'école publique, mais son impôt foncier aide quand même à la construire pour les autres élèves du quartier. L'impôt finance l'ensemble des dépenses publiques, il ne se paie pas contre un service précis. Seule la taxe a une contrepartie directe.",
+          "figure": null,
+          "exercise": {
+            "title": "Distinguer l'impôt et la taxe",
+            "statement": "Dans cet exercice, tu distingues l'impôt de la taxe avec la méthode de la fiche. Les personnes et la commune sont fictives.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un impôt est un prélèvement obligatoire versé à l'État ou à une collectivité pour financer les dépenses publiques.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la somme est un prélèvement versé à l'État ou à une collectivité. Étape 2 — Chercher : elle finance l'ensemble des dépenses publiques, sans service précis rendu à celui qui paie, et on ne peut pas refuser de la payer. Étape 3 — Conclure : c'est la définition de l'impôt, l'affirmation est donc vraie. Un don, lui, est volontaire.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Mme Koné vend des légumes au marché. Elle paie 500 francs à la mairie pour l'enlèvement des ordures devant son étal, un service précis qui lui est rendu. Comment s'appelle ce prélèvement ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : Mme Koné paie 500 francs à la mairie. Étape 2 — Chercher : la somme paie un service précis, l'enlèvement des ordures devant son étal. Étape 3 — Conclure : il y a une contrepartie directe, c'est donc une taxe. Ce n'est pas un impôt, qui n'a pas de contrepartie directe. Ce n'est pas une amende, qui sanctionne une faute, ni un don, qui est volontaire.",
+                "answers": [
+                  {
+                    "content": "Un droit de douane",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un impôt",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une taxe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une amende",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à la nature du prélèvement.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer chaque somme et celui qui paie. Étape 2 — Chercher s'il y a un service précis rendu à celui qui paie : la place au marché en est un, l'impôt foncier n'en est pas un. Étape 3 — Conclure : l'impôt foncier est un impôt, la place au marché une taxe. Le sac de ciment n'est ni l'un ni l'autre : on le donne librement, alors que l'impôt et la taxe sont obligatoires.",
+                "answers": [
+                  {
+                    "content": "Le propriétaire d'une boutique paie l'impôt foncier sur son local.",
+                    "match": "Impôt"
+                  },
+                  {
+                    "content": "Une vendeuse paie la place qu'elle occupe au marché.",
+                    "match": "Taxe"
+                  },
+                  {
+                    "content": "Un habitant offre librement un sac de ciment à l'école.",
+                    "match": "Don volontaire"
+                  }
+                ]
+              },
+              {
+                "content": "Un impôt est un prélèvement ___ : on n'a pas le choix de le payer.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : l'impôt est une somme versée à l'État ou à une collectivité. Étape 2 — Chercher : la loi impose de la payer, le contribuable ne choisit pas. Étape 3 — Conclure : l'impôt est un prélèvement obligatoire. C'est ce qui le distingue d'un don.",
+                "answers": [
+                  {
+                    "content": "obligatoire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Nadège dit : « Je ne me suis jamais fait soigner à l'hôpital public, donc je ne dois pas d'impôt. » Pourquoi a-t-elle tort ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher : l'impôt n'a pas de contrepartie directe, il paie l'ensemble des dépenses publiques (écoles, hôpitaux, routes), même pour quelqu'un qui n'en utilise pas une en particulier. Étape 3 — Conclure : Nadège confond l'impôt avec le paiement d'un service pour elle seule, c'est le piège. Elle profite d'ailleurs d'autres services publics, comme les routes ou l'école. L'impôt n'est pas un don : il est obligatoire.",
+                "answers": [
+                  {
+                    "content": "Parce que l'hôpital lui a déjà rendu un service sans qu'elle le sache",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que seuls les malades sont dispensés de l'impôt",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'impôt est un don que l'on fait quand on le souhaite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'impôt finance toutes les dépenses publiques, sans service précis pour chaque personne qui paie",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître un impôt direct et un impôt indirect",
+          "remember": "Un **impôt direct** est payé **directement** à l'administration par le contribuable, sur ses revenus ou ses biens : l'impôt sur le revenu, l'impôt foncier sur une maison ou un terrain. Un **impôt indirect** est **compris dans le prix** d'un produit ou d'un service : le client le supporte, et le commerçant le reverse à l'administration. Exemple : la **TVA** (taxe sur la valeur ajoutée), qui est un impôt indirect malgré son nom. Les droits de douane sur les produits importés sont aussi compris dans le prix.",
+          "method": [
+            "Repérer sur quoi porte le prélèvement : un revenu, un bien ou un achat.",
+            "Chercher qui verse la somme à l'administration et qui la supporte vraiment.",
+            "Conclure : direct si celui qui supporte l'impôt est celui qui le doit à l'administration, indirect si la somme est comprise dans le prix."
+          ],
+          "example": {
+            "statement": "M. Yao reçoit chaque année un avis pour l'impôt foncier de son local et le règle lui-même à l'administration. Mme Kouadio achète un téléviseur dans une boutique de Sikoro : le prix affiché contient la TVA, que le commerçant reverse ensuite à l'administration. Classe chaque impôt (personnages fictifs).",
+            "steps": [
+              "Repérer : l'impôt foncier porte sur un bien, le local de M. Yao ; la TVA porte sur un achat, le téléviseur.",
+              "Chercher : M. Yao verse lui-même l'impôt foncier à l'administration ; pour la TVA, le commerçant verse, mais Mme Kouadio la supporte dans le prix.",
+              "Conclure : l'impôt foncier est un impôt direct, la TVA est un impôt indirect."
+            ]
+          },
+          "pitfall": "Ne pas croire que seuls les gens qui gagnent de l'argent paient des impôts. Contre-exemple : un élève sans revenu qui achète un téléphone ou une boisson achetée en supermarché, dont le prix contient la TVA paie un impôt indirect, même s'il ne le voit pas. Pour les impôts indirects, tout consommateur contribue, même sans revenu ni salaire.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître un impôt direct ou indirect",
+            "statement": "Dans cet exercice, tu reconnais un impôt direct et un impôt indirect avec la méthode de la fiche. Aucun taux n'est utilisé.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel prélèvement est un impôt indirect ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la TVA porte sur un achat, l'impôt foncier sur un bien, l'impôt sur le revenu sur un revenu. Étape 2 — Chercher : le prix du téléviseur contient la TVA, que le commerçant reverse à l'administration ; le client la supporte sans la voir. Étape 3 — Conclure : la TVA est un impôt indirect. Les deux autres sont versés directement par le contribuable : ce sont des impôts directs.",
+                "answers": [
+                  {
+                    "content": "L'impôt foncier que le propriétaire d'une maison règle lui-même à l'administration",
+                    "correct": false
+                  },
+                  {
+                    "content": "La TVA comprise dans le prix d'un téléviseur acheté en boutique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une amende payée après une infraction",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'impôt sur le revenu qu'un commerçant déclare et paie lui-même",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un client qui achète un téléphone dont le prix contient la TVA paie un impôt indirect, même s'il ne le voit pas écrit à part.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le prélèvement porte sur un achat, le téléphone. Étape 2 — Chercher : la TVA est comprise dans le prix ; le commerçant la reverse à l'administration, mais c'est le client qui la supporte. Étape 3 — Conclure : c'est un impôt indirect. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les deux impôts indirects.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer sur quoi porte chaque prélèvement : un achat, un produit importé, un bien, un revenu. Étape 2 — Chercher qui paie vraiment : pour la TVA et les droits de douane, la somme est comprise dans le prix et supportée par le client, le commerçant la reverse. Pour l'impôt foncier et l'impôt sur le revenu, c'est le contribuable lui-même qui règle l'administration. Étape 3 — Conclure : les deux premiers sont indirects, les deux autres directs.",
+                "answers": [
+                  {
+                    "content": "L'impôt sur le revenu qu'un commerçant déclare et règle lui-même",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'impôt foncier payé par le propriétaire d'une maison",
+                    "correct": false
+                  },
+                  {
+                    "content": "La TVA comprise dans le prix d'un téléviseur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les droits de douane compris dans le prix d'un produit importé",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un impôt ___, le commerçant verse la somme à l'administration, mais c'est le client qui la supporte dans le prix.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Chercher qui verse et qui supporte : le commerçant verse à l'administration, le client supporte la charge dans le prix. Étape 3 — Conclure : c'est la définition de l'impôt indirect. Dans l'impôt direct, au contraire, le contribuable paie lui-même l'administration.",
+                "answers": [
+                  {
+                    "content": "indirect",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Ange a 14 ans et n'a aucun revenu. Il dit : « Je ne paie aucun impôt. » Que peut-on lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : Ange fait des achats, par exemple un téléphone ou une boisson achetée en supermarché. Étape 2 — Chercher : le prix de nombreux produits contient déjà la TVA, supportée par l'acheteur. Étape 3 — Conclure : Ange paie un impôt indirect, même sans revenu. Penser que seuls ceux qui gagnent de l'argent paient un impôt est le piège. Il ne paie ni l'impôt foncier de l'école ni l'impôt sur le revenu de ses parents.",
+                "answers": [
+                  {
+                    "content": "Il paie l'impôt foncier de l'école de son quartier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Quand il achète des produits dont le prix contient la TVA, il paie un impôt indirect",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison, seuls les salariés paient des impôts",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il paie l'impôt sur le revenu de ses parents",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dire qui collecte l'impôt et à quoi servent les recettes",
+          "remember": "L'administration **collecte** les impôts et les taxes. La **Direction générale des impôts** perçoit les impôts intérieurs. La **Direction générale des douanes** perçoit les droits de douane sur les marchandises qui entrent ou sortent du pays. Les **collectivités territoriales**, comme la commune, perçoivent des taxes locales. Les recettes arrivent au **Trésor public** et forment le **budget** de l'État ou de la collectivité. Le budget finance les **services publics** : écoles, hôpitaux, routes, eau, sécurité. Celui qui collecte n'est pas propriétaire de l'argent.",
+          "method": [
+            "Identifier la nature du prélèvement : impôt, droit de douane ou taxe locale.",
+            "Désigner qui le collecte : la Direction générale des impôts, celle des douanes ou la collectivité.",
+            "Suivre l'argent jusqu'au budget de l'État ou de la collectivité.",
+            "Nommer les dépenses publiques financées : écoles, hôpitaux, routes, eau, sécurité."
+          ],
+          "example": {
+            "statement": "M. Gérard, importateur fictif, fait entrer des sacs de riz par le port et paie des droits de douane. Qui collecte cet argent, où va-t-il et à quoi sert-il ?",
+            "steps": [
+              "Identifier : les droits payés par M. Gérard sont des droits de douane, car ils portent sur des marchandises qui entrent dans le pays.",
+              "Désigner : ils sont collectés par la Direction générale des douanes.",
+              "Suivre : l'argent est versé au Trésor public et alimente le budget de l'État.",
+              "Nommer : ce budget finance des services publics, comme des écoles, des hôpitaux et des routes."
+            ]
+          },
+          "pitfall": "Ne pas confondre celui qui collecte avec celui qui possède l'argent. L'agent qui encaisse une somme au guichet ou à la douane ne la garde pas : il la verse au Trésor public. Contre-exemple : si un agent encaisse 100 000 francs de droits de douane en une journée, les 100 000 francs rejoignent le budget de l'État. L'argent public sert à tous, il n'est jamais un revenu personnel de l'agent.",
+          "figure": "circuit-de-l-impot",
+          "exercise": {
+            "title": "Dire qui collecte et à quoi servent les recettes",
+            "statement": "Dans cet exercice, tu dis qui collecte l'impôt et à quoi servent les recettes avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque prélèvement à celui qui le collecte.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier la nature de chaque prélèvement : impôt, droit de douane ou taxe locale. Étape 2 — Désigner qui le collecte : la Direction générale des impôts pour les impôts, la Direction générale des douanes pour les marchandises qui passent la frontière, la collectivité territoriale (ici la commune) pour une taxe locale. Étape 3 — Suivre l'argent : il rejoint le budget de l'État ou celui de la commune. Étape 4 — Nommer ce qu'il finance, par exemple l'entretien de la gare et des routes.",
+                "answers": [
+                  {
+                    "content": "L'impôt foncier sur une maison",
+                    "match": "La Direction générale des impôts"
+                  },
+                  {
+                    "content": "Le droit de douane sur des marchandises importées",
+                    "match": "La Direction générale des douanes"
+                  },
+                  {
+                    "content": "La taxe de stationnement à la gare des taxis communaux",
+                    "match": "La commune (collectivité territoriale)"
+                  }
+                ]
+              },
+              {
+                "content": "À quoi servent d'abord les recettes des impôts et des taxes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Suivre l'argent : les recettes arrivent au Trésor public et dans le budget de l'État ou de la commune. Étape 4 — Nommer les dépenses financées : écoles, hôpitaux, routes, eau, sécurité. L'agent est payé par un salaire public, il ne garde pas une part de ce qu'il encaisse. Les commerçants reversent ce qu'ils collectent. L'argent n'est pas mis de côté : il sert à financer les dépenses publiques.",
+                "answers": [
+                  {
+                    "content": "À enrichir les commerçants qui les reversent",
+                    "correct": false
+                  },
+                  {
+                    "content": "À être mises de côté sans être dépensées",
+                    "correct": false
+                  },
+                  {
+                    "content": "À financer le budget public et les services publics : écoles, hôpitaux, routes",
+                    "correct": true
+                  },
+                  {
+                    "content": "À payer à l'agent collecteur une part pour son usage personnel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les trois dépenses que financent les recettes publiques.",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Suivre l'argent jusqu'au budget. Étape 4 — Nommer les dépenses publiques financées : un collège public, une route et des médicaments pour l'hôpital public sont des dépenses d'intérêt général. Un téléphone personnel ou la réparation d'une boutique privée ne servent qu'une personne : le budget public ne les finance pas.",
+                "answers": [
+                  {
+                    "content": "L'entretien d'une route",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'achat de médicaments pour un hôpital public",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'achat d'un téléphone pour l'usage personnel d'un agent",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réparation de la boutique d'un commerçant",
+                    "correct": false
+                  },
+                  {
+                    "content": "La construction d'un collège public",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Direction générale des ___ collecte les droits de douane sur les marchandises qui passent la frontière ou entrent par le port.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : un droit de douane est un prélèvement sur des marchandises qui franchissent la frontière. Étape 2 — Désigner qui le collecte : la Direction générale des douanes. La Direction générale des impôts collecte, elle, les impôts intérieurs comme l'impôt foncier.",
+                "answers": [
+                  {
+                    "content": "douanes",
+                    "correct": true
+                  },
+                  {
+                    "content": "douane",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'argent collecté par la Direction générale des impôts appartient à l'agent qui l'encaisse.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Désigner : l'agent collecte pour le compte de l'État. Étape 3 — Suivre l'argent : il est versé au Trésor public, il alimente le budget de l'État, puis il finance les services publics. C'est le piège : confondre celui qui collecte avec celui qui possède l'argent. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Pratiquer le civisme fiscal et reconnaître l'incivisme fiscal",
+          "remember": "La Constitution ivoirienne de 2016 fait à chacun le devoir de s'acquitter de ses obligations fiscales : c'est contribuer aux **charges publiques**. Le **civisme fiscal** consiste à respecter ce devoir : déclarer honnêtement ses revenus ou ses ventes, payer à temps, demander une facture ou un reçu, refuser la corruption. L'**incivisme fiscal** prend plusieurs formes : la **fraude fiscale** (cacher des revenus ou des ventes pour payer moins), la **contrebande** (faire passer des marchandises sans passer par la douane ni payer les droits), la **corruption** (donner ou accepter de l'argent pour éviter de payer). Il prive les services publics de moyens et expose à des sanctions prévues par la loi.",
+          "method": [
+            "Repérer ce que fait la personne face à l'impôt : déclarer, payer, demander un reçu ou chercher à y échapper.",
+            "Comparer son comportement avec le devoir de contribuer aux charges publiques.",
+            "Nommer l'acte : civisme fiscal, fraude, contrebande ou corruption.",
+            "Conclure sur les conséquences pour tous et proposer le bon comportement."
+          ],
+          "example": {
+            "statement": "Au marché de Sikoro (ville fictive), Mme Kouamé, qui tient une boutique, dit à un client : « Sans facture, c'est moins cher. » Le client accepte. Analyse la situation.",
+            "steps": [
+              "Repérer : la commerçante ne remet pas de facture et baisse le prix ; ses ventes ne seront pas déclarées ; le client accepte.",
+              "Comparer : tous les citoyens doivent contribuer aux charges publiques ; cacher une vente évite de payer ce qui est dû.",
+              "Nommer : c'est une fraude fiscale, et le client y participe en acceptant.",
+              "Conclure : cet argent manque pour les écoles ou les routes ; le client doit demander la facture et la garder."
+            ]
+          },
+          "pitfall": "Ne pas dire qu'une « petite fraude » ne fait de mal à personne. Contre-exemple : si 100 commerçants cachent chacun 10 000 francs d'impôts, il manque 1 000 000 de francs à l'État et à la commune pour leurs écoles, leurs marchés et leurs routes. Et le commerçant honnête, qui vend avec facture, devient moins compétitif. Une petite fraude répétée par beaucoup de personnes devient une grosse perte pour tous.",
+          "figure": null,
+          "exercise": {
+            "title": "Pratiquer le civisme fiscal et reconnaître l'incivisme",
+            "statement": "Dans cet exercice, tu reconnais le civisme fiscal et l'incivisme fiscal avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Demander une facture ou un reçu après un achat ou un paiement est un geste de civisme fiscal.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la personne demande une preuve de ce qu'elle a payé. Étape 2 — Comparer avec le devoir de contribuer aux charges publiques : la facture permet de déclarer et de reverser ce qui est dû. Étape 3 — Nommer l'acte : c'est du civisme fiscal. Étape 4 — Conclure : le geste aide à financer les services publics, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Choisis les deux comportements de civisme fiscal.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer ce que fait chaque personne face à l'impôt. Étape 2 — Comparer avec le devoir de contribuer aux charges publiques : déclarer honnêtement et payer à temps respectent ce devoir. Étape 3 — Nommer : ces deux gestes sont du civisme fiscal ; glisser de l'argent à un agent est de la corruption, vendre sans facture est une fraude. Étape 4 — Conclure : il faut déclarer et payer à temps.",
+                "answers": [
+                  {
+                    "content": "Payer ses impôts et ses taxes à la date prévue",
+                    "correct": true
+                  },
+                  {
+                    "content": "Glisser de l'argent à un agent pour ne pas payer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Déclarer honnêtement ses revenus ou ses ventes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Vendre sans facture pour baisser le prix",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque acte au nom qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'acte de chaque personne. Étape 2 — Comparer avec le devoir de contribuer aux charges publiques : aucune ne le respecte. Étape 3 — Nommer l'acte : cacher ses ventes pour payer moins est une fraude fiscale ; passer des marchandises sans passer par la douane est de la contrebande ; offrir de l'argent pour éviter de payer est de la corruption. Étape 4 — Conclure : ce sont trois formes d'incivisme fiscal.",
+                "answers": [
+                  {
+                    "content": "Un commerçant cache une partie de ses ventes pour payer moins d'impôt.",
+                    "match": "Fraude fiscale"
+                  },
+                  {
+                    "content": "Un transporteur contourne le poste de douane par un chemin de brousse avec ses marchandises.",
+                    "match": "Contrebande"
+                  },
+                  {
+                    "content": "Un chauffeur glisse un billet à un agent pour ne pas payer ce qu'il doit.",
+                    "match": "Corruption"
+                  }
+                ]
+              },
+              {
+                "content": "Faire entrer des marchandises dans le pays sans passer par la douane ni payer les droits s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer l'acte : des marchandises entrent sans passer par la douane et sans droits payés. Étape 3 — Nommer l'acte : c'est la contrebande. Ce n'est pas la corruption, qui consiste à donner de l'argent pour échapper à une règle, ni la fraude fiscale, qui consiste à cacher des revenus ou des ventes.",
+                "answers": [
+                  {
+                    "content": "contrebande",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un client dit : « Un reçu en moins, ça ne gêne personne. » En deux ou trois phrases, explique pourquoi il a tort, avec un chiffre simple.",
+                "question_type": "written",
+                "points": 3,
+                "criteria": [
+                  "Dit que ne pas demander de reçu ou de facture n'est pas sans conséquence",
+                  "Explique que les impôts et taxes manquants privent les services publics de moyens",
+                  "Donne un chiffre ou un exemple cohérent, par exemple plusieurs commerçants qui cachent la même somme"
+                ],
+                "explanation": "Corrigé modèle : « Il a tort. Un reçu qui manque, c'est une vente non déclarée, donc de l'impôt qui n'arrive pas dans les caisses. Si 100 commerçants cachent chacun 10 000 francs d'impôts, 1 000 000 de francs manquent à l'État et à la commune pour les écoles ou les routes. » Barème sur 3 : 1 point pour dire que le geste a des conséquences, 1 pour l'effet sur les services publics, 1 pour le chiffre cohérent (100 × 10 000 = 1 000 000). Étape 4 — Conclure sur les conséquences pour tous.",
+                "answers": [],
+                "starter": "Il a tort, car…"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le budget d'une commune",
+          "statement": "La commune fictive de Sikoro prépare son budget de dépenses : 20 millions de francs en tout. Tu lis la répartition et tu retrouves le circuit de l'impôt. Données fictives.",
+          "exercise_type": "fixation",
+          "figure": "budget-commune-sikoro",
+          "questions": [
+            {
+              "content": "Dans ce budget fictif de la commune de Sikoro (20 millions de francs en tout), les dépenses sont : écoles et centres de santé 8 millions, routes et éclairage 5 millions, marché et propreté 4 millions, administration 3 millions. Quel pourcentage du budget est consacré aux écoles et aux centres de santé ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer les données : la part des écoles et de la santé est de 8 millions sur un budget de 20 millions. Étape 2 — Écrire la fraction : 8 / 20. Étape 3 — Calculer : 8 / 20 = 4 / 10 = 40 %. Donc la réponse est 40 %. L'erreur la plus tentante est de répondre 8 %, en prenant le nombre de millions pour un pourcentage.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce budget fictif de la commune de Sikoro (20 millions de francs en tout), les dépenses sont : écoles et centres de santé 8 millions, routes et éclairage 5 millions, marché et propreté 4 millions, administration 3 millions. Quel pourcentage du budget est consacré aux routes et à l'éclairage ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : routes et éclairage reçoivent 5 millions sur 20. Étape 2 — Écrire la fraction : 5 / 20. Étape 3 — Calculer : 5 / 20 = 1 / 4 = 25 %. La réponse est 25 %. Piège : répondre 5 % revient à confondre les millions avec le pourcentage ; 20 % serait la part du marché et de la propreté (4 / 20).",
+              "answers": [
+                {
+                  "content": "5 %",
+                  "correct": false
+                },
+                {
+                  "content": "30 %",
+                  "correct": false
+                },
+                {
+                  "content": "20 %",
+                  "correct": false
+                },
+                {
+                  "content": "25 %",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce budget fictif de la commune de Sikoro (20 millions de francs en tout), les dépenses sont : écoles et centres de santé 8 millions, routes et éclairage 5 millions, marché et propreté 4 millions, administration 3 millions. Combien de millions de francs la commune consacre-t-elle ensemble aux routes et à l'éclairage, et au marché et à la propreté ?",
+              "question_type": "numeric",
+              "unit": "millions",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer les deux postes : routes et éclairage 5 millions, marché et propreté 4 millions. Étape 2 — Additionner : 5 + 4 = 9. Donc la commune y consacre 9 millions de francs. Piège : ajouter aussi l'administration (3 millions) donnerait 12, ce qui n'est pas demandé.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans ce budget fictif de la commune de Sikoro (20 millions de francs en tout), les dépenses sont : écoles et centres de santé 8 millions, routes et éclairage 5 millions, marché et propreté 4 millions, administration 3 millions. La somme consacrée à l'administration est supérieure à celle consacrée aux routes et à l'éclairage.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Repérer : administration 3 millions, routes et éclairage 5 millions. Étape 2 — Comparer : 3 est plus petit que 5. Donc l'affirmation est fausse : l'administration est le plus petit poste, avec 15 % du budget (3 / 20), contre 25 % pour les routes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le circuit de l'impôt, en partant du moment où les habitants paient.",
+              "question_type": "ordering",
+              "explanation": "Méthode : Étape 1 — Identifier le prélèvement : les contribuables paient impôts et taxes. Étape 2 — Désigner qui collecte : l'administration (impôts, douanes, commune). Étape 3 — Suivre l'argent : il rejoint le Trésor et le budget. Étape 4 — Nommer ce qui est financé : les services publics, qui profitent à nouveau aux contribuables. Le circuit forme une boucle : l'argent revient sous forme d'écoles, d'hôpitaux et de routes.",
+              "answers": [
+                {
+                  "content": "Les contribuables paient leurs impôts et leurs taxes."
+                },
+                {
+                  "content": "L'administration collecte l'argent."
+                },
+                {
+                  "content": "Le Trésor et le budget reçoivent et répartissent les recettes."
+                },
+                {
+                  "content": "Les services publics sont financés et profitent aux contribuables."
+                }
+              ]
+            },
+            {
+              "content": "Une habitante de Sikoro dit : « Les taxes du marché ne servent à rien. » En t'appuyant sur le budget fictif (20 millions de francs, dont 4 millions pour le marché et la propreté), réponds en deux ou trois phrases.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que les recettes locales financent des dépenses précises de la commune",
+                "S'appuie sur le budget : 4 millions pour le marché et la propreté, ou 20 % du budget",
+                "Conclut par une phrase claire contre l'idée reçue"
+              ],
+              "explanation": "Corrigé modèle : « Cette affirmation est fausse. Les taxes locales alimentent le budget de la commune. Dans le budget de Sikoro, 4 millions de francs sur 20, soit 20 %, servent au marché et à la propreté, ce qui profite aux vendeurs et aux clients. » Barème sur 3 : 1 point pour le rôle des recettes, 1 pour l'appui sur le budget (4 / 20 = 20 %), 1 pour la conclusion. Méthode : Étape 3 — Suivre l'argent jusqu'au budget ; Étape 4 — Nommer les dépenses financées.",
+              "answers": [],
+              "starter": "Cette affirmation est fausse, car…"
+            }
+          ]
+        },
+        {
+          "title": "Un chauffeur de taxi communal",
+          "statement": "Brice, chauffeur d'un taxi communal à Sikoro (ville fictive), paie une taxe à la commune et achète des pièces pour son véhicule. Tu analyses sa situation avec les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Brice est chauffeur d'un taxi communal à Sikoro (ville fictive). Chaque semaine, il paie une taxe de stationnement à la commune. Qui collecte cette taxe ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Identifier la nature du prélèvement : c'est une taxe locale de stationnement, payée en échange de l'usage de la gare. Étape 2 — Désigner qui la collecte : la collectivité territoriale, ici la commune. Étape 3 — Suivre l'argent : elle alimente le budget communal. Les douanes ne collectent que les droits sur les marchandises qui passent la frontière.",
+              "answers": [
+                {
+                  "content": "Le propriétaire de la gare",
+                  "correct": false
+                },
+                {
+                  "content": "La commune, une collectivité territoriale",
+                  "correct": true
+                },
+                {
+                  "content": "La Direction générale des douanes",
+                  "correct": false
+                },
+                {
+                  "content": "La Direction générale des impôts, qui garde la somme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Brice achète des pièces pour son taxi. Leur prix contient la TVA, que le commerçant reverse à l'administration. Brice paie donc un impôt indirect.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Repérer : la TVA porte sur un achat, celui des pièces. Étape 2 — Chercher qui verse et qui supporte : le commerçant verse à l'administration, mais Brice supporte la TVA dans le prix. Étape 3 — Conclure : c'est un impôt indirect. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un collègue de Brice propose de glisser un billet à l'agent de la commune pour ne pas payer la taxe. C'est de la ___.",
+              "question_type": "select",
+              "explanation": "Méthode : Étape 1 — Repérer : le collègue offre de l'argent à un agent. Étape 2 — Comparer avec le devoir de contribuer aux charges publiques : il cherche à y échapper. Étape 3 — Nommer l'acte : donner de l'argent pour éviter de payer est de la corruption. La contrebande concerne des marchandises passées sans passer par la douane, le civisme fiscal serait de payer.",
+              "answers": [
+                {
+                  "content": "contrebande",
+                  "correct": false
+                },
+                {
+                  "content": "corruption",
+                  "correct": true
+                },
+                {
+                  "content": "civisme fiscal",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après avoir payé sa taxe, Brice demande un ___ pour prouver qu'il a payé.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 1 — Repérer : Brice a payé une taxe à la commune. Étape 3 — Nommer le bon geste : demander un reçu est du civisme fiscal, car il prouve le paiement et assure que la somme arrive au budget communal.",
+              "answers": [
+                {
+                  "content": "reçu",
+                  "correct": true
+                },
+                {
+                  "content": "ticket",
+                  "correct": true
+                },
+                {
+                  "content": "quittance",
+                  "correct": true
+                },
+                {
+                  "content": "reçu de paiement",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si beaucoup de chauffeurs de taxis communaux ne paient pas leur taxe, quelles sont les deux conséquences probables pour la commune ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Repérer : plusieurs chauffeurs ne paient pas. Étape 2 — Comparer : le devoir de contribuer n'est pas respecté. Étape 3 — Nommer : c'est de l'incivisme fiscal. Étape 4 — Conclure sur les conséquences : les recettes de la commune baissent, donc moins d'argent pour les routes, l'éclairage et la propreté. Il est faux que les routes s'améliorent ou que les honnêtes paient moins : la règle ne change pas pour eux.",
+              "answers": [
+                {
+                  "content": "La commune a moins de moyens pour l'éclairage et la propreté",
+                  "correct": true
+                },
+                {
+                  "content": "La commune a moins d'argent pour entretenir les routes",
+                  "correct": true
+                },
+                {
+                  "content": "Les chauffeurs honnêtes paient moins de taxes",
+                  "correct": false
+                },
+                {
+                  "content": "Les routes sont mieux entretenues grâce aux économies",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Brice hésite à payer sa taxe de stationnement : « Personne ne contrôle. » En deux ou trois phrases, explique pourquoi il doit payer et demander son reçu.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Rappelle le devoir de contribuer aux charges publiques",
+                "Explique l'utilité de la taxe pour les services de la commune",
+                "Cite le reçu comme preuve du paiement"
+              ],
+              "explanation": "Corrigé modèle : « Brice doit payer, car contribuer aux charges publiques est un devoir du citoyen, même sans contrôle. La taxe finance les services de la commune, comme les routes, et le reçu prouve qu'il a payé. » Barème sur 3 : 1 point pour le devoir, 1 point pour l'utilité de la taxe, 1 point pour le reçu. Méthode : Étape 2 — Comparer avec le devoir ; Étape 4 — Proposer le bon comportement.",
+              "answers": [],
+              "starter": "Brice doit payer, car…"
+            }
+          ]
+        },
+        {
+          "title": "Au marché, devant la mairie",
+          "statement": "À Sikoro (ville fictive), 50 vendeuses du marché paient une taxe à la commune. M. Bamba, commerçant, s'interroge sur le comportement de son voisin. Tu calcules, puis tu prends position.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les étapes pour analyser un comportement face à l'impôt.",
+              "question_type": "ordering",
+              "explanation": "Méthode : on part des faits avant de juger. Étape 1 — Repérer ce que fait la personne. Étape 2 — Comparer avec la règle, ici le devoir de contribuer aux charges publiques. Étape 3 — Nommer l'acte avec le bon mot. Étape 4 — Conclure sur les conséquences et proposer le bon comportement. Nommer l'acte avant de comparer avec la règle serait une erreur : on ne peut pas juger ce qu'on n'a pas décrit.",
+              "answers": [
+                {
+                  "content": "Repérer ce que fait la personne face à l'impôt."
+                },
+                {
+                  "content": "Comparer avec le devoir de contribuer aux charges publiques."
+                },
+                {
+                  "content": "Nommer l'acte : civisme fiscal, fraude, contrebande ou corruption."
+                },
+                {
+                  "content": "Conclure sur les conséquences et proposer le bon comportement."
+                }
+              ]
+            },
+            {
+              "content": "Selon la Constitution ivoirienne de 2016, s'acquitter de ses obligations fiscales, c'est-à-dire contribuer aux charges publiques, est :",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer la règle : la Constitution ivoirienne de 2016 prévoit le devoir de s'acquitter de ses obligations fiscales. Étape 2 — Comparer : un devoir est une obligation, pas un choix. Étape 3 — Nommer : c'est un devoir du citoyen. Il n'est pas réservé aux commerçants et n'est pas une faveur : c'est la contribution de chacun à la vie commune.",
+              "answers": [
+                {
+                  "content": "un choix libre de chacun",
+                  "correct": false
+                },
+                {
+                  "content": "une faveur faite à l'État",
+                  "correct": false
+                },
+                {
+                  "content": "un droit réservé aux commerçants",
+                  "correct": false
+                },
+                {
+                  "content": "un devoir du citoyen",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au marché de Sikoro (ville fictive), 50 vendeuses paient chacune une taxe de 300 francs par jour de marché. Combien la commune encaisse-t-elle en 20 jours de marché si toutes paient ?",
+              "question_type": "numeric",
+              "unit": "francs",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer les données : 50 vendeuses, 300 francs par jour, 20 jours. Étape 2 — Calculer par jour : 50 × 300 = 15 000 francs. Étape 3 — Calculer sur 20 jours : 15 000 × 20 = 300 000 francs. Donc la commune encaisse 300 000 francs. Piège : oublier de multiplier par 20 donne seulement 15 000.",
+              "answers": [
+                {
+                  "content": "300000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le même marché, 10 des 50 vendeuses ne paient pas leur taxe de 300 francs pendant 20 jours de marché. Combien de francs manquent à la commune ?",
+              "question_type": "numeric",
+              "unit": "francs",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer : 10 vendeuses, 300 francs par jour, 20 jours. Étape 2 — Calculer par jour : 10 × 300 = 3 000 francs. Étape 3 — Calculer sur 20 jours : 3 000 × 20 = 60 000 francs. Il manque donc 60 000 francs à la commune. Piège : calculer pour 50 vendeuses donnerait 300 000, ce qui est la recette totale et non le manque.",
+              "answers": [
+                {
+                  "content": "60000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Choisis les trois conséquences de la fraude fiscale quand elle est répandue.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 1 — Repérer le comportement : la fraude répandue. Étape 2 — Comparer avec le devoir de contribuer. Étape 3 — Nommer : incivisme fiscal. Étape 4 — Conclure sur les conséquences : moins de recettes pour les services publics, concurrence déloyale pour ceux qui vendent avec facture, sanctions possibles. Il est faux que les services s'améliorent ou que les prix baissent : sans recettes, les services manquent de moyens.",
+              "answers": [
+                {
+                  "content": "Les commerçants honnêtes subissent une concurrence déloyale",
+                  "correct": true
+                },
+                {
+                  "content": "Les services publics s'améliorent plus vite",
+                  "correct": false
+                },
+                {
+                  "content": "Les prix baissent partout",
+                  "correct": false
+                },
+                {
+                  "content": "La commune ou l'État dispose de moins d'argent pour les écoles et les hôpitaux",
+                  "correct": true
+                },
+                {
+                  "content": "Les fraudeurs s'exposent à des sanctions prévues par la loi",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À la mairie de Sikoro, M. Bamba, commerçant, dit : « Je paie mes taxes et je demande toujours mes reçus, mais mon voisin ne paie rien. À quoi bon ? » Prends position en trois ou quatre phrases : doit-il continuer à payer ? Appuie-toi sur la règle.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Prend clairement position : il doit continuer à payer",
+                "S'appuie sur le devoir de contribuer aux charges publiques, qui s'impose à chacun",
+                "Distingue le comportement du voisin, qui est une fraude, du devoir de M. Bamba",
+                "Propose une démarche civique (en parler aux autorités, montrer l'exemple) plutôt que de frauder"
+              ],
+              "explanation": "Corrigé modèle : « M. Bamba doit continuer à payer. Contribuer aux charges publiques est un devoir de chaque citoyen, et ce devoir ne disparaît pas parce que quelqu'un d'autre le néglige. Le voisin qui ne paie rien commet une fraude, mais copier son comportement ferait perdre encore plus de recettes à la commune. M. Bamba peut aussi signaler la situation à l'administration. » Barème sur 4 : 1 point par critère. Méthode : Étape 2 — Comparer avec le devoir ; Étape 3 — Nommer l'acte ; Étape 4 — Proposer le bon comportement.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "La boutique de quartier",
+          "statement": "M. Kra tient une boutique de quartier à Sikoro (ville fictive). Il vend parfois sans facture, et son fournisseur propose des produits moins chers entrés sans passer par la douane. Tu analyses ces comportements et tu prends position.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "M. Kra tient une boutique de quartier. Son fournisseur propose des sacs de riz moins chers, entrés par une piste de brousse sans passer par la douane. Comment s'appelle cet acte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : des marchandises entrent dans le pays sans passer par la douane. Étape 2 — Comparer avec le devoir de contribuer aux charges publiques : les droits de douane ne sont pas payés. Étape 3 — Nommer l'acte : c'est de la contrebande. La corruption suppose de l'argent donné à un agent ; ici, il n'y a pas d'agent, juste un contournement.",
+              "answers": [
+                {
+                  "content": "La corruption",
+                  "correct": false
+                },
+                {
+                  "content": "Une taxe locale",
+                  "correct": false
+                },
+                {
+                  "content": "Le civisme fiscal",
+                  "correct": false
+                },
+                {
+                  "content": "La contrebande",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La TVA que le commerçant ajoute au prix d'un produit lui appartient.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Repérer : la TVA est comprise dans le prix payé par le client. Étape 2 — Chercher qui verse et qui possède : le commerçant la collecte, puis la reverse à l'administration. Étape 3 — Conclure : elle ne lui appartient pas, elle appartient à l'État ; l'affirmation est fausse. Garder cette somme serait de la fraude fiscale.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quand un commerçant propose : « Sans facture, c'est moins cher », le bon réflexe du client est de ___.",
+              "question_type": "select",
+              "explanation": "Méthode : Étape 1 — Repérer : le commerçant propose de vendre sans facture. Étape 2 — Comparer avec le devoir de contribuer : sans facture, la vente n'est pas déclarée. Étape 3 — Nommer : accepter revient à participer à une fraude. Étape 4 — Proposer le bon comportement : demander la facture et la garder.",
+              "answers": [
+                {
+                  "content": "demander la facture et la garder",
+                  "correct": true
+                },
+                {
+                  "content": "proposer encore moins cher",
+                  "correct": false
+                },
+                {
+                  "content": "accepter pour économiser",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chaque mois, M. Kra cache 10 000 francs d'impôts en vendant sans facture. Quelle somme d'impôts a-t-il cachée en une année de 12 mois ?",
+              "question_type": "numeric",
+              "unit": "francs",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer les données : 10 000 francs cachés par mois, 12 mois. Étape 2 — Calculer : 10 000 × 12 = 120 000 francs. Donc M. Kra a caché 120 000 francs en un an. C'est de l'argent qui manque aux écoles, aux hôpitaux et aux routes.",
+              "answers": [
+                {
+                  "content": "120000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Choisis les deux conséquences possibles pour M. Kra s'il est pris à cacher ses ventes.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Repérer le comportement : M. Kra cache ses ventes. Étape 2 — Comparer avec la règle. Étape 3 — Nommer : c'est une fraude fiscale. Étape 4 — Conclure sur les conséquences : la loi prévoit des sanctions, comme des pénalités ou des poursuites. Il est faux que la fraude soit récompensée par des félicitations ou une réduction d'impôts.",
+              "answers": [
+                {
+                  "content": "Des pénalités ou des amendes prévues par la loi",
+                  "correct": true
+                },
+                {
+                  "content": "Une réduction de ses impôts de l'année suivante",
+                  "correct": false
+                },
+                {
+                  "content": "Des poursuites pour fraude fiscale",
+                  "correct": true
+                },
+                {
+                  "content": "Des félicitations de l'administration",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mme Aya, cliente de M. Kra, hésite : « Si je demande une facture, il va croire que je ne lui fais pas confiance. » Prends position en quatre ou cinq phrases : doit-elle demander la facture ? Nomme l'acte, appuie-toi sur la règle et indique deux conséquences de la fraude pour tous.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Prend clairement position : elle doit demander la facture",
+                "Nomme l'acte : vendre sans facture est une fraude fiscale",
+                "S'appuie sur le devoir de contribuer aux charges publiques",
+                "Cite deux conséquences, par exemple moins d'argent public pour les écoles et les routes, concurrence déloyale pour les commerçants honnêtes",
+                "Propose une manière polie de demander la facture"
+              ],
+              "explanation": "Corrigé modèle : « Mme Aya doit demander la facture. Vendre sans facture est une fraude fiscale : la vente n'est pas déclarée et l'impôt n'est pas payé. Contribuer aux charges publiques est un devoir de chaque citoyen, y compris du client. Si beaucoup de ventes sont cachées, l'État et la commune ont moins d'argent pour les écoles et les routes, et les commerçants honnêtes subissent une concurrence déloyale. Elle peut dire poliment : “Je prends ma facture, c'est la règle pour tous.” » Barème sur 6 : 1 point par critère de position, de nom de l'acte et de règle, 2 points pour les deux conséquences, 1 point pour la manière de demander. Méthode : Étapes 1 à 4 de l'analyse d'un comportement face à l'impôt.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

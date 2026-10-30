@@ -1,1586 +1,1403 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Les forces",
       "subtitle": "Leçon 2 — progression DPFC 2026-2027",
       "level_name": "3ème",
       "material_name": "Physique-Chimie",
-      "essentials": [
+      "theme": "teal",
+      "figures": [
         {
-          "name": "Actions de contact et actions à distance",
-          "subtitle": "Reconnaître comment une force s'exerce sur un corps",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Dire ce qu'est une force et nommer son auteur et son receveur.</li><li>Distinguer une action de contact d'une action à distance.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le tir au but.</strong> Sur le terrain du quartier, un joueur frappe le ballon du pied : le pied touche le ballon et le fait partir. Le gardien plonge et détourne le tir avec ses gants : ses gants touchent le ballon. Plus tard, le ballon, lancé très haut, retombe vers la pelouse. Personne ne le touche pourtant, et il revient quand même au sol.</p><p><strong>Le pont.</strong> Le pied et les gants agissent sur le ballon en le touchant : ce sont des <strong>actions de contact</strong>. Le pied, ou le gardien, est l'<strong>auteur</strong> de l'action ; le ballon est le <strong>receveur</strong>. Quand le ballon retombe, c'est la Terre qui l'attire sans le toucher : c'est une <strong>action à distance</strong>, et c'est le poids que tu connais.</p><p><strong>La limite de l'image.</strong> Une force n'a pas besoin de contact pour exister : le ballon qui retombe le prouve. Et le contact ne dure pas : dès que le ballon a quitté le pied, le pied n'exerce plus de force sur lui.</p><h2>Ce qu'il faut retenir</h2><blockquote><p><strong>Force</strong> : action mécanique exercée par un corps, l'<strong>auteur</strong>, sur un autre corps, le <strong>receveur</strong>.</p><ul><li><strong>Action de contact</strong> : l'auteur touche le receveur. Elle est <em>localisée</em> si elle s'exerce sur une toute petite zone (le pied qui frappe le ballon), et <em>répartie</em> si elle s'exerce sur une grande surface (le vent sur une voile).</li><li><strong>Action à distance</strong> : l'auteur agit sans toucher le receveur (le poids : la Terre attire le ballon ; un aimant attire un clou).</li></ul></blockquote><h2>Exemple résolu</h2><p>Pour chaque action, donne l'auteur, le receveur et le type d'action : a) le pied frappe un ballon posé ; b) la Terre attire le ballon lancé en l'air.</p><ol><li><strong>a)</strong> Le pied agit sur le ballon : auteur = le pied, receveur = le ballon.</li><li>Le pied touche le ballon sur une petite zone : action de contact localisée.</li><li><strong>b)</strong> La Terre agit sur le ballon : auteur = la Terre, receveur = le ballon.</li><li>Rien ne touche le ballon en l'air : action à distance (c'est son poids).</li></ol><h2>Le piège à éviter</h2><p>Penser que le poids n'est pas une force « parce que la Terre ne touche pas le ballon ». Une force n'exige pas de contact : l'action à distance en est la preuve.</p><p>Pour t'en sortir, demande-toi toujours : <em>qui agit sur qui ?</em> Si tu trouves un auteur et un receveur, il y a une force, qu'il y ait contact ou non.</p><h2>En une phrase</h2><p>Une force est l'action d'un corps sur un autre, avec contact (le pied sur le ballon) ou à distance (la Terre sur le ballon).</p>",
-          "exercises": [
+          "key": "tir-au-but",
+          "kind": "coordinate_plane",
+          "description": "Une grille de 0 à 7 carreaux en abscisse et de 0 à 4 en ordonnée, 1 carreau valant 1 cm. Le ballon est au point B(1 ; 2), devant le pied d'un joueur qui tire au but. La force F exercée par le pied sur le ballon est un vecteur horizontal de 4 cm, tracé vers la droite à partir de B, à l'échelle 1 cm pour 10 N.",
+          "params": {
+            "xmin": 0,
+            "xmax": 7,
+            "ymin": 0,
+            "ymax": 4,
+            "points": [
+              {
+                "id": "B",
+                "x": 1,
+                "y": 2
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F",
+                "dx": 4,
+                "dy": 0,
+                "ox": 1,
+                "oy": 2
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "ballon-en-vol",
+          "kind": "coordinate_plane",
+          "description": "Une grille de 0 à 6 carreaux en abscisse et de 0 à 6 en ordonnée, 1 carreau valant 1 cm. Un ballon de masse 0,4 kg est en l'air ; son centre de gravité G est au point G(3 ; 5). Son poids P est un vecteur vertical de 4 cm, tracé vers le bas à partir de G, à l'échelle 1 cm pour 1 N.",
+          "params": {
+            "xmin": 0,
+            "xmax": 6,
+            "ymin": 0,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "G",
+                "x": 3,
+                "y": 5
+              }
+            ],
+            "vectors": [
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -4,
+                "ox": 3,
+                "oy": 5
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "coup-franc-oblique",
+          "kind": "coordinate_plane",
+          "description": "Une grille de 0 à 7 carreaux en abscisse et de 0 à 6 en ordonnée, 1 carreau valant 1 cm. Sur un coup franc, le ballon est au point A(1 ; 1). La force F du pied est un vecteur oblique qui part de A, monte de 4 carreaux et avance de 3 carreaux vers la droite : il mesure 5 cm, à l'échelle 1 cm pour 10 N.",
+          "params": {
+            "xmin": 0,
+            "xmax": 7,
+            "ymin": 0,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F",
+                "dx": 3,
+                "dy": 4,
+                "ox": 1,
+                "oy": 1
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "duel-au-ballon",
+          "kind": "coordinate_plane",
+          "description": "Une grille de 0 à 8 carreaux en abscisse et de 0 à 4 en ordonnée, 1 carreau valant 1 cm. Le ballon est au point O(4 ; 2). Le joueur A le pousse avec la force FA, vecteur horizontal de 3 cm vers la droite ; le joueur B le pousse avec la force FB, vecteur horizontal de 2 cm vers la gauche. Échelle : 1 cm pour 20 N.",
+          "params": {
+            "xmin": 0,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 4,
+            "points": [
+              {
+                "id": "O",
+                "x": 4,
+                "y": 2
+              }
+            ],
+            "vectors": [
+              {
+                "label": "FA",
+                "dx": 3,
+                "dy": 0,
+                "ox": 4,
+                "oy": 2
+              },
+              {
+                "label": "FB",
+                "dx": -2,
+                "dy": 0,
+                "ox": 4,
+                "oy": 2
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "dynamometre",
+          "kind": "plate",
+          "description": "Un dynamomètre à ressort, légendé : l'anneau en haut pour le tenir, le ressort dans le tube, la graduation en newtons, l'index (ou pointeur) qui se déplace devant la graduation, et le crochet en bas où l'on accroche la charge. Plus la force est grande, plus le ressort s'allonge.",
+          "params": {
+            "plate": "dynamometer",
+            "labels": [
+              {
+                "part": "ring",
+                "text": "Anneau"
+              },
+              {
+                "part": "spring",
+                "text": "Ressort"
+              },
+              {
+                "part": "scale",
+                "text": "Graduation"
+              },
+              {
+                "part": "pointer",
+                "text": "Index"
+              },
+              {
+                "part": "hook",
+                "text": "Crochet"
+              }
+            ],
+            "highlight": [],
+            "numbering": "names"
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître les effets d'une force",
+          "remember": "Une force est une **action mécanique** exercée par un corps (l'**auteur**) sur un autre corps (le **receveur**). On ne voit pas une force : on la reconnaît à ses effets. Une force peut : **mettre en mouvement** un corps immobile ; **modifier le mouvement** d'un corps (sa vitesse : l'accélérer, le ralentir, l'arrêter ; ou sa direction) ; **déformer** un corps (la déformation peut rester ou disparaître). Une même force peut produire plusieurs effets à la fois.",
+          "method": [
+            "Repérer le corps étudié (le receveur) et le corps qui agit sur lui (l'auteur).",
+            "Comparer l'état du receveur avant et après l'action : immobile ou en mouvement, vitesse, direction, forme.",
+            "Nommer le ou les effets observés : mise en mouvement, modification du mouvement, déformation.",
+            "Conclure par une phrase : « L'auteur exerce une force sur le receveur ; elle le … »."
+          ],
+          "example": {
+            "statement": "Au coup d'envoi, un joueur frappe du pied le ballon immobile. Le ballon part vers l'avant et s'aplatit un instant sous le pied. Quels sont les effets de la force ?",
+            "steps": [
+              "Repérer : le receveur est le ballon, l'auteur est le pied du joueur.",
+              "Comparer : avant, le ballon est immobile et rond ; après, il roule, et pendant le choc il est aplati.",
+              "Nommer : le ballon passe de l'immobilité au mouvement (mise en mouvement) et sa forme change un instant (déformation).",
+              "Conclure : le pied exerce une force sur le ballon ; elle le met en mouvement et le déforme."
+            ]
+          },
+          "pitfall": "Ne pas confondre « mettre en mouvement » et « modifier le mouvement ». Mettre en mouvement, c'est faire partir un corps immobile. Modifier le mouvement, c'est changer la vitesse ou la direction d'un corps déjà en mouvement. Contre-exemple : un ballon roule à 15 m/s et le gardien l'arrête (15 m/s puis 0 m/s). Le ballon n'était pas immobile avant : le gardien modifie son mouvement, il ne le met pas en mouvement. Pose-toi toujours la question : « Avant l'action, le corps bougeait-il déjà ? »",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître les effets d'une force",
+            "statement": "Sur le terrain du quartier, tu reconnais les effets des forces avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces phrases, laquelle définit une force ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : une force met en jeu un corps qui agit (l'auteur) et un corps qui subit (le receveur). Étape 2 — Comparer : on ne voit pas la force, on voit ce qu'elle change sur le receveur. Étape 3 — Nommer : mouvement ou déformation. Étape 4 — Conclure : une force est une action mécanique exercée par un corps sur un autre. La proposition « quantité de matière » confond la force avec la masse.",
+                "answers": [
+                  {
+                    "content": "Une action mécanique exercée par un corps sur un autre corps",
+                    "correct": true
+                  },
+                  {
+                    "content": "La quantité de matière contenue dans un corps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un mouvement que le corps garde pour toujours",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une propriété qui ne concerne que les corps qui bougent",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les trois effets que peut produire une force sur un corps ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer : l'auteur agit sur le receveur. Étape 2 — Comparer l'état du receveur avant et après : immobile ou en mouvement, vitesse, direction, forme. Étape 3 — Nommer les effets : mettre en mouvement un corps immobile, modifier le mouvement d'un corps déjà en mouvement (vitesse ou direction), déformer un corps. Changer la masse ou la couleur n'est jamais l'effet d'une force : la masse ne change pas quand on pousse un ballon.",
+                "answers": [
+                  {
+                    "content": "Mettre en mouvement un corps immobile",
+                    "correct": true
+                  },
+                  {
+                    "content": "Modifier le mouvement d'un corps",
+                    "correct": true
+                  },
+                  {
+                    "content": "Déformer un corps",
+                    "correct": true
+                  },
+                  {
+                    "content": "Changer la masse du corps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Changer la couleur du corps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Chauffer le corps",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au coup d'envoi, un joueur frappe du pied le ballon posé et immobile : le ballon part vers l'avant. Quel est l'effet de la force du pied ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : receveur = le ballon, auteur = le pied. Étape 2 — Comparer : avant, le ballon est immobile ; après, il roule. Étape 3 — Nommer : un corps immobile est devenu mobile, c'est une mise en mouvement. Étape 4 — Conclure : le pied met le ballon en mouvement. La proposition « arrête le ballon » est le contraire de ce qu'on observe.",
+                "answers": [
+                  {
+                    "content": "Il arrête le ballon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il met le ballon en mouvement",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il ne produit aucun effet",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il change la masse du ballon",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le gardien détourne un tir : le ballon change de direction. La force exercée par le gardien a modifié le mouvement du ballon.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : receveur = le ballon, auteur = le gardien. Étape 2 — Comparer : avant, le ballon va vers le but ; après, il part sur le côté. Étape 3 — Nommer : la direction a changé, donc le mouvement est modifié. Étape 4 — Conclure : l'affirmation est vraie. Une force qui change la direction ou la vitesse d'un corps modifie son mouvement.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à l'effet principal de la force.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'auteur et le receveur dans chaque situation. Étape 2 — Comparer avant et après. Étape 3 — Nommer l'effet : l'enfant fait partir un ballon immobile (mise en mouvement) ; le défenseur ralentit un ballon déjà lancé (modification du mouvement) ; le pied écrase la canette vide (déformation, qui reste après l'action).",
+                "answers": [
+                  {
+                    "content": "Un enfant pousse un ballon immobile",
+                    "match": "Mise en mouvement"
+                  },
+                  {
+                    "content": "Un défenseur ralentit un ballon qui roule",
+                    "match": "Modification du mouvement"
+                  },
+                  {
+                    "content": "Un joueur écrase une canette vide du pied",
+                    "match": "Déformation"
+                  }
+                ]
+              },
+              {
+                "content": "Un ballon roule à 15 m/s. Le gardien l'arrête : sa vitesse passe à 0 m/s. Quel est l'effet de la force du gardien ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : receveur = le ballon, auteur = le gardien. Étape 2 — Comparer : avant, le ballon roule à 15 m/s ; après, il est à 0 m/s. Étape 3 — Nommer : le ballon était déjà en mouvement, donc ce n'est pas une mise en mouvement ; sa vitesse a changé, le mouvement est modifié. Étape 4 — Conclure : le gardien modifie le mouvement du ballon. La proposition « mise en mouvement » est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Elle met le ballon en mouvement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle déforme le ballon uniquement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle modifie le mouvement du ballon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle n'a aucun effet, car le ballon est déjà arrêté à la fin",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Classer une action mécanique",
+          "remember": "Une action **de contact** : l'auteur touche le receveur (le pied sur le ballon, la main sur une porte, le vent sur une voile). Une action **à distance** : l'auteur agit sans contact (la Terre qui attire un corps, c'est le **poids** ; un aimant qui attire un clou). Une force est **localisée** quand elle s'exerce sur une toute petite zone, qu'on réduit à un point (le pied sur le ballon). Elle est **répartie** quand elle s'exerce sur toute une surface ou dans tout le volume du corps (le vent sur une voile ; le poids, réparti dans tout le corps).",
+          "method": [
+            "Identifier l'auteur et le receveur de l'action.",
+            "Se demander si l'auteur touche le receveur : oui, c'est une action de contact ; non, c'est une action à distance.",
+            "Observer la zone d'action : une petite zone réduite à un point, la force est localisée ; toute une surface ou tout le volume, la force est répartie.",
+            "Conclure en donnant les deux classements : contact ou distance, localisée ou répartie."
+          ],
+          "example": {
+            "statement": "Le vent gonfle la voile d'une pirogue. Classer cette action.",
+            "steps": [
+              "Identifier : l'auteur est le vent, le receveur est la voile.",
+              "Se demander : l'air est en contact avec la voile, donc c'est une action de contact.",
+              "Observer : le vent appuie sur toute la surface de la voile, pas sur un seul point, donc la force est répartie.",
+              "Conclure : c'est une action de contact répartie."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'un corps qui n'est plus touché ne subit plus de force. Contre-exemple : le gardien dégage un ballon de 0,4 kg ; à 10 m de haut, plus rien ne le touche, et pourtant il retombe. La Terre exerce sur lui une action à distance, son poids (4 N). Retiens aussi que la force du pied cesse dès que le contact cesse. Avant de répondre « aucune force », demande-toi toujours : « La Terre agit-elle encore sur ce corps ? »",
+          "figure": null,
+          "exercise": {
+            "title": "Classer des actions mécaniques",
+            "statement": "Autour du ballon, tu classes les actions de contact ou à distance, localisées ou réparties.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces actions, laquelle est une action à distance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier l'auteur et le receveur de chaque action. Étape 2 — Se demander si l'auteur touche le receveur : le pied, le joueur qui tire la corde et les gants du gardien touchent le receveur (contact) ; la Terre ne touche pas le ballon lancé en l'air, elle agit à distance (c'est le poids). Étape 4 — Conclure : la Terre qui attire le ballon est une action à distance. Le pied qui frappe est le piège : il touche le ballon.",
+                "answers": [
+                  {
+                    "content": "Le pied d'un joueur frappe un ballon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un joueur tire sur la corde d'une pirogue",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Terre attire un ballon lancé en l'air",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le gardien bloque le ballon avec ses gants",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque action à sa description complète.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier l'auteur et le receveur. Étape 2 — Se demander si l'auteur touche le receveur : le pied et le vent touchent, la Terre ne touche pas le ballon en l'air. Étape 3 — Observer la zone : le pied agit sur une petite zone (localisée) ; le vent agit sur toute la surface de la voile (répartie). Étape 4 — Conclure : contact localisée, contact répartie, à distance.",
+                "answers": [
+                  {
+                    "content": "Un pied frappe le ballon",
+                    "match": "Contact localisée"
+                  },
+                  {
+                    "content": "Le vent gonfle la voile d'une pirogue",
+                    "match": "Contact répartie"
+                  },
+                  {
+                    "content": "La Terre attire le ballon en l'air",
+                    "match": "À distance"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux actions de contact ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier l'auteur et le receveur de chaque action. Étape 2 — Se demander si l'auteur touche le receveur. La main du gardien touche le ballon et la main du joueur touche le maillot : ce sont des actions de contact. La Terre qui attire un fruit et l'aimant qui attire un clou n'ont pas besoin de toucher : ce sont des actions à distance.",
+                "answers": [
+                  {
+                    "content": "La main du gardien bloque le ballon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un joueur tire le maillot d'un adversaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Terre attire un fruit qui tombe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un aimant attire un clou sans le toucher",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le poids d'un ballon lancé en l'air",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le pied frappe le ballon sur une toute petite zone de contact : cette action est ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : auteur = le pied, receveur = le ballon. Étape 2 — Le pied touche le ballon : c'est une action de contact. Étape 3 — Observer la zone : elle est très petite, on peut la réduire à un point, donc la force est localisée. Étape 4 — Conclure : action de contact localisée. « Répartie » serait le cas du vent sur toute une voile.",
+                "answers": [
+                  {
+                    "content": "localisée",
+                    "correct": true
+                  },
+                  {
+                    "content": "répartie",
+                    "correct": false
+                  },
+                  {
+                    "content": "à distance",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un aimant peut exercer une force sur un clou sans le toucher.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : auteur = l'aimant, receveur = le clou. Étape 2 — Se demander si l'auteur touche le receveur : non, l'aimant agit à travers l'air. Étape 4 — Conclure : c'est une action à distance, donc l'affirmation est vraie. Croire qu'il faut toujours toucher pour exercer une force est l'erreur de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le gardien a dégagé le ballon, qui monte à 10 m de haut. Le pied ne le touche plus. On néglige l'action de l'air. Quelle affirmation est vraie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le receveur est le ballon ; le pied n'agit plus. Étape 2 — Se demander quel corps agit encore : la Terre. Elle n'a pas besoin de toucher le ballon. Étape 4 — Conclure : le ballon subit son poids, action à distance exercée par la Terre. « Aucune force sans contact » est faux, et la force du pied ne continue pas après la fin du contact.",
+                "answers": [
+                  {
+                    "content": "Le ballon ne subit aucune force, car plus rien ne le touche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le ballon subit son poids, une action à distance exercée par la Terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le ballon subit encore la force du pied, qui continue à le pousser vers le haut",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Donner les caractéristiques d'une force",
+          "remember": "Une force est caractérisée par **quatre éléments** : son **point d'application** (le point où elle s'exerce ; pour le poids, c'est le centre de gravité G du corps), sa **droite d'action** (la droite suivant laquelle elle s'exerce : verticale, horizontale ou oblique), son **sens** (d'un côté ou de l'autre de cette droite : vers le haut, le bas, la droite, la gauche) et son **intensité**. L'intensité s'exprime en **newton (N)** et se mesure avec un **dynamomètre**. Pour le poids : $P = m \\times g$ avec $g = 10$ N/kg.",
+          "method": [
+            "Repérer le point d'application : le point où la force s'exerce sur le corps.",
+            "Donner la droite d'action : la droite suivant laquelle la force agit (verticale, horizontale ou oblique).",
+            "Donner le sens de la force sur cette droite (vers le haut, le bas, la droite ou la gauche).",
+            "Déterminer l'intensité en newton : la lire sur le dynamomètre, ou la calculer avec $P = m \\times g$ pour un poids.",
+            "Présenter les quatre caractéristiques dans une phrase."
+          ],
+          "example": {
+            "statement": "Un ballon de masse 0,4 kg est lancé en l'air. Donner les caractéristiques de son poids (g = 10 N/kg).",
+            "steps": [
+              "Repérer : le poids s'applique au centre de gravité G du ballon.",
+              "Donner la droite d'action : c'est la verticale passant par G.",
+              "Donner le sens : vers le bas, vers la Terre.",
+              "Déterminer l'intensité : $P = m \\times g = 0,4 \\times 10 = 4$ N.",
+              "Présenter : le poids du ballon a pour point d'application G, pour droite d'action la verticale, il est dirigé vers le bas et vaut 4 N."
+            ]
+          },
+          "pitfall": "Ne pas confondre la masse et le poids, ni la direction et le sens. La masse se mesure en kg, le poids en N : un ballon de masse 0,4 kg a un poids de 4 N, pas de 0,4 N, car il faut multiplier par g = 10 N/kg. Et « verticale » est une droite d'action, alors que « vers le bas » est un sens : une même droite verticale a deux sens possibles, vers le haut ou vers le bas. Donne toujours les deux.",
+          "figure": "dynamometre",
+          "exercise": {
+            "title": "Donner les caractéristiques d'une force",
+            "statement": "Avec le dynamomètre et le poids du ballon, tu donnes les quatre caractéristiques d'une force.",
+            "exercise_type": "fixation",
+            "figure": "dynamometre",
+            "questions": [
+              {
+                "content": "Quel appareil permet de mesurer l'intensité d'une force ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche à mesurer une force, pas une masse ni une durée. Étape 4 — Déterminer l'intensité en newton (N) : on lit un dynamomètre, dont le ressort s'allonge d'autant plus que la force est grande. La balance mesure une masse en kg : c'est la confusion entre masse et poids que la fiche signale.",
+                "answers": [
+                  {
+                    "content": "Un dynamomètre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une balance à plateaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un chronomètre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une éprouvette graduée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur le dynamomètre de la figure, quelle partie se déplace devant la graduation pour indiquer la valeur de la force ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Déterminer l'intensité en newton : on accroche la charge au crochet, le ressort s'allonge et l'index (ou pointeur) s'arrête devant un trait de la graduation. On lit ce trait. Le crochet reçoit la charge mais ne donne pas la valeur ; l'anneau sert à tenir l'appareil ; la graduation est fixe.",
+                "answers": [
+                  {
+                    "content": "Le crochet",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'index (le pointeur)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'anneau",
+                    "correct": false
+                  },
+                  {
+                    "content": "La graduation",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un joueur a une masse de 60 kg. Calcule son poids en newton (g = 10 N/kg).",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : le poids s'applique au centre de gravité du joueur. Étape 2 — Droite d'action : la verticale. Étape 3 — Sens : vers le bas. Étape 4 — Déterminer l'intensité : $P = m \\times g = 60 \\times 10 = 600$ N. Étape 5 — Présenter : poids du joueur, 600 N. Répondre 60 N oublie de multiplier par g.",
+                "answers": [
+                  {
+                    "content": "600",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "N"
+              },
+              {
+                "content": "Le dynamomètre indique 8 N quand on y accroche un sac de crampons. Quelle est la masse du sac en kg ? On prend g = 10 N/kg et le poids vaut $P = m \\times g$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : la force mesurée est le poids du sac, appliqué en son centre de gravité. Étape 4 — Déterminer l'intensité : $P = 8$ N. On en déduit la masse : $m = P \\div g = 8 \\div 10 = 0,8$ kg. Répondre 80 kg vient d'une multiplication au lieu d'une division.",
+                "answers": [
+                  {
+                    "content": "0,8",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "kg"
+              },
+              {
+                "content": "Un ballon de masse 0,5 kg est en l'air (g = 10 N/kg). Quelles sont les caractéristiques de son poids ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le point d'application : le centre de gravité G du ballon. Étape 2 — Droite d'action : la verticale passant par G. Étape 3 — Sens : vers le bas. Étape 4 — Déterminer l'intensité : $P = m \\times g = 0,5 \\times 10 = 5$ N. Étape 5 — Présenter : point G, verticale, vers le bas, 5 N. La proposition « 0,5 N » oublie g ; « horizontale » confond verticale et horizontale.",
+                "answers": [
+                  {
+                    "content": "Point d'application : G ; verticale ; vers le haut ; 5 N",
+                    "correct": false
+                  },
+                  {
+                    "content": "Point d'application : G ; horizontale ; vers le bas ; 5 N",
+                    "correct": false
+                  },
+                  {
+                    "content": "Point d'application : G ; verticale ; vers le bas ; 5 N",
+                    "correct": true
+                  },
+                  {
+                    "content": "Point d'application : G ; verticale ; vers le bas ; 0,5 N",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour donner les caractéristiques d'une force.",
+                "question_type": "ordering",
+                "explanation": "La méthode suit toujours le même ordre. Étape 1 — Repérer le point d'application. Étape 2 — Donner la droite d'action. Étape 3 — Donner le sens. Étape 4 — Déterminer l'intensité en newton. On peut ensuite présenter les quatre caractéristiques dans une phrase.",
+                "answers": [
+                  {
+                    "content": "Repérer le point d'application"
+                  },
+                  {
+                    "content": "Donner la droite d'action"
+                  },
+                  {
+                    "content": "Donner le sens"
+                  },
+                  {
+                    "content": "Déterminer l'intensité en newton"
+                  }
+                ]
+              },
+              {
+                "content": "L'intensité d'une force s'exprime en ___ (écris le nom de l'unité, en toutes lettres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Déterminer l'intensité en newton : l'intensité d'une force se mesure avec un dynamomètre et s'exprime en newton, de symbole N. Le kilogramme (kg) est l'unité de la masse, pas de la force : c'est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "newton",
+                    "correct": true
+                  },
+                  {
+                    "content": "newtons",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « Le poids d'un ballon de masse 0,4 kg est de 0,4 N. » Quelle est la bonne correction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Déterminer l'intensité en newton : le poids se calcule avec $P = m \\times g = 0,4 \\times 10 = 4$ N. L'élève a recopié la masse en changeant l'unité, mais 1 kg ne fait pas 1 N. Il a oublié de multiplier par g = 10 N/kg. La masse est en kg, le poids en N.",
+                "answers": [
+                  {
+                    "content": "Il a oublié de multiplier par g : $P = 0,4 \\times 10 = 4$ N",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a oublié de convertir 0,4 kg en grammes : $P = 400$ N",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison, car 1 kg correspond toujours à 1 N",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il doit diviser par g : $P = 0,4 \\div 10 = 0,04$ N",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Représenter une force par un vecteur à l'échelle",
+          "remember": "Une force se représente par un **vecteur**, une flèche : son **origine** est le point d'application ; la **droite qui le porte** est la droite d'action ; sa **pointe** donne le sens ; sa **longueur** est proportionnelle à l'intensité, selon une **échelle**. Exemple d'échelle : 1 cm pour 10 N, donc une force de 30 N se représente par 3 cm. Longueur (cm) = intensité (N) $\\div$ newtons par cm. Pour lire une force sur un dessin, on fait l'inverse : intensité (N) = longueur (cm) $\\times$ newtons par cm.",
+          "method": [
+            "Lire l'échelle (combien de newtons représente 1 cm) et l'intensité de la force.",
+            "Calculer la longueur du vecteur : l'intensité en newton divisée par le nombre de newtons que représente 1 cm.",
+            "Placer l'origine du vecteur au point d'application de la force.",
+            "Tracer le vecteur sur la droite d'action, dans le bon sens, avec la longueur calculée.",
+            "Nommer le vecteur par sa lettre et noter l'échelle sur le schéma."
+          ],
+          "example": {
+            "statement": "Sur un coup franc, un joueur frappe le ballon avec une force F de 40 N, horizontale, vers la droite (vers le but). Représenter F à l'échelle 1 cm pour 10 N.",
+            "steps": [
+              "Lire : l'échelle est 1 cm pour 10 N et l'intensité de F est 40 N.",
+              "Calculer la longueur : $40 \\div 10 = 4$ cm.",
+              "Placer l'origine du vecteur au point de contact entre le pied et le ballon, point d'application de F.",
+              "Tracer une flèche horizontale de 4 cm, dirigée vers la droite.",
+              "Nommer le vecteur F et noter l'échelle : 1 cm pour 10 N."
+            ]
+          },
+          "pitfall": "Ne pas confondre la longueur du vecteur et l'intensité de la force : sans l'échelle, la longueur ne dit rien. Contre-exemple : un vecteur de 3 cm représente 30 N avec l'échelle 1 cm pour 10 N, mais 15 N avec l'échelle 1 cm pour 5 N. Ce n'est jamais 3 N par défaut. Lis toujours l'échelle avant de mesurer ou de tracer.",
+          "figure": "tir-au-but",
+          "exercise": {
+            "title": "Représenter une force à l'échelle",
+            "statement": "Sur un coup franc oblique, tu passes de la force au vecteur et du vecteur à la force avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "coup-franc-oblique",
+            "questions": [
+              {
+                "content": "Un vecteur force mesure 5 cm. L'échelle est 1 cm pour 10 N. Quelle est l'intensité de la force en newton ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : l'échelle dit que 1 cm représente 10 N, et le vecteur mesure 5 cm. Étape 2 — Calculer, en sens inverse : intensité = longueur $\\times$ 10 N par cm $= 5 \\times 10 = 50$ N. Répondre 5 N confond la longueur en cm avec l'intensité : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "50",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "N"
+              },
+              {
+                "content": "Une force de 30 N est représentée à l'échelle 1 cm pour 10 N. Quelle est la longueur du vecteur en cm ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : l'échelle est 1 cm pour 10 N et la force vaut 30 N. Étape 2 — Calculer la longueur : $30 \\div 10 = 3$ cm. Étapes 3 à 5 — Placer l'origine au point d'application, tracer le vecteur de 3 cm dans le bon sens, le nommer. Répondre 30 cm oublie l'échelle.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "cm"
+              },
+              {
+                "content": "Une force de 60 N est représentée à l'échelle 1 cm pour 20 N. Quelle est la longueur du vecteur en cm ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : 1 cm représente 20 N, la force vaut 60 N. Étape 2 — Calculer : $60 \\div 20 = 3$ cm. Étapes 3 à 5 — Placer l'origine, tracer, nommer. Avec une échelle de 1 cm pour 10 N on aurait 6 cm : la longueur dépend de l'échelle.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "cm"
+              },
+              {
+                "content": "Un vecteur force mesure 4 cm. L'échelle est 1 cm pour 5 N. Quelle est l'intensité de la force en newton ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : 1 cm représente 5 N, le vecteur mesure 4 cm. Étape 2 — Calculer, en sens inverse : $4 \\times 5 = 20$ N. Répondre 4 N oublie l'échelle ; répondre 0,8 N ou 1,25 N vient d'une division à la place de la multiplication.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "N"
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour représenter une force par un vecteur.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire l'échelle et l'intensité. Étape 2 — Calculer la longueur du vecteur (intensité divisée par les newtons d'un centimètre). Étape 3 — Placer l'origine au point d'application. Étape 4 — Tracer le vecteur sur la droite d'action, dans le bon sens. Étape 5 — Nommer le vecteur et noter l'échelle. On calcule la longueur avant de tracer.",
+                "answers": [
+                  {
+                    "content": "Lire l'échelle et l'intensité de la force"
+                  },
+                  {
+                    "content": "Calculer la longueur du vecteur"
+                  },
+                  {
+                    "content": "Placer l'origine au point d'application"
+                  },
+                  {
+                    "content": "Tracer le vecteur sur la droite d'action, dans le bon sens"
+                  },
+                  {
+                    "content": "Nommer le vecteur et noter l'échelle"
+                  }
+                ]
+              },
+              {
+                "content": "Quelle caractéristique d'une force est donnée par l'origine de son vecteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Placer l'origine du vecteur au point d'application de la force. L'origine est donc le point d'application. La pointe de la flèche donne le sens, la longueur donne l'intensité et la droite qui porte la flèche donne la droite d'action.",
+                "answers": [
+                  {
+                    "content": "Son sens",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son intensité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son point d'application",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa droite d'action",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un vecteur force de 3 cm de long représente toujours une force de 3 N.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire l'échelle : elle change d'un dessin à l'autre. Étape 2 — Calculer : avec 1 cm pour 10 N, 3 cm représentent 30 N ; avec 1 cm pour 5 N, 3 cm représentent 15 N. La longueur ne donne l'intensité qu'avec l'échelle. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un vecteur de 5 cm part du ballon, oblique vers le haut et la droite. L'échelle est 1 cm pour 10 N. Quelles sont les trois affirmations vraies ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Lire l'échelle : 1 cm pour 10 N. Étape 2 — Intensité : $5 \\times 10 = 50$ N. Étape 3 — L'origine du vecteur est au point d'application, ici le ballon. Étape 4 — Le vecteur est oblique, donc la droite d'action est oblique. L'intensité de 5 N oublie l'échelle ; la pointe de la flèche indique le sens, pas le point d'application.",
+                "answers": [
+                  {
+                    "content": "Son point d'application est le ballon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son intensité est de 50 N",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa droite d'action est oblique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son intensité est de 5 N",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son point d'application est la pointe de la flèche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa droite d'action est horizontale",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le dégagement du gardien",
+          "exercise_type": "fixation",
+          "figure": "ballon-en-vol",
+          "statement": "Sur le terrain du quartier, le gardien dégage un ballon de masse 0,4 kg posé sur le sol. Pendant le coup de pied, son pied exerce sur le ballon une force de 60 N. Une fois en l'air, le ballon n'est plus touché. Tu prends g = 10 N/kg et tu négliges l'action de l'air.",
+          "questions": [
             {
-              "title": "Comprendre — Qui agit sur qui ?",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Un gardien dégage du pied un ballon posé et immobile. Le ballon part et s'aplatit un instant. Quels sont les deux effets de la force du pied ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Repérer : receveur = le ballon, auteur = le pied. Étape 2 — Comparer avant et après : avant, il est immobile et rond ; après, il part en l'air, et pendant le choc il est aplati. Étape 3 — Nommer les effets : mise en mouvement et déformation. Le ballon n'a pas changé de masse, et il n'était pas en mouvement avant, donc il ne s'agit pas d'une modification de mouvement.",
+              "answers": [
                 {
-                  "content": "Qu'est-ce qu'une force ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une force est une action mécanique d'un corps (l'auteur) sur un autre (le receveur). Ce n'est pas une quantité de matière : cela, c'est la masse. Ce n'est pas non plus un mouvement : le mouvement peut être un effet de la force.",
-                  "answers": [
-                    {
-                      "content": "Une action mécanique exercée par un corps sur un autre corps",
-                      "correct": true
-                    },
-                    {
-                      "content": "La quantité de matière contenue dans un corps",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le mouvement d'un corps sur le terrain",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Il met le ballon en mouvement",
+                  "correct": true
                 },
                 {
-                  "content": "Pour exercer une force sur un ballon, un corps doit toujours le toucher.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Souviens-toi du ballon qui retombe : la Terre l'attire sans le toucher. Cette action à distance est une force, le poids. Seules les actions de contact exigent que les deux corps se touchent.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Il déforme le ballon un instant",
+                  "correct": true
                 },
                 {
-                  "content": "Un joueur frappe un ballon posé sur la pelouse. Quel est l'auteur de la force et quel est le receveur ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'auteur est le corps qui agit : le pied. Le receveur est le corps qui subit l'action : le ballon. L'erreur la plus tentante est d'inverser les rôles : le ballon ne frappe pas le pied, il reçoit le coup.",
-                  "answers": [
-                    {
-                      "content": "Auteur : le pied ; receveur : le ballon",
-                      "correct": true
-                    },
-                    {
-                      "content": "Auteur : le ballon ; receveur : le pied",
-                      "correct": false
-                    },
-                    {
-                      "content": "Auteur : le terrain ; receveur : le ballon",
-                      "correct": false
-                    },
-                    {
-                      "content": "Auteur : le joueur ; receveur : le but",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Il modifie le mouvement du ballon, car il roulait déjà",
+                  "correct": false
                 },
                 {
-                  "content": "Parmi ces actions, lesquelles sont des actions à distance ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le poids (la Terre attire le ballon) et l'aimant qui attire le clou agissent sans contact. Le pied et le gardien touchent le ballon : ce sont des actions de contact. Le vent touche aussi la voile : contact réparti.",
-                  "answers": [
-                    {
-                      "content": "La Terre attire un ballon lancé en l'air",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un aimant attire un clou sans le toucher",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le pied pousse le ballon",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le gardien attrape le ballon",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le vent pousse la voile d'un bateau",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le pied d'un joueur frappe un ballon sur une toute petite zone. De quelle action s'agit-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le pied touche le ballon : c'est une action de contact. Elle s'exerce sur une petite zone : elle est localisée. Une action répartie s'exercerait sur une grande surface, comme le vent sur une voile.",
-                  "answers": [
-                    {
-                      "content": "Une action de contact localisée",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une action de contact répartie",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une action à distance",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "L'action de la Terre sur un ballon lancé en l'air est une action à distance.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. La Terre n'est pas en contact avec le ballon en l'air et pourtant elle l'attire : c'est une action à distance. C'est cette action qu'on appelle le poids du ballon.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Il change la masse du ballon",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Classer des actions",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Comment classer l'action du pied sur le ballon ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Identifier : auteur = le pied, receveur = le ballon. Étape 2 — Le pied touche le ballon : action de contact. Étape 3 — La zone de contact est petite, réduite à un point : force localisée. Étape 4 — Conclure : action de contact localisée. L'action à distance suppose qu'il n'y ait aucun contact, ce qui n'est pas le cas.",
+              "answers": [
                 {
-                  "content": "Le vent pousse sur toute la surface d'un grand drapeau de tribune. De quelle action s'agit-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'air touche le drapeau : c'est un contact. Il s'exerce sur toute la surface du drapeau, donc il est réparti. Une action localisée s'exercerait sur une toute petite zone, comme la pointe d'un crampon.",
-                  "answers": [
-                    {
-                      "content": "Une action de contact répartie",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une action de contact localisée",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une action à distance",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ce n'est pas une force",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Action de contact, répartie",
+                  "correct": false
                 },
                 {
-                  "content": "Le crampon d'une chaussure s'enfonce dans le terrain mou par sa pointe. De quelle action s'agit-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le crampon touche le sol : c'est un contact. Il s'appuie par une pointe très petite : le contact est localisé. L'action à distance suppose qu'on ne touche pas, ce qui n'est pas le cas ici.",
-                  "answers": [
-                    {
-                      "content": "Une action de contact localisée",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une action de contact répartie",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une action à distance",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Action à distance, localisée",
+                  "correct": false
                 },
                 {
-                  "content": "Parmi ces situations, lesquelles sont des actions de contact ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le pied, les gants et le vent touchent leur receveur : ce sont des contacts. La Terre qui attire le ballon, ou l'aimant qui attire le clou, agissent sans toucher : ce sont des actions à distance.",
-                  "answers": [
-                    {
-                      "content": "Le pied frappe le ballon",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le gardien arrête le tir avec ses gants",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le vent souffle sur un drapeau",
-                      "correct": true
-                    },
-                    {
-                      "content": "La Terre attire le ballon qui retombe",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un aimant attire un clou de fer",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le poids d'un ballon qui tombe",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Action à distance, répartie",
+                  "correct": false
                 },
                 {
-                  "content": "Un ballon lancé en l'air retombe. On néglige l'action de l'air. Quel est l'auteur de l'action qui le fait retomber ?",
-                  "question_type": "single_choice",
-                  "explanation": "C'est la Terre qui attire le ballon : c'est son poids. Le joueur ne l'attire plus dès que le ballon a quitté ses mains ou son pied. L'air est négligé ici, et le ballon ne s'attire pas lui-même.",
-                  "answers": [
-                    {
-                      "content": "La Terre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le joueur qui l'a lancé",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le ballon lui-même",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'air",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quand le ballon vole vers le but après le tir, le pied exerce encore une force sur lui.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. La force du pied n'existe que pendant le contact. Dès que le ballon a quitté le pied, le pied n'exerce plus rien : l'auteur et le receveur ne se touchent plus.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle phrase décrit correctement l'action du poids sur un ballon ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le poids est l'attraction de la Terre sur le ballon : auteur = la Terre, receveur = le ballon, sans contact. Le sol et l'air ne sont pas les auteurs du poids, et il s'agit bien d'une action à distance.",
-                  "answers": [
-                    {
-                      "content": "La Terre (auteur) exerce sur le ballon (receveur) une action à distance",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le ballon exerce sur la Terre une action de contact",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sol exerce sur le ballon une action à distance",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'air exerce sur le ballon une action de contact localisée",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Action de contact, localisée",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Analyser un penalty",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Quand le ballon monte en l'air, il subit son poids, une action à distance exercée par la Terre.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Identifier : le receveur est le ballon, l'auteur est la Terre. Étape 2 — La Terre ne touche pas le ballon : action à distance. Le poids existe tant que le ballon est près de la Terre, qu'il soit touché ou non. L'affirmation est vraie.",
+              "answers": [
                 {
-                  "content": "Lors d'un penalty : (1) le pied frappe le ballon ; (2) le ballon vole vers le but ; (3) le gardien détourne le ballon du bout des gants ; (4) le ballon retombe au sol. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "En (1) le pied est l'auteur ; en (3) le gardien touche le ballon ; en (4) la Terre agit à distance. En (2), le pied n'agit plus. Et en (4), c'est la Terre qui attire le ballon : le contact avec le sol ne crée pas son poids.",
-                  "answers": [
-                    {
-                      "content": "En (1), l'auteur de la force est le pied et le receveur est le ballon",
-                      "correct": true
-                    },
-                    {
-                      "content": "En (3), le gardien exerce une action de contact sur le ballon",
-                      "correct": true
-                    },
-                    {
-                      "content": "En (4), la Terre exerce sur le ballon une action à distance",
-                      "correct": true
-                    },
-                    {
-                      "content": "En (2), le pied continue d'exercer une force sur le ballon",
-                      "correct": false
-                    },
-                    {
-                      "content": "En (4), l'action qui fait retomber le ballon est une action de contact",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Vrai",
+                  "correct": true
                 },
                 {
-                  "content": "Un élève affirme : « Le poids n'est pas une force, car la Terre ne touche pas le ballon. » Que lui répondre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une force peut s'exercer sans contact. Le poids est justement une action à distance de la Terre sur le ballon, avec la Terre comme auteur. L'absence de contact ne supprime pas la force.",
-                  "answers": [
-                    {
-                      "content": "Une force peut s'exercer sans contact : le poids est une action à distance de la Terre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Tu as raison : il n'y a pas de force sans contact",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le poids est une force seulement quand le ballon touche le sol",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le poids est une masse, pas une force",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule le poids du ballon en newton.",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Repérer : le poids s'applique au centre de gravité G. Étape 2 — Verticale. Étape 3 — Vers le bas. Étape 4 — Déterminer l'intensité : $P = m \\times g = 0,4 \\times 10 = 4$ N. Vérification : $4 \\div 10 = 0,4$ kg. Répondre 0,4 N oublie g.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "N"
+            },
+            {
+              "content": "La figure montre le poids du ballon à l'échelle 1 cm pour 1 N. Quelle est la longueur du vecteur poids, en cm ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : l'échelle est 1 cm pour 1 N et le poids vaut 4 N. Étape 2 — Calculer : $4 \\div 1 = 4$ cm. Étape 3 — L'origine est en G. Étape 4 — Le vecteur est vertical et dirigé vers le bas. Un vecteur de 0,4 cm viendrait d'une confusion avec la masse.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "La force du pied (60 N) est représentée à l'échelle 1 cm pour 20 N. Quelle est la longueur du vecteur en cm ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : 1 cm représente 20 N, la force vaut 60 N. Étape 2 — Calculer : $60 \\div 20 = 3$ cm. Avec 1 cm pour 10 N on trouverait 6 cm : la longueur dépend de l'échelle.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Donne les quatre caractéristiques du poids du ballon quand il est en l'air.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : le point d'application du poids est le centre de gravité G du ballon ; sa droite d'action est la verticale passant par G ; son sens est vers le bas ; son intensité est $P = m \\times g = 0,4 \\times 10 = 4$ N. Barème : 0,5 point par caractéristique correcte, l'intensité comptant seulement avec son calcul 0,4 × 10 et son unité, 2 points au total.",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Point d'application : le centre de gravité G",
+                "Droite d'action : la verticale",
+                "Sens : vers le bas",
+                "Intensité : 4 N, calcul $0,4 \\times 10$ avec l'unité"
+              ],
+              "starter": "Le poids du ballon a pour point d'application…"
+            }
+          ]
+        },
+        {
+          "title": "Le duel au maracana du quartier",
+          "exercise_type": "fixation",
+          "figure": "duel-au-ballon",
+          "statement": "Sur le maracana du quartier, deux joueurs A et B se disputent un ballon. Chacun le pousse du pied. La figure représente leurs forces FA (vers la droite) et FB (vers la gauche) à l'échelle 1 cm pour 20 N.",
+          "questions": [
+            {
+              "content": "Le vecteur FA mesure 3 cm à l'échelle 1 cm pour 20 N. Quelle est l'intensité de FA en newton ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : 1 cm représente 20 N, FA mesure 3 cm. Étape 2 — Calculer, en sens inverse : $3 \\times 20 = 60$ N. Répondre 3 N oublie l'échelle.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "N"
+            },
+            {
+              "content": "Le vecteur FB mesure 2 cm à l'échelle 1 cm pour 20 N. Quelle est l'intensité de FB en newton ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : 1 cm représente 20 N, FB mesure 2 cm. Étape 2 — Calculer : $2 \\times 20 = 40$ N. Vérification : $40 \\div 20 = 2$ cm.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "N"
+            },
+            {
+              "content": "FA mesure 3 cm et FB mesure 2 cm à la même échelle. Quel joueur exerce la plus grande force sur le ballon ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire l'échelle commune : 1 cm pour 20 N. Étape 2 — Calculer : FA = 60 N, FB = 40 N. Comme $60 > 40$, c'est le joueur A. Avec la même échelle, le vecteur le plus long est la force la plus grande ; sans la même échelle, on ne pourrait pas comparer.",
+              "answers": [
+                {
+                  "content": "Le joueur B, car 40 N est plus petit que 60 N et c'est lui qui pousse vers la gauche",
+                  "correct": false
                 },
                 {
-                  "content": "Un aimant attire un clou de fer posé sur une table, sans le toucher. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'aimant agit sur le clou : il est l'auteur, le clou est le receveur. L'action se fait sans contact : c'est une action à distance. Ne pas toucher ne veut pas dire pas de force, et le fer n'est pas la cause du contact.",
-                  "answers": [
-                    {
-                      "content": "L'aimant est l'auteur de la force",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le clou est le receveur de la force",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'action est de contact, car l'aimant et le clou sont en métal",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ce n'est pas une force, puisqu'il n'y a pas de contact",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le joueur A, car 60 N est plus grand que 40 N",
+                  "correct": true
                 },
                 {
-                  "content": "Une action de contact est toujours localisée sur un point très petit.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Une action de contact peut être localisée (le pied sur le ballon) ou répartie sur une grande surface (le vent sur un drapeau). Les deux restent des actions de contact.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Les deux joueurs, car les deux vecteurs partent du même point",
+                  "correct": false
                 },
                 {
-                  "content": "À l'instant où un joueur frappe du pied un ballon lancé en l'air, combien de corps exercent une force sur le ballon, en négligeant l'air ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le pied agit par contact et la Terre agit à distance par le poids : deux auteurs. L'erreur classique est de ne compter que le pied, en oubliant que le poids agit tout le temps, même sans contact.",
-                  "answers": [
-                    {
-                      "content": "Deux : le pied et la Terre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un seul : le pied",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un seul : la Terre",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aucun",
-                      "correct": false
-                    }
-                  ]
+                  "content": "On ne peut pas savoir, car les vecteurs sont de sens opposés",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que représente le point de départ commun des deux vecteurs, le point O qui représente le ballon ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 3 — Placer l'origine du vecteur au point d'application de la force. Les deux joueurs touchent le ballon : l'origine commune est le point d'application des deux forces, le ballon étant assimilé à un point. La pointe donne le sens, pas le point d'application.",
+              "answers": [
+                {
+                  "content": "Le point d'application des deux forces",
+                  "correct": true
+                },
+                {
+                  "content": "Le sens des deux forces",
+                  "correct": false
+                },
+                {
+                  "content": "L'intensité des deux forces",
+                  "correct": false
+                },
+                {
+                  "content": "La masse du ballon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les forces FA et FB ont la même droite d'action (l'horizontale passant par le ballon) mais des sens opposés.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 4 — Tracer le vecteur sur la droite d'action. FA et FB sont deux flèches horizontales qui partent de O : même droite d'action. FA va vers la droite, FB vers la gauche : sens opposés. L'affirmation est vraie. Le sens se lit à la pointe de la flèche.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le joueur B augmente sa poussée : FB vaut maintenant 100 N. À l'échelle 1 cm pour 20 N, quelle serait la longueur du vecteur FB en cm ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : 1 cm représente 20 N, la force vaut 100 N. Étape 2 — Calculer : $100 \\div 20 = 5$ cm. Répondre 2 cm reprend l'ancienne valeur ; 100 cm oublie l'échelle.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Relie chaque caractéristique d'une force à ce qui la donne sur le vecteur.",
+              "question_type": "matching",
+              "explanation": "Méthode. Étape 3 — L'origine du vecteur est placée au point d'application. Étape 4 — Le vecteur est tracé sur la droite d'action, avec le sens donné par la pointe. Étape 2 — La longueur, avec l'échelle, donne l'intensité. Chaque caractéristique se lit à un endroit précis du vecteur.",
+              "answers": [
+                {
+                  "content": "Point d'application",
+                  "match": "L'origine du vecteur"
+                },
+                {
+                  "content": "Droite d'action",
+                  "match": "La droite qui porte le vecteur"
+                },
+                {
+                  "content": "Sens",
+                  "match": "La pointe de la flèche"
+                },
+                {
+                  "content": "Intensité",
+                  "match": "La longueur du vecteur et l'échelle"
+                }
+              ]
+            },
+            {
+              "content": "Un élève affirme : « FA mesure 3 cm sur le dessin, donc FA = 3 N. » Quelle est la bonne réponse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Lire l'échelle : 1 cm pour 20 N. Étape 2 — Calculer : $3 \\times 20 = 60$ N. L'élève a pris la longueur pour l'intensité en oubliant l'échelle. La proposition « 3 N » est le piège, et « 23 N » additionne 3 et 20 au lieu de multiplier.",
+              "answers": [
+                {
+                  "content": "FA = 3 N, car la longueur donne directement l'intensité",
+                  "correct": false
+                },
+                {
+                  "content": "FA = 23 N, car on additionne la longueur et l'échelle",
+                  "correct": false
+                },
+                {
+                  "content": "FA = 60 N, car il faut multiplier 3 cm par 20 N par cm",
+                  "correct": true
+                },
+                {
+                  "content": "FA = 0,15 N, car on divise 3 par 20",
+                  "correct": false
                 }
               ]
             }
           ]
         },
         {
-          "name": "Les effets d'une force",
-          "subtitle": "Reconnaître si une force déforme un corps ou modifie son mouvement",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître les deux effets d'une force : déformer un corps et modifier son mouvement.</li><li>Dire, dans une situation, quel effet produit la force.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le coup de pied dans le ballon.</strong> Le ballon est immobile sur la pelouse. Le joueur le frappe : le ballon s'aplatit un instant sous le pied, puis reprend sa forme et part vers le but. Le gardien le détourne : le ballon change de direction. Un défenseur, du pied, le stoppe net. Plus tard, un joueur écrase une canette sous sa chaussure : elle reste aplatie.</p><p><strong>Le pont.</strong> Le ballon qui s'aplatit puis reprend sa forme, c'est une <strong>déformation temporaire</strong>. La canette qui reste écrasée, c'est une <strong>déformation permanente</strong>. Le ballon qui part, qui change de direction ou qui s'arrête, c'est une <strong>modification du mouvement</strong>.</p><p><strong>La limite de l'image.</strong> L'effet de la force reste, mais la force du pied ne reste pas : dès que le ballon quitte le pied, le pied n'exerce plus rien. Et une force peut avoir un effet trop petit pour être vu à l'œil nu.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Une force peut produire deux effets, séparément ou en même temps :</p><ul><li><strong>modifier le mouvement</strong> d'un corps : le mettre en mouvement, l'arrêter, changer sa vitesse (l'augmenter ou la diminuer) ou changer sa direction ;</li><li><strong>déformer</strong> un corps : la déformation est temporaire si le corps reprend sa forme (ressort, ballon), permanente s'il la garde (canette écrasée).</li></ul></blockquote><p>C'est la déformation d'un ressort qui permet au dynamomètre de mesurer une force.</p><h2>Exemple résolu</h2><p>Un joueur frappe un ballon immobile. Pendant le choc, le ballon s'aplatit, puis il reprend sa forme et part. Quels effets la force du pied produit-elle ?</p><ol><li>Le ballon passe de l'immobilité au mouvement : la force a <strong>modifié son mouvement</strong> (mise en mouvement).</li><li>Le ballon s'aplatit puis reprend sa forme : la force l'a <strong>déformé</strong>, de façon temporaire.</li><li>Conclusion : la force du pied produit <strong>les deux effets à la fois</strong>.</li></ol><h2>Le piège à éviter</h2><p>Ne regarder que le mouvement et dire qu'une force « n'a aucun effet » parce que le corps ne se déplace pas. Une force peut seulement déformer : un ressort qui s'allonge ou un ballon qui s'écrase sans partir.</p><p>Pour repérer l'effet, pose deux questions : <em>le corps a-t-il changé de forme ?</em> et <em>son mouvement a-t-il changé ?</em></p><h2>En une phrase</h2><p>Une force déforme un corps, modifie son mouvement, ou fait les deux à la fois.</p>",
-          "exercises": [
+          "title": "Le coup franc oblique",
+          "exercise_type": "evaluation",
+          "figure": "coup-franc-oblique",
+          "statement": "Lors d'un coup franc, un joueur frappe un ballon de masse 0,5 kg. Pendant le choc, il exerce sur le ballon une force F de 50 N, oblique, dirigée vers le haut et vers la droite (vers le but). La figure montre F à l'échelle 1 cm pour 10 N. Tu prends g = 10 N/kg et tu négliges l'action de l'air.",
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître les effets d'une force",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "À l'échelle 1 cm pour 10 N, quelle est la longueur du vecteur qui représente la force F de 50 N, en cm ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : 1 cm représente 10 N, la force vaut 50 N. Étape 2 — Calculer : $50 \\div 10 = 5$ cm. Étape 3 — L'origine est au ballon. Étape 4 — Le vecteur est oblique, vers le haut et la droite. Étape 5 — Le nommer F et noter l'échelle.",
+              "answers": [
                 {
-                  "content": "Quels sont les deux effets possibles d'une force sur un corps ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une force déforme un corps ou modifie son mouvement. Elle ne change ni la masse du corps (quantité de matière) ni la valeur de son poids : on n'obtient pas un corps plus lourd en le frappant.",
-                  "answers": [
-                    {
-                      "content": "Déformer le corps ou modifier son mouvement",
-                      "correct": true
-                    },
-                    {
-                      "content": "Augmenter sa masse ou diminuer son poids",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le chauffer ou le refroidir",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Comment classer l'action du pied sur le ballon pendant le choc ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Identifier : auteur = le pied, receveur = le ballon. Étape 2 — Le pied touche le ballon : contact. Étape 3 — La zone de contact est petite : force localisée. Étape 4 — Conclure : action de contact localisée.",
+              "answers": [
+                {
+                  "content": "Action à distance localisée",
+                  "correct": false
                 },
                 {
-                  "content": "Parmi ces observations, lesquelles montrent qu'une force modifie le mouvement d'un corps ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Un ballon qui se met en mouvement ou qui change de direction a vu son mouvement modifié. L'aplatissement du ballon et l'allongement du ressort sont des déformations : ce sont l'autre effet possible d'une force.",
-                  "answers": [
-                    {
-                      "content": "Un ballon immobile se met en mouvement après le tir",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un ballon change de direction en touchant le poteau",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un ballon s'aplatit au moment du choc",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le ressort d'un dynamomètre s'allonge",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Action de contact répartie",
+                  "correct": false
                 },
                 {
-                  "content": "Une force qui déforme un ballon le met forcément en mouvement.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Une force peut seulement déformer un corps, sans le déplacer : un ballon qu'on écrase de la main s'aplatit sans partir. Les deux effets sont indépendants, même s'ils peuvent se produire ensemble.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Action de contact localisée",
+                  "correct": true
                 },
                 {
-                  "content": "Un ballon est posé sur le sol : le joueur appuie dessus du pied sans le déplacer. Le ballon s'aplatit, puis reprend sa forme quand le joueur relâche. Quel effet de la force observe-t-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le ballon reprend sa forme initiale : la déformation est temporaire. Elle serait permanente s'il restait aplati, comme une canette écrasée. Et ce n'est pas une modification du mouvement : le ballon ne change pas de vitesse.",
-                  "answers": [
-                    {
-                      "content": "Une déformation temporaire",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une déformation permanente",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une modification du mouvement",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aucun effet",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un dynamomètre, quel effet de la force est utilisé pour la mesurer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dynamomètre contient un ressort : la force l'étire, et plus elle est grande, plus l'allongement est grand. On lit l'allongement sur la graduation. Le dynamomètre n'utilise pas le mouvement du corps.",
-                  "answers": [
-                    {
-                      "content": "La déformation d'un ressort",
-                      "correct": true
-                    },
-                    {
-                      "content": "La mise en mouvement du corps accroché",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le changement de masse du corps",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une force peut ralentir un corps qui est en mouvement.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Modifier un mouvement, c'est aussi bien l'accélérer que le ralentir, l'arrêter ou changer sa direction. Le gardien qui bloque un ballon lui fait perdre sa vitesse par une force.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Action à distance répartie",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Identifier l'effet dans une situation",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Calcule le poids du ballon, de masse 0,5 kg, en newton.",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Le poids s'applique en G. Étape 2 — Verticale. Étape 3 — Vers le bas. Étape 4 — Déterminer l'intensité : $P = m \\times g = 0,5 \\times 10 = 5$ N. Vérification : $5 \\div 10 = 0,5$ kg.",
+              "answers": [
                 {
-                  "content": "Un défenseur arrête du pied un ballon qui roule. Quel est l'effet de la force de son pied sur le ballon ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le ballon passe du mouvement à l'arrêt : son mouvement est modifié. Il n'est pas déformé de façon permanente, et l'effet n'est pas nul : sans la force du pied, le ballon aurait continué.",
-                  "answers": [
-                    {
-                      "content": "Une modification de son mouvement (il s'arrête)",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une déformation permanente",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aucun effet",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une mise en mouvement",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "N"
+            },
+            {
+              "content": "On représente aussi le poids du ballon (5 N) à l'échelle 1 cm pour 10 N. Quelle est la longueur du vecteur poids en cm ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : 1 cm représente 10 N, le poids vaut 5 N. Étape 2 — Calculer : $5 \\div 10 = 0,5$ cm, soit 5 mm. Le vecteur poids est très court, vertical et dirigé vers le bas. Répondre 5 cm confond le poids avec la force F.",
+              "answers": [
+                {
+                  "content": "0,5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Combien de fois la force F du pied (50 N) est-elle plus grande que le poids du ballon (5 N) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire les deux intensités : F = 50 N et P = 5 N. Étape 2 — Calculer le rapport : $50 \\div 5 = 10$. La force du pied est 10 fois plus grande, ce qui se voit aussi sur les longueurs : 5 cm contre 0,5 cm.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Quelles sont les trois caractéristiques exactes du poids du ballon en vol ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Point d'application : le centre de gravité G. Étape 2 — Droite d'action : la verticale. Étape 3 — Sens : vers le bas. Étape 4 — Intensité : $P = 0,5 \\times 10 = 5$ N. Le sens « vers le haut » et l'intensité 0,5 N sont les erreurs à éviter, et une droite oblique serait celle de F, pas du poids.",
+              "answers": [
+                {
+                  "content": "Son point d'application est le centre de gravité G",
+                  "correct": true
                 },
                 {
-                  "content": "Un joueur écrase une canette vide sous sa chaussure. Elle reste aplatie. Quel est l'effet de la force ?",
-                  "question_type": "single_choice",
-                  "explanation": "La canette garde sa nouvelle forme : la déformation est permanente. Elle serait temporaire si la canette reprenait sa forme, comme un ballon de football qui s'aplatit sous le pied.",
-                  "answers": [
-                    {
-                      "content": "Une déformation permanente",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une déformation temporaire",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une mise en mouvement",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un arrêt du mouvement",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Sa droite d'action est la verticale",
+                  "correct": true
                 },
                 {
-                  "content": "Un ballon frappe le poteau, s'écrase un instant et repart dans une autre direction. Quelles affirmations sur les effets de la force exercée par le poteau sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le ballon repart autrement : son mouvement et sa direction changent. Il s'écrase aussi un court instant. Le poteau est fixe mais il exerce une force sur le ballon, et la force ne change ni la masse ni la nature du ballon.",
-                  "answers": [
-                    {
-                      "content": "Le mouvement du ballon est modifié",
-                      "correct": true
-                    },
-                    {
-                      "content": "La direction du mouvement du ballon change",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le ballon se déforme un court instant",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le ballon devient plus lourd",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le poteau ne peut pas exercer de force, car il est fixe",
-                      "correct": false
-                    },
-                    {
-                      "content": "La masse du ballon diminue",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Son intensité est de 5 N",
+                  "correct": true
                 },
                 {
-                  "content": "Un élastique qu'on étire est déformé par une force.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Étirer un élastique, c'est exercer une force : l'effet est une déformation (temporaire si l'élastique reprend sa longueur). Il n'est pas besoin que l'élastique se déplace pour qu'il y ait un effet.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Son sens est vers le haut",
+                  "correct": false
                 },
                 {
-                  "content": "Un ballon roule lentement. Un joueur le frappe dans le sens de son déplacement : il roule beaucoup plus vite. Quel effet de la force observe-t-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "La vitesse du ballon a augmenté : le mouvement est modifié. Ce n'est pas une déformation permanente (rien n'indique que le ballon reste écrasé), et l'effet est clairement visible.",
-                  "answers": [
-                    {
-                      "content": "Une modification du mouvement (la vitesse augmente)",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une déformation permanente du ballon",
-                      "correct": false
-                    },
-                    {
-                      "content": "Aucun effet, car le ballon bougeait déjà",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une augmentation de la masse du ballon",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Son intensité est de 0,5 N",
+                  "correct": false
+                },
+                {
+                  "content": "Sa droite d'action est oblique",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Les effets d'un tir",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Un joueur frappe un ballon immobile : il s'aplatit puis part vers le but. Le gardien détourne le tir. Quels effets ces forces produisent-elles ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le pied met le ballon en mouvement et le déforme un instant ; le gardien change sa direction. La masse ne change pas. Et la force du pied n'agit plus en vol : seul l'effet (la vitesse acquise) subsiste.",
-                  "answers": [
-                    {
-                      "content": "Le pied met le ballon en mouvement",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le ballon est déformé temporairement au moment du tir",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le gardien change la direction du ballon",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le ballon perd de la masse pendant le tir",
-                      "correct": false
-                    },
-                    {
-                      "content": "La force du pied agit encore sur le ballon pendant le vol",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le gardien déforme définitivement le ballon",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un élève appuie fort sur un ballon posé : le ballon s'écrase sans se déplacer. Il dit : « Je n'ai produit aucun effet. » Que conclure ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une force peut seulement déformer. Ici le ballon s'écrase : la force a bien un effet, la déformation. Ne regarder que le mouvement fait oublier l'autre effet possible.",
-                  "answers": [
-                    {
-                      "content": "La force a bien un effet : elle déforme le ballon",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il n'y a pas de force, puisque le ballon ne bouge pas",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'effet est une mise en mouvement",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'effet est un changement de masse",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une force peut à la fois modifier le mouvement d'un corps et le déformer.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Dans le coup de pied, le ballon s'aplatit (déformation) et part (mouvement modifié) en même temps. Les deux effets ne s'excluent pas.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un élève utilise un dynamomètre pour mesurer une force. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La force déforme le ressort, et plus elle est grande, plus l'allongement est grand. Le dynamomètre ne mesure pas l'effet sur le mouvement : il mesure l'intensité de la force par la déformation.",
-                  "answers": [
-                    {
-                      "content": "La force étire le ressort du dynamomètre",
-                      "correct": true
-                    },
-                    {
-                      "content": "Plus la force est grande, plus le ressort s'allonge",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le ressort ne se déforme pas",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le dynamomètre indique l'effet de la force sur le mouvement du corps",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un joueur pousse un ballon qui roule, dans son sens : il va plus vite. Un autre joueur le retient du pied : il va moins vite. Que fait la force dans les deux cas ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans les deux cas, la vitesse du ballon change, qu'elle augmente ou qu'elle diminue : le mouvement est modifié. La force n'a pas besoin de déformer le ballon pour avoir un effet.",
-                  "answers": [
-                    {
-                      "content": "Elle modifie la vitesse du ballon",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle déforme le ballon de façon permanente",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle n'a aucun effet",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle change la masse du ballon",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
+              "content": "Un élève dit : « Le vecteur F mesure 5 cm, donc F vaut 5 N. » Explique son erreur et donne la bonne intensité.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : l'élève a pris la longueur du vecteur pour l'intensité. La longueur dépend de l'échelle : ici 1 cm représente 10 N, donc $F = 5 \\times 10 = 50$ N. Sans l'échelle, 5 cm ne donnent pas l'intensité. Barème : 1 point pour l'erreur (oubli de l'échelle), 1 point pour la lecture de l'échelle, 1 point pour le calcul et le résultat avec l'unité, 3 points au total.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Il explique que la longueur ne donne l'intensité qu'avec l'échelle",
+                "Il lit l'échelle : 1 cm pour 10 N",
+                "Il calcule $5 \\times 10 = 50$ N avec l'unité"
+              ],
+              "starter": "L'erreur de l'élève est d'avoir oublié…"
+            },
+            {
+              "content": "Le pied ne touche plus le ballon une fois qu'il est parti. Explique, avec les mots « action à distance », pourquoi le ballon finit par retomber.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : quand le ballon quitte le pied, la force du pied cesse, car elle est une action de contact. Mais la Terre exerce sur le ballon une action à distance, son poids, vertical et dirigé vers le bas. Cette force modifie le mouvement du ballon et le fait retomber. Barème : 1 point pour la fin de l'action du pied, 1 point pour le poids comme action à distance, 1 point pour l'effet sur le mouvement, 3 points au total.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Il dit que la force du pied cesse avec le contact",
+                "Il nomme le poids, action à distance de la Terre",
+                "Il relie le poids au mouvement qui change et au retour au sol"
+              ],
+              "starter": "Dès que le ballon quitte le pied…"
             }
           ]
         },
         {
-          "name": "Les caractéristiques d'une force",
-          "subtitle": "Donner le point d'application, la direction, le sens et l'intensité",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Citer les quatre caractéristiques d'une force.</li><li>Distinguer la direction et le sens d'une force.</li><li>Donner les caractéristiques d'une force, dont celles du poids d'un ballon.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le coup franc.</strong> Avant de tirer, le joueur réfléchit. Il choisit <em>où</em> frapper le ballon : au centre ou sur le côté. Il choisit la <em>ligne</em> du tir : tout droit vers le but ou en biais. Il choisit de quel <em>côté</em> de cette ligne le ballon doit partir : vers l'avant, pas vers l'arrière. Enfin, il choisit de frapper plus ou moins fort. Si l'un de ces choix change, le tir est différent.</p><p><strong>Le pont.</strong> L'endroit où le pied frappe, c'est le <strong>point d'application</strong>. La ligne du tir, c'est la <strong>direction</strong>. Le côté de cette ligne vers lequel le ballon part, c'est le <strong>sens</strong>. Frapper plus ou moins fort, c'est l'<strong>intensité</strong> de la force.</p><p><strong>La limite de l'image.</strong> Un vrai coup de pied touche le ballon sur une petite zone, pas sur un point. Pour décrire une force, on la ramène à un point d'application unique. Et l'intensité se mesure en newtons : « plus ou moins fort » n'est pas une valeur.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Une force est entièrement décrite par <strong>quatre caractéristiques</strong> :</p><ul><li>son <strong>point d'application</strong> : l'endroit où elle s'exerce ;</li><li>sa <strong>direction</strong> : la droite suivant laquelle elle agit (verticale, horizontale, oblique) ;</li><li>son <strong>sens</strong> : l'un des deux côtés de cette droite (vers le haut ou vers le bas, vers la droite ou vers la gauche) ;</li><li>son <strong>intensité</strong> (ou valeur) : notée $F$, en newtons (N), mesurée avec un dynamomètre.</li></ul><p>On note la force $\\vec F$ et son intensité $F$.</p></blockquote><p>Rappel : le poids $\\vec P$ a pour point d'application le centre de gravité G, pour direction la verticale, pour sens vers le bas, et pour intensité $P = m \\times g$.</p><h2>Exemple résolu</h2><p>Un ballon de football a une masse de $0{,}45\\ \\text{kg}$. Donne les caractéristiques de son poids, avec $g = 10\\ \\text{N/kg}$.</p><ol><li><strong>Point d'application</strong> : le centre de gravité G du ballon, son centre.</li><li><strong>Direction</strong> : la verticale.</li><li><strong>Sens</strong> : vers le bas, car la Terre attire le ballon.</li><li><strong>Intensité</strong> : $P = m \\times g = 0{,}45 \\times 10 = 4{,}5\\ \\text{N}$.</li></ol><h2>Le piège à éviter</h2><p>Confondre la direction et le sens. « Verticale » est une direction ; « vers le bas » est un sens. Deux forces peuvent avoir la même direction et des sens opposés : un joueur qui tire vers la droite et un autre vers la gauche, sur la même droite.</p><p>Pour ne pas te tromper, la direction se répond avec un mot comme « verticale » ou « horizontale », et le sens avec « vers le haut », « vers la droite »…</p><h2>En une phrase</h2><p>Une force se décrit par son point d'application, sa direction, son sens et son intensité en newtons.</p>",
-          "exercises": [
+          "title": "Peser le sac de ballons avec un dynamomètre",
+          "exercise_type": "evaluation",
+          "figure": "dynamometre",
+          "statement": "Avant l'entraînement, le coach pèse un sac de ballons avec un dynamomètre. Il accroche le sac au crochet et l'index se fixe sur 12 N. On néglige la masse du sac vide. Chaque ballon a une masse de 0,4 kg. Tu prends g = 10 N/kg.",
+          "questions": [
             {
-              "title": "Comprendre — Les quatre caractéristiques d'une force",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelle partie du dynamomètre s'allonge quand on accroche le sac ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 4 — Déterminer l'intensité en newton : on accroche la charge au crochet, le ressort s'allonge, et l'index se fixe devant un trait de la graduation. La partie qui s'allonge est le ressort. L'anneau ne bouge pas, la graduation est fixe, et l'index se déplace sans s'allonger.",
+              "answers": [
                 {
-                  "content": "Quelles sont les quatre caractéristiques d'une force ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une force se décrit par son point d'application, sa direction, son sens et son intensité. La masse et le volume décrivent un corps, pas une force. L'auteur et le receveur disent qui agit sur qui, mais ne sont pas des caractéristiques.",
-                  "answers": [
-                    {
-                      "content": "Le point d'application, la direction, le sens et l'intensité",
-                      "correct": true
-                    },
-                    {
-                      "content": "La masse, le volume, la direction et le sens",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'auteur, le receveur, la masse et l'intensité",
-                      "correct": false
-                    }
-                  ]
+                  "content": "L'anneau",
+                  "correct": false
                 },
                 {
-                  "content": "Dans quelle unité s'exprime l'intensité d'une force ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'intensité d'une force se mesure en newtons (N). Le kilogramme est l'unité de la masse, et le newton par kilogramme (N/kg) est l'unité de g. Retiens : force = newton.",
-                  "answers": [
-                    {
-                      "content": "Le newton (N)",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le kilogramme (kg)",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le mètre (m)",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le newton par kilogramme (N/kg)",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le ressort",
+                  "correct": true
                 },
                 {
-                  "content": "Deux forces de même direction ont forcément le même sens.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Un tir vers la droite et un tir vers la gauche, sur la même droite, ont la même direction mais des sens opposés. Direction et sens sont deux caractéristiques distinctes.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "La graduation",
+                  "correct": false
                 },
                 {
-                  "content": "On dit qu'une force est horizontale. Quelle caractéristique précise-t-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "« Horizontale » indique la droite suivant laquelle la force agit : c'est sa direction. Le sens, lui, dirait « vers la droite » ou « vers la gauche ». Le point d'application et l'intensité sont d'autres caractéristiques.",
-                  "answers": [
-                    {
-                      "content": "Sa direction",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son sens",
-                      "correct": false
-                    },
-                    {
-                      "content": "Son point d'application",
-                      "correct": false
-                    },
-                    {
-                      "content": "Son intensité",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel appareil permet de mesurer l'intensité d'une force ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le dynamomètre mesure l'intensité d'une force, en newtons, grâce à un ressort. La balance sert à mesurer une masse. Le chronomètre mesure une durée et la règle une longueur.",
-                  "answers": [
-                    {
-                      "content": "Le dynamomètre",
-                      "correct": true
-                    },
-                    {
-                      "content": "La balance",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le chronomètre",
-                      "correct": false
-                    },
-                    {
-                      "content": "La règle graduée",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un joueur tire. Quelles affirmations sur la direction et le sens de la force sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La direction est la droite suivant laquelle la force agit ; le sens est le côté de cette droite vers lequel elle pousse. L'intensité est la valeur en newtons, et le point d'application est l'endroit touché.",
-                  "answers": [
-                    {
-                      "content": "La direction est la droite suivant laquelle le tir est dirigé",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sens indique de quel côté de la droite la force pousse",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sens est la valeur de la force en newtons",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le point d'application est l'intensité du tir",
-                      "correct": false
-                    }
-                  ]
+                  "content": "L'index",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Donner les caractéristiques d'une force",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quel est l'effet de la force du sac sur le ressort ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Repérer : receveur = le ressort, auteur = le sac. Étape 2 — Comparer : sans charge, le ressort est court ; avec le sac, il est plus long. Étape 3 — Nommer l'effet : le ressort est déformé (étiré). Étape 4 — Conclure : la force du sac déforme le ressort, c'est ce qui permet de mesurer la force.",
+              "answers": [
                 {
-                  "content": "Un ballon a une masse de $0{,}5\\ \\text{kg}$. Avec $g = 10\\ \\text{N/kg}$, quelle est l'intensité de son poids ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = m × g = 0,5 × 10 = 5 N. Écrire 0,5 N oublie de multiplier par g, et 50 N décale la virgule. Le résultat est une force : il s'exprime en newtons, pas en kilogrammes.",
-                  "answers": [
-                    {
-                      "content": "$5\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}5\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$50\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\ \\text{kg}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Elle met le ressort en mouvement de façon définitive",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles sont les caractéristiques du poids d'un ballon, sans l'intensité ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le poids s'applique au centre de gravité G, suit la verticale et est dirigé vers le bas, car la Terre attire le ballon. Le poids n'est jamais horizontal et n'est pas dirigé vers le haut.",
-                  "answers": [
-                    {
-                      "content": "Point d'application : G ; direction : verticale ; sens : vers le bas",
-                      "correct": true
-                    },
-                    {
-                      "content": "Point d'application : G ; direction : verticale ; sens : vers le haut",
-                      "correct": false
-                    },
-                    {
-                      "content": "Point d'application : le sol ; direction : verticale ; sens : vers le haut",
-                      "correct": false
-                    },
-                    {
-                      "content": "Point d'application : G ; direction : horizontale ; sens : vers le bas",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Elle change la masse du ressort",
+                  "correct": false
                 },
                 {
-                  "content": "Un gardien soulève un ballon : sa main exerce une force verticale, dirigée vers le haut. Que sont la direction et le sens de cette force ?",
-                  "question_type": "single_choice",
-                  "explanation": "La verticale est la direction (la droite). « Vers le haut » est le sens (le côté de la droite). L'erreur fréquente est de les inverser.",
-                  "answers": [
-                    {
-                      "content": "Direction : verticale ; sens : vers le haut",
-                      "correct": true
-                    },
-                    {
-                      "content": "Direction : vers le haut ; sens : verticale",
-                      "correct": false
-                    },
-                    {
-                      "content": "Direction : horizontale ; sens : vers le haut",
-                      "correct": false
-                    },
-                    {
-                      "content": "Direction : verticale ; sens : vers le bas",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Elle déforme le ressort",
+                  "correct": true
                 },
                 {
-                  "content": "Deux joueurs tirent un même ballon, l'un vers la droite, l'autre vers la gauche, sur la même droite horizontale. Que dire de leurs forces ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les deux forces agissent suivant la même droite horizontale : même direction. Mais l'une pousse vers la droite et l'autre vers la gauche : les sens sont opposés.",
-                  "answers": [
-                    {
-                      "content": "Même direction, sens opposés",
-                      "correct": true
-                    },
-                    {
-                      "content": "Même direction, même sens",
-                      "correct": false
-                    },
-                    {
-                      "content": "Directions différentes, même sens",
-                      "correct": false
-                    },
-                    {
-                      "content": "Directions différentes, sens opposés",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le poids d'un ballon de $0{,}4\\ \\text{kg}$ a pour intensité $4\\ \\text{N}$ (avec $g = 10\\ \\text{N/kg}$).",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : P = m × g = 0,4 × 10 = 4 N. Le poids est une force : on l'exprime en newtons, pas en kilogrammes. Retiens que la masse de 0,4 kg donne un poids de 4 N.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un gardien a une masse de $70\\ \\text{kg}$. Avec $g = 10\\ \\text{N/kg}$, quelle est l'intensité de son poids ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = m × g = 70 × 10 = 700 N. 70 N oublie de multiplier par g ; 7 N divise par 10 au lieu de multiplier. Retiens que le poids se calcule en multipliant.",
-                  "answers": [
-                    {
-                      "content": "$700\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$70\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$7\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$7000\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Elle n'a aucun effet visible",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Décrire complètement une force",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "L'index indique 12 N : c'est le poids du sac. Calcule la masse du sac en kg.",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Repérer : le poids du sac est appliqué à son centre de gravité. Étape 4 — Déterminer l'intensité : $P = 12$ N. On en déduit $m = P \\div g = 12 \\div 10 = 1,2$ kg. Vérification : $1,2 \\times 10 = 12$ N. Répondre 120 kg vient d'une multiplication au lieu d'une division.",
+              "answers": [
                 {
-                  "content": "Un ballon a une masse de $0{,}43\\ \\text{kg}$. Avec $g = 10\\ \\text{N/kg}$, quelles sont les caractéristiques de son poids ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 0,43 × 10 = 4,3 N, appliqué en G, vertical, vers le bas. Le poids ne pointe jamais vers le haut. Et 0,43 N oublie de multiplier par g, tandis que 43 N le multiplie par 100.",
-                  "answers": [
-                    {
-                      "content": "G ; verticale ; vers le bas ; $4{,}3\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "G ; verticale ; vers le haut ; $4{,}3\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "G ; verticale ; vers le bas ; $0{,}43\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "G ; verticale ; vers le bas ; $43\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un joueur frappe un ballon : la force est horizontale, dirigée vers la droite, d'intensité $200\\ \\text{N}$. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La direction est « horizontale », le sens est « vers la droite », l'intensité est 200 N. Mélanger les mots donne les erreurs : « vers la droite » n'est pas une direction, et les newtons ne se confondent pas avec les kilogrammes.",
-                  "answers": [
-                    {
-                      "content": "Sa direction est horizontale",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son sens est vers la droite",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son intensité est de $200\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son sens est horizontal",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sa direction est vers la droite",
-                      "correct": false
-                    },
-                    {
-                      "content": "Son intensité est de $200\\ \\text{kg}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Si on change seulement le sens d'une force, on obtient une force différente, même avec la même intensité.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Les quatre caractéristiques décrivent la force : si l'une change, la force n'est plus la même. Un tir vers la droite et un tir vers la gauche, de même intensité, n'ont pas le même effet.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Force 1 : point A ; verticale ; vers le bas ; $20\\ \\text{N}$. Force 2 : point A ; verticale ; vers le haut ; $20\\ \\text{N}$. Que peut-on dire ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les deux forces ont le même point d'application, la même direction et la même intensité, mais pas le même sens : ce sont deux forces différentes. Les confondre revient à oublier le sens.",
-                  "answers": [
-                    {
-                      "content": "Ce sont deux forces différentes, car leurs sens sont opposés",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ce sont la même force, car elles ont la même intensité",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elles ont des directions différentes",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elles ont des intensités différentes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un élève décrit une force par : « intensité $150\\ \\text{N}$, direction horizontale ». Quelles caractéristiques manquent ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'élève a donné l'intensité et la direction. Il manque le point d'application (où la force s'exerce) et le sens (vers la droite ou vers la gauche). Une force n'est décrite que si les quatre sont connues.",
-                  "answers": [
-                    {
-                      "content": "Le point d'application",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sens",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'intensité",
-                      "correct": false
-                    },
-                    {
-                      "content": "La direction",
-                      "correct": false
-                    }
-                  ]
+                  "content": "1,2",
+                  "correct": true
                 }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "Représenter une force par un vecteur",
-          "subtitle": "Tracer et lire un vecteur force à l'échelle. À compléter : frottements et réaction d'un support (rattachement à valider)",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Représenter une force par un vecteur à l'échelle.</li><li>Lire l'intensité d'une force sur un vecteur tracé à l'échelle.</li></ul><h2>L'image pour comprendre</h2><p><strong>La flèche de l'entraîneur.</strong> Au tableau, l'entraîneur dessine le plan d'un tir. Il pose le début (l'origine) de sa flèche sur le ballon, il la trace suivant la ligne du tir et il met la pointe du côté du but. Il la dessine longue pour un tir puissant et courte pour une passe légère. Comme sur un plan, où 1 cm sur la feuille représente une distance sur le vrai terrain, il fixe aussi sa règle : 1 cm de flèche vaut un certain nombre de newtons.</p><p><strong>Le pont.</strong> La flèche est le <strong>vecteur force</strong>. Son <strong>origine</strong> est le point d'application. Son <strong>support</strong> (la droite qui la porte) donne la direction. Sa <strong>pointe</strong> donne le sens. Sa <strong>longueur</strong> donne l'intensité, grâce à l'<strong>échelle</strong>.</p><p><strong>La limite de l'image.</strong> La longueur de la flèche ne dit pas jusqu'où le ballon ira, ni combien de temps dure le tir : elle représente seulement l'intensité de la force, en newtons.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Une force se représente par un <strong>vecteur</strong> $\\vec F$ :</p><ul><li>son <strong>origine</strong> est le point d'application ;</li><li>son <strong>support</strong> est la direction ;</li><li>sa <strong>pointe</strong> indique le sens ;</li><li>sa <strong>longueur</strong> est proportionnelle à l'intensité, selon une <strong>échelle</strong> choisie à l'avance (par exemple « 1 cm pour 100 N »), la même pour toutes les forces du schéma.</li></ul><p>Longueur du vecteur = intensité $\\div$ valeur d'un centimètre. Intensité = longueur $\\times$ valeur d'un centimètre.</p></blockquote><h2>Exemple résolu</h2><p>Un gardien a une masse de $60\\ \\text{kg}$. Représente son poids avec l'échelle « 1 cm pour 200 N ». On prend $g = 10\\ \\text{N/kg}$.</p><ol><li><strong>Intensité</strong> : $P = m \\times g = 60 \\times 10 = 600\\ \\text{N}$.</li><li><strong>Longueur</strong> : $600 \\div 200 = 3$, donc la flèche mesure $3\\ \\text{cm}$.</li><li><strong>Tracé</strong> : on place l'origine au centre de gravité G du gardien, on trace la flèche verticale, pointe vers le bas, longue de $3\\ \\text{cm}$.</li></ol><p>Dans l'autre sens : un vecteur de $2{,}5\\ \\text{cm}$ avec l'échelle « 1 cm pour 20 N » représente $2{,}5 \\times 20 = 50\\ \\text{N}$.</p><h2>Le piège à éviter</h2><p>Oublier l'échelle et écrire la longueur égale à l'intensité (« 600 N donne 600 cm »), ou faire la mauvaise opération. Avec « 1 cm pour 200 N », on <em>divise</em> l'intensité par 200 pour trouver les centimètres, et on <em>multiplie</em> les centimètres par 200 pour retrouver les newtons.</p><p>Pour vérifier, une flèche trop longue pour la feuille doit t'alerter : choisis plus de newtons par centimètre (par exemple 1 cm pour 200 N au lieu de 1 cm pour 20 N).</p><h2>En une phrase</h2><p>Une force se dessine par une flèche : son origine est le point d'application, la droite qui la porte est la direction, la pointe est le sens, et la longueur donne l'intensité à l'échelle choisie.</p>",
-          "exercises": [
+              ],
+              "tolerance": 0,
+              "unit": "kg"
+            },
             {
-              "title": "Comprendre — Lire un vecteur force",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le sac contient seulement des ballons de 0,4 kg chacun. Combien de ballons contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. La masse totale est 1,2 kg. On calcule le nombre de ballons : $1,2 \\div 0,4 = 3$. Vérification : $3 \\times 0,4 = 1,2$ kg. Il y a donc 3 ballons.",
+              "answers": [
                 {
-                  "content": "Dans le vecteur qui représente une force, que représente l'origine de la flèche ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'origine de la flèche est le point d'application de la force, par exemple le centre G pour un poids. La pointe donne le sens, la droite qui porte la flèche donne la direction, et la longueur donne l'intensité.",
-                  "answers": [
-                    {
-                      "content": "Le point d'application",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le sens",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'intensité",
-                      "correct": false
-                    },
-                    {
-                      "content": "La direction",
-                      "correct": false
-                    }
-                  ]
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Un autre sac a une masse de 1 800 g. Convertis cette masse en kg, puis calcule son poids en newton.",
+              "question_type": "numeric",
+              "explanation": "Méthode. Conversion : 1 800 g $= 1,8$ kg car 1 000 g font 1 kg. Étape 4 — Déterminer l'intensité : $P = m \\times g = 1,8 \\times 10 = 18$ N. Répondre 18 000 N oublie la conversion en kg.",
+              "answers": [
+                {
+                  "content": "18",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "N"
+            },
+            {
+              "content": "On représente le poids du premier sac (12 N) à l'échelle 1 cm pour 4 N. Quelle est la longueur du vecteur en cm ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Lire : 1 cm représente 4 N, le poids vaut 12 N. Étape 2 — Calculer : $12 \\div 4 = 3$ cm. Étape 3 — Origine en G. Étape 4 — Vecteur vertical dirigé vers le bas. Vérification : $3 \\times 4 = 12$ N.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "Quelles sont les trois caractéristiques exactes du poids du sac ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 2 — Droite d'action : la verticale. Étape 3 — Sens : vers le bas. Étape 4 — Intensité : 12 N lus sur le dynamomètre. Le point d'application du poids est le centre de gravité du sac, pas le crochet. L'intensité 1,2 N confond la masse 1,2 kg avec le poids.",
+              "answers": [
+                {
+                  "content": "Sa droite d'action est la verticale",
+                  "correct": true
                 },
                 {
-                  "content": "Dans le vecteur qui représente une force, que représente la pointe de la flèche ?",
-                  "question_type": "single_choice",
-                  "explanation": "La pointe de la flèche indique le sens de la force, c'est-à-dire de quel côté de la droite elle pousse. L'intensité se lit sur la longueur. Le point d'application est l'origine de la flèche.",
-                  "answers": [
-                    {
-                      "content": "Le sens de la force",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le point d'application",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'intensité",
-                      "correct": false
-                    },
-                    {
-                      "content": "La masse du corps",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Son sens est vers le bas",
+                  "correct": true
                 },
                 {
-                  "content": "Que représente la longueur de la flèche d'un vecteur force ?",
-                  "question_type": "single_choice",
-                  "explanation": "La longueur est proportionnelle à l'intensité de la force, selon l'échelle choisie. Elle ne représente ni la distance parcourue par le ballon, ni la masse, ni la durée.",
-                  "answers": [
-                    {
-                      "content": "L'intensité de la force, selon l'échelle",
-                      "correct": true
-                    },
-                    {
-                      "content": "La distance parcourue par le ballon",
-                      "correct": false
-                    },
-                    {
-                      "content": "La masse du corps",
-                      "correct": false
-                    },
-                    {
-                      "content": "La durée du tir",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Son intensité est de 12 N",
+                  "correct": true
                 },
                 {
-                  "content": "Avec la même échelle, une force de plus grande intensité est représentée par une flèche plus longue.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. La longueur est proportionnelle à l'intensité : avec la même échelle, une force deux fois plus grande donne une flèche deux fois plus longue.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Son point d'application est le crochet du dynamomètre",
+                  "correct": false
                 },
                 {
-                  "content": "Que signifie l'échelle « 1 cm pour 10 N » ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque centimètre de flèche représente 10 N : une flèche de 3 cm vaut donc 30 N. L'erreur est d'inverser et de croire que 10 cm représentent 1 N. L'échelle ne parle ni de kilogrammes ni de la distance parcourue.",
-                  "answers": [
-                    {
-                      "content": "Chaque centimètre de flèche représente 10 N",
-                      "correct": true
-                    },
-                    {
-                      "content": "Chaque centimètre de flèche représente 1 N",
-                      "correct": false
-                    },
-                    {
-                      "content": "La flèche mesure toujours 10 cm",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le ballon avance de 1 cm",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Son intensité est de 1,2 N",
+                  "correct": false
                 },
                 {
-                  "content": "Pour comparer deux forces sur un même schéma, on peut utiliser deux échelles différentes.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Pour pouvoir comparer les flèches, il faut la même échelle pour toutes les forces du schéma. Avec deux échelles, une flèche courte pourrait représenter une force plus grande.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Sa droite d'action est horizontale",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer une longueur ou une intensité",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Une force a pour intensité $40\\ \\text{N}$. L'échelle est « 1 cm pour 10 N ». Quelle est la longueur du vecteur ?",
-                  "question_type": "single_choice",
-                  "explanation": "40 ÷ 10 = 4 : le vecteur mesure 4 cm. 400 cm vient d'une multiplication au lieu d'une division, et 0,25 cm d'une division à l'envers (10 ÷ 40).",
-                  "answers": [
-                    {
-                      "content": "$4\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$400\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}25\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$50\\ \\text{cm}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une force a pour intensité $150\\ \\text{N}$. L'échelle est « 1 cm pour 50 N ». Quelle est la longueur du vecteur ?",
-                  "question_type": "single_choice",
-                  "explanation": "150 ÷ 50 = 3 : le vecteur mesure 3 cm. 7 500 cm résulte d'une multiplication, et 200 cm d'une addition. Pour passer des newtons aux centimètres, on divise.",
-                  "answers": [
-                    {
-                      "content": "$3\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$7500\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$200\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}33\\ \\text{cm}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un vecteur mesure $3{,}5\\ \\text{cm}$. L'échelle est « 1 cm pour 20 N ». Quelle est l'intensité de la force ?",
-                  "question_type": "single_choice",
-                  "explanation": "3,5 × 20 = 70 : l'intensité est 70 N. Pour passer des centimètres aux newtons, on multiplie par la valeur d'un centimètre. 23,5 N vient d'une addition, et 5,7 N d'une division à l'envers.",
-                  "answers": [
-                    {
-                      "content": "$70\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$23{,}5\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5{,}7\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$3{,}5\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un ballon a une masse de $0{,}45\\ \\text{kg}$ ($g = 10\\ \\text{N/kg}$). L'échelle est « 1 cm pour 1,5 N ». Quelle est la longueur du vecteur poids ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 0,45 × 10 = 4,5 N. Puis 4,5 ÷ 1,5 = 3 : le vecteur mesure 3 cm. 6,75 cm vient d'une multiplication, et 0,33 cm d'une division à l'envers (1,5 ÷ 4,5).",
-                  "answers": [
-                    {
-                      "content": "$3\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4{,}5\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6{,}75\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}33\\ \\text{cm}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une force de $80\\ \\text{N}$, avec l'échelle « 1 cm pour 20 N », est représentée par une flèche de $4\\ \\text{cm}$.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : 80 ÷ 20 = 4, donc la flèche mesure 4 cm. Pour vérifier, on refait l'opération dans l'autre sens : 4 × 20 = 80 N.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "L'échelle est « 1 cm pour 25 N ». Quelles associations longueur et intensité sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "On multiplie la longueur par 25 : 2 × 25 = 50 N et 4 × 25 = 100 N. En revanche 3 × 25 = 75 N, pas 28 N, et 5 × 25 = 125 N, pas 30 N.",
-                  "answers": [
-                    {
-                      "content": "$2\\ \\text{cm}$ pour $50\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4\\ \\text{cm}$ pour $100\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$3\\ \\text{cm}$ pour $28\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\ \\text{cm}$ pour $30\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Tracer et lire des vecteurs à l'échelle",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Un gardien a une masse de $70\\ \\text{kg}$ ($g = 10\\ \\text{N/kg}$). On représente son poids avec l'échelle « 1 cm pour 100 N ». Quelle est la longueur du vecteur poids ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 70 × 10 = 700 N, puis 700 ÷ 100 = 7 : le vecteur mesure 7 cm. 70 cm reprend la masse sans calculer le poids ni appliquer l'échelle, et 0,7 cm divise par 1 000 au lieu de 100.",
-                  "answers": [
-                    {
-                      "content": "$7\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$70\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}7\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}14\\ \\text{cm}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le poids d'un gardien est de $600\\ \\text{N}$. On le représente avec l'échelle « 1 cm pour 200 N ». Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le poids part de G, est vertical, vers le bas. La longueur est 600 ÷ 200 = 3 cm. La pointe vers le haut est fausse (la Terre attire vers le bas), et 600 cm oublie l'échelle.",
-                  "answers": [
-                    {
-                      "content": "Le vecteur a pour origine le centre de gravité G",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le vecteur est vertical",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le vecteur mesure $3\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "La pointe du vecteur est dirigée vers le haut",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le vecteur mesure $600\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le vecteur est horizontal puisque le gardien se tient sur le sol",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un tir est représenté par une flèche horizontale de $5\\ \\text{cm}$, pointe à droite, avec l'échelle « 1 cm pour 40 N ». Quelle est l'intensité de la force ?",
-                  "question_type": "single_choice",
-                  "explanation": "5 × 40 = 200 : l'intensité est 200 N. 45 N s'obtient par une addition, et 8 N par une division. Les centimètres se convertissent en newtons en multipliant par 40.",
-                  "answers": [
-                    {
-                      "content": "$200\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$45\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$8\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Sur un même schéma, avec la même échelle, la force $\\vec F_1$ est représentée par une flèche de $2\\ \\text{cm}$ et $\\vec F_2$ par une flèche de $4\\ \\text{cm}$. Que peut-on dire ?",
-                  "question_type": "single_choice",
-                  "explanation": "À la même échelle, 4 cm représente deux fois plus de newtons que 2 cm : F₂ a une intensité deux fois plus grande. La longueur ne représente ni la durée de l'action ni la distance parcourue.",
-                  "answers": [
-                    {
-                      "content": "$F_2$ a une intensité deux fois plus grande que $F_1$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$F_2$ s'exerce deux fois plus longtemps que $F_1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le ballon ira deux fois plus loin avec $F_2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$F_1$ et $F_2$ ont la même intensité",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour représenter une force de $90\\ \\text{N}$, un élève choisit l'échelle « 1 cm pour 1 N ». Pourquoi ce choix est-il mal adapté ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec 1 cm pour 1 N, la flèche mesurerait 90 cm : bien trop longue pour une feuille. Une échelle comme 1 cm pour 30 N donnerait 3 cm. L'échelle peut valoir 1, mais il faut qu'elle convienne à la feuille.",
-                  "answers": [
-                    {
-                      "content": "La flèche mesurerait $90\\ \\text{cm}$, trop longue pour la feuille",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une échelle ne peut jamais être « 1 cm pour 1 N »",
-                      "correct": false
-                    },
-                    {
-                      "content": "La flèche mesurerait $0{,}01\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'échelle doit toujours être exprimée en kilogrammes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un ballon a une masse de $0{,}6\\ \\text{kg}$ ($g = 10\\ \\text{N/kg}$). On représente son poids avec l'échelle « 1 cm pour 2 N ». Quelle est la longueur du vecteur ?",
-                  "question_type": "single_choice",
-                  "explanation": "P = 0,6 × 10 = 6 N, puis 6 ÷ 2 = 3 : le vecteur mesure 3 cm. 12 cm vient d'une multiplication, et 6 cm confond la longueur avec l'intensité en oubliant l'échelle.",
-                  "answers": [
-                    {
-                      "content": "$3\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$12\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}33\\ \\text{cm}$",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
+              "content": "Écris la démarche complète pour représenter le poids du sac (12 N) à l'échelle 1 cm pour 4 N : donne la longueur du vecteur et décris le tracé.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Étape 1 — Lire l'échelle (1 cm pour 4 N) et l'intensité (12 N). Étape 2 — Calculer la longueur : $12 \\div 4 = 3$ cm. Étape 3 — Placer l'origine au centre de gravité G du sac. Étape 4 — Tracer un vecteur vertical de 3 cm, dirigé vers le bas. Étape 5 — Nommer le vecteur P et noter l'échelle. Barème sur 4 points : 1 point pour l'échelle et l'intensité lues, 1 point pour le calcul de 3 cm avec l'unité, 1 point pour l'origine en G, 1 point pour la direction et le sens du tracé.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Il lit l'échelle et l'intensité : 1 cm pour 4 N, 12 N",
+                "Il calcule la longueur : $12 \\div 4 = 3$ cm",
+                "Il place l'origine au centre de gravité G du sac",
+                "Il trace un vecteur vertical dirigé vers le bas et nomme P avec l'échelle"
+              ],
+              "starter": "Étape 1 : je lis l'échelle…"
             }
           ]
         }

@@ -1,764 +1,1277 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Les devoirs des parents",
       "subtitle": "Leçon 1 — progression DPFC 2026-2027",
       "level_name": "3ème",
       "material_name": "EDHC",
-      "essentials": [
+      "theme": "blue",
+      "figures": [
         {
-          "name": "Nourrir, loger, vêtir et soigner l'enfant",
-          "subtitle": "Les devoirs d'entretien et de santé",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Citer les besoins de base que les parents doivent assurer à leur enfant.</li><li>Relier chaque devoir des parents à un droit de l'enfant.</li><li>Reconnaître une situation où un parent manque à son devoir d'entretien ou de santé.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : le repas du soir.</strong> Dans la cour familiale, la maman d'Awa prépare le repas. Awa a 9 ans. Personne ne lui demande de payer le riz, ni de trouver l'argent du loyer. Manger, avoir un toit et des habits à sa taille, c'est l'affaire des adultes de la maison, pas la sienne.</p><p><strong>Pont.</strong> Awa est l'enfant. Sa maman et son papa sont les parents. Le repas, le toit et les habits sont les besoins de base de l'enfant. Ce que les adultes assurent pour elle s'appelle le devoir d'entretien.</p><p><strong>Image 2 : la fièvre.</strong> Un matin, Awa a de la fièvre. Sa maman ne dit pas « ça va passer ». Elle l'emmène au centre de santé, et elle garde le carnet de vaccination bien rangé.</p><p><strong>Pont.</strong> La fièvre, c'est la maladie. Le centre de santé, c'est le soin. Le carnet de vaccination, c'est la prévention. L'ensemble forme le devoir de santé.</p><p><strong>Limite de l'image.</strong> Awa vit dans une famille qui y arrive. Une famille modeste a les mêmes devoirs, mais on attend d'elle qu'elle fasse tout ce qu'elle peut, pas qu'elle fasse l'impossible. Et l'État doit aider les parents qui en ont besoin.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Les parents ont la responsabilité première d'élever leur enfant et de permettre son développement. Le père et la mère partagent cette responsabilité.</p><p>Le devoir d'entretien : nourrir, loger et vêtir l'enfant.</p><p>Le devoir de santé : soigner l'enfant quand il est malade et prévenir la maladie (consultations, vaccins).</p><p>Chaque devoir des parents correspond à un droit de l'enfant : le droit à un niveau de vie suffisant et le droit à la santé. Ces droits sont reconnus par la Convention relative aux droits de l'enfant, un traité international que la Côte d'Ivoire a ratifié.</p></blockquote><h2>Exemple résolu</h2><p><strong>Situation.</strong> Un père a un salaire régulier. Son fils de 7 ans est malade depuis trois jours, mais il refuse d'acheter les médicaments et dépense l'argent en sorties.</p><ol><li>On repère le besoin de l'enfant : être soigné. C'est le devoir de santé.</li><li>On regarde les moyens du père : il a un salaire, donc il peut payer.</li><li>On compare : il peut agir et il ne le fait pas.</li><li>Conclusion : il manque à son devoir de soigner, et le droit à la santé de son fils n'est pas respecté.</li></ol><h2>Le piège à éviter</h2><p>Beaucoup d'élèves croient que le devoir d'entretien se limite à nourrir l'enfant. Non : le logement, les vêtements et les soins comptent autant. Autre erreur : penser que c'est à l'enfant de se débrouiller pour ses besoins de base. Chez un enfant, ce sont les parents qui en répondent.</p><h2>En une phrase</h2><p>Les parents doivent nourrir, loger, vêtir et soigner leur enfant : c'est le droit de l'enfant qui devient leur devoir.</p>",
-          "exercises": [
+          "key": "devoirs-des-parents",
+          "kind": "diagram",
+          "description": "Un arbre qui part des devoirs des parents envers l'enfant et se divise en six branches : entretien (nourrir, loger, vêtir), santé (soigner et vacciner), éducation et scolarisation, affection et encadrement moral, protection contre les dangers et déclaration de naissance. Les couleurs regroupent les besoins du corps, l'éducation et l'affection, la sécurité et l'identité.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "parents",
+                "label": "Devoirs des parents envers l'enfant"
+              },
+              {
+                "id": "entretien",
+                "label": "Entretien : nourrir, loger, vêtir",
+                "category": 1
+              },
+              {
+                "id": "sante",
+                "label": "Santé : soigner et vacciner",
+                "category": 1
+              },
+              {
+                "id": "education",
+                "label": "Éducation et scolarisation",
+                "category": 2
+              },
+              {
+                "id": "affection",
+                "label": "Affection et encadrement moral",
+                "category": 2
+              },
+              {
+                "id": "protection",
+                "label": "Protection contre les dangers",
+                "category": 3
+              },
+              {
+                "id": "naissance",
+                "label": "Déclaration de naissance",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "parents",
+                "to": "entretien"
+              },
+              {
+                "from": "parents",
+                "to": "sante"
+              },
+              {
+                "from": "parents",
+                "to": "education"
+              },
+              {
+                "from": "parents",
+                "to": "affection"
+              },
+              {
+                "from": "parents",
+                "to": "protection"
+              },
+              {
+                "from": "parents",
+                "to": "naissance"
+              }
+            ],
+            "legend": [
+              "Besoins du corps",
+              "Éducation et affection",
+              "Sécurité et identité"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "enfant-neglige-que-faire",
+          "kind": "diagram",
+          "description": "Un schéma en flux intitulé « Que faire face à un enfant négligé ? ». On part d'un enfant qui semble négligé ou maltraité, puis on demande s'il y a un danger immédiat. Si oui, on prévient la police ou la gendarmerie. Sinon, on en parle à un adulte de confiance, puis le centre social étudie la situation et aide la famille. Après l'intervention de la police ou de la gendarmerie, si les faits sont graves, le juge des enfants peut aussi intervenir. Si rien ne change après l'aide du centre social, il peut aussi intervenir.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "depart",
+                "label": "Un enfant semble négligé ou maltraité"
+              },
+              {
+                "id": "danger",
+                "label": "Y a-t-il un danger immédiat ?"
+              },
+              {
+                "id": "police",
+                "label": "Prévenir la police ou la gendarmerie"
+              },
+              {
+                "id": "adulte",
+                "label": "En parler à un adulte de confiance"
+              },
+              {
+                "id": "social",
+                "label": "Le centre social étudie la situation et aide la famille"
+              },
+              {
+                "id": "juge",
+                "label": "Le juge des enfants peut protéger l'enfant"
+              }
+            ],
+            "edges": [
+              {
+                "from": "depart",
+                "to": "danger"
+              },
+              {
+                "from": "danger",
+                "to": "police",
+                "label": "Oui"
+              },
+              {
+                "from": "danger",
+                "to": "adulte",
+                "label": "Non"
+              },
+              {
+                "from": "adulte",
+                "to": "social"
+              },
+              {
+                "from": "police",
+                "to": "juge",
+                "label": "Faits graves"
+              },
+              {
+                "from": "social",
+                "to": "juge",
+                "label": "Si rien ne change"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Entretenir et soigner l'enfant",
+          "remember": "Les parents ont la **responsabilité première** d'élever leur enfant et de permettre son développement. Le père et la mère la partagent, même s'ils sont séparés. L'ensemble de leurs pouvoirs et de leurs devoirs envers l'enfant s'appelle l'**autorité parentale** : elle sert l'enfant, pas le parent. Le **devoir d'entretien** : nourrir, loger et vêtir l'enfant. Le **devoir de santé** : soigner l'enfant quand il est malade et prévenir la maladie (consultations, vaccins). Chaque devoir des parents répond à un **droit de l'enfant** (un niveau de vie suffisant, la santé), reconnu par la Convention relative aux droits de l'enfant, un traité international que la Côte d'Ivoire a ratifié. Les parents doivent faire **tout ce qu'ils peuvent selon leurs moyens** ; l'État aide les familles qui en ont besoin.",
+          "method": [
+            "Identifier le besoin de l'enfant dans la situation : manger, être logé, être habillé, être soigné.",
+            "Nommer le devoir des parents qui répond à ce besoin : devoir d'entretien ou devoir de santé.",
+            "Comparer ce que font les parents avec leurs moyens : ont-ils fait tout ce qu'ils pouvaient ?",
+            "Conclure : devoir rempli ou manquement, en nommant le droit de l'enfant concerné."
+          ],
+          "example": {
+            "statement": "Dans une cour commune du quartier, M. Diallo a un salaire régulier. Son fils Issa, 7 ans, est malade depuis trois jours, mais M. Diallo refuse d'acheter les médicaments et dépense l'argent en sorties. Que peut-on dire de son comportement ?",
+            "steps": [
+              "Identifier le besoin : Issa est malade, il a besoin d'être soigné.",
+              "Nommer le devoir : soigner un enfant malade relève du devoir de santé des parents.",
+              "Comparer avec les moyens : M. Diallo a un salaire régulier, donc il peut payer les médicaments, et il choisit de ne pas le faire.",
+              "Conclure : M. Diallo manque à son devoir de santé, et le droit à la santé d'Issa n'est pas respecté."
+            ]
+          },
+          "pitfall": "Ne confonds pas **manquement** et **pauvreté**. Contre-exemple : Mme Sanogo vend des légumes au marché, gagne peu, mais nourrit ses enfants et les emmène au centre de santé dès qu'ils sont malades : elle remplit son devoir. M. Diallo, lui, a un salaire et dépense tout en sorties : il manque à son devoir. Ce qui compte, c'est ce que les parents font avec les moyens qu'ils ont, pas la somme d'argent. Autre erreur : croire que l'entretien se limite à la nourriture. Le logement, les vêtements et les soins comptent autant.",
+          "figure": "devoirs-des-parents",
+          "exercise": {
+            "title": "Entretenir et soigner l'enfant",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations de famille et de quartier.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans une cour commune, la maman d'Awa, 9 ans, lui prépare le repas, lui assure un toit et lui achète des habits à sa taille. Quel devoir remplit-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le besoin : Awa a besoin de manger, d'être logée et d'être habillée. Étape 2 — Nommer le devoir : nourrir, loger et vêtir, c'est le devoir d'entretien. Étape 3 — Comparer avec les moyens : sa maman fait ce qu'il faut. Étape 4 — Conclure : le devoir est rempli et le droit d'Awa à un niveau de vie suffisant est respecté. Le devoir de santé concerne les soins, pas le repas. Et ce ne sont pas des cadeaux : chaque devoir des parents répond à un droit de l'enfant.",
+                "answers": [
+                  {
+                    "content": "Le devoir d'entretien",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le devoir de santé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le devoir de déclarer la naissance",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun devoir : ce sont des cadeaux qu'elle fait quand elle le veut",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces gestes de parents, lesquels relèvent du devoir de santé ? (deux réponses)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier le besoin : l'enfant est malade ou doit être protégé contre la maladie. Étape 2 — Nommer le devoir : soigner et vacciner relèvent du devoir de santé. Les habits et le lit relèvent du devoir d'entretien. Étape 3 — Comparer avec les moyens : on attend des parents qu'ils fassent ce qu'ils peuvent, mais jamais que l'enfant paie lui-même ses médicaments. Étape 4 — Conclure : le droit à la santé de l'enfant se traduit par ces deux gestes.",
+                "answers": [
+                  {
+                    "content": "Emmener l'enfant au centre de santé quand il a de la fièvre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faire vacciner l'enfant selon son carnet de santé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lui acheter des habits à sa taille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Lui assurer un lit pour dormir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Lui demander de payer lui-même ses médicaments",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une mère vend des légumes au marché, gagne peu, mais nourrit ses enfants et les emmène au centre de santé quand ils sont malades. Elle manque à son devoir d'entretien parce qu'elle est pauvre.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier le besoin : manger et être soigné. Étape 2 — Nommer le devoir : entretien et santé. Étape 3 — Comparer avec les moyens : cette mère gagne peu mais fait tout ce qu'elle peut. Étape 4 — Conclure : elle remplit ses devoirs. L'affirmation est fausse parce qu'elle confond pauvreté et manquement : un manquement suppose qu'on peut agir et qu'on ne le fait pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à la réponse qui convient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le besoin dans chaque situation (être habillé, être protégé de la maladie, être soigné, être nourri). Étape 2 — Nommer le devoir : vêtir relève de l'entretien, vacciner de la santé. Étape 3 — Comparer avec les moyens : le père salarié peut payer et ne le fait pas, c'est un manquement ; la mère à petits revenus fait tout ce qu'elle peut. Étape 4 — Conclure : devoir rempli ou manquement, selon ce que les parents font avec leurs moyens.",
+                "answers": [
+                  {
+                    "content": "Un père achète des vêtements à sa fille",
+                    "match": "Devoir d'entretien"
+                  },
+                  {
+                    "content": "Une mère fait vacciner son bébé",
+                    "match": "Devoir de santé"
+                  },
+                  {
+                    "content": "Un père qui a un salaire laisse son fils malade sans médicaments",
+                    "match": "Manquement au devoir de santé"
+                  },
+                  {
+                    "content": "Une mère fait tout son possible avec de petits revenus",
+                    "match": "Devoir rempli malgré les difficultés"
+                  }
+                ]
+              },
+              {
+                "content": "Un père a un salaire régulier mais laisse son fils de 6 ans sans repas pour payer ses sorties. On dit qu'il commet un ___ à son devoir d'entretien. (un mot, 10 lettres)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier le besoin : le garçon a faim et doit être nourri. Étape 2 — Nommer le devoir : nourrir l'enfant, c'est le devoir d'entretien. Étape 3 — Comparer avec les moyens : le père a un salaire, il peut agir et ne le fait pas. Étape 4 — Conclure : c'est un manquement. Ce n'est pas de la pauvreté : le père a les moyens, c'est la différence entre un manquement et une difficulté.",
+                "answers": [
+                  {
+                    "content": "manquement",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Éduquer, scolariser et entourer l'enfant d'affection",
+          "remember": "**Éduquer**, c'est guider l'enfant et lui transmettre des valeurs (respect, honnêteté, solidarité) pour qu'il devienne un adulte responsable. **Scolariser**, c'est inscrire l'enfant à l'école, lui donner le nécessaire selon les moyens de la famille, et suivre son travail et sa présence en classe. L'école est obligatoire pour les enfants de 6 à 16 ans, filles et garçons : tous ont **le même droit à l'éducation**. L'**affection** : l'enfant a besoin de grandir dans une famille où règnent l'écoute et la compréhension. Un parent affectueux pose aussi des règles : c'est l'**encadrement moral**. **Corriger** un enfant, c'est le guider en respectant sa dignité ; le frapper ou l'humilier, ce n'est pas l'éduquer. La famille et l'école se complètent.",
+          "method": [
+            "Repérer ce que l'enfant reçoit ou ne reçoit pas : inscription, matériel, suivi du travail, valeurs, écoute.",
+            "Nommer le devoir en jeu : scolariser, éduquer ou entourer d'affection.",
+            "Vérifier que le parent respecte la dignité de l'enfant : il guide sans frapper ni humilier.",
+            "Conclure : devoir rempli ou manquement, et dire le comportement attendu du parent."
+          ],
+          "example": {
+            "statement": "Kouadio a 12 ans. Son père l'a inscrit à l'école. Quand Kouadio rapporte une mauvaise note en mathématiques, son père le frappe devant les voisins de la cour commune. Que peut-on dire ?",
+            "steps": [
+              "Repérer : Kouadio est inscrit à l'école, mais face à une mauvaise note il reçoit des coups devant les voisins.",
+              "Nommer le devoir : face à l'échec de l'enfant, le devoir en jeu est d'éduquer, c'est-à-dire de le guider.",
+              "Vérifier la dignité : frapper et humilier devant les voisins ne respecte pas la dignité de Kouadio.",
+              "Conclure : le père manque à son devoir d'éduquer ; il doit chercher la cause de la note avec Kouadio et l'aider à progresser."
+            ]
+          },
+          "pitfall": "Ne confonds pas **scolariser** et **payer l'inscription**, ni **corriger** et **frapper**. Contre-exemple : un père paie chaque année l'inscription de sa fille, mais ne regarde jamais ses cahiers et ne sait pas si elle va en classe. Il l'a inscrite, il ne l'a pas suivie. À l'inverse, un parent qui cherche la cause d'une mauvaise note avec son enfant et l'aide éduque, sans coups. Autre erreur : garder la fille à la maison pour les tâches ménagères et n'envoyer que les garçons à l'école. C'est une discrimination : le droit à l'éducation est le même pour tous.",
+          "figure": null,
+          "exercise": {
+            "title": "Éduquer, scolariser et entourer l'enfant d'affection",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations de famille et de quartier.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Les parents de Yao, 9 ans, refusent de l'inscrire à l'école, pourtant proche de chez eux, car ils préfèrent qu'il garde les chèvres. Quel devoir méconnaissent-ils ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer ce que l'enfant reçoit : Yao n'est pas inscrit alors qu'une école est proche. Étape 2 — Nommer le devoir en jeu : scolariser l'enfant. Étape 3 — Vérifier la dignité : le problème n'est pas ici la violence, mais l'absence d'inscription. Étape 4 — Conclure : les parents manquent au devoir de scolariser et doivent inscrire Yao. Le devoir de santé concerne les soins, et garder les chèvres ne remplace pas l'école.",
+                "answers": [
+                  {
+                    "content": "Le devoir de scolariser leur enfant",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le devoir de santé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le devoir de déclarer la naissance",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun devoir : les chèvres sont utiles à la famille",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un père paie chaque année l'inscription de sa fille à l'école, mais ne regarde jamais ses cahiers et ne sait pas si elle va en classe. Il remplit entièrement son devoir de scolariser.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer ce que l'enfant reçoit : l'inscription est payée, mais il n'y a ni suivi du travail ni vérification de la présence. Étape 2 — Nommer le devoir en jeu : scolariser, qui comprend inscrire, donner le nécessaire et suivre le travail et la présence. Étape 3 — Vérifier la dignité : aucune violence ici. Étape 4 — Conclure : il manque le suivi. C'est le piège classique : payer l'inscription n'est pas scolariser.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels gestes relèvent du devoir d'éduquer et de scolariser un enfant ? (trois réponses)",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer ce que l'enfant reçoit : présence suivie, valeurs, matériel. Étape 2 — Nommer le devoir en jeu : scolariser (matériel, présence) et éduquer (valeurs). Étape 3 — Vérifier la dignité : interdire les questions n'est pas guider, c'est étouffer l'enfant. Étape 4 — Conclure : vérifier la présence en classe, apprendre à dire la vérité et acheter le matériel sont les bons gestes. Vendre pendant les cours prive l'enfant d'école, et laisser l'enfant décider seul revient à renoncer à éduquer.",
+                "answers": [
+                  {
+                    "content": "Vérifier chaque jour que l'enfant va en classe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lui apprendre à dire la vérité et à respecter les autres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lui acheter cahiers et stylos selon les moyens de la famille",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'envoyer vendre des fruits au marché pendant les heures de classe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le laisser décider seul s'il vient en classe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Lui interdire de poser des questions",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève rapporte une mauvaise note. Le parent qui éduque ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer ce que l'enfant reçoit : une mauvaise note, donc un besoin d'aide. Étape 2 — Nommer le devoir en jeu : éduquer, c'est guider l'enfant. Étape 3 — Vérifier la dignité : les coups et l'humiliation ne la respectent pas, et ils n'apprennent rien. Étape 4 — Conclure : le bon comportement est de chercher la cause avec l'enfant et de l'aider. Le retirer de l'école, c'est renoncer à le scolariser.",
+                "answers": [
+                  {
+                    "content": "cherche avec lui la cause de la note et l'aide à progresser",
+                    "correct": true
+                  },
+                  {
+                    "content": "le frappe pour qu'il retienne la leçon",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'humilie devant les voisins de la cour",
+                    "correct": false
+                  },
+                  {
+                    "content": "le retire de l'école",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour analyser la situation d'un père qui frappe son fils après une mauvaise note.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer ce que l'enfant reçoit (ici des coups). Étape 2 — Nommer le devoir en jeu (éduquer). Étape 3 — Vérifier que la dignité est respectée (elle ne l'est pas). Étape 4 — Conclure (manquement, et comportement attendu : chercher la cause de la note avec l'enfant). On ne conclut jamais avant d'avoir vérifié la dignité de l'enfant.",
+                "answers": [
+                  {
+                    "content": "Repérer ce que l'enfant reçoit : des coups après sa note"
+                  },
+                  {
+                    "content": "Nommer le devoir en jeu : éduquer l'enfant"
+                  },
+                  {
+                    "content": "Vérifier le respect de la dignité de l'enfant"
+                  },
+                  {
+                    "content": "Conclure : manquement du père et comportement attendu"
+                  }
+                ]
+              },
+              {
+                "content": "Les parents d'Aya, 12 ans, veulent la garder à la maison pour les tâches ménagères et n'envoyer que son frère à l'école. Écris en deux ou trois phrases ce que tu leur réponds, avec la méthode de la fiche.",
+                "question_type": "written",
+                "points": 2,
+                "criteria": [
+                  "Nomme le devoir en jeu : scolariser, et le droit à l'éducation d'Aya",
+                  "Dit que filles et garçons ont le même droit à l'éducation",
+                  "Dit ce que les parents doivent faire : inscrire Aya et suivre son travail"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Aya ne reçoit pas d'école alors que son frère en reçoit une. Étape 2 — Le devoir en jeu est de scolariser : inscrire l'enfant, lui donner le nécessaire et suivre son travail. Étape 3 — Garder seulement la fille est une discrimination, car filles et garçons ont le même droit à l'éducation et l'école est obligatoire de 6 à 16 ans. Étape 4 — Les parents manquent à leur devoir ; ils doivent inscrire Aya et suivre son travail comme celui de son frère. Barème : 1 point pour le devoir et le droit nommés, 0,5 point pour l'égalité filles-garçons, 0,5 point pour le comportement attendu.",
+                "answers": [],
+                "starter": "Vous manquez à votre devoir de scolariser Aya, car…"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Protéger l'enfant et déclarer sa naissance",
+          "remember": "Le **devoir de protection** : les parents mettent l'enfant à l'abri de la violence (coups, humiliations, abus), de l'abandon, de l'**exploitation par le travail** (travail dangereux, épuisant ou qui empêche d'aller à l'école), de l'enlèvement et de la vente d'enfants. L'enfant a droit à cette protection, **même dans sa propre famille**. Les parents peuvent confier leur enfant à un proche, mais ils restent responsables de lui. Une petite aide à la maison, adaptée à l'âge, n'est pas de l'exploitation. Le **devoir d'identité** : tout enfant a droit, dès sa naissance, à un nom et à une nationalité. Les parents doivent **déclarer sa naissance** à l'état civil (le service qui enregistre les naissances, les mariages et les décès) pour obtenir son **acte de naissance**, preuve de son identité : nom, date et lieu de naissance, parents.",
+          "method": [
+            "Repérer le danger qui menace l'enfant ou la démarche que les parents n'ont pas faite.",
+            "Nommer le devoir en jeu : devoir de protection ou devoir de déclarer la naissance.",
+            "Chercher qui en est responsable : les parents, même s'ils ont confié l'enfant à une autre personne.",
+            "Conclure : manquement ou non, et dire ce que les parents doivent faire."
+          ],
+          "example": {
+            "statement": "Un père confie sa fille Mariam, 10 ans, à une parente qui tient un étal au marché. Mariam y porte de lourdes charges du matin au soir et n'est plus allée à l'école depuis la rentrée. Que peut-on dire ?",
+            "steps": [
+              "Repérer le danger : Mariam, 10 ans, fait un travail lourd à plein temps qui l'empêche d'aller à l'école. C'est de l'exploitation par le travail.",
+              "Nommer le devoir en jeu : protéger l'enfant contre l'exploitation (devoir de protection). L'école manquée touche aussi le devoir de scolariser.",
+              "Chercher le responsable : le père reste responsable de sa fille, même s'il l'a confiée à une parente.",
+              "Conclure : le père manque à son devoir de protection. Il doit retirer Mariam de ce travail et la remettre à l'école."
+            ]
+          },
+          "pitfall": "Ne pense pas que ce qui se passe dans la famille est une affaire privée, ni que « confier » l'enfant décharge les parents. Contre-exemple : un père qui laisse son fils de 5 ans seul plusieurs jours en disant « le voisin le surveille » reste responsable. Ne confonds pas non plus **aider** et **être exploité** : ranger sa chambre et mettre la table après l'école, c'est de l'aide ; vendre de l'eau au feu rouge de 6 h à 20 h, c'est de l'exploitation. Enfin, ne repousse pas la déclaration de naissance : on s'en aperçoit trop tard, quand on demande l'acte de naissance, par exemple à l'inscription à un examen.",
+          "figure": null,
+          "exercise": {
+            "title": "Protéger l'enfant et déclarer sa naissance",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations du quartier et du marché.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un garçon de 9 ans porte de lourds sacs de charbon au marché toute la journée, au lieu d'aller à l'école. De quoi s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le danger : un travail lourd, toute la journée, qui prive l'enfant d'école. Étape 2 — Nommer le devoir en jeu : le devoir de protection contre l'exploitation par le travail. Étape 3 — Chercher le responsable : ses parents. Étape 4 — Conclure : c'est une exploitation, pas une aide. Une aide à la maison reste légère, adaptée à l'âge et compatible avec l'école.",
+                "answers": [
+                  {
+                    "content": "D'une exploitation de l'enfant par le travail",
+                    "correct": true
+                  },
+                  {
+                    "content": "D'une simple aide à la maison",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'un jeu qui apprend la vie",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'une punition normale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une fille de 8 ans range sa chambre et aide à mettre la table après l'école, puis fait ses devoirs. Elle est exploitée par le travail.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le danger : y en a-t-il un ? Le travail est léger et se fait après l'école. Étape 2 — Nommer le devoir en jeu : la protection contre l'exploitation. Étape 3 — Chercher le responsable : les parents, qui ici n'imposent rien de dangereux. Étape 4 — Conclure : il n'y a pas d'exploitation. Ce travail n'est ni dangereux, ni épuisant, ni un obstacle à l'école : c'est de l'aide adaptée à l'âge.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles situations sont des manquements au devoir de protection ? (trois réponses)",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer le danger dans chaque situation : coups, abandon, remise à un inconnu contre de l'argent. Étape 2 — Nommer le devoir en jeu : la protection contre la violence, l'abandon et l'exploitation. Étape 3 — Chercher le responsable : les parents, dans chacun de ces trois cas. Étape 4 — Conclure : ce sont trois manquements. Aller chercher du pain près de chez soi, apprendre la route ou interdire une traversée dangereuse, c'est au contraire protéger l'enfant.",
+                "answers": [
+                  {
+                    "content": "Un parent frappe son enfant avec une ceinture jusqu'à le blesser",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un parent laisse son enfant de 5 ans seul à la maison pendant plusieurs jours",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un parent confie son enfant à un inconnu qui l'emmène travailler loin contre de l'argent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un parent demande à son fils de 10 ans d'aller chercher du pain à la boutique voisine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un parent explique à son enfant de 6 ans le danger de la route",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un parent interdit à son enfant de 5 ans de traverser seul une grande route",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour obtenir l'acte de naissance de leur enfant, les parents déclarent sa naissance au service de l'___ civil. (un mot)",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer la démarche : il faut une preuve de l'identité de l'enfant. Étape 2 — Nommer le devoir en jeu : déclarer la naissance. Étape 3 — Chercher le responsable : les parents. Étape 4 — Conclure : ils déclarent la naissance au service de l'état civil, qui enregistre les naissances, et reçoivent l'acte de naissance.",
+                "answers": [
+                  {
+                    "content": "état",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le père de Fanta, 8 ans, la confie à une tante en ville. La tante la fait vendre de l'eau au feu rouge toute la journée. Le père dit : « Je n'y suis pour rien, c'est la tante qui décide. » Que répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le danger : une enfant de 8 ans vend de l'eau au feu rouge toute la journée, c'est de l'exploitation. Étape 2 — Nommer le devoir en jeu : la protection contre l'exploitation. Étape 3 — Chercher le responsable : le père reste responsable de sa fille, même s'il l'a confiée à sa tante. Étape 4 — Conclure : il manque à son devoir et doit reprendre sa fille et la protéger. « Confier » n'efface pas la responsabilité des parents.",
+                "answers": [
+                  {
+                    "content": "Il reste responsable de sa fille : il manque à son devoir de protection",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison, car il a confié sa fille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison, car la tante a pris la place des parents",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seule la tante est responsable, car elle fait travailler Fanta",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître un manquement, ses conséquences et les recours",
+          "remember": "Un **manquement** : un parent qui peut remplir son devoir et ne le fait pas, ou qui maltraite son enfant. Ce n'est pas une **difficulté** : une famille pauvre qui fait tout ce qu'elle peut ne manque à rien, et elle peut être aidée. **Conséquences** : l'enfant souffre dans sa santé, ses études ou sa sécurité ; le parent peut être sanctionné par la justice et, dans les cas graves, perdre son autorité parentale ; l'enfant peut être confié à un proche ou à une structure de protection sur décision de la justice. **Recours** : un adulte de confiance (enseignant, proche) ; le **centre social**, où des travailleurs sociaux aident les familles ; la police ou la gendarmerie en cas de danger immédiat ; le **juge des enfants**, le magistrat qui protège les enfants en danger. Tout citoyen peut signaler un enfant en danger. Les lois ivoiriennes protègent la famille et l'enfant.",
+          "method": [
+            "Identifier le devoir auquel le parent semble manquer, d'après la situation.",
+            "Distinguer un manquement d'une difficulté : le parent peut-il agir, et refuse-t-il ?",
+            "Choisir le recours adapté : adulte de confiance et centre social, police ou gendarmerie si le danger est immédiat, justice si la situation dure.",
+            "Conclure : dire la conséquence pour le parent, ou l'aide apportée à la famille, et la protection de l'enfant."
+          ],
+          "example": {
+            "statement": "Dans la cour commune, Mme Touré, vendeuse de légumes, n'arrive plus à payer les fournitures de son fils Bakary, 10 ans. Elle fait tout pour le nourrir et le soigner, mais Bakary risque de quitter l'école. Sa maîtresse l'a remarqué. Que peut-elle faire ?",
+            "steps": [
+              "Identifier le devoir : il s'agit du devoir de scolariser Bakary, qui demande des fournitures.",
+              "Distinguer : Mme Touré fait tout ce qu'elle peut avec ses petits revenus. C'est une difficulté, pas un manquement.",
+              "Choisir le recours : la maîtresse en parle avec bienveillance à Mme Touré et l'oriente vers le centre social, qui peut aider la famille. Il n'y a pas de danger immédiat.",
+              "Conclure : Mme Touré n'est pas sanctionnée. La famille est aidée pour que Bakary reste à l'école."
+            ]
+          },
+          "pitfall": "Ne confonds pas **difficulté** et **manquement**, et ne dis pas que « ça ne regarde pas les voisins ». Contre-exemple : signaler à la police Mme Touré, qui fait tout son possible, serait injuste. À l'inverse, ne rien faire devant un enfant frappé tous les soirs, c'est laisser le danger continuer. Choisis le recours selon la gravité : danger immédiat, police ou gendarmerie ; difficulté d'argent, centre social ; situation qui dure malgré les démarches, juge des enfants.",
+          "figure": "enfant-neglige-que-faire",
+          "exercise": {
+            "title": "Reconnaître un manquement, ses conséquences et les recours",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations du quartier. Le schéma « Que faire face à un enfant négligé ? » t'aide à choisir le recours : on y lit que, s'il y a un danger immédiat, on prévient la police ou la gendarmerie, sinon on en parle à un adulte de confiance, puis le centre social étudie la situation.",
+            "exercise_type": "fixation",
+            "figure": "enfant-neglige-que-faire",
+            "questions": [
+              {
+                "content": "Mme Touré vend des légumes, fait tout pour nourrir et soigner son fils, mais ne peut plus payer ses fournitures scolaires. Comment qualifier sa situation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le devoir : scolariser le fils, ce qui demande des fournitures. Étape 2 — Distinguer un manquement d'une difficulté : Mme Touré fait tout ce qu'elle peut, c'est une difficulté. Étape 3 — Choisir le recours : le centre social, qui aide les familles. Étape 4 — Conclure : pas de sanction, mais une aide. Parler de manquement grave serait confondre pauvreté et refus d'agir.",
+                "answers": [
+                  {
+                    "content": "Une difficulté de la famille, pas un manquement : elle peut être aidée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un manquement grave qui mérite une sanction",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un abandon de l'enfant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un choix éducatif de la mère",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans la cour commune, tu entends chaque soir un père frapper son fils avec une ceinture, et l'enfant crie. Le danger est immédiat. Quel recours est le plus adapté ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le devoir : la protection de l'enfant contre la violence. Étape 2 — Distinguer : un père qui frappe son fils au point qu'il crie, c'est un manquement, pas une difficulté. Étape 3 — Choisir le recours : le danger est immédiat, donc on prévient la police ou la gendarmerie. Étape 4 — Conclure : l'enfant doit être mis à l'abri et le père peut répondre de ses actes. Attendre ou se taire laisse le danger continuer.",
+                "answers": [
+                  {
+                    "content": "Prévenir la police ou la gendarmerie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Attendre que le père se calme tout seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "En parler seulement aux autres voisins, sans rien faire d'autre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dire à l'enfant de se taire pour éviter les disputes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un voisin voit un enfant frappé tous les soirs. Il doit se taire, car l'éducation d'un enfant est une affaire privée de la famille.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier le devoir : la protection contre la violence. Étape 2 — Distinguer : frapper un enfant tous les soirs est un manquement. Étape 3 — Choisir le recours : un adulte de confiance, le centre social, la police ou la gendarmerie selon la gravité. Étape 4 — Conclure : l'enfant a droit à la protection même dans sa famille, et tout citoyen peut signaler un enfant en danger. L'idée d'une affaire privée est précisément le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un parent maltraite gravement son enfant. Quelles conséquences peut-il subir ? (deux réponses)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier le devoir : la protection de l'enfant. Étape 2 — Distinguer : maltraiter gravement est un manquement. Étape 3 — Choisir le recours : la justice, par le juge des enfants. Étape 4 — Conclure : le parent peut être sanctionné et, dans les cas graves, perdre son autorité parentale. Ses devoirs ne disparaissent pas : un manquement ne libère jamais le parent.",
+                "answers": [
+                  {
+                    "content": "Être sanctionné par la justice",
+                    "correct": true
+                  },
+                  {
+                    "content": "Perdre son autorité parentale dans les cas graves",
+                    "correct": true
+                  },
+                  {
+                    "content": "Recevoir une récompense de l'État",
+                    "correct": false
+                  },
+                  {
+                    "content": "Être dispensé de ses devoirs envers l'enfant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Voir ses devoirs envers l'enfant disparaître",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation au recours le plus adapté.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le devoir dans chaque situation (protection, scolarisation). Étape 2 — Distinguer manquement et difficulté : la mère qui travaille dur a une difficulté. Étape 3 — Choisir le recours selon la gravité : danger immédiat, police ou gendarmerie ; difficulté d'argent, centre social ; situation qui dure, juge des enfants ; enfant qui a peur, un adulte de confiance. Étape 4 — Conclure : protéger l'enfant et aider la famille quand elle fait tout ce qu'elle peut.",
+                "answers": [
+                  {
+                    "content": "Un enfant est en train d'être frappé et crie",
+                    "match": "Police ou gendarmerie"
+                  },
+                  {
+                    "content": "Une mère qui travaille dur ne peut plus payer les fournitures",
+                    "match": "Centre social"
+                  },
+                  {
+                    "content": "Un danger grave qui dure malgré les démarches",
+                    "match": "Juge des enfants"
+                  },
+                  {
+                    "content": "Un enfant a peur de rentrer chez lui et n'ose pas en parler",
+                    "match": "Un adulte de confiance"
+                  }
+                ]
+              },
+              {
+                "content": "Tu apprends qu'un camarade de classe est frappé chaque soir par son père et qu'il a peur de rentrer. Écris en trois phrases ce que tu fais, et pourquoi.",
+                "question_type": "written",
+                "points": 2,
+                "criteria": [
+                  "Choisit un recours adapté : un adulte de confiance, le centre social, ou la police ou la gendarmerie si le danger est immédiat",
+                  "Dit que l'enfant a droit à la protection, même dans sa famille",
+                  "Évite de garder le silence ou de se faire justice soi-même"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Le devoir en jeu est la protection de mon camarade contre la violence. Étape 2 — Frapper chaque soir est un manquement, pas une difficulté. Étape 3 — J'en parle à un adulte de confiance, comme mon enseignant, qui peut prévenir le centre social ; si mon camarade est en danger immédiat, la police ou la gendarmerie est prévenue. Étape 4 — Je n'attends pas et je ne garde pas le secret, car mon camarade a droit à la protection, même dans sa famille. Barème : 1 point pour un recours adapté, 0,5 point pour la justification par le droit, 0,5 point pour le refus du silence.",
+                "answers": [],
+                "starter": "J'en parle à…"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La famille Bamba dans la cour commune",
+          "statement": "Dans une cour commune du quartier, la famille Bamba vit avec trois enfants : Awa (12 ans), Sékou (8 ans) et le bébé Moussa (6 mois). M. Bamba, chauffeur de taxi, a un revenu régulier. Mme Bamba vend des fruits au marché et gagne peu. Dans cet exercice, tu analyses leurs situations avec les méthodes des fiches.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Les besoins de base de l'enfant",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "M. Bamba, chauffeur de taxi avec un revenu régulier, nourrit ses enfants, les loge et les habille. Quel devoir remplit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le besoin de l'enfant : manger, être logé, être habillé. Étape 2 — Nommer le devoir : nourrir, loger et vêtir, c'est le devoir d'entretien. Étape 3 — Comparer avec les moyens : M. Bamba a un revenu régulier et il agit. Étape 4 — Conclure : le devoir est rempli et le droit des enfants à un niveau de vie suffisant est respecté. Le devoir de santé concerne les soins et la prévention, pas les repas. Ce n'est pas de la générosité : c'est un devoir qui répond à un droit.",
+              "answers": [
                 {
-                  "content": "Awa a 9 ans. Ses parents lui assurent le repas, le toit et des habits à sa taille. Que représentent ces trois éléments ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce sont les besoins de base de l'enfant. Les adultes de la maison les assurent : c'est le devoir d'entretien. Awa n'a pas à les payer elle-même.",
-                  "answers": [
-                    { "content": "Les besoins de base que les parents doivent assurer à l'enfant", "correct": true },
-                    { "content": "Des cadeaux que les parents donnent quand ils le veulent", "correct": false },
-                    { "content": "Des récompenses pour les bonnes notes de l'enfant", "correct": false },
-                    { "content": "Des dépenses que l'enfant doit partager avec ses parents", "correct": false }
-                  ]
+                  "content": "Le devoir d'entretien",
+                  "correct": true
                 },
                 {
-                  "content": "Le devoir d'entretien des parents comprend : nourrir, loger et vêtir l'enfant.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Nourrir, loger et vêtir sont les trois besoins de base. Beaucoup oublient le logement et les vêtements, qui comptent autant que la nourriture.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Le devoir de santé",
+                  "correct": false
                 },
                 {
-                  "content": "Parmi ces propositions, lesquelles sont des devoirs des parents envers leur enfant ? (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Nourrir et soigner sont des devoirs des parents. L'enfant n'a pas à payer le loyer, et on ne le laisse pas se débrouiller seul pour se loger : il est mineur et dépend de ses parents.",
-                  "answers": [
-                    { "content": "Le nourrir", "correct": true },
-                    { "content": "L'emmener se soigner quand il est malade", "correct": true },
-                    { "content": "Lui demander de payer le loyer de la famille", "correct": false },
-                    { "content": "Le laisser trouver seul un endroit où dormir dès qu'il sait marcher", "correct": false },
-                    { "content": "Attendre qu'il gagne de l'argent pour lui acheter des habits", "correct": false }
-                  ]
+                  "content": "Le devoir de protection",
+                  "correct": false
                 },
                 {
-                  "content": "Quel droit de l'enfant correspond au devoir des parents de le soigner ?",
-                  "question_type": "single_choice",
-                  "explanation": "Soigner l'enfant, c'est respecter son droit à la santé. Chaque devoir des parents répond à un droit de l'enfant. Le droit au nom et à la nationalité correspond à un autre devoir.",
-                  "answers": [
-                    { "content": "Le droit à la santé", "correct": true },
-                    { "content": "Le droit de vote", "correct": false },
-                    { "content": "Le droit à un nom et à une nationalité", "correct": false },
-                    { "content": "Le droit de choisir son métier", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Les devoirs des parents sont des faveurs que l'enfant doit mériter par sa bonne conduite.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Ces devoirs correspondent à des droits de l'enfant. Un enfant ne les gagne pas par sa conduite : ses parents lui doivent le repas, le toit et les soins même après une bêtise.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Aucun devoir : c'est de la générosité",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Reconnaître le devoir en jeu",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le bébé Moussa, 6 mois, n'a jamais vu de soignant ni reçu un seul vaccin, alors que ses parents ont les moyens de l'emmener au centre de santé. Ses parents remplissent leur devoir de santé.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier le besoin : un bébé doit être suivi et vacciné. Étape 2 — Nommer le devoir : soigner et prévenir la maladie, c'est le devoir de santé. Étape 3 — Comparer avec les moyens : les parents peuvent le faire et ne le font pas. Étape 4 — Conclure : c'est un manquement au devoir de santé, et le droit de Moussa à la santé n'est pas respecté. Le piège est de croire que seule la maladie déclarée compte : la prévention (vaccins, consultations) en fait partie.",
+              "answers": [
                 {
-                  "content": "Un père qui a un salaire régulier refuse d'acheter les médicaments de son fils malade. Quel devoir méconnaît-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Soigner l'enfant malade relève du devoir de santé. Le père a les moyens et ne le fait pas : c'est un manquement. Le devoir de santé fait partie des besoins de base, avec nourrir, loger et vêtir.",
-                  "answers": [
-                    { "content": "Le devoir de santé (soigner son enfant)", "correct": true },
-                    { "content": "Le devoir de choisir le métier de son fils", "correct": false },
-                    { "content": "Le devoir de déclarer la naissance", "correct": false },
-                    { "content": "Aucun devoir, car la maladie passera seule", "correct": false }
-                  ]
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Une mère a peu de moyens. Elle vend au marché chaque jour pour nourrir ses enfants et les emmène au centre de santé quand ils sont malades. Elle remplit son devoir en faisant tout ce qu'elle peut.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. On attend des parents qu'ils fassent tout leur possible, pas qu'ils soient riches. Être modeste n'est pas un manquement ; refuser d'agir alors qu'on le peut en est un.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Mamadou a 6 ans. Lesquels de ces gestes de ses parents relèvent du devoir d'entretien et de santé ? (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Vacciner, habiller et loger Mamadou sont des devoirs d'entretien et de santé. Le faire vendre au carrefour est une exploitation. Attendre sans consulter une fièvre qui dure est une négligence.",
-                  "answers": [
-                    { "content": "Le faire vacciner selon son carnet de santé", "correct": true },
-                    { "content": "Lui acheter des habits à sa taille", "correct": true },
-                    { "content": "Lui assurer un logement où dormir à l'abri", "correct": true },
-                    { "content": "Le faire vendre des mouchoirs au carrefour toute la journée", "correct": false },
-                    { "content": "Attendre des semaines avant de consulter alors que sa fièvre persiste", "correct": false },
-                    { "content": "Lui interdire de jouer avec ses camarades", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Le petit frère d'Awa a une forte fièvre qui dure depuis deux jours. Que doivent faire ses parents ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une fièvre forte qui dure demande l'avis d'un soignant. Attendre, c'est risquer l'aggravation. Laisser l'enfant décider seul n'a pas de sens : il est trop petit pour juger de sa maladie.",
-                  "answers": [
-                    { "content": "L'emmener au centre de santé", "correct": true },
-                    { "content": "Attendre une semaine pour voir si ça passe", "correct": false },
-                    { "content": "Lui demander s'il veut aller se faire soigner", "correct": false },
-                    { "content": "Le laisser à la maison et continuer le travail", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un enfant a faim parce que son père, qui a un salaire, dépense presque tout au maquis. Comment décrire la situation ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le père a les moyens et ne nourrit pas son enfant : c'est un manquement au devoir d'entretien. Ce n'est pas un cas de force majeure, qui supposerait que le père ne puisse vraiment rien faire.",
-                  "answers": [
-                    { "content": "Un manquement au devoir d'entretien", "correct": true },
-                    { "content": "Un cas de force majeure", "correct": false },
-                    { "content": "Un choix éducatif du père", "correct": false },
-                    { "content": "L'exercice normal de l'autorité parentale", "correct": false }
-                  ]
+                  "content": "Faux",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Analyser des situations de famille",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Mme Bamba gagne peu en vendant des fruits au marché, mais elle fait tout pour que ses enfants mangent et soient soignés. Un voisin dit qu'elle manque à ses devoirs parce qu'elle est pauvre. Que répondre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le besoin : manger et être soigné. Étape 2 — Nommer le devoir : entretien et santé. Étape 3 — Comparer avec les moyens : Mme Bamba gagne peu mais fait tout ce qu'elle peut. Étape 4 — Conclure : elle remplit son devoir. Un manquement suppose qu'on peut agir et qu'on ne le fait pas. La pauvreté n'est pas un manquement, et elle ne fait pas disparaître les devoirs : elle appelle de l'aide.",
+              "answers": [
                 {
-                  "content": "Mme Koné a un revenu correct. Elle nourrit, habille et loge bien ses enfants, mais ne les emmène jamais au centre de santé, même malades. Quelle analyse est juste ?",
-                  "question_type": "single_choice",
-                  "explanation": "Elle remplit son devoir d'entretien (nourrir, vêtir, loger), mais elle manque au devoir de santé. Un devoir rempli ne compense pas un autre devoir négligé.",
-                  "answers": [
-                    { "content": "Elle remplit son devoir d'entretien mais manque à son devoir de santé", "correct": true },
-                    { "content": "Elle remplit tous ses devoirs, puisque les enfants sont nourris", "correct": false },
-                    { "content": "Elle ne manque à rien, car la santé est l'affaire de l'État seul", "correct": false },
-                    { "content": "Elle manque seulement au devoir d'entretien", "correct": false }
-                  ]
+                  "content": "Elle ne manque à rien : elle fait tout ce qu'elle peut, et l'État aide les familles qui en ont besoin",
+                  "correct": true
                 },
                 {
-                  "content": "Un voisin dit : « À 9 ans, un enfant doit se débrouiller pour manger. » Quels arguments permettent de lui répondre ? (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les parents ont la responsabilité première d'élever l'enfant, et leurs devoirs répondent à ses droits. L'âge de 9 ans ne change rien. L'État aide les parents, il ne les remplace pas.",
-                  "answers": [
-                    { "content": "Les parents ont la responsabilité première d'élever leur enfant", "correct": true },
-                    { "content": "Chaque devoir des parents correspond à un droit de l'enfant", "correct": true },
-                    { "content": "Un enfant devient responsable de ses besoins dès 9 ans", "correct": false },
-                    { "content": "Seul l'État doit nourrir les enfants", "correct": false }
-                  ]
+                  "content": "Le voisin a raison : sans argent, on ne peut pas remplir ses devoirs de parent",
+                  "correct": false
                 },
                 {
-                  "content": "Quand une famille est pauvre, les parents sont dispensés de tous leurs devoirs et l'État n'a aucun rôle.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Les parents doivent faire tout ce qu'ils peuvent, et l'État doit aider ceux qui en ont besoin. La pauvreté ne supprime pas le devoir ; elle appelle de l'aide.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Elle manque à ses devoirs, mais seulement le dimanche",
+                  "correct": false
                 },
                 {
-                  "content": "Parmi ces phrases, lesquelles sont exactes ? (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les trois phrases exactes décrivent le devoir d'entretien, le devoir de santé et leur lien avec les droits. Le devoir ne s'arrête pas à 5 ans et ne dépend pas de la conduite. Père et mère partagent la responsabilité.",
-                  "answers": [
-                    { "content": "Le devoir d'entretien comprend nourrir, loger et vêtir l'enfant", "correct": true },
-                    { "content": "Soigner et vacciner l'enfant relève du devoir de santé", "correct": true },
-                    { "content": "Le devoir de soigner des parents répond au droit à la santé de l'enfant", "correct": true },
-                    { "content": "Le devoir d'entretien s'arrête quand l'enfant a 5 ans", "correct": false },
-                    { "content": "Seule la mère a des devoirs envers l'enfant", "correct": false },
-                    { "content": "Le devoir d'entretien dépend de la gentillesse de l'enfant", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Les parents d'Ibrahim sont séparés. Son père a un emploi mais ne donne plus rien pour l'enfant ; sa mère s'occupe seule de tout. Que peut-on dire ?",
-                  "question_type": "single_choice",
-                  "explanation": "Père et mère ont des responsabilités communes, même séparés. Le père a les moyens et ne contribue pas : il manque à son devoir d'entretien. La séparation ne supprime pas ses devoirs.",
-                  "answers": [
-                    { "content": "Le père manque à son devoir d'entretien, car les deux parents restent responsables", "correct": true },
-                    { "content": "Le père est libre, car il n'habite plus avec l'enfant", "correct": false },
-                    { "content": "Seule la mère a des devoirs, puisque l'enfant vit chez elle", "correct": false },
-                    { "content": "C'est à Ibrahim de demander de l'argent à son père", "correct": false }
-                  ]
+                  "content": "Ses devoirs disparaissent, car elle gagne peu",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Awa, 12 ans, est inscrite à l'école. Pourtant M. Bamba voudrait qu'elle reste à la maison garder Moussa, alors que Sékou, lui, continue d'aller à l'école. Quels arguments montrent que M. Bamba a tort ? (deux réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer ce que l'enfant reçoit : Sékou va à l'école, Awa pourrait en être retirée. Étape 2 — Nommer le devoir en jeu : scolariser. Étape 3 — Vérifier la dignité et l'égalité : retirer seulement la fille est une discrimination. Étape 4 — Conclure : M. Bamba manque à son devoir de scolariser Awa. Les deux bons arguments sont l'égalité du droit à l'éducation et l'obligation scolaire de 6 à 16 ans. Payer la scolarité ne donne pas le droit de priver une enfant d'école.",
+              "answers": [
+                {
+                  "content": "Filles et garçons ont le même droit à l'éducation",
+                  "correct": true
+                },
+                {
+                  "content": "L'école est obligatoire pour les enfants de 6 à 16 ans, et Awa a 12 ans",
+                  "correct": true
+                },
+                {
+                  "content": "Une fille doit d'abord apprendre les tâches ménagères",
+                  "correct": false
+                },
+                {
+                  "content": "Les parents peuvent décider de tout, car ils paient la scolarité",
+                  "correct": false
+                },
+                {
+                  "content": "À 12 ans, Awa peut travailler à temps plein pour la famille",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour que la naissance de Moussa soit enregistrée, ses parents la déclarent à l'état civil et reçoivent son ___ de naissance. (un mot)",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer la démarche : Moussa doit pouvoir prouver son identité. Étape 2 — Nommer le devoir en jeu : déclarer la naissance. Étape 3 — Chercher qui en est responsable : ses parents. Étape 4 — Conclure : après la déclaration à l'état civil, les parents reçoivent l'acte de naissance, preuve de son nom, de sa date et de son lieu de naissance et de ses parents.",
+              "answers": [
+                {
+                  "content": "acte",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sékou, 8 ans, rapporte une mauvaise note. M. Bamba le frappe devant les voisins de la cour commune. Explique en trois ou quatre phrases pourquoi ce n'est pas la bonne manière et dis ce que M. Bamba devrait faire.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Nomme le devoir en jeu : éduquer, c'est guider l'enfant",
+                "Dit que frapper et humilier ne respecte pas la dignité de l'enfant",
+                "Dit ce que le père doit faire : chercher la cause de la note et aider Sékou"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Sékou reçoit des coups après un échec. Étape 2 — Le devoir en jeu est d'éduquer, c'est-à-dire de guider l'enfant. Étape 3 — Frapper Sékou devant les voisins ne respecte pas sa dignité : c'est de la violence, pas de l'éducation. Étape 4 — M. Bamba manque à son devoir d'éduquer ; il doit chercher avec Sékou la cause de la note et l'aider à progresser. Barème : 0,5 point pour le devoir nommé, 1 point pour la dignité non respectée, 0,5 point pour le comportement attendu.",
+              "answers": [],
+              "starter": "Frapper Sékou ne respecte pas…"
             }
           ]
         },
         {
-          "name": "Éduquer et scolariser l'enfant",
-          "subtitle": "Le devoir d'éducation",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Expliquer ce que veut dire éduquer un enfant.</li><li>Citer ce que les parents font pour scolariser leur enfant.</li><li>Reconnaître un manquement au devoir d'éducation.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : le champ.</strong> M. Brou plante de jeunes ignames. Il pose un tuteur à côté de chaque plant, il désherbe, il arrose quand il faut. Il sait que sans lui, les plants pousseraient de travers ou seraient étouffés par les mauvaises herbes.</p><p><strong>Pont.</strong> M. Brou, ce sont les parents. Les jeunes plants, ce sont les enfants. Le tuteur, le désherbage et l'arrosage, ce sont les conseils, les règles et les valeurs que les parents transmettent. La belle récolte, c'est l'enfant devenu un adulte responsable.</p><p><strong>Image 2 : la rentrée.</strong> À la rentrée, le père d'Awa va à l'école pour l'inscrire. Il achète les cahiers, les stylos et l'uniforme. Chaque soir, il demande à voir ses cahiers et vérifie qu'elle va en classe.</p><p><strong>Pont.</strong> L'inscription, c'est scolariser. L'achat du matériel, c'est donner les moyens d'étudier. Regarder les cahiers, c'est suivre le travail de l'enfant.</p><p><strong>Limite de l'image.</strong> Une plante ne parle pas et n'a pas d'avis. Un enfant est une personne qui a des droits : on l'écoute selon son âge et on respecte sa dignité. Éduquer, ce n'est pas dresser.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Éduquer, c'est guider l'enfant et lui transmettre des valeurs (respect, honnêteté, solidarité) pour qu'il devienne un adulte responsable.</p><p>Scolariser, c'est inscrire l'enfant à l'école, lui donner le nécessaire selon ses moyens, et suivre son travail et sa présence en classe.</p><p>L'enfant a droit à l'éducation, sans distinction : les filles et les garçons ont les mêmes droits. La Convention relative aux droits de l'enfant demande que l'enseignement primaire soit obligatoire et gratuit.</p><p>L'école instruit et éduque aussi : la famille et l'école se complètent.</p></blockquote><h2>Exemple résolu</h2><p><strong>Situation.</strong> Yao a 9 ans. Une école se trouve près de chez lui, mais ses parents ne l'ont pas inscrit : ils préfèrent qu'il garde les chèvres.</p><ol><li>On repère le besoin de l'enfant : aller à l'école. C'est son droit à l'éducation.</li><li>On regarde ce qui empêche l'inscription : rien d'autre que la préférence des parents.</li><li>On compare : le droit de Yao n'est pas respecté.</li><li>Conclusion : les parents manquent à leur devoir de scolariser. La solution est de l'inscrire ; en cas de difficulté, ils peuvent demander conseil à l'école.</li></ol><h2>Le piège à éviter</h2><p>Scolariser, ce n'est pas seulement payer l'inscription puis laisser l'école faire tout. Les parents doivent aussi suivre le travail et la présence de l'enfant. Autre erreur : croire qu'on peut garder une fille à la maison pour les tâches ménagères et envoyer seulement les garçons. Le droit à l'éducation est le même pour tous.</p><h2>En une phrase</h2><p>Les parents éduquent leur enfant et le scolarisent : ils l'inscrivent, lui donnent les moyens d'étudier et suivent son travail, filles comme garçons.</p>",
-          "exercises": [
+          "title": "Des enfants au marché du quartier",
+          "statement": "Un samedi, tu accompagnes ta tante au grand marché du quartier. Tu y observes plusieurs situations d'enfants et de parents. Dans cet exercice, tu les analyses avec les méthodes des fiches.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Éduquer et scolariser",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Au marché, une fillette de 8 ans aide sa mère à ranger des tomates pendant une heure après l'école, puis fait ses devoirs. De quoi s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le danger : y en a-t-il un ? Une heure de rangement après l'école n'est ni dangereuse ni épuisante. Étape 2 — Nommer le devoir en jeu : la protection contre l'exploitation. Étape 3 — Chercher le responsable : la mère, qui veille aussi aux devoirs. Étape 4 — Conclure : c'est une petite aide, adaptée à l'âge et compatible avec l'école. L'exploitation commence quand le travail est dangereux, épuisant ou empêche d'aller à l'école.",
+              "answers": [
                 {
-                  "content": "M. Brou plante de jeunes ignames et pose un tuteur à côté de chaque plant pour qu'il pousse droit. Si M. Brou représente les parents et les plants les enfants, le tuteur représente :",
-                  "question_type": "single_choice",
-                  "explanation": "Le tuteur guide la plante pour qu'elle pousse droit. Il représente les repères, les règles et les valeurs que les parents donnent pour guider l'enfant. Il ne représente ni une punition ni de l'argent.",
-                  "answers": [
-                    { "content": "Les repères et les valeurs que les parents donnent pour guider l'enfant", "correct": true },
-                    { "content": "Les punitions que les parents infligent", "correct": false },
-                    { "content": "L'argent que les parents dépensent", "correct": false },
-                    { "content": "L'enseignant qui remplace les parents", "correct": false }
-                  ]
+                  "content": "D'une aide adaptée à son âge, qui n'est pas de l'exploitation",
+                  "correct": true
                 },
                 {
-                  "content": "Éduquer un enfant, c'est seulement l'inscrire à l'école.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Inscrire l'enfant, c'est le scolariser. Éduquer va plus loin : guider l'enfant et lui transmettre des valeurs, à la maison comme à l'école. L'école instruit et éduque aussi : famille et école se complètent.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "D'une exploitation de l'enfant par le travail",
+                  "correct": false
                 },
                 {
-                  "content": "Scolariser un enfant, c'est : (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Scolariser, c'est inscrire l'enfant et suivre son travail et sa présence. Laisser l'enseignant tout faire sans regarder les cahiers, ou garder les filles à la maison, ne respecte pas le droit à l'éducation.",
-                  "answers": [
-                    { "content": "L'inscrire à l'école et lui donner le nécessaire", "correct": true },
-                    { "content": "Suivre son travail et sa présence en classe", "correct": true },
-                    { "content": "Ne jamais regarder ses cahiers, car c'est le travail de l'enseignant", "correct": false },
-                    { "content": "Garder les filles à la maison pour les tâches ménagères", "correct": false },
-                    { "content": "Choisir à sa place un métier pour toute sa vie", "correct": false }
-                  ]
+                  "content": "D'un manquement au devoir de scolariser",
+                  "correct": false
                 },
                 {
-                  "content": "Quel droit de l'enfant correspond au devoir des parents de le scolariser ?",
-                  "question_type": "single_choice",
-                  "explanation": "Scolariser l'enfant, c'est respecter son droit à l'éducation. Le droit de vote est réservé aux citoyens majeurs. Le droit de ne pas aller à l'école n'existe pas, et on ne choisit pas ses parents.",
-                  "answers": [
-                    { "content": "Le droit à l'éducation", "correct": true },
-                    { "content": "Le droit de vote", "correct": false },
-                    { "content": "Le droit de choisir ses parents", "correct": false },
-                    { "content": "Le droit de ne pas aller à l'école", "correct": false }
-                  ]
-                },
-                {
-                  "content": "On compare les parents à un planteur qui guide de jeunes plants avec des tuteurs. Quelle est la limite de cette comparaison pour comprendre l'éducation d'un enfant ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une plante n'a pas d'avis. L'enfant est une personne : ses parents l'écoutent selon son âge et respectent sa dignité. Éduquer ne veut pas dire dresser ou décider de tout sans l'écouter.",
-                  "answers": [
-                    { "content": "L'enfant est une personne qui a des droits et qu'on écoute, contrairement à une plante", "correct": true },
-                    { "content": "Un enfant n'a pas besoin de guide pour grandir", "correct": false },
-                    { "content": "Les parents ne peuvent rien apprendre à un enfant", "correct": false },
-                    { "content": "Un champ demande plus de travail qu'un enfant", "correct": false }
-                  ]
+                  "content": "D'un abandon de l'enfant",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Reconnaître le devoir d'éducation",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Au marché, un garçon de 9 ans porte des sacs de charbon de 7 h à 18 h au lieu d'aller à l'école. Quels devoirs ses parents méconnaissent-ils ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le danger : un travail lourd de 7 h à 18 h pour un enfant de 9 ans, qui l'empêche d'aller à l'école. Étape 2 — Nommer les devoirs en jeu : la protection contre l'exploitation et la scolarisation. Étape 3 — Chercher le responsable : ses parents. Étape 4 — Conclure : ils manquent aux deux devoirs. Qu'il aide sa famille n'y change rien : l'enfant n'est pas là pour faire vivre la famille au prix de sa santé et de son école.",
+              "answers": [
                 {
-                  "content": "Yao a 9 ans. Une école est proche de chez lui, mais ses parents refusent de l'inscrire pour qu'il garde les chèvres. Quel devoir méconnaissent-ils ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ne pas inscrire un enfant en âge d'aller à l'école, c'est manquer au devoir de scolariser, et donc au droit à l'éducation. Le devoir de santé concerne les soins, pas l'école.",
-                  "answers": [
-                    { "content": "Le devoir de scolariser leur enfant", "correct": true },
-                    { "content": "Le devoir de santé", "correct": false },
-                    { "content": "Le devoir de déclarer la naissance", "correct": false },
-                    { "content": "Aucun, car les chèvres aussi sont utiles", "correct": false }
-                  ]
+                  "content": "Le devoir de protection et le devoir de scolariser",
+                  "correct": true
                 },
                 {
-                  "content": "Un père décide d'envoyer son fils à l'école mais de garder sa fille à la maison pour les tâches ménagères. Il respecte le droit à l'éducation de ses deux enfants.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Les filles et les garçons ont le même droit à l'éducation. Garder seulement la fille à la maison, c'est une discrimination et un manquement au devoir de scolariser.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Seulement le devoir d'entretien",
+                  "correct": false
                 },
                 {
-                  "content": "Quels gestes de parents relèvent du devoir d'éducation et de scolarisation ? (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Vérifier la présence en classe, transmettre des valeurs et fournir le matériel sont des gestes d'éducation ou de scolarisation. Vendre pendant les cours, laisser sauter les cours ou interdire les questions les contredisent.",
-                  "answers": [
-                    { "content": "Vérifier que l'enfant va en classe chaque jour", "correct": true },
-                    { "content": "Lui apprendre à dire la vérité et à respecter les autres", "correct": true },
-                    { "content": "Lui acheter les cahiers et le matériel selon ses moyens", "correct": true },
-                    { "content": "L'envoyer vendre des fruits pendant les heures de classe", "correct": false },
-                    { "content": "Le laisser sauter les cours quand il n'a pas envie", "correct": false },
-                    { "content": "Lui interdire de poser des questions", "correct": false }
-                  ]
+                  "content": "Seulement le devoir de déclarer la naissance",
+                  "correct": false
                 },
                 {
-                  "content": "Un élève rentre avec une mauvaise note. Que fait un parent qui remplit bien son devoir d'éducation ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un parent éducateur cherche la cause avec l'enfant et l'aide. Frapper n'apprend rien et reste une violence. Retirer l'enfant de l'école ou l'ignorer revient à renoncer à éduquer.",
-                  "answers": [
-                    { "content": "Il cherche avec son enfant la cause de la note et l'aide à progresser", "correct": true },
-                    { "content": "Il le frappe pour qu'il travaille davantage", "correct": false },
-                    { "content": "Il l'ignore, car c'est l'affaire de l'enseignant", "correct": false },
-                    { "content": "Il le retire de l'école", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Le père d'Awa paie toujours la scolarité, mais il ne regarde jamais ses cahiers et ne sait pas si elle va en classe. Que lui manque-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Payer ne suffit pas : scolariser inclut le suivi du travail et de la présence. Il remplit la partie matérielle mais pas la partie accompagnement du devoir d'éducation.",
-                  "answers": [
-                    { "content": "Le suivi du travail et de la présence de l'enfant", "correct": true },
-                    { "content": "Rien, car payer suffit", "correct": false },
-                    { "content": "Le logement de l'enfant", "correct": false },
-                    { "content": "La déclaration de naissance", "correct": false }
-                  ]
+                  "content": "Aucun, puisque le garçon aide sa famille",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Éduquer, scolariser et respecter l'enfant",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Parmi ces situations vues au marché, lesquelles sont des manquements des parents ? (trois réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Repérer le danger ou ce qui manque : travail de 14 heures, fièvre non soignée, école refusée à une fille par un père qui a les moyens. Étape 2 — Nommer les devoirs : protection, santé, scolarisation. Étape 3 — Chercher le responsable : les parents ont les moyens d'agir. Étape 4 — Conclure : le travail de 6 h à 20 h, la fièvre non soignée et le refus de cahiers à une fille sont des manquements. Acheter du pain, apprendre la route ou faire vacciner un enfant, c'est au contraire remplir son rôle de parent.",
+              "answers": [
                 {
-                  "content": "Les parents d'Ama, 13 ans et bonne élève, veulent la retirer de l'école pour qu'elle vende au marché toute la journée. Quelle analyse est la bonne ?",
-                  "question_type": "single_choice",
-                  "explanation": "Retirer une bonne élève de l'école, c'est manquer au devoir de scolariser et menacer son droit à l'éducation. Qu'elle ramène de l'argent ne justifie rien : l'enfant n'est pas là pour faire vivre la famille.",
-                  "answers": [
-                    { "content": "Ils manquent au devoir de scolariser : le droit à l'éducation d'Ama est menacé", "correct": true },
-                    { "content": "Ils exercent librement leur autorité, et personne n'a rien à dire", "correct": false },
-                    { "content": "Ils ne manquent à rien, car Ama ramène de l'argent", "correct": false },
-                    { "content": "Seul l'État est responsable de l'école d'Ama", "correct": false }
-                  ]
+                  "content": "Un père laisse son fils de 7 ans vendre de l'eau aux voitures de 6 h à 20 h",
+                  "correct": true
                 },
                 {
-                  "content": "Lesquelles de ces phrases sont exactes ? (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La famille et l'école se complètent, et filles et garçons ont le même droit à l'éducation. L'éducation ne s'arrête pas à l'inscription. Elle ne consiste pas non plus à obéir sans jamais poser de question.",
-                  "answers": [
-                    { "content": "La famille et l'école se complètent dans l'éducation de l'enfant", "correct": true },
-                    { "content": "Les filles et les garçons ont le même droit à l'éducation", "correct": true },
-                    { "content": "Une fois l'enfant inscrit, les parents n'ont plus rien à faire", "correct": false },
-                    { "content": "Éduquer, c'est obtenir l'obéissance sans jamais écouter l'enfant", "correct": false }
-                  ]
+                  "content": "Une mère refuse d'emmener son fils de 5 ans, très fiévreux depuis trois jours, au centre de santé alors qu'elle a de l'argent",
+                  "correct": true
                 },
                 {
-                  "content": "Un parent peut frapper son enfant pour l'éduquer, car c'est sa manière de remplir son devoir d'éducation.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Éduquer, c'est guider en respectant la dignité de l'enfant. Les coups sont des violences, pas de l'éducation. Un parent peut corriger sans frapper ni humilier.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Un père qui a les moyens refuse d'acheter des cahiers à sa fille de 12 ans et la garde à la maison",
+                  "correct": true
                 },
                 {
-                  "content": "Que doit faire un parent pour remplir son devoir de scolariser ? (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Inscrire, fournir le nécessaire et veiller à l'assiduité sont les trois gestes de la scolarisation. Laisser l'enfant décider de venir ou non, ou le retirer pour de mauvaises notes, c'est renoncer au devoir.",
-                  "answers": [
-                    { "content": "L'inscrire à la rentrée", "correct": true },
-                    { "content": "Lui fournir le nécessaire selon ses moyens", "correct": true },
-                    { "content": "Veiller à ce qu'il soit présent en classe", "correct": true },
-                    { "content": "Laisser l'enfant décider seul s'il vient en classe", "correct": false },
-                    { "content": "Le retirer de l'école dès qu'il a de mauvaises notes", "correct": false },
-                    { "content": "Attendre que l'enseignant vienne chercher l'enfant à la maison", "correct": false }
-                  ]
+                  "content": "Une mère demande à sa fille de 11 ans d'aller acheter du pain à la boutique voisine après l'école",
+                  "correct": false
                 },
                 {
-                  "content": "Un père dit : « Mon rôle s'arrête à la porte de l'école. » Quelle réponse est la bonne ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'école instruit et éduque aussi, mais la famille continue d'éduquer : valeurs, dialogue, suivi. Les deux se complètent. Un parent qui se désintéresse de l'école de son enfant manque à une partie de son devoir.",
-                  "answers": [
-                    { "content": "L'école instruit et éduque aussi, mais la famille continue d'éduquer et de suivre l'enfant", "correct": true },
-                    { "content": "Il a raison : l'école remplace entièrement la famille", "correct": false },
-                    { "content": "Il a raison, car seul l'enseignant sait éduquer", "correct": false },
-                    { "content": "Il a tort : ce sont les parents qui doivent faire cours à la place de l'enseignant", "correct": false }
-                  ]
+                  "content": "Une grand-mère explique à son petit-fils de 6 ans comment traverser la route",
+                  "correct": false
+                },
+                {
+                  "content": "Un père emmène son fils au centre de santé pour ses vaccins",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Relie chaque situation du marché au devoir de parent concerné.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer ce que fait le parent dans chaque situation. Étape 2 — Nommer le devoir : vacciner relève de la santé, déclarer la naissance de l'identité, refuser la remise à un inconnu de la protection, inscrire et suivre de la scolarisation. Étape 3 — Chercher le responsable : ici, ce sont des adultes qui assument leur rôle. Étape 4 — Conclure : chacun remplit un devoir précis, qu'il faut savoir nommer.",
+              "answers": [
+                {
+                  "content": "Une mère fait vacciner son bébé",
+                  "match": "Devoir de santé"
+                },
+                {
+                  "content": "Un père déclare la naissance de sa fille à l'état civil",
+                  "match": "Devoir d'identité"
+                },
+                {
+                  "content": "Une mère refuse qu'un inconnu emmène sa fille travailler loin contre de l'argent",
+                  "match": "Devoir de protection"
+                },
+                {
+                  "content": "Un père inscrit son fils à l'école et regarde ses cahiers",
+                  "match": "Devoir de scolariser"
+                }
+              ]
+            },
+            {
+              "content": "Une mère du marché dit qu'elle ne peut plus payer les fournitures de son fils, mais qu'elle fait tout pour qu'il reste à l'école. Il s'agit d'une difficulté, et le recours adapté est de ___.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Identifier le devoir : scolariser son fils. Étape 2 — Distinguer un manquement d'une difficulté : cette mère fait tout ce qu'elle peut, c'est une difficulté. Étape 3 — Choisir le recours : il n'y a pas de danger immédiat, donc on l'oriente vers le centre social, qui aide les familles. Étape 4 — Conclure : aucune sanction, mais une aide. La police, la punition ou le retrait des enfants seraient injustes pour une mère qui fait son possible.",
+              "answers": [
+                {
+                  "content": "l'orienter vers le centre social",
+                  "correct": true
+                },
+                {
+                  "content": "la signaler à la police ou à la gendarmerie",
+                  "correct": false
+                },
+                {
+                  "content": "la punir devant les autres commerçantes",
+                  "correct": false
+                },
+                {
+                  "content": "retirer tout de suite ses enfants à cette mère",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un client dit au marché : « Le père est le chef de famille, il fait ce qu'il veut de son enfant, même le faire travailler toute la journée. » Réponds-lui en trois ou quatre phrases en t'appuyant sur les devoirs des parents.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que l'autorité parentale sert l'enfant et non le parent",
+                "Cite le devoir de protection contre l'exploitation et le devoir de scolariser",
+                "Précise ce qu'est une exploitation : travail dangereux, épuisant ou qui empêche d'aller à l'école"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Le client parle d'un enfant qui travaille toute la journée. Étape 2 — Les devoirs en jeu sont la protection contre l'exploitation et la scolarisation. Étape 3 — Le père est responsable de son enfant, mais l'autorité parentale sert l'enfant, pas le parent : elle ne donne pas le droit de le faire travailler au point de l'épuiser ou de l'empêcher d'aller à l'école. Étape 4 — Un père qui fait cela manque à ses devoirs. Barème : 0,5 point pour l'autorité parentale au service de l'enfant, 1 point pour les deux devoirs, 0,5 point pour la définition de l'exploitation.",
+              "answers": [],
+              "starter": "Ce n'est pas exact, car l'autorité parentale…"
+            },
+            {
+              "content": "Une commerçante voit chaque matin un garçon de 8 ans vendre des sachets d'eau devant son étal à l'heure des cours, sans cartable. Il n'y a pas de danger immédiat. Écris en trois phrases ce qu'elle peut faire, et pourquoi.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Identifie le problème : l'enfant travaille au lieu d'aller à l'école (protection et scolarisation)",
+                "Choisit un recours adapté sans danger immédiat : parler à un adulte de confiance ou aux parents, puis le centre social",
+                "Justifie par le droit de l'enfant à la protection et à l'éducation"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Le devoir en jeu est de protéger l'enfant contre l'exploitation et de le scolariser. Étape 2 — On ne sait pas encore si c'est un manquement ou une difficulté de la famille : il faut d'abord comprendre. Étape 3 — Comme il n'y a pas de danger immédiat, la commerçante en parle à un adulte de confiance, par exemple un enseignant de l'école voisine, ou à la famille avec bienveillance, puis le centre social peut étudier la situation et aider les parents. Étape 4 — L'enfant a droit à l'école et à la protection, donc elle ne reste pas indifférente. Barème : 1 point pour le problème identifié, 1 point pour le recours adapté, 1 point pour la justification.",
+              "answers": [],
+              "starter": "Je peux d'abord…"
             }
           ]
         },
         {
-          "name": "Protéger l'enfant contre les dangers",
-          "subtitle": "Le devoir de protection",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Citer les principaux dangers contre lesquels les parents doivent protéger l'enfant.</li><li>Distinguer corriger un enfant et le maltraiter.</li><li>Reconnaître une situation où l'enfant est exploité par le travail.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : le carrefour.</strong> En ville, une maman serre la main de son petit garçon avant de traverser devant les gbakas et les taxis. Elle regarde à gauche, à droite, et elle ne le lâche qu'une fois arrivée de l'autre côté.</p><p><strong>Pont.</strong> La route et les véhicules, ce sont les dangers de la rue, un exemple parmi tous les dangers qui menacent l'enfant. La main de la maman, c'est la protection des parents. Arriver de l'autre côté, c'est grandir en sécurité.</p><p><strong>Limite de l'image.</strong> La maman n'enferme pas son fils pour toujours. À mesure qu'il grandit, elle lui apprend à traverser seul. Protéger, ce n'est pas priver l'enfant de toute liberté.</p><p><strong>Image 2 : la plantation.</strong> Dans une plantation de cacao, un garçon de 9 ans porte de lourds sacs et manie la machette toute la journée, pendant que ses camarades sont en classe. Il est épuisé et il se blesse.</p><p><strong>Pont.</strong> Les lourds sacs et la machette, c'est un travail dangereux. La classe manquée, c'est l'éducation perdue. Ce que vit ce garçon s'appelle l'exploitation par le travail.</p><p><strong>Limite de l'image.</strong> Aider un peu à la maison, selon son âge, sans nuire à sa santé ni à l'école, n'est pas de l'exploitation. Le problème commence quand le travail est dangereux, épuisant ou empêche d'aller à l'école.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Les parents doivent protéger l'enfant contre toute forme de violence (coups, humiliations, abus), contre l'abandon et la négligence, contre l'exploitation par le travail (travail dangereux ou qui empêche d'aller à l'école), contre l'enlèvement et la vente des enfants.</p><p>Pour protéger, les parents savent avec qui leur enfant passe du temps, lui apprennent à dire non à un adulte qui le met mal à l'aise et l'écoutent quand il raconte ce qui lui fait peur.</p><p>L'enfant a droit à cette protection, y compris contre les violences qui viennent de sa propre famille.</p><p>Corriger un enfant, c'est le guider en respectant sa dignité. Le frapper, l'humilier ou lui faire peur, c'est le maltraiter, pas l'éduquer.</p></blockquote><h2>Exemple résolu</h2><p><strong>Situation.</strong> Un père confie sa fille de 10 ans à une parente en ville. Elle travaille du matin au soir et n'est jamais envoyée à l'école.</p><ol><li>On repère le danger : un travail à temps plein pour une enfant de 10 ans. C'est de l'exploitation.</li><li>On repère les conséquences : elle est privée d'école et épuisée.</li><li>On cherche qui doit la protéger : son père, qui reste responsable même s'il l'a confiée à une autre personne.</li><li>Conclusion : le père manque à son devoir de protection, et aussi à son devoir de scolariser.</li></ol><h2>Le piège à éviter</h2><p>Ne confonds pas corriger et frapper. Une sanction juste et expliquée, c'est de l'éducation ; un coup qui blesse ou une humiliation devant les autres, c'est une violence. Ne pense pas non plus que ce qui se passe dans la famille est une affaire privée : l'enfant a droit à la protection même dans sa propre maison.</p><h2>En une phrase</h2><p>Protéger, c'est garder l'enfant à l'abri de la violence, de l'abandon et du travail qui le met en danger ou l'empêche d'aller à l'école.</p>",
-          "exercises": [
+          "title": "Kouassi chez son oncle",
+          "statement": "Kouassi a 11 ans. Son père l'a confié à son oncle, M. Diomandé, qui habite dans la cour commune du quartier. L'oncle le nourrit, le loge, l'habille et l'emmène au centre de santé quand il est malade. Mais il l'envoie vendre des mouchoirs au carrefour chaque jour au lieu d'aller à l'école, et il le frappe quand Kouassi rapporte peu d'argent. La naissance de Kouassi n'a jamais été déclarée : il n'a pas d'acte de naissance. Mme Tano, une voisine enseignante, a tout remarqué. Dans cet exercice, tu analyses la situation avec les méthodes des fiches.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Les dangers et la protection",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Kouassi, 11 ans, confié à son oncle, est nourri, logé, habillé et soigné. Mais il vend des mouchoirs au carrefour au lieu d'aller à l'école, il est frappé quand il rapporte peu, et sa naissance n'a jamais été déclarée. Quels devoirs sont méconnus ? (trois réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Repérer le danger ou ce qui manque : un travail au carrefour, des coups, l'école arrêtée, pas d'acte de naissance. Étape 2 — Nommer les devoirs en jeu : protection, scolarisation et acte de naissance. Étape 3 — Chercher les responsables : le père et l'oncle à qui il a confié l'enfant. Étape 4 — Conclure : trois devoirs sont méconnus. L'entretien et la santé sont assurés, puisque Kouassi est nourri, logé, habillé et soigné : un devoir rempli ne compense pas les devoirs négligés.",
+              "answers": [
                 {
-                  "content": "Dans l'image du carrefour, la main de la maman qui serre celle de son fils représente :",
-                  "question_type": "single_choice",
-                  "explanation": "La main est la protection des parents : elle tient l'enfant à l'abri du danger. La route, elle, représente les dangers. Ce n'est ni une punition ni un moyen de l'empêcher de grandir.",
-                  "answers": [
-                    { "content": "La protection que les parents apportent à l'enfant", "correct": true },
-                    { "content": "Une punition infligée à l'enfant", "correct": false },
-                    { "content": "Le danger qui menace l'enfant", "correct": false },
-                    { "content": "L'autorité qui prive l'enfant de toute liberté", "correct": false }
-                  ]
+                  "content": "Le devoir de protection : exploitation par le travail et coups",
+                  "correct": true
                 },
                 {
-                  "content": "Protéger un enfant, c'est lui interdire toute sortie et l'empêcher d'apprendre à être autonome.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. La maman du carrefour apprend peu à peu à son fils à traverser seul. Protéger, c'est garder l'enfant à l'abri des vrais dangers, pas l'enfermer.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Le devoir de scolariser",
+                  "correct": true
                 },
                 {
-                  "content": "Contre quels dangers les parents doivent-ils protéger leur enfant ? (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les violences et le travail dangereux qui empêche d'aller à l'école sont des dangers contre lesquels les parents doivent protéger l'enfant. Les devoirs, les conseils et les jeux ne sont pas des dangers.",
-                  "answers": [
-                    { "content": "La violence (coups, humiliations)", "correct": true },
-                    { "content": "Le travail dangereux qui l'empêche d'aller à l'école", "correct": true },
-                    { "content": "Les devoirs de maison", "correct": false },
-                    { "content": "Les conseils des aînés", "correct": false },
-                    { "content": "Les jeux avec ses camarades", "correct": false }
-                  ]
+                  "content": "Le devoir de faire établir son acte de naissance",
+                  "correct": true
                 },
                 {
-                  "content": "Quel droit de l'enfant correspond au devoir de protection des parents ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le devoir de protection répond au droit de l'enfant d'être protégé contre la violence et l'exploitation. Décider seul de tout ou refuser toute correction n'est pas un droit de l'enfant, et le droit à un nom et à une nationalité répond à un autre devoir.",
-                  "answers": [
-                    { "content": "Le droit d'être protégé contre la violence et l'exploitation", "correct": true },
-                    { "content": "Le droit de décider seul de tout", "correct": false },
-                    { "content": "Le droit de ne jamais être corrigé ni conseillé", "correct": false },
-                    { "content": "Le droit à un nom et à une nationalité", "correct": false }
-                  ]
+                  "content": "Le devoir d'entretien (nourrir, loger, vêtir)",
+                  "correct": false
                 },
                 {
-                  "content": "Corriger un enfant en respectant sa dignité, c'est l'éduquer ; le frapper ou l'humilier, c'est le maltraiter.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Une sanction juste et expliquée fait partie de l'éducation. Les coups et les humiliations sont des violences, même si elles viennent d'un parent.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Le devoir de santé",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Repérer les manquements à la protection",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le père de Kouassi, 11 ans, dit : « C'est mon frère qui s'occupe de lui, je n'y suis pour rien. » Kouassi vend des mouchoirs au carrefour au lieu d'aller à l'école, et il est frappé. Que répondre au père ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le danger : exploitation par le travail, coups, école arrêtée. Étape 2 — Nommer les devoirs : protection et scolarisation. Étape 3 — Chercher le responsable : le père reste responsable de son fils, même confié à son frère. Étape 4 — Conclure : il manque à ses devoirs et doit reprendre ou protéger son fils. L'idée qu'un enfant confié à la famille est à l'abri est fausse : la famille n'est pas une raison de ne pas protéger.",
+              "answers": [
                 {
-                  "content": "Un garçon de 9 ans porte de lourds sacs à la plantation toute la journée, au lieu d'aller à l'école. De quoi s'agit-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un travail lourd et dangereux qui prive l'enfant d'école est une exploitation par le travail. Ce n'est pas une simple aide à la maison, qui reste légère et compatible avec l'école.",
-                  "answers": [
-                    { "content": "D'une exploitation de l'enfant par le travail", "correct": true },
-                    { "content": "D'une simple aide à la maison", "correct": false },
-                    { "content": "D'un jeu éducatif", "correct": false },
-                    { "content": "D'une punition normale", "correct": false }
-                  ]
+                  "content": "Il reste responsable de son fils : confier l'enfant ne supprime pas ses devoirs",
+                  "correct": true
                 },
                 {
-                  "content": "Une fille de 8 ans range sa chambre et aide à mettre la table après l'école. Elle est exploitée.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Une petite aide adaptée à l'âge, qui ne nuit ni à la santé ni à l'école, fait partie de la vie de famille. L'exploitation commence quand le travail est dangereux ou empêche d'étudier.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Il a raison, car c'est maintenant l'oncle seul qui est responsable",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles situations sont des manquements au devoir de protection ? (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Frapper jusqu'à blesser, abandonner un jeune enfant et le confier à un inconnu contre de l'argent sont des manquements. Demander d'aller chercher du pain, expliquer le danger ou refuser la traversée seule d'un petit protège l'enfant.",
-                  "answers": [
-                    { "content": "Un parent frappe son enfant avec une ceinture jusqu'à le blesser", "correct": true },
-                    { "content": "Un parent laisse son enfant de 5 ans seul à la maison pendant plusieurs jours", "correct": true },
-                    { "content": "Un parent confie son enfant à un inconnu qui l'emmène travailler loin contre de l'argent", "correct": true },
-                    { "content": "Un parent demande à son enfant de 10 ans d'aller chercher du pain à la boutique voisine", "correct": false },
-                    { "content": "Un parent explique à son enfant de 6 ans le danger de la route", "correct": false },
-                    { "content": "Un parent interdit à son enfant de 5 ans de traverser seul une grande route", "correct": false }
-                  ]
+                  "content": "Il a raison, car un enfant confié à la famille ne peut pas être exploité",
+                  "correct": false
                 },
                 {
-                  "content": "Après une bêtise de son fils, quel parent respecte son devoir de protection ?",
-                  "question_type": "single_choice",
-                  "explanation": "Expliquer la faute et donner une sanction juste, sans coups ni humiliation, c'est corriger tout en respectant la dignité de l'enfant. Les coups, la peur et l'indifférence ne sont pas de l'éducation.",
-                  "answers": [
-                    { "content": "Celui qui explique la faute et donne une sanction juste, sans coups ni humiliation", "correct": true },
-                    { "content": "Celui qui frappe fort pour que l'enfant n'oublie jamais", "correct": false },
-                    { "content": "Celui qui l'humilie devant les voisins", "correct": false },
-                    { "content": "Celui qui fait comme s'il n'avait rien vu", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Une maman remarque que son fils rentre de l'entraînement avec des bleus et qu'il a peur d'y retourner. Il dit que l'entraîneur le frappe. Que doit-elle faire ?",
-                  "question_type": "single_choice",
-                  "explanation": "La mère doit croire son fils, le mettre à l'abri et prévenir les responsables du club. Lui dire de se débrouiller ou le punir d'avoir parlé le laisse seul face au danger.",
-                  "answers": [
-                    { "content": "L'écouter, le mettre à l'abri et prévenir les responsables", "correct": true },
-                    { "content": "Lui dire de se débrouiller seul", "correct": false },
-                    { "content": "Le remettre à l'entraînement sans rien dire", "correct": false },
-                    { "content": "Le punir d'avoir parlé de l'entraîneur", "correct": false }
-                  ]
+                  "content": "Il n'est responsable que si l'oncle est un étranger à la famille",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Analyser des situations de danger",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "L'oncle de Kouassi peut frapper l'enfant quand il rapporte peu d'argent, car il remplace le père et c'est sa manière de l'éduquer.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer ce que l'enfant reçoit : des coups quand il rapporte peu d'argent. Étape 2 — Nommer le devoir en jeu : éduquer et protéger contre la violence. Étape 3 — Vérifier la dignité : frapper un enfant parce qu'il rapporte peu d'argent est une violence liée à l'exploitation, pas de l'éducation. Étape 4 — Conclure : c'est un manquement. Corriger, c'est guider en respectant la dignité de l'enfant.",
+              "answers": [
                 {
-                  "content": "Un père laisse sa fille de 11 ans vendre de l'eau au feu rouge de 6 h à 20 h. Elle ne va plus en classe. Quels devoirs sont méconnus ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le travail de 14 heures sur la route est une exploitation et un danger : c'est un manquement au devoir de protection. L'arrêt de l'école est aussi un manquement au devoir de scolariser.",
-                  "answers": [
-                    { "content": "Le devoir de protection et le devoir de scolariser", "correct": true },
-                    { "content": "Seulement le devoir d'entretien", "correct": false },
-                    { "content": "Seulement le devoir de déclarer la naissance", "correct": false },
-                    { "content": "Aucun, puisque la fille aide sa famille", "correct": false }
-                  ]
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Lesquelles de ces phrases sont exactes ? (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les violences dans la famille ne sont pas une affaire privée, et un travail devient préoccupant quand il est dangereux ou empêche d'aller à l'école. Un coup donné par un parent reste un coup, et la pauvreté ne justifie pas le travail à temps plein.",
-                  "answers": [
-                    { "content": "Les violences dans la famille ne sont pas une affaire privée : l'enfant a droit à la protection", "correct": true },
-                    { "content": "Un travail est préoccupant quand il est dangereux ou empêche l'enfant d'aller à l'école", "correct": true },
-                    { "content": "Quand c'est un parent qui frappe, c'est toujours de l'éducation", "correct": false },
-                    { "content": "Dès 6 ans, un enfant peut travailler à temps plein si la famille est pauvre", "correct": false },
-                    { "content": "Seuls les étrangers peuvent maltraiter un enfant", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un parent qui frappe son enfant pour le faire obéir exerce son droit d'éducation et ne manque à aucun devoir.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. L'éducation respecte la dignité de l'enfant. Frapper pour faire obéir est une violence : le parent manque à son devoir de protection, même s'il pense bien faire.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
-                },
-                {
-                  "content": "Pour protéger son enfant, un parent peut : (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Surveiller avec qui il passe du temps, lui apprendre à dire non à un adulte qui le met mal à l'aise et l'écouter protègent l'enfant. Lui demander de se taire laisse le danger continuer.",
-                  "answers": [
-                    { "content": "Savoir avec qui son enfant passe du temps", "correct": true },
-                    { "content": "Lui apprendre à dire non à un adulte qui le met mal à l'aise", "correct": true },
-                    { "content": "L'écouter quand il raconte ce qui lui fait peur", "correct": true },
-                    { "content": "Lui demander de se taire sur ce qui s'est passé pour éviter la honte", "correct": false },
-                    { "content": "Lui dire que les adultes ont toujours raison", "correct": false },
-                    { "content": "L'empêcher d'aller à l'école pour qu'il reste à l'abri", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Les parents de Mariam, 13 ans, veulent qu'elle quitte l'école et épouse un homme choisi par la famille, sans son accord. Que peut-on dire ?",
-                  "question_type": "single_choice",
-                  "explanation": "Imposer un mariage à une enfant de 13 ans la met en danger et la prive d'école : c'est un manquement au devoir de protection et au devoir de scolariser. La coutume ne supprime pas les droits de l'enfant.",
-                  "answers": [
-                    { "content": "Ils manquent au devoir de protection et de scolarisation : un mariage imposé met l'enfant en danger", "correct": true },
-                    { "content": "C'est la coutume, donc aucun droit de l'enfant n'est concerné", "correct": false },
-                    { "content": "Mariam est mineure, donc ses parents peuvent décider de tout", "correct": false },
-                    { "content": "Seule l'école est responsable de la situation de Mariam", "correct": false }
-                  ]
+                  "content": "Faux",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Kouassi n'a pas d'acte de naissance. Il aura du mal à prouver son ___ : son nom, sa date et son lieu de naissance, ses parents. (un mot)",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer ce qui manque : l'acte de naissance, qui prouve l'identité. Étape 2 — Nommer le devoir en jeu : faire établir l'acte de naissance de l'enfant. Étape 3 — Chercher le responsable : les parents. Étape 4 — Conclure : sans acte de naissance, Kouassi aura du mal à prouver son identité et à faire valoir ses droits, par exemple pour s'inscrire à un examen.",
+              "answers": [
+                {
+                  "content": "identité",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Mme Tano, voisine et enseignante, apprend que Kouassi est frappé tous les soirs et ne va plus à l'école. Que doit-elle faire en priorité ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le devoir : la protection de Kouassi contre la violence et l'exploitation. Étape 2 — Distinguer un manquement d'une difficulté : frapper l'enfant et le faire travailler, c'est un manquement. Étape 3 — Choisir le recours : signaler au centre social, et à la police ou à la gendarmerie si le danger est immédiat. Étape 4 — Conclure : Kouassi est protégé et remis à l'école. Se faire justice soi-même est une violence de plus, et se taire laisse le danger continuer.",
+              "answers": [
+                {
+                  "content": "Signaler la situation : au centre social, et à la police ou à la gendarmerie si le danger est immédiat",
+                  "correct": true
+                },
+                {
+                  "content": "Ne rien faire, car l'oncle a l'autorité sur l'enfant",
+                  "correct": false
+                },
+                {
+                  "content": "Frapper l'oncle à son tour pour lui faire comprendre",
+                  "correct": false
+                },
+                {
+                  "content": "Demander à Kouassi de se débrouiller seul",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige en cinq lignes environ une réponse à cette phrase de l'oncle : « Cet enfant ne m'appartient pas, mais j'en fais ce que je veux. » Explique pourquoi la situation de Kouassi est un manquement et ce qui doit changer.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Identifie les devoirs méconnus : protection, scolarisation et acte de naissance",
+                "Explique que le père reste responsable et que la violence n'est pas de l'éducation",
+                "Dit ce qui doit changer : arrêter le travail et les coups, remettre Kouassi à l'école, lui faire établir un acte de naissance"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Kouassi vend des mouchoirs au lieu d'aller à l'école, il est frappé et sa naissance n'est pas déclarée. Étape 2 — Les devoirs méconnus sont la protection, la scolarisation et l'acte de naissance. Étape 3 — Le père reste responsable de son fils, même confié, et les coups ne respectent pas la dignité de l'enfant : ce n'est pas de l'éducation. Étape 4 — Il faut arrêter le travail et les coups, remettre Kouassi à l'école et lui faire établir un acte de naissance. Barème : 1 point pour les devoirs, 1 point pour la responsabilité du père et la dignité, 1 point pour ce qui doit changer.",
+              "answers": [],
+              "starter": "Cette situation est un manquement, car…"
+            },
+            {
+              "content": "Un voisin dit : « Ça ne nous regarde pas, c'est une affaire de famille. » Es-tu d'accord ? Prends position et justifie ta réponse en trois phrases.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Prend clairement position (pas d'accord)",
+                "Justifie par le droit de l'enfant à la protection, même dans sa famille",
+                "Indique le comportement attendu : signaler la situation à un adulte ou au centre social"
+              ],
+              "explanation": "Corrigé modèle : Je ne suis pas d'accord. Étape 1 — Kouassi est frappé et exploité. Étape 2 — L'enfant a droit à la protection, même dans sa propre famille : les violences ne sont pas une affaire privée. Étape 3 — Tout citoyen peut signaler un enfant en danger. Étape 4 — Il faut donc en parler à un adulte de confiance ou au centre social, pour que Kouassi soit protégé. Barème : 0,5 point pour la prise de position, 1 point pour la justification, 0,5 point pour le comportement attendu.",
+              "answers": [],
+              "starter": "Je ne suis pas d'accord, car…"
             }
           ]
         },
         {
-          "name": "Identité, affection et intérêt supérieur de l'enfant",
-          "subtitle": "Déclarer la naissance, aimer, décider pour le bien de l'enfant. À compléter : sanctions, textes ivoiriens précis",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Expliquer pourquoi les parents doivent déclarer la naissance de leur enfant.</li><li>Citer ce que l'affection des parents implique.</li><li>Utiliser l'intérêt supérieur de l'enfant pour juger une décision.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 : le papier de Kofi.</strong> Après la naissance du petit Kofi, son père va au centre d'état civil et déclare la naissance. Il repart avec un acte de naissance. Des années plus tard, on lui demande l'extrait d'acte de naissance, notamment à l'inscription aux examens : il prouve qui est Kofi.</p><p><strong>Pont.</strong> La démarche du père, c'est la déclaration de naissance. L'acte de naissance, c'est la preuve de son nom, de sa date et de son lieu de naissance, et de ses parents. L'ensemble forme son identité reconnue.</p><p><strong>Limite de l'image.</strong> Le papier prouve l'identité, il ne la crée pas. Un enfant dont la naissance n'a pas été déclarée a quand même des droits, mais il aura beaucoup plus de mal à les faire valoir. C'est pourquoi les parents doivent faire la démarche.</p><p><strong>Image 2 : le soir à la maison.</strong> Le père de Fanta pose son téléphone, la regarde et lui demande comment s'est passée sa journée. Il écoute vraiment sa réponse. Quand elle revient avec une mauvaise note, sa maman la console sans se moquer, et l'encourage.</p><p><strong>Pont.</strong> Écouter, consoler et encourager, c'est l'affection des parents. Fanta se sent en sécurité pour grandir.</p><p><strong>Limite de l'image.</strong> Aimer son enfant ne veut pas dire tout accepter. Un parent affectueux pose aussi des règles.</p><p><strong>Image 3 : la balance.</strong> Dans une famille, il reste une somme d'argent qui permet soit d'acheter une télévision pour le salon, soit de soigner les dents de la petite Adjoua et d'acheter ses fournitures. Le père met les deux choix sur une balance et regarde lequel compte le plus pour Adjoua.</p><p><strong>Pont.</strong> La balance, c'est la décision à prendre. Le critère qui doit peser le plus lourd, c'est l'intérêt de l'enfant.</p><p><strong>Limite de l'image.</strong> L'enfant ne décide pas seul de tout. On l'écoute selon son âge et sa maturité, mais ce sont les adultes qui décident, en pensant à son bien.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Identité : tout enfant a droit, dès sa naissance, à un nom, à une nationalité et à être enregistré à l'état civil. Les parents ont le devoir de déclarer sa naissance.</p><p>Affection : l'enfant a besoin de grandir dans une famille où règnent l'amour et la compréhension. Les parents l'écoutent, le soutiennent et l'encouragent.</p><p>Intérêt supérieur de l'enfant : dans toutes les décisions qui concernent un enfant, son intérêt doit passer en premier. C'est la préoccupation fondamentale des parents, qui ont des responsabilités communes pour l'élever.</p></blockquote><h2>Exemple résolu</h2><p><strong>Situation.</strong> Un père a reçu une prime. Il hésite entre acheter une télévision pour le salon et payer les soins dentaires et les fournitures de sa fille de 10 ans.</p><ol><li>On identifie l'enfant concerné : la fille de 10 ans.</li><li>On repère ses besoins essentiels : sa santé et ses études.</li><li>On compare : la télévision est un confort pour la famille ; les soins et les fournitures répondent à des besoins essentiels de la fille.</li><li>Conclusion : l'intérêt supérieur de l'enfant demande de payer d'abord les soins et les fournitures. La télévision peut attendre.</li></ol><h2>Le piège à éviter</h2><p>Ne confonds pas l'intérêt supérieur de l'enfant et ses caprices. Faire dans l'intérêt de l'enfant, c'est décider pour son vrai bien, pas lui donner tout ce qu'il demande. Ne pense pas non plus que l'acte de naissance est facultatif : on s'en aperçoit trop tard, quand on demande l'extrait d'acte de naissance, notamment à l'inscription aux examens.</p><h2>En une phrase</h2><p>Les parents déclarent la naissance de leur enfant, lui donnent de l'affection et décident toujours en pensant d'abord à son bien.</p>",
-          "exercises": [
+          "title": "Ibrahim, le BEPC et l'étal de son père",
+          "statement": "Ibrahim a 14 ans et prépare le BEPC. Ses parents sont séparés. Sa mère, vendeuse au marché, paie seule sa nourriture, son logement et ses soins avec de petits revenus. Son père, commerçant dont l'étal marche bien, ne donne plus rien depuis deux ans. Pour inscrire Ibrahim à l'examen, l'école demande l'extrait d'acte de naissance. Or l'extrait d'Ibrahim a été perdu, et son père refuse de faire les démarches pour en obtenir un nouveau. Enfin, le père veut retirer Ibrahim de l'école pour qu'il tienne son étal toute la journée. Dans cet exercice, tu analyses la situation avec les méthodes des fiches. Le schéma « Que faire face à un enfant négligé ? » te sert pour les recours : si le danger n'est pas immédiat, on en parle à un adulte de confiance, puis le centre social étudie la situation et aide la famille.",
+          "exercise_type": "evaluation",
+          "figure": "enfant-neglige-que-faire",
+          "questions": [
             {
-              "title": "Comprendre — Identité, affection et intérêt de l'enfant",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "La mère d'Ibrahim, vendeuse au marché, paie seule la nourriture, le logement et les soins de son fils de 14 ans avec de petits revenus. Comment juger son comportement ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le besoin d'Ibrahim : manger, être logé, être soigné. Étape 2 — Nommer le devoir : entretien et santé. Étape 3 — Comparer avec les moyens : la mère paie seule avec de petits revenus, elle fait tout ce qu'elle peut. Étape 4 — Conclure : elle remplit ses devoirs. La pauvreté n'est pas un manquement. Les deux parents restent responsables, mais cela ne retire rien à ce que la mère fait déjà.",
+              "answers": [
                 {
-                  "content": "Que prouve l'acte de naissance d'un enfant ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'acte de naissance prouve l'identité de l'enfant : son nom, sa date et son lieu de naissance, ses parents. Il ne prouve ni sa réussite scolaire ni son état de santé.",
-                  "answers": [
-                    { "content": "Son identité : son nom, sa date et son lieu de naissance, ses parents", "correct": true },
-                    { "content": "Son niveau scolaire", "correct": false },
-                    { "content": "Son état de santé", "correct": false },
-                    { "content": "Sa bonne conduite", "correct": false }
-                  ]
+                  "content": "Elle remplit ses devoirs d'entretien et de santé en faisant tout ce qu'elle peut",
+                  "correct": true
                 },
                 {
-                  "content": "Déclarer la naissance d'un enfant à l'état civil est un devoir des parents.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Le droit de l'enfant à un nom et à une nationalité devient, pour ses parents, le devoir de déclarer sa naissance. On ne le repousse pas jusqu'au jour où on en aura besoin.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Elle manque à son devoir, car ses revenus sont petits",
+                  "correct": false
                 },
                 {
-                  "content": "L'affection des parents pour leur enfant se montre en : (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Écouter l'enfant et le consoler ou l'encourager sont des marques d'affection. Ignorer ses peurs ou se moquer de lui devant les voisins le blesse. Tout lui donner sans règle ne prouve pas l'affection.",
-                  "answers": [
-                    { "content": "L'écoutant quand il raconte sa journée", "correct": true },
-                    { "content": "Le consolant et l'encourageant après un échec", "correct": true },
-                    { "content": "Ignorant ses peurs", "correct": false },
-                    { "content": "Se moquant de ses mauvaises notes devant les voisins", "correct": false },
-                    { "content": "Lui donnant tout ce qu'il demande sans aucune règle", "correct": false }
-                  ]
+                  "content": "Elle n'a aucun devoir, puisque le père doit tout payer",
+                  "correct": false
                 },
                 {
-                  "content": "Un père hésite entre deux dépenses : une télévision pour le salon ou les soins dentaires de sa fille. Quel critère doit peser le plus lourd dans sa décision ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans toutes les décisions qui concernent un enfant, son intérêt passe en premier : c'est l'intérêt supérieur de l'enfant. Le confort des adultes passe après ses besoins essentiels.",
-                  "answers": [
-                    { "content": "L'intérêt de l'enfant", "correct": true },
-                    { "content": "Le confort des adultes", "correct": false },
-                    { "content": "L'avis des voisins", "correct": false },
-                    { "content": "Le prix le moins cher", "correct": false }
-                  ]
-                },
-                {
-                  "content": "On compare une décision de famille à une balance où l'on pèse l'intérêt de l'enfant. Quelle est la limite de cette comparaison ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'intérêt supérieur ne veut pas dire que l'enfant décide seul. On l'écoute selon son âge et sa maturité, mais les adultes décident en pensant à son bien.",
-                  "answers": [
-                    { "content": "L'enfant ne décide pas seul : on l'écoute, mais les adultes décident en pensant à son bien", "correct": true },
-                    { "content": "L'enfant doit toujours obtenir ce qu'il demande", "correct": false },
-                    { "content": "Les parents n'ont jamais de choix à faire", "correct": false },
-                    { "content": "L'argent est le seul critère de décision", "correct": false }
-                  ]
+                  "content": "Elle remplit seulement le devoir d'entretien, mais pas celui de santé",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Juger une décision dans l'intérêt de l'enfant",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le père d'Ibrahim, commerçant dont l'étal marche bien, ne donne plus rien pour son fils depuis deux ans. Les parents d'Ibrahim sont séparés. Quel est son manquement ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le besoin : Ibrahim a besoin d'être nourri, logé, soigné. Étape 2 — Nommer le devoir : l'entretien, que le père et la mère partagent, même séparés. Étape 3 — Comparer avec les moyens : l'étal du père marche bien, il peut contribuer et ne le fait pas. Étape 4 — Conclure : c'est un manquement au devoir d'entretien. La séparation ne supprime pas les devoirs du père.",
+              "answers": [
                 {
-                  "content": "Une maman n'a jamais déclaré la naissance de son fils de 6 ans à l'état civil. Quel est le problème ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans déclaration, l'enfant n'a pas de preuve de son identité : il aura du mal à obtenir l'extrait d'acte de naissance, demandé notamment à l'inscription aux examens, et à faire valoir ses droits. La maman manque aussi à son devoir de déclarer la naissance.",
-                  "answers": [
-                    { "content": "L'enfant n'a pas de preuve de son identité, et la maman manque à son devoir", "correct": true },
-                    { "content": "Il n'y a aucun problème, la déclaration est facultative", "correct": false },
-                    { "content": "C'est à l'enfant de déclarer sa naissance plus tard", "correct": false },
-                    { "content": "Seul l'enseignant peut régler la question", "correct": false }
-                  ]
+                  "content": "Un manquement au devoir d'entretien : séparés, les deux parents restent responsables, et il en a les moyens",
+                  "correct": true
                 },
                 {
-                  "content": "Un père a de l'argent pour une seule dépense : une télévision pour le salon, ou les soins dentaires de sa fille de 10 ans. L'intérêt supérieur de l'enfant demande de payer les soins d'abord.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Les soins répondent à un besoin essentiel de l'enfant, alors que la télévision est un confort. Dans toutes les décisions qui concernent un enfant, son intérêt passe en premier.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Aucun, car il n'habite plus avec l'enfant",
+                  "correct": false
                 },
                 {
-                  "content": "Fanta rentre en pleurant après une mauvaise note. Quelle réaction respecte le devoir d'affection ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'affection, c'est écouter l'enfant et le rassurer. Se moquer de lui, lui dire d'arrêter ou l'envoyer au lit sans un mot le laisse seul avec son chagrin.",
-                  "answers": [
-                    { "content": "L'écouter, la rassurer et l'encourager", "correct": true },
-                    { "content": "Lui dire d'arrêter de pleurnicher", "correct": false },
-                    { "content": "Se moquer de sa note devant la famille", "correct": false },
-                    { "content": "L'envoyer dormir sans un mot", "correct": false }
-                  ]
+                  "content": "Un simple désaccord entre adultes qui ne concerne pas l'enfant",
+                  "correct": false
                 },
                 {
-                  "content": "Dans quelles décisions agit-on dans l'intérêt supérieur de l'enfant ? (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Soigner d'abord un enfant malade, déclarer sa naissance et l'écouter avant un changement d'école servent son intérêt. Décider selon le confort des adultes, laisser un petit décider de tout ou lui tout cacher ne le fait pas.",
-                  "answers": [
-                    { "content": "Payer les soins d'un enfant malade avant un achat de confort", "correct": true },
-                    { "content": "Déclarer la naissance du bébé pour qu'il ait un nom reconnu", "correct": true },
-                    { "content": "Écouter l'avis de l'enfant avant de décider d'un changement d'école", "correct": true },
-                    { "content": "Choisir la solution la plus pratique pour les adultes sans penser à l'enfant", "correct": false },
-                    { "content": "Laisser un enfant de 7 ans décider seul de tout", "correct": false },
-                    { "content": "Cacher à l'enfant tout ce qui le concerne", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Que signifie « l'intérêt supérieur de l'enfant » ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans toutes les décisions qui concernent un enfant, son bien doit passer en premier. Cela ne veut pas dire qu'il obtient tout ce qu'il veut, ni qu'il décide seul.",
-                  "answers": [
-                    { "content": "Dans toutes les décisions qui le concernent, son bien passe en premier", "correct": true },
-                    { "content": "L'enfant obtient tout ce qu'il demande", "correct": false },
-                    { "content": "L'enfant décide seul à la place des adultes", "correct": false },
-                    { "content": "Les parents font ce qui est le plus facile pour eux", "correct": false }
-                  ]
+                  "content": "Un manquement au devoir de déclarer la naissance",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Identité, affection et décisions de famille",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le père d'Ibrahim, 14 ans, veut le retirer de l'école pour qu'il tienne son étal toute la journée. Quels devoirs ce projet méconnaît-il ? (deux réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer le danger : un enfant retiré de l'école pour travailler toute la journée. Étape 2 — Nommer les devoirs en jeu : scolariser et protéger contre l'exploitation. Étape 3 — Chercher le responsable : le père. Étape 4 — Conclure : le projet méconnaît ces deux devoirs. Le fait que l'étal soit celui de la famille ne change rien : un travail qui empêche d'aller à l'école reste de l'exploitation. Les devoirs de santé et de déclaration de naissance ne sont pas en cause dans ce projet.",
+              "answers": [
                 {
-                  "content": "Tiémoko, élève de 3ème, vit avec ses parents, présents. Ils n'ont jamais déclaré sa naissance et il risque d'être bloqué pour son inscription à l'examen. Qui a manqué à son devoir ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le devoir de déclarer la naissance revient aux parents. Tiémoko, mineur, n'a aucune faute. L'enseignant et le directeur ne sont pas chargés de cette déclaration.",
-                  "answers": [
-                    { "content": "Ses parents, qui n'ont pas déclaré sa naissance", "correct": true },
-                    { "content": "Tiémoko lui-même", "correct": false },
-                    { "content": "Son enseignant", "correct": false },
-                    { "content": "Le directeur de l'école", "correct": false }
-                  ]
+                  "content": "Le devoir de scolariser",
+                  "correct": true
                 },
                 {
-                  "content": "Lesquelles de ces phrases sont exactes ? (deux réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'intérêt de l'enfant passe en premier dans les décisions qui le concernent, et père et mère ont des responsabilités communes. L'intérêt supérieur n'est pas le caprice, et l'affection n'est pas facultative.",
-                  "answers": [
-                    { "content": "Dans toutes les décisions qui concernent un enfant, son intérêt doit passer en premier", "correct": true },
-                    { "content": "Le père et la mère ont des responsabilités communes pour élever l'enfant", "correct": true },
-                    { "content": "L'intérêt supérieur de l'enfant, c'est faire tous ses caprices", "correct": false },
-                    { "content": "Avant 18 ans, un enfant n'a pas à être écouté", "correct": false },
-                    { "content": "L'affection est facultative : seuls comptent la nourriture et le logement", "correct": false }
-                  ]
+                  "content": "Le devoir de protéger l'enfant contre l'exploitation par le travail",
+                  "correct": true
                 },
                 {
-                  "content": "Un parent affectueux ne pose jamais de règle à son enfant.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Aimer, c'est aussi guider : les règles font partie de l'éducation. L'affection s'accompagne d'écoute et de limites claires, sans violence.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Le devoir de déclarer la naissance",
+                  "correct": false
                 },
                 {
-                  "content": "Lesquels de ces devoirs relèvent de l'identité et de l'affection ? (trois réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Déclarer la naissance, donner un nom et écouter l'enfant relèvent de l'identité et de l'affection. Vacciner relève de la santé, inscrire à l'école de l'éducation, éviter le travail dangereux de la protection.",
-                  "answers": [
-                    { "content": "Déclarer la naissance de l'enfant à l'état civil", "correct": true },
-                    { "content": "Lui donner un nom", "correct": true },
-                    { "content": "L'écouter et l'encourager", "correct": true },
-                    { "content": "Le faire vacciner", "correct": false },
-                    { "content": "L'inscrire à l'école", "correct": false },
-                    { "content": "Le protéger d'un travail dangereux", "correct": false }
-                  ]
+                  "content": "Le devoir de santé",
+                  "correct": false
                 },
                 {
-                  "content": "Deux parents séparés ne sont d'accord sur rien. Sur quoi doivent-ils s'appuyer pour décider de l'école de leur fils ?",
-                  "question_type": "single_choice",
-                  "explanation": "La préoccupation fondamentale des parents est l'intérêt supérieur de l'enfant. Ce n'est ni le revenu, ni l'âge, ni la voix la plus forte qui doit décider.",
-                  "answers": [
-                    { "content": "L'intérêt supérieur de leur fils", "correct": true },
-                    { "content": "Le parent qui gagne le plus d'argent décide", "correct": false },
-                    { "content": "Le parent le plus âgé décide", "correct": false },
-                    { "content": "Celui qui parle le plus fort décide", "correct": false }
-                  ]
+                  "content": "Aucun : un étal de famille est un travail de famille",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Pour inscrire Ibrahim au BEPC, l'école demande l'extrait d'acte de ___. (un mot)",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer ce qui manque : un document qui prouve l'identité d'Ibrahim. Étape 2 — Nommer le devoir en jeu : faire les démarches pour que l'enfant ait son acte de naissance. Étape 3 — Chercher le responsable : les parents, ici le père qui refuse. Étape 4 — Conclure : le père doit faire les démarches pour obtenir un nouvel extrait d'acte de naissance, demandé pour l'examen. Repousser la démarche, c'est s'en apercevoir trop tard.",
+              "answers": [
+                {
+                  "content": "naissance",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Selon le schéma « Que faire face à un enfant négligé ? », quand le danger n'est pas immédiat, on parle d'abord à un adulte de confiance. Ensuite, qui étudie la situation et aide la famille ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le devoir : celui de scolariser et de protéger Ibrahim. Étape 2 — Distinguer manquement et difficulté : il y a un mélange, mais pas de danger immédiat. Étape 3 — Choisir le recours : on suit le schéma, adulte de confiance puis centre social. Étape 4 — Conclure : le centre social étudie la situation et aide la famille. La police est réservée au danger immédiat, et le juge des enfants intervient si rien ne change.",
+              "answers": [
+                {
+                  "content": "Le centre social",
+                  "correct": true
+                },
+                {
+                  "content": "La police ou la gendarmerie",
+                  "correct": false
+                },
+                {
+                  "content": "Le juge des enfants, tout de suite",
+                  "correct": false
+                },
+                {
+                  "content": "Le voisin le plus proche",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige, en huit lignes environ, un bilan de la situation d'Ibrahim : (a) quels devoirs du père sont méconnus ; (b) quel devoir la mère remplit ; (c) deux démarches possibles pour aider Ibrahim.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Cite les devoirs méconnus du père : entretien, scolarisation, protection contre l'exploitation",
+                "Reconnaît que la mère remplit son devoir en faisant tout ce qu'elle peut",
+                "Cite le nouvel extrait d'acte de naissance à obtenir pour l'inscription à l'examen",
+                "Propose deux démarches adaptées : adulte de confiance, centre social, nouvel extrait d'acte de naissance",
+                "Rédaction claire en phrases complètes, avec le vocabulaire de la leçon"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Le père ne donne plus rien depuis deux ans alors que son étal marche bien : il manque au devoir d'entretien. Il veut aussi retirer Ibrahim de l'école pour le faire travailler : il méconnaît le devoir de scolariser et celui de protéger contre l'exploitation. Étape 2 — La mère paie seule avec de petits revenus : elle fait tout ce qu'elle peut et remplit ses devoirs. Étape 3 — L'extrait d'acte de naissance d'Ibrahim est perdu : il faut faire les démarches pour en obtenir un nouveau, demandé à l'examen. Étape 4 — Il n'y a pas de danger immédiat, donc la mère peut parler à un adulte de confiance, comme un enseignant, puis au centre social qui étudiera la situation. Barème : 1 point pour les devoirs du père, 0,5 point pour la mère, 0,5 point pour l'extrait d'acte de naissance, 1 point pour deux démarches, 1 point pour les justifications.",
+              "answers": [],
+              "starter": "Le père d'Ibrahim manque à…"
+            },
+            {
+              "content": "Le père d'Ibrahim dit : « C'est mon fils, c'est moi qui décide de son avenir. » Prends position sur cette phrase en cinq lignes au plus, en t'appuyant sur les règles de la leçon.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Prend clairement position (le père n'a pas tous les droits)",
+                "Dit que l'autorité parentale sert l'intérêt de l'enfant et que les deux parents partagent la responsabilité",
+                "Cite au moins deux droits de l'enfant en jeu : éducation, protection"
+              ],
+              "explanation": "Corrigé modèle : Je ne suis pas d'accord avec le père. Étape 1 — Il parle de décider seul de l'avenir de son fils. Étape 2 — L'autorité parentale existe pour servir l'enfant, pas le parent ; les deux parents partagent la responsabilité, et l'enfant doit être écouté selon son âge. Étape 3 — Retirer Ibrahim de l'école pour le faire travailler méconnaît son droit à l'éducation et son droit à la protection. Étape 4 — Un père qui décide contre l'intérêt de son fils manque à ses devoirs. Barème : 0,5 point pour la prise de position, 1,5 point pour les règles, 1 point pour les droits cités.",
+              "answers": [],
+              "starter": "Je ne suis pas d'accord, car l'autorité parentale…"
             }
           ]
         }
