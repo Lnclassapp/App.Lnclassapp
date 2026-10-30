@@ -7,7 +7,8 @@ module Queries
       # groups : [Group] dans l'ordre des notions ; lesson_wide : [ExerciseRow] par position ;
       # targets : Queries::Classroom::CatalogAssignmentTargetsQuery::Targets pour un enseignant, nil pour tout autre rôle ;
       # bare : [Bare] les notions lisibles par ce rôle qui n'ont aucun exercice visible (leur ancre « notion-<slug> » reste la cible des liens).
-      Prepare = Data.define(:groups, :lesson_wide, :targets, :bare)
+      # material_slug : la matière du cours, pour la pastille de chaque carte d'exercice (UDR-XXXX exercices en cartes).
+      Prepare = Data.define(:groups, :lesson_wide, :targets, :bare, :material_slug)
       Bare = Data.define(:essential_slug, :title)
       Group = Data.define(:essential_slug, :title, :exercises)
       # student_state : StudentState pour l'élève (nil s'il n'y a rien à dire), nil pour tout autre rôle ; status : celui de l'équipe.
@@ -15,12 +16,12 @@ module Queries
       # kind : :to_review (lacune en attente) · :due (assignation active non rendue, due_on) · :score (meilleure note, score_percent).
       StudentState = Data.define(:kind, :due_on, :score_percent)
 
-      EMPTY = Prepare.new(groups: [], lesson_wide: [], targets: nil, bare: [])
+      EMPTY = Prepare.new(groups: [], lesson_wide: [], targets: nil, bare: [], material_slug: nil)
       EXERCISE_COLUMNS = %i[id public_id title exercise_type status essential_id].freeze
 
       # → Prepare. Un cours inconnu rend des listes vides ; la lecture d'un brouillon est l'affaire de ReadPublishedPolicy, en amont.
       def call(course_slug:, actor:)
-        course_id = Orm::Course.where(slug: course_slug).pick(:id)
+        course_id, material_slug = Orm::Course.joins(:material).where(slug: course_slug).pick(:id, "materials.slug")
         return EMPTY if course_id.nil?
 
         team = actor&.team? || false
@@ -29,7 +30,7 @@ module Queries
         counts = Orm::Question.where(exercise_id: exercises.map(&:first)).group(:exercise_id).count
         rows = exercises.to_h { |values| [ values.first, row(values, counts, state_of) ] }
         Prepare.new(groups: groups(course_id, exercises, rows), lesson_wide: lesson_wide(exercises, rows),
-                    targets: targets(course_slug, actor, exercises), bare: bare(course_id, exercises, team))
+                    targets: targets(course_slug, actor, exercises), bare: bare(course_id, exercises, team), material_slug:)
       end
 
       private

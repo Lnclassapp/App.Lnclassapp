@@ -24,7 +24,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#prepare-interros li[id^=exercise-]", 8
-    titles = css_select("#prepare-interros li[id^=exercise-] a span.font-medium").map { it.text.squish }
+    titles = css_select("#prepare-interros li[id^=exercise-] h3 a").map { it.text.squish }
     assert_equal @by_notion.map(&:title) + @wide.map(&:title), titles
     assert_select "#prepare-interros h3", text: "Notion 1"
     assert_select "#prepare-interros #toute-la-lecon h3", text: tl("lesson_wide_title")
@@ -62,7 +62,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select row(@by_notion[0]), text: including(tl("due", day: "jeudi"))
     assert_select row(@by_notion[1]), text: including("14/20")
     assert_select row(@by_notion[2]), text: including(tl("to_review"))
-    assert_select row(@by_notion[3]), text: /\A\s*#{Regexp.escape(@by_notion[3].title)}\s+Fixation\s+2 questions\s*\z/
+    assert_select row(@by_notion[3]), text: /\A\s*Fixation\s+#{Regexp.escape(@by_notion[3].title)}\s+2 questions\s+Commencer\s*\z/
     assert_equal "jeudi", I18n.l(assignment.due_on, format: "%A")
   end
 

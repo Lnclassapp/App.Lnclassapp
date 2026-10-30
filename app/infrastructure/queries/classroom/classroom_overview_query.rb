@@ -34,7 +34,7 @@ module Queries
       # counts : AssignmentFollowUpQuery::Counts, nil sans show_follow_up (FollowAssignmentPolicy, ADR-0072 §4.5).
       # comprehension : Assessment::ComprehensionSummaryQuery::Summary (ADR-0079), nil sans show_follow_up, comme counts.
       AssignmentRow = Data.define(:public_id, :exercise_title, :material_name, :material_category, :due_on, :counts,
-                                  :comprehension)
+                                  :comprehension, :exercise_type, :material_slug)
       # material_slug : une bande par matière pour l'enseignant de plusieurs matières (UDR-0127 §3.1).
       CourseRow = Data.define(:slug, :name, :subtitle, :level_name, :series_name, :material_name, :material_category,
                               :essentials_count, :material_slug)
@@ -61,7 +61,7 @@ module Queries
       # « Awa Bamba » se trouve par « awa », « bamba » ou « awa bamba » (UDR-0054 §3.9).
       STUDENT_NAME = "concat_ws(' ', users.first_name, users.last_name)".freeze
       ASSIGNMENT_COLUMNS = %w[classroom_assignments.id classroom_assignments.public_id exercises.title materials.name
-                              materials.category classroom_assignments.due_on].freeze
+                              materials.category classroom_assignments.due_on exercises.exercise_type materials.slug].freeze
       COURSE_COLUMNS = %w[courses.id courses.slug courses.name courses.subtitle levels.name series.name materials.name
                           materials.category materials.slug materials.id].freeze
 
@@ -192,9 +192,9 @@ module Queries
                                               assigned_at: :desc, id: :desc)
                                        .pluck(*ASSIGNMENT_COLUMNS)
         counts, comprehension = show_follow_up ? follow_up(classroom_id, rows.map(&:first)) : [ {}, {} ]
-        rows.map do |id, public_id, exercise_title, material_name, material_category, due_on|
+        rows.map do |id, public_id, exercise_title, material_name, material_category, due_on, exercise_type, material_slug|
           AssignmentRow.new(public_id:, exercise_title:, material_name:, material_category:, due_on:, counts: counts[id],
-                            comprehension: comprehension[id])
+                            comprehension: comprehension[id], exercise_type:, material_slug:)
         end
       end
 

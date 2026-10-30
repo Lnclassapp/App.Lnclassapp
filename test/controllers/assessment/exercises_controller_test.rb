@@ -31,8 +31,8 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#exercise_header", text: /#{I18n.t("#{scope}.show.exercise_types.evaluation")}/
     assert_select "a[href='#{course_path(@essential.course.slug, anchor: "notion-#{@essential.slug}")}']"
     assert_select "#exercise_questions li.question", 2
-    assert_select "#exercise_questions #sheet-question-1", text: /1\./
-    assert_select "#exercise_questions #sheet-question-2", text: /2\./
+    assert_select "#exercise_questions #sheet-question-1", text: /Question 1,/
+    assert_select "#exercise_questions #sheet-question-2", text: /Question 2,/
     # CA-13 : les propositions d'une question à choix sont sur la feuille, toutes, sans case à cocher.
     @exercise.questions.order(:position).each_with_index do |question, index|
       assert_select "#sheet-question-#{index + 1} li.answer", question.answers.count
@@ -128,6 +128,53 @@ class Assessment::ExercisesControllerTest < ActionDispatch::IntegrationTest
     %w[Yamoussoukro 42,75 0,25].each { assert_no_match(/#{it}/, response.body) }
     assert_select "#exercise_questions [data-correct]", 0
     assert_no_match(/Gauche2 → Droite2/, response.body)
+  end
+
+  # CA-8, UDR-XXXX-exercices-et-questions-en-cartes §3.3 : chaque question est une carte numérotée qui dit son format.
+  test "chaque question est une carte numérotée qui dit son format, jamais le nombre de bonnes propositions" do
+    exercise = create_exercise(essential: @essential, questions: 0, statement: "Deux divisions successives.")
+    formats = { "true_false" => "Vrai ou faux", "single_choice" => "Une seule réponse", "multiple_correct_2" => "Plusieurs réponses",
+                "multiple_correct_3" => "Plusieurs réponses" }
+    formats.each_key.with_index do |type, index|
+      correct = { "true_false" => 1, "single_choice" => 1, "multiple_correct_2" => 2, "multiple_correct_3" => 3 }.fetch(type)
+      question = exercise.questions.create!(position: index + 1, content: "Énoncé #{index + 1}", question_type: type)
+      4.times { |rank| question.answers.create!(position: rank + 1, content: "Choix #{rank + 1}", correct: rank < correct) }
+    end
+    create_kind_question(exercise:, question_type: "fill_blank", content: "Le ___ .", answers: %w[nucléole])
+    create_kind_question(exercise:, question_type: "numeric", content: "Combien ?", answers: [ "4" ])
+    create_kind_question(exercise:, question_type: "ordering", content: "Range.", answers: %w[A B C])
+    create_kind_question(exercise:, question_type: "matching", content: "Relie.", answers: [ %w[G1 D1], %w[G2 D2], %w[G3 D3] ])
+    expected = formats.values + [ "Texte à trous", "Réponse en nombre", "Remettre dans l'ordre", "Relier" ]
+
+    sign_in_as @student
+    get exercise_path(exercise.public_id)
+
+    assert_select "#exercise_statement_card", text: /Deux divisions successives\./
+    assert_select "#exercise-sheet[role=region]"
+    assert_select "#exercise_questions li.question", expected.size
+    expected.each_with_index do |label, index|
+      assert_select "#sheet-question-#{index + 1}.rounded-card"
+      assert_select "#sheet-question-#{index + 1} > div:first-child", text: /#{index + 1}/
+      assert_select "#sheet-question-#{index + 1}-format", text: label
+      assert_select "#sheet-question-#{index + 1} .sr-only", text: "Question #{index + 1},"
+    end
+    assert_select "#exercise_questions", text: /Plusieurs réponses/, count: 1
+    assert_equal 2, response.body.scan(">Plusieurs réponses<").size
+    assert_no_match(/\d propositions? correctes?/, response.body)
+  end
+
+  test "les formats restants se disent : sélection, rédigée, cahier" do
+    exercise = create_exercise(essential: @essential, questions: 0)
+    %w[select written notebook].each_with_index do |type, index|
+      create_kind_question(exercise:, question_type: type, content: "Q#{index} ___", answers: %w[Bon])
+    end
+
+    sign_in_as @student
+    get exercise_path(exercise.public_id)
+
+    assert_select "#sheet-question-1-format", text: "Choix dans une liste"
+    assert_select "#sheet-question-2-format", text: "Réponse rédigée"
+    assert_select "#sheet-question-3-format", text: "Sur le cahier"
   end
 
   # RE-22 — UDR-0069 §3.8 : après l'en-tête, la carte « Assigner à mes classes », une bascule par classe de l'enseignant

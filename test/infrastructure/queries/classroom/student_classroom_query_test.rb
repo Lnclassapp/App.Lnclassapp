@@ -167,6 +167,7 @@ module Queries
         assert_equal [ last.public_id, twice.public_id, "SVT", "svt", "science" ],
                      rows.first.to_h.values_at(:last_session_public_id, :exercise_public_id, :material_name, :material_slug,
                                                :material_category)
+        assert_equal %w[fixation fixation], rows.map(&:exercise_type)
       end
 
       # UDR-0076 §3.2 : le travail terminé reste à l'élève quand l'exercice est dépublié ensuite, comme « Mes activités

@@ -1,21 +1,4 @@
 <%# 🌐 UI · classroom/student_classrooms/_assigned_exercise — un exercice assigné que l'élève n'a pas encore fait %>
-<%# Rôle : toute la ligne mène à l'exercice : pastille de la matière, titre, matière, échéance (orange en retard, aujourd'hui, demain) %>
-<%# ADR  : 0072 · UDR : 0057 (R1, R3), 0062 §3.1 (due_badge, ton warning), 0076 §3.2, 0086 §3.4 · aucun bouton %>
-<%# locals: (exercise:, index:) -%>
-<% illustration = subject_illustration(exercise.material_slug) %>
-<%= tag.li(**ui_reveal_item(index)) do %>
-  <%= link_to exercise_path(exercise.public_id),
-              class: "group -mx-2 flex min-h-tap items-center gap-3 rounded-ln px-2 py-3 transition hover:bg-mist active:bg-mist focus-visible:outline-2 focus-visible:outline-brand" do %>
-    <span class="<%= class_names("grid size-11 shrink-0 place-items-center rounded-full", illustration.tint) %>" aria-hidden="true">
-      <%= image_tag illustration.path, alt: "", class: "size-7", loading: "lazy" %>
-    </span>
-    <span class="min-w-0 flex-1 space-y-1">
-      <span class="line-clamp-2 font-medium break-words text-ink"><%= exercise.title %></span>
-      <span class="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs text-mute">
-        <span><%= exercise.material_name %></span>
-        <%= due_badge exercise.due_on, size: :sm %>
-      </span>
-    </span>
-    <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
-  <% end %>
-<% end %>
+<%# Rôle : rend la carte d'exercice commune ; la liste de show.html.erb la pose en grille %>
+<%# ADR  : 0072 · UDR : XXXX-exercices-et-questions-en-cartes (§3.1, §3.2), 0076 §3.2, 0086 §3.4 · locals: (exercise:, index:) %>
+<%= render "assessment/exercises/card", card: exercise_card_for_assigned(exercise), index: %>

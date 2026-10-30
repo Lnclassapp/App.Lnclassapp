@@ -180,7 +180,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#assigned_exercises h2", text: I18n.t("#{scope}.assigned_exercises.title")
     assert_select "#assignment_#{assignment.public_id}" do
       assert_select "a[href='#{classroom_assignment_path(@classroom.public_id, assignment.public_id)}']", text: "La méiose"
-      assert_select "span", text: "SVT"
+      assert_select "p", text: /\ASVT · /
       assert_select "span", text: "Pour jeu. 8 oct."
       assert_select "span", text: "7 en retard"
     end
@@ -253,7 +253,7 @@ class Classroom::ClassroomsControllerTest < ActionDispatch::IntegrationTest
   test "sans les comptes (hors FollowAssignmentPolicy), la ligne n'a ni barre, ni « faits », ni lien vers le suivi" do
     row = Queries::Classroom::ClassroomOverviewQuery::AssignmentRow.new(
       public_id: "a1", exercise_title: "La méiose", material_name: "SVT", material_category: "science", due_on: nil,
-      counts: nil, comprehension: nil
+      counts: nil, comprehension: nil, exercise_type: "fixation", material_slug: "svt"
     )
 
     html = ApplicationController.render(partial: "classroom/classrooms/assigned_exercises",

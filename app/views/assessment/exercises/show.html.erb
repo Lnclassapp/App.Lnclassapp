@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercises/show — le sujet d'un exercice : la feuille telle qu'on la distribuerait en classe (AS-02) %>
 <%# Rôle : énoncé et questions numérotées, rien à remplir ; « Faire l'exercice » pour l'élève, bascules d'assignation pour l'enseignant, statut et transitions pour l'équipe (plus de « Modifier » : l'exercice se réimporte, ADR-0113 §4.6) %>
-<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113, 0115 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1 · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
+<%# ADR  : 0028, 0054, 0072, 0091 §4.4, 0112, 0113, 0115 · UDR : 0006, 0007, 0021, 0069, 0138 §3.1, XXXX-exercices-et-questions-en-cartes (§3.3 : une carte par question) · aucun cache : le HTML dépend du rôle (sécurité n° 29) · Stimulus : math %>
 <% exercise = @detail.exercise %>
 <% essential = @detail.essential %>
 <% course = @detail.course %>
@@ -34,25 +34,36 @@
       <%= ui_empty_state title: t(".no_questions"), icon: "question-mark-circle" %>
     </div>
   <% else %>
-    <%= ui_card padding: :lg, id: "exercise-sheet", role: "region", "aria-labelledby": "sheet_title", data: { controller: "math" } do %>
+    <%# UDR-XXXX-exercices-et-questions-en-cartes §3.3 : la feuille est une région sans cadre ; l'énoncé a sa carte, chaque question la sienne. %>
+    <%= tag.div id: "exercise-sheet", role: "region", "aria-labelledby": "sheet_title", class: "space-y-4", data: { controller: "math" } do %>
       <h2 id="sheet_title" class="sr-only"><%= t(".sheet_title") %></h2>
-      <% if exercise.statement.present? %>
-        <div id="exercise_statement" class="max-w-prose text-ink"><%= simple_format(exercise.statement) %></div>
+      <% figure = @detail.figure %>
+      <% if exercise.statement.present? || exercise.statement_blocks.present? || figure %>
+        <%= ui_card padding: :lg, id: "exercise_statement_card" do %>
+          <% if exercise.statement.present? %>
+            <div id="exercise_statement" class="max-w-prose text-ink"><%= simple_format(exercise.statement) %></div>
+          <% end %>
+          <%# ADR-0115 : le sujet en blocs (document encadré, tableau), après le texte. %>
+          <% if exercise.statement_blocks.present? %>
+            <div id="exercise_statement_blocks" class="mt-4 space-y-4"><%= render "assessment/statement_blocks/blocks", blocks: exercise.statement_blocks %></div>
+          <% end %>
+          <%# Refonte contenus maths, CA-13 : la figure citée, juste sous le sujet ; aucun emplacement sans figure. %>
+          <% if figure %>
+            <div id="exercise_figure" class="mt-4"><%= render "catalog/figures/figure", figure:, frame: :app %></div>
+          <% end %>
+        <% end %>
       <% end %>
-      <%# ADR-0115 : le sujet en blocs (document encadré, tableau), après le texte. %>
-      <% if exercise.statement_blocks.present? %>
-        <div id="exercise_statement_blocks" class="mt-4 space-y-4"><%= render "assessment/statement_blocks/blocks", blocks: exercise.statement_blocks %></div>
-      <% end %>
-      <%# Refonte contenus maths, CA-13 : la figure citée, juste sous le sujet ; aucun emplacement sans figure. %>
-      <% if (figure = @detail.figure) %>
-        <div id="exercise_figure" class="mt-4"><%= render "catalog/figures/figure", figure:, frame: :app %></div>
-      <% end %>
-      <ol id="exercise_questions" class="mt-6 list-none space-y-6">
+      <ol id="exercise_questions" class="list-none space-y-4">
         <% @detail.questions.each_with_index do |question, index| %>
+          <% number = index + 1 %>
           <% blank = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
-          <li id="sheet-question-<%= index + 1 %>" class="question">
+          <li id="sheet-question-<%= number %>" class="question rounded-card border border-line bg-white p-4 shadow-card sm:p-6">
+            <div class="mb-3 flex items-center gap-2">
+              <span class="grid size-8 place-items-center rounded-full bg-brand-soft text-sm font-medium text-brand-strong tabular-nums" aria-hidden="true"><%= number %></span>
+              <span id="sheet-question-<%= number %>-format" class="text-meta text-mute"><%= t(".question_formats.#{question.question_type}") %></span>
+            </div>
             <p class="font-medium whitespace-pre-line text-ink">
-              <span class="tabular-nums"><%= index + 1 %>.</span>
+              <span class="sr-only"><%= t(".question_number", number:) %></span>
               <%= %w[fill_blank select].include?(question.kind_name) ? question.content.sub(blank, "……………") : question.content %>
             </p>
             <% if (image = question.image) %>

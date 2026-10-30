@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_prepare_interros — les exercices de la page d'une leçon (catalogue et classe) %>
 <%# Rôle : exercices groupés par notion puis « Toute la leçon » ; état vide sans exercice ; enseignant : une bascule par classe sous chaque exercice (la classe donnée seulement, dans sa page de classe) %>
-<%# ADR  : 0113 · UDR : 0139 §3.4, §3.6 · locals: (prepare:, classroom_public_id: nil) %>
+<%# ADR  : 0113 · UDR : 0139 §3.4, §3.6, XXXX-exercices-et-questions-en-cartes (§3.2 : liste en grille, material_slug) · locals: (prepare:, classroom_public_id: nil) %>
 <% groups = prepare.groups %>
 <% lesson_wide = prepare.lesson_wide %>
 <% targets = prepare.targets %>
@@ -19,7 +19,7 @@
   <% @primary_assign_taken = false %>
   <% only = local_assigns[:classroom_public_id] %>
   <% classrooms = targets ? targets.classrooms.select { only.nil? || it.public_id == only } : [] %>
-  <% list_class = "divide-y divide-line rounded-card border border-line bg-white shadow-card" %>
+  <% list_class = "grid gap-3 sm:grid-cols-2 lg:grid-cols-3" %>
   <div class="space-y-6">
     <% if targets && classrooms.empty? %>
       <p id="assign_targets_none" class="text-mute"><%= t("catalog.courses.show.assign_targets_none", level: targets.scope_label) %></p>
@@ -29,7 +29,7 @@
         <h3 class="mb-2 font-display text-lg font-medium"><%= group.title %></h3>
         <ul class="<%= list_class %>">
           <% group.exercises.each do |exercise| %>
-            <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, team: current_actor&.team? %>
+            <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, material_slug: prepare.material_slug, team: current_actor&.team? %>
           <% end %>
         </ul>
       </div>
@@ -39,7 +39,7 @@
         <h3 class="mb-2 font-display text-lg font-medium"><%= t("catalog.courses.show.lesson_wide_title") %></h3>
         <ul class="<%= list_class %>">
           <% lesson_wide.each do |exercise| %>
-            <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, team: current_actor&.team? %>
+            <%= render "catalog/courses/exercise_row", exercise:, targets:, classrooms:, material_slug: prepare.material_slug, team: current_actor&.team? %>
           <% end %>
         </ul>
       </div>
