@@ -25,8 +25,8 @@ module Queries
       SheetExercise = Data.define(:public_id, :number, :title, :statement, :statement_blocks, :figure, :hint, :questions, :copy, :due) do
         def initialize(due: false, **) = super
       end
-      # passed : toutes les questions justes ; grade : Entities::Assessment::SheetGrade.
-      Copy = Data.define(:session_public_id, :passed, :grade)
+      # passed : toutes les questions justes ; la note de la copie est celle de sa page de résultat (sur 20).
+      Copy = Data.define(:session_public_id, :passed)
       # kind : :mcq · :true_false · :fill_in · :calculation · :other (play : la question de la session de lecture, pour son partiel) ;
       # multiple : un QCM à 2 ou 3 réponses justes ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
       # verdict :correct | :wrong | :empty, good_answer, explanation) n'est lue que pour un exercice corrigé : nil avant.
@@ -160,8 +160,7 @@ module Queries
                                        .group_by(&:first)
         sessions.to_h do |exercise_id, id, public_id, correct, count|
           taken = attempts.fetch(id, []).to_h { |_, question_id, *attempt| [ question_id, attempt ] }
-          grade = Entities::Assessment::SheetGrade.new(correct: [ correct, count ].min, total: count)
-          [ exercise_id, [ Copy.new(session_public_id: public_id, passed: correct == count, grade:), taken ] ]
+          [ exercise_id, [ Copy.new(session_public_id: public_id, passed: correct == count), taken ] ]
         end
       end
 

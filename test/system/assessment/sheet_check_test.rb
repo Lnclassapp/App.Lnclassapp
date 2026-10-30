@@ -1,7 +1,8 @@
 require "application_system_test_case"
 
 # prepare-interros-cahier, Lot C (CA-3, 4, 5, 10, 17 ; UDR feuilles-prepare-interros-et-devoirs §3) : l'élève vérifie un exercice sur la
-# feuille de la leçon ; l'exercice corrigé remplace l'ancien sans changer de page, ses refus s'affichent dans l'exercice, réponses gardées.
+# feuille de la leçon ; la vérification ouvre la page de résultat de sa copie (Lot C bis), d'où il revient à l'exercice sur la feuille ;
+# ses refus s'affichent dans l'exercice, réponses gardées.
 class Assessment::SheetCheckTest < ApplicationSystemTestCase
   setup do
     @course = create_course(name: "Thalès")
@@ -25,31 +26,31 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
   end
 
   # CA-3, CA-4
-  test "4 justes sur 5 : l'exercice affiche À revoir, la note, la mention et la correction sans changer d'adresse ; un exercice réussi compte" do
+  test "4 justes sur 5 : la page de résultat de la copie s'ouvre (note sur 20), le retour ramène à l'exercice, À revoir et Voir ma correction ; un exercice réussi compte" do
     visit course_path(@course.slug)
-    address = current_url
     answer(@exercise, [ true, true, true, true, false ])
 
     within(frame(@exercise)) { click_button "Vérifier ma réponse" }
 
+    assert_selector "#session_grade", text: "16/20"
+    assert_current_path(%r{\A/sessions/[^/]+/result\?return_to=sheet\z})
+    assert_equal 1, Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "completed").count
+    click_link "Retour à la leçon"
+
+    assert_current_path course_path(@course.slug)
     within(frame(@exercise)) do
       assert_selector ".ps-status", text: "À revoir"
-      assert_selector ".ps-result-grade", text: "Ta note : 8 / 10"
-      assert_selector ".ps-result-mention", text: "Mention : Très bien"
-      assert_selector ".ps-result-detail", text: "4 bonnes réponses sur 5."
-      assert_selector ".ps-correction-item", count: 5
-      assert_text "Bonne réponse :", count: 5
+      assert_link "Voir ma correction"
       assert_button "Refaire l'exercice"
       assert_no_button "Vérifier ma réponse"
+      assert_no_text "Ta note"
     end
-    assert_equal address, current_url
-    # Le focus passe à « Ta note ».
-    assert_equal "sheet-grade-#{@exercise.public_id}", page.evaluate_script("document.activeElement.id")
-    assert_equal 1, Orm::ExerciseSession.where(student: @student, exercise: @exercise, status: "completed").count
     within(".ps-sheet#notion-#{@notion.slug}") { assert_selector ".ps-progress", text: "0 / 4 exercice réussi" }
 
     answer(@short, [ true ])
     within(frame(@short)) { click_button "Vérifier ma réponse" }
+    assert_selector "#session_grade"
+    click_link "Retour à la leçon"
 
     within(frame(@short)) { assert_selector ".ps-status", text: "Réussi" }
     within(".ps-sheet#notion-#{@notion.slug}") { assert_selector ".ps-progress", text: "1 / 4 exercice réussi" }
@@ -68,14 +69,14 @@ class Assessment::SheetCheckTest < ApplicationSystemTestCase
     answer(@archived, [ true ])
     @archived.update!(status: "archived", archived_at: Time.current)
 
+    # Le formulaire vise toute la page (_top) : Turbo n'en suit qu'un à la fois, on attend la réponse avant d'envoyer le suivant.
     within(frame(@short)) { click_button "Vérifier ma réponse" }
-    within(frame(@archived)) { click_button "Vérifier ma réponse" }
-
     within(frame(@short)) do
       assert_selector "p[role=alert]", text: /Tu as rendu 3 copies d'affilée\. Tu pourras recommencer à \d{2} h \d{2}\./
       assert_selector "button[role=radio][aria-checked=true]", count: 1
       assert_button "Vérifier ma réponse"
     end
+    within(frame(@archived)) { click_button "Vérifier ma réponse" }
     within(frame(@archived)) do
       assert_selector "p[role=alert]", text: "Cet exercice n'existe plus."
       assert_selector "button[role=radio][aria-checked=true]", text: "Proposition 1"

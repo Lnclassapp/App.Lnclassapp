@@ -12,7 +12,9 @@
 | 2026-10-30 (Lot C) | `CheckExerciseOnSheet` traduit les indices postés par la feuille (ordre des positions pour les choix, mélange de `SHEET_SEED = 0` pour ordre et relier) vers ceux de l'ordre de la session (`AnswerShuffle`, graine = id de session) avant de rendre la copie à `SubmitExerciseCopy` | La feuille n'a pas de session au moment de s'afficher : sans cette traduction la bonne réponse serait corrigée à côté (le test du contrôleur le prouve avec 5 questions) | Non |
 | 2026-10-30 (Lot C) | « À rendre » = nouveau port `PendingAssignmentRepositoryPort` (assignation active de la classe principale, sans copie terminée rattachée), lu une fois par la page (`SheetExercise#due`) et par le use case | Aucun port existant ne dit « rendu » ; la définition est écrite une seule fois (page et refus de CA-17 d'accord) | Non |
 | 2026-10-30 (Lot C) | `StartExerciseSession` apprend `attach_assignment:` (vrai par défaut) ; `CheckExerciseOnSheet` ne rattache que le rendu d'un devoir (`assignment_public_id:`), jamais une copie refaite | memo Q17 : la copie refaite n'est plus rattachée, l'enseignant garde la copie rendue | Non |
-| 2026-10-30 (Lot C) | Le focus sur « Ta note » passe par `prepare-sheet` (le frame de la réponse porte `data-ps-focus`), pas par `autofocus` | `test/views/page_titles_test.rb` (UDR-0054 §3.3) interdit `autofocus` hors `ui_field` | Non |
+| 2026-10-30 (Lot C) | Le focus sur « Ta note » passe par `prepare-sheet` (le frame de la réponse porte `data-ps-focus`), pas par `autofocus` | `test/views/page_titles_test.rb` (UDR-0054 §3.3) interdit `autofocus` hors `ui_field` | Remplacé par le Lot C bis (plus de note sur la feuille, plus de focus) |
+| 2026-10-30 (Lot C bis) | « Vérifier ma réponse » redirige (303) vers `exercise_session_result_path(…, return_to:)` ; le formulaire vise `_top` ; `_result`, `SheetGrade` et leurs clés sont supprimés ; `return_to` = `sheet` ou `class`, jamais une adresse (liste blanche dans `SessionResultsController`, élève propriétaire seulement) | Décision de Touré 2026-10-30 (memo Q18) ; une adresse libre serait une redirection ouverte | Oui (ADR §4, UDR §3) |
+| 2026-10-30 (Lot C bis) | Les marques ✓ / ✗ par question et les réponses choisies restent sur l'exercice vérifié (`_question`) ; ni note ni correction | La consigne retire la note et la correction ; les marques ne sont ni l'un ni l'autre | Non, à confirmer par Touré |
 
 ## Ce qui a dérapé
 
@@ -62,7 +64,11 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
   les réponses restent sans JS de plus. Une réponse en 422 au format `turbo_stream` est bien traitée par Turbo dans un frame.
 - Un devoir rendu depuis « Ma classe » rend la réponse à partir de `PrepareSheetsQuery` (la leçon) : même partiel, même frame ; la progression
   de la leçon n'existe pas dans « Ma classe » (voir le contrat du Lot F, `plan.md`).
-- `test/guards/system_budget_test.rb` : le chantier a 15 s de budget système ; la vérification tient en 2 tests (6,0 s ; 5 tests : 9,7 s).
+- `test/guards/system_budget_test.rb` : le chantier a 15 s de budget système ; la vérification tient en 2 tests (5,0 s ; 5 tests : 9,7 s).
+- Lot C bis : le formulaire visant `_top`, Turbo ne suit qu'une soumission à la fois (`Navigator.submitForm` arrête la précédente) ; le
+  test système attend la réponse d'un exercice avant de vérifier le suivant (sinon test instable). Données mortes laissées : `good_answer`,
+  `explanation`, `other_answer` dans `PrepareSheetsQuery` et les classes `.ps-result*` / `.ps-correction*` de `prepare_sheet.css` (fichier du Lot 0),
+  à retirer au nettoyage de clôture.
 
 ### Lot A — import de l'indice et des sujets
 

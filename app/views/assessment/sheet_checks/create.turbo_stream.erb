@@ -1,14 +1,7 @@
-<%# 🌐 UI · assessment/sheet_checks/create — la réponse de « Vérifier ma réponse » : l'exercice corrigé et la progression, ou l'erreur dans l'exercice %>
-<%# Rôle : succès → le frame de l'exercice (marqué `focus` : prepare-sheet donne le focus à « Ta note ») et la progression de la feuille sont remplacés ; refus → le message s'ajoute à la fin du frame, les champs ne bougent pas (réponses gardées) %>
+<%# 🌐 UI · assessment/sheet_checks/create — la réponse d'un refus de « Vérifier ma réponse » : le message dans l'exercice, réponses gardées %>
+<%# Rôle : le message s'ajoute à la fin du frame (le formulaire n'est pas remplacé) ; un succès ne passe pas ici : il redirige vers la page de résultat de la copie %>
 <%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille (§4) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Comportement, États) %>
-<% if @error_code %>
-  <%= turbo_stream.remove "sheet-error-#{@exercise_public_id}" %>
-  <%= turbo_stream.append "sheet-exercise-#{@exercise_public_id}" do %>
-    <%= render "assessment/sheet_checks/error", exercise_public_id: @exercise_public_id, code: @error_code, resume_at: @resume_at %>
-  <% end %>
-<% else %>
-  <%= turbo_stream.replace "sheet-exercise-#{@exercise.public_id}" do %>
-    <%= render "catalog/courses/sheets/exercise", exercise: @exercise, mode: :student, targets: nil, classrooms: [], focus: true %>
-  <% end %>
-  <%= turbo_stream.update @sheet.progress_id, t("catalog.courses.sheets.progress", count: @sheet.passed, total: @sheet.exercises.size) %>
+<%= turbo_stream.remove "sheet-error-#{@exercise_public_id}" %>
+<%= turbo_stream.append "sheet-exercise-#{@exercise_public_id}" do %>
+  <%= render "assessment/sheet_checks/error", exercise_public_id: @exercise_public_id, code: @error_code, resume_at: @resume_at %>
 <% end %>

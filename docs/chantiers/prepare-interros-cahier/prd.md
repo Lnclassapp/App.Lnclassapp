@@ -28,9 +28,10 @@ Règles appliquées, inchangées : `ReadPublishedPolicy` (lecture, ADR-0028), la
 
 1. L'élève ouvre une leçon : sous « Prépare interros », une feuille par notion ; sous « Prépare devoirs », une feuille par sujet.
 2. Il répond aux questions d'un exercice ; ses réponses restent dans son navigateur s'il recharge la page.
-3. Il clique « Vérifier ma réponse » : la copie part, l'exercice se remplace sur place par sa version corrigée (« Réussi » ou
-   « À revoir », « Ta note : x / 10 », « Mention : … », « x bonnes réponses sur n. », la correction question par question).
-4. La progression de la feuille se met à jour (« 2 / 3 exercices réussis »).
+3. Il clique « Vérifier ma réponse » : la copie part et il arrive sur la page de résultat de sa copie, celle qui existe déjà
+   (note sur 20, appréciation, correction question par question).
+4. Il clique « Retour à la leçon » : il retrouve l'exercice sur la feuille (même ancre), marqué « Réussi » ou « À revoir »,
+   avec « Voir ma correction » et « Refaire l'exercice », et la progression se met à jour (« 2 / 3 exercices réussis »).
 5. Il clique « Refaire l'exercice » : l'exercice revient à blanc. « Recommencer cette notion / ce sujet » fait de même pour
    toute la feuille.
 6. L'enseignant ouvre la même leçon : chaque exercice porte « Assigner à <classe> » ; un clic assigne sans recharger.
@@ -52,7 +53,7 @@ Règles appliquées, inchangées : `ReadPublishedPolicy` (lecture, ADR-0028), la
 | Notion sans « À retenir » | Pas d'encadré « À retenir » |
 | Leçon sans sujet | Pas de section « Prépare devoirs » |
 | Question d'un type absent de la maquette | Rendue dans le cadre de la feuille avec son interaction d'aujourd'hui |
-| Rechargement après une copie vérifiée | L'exercice s'affiche corrigé, d'après la dernière copie |
+| Rechargement après une copie vérifiée | L'exercice affiche son statut (« Réussi » ou « À revoir »), « Voir ma correction » et « Refaire l'exercice », d'après la dernière copie |
 | Envoi avec un exercice déjà assigné à la classe | Les autres partent ; le bandeau nomme l'exercice refusé |
 | Envoi vide, ou de plus de 10 exercices | Refusé : « Choisis entre 1 et 10 exercices. » |
 | Élève sans devoir reçu | « Ma classe » garde son état vide d'aujourd'hui |
@@ -77,9 +78,9 @@ Et l'encadré « Notions mobilisées : » du sujet
 Étant donné un élève connecté devant un exercice de 5 questions
 Quand il répond juste à 4 questions et clique « Vérifier ma réponse »
 Alors une copie terminée est enregistrée pour cet exercice
-Et l'exercice affiche « À revoir », « Ta note : 8 / 10 », « Mention : Très bien », « 4 bonnes réponses sur 5. »
-Et la correction de chaque question avec « Bonne réponse : » et « Explication : »
-Et l'adresse de la page n'a pas changé
+Et il arrive sur la page de résultat de sa copie, avec sa note sur 20 et sa correction, sans JavaScript non plus
+Et « Retour à la leçon » le ramène à l'exercice sur la feuille
+Et l'exercice y affiche « À revoir », « Voir ma correction » et « Refaire l'exercice », sans « Ta note » ni correction
 
 # CA-4 Réussi et progression
 Étant donné un élève qui répond juste à toutes les questions d'un exercice et vérifie
@@ -149,7 +150,7 @@ Et un enseignant d'une autre classe ne peut pas envoyer à la 3e 1
 Alors chaque exercice porte « Rendre à l'enseignant » et ni « Vérifier ma réponse » ni note ni correction
 Quand il clique « Rendre à l'enseignant » sur un exercice
 Alors la copie est rattachée à l'assignation, l'enseignant la voit dans son suivi
-Et l'exercice affiche sa note et sa correction, et « Refaire l'exercice »
+Et il arrive sur la page de résultat de sa copie ; « Retour » le ramène à « Ma classe », où l'exercice affiche « Voir ma correction » et « Refaire l'exercice »
 Quand il refait l'exercice
 Alors le bouton est « Vérifier ma réponse », la nouvelle copie n'est pas rattachée au devoir
 Et l'enseignant voit toujours la copie rendue

@@ -1,8 +1,8 @@
 require "test_helper"
 
 # prepare-interros-cahier, Lot C (CA-3, 4, 5, 10, 17 ; UDR feuilles-prepare-interros-et-devoirs §3) : « Vérifier ma réponse » rend une vraie
-# copie depuis la feuille de la leçon et répond en Turbo Stream ; la pause, l'archivage, la panne et un devoir à rendre s'affichent dans
-# l'exercice, sans rien écrire ; sans JS, retour à la leçon, ancre de l'exercice.
+# copie depuis la feuille de la leçon puis ouvre la page de résultat existante (303, avec ou sans JS ; Lot C bis) ; la pause, l'archivage,
+# la panne et un devoir à rendre s'affichent dans l'exercice (Turbo Stream), sans rien écrire.
 class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
   STREAM = { "Accept" => "text/vnd.turbo-stream.html" }.freeze
 
@@ -32,40 +32,66 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
                                                           locals: { exercise:, mode: :student, assignment_public_id: }))
   end
 
-  test "4 justes sur 5 : une copie terminée, l'exercice corrigé remplace le frame, la feuille garde l'adresse (CA-3)" do
+  test "4 justes sur 5 : une copie terminée, puis la page de résultat de la copie (CA-3)" do
     sign_in_as @student
 
     assert_difference -> { Orm::ExerciseSession.where(student: @student, status: "completed").count }, 1 do
       check(right: 4)
     end
 
-    assert_response :success
-    assert_equal "text/vnd.turbo-stream.html", response.media_type
-    frame = "sheet-exercise-#{@exercise.public_id}"
-    assert_select "turbo-stream[action=replace][target=?]", frame
-    assert_select "turbo-stream[target=?] template", frame do
-      assert_select ".ps-status", text: "À revoir"
-      assert_select "##{"sheet-grade-#{@exercise.public_id}"}", text: "Ta note : 8 / 10"
-      assert_select ".ps-result-mention", text: "Mention : Très bien"
-      assert_select ".ps-result-detail", text: "4 bonnes réponses sur 5."
-      assert_select ".ps-correction-item", count: 5
-      assert_select "turbo-frame[data-checked=true][data-ps-focus=true]"
-    end
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
     assert_equal [ "completed", 4, 5 ], [ session.status, session.correct_count, session.question_count ]
+    assert_response :see_other
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet")
   end
 
-  test "toutes justes : « Réussi » et la progression de la feuille est remplacée (CA-4)" do
+  test "la page de résultat garde son contenu (note sur 20) et offre le retour à l'exercice de la feuille, ancre comprise" do
+    sign_in_as @student
+    check(right: 4)
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+
+    get exercise_session_result_path(session.public_id, return_to: "sheet")
+
+    assert_response :success
+    assert_select "#session_grade", text: "16/20"
+    back = "#{course_path(@course.slug)}#sheet-exercise-#{@exercise.public_id}"
+    assert_select "a[href=?]", back, text: "Retour à la leçon"
+  end
+
+  test "return_to ne prend que deux cibles : la feuille, ou Ma classe ; tout autre valeur laisse le retour d'aujourd'hui" do
+    sign_in_as @student
+    check
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+
+    get exercise_session_result_path(session.public_id, return_to: "class")
+    assert_select "a[href=?]", student_classroom_path, text: "Retour à Ma classe"
+
+    get exercise_session_result_path(session.public_id, return_to: "https://exemple.org/")
+    assert_select "a[href*='exemple']", 0
+    assert_select "a[href=?]", "#{course_path(@course.slug)}#notion-#{@notion.slug}", text: "Retour à la leçon"
+
+    get exercise_session_result_path(session.public_id)
+    assert_select "a[href=?]", "#{course_path(@course.slug)}#notion-#{@notion.slug}", text: "Retour à la leçon"
+  end
+
+  test "au retour sur la feuille, l'exercice vérifié montre « Réussi », « Voir ma correction » et « Refaire l'exercice », sans note ni correction (CA-4)" do
     sign_in_as @student
     create_exercise(essential: @notion, questions: 1)
     create_exercise(essential: @notion, questions: 1)
-
     check
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
 
-    assert_select "turbo-stream[action=replace][target=?] template", "sheet-exercise-#{@exercise.public_id}" do
+    get course_path(@course.slug)
+
+    assert_select "#sheet-exercise-#{@exercise.public_id}" do
       assert_select ".ps-status", text: "Réussi"
+      assert_select "a[href=?]", exercise_session_result_path(session.public_id, return_to: "sheet"), text: "Voir ma correction"
+      assert_select "button.ps-btn--redo", text: "Refaire l'exercice"
+      assert_select ".ps-result", 0
+      assert_select "button.ps-btn--primary[hidden]", text: "Vérifier ma réponse"
     end
-    assert_select "turbo-stream[target=?] template", "sheet-progress-notion-#{@notion.slug}", text: /1 \/ 3 exercice réussi/
+    assert_select ".ps-progress", text: "1 / 3 exercice réussi"
+    assert_no_match(/Ta note|Mention :/, response.body)
   end
 
   test "la copie compte comme n'importe quelle copie : note, maîtrise et pause suivent SubmitExerciseCopy" do
@@ -146,8 +172,7 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
 
     check
 
-    assert_response :success
-    assert_select "turbo-stream[action=replace] .ps-result-grade"
+    assert_response :see_other
   end
 
   test "la leçon n'offre pas « Vérifier ma réponse » pour un devoir à rendre (CA-17)" do
@@ -165,12 +190,14 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_select "#sheet-exercise-#{other.public_id} button.ps-btn--primary", text: "Vérifier ma réponse"
   end
 
-  test "sans JavaScript : redirection vers la leçon, ancre de l'exercice" do
+  test "sans JavaScript : la même redirection vers la page de résultat de la copie" do
     sign_in_as @student
 
     check(headers: {})
 
-    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise)
+    assert_response :see_other
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "sheet")
     assert_equal 1, Orm::ExerciseSession.where(student: @student, status: "completed").count
   end
 
@@ -225,12 +252,11 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
 
     check(right: 4, assignment_public_id: assignment.public_id)
 
-    assert_response :success
     session = Orm::ExerciseSession.find_by!(student: @student, exercise: @exercise, status: "completed")
+    assert_redirected_to exercise_session_result_path(session.public_id, return_to: "class")
     assert_equal assignment.id, session.classroom_assignment_id
     scores = Queries::Assessment::AssignmentScores.for(classroom_id: @classroom.id, assignment_ids: [ assignment.id ])
     assert_equal [ [ @student.id, [ 80 ] ] ], scores.fetch(assignment.id).map { [ it.student_id, it.scores ] }
-    assert_select "turbo-stream[action=replace] .ps-result-grade", text: "Ta note : 8 / 10"
   end
 
   test "après le rendu, une copie refaite (« Vérifier ma réponse ») n'est pas rattachée : l'enseignant garde la copie rendue" do
@@ -241,7 +267,7 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
 
     check(right: 5)
 
-    assert_response :success
+    assert_response :see_other
     assert_equal 2, Orm::ExerciseSession.where(student: @student, status: "completed").count
     assert_equal [ assignment.id, nil ], Orm::ExerciseSession.where(student: @student, status: "completed").order(:id).pluck(:classroom_assignment_id)
     scores = Queries::Assessment::AssignmentScores.for(classroom_id: @classroom.id, assignment_ids: [ assignment.id ])
@@ -286,14 +312,14 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_empty html.css("p.ps-error")
   end
 
-  test "après le rendu : le résultat et « Refaire l'exercice » ; le bouton refait est « Vérifier ma réponse », sans devoir" do
-    grade = Entities::Assessment::SheetGrade.new(correct: 4, total: 5)
-    copy = Queries::Catalog::PrepareSheetsQuery::Copy.new(session_public_id: "sess1", passed: false, grade:)
+  test "après le rendu : « Voir ma correction » et « Refaire l'exercice », sans note ; le bouton refait est « Vérifier ma réponse », sans devoir" do
+    copy = Queries::Catalog::PrepareSheetsQuery::Copy.new(session_public_id: "sess1", passed: false)
     html = sheet_html(copy:, assignment_public_id: "AsSiGn00000001")
 
     assert_equal [ "Vérifier ma réponse" ], html.css("button.ps-btn--primary").map { it.text.strip }
     assert_empty html.css("input[name=assignment_public_id]")
-    assert_not_empty html.css(".ps-result")
+    assert_empty html.css(".ps-result")
+    assert_equal [ "Voir ma correction" ], html.css("a.ps-btn--redo").map { it.text.strip }
     assert_equal [ "Refaire l'exercice" ], html.css("button.ps-btn--redo").map { it.text.strip }
   end
 end
