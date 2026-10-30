@@ -1,8 +1,8 @@
 require "test_helper"
 
 # CA-12, CA-13 (description) et CA-14 — UDR-0141 §3.1, §3.2 et UDR-0139 §3.2. La fiche de révision d'une leçon v3 dans la page de la
-# leçon : une page de cahier, une section par notion, quatre blocs dans l'ordre, étapes numérotées, coupe des 150 mots toute présente
-# dans le HTML.
+# leçon : une page de cahier, une section par notion, quatre blocs dans l'ordre, étapes numérotées. Sur la page de la leçon, elle est
+# entière dans une <dialog> plein écran fermée ; vue depuis une classe, coupe des 150 mots toute présente dans le HTML.
 class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
   REST = "[data-catalog--revision-more-target='rest']".freeze
 
@@ -25,6 +25,14 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
+  # La coupe des 150 mots vit sur la page de la leçon vue depuis une classe ; la page de la leçon montre la fiche entière.
+  def open_in_classroom
+    classroom = create_classroom(level: @course.level, series: @course.series)
+    sign_in_as create_teacher(classrooms: [ classroom ])
+    get classroom_course_path(classroom.public_id, @course.slug)
+    assert_response :success
+  end
+
   def t(key, **) = I18n.t("catalog.courses.show.#{key}", **)
   def sheet_t(key, **) = I18n.t("catalog.revision_sheets.sheet.#{key}", **)
 
@@ -34,7 +42,7 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
 
     open_course
 
-    assert_select "section#fiche-de-revision h2", text: t("revision_title")
+    assert_select "section#fiche-de-revision dialog h2", text: t("revision_title")
     assert_operator response.body.index("id=\"fiche-de-revision\""), :<, response.body.index("id=\"prepare-interros\"")
     assert_select "section#fiche-de-revision .sheet-screen[data-sheet-theme='teal'][data-seyes='true'][data-embedded='true'][data-controller='math']"
     assert_select ".sheet-screen article.sheet-page", count: 1
@@ -91,11 +99,27 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
     assert_includes response.body, "&lt;script&gt;"
   end
 
-  test "CA-12: a long sheet is cut at the end of the block that reaches 150 words, all of it is in the HTML" do
+  test "the lesson page shows only the « Fiche de révision » button; the whole sheet waits in a closed full-screen dialog" do
     add_notion(revision_notion("Longue").merge("remember" => words(160)))
     add_notion(revision_notion("Seconde"))
 
     open_course
+
+    assert_select "section#fiche-de-revision [data-controller='catalog--revision-dialog']" do
+      assert_select "button[aria-haspopup=dialog][aria-controls=revision-sheet][data-action='modal#open']", text: t("revision_title")
+      assert_select "dialog#revision-sheet.dialog-full:not([open])" do
+        assert_select "section.sheet-section", count: 2
+        assert_select REST, count: 0
+        assert_select "[data-controller~='catalog--revision-more']", count: 0
+      end
+    end
+  end
+
+  test "CA-12: a long sheet is cut at the end of the block that reaches 150 words, all of it is in the HTML" do
+    add_notion(revision_notion("Longue").merge("remember" => words(160)))
+    add_notion(revision_notion("Seconde"))
+
+    open_in_classroom
 
     assert_select ".sheet-box[data-tone='remember']#{REST}", count: 0
     assert_select "#{REST}.sheet-box[data-tone='method']", count: 1
@@ -113,7 +137,7 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
   test "CA-12: a short sheet is whole, with no « Voir plus »" do
     add_notion(revision_notion("Courte"))
 
-    open_course
+    open_in_classroom
 
     assert_select REST, count: 0
     assert_select "[data-catalog--revision-more-target='button']", count: 0
