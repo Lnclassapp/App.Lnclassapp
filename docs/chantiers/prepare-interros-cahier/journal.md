@@ -13,6 +13,8 @@
 | 2026-10-30 (Lot C) | « À rendre » = nouveau port `PendingAssignmentRepositoryPort` (assignation active de la classe principale, sans copie terminée rattachée), lu une fois par la page (`SheetExercise#due`) et par le use case | Aucun port existant ne dit « rendu » ; la définition est écrite une seule fois (page et refus de CA-17 d'accord) | Non |
 | 2026-10-30 (Lot C) | `StartExerciseSession` apprend `attach_assignment:` (vrai par défaut) ; `CheckExerciseOnSheet` ne rattache que le rendu d'un devoir (`assignment_public_id:`), jamais une copie refaite | memo Q17 : la copie refaite n'est plus rattachée, l'enseignant garde la copie rendue | Non |
 | 2026-10-30 (Lot C) | Le focus sur « Ta note » passe par `prepare-sheet` (le frame de la réponse porte `data-ps-focus`), pas par `autofocus` | `test/views/page_titles_test.rb` (UDR-0054 §3.3) interdit `autofocus` hors `ui_field` | Non |
+| 2026-10-30 (Lot F) | `StudentAssignedSheetsQuery` ne relit pas les exercices : il appelle `PrepareSheetsQuery` une fois par leçon de l'envoi et en reprend `SheetExercise` (`with`), puis efface la copie et la correction de tout exercice pas encore rendu | Une seule lecture des questions, des figures et des copies ; sans cet effacement, une copie d'entraînement faite avant l'envoi montrait sa correction dans les champs (`_question` rend `verdict` et `response` dès qu'ils existent) | Non |
+| 2026-10-30 (Lot F) | `sheets/_sheet.html.erb` (Lot B) modifié a minima : local `hand_ins:` (exercice → assignation, passé à `_exercise` en `assignment_public_id:`) et `reset_label:` facultatif (sans lui, pas de « Recommencer ») | `_sheet` ne passait aucun `assignment_public_id:` à `_exercise` : « Rendre à l'enseignant » était impossible depuis « Ma classe » sans cette ligne | Non |
 
 ## Ce qui a dérapé
 
@@ -63,6 +65,21 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - Un devoir rendu depuis « Ma classe » rend la réponse à partir de `PrepareSheetsQuery` (la leçon) : même partiel, même frame ; la progression
   de la leçon n'existe pas dans « Ma classe » (voir le contrat du Lot F, `plan.md`).
 - `test/guards/system_budget_test.rb` : le chantier a 15 s de budget système ; la vérification tient en 2 tests (6,0 s ; 5 tests : 9,7 s).
+
+### Lot F — devoirs reçus en feuilles
+
+- Un envoi = les assignations actives de la classe principale qui partagent `batch_public_id` ; une assignation sans envoi est son propre envoi
+  (clé = son `public_id`). Ordre des feuilles : la plus récente assignée d'abord ; ordre des exercices : celui de l'envoi (id d'assignation).
+  Une feuille « Prépare devoirs » dès 3 exercices ; titre « DEVOIR DU <date> » (`l(format: :long)`), « Devoir n / N » = rang dans la pile.
+- « Rendu » = une copie terminée rattachée à l'assignation (`exercise_sessions.classroom_assignment_id`). Une fois rendu, la feuille montre la
+  dernière copie terminée de l'élève (celle de la leçon, `PrepareSheetsQuery`), donc une copie d'entraînement refaite et vérifiée remplace la copie
+  rendue à l'affichage après rechargement ; l'enseignant, lui, garde la copie rendue (seule rattachée).
+- La progression « x / n exercices réussis » de la feuille ne se met pas à jour après le rendu : la réponse de `SheetChecksController` remplace
+  `sheet-progress-<feuille de la leçon>`, repère absent de « Ma classe » (contrat du Lot C). Elle se corrige au rechargement.
+- Plus de « Voir plus » sur « Exercices assignés » : toutes les feuilles actives sont rendues (l'enseignant retire un devoir pour l'ôter). Les
+  exercices rendus restent aussi dans « Exercices traités » (carte à droite), comme avant pour un exercice terminé.
+- `StudentClassroomQuery` calcule encore `assigned_exercises` (plus lu par la page) : à retirer avec son test, hors fiche du Lot F.
+- Budget système (ADR-0069 §9) : `assigned_sheets_test.rb` ajoute 6,5 s ; avec les lots B et C la suite du chantier est à 19,2 s pour 15 s.
 
 ### Lot A — import de l'indice et des sujets
 
