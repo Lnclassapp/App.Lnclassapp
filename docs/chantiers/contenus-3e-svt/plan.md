@@ -67,10 +67,10 @@ Contrat d'une planche (`plates/<id>.js`) : `export const TITLE` (nom français),
 - [x] ADR écrit si un port / une table / un contrat apparaît (ADR du programme, accepté)
 - [x] UDR écrite pour **chaque** vue créée ou modifiée (aucune vue ; UDR du programme pour le dessin)
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
-- [ ] Lot 0 mergé et ports gelés avant tout lot parallèle (sans objet : pas de Lot 0)
-- [ ] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
-- [ ] En-tête HITL sur chaque fichier créé dans `app/`
-- [ ] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
+- [x] Lot 0 mergé et ports gelés avant tout lot parallèle (sans objet : pas de Lot 0)
+- [x] Chaque critère d'acceptation a son test, écrit avant le code et rouge d'abord
+- [x] En-tête HITL sur chaque fichier créé dans `app/`
+- [x] Un rôle distinct a exécuté le parcours nominal + un chemin d'erreur
 - [ ] Pureté domaine · rubocop · tests · brakeman : au vert
 - [ ] PR unique vers `Develop`, référençant chantier + ADR + UDR
-- [ ] `journal.md` clos (dérapages, dette, chantiers de suivi)
+- [x] `journal.md` clos (dérapages, dette, chantiers de suivi)

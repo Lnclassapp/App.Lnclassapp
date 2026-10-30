@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré (PR) |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `feature/contenus-3e-svt` |
 | **Programme** | `contenus-3e-autres-matieres` (vague 3) |
