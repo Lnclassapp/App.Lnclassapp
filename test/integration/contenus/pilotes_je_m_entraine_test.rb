@@ -1,0 +1,59 @@
+require "test_helper"
+
+# Chantier je-m-entraine-dans-la-fiche, lot D : chaque notion des 6 leçons pilotes porte son entraînement (`practice`), distinct de son exercice noté.
+# A RESSERRER après fusion du lot A : la règle par case n'étant pas encore portée par QuestionKinds, les erreurs de structure d'une question
+# à plusieurs cases (TOLERATED_RULES) sont tolérées ici ; ensuite, `errors_for` doit être vide sans exception.
+module Contenus
+  class PilotesJeMEntraineTest < ActiveSupport::TestCase
+    ROOT = Rails.root.join("docs/contenus/lecons-traitees/3eme")
+    PILOTS = %w[
+      mathematiques/proprietes-de-thales-dans-un-triangle
+      francais/le-texte-argumentatif
+      physique-chimie/les-lentilles
+      svt/la-circulation-sanguine
+      histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance
+      edhc/le-scrutin-electoral
+    ].freeze
+    SCHEMA = JSONSchemer.schema(Rails.root.join("config/schemas/lnclass.course-tree.v3.json").read)
+    TOLERATED_RULES = %w[blank_marker accepted_answers_count options_count wrong_correct_count duplicate_accepted
+                         duplicate_options numeric_needs_one_value].freeze.freeze
+
+    def document(slug) = JSON.parse(ROOT.join("#{slug}.json").read)
+    def notions(slug) = document(slug).fetch("courses").first.fetch("notions")
+    def multi_blank?(question) = question["answers"].any? { (it["blank"] || 0) > 0 }
+    def squish(text) = text.to_s.gsub(/\s+/, " ").strip
+
+    PILOTS.each do |slug|
+      test "#{slug} : le fichier passe le schéma v3" do
+        assert_empty SCHEMA.validate(document(slug)).map { "#{it['data_pointer']} #{it['error']}" }.first(5)
+      end
+
+      test "#{slug} : chaque notion a un entraînement de 1 à 6 questions, bien formé" do
+        notions(slug).each do |notion|
+          practice = notion["practice"]
+          assert_kind_of Hash, practice, "#{notion['name']} : pas d'entraînement"
+          assert_includes 1..6, practice["questions"].size, notion["name"]
+          errors = Entities::Catalog::NotionPractice.errors_for(practice).reject do |path, code, params|
+            index = path[/\Aquestions\[(\d+)\]/, 1]&.to_i
+            code == "question_structure" && index && multi_blank?(practice["questions"][index]) && TOLERATED_RULES.include?(params[:rule].to_s)
+          end
+          assert_empty errors, notion["name"]
+        end
+      end
+
+      test "#{slug} : au moins une question à plusieurs cases et un indice" do
+        questions = notions(slug).flat_map { it["practice"]["questions"] }
+        assert questions.any? { multi_blank?(it) }, "aucune question à plusieurs cases"
+        assert questions.any? { it["hint"].present? }, "aucun indice"
+      end
+
+      test "#{slug} : aucune question d'entraînement n'est celle de l'exercice noté de la notion" do
+        notions(slug).each do |notion|
+          graded = notion["exercise"]["questions"].map { squish(it["content"]) }
+          practiced = notion["practice"]["questions"].map { squish(it["content"]) }
+          assert_empty graded & practiced, notion["name"]
+        end
+      end
+    end
+  end
+end

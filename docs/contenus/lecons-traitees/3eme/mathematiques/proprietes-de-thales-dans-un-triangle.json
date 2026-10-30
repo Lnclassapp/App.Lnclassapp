@@ -349,6 +349,69 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Dans le triangle $ABC$, $M$ est un point de $[AB]$, $N$ un point de $[AC]$ et $(MN) \\parallel (BC)$. On donne $AB = 9$ cm, $AC = 12$ cm, $BC = 15$ cm et $AM = 6$ cm.",
+            "questions": [
+              {
+                "content": "Quelle égalité est vraie, d'après la propriété de Thalès ?",
+                "question_type": "select",
+                "hint": "Les numérateurs sont dans le petit triangle $AMN$, les dénominateurs dans le grand triangle $ABC$.",
+                "explanation": "Étape 1 — Repérer : $(MN) \\parallel (BC)$ dans le triangle $ABC$. Étape 2 — Écrire : $\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}$. Chaque rapport compare une longueur du petit triangle $AMN$ à la longueur correspondante de $ABC$. Les autres égalités mélangent des côtés qui ne se correspondent pas ($NC$, $MB$ ne sont pas des côtés du petit triangle) ou comparent $MN$ à $AC$ au lieu de $BC$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{AM}{AB} = \\frac{AN}{AC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{AM}{AB} = \\frac{AN}{NC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{AM}{AB} = \\frac{MN}{AC}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{AM}{MB} = \\frac{AN}{AC}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $AN$ et $MN$. $AN$ (cm) = ___   $MN$ (cm) = ___",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "Écris l'égalité des trois rapports, puis garde deux rapports à la fois : un pour $AN$, un pour $MN$.",
+                "explanation": "Étape 1 — Repérer : $(MN) \\parallel (BC)$. Étape 2 — Écrire : $\\frac{AM}{AB} = \\frac{AN}{AC} = \\frac{MN}{BC}$. Étape 3 — Remplacer : $\\frac{6}{9} = \\frac{AN}{12} = \\frac{MN}{15}$. Étape 4 — Calculer : $AN = \\frac{6 \\times 12}{9} = 8$ cm et $MN = \\frac{6 \\times 15}{9} = 10$ cm. Contrôle : $MN$ est plus petit que $BC$, comme le petit triangle est plus petit que le grand.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Dans le triangle $ABC$, $(MN) \\parallel (BC)$, $M \\in [AB]$ et $N \\in [AC]$. On donne $AB = 12$ cm, $AC = 15$ cm et $AN = 5$ cm. Calcule $AM$.",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "L'inconnue $AM$ est dans le premier rapport ; garde le rapport $\\frac{AN}{AC}$ dont tu connais les deux longueurs.",
+                "explanation": "Étape 1 — Repérer : $(MN) \\parallel (BC)$ dans le triangle $ABC$. Étape 2 — Écrire : $\\frac{AM}{AB} = \\frac{AN}{AC}$. Étape 3 — Remplacer : $\\frac{AM}{12} = \\frac{5}{15}$. Étape 4 — Calculer : $AM = \\frac{12 \\times 5}{15} = 4$ cm. Le résultat est plus petit que $AB = 12$ cm : le point $M$ est bien sur le côté $[AB]$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -512,6 +575,83 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Dans le triangle $ABC$, $M$ est un point de $[AB]$ et $N$ un point de $[AC]$. On donne $AM = 3$ cm, $AB = 12$ cm, $AN = 5$ cm et $AC = 20$ cm.",
+            "questions": [
+              {
+                "content": "Calcule les deux rapports. $\\frac{AM}{AB}$ = ___   $\\frac{AN}{AC}$ = ___",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0.001,
+                "hint": "Divise chaque longueur du petit triangle par la longueur correspondante du grand.",
+                "explanation": "Étape 1 — Vérifier : $M$ est entre $A$ et $B$, $N$ est entre $A$ et $C$, dans le même ordre à partir de $A$. Étape 2 — Calculer : $\\frac{AM}{AB} = \\frac{3}{12} = 0{,}25$ et $\\frac{AN}{AC} = \\frac{5}{20} = 0{,}25$. Les deux rapports sont égaux.",
+                "answers": [
+                  {
+                    "content": "0.25",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0.25",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Complète la conclusion : comme les deux rapports sont ___, d'après la ___ de la propriété de Thalès, les droites $(MN)$ et $(BC)$ sont parallèles.",
+                "question_type": "select",
+                "hint": "On part de l'égalité des rapports pour arriver au parallélisme : quel est le nom de cette propriété ?",
+                "explanation": "Les rapports $\\frac{AM}{AB}$ et $\\frac{AN}{AC}$ sont égaux ($0{,}25$ chacun) et les points sont dans le même ordre : on peut conclure. On part de l'égalité des rapports pour prouver le parallélisme, c'est la réciproque de la propriété de Thalès.",
+                "answers": [
+                  {
+                    "content": "égaux",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "différents",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "réciproque",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "contraposée",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "définition",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour démontrer que deux droites sont parallèles.",
+                "question_type": "ordering",
+                "explanation": "On vérifie d'abord l'ordre des points, car la réciproque l'exige. On calcule ensuite chaque rapport séparément, puis on les compare. On conclut seulement à la fin, en citant la réciproque de la propriété de Thalès : une conclusion sans cette phrase n'est pas une démonstration.",
+                "answers": [
+                  {
+                    "content": "Vérifier que les points sont dans le même ordre à partir de $A$"
+                  },
+                  {
+                    "content": "Calculer séparément les rapports $\\frac{AM}{AB}$ et $\\frac{AN}{AC}$"
+                  },
+                  {
+                    "content": "Comparer les deux rapports"
+                  },
+                  {
+                    "content": "Conclure en citant la réciproque de la propriété de Thalès"
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -671,6 +811,75 @@
                   {
                     "content": "Non : car $AB \\neq AC$.",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans le triangle $ABC$, $M$ est un point de $[AB]$ et $N$ un point de $[AC]$. On donne $AM = 3$ cm, $AB = 7$ cm, $AN = 2$ cm et $AC = 5$ cm. On veut savoir si $(MN)$ est parallèle à $(BC)$.",
+            "questions": [
+              {
+                "content": "Calcule les produits en croix. $AM \\times AC$ = ___   $AB \\times AN$ = ___",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "hint": "Le produit en croix de $\\frac{3}{7}$ et $\\frac{2}{5}$ multiplie $3$ par $5$ d'une part, $7$ par $2$ d'autre part.",
+                "explanation": "Étape 1 — Repérer : on teste si $(MN) \\parallel (BC)$. Étape 2 — Calculer les rapports : $\\frac{AM}{AB} = \\frac{3}{7}$ et $\\frac{AN}{AC} = \\frac{2}{5}$. Étape 3 — Comparer avec les produits en croix : $AM \\times AC = 3 \\times 5 = 15$ et $AB \\times AN = 7 \\times 2 = 14$. Les deux produits sont différents.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "14",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Complète la conclusion : comme $15 \\neq 14$, les deux rapports sont ___ et la droite $(MN)$ ___ parallèle à $(BC)$.",
+                "question_type": "select",
+                "hint": "Si les droites étaient parallèles, Thalès donnerait des rapports égaux.",
+                "explanation": "Comme $15 \\neq 14$, les rapports $\\frac{3}{7}$ et $\\frac{2}{5}$ sont différents. Si $(MN)$ était parallèle à $(BC)$, la propriété de Thalès donnerait deux rapports égaux. Ce n'est pas le cas, donc $(MN)$ n'est pas parallèle à $(BC)$.",
+                "answers": [
+                  {
+                    "content": "différents",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "égaux",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "n'est pas",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "est",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Avec $AM = 6$ cm, $AB = 9$ cm, $AN = 4$ cm et $AC = 6$ cm, on peut affirmer que $(MN)$ n'est pas parallèle à $(BC)$.",
+                "question_type": "true_false",
+                "hint": "Compare les produits en croix $6 \\times 6$ et $9 \\times 4$.",
+                "explanation": "Calculons : $\\frac{AM}{AB} = \\frac{6}{9} = \\frac{2}{3}$ et $\\frac{AN}{AC} = \\frac{4}{6} = \\frac{2}{3}$. Les rapports sont égaux, et les points sont dans le même ordre à partir de $A$ : d'après la réciproque de la propriété de Thalès, $(MN) \\parallel (BC)$. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
                   }
                 ]
               }
