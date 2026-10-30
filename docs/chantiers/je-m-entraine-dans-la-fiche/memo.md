@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | décision |
+| **Statut** | planifié |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `feature/je-m-entraine-dans-la-fiche` |
 | **Programme** | — |
@@ -83,7 +83,7 @@ Ce qu'on ne fera **pas** dans ce chantier. Cette section est la plus utile du me
 
 ## Questions encore ouvertes
 
-- Où vit l'exercice d'entraînement : un exercice `assessment` marqué « entraînement » et exclu partout, ou un contenu de la fiche (`catalog`) qui réutilise les règles des types ? À trancher dans l'ADR. La règle de correction reste dans `assessment`, qui porte les types de questions et la note.
-- La règle d'arrondi des points répartis par case (ADR).
-- Qui écrit les exercices d'entraînement des deux leçons pilotes, et qui les relit : l'équipe, comme les leçons v3 (validation enseignante) ?
-- Le texte exact des retours par case (« juste », « à revoir », « à compléter » dans la maquette) et du message global : UDR.
+- *(tranchée par l'ADR)* Où vit l'exercice d'entraînement : dans la fiche de la notion, jugé par le serveur avec les règles des types de questions (ADR-XXXX-entrainement-de-notion-corrige-sans-trace).
+- *(tranchée par l'ADR)* L'arrondi des points répartis par case : aucun arrondi intermédiaire, calcul exact puis note arrondie vers le bas une seule fois (ADR-XXXX-questions-a-plusieurs-cases-et-indice).
+- Les leçons pilotes de SVT, d'Histoire-Géographie et d'EDHC : proposées (« La circulation sanguine », « L'accession de la Côte d'Ivoire à l'indépendance », « Le scrutin électoral »), à confirmer par le porteur.
+- Qui relit les exercices d'entraînement des 6 leçons avant la recette : l'équipe, comme les leçons v3 ?
