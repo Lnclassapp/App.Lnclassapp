@@ -2,11 +2,11 @@
 
 | | |
 |---|---|
-| **Type de cycle** | feature |
+| **Type de cycle** | programme |
 | **Statut** | planifié |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `feature/contenus-3e-autres-matieres` |
-| **Programme** | — |
+| **Programme** | — *(ce dossier est le programme `contenus-3e-autres-matieres`)* |
 
 ---
 
@@ -44,8 +44,8 @@ Les maths de 3ème sont en production au nouveau format. L'année scolaire 2026-
 | Les 10 leçons de HG ont besoin de cartes au-delà de la Côte d'Ivoire : quels fonds livrer ? | « Les leçons doivent suivre la progression nationale. » | Les fonds de carte sont ceux que le programme demande : Côte d'Ivoire, Afrique, monde. Le contenu de chaque leçon (notions, habiletés) suit la progression nationale 2026-2027, pas un choix de rédaction. |
 | Quelle part de questions corrigées automatiquement en Français, HG et EDHC ? | La moitié au moins. | Règle de rédaction contrôlée par le script : sur une leçon, ≥ 50 % des questions sont corrigées automatiquement ; les questions rédigées portent un corrigé modèle et un barème. |
 | Les fiches vides de la progression sont-elles déjà publiées en production ? | Non, rien n'est importé. | Aucune règle d'import nouvelle : nos fichiers créent les leçons, la progression complète l'année ensuite (ordre déjà documenté). |
-| Comment livrer, sachant qu'une figure nouvelle est refusée tant que son code n'est pas en production ? | Matière par matière. | Le Français s'écrit **sans figure nouvelle** et part en premier, importable aussitôt. Les autres matières partent dès que leurs sortes de figures sont en production : le chantier compte plusieurs trains. |
-| « Étude de l'œuvre intégrale n°1 » dépend du roman choisi, et les extraits récents sont protégés. | Méthode, textes originaux. | Toutes les leçons de Français enseignent une méthode sur des textes écrits pour Lnclass ou du domaine public ; aucun extrait d'œuvre protégée. Règle écrite dans le prompt. |
+| Comment livrer, sachant qu'une figure nouvelle est refusée tant que son code n'est pas en production, et qu'un chantier n'a qu'une PR ? | D'abord « matière par matière », puis, revu après le plan : **un chantier par matière**, dans l'ordre FR, HG, SVT, PC, EDHC. | Le chantier devient un **programme** de 5 vagues, une matière chacune, avec sa PR et sa mise en production. Chaque vague code les sortes de figures dont sa matière a besoin et que les vagues précédentes n'ont pas livrées. Le Français, sans code, part le premier. |
+| « Étude de l'œuvre intégrale n°1 » dépend du roman choisi, et les extraits récents sont protégés. | D'abord « méthode, textes originaux », puis, revu : « une œuvre du programme ». Le programme DPFC n'en impose aucune (« une œuvre intégrale donnée ») ; réponse finale : **mélanger les œuvres**. | La leçon enseigne la démarche des 10 séances du programme (introduire, construire le sens, conclure) en s'appuyant sur plusieurs œuvres étudiées au collège en Côte d'Ivoire, par de **courtes citations** référencées (auteur, titre, date). Les textes longs (résumé, lecture méthodique) sont du domaine public ou écrits pour Lnclass. Règle valable pour toutes les leçons de Français. |
 
 ## Cas limites identifiés
 
@@ -53,6 +53,8 @@ Les maths de 3ème sont en production au nouveau format. L'année scolaire 2026-
 - Une carte qui nomme une ville ou une région absente du fond : refusée au contrôle, jamais dessinée « à peu près ».
 - Une leçon d'histoire sensible (génocide des Tutsi au Rwanda, crises sociopolitiques) : vocabulaire et chiffres de la progression nationale et des sources reconnues, sans opinion ; relecture IA dédiée aux faits et aux dates.
 - Une question rédigée sans corrigé modèle ou sans barème : refusée au contrôle.
+- Une citation d'œuvre protégée trop longue ou sans référence : refusée à la relecture ; une citation tient en quelques lignes, jamais une page.
+- Une sorte de figure dont deux matières ont besoin (schéma fléché : HG, SVT, EDHC) : livrée par la première vague qui en a besoin, réutilisée telle quelle ensuite.
 - Une figure qui se lit seulement à la couleur (zones d'une carte) : illisible pour un élève daltonien ou sur un écran de téléphone pâle ; il faut un second repère (motif, légende numérotée).
 - Une figure sur un téléphone de 390 px : étiquettes d'une carte ou d'un schéma qui se chevauchent.
 - Un élève sans JavaScript ou dont le module ne charge pas : la description de la figure suffit à faire l'exercice.

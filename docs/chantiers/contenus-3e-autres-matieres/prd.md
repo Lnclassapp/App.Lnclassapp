@@ -1,10 +1,12 @@
-# PRD — Leçons de 3ème en SVT, Physique-Chimie, Histoire-Géographie, Français et EDHC, et leurs figures
+# PRD cadre — Leçons de 3ème en SVT, Physique-Chimie, Histoire-Géographie, Français et EDHC, et leurs figures
 
+> PRD cadre du programme : ses critères valent pour toutes les vagues ; chaque vague les reprend dans le PRD de son chantier, pour les sortes et la matière qu'elle livre.
+>
 > Les specs sont figées ici. Toute évolution après la phase 3 se fait par modification explicite de ce fichier, pas par improvisation dans le code.
 
 ## 1. Contexte
 
-En 3ème, seules les maths ont des leçons au format v3 ; les 10 premières leçons de la progression nationale en SVT, PC, HG, Français et EDHC sont vides. Le chantier ajoute six sortes de figures (frise, carte, schéma fléché, tracé optique, planche légendée, molécule) et une courbe, puis rédige les 50 leçons et les livre en fichiers prêts à importer, matière par matière, le Français d'abord.
+En 3ème, seules les maths ont des leçons au format v3 ; les 10 premières leçons de la progression nationale en SVT, PC, HG, Français et EDHC sont vides. Le chantier ajoute six sortes de figures (frise, carte, schéma fléché, tracé optique, planche légendée, molécule) et une courbe, puis rédige les 50 leçons et les livre en fichiers prêts à importer. Programme en 5 vagues, une matière par vague, chacune avec sa PR et sa mise en production : Français, Histoire-Géographie, SVT, Physique-Chimie, EDHC.
 
 ## 2. Acteurs et permissions
 
@@ -21,7 +23,7 @@ Aucune règle d'autorisation nouvelle : celles de l'import et de la lecture des 
 
 ### Chemin nominal
 
-1. Le porteur reçoit les 10 fichiers de Français, puis, après la mise en production des figures, les 40 fichiers de SVT, PC, HG et EDHC.
+1. À la fin de chaque vague, le porteur reçoit les 10 fichiers de la matière ; les figures dont ils ont besoin sont déjà en production.
 2. L'équipe importe un fichier depuis **Imports → Fiches de cours complètes** ; la leçon est créée en brouillon.
 3. L'équipe ouvre la fiche de révision : chaque notion a ses quatre blocs, chaque figure se dessine, les curseurs la font varier.
 4. L'équipe publie ; l'élève de 3ème révise la leçon et fait ses exercices.

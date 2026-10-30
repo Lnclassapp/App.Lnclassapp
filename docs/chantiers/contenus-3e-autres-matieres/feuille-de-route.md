@@ -1,0 +1,60 @@
+# Feuille de route — Leçons de 3ème en SVT, Physique-Chimie, Histoire-Géographie, Français et EDHC, et leurs figures
+
+> Programme (`docs/workflows/programme.md`) : il ne produit pas de code. Chaque vague ouvre son chantier `docs/chantiers/<slug>/` (memo, prd, plan), avec la ligne `Programme : contenus-3e-autres-matieres`, sa PR et sa mise en production.
+> Seule la vague qui s'ouvre est détaillée en lots, dans le `plan.md` de son chantier.
+
+## Les vagues
+
+Ordre choisi par le porteur (grill, revu après le premier plan) : **FR, HG, SVT, PC, EDHC**.
+
+```
+Vague 1  contenus-3e-francais            prompt par matière + 10 leçons          sans code   → commit de documentation sur Develop
+  ↓
+Vague 2  contenus-3e-histoire-geographie frise, carte (3 fonds), schéma, courbe  + 10 leçons → PR, train, production
+  ↓
+Vague 3  contenus-3e-svt                 planches (8 de SVT)                     + 10 leçons → PR, train, production
+  ↓
+Vague 4  contenus-3e-physique-chimie     tracé optique, molécule, planches (3)   + 10 leçons → PR, train, production
+  ↓
+Vague 5  contenus-3e-edhc                aucune sorte nouvelle (schéma, carte, graphique déjà là) + 10 leçons → documentation
+```
+
+| Vague | Chantier | Sortes de figures livrées | Leçons | Porte de sortie |
+|---|---|---|---|---|
+| 1 | `contenus-3e-francais` | aucune | 10 de Français | les 10 fichiers passent `valider.rb` sans avertissement, relus, envoyés au porteur ; prompt généralisé aux 5 matières |
+| 2 | `contenus-3e-histoire-geographie` | `timeline`, `map` (`cote_d_ivoire`, `africa`, `world`), `diagram`, `stat_chart` `line` ; avertissement « moins de la moitié corrigée automatiquement » dans `valider.rb` | 10 d'HG | code en production ; les 10 fichiers s'importent en brouillon en production et leurs figures sont `ready` |
+| 3 | `contenus-3e-svt` | `plate` et ses 8 planches de SVT | 10 de SVT | idem ; planches relues par un enseignant de SVT sur captures |
+| 4 | `contenus-3e-physique-chimie` | `optics`, `molecule`, planches `dynamometer`, `electrolyser`, `eudiometer` | 10 de PC | idem ; planches relues par un enseignant de PC |
+| 5 | `contenus-3e-edhc` | aucune | 10 d'EDHC | les 10 fichiers passent `valider.rb`, relus, envoyés au porteur |
+
+**Dépendances réelles.** La vague 5 ne dépend que de la vague 2 (schéma, carte de Côte d'Ivoire) : elle peut partir dès que la vague 2 est en production, sans attendre SVT et PC, si le porteur le décide. Les vagues 3 et 4 sont indépendantes l'une de l'autre (elles se partagent seulement `plate` : la vague 3 crée le module, la vague 4 ajoute ses planches).
+
+**Réutilisation.** Une sorte livrée par une vague est réutilisée telle quelle par les suivantes. Une vague qui a besoin de changer la forme d'une sorte déjà livrée rouvre la décision (amendement de l'ADR), jamais en silence dans son lot.
+
+## Registre des décisions de fondation
+
+| Décision | Options | Recommandation | Bloque | Tranchée par | Statut |
+|---|---|---|---|---|---|
+| Sortes de figures nouvelles, leurs paramètres, leurs listes fermées | voir l'ADR §3 | A : sortes à identifiants fermés | vagues 2, 3, 4 | ADR-XXXX-figures-des-matieres-de-3eme | Proposé → à accepter avant le Lot 0 de la vague 2 |
+| Dessin des sortes nouvelles (catégories teinte + motif, numérotation de repli) | — | — | vagues 2, 3, 4 | UDR-XXXX-figures-des-matieres-de-3eme | Proposé → à accepter avant le Lot 0 de la vague 2 |
+| Textes de Français : œuvres et droits | textes originaux · une œuvre · plusieurs œuvres en courtes citations | plusieurs œuvres, courtes citations référencées, textes longs du domaine public ou originaux (porteur) | vague 1 | memo, grill | Tranché |
+
+## Registre des contradictions
+
+| Sources | Écart | Tranché par |
+|---|---|---|
+| ADR-0116 §4.2 (« liste fermée de 5 sortes ») ↔ besoin des matières | la liste est trop courte | ADR-XXXX-figures-des-matieres-de-3eme, qui amende ADR-0116 §4.2 |
+| CLAUDE.md « une PR par chantier » ↔ « matière par matière » | une seule PR ne livre pas matière par matière | programme : un chantier, donc une PR, par matière |
+
+## Portes du programme
+
+- [ ] Vague 1 livrée : 10 fichiers de Français envoyés au porteur
+- [ ] ADR et UDR des figures acceptés avant le Lot 0 de la vague 2
+- [ ] Vagues 2 à 4 : code en production, 10 fichiers chacune, figures `ready` à 390 px et sur ordinateur (captures envoyées)
+- [ ] Vague 5 livrée
+- [ ] 50 leçons rangées dans `docs/contenus/lecons-traitees/3eme/`, README des contenus à jour
+- [ ] `journal.md` du programme clos
+
+## Challenger empirique — par vague, non négociable
+
+Un rôle **distinct de celui qui a écrit le code** exécute : il importe en brouillon une leçon de la vague, ouvre sa fiche de révision à 390 px et sur ordinateur, vérifie que chaque figure est `ready` et lisible, fait varier un curseur ; puis il importe un fichier dont une figure est incohérente (lieu inconnu, partie inconnue) et constate le refus `figure_invalid`. **Il ne relit pas le code, il le met à l'épreuve.**
