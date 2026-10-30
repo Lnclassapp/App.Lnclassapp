@@ -110,7 +110,7 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
       assert_equal [ "Devoirs communs" ], carousel_titles
     end
     # UDR-0071, amendment of 2026-10-06: no link from her home; the list, open by its address, keeps it « Masquée ».
-    within("#student_home_announcements") { assert_no_link tc("inboxes.carousel.all") }
+    within("#student_home_announcements") { assert_no_link "Toutes les annonces" }
     visit announcements_path
 
     within(card(fiches)) { assert_text tc("card.dismissed") }

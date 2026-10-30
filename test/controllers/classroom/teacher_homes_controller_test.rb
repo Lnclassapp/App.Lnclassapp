@@ -144,7 +144,12 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
         items.each { assert_includes it["class"], "basis-5/6" }
       end
       assert_select "li#add_classroom a[href='#{teacher_classrooms_path}']", text: including(tl("add_classroom_card.action"))
-      assert_select "[data-communication--carousel-target=pager][aria-hidden=true] [data-communication--carousel-target=dot]", 3
+      assert_select "[data-communication--carousel-target=pager]" do
+        assert_select "[aria-hidden=true] [data-communication--carousel-target=dot]", 3
+        assert_select "button[aria-controls=teacher_home_classrooms_track].hidden.lg\\:grid", 2
+        assert_select "button[data-communication--carousel-target=previous][aria-disabled=true]", text: "Classes précédentes"
+        assert_select "button[data-communication--carousel-target=next][aria-disabled=false]", text: "Classes suivantes"
+      end
     end
     assert_select "#teacher-classrooms-menu", 0
   end
@@ -177,6 +182,7 @@ class Classroom::TeacherHomesControllerTest < ActionDispatch::IntegrationTest
     assert_select "#student_home_announcements li article h3", text: "Conseil de classe"
     assert_select "#student_home_announcements", text: including("Pour les élèves"), count: 0
     assert_select "#student_home_announcements form[action*='dismissal']", 0
+    assert_select "#student_home_announcements a[href=?]", announcements_path, 0
   end
 
   test "CA-2: neither an announcement of another school, nor one to the direction, reaches the teacher's home" do

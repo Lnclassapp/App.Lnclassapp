@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::CoursesController
 # Rôle : catalogue filtré, cherché par nom (frame « courses »), par pages chargées au défilement, et page d'un cours ; élève : son niveau, groupé par matière, vue d'une matière, et sur ordinateur ses leçons par matière (la dernière touchée, gardée en session) ; enseignant : une de ses matières à la fois, au niveau du rond de l'accueil
-# ADR  : 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis
+# ADR  : 0026, 0028, 0035, 0076, 0090, 0094, 0103 · UDR : 0006, 0013 (amendement du 2026-10-05), 0054, 0069, 0077, 0085, 0126, XXXX écrans enseignant sans répétition §3.7, XXXX écrans élève sans répétition §3.6 bis, 0144 parcours matière → exercice §3
 module Catalog
   class CoursesController < AuthenticatedController
     include ReadsOwnLevel
@@ -15,7 +15,8 @@ module Catalog
     LESSON_MATERIAL_KEY = :courses_lesson_material
 
     helper_method :list_frame_request?, :filter_options, :student_audience, :teacher_scope, :student_material,
-                  :after_material, :teacher_material, :teacher_level_label, :lesson_materials, :lesson_material, :lessons_page
+                  :after_material, :teacher_material, :teacher_level_label, :lesson_materials, :lesson_material, :lessons_page,
+                  :next_exercise_for
 
     def index
       @filters = params.permit(*FILTERS).to_h.symbolize_keys
@@ -35,7 +36,7 @@ module Catalog
       return if refuse_out_of_level(course_slug: params[:slug])
 
       render_result Policies::Catalog::ReadPublishedPolicy.new.call(actor: current_actor, content: @detail.course),
-                    success: ->(_) { load_status_record; load_lesson_sections; record_reads }
+                    success: ->(_) { load_status_record; load_lesson_sections; load_next_exercise; record_reads }
     end
 
     # CA-12 : l'ancienne adresse de la fiche de cours mène à la fiche de révision de la page de la leçon (301) ; mêmes refus
@@ -55,6 +56,14 @@ module Catalog
     def load_lesson_sections
       @revision = Queries::Catalog::RevisionSheetQuery.new.call(course_slug: params[:slug], actor: current_actor)
       @prepare = Queries::Catalog::PrepareInterrosQuery.new.call(course_slug: params[:slug], actor: current_actor)
+    end
+
+    # UDR parcours matière → exercice §3 : la carte « Prochain exercice » de la leçon, pour l'élève seulement.
+    def load_next_exercise
+      return unless current_actor.student?
+
+      @next_exercise = Queries::Catalog::NextExerciseQuery.new.call(student_id: current_actor.user_id, audience: student_audience,
+                                                                    course_slug: params[:slug])
     end
 
     # ADR-0113 §4.3 (amende ADR-0090 §4.1) : ouvrir la leçon retient, pour l'élève, la lecture de chacune de ses notions publiées.
@@ -159,6 +168,18 @@ module Catalog
       @lessons_page ||= Queries::Catalog::CourseCatalogQuery.new.call(actor: current_actor, material: lesson_material.slug,
                                                                       search: @filters[:q], audience: student_audience,
                                                                       with_essentials: true)
+    end
+
+    # UDR parcours matière → exercice §3 : la carte de la vue d'une matière ; lue par les blocs de l'élève seulement (index :
+    # « if student », là où student_material et lesson_material existent), une fois par matière même si le téléphone et
+    # l'ordinateur visent la même.
+    def next_exercise_for(material_slug)
+      @next_exercises ||= {}
+      return @next_exercises[material_slug] if @next_exercises.key?(material_slug)
+
+      @next_exercises[material_slug] = Queries::Catalog::NextExerciseQuery.new.call(
+        student_id: current_actor.user_id, audience: student_audience, material: material_slug
+      )
     end
 
     def list_frame_request? = turbo_frame_request_id == LIST_FRAME

@@ -9,8 +9,9 @@ module Dtos
     class MessageInputTest < ActiveSupport::TestCase
       NOW = Time.zone.local(2026, 10, 1, 10, 0, 30)
       MEGABYTE = 1024 * 1024
-      MP3 = ("ID3".b + "\x04\x00\x00".b + ("\x00".b * 64)).freeze
-      M4A = ("\x00\x00\x00\x20ftypM4A \x00\x00\x02\x00".b + ("\x00".b * 64)).freeze
+      # Real recordings (test/fixtures/files/audio/README.txt): since the duration is measured, a header alone is not an audio.
+      MP3 = Rails.root.join("test/fixtures/files/audio/trame.mp3").binread.freeze
+      M4A = Rails.root.join("test/fixtures/files/audio/marque-m4a.m4a").binread.freeze
       WAV = "RIFF\x24\x08\x00\x00WAVEfmt \x10\x00\x00\x00".b.freeze
 
       # A file whose content must never be read: its weight alone refuses it.
@@ -97,8 +98,8 @@ module Dtos
       end
 
       test "an MP3 (with or without ID3) and an M4A are accepted" do
-        frame = "\xFF\xFB\x90\x64".b + ("\x00".b * 32)
-        { MP3 => [ "audio/mpeg", "audio.mp3" ], frame => [ "audio/mpeg", "audio.mp3" ], M4A => [ "audio/mp4", "audio.m4a" ] }
+        id3 = "ID3\x04\x00\x00\x00\x00\x00\x00".b + MP3
+        { MP3 => [ "audio/mpeg", "audio.mp3" ], id3 => [ "audio/mpeg", "audio.mp3" ], M4A => [ "audio/mp4", "audio.m4a" ] }
           .each do |bytes, (type, filename)|
           upload = checked(audio: StringIO.new(bytes)).upload(:audio)
 
@@ -124,6 +125,45 @@ module Dtos
                      errors(audio: StringIO.new(recording("enregistrement.amr"))))
       end
 
+      # An MPEG-2 layer III frame (16 kHz, 32 kbit/s): 144 bytes, 36 ms.
+      def mp3_of(frames) = ("\xFF\xF3\x48\x00".b + ("\x00".b * 140)) * frames
+
+      test "LA-4 — real recordings of 9 s, in MP3 and M4A, are accepted" do
+        %w[duree-9s.mp3 duree-9s.m4a].each do |name|
+          assert_empty errors(audio: StringIO.new(recording(name))), name
+        end
+      end
+
+      test "LA-2 — real recordings of 11 s are refused with the duration read, to a tenth, and the bound" do
+        message = "Cet audio dure 11,1 s : 10 secondes au plus. Raccourcissez l'enregistrement."
+        %w[duree-11s.mp3 duree-11s.m4a].each do |name|
+          assert_equal({ audio: [ message ] }, errors(audio: StringIO.new(recording(name))), name)
+        end
+      end
+
+      test "LA-2 — the bound is 10 s plus 0,3 s: 286 frames (10,296 s) pass, 287 (10,332 s) do not; the decimal mark is a comma" do
+        assert_empty errors(audio: StringIO.new(mp3_of(286)))
+        assert_equal({ audio: [ "Cet audio dure 10,3 s : 10 secondes au plus. Raccourcissez l'enregistrement." ] }, errors(audio: StringIO.new(mp3_of(287))))
+        assert_equal({ audio: [ "Cet audio dure 14,2 s : 10 secondes au plus. Raccourcissez l'enregistrement." ] }, errors(audio: StringIO.new(mp3_of(395))))
+      end
+
+      test "LA-3 — a duration that cannot be read is refused: a header alone, unknown bytes between frames, a fragmented M4A" do
+        unreadable = { audio: [ "La durée de cet audio ne se lit pas. Exportez l'enregistrement en MP3 ou M4A." ] }
+        moof = [ 8 ].pack("N") + "moof".b
+
+        assert_equal unreadable, errors(audio: StringIO.new("ID3\x04\x00\x00\x00\x00\x00\x00".b + ("\x00".b * 64)))
+        assert_equal unreadable, errors(audio: StringIO.new(mp3_of(3) + "\x01\x02".b + mp3_of(3)))
+        assert_equal unreadable, errors(audio: StringIO.new(M4A + moof))
+      end
+
+      test "LA-5 — an audio of more than 1 MB is refused by its weight alone: its duration is not read" do
+        assert_equal({ audio: [ "Ce fichier est trop lourd (1 Mo au plus)." ] }, errors(audio: Unread.new(size: MEGABYTE + 1)))
+      end
+
+      test "an audio already refused for its format is not measured" do
+        assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] }, errors(audio: StringIO.new(WAV)))
+      end
+
       test "AN-18 — a PDF renamed « affiche.png » and a WAV are refused: the error names the refused file" do
         assert_equal({ image: [ "Ce fichier n'est pas accepté." ] }, errors(image: photo("document.pdf")))
         assert_equal({ audio: [ "Ce fichier n'est pas accepté. Exportez l'enregistrement en MP3 ou M4A." ] }, errors(audio: StringIO.new(WAV)))
@@ -133,7 +173,7 @@ module Dtos
 
       test "AN-18 — an image of 3 MB and an audio of 12 MB are refused by their weight, before any read" do
         assert_equal({ image: [ "Ce fichier est trop lourd (2 Mo au plus)." ] }, errors(image: Unread.new(size: 3 * MEGABYTE)))
-        assert_equal({ audio: [ "Ce fichier est trop lourd (10 Mo au plus)." ] }, errors(audio: Unread.new(size: 12 * MEGABYTE)))
+        assert_equal({ audio: [ "Ce fichier est trop lourd (1 Mo au plus)." ] }, errors(audio: Unread.new(size: MEGABYTE + 1)))
       end
 
       # A real PNG brought to exactly `size` bytes by a comment chunk (tEXt) before IEND: a metadata the upload drops.
@@ -145,9 +185,9 @@ module Dtos
         bytes.byteslice(0, iend) + chunk + bytes.byteslice(iend..)
       end
 
-      test "the limits are inclusive: 2 MB of PNG and 10 MB of MP3 pass" do
+      test "the limits are inclusive: 2 MB of PNG and 1 MB of MP3 (closed by null bytes) pass" do
         png = png_of(2 * MEGABYTE)
-        mp3 = MP3 + ("\x00".b * ((10 * MEGABYTE) - MP3.bytesize))
+        mp3 = MP3 + ("\x00".b * (MEGABYTE - MP3.bytesize))
 
         assert checked(image: StringIO.new(png), audio: StringIO.new(mp3)).errors.empty?
       end
