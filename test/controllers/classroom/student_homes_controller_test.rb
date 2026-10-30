@@ -81,9 +81,10 @@ class Classroom::StudentHomesControllerTest < ActionDispatch::IntegrationTest
     end
     assert_select "section#student_home_announcements.lg\\:bg-paper.lg\\:border.lg\\:border-line"
     assert_select "section#student_history.lg\\:bg-paper.lg\\:border.lg\\:border-line.lg\\:p-6"
-    # The mist background and the sidebar without profile card are the shell's, for every student page.
+    # The mist background and the sidebar are the shell's, for every student page; carte-profil-eleve (UDR-0132 §3.1, amended):
+    # the profile card opens the sidebar, as the teacher's.
     assert_select "body > div.fixed.hidden.lg\\:block.bg-mist[aria-hidden=true]"
-    assert_select "aside .ui-avatar, aside [role=img], aside p.font-medium", 0
+    assert_select "aside > div.rounded-card p.font-medium", 1
     assert_select "aside > nav[aria-label] a", 3
   end
 
