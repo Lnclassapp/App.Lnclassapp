@@ -17,6 +17,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Aucune leçon n'était livrable au premier jet** : la relecture indépendante a trouvé de 5 à 8 défauts bloquants par leçon. On y trouvait des règles de grammaire fausses (« or » d'opposition, ordre des pronoms à l'impératif, participe présent et adjectif verbal), des faits d'œuvre inventés (résumé erroné de *L'Enfant noir*, fin à Conakry), des fautes de langue dans une leçon de Français, des réponses justes refusées par les `fill_blank` et des corrigés modèles qui recopiaient la thèse contre leur propre critère. Le script ne voit rien de tout cela : la relecture humaine ou IA reste la seule porte sur le fond.
 - **Le relais des rapports de relecture par message coûtait cher** : les rapports sont désormais écrits dans un fichier lu par l'auteur. Le brief du relecteur le demande.
 - **Scratchpad partagé** : un agent a écrasé le fichier temporaire d'un autre ; chaque agent doit nommer ses fichiers de façon unique.
+- **Le challenger a vu des astérisques à l'écran** : les champs d'une question sont du texte brut, mais la consigne permettait `*italique*` partout. Il y en avait 150 dans les questions des 10 leçons (titres d'œuvres, mots cités). Ils sont remplacés par des guillemets, et la consigne est précisée. Le contrôle ne le détecte pas.
 - **Le hook d'arrêt a demandé un commit à chaque tour** : il a été ignoré à dessein, car les leçons en relecture partent en un seul commit de lot.
 
 ## Ce qu'on a appris sur la codebase
@@ -33,6 +34,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | Relecture par un enseignant de Français : faits d'œuvre (L4), décompte des mots (L7), pronoms à l'impératif et participes (L8, L9), barèmes | Aucun enseignant disponible dans le chantier | Liste dans `docs/contenus/README.md`, section 3ème Français |
 | `valider.rb` ne contrôle ni `statement_blocks`, ni les clés inconnues du cours, de la notion, de l'exemple et de l'exercice ; l'import les refuse (constat de revue) | Défaut antérieur à ce chantier, hors du périmètre du Lot A | À ouvrir : parité complète du contrôle avec le schéma v3 |
+| Le contrôle n'avertit pas d'un `*` ou d'un `**` dans une question, et les autres leçons v3 (maths 3ème) peuvent en contenir | Hors périmètre ; à trancher : avertir dans le contrôle, ou rendre l'italique dans les questions | À ouvrir |
 | Liste des œuvres intégrales de l'établissement : la leçon 4 n'en suppose aucune en particulier | Varie selon l'établissement | — |
 
 ## Clôture

@@ -186,7 +186,7 @@ Sur l'ensemble de la leçon (exercices des notions et problèmes), **au moins la
 - Les nombres sont choisis pour que les calculs se fassent à la main, sans calculatrice.
 - Varie les types : une leçon qui n'a que des `single_choice` lasse l'élève. Prends le type qui teste le mieux le savoir-faire (un accord s'écrit en `fill_blank`, une chronologie se remet en ordre en `ordering`, une justification se rédige en `written`).
 - Chaque question est **autonome** : elle répète ses données, sans renvoyer à « la question précédente » ni à « la figure ci-dessus ». Si elle a besoin d'une figure, c'est le champ `figure` de l'**exercice** qui la porte, et l'énoncé de la question dit quand même ce qu'il faut lire (« Dans le triangle ABC rectangle en A… »).
-- Pas de HTML. Du texte, des formules `$…$`, `**gras**` et `*italique*` seulement.
+- Pas de HTML. Une question (`content`, propositions, `explanation`, `criteria`, `starter`) est du **texte brut** : des formules `$…$`, mais ni `**gras**` ni `*italique*`, que l'élève verrait tels quels. Un titre d'œuvre ou un mot cité s'y met entre guillemets « … », et “…” à l'intérieur d'une citation.
 
 ### La correction (`explanation`) : obligatoire, de 20 à 2 000 caractères
 
@@ -247,7 +247,7 @@ Si aucune sorte ne convient, **n'invente pas de sorte** : n'utilise pas de figur
 
 - Formules en KaTeX : `$…$` dans une ligne, `$$…$$` pour une formule seule. Dans le JSON, chaque `\` s'écrit `\\`.
 - `name`, `subtitle` et les titres d'exercices : 150 caractères au plus, **sans formule**.
-- Pas de tableau, pas d'image, pas de HTML : le balisage est `$…$`, `**gras**`, `*italique*`.
+- Pas de tableau, pas d'image, pas de HTML : le balisage est `$…$`, et `**gras**`, `*italique*` dans la fiche de révision et l'énoncé d'un exercice seulement (pas dans les questions).
 - Vocabulaire Lnclass : dire « fiche de révision », « exercice », « proposition » ; jamais « quiz », « habileté », « notion clé » ni « conforme au programme ».
 - Le contenu suit la **progression nationale** (l'intitulé exact) et le programme officiel du niveau, sans notion hors programme. Les acquis des classes précédentes sont permis ; une notion des leçons suivantes ne l'est pas. Si tu n'es pas certain qu'une notion figure au programme, ne l'écris pas.
 - Aucune invention : pas de valeur, de théorème, de propriété, de date, de chiffre, de citation ni d'auteur dont tu ne sois sûr. Les règles de textes et de faits de « Selon la matière » s'appliquent.
