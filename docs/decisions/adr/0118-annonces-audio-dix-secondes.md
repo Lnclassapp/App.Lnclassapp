@@ -50,7 +50,7 @@ La durée d'un fichier se lit dans ses octets, et un fichier téléversé est un
 ### 4.2 Mesure
 
 - **MP3** : on saute les étiquettes ID3v2 (taille *syncsafe*) et le remplissage nul, puis on parcourt **toutes** les trames ; chaque trame donne ses échantillons et sa fréquence. L'en-tête Xing/Info/VBRI n'est jamais cru. La fin admise, et elle seule : la fin du fichier ; des octets nuls jusqu'au bout ; un ID3v1 (exactement 128 octets, commençant par `TAG`, finissant le fichier) ; une étiquette APEv2 dont l'étendue va jusqu'à la fin du fichier (pied `APETAGEX` de 32 octets dont la taille, petit-boutiste aux octets 12..15, inclut le pied mais pas l'en-tête optionnel de 32 octets ; ou en-tête `APETAGEX` + taille), éventuellement suivie d'un ID3v1. Un `TAG` ou un `APETAGEX` suivi d'autre chose (des trames qu'un lecteur rejouerait), tout autre octet entre deux trames, ou aucune trame : illisible.
-- **M4A** : on parcourt les boîtes de premier niveau jusqu'à `moov` ; la durée est le **maximum** de `mvhd`, de chaque `mdhd` et de la somme de chaque table `stts` (échantillons × durée, sur l'échelle de sa piste). La table `stts` doit couvrir la piste : la somme de ses `sample_count` égale celui de `stsz` (ou `stz2`) de la même piste, et le nombre d'entrées annoncé correspond exactement aux octets de la boîte ; sinon, ou sans `stsz`/`stz2`, illisible. Un fichier fragmenté (`moof` ou `mvex`), sans `moov`, avec une échelle de temps nulle ou une boîte de taille incohérente : illisible.
+- **M4A** : on parcourt les boîtes de premier niveau jusqu'à `moov` ; la durée est le **maximum** de `mvhd`, de chaque `mdhd` et de la somme de chaque table `stts` (échantillons × durée, sur l'échelle de sa piste). La table `stts` doit couvrir la piste : la somme de ses `sample_count` égale celui de `stsz` (ou `stz2`) de la même piste, et le nombre d'entrées annoncé correspond exactement aux octets de la boîte ; sinon, ou sans `stsz`/`stz2`, illisible. Chaque `trak` doit avoir son `mdhd` et sa table `mdia/minf/stbl/stts` : une piste qui n'a qu'une durée déclarée est illisible (M9). Un fichier fragmenté (`moof` ou `mvex`), sans `moov`, avec une échelle de temps nulle ou une boîte de taille incohérente : illisible.
 
 ### 4.3 Téléchargement (retiré)
 
@@ -68,6 +68,8 @@ La durée d'un fichier se lit dans ses octets, et un fichier téléversé est un
 | M6 | Table `stts` qui annonce 2³² entrées | Le nombre d'entrées annoncé doit correspondre exactement aux octets de la boîte, sinon illisible | `audio_duration_test` : `stts` gonflée |
 | M7 | Mémoire, processeur | Poids vérifié avant toute lecture (1 Mo) ; parcours linéaire, ≤ 1 Mo / 24 o ≈ 44 000 trames | `message_input_test` : 1 Mo + 1 non lu |
 | M8 | Contournement du contrôle du navigateur | Le serveur mesure toujours | `authored_messages_controller_test` |
+| M9 | Un M4A dont une piste n'a pas de `mdhd`, ou dont `stbl`/`stts` n'est pas exactement sous `mdia/minf/stbl` : seule la durée déclarée se lisait (5 s devant 60 s de `stts`) — constat de la revue du train, 2026-10-30 | Chaque `trak` exige `mdhd` et `mdia/minf/stbl/stts` avec `stsz` ou `stz2`, sinon illisible | `audio_duration_test` : M9 |
+| M10 | `APETAGEX` suivi de 2 à 7 octets après des trames valides : lecture hors de la chaîne, erreur 500 au lieu d'un refus — même revue | Une étiquette APEv2 de moins de 32 octets n'est jamais lue : illisible | `audio_duration_test`, `message_input_test` : `APETAGEX` + 5 octets |
 
 Hors menace : le contenu sonore lui-même (ce que dit l'audio) relève de la modération (retrait, ADR-0078 §4.2).
 
@@ -94,5 +96,5 @@ Hors menace : le contenu sonore lui-même (ce que dit l'audio) relève de la mod
 
 ## 7. Comment vérifier que la décision est respectée
 
-- `bin/rails test test/domain/entities/communication/audio_duration_test.rb test/domain/dtos/communication/message_input_test.rb` : fichiers réels de 1 s, 9 s et 11 s (MP3, M4A), et fichiers forgés des menaces M1 à M6.
+- `bin/rails test test/domain/entities/communication/audio_duration_test.rb test/domain/dtos/communication/message_input_test.rb` : fichiers réels de 1 s, 9 s et 11 s (MP3, M4A), et fichiers forgés des menaces M1 à M6, M9 et M10.
 - `bin/rails test test/views/communication/card_test.rb` : aucune carte avec audio ne porte de lien « Télécharger » ni d'attribut `download`.

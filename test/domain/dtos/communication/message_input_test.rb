@@ -154,6 +154,7 @@ module Dtos
         assert_equal unreadable, errors(audio: StringIO.new("ID3\x04\x00\x00\x00\x00\x00\x00".b + ("\x00".b * 64)))
         assert_equal unreadable, errors(audio: StringIO.new(mp3_of(3) + "\x01\x02".b + mp3_of(3)))
         assert_equal unreadable, errors(audio: StringIO.new(M4A + moof))
+        assert_equal unreadable, errors(audio: StringIO.new(mp3_of(3) + "APETAGEX".b + ("\x01".b * 5)))
       end
 
       test "LA-5 — an audio of more than 1 MB is refused by its weight alone: its duration is not read" do
