@@ -26,6 +26,15 @@ const LENS_HALF = 105
 const SPAN_X = 250 // marge de 70 de chaque côté : A, B (à gauche) et A', B' (à droite) restent lisibles sur un téléphone
 const SPAN_Y = 90
 
+// Étiquettes de points : la taille réelle varie avec --figure-text (1 à 1,4) ; on place pour le pire cas, avec une marge sur la largeur des glyphes.
+const LABEL_SIZE = 13
+const LABEL_HEIGHT = LABEL_SIZE * 1.4
+const GLYPH_WIDTH = LABEL_SIZE * 1.4 * 0.7
+const LABEL_GAP = 4
+const FRAME_MARGIN = 24
+const MAX_SHIFTS = 8
+const AXIS_ROW = 26
+
 // Œil : cristallin et rétine à distance fixe ; la puissance relative vaut 1 pour un œil normal.
 const EYE_CENTER = { x: 380, y: AXIS_Y }
 const EYE_RADIUS = 90
@@ -39,6 +48,27 @@ const MIN_POWER = 0.15
 const EYE_NAME = { none: "normal", myopia: "myope", hyperopia: "hypermétrope" }
 
 let serial = 0
+
+// Place des étiquettes sans chevauchement, de façon déterministe : chacune garde sa place préférée, sinon le premier décalage horizontal (0, +1, −1, +2…
+// largeurs d'étiquette) puis, à défaut, la seconde rangée (`outward` : sens d'éloignement) qui ne touche aucune étiquette déjà posée et reste dans le cadre.
+function placeLabels(specs) {
+  const placed = []
+  const box = (x, y, text) => {
+    const half = (text.length * GLYPH_WIDTH + LABEL_GAP) / 2
+    return { left: x - half, right: x + half, top: y - LABEL_HEIGHT * 0.85, bottom: y + LABEL_HEIGHT * 0.3 }
+  }
+  const apart = (a, b) => a.right <= b.left || b.right <= a.left || a.bottom <= b.top || b.bottom <= a.top
+  const inside = (b) => b.left >= FRAME_MARGIN && b.right <= WIDTH - FRAME_MARGIN && b.top >= 0 && b.bottom <= DRAW_HEIGHT
+
+  return Object.fromEntries(specs.map(({ name, text, x, y, outward }) => {
+    const step = text.length * GLYPH_WIDTH + LABEL_GAP
+    const shifts = [0, ...Array.from({ length: MAX_SHIFTS }, (_, i) => [i + 1, -(i + 1)]).flat()]
+    const candidates = [0, 1].flatMap((row) => shifts.map((shift) => [x + shift * step, y + row * outward * 20]))
+    const [cx, cy] = candidates.find(([px, py]) => inside(box(px, py, text)) && placed.every((other) => apart(box(px, py, text), other))) ?? [x, y]
+    placed.push(box(cx, cy, text))
+    return [name, { x: round(cx), y: round(cy) }]
+  }))
+}
 
 const finite = (value) => typeof value === "number" && Number.isFinite(value)
 
@@ -128,13 +158,25 @@ export function create(canvas, params, { announce = () => {} } = {}) {
 
     el("line", { x1: 0, y1: AXIS_Y, x2: WIDTH, y2: AXIS_Y, stroke: "grid", "stroke-width": 1.5, "stroke-dasharray": DASH, "data-axis": "" }, svg)
     lensShape(svg, CENTER_X, LENS_HALF, dims.lens === "convergent", { "data-lens": dims.lens })
-    label(svg, CENTER_X + 12, AXIS_Y + 18, "O", { anchor: "start", tone: "muted" })
-
     // F est le foyer objet (−f'), F' le foyer image (f').
-    ;[["F", -fPrime], ["F'", fPrime]].forEach(([name, x]) => {
+    const foci = [["F", -fPrime], ["F'", fPrime]]
+    const tipY = (value) => Y(value) + (value < 0 ? 18 : -8)
+    const names = placeLabels([
+      { name: "O", text: "O", x: CENTER_X + 14, y: AXIS_Y + AXIS_ROW, outward: 1 },
+      { name: "A", text: "A", x: X(-distance), y: AXIS_Y + AXIS_ROW, outward: 1 },
+      ...foci.map(([name, x]) => ({ name, text: name, x: X(x), y: AXIS_Y + AXIS_ROW, outward: 1 })),
+      { name: "B", text: "B", x: X(-distance), y: tipY(height), outward: -1 },
+      ...(oa === null ? [] : [
+        { name: "A'", text: "A'", x: X(oa), y: AXIS_Y + AXIS_ROW, outward: 1 },
+        { name: "B'", text: "B'", x: X(oa), y: tipY(imageHeight), outward: imageHeight < 0 ? 1 : -1 }
+      ])
+    ])
+    const put = (parent, name, tone) => label(parent, names[name].x, names[name].y, name, { tone }).setAttribute("data-label", name)
+    put(svg, "O", "muted")
+    foci.forEach(([name, x]) => {
       const group = el("g", { "data-focus": name }, svg)
       el("circle", { cx: X(x), cy: AXIS_Y, r: 3.5, fill: "ink" }, group)
-      label(group, X(x), AXIS_Y + 20, name, { tone: "muted" })
+      put(group, name, "muted")
     })
 
     const rays = el("g", { "data-rays": "", "clip-path": `url(#${id}-clip)` }, svg)
@@ -157,14 +199,14 @@ export function create(canvas, params, { announce = () => {} } = {}) {
 
     const object = el("g", { "data-object": "" }, svg)
     el("line", { x1: X(-distance), y1: AXIS_Y, x2: X(-distance), y2: Y(height), stroke: "primary", "stroke-width": RAY_WIDTH, "marker-end": arrow(defs, id, "primary") }, object)
-    label(object, X(-distance), Y(height) - 8, "B", { tone: "primary" })
-    label(object, X(-distance) - 6, AXIS_Y + 38, "A", { anchor: "end", tone: "primary" })
+    put(object, "B", "primary")
+    put(object, "A", "primary")
 
     if (oa !== null) {
       const group = el("g", { "data-image": "", ...(virtual ? { "data-virtual": "" } : {}) }, svg)
       el("line", { x1: X(oa), y1: AXIS_Y, x2: X(oa), y2: Y(imageHeight), stroke: "success", "stroke-width": RAY_WIDTH, "marker-end": arrow(defs, id, "success"), "data-shaft": "", ...(virtual ? { "stroke-dasharray": DASH } : {}) }, group)
-      label(group, X(oa), Y(imageHeight) + (imageHeight < 0 ? 18 : -8), "B'", { tone: "success" })
-      label(group, X(oa) - 6, AXIS_Y + 38, "A'", { anchor: "end", tone: "success" })
+      put(group, "B'", "success")
+      put(group, "A'", "success")
     }
 
     const texts = oa === null
@@ -210,9 +252,11 @@ export function create(canvas, params, { announce = () => {} } = {}) {
 
     const where = { before: "avant", on: "sur", after: "après" }[place]
     const who = correction === "none" ? `œil ${EYE_NAME[defect]}` : `œil ${EYE_NAME[defect]}, lentille ${correction === "convergent" ? "convergente" : "divergente"}`
-    const text = `L'image se forme ${where} la rétine : ${who}`
-    label(svg, 12, 280, text, { anchor: "start", size: 14 }).setAttribute("data-measure", "convergence")
-    return text
+    // Deux lignes (le constat, puis l'œil et sa correction) : une seule dépasserait le cadre quand le texte est agrandi à 1,4.
+    const verdict = `L'image se forme ${where} la rétine`
+    label(svg, 12, 268, verdict, { anchor: "start", size: 14 }).setAttribute("data-measure", "convergence")
+    label(svg, 12, 294, who, { anchor: "start", size: 14 }).setAttribute("data-measure", "eye")
+    return `${verdict} : ${who}`
   }
 
   draw(params)

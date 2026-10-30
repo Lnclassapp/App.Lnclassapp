@@ -103,6 +103,70 @@ class Catalog::FigureOpticsSystemTest < ApplicationSystemTestCase
     end
   end
 
+  def narrow_host(width = 390)
+    page.execute_script("const h = document.getElementById('host'); h.style.maxWidth = '#{width}px'; h.style.width = '#{width}px'")
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    # Le contrôleur agrandit le texte (jusqu'à 1,4) une fois la figure rétrécie : on mesure après.
+    assert_selector "#host [style*='--figure-text: 1.4']", visible: :all
+  end
+
+  # Les boîtes écran des étiquettes de points (data-label) et des lignes de mesure (data-measure), avec celle du svg.
+  def label_boxes
+    page.evaluate_script(<<~JS)
+      (() => {
+        const rect = (n) => { const b = n.getBoundingClientRect(); return { left: b.left, right: b.right, top: b.top, bottom: b.bottom } }
+        const svg = document.querySelector("#host svg")
+        return {
+          frame: rect(svg),
+          points: [...svg.querySelectorAll("text[data-label]")].map((n) => ({ name: n.dataset.label, ...rect(n) })),
+          measures: [...svg.querySelectorAll("text[data-measure]")].map((n) => ({ name: n.dataset.measure, ...rect(n) }))
+        }
+      })()
+    JS
+  end
+
+  def assert_inside(frame, boxes, what)
+    boxes.each do |b|
+      assert b["left"] >= frame["left"] - 0.5 && b["right"] <= frame["right"] + 0.5 && b["top"] >= frame["top"] - 0.5 && b["bottom"] <= frame["bottom"] + 0.5,
+             "#{what} #{b['name']} sort du cadre : #{b} / #{frame}"
+    end
+  end
+
+  test "at 390 px the point labels of every reference lens figure never overlap and stay in the frame" do
+    cases = {
+      "convergente f=4 d=12 h=2" => lens,
+      "loupe f=5 d=2,5" => lens(focal: 5, distance: 2.5),
+      "divergente f=4 d=12" => lens(kind: "divergent"),
+      "convergente d=2" => lens(distance: 2),
+      "convergente d=4 (infini)" => lens(distance: 4),
+      "convergente d=6" => lens(distance: 6),
+      "convergente d=8" => lens(distance: 8)
+    }
+    cases.each do |name, figure|
+      mount(figure)
+      narrow_host
+      boxes = label_boxes
+      points = boxes["points"]
+      assert_operator points.size, :>=, 5, "#{name} : étiquettes de points"
+      points.combination(2).each do |a, b|
+        apart = a["right"] <= b["left"] || b["right"] <= a["left"] || a["bottom"] <= b["top"] || b["bottom"] <= a["top"]
+        assert apart, "#{name} : #{a['name']} et #{b['name']} se chevauchent (#{a} / #{b})"
+      end
+      assert_inside boxes["frame"], points, "#{name} : étiquette"
+      assert_inside boxes["frame"], boxes["measures"], "#{name} : mesure"
+    end
+  end
+
+  test "at 390 px every measure line of the eye figures fits in the frame" do
+    [ eye("none"), eye("myopia"), eye("myopia", "divergent"), eye("hyperopia"), eye("hyperopia", "convergent") ].each do |figure|
+      mount(figure)
+      narrow_host
+      boxes = label_boxes
+      assert_operator boxes["measures"].size, :>=, 1
+      assert_inside boxes["frame"], boxes["measures"], "mesure"
+    end
+  end
+
   test "the figure keeps its markers and clip paths unique when two figures share the page" do
     mount_html(render_html(lens) + render_html(lens(kind: "divergent")))
     assert_selector "#host [data-figure-state=ready]", count: 2, visible: :all
@@ -116,7 +180,8 @@ class Catalog::FigureOpticsSystemTest < ApplicationSystemTestCase
     mount(eye("myopia"))
     assert_selector "#host svg[data-convergence=before]", visible: :all
     assert_selector "#host svg [data-ray]", count: 3, visible: :all
-    assert_measure "convergence", "L'image se forme avant la rétine : œil myope"
+    assert_measure "convergence", "L'image se forme avant la rétine"
+    assert_measure "eye", "œil myope"
 
     mount(eye("myopia", "divergent"))
     assert_selector "#host svg[data-convergence=on]", visible: :all
@@ -132,7 +197,8 @@ class Catalog::FigureOpticsSystemTest < ApplicationSystemTestCase
 
     mount(eye("hyperopia", "convergent"))
     assert_selector "#host svg[data-convergence=on]", visible: :all
-    assert_measure "convergence", "L'image se forme sur la rétine : œil hypermétrope, lentille convergente"
+    assert_measure "convergence", "L'image se forme sur la rétine"
+    assert_measure "eye", "œil hypermétrope, lentille convergente"
 
     mount(eye("hyperopia", "divergent"))
     assert_selector "#host svg[data-convergence=after]", visible: :all
