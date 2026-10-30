@@ -22,8 +22,9 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
     page.execute_script("window.lnclassNotReloaded = true")
 
     within "#prepare-interros" do
-      assert_selector "h3", text: "Le théorème"
-      assert_selector "#toute-la-lecon h3"
+      assert_selector "#prepare-interros-grid h3", text: "Calculer une longueur"
+      assert_selector "#prepare-interros-grid span[aria-label='Le théorème']", visible: :all
+      assert_selector "#toute-la-lecon", visible: :all
       within "#exercise-#{@exercise.public_id}" do
         assert_text "3ème 1"
         click_button toggle(:assign)
@@ -42,7 +43,7 @@ class Catalog::PrepareInterrosTest < ApplicationSystemTestCase
     sign_in_as create_student_for(@course)
 
     visit course_path(@course.slug)
-    within("#toute-la-lecon") { click_on "Bilan de la leçon" }
+    within("#prepare-interros-grid li:has(#toute-la-lecon)") { click_on "Bilan de la leçon" }
     assert_current_path exercise_path(@wide.public_id)
     assert_selector "#exercise-sheet"
     click_on I18n.t("assessment.exercises.show.start")
