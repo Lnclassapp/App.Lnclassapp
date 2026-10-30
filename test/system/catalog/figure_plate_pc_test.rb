@@ -18,8 +18,9 @@ class Catalog::FigurePlatePcSystemTest < ApplicationSystemTestCase
 
   def html(params) = ApplicationController.render(partial: "catalog/figures/figure", locals: { figure: figure(params) })
 
+  # Une seule visite par test : les montages suivants remplacent l'hôte dans la même page.
   def mount_html(markup)
-    visit new_session_path
+    visit new_session_path unless page.has_css?("body > *", wait: 0)
     page.execute_script(<<~JS, markup)
       document.getElementById("host")?.remove()
       const host = document.createElement("div")
@@ -36,7 +37,7 @@ class Catalog::FigurePlatePcSystemTest < ApplicationSystemTestCase
   def labels = page.evaluate_script("[...document.querySelectorAll('#host svg [data-label]')].map((node) => [node.dataset.label, [...node.querySelectorAll('text')].map((line) => line.textContent.trim()).join(' ')])")
 
   PLATES.each do |plate, parts|
-    test "the #{plate} plate is ready, draws every part and links every label to its part" do
+    test "the #{plate} plate is ready, draws every part and ends the leader line of every label on its part" do
       mount_html(html(params_for(plate)))
 
       assert_selector "#host [data-figure-state=ready]", visible: :all
@@ -46,11 +47,6 @@ class Catalog::FigurePlatePcSystemTest < ApplicationSystemTestCase
       assert_equal NAMES.fetch(plate).sort, labels.map(&:last).sort
       assert_selector "#host svg [data-label] line", count: parts.size, visible: :all
       parts.each { assert_selector "#host svg [data-plate=#{plate}] [data-part=#{it}]", visible: :all }
-    end
-
-    test "the leader line of every #{plate} label ends on its part" do
-      mount_html(html(params_for(plate)))
-      assert_selector "#host [data-figure-state=ready]", visible: :all
 
       ends = page.evaluate_script(<<~JS)
         [...document.querySelectorAll("#host svg [data-label]")].map((label) => {

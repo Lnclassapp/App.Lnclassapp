@@ -11,8 +11,9 @@ class Catalog::FigureOpticsSystemTest < ApplicationSystemTestCase
   def render_html(figure) = ApplicationController.render(partial: "catalog/figures/figure", locals: { figure: })
   def mount(figure) = mount_html(render_html(figure))
 
+  # Une seule visite par test : les montages suivants remplacent l'hôte dans la même page.
   def mount_html(html)
-    visit new_session_path
+    visit new_session_path unless page.has_css?("body > *", wait: 0)
     page.execute_script(<<~JS, html)
       document.getElementById("host")?.remove()
       const host = document.createElement("div")
