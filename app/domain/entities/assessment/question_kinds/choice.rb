@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Choice
 # Rôle : Vrai / Faux, choix unique, 2 ou 3 propositions correctes : cocher le bon ensemble de propositions
-# ADR  : 0039, 0054, 0091 (§4.3 : comportement d'avant, déplacé de Question), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
+# ADR  : 0039, 0054, 0091 (§4.3 : comportement d'avant, déplacé de Question), 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds

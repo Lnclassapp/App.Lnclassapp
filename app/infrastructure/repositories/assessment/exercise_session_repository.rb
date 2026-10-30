@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseSessionRepository
 # Rôle : sessions d'exercice et tentatives immuables ; compteurs tenus en SQL, une seule session ouverte par exercice
-# ADR  : 0033, 0043, 0054, 0091, 0112, 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4 : cases, indice ouvert)
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : cases, indice ouvert)
 module Repositories
   module Assessment
     class ExerciseSessionRepository

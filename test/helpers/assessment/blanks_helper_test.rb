@@ -1,6 +1,6 @@
 require "test_helper"
 
-# UDR-XXXX je-m-entraine-dans-la-fiche §3.3 : le texte d'une question découpé en morceaux de texte et en cases.
+# UDR-0146 je-m-entraine-dans-la-fiche §3.3 : le texte d'une question découpé en morceaux de texte et en cases.
 module Assessment
   class BlanksHelperTest < ActionView::TestCase
     test "un énoncé à deux cases rend le texte et les cases dans l'ordre, numérotées depuis 0" do

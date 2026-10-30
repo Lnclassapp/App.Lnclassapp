@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/revision_sheets/_practice — « Je m'entraîne » : l'exercice d'entraînement d'une notion, entre l'exemple et le piège %>
 <%# Rôle : `notion` (RevisionSheetQuery::Notion, entraînement sans correction), `course_slug`, `rest` (données de la coupe) ; l'énoncé, les cases et les indices seuls sont dans la page : verdicts et corrigé viennent du serveur, dans le frame %>
-<%# ADR  : XXXX-entrainement-de-notion-corrige-sans-trace (§4) · UDR : XXXX-je-m-entraine-dans-la-fiche §3.2 %>
+<%# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4) · UDR : 0146-je-m-entraine-dans-la-fiche §3.2 %>
 <% practice = notion.practice %>
 <%= tag.div class: "sheet-card", data: { tone: "practice", **rest } do %>
   <p class="sheet-card-title" id="<%= notion.anchor %>-practice-title"><%= t("catalog.revision_sheets.practice.title") %></p>

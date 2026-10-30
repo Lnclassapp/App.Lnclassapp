@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::FillBlank
 # Rôle : texte à trous : juste sans tenir compte des majuscules, des accents ni des espaces en trop ; une faute de frappe est fausse ; jugé case par case
-# ADR  : 0091 (§4.2 : une à cinq réponses acceptées, `___` une fois dans l'énoncé ; §4.3 : la normalisation), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4)
+# ADR  : 0091 (§4.2 : une à cinq réponses acceptées, `___` une fois dans l'énoncé ; §4.3 : la normalisation), 0115, 0120-questions-a-plusieurs-cases-et-indice (§4)
 module Entities
   module Assessment
     module QuestionKinds

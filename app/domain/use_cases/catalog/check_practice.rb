@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::CheckPractice
 # Rôle : juge l'exercice d'entraînement d'une notion (« Je m'entraîne » de la fiche) case par case et rend le corrigé ; n'écrit rien
-# ADR  : XXXX-entrainement-de-notion-corrige-sans-trace (§4), XXXX-questions-a-plusieurs-cases-et-indice, 0028, 0035 · UDR : XXXX-je-m-entraine-dans-la-fiche (§3.4)
+# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4), 0120-questions-a-plusieurs-cases-et-indice, 0028, 0035 · UDR : 0146-je-m-entraine-dans-la-fiche (§3.4)
 module UseCases
   module Catalog
     # Aucun port d'écriture : l'absence de trace tient à la construction. Les réponses sont celles de la fiche, par question (clé = position

@@ -1,7 +1,7 @@
 # 🔌 INFRA · Queries::Assessment::SessionPlayQuery
 # Rôle : écran d'une session : la copie entière (copy : toutes les questions sans aucune correction ni id révélateur, leurs images) ;
 #        call, la prochaine question et le verdict de la question tentée, ne sert plus que l'ancien mode (retiré au Lot E)
-# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105, 0112, 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4 : cases, indice) · UDR : 0007, 0022, 0087, 0129, 0138 §3.2
+# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : cases, indice) · UDR : 0007, 0022, 0087, 0129, 0138 §3.2
 module Queries
   module Assessment
     class SessionPlayQuery

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::CloseExerciseSession
 # Rôle : seul point qui termine une session : score recalculé des tentatives, badge monté, lacune ouverte ou résolue
-# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune), 0115 (score en points), XXXX-questions-a-plusieurs-cases-et-indice (§6 : score en fractions de points)
+# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune), 0115 (score en points), 0120-questions-a-plusieurs-cases-et-indice (§6 : score en fractions de points)
 module UseCases
   module Assessment
     class CloseExerciseSession

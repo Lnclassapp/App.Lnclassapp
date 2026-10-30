@@ -174,9 +174,9 @@ Alors chacune de leurs notions a une section « Je m'entraîne » qui se vérifi
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-entrainement-de-notion-corrige-sans-trace — l'exercice d'entraînement vit dans la fiche de la notion et le serveur le corrige sans rien écrire.
-- ADR-XXXX-questions-a-plusieurs-cases-et-indice — plusieurs cases par question, points répartis par case, indice dont l'ouverture est enregistrée sur la copie (amende ADR-0115).
-- UDR-XXXX-je-m-entraine-dans-la-fiche — section « Je m'entraîne », cases, indice, verdicts (amende UDR-0141 §2 et §3.2, UDR-0139 §3.2 pour la coupe).
+- ADR-0119 — l'exercice d'entraînement vit dans la fiche de la notion et le serveur le corrige sans rien écrire.
+- ADR-0120 — plusieurs cases par question, points répartis par case, indice dont l'ouverture est enregistrée sur la copie (amende ADR-0115).
+- UDR-0146 — section « Je m'entraîne », cases, indice, verdicts (amende UDR-0141 §2 et §3.2, UDR-0139 §3.2 pour la coupe).
 
 ## 7. Mesures
 

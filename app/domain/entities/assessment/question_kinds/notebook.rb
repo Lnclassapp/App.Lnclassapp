@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Notebook
 # Rôle : travail sur le cahier : une consigne sans champ, jamais noté ; le corrigé type en texte est obligatoire
-# ADR  : 0115 (§4), XXXX-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
+# ADR  : 0115 (§4), 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds

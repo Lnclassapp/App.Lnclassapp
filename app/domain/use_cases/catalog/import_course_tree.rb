@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des leçons v3 (figures, notions à fiche, exercices, questions), tout en brouillon ; réimport d'un brouillon seulement
-# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, XXXX-entrainement-de-notion-corrige-sans-trace · UDR : 0038
+# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::NotionPractice
 # Rôle : l'exercice d'entraînement facultatif d'une notion (fiche, clé practice) : sa forme, son empreinte et sa copie sans correction
-# ADR  : XXXX-entrainement-de-notion-corrige-sans-trace (§4, §6), XXXX-questions-a-plusieurs-cases-et-indice · UDR : XXXX-je-m-entraine-dans-la-fiche
+# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4, §6), 0120-questions-a-plusieurs-cases-et-indice · UDR : 0146-je-m-entraine-dans-la-fiche
 require "digest"
 require "json"
 

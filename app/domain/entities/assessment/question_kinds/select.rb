@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Select
 # Rôle : choix dans une liste : 2 à 10 propositions, une seule correcte ; le trou ___ est facultatif avec une case ; jugé case par case
-# ADR  : 0115 (§4 : corrigé automatiquement, la réponse est l'identifiant de la proposition choisie), XXXX-questions-a-plusieurs-cases-et-indice (§4)
+# ADR  : 0115 (§4 : corrigé automatiquement, la réponse est l'identifiant de la proposition choisie), 0120-questions-a-plusieurs-cases-et-indice (§4)
 module Entities
   module Assessment
     module QuestionKinds

@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::HintsController
 # Rôle : l'élève ouvre l'indice d'une question de sa copie en cours ; Turbo Stream (replace hint_<id>), sans JavaScript retour à la copie
-# ADR  : XXXX-questions-a-plusieurs-cases-et-indice §4 · UDR : XXXX-je-m-entraine-dans-la-fiche §3.8 · sécurité : question_id lu en entier, jamais d'indice avant l'enregistrement
+# ADR  : 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : 0146-je-m-entraine-dans-la-fiche §3.8 · sécurité : question_id lu en entier, jamais d'indice avant l'enregistrement
 module Assessment
   class HintsController < AuthenticatedController
     allow_roles :student

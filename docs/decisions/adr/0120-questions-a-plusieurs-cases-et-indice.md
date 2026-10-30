@@ -1,4 +1,4 @@
-# ADR-XXXX : Une question peut avoir plusieurs cases, notées case par case, et un indice dont l'ouverture se voit sur la copie
+# ADR-0120 : Une question peut avoir plusieurs cases, notées case par case, et un indice dont l'ouverture se voit sur la copie
 <!-- index
 titre: Questions à plusieurs cases, points répartis par case, indice enregistré
 statut: Accepté
@@ -7,7 +7,7 @@ problematique: Les exercices des maquettes demandent plusieurs valeurs dans une 
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/je-m-entraine-dans-la-fiche` |
 | **Remplace** | — (amende ADR-0115 §4 : le score se calcule sur des fractions de points, et `fill_blank`, `select` et `numeric` acceptent plusieurs `___`) |
@@ -63,7 +63,7 @@ Une copie se rend d'un bloc (`SubmitExerciseCopy`) : `question_attempts` n'exist
 - L'ajout est idempotent : `array_append` seulement si l'identifiant est absent, sous le verrou de la session. Dix ouvertures donnent une seule mention.
 - Le texte de l'indice n'est **jamais** dans la page de la copie avant ce POST : la réponse est un Turbo Stream qui le place.
 - La note ne change pas. La page de résultat de l'élève, la copie lue par l'enseignant et le suivi montrent « Indice ouvert » sur la question.
-- Dans la fiche (ADR-XXXX-entrainement-de-notion-corrige-sans-trace), l'indice est dans la page et rien n'est enregistré.
+- Dans la fiche (ADR-0119), l'indice est dans la page et rien n'est enregistré.
 
 ## 5. Conséquences
 

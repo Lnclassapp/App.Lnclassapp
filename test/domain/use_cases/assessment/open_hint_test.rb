@@ -2,7 +2,7 @@ require "test_helper"
 
 module UseCases
   module Assessment
-    # CA-14, CA-15 (ADR-XXXX questions à plusieurs cases §4) : l'ouverture d'un indice est enregistrée pour l'auteur d'une copie en cours,
+    # CA-14, CA-15 (ADR-0120 questions à plusieurs cases §4) : l'ouverture d'un indice est enregistrée pour l'auteur d'une copie en cours,
     # une seule fois ; question sans indice, question d'un autre exercice, copie rendue ou d'autrui : :not_found, rien d'écrit.
     class OpenHintTest < ActiveSupport::TestCase
       STUDENT = Entities::Identity::Actor.new(user_id: 7, role: :student)

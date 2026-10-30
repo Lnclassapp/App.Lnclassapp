@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::NotionSheet
 # Rôle : la fiche au gabarit fixe d'une notion (À retenir · La méthode · Un exemple corrigé · Le piège à éviter) et ses règles de forme
-# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §6), XXXX-entrainement-de-notion-corrige-sans-trace (§4 : practice) · UDR : 0141-fiche-de-revision-en-quatre-blocs
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §6), 0119-entrainement-de-notion-corrige-sans-trace (§4 : practice) · UDR : 0141-fiche-de-revision-en-quatre-blocs
 module Entities
   module Catalog
     # practice : l'entraînement facultatif de la notion (NotionPractice) | nil. Sa validation est celle de NotionPractice.errors_for.

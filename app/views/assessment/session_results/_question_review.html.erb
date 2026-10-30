@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/session_results/_question_review — correction d'une question dans le résultat %>
 <%# Rôle : « Question n » et son verdict (Juste, Faux, Sans réponse : texte et icône, jamais la couleur seule ; « À comparer au corrigé » pour une réponse rédigée ou le cahier), l'énoncé, « Ta réponse » et la bonne réponse par type (kinds/_<type>_review), l'explication %>
-<%# ADR  : 0028, 0054, 0091 §4.4, 0112, 0115 · UDR : 0007, 0022, 0023, 0057, 0087 §3.6, 0138 §3.4, §3.8, 0140, XXXX-je-m-entraine-dans-la-fiche §3.9 · pour l'élève propriétaire, masquée à partir de la 4e (« Voir plus ») %>
+<%# ADR  : 0028, 0054, 0091 §4.4, 0112, 0115 · UDR : 0007, 0022, 0023, 0057, 0087 §3.6, 0138 §3.4, §3.8, 0140, 0146-je-m-entraine-dans-la-fiche §3.9 · pour l'élève propriétaire, masquée à partir de la 4e (« Voir plus ») %>
 <%# locals: (question:, reveal:, owner:, index:) -%>
 <% verdict = question.unanswered || question.correct.nil? ? :unanswered : (question.correct ? :correct : :wrong) %>
 <% badge = { correct: [ :success, "check-circle" ], wrong: [ :warning, "x-circle" ], unanswered: [ :neutral, "minus-circle" ] }.fetch(verdict) %>
@@ -10,7 +10,7 @@
   <div class="flex items-center justify-between gap-3">
     <p class="flex items-center gap-2 font-medium text-ink">
       <%= t(".number", number: question.number) %>
-      <%# UDR-XXXX §3.9 : l'indice ouvert se voit sur la copie, pour l'élève, l'enseignant et l'équipe ; il ne change pas la note. %>
+      <%# UDR-0146 §3.9 : l'indice ouvert se voit sur la copie, pour l'élève, l'enseignant et l'équipe ; il ne change pas la note. %>
       <% if question.hinted? %>
         <%= ui_badge t(".hint_opened"), tone: :neutral, icon: "light-bulb", size: :sm %>
       <% end %>

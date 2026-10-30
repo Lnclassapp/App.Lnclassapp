@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionAttempt
 # Rôle : tentative immuable d'une question dans une session ; response_text pour les trous et le nombre
-# ADR  : 0054, 0091, XXXX-questions-a-plusieurs-cases-et-indice (§4 : blank_responses, blank_results)
+# ADR  : 0054, 0091, 0120-questions-a-plusieurs-cases-et-indice (§4 : blank_responses, blank_results)
 module Entities
   module Assessment
     # blank_responses : la réponse de chaque case ([String]) ; blank_results : son verdict ([Boolean]) ; vides pour une question à une case.

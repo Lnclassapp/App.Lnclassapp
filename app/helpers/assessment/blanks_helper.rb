@@ -1,6 +1,6 @@
 # 🌐 UI · Assessment::BlanksHelper — l'énoncé d'une question découpé en texte et en cases
 # Rôle : un `___` est une case, numérotée de 0 dans l'ordre de l'énoncé ; la fiche (styles du cahier) et la copie (styles de l'application) s'en servent
-# ADR  : XXXX-questions-a-plusieurs-cases-et-indice (§4) · UDR : XXXX-je-m-entraine-dans-la-fiche (§3.3)
+# ADR  : 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0146-je-m-entraine-dans-la-fiche (§3.3)
 module Assessment
   module BlanksHelper
     MARKER = "___".freeze

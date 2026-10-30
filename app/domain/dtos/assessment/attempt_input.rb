@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Assessment::AttemptInput
 # Rôle : réponse d'un élève à une question : propositions cochées, texte saisi, indices d'affichage (ordre, relier) ou une saisie par case
-# ADR  : 0026, 0054, 0091 (§4.4 : jamais d'identifiant pour l'ordre et relier), 0115 (réponse rédigée, menace W2 à W4), XXXX-questions-a-plusieurs-cases-et-indice (§4 : blanks) · UDR : 0007, 0022, 0087
+# ADR  : 0026, 0054, 0091 (§4.4 : jamais d'identifiant pour l'ordre et relier), 0115 (réponse rédigée, menace W2 à W4), 0120-questions-a-plusieurs-cases-et-indice (§4 : blanks) · UDR : 0007, 0022, 0087
 module Dtos
   module Assessment
     class AttemptInput

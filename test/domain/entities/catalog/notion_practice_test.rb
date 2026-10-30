@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX entraînement de notion corrigé sans trace (§4, §6) : la forme de `practice`, son empreinte, sa copie sans correction.
+# ADR-0119 entraînement de notion corrigé sans trace (§4, §6) : la forme de `practice`, son empreinte, sa copie sans correction.
 module Entities
   module Catalog
     class NotionPracticeTest < ActiveSupport::TestCase

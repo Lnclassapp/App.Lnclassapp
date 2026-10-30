@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-14 (ADR-XXXX questions à plusieurs cases §4, UDR-XXXX §3.8, §3.9) : l'élève ouvre l'indice de la question 2, le lit, rend sa copie ;
+# CA-14 (ADR-0120 questions à plusieurs cases §4, UDR-0146 §3.8, §3.9) : l'élève ouvre l'indice de la question 2, le lit, rend sa copie ;
 # la note est celle d'une copie sans indice, et « Indice ouvert » se lit sur la question 2 seulement, pour l'élève comme pour l'enseignant.
 class Assessment::HintInCopyTest < ActionDispatch::IntegrationTest
   HINT = "Pense au rapport de proportionnalité."

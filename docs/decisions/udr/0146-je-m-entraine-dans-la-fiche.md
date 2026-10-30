@@ -1,17 +1,17 @@
-# UDR-XXXX : « Je m'entraîne » dans la fiche de révision, questions à plusieurs cases et indice
+# UDR-0146 : « Je m'entraîne » dans la fiche de révision, questions à plusieurs cases et indice
 <!-- index
 titre: Je m'entraîne dans la fiche, cases multiples et indice
 statut: Accepté
-adr-lie: XXXX-entrainement-de-notion-corrige-sans-trace, XXXX-questions-a-plusieurs-cases-et-indice
+adr-lie: 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice
 problematique: L'élève lit la méthode et l'exemple corrigé d'une notion mais ne peut pas s'y essayer sur place, et les exercices ne savent ni demander plusieurs valeurs dans une phrase ni donner un indice.
 -->
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/je-m-entraine-dans-la-fiche` |
-| **ADR lié** | ADR-XXXX-entrainement-de-notion-corrige-sans-trace, ADR-XXXX-questions-a-plusieurs-cases-et-indice |
+| **ADR lié** | ADR-0119, ADR-0120 |
 | **Remplacé par** | — |
 
 Amende l'UDR-0141 : le §2 (« Retirés du cahier : … exercices et « Je m'entraîne » dans la page ») ne vaut plus pour « Je m'entraîne », et le §3.2 gagne un 5e bloc entre l'exemple et le piège. Amende aussi l'UDR-0141 §3.1 / UDR-0139 §3.2 (coupe des 150 mots : le nouveau bloc compte zéro mot), l'UDR-0087 §3.4 et l'UDR-0140 §3 (saisie d'un texte à trous, d'une liste ou d'un chiffré à plusieurs cases), et l'UDR-0145 (carte d'une question dans la copie : bouton « Indice »). Le reste de l'UDR-0141 tient : habillage cahier, gabarit, figures, corrigé de l'équipe.
@@ -30,7 +30,7 @@ Les maquettes demandent aussi deux valeurs dans une même phrase (« AN (cm) = �
 - **Le bloc est une carte du cahier (`.sheet-card`, ton `practice`)**, pas un encadré : c'est un travail à faire, comme l'exemple est un travail fait. Les cases s'écrivent **dans la phrase**, à l'endroit des `___`, comme sur la maquette et comme sur la copie papier.
 - **« Vérifier » renvoie le verdict dans un Turbo Frame propre à la notion** : la page ne se recharge pas, la position de lecture est gardée, et sans JavaScript le formulaire ouvre une page de résultat. Aucun contrôleur Stimulus nouveau : le plafond de 61 Ko (ADR-0114) ne bouge pas.
 - **« Correction » n'existe qu'après un premier « Vérifier »** (grill 13). Avant, le bouton n'est pas dans la page, ni masqué ni désactivé : le corrigé n'est pas envoyé.
-- **« Indice » est un `<details>`** dans la fiche, sans requête. Dans une copie notée, c'est un bouton qui demande l'indice au serveur, lequel l'enregistre (ADR-XXXX-questions-a-plusieurs-cases-et-indice).
+- **« Indice » est un `<details>`** dans la fiche, sans requête. Dans une copie notée, c'est un bouton qui demande l'indice au serveur, lequel l'enregistre (ADR-0120).
 - **Verdict par case, en mots** : « Juste », « À revoir », « À compléter ». Jamais par la couleur seule.
 
 ## 3. Règles d'implémentation

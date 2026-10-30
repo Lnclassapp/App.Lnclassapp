@@ -1,4 +1,4 @@
-# ADR-XXXX questions à plusieurs cases et indice (je-m-entraine-dans-la-fiche) §4 et §6 : la case d'une réponse, les réponses par
+# ADR-0120 questions à plusieurs cases et indice (je-m-entraine-dans-la-fiche) §4 et §6 : la case d'une réponse, les réponses par
 # case d'une tentative, l'indice d'une question et les indices ouverts d'une copie. Tout est facultatif ou vaut 0 / vide :
 # aucun exercice existant ne change de note ni de forme.
 class AddBlanksAndHints < ActiveRecord::Migration[8.1]

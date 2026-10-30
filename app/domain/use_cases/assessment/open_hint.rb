@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::OpenHint
 # Rôle : l'élève ouvre l'indice d'une question de sa copie en cours ; l'ouverture est enregistrée (une fois), puis le texte est rendu
-# ADR  : XXXX-questions-a-plusieurs-cases-et-indice (§4) · UDR : XXXX-je-m-entraine-dans-la-fiche (§3.8)
+# ADR  : 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0146-je-m-entraine-dans-la-fiche (§3.8)
 module UseCases
   module Assessment
     class OpenHint

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, XXXX-entrainement-de-notion-corrige-sans-trace, XXXX-questions-a-plusieurs-cases-et-indice
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -48,7 +48,7 @@ module Ports
         def initialize(statement_blocks: nil, figure_key: nil, **) = super
       end
       # Une notion v3 (ADR-0116 §4.1, §4.3) : sheet est la fiche au gabarit fixe, { remember:, method: [], example: { statement:, steps: [] },
-      # pitfall:, figure_key:, practice: (facultatif : l'entraînement de la notion, ADR-XXXX) } (clés texte, jsonb tel quel) ; exercises : l'exercice
+      # pitfall:, figure_key:, practice: (facultatif : l'entraînement de la notion, ADR-0119) } (clés texte, jsonb tel quel) ; exercises : l'exercice
       # de la notion. Pas de content (retiré).
       NotionNode = Data.define(:slug, :course_id, :name, :position, :sheet, :exercises)
       # existing_id : l'id de la notion déjà en base d'une leçon réimportée (ADR-0113 §4.4) ; nil pour une notion à créer.

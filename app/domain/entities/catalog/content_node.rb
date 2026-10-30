@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ContentNode
 # Rôle : validateurs des cours, fiches et exercices importés, partagés par les trois imports de contenu
-# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, 0116, XXXX-entrainement-de-notion-corrige-sans-trace, XXXX-questions-a-plusieurs-cases-et-indice
+# ADR  : 0035, 0039, 0091 (§4.5 : tolerance et match), 0105, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice
 module Entities
   module Catalog
     module ContentNode

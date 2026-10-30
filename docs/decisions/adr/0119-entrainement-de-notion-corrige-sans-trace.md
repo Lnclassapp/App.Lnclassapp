@@ -1,4 +1,4 @@
-# ADR-XXXX : L'exercice d'entraînement d'une notion vit dans sa fiche et le serveur le corrige sans rien écrire
+# ADR-0119 : L'exercice d'entraînement d'une notion vit dans sa fiche et le serveur le corrige sans rien écrire
 <!-- index
 titre: Entraînement de notion dans la fiche, corrigé par le serveur sans trace
 statut: Accepté
@@ -7,7 +7,7 @@ problematique: L'élève doit s'exercer dans la fiche de révision, avec une cor
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/je-m-entraine-dans-la-fiche` |
 | **Remplace** | — (amende ADR-0116 §4.1 : une notion porte, en plus de son exercice noté, un entraînement facultatif dans sa fiche) |
@@ -63,7 +63,7 @@ Forme (schéma `lnclass.course-tree.v3.json`, clé `notions[].practice`) :
 }
 ```
 
-- 1 à 6 questions, de tous les types connus. Chaque question est validée par `Entities::Assessment::Question.structure_errors_for`, la règle des exercices notés, cases et indice compris (ADR-XXXX-questions-a-plusieurs-cases-et-indice).
+- 1 à 6 questions, de tous les types connus. Chaque question est validée par `Entities::Assessment::Question.structure_errors_for`, la règle des exercices notés, cases et indice compris (ADR-0120).
 - Sans `points`, `image` ni `criteria` : l'entraînement n'est pas noté et la fiche ne porte pas de fichier téléversé. L'import refuse ces clés dans `practice`.
 - Une `explanation` obligatoire par question (le corrigé), comme pour un exercice noté.
 - La règle « une notion = un exercice noté » de l'ADR-0116 §4.1 ne change pas.

@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Spécification : [`prd.md`](prd.md) · ADR-XXXX-entrainement-de-notion-corrige-sans-trace · ADR-XXXX-questions-a-plusieurs-cases-et-indice · UDR-XXXX-je-m-entraine-dans-la-fiche.
+> Spécification : [`prd.md`](prd.md) · ADR-0119 · ADR-0120 · UDR-0146.
 
 ## Graphe
 
@@ -157,7 +157,10 @@ Le brief de chaque agent contient le chemin absolu de son worktree, son lot reco
 | `app/views/assessment/exercise_sessions/show.html.erb`, `session_results/_question_review.html.erb` | Lot B (A ne touche que les partials `kinds/`) |
 | `app/domain/entities/assessment/question_kinds/*` | Lot A |
 | `app/views/catalog/revision_sheets/_sheet.html.erb`, `app/assets/stylesheets/course_sheet.css` | Lot C |
-| `docs/contenus/lecons-traitees/3eme/**` | Lot D |
+| `docs/contenus/lecons-traitees/3eme/**` | Lot D (puis les branches de contenu des matières, une par matière) |
+| `config/locales/teams/imports.fr.yml` | Lot A (constaté à l'exécution, absent du gel) |
+
+**Écarts constatés à l'exécution (2026-10-30)** : B a dû étendre `session_play_query.rb` (texte de l'indice ouvert, `nil` pour un indice fermé), autorisé après la fusion de A ; C a ajouté deux libellés à `revision_sheets.fr.yml` (Lot 0). Un **Lot R** (corrections des revues sécurité, échecs silencieux et tests) a suivi la fusion des quatre lots, sur la branche de chantier. L'UDR-0146 §3.8 est amendée : le formulaire de l'indice suit celui de la copie (formulaires imbriqués interdits), son bouton le désigne par `form=`.
 
 Contrôle mécanique (`awk … | uniq -d`) : à relancer avant chaque vague.
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Question
 # Rôle : une question d'exercice ; sa structure, la forme d'une réponse et la correction sont déléguées à son type
-# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/), 0105, 0115, XXXX-questions-a-plusieurs-cases-et-indice
+# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/), 0105, 0115, 0120-questions-a-plusieurs-cases-et-indice
 module Entities
   module Assessment
     # answers : [Answer], dans l'ordre des positions ; numeric_tolerance : marge d'un type numeric (BigDecimal | nil) ;

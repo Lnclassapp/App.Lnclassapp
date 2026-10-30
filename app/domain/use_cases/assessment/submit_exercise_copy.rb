@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::SubmitExerciseCopy
 # Rôle : l'élève rend la copie entière d'un exercice : toutes les réponses lues, corrigées, notées et la session close, en un envoi
-# ADR  : 0026, 0054, 0091 (§4.4 : indices d'affichage relus par AnswerShuffle), 0112, 0115 (réponse rédigée, cahier), XXXX-questions-a-plusieurs-cases-et-indice (§4 : une réponse et un verdict par case) · UDR : 0138
+# ADR  : 0026, 0054, 0091 (§4.4 : indices d'affichage relus par AnswerShuffle), 0112, 0115 (réponse rédigée, cahier), 0120-questions-a-plusieurs-cases-et-indice (§4 : une réponse et un verdict par case) · UDR : 0138
 module UseCases
   module Assessment
     class SubmitExerciseCopy

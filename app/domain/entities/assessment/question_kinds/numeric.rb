@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Numeric
 # Rôle : réponse en nombre : juste si l'écart à la valeur attendue ne dépasse pas la marge (0 sans marge) ; illisible, mal formée ; jugé case par case
-# ADR  : 0091 (§4.2 : une seule valeur attendue par case, numeric_tolerance ; §4.3), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4)
+# ADR  : 0091 (§4.2 : une seule valeur attendue par case, numeric_tolerance ; §4.3), 0115, 0120-questions-a-plusieurs-cases-et-indice (§4)
 require "bigdecimal"
 
 module Entities

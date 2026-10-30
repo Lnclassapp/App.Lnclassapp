@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::EssentialRepositoryPort
 # Rôle : contrat de persistance des fiches essentielles d'un cours
-# ADR  : 0029, 0035, 0039, XXXX-entrainement-de-notion-corrige-sans-trace
+# ADR  : 0029, 0035, 0039, 0119-entrainement-de-notion-corrige-sans-trace
 module Ports
   module Catalog
     module EssentialRepositoryPort

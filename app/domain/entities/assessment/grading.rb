@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Grading
 # Rôle : seuils pédagogiques nommés, score, note sur 20, maîtrise et palier de badge, tous lus sur la note affichée
-# ADR  : 0033, 0043, 0106, 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4, §6 : score en fractions de points)
+# ADR  : 0033, 0043, 0106, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4, §6 : score en fractions de points)
 module Entities
   module Assessment
     module Grading

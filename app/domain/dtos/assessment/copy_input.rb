@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Assessment::CopyInput
 # Rôle : la copie rendue par l'élève : une réponse par question (AttemptInput) ou nil quand elle est laissée vide
-# ADR  : 0054, 0091 (§4.4 : jamais d'identifiant pour l'ordre et relier), 0112, XXXX-questions-a-plusieurs-cases-et-indice (§4 : blanks) · UDR : 0138
+# ADR  : 0054, 0091 (§4.4 : jamais d'identifiant pour l'ordre et relier), 0112, 0120-questions-a-plusieurs-cases-et-indice (§4 : blanks) · UDR : 0138
 module Dtos
   module Assessment
     class CopyInput

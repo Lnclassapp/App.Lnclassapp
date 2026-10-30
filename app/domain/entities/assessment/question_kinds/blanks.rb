@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Blanks
 # Rôle : les cases d'une question (un `___` chacune, de 0 à 5) : réponses rangées par case, nombre de cases, refus de `blank` > 0
-# ADR  : XXXX-questions-a-plusieurs-cases-et-indice (§4 : cases numérotées par l'ordre des `___`, au plus 6)
+# ADR  : 0120-questions-a-plusieurs-cases-et-indice (§4 : cases numérotées par l'ordre des `___`, au plus 6)
 module Entities
   module Assessment
     module QuestionKinds

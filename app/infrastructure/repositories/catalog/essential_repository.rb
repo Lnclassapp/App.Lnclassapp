@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::EssentialRepository
 # Rôle : traduit Orm::Essential ↔ Entities::Catalog::Essential, avec le statut du cours ; transitions et clés de l'import
-# ADR  : 0029, 0035, 0039, 0116, XXXX-entrainement-de-notion-corrige-sans-trace
+# ADR  : 0029, 0035, 0039, 0116, 0119-entrainement-de-notion-corrige-sans-trace
 module Repositories
   module Catalog
     class EssentialRepository

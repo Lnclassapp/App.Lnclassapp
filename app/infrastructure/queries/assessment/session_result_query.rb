@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
 # Rôle : résultat d'une session terminée (score, note, appréciation, points, maîtrise, badge, progrès, effet sur la fiche) et sa correction ; sans reveal, seuls les choix
-# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
+# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery

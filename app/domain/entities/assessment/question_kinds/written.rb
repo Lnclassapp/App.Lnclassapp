@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Written
 # Rôle : réponse rédigée : un texte de 2 000 caractères au plus, vide admis, jamais noté ; le corrigé type est obligatoire
-# ADR  : 0115 (§4 ; menace : docs/chantiers/correction-comme-en-classe/menace.md, W1 à W5), XXXX-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
+# ADR  : 0115 (§4 ; menace : docs/chantiers/correction-comme-en-classe/menace.md, W1 à W5), 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds

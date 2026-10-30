@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, XXXX-entrainement-de-notion-corrige-sans-trace, XXXX-questions-a-plusieurs-cases-et-indice
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice
 module Repositories
   module Catalog
     class ContentTreeWriter

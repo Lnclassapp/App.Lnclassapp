@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/kinds/_select — choix dans une liste : un menu natif à la place du trou, ou sous la question %>
 <%# Rôle : la phrase coupée sur `___` comme _fill_blank ; propositions dans le mélange de la session, valeur = indice d'affichage (jamais l'id) ; aucune bonne réponse dans la page %>
-<%# ADR  : 0091 §4.4, 0115, XXXX-questions-a-plusieurs-cases-et-indice §4 · UDR : 0087 §3.4, §3.10, 0140 §3 (select natif, première option vide, aria-label = la phrase avec « blanc »), XXXX-je-m-entraine-dans-la-fiche §3.3 (plusieurs cases : un menu par `___`) · sans JavaScript, le menu marche tel quel %>
+<%# ADR  : 0091 §4.4, 0115, 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : 0087 §3.4, §3.10, 0140 §3 (select natif, première option vide, aria-label = la phrase avec « blanc »), 0146-je-m-entraine-dans-la-fiche §3.3 (plusieurs cases : un menu par `___`) · sans JavaScript, le menu marche tel quel %>
 <%# locals: (f:, question:, number:, values: {}) -%>
 <% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
 <% if question.multi_blank? %>

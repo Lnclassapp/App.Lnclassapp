@@ -2,7 +2,7 @@
 <%# Rôle : le texte saisi ; avec reveal seulement (enseignant, équipe), les réponses acceptées %>
 <%# ADR  : 0091 §4.4 · UDR : 0023, 0087 §3.6 %>
 <%# locals: (question:, reveal:) -%>
-<%# Plusieurs cases (XXXX-questions-a-plusieurs-cases-et-indice §4) : la phrase et un verdict par case. %>
+<%# Plusieurs cases (0120-questions-a-plusieurs-cases-et-indice §4) : la phrase et un verdict par case. %>
 <% if question.multi_blank? %>
   <%= render "assessment/session_results/kinds/blanks_review", question:, reveal: %>
 <% else %>

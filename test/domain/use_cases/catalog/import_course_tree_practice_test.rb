@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX entraînement de notion corrigé sans trace et questions à plusieurs cases : le schéma v3 porte `notions[].practice`,
+# ADR-0119 entraînement de notion corrigé sans trace et questions à plusieurs cases : le schéma v3 porte `notions[].practice`,
 # `question.hint` et `answer.blank`, et l'import les valide puis les écrit (sur le vrai moteur et les vrais dépôts).
 module UseCases
   module Catalog

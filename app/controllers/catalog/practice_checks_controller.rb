@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Catalog::PracticeChecksController
 # Rôle : « Vérifier » dans « Je m'entraîne » : le serveur juge les réponses de la notion case par case et rend le verdict puis le corrigé, sans rien écrire ; un frame par notion, une page pleine sans JavaScript
-# ADR  : XXXX-entrainement-de-notion-corrige-sans-trace (§4), 0026, 0028, 0035 · UDR : XXXX-je-m-entraine-dans-la-fiche §3.4, §3.5, §3.6
+# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4), 0026, 0028, 0035 · UDR : 0146-je-m-entraine-dans-la-fiche §3.4, §3.5, §3.6
 module Catalog
   class PracticeChecksController < AuthenticatedController
     include ReadsOwnLevel

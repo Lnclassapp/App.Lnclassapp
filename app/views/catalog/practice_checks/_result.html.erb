@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/practice_checks/_result — le frame « practice_<notion> » : le formulaire d'entraînement, et après « Vérifier » le verdict de chaque case puis « Correction » %>
 <%# Rôle : `course_slug`, `notion_slug`, `practice` (NotionPractice sans correction), `check` (CheckPractice::Check | nil avant le premier « Vérifier »), `values` (saisie gardée), `state` (:ready, :checked, :changed, :rate_limited), `title_id` ; la page de la leçon le rend sans verdict ni corrigé, le serveur seul les ajoute %>
-<%# ADR  : XXXX-entrainement-de-notion-corrige-sans-trace (§4) · UDR : XXXX-je-m-entraine-dans-la-fiche §3.2, §3.4, §3.5, §3.10 %>
+<%# ADR  : 0119-entrainement-de-notion-corrige-sans-trace (§4) · UDR : 0146-je-m-entraine-dans-la-fiche §3.2, §3.4, §3.5, §3.10 %>
 <% scope = "catalog.revision_sheets.practice" %>
 <% frame = "practice_#{notion_slug}" %>
 <% anchor = course_path(course_slug, anchor: "notion-#{notion_slug}") %>

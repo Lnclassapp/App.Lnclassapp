@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Matching
 # Rôle : relier : juste seulement si chaque élément de gauche est relié au sien, sans points partiels
-# ADR  : 0091 (§4.2 : trois à cinq paires, côtés droits distincts ; §4.3 ; §4.4 : indices d'affichage), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
+# ADR  : 0091 (§4.2 : trois à cinq paires, côtés droits distincts ; §4.3 ; §4.4 : indices d'affichage), 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds
