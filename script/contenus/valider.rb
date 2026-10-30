@@ -3,10 +3,16 @@
 # Contrôle d'un fichier de leçon `lnclass.course-tree` v3 contre les règles de docs/contenus/prompt-redaction.md.
 # Usage : ruby script/contenus/valider.rb fichier.json [fichier.json …]   (code de sortie 1 s'il y a une erreur)
 # Ruby pur : ni Rails ni bundler. Les ERREURS reprennent les règles et les codes de raison de l'import v3
-# (ADR fiche-de-revision-par-notion-et-figures-parametrees §4.1 et §4.2) : un fichier qui passe ici ne peut pas être refusé
-# à l'import pour ces règles. Les AVERTISSEMENTS sont des conseils de rédaction que l'import ne contrôle pas.
+# (ADR fiche-de-revision-par-notion-et-figures-parametrees §4.1 et §4.2 ; ADR-0115 pour les types de question) : un fichier qui
+# passe ici ne peut pas être refusé à l'import pour ces règles. Les AVERTISSEMENTS sont des conseils de rédaction que l'import
+# ne contrôle pas (dont la part de questions corrigées automatiquement, 50 % au moins).
 require "json"
-# Les bornes des figures sont lues dans le domaine (Ruby pur, sans Rails) : une seule source, les mêmes raisons qu'à l'import.
+require "bigdecimal"
+# Les bornes des figures et la structure des onze types de question sont lues dans le domaine (Ruby pur, sans Rails) :
+# une seule source, les mêmes raisons qu'à l'import.
+%w[choice fill_blank matching numeric ordering select written notebook].each { require_relative "../../app/domain/entities/assessment/question_kinds/#{it}" }
+require_relative "../../app/domain/entities/assessment/answer"
+require_relative "../../app/domain/entities/assessment/question"
 require_relative "../../app/domain/entities/catalog/figure_kinds"
 require_relative "../../app/domain/entities/catalog/figure"
 
@@ -25,17 +31,53 @@ module Contenus
     PROBLEMS = 4
     NOTION_TEXT_MAX = 1_200
     STEP_MAX = 300
-    # type => [propositions autorisées, bonnes propositions]
-    QUESTION_TYPES = {
-      "true_false" => [ [ 2 ], 1 ], "single_choice" => [ [ 3, 4, 5 ], 1 ],
-      "multiple_correct_2" => [ [ 4, 5 ], 2 ], "multiple_correct_3" => [ [ 5, 6 ], 3 ]
-    }.freeze
+    AUTO_GRADED_MIN = 50 # % des questions de la leçon corrigées par la machine
+    # Type à choix => propositions conseillées (le prompt les conseille, l'import ne les refuse pas).
+    CHOICE_ADVICE = { "true_false" => [ 2 ], "single_choice" => [ 3, 4, 5 ], "multiple_correct_2" => [ 4, 5 ], "multiple_correct_3" => [ 5, 6 ] }.freeze
+    # Le schéma v3 (question, answer) : clés admises (additionalProperties: false) et bornes.
+    IMAGE_KEYS = %w[description].freeze
+    IMAGE_DESCRIPTION_MAX = 150
+    QUESTION_KEYS = %w[content question_type explanation points unit starter criteria answers image tolerance].freeze
+    ANSWER_KEYS = %w[content correct is_correct match].freeze
+    POINTS = (0.5..20)
+    TOLERANCE = (0..99_999_999.9999)
+    TEXT_MAX = { "unit" => 10, "starter" => 150 }.freeze
+    CRITERIA_MAX = 8
+    CRITERION_MAX = 150
+    ANSWER_TEXT_MAX = 500
+    # Règle du domaine => clé du chemin de l'import (ContentNode::RULE_KEYS) ; toute autre règle porte sur `answers`.
+    RULE_KEYS = { blank_marker: "content", negative_tolerance: "tolerance", tolerance_out_of_range: "tolerance",
+                  points_out_of_range: "points", unit_not_allowed: "unit", unit_too_long: "unit", unit_invalid: "unit",
+                  starter_not_allowed: "starter", starter_too_long: "starter", criteria_not_allowed: "criteria",
+                  criteria_too_many: "criteria", criteria_too_long: "criteria", criteria_blank: "criteria",
+                  explanation_required: "explanation" }.freeze
     FORBIDDEN_WORDS = /habilet|notion cl[ée]|\bquiz\b|conforme au programme/i
     DEPENDENT = /question précédente|ci-dessus|figure ci|schéma ci|document ci/i
     STEP_CITATION = /(?:é|e)tape\s*\d/i
     HTML = %r{</?[a-zA-Z][^>]*>}
 
     attr_reader :errors, :warnings, :reasons
+
+    # Ligne de commande : un compte rendu par fichier sur `out` ; code de sortie 1 s'il y a une erreur ou un fichier illisible.
+    def self.run(files, out: $stdout)
+      return abort("Usage : ruby script/contenus/valider.rb fichier.json […]") if files.empty?
+
+      failed = files.count do |file|
+        document = begin
+          JSON.parse(File.read(file, encoding: "UTF-8"))
+        rescue JSON::ParserError, SystemCallError => e
+          out.puts "✗ #{file}\n    JSON illisible : #{e.message[0, 120]}"
+          next true
+        end
+        result = new(document).call
+        out.puts "#{result.errors.empty? ? '✓' : '✗'} #{file}"
+        result.errors.first(30).each { |message| out.puts "    ERREUR #{message}" }
+        out.puts "    … #{result.errors.size - 30} autres erreurs" if result.errors.size > 30
+        result.warnings.each { |message| out.puts "    avertissement #{message}" }
+        !result.errors.empty?
+      end
+      failed.zero? ? 0 : 1
+    end
 
     def initialize(document)
       @document = document
@@ -52,7 +94,7 @@ module Contenus
       escapes(@document, "$")
       found = @schema.empty? ? @adapter : @schema
       @reasons = found.map { |path, code, _| [ path, code ] }
-      @errors = found.map { |path, code, detail| "#{path} : #{code}#{" — #{detail}" if detail}" }
+      @errors = found.map { |path, code, detail| "#{path} : #{code} — #{detail}" }
       self
     end
 
@@ -109,6 +151,7 @@ module Contenus
         problems = []
       end
       problems.each_with_index { |problem, i| exercise(problem, "#{path}.exercises[#{i}]", figures, steps: nil) }
+      auto_graded_share(course, path)
     end
 
     # Le niveau et la matière inconnus sont refusés comme à l'import (unknown_level, unknown_material). Le reste du placement
@@ -143,7 +186,7 @@ module Contenus
           next
         end
         Entities::Catalog::Figure.errors_for(figure).each do |sub_path, code, detail|
-          fail_at(sub_path == "$" ? figure_path : "#{figure_path}.#{sub_path}", code, "paramètre « #{detail[:param]} » hors règle (voir ADR §4.2)")
+          fail_at([ figure_path, sub_path ].reject { it == "$" }.join("."), code, "paramètre « #{detail[:param]} » hors règle (voir ADR §4.2)")
         end
       end
       seen = []
@@ -249,22 +292,66 @@ module Contenus
     def question(question, path, steps)
       return schema_at(path, "objet attendu") unless question.is_a?(Hash)
 
+      shape = shape_errors(question, path)
       content = question["content"]
       if !content.is_a?(String) || content.empty? || content.length > 2_000 then schema_at("#{path}.content", "énoncé de 1 à 2 000 caractères attendu")
       elsif content.strip.empty? then fail_at("#{path}.content", "blank", "énoncé vide")
       end
       style(content.to_s, "#{path}.content")
+      warn_at(path, "dépend peut-être d'un élément absent") if content.to_s.match?(DEPENDENT)
       type = question["question_type"]
-      rules = QUESTION_TYPES[type]
       if !type.is_a?(String) || type.empty? || type.length > 40 then schema_at("#{path}.question_type", "texte de 1 à 40 caractères attendu")
-      elsif rules.nil? then fail_at("#{path}.question_type", "invalid_value", "type inconnu : #{type.inspect}")
       end
       explanation(question["explanation"], path, steps)
       raw_answers = question["answers"]
       return schema_at("#{path}.answers", "liste de 10 propositions au plus attendue") unless raw_answers.is_a?(Array) && raw_answers.size <= 10
 
-      answers(question, raw_answers, path, rules) if rules
-      warn_at(path, "dépend peut-être d'un élément absent") if question["content"].to_s.match?(DEPENDENT)
+      answer_texts(raw_answers, path) if shape
+      return unless shape
+
+      choice_advice(type, raw_answers, path)
+      structure(question, raw_answers, path)
+    end
+
+    # Ce que le schéma v3 refuse dans une question et ses propositions (clés inconnues, types, bornes). → true si rien à refuser.
+    def shape_errors(question, path)
+      before = @schema.size
+      (question.keys - QUESTION_KEYS).each { |key| schema_at("#{path}.#{key}", "clé inconnue") }
+      points, tolerance, criteria = question.values_at("points", "tolerance", "criteria")
+      schema_at("#{path}.points", "nombre de 0,5 à 20, par demi-point") unless points.nil? || (points.is_a?(::Numeric) && POINTS.cover?(points) && (points * 2 % 1).zero?)
+      schema_at("#{path}.tolerance", "nombre de 0 à 99 999 999,9999") unless tolerance.nil? || (tolerance.is_a?(::Numeric) && TOLERANCE.cover?(tolerance))
+      TEXT_MAX.each do |key, max|
+        schema_at("#{path}.#{key}", "texte de #{max} caractères au plus") unless question[key].nil? || (question[key].is_a?(String) && question[key].length <= max)
+      end
+      schema_at("#{path}.criteria", "liste de #{CRITERIA_MAX} critères au plus") unless criteria.nil? || (criteria.is_a?(Array) && criteria.size <= CRITERIA_MAX)
+      (criteria.is_a?(Array) ? criteria : []).each_with_index do |criterion, i|
+        schema_at("#{path}.criteria[#{i}]", "texte de #{CRITERION_MAX} caractères au plus") unless criterion.is_a?(String) && criterion.length <= CRITERION_MAX
+      end
+      (question["answers"].is_a?(Array) ? question["answers"] : []).each_with_index { |answer, i| answer_shape(answer, "#{path}.answers[#{i}]") }
+      image_shape(question["image"], "#{path}.image") if question.key?("image")
+      @schema.size == before
+    end
+
+    # Le schéma v3 (question_image) : { description } de 1 à 150 caractères, sans autre clé ; l'adaptateur refuse une description d'espaces.
+    def image_shape(image, path)
+      return schema_at(path, "objet { description } attendu") unless image.is_a?(Hash)
+
+      (image.keys - IMAGE_KEYS).each { |key| schema_at("#{path}.#{key}", "clé inconnue") }
+      description = image["description"]
+      if !description.is_a?(String) || description.empty? || description.length > IMAGE_DESCRIPTION_MAX
+        schema_at("#{path}.description", "texte de 1 à #{IMAGE_DESCRIPTION_MAX} caractères attendu")
+      elsif description.strip.empty? then fail_at("#{path}.description", "blank", "description obligatoire")
+      end
+    end
+
+    def answer_shape(answer, path)
+      return schema_at(path, "proposition : objet attendu") unless answer.is_a?(Hash)
+
+      (answer.keys - ANSWER_KEYS).each { |key| schema_at("#{path}.#{key}", "clé inconnue") }
+      %w[content match].each do |key|
+        schema_at("#{path}.#{key}", "texte de #{ANSWER_TEXT_MAX} caractères au plus attendu") unless answer[key].nil? || (answer[key].is_a?(String) && answer[key].length <= ANSWER_TEXT_MAX)
+      end
+      %w[correct is_correct].each { |key| schema_at("#{path}.#{key}", "booléen attendu") unless [ nil, true, false ].include?(answer[key]) }
     end
 
     # La correction est obligatoire (20 à 2 000 caractères, espaces réduits). Dans l'exercice d'une notion, elle doit reprendre la méthode.
@@ -293,31 +380,55 @@ module Contenus
 
     def normalize(string) = string.downcase.delete("$*").gsub(/\s+/, " ").strip
 
-    # Structure d'ADR-0115 (Entities::Catalog::ContentNode) : l'import rend « question_structure » pour toute faute de propositions.
-    # Les fourchettes du prompt (3 à 5 propositions, etc.) sont un conseil, pas un refus.
-    def answers(question, raw_answers, path, (counts, good))
-      return schema_at("#{path}.answers", "propositions : objets attendus") unless raw_answers.all?(Hash)
-
-      answers = raw_answers
-      type = question["question_type"]
-      structure = []
-      structure << "Vrai/Faux : 2 propositions, trouvé #{answers.size}" if type == "true_false" && answers.size != 2
-      structure << "au moins #{good + 1} propositions, trouvé #{answers.size}" if type != "true_false" && answers.size <= good
-      correct = answers.count { it["correct"] == true || (!it.key?("correct") && it["is_correct"] == true) }
-      structure << "#{good} bonne(s) proposition(s) attendue(s), trouvé #{correct}" unless correct == good
-      fail_at("#{path}.answers", "question_structure", structure.join(" ; ")) if structure.any?
-      warn_at("#{path}.answers", "#{counts.join(' ou ')} propositions conseillées pour ce type, trouvé #{answers.size}") unless counts.include?(answers.size)
-      if type == "true_false" && answers.map { it["content"] }.sort != %w[Faux Vrai]
-        warn_at("#{path}.answers", "Vrai/Faux : propositions « Vrai » et « Faux » exactement")
-      end
-      answers.each_with_index do |answer, i|
+    # Une proposition vide est refusée quel que soit le type (comme l'import) ; le balisage suit les conseils de rédaction.
+    def answer_texts(raw_answers, path)
+      raw_answers.each_with_index do |answer, i|
         content = answer["content"]
-        if !content.nil? && !content.is_a?(String) || content.to_s.length > 500 then schema_at("#{path}.answers[#{i}].content", "texte de 500 caractères au plus attendu")
-        elsif content.to_s.strip.empty? then fail_at("#{path}.answers[#{i}].content", "blank", "proposition vide")
-        end
+        fail_at("#{path}.answers[#{i}].content", "blank", "proposition vide") if content.to_s.strip.empty?
         style(content.to_s, "#{path}.answers[#{i}].content")
       end
+    end
+
+    # Conseils de rédaction des 4 types à choix : l'import n'en refuse aucun, il refuse seulement la structure (voir `structure`).
+    def choice_advice(type, answers, path)
+      counts = CHOICE_ADVICE[type]
+      return unless counts
+
+      warn_at("#{path}.answers", "#{counts.join(' ou ')} propositions conseillées pour ce type, trouvé #{answers.size}") unless counts.include?(answers.size)
+      warn_at("#{path}.answers", "Vrai/Faux : propositions « Vrai » et « Faux » exactement") if type == "true_false" && answers.map { it["content"] }.sort != %w[Faux Vrai]
       warn_at("#{path}.answers", "deux propositions identiques") if answers.map { it["content"] }.uniq.size != answers.size
+    end
+
+    # La structure de l'import (ContentNode.question_errors) : clés mal placées, puis les règles du domaine, chacune à la clé de RULE_KEYS.
+    def structure(question, raw_answers, path)
+      type, tolerance, points = question.values_at("question_type", "tolerance", "points")
+      fail_at("#{path}.tolerance", "question_structure", "tolerance_not_allowed : seule une question numeric a une marge") if !tolerance.nil? && type != "numeric"
+      raw_answers.each_with_index do |answer, i|
+        fail_at("#{path}.answers[#{i}].match", "question_structure", "match_not_allowed : seule une question matching relie des paires") if !answer["match"].nil? && type != "matching"
+      end
+      answers = raw_answers.each_with_index.map do |answer, i|
+        Entities::Assessment::Answer.new(id: i, position: i, content: answer["content"], correct: answer.fetch("correct") { answer["is_correct"] } == true,
+                                         match_content: answer["match"].to_s.strip.then { it.empty? ? nil : it })
+      end
+      rules = Entities::Assessment::Question.structure_errors_for(
+        question_type: type, answers:, content: question["content"], numeric_tolerance: tolerance.nil? ? nil : BigDecimal(tolerance.to_s),
+        explanation: question["explanation"], points: points.nil? ? BigDecimal("1") : BigDecimal(points.to_s), unit: question["unit"],
+        starter: question["starter"], criteria: Array(question["criteria"])
+      )
+      return fail_at("#{path}.question_type", "invalid_value", "type inconnu : #{type.inspect}") if rules == [ :unknown_question_type ]
+
+      rules.each { |rule| fail_at("#{path}.#{RULE_KEYS.fetch(rule, 'answers')}", "question_structure", rule.to_s) }
+    end
+
+    # ADR-0115 : au moins la moitié des questions de la leçon sont corrigées par la machine (les rédigées et le cahier ne le sont pas).
+    def auto_graded_share(course, path)
+      exercises = Array(course["notions"]).grep(Hash).map { it["exercise"] } + Array(course["exercises"])
+      questions = exercises.grep(Hash).flat_map { Array(it["questions"]).grep(Hash) }
+      return if questions.empty?
+
+      graded = questions.count { Entities::Assessment::Question.kind_for(it["question_type"])&.then { |kind| kind::AUTO_GRADED } }
+      share = (graded * 100.0 / questions.size).round
+      warn_at(path, "part corrigée automatiquement : #{share} % des questions (#{AUTO_GRADED_MIN} % au moins)") if graded * 100 < AUTO_GRADED_MIN * questions.size
     end
 
     # Bloc d'une notion : le schéma impose 1 à `max` caractères ; une valeur faite d'espaces est « blank » (NotionSheet).
@@ -356,12 +467,12 @@ module Contenus
       warn_at(path, "vocabulaire interdit : « #{found} »") if found
     end
 
-    def schema_at(path, detail = nil)
+    def schema_at(path, detail)
       @schema << [ path, "schema", detail ]
       nil
     end
 
-    def fail_at(path, code, detail = nil)
+    def fail_at(path, code, detail)
       @adapter << [ path, code, detail ]
       nil
     end
@@ -370,22 +481,4 @@ module Contenus
   end
 end
 
-if $PROGRAM_NAME == __FILE__
-  files = ARGV
-  abort "Usage : ruby script/contenus/valider.rb fichier.json […]" if files.empty?
-  failed = files.count do |file|
-    document = begin
-      JSON.parse(File.read(file, encoding: "UTF-8"))
-    rescue JSON::ParserError, SystemCallError => e
-      puts "✗ #{file}\n    JSON illisible : #{e.message[0, 120]}"
-      next true
-    end
-    result = Contenus::Valider.new(document).call
-    puts "#{result.errors.empty? ? '✓' : '✗'} #{file}"
-    result.errors.first(30).each { |message| puts "    ERREUR #{message}" }
-    puts "    … #{result.errors.size - 30} autres erreurs" if result.errors.size > 30
-    result.warnings.each { |message| puts "    avertissement #{message}" }
-    !result.errors.empty?
-  end
-  exit(failed.zero? ? 0 : 1)
-end
+($PROGRAM_NAME == __FILE__) && exit(Contenus::Valider.run(ARGV))
