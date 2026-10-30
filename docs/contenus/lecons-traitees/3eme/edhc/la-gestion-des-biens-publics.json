@@ -1,0 +1,1244 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La gestion des biens publics",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "EDHC",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "acteurs-biens-publics",
+          "kind": "diagram",
+          "description": "Arbre des acteurs propriétaires de biens publics dans la commune fictive de Sikoro. Au sommet, les biens publics. En dessous, deux propriétaires : l'État et la commune. L'État est relié au collège public et au centre de santé ; la commune à la fontaine du quartier et à l'éclairage public. Répartition donnée à titre d'exemple, elle peut varier.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "biens_publics",
+                "label": "Biens publics de Sikoro (exemple fictif)",
+                "category": 1
+              },
+              {
+                "id": "etat",
+                "label": "L'État",
+                "category": 2
+              },
+              {
+                "id": "commune",
+                "label": "La commune (la mairie)",
+                "category": 2
+              },
+              {
+                "id": "college",
+                "label": "Collège public : tables-bancs, toilettes, livres",
+                "category": 3
+              },
+              {
+                "id": "centre_sante",
+                "label": "Centre de santé public",
+                "category": 3
+              },
+              {
+                "id": "fontaine",
+                "label": "Fontaine du quartier",
+                "category": 3
+              },
+              {
+                "id": "eclairage",
+                "label": "Éclairage public de la rue",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "biens_publics",
+                "to": "etat",
+                "label": "propriétaire"
+              },
+              {
+                "from": "biens_publics",
+                "to": "commune",
+                "label": "propriétaire"
+              },
+              {
+                "from": "etat",
+                "to": "college"
+              },
+              {
+                "from": "etat",
+                "to": "centre_sante"
+              },
+              {
+                "from": "commune",
+                "to": "fontaine"
+              },
+              {
+                "from": "commune",
+                "to": "eclairage"
+              }
+            ],
+            "legend": [
+              "Ensemble des biens",
+              "Propriétaire",
+              "Bien public concerné"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "reaction-degradation",
+          "kind": "diagram",
+          "description": "Schéma des gestes à suivre quand un élève constate la dégradation d'un bien public. Il ne se met pas en danger, il signale à un adulte responsable. Le responsable vérifie et note les faits ; le gestionnaire fait réparer et les auteurs répondent de leurs actes. L'élève participe ensuite à la prévention et à l'entretien.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "constat",
+                "label": "Je constate une dégradation",
+                "category": 1
+              },
+              {
+                "id": "securite",
+                "label": "Je ne m'en prends pas à l'auteur et je reste en sécurité",
+                "category": 1
+              },
+              {
+                "id": "signalement",
+                "label": "Je signale à un adulte responsable",
+                "category": 1
+              },
+              {
+                "id": "verification",
+                "label": "Le responsable vérifie et note les faits",
+                "category": 2
+              },
+              {
+                "id": "reparation",
+                "label": "Le gestionnaire fait réparer",
+                "category": 2
+              },
+              {
+                "id": "sanction",
+                "label": "Les auteurs répondent de leurs actes",
+                "category": 2
+              },
+              {
+                "id": "prevention",
+                "label": "Je participe à la prévention et à l'entretien",
+                "category": 1
+              }
+            ],
+            "edges": [
+              {
+                "from": "constat",
+                "to": "securite"
+              },
+              {
+                "from": "securite",
+                "to": "signalement"
+              },
+              {
+                "from": "signalement",
+                "to": "verification"
+              },
+              {
+                "from": "verification",
+                "to": "reparation"
+              },
+              {
+                "from": "verification",
+                "to": "sanction"
+              },
+              {
+                "from": "reparation",
+                "to": "prevention"
+              },
+              {
+                "from": "sanction",
+                "to": "prevention"
+              }
+            ],
+            "legend": [
+              "Ce que fait l'élève",
+              "Ce que font les responsables"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "depenses-entretien-college",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres des dépenses d'entretien et de réparation du collège public fictif de Sikoro sur une année, en milliers de FCFA : tables-bancs 250, toilettes 180, toiture 120, clôture 150, livres de la bibliothèque 100. Le total est de 800. Données fictives.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              250,
+              180,
+              120,
+              150,
+              100
+            ],
+            "labels": [
+              "Tables-bancs",
+              "Toilettes",
+              "Toiture",
+              "Clôture",
+              "Livres"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir un bien public",
+          "remember": "Un **bien public** est un bien (une construction, un équipement, un espace, un service) qui appartient à l'**État** ou à une **collectivité territoriale** (commune, région) et qui est mis au service de **tous**, pour l'intérêt général. Exemples : l'école publique, ses tables-bancs, ses toilettes et ses livres ; la fontaine publique ; l'éclairage public du quartier ; le centre de santé public. Un **bien privé** appartient à une personne ou à une famille, qui décide seule de son usage : ton cartable, le téléphone de ta mère, la boutique d'un commerçant. Un bien public n'appartient pas à celui qui l'utilise : il appartient à la collectivité, donc à tous. Il est financé surtout par les impôts, comme tu l'as vu avec le civisme fiscal.",
+          "method": [
+            "Identifier le bien et l'usage qui en est fait dans la situation.",
+            "Chercher à qui il appartient : à une personne ou à une famille, ou à l'État ou à une collectivité territoriale ?",
+            "Chercher à qui il sert : à son propriétaire seul, ou à tous les habitants ?",
+            "Conclure : dire s'il s'agit d'un bien public ou d'un bien privé, et justifier."
+          ],
+          "example": {
+            "statement": "Dans la ville fictive de Sikoro, Awa remplit son seau à la fontaine du quartier, installée par la mairie et ouverte à tous les habitants. Chez elle, son frère Yao utilise la bicyclette de leur père. Lequel de ces deux biens est un bien public ?",
+            "steps": [
+              "Identifier : la fontaine du quartier, où Awa remplit son seau, et la bicyclette du père, que Yao utilise.",
+              "Chercher à qui il appartient : la fontaine a été installée par la mairie, donc par une collectivité territoriale ; la bicyclette appartient au père de Yao, une personne.",
+              "Chercher à qui il sert : la fontaine est ouverte à tous les habitants du quartier ; la bicyclette sert à la famille, et le père en décide.",
+              "Conclure : la fontaine est un bien public, car elle appartient à la collectivité et sert à tous ; la bicyclette est un bien privé."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'on devient propriétaire d'un bien public parce qu'on l'utilise tous les jours. Contre-exemple : la table-banc de ta classe est un bien public. Tu t'y assieds chaque jour, mais elle ne t'appartient pas : elle servira aussi aux élèves de l'année suivante. Si tu la casses ou si tu y graves ton nom, tu abîmes un bien qui sert à tous. Autre erreur : croire que tout ce qui se trouve à l'école est public. Le cahier de Kofi posé sur la table-banc reste un bien **privé**. Ce qui compte, c'est le **propriétaire** (l'État ou la collectivité) et l'**usage pour tous**.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître un bien public",
+            "statement": "Dans cet exercice, tu reconnais un bien public avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle phrase définit le mieux un bien public ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher à qui il appartient : un bien public appartient à l'État ou à une collectivité territoriale. Étape 3 — Chercher à qui il sert : il sert à tous. Emporter chez soi un bien public est un vol, et cela n'en fait pas un bien privé. Celui qui utilise le plus un bien public n'en devient pas propriétaire. Un lieu très fréquenté peut abriter des biens privés, comme les étals d'un marché.",
+                "answers": [
+                  {
+                    "content": "Un bien que n'importe qui peut prendre et emporter chez soi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un bien qui appartient à l'État ou à une collectivité territoriale et qui sert à tous",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un bien qui appartient à la personne qui l'utilise le plus souvent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un bien qui se trouve dans un lieu où il y a beaucoup de monde",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les trois biens publics parmi les propositions suivantes ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Chercher à qui il appartient : les toilettes du collège public, la fontaine publique et le centre de santé public appartiennent à l'État ou à une collectivité. Étape 3 — Chercher à qui il sert : ils servent à tous. Le cahier de Kofi et le téléphone d'un élève appartiennent à une personne : ce sont des biens privés, même s'ils se trouvent à l'école.",
+                "answers": [
+                  {
+                    "content": "Les toilettes d'un collège public",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le cahier de Kofi",
+                    "correct": false
+                  },
+                  {
+                    "content": "La fontaine publique du quartier",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le centre de santé public",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le téléphone portable d'un élève",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans la commune fictive de Sikoro, relie chaque bien à son propriétaire.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Chercher à qui il appartient. Les lampadaires de la rue sont installés par la mairie : ils appartiennent à la commune. Le collège public appartient à l'État, donc ses tables-bancs aussi. Le cartable est un bien privé qui appartient à Mariam, et la boutique appartient à la tante de Yao. Les lampadaires et les tables-bancs sont des biens publics ; le cartable et la boutique sont des biens privés.",
+                "answers": [
+                  {
+                    "content": "Les lampadaires de la rue du quartier",
+                    "match": "La commune"
+                  },
+                  {
+                    "content": "Les tables-bancs du collège public",
+                    "match": "L'État"
+                  },
+                  {
+                    "content": "Le cartable de Mariam",
+                    "match": "Mariam"
+                  },
+                  {
+                    "content": "La boutique de la tante de Yao",
+                    "match": "La tante de Yao"
+                  }
+                ]
+              },
+              {
+                "content": "Le livre prêté par la bibliothèque du collège public appartient à l'élève qui l'emprunte, car il l'utilise.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher à qui il appartient : le livre appartient à la bibliothèque du collège, donc à l'établissement public, pas à l'élève. Étape 3 — Chercher à qui il sert : il doit servir à tous les élèves. L'emprunteur doit le rendre en bon état. Utiliser un bien ne donne pas le droit de le garder ni de l'abîmer : c'est le piège à éviter.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Kofi dit : « Cette table-banc, je l'utilise toute l'année, donc elle est à moi. » Que faut-il lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : une table-banc de l'école publique. Étape 2 — Chercher à qui elle appartient : à l'État. Étape 3 — Chercher à qui elle sert : à tous les élèves, de cette année et des suivantes. Étape 4 — Conclure : c'est un bien public, Kofi n'en est pas propriétaire. Graver son nom ne change rien et abîme le bien. Être neuf ou usé ne change pas le propriétaire.",
+                "answers": [
+                  {
+                    "content": "Oui : celui qui utilise un bien public en devient propriétaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, mais seulement s'il y grave son nom",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : elle appartient à l'État et elle servira aussi aux élèves qui viendront après lui",
+                    "correct": true
+                  },
+                  {
+                    "content": "Non : une table-banc n'est un bien public que si elle est neuve",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les acteurs de la gestion des biens publics",
+          "remember": "Plusieurs acteurs interviennent dans la gestion d'un bien public. L'**État** et les **collectivités territoriales** (communes, régions) en sont les **propriétaires** : ils décident de construire, financent avec l'argent public et confient le bien à un gestionnaire. Le **gestionnaire** (le directeur du collège, le responsable du centre de santé, les services de la mairie) fait fonctionner et **entretient** le bien au quotidien, et rend compte de ce qu'il fait. Les **usagers** (élèves, habitants, malades) utilisent le bien, doivent le respecter et **signaler** ce qui ne va pas. Des **organes de contrôle**, comme la Cour des comptes pour l'argent public, vérifient que les fonds sont bien employés. La gestion n'est donc pas l'affaire de l'État seul : chacun a son rôle.",
+          "method": [
+            "Identifier le bien public et dire à quel niveau il sert : tout le pays ou un quartier.",
+            "Chercher le propriétaire : l'État ou la collectivité territoriale qui l'a installé et qui le finance.",
+            "Chercher le gestionnaire et les usagers : qui s'en occupe au quotidien, et qui l'utilise ?",
+            "Conclure : attribuer à chaque acteur son rôle, y compris le contrôle."
+          ],
+          "example": {
+            "statement": "Dans le collège public fictif de Sikoro, des tables-bancs sont abîmées. Le directeur dresse la liste des tables à réparer et l'envoie à l'administration de l'État chargée de l'éducation, qui finance les réparations. Les élèves doivent prendre soin du mobilier. Quel est le rôle de chacun ?",
+            "steps": [
+              "Identifier : les tables-bancs du collège public ; elles servent à tous les élèves de l'établissement.",
+              "Chercher le propriétaire : le collège est public, donc les tables-bancs appartiennent à l'État, qui finance les réparations.",
+              "Chercher le gestionnaire et les usagers : le directeur gère le mobilier au quotidien, puisqu'il recense les tables abîmées ; les élèves sont les usagers.",
+              "Conclure : l'État est propriétaire et finance ; le directeur gère et rend compte ; les élèves utilisent et prennent soin des tables ; un organe de contrôle vérifie l'emploi de l'argent public."
+            ]
+          },
+          "pitfall": "Ne pas croire que la gestion d'un bien public est l'affaire de l'État seul. Contre-exemple : le robinet de la fontaine du quartier coule en continu. Si chaque habitant pense « c'est le travail de la mairie », l'eau se perd pendant des jours, car la mairie ne le sait pas. L'usager voit le problème en premier : son rôle est de **signaler**. Autre erreur : croire que l'usager peut décider seul de l'usage du bien, par exemple démonter une ampoule pour l'emporter. Chaque acteur agit **dans son rôle**.",
+          "figure": "acteurs-biens-publics",
+          "exercise": {
+            "title": "Reconnaître les acteurs de la gestion",
+            "statement": "Dans cet exercice, tu attribues à chaque acteur son rôle avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque acteur à son rôle dans la gestion d'un bien public.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Chercher le propriétaire : l'État ou la collectivité territoriale décide et finance. Étape 3 — Chercher le gestionnaire et les usagers : le directeur s'occupe du bien au quotidien, les élèves l'utilisent et le respectent. Étape 4 — Conclure en ajoutant le contrôle : la Cour des comptes vérifie l'emploi de l'argent public. Ne confonds pas le gestionnaire, qui entretient, et l'organe de contrôle, qui vérifie.",
+                "answers": [
+                  {
+                    "content": "L'État ou la collectivité territoriale",
+                    "match": "Propriétaire qui décide et finance"
+                  },
+                  {
+                    "content": "Le directeur du collège public",
+                    "match": "Gestionnaire qui s'occupe du bien au quotidien"
+                  },
+                  {
+                    "content": "Les élèves",
+                    "match": "Usagers qui utilisent le bien et le respectent"
+                  },
+                  {
+                    "content": "La Cour des comptes",
+                    "match": "Organe qui contrôle l'emploi de l'argent public"
+                  }
+                ]
+              },
+              {
+                "content": "Le centre de santé public du quartier est un établissement de l'État. Qui en est le propriétaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le centre de santé public. Étape 2 — Chercher le propriétaire : l'État, qui l'a installé et le finance. Le médecin et le personnel en sont les gestionnaires ou les agents, pas les propriétaires. Le malade est un usager. Utiliser un bien public ne rend pas propriétaire : c'est le piège.",
+                "answers": [
+                  {
+                    "content": "Le médecin qui y travaille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le malade qui s'y soigne",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'État",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le premier habitant qui s'en est servi",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les usagers n'ont aucun rôle dans la gestion d'un bien public : seul l'État compte.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Chercher le gestionnaire et les usagers. Les usagers jouent un rôle : ils utilisent le bien avec soin, le respectent et signalent les pannes ou les dégradations. Étape 4 — Conclure : chacun a son rôle. Penser que tout dépend de l'État seul est le piège, car l'État ne voit pas tout : l'usager voit le problème en premier.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La personne ou le service qui s'occupe au quotidien d'un bien public s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Chercher le gestionnaire et les usagers. Celui qui fait fonctionner et entretient le bien au quotidien est le gestionnaire (par exemple le directeur du collège ou les services de la mairie). Le propriétaire décide et finance, l'usager utilise : ne les confonds pas avec le gestionnaire.",
+                "answers": [
+                  {
+                    "content": "gestionnaire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans la commune fictive de Sikoro, un lampadaire de la rue est cassé. Quels sont les deux comportements d'un usager responsable ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Chercher le gestionnaire et les usagers : le gestionnaire, ici la mairie, répare ; l'usager signale et respecte. Étape 4 — Conclure : chacun agit dans son rôle. Démonter le lampadaire est un vol. Attendre sans rien dire est le piège : la mairie ne sait pas qu'il est cassé. Décider seul de la réparation, c'est prendre la place du gestionnaire.",
+                "answers": [
+                  {
+                    "content": "Signaler la panne à la mairie ou au chef de quartier",
+                    "correct": true
+                  },
+                  {
+                    "content": "Prendre soin du lampadaire et ne pas le dégrader",
+                    "correct": true
+                  },
+                  {
+                    "content": "Démonter le lampadaire pour le garder chez soi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Attendre que la mairie vienne, sans en parler à personne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Décider seul de la réparation à la place de la mairie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les atteintes aux biens publics et leurs conséquences",
+          "remember": "Une **atteinte** est un acte qui abîme, détourne ou fait perdre un bien public. Les principales sont : le **vandalisme** (détruire ou dégrader volontairement : casser une table-banc, faire des graffitis sur un mur) ; le **vol** (prendre un bien public pour soi : des livres de la bibliothèque, des câbles de l'éclairage public) ; le **détournement** (employer l'argent ou les biens publics qu'on vous a confiés (agent, gestionnaire) pour son intérêt personnel au lieu de l'intérêt général) ; le **gaspillage** (utiliser sans nécessité ou laisser se perdre : un robinet ouvert, une lumière allumée dans une classe vide) ; la **corruption** (donner ou recevoir un avantage pour obtenir une faveur contraire au service public). Les **conséquences** touchent tout le monde : le bien ne sert plus (classe sans tables, rue dans le noir, malades mal soignés) ; la réparation coûte de l'argent public, donc des impôts qui ne servent plus à autre chose ; les auteurs peuvent être sanctionnés par l'école ou par la loi.",
+          "method": [
+            "Décrire l'acte : qui fait quoi, sur quel bien public ?",
+            "Nommer l'atteinte : vandalisme, vol, détournement, gaspillage ou corruption.",
+            "Mesurer les conséquences : qui est privé du bien, et qui paie la réparation ou le remplacement ?",
+            "Proposer la réaction : signaler, faire réparer, et rappeler que l'auteur répond de son acte."
+          ],
+          "example": {
+            "statement": "Un soir, des jeunes cassent volontairement les lavabos et les portes des toilettes du collège public fictif de Sikoro. De quelle atteinte s'agit-il, et quelles en sont les conséquences ?",
+            "steps": [
+              "Décrire : des jeunes cassent volontairement des lavabos et des portes, sur un bien public, les toilettes du collège.",
+              "Nommer : casser volontairement un bien public est du vandalisme ; ce n'est pas un vol, car rien n'est emporté.",
+              "Mesurer les conséquences : les élèves n'ont plus de toilettes utilisables, ce qui met leur hygiène en danger ; la réparation sera payée avec l'argent public, donc avec les impôts, qui ne serviront pas à autre chose.",
+              "Proposer la réaction : signaler les faits au directeur, faire réparer les toilettes ; si les auteurs sont identifiés, ils répondent de leurs actes."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une atteinte à un bien public est « sans victime » parce que « le bien n'est à personne » ou parce que « l'État est riche ». Contre-exemple : si trois ampoules d'une salle sont volées, les 40 élèves de la classe travaillent dans la pénombre, et la réparation est payée avec l'argent de tous. Autre confusion fréquente : casser un bien, c'est du **vandalisme** ; l'emporter, c'est du **vol** ; le laisser se perdre sans nécessité, c'est du **gaspillage**. Même sans intention de nuire, gaspiller est une atteinte.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître une atteinte aux biens publics",
+            "statement": "Dans cet exercice, tu nommes une atteinte aux biens publics et ses conséquences avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque acte à l'atteinte qu'il représente.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Décrire l'acte, puis Étape 2 — Nommer l'atteinte. Dégrader un mur volontairement, c'est du vandalisme. Emporter des câbles pour les vendre, c'est du vol. Employer l'argent public pour soi, c'est du détournement. Laisser couler l'eau sans besoin, c'est du gaspillage. Pour distinguer : on casse, on emporte, on détourne ou on laisse se perdre.",
+                "answers": [
+                  {
+                    "content": "Des élèves font des graffitis à la peinture sur le mur d'une salle de classe",
+                    "match": "Le vandalisme"
+                  },
+                  {
+                    "content": "Un jeune coupe et emporte les câbles de l'éclairage public pour les vendre",
+                    "match": "Le vol"
+                  },
+                  {
+                    "content": "Un gestionnaire emploie l'argent prévu pour les tables-bancs à ses dépenses personnelles",
+                    "match": "Le détournement"
+                  },
+                  {
+                    "content": "Une personne laisse la fontaine publique couler toute la journée sans nécessité",
+                    "match": "Le gaspillage"
+                  }
+                ]
+              },
+              {
+                "content": "Dans un centre de santé public fictif, un agent demande de l'argent à une mère pour faire passer son enfant avant les autres malades. De quelle atteinte s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décrire : un agent public demande de l'argent en échange d'une faveur, passer avant les autres. Étape 2 — Nommer : c'est de la corruption, car un avantage est échangé contre une faveur contraire au service public. Rien n'est cassé, donc ce n'est pas du vandalisme. Rien n'est laissé se perdre, donc ce n'est pas du gaspillage. Aucun matériel n'est emporté, donc ce n'est pas un vol.",
+                "answers": [
+                  {
+                    "content": "Le vandalisme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le gaspillage",
+                    "correct": false
+                  },
+                  {
+                    "content": "La corruption",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le vol de matériel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Des jeunes cassent volontairement les portes des toilettes d'un collège public. Quelles sont les deux conséquences ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Mesurer les conséquences : les élèves, usagers, sont privés du bien ; la réparation est payée avec l'argent public, donc avec les impôts. Une réparation n'est jamais gratuite. Dire que personne n'est touché parce que le bien n'appartient à personne est le piège : le bien appartient à tous, donc tous sont touchés.",
+                "answers": [
+                  {
+                    "content": "Les élèves n'ont plus de toilettes utilisables",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il faut payer la réparation avec de l'argent public",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le collège obtient de nouvelles toilettes sans aucun coût",
+                    "correct": false
+                  },
+                  {
+                    "content": "Personne n'est touché, car le bien n'appartient à personne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seuls les auteurs sont gênés",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Casser volontairement une table-banc ou une vitre de l'école s'appelle du ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Nommer l'atteinte : détruire ou dégrader volontairement un bien public est du vandalisme. Si le bien était emporté, ce serait un vol ; s'il était laissé se perdre sans nécessité, ce serait du gaspillage.",
+                "answers": [
+                  {
+                    "content": "vandalisme",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Laisser la lumière allumée toute la nuit dans une classe vide ne concerne personne, car l'électricité de l'école n'appartient à personne.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Décrire : une lumière reste allumée sans nécessité dans une classe vide. Étape 2 — Nommer : c'est du gaspillage. Étape 3 — Mesurer les conséquences : l'électricité est payée avec l'argent public, donc tous les contribuables paient pour rien. Dire que le bien n'est à personne est le piège : il appartient à tous.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Bien gérer et protéger les biens publics",
+          "remember": "La Constitution ivoirienne de 2016 fait à chaque citoyen le **devoir de respecter et de protéger les biens publics**. Une bonne gestion repose sur trois exigences : la **transparence** (les décisions et les dépenses sont connues et expliquées), l'**entretien** (réparer à temps pour que le bien dure) et la **reddition de comptes** (le gestionnaire rend compte de ce qu'il a fait de l'argent et des biens qui lui sont confiés). Un élève responsable utilise les biens avec soin, ne les dégrade pas, économise l'eau et l'électricité, **signale** une panne ou une dégradation à un adulte, refuse de participer à une dégradation, sensibilise ses camarades et participe à l'entretien (nettoyage, journée de salubrité).",
+          "method": [
+            "Constater l'état du bien public et le problème, s'il y en a un.",
+            "Rappeler la règle : le devoir de respecter et de protéger, et l'exigence de bonne gestion concernée.",
+            "Choisir le comportement responsable : utiliser avec soin, signaler, refuser de participer, sensibiliser.",
+            "Conclure : dire ce que chacun doit faire et pourquoi cela profite à tous."
+          ],
+          "example": {
+            "statement": "Au collège public fictif de Sikoro, Mariam remarque qu'un robinet des toilettes fuit depuis trois jours et que des camarades tirent sur la porte du fond, déjà branlante. Que doit-elle faire ?",
+            "steps": [
+              "Constater : un robinet fuit depuis trois jours ; la porte du fond est branlante et des camarades tirent dessus.",
+              "Rappeler la règle : chaque citoyen a le devoir de respecter et de protéger les biens publics ; laisser fuir un robinet est du gaspillage, et tirer sur la porte l'abîmera davantage.",
+              "Choisir le comportement responsable : Mariam demande calmement à ses camarades d'arrêter, puis signale la fuite et la porte au surveillant.",
+              "Conclure : elle protège des biens qui servent à tous les élèves ; signalée à temps, la réparation coûtera peu avant qu'il faille tout remplacer."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'il suffit de ne rien casser soi-même. Se taire face à une dégradation, ou rire avec ceux qui dégradent, laisse le dommage s'aggraver. Contre-exemple : une fuite signalée dès le premier jour se répare vite ; une fuite ignorée pendant un mois peut abîmer le mur et coûter bien plus cher. Autre erreur : se faire justice soi-même, en frappant l'auteur. La bonne réaction est de **signaler** à un adulte responsable, sans violence.",
+          "figure": "reaction-degradation",
+          "exercise": {
+            "title": "Protéger les biens publics",
+            "statement": "Dans cet exercice, tu choisis le comportement responsable avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Selon la Constitution de 2016, quel devoir chaque citoyen a-t-il à l'égard des biens publics ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Rappeler la règle : la Constitution fait à chaque citoyen le devoir de respecter et de protéger les biens publics. Payer des impôts ne donne pas le droit de s'approprier ou d'abîmer un bien public, car il sert à tous. Se désintéresser du bien en laissant le gestionnaire seul est le piège : l'usager doit aussi signaler et protéger.",
+                "answers": [
+                  {
+                    "content": "Les utiliser comme ses biens personnels, puisqu'il paie des impôts",
+                    "correct": false
+                  },
+                  {
+                    "content": "Respecter et protéger les biens publics",
+                    "correct": true
+                  },
+                  {
+                    "content": "Surveiller seulement les biens de sa famille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Laisser le gestionnaire seul s'en occuper",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque exigence de bonne gestion à son sens.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Rappeler la règle et l'exigence de bonne gestion concernée. La transparence consiste à faire connaître et à expliquer les décisions et les dépenses. L'entretien consiste à réparer à temps pour que le bien dure. La reddition de comptes oblige le gestionnaire à rendre compte de ce qu'il a fait. Ne confonds pas entretenir, qui est une action, et rendre compte, qui est un devoir envers les citoyens.",
+                "answers": [
+                  {
+                    "content": "La transparence",
+                    "match": "Les décisions et les dépenses sont connues et expliquées"
+                  },
+                  {
+                    "content": "L'entretien",
+                    "match": "Réparer à temps pour que le bien dure"
+                  },
+                  {
+                    "content": "La reddition de comptes",
+                    "match": "Le gestionnaire rend compte de l'usage de l'argent et des biens"
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les trois comportements responsables d'un élève ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Choisir le comportement responsable : économiser l'eau, signaler une panne et refuser de participer à une dégradation protègent les biens publics. Rire d'une vitre cassée encourage le vandalisme. Emporter un livre sans l'enregistrer est un vol, et le livre manquera aux autres élèves.",
+                "answers": [
+                  {
+                    "content": "Fermer le robinet après avoir bu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Signaler une ampoule cassée au surveillant",
+                    "correct": true
+                  },
+                  {
+                    "content": "Refuser de graver son nom sur la table-banc malgré l'insistance de camarades",
+                    "correct": true
+                  },
+                  {
+                    "content": "Rire quand un camarade casse une vitre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Emporter chez soi un livre de la bibliothèque sans l'enregistrer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour protéger un bien public.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Constater l'état du bien et le problème. Étape 2 — Rappeler la règle : respecter et protéger. Étape 3 — Choisir le comportement responsable. Étape 4 — Conclure sur ce que chacun doit faire. On constate toujours avant de réagir, et on rappelle la règle avant de choisir le comportement.",
+                "answers": [
+                  {
+                    "content": "Constater l'état du bien et le problème"
+                  },
+                  {
+                    "content": "Rappeler la règle : respecter et protéger"
+                  },
+                  {
+                    "content": "Choisir le comportement responsable"
+                  },
+                  {
+                    "content": "Conclure sur ce que chacun doit faire"
+                  }
+                ]
+              },
+              {
+                "content": "Yao voit des camarades casser une vitre de la classe. Il ne participe pas. Est-ce suffisant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Constater : des camarades cassent une vitre. Étape 2 — Rappeler la règle : le devoir est de respecter et de protéger. Étape 3 — Choisir le comportement responsable : signaler à un adulte, sans violence. Étape 4 — Conclure : se taire laisse le dommage s'aggraver. Ne pas casser soi-même ne suffit pas. Frapper ses camarades est une violence et ne protège pas le bien.",
+                "answers": [
+                  {
+                    "content": "Oui : l'important est de ne rien casser soi-même",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : il doit frapper ses camarades pour les punir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : il doit aussi signaler les faits à un adulte responsable, car se taire laisse le dommage s'aggraver",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : la réparation est le travail de l'État seul",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les biens publics du quartier Nord de Sikoro",
+          "statement": "Dans la ville fictive de Sikoro, le quartier Nord possède un collège public, une fontaine publique, des lampadaires dans la rue principale et un centre de santé public. Kofi y habite ; sa famille tient une petite boutique et possède une bicyclette. Dans cet exercice, tu reconnais les biens publics du quartier et tu rappelles leurs règles.\n\n*Texte écrit pour Lnclass ; les noms sont fictifs.*",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans le quartier Nord de Sikoro (fictif), quels sont les trois biens publics parmi la boutique de la famille de Kofi, la fontaine publique, le collège public, la bicyclette de Kofi et le centre de santé public ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : identifier chaque bien, chercher à qui il appartient, chercher à qui il sert, puis conclure. La fontaine publique, le collège public et le centre de santé public appartiennent à l'État ou à la commune et servent à tous : ce sont des biens publics. La boutique et la bicyclette appartiennent à la famille de Kofi, qui en décide : ce sont des biens privés, même si la boutique reçoit des clients.",
+              "answers": [
+                {
+                  "content": "La boutique de la famille de Kofi",
+                  "correct": false
+                },
+                {
+                  "content": "La fontaine publique",
+                  "correct": true
+                },
+                {
+                  "content": "Le collège public",
+                  "correct": true
+                },
+                {
+                  "content": "La bicyclette de Kofi",
+                  "correct": false
+                },
+                {
+                  "content": "Le centre de santé public",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans la commune fictive de Sikoro, ce sont les services de la mairie qui installent et entretiennent les lampadaires de la rue. Qui est le propriétaire de ces lampadaires ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : chercher à qui le bien appartient. La mairie installe et entretient les lampadaires : ils appartiennent à la commune, une collectivité territoriale. Se trouver devant une boutique ou passer souvent dans la rue ne donne aucun droit de propriété. Un bien public a toujours un propriétaire public.",
+              "answers": [
+                {
+                  "content": "La commune",
+                  "correct": true
+                },
+                {
+                  "content": "Le commerçant dont la boutique est devant le lampadaire",
+                  "correct": false
+                },
+                {
+                  "content": "Les habitants qui passent le plus souvent dans la rue",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun propriétaire : ils appartiennent à celui qui les allume",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La fontaine publique du quartier est un bien public, car elle sert à tous les habitants.",
+              "question_type": "true_false",
+              "explanation": "Méthode : chercher à qui le bien sert. La fontaine est ouverte à tous les habitants du quartier et elle appartient à la collectivité qui l'a installée. Elle remplit donc les deux conditions d'un bien public : un propriétaire public et un usage pour tous.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un bien qui appartient à l'État ou à une collectivité et qui sert à tous est un bien ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : conclure. Un bien qui appartient à l'État ou à une collectivité territoriale et qui sert à tous est un bien public. Le contraire est le bien privé, qui appartient à une personne ou à une famille qui en décide seule.",
+              "answers": [
+                {
+                  "content": "public",
+                  "correct": true
+                },
+                {
+                  "content": "publique",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'argent qui finance les biens publics vient surtout des ___ payés par les citoyens et les entreprises.",
+              "question_type": "select",
+              "explanation": "Méthode : chercher qui finance. Les biens publics sont financés surtout par les impôts, comme on l'a vu avec le civisme fiscal. Les dons des élèves et les cadeaux des familles ne suffiraient pas à construire un collège ou un centre de santé.",
+              "answers": [
+                {
+                  "content": "impôts",
+                  "correct": true
+                },
+                {
+                  "content": "dons des élèves",
+                  "correct": false
+                },
+                {
+                  "content": "cadeaux des familles",
+                  "correct": false
+                },
+                {
+                  "content": "loyers des habitants du quartier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi la table-banc que tu utilises au collège public n'est pas ta propriété.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « La table-banc appartient à l'État, car le collège est public. Elle sert à tous les élèves, aujourd'hui et les années suivantes. Je l'utilise chaque jour, mais cela ne me rend pas propriétaire : je dois en prendre soin. » Barème sur 2 : 1 point pour le propriétaire (l'État), 0,5 point pour l'usage de tous, 0,5 point pour la conclusion sur le soin à apporter.",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Dit que la table-banc appartient à l'État ou à la collectivité",
+                "Dit qu'elle sert à tous les élèves",
+                "Conclut que l'utiliser ne rend pas propriétaire"
+              ],
+              "starter": "La table-banc appartient à…"
+            }
+          ]
+        },
+        {
+          "title": "La panne de l'éclairage public à Sikoro",
+          "statement": "Dans le quartier Sud de la ville fictive de Sikoro, trois lampadaires sont éteints depuis une semaine. Des jeunes ont arraché les câbles pour les revendre. Un soir, Mariam rentre du collège dans le noir. Le chef de quartier alerte la mairie, qui prévoit de remplacer les câbles. Dans cet exercice, tu nommes l'atteinte, ses conséquences et la bonne réaction.\n\n*Texte écrit pour Lnclass ; les noms sont fictifs.*",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Des jeunes arrachent les câbles des lampadaires publics pour les revendre. Quelle atteinte est-ce ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : décrire l'acte, puis nommer l'atteinte. Des jeunes prennent des câbles appartenant à la commune pour les vendre : c'est un vol d'un bien public, et il détruit aussi l'éclairage. Le gaspillage consiste à laisser se perdre sans nécessité. La reddition de comptes et la transparence sont des exigences de bonne gestion, pas des atteintes.",
+              "answers": [
+                {
+                  "content": "Le vol d'un bien public",
+                  "correct": true
+                },
+                {
+                  "content": "Le gaspillage",
+                  "correct": false
+                },
+                {
+                  "content": "La reddition de comptes",
+                  "correct": false
+                },
+                {
+                  "content": "La transparence",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après l'arrachage des câbles de l'éclairage public, quelles sont les deux conséquences ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : mesurer les conséquences. D'abord, le bien ne sert plus : les habitants, dont Mariam, circulent dans le noir, ce qui est dangereux. Ensuite, le remplacement est payé avec l'argent public, donc avec les impôts. L'éclairage ne coûte pas moins cher et les jeunes ne deviennent pas propriétaires : ils ont commis un vol.",
+              "answers": [
+                {
+                  "content": "Les habitants circulent dans le noir",
+                  "correct": true
+                },
+                {
+                  "content": "La mairie doit payer le remplacement avec de l'argent public",
+                  "correct": true
+                },
+                {
+                  "content": "L'éclairage coûte moins cher",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun habitant n'est concerné",
+                  "correct": false
+                },
+                {
+                  "content": "Les jeunes deviennent propriétaires des lampadaires",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque acteur à ce qu'il fait dans cette situation.",
+              "question_type": "matching",
+              "explanation": "Méthode : chercher le propriétaire et le gestionnaire, puis les usagers. La mairie est propriétaire et gestionnaire de l'éclairage : elle fait remplacer les câbles. Le chef de quartier joue le rôle de relais en signalant la panne. Mariam et les habitants sont les usagers, privés de lumière.",
+              "answers": [
+                {
+                  "content": "La mairie",
+                  "match": "Remplace les câbles"
+                },
+                {
+                  "content": "Le chef de quartier",
+                  "match": "Signale la panne à la mairie"
+                },
+                {
+                  "content": "Mariam et les habitants",
+                  "match": "Usagers privés de lumière"
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la réaction responsable face à cette panne.",
+              "question_type": "ordering",
+              "explanation": "Méthode : constater, signaler, faire réparer, prévenir. On constate d'abord la panne. L'usager la signale au gestionnaire. La mairie, gestionnaire, fait réparer. Enfin les habitants sont sensibilisés pour que le vol ne se répète pas. On ne peut pas réparer avant d'avoir signalé : le gestionnaire doit être informé.",
+              "answers": [
+                {
+                  "content": "Constater que les lampadaires sont éteints"
+                },
+                {
+                  "content": "Signaler la panne à la mairie ou au chef de quartier"
+                },
+                {
+                  "content": "La mairie fait remplacer les câbles"
+                },
+                {
+                  "content": "Sensibiliser les habitants à protéger le matériel"
+                }
+              ]
+            },
+            {
+              "content": "Comme l'éclairage public appartient à la commune, un habitant peut ramasser les câbles tombés et les garder.",
+              "question_type": "true_false",
+              "explanation": "Méthode : chercher à qui le bien appartient, puis choisir le comportement responsable. Les câbles appartiennent à la commune, même tombés par terre : les garder serait un vol. Le comportement responsable est de les signaler à la mairie ou au chef de quartier pour qu'elle les récupère et les remette en service.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un camarade dit : « Les câbles de l'éclairage sont à l'État, donc à tout le monde : je peux les prendre. » Réponds-lui en trois ou quatre phrases.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Tu te trompes : un bien qui est à tout le monde n'est pas à toi seul. Les câbles appartiennent à la commune et servent à éclairer tous les habitants. Si tu les prends, c'est un vol : la rue reste dans le noir et la mairie paie le remplacement avec l'argent public. Tu dois les signaler. » Barème sur 4 : 1 point pour la règle (le bien public sert à tous et appartient à la collectivité), 1 point pour nommer l'acte (un vol), 1 point pour la conséquence, 1 point pour le comportement responsable.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Explique qu'un bien public n'appartient pas à une seule personne",
+                "Nomme l'acte : un vol",
+                "Donne une conséquence pour les habitants ou pour l'argent public",
+                "Propose de signaler"
+              ],
+              "starter": "Tu te trompes, car…"
+            }
+          ]
+        },
+        {
+          "title": "Les dépenses d'entretien du collège de Sikoro",
+          "statement": "Le collège public fictif de Sikoro a consacré, sur une année, des sommes à l'entretien et à la réparation de ses biens. Le diagramme en barres (données fictives) donne ces dépenses en milliers de FCFA : tables-bancs 250, toilettes 180, toiture 120, clôture 150, livres de la bibliothèque 100. Le directeur présente ces dépenses aux parents lors d'une réunion. Une partie des réparations des tables-bancs et des toilettes vient de dégradations volontaires.\n\n*Texte écrit pour Lnclass ; les données sont fictives.*",
+          "exercise_type": "evaluation",
+          "figure": "depenses-entretien-college",
+          "questions": [
+            {
+              "content": "Le diagramme donne les dépenses d'entretien du collège de Sikoro en milliers de FCFA (données fictives) : tables-bancs 250, toilettes 180, toiture 120, clôture 150, livres 100. Quel est le total de ces dépenses ?",
+              "question_type": "numeric",
+              "unit": "milliers",
+              "tolerance": 0,
+              "explanation": "Méthode : lire les données, puis calculer. Étape 1 — Lire chaque barre : 250, 180, 120, 150 et 100. Étape 2 — Additionner : 250 + 180 = 430 ; 430 + 120 = 550 ; 550 + 150 = 700 ; 700 + 100 = 800. Le total est de 800 milliers de FCFA, soit 800 000 FCFA. Ne t'arrête pas à la plus grande barre : le total compte toutes les dépenses.",
+              "answers": [
+                {
+                  "content": "800",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans le diagramme (tables-bancs 250, toilettes 180, toiture 120, clôture 150, livres 100, en milliers de FCFA, données fictives), quel poste coûte le plus ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : lire le diagramme et comparer les barres. La plus haute barre est celle des tables-bancs, avec 250 milliers de FCFA. Les toilettes (180) viennent ensuite, puis la clôture (150), la toiture (120) et les livres (100).",
+              "answers": [
+                {
+                  "content": "Les toilettes",
+                  "correct": false
+                },
+                {
+                  "content": "Les tables-bancs",
+                  "correct": true
+                },
+                {
+                  "content": "La clôture",
+                  "correct": false
+                },
+                {
+                  "content": "Les livres de la bibliothèque",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les tables-bancs et les toilettes sont souvent abîmées par des élèves. D'après le diagramme (tables-bancs 250, toilettes 180, en milliers de FCFA, données fictives), combien ces deux postes coûtent-ils au total ?",
+              "question_type": "numeric",
+              "unit": "milliers",
+              "tolerance": 0,
+              "explanation": "Méthode : identifier les deux postes, puis additionner. Étape 1 — Repérer : tables-bancs 250 et toilettes 180. Étape 2 — Calculer : 250 + 180 = 430. Ces deux postes coûtent 430 milliers de FCFA, plus de la moitié des 800 du total. La part de cet argent due aux dégradations volontaires aurait pu servir à autre chose, comme acheter des livres.",
+              "answers": [
+                {
+                  "content": "430",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après le diagramme (toilettes 180, livres 100, en milliers de FCFA, données fictives), les toilettes ont coûté moins que les livres de la bibliothèque.",
+              "question_type": "true_false",
+              "explanation": "Méthode : lire et comparer les barres. Les toilettes ont coûté 180 milliers de FCFA et les livres 100. 180 est plus grand que 100 : les toilettes ont coûté davantage, pas moins. Il faut comparer les valeurs lues, pas la place des barres.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le directeur explique aux parents ce que le collège a fait de l'argent de l'entretien et le montre dans un compte rendu. Quelle exigence de bonne gestion cela illustre-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : rappeler la règle et l'exigence concernée. Un gestionnaire qui rend compte de l'usage de l'argent qui lui a été confié pratique la reddition de comptes. L'entretien consiste à réparer les biens, pas à rendre compte. Le vandalisme et le détournement sont des atteintes, pas des exigences de bonne gestion.",
+              "answers": [
+                {
+                  "content": "L'entretien",
+                  "correct": false
+                },
+                {
+                  "content": "La reddition de comptes",
+                  "correct": true
+                },
+                {
+                  "content": "Le vandalisme",
+                  "correct": false
+                },
+                {
+                  "content": "Le détournement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève dit : « Ce n'est pas grave de casser une table-banc, l'État en rachètera une. » En quatre ou cinq phrases, explique pourquoi il a tort en citant le devoir des citoyens et une conséquence tirée du diagramme (tables-bancs 250 milliers de FCFA sur un total de 800, données fictives).",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « L'élève a tort. La table-banc est un bien public : elle sert à tous les élèves. Chaque citoyen a le devoir de respecter et de protéger les biens publics. Quand on casse une table-banc, il faut la remplacer avec de l'argent public, donc avec les impôts. Dans le diagramme fictif, les tables-bancs coûtent 250 milliers de FCFA sur 800 : cet argent ne sert plus à acheter des livres. » Barème sur 4 : 1 point pour la prise de position, 1 point pour le devoir de respecter et protéger, 1 point pour la conséquence chiffrée, 1 point pour la clarté et le ton respectueux.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Prend position clairement contre le comportement",
+                "Cite le devoir de respecter et de protéger les biens publics",
+                "Donne une conséquence chiffrée tirée du diagramme",
+                "Argumente avec clarté et respect"
+              ],
+              "starter": "L'élève a tort, car…"
+            }
+          ]
+        },
+        {
+          "title": "Au centre de santé de Sikoro",
+          "statement": "Le centre de santé public fictif de Sikoro reçoit chaque jour des habitants du quartier. Un matin, les familles découvrent que deux lits ont été cassés volontairement par des jeunes et que des boîtes de médicaments destinées aux malades ont disparu : un agent les a revendues. Par ailleurs, un autre agent a demandé de l'argent à une mère pour que son enfant passe avant les autres malades. Un groupe d'habitants décide d'agir et de prévenir le responsable du centre.\n\n*Texte écrit pour Lnclass ; les noms sont fictifs.*",
+          "exercise_type": "evaluation",
+          "figure": "reaction-degradation",
+          "questions": [
+            {
+              "content": "Relie chaque fait à l'atteinte qu'il représente.",
+              "question_type": "matching",
+              "explanation": "Méthode : décrire l'acte, puis nommer l'atteinte. Casser volontairement des lits, c'est du vandalisme. Revendre pour son profit des médicaments confiés au centre, c'est détourner un bien public de son usage : c'est du détournement. Demander de l'argent contre une faveur, passer avant les autres, c'est de la corruption.",
+              "answers": [
+                {
+                  "content": "Deux lits sont cassés volontairement par des jeunes",
+                  "match": "Le vandalisme"
+                },
+                {
+                  "content": "Un agent revend des médicaments destinés aux malades",
+                  "match": "Le détournement"
+                },
+                {
+                  "content": "Un agent demande de l'argent pour faire passer un enfant avant les autres",
+                  "match": "La corruption"
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois conséquences de ces actes pour le centre de santé et ses malades ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : mesurer les conséquences. Des lits cassés et des médicaments disparus font que les malades sont moins bien soignés et que certains risquent de ne pas recevoir leur traitement. Les lits sont remplacés avec l'argent public. Le centre ne devient pas plus performant, les agents n'en deviennent pas propriétaires, et tous les habitants sont concernés, pas seulement les agents.",
+              "answers": [
+                {
+                  "content": "Les malades sont moins bien soignés",
+                  "correct": true
+                },
+                {
+                  "content": "Les lits cassés doivent être remplacés avec de l'argent public",
+                  "correct": true
+                },
+                {
+                  "content": "Des malades risquent de ne pas recevoir leurs médicaments",
+                  "correct": true
+                },
+                {
+                  "content": "Le centre de santé devient plus performant",
+                  "correct": false
+                },
+                {
+                  "content": "Les agents deviennent propriétaires du centre",
+                  "correct": false
+                },
+                {
+                  "content": "Seuls les agents sont concernés",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le schéma de la bonne réaction, un habitant constate la dégradation de lits du centre de santé. Quelle est sa première réaction responsable après avoir constaté les faits ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : constater, puis choisir le comportement responsable. L'habitant ne s'en prend pas aux auteurs, reste en sécurité et signale au responsable du centre, qui vérifie les faits. Casser en retour est une violence et une nouvelle atteinte. Se taire laisse le dommage s'aggraver. Réparer seul sans prévenir ne permet pas de retrouver les auteurs.",
+              "answers": [
+                {
+                  "content": "Ne pas s'en prendre aux auteurs et rester en sécurité, puis signaler à un adulte responsable",
+                  "correct": true
+                },
+                {
+                  "content": "Casser en retour le bien des jeunes",
+                  "correct": false
+                },
+                {
+                  "content": "Ne rien dire pour éviter les problèmes",
+                  "correct": false
+                },
+                {
+                  "content": "Réparer les lits soi-même sans prévenir personne",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le responsable du centre doit expliquer aux habitants ce qu'il a fait des médicaments et de l'argent confiés au centre : c'est la ___.",
+              "question_type": "select",
+              "explanation": "Méthode : rappeler l'exigence de bonne gestion. Rendre compte de l'usage de l'argent et des biens confiés est la reddition de comptes. La corruption, le vandalisme et le gaspillage sont des atteintes aux biens publics, pas des exigences de bonne gestion.",
+              "answers": [
+                {
+                  "content": "reddition de comptes",
+                  "correct": true
+                },
+                {
+                  "content": "corruption",
+                  "correct": false
+                },
+                {
+                  "content": "vandalisme",
+                  "correct": false
+                },
+                {
+                  "content": "gaspillage",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Donner de l'argent à l'agent pour passer plus vite est acceptable, car cela rend service à un enfant malade.",
+              "question_type": "true_false",
+              "explanation": "Méthode : nommer l'atteinte et rappeler la règle. Donner de l'argent pour obtenir une faveur, passer avant les autres, participe à la corruption, qui est contraire à l'intérêt général. Les autres malades attendent plus longtemps, et le service public ne doit pas se vendre. La bonne réaction est de refuser et de signaler au responsable.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige en cinq ou six phrases le message du groupe d'habitants au responsable du centre : décris les faits, nomme deux atteintes, indique une conséquence et demande une réaction.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Monsieur le responsable, ce matin, nous avons constaté que deux lits du centre ont été cassés volontairement et que des médicaments ont disparu. Casser les lits est du vandalisme ; revendre des médicaments est un détournement. Les malades risquent d'être moins bien soignés et le remplacement coûtera de l'argent public. Un agent a aussi demandé de l'argent à une mère pour faire passer son enfant avant les autres. Nous vous demandons de vérifier les faits, de faire réparer les lits et de nous tenir informés. Merci de votre attention. » Barème sur 5 : 1 point pour les faits, 1 point pour deux atteintes bien nommées, 1 point pour la conséquence, 1 point pour la demande, 1 point pour la forme et le ton respectueux.",
+              "answers": [],
+              "points": 5,
+              "criteria": [
+                "Décrit les faits précisément",
+                "Nomme correctement deux atteintes",
+                "Indique une conséquence pour les malades ou l'argent public",
+                "Demande une réaction au responsable",
+                "Respecte la forme d'un message poli"
+              ],
+              "starter": "Monsieur le responsable, nous avons constaté…"
+            },
+            {
+              "content": "Un habitant dit : « Signaler, c'est trahir les gens du quartier. » Prends position en trois ou quatre phrases en t'appuyant sur le devoir des citoyens.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Je ne suis pas d'accord : signaler n'est pas trahir, c'est protéger tout le quartier. Le centre de santé est un bien public qui sert à tous. Chaque citoyen a le devoir de respecter et de protéger les biens publics. Si personne ne signale, les dégradations continuent et les malades en souffrent. » Barème sur 3 : 1 point pour la prise de position, 1 point pour le devoir de respecter et protéger, 1 point pour l'argument sur les malades ou le quartier.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Prend position clairement",
+                "Cite le devoir de respecter et de protéger les biens publics",
+                "Donne un argument sur les conséquences pour le quartier"
+              ],
+              "starter": "Je ne suis pas d'accord, car…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
