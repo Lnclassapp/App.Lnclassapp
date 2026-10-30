@@ -1,0 +1,1312 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'infection au VIH",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "SVT",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "virus-vih",
+          "kind": "plate",
+          "description": "Planche du VIH avec ses noms. À l'extérieur, l'enveloppe porte les glycoprotéines gp120 et gp41, par lesquelles le virus se fixe sur un lymphocyte T4. À l'intérieur, la matrice protéique et la capside enferment l'ARN viral et la transcriptase inverse. La gp120 est en évidence.",
+          "params": {
+            "plate": "hiv_virus",
+            "labels": [
+              {
+                "part": "envelope"
+              },
+              {
+                "part": "gp120"
+              },
+              {
+                "part": "gp41"
+              },
+              {
+                "part": "matrix"
+              },
+              {
+                "part": "capsid"
+              },
+              {
+                "part": "rna"
+              },
+              {
+                "part": "reverse_transcriptase"
+              }
+            ],
+            "highlight": [
+              "gp120"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "virus-vih-a-legender",
+          "kind": "plate",
+          "description": "Planche du VIH sans légende, avec des numéros : 1 l'enveloppe, 2 la glycoprotéine gp120, 3 la capside, 4 l'ARN viral, 5 la transcriptase inverse. L'élève retrouve le nom de chaque partie à partir de son numéro et de son rôle.",
+          "params": {
+            "plate": "hiv_virus",
+            "labels": [
+              {
+                "part": "envelope"
+              },
+              {
+                "part": "gp120"
+              },
+              {
+                "part": "capsid"
+              },
+              {
+                "part": "rna"
+              },
+              {
+                "part": "reverse_transcriptase"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "evolution-t4",
+          "kind": "stat_chart",
+          "description": "Courbe illustrative, d'après un document de classe, du nombre de lymphocytes T4 par mm3 de sang d'une personne infectée par le VIH et non traitée : 1000 à l'an 0, puis 850, 700, 600, 450, 350, 250, 150 et 80 à l'an 8. La courbe descend sans cesse. Ce ne sont pas des statistiques réelles.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1000,
+              850,
+              700,
+              600,
+              450,
+              350,
+              250,
+              150,
+              80
+            ],
+            "labels": [
+              "An 0",
+              "An 1",
+              "An 2",
+              "An 3",
+              "An 4",
+              "An 5",
+              "An 6",
+              "An 7",
+              "An 8"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "transmission-vih",
+          "kind": "diagram",
+          "description": "Schéma en arbre des voies de transmission du VIH : la voie sexuelle (rapport sexuel non protégé), la voie sanguine (objet souillé de sang, sang non contrôlé), la voie mère-enfant (grossesse, accouchement, allaitement), et les gestes qui ne transmettent pas le virus (poignée de main, repas, piqûre de moustique).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Le VIH et les liquides du corps"
+              },
+              {
+                "id": "v1",
+                "label": "Voie sexuelle"
+              },
+              {
+                "id": "v2",
+                "label": "Voie sanguine"
+              },
+              {
+                "id": "v3",
+                "label": "Voie mère-enfant"
+              },
+              {
+                "id": "v4",
+                "label": "Aucune transmission"
+              },
+              {
+                "id": "c1",
+                "label": "Rapport sexuel non protégé"
+              },
+              {
+                "id": "c2",
+                "label": "Objet souillé, sang non contrôlé"
+              },
+              {
+                "id": "c3",
+                "label": "Grossesse, accouchement, allaitement"
+              },
+              {
+                "id": "c4",
+                "label": "Poignée de main, repas, piqûre de moustique"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "v1"
+              },
+              {
+                "from": "r",
+                "to": "v2"
+              },
+              {
+                "from": "r",
+                "to": "v3"
+              },
+              {
+                "from": "r",
+                "to": "v4"
+              },
+              {
+                "from": "v1",
+                "to": "c1"
+              },
+              {
+                "from": "v2",
+                "to": "c2"
+              },
+              {
+                "from": "v3",
+                "to": "c3"
+              },
+              {
+                "from": "v4",
+                "to": "c4"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "prevention-vih",
+          "kind": "diagram",
+          "description": "Schéma en arbre de la prévention du VIH et de la prise en charge : contre la voie sexuelle, l'abstinence, la fidélité et le préservatif ; contre la voie sanguine, le matériel stérile et le sang contrôlé ; contre la voie mère-enfant, la PTME ; le dépistage au centre de santé ; le traitement par ARV et le suivi médical.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Prévenir et prendre en charge"
+              },
+              {
+                "id": "a",
+                "label": "Voie sexuelle"
+              },
+              {
+                "id": "b",
+                "label": "Voie sanguine"
+              },
+              {
+                "id": "c",
+                "label": "Voie mère-enfant"
+              },
+              {
+                "id": "d",
+                "label": "Connaître son statut"
+              },
+              {
+                "id": "e",
+                "label": "Après un test positif"
+              },
+              {
+                "id": "a1",
+                "label": "Abstinence, fidélité, préservatif"
+              },
+              {
+                "id": "b1",
+                "label": "Matériel stérile, sang contrôlé"
+              },
+              {
+                "id": "c1",
+                "label": "PTME"
+              },
+              {
+                "id": "d1",
+                "label": "Dépistage au centre de santé"
+              },
+              {
+                "id": "e1",
+                "label": "ARV et suivi médical"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "a"
+              },
+              {
+                "from": "r",
+                "to": "b"
+              },
+              {
+                "from": "r",
+                "to": "c"
+              },
+              {
+                "from": "r",
+                "to": "d"
+              },
+              {
+                "from": "r",
+                "to": "e"
+              },
+              {
+                "from": "a",
+                "to": "a1"
+              },
+              {
+                "from": "b",
+                "to": "b1"
+              },
+              {
+                "from": "c",
+                "to": "c1"
+              },
+              {
+                "from": "d",
+                "to": "d1"
+              },
+              {
+                "from": "e",
+                "to": "e1"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le VIH et ses effets sur les défenses de l'organisme",
+          "remember": "Le **VIH** (virus de l'immunodéficience humaine) est un virus. Il attaque les **lymphocytes T4**, des leucocytes qui commandent les défenses de l'organisme. Le virus se **fixe** sur la cellule, y entre, copie son **ARN** en ADN grâce à une enzyme (la **transcriptase inverse**), se **multiplie**, puis **détruit** la cellule. Le nombre de lymphocytes T4 baisse : c'est l'**immunodéficience**. Une personne est **séropositive** quand son sang contient des **anticorps** contre le VIH : elle peut se sentir bien pendant des années. Le **SIDA** (syndrome d'immunodéficience acquise) est le stade avancé : les défenses sont très affaiblies et des **maladies opportunistes** apparaissent (infections qu'un organisme sain combat facilement).",
+          "method": [
+            "Identifier le virus et la cellule qu'il attaque.",
+            "Décrire les étapes de son action dans la cellule : fixation, entrée, multiplication, destruction.",
+            "Lire l'évolution du nombre de lymphocytes T4 dans le document (courbe ou tableau).",
+            "Conclure sur l'état des défenses de l'organisme et sur le stade de l'infection."
+          ],
+          "example": {
+            "statement": "Un document de classe donne, à titre illustratif, le nombre de lymphocytes T4 par mm3 de sang d'une personne infectée par le VIH et non traitée : 1000 au début, 700 à l'an 2, 450 à l'an 4, 250 à l'an 6, 80 à l'an 8. Expliquer ce que le VIH fait à cette personne.",
+            "steps": [
+              "Identifier : le virus est le VIH, et il attaque les lymphocytes T4, cellules qui commandent les défenses.",
+              "Décrire : le VIH se fixe sur un lymphocyte T4, y entre, y copie son ARN en ADN, s'y multiplie, puis détruit la cellule.",
+              "Lire : le nombre de T4 passe de 1000 à 80 par mm3 en 8 ans, il diminue sans cesse.",
+              "Conclure : les défenses s'affaiblissent de plus en plus (immunodéficience) ; à 80 T4 par mm3, elles sont très affaiblies : des maladies opportunistes peuvent apparaître, c'est le stade SIDA."
+            ]
+          },
+          "pitfall": "Ne pas confondre **séropositif** et **malade du SIDA**. Contre-exemple : une personne séropositive qui a encore 800 lymphocytes T4 par mm3 (valeur illustrative) a des défenses qui fonctionnent et aucun signe de maladie. Le SIDA n'apparaît que lorsque les T4 sont devenus très peu nombreux et que des maladies opportunistes se déclarent. Séropositif = infecté par le VIH ; SIDA = stade avancé de l'infection.",
+          "figure": "virus-vih",
+          "exercise": {
+            "title": "Le VIH et les lymphocytes T4",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour expliquer l'action du VIH et distinguer séropositivité et SIDA.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle cellule le VIH attaque-t-il en priorité ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le virus est le VIH et la cellule qu'il attaque est le lymphocyte T4, un leucocyte qui commande les défenses de l'organisme. Étape 2 — Décrire : il s'y fixe, y entre, s'y multiplie puis la détruit. L'hématie transporte le dioxygène, la plaquette sanguine intervient dans la coagulation : ce ne sont pas les cibles du virus. Le polynucléaire est aussi un leucocyte, mais ce n'est pas lui que le VIH attaque en priorité.",
+                "answers": [
+                  {
+                    "content": "Le lymphocyte T4",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'hématie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La plaquette sanguine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le polynucléaire neutrophile",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'action du VIH dans un lymphocyte T4.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Décrire les étapes de l'action du virus : d'abord la fixation sur le lymphocyte T4, ensuite l'entrée et la copie de l'ARN en ADN grâce à la transcriptase inverse, puis la multiplication, enfin la destruction de la cellule qui libère de nouveaux virus. On ne peut pas détruire la cellule avant que le virus s'y soit multiplié.",
+                "answers": [
+                  {
+                    "content": "Le virus se fixe sur le lymphocyte T4."
+                  },
+                  {
+                    "content": "Le virus entre dans la cellule et copie son ARN en ADN."
+                  },
+                  {
+                    "content": "Le virus se multiplie dans la cellule."
+                  },
+                  {
+                    "content": "La cellule est détruite et libère de nouveaux virus."
+                  }
+                ]
+              },
+              {
+                "content": "Une personne séropositive est forcément malade du SIDA.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure sur le stade de l'infection : être séropositif veut dire que le sang contient des anticorps contre le VIH, donc que la personne est infectée. Elle peut garder des défenses suffisantes et ne présenter aucun signe pendant des années. Le SIDA est le stade avancé, avec des défenses très affaiblies et des maladies opportunistes. Séropositif et malade du SIDA ne sont donc pas la même chose.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un document de classe donne, à titre illustratif, 1000 lymphocytes T4 par mm3 de sang au début de l'infection, puis 400 par mm3 quelques années plus tard. De combien le nombre de T4 par mm3 a-t-il baissé ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Lire l'évolution du nombre de lymphocytes T4 : au début 1000, plus tard 400. Il faut soustraire la valeur finale de la valeur de départ : $1000 - 400 = 600$. Le nombre de T4 a baissé de 600 par mm3. Si tu écris 400 ou 1400, tu as recopié ou additionné les données au lieu de calculer la baisse.",
+                "answers": [
+                  {
+                    "content": "600",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Le SIDA est le stade où les défenses sont très affaiblies et où apparaissent des maladies ___.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Conclure sur l'état des défenses : quand le nombre de lymphocytes T4 est très bas, l'organisme ne se défend plus, et des infections qui profitent de cet affaiblissement apparaissent : ce sont les maladies opportunistes. Elles ne sont ni héréditaires ni génétiques, et elles ont une cause : ce sont des infections dues à des microbes qui profitent de l'affaiblissement des défenses.",
+                "answers": [
+                  {
+                    "content": "opportunistes",
+                    "correct": true
+                  },
+                  {
+                    "content": "héréditaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "génétiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "sans cause",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le virus et sa cible : le lymphocyte T4 est la cellule attaquée par le VIH. Étape 4 — Conclure sur les défenses : l'immunodéficience est la baisse des défenses, la maladie opportuniste en est la conséquence, et le séropositif est la personne dont le sang contient les anticorps contre le virus. Ne mélange pas séropositif (infection) et maladie opportuniste (stade avancé).",
+                "answers": [
+                  {
+                    "content": "Séropositif",
+                    "match": "Dont le sang contient des anticorps contre le VIH"
+                  },
+                  {
+                    "content": "Immunodéficience",
+                    "match": "Baisse des défenses de l'organisme"
+                  },
+                  {
+                    "content": "Maladie opportuniste",
+                    "match": "Infection qui profite de l'affaiblissement des défenses"
+                  },
+                  {
+                    "content": "Lymphocyte T4",
+                    "match": "Cellule attaquée par le VIH"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les modes de transmission du VIH",
+          "remember": "Le VIH se trouve, en quantité suffisante pour être transmis, dans le **sang**, le **sperme**, les **sécrétions vaginales** et le **lait maternel**. Il se transmet quand l'un de ces liquides passe dans l'organisme d'une autre personne. Il y a trois voies : la **voie sexuelle** (rapport sexuel non protégé), la **voie sanguine** (transfusion de sang non contrôlé, objet souillé de sang comme une seringue, une aiguille ou une lame) et la **voie mère-enfant** (pendant la grossesse, l'accouchement ou l'allaitement). Le VIH ne se transmet **pas** par la sueur, les larmes, une poignée de main, une accolade, le partage d'un repas, les toilettes ou une piqûre de moustique.",
+          "method": [
+            "Identifier le liquide du corps ou l'objet en cause dans la situation.",
+            "Chercher si ce liquide, s'il contient le virus, peut passer dans l'organisme d'une autre personne (muqueuse, plaie, piqûre, placenta, lait).",
+            "Nommer la voie de transmission : sexuelle, sanguine ou mère-enfant.",
+            "Conclure : transmission possible ou impossible, en justifiant."
+          ],
+          "example": {
+            "statement": "Yao est séropositif. Kofi partage avec lui un rasoir non désinfecté, puis lui serre la main. Dire si le VIH peut se transmettre dans chaque cas.",
+            "steps": [
+              "Identifier : dans le premier cas, le rasoir peut porter du sang ; dans le second, il n'y a que le contact de deux mains.",
+              "Chercher : le sang d'une personne infectée peut entrer par une petite coupure chez l'autre ; une poignée de main ne fait passer aucun liquide contenant le virus dans le corps.",
+              "Nommer : le rasoir est une voie sanguine ; la poignée de main n'est aucune voie.",
+              "Conclure : le partage du rasoir peut transmettre le VIH ; la poignée de main ne le transmet pas."
+            ]
+          },
+          "pitfall": "Ne pas croire que le VIH se transmet par les gestes de la vie courante. Contre-exemple : manger dans la même assiette qu'un camarade séropositif ne fait passer ni sang, ni sperme, ni sécrétions vaginales, ni lait : aucun risque. Cette erreur conduit à rejeter des personnes sans raison. Inversement, ne pas croire qu'un rasoir partagé est sans danger : il peut porter du sang. Le bon test est toujours : un liquide contenant le virus passe-t-il dans le corps d'une autre personne ?",
+          "figure": "transmission-vih",
+          "exercise": {
+            "title": "Reconnaître une transmission du VIH",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des situations de la vie courante pour dire si le VIH peut se transmettre.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces liquides du corps, lesquels peuvent transmettre le VIH ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier le liquide en cause : le VIH se trouve en grande quantité dans le sang, le sperme, les sécrétions vaginales et le lait maternel. Étape 2 — Chercher si ce liquide peut passer dans l'organisme d'une autre personne : c'est le cas pour ces trois liquides de la liste ; le lait maternel, absent de la liste, peut aussi transmettre le virus. La sueur et les larmes ne transmettent pas le virus : les confondre avec les trois liquides vrais conduit à craindre des gestes sans danger.",
+                "answers": [
+                  {
+                    "content": "Le sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sperme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les sécrétions vaginales",
+                    "correct": true
+                  },
+                  {
+                    "content": "La sueur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les larmes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un nourrisson est infecté par le VIH pendant l'allaitement par sa mère séropositive. Par quelle voie le virus est-il passé ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier le liquide : le lait maternel peut contenir le VIH. Étape 3 — Nommer la voie : le virus passe de la mère à l'enfant, c'est la voie mère-enfant, qui comprend la grossesse, l'accouchement et l'allaitement. Il n'y a ni rapport sexuel ni transfusion ici. Dire que le lait ne contient pas le virus est faux.",
+                "answers": [
+                  {
+                    "content": "La voie mère-enfant",
+                    "correct": true
+                  },
+                  {
+                    "content": "La voie sexuelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "La voie sanguine uniquement, par une transfusion",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune voie : le lait ne contient pas le virus",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une piqûre de moustique peut transmettre le VIH.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher si un liquide contenant le virus passe dans l'organisme d'une autre personne : le moustique n'injecte pas le sang de la personne piquée avant, seulement sa salive, et le VIH ne se multiplie pas chez lui. Étape 4 — Conclure : la transmission est impossible. Croire le contraire est une idée reçue qui fait peur sans raison.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à la voie de transmission du VIH.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Nommer la voie : le rapport sexuel non protégé est la voie sexuelle, le sang non contrôlé la voie sanguine, l'accouchement la voie mère-enfant. Pour l'assiette, Étape 2 : aucun sang, sperme, sécrétion vaginale ni lait ne passe dans le corps de l'autre, donc Étape 4 : pas de transmission.",
+                "answers": [
+                  {
+                    "content": "Rapport sexuel sans préservatif avec une personne infectée",
+                    "match": "Voie sexuelle"
+                  },
+                  {
+                    "content": "Transfusion de sang non contrôlé",
+                    "match": "Voie sanguine"
+                  },
+                  {
+                    "content": "Accouchement d'une mère séropositive non suivie",
+                    "match": "Voie mère-enfant"
+                  },
+                  {
+                    "content": "Partage d'une assiette avec une personne séropositive",
+                    "match": "Aucune voie : pas de transmission"
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces situations, lesquelles peuvent transmettre le VIH ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier le liquide ou l'objet : l'aiguille peut porter du sang. Étape 2 — Chercher le passage dans l'organisme : une aiguille perce la peau, un rapport sexuel met en contact des muqueuses avec le sperme ou les sécrétions vaginales. Étape 3 — Nommer la voie : sanguine et sexuelle. Le verre, la main et les toilettes ne font passer aucun liquide contenant le virus : pas de transmission.",
+                "answers": [
+                  {
+                    "content": "Se faire tatouer avec une aiguille non stérilisée déjà utilisée sur une personne infectée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Avoir un rapport sexuel sans préservatif avec une personne infectée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Boire dans le même verre qu'une personne séropositive",
+                    "correct": false
+                  },
+                  {
+                    "content": "Serrer la main d'une personne séropositive",
+                    "correct": false
+                  },
+                  {
+                    "content": "Utiliser les mêmes toilettes qu'une personne séropositive",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Kofi dit : « Je ne m'assois plus à côté d'Awa, car sa mère est séropositive et je risque d'attraper le VIH. » Que peut-on lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : il n'y a ni sang, ni sperme, ni sécrétions vaginales, ni lait en cause. Étape 2 — Chercher si un liquide contenant le virus passe d'un corps à l'autre : non. Étape 4 — Conclure : la transmission est impossible. Attention à l'erreur du piège : craindre les gestes de la vie courante conduit à rejeter une camarade sans raison.",
+                "answers": [
+                  {
+                    "content": "Être assis à côté d'une personne ne fait passer aucun liquide contenant le virus : il n'y a aucun risque.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : l'air autour d'une personne séropositive transporte le virus.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison tant qu'il ne se lave pas les mains après chaque contact.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il doit seulement éviter de lui parler de près.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète : le VIH peut être transmis par le sang, le sperme, les sécrétions vaginales et le lait ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier les liquides qui contiennent le virus en quantité suffisante : le sang, le sperme, les sécrétions vaginales et le lait maternel. C'est ce dernier liquide qui explique la transmission pendant l'allaitement, un des temps de la voie mère-enfant. Les autres liquides du corps comme la sueur et les larmes ne transmettent pas le VIH.",
+                "answers": [
+                  {
+                    "content": "maternel",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La prévention du VIH et la prise en charge",
+          "remember": "On évite l'infection en **coupant chaque voie de transmission**. Voie sexuelle : l'**abstinence**, la **fidélité** entre partenaires non infectés et dépistés, le **préservatif** utilisé correctement à chaque rapport. Voie sanguine : du **matériel stérile ou à usage unique** et du **sang contrôlé**. Voie mère-enfant : la **PTME** (prévention de la transmission mère-enfant), avec dépistage de la femme enceinte, médicaments et suivi par le personnel de santé. Le **dépistage** (recherche des anticorps, au centre de santé) permet de connaître son statut. Les **antirétroviraux (ARV)** ne guérissent pas, mais freinent la multiplication du virus : les T4 remontent. Une personne séropositive a droit au respect : le rejet ne protège de rien.",
+          "method": [
+            "Identifier la voie de transmission à interrompre dans la situation.",
+            "Choisir le moyen de prévention adapté à cette voie : abstinence, préservatif, matériel stérile, sang contrôlé ou PTME.",
+            "Proposer le dépistage au centre de santé pour connaître son statut, et le suivi médical si le test est positif.",
+            "Conclure : dire ce qui protège, ce qui soigne (les ARV) et comment traiter la personne sans la rejeter."
+          ],
+          "example": {
+            "statement": "Mariam, enceinte, apprend en consultation prénatale qu'elle est séropositive. Elle craint de transmettre le VIH à son bébé. Dire ce qu'on lui conseille.",
+            "steps": [
+              "Identifier : la voie à interrompre est la voie mère-enfant (grossesse, accouchement, allaitement).",
+              "Choisir : le moyen adapté est la PTME, avec des ARV pour la mère et le nouveau-né, un accouchement suivi et l'alimentation du bébé choisie avec le personnel de santé.",
+              "Proposer : le suivi médical de Mariam et de son bébé au centre de santé, et le dépistage de son partenaire.",
+              "Conclure : la PTME réduit fortement le risque de transmission ; les ARV ne guérissent pas mais contrôlent le virus ; Mariam et son bébé méritent le même respect que tous."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'on reconnaît une personne infectée à son apparence, ni que les ARV guérissent. Contre-exemple : une personne séropositive qui a encore 800 lymphocytes T4 par mm3 (valeur illustrative) peut paraître en pleine forme pendant des années tout en pouvant transmettre le virus : seul le test le montre. Les ARV, eux, ne détruisent pas le virus : arrêter le traitement, c'est laisser le virus se multiplier de nouveau.",
+          "figure": "prevention-vih",
+          "exercise": {
+            "title": "Prévenir le VIH et prendre en charge",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour choisir le bon moyen de prévention et la bonne attitude.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pour éviter la transmission du VIH par la voie sanguine lors d'une injection, que faut-il utiliser ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la voie à interrompre : ici la voie sanguine, car une seringue peut porter du sang. Étape 2 — Choisir le moyen adapté : du matériel stérile ou à usage unique. L'eau du robinet ne détruit pas le virus, partager une seringue dans la famille ne protège pas, et le préservatif protège contre la voie sexuelle, pas contre la voie sanguine.",
+                "answers": [
+                  {
+                    "content": "Une seringue neuve à usage unique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une seringue lavée à l'eau du robinet",
+                    "correct": false
+                  },
+                  {
+                    "content": "La seringue d'un membre de la famille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un préservatif",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque voie ou chaque besoin au moyen qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier la voie à interrompre, puis Étape 2 — Choisir le moyen adapté : abstinence ou préservatif pour la voie sexuelle, matériel stérile et sang contrôlé pour la voie sanguine, PTME pour la voie mère-enfant. Étape 3 — Proposer le dépistage au centre de santé pour connaître son statut. Un moyen ne protège que contre la voie qu'il coupe.",
+                "answers": [
+                  {
+                    "content": "Voie sexuelle",
+                    "match": "Abstinence ou préservatif"
+                  },
+                  {
+                    "content": "Voie sanguine",
+                    "match": "Matériel stérile et sang contrôlé"
+                  },
+                  {
+                    "content": "Voie mère-enfant",
+                    "match": "PTME"
+                  },
+                  {
+                    "content": "Connaître son statut",
+                    "match": "Dépistage au centre de santé"
+                  }
+                ]
+              },
+              {
+                "content": "Les antirétroviraux (ARV) guérissent définitivement l'infection par le VIH.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure sur ce qui soigne : les ARV freinent la multiplication du virus, le nombre de T4 remonte et la personne reste en bonne santé, mais le virus n'est pas éliminé. Arrêter le traitement permet au virus de se multiplier de nouveau. Les ARV soignent donc sans guérir : c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces propositions, lesquelles protègent du VIH par la voie sexuelle ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier la voie à interrompre : la voie sexuelle. Étape 2 — Choisir le moyen adapté : l'abstinence évite tout contact, le préservatif empêche le passage du sperme et des sécrétions vaginales. Se laver après ne retire pas le virus déjà passé, les vitamines n'empêchent pas l'infection, et l'apparence ne renseigne pas sur l'état d'une personne.",
+                "answers": [
+                  {
+                    "content": "L'abstinence",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le préservatif utilisé correctement à chaque rapport",
+                    "correct": true
+                  },
+                  {
+                    "content": "Se laver après le rapport",
+                    "correct": false
+                  },
+                  {
+                    "content": "Prendre des vitamines",
+                    "correct": false
+                  },
+                  {
+                    "content": "Choisir un partenaire qui a l'air en bonne santé",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour connaître son statut sérologique, on fait un test de ___ au centre de santé.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Proposer le dépistage au centre de santé : le test recherche les anticorps contre le VIH dans le sang et permet de connaître son statut. Le groupage sanguin sert à connaître son groupe, la vaccination et la transfusion sont d'autres actes et ne disent rien du statut.",
+                "answers": [
+                  {
+                    "content": "dépistage",
+                    "correct": true
+                  },
+                  {
+                    "content": "vaccination",
+                    "correct": false
+                  },
+                  {
+                    "content": "groupage sanguin",
+                    "correct": false
+                  },
+                  {
+                    "content": "transfusion",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un camarade a l'air en parfaite santé. Peut-on affirmer qu'il n'est pas infecté par le VIH ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Proposer le dépistage : une personne séropositive peut paraître en pleine forme pendant plusieurs années, car ses défenses fonctionnent encore. L'apparence ne prouve rien, et l'âge ne protège pas. Seul le test, fait au centre de santé avec des conseils, renseigne sur le statut. Étape 4 — Conclure : on ne juge ni ne rejette personne sur son apparence.",
+                "answers": [
+                  {
+                    "content": "Non : seul un test de dépistage permet de le savoir",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : une personne infectée se reconnaît toujours à son aspect",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : un adolescent ne peut pas être infecté",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, s'il n'a jamais toussé",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La campagne de dépistage au collège",
+          "statement": "Le club santé du collège organise une campagne de dépistage avec l'infirmier du centre de santé. Les élèves de 3ème préparent un exposé sur le virus, à l'aide d'une planche dont les parties sont numérotées. Tu réponds avec les fiches de la leçon.",
+          "exercise_type": "fixation",
+          "figure": "virus-vih-a-legender",
+          "questions": [
+            {
+              "content": "Sur la planche du VIH, le numéro 4 désigne le matériel génétique du virus, enfermé dans la capside. Comment s'appelle-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le virus et ses parties : le VIH a une enveloppe à l'extérieur, une capside à l'intérieur et, dans la capside, son matériel génétique, qui est de l'ARN. La transcriptase inverse est une enzyme qui copie cet ARN en ADN, l'enveloppe est la couche externe et la gp120 est une glycoprotéine de cette enveloppe.",
+              "answers": [
+                {
+                  "content": "L'ARN viral",
+                  "correct": true
+                },
+                {
+                  "content": "L'enveloppe",
+                  "correct": false
+                },
+                {
+                  "content": "La transcriptase inverse",
+                  "correct": false
+                },
+                {
+                  "content": "La glycoprotéine gp120",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur la planche du VIH, le numéro 5 désigne l'enzyme qui copie l'ARN du virus en ADN dans la cellule attaquée. Quel est son nom ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Décrire l'action du virus dans la cellule : après son entrée dans le lymphocyte T4, le VIH copie son ARN en ADN grâce à la transcriptase inverse, puis il se multiplie. La capside et l'enveloppe sont des structures qui entourent le virus, l'anticorps est une molécule fabriquée par l'organisme contre le virus.",
+              "answers": [
+                {
+                  "content": "La transcriptase inverse",
+                  "correct": true
+                },
+                {
+                  "content": "La capside",
+                  "correct": false
+                },
+                {
+                  "content": "L'enveloppe",
+                  "correct": false
+                },
+                {
+                  "content": "L'anticorps",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le VIH est une cellule vivante, comme un lymphocyte.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : le VIH est un virus, et non une cellule. Il n'a ni noyau ni cytoplasme, il ne se multiplie qu'à l'intérieur d'une cellule, ici un lymphocyte T4. Étape 2 — Décrire : c'est pourquoi il doit d'abord se fixer sur la cellule, y entrer, puis utiliser la cellule pour se multiplier.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Complète : le VIH détruit les lymphocytes ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Identifier la cible du virus : ce sont les lymphocytes T4, leucocytes qui commandent les défenses de l'organisme. Étape 4 — Conclure : quand ils sont détruits en grand nombre, l'organisme ne se défend plus bien contre les infections.",
+              "answers": [
+                {
+                  "content": "T4",
+                  "correct": true
+                },
+                {
+                  "content": "T 4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une personne dont le sang contient des anticorps contre le VIH est dite ___.",
+              "question_type": "select",
+              "explanation": "Étape 4 — Conclure sur le stade de l'infection : la présence d'anticorps contre le VIH dans le sang rend la personne séropositive. Séronégative veut dire qu'on n'en trouve pas. Malade du SIDA est le stade avancé : une personne séropositive n'est pas forcément à ce stade. Il n'existe pas de vaccin contre le VIH.",
+              "answers": [
+                {
+                  "content": "séropositive",
+                  "correct": true
+                },
+                {
+                  "content": "séronégative",
+                  "correct": false
+                },
+                {
+                  "content": "malade du SIDA",
+                  "correct": false
+                },
+                {
+                  "content": "vaccinée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces affirmations sur le dépistage, lesquelles sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Proposer le dépistage au centre de santé pour connaître son statut : le test recherche les anticorps et s'accompagne de conseils. Il ne soigne pas et ne protège pas pour la suite : il faut continuer à se protéger. Il est utile surtout parce qu'une personne infectée peut se sentir en bonne santé pendant des années.",
+              "answers": [
+                {
+                  "content": "Le test recherche les anticorps contre le VIH dans le sang",
+                  "correct": true
+                },
+                {
+                  "content": "Il se fait au centre de santé, avec des conseils",
+                  "correct": true
+                },
+                {
+                  "content": "Il guérit l'infection",
+                  "correct": false
+                },
+                {
+                  "content": "Il empêche de contracter le VIH ensuite",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'est utile que si on est déjà malade",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les idées reçues du club santé",
+          "statement": "Au club santé, des élèves ont recueilli des phrases entendues dans le quartier et dans la famille. Ils les trient avec ce que tu as appris sur les voies de transmission du VIH.",
+          "exercise_type": "fixation",
+          "figure": "transmission-vih",
+          "questions": [
+            {
+              "content": "Le VIH se transmet en buvant dans le même verre qu'une personne séropositive.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : un verre ne contient ni sang, ni sperme, ni sécrétions vaginales, ni lait maternel. Étape 2 — Chercher le passage dans l'organisme : aucun liquide contenant le virus ne passe dans le corps de l'autre. Étape 4 — Conclure : pas de transmission. Cette phrase est une idée reçue.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans un salon de coiffure, le coiffeur utilise la même lame sur plusieurs clients sans la changer ni la stériliser. Que peut-on dire ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier l'objet en cause : une lame peut porter du sang après une petite coupure. Étape 2 — Chercher le passage : elle peut blesser un autre client et faire entrer ce sang dans son corps. Étape 3 — Nommer la voie : sanguine. Étape 4 — Conclure : la transmission est possible. L'âge du client ne change rien.",
+              "answers": [
+                {
+                  "content": "La lame peut porter du sang : le VIH peut se transmettre par la voie sanguine",
+                  "correct": true
+                },
+                {
+                  "content": "Il n'y a aucun risque, car la lame ne touche que les cheveux",
+                  "correct": false
+                },
+                {
+                  "content": "Il y a un risque seulement par la voie sexuelle",
+                  "correct": false
+                },
+                {
+                  "content": "Le risque existe seulement si le client est un adulte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le raisonnement pour savoir si une situation peut transmettre le VIH.",
+              "question_type": "ordering",
+              "explanation": "On suit les étapes de la méthode de la leçon : d'abord Identifier le liquide ou l'objet, ensuite Chercher s'il peut passer dans l'organisme d'une autre personne, puis Nommer la voie, enfin Conclure. On ne peut pas conclure avant d'avoir cherché le passage dans l'organisme, sinon on répond au hasard.",
+              "answers": [
+                {
+                  "content": "Identifier le liquide ou l'objet en cause."
+                },
+                {
+                  "content": "Chercher s'il peut passer dans l'organisme d'une autre personne."
+                },
+                {
+                  "content": "Nommer la voie de transmission."
+                },
+                {
+                  "content": "Conclure : transmission possible ou impossible."
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces phrases entendues dans le quartier, lesquelles sont des idées reçues (fausses) ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "On vérifie chaque phrase avec la méthode. Moustique et repas : Étape 2, aucun liquide contenant le virus ne passe d'un corps à l'autre, donc faux. Visage : une personne séropositive peut paraître en pleine forme pendant des années, donc faux. Les deux dernières sont vraies : le lait maternel est un liquide qui peut contenir le virus, et la lame souillée est une voie sanguine.",
+              "answers": [
+                {
+                  "content": "Un moustique qui a piqué une personne séropositive peut transmettre le VIH.",
+                  "correct": true
+                },
+                {
+                  "content": "On reconnaît une personne infectée à son visage.",
+                  "correct": true
+                },
+                {
+                  "content": "Partager un repas avec une personne séropositive transmet le VIH.",
+                  "correct": true
+                },
+                {
+                  "content": "Une mère séropositive peut transmettre le VIH à son enfant pendant l'allaitement.",
+                  "correct": false
+                },
+                {
+                  "content": "Une lame de rasoir souillée de sang peut transmettre le VIH.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Complète : la transmission du VIH de la mère à l'enfant peut avoir lieu pendant la grossesse, pendant l'accouchement ou pendant ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 3 — Nommer la voie : c'est la voie mère-enfant, qui a trois temps : la grossesse (par le placenta), l'accouchement et l'allaitement, car le lait maternel peut contenir le virus. C'est pourquoi la PTME suit aussi l'alimentation du nouveau-né.",
+              "answers": [
+                {
+                  "content": "l'allaitement",
+                  "correct": true
+                },
+                {
+                  "content": "allaitement",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un camarade refuse de prêter son stylo à Moussa, car Moussa est séropositif. Écris trois à quatre phrases pour le convaincre, en suivant la méthode de la fiche sur les modes de transmission.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Le VIH se trouve dans le sang, le sperme, les sécrétions vaginales et le lait maternel. Pour qu'il se transmette, un de ces liquides doit passer dans le corps d'une autre personne, par la voie sexuelle, la voie sanguine ou la voie mère-enfant. Prêter un stylo ne fait passer aucun liquide : il n'y a donc aucun risque. Le VIH se transmet par exemple par une lame souillée de sang, mais pas par un objet de la vie courante. Refuser le stylo à Moussa n'est pas juste, et ne protège de rien. » Points : 1 pour les liquides, 1 pour l'absence de passage, 0,5 pour une voie, 0,5 pour la conclusion et le respect.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Identifie les liquides en cause (sang, sperme, sécrétions vaginales, lait maternel)",
+                "Explique que prêter un stylo ne fait passer aucun liquide dans le corps de l'autre",
+                "Nomme au moins une vraie voie de transmission pour montrer la différence",
+                "Conclut qu'il n'y a pas de risque et que refuser le stylo à Moussa est injuste"
+              ],
+              "starter": "Le VIH ne se transmet pas en prêtant un stylo, car…"
+            }
+          ]
+        },
+        {
+          "title": "La courbe d'une personne infectée et non traitée",
+          "statement": "Un document de classe donne l'évolution du nombre de lymphocytes T4 par mm3 de sang d'une personne infectée par le VIH et non traitée. Les valeurs sont illustratives : ce ne sont pas des statistiques réelles. An 0 : 1000 ; an 1 : 850 ; an 2 : 700 ; an 3 : 600 ; an 4 : 450 ; an 5 : 350 ; an 6 : 250 ; an 7 : 150 ; an 8 : 80.",
+          "exercise_type": "evaluation",
+          "figure": "evolution-t4",
+          "questions": [
+            {
+              "content": "D'après ce document de classe (valeurs illustratives : 1000 lymphocytes T4 par mm3 à l'an 0, 450 à l'an 4), de combien le nombre de T4 par mm3 a-t-il baissé entre l'an 0 et l'an 4 ?",
+              "question_type": "numeric",
+              "explanation": "Étape 3 — Lire l'évolution du nombre de T4 : à l'an 0 on lit 1000, à l'an 4 on lit 450. On soustrait : $1000 - 450 = 550$. Le nombre de T4 a baissé de 550 par mm3 en 4 ans. Si tu trouves 450, tu as recopié la valeur de l'an 4 au lieu de calculer la baisse.",
+              "answers": [
+                {
+                  "content": "550",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Selon les mêmes valeurs illustratives (450 lymphocytes T4 par mm3 à l'an 4, 80 à l'an 8), de combien le nombre de T4 par mm3 a-t-il baissé entre l'an 4 et l'an 8 ?",
+              "question_type": "numeric",
+              "explanation": "Étape 3 — Lire l'évolution : à l'an 4, 450 ; à l'an 8, 80. Calcul : $450 - 80 = 370$. Le nombre de T4 a baissé de 370 par mm3 entre l'an 4 et l'an 8. Le résultat reste une valeur illustrative d'un document de classe : on ne l'utilise pas comme une statistique réelle.",
+              "answers": [
+                {
+                  "content": "370",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Comment évolue le nombre de lymphocytes T4 d'une personne infectée par le VIH et non traitée, selon ce document de classe ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Lire l'évolution du nombre de T4 : les valeurs 1000, 850, 700, 600, 450, 350, 250, 150, 80 diminuent à chaque année. Étape 2 — Décrire l'action du VIH : il détruit les T4 en se multipliant dans ces cellules, ce qui explique la baisse. Une courbe qui monte ou reste stable ne correspond pas à une infection non traitée.",
+              "answers": [
+                {
+                  "content": "Il diminue sans cesse au cours des années",
+                  "correct": true
+                },
+                {
+                  "content": "Il augmente régulièrement",
+                  "correct": false
+                },
+                {
+                  "content": "Il reste stable",
+                  "correct": false
+                },
+                {
+                  "content": "Il augmente puis disparaît d'un coup",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La courbe de ce document de classe montre que la personne a guéri de son infection.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Lire la courbe : le nombre de T4 baisse de 1000 à 80 par mm3 sans jamais remonter. Étape 4 — Conclure : les défenses sont de plus en plus faibles, la personne n'a pas guéri. Une guérison se verrait par un virus qui disparaît et des défenses rétablies, ce que cette courbe ne montre pas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles conclusions peut-on tirer de cette courbe ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Conclure sur l'état des défenses : le VIH détruit les T4, qui commandent les défenses, donc l'immunodéficience s'installe. Plus elle est forte, plus les maladies opportunistes sont à craindre. Le virus ne disparaît pas, le nombre de T4 baisse au lieu d'augmenter, et la cible du VIH n'est pas l'hématie mais le lymphocyte T4.",
+              "answers": [
+                {
+                  "content": "Les défenses de l'organisme s'affaiblissent au fil des années",
+                  "correct": true
+                },
+                {
+                  "content": "Le risque de maladies opportunistes augmente si la baisse continue",
+                  "correct": true
+                },
+                {
+                  "content": "Le virus a disparu de l'organisme",
+                  "correct": false
+                },
+                {
+                  "content": "Le nombre de T4 augmente sans traitement",
+                  "correct": false
+                },
+                {
+                  "content": "Les hématies sont détruites en priorité",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les stades de l'infection par le VIH chez une personne non traitée.",
+              "question_type": "ordering",
+              "explanation": "Étape 4 — Conclure sur le stade de l'infection : après l'infection, la personne est séropositive sans signe visible. Le VIH détruit peu à peu les T4, les défenses deviennent très faibles, puis les maladies opportunistes apparaissent : c'est le stade SIDA. L'ordre suit la baisse des T4 de la courbe.",
+              "answers": [
+                {
+                  "content": "Infection par le VIH, sans signe visible (séropositivité)"
+                },
+                {
+                  "content": "Baisse progressive du nombre de lymphocytes T4"
+                },
+                {
+                  "content": "Défenses très affaiblies"
+                },
+                {
+                  "content": "Maladies opportunistes : stade SIDA"
+                }
+              ]
+            },
+            {
+              "content": "D'après la courbe illustrative d'un document de classe (1000 lymphocytes T4 par mm3 à l'an 0, 80 à l'an 8), explique en quatre à six lignes pourquoi la baisse des T4 rend la personne vulnérable, puis dis comment un traitement par ARV change la situation.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Les lymphocytes T4 commandent les défenses de l'organisme. Le VIH se fixe sur eux, y entre, s'y multiplie et les détruit. Sur le document de classe, le nombre de T4 passe de 1000 à 80 par mm3 : les défenses sont très affaiblies. Des maladies opportunistes peuvent alors apparaître : c'est le stade SIDA. Un traitement par ARV freine la multiplication du virus : le nombre de T4 remonte et la personne reste en meilleure santé, mais le virus n'est pas éliminé. » Barème : 1 point par critère.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Rappelle le rôle des T4 dans les défenses de l'organisme",
+                "Explique que le VIH se multiplie dans les T4 et les détruit",
+                "Décrit les conséquences : maladies opportunistes, stade SIDA",
+                "Indique que les ARV freinent le virus et que les T4 remontent, sans guérir"
+              ],
+              "starter": "Les lymphocytes T4 commandent…"
+            }
+          ]
+        },
+        {
+          "title": "Dans la famille d'Aya",
+          "statement": "Aya, enceinte de huit mois, a fait un test de dépistage lors d'une consultation prénatale : il montre qu'elle est séropositive. Sa grand-mère veut séparer ses assiettes et refuse que son petit frère Koffi la touche. L'infirmier rencontre la famille avec le club santé du village. Il rappelle les voies de transmission, la PTME et le traitement.",
+          "exercise_type": "evaluation",
+          "figure": "prevention-vih",
+          "questions": [
+            {
+              "content": "Le test réalisé par Aya recherche les anticorps contre le VIH dans son sang. Comment s'appelle ce test ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Proposer le dépistage au centre de santé : le test de dépistage recherche les anticorps contre le VIH dans le sang et indique le statut de la personne. Le groupage détermine le groupe sanguin, la transfusion est un apport de sang, la vaccination n'existe pas contre le VIH.",
+              "answers": [
+                {
+                  "content": "Le dépistage",
+                  "correct": true
+                },
+                {
+                  "content": "Le groupage",
+                  "correct": false
+                },
+                {
+                  "content": "La transfusion",
+                  "correct": false
+                },
+                {
+                  "content": "La vaccination",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Par quelle voie le VIH peut-il passer d'Aya à son bébé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier le liquide : le sang d'Aya pendant la grossesse, le sang et les sécrétions vaginales pendant l'accouchement, puis le lait. Étape 3 — Nommer la voie : c'est la voie mère-enfant, avec trois temps : la grossesse, l'accouchement et l'allaitement. Un bébé peut être infecté, et la PTME existe justement pour éviter cela.",
+              "answers": [
+                {
+                  "content": "La voie mère-enfant : pendant la grossesse, l'accouchement ou l'allaitement",
+                  "correct": true
+                },
+                {
+                  "content": "La voie sexuelle uniquement",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune voie : un bébé ne peut pas être infecté",
+                  "correct": false
+                },
+                {
+                  "content": "La voie sanguine uniquement, par une transfusion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles mesures de la PTME peuvent protéger le bébé d'Aya ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Choisir le moyen adapté à la voie mère-enfant : la PTME associe des ARV pour la mère et le nouveau-né, un accouchement suivi et une alimentation du bébé choisie avec le personnel de santé. Arrêter les consultations prive Aya du suivi, et séparer le bébé n'est pas une mesure de la PTME.",
+              "answers": [
+                {
+                  "content": "Des ARV pour la mère et pour le nouveau-né",
+                  "correct": true
+                },
+                {
+                  "content": "Un accouchement suivi par le personnel de santé",
+                  "correct": true
+                },
+                {
+                  "content": "Une alimentation du bébé choisie avec le personnel de santé",
+                  "correct": true
+                },
+                {
+                  "content": "Arrêter toutes les consultations pour éviter le stress",
+                  "correct": false
+                },
+                {
+                  "content": "Séparer le bébé de sa mère dès la naissance",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Koffi risque d'être infecté s'il mange dans la même assiette qu'Aya.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : une assiette n'a ni sang, ni sperme, ni sécrétions vaginales, ni lait. Étape 2 — Chercher le passage : aucun liquide contenant le virus ne passe dans le corps de Koffi. Étape 4 — Conclure : pas de transmission. Séparer les assiettes est inutile, et c'est un rejet injuste.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le traitement par ARV ___ la multiplication du virus dans l'organisme.",
+              "question_type": "select",
+              "explanation": "Étape 4 — Conclure sur ce qui soigne : les ARV freinent la multiplication du virus, ce qui permet au nombre de T4 de remonter. Ils ne le suppriment pas définitivement, sinon ils guériraient. Dire qu'ils accélèrent la multiplication ou n'ont aucun effet est faux.",
+              "answers": [
+                {
+                  "content": "freine",
+                  "correct": true
+                },
+                {
+                  "content": "accélère",
+                  "correct": false
+                },
+                {
+                  "content": "supprime définitivement",
+                  "correct": false
+                },
+                {
+                  "content": "n'a aucun effet sur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La grand-mère d'Aya dit : « Il faut séparer ses assiettes et empêcher Koffi de la toucher. » Écris quatre à cinq phrases pour lui expliquer pourquoi ce n'est pas nécessaire, en suivant la méthode de la fiche sur les modes de transmission.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Le VIH se trouve dans le sang, le sperme, les sécrétions vaginales et le lait maternel. Il ne se transmet que si l'un de ces liquides passe dans le corps d'une autre personne. Une assiette et une caresse ne font passer aucun de ces liquides. La transmission est donc impossible dans ces gestes, et Koffi peut toucher Aya sans risque. Aya a besoin du soutien de sa famille pour bien suivre son traitement. » Points : 1 pour les liquides, 1 pour l'absence de passage, 0,5 pour la conclusion, 0,5 pour le respect.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Identifie les liquides en cause",
+                "Montre que manger ou se toucher ne fait passer aucun liquide contenant le virus",
+                "Conclut que la transmission est impossible dans ces gestes",
+                "Rappelle le respect dû à Aya"
+              ],
+              "starter": "Le VIH ne se transmet pas par une assiette, car…"
+            },
+            {
+              "content": "Rédige un paragraphe de sept à dix lignes : cite les trois voies de transmission du VIH, indique pour chacune un moyen de prévention, puis dis comment il faut traiter une personne séropositive dans la famille et à l'école.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : « Le VIH se transmet par trois voies : la voie sexuelle, la voie sanguine et la voie mère-enfant. Contre la voie sexuelle, on se protège par l'abstinence ou le préservatif utilisé à chaque rapport. Contre la voie sanguine, on utilise du matériel stérile ou à usage unique et du sang contrôlé. Contre la voie mère-enfant, la PTME protège le bébé grâce aux ARV, à un accouchement suivi et à une alimentation choisie avec le personnel de santé. Le dépistage au centre de santé permet de connaître son statut, et les ARV freinent le virus sans guérir. Une personne séropositive doit être respectée dans sa famille et à l'école : le VIH ne se transmet pas par les gestes de la vie courante. » Barème : 1 point par critère.",
+              "answers": [],
+              "points": 6,
+              "criteria": [
+                "Nomme les trois voies : sexuelle, sanguine, mère-enfant",
+                "Associe à la voie sexuelle l'abstinence ou le préservatif",
+                "Associe à la voie sanguine le matériel stérile ou le sang contrôlé",
+                "Associe à la voie mère-enfant la PTME",
+                "Mentionne le dépistage et le traitement par ARV, qui ne guérit pas",
+                "Conclut sur le respect de la personne séropositive, sans rejet"
+              ],
+              "starter": "Le VIH se transmet par trois voies :"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

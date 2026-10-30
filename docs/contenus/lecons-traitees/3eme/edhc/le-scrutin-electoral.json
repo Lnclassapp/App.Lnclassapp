@@ -1,0 +1,1315 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le scrutin électoral",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "EDHC",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "etapes-du-scrutin",
+          "kind": "diagram",
+          "description": "Schéma en flèches des étapes d'un scrutin, de haut en bas : révision de la liste électorale, dépôt des candidatures, campagne électorale, vote au bureau de vote, dépouillement, résultats provisoires proclamés par la CEI, recours, résultats définitifs. Trois couleurs : avant le vote, jour du vote, après le vote.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "revision_liste",
+                "label": "Révision de la liste électorale",
+                "category": 1
+              },
+              {
+                "id": "depot_candidatures",
+                "label": "Dépôt des candidatures",
+                "category": 1
+              },
+              {
+                "id": "campagne",
+                "label": "Campagne électorale",
+                "category": 1
+              },
+              {
+                "id": "vote",
+                "label": "Vote au bureau de vote",
+                "category": 2
+              },
+              {
+                "id": "depouillement",
+                "label": "Dépouillement des bulletins",
+                "category": 2
+              },
+              {
+                "id": "resultats_provisoires",
+                "label": "Résultats provisoires (CEI)",
+                "category": 3
+              },
+              {
+                "id": "recours",
+                "label": "Recours (contentieux électoral)",
+                "category": 3
+              },
+              {
+                "id": "resultats_definitifs",
+                "label": "Résultats définitifs après recours",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "revision_liste",
+                "to": "depot_candidatures"
+              },
+              {
+                "from": "depot_candidatures",
+                "to": "campagne"
+              },
+              {
+                "from": "campagne",
+                "to": "vote"
+              },
+              {
+                "from": "vote",
+                "to": "depouillement"
+              },
+              {
+                "from": "depouillement",
+                "to": "resultats_provisoires"
+              },
+              {
+                "from": "resultats_provisoires",
+                "to": "recours"
+              },
+              {
+                "from": "recours",
+                "to": "resultats_definitifs"
+              }
+            ],
+            "legend": [
+              "Avant le vote",
+              "Jour du vote",
+              "Après le vote"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "resultats-delegues",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres des résultats fictifs de l'élection du délégué de la 3ème B : Awa 22 voix, Koffi 10 voix, Mariam 8 voix, soit 40 suffrages exprimés. Données fictives, inventées pour l'exercice.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              22,
+              10,
+              8
+            ],
+            "labels": [
+              "Awa",
+              "Koffi",
+              "Mariam"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "resultats-mandolia",
+          "kind": "stat_chart",
+          "description": "Diagramme circulaire des voix obtenues par trois listes fictives à l'élection du conseil municipal de Mandolia, une commune imaginaire : liste Soleil 2 500 voix, liste Baobab 1 500 voix, liste Lagune 1 000 voix, soit 5 000 suffrages exprimés. Données fictives.",
+          "params": {
+            "chart": "pie",
+            "series": [
+              2500,
+              1500,
+              1000
+            ],
+            "labels": [
+              "Liste Soleil",
+              "Liste Baobab",
+              "Liste Lagune"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le suffrage et ses principes",
+          "remember": "Le **suffrage** est le droit de vote : la façon dont les citoyens expriment leur choix. Le **scrutin** est l'opération de vote elle-même, du jour du vote jusqu'au résultat. Un suffrage démocratique respecte des principes. Il est **universel** : tous les citoyens qui remplissent les conditions fixées par la loi peuvent voter, sans distinction de richesse, de sexe, d'origine ni de religion. Il est **égal** : une personne, une voix, et toutes les voix ont le même poids. Il est **secret** : personne ne doit savoir pour qui tu votes (l'isoloir protège ton choix). Il est **libre** : aucune menace, aucune pression, aucun cadeau. Il est **direct** quand les citoyens élisent eux-mêmes leurs représentants, **indirect** quand ils élisent des délégués qui élisent à leur tour. Le président de la République est élu au suffrage universel direct.",
+          "method": [
+            "Identifier la situation : qui vote, pour qui et comment.",
+            "Chercher la règle : quel principe du suffrage s'applique (universel, égal, secret, libre, direct ou indirect).",
+            "Comparer la situation à la règle pour dire si le principe est respecté ou violé.",
+            "Conclure en nommant le principe et en proposant le comportement correct."
+          ],
+          "example": {
+            "statement": "Pour élire le délégué de la 3ème B, le professeur demande aux élèves de lever la main devant toute la classe pour dire pour qui ils votent. Quel principe du suffrage est en cause ?",
+            "steps": [
+              "Identifier : les élèves de la 3ème B votent pour leur délégué, et ils votent en levant la main devant tout le monde.",
+              "Chercher la règle : le principe du vote secret dit que personne ne doit savoir pour qui tu votes.",
+              "Comparer : à main levée, chacun voit le choix de chacun, donc le vote n'est pas secret : le principe est violé.",
+              "Conclure : le principe du suffrage secret n'est pas respecté. Il faut voter par bulletin, à l'abri des regards, et déposer le bulletin dans l'urne."
+            ]
+          },
+          "pitfall": "Ne crois pas que « suffrage universel » veut dire que tout le monde vote sans aucune condition. Universel veut dire sans discrimination de richesse, de sexe, d'origine ou de religion, parmi les personnes qui remplissent les conditions de la loi (nationalité, âge, inscription). Contre-exemple : une élève de 12 ans ne vote pas aux élections du pays, et le suffrage reste pourtant universel. Par contre, si l'on écartait les électeurs qui n'ont pas payé une somme d'argent, le suffrage ne serait plus universel.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître les principes du suffrage",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour reconnaître les principes du suffrage dans des situations d'élection à l'école et dans la commune.",
+            "questions": [
+              {
+                "content": "Quel principe du suffrage signifie qu'une personne a une seule voix et que toutes les voix ont le même poids ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la situation : on parle du poids des voix, une personne a une seule voix. Étape 2 — Chercher la règle : le principe « une personne, une voix » est le suffrage égal. Étape 3 — Comparer : le suffrage secret protège le choix, le suffrage direct supprime les intermédiaires, le suffrage universel parle de ceux qui peuvent voter ; seul « égal » parle du poids de la voix. Étape 4 — Conclure : la bonne réponse est « le suffrage égal ».",
+                "answers": [
+                  {
+                    "content": "Le suffrage secret",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le suffrage égal",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le suffrage direct",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le suffrage universel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque principe du suffrage à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : chaque définition décrit une idée précise. Étape 2 — Chercher la règle : universel = sans discrimination parmi ceux que la loi autorise ; égal = une personne, une voix ; secret = choix caché ; libre = sans pression. Étape 3 — Comparer chaque définition au principe qui porte le même mot-clé. Étape 4 — Conclure : les quatre paires ci-dessus sont les bonnes.",
+                "answers": [
+                  {
+                    "content": "Universel",
+                    "match": "Tous les citoyens qui remplissent les conditions peuvent voter, sans discrimination"
+                  },
+                  {
+                    "content": "Égal",
+                    "match": "Une personne, une voix"
+                  },
+                  {
+                    "content": "Secret",
+                    "match": "Personne ne sait pour qui l'électeur vote"
+                  },
+                  {
+                    "content": "Libre",
+                    "match": "L'électeur vote sans menace ni pression"
+                  }
+                ]
+              },
+              {
+                "content": "Dans une école, seuls les élèves qui ont de bonnes notes ont le droit de voter pour élire le délégué. Ce vote respecte le principe du suffrage universel.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier la situation : une partie des élèves est écartée à cause de ses notes. Étape 2 — Chercher la règle : le suffrage universel écarte toute discrimination (richesse, sexe, origine, réussite) parmi les personnes qui remplissent les conditions. Étape 3 — Comparer : les notes ne sont pas une condition prévue, donc le principe est violé. Étape 4 — Conclure : l'affirmation est fausse ; tous les élèves de la classe doivent pouvoir voter.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour élire le délégué de la 3ème A, un candidat offre un sac de bonbons aux électeurs qui votent pour lui. Quel principe du suffrage est violé ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la situation : un candidat récompense les électeurs d'un vote. Étape 2 — Chercher la règle : le suffrage libre interdit toute pression et tout cadeau en échange d'un vote. Étape 3 — Comparer : avec un cadeau, l'électeur ne choisit plus selon ses idées, le principe est violé. Étape 4 — Conclure : c'est le caractère libre du vote ; le bon comportement est de convaincre par son programme, sans rien offrir. Les autres principes ne sont pas concernés : tout le monde peut voter et chaque voix compte pareil.",
+                "answers": [
+                  {
+                    "content": "Le caractère libre du vote",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le caractère direct du vote",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le caractère universel du vote",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le caractère égal du vote",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Samuel, 13 ans, dit : « Le suffrage est universel, donc je peux voter à l'élection présidentielle. » Que peux-tu lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la situation : un élève de 13 ans veut voter. Étape 2 — Chercher la règle : le suffrage universel s'applique aux citoyens qui remplissent les conditions légales, dont l'âge de 18 ans. Étape 3 — Comparer : à 13 ans, Samuel ne remplit pas la condition d'âge ; cela n'est pas une discrimination, c'est une condition de la loi. Étape 4 — Conclure : il a tort. Croire que « universel » veut dire « sans aucune condition » est justement le piège. Dire que l'élection présidentielle est indirecte est faux aussi : le président est élu au suffrage universel direct.",
+                "answers": [
+                  {
+                    "content": "Tu as raison : universel veut dire que tout le monde vote, sans aucune condition.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tu as tort : universel veut dire sans discrimination parmi ceux qui remplissent les conditions de la loi, comme l'âge.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Tu as raison, mais seulement si tu es élève.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tu as tort, car l'élection présidentielle est un suffrage indirect.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les conditions pour être électeur",
+          "remember": "Pour voter en Côte d'Ivoire, il faut remplir **toutes** les conditions suivantes. Être de **nationalité ivoirienne**. Avoir **18 ans révolus** (18 ans accomplis, l'âge de la majorité). **Jouir de ses droits civils et politiques** : une personne privée de ces droits par une décision de justice ne vote pas. Être **inscrit sur la liste électorale**, établie et mise à jour par la Commission électorale indépendante (CEI). On vote au bureau de vote où l'on est inscrit. Il suffit qu'une seule condition manque pour ne pas pouvoir voter.",
+          "method": [
+            "Identifier la personne et relever ce que l'on sait d'elle : nationalité, âge, droits, inscription.",
+            "Rappeler les quatre conditions pour être électeur.",
+            "Vérifier les conditions une par une pour cette personne.",
+            "Conclure : elle peut voter seulement si les quatre conditions sont remplies, sinon dire laquelle manque et ce qu'elle peut faire."
+          ],
+          "example": {
+            "statement": "Mariam est ivoirienne et a eu 18 ans le mois dernier. Aucune décision de justice ne lui a retiré ses droits. Elle n'a jamais fait inscrire son nom sur la liste électorale. Peut-elle voter ?",
+            "steps": [
+              "Identifier : Mariam est ivoirienne, elle a 18 ans, elle a tous ses droits et son nom n'est pas sur la liste électorale.",
+              "Rappeler les conditions : nationalité ivoirienne, 18 ans révolus, jouissance des droits civils et politiques, inscription sur la liste électorale.",
+              "Vérifier : nationalité, oui ; âge, oui ; droits, oui ; inscription sur la liste, non.",
+              "Conclure : Mariam ne peut pas voter, car une condition manque, l'inscription. Elle doit demander son inscription lors de la révision de la liste électorale."
+            ]
+          },
+          "pitfall": "Ne pense pas qu'être ivoirien et avoir plus de 18 ans suffit. Les quatre conditions sont **cumulatives** : 3 conditions sur 4 ne donnent pas le droit de voter. Contre-exemple : Yao est ivoirien, il a 25 ans et tous ses droits, mais son nom n'est pas sur la liste. Il remplit 3 conditions sur 4, donc il ne vote pas. Pense aussi à « révolus » : un jeune de 17 ans et 11 mois n'a pas encore 18 ans.",
+          "figure": null,
+          "exercise": {
+            "title": "Vérifier les conditions pour voter",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour dire si des personnes fictives peuvent voter.",
+            "questions": [
+              {
+                "content": "Parmi ces propositions, choisis les deux qui sont des conditions pour être électeur.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : on cherche ce que la loi exige d'un électeur. Étape 2 — Rappeler les quatre conditions : nationalité ivoirienne, 18 ans révolus, jouissance des droits civils et politiques, inscription sur la liste électorale. Étape 3 — Vérifier chaque proposition : l'âge et l'inscription y figurent ; le BEPC, le mariage et une cotisation n'y figurent pas, ce sont des critères inventés. Étape 4 — Conclure : « avoir 18 ans révolus » et « être inscrit sur la liste électorale ».",
+                "answers": [
+                  {
+                    "content": "Avoir 18 ans révolus",
+                    "correct": true
+                  },
+                  {
+                    "content": "Être inscrit sur la liste électorale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Avoir réussi le BEPC",
+                    "correct": false
+                  },
+                  {
+                    "content": "Être marié ou mariée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Avoir payé une cotisation",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Nina, ivoirienne, a 17 ans et 11 mois. Elle remplit toutes les autres conditions et son nom est sur la liste. Elle peut voter.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier la personne : Nina est ivoirienne, elle a 17 ans et 11 mois. Étape 2 — Rappeler les conditions : il faut 18 ans révolus. Étape 3 — Vérifier : la nationalité est bonne, mais à 17 ans et 11 mois elle n'a pas encore accompli 18 ans. Étape 4 — Conclure : elle ne peut pas voter ; l'affirmation est fausse. Il lui manque un mois.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quatre personnes veulent voter. Elles jouissent toutes de leurs droits. Awa : ivoirienne, 19 ans, inscrite. Koffi : ivoirien, 18 ans, non inscrit. Salif : étranger, 30 ans. Léa : ivoirienne, 16 ans, inscrite. Qui peut voter ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier chaque personne et ce que l'on sait d'elle. Étape 2 — Rappeler les quatre conditions : nationalité, 18 ans, droits, inscription. Étape 3 — Vérifier : Awa remplit les quatre ; Koffi n'est pas inscrit ; Salif n'est pas ivoirien ; Léa n'a pas 18 ans. Étape 4 — Conclure : seule Awa peut voter. Koffi est le piège : il a l'âge et la nationalité, mais l'inscription manque.",
+                "answers": [
+                  {
+                    "content": "Awa",
+                    "correct": true
+                  },
+                  {
+                    "content": "Koffi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Salif",
+                    "correct": false
+                  },
+                  {
+                    "content": "Léa",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour voter, il faut être inscrit sur la liste ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier la question : on cherche la condition d'inscription. Étape 2 — Rappeler les conditions : la quatrième est l'inscription sur la liste électorale. Étape 3 — Vérifier le mot : c'est la liste établie pour les élections. Étape 4 — Conclure : le mot attendu est « électorale ».",
+                "answers": [
+                  {
+                    "content": "électorale",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Karim est ivoirien, a 22 ans et jouit de ses droits, mais il n'est pas inscrit. Il dit : « Je n'ai pas besoin de m'inscrire, j'ai l'âge et la nationalité. » Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la personne : Karim est ivoirien, a 22 ans, a ses droits, n'est pas inscrit. Étape 2 — Rappeler les quatre conditions : l'inscription en fait partie. Étape 3 — Vérifier : il en remplit 3 sur 4, l'inscription manque. Étape 4 — Conclure : il doit se faire inscrire à la révision de la liste. Croire que l'âge et la nationalité suffisent est le piège : les conditions sont cumulatives. L'âge de 25 ans est inventé : l'âge exigé est 18 ans.",
+                "answers": [
+                  {
+                    "content": "Tu as raison : l'âge et la nationalité suffisent.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tu as tort : l'inscription sur la liste électorale est aussi obligatoire, donc tu dois te faire inscrire.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Tu as raison : l'inscription est seulement pour les étrangers.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tu as tort : il faut d'abord avoir 25 ans.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les types de scrutin",
+          "remember": "Le **mode de scrutin** est la règle qui transforme les votes en élus. Selon ce que l'on vote : le **scrutin uninominal** (on vote pour une seule personne) ou le **scrutin de liste** (on vote pour un groupe de candidats présentés ensemble). Selon la façon de désigner le gagnant : le **scrutin majoritaire** (gagne celui qui a la majorité des voix, en un tour ou en deux tours) ou le **scrutin proportionnel** (les sièges sont partagés entre les listes en proportion de leurs voix). Les **suffrages exprimés** sont les voix valables, sans les bulletins blancs ni nuls. La **majorité absolue** est plus de la moitié des suffrages exprimés ; la **majorité relative** est le plus grand nombre de voix, même sans dépasser la moitié. Au scrutin majoritaire à deux tours, si personne n'a la majorité absolue au premier tour, un second tour a lieu entre les deux candidats arrivés en tête. L'élection présidentielle est un scrutin uninominal majoritaire à deux tours.",
+          "method": [
+            "Relever l'objet du vote : une personne ou une liste.",
+            "Relever la règle du gagnant : majorité des voix ou proportion des voix.",
+            "Calculer les suffrages exprimés, puis le pourcentage de chaque candidat ou de chaque liste.",
+            "Nommer le scrutin et conclure : gagnant, second tour ou répartition des sièges."
+          ],
+          "example": {
+            "statement": "À l'élection fictive du délégué de la 3ème A, trois élèves se présentent. Il y a 40 suffrages exprimés : Aya a 18 voix, Brice 14 voix, Clarisse 8 voix. La règle de la classe : il faut la majorité absolue, sinon un second tour oppose les deux premiers. Qui est élu ?",
+            "steps": [
+              "Relever l'objet du vote : on vote pour une seule personne, donc le scrutin est uninominal.",
+              "Relever la règle du gagnant : la majorité absolue est exigée, sinon il y a un second tour.",
+              "Calculer : suffrages exprimés = 18 + 14 + 8 = 40 ; la moitié est 20 ; Aya a 18 ÷ 40 = 45 %, Brice 35 %, Clarisse 20 %.",
+              "Nommer et conclure : c'est un scrutin uninominal majoritaire à deux tours. Personne n'a plus de 20 voix, donc personne n'est élu au premier tour ; un second tour oppose Aya et Brice."
+            ]
+          },
+          "pitfall": "Ne confonds pas « avoir le plus de voix » et « avoir la majorité absolue ». Contre-exemple : avec 40 suffrages exprimés, un candidat qui a 18 voix est premier, mais 18 est moins que la moitié (20), donc il n'a que 45 % : il n'a pas la majorité absolue. Pour avoir la majorité absolue sur 40 voix, il faut au moins 21 voix. Si la règle exige la majorité absolue, il faut un second tour.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître et appliquer un mode de scrutin",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des élections fictives de l'école et de la commune de Mandolia, une commune imaginaire.",
+            "questions": [
+              {
+                "content": "Dans un scrutin uninominal, pour quoi l'électeur vote-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever l'objet du vote : le mot « uninominal » vient de « un seul nom ». Étape 2 — Relever la règle du gagnant : ici la question ne porte pas sur le gagnant. Étape 3 — Il n'y a rien à calculer. Étape 4 — Nommer et conclure : au scrutin uninominal on vote pour une seule personne. Voter pour une liste de plusieurs candidats est le scrutin de liste, c'est le piège.",
+                "answers": [
+                  {
+                    "content": "Pour une seule personne",
+                    "correct": true
+                  },
+                  {
+                    "content": "Pour une liste de plusieurs candidats",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour un parti seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour un nombre de sièges",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever l'objet du vote : uninominal = une personne ; de liste = un groupe. Étape 2 — Relever la règle du gagnant : absolue = plus de la moitié ; relative = le plus de voix. Étape 3 — Il n'y a pas de calcul ici. Étape 4 — Nommer et conclure : les quatre paires ci-dessus sont les bonnes.",
+                "answers": [
+                  {
+                    "content": "Scrutin uninominal",
+                    "match": "On vote pour une seule personne"
+                  },
+                  {
+                    "content": "Scrutin de liste",
+                    "match": "On vote pour un groupe de candidats présentés ensemble"
+                  },
+                  {
+                    "content": "Majorité absolue",
+                    "match": "Plus de la moitié des suffrages exprimés"
+                  },
+                  {
+                    "content": "Majorité relative",
+                    "match": "Le plus grand nombre de voix, même sans dépasser la moitié"
+                  }
+                ]
+              },
+              {
+                "content": "Au premier tour de l'élection d'un délégué, il y a 60 suffrages exprimés. Combien de voix faut-il au minimum pour avoir la majorité absolue ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever l'objet du vote : on vote pour une personne. Étape 2 — Relever la règle du gagnant : la majorité absolue, c'est plus de la moitié des suffrages exprimés. Étape 3 — Calculer : la moitié de 60 est 30, donc il faut plus de 30 voix, c'est-à-dire au moins 31. Étape 4 — Conclure : il faut 31 voix. Avec 30 voix, le candidat n'a que la moitié exactement, pas plus de la moitié.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "31",
+                    "correct": true
+                  }
+                ],
+                "unit": "voix"
+              },
+              {
+                "content": "Dans la commune fictive de Mandolia, le conseil municipal a 20 sièges, répartis à la proportionnelle entre les listes. Il y a 5 000 suffrages exprimés. La liste Lagune a 1 000 voix. Combien de sièges obtient-elle ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever l'objet du vote : on vote pour des listes. Étape 2 — Relever la règle du gagnant : les sièges sont partagés en proportion des voix, c'est le scrutin proportionnel. Étape 3 — Calculer : 1 000 ÷ 5 000 = 20 % des voix ; 20 % de 20 sièges = 4 sièges. Étape 4 — Conclure : la liste Lagune obtient 4 sièges.",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "unit": "sièges"
+              },
+              {
+                "content": "Au premier tour d'une élection fictive, il y a 40 suffrages exprimés : Léa a 17 voix, Omar 15 voix, Fanta 8 voix. La règle exige la majorité absolue. Léa dit : « J'ai le plus de voix, je suis élue. » Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever l'objet du vote : on vote pour une personne. Étape 2 — Relever la règle du gagnant : la majorité absolue est exigée. Étape 3 — Calculer : 17 + 15 + 8 = 40 ; la moitié est 20 ; il faut au moins 21 voix ; Léa a 17 ÷ 40, soit 42,5 %, donc moins de la moitié. Étape 4 — Conclure : personne n'est élu, un second tour oppose Léa et Omar. Croire qu'être premier suffit est le piège : être premier ne suffit pas quand la majorité absolue est exigée.",
+                "answers": [
+                  {
+                    "content": "Léa est élue, car elle est première.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Personne n'est élu : Léa a moins de 21 voix, un second tour oppose Léa et Omar.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Omar est élu, car il a plus de 10 voix.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les trois candidats se partagent la fonction.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le déroulement du scrutin",
+          "remember": "Une élection suit des étapes dans un ordre précis. 1. La **révision de la liste électorale** : on ajoute les nouveaux électeurs et on retire ceux qui ne remplissent plus les conditions. 2. Le **dépôt des candidatures** : les candidats se déclarent et leur dossier est vérifié. 3. La **campagne électorale** : les candidats présentent leur programme aux électeurs, dans le respect de la loi et des autres candidats. 4. Le **vote** au bureau de vote : l'électeur fait vérifier son nom sur la liste, vote à l'isoloir et dépose son bulletin dans l'urne. 5. Le **dépouillement** : les bulletins sont comptés au bureau de vote, en public. 6. La proclamation des **résultats provisoires** par la Commission électorale indépendante (CEI), qui organise les élections. 7. Le **contentieux électoral** (les recours contre les résultats), puis les **résultats définitifs** : pour l'élection présidentielle, c'est le Conseil constitutionnel qui examine les recours et proclame les résultats définitifs ; il juge aussi les recours contre l'élection des députés.",
+          "method": [
+            "Situer la situation dans le déroulement du scrutin : dire à quelle étape on se trouve.",
+            "Rappeler ce qui se passe à cette étape et qui agit.",
+            "Comparer la situation à ce que la règle prévoit pour repérer ce qui est irrégulier.",
+            "Conclure en indiquant le comportement correct ou l'étape suivante."
+          ],
+          "example": {
+            "statement": "À l'élection du délégué de la 3ème C, après le vote, le surveillant ouvre l'urne, compte seul les bulletins dans son bureau, puis annonce le résultat à la classe. Cette façon de faire est-elle correcte ?",
+            "steps": [
+              "Situer : le vote est terminé, on se trouve à l'étape du dépouillement.",
+              "Rappeler : le dépouillement est le comptage des bulletins, fait au bureau de vote, en public, en présence de témoins.",
+              "Comparer : le surveillant compte seul, à l'écart, sans témoin : ce n'est pas public, la règle n'est pas respectée.",
+              "Conclure : il faut recompter les bulletins publiquement, devant des élèves témoins ; la proclamation du résultat vient seulement après."
+            ]
+          },
+          "pitfall": "Ne confonds pas résultat provisoire et résultat définitif. Un résultat provisoire peut encore être contesté par un recours dans les délais prévus. Exemple fictif : la CEI annonce 52 % pour un candidat. C'est une annonce provisoire, et cela ne veut pas dire que le chiffre est faux. Le résultat devient définitif après l'examen des recours : pour la présidentielle, par le Conseil constitutionnel. L'élection n'est donc pas terminée à l'annonce du résultat provisoire.",
+          "figure": "etapes-du-scrutin",
+          "exercise": {
+            "title": "Suivre les étapes d'un scrutin",
+            "exercise_type": "fixation",
+            "figure": "etapes-du-scrutin",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour situer les événements d'une élection dans le déroulement du scrutin. La figure montre les étapes dans l'ordre : de la révision de la liste électorale aux résultats définitifs.",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les six premières étapes d'un scrutin.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer chaque événement dans le scrutin. Étape 2 — Rappeler ce qui se passe : la liste est révisée avant tout ; les candidats se déclarent ; ils font campagne ; on vote ; on compte ; on proclame. Étape 3 — Comparer l'ordre logique : on ne peut pas compter avant d'avoir voté, ni faire campagne sans candidats. Étape 4 — Conclure : l'ordre est révision de la liste, dépôt des candidatures, campagne, vote, dépouillement, résultats provisoires.",
+                "answers": [
+                  {
+                    "content": "Révision de la liste électorale"
+                  },
+                  {
+                    "content": "Dépôt des candidatures"
+                  },
+                  {
+                    "content": "Campagne électorale"
+                  },
+                  {
+                    "content": "Vote au bureau de vote"
+                  },
+                  {
+                    "content": "Dépouillement"
+                  },
+                  {
+                    "content": "Proclamation des résultats provisoires"
+                  }
+                ]
+              },
+              {
+                "content": "Quel organe proclame les résultats provisoires des élections nationales ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : on est après le dépouillement. Étape 2 — Rappeler qui agit : la CEI organise les élections et proclame les résultats provisoires. Étape 3 — Comparer : le Conseil constitutionnel intervient plus tard, pour les recours et les résultats définitifs ; le bureau de vote compte les bulletins mais ne proclame pas le résultat national. Étape 4 — Conclure : c'est la Commission électorale indépendante.",
+                "answers": [
+                  {
+                    "content": "La Commission électorale indépendante (CEI)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Conseil constitutionnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le bureau de vote du quartier",
+                    "correct": false
+                  },
+                  {
+                    "content": "La mairie de la commune",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque étape à ce qui s'y passe.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer chaque étape dans le scrutin. Étape 2 — Rappeler ce qui s'y passe et qui agit. Étape 3 — Comparer chaque étape à la description qui porte le même sens : candidats qui se déclarent, programme, comptage public, recours. Étape 4 — Conclure : les quatre paires ci-dessus sont les bonnes.",
+                "answers": [
+                  {
+                    "content": "Dépôt des candidatures",
+                    "match": "Les candidats se déclarent et leur dossier est vérifié"
+                  },
+                  {
+                    "content": "Campagne électorale",
+                    "match": "Les candidats présentent leur programme aux électeurs"
+                  },
+                  {
+                    "content": "Dépouillement",
+                    "match": "Les bulletins sont comptés, en public, au bureau de vote"
+                  },
+                  {
+                    "content": "Contentieux électoral",
+                    "match": "Les recours contre les résultats sont examinés"
+                  }
+                ]
+              },
+              {
+                "content": "Pour l'élection présidentielle, les résultats définitifs sont proclamés par le Conseil ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : on est à la dernière étape, après les recours. Étape 2 — Rappeler qui agit : pour la présidentielle, le Conseil constitutionnel examine les recours et proclame les résultats définitifs. Étape 3 — Comparer : la CEI donne seulement les résultats provisoires. Étape 4 — Conclure : le mot attendu est « constitutionnel ».",
+                "answers": [
+                  {
+                    "content": "constitutionnel",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quand la CEI annonce les résultats provisoires, l'élection est terminée et plus personne ne peut les contester.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : on est à l'étape des résultats provisoires. Étape 2 — Rappeler : après cette étape vient le contentieux électoral, où les recours sont examinés. Étape 3 — Comparer : « provisoire » veut dire qui peut encore changer après les recours. Étape 4 — Conclure : l'affirmation est fausse ; le résultat devient définitif après l'examen des recours, par le Conseil constitutionnel pour la présidentielle.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les comportements civiques et les fraudes",
+          "remember": "Le citoyen a des devoirs avant, pendant et après le vote. Les **comportements civiques** : s'informer sur les programmes, se faire inscrire sur la liste, voter librement et en secret, respecter les autres candidats et leurs partisans, accepter le résultat et n'utiliser que les recours légaux en cas de désaccord. Les **fraudes électorales** sont interdites et punies par la loi : l'**achat de voix** (donner de l'argent ou des cadeaux contre un vote), le **vote à la place d'une autre personne** ou le **vote multiple** (voter plusieurs fois), le **bourrage d'urne** (mettre dans l'urne plus de bulletins que de votants), l'**intimidation** (menacer ou forcer un électeur), la destruction de bulletins ou de matériel, la falsification des résultats. Une fraude trahit la confiance de tous les électeurs.",
+          "method": [
+            "Décrire le comportement : qui fait quoi, et à quel moment (avant, pendant ou après le vote).",
+            "Chercher le principe du suffrage ou la règle concernée.",
+            "Qualifier le comportement : civique ou fraude, et nommer la fraude.",
+            "Proposer le comportement correct et la bonne réaction."
+          ],
+          "example": {
+            "statement": "Pendant l'élection du délégué de la 3ème D, Idriss distribue des bonbons à ses camarades en leur demandant de voter pour lui. Que penser de son comportement ?",
+            "steps": [
+              "Décrire : avant le vote, Idriss offre des bonbons à des camarades en échange de leur voix.",
+              "Chercher le principe : le suffrage libre interdit tout cadeau et toute pression sur l'électeur.",
+              "Qualifier : c'est une fraude, l'achat de voix, même avec un petit cadeau.",
+              "Proposer : Idriss doit présenter son programme et convaincre par ses idées ; les camarades refusent les bonbons et peuvent prévenir le professeur."
+            ]
+          },
+          "pitfall": "Ne pense pas qu'une « petite fraude pour aider un ami » n'est pas grave. Contre-exemple chiffré : 40 élèves ont voté, mais on trouve 50 bulletins dans l'urne. Les 10 bulletins en trop représentent 25 % de plus que le nombre de votants (10 ÷ 40 = 25 %) : le résultat est faussé et le vote perd sa valeur pour tous. Toute fraude, petite ou grande, viole l'égalité et la liberté du vote.",
+          "figure": null,
+          "exercise": {
+            "title": "Distinguer comportement civique et fraude",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour classer des comportements d'électeurs fictifs en comportements civiques ou en fraudes.",
+            "questions": [
+              {
+                "content": "Choisis les trois comportements civiques.",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Décrire chaque comportement : qui fait quoi. Étape 2 — Chercher le principe : le vote libre et secret, l'égalité, le respect de la loi. Étape 3 — Qualifier : s'informer, voter librement et en secret, accepter le résultat avec des recours légaux sont civiques ; accepter un cadeau (achat de voix), menacer (intimidation) et voter à la place d'un ami sont des fraudes. Étape 4 — Conclure : les trois comportements civiques sont s'informer sur le programme, voter librement et en secret, et accepter le résultat avec des recours légaux seulement.",
+                "answers": [
+                  {
+                    "content": "S'informer sur le programme des candidats",
+                    "correct": true
+                  },
+                  {
+                    "content": "Accepter un cadeau en échange de son vote",
+                    "correct": false
+                  },
+                  {
+                    "content": "Voter librement et en secret",
+                    "correct": true
+                  },
+                  {
+                    "content": "Menacer ceux qui votent pour un autre candidat",
+                    "correct": false
+                  },
+                  {
+                    "content": "Accepter le résultat et n'utiliser que les recours légaux en cas de désaccord",
+                    "correct": true
+                  },
+                  {
+                    "content": "Voter à la place d'un ami absent",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque fraude à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Décrire chaque comportement. Étape 2 — Chercher le principe violé : égalité pour le bourrage et le vote multiple, liberté pour l'achat de voix et l'intimidation. Étape 3 — Qualifier chaque fraude par son nom. Étape 4 — Conclure : les quatre paires ci-dessus sont les bonnes.",
+                "answers": [
+                  {
+                    "content": "Bourrage d'urne",
+                    "match": "Mettre dans l'urne plus de bulletins que de votants"
+                  },
+                  {
+                    "content": "Achat de voix",
+                    "match": "Donner de l'argent ou un cadeau contre un vote"
+                  },
+                  {
+                    "content": "Vote multiple",
+                    "match": "Voter plusieurs fois"
+                  },
+                  {
+                    "content": "Intimidation",
+                    "match": "Menacer ou forcer un électeur"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève prend le bulletin d'un camarade absent et le met dans l'urne. De quelle fraude s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décrire : pendant le vote, un élève vote pour un absent. Étape 2 — Chercher le principe : une personne, une voix, et chacun vote pour soi. Étape 3 — Qualifier : c'est un vote à la place d'une autre personne, donc une fraude. Étape 4 — Proposer : l'élève doit voter seulement pour lui-même. La campagne et le dépouillement sont des étapes normales du scrutin, pas des fraudes.",
+                "answers": [
+                  {
+                    "content": "Voter à la place d'une autre personne",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'achat de voix",
+                    "correct": false
+                  },
+                  {
+                    "content": "La campagne électorale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dépouillement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Accepter le résultat d'une élection n'empêche pas de déposer un recours légal en cas d'irrégularité constatée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Décrire : après le vote, un citoyen constate une irrégularité. Étape 2 — Chercher la règle : la loi prévoit un contentieux électoral, c'est-à-dire des recours. Étape 3 — Qualifier : utiliser le recours légal est un comportement civique, alors que la violence ou l'insulte ne le sont pas. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Kévin dit : « Mettre quelques bulletins en plus pour aider mon ami candidat, ce n'est pas grave. » 40 élèves ont voté et l'urne contient 50 bulletins. Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décrire : pendant le vote, des bulletins sont ajoutés, 50 bulletins pour 40 votants. Étape 2 — Chercher le principe : une personne, une voix ; la sincérité du vote. Étape 3 — Qualifier : c'est un bourrage d'urne, une fraude ; les 10 bulletins en trop font 25 % de plus que les votants. Étape 4 — Proposer : refuser de frauder et signaler l'irrégularité. Croire que 10 bulletins ne changent rien est le piège : aucune fraude n'est « petite ».",
+                "answers": [
+                  {
+                    "content": "Tu as raison : 10 bulletins ne changent rien.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tu as tort : c'est un bourrage d'urne, une fraude qui fausse le résultat, même si elle est petite.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Tu as raison : c'est normal quand on veut aider un ami.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Tu as tort seulement si ton ami gagne grâce à ces bulletins.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "L'élection du délégué de la 3ème B",
+          "exercise_type": "fixation",
+          "figure": "resultats-delegues",
+          "statement": "La classe de 3ème B compte 50 élèves inscrits sur la liste de la classe. Pour élire son délégué, elle organise un scrutin dont la règle est la suivante : il faut la majorité absolue des suffrages exprimés, sinon un second tour oppose les deux premiers. Les bulletins blancs et nuls ne comptent pas dans les suffrages exprimés. Résultats (données fictives) : 45 élèves ont voté, dont 5 bulletins blancs ou nuls. Trois élèves se présentaient : Awa a obtenu 22 voix, Koffi 10 voix et Mariam 8 voix. La figure montre ces résultats.",
+          "questions": [
+            {
+              "content": "Dans une classe de 50 inscrits, 45 élèves ont voté dont 5 bulletins blancs ou nuls. Combien y a-t-il de suffrages exprimés ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever l'objet du vote : on vote pour une personne. Étape 2 — Relever la règle : seuls les bulletins valables comptent. Étape 3 — Calculer : suffrages exprimés = votants − bulletins blancs ou nuls = 45 − 5 = 40. Vérification avec les voix : 22 + 10 + 8 = 40. Étape 4 — Conclure : 40 suffrages exprimés. Piège : prendre 45, le nombre de votants, oublie de retirer les bulletins blancs et nuls.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "voix"
+            },
+            {
+              "content": "Awa a 22 voix, Koffi 10 voix et Mariam 8 voix, sur 40 suffrages exprimés. Quel est le pourcentage de voix de Koffi ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever l'objet du vote : une personne. Étape 2 — Relever la règle : seuls les suffrages exprimés servent de base. Étape 3 — Calculer le pourcentage : voix de Koffi ÷ suffrages exprimés = 10 ÷ 40 = 1 ÷ 4 = 25 %. Contrôle : Awa a 22 ÷ 40 = 55 %, Mariam 8 ÷ 40 = 20 %, et 55 + 25 + 20 = 100 %. Piège : diviser par 45, le nombre de votants, donne un résultat faux (environ 22 %) ; le pourcentage se calcule sur les suffrages exprimés. Étape 4 — Conclure : Koffi a 25 % des voix.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "unit": "%"
+            },
+            {
+              "content": "La règle d'une élection de délégué exige la majorité absolue des suffrages exprimés, sinon un second tour a lieu. Awa a 22 voix sur 40 suffrages exprimés. Que se passe-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Relever l'objet du vote : une personne. Étape 2 — Relever la règle : majorité absolue = plus de la moitié des suffrages exprimés. Étape 3 — Calculer : la moitié de 40 est 20 ; Awa a 22 voix, donc plus de 20 ; elle a 55 %. Étape 4 — Conclure : Awa est élue dès le premier tour, sans second tour. Dire qu'un second tour est nécessaire oublie de comparer 22 à la moitié de 40 ; exiger 45 voix compare à tort au nombre de votants.",
+              "answers": [
+                {
+                  "content": "Awa est élue : 22 est plus que la moitié de 40, donc elle a la majorité absolue.",
+                  "correct": true
+                },
+                {
+                  "content": "Un second tour est nécessaire, car Awa n'a pas la majorité absolue.",
+                  "correct": false
+                },
+                {
+                  "content": "Awa n'est pas élue, car elle n'a pas 45 voix.",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois candidats sont élus.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le taux de participation de la classe : 45 votants sur 50 inscrits, en pourcentage ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever l'objet du vote : une personne ; données : 50 inscrits, 45 votants. Étape 2 — Relever la règle : le taux de participation compare les votants aux inscrits. Étape 3 — Calculer : 45 ÷ 50 = 90 ÷ 100 = 90 %. Le taux de participation compare les votants aux inscrits. Il ne compte pas les suffrages exprimés. Étape 4 — Conclure : 90 % des inscrits ont voté, ce qui montre un bon civisme.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ],
+              "unit": "%"
+            },
+            {
+              "content": "Une élection de délégué où chaque élève vote pour une seule personne et où le gagnant doit avoir la majorité des voix est un scrutin uninominal majoritaire.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Relever l'objet du vote : chaque électeur vote pour une seule personne, donc uninominal. Étape 2 — Relever la règle du gagnant : le gagnant est celui qui a la majorité des voix (absolue, avec second tour si besoin), donc majoritaire. Étape 3 — Il n'y a rien à calculer. Étape 4 — Conclure : l'affirmation est vraie. Un scrutin de liste ou proportionnel partagerait des sièges entre plusieurs listes, ce qui n'est pas le cas pour un seul poste de délégué.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam, qui a perdu avec 8 voix, déclare devant la classe : « L'élection est truquée ! » Elle n'a aucune preuve. Que lui conseilles-tu ? Réponds en 3 ou 4 phrases en t'appuyant sur les règles du scrutin.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que le résultat se vérifie avec le dépouillement public et le procès-verbal",
+                "Rappelle qu'un désaccord se règle par un recours légal, avec des preuves",
+                "Condamne l'accusation sans preuve et les insultes",
+                "Phrases complètes, vocabulaire du scrutin (dépouillement, recours, résultat)"
+              ],
+              "explanation": "Corrigé modèle : « Je conseille à Mariam d'accepter le résultat si le dépouillement a eu lieu en public, devant des témoins. Les voix de chacun ont été comptées : 22, 10 et 8. Si elle a vraiment constaté une irrégularité, par exemple un bulletin en trop, elle doit la signaler au professeur avec des preuves, c'est le recours légal. Accuser sans preuve est un manque de civisme. » Barème (3 points) : vérification par le dépouillement public 1 ; recours légal avec preuves 1 ; refus de l'accusation sans preuve 0,5 ; qualité de la rédaction 0,5.",
+              "answers": [],
+              "starter": "Je lui conseille de…"
+            }
+          ]
+        },
+        {
+          "title": "Qui peut voter à Mandolia ?",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Mandolia est une commune imaginaire. Avant une élection, la Commission électorale indépendante fait afficher la liste électorale. Des habitants fictifs viennent vérifier s'ils peuvent voter. Tous jouissent de leurs droits civils et politiques, sauf indication contraire.",
+          "questions": [
+            {
+              "content": "Relie chaque habitant à la condition qui lui manque pour voter. Nadia est ivoirienne, a 17 ans et est inscrite. Paul est ivoirien, a 30 ans et n'est pas inscrit. Jean est de nationalité étrangère, a 40 ans. Moussa est ivoirien, a 35 ans, est inscrit, mais une décision de justice lui a retiré ses droits civils et politiques.",
+              "question_type": "matching",
+              "explanation": "Méthode (conditions d'électeur). Étape 1 — Identifier chaque personne et ce que l'on sait d'elle. Étape 2 — Rappeler les quatre conditions : nationalité, 18 ans révolus, droits, inscription. Étape 3 — Vérifier : Nadia n'a que 17 ans ; Paul n'est pas inscrit ; Jean n'est pas ivoirien ; Moussa n'a plus ses droits. Étape 4 — Conclure : une seule condition manquante suffit pour ne pas voter. Les quatre paires ci-dessus sont les bonnes.",
+              "answers": [
+                {
+                  "content": "Nadia, 17 ans",
+                  "match": "L'âge de 18 ans révolus"
+                },
+                {
+                  "content": "Paul, non inscrit",
+                  "match": "L'inscription sur la liste électorale"
+                },
+                {
+                  "content": "Jean, de nationalité étrangère",
+                  "match": "La nationalité ivoirienne"
+                },
+                {
+                  "content": "Moussa, privé de ses droits",
+                  "match": "La jouissance des droits civils et politiques"
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces cinq habitants de Mandolia, qui peuvent voter ? Tous sont inscrits et jouissent de leurs droits. Aïcha : ivoirienne, 18 ans accomplis. Bakary : ivoirien, 17 ans. Carla : de nationalité étrangère, 25 ans. Daouda : ivoirien, 50 ans. Eva : ivoirienne, 16 ans.",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode. Étape 1 — Identifier : nationalité et âge de chacun ; l'inscription et les droits sont donnés. Étape 2 — Rappeler : nationalité ivoirienne et 18 ans révolus. Étape 3 — Vérifier : Aïcha (ivoirienne, 18 ans) et Daouda (ivoirien, 50 ans) remplissent tout ; Bakary et Eva ont moins de 18 ans ; Carla n'est pas ivoirienne. Étape 4 — Conclure : Aïcha et Daouda peuvent voter.",
+              "answers": [
+                {
+                  "content": "Aïcha",
+                  "correct": true
+                },
+                {
+                  "content": "Bakary",
+                  "correct": false
+                },
+                {
+                  "content": "Carla",
+                  "correct": false
+                },
+                {
+                  "content": "Daouda",
+                  "correct": true
+                },
+                {
+                  "content": "Eva",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre ce que fait un électeur le jour du vote.",
+              "question_type": "ordering",
+              "explanation": "Méthode (déroulement du scrutin). Étape 1 — Situer : on est à l'étape du vote. Étape 2 — Rappeler : l'électeur va au bureau où il est inscrit, fait vérifier son nom, vote à l'isoloir, dépose son bulletin. Étape 3 — Comparer l'ordre logique : on ne dépose pas le bulletin avant d'avoir voté à l'isoloir, ni avant d'avoir été reconnu comme électeur. Étape 4 — Conclure : l'ordre ci-dessus est le bon.",
+              "answers": [
+                {
+                  "content": "Il se rend au bureau de vote où il est inscrit"
+                },
+                {
+                  "content": "Il présente sa pièce d'identité et fait vérifier son nom sur la liste"
+                },
+                {
+                  "content": "Il prend un bulletin et passe à l'isoloir"
+                },
+                {
+                  "content": "Il dépose son bulletin dans l'urne"
+                }
+              ]
+            },
+            {
+              "content": "À l'école de Mandolia, les élèves de chaque classe élisent leur délégué. Ensuite, les délégués de toutes les classes élisent le président du comité des élèves. Comment est élu le président du comité ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (principes du suffrage). Étape 1 — Identifier : les élèves élisent des délégués, puis les délégués élisent le président. Étape 2 — Chercher la règle : direct = les citoyens élisent eux-mêmes ; indirect = ils élisent des délégués qui élisent à leur tour. Étape 3 — Comparer : les élèves n'élisent pas eux-mêmes le président, ce sont les délégués. Étape 4 — Conclure : suffrage indirect. Le mot « proportionnel » désigne un mode de scrutin, pas la nature directe ou indirecte du suffrage.",
+              "answers": [
+                {
+                  "content": "Au suffrage indirect : ce sont des délégués qui votent",
+                  "correct": true
+                },
+                {
+                  "content": "Au suffrage direct : tous les élèves votent pour lui",
+                  "correct": false
+                },
+                {
+                  "content": "Au suffrage secret uniquement",
+                  "correct": false
+                },
+                {
+                  "content": "Au suffrage proportionnel",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'Ivoirienne Aïcha a 18 ans accomplis et jouit de ses droits, mais son nom n'est pas sur la liste électorale. Elle peut quand même voter.",
+              "question_type": "true_false",
+              "explanation": "Méthode (conditions d'électeur). Étape 1 — Identifier : Aïcha est ivoirienne, a 18 ans, a ses droits, n'est pas inscrite. Étape 2 — Rappeler : l'inscription est l'une des quatre conditions. Étape 3 — Vérifier : trois conditions sur quatre sont remplies. Étape 4 — Conclure : elle ne peut pas voter tant qu'elle n'est pas inscrite ; l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un voisin de 17 ans te dit : « C'est injuste, je ne peux pas voter alors que je suis ivoirien ! » Que lui réponds-tu ? Donne la règle et un conseil, en 3 ou 4 phrases.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Cite la condition d'âge : 18 ans révolus",
+                "Explique que les quatre conditions sont cumulatives (nationalité, âge, droits, inscription)",
+                "Donne un conseil civique : s'informer, se faire inscrire à ses 18 ans",
+                "Ton respectueux et phrases complètes"
+              ],
+              "explanation": "Corrigé modèle : « Tu es ivoirien, c'est une des conditions, mais ce n'est pas la seule. Pour voter, il faut aussi avoir 18 ans révolus, jouir de ses droits civils et politiques et être inscrit sur la liste électorale. À 17 ans, il te manque l'âge, ce n'est pas une injustice, c'est une règle qui s'applique à tous les jeunes. Quand tu auras 18 ans, fais-toi inscrire sur la liste pour pouvoir voter. » Barème (3 points) : condition d'âge 1 ; quatre conditions cumulatives 1 ; conseil civique 0,5 ; rédaction et respect 0,5.",
+              "answers": [],
+              "starter": "Pour voter, il faut…"
+            }
+          ]
+        },
+        {
+          "title": "L'élection du conseil municipal de Mandolia",
+          "exercise_type": "evaluation",
+          "figure": "resultats-mandolia",
+          "statement": "Mandolia est une commune imaginaire. Pour cet exercice, son conseil municipal de 20 membres est élu à la proportionnelle : les sièges sont partagés entre les listes en proportion des voix. La commune compte 8 000 électeurs inscrits. 5 200 d'entre eux ont voté, dont 200 bulletins blancs ou nuls, qui ne comptent pas dans les suffrages exprimés. Cette règle est propre à l'exercice : la règle réelle des élections municipales en Côte d'Ivoire est différente. Résultats (données fictives) : liste Soleil 2 500 voix, liste Baobab 1 500 voix, liste Lagune 1 000 voix. La figure montre ces résultats.",
+          "questions": [
+            {
+              "content": "À Mandolia, 5 200 électeurs ont voté sur 8 000 inscrits. Quel est le taux de participation, en pourcentage ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever l'objet du vote : des listes ; données : 8 000 inscrits, 5 200 votants. Étape 2 — Relever la règle : le taux de participation compare les votants aux inscrits. Étape 3 — Calculer : 5 200 ÷ 8 000 = 52 ÷ 80 = 0,65, soit 65 %. Le taux de participation se calcule sur les inscrits. Piège : diviser les suffrages exprimés par les inscrits (5 000 ÷ 8 000 = 62,5 %) : la participation compte tous les votants, blancs et nuls compris. Étape 4 — Conclure : la participation est de 65 %.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "65",
+                  "correct": true
+                }
+              ],
+              "unit": "%"
+            },
+            {
+              "content": "La liste Baobab a 1 500 voix sur 5 000 suffrages exprimés. Quel est son pourcentage de voix ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 3 — Calculer : suffrages exprimés = 5 200 − 200 = 5 000, ce qui est confirmé par 2 500 + 1 500 + 1 000 = 5 000. Pourcentage de Baobab = 1 500 ÷ 5 000 = 3 ÷ 10 = 30 %. Contrôle : Soleil 50 %, Baobab 30 %, Lagune 20 %, soit 100 %.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "%"
+            },
+            {
+              "content": "Avec 20 sièges à répartir à la proportionnelle, combien de sièges obtient la liste Soleil, qui a 50 % des voix ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Relever la règle : proportion des voix. Étape 3 — Calculer : 50 % de 20 sièges = 10 sièges. Contrôle : Baobab 30 % donne 6 sièges, Lagune 20 % donne 4 sièges, et 10 + 6 + 4 = 20 sièges. Étape 4 — Conclure : Soleil obtient 10 sièges. Piège : croire que la liste première prend tous les sièges, ce qui serait un scrutin majoritaire.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "sièges"
+            },
+            {
+              "content": "À Mandolia, les électeurs votent pour des listes de candidats et les sièges sont partagés selon la proportion des voix. Quel est ce scrutin ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Relever l'objet du vote : des listes de candidats, donc scrutin de liste. Étape 2 — Relever la règle du gagnant : les sièges sont partagés en proportion des voix, donc proportionnel. Étape 4 — Nommer : scrutin de liste proportionnel. L'uninominal majoritaire à deux tours est celui de l'élection présidentielle, pour une seule personne.",
+              "answers": [
+                {
+                  "content": "Un scrutin de liste proportionnel",
+                  "correct": true
+                },
+                {
+                  "content": "Un scrutin uninominal majoritaire à deux tours",
+                  "correct": false
+                },
+                {
+                  "content": "Un scrutin indirect",
+                  "correct": false
+                },
+                {
+                  "content": "Un scrutin sans suffrage",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au dépouillement, on compte 5 300 bulletins dans les urnes, alors que 5 200 électeurs seulement ont signé la liste d'émargement. Quelle fraude cette différence peut-elle révéler ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (fraudes). Étape 1 — Décrire : 5 300 bulletins pour 5 200 votants, soit 100 bulletins en trop. Étape 2 — Chercher le principe : une personne, une voix. Étape 3 — Qualifier : des bulletins ont pu être ajoutés, c'est un bourrage d'urne. Étape 4 — Proposer : signaler l'écart au bureau de vote, le noter au procès-verbal et utiliser les recours légaux. La campagne, la révision de la liste et le vote secret ne créent pas de bulletins en trop.",
+              "answers": [
+                {
+                  "content": "Un bourrage d'urne",
+                  "correct": true
+                },
+                {
+                  "content": "Une campagne électorale trop longue",
+                  "correct": false
+                },
+                {
+                  "content": "Une révision de la liste électorale",
+                  "correct": false
+                },
+                {
+                  "content": "Un vote secret",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le conseil municipal de Mandolia (20 sièges) est élu à la proportionnelle entre trois listes : Soleil 50 % des voix, Baobab 30 %, Lagune 20 %. Choisis les trois propositions vraies.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. Étape 1 — Relever l'objet du vote : des listes. Étape 2 — Relever la règle : proportionnelle, chaque liste a des sièges selon ses voix. Étape 3 — Calculer : Lagune a 20 % des voix, soit 4 sièges. Étape 4 — Conclure : les trois propositions vraies sont celles sur Lagune qui obtient des sièges, sur l'inscription nécessaire et sur le scrutin de liste. Dire que l'on vote pour une seule personne est faux : on vote pour une liste, pas pour une seule personne, et dire que la liste première prend les 20 sièges est faux aussi : à la proportionnelle, les sièges sont partagés selon les voix.",
+              "answers": [
+                {
+                  "content": "La liste Lagune obtient des sièges alors qu'elle n'est que troisième",
+                  "correct": true
+                },
+                {
+                  "content": "Les électeurs votent pour une seule personne",
+                  "correct": false
+                },
+                {
+                  "content": "Un électeur de Mandolia doit être inscrit sur la liste électorale pour voter",
+                  "correct": true
+                },
+                {
+                  "content": "La liste arrivée première prend les 20 sièges",
+                  "correct": false
+                },
+                {
+                  "content": "Le scrutin est un scrutin de liste",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige trois conseils civiques à donner aux habitants de Mandolia : un avant le vote, un pendant le vote, un après le vote. Chaque conseil tient en une phrase et s'appuie sur une règle du scrutin.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Un conseil avant le vote appuyé sur une règle (inscription, programme)",
+                "Un conseil pendant le vote appuyé sur une règle (secret, liberté)",
+                "Un conseil après le vote appuyé sur une règle (résultat accepté, recours légal)",
+                "Trois phrases complètes avec le vocabulaire du scrutin"
+              ],
+              "explanation": "Corrigé modèle : « Avant le vote, je conseille de s'informer sur le programme de chaque liste et de vérifier que son nom est sur la liste électorale, car sans inscription on ne peut pas voter. Pendant le vote, je conseille de voter librement et en secret à l'isoloir, sans accepter de cadeau ni de pression. Après le vote, je conseille d'accepter le résultat, et de recourir à la voie légale si l'on constate une irrégularité. » Barème (4 points) : un conseil par moment avec sa règle 3 × 1 ; qualité de la rédaction 1.",
+              "answers": [],
+              "starter": "Avant le vote, je conseille de…"
+            }
+          ]
+        },
+        {
+          "title": "De la campagne aux résultats définitifs",
+          "exercise_type": "evaluation",
+          "figure": "etapes-du-scrutin",
+          "statement": "À Mandolia, une commune imaginaire, des habitants fictifs suivent une élection du début à la fin. La figure montre les étapes d'un scrutin, de la révision de la liste électorale aux résultats définitifs. Pour une élection municipale, les recours ne vont pas devant le Conseil constitutionnel : la figure donne le schéma général. Les questions portent sur ce que racontent ces habitants.",
+          "questions": [
+            {
+              "content": "Relie chaque événement de Mandolia à l'étape du scrutin correspondante.",
+              "question_type": "matching",
+              "explanation": "Méthode (déroulement du scrutin). Étape 1 — Situer chaque événement dans le scrutin. Étape 2 — Rappeler ce qui se passe à chaque étape : dossiers remis, programme présenté, comptage public, recours. Étape 3 — Comparer chaque événement à l'étape qui porte le même sens. Étape 4 — Conclure : les quatre paires ci-dessus sont les bonnes.",
+              "answers": [
+                {
+                  "content": "Les listes Soleil, Baobab et Lagune remettent leur dossier de candidature.",
+                  "match": "Dépôt des candidatures"
+                },
+                {
+                  "content": "Sur la place du marché, la liste Baobab présente son programme.",
+                  "match": "Campagne électorale"
+                },
+                {
+                  "content": "Le soir du vote, les bulletins sont comptés devant les témoins des listes.",
+                  "match": "Dépouillement"
+                },
+                {
+                  "content": "La liste Lagune conteste un résultat par la voie légale.",
+                  "match": "Contentieux électoral"
+                }
+              ]
+            },
+            {
+              "content": "Dans le schéma des étapes d'un scrutin (révision de la liste, dépôt des candidatures, campagne, vote, dépouillement, résultats provisoires, recours, résultats définitifs), quelle étape vient juste après le dépouillement ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Étape 1 — Situer : on est au dépouillement, c'est-à-dire que les bulletins viennent d'être comptés. Étape 2 — Rappeler ce qui suit : une fois les bulletins comptés, la CEI proclame les résultats provisoires. Étape 3 — Comparer avec les autres propositions : la campagne, les candidatures et la révision de la liste se trouvent avant le vote. Étape 4 — Conclure : la proclamation des résultats provisoires.",
+              "answers": [
+                {
+                  "content": "La proclamation des résultats provisoires",
+                  "correct": true
+                },
+                {
+                  "content": "La campagne électorale",
+                  "correct": false
+                },
+                {
+                  "content": "Le dépôt des candidatures",
+                  "correct": false
+                },
+                {
+                  "content": "La révision de la liste électorale",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Choisis les trois comportements qui sont des fraudes. Un habitant de Mandolia donne 5 000 francs CFA à des voisins pour qu'ils votent pour la liste Soleil. Une habitante lit les programmes avant de voter. Une habitante vote à la place de sa sœur absente. Un agent glisse 100 bulletins en plus dans l'urne. Un habitant signale au président du bureau une urne ouverte. Un habitant accepte le résultat tout en déposant un recours légal.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode (fraudes). Étape 1 — Décrire chaque comportement. Étape 2 — Chercher le principe : liberté du vote, une personne une voix. Étape 3 — Qualifier : donner de l'argent est un achat de voix ; voter à la place d'une absente est un vote à la place d'une autre personne ; glisser des bulletins en plus est un bourrage d'urne. Lire les programmes, signaler une urne ouverte et déposer un recours légal sont des comportements civiques. Étape 4 — Proposer : refuser ces fraudes et les signaler.",
+              "answers": [
+                {
+                  "content": "Donner 5 000 francs CFA à des voisins pour qu'ils votent pour une liste",
+                  "correct": true
+                },
+                {
+                  "content": "Lire les programmes avant de voter",
+                  "correct": false
+                },
+                {
+                  "content": "Voter à la place de sa sœur absente",
+                  "correct": true
+                },
+                {
+                  "content": "Glisser 100 bulletins en plus dans l'urne",
+                  "correct": true
+                },
+                {
+                  "content": "Signaler une urne ouverte au président du bureau",
+                  "correct": false
+                },
+                {
+                  "content": "Accepter le résultat tout en déposant un recours légal",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand une liste conteste les résultats par la voie légale, on parle de ___ électoral.",
+              "question_type": "select",
+              "explanation": "Méthode. Étape 1 — Situer : on est après l'annonce des résultats provisoires. Étape 2 — Rappeler : les recours contre les résultats forment le contentieux électoral. Étape 3 — Comparer : le dépouillement est le comptage des bulletins, le scrutin est l'ensemble des opérations de vote, le suffrage est le droit de vote. Étape 4 — Conclure : le mot est « contentieux ».",
+              "answers": [
+                {
+                  "content": "contentieux",
+                  "correct": true
+                },
+                {
+                  "content": "dépouillement",
+                  "correct": false
+                },
+                {
+                  "content": "scrutin",
+                  "correct": false
+                },
+                {
+                  "content": "suffrage",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour l'élection présidentielle, ce sont les juges du Conseil constitutionnel qui proclament les résultats définitifs.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Étape 1 — Situer : on est à la dernière étape du schéma. Étape 2 — Rappeler : la CEI proclame les résultats provisoires, puis les recours sont examinés. Étape 3 — Comparer : pour la présidentielle, le Conseil constitutionnel proclame les résultats définitifs. Étape 4 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le dépouillement compte 5 300 bulletins pour 5 200 votants à Mandolia. Combien de bulletins y a-t-il en trop ?",
+              "question_type": "numeric",
+              "explanation": "Méthode. Étape 1 — Décrire : 5 300 bulletins comptés, 5 200 votants. Étape 3 — Calculer : 5 300 − 5 200 = 100 bulletins en trop. Étape 4 — Conclure : il y a 100 bulletins en trop, un écart à signaler au procès-verbal et à examiner par la voie légale, car il peut révéler un bourrage d'urne. Piège : penser qu'un écart de 100 bulletins sur 5 200 est négligeable, alors que chaque voix compte autant que les autres.",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ],
+              "unit": "bulletins"
+            },
+            {
+              "content": "Un jeune de 18 ans dit : « Mon vote ne compte pas, donc je ne m'inscris pas sur la liste électorale. » Rédige un paragraphe de 5 à 7 phrases pour le convaincre de s'inscrire et de voter. Appuie-toi sur au moins deux principes ou règles du scrutin et sur un exemple chiffré.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Cite la règle : inscription obligatoire pour voter",
+                "S'appuie sur le suffrage égal (une personne, une voix) ou universel",
+                "Donne un exemple chiffré cohérent (par exemple une élection gagnée à quelques voix)",
+                "Développe un argument civique (participer aux décisions, respecter la démocratie)",
+                "Paragraphe structuré, phrases complètes, sans attaque personnelle"
+              ],
+              "explanation": "Corrigé modèle : « Je te conseille de t'inscrire sur la liste électorale, car sans inscription tu ne pourras pas voter, même à 18 ans. Le suffrage est égal : ta voix a le même poids que celle de n'importe qui. Imagine une élection où deux listes obtiennent 2 501 et 2 499 voix : la différence est de deux voix, et chaque voix décide du résultat. En t'inscrivant et en votant, tu participes aux décisions de ta commune et tu fais vivre la démocratie. Ton vote est secret et libre, personne ne peut te forcer. Voter est donc un acte civique utile. » Barème (5 points) : règle de l'inscription 1 ; principe égal ou universel 1 ; exemple chiffré cohérent 1 ; argument civique 1 ; structure et rédaction 1.",
+              "answers": [],
+              "starter": "Je te conseille de t'inscrire, car…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

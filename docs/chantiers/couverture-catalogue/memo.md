@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix (tests) |
-| **Statut** | en cours |
+| **Statut** | livré, clos |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `fix/couverture-catalogue` |
 | **Programme** | — |
@@ -27,5 +27,5 @@ Une branche que rien ne peut atteindre (garde redondante avec une validation en 
 ## Portes de sortie
 
 - [x] Suite complète locale : 100 % lignes et branches, 0 échec
-- [ ] `bin/ci-quiet` vert, ligne de preuve dans la PR
-- [ ] Statut `ci` vert sur le train #370
+- [x] `bin/ci-quiet` vert, ligne de preuve dans la PR
+- [x] Statut `ci` vert sur le train #370

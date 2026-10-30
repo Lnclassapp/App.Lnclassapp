@@ -1,0 +1,1119 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les institutions juridictionnelles",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "EDHC",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "organisation-juridictions",
+          "kind": "diagram",
+          "description": "Arbre de l'organisation des juridictions. Le pouvoir judiciaire indépendant se divise en ordre judiciaire (tribunaux de première instance et de commerce, cours d'appel, Cour de cassation) et ordre administratif (Conseil d'État). La Cour des comptes est rattachée au sommet. Le Conseil constitutionnel n'y figure pas.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "pouvoir_judiciaire",
+                "label": "Pouvoir judiciaire indépendant",
+                "category": 1
+              },
+              {
+                "id": "ordre_judiciaire",
+                "label": "Ordre judiciaire",
+                "category": 1
+              },
+              {
+                "id": "ordre_administratif",
+                "label": "Ordre administratif",
+                "category": 1
+              },
+              {
+                "id": "cour_des_comptes",
+                "label": "Cour des comptes",
+                "category": 2
+              },
+              {
+                "id": "cour_de_cassation",
+                "label": "Cour de cassation",
+                "category": 2
+              },
+              {
+                "id": "cours_d_appel",
+                "label": "Cours d'appel",
+                "category": 3
+              },
+              {
+                "id": "tribunaux",
+                "label": "Tribunaux de première instance et de commerce",
+                "category": 3
+              },
+              {
+                "id": "conseil_d_etat",
+                "label": "Conseil d'État",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "pouvoir_judiciaire",
+                "to": "ordre_judiciaire"
+              },
+              {
+                "from": "pouvoir_judiciaire",
+                "to": "ordre_administratif"
+              },
+              {
+                "from": "pouvoir_judiciaire",
+                "to": "cour_des_comptes"
+              },
+              {
+                "from": "ordre_judiciaire",
+                "to": "cour_de_cassation"
+              },
+              {
+                "from": "cour_de_cassation",
+                "to": "cours_d_appel"
+              },
+              {
+                "from": "cours_d_appel",
+                "to": "tribunaux"
+              },
+              {
+                "from": "ordre_administratif",
+                "to": "conseil_d_etat"
+              }
+            ],
+            "legend": [
+              "Pouvoir et ordres",
+              "Juridictions suprêmes et contrôle",
+              "Juridictions du fond"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "parcours-affaire",
+          "kind": "diagram",
+          "description": "Parcours d'une affaire dans l'ordre judiciaire, de haut en bas : un litige commercial ou entre particuliers est porté devant un tribunal de première instance ou de commerce, qui rend un jugement ; une partie peut faire appel devant la cour d'appel, qui rend un arrêt ; un pourvoi peut ensuite être formé devant la Cour de cassation.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "litige",
+                "label": "Litige"
+              },
+              {
+                "id": "premiere_instance",
+                "label": "Tribunal de première instance ou de commerce",
+                "category": 1
+              },
+              {
+                "id": "jugement",
+                "label": "Jugement",
+                "category": 1
+              },
+              {
+                "id": "appel",
+                "label": "Appel devant la cour d'appel",
+                "category": 1
+              },
+              {
+                "id": "arret",
+                "label": "Arrêt de la cour d'appel",
+                "category": 1
+              },
+              {
+                "id": "pourvoi",
+                "label": "Pourvoi devant la Cour de cassation",
+                "category": 2
+              },
+              {
+                "id": "decision",
+                "label": "Décision de la Cour de cassation",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "litige",
+                "to": "premiere_instance",
+                "label": "saisine"
+              },
+              {
+                "from": "premiere_instance",
+                "to": "jugement"
+              },
+              {
+                "from": "jugement",
+                "to": "appel",
+                "label": "contestation"
+              },
+              {
+                "from": "appel",
+                "to": "arret"
+              },
+              {
+                "from": "arret",
+                "to": "pourvoi",
+                "label": "recours"
+              },
+              {
+                "from": "pourvoi",
+                "to": "decision"
+              }
+            ],
+            "legend": [
+              "Juridictions du fond",
+              "Contrôle de la loi"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le pouvoir judiciaire et son indépendance",
+          "remember": "Un État de droit repose sur trois pouvoirs : le pouvoir **législatif** fait la loi, le pouvoir **exécutif** la fait appliquer, et le pouvoir **judiciaire** **juge** : il tranche les litiges (désaccords entre personnes) et sanctionne les infractions (actes interdits par la loi). Selon la Constitution du 8 novembre 2016, le pouvoir judiciaire est **indépendant** du pouvoir législatif et du pouvoir exécutif : le juge ne reçoit d'ordre de personne et n'obéit qu'à la loi. Le Président de la République est le garant de cette indépendance ; il est assisté par le **Conseil supérieur de la magistrature**, qui veille notamment à la carrière et à la discipline des magistrats (juges et procureurs).",
+          "method": [
+            "Identifier le problème : un litige entre personnes ou une infraction.",
+            "Repérer la règle de droit que le juge doit appliquer.",
+            "Nommer l'acteur qui tranche : un juge, jamais une personne qui a un intérêt dans l'affaire.",
+            "Vérifier l'indépendance : personne ne doit dicter sa décision au juge."
+          ],
+          "example": {
+            "statement": "Awa se plaint des branches du manguier de son voisin Yao, qui ont abîmé son toit. Elle saisit un juge. Un notable du quartier téléphone au juge pour lui demander de donner raison à Yao. Analyser la situation.",
+            "steps": [
+              "Identifier : c'est un litige entre deux voisins (des dégâts sur un toit), pas une infraction.",
+              "Repérer : le juge applique la loi sur les dommages causés à autrui ; il ne décide pas selon son avis personnel.",
+              "Nommer : c'est un juge qui tranche, pas le notable, qui n'a aucun pouvoir de justice.",
+              "Vérifier : l'appel du notable est une pression ; un juge indépendant décide selon la loi seule et ne cède pas."
+            ]
+          },
+          "pitfall": "Ne confonds pas juger avec faire la loi ou obéir au plus puissant. Contre-exemple : un ministre demande à un juge de condamner un commerçant. Le juge refuse d'obéir, car il n'est soumis qu'à la loi. Le juge ne vote pas la loi (c'est le pouvoir législatif) et ne gouverne pas (c'est le pouvoir exécutif) : il applique la loi à un cas précis.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître le rôle du pouvoir judiciaire",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la fiche à des situations de la vie courante.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Selon la Constitution du 8 novembre 2016, le pouvoir judiciaire est indépendant du pouvoir exécutif et du pouvoir législatif.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Vérifier l'indépendance : la Constitution du 8 novembre 2016 affirme que le pouvoir judiciaire est indépendant des deux autres pouvoirs. La réponse est Vrai. L'erreur tentante serait de croire que le gouvernement peut diriger les juges ; ce n'est pas le cas, car le juge n'obéit qu'à la loi.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux voisins se disputent une clôture. Qui a le pouvoir de rendre une décision de justice sur ce litige ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : c'est un litige entre voisins. Étape 3 — Nommer l'acteur qui tranche : seul un juge rend une décision de justice. Le chef de quartier peut aider à se concilier et le gendarme constate les faits, mais ni l'un ni l'autre ne juge ; le maire non plus.",
+                "answers": [
+                  {
+                    "content": "Le chef du quartier",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un juge",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le gendarme qui a calmé la dispute",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le maire de la commune",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque pouvoir à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Nommer l'acteur qui tranche : c'est le pouvoir judiciaire, qui juge. Le pouvoir législatif fait la loi ; le pouvoir exécutif la fait appliquer. Ne les mélange pas : le juge applique la loi à un cas, il ne la fait pas.",
+                "answers": [
+                  {
+                    "content": "Pouvoir législatif",
+                    "match": "Faire la loi"
+                  },
+                  {
+                    "content": "Pouvoir exécutif",
+                    "match": "Faire appliquer la loi et gouverner"
+                  },
+                  {
+                    "content": "Pouvoir judiciaire",
+                    "match": "Juger les litiges et sanctionner les infractions"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour analyser une situation devant la justice.",
+                "question_type": "ordering",
+                "explanation": "La méthode suit cet ordre : Étape 1 — Identifier le problème ; Étape 2 — Repérer la règle de droit ; Étape 3 — Nommer l'acteur qui tranche ; Étape 4 — Vérifier l'indépendance. On sait d'abord de quoi il s'agit, puis quelle règle s'applique, puis qui juge, puis si le juge est libre.",
+                "answers": [
+                  {
+                    "content": "Identifier le problème : litige ou infraction."
+                  },
+                  {
+                    "content": "Repérer la règle de droit à appliquer."
+                  },
+                  {
+                    "content": "Nommer l'acteur qui tranche : un juge."
+                  },
+                  {
+                    "content": "Vérifier l'indépendance du juge."
+                  }
+                ]
+              },
+              {
+                "content": "Un ministre téléphone à un juge pour qu'il condamne un commerçant. Que doit faire le juge ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Vérifier l'indépendance : la Constitution du 8 novembre 2016 rend le pouvoir judiciaire indépendant du pouvoir exécutif, dont le ministre fait partie. Étape 2 — Repérer la règle : le juge se fonde sur la loi. Obéir au ministre est le piège : cela supprimerait l'indépendance du juge.",
+                "answers": [
+                  {
+                    "content": "Décider selon la loi seule, sans obéir au ministre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Obéir, car un ministre est plus haut placé que lui",
+                    "correct": false
+                  },
+                  {
+                    "content": "Attendre l'accord du Parlement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Demander son avis au voisin du commerçant",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les juridictions du fond et le double degré",
+          "remember": "Les **juridictions du fond** examinent les faits (ce qui s'est passé) et le droit (la règle à appliquer). Au premier degré : le **tribunal de première instance**, qui peut avoir des **sections détachées** (des antennes dans d'autres villes), juge la plupart des litiges entre personnes ; le **tribunal de commerce**, là où il existe, juge les litiges commerciaux, notamment entre commerçants. Au second degré : la **cour d'appel** réexamine l'affaire quand une partie conteste le jugement et fait **appel**. C'est le **double degré de juridiction** : une affaire peut être jugée deux fois sur le fond.",
+          "method": [
+            "Identifier la nature du litige : entre voisins, entre commerçants, après un accident…",
+            "Choisir la juridiction du premier degré : le tribunal de commerce pour un litige commercial, sinon le tribunal de première instance.",
+            "Situer le degré : première instance, puis cour d'appel si une partie conteste le jugement."
+          ],
+          "example": {
+            "statement": "Mariam, commerçante au marché, a vendu 50 sacs de riz à un grossiste qui refuse de payer. Le tribunal lui donne raison, mais le grossiste conteste le jugement. Quelles juridictions interviennent ?",
+            "steps": [
+              "Identifier : c'est un litige commercial entre deux commerçants (une vente de marchandises non payée).",
+              "Choisir : le litige est commercial, donc il va devant le tribunal de commerce.",
+              "Situer : le grossiste conteste, donc il fait appel devant la cour d'appel, juridiction du second degré."
+            ]
+          },
+          "pitfall": "Ne crois pas que tout litige d'argent va au tribunal de commerce. Contre-exemple : Kouassi réclame à son ancien propriétaire la caution de sa location, qui n'est pas restituée. Ni l'un ni l'autre n'agit en commerçant : le litige va devant le tribunal de première instance. Le tribunal de commerce est réservé aux litiges commerciaux.",
+          "figure": "parcours-affaire",
+          "exercise": {
+            "title": "Choisir la bonne juridiction du fond",
+            "statement": "Dans cet exercice, tu appliques les trois étapes de la fiche à des litiges du quotidien.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Deux conducteurs de moto, qui ne sont pas des commerçants, se heurtent. L'un demande la réparation de ses dégâts. Quelle juridiction du premier degré s'occupe du litige ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : c'est un litige entre deux particuliers après un accident, pas un litige commercial. Étape 2 — Choisir la juridiction du premier degré : le tribunal de première instance. Le tribunal de commerce serait le piège : il est réservé aux litiges commerciaux. La cour d'appel intervient seulement au second degré.",
+                "answers": [
+                  {
+                    "content": "Le tribunal de commerce",
+                    "correct": false
+                  },
+                  {
+                    "content": "La cour d'appel",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le tribunal de première instance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Conseil constitutionnel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La cour d'appel est une juridiction du second degré : elle réexamine une affaire déjà jugée en première instance.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Situer le degré : le tribunal de première instance ou le tribunal de commerce juge au premier degré ; la cour d'appel, au second, quand une partie fait appel. La réponse est Vrai.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation à la juridiction qui convient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier la nature du litige, puis Étape 2 — Choisir : litige commercial, tribunal de commerce ; litige entre voisins, tribunal de première instance. Étape 3 — Situer le degré : contester un jugement déjà rendu, c'est faire appel devant la cour d'appel.",
+                "answers": [
+                  {
+                    "content": "Deux commerçants du marché se disputent un paiement de marchandises",
+                    "match": "Tribunal de commerce"
+                  },
+                  {
+                    "content": "Deux voisins se disputent une clôture",
+                    "match": "Tribunal de première instance"
+                  },
+                  {
+                    "content": "Une partie conteste un jugement de première instance",
+                    "match": "Cour d'appel"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont des juridictions du fond ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Choisir et Étape 3 — Situer : le tribunal de première instance, le tribunal de commerce et la cour d'appel jugent les faits et le droit. La Cour de cassation ne rejuge pas les faits, et le Conseil constitutionnel ne juge pas les litiges entre personnes.",
+                "answers": [
+                  {
+                    "content": "Le tribunal de première instance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le tribunal de commerce",
+                    "correct": true
+                  },
+                  {
+                    "content": "La cour d'appel",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Cour de cassation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Conseil constitutionnel",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Kouassi réclame à son ancien propriétaire, non commerçant, la caution de sa location qui n'est pas restituée. Ce litige est jugé par le ___ au premier degré.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : une caution de location entre particuliers, donc aucun acte de commerce. Étape 2 — Choisir : le tribunal de première instance. Le tribunal de commerce est le piège : l'argent ne suffit pas à rendre un litige commercial. Étape 3 — Situer : c'est le premier degré.",
+                "answers": [
+                  {
+                    "content": "tribunal de première instance",
+                    "correct": true
+                  },
+                  {
+                    "content": "tribunal de commerce",
+                    "correct": false
+                  },
+                  {
+                    "content": "Conseil d'État",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les juridictions suprêmes et les deux ordres",
+          "remember": "La Constitution du 8 novembre 2016 met au sommet de la justice : la **Cour de cassation** (ordre judiciaire), le **Conseil d'État** (ordre administratif) et la **Cour des comptes**, qui contrôle l'emploi de l'argent public. L'**ordre judiciaire** juge les litiges entre particuliers et les infractions. L'**ordre administratif** juge les litiges entre un particulier et l'administration (l'État, les collectivités, les services publics). Le **pourvoi en cassation** est le recours devant la Cour de cassation : elle ne rejuge pas les faits, elle vérifie que la loi a été bien appliquée.",
+          "method": [
+            "Identifier les parties au litige : deux particuliers, ou un particulier et l'administration.",
+            "Déterminer l'ordre de juridiction : judiciaire ou administratif.",
+            "Nommer la juridiction suprême de cet ordre, que l'on saisit par un pourvoi."
+          ],
+          "example": {
+            "statement": "Mme Adjoua, enseignante, conteste une décision de l'administration qui a refusé de lui délivrer un document. Elle veut aller jusqu'à la juridiction suprême. Laquelle ?",
+            "steps": [
+              "Identifier : les parties sont une particulière et l'administration.",
+              "Déterminer : l'administration est en cause, donc l'ordre est administratif.",
+              "Nommer : la juridiction suprême de l'ordre administratif est le Conseil d'État, saisi en dernier recours."
+            ]
+          },
+          "pitfall": "Ne crois pas que la Cour de cassation refait le procès. Contre-exemple : un plaideur lui dit que les témoins ont menti. Elle répond qu'elle ne réexamine pas les faits : elle contrôle seulement si les juges ont bien appliqué la loi. Ne confonds pas non plus les deux sommets : Cour de cassation pour l'ordre judiciaire, Conseil d'État pour l'ordre administratif.",
+          "figure": "organisation-juridictions",
+          "exercise": {
+            "title": "Trouver l'ordre et la juridiction suprême",
+            "statement": "Dans cet exercice, tu appliques les trois étapes de la fiche à des litiges du quotidien.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque juridiction à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Nommer la juridiction suprême : la Cour de cassation pour l'ordre judiciaire, le Conseil d'État pour l'ordre administratif. La Cour des comptes est à part : elle contrôle l'emploi de l'argent public.",
+                "answers": [
+                  {
+                    "content": "Cour de cassation",
+                    "match": "Juridiction suprême de l'ordre judiciaire"
+                  },
+                  {
+                    "content": "Conseil d'État",
+                    "match": "Juridiction suprême de l'ordre administratif"
+                  },
+                  {
+                    "content": "Cour des comptes",
+                    "match": "Contrôle l'emploi de l'argent public"
+                  }
+                ]
+              },
+              {
+                "content": "Après un accident de moto entre deux particuliers, le jugement d'appel est encore contesté par un pourvoi. Quelle juridiction suprême est saisie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : deux particuliers. Étape 2 — Déterminer : l'ordre est judiciaire. Étape 3 — Nommer : la Cour de cassation. Le Conseil d'État est le piège : il est le sommet de l'ordre administratif.",
+                "answers": [
+                  {
+                    "content": "Le Conseil d'État",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Cour de cassation",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Conseil constitutionnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Cour des comptes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un commerçant conteste devant la justice une décision de l'administration qui lui a refusé une autorisation. Quelle juridiction suprême tranche en dernier recours ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : un particulier face à l'administration. Étape 2 — Déterminer : l'ordre est administratif. Étape 3 — Nommer : le Conseil d'État. La Cour de cassation est le piège, car elle est le sommet de l'autre ordre.",
+                "answers": [
+                  {
+                    "content": "La Cour de cassation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Conseil d'État",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le tribunal de commerce",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Haute Cour de justice",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour trouver la juridiction suprême.",
+                "question_type": "ordering",
+                "explanation": "La méthode suit cet ordre : Étape 1 — Identifier les parties ; Étape 2 — Déterminer l'ordre ; Étape 3 — Nommer la juridiction suprême. On ne peut pas nommer le sommet avant de savoir à quel ordre appartient le litige.",
+                "answers": [
+                  {
+                    "content": "Identifier les parties au litige."
+                  },
+                  {
+                    "content": "Déterminer l'ordre de juridiction."
+                  },
+                  {
+                    "content": "Nommer la juridiction suprême de cet ordre."
+                  }
+                ]
+              },
+              {
+                "content": "Devant la Cour de cassation, on peut faire réentendre les témoins pour rejuger les faits.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Nommer la juridiction suprême et connaître son rôle : la Cour de cassation vérifie seulement si la loi a été bien appliquée. Elle ne rejuge pas les faits ; l'affirmation est donc Faux. Croire le contraire, c'est transformer la cassation en troisième procès.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le Conseil constitutionnel et la Haute Cour de justice",
+          "remember": "Le **Conseil constitutionnel** est le juge de la **constitutionnalité** : il vérifie qu'une loi respecte la Constitution. Il veille aussi à la régularité des élections présidentielle et législatives et proclame les résultats définitifs de l'élection du Président de la République. Ses décisions s'imposent à tous. Il ne rejuge pas les litiges entre personnes. La **Haute Cour de justice** est une juridiction exceptionnelle qui juge le Président de la République en cas de **haute trahison** (faute très grave contre la Nation). Elle ne juge pas les litiges ordinaires.",
+          "method": [
+            "Identifier ce qui est contesté ou reproché : une loi, une élection, une faute d'une haute autorité.",
+            "Écarter les juridictions ordinaires, qui jugent les litiges entre personnes et les infractions.",
+            "Désigner l'institution compétente : Conseil constitutionnel ou Haute Cour de justice."
+          ],
+          "example": {
+            "statement": "Une loi imaginaire interdirait à toute personne de se déplacer dans la ville après 18 h. Des citoyens pensent qu'elle contredit un principe de la Constitution. Quelle institution doit vérifier ?",
+            "steps": [
+              "Identifier : ce qui est contesté est une loi, et non un voisin ou un commerçant.",
+              "Écarter : le tribunal de première instance et la cour d'appel jugent des litiges entre personnes, pas des lois.",
+              "Désigner : c'est le Conseil constitutionnel, juge de la constitutionnalité des lois."
+            ]
+          },
+          "pitfall": "Ne crois pas que le Conseil constitutionnel est un tribunal d'appel pour tout le monde. Contre-exemple : un voisin condamné pour avoir détruit une clôture ne peut pas lui demander de rejuger son affaire. Il juge si une loi respecte la Constitution et veille à la régularité des élections ; il ne rejuge pas les litiges entre personnes.",
+          "figure": null,
+          "exercise": {
+            "title": "Distinguer les institutions particulières",
+            "statement": "Dans cet exercice, tu appliques les trois étapes de la fiche à des institutions de l'État.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque institution à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Désigner l'institution compétente : le Conseil constitutionnel contrôle la constitutionnalité des lois, la Haute Cour de justice juge le Président en cas de haute trahison, et la Cour de cassation vérifie l'application de la loi. Ils n'ont pas tous le même rôle.",
+                "answers": [
+                  {
+                    "content": "Conseil constitutionnel",
+                    "match": "Vérifie qu'une loi respecte la Constitution"
+                  },
+                  {
+                    "content": "Haute Cour de justice",
+                    "match": "Juge le Président de la République en cas de haute trahison"
+                  },
+                  {
+                    "content": "Cour de cassation",
+                    "match": "Vérifie que la loi a été bien appliquée par les juges"
+                  }
+                ]
+              },
+              {
+                "content": "Une personne pense qu'une loi nouvelle contredit la Constitution. Quelle institution vérifie cela ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : ce qui est contesté est une loi. Étape 2 — Écarter : la cour d'appel, le tribunal de commerce et la Cour de cassation jugent des litiges entre personnes. Étape 3 — Désigner : le Conseil constitutionnel.",
+                "answers": [
+                  {
+                    "content": "La cour d'appel",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le tribunal de commerce",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Conseil constitutionnel",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Cour de cassation",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces missions, lesquelles sont celles du Conseil constitutionnel ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier ce qui est en jeu, puis Étape 2 — Écarter : un litige de voisinage et un appel relèvent des juridictions ordinaires. Étape 3 — Désigner : le Conseil constitutionnel contrôle la constitutionnalité des lois et veille à la régularité de l'élection présidentielle.",
+                "answers": [
+                  {
+                    "content": "Contrôler qu'une loi respecte la Constitution",
+                    "correct": true
+                  },
+                  {
+                    "content": "Veiller à la régularité de l'élection présidentielle",
+                    "correct": true
+                  },
+                  {
+                    "content": "Juger un litige de voisinage",
+                    "correct": false
+                  },
+                  {
+                    "content": "Juger l'appel d'un jugement du tribunal de commerce",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète le nom de l'institution qui juge le Président de la République en cas de haute trahison : la Haute Cour de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : une faute très grave du Président de la République. Étape 2 — Écarter les juridictions ordinaires. Étape 3 — Désigner : la Haute Cour de justice. Le mot attendu est « justice ».",
+                "answers": [
+                  {
+                    "content": "justice",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un voisin condamné par un tribunal peut saisir le Conseil constitutionnel pour faire rejuger son affaire.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écarter les juridictions ordinaires ne veut pas dire qu'on peut ensuite aller au Conseil constitutionnel : il ne rejuge pas les litiges entre personnes. Il contrôle la constitutionnalité des lois et veille à la régularité des élections. La réponse est Faux.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un conflit de voisinage",
+          "statement": "Awa et son voisin Yao se disputent. Les branches du manguier de Yao ont abîmé le toit d'Awa. Yao refuse de payer la réparation. Awa saisit la justice. Dans cet exercice, tu suis la méthode de la fiche pour analyser ce litige.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Awa et Yao, voisins en conflit pour des dégâts sur un toit, peuvent s'adresser à un juge pour trancher leur litige, au lieu de se faire justice eux-mêmes.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : c'est un litige entre deux voisins. Étape 3 — Nommer l'acteur qui tranche : un juge. Se faire justice soi-même n'est pas permis : le pouvoir de juger appartient au pouvoir judiciaire. La réponse est Vrai.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa et Yao se disputent à propos de dégâts sur un toit. Aucun n'est commerçant dans cette affaire. Quelle juridiction du premier degré est saisie ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : un litige entre voisins, sans caractère commercial. Étape 2 — Choisir la juridiction du premier degré : le tribunal de première instance ou sa section détachée, la plus proche. Le tribunal de commerce est réservé aux litiges commerciaux ; la Cour de cassation et le Conseil d'État sont des juridictions suprêmes.",
+              "answers": [
+                {
+                  "content": "Le tribunal de première instance (ou sa section détachée)",
+                  "correct": true
+                },
+                {
+                  "content": "Le tribunal de commerce",
+                  "correct": false
+                },
+                {
+                  "content": "La Cour de cassation",
+                  "correct": false
+                },
+                {
+                  "content": "Le Conseil d'État",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un notable téléphone au juge pour qu'il donne raison à Yao. Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Vérifier l'indépendance : la Constitution du 8 novembre 2016 dit que le pouvoir judiciaire est indépendant ; le Président en est le garant, assisté du Conseil supérieur de la magistrature. Le juge ne consulte pas le chef du quartier pour décider, et le Conseil constitutionnel ne choisit pas le jugement des tribunaux.",
+              "answers": [
+                {
+                  "content": "Le juge ne reçoit d'ordre de personne et n'obéit qu'à la loi",
+                  "correct": true
+                },
+                {
+                  "content": "Le Président de la République est le garant de l'indépendance du pouvoir judiciaire, assisté du Conseil supérieur de la magistrature",
+                  "correct": true
+                },
+                {
+                  "content": "Le juge doit consulter le chef du quartier avant de décider",
+                  "correct": false
+                },
+                {
+                  "content": "Le Conseil constitutionnel choisit le jugement des tribunaux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao perd, conteste, puis forme un pourvoi. Remets dans l'ordre le parcours de l'affaire.",
+              "question_type": "ordering",
+              "explanation": "Étape 2 — Choisir la juridiction du premier degré : le tribunal de première instance juge d'abord. Étape 3 — Situer le degré : la cour d'appel, au second degré, après l'appel. Puis la Cour de cassation, juridiction suprême de l'ordre judiciaire, est saisie par un pourvoi.",
+              "answers": [
+                {
+                  "content": "Tribunal de première instance"
+                },
+                {
+                  "content": "Cour d'appel"
+                },
+                {
+                  "content": "Cour de cassation"
+                }
+              ]
+            },
+            {
+              "content": "Un notable propose à Awa de « s'arranger » en téléphonant au juge pour obtenir une décision favorable. Explique en trois ou quatre phrases pourquoi cette démarche est contraire à l'indépendance de la justice et ce que le juge doit faire.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Dit que le juge est indépendant et n'obéit qu'à la loi",
+                "Dit que personne, ni un notable ni une autorité, ne peut dicter sa décision au juge",
+                "Dit que le juge écoute les deux parties et décide selon la loi seule",
+                "Phrases claires, sans copier l'énoncé"
+              ],
+              "explanation": "Corrigé modèle : Appeler le juge pour obtenir une décision favorable est une pression. La Constitution du 8 novembre 2016 rend le pouvoir judiciaire indépendant : le juge ne reçoit d'ordre de personne. Personne, pas même un notable, ne peut lui dicter sa décision. Il doit écouter Awa et Yao, puis décider selon la loi seule. Barème : 0,5 point par critère.",
+              "answers": [],
+              "starter": "Cette démarche est contraire à l'indépendance de la justice parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Un litige au marché",
+          "statement": "Mariam, commerçante au marché, a vendu 50 sacs de riz à Seydou, un grossiste. Seydou refuse de payer. Le tribunal donne raison à Mariam, mais Seydou conteste le jugement. Dans cet exercice, tu suis la méthode de la fiche pour analyser ce litige.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Mariam, commerçante, a vendu du riz à Seydou, grossiste, qui ne paie pas. Quelle juridiction du premier degré juge ce litige commercial ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : une vente de marchandises entre deux commerçants, donc un litige commercial. Étape 2 — Choisir la juridiction du premier degré : le tribunal de commerce. La cour d'appel intervient plus tard ; la Haute Cour de justice et le Conseil constitutionnel ne jugent pas ce type de litige.",
+              "answers": [
+                {
+                  "content": "Le tribunal de commerce",
+                  "correct": true
+                },
+                {
+                  "content": "La cour d'appel",
+                  "correct": false
+                },
+                {
+                  "content": "La Haute Cour de justice",
+                  "correct": false
+                },
+                {
+                  "content": "Le Conseil constitutionnel",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kofi, qui n'est pas commerçant, réclame à sa tante le remboursement d'un prêt de 30 000 F. Quelle juridiction du premier degré juge ce litige ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : un prêt entre membres d'une famille, sans acte de commerce. Étape 2 — Choisir : le tribunal de première instance. Le tribunal de commerce est le piège : l'argent seul ne rend pas un litige commercial.",
+              "answers": [
+                {
+                  "content": "Le tribunal de commerce",
+                  "correct": false
+                },
+                {
+                  "content": "Le tribunal de première instance",
+                  "correct": true
+                },
+                {
+                  "content": "Le Conseil d'État",
+                  "correct": false
+                },
+                {
+                  "content": "La Cour des comptes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Seydou conteste le jugement. Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Situer le degré : contester un jugement de première instance, c'est faire appel devant la cour d'appel, qui réexamine les faits et le droit. Le Conseil constitutionnel ne juge pas les appels, et le pourvoi en cassation est un autre recours, devant la Cour de cassation.",
+              "answers": [
+                {
+                  "content": "Il fait appel devant la cour d'appel",
+                  "correct": true
+                },
+                {
+                  "content": "L'affaire peut être jugée une seconde fois sur les faits et le droit",
+                  "correct": true
+                },
+                {
+                  "content": "Il fait appel devant le Conseil constitutionnel",
+                  "correct": false
+                },
+                {
+                  "content": "L'appel est un pourvoi en cassation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le principe qui permet de faire juger une affaire une seconde fois s'appelle le double ___ de juridiction.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 3 — Situer le degré : première instance, puis appel. Cette possibilité de juger deux fois sur le fond s'appelle le double degré de juridiction. Le mot attendu est « degré ».",
+              "answers": [
+                {
+                  "content": "degré",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques phrases la différence entre faire appel et former un pourvoi en cassation.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que l'appel est un nouvel examen des faits et du droit par la cour d'appel",
+                "Dit que le pourvoi est porté devant la Cour de cassation",
+                "Dit que la Cour de cassation vérifie l'application de la loi sans rejuger les faits",
+                "Phrases claires et vocabulaire exact"
+              ],
+              "explanation": "Corrigé modèle : Faire appel, c'est demander à la cour d'appel de réexaminer l'affaire, c'est-à-dire les faits et le droit, après un jugement de première instance. Former un pourvoi en cassation, c'est saisir la Cour de cassation : elle ne rejuge pas les faits, elle vérifie seulement que la loi a été bien appliquée. Barème : 0,75 point par critère.",
+              "answers": [],
+              "starter": "Faire appel, c'est…"
+            }
+          ]
+        },
+        {
+          "title": "Un accident de moto",
+          "statement": "Drissa, motocycliste, est heurté par Salif, un autre conducteur. Drissa est blessé et sa moto est abîmée ; il demande réparation. Le tribunal condamne Salif. Salif fait appel, et la cour d'appel confirme. Salif pense que la cour a mal appliqué la loi. Dans cet exercice, tu suis la méthode de la fiche pour analyser cette affaire.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Drissa et Salif sont deux particuliers qui s'opposent après un accident de moto. De quel ordre de juridiction relève leur affaire ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier les parties : deux particuliers. Étape 2 — Déterminer l'ordre : l'ordre judiciaire juge les litiges entre particuliers et les infractions. L'ordre administratif concerne les litiges avec l'administration, ce qui n'est pas le cas ici.",
+              "answers": [
+                {
+                  "content": "Ordre judiciaire",
+                  "correct": true
+                },
+                {
+                  "content": "Ordre administratif",
+                  "correct": false
+                },
+                {
+                  "content": "Ordre constitutionnel",
+                  "correct": false
+                },
+                {
+                  "content": "Ordre commercial",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque juridiction à sa place dans l'affaire de Drissa et Salif.",
+              "question_type": "matching",
+              "explanation": "Méthode des juridictions du fond, étape 3 — Situer le degré : le tribunal de première instance est le premier degré ; la cour d'appel, le second, après l'appel de Salif. Méthode des juridictions suprêmes, étape 3 — Nommer la juridiction suprême : la Cour de cassation contrôle l'application de la loi quand Salif forme un pourvoi.",
+              "answers": [
+                {
+                  "content": "Tribunal de première instance",
+                  "match": "Premier degré : il juge d'abord l'affaire"
+                },
+                {
+                  "content": "Cour d'appel",
+                  "match": "Second degré : elle réexamine après l'appel de Salif"
+                },
+                {
+                  "content": "Cour de cassation",
+                  "match": "Elle contrôle l'application de la loi après un pourvoi"
+                }
+              ]
+            },
+            {
+              "content": "Salif forme un pourvoi devant la Cour de cassation en disant qu'un témoin a menti. Que peut examiner la Cour de cassation ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Nommer la juridiction suprême et connaître son rôle : la Cour de cassation ne rejuge pas les faits, donc elle ne fait pas réentendre les témoins ; elle vérifie l'application de la loi. Contrôler une loi par rapport à la Constitution relève du Conseil constitutionnel.",
+              "answers": [
+                {
+                  "content": "Seulement si la loi a été bien appliquée",
+                  "correct": true
+                },
+                {
+                  "content": "Les faits, en faisant réentendre tous les témoins",
+                  "correct": false
+                },
+                {
+                  "content": "Si la loi respecte la Constitution",
+                  "correct": false
+                },
+                {
+                  "content": "L'élection du Président de la République",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'accident de Drissa et Salif concerne un particulier et l'administration, donc il relève du Conseil d'État.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier les parties : Drissa et Salif sont deux particuliers, pas un particulier et l'administration. Étape 2 — Déterminer l'ordre : judiciaire. Le Conseil d'État est la juridiction suprême de l'ordre administratif ; l'affirmation est Faux.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Salif dit : « La Cour de cassation va me juger une troisième fois. » Réponds-lui en expliquant, en quelques phrases, le rôle de la Cour de cassation et ce qu'elle ne fait pas.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que la Cour de cassation est la juridiction suprême de l'ordre judiciaire",
+                "Dit qu'elle vérifie l'application de la loi",
+                "Dit qu'elle ne rejuge pas les faits (pas de troisième procès)",
+                "Explique que le pourvoi est le recours qui la saisit"
+              ],
+              "explanation": "Corrigé modèle : La Cour de cassation est la juridiction suprême de l'ordre judiciaire. Salif la saisit par un pourvoi, mais elle ne le juge pas une troisième fois : elle ne réexamine pas les faits ni les témoignages. Elle vérifie seulement que la cour d'appel a bien appliqué la loi. Barème : 1 point pour les deux premiers critères réunis, 1 point pour l'absence de rejugement des faits, 1 point pour le pourvoi.",
+              "answers": [],
+              "starter": "La Cour de cassation ne juge pas une troisième fois, car…"
+            }
+          ]
+        },
+        {
+          "title": "Contester une décision de l'administration",
+          "statement": "Affoué, commerçante, s'est vu refuser par un service de la commune l'autorisation d'installer son étal. Elle juge la décision injuste. Son cousin lui dit : « Inutile d'aller devant un juge, on connaît le chef de service, on va s'arranger. » Dans cet exercice, tu suis la méthode de la fiche pour analyser cette situation.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Affoué, commerçante, conteste une décision d'un service de la commune. De quel ordre de juridiction relève ce litige ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier les parties : une particulière et l'administration (la commune). Étape 2 — Déterminer l'ordre : administratif. L'ordre judiciaire serait le piège : il juge les litiges entre particuliers et les infractions.",
+              "answers": [
+                {
+                  "content": "Ordre administratif",
+                  "correct": true
+                },
+                {
+                  "content": "Ordre judiciaire",
+                  "correct": false
+                },
+                {
+                  "content": "Ordre constitutionnel",
+                  "correct": false
+                },
+                {
+                  "content": "Ordre commercial",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Affoué va jusqu'au bout de la procédure contre la décision d'un service de la commune. Quelle est la juridiction suprême de cet ordre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Nommer la juridiction suprême de l'ordre administratif : le Conseil d'État. La Cour de cassation est le sommet de l'ordre judiciaire, pas de l'ordre administratif.",
+              "answers": [
+                {
+                  "content": "Le Conseil d'État",
+                  "correct": true
+                },
+                {
+                  "content": "La Cour de cassation",
+                  "correct": false
+                },
+                {
+                  "content": "Le Conseil constitutionnel",
+                  "correct": false
+                },
+                {
+                  "content": "La Cour des comptes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sur le Conseil constitutionnel sont vraies ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Désigner l'institution compétente : le Conseil constitutionnel contrôle la constitutionnalité des lois et veille à la régularité de l'élection présidentielle, mais ne juge pas les litiges entre personnes. La juridiction suprême de l'ordre administratif est le Conseil d'État ; les infractions de la route relèvent de l'ordre judiciaire.",
+              "answers": [
+                {
+                  "content": "Il vérifie qu'une loi respecte la Constitution",
+                  "correct": true
+                },
+                {
+                  "content": "Il veille à la régularité de l'élection présidentielle",
+                  "correct": true
+                },
+                {
+                  "content": "Il ne juge pas les litiges de voisinage",
+                  "correct": true
+                },
+                {
+                  "content": "Il est la juridiction suprême de l'ordre administratif",
+                  "correct": false
+                },
+                {
+                  "content": "Il juge les infractions de la route",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque situation à l'institution compétente.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier ce qui est en jeu, puis Étape 2 — Déterminer l'ordre ou écarter les juridictions ordinaires. Une décision de l'administration relève de l'ordre administratif ; un voisin, de l'ordre judiciaire ; une loi, du Conseil constitutionnel ; la haute trahison du Président, de la Haute Cour de justice.",
+              "answers": [
+                {
+                  "content": "Contester une décision de l'administration",
+                  "match": "Ordre administratif (Conseil d'État au sommet)"
+                },
+                {
+                  "content": "Poursuivre un voisin qui a détruit sa clôture",
+                  "match": "Ordre judiciaire"
+                },
+                {
+                  "content": "Vérifier qu'une loi respecte la Constitution",
+                  "match": "Conseil constitutionnel"
+                },
+                {
+                  "content": "Juger le Président de la République pour haute trahison",
+                  "match": "Haute Cour de justice"
+                }
+              ]
+            },
+            {
+              "content": "Le cousin d'Affoué dit : « Inutile d'aller devant un juge, on va s'arranger. » Prends position : a-t-il raison ? Argumente en quelques phrases avec ce que dit la règle.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Prend position clairement (le cousin a tort)",
+                "Dit qu'une personne peut s'adresser à un juge pour faire respecter ses droits",
+                "Dit que le juge est indépendant et décide selon la loi",
+                "Explique que s'arranger par relations n'est pas égal pour tous",
+                "Phrases claires et argumentées"
+              ],
+              "explanation": "Corrigé modèle : Le cousin a tort. Une personne qui estime qu'une décision de l'administration est injuste peut s'adresser à un juge de l'ordre administratif pour faire respecter ses droits. Ce juge est indépendant : il décide selon la loi, non selon les relations. S'arranger grâce à quelqu'un qu'on connaît serait injuste pour ceux qui n'ont pas de relations. Barème : 1 point par critère, 4 points au plus.",
+              "answers": [],
+              "starter": "Le cousin a tort, car…"
+            },
+            {
+              "content": "Décris en trois phrases le chemin d'Affoué : l'ordre dont relève son litige, pourquoi, et la juridiction suprême qui tranche en dernier recours.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Reconnaît l'ordre administratif",
+                "Justifie : une particulière face à l'administration (la commune)",
+                "Nomme le Conseil d'État comme juridiction suprême"
+              ],
+              "explanation": "Corrigé modèle : Le litige d'Affoué relève de l'ordre administratif, parce qu'il oppose une particulière à l'administration, ici un service de la commune. En dernier recours, la juridiction suprême qui tranche est le Conseil d'État. Barème : 1 point par critère, 3 points au total.",
+              "answers": [],
+              "starter": "Le litige relève de l'ordre…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
