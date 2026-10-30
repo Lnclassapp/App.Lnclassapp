@@ -15,7 +15,7 @@ class Identity::ProfilePhotoDisplayTest < ActionDispatch::IntegrationTest
     get profile_path
 
     assert_select "header button#avatar-menu-button img.ui-avatar[alt='Aya Koné'][src='#{@src}']"
-    assert_select "aside img", 0 # Lot O1: the student's sidebar has no profile card, so no photo
+    assert_select "aside > div.rounded-card img.ui-avatar[alt='Aya Koné'][src='#{@src}']" # carte-profil-eleve: the sidebar's profile card
     assert_select "header dialog#avatar-menu img.ui-avatar[alt='Aya Koné'][src='#{@src}']", count: 1
     # CA-E2 (lot E1), CA-E9 (lot O2): the row says « Ta photo » and opens the modal; the blue card (from lg) shows the photo too.
     assert_select "#profile_identity img.ui-avatar[alt='Aya Koné'][src='#{@src}']"

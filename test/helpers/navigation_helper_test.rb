@@ -293,4 +293,14 @@ class NavigationHelperTest < ActionView::TestCase
       assert_equal "/teams/schools", back_href("/teams/schools", from: "/teams/schools"), reason
     end
   end
+
+  # carte-profil-eleve (UDR-0132 §3.1, amendée) : « classe · sigle », le nom faute de sigle, nil sans classe active.
+  test "student_detail: the classroom and the school's sigle, else its name; nil without a classroom" do
+    about = ->(**parts) { NavigationHelper::ShellUser.new(name: "Awa Koné", role: :student, about: Queries::Identity::ShellUserQuery::About.new(gender: "female", **parts)) }
+
+    assert_equal "3ème B · LMC", student_detail(about.(classroom: "3ème B", school: "Lycée Moderne de Cocody", sigle: "LMC"))
+    assert_equal "3ème B · Lycée Moderne de Cocody", student_detail(about.(classroom: "3ème B", school: "Lycée Moderne de Cocody", sigle: ""))
+    assert_nil student_detail(about.())
+    assert_nil student_detail(NavigationHelper::ShellUser.new(name: "Awa Koné", role: :student))
+  end
 end
