@@ -79,7 +79,9 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
 </li>
 ```
 
+- Le `<li>` porte `data-bleed-keep` : une carte d'exercice reste toujours dans la marge, arrondie, au téléphone aussi (la règle `[data-bleed]` exclut `[data-bleed-keep] *`).
 - Le titre est un `<h3>` : les listes sont sous un `<h2>` de section.
+- Le pied de carte passe à la ligne (`flex-wrap`, `gap-x-3 gap-y-2`) : l'échéance et le verbe ne se touchent jamais à 390 px.
 - Le verbe est `aria-hidden` : le nom accessible du lien reste le titre seul (la destination ne change pas avec le verbe ; les tests et les lecteurs d'écran trouvent l'exercice par son titre).
 - Un seul lien par carte. Rien d'interactif hors du bloc ; le bloc est `relative z-10` pour passer au-dessus du lien étiré.
 
@@ -118,6 +120,8 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
 - En tête de la carte : `<div class="mb-3 flex items-center gap-2">` avec le numéro en pastille (`grid size-8 place-items-center rounded-full bg-brand-soft text-sm font-medium text-brand-strong tabular-nums`, `aria-hidden`) et le format (`text-meta text-mute`, `id="sheet-question-N-format"`). Le numéro reste lu : `<span class="sr-only">Question N, </span>` dans l'énoncé.
 - Format, par `question_type` (`assessment.exercises.show.question_formats.*`) : `true_false` « Vrai ou faux » · `single_choice` « Une seule réponse » · `multiple_correct_2` et `multiple_correct_3` « Plusieurs réponses » · `fill_blank` « Texte à trous » · `numeric` « Réponse en nombre » · `ordering` « Remettre dans l'ordre » · `matching` « Relier » · `select` « Choix dans une liste » · `written` « Réponse rédigée » · `notebook` « Sur le cahier ».
 - `sheet_kinds/_choice` ne répète plus « Plusieurs réponses » : le format le dit.
+- Au téléphone, `#exercise-sheet` porte `data-bleed-keep` : les cartes de question restent dans la marge, arrondies (la règle `[data-bleed]` de l'UDR-0005 ne les met pas bord à bord).
+- L'énoncé commence sans blanc de tête : le `sr-only` et le texte tiennent sur une ligne dans le `<p>` (`whitespace-pre-line` rendrait l'indentation).
 - Image, solution et explication gardent leur rendu, dans la carte.
 
 ## 4. Conséquences
