@@ -293,7 +293,8 @@ module Entities
       end
 
       test "an stts box without its header is unreadable" do
-        broken = box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1000) + box("minf", box("stbl", box("stts", zeros(4))))))
+        broken = box("trak", box("mdia", header_box("mdhd", timescale: 1000, duration: 1000) +
+                                         box("minf", box("stbl", box("stts", zeros(4)) + sizes(5)))))
 
         assert_nil mp4(file(movie(broken)))
       end
