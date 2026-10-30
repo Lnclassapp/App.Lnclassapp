@@ -1,0 +1,1415 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Électrolyse et synthèse de l'eau",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Physique-Chimie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "electrolyseur",
+          "kind": "plate",
+          "description": "Schéma légendé d'un électrolyseur de laboratoire : un générateur de courant continu est relié à deux électrodes, l'anode reliée à la borne positive et la cathode à la borne négative, plongées dans une cuve d'eau additionnée de soude. Au-dessus de chaque électrode, un tube renversé recueille un gaz : le dioxygène à l'anode, le dihydrogène à la cathode, en volume double.",
+          "params": {
+            "plate": "electrolyser",
+            "numbering": "names",
+            "labels": [
+              {
+                "part": "generator",
+                "text": "Générateur de courant continu"
+              },
+              {
+                "part": "vessel",
+                "text": "Cuve"
+              },
+              {
+                "part": "electrolyte",
+                "text": "Eau additionnée de soude"
+              },
+              {
+                "part": "anode",
+                "text": "Anode (+)"
+              },
+              {
+                "part": "cathode",
+                "text": "Cathode (−)"
+              },
+              {
+                "part": "oxygen_tube",
+                "text": "Tube de dioxygène"
+              },
+              {
+                "part": "hydrogen_tube",
+                "text": "Tube de dihydrogène"
+              },
+              {
+                "part": "oxygen",
+                "text": "Dioxygène"
+              },
+              {
+                "part": "hydrogen",
+                "text": "Dihydrogène"
+              }
+            ],
+            "highlight": []
+          },
+          "controls": []
+        },
+        {
+          "key": "electrolyseur-numeros",
+          "kind": "plate",
+          "description": "Le même électrolyseur de laboratoire, mais sans noms : six parties portent seulement un numéro, de 1 à 6, dans cet ordre : 1 le générateur, 2 l'eau additionnée de soude, 3 l'anode, 4 la cathode, 5 le tube de dioxygène, 6 le tube de dihydrogène. L'élève doit retrouver le rôle de chaque numéro.",
+          "params": {
+            "plate": "electrolyser",
+            "numbering": "numbers",
+            "labels": [
+              {
+                "part": "generator"
+              },
+              {
+                "part": "electrolyte"
+              },
+              {
+                "part": "anode"
+              },
+              {
+                "part": "cathode"
+              },
+              {
+                "part": "oxygen_tube"
+              },
+              {
+                "part": "hydrogen_tube"
+              }
+            ],
+            "highlight": []
+          },
+          "controls": []
+        },
+        {
+          "key": "eudiometre",
+          "kind": "plate",
+          "description": "Schéma légendé d'un eudiomètre : un tube de verre gradué, fermé en haut et renversé sur une cuve à eau, contient un mélange de dihydrogène et de dioxygène. Deux électrodes traversent le tube et laissent jaillir une étincelle dans le mélange. Après l'étincelle, de l'eau se forme et le niveau de l'eau monte dans le tube gradué.",
+          "params": {
+            "plate": "eudiometer",
+            "numbering": "names",
+            "labels": [
+              {
+                "part": "tube",
+                "text": "Tube gradué"
+              },
+              {
+                "part": "scale",
+                "text": "Graduation en cm³"
+              },
+              {
+                "part": "electrodes",
+                "text": "Électrodes"
+              },
+              {
+                "part": "spark",
+                "text": "Étincelle"
+              },
+              {
+                "part": "gas_mixture",
+                "text": "Mélange de dihydrogène et de dioxygène"
+              },
+              {
+                "part": "water",
+                "text": "Eau"
+              },
+              {
+                "part": "trough",
+                "text": "Cuve à eau"
+              }
+            ],
+            "highlight": []
+          },
+          "controls": []
+        },
+        {
+          "key": "molecule-eau",
+          "kind": "molecule",
+          "description": "Modèle de la molécule d'eau en formule développée : un atome d'oxygène O au centre est relié par un trait simple à chacun des deux atomes d'hydrogène H. La molécule compte donc trois atomes, un d'oxygène et deux d'hydrogène, ce qui donne la formule H₂O.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "o",
+                "element": "O",
+                "x": 6,
+                "y": 5
+              },
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 4,
+                "y": 7
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 8,
+                "y": 7
+              }
+            ],
+            "bonds": [
+              [
+                "o",
+                "h1",
+                1
+              ],
+              [
+                "o",
+                "h2",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "molecule-dihydrogene",
+          "kind": "molecule",
+          "description": "Modèle de la molécule de dihydrogène en formule développée : deux atomes d'hydrogène H sont reliés par un trait simple, H–H. La molécule compte deux atomes identiques, ce qui donne la formule H₂. Le dihydrogène est le gaz formé à la cathode lors de l'électrolyse de l'eau.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 8,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "h1",
+                "h2",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "molecule-dioxygene",
+          "kind": "molecule",
+          "description": "Modèle de la molécule de dioxygène en formule développée : deux atomes d'oxygène O sont reliés par un double trait, O=O. La molécule compte deux atomes identiques, ce qui donne la formule O₂. Le dioxygène est le gaz formé à l'anode lors de l'électrolyse de l'eau.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "o1",
+                "element": "O",
+                "x": 4,
+                "y": 6
+              },
+              {
+                "id": "o2",
+                "element": "O",
+                "x": 8,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "o1",
+                "o2",
+                2
+              ]
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Décrire l'électrolyse de l'eau",
+          "remember": "L'**électrolyse de l'eau** est la décomposition de l'eau par le courant électrique continu. Dans un **électrolyseur**, deux électrodes plongent dans de l'eau additionnée d'un peu de soude (qui rend l'eau conductrice). L'**anode** est reliée à la borne **+** du générateur, la **cathode** à la borne **−**. À l'anode se forme le **dioxygène** ($\\mathrm{O_2}$), à la cathode le **dihydrogène** ($\\mathrm{H_2}$). Les gaz sont recueillis dans des tubes renversés. À chaque instant, le volume de dihydrogène est le **double** de celui de dioxygène : $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$.",
+          "method": [
+            "Repérer les électrodes : l'anode est reliée à la borne + du générateur, la cathode à la borne −.",
+            "Associer chaque gaz à son électrode : le dioxygène se forme à l'anode, le dihydrogène à la cathode.",
+            "Comparer les volumes recueillis : le volume de dihydrogène est le double de celui de dioxygène.",
+            "Calculer le volume cherché avec $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$, puis écrire le résultat avec son unité."
+          ],
+          "example": {
+            "statement": "Dans l'électrolyseur de Fatou et Ibrahim, le tube posé sur l'électrode reliée à la borne positive reçoit 14 $\\text{cm}^3$ de gaz. Nommer cette électrode et le gaz du tube, puis donner le volume de gaz recueilli dans l'autre tube.",
+            "steps": [
+              "Repérer : l'électrode reliée à la borne + est l'anode.",
+              "Associer : le dioxygène se forme à l'anode, donc le tube contient 14 $\\text{cm}^3$ de dioxygène ; l'autre électrode, la cathode, donne le dihydrogène.",
+              "Comparer : le dihydrogène a un volume double de celui du dioxygène, $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$.",
+              "Calculer : $V_{\\mathrm{H_2}}$ = 2 × 14 = 28 $\\text{cm}^3$ de dihydrogène."
+            ]
+          },
+          "pitfall": "Ne pas croire que le gaz le plus abondant est le dioxygène parce que « l'oxygène est dans l'eau ». C'est le dihydrogène qui a le plus grand volume, toujours à la cathode (borne −). Contre-exemple chiffré : si l'anode donne 5 $\\text{cm}^3$ de dioxygène, la cathode donne 10 $\\text{cm}^3$ de dihydrogène, et non 2,5 $\\text{cm}^3$. Pour ne pas inverser, retiens : volume double = dihydrogène = cathode.",
+          "figure": "electrolyseur",
+          "exercise": {
+            "title": "Décrire l'électrolyse de l'eau",
+            "statement": "Dans cet exercice, tu décris un électrolyseur de TP et tu calcules des volumes de gaz avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "electrolyseur-numeros",
+            "questions": [
+              {
+                "content": "Dans un électrolyseur, à quelle borne du générateur l'anode est-elle reliée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer les électrodes : l'anode est reliée à la borne positive (+) du générateur et la cathode à la borne négative (−). La réponse « borne négative » est l'erreur classique : elle inverse l'anode et la cathode, et on se trompe alors sur le gaz qui se forme à chaque électrode.",
+                "answers": [
+                  {
+                    "content": "À la borne positive (+) du générateur",
+                    "correct": true
+                  },
+                  {
+                    "content": "À la borne négative (−) du générateur",
+                    "correct": false
+                  },
+                  {
+                    "content": "À aucune borne : elle est reliée seulement à la cathode",
+                    "correct": false
+                  },
+                  {
+                    "content": "À la borne négative, parce que l'anode attire le dihydrogène",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément à ce qui lui correspond lors de l'électrolyse de l'eau.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : l'anode est reliée à la borne +, la cathode à la borne −. Étape 2 — Associer : le dioxygène se forme à l'anode, le dihydrogène à la cathode. Étape 3 — Comparer les volumes : le volume de dihydrogène est le double de celui de dioxygène, donc le rapport vaut 2.",
+                "answers": [
+                  {
+                    "content": "Gaz formé à l'anode",
+                    "match": "Le dioxygène"
+                  },
+                  {
+                    "content": "Gaz formé à la cathode",
+                    "match": "Le dihydrogène"
+                  },
+                  {
+                    "content": "Rapport entre le volume de dihydrogène et le volume de dioxygène",
+                    "match": "2"
+                  }
+                ]
+              },
+              {
+                "content": "Au TP, Awa et Yao recueillent 9 $\\text{cm}^3$ de dioxygène dans le tube de l'anode. Quel volume de dihydrogène recueillent-ils dans le tube de la cathode ?",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le tube de l'anode contient le dioxygène. Étape 2 — Associer : le dihydrogène se forme à la cathode. Étape 3 — Comparer : $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$. Étape 4 — Calculer : $V_{\\mathrm{H_2}}$ = 2 × 9 = 18 $\\text{cm}^3$. L'erreur 4,5 $\\text{cm}^3$ divise par 2 au lieu de multiplier : c'est le dioxygène qui a le plus petit volume.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un électrolyseur, on recueille 30 $\\text{cm}^3$ de dihydrogène à la cathode. Quel volume de dioxygène s'est formé à l'anode ?",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la cathode (borne −) donne le dihydrogène. Étape 2 — Associer : le dioxygène se forme à l'anode. Étape 3 — Comparer : $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$, donc $V_{\\mathrm{O_2}}$ = $V_{\\mathrm{H_2}}$ ÷ 2. Étape 4 — Calculer : $V_{\\mathrm{O_2}}$ = 30 ÷ 2 = 15 $\\text{cm}^3$. L'erreur 60 $\\text{cm}^3$ double le volume de dihydrogène au lieu de le diviser par 2.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur un schéma d'électrolyseur, les parties sont numérotées ainsi : 1 générateur, 2 eau additionnée de soude, 3 anode, 4 cathode, 5 tube de dioxygène, 6 tube de dihydrogène. Quel tube contient le plus grand volume de gaz ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'anode porte le numéro 3 et la cathode le numéro 4. Étape 2 — Associer : la cathode donne le dihydrogène, recueilli dans le tube 6. Étape 3 — Comparer : $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$, donc le tube 6 contient le double de gaz du tube 5. Un même volume dans les deux tubes serait faux : le bilan donne deux fois plus de dihydrogène que de dioxygène.",
+                "answers": [
+                  {
+                    "content": "Le tube 6, celui du dihydrogène, au-dessus de la cathode",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le tube 5, celui du dioxygène, au-dessus de l'anode",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le tube 3, car l'anode attire le plus de gaz",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les tubes 5 et 6 contiennent le même volume",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur un schéma d'électrolyseur, les parties sont numérotées ainsi : 1 générateur, 2 eau additionnée de soude, 3 anode, 4 cathode, 5 tube de dioxygène, 6 tube de dihydrogène. Quelle électrode est reliée à la borne négative du générateur, et quel numéro porte-t-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer les électrodes : la borne négative (−) est reliée à la cathode, la borne positive (+) à l'anode. Dans la numérotation donnée, la cathode porte le numéro 4. Le numéro 6 est celui du tube de dihydrogène, pas celui d'une électrode, et l'anode (numéro 3) est reliée à la borne +.",
+                "answers": [
+                  {
+                    "content": "La cathode, numéro 4",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'anode, numéro 3",
+                    "correct": false
+                  },
+                  {
+                    "content": "La cathode, numéro 6",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'anode, numéro 5",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'eau pure conduit très mal le courant électrique : pour réaliser l'électrolyse en TP, on lui ajoute un peu de soude.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le montage : sans particules en solution, l'eau pure ne laisse presque pas passer le courant, donc très peu de gaz se forme. On ajoute un peu de soude pour que l'eau conduise. La soude est corrosive : lunettes et gants sont obligatoires. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Lors de l'électrolyse de l'eau, le volume de dioxygène recueilli à l'anode est le double du volume de dihydrogène recueilli à la cathode.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer les volumes : c'est le dihydrogène qui a le plus grand volume, $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$. Contre-exemple : si l'anode donne 5 $\\text{cm}^3$ de dioxygène, la cathode donne 10 $\\text{cm}^3$ de dihydrogène. L'affirmation inverse les deux gaz : elle est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Identifier les gaz formés par des tests",
+          "remember": "Deux tests simples permettent d'identifier les gaz de l'électrolyse. Le **dioxygène** ($\\mathrm{O_2}$) **ravive** une bûchette présentant un point incandescent : elle se rallume. Le **dihydrogène** ($\\mathrm{H_2}$) produit une **petite détonation** quand on approche une flamme de l'ouverture du tube ; il brûle et laisse de la buée, des gouttelettes d'eau. On teste toujours un petit volume de gaz recueilli dans un tube, à l'écart de l'électrolyseur, avec des lunettes de protection.",
+          "method": [
+            "Choisir le test adapté au gaz cherché : bûchette incandescente pour le dioxygène, flamme pour le dihydrogène.",
+            "Réaliser le test à l'ouverture du tube recueilli, loin de l'électrolyseur et avec des lunettes.",
+            "Observer ce qui se passe : la bûchette se rallume, ou une petite détonation se produit, ou rien.",
+            "Conclure en nommant le gaz et l'électrode où il s'est formé."
+          ],
+          "example": {
+            "statement": "Mme Koné demande d'identifier le gaz d'un tube recueilli à l'anode. Awa approche de l'ouverture du tube une bûchette qui rougeoie : elle se rallume avec une flamme vive. Quel est le gaz ?",
+            "steps": [
+              "Choisir : pour chercher du dioxygène, on prend une bûchette incandescente.",
+              "Réaliser : Awa approche la bûchette de l'ouverture du tube, loin de l'électrolyseur, avec des lunettes.",
+              "Observer : la bûchette se rallume avec une flamme vive.",
+              "Conclure : le gaz est du dioxygène, cohérent avec l'anode où il se forme."
+            ]
+          },
+          "pitfall": "Ne pas confondre les deux tests. La bûchette qui se rallume prouve le dioxygène ; la petite détonation près d'une flamme prouve le dihydrogène. Contre-exemple : si une bûchette incandescente approchée du tube de la cathode ne se rallume pas, on conclut que ce n'est pas du dioxygène, pas qu'il n'y a pas de gaz. On fait alors le test à la flamme, qui donne la détonation du dihydrogène.",
+          "figure": null,
+          "exercise": {
+            "title": "Identifier les gaz par des tests",
+            "statement": "Dans cet exercice, tu associes chaque gaz de l'électrolyse à son test et à son observation avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel test permet d'identifier le dioxygène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir le test adapté : pour le dioxygène, on utilise une bûchette incandescente, qui se rallume en présence de ce gaz. La petite détonation à la flamme est le test du dihydrogène. L'eau de chaux troublée est le test d'un autre gaz, pas du dioxygène. Une bûchette qui s'éteint ne prouve pas la présence de dioxygène.",
+                "answers": [
+                  {
+                    "content": "Approcher de l'ouverture du tube une bûchette présentant un point incandescent : elle se rallume",
+                    "correct": true
+                  },
+                  {
+                    "content": "Approcher une flamme de l'ouverture du tube : on entend une petite détonation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Verser de l'eau de chaux dans le tube : elle se trouble",
+                    "correct": false
+                  },
+                  {
+                    "content": "Approcher une bûchette incandescente du tube : elle s'éteint",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On approche une flamme de l'ouverture d'un tube de gaz recueilli à la cathode : on entend une petite détonation. Quel gaz contient le tube ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : le test à la flamme est le test du dihydrogène. Étape 3 — Observer : une petite détonation se produit. Étape 4 — Conclure : le gaz est du dihydrogène, ce qui est cohérent avec la cathode. Le dioxygène ne détone pas : il fait seulement se rallumer une bûchette incandescente.",
+                "answers": [
+                  {
+                    "content": "Le dihydrogène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la vapeur d'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le tube est vide",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque observation à la conclusion qu'elle permet.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Observer, puis Étape 4 — Conclure. Une bûchette qui se rallume prouve le dioxygène. Une petite détonation près d'une flamme prouve le dihydrogène. Si aucun des deux tests ne réussit, on ne peut conclure à aucun de ces deux gaz.",
+                "answers": [
+                  {
+                    "content": "La bûchette incandescente se rallume",
+                    "match": "Le gaz est du dioxygène"
+                  },
+                  {
+                    "content": "Une petite détonation se produit près d'une flamme",
+                    "match": "Le gaz est du dihydrogène"
+                  },
+                  {
+                    "content": "La bûchette ne se rallume pas et il n'y a pas de détonation",
+                    "match": "Le gaz n'est ni du dioxygène ni du dihydrogène"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour identifier le dioxygène d'un tube.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Choisir le test : la bûchette incandescente. Étape 2 — Réaliser le test : on l'approche de l'ouverture du tube. Étape 3 — Observer : la bûchette se rallume. Étape 4 — Conclure : le gaz est du dioxygène. On ne peut conclure qu'après avoir observé, jamais avant.",
+                "answers": [
+                  {
+                    "content": "Choisir une bûchette présentant un point incandescent"
+                  },
+                  {
+                    "content": "Approcher la bûchette de l'ouverture du tube"
+                  },
+                  {
+                    "content": "Observer si la bûchette se rallume"
+                  },
+                  {
+                    "content": "Conclure : le gaz est du dioxygène"
+                  }
+                ]
+              },
+              {
+                "content": "Pour tester le dihydrogène, on plonge dans le tube une bûchette incandescente.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir le test adapté : la bûchette incandescente est le test du dioxygène. Le dihydrogène se reconnaît à la petite détonation qu'il produit près d'une flamme. Contre-exemple : une bûchette incandescente plongée dans le dihydrogène ne se rallume pas, et on n'en conclurait rien. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux précautions à respecter pendant l'électrolyse de l'eau additionnée de soude ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Réaliser le test avec sécurité. La soude est corrosive : lunettes et gants sont indispensables. Le dihydrogène détone près d'une flamme : on teste un petit volume recueilli dans un tube, loin de l'électrolyseur. Goûter un produit de laboratoire est interdit, et boucher l'électrolyseur ou y approcher une flamme est dangereux.",
+                "answers": [
+                  {
+                    "content": "Porter des lunettes et des gants, car la soude est corrosive",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faire le test de la flamme sur le gaz recueilli dans un petit tube, loin de l'électrolyseur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Goûter l'électrolyte pour vérifier qu'il est bien mélangé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Approcher la flamme directement au-dessus de l'électrolyseur pour gagner du temps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Boucher hermétiquement l'électrolyseur pour garder tous les gaz",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La bûchette incandescente se rallume dans le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Observer : une bûchette incandescente qui se rallume. Étape 4 — Conclure : le gaz est le dioxygène, formé à l'anode. L'erreur « dihydrogène » vient de la confusion entre les deux tests : le dihydrogène se reconnaît à la petite détonation près d'une flamme.",
+                "answers": [
+                  {
+                    "content": "dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "oxygène",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire l'équation-bilan de l'électrolyse",
+          "remember": "Une molécule d'eau $\\mathrm{H_2O}$ contient 1 atome d'oxygène et 2 atomes d'hydrogène ; le dihydrogène est $\\mathrm{H_2}$ et le dioxygène $\\mathrm{O_2}$. Pendant une réaction chimique, les **atomes se conservent** : il y a autant d'atomes de chaque sorte avant et après. On équilibre avec des **coefficients** écrits devant les formules ; on ne change **jamais un indice**. Pour l'électrolyse de l'eau, l'**équation-bilan** est $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$ : 2 molécules d'eau donnent 2 molécules de dihydrogène et 1 molécule de dioxygène.",
+          "method": [
+            "Écrire les formules des corps qui disparaissent (à gauche) et de ceux qui se forment (à droite).",
+            "Compter les atomes de chaque sorte à gauche et à droite de la flèche.",
+            "Équilibrer en ajoutant des coefficients devant les formules, sans jamais changer un indice.",
+            "Vérifier que chaque sorte d'atome est en même nombre des deux côtés, puis lire l'équation."
+          ],
+          "example": {
+            "statement": "Écrire l'équation-bilan de la décomposition de l'eau en dihydrogène et dioxygène.",
+            "steps": [
+              "Écrire : $\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$.",
+              "Compter : à gauche 2 H et 1 O ; à droite 2 H et 2 O. Les atomes d'oxygène ne sont pas en même nombre.",
+              "Équilibrer : on écrit 2 devant $\\mathrm{H_2O}$ (4 H, 2 O), puis 2 devant $\\mathrm{H_2}$ pour avoir 4 H à droite : $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$.",
+              "Vérifier : 4 H et 2 O à gauche, 4 H et 2 O à droite. L'équation est équilibrée."
+            ]
+          },
+          "pitfall": "Ne pas équilibrer en changeant un indice. Contre-exemple : dans $\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$, il manque un atome d'oxygène à gauche. Écrire $\\mathrm{H_2O_2}$ à la place de $\\mathrm{H_2O}$ règle le compte, mais ce n'est plus de l'eau. On met un coefficient : 2 devant $\\mathrm{H_2O}$, puis 2 devant $\\mathrm{H_2}$.",
+          "figure": "molecule-eau",
+          "exercise": {
+            "title": "Écrire une équation-bilan",
+            "statement": "Dans cet exercice, tu écris et tu équilibres l'équation-bilan de l'électrolyse de l'eau avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "molecule-dioxygene",
+            "questions": [
+              {
+                "content": "Quelle est la formule de la molécule d'eau ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire la formule : la molécule d'eau contient 2 atomes d'hydrogène et 1 atome d'oxygène, donc $\\mathrm{H_2O}$. Écrire $\\mathrm{HO_2}$ échange les indices. Écrire $\\mathrm{H_2O_2}$ ajoute un atome d'oxygène : ce n'est plus de l'eau. Écrire $\\mathrm{H_2}$ désigne le dihydrogène.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{H_2O}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{HO_2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{H_2O_2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{H_2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le modèle de la molécule de dioxygène, deux atomes d'oxygène sont reliés par un double trait. Quelle est la formule du dioxygène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire la formule : la molécule de dioxygène contient 2 atomes d'oxygène, donc $\\mathrm{O_2}$. L'indice 2 est écrit en bas, à droite du symbole. La formule O désigne un seul atome, $\\mathrm{O_3}$ une molécule de trois atomes, et $2\\,\\mathrm{O}$ deux atomes séparés : aucune ne désigne la molécule de dioxygène.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{O_2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "O",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{O_3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2\\,\\mathrm{O}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'atomes d'hydrogène contiennent 3 molécules d'eau $\\mathrm{H_2O}$ ?",
+                "question_type": "numeric",
+                "unit": "atomes",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Compter les atomes : une molécule $\\mathrm{H_2O}$ contient 2 atomes d'hydrogène. Pour 3 molécules, on multiplie : 3 × 2 = 6 atomes d'hydrogène. L'erreur 3 oublie l'indice 2 de l'hydrogène.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle équation est correctement équilibrée pour la décomposition de l'eau par électrolyse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Compter. Dans $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$ : à gauche 2 × 2 = 4 atomes H et 2 atomes O ; à droite 2 × 2 = 4 atomes H et 2 atomes O. Étape 4 — Vérifier : tout est égal. Dans $\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$, il y a 1 atome O à gauche et 2 à droite. Dans $2\\,\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$, il y a 4 atomes H à gauche et 2 à droite.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2\\,\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète l'équation-bilan : $2\\,\\mathrm{H_2O} \\longrightarrow$ ___ $\\mathrm{H_2} + \\mathrm{O_2}$",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Compter : à gauche 2 × 2 = 4 atomes d'hydrogène. Étape 3 — Équilibrer : il faut 4 atomes d'hydrogène à droite, donc le coefficient 2 devant $\\mathrm{H_2}$ (2 × 2 = 4). Étape 4 — Vérifier : 4 H et 2 O de chaque côté. Le coefficient 1 laisserait 2 atomes H à droite contre 4 à gauche.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans l'équation $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$, combien d'atomes d'oxygène y a-t-il à droite de la flèche ?",
+                "question_type": "numeric",
+                "unit": "atomes",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Compter les atomes à droite de la flèche : le produit $\\mathrm{O_2}$ contient 2 atomes d'oxygène, et 2 $\\mathrm{H_2}$ n'en contient aucun. Il y a donc 2 atomes d'oxygène, comme à gauche (2 molécules d'eau, 1 atome chacune). Étape 4 — Vérifier : 2 = 2.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour équilibrer $\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$, on peut remplacer $\\mathrm{H_2O}$ par $\\mathrm{H_2O_2}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Équilibrer : on ajoute seulement des coefficients devant les formules, on ne modifie jamais un indice. Contre-exemple : $\\mathrm{H_2O_2}$ n'est plus de l'eau, c'est un autre corps. L'équation correcte est $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$, obtenue avec des coefficients. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans l'équation $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$, quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Compter. À gauche : 2 × $\\mathrm{H_2O}$ donne 4 atomes H et 2 atomes O. À droite : 2 × $\\mathrm{H_2}$ donne 4 atomes H, et $\\mathrm{O_2}$ donne 2 atomes O. Étape 4 — Vérifier : 4 H et 2 O de chaque côté. Les atomes se conservent pendant la réaction, donc les trois autres affirmations sont fausses.",
+                "answers": [
+                  {
+                    "content": "Il y a 4 atomes d'hydrogène de chaque côté de la flèche",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il y a 2 atomes d'oxygène de chaque côté de la flèche",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il y a 2 atomes d'hydrogène à gauche et 4 à droite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il y a 1 atome d'oxygène à gauche et 2 à droite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nombre d'atomes change pendant la réaction",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Réaliser la synthèse de l'eau et calculer des volumes",
+          "remember": "La **synthèse de l'eau** est la réaction inverse de l'électrolyse. Dans un **eudiomètre** (tube gradué fermé, muni de deux électrodes, renversé sur une cuve à eau), une **étincelle** fait réagir le dihydrogène et le dioxygène : $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$. Les gaz réagissent dans les proportions **2 volumes de dihydrogène pour 1 volume de dioxygène** (volumes mesurés dans les mêmes conditions). L'eau formée est liquide, son volume est négligeable : le volume de gaz diminue. Si l'un des gaz est introduit en trop grande quantité, il **reste** en **excès** après la réaction.",
+          "method": [
+            "Lire les proportions de l'équation $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$ : 2 volumes de dihydrogène pour 1 volume de dioxygène.",
+            "Calculer le volume de dioxygène nécessaire pour consommer tout le dihydrogène : $V_{\\mathrm{O_2}}$ = $V_{\\mathrm{H_2}}$ ÷ 2.",
+            "Comparer ce volume au dioxygène introduit pour trouver le gaz en excès : celui dont il en reste.",
+            "Déduire le volume de gaz restant : volume introduit moins volume consommé."
+          ],
+          "example": {
+            "statement": "Dans un eudiomètre, Yao introduit 10 $\\text{cm}^3$ de dihydrogène et 10 $\\text{cm}^3$ de dioxygène, puis fait jaillir l'étincelle. Quel gaz reste-t-il et en quel volume ?",
+            "steps": [
+              "Lire : $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$, donc 2 volumes de dihydrogène pour 1 volume de dioxygène.",
+              "Calculer : le dioxygène nécessaire est $V_{\\mathrm{O_2}}$ = 10 ÷ 2 = 5 $\\text{cm}^3$.",
+              "Comparer : 5 $\\text{cm}^3$ nécessaires sont inférieurs à 10 $\\text{cm}^3$ introduits, donc le dioxygène est en excès et le dihydrogène est entièrement consommé.",
+              "Déduire : il reste 10 − 5 = 5 $\\text{cm}^3$ de dioxygène."
+            ]
+          },
+          "pitfall": "Ne pas croire que les gaz réagissent à volumes égaux. Contre-exemple chiffré : avec 10 $\\text{cm}^3$ de dihydrogène et 10 $\\text{cm}^3$ de dioxygène, on pense qu'il ne reste rien. Or le dihydrogène n'en consomme que 5 $\\text{cm}^3$ : il reste 5 $\\text{cm}^3$ de dioxygène. Les volumes réagissent dans le rapport 2 pour 1, comme les coefficients de $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$.",
+          "figure": "eudiometre",
+          "exercise": {
+            "title": "Calculer des volumes dans l'eudiomètre",
+            "statement": "Dans cet exercice, tu calcules les volumes de gaz consommés et restants dans un eudiomètre avec la méthode de la fiche. Les volumes sont mesurés dans les mêmes conditions.",
+            "exercise_type": "fixation",
+            "figure": "eudiometre",
+            "questions": [
+              {
+                "content": "Dans un eudiomètre rempli d'un mélange de dihydrogène et de dioxygène, que provoque l'étincelle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'équation $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$ : le dihydrogène et le dioxygène donnent de l'eau. L'étincelle déclenche cette synthèse. La séparation de l'eau en deux gaz est l'électrolyse, la réaction inverse, qui demande un générateur. Aucun gaz n'est fabriqué : au contraire, les gaz disparaissent.",
+                "answers": [
+                  {
+                    "content": "Elle déclenche la réaction qui forme de l'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle sépare l'eau en dihydrogène et en dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle chauffe les gaz sans qu'il se passe de réaction",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle fabrique du dioxygène supplémentaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On introduit 12 $\\text{cm}^3$ de dihydrogène dans un eudiomètre. Quel volume de dioxygène faut-il pour consommer tout ce dihydrogène ?",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$, soit 2 volumes de dihydrogène pour 1 volume de dioxygène. Étape 2 — Calculer le volume nécessaire : $V_{\\mathrm{O_2}}$ = $V_{\\mathrm{H_2}}$ ÷ 2 = 12 ÷ 2 = 6 $\\text{cm}^3$. L'erreur 24 $\\text{cm}^3$ multiplie par 2 au lieu de diviser : il faut moins de dioxygène que de dihydrogène.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On introduit 20 $\\text{cm}^3$ de dioxygène dans un eudiomètre. Quel volume de dihydrogène faut-il pour consommer tout ce dioxygène ?",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : 2 volumes de dihydrogène pour 1 volume de dioxygène. Étape 2 — Calculer le volume nécessaire : $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$ = 2 × 20 = 40 $\\text{cm}^3$. L'erreur 10 $\\text{cm}^3$ divise par 2 au lieu de multiplier : ici c'est le dioxygène qui est connu, et il faut deux fois plus de dihydrogène.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un eudiomètre, on introduit 8 $\\text{cm}^3$ de dihydrogène et 8 $\\text{cm}^3$ de dioxygène, puis on fait jaillir l'étincelle. Quel volume de gaz reste-t-il après la réaction ? L'eau formée est liquide, son volume est négligeable.",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : 2 volumes de dihydrogène pour 1 de dioxygène. Étape 2 — Calculer : le dioxygène nécessaire est 8 ÷ 2 = 4 $\\text{cm}^3$. Étape 3 — Comparer : 4 $\\text{cm}^3$ nécessaires sont inférieurs à 8 $\\text{cm}^3$ introduits, donc le dioxygène est en excès. Étape 4 — Déduire : il reste 8 − 4 = 4 $\\text{cm}^3$ de dioxygène. L'erreur 0 suppose que les deux gaz sont consommés à volumes égaux.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On introduit 6 $\\text{cm}^3$ de dihydrogène et 2 $\\text{cm}^3$ de dioxygène dans un eudiomètre, puis on fait jaillir l'étincelle. Quel gaz reste-t-il, et en quel volume ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : 2 volumes de dihydrogène pour 1 de dioxygène. Étape 2 — Calculer : le dioxygène nécessaire pour 6 $\\text{cm}^3$ de dihydrogène est 6 ÷ 2 = 3 $\\text{cm}^3$. Étape 3 — Comparer : 3 $\\text{cm}^3$ nécessaires sont supérieurs à 2 $\\text{cm}^3$ introduits, donc le dioxygène manque et le dihydrogène est en excès. Étape 4 — Déduire : 2 $\\text{cm}^3$ de dioxygène consomment 2 × 2 = 4 $\\text{cm}^3$ de dihydrogène, donc il reste 6 − 4 = 2 $\\text{cm}^3$ de dihydrogène. La réponse 4 $\\text{cm}^3$ de dihydrogène donne le volume consommé, pas le volume restant.",
+                "answers": [
+                  {
+                    "content": "2 $\\text{cm}^3$ de dihydrogène",
+                    "correct": true
+                  },
+                  {
+                    "content": "4 $\\text{cm}^3$ de dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "4 $\\text{cm}^3$ de dihydrogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun gaz : tout est consommé",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après l'étincelle, le niveau de l'eau dans le tube de l'eudiomètre ___, car de l'eau liquide se forme et le volume de gaz diminue.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire l'équation $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$ : les gaz se transforment en eau liquide. Le volume de gaz dans le tube diminue, donc l'eau de la cuve monte dans le tube. Le niveau ne descend pas, et il ne reste pas identique puisque des gaz disparaissent.",
+                "answers": [
+                  {
+                    "content": "monte",
+                    "correct": true
+                  },
+                  {
+                    "content": "descend",
+                    "correct": false
+                  },
+                  {
+                    "content": "reste identique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On introduit 10 $\\text{cm}^3$ de dihydrogène et 10 $\\text{cm}^3$ de dioxygène dans un eudiomètre. Après l'étincelle, les deux gaz sont entièrement consommés.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer : 10 $\\text{cm}^3$ de dihydrogène demandent seulement 10 ÷ 2 = 5 $\\text{cm}^3$ de dioxygène. Étape 3 — Comparer : 5 $\\text{cm}^3$ nécessaires sont inférieurs à 10 $\\text{cm}^3$ introduits, donc le dioxygène est en excès. Étape 4 — Déduire : il reste 10 − 5 = 5 $\\text{cm}^3$ de dioxygène. Les gaz ne sont pas consommés à volumes égaux, mais dans les proportions 2 pour 1.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux mélanges de gaz qui sont entièrement consommés par l'étincelle ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire : un mélange est entièrement consommé s'il respecte 2 volumes de dihydrogène pour 1 de dioxygène. Étape 2 — Calculer pour chaque mélange le dioxygène nécessaire : 4 ÷ 2 = 2 $\\text{cm}^3$, vrai ; 6 ÷ 2 = 3 $\\text{cm}^3$, vrai ; 5 ÷ 2 = 2,5 $\\text{cm}^3$, faux (5 introduits) ; 3 ÷ 2 = 1,5 $\\text{cm}^3$, faux ; 2 ÷ 2 = 1 $\\text{cm}^3$, faux (4 introduits).",
+                "answers": [
+                  {
+                    "content": "4 $\\text{cm}^3$ de dihydrogène et 2 $\\text{cm}^3$ de dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "6 $\\text{cm}^3$ de dihydrogène et 3 $\\text{cm}^3$ de dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "5 $\\text{cm}^3$ de dihydrogène et 5 $\\text{cm}^3$ de dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "3 $\\text{cm}^3$ de dihydrogène et 3 $\\text{cm}^3$ de dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 $\\text{cm}^3$ de dihydrogène et 4 $\\text{cm}^3$ de dioxygène",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Électrolyse de l'eau au laboratoire du lycée",
+          "statement": "Au laboratoire du lycée, Mme Koné fait réaliser l'électrolyse de l'eau additionnée de soude. Awa et Yao, en binôme, relient l'électrolyseur à un générateur de courant continu avec des lunettes et des gants. Dans le tube posé sur l'électrode reliée à la borne négative, ils recueillent 24 $\\text{cm}^3$ de gaz.",
+          "exercise_type": "fixation",
+          "figure": "electrolyseur",
+          "questions": [
+            {
+              "content": "Mme Koné fait ajouter un peu de soude à l'eau avant l'électrolyse. Pourquoi ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : on relit le montage. L'eau pure conduit très mal le courant, donc presque aucun gaz ne se forme. Une petite quantité de soude rend l'eau conductrice ; elle n'est pas la source des gaz, car les gaz viennent de la décomposition de l'eau. Elle ne change pas non plus le rôle des électrodes, fixé par les bornes du générateur. Elle est corrosive : lunettes et gants.",
+              "answers": [
+                {
+                  "content": "Pour que l'eau conduise le courant électrique",
+                  "correct": true
+                },
+                {
+                  "content": "Pour que l'eau devienne plus froide",
+                  "correct": false
+                },
+                {
+                  "content": "Pour fournir le dihydrogène qui sera recueilli",
+                  "correct": false
+                },
+                {
+                  "content": "Pour que la cathode devienne l'anode",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Awa relie une électrode à la borne négative du générateur d'un électrolyseur. Comment s'appelle cette électrode, et quel gaz s'y forme ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'électrode reliée à la borne − est la cathode. Étape 2 — Associer : le dihydrogène se forme à la cathode, le dioxygène à l'anode. Les trois autres réponses inversent soit le nom de l'électrode, soit le gaz.",
+              "answers": [
+                {
+                  "content": "La cathode, où se forme le dihydrogène",
+                  "correct": true
+                },
+                {
+                  "content": "L'anode, où se forme le dihydrogène",
+                  "correct": false
+                },
+                {
+                  "content": "La cathode, où se forme le dioxygène",
+                  "correct": false
+                },
+                {
+                  "content": "L'anode, où se forme le dioxygène",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après quelques minutes, Awa et Yao recueillent 24 $\\text{cm}^3$ de dihydrogène dans le tube de la cathode. Quel volume de dioxygène a-t-on recueilli dans le tube de l'anode ?",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : la cathode donne le dihydrogène, l'anode le dioxygène. Étape 3 — Comparer : $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$, donc $V_{\\mathrm{O_2}}$ = $V_{\\mathrm{H_2}}$ ÷ 2. Étape 4 — Calculer : $V_{\\mathrm{O_2}}$ = 24 ÷ 2 = 12 $\\text{cm}^3$. L'erreur 48 $\\text{cm}^3$ double le volume de dihydrogène au lieu de le diviser.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Awa et Yao ont recueilli 24 $\\text{cm}^3$ de dihydrogène et 12 $\\text{cm}^3$ de dioxygène. Quel est le volume total de gaz recueilli ?",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Additionner les volumes des deux tubes : 24 + 12 = 36 $\\text{cm}^3$. Les deux volumes s'ajoutent, car il s'agit de deux gaz recueillis dans deux tubes. L'erreur 24 $\\text{cm}^3$ ne compte que le tube de la cathode, l'erreur 12 $\\text{cm}^3$ que celui de l'anode.",
+              "answers": [
+                {
+                  "content": "36",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour identifier le gaz du tube de l'anode, quel test Yao doit-il réaliser, et quel résultat attend-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : le gaz de l'anode est le dioxygène. Son test est la bûchette incandescente. Étape 3 — Observer : la bûchette doit se rallumer. La petite détonation à la flamme est le test du dihydrogène, gaz de la cathode, et c'est une erreur de croire que la bûchette doit s'éteindre.",
+              "answers": [
+                {
+                  "content": "Une bûchette incandescente, qui doit se rallumer",
+                  "correct": true
+                },
+                {
+                  "content": "Une flamme, qui doit provoquer une petite détonation",
+                  "correct": false
+                },
+                {
+                  "content": "Une bûchette incandescente, qui doit s'éteindre",
+                  "correct": false
+                },
+                {
+                  "content": "Une flamme, qui doit s'éteindre sans bruit",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cet électrolyseur, le tube de l'anode contient le plus grand volume de gaz.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Comparer : le plus grand volume est celui du dihydrogène, recueilli à la cathode. Avec 24 $\\text{cm}^3$ à la cathode et 12 $\\text{cm}^3$ à l'anode, le tube de l'anode contient le plus petit volume. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Tests et équation-bilan de l'électrolyse",
+          "statement": "Fatou et Ibrahim terminent leur compte rendu de TP d'électrolyse de l'eau au laboratoire du lycée. Ils ont recueilli un gaz dans le tube A, à l'anode, et un gaz dans le tube B, à la cathode. M. Traoré leur demande d'identifier les gaz et d'écrire le bilan de la réaction.",
+          "exercise_type": "fixation",
+          "figure": "molecule-dihydrogene",
+          "questions": [
+            {
+              "content": "Au TP, les tubes A et B contiennent les gaz recueillis aux deux électrodes. Relie chaque observation du binôme à sa conclusion.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Observer, puis Étape 4 — Conclure. La bûchette qui se rallume prouve le dioxygène, formé à l'anode. La petite détonation près d'une flamme prouve le dihydrogène, formé à la cathode. Si aucun des deux tests ne réussit, on ne peut conclure à aucun de ces deux gaz.",
+              "answers": [
+                {
+                  "content": "La bûchette incandescente se rallume dans le tube A",
+                  "match": "Le tube A contient du dioxygène, formé à l'anode"
+                },
+                {
+                  "content": "Une petite détonation se produit au contact de la flamme sur le tube B",
+                  "match": "Le tube B contient du dihydrogène, formé à la cathode"
+                },
+                {
+                  "content": "La bûchette s'éteint et il n'y a pas de détonation",
+                  "match": "Le gaz n'est ni du dioxygène ni du dihydrogène"
+                }
+              ]
+            },
+            {
+              "content": "Dans le modèle de la molécule de dihydrogène, deux atomes d'hydrogène sont reliés par un trait. Quelle est la formule du dihydrogène, et combien d'atomes la molécule contient-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : on lit le modèle. Étape 1 — Écrire la formule : deux atomes d'hydrogène identiques donnent $\\mathrm{H_2}$. La formule H désigne un seul atome, $\\mathrm{H_3}$ n'est pas le dihydrogène, et $\\mathrm{H_2O}$ est la formule de l'eau, qui contient aussi de l'oxygène.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{H_2}$, 2 atomes",
+                  "correct": true
+                },
+                {
+                  "content": "H, 1 atome",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{H_3}$, 3 atomes",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{H_2O}$, 3 atomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le bilan de l'électrolyse, combien d'atomes d'hydrogène y a-t-il dans 5 molécules d'eau $\\mathrm{H_2O}$ ?",
+              "question_type": "numeric",
+              "unit": "atomes",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Compter : une molécule $\\mathrm{H_2O}$ contient 2 atomes d'hydrogène. Pour 5 molécules : 5 × 2 = 10 atomes d'hydrogène. L'erreur 5 oublie l'indice 2.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'équation-bilan de l'électrolyse de l'eau s'écrit : 2 $\\mathrm{H_2O}$ → ___",
+              "question_type": "select",
+              "explanation": "Étape 2 — Compter : 2 $\\mathrm{H_2O}$ contient 4 atomes H et 2 atomes O. Étape 3 — Équilibrer : 2 $\\mathrm{H_2}$ donne 4 H et $\\mathrm{O_2}$ donne 2 O. Étape 4 — Vérifier : 4 H et 2 O de chaque côté. Les trois autres propositions ne conservent pas les atomes : $\\mathrm{H_2}$ + $\\mathrm{O_2}$ a 2 H seulement ; 2 $\\mathrm{H_2}$ + 2 $\\mathrm{O_2}$ a 4 O ; $\\mathrm{H_2}$ + 2 $\\mathrm{O_2}$ a 2 H et 4 O.",
+              "answers": [
+                {
+                  "content": "2 $\\mathrm{H_2}$ + $\\mathrm{O_2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{H_2}$ + $\\mathrm{O_2}$",
+                  "correct": false
+                },
+                {
+                  "content": "2 $\\mathrm{H_2}$ + 2 $\\mathrm{O_2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{H_2}$ + 2 $\\mathrm{O_2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois affirmations vraies sur l'électrolyse de l'eau ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : on reprend les fiches. L'électrolyse décompose l'eau en dihydrogène et en dioxygène. Les atomes se conservent, c'est ce qu'exprime l'équation équilibrée $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$. Les coefficients donnent $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$. Les trois autres propositions sont fausses : la soude sert seulement à conduire le courant, il se forme deux gaz, et le volume double est celui du dihydrogène.",
+              "answers": [
+                {
+                  "content": "L'eau est décomposée en deux gaz différents",
+                  "correct": true
+                },
+                {
+                  "content": "Les atomes se conservent pendant la réaction",
+                  "correct": true
+                },
+                {
+                  "content": "Le volume de dihydrogène est le double de celui de dioxygène",
+                  "correct": true
+                },
+                {
+                  "content": "La soude est transformée en dihydrogène",
+                  "correct": false
+                },
+                {
+                  "content": "Il se forme un seul gaz, le dioxygène",
+                  "correct": false
+                },
+                {
+                  "content": "Le volume de dioxygène est le double de celui de dihydrogène",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Décris le test qui identifie le dihydrogène : le geste, l'observation attendue et la conclusion.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Une flamme est approchée de l'ouverture du tube de gaz",
+                "L'observation attendue est une petite détonation",
+                "La conclusion nomme le dihydrogène",
+                "La précaution de sécurité (petit tube, loin de l'électrolyseur) est citée"
+              ],
+              "explanation": "Corrigé modèle : on recueille un petit volume de gaz dans un tube, loin de l'électrolyseur, avec des lunettes. On approche une flamme de l'ouverture du tube. On entend une petite détonation. Je conclus que le gaz est du dihydrogène, formé à la cathode. Barème sur 2 points : le geste et la précaution, 0,5 point ; l'observation, 0,5 point ; la conclusion, 1 point (la conclusion sans l'observation ne rapporte rien).",
+              "answers": [],
+              "starter": "On recueille le gaz dans un petit tube, puis…"
+            }
+          ]
+        },
+        {
+          "title": "Synthèse de l'eau à l'eudiomètre : bilan des volumes",
+          "statement": "Pour le devoir, Mme Koné fait réaliser en binômes la synthèse de l'eau dans un eudiomètre. Aya et Kouadio y introduisent des volumes mesurés de dihydrogène et de dioxygène, puis font jaillir l'étincelle derrière un écran de protection. Tous les volumes sont mesurés dans les mêmes conditions, et l'eau formée est liquide.",
+          "exercise_type": "evaluation",
+          "figure": "eudiometre",
+          "questions": [
+            {
+              "content": "Aya et Kouadio introduisent 15 $\\text{cm}^3$ de dihydrogène dans un eudiomètre. Quel volume de dioxygène faut-il pour consommer tout ce dihydrogène ?",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$, soit 2 volumes de dihydrogène pour 1 de dioxygène. Étape 2 — Calculer : $V_{\\mathrm{O_2}}$ = $V_{\\mathrm{H_2}}$ ÷ 2 = 15 ÷ 2 = 7,5 $\\text{cm}^3$. L'erreur 30 $\\text{cm}^3$ multiplie par 2 au lieu de diviser.",
+              "answers": [
+                {
+                  "content": "7,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Aya et Kouadio introduisent dans l'eudiomètre 15 $\\text{cm}^3$ de dihydrogène et 10 $\\text{cm}^3$ de dioxygène, puis font jaillir l'étincelle. Quel gaz est en excès ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire les proportions : 2 pour 1. Étape 2 — Calculer : il faut 15 ÷ 2 = 7,5 $\\text{cm}^3$ de dioxygène pour 15 $\\text{cm}^3$ de dihydrogène. Étape 3 — Comparer : 7,5 $\\text{cm}^3$ nécessaires sont inférieurs à 10 $\\text{cm}^3$ introduits, donc le dioxygène est en excès. Les deux gaz ne seraient consommés entièrement qu'avec 7,5 $\\text{cm}^3$ de dioxygène seulement, et l'eau formée est liquide, ce n'est pas un gaz restant.",
+              "answers": [
+                {
+                  "content": "Le dioxygène",
+                  "correct": true
+                },
+                {
+                  "content": "Le dihydrogène",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun : les deux gaz sont consommés entièrement",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau formée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le même essai (15 $\\text{cm}^3$ de dihydrogène et 10 $\\text{cm}^3$ de dioxygène), quel volume de gaz reste-t-il après l'étincelle ?",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : 2 volumes de dihydrogène pour 1 de dioxygène. Étape 2 — Calculer : le dioxygène nécessaire est 15 ÷ 2 = 7,5 $\\text{cm}^3$. Étape 3 — Comparer : 7,5 est inférieur à 10, donc le dioxygène est en excès. Étape 4 — Déduire : il reste 10 − 7,5 = 2,5 $\\text{cm}^3$ de dioxygène. L'erreur 5 $\\text{cm}^3$ vient du calcul 15 − 10 qui compare directement les deux volumes, sans appliquer le rapport 2 pour 1.",
+              "answers": [
+                {
+                  "content": "2,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au second essai, ils introduisent 9 $\\text{cm}^3$ de dihydrogène et 3 $\\text{cm}^3$ de dioxygène. Quel volume de dihydrogène reste-t-il après l'étincelle ?",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : 2 volumes de dihydrogène pour 1 de dioxygène. Étape 2 — Calculer : pour 9 $\\text{cm}^3$ de dihydrogène, il faudrait 9 ÷ 2 = 4,5 $\\text{cm}^3$ de dioxygène. Étape 3 — Comparer : 4,5 est supérieur à 3, donc le dioxygène manque et le dihydrogène est en excès. Étape 4 — Déduire : 3 $\\text{cm}^3$ de dioxygène consomment 2 × 3 = 6 $\\text{cm}^3$ de dihydrogène, donc il reste 9 − 6 = 3 $\\text{cm}^3$ de dihydrogène.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans l'eudiomètre, le volume de gaz diminue après l'étincelle parce que de l'eau liquide se forme.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire l'équation $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$ : deux gaz donnent de l'eau. À la température ambiante, l'eau formée est liquide et son volume est négligeable devant celui des gaz. Le volume de gaz diminue donc, et l'eau de la cuve monte dans le tube. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Écris l'équation-bilan de la synthèse de l'eau. Montre qu'elle est équilibrée, puis dis ce qu'elle indique sur les volumes de gaz qui réagissent.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "L'équation 2 H2 + O2 → 2 H2O est correcte",
+                "Le compte des atomes de chaque côté (4 H et 2 O) est justifié",
+                "Les proportions 2 volumes de dihydrogène pour 1 volume de dioxygène sont citées",
+                "Le lien entre les coefficients et les volumes est expliqué"
+              ],
+              "explanation": "Corrigé modèle : l'équation-bilan est $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$. Étape 2 — Compter : à gauche, 2 $\\mathrm{H_2}$ donne 4 atomes H et $\\mathrm{O_2}$ donne 2 atomes O ; à droite, 2 $\\mathrm{H_2O}$ donne 4 atomes H et 2 atomes O. Étape 4 — Vérifier : les atomes se conservent, l'équation est équilibrée. Les coefficients indiquent que 2 volumes de dihydrogène réagissent avec 1 volume de dioxygène. Barème sur 3 points : équation correcte, 1 point ; comptage des atomes, 1 point ; proportions en volumes, 1 point.",
+              "answers": [],
+              "starter": "L'équation-bilan est…"
+            }
+          ]
+        },
+        {
+          "title": "De l'électrolyse à la synthèse de l'eau, type BEPC",
+          "statement": "Pour le BEPC blanc du laboratoire du lycée, Yao réalise d'abord l'électrolyse de l'eau additionnée de soude, puis la synthèse de l'eau dans un eudiomètre avec les gaz obtenus. Tous les volumes sont mesurés dans les mêmes conditions, et l'eau formée dans l'eudiomètre est liquide.",
+          "exercise_type": "evaluation",
+          "figure": "molecule-dioxygene",
+          "questions": [
+            {
+              "content": "Pour le BEPC blanc, Yao électrolyse de l'eau additionnée de soude. Il recueille 40 $\\text{cm}^3$ de dihydrogène dans le tube de la cathode. Quel volume de dioxygène s'est formé à l'anode ?",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : la cathode (borne −) donne le dihydrogène, l'anode (borne +) le dioxygène. Étape 3 — Comparer : $V_{\\mathrm{H_2}}$ = 2 × $V_{\\mathrm{O_2}}$, donc $V_{\\mathrm{O_2}}$ = $V_{\\mathrm{H_2}}$ ÷ 2. Étape 4 — Calculer : $V_{\\mathrm{O_2}}$ = 40 ÷ 2 = 20 $\\text{cm}^3$. L'erreur 80 $\\text{cm}^3$ double le volume de dihydrogène au lieu de le diviser.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour identifier le gaz du tube de la cathode, Yao approche une flamme de l'ouverture du tube. Quelle observation confirme que c'est du dihydrogène ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir le test : la flamme est le test du dihydrogène. Étape 3 — Observer : le dihydrogène produit une petite détonation. Une flamme qui devient plus vive correspond plutôt à un gaz qui entretient la combustion, le dioxygène. Étape 4 — Conclure : petite détonation, donc dihydrogène.",
+              "answers": [
+                {
+                  "content": "Une petite détonation",
+                  "correct": true
+                },
+                {
+                  "content": "La flamme devient plus vive et brille fortement",
+                  "correct": false
+                },
+                {
+                  "content": "La flamme s'éteint sans aucun bruit",
+                  "correct": false
+                },
+                {
+                  "content": "Une fumée noire apparaît",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'équation-bilan de l'électrolyse de l'eau réalisée par Yao ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : l'eau disparaît, le dihydrogène et le dioxygène se forment. Étape 2 — Compter, Étape 3 — Équilibrer : $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$ a 4 H et 2 O de chaque côté. La première proposition a 1 O à gauche et 2 à droite. La troisième est la synthèse, la réaction inverse. La quatrième a 2 O à gauche et 4 à droite.",
+              "answers": [
+                {
+                  "content": "$2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{H_2O} \\longrightarrow \\mathrm{H_2} + \\mathrm{O_2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$",
+                  "correct": false
+                },
+                {
+                  "content": "$2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + 2\\,\\mathrm{O_2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao introduit ensuite dans un eudiomètre ses 40 $\\text{cm}^3$ de dihydrogène et 30 $\\text{cm}^3$ de dioxygène pris dans une bouteille. Quel volume de dioxygène faut-il pour consommer tout le dihydrogène ?",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$, soit 2 volumes de dihydrogène pour 1 de dioxygène. Étape 2 — Calculer : $V_{\\mathrm{O_2}}$ = $V_{\\mathrm{H_2}}$ ÷ 2 = 40 ÷ 2 = 20 $\\text{cm}^3$. On retrouve le volume de dioxygène formé à l'anode, car la synthèse est la réaction inverse de l'électrolyse.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec 40 $\\text{cm}^3$ de dihydrogène et 30 $\\text{cm}^3$ de dioxygène dans l'eudiomètre, quel gaz reste-t-il après l'étincelle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Calculer : il faut 20 $\\text{cm}^3$ de dioxygène pour 40 $\\text{cm}^3$ de dihydrogène. Étape 3 — Comparer : 20 est inférieur à 30, donc le dioxygène est en excès. Le dihydrogène est entièrement consommé : il ne reste que du dioxygène, et non un mélange.",
+              "answers": [
+                {
+                  "content": "Du dioxygène",
+                  "correct": true
+                },
+                {
+                  "content": "Du dihydrogène",
+                  "correct": false
+                },
+                {
+                  "content": "Un mélange des deux gaz",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun gaz",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel volume de gaz reste-t-il à la fin dans l'eudiomètre de Yao ? (40 $\\text{cm}^3$ de dihydrogène et 30 $\\text{cm}^3$ de dioxygène au départ.)",
+              "question_type": "numeric",
+              "unit": "cm³",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Calculer : le dioxygène nécessaire est 40 ÷ 2 = 20 $\\text{cm}^3$. Étape 3 — Comparer : 20 est inférieur à 30, donc le dioxygène est en excès. Étape 4 — Déduire : il reste 30 − 20 = 10 $\\text{cm}^3$ de dioxygène. L'erreur 70 $\\text{cm}^3$ additionne les deux volumes au lieu de soustraire le volume consommé.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Compare l'expérience d'électrolyse et celle de la synthèse de l'eau réalisées par Yao. Explique pourquoi elles montrent que l'eau est formée de dihydrogène et de dioxygène, et cite les proportions en volumes de chaque expérience.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "L'électrolyse décompose l'eau en dihydrogène et dioxygène",
+                "La synthèse reforme l'eau à partir de ces deux gaz",
+                "Les deux expériences sont inverses l'une de l'autre",
+                "Les proportions 2 pour 1 sont citées pour l'électrolyse et pour la synthèse",
+                "Une équation-bilan correcte est donnée pour au moins une des deux réactions"
+              ],
+              "explanation": "Corrigé modèle : l'électrolyse décompose l'eau : $2\\,\\mathrm{H_2O} \\longrightarrow 2\\,\\mathrm{H_2} + \\mathrm{O_2}$, et l'on recueille 2 volumes de dihydrogène pour 1 volume de dioxygène. La synthèse reforme l'eau à partir des deux mêmes gaz : $2\\,\\mathrm{H_2} + \\mathrm{O_2} \\longrightarrow 2\\,\\mathrm{H_2O}$, et ils réagissent dans les mêmes proportions, 2 volumes de dihydrogène pour 1 volume de dioxygène. Les deux expériences sont inverses : l'eau peut être séparée en dihydrogène et dioxygène, puis reconstituée, donc elle contient ces deux éléments. Barème sur 4 points : la décomposition, 1 point ; la reformation de l'eau, 1 point ; les proportions 2 pour 1 dans les deux expériences, 1 point ; une équation correcte, 1 point.",
+              "answers": [],
+              "starter": "L'électrolyse décompose l'eau, tandis que la synthèse…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

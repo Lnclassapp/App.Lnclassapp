@@ -1,0 +1,1177 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Travail et puissance mécaniques",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "travail-force-constante",
+          "kind": "coordinate_plane",
+          "description": "Un repère où l'axe horizontal donne la distance d parcourue par le point d'application d'une force constante de 3 kN (de 0 à 10 m) et l'axe vertical le travail W en kJ (de 0 à 30 kJ). Le travail est proportionnel à la distance : c'est une droite passant par l'origine, de pente 3. Deux points sont repérés : A (4 ; 12) et B (8 ; 24).",
+          "params": {
+            "xmin": 0,
+            "xmax": 10,
+            "ymin": 0,
+            "ymax": 30,
+            "points": [
+              {
+                "id": "A",
+                "x": 4,
+                "y": 12
+              },
+              {
+                "id": "B",
+                "x": 8,
+                "y": 24
+              }
+            ],
+            "lines": [
+              {
+                "a": 3,
+                "b": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "travail-poids-hauteur",
+          "kind": "coordinate_plane",
+          "description": "Un repère où l'axe horizontal donne la hauteur h dont descend (ou monte lentement) une caisse de 500 kg, de poids 5000 N (de 0 à 10 m), et l'axe vertical le travail W en kJ (de 0 à 50 kJ). Le travail est proportionnel à la hauteur : c'est une droite passant par l'origine, de pente 5. Deux points sont repérés : A (2 ; 10) et B (6 ; 30).",
+          "params": {
+            "xmin": 0,
+            "xmax": 10,
+            "ymin": 0,
+            "ymax": 50,
+            "points": [
+              {
+                "id": "A",
+                "x": 2,
+                "y": 10
+              },
+              {
+                "id": "B",
+                "x": 6,
+                "y": 30
+              }
+            ],
+            "lines": [
+              {
+                "a": 5,
+                "b": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "puissances-des-machines",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres qui compare les puissances de quatre machines du port d'Abidjan, en kW : le treuil 5 kW, le chariot élévateur 10 kW, la grue A 20 kW et la grue B 40 kW. Plus la barre est haute, plus la machine est puissante.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              5,
+              10,
+              20,
+              40
+            ],
+            "labels": [
+              "Treuil",
+              "Chariot",
+              "Grue A",
+              "Grue B"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "travaux-en-une-minute",
+          "kind": "stat_chart",
+          "description": "Un diagramme en barres qui compare le travail effectué en une minute (60 s) par quatre machines du port d'Abidjan, en kJ : le treuil 300 kJ, le chariot élévateur 600 kJ, la grue A 1200 kJ et la grue B 2400 kJ. Plus la barre est haute, plus le travail est grand.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              300,
+              600,
+              1200,
+              2400
+            ],
+            "labels": [
+              "Treuil",
+              "Chariot",
+              "Grue A",
+              "Grue B"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le travail d'une force constante",
+          "remember": "Quand le point d'application d'une force constante $\\vec{F}$ se déplace d'une distance $d$ dans la direction et dans le sens de cette force, la force effectue un **travail** $W = F \\times d$, avec $W$ en joules (J), $F$ en newtons (N) et $d$ en mètres (m). Le joule est le travail d'une force de 1 N dont le point d'application se déplace de 1 m. Autres unités : $1\\ \\text{kJ} = 1000\\ \\text{J}$ et $1\\ \\text{kN} = 1000\\ \\text{N}$. Si le point d'application ne se déplace pas ($d = 0$), le travail est nul.",
+          "method": [
+            "Relever la force $F$ et la distance $d$ parcourue par son point d'application.",
+            "Convertir la force en newtons et la distance en mètres.",
+            "Écrire la formule $W = F \\times d$.",
+            "Remplacer $F$ et $d$ par leurs valeurs, puis calculer $W$.",
+            "Donner le résultat en joules, et en kJ si l'énoncé le demande."
+          ],
+          "example": {
+            "statement": "Un docker tire un chariot de sacs avec une force constante de 0,4 kN sur 25 m, dans la direction et le sens du déplacement. Calculer le travail de cette force.",
+            "steps": [
+              "Relever : $F = 0{,}4\\ \\text{kN}$ et $d = 25\\ \\text{m}$.",
+              "Convertir : $0{,}4\\ \\text{kN} = 400\\ \\text{N}$ ; la distance est déjà en mètres.",
+              "Écrire : $W = F \\times d$.",
+              "Remplacer et calculer : $W = 400 \\times 25 = 10000\\ \\text{J}$.",
+              "Donner : $W = 10000\\ \\text{J}$, soit $10\\ \\text{kJ}$."
+            ]
+          },
+          "pitfall": "Ne pas oublier de convertir avant de calculer. Contre-exemple : une force de 3 kN déplace son point d'application de 200 cm. Si tu écris $W = 3 \\times 200 = 600$, tu mélanges des kN et des cm. En convertissant : $3\\ \\text{kN} = 3000\\ \\text{N}$ et $200\\ \\text{cm} = 2\\ \\text{m}$, donc $W = 3000 \\times 2 = 6000\\ \\text{J}$. Le premier résultat est 10 fois trop petit. Convertis toujours la force en N et la distance en m.",
+          "figure": "travail-force-constante",
+          "exercise": {
+            "title": "Calculer le travail d'une force constante",
+            "statement": "Dans cet exercice, tu calcules le travail de forces constantes avec la méthode de la fiche, sur le quai du port d'Abidjan. Dans toutes les questions, le point d'application de la force se déplace dans la direction et dans le sens de la force.",
+            "exercise_type": "fixation",
+            "figure": "travail-force-constante",
+            "questions": [
+              {
+                "content": "Quelle est l'unité du travail d'une force dans le système international ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : on cherche l'unité d'un travail $W$. Étape 2 — Convertir : dans la formule $W = F \\times d$, la force est en newtons et la distance en mètres. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer : $1\\ \\text{N} \\times 1\\ \\text{m}$ donne le joule. Étape 5 — Donner : l'unité est le joule (J). Le newton est l'unité d'une force et le watt celle d'une puissance : ce sont les unités des autres grandeurs de la formule.",
+                "answers": [
+                  {
+                    "content": "Le newton (N)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le joule (J)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le watt (W)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le kilogramme (kg)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un docker pousse un chariot avec une force constante de 500 N sur 12 m, dans la direction et le sens de son déplacement. Quel est le travail de cette force ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 500\\ \\text{N}$ et $d = 12\\ \\text{m}$. Étape 2 — Convertir : les unités sont déjà N et m. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 500 \\times 12 = 6000\\ \\text{J}$. Étape 5 — Donner : $W = 6000\\ \\text{J}$, soit 6 kJ.",
+                "answers": [
+                  {
+                    "content": "6000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un tracteur de quai tire une remorque avec une force constante de 2 kN sur 30 m, dans la direction et le sens de son déplacement. Quel est le travail de cette force, en joules ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 2\\ \\text{kN}$ et $d = 30\\ \\text{m}$. Étape 2 — Convertir : $2\\ \\text{kN} = 2000\\ \\text{N}$. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 2000 \\times 30 = 60000\\ \\text{J}$. Étape 5 — Donner : $W = 60000\\ \\text{J}$, soit 60 kJ. Écrire $2 \\times 30 = 60\\ \\text{J}$ serait faux : on aurait oublié de convertir les kN en N.",
+                "answers": [
+                  {
+                    "content": "60000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une force constante de 250 N déplace son point d'application de 4 m dans sa direction et son sens. Son travail vaut ___ J.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : $F = 250\\ \\text{N}$ et $d = 4\\ \\text{m}$. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 250 \\times 4 = 1000\\ \\text{J}$. Étape 5 — Donner : $W = 1000\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un docker pousse un chariot avec une force constante de 80 N sur 150 cm, dans la direction et le sens de son déplacement. Quel est le travail de cette force, en joules ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 80\\ \\text{N}$ et $d = 150\\ \\text{cm}$. Étape 2 — Convertir : $150\\ \\text{cm} = 1{,}5\\ \\text{m}$. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 80 \\times 1{,}5 = 120\\ \\text{J}$. Étape 5 — Donner : $W = 120\\ \\text{J}$. Avec 150 on trouverait 12000 J, un résultat 100 fois trop grand.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un chariot est tiré avec une force constante de 3 kN dans la direction et le sens de son déplacement. Sur la droite de la figure, le travail W (en kJ) est donné en fonction de la distance d (en m). Quel est le travail pour d = 8 m, en kJ ?",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $F = 3\\ \\text{kN}$ et $d = 8\\ \\text{m}$ ; le point B de la figure est (8 ; 24). Étape 2 — Convertir : $3\\ \\text{kN} = 3000\\ \\text{N}$. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 3000 \\times 8 = 24000\\ \\text{J}$. Étape 5 — Donner : $W = 24000\\ \\text{J} = 24\\ \\text{kJ}$, valeur lue sur la droite en B.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes du calcul d'un travail.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever les données. Étape 2 — Convertir en N et en m avant tout calcul. Étape 3 — Écrire la formule $W = F \\times d$. Étape 4 — Remplacer et calculer. L'ordre compte : calculer avant de convertir est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Relever la force et la distance."
+                  },
+                  {
+                    "content": "Convertir la force en newtons et la distance en mètres."
+                  },
+                  {
+                    "content": "Écrire la formule $W = F \\times d$."
+                  },
+                  {
+                    "content": "Remplacer par les valeurs et calculer le résultat en joules."
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque grandeur à son unité dans le système international.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Convertir : on exprime chaque grandeur dans son unité du système international avant de calculer. La force est en newtons, la distance en mètres, et le travail $W = F \\times d$ en joules.",
+                "answers": [
+                  {
+                    "content": "La force",
+                    "match": "Le newton (N)"
+                  },
+                  {
+                    "content": "La distance parcourue",
+                    "match": "Le mètre (m)"
+                  },
+                  {
+                    "content": "Le travail d'une force",
+                    "match": "Le joule (J)"
+                  }
+                ]
+              },
+              {
+                "content": "Une force de 3 kN qui déplace son point d'application de 200 cm, dans sa direction et son sens, effectue un travail de 600 J.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : $F = 3\\ \\text{kN}$ et $d = 200\\ \\text{cm}$. Étape 2 — Convertir : $F = 3000\\ \\text{N}$ et $d = 2\\ \\text{m}$. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 3000 \\times 2 = 6000\\ \\text{J}$. L'affirmation est fausse : 600 J vient de $3 \\times 200$, sans aucune conversion.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le travail du poids d'un corps",
+          "remember": "Le **poids** d'un corps de masse $m$ vaut $P = m \\times g$, avec $g = 10\\ \\text{N/kg}$ ($m$ en kg). Quand ce corps descend d'une hauteur verticale $h$, le travail de son poids vaut $W = P \\times h = m \\times g \\times h$ ($W$ en J, $P$ en N, $h$ en m). Pour soulever lentement le corps de la hauteur $h$, la force exercée (par la grue, par exemple) a la même intensité que le poids : son travail vaut aussi $P \\times h$. Seule compte la hauteur mesurée sur la verticale, pas la longueur du chemin suivi.",
+          "method": [
+            "Relever la masse $m$ du corps et la hauteur verticale $h$.",
+            "Calculer le poids $P = m \\times g$, avec $m$ en kg.",
+            "Écrire la formule $W = P \\times h$.",
+            "Remplacer $P$ et $h$ par leurs valeurs, puis calculer $W$ en joules."
+          ],
+          "example": {
+            "statement": "Une grue pose lentement une caisse de 500 kg sur le quai, 4 m plus bas (g = 10 N/kg). Calculer le travail du poids de la caisse.",
+            "steps": [
+              "Relever : $m = 500\\ \\text{kg}$ et $h = 4\\ \\text{m}$.",
+              "Calculer le poids : $P = m \\times g = 500 \\times 10 = 5000\\ \\text{N}$.",
+              "Écrire : $W = P \\times h$.",
+              "Remplacer et calculer : $W = 5000 \\times 4 = 20000\\ \\text{J}$, soit $20\\ \\text{kJ}$."
+            ]
+          },
+          "pitfall": "Ne pas utiliser la masse à la place du poids. Contre-exemple : une caisse de 500 kg descend de 4 m. Si tu écris $W = m \\times h = 500 \\times 4 = 2000\\ \\text{J}$, tu oublies $g$. Le poids est $P = 500 \\times 10 = 5000\\ \\text{N}$, donc $W = 5000 \\times 4 = 20000\\ \\text{J}$ : le premier résultat est 10 fois trop petit. Passe toujours par le poids en newtons avant de multiplier par la hauteur.",
+          "figure": "travail-poids-hauteur",
+          "exercise": {
+            "title": "Calculer le travail du poids",
+            "statement": "Dans cet exercice, tu calcules le travail du poids de charges déplacées dans le port d'Abidjan avec la méthode de la fiche. On prend g = 10 N/kg.",
+            "exercise_type": "fixation",
+            "figure": "travail-poids-hauteur",
+            "questions": [
+              {
+                "content": "Quelle formule donne le travail du poids d'un corps de masse m qui descend d'une hauteur h, avec g = 10 N/kg ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : la masse $m$ et la hauteur $h$. Étape 2 — Calculer le poids : $P = m \\times g$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer : $W = m \\times g \\times h$. La proposition $W = m \\times h$ oublie le passage de la masse au poids, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "$W = m \\times g \\times h$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$W = m \\times h$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$W = m \\times g$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$W = g \\times h$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un fût de masse 20 kg descend de 3 m (g = 10 N/kg). Quel est le travail de son poids ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 1,
+                "explanation": "Étape 1 — Relever : $m = 20\\ \\text{kg}$ et $h = 3\\ \\text{m}$. Étape 2 — Calculer le poids : $P = m \\times g = 20 \\times 10 = 200\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 200 \\times 3 = 600\\ \\text{J}$. Avec la masse seule on trouverait $20 \\times 3 = 60$, dix fois trop petit.",
+                "answers": [
+                  {
+                    "content": "600",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un sac de cacao de masse 60 kg est descendu d'un camion jusqu'au sol, 1,5 m plus bas (g = 10 N/kg). Quel est le travail de son poids ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $m = 60\\ \\text{kg}$ et $h = 1{,}5\\ \\text{m}$. Étape 2 — Calculer le poids : $P = 60 \\times 10 = 600\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 600 \\times 1{,}5 = 900\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "900",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une grue soulève lentement un conteneur de masse 2 t à 5 m de hauteur. La force exercée par la grue a la même intensité que le poids du conteneur (g = 10 N/kg). Quel est le travail de cette force, en kJ ?",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 2,
+                "explanation": "Étape 1 — Relever : $m = 2\\ \\text{t}$ et $h = 5\\ \\text{m}$. Étape 2 — Calculer le poids : $m = 2000\\ \\text{kg}$, donc $P = 2000 \\times 10 = 20000\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 20000 \\times 5 = 100000\\ \\text{J} = 100\\ \\text{kJ}$. Si on garde $m = 2$ sans convertir la tonne en kg, on trouve un résultat 1000 fois trop petit.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un colis de masse 40 kg descend de 2,5 m (g = 10 N/kg). Le travail de son poids vaut ___ J.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : $m = 40\\ \\text{kg}$ et $h = 2{,}5\\ \\text{m}$. Étape 2 — Calculer le poids : $P = 40 \\times 10 = 400\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 400 \\times 2{,}5 = 1000\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un fût de masse 50 kg descend le long d'une rampe de 6 m de long, du haut d'un camion jusqu'au sol. Le haut de la rampe est à 1,5 m au-dessus du sol (g = 10 N/kg). Quel est le travail du poids du fût ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $m = 50\\ \\text{kg}$ ; la hauteur verticale est $h = 1{,}5\\ \\text{m}$, pas la longueur de la rampe. Étape 2 — Calculer le poids : $P = 50 \\times 10 = 500\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 500 \\times 1{,}5 = 750\\ \\text{J}$. Les 3000 J viennent de $500 \\times 6$ (longueur de la rampe) et les 75 J de $50 \\times 1{,}5$ (masse au lieu du poids).",
+                "answers": [
+                  {
+                    "content": "750 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "3000 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "75 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "300 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le graphique de la figure donne le travail W (en kJ) en fonction de la hauteur h (en m) pour une caisse de masse 500 kg dont le poids est 5000 N. Quel est le travail pour h = 7 m, en kJ ?",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $m = 500\\ \\text{kg}$ et $h = 7\\ \\text{m}$ ; la figure montre la droite de pente 5 passant par A (2 ; 10) et B (6 ; 30). Étape 2 — Calculer le poids : $P = 500 \\times 10 = 5000\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 5000 \\times 7 = 35000\\ \\text{J} = 35\\ \\text{kJ}$, valeur de la droite pour $h = 7$.",
+                "answers": [
+                  {
+                    "content": "35",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de masse 500 kg descend de 4 m (g = 10 N/kg) : le travail de son poids est de 2000 J.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : $m = 500\\ \\text{kg}$ et $h = 4\\ \\text{m}$. Étape 2 — Calculer le poids : $P = 500 \\times 10 = 5000\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 5000 \\times 4 = 20000\\ \\text{J}$. L'affirmation est fausse : 2000 J vient de $500 \\times 4$, la masse ayant été utilisée à la place du poids.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La puissance mécanique",
+          "remember": "La **puissance** mécanique d'une machine mesure le travail qu'elle effectue en une seconde. Si elle effectue un travail $W$ pendant une durée $t$, sa puissance est $\\mathcal{P} = \\dfrac{W}{t}$, avec $W$ en joules (J), $t$ en secondes (s) et $\\mathcal{P}$ en watts (symbole $\\text{W}$ droit, à ne pas confondre avec le travail $W$). On la note $\\mathcal{P}$ pour ne pas la confondre avec le poids $P$. Conversions : $1\\ \\text{kW} = 1000\\ \\text{W}$ ; $1\\ \\text{min} = 60\\ \\text{s}$ ; $1\\ \\text{h} = 3600\\ \\text{s}$.",
+          "method": [
+            "Relever le travail $W$ effectué et la durée $t$.",
+            "Convertir le travail en joules et la durée en secondes.",
+            "Écrire la formule $\\mathcal{P} = \\dfrac{W}{t}$.",
+            "Remplacer $W$ et $t$ par leurs valeurs, calculer en watts, puis convertir en kW si l'énoncé le demande."
+          ],
+          "example": {
+            "statement": "Un treuil du port effectue un travail de 120 kJ en 2 min. Calculer sa puissance en watts, puis en kilowatts.",
+            "steps": [
+              "Relever : $W = 120\\ \\text{kJ}$ et $t = 2\\ \\text{min}$.",
+              "Convertir : $W = 120000\\ \\text{J}$ et $t = 2 \\times 60 = 120\\ \\text{s}$.",
+              "Écrire : $\\mathcal{P} = \\dfrac{W}{t}$.",
+              "Remplacer et calculer : $\\mathcal{P} = \\dfrac{120000}{120} = 1000\\ \\text{W}$, soit $1\\ \\text{kW}$."
+            ]
+          },
+          "pitfall": "Ne pas diviser par une durée restée en minutes. Contre-exemple : un moteur effectue 6000 J en 2 min. Si tu écris $\\mathcal{P} = \\dfrac{6000}{2} = 3000\\ \\text{W}$, tu divises par des minutes. En convertissant, $t = 2 \\times 60 = 120\\ \\text{s}$ et $\\mathcal{P} = \\dfrac{6000}{120} = 50\\ \\text{W}$ : le premier résultat est 60 fois trop grand. Convertis toujours la durée en secondes.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une puissance mécanique",
+            "statement": "Dans cet exercice, tu calcules la puissance de machines du port d'Abidjan avec la méthode de la fiche. On prend g = 10 N/kg quand il faut calculer un poids.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'unité de la puissance dans le système international ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : on cherche l'unité d'une puissance. Étape 2 — Convertir : dans $\\mathcal{P} = \\dfrac{W}{t}$, le travail est en joules et la durée en secondes. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer : des joules par seconde donnent des watts. L'unité est le watt (W). Le joule est l'unité du travail, pas celle de la puissance.",
+                "answers": [
+                  {
+                    "content": "Le watt (W)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le joule (J)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le newton (N)",
+                    "correct": false
+                  },
+                  {
+                    "content": "La seconde (s)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux unités de puissance ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Convertir : la puissance se mesure en watts, et $1\\ \\text{kW} = 1000\\ \\text{W}$. Le watt et le kilowatt sont donc les deux unités de puissance. Le joule mesure un travail, le newton une force et le mètre une longueur.",
+                "answers": [
+                  {
+                    "content": "Le watt (W)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le joule (J)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le mètre (m)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le kilowatt (kW)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le newton (N)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un treuil effectue un travail de 3000 J en 10 s. Quelle est sa puissance, en watts ?",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $W = 3000\\ \\text{J}$ et $t = 10\\ \\text{s}$. Étape 2 — Convertir : tout est déjà en J et en s. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{3000}{10} = 300\\ \\text{W}$.",
+                "answers": [
+                  {
+                    "content": "300",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur de grue effectue un travail de 90 kJ en 30 s. Quelle est sa puissance, en watts ?",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 1,
+                "explanation": "Étape 1 — Relever : $W = 90\\ \\text{kJ}$ et $t = 30\\ \\text{s}$. Étape 2 — Convertir : $90\\ \\text{kJ} = 90000\\ \\text{J}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{90000}{30} = 3000\\ \\text{W}$, soit 3 kW. Sans conversion, on trouverait 3 W, un résultat 1000 fois trop petit.",
+                "answers": [
+                  {
+                    "content": "3000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur effectue un travail de 240 kJ en 4 min. Quelle est sa puissance, en watts ?",
+                "question_type": "numeric",
+                "unit": "W",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $W = 240\\ \\text{kJ}$ et $t = 4\\ \\text{min}$. Étape 2 — Convertir : $W = 240000\\ \\text{J}$ et $t = 4 \\times 60 = 240\\ \\text{s}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{240000}{240} = 1000\\ \\text{W}$, soit 1 kW. Diviser par 4 au lieu de 240 donnerait 60000 W : la minute n'aurait pas été convertie.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur de puissance 5 kW a une puissance de ___ W.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : $\\mathcal{P} = 5\\ \\text{kW}$. Étape 2 — Convertir : $1\\ \\text{kW} = 1000\\ \\text{W}$, donc $5 \\times 1000 = 5000\\ \\text{W}$. Les étapes suivantes de la méthode (écrire la formule, remplacer) ne servent pas ici : la question demande seulement la conversion.",
+                "answers": [
+                  {
+                    "content": "5000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une grue soulève lentement une caisse de masse 500 kg à 6 m de hauteur en 10 s (g = 10 N/kg). Quelle est sa puissance, en kW ?",
+                "question_type": "numeric",
+                "unit": "kW",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : le travail se calcule d'abord avec $P = 500 \\times 10 = 5000\\ \\text{N}$ et $h = 6\\ \\text{m}$, donc $W = 5000 \\times 6 = 30000\\ \\text{J}$ ; la durée est $t = 10\\ \\text{s}$. Étape 2 — Convertir : tout est en J et en s. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{30000}{10} = 3000\\ \\text{W} = 3\\ \\text{kW}$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque conversion à sa valeur.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Convertir : ces quatre égalités servent avant tout calcul de puissance. $1\\ \\text{kW} = 1000\\ \\text{W}$, $1\\ \\text{min} = 60\\ \\text{s}$, $1\\ \\text{h} = 60 \\times 60 = 3600\\ \\text{s}$ et $1\\ \\text{kJ} = 1000\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "1 kW",
+                    "match": "1000 W"
+                  },
+                  {
+                    "content": "1 min",
+                    "match": "60 s"
+                  },
+                  {
+                    "content": "1 h",
+                    "match": "3600 s"
+                  },
+                  {
+                    "content": "1 kJ",
+                    "match": "1000 J"
+                  }
+                ]
+              },
+              {
+                "content": "Un travail de 6000 J effectué en 2 min correspond à une puissance de 3000 W.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : $W = 6000\\ \\text{J}$ et $t = 2\\ \\text{min}$. Étape 2 — Convertir : $t = 2 \\times 60 = 120\\ \\text{s}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{6000}{120} = 50\\ \\text{W}$. L'affirmation est fausse : 3000 W vient de $6000 \\div 2$, avec la durée en minutes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le travail, la durée et la puissance",
+          "remember": "De $\\mathcal{P} = \\dfrac{W}{t}$ on déduit deux autres relations : le travail $W = \\mathcal{P} \\times t$ (en J, avec $\\mathcal{P}$ en W et $t$ en s) et la durée $t = \\dfrac{W}{\\mathcal{P}}$. Pour un même travail, une machine deux fois plus puissante met deux fois moins de temps. **La puissance n'est pas le travail** : une machine puissante n'effectue un grand travail que si elle fonctionne assez longtemps.",
+          "method": [
+            "Relever les deux grandeurs connues parmi $W$, $\\mathcal{P}$ et $t$, et repérer celle qu'on cherche.",
+            "Convertir le travail en joules, la puissance en watts et la durée en secondes.",
+            "Écrire la formule adaptée : $W = \\mathcal{P} \\times t$ ou $t = \\dfrac{W}{\\mathcal{P}}$.",
+            "Remplacer par les valeurs, calculer, puis donner le résultat avec son unité (en min ou en kJ si l'énoncé le demande)."
+          ],
+          "example": {
+            "statement": "Un moteur de grue de puissance 5 kW doit effectuer un travail de 600 kJ. Calculer la durée du travail, en secondes puis en minutes.",
+            "steps": [
+              "Relever : $\\mathcal{P} = 5\\ \\text{kW}$ et $W = 600\\ \\text{kJ}$ ; on cherche la durée $t$.",
+              "Convertir : $\\mathcal{P} = 5000\\ \\text{W}$ et $W = 600000\\ \\text{J}$.",
+              "Écrire : $t = \\dfrac{W}{\\mathcal{P}}$.",
+              "Remplacer et calculer : $t = \\dfrac{600000}{5000} = 120\\ \\text{s}$, soit $120 \\div 60 = 2\\ \\text{min}$."
+            ]
+          },
+          "pitfall": "Ne pas croire que la machine la plus puissante a toujours effectué le plus grand travail. Contre-exemple : la machine A (2 kW) fonctionne 10 s et effectue $2000 \\times 10 = 20000\\ \\text{J}$ ; la machine B (1 kW) fonctionne 60 s et effectue $1000 \\times 60 = 60000\\ \\text{J}$. B est moins puissante mais a effectué trois fois plus de travail. Pour comparer des travaux, calcule $W = \\mathcal{P} \\times t$ ; ne compare pas seulement les puissances.",
+          "figure": "puissances-des-machines",
+          "exercise": {
+            "title": "Passer de la puissance au travail et à la durée",
+            "statement": "Dans cet exercice, tu utilises la puissance pour trouver un travail ou une durée, et tu compares des machines du port d'Abidjan, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "puissances-des-machines",
+            "questions": [
+              {
+                "content": "Un moteur de puissance 2 kW fonctionne pendant 15 s. Quel travail effectue-t-il, en joules ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $\\mathcal{P} = 2\\ \\text{kW}$ et $t = 15\\ \\text{s}$ ; on cherche $W$. Étape 2 — Convertir : $\\mathcal{P} = 2000\\ \\text{W}$. Étape 3 — Écrire : $W = \\mathcal{P} \\times t$. Étape 4 — Remplacer et calculer : $W = 2000 \\times 15 = 30000\\ \\text{J}$.",
+                "answers": [
+                  {
+                    "content": "30000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur de puissance 500 W doit effectuer un travail de 20000 J. Quelle durée lui faut-il, en secondes ?",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 1,
+                "explanation": "Étape 1 — Relever : $\\mathcal{P} = 500\\ \\text{W}$ et $W = 20000\\ \\text{J}$ ; on cherche $t$. Étape 2 — Convertir : tout est en W et en J. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{20000}{500} = 40\\ \\text{s}$.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur de grue de puissance 40 kW fonctionne pendant 5 min. Quel travail effectue-t-il, en kJ ?",
+                "question_type": "numeric",
+                "unit": "kJ",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $\\mathcal{P} = 40\\ \\text{kW}$ et $t = 5\\ \\text{min}$ ; on cherche $W$. Étape 2 — Convertir : $\\mathcal{P} = 40000\\ \\text{W}$ et $t = 5 \\times 60 = 300\\ \\text{s}$. Étape 3 — Écrire : $W = \\mathcal{P} \\times t$. Étape 4 — Remplacer et calculer : $W = 40000 \\times 300 = 12000000\\ \\text{J} = 12000\\ \\text{kJ}$.",
+                "answers": [
+                  {
+                    "content": "12000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un moteur de puissance 1,5 kW doit effectuer un travail de 90 kJ. Quelle durée lui faut-il, en secondes ?",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $\\mathcal{P} = 1{,}5\\ \\text{kW}$ et $W = 90\\ \\text{kJ}$ ; on cherche $t$. Étape 2 — Convertir : $\\mathcal{P} = 1500\\ \\text{W}$ et $W = 90000\\ \\text{J}$. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{90000}{1500} = 60\\ \\text{s}$.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La machine A a une puissance de 2 kW et fonctionne 10 s. La machine B a une puissance de 1 kW et fonctionne 60 s. Laquelle effectue le plus grand travail ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : A a $\\mathcal{P} = 2\\ \\text{kW}$ et $t = 10\\ \\text{s}$ ; B a $\\mathcal{P} = 1\\ \\text{kW}$ et $t = 60\\ \\text{s}$. Étape 2 — Convertir : 2000 W et 1000 W. Étape 3 — Écrire : $W = \\mathcal{P} \\times t$. Étape 4 — Remplacer et calculer : pour A, $2000 \\times 10 = 20000\\ \\text{J}$ ; pour B, $1000 \\times 60 = 60000\\ \\text{J}$. B effectue le plus grand travail malgré sa puissance plus faible : la puissance seule ne suffit pas, il faut aussi la durée.",
+                "answers": [
+                  {
+                    "content": "La machine A, car elle est plus puissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "La machine B : 60 kJ contre 20 kJ",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les deux, car la puissance est la même quand on la rapporte à une seconde",
+                    "correct": false
+                  },
+                  {
+                    "content": "La machine A : 20 kJ contre 6 kJ",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une machine de puissance 3 kW qui fonctionne 20 s effectue un travail de 6 kJ.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : $\\mathcal{P} = 3\\ \\text{kW}$ et $t = 20\\ \\text{s}$. Étape 2 — Convertir : $\\mathcal{P} = 3000\\ \\text{W}$. Étape 3 — Écrire : $W = \\mathcal{P} \\times t$. Étape 4 — Remplacer et calculer : $W = 3000 \\times 20 = 60000\\ \\text{J} = 60\\ \\text{kJ}$. L'affirmation est fausse : 6 kJ viendrait d'une conversion oubliée sur la puissance.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le diagramme de la figure donne la puissance de la grue B : 40 kW. Quelle durée lui faut-il pour effectuer un travail de 2400 kJ, en secondes ?",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : la barre de la grue B indique $\\mathcal{P} = 40\\ \\text{kW}$ et $W = 2400\\ \\text{kJ}$ ; on cherche $t$. Étape 2 — Convertir : $\\mathcal{P} = 40000\\ \\text{W}$ et $W = 2400000\\ \\text{J}$. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{2400000}{40000} = 60\\ \\text{s}$.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le diagramme de la figure donne les puissances du treuil (5 kW) et de la grue A (20 kW). Le treuil met 80 s pour effectuer un certain travail. Combien de secondes la grue A met-elle pour effectuer le même travail ?",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 2,
+                "explanation": "Étape 1 — Relever : $\\mathcal{P}_{\\text{treuil}} = 5\\ \\text{kW}$, $t = 80\\ \\text{s}$ ; on cherche d'abord le travail $W$, puis la durée de la grue A ($20\\ \\text{kW}$). Étape 2 — Convertir : 5000 W et 20000 W. Étape 3 — Écrire : $W = \\mathcal{P} \\times t$ puis $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $W = 5000 \\times 80 = 400000\\ \\text{J}$, puis $t = \\dfrac{400000}{20000} = 20\\ \\text{s}$. La grue A est 4 fois plus puissante : elle est 4 fois plus rapide.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le chariot élévateur du quai",
+          "statement": "Un chariot élévateur du port d'Abidjan soulève lentement une palette de 200 kg à 3 m de hauteur, puis roule avec elle sur le quai. On prend g = 10 N/kg.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un chariot élévateur du port soulève une palette de masse 200 kg (g = 10 N/kg). Quel est le poids de la palette, en newtons ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $m = 200\\ \\text{kg}$. Étape 2 — Calculer le poids : $P = m \\times g = 200 \\times 10 = 2000\\ \\text{N}$. C'est le poids qu'il faut compenser pour soulever lentement la palette. Le résultat n'est pas 200 : la masse en kg n'est pas un poids.",
+              "answers": [
+                {
+                  "content": "2000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot élévateur soulève lentement la palette de 200 kg (g = 10 N/kg) à 3 m de hauteur. La force exercée a la même intensité que le poids. Quel est le travail de cette force, en joules ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $m = 200\\ \\text{kg}$ et $h = 3\\ \\text{m}$. Étape 2 — Calculer le poids : $P = 200 \\times 10 = 2000\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 2000 \\times 3 = 6000\\ \\text{J}$.",
+              "answers": [
+                {
+                  "content": "6000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot effectue un travail de 6000 J en 4 s pour lever la palette. Quelle est sa puissance, en watts ?",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $W = 6000\\ \\text{J}$ et $t = 4\\ \\text{s}$. Étape 2 — Convertir : tout est en J et en s. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{6000}{4} = 1500\\ \\text{W}$, soit 1,5 kW.",
+              "answers": [
+                {
+                  "content": "1500",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot roule ensuite avec la palette sur le quai. Il exerce une force constante de 400 N, dans la direction et le sens de son déplacement, sur 25 m. Quel est le travail de cette force, en kJ ?",
+              "question_type": "numeric",
+              "unit": "kJ",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $F = 400\\ \\text{N}$ et $d = 25\\ \\text{m}$. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 400 \\times 25 = 10000\\ \\text{J}$. Étape 5 — Donner : $10000\\ \\text{J} = 10\\ \\text{kJ}$.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève calcule le travail du poids d'une palette de 200 kg qui descend de 3 m (g = 10 N/kg) et trouve 600 J. Quelle est son erreur ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Calculer le poids : $P = 200 \\times 10 = 2000\\ \\text{N}$. Étape 3 — Écrire : $W = P \\times h = 2000 \\times 3 = 6000\\ \\text{J}$. L'élève a calculé $200 \\times 3 = 600$ : il a utilisé la masse à la place du poids. Son résultat est 10 fois trop petit.",
+              "answers": [
+                {
+                  "content": "Il a multiplié la masse par la hauteur au lieu du poids par la hauteur",
+                  "correct": true
+                },
+                {
+                  "content": "Il a oublié de convertir les mètres en kilomètres",
+                  "correct": false
+                },
+                {
+                  "content": "Il a divisé le poids par la hauteur",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'a fait aucune erreur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un docker tient une caisse de 30 kg immobile à bout de bras pendant 1 min. Explique pourquoi le travail de la force qu'il exerce sur la caisse est nul, malgré sa fatigue.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Rappelle la formule du travail $W = F \\times d$",
+                "Constate que la caisse ne se déplace pas : $d = 0$",
+                "Conclut que $W = 0\\ \\text{J}$ et distingue fatigue et travail mécanique"
+              ],
+              "explanation": "Corrigé modèle : le travail d'une force constante vaut $W = F \\times d$. La caisse reste immobile, donc le point d'application de la force ne se déplace pas : $d = 0\\ \\text{m}$ et $W = F \\times 0 = 0\\ \\text{J}$. Le docker se fatigue, mais le travail mécanique de sa force est nul. Barème : formule (0,5 point), constat $d = 0$ (0,5 point), conclusion $W = 0$ (1 point).",
+              "answers": [],
+              "starter": "Le travail est nul parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Comparer les machines du port",
+          "statement": "Le diagramme de la figure donne le travail effectué en une minute (60 s) par quatre machines du port d'Abidjan : le treuil, le chariot élévateur, la grue A et la grue B. Tu en déduis leurs puissances et tu les compares.",
+          "exercise_type": "fixation",
+          "figure": "travaux-en-une-minute",
+          "questions": [
+            {
+              "content": "Le diagramme de la figure indique que la grue A effectue 1200 kJ en 60 s. Quelle est sa puissance, en kW ?",
+              "question_type": "numeric",
+              "unit": "kW",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $W = 1200\\ \\text{kJ}$ et $t = 60\\ \\text{s}$. Étape 2 — Convertir : $W = 1200000\\ \\text{J}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{1200000}{60} = 20000\\ \\text{W} = 20\\ \\text{kW}$.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le diagramme de la figure indique que la grue B effectue 2400 kJ en 60 s. Quelle est sa puissance, en kW ?",
+              "question_type": "numeric",
+              "unit": "kW",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $W = 2400\\ \\text{kJ}$ et $t = 60\\ \\text{s}$. Étape 2 — Convertir : $W = 2400000\\ \\text{J}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{2400000}{60} = 40000\\ \\text{W} = 40\\ \\text{kW}$.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot élévateur effectue 600 kJ en 60 s. Quelle est sa puissance ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : $W = 600\\ \\text{kJ}$ et $t = 60\\ \\text{s}$. Étape 2 — Convertir : $W = 600000\\ \\text{J}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{600000}{60} = 10000\\ \\text{W} = 10\\ \\text{kW}$. Les 10 W oublient la conversion des kJ, et les 36 kW viennent de $600 \\times 60$ au lieu de $600 \\div 60$.",
+              "answers": [
+                {
+                  "content": "10 kW",
+                  "correct": true
+                },
+                {
+                  "content": "10 W",
+                  "correct": false
+                },
+                {
+                  "content": "36 kW",
+                  "correct": false
+                },
+                {
+                  "content": "600 kW",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La grue B a une puissance de 40 kW. Quelle durée lui faut-il pour effectuer 1200 kJ, en secondes ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $\\mathcal{P} = 40\\ \\text{kW}$ et $W = 1200\\ \\text{kJ}$ ; on cherche $t$. Étape 2 — Convertir : $\\mathcal{P} = 40000\\ \\text{W}$ et $W = 1200000\\ \\text{J}$. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{1200000}{40000} = 30\\ \\text{s}$. La grue A, deux fois moins puissante, met 60 s pour ce même travail.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le treuil effectue 300 kJ en 60 s, donc sa puissance est de 5 kW. Quelle durée lui faut-il pour effectuer 1200 kJ, en minutes ?",
+              "question_type": "numeric",
+              "unit": "min",
+              "tolerance": 1,
+              "explanation": "Étape 1 — Relever : $\\mathcal{P} = 5\\ \\text{kW}$ et $W = 1200\\ \\text{kJ}$ ; on cherche $t$. Étape 2 — Convertir : $\\mathcal{P} = 5000\\ \\text{W}$ et $W = 1200000\\ \\text{J}$. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{1200000}{5000} = 240\\ \\text{s}$, soit $240 \\div 60 = 4\\ \\text{min}$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La grue B est plus puissante que la grue A : elle effectue donc toujours un plus grand travail que la grue A, quelle que soit la durée de fonctionnement.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : la grue B a 40 kW et la grue A 20 kW. Étape 3 — Écrire : $W = \\mathcal{P} \\times t$. Étape 4 — Remplacer et calculer : en 60 s, B effectue $40000 \\times 60 = 2400000\\ \\text{J}$ ; en 60 s, A effectue 1 200 000 J. Mais si B ne fonctionne que 10 s, elle effectue 400 000 J, moins que A qui fonctionne 60 s. Le travail dépend de la puissance et de la durée : l'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La grue du terminal à conteneurs",
+          "statement": "Sur le terminal à conteneurs du port d'Abidjan, une grue soulève lentement des conteneurs de masse 3 t à 12 m de hauteur. La force exercée par la grue a la même intensité que le poids du conteneur. On prend g = 10 N/kg.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une grue du terminal soulève lentement un conteneur de masse 3 t (g = 10 N/kg). Quel est le poids du conteneur, en newtons ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $m = 3\\ \\text{t}$. Étape 2 — Convertir et calculer le poids : $m = 3000\\ \\text{kg}$, donc $P = m \\times g = 3000 \\times 10 = 30000\\ \\text{N}$. Garder $m = 3$ donnerait 30 N, soit 1000 fois trop peu.",
+              "answers": [
+                {
+                  "content": "30000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La grue soulève lentement ce conteneur de 3 t (poids 30000 N) à 12 m de hauteur. Quel est le travail de la force exercée par la grue, en kJ ?",
+              "question_type": "numeric",
+              "unit": "kJ",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $P = 30000\\ \\text{N}$ et $h = 12\\ \\text{m}$. Étape 2 — Calculer : la force de la grue a la même intensité que le poids. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 30000 \\times 12 = 360000\\ \\text{J} = 360\\ \\text{kJ}$.",
+              "answers": [
+                {
+                  "content": "360",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le levage de 12 m dure 36 s et demande un travail de 360 kJ. Quelle est la puissance de la grue pendant le levage, en watts ?",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $W = 360\\ \\text{kJ}$ et $t = 36\\ \\text{s}$. Étape 2 — Convertir : $W = 360000\\ \\text{J}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{360000}{36} = 10000\\ \\text{W}$, soit 10 kW.",
+              "answers": [
+                {
+                  "content": "10000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un moteur de puissance 15 kW doit effectuer un travail de 360 kJ. Quelle durée lui faut-il, en secondes ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $\\mathcal{P} = 15\\ \\text{kW}$ et $W = 360\\ \\text{kJ}$ ; on cherche $t$. Étape 2 — Convertir : $\\mathcal{P} = 15000\\ \\text{W}$ et $W = 360000\\ \\text{J}$. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{360000}{15000} = 24\\ \\text{s}$.",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La grue de 15 kW soulève 20 conteneurs identiques de 3 t, chacun à 12 m de hauteur (g = 10 N/kg). Quelle durée totale faut-il, en minutes ?",
+              "question_type": "numeric",
+              "unit": "min",
+              "tolerance": 1,
+              "explanation": "Étape 1 — Relever : pour un conteneur, $W = P \\times h = 30000 \\times 12 = 360000\\ \\text{J}$ ; pour 20 conteneurs, $W = 20 \\times 360000 = 7200000\\ \\text{J}$ ; $\\mathcal{P} = 15\\ \\text{kW}$. Étape 2 — Convertir : $\\mathcal{P} = 15000\\ \\text{W}$. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{7200000}{15000} = 480\\ \\text{s}$, soit $480 \\div 60 = 8\\ \\text{min}$.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soulever le même conteneur de 6 m au lieu de 12 m demande la moitié du travail.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Relever : le poids $P = 30000\\ \\text{N}$ ne change pas, seule la hauteur change. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : pour 12 m, $W = 360000\\ \\text{J}$ ; pour 6 m, $W = 30000 \\times 6 = 180000\\ \\text{J}$. Le travail est proportionnel à la hauteur : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un docker affirme : « Ma grue de 15 kW est plus puissante que celle de 10 kW, donc elle a fait plus de travail. » Réponds avec un exemple chiffré : la grue de 15 kW fonctionne 10 s et la grue de 10 kW fonctionne 60 s.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Rappelle la relation $W = \\mathcal{P} \\times t$",
+                "Calcule le travail de la grue de 15 kW : 150 kJ",
+                "Calcule le travail de la grue de 10 kW : 600 kJ",
+                "Conclut que la puissance seule ne donne pas le travail"
+              ],
+              "explanation": "Corrigé modèle : le travail vaut $W = \\mathcal{P} \\times t$. Grue de 15 kW : $W = 15000 \\times 10 = 150000\\ \\text{J} = 150\\ \\text{kJ}$. Grue de 10 kW : $W = 10000 \\times 60 = 600000\\ \\text{J} = 600\\ \\text{kJ}$. La grue la moins puissante a effectué le plus grand travail, car elle a fonctionné plus longtemps : le docker a tort, il faut aussi tenir compte de la durée. Barème : relation (0,5 point), travail de la grue de 15 kW (0,5 point), travail de la grue de 10 kW (1 point), conclusion (1 point).",
+              "answers": [],
+              "starter": "Le travail dépend de la puissance et de…"
+            }
+          ]
+        },
+        {
+          "title": "Le déchargement d'un cargo",
+          "statement": "Un cargo arrive au port d'Abidjan avec 40 conteneurs de masse 2 t chacun. Une grue les soulève lentement un par un à 10 m de hauteur pour les poser sur un camion. Sur le quai, un docker pousse aussi un chariot. On prend g = 10 N/kg.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un cargo décharge des conteneurs de masse 2 t chacun, soulevés lentement par une grue (g = 10 N/kg). Quel est le poids d'un conteneur, en newtons ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $m = 2\\ \\text{t}$. Étape 2 — Convertir et calculer le poids : $m = 2000\\ \\text{kg}$, donc $P = 2000 \\times 10 = 20000\\ \\text{N}$.",
+              "answers": [
+                {
+                  "content": "20000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La grue soulève un conteneur de 2 t (poids 20000 N) à 10 m de hauteur. Quel est le travail de la force exercée par la grue, en kJ ?",
+              "question_type": "numeric",
+              "unit": "kJ",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $P = 20000\\ \\text{N}$ et $h = 10\\ \\text{m}$. Étape 2 — Calculer : la force de la grue a la même intensité que le poids. Étape 3 — Écrire : $W = P \\times h$. Étape 4 — Remplacer et calculer : $W = 20000 \\times 10 = 200000\\ \\text{J} = 200\\ \\text{kJ}$.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La grue décharge 40 conteneurs de 2 t, chacun soulevé de 10 m. Quel est le travail total, en kJ ?",
+              "question_type": "numeric",
+              "unit": "kJ",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : un conteneur demande $W = 200\\ \\text{kJ}$ ; il y en a 40. Étape 2 — Convertir : tout est en kJ. Étape 3 — Écrire : $W_{\\text{total}} = 40 \\times W$. Étape 4 — Remplacer et calculer : $W_{\\text{total}} = 40 \\times 200 = 8000\\ \\text{kJ}$, soit 8 000 000 J.",
+              "answers": [
+                {
+                  "content": "8000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le moteur de la grue a une puissance de 50 kW. Quelle durée lui faut-il pour effectuer un travail de 8000 kJ, en secondes ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $\\mathcal{P} = 50\\ \\text{kW}$ et $W = 8000\\ \\text{kJ}$ ; on cherche $t$. Étape 2 — Convertir : $\\mathcal{P} = 50000\\ \\text{W}$ et $W = 8000000\\ \\text{J}$. Étape 3 — Écrire : $t = \\dfrac{W}{\\mathcal{P}}$. Étape 4 — Remplacer et calculer : $t = \\dfrac{8000000}{50000} = 160\\ \\text{s}$.",
+              "answers": [
+                {
+                  "content": "160",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En réalité, la grue effectue ce travail de 8000 kJ en 200 s. Quelle est sa puissance moyenne, en kW ?",
+              "question_type": "numeric",
+              "unit": "kW",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $W = 8000\\ \\text{kJ}$ et $t = 200\\ \\text{s}$. Étape 2 — Convertir : $W = 8000000\\ \\text{J}$. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{8000000}{200} = 40000\\ \\text{W} = 40\\ \\text{kW}$. Elle est inférieure aux 50 kW du moteur.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un docker pousse un chariot avec une force constante de 320 N, dans la direction et le sens de son déplacement, sur 40 m. Quel est le travail de cette force, en joules ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $F = 320\\ \\text{N}$ et $d = 40\\ \\text{m}$. Étape 2 — Convertir : rien à convertir. Étape 3 — Écrire : $W = F \\times d$. Étape 4 — Remplacer et calculer : $W = 320 \\times 40 = 12800\\ \\text{J}$.",
+              "answers": [
+                {
+                  "content": "12800",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le docker effectue ce travail de 12800 J en 80 s. Quelle est sa puissance, en watts ?",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $W = 12800\\ \\text{J}$ et $t = 80\\ \\text{s}$. Étape 2 — Convertir : tout est en J et en s. Étape 3 — Écrire : $\\mathcal{P} = \\dfrac{W}{t}$. Étape 4 — Remplacer et calculer : $\\mathcal{P} = \\dfrac{12800}{80} = 160\\ \\text{W}$.",
+              "answers": [
+                {
+                  "content": "160",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La grue a une puissance de 40 kW et le docker de 160 W. Calcule combien de fois la puissance de la grue est plus grande que celle du docker, puis explique ce que cela signifie pour deux travaux de même durée.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Convertit 40 kW en 40000 W",
+                "Calcule le rapport $\\dfrac{40000}{160} = 250$",
+                "Explique que, pendant la même durée, la grue effectue un travail 250 fois plus grand"
+              ],
+              "explanation": "Corrigé modèle : $40\\ \\text{kW} = 40000\\ \\text{W}$. Le rapport est $\\dfrac{40000}{160} = 250$ : la grue est 250 fois plus puissante que le docker. Comme $W = \\mathcal{P} \\times t$, pendant une même durée la grue effectue un travail 250 fois plus grand que celui du docker. Barème : conversion (0,5 point), rapport 250 (1 point), explication avec la durée (1,5 point).",
+              "answers": [],
+              "starter": "40 kW = 40000 W, donc…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,1274 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les alcanes",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Physique-Chimie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "alcane-brute",
+          "kind": "molecule",
+          "description": "Le module affiche l'alcane à 3 atomes de carbone, le propane, avec son nom et sa formule brute C3H8. Le curseur règle le nombre d'atomes de carbone de 1 à 10 : le nom (méthane, éthane, propane… décane) et la formule brute CnH2n+2 changent avec lui.",
+          "params": {
+            "mode": "alkane",
+            "carbons": 3,
+            "display": "raw"
+          },
+          "controls": [
+            {
+              "param": "carbons",
+              "min": 1,
+              "max": 10,
+              "step": 1,
+              "label": "Nombre d'atomes de carbone"
+            }
+          ]
+        },
+        {
+          "key": "alcane-developpee",
+          "kind": "molecule",
+          "description": "Le module dessine la formule développée de l'alcane à 4 atomes de carbone, le butane : les atomes de carbone sont alignés en chaîne, chacun relié à ses voisins et à ses atomes d'hydrogène. Le nom et la formule brute C4H10 sont écrits. Le curseur règle le nombre d'atomes de carbone de 1 à 10.",
+          "params": {
+            "mode": "alkane",
+            "carbons": 4,
+            "display": "developed"
+          },
+          "controls": [
+            {
+              "param": "carbons",
+              "min": 1,
+              "max": 10,
+              "step": 1,
+              "label": "Nombre d'atomes de carbone"
+            }
+          ]
+        },
+        {
+          "key": "alcane-semi-developpee",
+          "kind": "molecule",
+          "description": "Le module écrit la formule semi-développée de l'alcane à 4 atomes de carbone, le butane : CH3 aux deux extrémités et CH2 au milieu de la chaîne. Le nom et la formule brute C4H10 sont affichés. Le curseur règle le nombre d'atomes de carbone de 1 à 10.",
+          "params": {
+            "mode": "alkane",
+            "carbons": 4,
+            "display": "semi_developed"
+          },
+          "controls": [
+            {
+              "param": "carbons",
+              "min": 1,
+              "max": 10,
+              "step": 1,
+              "label": "Nombre d'atomes de carbone"
+            }
+          ]
+        },
+        {
+          "key": "molecule-eau",
+          "kind": "molecule",
+          "description": "La molécule d'eau H2O est dessinée avec un atome d'oxygène au centre, relié par une liaison simple à deux atomes d'hydrogène placés en dessous, de part et d'autre. L'eau est l'un des deux produits de la combustion complète d'un alcane.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "o",
+                "element": "O",
+                "x": 6,
+                "y": 5
+              },
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 4,
+                "y": 7
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 8,
+                "y": 7
+              }
+            ],
+            "bonds": [
+              [
+                "o",
+                "h1",
+                1
+              ],
+              [
+                "o",
+                "h2",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "molecule-co2",
+          "kind": "molecule",
+          "description": "La molécule de dioxyde de carbone CO2 est dessinée en ligne droite : un atome de carbone au centre, relié à chacun de ses deux voisins, deux atomes d'oxygène, par une double liaison. C'est l'un des deux produits de la combustion complète d'un alcane.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "o1",
+                "element": "O",
+                "x": 3,
+                "y": 6
+              },
+              {
+                "id": "c",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "o2",
+                "element": "O",
+                "x": 9,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "o1",
+                "c",
+                2
+              ],
+              [
+                "c",
+                "o2",
+                2
+              ]
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un alcane et écrire sa formule brute",
+          "remember": "Un **hydrocarbure** est un composé qui ne contient que des atomes de **carbone (C)** et d'**hydrogène (H)**. Les **alcanes** sont des hydrocarbures dont tous les atomes de carbone sont reliés par des liaisons simples. Leur formule brute générale est $\\mathrm{C_nH_{2n+2}}$, où $n$ est le nombre d'atomes de carbone. Les dix premiers : méthane ($n=1$, $\\mathrm{CH_4}$), éthane ($n=2$, $\\mathrm{C_2H_6}$), propane ($n=3$, $\\mathrm{C_3H_8}$), butane ($n=4$, $\\mathrm{C_4H_{10}}$), pentane ($n=5$, $\\mathrm{C_5H_{12}}$), hexane ($n=6$), heptane ($n=7$), octane ($n=8$), nonane ($n=9$), décane ($n=10$). Les alcanes viennent du **pétrole** et du **gaz naturel** (surtout du méthane). Le butane des bouteilles de gaz domestiques est un alcane.",
+          "method": [
+            "Repérer le nombre $n$ d'atomes de carbone de l'alcane.",
+            "Calculer le nombre d'atomes d'hydrogène avec $2n+2$.",
+            "Écrire la formule brute $\\mathrm{C_nH_{2n+2}}$ avec les nombres trouvés.",
+            "Donner le nom de l'alcane à l'aide de $n$ (méth, éth, prop, but, pent, hex, hept, oct, non, déc, puis -ane)."
+          ],
+          "example": {
+            "statement": "Donner la formule brute et le nom de l'alcane qui a 6 atomes de carbone.",
+            "steps": [
+              "Repérer : l'alcane a 6 atomes de carbone, donc $n=6$.",
+              "Calculer : le nombre d'atomes d'hydrogène est $2 \\times 6 + 2 = 14$.",
+              "Écrire : la formule brute est $\\mathrm{C_6H_{14}}$.",
+              "Donner le nom : $n=6$ se dit « hex » et on ajoute -ane : c'est l'hexane."
+            ]
+          },
+          "pitfall": "Ne pas oublier le « +2 » dans $2n+2$. Contre-exemple : pour le butane ($n=4$), $2n = 8$ donnerait $\\mathrm{C_4H_8}$, mais le butane est $\\mathrm{C_4H_{10}}$ car $2 \\times 4 + 2 = 10$. $\\mathrm{C_4H_8}$ n'est pas un alcane : il a deux atomes d'hydrogène de moins. Vérifie toujours : nombre d'hydrogène $= 2n + 2$.",
+          "figure": "alcane-brute",
+          "exercise": {
+            "title": "Formule brute et nom des alcanes",
+            "statement": "Dans cet exercice, tu reconnais des alcanes, tu écris leur formule brute et tu donnes leur nom. Tu peux déplacer le curseur du module pour voir le nom et la formule brute de chaque alcane. Utilise la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "alcane-brute",
+            "questions": [
+              {
+                "content": "Quelle est la formule brute générale des alcanes, où $n$ est le nombre d'atomes de carbone ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on note $n$ le nombre d'atomes de carbone. Étape 2 — Calculer : le nombre d'hydrogène est $2n+2$. Étape 3 — Écrire : la formule générale est $\\mathrm{C_nH_{2n+2}}$. La proposition $\\mathrm{C_nH_{2n}}$ oublie le « +2 » : c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C_nH_{2n+2}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_nH_{2n}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_{2n}H_{n+2}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_nH_{n+2}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un hydrocarbure est un composé qui ne contient que des atomes de carbone et des atomes d'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on regarde les atomes présents dans le composé. Un hydrocarbure contient seulement du carbone (C) et de l'hydrogène (H). Étape 4 — Donner le nom : tous les alcanes, comme le méthane ou le butane, sont des hydrocarbures. La réponse est « hydrogène ». L'oxygène n'est présent que dans le dioxygène qui sert à brûler l'hydrocarbure.",
+                "answers": [
+                  {
+                    "content": "hydrogène",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un alcane a 7 atomes de carbone. Combien d'atomes d'hydrogène contient une molécule de cet alcane ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : $n = 7$. Étape 2 — Calculer : $2n + 2 = 2 \\times 7 + 2 = 16$. Étape 3 — Écrire : la formule brute est $\\mathrm{C_7H_{16}}$ (c'est l'heptane). Répondre 14 vient de l'oubli du « +2 ».",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "atomes"
+              },
+              {
+                "content": "Relie chaque alcane à sa formule brute.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer $n$ dans chaque nom : méthane $n=1$, propane $n=3$, pentane $n=5$, octane $n=8$. Étape 2 — Calculer $2n+2$ : 4, 8, 12 et 18. Étape 3 — Écrire les formules : $\\mathrm{CH_4}$, $\\mathrm{C_3H_8}$, $\\mathrm{C_5H_{12}}$, $\\mathrm{C_8H_{18}}$. Étape 4 — Le nom donne $n$ : méth = 1, prop = 3, pent = 5, oct = 8.",
+                "answers": [
+                  {
+                    "content": "Méthane",
+                    "match": "$\\mathrm{CH_4}$"
+                  },
+                  {
+                    "content": "Propane",
+                    "match": "$\\mathrm{C_3H_8}$"
+                  },
+                  {
+                    "content": "Pentane",
+                    "match": "$\\mathrm{C_5H_{12}}$"
+                  },
+                  {
+                    "content": "Octane",
+                    "match": "$\\mathrm{C_8H_{18}}$"
+                  }
+                ]
+              },
+              {
+                "content": "L'alcane de formule brute $\\mathrm{C_9H_{20}}$ s'appelle le ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : dans $\\mathrm{C_9H_{20}}$, il y a 9 atomes de carbone, donc $n=9$. Étape 2 — Calculer : $2 \\times 9 + 2 = 20$, la formule est bien celle d'un alcane. Étape 4 — Donner le nom : $n=9$ se dit « non », donc nonane. L'octane a $n=8$ ($\\mathrm{C_8H_{18}}$) et le décane $n=10$ ($\\mathrm{C_{10}H_{22}}$).",
+                "answers": [
+                  {
+                    "content": "nonane",
+                    "correct": true
+                  },
+                  {
+                    "content": "octane",
+                    "correct": false
+                  },
+                  {
+                    "content": "décane",
+                    "correct": false
+                  },
+                  {
+                    "content": "heptane",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces formules brutes, lesquelles sont celles d'alcanes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer $n$ pour chaque formule. Étape 2 — Calculer $2n+2$ et comparer au nombre d'hydrogène. $\\mathrm{C_4H_{10}}$ : $n=4$, $2n+2=10$ (alcane). $\\mathrm{C_6H_{14}}$ : $n=6$, $2n+2=14$ (alcane). $\\mathrm{C_4H_8}$ : $2n+2=10$, pas 8. $\\mathrm{C_5H_{10}}$ : $2n+2=12$, pas 10. $\\mathrm{C_3H_6}$ : $2n+2=8$, pas 6. Ces trois dernières ont deux atomes d'hydrogène de moins : c'est le piège du « +2 » oublié.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C_4H_{10}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_6H_{14}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{C_4H_8}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_5H_{10}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_3H_6}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le butane des bouteilles de gaz domestiques est un alcane, de formule brute $\\mathrm{C_4H_{10}}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le butane a 4 atomes de carbone, $n=4$. Étape 2 — Calculer : $2 \\times 4 + 2 = 10$. Étape 3 — Écrire : $\\mathrm{C_4H_{10}}$ respecte la formule $\\mathrm{C_nH_{2n+2}}$. Étape 4 — Donner le nom : $n=4$ se dit « but », donc butane. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire les formules développée et semi-développée",
+          "remember": "Dans un alcane à chaîne linéaire, les atomes de carbone forment une chaîne sans ramification. Chaque atome de carbone fait **4 liaisons** et chaque atome d'hydrogène en fait **1**. La **formule développée** montre tous les atomes et toutes les liaisons. La **formule semi-développée** ne montre pas les liaisons C–H : elle regroupe les hydrogènes autour de chaque carbone. Aux deux extrémités de la chaîne, le carbone porte 3 hydrogènes ($\\mathrm{CH_3}$) ; dans la chaîne, chaque carbone porte 2 hydrogènes ($\\mathrm{CH_2}$). Pour le méthane, le seul carbone porte 4 hydrogènes ($\\mathrm{CH_4}$).",
+          "method": [
+            "Déterminer la formule brute de l'alcane avec $\\mathrm{C_nH_{2n+2}}$.",
+            "Aligner les $n$ atomes de carbone en chaîne, reliés par des liaisons simples.",
+            "Compléter avec les atomes d'hydrogène pour que chaque carbone fasse 4 liaisons.",
+            "Regrouper les hydrogènes autour de chaque carbone pour écrire la formule semi-développée, puis vérifier le total d'hydrogène."
+          ],
+          "example": {
+            "statement": "Écrire les formules développée et semi-développée du butane (4 atomes de carbone).",
+            "steps": [
+              "Déterminer : $n=4$ donc $2 \\times 4 + 2 = 10$ ; la formule brute est $\\mathrm{C_4H_{10}}$.",
+              "Aligner : on place 4 atomes de carbone en ligne : C–C–C–C.",
+              "Compléter : chaque carbone d'extrémité reçoit 3 hydrogènes, chaque carbone du milieu en reçoit 2.",
+              "Regrouper : $\\mathrm{CH_3-CH_2-CH_2-CH_3}$. Vérifier : $3+2+2+3 = 10$ hydrogènes, comme dans $\\mathrm{C_4H_{10}}$."
+            ]
+          },
+          "pitfall": "Ne pas écrire $\\mathrm{CH_2}$ au bout de la chaîne ni $\\mathrm{CH_3}$ au milieu. Contre-exemple : $\\mathrm{CH_2-CH_2-CH_3}$ pour le propane. Le premier carbone n'a qu'un voisin carbone et 2 hydrogènes : il fait seulement 3 liaisons, il lui en manque une. Un carbone d'extrémité a 1 voisin carbone + 3 hydrogènes = 4 liaisons. Compte toujours 4 liaisons par carbone et vérifie le total d'hydrogène avec $2n+2$.",
+          "figure": "alcane-semi-developpee",
+          "exercise": {
+            "title": "Formules développée et semi-développée",
+            "statement": "Dans cet exercice, tu écris des formules développées et semi-développées d'alcanes à chaîne linéaire. Le module dessine la formule développée d'un alcane : règle le curseur pour vérifier tes réponses. Utilise la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "alcane-developpee",
+            "questions": [
+              {
+                "content": "Quelle est la formule semi-développée du propane ($\\mathrm{C_3H_8}$) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer : $n=3$, $2n+2=8$, la formule brute est $\\mathrm{C_3H_8}$. Étape 2 — Aligner : C–C–C. Étape 3 — Compléter : 3 hydrogènes aux extrémités, 2 au milieu. Étape 4 — Regrouper : $\\mathrm{CH_3-CH_2-CH_3}$, soit $3+2+3 = 8$ hydrogènes. La proposition avec $\\mathrm{CH_3}$ au milieu donnerait 5 liaisons au carbone du milieu.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_3-CH_3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_2-CH_2-CH_2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_2-CH_3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un alcane, combien de liaisons fait chaque atome de carbone ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Compléter : on ajoute des atomes d'hydrogène jusqu'à ce que chaque carbone fasse 4 liaisons. Cette règle sert à vérifier chaque carbone de la chaîne, à l'étape 2 comme à l'étape 3. La réponse est 4.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "liaisons"
+              },
+              {
+                "content": "Dans la formule semi-développée du butane $\\mathrm{CH_3-CH_2-CH_2-CH_3}$, chaque carbone du milieu porte ___ atomes d'hydrogène.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Aligner : 4 carbones en chaîne, deux sont à l'extrémité et deux sont au milieu. Étape 3 — Compléter : un carbone du milieu a 2 voisins carbone, donc il lui faut $4-2 = 2$ hydrogènes. Étape 4 — Regrouper : on écrit $\\mathrm{CH_2}$. La réponse est 2. Les carbones d'extrémité, eux, portent 3 hydrogènes ($\\mathrm{CH_3}$).",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour écrire la formule semi-développée de l'éthane.",
+                "question_type": "ordering",
+                "explanation": "On suit la méthode dans l'ordre. Étape 1 — Déterminer la formule brute : $n=2$, donc $\\mathrm{C_2H_6}$. Étape 2 — Aligner les 2 carbones. Étape 3 — Compléter : chaque carbone a 1 voisin carbone, donc 3 hydrogènes. Étape 4 — Regrouper : $\\mathrm{CH_3-CH_3}$, soit $3+3 = 6$ hydrogènes.",
+                "answers": [
+                  {
+                    "content": "Déterminer la formule brute : $n=2$, donc $\\mathrm{C_2H_6}$."
+                  },
+                  {
+                    "content": "Aligner les 2 atomes de carbone, reliés par une liaison simple."
+                  },
+                  {
+                    "content": "Compléter : chaque carbone reçoit 3 atomes d'hydrogène."
+                  },
+                  {
+                    "content": "Regrouper : écrire $\\mathrm{CH_3-CH_3}$ et vérifier 6 hydrogènes."
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux écritures correctes du butane ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Déterminer : le butane a $n=4$, donc $\\mathrm{C_4H_{10}}$ (formule brute). Étapes 2 à 4 — Aligner, compléter, regrouper : $\\mathrm{CH_3-CH_2-CH_2-CH_3}$ (semi-développée). $\\mathrm{CH_3-CH_2-CH_3}$ est le propane ($n=3$). $\\mathrm{C_4H_8}$ a deux hydrogènes de moins : ce n'est pas un alcane. $\\mathrm{CH_3-CH_2-CH_2-CH_2-CH_3}$ a 5 carbones : c'est le pentane.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{C_4H_{10}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_2-CH_3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{C_4H_8}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_3-CH_2-CH_2-CH_2-CH_3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le pentane (5 atomes de carbone), les trois carbones du milieu portent chacun 2 atomes d'hydrogène. Combien d'atomes d'hydrogène portent-ils en tout ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Déterminer : $n=5$, la formule brute est $\\mathrm{C_5H_{12}}$. Étape 2 — Aligner : 5 carbones, dont 3 au milieu. Étape 3 — Compléter : chaque carbone du milieu a 2 hydrogènes. Étape 4 — Regrouper et vérifier : les trois du milieu portent $3 \\times 2 = 6$ hydrogènes, et les deux extrémités $2 \\times 3 = 6$, soit $12$ au total, comme dans $\\mathrm{C_5H_{12}}$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "atomes"
+              },
+              {
+                "content": "Un élève écrit $\\mathrm{CH_2-CH_2-CH_3}$ pour le propane. Quelle est son erreur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Compléter : chaque carbone doit faire 4 liaisons. Le premier carbone de $\\mathrm{CH_2-CH_2-CH_3}$ a 1 voisin carbone et 2 hydrogènes : 3 liaisons seulement. Étape 4 — Regrouper : un carbone d'extrémité s'écrit $\\mathrm{CH_3}$ (1 voisin carbone + 3 hydrogènes). Le bon résultat est $\\mathrm{CH_3-CH_2-CH_3}$. Le total d'hydrogène ($2+2+3 = 7$) ne vérifie pas non plus $2n+2 = 8$.",
+                "answers": [
+                  {
+                    "content": "Le carbone d'extrémité ne fait que 3 liaisons : il doit être CH3",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a écrit trop de carbones",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a oublié l'oxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a aucune erreur",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La combustion complète d'un alcane et ses tests",
+          "remember": "La **combustion** d'un alcane est une réaction chimique avec le **dioxygène** ($\\mathrm{O_2}$) de l'air ; elle dégage de la chaleur. Elle est **complète** quand le dioxygène est en quantité suffisante. Les produits sont alors toujours : le **dioxyde de carbone** ($\\mathrm{CO_2}$) et l'**eau** ($\\mathrm{H_2O}$). Bilan en mots : alcane + dioxygène → dioxyde de carbone + eau. **Tests** : le dioxyde de carbone **trouble l'eau de chaux** (elle devient laiteuse) ; l'eau fait passer le **sulfate de cuivre anhydre** du blanc au bleu. Si le dioxygène manque, la combustion est **incomplète** : elle peut produire du **monoxyde de carbone** (CO), gaz toxique sans odeur, et du carbone (suie). On aère donc toujours une pièce où brûle du gaz.",
+          "method": [
+            "Réaliser la combustion de l'alcane dans l'air et recueillir les gaz produits.",
+            "Tester la présence d'eau avec du sulfate de cuivre anhydre blanc.",
+            "Tester la présence de dioxyde de carbone en faisant barboter les gaz dans l'eau de chaux.",
+            "Conclure en écrivant le bilan de la réaction : alcane + dioxygène → dioxyde de carbone + eau."
+          ],
+          "example": {
+            "statement": "On brûle du butane d'un briquet à gaz sous un entonnoir. Les gaz recueillis passent d'abord sur du sulfate de cuivre anhydre blanc, qui devient bleu, puis dans l'eau de chaux, qui devient laiteuse. Quels sont les produits de la combustion ?",
+            "steps": [
+              "Réaliser : le butane brûle dans le dioxygène de l'air et les gaz sont recueillis.",
+              "Tester l'eau : le sulfate de cuivre anhydre blanc devient bleu, donc il y a de l'eau.",
+              "Tester le dioxyde de carbone : l'eau de chaux se trouble, donc il y a du dioxyde de carbone.",
+              "Conclure : butane + dioxygène → dioxyde de carbone + eau."
+            ]
+          },
+          "pitfall": "Ne pas confondre le dioxyde de carbone $\\mathrm{CO_2}$ et le monoxyde de carbone CO. $\\mathrm{CO_2}$ est le produit de la combustion complète ; il trouble l'eau de chaux. CO apparaît quand le dioxygène manque (combustion incomplète) ; il est très toxique et sans odeur. Contre-exemple : un réchaud allumé dans une pièce fermée manque de dioxygène et peut produire du CO, que personne ne sent. Aère toujours.",
+          "figure": "molecule-eau",
+          "exercise": {
+            "title": "La combustion complète et ses tests",
+            "statement": "Dans cet exercice, tu identifies les produits de la combustion complète d'un alcane et les tests qui les mettent en évidence. Le module montre la molécule de dioxyde de carbone. Utilise la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "molecule-co2",
+            "questions": [
+              {
+                "content": "Quels sont les deux produits de la combustion complète d'un alcane dans le dioxygène ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Réaliser la combustion de l'alcane dans l'air. Étapes 2 et 3 — Tester : le sulfate de cuivre anhydre met en évidence l'eau, l'eau de chaux met en évidence le dioxyde de carbone. Étape 4 — Conclure : alcane + dioxygène → dioxyde de carbone + eau. Le monoxyde de carbone n'apparaît qu'en combustion incomplète, et le dihydrogène n'est pas formé.",
+                "answers": [
+                  {
+                    "content": "Le dioxyde de carbone et l'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le monoxyde de carbone et le dihydrogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dioxygène et l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le carbone et le dioxygène",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque test à son résultat.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Tester l'eau : le sulfate de cuivre anhydre blanc devient bleu. Étape 3 — Tester le dioxyde de carbone : l'eau de chaux se trouble. Étape 4 — Conclure : ces deux résultats donnent les deux produits de la combustion complète. Le monoxyde de carbone, produit seulement en combustion incomplète, ne se détecte pas avec ces deux tests.",
+                "answers": [
+                  {
+                    "content": "Sulfate de cuivre anhydre qui devient bleu",
+                    "match": "Il y a de l'eau"
+                  },
+                  {
+                    "content": "Eau de chaux qui devient laiteuse",
+                    "match": "Il y a du dioxyde de carbone"
+                  },
+                  {
+                    "content": "Combustion complète",
+                    "match": "Produit CO2 et H2O"
+                  },
+                  {
+                    "content": "Manque de dioxygène",
+                    "match": "Peut produire du monoxyde de carbone"
+                  }
+                ]
+              },
+              {
+                "content": "Le sulfate de cuivre anhydre, blanc au départ, devient ___ en présence d'eau.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Tester la présence d'eau : on met le sulfate de cuivre anhydre blanc au contact des gaz de la combustion. S'il devient bleu, il y a de l'eau. La réponse est « bleu ». Ne confonds pas avec l'eau de chaux, qui devient laiteuse en présence de dioxyde de carbone.",
+                "answers": [
+                  {
+                    "content": "bleu",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'expérience de la combustion du butane.",
+                "question_type": "ordering",
+                "explanation": "On suit la méthode dans l'ordre. Étape 1 — Réaliser la combustion et recueillir les gaz. Étape 2 — Tester l'eau avec le sulfate de cuivre anhydre. Étape 3 — Tester le dioxyde de carbone avec l'eau de chaux. Étape 4 — Conclure par le bilan en mots.",
+                "answers": [
+                  {
+                    "content": "Brûler le butane dans l'air et recueillir les gaz."
+                  },
+                  {
+                    "content": "Tester l'eau avec le sulfate de cuivre anhydre blanc."
+                  },
+                  {
+                    "content": "Tester le dioxyde de carbone avec l'eau de chaux."
+                  },
+                  {
+                    "content": "Conclure : butane + dioxygène → dioxyde de carbone + eau."
+                  }
+                ]
+              },
+              {
+                "content": "Le gaz toxique, sans odeur, produit par une combustion incomplète est le dioxyde de carbone $\\mathrm{CO_2}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : la combustion complète donne le dioxyde de carbone $\\mathrm{CO_2}$ ; la combustion incomplète peut donner du monoxyde de carbone CO. C'est le monoxyde de carbone qui est très toxique et sans odeur. L'affirmation confond les deux gaz : c'est le piège de la fiche. Elle est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le module montre la molécule de dioxyde de carbone. Quels atomes la composent ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Tester le dioxyde de carbone : sa formule $\\mathrm{CO_2}$ se lit un atome de carbone (C) et deux atomes d'oxygène (O), reliés par deux doubles liaisons. Étape 4 — Conclure : le carbone du butane se retrouve dans $\\mathrm{CO_2}$. Le dioxyde de carbone ne contient pas d'hydrogène : celui-ci se retrouve dans l'eau $\\mathrm{H_2O}$.",
+                "answers": [
+                  {
+                    "content": "Un atome de carbone et deux atomes d'oxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Deux atomes de carbone et un atome d'oxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un atome de carbone et deux atomes d'hydrogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Deux atomes d'hydrogène et un atome d'oxygène",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi faut-il aérer une pièce où brûle un réchaud à gaz ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Réaliser la combustion : elle consomme le dioxygène de la pièce. Si l'air n'est pas renouvelé, le dioxygène manque et la combustion devient incomplète. Étape 4 — Conclure : elle peut produire du monoxyde de carbone, gaz toxique sans odeur. Aérer apporte du dioxygène. Le gaz butane n'est pas dangereux « parce qu'il est un alcane » : le danger vient du manque d'air.",
+                "answers": [
+                  {
+                    "content": "Pour éviter une combustion incomplète qui produit du monoxyde de carbone",
+                    "correct": true
+                  },
+                  {
+                    "content": "Pour que le gaz produise plus d'eau de chaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que le dioxygène est un gaz toxique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour refroidir la bouteille de gaz uniquement",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Équilibrer l'équation-bilan de la combustion d'un alcane",
+          "remember": "L'**équation-bilan** écrit la réaction avec les formules : alcane + $\\mathrm{O_2}$ → $\\mathrm{CO_2}$ + $\\mathrm{H_2O}$. Au cours d'une réaction, les atomes **se conservent** : il y a autant d'atomes de chaque élément avant (à gauche de la flèche) qu'après (à droite). On **équilibre** avec des **coefficients** placés devant les formules, jamais en changeant les indices. Exemples : $\\mathrm{CH_4 + 2\\,O_2 \\rightarrow CO_2 + 2\\,H_2O}$ et $\\mathrm{2\\,C_4H_{10} + 13\\,O_2 \\rightarrow 8\\,CO_2 + 10\\,H_2O}$. Un coefficient 1 ne s'écrit pas.",
+          "method": [
+            "Écrire l'équation non équilibrée avec les formules de l'alcane, du dioxygène, du dioxyde de carbone et de l'eau.",
+            "Équilibrer les atomes de carbone avec le coefficient de $\\mathrm{CO_2}$.",
+            "Équilibrer les atomes d'hydrogène avec le coefficient de $\\mathrm{H_2O}$.",
+            "Équilibrer les atomes d'oxygène avec le coefficient de $\\mathrm{O_2}$ ; si ce coefficient est fractionnaire, tout multiplier par 2.",
+            "Vérifier en comptant les atomes de chaque élément à gauche et à droite."
+          ],
+          "example": {
+            "statement": "Équilibrer la combustion complète du propane $\\mathrm{C_3H_8}$.",
+            "steps": [
+              "Écrire : $\\mathrm{C_3H_8 + O_2 \\rightarrow CO_2 + H_2O}$.",
+              "Équilibrer le carbone : 3 atomes de C à gauche, donc $3\\,\\mathrm{CO_2}$.",
+              "Équilibrer l'hydrogène : 8 atomes de H à gauche, donc $4\\,\\mathrm{H_2O}$ (car $4 \\times 2 = 8$).",
+              "Équilibrer l'oxygène : à droite $3 \\times 2 + 4 = 10$ atomes de O, donc $5\\,\\mathrm{O_2}$ ; le coefficient est entier, on garde.",
+              "Vérifier : à gauche 3 C, 8 H, 10 O ; à droite 3 C, 8 H, $6+4 = 10$ O. Équation : $\\mathrm{C_3H_8 + 5\\,O_2 \\rightarrow 3\\,CO_2 + 4\\,H_2O}$."
+            ]
+          },
+          "pitfall": "Ne jamais modifier un indice pour équilibrer. Contre-exemple : écrire $\\mathrm{H_4O}$ à la place de $2\\,\\mathrm{H_2O}$ pour avoir 4 hydrogènes. $\\mathrm{H_4O}$ n'existe pas : ce n'est plus de l'eau. Seuls les **coefficients** (devant la formule) changent le nombre de molécules ; les **indices** (en bas, dans la formule) définissent la molécule et ne changent jamais.",
+          "figure": null,
+          "exercise": {
+            "title": "Équilibrer les équations de combustion",
+            "statement": "Dans cet exercice, tu équilibres des équations-bilans de combustion complète d'alcanes. Utilise la méthode de la fiche : carbone, puis hydrogène, puis oxygène.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'équation-bilan équilibrée de la combustion complète du méthane ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $\\mathrm{CH_4 + O_2 \\rightarrow CO_2 + H_2O}$. Étape 2 — Carbone : 1 C de chaque côté. Étape 3 — Hydrogène : 4 H à gauche, donc $2\\,\\mathrm{H_2O}$. Étape 4 — Oxygène : à droite $2+2 = 4$ O, donc $2\\,\\mathrm{O_2}$. Étape 5 — Vérifier : 1 C, 4 H, 4 O de chaque côté. Les autres propositions laissent un côté déséquilibré en H ou en O.",
+                "answers": [
+                  {
+                    "content": "$\\mathrm{CH_4 + 2\\,O_2 \\rightarrow CO_2 + 2\\,H_2O}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathrm{CH_4 + O_2 \\rightarrow CO_2 + 2\\,H_2O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_4 + 2\\,O_2 \\rightarrow CO_2 + H_2O}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathrm{CH_4 + 2\\,O_2 \\rightarrow CO_2 + 4\\,H_2O}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans $\\mathrm{C_3H_8 + ?\\,O_2 \\rightarrow 3\\,CO_2 + 4\\,H_2O}$, quel coefficient faut-il devant $\\mathrm{O_2}$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Carbone : $3\\,\\mathrm{CO_2}$ pour 3 C. Étape 3 — Hydrogène : $4\\,\\mathrm{H_2O}$ pour 8 H. Étape 4 — Oxygène : à droite $3 \\times 2 + 4 \\times 1 = 10$ atomes de O, et un $\\mathrm{O_2}$ en fournit 2 : $10 \\div 2 = 5$. Étape 5 — Vérifier : 10 O à gauche ($5 \\times 2$) et 10 à droite. Répondre 10 oublie que $\\mathrm{O_2}$ contient 2 atomes.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Dans $\\mathrm{2\\,C_2H_6 + ?\\,O_2 \\rightarrow 4\\,CO_2 + 6\\,H_2O}$, quel coefficient faut-il devant $\\mathrm{O_2}$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Carbone : $2 \\times 2 = 4$ C à gauche et $4\\,\\mathrm{CO_2}$ à droite. Étape 3 — Hydrogène : $2 \\times 6 = 12$ H à gauche et $6 \\times 2 = 12$ à droite. Étape 4 — Oxygène : à droite $4 \\times 2 + 6 = 14$ atomes de O, donc $14 \\div 2 = 7$ molécules $\\mathrm{O_2}$. Étape 5 — Vérifier : $7 \\times 2 = 14$ O de chaque côté.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Complète : C₃H₈ + 5 O₂ → ___ CO₂ + 4 H₂O",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Équilibrer les atomes de carbone avec le coefficient de CO₂ : le propane C₃H₈ contient 3 atomes de carbone, donc il faut 3 CO₂. Étape 5 — Vérifier : à droite $3 \\times 2 + 4 = 10$ atomes d'oxygène, comme à gauche ($5 \\times 2$). La réponse est 3.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  },
+                  {
+                    "content": "trois",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour équilibrer une équation de combustion.",
+                "question_type": "ordering",
+                "explanation": "La méthode va toujours dans le même ordre : carbone, hydrogène, puis oxygène, car le dioxygène apparaît dans les deux produits et se règle en dernier. Étape 1 — Écrire. Étape 2 — Carbone. Étape 3 — Hydrogène. Étape 4 — Oxygène. Étape 5 — Vérifier.",
+                "answers": [
+                  {
+                    "content": "Écrire l'équation non équilibrée avec les quatre formules."
+                  },
+                  {
+                    "content": "Équilibrer le carbone avec le coefficient de CO2."
+                  },
+                  {
+                    "content": "Équilibrer l'hydrogène avec le coefficient de H2O."
+                  },
+                  {
+                    "content": "Équilibrer l'oxygène avec le coefficient de O2."
+                  },
+                  {
+                    "content": "Vérifier en comptant les atomes de chaque côté."
+                  }
+                ]
+              },
+              {
+                "content": "Pour équilibrer une équation, on peut écrire $\\mathrm{H_4O}$ à la place de $2\\,\\mathrm{H_2O}$, car cela donne aussi 4 atomes d'hydrogène.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Équilibrer l'hydrogène avec le coefficient de $\\mathrm{H_2O}$ : on agit sur le coefficient, devant la formule. Changer l'indice crée une autre molécule : $\\mathrm{H_4O}$ n'existe pas et n'est pas de l'eau. Étape 5 — Vérifier : la formule de l'eau reste $\\mathrm{H_2O}$ ; $2\\,\\mathrm{H_2O}$ contient bien 4 H. L'affirmation est fausse : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans $\\mathrm{C_5H_{12} + ?\\,O_2 \\rightarrow 5\\,CO_2 + 6\\,H_2O}$, quel coefficient faut-il devant $\\mathrm{O_2}$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Carbone : 5 C dans le pentane, donc $5\\,\\mathrm{CO_2}$. Étape 3 — Hydrogène : 12 H, donc $6\\,\\mathrm{H_2O}$. Étape 4 — Oxygène : à droite $5 \\times 2 + 6 = 16$ atomes de O, donc $16 \\div 2 = 8$. Étape 5 — Vérifier : $8 \\times 2 = 16$ O de chaque côté. Répondre 16 oublie la division par 2.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La bouteille de gaz butane de la cuisine",
+          "statement": "Dans la cuisine de Mariam, la cuisinière fonctionne avec une bouteille de gaz butane. Le butane est un alcane à 4 atomes de carbone. Le module dessine sa formule développée. Tu utilises les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": "alcane-developpee",
+          "questions": [
+            {
+              "content": "Le butane de la bouteille a 4 atomes de carbone. Quelle est sa formule brute ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 1. Étape 1 — Repérer : $n=4$. Étape 2 — Calculer : $2 \\times 4 + 2 = 10$ atomes d'hydrogène. Étape 3 — Écrire : $\\mathrm{C_4H_{10}}$. Étape 4 — Donner le nom : « but » + -ane = butane. $\\mathrm{C_4H_8}$ oublie le « +2 », et $\\mathrm{C_4H_{12}}$ ajoute 2 de trop.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{C_4H_{10}}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{C_4H_8}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{C_4H_{12}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{C_8H_{10}}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'atomes (carbone et hydrogène) contient une molécule de butane $\\mathrm{C_4H_{10}}$ ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : lire la formule brute. Étape 1 — Repérer : 4 atomes de carbone. Étape 2 — Calculer : $2 \\times 4 + 2 = 10$ atomes d'hydrogène. Étape 3 — Écrire $\\mathrm{C_4H_{10}}$ et additionner : $4 + 10 = 14$ atomes. Répondre 10 ne compte que l'hydrogène.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "atomes"
+            },
+            {
+              "content": "Quelle est la formule semi-développée du butane ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 2. Étape 1 — Déterminer : $\\mathrm{C_4H_{10}}$. Étape 2 — Aligner 4 carbones en chaîne. Étape 3 — Compléter : 3 hydrogènes sur chaque extrémité, 2 sur chaque carbone du milieu. Étape 4 — Regrouper : $\\mathrm{CH_3-CH_2-CH_2-CH_3}$, soit $3+2+2+3 = 10$ hydrogènes. Les autres propositions ont un carbone qui ne fait pas 4 liaisons.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{CH_3-CH_2-CH_2-CH_3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{CH_2-CH_2-CH_2-CH_2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{CH_3-CH_3-CH_3-CH_3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{CH_3-CH_2-CH_3}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le butane est un hydrocarbure.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la notion 1. Étape 1 — Repérer les atomes présents : le butane $\\mathrm{C_4H_{10}}$ ne contient que du carbone et de l'hydrogène. Un hydrocarbure est un composé qui ne contient que ces deux éléments, donc l'affirmation est vraie. Étape 4 — Donner le nom : c'est un alcane, donc un hydrocarbure.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le butane de la bouteille, comme le propane, est un ___.",
+              "question_type": "select",
+              "explanation": "Méthode de la notion 1. Étape 2 — Calculer : le butane ($n=4$, $\\mathrm{C_4H_{10}}$) et le propane ($n=3$, $\\mathrm{C_3H_8}$) vérifient la formule $\\mathrm{C_nH_{2n+2}}$ : ce sont des alcanes. Un alcool ou un acide contient de l'oxygène en plus, et un métal n'est pas un composé de carbone et d'hydrogène.",
+              "answers": [
+                {
+                  "content": "alcane",
+                  "correct": true
+                },
+                {
+                  "content": "alcool",
+                  "correct": false
+                },
+                {
+                  "content": "métal",
+                  "correct": false
+                },
+                {
+                  "content": "acide",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mariam dit : « Le butane est un hydrocarbure et un alcane ». Justifie cette phrase à l'aide de sa formule brute $\\mathrm{C_4H_{10}}$.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Étape 1 — Repérer : la formule $\\mathrm{C_4H_{10}}$ ne contient que des atomes de carbone et d'hydrogène, donc le butane est un hydrocarbure. Étape 2 — Calculer : $n=4$ et $2n+2 = 2 \\times 4 + 2 = 10$, ce qui correspond bien aux 10 hydrogènes. Étape 3 — Écrire : la formule est de la forme $\\mathrm{C_nH_{2n+2}}$. Étape 4 — Conclure : c'est un alcane. Répartition : 1 point pour l'hydrocarbure, 1 point pour le calcul $2n+2$ et la conclusion.",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Il est dit que la formule ne contient que du carbone et de l'hydrogène",
+                "Le calcul $2n+2 = 10$ avec $n=4$ est écrit",
+                "La conclusion « c'est un alcane » est justifiée par la formule $\\mathrm{C_nH_{2n+2}}$"
+              ],
+              "starter": "Le butane est un hydrocarbure car…"
+            }
+          ]
+        },
+        {
+          "title": "Le réchaud à propane du maquis",
+          "statement": "Dans un maquis, la cuisinière fait chauffer sa sauce sur un réchaud qui brûle du propane, un alcane de formule $\\mathrm{C_3H_8}$. Un élève veut identifier les produits de la combustion complète. Tu utilises les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quels sont les deux produits de la combustion complète du propane dans le dioxygène ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode de la notion 3. Étape 1 — Réaliser la combustion du propane dans l'air. Étapes 2 et 3 — Tester : on cherche de l'eau et du dioxyde de carbone. Étape 4 — Conclure : propane + dioxygène → dioxyde de carbone + eau. Le monoxyde de carbone n'apparaît qu'en combustion incomplète, et le propane n'est pas un produit : c'est le réactif.",
+              "answers": [
+                {
+                  "content": "Le dioxyde de carbone",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau",
+                  "correct": true
+                },
+                {
+                  "content": "Le monoxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "Le dihydrogène",
+                  "correct": false
+                },
+                {
+                  "content": "Le propane",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel produit met-on en évidence avec le sulfate de cuivre anhydre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 3. Étape 2 — Tester la présence d'eau : le sulfate de cuivre anhydre blanc devient bleu au contact de l'eau. Il ne réagit pas avec le dioxyde de carbone, qui se détecte avec l'eau de chaux (étape 3).",
+              "answers": [
+                {
+                  "content": "L'eau",
+                  "correct": true
+                },
+                {
+                  "content": "Le dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "Le dioxygène",
+                  "correct": false
+                },
+                {
+                  "content": "Le propane",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'eau de chaux devient laiteuse en présence de dioxyde de carbone.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la notion 3. Étape 3 — Tester le dioxyde de carbone : on fait barboter les gaz dans l'eau de chaux. Si elle se trouble (devient laiteuse), il y a du dioxyde de carbone. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le gaz qui trouble l'eau de chaux s'appelle le ___ de carbone.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la notion 3. Étape 3 — Tester le dioxyde de carbone : le gaz qui trouble l'eau de chaux est le dioxyde de carbone $\\mathrm{CO_2}$. Il ne faut pas le confondre avec le monoxyde de carbone CO, produit en combustion incomplète (piège de la fiche). Étape 4 — Conclure : propane + dioxygène → dioxyde de carbone + eau.",
+              "answers": [
+                {
+                  "content": "dioxyde",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quand le dioxygène manque, la combustion du propane est incomplète. Quel gaz toxique, sans odeur, peut apparaître ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 3. Étape 1 — Réaliser la combustion : si l'air est mal renouvelé, le dioxygène manque. Étape 4 — Conclure : la combustion incomplète peut produire du monoxyde de carbone CO, très toxique et sans odeur. Le dioxyde de carbone $\\mathrm{CO_2}$ est le produit de la combustion complète ; l'eau n'est pas toxique.",
+              "answers": [
+                {
+                  "content": "Le monoxyde de carbone",
+                  "correct": true
+                },
+                {
+                  "content": "Le dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "L'eau",
+                  "correct": false
+                },
+                {
+                  "content": "Le dioxygène",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un cuisinier allume un réchaud à gaz dans un petit local sans fenêtre, porte fermée. Explique pourquoi c'est dangereux et indique une précaution.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Étape 1 — Réaliser la combustion : le réchaud consomme le dioxygène du local fermé. Quand il en manque, la combustion devient incomplète. Étape 4 — Conclure : elle produit du monoxyde de carbone, gaz très toxique et sans odeur, qu'on ne remarque pas. Précaution : aérer la pièce (ouvrir porte et fenêtre) pour apporter du dioxygène. Répartition : 1 point pour le manque de dioxygène et la combustion incomplète, 0,5 pour le monoxyde de carbone, 0,5 pour la précaution.",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Il est dit que le dioxygène manque dans un local fermé",
+                "La combustion incomplète produit du monoxyde de carbone, toxique et sans odeur",
+                "Une précaution est donnée : aérer ou ouvrir la porte et la fenêtre"
+              ],
+              "starter": "Dans un local fermé, le dioxygène…"
+            }
+          ]
+        },
+        {
+          "title": "Le pétrole et les alcanes du garage",
+          "statement": "Un garage utilise plusieurs alcanes extraits du pétrole. On étudie la formule de ces alcanes et leur combustion complète dans le dioxygène. Tu appliques les méthodes de la leçon : formule brute, nom, puis équation-bilan.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un alcane contient 22 atomes d'hydrogène par molécule. Combien d'atomes de carbone contient-il ?",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion 1, utilisée à l'envers. Étape 1 — Repérer : on cherche $n$ avec $2n + 2 = 22$. Étape 2 — Calculer : $2n = 22 - 2 = 20$, donc $n = 20 \\div 2 = 10$. Étape 3 — Écrire : $\\mathrm{C_{10}H_{22}}$. Étape 4 — Donner le nom : décane. Vérification : $2 \\times 10 + 2 = 22$. Répondre 11 vient de $22 \\div 2$ sans retrancher 2.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "atomes"
+            },
+            {
+              "content": "Quel est le nom de l'alcane de formule brute $\\mathrm{C_7H_{16}}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 1. Étape 1 — Repérer : $n=7$. Étape 2 — Calculer : $2 \\times 7 + 2 = 16$, la formule correspond. Étape 4 — Donner le nom : $n=7$ se dit « hept », donc heptane. L'hexane est $\\mathrm{C_6H_{14}}$ et l'octane $\\mathrm{C_8H_{18}}$.",
+              "answers": [
+                {
+                  "content": "heptane",
+                  "correct": true
+                },
+                {
+                  "content": "hexane",
+                  "correct": false
+                },
+                {
+                  "content": "octane",
+                  "correct": false
+                },
+                {
+                  "content": "nonane",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Complète l'équation du propane : C₃H₈ + 5 O₂ → 3 CO₂ + ___ H₂O",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la notion 4. Étape 3 — Équilibrer les atomes d'hydrogène avec le coefficient de H₂O : le propane C₃H₈ contient 8 atomes d'hydrogène, et chaque H₂O en contient 2, donc $8 \\div 2 = 4$ molécules. Étape 5 — Vérifier : à droite $3 \\times 2 + 4 = 10$ atomes d'oxygène, comme à gauche $5 \\times 2$. La réponse est 4.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                },
+                {
+                  "content": "quatre",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans l'équation $\\mathrm{C_3H_8 + 5\\,O_2 \\rightarrow 3\\,CO_2 + 4\\,H_2O}$, combien d'atomes d'oxygène y a-t-il au total à droite de la flèche ?",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion 4, vérification. Étape 5 — Vérifier : on compte les atomes de chaque côté. $3\\,\\mathrm{CO_2}$ apporte $3 \\times 2 = 6$ atomes d'oxygène, $4\\,\\mathrm{H_2O}$ en apporte $4 \\times 1 = 4$. Total : $6 + 4 = 10$. À gauche : $5 \\times 2 = 10$. L'équation est bien équilibrée. Répondre 7 oublie que $\\mathrm{CO_2}$ contient 2 atomes d'oxygène.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "atomes"
+            },
+            {
+              "content": "Quelle est l'équation-bilan équilibrée de la combustion complète de l'hexane $\\mathrm{C_6H_{14}}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 4. Étape 1 — Écrire : $\\mathrm{C_6H_{14} + O_2 \\rightarrow CO_2 + H_2O}$. Étape 2 — Carbone : $6\\,\\mathrm{CO_2}$. Étape 3 — Hydrogène : $14 \\div 2 = 7$, donc $7\\,\\mathrm{H_2O}$. Étape 4 — Oxygène : $6 \\times 2 + 7 = 19$ atomes de O, donc $\\frac{19}{2}\\,\\mathrm{O_2}$ : coefficient fractionnaire, on multiplie tout par 2. Étape 5 — Vérifier : $\\mathrm{2\\,C_6H_{14} + 19\\,O_2 \\rightarrow 12\\,CO_2 + 14\\,H_2O}$ donne 38 O à gauche, $24+14 = 38$ à droite. Les autres propositions ne conservent pas les atomes d'oxygène.",
+              "answers": [
+                {
+                  "content": "$\\mathrm{2\\,C_6H_{14} + 19\\,O_2 \\rightarrow 12\\,CO_2 + 14\\,H_2O}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathrm{C_6H_{14} + 19\\,O_2 \\rightarrow 6\\,CO_2 + 7\\,H_2O}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{2\\,C_6H_{14} + 9\\,O_2 \\rightarrow 12\\,CO_2 + 14\\,H_2O}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathrm{C_6H_{14} + O_2 \\rightarrow 6\\,CO_2 + 7\\,H_2O}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On brûle un alcane X. L'équation est $\\mathrm{2\\,X + 13\\,O_2 \\rightarrow 8\\,CO_2 + 10\\,H_2O}$. Quel est l'alcane X ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 4, utilisée à l'envers. Étape 2 — Carbone : $8\\,\\mathrm{CO_2}$ pour $2\\,\\mathrm{X}$ : chaque molécule de X contient $8 \\div 2 = 4$ atomes de carbone. Étape 3 — Hydrogène : $10\\,\\mathrm{H_2O}$ contiennent 20 H pour $2\\,\\mathrm{X}$ : $20 \\div 2 = 10$ H par molécule. Étape 1 — Écrire : X est $\\mathrm{C_4H_{10}}$, le butane ($2 \\times 4 + 2 = 10$). Étape 5 — Vérifier : O à droite $16+10 = 26 = 13 \\times 2$.",
+              "answers": [
+                {
+                  "content": "Le butane $\\mathrm{C_4H_{10}}$",
+                  "correct": true
+                },
+                {
+                  "content": "Le propane $\\mathrm{C_3H_8}$",
+                  "correct": false
+                },
+                {
+                  "content": "Le pentane $\\mathrm{C_5H_{12}}$",
+                  "correct": false
+                },
+                {
+                  "content": "L'octane $\\mathrm{C_8H_{18}}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Écris l'équation-bilan équilibrée de la combustion complète de l'éthane $\\mathrm{C_2H_6}$ dans le dioxygène, en détaillant les étapes de l'équilibrage.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Étape 1 — Écrire : $\\mathrm{C_2H_6 + O_2 \\rightarrow CO_2 + H_2O}$. Étape 2 — Carbone : 2 C dans l'éthane, donc $2\\,\\mathrm{CO_2}$. Étape 3 — Hydrogène : 6 H, donc $3\\,\\mathrm{H_2O}$. Étape 4 — Oxygène : $2 \\times 2 + 3 = 7$ atomes de O, donc $\\frac{7}{2}\\,\\mathrm{O_2}$ ; le coefficient est fractionnaire, on multiplie tout par 2. Résultat : $\\mathrm{2\\,C_2H_6 + 7\\,O_2 \\rightarrow 4\\,CO_2 + 6\\,H_2O}$. Étape 5 — Vérifier : 4 C, 12 H, 14 O de chaque côté. Répartition : 1 point pour C et H, 1 point pour O et le passage aux nombres entiers, 1 point pour la vérification.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Carbone puis hydrogène équilibrés avec les coefficients de CO2 et de H2O",
+                "Oxygène équilibré, avec passage aux nombres entiers",
+                "Équation finale juste : 2 C2H6 + 7 O2 → 4 CO2 + 6 H2O",
+                "Vérification par comptage des atomes de chaque côté"
+              ],
+              "starter": "Étape 1 : C2H6 + O2 → …"
+            }
+          ]
+        },
+        {
+          "title": "Cuisiner au butane : combustion et sécurité",
+          "statement": "Un cuisinier utilise une bouteille de gaz butane $\\mathrm{C_4H_{10}}$. La combustion complète du butane a pour équation : $\\mathrm{2\\,C_4H_{10} + 13\\,O_2 \\rightarrow 8\\,CO_2 + 10\\,H_2O}$. Tu analyses cette équation, tu décris l'expérience qui met en évidence les produits, puis tu fais le point sur les dangers.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans $\\mathrm{2\\,C_4H_{10}}$, combien y a-t-il d'atomes d'hydrogène au total ?",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion 4, vérification. Étape 3 — Équilibrer l'hydrogène : une molécule de butane contient 10 H. Deux molécules en contiennent $2 \\times 10 = 20$. À droite, $10\\,\\mathrm{H_2O}$ contiennent $10 \\times 2 = 20$ H : l'hydrogène est conservé. Étape 5 — Vérifier. Répondre 10 oublie le coefficient 2 devant $\\mathrm{C_4H_{10}}$.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "atomes"
+            },
+            {
+              "content": "Combien de molécules d'eau se forment quand 2 molécules de butane brûlent complètement, selon l'équation de l'énoncé ?",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion 4. On lit les coefficients de l'équation $\\mathrm{2\\,C_4H_{10} + 13\\,O_2 \\rightarrow 8\\,CO_2 + 10\\,H_2O}$ : 2 molécules de butane donnent 10 molécules d'eau. Étape 3 — Hydrogène : $20 \\div 2 = 10$. Étape 5 — Vérifier : 20 H à gauche, $10 \\times 2 = 20$ H à droite. Répondre 5 serait diviser par 2 deux fois.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "molécules"
+            },
+            {
+              "content": "Selon l'équation, 6 molécules de butane brûlent complètement. Combien de molécules de dioxyde de carbone se forment ?",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion 4. Étape 2 — Carbone : l'équation montre que 2 molécules de butane donnent 8 molécules de $\\mathrm{CO_2}$, soit 4 molécules de $\\mathrm{CO_2}$ pour 1 butane (4 atomes de C par molécule). Pour 6 molécules : $6 \\times 4 = 24$. On peut aussi multiplier l'équation par 3 : $6\\,\\mathrm{C_4H_{10}} + 39\\,\\mathrm{O_2} \\rightarrow 24\\,\\mathrm{CO_2} + 30\\,\\mathrm{H_2O}$. Étape 5 — Vérifier : $24 \\times 1 = 24$ C pour $6 \\times 4 = 24$ C.",
+              "answers": [
+                {
+                  "content": "24",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "molécules"
+            },
+            {
+              "content": "Quel réactif utilise-t-on pour montrer que l'une des substances produites est de l'eau ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion 3. Étape 2 — Tester la présence d'eau : le sulfate de cuivre anhydre blanc devient bleu en présence d'eau. L'eau de chaux (étape 3) sert à détecter le dioxyde de carbone, pas l'eau. Le dioxygène et le butane ne servent pas de test.",
+              "answers": [
+                {
+                  "content": "Le sulfate de cuivre anhydre blanc",
+                  "correct": true
+                },
+                {
+                  "content": "L'eau de chaux",
+                  "correct": false
+                },
+                {
+                  "content": "Le dioxygène",
+                  "correct": false
+                },
+                {
+                  "content": "Le butane liquide",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si le dioxygène manque, la combustion du butane peut produire du monoxyde de carbone, gaz toxique et sans odeur.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la notion 3. Étape 1 — Réaliser la combustion : si l'air est mal renouvelé, le dioxygène manque. Étape 4 — Conclure : la combustion est incomplète et peut produire du monoxyde de carbone CO, très toxique et sans odeur, ainsi que de la suie. L'affirmation est vraie. Il ne faut pas le confondre avec le dioxyde de carbone $\\mathrm{CO_2}$ de la combustion complète.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Décris l'expérience qui permet de montrer que la combustion complète du butane produit de l'eau et du dioxyde de carbone. Donne les tests et les observations attendues.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Étape 1 — Réaliser : on brûle le butane dans l'air et on recueille les gaz de combustion. Étape 2 — Tester l'eau : on met en contact les gaz avec du sulfate de cuivre anhydre blanc, qui devient bleu : il y a de l'eau. Étape 3 — Tester le dioxyde de carbone : on fait barboter les gaz dans l'eau de chaux, qui se trouble (devient laiteuse) : il y a du dioxyde de carbone. Étape 4 — Conclure : butane + dioxygène → dioxyde de carbone + eau. Répartition : 1 point pour la combustion, 1 point par test avec son observation, 1 point pour la conclusion.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "La combustion du butane dans l'air est décrite, avec les gaz recueillis",
+                "Test de l'eau : sulfate de cuivre anhydre qui passe du blanc au bleu",
+                "Test du dioxyde de carbone : eau de chaux qui se trouble",
+                "Conclusion : butane + dioxygène → dioxyde de carbone + eau"
+              ],
+              "starter": "On brûle le butane dans l'air, puis…"
+            },
+            {
+              "content": "Écris l'équation-bilan équilibrée de la combustion complète du propane $\\mathrm{C_3H_8}$. Vérifie ton équation en comptant les atomes de chaque côté.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Étape 1 — Écrire : $\\mathrm{C_3H_8 + O_2 \\rightarrow CO_2 + H_2O}$. Étape 2 — Carbone : $3\\,\\mathrm{CO_2}$. Étape 3 — Hydrogène : 8 H, donc $4\\,\\mathrm{H_2O}$. Étape 4 — Oxygène : $3 \\times 2 + 4 = 10$ O, donc $5\\,\\mathrm{O_2}$. Équation : $\\mathrm{C_3H_8 + 5\\,O_2 \\rightarrow 3\\,CO_2 + 4\\,H_2O}$. Étape 5 — Vérifier : à gauche 3 C, 8 H, 10 O ; à droite 3 C, 8 H, $6+4 = 10$ O. Répartition : 2 points pour l'équation, 1 point pour la vérification.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Les coefficients 3, 4 et 5 sont trouvés dans le bon ordre : C, H, O",
+                "L'équation finale est juste : C3H8 + 5 O2 → 3 CO2 + 4 H2O",
+                "La vérification compte les atomes de chaque côté"
+              ],
+              "starter": "Étape 1 : C3H8 + O2 → …"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
