@@ -118,6 +118,16 @@ Le titre de notion au-dessus de chaque carte répétait le titre de l'exercice, 
 - Plus de `<h3>` de notion ni de « Toute la leçon » au-dessus des cartes. Le type de la carte (« Évaluation ») distingue les exercices de toute la leçon.
 - Les ancres restent (UDR-0139 §3.7) : le `<li>` de la **première** carte d'une notion porte, en premier enfant, `<span id="notion-<slug>" class="block scroll-mt-24" tabindex="-1" aria-label="<nom de la notion>"></span>` ; celui de la première carte de toute la leçon, `<span id="toute-la-lecon" …>` de même. Le partial de carte reçoit ce repère par un local facultatif `anchor: { id:, label: }`.
 - Les notions sans exercice gardent leur bloc (titre + « pas encore d'exercice »), sous la grille.
+
+### 3.2 ter — « Prépare devoirs » pour les évaluations (amendement du 2026-10-30, demande du porteur)
+
+La page d'une leçon (catalogue et page de leçon dans une classe) sépare les exercices par **type** :
+
+- **« Prépare interros »** (`section#prepare-interros`) : les exercices de **fixation**, notions dans leur ordre puis ceux de toute la leçon. Intro : « Pour t'entraîner : un exercice par notion, puis sur toute la leçon. » Les notions sans exercice et l'état vide restent dans cette section.
+- **« Prépare devoirs »** (`section#prepare-devoirs`, juste après) : les exercices d'**évaluation**, même ordre, même grille (`ul#prepare-devoirs-grid`, mêmes classes que §3.2 bis). Intro : « Pour te tester : des évaluations sur toute la leçon, comme un devoir. » La section n'est pas rendue quand la leçon n'a aucune évaluation.
+- Le type sur la carte reste affiché (« Fixation », « Évaluation »).
+- Ancres : chacune (`notion-<slug>`, `toute-la-lecon`) est posée **une seule fois**, sur la première carte qui la concerne dans l'ordre de la page (interros, puis devoirs).
+- Les bascules d'assignation de l'enseignant restent sous chaque carte, dans les deux sections.
 - `classroom/classrooms/_assigned_exercises` : chaque assignation rend la carte (`exercise_card_for_assignment`).
 
 ### 3.3 La carte de question — `assessment/exercises/show`

@@ -71,7 +71,7 @@ class Communication::AnnouncementsJourneyTest < ApplicationSystemTestCase
     within("#announcement-tabs") { click_link tc("tabs.mine") }
     click_on tc("authored_messages.index.new"), match: :first
     fill_in field(:title), with: "Nouvelles fiches"
-    fill_in field(:body), with: "Les fiches du chapitre 3 sont en ligne. Le détail est dans l'audio."
+    fill_in field(:body), with: "Les fiches du chapitre 3 sont en ligne."
     tap find("label", text: tc("illustrations.sheets"))
     [ "3ème B", "3ème C" ].each { tap find("label", text: it) }
     attach_file field(:audio), file_fixture(AUDIO)
