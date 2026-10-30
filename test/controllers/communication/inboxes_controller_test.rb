@@ -95,13 +95,14 @@ module Communication
       end
     end
 
-    test "AN-14 (display) — an edited message is marked « Modifiée »" do
+    test "AN-14 (display) — retired on 2026-10-30: an edited message is not marked « Modifiée »" do
       fiches(edited_at: 5.minutes.ago)
       sign_in_as @awa
 
       get announcements_path
 
-      assert_select "article span", I18n.t("communication.card.edited")
+      assert_select "article"
+      assert_select "article", text: /Modifiée/, count: 0
     end
 
     test "AN-18 — an image replaces the illustration; only a card with an audio has the ▶ button" do
