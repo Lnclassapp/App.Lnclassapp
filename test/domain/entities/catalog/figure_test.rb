@@ -12,8 +12,8 @@ module Entities
         assert_empty Figure.errors_for(raw)
       end
 
-      test "la liste des sortes est fermée : cinq sortes" do
-        assert_equal %w[coordinate_plane geometry number_line solid stat_chart], FigureKinds::ALL.keys.sort
+      test "la liste des sortes est fermée : huit sortes" do
+        assert_equal %w[coordinate_plane diagram geometry map number_line solid stat_chart timeline], FigureKinds::ALL.keys.sort
         assert_equal [ "kind", "figure_invalid", { param: "kind" } ], Figure.errors_for(raw(kind: "hologram")).first
       end
 
@@ -179,6 +179,237 @@ module Entities
         assert_equal [ [ "kind", "figure_invalid" ] ], reasons(raw(kind: "hologram", controls: [ control ]))
         assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(solid(controls: [ control.merge("param" => 5) ]))
         assert_equal [ [ "controls[0].param", "figure_invalid" ] ], reasons(solid(controls: [ control.merge("param" => nil) ]))
+      end
+
+      def timeline(**params) = raw(kind: "timeline", params: TIMELINE.merge(params.transform_keys(&:to_s)))
+      def map(**params) = raw(kind: "map", params: MAP.merge(params.transform_keys(&:to_s)))
+      def diagram(**params) = raw(kind: "diagram", params: FLOW.merge(params.transform_keys(&:to_s)))
+      def paths(figure) = reasons(figure).map(&:first).uniq
+
+      TIMELINE = { "start" => 1880, "end" => 1960, "step" => 10, "unit" => "year",
+                   "periods" => [ { "from" => 1884, "to" => 1914, "label" => "Conquête" } ],
+                   "events" => [ { "at" => 1893, "label" => "Colonie" }, { "at" => 1960, "label" => "Indépendance" } ] }.freeze
+      MAP = { "base" => "cote_d_ivoire", "legend" => %w[Forêt Savane],
+              "areas" => [ { "id" => "dense_forest", "category" => 1 }, { "id" => "savanna", "category" => 2 } ],
+              "places" => [ { "id" => "abidjan", "label" => "Capitale" }, { "id" => "korhogo" } ],
+              "routes" => [ { "from" => "abidjan", "to" => "korhogo", "label" => "Route" }, { "from" => "abidjan", "to" => "man" } ] }.freeze
+      FLOW = { "layout" => "flow", "direction" => "right", "legend" => %w[Étape],
+               "nodes" => [ { "id" => "a", "label" => "Début", "category" => 1 }, { "id" => "b", "label" => "Fin" } ],
+               "edges" => [ { "from" => "a", "to" => "b", "label" => "puis" }, { "from" => "b", "to" => "a" } ] }.freeze
+      TREE_NODES = %w[r a b c].map { { "id" => it, "label" => it.upcase } }.freeze
+
+      test "une figure bien formée de chaque sorte nouvelle, de chaque fond et de chaque schéma est valide" do
+        assert_empty Figure.errors_for(timeline)
+        assert_empty Figure.errors_for(timeline(unit: "month", periods: [], events: []))
+        assert_empty Figure.errors_for(raw(kind: "timeline", params: { "start" => 0, "end" => 10, "step" => 1 }))
+        assert_empty Figure.errors_for(map)
+        assert_empty Figure.errors_for(map(base: "africa", areas: [ { "id" => "civ", "category" => 1 } ], places: [ { "id" => "abidjan" } ], routes: [ { "from" => "dakar", "to" => "lagos" } ]))
+        assert_empty Figure.errors_for(map(base: "world", areas: [ { "id" => "africa", "category" => 2 } ], places: [ { "id" => "yalta" } ], routes: []))
+        assert_empty Figure.errors_for(raw(kind: "map", params: { "base" => "world" }))
+        assert_empty Figure.errors_for(diagram)
+        assert_empty Figure.errors_for(raw(kind: "diagram", params: { "layout" => "flow", "nodes" => [ { "id" => "a", "label" => "A" } ] }))
+        edges = [ { "from" => "r", "to" => "a" }, { "from" => "r", "to" => "b" }, { "from" => "a", "to" => "c" } ]
+        assert_empty Figure.errors_for(diagram(layout: "tree", direction: "down", nodes: TREE_NODES, edges:))
+        ring = %w[a b c].map { { "id" => it, "label" => it } }
+        assert_empty Figure.errors_for(diagram(layout: "cycle", nodes: ring, edges: [ { "from" => "a", "to" => "b" }, { "from" => "b", "to" => "c" }, { "from" => "c", "to" => "a" } ]))
+        assert_empty Figure.errors_for(raw(kind: "stat_chart", params: { "chart" => "line", "series" => [ 1, 3, 2 ], "labels" => %w[a b c] }))
+      end
+
+      test "timeline : curseurs sur start et end seulement" do
+        control = { "param" => "start", "min" => 1850, "max" => 1900, "step" => 5, "label" => "début" }
+
+        assert_empty Figure.errors_for(timeline.merge("controls" => [ control ]))
+        assert_empty Figure.errors_for(timeline.merge("controls" => [ control.merge("param" => "end", "min" => 1900, "max" => 2000) ]))
+        assert_includes reasons(timeline.merge("controls" => [ control.merge("param" => "step") ])), [ "controls[0].param", "figure_invalid" ]
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ control.merge("max" => 2101) ]))
+      end
+
+      test "timeline : les extrêmes d'un curseur gardent end après start et au plus 200 graduations" do
+        control = { "param" => "start", "min" => 1850, "max" => 1900, "step" => 5, "label" => "début" }
+
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ control.merge("max" => 1960) ]))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ control.merge("max" => 1961) ]))
+        assert_equal [ [ "controls[0].min", "figure_invalid" ] ], reasons(timeline.merge("params" => TIMELINE.merge("step" => 1, "end" => 1960), "controls" => [ control.merge("min" => 1700, "max" => 1900) ]))
+        end_control = { "param" => "end", "min" => 1900, "max" => 2000, "step" => 5, "label" => "fin" }
+        assert_equal [ [ "controls[0].min", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ end_control.merge("min" => 1880) ]))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline(start: 1800, end: 1900, step: 1, events: [], periods: []).merge("controls" => [ end_control.merge("min" => 1900, "max" => 2100) ]))
+      end
+
+      test "graduations : pas de division entière, 401 unités au pas 2 sont refusées" do
+        assert_equal [ [ "params.step", "figure_invalid" ] ], reasons(timeline(start: 0, end: 401, step: 2, events: [], periods: []))
+        assert_empty Figure.errors_for(timeline(start: 0, end: 400, step: 2, events: [], periods: []))
+        assert_equal [ [ "params.step", "figure_invalid" ] ], reasons(raw(kind: "number_line", params: { "min" => -100, "max" => 100, "step" => 0.5 }))
+        assert_empty Figure.errors_for(raw(kind: "number_line", params: { "min" => -100, "max" => 100, "step" => 1 }))
+      end
+
+      test "map : une route ne boucle pas sur un lieu, un libellé n'est pas blanc, la légende est faite de textes" do
+        assert_equal [ [ "params.routes[0].to", "figure_invalid" ] ], reasons(map(routes: [ { "from" => "abidjan", "to" => "abidjan" } ]))
+        assert_equal [ [ "params.places[0].label", "figure_invalid" ] ], reasons(map(places: [ { "id" => "abidjan", "label" => "  " } ]))
+        assert_equal [ [ "params.routes[0].label", "figure_invalid" ] ], reasons(map(routes: [ { "from" => "abidjan", "to" => "man", "label" => "" } ]))
+        assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(map(legend: [ 3, "Savane" ]))
+        assert_equal [ [ "params.legend[1]", "figure_invalid" ] ], reasons(map(legend: [ "Forêt", "" ]))
+      end
+
+      test "diagram : un libellé d'arête n'est pas blanc, la légende est faite de textes" do
+        assert_equal [ [ "params.edges[0].label", "figure_invalid" ] ], reasons(diagram(edges: [ { "from" => "a", "to" => "b", "label" => "  " } ]))
+        assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(diagram(legend: [ 3 ]))
+        assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(diagram(legend: [ "" ]))
+      end
+
+      test "map et diagram n'ont aucun curseur" do
+        assert_empty FigureKinds.fetch("map").adjustable
+        assert_empty FigureKinds.fetch("diagram").adjustable
+        assert_equal %w[start end], FigureKinds.fetch("timeline").adjustable
+      end
+
+      test "les paramètres exigés par les sortes nouvelles" do
+        assert_equal %w[params.start params.end params.step], paths(raw(kind: "timeline", params: {}))
+        assert_equal %w[params.base], paths(raw(kind: "map", params: {}))
+        assert_equal %w[params.layout params.nodes], paths(raw(kind: "diagram", params: {}))
+      end
+
+      test "les bornes génériques des sortes nouvelles" do
+        assert_includes paths(timeline(start: -3001)), "params.start"
+        assert_equal %w[params.step], paths(timeline(step: 0))
+        assert_equal %w[params.unit], paths(timeline(unit: "hour"))
+        assert_equal %w[params.periods], paths(timeline(periods: Array.new(9) { { "from" => 1900, "to" => 1901, "label" => "p" } }))
+        assert_equal %w[params.base], paths(map(base: "moon", areas: [], places: [], routes: []))
+        assert_equal %w[params.legend], paths(map(legend: Array.new(7, "a")))
+        assert_equal %w[params.layout], paths(diagram(layout: "spiral"))
+        assert_equal %w[params.nodes], paths(diagram(nodes: Array.new(13) { { "id" => "n#{it}", "label" => "n" } }, edges: []))
+      end
+
+      test "timeline : end après start, au plus 200 graduations" do
+        assert_equal [ [ "params.end", "figure_invalid", { param: "end" } ] ], Figure.errors_for(timeline(end: 1880, events: [], periods: []))
+        assert_equal %w[params.end], paths(timeline(end: 1800, events: [], periods: []))
+        assert_empty Figure.errors_for(timeline(start: 0, end: 200, step: 1, events: [], periods: []))
+        assert_equal [ [ "params.step", "figure_invalid", { param: "step" } ] ], Figure.errors_for(timeline(start: 0, end: 201, step: 1, events: [], periods: []))
+        assert_equal %w[params.end], paths(timeline(end: "x"))
+      end
+
+      test "timeline : événements dans la plage, avec un libellé" do
+        assert_equal %w[params.events[0].at], paths(timeline(events: [ { "at" => 1879, "label" => "x" } ]))
+        assert_equal %w[params.events[0].at], paths(timeline(events: [ { "at" => 1961, "label" => "x" } ]))
+        assert_equal %w[params.events[0].at], paths(timeline(events: [ { "label" => "x" } ]))
+        assert_equal %w[params.events[0].at], paths(timeline(events: [ { "at" => "1900", "label" => "x" } ]))
+        assert_equal %w[params.events[0].label], paths(timeline(events: [ { "at" => 1900, "label" => " " } ]))
+        assert_equal %w[params.events[0].label], paths(timeline(events: [ { "at" => 1900 } ]))
+        assert_equal %w[params.events[1]], paths(timeline(events: [ { "at" => 1900, "label" => "x" }, "x" ]))
+        assert_equal [ [ "params.events[0]", "figure_invalid", { param: "events[0]" } ] ], Figure.errors_for(timeline(events: [ 1900 ]))
+      end
+
+      test "timeline : périodes dans la plage, ordonnées, avec un libellé" do
+        period = ->(**p) { timeline(periods: [ { "from" => 1900, "to" => 1910, "label" => "x" }.merge(p.transform_keys(&:to_s)) ]) }
+
+        assert_empty Figure.errors_for(period.())
+        assert_equal %w[params.periods[0].from], paths(period.(from: 1800))
+        assert_equal %w[params.periods[0].to], paths(period.(to: 2000))
+        assert_equal %w[params.periods[0].to], paths(period.(to: 1900))
+        assert_equal %w[params.periods[0].to], paths(period.(to: 1890))
+        assert_equal %w[params.periods[0].from], paths(period.(from: "x"))
+        assert_equal %w[params.periods[0].to], paths(period.(to: nil))
+        assert_equal %w[params.periods[0].label], paths(period.(label: ""))
+        assert_equal %w[params.periods[0]], paths(timeline(periods: [ 5 ]))
+      end
+
+      test "timeline : des listes qui ne sont pas des tableaux ne lèvent pas" do
+        assert_equal %w[params.periods params.events], paths(timeline(events: "x", periods: {}))
+      end
+
+      test "map : une aire connue du fond, une seule fois, d'une catégorie de la légende" do
+        area = ->(*areas) { map(areas:) }
+
+        assert_equal %w[params.areas[0].id], paths(area.({ "id" => "abidjan_nord", "category" => 1 }))
+        assert_equal %w[params.areas[0].id], paths(area.({ "id" => "civ", "category" => 1 }))
+        assert_equal %w[params.areas[1].id], paths(area.({ "id" => "savanna", "category" => 1 }, { "id" => "savanna", "category" => 2 }))
+        assert_equal %w[params.areas[0].category], paths(area.({ "id" => "savanna", "category" => 3 }))
+        assert_equal %w[params.areas[0].category], paths(area.({ "id" => "savanna", "category" => 0 }))
+        assert_equal %w[params.areas[0].category], paths(area.({ "id" => "savanna", "category" => 1.5 }))
+        assert_equal %w[params.areas[0].category], paths(area.({ "id" => "savanna" }))
+        assert_equal %w[params.areas[0].id], paths(area.({ "id" => 5, "category" => 1 }))
+        assert_equal %w[params.areas[0]], paths(area.("savanna"))
+        assert_equal [ [ "params.areas[0].id", "figure_invalid", { param: "areas[0].id" } ] ], Figure.errors_for(area.({ "id" => "x", "category" => 1 }))
+      end
+
+      test "map : une aire sans légende est refusée sur la légende" do
+        areas = [ { "id" => "savanna", "category" => 1 } ]
+
+        assert_equal %w[params.legend], paths(map(areas:, legend: []))
+        assert_equal %w[params.legend], paths(map(areas:).tap { it["params"].delete("legend") })
+        assert_empty Figure.errors_for(map(areas: [], legend: []))
+      end
+
+      test "map : les lieux et les routes appartiennent au fond" do
+        assert_equal %w[params.places[0].id], paths(map(places: [ { "id" => "paris" } ]))
+        assert_equal %w[params.places[1].id], paths(map(places: [ { "id" => "abidjan" }, { "id" => 3 } ]))
+        assert_equal %w[params.places[0].label], paths(map(places: [ { "id" => "abidjan", "label" => 4 } ]))
+        assert_equal %w[params.places[0]], paths(map(places: [ "abidjan" ]))
+        assert_equal %w[params.routes[0].from], paths(map(routes: [ { "from" => "paris", "to" => "man" } ]))
+        assert_equal %w[params.routes[0].to], paths(map(routes: [ { "from" => "man", "to" => "paris" } ]))
+        assert_equal %w[params.routes[0].label], paths(map(routes: [ { "from" => "man", "to" => "korhogo", "label" => 4 } ]))
+        assert_equal %w[params.routes[0]], paths(map(routes: [ "man" ]))
+        assert_equal [ [ "params.routes[0].to", "figure_invalid", { param: "routes[0].to" } ] ], Figure.errors_for(map(routes: [ { "from" => "man", "to" => "x" } ]))
+      end
+
+      test "map : un fond inconnu ne déclenche qu'une erreur de fond, des listes qui ne sont pas des tableaux ne lèvent pas" do
+        assert_equal %w[params.base], paths(map(base: "moon"))
+        assert_equal %w[params.areas params.places params.routes], paths(map(areas: "x", places: 1, routes: {}))
+      end
+
+      test "diagram : nœuds à identifiant unique, libellé et catégorie de la légende" do
+        nodes = ->(*items) { diagram(nodes: items, edges: []) }
+
+        assert_equal %w[params.nodes[0].id], paths(nodes.({ "id" => "", "label" => "A" }))
+        assert_equal %w[params.nodes[0].id], paths(nodes.({ "label" => "A" }))
+        assert_equal %w[params.nodes[1].id], paths(nodes.({ "id" => "a", "label" => "A" }, { "id" => "a", "label" => "B" }))
+        assert_equal %w[params.nodes[0].label], paths(nodes.({ "id" => "a", "label" => " " }))
+        assert_equal %w[params.nodes[0].label], paths(nodes.({ "id" => "a" }))
+        assert_equal %w[params.nodes[0].category], paths(nodes.({ "id" => "a", "label" => "A", "category" => 2 }))
+        assert_equal %w[params.nodes[0].category], paths(nodes.({ "id" => "a", "label" => "A", "category" => 0 }))
+        assert_equal %w[params.nodes[0].category], paths(nodes.({ "id" => "a", "label" => "A", "category" => "1" }))
+        assert_equal %w[params.nodes[0]], paths(nodes.("a"))
+        assert_equal %w[params.nodes[0].category], paths(diagram(nodes: [ { "id" => "a", "label" => "A", "category" => 1 } ], edges: [], legend: []))
+        assert_equal [ [ "params.nodes[0].id", "figure_invalid", { param: "nodes[0].id" } ] ], Figure.errors_for(nodes.({ "label" => "A" }))
+      end
+
+      test "diagram : arêtes entre deux nœuds existants et différents" do
+        edges = ->(*items) { diagram(edges: items) }
+
+        assert_empty Figure.errors_for(edges.())
+        assert_equal %w[params.edges[0].from], paths(edges.({ "from" => "z", "to" => "b" }))
+        assert_equal %w[params.edges[0].to], paths(edges.({ "from" => "a", "to" => "z" }))
+        assert_equal %w[params.edges[0].from params.edges[0].to], paths(edges.({ "from" => 1, "to" => 2 }))
+        assert_equal %w[params.edges[0].to], paths(edges.({ "from" => "a", "to" => "a" }))
+        assert_equal %w[params.edges[0].label], paths(edges.({ "from" => "a", "to" => "b", "label" => 3 }))
+        assert_equal %w[params.edges[0]], paths(edges.("a"))
+        assert_equal [ [ "params.edges[0].to", "figure_invalid", { param: "edges[0].to" } ] ], Figure.errors_for(edges.({ "from" => "a", "to" => "z" }))
+      end
+
+      test "diagram tree : un seul parent, une seule racine, aucun cycle" do
+        tree = ->(edges, nodes = TREE_NODES) { diagram(layout: "tree", nodes:, edges:) }
+        edge = ->(from, to) { { "from" => from, "to" => to } }
+
+        assert_equal %w[params.edges[2].to], paths(tree.([ edge.("r", "a"), edge.("r", "b"), edge.("a", "b"), edge.("b", "c") ]))
+        assert_equal %w[params.edges], paths(tree.([ edge.("r", "a"), edge.("a", "b") ]))
+        assert_equal %w[params.edges], paths(tree.([]))
+        assert_equal %w[params.edges], paths(tree.([ edge.("r", "a"), edge.("b", "c"), edge.("c", "b") ]))
+        assert_equal %w[params.edges], paths(tree.([ edge.("a", "b"), edge.("b", "c"), edge.("c", "a") ]))
+        assert_equal %w[params.edges[0].to], paths(tree.([ edge.("r", "r") ]))
+        two_roots = [ { "id" => "x", "label" => "X" }, { "id" => "y", "label" => "Y" } ]
+        assert_equal %w[params.edges], paths(tree.([], two_roots))
+      end
+
+      test "diagram cycle : au moins trois nœuds" do
+        two = %w[a b].map { { "id" => it, "label" => it } }
+
+        assert_equal %w[params.nodes], paths(diagram(layout: "cycle", nodes: two))
+        assert_empty Figure.errors_for(diagram(layout: "cycle", nodes: two + [ { "id" => "c", "label" => "c" } ], edges: []))
+      end
+
+      test "diagram : des listes qui ne sont pas des tableaux ne lèvent pas" do
+        assert_equal %w[params.nodes params.edges], paths(diagram(nodes: "x", edges: 2))
+        assert_equal %w[params.layout], paths(raw(kind: "diagram", params: { "layout" => "x", "nodes" => [ { "id" => "a", "label" => "A" } ] }))
+        assert_equal %w[params.nodes[1]], paths(diagram(layout: "tree", nodes: [ { "id" => "a", "label" => "A" }, "b" ], edges: []))
       end
 
       test "from_raw construit la figure" do

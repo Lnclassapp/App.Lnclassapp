@@ -201,7 +201,7 @@ Une correction d'une phrase (« car $2 + 2 = 4$ ») ne convient pas. Une correct
 
 ## Les figures paramétrées
 
-Une figure est un dessin interactif **généré par une sorte et des paramètres**. Les sortes propres aux autres matières (frise, carte, schéma, tracé optique, planche, molécule) arrivent avec leur vague du programme `contenus-3e-autres-matieres` : tant qu'une sorte n'est pas dans la liste ci-dessous, elle n'existe pas. Le Français n'utilise pas de figure. Tu n'écris jamais de code, jamais de SVG : tu choisis une sorte dans la liste ci-dessous et tu remplis ses paramètres. Une notion ou un exercice cite une figure par sa clé (`"figure": "triangle-thales"`).
+Une figure est un dessin interactif **généré par une sorte et des paramètres**. Les sortes encore absentes (tracé optique, planche, molécule) arrivent avec leur vague du programme `contenus-3e-autres-matieres` : tant qu'une sorte n'est pas dans la liste ci-dessous, elle n'existe pas. Le Français n'utilise pas de figure. Tu n'écris jamais de code, jamais de SVG : tu choisis une sorte dans la liste ci-dessous et tu remplis ses paramètres. Une notion ou un exercice cite une figure par sa clé (`"figure": "triangle-thales"`).
 
 ```json
 { "key": "triangle-thales", "kind": "geometry",
@@ -217,19 +217,22 @@ En `geometry`, l'interaction passe par les points `"draggable": true` (contraint
 
 - `key` : minuscules, chiffres et tirets, 40 caractères au plus, **unique** dans la leçon.
 - `description` : **150 à 600 caractères**, obligatoire. Elle dit ce que la figure montre et ce qu'on peut lire ou faire bouger ; c'est le texte de repli sans JavaScript et pour l'élève malvoyant.
-- `controls` : 0 à 4 curseurs. Chacun : `param` (la **clé numérique de premier niveau** de `params` qu'il règle, ex. `solid.height`, `solid.radius`, `number_line.min`, `coordinate_plane.xmin` ; `geometry` n'en a pas, donc `controls: []` en `geometry`), `min` et `max` (entre −1 000 et 1 000, `max` > `min`), `step` (> 0, au plus `max − min`), `label` (1 à 40 caractères). Une figure sans contrôle est fixe.
+- `controls` : 0 à 4 curseurs. Chacun : `param` (la **clé numérique de premier niveau** de `params` qu'il règle, ex. `solid.height`, `solid.radius`, `number_line.min`, `coordinate_plane.xmin`, `timeline.start` ; `geometry`, `map` et `diagram` n'en ont pas, donc `controls: []`), `min` et `max` (entre −3 000 et 3 000, dans les bornes du paramètre réglé, `max` > `min`), `step` (> 0, au plus `max − min`), `label` (1 à 40 caractères). Une figure sans contrôle est fixe.
 - Une figure s'utilise quand elle **aide vraiment** (un schéma qu'on ne peut pas décrire sans perdre l'élève). Pas de figure décorative. 12 au plus par leçon.
 - Un paramètre hors bornes, un paramètre inconnu, une description trop courte ou une sorte inconnue : la leçon entière est refusée (`figure_invalid`, avec le nom du paramètre).
 
-### Les cinq sortes (liste fermée)
+### Les huit sortes (liste fermée)
 
 | `kind` | Pour | Paramètres autorisés (bornes) |
 |---|---|---|
 | `geometry` | Thalès, triangle rectangle, angles inscrits | `points` (≤ 12), `segments` (≤ 30), `lines` (≤ 12), `circles` (≤ 6), `angles` (≤ 12), `labels` (≤ 20), `constraints` (≤ 12). Tout nombre d'un élément est compris entre −20 et 20. |
 | `coordinate_plane` | Vecteurs, équations, fonctions affines | `xmin`, `xmax`, `ymin`, `ymax` (−50 à 50), `points` (≤ 12), `vectors` (≤ 8), `lines` (≤ 6), `segments` (≤ 12). Nombres d'un élément : −50 à 50. |
 | `number_line` | Inéquations, intervalles, racines | `min`, `max` (−100 à 100), `step` (0,01 à 50), `points` (≤ 12), `intervals` (≤ 6). Nombres d'un élément : −100 à 100. |
-| `stat_chart` | Statistique | `chart` (`bars`, `histogram` ou `pie`), `series` (≤ 20 valeurs, de −1 000 000 à 1 000 000), `labels` (≤ 20) |
+| `stat_chart` | Statistique, évolution d'une grandeur | `chart` (`bars`, `histogram`, `pie` ou `line` — une courbe), `series` (≤ 20 valeurs, de 0 à 1 000 000), `labels` (≤ 20) |
 | `solid` | Pyramides et cônes | `shape` (`pyramid` ou `cone`), `base` (`square`, `rectangular` ou `triangular`), `height`, `side`, `width`, `depth`, `radius` (chacun de 0,5 à 50) |
+| `timeline` | Frise chronologique (Histoire, SVT, EDHC) | `start`, `end` (−3 000 à 2 100, `end` > `start`), `step` (1 à 500, 200 graduations au plus), `unit` (`year`, `month` ou `day` ; absent = `year`), `periods` (≤ 8), `events` (≤ 16). Réglables : `start`, `end` (zoom). |
+| `map` | Carte (Géographie, Histoire, EDHC) | `base` (`cote_d_ivoire`, `africa` ou `world`), `areas` (≤ 40), `places` (≤ 20), `routes` (≤ 10), `legend` (≤ 6 textes). Aucun réglable. |
+| `diagram` | Schéma fléché : étapes, causes et conséquences, organigramme, cycle | `layout` (`flow`, `tree` ou `cycle`), `direction` (`down` ou `right` ; absent = `down`), `nodes` (≤ 12), `edges` (≤ 16), `legend` (≤ 4 textes). Aucun réglable. |
 
 Un élément de liste est un nombre, un texte (60 caractères au plus), un tableau de 4 valeurs simples au plus, ou un objet de valeurs simples (texte, nombre, `true`/`false`). **Aucun tableau ni objet n'est imbriqué dans un objet.**
 
@@ -240,6 +243,15 @@ Formes d'éléments à utiliser :
 - `number_line` : `points` `{"value":2,"label":"x"}` ; `intervals` `{"from":1,"to":4,"from_open":true,"to_open":false}`.
 - `stat_chart` : `series` `[12, 18, 9]` et `labels` `["Lun","Mar","Mer"]` dans le même ordre.
 - `solid` : uniquement les dimensions (une `pyramid` utilise `base`, `height` et `side` ou `width` et `depth` ; un `cone` utilise `radius` et `height`).
+- `timeline` : `periods` `{"from":1893,"to":1960,"label":"Colonie française"}` (`from` < `to`) ; `events` `{"at":1934,"label":"Abidjan capitale"}`. Chaque `at`, `from`, `to` est compris entre `start` et `end`. Un curseur sur `start` ou `end` zoome la frise : ses bornes restent dans −3 000..2 100.
+- `map` : `areas` `{"id":"savanna","category":2}` (une aire au plus une fois ; `category` de 1 à la taille de `legend`, et `legend` est obligatoire dès qu'une aire est donnée) ; `places` `{"id":"abidjan","label":"Abidjan (port)"}` (`label` facultatif, sinon le nom du fond) ; `routes` `{"from":"abidjan","to":"bouake","label":"Voie ferrée"}` (entre deux lieux du fond). Les zones se distinguent par une teinte **et** un motif : la légende dit ce que chaque catégorie représente.
+- `diagram` : `nodes` `{"id":"ag","label":"Assemblée générale","category":1}` (`id` unique, `category` facultative de 1 à la taille de `legend`) ; `edges` `{"from":"onu","to":"ag","label":"élit"}` (entre deux nœuds existants, `label` facultatif). `tree` : une seule racine, chaque nœud a au plus un parent, aucun cycle ; `cycle` : 3 nœuds au moins.
+
+**Identifiants des fonds de carte (liste fermée).** Une carte ne nomme que ces aires et ces lieux ; tout autre identifiant fait refuser la leçon (`figure_invalid`, avec le chemin du paramètre). La liste fait foi dans `app/domain/entities/catalog/figure_catalogs.rb`.
+
+- `cote_d_ivoire` — aires : les 14 districts `abidjan`, `yamoussoukro`, `bas_sassandra`, `comoe`, `denguele`, `goh_djiboua`, `lacs`, `lagunes`, `montagnes`, `sassandra_marahoue`, `savanes`, `vallee_du_bandama`, `woroba`, `zanzan` ; les zones naturelles `dense_forest`, `savanna`, `coastal_strip`, `mountain_west` (contours schématiques). Lieux : `abidjan`, `yamoussoukro`, `bouake`, `daloa`, `korhogo`, `san_pedro`, `man`, `gagnoa`, `abengourou`, `bondoukou`, `odienne`, `divo`, `sassandra`, `grand_bassam`, `bingerville`, `assinie`, `grand_lahou`, `dabou`, `agboville`, `kong`, `seguela`, `ferkessedougou`, `katiola`, `dimbokro`, `aboisso`, `tabou`, `soubre`, `toumodi`, `tiassale`, `danane`, `boundiali`, `touba`, `guiglo`, `duekoue`, `bouafle`, `adzope`, `issia`, et les barrages `kossou`, `taabo`, `buyo`, `ayame`.
+- `africa` — aires : les 54 États, par leur code ISO à 3 lettres en minuscules (`civ`, `gha`, `rwa`, `nga`, `cod`…). Lieux : leurs capitales en minuscules sans accent, mots liés par `_` (`yamoussoukro`, `accra`, `kigali`, `addis_ababa`, `ndjamena`, `porto_novo`, `sao_tome`…), et `abidjan`, `lagos`, `johannesburg`, `casablanca`, `alexandria`, `mombasa`, `douala`, `suez`.
+- `world` — aires : les pays par leur code ISO à 3 lettres en minuscules (`fra`, `deu`, `usa`, `jpn`, `rus`, `gbr`…, sans l'Antarctique) et les continents `africa`, `asia`, `europe`, `north_america`, `south_america`, `oceania`. Lieux : `pearl_harbor`, `hiroshima`, `nagasaki`, `stalingrad`, `normandy`, `berlin`, `london`, `paris`, `moscow`, `washington`, `tokyo`, `rome`, `el_alamein`, `midway`, `warsaw`, `yalta`, `brazzaville`, `new_york`, `san_francisco`, `geneva`, `the_hague`, `abidjan`.
 
 Si aucune sorte ne convient, **n'invente pas de sorte** : n'utilise pas de figure et décris la situation dans l'énoncé, puis signale-le dans ton bilan.
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::FigureKinds
-# Rôle : liste fermée des cinq sortes de figures d'une leçon et bornes de leurs paramètres (une sorte nouvelle = un amendement de l'ADR)
-# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs
+# Rôle : liste fermée des huit sortes de figures d'une leçon et bornes de leurs paramètres (une sorte nouvelle = un amendement de l'ADR)
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2), XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs
 module Entities
   module Catalog
     module FigureKinds
@@ -18,7 +18,7 @@ module Entities
       ITEM_ARRAY_MAX = 4
       CONTROLS_MAX = 4
       LABEL_MAX = 40
-      CONTROL_BOUND = 1_000
+      CONTROL_BOUND = 3_000 # bornes d'un curseur : couvre les années d'une frise (−3000..2100)
       KEY_PATTERN = /\A[a-z0-9][a-z0-9-]{0,39}\z/
       PARAM_PATTERN = /\A[a-z][a-z0-9_]{0,29}\z/
       DESCRIPTION_LENGTH = (150..600)
@@ -57,11 +57,20 @@ module Entities
                                   params: { "min" => number(-100..100), "max" => number(-100..100), "step" => number(0.01..50),
                                             "points" => list(12), "intervals" => list(6) }),
         "stat_chart" => Kind.new(name: "stat_chart", item_range: (-1_000_000..1_000_000), adjustable: [].freeze, required: ->(_) { %w[chart series] },
-                                 params: { "chart" => enum("bars", "histogram", "pie"), "series" => list(20), "labels" => list(20) }),
+                                 params: { "chart" => enum("bars", "histogram", "pie", "line"), "series" => list(20), "labels" => list(20) }),
         "solid" => Kind.new(name: "solid", item_range: (0.5..50), adjustable: %w[height side width depth radius].freeze, required: SOLID_REQUIRED,
                             params: { "shape" => enum("pyramid", "cone"), "base" => enum("square", "rectangular", "triangular"),
                                       "height" => number(0.5..50), "side" => number(0.5..50), "width" => number(0.5..50),
-                                      "depth" => number(0.5..50), "radius" => number(0.5..50) })
+                                      "depth" => number(0.5..50), "radius" => number(0.5..50) }),
+        "timeline" => Kind.new(name: "timeline", item_range: (-3000..2100), adjustable: %w[start end].freeze, required: ->(_) { %w[start end step] },
+                               params: { "start" => number(-3000..2100), "end" => number(-3000..2100), "step" => number(1..500),
+                                         "unit" => enum("year", "month", "day"), "periods" => list(8), "events" => list(16) }),
+        "map" => Kind.new(name: "map", item_range: (1..6), adjustable: [].freeze, required: ->(_) { %w[base] },
+                          params: { "base" => enum("cote_d_ivoire", "africa", "world"), "areas" => list(40), "places" => list(20),
+                                    "routes" => list(10), "legend" => list(6) }),
+        "diagram" => Kind.new(name: "diagram", item_range: (1..4), adjustable: [].freeze, required: ->(_) { %w[layout nodes] },
+                              params: { "layout" => enum("flow", "tree", "cycle"), "direction" => enum("down", "right"),
+                                        "nodes" => list(12), "edges" => list(16), "legend" => list(4) })
       }.freeze
       NAMES = ALL.keys.freeze
 
