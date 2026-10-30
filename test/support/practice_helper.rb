@@ -4,13 +4,6 @@ module PracticeHelper
 
   EXPLANATION = "On applique la méthode de la notion pas à pas, puis on vérifie le résultat obtenu.".freeze
 
-  # Lot A (jugement par case) pas encore fusionné : le test à plusieurs cases attend `blank_results` sur les kinds chiffré, trous et liste.
-  def skip_until_lot_a_blank_results
-    return if Entities::Assessment::Question.kind_for("numeric").respond_to?(:blank_results)
-
-    skip "En attente du Lot A : Question#blank_results (jugement par case) n'est pas encore porté par les types de question"
-  end
-
   def numeric_question(content: "AN (cm) = ___", value: "4,8", unit: "cm")
     { "content" => content, "question_type" => "numeric", "unit" => unit, "tolerance" => 0.01, "explanation" => EXPLANATION,
       "answers" => [ { "content" => value, "correct" => true, "blank" => 0 } ] }
@@ -41,6 +34,18 @@ module PracticeHelper
   def fill_blank_question
     { "content" => "Le côté opposé à l'angle droit s'appelle l'___.", "question_type" => "fill_blank", "explanation" => EXPLANATION,
       "answers" => [ { "content" => "hypoténuse" } ] }
+  end
+
+  def notebook_question
+    { "content" => "Trace la figure sur ton cahier.", "question_type" => "notebook", "explanation" => EXPLANATION, "answers" => [] }
+  end
+
+  # Une liste déroulante à `blanks` cases : une proposition juste et une fausse par case.
+  def select_question(blanks: 1)
+    answers = (0...blanks).flat_map do |blank|
+      [ { "content" => "juste #{blank}", "correct" => true, "blank" => blank }, { "content" => "faux #{blank}", "correct" => false, "blank" => blank } ]
+    end
+    { "content" => Array.new(blanks) { "___" }.join(" et "), "question_type" => "select", "explanation" => EXPLANATION, "answers" => answers }
   end
 
   def written_question

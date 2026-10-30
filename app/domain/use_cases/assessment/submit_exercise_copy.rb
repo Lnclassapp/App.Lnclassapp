@@ -21,6 +21,7 @@ module UseCases
       BLANK_KINDS = [ Entities::Assessment::QuestionKinds::Numeric, Entities::Assessment::QuestionKinds::FillBlank,
                       Entities::Assessment::QuestionKinds::Select ].freeze
       BLANK_SEPARATOR = " ; ".freeze
+      INVALID_PICK = :invalid_pick
 
       def initialize(sessions:, exercises:, policy:, close:, transaction:, clock:)
         @sessions = sessions
@@ -144,7 +145,15 @@ module UseCases
         return posted unless question.kind.equal?(Entities::Assessment::QuestionKinds::Select)
 
         shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answer_ids)
-        posted.map { |index| shuffled[index.to_i] if index.match?(Dtos::Assessment::AttemptInput::INTEGER) }
+        posted.map { |index| shown_id(shuffled, index) }
+      end
+
+      # Vide : la case est laissée vide (nil). Non vide, illisible ou hors bornes : INVALID_PICK, que well_formed? refuse.
+      def shown_id(shuffled, index)
+        return nil if index.strip.empty?
+
+        at = index.match?(Dtos::Assessment::AttemptInput::INTEGER) ? index.to_i : nil
+        at&.between?(0, shuffled.size - 1) ? shuffled[at] : INVALID_PICK
       end
 
       # Seule la réponse rédigée a droit à 2 000 caractères ; trous et nombre restent à 200 (menace W2).

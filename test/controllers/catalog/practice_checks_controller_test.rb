@@ -1,9 +1,10 @@
 require "test_helper"
 
-# CA-6, CA-7, CA-8, CA-9 — ADR entraînement corrigé sans trace §4, UDR je-m-entraine-dans-la-fiche §3.4 à §3.6. « Vérifier » : le serveur juge
+# CA-4, CA-6 à CA-9, CA-17 — ADR entraînement corrigé sans trace §4, UDR je-m-entraine-dans-la-fiche §3.4 à §3.6. « Vérifier » : le serveur juge
 # les réponses d'une notion et rend le verdict puis le corrigé, dans un frame ou en page pleine, sans rien écrire.
 class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
   setup do
+    Rails.cache.clear
     @course = create_course(name: "Racines carrées", content: "")
     @notion = create_practice_notion(course: @course, questions: [ numeric_question, choice_question ])
     @student = create_student_for(@course)
@@ -22,7 +23,7 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     display_index(practice, practice.questions.last, 0).to_s
   end
 
-  test "CA-6: a student gets a verdict per box and the correction in the frame, in words and not by colour alone" do
+  test "CA-4: a student gets a verdict per box and the correction in the frame, in words and not by colour alone" do
     sign_in_as @student
 
     check({ "0" => { "blanks" => { "0" => "4,8" } }, "1" => { "ids" => [ right_choice ] } })
@@ -37,7 +38,7 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     assert_no_match(/<html/, response.body, "le frame seul, sans le shell")
   end
 
-  test "CA-6: a wrong or empty box is marked aria-invalid and the saisie is kept" do
+  test "CA-4: a wrong or empty box is marked aria-invalid and the saisie is kept" do
     sign_in_as @student
 
     check({ "0" => { "blanks" => { "0" => "5" } } })
@@ -49,7 +50,7 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     assert_select ".sheet-practice-correction", text: /4,8 cm/
   end
 
-  test "CA-6: without a Turbo-Frame header the same answer is a full page with the back link and the same status" do
+  test "CA-9: without a Turbo-Frame header the same answer is a full page with the back link and the same status" do
     sign_in_as @student
 
     check({ "0" => { "blanks" => { "0" => "4,8" } } }, headers: {})
@@ -59,16 +60,18 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     assert_select "h1", text: pt("page_title", notion: @notion.name)
     assert_select "a[href='#{course_path(@course.slug, anchor: "notion-#{@notion.slug}")}']", text: pt("back")
     assert_select "turbo-frame#practice_#{@notion.slug} .sheet-verdict[data-verdict='correct']"
+    assert_select ".sheet-practice-correction", text: /4,8 cm/
   end
 
   test "CA-4: nothing is written, the page answers 200 and no table gains a row" do
     sign_in_as @student
     tables = ActiveRecord::Base.connection.tables - %w[schema_migrations ar_internal_metadata sessions]
-    counts = -> { tables.sum { ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{it}").to_i } }
+    counts = -> { tables.to_h { [ it, ActiveRecord::Base.connection.select_value("SELECT COUNT(*) FROM #{ActiveRecord::Base.connection.quote_table_name(it)}").to_i ] } }
     before = counts.call
 
     check({ "0" => { "blanks" => { "0" => "4,8" } } })
 
+    assert_response :success
     assert_equal before, counts.call
   end
 
@@ -98,13 +101,25 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     assert_select ".sheet-practice-correction", count: 0
   end
 
-  test "CA-9: a visitor is sent to the sign-in" do
+  test "CA-8: the limit is per account, another student is still served" do
+    sign_in_as @student
+    31.times { check({}) }
+    assert_response :too_many_requests
+
+    sign_in_as create_student_for(@course)
+    check({ "0" => { "blanks" => { "0" => "4,8" } } })
+
+    assert_response :success
+    assert_select ".sheet-verdict[data-verdict='correct']"
+  end
+
+  test "CA-6: a visitor is sent to the sign-in" do
     check({})
 
     assert_redirected_to new_session_path
   end
 
-  test "CA-9: a draft notion, a draft lesson, an unknown notion and a student of another level answer 404 without a hint" do
+  test "CA-6: a draft notion, a draft lesson, an unknown notion and a student of another level answer 404 without a hint" do
     sign_in_as @student
     draft = create_practice_notion(course: @course, name: "Brouillon de notion", status: "draft")
     check({}, notion: draft)
@@ -119,7 +134,30 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     assert_response :not_found
   end
 
-  test "CA-9: the team may check a draft notion" do
+  test "CA-6: a teacher gets 404 for a draft notion and for a notion of a draft lesson" do
+    sign_in_as create_teacher(classrooms: [])
+    draft = create_practice_notion(course: @course, name: "Brouillon de notion", status: "draft")
+    check({}, notion: draft)
+    assert_response :not_found
+
+    draft_course = create_course(name: "Leçon brouillon", status: "draft", content: "")
+    in_draft = create_practice_notion(course: draft_course, name: "Notion d'une leçon brouillon")
+    check({}, course: draft_course, notion: in_draft)
+    assert_response :not_found
+  end
+
+  test "CA-6: a student gets 404 for a notion of a draft lesson, at the HTTP level" do
+    sign_in_as @student
+    draft_course = create_course(name: "Leçon brouillon", status: "draft", level: @course.level, content: "")
+    in_draft = create_practice_notion(course: draft_course, name: "Notion d'une leçon brouillon")
+
+    check({}, course: draft_course, notion: in_draft)
+
+    assert_response :not_found
+    assert_select ".sheet-verdict", count: 0
+  end
+
+  test "CA-6: the team may check a draft notion" do
     sign_in_as create_team_member
     draft_course = create_course(name: "Brouillon", status: "draft", content: "")
     draft = create_practice_notion(course: draft_course, status: "draft")
@@ -136,6 +174,34 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select ".sheet-verdict[data-verdict='blank']", count: 2
+  end
+
+  test "an empty, unreadable or out-of-range list answer is a box to complete, never a 500" do
+    notion = create_practice_notion(course: @course, name: "Liste", questions: [ select_question, select_question(blanks: 2) ])
+    digest = Entities::Catalog::NotionPractice.from_raw(raw_practice(select_question, select_question(blanks: 2))).digest
+    sign_in_as @student
+
+    [ "", "abc", "99", "-1" ].each do |value|
+      check({ "0" => { "blanks" => { "0" => value } }, "1" => { "blanks" => { "0" => value, "1" => value } } }, notion:, digest:)
+
+      assert_response :success, "saisie #{value.inspect}"
+      assert_select ".sheet-verdict[data-verdict='blank']", count: 3
+    end
+  end
+
+  test "CA-17: a notebook question is closed with « J'ai fini » and its correction shows without any verdict" do
+    notion = create_practice_notion(course: @course, name: "Cahier", questions: [ notebook_question ])
+    digest = Entities::Catalog::NotionPractice.from_raw(raw_practice(notebook_question)).digest
+    sign_in_as @student
+
+    get course_path(@course.slug)
+    assert_select "##{"practice_#{notion.slug}"} button[type=submit]", text: pt("done")
+
+    check({}, notion:, digest:)
+
+    assert_response :success
+    assert_select ".sheet-verdict", count: 0
+    assert_select "details.sheet-practice-correction[open]", text: /#{Regexp.escape(numeric_question["explanation"])}/
   end
 
   test "a notion without practice answers 404" do

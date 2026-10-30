@@ -69,7 +69,8 @@
         <% number = question.number %>
         <% problem = errors[number] %>
         <%# L'énoncé d'un texte à trous, ou d'une liste dont le trou est dans la phrase, est la phrase, qui porte le champ : la légende en est la consigne (UDR-0087 §3.4, 0140 §3). %>
-        <% legend = if question.kind_name == "fill_blank" then t("assessment.exercise_sessions.kinds.fill_blank.legend")
+        <%# Une question chiffrée à plusieurs cases est de même une phrase à champs (UDR fiche §3.8) : la phrase remplace l'énoncé, la légende est la consigne. %>
+        <% legend = if question.kind_name == "fill_blank" || (question.kind_name == "numeric" && question.multi_blank?) then t("assessment.exercise_sessions.kinds.fill_blank.legend")
                     elsif question.kind_name == "select" && question.content.include?(Entities::Assessment::QuestionKinds::FillBlank::MARKER) then t("assessment.exercise_sessions.kinds.select.legend")
                     else question.content end %>
         <li id="question-<%= number %>">

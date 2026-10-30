@@ -141,4 +141,25 @@ class Assessment::MultiBlankCopyTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_equal 0, Orm::QuestionAttempt.where(exercise_session: session).count
   end
+
+  test "UDR 3.8 : la phrase à cases remplace l'énoncé, ni dans la copie ni dans le résultat on ne lit les ___ bruts" do
+    exercise, numeric, single = two_blank_exercise
+    student = create_student_for(exercise.essential.course)
+    session = create_exercise_session(student:, exercise:)
+    sign_in_as student
+
+    get exercise_session_path(session.public_id)
+
+    assert_select "#question-1", text: /___/, count: 0
+    assert_select "#question-1 input[name$='[blanks][1]']"
+
+    post exercise_session_copy_path(session.public_id), params: { copy: { answers: {
+      numeric.id.to_s => { blanks: { "0" => "3", "1" => "5" } }, single.id.to_s => { response_text: "Abidjan" }
+    } } }
+    get exercise_session_result_path(session.public_id)
+
+    assert_select "#question_review_#{numeric.id}", text: /___/, count: 0
+    assert_select "#question_review_#{numeric.id} [data-blank-verdict]", 2
+    assert_select "#question_review_#{single.id}", text: /Capitale ___/
+  end
 end

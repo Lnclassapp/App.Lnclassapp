@@ -36,9 +36,7 @@ class Catalog::PracticeInSheetSystemTest < ApplicationSystemTestCase
     assert_current_path course_path(@course.slug)
   end
 
-  # En attente du Lot A (verdict par case d'une question à plusieurs cases).
   test "a two-box question gets one verdict per box" do
-    skip_until_lot_a_blank_results
     notion = create_practice_notion(course: create_course(name: "Thalès", content: "", level: @course.level), questions: [ two_blank_numeric_question ])
     sign_in_as @student
     visit course_path(notion.course.slug)

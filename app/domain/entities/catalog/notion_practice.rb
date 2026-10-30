@@ -52,13 +52,16 @@ module Entities
       def self.question_from(raw, index)
         choice = %w[choice select].include?(Assessment::Question.kind_name_for(raw["question_type"]))
         answers = Array(raw["answers"]).each_with_index.map do |answer, rank|
-          Assessment::Answer.new(id: rank, position: rank + 1, content: answer["content"].to_s.strip, correct: !choice || answer["correct"] == true,
+          Assessment::Answer.new(id: rank, position: rank + 1, content: answer["content"].to_s.strip, correct: !choice || correct_in?(answer),
                                  match_content: answer["match"].to_s.strip.presence, blank: answer["blank"] || 0)
         end
         Assessment::Question.new(id: index, position: index + 1, content: raw["content"].to_s.strip, explanation: raw["explanation"].to_s.strip.presence,
                                  question_type: raw["question_type"], answers:, numeric_tolerance: raw["tolerance"]&.then { BigDecimal(it.to_s) },
                                  unit: raw["unit"].to_s.strip.presence, starter: raw["starter"].to_s.strip.presence, hint: raw["hint"].to_s.strip.presence)
       end
+
+      # L'ancienne application nomme is_correct ce que le schéma nomme correct : un seul lecteur pour la copie et la validation.
+      def self.correct_in?(answer) = answer.fetch("correct") { answer["is_correct"] } == true
 
       def self.statement_errors(statement)
         return [] if statement.nil?
@@ -124,7 +127,7 @@ module Entities
         type = raw["question_type"]
         tolerance = raw["tolerance"]
         answers = raw["answers"].each_with_index.map do |answer, index|
-          Assessment::Answer.new(id: index, position: index, content: answer["content"], correct: answer.fetch("correct") { answer["is_correct"] } == true,
+          Assessment::Answer.new(id: index, position: index, content: answer["content"], correct: correct_in?(answer),
                                  match_content: answer["match"].to_s.strip.presence, blank: answer["blank"] || 0)
         end
         rules = Assessment::Question.structure_errors_for(question_type: type, answers:, content: raw["content"],
@@ -138,7 +141,7 @@ module Entities
 
       def self.violation(path, code, **params) = [ path, code, params ]
 
-      private_class_method :canonical, :question_from, :statement_errors, :question_errors, :shape_errors, :hint_ok?, :answers_shape_errors,
+      private_class_method :canonical, :question_from, :correct_in?, :statement_errors, :question_errors, :shape_errors, :hint_ok?, :answers_shape_errors,
                            :text_errors, :explanation_errors, :structure_errors, :violation
     end
 

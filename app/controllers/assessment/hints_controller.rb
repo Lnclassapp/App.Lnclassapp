@@ -13,16 +13,22 @@ module Assessment
         @opened = opened
         respond_to do |format|
           format.turbo_stream
-          format.html { redirect_to exercise_session_path(params[:public_id], anchor: "question-#{number_of(opened.question_id)}"), status: :see_other }
+          format.html { redirect_to exercise_session_path(params[:public_id], anchor: anchor_for(opened.question_id)), status: :see_other }
         end
       }
     end
 
     private
 
-    # Rang de la question dans son exercice (l'ancre de la copie), lu sur la copie de l'élève.
+    # L'ancre de la question dans la copie ; rien si son rang ne se lit pas (la copie vient d'être rendue ailleurs).
+    def anchor_for(question_id)
+      number = number_of(question_id)
+      "question-#{number}" if number
+    end
+
+    # Rang de la question dans son exercice, lu sur la copie de l'élève.
     def number_of(question_id)
-      Queries::Assessment::SessionPlayQuery.new.copy(public_id: params[:public_id]).questions.find { it.id == question_id }.number
+      Queries::Assessment::SessionPlayQuery.new.copy(public_id: params[:public_id])&.questions&.find { it.id == question_id }&.number
     end
 
     def open_hint

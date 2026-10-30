@@ -64,9 +64,7 @@ module Entities
         end
       end
 
-      # En attente du Lot A : le verdict par case des questions à plusieurs cases est celui de Question#blank_results.
       test "CA-5: une question à plusieurs cases reçoit les verdicts par case de Question#blank_results" do
-        skip_until_lot_a_blank_results
         raw = two_blank_numeric_question
         question = copy_question(raw)
         practice = Catalog::NotionPractice.from_raw(raw_practice(raw))

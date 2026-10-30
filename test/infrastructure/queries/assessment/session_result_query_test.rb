@@ -178,6 +178,7 @@ module Queries
       end
 
       # ADR-0091 §4.4 : « Ton choix » par type ; la solution seulement avec reveal.
+      # Le nombre de cases (MAX(blank)) est la seule lecture de answers hors reveal pour les trous et le nombre : ni texte, ni correction.
       def kind_review(reveal:)
         exercise = create_exercise(questions: 0)
         blank = create_kind_question(exercise:, question_type: "fill_blank", content: "La capitale est ___ .", answers: %w[Abidjan])
@@ -194,7 +195,7 @@ module Queries
         attempt.(steps, ids: steps.answers.order(:position).map(&:id).reverse)
         attempt.(pairs, ids: pairs.answers.order(:position).map(&:id).rotate)
         binds = []
-        callback = ->(*, payload) { binds.concat(payload[:type_casted_binds]) if payload[:sql].include?('FROM "answers"') }
+        callback = ->(*, payload) { binds.concat(payload[:type_casted_binds]) if payload[:sql].include?('FROM "answers"') && !payload[:sql].include?("MAX(") }
         review = ActiveSupport::Notifications.subscribed(callback, "sql.active_record") { result(reveal:, session:).review }
         [ review, binds ]
       end
@@ -495,6 +496,34 @@ module Queries
         assert_equal [ [], [] ], row.review.map(&:blank_results)
         assert_equal [ Rational(0), Rational(1) ], row.review.map(&:share)
         assert_equal [ BigDecimal("1"), BigDecimal("2"), false ], [ row.points.earned, row.points.graded, row.points.weighted ]
+      end
+
+      test "plusieurs cases laissées vides : la question reste à plusieurs cases, sans réponse, et rapporte 0 comme Grading.share" do
+        session, numeric, select = multi_blank_session
+        Orm::QuestionAttempt.where(exercise_session: session).delete_all
+        Orm::QuestionAttempt.create!(exercise_session: session, question: numeric, correct: false, selected_answer_ids: [], response_text: nil,
+                                     unanswered: true, answered_at: Time.current)
+
+        [ true, false ].each do |reveal|
+          first, second = result(session:, reveal:).review
+
+          assert_equal [ true, true ], [ first.multi_blank?, second.multi_blank? ], "reveal #{reveal}"
+          assert_equal [ 2, 2 ], [ first.blanks, second.blanks ]
+          assert_equal [ Rational(0), Rational(0) ], [ first.share, second.share ]
+          assert_equal Entities::Assessment::Grading.share_of(blanks: 2, correct: false, blank_results: []), first.share
+        end
+        assert_equal [ [ "3" ], [ "4" ] ], result(session:, reveal: true).review.first.blank_solutions
+        assert select
+      end
+
+      test "la part d'une question lit la règle de Grading.share, une case ou plusieurs" do
+        session, numeric, select = multi_blank_session
+        questions = Repositories::Assessment::ExerciseRepository.new.find(id: numeric.exercise_id).questions
+        attempts = Repositories::Assessment::ExerciseSessionRepository.new.attempts(session_id: session.id).to_h { [ it.question_id, it ] }
+
+        shares = result(session:).review.map(&:share)
+
+        assert_equal [ numeric, select ].map { |orm| questions.find { it.id == orm.id } }.map { Entities::Assessment::Grading.share(it, attempts[it.id]) }, shares
       end
     end
   end

@@ -60,9 +60,16 @@ module Entities
       # plusieurs, cases justes / cases. Sans tentative, 0. Une question sans case jugée garde `correct` : les tentatives d'avant les cases.
       def self.share(question, attempt)
         return Rational(0) if attempt.nil?
-        return Rational(attempt.correct == true ? 1 : 0) if question.blanks == 1
 
-        Rational(attempt.blank_results.count(true), question.blanks)
+        share_of(blanks: question.blanks, correct: attempt.correct, blank_results: attempt.blank_results)
+      end
+
+      # La même règle, pour qui n'a pas la question sous la main (le résultat) : blanks, le nombre de cases de la question. Une
+      # question à plusieurs cases sans verdict par case (copie laissée vide) rapporte 0.
+      def self.share_of(blanks:, correct:, blank_results:)
+        return Rational(correct == true ? 1 : 0) if blanks == 1
+
+        Rational(blank_results.count(true), blanks)
       end
 
       # ADR-0115, ADR cases §6 : les points rapportés sur ceux des questions corrigées automatiquement, en fractions de points, arrondi

@@ -22,7 +22,10 @@
       <%= ui_badge t("assessment.session_results.show.#{verdict}"), tone: badge.first, icon: badge.last, size: :sm %>
     <% end %>
   </div>
-  <p class="mt-2 whitespace-pre-line text-ink"><%= question.content %></p>
+  <%# Plusieurs cases : la phrase à cases (blanks_review) remplace l'énoncé brut et ses ___ (UDR fiche §3.9). %>
+  <% unless question.multi_blank? %>
+    <p class="mt-2 whitespace-pre-line text-ink"><%= question.content %></p>
+  <% end %>
   <div class="mt-2">
     <%= render "assessment/session_results/kinds/#{question.kind_name}_review", question:, reveal: %>
   </div>

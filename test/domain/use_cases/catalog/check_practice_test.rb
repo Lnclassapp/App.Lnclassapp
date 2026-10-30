@@ -166,15 +166,38 @@ module UseCases
         assert_equal %i[notions policy level_policy], CheckPractice.instance_method(:initialize).parameters.map(&:last), "aucun port d'écriture injecté"
       end
 
-      # En attente du Lot A (Question#blank_results pour tous les types) : plusieurs cases.
       test "plusieurs cases : un verdict par case" do
-        skip_until_lot_a_blank_results
         use_case = build(two_blank_numeric_question)
 
         assert_equal [ :correct, :wrong ], check(use_case, { "0" => blanks("4,8 cm", "5") }).value.questions.first.verdicts
         assert_equal [ :correct, :blank ], check(use_case, { "0" => blanks("4,8", "") }).value.questions.first.verdicts
         assert_equal :some_wrong, check(use_case, { "0" => blanks("4,8", "5") }).value.status
         assert_equal [ "4,8 cm", "3 cm" ], check(use_case, {}).value.questions.first.expected
+      end
+
+      test "une liste laissée vide, illisible ou hors bornes est une case à compléter, jamais une exception" do
+        [ 1, 2 ].each do |blanks|
+          use_case = build(select_question(blanks:))
+
+          [ "", "abc", "99", "-1", " " ].each do |value|
+            given = { "blanks" => (0...blanks).to_h { [ it.to_s, value ] } }
+            verdicts = check(use_case, { "0" => given }).value.questions.first.verdicts
+
+            assert_equal Array.new(blanks, :blank), verdicts, "#{blanks} case(s), saisie #{value.inspect}"
+          end
+        end
+      end
+
+      test "une bonne réponse écrite is_correct est reconnue comme correct" do
+        raw = choice_question.merge("answers" => [ { "content" => "7", "is_correct" => true }, { "content" => "8", "is_correct" => false } ])
+        question = Entities::Catalog::NotionPractice.from_raw(raw_practice(raw)).questions.first
+
+        assert_equal [ true, false ], question.answers.map(&:correct)
+
+        use_case = build(raw)
+        right = display_index(@practice, @practice.questions.first, 0)
+
+        assert_equal [ :correct ], check(use_case, { "0" => { "ids" => [ right.to_s ] } }).value.questions.first.verdicts
       end
     end
   end

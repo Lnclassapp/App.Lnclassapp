@@ -25,6 +25,7 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - Lot 0 : `NotionPractice#without_correction` vide les réponses des types chiffré, trous, rédigé et cahier ; ordering et matching gardent leurs éléments (nécessaires à l'affichage) dans l'ordre des positions : le Lot C doit les mélanger avant de les rendre.
 - Lot C : trois tests (use case, parité CA-5, système « deux cases ») attendent `blank_results` du Lot A : ils se sautent par `skip_until_lot_a_blank_results` (test/support/practice_helper.rb) et se réveillent seuls après la fusion de A. `PortContractsTest` ne reste rouge que sur `record_hint` (Lot A) ; `practice_for` est écrit.
 - Lot C : deux clés (`notebook`, `unscored`) ajoutées à `config/locales/catalog/revision_sheets.fr.yml` (fichier du Lot 0) : libellés manquants au gel.
+- Lot R (corrections des revues) : liste vide/illisible/hors bornes jugée « à compléter » (fiche) ou refusée (copie à plusieurs cases) sans exception ; `is_correct` lu par un seul lecteur (`NotionPractice.correct_in?`) ; `ReviewQuestion#blanks` (nombre de cases de la question) remplace la déduction par `blank_results.size`, `Grading.share_of` est la règle unique des parts ; l indice sans rang lisible redirige sans ancre ; la phrase à cases remplace l énoncé brut (copie et résultat) ; `skip_until_lot_a_blank_results` retiré. Un enseignant postant un indice reçoit 403 (garde de rôle), pas 404 ; la politique de niveau laisse un enseignant lire tout niveau publié.
 
 ## Dette laissée derrière
 

@@ -63,11 +63,13 @@ class Assessment::HintsControllerTest < ActionDispatch::IntegrationTest
 
   test "ouvrir un indice ne change pas la note de la copie" do
     sign_in_as @student
-    open_hint
 
-    assert_no_difference -> { Orm::QuestionAttempt.count } do
-      assert_equal [ "started", nil ], @session.reload.then { [ it.status, it.score_percent ] }
+    assert_no_difference [ "Orm::QuestionAttempt.count", "Orm::ExerciseSession.where(status: 'completed').count" ] do
+      open_hint
     end
+
+    assert_redirected_to exercise_session_path(@session.public_id, anchor: "question-2")
+    assert_equal [ "started", nil, [ @second.id ] ], @session.reload.then { [ it.status, it.score_percent, it.hinted_question_ids ] }
   end
 
   test "CA-15 : une copie rendue : 404, rien d'enregistré" do
@@ -95,12 +97,52 @@ class Assessment::HintsControllerTest < ActionDispatch::IntegrationTest
     other = create_exercise(questions: 1).questions.first.tap { it.update!(hint: "Ailleurs.") }
     sign_in_as @student
 
-    [ @first, other ].each { open_hint(it) }
+    [ @first, other ].each do |question|
+      open_hint(question)
+      assert_response :not_found, "question #{question.id}"
+    end
     post exercise_session_hints_path(@session.public_id), params: { question_id: 0 }
+    assert_response :not_found
     post exercise_session_hints_path(@session.public_id)
-
     assert_response :not_found
     assert_empty @session.reload.hinted_question_ids
+  end
+
+  test "CA-15 : une copie abandonnée : 404, rien d'enregistré" do
+    abandoned = create_exercise_session(student: @student, exercise: @exercise, status: "abandoned")
+    sign_in_as @student
+
+    open_hint(session: abandoned)
+
+    assert_response :not_found
+    assert_empty abandoned.reload.hinted_question_ids
+    assert_not_includes response.body, HINT
+  end
+
+  test "un enseignant ne peut pas ouvrir l'indice de la copie d'un élève : refusé par le rôle (403), rien d'enregistré" do
+    sign_in_as create_teacher(classrooms: [])
+
+    open_hint
+
+    assert_response :forbidden
+    assert_empty @session.reload.hinted_question_ids
+    assert_not_includes response.body, HINT
+  end
+
+  test "sans rang de question lisible dans la copie, la redirection n'a pas d'ancre" do
+    sign_in_as @student
+    unreadable = Struct.new(:questions).new([])
+    original = Queries::Assessment::SessionPlayQuery.instance_method(:copy)
+    Queries::Assessment::SessionPlayQuery.define_method(:copy) { |**| unreadable }
+
+    begin
+      open_hint
+    ensure
+      Queries::Assessment::SessionPlayQuery.define_method(:copy, original)
+    end
+
+    assert_redirected_to exercise_session_path(@session.public_id)
+    assert_equal [ @second.id ], @session.reload.hinted_question_ids
   end
 
   test "la copie reste hors d'atteinte d'un visiteur déconnecté" do

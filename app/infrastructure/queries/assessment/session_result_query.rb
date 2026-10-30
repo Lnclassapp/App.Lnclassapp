@@ -31,17 +31,17 @@ module Queries
       # l'indice de cette question (Lot B l'affiche, sans rien dire du texte).
       ReviewQuestion = Data.define(:id, :number, :content, :explanation, :correct, :answers, :question_type, :response_text,
                                    :pairs, :solution, :numeric_tolerance, :unanswered, :points, :unit, :criteria,
-                                   :blank_responses, :blank_results, :blank_solutions, :hinted) do
+                                   :blank_responses, :blank_results, :blank_solutions, :hinted, :blanks) do
         def initialize(question_type: "single_choice", response_text: nil, pairs: [], solution: [], numeric_tolerance: nil,
                        unanswered: false, points: BigDecimal("1"), unit: nil, criteria: [], blank_responses: [], blank_results: [],
-                       blank_solutions: [], hinted: false, **) = super
+                       blank_solutions: [], hinted: false, blanks: 1, **) = super
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
         def auto_graded? = Entities::Assessment::Question.kind_for(question_type)::AUTO_GRADED
-        # Plusieurs cases : seule une tentative de plusieurs cases enregistre un verdict par case.
-        def multi_blank? = blank_results.size > 1
+        # Plusieurs cases : le nombre de cases de la question (blanks), pas celui des verdicts : une copie laissée vide n'en enregistre aucun.
+        def multi_blank? = blanks > 1
         def hinted? = hinted
-        # La part de la question que sa réponse rapporte, de 0 à 1 (Grading.share).
-        def share = multi_blank? ? Rational(blank_results.count(true), blank_results.size) : Rational(correct == true ? 1 : 0)
+        # La part de la question que sa réponse rapporte, de 0 à 1 : la règle de Grading.share, que la clôture applique à la note.
+        def share = Entities::Assessment::Grading.share_of(blanks:, correct:, blank_results:)
         def earned_points = points.to_r * share
       end
       # Sans reveal, correct vaut nil : la colonne n'est pas lue, et seules les propositions cochées le sont.
@@ -51,6 +51,7 @@ module Queries
       # Types dont la réponse est une proposition cochée ou choisie, et types sans élément ni proposition.
       CHOICE_KINDS = %w[choice select].freeze
       WRITTEN_KINDS = %w[written notebook].freeze
+      BLANK_KINDS = %w[numeric fill_blank select].freeze
       Pair = Data.define(:left, :right)
 
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id users.first_name
@@ -145,6 +146,7 @@ module Queries
         kinds = questions.to_h { |id, _, _, question_type| [ id, kind_name(question_type) ] }
         choice_ids = kinds.select { |_, kind| CHOICE_KINDS.include?(kind) }.keys
         answers = reveal ? all_answers(choice_ids, attempts) : selected_answers(attempts.slice(*choice_ids))
+        blanks = blank_counts(kinds)
         elements = elements(kinds.select { |_, kind| elements_needed?(kind, reveal) }.keys, reveal)
         questions.each_with_index.map do |(id, content, explanation, question_type, points, unit, criteria, tolerance), index|
           correct, selected, response_text, unanswered, blank_responses, blank_results = attempts.fetch(id, [ nil, [], nil, false, [], [] ])
@@ -152,10 +154,19 @@ module Queries
           written = WRITTEN_KINDS.include?(kind_name(question_type))
           ReviewQuestion.new(id:, number: index + 1, content:, explanation: (explanation if reveal || !written), correct:, question_type:,
                              response_text:, unanswered:, points:, unit:, criteria: (reveal ? criteria : []),
-                             answers: answers.fetch(id, []), blank_responses:, blank_results:, hinted: hinted_question_ids.include?(id),
+                             answers: answers.fetch(id, []), blank_responses:, blank_results:, blanks: blanks.fetch(id, 1), hinted: hinted_question_ids.include?(id),
                              blank_solutions: (blank_solutions(kind_name(question_type), elements.fetch(id, [])) if reveal) || [],
                              **kind_review(kind_name(question_type), elements.fetch(id, []), selected, reveal, tolerance))
         end
+      end
+
+      # Le nombre de cases de chaque question qui juge case par case (la plus haute case + 1, comme Question#blanks), lu sur les
+      # propositions seules : sans reveal, ni leur texte ni leur correction ne sortent. { question_id => Integer }
+      def blank_counts(kinds)
+        ids = kinds.select { |_, kind| BLANK_KINDS.include?(kind) }.keys
+        return {} if ids.empty?
+
+        Orm::Answer.where(question_id: ids).group(:question_id).maximum(:blank).transform_values { it.to_i + 1 }
       end
 
       def kind_name(question_type) = Entities::Assessment::Question.kind_name_for(question_type)

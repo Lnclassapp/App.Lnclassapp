@@ -119,12 +119,18 @@ module UseCases
       def select_verdicts(question, digest, input)
         shuffled = self.class.display_ids(digest, question)
         given = input["blanks"].is_a?(Hash) ? input["blanks"] : {}
-        picked = Array.new(question.blanks) { shuffled[index_of(given[it.to_s])&.then { |at| at if at.between?(0, shuffled.size - 1) }] }
+        picked = Array.new(question.blanks) { shuffled_at(shuffled, given[it.to_s]) }
         return [ select_verdict(question, picked.first) ] if question.blanks == 1
 
         by_id = question.answers.index_by(&:id)
         results = question.blank_results(picked.map { by_id[it]&.content.to_s })
         picked.each_with_index.map { |id, index| id.nil? ? :blank : (results[index] ? :correct : :wrong) }
+      end
+
+      # La proposition que désigne l'indice posté ; rien si l'indice est vide, illisible ou hors des bornes.
+      def shuffled_at(shuffled, value)
+        at = index_of(value)
+        shuffled[at] if at&.between?(0, shuffled.size - 1)
       end
 
       def select_verdict(question, id)
