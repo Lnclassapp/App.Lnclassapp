@@ -9,6 +9,7 @@
 | 2026-10-13 | Grill repris avec l'algorithme en 5 étapes : une fiche de révision par leçon, 9 blocs, réponse numérique et indice, exercices à correction affichable retirés avec le verrou enseignant, figure fixe intégrée, bascule leçon par leçon | Les maquettes sont des fiches de cours ; seul ce qui sert à réviser est gardé, et le premier retour d'élèves n'attend plus les 213 leçons | À voir au PRD (format d'import v2, remplacement d'une leçon) |
 | 2026-10-27 | Lot 0 : format et contrat gelés (voir « Lot 0 » ci-dessous) ; `format` = `lnclass.course-sheet` | Le nom suit celui du schéma, comme `lnclass.course-tree` | Oui, à aligner dans l'ADR à la clôture |
 | 2026-10-28 | Lot F (Texte argumentatif, phase 2, repris de Touré par l'orchestrateur) : contrat du kind `argument_highlighter` et choix de contenu (voir « Lot F » ci-dessous) | Le contrat gelé du Lot 0 (`params` : 12 clés, chaînes de 200 caractères) ne porte le texte à analyser qu'en morceaux balisés | Non (contrat de kind, dans le journal) |
+| 2026-10-28 | Le porteur accepte les écarts du Lot F avec la maquette (voir « Lot F ») et l'en-tête des trois fiches passe de « … · Fiche de cours » à « … · Fiche de révision » | Le contrat gelé du Lot 0 ne les porte pas ; le nom à l'écran est tranché par l'UDR-0139 | Non |
 
 ### Lot 0 — Socle (2026-10-27)
 
@@ -81,17 +82,37 @@
 
 Mesurés avec `record_timings` corrigé (#341), les tests système des Lots E et F prenaient 27 s (11,5 + 15,4), au-delà des 15 s par chantier ; chaque PR passait la garde seule. Le porteur a choisi « réduire + dérogation » : le Lot F passe de 4 tests à 2 (9,8 s, mêmes vérifications), et les deux fichiers ont 22 s (amendement de l'ADR-0069 du 2026-10-28).
 
+### Challenger empirique (2026-10-28)
+
+Un agent distinct, qui n'a pas écrit le code, a fait tourner l'application (base de développement, élève de 3ème) sur les trois fiches, à 390 px et 1 440 px. Captures envoyées au porteur, non commitées.
+
+- **Parcours nominal : OK sur les trois fiches.** En-tête « … · Fiche de révision », « Voir plus » déplie la fiche entière, les blocs interactifs réagissent (simulateur et construction de Lentilles, surligneurs, entraînement et rédaction de Texte argumentatif, figure et réciproque de Thalès, exercices corrigés). Console : aucune erreur, aucune requête en échec.
+- **Chemins d'erreur : OK.** Mauvaise réponse (retour « à revoir », solution), ancienne URL `/courses/:slug/fiche` (301 vers l'ancre, fiche repliée), visiteur anonyme (302 vers la connexion, rien d'exposé).
+- **Mesures** (bureau, 4 chargements) : page de la leçon chargée en 196 à 590 ms (TTFB 121 à 228 ms, 92 à 115 Ko) ; du clic « Voir plus » au bloc interactif prêt, 6 à 91 ms.
+- **390 px** : aucun débordement horizontal (`scrollWidth` = 390 sur les trois fiches).
+
+**Anomalies relevées**
+- A. Retour arrière (cache Turbo) : la fiche revient repliée et les blocs interactifs propres, mais les exercices corrigés gardent la saisie, les retours « à revoir » et le message global (Thalès, Lentilles, Texte argumentatif).
+- B. La coupe « Voir plus » tombe sur des blocs entiers : 346 mots visibles sur Lentilles, 229 sur Thalès, 199 sur Texte argumentatif, pour environ 150 annoncés ; sur Lentilles et Thalès le texte replié finit par l'annonce d'une figure masquée.
+- C. « Vérifier » sur un exercice vide : chaque champ dit « à compléter », le message global dit « Certaines réponses sont à revoir ».
+- D. Les graines n'importent que les fiches absentes : une base où Thalès est déjà importée garde « Géométrie · Fiche de cours » jusqu'à un ré-import (le remplacement d'une fiche est hors périmètre).
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
-- …
+- Le budget des tests système : chaque PR passait la garde seule, la somme des Lots E et F faisait 27 s pour 15. `record_timings` perdait la durée du premier test (coupé par le message de Puma) : 19 s annoncés au porteur, 27 s réels, rectifié avant de trancher (#341, #346).
+- La refonte de la page de la leçon (#337) a changé l'entrée de la fiche pendant la phase 2 (301 vers l'ancre, fiche pliée après 150 mots) : 10 tests du Lot E à reprendre après la fusion de `Develop`.
+- `bin/check-asset-budget` plafonnait à 60 Ko quand l'ADR-0114 et `javascript_bundle_test` disaient 61 : deux sources pour un même plafond (#341 les relie par un test).
+- Un en-tête resté « Fiche de cours » dans les trois fichiers de graines après que l'UDR-0139 a tranché le nom : vu seulement à la clôture.
 
 ## Ce qu'on a appris sur la codebase
 
 Découvertes sur du code existant, pièges, dépendances non documentées.
 
-- …
+- `#318` dans un en-tête HITL est lu comme une couleur par `design_tokens_test`.
+- Un contrôleur Stimulus qui charge sa logique par `import()` doit se remettre à zéro sur `turbo:before-cache` et ne poser `data-ready` qu'après l'import, sinon le retour arrière rend une copie déjà branchée.
+- Le JS commun est à 0,3 Ko de son plafond de 61 Ko : toute nouvelle coquille doit rester une coquille.
 
 ## Dette laissée derrière
 
@@ -99,13 +120,22 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| | | |
+| Relecture du contenu de Lentilles (leçon et fiche) par le porteur ou Touré | Relue par l'agent seul | Sans objet : fiche retirée le 2026-10-29 (#362) |
+| Écarts du Lot F avec la maquette (pastilles, colonnes, exercices à réponse libre, invite de rédaction) | Le contrat gelé du Lot 0 ne les porte pas ; acceptés par le porteur le 2026-10-28 | Une version 2 du format si une autre fiche en a besoin |
+| Conversion des 213 leçons au format des fiches | Hors périmètre (memo) | Chantier de contenu à ouvrir par le porteur |
+| Remplacement d'une fiche déjà en ligne, « Signaler une erreur », éditeur de fiches, serveur MCP | Hors périmètre (memo) | Chantiers à part |
+| Anomalies A, B et C du challenger (état des exercices au retour arrière, coupe « Voir plus », message de l'exercice vide) | Relevées à la clôture ; B tient à la coupe de `refonte-page-lecon` | A et C : sans objet (blocs retirés, #362) ; B : ticket de suivi |
+| En-tête de Thalès sur une base déjà semée (anomalie D) | Le remplacement d'une fiche est hors périmètre | Sans objet : table et graines retirées (#362) |
+| Budget système de 22 s pour les deux fiches | Dérogation de l'ADR-0069 (2026-10-28) | Toute nouvelle fiche refait le compte |
 
 ## Clôture
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-28 (dans `Develop`) |
+| **PR** | #319 (phase 1, Thalès), #339 (Lot E, Lentilles), #338 (Lot F, Texte argumentatif), #346 (budget système), clôture ; outillage lié : #341 |
+| **ADR produits** | ADR-0110 (fiche en données importées) ; amendement de l'ADR-0069 du 2026-10-28 (22 s) |
+| **UDR produits** | UDR-0137 (fiche à l'identique des maquettes) ; nom à l'écran tranché par l'UDR-0139 (`refonte-page-lecon`) |
+| **Challenger** | voir « Challenger empirique » ci-dessus |
+| **Retrait** | Le 2026-10-29, `refonte-contenus-maths` (Lot R, CA-17, #362) retire le format `lnclass.course-sheet`, la table `course_sheets`, les kinds et les trois fiches semées ; il garde l'habillage cahier (`course_sheet.css`, polices, Seyès, thèmes) pour la fiche v3. L'en-tête « Fiche de révision » de cette clôture n'a donc plus de fichier où vivre. |
+| **Suivi** | Anomalies A, C et D du challenger et relecture de Lentilles : sans objet, le code et les fiches sont retirés. Anomalie B (coupe « Voir plus ») : à revérifier sur la fiche v3, voir le ticket de suivi. |
