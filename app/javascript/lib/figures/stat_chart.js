@@ -1,5 +1,5 @@
-// ⚡ FRONT · lib/figures/stat_chart — le diagramme statistique : bâtons, histogramme ou circulaire
-// Rôle : lit `chart` (bars, histogram, pie), `series` (nombres de 0 à 1 000 000) et `labels` (textes, dans le même ordre) ; revérifie les valeurs avant de dessiner
+// ⚡ FRONT · lib/figures/stat_chart — le diagramme statistique : bâtons, histogramme, courbe ou circulaire
+// Rôle : lit `chart` (bars, histogram, line, pie), `series` (nombres de 0 à 1 000 000) et `labels` (textes, dans le même ordre) ; revérifie les valeurs avant de dessiner ; la courbe (`line`) relie un point par valeur sur le repère gradué des bâtons, étiquettes d'abscisse sur deux rangs si elles se chevauchent
 // ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3) · chargé par import() depuis controllers/figure_controller
 
 import { el, root, label, fixed, round } from "./svg"
@@ -14,7 +14,7 @@ const BOTTOM = 52
 const MAX_VALUES = 20
 const RANGE = 1_000_000
 const MAX_TICKS = 50
-const CHARTS = ["bars", "histogram", "pie"]
+const CHARTS = ["bars", "histogram", "pie", "line"]
 const TONES = ["primary", "accent", "success", "muted", "ink"]
 
 const finite = (value) => typeof value === "number" && Number.isFinite(value)
@@ -49,13 +49,15 @@ export function create(canvas, params) {
     const { chart, series, names } = read(next)
     const svg = root(WIDTH, chart === "pie" ? PIE_HEIGHT : HEIGHT)
     if (chart === "pie") drawPie(svg, series, names)
+    else if (chart === "line") drawLine(svg, series, names)
     else drawBars(svg, series, names, chart === "histogram")
     state.svg?.remove()
     canvas.appendChild(svg)
     state.svg = svg
   }
 
-  function drawBars(svg, series, names, joined) {
+  // Le repère gradué commun aux bâtons et à la courbe : graduations, axes, échelle verticale.
+  function frame(svg, series) {
     const { unit, max } = niceMax(Math.max(...series))
     const height = HEIGHT - TOP - BOTTOM
     const y = (value) => round(TOP + height - (value / max) * height)
@@ -64,6 +66,13 @@ export function create(canvas, params) {
       el("line", { x1: LEFT, y1: y(value), x2: WIDTH - RIGHT, y2: y(value), stroke: "grid", "stroke-width": 0.75 }, svg)
       label(svg, LEFT - 6, y(value) + 4, fixed(value), { anchor: "end", tone: "muted", size: 11 })
     }
+    el("line", { x1: LEFT, y1: y(0), x2: WIDTH - RIGHT, y2: y(0), stroke: "ink", "stroke-width": 2 }, svg)
+    el("line", { x1: LEFT, y1: TOP, x2: LEFT, y2: y(0), stroke: "ink", "stroke-width": 2 }, svg)
+    return { max, height, y }
+  }
+
+  function drawBars(svg, series, names, joined) {
+    const { max, height, y } = frame(svg, series)
     const slot = (WIDTH - LEFT - RIGHT) / series.length
     const gap = joined ? 0 : slot * 0.25
     series.forEach((value, index) => {
@@ -73,8 +82,21 @@ export function create(canvas, params) {
       label(svg, x + (slot - gap) / 2, y(value) - 6, fixed(value), { tone: "ink", size: 12 })
       label(svg, x + (slot - gap) / 2, TOP + height + 18, names[index], { tone: "muted", size: 12 })
     })
-    el("line", { x1: LEFT, y1: y(0), x2: WIDTH - RIGHT, y2: y(0), stroke: "ink", "stroke-width": 2 }, svg)
-    el("line", { x1: LEFT, y1: TOP, x2: LEFT, y2: y(0), stroke: "ink", "stroke-width": 2 }, svg)
+  }
+
+  // La courbe : une polyligne de 2,5 unités, un point par valeur (sa valeur au-dessus), les étiquettes sous l'axe.
+  function drawLine(svg, series, names) {
+    const { height, y } = frame(svg, series)
+    const slot = (WIDTH - LEFT - RIGHT) / series.length
+    const xs = series.map((_, index) => round(LEFT + (index + 0.5) * slot))
+    el("polyline", { points: series.map((value, index) => `${xs[index]},${y(value)}`).join(" "), fill: "none", stroke: "primary", "stroke-width": 2.5, "stroke-linejoin": "round", "stroke-linecap": "round" }, svg)
+    // Largeur estimée au pire (texte agrandi au téléphone) : si une étiquette dépasse sa case, tout passe sur deux rangs.
+    const crowded = names.some((name) => name.length * 12 * 0.6 * 1.4 > slot)
+    series.forEach((value, index) => {
+      el("circle", { cx: xs[index], cy: y(value), r: 5, fill: "primary", stroke: "paper", "stroke-width": 1.5, "data-point": index }, svg)
+      label(svg, xs[index], y(value) - 10, fixed(value), { tone: "ink", size: 12 })
+      label(svg, xs[index], TOP + height + 18 + (crowded && index % 2 === 1 ? 16 : 0), names[index], { tone: "muted", size: 12 })
+    })
   }
 
   // Le circulaire : un secteur par valeur (angle proportionnel), sa part en pourcentage dans la légende à droite.

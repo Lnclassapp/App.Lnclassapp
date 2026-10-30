@@ -1,0 +1,1224 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — Etude Economique de l'Afrique",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "carte-atouts-miniers",
+          "kind": "map",
+          "description": "Carte de l'Afrique qui colore les principaux pays producteurs de ressources citées dans la leçon : pétrole (Nigeria, Algérie, Angola), cuivre (RD Congo, Zambie), or (Afrique du Sud, Ghana) et diamant (Botswana). Cinq villes économiques sont placées : Lagos, Johannesburg, Casablanca, Abidjan et Douala.",
+          "params": {
+            "base": "africa",
+            "areas": [
+              {
+                "id": "nga",
+                "category": 1
+              },
+              {
+                "id": "dza",
+                "category": 1
+              },
+              {
+                "id": "ago",
+                "category": 1
+              },
+              {
+                "id": "cod",
+                "category": 2
+              },
+              {
+                "id": "zmb",
+                "category": 2
+              },
+              {
+                "id": "zaf",
+                "category": 3
+              },
+              {
+                "id": "gha",
+                "category": 3
+              },
+              {
+                "id": "bwa",
+                "category": 4
+              }
+            ],
+            "places": [
+              {
+                "id": "lagos"
+              },
+              {
+                "id": "johannesburg"
+              },
+              {
+                "id": "casablanca"
+              },
+              {
+                "id": "abidjan"
+              },
+              {
+                "id": "douala"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "Pétrole",
+              "Cuivre",
+              "Or",
+              "Diamant"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-activites-afrique",
+          "kind": "map",
+          "description": "Carte de l'Afrique qui distingue des pays cités dans la leçon : les pays à l'industrie la plus développée (Afrique du Sud, Égypte, Maroc, Nigeria), les pays producteurs de cacao (Côte d'Ivoire, Ghana) et l'Éthiopie, connue pour son café. Les villes Lagos, Johannesburg, Casablanca et Alexandrie sont repérées.",
+          "params": {
+            "base": "africa",
+            "areas": [
+              {
+                "id": "zaf",
+                "category": 1
+              },
+              {
+                "id": "egy",
+                "category": 1
+              },
+              {
+                "id": "mar",
+                "category": 1
+              },
+              {
+                "id": "nga",
+                "category": 1
+              },
+              {
+                "id": "civ",
+                "category": 2
+              },
+              {
+                "id": "gha",
+                "category": 2
+              },
+              {
+                "id": "eth",
+                "category": 3
+              }
+            ],
+            "places": [
+              {
+                "id": "lagos"
+              },
+              {
+                "id": "johannesburg"
+              },
+              {
+                "id": "casablanca"
+              },
+              {
+                "id": "alexandria"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "Industrie plus développée",
+              "Cacao",
+              "Café"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cercle-dependance",
+          "kind": "diagram",
+          "description": "Schéma en cercle qui relie cinq éléments d'une même chaîne : l'exportation de matières premières brutes, des revenus instables car les prix changent, un manque d'argent à investir avec endettement, des infrastructures et usines insuffisantes, puis une faible transformation sur place, qui ramène à l'exportation de produits bruts.",
+          "params": {
+            "layout": "cycle",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "exp",
+                "label": "Exportation de matières premières brutes"
+              },
+              {
+                "id": "rev",
+                "label": "Revenus instables (prix mondiaux)"
+              },
+              {
+                "id": "dette",
+                "label": "Peu d'argent à investir, endettement"
+              },
+              {
+                "id": "infra",
+                "label": "Infrastructures et usines insuffisantes"
+              },
+              {
+                "id": "transf",
+                "label": "Faible transformation sur place"
+              }
+            ],
+            "edges": [
+              {
+                "from": "exp",
+                "to": "rev"
+              },
+              {
+                "from": "rev",
+                "to": "dette"
+              },
+              {
+                "from": "dette",
+                "to": "infra"
+              },
+              {
+                "from": "infra",
+                "to": "transf"
+              },
+              {
+                "from": "transf",
+                "to": "exp"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-regroupements",
+          "kind": "timeline",
+          "description": "Frise de 1960 à 2025 qui place les grandes étapes de l'organisation de l'Afrique : création de l'OUA en 1963, de la CEDEAO en 1975, de l'UEMOA en 1994, transformation de l'OUA en Union africaine en 2002 et signature de l'accord de la ZLECAf en 2018. L'Union africaine existe toujours.",
+          "params": {
+            "start": 1960,
+            "end": 2025,
+            "step": 10,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1963,
+                "to": 2002,
+                "label": "OUA"
+              },
+              {
+                "from": 2002,
+                "to": 2025,
+                "label": "Union africaine"
+              }
+            ],
+            "events": [
+              {
+                "at": 1963,
+                "label": "Création de l'OUA"
+              },
+              {
+                "at": 1975,
+                "label": "Création de la CEDEAO"
+              },
+              {
+                "at": 1994,
+                "label": "Création de l'UEMOA"
+              },
+              {
+                "at": 2002,
+                "label": "L'OUA devient l'Union africaine"
+              },
+              {
+                "at": 2018,
+                "label": "Accord de la ZLECAf signé"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les atouts de l'Afrique",
+          "remember": "Un **atout** est un avantage qui peut aider un pays ou un continent à se développer. L'Afrique en a quatre grands. **1. Des terres agricoles vastes.** **2. Des ressources minières et énergétiques.** Le pétrole vient surtout du Nigeria, de l'Algérie et de l'Angola ; le cuivre de la RD Congo et de la Zambie (le cobalt de la RD Congo) ; l'or de l'Afrique du Sud et du Ghana ; le diamant du Botswana. **3. Un potentiel hydroélectrique** (électricité produite par la force de l'eau), notamment sur le fleuve Congo et le Nil. **4. Une population nombreuse et jeune** : environ 1,5 milliard d'habitants, un marché et une main-d'œuvre.",
+          "method": [
+            "Localiser le pays ou l'espace concerné sur la carte.",
+            "Identifier le type d'atout : agricole, minier, énergétique ou humain.",
+            "Nommer la ressource précise et les pays qui la produisent.",
+            "Expliquer en quoi cet atout peut aider au développement."
+          ],
+          "example": {
+            "statement": "Présenter l'atout que représentent le cuivre et le cobalt de la RD Congo.",
+            "steps": [
+              "Localiser : la RD Congo est un grand pays d'Afrique centrale, que traverse le fleuve Congo.",
+              "Identifier : cuivre et cobalt sont des minerais, donc un atout minier.",
+              "Nommer : le cuivre est produit en RD Congo et en Zambie ; le cobalt, en RD Congo.",
+              "Expliquer : vendus ou transformés, ces minerais apportent des revenus, des emplois et des devises (l'argent étranger reçu par un pays qui vend à l'étranger)."
+            ]
+          },
+          "pitfall": "Ne confonds pas les ressources minières et les ressources énergétiques, ni les pays. Le **pétrole** est une énergie, alors que l'or, le cuivre et le diamant sont des minerais. Fausse phrase fréquente : « le Botswana est un grand producteur de pétrole ». Fait exact : le Botswana est connu pour son **diamant** ; le pétrole vient du Nigeria, de l'Algérie et de l'Angola. Associe toujours un pays à une ressource avant d'écrire.",
+          "figure": "carte-atouts-miniers",
+          "exercise": {
+            "title": "Reconnaître les atouts de l'Afrique",
+            "statement": "Dans cet exercice, tu repères les atouts de l'Afrique avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "carte-atouts-miniers",
+            "questions": [
+              {
+                "content": "Relie chaque pays africain à la ressource pour laquelle il est connu.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Localiser : place chaque pays sur la carte. Étape 2 — Identifier : pétrole (énergie), cuivre, cobalt, or et diamant (minerais). Étape 3 — Nommer : Nigeria avec le pétrole, RD Congo avec le cuivre et le cobalt, Ghana avec l'or, Botswana avec le diamant. Erreur tentante : associer le Botswana au pétrole ; il est connu pour son diamant.",
+                "answers": [
+                  {
+                    "content": "Nigeria",
+                    "match": "Pétrole"
+                  },
+                  {
+                    "content": "RD Congo",
+                    "match": "Cuivre et cobalt"
+                  },
+                  {
+                    "content": "Ghana",
+                    "match": "Or"
+                  },
+                  {
+                    "content": "Botswana",
+                    "match": "Diamant"
+                  }
+                ]
+              },
+              {
+                "content": "Quel pays africain est connu pour son diamant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser : le Botswana est en Afrique australe. Étape 2 — Identifier : le diamant est un minerai. Étape 3 — Nommer : le pays associé au diamant dans la leçon est le Botswana. Le Nigeria est cité pour le pétrole, la Zambie pour le cuivre, l'Égypte pour son industrie.",
+                "answers": [
+                  {
+                    "content": "Nigeria",
+                    "correct": false
+                  },
+                  {
+                    "content": "Botswana",
+                    "correct": true
+                  },
+                  {
+                    "content": "Zambie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Égypte",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'Afrique compte moins d'un milliard d'habitants.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier : la population est un atout humain. Étape 3 — Nommer : l'Afrique compte environ 1,5 milliard d'habitants, une population nombreuse et jeune. Étape 4 — Expliquer : c'est un grand marché et une main-d'œuvre importante. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les trois pays producteurs de pétrole cités dans la leçon ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Identifier : le pétrole est une ressource énergétique. Étape 3 — Nommer : les pays cités sont le Nigeria, l'Algérie et l'Angola. La Zambie est connue pour le cuivre et le Botswana pour le diamant : ce sont des minerais, pas du pétrole.",
+                "answers": [
+                  {
+                    "content": "Nigeria",
+                    "correct": true
+                  },
+                  {
+                    "content": "Zambie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Algérie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Botswana",
+                    "correct": false
+                  },
+                  {
+                    "content": "Angola",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le pétrole est classé parmi les ressources…",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : on distingue le type d'atout. Le pétrole fournit de l'énergie : c'est une ressource énergétique. Le piège est de le ranger avec l'or et le diamant, qui sont des minerais. Étape 4 — Expliquer : il apporte des revenus au pays qui l'exporte.",
+                "answers": [
+                  {
+                    "content": "minières, comme le diamant",
+                    "correct": false
+                  },
+                  {
+                    "content": "énergétiques",
+                    "correct": true
+                  },
+                  {
+                    "content": "agricoles",
+                    "correct": false
+                  },
+                  {
+                    "content": "humaines",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les activités économiques de l'Afrique",
+          "remember": "Les Africains vivent de plusieurs activités. **L'agriculture** occupe une grande part de la population. L'agriculture **vivrière** nourrit les familles et les marchés locaux (manioc, igname, mil). L'agriculture **d'exportation** est vendue à l'étranger : le **cacao** en Côte d'Ivoire et au Ghana, le **café** en Éthiopie. **Les mines** fournissent or, cuivre et diamant ; les gisements fournissent le pétrole et le gaz. **L'industrie** reste encore faible ; elle est surtout concentrée en Afrique du Sud, en Égypte, au Maroc et au Nigeria. **Le commerce et les services** (transports, banques, tourisme) se développent dans les villes.",
+          "method": [
+            "Identifier l'activité et le produit concernés.",
+            "Classer l'activité : agriculture vivrière, agriculture d'exportation, mines, industrie, commerce ou services.",
+            "Localiser les pays où cette activité est importante.",
+            "Apprécier le poids de l'activité : forte ou faible dans l'économie."
+          ],
+          "example": {
+            "statement": "Étudier l'activité de la culture du cacao en Afrique de l'Ouest.",
+            "steps": [
+              "Identifier : on cultive le cacao, dont les fèves sont surtout vendues à l'étranger.",
+              "Classer : c'est une agriculture d'exportation, pas une agriculture vivrière.",
+              "Localiser : le cacao est important en Côte d'Ivoire et au Ghana.",
+              "Apprécier : l'activité est forte et apporte des revenus, mais le produit part surtout brut, sans grande transformation sur place."
+            ]
+          },
+          "pitfall": "Ne classe pas une agriculture d'après le produit, mais d'après sa **destination**. Le cacao et le café sont cultivés pour être vendus à l'étranger : ils sont d'exportation. Le manioc cultivé pour nourrir la famille est vivrier. Fausse phrase fréquente : « le cacao est une culture vivrière ». Fait exact : le cacao est une culture d'exportation ; on ne le mange pas tel quel, on vend ses fèves.",
+          "figure": "carte-activites-afrique",
+          "exercise": {
+            "title": "Classer des activités économiques africaines",
+            "statement": "Dans cet exercice, tu classes des activités et tu les localises avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "carte-activites-afrique",
+            "questions": [
+              {
+                "content": "Relie chaque activité à sa catégorie.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : repère ce que fait chaque activité. Étape 2 — Classer : le cacao est vendu à l'étranger (exportation), le manioc nourrit la famille (vivrier), l'or est extrait du sol (mines), les banques et transports rendent des services. Erreur tentante : classer le cacao comme vivrier.",
+                "answers": [
+                  {
+                    "content": "Culture du cacao en Côte d'Ivoire",
+                    "match": "Agriculture d'exportation"
+                  },
+                  {
+                    "content": "Culture du manioc pour nourrir la famille",
+                    "match": "Agriculture vivrière"
+                  },
+                  {
+                    "content": "Extraction de l'or au Ghana",
+                    "match": "Mines"
+                  },
+                  {
+                    "content": "Banques et transports",
+                    "match": "Commerce et services"
+                  }
+                ]
+              },
+              {
+                "content": "Quel pays africain est connu pour son café ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le café est une culture vendue à l'étranger. Étape 2 — Classer : c'est une agriculture d'exportation. Étape 3 — Localiser : l'Éthiopie est le pays cité pour le café dans la leçon. Les autres pays sont plutôt cités pour le diamant, le pétrole ou le cuivre.",
+                "answers": [
+                  {
+                    "content": "Éthiopie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Botswana",
+                    "correct": false
+                  },
+                  {
+                    "content": "Algérie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Zambie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels pays africains ont une industrie plus développée que la plupart des autres ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Localiser : l'industrie reste faible en Afrique et se concentre en quelques pays : Afrique du Sud, Égypte, Maroc, Nigeria. Étape 4 — Apprécier : dans les autres pays de la liste, l'industrie pèse peu. Les bonnes réponses sont donc le Maroc, l'Égypte et l'Afrique du Sud.",
+                "answers": [
+                  {
+                    "content": "Maroc",
+                    "correct": true
+                  },
+                  {
+                    "content": "Burundi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Égypte",
+                    "correct": true
+                  },
+                  {
+                    "content": "Tchad",
+                    "correct": false
+                  },
+                  {
+                    "content": "Afrique du Sud",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète : le cacao ivoirien est vendu surtout à l'étranger, c'est une agriculture d'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : le cacao est cultivé pour être vendu. Étape 2 — Classer : la destination est l'étranger, donc agriculture d'exportation. Le mot attendu est « exportation ».",
+                "answers": [
+                  {
+                    "content": "exportation",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le cacao est une culture vivrière.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : le produit est le cacao. Étape 2 — Classer : on classe d'après la destination. Le cacao est vendu à l'étranger : c'est une culture d'exportation. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les problèmes économiques de l'Afrique",
+          "remember": "Malgré ses atouts, l'Afrique rencontre cinq grands problèmes. **La dépendance** : beaucoup de pays vivent de la vente de peu de matières premières (produits bruts, non transformés), dont les prix changent sur le marché mondial. **La faible industrialisation** : on transforme peu sur place, on exporte des produits bruts et on importe des produits fabriqués. **L'endettement** : les emprunts doivent être remboursés avec des intérêts. **L'insuffisance des infrastructures** : routes, voies ferrées, ports, électricité. **Les conflits** : ils détruisent les biens, déplacent les populations et découragent les investisseurs.",
+          "method": [
+            "Repérer le problème décrit dans la situation ou le document.",
+            "Nommer ce problème avec le mot du cours.",
+            "Expliquer la cause du problème.",
+            "Dégager ses conséquences pour le développement."
+          ],
+          "example": {
+            "statement": "Un pays africain exporte du cacao brut et importe du chocolat fabriqué à l'étranger. Analyser cette situation.",
+            "steps": [
+              "Repérer : le pays vend un produit brut et achète le même produit transformé.",
+              "Nommer : c'est une faible industrialisation, liée à la dépendance aux matières premières.",
+              "Expliquer : il y a peu d'usines, d'électricité et de capitaux pour transformer sur place.",
+              "Dégager : le pays perd la valeur ajoutée (le gain obtenu en transformant) et des emplois ; ses revenus dépendent des prix mondiaux."
+            ]
+          },
+          "pitfall": "Ne dis pas que l'Afrique est pauvre parce qu'elle n'a pas de ressources. Fausse phrase fréquente : « il n'y a rien à exploiter ». Fait exact : l'Afrique possède du pétrole, du cuivre, de l'or, du diamant et de vastes terres. Le problème vient surtout de la façon dont ces richesses sont exploitées : vendues brutes, avec peu d'infrastructures et parfois des conflits.",
+          "figure": "cercle-dependance",
+          "exercise": {
+            "title": "Analyser des problèmes économiques de l'Afrique",
+            "statement": "Dans cet exercice, tu nommes et tu expliques des problèmes économiques avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "cercle-dependance",
+            "questions": [
+              {
+                "content": "Relie chaque problème à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : lis chaque description. Étape 2 — Nommer : associe le mot du cours. La dépendance vient de peu de produits bruts vendus, la faible industrialisation du peu de transformation, l'endettement des emprunts à rembourser, les infrastructures des routes et de l'électricité qui manquent.",
+                "answers": [
+                  {
+                    "content": "Dépendance",
+                    "match": "Vendre surtout quelques matières premières aux prix changeants"
+                  },
+                  {
+                    "content": "Faible industrialisation",
+                    "match": "Transformer peu de produits sur place"
+                  },
+                  {
+                    "content": "Endettement",
+                    "match": "Devoir rembourser des emprunts avec intérêts"
+                  },
+                  {
+                    "content": "Insuffisance d'infrastructures",
+                    "match": "Manquer de routes et d'électricité"
+                  }
+                ]
+              },
+              {
+                "content": "Un pays vend du cacao brut et achète du chocolat fabriqué ailleurs. Quel problème est illustré ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le pays vend un produit brut et achète le produit transformé. Étape 2 — Nommer : c'est la faible industrialisation. Étape 3 — Expliquer : peu d'usines pour transformer. Aucune donnée ne parle d'emprunts ni de guerre, donc ce n'est ni l'endettement ni les conflits.",
+                "answers": [
+                  {
+                    "content": "La faible industrialisation",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'endettement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les conflits",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le manque de population",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux conséquences d'un conflit sur l'économie ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Nommer : il s'agit de conflits. Étape 3 — Expliquer : la guerre détruit les routes, les usines et les cultures. Étape 4 — Dégager : les familles quittent leurs régions et les investisseurs hésitent. Les réponses exactes sont donc populations déplacées et infrastructures détruites.",
+                "answers": [
+                  {
+                    "content": "Des populations déplacées",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une hausse des investissements étrangers",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des infrastructures détruites",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une meilleure transformation sur place",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'Afrique est pauvre parce qu'elle n'a pas de ressources naturelles.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : l'Afrique possède du pétrole, du cuivre, de l'or, du diamant et de vastes terres agricoles. Étape 4 — Dégager : le problème vient de leur exploitation (produits bruts, infrastructures insuffisantes), pas de l'absence de ressources. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète : quand un pays emprunte de l'argent qu'il doit rembourser avec des intérêts, on parle d'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le pays emprunte et doit rembourser. Étape 2 — Nommer : avec le mot du cours, c'est l'endettement. Étape 4 — Dégager : une grande part des revenus sert à rembourser au lieu d'investir.",
+                "answers": [
+                  {
+                    "content": "endettement",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les solutions et les regroupements régionaux",
+          "remember": "Pour dépasser ces problèmes, les États africains se regroupent. **L'OUA** (Organisation de l'unité africaine) est créée en **1963** ; elle devient l'**Union africaine** (UA) en **2002**. La **CEDEAO** (Communauté économique des États de l'Afrique de l'Ouest) est créée en **1975**. L'**UEMOA** (Union économique et monétaire ouest-africaine) est créée en **1994**. La **ZLECAf** (Zone de libre-échange continentale africaine) veut faciliter le commerce entre les pays africains en réduisant les droits de douane (taxes sur les produits qui passent une frontière). Autre solution : la **transformation locale** des matières premières.",
+          "method": [
+            "Identifier la solution ou l'organisation étudiée.",
+            "Situer sa date de création.",
+            "Préciser son espace et son objectif.",
+            "Montrer à quel problème elle répond."
+          ],
+          "example": {
+            "statement": "Présenter la CEDEAO.",
+            "steps": [
+              "Identifier : la CEDEAO est la Communauté économique des États de l'Afrique de l'Ouest.",
+              "Situer : elle est créée en 1975.",
+              "Préciser : elle regroupe des États d'Afrique de l'Ouest ; elle veut faciliter les échanges et la circulation entre eux.",
+              "Montrer : en élargissant le marché, elle répond à la faiblesse des échanges et à l'étroitesse du marché de chaque pays."
+            ]
+          },
+          "pitfall": "Ne confonds pas les sigles et les dates. Fausse phrase fréquente : « la CEDEAO a été créée en 1994 ». Fait exact : la **CEDEAO** date de **1975** ; **1994** est la date de l'**UEMOA**. L'UA ne date pas de 1963 : en 1963 on crée l'**OUA**, qui devient l'**UA** en **2002**. Retiens la suite 1963, 1975, 1994, 2002.",
+          "figure": "frise-regroupements",
+          "exercise": {
+            "title": "Situer et expliquer les regroupements africains",
+            "statement": "Dans cet exercice, tu situes et tu expliques des organisations africaines avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "frise-regroupements",
+            "questions": [
+              {
+                "content": "Range ces créations dans l'ordre chronologique, de la plus ancienne à la plus récente.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : quatre événements. Étape 2 — Situer leur date : OUA 1963, CEDEAO 1975, UEMOA 1994, passage à l'Union africaine 2002. On range alors du plus ancien au plus récent. Erreur tentante : placer l'UEMOA avant la CEDEAO.",
+                "answers": [
+                  {
+                    "content": "Création de l'OUA (1963)"
+                  },
+                  {
+                    "content": "Création de la CEDEAO (1975)"
+                  },
+                  {
+                    "content": "Création de l'UEMOA (1994)"
+                  },
+                  {
+                    "content": "L'OUA devient l'Union africaine (2002)"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque sigle à son nom.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : lis chaque sigle lettre par lettre. Étape 3 — Préciser : CEDEAO et UEMOA concernent l'Afrique de l'Ouest ; la ZLECAf concerne tout le continent ; l'OUA est la première organisation continentale (1963).",
+                "answers": [
+                  {
+                    "content": "OUA",
+                    "match": "Organisation de l'unité africaine"
+                  },
+                  {
+                    "content": "CEDEAO",
+                    "match": "Communauté économique des États de l'Afrique de l'Ouest"
+                  },
+                  {
+                    "content": "UEMOA",
+                    "match": "Union économique et monétaire ouest-africaine"
+                  },
+                  {
+                    "content": "ZLECAf",
+                    "match": "Zone de libre-échange continentale africaine"
+                  }
+                ]
+              },
+              {
+                "content": "Complète : l'OUA, créée en 1963, est devenue en 2002 l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : l'OUA est la première organisation continentale. Étape 2 — Situer : en 2002, elle se transforme. Étape 3 — Préciser : elle prend le nom d'Union africaine (UA).",
+                "answers": [
+                  {
+                    "content": "Union africaine",
+                    "correct": true
+                  },
+                  {
+                    "content": "UA",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'objectif de la ZLECAf ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : la ZLECAf est une zone de libre-échange continentale. Étape 3 — Préciser : son objectif est de commercer plus librement entre pays africains. Étape 4 — Montrer : elle répond à la faiblesse des échanges entre pays voisins. Les autres propositions ne correspondent pas à son rôle.",
+                "answers": [
+                  {
+                    "content": "Faciliter le commerce entre pays africains en réduisant les droits de douane",
+                    "correct": true
+                  },
+                  {
+                    "content": "Interdire toutes les importations",
+                    "correct": false
+                  },
+                  {
+                    "content": "Créer une armée commune à tous les États",
+                    "correct": false
+                  },
+                  {
+                    "content": "Fixer le prix mondial du cacao",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La CEDEAO a été créée en 1994.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la CEDEAO est la communauté économique de l'Afrique de l'Ouest. Étape 2 — Situer : sa date est 1975. La date de 1994 est celle de l'UEMOA. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Analyser une situation économique africaine",
+          "statement": "Lis le document, puis réponds aux questions. Document (texte écrit pour Lnclass) : « Un pays africain exporte chaque année du cuivre brut. Il achète à l'étranger des câbles électriques fabriqués avec du cuivre. Chez lui, les routes sont mal entretenues et l'électricité est souvent coupée. »",
+          "exercise_type": "fixation",
+          "figure": "cercle-dependance",
+          "questions": [
+            {
+              "content": "Un pays exporte du cuivre brut et achète des câbles fabriqués avec du cuivre. Quel problème cela montre-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer : le pays vend le cuivre brut et achète des produits fabriqués avec ce cuivre. 2. Nommer : c'est la faible industrialisation. 3. Expliquer : il transforme peu sur place. Une proposition comme « absence de ressources » est fausse : le pays possède du cuivre.",
+              "answers": [
+                {
+                  "content": "La faible industrialisation",
+                  "correct": true
+                },
+                {
+                  "content": "Un trop grand nombre d'usines",
+                  "correct": false
+                },
+                {
+                  "content": "L'absence totale de ressources",
+                  "correct": false
+                },
+                {
+                  "content": "La fin des échanges",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cette situation (cuivre exporté brut, routes mal entretenues, électricité souvent coupée), quels deux problèmes sont présents ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Repérer les faits : le cuivre est vendu brut, les routes sont mauvaises, l'électricité est coupée. 2. Nommer : faible industrialisation et insuffisance d'infrastructures. Aucun fait ne parle de guerre. Une transformation locale excessive est le contraire de la situation décrite.",
+              "answers": [
+                {
+                  "content": "Faible industrialisation",
+                  "correct": true
+                },
+                {
+                  "content": "Conflits armés",
+                  "correct": false
+                },
+                {
+                  "content": "Insuffisance d'infrastructures",
+                  "correct": true
+                },
+                {
+                  "content": "Excès de transformation locale",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Complète : le cuivre est une ressource ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Localiser et identifier l'atout. 2. Classer : le cuivre est un minerai extrait du sol, donc une ressource minière. L'erreur tentante est de le ranger parmi les ressources énergétiques, comme le pétrole.",
+              "answers": [
+                {
+                  "content": "minière",
+                  "correct": true
+                },
+                {
+                  "content": "minérale",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour répondre à la vente du cuivre à l'état brut, le pays doit développer la ___ locale du cuivre.",
+              "question_type": "select",
+              "explanation": "Méthode : 1. Repérer le problème : cuivre exporté brut. 2. Nommer la solution du cours : la transformation locale. 3. Expliquer : fabriquer sur place garde la valeur ajoutée et crée des emplois. Importer davantage ou s'endetter aggraverait le problème.",
+              "answers": [
+                {
+                  "content": "transformation",
+                  "correct": true
+                },
+                {
+                  "content": "importation",
+                  "correct": false
+                },
+                {
+                  "content": "dette",
+                  "correct": false
+                },
+                {
+                  "content": "consommation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi exporter du cuivre brut et acheter des câbles fabriqués est un problème pour ce pays.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Le produit exporté est brut et le produit acheté est transformé",
+                "L'idée de perte de valeur ajoutée ou d'emplois est présente",
+                "Le vocabulaire du cours est employé (faible industrialisation, matières premières)"
+              ],
+              "explanation": "Corrigé modèle : Ce pays vend une matière première brute, le cuivre, et rachète un produit transformé, les câbles. Il ne garde pas la valeur ajoutée de la transformation et perd des emplois industriels. Il dépend aussi des prix mondiaux du cuivre. Points : 1 pour le constat (brut contre fabriqué), 0,5 pour la conséquence, 0,5 pour le vocabulaire.",
+              "answers": [],
+              "starter": "Ce pays vend du cuivre brut et…"
+            }
+          ]
+        },
+        {
+          "title": "Situer les regroupements africains",
+          "statement": "Dans cet exercice, tu retrouves les grandes organisations africaines et leurs dates. Appuie-toi sur la frise.",
+          "exercise_type": "fixation",
+          "figure": "frise-regroupements",
+          "questions": [
+            {
+              "content": "Relie chaque date à l'événement correspondant.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Identifier chaque organisation. 2. Situer sa date : OUA 1963, CEDEAO 1975, UEMOA 1994, UA 2002. Erreur fréquente : attribuer 1994 à la CEDEAO ; 1994 est la date de l'UEMOA.",
+              "answers": [
+                {
+                  "content": "1963",
+                  "match": "Création de l'OUA"
+                },
+                {
+                  "content": "1975",
+                  "match": "Création de la CEDEAO"
+                },
+                {
+                  "content": "1994",
+                  "match": "Création de l'UEMOA"
+                },
+                {
+                  "content": "2002",
+                  "match": "L'OUA devient l'Union africaine"
+                }
+              ]
+            },
+            {
+              "content": "Quelle organisation d'Afrique de l'Ouest est une union économique et monétaire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier le nom complet : Union économique et monétaire ouest-africaine. 2. Préciser l'espace : l'Afrique de l'Ouest. OUA et Union africaine sont des organisations de tout le continent, tout comme la ZLECAf.",
+              "answers": [
+                {
+                  "content": "UEMOA",
+                  "correct": true
+                },
+                {
+                  "content": "OUA",
+                  "correct": false
+                },
+                {
+                  "content": "ZLECAf",
+                  "correct": false
+                },
+                {
+                  "content": "Union africaine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La Côte d'Ivoire est membre de la CEDEAO et de l'UEMOA.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier les deux organisations ouest-africaines. 2. Préciser leur espace : la Côte d'Ivoire est un État d'Afrique de l'Ouest et appartient aux deux. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux organisations qui concernent seulement l'Afrique de l'Ouest ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Identifier chaque sigle. 2. Préciser l'espace : CEDEAO et UEMOA sont ouest-africaines ; l'Union africaine, l'OUA et la ZLECAf couvrent le continent.",
+              "answers": [
+                {
+                  "content": "CEDEAO",
+                  "correct": true
+                },
+                {
+                  "content": "Union africaine",
+                  "correct": false
+                },
+                {
+                  "content": "UEMOA",
+                  "correct": true
+                },
+                {
+                  "content": "ZLECAf",
+                  "correct": false
+                },
+                {
+                  "content": "OUA",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Distingue en deux phrases l'Union africaine et la CEDEAO (date de création et espace concerné).",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "La CEDEAO est citée avec sa date de 1975 et l'Afrique de l'Ouest",
+                "L'Union africaine est présentée comme continentale et issue de l'OUA (1963, devenue UA en 2002)",
+                "Les deux organisations ne sont pas confondues"
+              ],
+              "explanation": "Corrigé modèle : La CEDEAO est créée en 1975 et regroupe des États d'Afrique de l'Ouest pour faciliter leurs échanges. L'Union africaine, née en 2002 de la transformation de l'OUA (créée en 1963), concerne tout le continent. Points : 1 pour la CEDEAO, 1 pour l'Union africaine.",
+              "answers": [],
+              "starter": "La CEDEAO est créée en… "
+            }
+          ]
+        },
+        {
+          "title": "Atouts et limites de l'Afrique",
+          "statement": "Dans ce devoir, tu utilises la carte des ressources et tes notions sur les atouts et les problèmes. La carte colore le Nigeria, l'Algérie et l'Angola pour le pétrole, la RD Congo et la Zambie pour le cuivre, l'Afrique du Sud et le Ghana pour l'or, le Botswana pour le diamant.",
+          "exercise_type": "evaluation",
+          "figure": "carte-atouts-miniers",
+          "questions": [
+            {
+              "content": "Quel pays de la liste est un producteur de pétrole cité dans la leçon ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Localiser le pays sur la carte. 2. Identifier : le pétrole est une ressource énergétique. 3. Nommer : le pétrole vient du Nigeria, de l'Algérie et de l'Angola. Le Botswana est connu pour le diamant, la Zambie pour le cuivre.",
+              "answers": [
+                {
+                  "content": "Botswana",
+                  "correct": false
+                },
+                {
+                  "content": "Zambie",
+                  "correct": false
+                },
+                {
+                  "content": "Angola",
+                  "correct": true
+                },
+                {
+                  "content": "Éthiopie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Complète : l'Afrique compte environ ___ milliard(s) d'habitants (arrondi au dixième).",
+              "question_type": "numeric",
+              "unit": "milliards",
+              "tolerance": 0.1,
+              "explanation": "Méthode : 1. Identifier l'atout humain. 2. Nommer le fait du cours : environ 1,5 milliard d'habitants. 3. Expliquer : une population nombreuse et jeune est un marché et une main-d'œuvre.",
+              "answers": [
+                {
+                  "content": "1,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque ressource à un pays producteur cité dans la leçon.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Localiser les pays. 2. Identifier minerais et énergie. 3. Nommer : or en Afrique du Sud, cuivre en Zambie, diamant au Botswana, pétrole en Algérie. Piège : ranger le pétrole avec les minerais ou le diamant avec l'Algérie.",
+              "answers": [
+                {
+                  "content": "Or",
+                  "match": "Afrique du Sud"
+                },
+                {
+                  "content": "Cuivre",
+                  "match": "Zambie"
+                },
+                {
+                  "content": "Diamant",
+                  "match": "Botswana"
+                },
+                {
+                  "content": "Pétrole",
+                  "match": "Algérie"
+                }
+              ]
+            },
+            {
+              "content": "Quels sont trois atouts de l'Afrique ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Identifier le type d'atout. 2. Nommer : terres agricoles, ressources minières et énergétiques, population nombreuse et jeune. Les infrastructures suffisantes partout et l'industrie très développée partout sont fausses : ce sont justement des problèmes.",
+              "answers": [
+                {
+                  "content": "De vastes terres agricoles",
+                  "correct": true
+                },
+                {
+                  "content": "Des infrastructures suffisantes dans tous les pays",
+                  "correct": false
+                },
+                {
+                  "content": "Des ressources minières et énergétiques",
+                  "correct": true
+                },
+                {
+                  "content": "Une industrie très développée partout",
+                  "correct": false
+                },
+                {
+                  "content": "Une population nombreuse et jeune",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le fleuve Congo et le ___ offrent un potentiel hydroélectrique.",
+              "question_type": "select",
+              "explanation": "Méthode : 1. Localiser : un potentiel hydroélectrique demande un cours d'eau. 2. Identifier : l'énergie produite par la force de l'eau. 3. Nommer : le fleuve Congo et le Nil. Le Sahara, le Kilimandjaro et le Kalahari ne sont pas des fleuves.",
+              "answers": [
+                {
+                  "content": "Sahara",
+                  "correct": false
+                },
+                {
+                  "content": "Kilimandjaro",
+                  "correct": false
+                },
+                {
+                  "content": "Nil",
+                  "correct": true
+                },
+                {
+                  "content": "Kalahari",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe : montre que l'Afrique a de grands atouts mais que leur exploitation pose des problèmes. Cite deux atouts avec un pays chacun et deux problèmes.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Deux atouts sont cités, chacun avec un pays exact",
+                "Deux problèmes sont nommés avec le vocabulaire du cours",
+                "Le lien entre atouts et problèmes est expliqué (matières premières exportées brutes)"
+              ],
+              "explanation": "Corrigé modèle : L'Afrique possède de grands atouts : le pétrole du Nigeria et le diamant du Botswana, par exemple. Pourtant, une grande part de ces richesses est exportée à l'état brut. Les pays dépendent donc des prix mondiaux et transforment peu sur place. L'insuffisance des infrastructures freine aussi l'industrie. Points : 1 pour les atouts, 1 pour les problèmes, 1 pour le lien.",
+              "answers": [],
+              "starter": "L'Afrique possède de grands atouts, par exemple…"
+            }
+          ]
+        },
+        {
+          "title": "Comment mieux profiter des richesses de l'Afrique ?",
+          "statement": "Situation (BEPC) : tu prépares un exposé sur le thème « Comment l'Afrique peut-elle mieux profiter de ses richesses ? ». Tu t'appuies sur le schéma en cercle de la dépendance, qui relie exportation brute, revenus instables, manque d'argent à investir, infrastructures insuffisantes et faible transformation.",
+          "exercise_type": "evaluation",
+          "figure": "cercle-dependance",
+          "questions": [
+            {
+              "content": "Selon le schéma de la leçon, range ces éléments dans l'ordre de la chaîne, en partant de l'exportation de matières premières brutes.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Repérer le point de départ : l'exportation de matières premières brutes. 2. Suivre les flèches : les prix mondiaux changent, donc les revenus sont instables ; il reste peu d'argent à investir ; les infrastructures et les usines manquent ; la transformation sur place reste faible, ce qui ramène à l'exportation brute.",
+              "answers": [
+                {
+                  "content": "Exportation de matières premières brutes"
+                },
+                {
+                  "content": "Revenus instables (prix mondiaux)"
+                },
+                {
+                  "content": "Peu d'argent à investir, endettement"
+                },
+                {
+                  "content": "Infrastructures et usines insuffisantes"
+                },
+                {
+                  "content": "Faible transformation sur place"
+                }
+              ]
+            },
+            {
+              "content": "Quelle solution permet de garder davantage de valeur en Afrique ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer le problème : les produits partent bruts. 2. Nommer la solution du cours : la transformation locale. 3. Expliquer : elle garde la valeur ajoutée et crée des emplois. Les autres propositions aggraveraient le problème.",
+              "answers": [
+                {
+                  "content": "Transformer les matières premières sur place",
+                  "correct": true
+                },
+                {
+                  "content": "Exporter plus de produits bruts",
+                  "correct": false
+                },
+                {
+                  "content": "S'endetter davantage",
+                  "correct": false
+                },
+                {
+                  "content": "Réduire les routes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux solutions évoquées dans la leçon ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Repérer les problèmes. 2. Nommer les solutions du cours : transformation locale et regroupements régionaux, dont la ZLECAf qui facilite le commerce entre pays africains. La dépendance à un seul produit est un problème, et arrêter le commerce irait contre l'objectif de la ZLECAf.",
+              "answers": [
+                {
+                  "content": "La transformation locale des matières premières",
+                  "correct": true
+                },
+                {
+                  "content": "L'augmentation de la dépendance à un seul produit",
+                  "correct": false
+                },
+                {
+                  "content": "La création de zones de coopération comme la ZLECAf",
+                  "correct": true
+                },
+                {
+                  "content": "L'arrêt de tout commerce entre pays africains",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les regroupements régionaux comme la CEDEAO ou l'UEMOA visent à faciliter les échanges entre pays voisins.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier les organisations. 2. Préciser leur objectif : coopération économique et échanges facilités. 3. Montrer : un marché plus grand répond à la faiblesse des échanges. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Cite deux atouts de l'Afrique et, pour chacun, un pays producteur ou concerné.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Deux atouts exacts sont cités",
+                "Chaque atout est associé à un pays correct",
+                "Pas de confusion entre ressources minières et énergétiques"
+              ],
+              "explanation": "Corrigé modèle : Premier atout, le pétrole, produit au Nigeria. Deuxième atout, le cuivre, extrait en Zambie. On peut aussi citer l'or du Ghana ou le diamant du Botswana. Points : 1 par atout correctement associé à un pays.",
+              "answers": [],
+              "starter": "Premier atout : "
+            },
+            {
+              "content": "Rédige un paragraphe de synthèse (6 à 8 lignes) : quels problèmes économiques freinent l'Afrique et quelles solutions existent ?",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Au moins deux problèmes sont nommés et expliqués",
+                "Au moins deux solutions sont citées (transformation locale, regroupements)",
+                "Une organisation est citée avec sa date exacte",
+                "Le paragraphe est organisé et rédigé en phrases"
+              ],
+              "explanation": "Corrigé modèle : L'Afrique est riche en ressources, mais elle dépend de l'exportation de matières premières brutes, dont les prix varient. Elle manque aussi d'infrastructures et connaît parfois des conflits ou de l'endettement. Pour avancer, les États se regroupent : la CEDEAO (1975) et l'UEMOA (1994) en Afrique de l'Ouest, l'Union africaine (2002) et la ZLECAf pour le commerce continental. Ils cherchent aussi à transformer les produits sur place. Points : 1,5 pour les problèmes, 1,5 pour les solutions, 0,5 pour la date, 0,5 pour la rédaction.",
+              "answers": [],
+              "starter": "L'Afrique est riche en ressources, mais…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
