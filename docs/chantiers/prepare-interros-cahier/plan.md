@@ -56,6 +56,9 @@ Vague 1 : Lot 0 → 1 agent · Vague 2 : Lot A ‖ Lot B ‖ Lot 0b → 3 agents
                      `app/infrastructure/repositories/catalog/content_tree_writer.rb`
                      `app/infrastructure/repositories/catalog/import_schema_validator.rb`
                      `app/views/teams/imports/kinds/_course_tree.html.erb` *(l'exemple du fichier)*
+                     `config/schemas/lnclass.course-tree.v3.json` · `app/domain/entities/catalog/import_error.rb`
+                     `config/locales/teams/imports.fr.yml` · `config/locales/teams/import_course_tree.fr.yml`
+                     `test/support/factories/revision_sheet.rb` *(ajoutés en cours de lot, 2026-10-30 : aucun autre lot ne les touche)*
 - **Dépend de**    : Lot 0
 - **Test associé** : `test/domain/use_cases/catalog/import_course_tree_test.rb` · `test/infrastructure/repositories/catalog/content_tree_writer_test.rb`
 - **Done quand**   : l'équipe importe la leçon Thalès avec indices et 3 sujets ; un sujet dont un exercice a une notion est
