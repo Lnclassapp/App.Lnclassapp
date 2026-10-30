@@ -33,8 +33,10 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
     assert_selector "#prepare-interros [id^='assignment_']", count: 4
     assert_no_selector "[id^='assignment_#{@tle_c1.public_id}_']"
     assert_no_text "Tle C 1"
-    assert_selector "#prepare-interros .ui-button-primary", count: 1
-    assert_selector "#{toggle(@tle_d1, @phases)} .ui-button-primary"
+    assert_selector "#prepare-interros .ps-btn--primary", count: 1
+    assert_selector "#{toggle(@tle_d1, @phases)} .ps-btn--primary"
+    assert_selector :link_or_button, "Assigner à Tle D 1", count: 2
+    assert_selector :link_or_button, "Assigner à Tle D 2", count: 2
 
     assert_no_page_reload do
       within(toggle(@tle_d1, @phases)) { click_on "Assigner" }
@@ -55,10 +57,10 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
       end
       assert_toast "Les phases ajouté à Tle D 1, à rendre jeudi 8 oct."
       assert_no_selector DAYS_MODAL
-      # UDR-0077 §3.3 : la ligne compacte entière est remplacée — l'échéance sous la classe, ✕ seul à droite.
+      # Feuille de la leçon (UDR feuilles-prepare-interros-et-devoirs §3) : « ✓ Assigné à <classe> » et l'échéance, puis « Retirer ».
       within(toggle(@tle_d1, @phases)) do
-        assert_text "Assigné"
-        assert_selector "p.text-xs", text: "Pour jeu. 8 oct."
+        assert_selector "[role=status]", text: "✓ Assigné à Tle D 1"
+        assert_selector "[role=status]", text: "Pour jeu. 8 oct."
         assert_selector "button[aria-label='Retirer « Les phases » de Tle D 1']"
       end
       within(toggle(@tle_d2, @phases)) { assert_no_text "Assigné" }
@@ -93,25 +95,22 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
     assert_equal [ 1, 4, 5 ], Orm::ClassroomSessionDay.where(teacher_id: @teacher.id, classroom_id: @tle_d1.id).pluck(:weekday).sort
   end
 
-  # CA-7 (UDR-0077 §3.3) : à 375 px, la ligne d'une classe tient sur une ligne — la classe à gauche, « Assigné » et ✕ à
-  # droite, l'échéance sous la classe — sous le titre de l'exercice, dans sa liste, sans défilement de côté.
-  test "on a phone, each classroom is one compact row under the exercise title, and the page does not scroll sideways" do
+  # CA-7 : à 375 px, la bascule d'une classe tient dans la feuille, sous le titre de l'exercice, sans défilement de côté ;
+  # ses boutons font au moins 44 px de haut (UDR feuilles-prepare-interros-et-devoirs, Accessibilité).
+  test "on a phone, each classroom is two buttons in the sheet under the exercise title, and the page does not scroll sideways" do
     create_assignment(classroom: @tle_d1, assignable: @phases, by: @teacher, due_on: Date.new(2026, 10, 8))
     with_mobile_viewport do
       visit course_path(@course.slug)
 
-      title = find("#sheet-exercise-#{@phases.public_id} .ps-exercise-head")
-      list = find("#sheet-exercise-#{@phases.public_id} ul").rect
-      assigned = find(toggle(@tle_d1, @phases), text: "Pour jeu. 8 oct.").rect
+      frame = find("#sheet-exercise-#{@phases.public_id}")
+      title = frame.find(".ps-exercise-head")
+      assigned = frame.find("[role=status]", text: "Pour jeu. 8 oct.").rect
       assert_operator assigned.y, :>, title.rect.y
-      assert_operator assigned.x + assigned.width, :<=, list.x + list.width, "la bascule déborde de sa liste"
-      within(toggle(@tle_d1, @phases)) do
-        name = find("p", text: "Tle D 1").rect
-        cross = find("button[aria-label='Retirer « Les phases » de Tle D 1']").rect
-        assert_operator cross.y, :<, name.y + name.height, "✕ passe sous le nom de la classe"
-        assert_operator cross.x, :>, name.x + name.width, "✕ n'est pas à droite de la classe"
-        assert_operator cross.height, :>=, 48
-      end
+      assert_operator assigned.x + assigned.width, :<=, frame.rect.x + frame.rect.width, "la bascule déborde de la feuille"
+      cross = frame.find("button[aria-label='Retirer « Les phases » de Tle D 1']").rect
+      assert_operator cross.x + cross.width, :<=, frame.rect.x + frame.rect.width, "« Retirer » déborde de la feuille"
+      assert_operator cross.height, :>=, 44
+      assert_operator frame.find(:link_or_button, "Assigner à Tle D 2").rect.height, :>=, 44
       assert_equal page.evaluate_script("document.documentElement.clientWidth"),
                    page.evaluate_script("document.documentElement.scrollWidth"), "la page défile en largeur"
     end
