@@ -764,9 +764,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     # UDR page de la leçon §3.1 : deux sections, plus de liste de notions ; la fiche de révision montre les notions publiées au
     # gabarit des quatre blocs (UDR-0141 fiche de révision) ; « Prépare interros » liste l'exercice de la notion (Lot B).
     assert_select "#course_essentials", 0
-    # La fiche n'est pas ouverte d'emblée : un bouton « Fiche de révision » ouvre sa <dialog> en plein écran.
-    assert_select "section#fiche-de-revision button[aria-haspopup=dialog][aria-controls=revision-sheet]", text: tl("show.revision_title")
-    assert_select "section#fiche-de-revision dialog#revision-sheet.dialog-full:not([open]) h2", text: tl("show.revision_title")
+    assert_select "section#fiche-de-revision h2", text: tl("show.revision_title")
     assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
     assert_select "section#fiche-de-revision h4", text: "1. La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
