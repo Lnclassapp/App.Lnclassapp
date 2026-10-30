@@ -98,16 +98,32 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 
 ## Lot C — Vérifier un exercice sur la feuille
 
-- **Couche**       : domaine + delivery + ui
+- **Couche**       : domaine + infrastructure + delivery + ui
 - **Fichiers**     : `app/domain/use_cases/assessment/check_exercise_on_sheet.rb`
                      `app/controllers/assessment/sheet_checks_controller.rb`
                      `app/views/assessment/sheet_checks/create.turbo_stream.erb`
                      `app/views/assessment/sheet_checks/_error.html.erb`
+                     *Ajoutés en cours de lot (2026-10-30, accord de l'orchestrateur ou nécessité) :*
+                     `app/views/catalog/courses/sheets/_exercise.html.erb` *(« Ce devoir est à rendre » ; local `assignment_public_id:` : « Rendre à l'enseignant » ; local `focus:`)*
+                     `app/views/catalog/courses/sheets/_question.html.erb` *(inchangé : pas de bug, voir le journal)*
+                     `app/domain/ports/assessment/pending_assignment_repository_port.rb` · `app/infrastructure/repositories/assessment/pending_assignment_repository.rb` *(« à rendre » : devoir actif de la classe principale, sans copie rendue)*
+                     `app/domain/use_cases/assessment/start_exercise_session.rb` *(`attach_assignment: true` : une copie refaite après le rendu n'est pas rattachée)*
+                     `app/infrastructure/queries/catalog/prepare_sheets_query.rb` *(`SheetExercise#due`)* · `app/javascript/controllers/prepare_sheet_controller.js` *(focus sur « Ta note »)*
+                     `config/locales/assessment/sheet_checks.fr.yml` · `config/locales/catalog/courses.fr.yml` *(`sheets.hand_in`)* · `script/ci/test_timings.yml`
 - **Dépend de**    : Lot B
 - **Test associé** : `test/domain/use_cases/assessment/check_exercise_on_sheet_test.rb` · `test/controllers/assessment/sheet_checks_controller_test.rb` · `test/system/assessment/sheet_check_test.rb`
+                     `test/infrastructure/repositories/assessment/pending_assignment_repository_test.rb` · `test/domain/use_cases/assessment/start_exercise_session_test.rb` · `test/infrastructure/queries/catalog/prepare_sheets_query_test.rb`
 - **Done quand**   : « Vérifier ma réponse » enregistre une copie et remplace l'exercice par sa correction sans changer de page ;
                      la pause, l'exercice archivé et la panne affichent leur message, réponses gardées ; depuis la leçon,
                      un exercice assigné et pas encore rendu est refusé sans copie et affiche « Ce devoir est à rendre… » (CA-3, 4, 5, 10, 17)
+- **Contrat pour le Lot F** (CA-16, memo Q17) : `sheets/_exercise` accepte `assignment_public_id:` ; tant que `exercise.copy` est nil (la copie
+                     *rendue*, que la requête du Lot F doit donner, jamais une copie d'entraînement), le bouton noir est « Rendre à l'enseignant »
+                     avec un champ caché `assignment_public_id` et ni note ni correction ; une fois `copy` donnée, le résultat et « Refaire l'exercice »,
+                     et le bouton refait est « Vérifier ma réponse », sans champ (copie d'entraînement, non rattachée). `POST /exercises/:id/sheet_check`
+                     avec `assignment_public_id` : `CheckExerciseOnSheet` exige une assignation active de la classe principale de l'élève, qui porte
+                     l'exercice et pas encore rendue (sinon 403, ou « Ce devoir n'est plus à rendre. ») et y rattache la copie. La réponse remplace le
+                     frame `sheet-exercise-<id>` ; la progression `sheet-progress-<dom_id de la leçon>` n'existe pas dans « Ma classe » : le Lot F
+                     donne à sa feuille son propre repère s'il veut la compter.
 
 ---
 

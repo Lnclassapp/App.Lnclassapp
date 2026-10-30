@@ -271,6 +271,22 @@ module Queries
         assert_equal assignment.public_id, targets.states.fetch([ classroom.public_id, @e2.public_id ]).assignment_public_id
         assert_not_includes targets.classrooms.map(&:public_id), other.public_id
       end
+
+      # CA-17 (prepare-interros-cahier, Lot C) : « due » : l'élève doit encore rendre cet exercice, la feuille ne le vérifie pas.
+      test "un exercice assigné à l'élève et pas rendu porte due ; rendu, ou pour un autre rôle, non" do
+        classroom = create_classroom(level: @course.level, series: @course.series)
+        student = create_student(classroom:)
+        assignment = create_assignment(classroom:, assignable: @e2)
+        due = ->(actor) { call(actor).interros.flat_map(&:exercises).select(&:due).map(&:title) }
+
+        assert_equal [ "Ex 2" ], due.call(student_actor(student))
+        assert_empty due.call(nil)
+        assert_empty due.call(team_actor)
+
+        create_exercise_session(student:, exercise: @e2, status: "completed", classroom_assignment_id: assignment.id)
+
+        assert_empty due.call(student_actor(student))
+      end
     end
   end
 end

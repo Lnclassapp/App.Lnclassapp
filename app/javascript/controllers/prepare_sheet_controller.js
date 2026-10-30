@@ -21,6 +21,8 @@ export default class extends Controller {
   // Un exercice arrive (page, ou réponse de la vérification qui remplace le frame) : on lui rend son état.
   exerciseTargetConnected(exercise) {
     this.restore(exercise)
+    // La réponse de la vérification marque le frame : « Ta note » prend le focus (une page rechargée ne le marque pas).
+    if (exercise.dataset.psFocus === "true") exercise.querySelector(".ps-result-grade")?.focus()
   }
 
   restoreAll() {

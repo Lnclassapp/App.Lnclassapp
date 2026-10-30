@@ -20,8 +20,11 @@ module Queries
         def passed = exercises.count { it.copy&.passed }
         def progress_id = "sheet-progress-#{dom_id}"
       end
-      # copy : la dernière copie terminée de l'élève (Copy), nil sans copie ou hors élève ; questions : [Question].
-      SheetExercise = Data.define(:public_id, :number, :title, :statement, :statement_blocks, :figure, :hint, :questions, :copy)
+      # copy : la dernière copie terminée de l'élève (Copy), nil sans copie ou hors élève ; questions : [Question] ;
+      # due : un élève qui doit encore rendre cet exercice à son enseignant (CA-17) : la feuille ne le vérifie pas.
+      SheetExercise = Data.define(:public_id, :number, :title, :statement, :statement_blocks, :figure, :hint, :questions, :copy, :due) do
+        def initialize(due: false, **) = super
+      end
       # passed : toutes les questions justes ; grade : Entities::Assessment::SheetGrade.
       Copy = Data.define(:session_public_id, :passed, :grade)
       # kind : :mcq · :true_false · :fill_in · :calculation · :other (play : la question de la session de lecture, pour son partiel) ;
@@ -68,12 +71,19 @@ module Queries
         ids = rows.map(&:first)
         questions = questions(ids)
         copies = actor&.student? ? copies(ids, actor.user_id, questions) : {}
+        due = actor&.student? ? due_public_ids(rows, actor.user_id) : Set.new
         rows.to_h do |id, public_id, title, _status, _essential_id, _subject_id, statement, statement_blocks, figure_key, hint|
           copy, corrected = copies[id]
           [ id, SheetExercise.new(public_id:, number: 0, title:, statement:, statement_blocks:,
                                   figure: Queries::Assessment::SessionPlayQuery.figure_for(figures, figure_key),
-                                  hint: hint.presence, questions: question_list(questions.fetch(id, []), corrected), copy:) ]
+                                  hint: hint.presence, questions: question_list(questions.fetch(id, []), corrected), copy:,
+                                  due: due.include?(public_id)) ]
         end
+      end
+
+      # CA-17 : les exercices assignés à l'élève et pas encore rendus (une lecture de plus).
+      def due_public_ids(rows, student_id)
+        Repositories::Assessment::PendingAssignmentRepository.new.pending_exercise_public_ids(student_id:, exercise_public_ids: rows.map { it[1] })
       end
 
       def interros(course_id, rows, built)

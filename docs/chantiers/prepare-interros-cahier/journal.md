@@ -9,6 +9,10 @@
 | 2026-10-30 (Lot B) | `sheets/_sheet.html.erb` ne lit aucune variable d'instance ni requête : tout passe par des locals (`kind:`, `header_left:`, `header_right:`, `title:`, `subtitle:`, `box_label:`, `box_text:`, `exercises:`, `footer:`, `reset_label:`, `sheet_id:`, plus `material:`, `mode:`, `targets:`, `classrooms:`). Les lots E / F la réutilisent telle quelle. | Une seule feuille pour notions, « Toute la leçon » et sujets | Non (UDR) |
 | 2026-10-30 (Lot B) | L'exercice se rend sans formulaire pour l'enseignant et l'équipe | Les bascules d'assignation sont déjà des formulaires, qui ne s'imbriquent pas | Non |
 | 2026-10-30 (Lot B) | Les questions d'un type absent de la maquette (`:other`) réutilisent les partiels `exercise_sessions/kinds/*` ; leurs réponses ne sont pas gardées en brouillon | Le brouillon ne connaît que les propositions et les champs texte de la maquette | Non |
+| 2026-10-30 (Lot C) | `CheckExerciseOnSheet` traduit les indices postés par la feuille (ordre des positions pour les choix, mélange de `SHEET_SEED = 0` pour ordre et relier) vers ceux de l'ordre de la session (`AnswerShuffle`, graine = id de session) avant de rendre la copie à `SubmitExerciseCopy` | La feuille n'a pas de session au moment de s'afficher : sans cette traduction la bonne réponse serait corrigée à côté (le test du contrôleur le prouve avec 5 questions) | Non |
+| 2026-10-30 (Lot C) | « À rendre » = nouveau port `PendingAssignmentRepositoryPort` (assignation active de la classe principale, sans copie terminée rattachée), lu une fois par la page (`SheetExercise#due`) et par le use case | Aucun port existant ne dit « rendu » ; la définition est écrite une seule fois (page et refus de CA-17 d'accord) | Non |
+| 2026-10-30 (Lot C) | `StartExerciseSession` apprend `attach_assignment:` (vrai par défaut) ; `CheckExerciseOnSheet` ne rattache que le rendu d'un devoir (`assignment_public_id:`), jamais une copie refaite | memo Q17 : la copie refaite n'est plus rattachée, l'enseignant garde la copie rendue | Non |
+| 2026-10-30 (Lot C) | Le focus sur « Ta note » passe par `prepare-sheet` (le frame de la réponse porte `data-ps-focus`), pas par `autofocus` | `test/views/page_titles_test.rb` (UDR-0054 §3.3) interdit `autofocus` hors `ui_field` | Non |
 
 ## Ce qui a dérapé
 
@@ -47,6 +51,18 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
   test par `db:schema:load`, jamais par `db:migrate`.
 - `test/design/design_tokens_test.rb` réserve « Source Serif » aux fichiers de la fiche de cours (`SHEET_EXCEPTION`) : `prepare_sheet.css`
   n'y figure pas (voir le point remonté à l'orchestrateur).
+
+### Lot C — vérifier sur la feuille
+
+- **Pas de bug de HTML échappé dans `_question`** : « Un énoncé est du texte brut (UDR-0017) ». La page de l'exercice (`exercise_sessions/show`)
+  rend `question.content` échappé, comme la feuille ; le `<p>Question 1</p>` vient de la fabrique de test (`create_exercise`). Aucun helper
+  ne rend l'énoncé en HTML : `_question` n'a pas été modifié (rendre l'énoncé en HTML serait une faille).
+- Un exercice dont la dernière copie est terminée s'ouvre corrigé : pour refaire une copie (pause), l'élève clique d'abord « Refaire l'exercice ».
+- Les erreurs s'ajoutent à la fin du frame (`turbo_stream.remove` puis `append` de `p#sheet-error-<id>`), le formulaire n'est pas remplacé :
+  les réponses restent sans JS de plus. Une réponse en 422 au format `turbo_stream` est bien traitée par Turbo dans un frame.
+- Un devoir rendu depuis « Ma classe » rend la réponse à partir de `PrepareSheetsQuery` (la leçon) : même partiel, même frame ; la progression
+  de la leçon n'existe pas dans « Ma classe » (voir le contrat du Lot F, `plan.md`).
+- `test/guards/system_budget_test.rb` : le chantier a 15 s de budget système ; la vérification tient en 2 tests (6,0 s ; 5 tests : 9,7 s).
 
 ### Lot A — import de l'indice et des sujets
 
