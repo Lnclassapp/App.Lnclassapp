@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Numeric
-# Rôle : réponse en nombre : juste si l'écart à la valeur attendue ne dépasse pas la marge (0 sans marge) ; illisible, mal formée
-# ADR  : 0091 (§4.2 : une seule valeur attendue, numeric_tolerance ; §4.3), 0115
+# Rôle : réponse en nombre : juste si l'écart à la valeur attendue ne dépasse pas la marge (0 sans marge) ; illisible, mal formée ; jugé case par case
+# ADR  : 0091 (§4.2 : une seule valeur attendue par case, numeric_tolerance ; §4.3), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4)
 require "bigdecimal"
 
 module Entities
@@ -44,12 +44,18 @@ module Entities
         # Le nombre que dit la réponse de l'élève, unité de la question retirée → BigDecimal | nil
         def self.read(question, text) = parse(without_unit(text, question.unit))
 
-        def self.structure_errors(answers:, numeric_tolerance:, unit: nil, **)
-          errors = unit_errors(unit)
-          errors << :numeric_needs_one_value unless answers.size == 1
-          errors << :numeric_value_unreadable if answers.size == 1 && parse(answers.first.content).nil?
+        # Une valeur attendue par case ; l'unité et la marge valent pour toutes les cases.
+        def self.structure_errors(answers:, numeric_tolerance:, content: "", unit: nil, **)
+          cases = Blanks.cases(answers)
+          errors = unit_errors(unit) + Blanks.layout_errors(content, cases) + value_errors(cases)
           errors << :negative_tolerance if numeric_tolerance&.negative?
           errors << :tolerance_out_of_range if numeric_tolerance && !tolerance_in_range?(numeric_tolerance)
+          errors
+        end
+
+        def self.value_errors(cases)
+          errors = cases.reject { it.size == 1 }.map { cases.size > 1 && it.empty? ? :blank_without_answer : :numeric_needs_one_value }.uniq
+          errors << :numeric_value_unreadable if errors.empty? && cases.any? { parse(it.first.content).nil? }
           errors
         end
 
@@ -66,12 +72,27 @@ module Entities
           tolerance.finite? && tolerance <= TOLERANCE_MAX && tolerance.round(TOLERANCE_SCALE) == tolerance
         end
 
-        # Une saisie illisible n'est pas une mauvaise réponse : l'élève voit une erreur de saisie (422).
-        def self.well_formed?(question, text) = !read(question, text).nil?
+        # Une saisie illisible n'est pas une mauvaise réponse : l'élève voit une erreur de saisie (422). Plusieurs cases : un texte par
+        # case, une case vide admise (elle est fausse).
+        def self.well_formed?(question, response)
+          return !read(question, response).nil? if question.blanks == 1 && !response.is_a?(Array)
 
-        def self.correct?(question, text)
-          (read(question, text) - parse(question.answers.first.content)).abs <= (question.numeric_tolerance || 0)
+          response.is_a?(Array) && response.size == question.blanks && response.all? { it.is_a?(String) && (blank_text?(it) || !read(question, it).nil?) }
         end
+
+        def self.blank_text?(text) = text.gsub(EDGE_SPACES, "").empty?
+
+        # Le verdict de chaque case, dans l'ordre des cases. response : un texte (une case) ou une liste de textes. → [Boolean]
+        def self.blank_results(question, response)
+          texts = Array(response)
+          Blanks.cases(question.answers).each_with_index.map do |accepted, index|
+            value = read(question, texts[index])
+            wanted = accepted.first && parse(accepted.first.content)
+            !value.nil? && !wanted.nil? && (value - wanted).abs <= (question.numeric_tolerance || 0)
+          end
+        end
+
+        def self.correct?(question, response) = blank_results(question, response).all?
       end
     end
   end

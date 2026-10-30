@@ -1,0 +1,29 @@
+<%# 🌐 UI · assessment/session_results/kinds/_blanks_review — la phrase d'une question à plusieurs cases, la réponse et le verdict de chaque case %>
+<%# Rôle : à la place de chaque `___`, la réponse de l'élève puis « Juste » ou « À revoir » (mots, jamais la couleur seule) ; avec reveal, « attendu : » sur une case fausse ; « 1 / 2 pt » sous la phrase %>
+<%# ADR  : XXXX-questions-a-plusieurs-cases-et-indice §4 · UDR : XXXX-je-m-entraine-dans-la-fiche §3.3, §3.9 · sécurité : les réponses acceptées ne viennent qu'avec reveal (RevealCorrectionPolicy) %>
+<%# locals: (question:, reveal:, unit: nil) -%>
+<% scope = "assessment.session_results.question_review" %>
+<% fmt = ->(value) { number_with_precision(value, precision: 1, strip_insignificant_zeros: true) } %>
+<p class="leading-loose whitespace-pre-line text-ink">
+  <% blank_segments(question.content).each do |kind, part| %>
+    <% if kind == :text %>
+      <span><%= part %></span>
+    <% else %>
+      <% right = question.blank_results[part] == true %>
+      <% given = question.blank_responses[part].to_s %>
+      <span class="mx-1 inline-flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 align-middle" data-blank-verdict="<%= right ? "correct" : "wrong" %>">
+        <strong class="text-ink"><%= given.presence || "—" %><%= " #{unit}" if unit.present? && given.present? %></strong>
+        <% if right %>
+          <%= ui_badge t("#{scope}.blank_correct"), tone: :success, icon: "check-circle", size: :sm %>
+        <% else %>
+          <%= ui_badge t("#{scope}.blank_wrong"), tone: :warning, icon: "x-circle", size: :sm %>
+        <% end %>
+        <% wanted = question.blank_solutions[part] %>
+        <% if reveal && !right && wanted.present? %>
+          <span class="text-sm text-success" data-correct><%= t("#{scope}.blank_expected", value: "#{wanted.join(" ; ")}#{" #{unit}" if unit.present?}") %></span>
+        <% end %>
+      </span>
+    <% end %>
+  <% end %>
+</p>
+<p class="mt-1 text-sm text-mute tabular-nums"><%= t("#{scope}.blank_points", earned: fmt.(question.earned_points.to_f), total: fmt.(question.points)) %></p>

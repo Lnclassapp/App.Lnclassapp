@@ -47,6 +47,11 @@ fr:
         blank_option: "Une proposition est vide."
         duplicate_options: "Deux propositions sont identiques (sans compter majuscules, accents et espaces)."
         answers_not_allowed: "Cette question ne prend aucune proposition (answers)."
+        # ADR questions à plusieurs cases §4 : une case par ___, de 1 à 6 par question.
+        blank_markers_mismatch: "Écrivez autant de ___ (trois tirets bas) dans l'énoncé que la question a de cases."
+        blank_without_answer: "Une case n'a aucune réponse : donnez au moins une réponse pour chaque case (blank)."
+        too_many_blanks: "Une question a 6 cases au plus (blank de 0 à 5)."
+        blank_not_allowed: "Cette question n'a qu'une case : laissez blank à 0 ou retirez-le."
       statuses:
         queued: "En file d'attente"
         validating: "Vérification"
@@ -85,7 +90,7 @@ fr:
         example_steps_mismatch: "L'exemple corrigé doit avoir autant d'étapes que La méthode : l'étape n applique l'étape n."
         figure_invalid: "Figure non valide : vérifiez le paramètre « %{param} » (sorte, borne, description ou clé)."
         figure_missing: "La figure « %{key} » n'est pas dans la liste des figures de la fiche de cours."
-        invalid_count: "Nombre non valide : de 2 à 8 étapes dans La méthode, de 5 à 30 questions dans un exercice."
+        invalid_count: "Nombre non valide : de 2 à 8 étapes dans La méthode, de 5 à 30 questions dans un exercice, de 1 à 6 questions dans un entraînement."
         too_short: "Texte trop court : une correction compte au moins %{min} caractères."
         essential_not_in_lesson: "Fiche de cours « %{course} » déjà présente : la notion « %{name} » n'en fait pas partie. Un réimport ne crée ni ne modifie aucune notion."
         essential_missing_from_file: "Fiche de cours « %{course} » déjà présente : la notion « %{name} » n'est pas dans le fichier. Elle resterait sans exercice ; la fiche de cours n'est pas réimportée."
