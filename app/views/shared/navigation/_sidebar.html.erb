@@ -1,24 +1,23 @@
 <%# 🌐 UI · shared/navigation/_sidebar — navigation bureau (lg et plus) %>
-<%# Rôle : carte de profil (pas pour l'élève), destinations du rôle dans une carte blanche, 2e carte « Configuration » %>
-<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4), XXXX accueil élève §3.1 (ordinateur : sans carte de profil), XXXX écrans enseignant §3.14 (bloc de profil en tête, entrée active bleue) · ADR : 0076 (§4.2) %>
+<%# Rôle : carte de profil, destinations du rôle dans une carte blanche, 2e carte « Configuration » %>
+<%# UDR  : 0006, 0068 (§3.2), 0069 (§3.6), 0084 (§3.4), 0132 §3.1 (amendée : carte de profil de l'élève), 0134 §3.14 (bloc de profil en tête, entrée active bleue) · ADR : 0076 (§4.2) %>
 <% secondary = secondary_navigation_for(user.role) %>
 <% student = user.role.to_sym == :student %>
 <% teacher = user.role.to_sym == :teacher %>
 <% style = teacher ? :sidebar_teacher : :sidebar %>
 <aside class="fixed top-bar bottom-0 left-0 hidden w-rail overflow-y-auto border-r border-line bg-paper p-4 lg:block">
-  <%# UDR élève §3.1 : l'élève n'a pas de carte de profil (son avatar est dans l'en-tête) ; la navigation est sa première carte. %>
-  <% unless student %>
-    <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
-      <%= ui_avatar user.name, src: user.avatar_url %>
-      <div class="min-w-0">
-        <p class="truncate font-medium"><%= user.name %></p>
-        <%# UDR enseignant §3.14 : « Maths · PC · sigle », le texte de l'en-tête de « Mon compte » ; ce bloc n'est pas un lien. %>
-        <% detail = teacher ? teacher_detail(user) : user.detail %>
-        <% if detail.present? %><p class="line-clamp-2 text-xs text-mute"><%= detail %></p><% end %>
-      </div>
+  <div class="flex items-center gap-3 rounded-card border border-line bg-white p-4 shadow-card">
+    <%# UDR-0084 §3.4 : la couleur des initiales de l'élève suit son identifiant public, celle de l'avatar de l'en-tête. %>
+    <%= ui_avatar user.name, src: user.avatar_url, tone_seed: (user.public_id if student) %>
+    <div class="min-w-0">
+      <p class="truncate font-medium"><%= user.name %></p>
+      <%# UDR enseignant §3.14 : « Maths · PC · sigle », le texte de l'en-tête de « Mon compte » ; ce bloc n'est pas un lien.
+          UDR-0132 §3.1 (amendée) : l'élève y lit « 3ème B · sigle », ou « Pas encore de classe ». %>
+      <% detail = if teacher then teacher_detail(user) elsif student then student_detail(user) || t(".no_classroom") else user.detail end %>
+      <% if detail.present? %><p class="line-clamp-2 text-xs text-mute"><%= detail %></p><% end %>
     </div>
-  <% end %>
-  <nav aria-label="<%= t(".label") %>" class="<%= class_names("rounded-card border border-line bg-white p-2 shadow-card", "mt-4" => !student) %>">
+  </div>
+  <nav aria-label="<%= t(".label") %>" class="mt-4 rounded-card border border-line bg-white p-2 shadow-card">
     <ul class="space-y-1">
       <% navigation_for(user.role).each do |destination| %>
         <li><%= nav_link destination, style: %></li>

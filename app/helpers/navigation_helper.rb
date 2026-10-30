@@ -138,6 +138,13 @@ module NavigationHelper
     [ *teacher_subjects(user), school ].compact_blank.join(" · ")
   end
 
+  # UDR-0132 §3.1 (amendée) : la ligne de la carte de profil de l'élève, au gabarit de l'enseignant — « 3ème B · LMC » (le
+  # sigle, sinon le nom) ; nil sans classe active.
+  def student_detail(user)
+    about = user.about
+    [ about&.classroom, about&.sigle.presence || about&.school ].compact_blank.join(" · ").presence
+  end
+
   def nav_path(destination)
     respond_to?(destination.route) ? public_send(destination.route) : nil
   end

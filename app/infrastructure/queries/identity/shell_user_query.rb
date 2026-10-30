@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Identity::ShellUserQuery
 # Rôle : ce que le shell affiche de la personne connectée (nom, rôle, détail, et ses éléments pour le message WhatsApp), lu une fois par requête
-# ADR  : 0026, 0060, 0065, 0094, 0103 · UDR : 0006, 0047, 0052, 0098, 0126 (§3.5), 0128
+# ADR  : 0026, 0060, 0065, 0094, 0103 · UDR : 0006, 0047, 0052, 0098, 0126 (§3.5), 0128, 0132 (§3.1)
 module Queries
   module Identity
     class ShellUserQuery
@@ -9,8 +9,9 @@ module Queries
       # photo_version : nil sans photo (ADR-0060) ; about : les mêmes éléments, séparés, et le genre (UDR-0128).
       Row = Data.define(:name, :role, :detail, :public_id, :photo_version, :about)
       # UDR-0128 §3.1 : le message prêt de la carte d'aide nomme chaque élément ; gender accorde « enseignant(e) ».
-      About = Data.define(:gender, :classroom, :material, :school) do
-        def initialize(gender:, classroom: nil, material: nil, school: nil) = super
+      # sigle : celui de l'établissement de l'élève, pour sa carte de profil (UDR-0132 §3.1 amendée) ; absent du détail.
+      About = Data.define(:gender, :classroom, :material, :school, :sigle) do
+        def initialize(gender:, classroom: nil, material: nil, school: nil, sigle: nil) = super
 
         def detail = [ classroom, material, school ].compact.join(" · ").presence
       end
@@ -41,10 +42,10 @@ module Queries
       end
 
       def student_about(user_id, gender)
-        classroom, school =
+        classroom, school, sigle =
           Orm::ClassroomStudent.joins(classroom: :school).where(student_id: user_id, primary: true, left_at: nil, classrooms: { status: "active" })
-                               .pick("classrooms.name", "schools.name")
-        About.new(gender:, classroom:, school:)
+                               .pick("classrooms.name", "schools.name", "schools.sigle")
+        About.new(gender:, classroom:, school:, sigle:)
       end
 
       def teacher_about(user_id, gender, current_school_id)

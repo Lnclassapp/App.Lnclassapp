@@ -5,11 +5,12 @@ module Queries
     class ShellUserQueryTest < ActiveSupport::TestCase
       setup { @query = ShellUserQuery.new }
 
+      # carte-profil-eleve : le sigle part à part, pour la carte de profil de la barre latérale ; le détail garde le nom.
       test "a student shows their classroom and school" do
-        school = create_school(name: "Lycée classique d'Abidjan")
+        school = create_school(name: "Lycée classique d'Abidjan", sigle: "LCA")
         student = create_student(first_name: "Awa", last_name: "Koné", classroom: create_classroom(school:, name: "Tle D 1"))
 
-        about = ShellUserQuery::About.new(gender: "female", classroom: "Tle D 1", school: "Lycée classique d'Abidjan")
+        about = ShellUserQuery::About.new(gender: "female", classroom: "Tle D 1", school: "Lycée classique d'Abidjan", sigle: "LCA")
         assert_equal ShellUserQuery::Row.new(name: "Awa Koné", role: :student, detail: "Tle D 1 · Lycée classique d'Abidjan",
                                              public_id: student.public_id, photo_version: nil, about:),
                      @query.call(user_id: student.id)
