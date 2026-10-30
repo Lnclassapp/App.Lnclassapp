@@ -363,3 +363,12 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
   - erreurs serveur (422, sous le champ, comme les autres) : « Cet audio dure 14,2 s : 10 secondes au plus. Raccourcissez l'enregistrement. » ; « La durée de cet audio ne se lit pas. Exportez l'enregistrement en MP3 ou M4A. » ; « Ce fichier est trop lourd (1 Mo au plus). ».
 - **Accessibilité** : le message de durée est annoncé (`aria-live`) et lié au champ par la validité native.
 - **Vérification** : `test/views/communication/card_test.rb`, `test/views/communication/carousel_test.rb`, `test/controllers/communication/message_files_controller_test.rb`, `test/controllers/communication/authored_messages_controller_test.rb`, `test/system/communication/announcement_audio_duration_test.rb`.
+
+## Amendement du 2026-10-30 (second) — carte sobre : sans « Modifiée », dix mots, logo du lecteur
+
+*Chantier [`docs/chantiers/annonces-logo-audio`](../../chantiers/annonces-logo-audio/journal.md). Demande du porteur du 2026-10-30, après la livraison du premier amendement : « retire l'affichage de "Modifiée" ; la longueur max du texte est 10 mots ou 2 lignes sur l'annonce ; utilise le logo adapté aux users, le bleu pour les élèves et le jaune pour les enseignants. » En cas d'écart avec le §3.2 et l'amendement précédent, cette section fait foi.*
+
+- **§3.2, pas de « Modifiée »** : la carte ne porte plus le badge, nulle part (carrousel, liste, modération). La donnée (`edited_at`) reste ; la locale `communication.card.edited` part. Le badge « Masquée » et « Réafficher » de la liste restent.
+- **§3.2, texte** : la carte montre les **dix premiers mots** du texte, suivis de « … » s'il en a plus (`announcement_excerpt`), dans `p.line-clamp-2.text-sm` : deux lignes au plus, la première borne atteinte l'emporte. La saisie reste bornée à 140 caractères : la règle est d'affichage, une annonce existante n'est pas refusée à sa modification.
+- **§3.2, logo de l'équipe** : celui du lecteur, par `brand_logo` (UDR-0082) : `logo/lnclass-teacher.jpeg` (le baobab au bras levé sur orange) pour un enseignant, `logo/lnclass.jpeg` (bleu) pour un élève, une direction, l'équipe en modération, et dans la coque « Lnclass Teacher » le logo des enseignants comme partout ailleurs.
+- **Vérification** : `test/views/communication/card_test.rb`, `test/controllers/communication/inboxes_controller_test.rb` (AN-14 retiré), `test/controllers/communication/authored_messages_controller_test.rb`.
