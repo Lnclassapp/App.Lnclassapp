@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/exercise_sessions/kinds/_fill_blank — texte à trous : un champ à la place de `___`, dans la phrase %>
 <%# Rôle : la phrase dans une carte, le champ à la taille de ce qui est écrit ; la consigne est la légende de la copie ; aucune réponse acceptée dans la page %>
-<%# ADR  : 0091 §4.2, §4.4, 0112, 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : 0087 §3.4, §3.10 (le champ a pour nom l'énoncé, « blanc » à la place de `___`), 0138 §3.2, 0146-je-m-entraine-dans-la-fiche §3.3 (plusieurs cases : un champ par `___`) %>
+<%# ADR  : 0091 §4.2, §4.4, 0112, 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : 0087 §3.4, §3.10 (le champ a pour nom l'énoncé, « blanc » à la place de `___`), 0138 §3.2, 0147-je-m-entraine-dans-la-fiche §3.3 (plusieurs cases : un champ par `___`) %>
 <%# locals: (f:, question:, number:, values: {}) -%>
 <% before, after = question.content.split(Entities::Assessment::QuestionKinds::FillBlank::MARKER, 2) %>
 <% if question.multi_blank? %>

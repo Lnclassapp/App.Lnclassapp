@@ -1,6 +1,6 @@
 require "test_helper"
 
-# CA-14, CA-15 (ADR-0120 questions à plusieurs cases §4, UDR-0146 §3.8) : l'indice d'une question ne se lit qu'une fois son ouverture
+# CA-14, CA-15 (ADR-0120 questions à plusieurs cases §4, UDR-0147 §3.8) : l'indice d'une question ne se lit qu'une fois son ouverture
 # enregistrée. Avant le POST, son texte n'est nulle part dans la page. Copie rendue, copie d'un autre élève, question sans indice : 404.
 class Assessment::HintsControllerTest < ActionDispatch::IntegrationTest
   HINT = "Pense au rapport de proportionnalité."

@@ -70,7 +70,7 @@ export default class extends Controller {
   }
 
   // Envoi réussi (réponse Turbo Stream) : on ferme. Un 422 re-rend la modale dans le frame, qui se rouvre avec ses erreurs.
-  // Un formulaire dont la réponse remplace un frame de la boîte (« Vérifier » de la fiche, UDR-0146 §3.4) la laisse ouverte.
+  // Un formulaire dont la réponse remplace un frame de la boîte (« Vérifier » de la fiche, UDR-0147 §3.4) la laisse ouverte.
   submitEnd(event) {
     const frame = event.target.closest("turbo-frame")
     if (frame && this.dialogTarget.contains(frame)) return

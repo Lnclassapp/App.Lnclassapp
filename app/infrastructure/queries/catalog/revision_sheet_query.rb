@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::RevisionSheetQuery
 # Rôle : la « Fiche de révision » d'une leçon pour sa page : ses notions au gabarit des quatre blocs (et « Je m'entraîne » sans correction), ses figures et son thème, avec la coupe des 150 mots
-# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.3), 0119-entrainement-de-notion-corrige-sans-trace (§4) · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0139 §3.2, 0146-je-m-entraine-dans-la-fiche §3.1
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.3), 0119-entrainement-de-notion-corrige-sans-trace (§4) · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0139 §3.2, 0147-je-m-entraine-dans-la-fiche §3.1
 module Queries
   module Catalog
     class RevisionSheetQuery

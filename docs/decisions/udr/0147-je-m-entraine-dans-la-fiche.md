@@ -1,4 +1,4 @@
-# UDR-0146 : « Je m'entraîne » dans la fiche de révision, questions à plusieurs cases et indice
+# UDR-0147 : « Je m'entraîne » dans la fiche de révision, questions à plusieurs cases et indice
 <!-- index
 titre: Je m'entraîne dans la fiche, cases multiples et indice
 statut: Accepté

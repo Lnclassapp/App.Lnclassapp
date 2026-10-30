@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::RevisionPreview
 # Rôle : la coupe de la « Fiche de révision » d'une leçon : 150 mots de texte, puis la fin du bloc qui atteint le seuil
-# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113, 0116-fiche-de-revision-par-notion · UDR : 0139 §3.2, 0141-fiche-de-revision-en-quatre-blocs §3.1, 0146-je-m-entraine-dans-la-fiche §3.7
+# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113, 0116-fiche-de-revision-par-notion · UDR : 0139 §3.2, 0141-fiche-de-revision-en-quatre-blocs §3.1, 0147-je-m-entraine-dans-la-fiche §3.7
 module Entities
   module Catalog
     class RevisionPreview
