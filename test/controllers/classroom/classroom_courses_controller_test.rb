@@ -61,6 +61,44 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "##{toggle_id(@classroom, @ex_meiose)} .ui-button-primary"
   end
 
+  # UDR-0145 §3.2 ter : les évaluations vont dans « Prépare devoirs », les fixations dans « Prépare interros », jamais l'inverse.
+  test "evaluations go to « Prépare devoirs » with their toggles, fixations stay in « Prépare interros »" do
+    eval_mitose = create_exercise(essential: @mitose, title: "Devoir mitose", exercise_type: "evaluation")
+    eval_wide = create_lesson_wide_exercise(course: @course, title: "Devoir de la leçon", exercise_type: "evaluation")
+    sign_in_as @teacher
+
+    get classroom_course_path(@classroom.public_id, @course.slug)
+
+    assert_select "section#prepare-devoirs[aria-labelledby=prepare_devoirs_title] h2#prepare_devoirs_title", text: tl("prepare_devoirs_title")
+    assert_select "section#prepare-devoirs", text: including(tl("prepare_devoirs_intro"))
+    assert_select "ul#prepare-devoirs-grid li[id^=exercise-]", 2
+    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_mitose.public_id}"
+    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_wide.public_id}"
+    assert_select "ul#prepare-devoirs-grid li#exercise-#{@ex_meiose.public_id}", 0
+    assert_select "ul#prepare-interros-grid li#exercise-#{eval_mitose.public_id}", 0
+    assert_select "ul#prepare-interros-grid li#exercise-#{eval_wide.public_id}", 0
+    assert_select "ul#prepare-interros-grid li#exercise-#{@ex_meiose.public_id}"
+    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_mitose.public_id} ##{toggle_id(@classroom, eval_mitose)}"
+    assert_select ".ui-button-primary", 1
+    # Chaque repère n'existe qu'une fois : « notion-mitose » a déjà sa fixation, « toute-la-lecon » la sienne.
+    assert_select "##{"notion-#{@mitose.slug}"}", 1
+    assert_select "#toute-la-lecon", 1
+    assert_select "ul#prepare-devoirs-grid span[id]", 0
+  end
+
+  test "a notion with only an evaluation carries its anchor in « Prépare devoirs », which is absent without evaluation" do
+    sign_in_as @teacher
+    get classroom_course_path(@classroom.public_id, @course.slug)
+    assert_select "section#prepare-devoirs", 0
+
+    @ex_mitose.update!(exercise_type: "evaluation")
+    get classroom_course_path(@classroom.public_id, @course.slug)
+
+    assert_select "##{"notion-#{@mitose.slug}"}", 1
+    assert_select "ul#prepare-devoirs-grid > li > span#notion-#{@mitose.slug}"
+    assert_select "ul#prepare-interros-grid span#notion-#{@mitose.slug}", 0
+  end
+
   # UDR-0013 : une leçon d'un autre niveau que la classe, atteinte par l'URL, n'existe pas sur la page de la classe.
   test "a lesson of another level than the classroom is a 404" do
     classroom = create_classroom(name: "6ème 1")
