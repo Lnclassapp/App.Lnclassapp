@@ -10,6 +10,15 @@ module Entities
         Question.new(id: 1, position: 1, content: "Q ___", explanation: nil, question_type: type, answers:, **)
       end
 
+      # Remplace un instant la classe de règles que la question trouve pour son type (Minitest 6 n'a plus de stub).
+      def with_kind(kind)
+        original = Question.method(:kind_for)
+        Question.define_singleton_method(:kind_for) { |_type| kind }
+        yield
+      ensure
+        Question.define_singleton_method(:kind_for, original)
+      end
+
       test "une réponse sans case est celle de la case 0" do
         assert_equal 0, answer.blank
         assert_equal 3, answer(blank: 3).blank
@@ -27,18 +36,17 @@ module Entities
         assert_equal "Pense à Thalès.", question([], hint: "Pense à Thalès.").hint
       end
 
-      test "le verdict par case est un contrat : un type qui ne juge pas case par case lève NotImplementedError" do
-        assert_raises(NotImplementedError) { question([ answer ]).blank_results([ "4" ]) }
+      test "le verdict par case est un contrat : un type inconnu ou qui ne l'implémente pas lève NotImplementedError" do
         assert_raises(NotImplementedError) { question([], type: "poem").blank_results([]) }
+        kind = Object.new
+        with_kind(kind) { assert_raises(NotImplementedError) { question([ answer ]).blank_results([ "4" ]) } }
       end
 
       test "un type qui répond à blank_results est appelé avec la question et la réponse" do
-        kind = QuestionKinds::Numeric
+        kind = Object.new
         kind.define_singleton_method(:blank_results) { |question, response| [ question.blanks, response ] }
 
-        assert_equal [ 1, [ "4" ] ], question([ answer ]).blank_results([ "4" ])
-      ensure
-        kind.singleton_class.send(:remove_method, :blank_results)
+        with_kind(kind) { assert_equal [ 1, [ "4" ] ], question([ answer ]).blank_results([ "4" ]) }
       end
 
       test "une tentative et une copie ont leurs cases et leurs indices vides par défaut" do

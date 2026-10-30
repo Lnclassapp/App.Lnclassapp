@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Matching
 # Rôle : relier : juste seulement si chaque élément de gauche est relié au sien, sans points partiels
-# ADR  : 0091 (§4.2 : trois à cinq paires, côtés droits distincts ; §4.3 ; §4.4 : indices d'affichage), 0115
+# ADR  : 0091 (§4.2 : trois à cinq paires, côtés droits distincts ; §4.3 ; §4.4 : indices d'affichage), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds
@@ -17,8 +17,11 @@ module Entities
           errors << :missing_match if rights.any?(&:empty?)
           errors << :duplicate_match if FillBlank.duplicates?(rights)
           errors << :duplicate_left if FillBlank.duplicates?(answers.map(&:content))
-          errors
+          errors.concat(Blanks.single_case_errors(answers))
         end
+
+        # Une seule case : le verdict est celui de la question.
+        def self.blank_results(question, response) = [ correct?(question, response) ]
 
         # ids : pour chaque élément de gauche, dans l'ordre des positions, l'id de l'élément de droite choisi ; chacun une fois.
         def self.well_formed?(question, ids) = ids.sort == question.answer_ids.sort

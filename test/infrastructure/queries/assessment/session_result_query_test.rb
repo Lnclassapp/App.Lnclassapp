@@ -447,6 +447,55 @@ module Queries
         assert_equal [ @essential.course.slug, "Awa Koné" ], [ row.course_slug, row.student_name ]
         assert_nil row.gap_outcome
       end
+
+      def multi_blank_session
+        exercise = create_exercise(title: "Thalès", questions: 0)
+        numeric = exercise.questions.create!(position: 1, content: "AN = ___  MN = ___", question_type: "numeric", points: 2, unit: "cm")
+        [ "3", "4" ].each_with_index { |value, blank| numeric.answers.create!(position: blank + 1, content: value, correct: true, blank:) }
+        select = exercise.questions.create!(position: 2, content: "Il ___ puis il ___.", question_type: "select", points: 1)
+        [ [ "mange", true, 0 ], [ "dort", false, 0 ], [ "sort", true, 1 ], [ "boit", false, 1 ] ].each_with_index do |(text, correct, blank), rank|
+          select.answers.create!(position: rank + 1, content: text, correct:, blank:)
+        end
+        session = create_exercise_session(student: @student, exercise:, status: "completed", score_percent: 50)
+        Orm::QuestionAttempt.create!(exercise_session: session, question: numeric, correct: false, selected_answer_ids: [], response_text: "3 ; 5",
+                                     blank_responses: %w[3 5], blank_results: [ true, false ], answered_at: Time.current)
+        Orm::QuestionAttempt.create!(exercise_session: session, question: select, correct: false, selected_answer_ids: select.answers.where(content: %w[mange boit]).ids,
+                                     blank_responses: %w[mange boit], blank_results: [ true, false ], answered_at: Time.current)
+        [ session, numeric, select ]
+      end
+
+      test "plusieurs cases : la réponse et le verdict de chaque case, les points en fractions, l'indice ouvert" do
+        session, numeric, = multi_blank_session
+        session.update!(hinted_question_ids: [ numeric.id ])
+
+        row = result(session:)
+
+        first, second = row.review
+        assert_equal [ %w[3 5], [ true, false ], true ], [ first.blank_responses, first.blank_results, first.multi_blank? ]
+        assert_equal [ true, false ], [ first.hinted?, second.hinted? ]
+        assert_equal [ Rational(1), Rational(1, 2) ], [ first.earned_points, second.earned_points ]
+        # 1 point sur 2 + 0,5 point sur 1 : 1,5 point sur 3
+        assert_equal [ BigDecimal("1.5"), BigDecimal("3"), true ], [ row.points.earned, row.points.graded, row.points.weighted ]
+        assert_equal [], first.blank_solutions
+      end
+
+      test "plusieurs cases : avec reveal, les réponses acceptées de chaque case ; la proposition correcte pour une liste" do
+        session, = multi_blank_session
+
+        first, second = result(session:, reveal: true).review
+
+        assert_equal [ [ "3" ], [ "4" ] ], first.blank_solutions
+        assert_equal [ [ "mange" ], [ "sort" ] ], second.blank_solutions
+      end
+
+      test "une question à une case n'a ni cases, ni indice ouvert, et ses points restent tout ou rien" do
+        row = result
+
+        assert_equal [ false, false ], row.review.map(&:multi_blank?)
+        assert_equal [ [], [] ], row.review.map(&:blank_results)
+        assert_equal [ Rational(0), Rational(1) ], row.review.map(&:share)
+        assert_equal [ BigDecimal("1"), BigDecimal("2"), false ], [ row.points.earned, row.points.graded, row.points.weighted ]
+      end
     end
   end
 end

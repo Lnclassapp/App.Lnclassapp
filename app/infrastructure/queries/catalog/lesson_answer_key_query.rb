@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::LessonAnswerKeyQuery
 # Rôle : le corrigé d'une leçon pour l'équipe : tous les exercices non archivés, tous statuts, dans l'ordre de « Prépare interros », avec bonnes réponses et corrections
-# ADR  : 0113 (§4.6), 0115 · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.5
+# ADR  : 0113 (§4.6), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4 : case de chaque réponse, indice) · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.5
 module Queries
   module Catalog
     class LessonAnswerKeyQuery
@@ -10,8 +10,9 @@ module Queries
       end
       # essential_name : nil pour un exercice de toute la leçon ; figure : Entities::Catalog::Figure ou nil.
       ExerciseRow = Data.define(:public_id, :title, :essential_name, :statement, :statement_blocks, :figure, :questions)
-      QuestionRow = Data.define(:position, :content, :kind_name, :points, :unit, :numeric_tolerance, :explanation, :answers)
-      AnswerRow = Data.define(:content, :match_content, :correct)
+      # hint : l'indice de la question, nil sans indice ; blank : la case (0 à 5) à laquelle une réponse se rattache.
+      QuestionRow = Data.define(:position, :content, :kind_name, :points, :unit, :numeric_tolerance, :explanation, :answers, :hint)
+      AnswerRow = Data.define(:content, :match_content, :correct, :blank)
 
       EXERCISE_COLUMNS = %i[id public_id title statement statement_blocks figure_key essential_id].freeze
 
@@ -51,10 +52,10 @@ module Queries
       end
 
       def question_row(question)
-        answers = question.answers.map { AnswerRow.new(content: it.content, match_content: it.match_content, correct: it.correct) }
+        answers = question.answers.map { AnswerRow.new(content: it.content, match_content: it.match_content, correct: it.correct, blank: it.blank) }
         QuestionRow.new(position: question.position, content: question.content, kind_name: Entities::Assessment::Question.kind_name_for(question.question_type),
                         points: question.points, unit: question.unit, numeric_tolerance: question.numeric_tolerance,
-                        explanation: question.explanation, answers:)
+                        explanation: question.explanation, answers:, hint: question.hint)
       end
     end
   end

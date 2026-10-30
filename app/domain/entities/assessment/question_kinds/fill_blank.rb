@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::FillBlank
-# Rôle : texte à trous : juste sans tenir compte des majuscules, des accents ni des espaces en trop ; une faute de frappe est fausse
-# ADR  : 0091 (§4.2 : une à cinq réponses acceptées, `___` une fois dans l'énoncé ; §4.3 : la normalisation), 0115
+# Rôle : texte à trous : juste sans tenir compte des majuscules, des accents ni des espaces en trop ; une faute de frappe est fausse ; jugé case par case
+# ADR  : 0091 (§4.2 : une à cinq réponses acceptées, `___` une fois dans l'énoncé ; §4.3 : la normalisation), 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4)
 module Entities
   module Assessment
     module QuestionKinds
@@ -24,12 +24,17 @@ module Entities
               .gsub(DASHES, "-").gsub(/[[:space:]]+/, " ").strip
         end
 
+        # Une case : `___` une fois, de 1 à 5 réponses acceptées. Plusieurs cases : autant de `___` que de cases, chacune avec ses
+        # propres réponses (de 1 à 5), distinctes entre elles.
         def self.structure_errors(content:, answers:, **)
-          errors = []
-          errors << :blank_marker unless content.scan(MARKER).size == 1
-          errors << :accepted_answers_count unless ACCEPTED.cover?(answers.size)
-          errors << :duplicate_accepted if duplicates?(answers.map(&:content))
-          errors
+          cases = Blanks.cases(answers)
+          errors = Blanks.layout_errors(content, cases)
+          errors << :blank_marker if cases.size == 1 && content.scan(MARKER).size != 1
+          cases.each do |accepted|
+            errors << (accepted.empty? && cases.size > 1 ? :blank_without_answer : :accepted_answers_count) unless ACCEPTED.cover?(accepted.size)
+            errors << :duplicate_accepted if duplicates?(accepted.map(&:content))
+          end
+          errors.uniq
         end
 
         # Deux textes égaux une fois normalisés : la même réponse acceptée, saisie deux fois.
@@ -38,12 +43,23 @@ module Entities
           normalized.uniq.size != normalized.size
         end
 
-        def self.well_formed?(_question, text) = !normalize(text).empty?
+        # Une case : un texte non vide. Plusieurs cases : un texte par case, vide admis (la case est alors fausse).
+        def self.well_formed?(question, response)
+          return !normalize(response).empty? if question.blanks == 1 && !response.is_a?(Array)
 
-        def self.correct?(question, text)
-          given = normalize(text)
-          question.answers.any? { normalize(it.content) == given }
+          response.is_a?(Array) && response.size == question.blanks && response.all?(String)
         end
+
+        # Le verdict de chaque case, dans l'ordre des cases. response : un texte (une case) ou une liste de textes. → [Boolean]
+        def self.blank_results(question, response)
+          texts = Array(response)
+          Blanks.cases(question.answers).each_with_index.map do |accepted, index|
+            given = normalize(texts[index])
+            !given.empty? && accepted.any? { normalize(it.content) == given }
+          end
+        end
+
+        def self.correct?(question, response) = blank_results(question, response).all?
       end
     end
   end

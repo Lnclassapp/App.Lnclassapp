@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::ExerciseCopiesController
 # Rôle : l'élève rend sa copie d'un seul envoi : 303 vers le résultat, 422 avec ses réponses réaffichées, retrait de l'exercice vers la leçon
-# ADR  : 0026, 0054, 0091 (§4.4 : texte ou indices d'affichage), 0112, 0115 · UDR : 0138 §3.3 · sécurité : copy[answers][<id>] lu champ par champ
+# ADR  : 0026, 0054, 0091 (§4.4 : texte ou indices d'affichage), 0112, 0115, XXXX-questions-a-plusieurs-cases-et-indice (§4 : params blanks) · UDR : 0138 §3.3 · sécurité : copy[answers][<id>] lu champ par champ
 module Assessment
   class ExerciseCopiesController < AuthenticatedController
     include ReadsOwnLevel
@@ -31,7 +31,7 @@ module Assessment
         current_actor.user_id
     end
 
-    # Ce que l'élève a posté, champ par champ : ni plus de trois champs par question, ni autre clé que celles que le DTO lit.
+    # Ce que l'élève a posté, champ par champ : ni plus de quatre champs par question, ni autre clé que celles que le DTO lit.
     def posted_answers
       copy = params[:copy]
       answers = copy[:answers] if copy.is_a?(ActionController::Parameters)
