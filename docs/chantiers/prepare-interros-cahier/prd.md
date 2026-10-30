@@ -183,4 +183,4 @@ Alors aucune feuille ne dépasse de l'écran et chaque bouton fait au moins 44 p
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Requêtes SQL de la page d'une leçon (élève, 4 notions × 3 exercices, 3 sujets × 4) | à mesurer au Lot 0 | ≤ avant + 3 | |
+| Requêtes SQL de la page d'une leçon (élève, 4 notions × 3 exercices, 3 sujets × 4) | 36 (Lot 0, sans sujet) | ≤ 39 | 36 sans sujet, 37 avec sujets (Lot B) |

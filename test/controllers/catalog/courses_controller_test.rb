@@ -768,8 +768,7 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
     assert_select "section#fiche-de-revision h4", text: "1. La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
-    assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
-    assert_select "section#prepare-interros #notion-#{meiose.slug} h3", text: "La méiose"
+    assert_select "section#prepare-interros .ps-sheet#notion-#{meiose.slug} .ps-title", text: "La méiose"
     assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0

@@ -7,7 +7,6 @@ module Assessment
 
     Home = Queries::Classroom::StudentHomeQuery
     Treated = Queries::Classroom::StudentClassroomQuery::TreatedRow
-    Lesson = Queries::Catalog::PrepareInterrosQuery
     Overview = Queries::Classroom::ClassroomOverviewQuery
     Counts = Queries::Classroom::AssignmentFollowUpQuery::Counts
 
@@ -21,16 +20,10 @@ module Assessment
       Treated.new("ex2", "Les fonctions", "Maths", "maths", "science", score, "sess9", Time.current, "evaluation")
     end
 
-    def lesson(state: nil, status: "published", exercise_type: "fixation", count: 6)
-      Lesson::ExerciseRow.new(public_id: "ex3", title: "Les acides", exercise_type:, status:, questions_count: count, student_state: state)
-    end
-
     def assignment(counts: nil, due_on: nil)
       Overview::AssignmentRow.new(public_id: "as1", exercise_title: "La méiose", material_name: "SVT", material_category: "science",
                                   due_on:, counts:, comprehension: nil, exercise_type: "evaluation", material_slug: "svt")
     end
-
-    def state(kind, due_on: nil, score_percent: nil) = Lesson::StudentState.new(kind:, due_on:, score_percent:)
 
     def text(html) = Nokogiri::HTML.fragment(html.to_s).text.squish
 
@@ -69,74 +62,6 @@ module Assessment
       assert_includes exercise_card_for_treated(treated(67)).status, "text-ink"
       assert_not_includes exercise_card_for_treated(treated(67)).status, "text-success"
       assert_equal "4/20 · En difficulté", text(exercise_card_for_treated(treated(20)).status)
-    end
-
-    test "leçon, élève, à revoir : pastille À revoir et Revoir (CA-4)" do
-      card = exercise_card_for_lesson(lesson(state: state(:to_review)), material_slug: "svt", team: false, student: true)
-
-      assert_equal "À revoir", text(card.status)
-      assert_equal "Revoir", card.action
-      assert_equal "exercise-ex3", card.dom_id
-      assert_equal "6 questions", card.meta
-      assert_nil card.material_name
-      assert_equal [ "svt", "Fixation" ], [ card.material_slug, card.type_label ]
-    end
-
-    test "leçon, élève, à rendre : échéance, Commencer" do
-      card = exercise_card_for_lesson(lesson(state: state(:due, due_on: Time.zone.today + 2)), material_slug: "svt", team: false, student: true)
-
-      assert_match(/À rendre/, text(card.status))
-      assert_equal "Commencer", card.action
-    end
-
-    test "leçon, élève, note : vert dès 14/20 et Commencer ; encre sous 14/20 ; sous 10/20 : Refaire (CA-4)" do
-      acquired = exercise_card_for_lesson(lesson(state: state(:score, score_percent: 70)), material_slug: "svt", team: false, student: true)
-      middle = exercise_card_for_lesson(lesson(state: state(:score, score_percent: 55)), material_slug: "svt", team: false, student: true)
-      low = exercise_card_for_lesson(lesson(state: state(:score, score_percent: 40)), material_slug: "svt", team: false, student: true)
-
-      assert_equal "14/20", text(acquired.status)
-      assert_includes acquired.status, "text-success"
-      assert_equal "Commencer", acquired.action
-      assert_includes middle.status, "text-ink"
-      assert_equal "Commencer", middle.action
-      assert_equal "8/20", text(low.status)
-      assert_includes low.status, "text-ink"
-      assert_equal "Refaire", low.action
-    end
-
-    test "leçon, élève, sans état : pas de pastille, Commencer" do
-      card = exercise_card_for_lesson(lesson, material_slug: "svt", team: false, student: true)
-
-      assert_nil card.status
-      assert_equal "Commencer", card.action
-    end
-
-    test "leçon, enseignant : Voir l'exercice, sans état (CA-5)" do
-      card = exercise_card_for_lesson(lesson, material_slug: "svt", team: false, student: false)
-
-      assert_equal "Voir l'exercice", card.action
-      assert_nil card.status
-    end
-
-    test "leçon, équipe : le statut éditorial et Voir l'exercice (CA-7)" do
-      card = exercise_card_for_lesson(lesson(status: "draft"), material_slug: "svt", team: true, student: false)
-
-      assert_match(/Brouillon/, text(card.status))
-      assert_equal "Voir l'exercice", card.action
-    end
-
-    test "leçon : une seule question se dit au singulier" do
-      card = exercise_card_for_lesson(lesson(count: 1), material_slug: "svt", team: false, student: true)
-
-      assert_equal "1 question", card.meta
-    end
-
-    # grade_on_20 arrondit : 48 % fait déjà 10/20, 47 % fait 9/20.
-    test "le seuil de Refaire est 10/20 : 48 % → Commencer, 47 % → Refaire" do
-      at_ten = exercise_card_for_lesson(lesson(state: state(:score, score_percent: 48)), material_slug: "svt", team: false, student: true)
-      below = exercise_card_for_lesson(lesson(state: state(:score, score_percent: 47)), material_slug: "svt", team: false, student: true)
-
-      assert_equal [ "Commencer", "Refaire" ], [ at_ten.action, below.action ]
     end
 
     test "traité à 70 % : 14/20 en vert" do
@@ -180,9 +105,9 @@ module Assessment
     end
 
     test "une carte montre toujours une illustration, de repli sans matière connue" do
-      card = exercise_card_for_lesson(lesson, material_slug: nil, team: false, student: true)
+      card = exercise_card_for_treated(treated(70).with(material_slug: nil))
 
-      html = Nokogiri::HTML.fragment(render(partial: "assessment/exercises/card", locals: { card: })).css("li span[aria-hidden] img")
+      html = Nokogiri::HTML.fragment(render(partial: "assessment/exercises/card", locals: { card: })).css("span[aria-hidden] img")
 
       assert_equal 1, html.size
     end

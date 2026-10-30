@@ -27,16 +27,6 @@ module Assessment
                meta: nil, status:, action: card_t(:view_copy), progress: nil)
     end
 
-    # Page d'une leçon : PrepareInterrosQuery::ExerciseRow. La matière est dite dans l'en-tête de la page : pas de material_name.
-    # student : l'élève lit son état ; team : l'équipe lit le statut éditorial ; l'enseignant n'a ni l'un ni l'autre.
-    def exercise_card_for_lesson(row, material_slug:, team:, student:)
-      state = row.student_state
-      Card.new(dom_id: "exercise-#{row.public_id}", href: exercise_path(row.public_id), title: row.title, material_name: nil,
-               material_slug:, type_label: exercise_type_label(row.exercise_type), meta: card_t(:questions, count: row.questions_count),
-               status: (team ? content_status_badge(row.status) : lesson_state_badge(state)),
-               action: card_t(lesson_action(state, student:)), progress: nil)
-    end
-
     # Classe de l'enseignant : ClassroomOverviewQuery::AssignmentRow. Sans droit de suivi (counts nil) : ni lien ni action.
     def exercise_card_for_assignment(row, classroom_public_id:)
       counts = row.counts
@@ -58,23 +48,6 @@ module Assessment
     end
 
     def grade_tag(score) = tag.span(grade_label(score), class: class_names("font-display font-medium tabular-nums", grade_class(score)))
-
-    def lesson_state_badge(state)
-      case state&.kind
-      when :to_review then ui_badge(card_t(:to_review), tone: :warning, icon: "arrow-path")
-      when :due then due_badge(state.due_on)
-      when :score then grade_tag(state.score_percent)
-      end
-    end
-
-    # Revoir (lacune en attente) ; Refaire sous 10/20 ; Commencer sinon ; l'enseignant et l'équipe ouvrent l'exercice.
-    def lesson_action(state, student:)
-      return :open unless student
-      return :review if state&.kind == :to_review
-      return :redo if state&.kind == :score && !Entities::Assessment::Grading.reaches?(state.score_percent, Entities::Assessment::Grading::PASS_THRESHOLD)
-
-      :start
-    end
 
     def assignment_status(row)
       pending = row.counts&.pending.to_i

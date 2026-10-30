@@ -100,8 +100,8 @@ class Classroom::CatalogAssignmentTest < ApplicationSystemTestCase
     with_mobile_viewport do
       visit course_path(@course.slug)
 
-      title = find("#exercise-#{@phases.public_id} a", text: "Les phases")
-      list = find("#exercise-#{@phases.public_id} ul").rect
+      title = find("#sheet-exercise-#{@phases.public_id} .ps-exercise-head")
+      list = find("#sheet-exercise-#{@phases.public_id} ul").rect
       assigned = find(toggle(@tle_d1, @phases), text: "Pour jeu. 8 oct.").rect
       assert_operator assigned.y, :>, title.rect.y
       assert_operator assigned.x + assigned.width, :<=, list.x + list.width, "la bascule déborde de sa liste"

@@ -1,0 +1,59 @@
+<%# 🌐 UI · catalog/courses/_prepare_sheets — « Prépare interros » et « Prépare devoirs » de la page d'une leçon (catalogue et classe) %>
+<%# Rôle : une feuille par notion puis « Toute la leçon » (section Prépare interros), une feuille par sujet (section Prépare devoirs, seulement s'il y en a) ; état vide sans exercice ; enseignant : une bascule par classe à la place de « Vérifier » (la classe donnée seulement, dans sa page de classe) %>
+<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0113 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 %>
+<%# locals: (prepare:, classroom_public_id: nil) -%>
+<% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
+<% actor = current_actor %>
+<% @primary_assign_taken = false %>
+<% mode = if actor.nil? then :visitor elsif actor.student? then :student elsif actor.team? then :team else :teacher end %>
+<% targets = prepare.targets %>
+<% only = classroom_public_id %>
+<% classrooms = targets ? targets.classrooms.select { only.nil? || it.public_id == only } : [] %>
+<% empty = prepare.interros.empty? && prepare.devoirs.empty? %>
+<%# Ouvrir la page enregistre la lecture des notions (ADR-0113 §4.3) : pas de préchargement au survol. %>
+<section id="prepare-interros" aria-labelledby="prepare_title" data-turbo-prefetch="false">
+  <h2 id="prepare_title" class="mb-4 font-display text-xl font-medium"><%= t("catalog.courses.sheets.interros_section") %></h2>
+  <% if empty %>
+    <%= ui_empty_state title: t("catalog.courses.show.exercises_empty"), icon: "pencil-square" %>
+  <% end %>
+  <%# Les liens et les redirections visent « notion-<slug> » pour toute notion (UDR-0139 §3.7) : celle qui n'a pas d'exercice a son repère. %>
+  <% prepare.bare.each do |notion| %>
+    <div id="notion-<%= notion.essential_slug %>" class="mt-6 scroll-mt-24" tabindex="-1">
+      <h3 class="mb-1 font-display text-lg font-medium"><%= notion.title %></h3>
+      <p class="text-sm text-mute"><%= t("catalog.courses.show.notion_without_exercise") %></p>
+    </div>
+  <% end %>
+  <% if targets && classrooms.empty? && !empty %>
+    <p id="assign_targets_none" class="mb-4 text-mute"><%= t("catalog.courses.show.assign_targets_none", level: targets.scope_label) %></p>
+  <% end %>
+  <% unless prepare.interros.empty? %>
+    <div class="ps-page">
+      <% prepare.interros.each do |sheet| %>
+        <% wide = sheet.kind == :lesson_wide %>
+        <%= render "catalog/courses/sheets/sheet", kind: :interros, mode:, material: prepare.material_name,
+                   header_left: t("catalog.courses.sheets.brand_line", course: prepare.course_name),
+                   header_right: t("catalog.courses.sheets.notion_position", level: prepare.level_name, number: sheet.number, total: sheet.total),
+                   title: (wide ? t("catalog.courses.show.lesson_wide_title") : sheet.title),
+                   box_label: (t("catalog.courses.sheets.remember") if sheet.note), box_text: sheet.note,
+                   exercises: sheet.exercises, footer: t("catalog.courses.sheets.footer_notion", number: sheet.number),
+                   reset_label: t("catalog.courses.sheets.reset_notion"), sheet_id: sheet.dom_id, targets:, classrooms: %>
+      <% end %>
+    </div>
+  <% end %>
+</section>
+
+<% unless prepare.devoirs.empty? %>
+  <section id="prepare-devoirs" aria-labelledby="devoirs_title" data-turbo-prefetch="false">
+    <h2 id="devoirs_title" class="mb-4 font-display text-xl font-medium"><%= t("catalog.courses.sheets.devoirs_section") %></h2>
+    <div class="ps-page">
+      <% prepare.devoirs.each do |sheet| %>
+        <%= render "catalog/courses/sheets/sheet", kind: :devoirs, mode:, material: prepare.material_name,
+                   header_left: t("catalog.courses.sheets.brand_line", course: prepare.course_name),
+                   header_right: t("catalog.courses.sheets.subject_position", level: prepare.level_name, number: sheet.number, total: sheet.total),
+                   title: sheet.title, box_label: t("catalog.courses.sheets.notions"), box_text: sheet.note,
+                   exercises: sheet.exercises, footer: t("catalog.courses.sheets.footer_subject", number: sheet.number),
+                   reset_label: t("catalog.courses.sheets.reset_subject"), sheet_id: sheet.dom_id, targets:, classrooms: %>
+      <% end %>
+    </div>
+  </section>
+<% end %>

@@ -32,11 +32,12 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1")
     assert_select "#fiche-de-revision h2", text: "Fiche de révision"
     assert_select "#prepare-interros h2", text: "Prépare interros"
-    assert_select "#prepare-interros #notion-#{@meiose.slug} h3", text: "La méiose"
-    assert_select "#prepare-interros #notion-#{@mitose.slug} li[id^=exercise-]", 1
-    assert_select "#prepare-interros #toute-la-lecon h3", text: tl("lesson_wide_title")
-    assert_select "#prepare-interros li#exercise-#{@ex_wide.public_id}"
-    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id} a[href='#{exercise_path(@ex_meiose.public_id)}']"
+    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-title", text: "La méiose"
+    assert_select "#prepare-interros .ps-sheet#notion-#{@mitose.slug} .ps-exercise", 1
+    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-title", text: tl("lesson_wide_title")
+    assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_wide.public_id}"
+    assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_meiose.public_id}"
+    assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0
     # CA-05 : aucun ancien intitulé.
     assert_no_match(/Révisions de la leçon|Fiche de cours/, response.body)
   end
@@ -55,7 +56,7 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "##{toggle_id(@classroom, @ex_mitose)}", text: including(toggle("assigned"))
     assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']"
     assert_select "[id^='assignment_#{other.public_id}']", 0
-    assert_select ".ui-button-primary", 1
+    assert_select "#prepare-interros .ui-button-primary", 1
     assert_select "##{toggle_id(@classroom, @ex_meiose)} .ui-button-primary"
   end
 
@@ -108,8 +109,7 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     get classroom_course_path(@classroom.public_id, @course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros li[id^=exercise-]", 3
-    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id}", text: including(I18n.t("catalog.content_status.published"))
+    assert_select "#prepare-interros turbo-frame[id^=sheet-exercise-]", 3
     no_toggle
   end
 
