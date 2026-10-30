@@ -1,17 +1,18 @@
 # 🧠 DOMAINE · Entities::Assessment::Question
 # Rôle : une question d'exercice ; sa structure, la forme d'une réponse et la correction sont déléguées à son type
-# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/), 0105, 0115
+# ADR  : 0039, 0054, 0091 (§4.3 : un type par classe, sous question_kinds/), 0105, 0115, XXXX-questions-a-plusieurs-cases-et-indice
 module Entities
   module Assessment
     # answers : [Answer], dans l'ordre des positions ; numeric_tolerance : marge d'un type numeric (BigDecimal | nil) ;
     # image_description : l'image annoncée par l'import (ADR-0105 §4.6) ; image : Shared::ContentImage | nil.
     # ADR-0115 : points (BigDecimal, 0,5 à 20 par demi-point, 1 par défaut) ; unit : l'unité d'une réponse chiffrée ;
     # starter : le début de phrase d'une réponse rédigée ; criteria : sa grille de vérification (jamais enregistrée côté élève).
+    # hint : l'indice facultatif (500 caractères) ; les cases d'une réponse sont portées par Answer#blank.
     Question = Data.define(:id, :position, :content, :explanation, :question_type, :answers, :numeric_tolerance,
-                           :image_description, :image, :points, :unit, :starter, :criteria) do
+                           :image_description, :image, :points, :unit, :starter, :criteria, :hint) do
       # Les six premiers attributs sont obligatoires ; la marge, l'image, les points et le reste sont facultatifs.
       def initialize(numeric_tolerance: nil, image_description: nil, image: nil, points: BigDecimal("1"), unit: nil, starter: nil,
-                     criteria: [], **) = super
+                     criteria: [], hint: nil, **) = super
 
       # Classe de règles du type (QuestionKinds::Choice, FillBlank…), ou nil pour un type inconnu.
       def self.kind_for(question_type)
@@ -48,6 +49,17 @@ module Entities
       def kind = Question.kind_for(question_type)
       def kind_name = Question.kind_name_for(question_type)
       def expected_count = Question::EXPECTED.fetch(question_type.to_s.to_sym)
+      # Nombre de cases : la plus haute case des réponses plus un (0 à 5 : de 1 à 6 cases), 1 sans réponse.
+      def blanks = (answers.map(&:blank).max || 0) + 1
+
+      # Verdict de chaque case pour la réponse de l'élève (une liste de textes, une par case) → [Boolean]. Le contrat est posé ici ;
+      # la règle de chaque type vit dans sa classe (QuestionKinds), qui répond à blank_results quand elle juge case par case.
+      def blank_results(response)
+        raise NotImplementedError, "#{question_type} ne juge pas case par case" unless kind.respond_to?(:blank_results)
+
+        kind.blank_results(self, response)
+      end
+
       def answer_ids = answers.map(&:id)
       def correct_answer_ids = answers.select(&:correct).map(&:id)
       # Identifiants dans l'ordre des positions : le bon ordre d'une question « ordering », la colonne de gauche d'un « matching ».

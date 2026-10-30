@@ -1,11 +1,14 @@
 # 🧠 DOMAINE · Entities::Assessment::ExerciseSession
 # Rôle : une passation d'exercice par un élève ; score posé seulement à la clôture
-# ADR  : 0033, 0043, 0048, 0054
+# ADR  : 0033, 0043, 0048, 0054, XXXX-questions-a-plusieurs-cases-et-indice (§4 : hinted_question_ids)
 module Entities
   module Assessment
     ExerciseSession = Data.define(:id, :public_id, :student_id, :exercise_id, :status, :question_count, :answered_count,
                                   :correct_count, :progress_percent, :score_percent, :kind, :knowledge_gap_id,
-                                  :classroom_assignment_id, :started_at, :completed_at) do
+                                  :classroom_assignment_id, :started_at, :completed_at, :hinted_question_ids) do
+      # hinted_question_ids : les questions dont l'élève a ouvert l'indice dans cette copie.
+      def initialize(hinted_question_ids: [], **) = super
+
       def started? = status == "started"
       def completed? = status == "completed"
       def remediation? = kind == "remediation"

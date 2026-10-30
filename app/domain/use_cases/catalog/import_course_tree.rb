@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des leçons v3 (figures, notions à fiche, exercices, questions), tout en brouillon ; réimport d'un brouillon seulement
-# ADR  : 0035, 0039, 0105, 0113, 0115, 0116 · UDR : 0038
+# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, XXXX-entrainement-de-notion-corrige-sans-trace · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -165,12 +165,17 @@ module UseCases
         sheet = Entities::Catalog::NotionSheet.from_raw(notion)
         Node::NotionNode.new(
           slug: slug_for("#{course_name} #{notion['name'].squish}", "essential", data.fetch(:essential_slugs)), course_id: nil,
-          name: notion["name"].squish, position: index + 1,
-          sheet: { "remember" => sheet.remember, "method" => sheet.method_steps,
-                   "example" => { "statement" => sheet.example_statement, "steps" => sheet.example_steps },
-                   "pitfall" => sheet.pitfall, "figure_key" => sheet.figure_key },
+          name: notion["name"].squish, position: index + 1, sheet: sheet_hash(sheet, notion),
           exercises: [ exercise_node(notion["exercise"]) ]
         )
+      end
+
+      # La fiche en jsonb ; la clé practice n'existe que si la notion a un entraînement (déjà validé), écrit tel que reçu.
+      def sheet_hash(sheet, notion)
+        hash = { "remember" => sheet.remember, "method" => sheet.method_steps,
+                 "example" => { "statement" => sheet.example_statement, "steps" => sheet.example_steps },
+                 "pitfall" => sheet.pitfall, "figure_key" => sheet.figure_key }
+        sheet.practice ? hash.merge("practice" => notion["practice"]) : hash
       end
 
       def exercise_node(exercise)
