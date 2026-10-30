@@ -49,8 +49,14 @@ module Entities
 
         missing = kind.required.call(params).reject { filled?(params[it]) || (EMPTY_LIST_OK.include?(it) && params[it].is_a?(Array)) }
         return missing.map { violation("params.#{it}", it) } if missing.any?
+        return [] if oversized?(kind, params)
 
         send(:"#{kind.name}_errors", params)
+      end
+
+      # Une liste au-delà de sa borne est déjà refusée par params_errors : la cohérence n'est pas contrôlée (aucun coût quadratique sur une liste énorme).
+      def self.oversized?(kind, params)
+        kind.params.any? { |name, spec| spec.type == :list && params[name].is_a?(Array) && params[name].size > spec.max }
       end
 
       # Des paramètres obligatoires qui peuvent être une liste vide (molecule.js : un atome seul n'a aucune liaison).
@@ -62,14 +68,14 @@ module Entities
         points = params["points"]
         return [] unless points.is_a?(Array)
 
-        ids = []
+        seen = Set.new
         points.each_with_index.flat_map do |point, index|
           path = "params.points[#{index}]"
           next [ violation(path, "points[#{index}]") ] unless point.is_a?(Hash)
 
           id = point["id"]
-          ids << id
-          bad = !(id.is_a?(String) && !id.empty?) || ids.count(id) > 1
+          duplicate = !seen.add?(id)
+          bad = duplicate || !(id.is_a?(String) && !id.empty?)
           errors = bad ? [ violation("#{path}.id", "points[#{index}].id") ] : []
           %w[x y].each { |axis| errors << violation("#{path}.#{axis}", "points[#{index}].#{axis}") unless number?(point[axis]) }
           errors
@@ -154,15 +160,14 @@ module Entities
       end
 
       def self.area_errors(areas, known, legend)
-        seen = []
+        seen = Set.new
         areas.each_with_index.flat_map do |area, index|
           path = "params.areas[#{index}]"
           next [ violation(path, "areas[#{index}]") ] unless area.is_a?(Hash)
 
           id = area["id"]
           errors = []
-          errors << violation("#{path}.id", "areas[#{index}].id") unless known.include?(id) && !seen.include?(id)
-          seen << id
+          errors << violation("#{path}.id", "areas[#{index}].id") unless seen.add?(id) && known.include?(id)
           errors << violation("#{path}.category", "areas[#{index}].category") unless legend.zero? || category?(area["category"], legend)
           errors
         end
@@ -209,18 +214,28 @@ module Entities
         known = FigureCatalogs.parts(params["plate"])
         errors = label_part_errors(list_of(params, "labels"), known)
         highlight = list_of(params, "highlight")
-        errors.concat(highlight.each_index.reject { known.include?(highlight[it]) && highlight.index(highlight[it]) == it }.map { violation("params.highlight[#{it}]", "highlight[#{it}]") })
+        firsts = first_indexes(highlight) { it }
+        errors.concat(highlight.each_index.reject { known.include?(highlight[it]) && firsts[highlight[it]] == it }.map { violation("params.highlight[#{it}]", "highlight[#{it}]") })
+      end
+
+      # → Hash { valeur => index de sa première apparition } ; le bloc donne la valeur d'un élément, nil pour l'ignorer.
+      def self.first_indexes(list)
+        list.each_with_index.with_object({}) do |(item, index), firsts|
+          value = yield(item)
+          firsts[value] ||= index unless value.nil?
+        end
       end
 
       LABEL_KEYS = %w[part text].freeze
 
       def self.label_part_errors(labels, known)
+        firsts = first_indexes(labels) { it["part"] if it.is_a?(Hash) }
         labels.each_with_index.flat_map do |label, index|
           path = "params.labels[#{index}]"
           next [ violation(path, "labels[#{index}]") ] unless label.is_a?(Hash) && (label.keys - LABEL_KEYS).empty?
 
           errors = []
-          errors << violation("#{path}.part", "labels[#{index}].part") unless known.include?(label["part"]) && labels.index { it.is_a?(Hash) && it["part"] == label["part"] } == index
+          errors << violation("#{path}.part", "labels[#{index}].part") unless known.include?(label["part"]) && firsts[label["part"]] == index
           errors << violation("#{path}.text", "labels[#{index}].text") unless label["text"].nil? || text?(label["text"])
           errors
         end
@@ -231,20 +246,21 @@ module Entities
         nodes = list_of(params, "nodes")
         legend = params["legend"].is_a?(Array) ? params["legend"].size : 0
         errors = legend_errors(params)
-        errors.concat(nodes.each_with_index.flat_map { |node, index| node_errors(node, index, nodes, legend) })
-        errors.concat(edge_errors(list_of(params, "edges"), nodes.filter_map { it["id"] if it.is_a?(Hash) && text?(it["id"]) }))
+        firsts = first_indexes(nodes) { it["id"] if it.is_a?(Hash) }
+        errors.concat(nodes.each_with_index.flat_map { |node, index| node_errors(node, index, firsts, legend) })
+        errors.concat(edge_errors(list_of(params, "edges"), firsts.keys.select { text?(it) }.to_set))
         errors << violation("params.nodes", "nodes") if params["layout"] == "cycle" && nodes.size < 3
         errors.concat(tree_errors(params, nodes)) if errors.empty? && params["layout"] == "tree"
         errors
       end
 
-      def self.node_errors(node, index, nodes, legend)
+      # `firsts` : l'index de la première apparition de chaque identifiant ; un doublon est refusé, sa première apparition gardée.
+      def self.node_errors(node, index, firsts, legend)
         path = "params.nodes[#{index}]"
         return [ violation(path, "nodes[#{index}]") ] unless node.is_a?(Hash)
 
         errors = []
-        unique = nodes.select { it.is_a?(Hash) && it["id"] == node["id"] }.size == 1
-        errors << violation("#{path}.id", "nodes[#{index}].id") unless text?(node["id"]) && (unique || nodes.index { it.is_a?(Hash) && it["id"] == node["id"] } == index)
+        errors << violation("#{path}.id", "nodes[#{index}].id") unless text?(node["id"]) && firsts[node["id"]] == index
         errors << violation("#{path}.label", "nodes[#{index}].label") unless text?(node["label"])
         errors << violation("#{path}.category", "nodes[#{index}].category") unless node["category"].nil? || category?(node["category"], legend)
         errors
@@ -272,14 +288,23 @@ module Entities
         end
         return errors if errors.any?
 
-        (ids - parents.keys).size == 1 && ids.all? { rooted?(it, parents) } ? [] : [ violation("params.edges", "edges") ]
+        (ids - parents.keys).size == 1 && rooted?(ids, parents) ? [] : [ violation("params.edges", "edges") ]
       end
 
-      # Remonter de parent en parent atteint-il une racine (aucun cycle) ?
-      def self.rooted?(id, parents)
-        seen = [ id ]
-        seen << parents[seen.last] while parents[seen.last] && !seen.include?(parents[seen.last])
-        parents[seen.last].nil?
+      # Remonter de parent en parent atteint-il une racine (aucun cycle) depuis chaque nœud ? Un nœud déjà reconnu arrête la remontée :
+      # chaque nœud n'est parcouru qu'une fois en tout.
+      def self.rooted?(ids, parents)
+        rooted = Set.new
+        ids.all? do |id|
+          path = Set.new
+          current = id
+          until current.nil? || rooted.include?(current)
+            return false unless path.add?(current)
+
+            current = parents[current]
+          end
+          rooted.merge(path)
+        end
       end
 
       # optics.js : la correction n'existe qu'en mode œil (le mode et les paramètres exigés sont déjà contrôlés par `required`).
@@ -297,7 +322,6 @@ module Entities
       def self.foreign_errors(params, keys) = keys.select { params.key?(it) }.map { violation("params.#{it}", it) }
 
       # molecule.js : un alcane a un nombre entier de carbones ; un dessin libre a des atomes uniques sur la grille et des liaisons valides.
-      # Au-delà des bornes de listes, params_errors a déjà refusé : on ne calcule rien de plus (pas de coût quadratique sur une liste énorme).
       def self.molecule_errors(params)
         if params["mode"] == "alkane"
           errors = params["carbons"].is_a?(Integer) ? [] : [ violation("params.carbons", "carbons") ]
@@ -308,8 +332,6 @@ module Entities
 
         atoms = list_of(params, "atoms")
         bonds = list_of(params, "bonds")
-        limits = FigureKinds.fetch("molecule").params
-        return [] if atoms.size > limits["atoms"].max || bonds.size > limits["bonds"].max
 
         firsts = {}
         atoms.each_with_index { |atom, index| firsts[atom["id"]] ||= index if atom.is_a?(Hash) }

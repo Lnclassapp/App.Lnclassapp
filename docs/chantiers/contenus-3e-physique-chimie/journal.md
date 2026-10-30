@@ -33,7 +33,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| `geometry_errors` a la même boucle quadratique (`ids.count` dans la boucle, sans garde de taille) | Code d'une autre vague, hors périmètre | À ouvrir : `validation-figures-bornee` |
+| `geometry_errors` a la même boucle quadratique (`ids.count` dans la boucle, sans garde de taille) | Code d'une autre vague, hors périmètre | [`validation-figures-bornee`](../validation-figures-bornee/memo.md), livré |
 | Marge du libellé de curseur à 390 px dans le contrôleur partagé | Fichier partagé par toutes les sortes | Même suivi ou chantier UI |
 | Couverture 100 % lignes et branches non mesurée par fichier (SimpleCov mélange les processus) | Outillage | — |
 
