@@ -1,4 +1,4 @@
-# ADR-XXXX : L'audio d'une annonce dure 10 secondes au plus, mesuré dans ses octets, et se télécharge
+# ADR-0118 : L'audio d'une annonce dure 10 secondes au plus, mesuré dans ses octets, et se télécharge
 <!-- index
 titre: Annonces : un audio de 10 secondes au plus, mesuré sans bibliothèque, téléchargeable
 statut: Accepté

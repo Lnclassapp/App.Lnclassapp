@@ -89,6 +89,6 @@ Et l'onglet « Reçues » reste servi à son adresse
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-annonces-audio-dix-secondes — borne de durée, mesure sans bibliothèque, plafond d'1 Mo, téléchargement, menace.
+- ADR-0118 — borne de durée, mesure sans bibliothèque, plafond d'1 Mo, téléchargement, menace.
 - UDR-0071 — amendement du 2026-10-30 (§3.2 signature, §3.4 téléchargement, §3.5 et §3.7 sans « Toutes les annonces », §3.8 formulaire).
 - Aucun port, aucune table : la mesure est une fonction du domaine sur les octets déjà lus par la saisie.

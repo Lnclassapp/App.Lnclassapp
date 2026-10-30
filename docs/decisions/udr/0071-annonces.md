@@ -349,7 +349,7 @@ Pied (`div.flex.flex-wrap.justify-end.gap-3`) : `ui_button "Annuler", variant: :
 
 ## Amendement du 2026-10-30 — logo officiel, audio de 10 secondes téléchargeable, plus de « Toutes les annonces »
 
-*Chantier [`docs/chantiers/annonces-logo-audio`](../../chantiers/annonces-logo-audio/prd.md), [ADR-XXXX-annonces-audio-dix-secondes](../adr/XXXX-annonces-audio-dix-secondes.md). Demande du porteur du 2026-10-30 : « utilise le logo officiel de Lnclass et ajoute un audio de 10 s max à chaque annonce (rends-le aussi téléchargeable pour être réutilisable), et supprime "Toutes les annonces" ». Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
+*Chantier [`docs/chantiers/annonces-logo-audio`](../../chantiers/annonces-logo-audio/prd.md), [ADR-0118](../adr/0118-annonces-audio-dix-secondes.md). Demande du porteur du 2026-10-30 : « utilise le logo officiel de Lnclass et ajoute un audio de 10 s max à chaque annonce (rends-le aussi téléchargeable pour être réutilisable), et supprime "Toutes les annonces" ». Le texte ci-dessus reste tel qu'accepté ; en cas d'écart, cette section fait foi.*
 
 **Décision sur le logo : il signe toute annonce de l'équipe**, il n'est pas l'image d'une annonce. Le design system (§10, « Équipe : petit carré bleu avec le logo + Lnclass ») le place dans la signature ; joint comme image, il prendrait la place de l'illustration et se lirait deux fois sur la carte. Les annonces de l'équipe, présentes et futures, en bénéficient sans rien rejoindre.
 

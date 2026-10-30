@@ -45,7 +45,6 @@ export default class extends Controller {
     const message = this.messageValue.replace("%{duration}", shown)
     this.statusTarget.textContent = message
     this.inputTarget.setCustomValidity(message)
-    this.inputTarget.reportValidity()
   }
 
   clear() {
