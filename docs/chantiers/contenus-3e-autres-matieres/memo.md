@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | programme |
-| **Statut** | planifié |
+| **Statut** | en cours (vague 1 et vague 2 lancées) |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `feature/contenus-3e-autres-matieres` |
 | **Programme** | — *(ce dossier est le programme `contenus-3e-autres-matieres`)* |

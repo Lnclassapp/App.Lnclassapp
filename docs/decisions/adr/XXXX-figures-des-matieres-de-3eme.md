@@ -7,7 +7,7 @@ problematique: Les leçons de SVT, Physique-Chimie, Histoire-Géographie et EDHC
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/contenus-3e-autres-matieres` |
 | **Remplace** | — ; amende ADR-0116 §4.2 (liste des sortes, formes des éléments) |

@@ -8,7 +8,7 @@ problematique: Six sortes de figures nouvelles doivent se lire au téléphone, s
 
 | | |
 |---|---|
-| **Statut** | Proposé |
+| **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/contenus-3e-autres-matieres` |
 | **ADR lié** | ADR-XXXX-figures-des-matieres-de-3eme ; complète UDR-0141 §3.3 |
