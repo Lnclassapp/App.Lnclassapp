@@ -255,6 +255,58 @@ module Entities
         parents[seen.last].nil?
       end
 
+      # optics.js : la correction n'existe qu'en mode œil (le mode et les paramètres exigés sont déjà contrôlés par `required`).
+      def self.optics_errors(params)
+        params["mode"] == "lens" && !params["correction"].nil? ? [ violation("params.correction", "correction") ] : []
+      end
+
+      # molecule.js : un alcane a un nombre entier de carbones ; un dessin libre a des atomes uniques sur la grille et des liaisons valides.
+      def self.molecule_errors(params)
+        return (params["carbons"].is_a?(Integer) ? [] : [ violation("params.carbons", "carbons") ]) if params["mode"] == "alkane"
+
+        atoms = list_of(params, "atoms")
+        bonds = list_of(params, "bonds")
+        errors = atoms.each_with_index.flat_map { |atom, index| atom_errors(atom, index, atoms) }
+        errors.concat(bonds.each_with_index.flat_map { |bond, index| bond_errors(bond, index, atoms.filter_map { it["id"] if it.is_a?(Hash) }) })
+        errors.concat(valence_errors(atoms, bonds)) if errors.empty?
+        errors
+      end
+
+      def self.atom_errors(atom, index, atoms)
+        path = "params.atoms[#{index}]"
+        return [ violation(path, "atoms[#{index}]") ] unless atom.is_a?(Hash)
+
+        errors = []
+        first = atoms.index { it.is_a?(Hash) && it["id"] == atom["id"] }
+        errors << violation("#{path}.id", "atoms[#{index}].id") unless text?(atom["id"]) && first == index
+        errors << violation("#{path}.element", "atoms[#{index}].element") unless FigureKinds::MOLECULE_ELEMENTS.include?(atom["element"])
+        %w[x y].each { |axis| errors << violation("#{path}.#{axis}", "atoms[#{index}].#{axis}") unless atom[axis].is_a?(Integer) && FigureKinds::MOLECULE_GRID.cover?(atom[axis]) }
+        errors
+      end
+
+      def self.bond_errors(bond, index, ids)
+        path = "params.bonds[#{index}]"
+        return [ violation(path, "bonds[#{index}]") ] unless bond.is_a?(Array) && bond.size == 3
+
+        errors = (0..1).reject { ids.include?(bond[it]) }.map { violation("#{path}[#{it}]", "bonds[#{index}][#{it}]") }
+        errors << violation("#{path}[1]", "bonds[#{index}][1]") if errors.empty? && bond[0] == bond[1]
+        errors << violation("#{path}[2]", "bonds[#{index}][2]") unless bond[2].is_a?(Integer) && FigureKinds::BOND_ORDERS.cover?(bond[2])
+        errors
+      end
+
+      # La somme des ordres des liaisons d'un atome ne dépasse pas sa valence (Fe et Na ne sont pas contrôlés).
+      def self.valence_errors(atoms, bonds)
+        used = Hash.new(0)
+        bonds.each do |a, b, order|
+          used[a] += order
+          used[b] += order
+        end
+        atoms.each_with_index.filter_map do |atom, index|
+          max = FigureKinds::MOLECULE_VALENCE[atom["element"]]
+          violation("params.atoms[#{index}]", "atoms[#{index}]") if max && used[atom["id"]] > max
+        end
+      end
+
       def self.list_of(params, name) = params[name].is_a?(Array) ? params[name] : []
       def self.text?(value) = value.is_a?(String) && !value.strip.empty?
       def self.within?(value, span) = number?(value) && span.cover?(value)

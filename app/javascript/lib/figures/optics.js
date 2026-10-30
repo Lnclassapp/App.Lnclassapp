@@ -23,7 +23,7 @@ const CENTER_X = 320
 const AXIS_Y = 125
 const DRAW_HEIGHT = 245
 const LENS_HALF = 105
-const SPAN_X = 285
+const SPAN_X = 250 // marge de 70 de chaque côté : A, B (à gauche) et A', B' (à droite) restent lisibles sur un téléphone
 const SPAN_Y = 90
 
 // Œil : cristallin et rétine à distance fixe ; la puissance relative vaut 1 pour un œil normal.
@@ -158,11 +158,13 @@ export function create(canvas, params, { announce = () => {} } = {}) {
     const object = el("g", { "data-object": "" }, svg)
     el("line", { x1: X(-distance), y1: AXIS_Y, x2: X(-distance), y2: Y(height), stroke: "primary", "stroke-width": RAY_WIDTH, "marker-end": arrow(defs, id, "primary") }, object)
     label(object, X(-distance), Y(height) - 8, "B", { tone: "primary" })
+    label(object, X(-distance) - 6, AXIS_Y + 38, "A", { anchor: "end", tone: "primary" })
 
     if (oa !== null) {
       const group = el("g", { "data-image": "", ...(virtual ? { "data-virtual": "" } : {}) }, svg)
       el("line", { x1: X(oa), y1: AXIS_Y, x2: X(oa), y2: Y(imageHeight), stroke: "success", "stroke-width": RAY_WIDTH, "marker-end": arrow(defs, id, "success"), "data-shaft": "", ...(virtual ? { "stroke-dasharray": DASH } : {}) }, group)
       label(group, X(oa), Y(imageHeight) + (imageHeight < 0 ? 18 : -8), "B'", { tone: "success" })
+      label(group, X(oa) - 6, AXIS_Y + 38, "A'", { anchor: "end", tone: "success" })
     }
 
     const texts = oa === null

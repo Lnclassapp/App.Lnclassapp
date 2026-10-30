@@ -71,6 +71,7 @@ Consignes O et M : tant que le Lot D n'est pas fait, `Entities::Catalog::Figure`
 - **Dépend de**    : fusion de la vague 2 ; Lots O et M
 - **Test associé** : chaque incohérence `optics` et `molecule` du PRD rend `figure_invalid` au même chemin à l'import et au script ; liste blanche et réglables égaux à `FigureKinds` ; tests système O et M verts sans patch.
 - **Done quand**   : 100 % lignes et branches sur le code Ruby touché ; sections `optics` et `molecule` dans la consigne.
+- **Reprises**     : (4) le contrôleur annonce au relâchement la dernière mesure dite par la figure, à défaut le libellé du curseur, et `molecule.js` perd son `setTimeout` de 350 ms ; tests système O et M adaptés. (5) `optics.js` à 390 px : A et A' étiquetés, marge de 70 à gauche et à droite (`SPAN_X` 250).
 
 ## Lot P — Planches de PC
 

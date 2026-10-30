@@ -63,7 +63,9 @@ class Catalog::FigureOpticsSystemTest < ApplicationSystemTestCase
     assert_selector "#host svg [data-image][data-virtual]", count: 1, visible: :all
     dash = page.evaluate_script("document.querySelector('#host [data-image][data-virtual] [data-shaft]').getAttribute('stroke-dasharray')")
     assert_match(/\d/, dash.to_s)
-    assert_selector "#host [aria-live=polite]", text: /distance de l'objet : 2/, visible: :all
+    # Sans attendre : la mesure de la figure, pas le libellé du curseur, est ce que le relâchement vient d'annoncer.
+    spoken = page.evaluate_script("document.querySelector('#host [aria-live=polite]').textContent")
+    assert_match /OA' = −4 cm.*γ = 2.*virtuelle, droite, agrandie/, spoken
     assert_selector "#host svg [data-ray]", count: 3, visible: :all
   end
 
@@ -85,8 +87,25 @@ class Catalog::FigureOpticsSystemTest < ApplicationSystemTestCase
     assert_selector "#host svg [data-image][data-virtual]", count: 1, visible: :all
   end
 
+  test "at 390 px the object A, B and the image A', B' are labelled and none is cut off" do
+    [ lens, lens(kind: "divergent", focal: 5, distance: 30), lens(focal: 10, distance: 60, height: 10), lens(kind: "divergent", focal: 20, distance: 1) ].each do |figure|
+      mount(figure)
+      page.execute_script("document.getElementById('host').style.maxWidth = '390px'; document.getElementById('host').style.width = '390px'")
+      assert_selector "#host [data-figure-state=ready]", visible: :all
+
+      names = page.evaluate_script("[...document.querySelectorAll('#host svg text')].map((t) => t.textContent)")
+      assert_equal %w[A B], (names & %w[A B]).sort, "A et B sont écrits"
+      assert_equal %w[A' B'], (names & %w[A' B']).sort, "A' et B' sont écrits"
+      edges = page.evaluate_script(<<~JS)
+        [...document.querySelectorAll("#host svg text")].filter((t) => ["A", "B", "A'", "B'"].includes(t.textContent)).map((t) => { const b = t.getBBox(); return [b.x, b.x + b.width] })
+      JS
+      assert(edges.all? { |left, right| left >= 24 && right <= 616 }, "une étiquette est trop près du bord : #{edges}")
+    end
+  end
+
   test "the figure keeps its markers and clip paths unique when two figures share the page" do
     mount_html(render_html(lens) + render_html(lens(kind: "divergent")))
+    assert_selector "#host [data-figure-state=ready]", count: 2, visible: :all
 
     ids = page.evaluate_script("[...document.querySelectorAll('#host svg [id]')].map((n) => n.id)")
     assert_equal ids.uniq.size, ids.size

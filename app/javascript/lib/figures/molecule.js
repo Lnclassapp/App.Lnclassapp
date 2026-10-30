@@ -16,7 +16,6 @@ const MAX_ATOMS = 20
 const MAX_BONDS = 24
 const GRID = 12
 const SUB = "₀₁₂₃₄₅₆₇₈₉"
-const ANNOUNCE_DELAY = 350
 
 // Entier en chiffres indices Unicode (10 → ₁₀).
 const subscript = (count) => String(count).replace(/\d/g, (digit) => SUB[Number(digit)])
@@ -76,7 +75,7 @@ function semiText(carbons) {
 }
 
 export function create(canvas, params, { announce } = {}) {
-  const state = { svg: null, timer: null }
+  const state = { svg: null }
 
   // Une liaison : 1 à 3 traits parallèles, raccourcie aux deux bouts pour laisser la place aux lettres.
   function bond(svg, p, q, order, gap = 11) {
@@ -164,14 +163,11 @@ export function create(canvas, params, { announce } = {}) {
   draw(params)
   return {
     interactive: false,
-    // L'annonce attend la fin du geste : elle passe après celle du curseur, qui ne dit que la valeur.
+    // Le contrôleur garde ce texte et l'annonce au relâchement du curseur, à la place du libellé.
     redraw(next) {
-      const spoken = draw(next)
-      clearTimeout(state.timer)
-      state.timer = setTimeout(() => announce?.(spoken), ANNOUNCE_DELAY)
+      announce?.(draw(next))
     },
     destroy() {
-      clearTimeout(state.timer)
       state.svg?.remove()
     }
   }

@@ -60,7 +60,9 @@ class Catalog::FigureMoleculeSystemTest < ApplicationSystemTestCase
     find("input[type=range]").set(10)
     assert_selector "#host svg text[data-name]", text: "décane", visible: :all
     assert_selector "#host svg text[data-formula]", text: "C₁₀H₂₂", visible: :all
-    assert_selector "#host [aria-live=polite]", text: /décane, C₁₀H₂₂/, visible: :all
+    # Sans attendre : la mesure de la figure, pas le libellé du curseur, est ce que le relâchement vient d'annoncer.
+    spoken = page.evaluate_script("document.querySelector('#host [aria-live=polite]').textContent")
+    assert_match /décane, C₁₀H₂₂/, spoken
     inside = page.evaluate_script(<<~JS)
       [...document.querySelectorAll('#host svg text')].every((t) => { const b = t.getBBox(); return b.x >= 0 && b.x + b.width <= 640 })
     JS
