@@ -81,7 +81,7 @@ Fonctionnalité: Sortes de figures d'Histoire-Géographie
 
   Scénario: CA-8 catégories lisibles sans la couleur
     Étant donné une carte à trois catégories
-    Alors chaque catégorie a sa teinte et son motif, et la légende les reprend
+    Alors les catégories 1 à 3 ont chacune leur teinte en aplat, les catégories 4 à 6 leur motif, et la légende les reprend
 
 Fonctionnalité: Les 10 leçons d'Histoire-Géographie
 

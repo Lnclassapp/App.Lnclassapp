@@ -72,6 +72,7 @@ class Catalog::FigureDiagramSystemTest < ApplicationSystemTestCase
 
   def assert_laid_out(nodes:, edges:, label:)
     assert_selector "#host [data-figure-state=ready]", visible: :all
+    assert_selector "#host figcaption.sr-only", visible: :all
     assert_selector "#host svg [data-node]", count: nodes, visible: :all
     assert_selector "#host svg [data-edge]", count: edges, visible: :all
     found = collisions
@@ -167,5 +168,6 @@ class Catalog::FigureDiagramSystemTest < ApplicationSystemTestCase
     assert_selector "#host [data-figure-state=error]", visible: :all
     assert_no_selector "#host svg", visible: :all
     assert_selector "figcaption", text: Factories::RevisionSheet::FIGURE_DESCRIPTION
+    assert_no_selector "#host figcaption.sr-only", visible: :all
   end
 end

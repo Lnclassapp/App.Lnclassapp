@@ -36,6 +36,7 @@ class Catalog::FigureMapSystemTest < ApplicationSystemTestCase
             "routes" => [ { "from" => "abidjan", "to" => "korhogo" } ], "legend" => LEGEND })
 
     assert_selector "#host [data-figure-state=ready]", visible: :all
+    assert_selector "#host figcaption.sr-only", visible: :all
     assert_selector "#host svg [data-area]", count: 3, visible: :all
     assert_selector "#host svg [data-area=savanes][data-category='1']", visible: :all
     assert_selector "#host svg [data-place]", count: 2, visible: :all
@@ -53,6 +54,32 @@ class Catalog::FigureMapSystemTest < ApplicationSystemTestCase
     assert_equal "0.35", page.evaluate_script("document.querySelector('#host [data-area=savanes]').getAttribute('fill-opacity')")
     assert_equal "0.35", page.evaluate_script("document.querySelector('#host [data-legend=\"1\"] rect').getAttribute('fill-opacity')")
     assert_equal 1, page.evaluate_script("document.querySelectorAll('#host marker').length")
+  end
+
+  test "three categories get three distinct tints, areas and legend alike" do
+    mount({ "base" => "cote_d_ivoire", "legend" => LEGEND.first(3),
+            "areas" => [ { "id" => "savanes", "category" => 1 }, { "id" => "dense_forest", "category" => 2 }, { "id" => "coastal_strip", "category" => 3 } ] })
+
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    tints = page.evaluate_script("[...document.querySelectorAll('#host [data-area]')].map((n) => getComputedStyle(n).fill)")
+    swatches = page.evaluate_script("[...document.querySelectorAll('#host [data-legend] rect')].map((n) => getComputedStyle(n).fill)")
+
+    assert_equal 3, tints.uniq.size
+    assert_equal tints.sort, swatches.sort
+  end
+
+  test "categories 4 to 6 are filled with their own pattern, areas and legend alike" do
+    mount({ "base" => "cote_d_ivoire", "legend" => %w[Un Deux Trois Quatre Cinq Six],
+            "areas" => [ { "id" => "savanes", "category" => 4 }, { "id" => "dense_forest", "category" => 5 }, { "id" => "coastal_strip", "category" => 6 } ] })
+
+    assert_selector "#host [data-figure-state=ready]", visible: :all
+    [ 4, 5, 6 ].each do |category|
+      id = page.evaluate_script("document.querySelector('#host pattern[id$=\"-pat-#{category}\"]')?.id")
+
+      assert_match(/\Afig-map\d+-pat-#{category}\z/, id)
+      assert_equal "url(##{id})", page.evaluate_script("document.querySelector('#host [data-area][data-category=\"#{category}\"]').getAttribute('fill')")
+      assert_equal "url(##{id})", page.evaluate_script("document.querySelector('#host [data-legend=\"#{category}\"] rect').getAttribute('fill')")
+    end
   end
 
   test "an Africa map draws States and capitals and shows no attribution" do

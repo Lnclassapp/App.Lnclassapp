@@ -28,6 +28,8 @@ class Catalog::FigureTimelineSystemTest < ApplicationSystemTestCase
     JS
   end
 
+  def end_slider = { "param" => "end", "min" => 1900, "max" => 2000, "step" => 10, "label" => "fin" }
+
   def start_slider = { "param" => "start", "min" => 1880, "max" => 1950, "step" => 10, "label" => "début" }
 
   def overlapping_label_pairs
@@ -48,6 +50,7 @@ class Catalog::FigureTimelineSystemTest < ApplicationSystemTestCase
       mount(width:)
 
       assert_selector "#host [data-figure-state=ready]", visible: :all
+      assert_selector "#host figcaption.sr-only", visible: :all
       assert_selector "#host svg [data-tick]", count: 9, visible: :all
       assert_selector "#host svg [data-event]", count: 6, visible: :all
       assert_selector "#host svg [data-period]", count: 2, visible: :all
@@ -67,6 +70,19 @@ class Catalog::FigureTimelineSystemTest < ApplicationSystemTestCase
     assert_empty overlapping_label_pairs
   end
 
+  test "the end slider lowered to 1920 draws fewer ticks and hides the events after it" do
+    mount(figure(params: PARAMS.merge("end" => 2000, "events" => PARAMS["events"] + [ { "at" => 1990, "label" => "Fin de siècle" } ]), controls: [ end_slider ]))
+    assert_selector "#host svg [data-tick]", count: 13, visible: :all
+    assert_selector "#host svg [data-event]", count: 7, visible: :all
+
+    find("#host input[type=range]").set(1920)
+
+    assert_selector "#host svg [data-tick]", count: 5, visible: :all
+    assert_selector "#host svg [data-event]", count: 2, visible: :all
+    assert_selector "#host svg [data-period]", count: 1, visible: :all
+    assert_empty overlapping_label_pairs
+  end
+
   test "crowded long labels are replaced by numbers explained in a legend, without overlap" do
     events = (1940..1944).map { |year| { "at" => year, "label" => "Événement très long de l'année #{year}" } }
     mount(figure(params: PARAMS.merge("events" => events)))
@@ -82,6 +98,7 @@ class Catalog::FigureTimelineSystemTest < ApplicationSystemTestCase
 
     assert_selector "#host [data-figure-state=error]", visible: :all
     assert_no_selector "#host svg"
+    assert_no_selector "#host figcaption.sr-only", visible: :all
     assert_text Factories::RevisionSheet::FIGURE_DESCRIPTION
   end
 

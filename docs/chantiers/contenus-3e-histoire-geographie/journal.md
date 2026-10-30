@@ -13,6 +13,10 @@
 | 2026-10-30 | Lot B : zones naturelles de la CI = cellules convexes prioritaires (littoral, montagnes, savane + « V Baoulé », forêt = reste) découpées sur le contour Natural Earth 1:50m du pays, puis fusionnées | Les arêtes des 14 districts geoBoundaries ne se recollent qu'à 75 % : on ne peut pas en déduire le contour du pays. | Non |
 | 2026-10-30 | Lot B : `world.js` exporte aussi `CONTINENT_NAMES` ; `map.js` redessine quand le rapport `--figure-text` change (ResizeObserver) | Le titre d'un continent coloré ; un cadre masqué (`:empty`) n'a pas de largeur au premier dessin, la mise en page des étiquettes doit suivre la largeur réelle. | Non |
 
+- Écart retenu : le contour des aires sans catégorie est tracé en `muted` (au lieu de `grid`, illisible), voir la décision du lot B ci-dessus.
+- Lot G, corrections de revue (domaine, `Figure.errors_for`, donc import et `valider.rb` ensemble) : graduations comptées sans division entière ; route d'un lieu à lui-même refusée ; libellé blanc refusé (lieu, route, arête) ; légendes de carte et de schéma faites de textes non vides ; curseurs de frise bornés (`start` < `end`, `end` > `start`, au plus 200 graduations aux extrêmes). Script `fonds_de_carte.rb` : écriture via `.part` puis renommage, JSON illisible signalé avec « supprimer pour retélécharger ».
+- Hors périmètre, à traiter plus tard : `coordinate_plane.js:53`, l'identifiant du `clipPath` repart de zéro à chaque figure (deux repères sur une même page se mélangent).
+
 ## Ce qui a dérapé
 
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.

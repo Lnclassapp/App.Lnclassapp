@@ -219,9 +219,41 @@ module Entities
         control = { "param" => "start", "min" => 1850, "max" => 1900, "step" => 5, "label" => "début" }
 
         assert_empty Figure.errors_for(timeline.merge("controls" => [ control ]))
-        assert_empty Figure.errors_for(timeline.merge("controls" => [ control.merge("param" => "end") ]))
+        assert_empty Figure.errors_for(timeline.merge("controls" => [ control.merge("param" => "end", "min" => 1900, "max" => 2000) ]))
         assert_includes reasons(timeline.merge("controls" => [ control.merge("param" => "step") ])), [ "controls[0].param", "figure_invalid" ]
         assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ control.merge("max" => 2101) ]))
+      end
+
+      test "timeline : les extrêmes d'un curseur gardent end après start et au plus 200 graduations" do
+        control = { "param" => "start", "min" => 1850, "max" => 1900, "step" => 5, "label" => "début" }
+
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ control.merge("max" => 1960) ]))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ control.merge("max" => 1961) ]))
+        assert_equal [ [ "controls[0].min", "figure_invalid" ] ], reasons(timeline.merge("params" => TIMELINE.merge("step" => 1, "end" => 1960), "controls" => [ control.merge("min" => 1700, "max" => 1900) ]))
+        end_control = { "param" => "end", "min" => 1900, "max" => 2000, "step" => 5, "label" => "fin" }
+        assert_equal [ [ "controls[0].min", "figure_invalid" ] ], reasons(timeline.merge("controls" => [ end_control.merge("min" => 1880) ]))
+        assert_equal [ [ "controls[0].max", "figure_invalid" ] ], reasons(timeline(start: 1800, end: 1900, step: 1, events: [], periods: []).merge("controls" => [ end_control.merge("min" => 1900, "max" => 2100) ]))
+      end
+
+      test "graduations : pas de division entière, 401 unités au pas 2 sont refusées" do
+        assert_equal [ [ "params.step", "figure_invalid" ] ], reasons(timeline(start: 0, end: 401, step: 2, events: [], periods: []))
+        assert_empty Figure.errors_for(timeline(start: 0, end: 400, step: 2, events: [], periods: []))
+        assert_equal [ [ "params.step", "figure_invalid" ] ], reasons(raw(kind: "number_line", params: { "min" => -100, "max" => 100, "step" => 0.5 }))
+        assert_empty Figure.errors_for(raw(kind: "number_line", params: { "min" => -100, "max" => 100, "step" => 1 }))
+      end
+
+      test "map : une route ne boucle pas sur un lieu, un libellé n'est pas blanc, la légende est faite de textes" do
+        assert_equal [ [ "params.routes[0].to", "figure_invalid" ] ], reasons(map(routes: [ { "from" => "abidjan", "to" => "abidjan" } ]))
+        assert_equal [ [ "params.places[0].label", "figure_invalid" ] ], reasons(map(places: [ { "id" => "abidjan", "label" => "  " } ]))
+        assert_equal [ [ "params.routes[0].label", "figure_invalid" ] ], reasons(map(routes: [ { "from" => "abidjan", "to" => "man", "label" => "" } ]))
+        assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(map(legend: [ 3, "Savane" ]))
+        assert_equal [ [ "params.legend[1]", "figure_invalid" ] ], reasons(map(legend: [ "Forêt", "" ]))
+      end
+
+      test "diagram : un libellé d'arête n'est pas blanc, la légende est faite de textes" do
+        assert_equal [ [ "params.edges[0].label", "figure_invalid" ] ], reasons(diagram(edges: [ { "from" => "a", "to" => "b", "label" => "  " } ]))
+        assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(diagram(legend: [ 3 ]))
+        assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(diagram(legend: [ "" ]))
       end
 
       test "map et diagram n'ont aucun curseur" do

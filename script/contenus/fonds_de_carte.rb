@@ -400,9 +400,12 @@ module FondsDeCarte
     unless File.exist?(path)
       FileUtils.mkdir_p(TMP)
       warn "téléchargement de #{file}"
-      File.binwrite(path, fetch(url))
+      File.binwrite("#{path}.part", fetch(url)) # jamais de fichier à moitié écrit sous le vrai nom
+      File.rename("#{path}.part", path)
     end
     JSON.parse(File.read(path))
+  rescue JSON::ParserError => e
+    raise "#{path} n'est pas un JSON lisible (#{e.message[0, 80]}) : le supprimer pour le retélécharger"
   end
 
   # Les anneaux d'une géométrie GeoJSON : [[anneau, trous…], …] en [longitude, latitude].
