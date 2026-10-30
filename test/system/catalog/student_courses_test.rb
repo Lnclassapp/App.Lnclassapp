@@ -91,7 +91,8 @@ class Catalog::StudentCoursesTest < ApplicationSystemTestCase
     sign_in_as @student
 
     visit courses_path
-    assert_selector "#lesson_materials a[aria-current=page]", text: "Mathématiques"
+    # UDR-0146 : « Maths » seul visible, le nom entier en title.
+    assert_selector "#lesson_materials a[aria-current=page][title=Mathématiques]", text: "Maths"
     assert_selector "#lesson_materials a", count: 3
     assert_selector "#lessons_list > li", count: 2
     columns = all("#lessons_list > li").map { it.evaluate_script("this.getBoundingClientRect().x").round }

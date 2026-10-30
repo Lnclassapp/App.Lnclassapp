@@ -369,6 +369,12 @@ module ComponentsHelper
     SUBJECT_ILLUSTRATIONS.fetch(slug.to_s, SUBJECT_ILLUSTRATION_FALLBACK)
   end
 
+  # UDR-0146 §3 : le libellé court d'une matière (« Maths »), par slug figé (`shared.subjects.short`) ;
+  # nil sans entrée, et la vue garde le nom entier.
+  def subject_short_label(slug)
+    I18n.t("shared.subjects.short.#{slug}", default: nil)
+  end
+
   # Bulle ronde teintée, illustration 40 px, libellé dessous (UDR-0069 §3.3, charte §9) ; sr_suffix complète le nom accessible.
   # signal (UDR-0074 §3.5) : nil, :green, :yellow ou :red — pastille décorative, que sr_suffix doit dire.
   # short_label : libellé seul visible (« PC »), à toutes les tailles (UDR-0084 §3.5) ; le nom entier reste lu et en title.
