@@ -1,0 +1,5 @@
+<%# 🌐 UI · assessment/hints/create.turbo_stream — l'indice ouvert remplace le bouton %>
+<%# Rôle : replace hint_<question.id> par le texte de l'indice, la seule fois où il quitte le serveur pour la copie %>
+<%# ADR  : XXXX-questions-a-plusieurs-cases-et-indice §4 · UDR : XXXX-je-m-entraine-dans-la-fiche §3.8 %>
+<%= turbo_stream.replace "hint_#{@opened.question_id}", partial: "assessment/hints/hint",
+                         locals: { question_id: @opened.question_id, hint: @opened.hint } %>
