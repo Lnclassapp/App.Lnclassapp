@@ -1,4 +1,4 @@
-# UDR-XXXX : Parcours matière → exercice — la carte « Prochain exercice » dans la matière et dans la leçon
+# UDR-0144 : Parcours matière → exercice — la carte « Prochain exercice » dans la matière et dans la leçon
 <!-- index
 titre: Parcours matière → exercice : carte Prochain exercice dans la matière et la leçon
 statut: Accepté

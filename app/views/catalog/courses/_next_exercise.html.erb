@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/_next_exercise — la carte « Prochain exercice » de la vue d'une matière et de la page d'une leçon %>
 <%# Rôle : le titre de l'exercice et un bouton qui ouvre sa feuille (commencer, ou reprendre à la question N) ; rien sans exercice à proposer %>
-<%# ADR  : 0035 · UDR : XXXX parcours matière → exercice §3 · locals: (next_exercise:, scope:, id:) — scope vaut :material ou :lesson %>
+<%# ADR  : 0035 · UDR : 0144 parcours matière → exercice §3 · locals: (next_exercise:, scope:, id:) — scope vaut :material ou :lesson %>
 <% if next_exercise %>
   <% resume = next_exercise.kind == :resume %>
   <section id="<%= id %>" aria-labelledby="<%= id %>_title" data-turbo-prefetch="false" class="mb-6">

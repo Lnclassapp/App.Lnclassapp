@@ -11,6 +11,8 @@ const base = process.argv[2] || "http://localhost:3000"
 const contact = process.argv[3] || "0131001001"
 const shots = process.argv[4]
 const SUBJECT = "mathematiques"
+// MODE=lecon : l'élève choisit une leçon au lieu du raccourci de la matière (mesure l'écran de la leçon).
+const viaLesson = process.env.MODE === "lecon"
 
 const words = (text) => text.split(/\s+/).filter((w) => /[\p{L}\p{N}]/u.test(w)).length
 
@@ -66,8 +68,10 @@ async function run(width, height) {
   // Le chemin : chaque cible est la première qui existe dans la page, dans l'ordre donné (raccourci d'abord).
   const path = [
     ["accueil", [`#subject_${SUBJECT}`]],
-    ["matiere", ["#material_next_exercise a, #material_next_exercise button", "#lessons_list li[id^=lesson_essential_] a", "#courses_groups a[href*='/courses/']"]],
-    ["lecon", ["#lesson_next_exercise a, #lesson_next_exercise button", "#prepare-interros a[href*='/exercises/']"]],
+    ["matiere", [...(viaLesson ? [] : ["#material_next_exercise a, #material_next_exercise button",
+                                        "#lesson_material_next_exercise a, #lesson_material_next_exercise button"]),
+                 "#lessons_list li[id^=lesson_essential_] a", "#courses_groups a[href*='/courses/']"]],
+    ["lecon", ["#lesson_next_exercise button, #lesson_next_exercise a[href*='/sessions/']", "#prepare-interros a[href*='/exercises/']"]],
     ["exercice", ["#start-exercise-form button", "a[href*='/sessions/']"]],
   ]
   for (const [name, selectors] of path) {

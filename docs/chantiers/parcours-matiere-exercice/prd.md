@@ -71,7 +71,7 @@ CA-8 Mesure : grille → feuille ≤ 2 clics ; ≤ 50 mots et 0 px de défilemen
 
 ## 6. Décisions rattachées
 
-- UDR-XXXX-parcours-matiere-exercice-raccourcis
+- UDR-0144
 
 ## 7. Mesures
 
@@ -79,7 +79,12 @@ Même machine, même volume (memo), même méthode (`mesure_parcours.js`), élè
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Clics grille → feuille (390 · 1 280 px) | 4 · 4 | ≤ 2 | à mesurer |
-| Mots avant la cible, matière (390 · 1 280) | 8 · 18 | ≤ 50 | à mesurer |
-| Mots avant la cible, leçon (390 · 1 280) | 461 · 461 | ≤ 50 | à mesurer |
-| Défilement avant la cible, leçon (390 · 1 280) | 1 623 · 1 007 px | 0 | à mesurer |
+| Clics grille → feuille (390 · 1 280 px) | 4 · 4 | ≤ 2 | **2 · 2** |
+| Clics grille → feuille en choisissant la leçon (390 · 1 280) | 4 · 4 | ≤ 3 | **3 · 3** |
+| Mots avant la cible, matière (390 · 1 280) | 8 · 18 | ≤ 50 | **10 · 16** |
+| Mots avant la cible, leçon (390 · 1 280) | 461 · 461 | ≤ 50 | **17 · 17** |
+| Défilement avant la cible, leçon (390 · 1 280) | 1 623 · 1 007 px | 0 | **0 · 0 px** |
+| Sujet de l'exercice (344 mots avant « Faire l'exercice ») | traversé | évité | **évité** par la carte |
+| Mots de l'écran, matière · leçon, 390 px (information) | 54 · 545 | — | 65 · 557 |
+
+Après : commit du lot A, même base, élèves de 3ème neufs `0131001009`, `0131001010` (raccourci de la matière) et `0131001012`, `0131001013` (`MODE=lecon`) ; valeurs identiques d'un passage à l'autre (rendu déterministe), donc médiane = valeur. Le 3e passage de chaque série bute sur le limiteur de connexions (`login_attempts`), pas sur le parcours.

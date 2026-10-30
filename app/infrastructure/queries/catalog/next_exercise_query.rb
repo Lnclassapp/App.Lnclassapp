@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::NextExerciseQuery
 # Rôle : le prochain exercice de l'élève dans une matière ou une leçon : celui en cours, sinon le suivant du dernier terminé
-# ADR  : 0035 · UDR : XXXX parcours matière → exercice §3
+# ADR  : 0035 · UDR : 0144 parcours matière → exercice §3
 module Queries
   module Catalog
     class NextExerciseQuery

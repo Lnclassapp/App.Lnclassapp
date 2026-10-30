@@ -66,4 +66,4 @@ Protocole (rejouable) : `bin/rails db:seed`, `bin/rails runner db/seeds/demo/tro
 ## Liens
 
 - PRD : [`prd.md`](prd.md) · Plan : [`plan.md`](plan.md) · Journal : [`journal.md`](journal.md)
-- UDR : UDR-XXXX-parcours-matiere-exercice-raccourcis
+- UDR : UDR-0144
