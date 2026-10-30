@@ -26,7 +26,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | Quoi | Pourquoi reporté | Chantier de suivi |
 |---|---|---|
-| `geometry_errors` a une boucle non bornée (`ids.count` dans la boucle, sans garde de taille) | Code d'une autre vague, hors périmètre de la vague 4 | À ouvrir : `validation-figures-bornee` |
+| `geometry_errors` a une boucle non bornée (`ids.count` dans la boucle, sans garde de taille) | Code d'une autre vague, hors périmètre de la vague 4 | [`validation-figures-bornee`](../validation-figures-bornee/memo.md), livré |
 | Relecture des 8 planches de SVT et des points « à faire valider » des 10 leçons (vocabulaire, valeurs données en exemple) par un enseignant de SVT | Hors de portée d'un agent | Avant publication ; captures envoyées au porteur |
 | Relecture des 3 planches de PC et des chiffres des 10 leçons par un enseignant de Physique-Chimie | Hors de portée d'un agent | Avant publication |
 | Relecture par un enseignant de Français : faits d'œuvre (L4), décompte des mots (L7), pronoms à l'impératif et participes (L8, L9), barèmes | Aucun enseignant disponible | Liste dans `docs/contenus/README.md`, section 3ème Français |
