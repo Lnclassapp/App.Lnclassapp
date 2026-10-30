@@ -55,14 +55,13 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
 ```
 <li id=dom_id class="min-w-0" {ui_reveal_item si index}>
   <article class="group relative flex h-full flex-col gap-3 rounded-card border border-line bg-white p-4 shadow-card
-                  [si href] transition hover:border-brand/40 hover:shadow-lift has-[a:focus-visible]:outline-2
-                  has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-brand">
+                  [si href] transition hover:border-brand/40 hover:shadow-lift">
     <div class="flex items-start gap-3">
       <span class="grid size-11 shrink-0 place-items-center rounded-full {tint}" aria-hidden> <img 28 px> </span>
       <div class="min-w-0 flex-1 space-y-1">
         [si material_name ou type_label] <p class="text-meta text-mute">Matière · Type</p>   (séparateur « · »)
-        <h3 class="text-[15px] leading-snug font-medium text-ink line-clamp-2 break-words">
-          [si href] <a href class="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none">titre</a>
+        <h3 class="text-base leading-snug font-medium text-ink line-clamp-2 break-words">
+          [si href] <a href class="after:absolute after:inset-0 after:rounded-card focus-visible:outline-none focus-visible:after:outline-2 focus-visible:after:outline-offset-2 focus-visible:after:outline-brand">titre</a>
           [sinon]   titre
         </h3>
         [si meta] <p class="text-meta text-mute">meta</p>
@@ -98,13 +97,13 @@ Pourquoi des cartes en grille plutôt que des lignes : sur ordinateur, deux ou t
 
 `meta` : « N questions » sur la page d'une leçon ; `nil` ailleurs. `type_label` : partout où la ligne porte `exercise_type`.
 
-**Tokens** — couleurs : `bg-white`, `border-line`, `text-ink`, `text-mute`, `text-brand-strong`, `border-brand/40`, `shadow-card`, `hover:shadow-lift`, `text-success` (note ≥ 14/20) ; teinte de pastille : `subject_illustration(slug).tint`. Rayon : `rounded-card`. Typographie : titre 15 px / 500, étiquettes `text-meta` (13 px), verbe `text-sm` / 500. Aucune couleur en dur ; l'ambre seulement via `due_badge` et « À revoir » / « en retard » (urgence).
+**Tokens** — couleurs : `bg-white`, `border-line`, `text-ink`, `text-mute`, `text-brand-strong`, `border-brand/40`, `shadow-card`, `hover:shadow-lift`, `text-success` (note ≥ 14/20) ; teinte de pastille : `subject_illustration(slug).tint`. Rayon : `rounded-card`. Typographie : titre `text-base` / 500 (pas de valeur arbitraire : la garde `design_tokens_test` les refuse), étiquettes `text-meta` (13 px), verbe `text-sm` / 500. Aucune couleur en dur ; l'ambre seulement via `due_badge` et « À revoir » / « en retard » (urgence).
 
 **Comportement** — pas de Turbo Frame ni de Stimulus nouveaux. Les listes à « Voir plus » gardent `ui_reveal_item(index)` sur le `<li>` et `ui_reveal_more`. `prefers-reduced-motion` : la translation du survol vient de `transition`, coupée par la règle globale.
 
 **États** — vide : les `ui_empty_state` existants de chaque section, inchangés. Chargement : rendu serveur, pas de squelette (aucun chargement différé nouveau). Erreur : aucune (lecture seule ; une source sans ligne donne l'état vide). Succès : la grille de cartes.
 
-**Accessibilité** — la carte entière est la cible tactile (≥ 44 px) ; focus visible : contour 2 px `outline-brand` sur l'article quand son lien a le focus clavier ; la note garde son texte (la couleur n'est jamais seule porteuse) ; l'échéance a son icône.
+**Accessibilité** — la carte entière est la cible tactile (≥ 44 px) ; focus visible : contour 2 px `outline-brand` sur le pseudo-élément étiré du lien (toute la carte) quand il a le focus clavier ; la note garde son texte (la couleur n'est jamais seule porteuse) ; l'échéance a son icône.
 
 ### 3.2 Les branchements
 
