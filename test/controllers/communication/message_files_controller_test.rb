@@ -122,6 +122,55 @@ module Communication
       assert_not_served direction
     end
 
+    # LA-7, ADR annonces-audio-dix-secondes §4.3, M9 and M10: an attachment named by the application, never by the author.
+    test "LA-7 — with download, the audio is an attachment named annonce-<public_id>.mp3, in private no-store cache" do
+      sign_in_as @awa
+
+      get announcement_file_path(@message.public_id, kind: "audio", download: 1)
+
+      assert_equal [ 200, AUDIO, "audio/mpeg" ], [ response.status, response.body.b, response.media_type ]
+      assert_equal %(attachment; filename="annonce-#{@message.public_id}.mp3"; filename*=UTF-8''annonce-#{@message.public_id}.mp3),
+                   response.headers["Content-Disposition"]
+      assert_equal [ "no-store", "private" ], response.headers["Cache-Control"].split(/,\s*/).sort
+    end
+
+    test "LA-7 — an M4A is named .m4a, an image .png, whatever the title and the uploaded name" do
+      dto = Dtos::Communication::MessageInput.new(title: "x", body: "y", illustration: "info", commit: "publish",
+                                                  audio: StringIO.new(file_fixture("audio/marque-3gp4.m4a").binread)).tap { it.valid_at?(now: Time.current) }
+      message = create_message(author: @kouassi, title: %(Évil"\r\nX-Injected: 1.mp3), audience: "classrooms", classrooms: [ @troisieme_b ])
+      Repositories::Communication::AttachmentStore.new.attach(message_id: message.id, kind: :audio, **dto.upload(:audio).to_h)
+      attach(message, :image, @png, "image/png")
+      sign_in_as @awa
+
+      get announcement_file_path(message.public_id, kind: "audio", download: 1)
+      assert_match(/\Aattachment; filename="annonce-#{message.public_id}\.m4a"/, response.headers["Content-Disposition"])
+
+      get announcement_file_path(message.public_id, kind: "image", download: 1)
+      assert_match(/\Aattachment; filename="annonce-#{message.public_id}\.png"/, response.headers["Content-Disposition"])
+      assert_nil response.headers["X-Injected"]
+    end
+
+    test "LA-7 — an image of another type is named after it (jpg, webp), and an unknown type gets no extension" do
+      sign_in_as @awa
+      { "image/jpeg" => "jpg", "image/webp" => "webp", "application/octet-stream" => nil }.each do |type, extension|
+        message = create_message(author: @kouassi, audience: "classrooms", classrooms: [ @troisieme_b ])
+        attach(message, :image, @png, type)
+
+        get announcement_file_path(message.public_id, kind: "image", download: 1)
+
+        assert_match(/\Aattachment; filename="annonce-#{message.public_id}#{".#{extension}" if extension}"/, response.headers["Content-Disposition"], type)
+      end
+    end
+
+    test "LA-7, M9 — the download is a 404 for an actor who cannot read the announcement" do
+      sign_in_as create_student(classroom: @troisieme_a)
+
+      get announcement_file_path(@message.public_id, kind: "audio", download: 1)
+
+      assert_response :not_found
+      assert_nil response.headers["Content-Disposition"]
+    end
+
     test "a message without this file, or an unknown message: 404" do
       without = create_message(author: @kouassi, audience: "classrooms", classrooms: [ @troisieme_b ])
       sign_in_as @awa
