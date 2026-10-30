@@ -1,6 +1,9 @@
 # 🧠 DOMAINE · Entities::Catalog::Figure
 # Rôle : une figure paramétrée d'une leçon (clé, sorte, description, paramètres bornés, 0 à 4 curseurs) et ses règles de forme
-# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3)
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.1, §4.2), XXXX-figures-des-matieres-de-3eme (§4.2) · UDR : 0141-fiche-de-revision-en-quatre-blocs (§3.3)
+# script/contenus/valider.rb ne charge que figure_kinds et figure (hors Zeitwerk) : figure.rb amène ses catalogues si personne ne l'a fait.
+defined?(Entities::Catalog::FigureCatalogs) || require_relative("figure_catalogs")
+
 module Entities
   module Catalog
     Figure = Data.define(:key, :kind, :description, :params, :controls) do
@@ -24,7 +27,7 @@ module Entities
         else
           errors << violation("kind", "kind")
         end
-        errors.concat(controls_errors(raw["controls"], raw))
+        errors.concat(controls_errors(raw["controls"], raw)).uniq
       end
 
       def self.violation(path, param) = [ path, REASON, { param: } ]
@@ -81,9 +84,11 @@ module Entities
         return [] unless both_numbers?(params, "min", "max")
         return [ violation("params.max", "max") ] unless params["max"] > params["min"]
 
-        step = params["step"]
-        number?(step) && step.positive? && (params["max"] - params["min"]) / step > FigureKinds::MAX_TICKS ? [ violation("params.step", "step") ] : []
+        too_many_ticks?(params["min"], params["max"], params["step"]) ? [ violation("params.step", "step") ] : []
       end
+
+      # Plus de MAX_TICKS graduations entre deux bouts (sans division entière : 0..401 au pas 2 en fait 201).
+      def self.too_many_ticks?(low, high, step) = number?(step) && step.positive? && (high - low) > FigureKinds::MAX_TICKS * step
 
       def self.stat_chart_errors(params)
         series = params["series"]
@@ -95,6 +100,165 @@ module Entities
       end
 
       def self.solid_errors(_params) = []
+
+      # timeline.js : end > start, au plus 200 graduations ; événements et périodes dans [start, end].
+      def self.timeline_errors(params)
+        return [] unless both_numbers?(params, "start", "end")
+
+        low = params["start"]
+        high = params["end"]
+        errors = []
+        errors << violation("params.end", "end") unless high > low
+        step = params["step"]
+        errors << violation("params.step", "step") if high > low && too_many_ticks?(low, high, step)
+        errors.concat(list_of(params, "events").each_with_index.flat_map { |event, index| event_errors(event, index, low..high) })
+        errors.concat(list_of(params, "periods").each_with_index.flat_map { |period, index| period_errors(period, index, low..high) })
+      end
+
+      def self.event_errors(event, index, span)
+        path = "params.events[#{index}]"
+        return [ violation(path, "events[#{index}]") ] unless event.is_a?(Hash)
+
+        errors = []
+        errors << violation("#{path}.at", "events[#{index}].at") unless within?(event["at"], span)
+        errors << violation("#{path}.label", "events[#{index}].label") unless text?(event["label"])
+        errors
+      end
+
+      def self.period_errors(period, index, span)
+        path = "params.periods[#{index}]"
+        return [ violation(path, "periods[#{index}]") ] unless period.is_a?(Hash)
+
+        errors = []
+        errors << violation("#{path}.from", "periods[#{index}].from") unless within?(period["from"], span)
+        errors << violation("#{path}.to", "periods[#{index}].to") unless within?(period["to"], span) && (!within?(period["from"], span) || period["to"] > period["from"])
+        errors << violation("#{path}.label", "periods[#{index}].label") unless text?(period["label"])
+        errors
+      end
+
+      # map : identifiants du fond `base` (FigureCatalogs), catégories de la légende ; rien à contrôler si le fond est inconnu (déjà refusé).
+      def self.map_errors(params)
+        base = params["base"]
+        return [] unless FigureCatalogs::MAP_BASES.key?(base)
+
+        legend = params["legend"].is_a?(Array) ? params["legend"].size : 0
+        areas = list_of(params, "areas")
+        errors = legend_errors(params)
+        errors << violation("params.legend", "legend") if areas.any? && legend.zero?
+        errors.concat(area_errors(areas, FigureCatalogs.areas(base), legend))
+        errors.concat(place_errors(list_of(params, "places"), FigureCatalogs.places(base)))
+        errors.concat(route_errors(list_of(params, "routes"), FigureCatalogs.places(base)))
+      end
+
+      def self.area_errors(areas, known, legend)
+        seen = []
+        areas.each_with_index.flat_map do |area, index|
+          path = "params.areas[#{index}]"
+          next [ violation(path, "areas[#{index}]") ] unless area.is_a?(Hash)
+
+          id = area["id"]
+          errors = []
+          errors << violation("#{path}.id", "areas[#{index}].id") unless known.include?(id) && !seen.include?(id)
+          seen << id
+          errors << violation("#{path}.category", "areas[#{index}].category") unless legend.zero? || category?(area["category"], legend)
+          errors
+        end
+      end
+
+      def self.place_errors(places, known)
+        places.each_with_index.flat_map do |place, index|
+          path = "params.places[#{index}]"
+          next [ violation(path, "places[#{index}]") ] unless place.is_a?(Hash)
+
+          errors = []
+          errors << violation("#{path}.id", "places[#{index}].id") unless known.include?(place["id"])
+          errors.concat(label_errors(place, path, "places[#{index}]"))
+        end
+      end
+
+      # Chaque entrée de la légende est un texte non vide.
+      def self.legend_errors(params)
+        return [] unless params["legend"].is_a?(Array)
+
+        params["legend"].each_index.reject { text?(params["legend"][it]) }.map { violation("params.legend[#{it}]", "legend[#{it}]") }
+      end
+
+      def self.route_errors(routes, known)
+        routes.each_with_index.flat_map do |route, index|
+          path = "params.routes[#{index}]"
+          next [ violation(path, "routes[#{index}]") ] unless route.is_a?(Hash)
+
+          errors = %w[from to].reject { known.include?(route[it]) }.map { violation("#{path}.#{it}", "routes[#{index}].#{it}") }
+          errors << violation("#{path}.to", "routes[#{index}].to") if errors.empty? && route["from"] == route["to"]
+          errors.concat(label_errors(route, path, "routes[#{index}]"))
+        end
+      end
+
+      # Un libellé facultatif : absent, ou un texte (la longueur est bornée par param_errors).
+      def self.label_errors(item, path, param)
+        item["label"].nil? || text?(item["label"]) ? [] : [ violation("#{path}.label", "#{param}.label") ]
+      end
+
+      # diagram : nœuds uniques, arêtes entre nœuds existants ; `tree` : une racine, un parent par nœud, pas de cycle ; `cycle` : 3 nœuds au moins.
+      def self.diagram_errors(params)
+        nodes = list_of(params, "nodes")
+        legend = params["legend"].is_a?(Array) ? params["legend"].size : 0
+        errors = legend_errors(params)
+        errors.concat(nodes.each_with_index.flat_map { |node, index| node_errors(node, index, nodes, legend) })
+        errors.concat(edge_errors(list_of(params, "edges"), nodes.filter_map { it["id"] if it.is_a?(Hash) && text?(it["id"]) }))
+        errors << violation("params.nodes", "nodes") if params["layout"] == "cycle" && nodes.size < 3
+        errors.concat(tree_errors(params, nodes)) if errors.empty? && params["layout"] == "tree"
+        errors
+      end
+
+      def self.node_errors(node, index, nodes, legend)
+        path = "params.nodes[#{index}]"
+        return [ violation(path, "nodes[#{index}]") ] unless node.is_a?(Hash)
+
+        errors = []
+        unique = nodes.select { it.is_a?(Hash) && it["id"] == node["id"] }.size == 1
+        errors << violation("#{path}.id", "nodes[#{index}].id") unless text?(node["id"]) && (unique || nodes.index { it.is_a?(Hash) && it["id"] == node["id"] } == index)
+        errors << violation("#{path}.label", "nodes[#{index}].label") unless text?(node["label"])
+        errors << violation("#{path}.category", "nodes[#{index}].category") unless node["category"].nil? || category?(node["category"], legend)
+        errors
+      end
+
+      def self.edge_errors(edges, ids)
+        edges.each_with_index.flat_map do |edge, index|
+          path = "params.edges[#{index}]"
+          next [ violation(path, "edges[#{index}]") ] unless edge.is_a?(Hash)
+
+          errors = %w[from to].reject { ids.include?(edge[it]) }.map { violation("#{path}.#{it}", "edges[#{index}].#{it}") }
+          errors << violation("#{path}.to", "edges[#{index}].to") if errors.empty? && edge["from"] == edge["to"]
+          errors.concat(label_errors(edge, path, "edges[#{index}]"))
+        end
+      end
+
+      # Arbre : le premier parent d'un nœud gagne, l'arête en trop est refusée ; puis une seule racine et un chemin vers elle depuis chaque nœud.
+      def self.tree_errors(params, nodes)
+        ids = nodes.map { it["id"] }
+        parents = {}
+        errors = []
+        list_of(params, "edges").each_with_index do |edge, index|
+          errors << violation("params.edges[#{index}].to", "edges[#{index}].to") if parents.key?(edge["to"])
+          parents[edge["to"]] ||= edge["from"]
+        end
+        return errors if errors.any?
+
+        (ids - parents.keys).size == 1 && ids.all? { rooted?(it, parents) } ? [] : [ violation("params.edges", "edges") ]
+      end
+
+      # Remonter de parent en parent atteint-il une racine (aucun cycle) ?
+      def self.rooted?(id, parents)
+        seen = [ id ]
+        seen << parents[seen.last] while parents[seen.last] && !seen.include?(parents[seen.last])
+        parents[seen.last].nil?
+      end
+
+      def self.list_of(params, name) = params[name].is_a?(Array) ? params[name] : []
+      def self.text?(value) = value.is_a?(String) && !value.strip.empty?
+      def self.within?(value, span) = number?(value) && span.cover?(value)
+      def self.category?(value, legend) = value.is_a?(Integer) && (1..legend).cover?(value)
 
       def self.both_numbers?(params, low, high) = number?(params[low]) && number?(params[high])
 
@@ -152,7 +316,25 @@ module Entities
         errors << violation("#{path}.step", "#{path}.step") unless number?(step) && step.positive? && (!number?(min) || !number?(max) || max <= min || step <= max - min)
         label = control["label"]
         errors << violation("#{path}.label", "#{path}.label") unless label.is_a?(String) && (1..FigureKinds::LABEL_MAX).cover?(label.length)
+        errors.concat(timeline_control_errors(control, path, raw)) if errors.empty?
         errors
+      end
+
+      # Frise : aux extrêmes du curseur, end reste après start et les graduations restent au plus MAX_TICKS.
+      def self.timeline_control_errors(control, path, raw)
+        params = raw["params"]
+        return [] unless raw["kind"] == "timeline" && params.is_a?(Hash) && both_numbers?(params, "start", "end")
+
+        step = params["step"]
+        if control["param"] == "start"
+          return [ violation("#{path}.max", "#{path}.max") ] unless control["max"] < params["end"]
+
+          too_many_ticks?(control["min"], params["end"], step) ? [ violation("#{path}.min", "#{path}.min") ] : []
+        else
+          return [ violation("#{path}.min", "#{path}.min") ] unless control["min"] > params["start"]
+
+          too_many_ticks?(params["start"], control["max"], step) ? [ violation("#{path}.max", "#{path}.max") ] : []
+        end
       end
 
       # La clé est déclarée réglable par la sorte et présente dans `params` avec une valeur numérique.

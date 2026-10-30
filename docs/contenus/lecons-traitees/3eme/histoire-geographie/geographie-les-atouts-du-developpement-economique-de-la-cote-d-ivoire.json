@@ -1,816 +1,1244 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Géographie — Les atouts du développement économique de la Côte d'Ivoire",
       "subtitle": "Leçon 2 — progression DPFC 2026-2027",
       "level_name": "3ème",
       "material_name": "Histoire-Géographie",
-      "essentials": [
+      "theme": "teal",
+      "figures": [
         {
-          "name": "Les atouts naturels",
-          "subtitle": "Climat, sols, eau, mer et sous-sol : ce que la nature offre au pays",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Définir ce qu'est un atout et ce qu'est le développement économique.</li><li>Citer les principaux atouts naturels de la Côte d'Ivoire : climat, sols, eau, façade maritime, sous-sol.</li><li>Expliquer pourquoi un atout naturel ne suffit pas à lui seul.</li></ul><h2>L'image pour comprendre</h2><h3>Image : la terre du planteur de cacao et de café</h3><p>Le père de Kouassi a une plantation en bordure de forêt. La pluie tombe en abondance, la terre est sombre et riche, un ruisseau coule tout près, la chaleur ne manque jamais. Ses cacaoyers et ses caféiers poussent bien. Mais la terre seule ne remplit pas les sacs : il faut des bras pour récolter, un chemin pour sortir la récolte et un acheteur.</p><p><strong>Le pont.</strong> La pluie, la chaleur, la terre riche et le ruisseau, ce sont les atouts naturels du pays : le climat, les sols, l'eau. Les bras, le chemin et l'acheteur, ce sont d'autres atouts, que tu verras dans les fiches suivantes. Que la plantation fasse vivre la famille et rapporte de l'argent, c'est le développement économique.</p><p><strong>La limite de l'image.</strong> Le planteur ne voit que sa terre. Un pays a aussi une mer, des fleuves, un sous-sol, et un climat qui change du sud au nord. Et même une terre riche reste inutile si personne ne la met en valeur.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Un <strong>atout</strong> est un avantage dont dispose un pays et qui peut l'aider à se développer.</p><p>Le <strong>développement économique</strong> est l'augmentation durable des richesses produites dans un pays, qui améliore les conditions de vie de sa population.</p><p>Les <strong>atouts naturels</strong> sont ceux que la nature offre, sans intervention de l'homme :</p><ul><li><strong>le climat</strong> : chaud toute l'année, avec beaucoup de pluie dans le sud forestier, plus sec dans le nord ;</li><li><strong>la végétation et les sols</strong> : forêt dense au sud, savane au nord. Ils permettent des cultures variées, par exemple le cacao, le café et l'hévéa au sud, le coton au nord ;</li><li><strong>l'eau</strong> : de grands fleuves (Bandama, Sassandra, Comoé, Cavally), des lagunes comme la lagune Ébrié, et la pluie ;</li><li><strong>la façade maritime</strong> : la côte sur l'océan Atlantique, dans le golfe de Guinée, qui donne accès à la pêche et au commerce par la mer ;</li><li><strong>le sous-sol</strong> : du pétrole et du gaz naturel, de l'or, du diamant, du manganèse, entre autres.</li></ul><p>Un atout est une <strong>chance</strong>, pas une garantie : il faut le mettre en valeur.</p></blockquote><h2>Exemple résolu</h2><p><strong>Question.</strong> Parmi ces quatre éléments, lesquels sont des atouts naturels : la pluie abondante du sud, le port d'Abidjan, le fleuve Bandama, la jeunesse de la population ?</p><ol><li>Un atout naturel est offert par la nature, sans que l'homme l'ait construit.</li><li>La pluie est offerte par la nature : atout naturel.</li><li>Le fleuve Bandama existe sans l'homme : atout naturel.</li><li>Le port est construit par l'homme : ce n'est pas un atout naturel.</li><li>La jeunesse est une qualité de la population : ce n'est pas un atout naturel.</li></ol><p><strong>Réponse.</strong> La pluie abondante du sud et le fleuve Bandama.</p><h2>Le piège à éviter</h2><p>Ne confonds pas un atout naturel et ce que l'homme construit à partir de lui. Le fleuve est un atout naturel, mais le barrage construit sur ce fleuve est une infrastructure. Autre piège : croire qu'un pays riche en atouts naturels est automatiquement développé. La nature donne la chance, c'est le travail qui la transforme en richesse.</p><h2>En une phrase</h2><p>Le climat, les sols, l'eau, la mer et le sous-sol sont les atouts naturels de la Côte d'Ivoire, mais ils ne servent que si on les met en valeur.</p>",
-          "exercises": [
+          "key": "carte-ci-atouts",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire. Le sud est une zone de forêt dense, le nord une zone de savane. On y lit les ports d'Abidjan et de San Pedro, les villes de Yamoussoukro, Bouaké et Korhogo, les barrages de Kossou, Taabo, Buyo, Soubré et Ayamé, et la voie ferrée Abidjan, Bouaké, Ferkessédougou, vers Ouagadougou.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "dense_forest",
+                "category": 1
+              },
+              {
+                "id": "savanna",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "abidjan",
+                "label": "Abidjan (port)"
+              },
+              {
+                "id": "san_pedro",
+                "label": "San Pedro (port)"
+              },
+              {
+                "id": "yamoussoukro"
+              },
+              {
+                "id": "bouake"
+              },
+              {
+                "id": "korhogo"
+              },
+              {
+                "id": "ferkessedougou"
+              },
+              {
+                "id": "kossou",
+                "label": "Barrage de Kossou"
+              },
+              {
+                "id": "taabo",
+                "label": "Barrage de Taabo"
+              },
+              {
+                "id": "buyo",
+                "label": "Barrage de Buyo"
+              },
+              {
+                "id": "soubre",
+                "label": "Barrage de Soubré"
+              },
+              {
+                "id": "ayame",
+                "label": "Barrage d'Ayamé"
+              }
+            ],
+            "routes": [
+              {
+                "from": "abidjan",
+                "to": "bouake",
+                "label": "Voie ferrée"
+              },
+              {
+                "from": "bouake",
+                "to": "ferkessedougou",
+                "label": "Voie ferrée vers Ouagadougou"
+              }
+            ],
+            "legend": [
+              "Forêt dense (sud)",
+              "Savane (nord)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "population-ci",
+          "kind": "stat_chart",
+          "description": "Courbe de la population de la Côte d'Ivoire aux cinq recensements, en millions d'habitants : 6,7 en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014 et 29,4 en 2021. La courbe monte à chaque recensement, ce qui montre une population de plus en plus nombreuse.",
+          "params": {
+            "chart": "line",
+            "series": [
+              6.7,
+              10.8,
+              15.4,
+              22.7,
+              29.4
+            ],
+            "labels": [
+              "1975",
+              "1988",
+              "1998",
+              "2014",
+              "2021"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir les atouts et le développement économique",
+          "remember": "Un **atout** est un avantage dont dispose un pays et qui peut l'aider à se développer. Le **développement économique** est l'augmentation durable des richesses produites dans un pays, qui améliore les conditions de vie de sa population. On classe les atouts de la Côte d'Ivoire en quatre catégories : les atouts **naturels** (climat, sols, fleuves, mer, sous-sol), les atouts **humains** (la population), les atouts **politiques** (la stabilité) et les **infrastructures** (ports, routes, chemin de fer, barrages).",
+          "method": [
+            "Lire l'élément proposé et dire précisément ce qu'il est.",
+            "Chercher son origine : la nature, la population, l'organisation de l'État ou une construction de l'homme.",
+            "Classer l'élément dans la catégorie d'atouts qui correspond.",
+            "Justifier en une phrase en quoi il aide le pays à produire ou à se développer."
+          ],
+          "example": {
+            "statement": "Classer le port de San Pedro, sur la côte du sud-ouest, parmi les atouts de la Côte d'Ivoire.",
+            "steps": [
+              "Lire : le port de San Pedro est un port ouvert sur le golfe de Guinée.",
+              "Chercher son origine : un port est construit par l'homme, il n'est pas donné par la nature.",
+              "Classer : c'est une infrastructure.",
+              "Justifier : il permet d'exporter des produits comme le cacao et d'importer des marchandises par la mer."
+            ]
+          },
+          "pitfall": "Ne confonds pas un atout naturel et ce que l'homme construit à partir de lui. Contre-exemple : le fleuve Bandama est un atout naturel, mais le barrage de Kossou, bâti sur ce fleuve, est une infrastructure. Pour éviter l'erreur, demande-toi toujours : est-ce la nature qui l'a donné, ou l'homme qui l'a construit ?",
+          "figure": null,
+          "exercise": {
+            "title": "Définir et classer les atouts",
+            "statement": "Dans cet exercice, tu définis un atout, tu définis le développement économique et tu classes des éléments avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans la progression de géographie de 3ème, qu'est-ce qu'un atout pour un pays ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : le mot à définir est « atout ». Étape 2 — Chercher l'origine : un atout est un avantage que le pays possède. Étape 3 — Classer : c'est une notion de géographie économique. Étape 4 — Justifier : l'atout peut aider le pays à produire et à se développer. La proposition « un problème à résoudre » est fausse : c'est le contraire d'un avantage.",
+                "answers": [
+                  {
+                    "content": "Un problème que le pays doit résoudre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un avantage dont le pays dispose et qui peut l'aider à se développer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un produit que le pays vend à l'étranger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une somme d'argent prêtée par un autre pays",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément de la Côte d'Ivoire à la catégorie d'atout qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire chaque élément. Étape 2 — Chercher l'origine : le climat vient de la nature ; la jeunesse vient de la population ; le port est construit par l'homme ; la stabilité vient de l'organisation de l'État. Étape 3 — Classer : atout naturel, atout humain, infrastructure, atout politique. Étape 4 — Justifier : chacun aide le pays à produire ou à échanger.",
+                "answers": [
+                  {
+                    "content": "Le climat chaud et pluvieux du sud",
+                    "match": "Atout naturel"
+                  },
+                  {
+                    "content": "Une population jeune",
+                    "match": "Atout humain"
+                  },
+                  {
+                    "content": "Le port d'Abidjan",
+                    "match": "Infrastructure"
+                  },
+                  {
+                    "content": "La paix et la stabilité du pays",
+                    "match": "Atout politique"
+                  }
+                ]
+              },
+              {
+                "content": "Qu'est-ce que le développement économique d'un pays ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : on cherche la définition. Étape 2 — Chercher l'origine du mot : « économique » renvoie à la production de richesses. Étape 3 — Classer : c'est une notion centrale de la leçon. Étape 4 — Justifier : le développement dure dans le temps et améliore la vie de la population. Une seule récolte ne suffit pas : elle ne dure pas.",
+                "answers": [
+                  {
+                    "content": "L'augmentation durable des richesses produites, qui améliore les conditions de vie de la population",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une seule bonne récolte de cacao pendant une année",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'arrivée de touristes pendant les vacances",
+                    "correct": false
+                  },
+                  {
+                    "content": "La construction d'un seul grand bâtiment dans la capitale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le barrage de Kossou est classé parmi les ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire : le barrage de Kossou. Étape 2 — Chercher l'origine : il a été construit par l'homme sur le fleuve Bandama. Étape 3 — Classer : une construction de l'homme est une infrastructure. Étape 4 — Justifier : il produit de l'électricité pour le pays. Le fleuve est un atout naturel, mais pas le barrage : c'est le piège de la notion.",
+                "answers": [
+                  {
+                    "content": "atouts naturels",
+                    "correct": false
+                  },
+                  {
+                    "content": "atouts humains",
+                    "correct": false
+                  },
+                  {
+                    "content": "infrastructures",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : le barrage de Kossou est un atout naturel, parce qu'il est construit sur un fleuve.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : le barrage est construit sur le fleuve Bandama. Étape 2 — Chercher l'origine : le fleuve vient de la nature, mais le barrage est construit par l'homme. Étape 3 — Classer : le barrage est une infrastructure. Étape 4 — Justifier : l'affirmation est fausse, car elle confond le fleuve (atout naturel) et la construction faite dessus.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître les atouts naturels",
+          "remember": "Le sud a un climat **équatorial**, chaud et très pluvieux, avec une forêt dense et des sols riches. Le nord a un climat **tropical**, plus sec, avec de la savane ; au centre, le climat est tropical humide, une transition entre les deux. Quatre grands fleuves traversent le pays : le **Cavally**, le **Sassandra**, le **Bandama** et le **Comoé**. La **façade maritime** d'environ 550 km borde le golfe de Guinée. Le **sous-sol** et la mer renferment de l'or, du manganèse, du pétrole et du gaz.",
+          "method": [
+            "Situer la zone étudiée (sud, centre, nord ou côte) sur la carte.",
+            "Identifier le climat et la végétation de cette zone.",
+            "Relever les ressources que la nature y offre : sols, eau, mer, sous-sol.",
+            "Relier chaque ressource à l'activité économique qu'elle permet."
+          ],
+          "example": {
+            "statement": "Décrire les atouts naturels du sud forestier de la Côte d'Ivoire.",
+            "steps": [
+              "Situer : le sud forestier s'étend le long de la côte, au sud de la carte.",
+              "Identifier : le climat est équatorial, chaud et très pluvieux, et la végétation est la forêt dense.",
+              "Relever : les sols sont riches, des fleuves comme le Sassandra coulent vers la mer, et la côte donne sur le golfe de Guinée.",
+              "Relier : ces atouts permettent la culture du cacao, du café et de l'hévéa, la pêche et le commerce par les ports."
+            ]
+          },
+          "pitfall": "Ne dis pas que tout le pays a le même climat et les mêmes cultures. Contre-exemple : le cacao pousse dans la forêt dense du sud, alors que le coton est cultivé dans la savane du nord. Avant de répondre, commence toujours par situer la zone sur la carte.",
+          "figure": "carte-ci-atouts",
+          "exercise": {
+            "title": "Reconnaître les atouts naturels du pays",
+            "statement": "Dans cet exercice, tu relies climat, sols, fleuves, mer et sous-sol aux activités qu'ils permettent, avec la carte de la Côte d'Ivoire.",
+            "exercise_type": "fixation",
+            "figure": "carte-ci-atouts",
+            "questions": [
+              {
+                "content": "Quel est le climat du sud de la Côte d'Ivoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : on étudie le sud, près de la côte. Étape 2 — Identifier : le climat y est équatorial, chaud et très pluvieux, avec une forêt dense. Étape 3 — Relever : cette pluie nourrit les sols et les cours d'eau. Étape 4 — Relier : elle permet les cultures de cacao, de café et d'hévéa. Le climat tropical est celui du nord (tropical humide au centre, qui fait la transition), pas celui du sud.",
+                "answers": [
+                  {
+                    "content": "Un climat tropical plus sec, avec de la savane",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un climat désertique, presque sans pluie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un climat équatorial, chaud et très pluvieux, avec une forêt dense",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un climat polaire, très froid toute l'année",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque zone ou ressource naturelle à l'activité qu'elle permet.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer chaque zone sur la carte. Étape 2 — Identifier son climat et sa végétation : forêt dense au sud, savane au nord. Étape 3 — Relever la ressource naturelle : sols, mer, sous-sol. Étape 4 — Relier à l'activité : cacao, café et hévéa au sud, coton au nord, pêche et commerce sur la côte, mines et hydrocarbures grâce au sous-sol.",
+                "answers": [
+                  {
+                    "content": "Le sud de forêt dense",
+                    "match": "Culture du cacao, du café et de l'hévéa"
+                  },
+                  {
+                    "content": "Le nord de savane",
+                    "match": "Culture du coton"
+                  },
+                  {
+                    "content": "La côte du golfe de Guinée",
+                    "match": "Pêche et commerce maritime"
+                  },
+                  {
+                    "content": "Le sous-sol et la mer",
+                    "match": "Extraction d'or, de manganèse, de pétrole et de gaz"
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont trois grands fleuves de la Côte d'Ivoire ? (3 réponses)",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Situer les fleuves sur la carte : ils coulent du nord vers le sud. Étape 2 — Identifier : les grands fleuves ivoiriens sont le Cavally, le Sassandra, le Bandama et le Comoé. Étape 3 — Relever : ils fournissent de l'eau et de l'énergie. Étape 4 — Relier : ils servent à l'agriculture et aux barrages. Le Niger et le Congo coulent dans d'autres pays.",
+                "answers": [
+                  {
+                    "content": "Le Cavally",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Niger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Sassandra",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Congo",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Comoé",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La côte ivoirienne, longue d'environ 550 km, borde le golfe de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : la côte est au sud du pays. Étape 2 — Identifier : elle donne sur l'océan Atlantique, dans le golfe de Guinée. Étape 3 — Relever : cette façade maritime mesure environ 550 km. Étape 4 — Relier : elle permet la pêche et le commerce par la mer, avec les ports d'Abidjan et de San Pedro.",
+                "answers": [
+                  {
+                    "content": "Guinée",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : le coton se cultive surtout dans la forêt dense du sud de la Côte d'Ivoire.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : le coton est une culture du nord. Étape 2 — Identifier : le nord a un climat tropical et une végétation de savane. Étape 3 — Relever : le sud forestier est plus pluvieux et convient au cacao, au café et à l'hévéa. Étape 4 — Relier : chaque zone a ses cultures. L'affirmation est fausse : elle oublie que le climat change du sud au nord.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître les atouts humains",
+          "remember": "La population est un **atout humain**. Elle comptait 29,4 millions d'habitants au recensement de 2021 et elle est jeune. Elle fournit une **main-d'œuvre** pour l'agriculture, les mines, l'industrie et les services, y compris des travailleurs venus d'autres pays. Elle forme aussi un **marché**, c'est-à-dire des personnes qui achètent des produits. Les recensements donnent : 6,7 millions en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014 et 29,4 en 2021.",
+          "method": [
+            "Présenter le document : sa nature, sa source et ses dates.",
+            "Relever les chiffres de départ et d'arrivée.",
+            "Calculer l'évolution, ou comparer les chiffres entre eux.",
+            "Conclure en disant en quoi cette population est un atout pour l'économie."
+          ],
+          "example": {
+            "statement": "La courbe donne la population de la Côte d'Ivoire aux recensements : 15,4 millions en 1998 et 29,4 millions en 2021. Que montre-t-elle ?",
+            "steps": [
+              "Présenter : le document est la courbe des recensements, en millions d'habitants.",
+              "Relever : 15,4 millions en 1998 au départ, 29,4 millions en 2021 à l'arrivée.",
+              "Calculer : 29,4 − 15,4 = 14, soit 14 millions d'habitants de plus en 23 ans.",
+              "Conclure : la population est de plus en plus nombreuse, ce qui apporte de la main-d'œuvre et des consommateurs."
+            ]
+          },
+          "pitfall": "Ne confonds pas les dates et les résultats des recensements : 22,7 millions est le chiffre de 2014 et 29,4 millions celui de 2021. Ne dis pas non plus qu'une population nombreuse suffit : 29,4 millions d'habitants sans emplois ni formation ne produisent pas plus de richesses. Le nombre est une chance, pas une garantie.",
+          "figure": "population-ci",
+          "exercise": {
+            "title": "Lire la population de la Côte d'Ivoire",
+            "statement": "Dans cet exercice, tu lis la courbe des recensements de 1975 à 2021 et tu expliques en quoi la population est un atout.",
+            "exercise_type": "fixation",
+            "figure": "population-ci",
+            "questions": [
+              {
+                "content": "Selon le recensement de 2021, combien d'habitants compte la Côte d'Ivoire, en millions ?",
+                "question_type": "numeric",
+                "unit": "millions",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Présenter : le document est la courbe des recensements de 1975 à 2021, en millions d'habitants. Étape 2 — Relever : pour 2021, la valeur est 29,4. Étape 3 — Calculer : aucun calcul n'est demandé, on lit la valeur. Étape 4 — Conclure : la Côte d'Ivoire compte 29,4 millions d'habitants en 2021.",
+                "answers": [
+                  {
+                    "content": "29,4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La population était de 15,4 millions d'habitants en 1998 et de 29,4 millions en 2021. De combien de millions d'habitants a-t-elle augmenté ?",
+                "question_type": "numeric",
+                "unit": "millions",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Présenter : on compare deux recensements, 1998 et 2021. Étape 2 — Relever : 15,4 millions au départ, 29,4 millions à l'arrivée. Étape 3 — Calculer : 29,4 − 15,4 = 14. Étape 4 — Conclure : la population a augmenté de 14 millions d'habitants. Ne soustrais pas dans l'autre sens : le résultat doit être positif.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Classe ces recensements du plus ancien au plus récent.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Présenter : quatre recensements de la courbe. Étape 2 — Relever leurs dates : 1975, 1988, 1998, 2014. Étape 3 — Comparer : de la plus petite date à la plus grande. Étape 4 — Conclure : l'ordre est 1975, 1988, 1998, 2014, et la population monte à chaque fois (6,7 ; 10,8 ; 15,4 ; 22,7 millions).",
+                "answers": [
+                  {
+                    "content": "Recensement de 1975"
+                  },
+                  {
+                    "content": "Recensement de 1988"
+                  },
+                  {
+                    "content": "Recensement de 1998"
+                  },
+                  {
+                    "content": "Recensement de 2014"
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi une population jeune et nombreuse peut-elle être un atout pour l'économie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter : on parle de la population. Étape 2 — Relever : elle est nombreuse (29,4 millions en 2021) et jeune. Étape 3 — Calculer l'effet : plus de personnes en âge de travailler donne plus de bras dans les champs, les usines et les services. Étape 4 — Conclure : c'est un atout, mais il faut former et employer cette population. Aucune population ne remplace les routes ni les ports.",
+                "answers": [
+                  {
+                    "content": "Elle remplace le besoin de routes et de ports",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle fournit de la main-d'œuvre et des consommateurs pour les produits du pays",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle rend inutiles les ressources naturelles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle garantit à elle seule la fin de la pauvreté",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : une population nombreuse suffit à elle seule pour assurer le développement économique.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Présenter : la question porte sur le nombre d'habitants. Étape 2 — Relever : la Côte d'Ivoire a 29,4 millions d'habitants, mais il faut aussi des emplois et de la formation. Étape 3 — Calculer l'effet : sans emplois, un grand nombre d'habitants ne produit pas plus de richesses. Étape 4 — Conclure : l'affirmation est fausse, le nombre ne suffit pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles propositions sont des atouts humains de la Côte d'Ivoire ? (2 réponses)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Présenter : on cherche ce qui vient de la population. Étape 2 — Relever : la jeunesse et la main-d'œuvre, y compris étrangère, viennent des habitants. Étape 3 — Calculer l'effet : elles apportent des bras et des compétences. Étape 4 — Conclure : ce sont des atouts humains. Le port est une infrastructure ; le fleuve et le manganèse sont des atouts naturels.",
+                "answers": [
+                  {
+                    "content": "Une population jeune",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le port de San Pedro",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une main-d'œuvre nombreuse, y compris des travailleurs venus d'autres pays",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le fleuve Cavally",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le manganèse du sous-sol",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître les atouts politiques et les infrastructures",
+          "remember": "La **stabilité politique** et la paix sont un atout politique recherché : elles rassurent ceux qui investissent dans le pays. Les **infrastructures** sont des constructions qui aident à produire et à échanger : les ports d'**Abidjan** et de **San Pedro**, les routes, le chemin de fer **Abidjan–Ouagadougou** et les barrages hydroélectriques de **Kossou, Taabo, Buyo, Soubré et Ayamé**. Yamoussoukro est la capitale politique, Abidjan la capitale économique.",
+          "method": [
+            "Repérer l'infrastructure ou l'atout sur la carte.",
+            "Dire sa fonction : transporter, exporter, produire de l'énergie ou rassurer.",
+            "Relever ce qu'il relie ou alimente.",
+            "Expliquer en quoi il aide l'économie du pays."
+          ],
+          "example": {
+            "statement": "Expliquer le rôle du chemin de fer Abidjan–Ouagadougou.",
+            "steps": [
+              "Repérer : sur la carte, la voie ferrée part du port d'Abidjan et passe par Bouaké et Ferkessédougou ; elle se prolonge ensuite vers Ouagadougou, au Burkina Faso.",
+              "Dire sa fonction : transporter des marchandises et des voyageurs.",
+              "Relever ce qu'elle relie : le port d'Abidjan, les villes de l'intérieur et le Burkina Faso.",
+              "Expliquer : elle facilite le commerce du pays avec son voisin, qui n'a pas accès à la mer."
+            ]
+          },
+          "pitfall": "Ne confonds pas les fonctions des villes : Yamoussoukro est la capitale politique, alors qu'Abidjan est la capitale économique avec son grand port. Ne confonds pas non plus une infrastructure et un atout naturel : le barrage de Buyo est construit par l'homme sur le Sassandra, qui est le fleuve naturel.",
+          "figure": "carte-ci-atouts",
+          "exercise": {
+            "title": "Reconnaître les infrastructures et les atouts politiques",
+            "statement": "Dans cet exercice, tu repères sur la carte les ports, le chemin de fer et les barrages, et tu expliques leur rôle.",
+            "exercise_type": "fixation",
+            "figure": "carte-ci-atouts",
+            "questions": [
+              {
+                "content": "Relie chaque infrastructure ou atout à son rôle principal.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer chaque élément sur la carte. Étape 2 — Dire sa fonction : produire l'énergie, échanger par la mer, transporter par rail, rassurer les investisseurs. Étape 3 — Relever ce qu'il relie ou alimente : le barrage alimente le pays en électricité, le port relie le pays à la mer, le rail relie Abidjan à Ouagadougou. Étape 4 — Expliquer : chacun aide l'économie à produire et à échanger.",
+                "answers": [
+                  {
+                    "content": "Le barrage de Kossou",
+                    "match": "Produire de l'électricité"
+                  },
+                  {
+                    "content": "Le port d'Abidjan",
+                    "match": "Échanger des marchandises par la mer"
+                  },
+                  {
+                    "content": "Le chemin de fer Abidjan–Ouagadougou",
+                    "match": "Transporter marchandises et voyageurs vers le Burkina Faso"
+                  },
+                  {
+                    "content": "La stabilité politique",
+                    "match": "Rassurer ceux qui veulent investir dans le pays"
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont trois barrages hydroélectriques de la Côte d'Ivoire ? (3 réponses)",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer sur la carte les noms de barrages. Étape 2 — Dire leur fonction : produire de l'électricité grâce à l'eau des fleuves. Étape 3 — Relever : Kossou, Taabo, Buyo, Soubré et Ayamé en font partie. Étape 4 — Expliquer : ils fournissent l'énergie aux usines et aux habitations. Le port, l'aéroport et la gare sont d'autres infrastructures, pas des barrages.",
+                "answers": [
+                  {
+                    "content": "Kossou",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le port d'Abidjan",
+                    "correct": false
+                  },
+                  {
+                    "content": "Taabo",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'aéroport d'Abidjan",
+                    "correct": false
+                  },
+                  {
+                    "content": "Buyo",
+                    "correct": true
+                  },
+                  {
+                    "content": "La gare de Bouaké",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel port, situé dans le sud-ouest du pays, sert beaucoup à l'exportation du cacao ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le port sur la carte : il est sur la côte du sud-ouest. Étape 2 — Dire sa fonction : exporter des produits comme le cacao. Étape 3 — Relever ce qu'il relie : la région de production et les marchés étrangers. Étape 4 — Expliquer : San Pedro est le port du sud-ouest. Bouaké, Korhogo et Yamoussoukro sont des villes de l'intérieur, sans accès direct à la mer.",
+                "answers": [
+                  {
+                    "content": "Le port de Bouaké",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le port de Korhogo",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le port de San Pedro",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le port de Yamoussoukro",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Abidjan est la capitale ___ de la Côte d'Ivoire, alors que Yamoussoukro en est la capitale politique.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer Abidjan et Yamoussoukro sur la carte. Étape 2 — Dire leur fonction : Yamoussoukro est la capitale politique, Abidjan est la capitale économique. Étape 3 — Relever ce qu'Abidjan concentre : un grand port, des entreprises et un aéroport. Étape 4 — Expliquer : on ne confond pas les deux fonctions. Abidjan n'est ni une capitale agricole ni religieuse.",
+                "answers": [
+                  {
+                    "content": "économique",
+                    "correct": true
+                  },
+                  {
+                    "content": "agricole",
+                    "correct": false
+                  },
+                  {
+                    "content": "religieuse",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Range ces villes dans l'ordre où le chemin de fer Abidjan–Ouagadougou les traverse en Côte d'Ivoire, en partant d'Abidjan.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer la voie ferrée sur la carte. Étape 2 — Dire sa fonction : relier le port d'Abidjan au Burkina Faso. Étape 3 — Relever les villes dans l'ordre, du sud vers le nord : Abidjan, Bouaké, puis Ferkessédougou ; ensuite la ligne se prolonge vers Ouagadougou, hors de la carte. Étape 4 — Expliquer : cette ligne permet d'échanger des marchandises avec un pays sans accès à la mer.",
+                "answers": [
+                  {
+                    "content": "Abidjan"
+                  },
+                  {
+                    "content": "Bouaké"
+                  },
+                  {
+                    "content": "Ferkessédougou"
+                  }
+                ]
+              },
+              {
+                "content": "Vrai ou faux : le barrage de Buyo est un atout naturel de la Côte d'Ivoire.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le barrage de Buyo sur la carte, dans l'ouest du pays. Étape 2 — Dire sa fonction : produire de l'électricité. Étape 3 — Relever son origine : il est construit par l'homme sur le fleuve Sassandra. Étape 4 — Expliquer : le fleuve est un atout naturel, mais le barrage est une infrastructure. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Comprendre qu'un atout ne suffit pas seul",
+          "remember": "Un atout est une **chance**, pas une **garantie**. Pour qu'il serve au développement, il faut le **mettre en valeur** en le combinant avec d'autres atouts : des travailleurs formés, des routes et des ports, de l'énergie, de l'argent investi et la paix. Par exemple, le cacao pousse grâce au climat et aux sols (atouts naturels), il est récolté par les planteurs (atout humain), transporté par les routes puis exporté par le port de San Pedro (infrastructures).",
+          "method": [
+            "Identifier l'atout de départ.",
+            "Chercher ce qui manque pour l'utiliser.",
+            "Combiner l'atout avec les autres atouts qui le complètent.",
+            "Conclure sur les conditions nécessaires au développement."
+          ],
+          "example": {
+            "statement": "Montrer que le cacao ne se transforme en richesse que si plusieurs atouts sont réunis.",
+            "steps": [
+              "Identifier : l'atout de départ est le climat pluvieux et les sols riches du sud, qui permettent de cultiver le cacao.",
+              "Chercher ce qui manque : des planteurs pour récolter, des routes pour transporter les fèves, un port pour exporter.",
+              "Combiner : on associe les planteurs (atout humain), les routes et le port de San Pedro (infrastructures) au sol (atout naturel).",
+              "Conclure : un atout naturel seul ne suffit pas, il faut des travailleurs, des routes et un port pour créer de la richesse."
+            ]
+          },
+          "pitfall": "Ne pense pas qu'un pays riche en ressources est automatiquement développé. Contre-exemple : une forêt pleine de cacaoyers dont les fèves restent au village faute de route ne rapporte rien à personne. C'est la combinaison des atouts qui crée la richesse.",
+          "figure": null,
+          "exercise": {
+            "title": "Comprendre qu'un atout ne suffit pas seul",
+            "statement": "Dans cet exercice, tu montres avec la méthode de la fiche pourquoi il faut combiner plusieurs atouts pour se développer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pourquoi un atout ne suffit-il pas seul à développer un pays ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier l'atout de départ : par exemple les sols et la pluie. Étape 2 — Chercher ce qui manque : des travailleurs, des routes, de l'énergie, des capitaux. Étape 3 — Combiner les atouts entre eux. Étape 4 — Conclure : un atout seul ne se transforme pas en richesse. Les propositions fausses oublient cette combinaison.",
+                "answers": [
+                  {
+                    "content": "Parce qu'il faut aussi des bras, des routes, de l'énergie, de l'argent et de la paix pour l'utiliser",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce qu'un atout naturel disparaît dès qu'on l'utilise",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que seuls les atouts humains comptent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que les infrastructures n'ont aucun rôle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un atout est une chance, pas une ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : on parle de l'atout. Étape 2 — Chercher ce qui manque : le travail et les moyens pour l'utiliser. Étape 3 — Combiner l'atout avec d'autres atouts. Étape 4 — Conclure : l'atout est une chance qu'il faut mettre en valeur, il ne garantit pas le développement. Le mot attendu est « garantie ».",
+                "answers": [
+                  {
+                    "content": "garantie",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour montrer qu'un atout ne suffit pas.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier l'atout de départ. Étape 2 — Chercher ce qui manque pour l'utiliser. Étape 3 — Combiner l'atout avec les autres atouts qui le complètent. Étape 4 — Conclure sur les conditions du développement. On ne peut pas conclure avant d'avoir cherché ce qui manque.",
+                "answers": [
+                  {
+                    "content": "Identifier l'atout de départ"
+                  },
+                  {
+                    "content": "Chercher ce qui manque pour l'utiliser"
+                  },
+                  {
+                    "content": "Combiner l'atout avec les autres atouts"
+                  },
+                  {
+                    "content": "Conclure sur les conditions du développement"
+                  }
+                ]
+              },
+              {
+                "content": "Pour que les atouts naturels du sud profitent au pays, de quoi a-t-on besoin ? (2 réponses)",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier l'atout : les sols et la pluie du sud. Étape 2 — Chercher ce qui manque : des bras pour travailler et des moyens de transport. Étape 3 — Combiner : atout naturel, atout humain et infrastructures. Étape 4 — Conclure : les routes, les ports et la main-d'œuvre sont nécessaires. Fermer les ports empêcherait d'exporter.",
+                "answers": [
+                  {
+                    "content": "De routes et de ports pour sortir la récolte",
+                    "correct": true
+                  },
+                  {
+                    "content": "De moins de pluie",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'une main-d'œuvre qui travaille la terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "D'aucun travail de l'homme",
+                    "correct": false
+                  },
+                  {
+                    "content": "De fermer tous les ports",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un pays a de la forêt, de la pluie et des sols riches, mais pas de route pour sortir les récoltes. Explique en deux ou trois phrases pourquoi ces atouts ne suffisent pas.",
+                "question_type": "written",
+                "points": 2,
+                "criteria": [
+                  "Identifie l'atout de départ (forêt, pluie, sols)",
+                  "Dit ce qui manque (routes pour transporter la récolte)",
+                  "Conclut qu'un atout seul ne suffit pas"
+                ],
+                "explanation": "Corrigé modèle : Étape 1 — Identifier : la forêt, la pluie et les sols riches sont des atouts naturels. Étape 2 — Chercher ce qui manque : sans route, les récoltes ne peuvent pas être transportées vers les marchés et les ports. Étape 3 — Combiner : il faudrait ajouter des routes et de la main-d'œuvre à l'atout naturel. Étape 4 — Conclure : un atout seul ne suffit pas, il faut l'associer à d'autres atouts. Barème : 1 point pour l'identification de l'atout et de ce qui manque, 1 point pour la conclusion.",
+                "answers": [],
+                "starter": "Les atouts naturels ne suffisent pas, car…"
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Classer les atouts de la Côte d'Ivoire",
+          "statement": "Dans cette interrogation, tu classes les atouts de la Côte d'Ivoire en utilisant la carte et la méthode des fiches.",
+          "exercise_type": "fixation",
+          "figure": "carte-ci-atouts",
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître les atouts naturels",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Relie chaque élément de la Côte d'Ivoire à sa catégorie d'atout.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. Étape 1 — Lire chaque élément. Étape 2 — Chercher son origine : le Comoé existe sans l'homme ; la jeunesse vient des habitants ; le chemin de fer est construit ; la paix dépend de l'organisation de l'État. Étape 3 — Classer : atout naturel, atout humain, infrastructure, atout politique. Étape 4 — Justifier en une phrase. Tu peux réutiliser ces quatre étapes dans toute question de classement.",
+              "answers": [
                 {
-                  "content": "Qu'est-ce qu'un atout pour un pays ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un atout est un avantage dont le pays dispose et qui l'aide à se développer, comme la terre riche du planteur. Ce n'est pas un problème à résoudre, ni un produit vendu à l'étranger.",
-                  "answers": [
-                    { "content": "Un avantage dont le pays dispose et qui peut l'aider à se développer", "correct": true },
-                    { "content": "Un problème que le pays doit résoudre", "correct": false },
-                    { "content": "Un produit que le pays vend à l'étranger", "correct": false },
-                    { "content": "Une somme d'argent prêtée par un autre pays", "correct": false }
-                  ]
+                  "content": "Le fleuve Comoé",
+                  "match": "Atout naturel"
                 },
                 {
-                  "content": "Vrai ou faux : le climat chaud et pluvieux du sud de la Côte d'Ivoire favorise la culture du cacao et du café.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Comme sur la plantation de Kouassi, la chaleur et la pluie abondante du sud forestier sont un atout naturel pour ces cultures.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Une population jeune",
+                  "match": "Atout humain"
                 },
                 {
-                  "content": "Quelles propositions sont des atouts naturels de la Côte d'Ivoire ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La pluie du sud et le fleuve Sassandra sont offerts par la nature. Le barrage et l'aéroport sont construits par l'homme, et une loi est une règle écrite : ce ne sont pas des atouts naturels.",
-                  "answers": [
-                    { "content": "Les pluies abondantes du sud", "correct": true },
-                    { "content": "Le fleuve Sassandra", "correct": true },
-                    { "content": "Le barrage de Kossou", "correct": false },
-                    { "content": "L'aéroport d'Abidjan", "correct": false },
-                    { "content": "Une loi sur les investissements", "correct": false }
-                  ]
+                  "content": "Le chemin de fer Abidjan–Ouagadougou",
+                  "match": "Infrastructure"
                 },
                 {
-                  "content": "Un planteur de cacao et de café profite d'une terre riche, de la pluie et d'un ruisseau tout près de sa plantation. Dans l'économie d'un pays, ces éléments représentent :",
-                  "question_type": "single_choice",
-                  "explanation": "La terre, la pluie et le ruisseau sont donnés par la nature : ce sont des atouts naturels. Les routes seraient des infrastructures, les bras du planteur un atout humain.",
-                  "answers": [
-                    { "content": "Les atouts naturels du pays", "correct": true },
-                    { "content": "Les atouts humains du pays", "correct": false },
-                    { "content": "Les infrastructures du pays", "correct": false },
-                    { "content": "Les lois du pays", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Quelles propositions appartiennent au sous-sol ivoirien ? (3 réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le pétrole, le gaz naturel et l'or se trouvent dans le sous-sol ou sous la mer. Le cacao, le café et la forêt dense sont des productions ou une végétation de surface : ne les confonds pas avec le sous-sol.",
-                  "answers": [
-                    { "content": "Le pétrole", "correct": true },
-                    { "content": "Le gaz naturel", "correct": true },
-                    { "content": "L'or", "correct": true },
-                    { "content": "Le cacao", "correct": false },
-                    { "content": "Le café", "correct": false },
-                    { "content": "La forêt dense", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : le climat du nord de la Côte d'Ivoire est exactement le même que celui du sud.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Le sud est plus pluvieux avec une forêt dense, le nord est plus sec avec de la savane. C'est pourquoi les cultures changent du sud au nord.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "La paix et la stabilité",
+                  "match": "Atout politique"
                 }
               ]
             },
             {
-              "title": "Appliquer — Relier un atout naturel à son usage",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelles propositions appartiennent au sous-sol ivoirien ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. Étape 1 — Lire : on cherche les ressources du sous-sol. Étape 2 — Chercher l'origine : le manganèse et l'or se trouvent dans le sol. Étape 3 — Classer : ce sont des atouts naturels. Étape 4 — Justifier : ils sont extraits des mines. Le cacao est une culture, le port une infrastructure et la forêt une végétation : ils ne sont pas dans le sous-sol.",
+              "answers": [
                 {
-                  "content": "Un grand fleuve traverse une région au relief adapté. Quelle utilisation de ce fleuve peut aider le développement du pays ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un barrage sur un fleuve permet de produire de l'électricité grâce à la force de l'eau. Le fleuve est l'atout naturel, le barrage est la construction de l'homme.",
-                  "answers": [
-                    { "content": "Y construire un barrage pour produire de l'électricité", "correct": true },
-                    { "content": "Y extraire du pétrole", "correct": false },
-                    { "content": "Y cultiver du coton", "correct": false },
-                    { "content": "Y installer un aéroport", "correct": false }
-                  ]
+                  "content": "Le manganèse",
+                  "correct": true
                 },
                 {
-                  "content": "La côte ivoirienne donne sur l'océan Atlantique, dans le golfe de Guinée. Quel est le principal avantage de cette façade maritime ?",
-                  "question_type": "single_choice",
-                  "explanation": "La mer permet la pêche et le commerce par bateau, grâce aux ports. Le coton se cultive au nord et l'électricité vient des barrages : ce n'est pas l'avantage de la mer.",
-                  "answers": [
-                    { "content": "Elle permet la pêche et le commerce par la mer", "correct": true },
-                    { "content": "Elle permet de cultiver le coton", "correct": false },
-                    { "content": "Elle permet de produire de l'électricité sans barrage", "correct": false },
-                    { "content": "Elle remplace la main-d'œuvre", "correct": false }
-                  ]
+                  "content": "Le cacao",
+                  "correct": false
                 },
                 {
-                  "content": "Une région du nord, plus sèche, est couverte de savane. Parmi ces cultures, laquelle y est le mieux adaptée ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le coton s'adapte au climat plus sec du nord. Le cacao et l'hévéa demandent beaucoup de pluie : on les trouve surtout dans le sud forestier.",
-                  "answers": [
-                    { "content": "Le coton", "correct": true },
-                    { "content": "Le cacao", "correct": false },
-                    { "content": "L'hévéa", "correct": false }
-                  ]
+                  "content": "L'or",
+                  "correct": true
                 },
                 {
-                  "content": "Quelles propositions décrivent un atout naturel ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les sols de la forêt et les eaux de la lagune sont offerts par la nature. Les routes sont construites par l'homme, les jeunes sont des habitants, l'accord commercial est une décision entre États.",
-                  "answers": [
-                    { "content": "Les sols riches de la zone forestière", "correct": true },
-                    { "content": "Les eaux poissonneuses de la lagune Ébrié", "correct": true },
-                    { "content": "Les routes bitumées entre Abidjan et Yamoussoukro", "correct": false },
-                    { "content": "Les jeunes qui cherchent un travail", "correct": false },
-                    { "content": "Un accord de commerce avec les pays voisins", "correct": false }
-                  ]
+                  "content": "Le port d'Abidjan",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux : un fleuve est un atout naturel, mais le barrage construit sur ce fleuve est une infrastructure.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Le fleuve existe sans l'homme. Le barrage est construit par l'homme pour profiter du fleuve : c'est la différence entre un atout naturel et une infrastructure.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "La forêt dense",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Atouts naturels et mise en valeur",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le barrage de Kossou est construit sur le fleuve ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. Étape 1 — Repérer le barrage de Kossou sur la carte, au centre du pays. Étape 2 — Dire sa fonction : produire de l'électricité. Étape 3 — Relever le fleuve alimenté : le Bandama. Étape 4 — Expliquer : l'eau du Bandama fait tourner les turbines. Le Sassandra porte les barrages de Buyo et de Soubré, pas celui de Kossou.",
+              "answers": [
                 {
-                  "content": "Un pays reçoit beaucoup de pluie dans le sud et possède de l'or dans son sous-sol. Mais il n'a ni route ni port pour transporter l'or et les récoltes. Quelle conclusion est juste ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le pays a des atouts naturels, mais il ne les met pas pleinement en valeur sans moyens de transport. Un atout naturel est une chance, pas une garantie. Les routes ne sont pas un atout naturel.",
-                  "answers": [
-                    { "content": "Il a des atouts naturels, mais il ne les met pas pleinement en valeur", "correct": true },
-                    { "content": "Il n'a aucun atout", "correct": false },
-                    { "content": "Ses atouts naturels suffisent à le rendre développé", "correct": false },
-                    { "content": "Les routes sont un atout naturel qui lui manque", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Quels atouts naturels favorisent la culture du cacao et du café dans le sud ? (3 réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La pluie, les sols riches et la chaleur sont des atouts naturels. La main-d'œuvre est un atout humain et le port est une infrastructure : ils aident, mais ils ne sont pas naturels.",
-                  "answers": [
-                    { "content": "Des pluies abondantes", "correct": true },
-                    { "content": "Des sols riches", "correct": true },
-                    { "content": "Une chaleur présente toute l'année", "correct": true },
-                    { "content": "Un climat désertique", "correct": false },
-                    { "content": "Un port en eau profonde", "correct": false },
-                    { "content": "Une main-d'œuvre nombreuse", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Quelles affirmations sur l'eau sont justes ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les fleuves alimentent des barrages et les lagunes ou la mer permettent la pêche. L'eau n'est pas réservée au nord, le barrage est construit par l'homme, et le nord est plus sec que le sud.",
-                  "answers": [
-                    { "content": "Les fleuves peuvent servir à produire de l'électricité grâce à des barrages", "correct": true },
-                    { "content": "Les lagunes et la mer permettent la pêche", "correct": true },
-                    { "content": "L'eau est un atout seulement dans le nord", "correct": false },
-                    { "content": "Un barrage est un atout naturel", "correct": false },
-                    { "content": "Le nord est plus humide que le sud", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : un pays qui possède beaucoup d'atouts naturels est automatiquement un pays développé.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. La terre du planteur ne remplit pas les sacs toute seule. Il faut du travail, des moyens de transport et des règles pour transformer les atouts en richesse.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
-                },
-                {
-                  "content": "Pourquoi cultive-t-on surtout le cacao dans le sud forestier et le coton dans le nord ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le climat et la végétation changent du sud au nord : chaque culture pousse là où les conditions naturelles lui conviennent. Ce n'est ni une loi, ni un manque de routes dans le sud.",
-                  "answers": [
-                    { "content": "Parce que le climat et la végétation ne sont pas les mêmes au sud et au nord", "correct": true },
-                    { "content": "Parce qu'une loi interdit le cacao dans le nord", "correct": false },
-                    { "content": "Parce que le sud n'a pas de routes", "correct": false },
-                    { "content": "Parce que le coton ne rapporte rien", "correct": false }
-                  ]
+                  "content": "Bandama",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Vrai ou faux : la Côte d'Ivoire possède une façade maritime sur le golfe de Guinée.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Étape 1 — Situer la côte au sud de la carte. Étape 2 — Identifier : elle donne sur l'océan Atlantique, dans le golfe de Guinée. Étape 3 — Relever : cette façade mesure environ 550 km. Étape 4 — Relier : elle permet la pêche et le commerce par les ports d'Abidjan et de San Pedro. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Définis le mot « atout » puis cite deux atouts naturels de la Côte d'Ivoire.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Définition correcte : un avantage qui peut aider le pays à se développer",
+                "Deux atouts naturels exacts (climat, sols, fleuves, mer, sous-sol)",
+                "Phrases courtes et claires"
+              ],
+              "explanation": "Corrigé modèle : Un atout est un avantage dont dispose un pays et qui peut l'aider à se développer. Deux atouts naturels de la Côte d'Ivoire sont ses grands fleuves, comme le Sassandra et le Bandama, et son sous-sol, qui renferme de l'or et du manganèse.  Barème : 1 point pour la définition, 0,5 point pour chaque atout naturel exact.",
+              "answers": [],
+              "starter": "Un atout est…"
             }
           ]
         },
         {
-          "name": "Les atouts humains",
-          "subtitle": "Population jeune, main-d'œuvre, savoir-faire et marché intérieur",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Définir la main-d'œuvre et le marché intérieur.</li><li>Citer les atouts humains de la Côte d'Ivoire.</li><li>Distinguer un atout humain d'un atout naturel ou d'une infrastructure.</li></ul><h2>L'image pour comprendre</h2><h3>Image 1 : le jour de la récolte au village</h3><p>Une plantation de cacao arrive à maturité. Si le planteur était seul, les cabosses seraient perdues avant la fin de la récolte. Heureusement, ses enfants, ses voisins et des travailleurs venus d'autres villages, parfois d'autres pays voisins, viennent l'aider. Chacun connaît bien le travail : couper les cabosses, les ouvrir, faire sécher les fèves.</p><p><strong>Le pont.</strong> Les bras qui travaillent, c'est la <strong>main-d'œuvre</strong> : l'ensemble des personnes qui travaillent ou peuvent travailler. Le fait de connaître le travail, c'est le <strong>savoir-faire</strong>. Les travailleurs venus d'ailleurs rappellent que la population du pays est d'origines variées.</p><h3>Image 2 : le grand marché un samedi matin</h3><p>Au marché d'Adjamé, il y a beaucoup de monde. Plus les clients sont nombreux, plus les vendeuses vendent, et plus elles ont envie d'acheter des marchandises à leurs fournisseurs.</p><p><strong>Le pont.</strong> Les clients, ce sont les consommateurs du pays. Leur nombre forme le <strong>marché intérieur</strong> : un pays où beaucoup de gens achètent donne du travail à ceux qui produisent.</p><p><strong>La limite de l'image.</strong> Des bras nombreux ne suffisent pas : une main-d'œuvre est plus utile si elle est formée. Et des clients nombreux ne servent que s'ils ont de quoi acheter.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Les <strong>atouts humains</strong> sont ce que la population apporte au développement économique :</p><ul><li><strong>une population nombreuse et jeune</strong> : la part des jeunes est importante, ce qui fournit beaucoup de personnes en âge de travailler ;</li><li><strong>une main-d'œuvre</strong> qui travaille dans les champs, les usines, les chantiers et les commerces ;</li><li><strong>un savoir-faire</strong> : planteurs expérimentés, artisans, commerçants, techniciens et ingénieurs formés dans les écoles et les grandes écoles du pays, comme l'INP-HB de Yamoussoukro ;</li><li><strong>une population venue d'origines variées</strong> : la Côte d'Ivoire est un pays d'immigration, et des travailleurs venus de la sous-région ont participé à la mise en valeur des plantations et au développement des villes ;</li><li><strong>un marché intérieur</strong> : les habitants, surtout dans les grandes villes comme Abidjan, achètent des produits, ce qui encourage la production.</li></ul><p>Plus la population est <strong>formée</strong>, plus sa valeur est grande.</p></blockquote><h2>Exemple résolu</h2><p><strong>Question.</strong> Une entreprise veut ouvrir une fabrique de jus de fruits. Elle note : (a) beaucoup de jeunes à embaucher, (b) de nombreuses familles en ville qui achètent des boissons, (c) des sols fertiles à proximité. Lesquels sont des atouts humains ?</p><ol><li>Un atout humain vient de la population : travailleurs, savoir-faire, consommateurs.</li><li>(a) Des jeunes à embaucher : c'est de la main-d'œuvre, donc un atout humain.</li><li>(b) Des familles qui achètent : c'est le marché intérieur, donc un atout humain.</li><li>(c) Les sols fertiles viennent de la nature : atout naturel.</li></ol><p><strong>Réponse.</strong> (a) et (b).</p><h2>Le piège à éviter</h2><p>Ne confonds pas le bâtiment et les personnes. Une école est une infrastructure ; les élèves et les diplômés qu'elle forme sont un atout humain. Ne crois pas non plus que le nombre suffit : une population nombreuse est un vrai atout quand elle est formée et active.</p><h2>En une phrase</h2><p>Les atouts humains sont la main-d'œuvre jeune, le savoir-faire, la variété des origines et le marché intérieur formé par les consommateurs.</p>",
-          "exercises": [
+          "title": "Lire l'évolution de la population ivoirienne",
+          "statement": "Document : courbe des recensements officiels de la population de la Côte d'Ivoire, en millions d'habitants, pour les années 1975, 1988, 1998, 2014 et 2021. Tu lis la courbe, tu calcules des évolutions et tu expliques l'atout humain.",
+          "exercise_type": "fixation",
+          "figure": "population-ci",
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître les atouts humains",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Un tableau donne la population de la Côte d'Ivoire aux recensements : 6,7 millions en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014 et 29,4 en 2021. Quelle était la population en 2014, en millions ?",
+              "question_type": "numeric",
+              "unit": "millions",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. Étape 1 — Présenter le document : un tableau de recensements, en millions d'habitants. Étape 2 — Relever la valeur de l'année demandée : 2014. Étape 3 — Lire : 22,7. Étape 4 — Conclure : 22,7 millions en 2014. Attention : 29,4 est le chiffre de 2021 et 15,4 celui de 1998.",
+              "answers": [
                 {
-                  "content": "Que sont les atouts humains d'un pays ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les atouts humains viennent de la population : son travail, son savoir-faire et sa consommation. Le sous-sol est un atout naturel, les routes et les ports sont des infrastructures, les lois sont institutionnelles.",
-                  "answers": [
-                    { "content": "Ce que la population apporte : travail, savoir-faire, consommation", "correct": true },
-                    { "content": "Les richesses du sous-sol", "correct": false },
-                    { "content": "Les routes et les ports", "correct": false },
-                    { "content": "Les lois et les organisations régionales", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : la main-d'œuvre est l'ensemble des personnes qui travaillent ou qui peuvent travailler.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Dans l'image de la récolte, ce sont les bras qui viennent aider le planteur.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Quelles propositions sont des atouts humains ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Une population jeune et des artisans expérimentés viennent des habitants. Le fleuve et la lagune sont des atouts naturels, le port de San-Pédro une infrastructure.",
-                  "answers": [
-                    { "content": "Une population jeune", "correct": true },
-                    { "content": "Des artisans et des planteurs expérimentés", "correct": true },
-                    { "content": "Le fleuve Comoé", "correct": false },
-                    { "content": "Le port de San-Pédro", "correct": false },
-                    { "content": "La lagune Ébrié", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un samedi matin, les clients sont très nombreux au grand marché et les vendeuses vendent beaucoup. Dans l'économie d'un pays, ces clients nombreux représentent :",
-                  "question_type": "single_choice",
-                  "explanation": "Les clients sont les consommateurs : leur nombre forme le marché intérieur. La main-d'œuvre, ce sont les personnes qui travaillent, comme les vendeuses ou les ouvriers.",
-                  "answers": [
-                    { "content": "Le marché intérieur", "correct": true },
-                    { "content": "La main-d'œuvre", "correct": false },
-                    { "content": "Les infrastructures", "correct": false },
-                    { "content": "Les ressources du sous-sol", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Le jour de la récolte du cacao, les enfants et les voisins du planteur viennent l'aider à couper et à sécher les fèves. Dans l'économie d'un pays, ces bras qui travaillent représentent :",
-                  "question_type": "single_choice",
-                  "explanation": "Les bras sont les personnes qui travaillent : c'est la main-d'œuvre. Elle est un atout humain, pas un atout naturel ni une infrastructure.",
-                  "answers": [
-                    { "content": "La main-d'œuvre", "correct": true },
-                    { "content": "Le climat", "correct": false },
-                    { "content": "Les routes", "correct": false },
-                    { "content": "Les lois", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : des travailleurs venus de pays voisins ont participé à la mise en valeur des plantations et au développement des villes de Côte d'Ivoire.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. La Côte d'Ivoire est un pays d'immigration : la main-d'œuvre venue de la sous-région fait partie de ses atouts humains.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "22,7",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Identifier un atout humain",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "La population était de 6,7 millions en 1975 et de 10,8 millions en 1988. De combien de millions a-t-elle augmenté entre ces deux recensements ?",
+              "question_type": "numeric",
+              "unit": "millions",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. Étape 1 — Présenter : on compare deux recensements. Étape 2 — Relever : 6,7 au départ, 10,8 à l'arrivée. Étape 3 — Calculer : 10,8 − 6,7 = 4,1. Étape 4 — Conclure : la population a augmenté de 4,1 millions. Pense à soustraire le chiffre le plus ancien du plus récent.",
+              "answers": [
                 {
-                  "content": "Une région compte beaucoup de jeunes en âge de travailler, prêts à être embauchés. Quel atout humain est-ce ?",
-                  "question_type": "single_choice",
-                  "explanation": "Des jeunes en âge de travailler forment une main-d'œuvre. Ce n'est pas un atout naturel, car il vient de la population, ni une infrastructure, car rien n'est construit.",
-                  "answers": [
-                    { "content": "Une main-d'œuvre jeune", "correct": true },
-                    { "content": "Un climat favorable", "correct": false },
-                    { "content": "Un réseau routier", "correct": false },
-                    { "content": "Un code des investissements", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Un producteur de boissons hésite entre plusieurs villes. Il choisit Abidjan, où vit un très grand nombre d'habitants qui achètent ses produits. Quel atout humain l'attire ?",
-                  "question_type": "single_choice",
-                  "explanation": "De très nombreux consommateurs forment un grand marché intérieur. Le port serait une infrastructure ; les pluies du sud, un atout naturel.",
-                  "answers": [
-                    { "content": "Un grand marché intérieur", "correct": true },
-                    { "content": "Les pluies abondantes", "correct": false },
-                    { "content": "Le port en eau profonde", "correct": false },
-                    { "content": "Les gisements d'or", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Quelles propositions décrivent un atout humain ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les artisans qui maîtrisent leur métier et les ingénieurs formés sont des personnes : atout humain. Le barrage est une infrastructure, le sol fertile un atout naturel, le chemin de fer une infrastructure.",
-                  "answers": [
-                    { "content": "Des artisans qui maîtrisent la menuiserie et la couture", "correct": true },
-                    { "content": "Des ingénieurs formés dans les grandes écoles du pays", "correct": true },
-                    { "content": "Le barrage hydroélectrique de Taabo", "correct": false },
-                    { "content": "Le sol fertile de la forêt", "correct": false },
-                    { "content": "Le chemin de fer Abidjan–Ouagadougou", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Une école professionnelle forme des jeunes à la mécanique. Que représentent le bâtiment de l'école et les jeunes diplômés ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le bâtiment est construit par l'homme : infrastructure. Les jeunes diplômés sont des personnes qui ont un savoir-faire : atout humain. Ne les confonds pas.",
-                  "answers": [
-                    { "content": "Le bâtiment est une infrastructure, les diplômés sont un atout humain", "correct": true },
-                    { "content": "Le bâtiment est un atout humain, les diplômés sont une infrastructure", "correct": false },
-                    { "content": "Les deux sont des atouts naturels", "correct": false },
-                    { "content": "Les deux sont des atouts institutionnels", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : une population nombreuse est toujours un atout, qu'elle soit formée ou non.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Une population est un vrai atout quand elle est formée et active. Des bras nombreux sans formation ne valent pas autant que des travailleurs qui connaissent leur métier.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "4,1",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Les atouts humains en situation",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Parmi ces résultats, lequel est celui du recensement de 2021 pour la Côte d'Ivoire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Présenter : les recensements de 1975 à 2021. Étape 2 — Relever : 2021 est le recensement le plus récent. Étape 3 — Comparer : 29,4 est la plus grande valeur. Étape 4 — Conclure : 29,4 millions en 2021. 22,7 est le résultat de 2014, 15,4 celui de 1998, et 2,94 est dix fois trop petit.",
+              "answers": [
                 {
-                  "content": "Une entreprise veut ouvrir une usine. Quels éléments sont des atouts humains qui l'aident ? (3 réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Des jeunes disponibles, des techniciens formés et des consommateurs nombreux viennent de la population. La pluie est un atout naturel, le port une infrastructure, le code une règle institutionnelle.",
-                  "answers": [
-                    { "content": "Des jeunes disponibles pour travailler", "correct": true },
-                    { "content": "Des techniciens formés", "correct": true },
-                    { "content": "De nombreux consommateurs en ville", "correct": true },
-                    { "content": "Une pluie abondante", "correct": false },
-                    { "content": "Un port en eau profonde", "correct": false },
-                    { "content": "Un code des investissements", "correct": false }
-                  ]
+                  "content": "22,7 millions d'habitants",
+                  "correct": false
                 },
                 {
-                  "content": "Un planteur expérimenté apprend à son fils comment tailler les cacaoyers pour avoir de meilleures récoltes. De quel type d'atout s'agit-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le savoir-faire se transmet entre personnes : c'est un atout humain. Ce n'est pas un atout naturel, car il ne vient pas de la nature, ni une infrastructure.",
-                  "answers": [
-                    { "content": "Un atout humain : le savoir-faire", "correct": true },
-                    { "content": "Un atout naturel", "correct": false },
-                    { "content": "Une infrastructure", "correct": false },
-                    { "content": "Un atout institutionnel", "correct": false }
-                  ]
+                  "content": "29,4 millions d'habitants",
+                  "correct": true
                 },
                 {
-                  "content": "Pourquoi un grand nombre de consommateurs attire-t-il des entreprises dans un pays ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un marché intérieur large permet de vendre sur place, comme les vendeuses du marché le samedi. Les consommateurs ne fournissent pas de matières premières et ne remplacent pas la main-d'œuvre.",
-                  "answers": [
-                    { "content": "Parce que les entreprises peuvent y vendre facilement leurs produits", "correct": true },
-                    { "content": "Parce que les consommateurs fournissent les matières premières", "correct": false },
-                    { "content": "Parce que les consommateurs remplacent la main-d'œuvre", "correct": false },
-                    { "content": "Parce que cela supprime le besoin de routes", "correct": false }
-                  ]
+                  "content": "15,4 millions d'habitants",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux : la formation des jeunes augmente la valeur de la main-d'œuvre d'un pays.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Des travailleurs formés produisent mieux et plus vite. Le nombre compte, mais la formation compte aussi.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Quelles affirmations sur les atouts humains sont justes ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les atouts humains regroupent main-d'œuvre, savoir-faire et consommateurs, et ils valent plus quand la population est formée. Ils ne se limitent pas au nombre d'habitants et ne concernent pas que les agriculteurs.",
-                  "answers": [
-                    { "content": "Ils comprennent la main-d'œuvre, le savoir-faire et les consommateurs", "correct": true },
-                    { "content": "Leur valeur dépend aussi de la formation de la population", "correct": true },
-                    { "content": "Ils se limitent au nombre d'habitants", "correct": false },
-                    { "content": "Ils remplacent les atouts naturels", "correct": false },
-                    { "content": "Ils ne concernent que les agriculteurs", "correct": false }
-                  ]
+                  "content": "2,94 millions d'habitants",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Vrai ou faux : entre 1975 et 2021, la population de la Côte d'Ivoire a diminué.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Étape 1 — Présenter : la courbe des recensements. Étape 2 — Relever : 6,7 millions en 1975 et 29,4 millions en 2021. Étape 3 — Comparer : 29,4 est plus grand que 6,7. Étape 4 — Conclure : la population a augmenté. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles propositions sont des atouts humains ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. Étape 1 — Lire chaque élément. Étape 2 — Chercher son origine : la jeunesse et la main-d'œuvre viennent de la population. Étape 3 — Classer : ce sont des atouts humains. Étape 4 — Justifier : ils apportent des bras et des consommateurs. Le port est une infrastructure ; le manganèse et le fleuve sont des atouts naturels.",
+              "answers": [
+                {
+                  "content": "Une population jeune",
+                  "correct": true
+                },
+                {
+                  "content": "Le port de San Pedro",
+                  "correct": false
+                },
+                {
+                  "content": "Une main-d'œuvre nombreuse",
+                  "correct": true
+                },
+                {
+                  "content": "Le manganèse du sous-sol",
+                  "correct": false
+                },
+                {
+                  "content": "Le fleuve Cavally",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À l'aide des recensements (6,7 millions en 1975, 15,4 en 1998 et 29,4 en 2021), décris en trois phrases l'évolution de la population ivoirienne et explique en quoi c'est un atout.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Cite au moins deux chiffres exacts avec leur année",
+                "Dit que la population augmente de recensement en recensement",
+                "Explique l'atout : main-d'œuvre et consommateurs",
+                "Rappelle qu'un nombre élevé ne suffit pas sans emplois"
+              ],
+              "explanation": "Corrigé modèle : La population de la Côte d'Ivoire est passée de 6,7 millions d'habitants en 1975 à 15,4 millions en 1998, puis à 29,4 millions en 2021. Elle augmente donc à chaque recensement. C'est un atout humain, car elle fournit de la main-d'œuvre et des consommateurs, mais il faut des emplois et de la formation pour en profiter. Barème (3 points) : 1 point pour les deux chiffres exacts avec leur année, 0,5 point pour l'évolution, 1 point pour l'explication de l'atout, 0,5 point pour le rappel qu'un nombre élevé ne suffit pas sans emplois.",
+              "answers": [],
+              "starter": "La population est passée de…"
             }
           ]
         },
         {
-          "name": "Les atouts infrastructurels",
-          "subtitle": "Ports, routes, rail, aéroports, barrages et réseaux de communication",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Définir une infrastructure.</li><li>Citer les principales infrastructures de transport, d'énergie et de communication de la Côte d'Ivoire.</li><li>Distinguer un atout naturel d'une infrastructure qui l'utilise.</li></ul><h2>L'image pour comprendre</h2><h3>Image 1 : de la plantation au bateau</h3><p>Le planteur a rempli ses sacs de fèves de cacao. Sur la piste en mauvais état, le camion avance lentement et les sacs s'abîment. Sur la route bitumée, le même camion arrive vite jusqu'au port, où un bateau attend de partir. Le trajet entier dépend de ce que l'homme a construit.</p><p><strong>Le pont.</strong> La route bitumée et le port sont des <strong>infrastructures de transport</strong>. Elles relient la plantation aux acheteurs du monde entier.</p><h3>Image 2 : l'atelier du couturier</h3><p>Dans l'atelier d'un couturier, la machine à coudre ne tourne que si le courant arrive par le fil, et les clients passent commande par téléphone. Sans courant et sans réseau, l'atelier s'arrête, même avec un couturier habile.</p><p><strong>Le pont.</strong> Le courant qui arrive, c'est l'énergie produite par les centrales et les barrages. Le téléphone et internet sont les <strong>réseaux de communication</strong>.</p><p><strong>La limite de l'image.</strong> Une infrastructure ne tombe pas du ciel : elle est construite, puis entretenue, et cela coûte cher. Elle n'est un atout que si elle fonctionne et relie vraiment les lieux de production aux lieux de vente.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Une <strong>infrastructure</strong> est un équipement construit par l'homme qui permet de produire, de transporter ou de communiquer.</p><ul><li><strong>Les ports</strong> : le port autonome d'Abidjan, l'un des grands ports d'Afrique de l'Ouest, et le port de San-Pédro, au sud-ouest, tourné vers l'exportation du cacao et du bois. Le port d'Abidjan sert aussi aux pays voisins sans accès à la mer (pays enclavés), comme le Mali et le Burkina Faso.</li><li><strong>Les routes et le rail</strong> : un réseau routier, dont l'autoroute entre Abidjan et Yamoussoukro, et le chemin de fer qui relie Abidjan à Ouagadougou, au Burkina Faso.</li><li><strong>Les aéroports</strong> : l'aéroport international d'Abidjan, à Port-Bouët, et d'autres aéroports dans le pays.</li><li><strong>L'énergie</strong> : des barrages hydroélectriques (Kossou, Taabo, Ayamé, Buyo, Soubré) et des centrales qui fonctionnent au gaz. Le pays peut vendre de l'électricité à ses voisins.</li><li><strong>Les communications</strong> : réseaux de téléphonie mobile et d'internet.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Question.</strong> Un exportateur doit envoyer du cacao de Daloa vers l'Europe. Quelles infrastructures utilise-t-il, dans l'ordre ?</p><ol><li>Le cacao part de Daloa, dans l'intérieur du pays : il faut le transporter par la route.</li><li>Le camion l'emmène vers un port, par exemple celui d'Abidjan ou celui de San-Pédro.</li><li>Au port, le cacao est chargé sur un bateau qui traverse l'océan.</li></ol><p><strong>Réponse.</strong> D'abord les routes, puis le port.</p><h2>Le piège à éviter</h2><p>Ne confonds pas l'atout naturel et l'infrastructure qui s'appuie sur lui. Le Bandama est un fleuve (atout naturel), le barrage de Kossou est construit sur lui (infrastructure). La lagune ou la mer sont naturelles, le port est construit. Une infrastructure est toujours faite par l'homme.</p><h2>En une phrase</h2><p>Les ports, les routes, le rail, les aéroports, les barrages et les réseaux de communication sont des infrastructures construites par l'homme qui relient les producteurs aux acheteurs.</p>",
-          "exercises": [
+          "title": "Du cacao à l'exportation : combiner les atouts",
+          "statement": "Situation : une entreprise veut ouvrir une usine de transformation de cacao près du port de San Pedro, dans le sud-ouest de la Côte d'Ivoire. Tu utilises la carte pour montrer quels atouts sont nécessaires.",
+          "exercise_type": "evaluation",
+          "figure": "carte-ci-atouts",
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître les infrastructures",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Une entreprise veut ouvrir une usine de transformation de cacao à San Pedro. Quel atout naturel explique d'abord la production de cacao dans le sud-ouest ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier l'atout de départ : le cacao pousse dans le sud forestier. Étape 2 — Chercher l'origine : ce sont le climat équatorial et les sols riches. Étape 3 — Combiner : les planteurs, les routes et le port viennent ensuite. Étape 4 — Conclure : l'atout naturel est le point de départ. Le nord a de la savane et pas de désert ivoirien ; l'or et le rail ne produisent pas le cacao.",
+              "answers": [
                 {
-                  "content": "Qu'est-ce qu'une infrastructure ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une infrastructure est construite par l'homme (route, port, barrage). Une richesse naturelle ne l'est pas, et la qualité de la main-d'œuvre ou une loi ne sont pas des équipements construits.",
-                  "answers": [
-                    { "content": "Un équipement construit par l'homme pour produire, transporter ou communiquer", "correct": true },
-                    { "content": "Une richesse offerte par la nature", "correct": false },
-                    { "content": "La qualité de la main-d'œuvre", "correct": false },
-                    { "content": "Une loi qui protège les investisseurs", "correct": false }
-                  ]
+                  "content": "Le climat chaud et pluvieux et les sols riches de la forêt",
+                  "correct": true
                 },
                 {
-                  "content": "Quelles propositions sont des infrastructures de transport ? (3 réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le port de San-Pédro, le chemin de fer Abidjan–Ouagadougou et l'aéroport d'Abidjan sont construits pour transporter. Le fleuve et la forêt sont naturels, l'UEMOA est une organisation.",
-                  "answers": [
-                    { "content": "Le port de San-Pédro", "correct": true },
-                    { "content": "Le chemin de fer Abidjan–Ouagadougou", "correct": true },
-                    { "content": "L'aéroport d'Abidjan", "correct": true },
-                    { "content": "Le fleuve Bandama", "correct": false },
-                    { "content": "La forêt", "correct": false },
-                    { "content": "L'UEMOA", "correct": false }
-                  ]
+                  "content": "Les mines d'or du nord",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux : le barrage de Kossou est une infrastructure qui produit de l'électricité.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. C'est un barrage hydroélectrique construit sur le Bandama : il utilise la force de l'eau pour produire de l'électricité.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Le désert du nord",
+                  "correct": false
                 },
                 {
-                  "content": "Un planteur de cacao envoie ses sacs par camion sur une route bitumée jusqu'au port, où un bateau les attend. Dans l'économie d'un pays, cette route bitumée représente :",
-                  "question_type": "single_choice",
-                  "explanation": "La route est construite par l'homme pour transporter : c'est une infrastructure de transport. Elle ne vient pas de la nature, et ce n'est ni une loi ni un savoir-faire.",
-                  "answers": [
-                    { "content": "Une infrastructure de transport", "correct": true },
-                    { "content": "Un atout naturel", "correct": false },
-                    { "content": "Un atout humain", "correct": false },
-                    { "content": "Un atout institutionnel", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Pourquoi dit-on que le port d'Abidjan est utile à des pays comme le Mali et le Burkina Faso ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ces pays n'ont pas de côte : ils passent par un port voisin pour leurs importations et exportations. Le port ne se trouve pas chez eux et ne produit pas leur électricité.",
-                  "answers": [
-                    { "content": "Parce que ces pays n'ont pas accès à la mer et utilisent ce port pour leur commerce", "correct": true },
-                    { "content": "Parce que ce port se trouve sur leur territoire", "correct": false },
-                    { "content": "Parce qu'il produit leur électricité", "correct": false },
-                    { "content": "Parce qu'ils y cultivent leur cacao", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : un barrage hydroélectrique produit de l'électricité grâce à la force de l'eau.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. L'eau retenue puis lâchée fait tourner des turbines, qui produisent le courant. Le fleuve est l'atout naturel ; le barrage, l'infrastructure.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Le chemin de fer vers le Burkina Faso",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Choisir l'infrastructure adaptée",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelles propositions sont des infrastructures utiles à cette usine ? (3 réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode détaillée. Étape 1 — Repérer sur la carte les constructions : le port de San Pedro et le barrage de Soubré. Étape 2 — Dire leur fonction : exporter, transporter et produire de l'électricité. Étape 3 — Relever ce qu'elles relient : l'usine, les plantations et la mer. Étape 4 — Expliquer : sans port, sans routes ni énergie, l'usine ne fonctionne pas. Les routes ne figurent pas sur la carte, mais ce sont aussi des infrastructures, construites par l'homme. Le climat et la forêt sont des atouts naturels.",
+              "answers": [
                 {
-                  "content": "Un exportateur veut envoyer du café vers l'Europe par bateau. Quelle infrastructure est indispensable à la fin du trajet en Côte d'Ivoire ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le café doit être chargé sur un navire dans un port, comme les sacs de cacao dans l'image. Un barrage produit de l'électricité mais ne charge aucun bateau.",
-                  "answers": [
-                    { "content": "Un port", "correct": true },
-                    { "content": "Un barrage", "correct": false },
-                    { "content": "Une école", "correct": false },
-                    { "content": "Un réseau téléphonique", "correct": false }
-                  ]
+                  "content": "Le port de San Pedro",
+                  "correct": true
                 },
                 {
-                  "content": "Une usine de transformation a installé ses machines. De quelle infrastructure a-t-elle besoin pour les faire tourner ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les machines ont besoin d'énergie : réseau électrique, centrales et barrages. Le port, l'aéroport et le rail servent au transport, pas à faire tourner les machines.",
-                  "answers": [
-                    { "content": "Un réseau électrique alimenté par des centrales ou des barrages", "correct": true },
-                    { "content": "Un port", "correct": false },
-                    { "content": "Un aéroport", "correct": false },
-                    { "content": "Un chemin de fer", "correct": false }
-                  ]
+                  "content": "Le climat équatorial",
+                  "correct": false
                 },
                 {
-                  "content": "Quelles propositions sont des infrastructures ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'autoroute et le barrage de Taabo sont construits par l'homme. La lagune et la forêt de Taï sont naturelles, la jeunesse est un atout humain.",
-                  "answers": [
-                    { "content": "L'autoroute entre Abidjan et Yamoussoukro", "correct": true },
-                    { "content": "Le barrage de Taabo", "correct": true },
-                    { "content": "La lagune Ébrié", "correct": false },
-                    { "content": "La jeunesse de la population", "correct": false },
-                    { "content": "La forêt de Taï", "correct": false }
-                  ]
+                  "content": "Les routes",
+                  "correct": true
                 },
                 {
-                  "content": "Le Bandama est un fleuve, et le barrage de Kossou est construit sur lui. Comment classer chacun ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le fleuve existe sans l'homme : atout naturel. Le barrage est construit par l'homme pour profiter du fleuve : infrastructure.",
-                  "answers": [
-                    { "content": "Le fleuve est un atout naturel, le barrage est une infrastructure", "correct": true },
-                    { "content": "Le fleuve est une infrastructure, le barrage est un atout naturel", "correct": false },
-                    { "content": "Les deux sont des atouts naturels", "correct": false },
-                    { "content": "Les deux sont des atouts humains", "correct": false }
-                  ]
+                  "content": "La forêt dense",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux : le chemin de fer qui relie Abidjan à Ouagadougou est une infrastructure de transport reliant la Côte d'Ivoire à un pays voisin.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Cette ligne relie la Côte d'Ivoire au Burkina Faso. Le chemin de fer sert surtout au transport de marchandises et relie le port d'Abidjan aux pays voisins.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Le barrage de Soubré",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Infrastructures et mise en valeur",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Remets dans l'ordre la chaîne qui mène du cacao à l'exportation.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier le point de départ : la récolte, car il faut des fèves. Étape 2 — Chercher ce qui manque ensuite : un transport par la route vers la ville portuaire. Étape 3 — Combiner : la transformation à l'usine a lieu avant l'exportation. Étape 4 — Conclure : récolter, transporter, transformer, exporter.",
+              "answers": [
                 {
-                  "content": "Pour exporter des fèves de cacao, quelles infrastructures sont utiles ? (3 réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les routes, le port et le chemin de fer sont construits pour transporter. La pluie est un atout naturel, les paysans un atout humain, la monnaie commune un atout institutionnel.",
-                  "answers": [
-                    { "content": "Des routes bitumées", "correct": true },
-                    { "content": "Un port en eau profonde", "correct": true },
-                    { "content": "Un chemin de fer", "correct": true },
-                    { "content": "La pluie abondante", "correct": false },
-                    { "content": "Des paysans expérimentés", "correct": false },
-                    { "content": "Une monnaie commune avec les voisins", "correct": false }
-                  ]
+                  "content": "Récolter les fèves de cacao"
                 },
                 {
-                  "content": "Un pays a de riches plantations et des paysans nombreux, mais aucune route entre les champs et le port. Que lui manque-t-il pour que ces atouts profitent à l'économie ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les atouts naturels et humains existent déjà : il manque des infrastructures de transport pour relier les champs au port, comme la route bitumée de l'image.",
-                  "answers": [
-                    { "content": "Des infrastructures de transport", "correct": true },
-                    { "content": "De nouveaux atouts naturels", "correct": false },
-                    { "content": "Plus de pluie", "correct": false },
-                    { "content": "Plus de fleuves", "correct": false }
-                  ]
+                  "content": "Transporter les fèves par la route vers San Pedro"
                 },
                 {
-                  "content": "Vrai ou faux : les infrastructures sont des atouts naturels parce qu'elles se trouvent dans le pays.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux. Une infrastructure est construite par l'homme, alors qu'un atout naturel est offert par la nature. Se trouver dans le pays ne suffit pas à rendre une chose naturelle.",
-                  "answers": [
-                    { "content": "Vrai", "correct": false },
-                    { "content": "Faux", "correct": true }
-                  ]
+                  "content": "Transformer les fèves dans l'usine"
                 },
                 {
-                  "content": "Pourquoi un bon réseau d'électricité attire-t-il des entreprises dans un pays ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les usines et les ateliers ont besoin d'énergie pour fonctionner, comme la machine du couturier. L'électricité ne remplace ni la main-d'œuvre, ni les cultures, ni le port.",
-                  "answers": [
-                    { "content": "Parce que les usines ont besoin d'énergie pour fonctionner", "correct": true },
-                    { "content": "Parce que l'électricité remplace toute la main-d'œuvre", "correct": false },
-                    { "content": "Parce que l'électricité fait pousser les cultures", "correct": false },
-                    { "content": "Parce qu'elle rend le port inutile", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Quelles affirmations sur le port d'Abidjan sont justes ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le port d'Abidjan est un grand port de la côte atlantique et sert aussi aux pays voisins enclavés. C'est une infrastructure construite, il n'est pas à San-Pédro, et il ne sert pas qu'au cacao.",
-                  "answers": [
-                    { "content": "Il est un des grands ports d'Afrique de l'Ouest", "correct": true },
-                    { "content": "Il sert aussi aux pays voisins qui n'ont pas accès à la mer", "correct": true },
-                    { "content": "C'est un atout naturel, car la mer est naturelle", "correct": false },
-                    { "content": "Il est situé à San-Pédro", "correct": false },
-                    { "content": "Il sert uniquement à exporter du cacao", "correct": false }
-                  ]
+                  "content": "Exporter les produits par le port"
                 }
               ]
+            },
+            {
+              "content": "Vrai ou faux : en général, transformer le cacao sur place permet de gagner davantage que de vendre seulement les fèves.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier : le cacao est une matière première. Étape 2 — Chercher ce qui peut lui donner plus de valeur : la transformation. Étape 3 — Combiner : usine, énergie, port et main-d'œuvre. Étape 4 — Conclure : un produit transformé se vend en général plus cher qu'une matière brute. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans un village, les fèves de cacao restent sur place faute de route. Que montre cette situation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Identifier l'atout de départ : la production de cacao. Étape 2 — Chercher ce qui manque : une route. Étape 3 — Combiner : il faudrait associer la route au sol et aux planteurs. Étape 4 — Conclure : un atout naturel ne suffit pas sans infrastructures. Les autres propositions sont des conclusions fausses que la situation ne permet pas de tirer.",
+              "answers": [
+                {
+                  "content": "Que le cacao n'est pas un atout",
+                  "correct": false
+                },
+                {
+                  "content": "Que la pluie est un défaut du climat",
+                  "correct": false
+                },
+                {
+                  "content": "Qu'un atout naturel ne suffit pas sans infrastructures",
+                  "correct": true
+                },
+                {
+                  "content": "Que la population n'est pas un atout",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En un paragraphe d'environ cinq lignes, explique pourquoi la Côte d'Ivoire doit combiner plusieurs atouts pour se développer. Appuie-toi sur l'exemple du cacao.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Identifie les atouts naturels du cacao (climat, sols)",
+                "Cite un atout humain (planteurs, main-d'œuvre)",
+                "Cite au moins une infrastructure (routes, port de San Pedro)",
+                "Conclut qu'un atout seul ne suffit pas"
+              ],
+              "explanation": "Corrigé modèle : Le cacao pousse grâce au climat chaud et pluvieux et aux sols riches du sud, qui sont des atouts naturels. Mais ces atouts ne suffisent pas. Il faut des planteurs pour récolter les fèves, des routes pour les transporter et le port de San Pedro pour les exporter. Si une de ces conditions manque, la récolte ne rapporte rien. La Côte d'Ivoire doit donc combiner atouts naturels, atouts humains et infrastructures. Barème : 1 point par critère.",
+              "answers": []
             }
           ]
         },
         {
-          "name": "Les atouts institutionnels",
-          "subtitle": "Règles et organisations régionales. À compléter : chiffres, détails du code des investissements.",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Définir un atout institutionnel.</li><li>Citer des exemples : cadre juridique, paix et sécurité, organisations régionales.</li><li>Classer un exemple parmi les quatre types d'atouts : naturels, humains, infrastructurels, institutionnels.</li></ul><h2>L'image pour comprendre</h2><h3>Image 1 : le tournoi de football du quartier</h3><p>Le quartier organise un tournoi. Le règlement est connu de tous, un arbitre sanctionne les fautes et le calendrier est affiché. Les équipes s'inscrivent avec confiance, car elles savent que le match sera juste et que le vainqueur sera désigné selon les règles.</p><p><strong>Le pont.</strong> Le tournoi, c'est l'économie du pays. Le règlement, ce sont les lois et le code des investissements. L'arbitre, ce sont l'État et la justice qui font respecter les règles. Les équipes, ce sont les entreprises et les investisseurs, qui viennent quand ils savent que les règles sont claires.</p><h3>Image 2 : les commerçants de quartiers voisins</h3><p>Les commerçants de plusieurs quartiers voisins s'entendent : ils utilisent la même monnaie, et ils se déplacent et vendent sans payer de droit à chaque rue. Chacun vend à plus de clients, pour moins de frais.</p><p><strong>Le pont.</strong> Les quartiers voisins, ce sont les pays d'Afrique de l'Ouest. La monnaie commune et la circulation sans droit à chaque rue, c'est ce que permettent les organisations régionales comme la CEDEAO et l'UEMOA.</p><p><strong>La limite de l'image.</strong> Des règles ne servent à rien si elles ne sont pas appliquées, et une organisation régionale ne remplace pas les efforts du pays lui-même.</p><h2>Ce qu'il faut retenir</h2><blockquote><p>Les <strong>atouts institutionnels</strong> sont le cadre politique, juridique et économique qui facilite les activités économiques :</p><ul><li><strong>un État organisé</strong> : un gouvernement, une administration et une justice qui garantissent la sécurité des personnes et des biens et le respect des règles. La paix et la sécurité sont des conditions nécessaires pour que les entreprises s'installent ;</li><li><strong>un cadre juridique favorable aux investisseurs</strong> : un code des investissements et un droit des affaires commun à plusieurs pays africains, celui de l'OHADA (Organisation pour l'harmonisation en Afrique du droit des affaires) ;</li><li><strong>l'appartenance à des organisations régionales</strong> : la CEDEAO (Communauté économique des États de l'Afrique de l'Ouest) élargit les échanges entre voisins, et l'UEMOA (Union économique et monétaire ouest-africaine) partage une monnaie commune, le franc CFA, avec une banque centrale commune, la BCEAO ;</li><li><strong>des plans et des politiques de développement</strong> : l'État fixe des objectifs et des projets pour orienter l'économie.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Question.</strong> Un investisseur étranger note : (a) une loi protège les investisseurs, (b) une monnaie commune existe avec les pays voisins, (c) un port en eau profonde est disponible, (d) beaucoup de jeunes sont à la recherche d'un emploi. Lesquels sont des atouts institutionnels ?</p><ol><li>Un atout institutionnel est une règle ou une organisation : loi, monnaie commune, organisation régionale.</li><li>(a) Une loi : atout institutionnel.</li><li>(b) La monnaie commune de l'UEMOA : atout institutionnel.</li><li>(c) Le port est construit : infrastructure.</li><li>(d) Les jeunes sont des habitants : atout humain.</li></ol><p><strong>Réponse.</strong> (a) et (b).</p><h2>Le piège à éviter</h2><p>Ne confonds pas la règle et le bâtiment qui l'abrite. Une loi est un atout institutionnel ; le bâtiment du ministère est une infrastructure. Ne crois pas non plus qu'une loi suffit : un atout institutionnel n'aide l'économie que si les règles sont réellement appliquées.</p><h2>En une phrase</h2><p>Les atouts institutionnels sont les règles, les institutions et les organisations régionales qui rassurent les entreprises et facilitent les échanges.</p>",
-          "exercises": [
+          "title": "Lire la carte des atouts de la Côte d'Ivoire",
+          "statement": "Document : carte de la Côte d'Ivoire montrant la forêt dense au sud et la savane au nord, les ports d'Abidjan et de San Pedro, les barrages de Kossou, Taabo, Buyo, Soubré et Ayamé et la voie ferrée d'Abidjan vers Ouagadougou. Tu lis le document et tu rédigeras une synthèse.",
+          "exercise_type": "evaluation",
+          "figure": "carte-ci-atouts",
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître les atouts institutionnels",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Relie chaque lieu ivoirien à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. Étape 1 — Situer chaque lieu sur la carte. Étape 2 — Identifier sa nature : port, barrage, ville ou capitale. Étape 3 — Relever sa fonction : San Pedro exporte, Kossou produit de l'électricité, Bouaké est une ville du centre sur la voie ferrée, Yamoussoukro est la capitale politique. Étape 4 — Relier au développement : chacun aide à produire ou à échanger.",
+              "answers": [
                 {
-                  "content": "Que sont les atouts institutionnels d'un pays ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ce sont les règles, institutions et organisations qui encadrent et facilitent l'économie, comme le règlement du tournoi. Les routes sont des infrastructures et les fleuves sont des atouts naturels.",
-                  "answers": [
-                    { "content": "Les règles, les institutions et les organisations qui encadrent et facilitent l'économie", "correct": true },
-                    { "content": "Les routes et les ports", "correct": false },
-                    { "content": "Les fleuves et les forêts", "correct": false },
-                    { "content": "Les travailleurs et les consommateurs", "correct": false }
-                  ]
+                  "content": "San Pedro",
+                  "match": "Port du sud-ouest"
                 },
                 {
-                  "content": "Quelles propositions sont des atouts institutionnels ? (3 réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "L'UEMOA, les lois protégeant les investissements et le droit des affaires commun (OHADA) sont des règles ou des organisations. Le barrage est une infrastructure, le fleuve un atout naturel, les artisans un atout humain.",
-                  "answers": [
-                    { "content": "L'appartenance à l'UEMOA", "correct": true },
-                    { "content": "Des lois qui protègent les investissements", "correct": true },
-                    { "content": "Un droit des affaires commun à plusieurs pays africains (OHADA)", "correct": true },
-                    { "content": "Le barrage de Buyo", "correct": false },
-                    { "content": "Le fleuve Sassandra", "correct": false },
-                    { "content": "Le savoir-faire des artisans", "correct": false }
-                  ]
+                  "content": "Kossou",
+                  "match": "Barrage sur le fleuve Bandama"
                 },
                 {
-                  "content": "Vrai ou faux : la Côte d'Ivoire partage sa monnaie, le franc CFA, avec d'autres pays membres de l'UEMOA.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. L'UEMOA est une union économique et monétaire : ses membres partagent une monnaie commune, ce qui facilite les échanges.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Bouaké",
+                  "match": "Ville du centre traversée par la voie ferrée"
                 },
                 {
-                  "content": "Dans un tournoi de quartier, le règlement est connu de tous et un arbitre sanctionne les fautes. Dans l'économie d'un pays, le règlement et l'arbitre représentent :",
-                  "question_type": "single_choice",
-                  "explanation": "Le règlement, ce sont les lois ; l'arbitre, ce sont l'État et la justice qui les font respecter. Les équipes, elles, sont les entreprises.",
-                  "answers": [
-                    { "content": "Les lois et les institutions qui les font respecter", "correct": true },
-                    { "content": "Les entreprises et les investisseurs", "correct": false },
-                    { "content": "Les routes et les ports", "correct": false },
-                    { "content": "Les richesses du sous-sol", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Que signifie le sigle UEMOA ?",
-                  "question_type": "single_choice",
-                  "explanation": "UEMOA veut dire Union économique et monétaire ouest-africaine. C'est une organisation régionale d'Afrique de l'Ouest avec une monnaie commune, et non une organisation européenne ou maghrébine.",
-                  "answers": [
-                    { "content": "Union économique et monétaire ouest-africaine", "correct": true },
-                    { "content": "Union européenne des marchés ouest-atlantiques", "correct": false },
-                    { "content": "Union économique du Maghreb arabe", "correct": false },
-                    { "content": "Union des ouvriers et marchands de l'Ouest africain", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : la CEDEAO est une organisation régionale d'Afrique de l'Ouest dont la Côte d'Ivoire est membre.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. La CEDEAO, Communauté économique des États de l'Afrique de l'Ouest, vise à faciliter les échanges entre pays voisins.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "Yamoussoukro",
+                  "match": "Capitale politique"
                 }
               ]
             },
             {
-              "title": "Appliquer — Identifier l'atout institutionnel",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Document : carte de la Côte d'Ivoire avec une voie ferrée qui part d'Abidjan, passe par Bouaké et Ferkessédougou et se prolonge vers Ouagadougou. À quoi sert cette ligne ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. Étape 1 — Présenter le document : la carte montre une voie ferrée. Étape 2 — Dire la fonction : transporter par rail. Étape 3 — Relever ce qu'elle relie : Abidjan, Bouaké, Ferkessédougou, puis Ouagadougou au-delà de la carte. Étape 4 — Expliquer : elle facilite le commerce avec le Burkina Faso. Produire de l'électricité est le rôle des barrages.",
+              "answers": [
                 {
-                  "content": "Un commerçant d'Abidjan achète à un fournisseur d'un autre pays de l'UEMOA et paie sans changer de monnaie. Quel atout institutionnel en profite ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les pays de l'UEMOA partagent une monnaie commune, le franc CFA, ce qui simplifie les paiements entre eux. Ce n'est ni un atout naturel ni une infrastructure.",
-                  "answers": [
-                    { "content": "La monnaie commune de l'UEMOA", "correct": true },
-                    { "content": "Le climat du sud", "correct": false },
-                    { "content": "Le port d'Abidjan", "correct": false },
-                    { "content": "La jeunesse de la population", "correct": false }
-                  ]
+                  "content": "À produire de l'électricité",
+                  "correct": false
                 },
                 {
-                  "content": "Un investisseur veut être sûr que les règles seront claires et qu'une justice pourra trancher en cas de conflit avec un partenaire. À quel type d'atout est-il sensible ?",
-                  "question_type": "single_choice",
-                  "explanation": "Des règles claires et une justice font partie du cadre juridique : atout institutionnel. Comme l'arbitre du tournoi, la justice fait respecter le règlement.",
-                  "answers": [
-                    { "content": "Les atouts institutionnels", "correct": true },
-                    { "content": "Les atouts naturels", "correct": false },
-                    { "content": "Les infrastructures de transport", "correct": false },
-                    { "content": "Les atouts humains", "correct": false }
-                  ]
+                  "content": "À transporter des marchandises et des voyageurs entre le port d'Abidjan et le Burkina Faso",
+                  "correct": true
                 },
                 {
-                  "content": "Quelles propositions sont des atouts institutionnels ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Un code des investissements est un texte de loi et la CEDEAO une organisation régionale. Le port est une infrastructure, les sols fertiles sont un atout naturel, la jeunesse est un atout humain.",
-                  "answers": [
-                    { "content": "Un code des investissements", "correct": true },
-                    { "content": "L'appartenance à la CEDEAO", "correct": true },
-                    { "content": "Le port de San-Pédro", "correct": false },
-                    { "content": "Les sols fertiles de la forêt", "correct": false },
-                    { "content": "La jeunesse de la population", "correct": false }
-                  ]
+                  "content": "À pêcher dans le golfe de Guinée",
+                  "correct": false
                 },
                 {
-                  "content": "Vrai ou faux : appartenir à une organisation régionale comme la CEDEAO peut ouvrir un plus grand marché aux entreprises d'un pays.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Comme les commerçants qui vendent chez les voisins sans payer de droit à chaque rue, les entreprises atteignent plus de clients quand les échanges entre voisins sont facilités.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Des commerçants de quartiers voisins utilisent la même monnaie et vendent chez leurs voisins sans payer de droit à chaque rue. Que représentent la monnaie commune et la circulation sans droit à chaque rue ?",
-                  "question_type": "single_choice",
-                  "explanation": "Ils représentent ce que permettent les organisations régionales comme la CEDEAO et l'UEMOA : des échanges facilités et une monnaie commune. Ce ne sont ni des richesses du sous-sol ni des habitants.",
-                  "answers": [
-                    { "content": "Les avantages des organisations régionales, comme la CEDEAO et l'UEMOA", "correct": true },
-                    { "content": "Les richesses du sous-sol", "correct": false },
-                    { "content": "La main-d'œuvre du pays", "correct": false },
-                    { "content": "Les barrages du pays", "correct": false }
-                  ]
+                  "content": "À protéger la forêt dense",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Les quatre types d'atouts réunis",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Quelles productions agricoles sont surtout liées à la savane du nord de la Côte d'Ivoire ? (2 réponses)",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. Étape 1 — Situer le nord sur la carte. Étape 2 — Identifier : climat tropical, savane. Étape 3 — Relever les cultures : coton et anacarde (noix de cajou). Étape 4 — Relier : ces cultures donnent des revenus au nord. Le cacao et l'hévéa sont plutôt des cultures du sud forestier.",
+              "answers": [
                 {
-                  "content": "Un pays vote un bon code des investissements, mais personne n'applique ses règles. Quelle conclusion est juste ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un atout institutionnel n'aide l'économie que si les règles sont appliquées, comme un règlement de tournoi sans arbitre. Écrire une loi ne suffit pas, et elle ne remplace pas les autres atouts.",
-                  "answers": [
-                    { "content": "Un atout institutionnel n'est efficace que si les règles sont appliquées", "correct": true },
-                    { "content": "Écrire une loi suffit à attirer les investisseurs", "correct": false },
-                    { "content": "Un code des investissements est un atout naturel", "correct": false },
-                    { "content": "Un code des investissements remplace les infrastructures", "correct": false }
-                  ]
+                  "content": "Le coton",
+                  "correct": true
                 },
                 {
-                  "content": "Un investisseur étudie le cadre institutionnel de la Côte d'Ivoire. Quels éléments relèvent de ce cadre ? (3 réponses)",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les lois, les organisations régionales et la sécurité garantie par l'État forment le cadre institutionnel. La pluie est naturelle, le port est une infrastructure, la jeunesse est un atout humain.",
-                  "answers": [
-                    { "content": "Des lois et un code des investissements", "correct": true },
-                    { "content": "L'appartenance à l'UEMOA et à la CEDEAO", "correct": true },
-                    { "content": "La paix et la sécurité garanties par l'État", "correct": true },
-                    { "content": "Les pluies abondantes", "correct": false },
-                    { "content": "Un port en eau profonde", "correct": false },
-                    { "content": "Une population jeune", "correct": false }
-                  ]
+                  "content": "Le cacao",
+                  "correct": false
                 },
                 {
-                  "content": "Lequel de ces éléments est un atout infrastructurel et non un atout institutionnel ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le port d'Abidjan est construit : c'est une infrastructure. L'OHADA, la CEDEAO et le code des investissements sont des règles ou des organisations.",
-                  "answers": [
-                    { "content": "Le port d'Abidjan", "correct": true },
-                    { "content": "L'OHADA", "correct": false },
-                    { "content": "La CEDEAO", "correct": false },
-                    { "content": "Le code des investissements", "correct": false }
-                  ]
+                  "content": "L'anacarde",
+                  "correct": true
                 },
                 {
-                  "content": "Quelles affirmations sont justes ? (2 réponses)",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Une monnaie commune facilite les échanges et les organisations régionales élargissent le marché. Les atouts institutionnels ne sont pas dans le sous-sol, l'UEMOA est en Afrique de l'Ouest et une loi n'est pas une infrastructure.",
-                  "answers": [
-                    { "content": "La monnaie commune facilite les échanges avec les voisins de l'UEMOA", "correct": true },
-                    { "content": "Les organisations régionales élargissent le marché des entreprises", "correct": true },
-                    { "content": "Les atouts institutionnels sont des richesses du sous-sol", "correct": false },
-                    { "content": "L'UEMOA est une organisation de pays d'Europe de l'Est", "correct": false },
-                    { "content": "Une loi est une infrastructure", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Le fleuve Bandama, la population jeune, l'autoroute Abidjan–Yamoussoukro et le code des investissements sont respectivement :",
-                  "question_type": "single_choice",
-                  "explanation": "Le fleuve est offert par la nature, la population jeune est un atout humain, l'autoroute est construite, le code est une règle. Les autres ordres mélangent les quatre types.",
-                  "answers": [
-                    { "content": "Naturel, humain, infrastructurel, institutionnel", "correct": true },
-                    { "content": "Humain, naturel, institutionnel, infrastructurel", "correct": false },
-                    { "content": "Infrastructurel, humain, naturel, institutionnel", "correct": false },
-                    { "content": "Naturel, institutionnel, humain, infrastructurel", "correct": false }
-                  ]
-                },
-                {
-                  "content": "Vrai ou faux : les atouts naturels, humains, infrastructurels et institutionnels se complètent pour favoriser le développement économique.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai. Sur la plantation, la terre (naturel), les bras (humain), la route (infrastructure) et les règles du jeu (institutionnel) agissent ensemble. Un seul ne suffit pas.",
-                  "answers": [
-                    { "content": "Vrai", "correct": true },
-                    { "content": "Faux", "correct": false }
-                  ]
+                  "content": "L'hévéa",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "La capitale politique de la Côte d'Ivoire est ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. Étape 1 — Situer la ville au centre du pays. Étape 2 — Identifier : c'est la capitale politique. Étape 3 — Relever la différence : Abidjan est la capitale économique. Étape 4 — Relier : ne pas confondre les deux fonctions. La réponse est Yamoussoukro.",
+              "answers": [
+                {
+                  "content": "Yamoussoukro",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Cite deux infrastructures ivoiriennes de la carte et explique en une phrase le rôle de chacune dans l'économie.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Deux infrastructures exactes (port, barrage, chemin de fer, route)",
+                "Un rôle correct pour la première",
+                "Un rôle correct pour la seconde"
+              ],
+              "explanation": "Corrigé modèle : Le port d'Abidjan permet d'importer et d'exporter des marchandises par la mer. Le barrage de Kossou produit de l'électricité pour les usines et les habitations. Barème : 1 point par infrastructure exacte et 0,5 point par rôle correct.",
+              "answers": [],
+              "starter": "Le port d'Abidjan sert à…"
+            },
+            {
+              "content": "Montre en un paragraphe que la Côte d'Ivoire dispose d'atouts naturels, humains, politiques et d'infrastructures, mais qu'ils doivent être mis en valeur.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Cite un atout naturel exact",
+                "Cite un atout humain exact avec le chiffre de 2021",
+                "Cite un atout politique et une infrastructure",
+                "Explique qu'un atout est une chance et non une garantie"
+              ],
+              "explanation": "Corrigé modèle : La Côte d'Ivoire a des atouts naturels, comme le climat, les fleuves et le sous-sol. Elle a un atout humain avec une population jeune de 29,4 millions d'habitants en 2021. Elle bénéficie d'une stabilité recherchée et d'infrastructures comme les ports d'Abidjan et de San Pedro et les barrages. Mais un atout est une chance, pas une garantie : il faut le mettre en valeur avec du travail, de l'énergie et des routes. Barème : 1 point par atout, 1 point pour la conclusion.",
+              "answers": []
             }
           ]
         }
