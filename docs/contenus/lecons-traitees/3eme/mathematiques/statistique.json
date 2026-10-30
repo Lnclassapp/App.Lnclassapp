@@ -1,0 +1,1349 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Statistique",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "batons-notes",
+          "kind": "stat_chart",
+          "description": "Diagramme en bâtons des notes sur 10 de 20 élèves d'une classe de 3ème. Chaque bâton correspond à une note (5, 6, 7 ou 8) et sa hauteur donne l'effectif : 4, 8, 5 et 3 élèves. Le bâton le plus haut est celui de la note 6. On lit les effectifs sur l'axe vertical.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              4,
+              8,
+              5,
+              3
+            ],
+            "labels": [
+              "5",
+              "6",
+              "7",
+              "8"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "histogramme-cacao",
+          "kind": "stat_chart",
+          "description": "Histogramme des récoltes de cacao, en kilogrammes, de 20 planteurs d'un village. Les classes [0 ; 10[, [10 ; 20[ et [20 ; 30[ ont la même amplitude 10. Les rectangles ont pour hauteur les effectifs 4, 6 et 10. Le rectangle le plus haut est celui de la classe [20 ; 30[.",
+          "params": {
+            "chart": "histogram",
+            "series": [
+              4,
+              6,
+              10
+            ],
+            "labels": [
+              "[0 ; 10[",
+              "[10 ; 20[",
+              "[20 ; 30["
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "circulaire-ventes",
+          "kind": "stat_chart",
+          "description": "Diagramme circulaire des ventes annuelles de la coopérative, en tonnes : cacao 120, café 60, anacarde 40 et autres produits 20, soit 240 tonnes en tout. Chaque secteur a un angle proportionnel à la quantité vendue : 180°, 90°, 60° et 30°. Le secteur du cacao occupe la moitié du disque.",
+          "params": {
+            "chart": "pie",
+            "series": [
+              120,
+              60,
+              40,
+              20
+            ],
+            "labels": [
+              "Cacao",
+              "Café",
+              "Anacarde",
+              "Autres"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "batons-sacs",
+          "kind": "stat_chart",
+          "description": "Diagramme en bâtons du nombre de sacs de cacao vendus par jour par la coopérative pendant 20 jours. Les valeurs sont 20, 25, 30, 40 et 50 sacs, avec les effectifs 2, 6, 7, 4 et 1 jours. Le bâton le plus haut est celui de 30 sacs. Les effectifs se lisent sur l'axe vertical.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              2,
+              6,
+              7,
+              4,
+              1
+            ],
+            "labels": [
+              "20",
+              "25",
+              "30",
+              "40",
+              "50"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Dresser le tableau des effectifs et des fréquences",
+          "remember": "Une série statistique est l'ensemble des valeurs prises par un **caractère** (la note, la récolte, le prix…). L'**effectif** d'une valeur est le nombre de fois où elle apparaît ; l'**effectif total** $N$ est la somme des effectifs. La **fréquence** d'une valeur est $\\dfrac{\\text{effectif}}{N}$ : c'est un nombre compris entre 0 et 1, que l'on écrit souvent en pourcentage (on multiplie par 100). La somme des fréquences vaut 1, soit 100 %.",
+          "method": [
+            "Repérer le caractère étudié et la liste de ses valeurs.",
+            "Compter l'effectif de chaque valeur, puis additionner pour obtenir l'effectif total $N$.",
+            "Calculer la fréquence de chaque valeur : l'effectif divisé par l'effectif total $N$.",
+            "Vérifier que la somme des effectifs est $N$ et que la somme des fréquences est 1 (ou 100 %)."
+          ],
+          "example": {
+            "statement": "Voici les notes sur 10 de 20 élèves de 3ème : 5 ; 7 ; 6 ; 5 ; 8 ; 6 ; 7 ; 6 ; 5 ; 8 ; 6 ; 7 ; 6 ; 5 ; 7 ; 6 ; 8 ; 6 ; 7 ; 6. Dresser le tableau des effectifs et des fréquences.",
+            "steps": [
+              "Repérer : le caractère est la note sur 10 ; les valeurs sont 5, 6, 7 et 8.",
+              "Compter : 5 apparaît 4 fois, 6 apparaît 8 fois, 7 apparaît 5 fois, 8 apparaît 3 fois, donc $N = 4 + 8 + 5 + 3 = 20$.",
+              "Calculer : $\\frac{4}{20} = 0{,}2$ ; $\\frac{8}{20} = 0{,}4$ ; $\\frac{5}{20} = 0{,}25$ ; $\\frac{3}{20} = 0{,}15$, soit 20 %, 40 %, 25 % et 15 %.",
+              "Vérifier : $4 + 8 + 5 + 3 = 20$ et $20 + 40 + 25 + 15 = 100$ %, donc le tableau est juste."
+            ]
+          },
+          "pitfall": "Ne divise pas par le nombre de valeurs différentes : divise par l'**effectif total** $N$. Contre-exemple : dans une série de 20 élèves et 4 valeurs, une valeur d'effectif 8 a pour fréquence $\\frac{8}{20} = 0{,}4$, et non $\\frac{8}{4} = 2$. Une fréquence ne dépasse jamais 1 : si tu trouves 2, tu t'es trompé de diviseur.",
+          "figure": "batons-notes",
+          "exercise": {
+            "title": "Effectifs et fréquences d'une série de notes",
+            "statement": "Dans cet exercice, tu dresses des tableaux d'effectifs et de fréquences avec la méthode de la fiche de révision.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans une classe de 25 élèves, 5 élèves ont obtenu 12 sur 20. Quelle est la fréquence de la note 12 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le caractère est la note, la valeur étudiée est 12. Étape 2 — Compter : l'effectif de 12 est 5 et l'effectif total est $N = 25$. Étape 3 — Calculer : $\\frac{5}{25} = 0{,}2$, soit 20 %. Étape 4 — Vérifier : une fréquence est entre 0 et 1, c'est bien le cas. Piège : 5 % vient de l'effectif 5 écrit directement en pourcentage, et 500 % de la division $\\frac{25}{5}$ à l'envers.",
+                "answers": [
+                  {
+                    "content": "20 %",
+                    "correct": true
+                  },
+                  {
+                    "content": "5 %",
+                    "correct": false
+                  },
+                  {
+                    "content": "500 %",
+                    "correct": false
+                  },
+                  {
+                    "content": "25 %",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une série d'effectif total 40, une valeur a pour effectif 10. Sa fréquence est 0,25. Vrai ou faux ?",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Compter : l'effectif de la valeur est 10 et l'effectif total est $N = 40$. Étape 3 — Calculer : $\\frac{10}{40} = 0{,}25$. L'affirmation est donc vraie. Étape 4 — Vérifier : $0{,}25 = 25$ %, et 10 élèves sur 40 représentent bien un quart de la série.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Voici les notes sur 20 de 10 élèves : 8 ; 10 ; 10 ; 12 ; 8 ; 10 ; 12 ; 10 ; 14 ; 10. Quel est l'effectif de la note 10 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les valeurs sont 8, 10, 12 et 14. Étape 2 — Compter : 8 apparaît 2 fois, 10 apparaît 5 fois, 12 apparaît 2 fois, 14 apparaît 1 fois, donc $N = 2 + 5 + 2 + 1 = 10$. L'effectif de 10 est 5. Étape 4 — Vérifier : la somme des effectifs est bien $N = 10$. L'erreur 10 est l'effectif total, et 4 vient d'un oubli lors du comptage.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  },
+                  {
+                    "content": "4",
+                    "correct": false
+                  },
+                  {
+                    "content": "10",
+                    "correct": false
+                  },
+                  {
+                    "content": "2",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une coopérative interroge 50 planteurs. Les valeurs du tableau ont pour effectifs 10, 20, 15 et 5. Quelles fréquences sont correctes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Compter : $N = 10 + 20 + 15 + 5 = 50$. Étape 3 — Calculer : $\\frac{10}{50} = 0{,}2 = 20$ %, $\\frac{20}{50} = 0{,}4 = 40$ %, $\\frac{15}{50} = 0{,}3 = 30$ % et $\\frac{5}{50} = 0{,}1 = 10$ %. Les deux premières propositions sont vraies. Étape 4 — Vérifier : $20 + 40 + 30 + 10 = 100$ %. Piège : écrire 15 % ou 5 % revient à recopier l'effectif au lieu de le diviser par 50.",
+                "answers": [
+                  {
+                    "content": "La valeur d'effectif 10 a pour fréquence 20 %",
+                    "correct": true
+                  },
+                  {
+                    "content": "La valeur d'effectif 20 a pour fréquence 40 %",
+                    "correct": true
+                  },
+                  {
+                    "content": "La valeur d'effectif 15 a pour fréquence 15 %",
+                    "correct": false
+                  },
+                  {
+                    "content": "La valeur d'effectif 5 a pour fréquence 5 %",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une série d'effectif total 20 qui compte 4 valeurs différentes, une valeur a pour effectif 8. Quelle est sa fréquence ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Compter : l'effectif de la valeur est 8, l'effectif total est $N = 20$ (et non 4, qui est le nombre de valeurs différentes). Étape 3 — Calculer : $\\frac{8}{20} = 0{,}4$. Étape 4 — Vérifier : une fréquence est comprise entre 0 et 1 ; 2 et 8 sont impossibles. La proposition 2 vient de la division $\\frac{8}{4}$, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "0,4",
+                    "correct": true
+                  },
+                  {
+                    "content": "2",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,5",
+                    "correct": false
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer une moyenne pondérée",
+          "remember": "La **moyenne** d'une série dont les valeurs $x_1, x_2, \\dots$ ont les effectifs $n_1, n_2, \\dots$ est $\\dfrac{n_1 x_1 + n_2 x_2 + \\dots}{N}$, où $N$ est l'effectif total. Si les valeurs sont regroupées en **classes** $[a\\,;\\,b[$, on remplace chaque classe par son **centre** $\\dfrac{a+b}{2}$ : la moyenne obtenue est une valeur approchée.",
+          "method": [
+            "Multiplier chaque valeur (ou chaque centre de classe) par son effectif.",
+            "Additionner tous les produits obtenus.",
+            "Calculer l'effectif total $N$.",
+            "Diviser la somme des produits par l'effectif total $N$."
+          ],
+          "example": {
+            "statement": "Les notes sur 10 de 20 élèves sont : 5 (effectif 4), 6 (effectif 8), 7 (effectif 5) et 8 (effectif 3). Calculer la moyenne.",
+            "steps": [
+              "Multiplier : $5 \\times 4 = 20$ ; $6 \\times 8 = 48$ ; $7 \\times 5 = 35$ ; $8 \\times 3 = 24$.",
+              "Additionner : $20 + 48 + 35 + 24 = 127$.",
+              "Calculer l'effectif total : $N = 4 + 8 + 5 + 3 = 20$.",
+              "Diviser : $\\frac{127}{20} = 6{,}35$. La moyenne de la classe est 6,35 sur 10."
+            ]
+          },
+          "pitfall": "Ne calcule pas la moyenne des valeurs sans tenir compte des effectifs. Contre-exemple : avec 5 (effectif 4), 6 (effectif 8), 7 (effectif 5) et 8 (effectif 3), $\\frac{5+6+7+8}{4} = 6{,}5$, alors que la vraie moyenne est 6,35. Chaque valeur compte autant de fois que son effectif : il faut **multiplier d'abord**, puis diviser par $N$, jamais par le nombre de valeurs.",
+          "figure": "histogramme-cacao",
+          "exercise": {
+            "title": "Calculer des moyennes pondérées",
+            "statement": "Dans cet exercice, tu calcules des moyennes avec la méthode de la fiche de révision, pour des notes puis pour des récoltes de cacao.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une série a pour valeurs 10 (effectif 2), 12 (effectif 3) et 15 (effectif 5). Quelle est sa moyenne ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Multiplier : $10 \\times 2 = 20$ ; $12 \\times 3 = 36$ ; $15 \\times 5 = 75$. Étape 2 — Additionner : $20 + 36 + 75 = 131$. Étape 3 — Calculer l'effectif total : $N = 2 + 3 + 5 = 10$. Étape 4 — Diviser : $\\frac{131}{10} = 13{,}1$. Piège : 12,33 est la moyenne simple $\\frac{10+12+15}{3}$, qui oublie les effectifs ; 131 est la somme non divisée.",
+                "answers": [
+                  {
+                    "content": "13,1",
+                    "correct": true
+                  },
+                  {
+                    "content": "12,33",
+                    "correct": false
+                  },
+                  {
+                    "content": "131",
+                    "correct": false
+                  },
+                  {
+                    "content": "13",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La récolte de cacao de 20 planteurs est regroupée en classes (en kg) : $[0\\,;\\,10[$ effectif 4, $[10\\,;\\,20[$ effectif 6, $[20\\,;\\,30[$ effectif 10. Quelle est la moyenne approchée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Multiplier chaque centre de classe par son effectif : les centres sont 5, 15 et 25, donc $5 \\times 4 = 20$ ; $15 \\times 6 = 90$ ; $25 \\times 10 = 250$. Étape 2 — Additionner : $20 + 90 + 250 = 360$. Étape 3 — Calculer l'effectif total : $N = 4 + 6 + 10 = 20$. Étape 4 — Diviser : $\\frac{360}{20} = 18$ kg. Piège : 15 est la moyenne simple des centres, 25 le centre de la classe la plus fréquente.",
+                "answers": [
+                  {
+                    "content": "18 kg",
+                    "correct": true
+                  },
+                  {
+                    "content": "15 kg",
+                    "correct": false
+                  },
+                  {
+                    "content": "25 kg",
+                    "correct": false
+                  },
+                  {
+                    "content": "360 kg",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour calculer la moyenne d'une série regroupée en classes, on remplace chaque classe par sa borne supérieure. Vrai ou faux ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Multiplier : on multiplie l'effectif de chaque classe par le **centre** de la classe, c'est-à-dire la moyenne de ses deux bornes, par exemple 15 pour $[10\\,;\\,20[$. Utiliser la borne supérieure (20) donnerait une moyenne trop grande. L'affirmation est donc fausse. Les étapes 2, 3 et 4 (additionner, calculer $N$, diviser) restent les mêmes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une série a pour valeurs 2 (effectif 3), 6 (effectif 1) et 10 (effectif 1). Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Multiplier : $2 \\times 3 = 6$ ; $6 \\times 1 = 6$ ; $10 \\times 1 = 10$. Étape 2 — Additionner : $6 + 6 + 10 = 22$. Étape 3 — Calculer l'effectif total : $N = 3 + 1 + 1 = 5$. Étape 4 — Diviser : $\\frac{22}{5} = 4{,}4$. Les trois premières propositions sont vraies. Piège : 3 est le nombre de valeurs, et 6 est la moyenne simple $\\frac{2+6+10}{3}$, qui ignore les effectifs.",
+                "answers": [
+                  {
+                    "content": "La somme des produits valeur × effectif vaut 22",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'effectif total vaut 5",
+                    "correct": true
+                  },
+                  {
+                    "content": "La moyenne vaut 4,4",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'effectif total vaut 3",
+                    "correct": false
+                  },
+                  {
+                    "content": "La moyenne vaut 6",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une série a pour valeurs 5 (effectif 1) et 15 (effectif 3). Quelle est sa moyenne ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Multiplier : $5 \\times 1 = 5$ ; $15 \\times 3 = 45$. Étape 2 — Additionner : $5 + 45 = 50$. Étape 3 — Calculer l'effectif total : $N = 1 + 3 = 4$. Étape 4 — Diviser : $\\frac{50}{4} = 12{,}5$. Le piège est la proposition 10, moyenne simple $\\frac{5+15}{2}$ : elle ne tient pas compte du fait que 15 apparaît trois fois.",
+                "answers": [
+                  {
+                    "content": "12,5",
+                    "correct": true
+                  },
+                  {
+                    "content": "10",
+                    "correct": false
+                  },
+                  {
+                    "content": "50",
+                    "correct": false
+                  },
+                  {
+                    "content": "15",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer le mode et l'étendue",
+          "remember": "Le **mode** d'une série est la valeur qui a le plus grand effectif ; une série peut avoir plusieurs modes. Pour une série en classes de même amplitude, la **classe modale** est la classe de plus grand effectif. L'**étendue** est la différence entre la plus grande et la plus petite valeur : $\\text{étendue} = \\text{valeur maximale} - \\text{valeur minimale}$.",
+          "method": [
+            "Repérer le plus grand effectif du tableau.",
+            "Lire la valeur (ou la classe) qui correspond à cet effectif : c'est le mode (ou la classe modale).",
+            "Calculer l'étendue en soustrayant la plus petite valeur de la plus grande."
+          ],
+          "example": {
+            "statement": "Les notes sur 10 de 20 élèves sont : 5 (effectif 4), 6 (effectif 8), 7 (effectif 5) et 8 (effectif 3). Donner le mode et l'étendue.",
+            "steps": [
+              "Repérer : le plus grand effectif du tableau est 8.",
+              "Lire : l'effectif 8 correspond à la note 6, donc le mode est 6.",
+              "Calculer : la plus grande note est 8, la plus petite est 5, donc l'étendue est $8 - 5 = 3$."
+            ]
+          },
+          "pitfall": "Le mode est une **valeur**, pas un effectif. Contre-exemple : dans la série 5 (effectif 4), 6 (effectif 8), 7 (effectif 5), 8 (effectif 3), le mode est 6 et non 8, car 8 est l'effectif de la note 6. De même, l'étendue est une différence : $8 - 5 = 3$, jamais la somme $8 + 5 = 13$.",
+          "figure": "batons-notes",
+          "exercise": {
+            "title": "Mode et étendue d'une série",
+            "statement": "Dans cet exercice, tu cherches le mode, la classe modale et l'étendue avec la méthode de la fiche de révision.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une série a pour valeurs 10 (effectif 3), 12 (effectif 9) et 14 (effectif 5). Quel est son mode ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le plus grand effectif est 9. Étape 2 — Lire la valeur qui correspond : l'effectif 9 est celui de la valeur 12, donc le mode est 12. Piège : 9 est l'effectif du mode, pas le mode ; 14 est la plus grande valeur, pas la plus fréquente.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  },
+                  {
+                    "content": "9",
+                    "correct": false
+                  },
+                  {
+                    "content": "14",
+                    "correct": false
+                  },
+                  {
+                    "content": "10",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Cinq élèves ont obtenu les notes 4 ; 17 ; 9 ; 12 ; 8. Quelle est l'étendue de cette série ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer l'étendue : la plus grande note est 17, la plus petite est 4, donc l'étendue est $17 - 4 = 13$. Les étapes 1 et 2 ne servent pas ici, car on ne cherche pas le mode. Piège : 21 est la somme $17 + 4$ ; 17 est la plus grande valeur, pas l'écart.",
+                "answers": [
+                  {
+                    "content": "13",
+                    "correct": true
+                  },
+                  {
+                    "content": "21",
+                    "correct": false
+                  },
+                  {
+                    "content": "9",
+                    "correct": false
+                  },
+                  {
+                    "content": "17",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une série peut avoir deux modes. Vrai ou faux ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le plus grand effectif : il peut apparaître pour deux valeurs différentes. Étape 2 — Lire les valeurs correspondantes : chacune est un mode. Exemple : 5 (effectif 6) et 7 (effectif 6) sont deux modes. L'affirmation est donc vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une coopérative note le nombre de sacs vendus par jour : 20 (effectif 4), 25 (effectif 11), 30 (effectif 11) et 40 (effectif 2). Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : le plus grand effectif est 11, et il apparaît deux fois. Étape 2 — Lire : les valeurs 25 et 30 ont l'effectif 11, ce sont deux modes. Étape 3 — Calculer l'étendue : $40 - 20 = 20$, donc 60 est faux (c'est la somme $40 + 20$). Piège : 11 est un effectif, pas un mode ; et la plus grande valeur 40 n'est pas la plus fréquente (effectif 2).",
+                "answers": [
+                  {
+                    "content": "25 est un mode",
+                    "correct": true
+                  },
+                  {
+                    "content": "30 est un mode",
+                    "correct": true
+                  },
+                  {
+                    "content": "11 est le mode",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'étendue vaut 60",
+                    "correct": false
+                  },
+                  {
+                    "content": "40 est le mode, car c'est la plus grande valeur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une série a pour valeurs 1 (effectif 12), 2 (effectif 3) et 3 (effectif 5). Quel est son mode ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le plus grand effectif est 12. Étape 2 — Lire : cet effectif est celui de la valeur 1, donc le mode est 1. Piège de la fiche : répondre 12, qui est l'effectif et non la valeur. 3 est la plus grande valeur et 2 la valeur du milieu : aucune n'est la plus fréquente.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  },
+                  {
+                    "content": "12",
+                    "correct": false
+                  },
+                  {
+                    "content": "3",
+                    "correct": false
+                  },
+                  {
+                    "content": "2",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer la médiane",
+          "remember": "La **médiane** partage une série rangée dans l'ordre croissant en deux groupes de même effectif. Si l'effectif total $N$ est impair, c'est la valeur de rang $\\frac{N+1}{2}$. Si $N$ est pair, c'est la moyenne des valeurs de rang $\\frac{N}{2}$ et $\\frac{N}{2}+1$. L'**effectif cumulé croissant** d'une valeur est la somme des effectifs de cette valeur et des valeurs plus petites ; il aide à trouver un rang.",
+          "method": [
+            "Ranger les valeurs dans l'ordre croissant et écrire les effectifs cumulés croissants.",
+            "Calculer l'effectif total $N$ et repérer le ou les rangs du milieu.",
+            "Lire la valeur de ce rang (si $N$ est impair) ou les deux valeurs centrales (si $N$ est pair).",
+            "Conclure : la médiane est la valeur centrale, ou la moyenne des deux valeurs centrales."
+          ],
+          "example": {
+            "statement": "Les notes sur 10 de 20 élèves sont : 5 (effectif 4), 6 (effectif 8), 7 (effectif 5) et 8 (effectif 3). Déterminer la médiane.",
+            "steps": [
+              "Ranger : les notes sont déjà croissantes ; les effectifs cumulés croissants sont 4 ; 12 ; 17 ; 20.",
+              "Calculer $N = 20$, qui est pair : les rangs du milieu sont $\\frac{20}{2} = 10$ et $11$.",
+              "Lire : les rangs 5 à 12 correspondent à la note 6, donc les 10e et 11e notes valent toutes les deux 6.",
+              "Conclure : la médiane est $\\frac{6 + 6}{2} = 6$."
+            ]
+          },
+          "pitfall": "Ne prends jamais le milieu de la liste avant de l'avoir **rangée**. Contre-exemple : la liste 9 ; 3 ; 7 ; 1 ; 5 a pour valeur du milieu 7, mais une fois rangée (1 ; 3 ; 5 ; 7 ; 9), sa médiane est 5. Quand $N$ est pair, il y a deux valeurs centrales : on fait leur moyenne.",
+          "figure": null,
+          "exercise": {
+            "title": "Médiane d'une série de notes",
+            "statement": "Dans cet exercice, tu détermines des médianes avec la méthode de la fiche de révision.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Cinq élèves ont obtenu les notes 12 ; 8 ; 15 ; 10 ; 9. Quelle est la médiane de cette série ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Ranger dans l'ordre croissant : 8 ; 9 ; 10 ; 12 ; 15. Étape 2 — Calculer $N = 5$, impair : le rang du milieu est $\\frac{5+1}{2} = 3$. Étape 3 — Lire la valeur de rang 3 : c'est 10. Étape 4 — Conclure : la médiane est 10. Piège : 15 est le milieu de la liste non rangée ; il faut d'abord ranger.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  },
+                  {
+                    "content": "15",
+                    "correct": false
+                  },
+                  {
+                    "content": "12",
+                    "correct": false
+                  },
+                  {
+                    "content": "9",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quatre élèves ont obtenu les notes 6 ; 14 ; 10 ; 8. Quelle est la médiane ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Ranger : 6 ; 8 ; 10 ; 14. Étape 2 — Calculer $N = 4$, pair : les rangs du milieu sont 2 et 3. Étape 3 — Lire les deux valeurs centrales : 8 et 10. Étape 4 — Conclure : la médiane est $\\frac{8 + 10}{2} = 9$. Piège : 8 ou 10 oublient la moyenne des deux valeurs centrales ; 9,5 est la moyenne de toute la série $\\frac{38}{4}$, pas la médiane.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  },
+                  {
+                    "content": "10",
+                    "correct": false
+                  },
+                  {
+                    "content": "9,5",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour une série de 15 valeurs rangées dans l'ordre croissant, la médiane est la valeur de rang 8. Vrai ou faux ?",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer $N = 15$, qui est impair : le rang du milieu est $\\frac{15+1}{2} = 8$. Étape 3 — Lire la valeur de rang 8 : elle a 7 valeurs avant elle et 7 après. Étape 4 — Conclure : la médiane est cette valeur de rang 8. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une série a pour valeurs 10 (effectif 5), 12 (effectif 7) et 14 (effectif 8). Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Ranger avec les effectifs cumulés croissants : 5 ; 12 ; 20. Étape 2 — Calculer $N = 5 + 7 + 8 = 20$, pair : les rangs du milieu sont 10 et 11. Étape 3 — Lire : les rangs 6 à 12 correspondent à la valeur 12, donc les 10e et 11e valeurs valent 12. Étape 4 — Conclure : la médiane est $\\frac{12+12}{2} = 12$. Piège : 12,3 est la moyenne de la série, et 14 est la plus grande valeur.",
+                "answers": [
+                  {
+                    "content": "L'effectif total vaut 20",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les rangs du milieu sont 10 et 11",
+                    "correct": true
+                  },
+                  {
+                    "content": "La médiane vaut 12",
+                    "correct": true
+                  },
+                  {
+                    "content": "La médiane vaut 14",
+                    "correct": false
+                  },
+                  {
+                    "content": "La médiane vaut 12,3",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Cinq élèves ont obtenu les notes 18 ; 6 ; 14 ; 10 ; 7. Quelle est la médiane ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Ranger : 6 ; 7 ; 10 ; 14 ; 18. Étape 2 — Calculer $N = 5$, impair : le rang du milieu est 3. Étape 3 — Lire la valeur de rang 3 : c'est 10. Étape 4 — Conclure : la médiane est 10. Piège de la fiche : 14 est la valeur du milieu de la liste non rangée ; 11 est la moyenne $\\frac{55}{5}$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  },
+                  {
+                    "content": "14",
+                    "correct": false
+                  },
+                  {
+                    "content": "11",
+                    "correct": false
+                  },
+                  {
+                    "content": "7",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Lire et construire un diagramme",
+          "remember": "Un **diagramme en bâtons** représente des valeurs isolées : la hauteur d'un bâton est l'effectif. Un **histogramme** représente des classes de même amplitude : la hauteur d'un rectangle est l'effectif. Un **diagramme circulaire** représente les parts d'un tout : l'angle d'un secteur est proportionnel à l'effectif, avec $\\text{angle} = \\dfrac{\\text{effectif}}{N} \\times 360^\\circ$. Les angles d'un diagramme circulaire ont pour somme $360^\\circ$.",
+          "method": [
+            "Identifier le type de série : valeurs isolées, classes ou parts d'un tout.",
+            "Choisir le diagramme : bâtons, histogramme ou circulaire.",
+            "Calculer la mesure de chaque élément : la hauteur est l'effectif, et l'angle est $\\frac{\\text{effectif}}{N} \\times 360^\\circ$.",
+            "Tracer chaque élément avec une échelle régulière, puis ajouter le titre et la légende."
+          ],
+          "example": {
+            "statement": "Une coopérative a vendu 120 t de cacao, 60 t de café, 40 t d'anacarde et 20 t d'autres produits. Représenter ces ventes.",
+            "steps": [
+              "Identifier : on compare des parts d'un tout de $N = 240$ tonnes vendues.",
+              "Choisir : le diagramme circulaire convient aux parts d'un tout.",
+              "Calculer les angles : cacao $\\frac{120}{240} \\times 360 = 180^\\circ$ ; café $90^\\circ$ ; anacarde $60^\\circ$ ; autres $30^\\circ$. Somme : $360^\\circ$.",
+              "Tracer les quatre secteurs avec le rapporteur, puis écrire le titre « Ventes de la coopérative » et la légende des produits."
+            ]
+          },
+          "pitfall": "Ne mets pas l'effectif directement comme angle : l'angle se calcule avec $N$. Contre-exemple : un effectif de 20 sur un total de 80 correspond à $\\frac{20}{80} \\times 360 = 90^\\circ$, et non à $20^\\circ$. Pour t'assurer que ton diagramme circulaire est juste, additionne les angles : tu dois trouver exactement $360^\\circ$.",
+          "figure": "circulaire-ventes",
+          "exercise": {
+            "title": "Diagrammes en bâtons, histogrammes et circulaires",
+            "statement": "Dans cet exercice, tu choisis et construis des diagrammes avec la méthode de la fiche de révision. Les ventes de la coopérative sont : cacao 120 t, café 60 t, anacarde 40 t, autres 20 t.",
+            "exercise_type": "fixation",
+            "figure": "circulaire-ventes",
+            "questions": [
+              {
+                "content": "Dans une série d'effectif total 40, une valeur a pour effectif 10. Quel est l'angle de son secteur dans un diagramme circulaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer la mesure : $\\frac{10}{40} \\times 360 = 0{,}25 \\times 360 = 90^\\circ$. Les étapes 1 et 2 sont déjà données : on a des parts d'un tout, donc un diagramme circulaire. Piège : 10° est l'effectif recopié comme angle ; 36° vient de la division $\\frac{360}{10}$.",
+                "answers": [
+                  {
+                    "content": "90°",
+                    "correct": true
+                  },
+                  {
+                    "content": "10°",
+                    "correct": false
+                  },
+                  {
+                    "content": "36°",
+                    "correct": false
+                  },
+                  {
+                    "content": "144°",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La taille de 60 planteurs est regroupée en classes de même amplitude : $[150\\,;\\,160[$, $[160\\,;\\,170[$, $[170\\,;\\,180[$. Quel diagramme est le plus adapté ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : les données sont regroupées en classes. Étape 2 — Choisir : pour des classes de même amplitude, on choisit l'histogramme. Le diagramme en bâtons sert pour des valeurs isolées, et le diagramme circulaire pour les parts d'un tout. Étape 3 — Calculer ensuite la hauteur de chaque rectangle : c'est l'effectif de la classe.",
+                "answers": [
+                  {
+                    "content": "Un histogramme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un diagramme en bâtons",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un diagramme circulaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les ventes d'une coopérative sont : cacao 120 t, café 60 t, anacarde 40 t, autres produits 20 t. Quel est l'angle du secteur du café dans un diagramme circulaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : ce sont des parts d'un tout, avec $N = 120 + 60 + 40 + 20 = 240$ t. Étape 2 — Choisir : diagramme circulaire. Étape 3 — Calculer : $\\frac{60}{240} \\times 360 = 90^\\circ$. Piège : 60° recopie la quantité de café ; 180° est l'angle du cacao.",
+                "answers": [
+                  {
+                    "content": "90°",
+                    "correct": true
+                  },
+                  {
+                    "content": "60°",
+                    "correct": false
+                  },
+                  {
+                    "content": "180°",
+                    "correct": false
+                  },
+                  {
+                    "content": "150°",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les ventes d'une coopérative sont : cacao 120 t, café 60 t, anacarde 40 t, autres produits 20 t, dans un diagramme circulaire. Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Calculer avec $N = 240$ : cacao $\\frac{120}{240} \\times 360 = 180^\\circ$ ; café $90^\\circ$ ; anacarde $\\frac{40}{240} \\times 360 = 60^\\circ$ ; autres $\\frac{20}{240} \\times 360 = 30^\\circ$. Étape 4 — Tracer puis vérifier : $180 + 90 + 60 + 30 = 360^\\circ$. Piège : 40° et 20° sont les tonnes recopiées comme angles.",
+                "answers": [
+                  {
+                    "content": "Le secteur du cacao mesure 180°",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les angles des quatre secteurs ont pour somme 360°",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le secteur de l'anacarde mesure 40°",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le secteur des autres produits mesure 20°",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une série d'effectif total 80, une valeur d'effectif 20 est représentée par un secteur de 20° dans un diagramme circulaire. Ce tracé est correct. Vrai ou faux ?",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer l'angle : $\\frac{20}{80} \\times 360 = 90^\\circ$, et non 20°. Le tracé est donc faux : l'angle ne se lit pas directement sur l'effectif, il dépend de l'effectif total. Étape 4 — Vérifier : si chaque valeur était tracée avec son effectif comme angle, la somme ne vaudrait pas 360°.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les notes d'un devoir de mathématiques",
+          "statement": "Dans une classe de 3ème de 20 élèves, voici les notes sur 20 d'un devoir de mathématiques : 8 (effectif 2), 10 (effectif 4), 12 (effectif 6), 14 (effectif 5) et 16 (effectif 3). Tu analyses cette série avec les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Notes sur 20 : 8 (effectif 2), 10 (effectif 4), 12 (effectif 6), 14 (effectif 5), 16 (effectif 3). Quelle est la fréquence de la note 14 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode des fréquences. Étape 1 : la valeur étudiée est la note 14. Étape 2 : son effectif est 5 et l'effectif total est $N = 2 + 4 + 6 + 5 + 3 = 20$. Étape 3 : fréquence $= \\frac{5}{20} = 0{,}25 = 25$ %. Piège : 5 % recopie l'effectif, et 20 % est l'effectif total mal interprété.",
+              "answers": [
+                {
+                  "content": "25 %",
+                  "correct": true
+                },
+                {
+                  "content": "5 %",
+                  "correct": false
+                },
+                {
+                  "content": "20 %",
+                  "correct": false
+                },
+                {
+                  "content": "14 %",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Notes sur 20 : 8 (effectif 2), 10 (effectif 4), 12 (effectif 6), 14 (effectif 5), 16 (effectif 3). Quelle est la moyenne de la classe ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la moyenne pondérée. Étape 1 — Multiplier : $8\\times2=16$ ; $10\\times4=40$ ; $12\\times6=72$ ; $14\\times5=70$ ; $16\\times3=48$. Étape 2 — Additionner : $16+40+72+70+48 = 246$. Étape 3 — Effectif total : $N = 20$. Étape 4 — Diviser : $\\frac{246}{20} = 12{,}3$. Piège : 12 est la moyenne simple $\\frac{8+10+12+14+16}{5}$, qui ignore les effectifs ; 246 est la somme non divisée.",
+              "answers": [
+                {
+                  "content": "12,3",
+                  "correct": true
+                },
+                {
+                  "content": "12",
+                  "correct": false
+                },
+                {
+                  "content": "246",
+                  "correct": false
+                },
+                {
+                  "content": "13",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Notes sur 20 : 8 (effectif 2), 10 (effectif 4), 12 (effectif 6), 14 (effectif 5), 16 (effectif 3). Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode du mode et de l'étendue. Étape 1 — Repérer le plus grand effectif : 6. Étape 2 — Lire la valeur : c'est la note 12, donc le mode est 12 (et non 6, qui est son effectif). Étape 3 — Étendue : $16 - 8 = 8$. Piège : 24 est la somme $16 + 8$ ; 16 est la plus grande note.",
+              "answers": [
+                {
+                  "content": "Le mode est 12",
+                  "correct": true
+                },
+                {
+                  "content": "L'étendue est 8",
+                  "correct": true
+                },
+                {
+                  "content": "Le mode est 6",
+                  "correct": false
+                },
+                {
+                  "content": "L'étendue est 24",
+                  "correct": false
+                },
+                {
+                  "content": "L'étendue est 16",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Notes sur 20 : 8 (effectif 2), 10 (effectif 4), 12 (effectif 6), 14 (effectif 5), 16 (effectif 3). Quelle est la médiane ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la médiane. Étape 1 — Ranger avec les effectifs cumulés croissants : 2 ; 6 ; 12 ; 17 ; 20. Étape 2 — $N = 20$, pair : les rangs du milieu sont 10 et 11. Étape 3 — Les rangs 7 à 12 correspondent à la note 12 : les deux valeurs centrales valent 12. Étape 4 — La médiane est $\\frac{12+12}{2} = 12$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                },
+                {
+                  "content": "14",
+                  "correct": false
+                },
+                {
+                  "content": "10",
+                  "correct": false
+                },
+                {
+                  "content": "13",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Notes sur 20 : 8 (effectif 2), 10 (effectif 4), 12 (effectif 6), 14 (effectif 5), 16 (effectif 3). Plus de la moitié des élèves ont au moins 12 sur 20. Vrai ou faux ?",
+              "question_type": "true_false",
+              "explanation": "Méthode : compter les effectifs. Étape 1 : les élèves qui ont au moins 12 sont ceux des notes 12, 14 et 16, soit $6 + 5 + 3 = 14$ élèves. Étape 2 : la moitié de la classe est $\\frac{20}{2} = 10$ élèves. Étape 3 : comme $14 > 10$, plus de la moitié des élèves ont au moins 12. On retrouve ce résultat avec la médiane, qui vaut 12.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Notes sur 20 : 8 (effectif 2), 10 (effectif 4), 12 (effectif 6), 14 (effectif 5), 16 (effectif 3). Quel est l'angle du secteur de la note 10 dans un diagramme circulaire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du diagramme circulaire. Étape 1 : parts d'un tout, avec $N = 20$. Étape 2 : diagramme circulaire. Étape 3 : $\\frac{4}{20} \\times 360 = 0{,}2 \\times 360 = 72^\\circ$. Piège : 4° recopie l'effectif ; 40° est $4 \\times 10$.",
+              "answers": [
+                {
+                  "content": "72°",
+                  "correct": true
+                },
+                {
+                  "content": "40°",
+                  "correct": false
+                },
+                {
+                  "content": "4°",
+                  "correct": false
+                },
+                {
+                  "content": "20°",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La récolte de cacao d'un village",
+          "statement": "Dans un village, 20 planteurs ont récolté du cacao cette saison. Les récoltes, en kg, sont regroupées en trois classes de même amplitude 50 : $[0\\,;\\,50[$ (effectif 6), $[50\\,;\\,100[$ (effectif 9) et $[100\\,;\\,150[$ (effectif 5).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Récoltes de 20 planteurs en kg : $[0\\,;\\,50[$ effectif 6, $[50\\,;\\,100[$ effectif 9, $[100\\,;\\,150[$ effectif 5. Quelle est la classe modale ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du mode. Étape 1 — Repérer le plus grand effectif : 9. Étape 2 — Lire la classe correspondante : c'est $[50\\,;\\,100[$, la classe modale. Piège : répondre 9 donne l'effectif, pas la classe.",
+              "answers": [
+                {
+                  "content": "$[50\\,;\\,100[$",
+                  "correct": true
+                },
+                {
+                  "content": "$[0\\,;\\,50[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[100\\,;\\,150[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une classe de récoltes est $[100\\,;\\,150[$ (en kg). Quel est son centre ?",
+              "question_type": "single_choice",
+              "explanation": "Pour la moyenne par classes, chaque classe est remplacée par son centre. Le centre de $[100\\,;\\,150[$ est $\\frac{100 + 150}{2} = 125$. Piège : 150 est la borne supérieure, 100 la borne inférieure, et 50 est l'amplitude de la classe.",
+              "answers": [
+                {
+                  "content": "125 kg",
+                  "correct": true
+                },
+                {
+                  "content": "150 kg",
+                  "correct": false
+                },
+                {
+                  "content": "100 kg",
+                  "correct": false
+                },
+                {
+                  "content": "50 kg",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Récoltes de 20 planteurs en kg : $[0\\,;\\,50[$ effectif 6, $[50\\,;\\,100[$ effectif 9, $[100\\,;\\,150[$ effectif 5. Quelle est la moyenne approchée de la récolte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la moyenne pondérée. Étape 1 — Multiplier chaque centre (25, 75, 125) par son effectif : $25\\times6=150$ ; $75\\times9=675$ ; $125\\times5=625$. Étape 2 — Additionner : $150+675+625 = 1\\,450$. Étape 3 — Effectif total : $N = 20$. Étape 4 — Diviser : $\\frac{1\\,450}{20} = 72{,}5$ kg. Piège : 75 est la moyenne simple des centres, 1 450 la somme non divisée.",
+              "answers": [
+                {
+                  "content": "72,5 kg",
+                  "correct": true
+                },
+                {
+                  "content": "75 kg",
+                  "correct": false
+                },
+                {
+                  "content": "1 450 kg",
+                  "correct": false
+                },
+                {
+                  "content": "70 kg",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Récoltes de 20 planteurs en kg : $[0\\,;\\,50[$ effectif 6, $[50\\,;\\,100[$ effectif 9, $[100\\,;\\,150[$ effectif 5. Quel est l'angle du secteur de la classe $[50\\,;\\,100[$ dans un diagramme circulaire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du diagramme circulaire. Étape 1 : parts d'un tout, $N = 20$. Étape 2 : diagramme circulaire. Étape 3 : $\\frac{9}{20} \\times 360 = 0{,}45 \\times 360 = 162^\\circ$. Piège : 9° recopie l'effectif ; 108° est l'angle de la classe $[0\\,;\\,50[$ ($\\frac{6}{20} \\times 360$).",
+              "answers": [
+                {
+                  "content": "162°",
+                  "correct": true
+                },
+                {
+                  "content": "9°",
+                  "correct": false
+                },
+                {
+                  "content": "108°",
+                  "correct": false
+                },
+                {
+                  "content": "90°",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Récoltes de 20 planteurs en kg : $[0\\,;\\,50[$ effectif 6, $[50\\,;\\,100[$ effectif 9, $[100\\,;\\,150[$ effectif 5. Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer le plus grand effectif : 9, donc la classe modale est $[50\\,;\\,100[$. Fréquence de $[0\\,;\\,50[$ : $\\frac{6}{20} = 0{,}3 = 30$ %. Fréquence de $[100\\,;\\,150[$ : $\\frac{5}{20} = 25$ %, pas 5 %. La moyenne approchée est 72,5 kg, pas 75. L'angle de $[100\\,;\\,150[$ est $\\frac{5}{20} \\times 360 = 90^\\circ$ (125 est le centre de la classe, pas un angle).",
+              "answers": [
+                {
+                  "content": "La classe modale est $[50\\,;\\,100[$",
+                  "correct": true
+                },
+                {
+                  "content": "La fréquence de $[0\\,;\\,50[$ est 30 %",
+                  "correct": true
+                },
+                {
+                  "content": "La fréquence de $[100\\,;\\,150[$ est 5 %",
+                  "correct": false
+                },
+                {
+                  "content": "La moyenne approchée est 75 kg",
+                  "correct": false
+                },
+                {
+                  "content": "L'angle de $[100\\,;\\,150[$ est 125°",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Récoltes de 20 planteurs en kg : $[0\\,;\\,50[$ effectif 6, $[50\\,;\\,100[$ effectif 9, $[100\\,;\\,150[$ effectif 5. Exactement 15 planteurs ont récolté moins de 100 kg. Vrai ou faux ?",
+              "question_type": "true_false",
+              "explanation": "Méthode : additionner les effectifs des classes concernées. Les planteurs qui ont récolté moins de 100 kg sont ceux de $[0\\,;\\,50[$ et de $[50\\,;\\,100[$, soit $6 + 9 = 15$ planteurs. Les 5 autres ont récolté 100 kg ou plus. L'affirmation est vraie. En fréquence, cela fait $\\frac{15}{20} = 75$ %.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les ventes de sacs de cacao de la coopérative",
+          "statement": "Une coopérative a noté le nombre de sacs de cacao vendus par jour pendant 20 jours : 20 sacs (effectif 2), 25 sacs (effectif 6), 30 sacs (effectif 7), 40 sacs (effectif 4) et 50 sacs (effectif 1). Tu étudies cette série comme dans un devoir de 3ème.",
+          "exercise_type": "evaluation",
+          "figure": "batons-sacs",
+          "questions": [
+            {
+              "content": "Pendant 20 jours, la coopérative a vendu 20 sacs (2 jours), 25 sacs (6 jours), 30 sacs (7 jours), 40 sacs (4 jours) et 50 sacs (1 jour). Quelle est la fréquence des jours à 40 sacs ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode des fréquences. Étape 1 : la valeur étudiée est 40 sacs. Étape 2 : son effectif est 4 et l'effectif total est $N = 2+6+7+4+1 = 20$. Étape 3 : fréquence $= \\frac{4}{20} = 0{,}2 = 20$ %. Étape 4 : vérification, les fréquences de toute la série ont pour somme 100 %. Piège : 4 % recopie l'effectif, 40 % recopie la valeur.",
+              "answers": [
+                {
+                  "content": "20 %",
+                  "correct": true
+                },
+                {
+                  "content": "4 %",
+                  "correct": false
+                },
+                {
+                  "content": "40 %",
+                  "correct": false
+                },
+                {
+                  "content": "25 %",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant 20 jours, la coopérative a vendu 20 sacs (2 jours), 25 sacs (6 jours), 30 sacs (7 jours), 40 sacs (4 jours) et 50 sacs (1 jour). Quelle est la moyenne de sacs vendus par jour ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la moyenne pondérée. Étape 1 — Multiplier : $20\\times2=40$ ; $25\\times6=150$ ; $30\\times7=210$ ; $40\\times4=160$ ; $50\\times1=50$. Étape 2 — Additionner : $40+150+210+160+50 = 610$. Étape 3 — Effectif total : $N = 20$. Étape 4 — Diviser : $\\frac{610}{20} = 30{,}5$. Piège : 33 est la moyenne simple $\\frac{20+25+30+40+50}{5}$, qui ignore les effectifs ; 610 est le total de sacs, non divisé.",
+              "answers": [
+                {
+                  "content": "30,5",
+                  "correct": true
+                },
+                {
+                  "content": "33",
+                  "correct": false
+                },
+                {
+                  "content": "610",
+                  "correct": false
+                },
+                {
+                  "content": "30",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant 20 jours, la coopérative a vendu 20 sacs (2 jours), 25 sacs (6 jours), 30 sacs (7 jours), 40 sacs (4 jours) et 50 sacs (1 jour). Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Mode : Étape 1 — le plus grand effectif est 7, Étape 2 — il correspond à 30 sacs, donc le mode est 30 (7 est l'effectif). Médiane : Étape 1 — effectifs cumulés croissants 2 ; 8 ; 15 ; 19 ; 20. Étape 2 — $N = 20$, rangs 10 et 11. Étape 3 — les rangs 9 à 15 correspondent à 30 sacs. Étape 4 — la médiane est 30, et 30,5 est la moyenne. L'étendue est $50 - 20 = 30$, pas la somme 70.",
+              "answers": [
+                {
+                  "content": "Le mode est 30",
+                  "correct": true
+                },
+                {
+                  "content": "La médiane est 30",
+                  "correct": true
+                },
+                {
+                  "content": "La médiane est 30,5",
+                  "correct": false
+                },
+                {
+                  "content": "Le mode est 7",
+                  "correct": false
+                },
+                {
+                  "content": "L'étendue est 70",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant 20 jours, la coopérative a vendu 20 sacs (2 jours), 25 sacs (6 jours), 30 sacs (7 jours), 40 sacs (4 jours) et 50 sacs (1 jour). Quel est l'angle du secteur des jours à 30 sacs dans un diagramme circulaire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du diagramme circulaire. Étape 1 : parts d'un tout, $N = 20$. Étape 2 : diagramme circulaire. Étape 3 : $\\frac{7}{20} \\times 360 = 0{,}35 \\times 360 = 126^\\circ$. Étape 4 : les cinq angles $36^\\circ + 108^\\circ + 126^\\circ + 72^\\circ + 18^\\circ$ ont pour somme $360^\\circ$. Piège : 7° recopie l'effectif, 30° recopie la valeur.",
+              "answers": [
+                {
+                  "content": "126°",
+                  "correct": true
+                },
+                {
+                  "content": "7°",
+                  "correct": false
+                },
+                {
+                  "content": "105°",
+                  "correct": false
+                },
+                {
+                  "content": "30°",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant 20 jours, la coopérative a vendu en moyenne 30,5 sacs par jour. Elle affirme : « nous avons vendu en moyenne plus de 30 sacs par jour ». Vrai ou faux ?",
+              "question_type": "true_false",
+              "explanation": "Méthode : comparer la moyenne à 30. Étape 1 : la moyenne calculée avec les effectifs est $\\frac{610}{20} = 30{,}5$. Étape 2 : comme $30{,}5 > 30$, l'affirmation est vraie. Remarque : le mode et la médiane valent 30, mais ce ne sont pas des moyennes ; l'affirmation porte bien sur la moyenne.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant 20 jours, la coopérative a vendu 610 sacs au total, soit 30,5 sacs par jour en moyenne. Chaque sac rapporte 15 000 F. Quelle est la recette totale ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 : le total de sacs est la somme des produits valeur × effectif, soit 610 (ou moyenne × effectif total : $30{,}5 \\times 20 = 610$). Étape 2 : la recette est $610 \\times 15\\,000 = 9\\,150\\,000$ F. Piège : 457 500 F est $30{,}5 \\times 15\\,000$, la recette d'un seul jour moyen ; 9 000 000 F utilise 600 sacs ($30 \\times 20$) au lieu de 610.",
+              "answers": [
+                {
+                  "content": "9 150 000 F",
+                  "correct": true
+                },
+                {
+                  "content": "457 500 F",
+                  "correct": false
+                },
+                {
+                  "content": "915 000 F",
+                  "correct": false
+                },
+                {
+                  "content": "9 000 000 F",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Moyennes d'une classe de 3ème",
+          "statement": "Dans une classe de 3ème de 25 élèves, dont 20 filles et 5 garçons, la moyenne au devoir de mathématiques est 11,2 sur 20. Les 20 filles ont une moyenne de 11,5. Tu retrouves la moyenne des garçons, comme dans un devoir du BEPC.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans une classe de 25 élèves, la moyenne du devoir est 11,2. Quelle est la somme des notes des 25 élèves ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la moyenne : la moyenne est la somme des notes divisée par l'effectif total. Étape 1 : $N = 25$ et moyenne $= 11{,}2$. Étape 2 : somme des notes $= 11{,}2 \\times 25 = 280$. Étape 3 : vérification, $\\frac{280}{25} = 11{,}2$. Piège : 36,2 additionne 11,2 et 25 ; 2,24 divise 11,2 par 5.",
+              "answers": [
+                {
+                  "content": "280",
+                  "correct": true
+                },
+                {
+                  "content": "36,2",
+                  "correct": false
+                },
+                {
+                  "content": "11,2",
+                  "correct": false
+                },
+                {
+                  "content": "2,24",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une classe de 25 élèves, 20 filles ont une moyenne de 11,5 au devoir. Quelle est la somme des notes des filles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : somme $=$ moyenne $\\times$ effectif. Étape 1 : les filles forment un groupe de 20 élèves de moyenne 11,5. Étape 2 : somme des notes des filles $= 11{,}5 \\times 20 = 230$. Piège : 287,5 utilise l'effectif de toute la classe ($11{,}5 \\times 25$) ; 23 est une erreur de virgule.",
+              "answers": [
+                {
+                  "content": "230",
+                  "correct": true
+                },
+                {
+                  "content": "31,5",
+                  "correct": false
+                },
+                {
+                  "content": "23",
+                  "correct": false
+                },
+                {
+                  "content": "287,5",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une classe de 25 élèves, la somme des notes est 280, et la somme des notes des 20 filles est 230. Quelle est la moyenne des 5 garçons ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 : somme des notes des garçons $= 280 - 230 = 50$. Étape 2 : effectif des garçons $= 25 - 20 = 5$. Étape 3 : moyenne des garçons $= \\frac{50}{5} = 10$. Piège : 50 est la somme des notes, non divisée par 5 ; 11,2 est la moyenne de toute la classe.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                },
+                {
+                  "content": "50",
+                  "correct": false
+                },
+                {
+                  "content": "11,2",
+                  "correct": false
+                },
+                {
+                  "content": "9",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une classe de 25 élèves, la somme des notes au devoir est 280. Un nouvel élève arrive et obtient 19 au même devoir. Quelle est la nouvelle moyenne de la classe ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 : nouvelle somme $= 280 + 19 = 299$. Étape 2 : nouvel effectif total $= 25 + 1 = 26$. Étape 3 : nouvelle moyenne $= \\frac{299}{26} = 11{,}5$. Piège : 11,96 divise par 25 en oubliant le nouvel élève ; 15,1 est la moyenne $\\frac{11{,}2 + 19}{2}$ de deux nombres, qui oublie que 25 notes sont derrière 11,2.",
+              "answers": [
+                {
+                  "content": "11,5",
+                  "correct": true
+                },
+                {
+                  "content": "11,96",
+                  "correct": false
+                },
+                {
+                  "content": "15,1",
+                  "correct": false
+                },
+                {
+                  "content": "11,2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une classe de 25 élèves, 5 sont des garçons. Quel est l'angle du secteur des garçons dans un diagramme circulaire de la classe ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode du diagramme circulaire. Étape 1 : parts d'un tout, avec $N = 25$. Étape 2 : diagramme circulaire. Étape 3 : $\\frac{5}{25} \\times 360 = 0{,}2 \\times 360 = 72^\\circ$. Étape 4 : le secteur des filles mesure $\\frac{20}{25} \\times 360 = 288^\\circ$, et $72 + 288 = 360$. Piège : 5° recopie l'effectif ; 20° est le pourcentage.",
+              "answers": [
+                {
+                  "content": "72°",
+                  "correct": true
+                },
+                {
+                  "content": "5°",
+                  "correct": false
+                },
+                {
+                  "content": "20°",
+                  "correct": false
+                },
+                {
+                  "content": "90°",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une classe de 25 élèves, les 20 filles ont pour moyenne 11,5 et les 5 garçons ont pour moyenne 10. La moyenne de la classe est $\\frac{11{,}5 + 10}{2} = 10{,}75$. Vrai ou faux ?",
+              "question_type": "true_false",
+              "explanation": "Il faut pondérer par les effectifs. Étape 1 : somme des notes des filles $11{,}5 \\times 20 = 230$ et des garçons $10 \\times 5 = 50$. Étape 2 : somme totale $= 280$. Étape 3 : moyenne de la classe $= \\frac{280}{25} = 11{,}2$. Le calcul $\\frac{11{,}5 + 10}{2}$ est le piège de la fiche : il donne autant de poids à 5 garçons qu'à 20 filles. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

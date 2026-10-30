@@ -46,12 +46,27 @@ class Assessment::QuestionNumericTest < ActionDispatch::IntegrationTest
     assert_select "#question_review_#{@question.id}", text: /42\.6/
   end
 
-  test "une mauvaise réponse ne révèle ni la valeur ni la marge, au verdict comme au résultat" do
-    copy @question => "40"
-    assert_equal false, Orm::QuestionAttempt.find_by!(question: @question).correct
+  test "ADR-0115 D1 : rien de la valeur ni de la marge avant la vérification ; une mauvaise réponse, une fois la copie vérifiée, montre la valeur et la marge" do
+    # Copie refusée (422) : rien n'est écrit, la page ne dit ni la valeur ni la marge.
+    copy @question => "42,,75"
+    assert_response :unprocessable_entity
+    assert_no_match(/42[,.]75|0[,.]25/, without_svg)
+    assert_select "[data-correct]", 0
+    # Copie ouverte : sa correction n'existe pas encore, on revient à la copie sans la solution.
+    get exercise_session_result_path(@session.public_id)
+    assert_redirected_to exercise_session_path(@session.public_id)
     follow_redirect!
     assert_no_match(/42[,.]75|0[,.]25/, without_svg)
     assert_select "[data-correct]", 0
+
+    copy @question => "40"
+    assert_equal false, Orm::QuestionAttempt.find_by!(question: @question).correct
+    follow_redirect!
+    assert_select "#question_review_#{@question.id} strong", text: "40"
+    assert_select "#question_review_#{@question.id} [data-correct]" do |expected|
+      assert_match(/42,75/, expected.text)
+      assert_match(/#{Regexp.escape(I18n.t("assessment.exercises.solution.tolerance", tolerance: "0,25"))}/, expected.text)
+    end
   end
 
   test "CA-6 : « −2 » (moins Unicode) est juste" do

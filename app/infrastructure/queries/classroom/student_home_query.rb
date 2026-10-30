@@ -21,7 +21,7 @@ module Queries
       # due_on : l'échéance de l'assignation (ADR-0072), nil sans jours de séance ; material_slug : la pastille illustrée.
       ExerciseRow = Data.define(:public_id, :title, :material_name, :material_category, :material_slug, :badge_level,
                                 :best_score_percent, :completed_count, :started_session_public_id, :due_on)
-      SessionRow = Data.define(:public_id, :exercise_public_id, :exercise_title, :material_name, :material_slug, :score_percent,
+      SessionRow = Data.define(:public_id, :exercise_id, :exercise_public_id, :exercise_title, :material_name, :material_slug, :score_percent,
                                :completed_at)
       GapRow = Data.define(:essential_name, :essential_slug, :course_slug)
       SubjectRow = Data.define(:slug, :name)
@@ -87,7 +87,7 @@ module Queries
         Orm::ExerciseSession.joins(exercise: { course: :material }).where(student_id:, status: "completed")
                             .merge(own_level(student_id))
                             .order(completed_at: :desc, id: :desc).limit(RECENT_SESSIONS)
-                            .pluck(:public_id, "exercises.public_id", "exercises.title", "materials.name", "materials.slug", :score_percent,
+                            .pluck(:public_id, :exercise_id, "exercises.public_id", "exercises.title", "materials.name", "materials.slug", :score_percent,
                                    :completed_at)
                             .map { |values| SessionRow.new(*values) }
       end

@@ -1,0 +1,1436 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Vecteurs",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "Mathématiques",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "carte-gbaka",
+          "kind": "coordinate_plane",
+          "description": "Une carte quadrillée de 0 à 9 en abscisse et de 0 à 7 en ordonnée. Un gbaka part de la gare A(1 ; 2), roule jusqu'à l'arrêt B(5 ; 5) puis jusqu'à C(7 ; 1). Les deux flèches AB et BC montrent chaque déplacement : on lit de combien de carreaux on avance vers la droite et vers le haut.",
+          "params": {
+            "xmin": 0,
+            "xmax": 9,
+            "ymin": 0,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 2
+              },
+              {
+                "id": "B",
+                "x": 5,
+                "y": 5
+              },
+              {
+                "id": "C",
+                "x": 7,
+                "y": 1
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 4,
+                "dy": 3,
+                "ox": 1,
+                "oy": 2
+              },
+              {
+                "label": "BC",
+                "dx": 2,
+                "dy": -4,
+                "ox": 5,
+                "oy": 5
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pirogues-parallelogramme",
+          "kind": "coordinate_plane",
+          "description": "Une carte quadrillée de 0 à 8 en abscisse et de 0 à 7 en ordonnée. Quatre pirogues sont aux points A(1 ; 1), B(5 ; 2), C(6 ; 5) et D(2 ; 4). Les côtés du quadrilatère ABCD sont tracés, avec le vecteur AB et le vecteur DC : ils ont la même direction, le même sens et la même longueur.",
+          "params": {
+            "xmin": 0,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 5,
+                "y": 2
+              },
+              {
+                "id": "C",
+                "x": 6,
+                "y": 5
+              },
+              {
+                "id": "D",
+                "x": 2,
+                "y": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 5,
+                "y2": 2
+              },
+              {
+                "x1": 5,
+                "y1": 2,
+                "x2": 6,
+                "y2": 5
+              },
+              {
+                "x1": 6,
+                "y1": 5,
+                "x2": 2,
+                "y2": 4
+              },
+              {
+                "x1": 2,
+                "y1": 4,
+                "x2": 1,
+                "y2": 1
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 4,
+                "dy": 1,
+                "ox": 1,
+                "oy": 1
+              },
+              {
+                "label": "DC",
+                "dx": 4,
+                "dy": 1,
+                "ox": 2,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "trajet-chasles",
+          "kind": "coordinate_plane",
+          "description": "Une carte quadrillée de 0 à 7 en abscisse et de 0 à 7 en ordonnée. Un gbaka roule de A(1 ; 1) à B(4 ; 2), puis de B à C(5 ; 5). Les flèches AB et BC sont placées bout à bout ; la flèche AC va directement de A à C et représente leur somme, d'après la relation de Chasles.",
+          "params": {
+            "xmin": 0,
+            "xmax": 7,
+            "ymin": 0,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 4,
+                "y": 2
+              },
+              {
+                "id": "C",
+                "x": 5,
+                "y": 5
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 3,
+                "dy": 1,
+                "ox": 1,
+                "oy": 1
+              },
+              {
+                "label": "BC",
+                "dx": 1,
+                "dy": 3,
+                "ox": 4,
+                "oy": 2
+              },
+              {
+                "label": "AC",
+                "dx": 4,
+                "dy": 4,
+                "ox": 1,
+                "oy": 1
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pirogues-paralleles",
+          "kind": "coordinate_plane",
+          "description": "Une carte quadrillée de 0 à 8 en abscisse et de 0 à 7 en ordonnée. Une pirogue va de A(1 ; 1) à B(3 ; 2) ; une autre va de C(2 ; 4) à D(6 ; 6). Le vecteur CD est le double du vecteur AB : les deux flèches ont la même direction, donc les trajectoires (AB) et (CD) sont parallèles.",
+          "params": {
+            "xmin": 0,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 3,
+                "y": 2
+              },
+              {
+                "id": "C",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "D",
+                "x": 6,
+                "y": 6
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 2,
+                "dy": 1,
+                "ox": 1,
+                "oy": 1
+              },
+              {
+                "label": "CD",
+                "dx": 4,
+                "dy": 2,
+                "ox": 2,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "trajet-gbaka",
+          "kind": "coordinate_plane",
+          "description": "Une carte quadrillée de 0 à 8 en abscisse et de 0 à 8 en ordonnée (1 carreau = 1 km). Un gbaka part de la gare G(2 ; 1), s'arrête en M(5 ; 2) puis termine en T(6 ; 6). Les flèches GM et MT sont bout à bout ; la flèche GT relie directement la gare au terminus.",
+          "params": {
+            "xmin": 0,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "G",
+                "x": 2,
+                "y": 1
+              },
+              {
+                "id": "M",
+                "x": 5,
+                "y": 2
+              },
+              {
+                "id": "T",
+                "x": 6,
+                "y": 6
+              }
+            ],
+            "vectors": [
+              {
+                "label": "GM",
+                "dx": 3,
+                "dy": 1,
+                "ox": 2,
+                "oy": 1
+              },
+              {
+                "label": "MT",
+                "dx": 1,
+                "dy": 4,
+                "ox": 5,
+                "oy": 2
+              },
+              {
+                "label": "GT",
+                "dx": 4,
+                "dy": 5,
+                "ox": 2,
+                "oy": 1
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "deux-pirogues",
+          "kind": "coordinate_plane",
+          "description": "Une carte quadrillée de 0 à 8 en abscisse et de 0 à 7 en ordonnée. Une première pirogue va de A(2 ; 1) à B(6 ; 3), une seconde de C(1 ; 4) à D(5 ; 6). Les deux flèches AB et CD sont parallèles et de même longueur : elles représentent le même vecteur, de coordonnées (4 ; 2).",
+          "params": {
+            "xmin": 0,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "A",
+                "x": 2,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 6,
+                "y": 3
+              },
+              {
+                "id": "C",
+                "x": 1,
+                "y": 4
+              },
+              {
+                "id": "D",
+                "x": 5,
+                "y": 6
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 4,
+                "dy": 2,
+                "ox": 2,
+                "oy": 1
+              },
+              {
+                "label": "CD",
+                "dx": 4,
+                "dy": 2,
+                "ox": 1,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "balises-carte",
+          "kind": "coordinate_plane",
+          "description": "Une carte quadrillée de 0 à 9 en abscisse et de 0 à 8 en ordonnée. Quatre balises sont posées en A(1 ; 1), B(5 ; 3), C(7 ; 6) et D(3 ; 4). Les côtés du quadrilatère ABCD sont tracés, avec les flèches AB et DC, qui se superposent par translation : on peut lire leurs coordonnées sur le quadrillage.",
+          "params": {
+            "xmin": 0,
+            "xmax": 9,
+            "ymin": 0,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 5,
+                "y": 3
+              },
+              {
+                "id": "C",
+                "x": 7,
+                "y": 6
+              },
+              {
+                "id": "D",
+                "x": 3,
+                "y": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 5,
+                "y2": 3
+              },
+              {
+                "x1": 5,
+                "y1": 3,
+                "x2": 7,
+                "y2": 6
+              },
+              {
+                "x1": 7,
+                "y1": 6,
+                "x2": 3,
+                "y2": 4
+              },
+              {
+                "x1": 3,
+                "y1": 4,
+                "x2": 1,
+                "y2": 1
+              }
+            ],
+            "vectors": [
+              {
+                "label": "AB",
+                "dx": 4,
+                "dy": 2,
+                "ox": 1,
+                "oy": 1
+              },
+              {
+                "label": "DC",
+                "dx": 4,
+                "dy": 2,
+                "ox": 3,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Calculer les coordonnées d'un vecteur",
+          "remember": "Un vecteur $\\overrightarrow{AB}$ représente le déplacement du point $A$ (l'origine) vers le point $B$ (l'extrémité) : il a une direction, un sens et une longueur. Dans un repère, si $A(x_A ; y_A)$ et $B(x_B ; y_B)$, alors $\\overrightarrow{AB}$ a pour coordonnées $(x_B - x_A\\ ;\\ y_B - y_A)$. Les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{BA}$ sont opposés : $\\overrightarrow{BA} = -\\overrightarrow{AB}$.",
+          "method": [
+            "Lire les coordonnées de l'origine $A$ et de l'extrémité $B$ du vecteur.",
+            "Calculer l'abscisse : celle de l'extrémité moins celle de l'origine, $x_B - x_A$.",
+            "Calculer l'ordonnée : celle de l'extrémité moins celle de l'origine, $y_B - y_A$.",
+            "Écrire les coordonnées du vecteur sous la forme $\\overrightarrow{AB}(x\\,;\\,y)$."
+          ],
+          "example": {
+            "statement": "Un gbaka part de la gare $A(1 ; 2)$ et arrive à l'arrêt $B(5 ; 5)$ sur une carte quadrillée. Calculer les coordonnées de $\\overrightarrow{AB}$.",
+            "steps": [
+              "Lire : l'origine est $A(1 ; 2)$ et l'extrémité est $B(5 ; 5)$.",
+              "Calculer l'abscisse : $x_B - x_A = 5 - 1 = 4$.",
+              "Calculer l'ordonnée : $y_B - y_A = 5 - 2 = 3$.",
+              "Écrire : $\\overrightarrow{AB}(4\\,;\\,3)$. Le gbaka avance de 4 carreaux vers la droite et de 3 carreaux vers le haut."
+            ]
+          },
+          "pitfall": "Ne pas inverser l'origine et l'extrémité : on calcule toujours « extrémité moins origine ». Contre-exemple : avec $A(1 ; 2)$ et $B(4 ; 6)$, on a $\\overrightarrow{AB}(3\\,;\\,4)$, alors que $\\overrightarrow{BA}(-3\\,;\\,-4)$. Si tu calcules « origine moins extrémité », tu trouves le vecteur opposé : le déplacement dans l'autre sens. Avant de rendre ta réponse, relis le nom du vecteur : la première lettre est l'origine.",
+          "figure": "carte-gbaka",
+          "exercise": {
+            "title": "Calculer des coordonnées de vecteurs",
+            "statement": "Dans cet exercice, tu calcules les coordonnées de vecteurs dans un repère avec la méthode de la fiche : lire, calculer l'abscisse, calculer l'ordonnée, écrire.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On donne $A(2 ; 1)$ et $B(7 ; 4)$. Quelles sont les coordonnées de $\\overrightarrow{AB}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : l'origine est $A(2 ; 1)$, l'extrémité est $B(7 ; 4)$. Étape 2 — Calculer l'abscisse : $7 - 2 = 5$. Étape 3 — Calculer l'ordonnée : $4 - 1 = 3$. Étape 4 — Écrire : $\\overrightarrow{AB}(5\\,;\\,3)$. La proposition $(-5\\,;\\,-3)$ vient de « origine moins extrémité » : c'est le vecteur $\\overrightarrow{BA}$. La proposition $(9\\,;\\,5)$ additionne les coordonnées au lieu de les soustraire.",
+                "answers": [
+                  {
+                    "content": "$(5\\,;\\,3)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(-5\\,;\\,-3)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(9\\,;\\,5)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(3\\,;\\,5)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $C(-3 ; 4)$ et $D(2 ; -1)$. Quelles sont les coordonnées de $\\overrightarrow{CD}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : l'origine est $C(-3 ; 4)$, l'extrémité est $D(2 ; -1)$. Étape 2 — Calculer l'abscisse : $2 - (-3) = 2 + 3 = 5$. Étape 3 — Calculer l'ordonnée : $-1 - 4 = -5$. Étape 4 — Écrire : $\\overrightarrow{CD}(5\\,;\\,-5)$. Attention aux signes : soustraire $-3$ revient à ajouter 3. La proposition $(-1\\,;\\,3)$ additionne au lieu de soustraire.",
+                "answers": [
+                  {
+                    "content": "$(5\\,;\\,5)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(5\\,;\\,-5)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(-5\\,;\\,5)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(-1\\,;\\,3)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $E(0 ; 3)$ et $F(4 ; -2)$. Le vecteur $\\overrightarrow{FE}$ a pour coordonnées $(-4\\,;\\,5)$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : pour $\\overrightarrow{FE}$, l'origine est $F(4 ; -2)$ et l'extrémité est $E(0 ; 3)$. Étape 2 — Calculer l'abscisse : $0 - 4 = -4$. Étape 3 — Calculer l'ordonnée : $3 - (-2) = 5$. Étape 4 — Écrire : $\\overrightarrow{FE}(-4\\,;\\,5)$. L'affirmation est donc vraie. Le vecteur $\\overrightarrow{EF}$ vaut $(4\\,;\\,-5)$ : c'est l'opposé, et c'est lui qu'on trouve si on se trompe d'origine.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(1 ; 4)$ et $B(4 ; 2)$. Quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire : $A(1 ; 4)$ et $B(4 ; 2)$. Étape 2 — Pour $\\overrightarrow{AB}$, l'abscisse est $4 - 1 = 3$. Étape 3 — L'ordonnée est $2 - 4 = -2$. Étape 4 — Donc $\\overrightarrow{AB}(3\\,;\\,-2)$. Pour $\\overrightarrow{BA}$, l'origine est $B$ : $1 - 4 = -3$ et $4 - 2 = 2$, donc $\\overrightarrow{BA}(-3\\,;\\,2)$, l'opposé de $\\overrightarrow{AB}$. Les affirmations $\\overrightarrow{AB}(-3\\,;\\,2)$ et $\\overrightarrow{BA}(3\\,;\\,-2)$ sont fausses : elles confondent origine et extrémité.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{AB}$ a pour coordonnées $(3\\,;\\,-2)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{BA}$ a pour coordonnées $(-3\\,;\\,2)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB}$ a pour coordonnées $(-3\\,;\\,2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB}$ a pour coordonnées $(5\\,;\\,6)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{BA}$ a pour coordonnées $(3\\,;\\,-2)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur une carte quadrillée, un gbaka part de la gare $G(2 ; 3)$ et arrive à l'arrêt $H(6 ; 1)$. Quel vecteur représente son déplacement ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : l'origine est la gare $G(2 ; 3)$, l'extrémité est l'arrêt $H(6 ; 1)$. Le déplacement est $\\overrightarrow{GH}$. Étape 2 — Calculer l'abscisse : $6 - 2 = 4$. Étape 3 — Calculer l'ordonnée : $1 - 3 = -2$. Étape 4 — Écrire : $\\overrightarrow{GH}(4\\,;\\,-2)$. Le gbaka avance de 4 carreaux et descend de 2. La proposition $\\overrightarrow{HG}(-4\\,;\\,2)$ est le trajet du retour : on a pris l'arrêt comme origine.",
+                "answers": [
+                  {
+                    "content": "$(-4\\,;\\,2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(4\\,;\\,-2)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(8\\,;\\,4)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(4\\,;\\,2)$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître un parallélogramme avec des vecteurs",
+          "remember": "Dire que $ABCD$ est un parallélogramme (non aplati) équivaut à $\\overrightarrow{AB} = \\overrightarrow{DC}$. Deux vecteurs sont égaux quand ils ont la même direction, le même sens et la même longueur, c'est-à-dire les mêmes coordonnées. On a aussi $\\overrightarrow{AD} = \\overrightarrow{BC}$.",
+          "method": [
+            "Écrire l'égalité vectorielle qui traduit le parallélogramme, en suivant l'ordre des sommets : $\\overrightarrow{AB} = \\overrightarrow{DC}$.",
+            "Calculer les coordonnées de chaque vecteur avec la méthode « extrémité moins origine ».",
+            "Comparer les coordonnées : abscisse avec abscisse, ordonnée avec ordonnée (si un point est inconnu, écrire une équation par coordonnée).",
+            "Conclure : si les coordonnées sont égales, $ABCD$ est un parallélogramme ; sinon, ce n'en est pas un."
+          ],
+          "example": {
+            "statement": "Quatre pirogues sont aux points $A(1 ; 1)$, $B(5 ; 2)$, $C(6 ; 5)$ et $D(2 ; 4)$. Le quadrilatère $ABCD$ est-il un parallélogramme ?",
+            "steps": [
+              "Écrire : $ABCD$ est un parallélogramme si $\\overrightarrow{AB} = \\overrightarrow{DC}$.",
+              "Calculer : $\\overrightarrow{AB}(4\\,;\\,1)$ car $5 - 1 = 4$ et $2 - 1 = 1$ ; $\\overrightarrow{DC}(4\\,;\\,1)$ car $6 - 2 = 4$ et $5 - 4 = 1$.",
+              "Comparer : les abscisses valent 4 et 4, les ordonnées valent 1 et 1.",
+              "Conclure : $\\overrightarrow{AB} = \\overrightarrow{DC}$, donc $ABCD$ est un parallélogramme."
+            ]
+          },
+          "pitfall": "Ne pas écrire l'égalité dans le mauvais ordre. Pour $ABCD$, c'est $\\overrightarrow{AB} = \\overrightarrow{DC}$ (ou $\\overrightarrow{AD} = \\overrightarrow{BC}$), jamais $\\overrightarrow{AB} = \\overrightarrow{CD}$. Contre-exemple : $A(0 ; 0)$, $B(4 ; 0)$, $C(5 ; 3)$, $D(1 ; 3)$ forment bien un parallélogramme, mais $\\overrightarrow{AB}(4\\,;\\,0)$ et $\\overrightarrow{CD}(-4\\,;\\,0)$ ne sont pas égaux : avec $\\overrightarrow{AB} = \\overrightarrow{CD}$, tu conclurais à tort que ce n'en est pas un. Les lettres se suivent dans l'ordre des sommets, et l'on compare les côtés opposés dans le même sens de parcours.",
+          "figure": "pirogues-parallelogramme",
+          "exercise": {
+            "title": "Reconnaître et construire un parallélogramme",
+            "statement": "Dans cet exercice, tu utilises l'égalité de vecteurs pour reconnaître un parallélogramme ou trouver un sommet, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On donne $A(0 ; 0)$, $B(3 ; 1)$, $C(4 ; 4)$ et $D(1 ; 3)$. Le quadrilatère $ABCD$ est un parallélogramme.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $ABCD$ est un parallélogramme si $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Calculer : $\\overrightarrow{AB}(3-0\\,;\\,1-0) = (3\\,;\\,1)$ et $\\overrightarrow{DC}(4-1\\,;\\,4-3) = (3\\,;\\,1)$. Étape 3 — Comparer : les abscisses valent 3 et 3, les ordonnées valent 1 et 1. Étape 4 — Conclure : $\\overrightarrow{AB} = \\overrightarrow{DC}$, donc $ABCD$ est un parallélogramme. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les points $A(1 ; 2)$, $B(4 ; 3)$, $C(5 ; 6)$ et $D(2 ; 5)$ forment le parallélogramme $ABCD$. Quelle égalité de vecteurs le traduit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire l'égalité en suivant l'ordre des sommets : $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Vérifier en calculant : $\\overrightarrow{AB}(3\\,;\\,1)$ et $\\overrightarrow{DC}(5-2\\,;\\,6-5) = (3\\,;\\,1)$. Étape 3 — Les coordonnées sont égales. Étape 4 — Conclure : $\\overrightarrow{AB} = \\overrightarrow{DC}$. La proposition $\\overrightarrow{AB} = \\overrightarrow{CD}$ est fausse : $\\overrightarrow{CD}(-3\\,;\\,-1)$ est l'opposé de $\\overrightarrow{AB}$. Les propositions $\\overrightarrow{AB} = \\overrightarrow{AD}$ et $\\overrightarrow{AB} = \\overrightarrow{BC}$ comparent deux côtés qui se suivent : $\\overrightarrow{AD}(1\\,;\\,3)$ et $\\overrightarrow{BC}(1\\,;\\,3)$ ne sont pas égaux à $\\overrightarrow{AB}$.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{CD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{AD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{DC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{BC}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0 ; 1)$, $B(4 ; 2)$, $C(6 ; 5)$ et $D(1 ; 3)$. Que peut-on dire de $ABCD$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $ABCD$ serait un parallélogramme si $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Calculer : $\\overrightarrow{AB}(4-0\\,;\\,2-1) = (4\\,;\\,1)$ et $\\overrightarrow{DC}(6-1\\,;\\,5-3) = (5\\,;\\,2)$. Étape 3 — Comparer : les abscisses valent 4 et 5, les ordonnées 1 et 2 : elles sont différentes. Étape 4 — Conclure : $\\overrightarrow{AB} \\neq \\overrightarrow{DC}$, donc $ABCD$ n'est pas un parallélogramme. Avoir des coordonnées positives ou être orientés vers la droite ne suffit pas : il faut les mêmes coordonnées.",
+                "answers": [
+                  {
+                    "content": "Ce n'est pas un parallélogramme, car $\\overrightarrow{AB}(4\\,;\\,1)$ et $\\overrightarrow{DC}(5\\,;\\,2)$ sont différents.",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est un parallélogramme, car $\\overrightarrow{AB}$ et $\\overrightarrow{DC}$ ont tous deux des coordonnées positives.",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est un parallélogramme, car $\\overrightarrow{AB}$ et $\\overrightarrow{DC}$ sont tous deux orientés vers la droite.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(1 ; 1)$, $B(4 ; 2)$ et $C(6 ; 5)$. Où faut-il placer $D$ pour que $ABCD$ soit un parallélogramme ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Calculer : $\\overrightarrow{AB}(3\\,;\\,1)$ et, si $D(x ; y)$, $\\overrightarrow{DC}(6-x\\,;\\,5-y)$. Étape 3 — Comparer, une équation par coordonnée : $6 - x = 3$ donc $x = 3$ ; $5 - y = 1$ donc $y = 4$. Étape 4 — Conclure : $D(3 ; 4)$. Vérification : $\\overrightarrow{DC}(3\\,;\\,1) = \\overrightarrow{AB}$. La proposition $(9 ; 6)$ vient de $C + \\overrightarrow{AB}$ : cela donne un autre quadrilatère, pas $ABCD$.",
+                "answers": [
+                  {
+                    "content": "$D(9 ; 6)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$D(3 ; -4)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$D(3 ; 4)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$D(2 ; 3)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0 ; 0)$, $B(5 ; 1)$, $C(6 ; 4)$ et $D(1 ; 3)$ ; $ABCD$ est un parallélogramme. Quelles sont les deux égalités vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Écrire : pour $ABCD$, $\\overrightarrow{AB} = \\overrightarrow{DC}$ et $\\overrightarrow{AD} = \\overrightarrow{BC}$. Étape 2 — Calculer : $\\overrightarrow{AB}(5\\,;\\,1)$, $\\overrightarrow{DC}(5\\,;\\,1)$, $\\overrightarrow{AD}(1\\,;\\,3)$, $\\overrightarrow{BC}(1\\,;\\,3)$. Étape 3 — Comparer : les deux paires ont les mêmes coordonnées. Étape 4 — Conclure : $\\overrightarrow{AB} = \\overrightarrow{DC}$ et $\\overrightarrow{AD} = \\overrightarrow{BC}$ sont vraies. Mais $\\overrightarrow{AB} = \\overrightarrow{CD}$ est fausse ($\\overrightarrow{CD}(-5\\,;\\,-1)$) et $\\overrightarrow{AB} = \\overrightarrow{AD}$ aussi ($(5\\,;\\,1)$ contre $(1\\,;\\,3)$).",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{DC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AD} = \\overrightarrow{BC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{CD}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} = \\overrightarrow{AD}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Additionner des vecteurs avec la relation de Chasles",
+          "remember": "**Relation de Chasles** : $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$ (l'extrémité du premier vecteur est l'origine du second). Pour $\\vec{u}(x\\,;\\,y)$ et $\\vec{v}(x'\\,;\\,y')$, le vecteur $\\vec{u} + \\vec{v}$ a pour coordonnées $(x + x'\\ ;\\ y + y')$. L'opposé de $\\overrightarrow{AB}$ est $\\overrightarrow{BA} = -\\overrightarrow{AB}$.",
+          "method": [
+            "Lire les coordonnées des deux vecteurs (les calculer à partir des points si besoin).",
+            "Additionner les abscisses des deux vecteurs.",
+            "Additionner les ordonnées des deux vecteurs.",
+            "Conclure avec la relation de Chasles : si l'extrémité du premier vecteur est l'origine du second, la somme est le vecteur qui va de l'origine du premier à l'extrémité du second."
+          ],
+          "example": {
+            "statement": "Un gbaka roule de $A(1 ; 1)$ à $B(4 ; 2)$, puis de $B$ à $C(5 ; 5)$. Calculer $\\overrightarrow{AB} + \\overrightarrow{BC}$ et le comparer à $\\overrightarrow{AC}$.",
+            "steps": [
+              "Lire : $\\overrightarrow{AB}(3\\,;\\,1)$ et $\\overrightarrow{BC}(1\\,;\\,3)$ (extrémité moins origine).",
+              "Additionner les abscisses : $3 + 1 = 4$.",
+              "Additionner les ordonnées : $1 + 3 = 4$.",
+              "Conclure : la somme a pour coordonnées $(4\\,;\\,4)$. Les vecteurs sont bout à bout, donc par la relation de Chasles $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$ ; et en effet $\\overrightarrow{AC}(4\\,;\\,4)$."
+            ]
+          },
+          "pitfall": "Ne pas écrire $\\overrightarrow{AB} + \\overrightarrow{CB} = \\overrightarrow{AC}$ : la relation de Chasles ne s'applique que si l'extrémité du premier vecteur est l'origine du second. Contre-exemple : $A(0 ; 0)$, $B(2 ; 0)$, $C(2 ; 3)$. On a $\\overrightarrow{AB}(2\\,;\\,0)$ et $\\overrightarrow{CB}(0\\,;\\,-3)$, donc leur somme est $(2\\,;\\,-3)$, alors que $\\overrightarrow{AC}(2\\,;\\,3)$. Pour les mettre bout à bout, remplace $\\overrightarrow{CB}$ par son opposé $\\overrightarrow{BC}(0\\,;\\,3)$ : alors $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$.",
+          "figure": "trajet-chasles",
+          "exercise": {
+            "title": "Additionner des vecteurs",
+            "statement": "Dans cet exercice, tu additionnes des vecteurs avec leurs coordonnées et la relation de Chasles, en suivant la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On donne $\\vec{u}(2\\,;\\,-1)$ et $\\vec{v}(3\\,;\\,4)$. Quelles sont les coordonnées de $\\vec{u} + \\vec{v}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $\\vec{u}(2\\,;\\,-1)$ et $\\vec{v}(3\\,;\\,4)$. Étape 2 — Additionner les abscisses : $2 + 3 = 5$. Étape 3 — Additionner les ordonnées : $-1 + 4 = 3$. Étape 4 — Conclure : $\\vec{u} + \\vec{v}(5\\,;\\,3)$. La proposition $(-1\\,;\\,-5)$ est la différence $\\vec{u} - \\vec{v}$, et $(6\\,;\\,-4)$ multiplie les coordonnées au lieu de les additionner.",
+                "answers": [
+                  {
+                    "content": "$(-1\\,;\\,-5)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(6\\,;\\,-4)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(5\\,;\\,3)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(5\\,;\\,-3)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur une carte quadrillée, un gbaka roule de $A(1 ; 2)$ à $B(4 ; 3)$, puis de $B$ à $C(6 ; 7)$. Quel est son déplacement total $\\overrightarrow{AC}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $\\overrightarrow{AB}(3\\,;\\,1)$ et $\\overrightarrow{BC}(2\\,;\\,4)$. Étape 2 — Additionner les abscisses : $3 + 2 = 5$. Étape 3 — Additionner les ordonnées : $1 + 4 = 5$. Étape 4 — Conclure : les vecteurs sont bout à bout, donc $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}(5\\,;\\,5)$. Vérification : $6 - 1 = 5$ et $7 - 2 = 5$. La proposition $(2\\,;\\,4)$ ne compte que le second trajet, et $(6\\,;\\,7)$ donne les coordonnées de $C$, pas du déplacement.",
+                "answers": [
+                  {
+                    "content": "$(6\\,;\\,7)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(2\\,;\\,4)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(5\\,;\\,5)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(3\\,;\\,1)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle somme de vecteurs est égale à $\\overrightarrow{MP}$ d'après la relation de Chasles ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : on cherche deux vecteurs bout à bout, de $M$ à $P$. Étapes 2 et 3 — Les coordonnées s'additionnent, donc la somme va de l'origine du premier à l'extrémité du second. Étape 4 — Conclure : $\\overrightarrow{MN} + \\overrightarrow{NP} = \\overrightarrow{MP}$, car l'extrémité $N$ du premier est l'origine du second. Dans $\\overrightarrow{MN} + \\overrightarrow{PN}$, les vecteurs ne sont pas bout à bout. Dans $\\overrightarrow{NM} + \\overrightarrow{NP}$, ils ont la même origine : la relation de Chasles ne s'applique pas.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{MN} + \\overrightarrow{PN}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{MN} + \\overrightarrow{NP}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{NM} + \\overrightarrow{NP}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0 ; 0)$, $B(3 ; 1)$ et $C(4 ; 5)$. Quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire : $\\overrightarrow{AB}(3\\,;\\,1)$ et $\\overrightarrow{BC}(4-3\\,;\\,5-1) = (1\\,;\\,4)$. Étape 2 — Additionner les abscisses : $3 + 1 = 4$. Étape 3 — Additionner les ordonnées : $1 + 4 = 5$. Étape 4 — Conclure : $\\overrightarrow{AB} + \\overrightarrow{BC}(4\\,;\\,5)$ et, par la relation de Chasles, $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$ (on a bien $\\overrightarrow{AC}(4\\,;\\,5)$). L'affirmation $(2\\,;\\,-3)$ vient d'une soustraction, et $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{CA}$ donne le vecteur opposé, de coordonnées $(-4\\,;\\,-5)$.",
+                "answers": [
+                  {
+                    "content": "$\\overrightarrow{AB} + \\overrightarrow{BC}$ a pour coordonnées $(4\\,;\\,5)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} + \\overrightarrow{BC}$ a pour coordonnées $(2\\,;\\,-3)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{CA}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour tous points $A$, $B$ et $C$, on a $\\overrightarrow{AB} + \\overrightarrow{CB} = \\overrightarrow{AC}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire avec un exemple : $A(0 ; 0)$, $B(2 ; 0)$, $C(2 ; 3)$ donnent $\\overrightarrow{AB}(2\\,;\\,0)$ et $\\overrightarrow{CB}(0\\,;\\,-3)$. Étapes 2 et 3 — Additionner : $2 + 0 = 2$ et $0 + (-3) = -3$. Étape 4 — Conclure : la somme vaut $(2\\,;\\,-3)$ alors que $\\overrightarrow{AC}(2\\,;\\,3)$. Les deux vecteurs ne sont pas bout à bout (l'extrémité de $\\overrightarrow{AB}$ est $B$, l'origine de $\\overrightarrow{CB}$ est $C$), donc Chasles ne s'applique pas : l'affirmation est fausse. La bonne relation est $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître des vecteurs colinéaires",
+          "remember": "Pour un réel $k$ et $\\vec{u}(x\\,;\\,y)$, le vecteur $k\\vec{u}$ a pour coordonnées $(kx\\ ;\\ ky)$. Deux vecteurs $\\vec{u}(x\\,;\\,y)$ et $\\vec{v}(x'\\,;\\,y')$ sont **colinéaires** quand l'un est un multiple de l'autre, c'est-à-dire quand $x \\times y' = x' \\times y$ (produits en croix égaux). Si $\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ sont colinéaires, les droites $(AB)$ et $(CD)$ sont parallèles ; si $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ sont colinéaires, les points $A$, $B$ et $C$ sont alignés.",
+          "method": [
+            "Calculer les coordonnées des deux vecteurs (les lire, ou les calculer à partir des points).",
+            "Calculer les deux produits en croix : $x \\times y'$ et $x' \\times y$.",
+            "Comparer les deux produits.",
+            "Conclure : s'ils sont égaux, les vecteurs sont colinéaires (droites parallèles, points alignés) ; sinon, ils ne le sont pas."
+          ],
+          "example": {
+            "statement": "Une pirogue va de $A(1 ; 1)$ à $B(3 ; 2)$, une autre de $C(2 ; 4)$ à $D(6 ; 6)$. Les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ sont-ils colinéaires ?",
+            "steps": [
+              "Calculer : $\\overrightarrow{AB}(2\\,;\\,1)$ car $3 - 1 = 2$ et $2 - 1 = 1$ ; $\\overrightarrow{CD}(4\\,;\\,2)$ car $6 - 2 = 4$ et $6 - 4 = 2$.",
+              "Calculer les produits en croix : $2 \\times 2 = 4$ et $4 \\times 1 = 4$.",
+              "Comparer : les deux produits sont égaux.",
+              "Conclure : $\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ sont colinéaires (en fait $\\overrightarrow{CD} = 2\\,\\overrightarrow{AB}$), donc les droites $(AB)$ et $(CD)$ sont parallèles : les deux pirogues suivent des trajectoires parallèles."
+            ]
+          },
+          "pitfall": "Ne pas croire que deux vecteurs sont colinéaires parce que leurs coordonnées « grandissent » de la même façon. Il faut le même coefficient $k$ pour l'abscisse et pour l'ordonnée. Contre-exemple : $\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,5)$. On passe de 2 à 4 (fois 2) mais de 3 à 5 (plus 2) : produits en croix $2 \\times 5 = 10$ et $4 \\times 3 = 12$, différents, donc pas colinéaires. Calcule toujours les deux produits en croix.",
+          "figure": "pirogues-paralleles",
+          "exercise": {
+            "title": "Reconnaître des vecteurs colinéaires",
+            "statement": "Dans cet exercice, tu décides si des vecteurs sont colinéaires avec les produits en croix, en suivant la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Les vecteurs $\\vec{u}(3\\,;\\,-2)$ et $\\vec{v}(-6\\,;\\,4)$ sont colinéaires.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : les coordonnées sont données, $\\vec{u}(3\\,;\\,-2)$ et $\\vec{v}(-6\\,;\\,4)$. Étape 2 — Calculer les produits en croix : $3 \\times 4 = 12$ et $(-6) \\times (-2) = 12$. Étape 3 — Comparer : les deux produits sont égaux. Étape 4 — Conclure : les vecteurs sont colinéaires (en fait $\\vec{v} = -2\\vec{u}$, ils sont de sens contraires). L'affirmation est vraie ; deux vecteurs de sens contraires peuvent être colinéaires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces vecteurs, lequel est colinéaire à $\\vec{u}(2\\,;\\,5)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : les coordonnées sont données. Étape 2 — Calculer les produits en croix de chaque proposition avec $\\vec{u}(2\\,;\\,5)$. Pour $(4\\,;\\,10)$ : $2 \\times 10 = 20$ et $4 \\times 5 = 20$. Pour $(4\\,;\\,7)$ : $14$ et $20$. Pour $(3\\,;\\,6)$ : $12$ et $15$. Pour $(5\\,;\\,2)$ : $4$ et $25$. Étape 3 — Comparer : seuls les produits de $(4\\,;\\,10)$ sont égaux. Étape 4 — Conclure : $(4\\,;\\,10) = 2\\vec{u}$ est colinéaire à $\\vec{u}$. Inverser les coordonnées, comme dans $(5\\,;\\,2)$, ne donne pas un vecteur colinéaire.",
+                "answers": [
+                  {
+                    "content": "$(5\\,;\\,2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(4\\,;\\,7)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(3\\,;\\,6)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(4\\,;\\,10)$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour quelle valeur de $m$ les vecteurs $\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,m)$ sont-ils colinéaires ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,m)$ sont donnés. Étape 2 — Calculer les produits en croix : $2 \\times m = 2m$ et $4 \\times 3 = 12$. Étape 3 — Comparer : les vecteurs sont colinéaires quand $2m = 12$. Étape 4 — Conclure : $m = 12 \\div 2 = 6$ ; on retrouve $\\vec{v} = 2\\vec{u}$. La proposition $m = 5$ vient du raisonnement « de 2 à 4 on ajoute 2, donc de 3 à 5 » : c'est le piège de la fiche. La proposition $m = 12$ oublie de diviser par 2.",
+                "answers": [
+                  {
+                    "content": "$m = 5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$m = 12$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$m = 6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$m = 8$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0 ; 0)$, $B(2 ; 1)$, $C(4 ; 2)$ et $D(6 ; 5)$. Quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Calculer : $\\overrightarrow{AB}(2\\,;\\,1)$, $\\overrightarrow{AC}(4\\,;\\,2)$, $\\overrightarrow{AD}(6\\,;\\,5)$. Étape 2 — Calculer les produits en croix : pour $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ : $2 \\times 2 = 4$ et $4 \\times 1 = 4$ ; pour $\\overrightarrow{AB}$ et $\\overrightarrow{AD}$ : $2 \\times 5 = 10$ et $6 \\times 1 = 6$. Étape 3 — Comparer : égaux pour la première paire, différents pour la seconde. Étape 4 — Conclure : $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ sont colinéaires, donc $A$, $B$, $C$ sont alignés ; $\\overrightarrow{AB}$ et $\\overrightarrow{AD}$ ne le sont pas, donc $A$, $B$, $D$ ne sont pas alignés.",
+                "answers": [
+                  {
+                    "content": "Les points $A$, $B$ et $C$ sont alignés.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ sont colinéaires.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les points $A$, $B$ et $D$ sont alignés.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les vecteurs $\\overrightarrow{AB}$ et $\\overrightarrow{AD}$ sont colinéaires.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les vecteurs $\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,5)$ sont-ils colinéaires ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $\\vec{u}(2\\,;\\,3)$ et $\\vec{v}(4\\,;\\,5)$ sont donnés. Étape 2 — Calculer les produits en croix : $2 \\times 5 = 10$ et $4 \\times 3 = 12$. Étape 3 — Comparer : $10 \\neq 12$. Étape 4 — Conclure : les vecteurs ne sont pas colinéaires. Le raisonnement « on ajoute 2 à chaque coordonnée » est faux : pour être colinéaires, il faudrait multiplier les deux coordonnées par le même nombre, et $4 \\div 2 = 2$ alors que $5 \\div 3$ n'est pas égal à 2.",
+                "answers": [
+                  {
+                    "content": "Oui, car on passe de 2 à 4 et de 3 à 5 : chaque coordonnée augmente de 2.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car les produits en croix $2 \\times 5 = 10$ et $4 \\times 3 = 12$ sont différents.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, car les deux vecteurs ont des coordonnées positives.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le trajet d'un gbaka sur la carte",
+          "exercise_type": "fixation",
+          "figure": "trajet-gbaka",
+          "statement": "Sur une carte quadrillée (1 carreau = 1 km), un gbaka part de la gare $G(2 ; 1)$, s'arrête à $M(5 ; 2)$ puis termine sa course au terminus $T(6 ; 6)$. Tu calcules ses déplacements avec les vecteurs.",
+          "questions": [
+            {
+              "content": "Un gbaka part de la gare $G(2 ; 1)$ et arrive à l'arrêt $M(5 ; 2)$. Quelles sont les coordonnées de $\\overrightarrow{GM}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : l'origine est $G(2 ; 1)$, l'extrémité est $M(5 ; 2)$. Étape 2 — Calculer l'abscisse : $5 - 2 = 3$. Étape 3 — Calculer l'ordonnée : $2 - 1 = 1$. Étape 4 — Écrire : $\\overrightarrow{GM}(3\\,;\\,1)$ : le gbaka avance de 3 km vers l'est et de 1 km vers le nord. Le vecteur $(-3\\,;\\,-1)$ est le trajet de retour $\\overrightarrow{MG}$ ; $(7\\,;\\,3)$ additionne au lieu de soustraire.",
+              "answers": [
+                {
+                  "content": "$(3\\,;\\,1)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(-3\\,;\\,-1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(7\\,;\\,3)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(1\\,;\\,3)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un gbaka va de l'arrêt $M(5 ; 2)$ au terminus $T(6 ; 6)$. Quelles sont les coordonnées de $\\overrightarrow{MT}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : l'origine est $M(5 ; 2)$, l'extrémité est $T(6 ; 6)$. Étape 2 — Calculer l'abscisse : $6 - 5 = 1$. Étape 3 — Calculer l'ordonnée : $6 - 2 = 4$. Étape 4 — Écrire : $\\overrightarrow{MT}(1\\,;\\,4)$. Les propositions $(4\\,;\\,1)$ (coordonnées échangées), $(-1\\,;\\,-4)$ (sens inversé) et $(11\\,;\\,8)$ (addition) correspondent chacune à une erreur classique : l'abscisse se lit en premier, et l'on soustrait l'origine à l'extrémité.",
+              "answers": [
+                {
+                  "content": "$(4\\,;\\,1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(-1\\,;\\,-4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(11\\,;\\,8)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(1\\,;\\,4)$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un gbaka roule de $G(2 ; 1)$ à $M(5 ; 2)$ puis de $M$ à $T(6 ; 6)$, avec $\\overrightarrow{GM}(3\\,;\\,1)$ et $\\overrightarrow{MT}(1\\,;\\,4)$. Quelles sont les coordonnées de son déplacement total $\\overrightarrow{GT}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : $\\overrightarrow{GM}(3\\,;\\,1)$ et $\\overrightarrow{MT}(1\\,;\\,4)$, bout à bout (l'extrémité $M$ du premier est l'origine du second). Étape 2 — Additionner les abscisses : $3 + 1 = 4$. Étape 3 — Additionner les ordonnées : $1 + 4 = 5$. Étape 4 — Conclure : par la relation de Chasles, $\\overrightarrow{GM} + \\overrightarrow{MT} = \\overrightarrow{GT}(4\\,;\\,5)$. Vérification : $6 - 2 = 4$ et $6 - 1 = 5$. La proposition $(2\\,;\\,-3)$ vient d'une soustraction des deux vecteurs, et $(6\\,;\\,6)$ donne les coordonnées de $T$.",
+              "answers": [
+                {
+                  "content": "$(2\\,;\\,-3)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(6\\,;\\,6)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(4\\,;\\,5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(1\\,;\\,4)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après avoir atteint le terminus $T(6 ; 6)$, le gbaka revient à la gare $G(2 ; 1)$. Quelles sont les coordonnées de $\\overrightarrow{TG}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : l'origine est $T(6 ; 6)$, l'extrémité est $G(2 ; 1)$. Étape 2 — Calculer l'abscisse : $2 - 6 = -4$. Étape 3 — Calculer l'ordonnée : $1 - 6 = -5$. Étape 4 — Écrire : $\\overrightarrow{TG}(-4\\,;\\,-5)$. C'est l'opposé de $\\overrightarrow{GT}(4\\,;\\,5)$ : $\\overrightarrow{TG} = -\\overrightarrow{GT}$. La proposition $(4\\,;\\,5)$ est l'aller et non le retour ; $(-4\\,;\\,5)$ oublie de changer le signe de l'ordonnée.",
+              "answers": [
+                {
+                  "content": "$(4\\,;\\,5)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(-4\\,;\\,5)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(-4\\,;\\,-5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(-6\\,;\\,-6)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On reprend le trajet $G(2 ; 1)$, $M(5 ; 2)$, $T(6 ; 6)$. Quelles sont les deux affirmations vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Lire : $\\overrightarrow{GM}(3\\,;\\,1)$, $\\overrightarrow{MT}(1\\,;\\,4)$, $\\overrightarrow{GT}(4\\,;\\,5)$, $\\overrightarrow{TG}(-4\\,;\\,-5)$. Étape 2 — La relation de Chasles donne $\\overrightarrow{GM} + \\overrightarrow{MT} = \\overrightarrow{GT}$ : vraie, car $3 + 1 = 4$ et $1 + 4 = 5$. Étape 3 — Le retour est l'opposé de l'aller : $\\overrightarrow{TG} = -\\overrightarrow{GT}$ est vraie. Étape 4 — Les deux autres sont fausses : $\\overrightarrow{GM} + \\overrightarrow{TM}$ n'est pas bout à bout et vaut $(3\\,;\\,1) + (-1\\,;\\,-4) = (2\\,;\\,-3)$, et $\\overrightarrow{TG}$ a pour coordonnées $(-4\\,;\\,-5)$, pas $(4\\,;\\,5)$.",
+              "answers": [
+                {
+                  "content": "$\\overrightarrow{GM} + \\overrightarrow{MT} = \\overrightarrow{GT}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\overrightarrow{TG} = -\\overrightarrow{GT}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\overrightarrow{GM} + \\overrightarrow{TM} = \\overrightarrow{GT}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\overrightarrow{TG}$ a pour coordonnées $(4\\,;\\,5)$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux pirogues sur la lagune",
+          "exercise_type": "fixation",
+          "figure": "deux-pirogues",
+          "statement": "Sur une carte quadrillée de la lagune, une première pirogue va de $A(2 ; 1)$ à $B(6 ; 3)$ et une seconde de $C(1 ; 4)$ à $D(5 ; 6)$. Tu compares leurs déplacements avec les vecteurs.",
+          "questions": [
+            {
+              "content": "Une pirogue va de $A(2 ; 1)$ à $B(6 ; 3)$. Quelles sont les coordonnées de $\\overrightarrow{AB}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : l'origine est $A(2 ; 1)$, l'extrémité est $B(6 ; 3)$. Étape 2 — Calculer l'abscisse : $6 - 2 = 4$. Étape 3 — Calculer l'ordonnée : $3 - 1 = 2$. Étape 4 — Écrire : $\\overrightarrow{AB}(4\\,;\\,2)$. Le vecteur $(-4\\,;\\,-2)$ serait $\\overrightarrow{BA}$, et $(4\\,;\\,-2)$ se trompe de signe sur l'ordonnée ; $(8\\,;\\,4)$ additionne les coordonnées.",
+              "answers": [
+                {
+                  "content": "$(-4\\,;\\,-2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(8\\,;\\,4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(4\\,;\\,-2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(4\\,;\\,2)$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une seconde pirogue va de $C(1 ; 4)$ à $D(5 ; 6)$. Quelles sont les coordonnées de $\\overrightarrow{CD}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : l'origine est $C(1 ; 4)$, l'extrémité est $D(5 ; 6)$. Étape 2 — Calculer l'abscisse : $5 - 1 = 4$. Étape 3 — Calculer l'ordonnée : $6 - 4 = 2$. Étape 4 — Écrire : $\\overrightarrow{CD}(4\\,;\\,2)$. Le vecteur $(6\\,;\\,10)$ est une addition des coordonnées, $(-4\\,;\\,-2)$ le trajet de retour, et $(2\\,;\\,4)$ échange abscisse et ordonnée.",
+              "answers": [
+                {
+                  "content": "$(6\\,;\\,10)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(-4\\,;\\,-2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(4\\,;\\,2)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(2\\,;\\,4)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On a $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\overrightarrow{CD}(4\\,;\\,2)$ avec $A(2 ; 1)$, $B(6 ; 3)$, $C(1 ; 4)$ et $D(5 ; 6)$. Quelle conclusion est correcte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : un parallélogramme $ABDC$ se traduit par $\\overrightarrow{AB} = \\overrightarrow{CD}$ (côtés opposés, dans l'ordre des sommets $A$, $B$, $D$, $C$). Étape 2 — Les coordonnées ont été calculées : $(4\\,;\\,2)$ et $(4\\,;\\,2)$. Étape 3 — Comparer : elles sont égales. Étape 4 — Conclure : $\\overrightarrow{AB} = \\overrightarrow{CD}$, donc $ABDC$ est un parallélogramme. Deux vecteurs peuvent être égaux sans avoir la même origine. En revanche, $ABCD$ n'est pas un parallélogramme : $\\overrightarrow{DC}(-4\\,;\\,-2) \\neq \\overrightarrow{AB}$.",
+              "answers": [
+                {
+                  "content": "$\\overrightarrow{AB} = \\overrightarrow{CD}$, donc $ABDC$ est un parallélogramme.",
+                  "correct": true
+                },
+                {
+                  "content": "$\\overrightarrow{AB} = \\overrightarrow{CD}$, donc $ABCD$ est un parallélogramme.",
+                  "correct": false
+                },
+                {
+                  "content": "$\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ sont opposés.",
+                  "correct": false
+                },
+                {
+                  "content": "$\\overrightarrow{AB}$ et $\\overrightarrow{CD}$ ne sont pas égaux car ils n'ont pas la même origine.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une troisième pirogue part de $E(3 ; 3)$ et fait le même déplacement que $\\overrightarrow{AB}(4\\,;\\,2)$. Elle arrive en $F$ tel que $\\overrightarrow{EF} = \\overrightarrow{AB}$. Quelles sont les coordonnées de $F$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $\\overrightarrow{EF} = \\overrightarrow{AB}$. Étape 2 — Calculer : $\\overrightarrow{AB}(4\\,;\\,2)$ et, si $F(x ; y)$, $\\overrightarrow{EF}(x-3\\,;\\,y-3)$. Étape 3 — Comparer, une équation par coordonnée : $x - 3 = 4$ donc $x = 7$ ; $y - 3 = 2$ donc $y = 5$. Étape 4 — Conclure : $F(7 ; 5)$. La proposition $(4 ; 2)$ confond les coordonnées du vecteur avec celles du point d'arrivée ; $(-1 ; 1)$ soustrait le vecteur au lieu de l'ajouter.",
+              "answers": [
+                {
+                  "content": "$F(4 ; 2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$F(-1 ; 1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$F(7 ; 5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$F(1 ; 1)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les vecteurs $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\vec{v}(6\\,;\\,4)$ sont colinéaires.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Calculer : les coordonnées sont données, $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\vec{v}(6\\,;\\,4)$. Étape 2 — Calculer les produits en croix : $4 \\times 4 = 16$ et $6 \\times 2 = 12$. Étape 3 — Comparer : $16 \\neq 12$. Étape 4 — Conclure : les vecteurs ne sont pas colinéaires, l'affirmation est fausse. Le piège est d'ajouter 2 à chaque coordonnée (de 4 à 6 et de 2 à 4) : il faudrait au contraire multiplier par un même nombre.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Quatre balises sur la carte",
+          "exercise_type": "evaluation",
+          "figure": "balises-carte",
+          "statement": "Sur une carte quadrillée, quatre balises de signalisation sont posées en $A(1 ; 1)$, $B(5 ; 3)$, $C(7 ; 6)$ et $D(3 ; 4)$. Tu étudies le quadrilatère $ABCD$ avec les vecteurs, comme à l'interrogation ou au BEPC.",
+          "questions": [
+            {
+              "content": "Quelles sont les coordonnées de $\\overrightarrow{AB}$ avec $A(1 ; 1)$ et $B(5 ; 3)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : l'origine est $A(1 ; 1)$ et l'extrémité est $B(5 ; 3)$. Étape 2 — Calculer l'abscisse : $x_B - x_A = 5 - 1 = 4$. Étape 3 — Calculer l'ordonnée : $y_B - y_A = 3 - 1 = 2$. Étape 4 — Écrire : $\\overrightarrow{AB}(4\\,;\\,2)$. Rédaction à retenir : « extrémité moins origine ». La proposition $(-4\\,;\\,-2)$ est $\\overrightarrow{BA}$ ; $(6\\,;\\,4)$ additionne les coordonnées.",
+              "answers": [
+                {
+                  "content": "$(-4\\,;\\,-2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(6\\,;\\,4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(4\\,;\\,2)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(2\\,;\\,4)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $A(1 ; 1)$, $B(5 ; 3)$, $C(7 ; 6)$ et $D(3 ; 4)$, avec $\\overrightarrow{AB}(4\\,;\\,2)$. Que peut-on conclure pour $ABCD$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Propriété : $ABCD$ est un parallélogramme si et seulement si $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Calculer : $\\overrightarrow{DC}(7-3\\,;\\,6-4) = (4\\,;\\,2)$. Étape 3 — Comparer : $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\overrightarrow{DC}(4\\,;\\,2)$ ont les mêmes coordonnées. Étape 4 — Conclure : $\\overrightarrow{AB} = \\overrightarrow{DC}$, donc $ABCD$ est un parallélogramme. À rédiger ainsi en devoir. La proposition qui compare $\\overrightarrow{AB}$ et $\\overrightarrow{BC}$ mélange deux côtés consécutifs : on compare toujours les côtés opposés.",
+              "answers": [
+                {
+                  "content": "$ABCD$ est un parallélogramme, car $\\overrightarrow{AB}(4\\,;\\,2) = \\overrightarrow{DC}(4\\,;\\,2)$.",
+                  "correct": true
+                },
+                {
+                  "content": "$ABCD$ n'est pas un parallélogramme, car $\\overrightarrow{AB}(4\\,;\\,2) \\neq \\overrightarrow{BC}(2\\,;\\,3)$.",
+                  "correct": false
+                },
+                {
+                  "content": "$ABCD$ n'est pas un parallélogramme, car $\\overrightarrow{DC}$ a pour coordonnées $(-4\\,;\\,-2)$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $A(1 ; 1)$, $B(5 ; 3)$, $C(7 ; 6)$ et $D(3 ; 4)$, on a $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\overrightarrow{AD}(2\\,;\\,3)$. Quelles sont les coordonnées de $\\overrightarrow{AB} + \\overrightarrow{AD}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\overrightarrow{AD}(2\\,;\\,3)$. Étape 2 — Additionner les abscisses : $4 + 2 = 6$. Étape 3 — Additionner les ordonnées : $2 + 3 = 5$. Étape 4 — Conclure : $\\overrightarrow{AB} + \\overrightarrow{AD}(6\\,;\\,5)$. Comme $ABCD$ est un parallélogramme, $\\overrightarrow{AD} = \\overrightarrow{BC}$, donc $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}$ par la relation de Chasles, et l'on vérifie $\\overrightarrow{AC}(7-1\\,;\\,6-1) = (6\\,;\\,5)$. La proposition $(2\\,;\\,-1)$ est la différence $\\overrightarrow{AB} - \\overrightarrow{AD}$.",
+              "answers": [
+                {
+                  "content": "$(2\\,;\\,-1)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(4\\,;\\,2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(6\\,;\\,5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(8\\,;\\,6)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On a $\\overrightarrow{AB}(4\\,;\\,2)$ avec $A(1 ; 1)$ et $B(5 ; 3)$. Quels sont les trois points $X$ tels que $A$, $B$ et $X$ soient alignés ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Calculer : $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\overrightarrow{AX}$ pour chaque point. Étape 2 — Produits en croix de $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\overrightarrow{AX}(x'\\,\\,;\\,\\,y')$ : $4y'$ et $2x'$. Pour $(3 ; 2)$ : $\\overrightarrow{AX}(2\\,;\\,1)$, $4$ et $4$. Pour $(7 ; 4)$ : $(6\\,;\\,3)$, $12$ et $12$. Pour $(9 ; 5)$ : $(8\\,;\\,4)$, $16$ et $16$. Pour $(4 ; 3)$ : $(3\\,;\\,2)$, $8$ et $6$. Pour $(7 ; 5)$ : $(6\\,;\\,4)$, $16$ et $12$. Pour $(6 ; 4)$ : $(5\\,;\\,3)$, $12$ et $10$. Étape 3 — Comparer : égaux pour les trois premiers. Étape 4 — Conclure : $(3 ; 2)$, $(7 ; 4)$ et $(9 ; 5)$ sont alignés avec $A$ et $B$, car $\\overrightarrow{AB}$ et $\\overrightarrow{AX}$ sont colinéaires.",
+              "answers": [
+                {
+                  "content": "$X(3 ; 2)$",
+                  "correct": true
+                },
+                {
+                  "content": "$X(7 ; 4)$",
+                  "correct": true
+                },
+                {
+                  "content": "$X(9 ; 5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$X(4 ; 3)$",
+                  "correct": false
+                },
+                {
+                  "content": "$X(7 ; 5)$",
+                  "correct": false
+                },
+                {
+                  "content": "$X(6 ; 4)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Puisque $ABCD$ est un parallélogramme, on a $\\overrightarrow{AB} = \\overrightarrow{CD}$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Propriété : dans le parallélogramme $ABCD$, l'égalité est $\\overrightarrow{AB} = \\overrightarrow{DC}$, dans l'ordre des sommets. Étape 2 — Calculer : $\\overrightarrow{AB}(4\\,;\\,2)$ et $\\overrightarrow{CD}(3-7\\,;\\,4-6) = (-4\\,;\\,-2)$. Étape 3 — Comparer : les coordonnées sont opposées, pas égales. Étape 4 — Conclure : $\\overrightarrow{AB} \\neq \\overrightarrow{CD}$ ; en fait $\\overrightarrow{CD} = -\\overrightarrow{AB}$. L'affirmation est fausse. Il faut écrire $\\overrightarrow{AB} = \\overrightarrow{DC}$ : l'ordre des lettres compte.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le circuit d'un gbaka entre trois villages",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Sur une carte quadrillée (1 carreau = 1 km), un gbaka part du village $A(1 ; 2)$, passe par le village $B(4 ; 3)$ puis arrive au village $C(7 ; 7)$. Tu combines coordonnées, somme de vecteurs, parallélogramme et colinéarité, comme dans un devoir de 3ème.",
+          "questions": [
+            {
+              "content": "Le gbaka roule de $A(1 ; 2)$ à $B(4 ; 3)$ puis de $B$ à $C(7 ; 7)$. Quelles sont les coordonnées de $\\overrightarrow{AB} + \\overrightarrow{BC}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : $\\overrightarrow{AB}(4-1\\,;\\,3-2) = (3\\,;\\,1)$ et $\\overrightarrow{BC}(7-4\\,;\\,7-3) = (3\\,;\\,4)$. Étape 2 — Additionner les abscisses : $3 + 3 = 6$. Étape 3 — Additionner les ordonnées : $1 + 4 = 5$. Étape 4 — Conclure : les vecteurs sont bout à bout, donc $\\overrightarrow{AB} + \\overrightarrow{BC} = \\overrightarrow{AC}(6\\,;\\,5)$ par la relation de Chasles. Vérification : $7 - 1 = 6$ et $7 - 2 = 5$. La proposition $(0\\,;\\,-3)$ est la différence $\\overrightarrow{AB} - \\overrightarrow{BC}$.",
+              "answers": [
+                {
+                  "content": "$(0\\,;\\,-3)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(9\\,;\\,12)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(6\\,;\\,5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(3\\,;\\,5)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un second gbaka part de $D(2 ; 1)$ et fait le même déplacement que $\\overrightarrow{AC}(6\\,;\\,5)$. Il arrive en $E$ tel que $\\overrightarrow{DE} = \\overrightarrow{AC}$. Quelles sont les coordonnées de $E$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $\\overrightarrow{DE} = \\overrightarrow{AC}$. Étape 2 — Calculer : $\\overrightarrow{AC}(6\\,;\\,5)$ et, si $E(x ; y)$, $\\overrightarrow{DE}(x-2\\,;\\,y-1)$. Étape 3 — Comparer, une équation par coordonnée : $x - 2 = 6$ donc $x = 8$ ; $y - 1 = 5$ donc $y = 6$. Étape 4 — Conclure : $E(8 ; 6)$. La proposition $(6 ; 5)$ prend les coordonnées du vecteur pour celles d'un point ; $(-4 ; -4)$ soustrait le vecteur au lieu de l'ajouter.",
+              "answers": [
+                {
+                  "content": "$E(6 ; 5)$",
+                  "correct": false
+                },
+                {
+                  "content": "$E(8 ; 6)$",
+                  "correct": true
+                },
+                {
+                  "content": "$E(-4 ; -4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$E(8 ; 7)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après avoir atteint $C(7 ; 7)$, le gbaka revient en $A(1 ; 2)$. Quelles sont les coordonnées de $\\overrightarrow{CA}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : l'origine est $C(7 ; 7)$, l'extrémité est $A(1 ; 2)$. Étape 2 — Calculer l'abscisse : $1 - 7 = -6$. Étape 3 — Calculer l'ordonnée : $2 - 7 = -5$. Étape 4 — Écrire : $\\overrightarrow{CA}(-6\\,;\\,-5)$, l'opposé de $\\overrightarrow{AC}(6\\,;\\,5)$. La proposition $(6\\,;\\,5)$ est l'aller et $(-6\\,;\\,5)$ oublie de changer le signe de l'ordonnée.",
+              "answers": [
+                {
+                  "content": "$(6\\,;\\,5)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(-6\\,;\\,5)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(-6\\,;\\,-5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(3\\,;\\,-1)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $A(1 ; 2)$, $B(4 ; 3)$ et $C(7 ; 7)$. Où placer $D$ pour que $ABCD$ soit un parallélogramme ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $ABCD$ est un parallélogramme si $\\overrightarrow{AB} = \\overrightarrow{DC}$. Étape 2 — Calculer : $\\overrightarrow{AB}(3\\,;\\,1)$ et, si $D(x ; y)$, $\\overrightarrow{DC}(7-x\\,;\\,7-y)$. Étape 3 — Comparer : $7 - x = 3$ donc $x = 4$ ; $7 - y = 1$ donc $y = 6$. Étape 4 — Conclure : $D(4 ; 6)$. Vérification : $\\overrightarrow{DC}(3\\,;\\,1) = \\overrightarrow{AB}$. La proposition $(10 ; 8)$ vient de $C + \\overrightarrow{AB}$, qui donne un autre quadrilatère ; $(-2 ; -2)$ vient de $A + B - C$.",
+              "answers": [
+                {
+                  "content": "$D(10 ; 8)$",
+                  "correct": false
+                },
+                {
+                  "content": "$D(-2 ; -2)$",
+                  "correct": false
+                },
+                {
+                  "content": "$D(4 ; 6)$",
+                  "correct": true
+                },
+                {
+                  "content": "$D(3 ; 5)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le vecteur $\\overrightarrow{AC}$ a pour coordonnées $(6\\,;\\,5)$. Quels sont les deux vecteurs colinéaires à $\\overrightarrow{AC}$ ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Calculer : $\\overrightarrow{AC}(6\\,;\\,5)$ et les vecteurs proposés sont donnés. Étape 2 — Calculer les produits en croix avec $(6\\,;\\,5)$ : pour $(12\\,;\\,10)$, $6 \\times 10 = 60$ et $12 \\times 5 = 60$ ; pour $(-6\\,;\\,-5)$, $6 \\times (-5) = -30$ et $(-6) \\times 5 = -30$ ; pour $(7\\,;\\,6)$, $36$ et $35$ ; pour $(6\\,;\\,10)$, $60$ et $30$. Étape 3 — Comparer : égaux pour les deux premiers. Étape 4 — Conclure : $(12\\,;\\,10) = 2\\overrightarrow{AC}$ et $(-6\\,;\\,-5) = -\\overrightarrow{AC}$ sont colinéaires à $\\overrightarrow{AC}$. Le vecteur $(7\\,;\\,6)$ est le piège : on ajoute 1 à chaque coordonnée au lieu de multiplier.",
+              "answers": [
+                {
+                  "content": "$(12\\,;\\,10)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(-6\\,;\\,-5)$",
+                  "correct": true
+                },
+                {
+                  "content": "$(7\\,;\\,6)$",
+                  "correct": false
+                },
+                {
+                  "content": "$(6\\,;\\,10)$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

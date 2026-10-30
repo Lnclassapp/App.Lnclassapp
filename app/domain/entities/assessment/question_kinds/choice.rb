@@ -1,12 +1,13 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Choice
 # Rôle : Vrai / Faux, choix unique, 2 ou 3 propositions correctes : cocher le bon ensemble de propositions
-# ADR  : 0039, 0054, 0091 (§4.3 : comportement d'avant, déplacé de Question)
+# ADR  : 0039, 0054, 0091 (§4.3 : comportement d'avant, déplacé de Question), 0115
 module Entities
   module Assessment
     module QuestionKinds
       class Choice
         EXPECTED = { true_false: 1, single_choice: 1, multiple_correct_2: 2, multiple_correct_3: 3 }.freeze
         # Ce que la page poste : attempt[answer_ids][].
+        AUTO_GRADED = true
         INPUT = :answer_ids
         INVALID = { answer_ids: [ :wrong_selection ] }.freeze
 

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Exercise
 # Rôle : un exercice d'une leçon (de notion ou de toute la leçon), son sujet, ses questions et les faits de publication de ses parents
-# ADR  : 0035, 0036, 0054, 0105, 0113
+# ADR  : 0035, 0036, 0054, 0105, 0113, 0115
 module Entities
   module Assessment
     class Exercise
@@ -13,6 +13,8 @@ module Entities
 
       attr_accessor :id, :public_id, :course_id, :essential_id, :exercise_type, :position, :author_id, :status,
                     :published_at, :archived_at, :parents_published
+      # ADR-0115 : le sujet en blocs (document, tableau), facultatif ; sa validation (StatementBlocks) est au Lot E.
+      attr_accessor :statement_blocks
       attr_writer :questions
       attr_reader :title, :statement
 
@@ -36,8 +38,11 @@ module Entities
       def published? = status == "published"
       def readable_chain_published? = published? && parents_published == true
 
-      # Au moins une question, toutes bien construites (ADR-0035).
-      def publishable? = questions.any? && questions.all? { |question| question.structure_errors.empty? }
+      # Au moins une question, toutes bien construites (ADR-0035), dont une corrigée automatiquement (ADR-0115) : sans elle,
+      # la copie n'a pas de note.
+      def publishable?
+        questions.any? && questions.all? { |question| question.structure_errors.empty? } && questions.any?(&:auto_graded?)
+      end
 
       # Les questions dont l'image manque ou n'a pas de texte de remplacement, par numéro (ADR-0105 §4.4) → { 2 => [:image_missing] }.
       def image_errors = questions.each_with_index.to_h { |question, index| [ index + 1, question.image_errors ] }.reject { _2.empty? }

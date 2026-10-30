@@ -1,92 +1,43 @@
 # 🔌 INFRA · Queries::Catalog::RevisionSheetQuery
-# Rôle : la « Fiche de révision » d'une leçon pour sa page (fiche cahier, ou texte de la leçon puis des notions publiées), avec sa coupe des 150 mots
-# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113 · UDR : 0139 §3.2
+# Rôle : la « Fiche de révision » d'une leçon pour sa page : ses notions au gabarit des quatre blocs, ses figures et son thème, avec la coupe des 150 mots
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.3) · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0139 §3.2
 module Queries
   module Catalog
     class RevisionSheetQuery
-      # kind : :sheet (fiche cahier), :texts (texte de la leçon puis notions) ou :empty ; sheet : CourseSheetQuery::Row | nil ;
-      # texts : [{ title:, html:, blocks: }] (title nil pour le texte de la leçon ; html : le texte entier, blocks : son html
-      # bloc par bloc, dans l'ordre) ; cut : la coupe des 150 mots (Entities::Catalog::RevisionPreview), nil sans coupe.
-      # Contrat gelé par le Lot 0 : le Lot A le remplit, sans le changer (`blocks` complète l'élément de `texts`).
-      Revision = Data.define(:kind, :sheet, :texts, :cut)
+      # kind : :sheet (au moins une notion à montrer) ou :empty ; sheet : Lesson | nil ; cut : la coupe des 150 mots
+      # (Entities::Catalog::RevisionPreview), nil sans coupe.
+      Revision = Data.define(:kind, :sheet, :cut)
+      # material, level : leurs noms ; theme : blue | teal | burgundy ; notions : [Notion].
+      Lesson = Data.define(:name, :subtitle, :material, :level, :theme, :notions)
+      # sheet : Entities::Catalog::NotionSheet ; figure : Entities::Catalog::Figure | nil (la clé citée est absente de la leçon).
+      Notion = Data.define(:slug, :name, :sheet, :figure) do
+        def anchor = "notion-#{slug}"
+      end
 
-      EMPTY = Revision.new(kind: :empty, sheet: nil, texts: [], cut: nil)
+      EMPTY = Revision.new(kind: :empty, sheet: nil, cut: nil)
 
-      # → Revision. Les brouillons et archivés ne figurent jamais ici : la fiche se lit publiée, pour tous les rôles.
-      def call(course_slug:, actor:) # rubocop:disable Lint/UnusedMethodArgument -- signature gelée par le Lot 0
-        sheet = CourseSheetQuery.new.call(course_slug:)
-        return sheet_revision(sheet) if sheet
+      # → Revision. Un élève ou un enseignant ne lit que les notions publiées ; l'équipe relit aussi les brouillons. Une notion sans
+      # fiche (ancien contenu) n'est jamais montrée. La lecture d'un brouillon de leçon est l'affaire de ReadPublishedPolicy.
+      def call(course_slug:, actor:)
+        course = Orm::Course.joins(:material, :level).where(slug: course_slug)
+                            .pick(:id, :name, :subtitle, :sheet_theme, :figures, "materials.name", "levels.name")
+        return EMPTY if course.nil?
 
-        course = Orm::Course.find_by(slug: course_slug)
-        course ? texts_revision(course) : EMPTY
+        id, name, subtitle, theme, figures, material, level = course
+        notions = notions_of(id, figures, statuses: actor&.team? ? %w[draft published] : %w[published])
+        return EMPTY if notions.empty?
+
+        preview = Entities::Catalog::RevisionPreview.for_notions(notions.map(&:sheet))
+        Revision.new(kind: :sheet, sheet: Lesson.new(name:, subtitle:, material:, level:, theme:, notions:), cut: (preview if preview.cut?))
       end
 
       private
 
-      def sheet_revision(sheet)
-        preview = Entities::Catalog::RevisionPreview.for_sheet(sheet.pages)
-        Revision.new(kind: :sheet, sheet:, texts: [], cut: (preview if preview.cut?))
-      end
-
-      def texts_revision(course)
-        texts = [ text_entry(nil, course.content) ] + essential_entries(course.id)
-        texts.select! { it[:blocks].any? }
-        return EMPTY if texts.empty?
-
-        preview = Entities::Catalog::RevisionPreview.for_texts(texts.map { { title: it[:title], blocks: it[:plain] } })
-        Revision.new(kind: :texts, sheet: nil, texts: texts.map { it.except(:plain) }, cut: (preview if preview.cut?))
-      end
-
-      # Les notions publiées dans l'ordre, leurs textes lus d'une seule requête (pas de préchargement : Bullet le juge inutile
-      # quand une notion n'a pas de texte).
-      def essential_entries(course_id)
-        rows = Orm::Essential.where(course_id:, status: "published").order(:position).pluck(:id, :name)
-        bodies = ActionText::RichText.where(record_type: Orm::Essential.polymorphic_name, record_id: rows.map(&:first), name: "content")
-                                     .index_by(&:record_id)
-        rows.map { |id, name| text_entry(name, bodies[id]) }
-      end
-
-      # Le texte rendu et assaini par Action Text, coupé en blocs de premier niveau (un paragraphe = un bloc). plain : le texte
-      # de chaque bloc pour le compte des mots ; une figure (image jointe) n'en porte aucun.
-      def text_entry(title, rich_text)
-        nodes = rich_text.blank? ? [] : blocks_of(rich_text.to_s)
-        { title:, html: nodes.sum("".html_safe) { it.to_html.html_safe }, # rubocop:disable Rails/OutputSafety -- rendu et assaini par Action Text
-          blocks: nodes.map { it.to_html.html_safe }, # rubocop:disable Rails/OutputSafety -- idem
-          plain: nodes.map { it.name == "figure" ? "" : it.text } }
-      end
-
-      def blocks_of(html)
-        fragment = Nokogiri::HTML5.fragment(html)
-        children = (fragment.at_css("div.trix-content") || fragment).children.reject { it.text? && it.text.strip.empty? }
-        children.flat_map { paragraphs_of(it) }
-      end
-
-      # Trix enregistre les paragraphes saisis dans un seul `<div>…<br><br>…</div>` : chaque suite de deux `br` (ou plus, blancs
-      # tolérés entre eux) coupe l'élément en autant d'éléments de même balise. Un élément sans suite de `br` reste tel quel.
-      def paragraphs_of(node)
-        return [ node ] unless node.element? && node.children.any? { it.name == "br" }
-
-        chunks = [ [] ]
-        run = [] # des br et des blancs qui se suivent : le séparateur possible
-        flush = lambda do
-          if run.count { it.name == "br" } >= 2 then chunks << []
-          else chunks.last.concat(run)
-          end
-          run = []
-        end
-        node.children.each do |child|
-          if child.name == "br" || (child.text? && child.text.strip.empty?)
-            run << child
-          else
-            flush.call
-            chunks.last << child
-          end
-        end
-        flush.call
-        return [ node ] if chunks.size == 1
-
-        chunks.reject { |nodes| nodes.all? { it.name == "br" || (it.text? && it.text.strip.empty?) } }.map do |nodes|
-          node.dup(0).tap { |copy| nodes.each { copy.add_child(it) } }
+      def notions_of(course_id, figures, statuses:)
+        by_key = Array(figures).to_h { [ it["key"], Entities::Catalog::Figure.from_raw(it) ] }
+        Orm::Essential.where(course_id:, status: statuses).where.not(sheet: {}).order(:position).pluck(:slug, :name, :sheet).map do |slug, name, raw|
+          sheet = Entities::Catalog::NotionSheet.from_raw(raw.merge("figure" => raw["figure_key"]))
+          Notion.new(slug:, name:, sheet:, figure: by_key[sheet.figure_key])
         end
       end
     end

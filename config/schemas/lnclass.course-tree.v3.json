@@ -1,0 +1,395 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Import des leçons, version 3 : fiche de révision par notion et figures paramétrées (ADR-0116, ADR-0039, UDR-0141)",
+  "description": "Enveloppe { format, version: 3, courses[] }. Une leçon porte ses figures (0 à 12), ses notions (1 à 12, chacune avec sa fiche au gabarit fixe et son exercice) et ses quatre problèmes. Les règles qui comparent deux éléments (example.steps autant que method, noms de notions uniques, clés de figures uniques et citées) sont vérifiées par les entités, pour noter l'erreur à sa raison propre. Aucune URL, aucun HTML. La clé status n'existe plus : tout naît en brouillon.",
+  "type": "object",
+  "required": [
+    "format",
+    "version",
+    "courses"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "format": {
+      "const": "lnclass.course-tree"
+    },
+    "version": {
+      "const": 3
+    },
+    "courses": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/course"
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "figure_key": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^[a-z0-9][a-z0-9-]{0,39}$"
+    },
+    "course": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "level_name",
+        "material_name",
+        "notions",
+        "exercises"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "subtitle": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 300
+        },
+        "level_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "material_name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "series_name": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 100
+        },
+        "theme": {
+          "description": "Habillage cahier (UDR-0137) ; absent : blue.",
+          "enum": [
+            "blue",
+            "teal",
+            "burgundy"
+          ]
+        },
+        "figures": {
+          "type": "array",
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/figure"
+          }
+        },
+        "notions": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 12,
+          "items": {
+            "$ref": "#/$defs/notion"
+          }
+        },
+        "exercises": {
+          "description": "Les problèmes de toute la leçon : exactement quatre, compté par l'adaptateur (raison lesson_exercise_count).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/exercise"
+          }
+        }
+      }
+    },
+    "figure": {
+      "description": "La forme seulement : la sorte, la description, les paramètres et les curseurs sont vérifiés par l'adaptateur (Entities::Catalog::Figure), qui note chaque faute à sa raison figure_invalid.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "key",
+        "kind",
+        "description",
+        "params"
+      ],
+      "properties": {
+        "key": {
+          "type": "string"
+        },
+        "kind": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "params": {
+          "type": "object"
+        },
+        "controls": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "notion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "remember",
+        "method",
+        "example",
+        "pitfall"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "remember": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "method": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        },
+        "example": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "statement",
+            "steps"
+          ],
+          "properties": {
+            "statement": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 1200
+            },
+            "steps": {
+              "type": "array",
+              "minItems": 2,
+              "maxItems": 8,
+              "items": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 300
+              }
+            }
+          }
+        },
+        "pitfall": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 1200
+        },
+        "figure": {
+          "$ref": "#/$defs/figure_key"
+        },
+        "exercise": {
+          "description": "Un exercice exactement par notion : un objet est vérifié ici, tout autre valeur (absente, null, liste) est refusée par l'adaptateur (raison essential_exercise_count).",
+          "if": {
+            "type": "object"
+          },
+          "then": {
+            "$ref": "#/$defs/exercise"
+          }
+        }
+      }
+    },
+    "exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "statement",
+        "exercise_type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 5000
+        },
+        "exercise_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "figure": {
+          "$ref": "#/$defs/figure_key"
+        },
+        "statement_blocks": {
+          "description": "Le sujet en blocs (ADR-0115) : dix blocs au plus, objets ; leurs types et leurs textes sont vérifiés par l'adaptateur (paragraph, box, table).",
+          "type": [
+            "array",
+            "null"
+          ],
+          "maxItems": 10,
+          "items": {
+            "type": "object"
+          }
+        },
+        "questions": {
+          "description": "Cinq à trente questions par exercice (ADR-0116 §4.1), comptées par l'adaptateur (raisons too_few_questions et invalid_count).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/question"
+          }
+        }
+      }
+    },
+    "question": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "question_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "explanation": {
+          "description": "La correction rédigée, obligatoire pour toute question (ADR-0116 §4.1) : 20 à 2 000 caractères, vérifiés par l'adaptateur (raisons blank, too_short, too_long).",
+          "type": "string"
+        },
+        "points": {
+          "description": "Points de la question (ADR-0115) : de 0,5 à 20, par demi-point ; 1 sans la clé.",
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0.5,
+          "maximum": 20,
+          "multipleOf": 0.5
+        },
+        "unit": {
+          "description": "Unité d'une question numeric : 10 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10
+        },
+        "starter": {
+          "description": "Début de phrase d'une question written : 150 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 150
+        },
+        "criteria": {
+          "description": "Grille de vérification d'une question written : huit critères de 150 caractères au plus.",
+          "type": [
+            "array",
+            "null"
+          ],
+          "maxItems": 8,
+          "items": {
+            "type": "string",
+            "maxLength": 150
+          }
+        },
+        "answers": {
+          "description": "Dix propositions au plus par question.",
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/answer"
+          }
+        },
+        "image": {
+          "$ref": "#/$defs/question_image"
+        },
+        "tolerance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 99999999.9999
+        }
+      },
+      "required": [
+        "content",
+        "question_type",
+        "answers"
+      ]
+    },
+    "question_image": {
+      "description": "ADR-0105 §4.6 : l'image annoncée d'une question, jamais l'image. Facultative ; un fichier sans elle reste valide.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "description"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 150
+        }
+      }
+    },
+    "answer": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        },
+        "correct": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "is_correct": {
+          "type": [
+            "boolean",
+            "null"
+          ]
+        },
+        "match": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        }
+      }
+    }
+  }
+}

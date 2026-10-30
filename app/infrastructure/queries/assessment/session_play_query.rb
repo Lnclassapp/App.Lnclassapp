@@ -1,7 +1,7 @@
 # 🔌 INFRA · Queries::Assessment::SessionPlayQuery
 # Rôle : écran d'une session : la copie entière (copy : toutes les questions sans aucune correction ni id révélateur, leurs images) ;
 #        call, la prochaine question et le verdict de la question tentée, ne sert plus que l'ancien mode (retiré au Lot E)
-# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105, 0112 · UDR : 0007, 0022, 0087, 0129, 0138 §3.2
+# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105, 0112, 0115 · UDR : 0007, 0022, 0087, 0129, 0138 §3.2
 module Queries
   module Assessment
     class SessionPlayQuery
@@ -16,11 +16,14 @@ module Queries
       # - items : les étapes (ordering) ou la colonne de droite (matching), mélangées, sans id : seul leur indice d'affichage ;
       # - prompts : la colonne de gauche d'un matching, dans l'ordre des positions, sans id.
       # Trous et nombre : rien de tout cela, aucune ligne answers n'est lue.
-      Question = Data.define(:id, :number, :content, :question_type, :answers, :items, :prompts, :image) do
-        def initialize(items: [], prompts: [], image: nil, **) = super
+      # ADR-0115 : points, unité d'un nombre et début de phrase d'une réponse rédigée, montrés avant la réponse ; jamais le corrigé ni la grille.
+      Question = Data.define(:id, :number, :content, :question_type, :answers, :items, :prompts, :image, :points, :unit, :starter) do
+        def initialize(items: [], prompts: [], image: nil, points: BigDecimal("1"), unit: nil, starter: nil, **) = super
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
         def expected_count = Entities::Assessment::Question::EXPECTED.fetch(question_type.to_sym)
         def multiple? = expected_count > 1
+        # Compte dans « n/T répondues » : une question corrigée par la machine (ni rédigée ni cahier).
+        def counted? = Entities::Assessment::Question.kind_for(question_type)::AUTO_GRADED
       end
       # Jamais de colonne correct : une proposition montrée à l'élève ne dit pas si elle est juste. index : rang d'affichage.
       Answer = Data.define(:id, :content, :index)
@@ -36,8 +39,10 @@ module Queries
       end
 
       # La copie rendue à l'élève (UDR-0138 §3.2) : sujet et toutes les questions, mélange de la session. completed? et started? pour l'aiguillage.
+      # statement_blocks : le sujet en blocs de l'exercice (ADR-0115), nil sans blocs ; figure : la figure citée, nil sinon.
       Copy = Data.define(:session_public_id, :student_id, :status, :exercise_public_id, :exercise_title, :statement, :question_count,
-                         :questions) do
+                         :questions, :statement_blocks, :figure) do
+        def initialize(statement_blocks: nil, figure: nil, **) = super
         def completed? = status == "completed"
         def started? = status == "started"
       end
@@ -45,6 +50,14 @@ module Queries
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id exercise_sessions.status
                            exercise_sessions.answered_count exercise_sessions.question_count exercise_sessions.progress_percent
                            exercises.id exercises.public_id exercises.title].freeze
+
+      # La figure de la leçon citée par figure_key, ou nil : sans clé, clé introuvable ou entrée mal formée, jamais d'exception.
+      def self.figure_for(figures, key)
+        return if key.blank?
+
+        raw = Array(figures).find { it.is_a?(Hash) && it["key"] == key }
+        raw && Entities::Catalog::Figure.from_raw(raw)
+      end
 
       # feedback_question_id : question qui vient d'être soumise ; son verdict n'est lu que si elle est tentée.
       # → Row | nil
@@ -64,23 +77,25 @@ module Queries
       # Toute la copie : une requête pour les questions, une pour leurs propositions, une pour leurs images.
       # → Copy | nil. Les identifiants ne servent qu'au mélange, ici, côté serveur (ADR-0091 §4.4).
       def copy(public_id:)
-        id, public_id, student_id, status, question_count, exercise_id, exercise_public_id, title, statement =
-          Orm::ExerciseSession.joins(:exercise).where(public_id:)
+        id, public_id, student_id, status, question_count, exercise_id, exercise_public_id, title, statement, statement_blocks,
+          figures, figure_key =
+          Orm::ExerciseSession.joins(exercise: :course).where(public_id:)
                               .pick("exercise_sessions.id", "exercise_sessions.public_id", "exercise_sessions.student_id", "exercise_sessions.status",
-                                    "exercise_sessions.question_count", "exercises.id", "exercises.public_id", "exercises.title", "exercises.statement")
+                                    "exercise_sessions.question_count", "exercises.id", "exercises.public_id", "exercises.title", "exercises.statement",
+                                    "exercises.statement_blocks", "courses.figures", "exercises.figure_key")
         return if id.nil?
 
-        rows = Orm::Question.where(exercise_id:).order(:position, :id).pluck(:id, :content, :question_type)
+        rows = Orm::Question.where(exercise_id:).order(:position, :id).pluck(:id, :content, :question_type, :points, :unit, :starter)
         answers = Orm::Answer.where(question_id: rows.map(&:first)).order(:question_id, :position, :id)
                              .pluck(:question_id, :id, :content, :match_content).group_by(&:first)
         images = Orm::QuestionImage.where(question_id: rows.map(&:first)).pluck(:question_id, :public_id, :alt, :width, :height)
                                    .to_h { |question_id, *image| [ question_id, Image.new(*image) ] }
-        questions = rows.each_with_index.map do |(question_id, content, question_type), index|
-          Question.new(id: question_id, number: index + 1, content:, question_type:, answers: [], image: images[question_id],
+        questions = rows.each_with_index.map do |(question_id, content, question_type, points, unit, starter), index|
+          Question.new(id: question_id, number: index + 1, content:, question_type:, answers: [], image: images[question_id], points:, unit:, starter:,
                        **sheet(id, question_id, kind_name(question_type), answers.fetch(question_id, []).map { it.drop(1) }))
         end
         Copy.new(session_public_id: public_id, student_id:, status:, exercise_public_id:, exercise_title: title, statement:, question_count:,
-                 questions:)
+                 questions:, statement_blocks:, figure: self.class.figure_for(figures, figure_key))
       end
 
       private
@@ -88,7 +103,7 @@ module Queries
       # Par type : propositions mélangées d'un choix (avec leur id), étapes ou colonne de droite mélangées sans id, colonne de gauche.
       def sheet(session_id, question_id, kind, rows)
         case kind
-        when "choice"
+        when "choice", "select"
           contents = rows.to_h { |id, content, _| [ id, content ] }
           { answers: shuffled(session_id, question_id, contents.keys).each_with_index.map { |id, index| Answer.new(id:, content: contents[id], index:) } }
         when "ordering" then { items: items(session_id, question_id, rows.to_h { |id, content, _| [ id, content ] }) }

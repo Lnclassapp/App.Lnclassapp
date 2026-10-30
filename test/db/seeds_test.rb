@@ -88,7 +88,7 @@ class SeedsTest < ActiveSupport::TestCase
   end
 
   # UDR-0017: a statement is typed in a text area and shown escaped, with its line breaks (_question_card); only the
-  # content of a course or an essential is rich text. Played in the transaction of the test, after the test seeds.
+  # content of a course is rich text. Played in the transaction of the test, after the test seeds.
   test "in development, the demo statements are plain text and the course content rich text" do
     run_seeds
     as_development { capture_io { load Rails.root.join("db/seeds/development.rb").to_s, true } }

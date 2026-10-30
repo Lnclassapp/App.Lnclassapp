@@ -15,7 +15,10 @@ class LocaleFilesTest < ActiveSupport::TestCase
     "fr.classroom.classroom_courses.show.prepare_intro" => "Un exercice par notion, puis quatre sur toute la leçon.",
     "fr.classroom.classroom_courses.show.lesson_wide_title" => "Toute la leçon",
     "fr.assessment.exercises.show.lesson_wide" => "Toute la leçon",
-    "fr.assessment.session_results.show.back_to_lesson" => "Retour à la leçon"
+    "fr.assessment.session_results.show.back_to_lesson" => "Retour à la leçon",
+    # UDR-0140 (correction-comme-en-classe, CA-10) : la carte « À revoir » d'un exercice de toute la leçon.
+    "fr.assessment.session_results.show.to_review_lesson_html" => "À revoir dans la leçon : %{questions}",
+    "fr.assessment.session_results.show.whole_lesson" => "Toute la leçon"
   }.freeze
 
   test "the French locale files exist" do
@@ -72,7 +75,7 @@ class LocaleFilesTest < ActiveSupport::TestCase
   test "the UDR-0130 exceptions are the listed values alone, with their exact wording" do
     assert(ALLOWED.values.all? { it.match?(FORBIDDEN) })
     assert_equal [ "Révisions de la leçon", "Un exercice par notion, puis quatre sur toute la leçon.", "Toute la leçon",
-                   "Retour à la leçon" ], ALLOWED.values.uniq
+                   "Retour à la leçon", "À revoir dans la leçon : %{questions}" ], ALLOWED.values.uniq
     ALLOWED.each { |key, value| assert_equal value, I18n.t(key.delete_prefix("fr."), locale: :fr) }
   end
 

@@ -20,6 +20,25 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_raises(ActionController::RoutingError) { Rails.application.routes.recognize_path("/join", method: :post) }
   end
 
+  # ADR-0085 §4.7: opening the link of a class has its own counter (60 a minute and per address), not the 10 of the code check.
+  test "ADR-0085 §4.7: 45 openings of a class link from the same address in a minute never receive 429" do
+    token = @classroom.reload.link_token
+
+    45.times do |i|
+      get join_classroom_path(token)
+      assert_response :success, "opening #{i + 1} was refused (#{response.status})"
+    end
+  end
+
+  test "ADR-0085 §4.7: the 61st opening of a class link in a minute from the same address receives 429" do
+    token = @classroom.reload.link_token
+    60.times { get join_classroom_path(token) }
+
+    get join_classroom_path(token)
+
+    assert_response :too_many_requests
+  end
+
   test "IL-09: an old classroom code link opens the standard page with the alert, and is never looked up" do
     [ "kfm37", "KFM37", "zzz99" ].each do |old|
       get join_classroom_path(old)
@@ -252,9 +271,9 @@ class Classroom::JoinsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to new_student_classroom_choice_path
   end
 
-  test "ADR-0085 §4.2: the link page shares the limit of 10 openings a minute" do
+  test "ADR-0085 §4.2: the link page has its own limit of 60 openings a minute (§4.7)" do
     token = link_token
-    10.times { |index| get join_classroom_path(index.even? ? token : "cccccccccccc") }
+    60.times { |index| get join_classroom_path(index.even? ? token : "cccccccccccc") }
 
     get join_classroom_path(token)
 

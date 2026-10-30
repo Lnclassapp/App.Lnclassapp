@@ -1,21 +1,24 @@
 # 🔌 INFRA · Queries::Assessment::ExerciseDetailQuery
 # Rôle : le sujet d'un exercice de la leçon (notion facultative), son cours et ses questions, propositions mélangées de la graine de l'exercice ;
 #        sans reveal, ni correction, ni explication, ni solution d'un nouveau type
-# ADR  : 0026, 0028, 0054, 0091 (§4.4), 0112, 0113 · UDR : 0138 §3.1 · sécurité n° 29
+# ADR  : 0026, 0028, 0054, 0091 (§4.4), 0112, 0113, 0115 · UDR : 0138 §3.1 · sécurité n° 29
 module Queries
   module Assessment
     class ExerciseDetailQuery
       # essential : nil pour un exercice de toute la leçon.
-      Row = Data.define(:exercise, :essential, :course, :questions)
-      ExerciseRow = Data.define(:id, :public_id, :title, :statement, :exercise_type, :status)
+      # figure : la figure de la leçon citée par l'exercice (Entities::Catalog::Figure), nil sinon.
+      Row = Data.define(:exercise, :essential, :course, :questions, :figure)
+      # statement_blocks : le sujet en blocs (ADR-0115), nil sans blocs.
+      ExerciseRow = Data.define(:id, :public_id, :title, :statement, :exercise_type, :status, :statement_blocks)
       EssentialRow = Data.define(:slug, :name)
       CourseRow = Data.define(:slug, :name, :level_name, :series_name, :material_name, :material_category)
       # Sans reveal, explanation, correct, numeric_tolerance et match_content valent nil : leurs colonnes ne sont même pas
       # sélectionnées. La feuille de l'élève montre pourtant les étapes (ordering) et les deux colonnes (matching) : items est
       # la colonne mélangée (étapes, colonne de droite) sans ordre juste, prompts la colonne de gauche ; image : Image ou nil.
       QuestionRow = Data.define(:id, :position, :content, :question_type, :explanation, :answers, :numeric_tolerance,
-                                :items, :prompts, :image) do
-        def initialize(numeric_tolerance: nil, items: [], prompts: [], image: nil, **) = super
+                                :items, :prompts, :image, :points, :unit, :starter, :criteria) do
+        # ADR-0115 : points, unité et début de phrase se montrent avant la réponse ; la grille (criteria) seulement avec reveal.
+        def initialize(numeric_tolerance: nil, items: [], prompts: [], image: nil, points: BigDecimal("1"), unit: nil, starter: nil, criteria: [], **) = super
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
       end
       AnswerRow = Data.define(:id, :position, :content, :correct, :match_content) do
@@ -26,9 +29,9 @@ module Queries
       Image = SessionPlayQuery::Image
 
       EXERCISE_COLUMNS = %w[exercises.id exercises.public_id exercises.title exercises.statement exercises.exercise_type
-                            exercises.status essentials.slug essentials.name courses.slug courses.name levels.name series.name
-                            materials.name materials.category].freeze
-      QUESTION_COLUMNS = %i[id position content question_type].freeze
+                            exercises.status exercises.statement_blocks essentials.slug essentials.name courses.slug courses.name levels.name series.name
+                            materials.name materials.category courses.figures exercises.figure_key].freeze
+      QUESTION_COLUMNS = %i[id position content question_type points unit starter].freeze
       ANSWER_COLUMNS = %i[question_id id position content].freeze
 
       # → Row | nil (exercice inconnu). La lecture d'un brouillon est l'affaire de ReadPublishedPolicy, en amont.
@@ -39,30 +42,32 @@ module Queries
                                    .where(public_id:).pick(*EXERCISE_COLUMNS)
         return if id.nil?
 
+        *values, figures, figure_key = values
         exercise, essential, course = split(id, values)
-        Row.new(exercise:, essential:, course:, questions: questions(id, reveal))
+        Row.new(exercise:, essential:, course:, questions: questions(id, reveal), figure: SessionPlayQuery.figure_for(figures, figure_key))
       end
 
       private
 
       def split(id, values)
-        public_id, title, statement, exercise_type, status, essential_slug, essential_name, *course = values
+        public_id, title, statement, exercise_type, status, statement_blocks, essential_slug, essential_name, *course = values
         slug, name, level_name, series_name, material_name, material_category = course
-        [ ExerciseRow.new(id:, public_id:, title:, statement:, exercise_type:, status:),
+        [ ExerciseRow.new(id:, public_id:, title:, statement:, exercise_type:, status:, statement_blocks:),
           (EssentialRow.new(slug: essential_slug, name: essential_name) if essential_slug),
           CourseRow.new(slug:, name:, level_name:, series_name:, material_name:, material_category:) ]
       end
 
       def questions(exercise_id, reveal)
         rows = Orm::Question.where(exercise_id:).order(:position)
-                            .pluck(*QUESTION_COLUMNS, *(reveal ? %i[explanation numeric_tolerance] : []))
-        shown = reveal ? rows : rows.select { Entities::Assessment::Question.kind_name_for(it[3]) == "choice" }
+                            .pluck(*QUESTION_COLUMNS, *(reveal ? %i[explanation numeric_tolerance criteria] : []))
+        shown = reveal ? rows : rows.select { %w[choice select].include?(Entities::Assessment::Question.kind_name_for(it[3])) }
         answers = answers_by_question(shown.map(&:first), reveal)
         elements = elements_by_question(rows)
         images = images_by_question(rows.map(&:first))
-        rows.map do |id, position, content, question_type, explanation, numeric_tolerance|
+        rows.map do |id, position, content, question_type, points, unit, starter, explanation, numeric_tolerance, criteria|
           kind = Entities::Assessment::Question.kind_name_for(question_type)
           QuestionRow.new(id:, position:, content:, question_type:, explanation:, numeric_tolerance:, image: images[id],
+                          points:, unit:, starter:, criteria: reveal ? (criteria || []) : [],
                           answers: shuffle_choices(exercise_id, id, kind, answers.fetch(id, [])),
                           **sheet(exercise_id, id, kind, elements.fetch(id, [])))
         end
@@ -70,7 +75,7 @@ module Queries
 
       # Mélange de la feuille : la graine est l'exercice, jamais l'ordre de saisie, qui trahirait l'ordre juste (UDR-0138 §3.1).
       def shuffle_choices(exercise_id, question_id, kind, answers)
-        return answers unless kind == "choice"
+        return answers unless %w[choice select].include?(kind)
 
         by_id = answers.index_by(&:id)
         Entities::Assessment::AnswerShuffle.for(session_id: exercise_id, question_id:, ids: by_id.keys).map { by_id.fetch(it) }

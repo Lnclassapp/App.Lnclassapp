@@ -29,8 +29,7 @@ module UseCases
       # est publiée si elle ne l'est pas (brouillon ou archivée), avec les règles de son use case ; chaque publication est
       # inscrite au journal par son use case.
       # → Result(Summary) | :forbidden | :not_found | :conflict — alors rien n'est écrit : base parent_not_published,
-      #   image_slots_unreadable, image_slots_left ou image_alts_blank (racine fiche), ou essential_not_ready |
-      #   essential_unreadable avec name (une fiche du cours, ADR-0105)
+      #   (la racine ou son cours n'est pas publiable)
       def call(actor:, root:, slug:)
         raise ArgumentError, "racine inconnue : #{root}" unless ROOTS.include?(root)
 
@@ -46,9 +45,6 @@ module UseCases
       private
 
       def cascade(actor, root, record)
-        not_ready = root == :course ? first_essential_not_ready(record) : nil
-        return not_ready if not_ready
-
         unless record.status == "published"
           published = publish_root(actor, root, record.slug)
           return published if published.failure?
@@ -65,23 +61,6 @@ module UseCases
       end
 
       def image_refused?(result) = result.failure? && (Array(result.errors[:base]) & IMAGE_REASONS).any?
-
-      # ADR-0105 §4.4 : toutes les fiches brouillons du cours sont vérifiées avant toute écriture ; la première qui n'est pas
-      # prête (emplacement d'image restant, image sans texte de remplacement) refuse tout et se nomme ; un texte trop complexe
-      # à relire a sa propre raison (essential_unreadable), pour ne pas dire qu'il manque une image.
-      def first_essential_not_ready(course)
-        @essentials.draft_slugs(course_id: course.id).each do |slug|
-          essential = @essentials.find_by_slug(slug:)
-          next if essential.nil?
-
-          ready = PublishEssential.images_ready(essential)
-          next if ready.success?
-
-          reason = ready.errors[:base] == [ :image_slots_unreadable ] ? :essential_unreadable : :essential_not_ready
-          return Shared::Result.failure(:conflict, errors: { base: [ reason ], name: essential.name })
-        end
-        nil
-      end
 
       def publish_root(actor, root, slug)
         root == :course ? @publish_course.call(actor:, slug:) : @publish_essential.call(actor:, slug:)

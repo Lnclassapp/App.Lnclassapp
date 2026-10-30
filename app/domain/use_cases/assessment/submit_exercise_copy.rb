@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::SubmitExerciseCopy
 # Rôle : l'élève rend la copie entière d'un exercice : toutes les réponses lues, corrigées, notées et la session close, en un envoi
-# ADR  : 0026, 0054, 0091 (§4.4 : indices d'affichage relus par AnswerShuffle), 0112 · UDR : 0138
+# ADR  : 0026, 0054, 0091 (§4.4 : indices d'affichage relus par AnswerShuffle), 0112, 0115 (réponse rédigée, cahier) · UDR : 0138
 module UseCases
   module Assessment
     class SubmitExerciseCopy
@@ -86,7 +86,8 @@ module UseCases
         errors = {}
         attempts = questions.each_with_index.map do |question, index|
           input = dto.answers[question.id]
-          next unanswered(question) if input.nil?
+          # Le cahier n'a aucun champ : rien de ce qui est posté n'est lu, ni compté, ni noté.
+          next unanswered(question) if input.nil? || question.kind::INPUT == :none
 
           attempt, problems = attempt_for(session, question, input)
           errors[index + 1] = problems if problems
@@ -107,9 +108,16 @@ module UseCases
 
         response = response_for(question, session, input)
         return [ nil, question.kind::INVALID ] unless question.well_formed?(response)
+        return [ nil, { response_text: [ :too_long ] } ] if too_long_for_short_answer?(question, response)
 
         [ { question_id: question.id, selected_answer_ids: response.is_a?(String) ? [] : response,
             response_text: (response if response.is_a?(String)), correct: question.correct?(response), unanswered: false }, nil ]
+      end
+
+      # Seule la réponse rédigée a droit à 2 000 caractères ; trous et nombre restent à 200 (menace W2).
+      def too_long_for_short_answer?(question, response)
+        question.kind::INPUT == :response_text && !question.kind.equal?(Entities::Assessment::QuestionKinds::Written) &&
+          response.length > Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX
       end
 
       # Ce que la question corrige : le texte saisi, les identifiants cochés, ou ceux que désignent les indices d'affichage

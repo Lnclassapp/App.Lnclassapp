@@ -52,9 +52,12 @@ module Dtos
         AttemptInput.new(session_public_id:, question_id:, **fields)
       end
 
+      # Un texte aux octets invalides n'est pas vide : il va jusqu'à AttemptInput, qui le refuse (strip lèverait).
+      def blank_text?(text) = text.to_s.then { it.valid_encoding? && it.strip.empty? }
+
       # Rien cochée, texte vide, aucun indice d'affichage choisi (relier : « Choisis… » partout) → question vide.
       def blank_fields?(fields)
-        Array(fields[:answer_ids]).all? { it.to_s.strip.empty? } && fields[:response_text].to_s.strip.empty? &&
+        Array(fields[:answer_ids]).all? { it.to_s.strip.empty? } && blank_text?(fields[:response_text]) &&
           Array(fields[:display_order]).all? { it.to_s.strip.empty? }
       end
     end
