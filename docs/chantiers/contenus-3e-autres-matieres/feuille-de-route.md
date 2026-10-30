@@ -8,7 +8,7 @@
 Ordre choisi par le porteur (grill, revu après le premier plan) : **FR, HG, SVT, PC, EDHC**.
 
 ```
-Vague 1  contenus-3e-francais            prompt par matière + 10 leçons          sans code   → commit de documentation sur Develop
+Vague 1  contenus-3e-francais            script aligné sur l'import + prompt par matière + 10 leçons → PR (aucun code déployé)
   ↓
 Vague 2  contenus-3e-histoire-geographie frise, carte (3 fonds), schéma, courbe  + 10 leçons → PR, train, production
   ↓
@@ -21,8 +21,8 @@ Vague 5  contenus-3e-edhc                aucune sorte nouvelle (schéma, carte, 
 
 | Vague | Chantier | Sortes de figures livrées | Leçons | Porte de sortie |
 |---|---|---|---|---|
-| 1 | `contenus-3e-francais` | aucune | 10 de Français | les 10 fichiers passent `valider.rb` sans avertissement, relus, envoyés au porteur ; prompt généralisé aux 5 matières |
-| 2 | `contenus-3e-histoire-geographie` | `timeline`, `map` (`cote_d_ivoire`, `africa`, `world`), `diagram`, `stat_chart` `line` ; avertissement « moins de la moitié corrigée automatiquement » dans `valider.rb` | 10 d'HG | code en production ; les 10 fichiers s'importent en brouillon en production et leurs figures sont `ready` |
+| 1 | `contenus-3e-francais` | aucune ; `valider.rb` accepte les types de questions que l'import accepte déjà (rédigée, appariement…) et avertit sous 50 % de questions corrigées automatiquement | 10 de Français | les 10 fichiers passent `valider.rb` sans avertissement, relus, envoyés au porteur ; prompt généralisé aux 5 matières |
+| 2 | `contenus-3e-histoire-geographie` | `timeline`, `map` (`cote_d_ivoire`, `africa`, `world`), `diagram`, `stat_chart` `line`  | 10 d'HG | code en production ; les 10 fichiers s'importent en brouillon en production et leurs figures sont `ready` |
 | 3 | `contenus-3e-svt` | `plate` et ses 8 planches de SVT | 10 de SVT | idem ; planches relues par un enseignant de SVT sur captures |
 | 4 | `contenus-3e-physique-chimie` | `optics`, `molecule`, planches `dynamometer`, `electrolyser`, `eudiometer` | 10 de PC | idem ; planches relues par un enseignant de PC |
 | 5 | `contenus-3e-edhc` | aucune | 10 d'EDHC | les 10 fichiers passent `valider.rb`, relus, envoyés au porteur |
@@ -44,6 +44,7 @@ Vague 5  contenus-3e-edhc                aucune sorte nouvelle (schéma, carte, 
 | Sources | Écart | Tranché par |
 |---|---|---|
 | ADR-0116 §4.2 (« liste fermée de 5 sortes ») ↔ besoin des matières | la liste est trop courte | ADR-XXXX-figures-des-matieres-de-3eme, qui amende ADR-0116 §4.2 |
+| `valider.rb` (4 types à choix) ↔ import (tous les types de question) | le script refuse des questions que l'import accepte | vague 1 : le script reprend la règle de l'import (`Entities::Assessment::Question`) |
 | CLAUDE.md « une PR par chantier » ↔ « matière par matière » | une seule PR ne livre pas matière par matière | programme : un chantier, donc une PR, par matière |
 
 ## Portes du programme
