@@ -162,6 +162,7 @@ Points mineurs non encore rattachés à un chantier : trois orthographes pour le
 | [`contenus-3e-edhc`](contenus-3e-edhc/memo.md) | livré ([#375](https://github.com/Lnclassapp/App.Lnclassapp/pull/375) vers `Develop`, 2026-10-30), clos | Vague 5 : 10 leçons d'EDHC avec les figures des vagues précédentes (schéma, graphique, carte de Côte d'Ivoire), aucune sorte nouvelle |
 | [`contenus-3e-svt`](contenus-3e-svt/memo.md) | livré ([#376](https://github.com/Lnclassapp/App.Lnclassapp/pull/376) vers `Develop`, 2026-10-30), clos | Vague 3 : planches légendées (`plate`, 8 planches de SVT) ; 10 leçons de SVT, planches à faire relire par un enseignant |
 | [`contenus-3e-physique-chimie`](contenus-3e-physique-chimie/memo.md) | livré ([#377](https://github.com/Lnclassapp/App.Lnclassapp/pull/377) vers `Develop`, 2026-10-30), clos | Vague 4 : tracé optique, molécule et 3 planches (dynamomètre, électrolyseur, eudiomètre) ; 10 leçons de Physique-Chimie, planches et chiffres à faire relire par un enseignant |
+| [`validation-figures-bornee`](validation-figures-bornee/memo.md) | livré (PR vers `Develop`, 2026-10-30), clos | Optimisation : une liste de figure au-delà de sa borne coupe les contrôles de cohérence, recherches en `Set`/`Hash` ; un arbre en chaîne de 5 000 nœuds passe de plus de 60 s à 0,03 ms (dette de la revue de sécurité du programme `contenus-3e-autres-matieres`) |
 
 ## Backlog
 
