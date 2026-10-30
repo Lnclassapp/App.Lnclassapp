@@ -1,0 +1,1565 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les relations sols-plantes",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "SVT",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "racine-noms",
+          "kind": "plate",
+          "description": "Planche d'une racine de plante cultivée au jardin, avec ses légendes. De la pointe vers la tige : la coiffe qui protège l'extrémité, la zone d'allongement lisse, la zone pilifère couverte de poils absorbants, puis les racines secondaires jusqu'au collet. Un poil absorbant est agrandi entre des particules de sol et de l'eau du sol.",
+          "params": {
+            "plate": "root_hairs",
+            "labels": [
+              {
+                "part": "collar",
+                "text": "collet"
+              },
+              {
+                "part": "main_root",
+                "text": "racine principale"
+              },
+              {
+                "part": "lateral_root",
+                "text": "racine secondaire"
+              },
+              {
+                "part": "root_hair_zone",
+                "text": "zone pilifère"
+              },
+              {
+                "part": "elongation_zone",
+                "text": "zone d'allongement"
+              },
+              {
+                "part": "root_cap",
+                "text": "coiffe"
+              },
+              {
+                "part": "root_hair",
+                "text": "poil absorbant"
+              },
+              {
+                "part": "soil_particle",
+                "text": "particule de sol"
+              },
+              {
+                "part": "soil_water",
+                "text": "eau du sol"
+              }
+            ],
+            "highlight": [
+              "root_hair_zone"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "racine-numeros",
+          "kind": "plate",
+          "description": "Planche d'une racine d'un plant de piment du jardin. Sept éléments sont repérés par des numéros de 1 à 7, sans légende : le collet, la zone pilifère, la zone d'allongement, la coiffe, un poil absorbant agrandi, une particule de sol et l'eau du sol. L'élève doit retrouver chaque nom d'après la position et l'aspect.",
+          "params": {
+            "plate": "root_hairs",
+            "labels": [
+              {
+                "part": "collar"
+              },
+              {
+                "part": "root_hair_zone"
+              },
+              {
+                "part": "elongation_zone"
+              },
+              {
+                "part": "root_cap"
+              },
+              {
+                "part": "root_hair"
+              },
+              {
+                "part": "soil_particle"
+              },
+              {
+                "part": "soil_water"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "trajet-eau-sels",
+          "kind": "diagram",
+          "description": "Schéma fléché du trajet de l'eau et des sels minéraux, de haut en bas : l'eau du sol contenant des sels minéraux dissous est prélevée par les poils absorbants de la racine, passe dans la racine, puis est conduite vers la tige et les feuilles. Le premier élément est dans le sol, les trois autres font partie de la plante.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "sol",
+                "label": "Eau du sol et sels dissous",
+                "category": 1
+              },
+              {
+                "id": "poils",
+                "label": "Poils absorbants",
+                "category": 2
+              },
+              {
+                "id": "racine",
+                "label": "Racine",
+                "category": 2
+              },
+              {
+                "id": "tige",
+                "label": "Tige et feuilles",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "sol",
+                "to": "poils",
+                "label": "prélevés"
+              },
+              {
+                "from": "poils",
+                "to": "racine"
+              },
+              {
+                "from": "racine",
+                "to": "tige",
+                "label": "conduits"
+              }
+            ],
+            "legend": [
+              "Dans le sol",
+              "Dans la plante"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "experience-tomate",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la hauteur de trois plants de tomate identiques, mesurée au jardin scolaire après quatre semaines, en centimètres. Lot A, sol de jardin arrosé : 30. Lot B, sable lavé arrosé à l'eau distillée : 8. Lot C, sable lavé arrosé d'une solution minérale : 28. Les valeurs sont celles d'un exercice.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              30,
+              8,
+              28
+            ],
+            "labels": [
+              "Lot A sol",
+              "Lot B sable",
+              "Lot C solution"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "experience-gombo",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la hauteur de trois plants de gombo identiques, mesurée après cinq semaines, en centimètres. Lot 1, sol de jardin arrosé : 24. Lot 2, sable lavé arrosé à l'eau distillée : 6. Lot 3, sable lavé arrosé d'une solution minérale : 22. Les valeurs sont celles d'un exercice, pas d'une mesure réelle.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              24,
+              6,
+              22
+            ],
+            "labels": [
+              "Lot 1 sol",
+              "Lot 2 sable",
+              "Lot 3 solution"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-mineralisation",
+          "kind": "diagram",
+          "description": "Schéma fléché en cycle du recyclage de la matière organique : la plante vivante donne des feuilles et des racines mortes, la litière ; les décomposeurs la transforment en humus ; l'humus est minéralisé en sels minéraux dissous ; les racines absorbent ces sels minéraux et la plante pousse. Le cycle se referme sur la plante.",
+          "params": {
+            "layout": "cycle",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "plante",
+                "label": "Plante vivante"
+              },
+              {
+                "id": "litiere",
+                "label": "Litière : débris morts"
+              },
+              {
+                "id": "humus",
+                "label": "Humus"
+              },
+              {
+                "id": "sels",
+                "label": "Sels minéraux dissous"
+              }
+            ],
+            "edges": [
+              {
+                "from": "plante",
+                "to": "litiere",
+                "label": "mort, chute"
+              },
+              {
+                "from": "litiere",
+                "to": "humus",
+                "label": "décomposition"
+              },
+              {
+                "from": "humus",
+                "to": "sels",
+                "label": "minéralisation"
+              },
+              {
+                "from": "sels",
+                "to": "plante",
+                "label": "absorption"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "profil-sol-noms",
+          "kind": "plate",
+          "description": "Planche d'un profil de sol de jardin, avec ses légendes. De la surface vers la profondeur : la litière de débris végétaux, l'horizon humifère sombre et riche en humus, l'horizon d'accumulation, la roche mère altérée puis la roche mère. Des racines traversent les premiers horizons.",
+          "params": {
+            "plate": "soil_profile",
+            "labels": [
+              {
+                "part": "litter",
+                "text": "litière"
+              },
+              {
+                "part": "humus_horizon",
+                "text": "horizon humifère"
+              },
+              {
+                "part": "accumulation_horizon",
+                "text": "horizon d'accumulation"
+              },
+              {
+                "part": "weathered_rock",
+                "text": "roche mère altérée"
+              },
+              {
+                "part": "bedrock",
+                "text": "roche mère"
+              },
+              {
+                "part": "roots",
+                "text": "racines"
+              }
+            ],
+            "highlight": [
+              "humus_horizon"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "profil-sol-numeros",
+          "kind": "plate",
+          "description": "Planche d'un profil de sol de jardin. Six éléments sont repérés par des numéros de 1 à 6, sans légende : la litière, l'horizon humifère, l'horizon d'accumulation, la roche mère altérée, la roche mère et les racines. L'élève doit retrouver chaque nom d'après la position et la couleur dans le profil.",
+          "params": {
+            "plate": "soil_profile",
+            "labels": [
+              {
+                "part": "litter"
+              },
+              {
+                "part": "humus_horizon"
+              },
+              {
+                "part": "accumulation_horizon"
+              },
+              {
+                "part": "weathered_rock"
+              },
+              {
+                "part": "bedrock"
+              },
+              {
+                "part": "roots"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-fertilite",
+          "kind": "diagram",
+          "description": "Schéma fléché en cycle de l'entretien de la fertilité d'une planche de légumes : les plantes poussent, la récolte emporte des sels minéraux, le sol s'appauvrit, puis un apport de compost, de fumier ou d'engrais l'enrichit de nouveau en sels minéraux avant la culture suivante. Les trois premières étapes relèvent du prélèvement, les deux dernières de l'apport.",
+          "params": {
+            "layout": "cycle",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "pousse",
+                "label": "Plantes qui poussent",
+                "category": 1
+              },
+              {
+                "id": "recolte",
+                "label": "Récolte emportée",
+                "category": 1
+              },
+              {
+                "id": "appauvri",
+                "label": "Sol appauvri",
+                "category": 1
+              },
+              {
+                "id": "apport",
+                "label": "Apport de compost ou d'engrais",
+                "category": 2
+              },
+              {
+                "id": "enrichi",
+                "label": "Sol enrichi",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "pousse",
+                "to": "recolte"
+              },
+              {
+                "from": "recolte",
+                "to": "appauvri",
+                "label": "sels emportés"
+              },
+              {
+                "from": "appauvri",
+                "to": "apport"
+              },
+              {
+                "from": "apport",
+                "to": "enrichi"
+              },
+              {
+                "from": "enrichi",
+                "to": "pousse",
+                "label": "culture suivante"
+              }
+            ],
+            "legend": [
+              "Prélèvement",
+              "Apport"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "L'absorption de l'eau et des sels minéraux par la racine",
+          "remember": "La racine fixe la plante dans le sol et y prélève l'**eau** et les **sels minéraux**. Une racine a plusieurs zones. De la pointe vers la tige : la **coiffe**, qui protège l'extrémité ; la **zone d'allongement**, lisse, où la racine s'allonge ; la **zone pilifère**, couverte de **poils absorbants** ; puis les racines secondaires, jusqu'au **collet**, limite entre la racine et la tige. Un **poil absorbant** est un très fin prolongement d'une cellule de la surface de la racine. Il se glisse entre les particules de sol et touche l'eau du sol, qui contient des sels minéraux dissous. Les poils sont très nombreux : ils agrandissent la surface de contact avec le sol. La zone pilifère est donc la zone d'absorption de la racine.",
+          "method": [
+            "Repérer la zone de la racine que l'on étudie, de la coiffe jusqu'au collet.",
+            "Décrire cette zone : sa position et son aspect (lisse ou couverte de poils).",
+            "Expliquer son rôle : montrer que les poils absorbants, au contact de l'eau du sol, absorbent l'eau et les sels minéraux.",
+            "Conclure : écrire ce que la racine absorbe, et à quel endroit."
+          ],
+          "example": {
+            "statement": "Au jardin scolaire, les élèves arrachent doucement un plant de tomate et observent sa racine à la loupe. Ils voient une pointe protégée par un petit capuchon, une partie lisse, puis une partie couverte de fins poils blancs, et enfin des racines plus grosses. Trouver où la racine absorbe l'eau.",
+            "steps": [
+              "Repérer : de la pointe vers la tige, on voit le capuchon (la coiffe), une partie lisse (la zone d'allongement), une partie à poils (la zone pilifère), puis les racines secondaires.",
+              "Décrire : la zone pilifère est située derrière la zone lisse ; elle est couverte de fins poils blancs, les poils absorbants.",
+              "Expliquer : les poils absorbants sont très nombreux et se glissent entre les particules de sol ; ils touchent l'eau du sol, qui contient des sels minéraux dissous.",
+              "Conclure : la racine absorbe l'eau et les sels minéraux dissous au niveau de la zone pilifère, grâce à ses poils absorbants."
+            ]
+          },
+          "pitfall": "Ne pas croire que la racine absorbe par sa pointe, ni que la coiffe sert à boire. La coiffe protège l'extrémité de la racine quand elle pousse dans le sol : elle n'absorbe pas. Contre-exemple : sur une racine de tomate, la pointe est lisse et sans poils ; les poils sont plus haut, dans la zone pilifère. Ne confonds pas non plus un poil absorbant (un fin prolongement de cellule) avec une racine secondaire (une vraie petite racine).",
+          "figure": "racine-noms",
+          "exercise": {
+            "title": "Observer une racine au jardin scolaire",
+            "statement": "Dans cet exercice, tu observes des racines de plants du jardin scolaire (tomate, piment, gombo, laitue) avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "racine-numeros",
+            "questions": [
+              {
+                "content": "Au jardin scolaire, on observe la racine d'un plant de piment. Quelle zone de la racine porte les poils absorbants ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : de la pointe vers la tige, on rencontre la coiffe, la zone d'allongement, la zone pilifère, puis les racines secondaires et le collet. Étape 2 — Décrire : la coiffe et la zone d'allongement sont lisses ; seule la zone pilifère est couverte de fins poils blancs. Étape 3 — Expliquer : ces poils sont les poils absorbants. Étape 4 — Conclure : la zone qui porte les poils absorbants est la zone pilifère. La coiffe est tentante, car elle est à la pointe, mais elle protège l'extrémité de la racine et n'absorbe pas.",
+                "answers": [
+                  {
+                    "content": "La zone pilifère",
+                    "correct": true
+                  },
+                  {
+                    "content": "La coiffe",
+                    "correct": false
+                  },
+                  {
+                    "content": "La zone d'allongement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le collet",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les poils absorbants sont de petites racines secondaires qui fixent le plant de tomate dans le sol.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les racines secondaires partent de la racine principale ; les poils absorbants sont dans la zone pilifère, près de la pointe. Étape 2 — Décrire : un poil absorbant est un très fin prolongement d'une cellule de la surface de la racine, alors qu'une racine secondaire est une vraie racine, plus grosse. Étape 3 — Expliquer : le poil absorbant sert à absorber l'eau et les sels minéraux, pas à fixer la plante. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur la planche de la racine de piment, les numéros désignent des éléments. Relie chaque numéro à son nom : le numéro 1 est situé à la limite entre la racine et la tige, le numéro 2 est couvert de poils, le numéro 4 est tout au bout de la racine, le numéro 5 est un prolongement très fin entre les particules de sol.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on lit la position de chaque élément de la pointe vers la tige. Étape 2 — Décrire : le numéro 4 est à l'extrémité ; le numéro 2 est couvert de poils ; le numéro 5 est un fin prolongement ; le numéro 1 est à la limite avec la tige. Étape 3 — Expliquer : le collet est la limite entre racine et tige ; la zone pilifère porte les poils ; la coiffe protège la pointe ; le poil absorbant est en contact avec l'eau du sol. Étape 4 — Conclure : 1 collet, 2 zone pilifère, 4 coiffe, 5 poil absorbant. L'erreur fréquente est de prendre la coiffe pour la zone qui absorbe.",
+                "answers": [
+                  {
+                    "content": "Numéro 1",
+                    "match": "Collet"
+                  },
+                  {
+                    "content": "Numéro 2",
+                    "match": "Zone pilifère"
+                  },
+                  {
+                    "content": "Numéro 4",
+                    "match": "Coiffe"
+                  },
+                  {
+                    "content": "Numéro 5",
+                    "match": "Poil absorbant"
+                  }
+                ]
+              },
+              {
+                "content": "L'eau du sol contient des ___ dissous, que les poils absorbants prélèvent avec l'eau.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : les poils absorbants sont au contact de l'eau du sol. Étape 2 — Décrire : cette eau n'est pas pure ; des substances y sont dissoutes. Étape 3 — Expliquer : ces substances sont les sels minéraux (nitrates, phosphates, sels de potassium). Étape 4 — Conclure : la racine absorbe de l'eau et des sels minéraux dissous. Les particules de terre elles-mêmes ne sont jamais absorbées.",
+                "answers": [
+                  {
+                    "content": "sels minéraux",
+                    "correct": true
+                  },
+                  {
+                    "content": "sels",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les zones d'une racine de gombo, en partant de la pointe vers le collet.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on part de la pointe de la racine. Étape 2 — Décrire : la coiffe est tout au bout ; vient ensuite la zone d'allongement, lisse ; puis la zone pilifère, couverte de poils absorbants ; plus haut partent les racines secondaires, avant le collet. Étape 3 — Expliquer : les poils absorbants se trouvent dans la zone pilifère, jamais à l'extrême pointe. Étape 4 — Conclure : coiffe, zone d'allongement, zone pilifère, racines secondaires.",
+                "answers": [
+                  {
+                    "content": "La coiffe"
+                  },
+                  {
+                    "content": "La zone d'allongement"
+                  },
+                  {
+                    "content": "La zone pilifère"
+                  },
+                  {
+                    "content": "Les racines secondaires"
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi les poils absorbants sont-ils très efficaces pour absorber l'eau et les sels minéraux du sol ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : les poils absorbants sont dans la zone pilifère, entre les particules de sol. Étape 2 — Décrire : ils sont très nombreux, très fins et en contact avec l'eau du sol. Étape 3 — Expliquer : leur grand nombre augmente la surface de contact, et leur finesse leur permet de se glisser entre les particules. Étape 4 — Conclure : ils prélèvent efficacement l'eau et les sels minéraux dissous. Ils ne fabriquent pas les sels minéraux : ceux-ci viennent du sol.",
+                "answers": [
+                  {
+                    "content": "Ils sont très nombreux et très fins, donc ils augmentent beaucoup la surface de contact avec le sol.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils se glissent entre les particules de sol et touchent l'eau du sol qui contient les sels minéraux dissous.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils fabriquent eux-mêmes les sels minéraux dont la plante a besoin.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils sont protégés par la coiffe, qui absorbe l'eau à leur place.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils sont gros et peu nombreux, ce qui laisse passer plus d'eau.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un jardinier arrache un plant de laitue sans sa motte de terre et le replante : le plant se fane. Quelle est l'explication la plus juste ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la zone concernée est la zone pilifère, qui porte les poils absorbants. Étape 2 — Décrire : ces poils sont très fins et très fragiles ; ils se cassent quand on arrache la racine hors de la terre. Étape 3 — Expliquer : sans poils absorbants, la surface de contact avec l'eau du sol est beaucoup plus petite, donc l'eau absorbée ne suffit plus. Étape 4 — Conclure : le plant se fane. L'erreur tentante est d'accuser la coiffe : elle protège la pointe, elle n'absorbe pas. La motte de terre protège les poils lors du repiquage.",
+                "answers": [
+                  {
+                    "content": "Les fins poils absorbants se sont cassés, donc la racine absorbe beaucoup moins d'eau.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le plant a perdu sa coiffe, qui servait à absorber l'eau.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le plant a perdu les particules de sol, qu'il utilise comme aliment.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le plant n'a plus de collet, donc il ne peut plus pousser.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le sol, source d'eau et de sels minéraux pour la plante",
+          "remember": "Le sol retient de l'eau dans ses espaces vides. Cette eau n'est pas pure : elle contient des **sels minéraux** dissous (nitrates, phosphates, sels de potassium). On l'appelle la **solution du sol**. La plante y trouve l'eau et les sels minéraux dont elle a besoin pour pousser. Les sels minéraux viennent de l'altération de la roche mère et de la transformation de la matière organique de l'humus. Pour prouver le rôle des sels minéraux, on réalise une expérience avec des **lots** de plants identiques, placés dans les mêmes conditions : les lots ne doivent différer que par **un seul facteur**. Un sable lavé ne contient presque pas de sels minéraux ; l'**eau distillée** n'en contient pas du tout.",
+          "method": [
+            "Observer les lots de plants : ce que chaque lot reçoit et le résultat obtenu.",
+            "Comparer deux lots qui ne diffèrent que par un seul facteur.",
+            "Interpréter la différence de croissance : la relier au facteur qui change.",
+            "Conclure : dire ce que le sol apporte à la plante."
+          ],
+          "example": {
+            "statement": "Au jardin scolaire, les élèves cultivent trois pots de tomate identiques, avec la même lumière. Lot A : sol de jardin, arrosé à l'eau. Lot B : sable lavé, arrosé à l'eau distillée. Lot C : sable lavé, arrosé d'une solution minérale. Après quatre semaines, les plants des lots A et C sont grands et verts (30 et 28 cm) ; ceux du lot B sont petits, à feuilles jaunes (8 cm). Montrer ce que le sol apporte à la plante.",
+            "steps": [
+              "Observer : lot A, 30 cm et vert ; lot B, 8 cm et jaune ; lot C, 28 cm et vert. Le lot B reçoit du sable lavé et de l'eau distillée ; le lot C reçoit du sable lavé et une solution minérale.",
+              "Comparer : les lots B et C ont le même sable lavé et ne diffèrent que par l'arrosage : eau distillée ou solution minérale.",
+              "Interpréter : le lot C pousse bien, le lot B mal ; la seule différence est la présence de sels minéraux, donc ce sont eux qui font pousser le lot C.",
+              "Conclure : le sol de jardin (lot A) apporte à la plante des sels minéraux, que la solution minérale remplace dans le lot C ; il retient aussi l'eau d'arrosage."
+            ]
+          },
+          "pitfall": "Ne pas comparer deux lots qui diffèrent par plusieurs facteurs. Contre-exemple : si tu compares le lot A (sol de jardin) au lot B (sable lavé, eau distillée), tu changes à la fois le sol et l'eau : tu ne sais pas lequel explique les 22 cm d'écart (30 − 8). Compare B et C, qui ne diffèrent que par les sels minéraux. Ne dis pas non plus que la plante « mange la terre » : elle absorbe seulement de l'eau et des sels minéraux dissous.",
+          "figure": "experience-tomate",
+          "exercise": {
+            "title": "Des plants de tomate sur trois sols différents",
+            "statement": "Dans cet exercice, tu analyses les résultats d'une culture de plants de tomate au jardin scolaire. Les valeurs sont celles d'un exercice. Utilise les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "experience-tomate",
+            "questions": [
+              {
+                "content": "Une plante de gombo absorbe par ses racines de petites particules de terre, qui deviennent sa matière.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : au jardin, la terre reste dans le sol et la racine s'y enfonce. Étape 2 — Comparer : une plante sur sable lavé arrosé d'une solution minérale pousse presque comme une plante sur sol de jardin ; la terre n'est donc pas indispensable, seules l'eau et les sels minéraux comptent. Étape 3 — Interpréter : ce sont des substances dissoutes dans l'eau du sol qui sont absorbées. Étape 4 — Conclure : la plante absorbe de l'eau et des sels minéraux dissous, pas des particules de terre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Qu'est-ce que la solution du sol ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : le sol retient de l'eau dans ses espaces. Étape 2 — Comparer : cette eau n'est pas de l'eau distillée, car elle contient des substances dissoutes. Étape 3 — Interpréter : ces substances sont les sels minéraux, venus de la roche mère altérée et de l'humus. Étape 4 — Conclure : la solution du sol est l'eau du sol qui contient des sels minéraux dissous. Un engrais n'est pas la solution du sol : il en est seulement un apport possible.",
+                "answers": [
+                  {
+                    "content": "L'eau du sol dans laquelle des sels minéraux sont dissous",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un engrais fabriqué en usine et vendu en sac",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un mélange de sable et de petits cailloux",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau de pluie qui ruisselle sur le sol sans y entrer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au jardin scolaire, après quatre semaines, les plants de tomate mesurent 30 cm (lot A, sol de jardin), 8 cm (lot B, sable lavé arrosé à l'eau distillée) et 28 cm (lot C, sable lavé arrosé d'une solution minérale). De combien de centimètres le lot C est-il plus haut que le lot B ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Observer : lot B : 8 cm ; lot C : 28 cm. Étape 2 — Comparer : les deux lots ont le même sable lavé et ne diffèrent que par l'arrosage (eau distillée ou solution minérale). Étape 3 — Interpréter : on calcule l'écart 28 − 8 = 20 cm, qui est dû à la solution minérale. Étape 4 — Conclure : le lot C est plus haut de 20 cm. L'erreur tentante est de calculer 30 − 8 = 22 cm, qui compare le lot A au lot B : ces deux lots diffèrent par plusieurs facteurs, donc on ne peut pas en tirer de conclusion sur les sels minéraux.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "cm"
+              },
+              {
+                "content": "Pour montrer le rôle des sels minéraux, quels deux lots de plants de tomate faut-il comparer ? Lot A : sol de jardin arrosé ; lot B : sable lavé arrosé d'eau distillée ; lot C : sable lavé arrosé d'une solution minérale.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : A a un sol de jardin ; B et C ont du sable lavé ; B reçoit de l'eau distillée, C une solution minérale. Étape 2 — Comparer : pour isoler l'effet des sels minéraux, il faut deux lots qui ne diffèrent que par ce facteur : B et C ont le même sable et diffèrent seulement par les sels. Étape 3 — Interpréter : si C pousse mieux que B, c'est grâce aux sels minéraux. Étape 4 — Conclure : on compare B et C. Comparer A et B mélange deux facteurs (le sol et l'arrosage).",
+                "answers": [
+                  {
+                    "content": "Les lots B et C",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les lots A et B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les lots A et C",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les trois lots en même temps, sans choisir",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les plants du lot B ont des feuilles jaunes et sont petits, car le sable lavé et l'eau distillée ne leur apportent presque pas de ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Observer : les plants du lot B sont petits, à feuilles jaunes. Étape 2 — Comparer : le lot C, qui reçoit en plus une solution minérale, pousse bien. Étape 3 — Interpréter : la seule différence entre B et C est la présence de sels minéraux. Étape 4 — Conclure : le lot B manque de sels minéraux. Le manque d'eau n'est pas en cause, car le lot B est arrosé.",
+                "answers": [
+                  {
+                    "content": "sels minéraux",
+                    "correct": true
+                  },
+                  {
+                    "content": "sels",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "D'où viennent les sels minéraux que l'on trouve dans le sol du jardin ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Observer : le profil d'un sol montre une roche mère, une roche altérée et un horizon humifère riche en humus. Étape 2 — Comparer : la roche mère altérée libère des substances minérales ; l'humus, en se transformant, en libère aussi. Étape 3 — Interpréter : ces deux sources fournissent les sels minéraux dissous dans l'eau du sol. Étape 4 — Conclure : roche mère altérée et humus. L'eau distillée, au contraire, ne contient pas de sels minéraux : c'est pour cela qu'on l'utilise dans l'expérience.",
+                "answers": [
+                  {
+                    "content": "De l'altération de la roche mère",
+                    "correct": true
+                  },
+                  {
+                    "content": "De la transformation de la matière organique de l'humus",
+                    "correct": true
+                  },
+                  {
+                    "content": "De l'eau distillée utilisée pour arroser",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la lumière du soleil qui éclaire les feuilles",
+                    "correct": false
+                  },
+                  {
+                    "content": "De l'air qui circule entre les feuilles de la plante",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le recyclage de la matière organique : humus et minéralisation",
+          "remember": "Les feuilles, les tiges et les racines mortes, les déjections et les cadavres d'animaux forment la **matière organique morte**. À la surface du sol, elle constitue la **litière**. Les **décomposeurs** (vers de terre, insectes du sol, champignons, bactéries) la fragmentent et la décomposent. Elle devient alors l'**humus**, matière organique sombre, mêlée au sol dans l'horizon humifère. L'humus est ensuite transformé en **sels minéraux** dissous : c'est la **minéralisation**. Les poils absorbants prélèvent ces sels minéraux avec l'eau du sol, et la plante les utilise pour pousser. La matière des êtres vivants retourne ainsi au sol, puis aux plantes : c'est un cycle. L'humus n'est pas un sel minéral : seuls les sels minéraux dissous sont absorbés.",
+          "method": [
+            "Repérer la matière organique morte présente à la surface du sol.",
+            "Identifier les êtres vivants du sol qui la décomposent.",
+            "Décrire les transformations dans l'ordre : litière, humus, puis sels minéraux dissous.",
+            "Conclure : écrire que les racines absorbent ces sels minéraux, ce qui ferme le cycle."
+          ],
+          "example": {
+            "statement": "Le jardin scolaire a un tas de compost : épluchures de légumes, feuilles et herbes coupées. Au bout de quelques mois, le tas est devenu une matière brune, sombre et friable, où grouillent des vers et des champignons blancs. Expliquer comment ce tas redevient utile aux plantes.",
+            "steps": [
+              "Repérer : les épluchures, les feuilles et les herbes coupées sont de la matière organique morte, une litière.",
+              "Identifier : les vers de terre, les champignons et les bactéries du tas sont des décomposeurs.",
+              "Décrire : les débris ont été décomposés en une matière brune, sombre et friable, l'humus ; l'humus se minéralise ensuite en sels minéraux dissous.",
+              "Conclure : si on met ce compost sur la planche, les poils absorbants des racines prélèvent les sels minéraux, et la matière des déchets retourne aux plantes."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'humus et les sels minéraux. Contre-exemple : un tas de feuilles mortes fraîches mis au pied d'un plant n'est pas un engrais, car la racine n'absorbe que des sels minéraux dissous ; il faut d'abord que les décomposeurs fabriquent de l'humus, puis que l'humus se minéralise. Ne confonds pas non plus la litière (débris encore visibles, en surface) et l'humus (matière déjà décomposée, sombre, mêlée au sol).",
+          "figure": "profil-sol-noms",
+          "exercise": {
+            "title": "Du compost du jardin aux racines des plantes",
+            "statement": "Dans cet exercice, tu suis le recyclage des feuilles mortes et des épluchures au jardin scolaire, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "profil-sol-numeros",
+            "questions": [
+              {
+                "content": "Au pied des manguiers de la cour de l'école, des feuilles mortes recouvrent le sol. Comment appelle-t-on cette couche de débris végétaux ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : à la surface du sol, on voit des feuilles mortes, des brindilles et des fruits tombés. Étape 2 — Identifier : ce sont des débris végétaux non encore décomposés. Étape 3 — Décrire : cet ensemble forme la litière ; plus bas, quand les débris sont décomposés, on trouve l'humus. Étape 4 — Conclure : la couche de feuilles mortes est la litière. Confondre litière et humus est l'erreur fréquente : l'humus est de la matière déjà décomposée, sombre, mêlée au sol.",
+                "answers": [
+                  {
+                    "content": "La litière",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'humus",
+                    "correct": false
+                  },
+                  {
+                    "content": "La roche mère",
+                    "correct": false
+                  },
+                  {
+                    "content": "La solution du sol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le recyclage d'une feuille morte tombée sur une planche du jardin.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : la matière organique morte est d'abord à la surface, c'est la litière. Étape 2 — Identifier : des êtres vivants du sol, les décomposeurs, la fragmentent. Étape 3 — Décrire : les débris deviennent de l'humus, puis l'humus est minéralisé en sels minéraux dissous. Étape 4 — Conclure : les racines absorbent ces sels minéraux et le cycle se referme. On ne peut pas sauter l'humus ni la minéralisation : la racine n'absorbe pas la feuille morte.",
+                "answers": [
+                  {
+                    "content": "La feuille morte tombe sur le sol et forme la litière."
+                  },
+                  {
+                    "content": "Les décomposeurs fragmentent et transforment les débris en humus."
+                  },
+                  {
+                    "content": "L'humus est transformé en sels minéraux dissous : c'est la minéralisation."
+                  },
+                  {
+                    "content": "Les poils absorbants des racines prélèvent les sels minéraux."
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot du recyclage de la matière organique à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : la matière organique morte tombe à la surface : c'est la litière. Étape 2 — Identifier : les êtres vivants du sol qui la décomposent sont des décomposeurs. Étape 3 — Décrire : les débris deviennent de l'humus, puis la minéralisation les transforme en sels minéraux dissous. Étape 4 — Conclure : chaque mot correspond à une étape de la chaîne. L'erreur fréquente est d'écrire que l'humus est un sel minéral : l'humus est de la matière organique, le sel minéral est une substance dissoute.",
+                "answers": [
+                  {
+                    "content": "Litière",
+                    "match": "Débris végétaux morts à la surface du sol"
+                  },
+                  {
+                    "content": "Humus",
+                    "match": "Matière organique décomposée, sombre, mêlée au sol"
+                  },
+                  {
+                    "content": "Minéralisation",
+                    "match": "Transformation de l'humus en sels minéraux dissous"
+                  },
+                  {
+                    "content": "Décomposeur",
+                    "match": "Être vivant du sol, comme le ver de terre ou la bactérie, qui décompose les débris"
+                  }
+                ]
+              },
+              {
+                "content": "Les poils absorbants peuvent absorber directement les feuilles mortes de la litière.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les feuilles mortes sont de la matière organique solide à la surface. Étape 2 — Identifier : seuls les décomposeurs peuvent les fragmenter. Étape 3 — Décrire : après l'humus et la minéralisation, il reste des sels minéraux dissous dans l'eau du sol. Étape 4 — Conclure : les poils absorbants ne prélèvent que l'eau et les sels minéraux dissous, jamais des débris solides. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur le profil de sol du jardin scolaire, le numéro 2 désigne l'horizon humifère. Qu'y trouve-t-on qui le rend favorable aux plantes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'horizon humifère est la couche sombre située sous la litière. Étape 2 — Identifier : sa couleur sombre vient de l'humus, matière organique décomposée par les décomposeurs. Étape 3 — Décrire : en se minéralisant, l'humus libère des sels minéraux dissous dans l'eau du sol. Étape 4 — Conclure : cet horizon est riche en humus, donc favorable aux racines. La roche mère, elle, se trouve beaucoup plus bas dans le profil.",
+                "answers": [
+                  {
+                    "content": "Beaucoup d'humus, qui libère des sels minéraux en se minéralisant",
+                    "correct": true
+                  },
+                  {
+                    "content": "Surtout de la roche mère non altérée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Uniquement du sable lavé sans matière organique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Uniquement des cailloux de grande taille",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève propose : « Je pose des feuilles mortes toutes fraîches au pied de mes tomates : les racines vont les absorber tout de suite. » Quelle est la bonne réponse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : des feuilles fraîches sont de la matière organique morte, donc de la litière. Étape 2 — Identifier : leur décomposition demande des décomposeurs et du temps. Étape 3 — Décrire : litière, puis humus, puis minéralisation en sels minéraux dissous. Étape 4 — Conclure : la plante ne profite des feuilles qu'après ces transformations. L'erreur de l'élève est de croire que la feuille est absorbée ; mais dire qu'elle n'apporte jamais rien est faux aussi, puisqu'elle finit en sels minéraux.",
+                "answers": [
+                  {
+                    "content": "Non : les décomposeurs doivent d'abord les transformer en humus, puis l'humus est minéralisé en sels minéraux.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : les poils absorbants prélèvent directement les feuilles.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : les feuilles mortes n'apportent jamais rien au sol.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : la litière est déjà faite de sels minéraux dissous.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels êtres vivants ou éléments du sol participent à la décomposition de la litière ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer : la litière est de la matière organique morte. Étape 2 — Identifier : les êtres vivants du sol qui la décomposent sont les décomposeurs : vers de terre, champignons et bactéries. Étape 3 — Décrire : ils la fragmentent puis la transforment en humus. Étape 4 — Conclure : les trois bonnes propositions sont les vers de terre, les champignons et les bactéries. Les cailloux sont minéraux et les poils absorbants font partie de la racine : ils ne décomposent rien.",
+                "answers": [
+                  {
+                    "content": "Les vers de terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les champignons",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les bactéries",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les cailloux du sol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les poils absorbants",
+                    "correct": false
+                  },
+                  {
+                    "content": "La coiffe de la racine",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'entretien de la fertilité du sol",
+          "remember": "Un sol **fertile** fournit aux plantes assez d'eau et de sels minéraux. Quand on récolte les légumes, on emporte les sels minéraux que les plantes ont prélevés : si rien ne revient au sol, il s'**appauvrit** et les plants deviennent petits, à feuilles pâles. Pour entretenir la fertilité, on fait des **apports** : de la matière organique (compost, fumier, feuilles mortes) qui libère des sels minéraux en se minéralisant et améliore le sol, ou un **engrais minéral**, qui apporte directement des sels minéraux, en quantité mesurée.",
+          "method": [
+            "Identifier ce que la culture prélève au sol et ce que la récolte emporte.",
+            "Constater l'état du sol et des plants : taille, couleur des feuilles, rendement.",
+            "Choisir un apport adapté : compost, fumier ou engrais minéral.",
+            "Conclure : écrire comment le sol retrouve des sels minéraux pour la culture suivante."
+          ],
+          "example": {
+            "statement": "Sur une planche de laitue du jardin scolaire, les élèves ont fait deux récoltes sans rien ajouter. À la troisième culture, les laitues sont petites et pâles. Proposer une solution.",
+            "steps": [
+              "Identifier : les deux premières cultures ont prélevé des sels minéraux, et les récoltes les ont emportés hors de la planche.",
+              "Constater : les laitues de la troisième culture sont petites et pâles ; le sol est appauvri en sels minéraux.",
+              "Choisir : un apport de compost, fait de déchets décomposés, qui libère des sels minéraux en se minéralisant.",
+              "Conclure : avec le compost, le sol retrouve des sels minéraux, et la culture suivante pourra mieux pousser."
+            ]
+          },
+          "pitfall": "Ne pas croire que le sol est une réserve inépuisable. Contre-exemple : une planche de gombo cultivée trois fois de suite sans aucun apport donne des plants de plus en plus petits et pâles, car chaque récolte a emporté des sels minéraux. Arroser davantage n'y change rien : l'eau seule ne remplace pas les sels minéraux. Il faut rendre au sol ce que la récolte lui a pris.",
+          "figure": "cycle-fertilite",
+          "exercise": {
+            "title": "Garder la planche de légumes en bon état",
+            "statement": "Dans cet exercice, tu aides les élèves du jardin scolaire à garder leurs planches de légumes fertiles, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Récolter les légumes d'une planche ne change rien aux sels minéraux du sol.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : pendant leur croissance, les plants de la planche ont absorbé des sels minéraux du sol. Étape 2 — Constater : en récoltant les légumes, on emporte ces sels minéraux hors de la planche. Étape 3 — Choisir : sans apport, ils ne reviennent pas au sol. Étape 4 — Conclure : la récolte appauvrit le sol en sels minéraux ; l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces apports, lequel est un apport de matière organique pour une planche de légumes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : les apports possibles sont de deux sortes, matière organique ou engrais minéral. Étape 2 — Constater : le compost est fait de déchets végétaux décomposés, donc de matière organique. Étape 3 — Choisir : le compost, en se minéralisant, redonne des sels minéraux au sol. Étape 4 — Conclure : la bonne proposition est le compost. L'eau distillée ne contient pas de sels minéraux et le sable lavé presque pas.",
+                "answers": [
+                  {
+                    "content": "Le compost",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'eau distillée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sable lavé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les cailloux de la roche mère",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque pratique du jardin à son effet sur le sol.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : le sol perd des sels minéraux à chaque récolte. Étape 2 — Constater : il faut lui en rendre. Étape 3 — Choisir : le compost ou le fumier apportent de la matière organique ; l'engrais minéral apporte directement des sels, en quantité mesurée ; les feuilles mortes laissées sur la planche se décomposent. Étape 4 — Conclure : chaque pratique a son effet. L'erreur fréquente est de croire que l'engrais minéral est de la matière organique : il apporte des sels minéraux directement.",
+                "answers": [
+                  {
+                    "content": "Compost ou fumier",
+                    "match": "Apporte de la matière organique qui libère des sels minéraux"
+                  },
+                  {
+                    "content": "Engrais minéral",
+                    "match": "Apporte directement des sels minéraux"
+                  },
+                  {
+                    "content": "Feuilles mortes laissées sur la planche",
+                    "match": "Se décomposent en humus puis libèrent des sels minéraux"
+                  },
+                  {
+                    "content": "Engrais en trop grande quantité",
+                    "match": "Gaspille les sels minéraux : il faut en mesurer la dose"
+                  }
+                ]
+              },
+              {
+                "content": "Une récolte emporte avec elle des sels ___ qui avaient été prélevés dans le sol.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : la plante a absorbé de l'eau et des sels dissous dans la solution du sol. Étape 2 — Constater : ces sels se trouvent dans les légumes récoltés. Étape 3 — Choisir : il faudra les rendre au sol par un apport. Étape 4 — Conclure : la récolte emporte des sels minéraux.",
+                "answers": [
+                  {
+                    "content": "minéraux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre l'appauvrissement puis l'enrichissement d'une planche de gombo.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : la plante absorbe d'abord des sels minéraux en poussant. Étape 2 — Constater : la récolte les emporte. Étape 3 — Choisir : sans apport, le sol s'appauvrit ; avec du compost, on lui redonne des sels minéraux. Étape 4 — Conclure : prélèvement, départ avec la récolte, appauvrissement, puis apport. L'apport vient en dernier, car il répond à l'appauvrissement.",
+                "answers": [
+                  {
+                    "content": "Les plants de gombo poussent en absorbant des sels minéraux."
+                  },
+                  {
+                    "content": "La récolte emporte ces sels minéraux hors de la planche."
+                  },
+                  {
+                    "content": "Sans apport, le sol de la planche s'appauvrit en sels minéraux."
+                  },
+                  {
+                    "content": "Un apport de compost redonne des sels minéraux au sol."
+                  }
+                ]
+              },
+              {
+                "content": "Un élève affirme : « Le sol est une réserve infinie, on peut cultiver sans jamais rien lui rendre. » Quel fait contredit cette affirmation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : chaque récolte emporte des sels minéraux. Étape 2 — Constater : sans apport, les plants deviennent petits et pâles, signe d'un sol appauvri. Étape 3 — Choisir : l'affirmation contredite est celle de la réserve infinie. Étape 4 — Conclure : le sol doit être entretenu par des apports. La couleur de la planche ne prouve rien, et arroser davantage ne remplace pas les sels minéraux.",
+                "answers": [
+                  {
+                    "content": "Après plusieurs récoltes sans apport, les plants de la planche sont de plus en plus petits et pâles.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les plants poussent mieux quand on arrose beaucoup, quel que soit le sol.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les vers de terre sont présents dans toutes les planches du jardin.",
+                    "correct": false
+                  },
+                  {
+                    "content": "La planche reste de la même couleur après chaque récolte.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels apports peut-on faire sur une planche pour lui redonner des sels minéraux ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : la planche a perdu des sels minéraux avec les récoltes. Étape 2 — Constater : le compost et le fumier sont des matières organiques décomposées ou à décomposer. Étape 3 — Choisir : en se minéralisant, ils libèrent des sels minéraux. Étape 4 — Conclure : compost et fumier. L'eau distillée ne contient pas de sels minéraux et le sable lavé presque pas.",
+                "answers": [
+                  {
+                    "content": "Du compost",
+                    "correct": true
+                  },
+                  {
+                    "content": "Du fumier",
+                    "correct": true
+                  },
+                  {
+                    "content": "De l'eau distillée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du sable lavé",
+                    "correct": false
+                  },
+                  {
+                    "content": "De l'eau de pluie recueillie dans un seau",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les poils absorbants d'un plant de tomate",
+          "statement": "Au jardin scolaire, la classe de 3ème cultive des tomates sur une planche. Pour comprendre comment les plants se nourrissent, les élèves arrachent un plant avec précaution, lavent doucement sa racine et l'observent à la loupe. Ils étudient ensuite le trajet de l'eau.",
+          "exercise_type": "fixation",
+          "figure": "trajet-eau-sels",
+          "questions": [
+            {
+              "content": "À la loupe, les élèves voient dans une zone de la racine de nombreux fins poils blancs. Que sont ces poils ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la zone observée : une zone de la racine couverte de fins poils, la zone pilifère. 2. Décrire : ces poils sont très fins, très nombreux, au contact du sol. 3. Expliquer le rôle : ils absorbent l'eau et les sels minéraux de l'eau du sol. 4. Conclure : ce sont des poils absorbants. Les racines secondaires sont de vraies racines plus grosses, visibles à l'œil nu.",
+              "answers": [
+                {
+                  "content": "Des poils absorbants, qui prélèvent l'eau et les sels minéraux du sol",
+                  "correct": true
+                },
+                {
+                  "content": "Des racines secondaires, qui fixent le plant dans le sol",
+                  "correct": false
+                },
+                {
+                  "content": "Des poils protecteurs qui évitent que la racine touche l'eau",
+                  "correct": false
+                },
+                {
+                  "content": "Des tiges très fines qui portent les premières feuilles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet de l'eau et des sels minéraux dans le plant de tomate.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Repérer le point de départ : l'eau du sol, qui contient des sels minéraux dissous. 2. Décrire le prélèvement : les poils absorbants, dans la zone pilifère, absorbent l'eau et les sels. 3. Suivre le trajet : ils passent dans la racine, puis sont conduits vers la tige et les feuilles. 4. Conclure : sol, poils absorbants, racine, tige et feuilles. On ne peut pas inverser : l'absorption se fait dans le sol, avant tout passage dans la tige.",
+              "answers": [
+                {
+                  "content": "L'eau du sol contient des sels minéraux dissous."
+                },
+                {
+                  "content": "Les poils absorbants prélèvent l'eau et les sels minéraux."
+                },
+                {
+                  "content": "L'eau et les sels passent dans la racine."
+                },
+                {
+                  "content": "L'eau et les sels sont conduits vers la tige et les feuilles."
+                }
+              ]
+            },
+            {
+              "content": "Une racine couverte de très nombreux poils absorbants a une surface de contact avec le sol ___ .",
+              "question_type": "select",
+              "explanation": "Méthode : 1. Repérer : la zone pilifère, près de la pointe, est couverte de très nombreux poils. 2. Décrire : ces poils sont fins et se glissent entre les particules du sol. 3. Expliquer : chaque poil touche l'eau du sol ; ensemble, ils agrandissent la surface de contact. 4. Conclure : la surface de contact est plus grande. Une racine lisse aurait une surface bien plus petite, donc elle absorberait moins.",
+              "answers": [
+                {
+                  "content": "plus grande",
+                  "correct": true
+                },
+                {
+                  "content": "plus petite",
+                  "correct": false
+                },
+                {
+                  "content": "identique à celle d'une racine lisse",
+                  "correct": false
+                },
+                {
+                  "content": "nulle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La zone de la racine couverte de poils absorbants s'appelle la zone ___ .",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Repérer les zones de la racine : coiffe, zone d'allongement, zone pilifère, racines secondaires, collet. 2. Décrire celle qui porte les poils : elle est couverte de poils absorbants. 3. Expliquer : le nom vient de cette particularité, pilifère signifie qui porte des poils. 4. Conclure : c'est la zone pilifère. La zone d'allongement, elle, reste lisse.",
+              "answers": [
+                {
+                  "content": "pilifère",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour repiquer des plants de piment sans abîmer leurs poils absorbants, il vaut mieux les arracher avec leur motte de terre.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Repérer la zone fragile : la zone pilifère. 2. Décrire : les poils absorbants sont très fins et se cassent facilement quand la racine sort de la terre. 3. Expliquer : la motte de terre garde les poils au contact du sol et les protège. 4. Conclure : avec la motte, le plant continue à absorber l'eau après le repiquage ; l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en deux ou trois phrases pourquoi un plant de laitue arraché brutalement, puis replanté sans motte, se fane.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Les poils absorbants sont cités comme les organes d'absorption de l'eau",
+                "Les poils sont fins et se cassent quand on arrache le plant",
+                "Le lien est fait entre moins de poils, moins d'eau absorbée, et le flétrissement"
+              ],
+              "explanation": "Corrigé modèle : Les poils absorbants de la zone pilifère absorbent l'eau et les sels minéraux du sol. Ils sont très fins et se cassent quand on arrache le plant sans motte. La surface d'absorption devient beaucoup plus petite, le plant absorbe trop peu d'eau et il se fane. Barème : 1 point pour le rôle des poils absorbants, 0,5 point pour leur fragilité, 0,5 point pour le lien avec le flétrissement.",
+              "answers": [],
+              "starter": "Les poils absorbants de la racine…"
+            }
+          ]
+        },
+        {
+          "title": "Trois lots de gombo pour comprendre le rôle du sol",
+          "statement": "Au jardin scolaire, des élèves de 3ème cultivent trois pots de gombo identiques, avec la même lumière. Lot 1 : sol de jardin, arrosé. Lot 2 : sable lavé, arrosé à l'eau distillée. Lot 3 : sable lavé, arrosé d'une solution minérale. Après cinq semaines, les plants mesurent 24 cm (lot 1), 6 cm (lot 2) et 22 cm (lot 3). Les valeurs sont celles d'un exercice. Les plants du lot 2 ont des feuilles jaunes.",
+          "exercise_type": "fixation",
+          "figure": "experience-gombo",
+          "questions": [
+            {
+              "content": "Pour montrer le rôle des sels minéraux, avec quel lot faut-il comparer le lot 3 ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Observer : lot 2 et lot 3 ont le même sable lavé ; lot 1 a un sol de jardin. 2. Comparer : on compare deux lots qui ne diffèrent que par un facteur : les lots 2 et 3 ne diffèrent que par l'arrosage (eau distillée ou solution minérale). 3. Interpréter : toute différence vient donc des sels minéraux. 4. Conclure : on compare le lot 3 au lot 2. Comparer le lot 3 au lot 1 mélangerait deux facteurs : le sol et l'arrosage.",
+              "answers": [
+                {
+                  "content": "Avec le lot 2",
+                  "correct": true
+                },
+                {
+                  "content": "Avec le lot 1",
+                  "correct": false
+                },
+                {
+                  "content": "Avec aucun lot, un seul lot suffit",
+                  "correct": false
+                },
+                {
+                  "content": "Avec le lot 1 et le lot 2 en même temps, sans distinguer",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de centimètres le lot 3 est-il plus haut que le lot 2 ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1. Observer : lot 2 : 6 cm ; lot 3 : 22 cm. 2. Comparer : ce sont les deux lots qui ne diffèrent que par les sels minéraux. 3. Interpréter : l'écart se calcule 22 − 6 = 16 cm et vient des sels minéraux. 4. Conclure : le lot 3 est plus haut de 16 cm. L'erreur tentante est de calculer 24 − 6 = 18 cm, qui compare le lot 1 au lot 2, deux lots qui diffèrent par plusieurs facteurs.",
+              "answers": [
+                {
+                  "content": "16",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "cm"
+            },
+            {
+              "content": "On arrose le lot 2 avec de l'eau distillée pour que l'eau d'arrosage n'apporte pas de ___ .",
+              "question_type": "select",
+              "explanation": "Méthode : 1. Observer : le lot 2 est arrosé à l'eau distillée. 2. Comparer : l'eau distillée est de l'eau privée de toute substance dissoute. 3. Interpréter : ainsi, le lot 2 n'a aucune source de sels minéraux. 4. Conclure : l'eau distillée n'apporte pas de sels minéraux. Elle n'a aucun rapport avec la lumière ou la chaleur, qui sont les mêmes pour les trois lots.",
+              "answers": [
+                {
+                  "content": "sels minéraux",
+                  "correct": true
+                },
+                {
+                  "content": "lumière",
+                  "correct": false
+                },
+                {
+                  "content": "chaleur",
+                  "correct": false
+                },
+                {
+                  "content": "particules de terre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles conclusions sont justes d'après les résultats des trois lots de gombo ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Observer : lot 1 et lot 3 sont grands, lot 2 est petit à feuilles jaunes. 2. Comparer : les lots 2 et 3 ne diffèrent que par la solution minérale. 3. Interpréter : le manque de sels minéraux explique le retard du lot 2, et la solution minérale compense l'absence de sol. 4. Conclure : deux conclusions justes. Les grains de sable ne sont pas absorbés, et l'eau distillée seule n'a pas fait pousser le lot 2.",
+              "answers": [
+                {
+                  "content": "Le sable lavé ne fournit pas assez de sels minéraux aux plants du lot 2.",
+                  "correct": true
+                },
+                {
+                  "content": "La solution minérale remplace les sels minéraux que le sol de jardin apporte.",
+                  "correct": true
+                },
+                {
+                  "content": "Les plants du lot 2 se nourrissent des grains de sable.",
+                  "correct": false
+                },
+                {
+                  "content": "Les plants du lot 3 ont grandi grâce à l'eau distillée seule.",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol de jardin n'apporte rien aux plants du lot 1.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La comparaison des trois lots montre que le sol de jardin fournit à la plante les sels minéraux nécessaires à sa croissance.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Observer : le lot 1, en sol de jardin arrosé, mesure 24 cm, presque comme le lot 3. 2. Comparer : le lot 1 est très supérieur au lot 2 (6 cm). 3. Interpréter : le sol de jardin joue le même rôle que la solution minérale du lot 3. 4. Conclure : le sol fournit les sels minéraux, comme la solution minérale du lot 3 ; l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige la conclusion de l'expérience : dis ce que les trois lots montrent sur le rôle du sol pour la plante, en suivant les étapes observer, comparer, interpréter, conclure.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les résultats des trois lots sont donnés (grande taille des lots 1 et 3, petite taille du lot 2)",
+                "La comparaison porte sur les lots 2 et 3, qui ne diffèrent que par les sels minéraux",
+                "La différence est reliée aux sels minéraux",
+                "La conclusion dit que le sol apporte les sels minéraux (dissous dans l'eau qu'il retient)"
+              ],
+              "explanation": "Corrigé modèle : Les plants des lots 1 et 3 sont grands (24 et 22 cm) et ceux du lot 2 sont petits (6 cm) à feuilles jaunes. Les lots 2 et 3 ne diffèrent que par l'arrosage : eau distillée ou solution minérale. Le lot 3 pousse bien, donc ce sont les sels minéraux qui expliquent la différence. Le sol de jardin du lot 1 apporte donc à la plante les sels minéraux, dissous dans l'eau qu'il retient. Barème : 1 point pour les résultats, 1 point pour la comparaison des lots 2 et 3, 0,5 point pour l'interprétation, 0,5 point pour la conclusion.",
+              "answers": [],
+              "starter": "Les lots 2 et 3 ne diffèrent que…"
+            }
+          ]
+        },
+        {
+          "title": "Du compost aux racines : deux planches comparées",
+          "statement": "Au jardin scolaire, les élèves ont deux planches voisines de tomate, au même soleil et arrosées de la même façon. Sur la planche A, ils ajoutent du compost fait d'épluchures de légumes, de feuilles et d'herbes coupées avant chaque culture. Sur la planche B, ils n'ajoutent rien et enlèvent les feuilles tombées. Après trois cultures, les plants de la planche A sont grands et verts, ceux de la planche B petits et pâles.",
+          "exercise_type": "evaluation",
+          "figure": "cycle-mineralisation",
+          "questions": [
+            {
+              "content": "Quel est le bon ordre du recyclage de la matière organique ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la matière organique morte : elle forme la litière. 2. Identifier les décomposeurs qui la transforment. 3. Décrire dans l'ordre : litière, humus, puis sels minéraux dissous par minéralisation. 4. Conclure : les racines absorbent les sels et la plante pousse. Écrire l'humus avant la litière est une erreur d'ordre : l'humus vient de la décomposition de la litière.",
+              "answers": [
+                {
+                  "content": "Plante, litière, humus, sels minéraux, plante",
+                  "correct": true
+                },
+                {
+                  "content": "Plante, sels minéraux, humus, litière, plante",
+                  "correct": false
+                },
+                {
+                  "content": "Plante, humus, litière, sels minéraux, plante",
+                  "correct": false
+                },
+                {
+                  "content": "Litière, plante, sels minéraux, humus, litière",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La transformation de l'humus en sels minéraux dissous s'appelle la ___ .",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Repérer les étapes du cycle de la matière organique. 2. Identifier l'étape qui suit la formation de l'humus. 3. Décrire : l'humus se transforme en sels minéraux dissous. 4. Conclure : cette transformation est la minéralisation. À ne pas confondre avec la décomposition, qui transforme la litière en humus.",
+              "answers": [
+                {
+                  "content": "minéralisation",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels rôles l'humus joue-t-il dans le sol du jardin ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Repérer l'humus : matière organique décomposée, sombre, mêlée au sol dans l'horizon humifère. 2. Identifier son origine : la décomposition de la litière par les décomposeurs. 3. Décrire ses rôles : il libère des sels minéraux en se minéralisant et aide à retenir l'eau. 4. Conclure : trois bonnes propositions. L'humus n'est pas absorbé tel quel et n'a rien d'une roche.",
+              "answers": [
+                {
+                  "content": "Il libère des sels minéraux quand il se minéralise.",
+                  "correct": true
+                },
+                {
+                  "content": "Il aide le sol à retenir l'eau.",
+                  "correct": true
+                },
+                {
+                  "content": "Il se trouve surtout dans l'horizon humifère.",
+                  "correct": true
+                },
+                {
+                  "content": "Il est absorbé directement par les poils absorbants.",
+                  "correct": false
+                },
+                {
+                  "content": "Il est une roche mère non altérée.",
+                  "correct": false
+                },
+                {
+                  "content": "Il empêche toute décomposition de la litière.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Enlever toutes les feuilles mortes d'une planche et ne rien y ajouter prive le sol de matière organique et risque de l'appauvrir.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Repérer la source de matière organique : la litière, composée de feuilles mortes. 2. Identifier : sans litière, les décomposeurs n'ont plus rien à décomposer. 3. Décrire : il n'y a plus d'humus nouveau, donc moins de sels minéraux libérés. 4. Conclure : le sol de la planche s'appauvrit ; l'affirmation est vraie, comme le montre la planche B.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi les plants de la planche A sont-ils plus grands que ceux de la planche B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la différence : A reçoit du compost, B ne reçoit rien et perd même ses feuilles tombées ; dans les deux cas, B reçoit moins de matière organique. 2. Identifier : le compost est de la matière organique décomposée par des décomposeurs. 3. Décrire : en se minéralisant, il libère des sels minéraux dissous dans l'eau du sol. 4. Conclure : les racines de A absorbent plus de sels minéraux que celles de B. Les deux planches reçoivent la même eau et le même soleil : ce ne sont donc pas des explications.",
+              "answers": [
+                {
+                  "content": "Le compost apporte de la matière organique, qui libère des sels minéraux en se minéralisant.",
+                  "correct": true
+                },
+                {
+                  "content": "Le compost remplace l'eau d'arrosage dont les plants de la planche B manquent.",
+                  "correct": false
+                },
+                {
+                  "content": "Le compost apporte directement du soleil aux plants de la planche A.",
+                  "correct": false
+                },
+                {
+                  "content": "Les poils absorbants n'existent que sur la planche A.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique, en suivant les étapes de la méthode, comment les épluchures de légumes du compost redeviennent utiles aux plants de tomate de la planche A.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Les épluchures sont identifiées comme de la matière organique morte (litière)",
+                "Les décomposeurs sont cités (vers de terre, champignons, bactéries)",
+                "L'ordre litière, humus, sels minéraux est respecté, avec le mot minéralisation",
+                "La conclusion dit que les racines absorbent les sels minéraux"
+              ],
+              "explanation": "Corrigé modèle : Les épluchures sont de la matière organique morte, comme une litière. Les décomposeurs du compost (vers de terre, champignons, bactéries) les décomposent en humus. L'humus se minéralise ensuite en sels minéraux dissous dans l'eau du sol. Les poils absorbants des racines de tomate prélèvent ces sels minéraux, qui servent à la croissance des plants. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Les épluchures sont de la matière organique…"
+            }
+          ]
+        },
+        {
+          "title": "Un jardin scolaire de plus en plus pauvre",
+          "statement": "Depuis quatre ans, le jardin d'une école cultive tomate, gombo, aubergine et piment sur les mêmes planches. Après chaque récolte, les élèves emportent toutes les tiges et toutes les feuilles pour nettoyer, et ne mettent ni compost ni fumier. Cette année, les plants sont petits, leurs feuilles sont pâles et la récolte est faible, bien que les planches soient arrosées régulièrement et exposées au soleil.",
+          "exercise_type": "evaluation",
+          "figure": "cycle-fertilite",
+          "questions": [
+            {
+              "content": "Quelle est l'explication la plus probable de l'état des plants ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier ce que les cultures prélèvent et ce que le nettoyage emporte : sels minéraux et matière organique. 2. Constater : plants petits, feuilles pâles, récolte faible malgré l'arrosage et le soleil. 3. Choisir l'explication : sans compost, fumier ni retour des débris, le sol s'appauvrit. 4. Conclure : sol appauvri en sels minéraux. Le soleil et l'arrosage sont déjà corrects, et un excès d'humus n'est pas le problème ici : il manque de la matière organique.",
+              "answers": [
+                {
+                  "content": "Les récoltes et le nettoyage ont emporté des sels minéraux sans qu'on en rende au sol : le sol s'est appauvri.",
+                  "correct": true
+                },
+                {
+                  "content": "Les planches manquent de soleil, qui est la source des sels minéraux.",
+                  "correct": false
+                },
+                {
+                  "content": "Les poils absorbants des plants absorbent trop d'eau.",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol est devenu trop riche en humus pour les plantes.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément du jardin à son rôle dans la relation entre le sol et les plantes.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Identifier le trajet des sels minéraux : du sol vers la plante, puis hors de la planche par la récolte. 2. Constater les rôles : les poils absorbants prélèvent l'eau et les sels ; la récolte les emporte. 3. Choisir ce qui les rend au sol : le compost, dont la matière organique se minéralise en sels minéraux dissous. 4. Conclure : chaque élément est relié à son rôle. L'erreur fréquente est de dire que la récolte apporte des sels minéraux : elle en retire.",
+              "answers": [
+                {
+                  "content": "Poils absorbants",
+                  "match": "Prélèvent l'eau et les sels minéraux du sol"
+                },
+                {
+                  "content": "Récolte",
+                  "match": "Emporte des sels minéraux hors de la planche"
+                },
+                {
+                  "content": "Compost",
+                  "match": "Apporte de la matière organique qui libère des sels minéraux"
+                },
+                {
+                  "content": "Minéralisation",
+                  "match": "Transforme l'humus en sels minéraux dissous"
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la démarche des élèves pour redresser leur jardin.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Identifier d'abord ce que les cultures prélèvent et ce que la récolte emporte. 2. Constater ensuite l'état des plants et des feuilles. 3. Choisir un apport adapté au sol appauvri. 4. Conclure sur l'enrichissement du sol pour la culture suivante. L'ordre suit la démarche de la fiche : on ne choisit pas un apport avant d'avoir compris la cause.",
+              "answers": [
+                {
+                  "content": "Identifier ce que les cultures prélèvent et ce que la récolte emporte."
+                },
+                {
+                  "content": "Constater l'état des plants et des feuilles."
+                },
+                {
+                  "content": "Choisir un apport adapté, comme le compost ou le fumier."
+                },
+                {
+                  "content": "Conclure que le sol retrouvera des sels minéraux pour la culture suivante."
+                }
+              ]
+            },
+            {
+              "content": "Quelle mesure est la mieux adaptée pour redonner de la fertilité aux planches ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier la cause : le sol manque de sels minéraux et de matière organique. 2. Constater : arroser davantage n'ajoute aucun sel minéral. 3. Choisir : le compost et le fumier apportent de la matière organique qui se minéralise. 4. Conclure : cet apport redonne des sels minéraux au sol. Le sable lavé n'en contient presque pas, et retirer plus de feuilles aggraverait l'appauvrissement.",
+              "answers": [
+                {
+                  "content": "Apporter du compost ou du fumier, et laisser les débris de plantes se décomposer sur les planches",
+                  "correct": true
+                },
+                {
+                  "content": "Arroser davantage sans rien ajouter",
+                  "correct": false
+                },
+                {
+                  "content": "Remplacer le sol par du sable lavé",
+                  "correct": false
+                },
+                {
+                  "content": "Retirer encore plus de feuilles mortes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un engrais minéral apporte directement des sels minéraux, alors que le compost doit d'abord être décomposé et minéralisé.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Identifier les deux sortes d'apport : matière organique ou engrais minéral. 2. Constater : le compost est de la matière organique, qui passe par l'humus puis la minéralisation. 3. Choisir : l'engrais minéral est déjà fait de sels minéraux. 4. Conclure : l'affirmation est vraie. Cela ne veut pas dire que l'engrais est toujours meilleur : il faut en doser la quantité.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels indices montrent que le sol d'une planche s'est appauvri en sels minéraux ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Identifier ce qui manque : des sels minéraux. 2. Constater les signes visibles : petite taille des plants et feuilles pâles ou jaunes. 3. Choisir ensuite l'apport qui y répond. 4. Conclure : deux bons indices. Les vers de terre et un sol sombre sont plutôt des signes de matière organique, et l'arrosage régulier ne dit rien sur les sels minéraux.",
+              "answers": [
+                {
+                  "content": "Les plants sont petits.",
+                  "correct": true
+                },
+                {
+                  "content": "Les feuilles sont pâles ou jaunes.",
+                  "correct": true
+                },
+                {
+                  "content": "Les vers de terre sont nombreux dans la planche.",
+                  "correct": false
+                },
+                {
+                  "content": "La planche est arrosée régulièrement.",
+                  "correct": false
+                },
+                {
+                  "content": "Le sol de la planche est sombre en surface.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe qui explique le lien entre la récolte, l'appauvrissement du sol et le rôle du compost, puis propose deux pratiques pour entretenir la fertilité des planches du jardin.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Le prélèvement des sels minéraux par les poils absorbants est expliqué",
+                "La récolte emporte ces sels minéraux, donc le sol s'appauvrit",
+                "Le compost est présenté comme de la matière organique qui libère des sels minéraux en se minéralisant",
+                "Deux pratiques exactes sont proposées (compost, fumier, engrais minéral, retour des débris de culture)",
+                "Le paragraphe est clair, organisé, avec le vocabulaire de la leçon"
+              ],
+              "explanation": "Corrigé modèle : Les poils absorbants des plants prélèvent dans le sol l'eau et des sels minéraux. Quand on récolte, on emporte ces sels minéraux : si rien n'est rendu, le sol s'appauvrit et les plants deviennent petits et pâles. Le compost est de la matière organique : les décomposeurs la transforment en humus, puis l'humus se minéralise et libère des sels minéraux que les racines absorbent. Pour entretenir les planches, les élèves peuvent apporter du compost ou du fumier avant chaque culture et remettre sur la planche les débris de culture. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Les poils absorbants prélèvent dans le sol…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

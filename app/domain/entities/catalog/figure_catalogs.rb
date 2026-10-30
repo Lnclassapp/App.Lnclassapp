@@ -1,5 +1,5 @@
 # 🧠 DOMAINE · Entities::Catalog::FigureCatalogs
-# Rôle : listes fermées des identifiants (aires et lieux) de chaque fond de carte d'une figure `map` ; Ruby pur, lu par Figure et par le script de contenus
+# Rôle : listes fermées des identifiants (aires et lieux) de chaque fond de carte d'une figure `map` et des parties de chaque planche d'une figure `plate` ; Ruby pur, lu par Figure et par le script de contenus
 # ADR  : XXXX-figures-des-matieres-de-3eme (§4.2, §4.3) · UDR : XXXX-figures-des-matieres-de-3eme (§3)
 module Entities
   module Catalog
@@ -44,9 +44,24 @@ module Entities
         "world" => { areas: WORLD_AREAS, places: WORLD_PLACES }.freeze
       }.freeze
 
+      # Parties de chaque planche de SVT (PRD contenus-3e-svt §5), dans l'ordre de lib/figures/plates/<planche>.js (test de parité).
+      PLATES = {
+        "digestive_system" => %w[mouth salivary_glands oesophagus stomach liver gallbladder pancreas small_intestine large_intestine rectum anus].freeze,
+        "blood_smear" => %w[red_blood_cell neutrophil lymphocyte monocyte platelet plasma].freeze,
+        "heart" => %w[right_atrium left_atrium right_ventricle left_ventricle septum aorta pulmonary_artery superior_vena_cava inferior_vena_cava
+                      pulmonary_veins tricuspid_valve mitral_valve].freeze,
+        "double_circulation" => %w[right_heart left_heart lungs organs pulmonary_artery pulmonary_veins aorta vena_cava].freeze,
+        "female_reproductive_system" => %w[ovary oviduct infundibulum uterus endometrium cervix vagina].freeze,
+        "hiv_virus" => %w[envelope gp120 gp41 matrix capsid rna reverse_transcriptase].freeze,
+        "soil_profile" => %w[litter humus_horizon accumulation_horizon weathered_rock bedrock roots].freeze,
+        "root_hairs" => %w[collar main_root lateral_root root_hair_zone elongation_zone root_cap root_hair soil_particle soil_water].freeze
+      }.freeze
+
       # → Array<String> ; vide pour un fond inconnu.
       def self.areas(base) = MAP_BASES.dig(base, :areas) || []
       def self.places(base) = MAP_BASES.dig(base, :places) || []
+      # → Array<String> ; vide pour une planche inconnue.
+      def self.parts(plate) = PLATES[plate] || []
     end
   end
 end

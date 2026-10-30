@@ -12,8 +12,8 @@ module Entities
         assert_empty Figure.errors_for(raw)
       end
 
-      test "la liste des sortes est fermée : huit sortes" do
-        assert_equal %w[coordinate_plane diagram geometry map number_line solid stat_chart timeline], FigureKinds::ALL.keys.sort
+      test "la liste des sortes est fermée : neuf sortes" do
+        assert_equal %w[coordinate_plane diagram geometry map number_line plate solid stat_chart timeline], FigureKinds::ALL.keys.sort
         assert_equal [ "kind", "figure_invalid", { param: "kind" } ], Figure.errors_for(raw(kind: "hologram")).first
       end
 
@@ -184,6 +184,7 @@ module Entities
       def timeline(**params) = raw(kind: "timeline", params: TIMELINE.merge(params.transform_keys(&:to_s)))
       def map(**params) = raw(kind: "map", params: MAP.merge(params.transform_keys(&:to_s)))
       def diagram(**params) = raw(kind: "diagram", params: FLOW.merge(params.transform_keys(&:to_s)))
+      def plate(**params) = raw(kind: "plate", params: HEART.merge(params.transform_keys(&:to_s)))
       def paths(figure) = reasons(figure).map(&:first).uniq
 
       TIMELINE = { "start" => 1880, "end" => 1960, "step" => 10, "unit" => "year",
@@ -196,6 +197,8 @@ module Entities
       FLOW = { "layout" => "flow", "direction" => "right", "legend" => %w[Étape],
                "nodes" => [ { "id" => "a", "label" => "Début", "category" => 1 }, { "id" => "b", "label" => "Fin" } ],
                "edges" => [ { "from" => "a", "to" => "b", "label" => "puis" }, { "from" => "b", "to" => "a" } ] }.freeze
+      HEART = { "plate" => "heart", "numbering" => "names", "highlight" => %w[aorta],
+                "labels" => [ { "part" => "right_atrium" }, { "part" => "aorta", "text" => "Aorte" }, { "part" => "septum" }, { "part" => "mitral_valve" } ] }.freeze
       TREE_NODES = %w[r a b c].map { { "id" => it, "label" => it.upcase } }.freeze
 
       test "une figure bien formée de chaque sorte nouvelle, de chaque fond et de chaque schéma est valide" do
@@ -254,6 +257,77 @@ module Entities
         assert_equal [ [ "params.edges[0].label", "figure_invalid" ] ], reasons(diagram(edges: [ { "from" => "a", "to" => "b", "label" => "  " } ]))
         assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(diagram(legend: [ 3 ]))
         assert_equal [ [ "params.legend[0]", "figure_invalid" ] ], reasons(diagram(legend: [ "" ]))
+      end
+
+      test "plate : chaque planche accepte une étiquette et un surlignage sur chacune de ses parties" do
+        assert_empty Figure.errors_for(plate)
+        FigureCatalogs::PLATES.each do |name, parts|
+          labels = parts.first(12).map { { "part" => it } }
+          assert_empty Figure.errors_for(raw(kind: "plate", params: { "plate" => name, "numbering" => "numbers", "labels" => labels, "highlight" => parts.last(4) })), name
+        end
+      end
+
+      test "plate : une planche inconnue est refusée, sans autre erreur" do
+        assert_equal [ [ "params.plate", "figure_invalid" ] ], reasons(plate(plate: "skeleton"))
+        assert_equal [ [ "params.plate", "figure_invalid" ] ], reasons(plate(plate: 3))
+      end
+
+      test "plate : les paramètres exigés sont plate, labels et numbering" do
+        assert_equal %w[params.plate params.labels], paths(raw(kind: "plate", params: { "numbering" => "names" }))
+        assert_equal %w[params.labels], paths(plate(labels: []))
+      end
+
+      test "plate : une partie inconnue de la planche, dans les étiquettes ou le surlignage" do
+        assert_equal [ [ "params.labels[1].part", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta" }, { "part" => "liver" } ]))
+        assert_equal [ [ "params.highlight[1]", "figure_invalid" ] ], reasons(plate(highlight: %w[aorta liver]))
+        assert_equal [ [ "params.highlight[0]", "figure_invalid" ] ], reasons(plate(highlight: [ 1 ]))
+      end
+
+      test "plate : une partie n'est étiquetée ni surlignée deux fois" do
+        assert_equal [ [ "params.labels[1].part", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta" }, { "part" => "aorta" } ]))
+        assert_equal [ [ "params.highlight[1]", "figure_invalid" ] ], reasons(plate(highlight: %w[aorta aorta]))
+      end
+
+      test "plate : une étiquette est un objet avec une partie, et un texte facultatif qui est un texte non vide" do
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(plate(labels: [ "aorta" ]))
+        assert_equal [ [ "params.labels[0].part", "figure_invalid" ] ], reasons(plate(labels: [ { "text" => "Aorte" } ]))
+        assert_equal [ [ "params.labels[0].part", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => 4 } ]))
+        assert_equal [ [ "params.labels[0].text", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "text" => 4 } ]))
+        assert_equal [ [ "params.labels[0].text", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "text" => " " } ]))
+        assert_equal [ [ "params.labels[0].text", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "text" => "a" * 61 } ]))
+        assert_empty Figure.errors_for(plate(labels: [ { "part" => "aorta", "text" => "a" * 60 } ]))
+        assert_empty Figure.errors_for(plate(labels: [ { "part" => "aorta", "text" => "é" * 60 } ]))
+      end
+
+      test "plate : un texte nul est refusé, une clé absente est permise" do
+        assert_equal [ [ "params.labels[0].text", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "text" => nil } ]))
+        assert_empty Figure.errors_for(plate(labels: [ { "part" => "aorta" } ]))
+      end
+
+      test "plate : une étiquette n'admet que part et text" do
+        assert_equal [ [ "params.labels[0]", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta", "texte" => "Aorte" } ]))
+        assert_equal [ [ "params.labels[1]", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "aorta" }, { "part" => "septum", "text" => "Cloison", "x" => 1 } ]))
+      end
+
+      test "plate : les noms du prototype ne sont ni une planche ni une partie" do
+        assert_equal [ [ "params.plate", "figure_invalid" ] ], reasons(plate(plate: "__proto__"))
+        assert_equal [ [ "params.labels[0].part", "figure_invalid" ] ], reasons(plate(labels: [ { "part" => "constructor" } ]))
+        assert_equal [ [ "params.highlight[0]", "figure_invalid" ] ], reasons(plate(highlight: [ "__proto__" ]))
+      end
+
+      test "plate : bornes de 12 étiquettes, 4 surlignages et deux numérotations" do
+        twelve = FigureCatalogs.parts("heart").map { { "part" => it } }
+        assert_empty Figure.errors_for(plate(labels: twelve))
+        assert_equal %w[params.labels params.labels[12].part], paths(plate(labels: twelve + [ { "part" => "septum" } ]))
+        assert_equal %w[params.highlight], paths(plate(highlight: %w[aorta septum mitral_valve right_atrium left_atrium]))
+        assert_empty Figure.errors_for(plate(numbering: "numbers"))
+        assert_equal %w[params.numbering], paths(plate(numbering: "letters"))
+        assert_equal %w[params.numbering], paths(raw(kind: "plate", params: HEART.except("numbering")))
+      end
+
+      test "plate : aucun curseur" do
+        assert_empty FigureKinds.fetch("plate").adjustable
+        assert_includes paths(plate.merge("controls" => [ { "param" => "x", "min" => 0, "max" => 1, "step" => 1, "label" => "x" } ])), "controls[0].param"
       end
 
       test "map et diagram n'ont aucun curseur" do

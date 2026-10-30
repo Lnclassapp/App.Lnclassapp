@@ -1,0 +1,1393 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La circulation sanguine",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "3ème",
+      "material_name": "SVT",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "coeur-legende",
+          "kind": "plate",
+          "description": "Coupe longitudinale du cœur vue de face, avec ses douze parties nommées : les oreillettes et les ventricules droits et gauches, la cloison, les deux valvules auriculo-ventriculaires, l'aorte, l'artère pulmonaire, les veines caves et les veines pulmonaires. Le côté droit du cœur est à gauche de l'image.",
+          "params": {
+            "plate": "heart",
+            "labels": [
+              {
+                "part": "right_atrium"
+              },
+              {
+                "part": "left_atrium"
+              },
+              {
+                "part": "right_ventricle"
+              },
+              {
+                "part": "left_ventricle"
+              },
+              {
+                "part": "septum"
+              },
+              {
+                "part": "aorta"
+              },
+              {
+                "part": "pulmonary_artery"
+              },
+              {
+                "part": "superior_vena_cava"
+              },
+              {
+                "part": "inferior_vena_cava"
+              },
+              {
+                "part": "pulmonary_veins"
+              },
+              {
+                "part": "tricuspid_valve"
+              },
+              {
+                "part": "mitral_valve"
+              }
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "coeur-a-legender",
+          "kind": "plate",
+          "description": "Coupe longitudinale du cœur vue de face, dont huit parties portent un numéro sans légende : 1 oreillette droite, 2 ventricule droit, 3 oreillette gauche, 4 ventricule gauche, 5 aorte, 6 artère pulmonaire, 7 valvule auriculo-ventriculaire droite, 8 veine cave supérieure. Le côté droit du cœur est à gauche de l'image.",
+          "params": {
+            "plate": "heart",
+            "labels": [
+              {
+                "part": "right_atrium"
+              },
+              {
+                "part": "right_ventricle"
+              },
+              {
+                "part": "left_atrium"
+              },
+              {
+                "part": "left_ventricle"
+              },
+              {
+                "part": "aorta"
+              },
+              {
+                "part": "pulmonary_artery"
+              },
+              {
+                "part": "tricuspid_valve"
+              },
+              {
+                "part": "superior_vena_cava"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "double-circulation",
+          "kind": "plate",
+          "description": "Schéma de la double circulation : le cœur droit envoie le sang aux poumons par l'artère pulmonaire, les veines pulmonaires le ramènent au cœur gauche, qui l'envoie aux organes par l'aorte, et les veines caves le ramènent au cœur droit. Chaque partie du schéma porte son nom.",
+          "params": {
+            "plate": "double_circulation",
+            "labels": [
+              {
+                "part": "right_heart"
+              },
+              {
+                "part": "left_heart"
+              },
+              {
+                "part": "lungs"
+              },
+              {
+                "part": "organs"
+              },
+              {
+                "part": "pulmonary_artery"
+              },
+              {
+                "part": "pulmonary_veins"
+              },
+              {
+                "part": "aorta"
+              },
+              {
+                "part": "vena_cava"
+              }
+            ],
+            "highlight": [
+              "lungs",
+              "organs"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "double-circulation-a-legender",
+          "kind": "plate",
+          "description": "Schéma de la double circulation dont huit parties portent un numéro sans légende : 1 cœur droit, 2 poumons, 3 cœur gauche, 4 organes, 5 artère pulmonaire, 6 veines pulmonaires, 7 aorte, 8 veines caves. Le sang circule du cœur droit vers les poumons, puis vers le cœur gauche, les organes et le cœur droit.",
+          "params": {
+            "plate": "double_circulation",
+            "labels": [
+              {
+                "part": "right_heart"
+              },
+              {
+                "part": "lungs"
+              },
+              {
+                "part": "left_heart"
+              },
+              {
+                "part": "organs"
+              },
+              {
+                "part": "pulmonary_artery"
+              },
+              {
+                "part": "pulmonary_veins"
+              },
+              {
+                "part": "aorta"
+              },
+              {
+                "part": "vena_cava"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "trajet-du-sang",
+          "kind": "diagram",
+          "description": "Schéma fléché circulaire du trajet du sang : oreillette droite, ventricule droit, poumons (artère pulmonaire), oreillette gauche (veines pulmonaires), ventricule gauche, organes (aorte), puis retour à l'oreillette droite (veines caves). Les couleurs distinguent sang pauvre en dioxygène, sang riche et lieux d'échanges.",
+          "params": {
+            "layout": "cycle",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "od",
+                "label": "Oreillette droite",
+                "category": 1
+              },
+              {
+                "id": "vd",
+                "label": "Ventricule droit",
+                "category": 1
+              },
+              {
+                "id": "po",
+                "label": "Poumons",
+                "category": 3
+              },
+              {
+                "id": "og",
+                "label": "Oreillette gauche",
+                "category": 2
+              },
+              {
+                "id": "vg",
+                "label": "Ventricule gauche",
+                "category": 2
+              },
+              {
+                "id": "or",
+                "label": "Organes",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "od",
+                "to": "vd",
+                "label": "valvule"
+              },
+              {
+                "from": "vd",
+                "to": "po",
+                "label": "artère pulmonaire"
+              },
+              {
+                "from": "po",
+                "to": "og",
+                "label": "veines pulmonaires"
+              },
+              {
+                "from": "og",
+                "to": "vg",
+                "label": "valvule"
+              },
+              {
+                "from": "vg",
+                "to": "or",
+                "label": "aorte"
+              },
+              {
+                "from": "or",
+                "to": "od",
+                "label": "veines caves"
+              }
+            ],
+            "legend": [
+              "Sang pauvre en dioxygène",
+              "Sang riche en dioxygène",
+              "Lieu d'échanges"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frequence-cardiaque",
+          "kind": "stat_chart",
+          "description": "Courbe de la fréquence cardiaque d'un élève lors d'un entraînement de course, en battements par minute : 75 au repos, 120 après 2 minutes de course, 150 après 5 minutes de course, 110 une minute après l'arrêt et 80 cinq minutes après l'arrêt.",
+          "params": {
+            "chart": "line",
+            "series": [
+              75,
+              120,
+              150,
+              110,
+              80
+            ],
+            "labels": [
+              "Repos",
+              "2 min de course",
+              "5 min de course",
+              "Arrêt + 1 min",
+              "Arrêt + 5 min"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le cœur : cavités, valvules et vaisseaux",
+          "remember": "Le cœur est un **muscle creux** situé dans la cage thoracique, entre les poumons. Une **cloison** le sépare en deux côtés, le **cœur droit** et le **cœur gauche**, qui ne communiquent pas. Chaque côté a deux cavités : une **oreillette** en haut, qui **reçoit** le sang, et un **ventricule** en bas, qui **envoie** le sang hors du cœur. Entre l'oreillette et le ventricule d'un même côté, une **valvule auriculo-ventriculaire** laisse passer le sang dans un seul sens. Les **veines caves** (supérieure et inférieure) arrivent à l'oreillette droite ; l'**artère pulmonaire** part du ventricule droit ; les **veines pulmonaires** arrivent à l'oreillette gauche ; l'**aorte** part du ventricule gauche. La paroi du ventricule gauche est plus épaisse que celle du ventricule droit.",
+          "method": [
+            "Repérer la cloison, puis les deux côtés du cœur : sur un schéma vu de face, le côté droit du cœur est à gauche de l'image.",
+            "Distinguer, dans chaque côté, l'oreillette (en haut, elle reçoit le sang) et le ventricule (en bas, il envoie le sang).",
+            "Placer les valvules entre oreillette et ventricule, puis les vaisseaux : ceux qui arrivent à une oreillette et ceux qui partent d'un ventricule.",
+            "Nommer chaque cavité et chaque vaisseau en précisant son côté : droit ou gauche."
+          ],
+          "example": {
+            "statement": "Sur un schéma du cœur vu de face, une cavité est située à droite de l'image, en bas, et sa paroi est la plus épaisse. Un vaisseau en part. Nommer la cavité et le vaisseau.",
+            "steps": [
+              "Repérer : la cloison sépare les deux côtés ; la cavité est à droite de l'image, donc elle est du côté gauche du cœur.",
+              "Distinguer : elle est en bas, c'est donc un ventricule (il envoie le sang) ; sa paroi épaisse le confirme.",
+              "Placer : une valvule auriculo-ventriculaire la sépare de l'oreillette située au-dessus ; le vaisseau qui en part est une artère.",
+              "Nommer : c'est le ventricule gauche, et le vaisseau qui en part est l'aorte."
+            ]
+          },
+          "pitfall": "Ne pas confondre la droite et la gauche du schéma avec celles du cœur. Sur un schéma vu de face, comme quand tu regardes quelqu'un en face, sa main droite est de ton côté gauche. Contre-exemple : la cavité en bas à gauche de l'image est le ventricule **droit**, et non le gauche. Ne confonds pas non plus l'oreillette (en haut, elle reçoit) et le ventricule (en bas, il envoie).",
+          "figure": "coeur-legende",
+          "exercise": {
+            "title": "Légender le cœur et nommer ses vaisseaux",
+            "statement": "Dans cet exercice, tu légendes le schéma du cœur et tu nommes ses cavités et ses vaisseaux avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "coeur-a-legender",
+            "questions": [
+              {
+                "content": "Sur le schéma du cœur de l'exercice (vue de face), le numéro 4 désigne ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : la cloison sépare les deux côtés du cœur ; sur le schéma, le numéro 4 est du côté gauche du cœur (à droite de l'image). Étape 2 — Distinguer : il est en bas, c'est donc un ventricule. Étape 3 — Placer : une valvule le sépare de l'oreillette au-dessus de lui et l'aorte en part. Étape 4 — Nommer : c'est le ventricule gauche. Le ventricule droit serait faux : il est de l'autre côté de la cloison. L'oreillette gauche serait faux : une oreillette est en haut du schéma.",
+                "answers": [
+                  {
+                    "content": "le ventricule gauche",
+                    "correct": true
+                  },
+                  {
+                    "content": "le ventricule droit",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'oreillette gauche",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'aorte",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'oreillette droite",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque numéro du schéma du cœur de l'exercice à la partie qu'il désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : la cloison partage le schéma en deux côtés, le côté droit du cœur étant à gauche de l'image. Étape 2 — Distinguer : les numéros 1 et 3 sont en haut (oreillettes), les numéros 2 et 4 en bas (ventricules). Étape 3 — Placer les vaisseaux : l'aorte part du ventricule gauche, l'artère pulmonaire part du ventricule droit, la veine cave supérieure arrive à l'oreillette droite. Étape 4 — Nommer : 1 oreillette droite, 3 oreillette gauche, 5 aorte, 6 artère pulmonaire, 8 veine cave supérieure.",
+                "answers": [
+                  {
+                    "content": "Numéro 1",
+                    "match": "Oreillette droite"
+                  },
+                  {
+                    "content": "Numéro 3",
+                    "match": "Oreillette gauche"
+                  },
+                  {
+                    "content": "Numéro 5",
+                    "match": "Aorte"
+                  },
+                  {
+                    "content": "Numéro 6",
+                    "match": "Artère pulmonaire"
+                  },
+                  {
+                    "content": "Numéro 8",
+                    "match": "Veine cave supérieure"
+                  }
+                ]
+              },
+              {
+                "content": "Les veines caves ramènent au cœur le sang venu des organes. Dans quelle cavité du cœur ce sang arrive-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les veines caves arrivent du côté droit du cœur. Étape 2 — Distinguer : un vaisseau qui arrive au cœur aboutit à une oreillette (elle reçoit le sang) et non à un ventricule (il envoie le sang). Étape 3 — Placer : les veines caves arrivent à l'oreillette, en haut du cœur. Étape 4 — Nommer : c'est l'oreillette droite. Le ventricule droit est faux : il envoie le sang vers les poumons par l'artère pulmonaire. L'oreillette gauche reçoit les veines pulmonaires.",
+                "answers": [
+                  {
+                    "content": "Dans l'oreillette droite",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans le ventricule droit",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans l'oreillette gauche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le ventricule gauche",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le sang peut passer directement du ventricule droit au ventricule gauche à travers la cloison du cœur.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la cloison sépare le cœur droit du cœur gauche. Étape 2 — Distinguer : chaque ventricule est dans un côté différent. Étape 3 — Placer : aucune ouverture ne traverse la cloison ; les valvules sont entre oreillette et ventricule d'un même côté. Étape 4 — Nommer : les deux côtés ne communiquent pas, donc l'affirmation est fausse. Le sang du ventricule droit part par l'artère pulmonaire vers les poumons.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète : le vaisseau qui part du ventricule gauche et envoie le sang vers les organes s'appelle ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le ventricule gauche est dans le côté gauche du cœur. Étape 2 — Distinguer : un ventricule envoie le sang hors du cœur. Étape 3 — Placer les vaisseaux : le vaisseau qui part du ventricule gauche est l'aorte, alors que l'artère pulmonaire part du ventricule droit. Étape 4 — Nommer : c'est l'aorte, côté gauche.",
+                "answers": [
+                  {
+                    "content": "aorte",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'aorte",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le trajet du sang dans le côté droit du cœur, de son arrivée à sa sortie.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on suit le côté droit du cœur. Étape 2 — Distinguer : le sang arrive d'abord à l'oreillette, qui reçoit, puis passe dans le ventricule, qui envoie. Étape 3 — Placer : les veines caves arrivent à l'oreillette droite ; la valvule auriculo-ventriculaire droite laisse passer le sang vers le ventricule droit, dont part l'artère pulmonaire. Étape 4 — Nommer : veines caves, oreillette droite, valvule, ventricule droit, artère pulmonaire.",
+                "answers": [
+                  {
+                    "content": "Veines caves"
+                  },
+                  {
+                    "content": "Oreillette droite"
+                  },
+                  {
+                    "content": "Valvule auriculo-ventriculaire droite"
+                  },
+                  {
+                    "content": "Ventricule droit"
+                  },
+                  {
+                    "content": "Artère pulmonaire"
+                  }
+                ]
+              },
+              {
+                "content": "Sur un schéma du cœur vu de face, comme sur une planche de SVT, quelle est la cavité située en bas à gauche de l'image ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : sur un schéma vu de face, le côté droit du cœur est à gauche de l'image, comme la main droite d'une personne qui te fait face est de ton côté gauche. Étape 2 — Distinguer : la cavité est en bas, c'est un ventricule. Étape 3 — Placer : elle est du côté droit du cœur. Étape 4 — Nommer : c'est le ventricule droit. Le ventricule gauche est la proposition piège : elle vient de la confusion entre la gauche de l'image et la gauche du cœur.",
+                "answers": [
+                  {
+                    "content": "Le ventricule droit",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le ventricule gauche",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'oreillette droite",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'oreillette gauche",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les vaisseaux sanguins : artères, veines et capillaires",
+          "remember": "Le sang circule dans des **vaisseaux sanguins** de trois sortes. Une **artère** est un vaisseau dont le sang **part du cœur** : elle l'emmène vers les organes ou vers les poumons ; sa paroi est épaisse et élastique. Une **veine** est un vaisseau qui **ramène le sang vers le cœur** ; sa paroi est plus mince et les veines des membres possèdent des valvules qui empêchent le sang de refluer. Les **capillaires** sont des vaisseaux très fins, situés dans les organes et les poumons, qui relient les artères aux veines ; leur paroi très mince permet les échanges entre le sang et les cellules. Une artère ou une veine se définit par le **sens** du sang, jamais par sa richesse en dioxygène : l'artère pulmonaire transporte du sang pauvre en dioxygène, les veines pulmonaires du sang riche en dioxygène.",
+          "method": [
+            "Identifier le point de départ et le point d'arrivée du sang dans le vaisseau : cœur, poumons ou organe.",
+            "Déterminer le sens : si le sang part du cœur, c'est une artère ; s'il revient au cœur, c'est une veine.",
+            "Reconnaître un capillaire : vaisseau très fin, situé dans un organe ou un poumon, relié à une artère et à une veine, lieu des échanges.",
+            "Vérifier la conclusion : la richesse du sang en dioxygène ne sert pas à nommer le vaisseau."
+          ],
+          "example": {
+            "statement": "Un vaisseau part du ventricule droit et rejoint les poumons. Le sang qu'il transporte est pauvre en dioxygène. Nommer ce vaisseau.",
+            "steps": [
+              "Identifier : le sang part du ventricule droit, c'est-à-dire du cœur, et arrive aux poumons.",
+              "Déterminer le sens : le sang part du cœur, donc c'est une artère : l'artère pulmonaire.",
+              "Reconnaître un capillaire : ce vaisseau est gros et relie le cœur aux poumons ; ce n'est pas un capillaire, car les capillaires sont dans les poumons.",
+              "Vérifier : le sang est pauvre en dioxygène, mais cela ne change pas le nom du vaisseau, qui se définit par le sens du sang."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une artère transporte toujours du sang riche en dioxygène et une veine du sang pauvre. Contre-exemple : l'artère pulmonaire part du cœur, c'est bien une artère, et pourtant son sang est pauvre en dioxygène ; les veines pulmonaires ramènent au cœur un sang riche en dioxygène. Pour nommer un vaisseau, regarde toujours le sens du sang.",
+          "figure": null,
+          "exercise": {
+            "title": "Distinguer artères, veines et capillaires",
+            "statement": "Dans cet exercice, tu nommes des vaisseaux sanguins avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une veine est un vaisseau sanguin qui ramène le sang vers le cœur.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : une veine a pour point d'arrivée le cœur. Étape 2 — Déterminer le sens : le sang revient au cœur, c'est une veine ; s'il en partait, ce serait une artère. Étape 3 — Reconnaître un capillaire : ce n'est pas la question, car un capillaire est très fin et relie artère et veine. Étape 4 — Vérifier : la richesse en dioxygène n'intervient pas. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un vaisseau part du ventricule droit et emmène vers les poumons du sang pauvre en dioxygène. Comment s'appelle ce type de vaisseau ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le sang part du ventricule droit (cœur) et arrive aux poumons. Étape 2 — Déterminer le sens : il part du cœur, c'est une artère (l'artère pulmonaire). Étape 3 — Reconnaître un capillaire : ce vaisseau est gros et relie le cœur aux poumons, ce n'est pas un capillaire. Étape 4 — Vérifier : le sang est pauvre en dioxygène, mais cela ne change pas le nom ; ce n'est donc pas une veine.",
+                "answers": [
+                  {
+                    "content": "Une artère",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une veine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un capillaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque type de vaisseau sanguin à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : on regarde d'où part le sang et où il arrive. Étape 2 — Déterminer le sens : une artère emmène le sang à partir du cœur ; une veine le ramène au cœur. Étape 3 — Reconnaître un capillaire : il est très fin, situé dans les organes et les poumons, et c'est là que se font les échanges. Étape 4 — Vérifier : aucune description ne dépend de la richesse du sang en dioxygène.",
+                "answers": [
+                  {
+                    "content": "Artère",
+                    "match": "Le sang part du cœur"
+                  },
+                  {
+                    "content": "Veine",
+                    "match": "Le sang revient vers le cœur"
+                  },
+                  {
+                    "content": "Capillaire",
+                    "match": "Très fin, lieu des échanges avec les cellules"
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux vaisseaux qui sont des artères ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : on cherche, pour chaque vaisseau, le point de départ. Étape 2 — Déterminer le sens : l'aorte part du ventricule gauche et l'artère pulmonaire part du ventricule droit, ce sont des artères. Les veines pulmonaires et la veine cave inférieure arrivent au cœur : ce sont des veines. Étape 3 — Reconnaître un capillaire : un capillaire d'un muscle est très fin, ce n'est pas une artère. Étape 4 — Vérifier : les veines pulmonaires portent du sang riche en dioxygène, mais ce sont quand même des veines.",
+                "answers": [
+                  {
+                    "content": "L'aorte",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'artère pulmonaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "La veine cave inférieure",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les veines pulmonaires",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un capillaire d'un muscle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les échanges entre le sang et les cellules d'un muscle se font dans les vaisseaux les plus fins, appelés ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : le sang arrive dans un muscle, un organe. Étape 2 — Déterminer le sens : le sang arrive au muscle par une artère et en repart par une veine ; leur paroi, plus épaisse que celle des capillaires, ne permet pas les échanges. Étape 3 — Reconnaître un capillaire : très fin, dans l'organe, relié à une artère et à une veine, il est le lieu des échanges. Étape 4 — Vérifier : la richesse en dioxygène n'intervient pas ; ce sont les capillaires.",
+                "answers": [
+                  {
+                    "content": "capillaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "capillaires sanguins",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Awa affirme : « Les veines pulmonaires sont des artères, car elles transportent du sang riche en dioxygène. » Que penses-tu de cette affirmation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : les veines pulmonaires partent des poumons et arrivent à l'oreillette gauche du cœur. Étape 2 — Déterminer le sens : le sang revient au cœur, ce sont donc des veines. Étape 3 — Reconnaître un capillaire : un capillaire est très fin et relie artère et veine ; ce n'est pas le cas ici. Étape 4 — Vérifier : Awa nomme le vaisseau d'après son contenu en dioxygène ; or ce critère est faux, car l'artère pulmonaire transporte du sang pauvre en dioxygène.",
+                "answers": [
+                  {
+                    "content": "Elle a raison : une artère est un vaisseau qui contient du sang riche en dioxygène.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle a tort : ces vaisseaux ramènent le sang au cœur, ce sont donc des veines.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle a tort : ce sont des capillaires, car elles sont situées dans les poumons.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour reconnaître une artère, je me demande si le sang ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : on repère le point de départ du sang. Étape 2 — Déterminer le sens : une artère est un vaisseau dont le sang part du cœur. Étape 3 — Reconnaître un capillaire : cela ne change pas ce critère. Étape 4 — Vérifier : « rouge vif » et « pauvre en dioxygène » dépendent du dioxygène et ne servent pas à nommer le vaisseau ; « revient au cœur » définit une veine.",
+                "answers": [
+                  {
+                    "content": "part du cœur",
+                    "correct": true
+                  },
+                  {
+                    "content": "revient au cœur",
+                    "correct": false
+                  },
+                  {
+                    "content": "est rouge vif",
+                    "correct": false
+                  },
+                  {
+                    "content": "est pauvre en dioxygène",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La double circulation",
+          "remember": "La circulation du sang est **fermée** : le sang reste dans les vaisseaux. Elle est **double**, car elle est formée de deux boucles. La **petite circulation** (circulation pulmonaire) va du **ventricule droit** aux poumons par l'**artère pulmonaire** ; dans les capillaires des poumons, le sang se charge en dioxygène et libère du dioxyde de carbone ; les **veines pulmonaires** le ramènent à l'**oreillette gauche**. La **grande circulation** va du **ventricule gauche** aux organes par l'**aorte** ; dans les capillaires des organes, le sang cède du dioxygène et des nutriments et prend du dioxyde de carbone et des déchets ; les **veines caves** le ramènent à l'**oreillette droite**. Le sang est donc riche en dioxygène dans le cœur gauche et pauvre en dioxygène dans le cœur droit. À chaque tour complet, le sang passe **deux fois** dans le cœur.",
+          "method": [
+            "Partir d'un ventricule et nommer l'artère qui en part : l'artère pulmonaire pour le ventricule droit, l'aorte pour le ventricule gauche.",
+            "Suivre le sang jusqu'aux capillaires, dans les poumons ou dans les organes, et dire ce qui s'y échange.",
+            "Suivre le retour du sang par les veines jusqu'à l'oreillette : veines pulmonaires ou veines caves.",
+            "Noter la richesse du sang en dioxygène à chaque étape : sang riche ou sang pauvre.",
+            "Conclure en nommant la circulation, petite ou grande, et le côté du cœur où le sang revient."
+          ],
+          "example": {
+            "statement": "Suivre le sang qui part du ventricule gauche jusqu'à son retour au cœur.",
+            "steps": [
+              "Partir : le sang quitte le ventricule gauche par l'aorte.",
+              "Suivre jusqu'aux capillaires : il arrive dans les capillaires des organes, où il cède du dioxygène et des nutriments et prend du dioxyde de carbone et des déchets.",
+              "Suivre le retour : il revient par les veines caves jusqu'à l'oreillette droite.",
+              "Noter : le sang est riche en dioxygène dans l'aorte et pauvre en dioxygène dans les veines caves.",
+              "Conclure : c'est la grande circulation ; le sang revient au côté droit du cœur."
+            ]
+          },
+          "pitfall": "Ne pas croire que le sang passe directement du cœur droit au cœur gauche. Les deux côtés ne communiquent pas : pour aller de l'un à l'autre, le sang passe par les poumons. Contre-exemple chiffré : à chaque tour complet, le sang passe 2 fois dans le cœur (cœur droit, puis cœur gauche), et non 1 fois.",
+          "figure": "double-circulation",
+          "exercise": {
+            "title": "Suivre le sang dans la double circulation",
+            "statement": "Dans cet exercice, tu suis le trajet du sang et tu légendes le schéma de la double circulation avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "double-circulation-a-legender",
+            "questions": [
+              {
+                "content": "Sur le schéma de la double circulation de l'exercice, le numéro 2 désigne ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Partir : le sang quitte le cœur droit par l'artère pulmonaire (numéro 5) et le cœur gauche par l'aorte (numéro 7). Étape 2 — Suivre jusqu'aux capillaires : l'artère pulmonaire conduit aux poumons, l'aorte aux organes. Étape 3 — Suivre le retour : les veines pulmonaires (6) reviennent des poumons, les veines caves (8) des organes. Étape 4 — Noter : le sang arrive pauvre en dioxygène au numéro 2 et en repart riche : ce sont les poumons. Étape 5 — Conclure : le numéro 2 désigne les poumons, le numéro 4 les organes.",
+                "answers": [
+                  {
+                    "content": "les poumons",
+                    "correct": true
+                  },
+                  {
+                    "content": "les organes",
+                    "correct": false
+                  },
+                  {
+                    "content": "le cœur gauche",
+                    "correct": false
+                  },
+                  {
+                    "content": "le cœur droit",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque numéro du schéma de la double circulation de l'exercice au vaisseau qu'il désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Partir : l'aorte (numéro 7) part du cœur gauche et l'artère pulmonaire (numéro 5) part du cœur droit. Étape 2 — Suivre jusqu'aux capillaires : l'artère pulmonaire va aux poumons, l'aorte aux organes. Étape 3 — Suivre le retour : les veines pulmonaires (numéro 6) ramènent le sang des poumons au cœur gauche, les veines caves (numéro 8) le ramènent des organes au cœur droit. Étape 4 — Noter : l'artère pulmonaire et les veines caves portent du sang pauvre en dioxygène, les veines pulmonaires et l'aorte du sang riche en dioxygène. Étape 5 — Conclure : 5 artère pulmonaire, 6 veines pulmonaires, 7 aorte, 8 veines caves.",
+                "answers": [
+                  {
+                    "content": "Numéro 5",
+                    "match": "Artère pulmonaire"
+                  },
+                  {
+                    "content": "Numéro 6",
+                    "match": "Veines pulmonaires"
+                  },
+                  {
+                    "content": "Numéro 7",
+                    "match": "Aorte"
+                  },
+                  {
+                    "content": "Numéro 8",
+                    "match": "Veines caves"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le trajet du sang dans la petite circulation, en partant du ventricule droit.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Partir : le sang quitte le ventricule droit par l'artère pulmonaire. Étape 2 — Suivre jusqu'aux capillaires : il arrive aux capillaires des poumons. Étape 3 — Suivre le retour : les veines pulmonaires le ramènent à l'oreillette gauche. Étape 4 — Noter : le sang est pauvre en dioxygène au départ et riche à l'arrivée. Étape 5 — Conclure : c'est la petite circulation, qui revient au côté gauche du cœur.",
+                "answers": [
+                  {
+                    "content": "Ventricule droit"
+                  },
+                  {
+                    "content": "Artère pulmonaire"
+                  },
+                  {
+                    "content": "Capillaires des poumons"
+                  },
+                  {
+                    "content": "Veines pulmonaires"
+                  },
+                  {
+                    "content": "Oreillette gauche"
+                  }
+                ]
+              },
+              {
+                "content": "Dans les capillaires des poumons, que se passe-t-il pour le sang ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Partir : le sang pauvre en dioxygène quitte le ventricule droit par l'artère pulmonaire. Étape 2 — Suivre jusqu'aux capillaires : dans les capillaires des poumons, il se charge en dioxygène et libère du dioxyde de carbone. Étape 3 — Suivre le retour : les veines pulmonaires ramènent un sang riche en dioxygène. Étape 4 — Noter : le sang passe de pauvre à riche. La proposition « il perd du dioxygène » décrit ce qui se passe dans les organes, pas dans les poumons.",
+                "answers": [
+                  {
+                    "content": "Il se charge en dioxygène et libère du dioxyde de carbone.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il perd du dioxygène et se charge en dioxyde de carbone.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il perd du dioxygène et reste chargé en dioxyde de carbone.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il ne change pas de composition.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À chaque tour complet du sang dans le corps (petite et grande circulation), combien de fois le sang passe-t-il dans le cœur ?",
+                "question_type": "numeric",
+                "unit": "fois",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Partir : le sang part du ventricule droit vers les poumons. Étape 2 — Suivre jusqu'aux capillaires : il passe par les poumons. Étape 3 — Suivre le retour : il revient au cœur gauche, puis repart par l'aorte vers les organes. Étape 4 — Noter : il traverse le cœur droit, puis le cœur gauche. Étape 5 — Conclure : à chaque tour complet, le sang passe 2 fois dans le cœur et non 1 fois.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le sang qui arrive à l'oreillette gauche par les veines pulmonaires est riche en dioxygène.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Partir : le sang pauvre part du ventricule droit vers les poumons. Étape 2 — Suivre jusqu'aux capillaires : dans les poumons, il se charge en dioxygène. Étape 3 — Suivre le retour : les veines pulmonaires le ramènent à l'oreillette gauche. Étape 4 — Noter : ce sang est riche en dioxygène. Étape 5 — Conclure : l'affirmation est vraie, même si les vaisseaux sont des veines.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève pense que le sang va directement du cœur droit au cœur gauche. Par où le sang passe-t-il réellement pour aller de l'un à l'autre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Partir : le sang part du ventricule droit par l'artère pulmonaire. Étape 2 — Suivre jusqu'aux capillaires : cette artère conduit aux poumons. Étape 3 — Suivre le retour : les veines pulmonaires reviennent à l'oreillette gauche, donc au cœur gauche. Étape 4 — Noter : la cloison ne laisse rien passer et les valvules sont dans un seul côté du cœur, entre oreillette et ventricule. Étape 5 — Conclure : le cœur droit et le cœur gauche sont reliés par les poumons (petite circulation).",
+                "answers": [
+                  {
+                    "content": "Par les poumons",
+                    "correct": true
+                  },
+                  {
+                    "content": "Par la cloison du cœur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Par les organes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Par les valvules auriculo-ventriculaires",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les battements du cœur à l'effort",
+          "remember": "Le cœur se **contracte** puis se **relâche** de façon régulière : une contraction suivie d'un relâchement fait un **battement**. La **fréquence cardiaque** est le nombre de battements par minute. On la mesure en prenant le **pouls**, sur une artère, au poignet ou au cou : chaque battement pousse le sang dans les artères. Au repos, la fréquence cardiaque d'un adulte est d'environ 70 battements par minute. Pendant un effort, les muscles consomment plus de dioxygène et de nutriments : le cœur bat plus vite et envoie plus de sang vers les muscles. Après l'effort, la fréquence redescend progressivement vers sa valeur de repos.",
+          "method": [
+            "Lire la fréquence cardiaque au repos sur la courbe ou dans le tableau.",
+            "Lire la fréquence cardiaque pendant l'effort, à l'endroit où elle est la plus élevée.",
+            "Calculer la variation : fréquence pendant l'effort moins fréquence au repos.",
+            "Interpréter et conclure : relier la variation au besoin des muscles en dioxygène et en nutriments."
+          ],
+          "example": {
+            "statement": "Un footballeur a une fréquence cardiaque de 70 battements par minute au repos et de 160 après un sprint prolongé. Que peut-on conclure ?",
+            "steps": [
+              "Lire : au repos, la fréquence est de 70 battements par minute.",
+              "Lire : pendant l'effort, la fréquence la plus élevée est de 160 battements par minute.",
+              "Calculer : la variation est 160 − 70 = 90 battements par minute de plus.",
+              "Interpréter et conclure : ses muscles ont besoin de plus de dioxygène et de nutriments ; son cœur bat plus vite pour envoyer plus de sang vers eux."
+            ]
+          },
+          "pitfall": "Ne pas confondre la valeur lue sur la courbe avec la variation. Contre-exemple chiffré : 70 au repos et 160 pendant l'effort ; la fréquence a augmenté de 160 − 70 = 90 battements par minute, et non de 160. Ne dis pas non plus que le cœur « s'emballe » sans raison : la cause de l'augmentation est le besoin des muscles.",
+          "figure": "frequence-cardiaque",
+          "exercise": {
+            "title": "Exploiter une courbe de fréquence cardiaque",
+            "statement": "Dans cet exercice, tu lis et tu interprètes des mesures de fréquence cardiaque d'un sportif avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "frequence-cardiaque",
+            "questions": [
+              {
+                "content": "Un élève relève sa fréquence cardiaque pendant un entraînement de course : 75 battements par minute au repos, 120 après 2 minutes de course, 150 après 5 minutes de course, 110 une minute après l'arrêt et 80 cinq minutes après l'arrêt. Quelle est sa fréquence cardiaque la plus élevée ?",
+                "question_type": "numeric",
+                "unit": "batt/min",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire au repos : 75 battements par minute. Étape 2 — Lire pendant l'effort : on cherche la valeur la plus élevée de la courbe, 150 battements par minute après 5 minutes de course. Étape 3 — Calculer : la variation vaudrait 150 − 75 = 75. Étape 4 — Interpréter : les muscles travaillent le plus à ce moment. La réponse est 150.",
+                "answers": [
+                  {
+                    "content": "150",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève relève sa fréquence cardiaque pendant un entraînement de course : 75 battements par minute au repos, 120 après 2 minutes de course, 150 après 5 minutes de course, 110 une minute après l'arrêt et 80 cinq minutes après l'arrêt. De combien de battements par minute la fréquence a-t-elle augmenté entre le repos et la fréquence la plus élevée ?",
+                "question_type": "numeric",
+                "unit": "batt/min",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire au repos : 75 battements par minute. Étape 2 — Lire pendant l'effort : la valeur la plus élevée est 150. Étape 3 — Calculer la variation : 150 − 75 = 75 battements par minute. Étape 4 — Interpréter : le cœur bat 75 fois de plus par minute, pour envoyer plus de sang aux muscles. Attention : 150 est la valeur lue, pas la variation.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi la fréquence cardiaque augmente-t-elle pendant une course ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire au repos : la fréquence est basse, car les muscles consomment peu. Étape 2 — Lire pendant l'effort : elle augmente fortement. Étape 3 — Calculer la variation : la hausse est positive. Étape 4 — Interpréter : pendant l'effort, les muscles consomment plus de dioxygène et de nutriments ; le cœur bat plus vite et envoie plus de sang vers eux. Les autres explications ne s'appuient sur aucun besoin des muscles.",
+                "answers": [
+                  {
+                    "content": "Les muscles consomment plus de dioxygène et de nutriments, et le cœur envoie plus de sang vers eux.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le sang devient plus épais et le cœur doit battre plus vite pour le pousser.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cœur se fatigue et bat au hasard.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les poumons envoient moins de sang aux muscles, donc le cœur compense.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève relève sa fréquence cardiaque pendant un entraînement de course : 75 battements par minute au repos, 120 après 2 minutes de course, 150 après 5 minutes de course, 110 une minute après l'arrêt et 80 cinq minutes après l'arrêt. Une minute après l'arrêt de la course, la fréquence cardiaque est déjà revenue à sa valeur de repos.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire au repos : 75 battements par minute. Étape 2 — Lire la valeur à comparer : une minute après l'arrêt, 110. Étape 3 — Calculer : 110 − 75 = 35, la fréquence est encore plus haute que celle de repos. Étape 4 — Interpréter : après l'effort, la fréquence redescend progressivement ; il faut attendre plus longtemps (80 après 5 minutes). L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour exploiter une courbe de fréquence cardiaque.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire au repos : on commence par la valeur de référence. Étape 2 — Lire pendant l'effort : on prend la valeur la plus élevée. Étape 3 — Calculer la variation : on soustrait la valeur de repos. Étape 4 — Interpréter et conclure : on explique la variation par le besoin des muscles. On ne peut pas interpréter avant d'avoir calculé.",
+                "answers": [
+                  {
+                    "content": "Lire la fréquence au repos"
+                  },
+                  {
+                    "content": "Lire la fréquence pendant l'effort"
+                  },
+                  {
+                    "content": "Calculer la variation"
+                  },
+                  {
+                    "content": "Interpréter et conclure"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève a une fréquence de 75 battements par minute au repos et de 150 pendant l'effort. Il écrit : « La fréquence a augmenté de 150 battements par minute. » Quelle est son erreur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire au repos : 75 battements par minute. Étape 2 — Lire pendant l'effort : 150. Étape 3 — Calculer la variation : 150 − 75 = 75 battements par minute de plus, et non 150. Étape 4 — Interpréter : le cœur bat 75 fois de plus par minute. Ajouter 75 et 150 n'aurait aucun sens, car on cherche un écart.",
+                "answers": [
+                  {
+                    "content": "Il a donné la valeur lue, pas la variation : 150 − 75 = 75.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a oublié d'ajouter la valeur de repos : 75 + 150 = 225.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a pas d'erreur.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le trajet du sang d'un footballeur",
+          "statement": "Kouadio joue au football dans son quartier. Après un sprint, il sent son cœur battre fort. Le schéma fléché montre le trajet du sang dans son corps : tu l'utilises avec les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": "trajet-du-sang",
+          "questions": [
+            {
+              "content": "Kouadio sprinte pendant un match. Remets dans l'ordre le trajet du sang dans la grande circulation, en partant du ventricule gauche.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Partir : le sang quitte le ventricule gauche par l'aorte (grande circulation). 2. Suivre jusqu'aux capillaires : l'aorte et ses artères conduisent aux organes, ici les muscles de Kouadio, où le sang cède du dioxygène et des nutriments. 3. Suivre le retour : les veines caves ramènent le sang à l'oreillette droite. 4. Noter : le sang est riche en dioxygène dans l'aorte et pauvre dans les veines caves. 5. Conclure : le sang revient au côté droit du cœur. L'ordre est donc ventricule gauche, aorte, capillaires, veines caves, oreillette droite.",
+              "answers": [
+                {
+                  "content": "Ventricule gauche"
+                },
+                {
+                  "content": "Aorte"
+                },
+                {
+                  "content": "Capillaires des muscles"
+                },
+                {
+                  "content": "Veines caves"
+                },
+                {
+                  "content": "Oreillette droite"
+                }
+              ]
+            },
+            {
+              "content": "Pendant le match, du sang part du ventricule gauche de Kouadio vers ses muscles. Comment s'appelle le vaisseau qui part du ventricule gauche ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier : le sang part du ventricule gauche, donc du cœur. 2. Déterminer le sens : un vaisseau qui part du cœur est une artère. 3. Nommer : l'artère qui part du ventricule gauche est l'aorte. L'artère pulmonaire part du ventricule droit et va aux poumons. Les veines caves et les veines pulmonaires arrivent au cœur et ne peuvent donc pas être celles qui en partent.",
+              "answers": [
+                {
+                  "content": "L'aorte",
+                  "correct": true
+                },
+                {
+                  "content": "L'artère pulmonaire",
+                  "correct": false
+                },
+                {
+                  "content": "Les veines caves",
+                  "correct": false
+                },
+                {
+                  "content": "Les veines pulmonaires",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le sang qui revient des muscles de Kouadio par les veines caves est riche en dioxygène.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Suivre jusqu'aux capillaires : dans les capillaires des muscles, le sang cède du dioxygène aux cellules et prend du dioxyde de carbone. 2. Suivre le retour : les veines caves ramènent ce sang à l'oreillette droite. 3. Noter : il est donc pauvre en dioxygène. L'affirmation est fausse. C'est après son passage dans les poumons que le sang redevient riche en dioxygène.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels éléments le sang rencontre-t-il lorsqu'il fait la petite circulation ? (trois réponses)",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode détaillée. 1. Partir : la petite circulation commence au ventricule droit, d'où part l'artère pulmonaire. 2. Suivre jusqu'aux capillaires : cette artère conduit aux capillaires des poumons. 3. Suivre le retour : les veines pulmonaires ramènent le sang à l'oreillette gauche. 4. Les éléments de la grande circulation (aorte, capillaires des muscles, veines caves) sont les propositions pièges : ils appartiennent à l'autre boucle.",
+              "answers": [
+                {
+                  "content": "L'artère pulmonaire",
+                  "correct": true
+                },
+                {
+                  "content": "Les capillaires des poumons",
+                  "correct": true
+                },
+                {
+                  "content": "Les veines pulmonaires",
+                  "correct": true
+                },
+                {
+                  "content": "L'aorte",
+                  "correct": false
+                },
+                {
+                  "content": "Les veines caves",
+                  "correct": false
+                },
+                {
+                  "content": "Les capillaires des muscles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Entre l'oreillette et le ventricule, le sang ne peut passer que dans un seul sens grâce aux ___ auriculo-ventriculaires.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode détaillée. 1. Repérer : les deux côtés du cœur sont séparés par la cloison. 2. Distinguer : dans chaque côté, l'oreillette reçoit le sang et le ventricule l'envoie. 3. Placer : entre l'oreillette et le ventricule d'un même côté se trouve une valvule auriculo-ventriculaire, qui s'ouvre vers le ventricule et empêche le sang de refluer. La réponse est « valvules ».",
+              "answers": [
+                {
+                  "content": "valvules",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le sang qui sort du ventricule droit est ___ en dioxygène.",
+              "question_type": "select",
+              "explanation": "Méthode détaillée. 1. Partir : le ventricule droit envoie le sang par l'artère pulmonaire. 2. Suivre jusqu'aux capillaires : ce sang vient des organes et va aux poumons pour se charger en dioxygène. 3. Noter : avant son passage dans les poumons, il est pauvre en dioxygène. Le cœur droit contient un sang pauvre, le cœur gauche un sang riche en dioxygène.",
+              "answers": [
+                {
+                  "content": "pauvre",
+                  "correct": true
+                },
+                {
+                  "content": "riche",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le pouls d'une coureuse",
+          "statement": "Aminata s'entraîne pour le 100 mètres. Tu étudies son pouls et les vaisseaux qui apportent le sang à ses muscles.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Aminata s'entraîne pour le 100 mètres au stade de son collège. Son entraîneur prend son pouls au poignet avant la course, puis juste après. Sur quel type de vaisseau le pouls est-il pris au poignet ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode détaillée. 1. Identifier : le pouls est le battement ressenti quand le cœur pousse le sang. 2. Déterminer le sens : le sang envoyé par le cœur circule dans des vaisseaux qui partent du cœur, des artères. 3. Reconnaître un capillaire : trop fin pour sentir un battement. 4. Conclure : on prend le pouls sur une artère du poignet ou du cou.",
+              "answers": [
+                {
+                  "content": "Sur une artère : chaque battement du cœur pousse le sang dans l'artère.",
+                  "correct": true
+                },
+                {
+                  "content": "Sur une veine, car les veines ramènent le sang au cœur.",
+                  "correct": false
+                },
+                {
+                  "content": "Sur un capillaire, car il est situé sous la peau.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aminata s'entraîne pour le 100 mètres au stade de son collège. Son entraîneur prend son pouls au poignet avant la course, puis juste après. Avant la course, son pouls est de 70 battements par minute ; juste après, il est de 160. De combien de battements par minute sa fréquence a-t-elle augmenté ?",
+              "question_type": "numeric",
+              "unit": "batt/min",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée (La méthode d'exploitation d'une courbe). 1. Lire au repos : 70. 2. Lire pendant l'effort : 160. 3. Calculer la variation : 160 − 70 = 90 battements par minute. 4. Interpréter : le cœur bat 90 fois de plus par minute pour envoyer plus de sang aux muscles. La réponse est 90 et non 160.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Aminata s'entraîne pour le 100 mètres au stade de son collège. Son entraîneur prend son pouls au poignet avant la course, puis juste après. L'entraîneur compte 15 battements en 10 secondes. Quelle est la fréquence cardiaque d'Aminata, en battements par minute ?",
+              "question_type": "numeric",
+              "unit": "batt/min",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. 1. Lire : 15 battements en 10 secondes. 2. Chercher combien de fois 10 secondes tiennent dans une minute : 60 ÷ 10 = 6. 3. Calculer : 15 × 6 = 90 battements par minute. 4. Conclure : sa fréquence est de 90 battements par minute. Dire 15 serait une erreur : c'est le nombre de battements en 10 secondes.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque description à son vaisseau sanguin.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Identifier : on repère le départ et l'arrivée du sang. 2. Déterminer le sens : un vaisseau qui part du ventricule gauche est l'aorte ; un vaisseau qui part du ventricule droit est l'artère pulmonaire ; celui qui ramène le sang des poumons au cœur est une veine, les veines pulmonaires. 3. Reconnaître un capillaire : très fin, dans un muscle, c'est un capillaire.",
+              "answers": [
+                {
+                  "content": "Il part du ventricule gauche",
+                  "match": "Aorte"
+                },
+                {
+                  "content": "Il part du ventricule droit",
+                  "match": "Artère pulmonaire"
+                },
+                {
+                  "content": "Il ramène le sang des poumons au cœur",
+                  "match": "Veines pulmonaires"
+                },
+                {
+                  "content": "Il est très fin, dans le muscle de la cuisse",
+                  "match": "Capillaire"
+                }
+              ]
+            },
+            {
+              "content": "Pendant la course, les muscles de ses jambes ont besoin de plus de nutriments et de plus de ___.",
+              "question_type": "select",
+              "explanation": "Méthode détaillée. 1. Lire : pendant l'effort, la fréquence cardiaque augmente. 2. Interpréter : les muscles consomment plus de dioxygène et de nutriments. 3. Conclure : ils ont besoin de plus de dioxygène. Le dioxyde de carbone et les déchets sont rejetés par les muscles, ils n'en sont pas le besoin.",
+              "answers": [
+                {
+                  "content": "dioxygène",
+                  "correct": true
+                },
+                {
+                  "content": "dioxyde de carbone",
+                  "correct": false
+                },
+                {
+                  "content": "déchets",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant que court Aminata, son cœur envoie plus de sang vers ses muscles qu'au repos.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Lire : sa fréquence cardiaque passe de 70 à 160 battements par minute. 2. Calculer : 160 − 70 = 90 battements de plus par minute. 3. Interpréter : un cœur qui bat plus vite envoie plus de sang aux muscles, qui consomment plus de dioxygène et de nutriments. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un match de football du collège",
+          "statement": "Au cours d'un match de football, le professeur de SVT mesure la fréquence cardiaque de Yao. Tu exploites ses mesures et tu expliques le trajet du sang.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Yao, élève de 3ème, joue au football avec ses camarades. Le professeur de SVT mesure sa fréquence cardiaque : 72 battements par minute au repos, 140 après 3 minutes de jeu, 90 trois minutes après la fin du match. De combien de battements par minute sa fréquence augmente-t-elle entre le repos et la mesure prise après 3 minutes de jeu ?",
+              "question_type": "numeric",
+              "unit": "batt/min",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. 1. Lire au repos : 72 battements par minute. 2. Lire pendant l'effort : 140. 3. Calculer la variation : 140 − 72 = 68 battements par minute. 4. Interpréter : le cœur bat plus vite. La réponse est 68, et non 140.",
+              "answers": [
+                {
+                  "content": "68",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Yao, élève de 3ème, joue au football avec ses camarades. Le professeur de SVT mesure sa fréquence cardiaque : 72 battements par minute au repos, 140 après 3 minutes de jeu, 90 trois minutes après la fin du match. Quelles sont les deux affirmations exactes sur l'augmentation de sa fréquence pendant le jeu ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode détaillée. 1. Lire : la fréquence passe de 72 à 140. 2. Calculer : 140 − 72 = 68 battements de plus par minute. 3. Interpréter : les muscles consomment plus de dioxygène et de nutriments, donc le cœur bat plus vite et envoie plus de sang vers eux. Les autres propositions sont fausses : le sang ne s'épaissit pas à cause d'un effort, les valvules ne se ferment pas tout le temps, et le sang continue de circuler dans tous les organes.",
+              "answers": [
+                {
+                  "content": "Ses muscles consomment plus de dioxygène et de nutriments.",
+                  "correct": true
+                },
+                {
+                  "content": "Son cœur envoie plus de sang vers ses muscles.",
+                  "correct": true
+                },
+                {
+                  "content": "Son sang devient plus épais.",
+                  "correct": false
+                },
+                {
+                  "content": "Les valvules du cœur se ferment.",
+                  "correct": false
+                },
+                {
+                  "content": "Le sang cesse de circuler dans ses organes.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao, élève de 3ème, joue au football avec ses camarades. Le professeur de SVT mesure sa fréquence cardiaque : 72 battements par minute au repos, 140 après 3 minutes de jeu, 90 trois minutes après la fin du match. Explique, en suivant le trajet du sang, comment le dioxygène arrive jusqu'aux muscles de Yao.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le sang se charge en dioxygène dans les capillaires des poumons",
+                "Il revient au cœur gauche par les veines pulmonaires puis part par l'aorte",
+                "Il arrive aux capillaires des muscles où il cède le dioxygène",
+                "Le trajet est écrit dans le bon ordre"
+              ],
+              "explanation": "Corrigé modèle : le sang pauvre en dioxygène part du ventricule droit par l'artère pulmonaire. Dans les capillaires des poumons, il se charge en dioxygène. Les veines pulmonaires le ramènent à l'oreillette gauche, puis il passe dans le ventricule gauche. Il repart par l'aorte et les artères jusqu'aux capillaires des muscles, où il cède son dioxygène et ses nutriments. Barème (3 points) : chargement en dioxygène dans les poumons, 1 point ; retour au cœur gauche puis départ par l'aorte, 1 point ; cession aux muscles dans les capillaires, 0,5 point ; trajet dans l'ordre, 0,5 point.",
+              "answers": [],
+              "starter": "Le sang pauvre en dioxygène part du ventricule droit…"
+            },
+            {
+              "content": "Le dioxyde de carbone produit par les muscles de Yao est ramené au cœur droit par ___.",
+              "question_type": "select",
+              "explanation": "Méthode détaillée. 1. Identifier : les muscles sont des organes de la grande circulation. 2. Déterminer le sens : le sang qui les quitte revient au cœur, par des veines. 3. Nommer : les veines des organes se jettent dans les veines caves, qui arrivent à l'oreillette droite. Les veines pulmonaires viennent des poumons, l'artère pulmonaire et l'aorte partent du cœur.",
+              "answers": [
+                {
+                  "content": "les veines caves",
+                  "correct": true
+                },
+                {
+                  "content": "les veines pulmonaires",
+                  "correct": false
+                },
+                {
+                  "content": "l'artère pulmonaire",
+                  "correct": false
+                },
+                {
+                  "content": "l'aorte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Yao, élève de 3ème, joue au football avec ses camarades. Le professeur de SVT mesure sa fréquence cardiaque : 72 battements par minute au repos, 140 après 3 minutes de jeu, 90 trois minutes après la fin du match. Trois minutes après la fin du match, la fréquence cardiaque de Yao est identique à celle du repos.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Lire au repos : 72. 2. Lire trois minutes après le match : 90. 3. Calculer : 90 − 72 = 18, la fréquence est encore plus haute qu'au repos. 4. Conclure : après l'effort, elle redescend progressivement. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Yao, élève de 3ème, joue au football avec ses camarades. Le professeur de SVT mesure sa fréquence cardiaque : 72 battements par minute au repos, 140 après 3 minutes de jeu, 90 trois minutes après la fin du match. Compare la valeur de 90 mesurée après le match à la valeur de 72 du repos et explique ce que tu peux en conclure.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Lecture correcte des deux valeurs (90 et 72)",
+                "La différence est calculée : 90 − 72 = 18",
+                "La conclusion est le retour progressif au repos"
+              ],
+              "explanation": "Corrigé modèle : 90 − 72 = 18 ; la fréquence cardiaque est encore plus élevée de 18 battements par minute qu'au repos. On en conclut qu'après l'effort le cœur ne revient pas tout de suite à sa fréquence de repos : le retour est progressif. Barème (2 points) : lecture des deux valeurs, 0,5 point ; calcul de la différence, 0,5 point ; conclusion, 1 point.",
+              "answers": [],
+              "starter": "Après le match, la fréquence est de 90 battements…"
+            }
+          ]
+        },
+        {
+          "title": "La course de 1 500 mètres",
+          "statement": "Sujet de type BEPC. Konan prépare une course de 1 500 mètres : tu compares les deux circulations et tu expliques ce qui se passe dans son corps pendant l'effort.",
+          "exercise_type": "evaluation",
+          "figure": "double-circulation",
+          "questions": [
+            {
+              "content": "Relie chaque vaisseau à sa description.",
+              "question_type": "matching",
+              "explanation": "Méthode détaillée. 1. Partir : l'aorte part du ventricule gauche et l'artère pulmonaire part du ventricule droit. 2. Suivre le retour : les veines caves arrivent à l'oreillette droite et les veines pulmonaires à l'oreillette gauche. 3. Conclure : ces quatre vaisseaux sont les liens entre le cœur, les poumons et les organes dans la double circulation.",
+              "answers": [
+                {
+                  "content": "Aorte",
+                  "match": "Part du ventricule gauche"
+                },
+                {
+                  "content": "Veines caves",
+                  "match": "Arrivent à l'oreillette droite"
+                },
+                {
+                  "content": "Artère pulmonaire",
+                  "match": "Part du ventricule droit"
+                },
+                {
+                  "content": "Veines pulmonaires",
+                  "match": "Arrivent à l'oreillette gauche"
+                }
+              ]
+            },
+            {
+              "content": "Sujet de type BEPC. Konan prépare une course de 1 500 mètres. Pendant l'effort, son cœur bat à 150 battements par minute. Le schéma de la double circulation montre le cœur droit, les poumons, le cœur gauche et les organes reliés par des vaisseaux. Le sang qui quitte le ventricule droit de Konan est riche en dioxygène.",
+              "question_type": "true_false",
+              "explanation": "Méthode détaillée. 1. Partir : le ventricule droit envoie le sang par l'artère pulmonaire. 2. Noter : ce sang vient des organes et il est pauvre en dioxygène. 3. Suivre jusqu'aux capillaires : il se charge en dioxygène dans les poumons. L'affirmation est fausse : le sang riche en dioxygène est dans le cœur gauche.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sujet de type BEPC. Konan prépare une course de 1 500 mètres. Pendant l'effort, son cœur bat à 150 battements par minute. Le schéma de la double circulation montre le cœur droit, les poumons, le cœur gauche et les organes reliés par des vaisseaux. Remets dans l'ordre les parties traversées par le sang au cours d'un tour complet, en partant de l'oreillette droite.",
+              "question_type": "ordering",
+              "explanation": "Méthode détaillée. 1. Partir : de l'oreillette droite, le sang passe dans le ventricule droit. 2. Suivre jusqu'aux capillaires : l'artère pulmonaire le conduit aux poumons. 3. Suivre le retour : les veines pulmonaires le ramènent à l'oreillette gauche, puis il passe dans le ventricule gauche. 4. Il repart par l'aorte vers les organes. 5. Conclure : un tour complet traverse le cœur deux fois, côté droit puis côté gauche.",
+              "answers": [
+                {
+                  "content": "Oreillette droite"
+                },
+                {
+                  "content": "Ventricule droit"
+                },
+                {
+                  "content": "Poumons"
+                },
+                {
+                  "content": "Oreillette gauche"
+                },
+                {
+                  "content": "Ventricule gauche"
+                },
+                {
+                  "content": "Organes"
+                }
+              ]
+            },
+            {
+              "content": "Sujet de type BEPC. Konan prépare une course de 1 500 mètres. Pendant l'effort, son cœur bat à 150 battements par minute. Le schéma de la double circulation montre le cœur droit, les poumons, le cœur gauche et les organes reliés par des vaisseaux. Combien de battements son cœur effectue-t-il en 10 secondes ?",
+              "question_type": "numeric",
+              "unit": "battements",
+              "tolerance": 0,
+              "explanation": "Méthode détaillée. 1. Lire : 150 battements par minute. 2. Chercher combien de fois 10 secondes tiennent dans une minute : 60 ÷ 10 = 6. 3. Calculer : 150 ÷ 6 = 25 battements. 4. Conclure : 25 battements en 10 secondes. Attention : 150 est le nombre de battements en une minute.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Sujet de type BEPC. Konan prépare une course de 1 500 mètres. Pendant l'effort, son cœur bat à 150 battements par minute. Le schéma de la double circulation montre le cœur droit, les poumons, le cœur gauche et les organes reliés par des vaisseaux. Compare la petite circulation et la grande circulation : donne leur point de départ, leur point d'arrivée et le rôle de chacune.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Petite circulation : du ventricule droit à l'oreillette gauche, en passant par les poumons",
+                "Grande circulation : du ventricule gauche à l'oreillette droite, en passant par les organes",
+                "Rôle de la petite : charger le sang en dioxygène et libérer du dioxyde de carbone",
+                "Rôle de la grande : fournir dioxygène et nutriments aux organes"
+              ],
+              "explanation": "Corrigé modèle : la petite circulation part du ventricule droit par l'artère pulmonaire, passe par les poumons et revient à l'oreillette gauche par les veines pulmonaires ; elle charge le sang en dioxygène et le débarrasse du dioxyde de carbone. La grande circulation part du ventricule gauche par l'aorte, passe par les organes et revient à l'oreillette droite par les veines caves ; elle apporte aux organes le dioxygène et les nutriments et emporte le dioxyde de carbone et les déchets. Barème (3 points) : petite circulation, 1 point ; grande circulation, 1 point ; rôle de la petite, 0,5 point ; rôle de la grande, 0,5 point.",
+              "answers": [],
+              "starter": "La petite circulation part du ventricule droit…"
+            },
+            {
+              "content": "Sujet de type BEPC. Konan prépare une course de 1 500 mètres. Pendant l'effort, son cœur bat à 150 battements par minute. Le schéma de la double circulation montre le cœur droit, les poumons, le cœur gauche et les organes reliés par des vaisseaux. Explique pourquoi la fréquence cardiaque de Konan augmente pendant la course, en reliant le besoin des muscles, le rôle du sang et le rôle du cœur.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Les muscles consomment plus de dioxygène et de nutriments pendant l'effort",
+                "Le sang apporte le dioxygène et les nutriments aux muscles",
+                "Le cœur bat plus vite et envoie plus de sang vers les muscles",
+                "Le sang emporte le dioxyde de carbone produit par les muscles",
+                "L'explication est organisée, du besoin à la conséquence"
+              ],
+              "explanation": "Corrigé modèle : pendant la course, les muscles de Konan consomment plus de dioxygène et de nutriments. Le sang les leur apporte dans la grande circulation, et ramène le dioxyde de carbone vers le cœur droit puis les poumons. Pour répondre à ce besoin, le cœur bat plus vite : il envoie plus de sang par minute vers les muscles. C'est pourquoi sa fréquence passe de la valeur de repos à 150 battements par minute. Barème (4 points) : besoin des muscles, 1 point ; rôle du sang, 1 point ; rôle du cœur, 1 point ; dioxyde de carbone et organisation, 1 point.",
+              "answers": [],
+              "starter": "Pendant la course, les muscles de Konan…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

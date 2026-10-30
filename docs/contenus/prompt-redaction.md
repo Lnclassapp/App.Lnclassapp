@@ -221,7 +221,7 @@ En `geometry`, l'interaction passe par les points `"draggable": true` (contraint
 - Une figure s'utilise quand elle **aide vraiment** (un schéma qu'on ne peut pas décrire sans perdre l'élève). Pas de figure décorative. 12 au plus par leçon.
 - Un paramètre hors bornes, un paramètre inconnu, une description trop courte ou une sorte inconnue : la leçon entière est refusée (`figure_invalid`, avec le nom du paramètre).
 
-### Les huit sortes (liste fermée)
+### Les neuf sortes (liste fermée)
 
 | `kind` | Pour | Paramètres autorisés (bornes) |
 |---|---|---|
@@ -233,6 +233,7 @@ En `geometry`, l'interaction passe par les points `"draggable": true` (contraint
 | `timeline` | Frise chronologique (Histoire, SVT, EDHC) | `start`, `end` (−3 000 à 2 100, `end` > `start`), `step` (1 à 500, 200 graduations au plus), `unit` (`year`, `month` ou `day` ; absent = `year`), `periods` (≤ 8), `events` (≤ 16). Réglables : `start`, `end` (zoom). |
 | `map` | Carte (Géographie, Histoire, EDHC) | `base` (`cote_d_ivoire`, `africa` ou `world`), `areas` (≤ 40), `places` (≤ 20), `routes` (≤ 10), `legend` (≤ 6 textes). Aucun réglable. |
 | `diagram` | Schéma fléché : étapes, causes et conséquences, organigramme, cycle | `layout` (`flow`, `tree` ou `cycle`), `direction` (`down` ou `right` ; absent = `down`), `nodes` (≤ 12), `edges` (≤ 16), `legend` (≤ 4 textes). Aucun réglable. |
+| `plate` | Planche légendée de SVT : un schéma de manuel dont on étiquette et surligne les parties | `plate` (une des 8 planches ci-dessous), `labels` (≤ 12), `highlight` (≤ 4 parties), `numbering` (`names` ou `numbers`). Les trois premiers sont obligatoires, `highlight` facultatif. Aucun réglable. |
 
 Un élément de liste est un nombre, un texte (60 caractères au plus), un tableau de 4 valeurs simples au plus, ou un objet de valeurs simples (texte, nombre, `true`/`false`). **Aucun tableau ni objet n'est imbriqué dans un objet.**
 
@@ -246,6 +247,7 @@ Formes d'éléments à utiliser :
 - `timeline` : `periods` `{"from":1893,"to":1960,"label":"Colonie française"}` (`from` < `to`) ; `events` `{"at":1934,"label":"Abidjan capitale"}`. Chaque `at`, `from`, `to` est compris entre `start` et `end`. Un curseur sur `start` ou `end` zoome la frise : ses bornes restent dans −3 000..2 100.
 - `map` : `areas` `{"id":"savanna","category":2}` (une aire au plus une fois ; `category` de 1 à la taille de `legend`, et `legend` est obligatoire dès qu'une aire est donnée) ; `places` `{"id":"abidjan","label":"Abidjan (port)"}` (`label` facultatif, sinon le nom du fond) ; `routes` `{"from":"abidjan","to":"bouake","label":"Voie ferrée"}` (entre deux lieux du fond). Les zones se distinguent par une teinte **et** un motif : la légende dit ce que chaque catégorie représente.
 - `diagram` : `nodes` `{"id":"ag","label":"Assemblée générale","category":1}` (`id` unique, `category` facultative de 1 à la taille de `legend`) ; `edges` `{"from":"onu","to":"ag","label":"élit"}` (entre deux nœuds existants, `label` facultatif). `tree` : une seule racine, chaque nœud a au plus un parent, aucun cycle ; `cycle` : 3 nœuds au moins.
+- `plate` : `labels` `{"part":"aorta","text":"Aorte"}` (`part` obligatoire, de la planche, **une fois au plus** ; `text` facultatif, 60 caractères au plus, sinon le nom français de la partie) ; `highlight` `["aorta","stomach"]` (des identifiants de parties de la planche, chacun une fois au plus). Une planche sans étiquette n'a pas de sens : `labels` n'est jamais vide. Avec `numbering` = `names`, chaque étiquette porte son nom (ou son `text`) ; avec `numbers`, elle ne porte que son numéro, **dans l'ordre de `labels`** (1, 2, 3…), sans légende : c'est la forme pour « légender le schéma » (l'exercice demande les noms, la correction les donne dans le même ordre). Usage SVT : montrer un organe ou une structure, faire repérer des parties, souligner (`highlight`) ce dont parle la question.
 
 **Identifiants des fonds de carte (liste fermée).** Une carte ne nomme que ces aires et ces lieux ; tout autre identifiant fait refuser la leçon (`figure_invalid`, avec le chemin du paramètre). La liste fait foi dans `app/domain/entities/catalog/figure_catalogs.rb`.
 
@@ -319,3 +321,15 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
 - **Notions à couvrir** (facultatif) : <liste du programme, si tu l'as>
 - **Acquis des leçons précédentes / leçons suivantes interdites** (facultatif) : <intitulés de la progression>
 - **Contraintes particulières** (facultatif) : <ex. insister sur la rédaction au BEPC>
+
+
+**Planches de SVT (liste fermée).** Une figure `plate` ne nomme que ces planches et ces parties (identifiant — nom français) ; tout autre identifiant fait refuser la leçon (`figure_invalid`, avec le chemin du paramètre). La liste fait foi dans `app/domain/entities/catalog/figure_catalogs.rb`.
+
+- `digestive_system` (Appareil digestif) : `mouth` bouche, `salivary_glands` glandes salivaires, `oesophagus` œsophage, `stomach` estomac, `liver` foie, `gallbladder` vésicule biliaire, `pancreas` pancréas, `small_intestine` intestin grêle, `large_intestine` gros intestin, `rectum` rectum, `anus` anus.
+- `blood_smear` (Frottis sanguin) : `red_blood_cell` hématie, `neutrophil` polynucléaire, `lymphocyte` lymphocyte, `monocyte` monocyte, `platelet` plaquette sanguine, `plasma` plasma.
+- `heart` (Cœur) : `right_atrium` oreillette droite, `left_atrium` oreillette gauche, `right_ventricle` ventricule droit, `left_ventricle` ventricule gauche, `septum` cloison, `aorta` aorte, `pulmonary_artery` artère pulmonaire, `superior_vena_cava` veine cave supérieure, `inferior_vena_cava` veine cave inférieure, `pulmonary_veins` veines pulmonaires, `tricuspid_valve` valvule auriculo-ventriculaire droite, `mitral_valve` valvule auriculo-ventriculaire gauche.
+- `double_circulation` (Double circulation) : `right_heart` cœur droit, `left_heart` cœur gauche, `lungs` poumons, `organs` organes, `pulmonary_artery` artère pulmonaire, `pulmonary_veins` veines pulmonaires, `aorta` aorte, `vena_cava` veines caves.
+- `female_reproductive_system` (Appareil reproducteur féminin) : `ovary` ovaire, `oviduct` trompe (oviducte), `infundibulum` pavillon, `uterus` utérus, `endometrium` muqueuse utérine, `cervix` col de l'utérus, `vagina` vagin.
+- `hiv_virus` (VIH) : `envelope` enveloppe, `gp120` glycoprotéine gp120, `gp41` glycoprotéine gp41, `matrix` matrice protéique, `capsid` capside, `rna` ARN viral, `reverse_transcriptase` transcriptase inverse.
+- `soil_profile` (Profil de sol) : `litter` litière, `humus_horizon` horizon humifère, `accumulation_horizon` horizon d'accumulation, `weathered_rock` roche mère altérée, `bedrock` roche mère, `roots` racines.
+- `root_hairs` (Racine et poils absorbants) : `collar` collet, `main_root` racine principale, `lateral_root` racine secondaire, `root_hair_zone` zone pilifère, `elongation_zone` zone d'allongement, `root_cap` coiffe, `root_hair` poil absorbant, `soil_particle` particule de sol, `soil_water` eau du sol.

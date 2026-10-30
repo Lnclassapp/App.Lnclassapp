@@ -31,7 +31,7 @@ class FiguresStructureTest < ActiveSupport::TestCase
   end
 
   test "the kinds of this lot have their module" do
-    %w[geometry number_line].each { assert_includes SOURCES.map { |path| File.basename(path, ".js") }, it }
+    %w[geometry number_line plate].each { assert_includes SOURCES.map { |path| File.basename(path, ".js") }, it }
   end
 
   test "a map base weighs 150 KB at most" do
