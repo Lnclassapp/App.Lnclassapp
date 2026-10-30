@@ -70,6 +70,12 @@ contredit une règle de l'application, la ligne dit ce qui est retenu ; le porte
 | Q8. Qu'est-ce qu'un sujet de devoir ? | Un titre, la liste des notions mobilisées et ses exercices dans l'ordre, écrits dans le fichier d'import de la leçon | Donnée nouvelle ; un exercice de sujet n'a pas de notion |
 | Q9. Où va « Prépare devoirs » dans la page ? | Juste sous « Prépare interros », un sujet par feuille ; sans sujet, la section n'apparaît pas | Les exercices « Toute la leçon » sans sujet restent sous « Prépare interros », dans une dernière feuille |
 | Q10. Les réponses tapées avant « Vérifier » survivent-elles à un rechargement ? | Oui, dans le navigateur, comme la maquette | Rien n'est envoyé avant « Vérifier » |
+| Q11. (ajout de Touré, 2026-10-30) L'enseignant compose-t-il son propre devoir ? | Oui : il coche des exercices dans les feuilles d'une ou plusieurs leçons de sa classe, puis « Envoyer à <classe> » | Un envoi groupe plusieurs exercices ; donnée nouvelle sur l'assignation |
+| Q12. Que reçoit l'élève ? | Un envoi = une feuille dans « Ma classe », du plus récent au plus ancien ; « Notions mobilisées » se remplit avec les notions des exercices choisis | La liste des exercices assignés de « Ma classe » devient une pile de feuilles |
+| Q13. Un envoi de 1 ou 2 exercices ? | Forme « Prépare interros » ; « À retenir » seulement si les exercices viennent de la même notion. À partir de 3 : forme « Prépare devoirs » | Le choix de forme se lit sur le nombre d'exercices de l'envoi |
+| Q14. Échéance, note, pause ? | Les règles des devoirs d'aujourd'hui : échéance au prochain jour de séance, note sur 20 vue par l'enseignant, pause de 3 copies | Chaque exercice de l'envoi reste une assignation ordinaire ; rien ne change au suivi de l'enseignant |
+| Q15. « Assigner à <classe> » sous un exercice (Lot D) reste-t-il ? | Oui : c'est un envoi d'un seul exercice | Deux gestes, une seule donnée |
+| Q16. Le porteur a-t-il validé cet ajout ? | Oui, rapporté par Touré (2026-10-30) | Lots 0b, E et F ajoutés au plan |
 
 ## Cas limites identifiés
 
@@ -79,6 +85,9 @@ contredit une règle de l'application, la ligne dit ce qui est retenu ; le porte
 - Un exercice archivé pendant que la page est ouverte : « Vérifier » répond que l'exercice n'existe plus, sans perdre la page.
 - Un élève non connecté : la feuille se lit, « Vérifier » mène à la connexion.
 - Une notion sans « À retenir » : l'encadré n'apparaît pas.
+- L'enseignant coche un exercice déjà assigné à la classe : il est refusé dans l'envoi, avec son nom ; le reste part.
+- L'enseignant change de leçon avant d'envoyer : sa sélection le suit (gardée dans son navigateur), jusqu'à l'envoi.
+- Un envoi dont un exercice est archivé ensuite : la feuille de l'élève l'omet ; un envoi vidé n'apparaît plus.
 
 ## Questions encore ouvertes
 

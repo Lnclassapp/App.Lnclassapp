@@ -13,8 +13,8 @@ lit la correction sans quitter la page. **Leur design s'applique tel quel** ([me
 
 | Acteur | Peut | Ne peut pas |
 |---|---|---|
-| Student | Répondre dans la feuille, « Vérifier ma réponse » (une copie), lire l'indice, « Refaire l'exercice », « Recommencer cette notion / ce sujet » | Vérifier pendant la pause de 3 copies ; vérifier un exercice non publié ou d'une notion non publiée |
-| Teacher | Lire les feuilles sans champs de réponse ; « Assigner à <classe> » sous chaque exercice | Rendre une copie |
+| Student | Lire ses devoirs reçus en feuilles dans « Ma classe » ; répondre dans la feuille, « Vérifier ma réponse » (une copie), lire l'indice, « Refaire l'exercice », « Recommencer cette notion / ce sujet » | Vérifier pendant la pause de 3 copies ; vérifier un exercice non publié ou d'une notion non publiée |
+| Teacher | Lire les feuilles sans champs de réponse ; « Assigner à <classe> » sous chaque exercice ; cocher des exercices de plusieurs leçons et les « Envoyer à <classe> » en un devoir | Rendre une copie ; envoyer à une classe qui n'est pas la sienne ou un exercice d'un autre niveau |
 | Team | Lire les feuilles comme l'enseignant, brouillons compris, sans « Assigner » | Rendre une copie |
 | Visiteur non connecté | Lire les feuilles d'une leçon publique | Vérifier : « Vérifier ma réponse » mène à la connexion |
 | Parent, SchoolStaff | Rien de nouveau : la page ne change pas pour eux | — |
@@ -34,6 +34,11 @@ Règles appliquées, inchangées : `ReadPublishedPolicy` (lecture, ADR-0028), la
 5. Il clique « Refaire l'exercice » : l'exercice revient à blanc. « Recommencer cette notion / ce sujet » fait de même pour
    toute la feuille.
 6. L'enseignant ouvre la même leçon : chaque exercice porte « Assigner à <classe> » ; un clic assigne sans recharger.
+7. L'enseignant coche « Choisir » sous des exercices, dans une ou plusieurs leçons ; un bandeau compte sa sélection
+   (« 4 exercices choisis ») ; « Envoyer à <classe> » crée le devoir.
+8. L'élève ouvre « Ma classe » : chaque devoir reçu est une feuille, la plus récente en haut. Un devoir de 3 exercices ou
+   plus a la forme « Prépare devoirs » (« Devoir n / N », « Notions mobilisées »), un devoir de 1 ou 2 la forme
+   « Prépare interros ». Il y vérifie ses réponses comme dans la leçon.
 
 ### Chemins alternatifs et erreurs
 
@@ -48,6 +53,9 @@ Règles appliquées, inchangées : `ReadPublishedPolicy` (lecture, ADR-0028), la
 | Leçon sans sujet | Pas de section « Prépare devoirs » |
 | Question d'un type absent de la maquette | Rendue dans le cadre de la feuille avec son interaction d'aujourd'hui |
 | Rechargement après une copie vérifiée | L'exercice s'affiche corrigé, d'après la dernière copie |
+| Envoi avec un exercice déjà assigné à la classe | Les autres partent ; le bandeau nomme l'exercice refusé |
+| Envoi vide, ou de plus de 10 exercices | Refusé : « Choisis entre 1 et 10 exercices. » |
+| Élève sans devoir reçu | « Ma classe » garde son état vide d'aujourd'hui |
 
 ## 4. Critères d'acceptation
 
@@ -113,6 +121,29 @@ Et un sujet dont un exercice a une notion est refusé avec une erreur nommant le
 Quand l'élève clique « Vérifier ma réponse »
 Alors l'exercice affiche « Cet exercice n'existe plus. » et ses réponses restent dans les champs
 
+# CA-12 Composer un devoir
+Étant donné un enseignant de la 3e 1 qui coche 2 exercices dans la leçon « Thalès » et 2 dans « Pythagore »
+Quand il clique « Envoyer à 3e 1 »
+Alors 4 assignations actives d'un même envoi existent pour la 3e 1, échéance au prochain jour de séance
+Et sa sélection est vidée
+
+# CA-13 Devoir reçu, forme « Prépare devoirs »
+Étant donné un élève de la 3e 1 et l'envoi de 4 exercices
+Quand il ouvre « Ma classe »
+Alors il voit une feuille « PRÉPARE DEVOIRS » avec les 4 exercices et « Notions mobilisées : » qui nomme leurs notions
+Et il vérifie un exercice sans quitter la page
+
+# CA-14 Devoir reçu, forme « Prépare interros »
+Étant donné l'envoi de 2 exercices de la même notion
+Alors l'élève voit une feuille « PRÉPARE INTERROS » avec « À retenir : » de cette notion
+Et un envoi de 2 exercices de notions différentes n'a pas d'encadré « À retenir »
+
+# CA-15 Refus
+Étant donné un exercice déjà assigné à la 3e 1
+Quand l'enseignant l'envoie avec 2 autres exercices
+Alors 2 assignations sont créées et le bandeau nomme l'exercice refusé
+Et un enseignant d'une autre classe ne peut pas envoyer à la 3e 1
+
 # CA-11 Téléphone
 Étant donné un écran de 390 px de large
 Alors aucune feuille ne dépasse de l'écran et chaque bouton fait au moins 44 px de haut
@@ -122,9 +153,9 @@ Alors aucune feuille ne dépasse de l'écran et chaque bouton fait au moins 44 p
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | `Entities::Assessment::Exercise#hint` ; `Entities::Catalog::Subject` ; `Entities::Assessment::SheetGrade` (note sur 10, mention, détail) ; use case `UseCases::Assessment::CheckExerciseOnSheet` (compose `StartExerciseSession` et `SubmitExerciseCopy`) ; port `Ports::Catalog::ContentTreeWriterPort` étendu (sujets, indice) |
-| Infrastructure | migrations `exercises.hint`, table `subjects`, `exercises.subject_id` ; `Orm::Subject` ; `Queries::Catalog::PrepareSheetsQuery` (remplace `PrepareInterrosQuery`) ; import `course_tree` (indice, sujets) |
-| Delivery | `POST /exercises/:exercise_public_id/sheet_check` → `Assessment::SheetChecksController#create` (Turbo Stream) |
+| Domaine | use case `UseCases::Classroom::AssignExerciseBatch` (règles de `AssignResource`, une transaction) ; `Entities::Assessment::Exercise#hint` ; `Entities::Catalog::Subject` ; `Entities::Assessment::SheetGrade` (note sur 10, mention, détail) ; use case `UseCases::Assessment::CheckExerciseOnSheet` (compose `StartExerciseSession` et `SubmitExerciseCopy`) ; port `Ports::Catalog::ContentTreeWriterPort` étendu (sujets, indice) |
+| Infrastructure | migration `classroom_assignments.batch_public_id` ; `Queries::Classroom::StudentAssignedSheetsQuery` ; migrations `exercises.hint`, table `subjects`, `exercises.subject_id` ; `Orm::Subject` ; `Queries::Catalog::PrepareSheetsQuery` (remplace `PrepareInterrosQuery`) ; import `course_tree` (indice, sujets) |
+| Delivery | `POST /exercises/:exercise_public_id/sheet_check` → `Assessment::SheetChecksController#create` (Turbo Stream) ; `POST /classrooms/:classroom_public_id/assignment_batches` → `Classroom::AssignmentBatchesController#create` |
 | UI | `catalog/courses/_prepare_sheets`, `catalog/courses/sheets/_sheet`, `_exercise`, `_result` ; `app/assets/stylesheets/prepare_sheet.css` ; Stimulus `prepare-sheet` (brouillon local, indice, refaire, recommencer) |
 
 ## 6. Décisions rattachées

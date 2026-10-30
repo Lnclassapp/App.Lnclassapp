@@ -55,6 +55,14 @@ La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le
 > `Entities::Assessment::SheetGrade` : sur 10, au demi-point, mention de la maquette (≥ 9 Excellent, ≥ 7 Très bien,
 > ≥ 5 Assez bien, sinon À retravailler).**
 
+> **Ajout du 2026-10-30 (Touré, accord du porteur).** **Nous laissons l'enseignant envoyer plusieurs exercices en un
+> devoir : `classroom_assignments.batch_public_id` (14 caractères, nul pour un exercice assigné seul, indexé) relie les
+> assignations d'un même envoi. `UseCases::Classroom::AssignExerciseBatch` crée, dans une transaction, une assignation
+> ordinaire par exercice (règles de `AssignResource` : enseignant de la classe, exercice publié du niveau, échéance au
+> prochain jour de séance), de 1 à 10 exercices ; un exercice déjà assigné à la classe est écarté et nommé, les autres
+> partent. Nous écartons une table de devoirs composés (option F) : chaque exercice resterait à suivre deux fois, et
+> le suivi de l'enseignant, la note et l'échéance d'aujourd'hui marchent sans changer.**
+
 ## 5. Conséquences
 
 ### 🟢 Positives
@@ -64,6 +72,9 @@ La maquette note sur 10 avec « Excellent » dès 9 ; l'ADR-0115 note sur 20. Le
 - La page de l'exercice et celle du résultat restent pour les exercices assignés.
 
 ### 🔴 Coûts consentis
+
+- Un envoi n'a pas de titre ni d'identité propre hors de ses assignations : le renommer ou le réordonner demanderait une table.
+- L'index « une assignation active par exercice et par classe » interdit d'envoyer deux fois le même exercice à la même classe.
 
 - Deux migrations et une table de plus ; l'import `course_tree` apprend deux clés (`hint`, `subjects`).
 - La note s'affiche sur 10 dans la feuille et sur 20 ailleurs, pour la même copie.

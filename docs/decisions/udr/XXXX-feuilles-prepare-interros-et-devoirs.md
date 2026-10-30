@@ -50,6 +50,27 @@ UDR-0145 §3.2. La seule adaptation est la vue de l'enseignant, que la maquette 
   sur n. », « CORRECTION », puis par question « a. ✓ Juste | ✗ Faux | ✗ Sans réponse · Bonne réponse : … » et
   « Explication : » (`questions.explanation`). Note et mention : `Entities::Assessment::SheetGrade`.
 
+**Devoir composé par l'enseignant** (ajout du 2026-10-30)
+- Sous chaque exercice de la feuille, pour l'enseignant : une case « Choisir » (`role="checkbox"`, 44 px), à côté de
+  « Assigner à <classe> », même style.
+- Bandeau collé en bas de l'écran (`app/views/catalog/courses/sheets/_batch_bar.html.erb`), cadre noir 2 px, fond blanc,
+  visible dès un exercice choisi : « n exercice(s) choisi(s) » · « Vider » (lien souligné) · « Envoyer à <classe> »
+  (bouton noir), un par classe de l'enseignant pour ce niveau. Sélection gardée dans `localStorage`
+  (`lnclass-batch-<teacher>`), elle suit l'enseignant d'une leçon à l'autre.
+- Après l'envoi (Turbo Stream sur `#sheet-batch-bar`) : « Devoir envoyé à 3e 1 : n exercices. » et, s'il y en a, « Déjà
+  assigné : <titres>. » (`role="status"`) ; la sélection est vidée.
+
+**Devoirs reçus par l'élève** (`app/views/classroom/student_classrooms/_assigned_sheets.html.erb`, à la place de la liste
+des `_assigned_exercise`)
+- Un envoi = une feuille `_sheet` (même partiel que la leçon), la plus récente en haut ; un exercice assigné seul est un
+  envoi d'un exercice.
+- 3 exercices ou plus : cartouche « PRÉPARE DEVOIRS », « Devoir n / N », titre « DEVOIR DU <date d'envoi> », encadré
+  « Notions mobilisées : » (noms des notions des exercices, dans l'ordre, sans doublon ; un exercice « Toute la leçon »
+  apporte le nom de sa leçon), sous-titre « À rendre le <échéance> ».
+- 1 ou 2 exercices : cartouche « PRÉPARE INTERROS », titre = nom de la notion si elle est commune, sinon « DEVOIR DU
+  <date> » ; « À retenir : » seulement si la notion est commune et a un « À retenir ».
+- Vérifier, Indice, Refaire : comme dans la leçon (même frame, même route).
+
 **Tokens**
 - Exception assumée au design system : les valeurs de la maquette, dans `app/assets/stylesheets/prepare_sheet.css`, en
   classes `.ps-*` (fond `#d6d6d6`, feuille blanche `max-width: 880px`, ombre `0 8px 28px rgba(0,0,0,.15)`, bordures noires,
