@@ -144,6 +144,19 @@ Quand l'enseignant l'envoie avec 2 autres exercices
 Alors 2 assignations sont créées et le bandeau nomme l'exercice refusé
 Et un enseignant d'une autre classe ne peut pas envoyer à la 3e 1
 
+# CA-16 Devoir reçu : pas de correction avant de rendre
+Étant donné un élève qui a reçu un devoir de 3 exercices
+Alors chaque exercice porte « Rendre à l'enseignant » et ni « Vérifier ma réponse » ni note ni correction
+Quand il clique « Rendre à l'enseignant » sur un exercice
+Alors la copie est rattachée à l'assignation, l'enseignant la voit dans son suivi
+Et l'exercice affiche sa note et sa correction, sans « Refaire l'exercice »
+
+# CA-17 Pas de raccourci par la leçon
+Étant donné un exercice assigné à l'élève et pas encore rendu
+Quand il ouvre la leçon
+Alors cet exercice n'a pas « Vérifier ma réponse » et affiche « Ce devoir est à rendre : ouvre-le dans Ma classe. »
+Et un envoi direct de la vérification est refusé sans copie
+
 # CA-11 Téléphone
 Étant donné un écran de 390 px de large
 Alors aucune feuille ne dépasse de l'écran et chaque bouton fait au moins 44 px de haut

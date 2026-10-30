@@ -106,7 +106,8 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 - **Dépend de**    : Lot B
 - **Test associé** : `test/domain/use_cases/assessment/check_exercise_on_sheet_test.rb` · `test/controllers/assessment/sheet_checks_controller_test.rb` · `test/system/assessment/sheet_check_test.rb`
 - **Done quand**   : « Vérifier ma réponse » enregistre une copie et remplace l'exercice par sa correction sans changer de page ;
-                     la pause, l'exercice archivé et la panne affichent leur message, réponses gardées (CA-3, 4, 5, 10)
+                     la pause, l'exercice archivé et la panne affichent leur message, réponses gardées ; depuis la leçon,
+                     un exercice assigné et pas encore rendu est refusé sans copie et affiche « Ce devoir est à rendre… » (CA-3, 4, 5, 10, 17)
 
 ---
 
@@ -167,7 +168,7 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 - **Dépend de**    : Lot 0b, Lot C
 - **Test associé** : `test/infrastructure/queries/classroom/student_assigned_sheets_query_test.rb` · `test/system/classroom/assigned_sheets_test.rb`
 - **Done quand**   : l'élève voit dans « Ma classe » une feuille par envoi, forme « Prépare devoirs » dès 3 exercices et
-                     « Prépare interros » pour 1 ou 2, et y vérifie un exercice sans quitter la page (CA-13, CA-14)
+                     « Prépare interros » pour 1 ou 2 ; « Rendre à l'enseignant » rattache la copie au devoir, puis seulement la note et la correction, sans « Refaire » (CA-13, 14, 16)
 
 ---
 
@@ -192,7 +193,7 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 | `app/views/catalog/courses/sheets/_teacher_bar.html.erb` | Lot B le crée, Lot D le remplit, Lot E y ajoute « Choisir » (séquentiel) |
 | `app/views/catalog/courses/sheets/_sheet.html.erb` | Lot B (les lots E et F le rendent sans le modifier) |
 
-Critères d'acceptation : CA-1, 2, 6, 7, 11 → Lot B · CA-3, 4, 5, 10 → Lot C · CA-8 → Lot D · CA-9 → Lot A · CA-12, 15 → Lot E · CA-13, 14 → Lot F. Aucun orphelin.
+Critères d'acceptation : CA-1, 2, 6, 7, 11 → Lot B · CA-3, 4, 5, 10 → Lot C · CA-8 → Lot D · CA-9 → Lot A · CA-12, 15 → Lot E · CA-13, 14, 16 → Lot F · CA-17 → Lot C. Aucun orphelin.
 
 ## Portes de sortie
 

@@ -69,7 +69,11 @@ des `_assigned_exercise`)
   apporte le nom de sa leçon), sous-titre « À rendre le <échéance> ».
 - 1 ou 2 exercices : cartouche « PRÉPARE INTERROS », titre = nom de la notion si elle est commune, sinon « DEVOIR DU
   <date> » ; « À retenir : » seulement si la notion est commune et a un « À retenir ».
-- Vérifier, Indice, Refaire : comme dans la leçon (même frame, même route).
+- Avant de rendre : le bouton noir est « Rendre à l'enseignant » (même route `sheet_check`, la copie se rattache à
+  l'assignation active) ; « Indice » reste ; ni note ni correction. Après : le résultat comme dans la leçon, **sans**
+  « Refaire l'exercice » ni « Recommencer » (memo Q17).
+- Dans la leçon, un exercice assigné à l'élève et pas encore rendu : à la place de « Vérifier ma réponse » et
+  « Indice », `p` « Ce devoir est à rendre : ouvre-le dans Ma classe. » avec le lien vers « Ma classe ».
 
 **Tokens**
 - Exception assumée au design system : les valeurs de la maquette, dans `app/assets/stylesheets/prepare_sheet.css`, en
