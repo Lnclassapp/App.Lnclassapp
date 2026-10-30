@@ -1,6 +1,6 @@
-<%# 🌐 UI · catalog/revision_sheets/_sheet — la fiche de révision d'une leçon : une page de cahier, une section par notion, quatre blocs au gabarit fixe %>
+<%# 🌐 UI · catalog/revision_sheets/_sheet — la fiche de révision d'une leçon : une page de cahier, une section par notion, quatre blocs au gabarit fixe, et « Je m'entraîne » entre l'exemple et le piège quand la notion en a un %>
 <%# Rôle : `sheet` (RevisionSheetQuery::Lesson) ; `cut` (RevisionPreview, nil sans coupe) marque la suite (`rest`) ; sans JavaScript tout se lit %>
-<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.2, 0137, 0139 §3.2 %>
+<%# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.2, 0137, 0139 §3.2, XXXX-je-m-entraine-dans-la-fiche §3.1 %>
 <% cut = local_assigns[:cut] %>
 <% rest_data = { catalog__revision_more_target: "rest" } %>
 <% preview = Entities::Catalog::RevisionPreview %>
@@ -52,6 +52,10 @@
                 <li><span class="sr-only"><%= t(".step", number: step_index + 1) %></span> <%= sheet_text(step) %></li>
               <% end %>
             </ol>
+          <% end %>
+
+          <% if notion.practice %>
+            <%= render "catalog/revision_sheets/practice", notion:, course_slug: sheet.course_slug, rest: rest_for.(index, preview::PRACTICE) %>
           <% end %>
 
           <%= tag.div class: "sheet-box", data: { tone: "pitfall", **rest_for.(index, preview::PITFALL) } do %>

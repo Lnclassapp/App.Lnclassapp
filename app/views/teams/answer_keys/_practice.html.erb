@@ -1,0 +1,40 @@
+<%# 🌐 UI · teams/answer_keys/_practice — « Je m'entraîne (non noté) » d'une notion dans le corrigé de l'équipe, sous son exercice noté %>
+<%# Rôle : `notion` (répond à name et practice : Entities::Catalog::NotionPractice complet, avec corrigé) ; chaque question, ses bonnes réponses par case, son indice et son explication ; en lecture seule %>
+<%# ADR  : XXXX-entrainement-de-notion-corrige-sans-trace (§4) · UDR : XXXX-je-m-entraine-dans-la-fiche §3.9 %>
+<% practice = notion.practice %>
+<% heading_id = "practice-title-#{notion.name.parameterize}" %>
+<% if practice %>
+  <section class="print:break-inside-avoid" aria-labelledby="<%= heading_id %>">
+    <%= ui_card padding: :md do %>
+      <p class="text-xs uppercase tracking-wide text-mute"><%= notion.name %></p>
+      <h2 id="<%= heading_id %>" class="font-display text-lg font-medium"><%= t("catalog.revision_sheets.practice.unscored") %></h2>
+      <% if practice.statement.present? %><p class="mt-2 max-w-prose whitespace-pre-line text-ink"><%= practice.statement %></p><% end %>
+      <ol class="mt-4 list-none space-y-5">
+        <% practice.questions.each do |question| %>
+          <li>
+            <p class="font-medium whitespace-pre-line text-ink">
+              <span class="tabular-nums"><%= t("catalog.revision_sheets.practice.question", number: question.position) %></span>
+              <span class="block font-normal"><%= question.content %></span>
+            </p>
+            <% expected = UseCases::Catalog::CheckPractice.expected_for(question) %>
+            <% if expected.any? %>
+              <p class="mt-2 flex items-center gap-1.5 text-success">
+                <%= ui_icon "check-circle", variant: :mini, size: :sm %>
+                <span class="sr-only"><%= t("teams.answer_keys.show.right_answer") %></span>
+                <span class="text-ink"><%= expected.join(" ; ") %></span>
+              </p>
+            <% end %>
+            <% if question.hint.present? %>
+              <p class="mt-1 flex items-center gap-1.5 text-sm text-mute">
+                <%= ui_icon "light-bulb", variant: :mini, size: :sm %><span><%= t("catalog.revision_sheets.practice.hint") %> : <%= question.hint %></span>
+              </p>
+            <% end %>
+            <% if question.explanation.present? %>
+              <div class="mt-2 rounded-card bg-mist p-3"><p class="whitespace-pre-line text-ink"><%= question.explanation %></p></div>
+            <% end %>
+          </li>
+        <% end %>
+      </ol>
+    <% end %>
+  </section>
+<% end %>

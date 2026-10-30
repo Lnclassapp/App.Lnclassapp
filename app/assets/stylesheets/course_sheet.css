@@ -514,3 +514,237 @@
   background: linear-gradient(to top, var(--sheet-paper), transparent);
   pointer-events: none;
 }
+
+/* ---- « Je m'entraîne » (UDR XXXX-je-m-entraine-dans-la-fiche §3.2 à §3.5, §3.10) --------------------------------------------
+   Jetons du cahier seulement. Cibles de 48 px, cases qui passent à la ligne avec leur texte (jamais de défilement horizontal),
+   verdict en mots et en symbole, jamais par la couleur seule. */
+
+.sheet-card[data-tone="practice"] {
+  border-left: 3px solid var(--sheet-primary);
+}
+
+.sheet-practice-questions {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  padding-left: 22px;
+}
+
+.sheet-practice-question {
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.sheet-practice-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 8px;
+  align-items: center;
+  margin: 0;
+  font-family: var(--sheet-font-body);
+  line-height: 32px;
+}
+
+.sheet-practice-blank {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px 8px;
+  align-items: center;
+}
+
+.sheet-practice-unit {
+  color: var(--sheet-ink-secondary);
+}
+
+.sheet-input {
+  box-sizing: border-box;
+  min-width: 7ch;
+  max-width: 100%;
+  height: 48px;
+  padding: 0 12px;
+  border: 1.5px solid var(--sheet-field-border);
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-white);
+  color: var(--sheet-ink);
+  font: inherit;
+  font-size: 18px;
+}
+
+.sheet-input:focus-visible {
+  outline: 2px solid var(--sheet-primary);
+  outline-offset: 1px;
+}
+
+.sheet-input[aria-invalid="true"] {
+  border-color: var(--sheet-error);
+}
+
+.sheet-practice-text {
+  width: 100%;
+  height: auto;
+  padding: 8px 12px;
+}
+
+.sheet-practice-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheet-practice-choice {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  min-height: 48px;
+  padding: 4px 12px;
+  border: 1.5px solid var(--sheet-field-border);
+  border-radius: var(--sheet-radius-field);
+  background: var(--sheet-white);
+}
+
+.sheet-practice-choice input {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  accent-color: var(--sheet-primary);
+}
+
+.sheet-practice-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.sheet-practice-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  align-items: center;
+}
+
+.sheet-practice-hint {
+  margin-top: 8px;
+  font-size: 15px;
+}
+
+.sheet-practice-hint summary,
+.sheet-practice-correction summary {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  color: var(--sheet-primary);
+  cursor: pointer;
+}
+
+.sheet-practice-help {
+  margin: 8px 0 0;
+  font-size: 15px;
+  color: var(--sheet-ink-secondary);
+}
+
+.sheet-practice-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  align-items: flex-start;
+  margin-top: 12px;
+}
+
+.sheet-practice-actions details {
+  flex: 1 1 100%;
+}
+
+.sheet-practice-correction ol {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 8px 0 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.sheet-practice-expected {
+  display: block;
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  color: var(--sheet-primary-deep);
+}
+
+.sheet-practice-feedback {
+  margin-top: 12px;
+  padding: 8px 12px;
+  border-radius: var(--sheet-radius-field);
+  background: color-mix(in oklch, var(--sheet-primary) 8%, var(--sheet-card));
+  font-family: var(--sheet-font-title);
+  font-size: 18px;
+}
+
+.sheet-practice-feedback p {
+  margin: 0;
+}
+
+.sheet-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 48px;
+  padding: 0 20px;
+  border: 1.5px solid var(--sheet-primary);
+  border-radius: var(--sheet-radius-box);
+  background: var(--sheet-primary);
+  color: var(--sheet-white);
+  font-family: var(--sheet-font-title);
+  font-weight: 700;
+  font-size: 18px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.sheet-button[data-variant="ghost"] {
+  background: transparent;
+  color: var(--sheet-primary);
+}
+
+.sheet-button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.sheet-button:focus-visible {
+  outline: 2px solid var(--sheet-primary-deep);
+  outline-offset: 2px;
+}
+
+.sheet-verdict {
+  display: inline-flex;
+  gap: 4px;
+  align-items: center;
+  margin: 0;
+  font-family: var(--sheet-font-title);
+  font-size: 16px;
+  line-height: 1.2;
+}
+
+.sheet-verdict[data-verdict="correct"] {
+  color: var(--sheet-success);
+}
+
+.sheet-verdict[data-verdict="wrong"] {
+  color: var(--sheet-error);
+}
+
+.sheet-verdict[data-verdict="blank"] {
+  color: var(--sheet-pending);
+}
+
+turbo-frame[aria-busy="true"] .sheet-practice-questions {
+  opacity: 0.7;
+}

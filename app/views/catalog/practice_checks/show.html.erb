@@ -1,0 +1,22 @@
+<%# 🌐 UI · catalog/practice_checks/show — « Vérifier » sans JavaScript : la même réponse que le frame, en page pleine %>
+<%# Rôle : le cadre du cahier, l'énoncé, le formulaire et son verdict, puis « Retour à la fiche » ; même statut HTTP que la réponse du frame %>
+<%# ADR  : XXXX-entrainement-de-notion-corrige-sans-trace (§4) · UDR : XXXX-je-m-entraine-dans-la-fiche §3.6 %>
+<% scope = "catalog.revision_sheets.practice" %>
+<% title = notion_name.present? ? t("#{scope}.page_title", notion: notion_name) : t("#{scope}.title") %>
+<% page_title title %>
+<% content_for :nav_key, "courses" %>
+<% content_for :head do %><%= stylesheet_link_tag "course_sheet" %><% end %>
+<%= ui_back_link t("#{scope}.back"), href: course_path(course_slug, anchor: "notion-#{notion_slug}") %>
+<%= ui_page_header title: title %>
+
+<div class="sheet-screen" data-sheet-theme="blue" data-seyes="true" data-embedded="true" data-controller="math">
+  <article class="sheet-page">
+    <div class="sheet-page-body">
+      <div class="sheet-card" data-tone="practice">
+        <p class="sheet-card-title" id="<%= title_id %>"><%= t("#{scope}.title") %></p>
+        <% if practice&.statement.present? %><p class="sheet-text"><%= sheet_text(practice.statement) %></p><% end %>
+        <%= render "catalog/practice_checks/result", course_slug:, notion_slug:, practice:, check:, values:, state:, title_id: %>
+      </div>
+    </div>
+  </article>
+</div>
