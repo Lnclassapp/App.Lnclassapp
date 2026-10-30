@@ -1,6 +1,6 @@
 // ⚡ FRONT · communication/carousel_controller — les points du carrousel d'annonces, et le focus après un masquage
-// Rôle : montre les points dès 2 cartes qui débordent de la bande et suit la carte en vue au défilement (passif) ; refocus : titre
-// UDR  : 0071 (§3.5), 0077 (§3.1 : toutes les cartes en vue, pas de points) · sans JavaScript, la bande défile et les points restent cachés
+// Rôle : points dès 2 cartes qui débordent, suivis au défilement (passif) ; previous / next (facultatifs) : une largeur, aria-disabled au bout ; refocus : titre
+// UDR  : 0071 (§3.5), 0077 (§3.1 : toutes les cartes en vue, pas de points), 0143 (previous / next) · sans JavaScript, la bande défile et les points restent cachés
 import { Controller } from "@hotwired/stimulus"
 
 // Classes écrites en entier pour que Tailwind les compile.
@@ -8,7 +8,7 @@ const ACTIVE = ["w-4", "bg-brand-strong"]
 const IDLE = ["w-1.5", "bg-line"]
 
 export default class extends Controller {
-  static targets = ["track", "pager", "dot"]
+  static targets = ["track", "pager", "dot", "previous", "next"]
   static values = { refocus: Boolean }
 
   connect() {
@@ -37,6 +37,21 @@ export default class extends Controller {
     this.pagerTarget.classList.toggle("flex", overflows)
   }
 
+  // aria-disabled plutôt que disabled : le bouton garde le focus quand on atteint le bout au clavier.
+  previous() {
+    this.page(-1)
+  }
+
+  next() {
+    this.page(1)
+  }
+
+  page(direction) {
+    const button = direction < 0 ? this.previousTarget : this.nextTarget
+    if (button.getAttribute("aria-disabled") === "true") return
+    this.trackTarget.scrollBy({ left: direction * this.trackTarget.clientWidth })
+  }
+
   // La carte active est celle dont le bord gauche est le plus près de celui de la bande ; au bout, la dernière.
   update() {
     const track = this.trackTarget
@@ -44,6 +59,8 @@ export default class extends Controller {
     const left = track.getBoundingClientRect().left
     const distances = cards.map((card) => Math.abs(card.getBoundingClientRect().left - left))
     const atEnd = track.scrollLeft + track.clientWidth >= track.scrollWidth - 1
+    if (this.hasPreviousTarget) this.previousTarget.setAttribute("aria-disabled", String(track.scrollLeft <= 1))
+    if (this.hasNextTarget) this.nextTarget.setAttribute("aria-disabled", String(atEnd))
     const active = atEnd ? cards.length - 1 : distances.indexOf(Math.min(...distances))
 
     this.dotTargets.forEach((dot, index) => {
