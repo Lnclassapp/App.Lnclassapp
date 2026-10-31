@@ -8,9 +8,11 @@ require "test_helper"
 module Repositories
   module Catalog
     class ContentTreeWriterCharacterizationTest < ActiveSupport::TestCase
-      LESSONS = %w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools
-                   svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes]
-                .map { Rails.root.join("docs/contenus/lecons-traitees/tle-d/#{it}.json") }.sort_by { File.basename(it) }
+      # La leçon de SVT est passée au format 3 (chantier contenus-tle-svt-cd) : sa version d'avant est gardée en fixture.
+      LESSONS = (%w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools]
+                .map { Rails.root.join("docs/contenus/lecons-traitees/tle-d/#{it}.json") } +
+                 [ Rails.root.join("test/fixtures/files/legacy_lessons/tle-d/svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json") ])
+                .sort_by { File.basename(it) }
       SNAPSHOT = "content_tree_snapshot.json"
       TABLES = %w[courses essentials exercises questions answers action_text_rich_texts].freeze
       # Identifiants, horodatages de création et auteur : ils changent d'une base à l'autre, pas le contenu.

@@ -28,6 +28,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - `valider.rb` refuse « u.a. » dans `unit` (`unit_invalid`) : écrire « ua » ou rien.
 - `duplicate_accepted` compare les variantes acceptées sans accents : « ovocyte » et « ovocyté » sont un doublon.
 - `hint` et `blank` ne sont admis que dans `practice`.
+- Deux tests lisent des leçons v1 de `tle-d/` (`content_tree_writer_characterization_test`, `rich_text_sanitizer_test`) : remplacer une leçon v1 les casse. La version d'avant de « Le devenir des cellules sexuelles » est gardée dans `test/fixtures/files/legacy_lessons/`, et le test du nettoyeur ignore les fichiers au format 3. Les vagues suivantes qui remplacent des v1 de `tle-d/` (maths, physique-chimie) devront faire de même.
 - Une `stat_chart` ne porte qu'une série et des valeurs de 0 à 1 000 000 ; un `diagram` en arbre n'a qu'un parent par nœud (pas d'arbre généalogique).
 
 ## Dette laissée derrière

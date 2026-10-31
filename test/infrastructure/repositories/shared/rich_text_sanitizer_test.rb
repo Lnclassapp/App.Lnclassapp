@@ -32,8 +32,10 @@ module Repositories
       # Rails sur un HTML analysé une seconde fois.
       test "une seule analyse rend exactement ce que rendaient les deux, sur les leçons de Tle D" do
         two_passes = Rails::HTML5::SafeListSanitizer.new
-        contents = Rails.root.glob("docs/contenus/lecons-traitees/tle-d/**/*.json").flat_map do |file|
-          JSON.parse(file.read).fetch("courses").flat_map { |course| [ course["content"], *course["essentials"].pluck("content") ] }
+        # Les leçons au format 3 n'ont plus de texte riche ; la leçon de SVT d'avant est gardée en fixture.
+        files = Rails.root.glob("docs/contenus/lecons-traitees/tle-d/**/*.json") + Rails.root.glob("test/fixtures/files/legacy_lessons/tle-d/**/*.json")
+        contents = files.map { JSON.parse(it.read) }.reject { it["version"] == 3 }.flat_map do |tree|
+          tree.fetch("courses").flat_map { |course| [ course["content"], *course["essentials"].pluck("content") ] }
         end.compact
         contents += [ %(<p>a &amp; b &lt; c &nbsp;é “q” 😀 $\\frac{1}{2}$</p>\n<pre>\ncode\tici</pre>), "<p>non fermé <b>gras", " " ]
 
