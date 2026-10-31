@@ -1,7 +1,7 @@
 require "test_helper"
 
 # CA-12, CA-13 (description) et CA-14 — UDR-0141 §3.1, §3.2 et UDR-0139 §3.2. La fiche de révision d'une leçon v3 dans la page de la
-# leçon : une page de cahier, une section par notion, quatre blocs dans l'ordre, étapes numérotées, coupe des 150 mots toute présente
+# leçon : une page de cahier, une section par notion, quatre blocs dans l'ordre, étapes numérotées, coupe des 50 mots toute présente
 # dans le HTML.
 class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
   REST = "[data-catalog--revision-more-target='rest']".freeze
@@ -91,8 +91,8 @@ class Catalog::RevisionSheetTest < ActionDispatch::IntegrationTest
     assert_includes response.body, "&lt;script&gt;"
   end
 
-  test "CA-12: a long sheet is cut at the end of the block that reaches 150 words, all of it is in the HTML" do
-    add_notion(revision_notion("Longue").merge("remember" => words(160)))
+  test "CA-12: a long sheet is cut at the end of the block that reaches 50 words, all of it is in the HTML" do
+    add_notion(revision_notion("Longue").merge("remember" => words(60)))
     add_notion(revision_notion("Seconde"))
 
     open_course
