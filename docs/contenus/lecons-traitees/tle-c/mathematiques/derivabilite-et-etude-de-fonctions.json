@@ -9,266 +9,6 @@
       "material_name": "Mathématiques",
       "series_name": "C",
       "theme": "teal",
-      "figures": [
-        {
-          "key": "tangente-planche",
-          "kind": "coordinate_plane",
-          "description": "Le bord d'une planche suit la courbe de f(x) = x² − 3x + 1. Cinq points de la courbe sont placés : P(0 ; 1), Q(1 ; −1), A(2 ; −1), R(3 ; 1) et S(4 ; 5). La droite d'équation y = x − 3 est la tangente en A, de coefficient directeur f'(2) = 1.",
-          "params": {
-            "xmin": -1,
-            "xmax": 5,
-            "ymin": -4,
-            "ymax": 6,
-            "points": [
-              {
-                "id": "P",
-                "x": 0,
-                "y": 1
-              },
-              {
-                "id": "Q",
-                "x": 1,
-                "y": -1
-              },
-              {
-                "id": "A",
-                "x": 2,
-                "y": -1
-              },
-              {
-                "id": "R",
-                "x": 3,
-                "y": 1
-              },
-              {
-                "id": "S",
-                "x": 4,
-                "y": 5
-              }
-            ],
-            "lines": [
-              {
-                "a": 1,
-                "b": -3
-              }
-            ]
-          },
-          "controls": []
-        },
-        {
-          "key": "profil-baguette",
-          "kind": "coordinate_plane",
-          "description": "Le profil d'une baguette suit f(x) = x² pour x ≤ 1 puis f(x) = 3x − 2 pour x \\gt  1. Les points O(0 ; 0), A(−1 ; 1), B(1 ; 1), C(2 ; 4) et D(3 ; 7) sont placés. Les deux droites y = 2x − 1 et y = 3x − 2 se coupent en B : ce sont les supports des deux demi-tangentes du point anguleux.",
-          "params": {
-            "xmin": -2,
-            "xmax": 4,
-            "ymin": -2,
-            "ymax": 8,
-            "points": [
-              {
-                "id": "O",
-                "x": 0,
-                "y": 0
-              },
-              {
-                "id": "A",
-                "x": -1,
-                "y": 1
-              },
-              {
-                "id": "B",
-                "x": 1,
-                "y": 1
-              },
-              {
-                "id": "C",
-                "x": 2,
-                "y": 4
-              },
-              {
-                "id": "D",
-                "x": 3,
-                "y": 7
-              }
-            ],
-            "lines": [
-              {
-                "a": 2,
-                "b": -1
-              },
-              {
-                "a": 3,
-                "b": -2
-              }
-            ]
-          },
-          "controls": []
-        },
-        {
-          "key": "reciproque-symetrie",
-          "kind": "coordinate_plane",
-          "description": "Pour f(x) = x² + 2 sur [0 ; +∞[, on place A(0 ; 2), B(1 ; 3), C(2 ; 6) sur la courbe de f et leurs symétriques A'(2 ; 0), B'(3 ; 1), C'(6 ; 2) sur celle de f⁻¹, par rapport à la droite y = x. Les tangentes en C (y = 4x − 2) et en C' (y = x/4 + 1/2) ont des pentes inverses l'une de l'autre.",
-          "params": {
-            "xmin": -1,
-            "xmax": 8,
-            "ymin": -1,
-            "ymax": 8,
-            "points": [
-              {
-                "id": "A",
-                "x": 0,
-                "y": 2
-              },
-              {
-                "id": "B",
-                "x": 1,
-                "y": 3
-              },
-              {
-                "id": "C",
-                "x": 2,
-                "y": 6
-              },
-              {
-                "id": "A'",
-                "x": 2,
-                "y": 0
-              },
-              {
-                "id": "B'",
-                "x": 3,
-                "y": 1
-              },
-              {
-                "id": "C'",
-                "x": 6,
-                "y": 2
-              }
-            ],
-            "lines": [
-              {
-                "a": 1,
-                "b": 0
-              },
-              {
-                "a": 4,
-                "b": -2
-              },
-              {
-                "a": 0.25,
-                "b": 0.5
-              }
-            ]
-          },
-          "controls": []
-        },
-        {
-          "key": "asymptote-centre",
-          "kind": "coordinate_plane",
-          "description": "Pour f(x) = (x² − 3x + 3)/(x − 1), la droite y = x − 2 est l'asymptote oblique et la droite x = 1 l'asymptote verticale. Le point Ω(1 ; −1) est leur intersection. Les points A(2 ; 1) et B(0 ; −3), C(3 ; 1,5) et D(−1 ; −3,5) de la courbe sont deux à deux symétriques par rapport à Ω.",
-          "params": {
-            "xmin": -3,
-            "xmax": 6,
-            "ymin": -6,
-            "ymax": 5,
-            "points": [
-              {
-                "id": "W",
-                "x": 1,
-                "y": -1
-              },
-              {
-                "id": "A",
-                "x": 2,
-                "y": 1
-              },
-              {
-                "id": "B",
-                "x": 0,
-                "y": -3
-              },
-              {
-                "id": "C",
-                "x": 3,
-                "y": 1.5
-              },
-              {
-                "id": "D",
-                "x": -1,
-                "y": -3.5
-              }
-            ],
-            "lines": [
-              {
-                "a": 1,
-                "b": -2
-              }
-            ],
-            "segments": [
-              {
-                "x1": 1,
-                "y1": -6,
-                "x2": 1,
-                "y2": 5
-              }
-            ]
-          },
-          "controls": []
-        },
-        {
-          "key": "motif-broderie",
-          "kind": "coordinate_plane",
-          "description": "Pour f(x) = (x² − 2x + 5)/(x − 1), la droite Δ : y = x − 1 est asymptote oblique et la droite x = 1 asymptote verticale. Les points de la courbe A(−1 ; −4), B(3 ; 4), C(2 ; 5) et D(0 ; −5) sont placés, avec le point Ω(1 ; 0) où se coupent les asymptotes ; C et D sont symétriques par rapport à Ω.",
-          "params": {
-            "xmin": -3,
-            "xmax": 6,
-            "ymin": -7,
-            "ymax": 7,
-            "points": [
-              {
-                "id": "W",
-                "x": 1,
-                "y": 0
-              },
-              {
-                "id": "A",
-                "x": -1,
-                "y": -4
-              },
-              {
-                "id": "B",
-                "x": 3,
-                "y": 4
-              },
-              {
-                "id": "C",
-                "x": 2,
-                "y": 5
-              },
-              {
-                "id": "D",
-                "x": 0,
-                "y": -5
-              }
-            ],
-            "lines": [
-              {
-                "a": 1,
-                "b": -1
-              }
-            ],
-            "segments": [
-              {
-                "x1": 1,
-                "y1": -7,
-                "x2": 1,
-                "y2": 7
-              }
-            ]
-          },
-          "controls": []
-        }
-      ],
       "notions": [
         {
           "name": "Dérivabilité en un point et tangente",
@@ -359,7 +99,7 @@
               {
                 "content": "Soit $f(x)=|x-2|$. Quelles sont les deux affirmations vraies ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Écrire : $f(2)=0$ et le taux vaut $\\dfrac{|h|}{h}$. Étape 2 — Simplifier : pour $h\\gt 0$, $\\dfrac{h}{h}=1$ ; pour $h\\lt 0$, $\\dfrac{-h}{h}=-1$. Étape 3 — Calculer les limites : $f'_d(2)=1$ et $f'_g(2)=-1$. Étape 4 — Conclure : les deux limites sont finies mais différentes, donc $f$ n'est pas dérivable en $2$ : la courbe a un point anguleux avec deux demi-tangentes. $f$ est pourtant continue en $2$, car $|x-2|$ tend vers $0$.",
+                "explanation": "Étape 1 — Écrire : $f(2)=0$ et le taux vaut $\\dfrac{|h|}{h}$. Étape 2 — Simplifier : pour $h\\gt 0$, $\\dfrac{h}{h}=1$ ; pour $h\\lt 0$, $\\dfrac{-h}{h}=-1$. Étape 3 — Calculer les limites : $f'_d(2)=1$ et $f'_g(2)=-1$. Étape 4 — Conclure : les deux limites sont finies mais différentes, donc $f$ n'est pas dérivable en $2$ : la courbe a un point anguleux avec deux demi-tangentes. $f$ est pourtant continue en $2$, car $|x-2|$ tend vers $0$. La proposition « la dérivée à gauche vaut $1$ » se trompe de signe : pour $h\\lt 0$, $|h|=-h$ et le taux vaut $-1$.",
                 "answers": [
                   {
                     "content": "La dérivée à droite en $2$ vaut $1$.",
@@ -458,24 +198,24 @@
                 ]
               },
               {
-                "content": "Soit $h(x)=|x+3|$. Que se passe-t-il en $-3$ ?",
+                "content": "Soit $k(x)=|x+3|$. Que se passe-t-il en $-3$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Écrire : $h(-3)=0$ et le taux vaut $\\dfrac{|h|}{h}$. Étape 2 — Simplifier : il vaut $1$ si $h\\gt 0$ et $-1$ si $h\\lt 0$. Étape 3 — Calculer les limites : $1$ à droite, $-1$ à gauche. Étape 4 — Conclure : deux limites finies différentes, pas de dérivabilité, deux demi-tangentes. Attention : $h$ est bien continue en $-3$.",
+                "explanation": "Étape 1 — Écrire : $k(-3)=0$ et le taux vaut $\\dfrac{|h|}{h}$. Étape 2 — Simplifier : il vaut $1$ si $h\\gt 0$ et $-1$ si $h\\lt 0$. Étape 3 — Calculer les limites : $1$ à droite, $-1$ à gauche. Étape 4 — Conclure : deux limites finies différentes, pas de dérivabilité, deux demi-tangentes. Attention : $k$ est bien continue en $-3$. La proposition « $k'(-3)=1$ » ne retient que la limite à droite ; la proposition « $k'(-3)=0$ » suppose à tort une tangente horizontale (le minimum de $|x+3|$ est un point anguleux).",
                 "answers": [
                   {
-                    "content": "$h$ n'est pas dérivable : demi-tangentes de pentes $-1$ (à gauche) et $1$ (à droite).",
+                    "content": "$k$ n'est pas dérivable : demi-tangentes de pentes $-1$ (à gauche) et $1$ (à droite).",
                     "correct": true
                   },
                   {
-                    "content": "$h$ est dérivable et $h'(-3)=0$.",
+                    "content": "$k$ est dérivable et $k'(-3)=0$.",
                     "correct": false
                   },
                   {
-                    "content": "$h$ est dérivable et $h'(-3)=1$.",
+                    "content": "$k$ est dérivable et $k'(-3)=1$.",
                     "correct": false
                   },
                   {
-                    "content": "$h$ n'est pas continue en $-3$.",
+                    "content": "$k$ n'est pas continue en $-3$.",
                     "correct": false
                   }
                 ]
@@ -485,7 +225,7 @@
         },
         {
           "name": "Dérivée d'une fonction composée",
-          "remember": "Si $u$ est dérivable en $x$ et $v$ dérivable en $u(x)$, alors la fonction composée $v\\circ u : x\\mapsto v(u(x))$ est dérivable en $x$ et $(v\\circ u)'(x)=u'(x)\\times v'(u(x))$. Cas usuels, avec $u$ dérivable : $(u^n)'=n\\,u'\\,u^{n-1}$ pour $n$ entier non nul ; $\\left(\\dfrac{1}{u}\\right)'=-\\dfrac{u'}{u^2}$ là où $u\\neq 0$ ; $(\\sqrt{u})'=\\dfrac{u'}{2\\sqrt{u}}$ là où $u\\gt 0$. La fonction $\\sqrt{u}$ n'est pas dérivable là où $u$ s'annule (demi-tangente verticale).",
+          "remember": "Si $u$ est dérivable en $x$ et $v$ dérivable en $u(x)$, alors la fonction composée $v\\circ u : x\\mapsto v(u(x))$ est dérivable en $x$ et $(v\\circ u)'(x)=u'(x)\\times v'(u(x))$. Cas usuels, avec $u$ dérivable : $(u^n)'=n\\,u'\\,u^{n-1}$ pour $n$ entier non nul (avec $u\\neq 0$ si $n\\lt 0$) ; $\\left(\\dfrac{1}{u}\\right)'=-\\dfrac{u'}{u^2}$ là où $u\\neq 0$ ; $(\\sqrt{u})'=\\dfrac{u'}{2\\sqrt{u}}$ là où $u\\gt 0$. La fonction $\\sqrt{u}$ n'est pas dérivable là où $u$ s'annule (demi-tangente verticale).",
           "method": [
             "Identifier la fonction intérieure $u$ et la fonction extérieure $v$ telles que $f(x)=v(u(x))$.",
             "Calculer la dérivée de la fonction intérieure $u'(x)$ et celle de la fonction extérieure $v'(X)$.",
@@ -762,7 +502,7 @@
               {
                 "content": "Soit $f(x)=x^3+x$ sur $\\mathbb{R}$ (bijective). Que vaut $(f^{-1})'(10)$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $f$ est continue et strictement croissante (car $f'\\gt 0$). Étape 2 — Chercher l'antécédent : $f(2)=8+2=10$, donc $x_0=2$. Étape 3 — Calculer : $f'(2)=3\\times 4+1=13\\neq 0$. Étape 4 — Appliquer : $(f^{-1})'(10)=\\dfrac{1}{13}$. La proposition $\\dfrac{1}{301}$ calcule $f'(10)=301$ : c'est le piège, on doit calculer $f'$ en $x_0=2$, pas en $10$. La proposition $13$ oublie de prendre l'inverse.",
+                "explanation": "Étape 1 — Vérifier : $f$ est continue et strictement croissante (car $f'\\gt 0$). Étape 2 — Chercher l'antécédent : $f(2)=8+2=10$, donc $x_0=2$. Étape 3 — Calculer : $f'(2)=3\\times 4+1=13\\neq 0$. Étape 4 — Appliquer : $(f^{-1})'(10)=\\dfrac{1}{13}$. La proposition $\\dfrac{1}{301}$ calcule $f'(10)=301$ : c'est le piège, on doit calculer $f'$ en $x_0=2$, pas en $10$. La proposition $13$ oublie de prendre l'inverse ; $\\dfrac{1}{12}$ oublie le $+1$ de $3x^2+1$ en calculant $f'(2)$.",
                 "answers": [
                   {
                     "content": "$\\dfrac{1}{13}$",
@@ -783,7 +523,7 @@
                 ]
               },
               {
-                "content": "Soit $f(x)=x^2+2x$ sur $[-1\\,;+\\infty[$ (bijective, car $f'(x)=2x+2\\geq 0$). Calcule $(f^{-1})'(3)$ (écris un nombre décimal).",
+                "content": "Soit $f(x)=x^2+2x$ sur $[-1\\,;+\\infty[$ (bijective : $f'(x)=2x+2\\geq 0$ et $f'$ ne s'annule qu'en $-1$, donc $f$ est strictement croissante). Calcule $(f^{-1})'(3)$ (écris un nombre décimal).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Vérifier : $f$ est continue, strictement croissante sur $[-1\\,;+\\infty[$, avec $J=[-1\\,;+\\infty[$ ; $3\\in J$. Étape 2 — Chercher l'antécédent : $x_0^2+2x_0=3$, soit $(x_0+3)(x_0-1)=0$ ; on garde $x_0=1\\in I$ ($-3$ est hors de $I$). Étape 3 — Calculer : $f'(1)=4\\neq 0$. Étape 4 — Appliquer : $(f^{-1})'(3)=\\dfrac{1}{4}=0{,}25$.",
@@ -812,7 +552,7 @@
               {
                 "content": "Soit $f(x)=x^2+2$ sur $[0\\,;+\\infty[$. Quelle est l'équation de la tangente à la courbe de $f^{-1}$ au point d'abscisse $6$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $f$ est continue et strictement croissante sur $[0\\,;+\\infty[$ ; $6\\in J=[2\\,;+\\infty[$. Étape 2 — Chercher l'antécédent : $x^2+2=6$ donne $x_0=2$. Étape 3 — Calculer : $f'(2)=4\\neq 0$. Étape 4 — Appliquer : $(f^{-1})'(6)=\\dfrac14$, et la tangente est $y=\\dfrac14(x-6)+2=\\dfrac14 x+\\dfrac12$. La proposition $y=4x-2$ est la tangente à la courbe de $f$ au point d'abscisse $2$ ; $\\dfrac14 x+\\dfrac{11}{2}$ échange les coordonnées du point de tangence.",
+                "explanation": "Étape 1 — Vérifier : $f$ est continue et strictement croissante sur $[0\\,;+\\infty[$ ; $6\\in J=[2\\,;+\\infty[$. Étape 2 — Chercher l'antécédent : $x^2+2=6$ donne $x_0=2$. Étape 3 — Calculer : $f'(2)=4\\neq 0$. Étape 4 — Appliquer : $(f^{-1})'(6)=\\dfrac14$, et la tangente est $y=\\dfrac14(x-6)+2=\\dfrac14 x+\\dfrac12$. La proposition $y=4x-2$ est la tangente à la courbe de $f$ au point d'abscisse $2$ ; $\\dfrac14 x+\\dfrac{11}{2}$ échange les coordonnées du point de tangence ; $\\dfrac14 x-\\dfrac32$ oublie d'ajouter $x_0=2$ à $\\dfrac14(x-6)$.",
                 "answers": [
                   {
                     "content": "$y=\\dfrac14 x+\\dfrac12$",
@@ -871,7 +611,7 @@
               {
                 "content": "Pour $g(x)=x^2-1$ sur $[0\\,;+\\infty[$ (bijective sur $J=[-1\\,;+\\infty[$), que peut-on dire de $g^{-1}$ en $y_0=-1$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $g$ est continue et strictement croissante sur $[0\\,;+\\infty[$ ; $-1\\in J$. Étape 2 — Chercher l'antécédent : $x_0^2-1=-1$ donne $x_0=0$. Étape 3 — Calculer : $g'(0)=0$. Étape 4 — Conclure : $g'(x_0)=0$, donc on ne peut pas appliquer la formule : $g^{-1}$ n'est pas dérivable en $-1$ (tangente verticale). Les autres valeurs viennent d'une division par $0$ ignorée.",
+                "explanation": "Étape 1 — Vérifier : $g$ est continue et strictement croissante sur $[0\\,;+\\infty[$ ; $-1\\in J$. Étape 2 — Chercher l'antécédent : $x_0^2-1=-1$ donne $x_0=0$. Étape 3 — Calculer : $g'(0)=0$. Étape 4 — Conclure : $g'(x_0)=0$, donc on ne peut pas appliquer la formule : $g^{-1}$ n'est pas dérivable en $-1$ (tangente verticale). Les autres valeurs viennent d'une division par $0$ ignorée. En $y_0=-1$, qui est la borne de $J=[-1\\,;+\\infty[$, la courbe de $g^{-1}$ a une demi-tangente verticale.",
                 "answers": [
                   {
                     "content": "$g^{-1}$ n'est pas dérivable en $-1$, car $g'(0)=0$.",
@@ -896,7 +636,7 @@
         },
         {
           "name": "Variations et extremums",
-          "remember": "Soit $f$ dérivable sur un intervalle $I$. Si $f'\\geq 0$ sur $I$ (et ne s'annule qu'en des points isolés), $f$ est croissante ; si $f'\\leq 0$, elle est décroissante ; si $f'=0$, elle est constante. Si $f'$ s'annule en $a$ **en changeant de signe**, $f$ a un extremum local en $a$ : un maximum si $f'$ passe de $+$ à $-$, un minimum si elle passe de $-$ à $+$. La courbe a alors une tangente horizontale au point d'abscisse $a$. Sur un intervalle fermé, l'extremum global se trouve en comparant les extremums locaux et les valeurs aux bornes.",
+          "remember": "Soit $f$ dérivable sur un intervalle $I$. Si $f'\\geq 0$ sur $I$, $f$ est croissante, et strictement croissante si de plus $f'$ ne s'annule qu'en des points isolés ; de même avec $f'\\leq 0$ (décroissante) ; si $f'=0$, $f$ est constante. Si $f'$ s'annule en $a$ **en changeant de signe**, $f$ a un extremum local en $a$ : un maximum si $f'$ passe de $+$ à $-$, un minimum si elle passe de $-$ à $+$. La courbe a alors une tangente horizontale au point d'abscisse $a$. Sur un intervalle fermé, l'extremum global se trouve en comparant les extremums locaux et les valeurs aux bornes.",
           "method": [
             "Calculer la dérivée $f'(x)$ sur l'intervalle d'étude, qu'on précise.",
             "Étudier le signe de $f'(x)$ : chercher où $f'(x)=0$, factoriser, puis dresser le tableau de signes.",
@@ -1417,7 +1157,7 @@
             {
               "content": "Une boîte sans couvercle à base carrée de côté $x$ dm a pour volume $32$ dm$^3$. Quelle est sa hauteur $h$ en fonction de $x$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Le volume est (aire de la base) $\\times$ hauteur : $x^2\\times h=32$. Étape 2 — On isole $h$ : $h=\\dfrac{32}{x^2}$. La proposition $\\dfrac{32}{x}$ oublie que la base est un carré ($x^2$, pas $x$).",
+              "explanation": "Étape 1 — Le volume est (aire de la base) $\\times$ hauteur : $x^2\\times h=32$. Étape 2 — On isole $h$ : $h=\\dfrac{32}{x^2}$. La proposition $\\dfrac{32}{x}$ oublie que la base est un carré ($x^2$, pas $x$) ; $\\dfrac{8}{x}$ divise le volume par $4x$, comme si la base avait quatre côtés de longueur $x$.",
               "answers": [
                 {
                   "content": "$h=\\dfrac{32}{x^2}$",
@@ -1612,10 +1352,33 @@
               ]
             },
             {
-              "content": "On admet que $f'(x)=1-\\dfrac{4}{(x-1)^2}$. Calcule le coefficient directeur de la tangente à $\\mathcal{C}$ au point d'abscisse $2$.",
+              "content": "Pour $f(x)=x-1+\\dfrac{4}{x-1}$ sur $\\mathbb{R}\\setminus\\{1\\}$, que vaut $f'(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer la dérivée : la dérivée de $x-1$ est $1$. Pour $\\dfrac{4}{x-1}=4\\times\\dfrac1u$ avec $u=x-1$ et $u'=1$, la formule $\\left(\\dfrac1u\\right)'=-\\dfrac{u'}{u^2}$ donne $-\\dfrac{4}{(x-1)^2}$. Donc $f'(x)=1-\\dfrac{4}{(x-1)^2}=\\dfrac{(x-1)^2-4}{(x-1)^2}=\\dfrac{(x-3)(x+1)}{(x-1)^2}$. La proposition avec $+$ se trompe de signe ; celle avec $x-1$ au dénominateur oublie le carré ; la dernière oublie la dérivée de $x-1$.",
+              "answers": [
+                {
+                  "content": "$1-\\dfrac{4}{(x-1)^2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$1+\\dfrac{4}{(x-1)^2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$1-\\dfrac{4}{x-1}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-\\dfrac{4}{(x-1)^2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On rappelle que $f'(x)=1-\\dfrac{4}{(x-1)^2}$. Calcule le coefficient directeur de la tangente à $\\mathcal{C}$ au point d'abscisse $2$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Le nombre dérivé en $2$ est le coefficient directeur de la tangente. Étape 2 — Calculer : $(2-1)^2=1$, donc $f'(2)=1-\\dfrac{4}{1}=1-4=-3$. La tangente en $A(2\\,;5)$ est $y=-3(x-2)+5=-3x+11$.",
+              "explanation": "Étape 1 — Le nombre dérivé en $2$ est le coefficient directeur de la tangente. Étape 2 — Calculer : $(2-1)^2=1$, donc $f'(2)=1-\\dfrac{4}{1}=1-4=-3$. La tangente au point $C(2\\,;5)$ de la figure est $y=-3(x-2)+5=-3x+11$.",
               "answers": [
                 {
                   "content": "-3",
@@ -1624,7 +1387,7 @@
               ]
             },
             {
-              "content": "On admet que $f'(x)=\\dfrac{(x-3)(x+1)}{(x-1)^2}$. Quels sont les extremums locaux de $f$ ?",
+              "content": "On a $f'(x)=\\dfrac{(x-3)(x+1)}{(x-1)^2}$. Quels sont les extremums locaux de $f$ ?",
               "question_type": "single_choice",
               "explanation": "Étape 1 — Dériver : $f'(x)=\\dfrac{(x-3)(x+1)}{(x-1)^2}$, et le dénominateur est positif. Étape 2 — Étudier le signe : $f'\\gt 0$ sur $]-\\infty\\,;-1[$, $f'\\lt 0$ sur $]-1\\,;1[$ et sur $]1\\,;3[$, $f'\\gt 0$ sur $]3\\,;+\\infty[$. Étape 3 — Tableau : $f$ croît, décroît (de part et d'autre de la valeur interdite $1$), puis croît. Étape 4 — Lire : en $-1$, $f'$ passe de $+$ à $-$ : maximum, $f(-1)=-2-2=-4$ ; en $3$, de $-$ à $+$ : minimum, $f(3)=2+2=4$. Le maximum local $-4$ est plus petit que le minimum local $4$ : c'est normal, car les deux sont séparés par la valeur interdite $1$.",
               "answers": [
@@ -1662,24 +1425,24 @@
               ]
             },
             {
-              "content": "Sur $[3\\,;+\\infty[$, la fonction $f$ est continue et strictement croissante, avec $f(3)=4$. Elle réalise une bijection de $[3\\,;+\\infty[$ sur $[4\\,;+\\infty[$. Que vaut $(f^{-1})'(5)$ ? (On rappelle $f'(x)=1-\\dfrac{4}{(x-1)^2}$.)",
+              "content": "Sur $[3\\,;+\\infty[$, la fonction $f$ est continue et strictement croissante, avec $f(3)=4$. Elle réalise une bijection de $[3\\,;+\\infty[$ sur $[4\\,;+\\infty[$. Que vaut $(f^{-1})'\\left(\\dfrac{13}{3}\\right)$ ? (On rappelle $f'(x)=1-\\dfrac{4}{(x-1)^2}$.)",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Vérifier : $f$ est une bijection de $I=[3\\,;+\\infty[$ sur $J=[4\\,;+\\infty[$, et $5\\in J$. Étape 2 — Chercher l'antécédent : $f(x)=5$ donne, avec $t=x-1$, $t+\\dfrac4t=5$, soit $t^2-5t+4=0$, donc $t=1$ ou $t=4$, soit $x=2$ ou $x=5$. Seul $x_0=5$ est dans $I$. Étape 3 — Calculer : $f'(5)=1-\\dfrac{4}{16}=\\dfrac34\\neq 0$. Étape 4 — Appliquer : $(f^{-1})'(5)=\\dfrac{1}{3/4}=\\dfrac43$. La proposition $\\dfrac34$ oublie de prendre l'inverse.",
+              "explanation": "Étape 1 — Vérifier : $f$ est une bijection de $I=[3\\,;+\\infty[$ sur $J=[4\\,;+\\infty[$, et $\\dfrac{13}{3}\\in J$. Étape 2 — Chercher l'antécédent : $f(x)=\\dfrac{13}{3}$ donne, avec $t=x-1$, $t+\\dfrac4t=\\dfrac{13}{3}$, soit $3t^2-13t+12=0$, donc $t=3$ ou $t=\\dfrac43$, soit $x=4$ ou $x=\\dfrac73$. Seul $x_0=4$ est dans $I$. Étape 3 — Calculer : $f'(4)=1-\\dfrac49=\\dfrac59\\neq 0$. Étape 4 — Appliquer : $(f^{-1})'\\left(\\dfrac{13}{3}\\right)=\\dfrac{1}{5/9}=\\dfrac95$. La proposition $\\dfrac59$ oublie de prendre l'inverse. La proposition $\\dfrac{25}{16}$ est le piège de la fiche : elle calcule $f'\\left(\\dfrac{13}{3}\\right)=\\dfrac{16}{25}$ en $y_0$ au lieu de $x_0=4$, puis inverse. La proposition $\\dfrac{3}{13}$ inverse $y_0$ lui-même, ce qui n'a aucun lien avec la formule.",
               "answers": [
                 {
-                  "content": "$\\dfrac43$",
+                  "content": "$\\dfrac95$",
                   "correct": true
                 },
                 {
-                  "content": "$\\dfrac34$",
+                  "content": "$\\dfrac59$",
                   "correct": false
                 },
                 {
-                  "content": "$4$",
+                  "content": "$\\dfrac{25}{16}$",
                   "correct": false
                 },
                 {
-                  "content": "$\\dfrac15$",
+                  "content": "$\\dfrac{3}{13}$",
                   "correct": false
                 }
               ]
@@ -1710,7 +1473,7 @@
             {
               "content": "Quelle droite est asymptote oblique à $\\mathcal{C}$ en $+\\infty$ et en $-\\infty$, sachant que $f(x)=x-\\dfrac{x}{x^2+1}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Écrire : $f(x)=x-\\dfrac{x}{x^2+1}$, avec $a=1$ et $b=0$. Étape 2 — Calculer la limite : $f(x)-x=-\\dfrac{x}{x^2+1}$. Pour $x$ grand, le dénominateur croît comme $x^2$ : le quotient est équivalent à $-\\dfrac1x$, qui tend vers $0$. Donc $\\Delta : y=x$ est asymptote oblique en $+\\infty$ et en $-\\infty$.",
+              "explanation": "Étape 1 — Écrire : $f(x)=x-\\dfrac{x}{x^2+1}$, avec $a=1$ et $b=0$. Étape 2 — Calculer la limite : $f(x)-x=-\\dfrac{x}{x^2+1}$. On écrit $\\dfrac{x}{x^2+1}=\\dfrac{1/x}{1+1/x^2}$ : le numérateur tend vers $0$ et le dénominateur vers $1$, donc le quotient tend vers $0$. Donc $\\Delta : y=x$ est asymptote oblique en $+\\infty$ et en $-\\infty$.",
               "answers": [
                 {
                   "content": "$y=x$",
@@ -1822,6 +1585,266 @@
               ]
             }
           ]
+        }
+      ],
+      "figures": [
+        {
+          "key": "tangente-planche",
+          "kind": "coordinate_plane",
+          "description": "Le bord d'une planche suit la courbe de f(x) = x² − 3x + 1. Cinq points de la courbe sont placés : P(0 ; 1), Q(1 ; −1), A(2 ; −1), R(3 ; 1) et S(4 ; 5). La droite d'équation y = x − 3 est la tangente en A, de coefficient directeur f'(2) = 1.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": -4,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "P",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "Q",
+                "x": 1,
+                "y": -1
+              },
+              {
+                "id": "A",
+                "x": 2,
+                "y": -1
+              },
+              {
+                "id": "R",
+                "x": 3,
+                "y": 1
+              },
+              {
+                "id": "S",
+                "x": 4,
+                "y": 5
+              }
+            ],
+            "lines": [
+              {
+                "a": 1,
+                "b": -3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "profil-baguette",
+          "kind": "coordinate_plane",
+          "description": "Le profil d'une baguette suit f(x) = x² pour x ≤ 1 puis f(x) = 3x − 2 pour x > 1. Les points O(0 ; 0), A(−1 ; 1), B(1 ; 1), C(2 ; 4) et D(3 ; 7) sont placés. Les deux droites y = 2x − 1 et y = 3x − 2 se coupent en B : ce sont les supports des deux demi-tangentes du point anguleux.",
+          "params": {
+            "xmin": -2,
+            "xmax": 4,
+            "ymin": -2,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": -1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "C",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "D",
+                "x": 3,
+                "y": 7
+              }
+            ],
+            "lines": [
+              {
+                "a": 2,
+                "b": -1
+              },
+              {
+                "a": 3,
+                "b": -2
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "reciproque-symetrie",
+          "kind": "coordinate_plane",
+          "description": "Pour f(x) = x² + 2 sur [0 ; +∞[, on place A(0 ; 2), B(1 ; 3), C(2 ; 6) sur la courbe de f et leurs symétriques A'(2 ; 0), B'(3 ; 1), C'(6 ; 2) sur celle de f⁻¹, par rapport à la droite y = x. Les tangentes en C (y = 4x − 2) et en C' (y = x/4 + 1/2) ont des pentes inverses l'une de l'autre.",
+          "params": {
+            "xmin": -1,
+            "xmax": 8,
+            "ymin": -1,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 2
+              },
+              {
+                "id": "B",
+                "x": 1,
+                "y": 3
+              },
+              {
+                "id": "C",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "A'",
+                "x": 2,
+                "y": 0
+              },
+              {
+                "id": "B'",
+                "x": 3,
+                "y": 1
+              },
+              {
+                "id": "C'",
+                "x": 6,
+                "y": 2
+              }
+            ],
+            "lines": [
+              {
+                "a": 1,
+                "b": 0
+              },
+              {
+                "a": 4,
+                "b": -2
+              },
+              {
+                "a": 0.25,
+                "b": 0.5
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "asymptote-centre",
+          "kind": "coordinate_plane",
+          "description": "Pour f(x) = (x² − 3x + 3)/(x − 1), la droite y = x − 2 est l'asymptote oblique et la droite x = 1 l'asymptote verticale. Le point Ω(1 ; −1) est leur intersection. Les points A(2 ; 1) et B(0 ; −3), C(3 ; 1,5) et D(−1 ; −3,5) de la courbe sont deux à deux symétriques par rapport à Ω.",
+          "params": {
+            "xmin": -3,
+            "xmax": 6,
+            "ymin": -6,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "W",
+                "x": 1,
+                "y": -1
+              },
+              {
+                "id": "A",
+                "x": 2,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 0,
+                "y": -3
+              },
+              {
+                "id": "C",
+                "x": 3,
+                "y": 1.5
+              },
+              {
+                "id": "D",
+                "x": -1,
+                "y": -3.5
+              }
+            ],
+            "lines": [
+              {
+                "a": 1,
+                "b": -2
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": -6,
+                "x2": 1,
+                "y2": 5
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "motif-broderie",
+          "kind": "coordinate_plane",
+          "description": "Pour f(x) = (x² − 2x + 5)/(x − 1), la droite Δ : y = x − 1 est asymptote oblique et la droite x = 1 asymptote verticale. Les points de la courbe A(−1 ; −4), B(3 ; 4), C(2 ; 5) et D(0 ; −5) sont placés, avec le point Ω(1 ; 0) où se coupent les asymptotes ; C et D sont symétriques par rapport à Ω.",
+          "params": {
+            "xmin": -3,
+            "xmax": 6,
+            "ymin": -7,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "W",
+                "x": 1,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": -1,
+                "y": -4
+              },
+              {
+                "id": "B",
+                "x": 3,
+                "y": 4
+              },
+              {
+                "id": "C",
+                "x": 2,
+                "y": 5
+              },
+              {
+                "id": "D",
+                "x": 0,
+                "y": -5
+              }
+            ],
+            "lines": [
+              {
+                "a": 1,
+                "b": -1
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": -7,
+                "x2": 1,
+                "y2": 7
+              }
+            ]
+          },
+          "controls": []
         }
       ]
     }

@@ -270,7 +270,7 @@
         },
         {
           "name": "Utiliser les théorèmes de comparaison et des gendarmes",
-          "remember": "Comparaison : si $f(x)\\ge g(x)$ pour $x$ assez grand et $\\lim g=+\\infty$, alors $\\lim f=+\\infty$ ; si $f(x)\\le g(x)$ et $\\lim g=-\\infty$, alors $\\lim f=-\\infty$. Gendarmes : si $g(x)\\le f(x)\\le h(x)$ au voisinage du point (ou de l'infini) étudié et si $g$ et $h$ ont la même limite $\\ell$, alors $\\lim f=\\ell$. Encadrements connus : $-1\\le\\sin x\\le1$ et $-1\\le\\cos x\\le1$ pour tout réel $x$. Ces deux fonctions n'ont pas de limite en $+\\infty$ : elles oscillent.",
+          "remember": "Comparaison : au voisinage de $a$ ou de $\\pm\\infty$ (par exemple pour $x$ assez grand ou assez négatif), si $f(x)\\ge g(x)$ et $\\lim g=+\\infty$, alors $\\lim f=+\\infty$ ; si $f(x)\\le g(x)$ et $\\lim g=-\\infty$, alors $\\lim f=-\\infty$. Gendarmes : si $g(x)\\le f(x)\\le h(x)$ au voisinage du point (ou de l'infini) étudié et si $g$ et $h$ ont la même limite $\\ell$, alors $\\lim f=\\ell$. Encadrements connus : $-1\\le\\sin x\\le1$ et $-1\\le\\cos x\\le1$ pour tout réel $x$. Ces deux fonctions n'ont pas de limite en $+\\infty$ : elles oscillent.",
           "method": [
             "Repérer le terme sans limite ($\\sin x$, $\\cos x$) et écrire son encadrement connu.",
             "Encadrer $f(x)$ : en déduire un encadrement de l'expression entière en additionnant ou en multipliant, sans oublier d'inverser le sens des inégalités si l'on multiplie par un nombre négatif.",
@@ -420,7 +420,7 @@
             ]
           },
           "practice": {
-            "statement": "On étudie des écarts de recette d'un taxi, modélisés par des expressions avec $\\sin x$ ou $\\cos x$, quand $x$ devient très grand.",
+            "statement": "On étudie la limite en $+\\infty$ d'expressions qui contiennent $\\sin x$ ou $\\cos x$.",
             "questions": [
               {
                 "content": "Quelle est la limite de $4x-2\\cos x$ quand $x\\to+\\infty$ ?",
@@ -447,13 +447,13 @@
                 "hint": "Multiplier $-1\\le\\cos x\\le1$ par $-2$ inverse les inégalités."
               },
               {
-                "content": "Pour $x>0$ : $4-\\dfrac1x\\le\\dfrac{4x+\\sin x}{x}\\le4+\\dfrac1x$. Quand $x\\to+\\infty$, les deux bornes tendent vers ___ . D'après le théorème des gendarmes, $\\lim_{x\\to+\\infty}\\dfrac{4x+\\sin x}{x}=$ ___ .",
+                "content": "Pour $x>0$ : $-\\dfrac1x\\le\\dfrac{\\sin x}{x}\\le\\dfrac1x$. Quand $x\\to+\\infty$, les deux bornes tendent vers ___ . On en déduit que $\\lim_{x\\to+\\infty}\\dfrac{4x+\\sin x}{x}=4+\\lim_{x\\to+\\infty}\\dfrac{\\sin x}{x}=$ ___ .",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : on part de $-1\\le\\sin x\\le1$. Étape 2 — Encadrer : l'encadrement est donné dans l'énoncé. Étape 3 — Calculer : $\\lim_{x\\to+\\infty}\\left(4-\\frac1x\\right)=4$ et $\\lim_{x\\to+\\infty}\\left(4+\\frac1x\\right)=4$ : première case $4$. Étape 4 — Conclure : les bornes ont la même limite, donc le théorème des gendarmes donne la limite $4$ : seconde case $4$.",
+                "explanation": "Étape 1 — Repérer : on part de $-1\\le\\sin x\\le1$. Étape 2 — Encadrer : l'encadrement de $\\frac{\\sin x}{x}$ pour $x>0$ est donné dans l'énoncé. Étape 3 — Calculer : $\\lim_{x\\to+\\infty}\\left(-\\frac1x\\right)=0$ et $\\lim_{x\\to+\\infty}\\frac1x=0$ : première case $0$. Étape 4 — Conclure : d'après le théorème des gendarmes, $\\lim\\frac{\\sin x}{x}=0$, donc $\\lim\\frac{4x+\\sin x}{x}=4+0=4$ : seconde case $4$.",
                 "answers": [
                   {
-                    "content": "4",
+                    "content": "0",
                     "correct": true,
                     "blank": 0
                   },
@@ -492,7 +492,7 @@
             "Conclure : écrire l'équation de chaque asymptote et, si on le demande, la position de la courbe (signe de $f(x)-y_{\\text{asymptote}}$)."
           ],
           "example": {
-            "statement": "Le prix moyen d'un trajet est modélisé par $f(x)=\\dfrac{2x+1}{x-1}$. Déterminer les asymptotes de sa courbe et la position par rapport à l'asymptote horizontale.",
+            "statement": "Soit $f(x)=\\dfrac{2x+1}{x-1}$. Déterminer les asymptotes de sa courbe et la position par rapport à l'asymptote horizontale.",
             "steps": [
               "Chercher : $f$ est définie sur $\\mathbb R\\setminus\\{1\\}$ ; on étudie les limites en $-\\infty$, en $+\\infty$ et en $1$ (à gauche et à droite).",
               "Calculer : en $\\pm\\infty$, $f(x)$ a la limite de $\\frac{2x}{x}=2$. En $1^+$, le numérateur tend vers $3$ et $x-1\\to0^+$, donc $f\\to+\\infty$ ; en $1^-$, $x-1\\to0^-$, donc $f\\to-\\infty$.",
@@ -630,7 +630,7 @@
             ]
           },
           "practice": {
-            "statement": "Le prix moyen d'une course de taxi (en centaines de FCFA) est modélisé par $f(x)=\\dfrac{4x-3}{x-2}$ pour $x\\neq2$.",
+            "statement": "On considère la fonction $f(x)=\\dfrac{4x-3}{x-2}$ pour $x\\neq2$.",
             "questions": [
               {
                 "content": "La courbe de $f$ admet une asymptote horizontale d'équation $y=$ ___ et une asymptote verticale d'équation $x=$ ___ .",
@@ -806,7 +806,7 @@
               {
                 "content": "Quelles sont les deux fonctions continues sur $\\mathbb R$ tout entier ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Calculer : on regarde le domaine de définition de chacune. Étape 2 — Limites : un polynôme et la fonction sinus sont définis et continus en tout réel. Étape 3 — Comparer : $\\frac1x$ n'est pas définie en $0$ et $\\sqrt x$ n'est pas définie pour $x<0$. Étape 4 — Conclure : les deux fonctions continues sur $\\mathbb R$ sont $x^3-2x+1$ et $\\sin x$.",
+                "explanation": "Ici il n'y a pas de point de raccord, donc les étapes de la méthode (Étape 1 : calculer $f(a)$ ; Étape 2 : limites à gauche et à droite) ne servent pas : on utilise les fonctions usuelles. Un polynôme et la fonction sinus sont définis et continus en tout réel, donc continus sur $\\mathbb R$. La fonction $\\frac1x$ n'est pas définie en $0$ et $\\sqrt x$ n'est pas définie pour $x<0$ : elles ne sont pas continues sur $\\mathbb R$ tout entier. Les deux fonctions demandées sont $x^3-2x+1$ et $\\sin x$.",
                 "answers": [
                   {
                     "content": "$x\\mapsto x^3-2x+1$",
@@ -943,7 +943,7 @@
                 "content": "Soit $g(x)=x^3+x-3$. Calcule $g(1{,}3)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $g$ est un polynôme, donc on peut calculer directement ses valeurs. Étape 2 — Étudier : on calcule les puissances à la main, $1{,}3^2=1{,}69$ puis $1{,}3^3=2{,}197$. Étape 3 — Calculer : $g(1{,}3)=2{,}197+1{,}3-3=0{,}497$. Étape 4 — Conclure : $g(1{,}3)=0{,}497$, ce nombre est positif ; il servira à encadrer la solution de $g(x)=0$.",
+                "explanation": "Les étapes 1 à 4 (continuité, variations, bornes, solution unique) sont acquises ici : on ne demande qu'une valeur, utile pour l'Étape 5 — Encadrer. Calculer : $1{,}3^2=1{,}69$ puis $1{,}3^3=2{,}197$, donc $g(1{,}3)=2{,}197+1{,}3-3=0{,}497$. Ce nombre est positif : il sert à encadrer la solution de $g(x)=0$ avec un changement de signe.",
                 "answers": [
                   {
                     "content": "0,497",
@@ -1085,7 +1085,7 @@
                 "content": "Soit $f(x)=x^3+4x-6$. Calcule $f(1{,}2)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $f$ est un polynôme, donc on calcule directement ses valeurs. Étape 2 — Étudier : $1{,}2^2=1{,}44$ puis $1{,}2^3=1{,}728$. Étape 3 — Calculer : $f(1{,}2)=1{,}728+4{,}8-6=0{,}528$. Étape 4 — Conclure : $f(1{,}2)>0$ et $f(1)=-1<0$, donc la solution $\\alpha$ de $f(x)=0$ vérifie $1<\\alpha<1{,}2$ (Étape 5 — Encadrer).",
+                "explanation": "Les étapes 1 à 4 (continuité, variations, bornes, solution unique) sont acquises ici : on ne demande qu'une valeur pour l'Étape 5 — Encadrer. Calculer : $1{,}2^2=1{,}44$ puis $1{,}2^3=1{,}728$, donc $f(1{,}2)=1{,}728+4{,}8-6=0{,}528$. Comme $f(1)=-1<0$ et $f(1{,}2)>0$, la solution $\\alpha$ de $f(x)=0$ vérifie $1<\\alpha<1{,}2$.",
                 "answers": [
                   {
                     "content": "0,528",
@@ -1176,16 +1176,24 @@
               ]
             },
             {
-              "content": "Quelle que soit la production $x>0$, le coût moyen $C_m(x)$ reste strictement supérieur à $3$.",
-              "question_type": "true_false",
-              "explanation": "Étape 1 — Chercher : on compare $C_m(x)$ à la limite $3$. Étape 2 — Calculer : $C_m(x)-3=\\frac{20x+25}{x^2+25}$, positif pour $x>0$. Étape 3 — Interpréter : $C_m(x)>3$ pour tout $x>0$. Étape 4 — Conclure : l'affirmation est vraie. Le coût moyen se rapproche de 3 mais ne descend jamais jusqu'à 3.",
+              "content": "Une variation saisonnière s'ajoute au coût moyen : $E(x)=C_m(x)+\\dfrac{\\cos x}{x}$ pour $x>0$, avec $C_m(x)\\to3$ quand $x\\to+\\infty$. Quelle est la limite de $E(x)$ en $+\\infty$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $\\cos x$ n'a pas de limite, mais $-1\\le\\cos x\\le1$. Étape 2 — Encadrer : pour $x>0$, on divise par $x$ : $-\\frac1x\\le\\frac{\\cos x}{x}\\le\\frac1x$. Étape 3 — Calculer : les deux bornes tendent vers $0$, donc, d'après le théorème des gendarmes, $\\lim_{x\\to+\\infty}\\frac{\\cos x}{x}=0$. Étape 4 — Conclure : $\\lim E(x)=3+0=3$ (somme de deux limites). La proposition $4$ remplace $\\cos x$ par sa borne $1$ ; la proposition « n'existe pas » oublie la division par $x$.",
               "answers": [
                 {
-                  "content": "Vrai",
+                  "content": "$3+1=4$",
+                  "correct": false
+                },
+                {
+                  "content": "La limite n'existe pas, car $\\cos x$ oscille",
+                  "correct": false
+                },
+                {
+                  "content": "$3$",
                   "correct": true
                 },
                 {
-                  "content": "Faux",
+                  "content": "$+\\infty$",
                   "correct": false
                 }
               ]
@@ -1365,10 +1373,10 @@
               ]
             },
             {
-              "content": "Avec $a=1$, le client veut aller le plus loin possible avec $12$ centaines de FCFA, donc résoudre $f(d)=12$. Quelle distance en kilomètres obtient-il ?",
+              "content": "Avec $a=1$, $f$ est continue et strictement croissante sur $[0\\,;+\\infty[$ et $12\\in[1\\,;+\\infty[$, donc $f(d)=12$ a une solution unique. Le client a $12$ centaines de FCFA : quelle distance en kilomètres obtient-il ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Vérifier : la solution est unique (question précédente). Étape 2 — Étudier : comme $f(4)=9<12$, la solution est dans $]4\\,;+\\infty[$, où $f(d)=d+5$. Étape 3 — Calculer : $d+5=12$ donne $d=7$. Étape 4 — Conclure : le client peut faire $7$ km ; contrôle : $f(7)=7+5=12$.",
+              "explanation": "Étape 1 — Vérifier : $f$ est continue et strictement croissante sur $[0\\,;+\\infty[$ avec $12\\in[1\\,;+\\infty[$, donc la solution est unique. Étape 2 — Étudier : comme $f(4)=9<12$, la solution est dans $]4\\,;+\\infty[$, où $f(d)=d+5$. Étape 3 — Calculer : $d+5=12$ donne $d=7$. Étape 4 — Conclure : le client peut faire $7$ km ; contrôle : $f(7)=7+5=12$.",
               "answers": [
                 {
                   "content": "7",
@@ -1414,7 +1422,7 @@
               "explanation": "Étape 1 — Chercher : on étudie $K(v)-\\frac v{10}$ en $+\\infty$. Étape 2 — Calculer : $K(v)-\\frac v{10}=\\frac{490}v\\to0$. Étape 3 — Interpréter : la limite de $K(v)-(av+b)$ est $0$ avec $a=\\frac1{10}\\neq0$ et $b=0$ : asymptote oblique. Étape 4 — Conclure : la droite $y=\\frac v{10}$. La dernière proposition est fausse : une limite infinie n'empêche pas l'existence d'une asymptote oblique. La droite $y=490$ n'est qu'une valeur du numérateur.",
               "answers": [
                 {
-                  "content": "$y=\\dfrac{v}{10}$ (en traçant $K$ en fonction de $v$, la droite d'équation $y=\\frac{v}{10}$)",
+                  "content": "$y=\\dfrac{v}{10}$",
                   "correct": true
                 },
                 {
@@ -1441,8 +1449,7 @@
                   "content": "14",
                   "correct": true
                 }
-              ],
-              "unit": "milliers"
+              ]
             },
             {
               "content": "Le coût minimal est $K(70)=14$. Combien de vitesses $v>0$ donnent un coût égal à $14{,}9$ milliers de FCFA ?",

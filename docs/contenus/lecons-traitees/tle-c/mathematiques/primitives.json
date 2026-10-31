@@ -366,7 +366,7 @@
               {
                 "content": "Relie chaque fonction à une de ses primitives.",
                 "question_type": "matching",
-                "explanation": "Étape 1 — Identifier chaque forme usuelle. Étape 2 — Écrire sa primitive : $x^2 \\to \\frac{x^3}{3}$, $\\cos x \\to \\sin x$, $\\frac{1}{\\sqrt{x}} \\to 2\\sqrt{x}$, $\\sin x \\to -\\cos x$. Étape 3 — Il n'y a pas de coefficient à appliquer. Étape 4 — Vérifier en dérivant chaque primitive.",
+                "explanation": "Étape 1 — Identifier chaque forme usuelle. Étape 2 — Écrire sa primitive : $x^2 \\to \\frac{x^3}{3}$, $\\cos x \\to \\sin x$, $\\frac{1}{\\sqrt{x}} \\to 2\\sqrt{x}$, $\\sin x \\to -\\cos x$. Étape 3 — Il n'y a pas de coefficient à appliquer. Étape 4 — Vérifier en dérivant chaque primitive. Les pièges : relier $x^2$ à $x^3$ oublie de diviser par 3, et relier $\\sin x$ à $\\cos x$ oublie le signe moins.",
                 "answers": [
                   {
                     "content": "$x^2$",
@@ -777,7 +777,7 @@
                 "content": "Soit $F$ la primitive de $f(x) = 4x - 3$ sur $\\mathbb{R}$ telle que $F(2) = 7$. On écrit $F(x) = 2x^2 - 3x + c$. Quelle est la valeur de $c$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Déterminer : $G(x) = 2x^2 - 3x$ est une primitive de $f$. Étape 2 — Écrire la condition : $G(2) + c = 7$, soit $(8 - 6) + c = 7$. Étape 3 — Résoudre : $2 + c = 7$, donc $c = 5$. Étape 4 — Écrire : $F(x) = 2x^2 - 3x + 5$ ; vérification : $F(2) = 8 - 6 + 5 = 7$.",
+                "explanation": "Étape 1 — Déterminer : $G(x) = 2x^2 - 3x$ est une primitive de $f$. Étape 2 — Écrire la condition : $G(2) + c = 7$, soit $(8 - 6) + c = 7$. Étape 3 — Résoudre : $2 + c = 7$, donc $c = 5$. Étape 4 — Écrire : $F(x) = 2x^2 - 3x + 5$ ; vérification : $F(2) = 8 - 6 + 5 = 7$. L'erreur tentante est de prendre $c = 7$ en oubliant de retrancher $G(2) = 2$.",
                 "answers": [
                   {
                     "content": "5",
@@ -821,7 +821,7 @@
                 ]
               },
               {
-                "content": "Le coût marginal d'un vendeur de pagnes est $C_m(q) = 6q + 4$ (en milliers de F CFA par centaine de pagnes). Les frais fixes sont $C(0) = 20$ milliers de F CFA. Quel est le coût total $C(2)$ pour 2 centaines de pagnes ?",
+                "content": "Le coût marginal d'un vendeur de pagnes est $C_m(q) = 6q + 4$ (en milliers de F CFA par centaine de pagnes). Les frais fixes sont $C(0) = 20$ milliers de F CFA. Quel est le coût total $C(2)$ pour 2 centaines de pagnes, en milliers de F CFA ?",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Déterminer : $G(q) = 3q^2 + 4q$, donc $C(q) = 3q^2 + 4q + c$. Étape 2 — Écrire la condition : $C(0) = 20$ donne $0 + c = 20$. Étape 3 — Résoudre : $c = 20$. Étape 4 — Écrire : $C(q) = 3q^2 + 4q + 20$, puis $C(2) = 12 + 8 + 20 = 40$ milliers de F CFA. Le piège serait d'oublier les frais fixes et de répondre 20.",
@@ -830,8 +830,7 @@
                     "content": "40",
                     "correct": true
                   }
-                ],
-                "unit": "kF"
+                ]
               },
               {
                 "content": "Pour trouver la primitive $F$ de $f(x) = 2x$ telle que $F(1) = 5$, on résout l'équation $f(1) = 5$.",
@@ -852,7 +851,7 @@
                 "content": "Un car roule avec la vitesse $v(t) = 6t + 30$ (en km/h) à l'instant $t$ (en heures). Au départ, il est au kilomètre $d(0) = 20$. Quelle est sa position $d(2)$ au bout de 2 heures ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Déterminer : la position $d$ est une primitive de la vitesse $v$ ; $G(t) = 3t^2 + 30t$, donc $d(t) = 3t^2 + 30t + c$. Étape 2 — Écrire la condition : $d(0) = 20$ donne $c = 20$. Étape 3 — Résoudre : $c = 20$. Étape 4 — Écrire : $d(t) = 3t^2 + 30t + 20$, puis $d(2) = 12 + 60 + 20 = 92$ km.",
+                "explanation": "Étape 1 — Déterminer : la position $d$ est une primitive de la vitesse $v$ ; $G(t) = 3t^2 + 30t$, donc $d(t) = 3t^2 + 30t + c$. Étape 2 — Écrire la condition : $d(0) = 20$ donne $c = 20$. Étape 3 — Résoudre : $c = 20$. Étape 4 — Écrire : $d(t) = 3t^2 + 30t + 20$, puis $d(2) = 12 + 60 + 20 = 92$ km. Oublier la constante donnerait $12 + 60 = 72$ km.",
                 "answers": [
                   {
                     "content": "92",
@@ -917,7 +916,7 @@
                 "content": "Un tricycle roule avec la vitesse $v(t) = 4t + 10$ (en km/h) à l'instant $t$ (en heures). Au départ, il est au kilomètre $d(0) = 5$. Quelle est sa position $d(3)$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Déterminer : $d$ est une primitive de $v$ ; $G(t) = 2t^2 + 10t$, donc $d(t) = 2t^2 + 10t + c$. Étape 2 — Écrire la condition : $d(0) = 5$ donne $c = 5$. Étape 3 — Résoudre : $c = 5$. Étape 4 — Écrire : $d(t) = 2t^2 + 10t + 5$, puis $d(3) = 18 + 30 + 5 = 53$ km.",
+                "explanation": "Étape 1 — Déterminer : $d$ est une primitive de $v$ ; $G(t) = 2t^2 + 10t$, donc $d(t) = 2t^2 + 10t + c$. Étape 2 — Écrire la condition : $d(0) = 5$ donne $c = 5$. Étape 3 — Résoudre : $c = 5$. Étape 4 — Écrire : $d(t) = 2t^2 + 10t + 5$, puis $d(3) = 18 + 30 + 5 = 53$ km. Oublier la constante donnerait $48$ km.",
                 "answers": [
                   {
                     "content": "53",
@@ -977,14 +976,13 @@
               "content": "Un vendeur a pour coût total $C(q) = 2q^3 - 2q^2 + 3q + 12$ (en milliers de F CFA, pour $q$ centaines de régimes). Quel est le coût pour 2 centaines de régimes ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Déterminer : la primitive du coût marginal est $2q^3 - 2q^2 + 3q + c$, avec $c = 12$. Étape 2 — Écrire la condition : déjà utilisée pour $c$. Étape 3 — Résoudre : on calcule $C(2) = 2 \\times 8 - 2 \\times 4 + 3 \\times 2 + 12$. Étape 4 — Écrire : $C(2) = 16 - 8 + 6 + 12 = 26$ milliers de F CFA. Oublier les frais fixes donnerait 14.",
+              "explanation": "Étape 1 — Écrire : on remplace $q$ par 2 dans $C(q)$. Étape 2 — Calculer les puissances et les produits : $2q^3 = 2 \\times 8 = 16$, $2q^2 = 2 \\times 4 = 8$, $3q = 6$. Étape 3 — Additionner avec les frais fixes : $16 - 8 + 6 + 12$. Étape 4 — Conclure : $C(2) = 26$ milliers de F CFA. Oublier les frais fixes donnerait 14.",
               "answers": [
                 {
                   "content": "26",
                   "correct": true
                 }
-              ],
-              "unit": "kF"
+              ]
             },
             {
               "content": "Le coût total du vendeur est $C(q) = 2q^3 - 2q^2 + 3q$, car c'est une primitive de $C_m(q) = 6q^2 - 4q + 3$.",
@@ -1005,19 +1003,18 @@
               "content": "Un vendeur a pour coût total $C(q) = 2q^3 - 2q^2 + 3q + 12$ et il vend chaque centaine de régimes 30 milliers de F CFA, donc sa recette est $R(q) = 30q$. Quel est son bénéfice $B(2) = R(2) - C(2)$ en milliers de F CFA ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Déterminer : $C(2) = 16 - 8 + 6 + 12 = 26$. Étape 2 — Écrire : $R(2) = 30 \\times 2 = 60$. Étape 3 — Résoudre : $B(2) = 60 - 26$. Étape 4 — Écrire : $B(2) = 34$ milliers de F CFA.",
+              "explanation": "Étape 1 — Déterminer : $C(2) = 16 - 8 + 6 + 12 = 26$. Étape 2 — Écrire : $R(2) = 30 \\times 2 = 60$. Étape 3 — Résoudre : $B(2) = 60 - 26$. Étape 4 — Écrire : $B(2) = 34$ milliers de F CFA. Si on oublie les frais fixes, on trouve $C(2) = 14$ et $B(2) = 46$ : c'est faux.",
               "answers": [
                 {
                   "content": "34",
                   "correct": true
                 }
-              ],
-              "unit": "kF"
+              ]
             },
             {
               "content": "Le coût total $C$ d'un vendeur vérifie $C'(q) = C_m(q) = 6q^2 - 4q + 3$ et $C(0) = 12$. Quelles affirmations sont vraies ?",
               "question_type": "multiple_correct_2",
-              "explanation": "Étape 1 — Identifier : $C$ est une primitive de $C_m$, donc $C' = C_m$. Étape 2 — Écrire la condition : $C(0) = 12$ est la donnée sur les frais fixes. Étape 3 — Comparer : $C_m(0) = 3$, donc $C'(0) = 3$ et non $12$ ; et $C_m(q) + 12$ est une dérivée augmentée de 12, pas un coût total. Étape 4 — Conclure : les deux premières affirmations sont vraies.",
+              "explanation": "Étape 1 — Identifier : $C$ est une primitive de $C_m$, donc $C' = C_m$. Étape 2 — Écrire la condition : $C(0) = 12$ est la donnée sur les frais fixes. Étape 3 — Comparer : $C_m(0) = 3$, donc $C'(0) = 3$ et non $12$ ; et $C_m(q) + 12$ est une dérivée augmentée de 12, pas un coût total. Étape 4 — Conclure : les affirmations vraies sont $C(0) = 12$ et $C'(q) = C_m(q)$ pour tout $q \\geq 0$.",
               "answers": [
                 {
                   "content": "$C(0) = 12$",
@@ -1160,14 +1157,14 @@
             {
               "content": "Une coopérative a pour recette marginale $R_m(x) = \\dfrac{2x}{\\sqrt{x^2 + 16}}$ pour $x \\geq 0$. Quelle forme reconnaît-on ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Repérer : une racine carrée au dénominateur, donc la forme $\\frac{u'}{\\sqrt{u}}$. Étape 2 — Identifier : $u(x) = x^2 + 16$, positif sur $[0\\,;+\\infty[$, et $u'(x) = 2x$, exactement le numérateur. Étape 3 — Ajuster : aucun coefficient à ajouter. Les formes $u'u^n$ et $\\frac{u'}{u^2}$ n'ont pas de racine au dénominateur.",
+              "explanation": "Étape 1 — Repérer : une racine carrée au dénominateur, donc la forme $\\frac{u'}{\\sqrt{u}}$. Étape 2 — Identifier : $u(x) = x^2 + 16$, positif sur $[0\\,;+\\infty[$, et $u'(x) = 2x$, exactement le numérateur. Étape 3 — Ajuster : aucun coefficient à ajouter. Les formes $u'u^n$ et $\\frac{u'}{u^2}$ n'ont pas de racine au dénominateur ; et $u(x) = 2x$ ne convient pas, car la racine porte sur $x^2 + 16$.",
               "answers": [
                 {
                   "content": "$\\dfrac{u'}{u^2}$ avec $u(x) = x^2 + 16$",
                   "correct": false
                 },
                 {
-                  "content": "$\\cos(ax + b)$ avec $a = 2$",
+                  "content": "$\\dfrac{u'}{\\sqrt{u}}$ avec $u(x) = 2x$",
                   "correct": false
                 },
                 {
@@ -1219,7 +1216,7 @@
               "content": "La recette de la coopérative est $R(x) = 2\\sqrt{x^2 + 16} - 8$ (en centaines de milliers de F CFA, $x$ en tonnes). Que vaut $R(3)$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire : on remplace $x$ par 3. Étape 2 — Calculer sous la racine : $3^2 + 16 = 25$. Étape 3 — Calculer la racine : $\\sqrt{25} = 5$. Étape 4 — Conclure : $R(3) = 2 \\times 5 - 8 = 2$ centaines de milliers de F CFA.",
+              "explanation": "Étape 1 — Écrire : on remplace $x$ par 3. Étape 2 — Calculer sous la racine : $3^2 + 16 = 25$. Étape 3 — Calculer la racine : $\\sqrt{25} = 5$. Étape 4 — Conclure : $R(3) = 2 \\times 5 - 8 = 2$ centaines de milliers de F CFA. Si on oublie la constante $-8$, on trouve $10$ : c'est l'erreur à éviter.",
               "answers": [
                 {
                   "content": "2",
@@ -1280,7 +1277,7 @@
             {
               "content": "Quelle expression est une primitive de $\\dfrac{4x}{(x^2 + 1)^2}$ sur $[0\\,;6]$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Repérer : la forme $\\frac{u'}{u^2}$. Étape 2 — Identifier : $u(x) = x^2 + 1$, qui ne s'annule pas, et $u'(x) = 2x$. Étape 3 — Ajuster : $\\frac{4x}{(x^2 + 1)^2} = 2 \\times \\frac{2x}{(x^2 + 1)^2} = 2\\,\\frac{u'}{u^2}$. Étape 4 — Écrire : $2 \\times \\left(-\\frac{1}{u}\\right) = -\\frac{2}{x^2 + 1}$ ; vérification : $\\left(-\\frac{2}{x^2 + 1}\\right)' = \\frac{2 \\times 2x}{(x^2 + 1)^2}$. La proposition $-\\frac{4}{x^2 + 1}$ ne tient pas compte de $u' = 2x$.",
+              "explanation": "Étape 1 — Repérer : la forme $\\frac{u'}{u^2}$. Étape 2 — Identifier : $u(x) = x^2 + 1$, qui ne s'annule pas, et $u'(x) = 2x$. Étape 3 — Ajuster : $\\frac{4x}{(x^2 + 1)^2} = 2 \\times \\frac{2x}{(x^2 + 1)^2} = 2\\,\\frac{u'}{u^2}$. Étape 4 — Écrire : $2 \\times \\left(-\\frac{1}{u}\\right) = -\\frac{2}{x^2 + 1}$ ; vérification : $\\left(-\\frac{2}{x^2 + 1}\\right)' = \\frac{2 \\times 2x}{(x^2 + 1)^2}$. La proposition $-\\frac{4}{x^2 + 1}$ oublie l'ajustement du coefficient : sa dérivée est $\\frac{8x}{(x^2 + 1)^2}$, le double de la fonction.",
               "answers": [
                 {
                   "content": "$-\\dfrac{4}{x^2 + 1}$",
@@ -1330,14 +1327,13 @@
               "content": "Le coût total est $C(x) = x^3 - \\dfrac{2}{x^2 + 1} + 7$ (en milliers de F CFA). Que vaut $C(1)$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire : on remplace $x$ par 1. Étape 2 — Calculer : $1^3 = 1$ et $\\frac{2}{1^2 + 1} = 1$. Étape 3 — Additionner : $1 - 1 + 7$. Étape 4 — Conclure : $C(1) = 7$ milliers de F CFA.",
+              "explanation": "Étape 1 — Écrire : on remplace $x$ par 1. Étape 2 — Calculer : $1^3 = 1$ et $\\frac{2}{1^2 + 1} = 1$. Étape 3 — Additionner : $1 - 1 + 7$. Étape 4 — Conclure : $C(1) = 7$ milliers de F CFA. Oublier la constante $7$ donnerait $0$.",
               "answers": [
                 {
                   "content": "7",
                   "correct": true
                 }
-              ],
-              "unit": "kF"
+              ]
             },
             {
               "content": "Le coût total $C$ est croissant sur $[0\\,;6]$, car son coût marginal $C_m(x) = 3x^2 + \\dfrac{4x}{(x^2 + 1)^2}$ est positif ou nul sur $[0\\,;6]$.",
@@ -1358,20 +1354,19 @@
               "content": "Avec le coût $C(x) = x^3 - \\dfrac{2}{x^2 + 1} + 7$ et la recette $R(x) = 9x$, quel est le bénéfice $B(1) = R(1) - C(1)$ en milliers de F CFA ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire : $R(1) = 9 \\times 1 = 9$. Étape 2 — Calculer : $C(1) = 1 - 1 + 7 = 7$. Étape 3 — Soustraire : $B(1) = 9 - 7$. Étape 4 — Conclure : $B(1) = 2$ milliers de F CFA.",
+              "explanation": "Étape 1 — Écrire : $R(1) = 9 \\times 1 = 9$. Étape 2 — Calculer : $C(1) = 1 - 1 + 7 = 7$. Étape 3 — Soustraire : $B(1) = 9 - 7$. Étape 4 — Conclure : $B(1) = 2$ milliers de F CFA. Oublier les frais fixes $c = 7$ donnerait $C(1) = 0$ et $B(1) = 9$ : c'est faux.",
               "answers": [
                 {
                   "content": "2",
                   "correct": true
                 }
-              ],
-              "unit": "kF"
+              ]
             },
             {
-              "content": "La formule $C(x) = x^3 - \\dfrac{2}{x^2 + 1} + 7$ a un sens pour tout $x \\geq 0$. Quelle est la limite de $C(x) - x^3$ quand $x$ tend vers $+\\infty$ ?",
+              "content": "Soit $G$ la fonction définie sur $[0\\,;+\\infty[$ par $G(x) = x^3 - \\dfrac{2}{x^2 + 1} + 7$. Quelle est la limite de $G(x) - x^3$ quand $x$ tend vers $+\\infty$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire : $C(x) - x^3 = 7 - \\frac{2}{x^2 + 1}$. Étape 2 — Calculer la limite du quotient : $x^2 + 1 \\to +\\infty$, donc $\\frac{2}{x^2 + 1} \\to 0$. Étape 3 — Appliquer la limite d'une somme : $7 - 0$. Étape 4 — Conclure : la limite est $7$ ; la courbe de $C$ s'approche de celle de $x^3 + 7$.",
+              "explanation": "Étape 1 — Écrire : $G(x) - x^3 = 7 - \\frac{2}{x^2 + 1}$. Étape 2 — Calculer la limite du quotient : $x^2 + 1 \\to +\\infty$, donc $\\frac{2}{x^2 + 1} \\to 0$. Étape 3 — Appliquer la limite d'une somme : $7 - 0$. Étape 4 — Conclure : la limite est $7$ ; la courbe de $G$ s'approche de celle de $x^3 + 7$.",
               "answers": [
                 {
                   "content": "7",

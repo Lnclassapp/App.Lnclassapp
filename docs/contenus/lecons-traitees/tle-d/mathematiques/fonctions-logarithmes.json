@@ -33,7 +33,7 @@
                 "from": 1,
                 "to": 8,
                 "from_open": true,
-                "to_open": false
+                "to_open": true
               }
             ]
           },
@@ -151,7 +151,7 @@
               {
                 "content": "On note $a=\\ln 2$ et $b=\\ln 3$. Exprime $\\ln 18$ en fonction de $a$ et $b$.",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : $18=2\\times 3^2$. Étape 2 — Appliquer : $\\ln 18=\\ln 2+\\ln(3^2)=\\ln 2+2\\ln 3$. Étape 3 — Remplacer : $\\ln 2=a$ et $\\ln 3=b$. Étape 4 — Réduire : $\\ln 18=a+2b$. La proposition $2a+b$ attribue l'exposant 2 au mauvais nombre ; $2ab$ transforme la somme en produit, ce que la propriété ne permet pas.",
+                "explanation": "Étape 1 — Décomposer : $18=2\\times 3^2$. Étape 2 — Appliquer : $\\ln 18=\\ln 2+\\ln(3^2)=\\ln 2+2\\ln 3$. Étape 3 — Remplacer : $\\ln 2=a$ et $\\ln 3=b$. Étape 4 — Réduire : $\\ln 18=a+2b$. La proposition $2a+b$ attribue l'exposant 2 au mauvais nombre ; $2ab$ transforme la somme en produit, ce que la propriété ne permet pas ; $a+b+2$ ajoute l'exposant 2 comme un terme au lieu de le multiplier par $\\ln 3$.",
                 "answers": [
                   {
                     "content": "$2a+b$",
@@ -174,7 +174,7 @@
               {
                 "content": "On note $a=\\ln 2$. Exprime $\\ln\\dfrac{1}{4}$ en fonction de $a$.",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : $\\dfrac14=\\dfrac{1}{2^2}$, donc $\\ln\\dfrac14=-\\ln(2^2)$. Étape 2 — Appliquer : $\\ln\\dfrac1x=-\\ln x$ et $\\ln(2^2)=2\\ln 2$. Étape 3 — Remplacer : $\\ln 2=a$. Étape 4 — Réduire : $\\ln\\dfrac14=-2a$. Le logarithme d'un nombre inférieur à 1 est négatif : $2a$ est donc faux, car $a=\\ln 2>0$.",
+                "explanation": "Étape 1 — Décomposer : $\\dfrac14=\\dfrac{1}{2^2}$, donc $\\ln\\dfrac14=-\\ln(2^2)$. Étape 2 — Appliquer : $\\ln\\dfrac1x=-\\ln x$ et $\\ln(2^2)=2\\ln 2$. Étape 3 — Remplacer : $\\ln 2=a$. Étape 4 — Réduire : $\\ln\\dfrac14=-2a$. Le logarithme d'un nombre inférieur à 1 est négatif : $2a$ est donc faux, car $a=\\ln 2>0$. La proposition $-4a$ prend le nombre $4$ comme facteur alors que $4=2^2$ : c'est l'exposant $2$ qui sort, pas $4$.",
                 "answers": [
                   {
                     "content": "$2a$",
@@ -600,7 +600,7 @@
                 "content": "Calcule $\\lim_{x\\to 0^+}\\,(3+x\\ln x)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : quand $x\\to 0^+$, $x\\to 0$ et $\\ln x\\to-\\infty$ : c'est une forme indéterminée $0\\times(-\\infty)$. Étape 2 — Transformer : le terme $x\\ln x$ est exactement celui de la croissance comparée. Étape 3 — Appliquer : $\\lim_{x\\to 0^+}x\\ln x=0$. Étape 4 — Conclure : $3+0=3$. Écrire $-\\infty$ ou $0$ pour $x\\ln x$ sans cette règle est une erreur.",
+                "explanation": "Étape 1 — Calculer : quand $x\\to 0^+$, $x\\to 0$ et $\\ln x\\to-\\infty$ : c'est une forme indéterminée $0\\times(-\\infty)$. Étape 2 — Transformer : le terme $x\\ln x$ est exactement celui de la croissance comparée. Étape 3 — Appliquer : $\\lim_{x\\to 0^+}x\\ln x=0$. Étape 4 — Conclure : $3+0=3$. Conclure $-\\infty$ (en croyant que $\\ln x$ l'emporte sur $x$) est l'erreur tentante : seule la croissance comparée donne $0$.",
                 "answers": [
                   {
                     "content": "3",
@@ -780,11 +780,11 @@
         },
         {
           "name": "Dériver ln u et primitiver u'/u",
-          "remember": "Si $u$ est dérivable et strictement positive sur un intervalle $I$, alors $\\ln u$ est dérivable sur $I$ et $(\\ln u)'=\\dfrac{u'}{u}$. En particulier $(\\ln x)'=\\dfrac1x$ sur $]0\\ ;\\ +\\infty[$. Réciproquement, sur un intervalle où $u>0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln u$ ; sur un intervalle où $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln(-u)$. Les primitives d'une fonction sur un intervalle diffèrent d'une constante.",
+          "remember": "Si $u$ est dérivable et ne s'annule pas sur un intervalle $I$, alors $\\ln|u|$ est dérivable sur $I$ et $(\\ln|u|)'=\\dfrac{u'}{u}$. Si $u>0$, cela donne $(\\ln u)'=\\dfrac{u'}{u}$ ; en particulier $(\\ln x)'=\\dfrac1x$ sur $]0\\ ;\\ +\\infty[$. Réciproquement, une primitive de $\\dfrac{u'}{u}$ sur $I$ est $\\ln|u|$, soit $\\ln u$ si $u>0$ et $\\ln(-u)$ si $u<0$. Les primitives d'une fonction sur un intervalle diffèrent d'une constante.",
           "method": [
-            "Identifier la fonction $u$ placée dans le $\\ln$ et vérifier que $u>0$ sur l'intervalle étudié.",
+            "Identifier la fonction $u$ placée dans le $\\ln$, vérifier qu'elle ne s'annule pas sur l'intervalle étudié et repérer son signe.",
             "Calculer $u'$ (pour une primitive, vérifier que $u'$ est au numérateur et $u$ au dénominateur).",
-            "Appliquer : $(\\ln u)'=\\dfrac{u'}{u}$, ou « une primitive de $\\dfrac{u'}{u}$ est $\\ln u$ ».",
+            "Appliquer : $(\\ln u)'=\\dfrac{u'}{u}$ si $u>0$, ou « une primitive de $\\dfrac{u'}{u}$ est $\\ln|u|$ » ($\\ln u$ si $u>0$, $\\ln(-u)$ si $u<0$).",
             "Simplifier le résultat, et pour une primitive la contrôler en la dérivant."
           ],
           "example": {
@@ -888,7 +888,7 @@
               {
                 "content": "Sur $]-\\infty\\ ;\\ 1[$, quelle est une primitive de $x\\mapsto\\dfrac{1}{x-1}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $u(x)=x-1$ et sur $]-\\infty\\ ;\\ 1[$ on a $u<0$. Étape 2 — Calculer : $u'(x)=1$. Étape 3 — Appliquer : comme $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln(-u)=\\ln(1-x)$. Étape 4 — Contrôler : la dérivée de $\\ln(1-x)$ est $\\dfrac{-1}{1-x}=\\dfrac{1}{x-1}$. La proposition $\\ln(x-1)$ n'existe pas pour $x<1$.",
+                "explanation": "Étape 1 — Identifier : $u(x)=x-1$ et sur $]-\\infty\\ ;\\ 1[$ on a $u<0$. Étape 2 — Calculer : $u'(x)=1$. Étape 3 — Appliquer : comme $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln|u|=\\ln(-u)=\\ln(1-x)$. Étape 4 — Contrôler : la dérivée de $\\ln(1-x)$ est $\\dfrac{-1}{1-x}=\\dfrac{1}{x-1}$. La proposition $\\ln(x-1)$ n'existe pas pour $x<1$ ; la proposition $-\\ln(1-x)$ a pour dérivée $\\dfrac{1}{1-x}$, qui est l'opposé de $\\dfrac{1}{x-1}$ : mauvais signe.",
                 "answers": [
                   {
                     "content": "$\\ln(x-1)$",
@@ -977,7 +977,7 @@
                 ]
               },
               {
-                "content": "Sur $]0\\ ;\\ +\\infty[$, la dérivée de $x\\mapsto\\ln(5x)$ s'écrit $\\dfrac{1}{u}$. Complète : $u=$ ___ .",
+                "content": "Sur $]0\\ ;\\ +\\infty[$, la dérivée de $x\\mapsto\\ln(5x)$ est la fonction $x\\mapsto 1/$ ___ .",
                 "question_type": "fill_blank",
                 "hint": "Simplifie la fraction $\\dfrac{5}{5x}$.",
                 "explanation": "Étape 1 — Identifier : $u(x)=5x>0$ sur $]0\\ ;\\ +\\infty[$. Étape 2 — Calculer : $u'(x)=5$. Étape 3 — Appliquer : $\\dfrac{u'(x)}{u(x)}=\\dfrac{5}{5x}$. Étape 4 — Simplifier : $\\dfrac{5}{5x}=\\dfrac1x$. La dérivée de $\\ln(5x)$ est la même que celle de $\\ln x$, car $\\ln(5x)=\\ln 5+\\ln x$ et $\\ln 5$ est une constante.",
@@ -1201,7 +1201,7 @@
             {
               "content": "Une solution a un pH égal à $5$ (avec $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$). Quelle est sa concentration $[\\mathrm{H_3O^+}]$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Décomposer : on cherche $c$ tel que $-\\log c=5$, donc $\\log c=-5$. Étape 2 — Appliquer : $\\log(10^{-5})=-5$ et $\\log$ est strictement croissante, donc $c=10^{-5}$. Étape 3 — Remplacer : aucune valeur n'est nécessaire. Étape 4 — Calculer et interpréter : $c=10^{-5}$ mol/L. La proposition $10^5$ oublie le signe de l'exposant ; une concentration ne peut pas être négative.",
+              "explanation": "Étape 1 — Décomposer : on cherche $c$ tel que $-\\log c=5$, donc $\\log c=-5$. Étape 2 — Appliquer : $\\log(10^{-5})=-5$ et $\\log$ est strictement croissante, donc $c=10^{-5}$. Étape 3 — Remplacer : aucune valeur n'est nécessaire. Étape 4 — Calculer et interpréter : $c=10^{-5}$ mol/L. La proposition $10^5$ oublie le signe de l'exposant ; $\\dfrac15$ mol/L prend le pH pour l'inverse de la concentration ; une concentration ne peut pas être négative.",
               "answers": [
                 {
                   "content": "$10^{5}$ mol/L",
@@ -1281,6 +1281,52 @@
               ]
             },
             {
+              "content": "Une solution est très acide si son pH $=-\\log[\\mathrm{H_3O^+}]$ est inférieur ou égal à $3$. À quelle condition sur la concentration $[\\mathrm{H_3O^+}]$ (en mol/L) cela correspond-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Domaine : une concentration est strictement positive. Étape 2 — Ramener : $-\\log c\\le 3$ équivaut à $\\log c\\ge -3=\\log(10^{-3})$ (on a changé le sens en multipliant par $-1$). Étape 3 — Supprimer les logarithmes : $\\log$ est strictement croissante, donc $c\\ge 10^{-3}$. Étape 4 — Conclure : plus la solution est acide, plus sa concentration est grande. La proposition $c\\le 10^{-3}$ oublie le changement de sens dû au signe moins.",
+              "answers": [
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\le 10^{-3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\ge 10^{-3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\ge 10^{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\le 3$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand la concentration $[\\mathrm{H_3O^+}]$ d'une solution tend vers $0$ par valeurs supérieures, vers quelle valeur tend son pH $=-\\log[\\mathrm{H_3O^+}]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Limite : $\\log c=\\dfrac{\\ln c}{\\ln 10}$ et $\\ln c\\to-\\infty$ quand $c\\to 0^+$, avec $\\ln 10>0$. Étape 2 — Conclure : $\\log c\\to-\\infty$, donc $-\\log c\\to+\\infty$. Plus la solution est diluée en ions, plus le pH est grand (basique). La réponse $-\\infty$ oublie le signe moins de la formule.",
+              "answers": [
+                {
+                  "content": "$-\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$7$",
+                  "correct": false
+                }
+              ]
+            },
+            {
               "content": "Relie chaque concentration $[\\mathrm{H_3O^+}]$ au pH correspondant (avec $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$).",
               "question_type": "matching",
               "explanation": "Étape 1 — Décomposer : chaque concentration est une puissance de $10$. Étape 2 — Appliquer : $\\log(10^n)=n$. Étape 4 — Calculer : $\\mathrm{pH}=-\\log(10^{-1})=1$, $-\\log(10^{-7})=7$ et $-\\log(10^{-12})=12$. Le pH est donc l'opposé de l'exposant : plus l'exposant est négatif, plus le pH est grand.",
@@ -1343,16 +1389,16 @@
                   "correct": false
                 },
                 {
-                  "content": "$10^{-4}$ W/m²",
-                  "correct": true
-                },
-                {
                   "content": "$10^{8}$ W/m²",
                   "correct": false
                 },
                 {
                   "content": "$8\\times 10^{-12}$ W/m²",
                   "correct": false
+                },
+                {
+                  "content": "$10^{-4}$ W/m²",
+                  "correct": true
                 }
               ]
             },
@@ -1398,6 +1444,52 @@
               ]
             },
             {
+              "content": "On veut un niveau sonore $L=10\\log\\dfrac{I}{I_0}$ d'au plus $60$ dB, avec $I_0=10^{-12}$ W/m². À quelle condition sur l'intensité $I$ cela correspond-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Domaine : $I>0$. Étape 2 — Ramener : $10\\log\\dfrac{I}{I_0}\\le 60$ équivaut à $\\log\\dfrac{I}{I_0}\\le 6=\\log(10^6)$. Étape 3 — Supprimer les logarithmes : $\\log$ est strictement croissante, donc $\\dfrac{I}{I_0}\\le 10^6$. Étape 4 — Conclure : $I\\le 10^6\\times 10^{-12}=10^{-6}$ W/m². Le sens de l'inégalité est conservé.",
+              "answers": [
+                {
+                  "content": "$I\\le 10^{-6}$ W/m²",
+                  "correct": true
+                },
+                {
+                  "content": "$I\\ge 10^{-6}$ W/m²",
+                  "correct": false
+                },
+                {
+                  "content": "$I\\le 6\\times 10^{-12}$ W/m²",
+                  "correct": false
+                },
+                {
+                  "content": "$I\\le 10^{6}$ W/m²",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le niveau sonore est la fonction $L(I)=\\dfrac{10\\,(\\ln I-\\ln I_0)}{\\ln 10}$ de l'intensité $I>0$, où $I_0$ est une constante. Quelle est sa dérivée ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $\\ln I_0$ et $\\ln 10$ sont des constantes ; seul $\\ln I$ dépend de $I$. Étape 2 — Calculer : $(\\ln I)'=\\dfrac1I$. Étape 3 — Appliquer : $L'(I)=\\dfrac{10}{\\ln 10}\\times\\dfrac1I=\\dfrac{10}{I\\ln 10}$. Étape 4 — Interpréter : la dérivée est positive mais tend vers $0$ : à forte intensité, le niveau croît de plus en plus lentement.",
+              "answers": [
+                {
+                  "content": "$L'(I)=\\dfrac{10}{\\ln 10}$",
+                  "correct": false
+                },
+                {
+                  "content": "$L'(I)=\\dfrac{10}{I\\ln 10}$",
+                  "correct": true
+                },
+                {
+                  "content": "$L'(I)=\\dfrac{1}{I}$",
+                  "correct": false
+                },
+                {
+                  "content": "$L'(I)=\\dfrac{10\\ln I}{\\ln 10}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
               "content": "Relie chaque intensité $I$ au niveau sonore correspondant (avec $L=10\\log\\dfrac{I}{I_0}$ et $I_0=10^{-12}$ W/m²).",
               "question_type": "matching",
               "explanation": "Étape 1 — Décomposer : $\\dfrac{I}{I_0}$ vaut respectivement $1$, $10^{3}$ et $10^{9}$. Étape 2 — Appliquer : $\\log 1=0$, $\\log(10^3)=3$ et $\\log(10^9)=9$. Étape 4 — Calculer : $L=0$ dB, $L=10\\times 3=30$ dB et $L=10\\times 9=90$ dB.",
@@ -1420,82 +1512,82 @@
         },
         {
           "title": "L'épargne de Moussa et ses objectifs",
-          "statement": "Moussa place 50 000 F sur un compte d'épargne en mobile money. Chaque trimestre, son capital augmente de 10 %. Après $n$ trimestres ($n$ entier naturel), son capital est $C(n)=50\\,000\\times 1,1^n$ francs. On donne $\\ln 2\\approx 0,693$, $\\ln 3\\approx 1,099$, $\\ln 5\\approx 1,609$ et $\\ln 1,1\\approx 0,0953$.",
+          "statement": "Moussa place 50 000 F sur un compte d'épargne en mobile money. Chaque année, son capital augmente de 6 %. Après $n$ années ($n$ entier naturel), son capital est $C(n)=50\\,000\\times 1,06^n$ francs. On donne $\\ln 2\\approx 0,693$, $\\ln 3\\approx 1,099$, $\\ln 5\\approx 1,609$ et $\\ln 1,06\\approx 0,0583$.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
             {
-              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,1^n$ francs. Quelle égalité est vraie pour tout entier naturel $n$ ?",
+              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,06^n$ francs. Quelle égalité est vraie pour tout entier naturel $n$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Décomposer : $1,1^n$ est une puissance d'exposant entier $n$ de $a=1,1>0$. Étape 2 — Appliquer la propriété $\\ln(a^n)=n\\ln a$. Étape 3 — Remplacer : $\\ln(1,1^n)=n\\ln 1,1$. Les autres propositions viennent de confusions : l'exposant sort en facteur, il ne s'ajoute pas et ne devient pas exposant de $\\ln 1,1$.",
+              "explanation": "Étape 1 — Décomposer : $1,06^n$ est une puissance d'exposant entier $n$ de $a=1,06>0$. Étape 2 — Appliquer la propriété $\\ln(a^n)=n\\ln a$. Étape 3 — Remplacer : $\\ln(1,06^n)=n\\ln 1,06$. Les autres propositions viennent de confusions : l'exposant sort en facteur, il ne s'ajoute pas et ne devient pas exposant de $\\ln 1,06$.",
               "answers": [
                 {
-                  "content": "$\\ln(1,1^n)=\\ln n\\times 1,1$",
+                  "content": "$\\ln(1,06^n)=\\ln n\\times 1,06$",
                   "correct": false
                 },
                 {
-                  "content": "$\\ln(1,1^n)=(\\ln 1,1)^n$",
+                  "content": "$\\ln(1,06^n)=(\\ln 1,06)^n$",
                   "correct": false
                 },
                 {
-                  "content": "$\\ln(1,1^n)=n+\\ln 1,1$",
+                  "content": "$\\ln(1,06^n)=n+\\ln 1,06$",
                   "correct": false
                 },
                 {
-                  "content": "$\\ln(1,1^n)=n\\ln 1,1$",
+                  "content": "$\\ln(1,06^n)=n\\ln 1,06$",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Moussa cherche le plus petit nombre $n$ de trimestres tel que $50\\,000\\times 1,1^n\\ge 100\\,000$. Remets dans l'ordre les étapes de la résolution.",
+              "content": "Moussa cherche le plus petit nombre $n$ d'années tel que $50\\,000\\times 1,06^n\\ge 100\\,000$. Remets dans l'ordre les étapes de la résolution.",
               "question_type": "ordering",
-              "explanation": "Étape 1 — Simplifier : on divise par $50\\,000$, ce qui donne $1,1^n\\ge 2$. Étape 2 — Appliquer $\\ln$ : elle est strictement croissante, le sens est conservé, et $\\ln(1,1^n)=n\\ln 1,1$. Étape 3 — Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{0,693}{0,0953}\\approx 7,3$. Étape 4 — Conclure : le premier entier supérieur à $7,3$ est $8$. Cette méthode sert pour tout objectif d'épargne.",
+              "explanation": "Étape 1 — Simplifier : on divise par $50\\,000$, ce qui donne $1,06^n\\ge 2$. Étape 2 — Appliquer $\\ln$ : elle est strictement croissante, le sens est conservé, et $\\ln(1,06^n)=n\\ln 1,06$. Étape 3 — Diviser par $\\ln 1,06>0$ : $n\\ge\\dfrac{0,693}{0,0583}\\approx 11,9$. Étape 4 — Conclure : le premier entier supérieur à $11,9$ est $12$. Cette méthode sert pour tout objectif d'épargne.",
               "answers": [
                 {
-                  "content": "Simplifier l'inégalité : $1,1^n\\ge 2$."
+                  "content": "Simplifier l'inégalité : $1,06^n\\ge 2$."
                 },
                 {
-                  "content": "Appliquer $\\ln$ aux deux membres, car $\\ln$ est croissante : $n\\ln 1,1\\ge\\ln 2$."
+                  "content": "Appliquer $\\ln$ aux deux membres, car $\\ln$ est croissante : $n\\ln 1,06\\ge\\ln 2$."
                 },
                 {
-                  "content": "Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{\\ln 2}{\\ln 1,1}\\approx 7,3$."
+                  "content": "Diviser par $\\ln 1,06>0$ : $n\\ge\\dfrac{\\ln 2}{\\ln 1,06}\\approx 11,9$."
                 },
                 {
-                  "content": "Conclure : $n$ est un entier, donc le plus petit est $n=8$."
+                  "content": "Conclure : $n$ est un entier, donc le plus petit est $n=12$."
                 }
               ]
             },
             {
-              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,1^n$ francs. Avec $\\ln 3\\approx 1,099$ et $\\ln 1,1\\approx 0,0953$, quel est le plus petit nombre entier $n$ de trimestres pour que son capital atteigne au moins $150\\,000$ F ?",
+              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,06^n$ francs. Avec $\\ln 3\\approx 1,099$ et $\\ln 1,06\\approx 0,0583$, quel est le plus petit nombre entier $n$ d'années pour que son capital atteigne au moins $150\\,000$ F ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "unit": "trimestres",
-              "explanation": "Étape 1 — Simplifier : $50\\,000\\times 1,1^n\\ge 150\\,000$ équivaut à $1,1^n\\ge 3$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,1\\ge\\ln 3$. Étape 3 — Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{1,099}{0,0953}\\approx 11,5$. Étape 4 — Conclure : $n$ est entier, donc $n=12$. La valeur $11$ ne suffit pas, car $11,5$ est supérieur à $11$.",
+              "unit": "années",
+              "explanation": "Étape 1 — Simplifier : $50\\,000\\times 1,06^n\\ge 150\\,000$ équivaut à $1,06^n\\ge 3$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,06\\ge\\ln 3$. Étape 3 — Diviser par $\\ln 1,06>0$ : $n\\ge\\dfrac{1,099}{0,0583}\\approx 18,9$. Étape 4 — Conclure : $n$ est entier, donc $n=19$. La valeur $18$ ne suffit pas, car $18,9$ est supérieur à $18$.",
               "answers": [
                 {
-                  "content": "12",
+                  "content": "19",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,1^n$ francs. Avec $\\ln 5\\approx 1,609$ et $\\ln 1,1\\approx 0,0953$, quel est le plus petit nombre entier $n$ de trimestres pour que son capital atteigne au moins $250\\,000$ F ?",
+              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,06^n$ francs. Avec $\\ln 5\\approx 1,609$ et $\\ln 1,06\\approx 0,0583$, quel est le plus petit nombre entier $n$ d'années pour que son capital atteigne au moins $250\\,000$ F ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "unit": "trimestres",
-              "explanation": "Étape 1 — Simplifier : $50\\,000\\times 1,1^n\\ge 250\\,000$ équivaut à $1,1^n\\ge 5$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,1\\ge\\ln 5$. Étape 3 — Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{1,609}{0,0953}\\approx 16,9$. Étape 4 — Conclure : $n$ est entier, donc $n=17$. Arrondir à $16$ serait une erreur : le capital n'aurait pas encore atteint $250\\,000$ F.",
+              "unit": "années",
+              "explanation": "Étape 1 — Simplifier : $50\\,000\\times 1,06^n\\ge 250\\,000$ équivaut à $1,06^n\\ge 5$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,06\\ge\\ln 5$. Étape 3 — Diviser par $\\ln 1,06>0$ : $n\\ge\\dfrac{1,609}{0,0583}\\approx 27,6$. Étape 4 — Conclure : $n$ est entier, donc $n=28$. Arrondir à $27$ serait une erreur : le capital n'aurait pas encore atteint $250\\,000$ F.",
               "answers": [
                 {
-                  "content": "17",
+                  "content": "28",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Avec $C(n)=50\\,000\\times 1,1^n$, $\\ln 2\\approx 0,693$ et $\\ln 1,1\\approx 0,0953$, le capital de Moussa atteint $100\\,000$ F au bout de $7$ trimestres.",
+              "content": "Avec $C(n)=50\\,000\\times 1,06^n$, $\\ln 2\\approx 0,693$ et $\\ln 1,06\\approx 0,0583$, le capital de Moussa atteint $100\\,000$ F au bout de $11$ années.",
               "question_type": "true_false",
-              "explanation": "Étape 1 — Simplifier : il faut $1,1^7\\ge 2$. Étape 2 — Appliquer $\\ln$ : cela revient à $7\\ln 1,1\\ge\\ln 2$. Étape 3 — Calculer : $7\\times 0,0953=0,6671$, inférieur à $\\ln 2\\approx 0,693$. Étape 4 — Conclure : $1,1^7<2$, donc le capital est encore inférieur à $100\\,000$ F. Il faut $8$ trimestres.",
+              "explanation": "Étape 1 — Simplifier : il faut $1,06^{11}\\ge 2$. Étape 2 — Appliquer $\\ln$ : cela revient à $11\\ln 1,06\\ge\\ln 2$. Étape 3 — Calculer : $11\\times 0,0583=0,6413$, inférieur à $\\ln 2\\approx 0,693$. Étape 4 — Conclure : $1,06^{11}<2$, donc le capital est encore inférieur à $100\\,000$ F. Il faut $12$ années.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1508,12 +1600,12 @@
               ]
             },
             {
-              "content": "Pour atteindre un capital $K$ (en francs) en partant de $50\\,000$ F à 10 % par trimestre, la durée en trimestres est donnée par $T(K)=\\dfrac{\\ln K-\\ln 50000}{\\ln 1,1}$ pour $K>0$. Quelle est sa dérivée ?",
+              "content": "Pour atteindre un capital $K$ (en francs) en partant de $50\\,000$ F à 6 % par an, la durée en années est donnée par $T(K)=\\dfrac{\\ln K-\\ln 50000}{\\ln 1,06}$ pour $K>0$. Quelle est sa dérivée ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Identifier : $\\ln 50000$ et $\\ln 1,1$ sont des constantes ; seul $\\ln K$ dépend de $K$. Étape 2 — Calculer : $(\\ln K)'=\\dfrac1K$, et la constante a pour dérivée $0$. Étape 3 — Appliquer : $T'(K)=\\dfrac{1}{\\ln 1,1}\\times\\dfrac1K=\\dfrac{1}{K\\ln 1,1}$. Étape 4 — Interpréter : la dérivée est positive, donc plus le capital visé est grand, plus il faut de temps.",
+              "explanation": "Étape 1 — Identifier : $\\ln 50000$ et $\\ln 1,06$ sont des constantes ; seul $\\ln K$ dépend de $K$. Étape 2 — Calculer : $(\\ln K)'=\\dfrac1K$, et la constante a pour dérivée $0$. Étape 3 — Appliquer : $T'(K)=\\dfrac{1}{\\ln 1,06}\\times\\dfrac1K=\\dfrac{1}{K\\ln 1,06}$. Étape 4 — Interpréter : la dérivée est positive, donc plus le capital visé est grand, plus il faut de temps.",
               "answers": [
                 {
-                  "content": "$T'(K)=\\dfrac{1}{K\\ln 1,1}$",
+                  "content": "$T'(K)=\\dfrac{1}{K\\ln 1,06}$",
                   "correct": true
                 },
                 {
@@ -1521,19 +1613,19 @@
                   "correct": false
                 },
                 {
-                  "content": "$T'(K)=\\dfrac{\\ln K}{\\ln 1,1}$",
+                  "content": "$T'(K)=\\dfrac{\\ln K}{\\ln 1,06}$",
                   "correct": false
                 },
                 {
-                  "content": "$T'(K)=\\dfrac{1}{\\ln 1,1}$",
+                  "content": "$T'(K)=\\dfrac{1}{\\ln 1,06}$",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Avec $T(K)=\\dfrac{\\ln K-\\ln 50000}{\\ln 1,1}$ pour $K>0$, on a $T(K)<0$ si et seulement si $K<50\\,000$.",
+              "content": "Avec $T(K)=\\dfrac{\\ln K-\\ln 50000}{\\ln 1,06}$ pour $K>0$, on a $T(K)<0$ si et seulement si $K<50\\,000$.",
               "question_type": "true_false",
-              "explanation": "Étape 1 — Repérer le signe du dénominateur : $\\ln 1,1>0$ car $1,1>1$. Étape 2 — Étudier le numérateur : $T(K)<0$ équivaut à $\\ln K-\\ln 50000<0$, c'est-à-dire $\\ln K<\\ln 50000$. Étape 3 — Appliquer la stricte croissance de $\\ln$ : cela équivaut à $K<50000$. Étape 4 — Interpréter : une durée négative correspond à un capital inférieur à la mise de départ.",
+              "explanation": "Étape 1 — Repérer le signe du dénominateur : $\\ln 1,06>0$ car $1,06>1$. Étape 2 — Étudier le numérateur : $T(K)<0$ équivaut à $\\ln K-\\ln 50000<0$, c'est-à-dire $\\ln K<\\ln 50000$. Étape 3 — Appliquer la stricte croissance de $\\ln$ : cela équivaut à $K<50000$. Étape 4 — Interpréter : une durée négative correspond à un capital inférieur à la mise de départ.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1627,8 +1719,8 @@
             {
               "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ (en dizaines de milliers de francs). Avec $\\ln 2\\approx 0,693$, donne une valeur approchée du bénéfice maximal $B(4)$.",
               "question_type": "numeric",
-              "tolerance": 0.001,
-              "explanation": "Étape 1 — Remplacer : $B(4)=4\\ln 4-4+1=4\\ln 4-3$. Étape 2 — Appliquer les propriétés de $\\ln$ : $\\ln 4=\\ln(2^2)=2\\ln 2$, donc $B(4)=8\\ln 2-3$. Étape 3 — Calculer : $8\\times 0,693=5,544$, donc $B(4)\\approx 2,544$. Étape 4 — Interpréter : $2,544$ dizaines de milliers de francs, soit environ $25\\,440$ F.",
+              "tolerance": 0.005,
+              "explanation": "Étape 1 — Remplacer : $B(4)=4\\ln 4-4+1=4\\ln 4-3$. Étape 2 — Appliquer les propriétés de $\\ln$ : $\\ln 4=\\ln(2^2)=2\\ln 2$, donc $B(4)=8\\ln 2-3$. Étape 3 — Calculer : $8\\times 0,693=5,544$, donc $B(4)\\approx 2,544$. Étape 4 — Interpréter : $2,544$ dizaines de milliers de francs, soit environ $25\\,450$ F.",
               "answers": [
                 {
                   "content": "2,544",
@@ -1639,7 +1731,7 @@
             {
               "content": "Le bénéfice est $B(x)=4\\ln x-x+1$, définie sur $]0\\ ;\\ +\\infty[$ pour l'étude mathématique. Quelle est la limite de $B(x)$ quand $x$ tend vers $+\\infty$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Limites : $4\\ln x\\to+\\infty$ et $-x\\to-\\infty$ : forme indéterminée $+\\infty-\\infty$. Étape 2 — Transformer : $B(x)=x\\left(4\\,\\dfrac{\\ln x}{x}-1+\\dfrac1x\\right)$ pour $x>0$. Étape 3 — Appliquer la croissance comparée : $\\dfrac{\\ln x}{x}\\to 0$ et $\\dfrac1x\\to 0$, donc le facteur tend vers $-1$. Étape 4 — Conclure : $x\\to+\\infty$ fois un facteur qui tend vers $-1$ donne $-\\infty$. Produire énormément de bouteilles fait perdre de l'argent.",
+              "explanation": "Étape 1 — Limites : $4\\ln x\\to+\\infty$ et $-x\\to-\\infty$ : forme indéterminée $+\\infty-\\infty$. Étape 2 — Transformer : $B(x)=x\\left(4\\,\\dfrac{\\ln x}{x}-1+\\dfrac1x\\right)$ pour $x>0$. Étape 3 — Appliquer la croissance comparée : $\\dfrac{\\ln x}{x}\\to 0$ et $\\dfrac1x\\to 0$, donc le facteur tend vers $-1$. Étape 4 — Conclure : $x\\to+\\infty$ fois un facteur qui tend vers $-1$ donne $-\\infty$.",
               "answers": [
                 {
                   "content": "$+\\infty$",
@@ -1672,7 +1764,7 @@
               ]
             },
             {
-              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$, avec $B(1)=0$, $B$ croissante sur $[1\\ ;\\ 4]$ et décroissante sur $[4\\ ;\\ 12]$. On donne $B(10)\\approx 0,212>0$ et $B(11)\\approx -0,408<0$. Quel est le plus grand nombre entier de centaines de bouteilles pour lequel le bénéfice est strictement positif ?",
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$, avec $B(1)=0$, $B$ croissante sur $[1\\ ;\\ 4]$ et décroissante sur $[4\\ ;\\ 12]$. On donne $B(10)\\approx 0,21>0$ et $B(11)\\approx -0,408<0$. Quel est le plus grand nombre entier de centaines de bouteilles pour lequel le bénéfice est strictement positif ?",
               "question_type": "numeric",
               "tolerance": 0,
               "unit": "centaines",

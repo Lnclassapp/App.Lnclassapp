@@ -33,7 +33,7 @@
                 "from": 1,
                 "to": 8,
                 "from_open": true,
-                "to_open": false
+                "to_open": true
               }
             ]
           },
@@ -151,7 +151,7 @@
               {
                 "content": "On note $a=\\ln 2$ et $b=\\ln 3$. Exprime $\\ln 18$ en fonction de $a$ et $b$.",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : $18=2\\times 3^2$. Étape 2 — Appliquer : $\\ln 18=\\ln 2+\\ln(3^2)=\\ln 2+2\\ln 3$. Étape 3 — Remplacer : $\\ln 2=a$ et $\\ln 3=b$. Étape 4 — Réduire : $\\ln 18=a+2b$. La proposition $2a+b$ attribue l'exposant 2 au mauvais nombre ; $2ab$ transforme la somme en produit, ce que la propriété ne permet pas.",
+                "explanation": "Étape 1 — Décomposer : $18=2\\times 3^2$. Étape 2 — Appliquer : $\\ln 18=\\ln 2+\\ln(3^2)=\\ln 2+2\\ln 3$. Étape 3 — Remplacer : $\\ln 2=a$ et $\\ln 3=b$. Étape 4 — Réduire : $\\ln 18=a+2b$. La proposition $2a+b$ attribue l'exposant 2 au mauvais nombre ; $2ab$ transforme la somme en produit, ce que la propriété ne permet pas ; $a+b+2$ ajoute l'exposant 2 comme un terme au lieu de le multiplier par $\\ln 3$.",
                 "answers": [
                   {
                     "content": "$2a+b$",
@@ -174,7 +174,7 @@
               {
                 "content": "On note $a=\\ln 2$. Exprime $\\ln\\dfrac{1}{4}$ en fonction de $a$.",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : $\\dfrac14=\\dfrac{1}{2^2}$, donc $\\ln\\dfrac14=-\\ln(2^2)$. Étape 2 — Appliquer : $\\ln\\dfrac1x=-\\ln x$ et $\\ln(2^2)=2\\ln 2$. Étape 3 — Remplacer : $\\ln 2=a$. Étape 4 — Réduire : $\\ln\\dfrac14=-2a$. Le logarithme d'un nombre inférieur à 1 est négatif : $2a$ est donc faux, car $a=\\ln 2>0$.",
+                "explanation": "Étape 1 — Décomposer : $\\dfrac14=\\dfrac{1}{2^2}$, donc $\\ln\\dfrac14=-\\ln(2^2)$. Étape 2 — Appliquer : $\\ln\\dfrac1x=-\\ln x$ et $\\ln(2^2)=2\\ln 2$. Étape 3 — Remplacer : $\\ln 2=a$. Étape 4 — Réduire : $\\ln\\dfrac14=-2a$. Le logarithme d'un nombre inférieur à 1 est négatif : $2a$ est donc faux, car $a=\\ln 2>0$. La proposition $-4a$ prend le nombre $4$ comme facteur alors que $4=2^2$ : c'est l'exposant $2$ qui sort, pas $4$.",
                 "answers": [
                   {
                     "content": "$2a$",
@@ -600,7 +600,7 @@
                 "content": "Calcule $\\lim_{x\\to 0^+}\\,(3+x\\ln x)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : quand $x\\to 0^+$, $x\\to 0$ et $\\ln x\\to-\\infty$ : c'est une forme indéterminée $0\\times(-\\infty)$. Étape 2 — Transformer : le terme $x\\ln x$ est exactement celui de la croissance comparée. Étape 3 — Appliquer : $\\lim_{x\\to 0^+}x\\ln x=0$. Étape 4 — Conclure : $3+0=3$. Écrire $-\\infty$ ou $0$ pour $x\\ln x$ sans cette règle est une erreur.",
+                "explanation": "Étape 1 — Calculer : quand $x\\to 0^+$, $x\\to 0$ et $\\ln x\\to-\\infty$ : c'est une forme indéterminée $0\\times(-\\infty)$. Étape 2 — Transformer : le terme $x\\ln x$ est exactement celui de la croissance comparée. Étape 3 — Appliquer : $\\lim_{x\\to 0^+}x\\ln x=0$. Étape 4 — Conclure : $3+0=3$. Conclure $-\\infty$ (en croyant que $\\ln x$ l'emporte sur $x$) est l'erreur tentante : seule la croissance comparée donne $0$.",
                 "answers": [
                   {
                     "content": "3",
@@ -780,11 +780,11 @@
         },
         {
           "name": "Dériver ln u et primitiver u'/u",
-          "remember": "Si $u$ est dérivable et strictement positive sur un intervalle $I$, alors $\\ln u$ est dérivable sur $I$ et $(\\ln u)'=\\dfrac{u'}{u}$. En particulier $(\\ln x)'=\\dfrac1x$ sur $]0\\ ;\\ +\\infty[$. Réciproquement, sur un intervalle où $u>0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln u$ ; sur un intervalle où $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln(-u)$. Les primitives d'une fonction sur un intervalle diffèrent d'une constante.",
+          "remember": "Si $u$ est dérivable et ne s'annule pas sur un intervalle $I$, alors $\\ln|u|$ est dérivable sur $I$ et $(\\ln|u|)'=\\dfrac{u'}{u}$. Si $u>0$, cela donne $(\\ln u)'=\\dfrac{u'}{u}$ ; en particulier $(\\ln x)'=\\dfrac1x$ sur $]0\\ ;\\ +\\infty[$. Réciproquement, une primitive de $\\dfrac{u'}{u}$ sur $I$ est $\\ln|u|$, soit $\\ln u$ si $u>0$ et $\\ln(-u)$ si $u<0$. Les primitives d'une fonction sur un intervalle diffèrent d'une constante.",
           "method": [
-            "Identifier la fonction $u$ placée dans le $\\ln$ et vérifier que $u>0$ sur l'intervalle étudié.",
+            "Identifier la fonction $u$ placée dans le $\\ln$, vérifier qu'elle ne s'annule pas sur l'intervalle étudié et repérer son signe.",
             "Calculer $u'$ (pour une primitive, vérifier que $u'$ est au numérateur et $u$ au dénominateur).",
-            "Appliquer : $(\\ln u)'=\\dfrac{u'}{u}$, ou « une primitive de $\\dfrac{u'}{u}$ est $\\ln u$ ».",
+            "Appliquer : $(\\ln u)'=\\dfrac{u'}{u}$ si $u>0$, ou « une primitive de $\\dfrac{u'}{u}$ est $\\ln|u|$ » ($\\ln u$ si $u>0$, $\\ln(-u)$ si $u<0$).",
             "Simplifier le résultat, et pour une primitive la contrôler en la dérivant."
           ],
           "example": {
@@ -888,7 +888,7 @@
               {
                 "content": "Sur $]-\\infty\\ ;\\ 1[$, quelle est une primitive de $x\\mapsto\\dfrac{1}{x-1}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $u(x)=x-1$ et sur $]-\\infty\\ ;\\ 1[$ on a $u<0$. Étape 2 — Calculer : $u'(x)=1$. Étape 3 — Appliquer : comme $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln(-u)=\\ln(1-x)$. Étape 4 — Contrôler : la dérivée de $\\ln(1-x)$ est $\\dfrac{-1}{1-x}=\\dfrac{1}{x-1}$. La proposition $\\ln(x-1)$ n'existe pas pour $x<1$.",
+                "explanation": "Étape 1 — Identifier : $u(x)=x-1$ et sur $]-\\infty\\ ;\\ 1[$ on a $u<0$. Étape 2 — Calculer : $u'(x)=1$. Étape 3 — Appliquer : comme $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln|u|=\\ln(-u)=\\ln(1-x)$. Étape 4 — Contrôler : la dérivée de $\\ln(1-x)$ est $\\dfrac{-1}{1-x}=\\dfrac{1}{x-1}$. La proposition $\\ln(x-1)$ n'existe pas pour $x<1$ ; la proposition $-\\ln(1-x)$ a pour dérivée $\\dfrac{1}{1-x}$, qui est l'opposé de $\\dfrac{1}{x-1}$ : mauvais signe.",
                 "answers": [
                   {
                     "content": "$\\ln(x-1)$",
@@ -977,7 +977,7 @@
                 ]
               },
               {
-                "content": "Sur $]0\\ ;\\ +\\infty[$, la dérivée de $x\\mapsto\\ln(5x)$ s'écrit $\\dfrac{1}{u}$. Complète : $u=$ ___ .",
+                "content": "Sur $]0\\ ;\\ +\\infty[$, la dérivée de $x\\mapsto\\ln(5x)$ est la fonction $x\\mapsto 1/$ ___ .",
                 "question_type": "fill_blank",
                 "hint": "Simplifie la fraction $\\dfrac{5}{5x}$.",
                 "explanation": "Étape 1 — Identifier : $u(x)=5x>0$ sur $]0\\ ;\\ +\\infty[$. Étape 2 — Calculer : $u'(x)=5$. Étape 3 — Appliquer : $\\dfrac{u'(x)}{u(x)}=\\dfrac{5}{5x}$. Étape 4 — Simplifier : $\\dfrac{5}{5x}=\\dfrac1x$. La dérivée de $\\ln(5x)$ est la même que celle de $\\ln x$, car $\\ln(5x)=\\ln 5+\\ln x$ et $\\ln 5$ est une constante.",
@@ -1201,7 +1201,7 @@
             {
               "content": "Une solution a un pH égal à $5$ (avec $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$). Quelle est sa concentration $[\\mathrm{H_3O^+}]$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Décomposer : on cherche $c$ tel que $-\\log c=5$, donc $\\log c=-5$. Étape 2 — Appliquer : $\\log(10^{-5})=-5$ et $\\log$ est strictement croissante, donc $c=10^{-5}$. Étape 3 — Remplacer : aucune valeur n'est nécessaire. Étape 4 — Calculer et interpréter : $c=10^{-5}$ mol/L. La proposition $10^5$ oublie le signe de l'exposant ; une concentration ne peut pas être négative.",
+              "explanation": "Étape 1 — Décomposer : on cherche $c$ tel que $-\\log c=5$, donc $\\log c=-5$. Étape 2 — Appliquer : $\\log(10^{-5})=-5$ et $\\log$ est strictement croissante, donc $c=10^{-5}$. Étape 3 — Remplacer : aucune valeur n'est nécessaire. Étape 4 — Calculer et interpréter : $c=10^{-5}$ mol/L. La proposition $10^5$ oublie le signe de l'exposant ; $\\dfrac15$ mol/L prend le pH pour l'inverse de la concentration ; une concentration ne peut pas être négative.",
               "answers": [
                 {
                   "content": "$10^{5}$ mol/L",
@@ -1281,6 +1281,52 @@
               ]
             },
             {
+              "content": "Une solution est très acide si son pH $=-\\log[\\mathrm{H_3O^+}]$ est inférieur ou égal à $3$. À quelle condition sur la concentration $[\\mathrm{H_3O^+}]$ (en mol/L) cela correspond-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Domaine : une concentration est strictement positive. Étape 2 — Ramener : $-\\log c\\le 3$ équivaut à $\\log c\\ge -3=\\log(10^{-3})$ (on a changé le sens en multipliant par $-1$). Étape 3 — Supprimer les logarithmes : $\\log$ est strictement croissante, donc $c\\ge 10^{-3}$. Étape 4 — Conclure : plus la solution est acide, plus sa concentration est grande. La proposition $c\\le 10^{-3}$ oublie le changement de sens dû au signe moins.",
+              "answers": [
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\le 10^{-3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\ge 10^{-3}$",
+                  "correct": true
+                },
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\ge 10^{3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$[\\mathrm{H_3O^+}]\\le 3$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand la concentration $[\\mathrm{H_3O^+}]$ d'une solution tend vers $0$ par valeurs supérieures, vers quelle valeur tend son pH $=-\\log[\\mathrm{H_3O^+}]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Limite : $\\log c=\\dfrac{\\ln c}{\\ln 10}$ et $\\ln c\\to-\\infty$ quand $c\\to 0^+$, avec $\\ln 10>0$. Étape 2 — Conclure : $\\log c\\to-\\infty$, donc $-\\log c\\to+\\infty$. Plus la solution est diluée en ions, plus le pH est grand (basique). La réponse $-\\infty$ oublie le signe moins de la formule.",
+              "answers": [
+                {
+                  "content": "$-\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$7$",
+                  "correct": false
+                }
+              ]
+            },
+            {
               "content": "Relie chaque concentration $[\\mathrm{H_3O^+}]$ au pH correspondant (avec $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$).",
               "question_type": "matching",
               "explanation": "Étape 1 — Décomposer : chaque concentration est une puissance de $10$. Étape 2 — Appliquer : $\\log(10^n)=n$. Étape 4 — Calculer : $\\mathrm{pH}=-\\log(10^{-1})=1$, $-\\log(10^{-7})=7$ et $-\\log(10^{-12})=12$. Le pH est donc l'opposé de l'exposant : plus l'exposant est négatif, plus le pH est grand.",
@@ -1343,16 +1389,16 @@
                   "correct": false
                 },
                 {
-                  "content": "$10^{-4}$ W/m²",
-                  "correct": true
-                },
-                {
                   "content": "$10^{8}$ W/m²",
                   "correct": false
                 },
                 {
                   "content": "$8\\times 10^{-12}$ W/m²",
                   "correct": false
+                },
+                {
+                  "content": "$10^{-4}$ W/m²",
+                  "correct": true
                 }
               ]
             },
@@ -1398,6 +1444,52 @@
               ]
             },
             {
+              "content": "On veut un niveau sonore $L=10\\log\\dfrac{I}{I_0}$ d'au plus $60$ dB, avec $I_0=10^{-12}$ W/m². À quelle condition sur l'intensité $I$ cela correspond-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Domaine : $I>0$. Étape 2 — Ramener : $10\\log\\dfrac{I}{I_0}\\le 60$ équivaut à $\\log\\dfrac{I}{I_0}\\le 6=\\log(10^6)$. Étape 3 — Supprimer les logarithmes : $\\log$ est strictement croissante, donc $\\dfrac{I}{I_0}\\le 10^6$. Étape 4 — Conclure : $I\\le 10^6\\times 10^{-12}=10^{-6}$ W/m². Le sens de l'inégalité est conservé.",
+              "answers": [
+                {
+                  "content": "$I\\le 10^{-6}$ W/m²",
+                  "correct": true
+                },
+                {
+                  "content": "$I\\ge 10^{-6}$ W/m²",
+                  "correct": false
+                },
+                {
+                  "content": "$I\\le 6\\times 10^{-12}$ W/m²",
+                  "correct": false
+                },
+                {
+                  "content": "$I\\le 10^{6}$ W/m²",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le niveau sonore est la fonction $L(I)=\\dfrac{10\\,(\\ln I-\\ln I_0)}{\\ln 10}$ de l'intensité $I>0$, où $I_0$ est une constante. Quelle est sa dérivée ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $\\ln I_0$ et $\\ln 10$ sont des constantes ; seul $\\ln I$ dépend de $I$. Étape 2 — Calculer : $(\\ln I)'=\\dfrac1I$. Étape 3 — Appliquer : $L'(I)=\\dfrac{10}{\\ln 10}\\times\\dfrac1I=\\dfrac{10}{I\\ln 10}$. Étape 4 — Interpréter : la dérivée est positive mais tend vers $0$ : à forte intensité, le niveau croît de plus en plus lentement.",
+              "answers": [
+                {
+                  "content": "$L'(I)=\\dfrac{10}{\\ln 10}$",
+                  "correct": false
+                },
+                {
+                  "content": "$L'(I)=\\dfrac{10}{I\\ln 10}$",
+                  "correct": true
+                },
+                {
+                  "content": "$L'(I)=\\dfrac{1}{I}$",
+                  "correct": false
+                },
+                {
+                  "content": "$L'(I)=\\dfrac{10\\ln I}{\\ln 10}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
               "content": "Relie chaque intensité $I$ au niveau sonore correspondant (avec $L=10\\log\\dfrac{I}{I_0}$ et $I_0=10^{-12}$ W/m²).",
               "question_type": "matching",
               "explanation": "Étape 1 — Décomposer : $\\dfrac{I}{I_0}$ vaut respectivement $1$, $10^{3}$ et $10^{9}$. Étape 2 — Appliquer : $\\log 1=0$, $\\log(10^3)=3$ et $\\log(10^9)=9$. Étape 4 — Calculer : $L=0$ dB, $L=10\\times 3=30$ dB et $L=10\\times 9=90$ dB.",
@@ -1420,12 +1512,12 @@
         },
         {
           "title": "La durée de doublement d'une épargne",
-          "statement": "Aminata place 100 000 F sur un compte d'épargne en mobile money. Chaque trimestre, son capital augmente de 5 %. Après $n$ trimestres ($n$ entier naturel), son capital est $C(n)=100\\,000\\times 1,05^n$ francs. On donne $\\ln 2\\approx 0,693$, $\\ln 3\\approx 1,099$, $\\ln 1,05\\approx 0,0488$ et $\\ln 1,1\\approx 0,0953$.",
+          "statement": "Aminata place 100 000 F sur un compte d'épargne en mobile money. Chaque année, son capital augmente de 5 %. Après $n$ années ($n$ entier naturel), son capital est $C(n)=100\\,000\\times 1,05^n$ francs. On donne $\\ln 2\\approx 0,693$, $\\ln 3\\approx 1,099$, $\\ln 1,05\\approx 0,0488$ et $\\ln 1,04\\approx 0,0392$.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
             {
-              "content": "Aminata cherche le plus petit nombre $n$ de trimestres tel que $100\\,000\\times 1,05^n\\ge 200\\,000$. Remets dans l'ordre les étapes de la résolution.",
+              "content": "Aminata cherche le plus petit nombre $n$ d'années tel que $100\\,000\\times 1,05^n\\ge 200\\,000$. Remets dans l'ordre les étapes de la résolution.",
               "question_type": "ordering",
               "explanation": "Étape 1 — Simplifier : on divise par $100\\,000$, ce qui donne $1,05^n\\ge 2$. Étape 2 — Appliquer $\\ln$ : comme $\\ln$ est strictement croissante, l'inégalité garde son sens, et $\\ln(1,05^n)=n\\ln 1,05$. Étape 3 — Diviser par $\\ln 1,05$, qui est positif car $1,05>1$ : $n\\ge\\dfrac{0,693}{0,0488}\\approx 14,2$. Étape 4 — Conclure : le premier entier supérieur ou égal à $14,2$ est $15$. Cette méthode se réutilise telle quelle pour tout capital cible.",
               "answers": [
@@ -1467,10 +1559,10 @@
               ]
             },
             {
-              "content": "Aminata a un capital $C(n)=100\\,000\\times 1,05^n$ francs. Avec $\\ln 2\\approx 0,693$ et $\\ln 1,05\\approx 0,0488$, quel est le plus petit nombre entier $n$ de trimestres pour que son capital atteigne au moins $200\\,000$ F ?",
+              "content": "Aminata a un capital $C(n)=100\\,000\\times 1,05^n$ francs. Avec $\\ln 2\\approx 0,693$ et $\\ln 1,05\\approx 0,0488$, quel est le plus petit nombre entier $n$ d'années pour que son capital atteigne au moins $200\\,000$ F ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "unit": "trimestres",
+              "unit": "années",
               "explanation": "Étape 1 — Simplifier : $100\\,000\\times 1,05^n\\ge 200\\,000$ équivaut à $1,05^n\\ge 2$. Étape 2 — Appliquer $\\ln$ (croissante) : $n\\ln 1,05\\ge\\ln 2$. Étape 3 — Diviser par $\\ln 1,05>0$ : $n\\ge\\dfrac{0,693}{0,0488}\\approx 14,2$. Étape 4 — Conclure : $n$ est entier, donc $n=15$. La valeur $14$ est trop petite : le capital n'a pas encore doublé.",
               "answers": [
                 {
@@ -1480,10 +1572,10 @@
               ]
             },
             {
-              "content": "Aminata a un capital $C(n)=100\\,000\\times 1,05^n$ francs. Avec $\\ln 3\\approx 1,099$ et $\\ln 1,05\\approx 0,0488$, quel est le plus petit nombre entier $n$ de trimestres pour que son capital atteigne au moins $300\\,000$ F ?",
+              "content": "Aminata a un capital $C(n)=100\\,000\\times 1,05^n$ francs. Avec $\\ln 3\\approx 1,099$ et $\\ln 1,05\\approx 0,0488$, quel est le plus petit nombre entier $n$ d'années pour que son capital atteigne au moins $300\\,000$ F ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "unit": "trimestres",
+              "unit": "années",
               "explanation": "Étape 1 — Simplifier : $100\\,000\\times 1,05^n\\ge 300\\,000$ équivaut à $1,05^n\\ge 3$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,05\\ge\\ln 3$. Étape 3 — Diviser par $\\ln 1,05>0$ : $n\\ge\\dfrac{1,099}{0,0488}\\approx 22,5$. Étape 4 — Conclure : $n$ est entier, donc $n=23$. Arrondir à $22$ serait une erreur : à ce moment le capital n'a pas encore triplé.",
               "answers": [
                 {
@@ -1493,9 +1585,9 @@
               ]
             },
             {
-              "content": "Avec $C(n)=100\\,000\\times 1,05^n$, $\\ln 2\\approx 0,693$ et $\\ln 1,05\\approx 0,0488$, le capital d'Aminata dépasse $200\\,000$ F au bout de $14$ trimestres.",
+              "content": "Avec $C(n)=100\\,000\\times 1,05^n$, $\\ln 2\\approx 0,693$ et $\\ln 1,05\\approx 0,0488$, le capital d'Aminata dépasse $200\\,000$ F au bout de $14$ années.",
               "question_type": "true_false",
-              "explanation": "Étape 1 — Simplifier : il faut $1,05^{14}\\ge 2$. Étape 2 — Appliquer $\\ln$ : cela revient à $14\\ln 1,05\\ge\\ln 2$. Étape 3 — Calculer : $14\\times 0,0488=0,6832$, qui est inférieur à $\\ln 2\\approx 0,693$. Étape 4 — Conclure : $1,05^{14}<2$, donc le capital est encore inférieur à $200\\,000$ F. Il faut attendre $15$ trimestres.",
+              "explanation": "Étape 1 — Simplifier : il faut $1,05^{14}\\ge 2$. Étape 2 — Appliquer $\\ln$ : cela revient à $14\\ln 1,05\\ge\\ln 2$. Étape 3 — Calculer : $14\\times 0,0488=0,6832$, qui est inférieur à $\\ln 2\\approx 0,693$. Étape 4 — Conclure : $1,05^{14}<2$, donc le capital est encore inférieur à $200\\,000$ F. Il faut attendre $15$ années.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1508,20 +1600,20 @@
               ]
             },
             {
-              "content": "Un autre compte offre 10 % par trimestre : le capital est $100\\,000\\times 1,1^n$ francs. Avec $\\ln 2\\approx 0,693$ et $\\ln 1,1\\approx 0,0953$, quel est le plus petit nombre entier $n$ de trimestres pour doubler le capital ?",
+              "content": "Un autre compte offre 4 % par an : le capital est $100\\,000\\times 1,04^n$ francs. Avec $\\ln 2\\approx 0,693$ et $\\ln 1,04\\approx 0,0392$, quel est le plus petit nombre entier $n$ d'années pour doubler le capital ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "unit": "trimestres",
-              "explanation": "Étape 1 — Simplifier : $100\\,000\\times 1,1^n\\ge 200\\,000$ équivaut à $1,1^n\\ge 2$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,1\\ge\\ln 2$. Étape 3 — Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{0,693}{0,0953}\\approx 7,3$. Étape 4 — Conclure : $n=8$. Doubler le taux ne divise pas tout à fait la durée par deux : on passe de $15$ à $8$ trimestres.",
+              "unit": "années",
+              "explanation": "Étape 1 — Simplifier : $100\\,000\\times 1,04^n\\ge 200\\,000$ équivaut à $1,04^n\\ge 2$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,04\\ge\\ln 2$. Étape 3 — Diviser par $\\ln 1,04>0$ : $n\\ge\\dfrac{0,693}{0,0392}\\approx 17,7$. Étape 4 — Conclure : $n=18$. Un taux plus faible rallonge la durée : on passe de $15$ à $18$ années.",
               "answers": [
                 {
-                  "content": "8",
+                  "content": "18",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Pour atteindre un capital $K$ (en francs) en partant de $100\\,000$ F à 5 % par trimestre, la durée en trimestres est donnée par $D(K)=\\dfrac{\\ln K-\\ln 100000}{\\ln 1,05}$ pour $K>0$. Quelle est sa dérivée ?",
+              "content": "Pour atteindre un capital $K$ (en francs) en partant de $100\\,000$ F à 5 % par an, la durée en années est donnée par $D(K)=\\dfrac{\\ln K-\\ln 100000}{\\ln 1,05}$ pour $K>0$. Quelle est sa dérivée ?",
               "question_type": "single_choice",
               "explanation": "Étape 1 — Identifier : $\\ln 100000$ et $\\ln 1,05$ sont des constantes ; seul $\\ln K$ dépend de $K$. Étape 2 — Calculer : $(\\ln K)'=\\dfrac1K$ et la dérivée d'une constante est $0$. Étape 3 — Appliquer : $D'(K)=\\dfrac{1}{\\ln 1,05}\\times\\dfrac1K=\\dfrac{1}{K\\ln 1,05}$. Étape 4 — Interpréter : cette dérivée est positive, donc il faut d'autant plus de temps que le capital visé est grand.",
               "answers": [
@@ -1693,7 +1785,7 @@
             {
               "content": "Soit $g(x)=x-1-2\\ln x$. Avec $\\ln 3\\approx 1,099$, donne une valeur approchée de $g(3)$.",
               "question_type": "numeric",
-              "tolerance": 0.001,
+              "tolerance": 0.002,
               "explanation": "Étape 1 — Remplacer : $g(3)=3-1-2\\ln 3=2-2\\ln 3$. Étape 2 — Calculer : $2\\ln 3\\approx 2,198$. Étape 3 — Conclure : $g(3)\\approx 2-2,198=-0,198$. Ce nombre est négatif.",
               "answers": [
                 {
@@ -1751,7 +1843,7 @@
             {
               "content": "La fonction $g(x)=x-1-2\\ln x$ admet pour primitives les fonctions $F(x)=\\dfrac{x^2}{2}+x-2x\\ln x+c$ (car $x\\ln x-x$ est une primitive de $\\ln$). Soit $F$ la primitive qui s'annule en $1$. Avec $\\ln 2\\approx 0,693$, calcule une valeur approchée de $F(2)$.",
               "question_type": "numeric",
-              "tolerance": 0.001,
+              "tolerance": 0.005,
               "explanation": "Étape 1 — Déterminer la constante : $F(1)=\\dfrac12+1-2\\times 1\\times\\ln 1+c=\\dfrac32+c$, qui doit valoir $0$, donc $c=-\\dfrac32$. Étape 2 — Remplacer : $F(2)=\\dfrac{4}{2}+2-4\\ln 2-\\dfrac32=\\dfrac52-4\\ln 2$. Étape 3 — Calculer : $4\\ln 2\\approx 2,772$, donc $F(2)\\approx 2,5-2,772=-0,272$.",
               "answers": [
                 {

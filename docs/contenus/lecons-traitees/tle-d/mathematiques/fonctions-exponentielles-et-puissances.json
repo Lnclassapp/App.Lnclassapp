@@ -13,7 +13,7 @@
         {
           "key": "tangente-exp-origine",
           "kind": "coordinate_plane",
-          "description": "Un repère où l'on lit trois choses sur la fonction exponentielle : la droite d'équation y = x + 1, tangente à la courbe au point A(0 ; 1), l'axe des abscisses y = 0, asymptote horizontale en moins l'infini, et le point B(1 ; 2,72) de la courbe, situé au-dessus de la tangente au point C(1 ; 2).",
+          "description": "Un repère (la courbe de l'exponentielle n'est pas tracée) où l'on lit trois choses sur la fonction exponentielle : la droite d'équation y = x + 1, tangente à la courbe au point A(0 ; 1), l'axe des abscisses y = 0, asymptote horizontale en moins l'infini, et le point B(1 ; 2,72) de la courbe, situé au-dessus de la tangente au point C(1 ; 2).",
           "params": {
             "xmin": -4,
             "xmax": 4,
@@ -60,7 +60,7 @@
         {
           "key": "refroidissement-plat",
           "kind": "coordinate_plane",
-          "description": "Un repère pour le refroidissement d'un plat : l'axe horizontal donne le temps en minutes, l'axe vertical la température en degrés, de 0 à 50 (le départ à 80 degrés sort du cadre). La droite horizontale y = 20 est l'asymptote. Le point B(7 ; 50) est atteint au bout d'environ 6,9 minutes, le point C(30 ; 23) montre la température qui s'approche de 20.",
+          "description": "Un repère pour le refroidissement d'un plat (la courbe n'est pas tracée) : l'axe horizontal donne le temps en minutes, l'axe vertical la température en degrés, de 0 à 50 (le départ à 80 degrés sort du cadre). La droite horizontale y = 20 est l'asymptote. Les points B(10 ; 42,1), C(20 ; 28,1) et D(30 ; 23) sont sur la courbe et s'approchent de cette droite.",
           "params": {
             "xmin": -2,
             "xmax": 40,
@@ -69,11 +69,16 @@
             "points": [
               {
                 "id": "B",
-                "x": 7,
-                "y": 50
+                "x": 10,
+                "y": 42.1
               },
               {
                 "id": "C",
+                "x": 20,
+                "y": 28.1
+              },
+              {
+                "id": "D",
                 "x": 30,
                 "y": 23
               }
@@ -84,26 +89,19 @@
                 "b": 20
               }
             ],
-            "segments": [
-              {
-                "x1": 0,
-                "y1": 50,
-                "x2": 7,
-                "y2": 50
-              }
-            ]
+            "segments": []
           },
           "controls": []
         },
         {
           "key": "cacao-maximum",
           "kind": "coordinate_plane",
-          "description": "Un repère pour la production de cacao : l'axe horizontal donne le nombre de mois après la floraison, l'axe vertical la quantité récoltée en centaines de kg. Le point M(1 ; 0,74) est le maximum, la droite horizontale y = 0,74 le touche, et l'axe des abscisses y = 0 est l'asymptote en plus l'infini.",
+          "description": "Un repère pour la production de cacao (la courbe n'est pas tracée) : l'axe horizontal donne le nombre de mois après la floraison, l'axe vertical la quantité récoltée en centaines de kg. Les points N(10 ; 2,7) et P(20 ; 0,7) sont sur la courbe. L'axe des abscisses y = 0 est l'asymptote en plus l'infini.",
           "params": {
-            "xmin": -1,
-            "xmax": 8,
+            "xmin": -2,
+            "xmax": 25,
             "ymin": -0.5,
-            "ymax": 2,
+            "ymax": 5,
             "points": [
               {
                 "id": "O",
@@ -111,29 +109,23 @@
                 "y": 0
               },
               {
-                "id": "M",
-                "x": 1,
-                "y": 0.74
+                "id": "N",
+                "x": 10,
+                "y": 2.7
+              },
+              {
+                "id": "P",
+                "x": 20,
+                "y": 0.7
               }
             ],
             "lines": [
               {
                 "a": 0,
                 "b": 0
-              },
-              {
-                "a": 0,
-                "b": 0.74
               }
             ],
-            "segments": [
-              {
-                "x1": 1,
-                "y1": 0,
-                "x2": 1,
-                "y2": 0.74
-              }
-            ]
+            "segments": []
           },
           "controls": []
         }
@@ -420,7 +412,7 @@
               {
                 "content": "Résous dans $\\mathbb{R}$ : $e^{2x} - 3e^{x} + 2 = 0$. Quelles sont les deux solutions ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Isoler : on pose $X = e^{x}$, avec $X > 0$, et l'équation devient $X^{2} - 3X + 2 = 0$. Étape 2 — Vérifier le signe : on cherchera $X > 0$. Étape 3 — Appliquer $\\ln$ : $\\Delta = 9 - 8 = 1$, donc $X = \\dfrac{3 - 1}{2} = 1$ ou $X = \\dfrac{3 + 1}{2} = 2$, et $e^{x} = 1 \\iff x = \\ln 1 = 0$, $e^{x} = 2 \\iff x = \\ln 2$. Étape 4 — Résoudre : les deux valeurs de $X$ sont strictement positives, on garde les deux. Étape 5 — Conclure : $S = \\{0\\,;\\,\\ln 2\\}$. Les propositions $1$ et $2$ sont les valeurs de $X$, pas de $x$.",
+                "explanation": "Étape 1 — Isoler : on pose $X = e^{x}$, avec $X > 0$, et l'équation devient $X^{2} - 3X + 2 = 0$. Étape 2 — Vérifier le signe : on résout en $X$, $\\Delta = 9 - 8 = 1$, donc $X = \\dfrac{3 - 1}{2} = 1$ ou $X = \\dfrac{3 + 1}{2} = 2$ ; les deux sont strictement positifs, on garde les deux. Étape 3 — Appliquer $\\ln$ : $e^{x} = 1 \\iff x = \\ln 1 = 0$ et $e^{x} = 2 \\iff x = \\ln 2$. Étape 4 — Résoudre : les deux équations en $x$ sont résolues. Étape 5 — Conclure : $S = \\{0\\,;\\,\\ln 2\\}$. Les propositions $1$ et $2$ sont les valeurs de $X$, pas de $x$.",
                 "answers": [
                   {
                     "content": "$0$",
@@ -447,7 +439,7 @@
               {
                 "content": "L'équation $e^{x} = -3$ admet une solution dans $\\mathbb{R}$.",
                 "question_type": "true_false",
-                "explanation": "Étape 1 — Isoler : l'exponentielle est isolée, $e^{x} = -3$. Étape 2 — Vérifier le signe : $k = -3 \\leq 0$, or $e^{x} > 0$ pour tout $x$. Étape 3 — Conclure : on ne peut pas appliquer $\\ln$, car $\\ln(-3)$ n'existe pas. Étape 4 — Résoudre : il n'y a rien à résoudre. Étape 5 — Conclure : $S = \\emptyset$. L'affirmation est donc fausse.",
+                "explanation": "Étape 1 — Isoler : l'exponentielle est isolée, $e^{x} = -3$. Étape 2 — Vérifier le signe : $k = -3 \\leq 0$, or $e^{x} > 0$ pour tout $x$. Étape 3 — Appliquer $\\ln$ : impossible, $\\ln(-3)$ n'existe pas. Étape 4 — Résoudre : il n'y a rien à résoudre, l'équation n'a aucune solution. Étape 5 — Conclure : $S = \\emptyset$. L'affirmation est donc fausse.",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -533,7 +525,7 @@
             ]
           },
           "pitfall": "Ne pas conclure sur une forme indéterminée avec une règle inventée : « $\\frac{\\infty}{\\infty} = 1$ » est faux. Contre-exemple chiffré : pour $x = 20$, $e^{20} \\approx 485\\,000\\,000$, donc $\\dfrac{e^{20}}{20} \\approx 24\\,000\\,000$, et non $1$. De même, $\\lim_{x \\to -\\infty} x\\,e^{x}$ n'est pas $-\\infty$ : $e^{x}$ tend vers $0$ beaucoup plus vite que $x$ ne tend vers $-\\infty$, et le produit tend vers $0$.",
-          "figure": "tangente-exp-origine",
+          "figure": null,
           "exercise": {
             "title": "Calculer des limites avec l'exponentielle",
             "statement": "Dans cet exercice, tu calcules des limites de fonctions contenant l'exponentielle, avec la méthode de la fiche : calculer les limites, repérer la croissance comparée, transformer, conclure.",
@@ -729,7 +721,7 @@
             ]
           },
           "pitfall": "Ne pas oublier le facteur $u'$ en dérivant, ni le facteur $\\frac{1}{a}$ en primitivant. Contre-exemple : $(e^{2x})' = 2e^{2x}$ et non $e^{2x}$ ; au voisinage de $0$, $e^{2x}$ vaut environ $1 + 2x$, donc sa pente en $0$ est $2$. De même, une primitive de $e^{2x}$ est $\\dfrac{1}{2}e^{2x}$ : en dérivant $e^{2x}$, on obtient $2e^{2x}$, pas $e^{2x}$.",
-          "figure": null,
+          "figure": "tangente-exp-origine",
           "exercise": {
             "title": "Dériver et primitiver avec l'exponentielle",
             "statement": "Dans cet exercice, tu dérives des fonctions de la forme e puissance u et tu cherches des primitives de u' e puissance u, avec la méthode de la fiche : identifier, reconnaître, appliquer, conclure.",
@@ -1128,7 +1120,7 @@
               "content": "Une culture est modélisée par $N(t) = 100 \\times 2^{t/2}$, où $t$ est en heures. Au bout de combien d'heures y a-t-il 1 600 bactéries ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire : on résout $100 \\times 2^{t/2} = 1600$, soit $2^{t/2} = 16$. Étape 2 — Isoler : $16 = 2^{4}$. Étape 3 — Appliquer $\\ln$ (ou comparer les exposants) : $e^{\\frac{t}{2}\\ln 2} = e^{4\\ln 2}$ donne $\\dfrac{t}{2}\\ln 2 = 4\\ln 2$. Étape 4 — Résoudre : $\\dfrac{t}{2} = 4$, donc $t = 8$. Étape 5 — Conclure : il faut 8 heures, soit 4 doublements.",
+              "explanation": "Étape 1 — Isoler : $100 \\times 2^{t/2} = 1600$ donne $2^{t/2} = 16$. Étape 2 — Vérifier le signe : $16 > 0$, et on réécrit $16 = 2^{4}$. Étape 3 — Appliquer $\\ln$ (ou comparer les exposants) : $e^{\\frac{t}{2}\\ln 2} = e^{4\\ln 2}$ donne $\\dfrac{t}{2}\\ln 2 = 4\\ln 2$. Étape 4 — Résoudre : $\\dfrac{t}{2} = 4$, donc $t = 8$. Étape 5 — Conclure : il faut 8 heures, soit 4 doublements.",
               "answers": [
                 {
                   "content": "8",
@@ -1256,73 +1248,73 @@
         },
         {
           "title": "La production de cacao d'une parcelle",
-          "statement": "Une coopérative modélise la quantité de cabosses de cacao récoltées (en centaines de kg) sur une parcelle, $x$ mois après la floraison, par $f(x) = 2x\\,e^{-x}$, pour $x \\in [0\\,;\\,+\\infty[$. La droite horizontale $y = \\dfrac{2}{e} \\approx 0{,}74$ touche la courbe à son maximum.",
+          "statement": "Une coopérative modélise la quantité de cabosses de cacao récoltées (en centaines de kg) sur une parcelle, $x$ mois après la floraison, par $f(x) = 2x\\,e^{-x/5}$, pour $x \\in [0\\,;\\,+\\infty[$.",
           "exercise_type": "evaluation",
           "figure": "cacao-maximum",
           "questions": [
             {
-              "content": "Pour $f(x) = 2x\\,e^{-x}$ sur $[0\\,;\\,+\\infty[$, quelle est la dérivée $f'(x)$ ?",
+              "content": "Pour $f(x) = 2x\\,e^{-x/5}$ sur $[0\\,;\\,+\\infty[$, quelle est la dérivée $f'(x)$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Identifier : $f = v \\times e^{u}$ avec $v(x) = 2x$ et $u(x) = -x$, donc $v'(x) = 2$ et $u'(x) = -1$. Étape 2 — Reconnaître : c'est un produit, on dérive avec $(vw)' = v'w + vw'$ et $(e^{u})' = u'\\,e^{u}$. Étape 3 — Appliquer : $f'(x) = 2\\,e^{-x} + 2x \\times (-1)\\,e^{-x} = (2 - 2x)\\,e^{-x}$. Étape 4 — Conclure : $f'(x) = 2(1 - x)\\,e^{-x}$. La proposition $2(1+x)\\,e^{-x}$ oublie le signe de $u'$ ; la proposition $2\\,e^{-x}$ oublie le second terme du produit.",
+              "explanation": "Étape 1 — Identifier : $f = v \\times e^{u}$ avec $v(x) = 2x$ et $u(x) = -\\dfrac{x}{5}$, donc $v'(x) = 2$ et $u'(x) = -\\dfrac{1}{5}$. Étape 2 — Reconnaître : c'est un produit, on dérive avec $(vw)' = v'w + vw'$ et $(e^{u})' = u'\\,e^{u}$. Étape 3 — Appliquer : $f'(x) = 2\\,e^{-x/5} + 2x \\times \\left(-\\dfrac{1}{5}\\right)e^{-x/5} = \\left(2 - \\dfrac{2x}{5}\\right)e^{-x/5}$. Étape 4 — Conclure : on factorise, $f'(x) = \\dfrac{2}{5}(5 - x)\\,e^{-x/5}$. La proposition $2(1-x)\\,e^{-x/5}$ vient d'un $u'$ pris égal à $-1$ au lieu de $-\\dfrac{1}{5}$.",
               "answers": [
                 {
-                  "content": "$2(1+x)\\,e^{-x}$",
+                  "content": "$2(1-x)\\,e^{-x/5}$",
                   "correct": false
                 },
                 {
-                  "content": "$2(1-x)\\,e^{-x}$",
+                  "content": "$\\dfrac{2}{5}(5-x)\\,e^{-x/5}$",
                   "correct": true
                 },
                 {
-                  "content": "$2\\,e^{-x}$",
+                  "content": "$\\dfrac{2}{5}(5+x)\\,e^{-x/5}$",
                   "correct": false
                 },
                 {
-                  "content": "$-2x\\,e^{-x}$",
+                  "content": "$-\\dfrac{2}{5}x\\,e^{-x/5}$",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Pour $f(x) = 2x\\,e^{-x}$ sur $[0\\,;\\,+\\infty[$, on a $f'(x) = 2(1-x)\\,e^{-x}$. En quelle valeur de $x$ la fonction $f$ atteint-elle son maximum ?",
+              "content": "Pour $f(x) = 2x\\,e^{-x/5}$ sur $[0\\,;\\,+\\infty[$, on a $f'(x) = \\dfrac{2}{5}(5-x)\\,e^{-x/5}$. En quelle valeur de $x$ la fonction $f$ atteint-elle son maximum ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Identifier : le signe de $f'(x)$ est celui de $2(1 - x)$ car $e^{-x} > 0$. Étape 2 — Reconnaître : $f'(x) > 0$ pour $x < 1$, $f'(1) = 0$ et $f'(x) < 0$ pour $x > 1$. Étape 3 — Appliquer : $f$ est croissante sur $[0\\,;\\,1]$, puis décroissante sur $[1\\,;\\,+\\infty[$. Étape 4 — Conclure : le maximum est atteint en $x = 1$, soit un mois après la floraison.",
+              "explanation": "Étape 1 — Identifier : le signe de $f'(x)$ est celui de $5 - x$ car $\\dfrac{2}{5} > 0$ et $e^{-x/5} > 0$. Étape 2 — Reconnaître : $f'(x) > 0$ pour $x < 5$, $f'(5) = 0$ et $f'(x) < 0$ pour $x > 5$. Étape 3 — Appliquer : $f$ est croissante sur $[0\\,;\\,5]$, puis décroissante sur $[5\\,;\\,+\\infty[$. Étape 4 — Conclure : le maximum est atteint en $x = 5$, soit 5 mois après la floraison.",
               "answers": [
                 {
-                  "content": "1",
+                  "content": "5",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Pour $f(x) = 2x\\,e^{-x}$, quelle est la valeur maximale de $f$ (en centaines de kg) ?",
+              "content": "Pour $f(x) = 2x\\,e^{-x/5}$, quelle est la valeur maximale de $f$ (en centaines de kg), atteinte en $x = 5$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Identifier : le maximum est atteint en $x = 1$. Étape 2 — Reconnaître : on calcule $f(1) = 2 \\times 1 \\times e^{-1}$. Étape 3 — Appliquer : $e^{-1} = \\dfrac{1}{e}$. Étape 4 — Conclure : $f(1) = \\dfrac{2}{e} \\approx 0{,}74$, soit environ 74 kg. La proposition $2e$ oublie le signe moins de l'exposant ; $\\dfrac{1}{e}$ oublie le facteur $2$.",
+              "explanation": "Étape 1 — Identifier : le maximum est atteint en $x = 5$. Étape 2 — Reconnaître : on calcule $f(5) = 2 \\times 5 \\times e^{-5/5}$. Étape 3 — Appliquer : $e^{-5/5} = e^{-1} = \\dfrac{1}{e}$. Étape 4 — Conclure : $f(5) = \\dfrac{10}{e} \\approx 3{,}7$. La proposition $10e^{-5}$ oublie de diviser $5$ par $5$ dans l'exposant ; $\\dfrac{2}{e}$ oublie le facteur $5$ ; $10e$ oublie le signe moins.",
               "answers": [
                 {
-                  "content": "$2e$",
-                  "correct": false
-                },
-                {
-                  "content": "$\\dfrac{1}{e}$",
-                  "correct": false
-                },
-                {
-                  "content": "$2e^{-2}$",
+                  "content": "$10e$",
                   "correct": false
                 },
                 {
                   "content": "$\\dfrac{2}{e}$",
+                  "correct": false
+                },
+                {
+                  "content": "$10e^{-5}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{10}{e}$",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Pour $f(x) = 2x\\,e^{-x}$, calcule $\\lim_{x \\to +\\infty} f(x)$. On pourra écrire $f(x) = \\dfrac{2x}{e^{x}}$.",
+              "content": "Pour $f(x) = 2x\\,e^{-x/5}$, calcule $\\lim_{x \\to +\\infty} f(x)$. On pourra écrire $f(x) = 10 \\times \\dfrac{x/5}{e^{x/5}}$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Calculer les limites : $x \\to +\\infty$ et $e^{-x} \\to 0$, forme $\\infty \\times 0$ indéterminée. Étape 2 — Repérer la croissance comparée : $\\lim_{x \\to +\\infty} \\dfrac{e^{x}}{x} = +\\infty$. Étape 3 — Transformer : $f(x) = \\dfrac{2}{\\,e^{x}/x\\,}$ pour $x > 0$. Étape 4 — Conclure : le dénominateur tend vers $+\\infty$, donc $\\lim f = 0$. La production finit par s'annuler : la droite $y = 0$ est asymptote.",
+              "explanation": "Étape 1 — Calculer les limites : $x \\to +\\infty$ et $e^{-x/5} \\to 0$, forme $\\infty \\times 0$ indéterminée. Étape 2 — Repérer la croissance comparée : avec $X = \\dfrac{x}{5}$, $\\lim_{X \\to +\\infty} \\dfrac{e^{X}}{X} = +\\infty$. Étape 3 — Transformer : $f(x) = 10 \\times \\dfrac{X}{e^{X}} = \\dfrac{10}{\\,e^{X}/X\\,}$. Étape 4 — Conclure : le dénominateur tend vers $+\\infty$, donc $\\lim f = 0$. La production tend vers $0$ sans s'annuler, car $f(x) > 0$ pour $x > 0$ : la droite $y = 0$ est asymptote.",
               "answers": [
                 {
                   "content": "0",
@@ -1331,25 +1323,14 @@
               ]
             },
             {
-              "content": "Pour $f(x) = 2x\\,e^{-x}$, quelle est la solution $x > 0$ de l'équation $f(x) = x$ ?",
-              "question_type": "single_choice",
-              "explanation": "Étape 1 — Isoler l'exponentielle : pour $x > 0$, $2x\\,e^{-x} = x$ donne $2\\,e^{-x} = 1$, soit $e^{-x} = \\dfrac{1}{2}$. Étape 2 — Vérifier le signe : $\\dfrac{1}{2} > 0$. Étape 3 — Appliquer $\\ln$ : $-x = \\ln\\dfrac{1}{2} = -\\ln 2$. Étape 4 — Résoudre : $x = \\ln 2 \\approx 0{,}69$. Étape 5 — Conclure : $x = \\ln 2 > 0$ convient. La proposition $-\\ln 2$ oublie le signe de l'exposant ; elle est de plus négative, donc exclue.",
+              "content": "Pour $f(x) = 2x\\,e^{-x/5}$, la coopérative fixe un seuil de récolte $k = 3$ centaines de kg. On rappelle que $f(0) = 0$, que $f$ croît jusqu'à $\\dfrac{10}{e} \\approx 3{,}7$ puis décroît vers $0$. Combien de valeurs de $x$ vérifient $f(x) = 3$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : on étudie les variations de $f$ : croissante de $0$ à $\\dfrac{10}{e}$ sur $[0\\,;\\,5]$, décroissante de $\\dfrac{10}{e}$ vers $0$ sur $[5\\,;\\,+\\infty[$. Étape 2 — Reconnaître : $\\dfrac{10}{e} \\approx 3{,}7 > 3 > 0$, car $e < 3{,}33$ donne $\\dfrac{10}{e} > 3$. Étape 3 — Appliquer : $f$ est continue et strictement monotone sur chaque intervalle, donc elle prend la valeur $3$ une fois sur $]0\\,;\\,5[$ et une fois sur $]5\\,;\\,+\\infty[$. Étape 4 — Conclure : l'équation $f(x) = 3$ a exactement 2 solutions : le seuil est franchi à la hausse, puis à la baisse.",
               "answers": [
                 {
-                  "content": "$2\\ln 2$",
-                  "correct": false
-                },
-                {
-                  "content": "$-\\ln 2$",
-                  "correct": false
-                },
-                {
-                  "content": "$\\ln 2$",
+                  "content": "2",
                   "correct": true
-                },
-                {
-                  "content": "$\\dfrac{\\ln 2}{2}$",
-                  "correct": false
                 }
               ]
             }

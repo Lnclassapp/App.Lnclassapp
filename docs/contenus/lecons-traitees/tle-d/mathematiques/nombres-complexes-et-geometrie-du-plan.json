@@ -1,0 +1,1522 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Nombres complexes et géométrie du plan",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "plan-quartier",
+          "kind": "coordinate_plane",
+          "description": "Le plan d'un quartier dans un repère orthonormé direct. L'école A(1 ; 0), le marché B(3 ; 1) et le dispensaire C(2 ; 3) forment un triangle. Les segments AB, AC et BC sont tracés : on lit le rapport AC sur AB et l'angle orienté entre AB et AC.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": -1,
+            "ymax": 4,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 3,
+                "y": 1
+              },
+              {
+                "id": "C",
+                "x": 2,
+                "y": 3
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 0,
+                "x2": 3,
+                "y2": 1
+              },
+              {
+                "x1": 1,
+                "y1": 0,
+                "x2": 2,
+                "y2": 3
+              },
+              {
+                "x1": 3,
+                "y1": 1,
+                "x2": 2,
+                "y2": 3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "triangle-bornes",
+          "kind": "coordinate_plane",
+          "description": "Trois bornes d'un quartier A(1 ; 1), B(4 ; 2) et C(0 ; 4) dans un repère orthonormé direct. Les segments AB, AC et BC forment un triangle rectangle isocèle en A : les côtés AB et AC ont la même longueur racine de 10 et sont perpendiculaires.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": -1,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 4,
+                "y": 2
+              },
+              {
+                "id": "C",
+                "x": 0,
+                "y": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 4,
+                "y2": 2
+              },
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 0,
+                "y2": 4
+              },
+              {
+                "x1": 4,
+                "y1": 2,
+                "x2": 0,
+                "y2": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cour-cercle",
+          "kind": "geometry",
+          "description": "Le carrelage d'une cour dans un repère orthonormé direct. Le point A(-2 ; 1) est le centre d'un cercle de rayon 3. Les points M1(1 ; 1), M2(-2 ; 4), M3(-5 ; 1) et M4(-2 ; -2) sont sur le cercle, à distance 3 de A : ils vérifient la relation de module de l'exemple.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": -2,
+                "y": 1,
+                "label": "A"
+              },
+              {
+                "id": "M1",
+                "x": 1,
+                "y": 1,
+                "label": "M1"
+              },
+              {
+                "id": "M2",
+                "x": -2,
+                "y": 4,
+                "label": "M2"
+              },
+              {
+                "id": "M3",
+                "x": -5,
+                "y": 1,
+                "label": "M3"
+              },
+              {
+                "id": "M4",
+                "x": -2,
+                "y": -2,
+                "label": "M4"
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "M1"
+              ]
+            ],
+            "circles": [
+              {
+                "center": "A",
+                "r": 3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rotation-pagne",
+          "kind": "coordinate_plane",
+          "description": "Un motif de pagne dans un repère orthonormé direct. Le centre Ω(1 ; 1), le sommet M(3 ; 1) du losange et son image M'(1 ; 3) par le quart de tour direct autour de Ω. Les segments ΩM et ΩM' sont perpendiculaires et ont la même longueur 2.",
+          "params": {
+            "xmin": -1,
+            "xmax": 5,
+            "ymin": -1,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "Ω",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "M",
+                "x": 3,
+                "y": 1
+              },
+              {
+                "id": "M'",
+                "x": 1,
+                "y": 3
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 3,
+                "y2": 1
+              },
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 1,
+                "y2": 3
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "place-carree",
+          "kind": "coordinate_plane",
+          "description": "Une place carrée sur le plan d'un quartier : les lampadaires A(1 ; 1), B(5 ; 1), C(1 ; 5) et D(5 ; 5), et la fontaine Ω(3 ; 3) au centre. Les segments AB, BD, DC et CA forment le carré ; les diagonales AD et BC se coupent en Ω.",
+          "params": {
+            "xmin": 0,
+            "xmax": 6,
+            "ymin": 0,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 5,
+                "y": 1
+              },
+              {
+                "id": "C",
+                "x": 1,
+                "y": 5
+              },
+              {
+                "id": "D",
+                "x": 5,
+                "y": 5
+              },
+              {
+                "id": "Ω",
+                "x": 3,
+                "y": 3
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 5,
+                "y2": 1
+              },
+              {
+                "x1": 5,
+                "y1": 1,
+                "x2": 5,
+                "y2": 5
+              },
+              {
+                "x1": 5,
+                "y1": 5,
+                "x2": 1,
+                "y2": 5
+              },
+              {
+                "x1": 1,
+                "y1": 5,
+                "x2": 1,
+                "y2": 1
+              },
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 5,
+                "y2": 5
+              },
+              {
+                "x1": 5,
+                "y1": 1,
+                "x2": 1,
+                "y2": 5
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Lire un angle et un rapport de longueurs dans un quotient",
+          "remember": "Dans le plan complexe muni d'un repère orthonormé direct, soient $A$, $B$, $C$ trois points d'affixes $z_A$, $z_B$, $z_C$, avec $A\\neq B$ et $A\\neq C$. On pose $Z=\\dfrac{z_C-z_A}{z_B-z_A}$. Alors $|Z|=\\dfrac{AC}{AB}$ et $\\arg Z\\equiv(\\overrightarrow{AB},\\overrightarrow{AC})\\ [2\\pi]$. Le module donne le rapport des longueurs ; l'argument donne l'angle orienté de $\\overrightarrow{AB}$ vers $\\overrightarrow{AC}$. Si l'on échange $B$ et $C$, le quotient devient $\\dfrac1Z$ : son module est inversé et son argument est opposé.",
+          "method": [
+            "Écrire les différences $z_B - z_A$ et $z_C - z_A$ à partir des affixes des trois points.",
+            "Calculer le quotient $Z=\\dfrac{z_C-z_A}{z_B-z_A}$ et le mettre sous forme algébrique (multiplier par le conjugué du dénominateur).",
+            "Déterminer le module $|Z|$ et un argument de $Z$.",
+            "Conclure : $\\dfrac{AC}{AB}=|Z|$ et $(\\overrightarrow{AB},\\overrightarrow{AC})\\equiv\\arg Z\\ [2\\pi]$."
+          ],
+          "example": {
+            "statement": "Sur le plan d'un quartier, rapporté à un repère orthonormé direct d'unité 100 m, l'école $A$ a pour affixe $1$, le marché $B$ a pour affixe $3+i$ et le dispensaire $C$ a pour affixe $2+3i$. Calculer le rapport $\\dfrac{AC}{AB}$ et l'angle $(\\overrightarrow{AB},\\overrightarrow{AC})$.",
+            "steps": [
+              "Écrire : $z_B - z_A = 3+i-1 = 2+i$ et $z_C - z_A = 2+3i-1 = 1+3i$.",
+              "Calculer : $Z=\\dfrac{1+3i}{2+i}=\\dfrac{(1+3i)(2-i)}{(2+i)(2-i)}=\\dfrac{2-i+6i+3}{5}=\\dfrac{5+5i}{5}=1+i$.",
+              "Déterminer : $|Z|=\\sqrt{1^2+1^2}=\\sqrt2$ et $Z=\\sqrt2\\left(\\dfrac{\\sqrt2}{2}+i\\dfrac{\\sqrt2}{2}\\right)$, donc $\\arg Z=\\dfrac{\\pi}{4}$.",
+              "Conclure : $\\dfrac{AC}{AB}=\\sqrt2$ et $(\\overrightarrow{AB},\\overrightarrow{AC})\\equiv\\dfrac{\\pi}{4}\\ [2\\pi]$. Le dispensaire est $\\sqrt2$ fois plus loin de l'école que le marché."
+            ]
+          },
+          "pitfall": "Ne pas oublier de soustraire $z_A$ : le quotient est $\\dfrac{z_C-z_A}{z_B-z_A}$, pas $\\dfrac{z_C}{z_B}$. Contre-exemple : avec $A(1)$, $B(3+i)$, $C(2+3i)$, on a $\\dfrac{z_C}{z_B}=\\dfrac{9+7i}{10}$, de module $\\dfrac{\\sqrt{130}}{10}\\approx1{,}14$, alors que le vrai rapport $\\dfrac{AC}{AB}$ vaut $\\sqrt2\\approx1{,}41$. Ne pas non plus inverser le quotient : $\\dfrac{z_B-z_A}{z_C-z_A}$ donne l'angle opposé $(\\overrightarrow{AC},\\overrightarrow{AB})$.",
+          "figure": "plan-quartier",
+          "exercise": {
+            "title": "Lire un rapport et un angle dans un quotient",
+            "statement": "Dans cet exercice, le plan complexe est muni d'un repère orthonormé direct. Tu utilises le quotient $Z=\\dfrac{z_C-z_A}{z_B-z_A}$ pour lire un rapport de longueurs et un angle orienté, avec la méthode de la fiche : écrire, calculer, déterminer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Les points $A(1+i)$, $B(3+i)$ et $C(3+3i)$ sont placés sur le plan d'un quartier. Quelle est la forme algébrique de $Z=\\dfrac{z_C-z_A}{z_B-z_A}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $z_B-z_A=3+i-1-i=2$ et $z_C-z_A=3+3i-1-i=2+2i$. Étape 2 — Calculer : $Z=\\dfrac{2+2i}{2}=1+i$. Étape 3 — Déterminer : $|Z|=\\sqrt2$, $\\arg Z=\\dfrac\\pi4$. Étape 4 — Conclure : $AC=\\sqrt2\\,AB$. La proposition $2+2i$ oublie de diviser par $z_B-z_A$ ; $\\dfrac{1-i}{2}$ est le quotient inversé $\\dfrac{z_B-z_A}{z_C-z_A}$.",
+                "answers": [
+                  {
+                    "content": "$1+i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1-i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2+2i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1-i}{2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le plan complexe, $A$ a pour affixe $0$, $B$ a pour affixe $1+i$ et $C$ a pour affixe $-2+2i$. Quelle est la valeur du rapport $\\dfrac{AC}{AB}$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $z_B-z_A=1+i$ et $z_C-z_A=-2+2i$. Étape 2 — Calculer : $Z=\\dfrac{-2+2i}{1+i}=\\dfrac{(-2+2i)(1-i)}{2}=\\dfrac{-2+2i+2i+2}{2}=2i$. Étape 3 — Déterminer : $|Z|=2$. Étape 4 — Conclure : $\\dfrac{AC}{AB}=|Z|=2$. Vérification : $AB=\\sqrt2$ et $AC=\\sqrt{8}=2\\sqrt2$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Les points $A(1)$, $B(2)$ et $C(1-i)$ ont pour quotient $Z=\\dfrac{z_C-z_A}{z_B-z_A}=-i$. Quelle est la mesure de l'angle orienté $(\\overrightarrow{AB},\\overrightarrow{AC})$ modulo $2\\pi$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $z_B-z_A=1$ et $z_C-z_A=-i$. Étape 2 — Calculer : $Z=\\dfrac{-i}{1}=-i$. Étape 3 — Déterminer : $|Z|=1$ et $-i=\\cos\\left(-\\dfrac\\pi2\\right)+i\\sin\\left(-\\dfrac\\pi2\\right)$, donc $\\arg Z=-\\dfrac\\pi2$. Étape 4 — Conclure : $(\\overrightarrow{AB},\\overrightarrow{AC})\\equiv-\\dfrac\\pi2\\ [2\\pi]$. La proposition $\\dfrac\\pi2$ est l'angle de $\\overrightarrow{AC}$ vers $\\overrightarrow{AB}$ : on s'est trompé de sens.",
+                "answers": [
+                  {
+                    "content": "$-\\dfrac\\pi2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac\\pi2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\pi$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0)$, $B(1)$ et $C(1+i\\sqrt3)$. Que valent $\\dfrac{AC}{AB}$ et $(\\overrightarrow{AB},\\overrightarrow{AC})$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $z_B-z_A=1$ et $z_C-z_A=1+i\\sqrt3$. Étape 2 — Calculer : $Z=1+i\\sqrt3$. Étape 3 — Déterminer : $|Z|=\\sqrt{1+3}=2$ et $Z=2\\left(\\dfrac12+i\\dfrac{\\sqrt3}{2}\\right)$, donc $\\arg Z=\\dfrac\\pi3$. Étape 4 — Conclure : $\\dfrac{AC}{AB}=2$ et l'angle vaut $\\dfrac\\pi3$. La proposition avec $\\dfrac\\pi6$ confond cosinus et sinus ; celle avec $\\dfrac12$ et $-\\dfrac\\pi3$ utilise le quotient inversé.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{AC}{AB}=2$ et angle $\\dfrac\\pi3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{AC}{AB}=2$ et angle $\\dfrac\\pi6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{AC}{AB}=\\dfrac12$ et angle $-\\dfrac\\pi3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{AC}{AB}=\\sqrt2$ et angle $\\dfrac\\pi3$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour trois points $A$, $B$, $C$ distincts, l'angle orienté $(\\overrightarrow{AB},\\overrightarrow{AC})$ est égal à l'argument de $\\dfrac{z_B-z_A}{z_C-z_A}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : l'angle $(\\overrightarrow{AB},\\overrightarrow{AC})$ va de $\\overrightarrow{AB}$ vers $\\overrightarrow{AC}$. Étape 2 — Calculer : le bon quotient est $Z=\\dfrac{z_C-z_A}{z_B-z_A}$ (arrivée sur départ). Étape 3 — Déterminer : le quotient proposé vaut $\\dfrac1Z$, d'argument $-\\arg Z$. Étape 4 — Conclure : il donne l'angle $(\\overrightarrow{AC},\\overrightarrow{AB})$, opposé du bon. Exemple : avec $Z=i$, l'affirmation donnerait $-\\dfrac\\pi2$ au lieu de $\\dfrac\\pi2$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Sur le plan d'un quartier muni d'un repère orthonormé direct, la gare $A$ a pour affixe $1$, la station $B$ a pour affixe $2$ et le château d'eau $C$ a pour affixe $i$. On pose $Z=\\dfrac{z_C-z_A}{z_B-z_A}$.",
+            "questions": [
+              {
+                "content": "Calcule $Z$ sous la forme $a+ib$ : $Z=$ ( ___ ) + ( ___ ) $i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $z_B-z_A=2-1=1$ et $z_C-z_A=i-1=-1+i$. Étape 2 — Calculer : $Z=\\dfrac{-1+i}{1}=-1+i$. Donc $a=-1$ et $b=1$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Soustrais d'abord $z_A=1$ au numérateur et au dénominateur."
+              },
+              {
+                "content": "Un argument de $Z=-1+i$ est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Écrire : $Z=-1+i$. Étape 2 — Calculer : déjà fait. Étape 3 — Déterminer : $|Z|=\\sqrt2$ ; $\\cos\\theta=-\\dfrac{\\sqrt2}{2}$ et $\\sin\\theta=\\dfrac{\\sqrt2}{2}$, donc $\\theta=\\dfrac{3\\pi}{4}$. Étape 4 — Conclure : $(\\overrightarrow{AB},\\overrightarrow{AC})\\equiv\\dfrac{3\\pi}4$. La proposition $\\dfrac\\pi4$ ignore le signe de la partie réelle.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{3\\pi}{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{\\pi}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\dfrac{\\pi}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\dfrac{3\\pi}{4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Donne la mesure en degrés, comprise entre $0$ et $180$, de l'angle $(\\overrightarrow{AB},\\overrightarrow{AC})$ sachant que $Z=-1+i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $Z=-1+i$. Étape 2 — Calculer : déjà fait. Étape 3 — Déterminer : $\\arg Z=\\dfrac{3\\pi}{4}$. Étape 4 — Conclure : $\\dfrac{3\\pi}{4}$ rad $=\\dfrac{3\\times180}{4}=135$ degrés.",
+                "answers": [
+                  {
+                    "content": "135",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "°"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître un alignement, un angle droit ou la nature d'un triangle",
+          "remember": "Soient $A$, $B$, $C$ trois points distincts et $Z=\\dfrac{z_C-z_A}{z_B-z_A}$. $A$, $B$, $C$ sont alignés si et seulement si $Z$ est réel. $(AB)\\perp(AC)$ si et seulement si $Z$ est imaginaire pur (non nul). $ABC$ est isocèle en $A$ si et seulement si $|Z|=1$. $ABC$ est rectangle isocèle en $A$ si et seulement si $Z=i$ ou $Z=-i$. $ABC$ est équilatéral si et seulement si $Z=\\dfrac12+i\\dfrac{\\sqrt3}{2}$ ou $Z=\\dfrac12-i\\dfrac{\\sqrt3}{2}$, c'est-à-dire $|Z|=1$ et $\\arg Z=\\pm\\dfrac\\pi3$.",
+          "method": [
+            "Écrire le quotient $Z=\\dfrac{z_C-z_A}{z_B-z_A}$ pour le sommet $A$ où l'on étudie l'angle ou les longueurs.",
+            "Calculer $Z$ sous forme algébrique $x+iy$ (multiplier par le conjugué du dénominateur).",
+            "Repérer si $Z$ est réel ($y=0$) ou imaginaire pur ($x=0$), et calculer son module $|Z|$.",
+            "Conclure avec la fiche : points alignés, angle droit, triangle isocèle, rectangle isocèle ou équilatéral."
+          ],
+          "example": {
+            "statement": "Trois bornes d'un quartier ont pour affixes $z_A=1+i$, $z_B=4+2i$ et $z_C=4i$ dans un repère orthonormé direct. Déterminer la nature du triangle $ABC$.",
+            "steps": [
+              "Écrire : le sommet étudié est $A$, donc $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{4i-(1+i)}{4+2i-(1+i)}=\\dfrac{-1+3i}{3+i}$.",
+              "Calculer : $Z=\\dfrac{(-1+3i)(3-i)}{(3+i)(3-i)}=\\dfrac{-3+i+9i+3}{10}=\\dfrac{10i}{10}=i$.",
+              "Repérer : $Z=i$ est imaginaire pur, et $|Z|=1$.",
+              "Conclure : $Z$ imaginaire pur donne $(AB)\\perp(AC)$ et $|Z|=1$ donne $AB=AC$, donc $ABC$ est rectangle isocèle en $A$."
+            ]
+          },
+          "pitfall": "Ne pas confondre imaginaire pur (angle droit) et module égal à 1 (côtés égaux). Contre-exemple 1 : avec $A(0)$, $B(1)$, $C(2i)$, $Z=2i$ est imaginaire pur, le triangle est rectangle en $A$, mais $AC=2$ et $AB=1$ : il n'est pas isocèle. Contre-exemple 2 : $Z=\\dfrac35+\\dfrac45i$ a pour module $1$ (isocèle en $A$) mais n'est pas imaginaire pur : pas d'angle droit. Pour un triangle rectangle isocèle, il faut les deux : $Z=\\pm i$.",
+          "figure": "triangle-bornes",
+          "exercise": {
+            "title": "Reconnaître la nature d'un triangle",
+            "statement": "Dans cet exercice, tu étudies des triangles dont les sommets sont des points du plan complexe. Tu appliques la méthode de la fiche : écrire le quotient, le calculer, repérer sa nature et son module, puis conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Les points $A(1)$, $B(2+i)$ et $C(4+3i)$ sont placés dans un repère orthonormé direct. Que peut-on dire de $A$, $B$, $C$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{3+3i}{1+i}$. Étape 2 — Calculer : $Z=\\dfrac{(3+3i)(1-i)}{2}=\\dfrac{3-3i+3i+3}{2}=3$. Étape 3 — Repérer : $Z=3$ est un nombre réel. Étape 4 — Conclure : $A$, $B$, $C$ sont alignés. Le module $|Z|=3\\neq1$ exclut le triangle isocèle en $A$, et $Z$ n'est pas imaginaire pur.",
+                "answers": [
+                  {
+                    "content": "$A$, $B$, $C$ sont alignés",
+                    "correct": true
+                  },
+                  {
+                    "content": "$ABC$ est rectangle en $A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$ABC$ est isocèle en $A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$ABC$ est équilatéral",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0)$, $B(2)$ et $C(3i)$. Quelle est la nature du triangle $ABC$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{3i}{2}$. Étape 2 — Calculer : $Z=\\dfrac32i$. Étape 3 — Repérer : $Z$ est imaginaire pur et $|Z|=\\dfrac32\\neq1$. Étape 4 — Conclure : $(AB)\\perp(AC)$ mais $AC=\\dfrac32AB$ : $ABC$ est rectangle en $A$ sans être isocèle. La proposition « rectangle isocèle » oublie de vérifier le module.",
+                "answers": [
+                  {
+                    "content": "rectangle en $A$, non isocèle",
+                    "correct": true
+                  },
+                  {
+                    "content": "rectangle isocèle en $A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "isocèle en $A$, non rectangle",
+                    "correct": false
+                  },
+                  {
+                    "content": "points alignés",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0)$, $B(1+2i)$ et $C(-1+2i)$. Le quotient vaut $Z=\\dfrac{3+4i}{5}$. Quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{-1+2i}{1+2i}$. Étape 2 — Calculer : $Z=\\dfrac{(-1+2i)(1-2i)}{5}=\\dfrac{-1+2i+2i+4}{5}=\\dfrac{3+4i}{5}$. Étape 3 — Repérer : $Z$ n'est ni réel ni imaginaire pur, et $|Z|=\\sqrt{\\dfrac{9+16}{25}}=1$. Étape 4 — Conclure : $AB=AC$ ($ABC$ est isocèle en $A$) et $|Z|=1$ ; il n'y a ni alignement ni angle droit en $A$.",
+                "answers": [
+                  {
+                    "content": "$|Z|=1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$ABC$ est isocèle en $A$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$ABC$ est rectangle en $A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A$, $B$, $C$ sont alignés",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On donne $A(0)$, $B(2)$ et $C(1+i\\sqrt3)$. Quelle est la nature du triangle $ABC$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{1+i\\sqrt3}{2}$. Étape 2 — Calculer : $Z=\\dfrac12+i\\dfrac{\\sqrt3}{2}$. Étape 3 — Repérer : $|Z|=\\sqrt{\\dfrac14+\\dfrac34}=1$ et $\\arg Z=\\dfrac\\pi3$. Étape 4 — Conclure : $Z=e^{i\\pi/3}$, donc $ABC$ est équilatéral. Vérification : $AB=2$, $AC=\\sqrt{1+3}=2$, $BC=\\sqrt{1+3}=2$. La proposition « isocèle non équilatéral » s'arrête à $|Z|=1$.",
+                "answers": [
+                  {
+                    "content": "équilatéral",
+                    "correct": true
+                  },
+                  {
+                    "content": "rectangle isocèle en $A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "isocèle en $A$, non équilatéral",
+                    "correct": false
+                  },
+                  {
+                    "content": "rectangle en $A$, non isocèle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si le quotient $Z=\\dfrac{z_C-z_A}{z_B-z_A}$ vaut $2i$, alors le triangle $ABC$ est rectangle isocèle en $A$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $Z=2i$. Étape 2 — Calculer : rien à faire, $Z$ est déjà sous forme algébrique. Étape 3 — Repérer : $Z$ est imaginaire pur, mais $|Z|=2\\neq1$. Étape 4 — Conclure : l'angle en $A$ est droit mais $AC=2AB$ : le triangle est rectangle sans être isocèle. Il faudrait $Z=\\pm i$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans un repère orthonormé direct, trois bornes d'un quartier ont pour affixes $z_D=i$, $z_E=2+i$ et $z_F=-i$. On étudie le triangle $DEF$ au sommet $D$ avec $Z=\\dfrac{z_F-z_D}{z_E-z_D}$.",
+            "questions": [
+              {
+                "content": "Calcule $Z$ sous la forme $a+ib$ : $Z=$ ( ___ ) + ( ___ ) $i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $z_F-z_D=-i-i=-2i$ et $z_E-z_D=2+i-i=2$. Étape 2 — Calculer : $Z=\\dfrac{-2i}{2}=-i=0+(-1)i$. Donc $a=0$ et $b=-1$.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Soustrais $z_D=i$ avant de diviser."
+              },
+              {
+                "content": "Quelle est la nature du triangle $DEF$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_F-z_D}{z_E-z_D}$. Étape 2 — Calculer : $Z=-i$. Étape 3 — Repérer : $Z$ est imaginaire pur et $|Z|=1$. Étape 4 — Conclure : $(DE)\\perp(DF)$ et $DE=DF$, donc $DEF$ est rectangle isocèle en $D$. La proposition « alignés » exigerait $Z$ réel.",
+                "answers": [
+                  {
+                    "content": "rectangle isocèle en $D$",
+                    "correct": true
+                  },
+                  {
+                    "content": "rectangle en $D$, non isocèle",
+                    "correct": false
+                  },
+                  {
+                    "content": "isocèle en $D$, non rectangle",
+                    "correct": false
+                  },
+                  {
+                    "content": "$D$, $E$, $F$ alignés",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde si $Z$ est réel, imaginaire pur, et calcule son module."
+              },
+              {
+                "content": "Calcule $EF^2$ pour $E(2+i)$ et $F(-i)$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Écrire : $z_E-z_F=2+i+i=2+2i$. Étape 2 — Calculer : $EF^2=|2+2i|^2=2^2+2^2$. Étape 3 — Repérer : on additionne deux carrés positifs. Étape 4 — Conclure : $EF^2=8$. Vérification avec Pythagore dans le triangle rectangle en $D$ : $DE^2+DF^2=4+4=8$.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Déterminer un ensemble de points du plan complexe",
+          "remember": "Soient $A$ et $B$ deux points distincts d'affixes $a$ et $b$, $M$ le point d'affixe $z$ et $r>0$. On a $|z-a|=AM$ et $|z-b|=BM$. $|z-a|=r$ : cercle de centre $A$ et de rayon $r$. $|z-a|\\le r$ : disque fermé (bord compris). $|z-a|=|z-b|$ : médiatrice du segment $[AB]$. Pour $z\\neq a$, $\\arg(z-a)=\\theta\\ [2\\pi]$ : demi-droite d'origine $A$ (sans $A$), dirigée par le vecteur d'affixe $e^{i\\theta}$ ($\\theta=0$ : vers la droite, $\\theta=\\dfrac\\pi2$ : vers le haut).",
+          "method": [
+            "Repérer le point mobile $M(z)$ et les points fixes dont les affixes apparaissent dans l'égalité.",
+            "Traduire en distances ou en angle : $|z-a|=AM$, $|z-b|=BM$, $\\arg(z-a)=(\\vec u,\\overrightarrow{AM})$.",
+            "Reconnaître l'ensemble : cercle ou disque ($AM$ et un nombre), médiatrice ($AM=BM$), demi-droite (angle fixe).",
+            "Préciser ses éléments (centre et rayon, ou extrémités du segment, ou origine et direction) puis conclure."
+          ],
+          "example": {
+            "statement": "Déterminer l'ensemble des points $M$ d'affixe $z$ tels que $|z+2-i|=3$, dans un repère orthonormé direct.",
+            "steps": [
+              "Repérer : le point mobile est $M(z)$ ; on écrit $z+2-i=z-(-2+i)$, donc le point fixe est $A(-2+i)$.",
+              "Traduire : $|z-(-2+i)|=AM$, donc l'égalité s'écrit $AM=3$.",
+              "Reconnaître : les points $M$ à distance constante $3$ de $A$ forment un cercle.",
+              "Préciser : c'est le cercle de centre $A(-2+i)$, c'est-à-dire le point de coordonnées $(-2\\,;\\,1)$, et de rayon $3$."
+            ]
+          },
+          "pitfall": "Ne pas se tromper de signe sur le centre : $|z+2|=3$ s'écrit $|z-(-2)|=3$, le centre est le point d'affixe $-2$, pas $2$. Contre-exemple : $z=1$ vérifie $|1+2|=3$, donc $1$ est sur l'ensemble, alors que $z=5$ est à distance $3$ de $2$ mais $|5+2|=7\\neq3$. Pour trouver le centre, on met toujours l'expression sous la forme $z-a$.",
+          "figure": "cour-cercle",
+          "exercise": {
+            "title": "Reconnaître des ensembles de points",
+            "statement": "Dans cet exercice, le plan complexe est muni d'un repère orthonormé direct. Tu identifies des ensembles de points $M(z)$ avec la méthode de la fiche : repérer, traduire, reconnaître, préciser.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est l'ensemble des points $M(z)$ tels que $|z-3|=2$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le point fixe est $A(3)$ et le point mobile est $M(z)$. Étape 2 — Traduire : $|z-3|=AM$, donc $AM=2$. Étape 3 — Reconnaître : une distance constante à un point fixe donne un cercle. Étape 4 — Préciser : centre le point d'affixe $3$, rayon $2$. La proposition « disque » oublie que l'égalité ne contient pas l'intérieur ; la proposition du centre $-3$ confond $z-3$ et $z+3$.",
+                "answers": [
+                  {
+                    "content": "le cercle de centre le point d'affixe $3$ et de rayon $2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "le cercle de centre le point d'affixe $-3$ et de rayon $2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "le cercle de centre le point d'affixe $3$ et de rayon $4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "le disque de centre le point d'affixe $3$ et de rayon $2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soient $A(1)$ et $B(i)$. Quel est l'ensemble des points $M(z)$ tels que $|z-1|=|z-i|$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : points fixes $A(1)$ et $B(i)$, point mobile $M(z)$. Étape 2 — Traduire : $AM=BM$. Étape 3 — Reconnaître : les points équidistants de $A$ et $B$ forment la médiatrice de $[AB]$. Étape 4 — Préciser : avec $z=x+iy$, $(x-1)^2+y^2=x^2+(y-1)^2$ donne $-2x+1=-2y+1$, soit la droite $y=x$. La proposition « cercle de diamètre $[AB]$ » confond équidistance et angle droit.",
+                "answers": [
+                  {
+                    "content": "la médiatrice du segment $[AB]$",
+                    "correct": true
+                  },
+                  {
+                    "content": "le cercle de centre $A$ passant par $B$",
+                    "correct": false
+                  },
+                  {
+                    "content": "la droite $(AB)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "le cercle de diamètre $[AB]$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'ensemble des points $M(z)$ tels que $|z+4-3i|=5$ est un cercle. Quelle est l'abscisse de son centre ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : on écrit $z+4-3i=z-(-4+3i)$, le point fixe est $A(-4+3i)$. Étape 2 — Traduire : $AM=5$. Étape 3 — Reconnaître : c'est un cercle de rayon $5$. Étape 4 — Préciser : le centre est $A(-4+3i)$, de coordonnées $(-4\\,;\\,3)$. L'abscisse est $-4$ ; la valeur $4$ vient d'une erreur de signe.",
+                "answers": [
+                  {
+                    "content": "-4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Soit $A(1)$. Quel est l'ensemble des points $M(z)$ tels que $\\arg(z-1)=\\dfrac\\pi2\\ [2\\pi]$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le point fixe est $A(1)$, le point mobile est $M(z)$. Étape 2 — Traduire : $\\arg(z-1)=(\\vec u,\\overrightarrow{AM})=\\dfrac\\pi2$. Étape 3 — Reconnaître : un angle fixe donne une demi-droite d'origine $A$. Étape 4 — Préciser : la direction est celle de $e^{i\\pi/2}=i$, donc la demi-droite part du point d'affixe $1$ verticalement vers le haut, sans le point $A$. La droite entière inclurait le côté $\\arg=-\\dfrac\\pi2$.",
+                "answers": [
+                  {
+                    "content": "la demi-droite d'origine le point d'affixe $1$, dirigée vers le haut, privée de son origine",
+                    "correct": true
+                  },
+                  {
+                    "content": "la droite verticale d'équation $x=1$ entière",
+                    "correct": false
+                  },
+                  {
+                    "content": "la demi-droite d'origine $O$ dirigée vers le haut",
+                    "correct": false
+                  },
+                  {
+                    "content": "le cercle de centre le point d'affixe $1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'ensemble des points $M(z)$ tels que $|z-5+i|=2$ est le cercle de centre le point d'affixe $5+i$ et de rayon $2$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on écrit $z-5+i=z-(5-i)$, le point fixe est $A(5-i)$. Étape 2 — Traduire : $AM=2$. Étape 3 — Reconnaître : c'est un cercle de rayon $2$. Étape 4 — Préciser : le centre est $5-i$, de coordonnées $(5\\,;\\,-1)$, et non $5+i$. L'affirmation est donc fausse : elle recopie le signe de $i$ au lieu de l'inverser.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans le plan complexe muni d'un repère orthonormé direct (unité 1 m), on étudie des ensembles de points $M$ d'affixe $z$ sur le carrelage d'une cour.",
+            "questions": [
+              {
+                "content": "L'ensemble des points $M(z)$ tels que $|z-1+2i|=4$ est le cercle de centre ( ___ ; ___ ) et de rayon $4$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : on écrit $z-1+2i=z-(1-2i)$, le point fixe est $A(1-2i)$. Étape 2 — Traduire : $AM=4$. Étape 3 — Reconnaître : c'est un cercle. Étape 4 — Préciser : le centre est $A(1\\,;\\,-2)$, de rayon $4$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Mets l'expression sous la forme $z-a$ : le signe de $a$ est l'inverse de celui écrit."
+              },
+              {
+                "content": "L'ensemble des points $M(z)$ tels que $|z|=|z-4|$ est la droite d'équation $x=$ ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : points fixes $O(0)$ et $A(4)$. Étape 2 — Traduire : $OM=AM$. Étape 3 — Reconnaître : c'est la médiatrice de $[OA]$. Étape 4 — Préciser : le milieu de $[OA]$ est $(2\\,;\\,0)$ et la médiatrice est verticale, d'équation $x=2$. Vérification : $x^2+y^2=(x-4)^2+y^2$ donne $8x=16$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'ensemble des points $M(z)$ tels que $\\arg(z-1+2i)=0\\ [2\\pi]$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on écrit $z-1+2i=z-(1-2i)$, le point fixe est $A(1\\,;\\,-2)$. Étape 2 — Traduire : $(\\vec u,\\overrightarrow{AM})=0$. Étape 3 — Reconnaître : un angle fixe donne une demi-droite. Étape 4 — Préciser : la direction est $e^{i0}=1$, c'est-à-dire vers la droite : la demi-droite horizontale d'origine $A$, privée de $A$.",
+                "answers": [
+                  {
+                    "content": "la demi-droite horizontale d'origine le point $(1\\,;\\,-2)$, vers la droite",
+                    "correct": true
+                  },
+                  {
+                    "content": "la demi-droite horizontale d'origine le point $(-1\\,;\\,2)$, vers la droite",
+                    "correct": false
+                  },
+                  {
+                    "content": "la demi-droite verticale d'origine le point $(1\\,;\\,-2)$, vers le haut",
+                    "correct": false
+                  },
+                  {
+                    "content": "la demi-droite horizontale d'origine le point $(1\\,;\\,-2)$, vers la gauche",
+                    "correct": false
+                  }
+                ],
+                "hint": "Une direction d'angle $0$ est celle du vecteur d'affixe $1$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Écrire une translation, une homothétie ou une rotation en complexe",
+          "remember": "Dans un repère orthonormé direct, le point $M(z)$ a pour image $M'(z')$. Translation de vecteur $\\vec u$ d'affixe $b$ : $z'=z+b$. Homothétie de centre $\\Omega(\\omega)$ et de rapport $k$ (réel non nul) : $z'-\\omega=k(z-\\omega)$. Rotation de centre $\\Omega(\\omega)$ et d'angle $\\theta$ : $z'-\\omega=e^{i\\theta}(z-\\omega)$. Cas utiles : quart de tour direct $e^{i\\pi/2}=i$, quart de tour indirect $e^{-i\\pi/2}=-i$, demi-tour $e^{i\\pi}=-1$. Le centre $\\Omega$ d'une homothétie ou d'une rotation est sa propre image : $z=\\omega$ donne $z'=\\omega$.",
+          "method": [
+            "Identifier la transformation et relever ses éléments : vecteur, ou centre et rapport, ou centre et angle.",
+            "Écrire la relation complexe : $z'=z+b$, $z'-\\omega=k(z-\\omega)$ ou $z'-\\omega=e^{i\\theta}(z-\\omega)$.",
+            "Remplacer $z$ par l'affixe du point de départ et calculer $z'$ sous forme algébrique.",
+            "Conclure en donnant l'affixe de l'image $M'$ et ses coordonnées."
+          ],
+          "example": {
+            "statement": "Sur un motif de pagne, rapporté à un repère orthonormé direct, le centre $\\Omega$ a pour affixe $1+i$ et un losange a un sommet en $M(3+i)$. On tourne le motif d'un quart de tour direct autour de $\\Omega$. Déterminer l'affixe de l'image $M'$ de $M$.",
+            "steps": [
+              "Identifier : c'est une rotation de centre $\\Omega(1+i)$ et d'angle $\\dfrac\\pi2$ ; le point de départ est $M(3+i)$.",
+              "Écrire : $z'-\\omega=e^{i\\pi/2}(z-\\omega)$, soit $z'-(1+i)=i\\,(z-(1+i))$.",
+              "Remplacer : $z-(1+i)=3+i-1-i=2$, donc $z'-(1+i)=i\\times2=2i$ et $z'=1+i+2i=1+3i$.",
+              "Conclure : l'image de $M$ est $M'(1+3i)$, de coordonnées $(1\\,;\\,3)$."
+            ]
+          },
+          "pitfall": "Ne pas oublier le centre : pour une rotation de centre $\\Omega\\neq O$, la formule n'est pas $z'=e^{i\\theta}z$. Contre-exemple : rotation de centre $\\Omega(1)$ et d'angle $\\dfrac\\pi2$, point $M(3)$. Avec la bonne formule, $z'-1=i(3-1)=2i$, donc $z'=1+2i$. Avec $z'=iz$, on trouverait $3i$, et le centre $\\Omega(1)$ serait envoyé sur $i$ au lieu de rester en place. Le centre doit toujours être sa propre image.",
+          "figure": "rotation-pagne",
+          "exercise": {
+            "title": "Écrire et appliquer une transformation du plan",
+            "statement": "Dans cet exercice, le plan complexe est muni d'un repère orthonormé direct. Tu calcules l'image de points par une translation, une homothétie ou une rotation avec la méthode de la fiche : identifier, écrire, remplacer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "La translation de vecteur $\\vec u$ d'affixe $2-3i$ transforme $M(-1+4i)$ en $M'$. Quelle est l'affixe de $M'$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : translation de vecteur d'affixe $b=2-3i$. Étape 2 — Écrire : $z'=z+b$. Étape 3 — Remplacer : $z'=-1+4i+2-3i=1+i$. Étape 4 — Conclure : $M'(1+i)$. La proposition $-3+7i$ soustrait le vecteur (translation inverse) ; $2-3i$ oublie d'ajouter $z$.",
+                "answers": [
+                  {
+                    "content": "$1+i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-3+7i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1+7i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2-3i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'homothétie de centre $\\Omega(1)$ et de rapport $3$ transforme $M(2+i)$ en $M'$. Quelle est l'affixe de $M'$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : homothétie de centre $\\omega=1$ et de rapport $k=3$. Étape 2 — Écrire : $z'-1=3(z-1)$. Étape 3 — Remplacer : $z-1=1+i$, donc $z'-1=3+3i$ et $z'=4+3i$. Étape 4 — Conclure : $M'(4+3i)$. La proposition $6+3i$ vient de $z'=3z$ (centre oublié) ; $3+3i$ s'arrête à $z'-1$.",
+                "answers": [
+                  {
+                    "content": "$4+3i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$6+3i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3+3i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4+i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La rotation de centre $O$ et d'angle $-\\dfrac\\pi2$ transforme $M(2+3i)$ en $M'$. Quelle est l'affixe de $M'$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : rotation de centre $O$ ($\\omega=0$) et d'angle $-\\dfrac\\pi2$. Étape 2 — Écrire : $z'=e^{-i\\pi/2}z=-i\\,z$. Étape 3 — Remplacer : $z'=-i(2+3i)=-2i-3i^2=3-2i$. Étape 4 — Conclure : $M'(3-2i)$. La proposition $-3+2i$ correspond à l'angle $+\\dfrac\\pi2$ (multiplication par $i$) ; $2-3i$ est le conjugué, une symétrie et non une rotation.",
+                "answers": [
+                  {
+                    "content": "$3-2i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-3+2i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2-3i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3+2i$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'homothétie de centre $\\Omega(2i)$ et de rapport $-2$ transforme $M(3+3i)$ en $M'$. L'affixe de $M'$ est un nombre réel : lequel ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : homothétie de centre $\\omega=2i$ et de rapport $k=-2$. Étape 2 — Écrire : $z'-2i=-2(z-2i)$. Étape 3 — Remplacer : $z-2i=3+i$, donc $z'-2i=-6-2i$ et $z'=-6-2i+2i=-6$. Étape 4 — Conclure : $M'(-6)$, de coordonnées $(-6\\,;\\,0)$.",
+                "answers": [
+                  {
+                    "content": "-6",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "La rotation de centre $\\Omega(1)$ et d'angle $\\dfrac\\pi2$ transforme $M(3)$ en $M'$. Quelle est l'affixe de $M'$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : rotation de centre $\\omega=1$ et d'angle $\\dfrac\\pi2$. Étape 2 — Écrire : $z'-1=i(z-1)$. Étape 3 — Remplacer : $z-1=2$, donc $z'-1=2i$ et $z'=1+2i$. Étape 4 — Conclure : $M'(1+2i)$. La proposition $3i$ vient de $z'=iz$ : elle oublie le centre, qui ne resterait pas en place ($i\\times1\\neq1$).",
+                "answers": [
+                  {
+                    "content": "$1+2i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1+3i$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Sur le carrelage d'une cour, rapporté à un repère orthonormé direct, on déplace des carreaux. Le point $M$ d'affixe $z$ a pour image $M'$ d'affixe $z'$.",
+            "questions": [
+              {
+                "content": "La translation de vecteur d'affixe $3+2i$ transforme $M(1-i)$ en $M'$ : $z'=$ ( ___ ) + ( ___ ) $i$.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : translation de vecteur d'affixe $b=3+2i$. Étape 2 — Écrire : $z'=z+b$. Étape 3 — Remplacer : $z'=1-i+3+2i=4+i$. Étape 4 — Conclure : $M'(4+i)$, donc la partie réelle est $4$ et la partie imaginaire est $1$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Une translation s'écrit simplement $z'=z+b$."
+              },
+              {
+                "content": "L'homothétie de centre $\\Omega(-1)$ et de rapport $\\dfrac12$ transforme $M(3+4i)$ en $M'$. Quelle est l'affixe de $M'$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : homothétie de centre $\\omega=-1$ et de rapport $k=\\dfrac12$. Étape 2 — Écrire : $z'+1=\\dfrac12(z+1)$. Étape 3 — Remplacer : $z+1=4+4i$, donc $z'+1=2+2i$ et $z'=1+2i$. Étape 4 — Conclure : $M'(1+2i)$. La proposition $\\dfrac32+2i$ vient de $z'=\\dfrac12z$ (centre oublié) ; $2+2i$ oublie de retrancher $1$.",
+                "answers": [
+                  {
+                    "content": "$1+2i$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac32+2i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2+2i$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-1+2i$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le centre est $\\omega=-1$ : $z-\\omega=z+1$."
+              },
+              {
+                "content": "La rotation de centre $\\Omega(i)$ et d'angle $\\pi$ transforme $M(2+3i)$ en $M'$. Quelle est la partie imaginaire de $z'$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : rotation de centre $\\omega=i$ et d'angle $\\pi$. Étape 2 — Écrire : $z'-i=e^{i\\pi}(z-i)=-(z-i)$. Étape 3 — Remplacer : $z-i=2+2i$, donc $z'-i=-2-2i$ et $z'=-2-2i+i=-2-i$. Étape 4 — Conclure : $M'(-2-i)$, de partie imaginaire $-1$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le plan d'un quartier",
+          "statement": "Le plan d'un quartier est rapporté à un repère orthonormé direct d'unité 100 m. L'école $E$ a pour affixe $1$, le marché $M$ a pour affixe $3+2i$ et le dispensaire $D$ a pour affixe $-1+2i$. Tu étudies le triangle $EMD$ avec le quotient $Z=\\dfrac{z_D-z_E}{z_M-z_E}$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "L'école $E$ a pour affixe $1$, le marché $M$ a pour affixe $3+2i$ et le dispensaire $D$ a pour affixe $-1+2i$. Quelles sont les affixes des vecteurs $\\overrightarrow{EM}$ et $\\overrightarrow{ED}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : l'affixe d'un vecteur est celle de l'extrémité moins celle de l'origine. Étape 2 — Calculer : $z_{\\overrightarrow{EM}}=3+2i-1=2+2i$ et $z_{\\overrightarrow{ED}}=-1+2i-1=-2+2i$. La proposition $4+2i$ et $2i$ additionne les affixes au lieu de les soustraire ; $3+2i$ et $-1+2i$ oublie de retrancher $z_E$.",
+              "answers": [
+                {
+                  "content": "$2+2i$ et $-2+2i$",
+                  "correct": true
+                },
+                {
+                  "content": "$-2-2i$ et $2-2i$",
+                  "correct": false
+                },
+                {
+                  "content": "$4+2i$ et $2i$",
+                  "correct": false
+                },
+                {
+                  "content": "$3+2i$ et $-1+2i$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $E(1)$ et $M(3+2i)$, calcule $EM^2$ (en unités de 100 m au carré).",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z_M-z_E=2+2i$. Étape 2 — Calculer : $EM^2=|2+2i|^2=2^2+2^2=8$. On garde le carré : $EM=2\\sqrt2$ n'est pas un nombre décimal simple.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Avec $E(1)$, $M(3+2i)$ et $D(-1+2i)$, quelle est la valeur de $Z=\\dfrac{z_D-z_E}{z_M-z_E}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $z_D-z_E=-2+2i$ et $z_M-z_E=2+2i$. Étape 2 — Calculer : $Z=\\dfrac{(-2+2i)(2-2i)}{(2+2i)(2-2i)}=\\dfrac{-4+4i+4i-4i^2}{8}=\\dfrac{8i}{8}=i$. Étape 3 — Repérer : $Z$ est imaginaire pur de module $1$. La valeur $-i$ vient d'un quotient inversé ; $1+i$ d'un oubli de division par le conjugué.",
+              "answers": [
+                {
+                  "content": "$i$",
+                  "correct": true
+                },
+                {
+                  "content": "$-i$",
+                  "correct": false
+                },
+                {
+                  "content": "$1+i$",
+                  "correct": false
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sachant que $Z=i$, quelle est la nature du triangle $EMD$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_D-z_E}{z_M-z_E}=i$. Étape 2 — Calculer : fait. Étape 3 — Repérer : $Z$ est imaginaire pur et $|Z|=1$. Étape 4 — Conclure : $(EM)\\perp(ED)$ et $EM=ED$, donc $EMD$ est rectangle isocèle en $E$. Il n'est pas simplement rectangle : le module vaut bien $1$.",
+              "answers": [
+                {
+                  "content": "rectangle isocèle en $E$",
+                  "correct": true
+                },
+                {
+                  "content": "rectangle en $E$, non isocèle",
+                  "correct": false
+                },
+                {
+                  "content": "isocèle en $E$, non rectangle",
+                  "correct": false
+                },
+                {
+                  "content": "équilatéral",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le triangle $EMD$ rectangle isocèle en $E$ avec $M(3+2i)$ et $D(-1+2i)$, quelle est la longueur réelle du trajet $MD$, en mètres (une unité du plan vaut 100 m) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z_D-z_M=-1+2i-3-2i=-4$. Étape 2 — Calculer : $MD=|-4|=4$ unités. Étape 3 — Convertir : $4\\times100=400$ m. Vérification avec Pythagore : $EM^2+ED^2=8+8=16=MD^2$.",
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "m"
+            },
+            {
+              "content": "Les trois points $E(1)$, $M(3+2i)$ et $D(-1+2i)$ sont alignés.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_D-z_E}{z_M-z_E}$. Étape 2 — Calculer : $Z=i$. Étape 3 — Repérer : trois points sont alignés si et seulement si $Z$ est réel ; or $i$ est imaginaire pur. Étape 4 — Conclure : les points ne sont pas alignés, ils forment un angle droit en $E$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La cour carrelée de l'école",
+          "statement": "Une cour carrelée est rapportée à un repère orthonormé direct d'unité 1 m. Deux poteaux sont placés en $A(-1)$ et $B(3)$. Tu décris des ensembles de points $M(z)$ avec des modules.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Les poteaux sont en $A(-1)$ et $B(3)$. Quel est l'ensemble des points $M(z)$ tels que $|z+1|=|z-3|$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $z+1=z-(-1)$, donc les points fixes sont $A(-1)$ et $B(3)$. Étape 2 — Traduire : $AM=BM$. Étape 3 — Reconnaître : c'est la médiatrice de $[AB]$. Étape 4 — Préciser : milieu $(1\\,;\\,0)$, droite verticale. Le cercle de centre $A$ passant par $B$ imposerait $AM=AB$, pas $AM=BM$.",
+              "answers": [
+                {
+                  "content": "la médiatrice du segment $[AB]$",
+                  "correct": true
+                },
+                {
+                  "content": "le cercle de centre $A$ passant par $B$",
+                  "correct": false
+                },
+                {
+                  "content": "le cercle de diamètre $[AB]$",
+                  "correct": false
+                },
+                {
+                  "content": "la droite $(AB)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'ensemble des points $M(z)$ tels que $|z+1|=|z-3|$ est une droite verticale d'équation $x=\\dots$ Quelle est la valeur de $x$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : points fixes $A(-1)$ et $B(3)$. Étape 2 — Traduire : $AM=BM$. Étape 3 — Reconnaître : médiatrice de $[AB]$. Étape 4 — Préciser : le milieu de $[AB]$ a pour abscisse $\\dfrac{-1+3}{2}=1$ et la médiatrice est verticale : $x=1$. Vérification : $(x+1)^2+y^2=(x-3)^2+y^2$ donne $8x=8$.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Quel est l'ensemble des points $M(z)$ tels que $|z-1-i|=2$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $z-1-i=z-(1+i)$, le point fixe est $\\Omega(1+i)$. Étape 2 — Traduire : $\\Omega M=2$. Étape 3 — Reconnaître : c'est un cercle. Étape 4 — Préciser : centre $\\Omega(1\\,;\\,1)$ et rayon $2$. Le centre $-1-i$ vient d'une erreur de signe.",
+              "answers": [
+                {
+                  "content": "le cercle de centre le point $(1\\,;\\,1)$ et de rayon $2$",
+                  "correct": true
+                },
+                {
+                  "content": "le cercle de centre le point $(-1\\,;\\,-1)$ et de rayon $2$",
+                  "correct": false
+                },
+                {
+                  "content": "le cercle de centre le point $(1\\,;\\,1)$ et de rayon $4$",
+                  "correct": false
+                },
+                {
+                  "content": "le disque de centre le point $(1\\,;\\,1)$ et de rayon $2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le cercle de centre $\\Omega(1+i)$ et de rayon $2$ coupe la droite $x=1$ en deux points. Quelle est l'ordonnée du point situé au-dessus de $\\Omega$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : le cercle est défini par $\\Omega M=2$. Étape 2 — Traduire : avec $x=1$, $(x-1)^2+(y-1)^2=4$ devient $(y-1)^2=4$. Étape 3 — Reconnaître : $y-1=2$ ou $y-1=-2$. Étape 4 — Préciser : $y=3$ ou $y=-1$ ; le point du dessus a pour ordonnée $3$.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Quels sont les deux points dont l'affixe vérifie $|z-1-i|=2$ ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : le centre est $\\Omega(1+i)$. Étape 2 — Traduire : il faut $|z-1-i|=2$. Étape 3 — Reconnaître : pour $z=3+i$, $|2|=2$ ; pour $z=1+3i$, $|2i|=2$. Pour $z=2+2i$, $|1+i|=\\sqrt2\\neq2$ ; pour $z=1+i$, le module est $0$ ; pour $z=0$, $|-1-i|=\\sqrt2$. Étape 4 — Préciser : les deux points sont $3+i$ et $1+3i$.",
+              "answers": [
+                {
+                  "content": "$3+i$",
+                  "correct": true
+                },
+                {
+                  "content": "$1+3i$",
+                  "correct": true
+                },
+                {
+                  "content": "$2+2i$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$1+i$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le point d'affixe $2+2i$ appartient-il au disque défini par $|z-1-i|\\le2$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le centre est $\\Omega(1+i)$ et le rayon est $2$. Étape 2 — Traduire : il faut $\\Omega M\\le2$. Étape 3 — Reconnaître : $|2+2i-1-i|=|1+i|=\\sqrt2\\approx1{,}41\\le2$. Étape 4 — Préciser : le point est dans le disque (strictement à l'intérieur), pas sur le cercle.",
+              "answers": [
+                {
+                  "content": "oui, il est à l'intérieur du disque",
+                  "correct": true
+                },
+                {
+                  "content": "non, il est sur le cercle",
+                  "correct": false
+                },
+                {
+                  "content": "non, il est à l'extérieur du disque",
+                  "correct": false
+                },
+                {
+                  "content": "on ne peut pas le savoir",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un motif de pagne en rotation",
+          "statement": "Un motif de pagne est dessiné dans un repère orthonormé direct d'origine $O$ (unité 1 cm). Le point $A$ a pour affixe $2$. La rotation $R$ de centre $O$ et d'angle $\\dfrac\\pi3$ transforme $A$ en $B$, puis $B$ en $C$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La rotation $R$ de centre $O$ et d'angle $\\dfrac\\pi3$ transforme $M(z)$ en $M'(z')$. Quelle est son écriture complexe ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : rotation de centre $O$ ($\\omega=0$) et d'angle $\\dfrac\\pi3$. Étape 2 — Écrire : $z'-0=e^{i\\pi/3}(z-0)$, soit $z'=e^{i\\pi/3}z$. Étape 3 — Remplacer : on garde la formule générale. Étape 4 — Conclure : la proposition $z'=z+e^{i\\pi/3}$ est une translation ; $z'=e^{-i\\pi/3}z$ est la rotation d'angle $-\\dfrac\\pi3$.",
+              "answers": [
+                {
+                  "content": "$z'=e^{i\\pi/3}z$",
+                  "correct": true
+                },
+                {
+                  "content": "$z'=z+e^{i\\pi/3}$",
+                  "correct": false
+                },
+                {
+                  "content": "$z'=e^{-i\\pi/3}z$",
+                  "correct": false
+                },
+                {
+                  "content": "$z'=\\dfrac{\\pi}{3}z$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le point $A$ a pour affixe $2$ et $B$ est son image par la rotation de centre $O$ et d'angle $\\dfrac\\pi3$. Quelle est la partie réelle de $z_B$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : rotation de centre $O$ et d'angle $\\dfrac\\pi3$. Étape 2 — Écrire : $z_B=e^{i\\pi/3}z_A$. Étape 3 — Remplacer : $z_B=2\\left(\\cos\\dfrac\\pi3+i\\sin\\dfrac\\pi3\\right)=2\\left(\\dfrac12+i\\dfrac{\\sqrt3}2\\right)=1+i\\sqrt3$. Étape 4 — Conclure : $B(1+i\\sqrt3)$, de partie réelle $1$.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Avec $O(0)$, $A(2)$ et $B(1+i\\sqrt3)$, quelle est la nature du triangle $OAB$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : au sommet $O$, $Z=\\dfrac{z_B-z_O}{z_A-z_O}=\\dfrac{1+i\\sqrt3}{2}$. Étape 2 — Calculer : $Z=\\dfrac12+i\\dfrac{\\sqrt3}2=e^{i\\pi/3}$. Étape 3 — Repérer : $|Z|=1$ et $\\arg Z=\\dfrac\\pi3$. Étape 4 — Conclure : $OAB$ est équilatéral (c'est le cas d'une rotation d'angle $\\dfrac\\pi3$). Un triangle seulement isocèle en $O$ n'aurait pas cet angle.",
+              "answers": [
+                {
+                  "content": "équilatéral",
+                  "correct": true
+                },
+                {
+                  "content": "rectangle isocèle en $O$",
+                  "correct": false
+                },
+                {
+                  "content": "isocèle en $O$, non équilatéral",
+                  "correct": false
+                },
+                {
+                  "content": "rectangle en $O$, non isocèle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le point $C$ est l'image de $B(1+i\\sqrt3)$ par la rotation de centre $O$ et d'angle $\\dfrac\\pi3$. Quelle est la partie réelle de $z_C$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : même rotation, point de départ $B$. Étape 2 — Écrire : $z_C=e^{i\\pi/3}z_B$. Étape 3 — Remplacer : $z_C=\\left(\\dfrac12+i\\dfrac{\\sqrt3}2\\right)(1+i\\sqrt3)=\\dfrac12+i\\dfrac{\\sqrt3}2+i\\dfrac{\\sqrt3}2-\\dfrac32=-1+i\\sqrt3$. Étape 4 — Conclure : $C(-1+i\\sqrt3)$, de partie réelle $-1$. On retrouve $2e^{2i\\pi/3}$.",
+              "answers": [
+                {
+                  "content": "-1",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Avec $A(2)$ et $C(-1+i\\sqrt3)$, calcule $AC^2$.",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $z_C-z_A=-1+i\\sqrt3-2=-3+i\\sqrt3$. Étape 2 — Calculer : $AC^2=|{-3}+i\\sqrt3|^2=9+3$. Étape 3 — Conclure : $AC^2=12$, donc $AC=2\\sqrt3$. Comme $AB=2$, $AC\\neq AB$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Avec $A(2)$, $B(1+i\\sqrt3)$ et $C(-1+i\\sqrt3)$, justifie que le triangle $ABC$ est isocèle en $B$ mais n'est pas équilatéral.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Étape 1 — Écrire : au sommet $B$, $Z=\\dfrac{z_C-z_B}{z_A-z_B}=\\dfrac{-2}{1-i\\sqrt3}$. Étape 2 — Calculer : $Z=\\dfrac{-2(1+i\\sqrt3)}{(1-i\\sqrt3)(1+i\\sqrt3)}=\\dfrac{-2(1+i\\sqrt3)}{4}=-\\dfrac12-i\\dfrac{\\sqrt3}2$. Étape 3 — Repérer : $|Z|=\\sqrt{\\dfrac14+\\dfrac34}=1$, donc $BA=BC$ : $ABC$ est isocèle en $B$. Étape 4 — Conclure : $Z$ n'est égal ni à $\\dfrac12+i\\dfrac{\\sqrt3}2$ ni à $\\dfrac12-i\\dfrac{\\sqrt3}2$, donc le triangle n'est pas équilatéral. Vérification : $BA=BC=2$ mais $AC=2\\sqrt3\\approx3{,}46$. Points : 1 pour le quotient, 1 pour le module, 1 pour la conclusion.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Écrire et calculer correctement le quotient en B (ou calculer BA, BC)",
+                "Montrer que le module vaut 1 (ou BA = BC) pour l'isocèle",
+                "Conclure que le triangle n'est pas équilatéral, car AC est différent de AB"
+              ],
+              "starter": "Au sommet B, on pose Z = ..."
+            }
+          ]
+        },
+        {
+          "title": "La place carrée et sa fontaine",
+          "statement": "Une place publique est tracée sur le plan d'un quartier, rapporté à un repère orthonormé direct d'unité 10 m. Trois lampadaires sont en $A(1+i)$, $B(5+i)$ et $C(1+5i)$. Le point $D$ est tel que $ABDC$ est un parallélogramme, et la fontaine $\\Omega$ est le milieu de $[AD]$. Une rotation $R$ de centre $\\Omega$ et d'angle $\\dfrac\\pi2$ sert à répartir des bancs autour de la fontaine.",
+          "exercise_type": "evaluation",
+          "figure": "place-carree",
+          "questions": [
+            {
+              "content": "Avec $A(1+i)$, $B(5+i)$ et $C(1+5i)$, quelle est la nature du triangle $ABC$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{4i}{4}$. Étape 2 — Calculer : $Z=i$. Étape 3 — Repérer : $Z$ est imaginaire pur et $|Z|=1$. Étape 4 — Conclure : $(AB)\\perp(AC)$ et $AB=AC=4$ : $ABC$ est rectangle isocèle en $A$. La proposition « équilatéral » exigerait $Z=\\dfrac12\\pm i\\dfrac{\\sqrt3}2$.",
+              "answers": [
+                {
+                  "content": "rectangle isocèle en $A$",
+                  "correct": true
+                },
+                {
+                  "content": "équilatéral",
+                  "correct": false
+                },
+                {
+                  "content": "rectangle en $A$, non isocèle",
+                  "correct": false
+                },
+                {
+                  "content": "isocèle en $A$, non rectangle",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "$ABDC$ est un parallélogramme avec $A(1+i)$, $B(5+i)$ et $C(1+5i)$, donc $z_D=z_B+z_C-z_A$. Quelle est l'ordonnée de $D$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : $\\overrightarrow{AB}=\\overrightarrow{CD}$ donne $z_D-z_C=z_B-z_A$, soit $z_D=z_B+z_C-z_A$. Étape 2 — Calculer : $z_D=5+i+1+5i-1-i=5+5i$. Étape 3 — Conclure : $D(5+5i)$, l'ordonnée est $5$.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "La fontaine $\\Omega$ est le milieu de $[AD]$ avec $A(1+i)$ et $D(5+5i)$. On a $z_\\Omega=a+ia$. Quelle est la valeur de $a$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Écrire : le milieu a pour affixe $\\dfrac{z_A+z_D}{2}$. Étape 2 — Calculer : $\\dfrac{1+i+5+5i}{2}=\\dfrac{6+6i}{2}=3+3i$. Étape 3 — Conclure : $\\Omega(3+3i)$ et $a=3$. Les diagonales d'un carré se coupent en leur milieu.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Avec $\\Omega(3+3i)$ et $A(1+i)$, quelle égalité décrit l'ensemble des points $M(z)$ situés à la même distance de $\\Omega$ que $A$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le point fixe est $\\Omega(3+3i)$ et $z-(3+3i)$ apparaît. Étape 2 — Traduire : $\\Omega M=\\Omega A$, avec $\\Omega A=|1+i-3-3i|=|-2-2i|=2\\sqrt2$. Étape 3 — Reconnaître : c'est un cercle. Étape 4 — Préciser : $|z-3-3i|=2\\sqrt2$. La proposition avec $8$ confond le rayon et son carré ; celle avec $z+3+3i$ se trompe de signe sur le centre.",
+              "answers": [
+                {
+                  "content": "$|z-3-3i|=2\\sqrt2$",
+                  "correct": true
+                },
+                {
+                  "content": "$|z-3-3i|=8$",
+                  "correct": false
+                },
+                {
+                  "content": "$|z+3+3i|=2\\sqrt2$",
+                  "correct": false
+                },
+                {
+                  "content": "$|z-1-i|=2\\sqrt2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La rotation $R$ de centre $\\Omega(3+3i)$ et d'angle $\\dfrac\\pi2$ s'écrit $z'=iz+b$. Quelle est la valeur de $b$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : rotation de centre $\\omega=3+3i$ et d'angle $\\dfrac\\pi2$. Étape 2 — Écrire : $z'-\\omega=i(z-\\omega)$, donc $z'=iz+\\omega(1-i)$. Étape 3 — Remplacer : $b=(3+3i)(1-i)=3-3i+3i+3=6$. Étape 4 — Conclure : $z'=iz+6$ et $b=6$. Vérification : $R(A)=i(1+i)+6=5+i=B$.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Par la translation $t$ de vecteur $\\overrightarrow{AB}$, avec $A(1+i)$ et $B(5+i)$, quelle est l'image de $C(1+5i)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : translation de vecteur d'affixe $b=z_B-z_A=4$. Étape 2 — Écrire : $z'=z+4$. Étape 3 — Remplacer : $z'=1+5i+4=5+5i$. Étape 4 — Conclure : l'image de $C$ est $D(5+5i)$. La proposition $-3+5i$ est l'image par la translation de vecteur $\\overrightarrow{BA}$.",
+              "answers": [
+                {
+                  "content": "le point $D(5+5i)$",
+                  "correct": true
+                },
+                {
+                  "content": "le point $B(5+i)$",
+                  "correct": false
+                },
+                {
+                  "content": "le point d'affixe $9+5i$",
+                  "correct": false
+                },
+                {
+                  "content": "le point d'affixe $-3+5i$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Montre que $ABDC$ est un carré.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle. Étape 1 — Écrire : $ABDC$ est un parallélogramme par construction ($z_D=z_B+z_C-z_A$). Étape 2 — Calculer : $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{4i}{4}=i$. Étape 3 — Repérer : $Z$ est imaginaire pur, donc $(AB)\\perp(AC)$, et $|Z|=1$, donc $AB=AC$. Étape 4 — Conclure : un parallélogramme qui a un angle droit et deux côtés consécutifs égaux est un carré. Points : 1 pour le parallélogramme, 1 pour le quotient $Z=i$, 1 pour la conclusion.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Justifier que ABDC est un parallélogramme",
+                "Calculer le quotient et trouver Z = i",
+                "Déduire l'angle droit et les côtés égaux, puis conclure que ABDC est un carré"
+              ],
+              "starter": "Le quotient (zC − zA)/(zB − zA) vaut ..."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

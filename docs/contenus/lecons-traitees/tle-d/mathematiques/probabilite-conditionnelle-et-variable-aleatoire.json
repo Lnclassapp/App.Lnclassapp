@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Probabilité conditionnelle et variable aléatoire",
@@ -8,1315 +8,1610 @@
       "level_name": "Tle",
       "material_name": "Mathématiques",
       "series_name": "D",
-      "essentials": [
+      "theme": "teal",
+      "figures": [
         {
-          "name": "Calculer une probabilité conditionnelle",
-          "subtitle": "Probabilité sachant un événement, arbre pondéré et formule des probabilités totales",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la probabilité d'un événement $A$ sachant qu'un événement $B$ est réalisé.</li>\n<li>Construire et lire un arbre pondéré.</li>\n<li>Calculer une probabilité avec la formule des probabilités totales.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La classe qui rétrécit (probabilité conditionnelle).</strong> Dans ta classe de Tle D, il y a 40 élèves : 16 filles et 24 garçons. Parmi les 16 filles, 4 portent des lunettes. Le professeur tire un nom au hasard et annonce seulement : « C'est une fille. » Pour deviner si l'élève porte des lunettes, tu ne regardes plus toute la classe, mais seulement le groupe des 16 filles. Ta chance est alors de 4 sur 16.</p>\n<p><em>Le pont.</em> La classe entière, c'est l'<strong>univers</strong> $\\Omega$, l'ensemble de tous les résultats possibles. « C'est une fille », c'est l'événement $B$, que l'on sait réalisé. « Porter des lunettes », c'est l'événement $A$. Les filles à lunettes, c'est l'événement $A \\cap B$ (lu « $A$ et $B$ »). Savoir que $B$ est réalisé fait rétrécir l'univers à $B$ : $P_B(A) = \\frac{4}{16} = \\frac{4/40}{16/40} = \\frac{P(A \\cap B)}{P(B)}$.</p>\n<p><em>Où l'image s'arrête.</em> L'information ne change pas l'élève tiré ; elle change seulement ce que tu sais. Et l'ordre compte : si 10 élèves de la classe portent des lunettes, la part des filles parmi les porteurs de lunettes est $\\frac{4}{10}$, pas $\\frac{4}{16}$. Donc $P_A(B)$ et $P_B(A)$ sont deux nombres différents.</p>\n<p><strong>2. Les routes du gbaka (arbre pondéré et probabilités totales).</strong> Un gbaka part de la gare d'Adjamé. Au premier carrefour, il prend la voie express 7 fois sur 10, sinon il passe par les petites rues. Par la voie express, il arrive en retard 2 fois sur 10 ; par les petites rues, 5 fois sur 10. Pour savoir à quelle fréquence il arrive en retard, tu suis chaque route jusqu'au retard, puis tu additionnes les routes.</p>\n<p><em>Le pont.</em> Chaque carrefour est un <strong>nœud</strong> de l'arbre, chaque route une <strong>branche</strong> qui porte sa probabilité. Au premier niveau : $E$ (voie express) avec $0{,}7$ et $\\overline{E}$ (l'événement contraire) avec $0{,}3$. Au second niveau, les branches portent des probabilités conditionnelles : $P_E(R) = 0{,}2$ et $P_{\\overline{E}}(R) = 0{,}5$. Suivre une route, c'est <strong>multiplier</strong> : $P(E \\cap R) = 0{,}7 \\times 0{,}2 = 0{,}14$. Additionner les routes, c'est la formule des probabilités totales : $P(R) = 0{,}14 + 0{,}3 \\times 0{,}5 = 0{,}29$.</p>\n<p><em>Où l'image s'arrête.</em> Les routes du départ doivent couvrir tous les cas et ne jamais se chevaucher. Si tu oublies une route, ou si deux routes se recouvrent, le total est faux.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Probabilité conditionnelle.</strong> Soit $B$ un événement tel que $P(B) \\neq 0$. La probabilité de $A$ sachant $B$ est $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$. On la note aussi $P(A/B)$. On a $P_B(\\overline{A}) = 1 - P_B(A)$.</p>\n<p><strong>Probabilités composées.</strong> $P(A \\cap B) = P(B) \\times P_B(A)$ et, si $P(A) \\neq 0$, $P(A \\cap B) = P(A) \\times P_A(B)$.</p>\n<p><strong>Règles de l'arbre pondéré.</strong></p>\n<ul>\n<li>La somme des probabilités des branches issues d'un même nœud vaut $1$.</li>\n<li>Les branches du second niveau portent des probabilités conditionnelles.</li>\n<li>La probabilité d'un chemin est le produit des probabilités de ses branches.</li>\n<li>La probabilité d'un événement est la somme des probabilités des chemins qui y mènent.</li>\n</ul>\n<p><strong>Formule des probabilités totales.</strong> Si $B_1, B_2, \\ldots, B_n$ forment une <strong>partition</strong> de $\\Omega$ (ils sont deux à deux incompatibles, c'est-à-dire qu'ils ne peuvent pas se produire ensemble, leur réunion est $\\Omega$ et leurs probabilités sont non nulles), alors $P(A) = P(B_1) \\times P_{B_1}(A) + \\ldots + P(B_n) \\times P_{B_n}(A)$. Cas le plus fréquent : $P(A) = P(B) \\times P_B(A) + P(\\overline{B}) \\times P_{\\overline{B}}(A)$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Dans un lycée, 60 % des élèves sont en série D (événement $D$), les autres en série A. 30 % des élèves de D ont plus de 12 de moyenne (événement $M$), contre 20 % des élèves de A. On choisit un élève au hasard.</strong></p>\n<ol>\n<li>On traduit l'énoncé : $P(D) = 0{,}6$, donc $P(\\overline{D}) = 0{,}4$. « 30 % des élèves de D » se lit « parmi les élèves de D » : $P_D(M) = 0{,}3$. De même, $P_{\\overline{D}}(M) = 0{,}2$.</li>\n<li>On construit l'arbre : premier niveau $D$ ($0{,}6$) et $\\overline{D}$ ($0{,}4$) ; second niveau $M$ et $\\overline{M}$ après chaque nœud, avec $0{,}3$ et $0{,}7$ après $D$, $0{,}2$ et $0{,}8$ après $\\overline{D}$.</li>\n<li>Probabilité d'un chemin : $P(D \\cap M) = 0{,}6 \\times 0{,}3 = 0{,}18$.</li>\n<li>Probabilités totales, car $D$ et $\\overline{D}$ forment une partition : $P(M) = 0{,}18 + 0{,}4 \\times 0{,}2 = 0{,}18 + 0{,}08 = 0{,}26$.</li>\n<li>On « remonte » l'arbre : l'élève a plus de 12 ; quelle est la probabilité qu'il soit en D ? $P_M(D) = \\frac{P(D \\cap M)}{P(M)} = \\frac{0{,}18}{0{,}26} = \\frac{9}{13} \\approx 0{,}69$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Confondre trois nombres différents. Dans l'exemple : $P_D(M) = 0{,}3$ se lit sur une branche ; $P(D \\cap M) = 0{,}18$ est le produit le long d'un chemin ; $P_M(D) \\approx 0{,}69$ se calcule avec la formule.</p>\n<p>Comment le repérer : lis la phrase. « Parmi les… », « sachant que… », « si l'élève est… » annoncent une probabilité conditionnelle, et le groupe qui suit est la condition. « …et… », « à la fois » annoncent une intersection.</p>\n<h2>En une phrase</h2>\n<p>Savoir que $B$ est réalisé fait rétrécir l'univers à $B$, donc $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$ ; dans un arbre, on multiplie le long d'un chemin et on additionne les chemins.</p>",
-          "exercises": [
+          "key": "arbre-jus",
+          "kind": "diagram",
+          "description": "Arbre pondéré de l'usine de jus. La racine est une bouteille prise au hasard. Elle vient de la machine A avec la probabilité 0,6 ou de la machine B avec la probabilité 0,4. Ensuite, une bouteille de A est défectueuse avec 0,05 et conforme avec 0,95 ; une bouteille de B est défectueuse avec 0,10 et conforme avec 0,90. Chaque étiquette d'arête est une probabilité.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Une bouteille"
+              },
+              {
+                "id": "a",
+                "label": "Machine A"
+              },
+              {
+                "id": "b",
+                "label": "Machine B"
+              },
+              {
+                "id": "ad",
+                "label": "A et défectueuse"
+              },
+              {
+                "id": "an",
+                "label": "A et conforme"
+              },
+              {
+                "id": "bd",
+                "label": "B et défectueuse"
+              },
+              {
+                "id": "bn",
+                "label": "B et conforme"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "a",
+                "label": "0,6"
+              },
+              {
+                "from": "r",
+                "to": "b",
+                "label": "0,4"
+              },
+              {
+                "from": "a",
+                "to": "ad",
+                "label": "0,05"
+              },
+              {
+                "from": "a",
+                "to": "an",
+                "label": "0,95"
+              },
+              {
+                "from": "b",
+                "to": "bd",
+                "label": "0,10"
+              },
+              {
+                "from": "b",
+                "to": "bn",
+                "label": "0,90"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "arbre-tombola",
+          "kind": "diagram",
+          "description": "Arbre pondéré de la tombola. Le joueur choisit l'urne U1 avec la probabilité 0,4 ou l'urne U2 avec la probabilité 0,6. Dans U1, le billet est gagnant avec 0,25 et perdant avec 0,75 ; dans U2, il est gagnant avec 0,20 et perdant avec 0,80. Les étiquettes des arêtes sont les probabilités de chaque branche.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "r",
+                "label": "Le joueur choisit une urne"
+              },
+              {
+                "id": "u1",
+                "label": "Urne U1"
+              },
+              {
+                "id": "u2",
+                "label": "Urne U2"
+              },
+              {
+                "id": "u1g",
+                "label": "U1 et gagnant"
+              },
+              {
+                "id": "u1p",
+                "label": "U1 et perdant"
+              },
+              {
+                "id": "u2g",
+                "label": "U2 et gagnant"
+              },
+              {
+                "id": "u2p",
+                "label": "U2 et perdant"
+              }
+            ],
+            "edges": [
+              {
+                "from": "r",
+                "to": "u1",
+                "label": "0,4"
+              },
+              {
+                "from": "r",
+                "to": "u2",
+                "label": "0,6"
+              },
+              {
+                "from": "u1",
+                "to": "u1g",
+                "label": "0,25"
+              },
+              {
+                "from": "u1",
+                "to": "u1p",
+                "label": "0,75"
+              },
+              {
+                "from": "u2",
+                "to": "u2g",
+                "label": "0,20"
+              },
+              {
+                "from": "u2",
+                "to": "u2p",
+                "label": "0,80"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "loi-tombola",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la loi du gain X, en centaines de francs, au tirage d'un billet dans l'urne de la kermesse. Trois barres : X = 0 avec 50 %, X = 1 avec 40 % et X = 3 avec 10 %. La hauteur de chaque barre est la probabilité de la valeur, en pourcentage ; la somme des trois hauteurs fait 100 %.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              50,
+              40,
+              10
+            ],
+            "labels": [
+              "X=0",
+              "X=1",
+              "X=3"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "loi-binomiale",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la loi binomiale B(4 ; 0,1), nombre X de bouteilles mal bouchées parmi 4. Cinq barres, en pourcentage : X = 0 environ 65,61 %, X = 1 environ 29,16 %, X = 2 environ 4,86 %, X = 3 environ 0,36 % et X = 4 environ 0,01 %. La barre de X = 0 domine ; les autres décroissent vite.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              65.61,
+              29.16,
+              4.86,
+              0.36,
+              0.01
+            ],
+            "labels": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Probabilité conditionnelle",
+          "remember": "Soient $A$ et $B$ deux événements avec $P(A) \\neq 0$. La probabilité de $B$ sachant $A$ est $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$. On en déduit $P(A \\cap B) = P(A) \\times P_A(B)$. Comme $P_A$ est une probabilité, $0 \\leq P_A(B) \\leq 1$ et $P_A(\\overline{B}) = 1 - P_A(B)$. L'événement qui suit « sachant que » est celui qui se trouve au dénominateur.",
+          "method": [
+            "Identifier l'événement qui suit « sachant que » (c'est $A$) et l'événement dont on cherche la probabilité (c'est $B$).",
+            "Calculer $P(A)$ et $P(A \\cap B)$ à partir des données de l'énoncé.",
+            "Appliquer la formule $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)}$.",
+            "Simplifier le quotient et vérifier que le résultat est compris entre 0 et 1."
+          ],
+          "example": {
+            "statement": "À la kermesse, 200 billets de tombola ont été vendus. 80 billets sont bleus (événement $A$), 40 billets sont gagnants (événement $B$) et 16 billets sont à la fois bleus et gagnants. On tire un billet au hasard. Calculer la probabilité que le billet soit gagnant sachant qu'il est bleu.",
+            "steps": [
+              "Identifier : « sachant qu'il est bleu » désigne $A$ ; on cherche la probabilité de $B$ (gagnant), donc $P_A(B)$.",
+              "Calculer : $P(A) = \\dfrac{80}{200} = 0{,}4$ et $P(A \\cap B) = \\dfrac{16}{200} = 0{,}08$.",
+              "Appliquer : $P_A(B) = \\dfrac{P(A \\cap B)}{P(A)} = \\dfrac{0{,}08}{0{,}4}$.",
+              "Simplifier : $\\dfrac{0{,}08}{0{,}4} = 0{,}2$, un nombre compris entre 0 et 1 (on retrouve $\\dfrac{16}{80}$)."
+            ]
+          },
+          "pitfall": "Ne pas confondre $P_A(B)$ et $P_B(A)$ : le dénominateur est l'événement qui suit « sachant que ». Contre-exemple avec la tombola : $P_A(B) = \\dfrac{16}{80} = 0{,}2$ (parmi les billets bleus, 1 sur 5 gagne), mais $P_B(A) = \\dfrac{16}{40} = 0{,}4$ (parmi les billets gagnants, 2 sur 5 sont bleus). Avant de diviser, demande-toi : « parmi quels cas je choisis ? »",
+          "figure": null,
+          "exercise": {
+            "title": "La kermesse de l'école : beignets et billets",
+            "statement": "À la kermesse de l'école, 120 élèves sont venus. 50 d'entre eux ont acheté un billet de tombola (événement $T$), 30 ont mangé un beignet (événement $B$) et 15 ont fait les deux. On choisit un élève au hasard parmi les 120. Tu appliques la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On cherche la probabilité qu'un élève ait mangé un beignet sachant qu'il a acheté un billet de tombola. Quelle écriture correspond à cette probabilité ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : l'événement qui suit « sachant que » est « acheter un billet », c'est $T$ ; on cherche $B$ (manger un beignet). L'écriture est donc $P_T(B)$. $P_B(T)$ échange les rôles : c'est la probabilité d'avoir acheté un billet sachant qu'on a mangé un beignet. $P(T \\cap B)$ est la probabilité des deux faits à la fois, sans condition.",
+                "answers": [
+                  {
+                    "content": "$P_B(T)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$P_T(B)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$P(T \\cap B)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$P(T) \\times P(B)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À la kermesse, 120 élèves sont venus : 50 ont acheté un billet ($T$), 30 ont mangé un beignet ($B$), 15 ont fait les deux. Calcule $P_T(B)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : « sachant qu'il a acheté un billet » désigne $T$ ; on cherche $B$. Étape 2 — Calculer : $P(T) = \\dfrac{50}{120}$ et $P(T \\cap B) = \\dfrac{15}{120}$. Étape 3 — Appliquer : $P_T(B) = \\dfrac{15/120}{50/120} = \\dfrac{15}{50}$. Étape 4 — Simplifier : $\\dfrac{15}{50} = 0{,}3$, qui est bien entre 0 et 1. Diviser 15 par 30 (le nombre de mangeurs de beignets) donnerait $P_B(T)$, pas $P_T(B)$.",
+                "answers": [
+                  {
+                    "content": "0,3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "À la kermesse, 120 élèves sont venus : 50 ont acheté un billet ($T$), 30 ont mangé un beignet ($B$), 15 ont fait les deux. Calcule $P_B(T)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : « sachant qu'il a mangé un beignet » désigne $B$ ; on cherche $T$. Étape 2 — Calculer : $P(B) = \\dfrac{30}{120}$ et $P(T \\cap B) = \\dfrac{15}{120}$. Étape 3 — Appliquer : $P_B(T) = \\dfrac{15/120}{30/120} = \\dfrac{15}{30}$. Étape 4 — Simplifier : $\\dfrac{15}{30} = 0{,}5$. Le résultat diffère de $P_T(B) = 0{,}3$ : le dénominateur n'est pas le même.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève est tiré au hasard à la kermesse. On sait que $P(T) = \\dfrac{5}{12}$ et que $P_T(B) = 0{,}3$. Calcule $P(T \\cap B)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : on cherche la probabilité de « billet et beignet », c'est $P(T \\cap B)$. Étape 2 — Calculer : on connaît $P(T) = \\dfrac{5}{12}$ et $P_T(B) = 0{,}3$. Étape 3 — Appliquer la formule dans l'autre sens : $P(T \\cap B) = P(T) \\times P_T(B) = \\dfrac{5}{12} \\times 0{,}3$. Étape 4 — Simplifier : $\\dfrac{5 \\times 0{,}3}{12} = \\dfrac{1{,}5}{12} = 0{,}125$, soit $\\dfrac{15}{120}$ comme dans l'énoncé de départ.",
+                "answers": [
+                  {
+                    "content": "0,125",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "À la kermesse, 120 élèves sont venus : 50 ont acheté un billet ($T$), 30 ont mangé un beignet ($B$), 15 ont fait les deux. Calcule la probabilité qu'un élève n'ait pas mangé de beignet sachant qu'il a acheté un billet, c'est-à-dire $P_T(\\overline{B})$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : l'événement conditionnant est $T$ ; on cherche $\\overline{B}$. Étape 2 — Calculer : $P_T(B) = \\dfrac{15}{50} = 0{,}3$ (parmi les 50 acheteurs, 15 ont mangé un beignet). Étape 3 — Appliquer : $P_T(\\overline{B}) = 1 - P_T(B) = 1 - 0{,}3$. Étape 4 — Simplifier : $0{,}7$, ce que confirme le comptage direct $\\dfrac{35}{50} = 0{,}7$.",
+                "answers": [
+                  {
+                    "content": "0,7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "À la kermesse, 50 élèves ont acheté un billet ($T$), 30 ont mangé un beignet ($B$), 15 ont fait les deux (sur 120 élèves). Affirmation : « $P_T(B) = P_B(T)$, car dans les deux cas on parle des mêmes 15 élèves ». Cette affirmation est-elle exacte ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : $P_T(B)$ a pour événement conditionnant $T$, $P_B(T)$ a pour événement conditionnant $B$. Étape 2 — Calculer : $P(T \\cap B) = \\dfrac{15}{120}$, $P(T) = \\dfrac{50}{120}$, $P(B) = \\dfrac{30}{120}$. Étape 3 — Appliquer : $P_T(B) = \\dfrac{15}{50} = 0{,}3$ et $P_B(T) = \\dfrac{15}{30} = 0{,}5$. Étape 4 — Conclure : $0{,}3 \\neq 0{,}5$. Le numérateur est le même, mais pas le dénominateur : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans un centre de santé de quartier, 150 patients ont été vus un lundi. 60 avaient de la fièvre (événement $F$), 45 avaient de la toux (événement $K$) et 27 avaient les deux. On choisit un patient au hasard parmi les 150.",
+            "questions": [
+              {
+                "content": "Pour calculer $P_F(K)$ en comptant les patients, on divise le nombre de patients qui ont de la fièvre et de la toux, soit ___, par le nombre de patients qui ont de la fièvre, soit ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Le dénominateur est l'événement placé après « sachant que ».",
+                "explanation": "Étape 1 — Identifier : « sachant qu'il a de la fièvre » désigne $F$ ; on cherche $K$. Étape 2 — Calculer : $P(F \\cap K) = \\dfrac{27}{150}$ et $P(F) = \\dfrac{60}{150}$. Étape 3 — Appliquer : $P_F(K) = \\dfrac{27/150}{60/150} = \\dfrac{27}{60}$. Le numérateur est 27 (fièvre et toux), le dénominateur est 60 (fièvre). Étape 4 — Simplifier : $\\dfrac{27}{60} = 0{,}45$.",
+                "answers": [
+                  {
+                    "content": "27",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "60",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Dans le même centre de santé : 150 patients, 60 avec fièvre ($F$), 45 avec toux ($K$), 27 avec les deux. Calcule $P_K(F)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Parmi les 45 patients qui toussent, combien ont aussi de la fièvre ?",
+                "explanation": "Étape 1 — Identifier : « sachant qu'il a de la toux » désigne $K$ ; on cherche $F$. Étape 2 — Calculer : $P(K) = \\dfrac{45}{150}$ et $P(K \\cap F) = \\dfrac{27}{150}$. Étape 3 — Appliquer : $P_K(F) = \\dfrac{27}{45}$. Étape 4 — Simplifier : $\\dfrac{27}{45} = 0{,}6$. Le résultat est différent de $P_F(K) = 0{,}45$.",
+                "answers": [
+                  {
+                    "content": "0,6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans le même centre de santé : 150 patients, 60 avec fièvre ($F$), 45 avec toux ($K$), 27 avec les deux. Calcule $P_F(\\overline{K})$, la probabilité de ne pas tousser sachant qu'on a de la fièvre.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : l'événement conditionnant est $F$ ; on cherche $\\overline{K}$. Étape 2 — Calculer : $P_F(K) = \\dfrac{27}{60} = 0{,}45$. Étape 3 — Appliquer : $P_F(\\overline{K}) = 1 - 0{,}45$. Étape 4 — Simplifier : $0{,}55$. Contrôle par comptage : 60 - 27 = 33 patients ont de la fièvre sans toux, et $\\dfrac{33}{60} = 0{,}55$.",
+                "answers": [
+                  {
+                    "content": "0,55",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Arbre pondéré et probabilités totales",
+          "remember": "Dans un arbre pondéré, la somme des probabilités des branches issues d'un même nœud vaut 1, et la probabilité d'un chemin est le produit des probabilités de ses branches : $P(A \\cap B) = P(A) \\times P_A(B)$. Formule des probabilités totales : $P(B) = P(A)\\,P_A(B) + P(\\overline{A})\\,P_{\\overline{A}}(B)$. Plus généralement, si $A_1, \\dots, A_n$ sont deux à deux incompatibles et de réunion l'univers (une partition), $P(B) = P(A_1 \\cap B) + \\dots + P(A_n \\cap B)$.",
+          "method": [
+            "Construire l'arbre : les événements de départ (une partition), puis les branches suivantes avec les probabilités conditionnelles.",
+            "Vérifier que les probabilités des branches issues d'un même nœud ont pour somme 1.",
+            "Calculer la probabilité de chaque chemin qui mène à l'événement cherché, en multipliant les probabilités de ses branches.",
+            "Additionner les probabilités de ces chemins : c'est la formule des probabilités totales.",
+            "Diviser, si l'on demande $P_B(A)$ (le conditionnement à l'envers), $P(A \\cap B)$ par $P(B)$."
+          ],
+          "example": {
+            "statement": "Une usine de jus remplit des bouteilles avec deux machines. La machine $A$ remplit 60 % des bouteilles et la machine $B$ les 40 % restants. Une bouteille de $A$ est défectueuse avec la probabilité 0,05, une bouteille de $B$ avec la probabilité 0,10. On prend une bouteille au hasard ; $D$ est l'événement « la bouteille est défectueuse ». Calculer $P(D)$ puis $P_D(A)$.",
+            "steps": [
+              "Construire : au départ $A$ (0,6) et $B$ (0,4) ; puis sur chaque branche $D$ et $\\overline{D}$, avec 0,05 et 0,95 après $A$, 0,10 et 0,90 après $B$.",
+              "Vérifier : $0{,}6 + 0{,}4 = 1$ ; $0{,}05 + 0{,}95 = 1$ ; $0{,}10 + 0{,}90 = 1$.",
+              "Calculer les chemins vers $D$ : $P(A \\cap D) = 0{,}6 \\times 0{,}05 = 0{,}03$ et $P(B \\cap D) = 0{,}4 \\times 0{,}10 = 0{,}04$.",
+              "Additionner : $P(D) = 0{,}03 + 0{,}04 = 0{,}07$.",
+              "Diviser : $P_D(A) = \\dfrac{P(A \\cap D)}{P(D)} = \\dfrac{0{,}03}{0{,}07} = \\dfrac{3}{7} \\approx 0{,}43$."
+            ]
+          },
+          "pitfall": "Ne pas additionner les probabilités le long d'un chemin : elles se multiplient. Contre-exemple avec l'usine : $P(A \\cap D) = 0{,}6 \\times 0{,}05 = 0{,}03$. Si on additionnait, on trouverait $0{,}6 + 0{,}05 = 0{,}65$, un nombre plus grand que $P(A) = 0{,}6$, ce qui est impossible puisque $A \\cap D$ est contenu dans $A$. On additionne seulement les chemins différents qui mènent au même événement.",
+          "figure": "arbre-jus",
+          "exercise": {
+            "title": "Le dépistage dans un centre de santé",
+            "statement": "Dans un centre de santé, on dépiste une maladie. Dans la population, 4 % des personnes sont malades (événement $M$). Le test est positif (événement $T$) avec la probabilité 0,90 pour une personne malade, et avec la probabilité 0,05 pour une personne non malade. On choisit une personne au hasard et on lui fait passer le test. Tu construis l'arbre pondéré et tu appliques la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans l'arbre pondéré du dépistage, deux branches partent du nœud « non malade » : l'une vers $T$ (probabilité 0,05), l'autre vers $\\overline{T}$. Quelle est la probabilité $P_{\\overline{M}}(\\overline{T})$ portée par la seconde branche ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Construire : sous le nœud $\\overline{M}$ partent deux branches, $T$ (0,05) et $\\overline{T}$. Étape 2 — Vérifier : la somme des branches issues d'un même nœud vaut 1, donc $P_{\\overline{M}}(\\overline{T}) = 1 - 0{,}05 = 0{,}95$. La proposition 0,05 est la branche $T$ ; 0,96 est $P(\\overline{M})$, la branche du niveau précédent ; 0,10 est $P_M(\\overline{T})$, de l'autre côté de l'arbre.",
+                "answers": [
+                  {
+                    "content": "$0{,}05$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}96$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}95$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0{,}10$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans la population, 4 % des personnes sont malades ($M$). Le test est positif ($T$) avec la probabilité 0,90 pour un malade et 0,05 pour un non malade. Calcule $P(M \\cap T)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Construire : $M$ (0,04) puis $T$ (0,90). Étape 2 — Vérifier : 0,04 + 0,96 = 1 et 0,90 + 0,10 = 1. Étape 3 — Calculer le chemin $M \\to T$ : $P(M \\cap T) = P(M) \\times P_M(T) = 0{,}04 \\times 0{,}90 = 0{,}036$. Étape 4 — Il n'y a qu'un chemin ici, donc rien à additionner. Additionner $0{,}04 + 0{,}90$ serait faux : les probabilités d'un chemin se multiplient.",
+                "answers": [
+                  {
+                    "content": "0,036",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans la population, 4 % des personnes sont malades ($M$). Le test est positif ($T$) avec la probabilité 0,90 pour un malade et 0,05 pour un non malade. Calcule $P(\\overline{M} \\cap T)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Construire : $\\overline{M}$ (0,96) puis $T$ (0,05). Étape 2 — Vérifier : 0,96 + 0,04 = 1 et 0,05 + 0,95 = 1. Étape 3 — Calculer le chemin $\\overline{M} \\to T$ : $P(\\overline{M} \\cap T) = 0{,}96 \\times 0{,}05 = 0{,}048$. Ce sont les « faux positifs » : personnes non malades dont le test est positif.",
+                "answers": [
+                  {
+                    "content": "0,048",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans la population, 4 % des personnes sont malades ($M$). Le test est positif ($T$) avec la probabilité 0,90 pour un malade et 0,05 pour un non malade. Calcule $P(T)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Construire : deux chemins mènent à $T$ : $M \\to T$ et $\\overline{M} \\to T$. Étape 2 — Vérifier : chaque nœud a des branches de somme 1. Étape 3 — Calculer les chemins : $P(M \\cap T) = 0{,}04 \\times 0{,}90 = 0{,}036$ et $P(\\overline{M} \\cap T) = 0{,}96 \\times 0{,}05 = 0{,}048$. Étape 4 — Additionner (probabilités totales) : $P(T) = 0{,}036 + 0{,}048 = 0{,}084$.",
+                "answers": [
+                  {
+                    "content": "0,084",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans la population, 4 % des personnes sont malades ($M$). Le test est positif ($T$) avec la probabilité 0,90 pour un malade et 0,05 pour un non malade. Une personne a un test positif. Calcule la probabilité qu'elle soit malade, $P_T(M)$, arrondie au centième.",
+                "question_type": "numeric",
+                "tolerance": 0.005,
+                "explanation": "Étape 1 — Construire : l'arbre donne $P(M \\cap T) = 0{,}036$ et $P(\\overline{M} \\cap T) = 0{,}048$. Étape 2 — Vérifier : les branches de chaque nœud ont pour somme 1. Étape 3 — Calculer les chemins vers $T$ : 0,036 et 0,048. Étape 4 — Additionner : $P(T) = 0{,}084$. Étape 5 — Diviser : $P_T(M) = \\dfrac{P(M \\cap T)}{P(T)} = \\dfrac{0{,}036}{0{,}084} = \\dfrac{3}{7} \\approx 0{,}43$. Une personne au test positif n'est donc malade qu'environ 4 fois sur 10, et non 9 fois sur 10 : 0,90 est $P_M(T)$, pas $P_T(M)$.",
+                "answers": [
+                  {
+                    "content": "0,43",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour calculer $P(M \\cap T)$ avec $P(M) = 0{,}04$ et $P_M(T) = 0{,}90$, un élève écrit : « $P(M \\cap T) = 0{,}04 + 0{,}90 = 0{,}94$ ». Ce calcul est-il correct ?",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer un chemin : on multiplie les probabilités de ses branches, $P(M \\cap T) = 0{,}04 \\times 0{,}90 = 0{,}036$. Étape 4 — Additionner ne sert que pour réunir des chemins différents. Le résultat 0,94 est absurde : il dépasse $P(M) = 0{,}04$, alors que $M \\cap T$ est contenu dans $M$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un commerçant du marché reçoit ses mangues de deux fournisseurs. Le fournisseur $F_1$ livre 70 % des mangues et $F_2$ les 30 % restantes. Une mangue de $F_1$ est abîmée avec la probabilité 0,10 ; une mangue de $F_2$ avec la probabilité 0,20. On prend une mangue au hasard ; $G$ est l'événement « la mangue est abîmée ».",
+            "questions": [
+              {
+                "content": "Complète les probabilités de chemins : $P(F_1 \\cap G) = $ ___ et $P(F_2 \\cap G) = $ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Un chemin se calcule en multipliant les probabilités de ses branches.",
+                "explanation": "Étape 1 — Construire : $F_1$ (0,7) puis $G$ (0,10) ; $F_2$ (0,3) puis $G$ (0,20). Étape 2 — Vérifier : 0,7 + 0,3 = 1. Étape 3 — Calculer chaque chemin en multipliant : $P(F_1 \\cap G) = 0{,}7 \\times 0{,}10 = 0{,}07$ et $P(F_2 \\cap G) = 0{,}3 \\times 0{,}20 = 0{,}06$.",
+                "answers": [
+                  {
+                    "content": "0,07",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0,06",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Dans le même cas (70 % de $F_1$, 30 % de $F_2$ ; mangues abîmées à 10 % pour $F_1$ et 20 % pour $F_2$), calcule $P(G)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Construire : deux chemins mènent à $G$. Étape 2 — Vérifier : chaque nœud a des branches de somme 1. Étape 3 — Calculer : 0,07 pour $F_1 \\cap G$ et 0,06 pour $F_2 \\cap G$. Étape 4 — Additionner : $P(G) = 0{,}07 + 0{,}06 = 0{,}13$.",
+                "answers": [
+                  {
+                    "content": "0,13",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans le même cas (70 % de $F_1$, 30 % de $F_2$ ; mangues abîmées à 10 % pour $F_1$ et 20 % pour $F_2$), on prend une mangue abîmée. Calcule la probabilité qu'elle vienne de $F_1$, $P_G(F_1)$, arrondie au centième.",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Divise la probabilité du chemin $F_1 \\cap G$ par $P(G)$.",
+                "explanation": "Étape 1 — Construire l'arbre : $P(F_1 \\cap G) = 0{,}07$ et $P(F_2 \\cap G) = 0{,}06$. Étape 2 — Vérifier : les sommes des branches valent 1. Étape 3 — Calculer les chemins vers $G$ : 0,07 et 0,06. Étape 4 — Additionner : $P(G) = 0{,}13$. Étape 5 — Diviser : $P_G(F_1) = \\dfrac{0{,}07}{0{,}13} = \\dfrac{7}{13} \\approx 0{,}54$.",
+                "answers": [
+                  {
+                    "content": "0,54",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Événements indépendants",
+          "remember": "Deux événements $A$ et $B$ sont indépendants si $P(A \\cap B) = P(A) \\times P(B)$. Si $P(A) \\neq 0$, cela équivaut à $P_A(B) = P(B)$ : savoir que $A$ est réalisé ne change pas la probabilité de $B$. Alors $A$ et $\\overline{B}$, $\\overline{A}$ et $B$, $\\overline{A}$ et $\\overline{B}$ sont aussi indépendants. Deux événements incompatibles ($A \\cap B = \\emptyset$) de probabilités non nulles ne sont jamais indépendants.",
+          "method": [
+            "Calculer $P(A)$, $P(B)$ et $P(A \\cap B)$.",
+            "Calculer le produit $P(A) \\times P(B)$.",
+            "Comparer $P(A \\cap B)$ et $P(A) \\times P(B)$.",
+            "Conclure : s'ils sont égaux, les événements sont indépendants ; sinon, ils ne le sont pas."
+          ],
+          "example": {
+            "statement": "Au quartier, on lance un dé équilibré à 6 faces. On note $A$ « le résultat est pair » et $B$ « le résultat est un multiple de 3 ». Les événements $A$ et $B$ sont-ils indépendants ?",
+            "steps": [
+              "Calculer : $P(A) = \\dfrac{3}{6} = \\dfrac{1}{2}$ (2, 4, 6), $P(B) = \\dfrac{2}{6} = \\dfrac{1}{3}$ (3, 6) et $A \\cap B = \\{6\\}$, donc $P(A \\cap B) = \\dfrac{1}{6}$.",
+              "Calculer le produit : $P(A) \\times P(B) = \\dfrac{1}{2} \\times \\dfrac{1}{3} = \\dfrac{1}{6}$.",
+              "Comparer : $P(A \\cap B) = \\dfrac{1}{6}$ et $P(A) \\times P(B) = \\dfrac{1}{6}$ sont égaux.",
+              "Conclure : $P(A \\cap B) = P(A) \\times P(B)$, donc $A$ et $B$ sont indépendants."
+            ]
+          },
+          "pitfall": "Ne pas confondre « incompatibles » et « indépendants ». Deux événements incompatibles ne peuvent pas se réaliser ensemble : si l'un a lieu, l'autre est impossible, donc le premier change la probabilité du second. Contre-exemple au dé : « pair » et « impair » sont incompatibles, $P(\\text{pair} \\cap \\text{impair}) = 0$, alors que $\\dfrac{1}{2} \\times \\dfrac{1}{2} = \\dfrac{1}{4}$ : ils ne sont pas indépendants.",
+          "figure": null,
+          "exercise": {
+            "title": "Le dé du quartier : indépendants ou non ?",
+            "statement": "Au quartier, on lance un dé équilibré à 6 faces. On note $A$ « le résultat est pair », $C$ « le résultat est supérieur ou égal à 5 » et $D$ « le résultat est inférieur ou égal à 3 ». Tu compares $P(A \\cap C)$ et $P(A) \\times P(C)$ comme dans la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On lance un dé équilibré à 6 faces. Les événements $A$ « le résultat est pair » et $C$ « le résultat est supérieur ou égal à 5 » sont indépendants.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : $P(A) = \\dfrac{3}{6} = \\dfrac{1}{2}$, $P(C) = \\dfrac{2}{6} = \\dfrac{1}{3}$ (5 et 6), $A \\cap C = \\{6\\}$ donc $P(A \\cap C) = \\dfrac{1}{6}$. Étape 2 — Calculer le produit : $\\dfrac{1}{2} \\times \\dfrac{1}{3} = \\dfrac{1}{6}$. Étape 3 — Comparer : les deux valeurs sont égales. Étape 4 — Conclure : $A$ et $C$ sont indépendants.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On lance un dé équilibré à 6 faces. Les événements $A$ « le résultat est pair » et $D$ « le résultat est inférieur ou égal à 3 » sont indépendants.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : $P(A) = \\dfrac{1}{2}$, $P(D) = \\dfrac{3}{6} = \\dfrac{1}{2}$ (1, 2, 3), $A \\cap D = \\{2\\}$ donc $P(A \\cap D) = \\dfrac{1}{6}$. Étape 2 — Calculer le produit : $\\dfrac{1}{2} \\times \\dfrac{1}{2} = \\dfrac{1}{4}$. Étape 3 — Comparer : $\\dfrac{1}{6} \\neq \\dfrac{1}{4}$. Étape 4 — Conclure : $A$ et $D$ ne sont pas indépendants.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux événements indépendants $R$ et $S$ vérifient $P(R) = 0{,}4$ et $P(S) = 0{,}5$. Calcule $P(R \\cap S)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : on connaît $P(R) = 0{,}4$ et $P(S) = 0{,}5$. Étape 2 — Calculer le produit : $P(R) \\times P(S) = 0{,}4 \\times 0{,}5 = 0{,}2$. Étape 3 — Comparer : comme $R$ et $S$ sont indépendants, $P(R \\cap S)$ est égal à ce produit. Étape 4 — Conclure : $P(R \\cap S) = 0{,}2$. La somme $0{,}4 + 0{,}5 = 0{,}9$ ne correspond à aucune formule d'intersection.",
+                "answers": [
+                  {
+                    "content": "0,2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux événements indépendants $R$ et $S$ vérifient $P(R) = 0{,}4$ et $P(S) = 0{,}5$. Calcule $P(R \\cup S)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $P(R) = 0{,}4$ et $P(S) = 0{,}5$. Étape 2 — Calculer le produit : $P(R \\cap S) = 0{,}4 \\times 0{,}5 = 0{,}2$ par indépendance. Étape 3 — Appliquer $P(R \\cup S) = P(R) + P(S) - P(R \\cap S) = 0{,}4 + 0{,}5 - 0{,}2$. Étape 4 — Conclure : $P(R \\cup S) = 0{,}7$. Oublier de retrancher $P(R \\cap S)$ donne 0,9, ce qui compte deux fois les cas où $R$ et $S$ ont lieu ensemble.",
+                "answers": [
+                  {
+                    "content": "0,7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On lance un dé équilibré à 6 faces. Quelle est la probabilité que le résultat soit impair et supérieur ou égal à 5 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : « impair » est $\\overline{A}$ avec $P(\\overline{A}) = \\dfrac{1}{2}$, et $P(C) = \\dfrac{1}{3}$ pour « supérieur ou égal à 5 ». Étape 2 — Calculer le produit : comme $A$ et $C$ sont indépendants, $\\overline{A}$ et $C$ le sont aussi, donc $P(\\overline{A} \\cap C) = \\dfrac{1}{2} \\times \\dfrac{1}{3} = \\dfrac{1}{6}$. Étape 3 — Comparer avec un comptage direct : seul le 5 convient, soit $\\dfrac{1}{6}$. Étape 4 — Conclure : $\\dfrac{1}{6}$. La valeur $\\dfrac{1}{3}$ oublie la condition « impair » ; $\\dfrac{1}{2}$ oublie la condition sur 5.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{1}{6}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{1}{3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{5}{6}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On lance un dé équilibré à 6 faces. Les événements $C$ « résultat supérieur ou égal à 5 » et $D$ « résultat inférieur ou égal à 3 » ne peuvent pas se réaliser en même temps. Sont-ils indépendants ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $P(C) = \\dfrac{1}{3}$, $P(D) = \\dfrac{1}{2}$ et $C \\cap D = \\emptyset$, donc $P(C \\cap D) = 0$. Étape 2 — Calculer le produit : $\\dfrac{1}{3} \\times \\dfrac{1}{2} = \\dfrac{1}{6}$. Étape 3 — Comparer : $0 \\neq \\dfrac{1}{6}$. Étape 4 — Conclure : $C$ et $D$ ne sont pas indépendants. Être incompatibles n'est pas être indépendants : au contraire, si $C$ a lieu, $D$ devient impossible.",
+                "answers": [
+                  {
+                    "content": "Oui, car ils sont incompatibles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : $P(C \\cap D) = 0$ alors que $P(C) \\times P(D) = \\dfrac{1}{6}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, car $P(C \\cap D) = 0$ est un nombre fixe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car $P(C) \\neq P(D)$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Une urne de la kermesse contient 10 billets numérotés de 1 à 10. On en tire un au hasard. On note $A$ « le numéro est pair », $B$ « le numéro est un multiple de 5 » et $C$ « le numéro est inférieur ou égal à 3 ».",
+            "questions": [
+              {
+                "content": "Complète : $P(A) = $ ___ et $P(B) = $ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Compte les numéros qui conviennent, puis divise par 10.",
+                "explanation": "Étape 1 — Calculer : les numéros pairs sont 2, 4, 6, 8, 10 (5 sur 10) donc $P(A) = 0{,}5$ ; les multiples de 5 sont 5 et 10 (2 sur 10) donc $P(B) = 0{,}2$. Ces deux valeurs serviront à calculer le produit $P(A) \\times P(B) = 0{,}1$ à l'étape 2.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0,2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une urne contient 10 billets numérotés de 1 à 10, tirés au hasard. $A$ : « numéro pair » ; $C$ : « numéro inférieur ou égal à 3 ». Calcule $P(A \\cap C)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : les numéros pairs inférieurs ou égaux à 3 sont seulement le 2, donc $A \\cap C = \\{2\\}$ et $P(A \\cap C) = \\dfrac{1}{10} = 0{,}1$. Il faut compter les numéros qui vérifient les deux conditions à la fois, pas ceux qui en vérifient une.",
+                "answers": [
+                  {
+                    "content": "0,1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une urne contient 10 billets numérotés de 1 à 10. $A$ : « numéro pair » ; $C$ : « numéro inférieur ou égal à 3 ». Avec $P(A) = 0{,}5$, $P(C) = 0{,}3$ et $P(A \\cap C) = 0{,}1$, les événements $A$ et $C$ sont ___",
+                "question_type": "select",
+                "hint": "Compare $P(A \\cap C)$ au produit $P(A) \\times P(C)$.",
+                "explanation": "Étape 1 — Calculer : $P(A) = 0{,}5$, $P(C) = 0{,}3$, $P(A \\cap C) = 0{,}1$. Étape 2 — Calculer le produit : $0{,}5 \\times 0{,}3 = 0{,}15$. Étape 3 — Comparer : $0{,}1 \\neq 0{,}15$. Étape 4 — Conclure : $A$ et $C$ ne sont pas indépendants. Ils ne sont pas non plus incompatibles, puisque $A \\cap C = \\{2\\}$ n'est pas vide.",
+                "answers": [
+                  {
+                    "content": "indépendants",
+                    "correct": false
+                  },
+                  {
+                    "content": "dépendants (non indépendants)",
+                    "correct": true
+                  },
+                  {
+                    "content": "incompatibles",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Variable aléatoire : loi, espérance et écart-type",
+          "remember": "Une variable aléatoire $X$ prend un nombre fini de valeurs $x_1, \\dots, x_n$. Sa loi est la liste des probabilités $p_i = P(X = x_i)$, dont la somme vaut 1. Espérance : $E(X) = \\sum p_i x_i$. Variance : $V(X) = \\sum p_i x_i^2 - (E(X))^2$. Écart-type : $\\sigma(X) = \\sqrt{V(X)}$. Si $X$ est le gain algébrique d'un jeu (mise déduite), le jeu est équitable lorsque $E(X) = 0$.",
+          "method": [
+            "Lister les valeurs possibles $x_1, \\dots, x_n$ de $X$.",
+            "Calculer la probabilité $p_i$ de chaque valeur et vérifier que $\\sum p_i = 1$.",
+            "Calculer l'espérance $E(X) = \\sum p_i x_i$.",
+            "Calculer la variance $V(X) = \\sum p_i x_i^2 - (E(X))^2$.",
+            "Calculer l'écart-type $\\sigma(X) = \\sqrt{V(X)}$."
+          ],
+          "example": {
+            "statement": "À la kermesse, une urne contient 10 billets : 5 blancs, 4 verts et 1 rouge. Le joueur tire un billet. Un billet blanc ne rapporte rien, un vert rapporte 100 F et le rouge 300 F. On note $X$ le gain en centaines de francs. Déterminer la loi de $X$, puis $E(X)$, $V(X)$ et $\\sigma(X)$.",
+            "steps": [
+              "Lister : $X$ prend les valeurs 0, 1 et 3.",
+              "Calculer les probabilités : $P(X=0) = \\dfrac{5}{10} = 0{,}5$, $P(X=1) = 0{,}4$, $P(X=3) = 0{,}1$ ; la somme vaut $0{,}5 + 0{,}4 + 0{,}1 = 1$.",
+              "Calculer l'espérance : $E(X) = 0 \\times 0{,}5 + 1 \\times 0{,}4 + 3 \\times 0{,}1 = 0{,}7$.",
+              "Calculer la variance : $\\sum p_i x_i^2 = 0 \\times 0{,}5 + 1 \\times 0{,}4 + 9 \\times 0{,}1 = 1{,}3$, donc $V(X) = 1{,}3 - 0{,}7^2 = 1{,}3 - 0{,}49 = 0{,}81$.",
+              "Calculer l'écart-type : $\\sigma(X) = \\sqrt{0{,}81} = 0{,}9$."
+            ]
+          },
+          "pitfall": "Ne pas faire la moyenne simple des valeurs : $E(X)$ pondère chaque valeur par sa probabilité. Contre-exemple avec la tombola : la moyenne simple de 0, 1 et 3 est $\\dfrac{4}{3} \\approx 1{,}33$, alors que $E(X) = 0{,}7$ ; la valeur 0 sort une fois sur deux, elle pèse plus que 3, qui sort une fois sur dix. Autre oubli fréquent : écrire $V(X) = \\sum p_i x_i^2$ sans retrancher $(E(X))^2$ (ici 1,3 au lieu de 0,81).",
+          "figure": "loi-tombola",
+          "exercise": {
+            "title": "Un jeu de dés au quartier est-il équitable ?",
+            "statement": "Au quartier, un jeu de dés se joue ainsi : le joueur mise 2 pièces de 100 F, puis lance un dé équilibré à 6 faces. Si le dé donne 6, il reçoit 6 pièces ; s'il donne 4 ou 5, il reçoit 3 pièces ; sinon il ne reçoit rien. On note $X$ le gain algébrique du joueur, en pièces de 100 F, la mise étant déjà déduite.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Au quartier, un joueur mise 2 pièces, lance un dé équilibré et reçoit 6 pièces s'il obtient 6, 3 pièces s'il obtient 4 ou 5, rien sinon. Son gain algébrique $X$ (mise déduite) prend trois valeurs. Lesquelles ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Lister : le joueur paie 2 pièces. Il reçoit 0, 3 ou 6 pièces, donc son gain algébrique vaut $0 - 2 = -2$, $3 - 2 = 1$ ou $6 - 2 = 4$. Les valeurs de $X$ sont $-2$, $1$ et $4$. Les nombres 3 et 6 sont les sommes reçues avant de déduire la mise : c'est l'erreur la plus fréquente.",
+                "answers": [
+                  {
+                    "content": "$-2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au quartier, un joueur lance un dé équilibré. Son gain algébrique $X$ vaut $-2$ si le dé donne 1, 2 ou 3, vaut $1$ si le dé donne 4 ou 5, et vaut $4$ si le dé donne 6. Quelle est la probabilité $P(X = 1)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lister : $X$ vaut 1 pour les faces 4 et 5. Étape 2 — Calculer la probabilité : 2 faces sur 6, donc $P(X = 1) = \\dfrac{2}{6} = \\dfrac{1}{3}$. Pour contrôler : $P(X = -2) = \\dfrac{3}{6} = \\dfrac{1}{2}$, $P(X = 4) = \\dfrac{1}{6}$ et $\\dfrac{1}{2} + \\dfrac{1}{3} + \\dfrac{1}{6} = 1$. La valeur $\\dfrac{1}{6}$ ne compte qu'une face ; $\\dfrac{1}{2}$ est la probabilité de $X = -2$.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{1}{6}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{2}{3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au quartier, un joueur lance un dé équilibré. Son gain algébrique $X$ (en pièces de 100 F) vaut $-2$ avec la probabilité $\\dfrac{1}{2}$, $1$ avec la probabilité $\\dfrac{1}{3}$ et $4$ avec la probabilité $\\dfrac{1}{6}$. Calcule $E(X)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lister : $X$ vaut $-2$, $1$ ou $4$. Étape 2 — Calculer les probabilités : $\\dfrac{1}{2}$, $\\dfrac{1}{3}$, $\\dfrac{1}{6}$, de somme 1. Étape 3 — Calculer l'espérance : $E(X) = -2 \\times \\dfrac{1}{2} + 1 \\times \\dfrac{1}{3} + 4 \\times \\dfrac{1}{6} = -1 + \\dfrac{1}{3} + \\dfrac{2}{3} = 0$. Le joueur ne gagne ni ne perd en moyenne : le jeu est équitable.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au quartier, un joueur lance un dé équilibré. Son gain algébrique $X$ (en pièces de 100 F) vaut $-2$ avec la probabilité $\\dfrac{1}{2}$, $1$ avec la probabilité $\\dfrac{1}{3}$ et $4$ avec la probabilité $\\dfrac{1}{6}$, et $E(X) = 0$. Calcule $V(X)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lister : $x_i = -2, 1, 4$. Étape 2 — Probabilités : $\\dfrac{1}{2}, \\dfrac{1}{3}, \\dfrac{1}{6}$. Étape 3 — On a $E(X) = 0$. Étape 4 — Calculer la variance : $\\sum p_i x_i^2 = 4 \\times \\dfrac{1}{2} + 1 \\times \\dfrac{1}{3} + 16 \\times \\dfrac{1}{6} = 2 + \\dfrac{1}{3} + \\dfrac{8}{3} = 5$, puis $V(X) = 5 - 0^2 = 5$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au quartier, le gain algébrique $X$ d'un joueur de dés a pour espérance $E(X) = 0$ et pour variance $V(X) = 5$. Quel est son écart-type $\\sigma(X)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — La variance vaut $V(X) = 5$. Étape 5 — Calculer l'écart-type : $\\sigma(X) = \\sqrt{V(X)} = \\sqrt{5} \\approx 2{,}24$. La réponse 5 est la variance, pas l'écart-type ; la réponse 0 est l'espérance : l'écart-type mesure la dispersion des gains autour de cette moyenne, il n'est pas nul puisque les gains valent $-2$, $1$ ou $4$.",
+                "answers": [
+                  {
+                    "content": "$\\sqrt{5}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$5$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{5}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au quartier, le gain algébrique $X$ d'un joueur de dés (mise déduite) a pour espérance $E(X) = 0$. Que peut-on dire du jeu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer l'espérance donne $E(X) = 0$. Un gain moyen nul signifie que, sur un très grand nombre de parties, le joueur ne gagne ni ne perd : le jeu est équitable. Cela ne veut pas dire qu'on ne perd jamais une partie : une partie perdue coûte 2 pièces.",
+                "answers": [
+                  {
+                    "content": "Le jeu est équitable",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le jeu est truqué en faveur du joueur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le joueur ne perd jamais",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le joueur gagne 1 pièce par partie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève calcule l'espérance du gain $X$, qui prend les valeurs $-2$, $1$ et $4$ avec les probabilités $\\dfrac{1}{2}$, $\\dfrac{1}{3}$ et $\\dfrac{1}{6}$, ainsi : « $E(X) = \\dfrac{-2 + 1 + 4}{3} = 1$ ». Ce calcul est-il correct ?",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Les valeurs n'ont pas la même probabilité : $-2$ sort une fois sur deux, $4$ une fois sur six. Étape 3 — L'espérance pondère : $E(X) = -2 \\times \\dfrac{1}{2} + 1 \\times \\dfrac{1}{3} + 4 \\times \\dfrac{1}{6} = 0$. La moyenne simple 1 donnerait à tort l'impression que le joueur gagne 1 pièce par partie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Une roue de la kermesse donne un gain $X$, en francs, qui prend les valeurs 0, 10 et 20. On sait que $P(X = 0) = 0{,}3$ et $P(X = 10) = 0{,}5$.",
+            "questions": [
+              {
+                "content": "Une roue de kermesse donne un gain $X$ de 0, 10 ou 20 F, avec $P(X = 0) = 0{,}3$ et $P(X = 10) = 0{,}5$. Calcule $P(X = 20)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "La somme des probabilités de la loi vaut 1.",
+                "explanation": "Étape 1 — Lister : $X$ vaut 0, 10 ou 20. Étape 2 — Calculer les probabilités : la somme vaut 1, donc $P(X = 20) = 1 - 0{,}3 - 0{,}5 = 0{,}2$.",
+                "answers": [
+                  {
+                    "content": "0,2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une roue de kermesse donne un gain $X$ de 0, 10 ou 20 F, avec $P(X = 0) = 0{,}3$, $P(X = 10) = 0{,}5$ et $P(X = 20) = 0{,}2$. Calcule $E(X)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "unit": "F",
+                "explanation": "Étape 1 — Lister : 0, 10, 20. Étape 2 — Probabilités : 0,3 ; 0,5 ; 0,2 (somme 1). Étape 3 — Calculer l'espérance : $E(X) = 0 \\times 0{,}3 + 10 \\times 0{,}5 + 20 \\times 0{,}2 = 0 + 5 + 4 = 9$. En moyenne, un tour rapporte 9 F.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour la même roue ($P(X = 0) = 0{,}3$, $P(X = 10) = 0{,}5$, $P(X = 20) = 0{,}2$, $E(X) = 9$), complète : $V(X) = $ ___ et $\\sigma(X) = $ ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Calcule d'abord $\\sum p_i x_i^2$, puis retranche le carré de l'espérance.",
+                "explanation": "Étape 3 — On a $E(X) = 9$. Étape 4 — Calculer la variance : $\\sum p_i x_i^2 = 0 \\times 0{,}3 + 100 \\times 0{,}5 + 400 \\times 0{,}2 = 50 + 80 = 130$, donc $V(X) = 130 - 9^2 = 130 - 81 = 49$. Étape 5 — Calculer l'écart-type : $\\sigma(X) = \\sqrt{49} = 7$.",
+                "answers": [
+                  {
+                    "content": "49",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Épreuves répétées et loi binomiale",
+          "remember": "Une épreuve de Bernoulli a deux issues : le succès (probabilité $p$) et l'échec (probabilité $1-p$). On la répète $n$ fois de façon identique et indépendante. Le nombre $X$ de succès suit la loi binomiale $\\mathcal{B}(n\\,;\\,p)$ : pour $k = 0, 1, \\dots, n$, $P(X = k) = \\binom{n}{k}\\,p^k\\,(1-p)^{n-k}$, où $\\binom{n}{k} = \\dfrac{n!}{k!\\,(n-k)!}$ compte les façons de placer les $k$ succès. L'espérance est $E(X) = np$ et la variance $V(X) = np(1-p)$.",
+          "method": [
+            "Reconnaître l'épreuve de Bernoulli : définir le succès et donner sa probabilité $p$.",
+            "Identifier $n$, vérifier que les répétitions sont identiques et indépendantes, puis conclure que $X$ suit $\\mathcal{B}(n\\,;\\,p)$.",
+            "Écrire la formule $P(X = k) = \\binom{n}{k}\\,p^k\\,(1-p)^{n-k}$ avec les valeurs de $n$, $k$ et $p$.",
+            "Calculer le coefficient binomial, les puissances, puis le produit.",
+            "Calculer $E(X) = np$ et $V(X) = np(1-p)$ si l'énoncé les demande."
+          ],
+          "example": {
+            "statement": "Dans une usine de jus, 10 % des bouteilles ont un bouchon mal serré. Le stock est très grand : on prélève 4 bouteilles au hasard et on considère les prélèvements comme indépendants. Soit $X$ le nombre de bouteilles mal bouchées. Calculer $P(X = 2)$, $E(X)$ et $V(X)$.",
+            "steps": [
+              "Reconnaître : le succès est « la bouteille est mal bouchée », de probabilité $p = 0{,}1$.",
+              "Identifier : $n = 4$ prélèvements identiques et indépendants, donc $X$ suit $\\mathcal{B}(4\\,;\\,0{,}1)$.",
+              "Écrire : $P(X = 2) = \\binom{4}{2} \\times 0{,}1^2 \\times 0{,}9^2$.",
+              "Calculer : $\\binom{4}{2} = 6$, $0{,}1^2 = 0{,}01$, $0{,}9^2 = 0{,}81$, donc $P(X = 2) = 6 \\times 0{,}01 \\times 0{,}81 = 0{,}0486$.",
+              "Calculer : $E(X) = 4 \\times 0{,}1 = 0{,}4$ et $V(X) = 4 \\times 0{,}1 \\times 0{,}9 = 0{,}36$."
+            ]
+          },
+          "pitfall": "Ne pas oublier le coefficient binomial $\\binom{n}{k}$ : il compte les ordres possibles des succès. Contre-exemple avec $\\mathcal{B}(3\\,;\\,0{,}5)$ : sans coefficient, on trouverait $0{,}5^3 = 0{,}125$ pour chaque valeur de $k$, et la somme des quatre probabilités vaudrait $0{,}5$, pas 1. Avec les coefficients 1, 3, 3, 1, on obtient 0,125 ; 0,375 ; 0,375 ; 0,125, de somme 1.",
+          "figure": "loi-binomiale",
+          "exercise": {
+            "title": "Les billets gagnants de la tombola",
+            "statement": "Pendant la kermesse, un élève tire 3 fois un billet dans une urne où 1 billet sur 5 est gagnant ; il remet le billet dans l'urne après chaque tirage. On note $X$ le nombre de billets gagnants obtenus.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un élève tire 3 fois un billet dans une urne où 1 billet sur 5 est gagnant, en remettant le billet après chaque tirage. Le nombre $X$ de billets gagnants suit une loi binomiale. Laquelle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : le succès est « le billet est gagnant », de probabilité $p = \\dfrac{1}{5} = 0{,}2$. Étape 2 — Identifier : il y a $n = 3$ tirages identiques et indépendants (le billet est remis), donc $X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$. La loi $\\mathcal{B}(3\\,;\\,0{,}8)$ prend la probabilité d'un échec ; $\\mathcal{B}(5\\,;\\,0{,}2)$ confond $n$ et le dénominateur de $p$.",
+                "answers": [
+                  {
+                    "content": "$\\mathcal{B}(5\\,;\\,0{,}2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathcal{B}(3\\,;\\,0{,}8)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathcal{B}(3\\,;\\,0{,}2)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathcal{B}(0{,}2\\,;\\,3)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève tire 3 fois un billet, avec remise, dans une urne où 1 billet sur 5 est gagnant. $X$ est le nombre de billets gagnants et suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Calcule $P(X = 0)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : succès = billet gagnant, $p = 0{,}2$. Étape 2 — Identifier : $X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Étape 3 — Écrire : $P(X = 0) = \\binom{3}{0} \\times 0{,}2^0 \\times 0{,}8^3$. Étape 4 — Calculer : $\\binom{3}{0} = 1$, $0{,}2^0 = 1$, $0{,}8^3 = 0{,}512$, donc $P(X = 0) = 0{,}512$.",
+                "answers": [
+                  {
+                    "content": "0,512",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève tire 3 fois un billet, avec remise, dans une urne où 1 billet sur 5 est gagnant. $X$ est le nombre de billets gagnants et suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Calcule $P(X = 1)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : succès = billet gagnant, $p = 0{,}2$. Étape 2 — Identifier : $X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Étape 3 — Écrire : $P(X = 1) = \\binom{3}{1} \\times 0{,}2^1 \\times 0{,}8^2$. Étape 4 — Calculer : $\\binom{3}{1} = 3$, $0{,}2^1 = 0{,}2$, $0{,}8^2 = 0{,}64$, donc $P(X = 1) = 3 \\times 0{,}2 \\times 0{,}64 = 0{,}384$.",
+                "answers": [
+                  {
+                    "content": "0,384",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève tire 3 fois un billet, avec remise, dans une urne où 1 billet sur 5 est gagnant. $X$ est le nombre de billets gagnants, $X \\sim \\mathcal{B}(3\\,;\\,0{,}2)$ et $P(X = 0) = 0{,}512$. Calcule la probabilité d'obtenir au moins un billet gagnant, $P(X \\geq 1)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : « au moins un » est l'événement contraire de « aucun ». Étape 2 — Identifier : $X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Étape 3 — Écrire : $P(X \\geq 1) = 1 - P(X = 0)$. Étape 4 — Calculer : $P(X = 0) = 0{,}8^3 = 0{,}512$, donc $P(X \\geq 1) = 1 - 0{,}512 = 0{,}488$.",
+                "answers": [
+                  {
+                    "content": "0,488",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève tire 3 fois un billet, avec remise, dans une urne où 1 billet sur 5 est gagnant. $X$ est le nombre de billets gagnants et suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Calcule $E(X)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : succès = billet gagnant, $p = 0{,}2$. Étape 2 — Identifier : $n = 3$, $X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Étape 5 — Calculer l'espérance : $E(X) = np = 3 \\times 0{,}2 = 0{,}6$. En moyenne, l'élève obtient 0,6 billet gagnant sur 3 tirages.",
+                "answers": [
+                  {
+                    "content": "0,6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève tire 3 fois un billet, avec remise, dans une urne où 1 billet sur 5 est gagnant. Il calcule la probabilité d'obtenir exactement un billet gagnant ainsi : « $P(X = 1) = 0{,}2 \\times 0{,}8 \\times 0{,}8 = 0{,}128$ ». Ce calcul est-il correct ?",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Écrire : la formule contient le coefficient $\\binom{3}{1} = 3$. Étape 4 — Calculer : $P(X = 1) = 3 \\times 0{,}2 \\times 0{,}8^2 = 3 \\times 0{,}128 = 0{,}384$. Le produit $0{,}2 \\times 0{,}8 \\times 0{,}8 = 0{,}128$ ne donne que la probabilité de « gagnant au 1er tirage, perdant aux deux autres » ; il y a 3 positions possibles pour le billet gagnant.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un joueur de l'équipe du quartier réussit un penalty avec la probabilité 0,6. Il tire 3 penaltys, de façon indépendante. On note $Z$ le nombre de buts marqués.",
+            "questions": [
+              {
+                "content": "Le nombre $Z$ de buts marqués suit la loi binomiale de paramètres n = ___ et p = ___",
+                "question_type": "select",
+                "hint": "$n$ est le nombre de tirs ; $p$ est la probabilité de réussir un tir.",
+                "explanation": "Étape 1 — Reconnaître : le succès est « marquer un but », de probabilité $p = 0{,}6$. Étape 2 — Identifier : le joueur tire 3 penaltys identiques et indépendants, donc $n = 3$ et $Z$ suit $\\mathcal{B}(3\\,;\\,0{,}6)$. La valeur 0,4 est la probabilité d'un échec, pas d'un succès.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0,6",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0,6",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "0,4",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "0,36",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un joueur réussit un penalty avec la probabilité 0,6. Il tire 3 penaltys indépendants ; $Z$ suit $\\mathcal{B}(3\\,;\\,0{,}6)$. Calcule $P(Z = 3)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : succès = but, $p = 0{,}6$. Étape 2 — Identifier : $Z$ suit $\\mathcal{B}(3\\,;\\,0{,}6)$. Étape 3 — Écrire : $P(Z = 3) = \\binom{3}{3} \\times 0{,}6^3 \\times 0{,}4^0$. Étape 4 — Calculer : $\\binom{3}{3} = 1$ et $0{,}6^3 = 0{,}216$, donc $P(Z = 3) = 0{,}216$.",
+                "answers": [
+                  {
+                    "content": "0,216",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un joueur réussit un penalty avec la probabilité 0,6. Il tire 3 penaltys indépendants ; $Z$ suit $\\mathcal{B}(3\\,;\\,0{,}6)$. Calcule $P(Z = 2)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "N'oublie pas le coefficient binomial : $\\binom{3}{2} = 3$.",
+                "explanation": "Étape 1 — Reconnaître : succès = but, $p = 0{,}6$. Étape 2 — Identifier : $Z$ suit $\\mathcal{B}(3\\,;\\,0{,}6)$. Étape 3 — Écrire : $P(Z = 2) = \\binom{3}{2} \\times 0{,}6^2 \\times 0{,}4^1$. Étape 4 — Calculer : $\\binom{3}{2} = 3$, $0{,}6^2 = 0{,}36$, donc $P(Z = 2) = 3 \\times 0{,}36 \\times 0{,}4 = 0{,}432$.",
+                "answers": [
+                  {
+                    "content": "0,432",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La tombola de la kermesse : deux urnes",
+          "statement": "Au stand de tombola de la kermesse, deux urnes sont proposées. Le joueur choisit l'urne $U_1$ avec la probabilité 0,4 et l'urne $U_2$ avec la probabilité 0,6, puis tire un billet dans l'urne choisie. Dans $U_1$, 25 % des billets sont gagnants ; dans $U_2$, 20 % des billets sont gagnants. On note $G$ l'événement « le billet tiré est gagnant ». Tu utilises l'arbre pondéré, les probabilités totales et l'indépendance.",
+          "exercise_type": "fixation",
+          "figure": "arbre-tombola",
+          "questions": [
             {
-              "title": "Comprendre — Lire une probabilité conditionnelle et un arbre pondéré",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Calcule $P(U_1 \\cap G)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Construire l'arbre : $U_1$ (0,4) puis $G$ (0,25). Étape 2 — Vérifier : 0,4 + 0,6 = 1 et 0,25 + 0,75 = 1. Étape 3 — Calculer le chemin : on multiplie les probabilités de ses branches, $P(U_1 \\cap G) = P(U_1) \\times P_{U_1}(G) = 0{,}4 \\times 0{,}25 = 0{,}1$. Additionner 0,4 et 0,25 serait faux.",
+              "answers": [
                 {
-                  "content": "Dans une classe de 40 élèves, il y a 16 filles, et 4 de ces filles portent des lunettes. On tire un élève au hasard. On note $F$ « l'élève est une fille » et $L$ « l'élève porte des lunettes ». Que vaut $P_F(L)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sachant que c'est une fille, l'univers se réduit aux 16 filles : $P_F(L) = \\frac{4}{16} = \\frac{1}{4}$. Répondre $\\frac{1}{10}$, c'est calculer $P(F \\cap L) = \\frac{4}{40}$ : tu as gardé toute la classe au lieu de la faire rétrécir.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{10}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{5}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour deux événements $A$ et $B$ de probabilités non nulles, on a toujours $P_B(A) = P_A(B)$.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Dans une classe de 40 élèves avec 16 filles et 10 porteurs de lunettes, dont 4 filles : la part des porteurs de lunettes parmi les filles vaut $\\frac{4}{16}$, mais la part des filles parmi les porteurs de lunettes vaut $\\frac{4}{10}$. Le groupe de référence a changé.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Soit $A$ et $B$ deux événements, avec $P(B) \\neq 0$. Quelle égalité définit $P_B(A)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On divise par la probabilité de la condition $B$, car l'univers rétrécit à $B$ : $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$. Diviser par $P(A)$ donne $P_A(B)$, la probabilité de $B$ sachant $A$ : c'est la confusion la plus fréquente.",
-                  "answers": [
-                    {
-                      "content": "$P_B(A) = \\frac{P(A \\cap B)}{P(B)}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P_B(A) = \\frac{P(A \\cap B)}{P(A)}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P_B(A) = P(A) \\times P(B)$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P_B(A) = \\frac{P(A)}{P(B)}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un arbre pondéré, quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les branches issues d'un même nœud couvrent tous les cas, donc leur somme vaut $1$, et on multiplie le long d'un chemin. Les branches du second niveau portent des probabilités conditionnelles, pas des intersections. La somme de tous les nombres de l'arbre dépasse $1$ dès qu'il a deux niveaux.",
-                  "answers": [
-                    {
-                      "content": "La somme des probabilités des branches issues d'un même nœud vaut $1$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité d'un chemin est le produit des probabilités de ses branches.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité d'un chemin est la somme des probabilités de ses branches.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les branches du second niveau portent des probabilités du type $P(A \\cap B)$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La somme de toutes les probabilités écrites sur l'arbre vaut $1$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un gbaka prend la voie express (événement $E$) avec la probabilité $0{,}7$. Quand il prend la voie express, il arrive en retard (événement $R$) avec la probabilité $0{,}2$. Que représente le nombre $0{,}2$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "« Quand il prend la voie express » est la condition : $0{,}2$ est la probabilité du retard sachant $E$, donc $P_E(R)$. Ce n'est pas $P(E \\cap R)$, qui vaut $0{,}7 \\times 0{,}2 = 0{,}14$ : souviens-toi, on multiplie en suivant la route.",
-                  "answers": [
-                    {
-                      "content": "$P_E(R)$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P(E \\cap R)$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P(R)$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P_R(E)$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On donne $P(B) = 0{,}5$ et $P_B(A) = 0{,}4$. Alors $P_B(\\overline{A}) = 0{,}6$.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Dans l'univers rétréci à $B$, $A$ et $\\overline{A}$ restent contraires : $P_B(\\overline{A}) = 1 - P_B(A) = 1 - 0{,}4 = 0{,}6$. L'erreur tentante est de calculer $1 - P(B) = 0{,}5$ : cela donne $P(\\overline{B})$, une tout autre probabilité.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,1",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer avec la formule et l'arbre pondéré",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Calcule $P(U_2 \\cap G)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Construire l'arbre : $U_2$ (0,6) puis $G$ (0,20). Étape 2 — Vérifier : $0{,}4 + 0{,}6 = 1$ et $0{,}2 + 0{,}8 = 1$. Étape 3 — Calculer le chemin : $P(U_2 \\cap G) = 0{,}6 \\times 0{,}2 = 0{,}12$.",
+              "answers": [
                 {
-                  "content": "On donne $P(A \\cap B) = 0{,}12$ et $P(B) = 0{,}4$. Que vaut $P_B(A)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P_B(A) = \\frac{P(A \\cap B)}{P(B)} = \\frac{0{,}12}{0{,}4} = 0{,}3$. Le résultat $0{,}048$ vient d'une multiplication au lieu d'une division : la formule demande de diviser par la probabilité de la condition.",
-                  "answers": [
-                    {
-                      "content": "$0{,}3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}048$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}52$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}28$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On donne $P(A) = 0{,}6$ et $P_A(B) = 0{,}5$. Que vaut $P(A \\cap B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Formule des probabilités composées : $P(A \\cap B) = P(A) \\times P_A(B) = 0{,}6 \\times 0{,}5 = 0{,}3$. Répondre $0{,}5$, c'est confondre la probabilité de la branche avec celle du chemin entier.",
-                  "answers": [
-                    {
-                      "content": "$0{,}3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}83$ environ",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}1$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On donne $P(B) = 0{,}3$, $P_B(A) = 0{,}6$ et $P_{\\overline{B}}(A) = 0{,}2$. Que vaut $P(A)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(\\overline{B}) = 1 - 0{,}3 = 0{,}7$. Probabilités totales : $P(A) = 0{,}3 \\times 0{,}6 + 0{,}7 \\times 0{,}2 = 0{,}18 + 0{,}14 = 0{,}32$. Additionner $0{,}6 + 0{,}2 = 0{,}8$, c'est oublier de multiplier par la probabilité de chaque route.",
-                  "answers": [
-                    {
-                      "content": "$0{,}32$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}8$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}24$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}4$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On donne $P(B) = 0{,}3$, $P_B(A) = 0{,}6$ et $P_{\\overline{B}}(A) = 0{,}2$. Que vaut $P_A(B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(A \\cap B) = 0{,}3 \\times 0{,}6 = 0{,}18$ et $P(A) = 0{,}18 + 0{,}7 \\times 0{,}2 = 0{,}32$. Donc $P_A(B) = \\frac{0{,}18}{0{,}32} = \\frac{9}{16}$. Répondre $0{,}6$, c'est lire $P_B(A)$ : on a inversé la condition.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{9}{16}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}18$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}32$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une urne contient 3 boules rouges et 2 boules vertes. On tire successivement deux boules, sans remise. Quelle est la probabilité que les deux boules soient rouges ?",
-                  "question_type": "single_choice",
-                  "explanation": "Premier tirage : $\\frac{3}{5}$. Sachant que la première est rouge, il reste 2 rouges sur 4 boules : $\\frac{2}{4}$. Donc $\\frac{3}{5} \\times \\frac{2}{4} = \\frac{3}{10}$. Le résultat $\\frac{9}{25}$ correspond à un tirage avec remise : ici l'urne a changé après le premier tirage.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{3}{10}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{9}{25}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{6}{25}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un lycée, 60 % des élèves sont internes (événement $I$), les autres sont externes. Ce lundi, 10 % des internes et 25 % des externes sont arrivés en retard (événement $R$). On choisit un élève au hasard. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "$P(I \\cap R) = 0{,}6 \\times 0{,}1 = 0{,}06$ et $P(R) = 0{,}06 + 0{,}4 \\times 0{,}25 = 0{,}16$. Le total $0{,}35 = 0{,}1 + 0{,}25$ oublie de multiplier par $P(I)$ et $P(\\overline{I})$. Et $P_I(R) = 0{,}1$, lu sur la branche, n'est pas $0{,}06$.",
-                  "answers": [
-                    {
-                      "content": "$P(I \\cap R) = 0{,}06$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P(R) = 0{,}16$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P(R) = 0{,}35$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P_I(R) = 0{,}06$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P_R(I) = 0{,}6$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,12",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Dépistage du paludisme et probabilités totales",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Calcule $P(G)$, la probabilité de tirer un billet gagnant.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Construire l'arbre : deux chemins mènent à $G$, l'un par $U_1$, l'autre par $U_2$. Étape 2 — Vérifier : les branches de chaque nœud ont pour somme 1. Étape 3 — Calculer chaque chemin : $0{,}4 \\times 0{,}25 = 0{,}10$ et $0{,}6 \\times 0{,}20 = 0{,}12$. Étape 4 — Additionner (formule des probabilités totales) : $P(G) = 0{,}10 + 0{,}12 = 0{,}22$.",
+              "answers": [
                 {
-                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Que vaut $P(M \\cap T)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On suit le chemin « malade puis positif » : $P(M \\cap T) = P(M) \\times P_M(T) = 0{,}1 \\times 0{,}95 = 0{,}095$. Le nombre $0{,}95$ est seulement la probabilité de la branche, $P_M(T)$.",
-                  "answers": [
-                    {
-                      "content": "$0{,}095$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}95$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}113$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}1$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,22",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Un billet gagnant est tiré. Calcule la probabilité qu'il vienne de l'urne $U_1$, $P_G(U_1)$, arrondie au centième.",
+              "question_type": "numeric",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Construire l'arbre. Étape 2 — Vérifier les sommes des branches. Étape 3 — Calculer les chemins vers $G$ : 0,10 (par $U_1$) et 0,12 (par $U_2$). Étape 4 — Additionner : $P(G) = 0{,}22$. Étape 5 — Diviser : $P_G(U_1) = \\dfrac{P(U_1 \\cap G)}{P(G)} = \\dfrac{0{,}10}{0{,}22} = \\dfrac{5}{11} \\approx 0{,}45$. Ne pas répondre 0,25 : c'est $P_{U_1}(G)$, la probabilité de gagner sachant $U_1$, qui est un conditionnement dans l'autre sens.",
+              "answers": [
+                {
+                  "content": "0,45",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Les événements $U_1$ et $G$ sont-ils indépendants ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode d'indépendance. Étape 1 — Calculer : $P(U_1) = 0{,}4$, $P(G) = 0{,}22$ et $P(U_1 \\cap G) = 0{,}10$. Étape 2 — Calculer le produit : $P(U_1) \\times P(G) = 0{,}4 \\times 0{,}22 = 0{,}088$. Étape 3 — Comparer : $0{,}10 \\neq 0{,}088$. Étape 4 — Conclure : $U_1$ et $G$ ne sont pas indépendants. Cela se voit aussi par $P_{U_1}(G) = 0{,}25 \\neq P(G) = 0{,}22$ : choisir l'urne $U_1$ change la chance de gagner.",
+              "answers": [
+                {
+                  "content": "Non : $P(U_1 \\cap G) = 0{,}10$ alors que $P(U_1) \\times P(G) = 0{,}088$",
+                  "correct": true
                 },
                 {
-                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Que vaut $P(T)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$M$ et $\\overline{M}$ forment une partition : $P(T) = 0{,}1 \\times 0{,}95 + 0{,}9 \\times 0{,}02 = 0{,}095 + 0{,}018 = 0{,}113$. Le résultat $0{,}097$ vient de l'erreur $0{,}1 \\times 0{,}02$ : la seconde route part de $\\overline{M}$, de probabilité $0{,}9$.",
-                  "answers": [
-                    {
-                      "content": "$0{,}113$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}097$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}97$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}095$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Oui : $P(U_1 \\cap G) = 0{,}10$ et $P(U_1) \\times P(G) = 0{,}10$",
+                  "correct": false
                 },
                 {
-                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Le test d'un habitant est positif. Quelle est la probabilité qu'il soit malade, arrondie au centième ?",
-                  "question_type": "single_choice",
-                  "explanation": "On cherche $P_T(M) = \\frac{P(M \\cap T)}{P(T)} = \\frac{0{,}095}{0{,}113} \\approx 0{,}84$, avec $P(T) = 0{,}095 + 0{,}9 \\times 0{,}02 = 0{,}113$. Répondre $0{,}95$, c'est confondre $P_T(M)$ et $P_M(T)$ : la condition n'est pas la même.",
-                  "answers": [
-                    {
-                      "content": "$0{,}84$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}95$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}10$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}11$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Oui, car $U_1$ et $U_2$ sont incompatibles",
+                  "correct": false
                 },
                 {
-                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "$P(T) = 0{,}113$, donc $P(\\overline{T}) = 0{,}887$. Le test se trompe sur deux chemins : $0{,}1 \\times 0{,}05 + 0{,}9 \\times 0{,}02 = 0{,}005 + 0{,}018 = 0{,}023$. Le total $0{,}07 = 0{,}05 + 0{,}02$ oublie le premier niveau de l'arbre.",
-                  "answers": [
-                    {
-                      "content": "$P(\\overline{T}) = 0{,}887$",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité que le test se trompe (malade et négatif, ou non malade et positif) est $0{,}023$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P_M(\\overline{T}) = 0{,}95$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P(M \\cap \\overline{T}) = 0{,}05$",
-                      "correct": false
-                    },
-                    {
-                      "content": "La probabilité que le test se trompe est $0{,}07$.",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "Non, car $P(U_1) \\neq P(U_2)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Le billet tiré est perdant. Calcule la probabilité qu'il vienne de l'urne $U_2$, $P_{\\overline{G}}(U_2)$, arrondie au centième.",
+              "question_type": "numeric",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Construire l'arbre : le chemin $U_2 \\to \\overline{G}$ a pour probabilité $0{,}6 \\times 0{,}8 = 0{,}48$ et le chemin $U_1 \\to \\overline{G}$ a pour probabilité $0{,}4 \\times 0{,}75 = 0{,}30$. Étape 2 — Vérifier : les branches de chaque nœud ont pour somme 1. Étape 3 — Additionner : $P(\\overline{G}) = 0{,}48 + 0{,}30 = 0{,}78$ (on vérifie : $1 - 0{,}22 = 0{,}78$). Étape 4 — Diviser : $P_{\\overline{G}}(U_2) = \\dfrac{0{,}48}{0{,}78} = \\dfrac{8}{13} \\approx 0{,}62$.",
+              "answers": [
                 {
-                  "content": "Dans une région, 10 % des habitants ont le paludisme (événement $M$). Un test rapide est positif (événement $T$) chez 95 % des malades et chez 2 % des personnes non malades. On choisit un habitant au hasard. Affirmation : une personne dont le test est positif a 95 chances sur 100 d'être malade.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. 95 % est $P_M(T)$, la part des positifs parmi les malades. Parmi les positifs, la part des malades est $P_T(M) = \\frac{0{,}095}{0{,}113} \\approx 0{,}84$, soit environ 84 %. Les non malades sont nombreux, et leurs 2 % de faux positifs pèsent.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "On donne $P(A) = 0{,}4$, $P_A(B) = 0{,}5$ et $P(B) = 0{,}38$. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "$P(A \\cap B) = 0{,}4 \\times 0{,}5 = 0{,}2$. Probabilités totales : $P(\\overline{A} \\cap B) = 0{,}38 - 0{,}2 = 0{,}18$. Puis $P_{\\overline{A}}(B) = \\frac{0{,}18}{0{,}6} = 0{,}3$. Répondre $0{,}18$ pour $P_{\\overline{A}}(B)$, c'est oublier de diviser par $P(\\overline{A})$.",
-                  "answers": [
-                    {
-                      "content": "$P(A \\cap B) = 0{,}2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P(\\overline{A} \\cap B) = 0{,}18$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P_{\\overline{A}}(B) = 0{,}3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P_{\\overline{A}}(B) = 0{,}18$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P_B(A) = 0{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P(\\overline{A} \\cap B) = 0{,}62$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,62",
+                  "correct": true
                 }
               ]
             }
           ]
         },
         {
-          "name": "Variable aléatoire, loi de probabilité et espérance",
-          "subtitle": "Donner la loi d'une variable aléatoire, calculer espérance, variance, écart-type et fonction de répartition",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître une variable aléatoire et donner sa loi de probabilité.</li>\n<li>Calculer l'espérance, la variance et l'écart-type d'une variable aléatoire.</li>\n<li>Déterminer la fonction de répartition d'une variable aléatoire.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. La tombola de la kermesse (variable aléatoire et loi).</strong> À la kermesse du lycée, tu tires un ticket dans une boîte de 10 tickets : 1 ticket gagne 1 000 F, 3 tickets gagnent 200 F et 6 tickets ne gagnent rien. Avant le tirage, tu ne sais pas combien tu vas gagner. Mais tu connais toutes les sommes possibles, et la chance de chacune.</p>\n<p><em>Le pont.</em> Chaque ticket est une <strong>issue</strong>, un résultat possible de l'expérience. La somme gagnée, c'est la <strong>variable aléatoire</strong> $X$ : elle associe un nombre à chaque issue. Les sommes $0$, $200$ et $1\\,000$ sont les <strong>valeurs prises</strong> par $X$. La liste « valeur, probabilité » est la <strong>loi de probabilité</strong> de $X$ : $P(X = 0) = 0{,}6$, $P(X = 200) = 0{,}3$ et $P(X = 1\\,000) = 0{,}1$.</p>\n<p><em>Où l'image s'arrête.</em> Malgré son nom, $X$ n'est pas une inconnue comme le $x$ d'une équation : c'est une fonction, qui va de l'univers vers $\\mathbb{R}$. Le hasard est dans le tirage du ticket, pas dans la règle qui donne le gain.</p>\n<p><strong>2. La caisse de l'organisateur (espérance).</strong> Si 100 élèves jouent, environ 10 gagnent 1 000 F, 30 gagnent 200 F et 60 ne gagnent rien. L'organisateur distribue environ $10 \\times 1\\,000 + 30 \\times 200 = 16\\,000$ F, soit 160 F par joueur en moyenne. S'il vend le ticket 200 F, il garde environ 40 F par joueur.</p>\n<p><em>Le pont.</em> Ces 160 F sont l'<strong>espérance</strong> $E(X)$ : la moyenne des valeurs de $X$, chacune pondérée par sa probabilité. $E(X) = 0 \\times 0{,}6 + 200 \\times 0{,}3 + 1\\,000 \\times 0{,}1 = 160$.</p>\n<p><em>Où l'image s'arrête.</em> Aucun joueur ne gagne exactement 160 F. L'espérance n'est pas forcément une valeur prise par $X$ : c'est une moyenne sur un très grand nombre de parties.</p>\n<p><strong>3. Les deux attaquants (variance et écart-type).</strong> Deux attaquants marquent en moyenne 1 but par match. Le premier marque 1 but à chaque match. Le second ne marque rien deux matchs sur trois, puis 3 buts le troisième. Même moyenne, mais le second est bien plus irrégulier.</p>\n<p><em>Le pont.</em> La <strong>variance</strong> $V(X)$ mesure cette irrégularité : c'est la moyenne des carrés des écarts entre les valeurs et l'espérance. Pour le premier attaquant, $V = 0$. Pour le second, $V = \\frac{2}{3} \\times (0 - 1)^2 + \\frac{1}{3} \\times (3 - 1)^2 = 2$. L'<strong>écart-type</strong> $\\sigma(X) = \\sqrt{V(X)}$ donne l'écart typique à la moyenne : ici $\\sqrt{2} \\approx 1{,}4$ but.</p>\n<p><em>Où l'image s'arrête.</em> La variance s'exprime en « buts au carré », ce qui n'a pas de sens concret. C'est pour cela qu'on prend sa racine carrée, l'écart-type, qui a la même unité que $X$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Variable aléatoire.</strong> Sur un univers fini $\\Omega$, une variable aléatoire $X$ est une application de $\\Omega$ dans $\\mathbb{R}$. On note $(X = x_i)$ l'événement « $X$ prend la valeur $x_i$ ».</p>\n<p><strong>Loi de probabilité.</strong> Donner la loi de $X$, c'est donner ses valeurs $x_1, x_2, \\ldots, x_n$ et les probabilités $p_i = P(X = x_i)$, avec $p_1 + p_2 + \\ldots + p_n = 1$. Sur ta copie, on la présente souvent dans un tableau à deux lignes.</p>\n<p><strong>Espérance.</strong> $E(X) = p_1 x_1 + p_2 x_2 + \\ldots + p_n x_n$. Pour un jeu où $X$ est le gain du joueur, le jeu est équitable si $E(X) = 0$, favorable au joueur si $E(X) > 0$, défavorable si $E(X) < 0$.</p>\n<p><strong>Variance et écart-type.</strong> $V(X) = p_1 \\big(x_1 - E(X)\\big)^2 + \\ldots + p_n \\big(x_n - E(X)\\big)^2$. En pratique, on utilise $V(X) = E(X^2) - \\big(E(X)\\big)^2$, avec $E(X^2) = p_1 x_1^2 + \\ldots + p_n x_n^2$. On a toujours $V(X) \\geq 0$, et $\\sigma(X) = \\sqrt{V(X)}$.</p>\n<p><strong>Fonction de répartition.</strong> C'est la fonction $F$ définie sur $\\mathbb{R}$ par $F(x) = P(X \\leq x)$. Elle est en escalier et croissante ; elle vaut $0$ avant la plus petite valeur de $X$ et $1$ à partir de la plus grande. Certains manuels utilisent $F(x) = P(X < x)$ : les deux définitions ne diffèrent qu'aux valeurs prises par $X$. Suis celle de ton professeur.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On lance un dé équilibré. Avec 1, 2 ou 3, tu perds 100 F ; avec 4 ou 5, tu ne gagnes rien ; avec 6, tu gagnes 300 F. On note $X$ ton gain algébrique (positif si tu gagnes, négatif si tu perds).</strong></p>\n<ol>\n<li>Valeurs de $X$ : $-100$, $0$ et $300$.</li>\n<li>Loi : $P(X = -100) = \\frac{3}{6} = \\frac{1}{2}$ ; $P(X = 0) = \\frac{2}{6} = \\frac{1}{3}$ ; $P(X = 300) = \\frac{1}{6}$. Vérification : $\\frac{1}{2} + \\frac{1}{3} + \\frac{1}{6} = 1$.</li>\n<li>Espérance : $E(X) = \\frac{1}{2} \\times (-100) + \\frac{1}{3} \\times 0 + \\frac{1}{6} \\times 300 = -50 + 0 + 50 = 0$. Le jeu est équitable.</li>\n<li>Variance : $E(X^2) = \\frac{1}{2} \\times 10\\,000 + \\frac{1}{3} \\times 0 + \\frac{1}{6} \\times 90\\,000 = 5\\,000 + 15\\,000 = 20\\,000$. Donc $V(X) = 20\\,000 - 0^2 = 20\\,000$.</li>\n<li>Écart-type : $\\sigma(X) = \\sqrt{20\\,000} = 100\\sqrt{2} \\approx 141$ F.</li>\n<li>Fonction de répartition : $F(x) = 0$ si $x < -100$ ; $F(x) = \\frac{1}{2}$ si $-100 \\leq x < 0$ ; $F(x) = \\frac{1}{2} + \\frac{1}{3} = \\frac{5}{6}$ si $0 \\leq x < 300$ ; $F(x) = 1$ si $x \\geq 300$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Prendre $E(X^2)$ pour la variance, en oubliant de retrancher $\\big(E(X)\\big)^2$, ou écrire $\\sigma(X) = V(X)^2$ au lieu de $\\sqrt{V(X)}$.</p>\n<p>Comment le repérer : vérifie d'abord que la somme des probabilités vaut $1$. Ensuite, une variance n'est jamais négative, et l'écart-type a la même unité que $X$ (des francs, des buts…) : s'il est bien plus grand que les écarts entre les valeurs et l'espérance, ton calcul est faux.</p>\n<h2>En une phrase</h2>\n<p>Une variable aléatoire donne un nombre à chaque résultat du hasard ; sa loi dit avec quelle probabilité elle prend chaque valeur, son espérance est sa moyenne sur un grand nombre de parties, et son écart-type mesure à quel point elle s'en éloigne.</p>",
-          "exercises": [
+          "title": "Deux dés au quartier",
+          "statement": "Au quartier, on lance deux dés équilibrés à 6 faces, un rouge et un vert. Les 36 résultats possibles sont équiprobables. On note $S$ « la somme des deux dés est 8 », $R$ « le dé rouge donne 6 » et $E$ « la somme des deux dés est supérieure ou égale à 10 ». Tu dénombres les résultats favorables, puis tu calcules des probabilités conditionnelles et tu étudies l'indépendance.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître une variable aléatoire et sa loi",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "On lance deux dés équilibrés à 6 faces (un rouge, un vert) : les 36 résultats sont équiprobables. Combien de ces résultats réalisent $S$ « la somme des deux dés est 8 » ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lister les couples (rouge ; vert) de somme 8 : (2 ; 6), (3 ; 5), (4 ; 4), (5 ; 3), (6 ; 2). Étape 2 — Compter : il y en a 5, donc $P(S) = \\dfrac{5}{36}$. Le couple (1 ; 7) n'existe pas, et il ne faut compter (4 ; 4) qu'une fois.",
+              "answers": [
                 {
-                  "content": "On lance deux pièces de monnaie et on note $X$ le nombre de « pile » obtenus. Quelles sont les valeurs prises par $X$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On peut obtenir aucun, un ou deux « pile » : $X$ prend les valeurs $0$, $1$ et $2$. Les issues PP, PF, FP, FF sont les résultats de l'expérience, pas les valeurs de $X$ : la variable aléatoire transforme chaque issue en nombre.",
-                  "answers": [
-                    {
-                      "content": "$0$, $1$ et $2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1$ et $2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0$ et $1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "PP, PF, FP et FF",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On lance deux pièces de monnaie équilibrées et on note $X$ le nombre de « pile » obtenus. Que vaut $P(X = 1)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les 4 issues PP, PF, FP, FF sont équiprobables, et deux d'entre elles donnent un seul « pile » : $P(X = 1) = \\frac{2}{4} = \\frac{1}{2}$. Répondre $\\frac{1}{3}$, c'est croire que les trois valeurs $0$, $1$, $2$ ont la même probabilité.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{3}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une variable aléatoire $X$ prend les valeurs $1$, $2$ et $3$ avec $P(X = 1) = 0{,}2$, $P(X = 2) = 0{,}5$ et $P(X = 3) = 0{,}4$. Ces données définissent une loi de probabilité.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. La somme des probabilités vaut $0{,}2 + 0{,}5 + 0{,}4 = 1{,}1$, et non $1$. Chaque probabilité est bien entre $0$ et $1$, mais cela ne suffit pas : la somme doit valoir exactement $1$.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une tombola de 10 tickets, 1 ticket gagne 1 000 F, 3 tickets gagnent 200 F et 6 ne gagnent rien. On note $X$ le gain d'un joueur qui tire un ticket. On trouve $E(X) = 160$. Que représente ce nombre ?",
-                  "question_type": "single_choice",
-                  "explanation": "$E(X) = 0 \\times 0{,}6 + 200 \\times 0{,}3 + 1\\,000 \\times 0{,}1 = 160$ : c'est le gain moyen par ticket sur un très grand nombre de tirages. Ce n'est pas la moyenne simple $\\frac{0 + 200 + 1\\,000}{3} = 400$, qui oublie que les gains n'ont pas la même probabilité.",
-                  "answers": [
-                    {
-                      "content": "Le gain moyen par ticket sur un très grand nombre de tirages",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le gain le plus probable",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le gain que chaque joueur reçoit à coup sûr",
-                      "correct": false
-                    },
-                    {
-                      "content": "La moyenne des trois gains possibles $0$, $200$ et $1\\,000$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Soit $X$ une variable aléatoire définie sur un univers fini. Quelles affirmations sont toujours vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La variance est une moyenne de carrés, donc $V(X) \\geq 0$, et $\\sigma(X) = \\sqrt{V(X)}$. En revanche, $E(X)$ peut être négative (un jeu perdant) et n'est pas forcément une valeur de $X$. Et $V(X) = E(X^2) - \\big(E(X)\\big)^2$, pas $E(X^2)$.",
-                  "answers": [
-                    {
-                      "content": "$V(X) \\geq 0$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\sigma(X) = \\sqrt{V(X)}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$E(X)$ est l'une des valeurs prises par $X$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "$V(X) = E(X^2)$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$E(X) \\geq 0$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une variable aléatoire $X$ prend les valeurs $0$, $1$ et $2$ avec les probabilités respectives $0{,}3$ ; $0{,}5$ et $0{,}2$. Sa fonction de répartition est définie par $F(x) = P(X \\leq x)$. Que vaut $F(1{,}5)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$F(1{,}5) = P(X \\leq 1{,}5)$ : on additionne les probabilités des valeurs inférieures ou égales à $1{,}5$, donc $0$ et $1$. $F(1{,}5) = 0{,}3 + 0{,}5 = 0{,}8$. Répondre $0{,}5$, c'est ne prendre que $P(X = 1)$ : la fonction de répartition cumule.",
-                  "answers": [
-                    {
-                      "content": "$0{,}8$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer espérance, variance et écart-type",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "On lance deux dés équilibrés (un rouge, un vert) : 36 résultats équiprobables. $R$ : « le dé rouge donne 6 » ; $S$ : « la somme est 8 ». Calcule $P_R(S)$.",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : l'événement conditionnant est $R$, qui compte 6 résultats (6 ; 1) à (6 ; 6). Étape 2 — Calculer : $P(R) = \\dfrac{6}{36}$ et $R \\cap S = \\{(6\\,;\\,2)\\}$, donc $P(R \\cap S) = \\dfrac{1}{36}$. Étape 3 — Appliquer : $P_R(S) = \\dfrac{1/36}{6/36} = \\dfrac{1}{6}$. Étape 4 — Simplifier : $\\dfrac{1}{6}$ ; le dé vert doit donner 2. La valeur $\\dfrac{5}{36}$ est $P(S)$, sans condition, et $\\dfrac{1}{36}$ est $P(R \\cap S)$.",
+              "answers": [
                 {
-                  "content": "Une variable aléatoire $X$ prend les valeurs $-1$, $2$ et $5$ avec les probabilités respectives $0{,}5$ ; $0{,}3$ et $0{,}2$. Que vaut $E(X)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$E(X) = 0{,}5 \\times (-1) + 0{,}3 \\times 2 + 0{,}2 \\times 5 = -0{,}5 + 0{,}6 + 1 = 1{,}1$. Le résultat $2$ est la moyenne simple des valeurs, sans les probabilités ; $2{,}1$ vient d'un signe moins oublié devant $0{,}5$.",
-                  "answers": [
-                    {
-                      "content": "$1{,}1$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2{,}1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1{,}21$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{6}$",
+                  "correct": true
                 },
                 {
-                  "content": "Une variable aléatoire $X$ prend les valeurs $-1$, $2$ et $5$ avec les probabilités respectives $0{,}5$ ; $0{,}3$ et $0{,}2$. Que vaut $V(X)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$E(X) = 1{,}1$ et $E(X^2) = 0{,}5 \\times 1 + 0{,}3 \\times 4 + 0{,}2 \\times 25 = 6{,}7$. Donc $V(X) = 6{,}7 - 1{,}1^2 = 6{,}7 - 1{,}21 = 5{,}49$. Le résultat $5{,}6$ vient d'un oubli du carré : on retranche $\\big(E(X)\\big)^2$, pas $E(X)$.",
-                  "answers": [
-                    {
-                      "content": "$5{,}49$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$6{,}7$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5{,}6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1{,}21$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{36}$",
+                  "correct": false
                 },
                 {
-                  "content": "Une variable aléatoire $X$ prend la valeur $0$ avec la probabilité $0{,}75$ et la valeur $4$ avec la probabilité $0{,}25$. Que vaut l'écart-type $\\sigma(X)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$E(X) = 0{,}25 \\times 4 = 1$ et $E(X^2) = 0{,}25 \\times 16 = 4$, donc $V(X) = 4 - 1^2 = 3$ et $\\sigma(X) = \\sqrt{3}$. Répondre $3$, c'est s'arrêter à la variance ; l'écart-type est sa racine carrée.",
-                  "answers": [
-                    {
-                      "content": "$\\sqrt{3}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$9$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{5}{36}$",
+                  "correct": false
                 },
                 {
-                  "content": "Une variable aléatoire $X$ prend les valeurs $1$, $2$, $3$ et $4$ avec $P(X = 1) = 0{,}1$, $P(X = 2) = 0{,}3$, $P(X = 3) = a$ et $P(X = 4) = 0{,}2$. Que vaut $a$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "La somme des probabilités vaut $1$ : $0{,}1 + 0{,}3 + a + 0{,}2 = 1$, donc $a = 1 - 0{,}6 = 0{,}4$. Répondre $0{,}6$, c'est s'arrêter à la somme des probabilités connues, sans la retrancher de $1$.",
-                  "answers": [
-                    {
-                      "content": "$0{,}4$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}25$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On lance un dé équilibré. Si tu obtiens 6, tu gagnes 300 F ; sinon, tu perds 60 F. On note $X$ ton gain algébrique, négatif quand tu perds. Que vaut $E(X)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(X = 300) = \\frac{1}{6}$ et $P(X = -60) = \\frac{5}{6}$. $E(X) = \\frac{300}{6} - \\frac{5 \\times 60}{6} = 50 - 50 = 0$ : le jeu est équitable. Répondre $50$ F, c'est oublier les pertes, qui comptent avec un signe moins.",
-                  "answers": [
-                    {
-                      "content": "$0$ F",
-                      "correct": true
-                    },
-                    {
-                      "content": "$50$ F",
-                      "correct": false
-                    },
-                    {
-                      "content": "$240$ F",
-                      "correct": false
-                    },
-                    {
-                      "content": "$40$ F",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une variable aléatoire $X$ prend les valeurs $1$, $3$ et $6$ avec les probabilités respectives $0{,}2$ ; $0{,}5$ et $0{,}3$. Sa fonction de répartition est définie par $F(x) = P(X \\leq x)$. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Aucune valeur de $X$ n'est inférieure ou égale à $0$, donc $F(0) = 0$. $F(4) = P(X = 1) + P(X = 3) = 0{,}7$. L'erreur tentante est de prendre seulement la probabilité de la valeur la plus proche, comme $F(4) = 0{,}5$ : $F$ cumule toutes les valeurs jusqu'à $x$.",
-                  "answers": [
-                    {
-                      "content": "$F(0) = 0$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$F(4) = 0{,}7$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$F(4) = 0{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$F(7) = 0{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$F(2) = 0$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{5}$",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Étudier un jeu de hasard",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "On lance deux dés équilibrés (un rouge, un vert) : 36 résultats équiprobables. $R$ : « le dé rouge donne 6 » ; $E$ : « la somme est supérieure ou égale à 10 ». Calcule $P_R(E)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : l'événement conditionnant est $R$ (6 résultats). Étape 2 — Calculer : $R \\cap E$ contient (6 ; 4), (6 ; 5), (6 ; 6), soit 3 résultats, donc $P(R \\cap E) = \\dfrac{3}{36}$ et $P(R) = \\dfrac{6}{36}$. Étape 3 — Appliquer : $P_R(E) = \\dfrac{3}{6}$. Étape 4 — Simplifier : $0{,}5$. Parmi les 6 résultats où le rouge donne 6, le vert doit donner 4, 5 ou 6.",
+              "answers": [
                 {
-                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut $P(X = 200)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$X = 200$ quand le joueur tire exactement 1 rouge. Il y a $C_5^2 = 10$ tirages possibles, dont $2 \\times 3 = 6$ avec 1 rouge et 1 vert : $P(X = 200) = \\frac{6}{10} = \\frac{3}{5}$. Répondre $\\frac{3}{10}$, c'est compter $C_3^2$, les tirages sans rouge.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{2}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{10}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{10}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On lance deux dés équilibrés (un rouge, un vert) : 36 résultats équiprobables. $R$ : « le dé rouge donne 6 » ; $S$ : « la somme est 8 ». On a $P(R) = \\dfrac{1}{6}$, $P(S) = \\dfrac{5}{36}$ et $P(R \\cap S) = \\dfrac{1}{36}$. Les événements $R$ et $S$ sont-ils indépendants ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer : $P(R) = \\dfrac{1}{6}$, $P(S) = \\dfrac{5}{36}$, $P(R \\cap S) = \\dfrac{1}{36}$. Étape 2 — Calculer le produit : $\\dfrac{1}{6} \\times \\dfrac{5}{36} = \\dfrac{5}{216}$. Étape 3 — Comparer : $\\dfrac{1}{36} = \\dfrac{6}{216} \\neq \\dfrac{5}{216}$. Étape 4 — Conclure : $R$ et $S$ ne sont pas indépendants. Savoir que le dé rouge donne 6 fait passer la chance d'avoir une somme de 8 de $\\dfrac{5}{36}$ à $\\dfrac{1}{6}$.",
+              "answers": [
+                {
+                  "content": "Oui : $P(R \\cap S) = P(R) \\times P(S)$",
+                  "correct": false
                 },
                 {
-                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut $P(X = -300)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$X = -300$ quand aucun jeton rouge n'est tiré : 2 verts parmi 3, soit $C_3^2 = 3$ tirages sur $C_5^2 = 10$. Donc $P(X = -300) = \\frac{3}{10}$. Le résultat $\\frac{9}{25} = \\left(\\frac{3}{5}\\right)^2$ correspond à des tirages avec remise : ici, le tirage est simultané.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{3}{10}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{9}{25}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{10}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Non : $P(R \\cap S) = \\dfrac{6}{216}$ alors que $P(R) \\times P(S) = \\dfrac{5}{216}$",
+                  "correct": true
                 },
                 {
-                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut $E(X)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Loi : $P(X = -300) = 0{,}3$ ; $P(X = 200) = 0{,}6$ ; $P(X = 700) = 0{,}1$. $E(X) = -90 + 120 + 70 = 100$. Le résultat $200$ est la moyenne simple des trois valeurs ; $400$ oublie de retirer la mise de 300 F.",
-                  "answers": [
-                    {
-                      "content": "$100$ F",
-                      "correct": true
-                    },
-                    {
-                      "content": "$200$ F",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0$ F",
-                      "correct": false
-                    },
-                    {
-                      "content": "$400$ F",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Oui, car $R$ ne dépend que du dé rouge",
+                  "correct": false
                 },
                 {
-                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Que vaut l'écart-type $\\sigma(X)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec $P(X = -300) = 0{,}3$, $P(X = 200) = 0{,}6$, $P(X = 700) = 0{,}1$ : $E(X^2) = 27\\,000 + 24\\,000 + 49\\,000 = 100\\,000$ et $E(X) = 100$. $V(X) = 100\\,000 - 100^2 = 90\\,000$, donc $\\sigma(X) = 300$ F. Répondre $316$ F, c'est oublier de retrancher $\\big(E(X)\\big)^2$.",
-                  "answers": [
-                    {
-                      "content": "$300$ F",
-                      "correct": true
-                    },
-                    {
-                      "content": "$90\\,000$ F",
-                      "correct": false
-                    },
-                    {
-                      "content": "$100\\,000$ F",
-                      "correct": false
-                    },
-                    {
-                      "content": "Environ $316$ F",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Non, car $R$ et $S$ sont incompatibles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On lance deux dés équilibrés (un rouge, un vert) : 36 résultats équiprobables. $R$ : « le dé rouge donne 6 » ; $E$ : « la somme est supérieure ou égale à 10 ». Les événements $R$ et $E$ sont indépendants.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Calculer : $P(R) = \\dfrac{6}{36} = \\dfrac{1}{6}$ ; les sommes de 10 ou plus sont (4 ; 6), (6 ; 4), (5 ; 5), (5 ; 6), (6 ; 5), (6 ; 6), donc $P(E) = \\dfrac{6}{36} = \\dfrac{1}{6}$ ; $R \\cap E$ compte 3 résultats, $P(R \\cap E) = \\dfrac{3}{36} = \\dfrac{1}{12}$. Étape 2 — Calculer le produit : $\\dfrac{1}{6} \\times \\dfrac{1}{6} = \\dfrac{1}{36}$. Étape 3 — Comparer : $\\dfrac{1}{12} \\neq \\dfrac{1}{36}$. Étape 4 — Conclure : $R$ et $E$ ne sont pas indépendants.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Affirmation : ce jeu est favorable au joueur.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. La loi est $P(X = -300) = 0{,}3$, $P(X = 200) = 0{,}6$, $P(X = 700) = 0{,}1$, donc $E(X) = -90 + 120 + 70 = 100 > 0$. En moyenne, le joueur gagne 100 F par partie. Perdre 3 fois sur 10 ne rend pas le jeu défavorable : c'est le signe de l'espérance qui décide.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On lance deux dés équilibrés (un rouge, un vert) : 36 résultats équiprobables. $R$ : « le dé rouge donne 6 » ; $S$ : « la somme est 8 ». Calcule $P(R \\cup S)$.",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer : $P(R) = \\dfrac{6}{36}$, $P(S) = \\dfrac{5}{36}$, $P(R \\cap S) = \\dfrac{1}{36}$. Étape 2 — Appliquer : $P(R \\cup S) = P(R) + P(S) - P(R \\cap S) = \\dfrac{6}{36} + \\dfrac{5}{36} - \\dfrac{1}{36}$. Étape 3 — Simplifier : $\\dfrac{10}{36} = \\dfrac{5}{18}$. La valeur $\\dfrac{11}{36}$ oublie de retrancher le résultat (6 ; 2), compté deux fois.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{11}{36}$",
+                  "correct": false
                 },
                 {
-                  "content": "Une urne contient 2 jetons rouges et 3 jetons verts. Un joueur paie 300 F, puis tire simultanément 2 jetons au hasard. Il reçoit 500 F par jeton rouge tiré. On note $X$ son gain algébrique (somme reçue moins la mise). Sa fonction de répartition est définie par $F(x) = P(X \\leq x)$. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les valeurs de $X$ sont $-300$ ($0{,}3$), $200$ ($0{,}6$) et $700$ ($0{,}1$). $F(-400) = 0$ ; $F(0) = 0{,}3$ ; $F(500) = 0{,}3 + 0{,}6 = 0{,}9$ ; $F(1\\,000) = 1$. Écrire $F(1\\,000) = 0{,}1$, c'est oublier que $F$ cumule toutes les valeurs.",
-                  "answers": [
-                    {
-                      "content": "$F(-400) = 0$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$F(0) = 0{,}3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$F(500) = 0{,}9$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$F(500) = 0{,}6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$F(1\\,000) = 0{,}1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$F(0) = 0$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{5}{36}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{5}{18}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{1}{6}$",
+                  "correct": false
                 }
               ]
             }
           ]
         },
         {
-          "name": "Événements indépendants et loi binomiale",
-          "subtitle": "Reconnaître l'indépendance et un schéma de Bernoulli, puis calculer avec la loi binomiale",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Reconnaître deux événements indépendants.</li>\n<li>Reconnaître une épreuve de Bernoulli et un schéma de Bernoulli.</li>\n<li>Calculer avec la loi binomiale : $P(X = k)$, l'espérance et la variance.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Ton dé et la pluie à Korhogo (indépendance).</strong> Tu lances un dé à Abidjan. Au même moment, il pleut ou non à Korhogo. Savoir qu'il pleut à Korhogo ne change rien à ta chance d'obtenir 6 : elle reste $\\frac{1}{6}$.</p>\n<p><em>Le pont.</em> $A$ est « obtenir 6 », $B$ est « il pleut à Korhogo ». « Savoir $B$ ne change pas la chance de $A$ » s'écrit $P_B(A) = P(A)$. Comme $P_B(A) = \\frac{P(A \\cap B)}{P(B)}$, cela revient à $P(A \\cap B) = P(A) \\times P(B)$ : c'est la définition de deux événements <strong>indépendants</strong>.</p>\n<p><em>Où l'image s'arrête.</em> Indépendants ne veut pas dire <strong>incompatibles</strong>. Deux événements incompatibles ne peuvent pas se produire ensemble, comme « obtenir 6 » et « obtenir 1 » au même lancer. Ils sont très dépendants : si tu sais que tu as obtenu 1, ta chance d'avoir 6 tombe à $0$.</p>\n<p><strong>2. La séance de tirs au but (schéma de Bernoulli et loi binomiale).</strong> L'attaquant de l'équipe du lycée tire 5 penalties. À chaque tir, il marque avec la même chance, $0{,}8$, et un tir n'influence pas les autres. Tu veux la chance qu'il marque exactement 3 fois. Une séance possible est « but, but, but, raté, raté » : sa probabilité est $0{,}8^3 \\times 0{,}2^2$. Mais les 3 buts peuvent tomber à d'autres places parmi les 5 tirs.</p>\n<p><em>Le pont.</em> Chaque tir est une <strong>épreuve de Bernoulli</strong> : deux issues seulement, le succès (but) de probabilité $p = 0{,}8$ et l'échec (raté) de probabilité $1 - p = 0{,}2$. Les 5 tirs, identiques et indépendants, forment un <strong>schéma de Bernoulli</strong> avec $n = 5$. Le nombre de façons de placer les 3 buts parmi les 5 tirs est $C_5^3 = 10$. Le nombre de buts $X$ suit la <strong>loi binomiale</strong> de paramètres $5$ et $0{,}8$, et $P(X = 3) = 10 \\times 0{,}8^3 \\times 0{,}2^2 = 0{,}2048$.</p>\n<p><em>Où l'image s'arrête.</em> Un vrai joueur se fatigue ou stresse : sa chance change d'un tir à l'autre. La loi binomiale ne s'applique que si les épreuves sont identiques (même $p$ à chaque fois) et indépendantes. Un tirage sans remise dans une urne, par exemple, n'est pas un schéma de Bernoulli.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Événements indépendants.</strong> $A$ et $B$ sont indépendants si $P(A \\cap B) = P(A) \\times P(B)$. Si $P(B) \\neq 0$, cela équivaut à $P_B(A) = P(A)$. Si $A$ et $B$ sont indépendants, alors $\\overline{A}$ et $B$, $A$ et $\\overline{B}$, $\\overline{A}$ et $\\overline{B}$ le sont aussi.</p>\n<p><strong>Épreuve de Bernoulli.</strong> Expérience aléatoire à deux issues : le succès, de probabilité $p$, et l'échec, de probabilité $1 - p$.</p>\n<p><strong>Schéma de Bernoulli.</strong> Répétition de $n$ épreuves de Bernoulli identiques et indépendantes.</p>\n<p><strong>Loi binomiale.</strong> Dans un schéma de Bernoulli de paramètres $n$ et $p$, le nombre $X$ de succès suit la loi binomiale $\\mathcal{B}(n \\,;\\, p)$ : pour tout entier $k$ de $0$ à $n$, $P(X = k) = C_n^k \\, p^k \\, (1 - p)^{n - k}$. Le nombre $C_n^k$, noté aussi $\\binom{n}{k}$, compte les façons de placer les $k$ succès parmi les $n$ épreuves.</p>\n<p><strong>Espérance et variance.</strong> $E(X) = np$ et $V(X) = np(1 - p)$.</p>\n<p><strong>Au moins un succès.</strong> $P(X \\geq 1) = 1 - P(X = 0) = 1 - (1 - p)^n$.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Un paysan sème 4 graines de maïs. Chaque graine germe avec la probabilité $0{,}9$, indépendamment des autres. On note $X$ le nombre de graines qui germent.</strong></p>\n<ol>\n<li>Loi de $X$ : chaque graine est une épreuve de Bernoulli (succès : elle germe, $p = 0{,}9$). Les 4 épreuves sont identiques et indépendantes, et $X$ compte les succès. Donc $X$ suit la loi $\\mathcal{B}(4 \\,;\\, 0{,}9)$.</li>\n<li>Les 4 graines germent : $P(X = 4) = C_4^4 \\times 0{,}9^4 \\times 0{,}1^0 = 0{,}6561$.</li>\n<li>Exactement 3 graines germent : $P(X = 3) = C_4^3 \\times 0{,}9^3 \\times 0{,}1 = 4 \\times 0{,}729 \\times 0{,}1 = 0{,}2916$.</li>\n<li>Au moins une graine germe : $P(X \\geq 1) = 1 - P(X = 0) = 1 - 0{,}1^4 = 0{,}9999$.</li>\n<li>$E(X) = 4 \\times 0{,}9 = 3{,}6$ graines en moyenne ; $V(X) = 4 \\times 0{,}9 \\times 0{,}1 = 0{,}36$, donc $\\sigma(X) = 0{,}6$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Oublier le coefficient $C_n^k$. Écrire $P(X = 3) = 0{,}9^3 \\times 0{,}1 = 0{,}0729$ donne la probabilité d'un seul ordre (les trois premières germent, la dernière non). Or les 3 graines qui germent peuvent être n'importe lesquelles parmi les 4.</p>\n<p>Comment le repérer : demande-toi « l'énoncé impose-t-il un ordre ? ». S'il dit seulement « exactement $k$ succès », multiplie par $C_n^k$. Autre contrôle : la somme des $P(X = k)$ pour $k$ de $0$ à $n$ doit valoir $1$.</p>\n<h2>En une phrase</h2>\n<p>Deux événements sont indépendants quand l'un ne change pas la chance de l'autre, soit $P(A \\cap B) = P(A) \\times P(B)$ ; et si on répète $n$ fois, de façon identique et indépendante, une épreuve à deux issues, le nombre de succès suit la loi binomiale $P(X = k) = C_n^k \\, p^k (1 - p)^{n - k}$.</p>",
-          "exercises": [
+          "title": "La roue de la chance",
+          "statement": "À la kermesse, la roue de la chance est partagée en trois types de secteurs. Après un tour, le joueur reçoit 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue, en centaines de francs (donc $G$ vaut 0, 1 ou 5). Le joueur paie une mise avant de tourner la roue. Tu étudies la loi de $G$, son espérance, sa dispersion, puis l'équité du jeu pour différentes mises.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Indépendance et schéma de Bernoulli",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). Calcule $p = P(G = 5)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lister les valeurs : $G$ vaut 0, 1 ou 5. Étape 2 — Calculer les probabilités : la somme des probabilités d'une loi vaut 1, donc $p = 1 - 0{,}2 - 0{,}5 = 0{,}3$. Vérification : $0{,}2 + 0{,}5 + 0{,}3 = 1$.",
+              "answers": [
                 {
-                  "content": "On donne $P(A) = 0{,}5$, $P(B) = 0{,}4$ et $P(A \\cap B) = 0{,}2$. Les événements $A$ et $B$ sont-ils indépendants ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(A) \\times P(B) = 0{,}5 \\times 0{,}4 = 0{,}2 = P(A \\cap B)$ : ils sont indépendants. Répondre « non, car $P(A \\cap B) \\neq 0$ », c'est confondre indépendants et incompatibles. Souviens-toi du dé et de la pluie : ils peuvent arriver ensemble.",
-                  "answers": [
-                    {
-                      "content": "Oui, car $P(A \\cap B) = P(A) \\times P(B)$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Non, car $P(A \\cap B) \\neq 0$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Non, car $P(A) + P(B) \\neq 1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "On ne peut pas savoir sans construire un arbre.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Deux événements incompatibles, de probabilités non nulles, sont indépendants.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Incompatibles signifie $P(A \\cap B) = 0$, alors que $P(A) \\times P(B) > 0$ : l'égalité de l'indépendance est fausse. Savoir que $A$ est réalisé rend $B$ impossible, donc $A$ change la chance de $B$ : ils sont dépendants.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Laquelle de ces expériences est une épreuve de Bernoulli ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une épreuve de Bernoulli a exactement deux issues. « Obtenir 6 ou non » en a deux : succès et échec. Noter le numéro du dé donne six issues. Tirer 3 boules et les compter, c'est une répétition d'épreuves, pas une seule épreuve.",
-                  "answers": [
-                    {
-                      "content": "Lancer un dé et noter si l'on obtient 6 ou non",
-                      "correct": true
-                    },
-                    {
-                      "content": "Lancer un dé et noter le numéro obtenu",
-                      "correct": false
-                    },
-                    {
-                      "content": "Lancer deux pièces et noter le nombre de « pile »",
-                      "correct": false
-                    },
-                    {
-                      "content": "Tirer 3 boules d'une urne et compter les boules rouges",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans lesquelles de ces situations la variable aléatoire $X$ suit-elle une loi binomiale ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Il faut un nombre fixé d'épreuves identiques et indépendantes, et $X$ doit compter les succès. Avec remise, la composition de l'urne ne change pas : c'est bon. Sans remise, la probabilité change à chaque tirage. « Lancer jusqu'à obtenir 6 » n'a pas de nombre d'épreuves fixé.",
-                  "answers": [
-                    {
-                      "content": "On lance 10 fois une pièce équilibrée ; $X$ est le nombre de « face ».",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une urne contient 3 boules rouges et 7 blanches ; on tire 4 boules une à une avec remise ; $X$ est le nombre de boules rouges.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une urne contient 3 boules rouges et 7 blanches ; on tire 4 boules une à une sans remise ; $X$ est le nombre de boules rouges.",
-                      "correct": false
-                    },
-                    {
-                      "content": "On lance un dé jusqu'à obtenir 6 ; $X$ est le nombre de lancers.",
-                      "correct": false
-                    },
-                    {
-                      "content": "On lance un dé 5 fois ; $X$ est la somme des numéros obtenus.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un joueur tire 5 penalties. À chaque tir, il marque avec la probabilité $0{,}8$, indépendamment des autres tirs. On note $X$ le nombre de buts marqués. Quels sont les paramètres de la loi binomiale suivie par $X$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y a $n = 5$ épreuves, et le succès compté par $X$ est « marquer », de probabilité $p = 0{,}8$. Prendre $p = 0{,}2$, c'est prendre la probabilité de l'échec : elle servirait si $X$ comptait les tirs ratés.",
-                  "answers": [
-                    {
-                      "content": "$n = 5$ et $p = 0{,}8$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$n = 5$ et $p = 0{,}2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$n = 0{,}8$ et $p = 5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$n = 4$ et $p = 0{,}8$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans la formule de la loi binomiale $P(X = k) = C_n^k \\, p^k \\, (1 - p)^{n - k}$, que compte le nombre $C_n^k$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$p^k (1 - p)^{n - k}$ est la probabilité d'un seul ordre de succès et d'échecs. $C_n^k$ compte les façons de placer les $k$ succès parmi les $n$ épreuves : pour 3 buts en 5 tirs, $C_5^3 = 10$ séances possibles. Ce n'est pas une probabilité : il peut dépasser $1$.",
-                  "answers": [
-                    {
-                      "content": "Le nombre de façons de placer les $k$ succès parmi les $n$ épreuves",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité d'obtenir $k$ succès",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le nombre d'échecs",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le nombre total d'issues de l'expérience",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,3",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer avec l'indépendance et la loi binomiale",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). On a $p = 0{,}3$. Calcule l'espérance $E(G)$ (en centaines de francs).",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lister : 0, 1, 5. Étape 2 — Probabilités : 0,2 ; 0,5 ; 0,3, de somme 1. Étape 3 — Calculer l'espérance : $E(G) = 0 \\times 0{,}2 + 1 \\times 0{,}5 + 5 \\times 0{,}3 = 0{,}5 + 1{,}5 = 2$. Un tour rapporte en moyenne 2 centaines de francs, soit 200 F.",
+              "answers": [
                 {
-                  "content": "Les événements $A$ et $B$ sont indépendants, avec $P(A) = 0{,}3$ et $P(B) = 0{,}6$. Que vaut $P(A \\cap B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Indépendants : $P(A \\cap B) = P(A) \\times P(B) = 0{,}3 \\times 0{,}6 = 0{,}18$. Répondre $0$, c'est confondre indépendants et incompatibles ; répondre $0{,}9$, c'est additionner au lieu de multiplier.",
-                  "answers": [
-                    {
-                      "content": "$0{,}18$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}9$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Les événements $A$ et $B$ sont indépendants, avec $P(A) = 0{,}3$ et $P(B) = 0{,}6$. Que vaut $P(A \\cup B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(A \\cap B) = 0{,}3 \\times 0{,}6 = 0{,}18$, puis $P(A \\cup B) = P(A) + P(B) - P(A \\cap B) = 0{,}9 - 0{,}18 = 0{,}72$. Répondre $0{,}9$, c'est oublier de retirer la partie commune, comptée deux fois.",
-                  "answers": [
-                    {
-                      "content": "$0{,}72$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}9$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}18$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}82$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "La variable aléatoire $X$ suit la loi binomiale $\\mathcal{B}(4 \\,;\\, 0{,}5)$. Que vaut $P(X = 2)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(X = 2) = C_4^2 \\times 0{,}5^2 \\times 0{,}5^2 = 6 \\times \\frac{1}{16} = \\frac{3}{8}$. Répondre $\\frac{1}{16}$, c'est oublier $C_4^2 = 6$ : il y a 6 façons de placer les 2 succès parmi les 4 épreuves.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{3}{8}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{16}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "La variable aléatoire $X$ suit la loi binomiale $\\mathcal{B}(3 \\,;\\, 0{,}2)$. Que vaut $P(X = 0)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Aucun succès : les 3 épreuves sont des échecs, de probabilité $0{,}8$ chacune. $P(X = 0) = 0{,}8^3 = 0{,}512$. Le résultat $0{,}008 = 0{,}2^3$ est la probabilité de 3 succès, $P(X = 3)$.",
-                  "answers": [
-                    {
-                      "content": "$0{,}512$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}008$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}8$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On lance 3 fois une pièce équilibrée. Quelle est la probabilité d'obtenir au moins une fois « pile » ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le contraire de « au moins un pile » est « aucun pile », de probabilité $\\left(\\frac{1}{2}\\right)^3 = \\frac{1}{8}$. Donc $P = 1 - \\frac{1}{8} = \\frac{7}{8}$. Le résultat $\\frac{3}{8}$ est la probabilité d'exactement un « pile » : « au moins un » compte aussi deux et trois.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{7}{8}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{8}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{8}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "La variable aléatoire $X$ suit la loi binomiale $\\mathcal{B}(20 \\,;\\, 0{,}3)$. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "$E(X) = np = 20 \\times 0{,}3 = 6$ et $V(X) = np(1 - p) = 20 \\times 0{,}3 \\times 0{,}7 = 4{,}2$. L'écart-type est $\\sqrt{4{,}2} \\approx 2{,}05$, pas $4{,}2$. Écrire $V(X) = 6$, c'est oublier le facteur $1 - p$.",
-                  "answers": [
-                    {
-                      "content": "$E(X) = 6$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$V(X) = 4{,}2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$V(X) = 6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$E(X) = 0{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\sigma(X) = 4{,}2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "2",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Les mangues abîmées, problème de loi binomiale",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). On a $p = 0{,}3$ et $E(G) = 2$. Calcule la variance $V(G)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 3 — On a $E(G) = 2$. Étape 4 — Calculer la variance : $\\sum p_i x_i^2 = 0 \\times 0{,}2 + 1 \\times 0{,}5 + 25 \\times 0{,}3 = 0{,}5 + 7{,}5 = 8$, donc $V(G) = 8 - 2^2 = 8 - 4 = 4$. Le nombre 8 est la moyenne des carrés, pas la variance : il faut retrancher le carré de l'espérance.",
+              "answers": [
                 {
-                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Pourquoi $X$ suit-elle une loi binomiale ?",
-                  "question_type": "single_choice",
-                  "explanation": "On répète 5 fois la même épreuve à deux issues (abîmée ou non, avec $p = 0{,}1$), de façon indépendante, et $X$ compte les succès : c'est un schéma de Bernoulli. Avoir un nombre fini de valeurs ne suffit pas : toutes les variables de ce cours en ont un.",
-                  "answers": [
-                    {
-                      "content": "On répète 5 fois, de façon identique et indépendante, une épreuve à deux issues, et $X$ compte les mangues abîmées.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Parce que $X$ prend un nombre fini de valeurs.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce que la probabilité qu'une mangue soit abîmée est faible.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Parce que $X$ peut prendre la valeur $0$.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). On a $V(G) = 4$. Quel est l'écart-type $\\sigma(G)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 5 — Calculer l'écart-type : $\\sigma(G) = \\sqrt{V(G)} = \\sqrt{4} = 2$ (en centaines de francs, soit 200 F). La réponse 4 est la variance ; $\\sqrt{8}$ viendrait de la moyenne des carrés sans retrancher $E(G)^2$ ; 8 est cette moyenne elle-même.",
+              "answers": [
+                {
+                  "content": "$2$",
+                  "correct": true
                 },
                 {
-                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Que vaut $P(X = 0)$, arrondie au millième ?",
-                  "question_type": "single_choice",
-                  "explanation": "$X$ suit $\\mathcal{B}(5 \\,;\\, 0{,}1)$. Aucune mangue abîmée : les 5 sont bonnes, chacune avec la probabilité $0{,}9$. $P(X = 0) = 0{,}9^5 \\approx 0{,}590$. Le nombre $0{,}1^5 = 0{,}00001$ est la probabilité que les 5 soient abîmées.",
-                  "answers": [
-                    {
-                      "content": "$0{,}590$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}900$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}410$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}00001$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$4$",
+                  "correct": false
                 },
                 {
-                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Que vaut $P(X = 1)$, arrondie au millième ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(X = 1) = C_5^1 \\times 0{,}1 \\times 0{,}9^4 = 5 \\times 0{,}1 \\times 0{,}6561 \\approx 0{,}328$. Le résultat $0{,}066$ oublie $C_5^1 = 5$ : la mangue abîmée peut être n'importe laquelle des 5.",
-                  "answers": [
-                    {
-                      "content": "$0{,}328$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}066$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}5$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\sqrt{8}$",
+                  "correct": false
                 },
                 {
-                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Quelle est la probabilité, arrondie au millième, que le client ait au moins une mangue abîmée ?",
-                  "question_type": "single_choice",
-                  "explanation": "« Au moins une » est le contraire de « aucune » : $P(X \\geq 1) = 1 - P(X = 0) = 1 - 0{,}9^5 \\approx 1 - 0{,}590 = 0{,}410$. Répondre $0{,}328$, c'est calculer « exactement une », $P(X = 1)$.",
-                  "answers": [
-                    {
-                      "content": "$0{,}410$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}328$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}590$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}5$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$8$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). Quelle mise, en francs, rend le jeu équitable ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "F",
+              "explanation": "Étape 1 — Lister : le gain net est $N = G - m$, où $m$ est la mise en centaines de francs. Étape 2 — On a $E(N) = E(G) - m$. Étape 3 — Le jeu est équitable si $E(N) = 0$, donc $m = E(G) = 2$ centaines de francs. Étape 4 — Conclure : la mise équitable est de 200 F.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). Le joueur mise 200 F. Quelle est la probabilité que son gain net soit strictement négatif ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lister : avec une mise de 2 centaines de francs, le gain net $N = G - 2$ vaut $-2$, $-1$ ou $3$. Étape 2 — Calculer les probabilités : $N < 0$ pour $G = 0$ ou $G = 1$. Étape 3 — Additionner : $P(N < 0) = P(G = 0) + P(G = 1) = 0{,}2 + 0{,}5 = 0{,}7$. Le jeu est équitable en moyenne, mais le joueur perd 7 fois sur 10.",
+              "answers": [
+                {
+                  "content": "0,7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). La mise est fixée à 250 F. Calcule l'espérance du gain net du joueur, en francs.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "F",
+              "explanation": "Étape 1 — Lister : le gain net est $N = G - 2{,}5$ (en centaines de francs). Étape 2 — Les probabilités de $G$ sont inchangées. Étape 3 — Calculer l'espérance : $E(N) = E(G) - 2{,}5 = 2 - 2{,}5 = -0{,}5$ centaine de francs. Étape 4 — Conclure : le joueur perd en moyenne 50 F par tour, soit $E(N) = -50$ F.",
+              "answers": [
+                {
+                  "content": "-50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À la kermesse, la roue de la chance donne 0 F avec la probabilité 0,2, 100 F avec la probabilité 0,5 et 500 F avec la probabilité $p$. On note $G$ la somme reçue en centaines de francs ($G$ vaut 0, 1 ou 5). La mise est fixée à 250 F. 300 joueurs tournent la roue une fois chacun. Quel bénéfice moyen, en francs, l'organisateur peut-il espérer ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "F",
+              "explanation": "Étape 1 — Lister : l'organisateur gagne ce que le joueur perd. Étape 2 — D'après la question précédente, le joueur perd en moyenne 50 F par tour. Étape 3 — Calculer : pour 300 tours, $300 \\times 50 = 15\\,000$ F. Étape 4 — Conclure : bénéfice moyen de 15 000 F. C'est une moyenne : le bénéfice réel varie autour de cette valeur.",
+              "answers": [
+                {
+                  "content": "15000",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Contrôle qualité dans l'usine de jus",
+          "statement": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On note $D$ l'événement « la bouteille est défectueuse ». Partie A : on prélève une bouteille au hasard dans la production d'une journée. Partie B : la production est très grande, on prélève plusieurs bouteilles de façon indépendante, chacune étant défectueuse avec la probabilité calculée en partie A.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève une bouteille au hasard. Calcule $P(C_1 \\cap D)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie A. Étape 1 — Construire l'arbre : $C_1$ (0,5) puis $D$ (0,08). Étape 2 — Vérifier : 0,5 + 0,5 = 1 et 0,08 + 0,92 = 1. Étape 3 — Calculer le chemin : $P(C_1 \\cap D) = 0{,}5 \\times 0{,}08 = 0{,}04$.",
+              "answers": [
+                {
+                  "content": "0,04",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève une bouteille au hasard. Calcule $P(D)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie A. Étape 1 — Construire l'arbre : deux chemins mènent à $D$. Étape 2 — Vérifier les sommes. Étape 3 — Calculer : $P(C_1 \\cap D) = 0{,}5 \\times 0{,}08 = 0{,}04$ et $P(C_2 \\cap D) = 0{,}5 \\times 0{,}12 = 0{,}06$. Étape 4 — Additionner (probabilités totales) : $P(D) = 0{,}04 + 0{,}06 = 0{,}1$.",
+              "answers": [
+                {
+                  "content": "0,1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève une bouteille qui s'avère défectueuse. Calcule la probabilité qu'elle vienne de la chaîne $C_2$, $P_D(C_2)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie A. Étape 1 — Construire l'arbre. Étape 2 — Vérifier les sommes. Étape 3 — Calculer : $P(C_2 \\cap D) = 0{,}5 \\times 0{,}12 = 0{,}06$. Étape 4 — Additionner : $P(D) = 0{,}04 + 0{,}06 = 0{,}1$. Étape 5 — Diviser : $P_D(C_2) = \\dfrac{0{,}06}{0{,}1} = 0{,}6$. La valeur 0,12 est $P_{C_2}(D)$, le conditionnement inverse.",
+              "answers": [
+                {
+                  "content": "0,6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève une bouteille au hasard. On a $P(D) = 0{,}1$ et $P(C_1 \\cap D) = 0{,}04$. Les événements $C_1$ et $D$ sont-ils indépendants ?",
+              "question_type": "single_choice",
+              "explanation": "Partie A. Étape 1 — Calculer : $P(C_1) = 0{,}5$, $P(D) = 0{,}1$ et $P(C_1 \\cap D) = 0{,}04$. Étape 2 — Calculer le produit : $0{,}5 \\times 0{,}1 = 0{,}05$. Étape 3 — Comparer : $0{,}04 \\neq 0{,}05$. Étape 4 — Conclure : $C_1$ et $D$ ne sont pas indépendants : la chaîne d'origine influence la chance qu'une bouteille soit défectueuse ($0{,}08 \\neq 0{,}1$).",
+              "answers": [
+                {
+                  "content": "Oui : $P(C_1 \\cap D) = P(C_1) \\times P(D)$",
+                  "correct": false
                 },
                 {
-                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit 5 mangues au hasard. On note $X$ le nombre de mangues abîmées. Quelles affirmations sont vraies ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "$X$ suit $\\mathcal{B}(5 \\,;\\, 0{,}1)$ : $E(X) = 5 \\times 0{,}1 = 0{,}5$ et $V(X) = 5 \\times 0{,}1 \\times 0{,}9 = 0{,}45$. $P(X \\leq 1) = 0{,}9^5 + 5 \\times 0{,}1 \\times 0{,}9^4 \\approx 0{,}590 + 0{,}328 = 0{,}919$. $E(X) = 4{,}5$ compte les bonnes mangues, pas les abîmées.",
-                  "answers": [
-                    {
-                      "content": "$E(X) = 0{,}5$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$V(X) = 0{,}45$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P(X \\leq 1) \\approx 0{,}919$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$E(X) = 4{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$V(X) = 0{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P(X \\leq 1) \\approx 0{,}328$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Non : $P(C_1 \\cap D) = 0{,}04$ alors que $P(C_1) \\times P(D) = 0{,}05$",
+                  "correct": true
                 },
                 {
-                  "content": "Au marché, chaque mangue d'un grand tas est abîmée avec la probabilité $0{,}1$, indépendamment des autres. Un client choisit $n$ mangues au hasard. Quel est le plus petit entier $n$ pour lequel la probabilité d'avoir au moins une mangue abîmée dépasse $0{,}5$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On veut $1 - 0{,}9^n > 0{,}5$, soit $0{,}9^n < 0{,}5$. À la calculatrice : $0{,}9^6 \\approx 0{,}531$, encore trop grand, et $0{,}9^7 \\approx 0{,}478 < 0{,}5$. Donc $n = 7$. Répondre $5$, c'est croire que les probabilités s'additionnent : $5 \\times 0{,}1 = 0{,}5$.",
-                  "answers": [
-                    {
-                      "content": "$7$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$10$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Oui, car $P(C_1) = P(C_2)$",
+                  "correct": false
+                },
+                {
+                  "content": "Non, car $C_1$ et $D$ sont incompatibles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une grande production contient 10 % de bouteilles défectueuses. On prélève 3 bouteilles de façon indépendante. Le nombre $X$ de bouteilles défectueuses suit une loi binomiale. Laquelle ?",
+              "question_type": "single_choice",
+              "explanation": "Partie B. Étape 1 — Reconnaître : le succès est « la bouteille est défectueuse », $p = 0{,}1$. Étape 2 — Identifier : 3 prélèvements identiques et indépendants, donc $n = 3$ et $X$ suit $\\mathcal{B}(3\\,;\\,0{,}1)$. La loi $\\mathcal{B}(3\\,;\\,0{,}9)$ prend la probabilité d'une bouteille conforme.",
+              "answers": [
+                {
+                  "content": "$\\mathcal{B}(3\\,;\\,0{,}1)$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathcal{B}(10\\,;\\,0{,}3)$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathcal{B}(3\\,;\\,0{,}9)$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathcal{B}(0{,}1\\,;\\,3)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une grande production contient 10 % de bouteilles défectueuses. On prélève 3 bouteilles de façon indépendante, et $X$ est le nombre de bouteilles défectueuses. Justifie que $X$ suit une loi binomiale et donne ses paramètres.",
+              "question_type": "written",
+              "points": 2,
+              "starter": "Prélever une bouteille est une épreuve de Bernoulli, car…",
+              "criteria": [
+                "Épreuve de Bernoulli : succès « défectueuse », $p = 0{,}1$",
+                "Répétitions identiques et indépendantes (production très grande)",
+                "Paramètres $n = 3$ et $p = 0{,}1$ : $X \\sim \\mathcal{B}(3\\,;\\,0{,}1)$"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Reconnaître : prélever une bouteille est une épreuve de Bernoulli, dont le succès est « la bouteille est défectueuse », de probabilité $p = 0{,}1$. Étape 2 — Identifier : la production est très grande, donc les 3 prélèvements sont identiques et indépendants, avec la même probabilité 0,1 de succès. $X$, le nombre de succès, suit donc la loi binomiale $\\mathcal{B}(3\\,;\\,0{,}1)$. Barème : 0,5 pour l'épreuve de Bernoulli et $p$, 1 pour l'identique et l'indépendant, 0,5 pour les paramètres.",
+              "answers": []
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève 3 bouteilles indépendantes dans une grande production où 10 % des bouteilles sont défectueuses. $X$ est le nombre de bouteilles défectueuses et suit $\\mathcal{B}(3\\,;\\,0{,}1)$. Calcule $P(X = 0)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie B. Étape 1 — Reconnaître : succès = défectueuse, $p = 0{,}1$. Étape 2 — Identifier : $X$ suit $\\mathcal{B}(3\\,;\\,0{,}1)$. Étape 3 — Écrire : $P(X = 0) = \\binom{3}{0} \\times 0{,}1^0 \\times 0{,}9^3$. Étape 4 — Calculer : $\\binom{3}{0} = 1$ et $0{,}9^3 = 0{,}729$, donc $P(X = 0) = 0{,}729$.",
+              "answers": [
+                {
+                  "content": "0,729",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève 3 bouteilles indépendantes dans une grande production où 10 % des bouteilles sont défectueuses. $X$ est le nombre de bouteilles défectueuses et suit $\\mathcal{B}(3\\,;\\,0{,}1)$. Calcule $P(X = 1)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie B. Étape 1 — Reconnaître : succès = défectueuse, $p = 0{,}1$. Étape 2 — Identifier : $X$ suit $\\mathcal{B}(3\\,;\\,0{,}1)$. Étape 3 — Écrire : $P(X = 1) = \\binom{3}{1} \\times 0{,}1^1 \\times 0{,}9^2$. Étape 4 — Calculer : $3 \\times 0{,}1 \\times 0{,}81 = 0{,}243$.",
+              "answers": [
+                {
+                  "content": "0,243",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève 3 bouteilles indépendantes dans une grande production où 10 % des bouteilles sont défectueuses. Le lot est refusé si au moins une bouteille prélevée est défectueuse. Calcule la probabilité que le lot soit refusé.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie B. Étape 1 — Reconnaître : $X$, le nombre de bouteilles défectueuses, suit $\\mathcal{B}(3\\,;\\,0{,}1)$. Étape 2 — Identifier : « au moins une » se note $X \\geq 1$, événement contraire de $X = 0$. Étape 3 — Écrire : $P(X \\geq 1) = 1 - P(X = 0)$. Étape 4 — Calculer : $P(X = 0) = 0{,}9^3 = 0{,}729$, donc $P(X \\geq 1) = 1 - 0{,}729 = 0{,}271$. Vérification : $0{,}243 + 3 \\times 0{,}01 \\times 0{,}9 + 0{,}001 = 0{,}243 + 0{,}027 + 0{,}001 = 0{,}271$.",
+              "answers": [
+                {
+                  "content": "0,271",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une grande production contient 10 % de bouteilles défectueuses. On prélève 3 bouteilles indépendantes ; le lot est refusé si au moins une est défectueuse. Un responsable affirme : « le risque de refuser le lot est $3 \\times 0{,}1 = 0{,}3$ ». Explique pourquoi ce calcul ne donne pas la bonne valeur et donne la valeur exacte.",
+              "question_type": "written",
+              "points": 2,
+              "starter": "Le calcul 3 × 0,1 est faux parce que…",
+              "criteria": [
+                "Le calcul $3 \\times 0{,}1$ additionne des événements qui ne sont pas incompatibles",
+                "Utilisation de l'événement contraire $1 - 0{,}9^3$",
+                "Valeur exacte 0,271"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Reconnaître : $X \\sim \\mathcal{B}(3\\,;\\,0{,}1)$ et le lot est refusé si $X \\geq 1$. Étape 2 — Le calcul $3 \\times 0{,}1$ revient à additionner les probabilités « la 1re est défectueuse », « la 2e l'est », « la 3e l'est ». Or ces événements ne sont pas incompatibles : deux bouteilles peuvent être défectueuses à la fois, et ces cas sont comptés plusieurs fois. Étape 3 — Écrire : $P(X \\geq 1) = 1 - P(X = 0) = 1 - 0{,}9^3 = 1 - 0{,}729 = 0{,}271$. Le risque exact est 0,271, inférieur à 0,3. Barème : 1 pour l'explication, 0,5 pour la méthode du contraire, 0,5 pour la valeur.",
+              "answers": []
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. Pour un autre contrôle, on prélève 10 bouteilles indépendantes dans une grande production où 10 % des bouteilles sont défectueuses. $Y$ est le nombre de bouteilles défectueuses et suit $\\mathcal{B}(10\\,;\\,0{,}1)$. Calcule $E(Y)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie B. Étape 1 — Reconnaître : succès = défectueuse, $p = 0{,}1$. Étape 2 — Identifier : $n = 10$ et $Y$ suit $\\mathcal{B}(10\\,;\\,0{,}1)$. Étape 5 — Calculer l'espérance : $E(Y) = np = 10 \\times 0{,}1 = 1$. En moyenne, une bouteille défectueuse sur 10 prélevées.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. Pour un autre contrôle, on prélève 10 bouteilles indépendantes dans une grande production où 10 % des bouteilles sont défectueuses. $Y$ est le nombre de bouteilles défectueuses et suit $\\mathcal{B}(10\\,;\\,0{,}1)$. Calcule la variance $V(Y)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Partie B. Étape 1 — Reconnaître : succès = défectueuse, $p = 0{,}1$. Étape 2 — Identifier : $Y$ suit $\\mathcal{B}(10\\,;\\,0{,}1)$. Étape 5 — Calculer la variance : $V(Y) = np(1-p) = 10 \\times 0{,}1 \\times 0{,}9 = 0{,}9$. Ne pas oublier le facteur $1 - p = 0{,}9$ : $np = 1$ est l'espérance, pas la variance.",
+              "answers": [
+                {
+                  "content": "0,9",
+                  "correct": true
                 }
               ]
             }
