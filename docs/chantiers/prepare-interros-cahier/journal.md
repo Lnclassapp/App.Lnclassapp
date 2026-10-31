@@ -159,6 +159,6 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | | |
 |---|---|
 | **Livré le** | 2026-10-31 |
-| **PR** | |
+| **PR** | [#416](https://github.com/Lnclassapp/App.Lnclassapp/pull/416), fusionnée le 2026-10-31 |
 | **ADR produits** | ADR-0121 (sujets de devoir et vérification sur la feuille) |
 | **UDR produits** | UDR-0149 (feuilles « Prépare interros » et « Prépare devoirs ») ; UDR-0145 §3.2 ter remplacé |
