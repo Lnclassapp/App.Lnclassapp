@@ -25,7 +25,8 @@ class Catalog::PrepareSheetsTest < ApplicationSystemTestCase
 
     within ".ps-sheet#notion-#{@notion.slug}" do
       assert_text "PRÉPARE INTERROS"
-      assert_selector ".ps-title", text: "LA PROPRIÉTÉ DE THALÈS"
+      assert_selector ".ps-title", text: "PRÉPARE INTERROS N°1"
+      assert_selector ".ps-subject", text: "La propriété de Thalès"
       assert_text "À retenir : AM/AB = AN/AC."
       within frame(@exercise) do
         assert_no_selector ".ps-hint"

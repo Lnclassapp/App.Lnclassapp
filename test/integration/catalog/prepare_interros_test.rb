@@ -34,7 +34,9 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
       assert_select ".ps-header", text: including(@course.material.name.upcase)
       assert_select ".ps-header", text: including("Lnclass · Thalès")
       assert_select ".ps-header", text: including("Classe de #{@course.level.name} · Notion 1 / 5")
-      assert_select ".ps-title", text: "Notion 1"
+      # UDR-0149 §3 (ajout du 2026-10-31) : le titre est numéroté, le nom de la notion passe en sous-titre.
+      assert_select ".ps-title", text: "Prépare interros n°1"
+      assert_select ".ps-title-block .ps-subject", text: "Notion 1"
       assert_select "#sheet-progress-notion-#{@notions.first.slug}.ps-progress", text: "0 / 1 exercice réussi"
       assert_select ".ps-remember", text: "À retenir : Retiens 1."
       assert_select ".ps-exercise-head", text: including("Exercice 1")
@@ -42,7 +44,8 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
       assert_select ".ps-footer button", text: "Recommencer cette notion"
     end
     assert_select "#toute-la-lecon.ps-sheet" do
-      assert_select ".ps-title", text: "Toute la leçon"
+      assert_select ".ps-title", text: "Prépare interros n°5"
+      assert_select ".ps-title-block .ps-subject", text: "Toute la leçon"
       assert_select ".ps-remember", 0
       assert_select ".ps-progress", text: "0 / 2 exercice réussi"
       assert_select ".ps-exercise", 2
@@ -90,7 +93,8 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select "#prepare-devoirs .ps-sheet", 1
     assert_select "#prepare-devoirs .ps-header", text: including("PRÉPARE DEVOIRS")
     assert_select "#prepare-devoirs .ps-header", text: including("Sujet 1 / 1")
-    assert_select "#prepare-devoirs .ps-title", text: "Sujet 1 · Calculer, démontrer, conclure"
+    assert_select "#prepare-devoirs .ps-title", text: "Prépare devoirs n°1"
+    assert_select "#prepare-devoirs .ps-title-block .ps-subject", text: "Sujet 1 · Calculer, démontrer, conclure"
     assert_select "#prepare-devoirs .ps-remember", text: "Notions mobilisées : Thalès et sa réciproque"
     assert_select "#prepare-devoirs .ps-exercise", 2
     assert_select "#prepare-devoirs .ps-footer", text: including("Lnclass · Prépare devoirs · Sujet 1")
