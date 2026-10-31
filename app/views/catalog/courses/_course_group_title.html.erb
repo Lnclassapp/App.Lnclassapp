@@ -1,15 +1,17 @@
 <%# 🌐 UI · catalog/courses/_course_group_title — titre d'un groupe de cours de l'élève : icône, matière, nombre de cours %>
 <%# Rôle : le titre entier ouvre la vue de la matière (?material=<slug>) ; le nombre compte toute la recherche, pas la page %>
-<%# ADR  : 0090 (§4.2) · UDR : 0085 (§3.2, §3.7 : nom accessible « matière, n cours, voir la matière ») %>
+<%# ADR  : 0090 (§4.2) · UDR : 0085 (§3.2, §3.7 : nom accessible « matière, n cours, voir la matière »), 0146 (§3 : libellé court visible, nom entier en title) %>
 <%# locals: (course:, count:) -%>
 <% illustration = subject_illustration(course.material_slug) %>
+<% short = subject_short_label(course.material_slug) %>
 <h2 id="courses_group_<%= course.material_slug %>_title" class="mb-2">
   <%= link_to courses_path(material: course.material_slug), "aria-label": t(".label", material: course.material_name, count:),
+              title: (course.material_name if short),
               class: "group flex min-h-tap items-center gap-3 rounded-ln text-ink focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand" do %>
     <span class="<%= class_names("grid size-10 shrink-0 place-items-center rounded-full", illustration.tint) %>">
       <%= image_tag illustration.path, alt: "", class: "size-7", "aria-hidden": true, loading: "lazy" %>
     </span>
-    <span class="min-w-0 flex-1 truncate font-display text-lg leading-tight font-medium"><%= course.material_name %></span>
+    <span class="min-w-0 flex-1 truncate font-display text-lg leading-tight font-medium"><%= short || course.material_name %></span>
     <span class="shrink-0 text-sm text-mute"><%= t(".count", count:) %></span>
     <%= ui_icon "chevron-right", variant: :mini, size: :sm, class: "text-mute transition group-hover:translate-x-0.5" %>
   <% end %>

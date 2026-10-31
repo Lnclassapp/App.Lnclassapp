@@ -359,6 +359,68 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à déduire un groupe sanguin et les anticorps du plasma, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un sang ne s'agglutine ni avec le sérum anti-A ni avec le sérum anti-B. Ses hématies n'ont aucun ___ : son groupe est le groupe ___.",
+                "question_type": "fill_blank",
+                "hint": "Relève d'abord les antigènes présents, puis déduis le groupe.",
+                "explanation": "Étape 1 — Observer : aucune agglutination, ni avec anti-A, ni avec anti-B. Étape 2 — Relever : il n'y a ni antigène A ni antigène B. Étape 3 — Déduire : sans antigène, le groupe est O. Étape 4 — Préciser : son plasma contient les anticorps anti-A et anti-B.",
+                "answers": [
+                  {
+                    "content": "antigène",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "O",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quels anticorps contient le plasma d'une personne de groupe B ?",
+                "question_type": "single_choice",
+                "hint": "Écris d'abord l'antigène, puis garde l'anticorps qui ne lui correspond pas.",
+                "explanation": "Étape 1 — Observer : le groupe B porte l'antigène B. Étape 2 — Relever : l'antigène présent est B, il n'y a pas d'antigène A. Étape 3 — Déduire : le groupe est B. Étape 4 — Préciser : les anticorps sont ceux qui ne correspondent pas à l'antigène B, donc l'anticorps anti-A.",
+                "answers": [
+                  {
+                    "content": "L'anticorps anti-A",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'anticorps anti-B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les anticorps anti-A et anti-B",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun anticorps",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une personne de groupe AB n'a aucun anticorps dans son plasma.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le groupe AB porte les antigènes A et B. Étape 2 — Déduire : le groupe est AB. Étape 3 — Préciser : aucun anticorps ne correspond à ces deux antigènes, donc le plasma n'en contient pas. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -527,6 +589,68 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à dire si un donneur est compatible avec un receveur, avec la méthode de la fiche : relever, comparer, conclure.",
+            "questions": [
+              {
+                "content": "Donneur de groupe B, receveur de groupe AB. Les hématies du donneur portent l'antigène ___. Le plasma du receveur AB ne contient aucun ___ : il n'y a pas d'agglutination.",
+                "question_type": "fill_blank",
+                "hint": "Pour le donneur, regarde ses antigènes ; pour le receveur, ses anticorps.",
+                "explanation": "Étape 1 — Relever : les hématies du donneur B portent l'antigène B ; le receveur AB n'a aucun anticorps. Étape 2 — Comparer : aucun anticorps du receveur ne correspond à l'antigène B. Étape 3 — Conclure : il n'y a pas d'agglutination, la transfusion est compatible.",
+                "answers": [
+                  {
+                    "content": "B",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "anticorps",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un donneur de groupe O donne son sang à un receveur de groupe A. Que peut-on dire ?",
+                "question_type": "single_choice",
+                "hint": "Compare les antigènes du donneur avec les anticorps du receveur.",
+                "explanation": "Étape 1 — Relever : le donneur O n'a aucun antigène ; le receveur A a l'anticorps anti-B. Étape 2 — Comparer : aucun antigène du donneur ne correspond à cet anticorps. Étape 3 — Conclure : pas d'agglutination, la transfusion est compatible. Les anticorps du donneur sont très dilués : on les néglige.",
+                "answers": [
+                  {
+                    "content": "C'est compatible : le donneur O n'a aucun antigène.",
+                    "correct": true
+                  },
+                  {
+                    "content": "C'est impossible : le donneur O a les anticorps anti-A et anti-B.",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est impossible : le receveur A a l'anticorps anti-A.",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est compatible seulement si le receveur est AB.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une personne de groupe B peut donner son sang à une personne de groupe AB.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le donneur B a l'antigène B ; le receveur AB n'a aucun anticorps. Étape 2 — Comparer : aucun anticorps du receveur ne correspond à l'antigène B. Étape 3 — Conclure : la transfusion est compatible ; l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -688,6 +812,68 @@
                   },
                   {
                     "content": "Le Rhésus n'a aucun effet sur une transfusion.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à prévoir le risque d'une seconde transfusion avec le Rhésus, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un receveur Rh- n'a pas d'anticorps anti-Rh au départ. Après un contact avec des hématies Rh+, son organisme ___ des anticorps anti-Rh. À la transfusion ___ de sang Rh+, ces anticorps agglutinent les hématies.",
+                "question_type": "fill_blank",
+                "hint": "Pense à ce qui se passe après la première transfusion, puis à la suivante.",
+                "explanation": "Étape 1 — Relever : le receveur est Rh- ; il n'a pas d'anticorps anti-Rh au départ. Étape 2 — Repérer le risque : le donneur Rh+ a l'antigène Rhésus, que le receveur Rh- n'a pas. Étape 3 — Prévoir : à la première transfusion, pas d'agglutination immédiate, mais l'organisme fabrique des anticorps ; à la transfusion suivante, ils agglutinent les hématies reçues.",
+                "answers": [
+                  {
+                    "content": "fabrique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "fabrique des",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "suivante",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "seconde",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "deuxième",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une femme Rh-, jamais transfusée, a besoin de sang. Quel sang doit-on lui donner ?",
+                "question_type": "single_choice",
+                "hint": "Cherche d'abord le risque : le donneur a-t-il un antigène que la receveuse n'a pas ?",
+                "explanation": "Étape 1 — Relever : la receveuse est Rh-, sans anticorps anti-Rh au départ. Étape 2 — Repérer le risque : un donneur Rh+ porte l'antigène Rhésus qu'elle n'a pas. Étape 3 — Prévoir : elle fabriquerait des anticorps, qui agglutineraient les hématies à la transfusion suivante. Étape 4 — Conclure : un receveur Rh- doit recevoir du sang Rh-.",
+                "answers": [
+                  {
+                    "content": "Du sang Rh-",
+                    "correct": true
+                  },
+                  {
+                    "content": "Du sang Rh+",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du sang Rh+ ou Rh-, au choix",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du sang Rh+, mais seulement la première fois",
                     "correct": false
                   }
                 ]

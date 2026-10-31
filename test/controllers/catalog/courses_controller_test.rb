@@ -1020,6 +1020,33 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ "lesson_material_#{@svt.slug}" ], current_pill
   end
 
+  test "CA-L1: a pill shows the short label of its subject, the full name read aloud and in title; without one, the full name" do
+    sign_in_as lessons_student
+
+    get courses_path(material: @philo.slug)
+
+    assert_select "a#lesson_material_#{@philo.slug}[title=?]", "Philosophie" do
+      assert_select "span[aria-hidden=true]", text: "Philo"
+      assert_select "span.sr-only", text: "Philosophie"
+    end
+    assert_select "a#lesson_material_#{@svt.slug}:not([title])", text: "SVT" do
+      assert_select "span.sr-only", 0
+    end
+  end
+
+  test "CA-L1: on a phone, a group title shows the short label, the full name in its accessible name and in title" do
+    sign_in_as lessons_student
+
+    get courses_path
+
+    assert_select "#courses_group_#{@philo.slug}_title a[title=?][aria-label*=?]", "Philosophie", "Philosophie" do
+      assert_select "span.truncate", text: "Philo"
+    end
+    assert_select "#courses_group_#{@svt.slug}_title a:not([title])" do
+      assert_select "span.truncate", text: "SVT"
+    end
+  end
+
   test "CA-E14: a lesson card shows its sheets, 3 then « Voir les N fiches », and « À revoir » for this student only" do
     sheets = Array.new(5) { |index| create_essential(course: @course, name: "Fiche #{index + 1}") }
     create_gap(student: lessons_student, essential: sheets.second)

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -14,8 +14,8 @@ module Repositories
       EXERCISE_COLUMNS = %w[id public_id course_id essential_id subject_id title statement statement_blocks figure_key hint exercise_type position
                             author_id status created_at updated_at].freeze
       QUESTION_COLUMNS = %w[id exercise_id position content explanation question_type numeric_tolerance image_description points unit
-                            starter criteria created_at updated_at].freeze
-      ANSWER_COLUMNS = %w[question_id position content correct match_content created_at updated_at].freeze
+                            starter criteria hint created_at updated_at].freeze
+      ANSWER_COLUMNS = %w[question_id position content correct match_content blank created_at updated_at].freeze
       # Format texte de COPY : ces quatre caractères seraient lus comme séparateurs ou échappements.
       COPY_ESCAPES = { "\\" => "\\\\", "\t" => "\\t", "\n" => "\\n", "\r" => "\\r" }.freeze
       COPY_SPECIALS = /[\\\t\n\r]/
@@ -257,7 +257,7 @@ module Repositories
       # Dans l'ordre de QUESTION_COLUMNS. Chaînes vides → null, critères vides retirés (ADR-0115) ; la base refuse le reste.
       def question_row(id, exercise_id, node)
         [ id, exercise_id, node.position, node.content, node.explanation, node.question_type, node.numeric_tolerance, node.image_description,
-          node.points, node.unit.presence, node.starter.presence, copy_array(node.criteria), @copy_at, @copy_at ]
+          node.points, node.unit.presence, node.starter.presence, copy_array(node.criteria), node.hint.presence, @copy_at, @copy_at ]
       end
 
       # Un tableau de textes au format COPY d'une colonne PostgreSQL array : {"a","b"}, chaque texte entre guillemets.
@@ -268,7 +268,7 @@ module Repositories
 
       # Dans l'ordre d'ANSWER_COLUMNS.
       def answer_row(question_id, node)
-        [ question_id, node.position, node.content, node.correct, node.match_content, @copy_at, @copy_at ]
+        [ question_id, node.position, node.content, node.correct, node.match_content, node.blank, @copy_at, @copy_at ]
       end
 
       # Le contenu importé est assaini avant d'entrer dans le contenu riche ; un contenu vide ne crée pas de ligne.

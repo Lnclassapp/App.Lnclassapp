@@ -193,7 +193,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select "#prepare-interros .ps-sheet", 5
     assert_select "#prepare-interros input:not([type=hidden])", 0
     assert_select "#prepare-interros textarea, #prepare-interros select", 0
-    assert_select "#prepare-interros button.ps-btn--primary", 0
+    assert_select "#prepare-interros button", text: "Vérifier ma réponse", count: 0
     assert_select "#prepare-interros button.ps-btn--hint", 0
     assert_select "#prepare-interros .ps-footer button", 0
     assert_select "#{frame(@by_notion.first)} #assignment_#{@classroom.public_id}_Exercise_#{@by_notion.first.public_id}"
@@ -208,7 +208,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select "#prepare-interros .ps-exercise", 7
     assert_select "#prepare-interros input:not([type=hidden])", 0
     assert_select "#prepare-interros [id^=assignment_]", 0
-    assert_select "#prepare-interros button.ps-btn--primary", 0
+    assert_select "#prepare-interros button", text: "Vérifier ma réponse", count: 0
   end
 
   test "a lesson without exercise says so, for a teacher too, and offers no sheet nor assignment" do

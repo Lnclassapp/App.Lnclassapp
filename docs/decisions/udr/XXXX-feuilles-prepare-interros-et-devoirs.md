@@ -33,7 +33,9 @@ UDR-0145 §3.2. La seule adaptation est la vue de l'enseignant, que la maquette 
 **Structure** (`app/views/catalog/courses/_prepare_sheets.html.erb`, rendu là où `_prepare_interros` l'est aujourd'hui)
 - Section « Prépare interros » : une feuille par notion qui a au moins un exercice, dans l'ordre des notions ; puis, si la
   leçon a des exercices « Toute la leçon » sans sujet, une dernière feuille titrée « TOUTE LA LEÇON », sans encadré.
-- Section « Prépare devoirs », juste dessous, seulement si la leçon a un sujet : une feuille par sujet, dans l'ordre.
+- Section « Prépare devoirs », juste dessous, seulement si la leçon a un sujet : une feuille par sujet, dans l'ordre. Elle
+  remplace la section « Prépare devoirs » par type d'exercice de l'UDR-0145 §3.2 ter : une évaluation sans sujet reste dans la
+  feuille de sa notion ou dans « Toute la leçon ».
 - Feuille (`catalog/courses/sheets/_sheet.html.erb`), recopiée de la maquette, du haut vers le bas :
   1. cartouche à bordure 2 px : « PRÉPARE INTERROS » / « PRÉPARE DEVOIRS », « MATHÉMATIQUES » (nom de la matière en
      capitales), « Lnclass · <titre de la leçon> », « Classe de <niveau> · Notion n / N » ou « Sujet n / N » ;

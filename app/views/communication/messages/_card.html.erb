@@ -1,14 +1,15 @@
 <%# 🌐 UI · communication/messages/_card — une annonce dans son thème : signature, titre, texte, illustration ou image, audio %>
 <%# Rôle : locaux card: (InboxQuery::MessageCard), context: (:carousel, :list, :moderation), dismissible: (croix) ; jamais un lien %>
-<%# ADR  : 0078, 0081 · UDR : 0005, 0071 (§3.2, §3.4, amendement du 2026-10-30), 0075 (§3.1, §3.2) %>
+<%# ADR  : 0078, 0081 · UDR : 0005, 0071 (§3.2, §3.4, amendements du 2026-10-30), 0075 (§3.1, §3.2) %>
 <% dom_id = "announcement_#{card.public_id}" %>
 <%# UDR-0075 §3.1 : le thème redéfinit les tokens de la carte ; fond, texte, signature, badge, croix et dessins le suivent. %>
 <%= tag.article id: dom_id, "aria-labelledby": "#{dom_id}_title", data: { announcement_theme: card.theme },
-                class: "relative flex min-h-40 gap-2 rounded-ln bg-brand-soft py-3 pr-2 pl-4 text-school" do %>
+                class: "relative flex min-h-32 gap-2 rounded-ln bg-brand-soft py-2 pr-2 pl-4 text-school" do %>
   <div class="flex min-w-0 flex-1 flex-col justify-center gap-1">
     <p class="flex min-w-0 items-center gap-1.5 text-xs font-medium text-school/80">
       <% if card.author_role == :team %>
-        <%= image_tag "logo/lnclass.jpeg", alt: "", width: 20, height: 20, class: "size-5 shrink-0 rounded-sm object-cover" %>
+        <%# Le logo du lecteur : orange pour un enseignant, bleu pour tout autre (amendement du 2026-10-30, second). %>
+        <%= image_tag announcement_logo, alt: "", width: 20, height: 20, class: "size-5 shrink-0 rounded-sm object-cover" %>
         <span><%= announcement_signature(card) %></span>
       <% else %>
         <%= ui_icon "user", variant: :mini, size: :sm %>
@@ -22,20 +23,15 @@
     </p>
     <h3 id="<%= dom_id %>_title" class="text-base leading-snug font-medium"><%= card.title %></h3>
     <%# Texte simple de l'auteur, toujours échappé (AN-20) : jamais raw ni html_safe. %>
-    <p class="text-sm"><%= card.body %></p>
-    <% restorable = context == :list && card.dismissed? %>
-    <% if card.edited? || restorable %>
+    <%# Dix mots au plus, sur deux lignes au plus (amendement du 2026-10-30, second). %>
+    <p class="line-clamp-2 text-sm"><%= announcement_excerpt(card.body) %></p>
+    <% if context == :list && card.dismissed? %>
       <div class="flex flex-wrap items-center gap-2">
-        <% if card.edited? %>
-          <%= ui_badge t("communication.card.edited"), tone: :neutral, size: :sm %>
-        <% end %>
-        <% if restorable %>
-          <%= ui_badge t("communication.card.dismissed"), tone: :neutral, size: :sm %>
-          <%= button_to t("communication.card.restore"), announcement_dismissal_path(card.public_id), method: :delete,
-                        data: { turbo_stream: true },
-                        class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm],
-                                           ComponentsHelper::BUTTON_VARIANTS[:secondary]) %>
-        <% end %>
+        <%= ui_badge t("communication.card.dismissed"), tone: :neutral, size: :sm %>
+        <%= button_to t("communication.card.restore"), announcement_dismissal_path(card.public_id), method: :delete,
+                      data: { turbo_stream: true },
+                      class: class_names(ComponentsHelper::BUTTON_BASE, ComponentsHelper::BUTTON_SIZES[:sm],
+                                         ComponentsHelper::BUTTON_VARIANTS[:secondary]) %>
       </div>
     <% end %>
     <%# Message d'échec de l'audio (UDR-0071 §3.4), annoncé ; vide par défaut. %>

@@ -44,7 +44,7 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
     assert_select "#classroom_gaps a[href*='/essentials/']", 0
   end
 
-  test "the anchor exists on the lesson page, with the exercise of the notion under it" do
+  test "the anchor exists on the lesson page, on the card of the notion's exercise" do
     sign_in_as @student
 
     get course_path(@course.slug)

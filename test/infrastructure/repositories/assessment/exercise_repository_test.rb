@@ -374,6 +374,19 @@ module Repositories
 
         assert_not Orm::QuestionImage.exists?(image.id)
       end
+
+      test "écrit et relit l'indice d'une question et la case de chaque réponse" do
+        blank_question = Question.new(id: nil, position: nil, content: "AN = ___  MN = ___", explanation: "Thalès.", question_type: "numeric",
+                                      hint: "Pense au coefficient.",
+                                      answers: [ Answer.new(id: nil, position: nil, content: "3", correct: true, blank: 0),
+                                                 Answer.new(id: nil, position: nil, content: "4", correct: true, blank: 1) ])
+
+        saved = @repository.create(exercise: exercise(questions: [ blank_question, question("Sans indice.") ]))
+
+        first, second = saved.questions
+        assert_equal [ "Pense au coefficient.", 2, [ 0, 1 ] ], [ first.hint, first.blanks, first.answers.map(&:blank) ]
+        assert_equal [ nil, 1 ], [ second.hint, second.blanks ]
+      end
     end
   end
 end

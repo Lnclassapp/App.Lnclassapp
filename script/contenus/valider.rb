@@ -10,6 +10,7 @@ require "json"
 require "bigdecimal"
 # Les bornes des figures et la structure des onze types de question sont lues dans le domaine (Ruby pur, sans Rails) :
 # une seule source, les mêmes raisons qu'à l'import.
+require_relative "../../app/domain/entities/assessment/question_kinds/blanks"
 %w[choice fill_blank matching numeric ordering select written notebook].each { require_relative "../../app/domain/entities/assessment/question_kinds/#{it}" }
 require_relative "../../app/domain/entities/assessment/answer"
 require_relative "../../app/domain/entities/assessment/question"

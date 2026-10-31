@@ -22,6 +22,17 @@ class Catalog::NotionAnchorsTest < ActionDispatch::IntegrationTest
     assert_select "#notion-#{@without.slug}[hidden]", 0
   end
 
+  test "the anchor is the sheet of the notion, once, whatever its number of exercises" do
+    create_exercise(essential: @with, questions: 1, title: "Second exercice")
+    sign_in_as @student
+
+    get course_path(@course.slug)
+
+    # UDR-XXXX feuilles-prepare-interros-et-devoirs §3 : une feuille par notion, son repère est l'ancre de la notion.
+    assert_select "#notion-#{@with.slug}", 1
+    assert_select ".ps-sheet#notion-#{@with.slug} .ps-exercise", 2
+  end
+
   test "the anchor of a notion with no exercise is there even when the lesson has no exercise at all" do
     Orm::Exercise.where(essential_id: @with.id).update_all(status: "draft")
     sign_in_as @student

@@ -112,6 +112,53 @@ module Entities
         assert_not Grading.upgrade?(:gold, :silver)
         assert_not Grading.upgrade?(:gold, nil)
       end
+
+      # ADR cases §4 et §6 : une question rapporte points × cases justes / cases ; le pourcentage est arrondi une seule fois, vers le bas.
+      def multi_question(blanks)
+        answers = (0...blanks).map { |blank| Answer.new(id: blank + 1, position: blank + 1, content: "1", correct: true, blank:) }
+        Question.new(id: 1, position: 1, content: "___", explanation: nil, question_type: "numeric", answers:)
+      end
+
+      def attempt(correct:, results: [])
+        QuestionAttempt.new(session_id: 1, question_id: 1, selected_answer_ids: [], correct:, answered_at: Time.current, blank_results: results)
+      end
+
+      test "share : une case vaut 1 si juste, 0 sinon, 0 sans tentative" do
+        single = multi_question(1)
+
+        assert_equal Rational(1), Grading.share(single, attempt(correct: true))
+        assert_equal Rational(0), Grading.share(single, attempt(correct: false))
+        assert_equal Rational(0), Grading.share(single, nil)
+      end
+
+      test "share : plusieurs cases, les cases justes sur les cases" do
+        three = multi_question(3)
+
+        assert_equal Rational(2, 3), Grading.share(three, attempt(correct: false, results: [ true, false, true ]))
+        assert_equal Rational(1), Grading.share(three, attempt(correct: true, results: [ true, true, true ]))
+        assert_equal Rational(0), Grading.share(three, attempt(correct: false, results: []))
+        assert_equal Rational(0), Grading.share(three, nil)
+      end
+
+      # CA-11 : 2 cases sur 2 points, une juste, donnent 1 point sur 2.
+      test "points_percent : 2 cases sur 2 points, une juste, valent 50 %" do
+        assert_equal 50, Grading.points_percent([ [ BigDecimal("2"), Rational(1, 2) ] ])
+      end
+
+      test "points_percent : l'arrondi se fait une seule fois, à la fin, vers le bas" do
+        assert_equal 66, Grading.points_percent([ [ BigDecimal("1"), Rational(2, 3) ] ])
+        assert_equal 33, Grading.points_percent([ [ BigDecimal("1"), Rational(1, 3) ] ])
+        # Trois questions à trois cases, une case juste chacune : 3/9 = 33 %, et non 3 × arrondi(33,33) = 99 %.
+        assert_equal 33, Grading.points_percent(Array.new(3) { [ BigDecimal("1"), Rational(1, 3) ] })
+        assert_equal 100, Grading.points_percent([ [ BigDecimal("0.5"), Rational(1) ], [ BigDecimal("1.5"), Rational(1) ] ])
+      end
+
+      test "points_percent : une question à une case donne les mêmes valeurs qu'avant, que la part soit un booléen ou 0/1" do
+        assert_equal Grading.points_percent([ [ BigDecimal("1"), true ], [ BigDecimal("2"), false ], [ BigDecimal("3"), true ] ]),
+                     Grading.points_percent([ [ BigDecimal("1"), Rational(1) ], [ BigDecimal("2"), Rational(0) ], [ BigDecimal("3"), Rational(1) ] ])
+        assert_equal 66, Grading.points_percent([ [ BigDecimal("1"), true ], [ BigDecimal("2"), false ], [ BigDecimal("3"), true ] ])
+        assert_kind_of Integer, Grading.points_percent([ [ BigDecimal("1"), Rational(1, 3) ] ])
+      end
     end
   end
 end

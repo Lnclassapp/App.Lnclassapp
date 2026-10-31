@@ -56,8 +56,8 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "##{toggle_id(@classroom, @ex_mitose)}", text: including(toggle("assigned"))
     assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']"
     assert_select "[id^='assignment_#{other.public_id}']", 0
-    assert_select "#prepare-interros .ui-button-primary", 1
-    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ui-button-primary"
+    assert_select "#prepare-interros [id^='assignment_'] .ps-btn--primary", 1
+    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ps-btn--primary"
   end
 
   # UDR-0013 : une leçon d'un autre niveau que la classe, atteinte par l'URL, n'existe pas sur la page de la classe.
