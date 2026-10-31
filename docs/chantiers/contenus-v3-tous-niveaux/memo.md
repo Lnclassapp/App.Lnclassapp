@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | programme |
-| **Statut** | cadrage — feuille de route soumise au porteur, aucune vague lancée |
+| **Statut** | en cours — feuille de route validée (2026-10-31), vagues de Tle lancées |
 | **Ouvert le** | 2026-10-31 |
 | **Branche** | aucune en propre ; une branche `feature/contenus-<niveau>-<matiere>` par vague |
 | **Programme** | — *(ce dossier est le programme `contenus-v3-tous-niveaux`)* |
