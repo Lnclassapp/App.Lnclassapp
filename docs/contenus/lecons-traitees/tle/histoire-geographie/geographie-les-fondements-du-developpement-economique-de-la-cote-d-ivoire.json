@@ -1,0 +1,1919 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — Les fondements du développement économique de la Côte d'Ivoire",
+      "subtitle": "Leçon 2 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "carte-ci-fondements-naturels",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire. Quatre zones naturelles sont colorées : la forêt dense au sud, la savane au nord, la bande côtière sur le golfe de Guinée et les montagnes de l'ouest. On y lit les ports d'Abidjan et de San Pedro, la ville de Man et les barrages de Kossou, Taabo, Buyo, Soubré et Ayamé.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "dense_forest",
+                "category": 1
+              },
+              {
+                "id": "savanna",
+                "category": 2
+              },
+              {
+                "id": "coastal_strip",
+                "category": 3
+              },
+              {
+                "id": "mountain_west",
+                "category": 4
+              }
+            ],
+            "places": [
+              {
+                "id": "abidjan",
+                "label": "Abidjan (port)"
+              },
+              {
+                "id": "san_pedro",
+                "label": "San Pedro (port)"
+              },
+              {
+                "id": "man",
+                "label": "Man"
+              },
+              {
+                "id": "kossou",
+                "label": "Barrage de Kossou"
+              },
+              {
+                "id": "taabo",
+                "label": "Barrage de Taabo"
+              },
+              {
+                "id": "buyo",
+                "label": "Barrage de Buyo"
+              },
+              {
+                "id": "soubre",
+                "label": "Barrage de Soubré"
+              },
+              {
+                "id": "ayame",
+                "label": "Barrage d'Ayamé"
+              }
+            ],
+            "legend": [
+              "Forêt dense (sud)",
+              "Savane (nord)",
+              "Bande côtière (lagunes)",
+              "Montagnes de l'ouest"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "population-ci",
+          "kind": "stat_chart",
+          "description": "Courbe de la population de la Côte d'Ivoire aux cinq recensements de l'INS, en millions d'habitants : 6,7 en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014 et 29,4 en 2021. La courbe monte à chaque recensement et dépasse quatre fois la valeur de 1975 en 2021. Attention : les recensements sont espacés de 13, 10, 16 puis 7 ans, alors que l'axe de la courbe est régulier ; la pente ne se compare donc pas d'une période à l'autre.",
+          "params": {
+            "chart": "line",
+            "series": [
+              6.7,
+              10.8,
+              15.4,
+              22.7,
+              29.4
+            ],
+            "labels": [
+              "1975",
+              "1988",
+              "1998",
+              "2014",
+              "2021"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-fondements",
+          "kind": "diagram",
+          "description": "Schéma en arbre. Au sommet, les fondements du développement économique. Quatre branches en partent : fondements naturels (forêt, fleuves, sous-sol), humains (population jeune, main-d'œuvre), politiques et institutionnels (libéralisme, stabilité, UEMOA) et financiers (épargne, capitaux étrangers, aide).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "fond",
+                "label": "Fondements du développement économique"
+              },
+              {
+                "id": "nat",
+                "label": "Fondements naturels",
+                "category": 1
+              },
+              {
+                "id": "hum",
+                "label": "Fondements humains",
+                "category": 2
+              },
+              {
+                "id": "pol",
+                "label": "Fondements politiques et institutionnels",
+                "category": 3
+              },
+              {
+                "id": "fin",
+                "label": "Fondements financiers",
+                "category": 4
+              },
+              {
+                "id": "nat_ex",
+                "label": "Forêt, fleuves, sous-sol",
+                "category": 1
+              },
+              {
+                "id": "hum_ex",
+                "label": "Population jeune, main-d'œuvre",
+                "category": 2
+              },
+              {
+                "id": "pol_ex",
+                "label": "Libéralisme, stabilité, UEMOA",
+                "category": 3
+              },
+              {
+                "id": "fin_ex",
+                "label": "Épargne, capitaux étrangers, aide",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "fond",
+                "to": "nat"
+              },
+              {
+                "from": "fond",
+                "to": "hum"
+              },
+              {
+                "from": "fond",
+                "to": "pol"
+              },
+              {
+                "from": "fond",
+                "to": "fin"
+              },
+              {
+                "from": "nat",
+                "to": "nat_ex"
+              },
+              {
+                "from": "hum",
+                "to": "hum_ex"
+              },
+              {
+                "from": "pol",
+                "to": "pol_ex"
+              },
+              {
+                "from": "fin",
+                "to": "fin_ex"
+              }
+            ],
+            "legend": [
+              "Naturels",
+              "Humains",
+              "Politiques et institutionnels",
+              "Financiers"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-financement",
+          "kind": "diagram",
+          "description": "Schéma fléché de gauche à droite. Trois sources d'argent, l'épargne intérieure, les capitaux étrangers et l'aide extérieure, financent l'investissement (usines, routes, écoles). L'investissement augmente la production, qui crée des emplois et des revenus.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "ep",
+                "label": "Épargne intérieure",
+                "category": 1
+              },
+              {
+                "id": "ce",
+                "label": "Capitaux étrangers",
+                "category": 2
+              },
+              {
+                "id": "ai",
+                "label": "Aide extérieure",
+                "category": 3
+              },
+              {
+                "id": "inv",
+                "label": "Investissement (usines, routes, écoles)"
+              },
+              {
+                "id": "prod",
+                "label": "Production accrue"
+              },
+              {
+                "id": "rev",
+                "label": "Emplois et revenus"
+              }
+            ],
+            "edges": [
+              {
+                "from": "ep",
+                "to": "inv",
+                "label": "finance"
+              },
+              {
+                "from": "ce",
+                "to": "inv",
+                "label": "finance"
+              },
+              {
+                "from": "ai",
+                "to": "inv",
+                "label": "finance"
+              },
+              {
+                "from": "inv",
+                "to": "prod"
+              },
+              {
+                "from": "prod",
+                "to": "rev"
+              }
+            ],
+            "legend": [
+              "Épargne des habitants",
+              "Investisseurs étrangers",
+              "Dons et prêts"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Repérer les fondements naturels",
+          "remember": "Les **fondements naturels** sont les conditions que la nature donne à un pays et sur lesquelles son économie s'appuie. En Côte d'Ivoire : un **relief** peu élevé (plaines et plateaux, avec les montagnes de l'ouest autour de Man) ; des **climats** chauds et humides au sud (type équatorial, quatre saisons) et plus secs au nord (type tropical, deux saisons) ; des **sols** de forêt qui portent le cacao, le café et l'hévéa, et des sols de savane qui portent le coton ; des **eaux** : fleuves (Bandama, Sassandra, Comoé), lagunes et façade sur le golfe de Guinée ; un **sous-sol** qui contient du pétrole et du gaz au large, de l'or, du manganèse, du nickel et du diamant. La Côte d'Ivoire est le premier producteur mondial de cacao (ICCO, campagne 2022-2023). Un fondement naturel est un **potentiel** : il faut l'exploiter.",
+          "method": [
+            "Lire l'élément proposé et le situer sur le territoire (sud, nord, ouest, côte).",
+            "Identifier la composante de la nature à laquelle il appartient : relief, climat, sol, eaux ou sous-sol.",
+            "Relier cette composante à l'activité qu'elle permet : culture, énergie, transport ou extraction.",
+            "Conclure en rappelant que c'est un potentiel, qui demande des moyens pour être exploité."
+          ],
+          "example": {
+            "statement": "Montrer en quoi la forêt humide du sud est un fondement naturel du développement économique.",
+            "steps": [
+              "Lire : il s'agit de la zone de forêt dense du sud, où il pleut beaucoup et où il fait chaud.",
+              "Identifier : la forêt humide relève du climat (chaud et pluvieux) et des sols (sols de forêt).",
+              "Relier : ce climat et ces sols permettent les cultures de plantation, comme le cacao, le café et l'hévéa.",
+              "Conclure : c'est un potentiel ; il faut des planteurs, des routes et des ports pour que ces produits soient récoltés et vendus."
+            ]
+          },
+          "pitfall": "Ne confonds pas un fondement naturel et sa mise en valeur. Le fleuve Sassandra est un fondement naturel ; le barrage de Buyo, construit sur ce fleuve, est un aménagement fait par l'homme. De même, un gisement de pétrole au large est naturel, mais le puits qui l'exploite demande de l'argent et de la technique. Demande-toi : est-ce la nature qui l'a donné, ou l'homme qui l'a construit ?",
+          "figure": "carte-ci-fondements-naturels",
+          "practice": {
+            "statement": "Tu t'entraînes à repérer un fondement naturel avec la méthode : lire, identifier, relier, conclure.",
+            "questions": [
+              {
+                "content": "Le climat chaud et humide du sud est un fondement ___, alors que le barrage de Taabo est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Identifier : le climat est donné par la nature, c'est un fondement naturel. Le barrage de Taabo est bâti par l'homme sur le Bandama : c'est un aménagement, pas un fondement naturel. Étape 4 — Conclure : la nature donne le potentiel, l'homme l'exploite.",
+                "answers": [
+                  {
+                    "content": "naturel",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "politique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "financier",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un aménagement construit par l'homme",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "un gisement du sous-sol",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "un climat de type équatorial",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pose-toi la question de la fiche : est-ce la nature qui l'a donné, ou l'homme qui l'a construit ?"
+              },
+              {
+                "content": "Quel produit de plantation fait de la Côte d'Ivoire le premier producteur mondial (ICCO, campagne 2022-2023) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Relier : le climat chaud et pluvieux et les sols de la forêt du sud permettent la culture du cacao. Le coton et le mil sont des cultures du nord, plus sec, et le manganèse vient du sous-sol, pas d'une plantation.",
+                "answers": [
+                  {
+                    "content": "Le cacao",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le coton",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le manganèse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le mil",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour repérer un fondement naturel.",
+                "question_type": "ordering",
+                "explanation": "La méthode suit toujours le même ordre : Étape 1 — Lire et situer ; Étape 2 — Identifier la composante ; Étape 3 — Relier à une activité ; Étape 4 — Conclure que c'est un potentiel.",
+                "answers": [
+                  {
+                    "content": "Lire l'élément et le situer sur le territoire"
+                  },
+                  {
+                    "content": "Identifier sa composante : relief, climat, sol, eaux ou sous-sol"
+                  },
+                  {
+                    "content": "Relier cette composante à une activité"
+                  },
+                  {
+                    "content": "Conclure : c'est un potentiel à exploiter"
+                  }
+                ]
+              },
+              {
+                "content": "Le pétrole et le gaz naturel ivoiriens se trouvent au large, dans le golfe de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : le gisement est au large de la côte, sous la mer. Étape 2 — Identifier : c'est une ressource du sous-sol, située dans le golfe de Guinée, sur lequel s'ouvre la Côte d'Ivoire.",
+                "answers": [
+                  {
+                    "content": "Guinée",
+                    "correct": true
+                  }
+                ],
+                "hint": "La Côte d'Ivoire est bordée par la mer au sud : de quel golfe s'agit-il ?"
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Identifier et relier les fondements naturels",
+            "statement": "Dans cet exercice, tu repères les fondements naturels de la Côte d'Ivoire et tu les relies à une activité, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "carte-ci-fondements-naturels",
+            "questions": [
+              {
+                "content": "Parmi ces éléments, lequel est un fondement naturel du développement économique ivoirien ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : on cherche ce qui est donné par la nature. Étape 2 — Identifier : les fleuves sont des eaux, donc un fondement naturel. Le barrage et le port sont construits par l'homme, et le code des investissements est une règle : ce sont des aménagements ou des règles, pas des fondements naturels.",
+                "answers": [
+                  {
+                    "content": "Le barrage de Kossou",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les fleuves Bandama et Sassandra",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le port de San Pedro",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le code des investissements",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément de la Côte d'Ivoire à la composante de la nature à laquelle il appartient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire chaque élément. Étape 2 — Identifier la composante : le climat équatorial est un climat ; les plaines et plateaux forment le relief ; le manganèse et l'or sont dans le sous-sol ; le Bandama et les lagunes sont des eaux.",
+                "answers": [
+                  {
+                    "content": "Le climat équatorial du sud",
+                    "match": "Climat"
+                  },
+                  {
+                    "content": "Les plaines et plateaux peu élevés",
+                    "match": "Relief"
+                  },
+                  {
+                    "content": "Le manganèse et l'or",
+                    "match": "Sous-sol"
+                  },
+                  {
+                    "content": "Le Bandama et les lagunes",
+                    "match": "Eaux"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles cultures la forêt dense du sud permet-elle surtout ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Identifier : la forêt dense a un climat chaud et pluvieux et des sols de forêt. Étape 3 — Relier : ils permettent le cacao et l'hévéa. Le coton et le mil sont surtout des cultures du nord, plus sec.",
+                "answers": [
+                  {
+                    "content": "Le coton",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cacao",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le mil",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hévéa",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le fleuve ___ a été aménagé à Kossou et à Taabo pour produire de l'électricité.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : deux barrages, Kossou et Taabo, sur le même fleuve. Étape 3 — Relier : la force de l'eau du Bandama fait tourner des turbines, ce qui produit de l'électricité.",
+                "answers": [
+                  {
+                    "content": "Bandama",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le climat du nord de la Côte d'Ivoire est de type équatorial, avec quatre saisons.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier : le nord a un climat de type tropical, avec deux saisons, une saison sèche et une saison des pluies. Les quatre saisons appartiennent au climat équatorial du sud.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le barrage de Buyo, sur le Sassandra, est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : la nature donne le fleuve, c'est un potentiel ; l'homme construit le barrage pour l'exploiter. Dire que le barrage est un fondement naturel est l'erreur du piège : on confond le potentiel et sa mise en valeur.",
+                "answers": [
+                  {
+                    "content": "Un fondement naturel, comme le fleuve",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un gisement du sous-sol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un aménagement construit par l'homme sur un fleuve",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un climat de type tropical",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser les fondements humains",
+          "remember": "Les **fondements humains** sont les hommes et les femmes qui produisent et qui achètent. Une **population** nombreuse et jeune fournit une **main-d'œuvre** (les personnes en âge de travailler) et un **marché intérieur** (des clients pour les produits). En Côte d'Ivoire, la population est passée de 6,7 millions d'habitants en 1975 à 29,4 millions en 2021 (Source : INS, recensements). L'**immigration** a aussi joué un rôle : des travailleurs venus des pays voisins (Burkina Faso, Mali, Guinée…) ont travaillé dans les plantations, sur les chantiers et dans le commerce. Une population n'est un atout que si elle est **formée** et **employée**.",
+          "method": [
+            "Lire les données : nature du document, dates et unité.",
+            "Calculer l'évolution entre deux dates, par une différence ou par un rapport.",
+            "Interpréter le résultat : dire ce qu'il signifie pour la main-d'œuvre et pour le marché intérieur.",
+            "Nuancer en rappelant que la population doit être formée et employée."
+          ],
+          "example": {
+            "statement": "Les recensements de l'INS comptent 15,4 millions d'habitants en 1998 et 29,4 millions en 2021. Montrer que la population est un fondement humain.",
+            "steps": [
+              "Lire : deux recensements de l'INS, exprimés en millions d'habitants, en 1998 et en 2021.",
+              "Calculer : 29,4 − 15,4 = 14,0 ; la population a gagné 14 millions d'habitants et a presque doublé en 23 ans.",
+              "Interpréter : plus d'habitants, c'est plus de travailleurs possibles et plus de clients pour les produits.",
+              "Nuancer : cela n'aide le développement que si ces habitants sont formés et trouvent un emploi."
+            ]
+          },
+          "pitfall": "Ne crois pas que plus d'habitants veut toujours dire plus de développement. Contre-exemple (chiffres d'exemple) : si la production augmente de 2 % par an alors que la population augmente de 3 % par an, chaque habitant dispose en moyenne de moins de richesses. Une population est un fondement humain quand elle est formée, en bonne santé et employée.",
+          "figure": "population-ci",
+          "practice": {
+            "statement": "Tu t'entraînes à analyser un fondement humain avec la méthode : lire, calculer, interpréter, nuancer.",
+            "questions": [
+              {
+                "content": "Les personnes en âge de travailler forment la ___, alors que l'ensemble des clients d'un pays forme le ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Interpréter : une population fournit deux choses. Les personnes en âge de travailler forment la main-d'œuvre. L'ensemble des clients du pays forme le marché intérieur. Le recensement est le comptage officiel de la population : il n'est ni l'un ni l'autre.",
+                "answers": [
+                  {
+                    "content": "main-d'œuvre",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "marché intérieur",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "recensement",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "marché intérieur",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "main-d'œuvre",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "recensement",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Une population travaille, et elle achète : à quoi correspond chaque rôle ?"
+              },
+              {
+                "content": "Entre 1998 et 2021, la population ivoirienne a diminué (Source : INS).",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer : 29,4 − 15,4 = 14,0, soit 14 millions d'habitants de plus. Le résultat est positif : la population a augmenté, elle n'a pas diminué.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les recensements de l'INS comptent 10,8 millions d'habitants en 1988 et 15,4 millions en 1998. De combien de millions la population a-t-elle augmenté ?",
+                "question_type": "numeric",
+                "unit": "millions",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : deux recensements en millions d'habitants. Étape 2 — Calculer : 15,4 − 10,8 = 4,6. La population a gagné 4,6 millions d'habitants entre 1988 et 1998.",
+                "answers": [
+                  {
+                    "content": "4,6",
+                    "correct": true
+                  }
+                ],
+                "hint": "Soustrais la valeur la plus ancienne de la valeur la plus récente."
+              },
+              {
+                "content": "Que désigne l'immigration ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Interpréter : l'immigration est l'arrivée de personnes venues d'ailleurs. Ces personnes, venues des pays voisins, ont fourni de la main-d'œuvre aux plantations. Le départ d'habitants est l'émigration, et le comptage est le recensement.",
+                "answers": [
+                  {
+                    "content": "L'arrivée de personnes venues d'autres pays pour s'installer ou travailler",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le départ d'habitants vers d'autres pays",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le comptage officiel de la population",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nombre de clients d'un marché",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Lire et interpréter l'évolution de la population",
+            "statement": "Dans cet exercice, tu calcules l'évolution de la population ivoirienne et tu en déduis ce qu'elle apporte au développement, avec la méthode de la fiche. Source des données : INS, recensements de 1975 (6,7 millions d'habitants), 1998 (15,4 millions) et 2021 (29,4 millions).",
+            "exercise_type": "fixation",
+            "figure": "population-ci",
+            "questions": [
+              {
+                "content": "Entre 1998 (15,4 millions d'habitants) et 2021 (29,4 millions), de combien de millions d'habitants la population ivoirienne a-t-elle augmenté ?",
+                "question_type": "numeric",
+                "unit": "millions",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : les recensements de l'INS donnent la population en millions d'habitants. Étape 2 — Calculer : 29,4 − 15,4 = 14,0. Étape 3 — Interpréter : 14 millions d'habitants de plus, c'est beaucoup de travailleurs et de clients possibles.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "En 1975, la population est de 6,7 millions d'habitants ; en 2021, de 29,4 millions (INS). Elle a été multipliée par environ :",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer par un rapport : 29,4 ÷ 6,7 ≈ 4,4. Étape 3 — Interpréter : la population a plus que quadruplé. La multiplier par 2 ou par 3 sous-estime l'évolution, et par 8 la surestime.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": false
+                  },
+                  {
+                    "content": "3",
+                    "correct": false
+                  },
+                  {
+                    "content": "4,4",
+                    "correct": true
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels rôles une population nombreuse peut-elle jouer dans le développement ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Interpréter : une population fournit des travailleurs (main-d'œuvre) et des clients (marché intérieur). Étape 4 — Nuancer : elle ne remplace pas la formation et ne garantit pas la richesse si elle n'est pas employée.",
+                "answers": [
+                  {
+                    "content": "Remplacer le besoin de formation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Fournir une main-d'œuvre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Garantir automatiquement la richesse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Constituer un marché intérieur",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire chaque mot. Étape 3 — Interpréter : la main-d'œuvre travaille, le marché intérieur achète, l'immigration est une arrivée de personnes, et le recensement est le comptage officiel fait par l'INS.",
+                "answers": [
+                  {
+                    "content": "Main-d'œuvre",
+                    "match": "Personnes en âge de travailler"
+                  },
+                  {
+                    "content": "Marché intérieur",
+                    "match": "Ensemble des clients à l'intérieur du pays"
+                  },
+                  {
+                    "content": "Immigration",
+                    "match": "Arrivée de personnes venues d'autres pays"
+                  },
+                  {
+                    "content": "Recensement",
+                    "match": "Comptage officiel de la population"
+                  }
+                ]
+              },
+              {
+                "content": "Des travailleurs venus des pays voisins ont contribué à la main-d'œuvre des plantations ivoiriennes.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Interpréter : l'immigration venue du Burkina Faso, du Mali ou de la Guinée a fourni de la main-d'œuvre aux plantations, aux chantiers et au commerce.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une population augmente de 3 % par an alors que la production augmente de 2 % par an. Que se passe-t-il en moyenne pour chaque habitant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer : la production progresse moins vite que la population, donc la part de chacun diminue. Étape 4 — Nuancer : plus d'habitants n'est un atout que si la production, la formation et l'emploi suivent. Croire que le nombre suffit est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Il dispose de moins de richesses",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il devient automatiquement plus riche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien ne change",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'a plus besoin d'emploi",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer les fondements politiques et institutionnels",
+          "remember": "Les **fondements politiques et institutionnels** sont les choix de l'État et les règles qui encouragent l'économie. Après l'indépendance (1960), la Côte d'Ivoire a choisi le **libéralisme économique** : l'initiative privée et les investisseurs étrangers sont admis, et l'État les accompagne. L'État a aussi pratiqué la **planification** : il fixe des objectifs sur plusieurs années dans des plans (perspectives décennales, plans quinquennaux). La **stabilité** politique et sociale des premières décennies de l'indépendance et un **code des investissements** qui protège les investisseurs rassurent ceux qui apportent de l'argent. Enfin l'**intégration régionale** élargit le marché : l'**UEMOA** (créée en 1994, huit États depuis 1997, monnaie commune le franc CFA) et la **CEDEAO** (créée en 1975).",
+          "method": [
+            "Identifier la décision ou la règle étudiée et celui qui la prend : l'État ou une organisation régionale.",
+            "Nommer le type de fondement : choix économique (libéralisme, planification), stabilité ou intégration régionale.",
+            "Expliquer l'effet attendu sur les entreprises, les investisseurs ou les échanges.",
+            "Donner un exemple précis, daté quand c'est possible."
+          ],
+          "example": {
+            "statement": "Expliquer en quoi l'appartenance à l'UEMOA est un fondement politique et institutionnel du développement ivoirien.",
+            "steps": [
+              "Identifier : l'UEMOA est une organisation régionale, créée en 1994 par sept États ouest-africains dont la Côte d'Ivoire ; elle compte huit États depuis 1997.",
+              "Nommer : c'est un fondement d'intégration régionale, avec une monnaie commune, le franc CFA, et des règles communes.",
+              "Expliquer : un produit ivoirien circule plus facilement vers les autres États membres, et l'entreprise vend à un marché plus grand.",
+              "Donner un exemple : un exportateur d'Abidjan vend au Burkina Faso, au Mali ou au Sénégal avec des règles communes et la même monnaie."
+            ]
+          },
+          "pitfall": "Ne confonds pas l'UEMOA et la CEDEAO. L'UEMOA (1994) compte huit États qui partagent le franc CFA ; la CEDEAO (1975) est une communauté plus large, qui compte des pays dont la monnaie est différente, comme le Nigeria et le Ghana. Ne confonds pas non plus le libéralisme (l'initiative privée) et la planification (les objectifs fixés par l'État) : la Côte d'Ivoire a combiné les deux.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer un fondement politique et institutionnel avec la méthode : identifier, nommer, expliquer, donner un exemple.",
+            "questions": [
+              {
+                "content": "Le choix de laisser agir l'initiative privée s'appelle le ___, alors que la fixation d'objectifs sur plusieurs années par l'État s'appelle la ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Nommer : l'initiative privée relève du libéralisme économique. Les objectifs fixés par l'État sur plusieurs années relèvent de la planification. L'intégration régionale est autre chose : c'est le rapprochement de plusieurs États.",
+                "answers": [
+                  {
+                    "content": "libéralisme économique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "planification",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "intégration régionale",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "planification",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "libéralisme économique",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "immigration",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Dans un cas, ce sont les entreprises qui décident ; dans l'autre, c'est l'État qui fixe les objectifs."
+              },
+              {
+                "content": "L'UEMOA a été créée en 1994.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Donner un exemple daté : l'UEMOA date de 1994 et la CEDEAO de 1975. On ne les confond pas.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "La CEDEAO est la plus ancienne des deux : elle date de 1975."
+              },
+              {
+                "content": "Quelle est la monnaie commune des États de l'UEMOA ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Nommer : l'intégration régionale de l'UEMOA repose sur une monnaie commune, le franc CFA. L'euro est la monnaie de la zone euro, le naira celle du Nigeria et le cedi celle du Ghana.",
+                "answers": [
+                  {
+                    "content": "Le franc CFA",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'euro",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le naira",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cedi",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces trois repères dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 4 — Donner un exemple daté : l'indépendance date de 1960, la CEDEAO de 1975 et l'UEMOA de 1994.",
+                "answers": [
+                  {
+                    "content": "Indépendance de la Côte d'Ivoire (1960)"
+                  },
+                  {
+                    "content": "Création de la CEDEAO (1975)"
+                  },
+                  {
+                    "content": "Création de l'UEMOA (1994)"
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Reconnaître et expliquer les choix politiques et institutionnels",
+            "statement": "Dans cet exercice, tu reconnais les choix de l'État et de l'intégration régionale et tu expliques leur effet sur l'économie, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque notion à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier chaque notion. Étape 2 — Nommer son type : le libéralisme laisse agir les entreprises, la planification fixe des objectifs, l'UEMOA et la CEDEAO sont deux organisations régionales. Étape 4 — Les dates (1994 et 1975) les distinguent.",
+                "answers": [
+                  {
+                    "content": "Libéralisme économique",
+                    "match": "L'initiative privée et les investisseurs sont encouragés"
+                  },
+                  {
+                    "content": "Planification",
+                    "match": "L'État fixe des objectifs économiques sur plusieurs années"
+                  },
+                  {
+                    "content": "UEMOA",
+                    "match": "Union de huit États qui partagent le franc CFA"
+                  },
+                  {
+                    "content": "CEDEAO",
+                    "match": "Communauté économique de l'Afrique de l'Ouest créée en 1975"
+                  }
+                ]
+              },
+              {
+                "content": "L'organisation régionale créée en 1975 pour rapprocher les États de l'Afrique de l'Ouest est la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : une organisation régionale ouest-africaine. Étape 4 — Donner une date : 1975 correspond à la CEDEAO ; l'UEMOA date de 1994.",
+                "answers": [
+                  {
+                    "content": "CEDEAO",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle décision traduit le libéralisme économique après 1960 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Nommer : accueillir l'initiative privée et les investisseurs est le libéralisme économique. Étape 3 — Expliquer : cela attire des capitaux et des entreprises. Les trois autres propositions décrivent le contraire : un État qui contrôle tout ou ferme le pays.",
+                "answers": [
+                  {
+                    "content": "Accueillir les investisseurs privés, ivoiriens et étrangers",
+                    "correct": true
+                  },
+                  {
+                    "content": "Confier toutes les entreprises à l'État",
+                    "correct": false
+                  },
+                  {
+                    "content": "Fermer les frontières à tous les produits étrangers",
+                    "correct": false
+                  },
+                  {
+                    "content": "Interdire les entreprises privées",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La planification consiste à laisser chaque entreprise agir sans aucun objectif commun.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Nommer : la planification est l'inverse. L'État fixe des objectifs sur plusieurs années dans des plans, comme les perspectives décennales et les plans quinquennaux. Laisser chaque entreprise agir seule relève du libéralisme.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels éléments rassurent un investisseur étranger ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Expliquer : un investisseur apporte son argent s'il est protégé par la loi et si le pays est stable. Des règles instables et un petit marché l'éloignent.",
+                "answers": [
+                  {
+                    "content": "Des règles qui changent chaque mois",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un code des investissements qui protège ses droits",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un marché limité à une seule ville",
+                    "correct": false
+                  },
+                  {
+                    "content": "La stabilité politique et sociale",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel pays appartient à la CEDEAO mais pas à l'UEMOA ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le Sénégal, le Togo et le Bénin font partie de l'UEMOA. Étape 4 — Donner un exemple : le Nigeria appartient à la CEDEAO mais n'utilise pas le franc CFA. C'est la confusion du piège entre les deux organisations.",
+                "answers": [
+                  {
+                    "content": "Le Sénégal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Nigeria",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Togo",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Bénin",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Comprendre les fondements financiers",
+          "remember": "Les **fondements financiers** sont les moyens d'argent qui permettent d'**investir** (construire des usines, des routes, des écoles). Ils viennent de trois sources. L'**épargne intérieure** : la part des revenus que les ménages, les entreprises et l'État mettent de côté, souvent déposée dans les banques. Les **capitaux étrangers** : les investissements directs étrangers, quand une entreprise étrangère crée ou achète une activité dans le pays. L'**aide extérieure** : des dons et des prêts accordés par des États ou des institutions comme la Banque mondiale ou la Banque africaine de développement (BAD), dont le siège est à Abidjan. La BRVM, bourse régionale installée à Abidjan, aide aussi à rassembler l'épargne.",
+          "method": [
+            "Lire le document et repérer qui apporte l'argent et qui le reçoit.",
+            "Classer l'apport : épargne intérieure, capitaux étrangers ou aide extérieure.",
+            "Préciser à quoi l'argent sert, c'est-à-dire quel investissement il finance.",
+            "Conclure sur l'effet attendu : plus de production, d'emplois et de revenus."
+          ],
+          "example": {
+            "statement": "Une entreprise étrangère construit près d'Abidjan une usine de transformation du cacao avec son propre argent. Analyser cet apport.",
+            "steps": [
+              "Lire : une entreprise étrangère apporte son argent, et le pays reçoit une usine.",
+              "Classer : c'est un capital étranger (un investissement direct étranger), pas une aide ni de l'épargne ivoirienne.",
+              "Préciser : l'argent finance un investissement, des machines et des bâtiments pour transformer le cacao.",
+              "Conclure : l'usine augmente la production, crée des emplois et distribue des revenus."
+            ]
+          },
+          "pitfall": "Ne confonds pas un investissement étranger et une aide. Une entreprise qui investit attend un profit : elle crée une activité et réalise des bénéfices. Une aide est donnée ou prêtée par un État ou une institution pour soutenir le pays. L'épargne intérieure, elle, vient des habitants et des entreprises du pays lui-même. Demande-toi : qui apporte l'argent, et pourquoi ?",
+          "figure": "schema-financement",
+          "practice": {
+            "statement": "Tu t'entraînes à classer un apport d'argent avec la méthode : lire, classer, préciser, conclure.",
+            "questions": [
+              {
+                "content": "L'argent mis de côté par les habitants d'un pays s'appelle ___, alors que l'argent qu'une entreprise étrangère investit dans le pays s'appelle ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Classer : l'argent mis de côté par les habitants est l'épargne intérieure. L'argent qu'une entreprise étrangère apporte est un capital étranger. Un don est une aide extérieure, et un salaire est un revenu.",
+                "answers": [
+                  {
+                    "content": "l'épargne intérieure",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'aide extérieure",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un recensement",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un capital étranger",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "un don",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "un salaire",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Demande-toi qui apporte l'argent : les habitants du pays, ou une entreprise venue d'ailleurs ?"
+              },
+              {
+                "content": "Un don d'une institution internationale à la Côte d'Ivoire est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Classer : un don accordé par une institution internationale est une aide extérieure. Ce n'est pas de l'épargne ivoirienne ni l'argent d'une entreprise qui attend un profit.",
+                "answers": [
+                  {
+                    "content": "De l'épargne intérieure",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un investissement direct étranger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une aide extérieure",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un impôt ivoirien",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La BRVM est une bourse régionale installée à Abidjan.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : la BRVM (Bourse régionale des valeurs mobilières) est installée à Abidjan. Étape 3 — Préciser : elle aide à rassembler l'épargne pour financer des investissements.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Son sigle commence par B comme bourse, et elle est installée dans la capitale économique."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Classer les sources de financement",
+            "statement": "Dans cet exercice, tu classes des apports d'argent et tu expliques ce qu'ils financent, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "schema-financement",
+            "questions": [
+              {
+                "content": "Une banque ivoirienne prête à une entreprise de Bouaké l'argent déposé par des épargnants. De quelle source financière s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : l'argent vient de déposants du pays. Étape 2 — Classer : c'est de l'épargne intérieure. Étape 3 — Préciser : il finance l'investissement de l'entreprise de Bouaké. Ce n'est ni un capital étranger ni une aide, car personne n'est venu de l'extérieur.",
+                "answers": [
+                  {
+                    "content": "De l'épargne intérieure",
+                    "correct": true
+                  },
+                  {
+                    "content": "De capitaux étrangers",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'une aide extérieure",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'une ressource du sous-sol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque source de financement à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire chaque terme. Étape 2 — Classer : l'épargne vient de l'intérieur, l'investissement direct vient d'une entreprise étrangère, l'aide vient d'États ou d'institutions, et la BRVM est le lieu où l'on rassemble l'épargne.",
+                "answers": [
+                  {
+                    "content": "Épargne intérieure",
+                    "match": "Revenus mis de côté par les habitants, les entreprises ou l'État du pays"
+                  },
+                  {
+                    "content": "Investissement direct étranger",
+                    "match": "Argent d'une entreprise étrangère qui crée ou achète une activité dans le pays"
+                  },
+                  {
+                    "content": "Aide extérieure",
+                    "match": "Dons et prêts d'États ou d'institutions internationales"
+                  },
+                  {
+                    "content": "BRVM",
+                    "match": "Bourse régionale installée à Abidjan"
+                  }
+                ]
+              },
+              {
+                "content": "La Banque africaine de développement a son siège à ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : la BAD est une institution financière africaine. Étape 2 — Classer : elle accorde de l'aide, c'est-à-dire des prêts et des dons. Son siège est à Abidjan.",
+                "answers": [
+                  {
+                    "content": "Abidjan",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces apports, lesquels viennent de l'étranger ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire : on cherche qui apporte l'argent. Étape 2 — Classer : l'entreprise étrangère apporte un capital étranger, l'institution internationale une aide extérieure. L'épargne en banque ivoirienne et le salaire mis de côté sont de l'épargne intérieure.",
+                "answers": [
+                  {
+                    "content": "L'épargne déposée dans une banque ivoirienne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un investissement direct d'une entreprise étrangère",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le salaire mis de côté par une enseignante ivoirienne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un don d'une institution internationale",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une entreprise qui réalise un investissement direct étranger n'attend aucun profit.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Classer : un investissement direct étranger vise un profit. C'est la différence avec l'aide, qui est donnée ou prêtée pour soutenir le pays. Étape 4 — Conclure : l'entreprise crée des emplois et des revenus en cherchant son bénéfice.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre la chaîne qui va de l'argent disponible aux revenus.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire : on part de l'argent disponible. Étape 2 — Classer ses sources. Étape 3 — Préciser : il finance un investissement. Étape 4 — Conclure : la production augmente, puis les emplois et les revenus. Le schéma financier va toujours de l'argent vers les revenus.",
+                "answers": [
+                  {
+                    "content": "Des capitaux sont réunis (épargne, capitaux étrangers, aide)"
+                  },
+                  {
+                    "content": "Ils financent un investissement (usine, route)"
+                  },
+                  {
+                    "content": "La production augmente"
+                  },
+                  {
+                    "content": "Des emplois et des revenus apparaissent"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser un document statistique",
+          "remember": "Au bac, un **document statistique** (tableau ou courbe) se lit avec méthode. Il a un **titre**, une **source** (qui a produit les chiffres), des **dates** et une **unité** (millions d'habitants, pourcentage, tonnes…). Une **évolution** se mesure par une différence (combien de plus ou de moins) ou par un rapport (combien de fois plus). Un **taux de variation** en pourcentage se calcule ainsi : (valeur finale − valeur de départ) ÷ valeur de départ × 100. Document d'étude : la population ivoirienne aux recensements de l'INS, en millions d'habitants : 6,7 en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014 et 29,4 en 2021.",
+          "method": [
+            "Présenter le document : nature, titre, source, dates et unité.",
+            "Relever les valeurs utiles, la plus ancienne et la plus récente.",
+            "Calculer l'évolution par une différence, un rapport ou un pourcentage.",
+            "Expliquer le résultat avec le cours, en le reliant à un fondement du développement."
+          ],
+          "example": {
+            "statement": "Analyser les recensements de l'INS : 15,4 millions d'habitants en 1998 et 29,4 millions en 2021.",
+            "steps": [
+              "Présenter : tableau de l'INS donnant deux recensements, 1998 et 2021, en millions d'habitants.",
+              "Relever : 15,4 millions en 1998 (valeur de départ) et 29,4 millions en 2021 (valeur finale).",
+              "Calculer : 29,4 − 15,4 = 14,0 ; puis 14,0 ÷ 15,4 × 100 ≈ 91 % ; la population a augmenté d'environ 91 %.",
+              "Expliquer : une population presque doublée fournit plus de main-d'œuvre et un marché intérieur plus large, c'est un fondement humain."
+            ]
+          },
+          "pitfall": "N'oublie ni l'unité ni la période. Écrire « la population a augmenté de 14 » est incomplet ; il faut écrire « de 14 millions d'habitants entre 1998 et 2021 ». Autre erreur : diviser par la valeur finale. Ici, 14 ÷ 29,4 donne environ 48 %, ce qui est faux : le pourcentage se calcule toujours par rapport à la valeur de départ.",
+          "figure": "population-ci",
+          "practice": {
+            "statement": "Tu t'entraînes à analyser un document statistique avec la méthode : présenter, relever, calculer, expliquer.",
+            "questions": [
+              {
+                "content": "Dans un document statistique, l'organisme qui a produit les chiffres est la ___, alors que la mention « millions d'habitants » est l'___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Présenter : on indique toujours la source, qui a produit les chiffres, puis l'unité, qui dit ce qu'on mesure. La date dit quand, et le titre dit de quoi parle le document.",
+                "answers": [
+                  {
+                    "content": "source",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "date",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "valeur de départ",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "unité",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "titre",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "période",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Qui a produit les chiffres ? Et que mesure-t-on avec « millions d'habitants » ?"
+              },
+              {
+                "content": "On calcule l'évolution entre 1998 (15,4) et 2021 (29,4). Quelle est la valeur de départ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever : la valeur de départ est la plus ancienne, ici 15,4 en 1998. La valeur finale est 29,4. Le nombre 14,0 est la différence, et 2021 est une date.",
+                "answers": [
+                  {
+                    "content": "15,4",
+                    "correct": true
+                  },
+                  {
+                    "content": "29,4",
+                    "correct": false
+                  },
+                  {
+                    "content": "14,0",
+                    "correct": false
+                  },
+                  {
+                    "content": "2021",
+                    "correct": false
+                  }
+                ],
+                "hint": "La valeur de départ est celle de la date la plus ancienne."
+              },
+              {
+                "content": "Les recensements de l'INS comptent 10,8 millions d'habitants en 1988 et 15,4 millions en 1998. Quel est le taux de variation, arrondi à l'unité, en pourcentage ?",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Calculer : 15,4 − 10,8 = 4,6 ; puis 4,6 ÷ 10,8 × 100 ≈ 42,6, soit 43 % après arrondi. On divise par la valeur de départ, 10,8.",
+                "answers": [
+                  {
+                    "content": "43",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise la différence par la valeur de départ, puis multiplie par 100."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Lire et calculer sur un document statistique",
+            "statement": "Dans cet exercice, tu analyses la population ivoirienne avec la méthode de la fiche. Source des données : INS, recensements de 1975 (6,7 millions d'habitants), 1988 (10,8), 1998 (15,4), 2014 (22,7) et 2021 (29,4).",
+            "exercise_type": "fixation",
+            "figure": "population-ci",
+            "questions": [
+              {
+                "content": "De 1975 (6,7 millions d'habitants) à 1988 (10,8 millions), de combien de millions la population a-t-elle augmenté ?",
+                "question_type": "numeric",
+                "unit": "millions",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Relever : 6,7 en 1975 et 10,8 en 1988. Étape 3 — Calculer : 10,8 − 6,7 = 4,1. La population a gagné 4,1 millions d'habitants.",
+                "answers": [
+                  {
+                    "content": "4,1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "De 2014 (22,7 millions d'habitants) à 2021 (29,4 millions), quel est le taux d'augmentation arrondi à l'unité, en pourcentage ?",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Relever : 22,7 est la valeur de départ, 29,4 la valeur finale. Étape 3 — Calculer : 29,4 − 22,7 = 6,7 ; puis 6,7 ÷ 22,7 × 100 ≈ 29,5, soit 30 % après arrondi. Diviser par 29,4 donnerait environ 23 %, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la première étape pour analyser un document statistique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter : avant tout calcul, on dit ce qu'est le document, qui l'a produit, à quelles dates et dans quelle unité. Sans cela, les chiffres n'ont pas de sens.",
+                "answers": [
+                  {
+                    "content": "Le présenter : nature, titre, source, dates et unité",
+                    "correct": true
+                  },
+                  {
+                    "content": "Calculer directement un pourcentage",
+                    "correct": false
+                  },
+                  {
+                    "content": "Donner son opinion",
+                    "correct": false
+                  },
+                  {
+                    "content": "Recopier toutes les valeurs",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'analyse d'un document statistique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Présenter ; Étape 2 — Relever les valeurs ; Étape 3 — Calculer ; Étape 4 — Expliquer avec le cours. Chaque étape prépare la suivante.",
+                "answers": [
+                  {
+                    "content": "Présenter le document"
+                  },
+                  {
+                    "content": "Relever les valeurs utiles"
+                  },
+                  {
+                    "content": "Calculer l'évolution"
+                  },
+                  {
+                    "content": "Expliquer avec le cours"
+                  }
+                ]
+              },
+              {
+                "content": "Pour calculer un taux de variation, on divise la différence par la valeur finale.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : on divise par la valeur de départ. Exemple : 14,0 ÷ 15,4 ≈ 91 %, alors que 14,0 ÷ 29,4 ≈ 48 % est une erreur.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un chiffre ne se comprend que si l'on connaît sa source, sa date et son ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Présenter : l'unité dit ce que l'on mesure. Écrire « 14 » sans unité est incomplet, alors que « 14 millions d'habitants » a un sens.",
+                "answers": [
+                  {
+                    "content": "unité",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Lire la carte des fondements naturels",
+          "statement": "Document : carte de la Côte d'Ivoire montrant la forêt dense au sud, la savane au nord, la bande côtière, les montagnes de l'ouest, les ports d'Abidjan et de San Pedro, la ville de Man et les barrages de Kossou, Taabo, Buyo, Soubré et Ayamé. Tu lis la carte et tu réponds avec la méthode des fondements naturels.",
+          "exercise_type": "fixation",
+          "figure": "carte-ci-fondements-naturels",
+          "questions": [
+            {
+              "content": "Relie chaque zone naturelle de la Côte d'Ivoire à ce qu'elle offre.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Lire chaque zone et la situer. Étape 2 — Identifier sa composante : climat et sols de forêt, climat plus sec du nord, eaux de la côte, relief de l'ouest. Étape 3 — Relier à l'activité : plantations dans la forêt, coton et élevage dans la savane, ports et pêche sur la côte, reliefs autour de Man.",
+              "answers": [
+                {
+                  "content": "Forêt dense du sud",
+                  "match": "Cultures de plantation (cacao, café, hévéa)"
+                },
+                {
+                  "content": "Savane du nord",
+                  "match": "Coton et élevage"
+                },
+                {
+                  "content": "Bande côtière",
+                  "match": "Lagunes, ports et accès à la mer"
+                },
+                {
+                  "content": "Montagnes de l'ouest",
+                  "match": "Reliefs plus élevés autour de Man"
+                }
+              ]
+            },
+            {
+              "content": "Sur quel fleuve se trouvent les barrages de Kossou et de Taabo ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : Kossou et Taabo sont deux barrages situés dans le centre du pays. Étape 2 — Identifier : ils sont construits sur le même fleuve, le Bandama. Le Sassandra porte Buyo et Soubré.",
+              "answers": [
+                {
+                  "content": "Le Bandama",
+                  "correct": true
+                },
+                {
+                  "content": "Le Sassandra",
+                  "correct": false
+                },
+                {
+                  "content": "Le Comoé",
+                  "correct": false
+                },
+                {
+                  "content": "Le Cavally",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels barrages sont construits sur le Sassandra ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Lire : on cherche les barrages du fleuve Sassandra. Étape 2 — Identifier : Buyo et Soubré sont sur le Sassandra. Kossou et Taabo sont sur le Bandama, et Ayamé est sur la Bia.",
+              "answers": [
+                {
+                  "content": "Kossou",
+                  "correct": false
+                },
+                {
+                  "content": "Buyo",
+                  "correct": true
+                },
+                {
+                  "content": "Taabo",
+                  "correct": false
+                },
+                {
+                  "content": "Soubré",
+                  "correct": true
+                },
+                {
+                  "content": "Ayamé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le barrage d'Ayamé est construit sur le fleuve ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Lire : Ayamé est un barrage de l'est du pays, près de la frontière avec le Ghana. Étape 2 — Identifier : il est construit sur la Bia.",
+              "answers": [
+                {
+                  "content": "Bia",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les ports d'Abidjan et de San Pedro sont situés sur la côte du golfe de Guinée.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : Abidjan et San Pedro sont au sud, au bord de la mer. Étape 3 — Relier : leur situation permet les échanges par bateau, donc l'exportation du cacao et l'importation de marchandises. Un port est cependant une construction de l'homme, pas un fondement naturel.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases pourquoi la forêt du sud et les fleuves sont des fondements naturels du développement, et pourquoi ils ne suffisent pas.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Cite un fondement naturel exact (forêt, climat, fleuve)",
+                "Relie-le à une activité (plantation, électricité)",
+                "Explique qu'il faut des moyens pour l'exploiter",
+                "Phrases claires et vocabulaire du cours"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lire : la carte montre la forêt dense au sud et des fleuves comme le Bandama. Étape 2 — Identifier : la forêt relève du climat et des sols, les fleuves des eaux. Étape 3 — Relier : la forêt permet les plantations de cacao, de café et d'hévéa, et les fleuves permettent de produire de l'électricité avec des barrages. Étape 4 — Conclure : ce sont des potentiels ; il faut des planteurs, des routes, des ports et des barrages pour les exploiter. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "La forêt du sud est un fondement naturel parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Classer les quatre catégories de fondements",
+          "statement": "Document : schéma en arbre qui part des fondements du développement économique de la Côte d'Ivoire et se divise en quatre branches : naturels, humains, politiques et institutionnels, financiers, avec un exemple pour chacune. Tu classes des éléments avec les méthodes de la leçon.",
+          "exercise_type": "fixation",
+          "figure": "schema-fondements",
+          "questions": [
+            {
+              "content": "Relie chaque exemple à la catégorie de fondements à laquelle il appartient.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Lire l'exemple. Étape 2 — Identifier qui l'a donné : la nature pour les fleuves et le sous-sol, la population pour la main-d'œuvre, l'État pour le code des investissements, les apporteurs d'argent pour les capitaux. Étape 3 — Classer dans la catégorie correspondante.",
+              "answers": [
+                {
+                  "content": "Les fleuves et le sous-sol",
+                  "match": "Fondements naturels"
+                },
+                {
+                  "content": "Une main-d'œuvre jeune",
+                  "match": "Fondements humains"
+                },
+                {
+                  "content": "Le code des investissements",
+                  "match": "Fondements politiques et institutionnels"
+                },
+                {
+                  "content": "Les capitaux étrangers",
+                  "match": "Fondements financiers"
+                }
+              ]
+            },
+            {
+              "content": "Quels éléments sont des fondements politiques et institutionnels ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Identifier : un fondement politique et institutionnel est un choix ou une règle. Étape 2 — Nommer : libéralisme, UEMOA et stabilité en sont. L'épargne est un fondement financier et le climat un fondement naturel.",
+              "answers": [
+                {
+                  "content": "L'épargne des ménages",
+                  "correct": false
+                },
+                {
+                  "content": "Le libéralisme économique",
+                  "correct": true
+                },
+                {
+                  "content": "Le climat équatorial du sud",
+                  "correct": false
+                },
+                {
+                  "content": "L'appartenance à l'UEMOA",
+                  "correct": true
+                },
+                {
+                  "content": "La stabilité politique et sociale",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une entreprise étrangère construit une usine à San Pedro avec son propre argent. De quel fondement relève cet apport ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : une entreprise étrangère apporte son argent. Étape 2 — Classer : c'est un capital étranger, donc un fondement financier. L'usine finance un investissement, étape 3, mais la source de l'argent reste étrangère.",
+              "answers": [
+                {
+                  "content": "Fondement financier (capitaux étrangers)",
+                  "correct": true
+                },
+                {
+                  "content": "Fondement naturel",
+                  "correct": false
+                },
+                {
+                  "content": "Fondement humain",
+                  "correct": false
+                },
+                {
+                  "content": "Fondement politique seulement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un seul fondement suffit à lui seul à développer un pays.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier les fondements : naturels, humains, institutionnels, financiers. Étape 4 — Conclure : un pays se développe quand plusieurs fondements se combinent. Un fleuve ne produit pas d'électricité sans barrage (fondement financier), et un capital étranger n'est efficace sans règles qui rassurent (fondement institutionnel) ni travailleurs formés (fondement humain).",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le franc CFA est la monnaie commune des États de l'___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Identifier : une monnaie commune concerne une organisation régionale. Étape 2 — Nommer : c'est l'UEMOA, créée en 1994. La CEDEAO, créée en 1975, est plus large.",
+              "answers": [
+                {
+                  "content": "UEMOA",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Choisis un fondement de chaque catégorie (naturel, humain, politique et institutionnel, financier) et donne pour chacun un exemple ivoirien.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Un fondement naturel avec un exemple exact",
+                "Un fondement humain avec un exemple exact",
+                "Un fondement politique et institutionnel exact",
+                "Un fondement financier exact"
+              ],
+              "explanation": "Corrigé modèle : fondement naturel, les fleuves comme le Bandama ; fondement humain, la population (29,4 millions d'habitants en 2021, INS) qui fournit de la main-d'œuvre ; fondement politique et institutionnel, l'appartenance à l'UEMOA ou le libéralisme économique ; fondement financier, l'épargne déposée dans les banques ou les capitaux étrangers. Barème : 1 point par catégorie correcte.",
+              "answers": [],
+              "starter": "Fondement naturel : …"
+            }
+          ]
+        },
+        {
+          "title": "Commenter l'évolution de la population ivoirienne",
+          "statement": "Document : courbe de la population de la Côte d'Ivoire aux recensements de l'INS, en millions d'habitants : 6,7 en 1975, 10,8 en 1988, 15,4 en 1998, 22,7 en 2014 et 29,4 en 2021. Source : INS, recensements généraux de la population et de l'habitat. Les recensements sont espacés de 13, 10, 16 puis 7 ans, alors que les points de la courbe sont régulièrement espacés : on ne lit pas la pente comme une vitesse. Tu analyses le document avec la méthode de la fiche.",
+          "exercise_type": "evaluation",
+          "figure": "population-ci",
+          "questions": [
+            {
+              "content": "Quelle est la nature de ce document ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : le document est une courbe, sa source est l'INS, ses dates vont de 1975 à 2021 et son unité est le million d'habitants. Les autres propositions décrivent d'autres documents.",
+              "answers": [
+                {
+                  "content": "Une courbe de la population aux recensements de l'INS, en millions d'habitants",
+                  "correct": true
+                },
+                {
+                  "content": "Un tableau des exportations de cacao",
+                  "correct": false
+                },
+                {
+                  "content": "Une carte des climats",
+                  "correct": false
+                },
+                {
+                  "content": "Un graphique du budget de l'État",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'augmentation de la population, en millions d'habitants, entre 1975 (6,7 millions) et 2021 (29,4 millions) ?",
+              "question_type": "numeric",
+              "unit": "millions",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Relever : 6,7 en 1975 et 29,4 en 2021. Étape 3 — Calculer : 29,4 − 6,7 = 22,7. La population a gagné 22,7 millions d'habitants en 46 ans.",
+              "answers": [
+                {
+                  "content": "22,7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le taux d'augmentation de la population entre 1998 (15,4 millions) et 2021 (29,4 millions), arrondi à l'unité, en pourcentage ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Relever : valeur de départ 15,4, valeur finale 29,4. Étape 3 — Calculer : (29,4 − 15,4) ÷ 15,4 × 100 = 14,0 ÷ 15,4 × 100 ≈ 90,9, soit 91 % après arrondi. Diviser par 29,4 est l'erreur du piège.",
+              "answers": [
+                {
+                  "content": "91",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles conclusions ce document permet-il de tirer ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Relever : les valeurs montent de 6,7 à 29,4 sans jamais baisser. Étape 3 — Calculer : 29,4 ÷ 6,7 ≈ 4,4, donc plus de quatre fois la valeur de 1975. Les deux autres propositions sont contredites par les chiffres.",
+              "answers": [
+                {
+                  "content": "La population a diminué après 2014",
+                  "correct": false
+                },
+                {
+                  "content": "La population a augmenté à chaque recensement",
+                  "correct": true
+                },
+                {
+                  "content": "La population de 2021 est inférieure à celle de 1998",
+                  "correct": false
+                },
+                {
+                  "content": "La population a plus que quadruplé entre 1975 et 2021",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le comptage officiel de la population s'appelle un ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Présenter : le document donne les résultats de recensements, c'est-à-dire de comptages officiels de la population, réalisés par l'INS.",
+              "answers": [
+                {
+                  "content": "recensement",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Montre en un court paragraphe que cette évolution de la population est un fondement humain du développement, puis indique une limite.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Cite deux chiffres du document avec leur unité et leur date",
+                "Relie la hausse à la main-d'œuvre et au marché intérieur",
+                "Cite la limite : formation et emploi nécessaires",
+                "Rédaction claire et organisée"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Présenter : d'après l'INS, la population ivoirienne est passée de 6,7 millions d'habitants en 1975 à 29,4 millions en 2021. Étape 2 — Calculer : elle a plus que quadruplé. Étape 3 — Interpréter : cette hausse fournit de la main-d'œuvre et un marché intérieur plus large, c'est un fondement humain. Étape 4 — Nuancer : cela ne profite au développement que si la population est formée et trouve un emploi. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "D'après l'INS, la population ivoirienne est passée de…"
+            }
+          ]
+        },
+        {
+          "title": "Commenter un document sur le financement du développement",
+          "statement": "Texte écrit pour Lnclass : « Un pays se développe quand il investit. Pour construire ses routes, ses usines et ses écoles, il lui faut de l'argent. Une partie vient de l'épargne de ses habitants, déposée dans les banques. Une autre vient d'entreprises étrangères qui installent des activités sur son sol. Une dernière vient de dons et de prêts accordés par des États et des institutions internationales. Cet argent ne suffit pas : il faut aussi des travailleurs formés, des règles qui rassurent les investisseurs et un marché assez grand pour vendre la production. » Le schéma associé montre les trois sources d'argent qui financent l'investissement, puis la production et les revenus. Consigne : tu fais le commentaire de ce document.",
+          "exercise_type": "evaluation",
+          "figure": "schema-financement",
+          "questions": [
+            {
+              "content": "Quelle est l'idée principale du texte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : un texte écrit pour Lnclass sur le financement du développement. Étape 2 — Relever : il cite trois sources d'argent puis d'autres conditions (travailleurs formés, règles, marché). Étape 4 — Expliquer : l'idée principale est donc l'investissement et ses conditions. Les autres propositions disent le contraire du texte.",
+              "answers": [
+                {
+                  "content": "Le développement repose sur l'investissement, financé par plusieurs sources et accompagné d'autres conditions",
+                  "correct": true
+                },
+                {
+                  "content": "Le développement dépend seulement des ressources du sous-sol",
+                  "correct": false
+                },
+                {
+                  "content": "Le développement ne dépend que de l'aide extérieure",
+                  "correct": false
+                },
+                {
+                  "content": "Le développement ne demande aucun argent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois sources d'argent citées par le texte ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Relever : le texte cite l'épargne des habitants, les entreprises étrangères, puis les dons et prêts. Le tourisme et le pétrole ne sont pas cités comme sources de financement.",
+              "answers": [
+                {
+                  "content": "Les recettes du tourisme",
+                  "correct": false
+                },
+                {
+                  "content": "L'épargne des habitants",
+                  "correct": true
+                },
+                {
+                  "content": "La vente du pétrole",
+                  "correct": false
+                },
+                {
+                  "content": "Les entreprises étrangères",
+                  "correct": true
+                },
+                {
+                  "content": "Les dons et prêts d'États et d'institutions internationales",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque condition citée par le texte au fondement qu'elle illustre.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Relever chaque condition. Étape 4 — Expliquer avec le cours : la formation relève du fondement humain, les règles fixées par l'État du fondement institutionnel, un marché élargi par une union régionale de l'intégration régionale, l'épargne du fondement financier.",
+              "answers": [
+                {
+                  "content": "Des travailleurs formés",
+                  "match": "Fondement humain"
+                },
+                {
+                  "content": "Des règles qui rassurent les investisseurs",
+                  "match": "Règle fixée par l'État (fondement institutionnel)"
+                },
+                {
+                  "content": "Un marché élargi à plusieurs États par une union régionale",
+                  "match": "Intégration régionale (UEMOA, CEDEAO)"
+                },
+                {
+                  "content": "L'épargne déposée dans les banques",
+                  "match": "Fondement financier"
+                }
+              ]
+            },
+            {
+              "content": "D'après le texte, l'argent suffit à lui seul pour développer un pays.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Relever : le texte dit « Cet argent ne suffit pas » et ajoute trois autres conditions. Étape 4 — Expliquer : le développement combine plusieurs fondements, financiers mais aussi humains et institutionnels.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La bourse régionale installée à Abidjan, qui rassemble l'épargne, a pour sigle ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 4 — Expliquer avec le cours : la BRVM (Bourse régionale des valeurs mobilières) est installée à Abidjan et aide à rassembler l'épargne pour financer des investissements.",
+              "answers": [
+                {
+                  "content": "BRVM",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Cite une source d'argent du texte et donne un exemple concret de ce qu'elle peut financer en Côte d'Ivoire.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Une source citée dans le texte",
+                "Un exemple concret d'investissement",
+                "Un lien correct entre les deux"
+              ],
+              "explanation": "Corrigé modèle : Les capitaux étrangers peuvent financer une usine de transformation du cacao près d'Abidjan : l'entreprise étrangère apporte son argent, construit l'usine et crée des emplois. Barème : 1 point pour la source, 0,5 point pour l'exemple, 0,5 point pour le lien.",
+              "answers": [],
+              "starter": "Les capitaux étrangers peuvent financer…"
+            },
+            {
+              "content": "Commentaire de document : à l'aide du texte et de tes connaissances, montre que le développement économique de la Côte d'Ivoire repose sur des fondements naturels, humains, politiques et institutionnels, et financiers, mais qu'aucun ne suffit seul.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Présente le document : nature, idée générale (1 point)",
+                "Fondements naturels exacts avec un exemple (1,5 point)",
+                "Fondements humains avec un chiffre daté et sourcé (1,5 point)",
+                "Fondements politiques et institutionnels exacts avec UEMOA ou libéralisme (1,5 point)",
+                "Fondements financiers avec les trois sources (1,5 point)",
+                "Conclusion : les fondements se combinent (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Présenter : ce texte écrit pour Lnclass explique que le développement demande de l'argent investi, mais aussi d'autres conditions. Étape 2 — Relever et classer : les fondements naturels sont la forêt, les fleuves et le sous-sol de la Côte d'Ivoire ; les fondements humains sont une population qui est passée de 6,7 millions d'habitants en 1975 à 29,4 millions en 2021 (INS), source de main-d'œuvre et de marché intérieur ; les fondements politiques et institutionnels sont le libéralisme économique, la planification, le code des investissements et l'appartenance à l'UEMOA et à la CEDEAO ; les fondements financiers sont l'épargne intérieure, les capitaux étrangers et l'aide extérieure. Étape 4 — Conclure : un fleuve sans barrage, un habitant sans formation ou un capital sans règles sûres ne produit pas de développement. Les fondements se combinent. Barème : 1 + 1,5 + 1,5 + 1,5 + 1,5 + 1 = 8 points.",
+              "answers": [],
+              "starter": "Ce document explique que…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

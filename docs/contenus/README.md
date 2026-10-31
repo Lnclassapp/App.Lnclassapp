@@ -55,9 +55,6 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 | `svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères (SVT) | 3 | 9 | 53 |
 | `svt/le-fonctionnement-des-organes-sexuels-chez-l-homme.json` | Le fonctionnement des organes sexuels chez l'Homme (SVT) | 3 | 9 | 54 |
 | `svt/la-reproduction-chez-les-spermaphytes.json` | La reproduction chez les spermaphytes (SVT) | 3 | 9 | 54 |
-| `histoire-geographie/histoire-l-onu.json` | Histoire — L'ONU | 3 | 9 | 53 |
-| `histoire-geographie/geographie-les-fondements-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les fondements du développement économique de la Côte d'Ivoire | 3 | 9 | 52 |
-| `histoire-geographie/histoire-l-ere-de-la-bipolarisation-de-1947-a-1991.json` | Histoire — L'ère de la bipolarisation de 1947 à 1991 | 3 | 9 | 53 |
 | `philosophie/la-dissertation-philosophique.json` | La dissertation philosophique | 3 | 9 | 52 |
 | `philosophie/le-commentaire-de-texte-philosophique.json` | Le commentaire de texte philosophique | 3 | 9 | 54 |
 | `philosophie/la-connaissance-de-l-homme.json` | La connaissance de l'homme | 3 | 9 | 52 |
@@ -65,13 +62,14 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 | `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 3 | 9 | 52 |
 | `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 3 | 9 | 51 |
 
+> **Histoire-Géographie** : les 3 leçons v1 de Tle (L'ONU, les fondements du développement économique de la Côte d'Ivoire, la bipolarisation), copiées dans `tle-d/`, `tle-a1/`, `tle-a2/` et `tle-c/`, sont remplacées par les 10 leçons v3 communes à toutes les séries de `lecons-traitees/tle/histoire-geographie/` (section « Tle, Histoire-Géographie au format 3 » plus bas).
+
 Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français ont d'abord eu **un exercice par fiche de révision** (format court de démonstration, 2026-10-06). Elles ont été **complétées le 2026-10-10** à 3 exercices par fiche de révision (Comprendre, Appliquer, S'évaluer), soit 54 exercices et 311 questions ajoutés, avec le prompt [`prompt-redaction.md`](prompt-redaction.md). Chacune a ensuite été relue par un second rédacteur (calculs refaits, dates et faits vérifiés), et les défauts trouvés ont été corrigés, dans l'ancien contenu comme dans le nouveau : par exemple « 17 États africains entrent à l'ONU en 1960 » (16 États africains, 17 nouveaux membres avec Chypre), la citation de Socrate donnée comme texte exact, ou « le dernier mot du poème » qui était l'avant-dernier vers. Les 18 leçons de Tle D passent `script/contenus/valider.rb` et s'importent ensemble sans erreur sur une base jetable : 18 cours, 55 fiches, 165 exercices, 949 questions, 3 835 propositions. Aucun enseignant ne les a encore relues.
 
 **Attention à l'import.** Une fiche de cours déjà présente est ignorée, jamais mise à jour. Si l'ancienne version de ces 9 leçons est déjà dans une base (développement, Staging ou main), il faut **renommer puis archiver** l'ancienne fiche de cours avant d'importer la version complète.
 
 À faire valider par un enseignant, en plus de la liste ci-dessous :
 
-- **Histoire-Géographie** : « Les fondements du développement économique de la Côte d'Ivoire » traite aussi des limites du modèle (endettement, crise des années 1980, chômage), voulu par la fiche d'origine mais proche de la leçon 6.
 - **Philosophie** : « La connaissance de l'homme » présente Durkheim et le fait social, proches de la leçon 4 (La vie en société). Le titre de sa dernière fiche parle de « la découverte de l'inconscient ». Dans « La dissertation philosophique » et « Le commentaire de texte philosophique », la méthode (problème, enjeu, plan dialectique) doit être cohérente avec celle de l'enseignant.
 - **Français** : « Préparation à l'oral du Baccalauréat » décrit un déroulement de l'épreuve en quatre temps que personne n'a confronté au programme ivoirien ; sa méthode est proche du commentaire composé (leçon 4). Le niveau de certains sujets inventés de « La dissertation littéraire » est peut-être bas pour une Terminale.
 
@@ -335,6 +333,25 @@ Au total : 42 notions, 82 exercices, 463 questions et 22 figures. Chaque fichier
 - **Leçon 7** : la distinction entre taxe et redevance.
 - **Leçon 10** : le rattachement des peuples aux groupes Mandé et Gour, les termes « toukpê » et « sanankouya », et la carte, qui ne colorie que les districts où un groupe est majoritaire de façon sûre (Montagnes, Vallée du Bandama et Sassandra-Marahoué restent blancs). Aucune alliance précise entre deux peuples réels n'est affirmée.
 
+### Tle, Histoire-Géographie au format 3 (chantier `contenus-tle-histoire-geographie`) — `lecons-traitees/tle/`
+
+Les 10 premières leçons d'Histoire-Géographie de Tle de la progression DPFC 2026-2027, rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague T8 du programme `contenus-v3-tous-niveaux`). La progression d'HG est **commune à toutes les séries** : chaque leçon est un seul cours, **sans `series_name`**, rangé dans `tle/histoire-geographie/` (comme `1ere/` et `2nde/`), visible des classes de Tle A1, A2, C et D. Elles remplacent les 3 fichiers v1 du même intitulé, qui étaient copiés dans `tle-a1/`, `tle-a2/`, `tle-c/` et `tle-d/`. Chaque notion porte son « Je m'entraîne » (`practice`). Figures : sortes de l'ADR-0117, aucune sorte nouvelle (la France est dessinée sur le fond `world`).
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Entraînement | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `histoire-geographie/histoire-l-onu.json` | Histoire — L'ONU | 5 | 9 | 54 | 93 % | 16 | 3 | `diagram`, `map world`, `timeline` |
+| 2 | `histoire-geographie/geographie-les-fondements-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les fondements du développement économique de la Côte d'Ivoire | 5 | 9 | 55 | 91 % | 18 | 4 | `diagram`, `map cote_d_ivoire`, `stat_chart line` |
+| 3 | `histoire-geographie/histoire-l-ere-de-la-bipolarisation-de-1947-a-1991.json` | Histoire — L'ère de la bipolarisation de 1947 à 1991 | 5 | 9 | 56 | 93 % | 15 | 3 | `diagram`, `map world`, `timeline` |
+| 4 | `histoire-geographie/geographie-les-secteurs-d-activites-economiques-de-la-cote-d-ivoire.json` | Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire | 5 | 9 | 55 | 89 % | 15 | 4 | `diagram`, `map cote_d_ivoire`, `stat_chart pie` |
+| 5 | `histoire-geographie/histoire-de-la-fin-de-la-guerre-froide-vers-un-monde-multipolaire.json` | Histoire — De la fin de la guerre froide vers un monde multipolaire | 5 | 9 | 52 | 90 % | 15 | 3 | `diagram`, `map world`, `timeline` |
+| 6 | `histoire-geographie/geographie-les-problemes-de-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les problèmes de développement économique de la Côte d'Ivoire | 5 | 9 | 55 | 91 % | 25 | 4 | `diagram`, `map cote_d_ivoire`, `stat_chart line` |
+| 7 | `histoire-geographie/histoire-la-montee-des-nationalismes-en-afrique.json` | Histoire — La montée des nationalismes en Afrique | 5 | 9 | 54 | 94 % | 15 | 3 | `diagram`, `map africa`, `timeline` |
+| 8 | `histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance.json` | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 5 | 9 | 56 | 93 % | 15 | 4 | `diagram`, `map cote_d_ivoire`, `timeline` |
+| 9 | `histoire-geographie/geographie-les-fondements-de-l-economie-de-la-france.json` | Géographie — Les fondements de l'économie de la France | 5 | 9 | 58 | 91 % | 15 | 6 | `diagram`, `map world`, `stat_chart bars`, `timeline` |
+| 10 | `histoire-geographie/histoire-l-accession-de-l-algerie-a-l-independance.json` | Histoire — L'accession de l'Algérie à l'indépendance | 5 | 9 | 54 | 91 % | 15 | 5 | `diagram`, `map africa`, `timeline` |
+
+Au total : 50 notions, 90 exercices, 549 questions notées, 164 questions d'entraînement et 39 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement et `test/integration/contenus/tle_histoire_geographie_je_m_entraine_test.rb`. Chacun a été relu par un second rédacteur qui n'en était pas l'auteur ; défauts corrigés, dont : l'UEMOA créée à huit États (sept en 1994, huit depuis 1997), la CEI créée « le mois précédent » la démission de Gorbatchev (même mois), le GPRA situé au Caire en 1959 (Tunis), le charbon lorrain dit « national », des parts du PIB attribuées à une source non vérifiée (présentées désormais comme ordres de grandeur d'illustration). Points à faire valider par un enseignant : journal du chantier et du programme. Les leçons restent en brouillon jusqu'à cette relecture.
+
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 
 Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A1 et A2 n'ont pas de Physique-Chimie dans la progression.
@@ -349,9 +366,6 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 | `svt/les-reactions-emotionnelles-chez-l-homme.json` | Les réactions émotionnelles chez l'Homme (SVT) | 1 | 4 | 12 | 60 |
 | `svt/l-activite-cerebrale-chez-l-homme.json` | L'activité cérébrale chez l'Homme (SVT) | 2 | 5 | 15 | 84 |
 | `svt/l-origine-de-la-vie.json` | L'origine de la vie (SVT) | 3 | 4 | 12 | 72 |
-| `histoire-geographie/histoire-l-onu.json` | Histoire — L'ONU (Histoire-Géographie) | 1 | 3 | 9 | 53 |
-| `histoire-geographie/geographie-les-fondements-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les fondements du développement économique de la Côte d'Ivoire (Histoire-Géographie) | 2 | 3 | 9 | 52 |
-| `histoire-geographie/histoire-l-ere-de-la-bipolarisation-de-1947-a-1991.json` | Histoire — L'ère de la bipolarisation de 1947 à 1991 (Histoire-Géographie) | 3 | 3 | 9 | 53 |
 | `francais/oeuvre-narrative.json` | Œuvre narrative (Français) | 1 | 3 | 9 | 54 |
 | `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat (Français) | 2 | 3 | 9 | 51 |
 | `francais/la-dissertation-litteraire.json` | La dissertation littéraire (Français) | 3 | 3 | 9 | 52 |
@@ -369,9 +383,6 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 | `svt/les-reactions-emotionnelles-chez-l-homme.json` | Les réactions émotionnelles chez l'Homme (SVT) | 1 | 4 | 12 | 60 |
 | `svt/l-activite-cerebrale-chez-l-homme.json` | L'activité cérébrale chez l'Homme (SVT) | 2 | 5 | 15 | 84 |
 | `svt/l-origine-de-la-vie.json` | L'origine de la vie (SVT) | 3 | 4 | 12 | 72 |
-| `histoire-geographie/histoire-l-onu.json` | Histoire — L'ONU (Histoire-Géographie) | 1 | 3 | 9 | 53 |
-| `histoire-geographie/geographie-les-fondements-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les fondements du développement économique de la Côte d'Ivoire (Histoire-Géographie) | 2 | 3 | 9 | 52 |
-| `histoire-geographie/histoire-l-ere-de-la-bipolarisation-de-1947-a-1991.json` | Histoire — L'ère de la bipolarisation de 1947 à 1991 (Histoire-Géographie) | 3 | 3 | 9 | 53 |
 | `francais/oeuvre-narrative.json` | Œuvre narrative (Français) | 1 | 3 | 9 | 54 |
 | `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat (Français) | 2 | 3 | 9 | 51 |
 | `francais/la-dissertation-litteraire.json` | La dissertation littéraire (Français) | 3 | 3 | 9 | 52 |
@@ -392,9 +403,6 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 | `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme (SVT) | 1 | 4 | 12 | 72 |
 | `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme (SVT) | 2 | 4 | 12 | 71 |
 | `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule (SVT) | 3 | 4 | 12 | 68 |
-| `histoire-geographie/histoire-l-onu.json` | Histoire — L'ONU (Histoire-Géographie) | 1 | 3 | 9 | 53 |
-| `histoire-geographie/geographie-les-fondements-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les fondements du développement économique de la Côte d'Ivoire (Histoire-Géographie) | 2 | 3 | 9 | 52 |
-| `histoire-geographie/histoire-l-ere-de-la-bipolarisation-de-1947-a-1991.json` | Histoire — L'ère de la bipolarisation de 1947 à 1991 (Histoire-Géographie) | 3 | 3 | 9 | 53 |
 | `francais/oeuvre-narrative.json` | Œuvre narrative (Français) | 1 | 3 | 9 | 54 |
 | `francais/la-dissertation-litteraire.json` | La dissertation littéraire (Français) | 2 | 3 | 9 | 52 |
 | `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat (Français) | 3 | 3 | 9 | 51 |

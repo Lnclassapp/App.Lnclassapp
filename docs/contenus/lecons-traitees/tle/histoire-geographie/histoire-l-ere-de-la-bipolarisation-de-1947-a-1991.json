@@ -1,0 +1,1978 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — L'ère de la bipolarisation de 1947 à 1991",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "schema-blocs",
+          "kind": "diagram",
+          "description": "Schéma en arbre du monde bipolaire après 1947. Deux branches partent de la racine : le bloc de l'Ouest, autour des États-Unis, avec la doctrine Truman, le plan Marshall et l'OTAN ; le bloc de l'Est, autour de l'URSS, avec la doctrine Jdanov et le Kominform, le Comecon et le pacte de Varsovie.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "monde",
+                "label": "Monde bipolaire après 1947"
+              },
+              {
+                "id": "ouest",
+                "label": "Bloc de l'Ouest (États-Unis)",
+                "category": 1
+              },
+              {
+                "id": "est",
+                "label": "Bloc de l'Est (URSS)",
+                "category": 2
+              },
+              {
+                "id": "truman",
+                "label": "Doctrine Truman (mars 1947)",
+                "category": 1
+              },
+              {
+                "id": "marshall",
+                "label": "Plan Marshall (annoncé en juin 1947)",
+                "category": 1
+              },
+              {
+                "id": "otan",
+                "label": "OTAN (1949)",
+                "category": 1
+              },
+              {
+                "id": "jdanov",
+                "label": "Doctrine Jdanov et Kominform (sept. 1947)",
+                "category": 2
+              },
+              {
+                "id": "comecon",
+                "label": "Comecon (1949)",
+                "category": 2
+              },
+              {
+                "id": "varsovie",
+                "label": "Pacte de Varsovie (1955)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "monde",
+                "to": "ouest"
+              },
+              {
+                "from": "monde",
+                "to": "est"
+              },
+              {
+                "from": "ouest",
+                "to": "truman"
+              },
+              {
+                "from": "ouest",
+                "to": "marshall"
+              },
+              {
+                "from": "ouest",
+                "to": "otan"
+              },
+              {
+                "from": "est",
+                "to": "jdanov"
+              },
+              {
+                "from": "est",
+                "to": "comecon"
+              },
+              {
+                "from": "est",
+                "to": "varsovie"
+              }
+            ],
+            "legend": [
+              "Bloc de l'Ouest",
+              "Bloc de l'Est"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-blocs",
+          "kind": "map",
+          "description": "Carte du monde des deux blocs. Teinte 1 : les membres fondateurs de l'OTAN en 1949 (États-Unis, Canada et pays d'Europe de l'Ouest). Teinte 2 : l'URSS, dessinée avec le fond actuel de la Russie, et des pays du pacte de Varsovie. Teinte 3 : Corée du Nord, Corée du Sud et Cuba, lieux de crises. L'Allemagne divisée n'est pas colorée. Washington, Moscou et Berlin sont placées.",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "usa",
+                "category": 1
+              },
+              {
+                "id": "can",
+                "category": 1
+              },
+              {
+                "id": "gbr",
+                "category": 1
+              },
+              {
+                "id": "fra",
+                "category": 1
+              },
+              {
+                "id": "ita",
+                "category": 1
+              },
+              {
+                "id": "bel",
+                "category": 1
+              },
+              {
+                "id": "nld",
+                "category": 1
+              },
+              {
+                "id": "nor",
+                "category": 1
+              },
+              {
+                "id": "dnk",
+                "category": 1
+              },
+              {
+                "id": "isl",
+                "category": 1
+              },
+              {
+                "id": "prt",
+                "category": 1
+              },
+              {
+                "id": "lux",
+                "category": 1
+              },
+              {
+                "id": "rus",
+                "category": 2
+              },
+              {
+                "id": "pol",
+                "category": 2
+              },
+              {
+                "id": "hun",
+                "category": 2
+              },
+              {
+                "id": "rou",
+                "category": 2
+              },
+              {
+                "id": "bgr",
+                "category": 2
+              },
+              {
+                "id": "cze",
+                "category": 2
+              },
+              {
+                "id": "svk",
+                "category": 2
+              },
+              {
+                "id": "prk",
+                "category": 3
+              },
+              {
+                "id": "kor",
+                "category": 3
+              },
+              {
+                "id": "cub",
+                "category": 3
+              }
+            ],
+            "places": [
+              {
+                "id": "washington",
+                "label": "Washington"
+              },
+              {
+                "id": "moscow",
+                "label": "Moscou"
+              },
+              {
+                "id": "berlin",
+                "label": "Berlin"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "Membres fondateurs de l'OTAN (1949)",
+              "URSS (contour de la Russie actuelle), pacte de Varsovie",
+              "Lieux de crises : Corée, Cuba"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-guerre-froide",
+          "kind": "timeline",
+          "description": "Frise de 1945 à 1991. Quatre phases en bandes : premières crises (1947-1953), coexistence pacifique (1953-1962), détente (1962-1979), regain des tensions (1979-1985). Les repères : doctrines de 1947, blocus de Berlin, OTAN, Corée, pacte de Varsovie, mur de Berlin, Cuba, SALT I, Helsinki, Afghanistan, bouclier antimissile et la borne de 1991.",
+          "params": {
+            "start": 1945,
+            "end": 1991,
+            "step": 5,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1947,
+                "to": 1953,
+                "label": "Premières crises"
+              },
+              {
+                "from": 1953,
+                "to": 1962,
+                "label": "Coexistence pacifique"
+              },
+              {
+                "from": 1962,
+                "to": 1979,
+                "label": "Détente"
+              },
+              {
+                "from": 1979,
+                "to": 1985,
+                "label": "Regain des tensions"
+              }
+            ],
+            "events": [
+              {
+                "at": 1947,
+                "label": "Doctrines Truman et Jdanov"
+              },
+              {
+                "at": 1948,
+                "label": "Blocus de Berlin"
+              },
+              {
+                "at": 1949,
+                "label": "OTAN ; Comecon"
+              },
+              {
+                "at": 1950,
+                "label": "Guerre de Corée (1950-1953)"
+              },
+              {
+                "at": 1953,
+                "label": "Mort de Staline"
+              },
+              {
+                "at": 1955,
+                "label": "Pacte de Varsovie"
+              },
+              {
+                "at": 1961,
+                "label": "Mur de Berlin"
+              },
+              {
+                "at": 1962,
+                "label": "Crise de Cuba"
+              },
+              {
+                "at": 1972,
+                "label": "Accords SALT I"
+              },
+              {
+                "at": 1975,
+                "label": "Acte final d'Helsinki"
+              },
+              {
+                "at": 1979,
+                "label": "Intervention soviétique en Afghanistan"
+              },
+              {
+                "at": 1983,
+                "label": "Projet de bouclier antimissile américain"
+              },
+              {
+                "at": 1991,
+                "label": "Borne de la période étudiée"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La naissance des deux blocs en 1947",
+          "remember": "Après 1945, deux **superpuissances** dominent le monde : les **États-Unis** et l'**URSS**. Alliées contre l'Allemagne nazie, elles deviennent rivales : c'est la **guerre froide**, un affrontement sans combat direct entre elles. En **1947**, chaque camp précise son discours. **États-Unis** : la **doctrine Truman** (mars 1947) promet une aide aux peuples « libres » jugés menacés, c'est la politique d'**endiguement** du communisme ; le **plan Marshall** (annoncé en juin 1947) apporte une aide économique pour reconstruire l'Europe. **URSS** : la **doctrine Jdanov** (septembre 1947) affirme que le monde est divisé en deux camps, l'un « impérialiste » autour des États-Unis, l'autre « démocratique » autour de l'URSS ; l'URSS refuse le plan Marshall et crée le **Kominform**, bureau d'information de partis communistes. Résultat : deux **blocs** s'opposent.",
+          "method": [
+            "Situer l'événement : sa date (1947) et ses acteurs (États-Unis, URSS, Europe).",
+            "Identifier l'auteur du discours et présenter ses idées avec tes propres mots.",
+            "Expliquer les mesures prises : aide économique, aide aux peuples menacés, Kominform.",
+            "Dégager le résultat : la division du monde en deux blocs rivaux."
+          ],
+          "example": {
+            "statement": "Expliquer comment la doctrine Truman et la doctrine Jdanov opposent deux discours en 1947.",
+            "steps": [
+              "Situer : en mars puis en septembre 1947, après la fin de la guerre, entre Washington et Moscou, avec l'Europe pour enjeu.",
+              "Identifier : le président américain Truman parle de peuples « libres » à aider ; le dirigeant soviétique Jdanov parle de deux camps, impérialiste et démocratique.",
+              "Expliquer : les États-Unis proposent l'aide aux peuples menacés et le plan Marshall ; l'URSS refuse ce plan et crée le Kominform.",
+              "Dégager : chacun présente son camp comme celui de la liberté ou de la démocratie ; le monde est partagé en deux blocs."
+            ]
+          },
+          "pitfall": "Ne confonds pas les deux doctrines ni leurs auteurs. La **doctrine Truman** est **américaine** (mars 1947) ; la **doctrine Jdanov** est **soviétique** (septembre 1947). Ne confonds pas non plus le **plan Marshall**, une aide économique, avec une alliance militaire. Contre-exemple : écrire « le plan Marshall est l'alliance militaire de 1949 » mélange le plan Marshall (annoncé en 1947) et l'OTAN (1949).",
+          "figure": "schema-blocs",
+          "practice": {
+            "statement": "Tu rappelles les discours de 1947 avec la méthode : situer, identifier, expliquer, dégager.",
+            "questions": [
+              {
+                "content": "La doctrine Truman est ___ et la doctrine Jdanov est ___.",
+                "question_type": "select",
+                "hint": "Pense à la nationalité de chaque dirigeant.",
+                "explanation": "Étape 2 — Identifier l'auteur : Truman est le président des États-Unis, donc sa doctrine est américaine ; Jdanov est un dirigeant soviétique, donc sa doctrine est soviétique.",
+                "answers": [
+                  {
+                    "content": "américaine",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "soviétique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "française",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "soviétique",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "américaine",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "britannique",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le plan Marshall est une aide ___ américaine pour reconstruire l'Europe.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Expliquer les mesures : le plan Marshall (annoncé en juin 1947) est une aide économique. Il ne s'agit pas d'une alliance militaire : celle de l'Ouest est l'OTAN, en 1949.",
+                "answers": [
+                  {
+                    "content": "économique",
+                    "correct": true
+                  },
+                  {
+                    "content": "financière",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Comment appelle-t-on l'affrontement sans combat direct entre les États-Unis et l'URSS après 1945 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager le résultat : les deux superpuissances s'opposent sans se battre directement. On parle de guerre froide, par contraste avec la guerre chaude des combats.",
+                "answers": [
+                  {
+                    "content": "La guerre froide",
+                    "correct": true
+                  },
+                  {
+                    "content": "La guerre éclair",
+                    "correct": false
+                  },
+                  {
+                    "content": "La guerre totale",
+                    "correct": false
+                  },
+                  {
+                    "content": "La guerre de Cent Ans",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Reconnaître les discours de 1947",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, identifier, expliquer, dégager.",
+            "exercise_type": "fixation",
+            "figure": "schema-blocs",
+            "questions": [
+              {
+                "content": "Quel président américain promet en mars 1947 une aide aux peuples « libres » menacés ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : mars 1947, aux États-Unis. Étape 2 — Identifier : l'auteur est le président Harry Truman, d'où le nom de doctrine Truman. Roosevelt est mort en avril 1945 ; Kennedy et Eisenhower sont présidents plus tard.",
+                "answers": [
+                  {
+                    "content": "Truman",
+                    "correct": true
+                  },
+                  {
+                    "content": "Roosevelt",
+                    "correct": false
+                  },
+                  {
+                    "content": "Kennedy",
+                    "correct": false
+                  },
+                  {
+                    "content": "Eisenhower",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux superpuissances qui s'opposent après 1945 ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Situer : après 1945, deux États dominent le monde par leur puissance économique et militaire, les États-Unis et l'URSS. Étape 2 — Identifier les acteurs : le Royaume-Uni et la France sortent affaiblis de la guerre ; ce ne sont pas des superpuissances.",
+                "answers": [
+                  {
+                    "content": "Les États-Unis",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'URSS",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Royaume-Uni",
+                    "correct": false
+                  },
+                  {
+                    "content": "La France",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément à ce qu'il désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier : Truman et Jdanov sont les auteurs de deux doctrines opposées. Étape 3 — Expliquer les mesures : le plan Marshall est une aide économique américaine ; le Kominform est la structure soviétique qui réunit des partis communistes.",
+                "answers": [
+                  {
+                    "content": "Doctrine Truman",
+                    "match": "Aide aux peuples libres menacés (mars 1947)"
+                  },
+                  {
+                    "content": "Plan Marshall",
+                    "match": "Aide économique pour reconstruire l'Europe"
+                  },
+                  {
+                    "content": "Doctrine Jdanov",
+                    "match": "Monde divisé en deux camps (septembre 1947)"
+                  },
+                  {
+                    "content": "Kominform",
+                    "match": "Bureau d'information de partis communistes"
+                  }
+                ]
+              },
+              {
+                "content": "La doctrine Jdanov est prononcée en ___ 1947.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : la doctrine Jdanov date de septembre 1947, six mois après la doctrine Truman (mars 1947). L'ordre compte : le discours soviétique répond à l'initiative américaine.",
+                "answers": [
+                  {
+                    "content": "septembre",
+                    "correct": true
+                  },
+                  {
+                    "content": "sept",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Tous les pays d'Europe, à l'Ouest comme à l'Est, bénéficient du plan Marshall.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer les mesures : l'URSS refuse le plan Marshall et les pays d'Europe de l'Est n'en bénéficient pas. Étape 4 — Dégager le résultat : cette différence de choix illustre la division de l'Europe en deux blocs.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces définitions, laquelle est celle du plan Marshall ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer les mesures : le plan Marshall est une aide économique, annoncée en 1947. L'alliance militaire de 1949 est l'OTAN ; le bureau d'information de partis communistes est le Kominform. Les confondre est l'erreur décrite dans Le piège à éviter.",
+                "answers": [
+                  {
+                    "content": "Une aide économique américaine pour reconstruire l'Europe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une alliance militaire de 1949",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un bureau d'information de partis communistes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un traité de paix signé en 1945",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'organisation des deux blocs",
+          "remember": "Chaque bloc s'organise. **Bloc de l'Ouest** (États-Unis) : l'**OECE** (1948) répartit l'aide du plan Marshall entre des pays européens ; l'**OTAN** (4 avril 1949, signée à Washington) est une **alliance militaire** de 12 pays fondateurs : les États-Unis, le Canada et dix pays d'Europe. **Bloc de l'Est** (URSS) : le **Comecon** (1949) est une organisation **économique** ; le **pacte de Varsovie** (14 mai 1955) est une **alliance militaire** de l'URSS et de pays d'Europe de l'Est, conclue peu après l'entrée de la RFA dans l'OTAN. L'**Allemagne** est elle-même divisée : la **RFA** à l'Ouest (mai 1949) et la **RDA** à l'Est (octobre 1949). Chaque bloc présente son organisation comme une défense de ses membres ; l'autre bloc y voit une menace.",
+          "method": [
+            "Repérer l'organisation : son nom et sa date de création.",
+            "Identifier ses membres et le bloc auquel elle appartient.",
+            "Préciser son domaine (militaire ou économique) et le but que le bloc lui donne.",
+            "Rapprocher l'organisation de celle de l'autre bloc."
+          ],
+          "example": {
+            "statement": "Présenter le pacte de Varsovie.",
+            "steps": [
+              "Repérer : le pacte de Varsovie, signé le 14 mai 1955.",
+              "Identifier : ses membres sont l'URSS et des pays d'Europe de l'Est ; il appartient au bloc de l'Est.",
+              "Préciser : c'est une alliance militaire, présentée par ses membres comme une défense commune.",
+              "Rapprocher : il correspond à l'OTAN, créée six ans plus tôt par le bloc de l'Ouest."
+            ]
+          },
+          "pitfall": "Ne confonds pas les deux alliances militaires, ni une alliance militaire avec une organisation économique. L'**OTAN** est occidentale (1949) ; le **pacte de Varsovie** est de l'Est (1955). Le **Comecon** (Est) et l'**OECE** (Ouest) sont économiques. Contre-exemple : « le pacte de Varsovie, créé en 1949 » est faux : 1949 est l'année de l'OTAN et du Comecon.",
+          "figure": "carte-blocs",
+          "practice": {
+            "statement": "Tu situes les organisations des deux blocs avec la méthode : repérer, identifier, préciser, rapprocher.",
+            "questions": [
+              {
+                "content": "L'OTAN est créée en ___ ; le pacte de Varsovie est conclu en ___.",
+                "question_type": "fill_blank",
+                "hint": "Les deux dates sont séparées de six ans.",
+                "explanation": "Étape 1 — Repérer : l'OTAN date de 1949 et le pacte de Varsovie de 1955. Étape 4 — Rapprocher : le pacte de l'Est vient six ans après l'alliance de l'Ouest.",
+                "answers": [
+                  {
+                    "content": "1949",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1955",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quelle organisation économique du bloc de l'Est est créée en 1949 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Préciser le domaine : le Comecon est une organisation économique de l'Est (étape 2 : bloc de l'Est). L'OECE est son équivalent occidental ; l'OTAN est militaire ; le Kominform réunit des partis communistes.",
+                "answers": [
+                  {
+                    "content": "Le Comecon",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'OECE",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'OTAN",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Kominform",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La RFA est l'Allemagne de l'Ouest et la RDA est l'Allemagne de l'Est.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier le bloc : la RFA (1949) fait partie du bloc de l'Ouest et la RDA (1949) du bloc de l'Est. L'Allemagne divisée illustre la division de l'Europe.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Situer les organisations des blocs",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : repérer, identifier, préciser, rapprocher.",
+            "exercise_type": "fixation",
+            "figure": "carte-blocs",
+            "questions": [
+              {
+                "content": "Quelle alliance militaire est signée à Washington le 4 avril 1949 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : une alliance signée à Washington en avril 1949 est l'OTAN. Étape 3 — Préciser : c'est une alliance militaire de l'Ouest. Le pacte de Varsovie date de 1955 ; le Comecon est économique ; le Kominform réunit des partis communistes.",
+                "answers": [
+                  {
+                    "content": "L'OTAN",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le pacte de Varsovie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Comecon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Kominform",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le pacte de Varsovie est conclu en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le pacte de Varsovie est signé le 14 mai 1955. Étape 4 — Rapprocher : il suit de six ans l'OTAN (1949) et vient peu après l'entrée de la RFA dans cette alliance.",
+                "answers": [
+                  {
+                    "content": "1955",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le pacte de Varsovie est créé avant l'OTAN.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer les dates : l'OTAN date de 1949, le pacte de Varsovie de 1955. Étape 4 — Rapprocher : l'alliance de l'Est est postérieure à celle de l'Ouest, c'est exactement l'inverse de l'affirmation.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces événements dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer les dates : plan Marshall en juin 1947, doctrine Jdanov et Kominform en septembre 1947, OTAN en 1949, pacte de Varsovie en 1955. Étape 4 — Rapprocher : les initiatives des deux blocs se répondent dans le temps.",
+                "answers": [
+                  {
+                    "content": "Annonce du plan Marshall (juin 1947)"
+                  },
+                  {
+                    "content": "Doctrine Jdanov et Kominform (septembre 1947)"
+                  },
+                  {
+                    "content": "Création de l'OTAN (1949)"
+                  },
+                  {
+                    "content": "Conclusion du pacte de Varsovie (1955)"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque organisation à son domaine et à son bloc.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier le bloc et étape 3 — Préciser le domaine : OTAN et pacte de Varsovie sont militaires, Comecon et OECE sont économiques. Étape 4 — Rapprocher : chaque organisation de l'Ouest a son équivalent à l'Est.",
+                "answers": [
+                  {
+                    "content": "OTAN",
+                    "match": "Alliance militaire du bloc de l'Ouest (1949)"
+                  },
+                  {
+                    "content": "Pacte de Varsovie",
+                    "match": "Alliance militaire du bloc de l'Est (1955)"
+                  },
+                  {
+                    "content": "Comecon",
+                    "match": "Organisation économique du bloc de l'Est (1949)"
+                  },
+                  {
+                    "content": "OECE",
+                    "match": "Organisation économique du bloc de l'Ouest (1948)"
+                  }
+                ]
+              },
+              {
+                "content": "Quels États sont membres fondateurs de l'OTAN en 1949 ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Identifier les membres : les États-Unis, le Canada et la France font partie des 12 fondateurs de l'OTAN. La Pologne, la Hongrie et la Roumanie appartiennent au bloc de l'Est et au pacte de Varsovie. Les ranger à l'Ouest est l'erreur de confusion entre les deux blocs.",
+                "answers": [
+                  {
+                    "content": "Les États-Unis",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Canada",
+                    "correct": true
+                  },
+                  {
+                    "content": "La France",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Pologne",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Hongrie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Roumanie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les crises de la guerre froide : Berlin, Corée, Cuba",
+          "remember": "Les blocs s'affrontent dans des **crises**, sans guerre directe entre les superpuissances. **Berlin (1948-1949)** : Berlin, divisée en secteurs, se trouve dans la zone d'occupation soviétique. À partir de juin 1948, l'URSS bloque les accès terrestres à Berlin-Ouest ; les Occidentaux organisent un **pont aérien** ; le blocus est levé en mai 1949. **Corée (1950-1953)** : la Corée, divisée au 38e parallèle, est attaquée par le Nord en juin 1950 ; des forces de l'ONU commandées par les États-Unis soutiennent le Sud ; la Chine soutient le Nord ; un **armistice** est signé en juillet 1953. **Cuba (octobre 1962)** : les États-Unis découvrent des missiles soviétiques à Cuba et organisent un blocus naval ; après des échanges entre Kennedy et Khrouchtchev, l'URSS retire ses missiles. En **août 1961**, un mur est construit à Berlin par les autorités est-allemandes.",
+          "method": [
+            "Situer la crise : sa date et son lieu.",
+            "Identifier les acteurs de chaque camp.",
+            "Expliquer l'enjeu et décrire le déroulement.",
+            "Dégager l'issue et ce qu'elle montre de la guerre froide."
+          ],
+          "example": {
+            "statement": "Présenter le blocus de Berlin (1948-1949).",
+            "steps": [
+              "Situer : de juin 1948 à mai 1949, à Berlin, dans l'Allemagne occupée.",
+              "Identifier : l'URSS bloque les accès ; les États-Unis et leurs alliés ravitaillent Berlin-Ouest.",
+              "Expliquer : l'enjeu est le contrôle de Berlin ; les Occidentaux répondent par un pont aérien, sans combat.",
+              "Dégager : l'URSS lève le blocus ; en 1949 naissent la RFA et la RDA, ce qui confirme la division de l'Allemagne."
+            ]
+          },
+          "pitfall": "Ne confonds pas le **blocus de Berlin** (1948-1949) avec la construction du **mur** (août 1961), ni les crises sans combat (Berlin, Cuba) avec la **guerre de Corée**, où l'on se bat réellement. Contre-exemple : « le mur de Berlin est construit en 1948 » est faux : 1948 est le début du blocus, le mur date de 1961.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu présentes une crise avec la méthode : situer, identifier, expliquer, dégager.",
+            "questions": [
+              {
+                "content": "Le blocus de Berlin commence en ___ ; le mur de Berlin est construit en ___.",
+                "question_type": "fill_blank",
+                "hint": "L'un est avant la guerre de Corée, l'autre après.",
+                "explanation": "Étape 1 — Situer : le blocus commence en juin 1948 ; le mur est construit en août 1961. Treize ans séparent les deux événements : ne les confonds pas.",
+                "answers": [
+                  {
+                    "content": "1948",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1961",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La guerre de Corée prend fin en 1953 par un ___.",
+                "question_type": "select",
+                "hint": "Ce mot désigne un arrêt des combats.",
+                "explanation": "Étape 4 — Dégager l'issue : en juillet 1953, un armistice arrête les combats près du 38e parallèle. Un armistice arrête la guerre sans être un traité de paix.",
+                "answers": [
+                  {
+                    "content": "armistice",
+                    "correct": true
+                  },
+                  {
+                    "content": "traité de paix",
+                    "correct": false
+                  },
+                  {
+                    "content": "pont aérien",
+                    "correct": false
+                  },
+                  {
+                    "content": "blocus naval",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel moyen les Occidentaux emploient-ils pour ravitailler Berlin-Ouest pendant le blocus ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer le déroulement : les accès terrestres étant bloqués, les Occidentaux ravitaillent Berlin-Ouest par avion. Cette réponse évite le combat direct.",
+                "answers": [
+                  {
+                    "content": "Un pont aérien",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une attaque terrestre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un blocus naval",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un train spécial",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Analyser les grandes crises",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, identifier, expliquer, dégager.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle crise oppose en 1948-1949 l'URSS et les Occidentaux autour d'une ville divisée, ravitaillée par un pont aérien ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : 1948-1949, en Allemagne. Étape 3 — Expliquer : le pont aérien est la réponse des Occidentaux au blocus de Berlin-Ouest. Corée (1950-1953) et Cuba (1962) sont des crises d'autres dates et d'autres lieux.",
+                "answers": [
+                  {
+                    "content": "Le blocus de Berlin",
+                    "correct": true
+                  },
+                  {
+                    "content": "La guerre de Corée",
+                    "correct": false
+                  },
+                  {
+                    "content": "La crise de Cuba",
+                    "correct": false
+                  },
+                  {
+                    "content": "La construction du mur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces événements dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer dans le temps : blocus de Berlin (1948-1949), guerre de Corée (1950-1953), mur de Berlin (août 1961), crise de Cuba (octobre 1962).",
+                "answers": [
+                  {
+                    "content": "Blocus de Berlin"
+                  },
+                  {
+                    "content": "Guerre de Corée"
+                  },
+                  {
+                    "content": "Construction du mur de Berlin"
+                  },
+                  {
+                    "content": "Crise de Cuba"
+                  }
+                ]
+              },
+              {
+                "content": "La guerre de Corée se termine par un armistice en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Dégager l'issue : la guerre de Corée (1950-1953) s'achève par un armistice signé en juillet 1953, avec une frontière proche du 38e parallèle.",
+                "answers": [
+                  {
+                    "content": "1953",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pendant la crise de Cuba (1962), les armées américaine et soviétique se livrent une guerre ouverte.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer le déroulement : les États-Unis organisent un blocus naval et négocient avec l'URSS. Étape 4 — Dégager l'issue : les missiles soviétiques sont retirés, sans guerre directe entre les superpuissances.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle puissance intervient en Corée aux côtés du Nord à partir de la fin de 1950 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier les acteurs : la Chine soutient le Nord, tandis que des forces de l'ONU, commandées par les États-Unis, soutiennent le Sud. Le Japon, le Royaume-Uni et Cuba ne sont pas les alliés du Nord.",
+                "answers": [
+                  {
+                    "content": "La Chine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Japon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Royaume-Uni",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cuba",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En quelle année le mur de Berlin est-il construit ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : le mur est construit en août 1961 par les autorités est-allemandes. 1948-1949 est la date du blocus de Berlin ; 1962 est celle de la crise de Cuba. Les confondre est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "1961",
+                    "correct": true
+                  },
+                  {
+                    "content": "1948",
+                    "correct": false
+                  },
+                  {
+                    "content": "1949",
+                    "correct": false
+                  },
+                  {
+                    "content": "1962",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les phases de la guerre froide : coexistence pacifique, détente, regain des tensions",
+          "remember": "On distingue quatre phases. **1947-1953** : naissance des blocs et premières crises (Berlin, Corée). **1953-1962 : coexistence pacifique** : après la mort de Staline (1953), les dirigeants soviétiques, dont Khrouchtchev, admettent de rivaliser avec les États-Unis sans guerre ; mais les crises continuent (mur de Berlin en 1961, Cuba en 1962). **1962-1979 : détente** : on négocie sur les armements (téléphone rouge en 1963, accords **SALT I** en 1972) et sur la sécurité en Europe (Acte final d'Helsinki en 1975). **1979-1985 : regain des tensions** : l'URSS intervient en Afghanistan (décembre 1979) ; les États-Unis lancent en 1983 un projet de bouclier antimissile. La période étudiée s'arrête en 1991 ; ses dernières années relèvent de la leçon sur la fin de la guerre froide.",
+          "method": [
+            "Situer la période : ses dates de début et de fin.",
+            "Nommer la phase et définir son caractère (tension, rivalité sans guerre, négociation).",
+            "Repérer deux faits qui l'illustrent, avec leur date.",
+            "Dégager ce qui fait passer à la phase suivante."
+          ],
+          "example": {
+            "statement": "Présenter la détente.",
+            "steps": [
+              "Situer : de 1962 environ à 1979.",
+              "Nommer : la détente est une phase de négociation entre les deux blocs, qui restent rivaux.",
+              "Repérer : les accords SALT I (1972) et l'Acte final d'Helsinki (1975).",
+              "Dégager : l'intervention soviétique en Afghanistan (1979) ouvre une phase de regain des tensions."
+            ]
+          },
+          "pitfall": "Ne crois pas que la coexistence pacifique ou la détente supprime la rivalité. La coexistence pacifique (1953-1962) compte encore le mur de Berlin (1961) et la crise de Cuba (1962). La détente ne dissout ni l'OTAN ni le pacte de Varsovie. Contre-exemple : « pendant la coexistence pacifique, il n'y a plus de crise » est faux : Cuba (1962) est l'une des crises les plus graves.",
+          "figure": "frise-guerre-froide",
+          "practice": {
+            "statement": "Tu présentes une phase avec la méthode : situer, nommer, repérer, dégager.",
+            "questions": [
+              {
+                "content": "La phase de 1953 à 1962 est la ___ ; la phase des années 1960-1970, marquée par SALT I, est la ___.",
+                "question_type": "select",
+                "hint": "SALT I est une négociation sur les armements.",
+                "explanation": "Étape 1 — Situer : 1953-1962 correspond à la coexistence pacifique. Étape 3 — Repérer : SALT I (1972) illustre la détente, qui s'étend de 1962 environ à 1979.",
+                "answers": [
+                  {
+                    "content": "coexistence pacifique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "détente",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "guerre totale",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "détente",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "coexistence pacifique",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "guerre totale",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel événement de décembre 1979 ouvre une phase de regain des tensions ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager le passage à la phase suivante : l'intervention soviétique en Afghanistan (décembre 1979) met fin à la détente. Cuba (1962) et le blocus de Berlin (1948) sont antérieurs ; SALT I (1972) appartient à la détente.",
+                "answers": [
+                  {
+                    "content": "L'intervention soviétique en Afghanistan",
+                    "correct": true
+                  },
+                  {
+                    "content": "La crise de Cuba",
+                    "correct": false
+                  },
+                  {
+                    "content": "La signature de SALT I",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le blocus de Berlin",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La coexistence pacifique s'ouvre après la mort de ___ en 1953.",
+                "question_type": "fill_blank",
+                "hint": "Il dirigeait l'URSS depuis les années 1920.",
+                "explanation": "Étape 1 — Situer : la mort de Staline, en mars 1953, ouvre la période de coexistence pacifique avec Khrouchtchev. Étape 2 — Nommer : c'est une rivalité sans guerre.",
+                "answers": [
+                  {
+                    "content": "Staline",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Situer les phases de la guerre froide",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : situer, nommer, repérer, dégager.",
+            "exercise_type": "fixation",
+            "figure": "frise-guerre-froide",
+            "questions": [
+              {
+                "content": "Relie chaque phase à sa période ou à un fait qui l'illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer : chaque phase a ses dates. Étape 2 — Nommer son caractère et étape 3 — Repérer un fait : la détente se reconnaît à SALT I (1972), le regain des tensions à l'Afghanistan (1979).",
+                "answers": [
+                  {
+                    "content": "Coexistence pacifique",
+                    "match": "1953-1962, rivalité sans guerre"
+                  },
+                  {
+                    "content": "Détente",
+                    "match": "1962-1979, accords SALT I en 1972"
+                  },
+                  {
+                    "content": "Regain des tensions",
+                    "match": "1979-1985, Afghanistan en 1979"
+                  },
+                  {
+                    "content": "Premières crises",
+                    "match": "1947-1953, Berlin et Corée"
+                  }
+                ]
+              },
+              {
+                "content": "Quelle initiative américaine de 1983 illustre le regain des tensions ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Repérer un fait daté : en 1983, les États-Unis lancent un projet de bouclier antimissile. SALT I (1972), le téléphone rouge (1963) et Helsinki (1975) sont des faits de la détente.",
+                "answers": [
+                  {
+                    "content": "Un projet de bouclier antimissile",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les accords SALT I",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le téléphone rouge",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Acte final d'Helsinki",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces phases dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer : 1947-1953, 1953-1962, 1962-1979 puis 1979-1985. Étape 4 — Dégager le passage de l'une à l'autre : chaque phase se termine par un événement qui ouvre la suivante.",
+                "answers": [
+                  {
+                    "content": "Naissance des blocs et premières crises"
+                  },
+                  {
+                    "content": "Coexistence pacifique"
+                  },
+                  {
+                    "content": "Détente"
+                  },
+                  {
+                    "content": "Regain des tensions"
+                  }
+                ]
+              },
+              {
+                "content": "Les accords SALT I sont signés en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Repérer : les accords SALT I, sur la limitation des armements stratégiques, sont signés en 1972, en pleine détente.",
+                "answers": [
+                  {
+                    "content": "1972",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le téléphone rouge, ligne directe entre Washington et Moscou, est installé en 1963.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Repérer : le téléphone rouge date de 1963, après la crise de Cuba. Il illustre la volonté d'éviter l'affrontement direct et annonce la détente.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Que signifie la coexistence pacifique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Nommer et définir : la coexistence pacifique est une rivalité sans guerre directe. Le piège est de croire qu'elle supprime les crises : le mur de Berlin (1961) et Cuba (1962) ont lieu pendant cette phase.",
+                "answers": [
+                  {
+                    "content": "Les deux camps admettent de rivaliser sans guerre directe, mais des crises éclatent encore",
+                    "correct": true
+                  },
+                  {
+                    "content": "La fin de toute rivalité entre les deux camps",
+                    "correct": false
+                  },
+                  {
+                    "content": "La dissolution des deux blocs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une alliance entre les États-Unis et l'URSS",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser un document de la guerre froide",
+          "remember": "Un document est un **texte, un tableau ou une carte** produit par quelqu'un, à une date précise, avec un but. À l'examen, on ne le recopie pas : on l'**analyse**. Un **discours** défend un **point de vue** : il dit ce que son auteur veut faire croire ou faire faire, pas forcément tout ce qui s'est passé. Pendant la guerre froide, les deux camps emploient des mots opposés pour un même fait : pour les États-Unis, le plan Marshall est une aide à la reconstruction ; dans le discours soviétique de 1947, il est un instrument de l'« impérialisme ». Pour juger, on confronte le discours aux **faits** (l'URSS refuse le plan, des pays d'Europe de l'Ouest l'acceptent). Une bonne analyse présente le document, en dégage les idées, les explique avec les connaissances de la leçon, puis en donne la portée et les limites.",
+          "method": [
+            "Présenter le document : sa nature, son auteur, sa date et son destinataire.",
+            "Dégager les idées principales en les reformulant.",
+            "Expliquer ces idées avec les connaissances de la leçon : contexte, faits, vocabulaire.",
+            "Confronter le point de vue de l'auteur aux faits, puis conclure sur sa portée."
+          ],
+          "example": {
+            "statement": "Analyser ce document. Texte écrit pour Lnclass, qui résume le discours de Jdanov (septembre 1947) : « Deux camps se font face dans le monde : le camp impérialiste, qui a pour chef les États-Unis, et le camp démocratique, qui a pour chef l'URSS. »",
+            "steps": [
+              "Présenter : texte écrit pour Lnclass, qui résume un discours du dirigeant soviétique Jdanov, prononcé en septembre 1947.",
+              "Dégager : le monde est coupé en deux camps, chacun dirigé par une superpuissance ; l'auteur qualifie l'un d'impérialiste et l'autre de démocratique.",
+              "Expliquer : c'est le contexte de la guerre froide ; la doctrine Jdanov répond à la doctrine Truman et au plan Marshall, et s'accompagne du Kominform.",
+              "Confronter : c'est le point de vue soviétique ; les États-Unis décrivent leur camp comme celui des peuples libres. Le document prouve l'existence de deux blocs et de deux discours opposés."
+            ]
+          },
+          "pitfall": "Ne prends pas un discours pour la description exacte des faits, et ne le recopie pas. Contre-exemple : écrire « les États-Unis sont impérialistes » parce que le texte le dit est une erreur ; écris « selon Jdanov, le camp américain est impérialiste ». Attribue toujours un jugement à son auteur.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu analyses un document avec la méthode : présenter, dégager, expliquer, confronter.",
+            "questions": [
+              {
+                "content": "Un discours exprime un ___ ; pour le juger, on le confronte aux ___.",
+                "question_type": "select",
+                "hint": "Un auteur défend ce qu'il pense.",
+                "explanation": "Étape 4 — Confronter : un discours exprime le point de vue de son auteur ; on le compare aux faits établis. Les faits servent de repère pour mesurer la portée du document.",
+                "answers": [
+                  {
+                    "content": "point de vue",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "fait établi",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "tableau de chiffres",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "faits",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "slogans",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "rumeurs",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'analyse d'un document.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Présenter, étape 2 — Dégager, étape 3 — Expliquer, étape 4 — Confronter : c'est l'ordre de la méthode. On ne peut pas expliquer des idées que l'on n'a pas dégagées.",
+                "answers": [
+                  {
+                    "content": "Présenter le document"
+                  },
+                  {
+                    "content": "Dégager les idées principales"
+                  },
+                  {
+                    "content": "Expliquer avec les connaissances"
+                  },
+                  {
+                    "content": "Confronter aux faits et conclure"
+                  }
+                ]
+              },
+              {
+                "content": "Quelle information faut-il d'abord donner pour présenter un document ?",
+                "question_type": "single_choice",
+                "hint": "Pense à la carte d'identité d'un document.",
+                "explanation": "Étape 1 — Présenter : on donne la nature du document, son auteur et sa date. L'avis personnel et le résumé de la leçon viennent plus tard, dans l'explication et la conclusion.",
+                "answers": [
+                  {
+                    "content": "Sa nature, son auteur et sa date",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ton avis personnel",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement la première phrase",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un résumé de toute la leçon",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Analyser un discours de 1947",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : présenter, dégager, expliquer, confronter. Le document est un texte écrit pour Lnclass.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Texte écrit pour Lnclass, qui résume les idées du discours prononcé par le président américain Truman devant le Congrès en mars 1947 : « Les États-Unis doivent soutenir les peuples libres qui sont menacés par des pressions venues de l'extérieur. » Quelle est la nature de ce document ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter : le document résume un discours prononcé par un président devant le Congrès, en mars 1947. Il n'est ni un traité, ni un tableau de chiffres, ni une carte.",
+                "answers": [
+                  {
+                    "content": "Un discours politique, ici résumé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un traité de paix",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un tableau de chiffres",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une carte",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Texte écrit pour Lnclass, qui résume les idées du discours prononcé par le président américain Truman devant le Congrès en mars 1947 : « Les États-Unis doivent soutenir les peuples libres qui sont menacés par des pressions venues de l'extérieur. » Quelle est l'idée principale ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Dégager : l'idée principale est l'aide promise aux peuples libres menacés, c'est-à-dire la doctrine Truman. Le pacte de Varsovie (1955) et le Kominform (1947) sont des organisations soviétiques.",
+                "answers": [
+                  {
+                    "content": "Les États-Unis aident les peuples libres jugés menacés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les États-Unis refusent d'intervenir en Europe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les États-Unis annoncent la création du pacte de Varsovie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les États-Unis rejoignent le Kominform",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Texte écrit pour Lnclass, qui résume les idées du discours prononcé par le président américain Truman devant le Congrès en mars 1947 : « Les États-Unis doivent soutenir les peuples libres qui sont menacés par des pressions venues de l'extérieur. » Quelles connaissances de la leçon aident à expliquer ce document ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Expliquer avec les connaissances : le contexte de 1947 est la rivalité naissante entre les superpuissances, et la doctrine Truman est la politique d'aide décrite par le texte. SALT I (1972) et le pacte de Varsovie (1955) viennent plus tard : ce sont des anachronismes.",
+                "answers": [
+                  {
+                    "content": "Après 1945, les États-Unis et l'URSS deviennent rivaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "La doctrine Truman prévoit une aide aux peuples jugés menacés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les accords SALT I limitent des armements en 1972",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pacte de Varsovie est conclu en 1955",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque étape de l'analyse à la question qu'elle pose.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Présenter répond à qui, quand, à qui ; étape 2 — Dégager aux idées principales ; étape 3 — Expliquer au contexte ; étape 4 — Confronter aux faits et aux limites du point de vue.",
+                "answers": [
+                  {
+                    "content": "Présenter",
+                    "match": "Qui parle, quand et à qui ?"
+                  },
+                  {
+                    "content": "Dégager",
+                    "match": "Quelles sont les idées principales ?"
+                  },
+                  {
+                    "content": "Expliquer",
+                    "match": "Quel contexte et quelles connaissances ?"
+                  },
+                  {
+                    "content": "Confronter",
+                    "match": "Que disent les faits, et quelles limites ?"
+                  }
+                ]
+              },
+              {
+                "content": "Texte écrit pour Lnclass, qui résume les idées du discours prononcé par le président américain Truman devant le Congrès en mars 1947 : « Les États-Unis doivent soutenir les peuples libres qui sont menacés par des pressions venues de l'extérieur. » Pour analyser ce texte, il faut présenter les idées comme celles de Truman, et non comme un fait établi par l'historien.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Confronter : un discours est un point de vue. On écrit « selon Truman, les États-Unis doivent soutenir les peuples libres » et on le compare aux faits. C'est la règle d'attribution du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève recopie un discours soviétique et écrit : « Les États-Unis sont impérialistes. » Que doit-il écrire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Confronter : un jugement s'attribue à son auteur (« selon Jdanov »). Écrire « c'est un fait » reprend le discours sans recul ; écrire « Jdanov a tort » juge à la place de l'historien.",
+                "answers": [
+                  {
+                    "content": "Selon Jdanov, le camp américain est impérialiste",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le camp américain est impérialiste, c'est un fait établi",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les États-Unis sont démocratiques, donc Jdanov a tort",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le texte ne dit rien d'utile",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les deux blocs en 1955",
+          "exercise_type": "fixation",
+          "figure": "carte-blocs",
+          "statement": "Dans cet exercice, tu lis la carte des deux blocs : en teinte 1 les membres fondateurs de l'OTAN (1949), en teinte 2 l'URSS et des pays du pacte de Varsovie (1955), en teinte 3 la Corée du Nord, la Corée du Sud et Cuba. Sur le fond de carte, l'URSS est dessinée avec le contour de la Russie actuelle.",
+          "questions": [
+            {
+              "content": "Sur une carte des deux blocs, l'URSS est dessinée avec le contour de la Russie actuelle. Quel bloc l'URSS dirige-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode — Identifier le bloc : l'URSS est la superpuissance du bloc de l'Est, avec le Comecon (1949) et le pacte de Varsovie (1955). Le bloc de l'Ouest est dirigé par les États-Unis.",
+              "answers": [
+                {
+                  "content": "Le bloc de l'Est",
+                  "correct": true
+                },
+                {
+                  "content": "Le bloc de l'Ouest",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun bloc",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux blocs à la fois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces États, lesquels sont membres fondateurs de l'OTAN en 1949 ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode — Identifier les membres : l'Italie, la Norvège et l'Islande font partie des 12 fondateurs de l'OTAN. La Pologne, la Bulgarie et la Roumanie appartiennent au bloc de l'Est : les placer à l'Ouest est la confusion entre les deux blocs.",
+              "answers": [
+                {
+                  "content": "L'Italie",
+                  "correct": true
+                },
+                {
+                  "content": "La Norvège",
+                  "correct": true
+                },
+                {
+                  "content": "L'Islande",
+                  "correct": true
+                },
+                {
+                  "content": "La Pologne",
+                  "correct": false
+                },
+                {
+                  "content": "La Bulgarie",
+                  "correct": false
+                },
+                {
+                  "content": "La Roumanie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La Pologne appartient au bloc de l'Ouest.",
+              "question_type": "true_false",
+              "explanation": "Méthode — Identifier le bloc : la Pologne fait partie des pays d'Europe de l'Est liés à l'URSS dans le pacte de Varsovie (1955). Elle n'est pas membre de l'OTAN.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque ville à son rôle pendant la guerre froide.",
+              "question_type": "matching",
+              "explanation": "Méthode — Situer : Washington est la capitale des États-Unis, Moscou celle de l'URSS. Berlin, divisée en secteurs, est au centre du blocus de 1948-1949 et de la construction du mur en 1961.",
+              "answers": [
+                {
+                  "content": "Washington",
+                  "match": "Capitale de la superpuissance du bloc de l'Ouest"
+                },
+                {
+                  "content": "Moscou",
+                  "match": "Capitale de la superpuissance du bloc de l'Est"
+                },
+                {
+                  "content": "Berlin",
+                  "match": "Ville divisée, enjeu des crises de 1948 et de 1961"
+                }
+              ]
+            },
+            {
+              "content": "Remets ces événements dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Méthode — Situer dans le temps : les deux doctrines (mars puis septembre 1947) précèdent l'OTAN (1949), puis le pacte de Varsovie (1955). L'ordre montre que chaque bloc s'organise en réponse à l'autre.",
+              "answers": [
+                {
+                  "content": "Doctrine Truman (mars 1947)"
+                },
+                {
+                  "content": "Doctrine Jdanov (septembre 1947)"
+                },
+                {
+                  "content": "Création de l'OTAN (1949)"
+                },
+                {
+                  "content": "Conclusion du pacte de Varsovie (1955)"
+                }
+              ]
+            },
+            {
+              "content": "En 1949 naissent deux États allemands : la RFA à l'Ouest et la ___ à l'Est.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode — Dégager le résultat : la division de l'Allemagne suit le blocus de Berlin. La RFA (mai 1949) appartient au bloc de l'Ouest et la RDA (octobre 1949) au bloc de l'Est.",
+              "answers": [
+                {
+                  "content": "RDA",
+                  "correct": true
+                },
+                {
+                  "content": "République démocratique allemande",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le blocus de Berlin, un document",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Document : texte écrit pour Lnclass sur le blocus de Berlin (1948-1949). Texte écrit pour Lnclass : « En juin 1948, l'URSS interdit les routes et les voies ferrées qui mènent aux secteurs occidentaux de Berlin. Les États-Unis et leurs alliés répondent par un pont aérien qui ravitaille la population. Le blocus est levé en mai 1949. » Tu l'analyses avec les étapes de la méthode : présenter, dégager, expliquer, confronter.",
+          "questions": [
+            {
+              "content": "Texte écrit pour Lnclass : « En juin 1948, l'URSS interdit les routes et les voies ferrées qui mènent aux secteurs occidentaux de Berlin. Les États-Unis et leurs alliés répondent par un pont aérien qui ravitaille la population. Le blocus est levé en mai 1949. » En quelle année le blocus commence-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter et situer : le texte date le début du blocus de juin 1948. 1947 est l'année des doctrines, 1950 celle du début de la guerre de Corée et 1961 celle du mur.",
+              "answers": [
+                {
+                  "content": "1948",
+                  "correct": true
+                },
+                {
+                  "content": "1947",
+                  "correct": false
+                },
+                {
+                  "content": "1950",
+                  "correct": false
+                },
+                {
+                  "content": "1961",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Texte écrit pour Lnclass : « En juin 1948, l'URSS interdit les routes et les voies ferrées qui mènent aux secteurs occidentaux de Berlin. Les États-Unis et leurs alliés répondent par un pont aérien qui ravitaille la population. Le blocus est levé en mai 1949. » Les Occidentaux répondent au blocus par une attaque militaire contre l'URSS.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Dégager : le texte parle d'un pont aérien qui ravitaille la population, pas d'une attaque. Cette réponse sans combat est typique de la guerre froide.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Texte écrit pour Lnclass : « En juin 1948, l'URSS interdit les routes et les voies ferrées qui mènent aux secteurs occidentaux de Berlin. Les États-Unis et leurs alliés répondent par un pont aérien qui ravitaille la population. Le blocus est levé en mai 1949. » Le blocus est levé en ___ 1949.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 2 — Dégager : le document donne la date de fin du blocus, mai 1949. Il a donc duré près d'un an, de juin 1948 à mai 1949.",
+              "answers": [
+                {
+                  "content": "mai",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À la suite de la crise de Berlin, deux États allemands sont créés en 1949. Lesquels ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Expliquer avec les connaissances : la division de l'Allemagne se confirme en 1949, avec la RFA (Ouest, mai) et la RDA (Est, octobre). Les autres couples ne désignent pas des États allemands.",
+              "answers": [
+                {
+                  "content": "La RFA et la RDA",
+                  "correct": true
+                },
+                {
+                  "content": "La RFA et l'URSS",
+                  "correct": false
+                },
+                {
+                  "content": "La RDA et la Pologne",
+                  "correct": false
+                },
+                {
+                  "content": "L'Allemagne et l'Autriche",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Texte écrit pour Lnclass : « En juin 1948, l'URSS interdit les routes et les voies ferrées qui mènent aux secteurs occidentaux de Berlin. Les États-Unis et leurs alliés répondent par un pont aérien qui ravitaille la population. Le blocus est levé en mai 1949. » Quels sont les deux éléments qui montrent que cette crise reste une guerre froide ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Confronter et conclure : le texte ne décrit aucun combat entre les superpuissances ; le pont aérien est un moyen non militaire. L'attaque de Berlin-Ouest et le cessez-le-feu de l'ONU ne figurent pas dans le document.",
+              "answers": [
+                {
+                  "content": "Les armées américaine et soviétique ne s'affrontent pas directement",
+                  "correct": true
+                },
+                {
+                  "content": "Le ravitaillement par avion remplace le recours à la force",
+                  "correct": true
+                },
+                {
+                  "content": "L'URSS attaque militairement Berlin-Ouest",
+                  "correct": false
+                },
+                {
+                  "content": "L'ONU impose un cessez-le-feu",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Texte écrit pour Lnclass : « En juin 1948, l'URSS interdit les routes et les voies ferrées qui mènent aux secteurs occidentaux de Berlin. Les États-Unis et leurs alliés répondent par un pont aérien qui ravitaille la population. Le blocus est levé en mai 1949. » En deux ou trois phrases, explique pourquoi le pont aérien est une réponse sans combat au blocus.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Il explique que le blocus coupe les accès terrestres à Berlin-Ouest (1 point)",
+                "Il explique que le pont aérien ravitaille la ville sans affrontement armé (1 point)"
+              ],
+              "explanation": "Corrigé modèle. Étape 3 — Expliquer : l'URSS bloque les routes et les voies ferrées, donc Berlin-Ouest ne peut plus être ravitaillée par voie terrestre. Les États-Unis et leurs alliés ravitaillent la ville par avion, sans attaquer l'URSS : il n'y a pas de combat entre les superpuissances. Barème : blocus des accès terrestres (1 point), ravitaillement aérien sans affrontement armé (1 point).",
+              "answers": [],
+              "starter": "Le blocus coupe les accès terrestres, donc…"
+            }
+          ]
+        },
+        {
+          "title": "Les phases de la guerre froide",
+          "exercise_type": "evaluation",
+          "figure": "frise-guerre-froide",
+          "statement": "Dans cet exercice de niveau devoir, tu lis la frise de 1945 à 1991 : quatre phases (premières crises 1947-1953, coexistence pacifique 1953-1962, détente 1962-1979, regain des tensions 1979-1985) et des événements datés. Tu appliques la méthode : situer, nommer, repérer, dégager.",
+          "questions": [
+            {
+              "content": "Relie chaque phase à sa période.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Situer : chaque phase a ses dates. Étape 2 — Nommer : les premières crises sont celles de Berlin et de la Corée ; la coexistence pacifique suit la mort de Staline ; la détente est la phase de négociation ; le regain des tensions suit l'Afghanistan.",
+              "answers": [
+                {
+                  "content": "Premières crises",
+                  "match": "1947-1953"
+                },
+                {
+                  "content": "Coexistence pacifique",
+                  "match": "1953-1962"
+                },
+                {
+                  "content": "Détente",
+                  "match": "1962-1979"
+                },
+                {
+                  "content": "Regain des tensions",
+                  "match": "1979-1985"
+                }
+              ]
+            },
+            {
+              "content": "Remets ces événements dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Situer : 1950, 1962, 1972 puis 1979. Étape 4 — Dégager : chaque événement appartient à une phase différente (premières crises, coexistence pacifique, détente, regain des tensions).",
+              "answers": [
+                {
+                  "content": "Début de la guerre de Corée (1950)"
+                },
+                {
+                  "content": "Crise de Cuba (1962)"
+                },
+                {
+                  "content": "Accords SALT I (1972)"
+                },
+                {
+                  "content": "Intervention soviétique en Afghanistan (1979)"
+                }
+              ]
+            },
+            {
+              "content": "Quels faits appartiennent à la détente ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Repérer : le téléphone rouge, SALT I et Helsinki sont des faits de négociation entre 1963 et 1975. Le blocus et la Corée appartiennent aux premières crises ; l'Afghanistan ouvre le regain des tensions.",
+              "answers": [
+                {
+                  "content": "Le téléphone rouge (1963)",
+                  "correct": true
+                },
+                {
+                  "content": "Les accords SALT I (1972)",
+                  "correct": true
+                },
+                {
+                  "content": "L'Acte final d'Helsinki (1975)",
+                  "correct": true
+                },
+                {
+                  "content": "Le blocus de Berlin (1948)",
+                  "correct": false
+                },
+                {
+                  "content": "L'intervention en Afghanistan (1979)",
+                  "correct": false
+                },
+                {
+                  "content": "Le début de la guerre de Corée (1950)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi la crise de Cuba (1962) peut-elle éclater en pleine coexistence pacifique ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Nommer et définir : la coexistence pacifique est une rivalité sans guerre directe. Étape 3 — Repérer : le mur de Berlin (1961) et Cuba (1962) l'illustrent. C'est le piège de la phase : croire qu'elle supprime les crises.",
+              "answers": [
+                {
+                  "content": "Parce que la coexistence admet la rivalité sans guerre, pas l'absence de crises",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que la coexistence pacifique est une alliance entre les deux blocs",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que la crise de Cuba a lieu avant la mort de Staline",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que la coexistence pacifique supprime les armes nucléaires",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La construction du mur de Berlin (1961) a lieu pendant la détente.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Situer : 1961 appartient à la coexistence pacifique (1953-1962), et non à la détente (1962-1979). Étape 4 — Dégager : la détente ne commence qu'après la crise de Cuba.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En 1983, les États-Unis lancent un projet de bouclier ___.",
+              "question_type": "select",
+              "explanation": "Étape 3 — Repérer : en 1983, le projet américain de bouclier antimissile illustre le regain des tensions (1979-1985). Les autres propositions ne correspondent à aucun projet de cette date.",
+              "answers": [
+                {
+                  "content": "antimissile",
+                  "correct": true
+                },
+                {
+                  "content": "alimentaire",
+                  "correct": false
+                },
+                {
+                  "content": "naval",
+                  "correct": false
+                },
+                {
+                  "content": "diplomatique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Compare en cinq à six lignes la coexistence pacifique et la détente : donne un point commun et une différence, avec un fait daté pour chaque phase.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il donne un point commun : une rivalité sans guerre directe, les blocs restent (1 point)",
+                "Il donne une différence : des crises graves d'un côté, des accords négociés de l'autre (1 point)",
+                "Il cite un fait daté pour chaque phase (1 point)"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Situer : la coexistence pacifique va de 1953 à 1962, la détente de 1962 à 1979. Étape 2 — Nommer : dans les deux phases, les États-Unis et l'URSS restent rivaux et les blocs subsistent, mais ils évitent la guerre directe. Étape 3 — Repérer : la coexistence pacifique reste marquée par des crises graves, comme le mur de Berlin (1961) et Cuba (1962) ; la détente se reconnaît à des négociations, comme les accords SALT I (1972). Barème : point commun (1 point), différence (1 point), un fait daté par phase (1 point).",
+              "answers": [],
+              "starter": "Dans les deux phases, les blocs restent rivaux ; la différence est que…"
+            }
+          ]
+        },
+        {
+          "title": "Commentaire de document : deux discours de 1947",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Exercice de niveau bac : commentaire de document. Document 1 : texte écrit pour Lnclass, qui résume les idées du discours du président américain Truman devant le Congrès (mars 1947) : les États-Unis doivent aider les peuples libres menacés par des pressions extérieures. Document 2 : texte écrit pour Lnclass, qui résume les idées du discours du dirigeant soviétique Jdanov (septembre 1947) : le monde est divisé en deux camps, l'un impérialiste dirigé par les États-Unis, l'autre démocratique dirigé par l'URSS ; le plan Marshall est présenté comme un moyen de domination. Tu appliques les quatre étapes de l'analyse : présenter, dégager, expliquer, confronter.",
+          "questions": [
+            {
+              "content": "Document 1 : texte écrit pour Lnclass, qui résume les idées du discours du président américain Truman devant le Congrès (mars 1947) : les États-Unis doivent aider les peuples libres menacés par des pressions extérieures. Document 2 : texte écrit pour Lnclass, qui résume les idées du discours du dirigeant soviétique Jdanov (septembre 1947) : le monde est divisé en deux camps, l'un impérialiste dirigé par les États-Unis, l'autre démocratique dirigé par l'URSS ; le plan Marshall est présenté comme un moyen de domination. Quelle est la nature commune de ces deux documents ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : ce sont deux discours de 1947, l'un américain (mars), l'autre soviétique (septembre), résumés pour Lnclass. Ce ne sont ni des traités ni des statistiques ni des cartes.",
+              "answers": [
+                {
+                  "content": "Des discours politiques de 1947, résumés dans des textes écrits pour Lnclass",
+                  "correct": true
+                },
+                {
+                  "content": "Des traités signés par les deux blocs",
+                  "correct": false
+                },
+                {
+                  "content": "Des statistiques sur le plan Marshall",
+                  "correct": false
+                },
+                {
+                  "content": "Des cartes des deux blocs",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque nom à l'idée qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Dégager : Truman présente une aide aux peuples jugés menacés ; Jdanov parle de deux camps ; le plan Marshall, annoncé en juin 1947, est une aide économique. Chaque nom correspond à un acteur et à un discours précis.",
+              "answers": [
+                {
+                  "content": "Truman",
+                  "match": "Aider les peuples libres menacés (mars 1947)"
+                },
+                {
+                  "content": "Jdanov",
+                  "match": "Deux camps, impérialiste et démocratique (septembre 1947)"
+                },
+                {
+                  "content": "Marshall",
+                  "match": "Aide économique pour reconstruire l'Europe"
+                }
+              ]
+            },
+            {
+              "content": "Document 1 : texte écrit pour Lnclass, qui résume les idées du discours du président américain Truman devant le Congrès (mars 1947) : les États-Unis doivent aider les peuples libres menacés par des pressions extérieures. Document 2 : texte écrit pour Lnclass, qui résume les idées du discours du dirigeant soviétique Jdanov (septembre 1947) : le monde est divisé en deux camps, l'un impérialiste dirigé par les États-Unis, l'autre démocratique dirigé par l'URSS ; le plan Marshall est présenté comme un moyen de domination. Quelles affirmations sont justes pour comparer ces discours ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Expliquer : chaque auteur défend son camp (peuples libres d'un côté, camp démocratique de l'autre) et le distingue d'un adversaire. Aucun des deux textes n'annonce une alliance militaire, et aucun n'annonce la fin de la rivalité.",
+              "answers": [
+                {
+                  "content": "Chaque discours présente son camp sous un jour favorable",
+                  "correct": true
+                },
+                {
+                  "content": "Chaque discours oppose son camp à un autre camp",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux discours annoncent la création d'une alliance militaire",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux discours annoncent la fin de la rivalité",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour commenter le document 2, on peut écrire « les États-Unis sont impérialistes » sans préciser que c'est l'opinion de Jdanov.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Confronter : un jugement s'attribue à son auteur. On écrit « selon Jdanov, le camp américain est impérialiste ». Sans cette précision, on présente un point de vue comme un fait, ce qui est l'erreur du piège de la notion « Analyser un document de la guerre froide ».",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes du commentaire d'un document.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 à 4 : présenter, dégager, expliquer, confronter. Cet ordre sert dans tout commentaire de document au bac : on ne confronte qu'après avoir compris et expliqué.",
+              "answers": [
+                {
+                  "content": "Présenter le document"
+                },
+                {
+                  "content": "Dégager les idées principales"
+                },
+                {
+                  "content": "Expliquer avec les connaissances"
+                },
+                {
+                  "content": "Confronter aux faits et conclure"
+                }
+              ]
+            },
+            {
+              "content": "Document 1 : texte écrit pour Lnclass, qui résume les idées du discours du président américain Truman devant le Congrès (mars 1947) : les États-Unis doivent aider les peuples libres menacés par des pressions extérieures. Document 2 : texte écrit pour Lnclass, qui résume les idées du discours du dirigeant soviétique Jdanov (septembre 1947) : le monde est divisé en deux camps, l'un impérialiste dirigé par les États-Unis, l'autre démocratique dirigé par l'URSS ; le plan Marshall est présenté comme un moyen de domination. En un paragraphe d'environ six lignes, montre ce que ces deux discours révèlent de la naissance des deux blocs en 1947.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il présente les deux documents : auteurs, dates, nature (1 point)",
+                "Il dégage l'idée de chaque discours en la reformulant (1 point)",
+                "Il mobilise le plan Marshall, le Kominform ou la guerre froide (1 point)",
+                "Il attribue les jugements à leurs auteurs et conclut sur les deux blocs (1 point)"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Présenter : les deux textes résument des discours de 1947, celui du président américain Truman en mars et celui du dirigeant soviétique Jdanov en septembre. Étape 2 — Dégager : le premier promet une aide aux peuples libres menacés ; le second divise le monde en deux camps, impérialiste et démocratique. Étape 3 — Expliquer : ces discours s'inscrivent dans la guerre froide ; le plan Marshall est refusé par l'URSS, qui crée le Kominform. Étape 4 — Confronter : selon Truman, son camp défend la liberté ; selon Jdanov, le camp américain est impérialiste. Les deux discours montrent que le monde se divise en deux blocs. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Ces deux discours, prononcés en 1947, montrent que…"
+            },
+            {
+              "content": "Sujet de synthèse. Explique, en un paragraphe organisé d'une dizaine de lignes, comment les deux blocs s'organisent et comment leur rivalité se manifeste de 1947 aux années 1980. Cite au moins deux organisations, deux crises et deux phases.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Il cite au moins deux organisations avec leur date (OTAN 1949, pacte de Varsovie 1955, Comecon...) (2 points)",
+                "Il cite au moins deux crises avec leur date (Berlin, Corée, Cuba) (2 points)",
+                "Il cite deux phases (coexistence pacifique, détente ou regain des tensions) avec leurs dates (1 point)",
+                "Le paragraphe est organisé et sans jugement (1 point)"
+              ],
+              "explanation": "Corrigé modèle. Introduction : de 1947 aux années 1980, les États-Unis et l'URSS dirigent deux blocs rivaux sans se combattre directement. Première partie, l'organisation : à l'Ouest, l'OECE (1948) et l'OTAN (1949) ; à l'Est, le Comecon (1949) et le pacte de Varsovie (1955). Deuxième partie, les manifestations : le blocus de Berlin (1948-1949), la guerre de Corée (1950-1953) et la crise de Cuba (1962) opposent les blocs. Troisième partie, les phases : la coexistence pacifique (1953-1962) admet la rivalité sans guerre ; la détente (1962-1979) voit des accords comme SALT I (1972) ; le regain des tensions (1979-1985) suit l'intervention en Afghanistan. Barème : organisations (2 points), crises (2 points), phases (1 point), organisation du paragraphe et neutralité (1 point).",
+              "answers": [],
+              "starter": "De 1947 aux années 1980, les deux blocs s'organisent…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

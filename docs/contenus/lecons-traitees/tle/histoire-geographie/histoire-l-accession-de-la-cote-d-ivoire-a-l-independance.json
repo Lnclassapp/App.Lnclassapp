@@ -1,0 +1,1888 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — L'accession de la Côte d'Ivoire à l'indépendance",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "frise-accession-tle",
+          "kind": "timeline",
+          "description": "Frise de 1940 à 1965, graduée tous les 5 ans. Elle place les repères de l'accession de la Côte d'Ivoire à l'indépendance : Brazzaville et le SAA (1944), l'ONU et l'élection de Félix Houphouët-Boigny comme député (1945), le PDCI, le RDA et la loi du 11 avril (1946), le désapparentement (1950), la loi-cadre (1956), le référendum et la République (1958), l'indépendance (1960). Le curseur règle la fin de la frise.",
+          "params": {
+            "start": 1940,
+            "end": 1965,
+            "step": 5,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1949,
+                "to": 1950,
+                "label": "Répression"
+              },
+              {
+                "from": 1958,
+                "to": 1960,
+                "label": "République dans la Communauté"
+              }
+            ],
+            "events": [
+              {
+                "at": 1944,
+                "label": "Brazzaville ; création du SAA"
+              },
+              {
+                "at": 1945,
+                "label": "ONU ; Houphouët-Boigny député"
+              },
+              {
+                "at": 1946,
+                "label": "PDCI, RDA, loi du 11 avril"
+              },
+              {
+                "at": 1950,
+                "label": "Désapparentement du RDA"
+              },
+              {
+                "at": 1956,
+                "label": "Loi-cadre Defferre"
+              },
+              {
+                "at": 1958,
+                "label": "Référendum ; République (4 déc.)"
+              },
+              {
+                "at": 1960,
+                "label": "Indépendance (7 août)"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "param": "end",
+              "min": 1960,
+              "max": 1970,
+              "step": 5,
+              "label": "Fin de la frise"
+            }
+          ]
+        },
+        {
+          "key": "schema-causes",
+          "kind": "diagram",
+          "description": "Schéma en arbre des causes de l'accession à l'indépendance. La racine, « Causes de l'accession », se divise en deux branches : le contexte colonial (travail forcé, code de l'indigénat, inégalités entre planteurs africains et européens) et le contexte international (Charte de l'Atlantique de 1941, Charte de l'ONU de 1945, conférence de Brazzaville de 1944).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "racine",
+                "label": "Causes de l'accession"
+              },
+              {
+                "id": "colonial",
+                "label": "Contexte colonial",
+                "category": 1
+              },
+              {
+                "id": "international",
+                "label": "Contexte international",
+                "category": 2
+              },
+              {
+                "id": "force",
+                "label": "Travail forcé",
+                "category": 1
+              },
+              {
+                "id": "indigenat",
+                "label": "Code de l'indigénat",
+                "category": 1
+              },
+              {
+                "id": "planteurs",
+                "label": "Inégalités entre planteurs",
+                "category": 1
+              },
+              {
+                "id": "atlantique",
+                "label": "Charte de l'Atlantique (1941)",
+                "category": 2
+              },
+              {
+                "id": "brazza",
+                "label": "Brazzaville (1944)",
+                "category": 2
+              },
+              {
+                "id": "onu",
+                "label": "Charte de l'ONU (1945)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "racine",
+                "to": "colonial"
+              },
+              {
+                "from": "racine",
+                "to": "international"
+              },
+              {
+                "from": "colonial",
+                "to": "force"
+              },
+              {
+                "from": "colonial",
+                "to": "indigenat"
+              },
+              {
+                "from": "colonial",
+                "to": "planteurs"
+              },
+              {
+                "from": "international",
+                "to": "atlantique"
+              },
+              {
+                "from": "international",
+                "to": "brazza"
+              },
+              {
+                "from": "international",
+                "to": "onu"
+              }
+            ],
+            "legend": [
+              "Cause intérieure (la colonie)",
+              "Cause extérieure (le monde)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-repression",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire localisant trois lieux liés aux événements de 1949-1950 : Grand-Bassam, sur le littoral, où des dirigeants du PDCI sont emprisonnés ; Dimbokro, dans le centre du pays, où des incidents font des victimes début 1950 ; Abidjan, chef-lieu de la colonie à partir de 1934, siège de l'administration.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "places": [
+              {
+                "id": "grand_bassam",
+                "label": "Grand-Bassam (arrestations, 1949)"
+              },
+              {
+                "id": "dimbokro",
+                "label": "Dimbokro (incidents, 1950)"
+              },
+              {
+                "id": "abidjan",
+                "label": "Abidjan (chef-lieu à partir de 1934)"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-etapes-tle",
+          "kind": "diagram",
+          "description": "Schéma en cinq étapes, de haut en bas : la loi-cadre Defferre du 23 juin 1956, le référendum du 28 septembre 1958, la République de Côte d'Ivoire du 4 décembre 1958, l'indépendance du 7 août 1960, la Constitution du 3 novembre 1960. Les trois premières étapes relèvent de l'autonomie, les deux dernières de la souveraineté.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "loi",
+                "label": "Loi-cadre Defferre (1956)",
+                "category": 1
+              },
+              {
+                "id": "ref",
+                "label": "Référendum (28 sept. 1958)",
+                "category": 1
+              },
+              {
+                "id": "rep",
+                "label": "République (4 déc. 1958)",
+                "category": 1
+              },
+              {
+                "id": "ind",
+                "label": "Indépendance (7 août 1960)",
+                "category": 2
+              },
+              {
+                "id": "cst",
+                "label": "Constitution (3 nov. 1960)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "loi",
+                "to": "ref"
+              },
+              {
+                "from": "ref",
+                "to": "rep"
+              },
+              {
+                "from": "rep",
+                "to": "ind"
+              },
+              {
+                "from": "ind",
+                "to": "cst"
+              }
+            ],
+            "legend": [
+              "Autonomie (dans la Communauté)",
+              "Souveraineté (indépendance)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les causes : le contexte colonial et le contexte international",
+          "remember": "Avant 1946, la Côte d'Ivoire est une **colonie française**, rattachée à l'Afrique-Occidentale française (AOF). Le **contexte colonial** pèse sur les Ivoiriens : le **travail forcé** (des Africains sont contraints de travailler pour l'administration ou des entreprises), le **code de l'indigénat** (des sanctions administratives infligées aux Africains, sans passer par les tribunaux ordinaires) et les **inégalités entre planteurs africains et européens**, ces derniers étant avantagés, notamment pour la main-d'œuvre. Le **contexte international** change après la Seconde Guerre mondiale : la France est affaiblie, la **Charte de l'Atlantique** (1941) et la **Charte de l'ONU** (1945) affirment le droit des peuples à disposer d'eux-mêmes, et la **conférence de Brazzaville** (1944) annonce des réformes dans l'empire colonial français, **sans promettre l'indépendance**. Ces causes, intérieures et extérieures, nourrissent les revendications des Africains.",
+          "method": [
+            "Situer le fait : donner sa date et son cadre (la colonie avant 1946, ou le monde après la guerre).",
+            "Distinguer le contexte colonial (ce qui se passe en Côte d'Ivoire) du contexte international (ce qui se passe dans le monde).",
+            "Expliquer en quoi le fait pèse sur les Ivoiriens ou encourage leurs revendications.",
+            "Relier le fait à sa conséquence : la montée des revendications politiques, puis les étapes vers l'indépendance."
+          ],
+          "example": {
+            "statement": "Le travail forcé est-il une cause intérieure ou extérieure de l'accession à l'indépendance ? Explique en quoi il y contribue.",
+            "steps": [
+              "Situer : le travail forcé est imposé aux Africains par l'administration coloniale avant son interdiction en 1946, dans la colonie de Côte d'Ivoire.",
+              "Distinguer : il se passe en Côte d'Ivoire, c'est donc un fait du contexte colonial (cause intérieure), et non du contexte international.",
+              "Expliquer : des Africains sont contraints de travailler contre leur gré, ce qui est ressenti comme une injustice, d'autant que les planteurs africains sont désavantagés pour la main-d'œuvre.",
+              "Relier : il nourrit la revendication de son abolition, obtenue par la loi du 11 avril 1946, première étape du combat politique des Ivoiriens."
+            ]
+          },
+          "pitfall": "Ne confonds pas une cause avec une étape de l'accession. Le référendum de 1958 ou l'indépendance de 1960 sont des étapes ou l'aboutissement, pas des causes. Ne crois pas non plus que la conférence de Brazzaville (1944) ouvre directement la voie à l'indépendance : elle annonce des réformes, mais écarte l'indépendance. Contre-exemple : 16 années séparent Brazzaville (1944) de l'indépendance (1960), et d'autres étapes (1946, 1956, 1958) sont nécessaires.",
+          "figure": "schema-causes",
+          "practice": {
+            "statement": "Tu classes les causes avec la méthode de la fiche : situer, distinguer, expliquer, relier.",
+            "questions": [
+              {
+                "content": "Le travail forcé relève du contexte ___ ; la Charte de l'ONU relève du contexte ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Distinguer : le travail forcé se passe dans la colonie, c'est le contexte colonial. La Charte de l'ONU (1945) concerne le monde entier, c'est le contexte international.",
+                "answers": [
+                  {
+                    "content": "colonial",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "international",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Demande-toi si le fait se passe en Côte d'Ivoire ou dans le monde."
+              },
+              {
+                "content": "Quel événement de 1944 annonce des réformes dans l'empire colonial français, sans promettre l'indépendance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : en 1944, c'est la conférence de Brazzaville. La Charte de l'ONU date de 1945, la loi-cadre de 1956 et la Constitution de 1960. Étape 3 — Expliquer : Brazzaville annonce des réformes, pas l'indépendance.",
+                "answers": [
+                  {
+                    "content": "La conférence de Brazzaville",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Charte de l'ONU",
+                    "correct": false
+                  },
+                  {
+                    "content": "La loi-cadre Defferre",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Constitution de 1960",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les planteurs africains sont désavantagés par rapport aux planteurs européens, notamment pour la main-d'œuvre.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : cette inégalité fait partie du contexte colonial. Elle pousse des planteurs africains à s'organiser, ce qui conduit à la création du SAA en 1944.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à la raison de la création du syndicat des planteurs africains."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Reconnaître les causes de l'accession",
+            "statement": "Dans cet exercice, tu classes les causes de l'accession de la Côte d'Ivoire à l'indépendance avec la méthode de la fiche : situer, distinguer, expliquer, relier.",
+            "exercise_type": "fixation",
+            "figure": "schema-causes",
+            "questions": [
+              {
+                "content": "Laquelle de ces situations relève du contexte colonial ivoirien avant 1946 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : la question porte sur la Côte d'Ivoire avant 1946. Étape 2 — Distinguer : le travail forcé se vit dans la colonie, c'est un fait du contexte colonial. La création de l'ONU (1945) est un fait du contexte international ; le référendum (1958) et la loi-cadre (1956) sont des étapes postérieures à 1946, pas des causes.",
+                "answers": [
+                  {
+                    "content": "Le travail forcé imposé à des Africains",
+                    "correct": true
+                  },
+                  {
+                    "content": "La création de l'ONU en 1945",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le référendum du 28 septembre 1958",
+                    "correct": false
+                  },
+                  {
+                    "content": "La loi-cadre de 1956",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les trois éléments du contexte colonial ivoirien, avant 1946 ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Distinguer : le contexte colonial regroupe ce que vivent les Ivoiriens dans la colonie : le travail forcé, l'indigénat (sanctions administratives infligées aux Africains) et les inégalités entre planteurs. Étape 3 — Expliquer : ces trois faits nourrissent les revendications. La Charte de l'ONU relève du contexte international ; le référendum de 1958 est une étape de l'accession, pas une cause.",
+                "answers": [
+                  {
+                    "content": "Le travail forcé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le code de l'indigénat",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les inégalités entre planteurs africains et européens",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Charte de l'ONU de 1945",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le référendum de 1958",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La conférence de Brazzaville (1944) promet l'indépendance aux colonies françaises d'Afrique.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : Brazzaville annonce des réformes dans l'empire colonial français, mais elle écarte l'indépendance. Étape 4 — Relier : il faut encore des luttes politiques et des étapes (1946, 1956, 1958) avant 1960. C'est le piège de la fiche : prendre une promesse de réformes pour une promesse d'indépendance.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque fait à ce qu'il représente.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Distinguer : le travail forcé et l'indigénat sont des faits du contexte colonial ; la Charte de l'ONU et Brazzaville appartiennent au contexte international. Étape 3 — Expliquer : chacun a un sens précis. Les relier à la bonne définition évite de les confondre.",
+                "answers": [
+                  {
+                    "content": "Le travail forcé",
+                    "match": "Des Africains contraints de travailler pour l'administration ou des entreprises"
+                  },
+                  {
+                    "content": "Le code de l'indigénat",
+                    "match": "Des sanctions administratives infligées aux Africains"
+                  },
+                  {
+                    "content": "La Charte de l'ONU (1945)",
+                    "match": "Le droit des peuples à disposer d'eux-mêmes"
+                  },
+                  {
+                    "content": "La conférence de Brazzaville (1944)",
+                    "match": "Des réformes annoncées, sans promesse d'indépendance"
+                  }
+                ]
+              },
+              {
+                "content": "Dans le contexte ___, la Charte de l'ONU (1945) reconnaît le droit des peuples à disposer d'eux-mêmes.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : la Charte de l'ONU date de 1945 et concerne le monde entier. Étape 2 — Distinguer : c'est donc le contexte international, et non le contexte colonial qui se passe en Côte d'Ivoire.",
+                "answers": [
+                  {
+                    "content": "international",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'indépendance du 7 août 1960 est ___ de l'accession, et non une cause.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Relier : les causes (contexte colonial et international) conduisent aux revendications, puis aux étapes de 1946 à 1960. L'indépendance est le résultat, donc l'aboutissement. La ranger parmi les causes est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "l'aboutissement",
+                    "correct": true
+                  },
+                  {
+                    "content": "une cause intérieure",
+                    "correct": false
+                  },
+                  {
+                    "content": "une cause extérieure",
+                    "correct": false
+                  },
+                  {
+                    "content": "un point de départ",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les acteurs et les organisations : SAA, PDCI et RDA",
+          "remember": "**1944** : le **Syndicat agricole africain (SAA)**, fondé par Félix Houphouët-Boigny, médecin et planteur, avec d'autres planteurs, défend les planteurs africains. **1945** : Houphouët-Boigny est élu **député** de la Côte d'Ivoire à l'Assemblée nationale constituante, à Paris. **1946** : il fonde le **Parti démocratique de la Côte d'Ivoire (PDCI)**, un parti politique. En **octobre 1946**, à **Bamako**, naît le **Rassemblement démocratique africain (RDA)**, qui réunit des partis de plusieurs territoires d'Afrique ; le PDCI en est la section ivoirienne. D'autres acteurs existent : d'autres partis, comme le Parti progressiste de Côte d'Ivoire (PPCI), et des syndicats de salariés. Un **syndicat** défend des intérêts professionnels ; un **parti** cherche à participer au pouvoir par les élections.",
+          "method": [
+            "Situer l'organisation : donner sa date de création et son lieu.",
+            "Identifier sa nature (syndicat, parti ou rassemblement de partis) et son fondateur.",
+            "Expliquer son objectif et les personnes qu'elle défend.",
+            "Dégager son rôle dans l'accession à l'indépendance."
+          ],
+          "example": {
+            "statement": "Présenter le Syndicat agricole africain (SAA).",
+            "steps": [
+              "Situer : le SAA est créé en 1944, en Côte d'Ivoire, deux ans avant le PDCI (1946).",
+              "Identifier : c'est un syndicat, et non un parti ; il est fondé par Félix Houphouët-Boigny, médecin et planteur.",
+              "Expliquer : son objectif est de défendre les planteurs africains, désavantagés par rapport aux planteurs européens, notamment pour la main-d'œuvre.",
+              "Dégager : le SAA organise les planteurs africains, fait connaître Houphouët-Boigny (élu député en 1945) et sert de point d'appui au PDCI de 1946."
+            ]
+          },
+          "pitfall": "Ne confonds pas le SAA, le PDCI et le RDA. Le SAA (1944) est un syndicat de planteurs ; le PDCI (1946) est un parti ivoirien ; le RDA (octobre 1946) est un rassemblement de partis de plusieurs territoires. Contre-exemple : le RDA n'est pas né en Côte d'Ivoire mais à Bamako, au Soudan français (le Mali actuel), et le PDCI n'en est que la section ivoirienne.",
+          "figure": "frise-accession-tle",
+          "practice": {
+            "statement": "Tu présentes les acteurs avec la méthode de la fiche : situer, identifier, expliquer, dégager.",
+            "questions": [
+              {
+                "content": "Le SAA est un ___ créé en ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Situer : le SAA est créé en 1944. Étape 2 — Identifier : c'est un syndicat de planteurs africains. Le PDCI, lui, est un parti créé en 1946.",
+                "answers": [
+                  {
+                    "content": "syndicat",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "parti",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "rassemblement",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1944",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1946",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1950",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Compare avec le PDCI, créé deux ans plus tard."
+              },
+              {
+                "content": "En 1945, Félix Houphouët-Boigny est élu :",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : en 1945, il est élu député à l'Assemblée nationale constituante. Il ne devient président qu'après l'indépendance de 1960. Étape 4 — Dégager : cette élection lui donne une tribune à Paris pour défendre les Africains.",
+                "answers": [
+                  {
+                    "content": "député de la Côte d'Ivoire à l'Assemblée constituante, à Paris",
+                    "correct": true
+                  },
+                  {
+                    "content": "président de la République de Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "gouverneur de la colonie",
+                    "correct": false
+                  },
+                  {
+                    "content": "secrétaire général de l'ONU",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En Côte d'Ivoire, le PDCI est le seul parti et le SAA le seul syndicat.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : d'autres partis (comme le PPCI) et des syndicats de salariés existent. Le PDCI et le SAA sont les organisations les plus connues du mouvement, mais pas les seules.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Relis la fin de la fiche."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Présenter les organisations ivoiriennes",
+            "statement": "Dans cet exercice, tu présentes le SAA, le PDCI et le RDA avec la méthode de la fiche : situer, identifier, expliquer, dégager.",
+            "exercise_type": "fixation",
+            "figure": "frise-accession-tle",
+            "questions": [
+              {
+                "content": "Quelle organisation est créée en 1944 pour défendre les planteurs africains ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : l'organisation date de 1944. Étape 2 — Identifier : c'est un syndicat de planteurs, le SAA. Le PDCI et le RDA sont créés en 1946 ; ils sont de nature différente (parti, rassemblement de partis).",
+                "answers": [
+                  {
+                    "content": "Le Syndicat agricole africain (SAA)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Parti démocratique de la Côte d'Ivoire (PDCI)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Rassemblement démocratique africain (RDA)",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Organisation des Nations unies (ONU)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces faits dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer : le SAA est de 1944, l'élection de 1945, puis le PDCI et le RDA en 1946 (le PDCI avant le RDA, qui naît en octobre à Bamako). Se tromper d'ordre, c'est confondre le syndicat, le parti et le rassemblement.",
+                "answers": [
+                  {
+                    "content": "Création du SAA (1944)"
+                  },
+                  {
+                    "content": "Élection de Félix Houphouët-Boigny comme député à l'Assemblée constituante (1945)"
+                  },
+                  {
+                    "content": "Création du PDCI (1946)"
+                  },
+                  {
+                    "content": "Naissance du RDA à Bamako (octobre 1946)"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque organisation à sa nature.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier la nature : syndicat pour le SAA, parti pour le PDCI, rassemblement de partis pour le RDA. Étape 3 — Expliquer : chacun défend des personnes ou des idées différentes, du syndicat de planteurs au rassemblement africain.",
+                "answers": [
+                  {
+                    "content": "Le SAA",
+                    "match": "Syndicat de planteurs africains"
+                  },
+                  {
+                    "content": "Le PDCI",
+                    "match": "Parti politique de Côte d'Ivoire"
+                  },
+                  {
+                    "content": "Le RDA",
+                    "match": "Rassemblement de partis de plusieurs territoires, né à Bamako"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux organisations fondées par Félix Houphouët-Boigny en Côte d'Ivoire, en 1944 et en 1946 ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Identifier le fondateur : Félix Houphouët-Boigny fonde le SAA (1944) et le PDCI (1946). L'ONU est une organisation internationale créée en 1945 par des États, le Parti communiste français est un parti français, la Communauté est une institution de 1958.",
+                "answers": [
+                  {
+                    "content": "Le Syndicat agricole africain (SAA)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Parti démocratique de la Côte d'Ivoire (PDCI)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'Organisation des Nations unies",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Parti communiste français",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Communauté",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le RDA est né en octobre 1946 dans la ville de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer le lieu : le RDA naît à Bamako, au Soudan français (le Mali actuel), et non en Côte d'Ivoire. Étape 2 — Identifier : il réunit des partis de plusieurs territoires ; le PDCI en est la section ivoirienne.",
+                "answers": [
+                  {
+                    "content": "Bamako",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le PDCI est le syndicat de planteurs africains créé en 1944.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier : le PDCI est un parti politique, créé en 1946. Le syndicat de 1944 est le SAA. C'est la confusion du piège de la fiche : mélanger syndicat et parti, 1944 et 1946.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'années séparent la création du SAA (1944) de celle du PDCI (1946) ?",
+                "question_type": "numeric",
+                "unit": "ans",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Situer : 1946 − 1944 = 2. Le PDCI naît deux ans après le SAA : les planteurs se sont d'abord organisés en syndicat, puis le mouvement est devenu politique.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'élection de 1945 et la loi du 11 avril 1946",
+          "remember": "En 1945, Félix Houphouët-Boigny est élu **député** de la Côte d'Ivoire à l'**Assemblée nationale constituante**, à Paris, chargée de préparer une nouvelle Constitution pour la France. Il propose un texte contre le **travail forcé**, adopté par l'Assemblée : la **loi du 11 avril 1946**, dite **loi Houphouët-Boigny**, **interdit le travail forcé ou obligatoire** dans les territoires d'outre-mer. Elle concerne donc toutes les colonies françaises, pas seulement la Côte d'Ivoire. En 1946 également, la loi du 7 mai (loi Lamine Guèye) accorde la qualité de citoyen aux ressortissants des territoires d'outre-mer, et le code de l'indigénat est supprimé. Pour **analyser un document**, comme un texte de loi, on le présente, on en dégage l'idée, on l'explique dans son contexte et on en montre la portée.",
+          "method": [
+            "Présenter le document : donner sa nature, son auteur ou son origine, et sa date.",
+            "Dégager l'idée principale : ce que le texte décide ou affirme.",
+            "Expliquer le contexte : pourquoi ce texte apparaît à ce moment-là.",
+            "Montrer la portée : ce que le texte change, et ses limites."
+          ],
+          "example": {
+            "statement": "Analyser la loi du 11 avril 1946 (résumé écrit pour Lnclass : elle interdit le travail forcé ou obligatoire dans les territoires d'outre-mer).",
+            "steps": [
+              "Présenter : c'est une loi, adoptée le 11 avril 1946 par l'Assemblée nationale constituante, à Paris, sur proposition de Félix Houphouët-Boigny.",
+              "Dégager : l'idée principale est l'interdiction du travail forcé ou obligatoire dans les territoires d'outre-mer.",
+              "Expliquer : au sortir de la guerre, le travail forcé pèse sur les Africains et provoque des revendications ; Houphouët-Boigny, élu député en 1945, porte cette demande à Paris.",
+              "Montrer : la loi libère des Africains d'une contrainte et fait connaître le PDCI, mais elle ne donne pas l'indépendance : les territoires restent dans l'ensemble français."
+            ]
+          },
+          "pitfall": "Ne confonds pas la loi du 11 avril 1946 avec l'indépendance, ni avec la création du PDCI ou du RDA. Elle supprime le travail forcé, rien de plus. Ne la présente pas non plus comme une loi ivoirienne : elle est votée à Paris pour tous les territoires d'outre-mer. Contre-exemple : 14 années séparent cette loi (1946) de l'indépendance (1960).",
+          "figure": null,
+          "practice": {
+            "statement": "Tu analyses la loi de 1946 avec la méthode de la fiche : présenter, dégager, expliquer, montrer.",
+            "questions": [
+              {
+                "content": "La loi du 11 avril 1946 est dite loi ___ ; elle interdit le travail ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Présenter : la loi porte le nom de son auteur, Félix Houphouët-Boigny. Étape 2 — Dégager : elle interdit le travail forcé (ou obligatoire) dans les territoires d'outre-mer.",
+                "answers": [
+                  {
+                    "content": "Houphouët-Boigny",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Houphouet Boigny",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "forcé",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "forcé ou obligatoire",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le nom de la loi est celui de son auteur ; son contenu concerne le travail."
+              },
+              {
+                "content": "Quelle est la date de cette loi ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter : la loi est du 11 avril 1946. Le 7 août 1960 est l'indépendance, le 28 septembre 1958 le référendum, le 23 juin 1956 la loi-cadre Defferre.",
+                "answers": [
+                  {
+                    "content": "Le 11 avril 1946",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le 7 août 1960",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le 28 septembre 1958",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le 23 juin 1956",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La loi du 11 avril 1946 est adoptée après l'indépendance de la Côte d'Ivoire.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer le contexte : la loi date de 1946, quatorze ans avant l'indépendance (1960). Elle est une première étape du combat politique, pas son aboutissement.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compare 1946 et 1960."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Analyser la loi du 11 avril 1946",
+            "statement": "Dans cet exercice, tu analyses la loi du 11 avril 1946 avec la méthode de la fiche : présenter, dégager, expliquer, montrer. Document : loi adoptée à Paris le 11 avril 1946 par l'Assemblée nationale constituante, sur proposition de Félix Houphouët-Boigny, député de la Côte d'Ivoire. Résumé écrit pour Lnclass : elle interdit le travail forcé ou obligatoire dans les territoires d'outre-mer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Qui est à l'origine de la loi du 11 avril 1946 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter : la loi est proposée par Félix Houphouët-Boigny, élu député à l'Assemblée constituante en 1945, d'où son nom de loi Houphouët-Boigny. Gaston Defferre est l'auteur de la loi-cadre de 1956, une autre loi.",
+                "answers": [
+                  {
+                    "content": "Félix Houphouët-Boigny, député de la Côte d'Ivoire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le gouverneur de la colonie de Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Charles de Gaulle, au nom de la conférence de Brazzaville",
+                    "correct": false
+                  },
+                  {
+                    "content": "Gaston Defferre, ministre de la France d'outre-mer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Que décide cette loi ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Dégager l'idée principale : le texte interdit le travail forcé. Il ne proclame pas l'indépendance (1960) et ne crée pas le RDA (octobre 1946, à Bamako).",
+                "answers": [
+                  {
+                    "content": "Elle interdit le travail forcé ou obligatoire dans les territoires d'outre-mer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle proclame l'indépendance de la Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle crée le Rassemblement démocratique africain",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle supprime l'impôt dans les colonies",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La loi du 11 avril 1946 ne concerne que la Côte d'Ivoire.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Montrer la portée : la loi est votée à Paris pour les territoires d'outre-mer, c'est-à-dire pour l'ensemble des colonies françaises. Elle n'est pas une loi ivoirienne, même si son auteur est le député de la Côte d'Ivoire.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Cette loi est votée par ___, à Paris.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Présenter : l'auteur du texte est le législateur, ici l'Assemblée nationale constituante, qui siège à Paris et où siège Houphouët-Boigny. Le Conseil de l'Entente est créé en 1959 et l'ONU n'adopte pas les lois françaises.",
+                "answers": [
+                  {
+                    "content": "l'Assemblée nationale constituante",
+                    "correct": true
+                  },
+                  {
+                    "content": "le Conseil de gouvernement de Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'Organisation des Nations unies",
+                    "correct": false
+                  },
+                  {
+                    "content": "le Conseil de l'Entente",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont deux effets de cette loi ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Montrer la portée : la loi supprime une contrainte qui pesait sur des Africains et fait connaître Houphouët-Boigny et le PDCI. Elle ne proclame pas l'indépendance (1960) et n'a aucun lien avec la dissolution du RDA, qui continue d'exister.",
+                "answers": [
+                  {
+                    "content": "Des Africains ne peuvent plus être contraints de travailler",
+                    "correct": true
+                  },
+                  {
+                    "content": "La loi fait connaître Félix Houphouët-Boigny et le PDCI",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'indépendance est proclamée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le RDA est dissous",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'analyse d'un document.",
+                "question_type": "ordering",
+                "explanation": "Les quatre étapes de la méthode : Étape 1 — Présenter, Étape 2 — Dégager, Étape 3 — Expliquer, Étape 4 — Montrer. On commence toujours par présenter le document avant de l'interpréter.",
+                "answers": [
+                  {
+                    "content": "Présenter le document : nature, auteur, date"
+                  },
+                  {
+                    "content": "Dégager l'idée principale"
+                  },
+                  {
+                    "content": "Expliquer le contexte"
+                  },
+                  {
+                    "content": "Montrer la portée"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La répression de 1949-1950 et le désapparentement du RDA",
+          "remember": "Le RDA, dont le PDCI est la section ivoirienne, s'est **apparenté** au groupe communiste de l'Assemblée nationale française (un **apparentement** est une alliance parlementaire). L'administration coloniale s'en inquiète. À partir de **1949**, des dirigeants du PDCI sont **arrêtés** et emprisonnés, notamment à **Grand-Bassam**. Des manifestations ont lieu et, début **1950**, des incidents font des victimes, notamment à **Dimbokro**. On parle de **répression de 1949-1950**. En **1950**, Félix Houphouët-Boigny annonce la rupture de cet apparentement : c'est le **désapparentement du RDA**. Le PDCI et le RDA continuent d'exister, et les tensions avec l'administration s'apaisent ensuite.",
+          "method": [
+            "Situer les faits dans l'ordre chronologique, avec leurs dates (1946, 1949, 1950).",
+            "Identifier les acteurs en présence : l'administration coloniale, le PDCI et le RDA.",
+            "Expliquer l'enchaînement : la cause, le fait, puis la décision qui en découle.",
+            "Dégager le résultat : ce qui change et ce qui continue pour le mouvement."
+          ],
+          "example": {
+            "statement": "Expliquer le désapparentement du RDA en 1950.",
+            "steps": [
+              "Situer : l'apparentement date de 1946, les arrestations de 1949, les incidents de Dimbokro du début de 1950, puis vient le désapparentement en 1950.",
+              "Identifier : l'administration coloniale d'un côté ; de l'autre le PDCI et le RDA, dirigés par Félix Houphouët-Boigny.",
+              "Expliquer : l'administration s'inquiète de l'apparentement au groupe communiste ; après les arrestations et les incidents, Houphouët-Boigny décide de rompre cet apparentement.",
+              "Dégager : le RDA et le PDCI continuent d'exister, les tensions s'apaisent et le PDCI poursuit son action politique."
+            ]
+          },
+          "pitfall": "Ne confonds pas la répression et le désapparentement, et ne crois pas que le désapparentement supprime le RDA ou le PDCI. La répression (1949-1950) désigne les arrestations et les incidents ; le désapparentement (1950) est la rupture d'une alliance parlementaire. Contre-exemple : après 1950, le PDCI existe toujours et reste le principal parti ivoirien jusqu'à l'indépendance de 1960.",
+          "figure": "carte-repression",
+          "practice": {
+            "statement": "Tu expliques ces faits avec la méthode de la fiche : situer, identifier, expliquer, dégager.",
+            "questions": [
+              {
+                "content": "En 1949, des dirigeants du ___ sont arrêtés ; en 1950, le RDA se désapparente du groupe ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier : les personnes arrêtées en 1949 sont des dirigeants du PDCI. Étape 3 — Expliquer : en 1950, le RDA rompt son apparentement avec le groupe communiste.",
+                "answers": [
+                  {
+                    "content": "PDCI",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "communiste",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un parti ivoirien, puis un groupe de l'Assemblée française."
+              },
+              {
+                "content": "Dans quelle ville du littoral des dirigeants du PDCI sont-ils emprisonnés en 1949 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : les arrestations de 1949 ont lieu notamment à Grand-Bassam, sur le littoral. Korhogo, Man et Bouaké sont des villes de l'intérieur du pays.",
+                "answers": [
+                  {
+                    "content": "Grand-Bassam",
+                    "correct": true
+                  },
+                  {
+                    "content": "Korhogo",
+                    "correct": false
+                  },
+                  {
+                    "content": "Man",
+                    "correct": false
+                  },
+                  {
+                    "content": "Bouaké",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La répression de 1949-1950 a lieu avant le désapparentement du RDA.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : arrestations en 1949, incidents au début de 1950, puis désapparentement en 1950. Étape 3 — Expliquer : le désapparentement vient après les faits de répression.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Classe les faits dans l'ordre des dates."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Expliquer la répression et le désapparentement",
+            "statement": "Dans cet exercice, tu expliques la répression de 1949-1950 et le désapparentement du RDA avec la méthode de la fiche : situer, identifier, expliquer, dégager. La carte localise Grand-Bassam, Dimbokro et Abidjan.",
+            "exercise_type": "fixation",
+            "figure": "carte-repression",
+            "questions": [
+              {
+                "content": "Quel élément explique l'hostilité de l'administration coloniale envers le RDA ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier les acteurs : l'administration coloniale s'inquiète de l'apparentement du RDA au groupe communiste. Étape 3 — Expliquer : cet apparentement est le point de tension qui conduit aux arrestations de 1949 puis au désapparentement de 1950. Les trois autres propositions sont inexactes.",
+                "answers": [
+                  {
+                    "content": "Le RDA est apparenté au groupe communiste de l'Assemblée nationale française",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le RDA refuse de participer aux élections",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le RDA est créé par l'administration elle-même",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le RDA réclame la suppression de l'ONU",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces faits dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer : 1946, 1949, début 1950, puis le désapparentement en 1950. Étape 3 — Expliquer : on lit l'enchaînement apparentement, répression, rupture de l'apparentement.",
+                "answers": [
+                  {
+                    "content": "Apparentement du RDA au groupe communiste (1946)"
+                  },
+                  {
+                    "content": "Arrestations de dirigeants du PDCI (1949)"
+                  },
+                  {
+                    "content": "Incidents de Dimbokro (début 1950)"
+                  },
+                  {
+                    "content": "Désapparentement du RDA (1950)"
+                  }
+                ]
+              },
+              {
+                "content": "Le désapparentement de 1950 met fin à l'existence du PDCI.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Dégager le résultat : le désapparentement est la rupture de l'alliance avec le groupe communiste, pas la disparition du parti. Le PDCI et le RDA continuent d'exister. C'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque repère au fait correspondant.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer : chaque fait a son lieu et sa date. Étape 3 — Expliquer : les arrestations de Grand-Bassam (1949) et les incidents de Dimbokro (début 1950) forment la répression ; la rupture de 1950 est le désapparentement.",
+                "answers": [
+                  {
+                    "content": "Grand-Bassam, 1949",
+                    "match": "Des dirigeants du PDCI sont emprisonnés"
+                  },
+                  {
+                    "content": "Dimbokro, début 1950",
+                    "match": "Des incidents font des victimes"
+                  },
+                  {
+                    "content": "1950",
+                    "match": "Rupture de l'apparentement avec le groupe communiste"
+                  }
+                ]
+              },
+              {
+                "content": "En 1950, le RDA rompt son apparentement avec le groupe ___ de l'Assemblée nationale française.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier : le groupe en cause est le groupe communiste. Étape 3 — Expliquer : l'apparentement avait inquiété l'administration, et sa rupture est la décision de 1950 appelée désapparentement.",
+                "answers": [
+                  {
+                    "content": "communiste",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que désigne le désapparentement du RDA ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager : le désapparentement est la fin d'une alliance parlementaire, décidée en 1950. Il ne dissout pas le RDA ; il ne se confond ni avec la répression qui le précède, ni avec l'indépendance de 1960.",
+                "answers": [
+                  {
+                    "content": "La rupture de l'alliance avec le groupe communiste, en 1950",
+                    "correct": true
+                  },
+                  {
+                    "content": "La dissolution du RDA",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'arrestation des dirigeants du PDCI",
+                    "correct": false
+                  },
+                  {
+                    "content": "La proclamation de l'indépendance",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "De la loi-cadre à l'indépendance (1956-1960) : une accession pacifique et négociée",
+          "remember": "**Loi-cadre Defferre** (23 juin 1956) : elle donne plus de pouvoirs aux territoires (suffrage universel, collège unique, conseils de gouvernement). **28 septembre 1958** : référendum sur la Constitution de la Ve République, qui crée la **Communauté** ; la Côte d'Ivoire vote oui. **4 décembre 1958** : proclamation de la **République de Côte d'Ivoire**, autonome dans la Communauté (la France garde notamment la défense, la politique étrangère et la monnaie). **1959** : création du Conseil de l'Entente avec le Dahomey, le Niger et la Haute-Volta. **7 août 1960** : **proclamation de l'indépendance**, après accord avec la France. **3 novembre 1960** : **Constitution** de la Côte d'Ivoire indépendante. L'accession est dite **pacifique et négociée** : pas de guerre de libération, mais des réformes obtenues par le vote et la négociation.",
+          "method": [
+            "Situer chaque étape par sa date exacte.",
+            "Identifier ce que l'étape change : plus de pouvoirs, autonomie ou souveraineté.",
+            "Ordonner les étapes, de la loi-cadre à la Constitution de 1960.",
+            "Conclure sur la forme de l'accession : pacifique et négociée, en citant des faits."
+          ],
+          "example": {
+            "statement": "Montrer que la République du 4 décembre 1958 n'est pas l'indépendance.",
+            "steps": [
+              "Situer : la République de Côte d'Ivoire est proclamée le 4 décembre 1958, après le référendum du 28 septembre 1958.",
+              "Identifier : elle donne l'autonomie dans la Communauté, mais la France garde notamment la défense, la politique étrangère et la monnaie.",
+              "Ordonner : cette étape précède l'indépendance du 7 août 1960 et la Constitution du 3 novembre 1960.",
+              "Conclure : la République de 1958 est une étape d'un processus pacifique et négocié, dont l'aboutissement est la souveraineté obtenue en 1960, sans guerre."
+            ]
+          },
+          "pitfall": "Ne confonds pas la République du 4 décembre 1958 (autonomie dans la Communauté) avec l'indépendance du 7 août 1960 (souveraineté), ni la Constitution du 3 novembre 1960 avec la proclamation de l'indépendance. Contre-exemple chiffré : 1958 et 1960 sont séparées de près de deux ans, et la Constitution de novembre 1960 vient près de trois mois après le 7 août.",
+          "figure": "schema-etapes-tle",
+          "practice": {
+            "statement": "Tu ordonnes les étapes avec la méthode de la fiche : situer, identifier, ordonner, conclure.",
+            "questions": [
+              {
+                "content": "Le référendum a lieu le ___ septembre 1958 ; l'indépendance est proclamée le ___ août 1960.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : le référendum a lieu le 28 septembre 1958 et l'indépendance est proclamée le 7 août 1960. Étape 3 — Ordonner : le référendum précède de près de deux ans l'indépendance.",
+                "answers": [
+                  {
+                    "content": "28",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "07",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Deux jours du mois, un pour chaque date."
+              },
+              {
+                "content": "Quelle organisation regroupe en 1959 la Côte d'Ivoire, le Dahomey, le Niger et la Haute-Volta ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : le Conseil de l'Entente est créé en 1959, avant l'indépendance, entre quatre territoires. Le RDA date de 1946 et le SAA de 1944 ; l'ONU est créée en 1945 et regroupe des États du monde entier.",
+                "answers": [
+                  {
+                    "content": "Le Conseil de l'Entente",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le RDA",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ONU",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le SAA",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La Constitution du 3 novembre 1960 est postérieure à la proclamation de l'indépendance.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Ordonner : l'indépendance est proclamée le 7 août 1960 ; la Constitution vient le 3 novembre 1960, près de trois mois plus tard.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare août et novembre 1960."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Ordonner les étapes de 1956 à 1960",
+            "statement": "Dans cet exercice, tu ordonnes et expliques les étapes vers l'indépendance avec la méthode de la fiche : situer, identifier, ordonner, conclure. Le schéma présente cinq étapes : loi-cadre (1956), référendum (28 septembre 1958), République (4 décembre 1958), indépendance (7 août 1960), Constitution (3 novembre 1960).",
+            "exercise_type": "fixation",
+            "figure": "schema-etapes-tle",
+            "questions": [
+              {
+                "content": "Remets ces étapes dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer : 1956, 28 septembre 1958, 4 décembre 1958, 7 août 1960, 3 novembre 1960. Étape 3 — Ordonner : les trois premières étapes relèvent de l'autonomie, les deux dernières de la souveraineté.",
+                "answers": [
+                  {
+                    "content": "Loi-cadre Defferre (1956)"
+                  },
+                  {
+                    "content": "Référendum du 28 septembre 1958"
+                  },
+                  {
+                    "content": "République de Côte d'Ivoire du 4 décembre 1958"
+                  },
+                  {
+                    "content": "Indépendance du 7 août 1960"
+                  },
+                  {
+                    "content": "Constitution du 3 novembre 1960"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque date au fait correspondant.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer chaque étape par sa date exacte. Étape 2 — Identifier ce qu'elle change : le référendum et la République de 1958 relèvent de l'autonomie ; l'indépendance et la Constitution de 1960 de la souveraineté.",
+                "answers": [
+                  {
+                    "content": "28 septembre 1958",
+                    "match": "Référendum sur la Constitution de la Ve République"
+                  },
+                  {
+                    "content": "4 décembre 1958",
+                    "match": "Proclamation de la République de Côte d'Ivoire dans la Communauté"
+                  },
+                  {
+                    "content": "7 août 1960",
+                    "match": "Proclamation de l'indépendance"
+                  },
+                  {
+                    "content": "3 novembre 1960",
+                    "match": "Constitution de la Côte d'Ivoire indépendante"
+                  }
+                ]
+              },
+              {
+                "content": "La République de Côte d'Ivoire proclamée le 4 décembre 1958 est-elle indépendante ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier ce que l'étape change : en 1958 la Côte d'Ivoire devient une République autonome dans la Communauté, la France gardant notamment la défense, la politique étrangère et la monnaie. L'indépendance n'est proclamée que le 7 août 1960. C'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Non : elle est autonome au sein de la Communauté",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : la Côte d'Ivoire est souveraine depuis cette date",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : la France a quitté la Communauté",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : elle est encore une simple colonie, sans institutions propres",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont trois changements apportés par la loi-cadre de 1956 ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Identifier ce que la loi-cadre change : suffrage universel, collège unique, conseils de gouvernement et pouvoirs élargis pour les assemblées territoriales. Elle prépare l'autonomie, sans proclamer l'indépendance. Le travail forcé a été interdit dès 1946.",
+                "answers": [
+                  {
+                    "content": "Le suffrage universel",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le collège unique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des conseils de gouvernement et plus de pouvoirs pour les territoires",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'indépendance immédiate",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'interdiction du travail forcé",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'indépendance de la Côte d'Ivoire est obtenue par une guerre de libération contre la France.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : l'accession est pacifique et négociée. Elle passe par des lois, un référendum et un accord avec la France, sans guerre de libération.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Côte d'Ivoire proclame son indépendance le ___ août 1960.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : l'indépendance est proclamée le 7 août 1960. La Constitution suit le 3 novembre 1960.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  },
+                  {
+                    "content": "07",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Côte d'Ivoire accède à l'indépendance par une voie ___ et négociée.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Conclure sur la forme : pas de guerre de libération, mais des réformes obtenues par le vote et la négociation. D'où les mots « pacifique et négociée ».",
+                "answers": [
+                  {
+                    "content": "pacifique",
+                    "correct": true
+                  },
+                  {
+                    "content": "armée",
+                    "correct": false
+                  },
+                  {
+                    "content": "révolutionnaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "militaire",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Situer les grandes étapes de 1944 à 1960",
+          "statement": "Sujet de type interrogation. Document : frise chronologique de 1940 à 1965 sur l'accession de la Côte d'Ivoire à l'indépendance : Brazzaville et le SAA (1944), l'ONU et l'élection de Félix Houphouët-Boigny comme député (1945), le PDCI, le RDA et la loi du 11 avril (1946), la répression (1949-1950) et le désapparentement (1950), la loi-cadre (1956), le référendum et la République (1958), l'indépendance (1960). Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "frise-accession-tle",
+          "questions": [
+            {
+              "content": "Remets ces faits dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Situer chaque fait par sa date : SAA (1944), PDCI et RDA (1946), désapparentement (1950), loi-cadre (1956), référendum et République (1958), indépendance (1960). Pour réussir ce type de question, relève la date de chaque événement sur la frise avant de les classer.",
+              "answers": [
+                {
+                  "content": "Création du SAA"
+                },
+                {
+                  "content": "Création du PDCI et naissance du RDA"
+                },
+                {
+                  "content": "Désapparentement du RDA"
+                },
+                {
+                  "content": "Loi-cadre Defferre"
+                },
+                {
+                  "content": "Référendum et République de Côte d'Ivoire"
+                },
+                {
+                  "content": "Proclamation de l'indépendance"
+                }
+              ]
+            },
+            {
+              "content": "Combien d'années séparent la loi du 11 avril 1946 de l'indépendance de 1960 ?",
+              "question_type": "numeric",
+              "unit": "ans",
+              "tolerance": 0,
+              "explanation": "Méthode : repérer les deux années sur la frise (1946 et 1960), puis soustraire. 1960 − 1946 = 14. Le travail politique des Ivoiriens dure donc quatorze ans après la loi sur le travail forcé.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle période de la frise correspond à la République de Côte d'Ivoire dans la Communauté ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : lire la légende de la période sur la frise. La République est proclamée le 4 décembre 1958 et l'indépendance le 7 août 1960. 1949-1950 est la période de la répression ; 1944-1946 est celle de la naissance des organisations.",
+              "answers": [
+                {
+                  "content": "De 1958 à 1960",
+                  "correct": true
+                },
+                {
+                  "content": "De 1944 à 1946",
+                  "correct": false
+                },
+                {
+                  "content": "De 1949 à 1950",
+                  "correct": false
+                },
+                {
+                  "content": "De 1956 à 1958",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le syndicat SAA naît en ___, deux ans avant le PDCI et le RDA (1946).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : situer chaque organisation par sa date. Le SAA, syndicat de planteurs, naît en 1944 ; le PDCI (parti) et le RDA (rassemblement de partis) naissent en 1946. Ne confonds pas les deux années.",
+              "answers": [
+                {
+                  "content": "1944",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le désapparentement du RDA (1950) précède la loi-cadre Defferre (1956).",
+              "question_type": "true_false",
+              "explanation": "Méthode : comparer les dates. 1950 est antérieur à 1956 : le désapparentement vient d'abord, puis la loi-cadre. Pour une question vrai ou faux de chronologie, ramène toujours chaque fait à son année.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur la frise, l'événement qui se produit en 1945, entre Brazzaville et le PDCI, est ___.",
+              "question_type": "select",
+              "explanation": "Méthode : lire la frise de gauche à droite. Entre 1944 (Brazzaville, SAA) et 1946 (PDCI, RDA), on trouve 1945 : l'ONU est créée et Félix Houphouët-Boigny est élu député. Le désapparentement est de 1950, la loi-cadre de 1956 et l'indépendance de 1960.",
+              "answers": [
+                {
+                  "content": "la création de l'ONU et l'élection de Houphouët-Boigny comme député",
+                  "correct": true
+                },
+                {
+                  "content": "le désapparentement du RDA",
+                  "correct": false
+                },
+                {
+                  "content": "la loi-cadre Defferre",
+                  "correct": false
+                },
+                {
+                  "content": "la proclamation de l'indépendance",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les causes et les acteurs de l'accession",
+          "statement": "Sujet de type interrogation. Document : schéma en arbre des causes de l'accession. Contexte colonial : travail forcé, code de l'indigénat, inégalités entre planteurs africains et européens. Contexte international : Charte de l'Atlantique (1941), conférence de Brazzaville (1944), Charte de l'ONU (1945). Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "schema-causes",
+          "questions": [
+            {
+              "content": "Quels sont les trois éléments du contexte international qui encouragent l'émancipation des Africains ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : distinguer le contexte colonial du contexte international. Le schéma classe la Charte de l'Atlantique, Brazzaville et la Charte de l'ONU dans le contexte international. Le travail forcé relève du contexte colonial ; le référendum de 1958 est une étape, pas une cause.",
+              "answers": [
+                {
+                  "content": "La Charte de l'Atlantique (1941)",
+                  "correct": true
+                },
+                {
+                  "content": "La conférence de Brazzaville (1944)",
+                  "correct": true
+                },
+                {
+                  "content": "La Charte de l'ONU (1945)",
+                  "correct": true
+                },
+                {
+                  "content": "Le travail forcé",
+                  "correct": false
+                },
+                {
+                  "content": "Le référendum de 1958",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles personnes le SAA, créé en 1944, défend-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode pour présenter une organisation : situer, identifier, expliquer l'objectif. Le SAA est un syndicat de planteurs africains, créé pour répondre aux inégalités avec les planteurs européens. Il ne défend ni les planteurs européens ni l'administration.",
+              "answers": [
+                {
+                  "content": "Les planteurs africains",
+                  "correct": true
+                },
+                {
+                  "content": "Les fonctionnaires français",
+                  "correct": false
+                },
+                {
+                  "content": "Les soldats de l'armée",
+                  "correct": false
+                },
+                {
+                  "content": "Les planteurs européens",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le code de l'indigénat permettait à l'administration de punir des Africains sans passer par les tribunaux ordinaires.",
+              "question_type": "true_false",
+              "explanation": "Méthode : définir le terme. L'indigénat est un ensemble de sanctions administratives infligées aux Africains. C'est un élément du contexte colonial, supprimé en 1946.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La loi du 11 avril 1946 répond à une cause ___ : le travail forcé.",
+              "question_type": "select",
+              "explanation": "Méthode : relier la loi à la cause qu'elle traite. Le travail forcé se vit dans la colonie, c'est une cause du contexte colonial. La loi de 1946 en supprime l'usage.",
+              "answers": [
+                {
+                  "content": "coloniale",
+                  "correct": true
+                },
+                {
+                  "content": "internationale",
+                  "correct": false
+                },
+                {
+                  "content": "financière",
+                  "correct": false
+                },
+                {
+                  "content": "religieuse",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque organisation à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode : situer, puis identifier la nature de chaque organisation : syndicat pour le SAA (1944), parti pour le PDCI (1946), rassemblement de partis pour le RDA (octobre 1946, à Bamako).",
+              "answers": [
+                {
+                  "content": "Le SAA",
+                  "match": "Défendre les planteurs africains"
+                },
+                {
+                  "content": "Le PDCI",
+                  "match": "Parti ivoirien fondé en 1946"
+                },
+                {
+                  "content": "Le RDA",
+                  "match": "Rassemblement de partis de plusieurs territoires"
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi l'inégalité entre planteurs africains et européens a pu pousser des planteurs africains à s'organiser en 1944.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "L'inégalité est décrite (planteurs africains désavantagés, notamment pour la main-d'œuvre)",
+                "Le lien est fait avec la création du SAA en 1944",
+                "L'objectif du syndicat (défendre les planteurs africains) est précisé"
+              ],
+              "explanation": "Corrigé modèle : Avant 1946, les planteurs africains sont désavantagés par rapport aux planteurs européens, notamment pour la main-d'œuvre, et le travail forcé pèse sur les Africains. Pour défendre leurs intérêts, Félix Houphouët-Boigny et d'autres planteurs fondent en 1944 le Syndicat agricole africain (SAA). Ce syndicat organise les planteurs africains et prépare l'action politique qui suivra. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Avant 1946, les planteurs africains…"
+            }
+          ]
+        },
+        {
+          "title": "Analyser la répression de 1949-1950 et le désapparentement",
+          "statement": "Sujet de type devoir. Document : texte écrit pour Lnclass, qui résume les faits. En 1946, le RDA s'apparente au groupe communiste de l'Assemblée nationale française. À partir de 1949, des dirigeants du PDCI sont arrêtés, notamment à Grand-Bassam. Début 1950, des incidents font des victimes à Dimbokro. En 1950, Félix Houphouët-Boigny annonce la rupture de cet apparentement. La carte localise Grand-Bassam, Dimbokro et Abidjan. Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": "carte-repression",
+          "questions": [
+            {
+              "content": "Quelle est la nature du document ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : on donne la nature du document avant de l'interpréter. L'énoncé précise qu'il s'agit d'un texte écrit pour Lnclass pour résumer des faits : ce n'est ni une loi, ni un discours d'époque, ni une photographie.",
+              "answers": [
+                {
+                  "content": "Un texte de synthèse écrit pour Lnclass, qui résume des faits",
+                  "correct": true
+                },
+                {
+                  "content": "Une loi votée par l'Assemblée nationale",
+                  "correct": false
+                },
+                {
+                  "content": "Un discours de Félix Houphouët-Boigny",
+                  "correct": false
+                },
+                {
+                  "content": "Une photographie de 1950",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les deux acteurs principaux du texte ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Identifier les acteurs : le texte oppose l'administration coloniale, qui arrête, aux dirigeants du PDCI, qui sont arrêtés. L'ONU, la Communauté (1958) et le SAA (1944) n'apparaissent pas comme acteurs de ces faits.",
+              "answers": [
+                {
+                  "content": "L'administration coloniale",
+                  "correct": true
+                },
+                {
+                  "content": "Les dirigeants du PDCI",
+                  "correct": true
+                },
+                {
+                  "content": "L'Organisation des Nations unies",
+                  "correct": false
+                },
+                {
+                  "content": "Le gouvernement de la Communauté",
+                  "correct": false
+                },
+                {
+                  "content": "Le Syndicat agricole africain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets les faits du texte dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Étape 3 — Expliquer l'enchaînement : on lit l'apparentement (1946), puis les arrestations (1949), puis les incidents (début 1950), enfin la rupture de l'apparentement (1950). Toujours ordonner les faits avant de les expliquer.",
+              "answers": [
+                {
+                  "content": "Apparentement du RDA au groupe communiste (1946)"
+                },
+                {
+                  "content": "Arrestations de dirigeants du PDCI (1949)"
+                },
+                {
+                  "content": "Incidents de Dimbokro (début 1950)"
+                },
+                {
+                  "content": "Rupture de l'apparentement (1950)"
+                }
+              ]
+            },
+            {
+              "content": "Le texte indique que le PDCI est dissous en 1950.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Dégager le résultat : le texte parle de la rupture de l'apparentement, pas de la fin du PDCI. Lire attentivement le document évite d'ajouter un fait qu'il ne contient pas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Où se situe Grand-Bassam, d'après la carte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de lecture d'une carte : repérer le lieu, puis le situer par rapport à un repère connu. Grand-Bassam est sur le littoral, à l'est d'Abidjan. Les autres propositions placent la ville dans l'intérieur du pays.",
+              "answers": [
+                {
+                  "content": "Sur le littoral, à l'est d'Abidjan",
+                  "correct": true
+                },
+                {
+                  "content": "Au nord, près de Korhogo",
+                  "correct": false
+                },
+                {
+                  "content": "À l'ouest, près de Man",
+                  "correct": false
+                },
+                {
+                  "content": "Au centre, près de Bouaké",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique comment le désapparentement de 1950 s'inscrit dans le contexte de la répression de 1949-1950.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "L'apparentement au groupe communiste est cité comme point de tension",
+                "La répression (arrestations de 1949, incidents de 1950) est décrite par des faits",
+                "Le désapparentement est défini comme la rupture de l'alliance, en 1950",
+                "Le PDCI et le RDA continuent d'exister"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Situer : le RDA s'apparente en 1946 au groupe communiste de l'Assemblée nationale française. Étape 2 — Identifier : l'administration coloniale s'en inquiète ; à partir de 1949, des dirigeants du PDCI sont arrêtés, et des incidents font des victimes à Dimbokro début 1950. Étape 3 — Expliquer : en 1950, Félix Houphouët-Boigny décide de rompre l'apparentement : c'est le désapparentement. Étape 4 — Dégager : le PDCI et le RDA continuent d'exister et les tensions s'apaisent. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "En 1946, le RDA s'apparente…"
+            }
+          ]
+        },
+        {
+          "title": "Dissertation guidée : une accession pacifique et négociée",
+          "statement": "Sujet de type bac. Sujet : « La Côte d'Ivoire accède à l'indépendance de 1944 à 1960 par une voie pacifique et négociée. » Discutez. Document : frise chronologique de 1940 à 1965 (Brazzaville et le SAA en 1944, la loi du 11 avril 1946, la répression de 1949-1950 et le désapparentement de 1950, la loi-cadre de 1956, le référendum et la République de 1958, l'indépendance du 7 août 1960). Réponds aux questions qui construisent la dissertation.",
+          "exercise_type": "evaluation",
+          "figure": "frise-accession-tle",
+          "questions": [
+            {
+              "content": "Quels sont les deux mots clés du sujet à définir en introduction ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Analyser le sujet : les mots clés sont ceux qui portent la discussion, ici « pacifique » (sans guerre de libération) et « négociée » (obtenue par des lois, un référendum et un accord avec la France). Les autres notions appartiennent à la guerre froide, pas à ce sujet.",
+              "answers": [
+                {
+                  "content": "pacifique",
+                  "correct": true
+                },
+                {
+                  "content": "négociée",
+                  "correct": true
+                },
+                {
+                  "content": "bipolarisation",
+                  "correct": false
+                },
+                {
+                  "content": "non-alignement",
+                  "correct": false
+                },
+                {
+                  "content": "plan Marshall",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les parties de la dissertation.",
+              "question_type": "ordering",
+              "explanation": "Étape 2 — Construire le plan : l'introduction vient en premier, puis les causes, l'action politique (1944-1950), les étapes négociées (1956-1960), enfin la conclusion. Un plan chronologique et thématique suit le fil du sujet.",
+              "answers": [
+                {
+                  "content": "Introduction : définir les termes et poser la problématique"
+                },
+                {
+                  "content": "I. Les causes : le contexte colonial et international"
+                },
+                {
+                  "content": "II. L'action politique des Ivoiriens (1944-1950)"
+                },
+                {
+                  "content": "III. Les étapes négociées (1956-1960)"
+                },
+                {
+                  "content": "Conclusion : répondre à la problématique"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque fait à la partie du plan où il s'insère.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Classer les arguments : les faits du contexte colonial vont en partie I, les organisations et la loi de 1946 en partie II, la loi-cadre, le référendum et l'indépendance en partie III. Chaque fait sert une seule partie.",
+              "answers": [
+                {
+                  "content": "Travail forcé et indigénat",
+                  "match": "Partie I : les causes"
+                },
+                {
+                  "content": "Loi du 11 avril 1946 et PDCI",
+                  "match": "Partie II : l'action politique des Ivoiriens"
+                },
+                {
+                  "content": "Référendum de 1958 et indépendance de 1960",
+                  "match": "Partie III : les étapes négociées"
+                }
+              ]
+            },
+            {
+              "content": "Quels sont trois arguments qui montrent une accession pacifique et négociée ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Choisir des arguments : un argument s'appuie sur un fait précis. Le vote de 1946, les textes et le référendum de 1956-1958, et l'indépendance proclamée sans guerre montrent la voie pacifique et négociée. Les deux autres propositions sont contraires aux faits.",
+              "answers": [
+                {
+                  "content": "La loi du 11 avril 1946 est obtenue par un vote à l'Assemblée constituante",
+                  "correct": true
+                },
+                {
+                  "content": "Les étapes de 1956 à 1960 passent par des textes et un référendum",
+                  "correct": true
+                },
+                {
+                  "content": "L'indépendance est proclamée le 7 août 1960, sans guerre de libération",
+                  "correct": true
+                },
+                {
+                  "content": "L'indépendance est obtenue par la lutte armée",
+                  "correct": false
+                },
+                {
+                  "content": "La France refuse toute évolution entre 1946 et 1960",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige l'introduction de la dissertation : amorce, définition des mots clés, problématique et annonce du plan.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "L'amorce situe le sujet (empire colonial français après 1945)",
+                "« Pacifique » et « négociée » sont définis",
+                "Une problématique est posée sous forme de question",
+                "Le plan en trois parties est annoncé"
+              ],
+              "explanation": "Corrigé modèle : Après la Seconde Guerre mondiale, la France est affaiblie et le droit des peuples à disposer d'eux-mêmes est affirmé par la Charte de l'ONU (1945). La Côte d'Ivoire, colonie française, accède à l'indépendance le 7 août 1960. Une voie pacifique est une voie sans guerre de libération ; une voie négociée est obtenue par des lois, un référendum et un accord avec la France. Comment les Ivoiriens obtiennent-ils l'indépendance de 1944 à 1960, et cette voie est-elle sans tensions ? Nous verrons d'abord les causes, puis l'action politique des Ivoiriens de 1944 à 1950, enfin les étapes négociées de 1956 à 1960. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "Après 1945, la France est affaiblie…"
+            },
+            {
+              "content": "Rédige la partie III du développement : « Les étapes négociées (1956-1960) ». Nuance ton propos en rappelant que la voie pacifique a aussi connu des tensions avant 1956.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Les étapes sont citées dans l'ordre avec leurs dates (1956, 28 septembre 1958, 4 décembre 1958, 7 août 1960, 3 novembre 1960)",
+                "Chaque étape est expliquée (ce qu'elle change)",
+                "La distinction entre autonomie (1958) et souveraineté (1960) est faite",
+                "Le caractère pacifique et négocié est justifié par des faits",
+                "Une nuance rappelle la répression de 1949-1950 et le désapparentement",
+                "La partie se termine par une phrase de transition ou de conclusion"
+              ],
+              "explanation": "Corrigé modèle : La loi-cadre Defferre (23 juin 1956) donne plus de pouvoirs aux territoires : suffrage universel, collège unique, conseils de gouvernement. Le 28 septembre 1958, la Côte d'Ivoire vote oui au référendum sur la Constitution de la Ve République ; le 4 décembre 1958, elle devient une République autonome dans la Communauté, la France gardant notamment la défense, la politique étrangère et la monnaie. L'indépendance est proclamée le 7 août 1960, puis la Constitution est adoptée le 3 novembre 1960. Il n'y a pas de guerre de libération : les réformes sont obtenues par le vote et la négociation. Cette voie n'a toutefois pas été sans tensions, comme le montrent la répression de 1949-1950 et le désapparentement de 1950. Ainsi, la Côte d'Ivoire passe de l'autonomie à la souveraineté par étapes. Barème : 1 point par critère.",
+              "answers": [],
+              "starter": "La loi-cadre Defferre de 1956 donne…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
