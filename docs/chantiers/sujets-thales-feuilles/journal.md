@@ -8,6 +8,8 @@
 
 ## Ce qui a dérapé
 
+- Lot C : les maths restaient en LaTeX brut (`$ABC$`, `$$\frac{AD}{AB}=…$$`) dans l'encadré « À retenir » et les propositions des QCM / vrai ou faux, et les figures d'exercice (192 px) étaient illisibles. Livrés par `prepare-interros-cahier` (seuls l'énoncé et les libellés portaient `data-controller="math"`), vus aux captures ; corrigé en posant le déclencheur sur l'encadré, les propositions, l'indice et le bloc « Correction », et en agrandissant la figure.
+
 ## Ce qu'on a appris sur la codebase
 
 ## Dette laissée derrière

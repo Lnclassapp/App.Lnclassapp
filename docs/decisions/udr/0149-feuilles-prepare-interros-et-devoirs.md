@@ -140,6 +140,7 @@ des `_assigned_exercise`)
   « a. <explication> », « b. … » ; la lettre est le rang de la question dans l'exercice (a pour la 1re), une question sans explication est
   sautée sans décaler les lettres, et le bloc est absent si aucune n'en a. Restent sur la question : ✓ / ✗ (verdict), « Ta réponse » et la bonne
   réponse. Les réponses rédigées et le cahier gardent leur corrigé type dans leur partiel. Le bloc n'est pas replié par « Voir plus ».
+- *Maths et figures* (vu aux captures). Tout texte de contenu d'une feuille porte `data-controller="math"` (KaTeX côté client, sur le texte échappé) : encadré « À retenir » / « Notions mobilisées », propositions (QCM et vrai ou faux), indice, bloc « Correction » de la page de résultat, comme l'énoncé et les libellés. La figure d'un exercice (`.ps-exercise-figure`) fait toute la colonne sur téléphone (320 px au plus, centrée) et 300 px à côté de l'énoncé sur ordinateur, au lieu de 192 px.
 - *Hors de cette règle* : « Je m'entraîne » de la fiche (`catalog/practice_checks`) garde sa correction par question.
 
 ## 4. Conséquences

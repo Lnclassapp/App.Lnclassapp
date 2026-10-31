@@ -53,6 +53,42 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_select "#prepare-interros a[href='#{exercise_path(@by_notion.first.public_id)}']", 0
   end
 
+  # prepare-interros-cahier, vu aux captures : le LaTeX de « À retenir », des propositions et des indices restait brut.
+  test "the « À retenir » box, the propositions and the hint carry the math trigger so their formulas are rendered" do
+    essential = @notions.first
+    essential.update!(sheet: { "remember" => "Si $(MN) \\parallel (BC)$ alors $$\\frac{AM}{AB}$$." })
+    sign_in_as @student
+
+    get course_path(@course.slug)
+
+    assert_select "#notion-#{essential.slug} .ps-remember[data-controller=math]", text: including("$(MN)")
+    assert_select "#notion-#{essential.slug} .ps-choice .ps-choice-label[data-controller=math]", minimum: 1
+    assert_select "#notion-#{essential.slug} .ps-hint[data-controller=math]", 1
+  end
+
+  test "the true or false propositions carry the math trigger" do
+    exercise = @by_notion.first
+    vf = exercise.questions.create!(position: 9, content: "Vrai ?", question_type: "true_false")
+    [ [ 1, "Vrai", true ], [ 2, "Faux", false ] ].each { |position, content, correct| vf.answers.create!(position:, content:, correct:) }
+    sign_in_as @student
+
+    get course_path(@course.slug)
+
+    assert_select frame(exercise) + " .ps-choices-vf .ps-choice-vf [data-controller=math]", 2
+  end
+
+  test "the exercise figure is no longer the 190 px thumbnail: it takes the readable figure class (full width on a phone, 280 to 320 px beside the statement)" do
+    exercise = @by_notion.first
+    @course.update!(figures: [ revision_figure ])
+    exercise.update!(figure_key: "triangle-thales")
+    sign_in_as @student
+
+    get course_path(@course.slug)
+
+    assert_select frame(exercise) + " .ps-exercise-figure figure", 1
+    assert_select frame(exercise) + " .ps-exercise-figure.w-48", 0
+  end
+
   test "each question carries its tag and label, the QCM its lettered propositions, and the form targets the sheet check" do
     exercise = @by_notion.first
     create_kind_question(exercise:, question_type: "fill_blank", content: "AM/AB = AN/___", answers: [ "AC" ])
