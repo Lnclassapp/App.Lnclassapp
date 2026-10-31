@@ -27,6 +27,8 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     assert_response :success
     assert_select "#prepare-interros .ps-sheet", 5
+    assert_select "#prepare-interros .ps-sheet[data-controller=prepare-sheet][data-prepare-sheet-owner-value=?]", @student.id.to_s, 5
+    assert_select "#prepare-interros .ps-exercise-head .ps-status", text: /Brouillon|Publié/, count: 0
     assert_select "#notion-#{@notions.first.slug}.ps-sheet" do
       assert_select ".ps-header", text: including("PRÉPARE INTERROS")
       assert_select ".ps-header", text: including(@course.material.name.upcase)
@@ -192,6 +194,7 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#prepare-interros .ps-sheet", 5
     assert_select "#prepare-interros input:not([type=hidden])", 0
+    assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0
     assert_select "#prepare-interros textarea, #prepare-interros select", 0
     assert_select "#prepare-interros button", text: "Vérifier ma réponse", count: 0
     assert_select "#prepare-interros button.ps-btn--hint", 0
@@ -207,7 +210,11 @@ class Catalog::PrepareInterrosTest < ActionDispatch::IntegrationTest
 
     assert_select "#prepare-interros .ps-exercise", 7
     assert_select "#prepare-interros input:not([type=hidden])", 0
+    assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0
     assert_select "#prepare-interros [id^=assignment_]", 0
+    assert_select "#toute-la-lecon", 1
+    assert_select "#prepare-interros .ps-exercise-head .ps-status", text: including("Brouillon"), count: 1
+    assert_select "#prepare-interros .ps-exercise-head .ps-status", text: "Publié", count: 6
     assert_select "#prepare-interros button", text: "Vérifier ma réponse", count: 0
   end
 

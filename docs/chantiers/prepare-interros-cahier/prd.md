@@ -132,7 +132,7 @@ Et sa sélection est vidée
 Étant donné un élève de la 3e 1 et l'envoi de 4 exercices
 Quand il ouvre « Ma classe »
 Alors il voit une feuille « PRÉPARE DEVOIRS » avec les 4 exercices et « Notions mobilisées : » qui nomme leurs notions
-Et il vérifie un exercice sans quitter la page
+Et il rend un exercice à l'enseignant depuis cette feuille : « Rendre à l'enseignant » ouvre la page de résultat de sa copie et « Retour » le ramène à « Ma classe » (CA-16)
 
 # CA-14 Devoir reçu, forme « Prépare interros »
 Étant donné l'envoi de 2 exercices de la même notion

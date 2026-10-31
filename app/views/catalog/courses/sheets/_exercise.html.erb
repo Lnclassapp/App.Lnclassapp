@@ -17,6 +17,8 @@
       <div class="ps-exercise-head">
         <b><%= t("catalog.courses.sheets.exercise", number: exercise.number) %></b>
         <span class="ps-status" data-ps="done" <%= tag.attributes(hidden: !checked) %>><%= t("catalog.courses.sheets.#{copy.passed ? :passed : :to_review}") if checked %></span>
+        <%# L'équipe lit le statut éditorial de chaque exercice (brouillon ou publié) ; les autres rôles ne le voient pas. %>
+        <% if mode == :team && exercise.status.present? %><span class="ps-status"><%= t("catalog.content_status.#{exercise.status}") %></span><% end %>
       </div>
       <% if exercise.statement.present? %>
         <div class="ps-statement" data-controller="math"><%= simple_format(exercise.statement) %></div>

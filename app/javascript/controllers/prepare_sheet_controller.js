@@ -1,5 +1,5 @@
 // ⚡ FRONT · prepare_sheet_controller — une feuille « Prépare interros » / « Prépare devoirs » : brouillon, indice, refaire, recommencer
-// Rôle : garde dans localStorage les réponses non vérifiées de chaque exercice (clé lnclass-prepare-<exercise_public_id>), montre ou cache l'indice, remet à blanc un exercice ou toute la feuille, sans requête
+// Rôle : garde dans localStorage les réponses non vérifiées de chaque exercice (clé lnclass-prepare-<owner>-<exercise_public_id> : le brouillon d'un élève ne se recharge pas dans le compte d'un autre sur le même appareil), montre ou cache l'indice, remet à blanc un exercice ou toute la feuille, sans requête
 // ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Comportement) · lecture et écriture du stockage sous try/catch : un navigateur qui le refuse ne casse rien
 import { Controller } from "@hotwired/stimulus"
 
@@ -7,6 +7,8 @@ const PREFIX = "lnclass-prepare-"
 
 export default class extends Controller {
   static targets = ["exercise"]
+  // owner : posé par le serveur (id de l'élève connecté, ou « visitor ») ; il entre dans la clé du brouillon.
+  static values = { owner: { type: String, default: "visitor" } }
 
   connect() {
     // Un turbo_stream.refresh fusionne la page : le serveur rend l'état corrigé ou vierge, le navigateur remet son brouillon.
@@ -158,7 +160,7 @@ export default class extends Controller {
   }
 
   storageKey(exercise) {
-    return PREFIX + exercise.dataset.exerciseId
+    return `${PREFIX}${this.ownerValue}-${exercise.dataset.exerciseId}`
   }
 
   read(exercise) {

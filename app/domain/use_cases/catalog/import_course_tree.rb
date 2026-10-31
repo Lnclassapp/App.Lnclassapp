@@ -14,7 +14,7 @@ module UseCases
       LESSON_EXERCISES = 4
       DEFAULT_THEME = "blue"
       # ADR-XXXX sujets-de-devoir §4 : l'indice, le titre et les notions d'un sujet sont du texte seul, borné ; un cours a dix sujets au plus,
-      # un sujet dix exercices au plus (les mêmes bornes que les contraintes de la base, qui les garantit aussi).
+      # un sujet dix exercices au plus (bornes de l'adaptateur d'import seulement : la base ne les contraint pas).
       HINT_MAX = 400
       SUBJECT_TITLE_MAX = Entities::Catalog::Subject::TITLE_MAX
       SUBJECT_NOTIONS_MAX = Entities::Catalog::Subject::NOTIONS_MAX
