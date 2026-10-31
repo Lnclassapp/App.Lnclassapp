@@ -37,7 +37,8 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
         assert_selector ".ps-sheet", count: 2
         within(".ps-sheet:first-child") do
           assert_selector ".ps-header-title", text: "PRÉPARE INTERROS", match: :first
-          assert_selector ".ps-title", text: "LA PROPRIÉTÉ DE THALÈS"
+          assert_selector ".ps-title", text: "PRÉPARE INTERROS N°1"
+          assert_selector ".ps-subject", text: "La propriété de Thalès"
           assert_selector ".ps-remember", text: "À retenir : Les rapports sont égaux."
           assert_selector ".ps-exercise", count: 1
         end

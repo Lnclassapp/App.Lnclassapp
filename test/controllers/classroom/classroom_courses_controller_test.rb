@@ -32,9 +32,11 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1")
     assert_select "#fiche-de-revision h2", text: "Fiche de révision"
     assert_select "#prepare-interros h2", text: "Prépare interros"
-    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-title", text: "La méiose"
+    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-title", text: "Prépare interros n°1"
+    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-subject", text: "La méiose"
     assert_select "#prepare-interros .ps-sheet#notion-#{@mitose.slug} .ps-exercise", 1
-    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-title", text: tl("lesson_wide_title")
+    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-title", text: /\APrépare interros n°\d+\z/
+    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-subject", text: tl("lesson_wide_title")
     assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_wide.public_id}"
     assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_meiose.public_id}"
     assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0

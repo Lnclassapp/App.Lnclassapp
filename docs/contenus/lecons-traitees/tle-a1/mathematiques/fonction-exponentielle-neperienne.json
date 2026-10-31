@@ -1,0 +1,1515 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Fonction exponentielle népérienne",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "A1",
+      "theme": "teal",
+      "figures": [],
+      "notions": [
+        {
+          "name": "La fonction exponentielle, réciproque de ln",
+          "remember": "La fonction **exponentielle népérienne**, notée $\\exp$ ou $e^x$, est la **réciproque** de $\\ln$ : pour tout réel $x$ et tout réel $y > 0$, $e^x = y \\iff x = \\ln y$. Conséquences : $e^x > 0$ pour tout réel $x$ ; $e^0 = 1$ ; $e^1 = e \\approx 2{,}718$ ; $\\ln(e^x) = x$ pour tout réel $x$ ; $e^{\\ln y} = y$ pour tout $y > 0$.",
+          "method": [
+            "Repérer dans l'expression un $\\ln(e^{\\dots})$, un $e^{\\ln(\\dots)}$ ou une valeur particulière comme $e^0$.",
+            "Appliquer la règle qui convient : $\\ln(e^x) = x$, $e^{\\ln y} = y$, $e^0 = 1$, ou l'équivalence $e^x = y \\iff x = \\ln y$.",
+            "Calculer le résultat, en vérifiant que le nombre placé dans $\\ln$ est bien strictement positif."
+          ],
+          "example": {
+            "statement": "Calculer $A = \\ln(e^{5}) + e^{\\ln 7} - e^{0}$.",
+            "steps": [
+              "Repérer : $\\ln(e^{5})$ est de la forme $\\ln(e^x)$, $e^{\\ln 7}$ est de la forme $e^{\\ln y}$, et $e^0$ est une valeur particulière.",
+              "Appliquer : $\\ln(e^{5}) = 5$, $e^{\\ln 7} = 7$ et $e^{0} = 1$.",
+              "Calculer : $A = 5 + 7 - 1 = 11$. Le nombre $7$ placé dans $\\ln$ est bien strictement positif."
+            ]
+          },
+          "pitfall": "Ne jamais écrire que $e^x$ peut être nul ou négatif, ni utiliser $\\ln$ d'un nombre négatif. Contre-exemple : $e^{\\ln(-3)}$ n'existe pas, car $\\ln(-3)$ n'existe pas ; et $e^0 = 1$, pas $0$. Une exponentielle est toujours strictement positive : $e^{-100} > 0$.",
+          "figure": null,
+          "exercise": {
+            "title": "Passer de l'exponentielle au logarithme",
+            "statement": "Dans cet exercice, tu utilises la fiche de révision : $e^x$ et $\\ln$ sont des fonctions réciproques.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Calcule $\\ln(e^{4})$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : l'expression est de la forme $\\ln(e^x)$ avec $x = 4$. Étape 2 — Appliquer : $\\ln(e^x) = x$. Étape 3 — Calculer : $\\ln(e^{4}) = 4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que vaut $e^{0}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $e^0$ est une valeur particulière. Étape 2 — Appliquer : $e^0 = 1$. Étape 3 — Calculer : le résultat est $1$. La proposition $0$ confond $e^0$ avec $0$ (une exponentielle n'est jamais nulle) ; la proposition $e$ confond $e^0$ avec $e^1$.",
+                "answers": [
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $e^{\\ln 9} - \\ln(e^{2})$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $e^{\\ln 9}$ est de la forme $e^{\\ln y}$ avec $y = 9 > 0$, et $\\ln(e^{2})$ est de la forme $\\ln(e^x)$. Étape 2 — Appliquer : $e^{\\ln 9} = 9$ et $\\ln(e^{2}) = 2$. Étape 3 — Calculer : $9 - 2 = 7$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour tout nombre réel $x$, on a $e^{x} > 0$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on compare $e^x$ à $0$. Étape 2 — Appliquer : $e^x = y$ n'a de sens que pour $y > 0$, car $x = \\ln y$ exige $y > 0$. Étape 3 — Calculer : par exemple $e^{-5} = \\dfrac{1}{e^{5}} > 0$. L'affirmation est vraie : une exponentielle est toujours strictement positive.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque expression à sa valeur.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : chaque expression est de la forme $\\ln(e^x)$, $e^{\\ln y}$ ou $e^0$. Étape 2 — Appliquer : $\\ln(e^{3}) = 3$ ; $e^{0} = 1$ ; $e^{\\ln 6} = 6$ ; $\\ln(e^{2}) = 2$. Étape 3 — Calculer : les quatre valeurs sont $3$, $1$, $6$ et $2$.",
+                "answers": [
+                  {
+                    "content": "$\\ln(e^{3})$",
+                    "match": "3"
+                  },
+                  {
+                    "content": "$e^{0}$",
+                    "match": "1"
+                  },
+                  {
+                    "content": "$e^{\\ln 6}$",
+                    "match": "6"
+                  },
+                  {
+                    "content": "$\\ln(e^{2})$",
+                    "match": "2"
+                  }
+                ]
+              },
+              {
+                "content": "Complète : $e^{x} = 7 \\iff x =$ ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : on a $e^x = y$ avec $y = 7$. Étape 2 — Appliquer : $e^x = y \\iff x = \\ln y$. Étape 3 — Calculer : $x = \\ln 7$ ; $7 > 0$, c'est bien défini. La proposition $e^{7}$ inverse les rôles de $e^x$ et de $\\ln$ ; les deux autres n'ont aucun rapport avec la réciproque.",
+                "answers": [
+                  {
+                    "content": "$e^{7}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{7}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln 7$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$7e$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Laquelle de ces écritures n'existe pas ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche un $\\ln$ appliqué à un nombre négatif ou nul. Étape 2 — Appliquer : $\\ln y$ n'existe que pour $y > 0$. Étape 3 — Calculer : $\\ln(-5)$ n'existe pas, donc $e^{\\ln(-5)}$ non plus. Les autres existent : $e^{\\ln 5} = 5$, $\\ln(e^{-5}) = -5$ (le nombre $e^{-5}$ est positif) et $\\ln(e^{0}) = \\ln 1 = 0$. Le piège est de croire que $e^{-5}$ est négatif.",
+                "answers": [
+                  {
+                    "content": "$e^{\\ln 5}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{\\ln(-5)}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\ln(e^{-5})$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln(e^{0})$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à passer de $e^x$ à $\\ln$ et inversement.",
+            "questions": [
+              {
+                "content": "Calcule $\\ln(e^{6}) =$ ___ et $e^{\\ln 8} =$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "$\\ln(e^{6}) = 6$ car $\\ln(e^x) = x$ ; $e^{\\ln 8} = 8$ car $e^{\\ln y} = y$ pour $y > 0$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Utilise $\\ln(e^x) = x$ puis $e^{\\ln y} = y$."
+              },
+              {
+                "content": "Quel est le signe de $e^{-3}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Une exponentielle est toujours strictement positive : $e^{-3} = \\dfrac{1}{e^{3}} > 0$. Elle n'est jamais négative ni nulle.",
+                "answers": [
+                  {
+                    "content": "Positif",
+                    "correct": true
+                  },
+                  {
+                    "content": "Négatif",
+                    "correct": false
+                  },
+                  {
+                    "content": "Nul",
+                    "correct": false
+                  }
+                ],
+                "hint": "Rappelle-toi que $e^x > 0$ pour tout réel $x$."
+              },
+              {
+                "content": "Complète : $e^{x} = 2 \\iff x =$ ___",
+                "question_type": "select",
+                "explanation": "La réciproque donne $e^x = 2 \\iff x = \\ln 2$, car $2 > 0$.",
+                "answers": [
+                  {
+                    "content": "$e^{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln 2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2e$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les propriétés algébriques de l'exponentielle",
+          "remember": "Pour tous réels $a$ et $b$ et tout entier $n$ : $e^{a+b} = e^{a} \\times e^{b}$ ; $e^{a-b} = \\dfrac{e^{a}}{e^{b}}$ ; $e^{-a} = \\dfrac{1}{e^{a}}$ ; $(e^{a})^{n} = e^{na}$. L'exponentielle transforme une **somme** d'exposants en **produit** de puissances de $e$.",
+          "method": [
+            "Repérer l'opération faite entre les puissances de $e$ : produit, quotient, inverse ou puissance.",
+            "Appliquer la règle qui correspond : on additionne les exposants pour un produit, on les soustrait pour un quotient, on les multiplie pour une puissance.",
+            "Calculer l'exposant obtenu et écrire le résultat sous la forme d'une seule puissance de $e$."
+          ],
+          "example": {
+            "statement": "Écrire $\\dfrac{e^{5} \\times e^{2}}{e^{4}}$ sous la forme $e^{k}$.",
+            "steps": [
+              "Repérer : au numérateur, un produit $e^{5} \\times e^{2}$ ; puis un quotient par $e^{4}$.",
+              "Appliquer : $e^{5} \\times e^{2} = e^{5+2} = e^{7}$, puis $\\dfrac{e^{7}}{e^{4}} = e^{7-4}$.",
+              "Calculer : l'exposant vaut $7 - 4 = 3$, donc le résultat est $e^{3}$."
+            ]
+          },
+          "pitfall": "Ne pas confondre une somme et un produit de puissances de $e$. $e^{a} + e^{b}$ n'est pas $e^{a+b}$. Contre-exemple : $e^{0} + e^{0} = 1 + 1 = 2$, mais $e^{0+0} = e^{0} = 1$. Et pour un produit on **additionne** les exposants : $e^{2} \\times e^{3} = e^{5}$, pas $e^{6}$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer avec les puissances de e",
+            "statement": "Dans cet exercice, tu utilises les propriétés algébriques de l'exponentielle pour écrire chaque expression avec une seule puissance de $e$.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On a $e^{3} \\times e^{4} = e^{k}$. Donne la valeur de $k$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : c'est un produit de deux puissances de $e$. Étape 2 — Appliquer : $e^{a} \\times e^{b} = e^{a+b}$, on additionne les exposants. Étape 3 — Calculer : $e^{3} \\times e^{4} = e^{3+4} = e^{7}$, donc $k = 7$. Multiplier les exposants ($3 \\times 4 = 12$) est l'erreur classique.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On a $\\dfrac{e^{9}}{e^{4}} = e^{k}$. Donne la valeur de $k$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : c'est un quotient de deux puissances de $e$. Étape 2 — Appliquer : $\\dfrac{e^{a}}{e^{b}} = e^{a-b}$, on soustrait les exposants. Étape 3 — Calculer : $\\dfrac{e^{9}}{e^{4}} = e^{9-4} = e^{5}$, donc $k = 5$. Diviser les exposants ($9 \\div 4$) est faux.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'écriture de $(e^{2})^{5}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est une puissance d'une puissance de $e$. Étape 2 — Appliquer : $(e^{a})^{n} = e^{na}$, on multiplie les exposants. Étape 3 — Calculer : $(e^{2})^{5} = e^{2 \\times 5} = e^{10}$. La proposition $e^{7}$ additionne les exposants (règle du produit) ; $e^{25}$ calcule $2^5$ au lieu de $2 \\times 5$ ; $5e^{2}$ traite la puissance comme une multiplication.",
+                "answers": [
+                  {
+                    "content": "$e^{7}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{10}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{25}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5e^{2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On a $\\dfrac{1}{e^{3}} = e^{k}$. Donne la valeur de $k$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : c'est l'inverse d'une puissance de $e$. Étape 2 — Appliquer : $\\dfrac{1}{e^{a}} = e^{-a}$. Étape 3 — Calculer : $\\dfrac{1}{e^{3}} = e^{-3}$, donc $k = -3$.",
+                "answers": [
+                  {
+                    "content": "-3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux égalités vraies pour tout réel $x$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on a un produit, un quotient et une somme de puissances de $e$. Étape 2 — Appliquer : $e^{x} \\times e^{2} = e^{x+2}$ et $\\dfrac{e^{x}}{e^{2}} = e^{x-2}$ sont deux règles du cours. Étape 3 — Calculer : elles sont vraies. $e^{x} + e^{2} = e^{x+2}$ est fausse : il n'y a pas de règle pour une somme (avec $x = 0$ : $1 + e^{2} \\neq e^{2}$). $e^{x} \\times e^{2} = e^{2x}$ est fausse : on additionne les exposants, on ne les multiplie pas.",
+                "answers": [
+                  {
+                    "content": "$e^{x} \\times e^{2} = e^{x+2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{x} + e^{2} = e^{x+2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{e^{x}}{e^{2}} = e^{x-2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{x} \\times e^{2} = e^{2x}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'égalité $e^{2} + e^{3} = e^{5}$ est vraie.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : c'est une somme de puissances de $e$, pas un produit. Étape 2 — Appliquer : la règle $e^{a+b} = e^{a} \\times e^{b}$ vaut pour un produit ; il n'existe pas de règle pour la somme. Étape 3 — Calculer : $e^{2} \\times e^{3} = e^{5}$, mais $e^{2} + e^{3} \\neq e^{5}$ (avec $e \\approx 2{,}7$ : $e^2 + e^3 \\approx 7{,}4 + 20 = 27{,}4$ alors que $e^5 \\approx 148$). L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On a $\\dfrac{e^{5} \\times e^{-2}}{e^{1}} = e^{k}$. Donne la valeur de $k$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : un produit $e^{5} \\times e^{-2}$ au numérateur, puis un quotient par $e^{1}$. Étape 2 — Appliquer : $e^{5} \\times e^{-2} = e^{5+(-2)} = e^{3}$, puis $\\dfrac{e^{3}}{e^{1}} = e^{3-1}$. Étape 3 — Calculer : l'exposant vaut $3 - 1 = 2$, donc $k = 2$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à écrire une expression avec une seule puissance de $e$.",
+            "questions": [
+              {
+                "content": "Complète : $e^{4} \\times e^{3} = e^{k}$ avec $k =$ ___ , et $\\dfrac{e^{6}}{e^{2}} = e^{m}$ avec $m =$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "$e^{4} \\times e^{3} = e^{4+3} = e^{7}$, donc $k = 7$ ; $\\dfrac{e^{6}}{e^{2}} = e^{6-2} = e^{4}$, donc $m = 4$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Produit : on additionne les exposants. Quotient : on les soustrait."
+              },
+              {
+                "content": "Quelle est l'écriture de $(e^{3})^{2}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Pour une puissance, on multiplie les exposants : $(e^{3})^{2} = e^{3 \\times 2} = e^{6}$.",
+                "answers": [
+                  {
+                    "content": "$e^{6}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{5}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{9}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pour une puissance d'une puissance, on multiplie les exposants."
+              },
+              {
+                "content": "L'égalité $e^{1} \\times e^{1} = e^{2}$ est vraie.",
+                "question_type": "true_false",
+                "explanation": "Pour un produit, on additionne les exposants : $e^{1} \\times e^{1} = e^{1+1} = e^{2}$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Équations et inéquations avec l'exponentielle",
+          "remember": "Pour $k > 0$ : $e^{u} = k \\iff u = \\ln k$ ; $e^{u} \\geq k \\iff u \\geq \\ln k$ ; $e^{u} \\leq k \\iff u \\leq \\ln k$. La fonction $\\ln$ est croissante : le sens de l'inégalité ne change pas. Pour $k \\leq 0$ : $e^{u} = k$ et $e^{u} \\leq k$ n'ont **aucune solution**, et $e^{u} \\geq k$ est vraie pour tout réel, car $e^{u} > 0$. Enfin $e^{u} = e^{v} \\iff u = v$.",
+          "method": [
+            "Isoler la puissance de $e$ d'un côté, pour obtenir une forme $e^{u} = k$ (ou $e^{u} \\geq k$, $e^{u} \\leq k$).",
+            "Contrôler le signe de $k$ : si $k \\leq 0$, $e^{u} = k$ et $e^{u} \\leq k$ n'ont pas de solution, et $e^{u} \\geq k$ est vraie pour tout réel ; sinon on continue.",
+            "Appliquer $\\ln$ aux deux membres, sans changer le sens de l'inégalité : $u = \\ln k$ (ou $u \\geq \\ln k$).",
+            "Résoudre l'équation ou l'inéquation obtenue en $x$ et écrire l'ensemble des solutions."
+          ],
+          "example": {
+            "statement": "Résoudre dans $\\mathbb{R}$ l'équation $2e^{x} + 1 = 11$.",
+            "steps": [
+              "Isoler : $2e^{x} = 11 - 1 = 10$, donc $e^{x} = 5$.",
+              "Contrôler : $k = 5$ et $5 > 0$, l'équation peut avoir une solution.",
+              "Appliquer : $e^{x} = 5 \\iff x = \\ln 5$.",
+              "Résoudre : il n'y a rien d'autre à calculer ; l'ensemble des solutions est $S = \\{\\ln 5\\}$."
+            ]
+          },
+          "pitfall": "Ne pas appliquer $\\ln$ à un nombre négatif. Contre-exemple : $e^{x} = -2$ n'a aucune solution, car $e^{x}$ est toujours strictement positif ; écrire $x = \\ln(-2)$ est faux. Contrôle toujours le signe de $k$. En inéquation, $\\ln$ est croissante : $e^{x} \\geq 3$ donne $x \\geq \\ln 3$, le sens ne change pas.",
+          "figure": null,
+          "exercise": {
+            "title": "Résoudre avec l'exponentielle",
+            "statement": "Dans cet exercice, tu résous des équations et des inéquations avec la méthode de la fiche : isoler, contrôler, appliquer $\\ln$, résoudre.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Résous l'équation $e^{x} = 1$. Donne la valeur de $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Isoler : l'équation est déjà de la forme $e^{x} = k$ avec $k = 1$. Étape 2 — Contrôler : $1 > 0$. Étape 3 — Appliquer : $e^{x} = 1 \\iff x = \\ln 1$. Étape 4 — Résoudre : $\\ln 1 = 0$, donc $S = \\{0\\}$.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la solution de l'équation $e^{x} = 4$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Isoler : l'équation est de la forme $e^{x} = k$ avec $k = 4$. Étape 2 — Contrôler : $4 > 0$. Étape 3 — Appliquer : $x = \\ln 4$. Étape 4 — Résoudre : $S = \\{\\ln 4\\}$. La proposition $e^{4}$ inverse les rôles de $e^x$ et de $\\ln$ ; $x = 4$ oublie d'appliquer $\\ln$ ; $-\\ln 4$ ajoute un signe sans raison.",
+                "answers": [
+                  {
+                    "content": "$x = e^{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = \\ln 4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x = 4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x = -\\ln 4$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous l'équation $e^{2x} = e^{6}$. Donne la valeur de $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Isoler : les deux membres sont déjà des puissances de $e$. Étape 2 — Contrôler : $e^{6} > 0$. Étape 3 — Appliquer : $e^{u} = e^{v} \\iff u = v$, donc $2x = 6$. Étape 4 — Résoudre : $x = \\dfrac{6}{2} = 3$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résous l'équation $e^{2x-1} = 1$. Donne la valeur de $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Isoler : l'équation est de la forme $e^{u} = k$ avec $u = 2x - 1$ et $k = 1$. Étape 2 — Contrôler : $1 > 0$. Étape 3 — Appliquer : $2x - 1 = \\ln 1 = 0$. Étape 4 — Résoudre : $2x = 1$, donc $x = 0{,}5$.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'ensemble des solutions de l'inéquation $e^{x} \\geq 3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Isoler : l'inéquation est de la forme $e^{x} \\geq k$ avec $k = 3$. Étape 2 — Contrôler : $3 > 0$. Étape 3 — Appliquer : $\\ln$ est croissante, le sens ne change pas : $x \\geq \\ln 3$. Étape 4 — Résoudre : $S = [\\ln 3 ; +\\infty[$. La proposition $]-\\infty ; \\ln 3]$ renverse le sens ; $[3 ; +\\infty[$ oublie $\\ln$ ; $[e^{3} ; +\\infty[$ inverse les rôles de $e^x$ et de $\\ln$.",
+                "answers": [
+                  {
+                    "content": "$[\\ln 3 ; +\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-\\infty ; \\ln 3]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[3 ; +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[e^{3} ; +\\infty[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'ensemble des solutions de l'inéquation $e^{x} < 1$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Isoler : l'inéquation est de la forme $e^{x} < k$ avec $k = 1$. Étape 2 — Contrôler : $1 > 0$. Étape 3 — Appliquer : $\\ln$ est croissante : $x < \\ln 1$. Étape 4 — Résoudre : $\\ln 1 = 0$, donc $S = ]-\\infty ; 0[$. La proposition $]0 ; +\\infty[$ renverse le sens ; $]-\\infty ; 1[$ oublie $\\ln$ ; $]-\\infty ; e[$ confond $\\ln 1$ avec $e$.",
+                "answers": [
+                  {
+                    "content": "$]0 ; +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]-\\infty ; 1[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]-\\infty ; 0[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-\\infty ; e[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour résoudre $2e^{x} = 8$.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Isoler : on divise par $2$ pour obtenir $e^{x} = 4$. Étape 2 — Contrôler : $4 > 0$, donc l'équation a une solution. Étape 3 — Appliquer : $x = \\ln 4$. Étape 4 — Résoudre : on conclut $S = \\{\\ln 4\\}$. L'ordre compte : on ne peut pas appliquer $\\ln$ avant d'avoir isolé $e^{x}$, ni avant d'avoir contrôlé le signe.",
+                "answers": [
+                  {
+                    "content": "Isoler : $e^{x} = 4$."
+                  },
+                  {
+                    "content": "Contrôler : $4 > 0$, la résolution est possible."
+                  },
+                  {
+                    "content": "Appliquer $\\ln$ : $x = \\ln 4$."
+                  },
+                  {
+                    "content": "Résoudre : écrire $S = \\{\\ln 4\\}$."
+                  }
+                ]
+              },
+              {
+                "content": "L'équation $e^{x} = -5$ admet pour solution $x = \\ln(-5)$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Isoler : l'équation est de la forme $e^{x} = k$ avec $k = -5$. Étape 2 — Contrôler : $k = -5 \\leq 0$, donc il n'y a aucune solution, car $e^{x} > 0$ pour tout réel $x$. Étape 3 — Appliquer : on ne peut pas, $\\ln(-5)$ n'existe pas. Étape 4 — Résoudre : $S = \\varnothing$. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à résoudre des équations et des inéquations avec $e^x$.",
+            "questions": [
+              {
+                "content": "On résout $2e^{x} = 14$. Après avoir isolé, $e^{x} =$ ___ , donc $x = \\ln$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "On isole : $e^{x} = \\dfrac{14}{2} = 7$. Comme $7 > 0$, on applique $\\ln$ : $x = \\ln 7$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Divise les deux membres par 2, puis applique $\\ln$."
+              },
+              {
+                "content": "Quel est l'ensemble des solutions de $e^{x} \\geq 1$ ?",
+                "question_type": "single_choice",
+                "explanation": "$e^{x} \\geq 1 \\iff x \\geq \\ln 1 = 0$, car $\\ln$ est croissante. Donc $S = [0 ; +\\infty[$.",
+                "answers": [
+                  {
+                    "content": "$[0 ; +\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-\\infty ; 0]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[1 ; +\\infty[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'équation $e^{x} = 0$ n'a aucune solution.",
+                "question_type": "true_false",
+                "explanation": "Une exponentielle est toujours strictement positive, donc $e^{x} = 0$ est impossible : $S = \\varnothing$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dérivée de e^u et étude d'une fonction",
+          "remember": "La fonction exponentielle est dérivable sur $\\mathbb{R}$ et $(e^{x})' = e^{x}$ : donc $e^{x}$ est une primitive de $e^{x}$. Pour une fonction $u$ dérivable : $(e^{u})' = u' \\times e^{u}$. Exemples : $(e^{2x})' = 2e^{2x}$ ; $(e^{-x+3})' = -e^{-x+3}$ ; $(e^{x^{2}-4x})' = (2x-4)e^{x^{2}-4x}$. Comme $e^{u} > 0$, le signe de $f'$ est celui de $u'$. Limites : $\\lim_{x \\to +\\infty} e^{x} = +\\infty$ et $\\lim_{x \\to -\\infty} e^{x} = 0$.",
+          "method": [
+            "Identifier la fonction $u$ placée dans l'exposant de $f(x) = e^{u(x)}$.",
+            "Calculer la dérivée $u'$ de l'exposant.",
+            "Écrire la dérivée $f'(x) = u'(x) \\times e^{u(x)}$ (en dérivant aussi les autres termes de $f$ s'il y en a).",
+            "Étudier le signe de $f'(x)$ : comme $e^{u(x)} > 0$, il est celui de $u'(x)$.",
+            "Conclure : $f$ est croissante là où $f' > 0$, décroissante là où $f' < 0$ ; écrire le tableau de variations."
+          ],
+          "example": {
+            "statement": "Étudier les variations de $f(x) = e^{x^{2}-4x}$ sur $\\mathbb{R}$.",
+            "steps": [
+              "Identifier : l'exposant est $u(x) = x^{2} - 4x$.",
+              "Calculer : $u'(x) = 2x - 4$.",
+              "Écrire : $f'(x) = (2x - 4)\\,e^{x^{2}-4x}$.",
+              "Étudier : $e^{x^{2}-4x} > 0$, donc $f'(x)$ a le signe de $2x - 4$ : négatif si $x < 2$, nul si $x = 2$, positif si $x > 2$.",
+              "Conclure : $f$ est décroissante sur $]-\\infty ; 2]$ et croissante sur $[2 ; +\\infty[$ ; son minimum est $f(2) = e^{-4}$."
+            ]
+          },
+          "pitfall": "Ne pas oublier le facteur $u'$. La dérivée de $e^{2x}$ n'est pas $e^{2x}$ mais $2e^{2x}$. Contre-exemple : quand $x$ passe de $0$ à $0{,}1$, $e^{2x}$ passe de $1$ à $e^{0{,}2} \\approx 1{,}22$, soit deux fois plus vite que $e^{x}$, qui passe de $1$ à $e^{0{,}1} \\approx 1{,}11$. La pente de $e^{2x}$ en $0$ vaut donc $2$, et non $1$.",
+          "figure": null,
+          "exercise": {
+            "title": "Dériver et étudier avec e^u",
+            "statement": "Dans cet exercice, tu dérives des fonctions de la forme $e^{u}$ et tu en étudies les variations, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la dérivée de $f(x) = e^{3x}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = 3x$. Étape 2 — Calculer : $u'(x) = 3$. Étape 3 — Écrire : $f'(x) = u'(x)\\,e^{u(x)} = 3e^{3x}$. La proposition $e^{3x}$ oublie le facteur $u'$ ; $3xe^{3x}$ multiplie par $3x$ au lieu de $3$ ; $\\dfrac{e^{3x}}{3}$ divise au lieu de multiplier par $u'$.",
+                "answers": [
+                  {
+                    "content": "$f'(x) = 3e^{3x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(x) = e^{3x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x) = 3xe^{3x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x) = \\dfrac{e^{3x}}{3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la dérivée de $f(x) = e^{-x+5}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = -x + 5$. Étape 2 — Calculer : $u'(x) = -1$. Étape 3 — Écrire : $f'(x) = -1 \\times e^{-x+5} = -e^{-x+5}$. La proposition $e^{-x+5}$ oublie le signe de $u'$ ; $(-x+5)e^{-x+5}$ remplace $u'$ par $u$ ; $-e^{-x}$ perd le $+5$ de l'exposant.",
+                "answers": [
+                  {
+                    "content": "$f'(x) = e^{-x+5}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x) = -e^{-x+5}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(x) = (-x+5)e^{-x+5}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x) = -e^{-x}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la dérivée de $f(x) = e^{x^{2}+x}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = x^{2} + x$. Étape 2 — Calculer : $u'(x) = 2x + 1$. Étape 3 — Écrire : $f'(x) = (2x+1)\\,e^{x^{2}+x}$. L'exposant ne change pas. La proposition $e^{2x+1}$ dérive l'exposant et oublie le facteur ; $(x^{2}+x)\\,e^{x^{2}+x}$ remplace $u'$ par $u$ ; $(2x+1)\\,e^{2x+1}$ dérive aussi l'exposant de $e$.",
+                "answers": [
+                  {
+                    "content": "$f'(x) = (2x+1)\\,e^{x^{2}+x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(x) = e^{2x+1}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x) = (x^{2}+x)\\,e^{x^{2}+x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x) = (2x+1)\\,e^{2x+1}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x) = e^{2x}$. Calcule $f'(0)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x) = 2x$. Étape 2 — Calculer : $u'(x) = 2$. Étape 3 — Écrire : $f'(x) = 2e^{2x}$, donc $f'(0) = 2e^{0} = 2 \\times 1 = 2$. Sans le facteur $u'$, on aurait trouvé $1$ : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On considère $f(x) = e^{x^{2}-6x}$. Quelles sont ses variations sur $\\mathbb{R}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = x^{2} - 6x$. Étape 2 — Calculer : $u'(x) = 2x - 6$. Étape 3 — Écrire : $f'(x) = (2x - 6)\\,e^{x^{2}-6x}$. Étape 4 — Étudier : $e^{u} > 0$, donc $f'$ a le signe de $2x - 6$, négatif pour $x < 3$ et positif pour $x > 3$. Étape 5 — Conclure : $f$ décroît sur $]-\\infty ; 3]$ puis croît sur $[3 ; +\\infty[$. La proposition « croissante sur $\\mathbb{R}$ » confond $f$ avec $e^{x}$ ; la troisième inverse les variations ; la dernière se trompe sur le signe de $2x - 6$ (il s'annule en $3$, pas en $-3$).",
+                "answers": [
+                  {
+                    "content": "Décroissante sur $]-\\infty ; 3]$, croissante sur $[3 ; +\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Croissante sur $\\mathbb{R}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Croissante sur $]-\\infty ; 3]$, décroissante sur $[3 ; +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Décroissante sur $]-\\infty ; -3]$, croissante sur $[-3 ; +\\infty[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux limites exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Pour le tableau de variations (Étape 5 — Conclure), on utilise les limites usuelles. Quand $x$ devient très grand, $e^{x}$ devient très grand : $\\lim_{x \\to +\\infty} e^{x} = +\\infty$. Quand $x$ devient très négatif, $e^{x} = \\dfrac{1}{e^{-x}}$ tend vers $0$ en restant positif : $\\lim_{x \\to -\\infty} e^{x} = 0$. La limite $-\\infty$ est impossible, car $e^{x} > 0$ ; la limite $0$ en $+\\infty$ confond les deux côtés.",
+                "answers": [
+                  {
+                    "content": "$\\lim_{x \\to +\\infty} e^{x} = +\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\lim_{x \\to -\\infty} e^{x} = -\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\lim_{x \\to -\\infty} e^{x} = 0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\lim_{x \\to +\\infty} e^{x} = 0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La dérivée de $f(x) = e^{2x}$ est $f'(x) = e^{2x}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : $u(x) = 2x$. Étape 2 — Calculer : $u'(x) = 2$. Étape 3 — Écrire : $f'(x) = 2e^{2x}$, et non $e^{2x}$ : le facteur $u'$ ne doit pas être oublié. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à dériver une fonction de la forme $e^{u}$.",
+            "questions": [
+              {
+                "content": "Pour $f(x) = e^{4x}$, l'exposant est $u(x) = 4x$, donc $u'(x) =$ ___ , et $f'(x) =$ ___ $\\times\\, e^{4x}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "On identifie $u(x) = 4x$, on calcule $u'(x) = 4$, puis $f'(x) = u'(x)\\,e^{u(x)} = 4e^{4x}$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La dérivée de $4x$ est $4$ ; ensuite $f' = u' \\times e^{u}$."
+              },
+              {
+                "content": "Quelle est la dérivée de $f(x) = e^{x+1}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Ici $u(x) = x + 1$ et $u'(x) = 1$, donc $f'(x) = 1 \\times e^{x+1} = e^{x+1}$.",
+                "answers": [
+                  {
+                    "content": "$f'(x) = e^{x+1}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(x) = e^{x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x) = (x+1)\\,e^{x+1}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si $f'(x) = 3e^{x}$ pour tout réel $x$, alors $f$ est ___ sur $\\mathbb{R}$.",
+                "question_type": "select",
+                "explanation": "Comme $e^{x} > 0$, on a $f'(x) = 3e^{x} > 0$ : la fonction $f$ est croissante.",
+                "answers": [
+                  {
+                    "content": "croissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "décroissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde le signe de $3e^{x}$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Modéliser une croissance ou une décroissance",
+          "remember": "Une quantité dont la vitesse de variation est proportionnelle à sa valeur suit le modèle $N(t) = N_{0}\\,e^{kt}$, où $N_{0} = N(0)$ est la valeur de départ et $t$ le temps. Si $k > 0$, c'est une **croissance** ; si $k < 0$, une **décroissance**. Pour atteindre une valeur $V$, on résout $N_{0}\\,e^{kt} = V$ avec $\\ln$. Dans les exercices, on donne une valeur arrondie, par exemple $\\ln 2 \\approx 0{,}7$ ou $e^{0{,}7} \\approx 2$.",
+          "method": [
+            "Lire dans l'énoncé la valeur de départ $N_{0}$ et le coefficient $k$ ; le signe de $k$ dit si c'est une croissance ou une décroissance.",
+            "Écrire le modèle $N(t) = N_{0}\\,e^{kt}$ avec ces valeurs.",
+            "Calculer $N(t)$ pour le temps $t$ demandé, ou résoudre $N(t) = V$ avec la méthode de $\\ln$ (isoler $e^{kt}$, puis appliquer $\\ln$).",
+            "Interpréter le résultat dans la situation, avec son unité."
+          ],
+          "example": {
+            "statement": "Dans un yaourt artisanal, on compte 200 bactéries par millilitre au départ. Le nombre au bout de $t$ heures est $N(t) = 200\\,e^{0{,}35t}$. Au bout de combien d'heures le nombre de bactéries double-t-il ? On prend $\\ln 2 \\approx 0{,}7$.",
+            "steps": [
+              "Lire : $N_{0} = 200$ et $k = 0{,}35 > 0$ : c'est une croissance.",
+              "Écrire : le modèle est $N(t) = 200\\,e^{0{,}35t}$.",
+              "Calculer : on cherche $t$ tel que $200\\,e^{0{,}35t} = 400$, donc $e^{0{,}35t} = 2$, donc $0{,}35t = \\ln 2 \\approx 0{,}7$ et $t \\approx \\dfrac{0{,}7}{0{,}35} = 2$.",
+              "Interpréter : le nombre de bactéries double en environ 2 heures."
+            ]
+          },
+          "pitfall": "Ne pas oublier d'isoler $e^{kt}$ avant d'appliquer $\\ln$. Écrire $200\\,e^{0{,}35t} = 400 \\Rightarrow 0{,}35t = \\ln 400$ est faux : on a oublié de diviser par $200$. Contre-exemple : cela donnerait $t \\approx 17$ h, et $N(17) \\approx 200 \\times e^{6} \\approx 80\\,000$, très loin de $400$. La bonne équation est $e^{0{,}35t} = 2$.",
+          "figure": null,
+          "exercise": {
+            "title": "Croissance et décroissance en exponentielle",
+            "statement": "Dans cet exercice, tu utilises le modèle $N(t) = N_{0}\\,e^{kt}$ avec la méthode de la fiche : lire, écrire, calculer, interpréter.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une population est modélisée par $N(t) = 300\\,e^{0{,}2t}$, avec $t$ en années. Que vaut $N(0)$, la population de départ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $N_{0}$ est la valeur de départ, c'est-à-dire $N(0)$. Étape 2 — Écrire : $N(t) = 300\\,e^{0{,}2t}$. Étape 3 — Calculer : $N(0) = 300\\,e^{0} = 300 \\times 1 = 300$. Étape 4 — Interpréter : la population de départ est $300$. La proposition $1$ oublie le facteur $300$ ; $0$ confond $e^0$ avec $0$ ; $60$ multiplie $300$ par $0{,}2$.",
+                "answers": [
+                  {
+                    "content": "$300$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$60$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La quantité $N(t) = 500\\,e^{-0{,}1t}$ décrit une décroissance.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : $N_{0} = 500$ et $k = -0{,}1$. Étape 2 — Écrire : $N(t) = 500\\,e^{-0{,}1t}$. Étape 3 — Calculer : $N'(t) = -0{,}1 \\times 500\\,e^{-0{,}1t} < 0$, car $e^{-0{,}1t} > 0$. Étape 4 — Interpréter : $k < 0$, donc la quantité diminue au cours du temps. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le nombre de bactéries d'un yaourt est $N(t) = 100\\,e^{0{,}35t}$, avec $t$ en heures. En prenant $e^{0{,}7} \\approx 2$, calcule $N(2)$.",
+                "question_type": "numeric",
+                "tolerance": 2,
+                "explanation": "Étape 1 — Lire : $N_{0} = 100$ et $k = 0{,}35$ (croissance). Étape 2 — Écrire : $N(t) = 100\\,e^{0{,}35t}$. Étape 3 — Calculer : $N(2) = 100\\,e^{0{,}35 \\times 2} = 100\\,e^{0{,}7} \\approx 100 \\times 2 = 200$. Étape 4 — Interpréter : il y a environ 200 bactéries au bout de 2 heures.",
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ],
+                "unit": "bactéries"
+              },
+              {
+                "content": "Une quantité de produit vaut $N(t) = 800\\,e^{-0{,}35t}$, avec $t$ en heures. En prenant $e^{-0{,}7} \\approx 0{,}5$, calcule $N(2)$.",
+                "question_type": "numeric",
+                "tolerance": 3,
+                "explanation": "Étape 1 — Lire : $N_{0} = 800$ et $k = -0{,}35$ (décroissance). Étape 2 — Écrire : $N(t) = 800\\,e^{-0{,}35t}$. Étape 3 — Calculer : $N(2) = 800\\,e^{-0{,}7} \\approx 800 \\times 0{,}5 = 400$. Étape 4 — Interpréter : la quantité a été divisée par $2$ en 2 heures.",
+                "answers": [
+                  {
+                    "content": "400",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On a $N(t) = 200\\,e^{0{,}35t}$ et on veut $N(t) = 800$. Quelle est l'équation obtenue après avoir isolé la puissance de $e$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : $N_{0} = 200$ et $k = 0{,}35$. Étape 2 — Écrire : $N(t) = 200\\,e^{0{,}35t}$. Étape 3 — Calculer : $200\\,e^{0{,}35t} = 800$, on divise par $200$ : $e^{0{,}35t} = 4$. La proposition $600$ soustrait $200$ au lieu de diviser ; $1\\,000$ additionne ; $0{,}35t = \\ln 800$ applique $\\ln$ sans isoler $e^{0{,}35t}$ (le piège de la fiche).",
+                "answers": [
+                  {
+                    "content": "$e^{0{,}35t} = 4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{0{,}35t} = 600$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{0{,}35t} = 1\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}35t = \\ln 800$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un laboratoire, une culture de bactéries compte $N(t) = 50\\,e^{0{,}35t}$ individus, avec $t$ en heures. Au bout de combien d'heures atteint-on 100 bactéries ? On prend $\\ln 2 \\approx 0{,}7$.",
+                "question_type": "numeric",
+                "tolerance": 0.05,
+                "explanation": "Étape 1 — Lire : $N_{0} = 50$ et $k = 0{,}35$. Étape 2 — Écrire : $N(t) = 50\\,e^{0{,}35t}$. Étape 3 — Calculer : $50\\,e^{0{,}35t} = 100$ donne $e^{0{,}35t} = 2$, donc $0{,}35t = \\ln 2 \\approx 0{,}7$ et $t \\approx 2$. Étape 4 — Interpréter : il faut environ 2 heures pour doubler.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "unit": "heures"
+              },
+              {
+                "content": "On veut résoudre $200\\,e^{0{,}35t} = 400$. Quelle est la première étape correcte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer : on commence par isoler $e^{0{,}35t}$ en divisant les deux membres par $200$ : $e^{0{,}35t} = 2$. Ensuite seulement on applique $\\ln$. Appliquer $\\ln$ directement oublie le facteur $200$ (le piège de la fiche) ; soustraire $200$ n'a pas de sens, $200$ multiplie ; remplacer $e^{0{,}35t}$ par $0{,}35t$ est faux.",
+                "answers": [
+                  {
+                    "content": "Appliquer $\\ln$ directement : $0{,}35t = \\ln 400$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Diviser par $200$ pour obtenir $e^{0{,}35t} = 2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Soustraire $200$ : $e^{0{,}35t} = 200$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Remplacer $e^{0{,}35t}$ par $0{,}35t$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un modèle $N(t) = N_{0}\\,e^{kt}$.",
+            "questions": [
+              {
+                "content": "Pour $N(t) = 150\\,e^{0{,}1t}$, la valeur de départ est $N_{0} =$ ___ et le coefficient est $k =$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Dans $N(t) = N_{0}\\,e^{kt}$, $N_{0}$ est le facteur devant $e$ : $N_{0} = 150$ ; $k$ est le coefficient de $t$ dans l'exposant : $k = 0{,}1$.",
+                "answers": [
+                  {
+                    "content": "150",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0,1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "$N_0$ est le nombre devant $e$, $k$ est le nombre devant $t$ dans l'exposant."
+              },
+              {
+                "content": "Une quantité suit $N(t) = 90\\,e^{-0{,}2t}$. Comment évolue-t-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Ici $k = -0{,}2 < 0$ : c'est une décroissance, la quantité diminue.",
+                "answers": [
+                  {
+                    "content": "Elle diminue",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle augmente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle reste constante",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde le signe de $k$."
+              },
+              {
+                "content": "Pour $N(t) = 40\\,e^{0{,}5t}$, calcule $N(0)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "$N(0) = 40\\,e^{0} = 40 \\times 1 = 40$.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ],
+                "hint": "Rappelle-toi que $e^{0} = 1$."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La population d'un village",
+          "statement": "La population du village de Kouadiokro est modélisée par $P(t) = 3\\,000\\,e^{0{,}07t}$, où $t$ est le nombre d'années écoulées depuis 2020. On prend $e^{0{,}7} \\approx 2$ et $\\ln 2 \\approx 0{,}7$. Tu lis le modèle, tu calcules et tu interprètes.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "La population d'un village est $P(t) = 3\\,000\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. Calcule $P(0)$, la population en 2020.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $N_{0} = P(0)$ est la valeur de départ et $k = 0{,}07$. Étape 2 — Écrire : $P(t) = 3\\,000\\,e^{0{,}07t}$. Étape 3 — Calculer : $P(0) = 3\\,000\\,e^{0} = 3\\,000 \\times 1 = 3\\,000$. Étape 4 — Interpréter : le village compte $3\\,000$ habitants en 2020.",
+              "answers": [
+                {
+                  "content": "3000",
+                  "correct": true
+                }
+              ],
+              "unit": "habitants"
+            },
+            {
+              "content": "La population d'un village est $P(t) = 3\\,000\\,e^{0{,}07t}$. Que peut-on dire de son évolution ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : $k = 0{,}07 > 0$. Étape 2 — Écrire : $P(t) = 3\\,000\\,e^{0{,}07t}$. Étape 3 — Calculer : $P'(t) = 0{,}07 \\times 3\\,000\\,e^{0{,}07t} > 0$ car $e^{0{,}07t} > 0$. Étape 4 — Interpréter : la population augmente. Les trois autres propositions confondent le signe de $k$, la valeur de $e^0$ (qui ne vaut $1$ qu'à $t = 0$) ou le signe de $N_{0}$.",
+              "answers": [
+                {
+                  "content": "Elle augmente, car $k = 0{,}07 > 0$",
+                  "correct": true
+                },
+                {
+                  "content": "Elle diminue, car $e^{0{,}07t}$ est petit",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est constante, car $e^0 = 1$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle diminue, car $0{,}07 < 1$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La population d'un village est $P(t) = 3\\,000\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $e^{0{,}7} \\approx 2$, calcule $P(10)$.",
+              "question_type": "numeric",
+              "tolerance": 50,
+              "explanation": "Étape 1 — Lire : $N_{0} = 3\\,000$ et $k = 0{,}07$. Étape 2 — Écrire : $P(t) = 3\\,000\\,e^{0{,}07t}$. Étape 3 — Calculer : $P(10) = 3\\,000\\,e^{0{,}07 \\times 10} = 3\\,000\\,e^{0{,}7} \\approx 3\\,000 \\times 2 = 6\\,000$. Étape 4 — Interpréter : en 2030, le village compte environ $6\\,000$ habitants.",
+              "answers": [
+                {
+                  "content": "6000",
+                  "correct": true
+                }
+              ],
+              "unit": "habitants"
+            },
+            {
+              "content": "La population d'un village est $P(t) = 3\\,000\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $\\ln 2 \\approx 0{,}7$, au bout de combien d'années atteint-elle $6\\,000$ habitants ?",
+              "question_type": "numeric",
+              "tolerance": 0.2,
+              "explanation": "Étape 1 — Lire : $N_{0} = 3\\,000$ et $k = 0{,}07$. Étape 2 — Écrire : $P(t) = 3\\,000\\,e^{0{,}07t}$. Étape 3 — Calculer : $3\\,000\\,e^{0{,}07t} = 6\\,000$ donne $e^{0{,}07t} = 2$, puis $0{,}07t = \\ln 2 \\approx 0{,}7$, donc $t \\approx 10$. Étape 4 — Interpréter : la population double en environ 10 ans.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "Avec $P(t) = 3\\,000\\,e^{0{,}07t}$ et $e^{0{,}7} \\approx 2$, la population dépasse $9\\,000$ habitants au bout de 20 ans.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : $N_{0} = 3\\,000$ et $k = 0{,}07$. Étape 2 — Écrire : $P(t) = 3\\,000\\,e^{0{,}07t}$. Étape 3 — Calculer : $P(20) = 3\\,000\\,e^{1{,}4}$, et $e^{1{,}4} = (e^{0{,}7})^{2} \\approx 2^{2} = 4$, donc $P(20) \\approx 12\\,000 > 9\\,000$. Étape 4 — Interpréter : l'affirmation est vraie. Doubler en 10 ans deux fois de suite multiplie par $4$, pas par $3$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les bactéries d'un yaourt artisanal",
+          "statement": "Une productrice fabrique du yaourt artisanal. Le nombre de bactéries par millilitre est $B(t) = 500\\,e^{0{,}4t}$, où $t$ est le temps en heures depuis le début de la fermentation. Tu résous des équations et des inéquations avec $e^x$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le nombre de bactéries d'un yaourt est $B(t) = 500\\,e^{0{,}4t}$, avec $t$ en heures. Calcule $B(0)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $B(0)$ est la valeur de départ $N_{0}$. Étape 2 — Écrire : $B(t) = 500\\,e^{0{,}4t}$. Étape 3 — Calculer : $B(0) = 500\\,e^{0} = 500$. Étape 4 — Interpréter : il y a $500$ bactéries par millilitre au départ.",
+              "answers": [
+                {
+                  "content": "500",
+                  "correct": true
+                }
+              ],
+              "unit": "bactéries"
+            },
+            {
+              "content": "Le nombre de bactéries d'un yaourt est $B(t) = 500\\,e^{0{,}4t}$, avec $t$ en heures. On prend $\\ln 2 \\approx 0{,}7$. Au bout de combien d'heures atteint-on $1\\,000$ bactéries ? Arrondis à $0{,}1$ près.",
+              "question_type": "numeric",
+              "tolerance": 0.1,
+              "explanation": "Étape 1 — Isoler : $500\\,e^{0{,}4t} = 1\\,000$ donne $e^{0{,}4t} = 2$. Étape 2 — Contrôler : $2 > 0$. Étape 3 — Appliquer : $0{,}4t = \\ln 2 \\approx 0{,}7$. Étape 4 — Résoudre : $t \\approx \\dfrac{0{,}7}{0{,}4} = 1{,}75$ heure. Avec la valeur exacte de $\\ln 2$, on trouve $1{,}73$, soit $1{,}7$ à $0{,}1$ près ; on accepte donc une marge de $0{,}1$.",
+              "answers": [
+                {
+                  "content": "1,7",
+                  "correct": true
+                }
+              ],
+              "unit": "heures"
+            },
+            {
+              "content": "Le nombre de bactéries d'un yaourt est $B(t) = 500\\,e^{0{,}4t}$. Quelle inéquation traduit $B(t) \\geq 1\\,500$ après avoir isolé la puissance de $e$ et appliqué $\\ln$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Isoler : $500\\,e^{0{,}4t} \\geq 1\\,500$ donne $e^{0{,}4t} \\geq 3$. Étape 2 — Contrôler : $3 > 0$. Étape 3 — Appliquer : $\\ln$ est croissante, le sens ne change pas : $0{,}4t \\geq \\ln 3$. Étape 4 — Résoudre : $t \\geq \\dfrac{\\ln 3}{0{,}4}$. La proposition « $\\leq$ » renverse le sens ; $\\ln 1\\,500$ oublie de diviser par $500$ ; $\\ln 3 \\times 0{,}4$ multiplie au lieu de diviser par $0{,}4$.",
+              "answers": [
+                {
+                  "content": "$t \\geq \\dfrac{\\ln 3}{0{,}4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$t \\leq \\dfrac{\\ln 3}{0{,}4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$t \\geq \\dfrac{\\ln 1\\,500}{0{,}4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$t \\geq \\ln 3 \\times 0{,}4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $B(t) = 500\\,e^{0{,}4t}$, le rapport $\\dfrac{B(t+1)}{B(t)}$ est égal à :",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : c'est un quotient de deux puissances de $e$. Étape 2 — Appliquer : $\\dfrac{B(t+1)}{B(t)} = \\dfrac{500\\,e^{0{,}4(t+1)}}{500\\,e^{0{,}4t}} = e^{0{,}4t + 0{,}4 - 0{,}4t}$. Étape 3 — Calculer : l'exposant vaut $0{,}4$, donc le rapport est $e^{0{,}4}$, qui ne dépend pas de $t$. La proposition $e^{0{,}4t}$ oublie de simplifier ; $500\\,e^{0{,}4}$ oublie de simplifier le facteur $500$ ; $1{,}4$ additionne $1$ et $0{,}4$.",
+              "answers": [
+                {
+                  "content": "$e^{0{,}4t}$",
+                  "correct": false
+                },
+                {
+                  "content": "$500\\,e^{0{,}4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$e^{0{,}4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$1{,}4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le nombre de bactéries $B(t) = 500\\,e^{0{,}4t}$ peut être négatif pour certaines valeurs de $t$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : $B(t)$ est le produit de $500 > 0$ et de $e^{0{,}4t}$. Étape 2 — Appliquer : une exponentielle est toujours strictement positive. Étape 3 — Calculer : $B(t) = 500\\,e^{0{,}4t} > 0$ pour tout $t$. L'affirmation est fausse : l'équation $B(t) = -100$ n'a aucune solution.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Étude d'une fonction avec e^u",
+          "statement": "Un agronome étudie la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = e^{2x-6} - 2x$. Tu la dérives, tu étudies son signe et ses variations, comme dans un devoir.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Soit $f(x) = e^{2x-6} - 2x$. Sa dérivée est $f'(x) = e^{2x-6} - 2$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : l'exposant est $u(x) = 2x - 6$. Étape 2 — Calculer : $u'(x) = 2$. Étape 3 — Écrire : $(e^{2x-6})' = 2e^{2x-6}$ et $(-2x)' = -2$, donc $f'(x) = 2e^{2x-6} - 2$. L'affirmation est fausse : l'expression proposée oublie le facteur $u' = 2$ devant $e^{2x-6}$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = e^{2x-6} - 2x$. Quelle est la dérivée de $f$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $u(x) = 2x - 6$. Étape 2 — Calculer : $u'(x) = 2$. Étape 3 — Écrire : $f'(x) = 2e^{2x-6} - 2$. La proposition $e^{2x-6} - 2$ oublie le facteur $2$ ; $2e^{2x-6} + 2$ se trompe sur le signe de la dérivée de $-2x$ ; $2e^{2x-6}$ oublie de dériver $-2x$.",
+              "answers": [
+                {
+                  "content": "$f'(x) = e^{2x-6} - 2$",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x) = 2e^{2x-6} - 2$",
+                  "correct": true
+                },
+                {
+                  "content": "$f'(x) = 2e^{2x-6} + 2$",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x) = 2e^{2x-6}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = e^{2x-6} - 2x$, de dérivée $f'(x) = 2e^{2x-6} - 2$. Calcule $f'(3)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : on remplace $x$ par $3$ dans $f'(x) = 2e^{2x-6} - 2$. Étape 2 — Calculer : l'exposant vaut $2 \\times 3 - 6 = 0$. Étape 3 — Écrire : $f'(3) = 2e^{0} - 2 = 2 - 2 = 0$. La dérivée s'annule en $x = 3$ : c'est le point où les variations changent.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = e^{2x-6} - 2x$, de dérivée $f'(x) = 2e^{2x-6} - 2$. Quel est l'ensemble des solutions de $f'(x) \\geq 0$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Isoler : $2e^{2x-6} - 2 \\geq 0$ donne $e^{2x-6} \\geq 1$. Étape 2 — Contrôler : $1 > 0$. Étape 3 — Appliquer : $\\ln$ est croissante, le sens ne change pas : $2x - 6 \\geq \\ln 1 = 0$. Étape 4 — Résoudre : $x \\geq 3$, donc $S = [3 ; +\\infty[$. La proposition $]-\\infty ; 3]$ renverse le sens ; $[0 ; +\\infty[$ oublie le $-6$ de l'exposant ; $[\\ln 2 ; +\\infty[$ confond $e^{2x-6} \\geq 1$ avec $e^{x} \\geq 2$.",
+              "answers": [
+                {
+                  "content": "$[3 ; +\\infty[$",
+                  "correct": true
+                },
+                {
+                  "content": "$]-\\infty ; 3]$",
+                  "correct": false
+                },
+                {
+                  "content": "$[0 ; +\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "$[\\ln 2 ; +\\infty[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $f(x) = e^{2x-6} - 2x$ sur $\\mathbb{R}$, de dérivée $f'(x) = 2e^{2x-6} - 2$. On a trouvé que $f'(x) \\geq 0 \\iff x \\geq 3$. Donne le tableau de variations de $f$ (sens de variation sur chaque intervalle) et calcule son extremum.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Signe de $f'$ : négatif avant $3$, nul en $3$, positif après $3$",
+                "$f$ décroissante sur $]-\\infty ; 3]$ et croissante sur $[3 ; +\\infty[$",
+                "$f(3) = e^{0} - 6 = -5$ calculé correctement",
+                "$f$ admet un minimum égal à $-5$ en $x = 3$"
+              ],
+              "explanation": "Corrigé modèle. Étape 4 — Étudier le signe : $f'(x) \\geq 0 \\iff x \\geq 3$, donc $f'(x) < 0$ pour $x < 3$, $f'(3) = 0$ et $f'(x) > 0$ pour $x > 3$. Étape 5 — Conclure : $f$ est décroissante sur $]-\\infty ; 3]$ puis croissante sur $[3 ; +\\infty[$. Valeur au changement : $f(3) = e^{2 \\times 3 - 6} - 2 \\times 3 = e^{0} - 6 = 1 - 6 = -5$. Donc $f$ admet un minimum égal à $-5$, atteint en $x = 3$. Barème : 1 point pour le signe de $f'$, 1 point pour les variations, 1 point pour $f(3) = -5$ et la conclusion.",
+              "answers": [],
+              "starter": "$f'(x) < 0$ pour $x <$ …"
+            },
+            {
+              "content": "On étudie $f(x) = e^{2x-6} - 2x$. Quelles sont les deux affirmations exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Calculer : $f(3) = e^{2 \\times 3 - 6} - 2 \\times 3 = e^{0} - 6 = 1 - 6 = -5$, donc la première affirmation est vraie et $f(3) = 1$ est fausse (elle oublie le terme $-6$). Étape 2 — Étudier : $f'(x) = 2e^{2x-6} - 2 \\leq 0$ si $x \\leq 3$, donc $f$ est décroissante sur $]-\\infty ; 3]$. Étape 3 — Conclure : $f$ n'est pas croissante sur $\\mathbb{R}$, car $f'$ est négative avant $3$.",
+              "answers": [
+                {
+                  "content": "$f(3) = -5$",
+                  "correct": true
+                },
+                {
+                  "content": "$f$ est croissante sur $\\mathbb{R}$",
+                  "correct": false
+                },
+                {
+                  "content": "$f$ est décroissante sur $]-\\infty ; 3]$",
+                  "correct": true
+                },
+                {
+                  "content": "$f(3) = 1$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Population d'une ville : modèle et étude",
+          "statement": "Une ville ivoirienne comptait 20 milliers d'habitants en 2020. Le nombre d'habitants, en milliers, est modélisé par $p(t) = 20\\,e^{0{,}07t}$, où $t$ est le nombre d'années écoulées depuis 2020. On prend $e^{0{,}7} \\approx 2$ et $\\ln 2 \\approx 0{,}7$. Tu modélises, tu justifies, tu résous et tu interprètes, comme au baccalauréat de la série A.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. Calcule $p(0)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : $N_{0} = p(0)$ et $k = 0{,}07$. Étape 2 — Écrire : $p(t) = 20\\,e^{0{,}07t}$. Étape 3 — Calculer : $p(0) = 20\\,e^{0} = 20$. Étape 4 — Interpréter : la ville compte $20$ milliers d'habitants en 2020.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "milliers"
+            },
+            {
+              "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. Montre que $p$ est croissante sur $[0 ; +\\infty[$.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Identifier $u(t) = 0{,}07t$ et calculer $u'(t) = 0{,}07$",
+                "Écrire $p'(t) = 20 \\times 0{,}07\\,e^{0{,}07t} = 1{,}4\\,e^{0{,}07t}$",
+                "Justifier $e^{0{,}07t} > 0$ donc $p'(t) > 0$",
+                "Conclure que $p$ est croissante"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Identifier : l'exposant est $u(t) = 0{,}07t$. Étape 2 — Calculer : $u'(t) = 0{,}07$. Étape 3 — Écrire : $p'(t) = 20 \\times 0{,}07\\,e^{0{,}07t} = 1{,}4\\,e^{0{,}07t}$. Étape 4 — Étudier : $e^{0{,}07t} > 0$ pour tout $t$, donc $p'(t) > 0$. Étape 5 — Conclure : $p$ est strictement croissante sur $[0 ; +\\infty[$. Barème : 1 point pour la dérivée, 1 point pour le signe justifié par $e^{u} > 0$, 1 point pour la conclusion.",
+              "answers": [],
+              "starter": "$p'(t) =$ …"
+            },
+            {
+              "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $e^{0{,}7} \\approx 2$, calcule $p(10)$.",
+              "question_type": "numeric",
+              "tolerance": 0.5,
+              "explanation": "Étape 1 — Lire : $N_{0} = 20$ et $k = 0{,}07$. Étape 2 — Écrire : $p(t) = 20\\,e^{0{,}07t}$. Étape 3 — Calculer : $p(10) = 20\\,e^{0{,}7} \\approx 20 \\times 2 = 40$. Étape 4 — Interpréter : en 2030, la ville compte environ $40$ milliers d'habitants.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "unit": "milliers"
+            },
+            {
+              "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $\\ln 4 = 2\\ln 2 \\approx 1{,}4$, au bout de combien d'années la population atteint-elle $80$ milliers ?",
+              "question_type": "numeric",
+              "tolerance": 0.3,
+              "explanation": "Étape 1 — Isoler : $20\\,e^{0{,}07t} = 80$ donne $e^{0{,}07t} = 4$. Étape 2 — Contrôler : $4 > 0$. Étape 3 — Appliquer : $0{,}07t = \\ln 4 \\approx 1{,}4$. Étape 4 — Résoudre : $t \\approx \\dfrac{1{,}4}{0{,}07} = 20$. La population atteint $80$ milliers au bout de 20 ans, soit en 2040.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $\\ln 8 = 3\\ln 2 \\approx 2{,}1$, à partir de combien d'années a-t-on $p(t) \\geq 160$ ?",
+              "question_type": "numeric",
+              "tolerance": 0.5,
+              "explanation": "Étape 1 — Isoler : $20\\,e^{0{,}07t} \\geq 160$ donne $e^{0{,}07t} \\geq 8$. Étape 2 — Contrôler : $8 > 0$. Étape 3 — Appliquer : $\\ln$ est croissante, le sens ne change pas : $0{,}07t \\geq \\ln 8 \\approx 2{,}1$. Étape 4 — Résoudre : $t \\geq \\dfrac{2{,}1}{0{,}07} = 30$. La population atteint $160$ milliers à partir de 30 ans, soit en 2050.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "Avec $p(t) = 20\\,e^{0{,}07t}$, la population peut redevenir inférieure à $20$ milliers un jour après 2020.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Isoler : on résout $20\\,e^{0{,}07t} < 20$, soit $e^{0{,}07t} < 1$. Étape 2 — Contrôler : $1 > 0$. Étape 3 — Appliquer : $0{,}07t < \\ln 1 = 0$, donc $t < 0$. Étape 4 — Résoudre : cela correspond à des années avant 2020. Comme $t \\geq 0$, la population reste supérieure ou égale à $20$ milliers (elle est croissante). L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Soit $g(x) = e^{x} + 2x$ sur $\\mathbb{R}$. Quelle est une primitive de $g$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $g$ est la somme de $e^{x}$ et de $2x$. Étape 2 — Appliquer : une primitive de $e^{x}$ est $e^{x}$ et une primitive de $2x$ est $x^{2}$. Étape 3 — Calculer : $G(x) = e^{x} + x^{2}$ ; on vérifie en dérivant : $G'(x) = e^{x} + 2x = g(x)$. La proposition $e^{x} + 2$ est la dérivée de $g$ ; $e^{x} + 2x^{2}$ se trompe sur la primitive de $2x$ ; la dernière n'a aucun lien avec $g$.",
+              "answers": [
+                {
+                  "content": "$G(x) = e^{x} + x^{2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$G(x) = e^{x} + 2$",
+                  "correct": false
+                },
+                {
+                  "content": "$G(x) = e^{x} + 2x^{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$G(x) = e^{x}\\,(x+1)$",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

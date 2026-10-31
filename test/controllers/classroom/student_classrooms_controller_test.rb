@@ -211,11 +211,14 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     sheets = css_select("#student_classroom_assigned .ps-sheet")
     assert_equal [ "PRÉPARE INTERROS", "PRÉPARE DEVOIRS" ], sheets.map { it.at_css(".ps-header-title").text }
     assert_select "#student_classroom_assigned .ps-sheet:first-child" do
-      assert_select ".ps-title", text: "La méiose"
+      assert_select ".ps-title", text: "Prépare interros n°1"
+      assert_select ".ps-subject", text: "La méiose"
       assert_select ".ps-remember", text: including("Deux divisions.")
       assert_select ".ps-exercise", two.size
     end
     assert_select "#student_classroom_assigned .ps-sheet:last-child" do
+      assert_select ".ps-title", text: "Prépare devoirs n°1"
+      assert_select ".ps-subject", text: /\ADEVOIR DU /
       assert_select ".ps-remember", text: including("Notions mobilisées :")
       assert_select ".ps-exercise", three.size
     end
