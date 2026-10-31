@@ -44,4 +44,4 @@
 | | |
 |---|---|
 | **Livré le** | 2026-10-31 |
-| **PR** | #426 (test `rich_text_sanitizer_test.rb:33` rouge : décision attendue) |
+| **PR** | #426 (correctif des tests repris de #415, commit 7737e7fa) |
