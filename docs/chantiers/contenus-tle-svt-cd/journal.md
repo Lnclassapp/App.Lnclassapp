@@ -28,7 +28,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - `valider.rb` refuse « u.a. » dans `unit` (`unit_invalid`) : écrire « ua » ou rien.
 - `duplicate_accepted` compare les variantes acceptées sans accents : « ovocyte » et « ovocyté » sont un doublon.
 - `hint` et `blank` ne sont admis que dans `practice`.
-- Deux tests lisent des leçons v1 de `tle-d/` (`content_tree_writer_characterization_test`, `rich_text_sanitizer_test`) : remplacer une leçon v1 les casse. La version d'avant de « Le devenir des cellules sexuelles » est gardée dans `test/fixtures/files/legacy_lessons/`, et le test du nettoyeur ignore les fichiers au format 3. Les vagues suivantes qui remplacent des v1 de `tle-d/` (maths, physique-chimie) devront faire de même.
+- Deux tests lisent des leçons v1 de `tle-d/` (`content_tree_writer_characterization_test`, `rich_text_sanitizer_test`) : remplacer une leçon v1 les casse. La version d'avant de « Le devenir des cellules sexuelles » est gardée en fixture, dans `test/fixtures/files/lecons_v1/` (dossier créé par la vague T3, #415, qui fige les v1 de Tle D).
 - Une `stat_chart` ne porte qu'une série et des valeurs de 0 à 1 000 000 ; un `diagram` en arbre n'a qu'un parent par nœud (pas d'arbre généalogique).
 
 ## Dette laissée derrière
@@ -44,6 +44,6 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 | | |
 |---|---|
 | **Livré le** | 2026-10-31 (PR prêtes, fusion par l'orchestrateur) |
-| **PR** | #421 (Tle C, `feature/contenus-tle-svt-cd`) · Tle D (`feature/contenus-tle-svt-d`), toutes deux vers `Develop` |
+| **PR** | #421 (Tle C, `feature/contenus-tle-svt-cd`) · #422 (Tle D, `feature/contenus-tle-svt-d`), toutes deux vers `Develop` |
 | **ADR produits** | aucun (ADR-0116, ADR-0117 du programme) |
 | **UDR produits** | aucune (UDR-0142, UDR-0147 du programme) |

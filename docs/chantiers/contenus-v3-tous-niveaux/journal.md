@@ -8,8 +8,7 @@
 |---|---|---|---|---|---|
 | 2026-10-31 | T1 | Tle (C, D) | Mathématiques | 14 leçons (20 fichiers) | #420 |
 | 2026-10-31 | T4 (1/2) | Tle C | SVT | 10 (dont 3 communes à C et D) | #421 |
-| 2026-10-31 | T4 (2/2) | Tle D | SVT | 10 (7 propres + 3 déclinées de Tle C) | `feature/contenus-tle-svt-d` |
-| 2026-10-31 | T4 (1/2) | Tle C | SVT | 10 (dont 3 communes à C et D) | `feature/contenus-tle-svt-cd` |
+| 2026-10-31 | T4 (2/2) | Tle D | SVT | 10 (7 propres + 3 déclinées de Tle C) | #422 |
 | 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
 
 ## À faire valider par un enseignant
