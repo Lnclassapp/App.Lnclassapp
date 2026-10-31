@@ -364,6 +364,42 @@ Au total : 42 notions, 82 exercices, 463 questions et 22 figures. Chaque fichier
 - **Leçon 7** : la distinction entre taxe et redevance.
 - **Leçon 10** : le rattachement des peuples aux groupes Mandé et Gour, les termes « toukpê » et « sanankouya », et la carte, qui ne colorie que les districts où un groupe est majoritaire de façon sûre (Montagnes, Vallée du Bandama et Sassandra-Marahoué restent blancs). Aucune alliance précise entre deux peuples réels n'est affirmée.
 
+### Tle A1 et A2, mathématiques au format 3 (chantier `contenus-tle-mathematiques-a`)
+
+Toutes les leçons de Mathématiques de la progression DPFC 2026-2027 de Tle A1 (8) et de Tle A2 (7), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague T2 du programme `contenus-v3-tous-niveaux`), au niveau d'une série littéraire : calculs simples, contextes concrets (atelier de couture, kermesse, plantation, mobile money, marché, tontine, gbaka, tournoi de football). 9 leçons distinctes, 15 fichiers : les 6 leçons communes aux deux séries ont un fichier par série, identiques hors série et rang (la version A2 de l'exponentielle remplace la question de primitive par une dérivée, celle du logarithme définit ln sans primitive). Les fichiers remplacent les 6 fichiers v1 du même nom (Fonctions, Probabilité et variable aléatoire, Primitives en A1 ; Fonctions, Probabilité, Logarithme en A2). Chaque notion a sa fiche en 4 blocs, un exercice et « Je m'entraîne » ; chaque leçon a 4 problèmes (2 de fixation, 2 d'évaluation dont un au niveau du baccalauréat A). Aucune sorte de figure nouvelle.
+
+#### Tle A1
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/etude-de-fonctions-polynomes-et-de-fonctions-rationnelles.json` | Étude de fonctions polynômes et de fonctions rationnelles | 5 | 9 | 56 | 94 % | 2 | `coordinate_plane` |
+| 2 | `mathematiques/probabilite-et-variable-aleatoire.json` | Probabilité et variable aléatoire | 4 | 8 | 59 | 96 % | 2 | `diagram`, `stat_chart` |
+| 3 | `mathematiques/primitives-et-calcul-integral.json` | Primitives et calcul intégral | 5 | 9 | 60 | 95 % | 1 | `coordinate_plane` |
+| 4 | `mathematiques/fonction-logarithme-neperien.json` | Fonction logarithme népérien | 4 | 8 | 52 | 96 % | 1 | `stat_chart` |
+| 5 | `mathematiques/fonction-exponentielle-neperienne.json` | Fonction exponentielle népérienne | 5 | 9 | 59 | 96 % | 0 | — |
+| 6 | `mathematiques/statistique-a-deux-variables.json` | Statistique à deux variables | 4 | 8 | 52 | 98 % | 10 | `coordinate_plane` |
+| 7 | `mathematiques/suites-numeriques.json` | Suites numériques | 5 | 9 | 51 | 96 % | 2 | `coordinate_plane` |
+| 8 | `mathematiques/systemes-d-equations-lineaires-dans.json` | Systèmes d'équations linéaires dans ℝ × ℝ | 5 | 9 | 58 | 96 % | 1 | `coordinate_plane` |
+
+Au total : 37 notions, 69 exercices, 447 questions notées et 19 figures.
+
+#### Tle A2
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/etude-de-fonctions-polynomes-et-de-fonctions-rationnelles.json` | Étude de fonctions polynômes et de fonctions rationnelles | 5 | 9 | 56 | 94 % | 2 | `coordinate_plane` |
+| 2 | `mathematiques/probabilite.json` | Probabilité | 5 | 9 | 58 | 96 % | 1 | `diagram` |
+| 3 | `mathematiques/fonction-logarithme-neperien.json` | Fonction logarithme népérien | 4 | 8 | 52 | 96 % | 1 | `stat_chart` |
+| 4 | `mathematiques/fonction-exponentielle-neperienne.json` | Fonction exponentielle népérienne | 5 | 9 | 59 | 96 % | 0 | — |
+| 5 | `mathematiques/statistique-a-deux-variables.json` | Statistique à deux variables | 4 | 8 | 52 | 98 % | 10 | `coordinate_plane` |
+| 6 | `mathematiques/suites-numeriques.json` | Suites numériques | 5 | 9 | 51 | 96 % | 2 | `coordinate_plane` |
+| 7 | `mathematiques/systemes-d-equations-lineaires-dans.json` | Systèmes d'équations linéaires dans ℝ × ℝ | 5 | 9 | 58 | 96 % | 1 | `coordinate_plane` |
+
+Au total : 33 notions, 61 exercices, 386 questions notées et 17 figures.
+
+Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte les règles de `Entities::Catalog::NotionPractice`. Chaque leçon a été relue par un second rédacteur (calculs refaits), et les défauts trouvés ont été corrigés. Les leçons restent en brouillon.
+
+À faire valider par un enseignant de mathématiques avant publication : le rattachement de chaque notion au programme de la série A, le niveau des problèmes de type bac et leurs barèmes. La liste par leçon est dans le journal du chantier [`contenus-tle-mathematiques-a`](../chantiers/contenus-tle-mathematiques-a/journal.md).
 ### Tle C et D, mathématiques au format 3 (chantier `contenus-tle-mathematiques-cd`)
 
 Les 10 leçons de Mathématiques de la progression DPFC 2026-2027 de Tle C et de Tle D, rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague T1 du programme `contenus-v3-tous-niveaux`). 14 leçons distinctes, 20 fichiers : les 6 leçons communes aux deux séries (Limites et continuité, Dérivabilité et étude de fonctions, Primitives, Fonctions logarithmes, Fonctions exponentielles, Nombres complexes) ont un fichier par série, avec les mêmes notions et des problèmes 3 et 4 au niveau de chaque série. « Fonctions exponentielles et fonctions puissances » (C) et « Fonctions exponentielles et puissances » (D) gardent le titre de leur progression. Les fichiers remplacent les 6 fichiers v1 du même nom (Barycentre, Limites et Divisibilité en C ; Limites, Probabilité et Dérivabilité en D). Chaque notion a sa fiche en 4 blocs, un exercice et « Je m'entraîne » ; chaque leçon a 4 problèmes (2 de fixation, 2 d'évaluation dont un au niveau du baccalauréat). Aucune sorte de figure nouvelle : les courbes, tableaux de variations, solides et coniques sont décrits par des points, segments et droites (dette notée au journal du chantier).
@@ -409,6 +445,8 @@ Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, 
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 
 Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A1 et A2 n'ont pas de Physique-Chimie dans la progression.
+
+Les 6 leçons de mathématiques de A1 et A2 de ces tableaux (format v1) sont remplacées par leur version au format 3 : voir « Tle A1 et A2, mathématiques au format 3 ».
 
 #### Tle A1
 
