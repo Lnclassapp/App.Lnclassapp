@@ -72,6 +72,45 @@ class SeedsTest < ActiveSupport::TestCase
     assert_equal before, counts
   end
 
+  test "the production seed runs the lesson loading task, which says it has nothing to load without an environment name" do
+    previous = ENV.delete("RAILWAY_ENVIRONMENT_NAME")
+
+    output = as_production { run_seeds }
+
+    assert_includes output, "[contenus] environnement sans chargement automatique"
+  ensure
+    ENV["RAILWAY_ENVIRONMENT_NAME"] = previous if previous
+  end
+
+  test "named Develop on a new database, the production seed loads nothing for lack of a team member" do
+    previous = ENV["RAILWAY_ENVIRONMENT_NAME"]
+    ENV["RAILWAY_ENVIRONMENT_NAME"] = "Develop"
+
+    output = as_production { run_seeds }
+
+    assert_includes output, "[contenus] aucun membre d'équipe actif"
+    assert_equal 0, Orm::Course.count
+  ensure
+    ENV["RAILWAY_ENVIRONMENT_NAME"] = previous
+  end
+
+  test "the contenus seed never fails the pre-deploy: an error of the task is logged and printed" do
+    Rails.application.load_tasks unless Rake::Task.task_defined?("contenus:charger")
+    logged = []
+
+    output = stub_method(Rails.logger, :error, ->(message) { logged << message }) do
+      stub_method(Rake::Task["contenus:charger"], :invoke, ->(*) { raise "boom" }) { as_production { run_seeds } }
+    end
+
+    assert_includes output, "[contenus] chargement automatique impossible : RuntimeError : boom"
+    assert_equal [ "[contenus] chargement automatique impossible : RuntimeError : boom" ], logged
+  end
+
+  test "development and test do not load lessons, and a PR environment is left out of the contenus seed" do
+    assert_no_match "[contenus]", run_seeds
+    assert_match(/"contenus" => %w\[production\]/, Rails.root.join("db/seeds.rb").read)
+  end
+
   test "the development and test files refuse to run in production" do
     as_production do
       %w[catalog school development].each do |name|

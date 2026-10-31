@@ -1,0 +1,1511 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 1,
+  "courses": [
+    {
+      "name": "Mouvement du centre d'inertie d'un solide",
+      "subtitle": "Leçon 3 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Physique-Chimie",
+      "series_name": "D",
+      "essentials": [
+        {
+          "name": "Le centre d'inertie et le principe de l'inertie",
+          "subtitle": "Trouver le point qui résume le mouvement d'un solide et le cadre où le principe de l'inertie s'applique",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Repérer ou calculer la position du centre d'inertie d'un solide.</li><li>Reconnaître un solide isolé ou pseudo-isolé et énoncer le principe de l'inertie.</li><li>Choisir un référentiel galiléen adapté au mouvement étudié.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 — Le bâton de la majorette.</strong> Au défilé de l'école, une majorette lance son bâton en l'air en le faisant tourner. Les deux bouts du bâton font des boucles compliquées. Mais si tu regardes seulement le milieu du bâton, il suit une courbe simple et régulière, comme une petite bille lancée seule.</p><p><strong>Le pont.</strong> Le bâton, c'est le <strong>solide</strong>. Son milieu, c'est son <strong>centre d'inertie</strong> G : le point dont le mouvement reste le plus simple, même quand le solide tourne sur lui-même. Pour étudier le mouvement d'ensemble du bâton, on étudie le mouvement de ce seul point.</p><p><strong>La limite de l'image.</strong> Le bâton est homogène et symétrique : G est en son milieu. Pour un marteau, G n'est pas au milieu du manche : il est près de la tête, la partie la plus lourde.</p><p><strong>Image 2 — Le sac dans le gbaka.</strong> Un sac de riz est posé sur le plancher d'un gbaka. Tant que le gbaka roule tout droit à vitesse constante, le sac reste immobile. Quand le chauffeur freine brusquement, le sac glisse vers l'avant, alors que personne ne l'a poussé.</p><p><strong>Le pont.</strong> Le sac, c'est un solide <strong>pseudo-isolé</strong> : son poids et la réaction du plancher se compensent (on néglige les frottements). Vu depuis la route, il garde sa vitesse : c'est le <strong>principe de l'inertie</strong>. La route (le sol) est un <strong>référentiel galiléen</strong>. Le gbaka qui freine n'en est pas un : dedans, le sac se met en mouvement sans qu'aucune force ne le pousse.</p><p><strong>La limite de l'image.</strong> Le sac n'est pas « projeté » vers l'avant par une force. Il continue simplement tout droit à la même vitesse, pendant que le gbaka ralentit sous lui.</p><h2>Ce qu'il faut retenir</h2><p>Un <em>solide isolé</em> ne subit aucune force. Un <em>solide pseudo-isolé</em> subit des forces dont la somme vectorielle est nulle : $\\sum \\vec F_{ext} = \\vec 0$. Les forces <em>extérieures</em> sont exercées par des objets qui ne font pas partie du système étudié.</p><blockquote><p><strong>Centre d'inertie G</strong> : point d'un solide dont le mouvement est le plus simple. Pour un solide homogène qui possède un centre de symétrie, G est ce centre. Pour un système de deux solides de masses $m_1$ et $m_2$, de centres d'inertie $G_1$ et $G_2$ : $(m_1 + m_2)\\,\\overrightarrow{OG} = m_1\\,\\overrightarrow{OG_1} + m_2\\,\\overrightarrow{OG_2}$, soit sur un axe $x_G = \\dfrac{m_1 x_1 + m_2 x_2}{m_1 + m_2}$. Dans un champ de pesanteur uniforme, G est confondu avec le centre de gravité.</p><p><strong>Principe de l'inertie</strong> : dans un référentiel galiléen, le centre d'inertie d'un solide isolé ou pseudo-isolé est soit au repos, soit en mouvement rectiligne uniforme. Réciproquement, si G est au repos ou en mouvement rectiligne uniforme dans un référentiel galiléen, alors $\\sum \\vec F_{ext} = \\vec 0$.</p><p><strong>Référentiel galiléen</strong> : référentiel dans lequel le principe de l'inertie est vérifié. Le référentiel terrestre l'est en bonne approximation pour les mouvements de courte durée sur Terre. On utilise le référentiel géocentrique pour les satellites de la Terre et le référentiel héliocentrique pour les planètes. Tout référentiel en mouvement rectiligne uniforme par rapport à un référentiel galiléen est galiléen.</p></blockquote><h2>Exemple résolu</h2><p>Une tige de masse négligeable, longue de 60 cm, porte à ses extrémités deux petites boules : $m_1 = 200\\ \\text{g}$ en A et $m_2 = 100\\ \\text{g}$ en B. On lance ce système sur une table horizontale à coussin d'air. Les positions de G, enregistrées toutes les 40 ms, sont alignées et séparées de 8 mm.</p><ol><li><strong>Position de G.</strong> On prend un axe d'origine A, orienté vers B : $x_1 = 0$ et $x_2 = 60\\ \\text{cm}$. Alors $x_G = \\dfrac{200 \\times 0 + 100 \\times 60}{200 + 100} = 20\\ \\text{cm}$. G est à 20 cm de A, plus près de la boule la plus lourde.</li><li><strong>Nature du mouvement de G.</strong> Les positions sont alignées : le mouvement est rectiligne. Elles sont également espacées : il est uniforme. Sa vitesse vaut $v = \\dfrac{8 \\times 10^{-3}}{40 \\times 10^{-3}} = 0{,}2\\ \\text{m/s}$.</li><li><strong>Conclusion.</strong> Dans le référentiel terrestre, supposé galiléen, G est en mouvement rectiligne uniforme. D'après la réciproque du principe de l'inertie, $\\sum \\vec F_{ext} = \\vec 0$ : le poids du système est compensé par la poussée de l'air de la table. Le système est pseudo-isolé.</li><li><strong>Remarque.</strong> Pendant ce temps, les boules A et B peuvent tourner autour de G et décrire des courbes. Seul G va tout droit : c'est le milieu du bâton de la majorette.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'un objet en mouvement a forcément besoin d'une force dans le sens de son mouvement. Un palet qui glisse à vitesse constante sur une table à coussin d'air n'est poussé par rien dans le sens de son mouvement : les forces qu'il subit se compensent.</p><p>Pour repérer l'erreur, demande-toi : le vecteur vitesse de G change-t-il, en valeur ou en direction ? S'il ne change pas, la somme des forces extérieures est nulle, même si l'objet avance vite.</p><h2>En une phrase</h2><p>Je résume le solide par son centre d'inertie G ; dans un référentiel galiléen, si les forces se compensent, G reste au repos ou va tout droit à vitesse constante.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Centre d'inertie, solide pseudo-isolé et référentiel galiléen",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une majorette lance son bâton homogène en le faisant tourner. Pendant le vol, le point du bâton qui a le mouvement le plus simple est son milieu, c'est-à-dire son centre d'inertie.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Le bâton est homogène et symétrique : son centre d'inertie G est en son milieu. C'est le seul point dont le mouvement reste simple, alors que les bouts font des boucles. L'erreur tentante est de croire que tous les points d'un solide ont le même mouvement : c'est faux dès que le solide tourne.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Qu'appelle-t-on un solide pseudo-isolé ?",
+                  "question_type": "single_choice",
+                  "explanation": "Un solide pseudo-isolé subit des forces, mais leur somme vectorielle est nulle, comme le sac dans le gbaka (poids et réaction se compensent). L'erreur la plus fréquente est de le confondre avec un solide isolé, qui ne subit aucune force du tout. Pseudo-isolé ne veut pas dire immobile : il peut être en mouvement rectiligne uniforme.",
+                  "answers": [
+                    {
+                      "content": "Un solide soumis à des forces dont la somme vectorielle est nulle",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un solide qui ne subit aucune force",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide qui reste toujours immobile",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide soumis à une seule force",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Parmi ces affirmations sur le principe de l'inertie, lesquelles sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Dans un référentiel galiléen, G d'un solide pseudo-isolé est au repos ou en mouvement rectiligne uniforme ; et la réciproque est vraie. L'erreur la plus fréquente est de penser qu'un mouvement à vitesse constante exige une force dans le sens du mouvement : les forces se compensent. Le principe n'est pas vrai dans tous les référentiels, par exemple dans un gbaka qui freine.",
+                  "answers": [
+                    {
+                      "content": "Dans un référentiel galiléen, le centre d'inertie d'un solide pseudo-isolé peut être en mouvement rectiligne uniforme.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si le centre d'inertie d'un solide est au repos dans un référentiel galiléen, la somme des forces extérieures qu'il subit est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Un solide pseudo-isolé est forcément immobile.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le principe de l'inertie est vérifié dans n'importe quel référentiel.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Un solide en mouvement rectiligne uniforme subit forcément une force dans le sens de son mouvement.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Pour étudier le mouvement d'un satellite qui tourne autour de la Terre, quel référentiel galiléen choisit-on ?",
+                  "question_type": "single_choice",
+                  "explanation": "On choisit le référentiel géocentrique, lié au centre de la Terre et à des étoiles lointaines. L'erreur tentante est de prendre le référentiel terrestre : il tourne avec la Terre, ce qui n'est pas négligeable sur la durée d'un tour de satellite. Le référentiel héliocentrique sert pour les planètes autour du Soleil.",
+                  "answers": [
+                    {
+                      "content": "Le référentiel géocentrique",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le référentiel terrestre",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le référentiel héliocentrique",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le référentiel lié au satellite",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un sac est posé sur le plancher d'un gbaka qui roule. Le chauffeur freine brusquement et le sac glisse vers l'avant. Quelle interprétation est juste ?",
+                  "question_type": "single_choice",
+                  "explanation": "Vu depuis la route (référentiel galiléen), le sac garde sa vitesse : c'est le principe de l'inertie. C'est le gbaka qui ralentit sous lui. L'erreur tentante est d'inventer une force qui pousse le sac vers l'avant : aucun objet n'exerce cette force. Le gbaka qui freine n'est pas un référentiel galiléen.",
+                  "answers": [
+                    {
+                      "content": "Vu depuis la route, le sac garde la vitesse qu'il avait : c'est le gbaka qui ralentit sous lui.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une force pousse le sac vers l'avant pendant le freinage.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le gbaka qui freine est un référentiel galiléen.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le sac glisse parce que son poids augmente pendant le freinage.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Positionner le centre d'inertie et utiliser le principe de l'inertie",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une tige de masse négligeable, longue de 40 cm, porte une boule de masse $m_1 = 300\\ \\text{g}$ à l'extrémité A et une boule de masse $m_2 = 100\\ \\text{g}$ à l'extrémité B. À quelle distance de A se trouve le centre d'inertie G du système ?",
+                  "question_type": "single_choice",
+                  "explanation": "Axe d'origine A : $x_G = \\dfrac{300 \\times 0 + 100 \\times 40}{300 + 100} = 10\\ \\text{cm}$. G est plus près de la boule la plus lourde. L'erreur tentante est de répondre 20 cm, le milieu : ce n'est vrai que si les deux masses sont égales. Inverser les masses donne 30 cm.",
+                  "answers": [
+                    {
+                      "content": "$10\\ \\text{cm}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\ \\text{cm}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$30\\ \\text{cm}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$13{,}3\\ \\text{cm}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un anneau métallique homogène a la forme d'un cercle. Où se trouve son centre d'inertie ?",
+                  "question_type": "single_choice",
+                  "explanation": "L'anneau homogène a un centre de symétrie : le centre du cercle. C'est donc son centre d'inertie, même s'il n'y a pas de matière en ce point. L'erreur tentante est de croire que G doit forcément être dans la matière du solide : G est un point défini par la répartition des masses.",
+                  "answers": [
+                    {
+                      "content": "Au centre du cercle, en un point où il n'y a pas de matière",
+                      "correct": true
+                    },
+                    {
+                      "content": "Sur l'anneau, au point le plus bas",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il n'en a pas, car son centre est vide",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur l'anneau, en n'importe quel point",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un palet glisse sur une table horizontale à coussin d'air. Les positions de son centre d'inertie, enregistrées toutes les 50 ms, sont alignées et séparées de 1,5 cm. Quelle est la vitesse de G ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le mouvement est rectiligne uniforme : $v = \\dfrac{1{,}5 \\times 10^{-2}}{50 \\times 10^{-3}} = 0{,}3\\ \\text{m/s}$. L'erreur tentante est d'oublier les conversions en mètres et en secondes, ce qui donne 0,03 ou 3. On travaille toujours en unités SI.",
+                  "answers": [
+                    {
+                      "content": "$0{,}3\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$3\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}03\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}075\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une lampe de masse $500\\ \\text{g}$ est suspendue au plafond par un fil. Elle est au repos. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de la tension du fil ?",
+                  "question_type": "single_choice",
+                  "explanation": "G est au repos dans le référentiel terrestre : $\\vec P + \\vec T = \\vec 0$, donc $T = P = m g = 0{,}5 \\times 10 = 5\\ \\text{N}$. L'erreur tentante est de dire 0 N parce que la lampe ne bouge pas : au repos, les forces se compensent, elles ne disparaissent pas. Garder 500 sans convertir donne 5 000 N.",
+                  "answers": [
+                    {
+                      "content": "$5\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\,000\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un camion roule en ligne droite à la vitesse constante de 60 km/h, sur une route horizontale. Le référentiel terrestre est supposé galiléen. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "G est en mouvement rectiligne uniforme : la somme des forces extérieures est nulle, donc les forces qui font avancer le camion compensent exactement les frottements. L'erreur la plus fréquente est de croire que la force motrice doit être plus grande que les frottements : ce serait vrai seulement si le camion accélérait.",
+                  "answers": [
+                    {
+                      "content": "La somme des forces extérieures appliquées au camion est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Les forces qui font avancer le camion compensent exactement les forces de frottement.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force qui fait avancer le camion est plus grande que les frottements, sinon il ne pourrait pas avancer.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le camion est un solide isolé.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme des forces extérieures est dirigée dans le sens du mouvement.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Centre d'inertie et principe de l'inertie",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une barre homogène de masse $1\\ \\text{kg}$ et de longueur $1\\ \\text{m}$ porte, à son extrémité B, un objet de masse $0{,}5\\ \\text{kg}$. À quelle distance de l'autre extrémité A se trouve le centre d'inertie du système ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le centre d'inertie de la barre est en son milieu, à 50 cm de A. Donc $x_G = \\dfrac{1 \\times 50 + 0{,}5 \\times 100}{1 + 0{,}5} = \\dfrac{100}{1{,}5} \\approx 66{,}7\\ \\text{cm}$. L'erreur tentante est de faire la moyenne simple de 50 et 100 (75 cm) : il faut pondérer chaque position par sa masse.",
+                  "answers": [
+                    {
+                      "content": "$66{,}7\\ \\text{cm}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$75\\ \\text{cm}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$50\\ \\text{cm}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$33{,}3\\ \\text{cm}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un palet autoporteur est lancé sur une table horizontale. Les positions de son centre d'inertie, enregistrées toutes les 20 ms, sont alignées et séparées de 6 mm. Le référentiel terrestre est supposé galiléen. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Positions alignées et également espacées : mouvement rectiligne uniforme, avec $v = \\dfrac{6 \\times 10^{-3}}{20 \\times 10^{-3}} = 0{,}3\\ \\text{m/s}$. Le palet est pseudo-isolé : la poussée de l'air compense son poids. L'erreur la plus fréquente est de chercher une force horizontale dans le sens du mouvement : il n'y en a pas.",
+                  "answers": [
+                    {
+                      "content": "Le mouvement de G est rectiligne uniforme.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse de G vaut $0{,}3\\ \\text{m/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La poussée de l'air compense le poids du palet.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le palet subit une force horizontale dans le sens de son mouvement.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse de G vaut $3\\ \\text{m/s}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le palet est un solide isolé.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Le référentiel terrestre est supposé galiléen. Un référentiel lié à un car qui roule en ligne droite à vitesse constante par rapport au sol est lui aussi galiléen.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Tout référentiel en mouvement rectiligne uniforme par rapport à un référentiel galiléen est galiléen. L'erreur tentante est de penser qu'un référentiel en mouvement ne peut jamais être galiléen : ce qui compte, c'est qu'il n'accélère pas. Un car qui freine ou qui tourne, lui, n'est pas galiléen.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une caisse de 40 kg est tirée sur un sol horizontal par une corde horizontale. Elle avance en ligne droite à vitesse constante. Les frottements du sol équivalent à une force constante de 120 N, opposée au mouvement. Quelle est la valeur de la tension de la corde ?",
+                  "question_type": "single_choice",
+                  "explanation": "Mouvement rectiligne uniforme : sur l'horizontale, la tension compense exactement le frottement, donc $T = 120\\ \\text{N}$. L'erreur tentante est de croire qu'il faut plus de 120 N pour que la caisse avance : c'est seulement nécessaire pour la faire accélérer. Le poids (400 N) est vertical et compensé par la réaction du sol.",
+                  "answers": [
+                    {
+                      "content": "$120\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Plus de $120\\ \\text{N}$, sinon la caisse n'avancerait pas",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{N}$, car la vitesse est constante",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans l'espace, loin de tout astre, un astronaute lance une clé à molette en la faisant tourner sur elle-même. Aucune force ne s'exerce sur la clé. Comment se déplace son centre d'inertie, dans un référentiel galiléen ?",
+                  "question_type": "single_choice",
+                  "explanation": "La clé est un solide isolé : d'après le principe de l'inertie, G va en ligne droite à vitesse constante, pendant que la clé tourne autour de G, comme le bâton de la majorette. L'erreur tentante est de penser que la clé va ralentir puis s'arrêter faute de force : sans force, rien ne change sa vitesse.",
+                  "answers": [
+                    {
+                      "content": "En ligne droite, à vitesse constante, pendant que la clé tourne autour de lui",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il tourne en rond comme les bouts de la clé",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il ralentit puis s'arrête, car plus rien ne le pousse",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il reste immobile, car aucune force ne s'exerce",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le théorème du centre d'inertie",
+          "subtitle": "Relier la somme des forces extérieures à l'accélération du centre d'inertie",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Énoncer le théorème du centre d'inertie.</li><li>Faire le bilan des forces extérieures et appliquer le théorème avec la méthode en 5 étapes.</li><li>Calculer une accélération, une force ou une masse à partir de ce théorème.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le pousse-pousse au marché.</strong> Au marché d'Adjamé, un pousseur démarre avec son pousse-pousse, la charrette à bras. Plus il pousse fort, plus la charrette prend vite de la vitesse. Si elle est chargée de sacs d'ignames, la même poussée la fait accélérer moins vite. Et si un camarade tire la charrette vers l'arrière, c'est la différence des deux efforts qui compte.</p><p><strong>Le pont.</strong> La poussée, le tirage du camarade et le frottement des roues, ce sont les <strong>forces extérieures</strong>. Leur somme vectorielle, c'est $\\sum \\vec F_{ext}$. Le chargement, c'est la <strong>masse</strong> $m$ : plus elle est grande, plus il est difficile de changer la vitesse. La rapidité avec laquelle la vitesse change, c'est l'<strong>accélération</strong> $\\vec a_G$ du centre d'inertie.</p><p><strong>La limite de l'image.</strong> Dans l'image, on pense à une poussée « vers l'avant ». Mais $\\vec a_G$ a la direction et le sens de la somme des forces, pas forcément ceux de la vitesse. Quand la charrette ralentit, elle avance encore, mais la somme des forces et $\\vec a_G$ sont dirigées vers l'arrière.</p><h2>Ce qu'il faut retenir</h2><p>La <em>somme vectorielle</em> des forces s'obtient en ajoutant les vecteurs, pas leurs valeurs. Les forces <em>intérieures</em>, exercées entre les parties du système, n'interviennent pas.</p><blockquote><p><strong>Théorème du centre d'inertie</strong> : dans un référentiel galiléen, la somme vectorielle des forces extérieures appliquées à un solide est égale au produit de sa masse par le vecteur accélération de son centre d'inertie :</p><p>$$\\sum \\vec F_{ext} = m\\,\\vec a_G$$</p><p>avec les forces en newtons (N), $m$ en kilogrammes (kg) et $a_G$ en $\\text{m/s}^2$.</p><p>Conséquences : $\\vec a_G$ a la même direction et le même sens que $\\sum \\vec F_{ext}$. Si $\\sum \\vec F_{ext}$ est constante, $\\vec a_G$ est constante. Si $\\sum \\vec F_{ext} = \\vec 0$, on retrouve le principe de l'inertie.</p></blockquote><p><strong>La méthode, en 5 étapes :</strong></p><ol><li>Préciser le <strong>système</strong> étudié.</li><li>Choisir un <strong>référentiel galiléen</strong>, souvent le référentiel terrestre.</li><li>Faire le <strong>bilan des forces extérieures</strong> : poids $\\vec P$, réaction $\\vec R$ du support, tension $\\vec T$ d'un fil ou d'un câble, force de frottement $\\vec f$…</li><li>Écrire le <strong>théorème</strong> : $\\vec P + \\vec R + \\ldots = m\\,\\vec a_G$.</li><li><strong>Projeter</strong> cette relation sur des axes orientés (un axe dans le sens du mouvement, un axe perpendiculaire) et résoudre.</li></ol><h2>Exemple résolu</h2><p>Une caisse de masse $m = 50\\ \\text{kg}$, au repos sur un sol horizontal, est tirée par une corde horizontale de tension $T = 200\\ \\text{N}$. Le sol exerce une force de frottement constante $f = 50\\ \\text{N}$, opposée au mouvement. On prend $g = 10\\ \\text{N/kg}$. Calcule l'accélération, la réaction du sol, puis la vitesse et la distance parcourue au bout de 3 s.</p><ol><li><strong>Système et référentiel.</strong> Le système est la caisse. Le référentiel terrestre est supposé galiléen.</li><li><strong>Bilan des forces.</strong> Le poids $\\vec P$ (vertical, vers le bas, $P = m g = 500\\ \\text{N}$), la réaction normale $\\vec R$ du sol (verticale, vers le haut), la tension $\\vec T$ (horizontale, dans le sens du mouvement), le frottement $\\vec f$ (horizontal, sens contraire).</li><li><strong>Théorème.</strong> $\\vec P + \\vec R + \\vec T + \\vec f = m\\,\\vec a_G$.</li><li><strong>Projection sur l'axe horizontal</strong>, orienté dans le sens du mouvement : $T - f = m\\,a$, donc $a = \\dfrac{200 - 50}{50} = 3\\ \\text{m/s}^2$.</li><li><strong>Projection sur l'axe vertical</strong> : G ne monte ni ne descend, donc $R - P = 0$ et $R = 500\\ \\text{N}$.</li><li><strong>Mouvement.</strong> $a$ est constante : le mouvement est rectiligne uniformément varié, avec $v_0 = 0$. À $t = 3\\ \\text{s}$ : $v = a\\,t = 9\\ \\text{m/s}$ et $x = \\frac{1}{2}a\\,t^2 = 13{,}5\\ \\text{m}$.</li></ol><h2>Le piège à éviter</h2><p>Projeter sans orienter les axes, en donnant le signe + à toutes les forces. Sur un axe orienté dans le sens du mouvement, une force de sens contraire, comme le frottement, compte en négatif : on écrit $T - f$, pas $T + f$.</p><p>Autre erreur : ajouter une force qui n'existe pas. Chaque force du bilan doit avoir un auteur : la Terre, le sol, la corde, l'air. Une force sans auteur, comme « la force de l'élan », n'existe pas.</p><h2>En une phrase</h2><p>Dans un référentiel galiléen, je fais le bilan des forces extérieures, j'écris $\\sum \\vec F_{ext} = m\\,\\vec a_G$ et je projette sur des axes orientés pour trouver l'accélération.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Énoncé et sens du théorème du centre d'inertie",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Quel est l'énoncé exact du théorème du centre d'inertie ?",
+                  "question_type": "single_choice",
+                  "explanation": "Dans un référentiel galiléen, la somme des forces extérieures est égale à $m\\,\\vec a_G$. L'erreur la plus fréquente est d'écrire $m\\,\\vec v_G$ : les forces changent la vitesse, elles ne la fixent pas. Les forces intérieures n'interviennent pas, et le théorème n'est valable que dans un référentiel galiléen.",
+                  "answers": [
+                    {
+                      "content": "Dans un référentiel galiléen, $\\sum \\vec F_{ext} = m\\,\\vec a_G$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Dans un référentiel galiléen, $\\sum \\vec F_{ext} = m\\,\\vec v_G$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans n'importe quel référentiel, $\\sum \\vec F_{ext} = m\\,\\vec a_G$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dans un référentiel galiléen, la somme des forces intérieures est égale à $m\\,\\vec a_G$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un mobile se déplace vers la droite en ralentissant, dans un référentiel galiléen. La somme des forces extérieures qu'il subit est dirigée vers la droite.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. Le mobile ralentit : son accélération est dirigée vers la gauche, à l'opposé de la vitesse. Or la somme des forces a le sens de $\\vec a_G$ : elle est donc dirigée vers la gauche. L'erreur tentante est de croire que la somme des forces a toujours le sens du mouvement, comme la charrette qu'on pousse.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un pousseur fait démarrer un pousse-pousse au marché, pendant qu'un camarade le tire vers l'arrière. Quelles correspondances avec le théorème du centre d'inertie sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le chargement correspond à la masse $m$, et la différence entre poussée et tirage correspond à la somme des forces. L'erreur la plus fréquente est d'associer la somme des forces à la vitesse : elle détermine l'accélération. Et plus la charrette est chargée, plus la même poussée donne une petite accélération, car $a = \\dfrac{F}{m}$.",
+                  "answers": [
+                    {
+                      "content": "Le chargement de sacs d'ignames correspond à la masse $m$ du système.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La différence entre la poussée et le tirage du camarade correspond à la somme des forces extérieures.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse de la charrette correspond à la somme des forces extérieures.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Plus la charrette est chargée, plus la même poussée lui donne une grande accélération.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "On étudie le système « caisse », qui glisse sur un sol horizontal en étant tirée par une corde. Quelles forces font partie du bilan des forces extérieures ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Le bilan contient les forces exercées sur la caisse par d'autres objets : le poids (par la Terre), la réaction du sol, la tension de la corde. L'erreur la plus fréquente est d'ajouter « la force de l'élan », qui n'a pas d'auteur. La force exercée par la caisse sur la corde s'exerce sur la corde, pas sur le système.",
+                  "answers": [
+                    {
+                      "content": "Le poids de la caisse, exercé par la Terre",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction du sol sur la caisse",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension de la corde sur la caisse",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force de l'élan de la caisse",
+                      "correct": false
+                    },
+                    {
+                      "content": "La force exercée par la caisse sur la corde",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Dans un référentiel galiléen, la somme des forces extérieures appliquées à un solide est constante et non nulle. Que peut-on dire du vecteur accélération de son centre d'inertie ?",
+                  "question_type": "single_choice",
+                  "explanation": "D'après $\\sum \\vec F_{ext} = m\\,\\vec a_G$, si la somme est constante, $\\vec a_G$ est constante, avec la même direction et le même sens. L'erreur tentante est de dire que $\\vec a_G$ a le sens de la vitesse : ce n'est vrai que si le mouvement est accéléré. Une force constante donne une accélération constante, pas une accélération qui augmente.",
+                  "answers": [
+                    {
+                      "content": "Il est constant, de même direction et de même sens que la somme des forces.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il est nul, car la somme des forces est constante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il a toujours la direction et le sens de la vitesse.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Il augmente sans cesse avec le temps.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer avec le théorème du centre d'inertie",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Une caisse de 20 kg glisse sur un sol horizontal. Elle est tirée par une corde horizontale de tension 100 N et subit une force de frottement constante de 40 N, opposée au mouvement. Le référentiel terrestre est galiléen. Quelle est la valeur de l'accélération de la caisse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Projection sur l'axe orienté dans le sens du mouvement : $T - f = m\\,a$, donc $a = \\dfrac{100 - 40}{20} = 3\\ \\text{m/s}^2$. L'erreur tentante est d'oublier le frottement ($5\\ \\text{m/s}^2$) ou de l'ajouter à la tension ($7\\ \\text{m/s}^2$) : il s'oppose au mouvement, il compte en négatif.",
+                  "answers": [
+                    {
+                      "content": "$3\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}33\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 1 000 kg roule sur une route droite et horizontale. Elle passe de 0 à 20 m/s en 10 s, avec une accélération constante. Quelle est la valeur de la somme des forces extérieures qu'elle subit ?",
+                  "question_type": "single_choice",
+                  "explanation": "D'abord l'accélération : $a = \\dfrac{20 - 0}{10} = 2\\ \\text{m/s}^2$. Puis $F = m\\,a = 1\\,000 \\times 2 = 2\\,000\\ \\text{N}$. L'erreur tentante est de multiplier la masse par la vitesse (20 000 N) : le théorème relie les forces à l'accélération, pas à la vitesse.",
+                  "answers": [
+                    {
+                      "content": "$2\\,000\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\,000\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$200\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\,000\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cabine d'ascenseur de masse 400 kg monte en accélérant. Son accélération est verticale, vers le haut, de valeur $1\\ \\text{m/s}^2$. On prend $g = 10\\ \\text{N/kg}$ et on néglige les frottements. Quelle est la tension du câble ?",
+                  "question_type": "single_choice",
+                  "explanation": "Axe vertical orienté vers le haut : $T - m g = m\\,a$, donc $T = m\\,(g + a) = 400 \\times 11 = 4\\,400\\ \\text{N}$. L'erreur tentante est de répondre 4 000 N (le poids) : cela vaut seulement à vitesse constante. Une erreur de signe donne 3 600 N, valeur d'une cabine qui accélère vers le bas.",
+                  "answers": [
+                    {
+                      "content": "$4\\,400\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4\\,000\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3\\,600\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un chariot est tiré sur un sol horizontal par une force horizontale constante de 30 N. Les frottements sont négligeables. Son accélération vaut $1{,}5\\ \\text{m/s}^2$. Quelle est sa masse ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sur l'axe du mouvement : $F = m\\,a$, donc $m = \\dfrac{F}{a} = \\dfrac{30}{1{,}5} = 20\\ \\text{kg}$. L'erreur tentante est de multiplier au lieu de diviser (45 kg). Vérifie l'ordre de grandeur : une force plus grande que l'accélération donne une masse plus grande que 1 kg.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{kg}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$45\\ \\text{kg}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}05\\ \\text{kg}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ \\text{kg}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une moto de 200 kg roule à 15 m/s sur une route droite et horizontale. Le conducteur freine : la somme des forces extérieures vaut alors 1 500 N, opposée au mouvement, et reste constante. Combien de temps met la moto pour s'arrêter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Axe orienté dans le sens du mouvement : $a = -\\dfrac{1\\,500}{200} = -7{,}5\\ \\text{m/s}^2$. Puis $0 = 15 - 7{,}5\\,t$, donc $t = 2\\ \\text{s}$. L'erreur tentante est de diviser l'accélération par la vitesse (0,5 s). Pour une durée, on divise un écart de vitesse par l'accélération.",
+                  "answers": [
+                    {
+                      "content": "$2\\ \\text{s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$0{,}5\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7{,}5\\ \\text{s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$15\\ \\text{s}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Mener l'étude dynamique d'un solide",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un chariot de 10 kg, au repos, est tiré sur un sol horizontal par une force horizontale constante de 50 N. Les frottements équivalent à une force constante de 10 N, opposée au mouvement. On prend $g = 10\\ \\text{N/kg}$ ; le référentiel terrestre est galiléen. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Horizontal : $a = \\dfrac{50 - 10}{10} = 4\\ \\text{m/s}^2$. Vertical : $R = m g = 100\\ \\text{N}$. À 2 s : $v = 4 \\times 2 = 8\\ \\text{m/s}$ et $x = \\frac{1}{2} \\times 4 \\times 2^2 = 8\\ \\text{m}$. L'erreur la plus fréquente est d'oublier le $\\frac{1}{2}$ dans $x$ (16 m). Une force constante donne un mouvement uniformément varié, pas uniforme.",
+                  "answers": [
+                    {
+                      "content": "L'accélération du chariot vaut $4\\ \\text{m/s}^2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La réaction normale du sol vaut $100\\ \\text{N}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Au bout de 2 s, la vitesse du chariot vaut $8\\ \\text{m/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'accélération du chariot vaut $5\\ \\text{m/s}^2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Au bout de 2 s, le chariot a parcouru $16\\ \\text{m}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mouvement est rectiligne uniforme, car la force est constante.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 800 kg roule à 72 km/h sur une route droite et horizontale. Elle freine avec une accélération constante et s'arrête sur une distance de 40 m. Quelle est la valeur de la somme des forces extérieures pendant le freinage ?",
+                  "question_type": "single_choice",
+                  "explanation": "$72\\ \\text{km/h} = 20\\ \\text{m/s}$. Relation sans le temps : $0 - 20^2 = 2a \\times 40$, donc $a = -5\\ \\text{m/s}^2$ et $F = 800 \\times 5 = 4\\,000\\ \\text{N}$. L'erreur tentante est d'oublier le facteur 2 (8 000 N). Garder 72 sans convertir donne une valeur absurde de plus de 50 000 N.",
+                  "answers": [
+                    {
+                      "content": "$4\\,000\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8\\,000\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$51\\,840\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\,000\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une cabine d'ascenseur de 500 kg descend. Juste avant l'arrêt, elle ralentit avec une accélération verticale de valeur $2\\ \\text{m/s}^2$. On prend $g = 10\\ \\text{N/kg}$ et on néglige les frottements. Quelle est la tension du câble pendant cette phase ?",
+                  "question_type": "single_choice",
+                  "explanation": "La cabine descend en ralentissant : $\\vec a_G$ est dirigée vers le haut. Axe vers le haut : $T - m g = m\\,a$, donc $T = 500 \\times (10 + 2) = 6\\,000\\ \\text{N}$. L'erreur tentante est de penser que l'accélération est vers le bas parce que la cabine descend : cela donne 4 000 N, valeur d'une cabine qui descend en accélérant.",
+                  "answers": [
+                    {
+                      "content": "$6\\,000\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4\\,000\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\,000\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1\\,000\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Deux caisses A (6 kg) et B (4 kg), reliées par un fil horizontal, glissent sans frottement sur un sol horizontal. Une force horizontale de 20 N tire la caisse A, et A tire B par le fil. Quelle est la tension du fil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Système {A + B} : le fil est intérieur, donc $20 = (6 + 4)\\,a$ et $a = 2\\ \\text{m/s}^2$. Système {B} : le fil est extérieur, donc $T = 4 \\times 2 = 8\\ \\text{N}$. L'erreur tentante est de croire que le fil transmet toute la force (20 N) : une partie sert à accélérer A. Appliquer le calcul à A au lieu de B donne 12 N.",
+                  "answers": [
+                    {
+                      "content": "$8\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$20\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$12\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 2 kg se déplace sur un axe horizontal $(Ox)$, dans un référentiel galiléen. Son équation horaire est $x(t) = 1{,}5\\,t^2 + 2\\,t$ (unités SI). Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "On dérive deux fois : $v = 3\\,t + 2$, puis $a = 3\\ \\text{m/s}^2$, constante. Donc $\\sum F = m\\,a = 2 \\times 3 = 6\\ \\text{N}$, constante. L'erreur la plus fréquente est de prendre le coefficient 1,5 pour l'accélération : dans $x = \\frac{1}{2}a\\,t^2 + \\ldots$, ce coefficient vaut $\\frac{a}{2}$.",
+                  "answers": [
+                    {
+                      "content": "La somme des forces extérieures a pour valeur $6\\ \\text{N}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme des forces extérieures est constante.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme des forces extérieures a pour valeur $3\\ \\text{N}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme des forces extérieures a pour valeur $4\\ \\text{N}$, car $m \\times v_0 = 2 \\times 2$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme des forces extérieures est nulle à $t = 0$, car le solide part de l'origine.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le mouvement d'un solide sur un plan incliné",
+          "subtitle": "Avec ou sans frottement",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Représenter les forces qui s'exercent sur un solide posé sur un plan incliné et les projeter sur des axes adaptés.</li><li>Calculer l'accélération d'un solide qui monte ou descend une pente, avec ou sans frottement.</li><li>En déduire une vitesse, une distance, une durée ou la valeur d'une force de frottement.</li></ul><h2>L'image pour comprendre</h2><p><strong>La petite voiture dans la rue en pente.</strong> À Abobo, un enfant lâche sa petite voiture en bois en haut d'une rue en pente. Plus la rue est raide, plus la voiture prend vite de la vitesse. Sur une rue presque plate, elle avance à peine. Si la rue est en terre rugueuse, elle accélère moins que sur le goudron lisse.</p><p><strong>Le pont.</strong> La rue, c'est le <strong>plan incliné</strong>, qui fait un angle $\\alpha$ avec l'horizontale. La voiture, c'est le solide, résumé par son centre d'inertie G. Une partie seulement du poids tire la voiture vers le bas de la pente : c'est la composante $m g \\sin\\alpha$, d'autant plus grande que la rue est raide. L'autre partie, $m g \\cos\\alpha$, appuie la voiture contre la rue : elle est compensée par la réaction. La terre rugueuse, c'est la <strong>force de frottement</strong> $\\vec f$, qui s'oppose au mouvement.</p><p><strong>La limite de l'image.</strong> Une petite voiture roule sur ses roues ; dans les exercices, le solide glisse. Et dans la réalité, le frottement n'est pas toujours constant : on le suppose constant pour pouvoir calculer.</p><h2>Ce qu'il faut retenir</h2><p>On choisit un axe $(Ox)$ parallèle à la pente, orienté dans le sens du mouvement, et un axe $(Oy)$ perpendiculaire à la pente. L'angle entre le poids $\\vec P$ et l'axe $(Oy)$ vaut aussi $\\alpha$. La <em>réaction normale</em> $\\vec R_N$ est la partie de la réaction du plan perpendiculaire à la pente.</p><blockquote><p>Un solide de masse $m$ glisse sur un plan incliné d'angle $\\alpha$. La force de frottement $\\vec f$, de valeur $f$ constante, est parallèle à la pente et opposée au mouvement. Dans le référentiel terrestre, supposé galiléen, avec l'axe $(Ox)$ orienté dans le sens du mouvement :</p><ul><li>Réaction normale du plan : $R_N = m g \\cos\\alpha$, car le solide ne quitte pas le plan.</li><li>Le solide <strong>descend</strong> : $a = g \\sin\\alpha - \\dfrac{f}{m}$ ; sans frottement, $a = g \\sin\\alpha$.</li><li>Le solide <strong>monte</strong>, après avoir été lancé : $a = -\\left(g \\sin\\alpha + \\dfrac{f}{m}\\right)$ ; il ralentit.</li></ul><p>L'accélération est constante : le mouvement de G est rectiligne uniformément varié.</p></blockquote><h2>Exemple résolu</h2><p>Un solide de masse $m = 2\\ \\text{kg}$ est lâché sans vitesse en haut d'un plan incliné d'angle $\\alpha = 30^\\circ$. Il descend en subissant une force de frottement constante $f = 4\\ \\text{N}$. On prend $g = 10\\ \\text{N/kg}$. Calcule son accélération, la réaction normale, puis sa vitesse après 6 m de descente.</p><ol><li><strong>Système et référentiel.</strong> Le système est le solide ; le référentiel terrestre est supposé galiléen.</li><li><strong>Bilan des forces.</strong> Le poids $\\vec P$, la réaction normale $\\vec R_N$ du plan, la force de frottement $\\vec f$, dirigée vers le haut de la pente.</li><li><strong>Théorème.</strong> $\\vec P + \\vec R_N + \\vec f = m\\,\\vec a_G$.</li><li><strong>Projection sur $(Ox)$</strong>, orienté vers le bas de la pente : $m g \\sin\\alpha - f = m\\,a$, donc $a = 10 \\times 0{,}5 - \\dfrac{4}{2} = 3\\ \\text{m/s}^2$.</li><li><strong>Projection sur $(Oy)$</strong> : $R_N - m g \\cos\\alpha = 0$, donc $R_N = 2 \\times 10 \\times \\cos 30^\\circ \\approx 17{,}3\\ \\text{N}$.</li><li><strong>Vitesse après 6 m.</strong> Le mouvement est uniformément varié, avec $v_0 = 0$ : $v^2 = 2\\,a\\,d = 2 \\times 3 \\times 6 = 36$, donc $v = 6\\ \\text{m/s}$. Il a fallu $t = \\dfrac{v}{a} = 2\\ \\text{s}$.</li><li><strong>Comparaison.</strong> Sans frottement, on aurait $a = g \\sin\\alpha = 5\\ \\text{m/s}^2$, quelle que soit la masse.</li></ol><h2>Le piège à éviter</h2><p>Projeter le poids avec le mauvais angle, en écrivant $m g \\cos\\alpha$ le long de la pente. Vérifie avec un cas limite : si $\\alpha = 0$, le plan est horizontal et le solide n'est pas entraîné. La composante le long de la pente doit donc être nulle : c'est $\\sin 0 = 0$, et non $\\cos 0 = 1$.</p><p>Autre piège : quand le solide monte, le frottement est dirigé vers le bas de la pente, dans le même sens que la composante du poids. Les deux freinent le solide : on les ajoute.</p><h2>En une phrase</h2><p>Sur une pente d'angle $\\alpha$, le poids tire le solide le long de la pente avec $m g \\sin\\alpha$, la réaction compense $m g \\cos\\alpha$ et le frottement freine : j'en déduis une accélération constante.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Les forces sur un plan incliné",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un solide de masse $m$ est posé sur un plan incliné d'angle $\\alpha$ avec l'horizontale. Quelle est la valeur de la composante de son poids parallèle à la pente ?",
+                  "question_type": "single_choice",
+                  "explanation": "La composante du poids le long de la pente vaut $m g \\sin\\alpha$. Vérifie avec $\\alpha = 0$ : sur un plan horizontal, le poids ne tire pas le long du plan, et $\\sin 0 = 0$. L'erreur la plus fréquente est d'écrire $m g \\cos\\alpha$ : c'est la composante perpendiculaire à la pente, compensée par la réaction.",
+                  "answers": [
+                    {
+                      "content": "$m g \\sin\\alpha$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$m g \\cos\\alpha$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m g$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$m g \\tan\\alpha$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est lâché sans vitesse sur un plan incliné, et les frottements sont négligeables. Son accélération ne dépend pas de sa masse.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Sans frottement, $m g \\sin\\alpha = m\\,a$, donc $a = g \\sin\\alpha$ : la masse se simplifie. Un petit et un gros solide lâchés sur la même pente lisse descendent ensemble. L'erreur tentante est de croire que le plus lourd descend plus vite : il est plus tiré, mais il est aussi plus difficile à mettre en mouvement.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un enfant lâche sa petite voiture en haut d'une rue en pente. Quelles correspondances entre cette image et l'étude d'un plan incliné sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Une rue plus raide correspond à un angle $\\alpha$ plus grand, donc à une composante $m g \\sin\\alpha$ plus grande. La terre rugueuse correspond au frottement. L'erreur la plus fréquente est de croire que la partie du poids qui appuie contre la rue fait accélérer : elle est compensée par la réaction. Sur une rue plate, rien ne tire la voiture le long du sol.",
+                  "answers": [
+                    {
+                      "content": "Plus la rue est raide, plus $\\alpha$ est grand, et plus la composante $m g \\sin\\alpha$ est grande.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La terre rugueuse de la rue correspond à la force de frottement, opposée au mouvement.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La partie du poids qui appuie la voiture contre la rue la fait accélérer.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Sur une rue parfaitement plate, la voiture lâchée sans vitesse se met à accélérer.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide glisse sur un plan incliné d'angle $\\alpha$. Il subit son poids, la réaction du plan et éventuellement un frottement parallèle à la pente. Quelle est la valeur de la réaction normale $R_N$ du plan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le solide reste sur le plan : sur l'axe perpendiculaire à la pente, $R_N - m g \\cos\\alpha = 0$, donc $R_N = m g \\cos\\alpha$. L'erreur la plus fréquente est d'écrire $R_N = m g$ comme sur un sol horizontal : sur une pente, la réaction ne compense qu'une partie du poids.",
+                  "answers": [
+                    {
+                      "content": "$R_N = m g \\cos\\alpha$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$R_N = m g$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R_N = m g \\sin\\alpha$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$R_N = 0$, car le solide glisse",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est lancé vers le haut d'un plan incliné ; il monte en subissant des frottements. Quels sont la direction et le sens de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "Pendant la montée, la composante du poids le long de la pente et le frottement sont tous deux dirigés vers le bas de la pente. Leur somme, donc $\\vec a_G$, est parallèle à la pente, vers le bas : le solide ralentit. L'erreur tentante est de donner à l'accélération le sens du mouvement : ce n'est vrai que si le solide accélère.",
+                  "answers": [
+                    {
+                      "content": "Parallèle à la pente, vers le bas : le solide ralentit.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Parallèle à la pente, vers le haut, dans le sens du mouvement.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Verticale, vers le bas, comme le poids.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Nulle, tant que le solide monte.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer une accélération et une vitesse sur un plan incliné",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un solide glisse sans frottement vers le bas d'un plan incliné d'angle $30^\\circ$. On prend $g = 10\\ \\text{m/s}^2$. Quelle est la valeur de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sans frottement, $a = g \\sin\\alpha = 10 \\times \\sin 30^\\circ = 10 \\times 0{,}5 = 5\\ \\text{m/s}^2$. L'erreur tentante est d'utiliser le cosinus, ce qui donne environ $8{,}7\\ \\text{m/s}^2$. Une autre est de répondre $g$ : ce serait une chute verticale, pas une glissade sur une pente.",
+                  "answers": [
+                    {
+                      "content": "$5\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8{,}7\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 4 kg descend un plan incliné d'angle $30^\\circ$. Il subit une force de frottement constante de 8 N, opposée au mouvement. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "Projection le long de la pente, vers le bas : $a = g \\sin\\alpha - \\dfrac{f}{m} = 5 - \\dfrac{8}{4} = 3\\ \\text{m/s}^2$. L'erreur tentante est d'ignorer le frottement ($5\\ \\text{m/s}^2$) ou de l'ajouter ($7\\ \\text{m/s}^2$) : il freine la descente, il se retranche. Le cosinus donne environ $6{,}7\\ \\text{m/s}^2$.",
+                  "answers": [
+                    {
+                      "content": "$3\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$5\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$7\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$6{,}7\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 2 kg est posé sur un plan incliné d'angle $60^\\circ$. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de la réaction normale du plan ?",
+                  "question_type": "single_choice",
+                  "explanation": "$R_N = m g \\cos\\alpha = 2 \\times 10 \\times \\cos 60^\\circ = 20 \\times 0{,}5 = 10\\ \\text{N}$. L'erreur tentante est d'utiliser $\\sin 60^\\circ$, ce qui donne environ 17,3 N, ou de prendre tout le poids (20 N). Plus la pente est raide, plus la réaction normale est petite.",
+                  "answers": [
+                    {
+                      "content": "$10\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$17{,}3\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$20\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide part du repos en haut d'un plan incliné long de 4 m. Il descend avec une accélération constante de $2\\ \\text{m/s}^2$. Quelle est sa vitesse en bas du plan ?",
+                  "question_type": "single_choice",
+                  "explanation": "Relation sans le temps : $v^2 - 0 = 2\\,a\\,d = 2 \\times 2 \\times 4 = 16$, donc $v = 4\\ \\text{m/s}$. L'erreur la plus fréquente est d'oublier la racine carrée et de répondre 16 m/s. Oublier le facteur 2 donne $\\sqrt 8 \\approx 2{,}8\\ \\text{m/s}$.",
+                  "answers": [
+                    {
+                      "content": "$4\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$16\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}8\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$8\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide est lancé vers le haut d'un plan incliné d'angle $30^\\circ$, sans frottement, avec une vitesse de 5 m/s. On prend $g = 10\\ \\text{m/s}^2$. Quelle distance parcourt-il le long de la pente avant de s'arrêter ?",
+                  "question_type": "single_choice",
+                  "explanation": "Axe dans le sens de la montée : $a = -g \\sin\\alpha = -5\\ \\text{m/s}^2$. Puis $0 - 5^2 = 2 \\times (-5) \\times d$, donc $d = 2{,}5\\ \\text{m}$. L'erreur tentante est de prendre $a = -g$ comme pour une chute verticale (1,25 m) ; une autre est d'oublier le facteur 2 (5 m).",
+                  "answers": [
+                    {
+                      "content": "$2{,}5\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1{,}25\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$5\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$1{,}44\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier le mouvement d'un solide sur un plan incliné",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Un solide de 500 g est lâché sans vitesse en haut d'un plan incliné d'angle $30^\\circ$, long de 6 m. Il glisse en subissant une force de frottement constante de 1 N. On prend $g = 10\\ \\text{N/kg}$ ; le référentiel terrestre est galiléen. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "$a = 10 \\times 0{,}5 - \\dfrac{1}{0{,}5} = 3\\ \\text{m/s}^2$. En bas : $v^2 = 2 \\times 3 \\times 6 = 36$, donc $v = 6\\ \\text{m/s}$, atteinte en $t = \\dfrac{6}{3} = 2\\ \\text{s}$. $R_N = 5 \\cos 30^\\circ \\approx 4{,}3\\ \\text{N}$, pas 5 N. L'erreur la plus fréquente est d'oublier le frottement et de garder $a = 5\\ \\text{m/s}^2$.",
+                  "answers": [
+                    {
+                      "content": "L'accélération du solide vaut $3\\ \\text{m/s}^2$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le solide arrive en bas du plan avec une vitesse de $6\\ \\text{m/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le solide met $2\\ \\text{s}$ pour descendre le plan.",
+                      "correct": true
+                    },
+                    {
+                      "content": "L'accélération vaut $5\\ \\text{m/s}^2$, car la masse n'intervient pas.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction normale du plan vaut $5\\ \\text{N}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le mouvement est rectiligne uniforme, car le frottement compense le poids.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 2 kg descend un plan incliné d'angle $30^\\circ$. On mesure une accélération constante de $4\\ \\text{m/s}^2$. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de la force de frottement, supposée constante ?",
+                  "question_type": "single_choice",
+                  "explanation": "Projection vers le bas de la pente : $m g \\sin\\alpha - f = m\\,a$, donc $f = 2 \\times 10 \\times 0{,}5 - 2 \\times 4 = 10 - 8 = 2\\ \\text{N}$. L'erreur tentante est de répondre 8 N, en prenant $m\\,a$ pour le frottement : $m\\,a$ est la somme des forces, pas une force du bilan. Le cosinus donne 9,3 N.",
+                  "answers": [
+                    {
+                      "content": "$2\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$8\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$18\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$9{,}3\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 1 kg est lancé vers le haut d'un plan incliné d'angle $30^\\circ$ avec une vitesse de 8 m/s. Une force de frottement constante de 3 N s'oppose au mouvement. On prend $g = 10\\ \\text{N/kg}$. Quelle distance parcourt-il avant de s'arrêter ?",
+                  "question_type": "single_choice",
+                  "explanation": "En montée, poids et frottement freinent tous deux : $a = -\\left(5 + \\dfrac{3}{1}\\right) = -8\\ \\text{m/s}^2$. Puis $0 - 8^2 = 2 \\times (-8) \\times d$, donc $d = 4\\ \\text{m}$. L'erreur tentante est de retrancher le frottement comme en descente ($a = -2$, d'où 16 m). Oublier le frottement donne 6,4 m.",
+                  "answers": [
+                    {
+                      "content": "$4\\ \\text{m}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6{,}4\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$16\\ \\text{m}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$3{,}2\\ \\text{m}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de 3 kg est maintenu immobile sur un plan incliné d'angle $30^\\circ$ par un fil parallèle à la pente. Les frottements sont négligeables. On prend $g = 10\\ \\text{N/kg}$. Quelle est la tension du fil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le solide est au repos : $\\vec P + \\vec R_N + \\vec T = \\vec 0$. Le long de la pente : $T = m g \\sin\\alpha = 3 \\times 10 \\times 0{,}5 = 15\\ \\text{N}$. L'erreur tentante est d'utiliser le cosinus (environ 26 N) ou de prendre tout le poids (30 N) : le fil ne retient que la partie du poids parallèle à la pente.",
+                  "answers": [
+                    {
+                      "content": "$15\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$26\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$30\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{N}$, car le solide est immobile",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide de masse $m$ descend un plan incliné d'angle $20^\\circ$ à vitesse constante. Le référentiel terrestre est galiléen. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Vitesse constante en ligne droite : mouvement rectiligne uniforme, donc $\\sum \\vec F_{ext} = \\vec 0$. Le long de la pente, le frottement compense $m g \\sin 20^\\circ$. L'erreur la plus fréquente est de croire qu'il n'y a pas de frottement : sans lui, le solide accélérerait avec $a = g \\sin 20^\\circ$. La réaction normale vaut $m g \\cos 20^\\circ$, pas $m g$.",
+                  "answers": [
+                    {
+                      "content": "La somme des forces extérieures appliquées au solide est nulle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La force de frottement a pour valeur $m g \\sin 20^\\circ$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Il n'y a pas de frottement, sinon le solide ralentirait.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accélération du solide vaut $g \\sin 20^\\circ$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction normale du plan vaut $m g$.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "Le mouvement circulaire uniforme",
+          "subtitle": "Accélération centripète, véhicule dans un virage plat ou relevé, et pendule conique",
+          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Appliquer le théorème du centre d'inertie à un solide en mouvement circulaire uniforme.</li><li>Trouver la force qui fait tourner un véhicule dans un virage plat ou relevé, et calculer une vitesse limite ou l'angle d'un virage.</li><li>Étudier un pendule conique : tension du fil, angle du fil et vitesse angulaire.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 — La pierre au bout de la ficelle.</strong> Tu fais tourner au-dessus de ta tête une pierre attachée à une ficelle, comme un berger avec sa fronde. Pour qu'elle tourne, ta main doit tirer sans arrêt la ficelle vers elle. Si la ficelle casse, la pierre ne part pas en s'éloignant de ta main : elle file tout droit, dans la direction qu'elle avait à cet instant.</p><p><strong>Le pont.</strong> Ta main, c'est le <strong>centre</strong> du cercle. La ficelle qui tire vers ta main, c'est la force dirigée vers le centre, appelée force <strong>centripète</strong>. Elle ne change pas la valeur de la vitesse, elle change sa direction : c'est l'<strong>accélération centripète</strong>. La pierre qui file tout droit quand la ficelle casse, c'est le <strong>principe de l'inertie</strong> : sans force, G va en ligne droite.</p><p><strong>La limite de l'image.</strong> Ta main bouge un peu et la ficelle n'est pas parfaitement horizontale. Dans l'étude, le centre est fixe et le cercle est dans un plan.</p><p><strong>Image 2 — Le gbaka dans le virage.</strong> Sur une route plate, un gbaka prend un virage. Par temps sec, ses pneus « accrochent » la route et il tourne. Sur une route mouillée ou couverte de sable, s'il va trop vite, il dérape vers l'extérieur. Sur l'autoroute, les grands virages sont <strong>relevés</strong> : la route penche vers l'intérieur, comme un cycliste qui se penche pour tourner.</p><p><strong>Le pont.</strong> L'accroche des pneus, c'est la <strong>force de frottement latérale</strong> exercée par la route : sur un virage plat, c'est elle qui joue le rôle de la ficelle. Le dérapage arrive quand la route ne peut plus fournir une force assez grande. Sur un virage relevé, la réaction de la route est penchée vers l'intérieur : une partie de cette réaction tire le véhicule vers le centre, même sans frottement.</p><p><strong>La limite de l'image.</strong> Les passagers se sentent « poussés vers l'extérieur ». Aucune force ne les pousse ainsi : leur corps tend à continuer tout droit, et c'est le siège ou la portière qui les pousse vers l'intérieur. Dans un référentiel galiléen, la « force centrifuge » n'existe pas.</p><h2>Ce qu'il faut retenir</h2><p>Dans un <em>mouvement circulaire uniforme</em> (MCU) de rayon $r$, la valeur $v$ de la vitesse est constante. La <em>vitesse angulaire</em> $\\omega$, en $\\text{rad/s}$, est l'angle balayé par seconde : $v = r\\,\\omega$. Un virage <em>relevé</em> est incliné d'un angle $\\alpha$ vers l'intérieur.</p><blockquote><p><strong>Accélération du MCU</strong> : $\\vec a_G$ est dirigée vers le centre du cercle (centripète), de valeur $a_G = \\dfrac{v^2}{r} = r\\,\\omega^2$.</p><p><strong>Théorème du centre d'inertie appliqué au MCU</strong> : dans un référentiel galiléen, la somme des forces extérieures est dirigée vers le centre, de valeur $\\sum F = m\\,\\dfrac{v^2}{r}$. Si cette somme disparaît, G part en ligne droite, tangentiellement au cercle.</p><p><strong>Virage plat</strong> : la force de frottement latérale est centripète, $f = m\\,\\dfrac{v^2}{r}$. Si la route peut fournir au plus $f_{max}$, la vitesse maximale est $v_{max} = \\sqrt{\\dfrac{f_{max}\\,r}{m}}$.</p><p><strong>Virage relevé d'angle $\\alpha$, sans frottement latéral</strong> : $R\\cos\\alpha = m g$ et $R\\sin\\alpha = m\\,\\dfrac{v^2}{r}$, d'où $\\tan\\alpha = \\dfrac{v^2}{r\\,g}$.</p><p><strong>Pendule conique</strong> : une bille de masse $m$, au bout d'un fil de longueur $L$, tourne à la vitesse angulaire $\\omega$ dans un plan horizontal ; le fil fait l'angle $\\theta$ avec la verticale. Le rayon vaut $r = L\\sin\\theta$, et : $T = m\\,\\omega^2 L$ ; $\\cos\\theta = \\dfrac{g}{\\omega^2 L}$. Ce mouvement n'est possible que si $\\omega^2 > \\dfrac{g}{L}$.</p></blockquote><h2>Exemple résolu</h2><h3>Un pendule conique</h3><p>Une bille de masse $m = 100\\ \\text{g}$, attachée à un fil de longueur $L = 50\\ \\text{cm}$, tourne dans un plan horizontal à $\\omega = 5\\ \\text{rad/s}$. On prend $g = 10\\ \\text{N/kg}$ et on néglige l'air. Calcule l'angle du fil, la tension, le rayon et la vitesse.</p><ol><li><strong>Système, référentiel, forces.</strong> La bille, dans le référentiel terrestre supposé galiléen. Elle subit son poids $\\vec P$ (vertical) et la tension $\\vec T$ (le long du fil, vers le point d'attache).</li><li><strong>Théorème.</strong> $\\vec P + \\vec T = m\\,\\vec a_G$, avec $\\vec a_G$ horizontale, vers le centre, de valeur $r\\,\\omega^2$.</li><li><strong>Projection horizontale</strong> (vers le centre) : $T\\sin\\theta = m\\,r\\,\\omega^2 = m\\,L\\sin\\theta\\,\\omega^2$, donc $T = m\\,\\omega^2 L = 0{,}1 \\times 25 \\times 0{,}5 = 1{,}25\\ \\text{N}$.</li><li><strong>Projection verticale</strong> : G ne monte ni ne descend, donc $T\\cos\\theta - m g = 0$ et $\\cos\\theta = \\dfrac{m g}{T} = \\dfrac{1}{1{,}25} = 0{,}8$, soit $\\theta \\approx 37^\\circ$.</li><li><strong>Rayon et vitesse.</strong> $\\sin\\theta = 0{,}6$, donc $r = 0{,}5 \\times 0{,}6 = 0{,}3\\ \\text{m}$ et $v = r\\,\\omega = 1{,}5\\ \\text{m/s}$.</li></ol><h3>Un virage relevé</h3><p>Un virage de rayon $r = 100\\ \\text{m}$ doit être pris à $72\\ \\text{km/h}$ sans frottement latéral. On convertit : $v = 20\\ \\text{m/s}$. Alors $\\tan\\alpha = \\dfrac{20^2}{100 \\times 10} = 0{,}4$, soit $\\alpha \\approx 22^\\circ$.</p><h2>Le piège à éviter</h2><p>Ajouter une « force centrifuge » dans le bilan des forces, pour « équilibrer » la force centripète. Dans un référentiel galiléen, cette force n'existe pas : elle n'a pas d'auteur. Et un solide en MCU n'est pas en équilibre : son accélération n'est pas nulle.</p><p>Pour repérer l'erreur, vérifie ta somme des forces : elle doit être dirigée vers le centre et valoir $m\\,\\dfrac{v^2}{r}$, jamais zéro. Pour le pendule conique, n'oublie pas non plus que le rayon est $L\\sin\\theta$, et non la longueur $L$ du fil.</p><h2>En une phrase</h2><p>Pour tourner à vitesse constante, il faut une somme de forces dirigée vers le centre, de valeur $m\\,\\dfrac{v^2}{r}$ : la tension d'un fil, le frottement de la route ou la réaction d'un virage relevé.</p>",
+          "exercises": [
+            {
+              "title": "Comprendre — Accélération et forces dans un mouvement circulaire uniforme",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Dans un mouvement circulaire uniforme, la valeur de la vitesse est constante. Donc l'accélération du centre d'inertie est nulle.",
+                  "question_type": "true_false",
+                  "explanation": "Faux. La valeur de la vitesse est constante, mais sa direction change sans cesse. L'accélération est donc non nulle : elle est dirigée vers le centre et vaut $\\dfrac{v^2}{r}$. L'erreur tentante est de confondre « vitesse constante en valeur » et « vecteur vitesse constant », comme la pierre de la fronde qu'il faut tirer sans arrêt.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Un solide décrit un cercle de rayon $r$ à vitesse de valeur $v$ constante. Comment est son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "En MCU, $\\vec a_G$ est dirigée vers le centre (centripète) et vaut $\\dfrac{v^2}{r}$. L'erreur la plus fréquente est de la croire nulle parce que la vitesse est constante en valeur. Elle n'est pas tangente : une composante tangente changerait la valeur de la vitesse.",
+                  "answers": [
+                    {
+                      "content": "Dirigée vers le centre du cercle, de valeur $\\dfrac{v^2}{r}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "Nulle, car la vitesse est constante",
+                      "correct": false
+                    },
+                    {
+                      "content": "Tangente au cercle, de valeur $\\dfrac{v^2}{r}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "Dirigée vers l'extérieur du cercle, de valeur $\\dfrac{v^2}{r}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Tu fais tourner au-dessus de ta tête une pierre attachée à une ficelle, dans un plan horizontal. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "La tension de la ficelle est la force centripète qui fait tourner la pierre. Si la ficelle casse, la pierre n'a plus de force horizontale : elle part tout droit, tangentiellement au cercle. L'erreur la plus fréquente est d'imaginer une force centrifuge qui la tirerait vers l'extérieur : cette force n'a pas d'auteur.",
+                  "answers": [
+                    {
+                      "content": "La tension de la ficelle est la force dirigée vers le centre qui fait tourner la pierre.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si la ficelle casse, la pierre part en ligne droite, tangentiellement au cercle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Si la ficelle casse, la pierre part dans la direction de la ficelle, en s'éloignant de la main.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Une force centrifuge tire la pierre vers l'extérieur et compense la tension.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture prend un virage à vitesse constante sur une route horizontale (virage plat). Quelle force la fait tourner ?",
+                  "question_type": "single_choice",
+                  "explanation": "Sur un virage plat, le poids et la réaction normale sont verticaux : ils se compensent. La seule force horizontale dirigée vers le centre est le frottement latéral de la route sur les pneus. L'erreur tentante est de citer la force centrifuge, qui n'existe pas dans un référentiel galiléen. Sans frottement (route mouillée ou sablée), la voiture dérape.",
+                  "answers": [
+                    {
+                      "content": "La force de frottement latérale exercée par la route sur les pneus, dirigée vers le centre du virage",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le poids de la voiture",
+                      "correct": false
+                    },
+                    {
+                      "content": "La force centrifuge",
+                      "correct": false
+                    },
+                    {
+                      "content": "La réaction normale de la route, verticale",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bille accrochée à un fil tourne à vitesse angulaire constante dans un plan horizontal : c'est un pendule conique. Le fil, de longueur $L$, fait un angle $\\theta$ avec la verticale. On néglige l'air. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "La bille subit seulement son poids et la tension. Leur somme est horizontale, vers le centre, car c'est la direction de $\\vec a_G$. Le rayon vaut $L\\sin\\theta$. L'erreur la plus fréquente est de croire que la tension compense le poids : seule sa partie verticale le compense, sa partie horizontale fait tourner la bille.",
+                  "answers": [
+                    {
+                      "content": "La bille subit deux forces : son poids et la tension du fil.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La somme de ces deux forces est horizontale, dirigée vers le centre du cercle.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le rayon du cercle vaut $L\\sin\\theta$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension du fil compense exactement le poids de la bille.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rayon du cercle est égal à la longueur $L$ du fil.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La bille subit aussi une force centrifuge qui équilibre la tension.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Appliquer — Calculer dans un mouvement circulaire uniforme",
+              "exercise_type": "fixation",
+              "questions": [
+                {
+                  "content": "Un mobile décrit un cercle de rayon $2\\ \\text{m}$ à la vitesse constante de $4\\ \\text{m/s}$. Quelle est la valeur de son accélération ?",
+                  "question_type": "single_choice",
+                  "explanation": "$a = \\dfrac{v^2}{r} = \\dfrac{4^2}{2} = 8\\ \\text{m/s}^2$. L'erreur tentante est d'oublier le carré ($\\dfrac{4}{2} = 2$) ou de multiplier par le rayon au lieu de diviser (32). Une autre est de répondre 0 parce que la vitesse est constante : sa direction change.",
+                  "answers": [
+                    {
+                      "content": "$8\\ \\text{m/s}^2$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$32\\ \\text{m/s}^2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0\\ \\text{m/s}^2$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bille de 200 g, attachée à un fil horizontal dont l'autre bout est fixé au centre d'une table horizontale sans frottement, décrit un cercle de rayon $0{,}5\\ \\text{m}$ à $3\\ \\text{m/s}$. Quelle est la tension du fil ?",
+                  "question_type": "single_choice",
+                  "explanation": "Le poids et la réaction de la table se compensent. La tension est la seule force horizontale : $T = m\\,\\dfrac{v^2}{r} = 0{,}2 \\times \\dfrac{9}{0{,}5} = 3{,}6\\ \\text{N}$. L'erreur tentante est d'oublier le carré de la vitesse (1,2 N) ou de prendre le poids (2 N) : ici, le fil ne porte pas la bille, il la fait tourner.",
+                  "answers": [
+                    {
+                      "content": "$3{,}6\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$1{,}2\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}9\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une voiture de 1 000 kg prend un virage plat de rayon $50\\ \\text{m}$ à $54\\ \\text{km/h}$. Quelle force de frottement latérale la route doit-elle exercer ?",
+                  "question_type": "single_choice",
+                  "explanation": "On convertit : $54\\ \\text{km/h} = 15\\ \\text{m/s}$. Puis $f = m\\,\\dfrac{v^2}{r} = 1\\,000 \\times \\dfrac{225}{50} = 4\\,500\\ \\text{N}$. L'erreur tentante est de garder 54 sans convertir, ce qui donne 58 320 N. Oublier le carré donne 300 N.",
+                  "answers": [
+                    {
+                      "content": "$4\\,500\\ \\text{N}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$58\\,320\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$300\\ \\text{N}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$10\\,000\\ \\text{N}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un virage relevé de rayon $80\\ \\text{m}$ est construit pour être pris à $72\\ \\text{km/h}$ sans frottement latéral. On prend $g = 10\\ \\text{m/s}^2$. Que vaut la tangente de l'angle $\\alpha$ du virage ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v = 20\\ \\text{m/s}$, donc $\\tan\\alpha = \\dfrac{v^2}{r\\,g} = \\dfrac{400}{80 \\times 10} = 0{,}5$. L'erreur tentante est d'inverser la formule ($\\dfrac{r\\,g}{v^2} = 2$) : vérifie qu'un virage pris plus vite doit être plus relevé, donc $v^2$ est au numérateur.",
+                  "answers": [
+                    {
+                      "content": "$0{,}5$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$2$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}9$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}25$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une bille, au bout d'un fil de longueur $40\\ \\text{cm}$, tourne en pendule conique à la vitesse angulaire $\\omega = 10\\ \\text{rad/s}$. On prend $g = 10\\ \\text{m/s}^2$. Que vaut $\\cos\\theta$, où $\\theta$ est l'angle du fil avec la verticale ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\cos\\theta = \\dfrac{g}{\\omega^2 L} = \\dfrac{10}{100 \\times 0{,}4} = 0{,}25$. L'erreur tentante est d'inverser la fraction (4) ou d'oublier le carré de $\\omega$ (2,5). Un cosinus plus grand que 1 est impossible : c'est un bon moyen de repérer l'erreur.",
+                  "answers": [
+                    {
+                      "content": "$0{,}25$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$4$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$2{,}5$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5$",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "S'évaluer — Étudier un virage et un pendule conique",
+              "exercise_type": "evaluation",
+              "questions": [
+                {
+                  "content": "Une bille de 50 g, au bout d'un fil de longueur $1\\ \\text{m}$, tourne en pendule conique. Le fil fait un angle de $60^\\circ$ avec la verticale. On prend $g = 10\\ \\text{N/kg}$ et on néglige l'air. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_3",
+                  "explanation": "Vertical : $T\\cos 60^\\circ = m g$, donc $T = \\dfrac{0{,}5}{0{,}5} = 1\\ \\text{N}$. Rayon : $r = \\sin 60^\\circ \\approx 0{,}87\\ \\text{m}$. Et $T = m\\,\\omega^2 L$ donne $\\omega^2 = 20$, soit $\\omega \\approx 4{,}5\\ \\text{rad/s}$. L'erreur la plus fréquente est de croire que la tension vaut le poids (0,5 N), ou d'oublier la racine carrée.",
+                  "answers": [
+                    {
+                      "content": "La tension du fil vaut $1\\ \\text{N}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le rayon du cercle vaut environ $0{,}87\\ \\text{m}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La vitesse angulaire vaut environ $4{,}5\\ \\text{rad/s}$.",
+                      "correct": true
+                    },
+                    {
+                      "content": "La tension du fil vaut $0{,}5\\ \\text{N}$, comme le poids.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Le rayon du cercle vaut $1\\ \\text{m}$.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La vitesse angulaire vaut $20\\ \\text{rad/s}$.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Une moto et son pilote ont une masse totale de 200 kg. Ils abordent un virage plat de rayon $40\\ \\text{m}$. La route peut exercer au plus une force de frottement latérale de $2\\,000\\ \\text{N}$. Quelle est la vitesse maximale pour ne pas déraper ?",
+                  "question_type": "single_choice",
+                  "explanation": "$v_{max} = \\sqrt{\\dfrac{f_{max}\\,r}{m}} = \\sqrt{\\dfrac{2\\,000 \\times 40}{200}} = \\sqrt{400} = 20\\ \\text{m/s}$, soit 72 km/h. L'erreur la plus fréquente est d'oublier la racine carrée (400 m/s). Diviser par le rayon au lieu de multiplier donne 0,5 m/s, une vitesse absurde.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{m/s}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$400\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$0{,}5\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$14{,}1\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un virage relevé de rayon $200\\ \\text{m}$ a une inclinaison telle que $\\tan\\alpha = 0{,}2$. On prend $g = 10\\ \\text{m/s}^2$. À quelle vitesse faut-il le prendre pour n'avoir besoin d'aucun frottement latéral ?",
+                  "question_type": "single_choice",
+                  "explanation": "$\\tan\\alpha = \\dfrac{v^2}{r\\,g}$, donc $v^2 = r\\,g\\tan\\alpha = 200 \\times 10 \\times 0{,}2 = 400$ et $v = 20\\ \\text{m/s}$, soit 72 km/h. L'erreur tentante est d'oublier $g$ ($v^2 = 40$, d'où 6,3 m/s) ou d'inverser la formule, ce qui donne 100 m/s.",
+                  "answers": [
+                    {
+                      "content": "$20\\ \\text{m/s}$, soit $72\\ \\text{km/h}$",
+                      "correct": true
+                    },
+                    {
+                      "content": "$6{,}3\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$100\\ \\text{m/s}$",
+                      "correct": false
+                    },
+                    {
+                      "content": "$400\\ \\text{m/s}$",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un véhicule prend un virage relevé d'angle $\\alpha$, sans frottement latéral, à vitesse constante. La réaction de la route a une valeur plus grande que le poids du véhicule.",
+                  "question_type": "true_false",
+                  "explanation": "Vrai. Sur la verticale, $R\\cos\\alpha = m g$, donc $R = \\dfrac{m g}{\\cos\\alpha}$, plus grand que $m g$ car $\\cos\\alpha < 1$. La réaction doit à la fois porter le véhicule et le pousser vers le centre. L'erreur tentante est de croire que $R = m g$ comme sur une route plate, où la réaction ne fait que compenser le poids.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Un passager de gbaka se sent poussé vers l'extérieur quand le véhicule prend un virage à vitesse constante. On raisonne dans le référentiel terrestre, galiléen. Quelles affirmations sont justes ?",
+                  "question_type": "multiple_correct_2",
+                  "explanation": "Le passager décrit un arc de cercle : la somme des forces qu'il subit est dirigée vers le centre. Son corps tend à continuer tout droit, et c'est le siège ou la portière qui le pousse vers l'intérieur. L'erreur la plus fréquente est de croire à une force centrifuge : ce qu'il ressent, c'est son inertie, comme la pierre qui file quand la ficelle casse.",
+                  "answers": [
+                    {
+                      "content": "La somme des forces exercées sur le passager est dirigée vers le centre du virage.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Le passager tend à continuer tout droit ; le siège ou la portière le pousse vers l'intérieur pour le faire tourner.",
+                      "correct": true
+                    },
+                    {
+                      "content": "Une force centrifuge pousse le passager vers l'extérieur du virage.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La somme des forces exercées sur le passager est nulle, car sa vitesse est constante.",
+                      "correct": false
+                    },
+                    {
+                      "content": "L'accélération du passager est dirigée vers l'extérieur du virage.",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

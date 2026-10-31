@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121, chargement-automatique-des-lecons-hors-production
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -85,6 +85,16 @@ module Ports
       # → { courses:, essentials:, exercises:, questions:, answers:, subjects: } (lignes créées)
       def replace_draft(course_id:, tree:)
         raise NotImplementedError, "#{self.class} doit implémenter #replace_draft"
+      end
+
+      # Chargement automatique hors production : remplace, publiée ou non, les exercices des notions, les problèmes et les sujets de devoir
+      # d'une leçon (et ce qui s'y rattache : séances, tentatives, badges, lacunes nées de ces séances, devoirs envoyés), dans la transaction de
+      # l'appelant, la leçon verrouillée. Le cours, ses notions, leurs fiches et leurs lectures ne bougent pas. Les exercices du nœud
+      # (`tree`, un CourseNode v3) se rattachent aux notions en place par leur nom (squish) ; une notion introuvable lève KeyError. Les figures
+      # citées par ces exercices et sujets sont ajoutées aux figures de la leçon ou y remplacent leur clé. Tout est écrit en brouillon.
+      # → { courses:, essentials:, exercises:, questions:, answers:, subjects: } (lignes créées ; essentials vaut 0)
+      def replace_exercises(course_id:, tree:)
+        raise NotImplementedError, "#{self.class} doit implémenter #replace_exercises"
       end
     end
   end

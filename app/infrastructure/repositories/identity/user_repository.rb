@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Identity::UserRepository
 # Rôle : lit et modifie les comptes, vérifie le PIN par bcrypt en temps constant, construit l'acteur, anonymise un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084, 0092, 0094, 0096
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0065, 0077, 0082, 0084, 0092, 0094, 0096, chargement-automatique-des-lecons-hors-production
 module Repositories
   module Identity
     class UserRepository
@@ -61,6 +61,11 @@ module Repositories
 
         school_id, staff_position = school_of(user, current_school_id)
         Entities::Identity::Actor.new(user_id:, role: user.role.to_sym, team_role: user.team_role, school_id:, staff_position:)
+      end
+
+      def oldest_active_team_actor
+        id = Orm::User.where(role: "team", anonymized_at: nil).order(:created_at, :id).pick(:id)
+        id && actor_for(user_id: id)
       end
 
       private

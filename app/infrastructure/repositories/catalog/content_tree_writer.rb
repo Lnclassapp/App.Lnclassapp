@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121, chargement-automatique-des-lecons-hors-production
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -77,9 +77,42 @@ module Repositories
         { courses: 1, essentials: notions.size, **counts, subjects: subjects.size }
       end
 
+      # Chargement automatique hors production (ADR chargement-automatique-des-lecons-hors-production §4.4) : remplace, dans la transaction
+      # de l'appelant et la leçon verrouillée, les exercices de ses notions, ses problèmes et ses sujets de devoir, publiée ou non, avec ce qui
+      # s'y rattache (séances, tentatives, badges, lacunes nées de ces séances, devoirs envoyés). Le cours (nom, sous-titre, thème, texte), ses
+      # notions, leurs fiches et leurs lectures ne bougent pas : les exercices du nœud se rattachent aux notions en place par leur nom
+      # (squish ; une notion introuvable lève KeyError, rien n'est écrit). Les figures citées par les exercices et les sujets du nœud sont
+      # ajoutées aux figures de la leçon, ou les remplacent par leur clé ; les autres restent. Les lignes écrites sont en brouillon.
+      # → { courses:, essentials:, exercises:, questions:, answers:, subjects: } (lignes créées, essentials vaut 0)
+      def replace_exercises(course_id:, tree:)
+        connection.execute("SET LOCAL enable_seqscan = off")
+        course = Orm::Course.lock.find(course_id)
+        notion_ids = Orm::Essential.where(course_id:).lock.pluck(:name, :id).to_h { |name, id| [ name.squish, id ] }
+        exercises = tree.notions.flat_map { |notion| notion.exercises.map { |node| node.with(essential_id: notion_ids.fetch(notion.name.squish)) } }
+
+        stamp(course.author_id, Time.current)
+        deleted = delete_content(course_id, keep_notions: true)
+        Rails.logger.info("[import] exercices remplacés : course_id=#{course_id} slug=#{course.slug} lignes supprimées #{deleted.to_json}")
+        subjects = tree.subjects.map { it.with(course_id:) }
+        cited = (exercises + tree.exercises + subjects.flat_map(&:exercises)).filter_map(&:figure_key)
+        course.update_columns(figures: merged_figures(course.figures, tree.figures, cited), updated_at: @at)
+
+        lesson_wide = tree.exercises.map { [ it, course_id, nil ] }
+        counts = write_exercises(exercises, lesson_wide + subject_exercises(subjects, insert_subjects(subjects)))
+
+        { courses: 1, essentials: 0, **counts, subjects: subjects.size }
+      end
+
       private
 
       def connection = ActiveRecord::Base.connection
+
+      # Les figures de la leçon, celles du fichier citées (cited) y remplaçant leur homonyme ou s'y ajoutant ; les autres restent.
+      def merged_figures(current, incoming, cited)
+        fresh = incoming.select { cited.include?(it["key"]) }.index_by { it["key"] }
+        kept = current.map { |figure| fresh.delete(figure["key"]) || figure }
+        kept + fresh.values
+      end
 
       def stamp(author_id, at)
         @author_id = author_id
@@ -133,16 +166,18 @@ module Repositories
 
       # Du plus dépendant au moins dépendant (toutes les clés étrangères sont RESTRICT) : lacunes, copies, séances, badges, questions,
       # exercices, sujets, puis notions, leurs lectures, images et texte riche. Les images (fichiers stockés) sont détruites pour être purgées.
+      # keep_notions : les notions, leurs lectures et les lacunes qui ne naissent pas des séances supprimées restent (replace_exercises).
       # → nombre de lignes supprimées par table.
-      def delete_content(course_id)
+      def delete_content(course_id, keep_notions: false)
         exercise_ids = Orm::Exercise.where(course_id:).pluck(:id)
         essential_ids = Orm::Essential.where(course_id:).pluck(:id)
         question_ids = Orm::Question.where(exercise_id: exercise_ids).pluck(:id)
         session_ids = Orm::ExerciseSession.where(exercise_id: exercise_ids).pluck(:id)
         deleted = {}
 
-        gap_ids = Orm::KnowledgeGap.where(essential_id: essential_ids).or(Orm::KnowledgeGap.where(source_session_id: session_ids))
-                                   .or(Orm::KnowledgeGap.where(resolved_by_session_id: session_ids)).pluck(:id)
+        gaps = Orm::KnowledgeGap.where(source_session_id: session_ids).or(Orm::KnowledgeGap.where(resolved_by_session_id: session_ids))
+        gaps = gaps.or(Orm::KnowledgeGap.where(essential_id: essential_ids)) unless keep_notions
+        gap_ids = gaps.pluck(:id)
         # Une séance de remédiation (la base veut une lacune avec elle) devient une séance ordinaire quand sa lacune disparaît ; celles des
         # exercices supprimés partent ensuite avec eux.
         Orm::ExerciseSession.where(knowledge_gap_id: gap_ids).update_all(kind: "standard", knowledge_gap_id: nil)
@@ -158,6 +193,8 @@ module Repositories
         deleted[:questions] = Orm::Question.where(id: question_ids).delete_all
         deleted[:exercises] = Orm::Exercise.where(id: exercise_ids).delete_all
         deleted[:subjects] = Orm::Subject.where(course_id:).delete_all
+        return deleted if keep_notions
+
         deleted[:essential_reads] = Orm::EssentialRead.where(essential_id: essential_ids).delete_all
         deleted[:essentials] = Orm::Essential.where(id: essential_ids).delete_all
         deleted

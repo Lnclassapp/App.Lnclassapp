@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::CourseRepository
 # Rôle : traduit Orm::Course et son contenu riche (Action Text) ↔ Entities::Catalog::Course ; slug figé à la création
-# ADR  : 0029, 0035, 0039, 0075, 0116
+# ADR  : 0029, 0035, 0039, 0075, 0116, chargement-automatique-des-lecons-hors-production
 module Repositories
   module Catalog
     class CourseRepository
@@ -55,6 +55,12 @@ module Repositories
 
       def taken_slugs
         Orm::Course.pluck(:slug).to_set
+      end
+
+      def slugs_by_key
+        Orm::Course.pluck(:slug, :name, :level_id, :material_id, :series_id).to_h do |slug, name, *taxonomy|
+          [ [ Entities::Shared::NaturalKey.compact(name), *taxonomy ], slug ]
+        end
       end
 
       # ADR-0116 §4.4 : la leçon et ses notions et exercices sont lus sous verrou (FOR UPDATE), dans la transaction de l'appelant.

@@ -212,12 +212,22 @@
           "$ref": "#/$defs/figure_key"
         },
         "exercise": {
-          "description": "Un exercice exactement par notion : un objet est vérifié ici, tout autre valeur (absente, null, liste) est refusée par l'adaptateur (raison essential_exercise_count).",
+          "description": "Un exercice (objet) ou une liste de un à deux exercices par notion (amendement ADR-0116 du 2026-10-31) : chaque exercice est vérifié ici, le nombre est compté par l'adaptateur (raison essential_exercise_count) ; absent, null ou liste vide sont refusés par lui.",
           "if": {
             "type": "object"
           },
           "then": {
             "$ref": "#/$defs/exercise"
+          },
+          "else": {
+            "if": {
+              "type": "array"
+            },
+            "then": {
+              "items": {
+                "$ref": "#/$defs/exercise"
+              }
+            }
           }
         },
         "practice": {

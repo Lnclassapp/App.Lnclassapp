@@ -1,0 +1,1719 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les drogues et le système nerveux",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "classification-des-drogues",
+          "kind": "diagram",
+          "description": "Arbre de classement des drogues d'après leur effet sur l'activité du système nerveux. La racine est « Drogues » ; elle se divise en trois classes : stimulants (cocaïne, nicotine), dépresseurs (alcool, héroïne) et perturbateurs (cannabis). Chaque classe est reliée à ses exemples.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "d",
+                "label": "Drogues : substances agissant sur le système nerveux",
+                "category": 1
+              },
+              {
+                "id": "s",
+                "label": "Stimulants : activité accélérée",
+                "category": 2
+              },
+              {
+                "id": "p",
+                "label": "Dépresseurs : activité ralentie",
+                "category": 3
+              },
+              {
+                "id": "x",
+                "label": "Perturbateurs : perceptions déformées",
+                "category": 4
+              },
+              {
+                "id": "s1",
+                "label": "Cocaïne",
+                "category": 2
+              },
+              {
+                "id": "s2",
+                "label": "Nicotine",
+                "category": 2
+              },
+              {
+                "id": "p1",
+                "label": "Alcool",
+                "category": 3
+              },
+              {
+                "id": "p2",
+                "label": "Héroïne",
+                "category": 3
+              },
+              {
+                "id": "x1",
+                "label": "Cannabis",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "d",
+                "to": "s"
+              },
+              {
+                "from": "d",
+                "to": "p"
+              },
+              {
+                "from": "d",
+                "to": "x"
+              },
+              {
+                "from": "s",
+                "to": "s1"
+              },
+              {
+                "from": "s",
+                "to": "s2"
+              },
+              {
+                "from": "p",
+                "to": "p1"
+              },
+              {
+                "from": "p",
+                "to": "p2"
+              },
+              {
+                "from": "x",
+                "to": "x1"
+              }
+            ],
+            "legend": [
+              "Drogues",
+              "Stimulants",
+              "Dépresseurs",
+              "Perturbateurs"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "synapse-et-drogues",
+          "kind": "diagram",
+          "description": "Schéma fléché d'une synapse à neurotransmetteur. La transmission normale va de l'arrivée du potentiel d'action à la libération, à la fixation sur les récepteurs (PPSE) puis à la recapture. Quatre actions de drogues sont reliées à leur étape : amphétamines (libération augmentée), morphine et nicotine (mime), antagoniste (récepteurs bloqués), cocaïne (recapture bloquée).",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "a",
+                "label": "Potentiel d'action au bouton présynaptique",
+                "category": 1
+              },
+              {
+                "id": "b",
+                "label": "Libération du neurotransmetteur",
+                "category": 1
+              },
+              {
+                "id": "c",
+                "label": "Fixation sur les récepteurs : PPSE",
+                "category": 1
+              },
+              {
+                "id": "d",
+                "label": "Recapture du neurotransmetteur",
+                "category": 1
+              },
+              {
+                "id": "e",
+                "label": "Amphétamines : libération augmentée",
+                "category": 2
+              },
+              {
+                "id": "f",
+                "label": "Morphine, nicotine : mime",
+                "category": 2
+              },
+              {
+                "id": "g",
+                "label": "Antagoniste : récepteurs bloqués",
+                "category": 2
+              },
+              {
+                "id": "h",
+                "label": "Cocaïne : recapture bloquée",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "a",
+                "to": "b"
+              },
+              {
+                "from": "b",
+                "to": "c"
+              },
+              {
+                "from": "c",
+                "to": "d",
+                "label": "puis"
+              },
+              {
+                "from": "e",
+                "to": "b",
+                "label": "renforce"
+              },
+              {
+                "from": "f",
+                "to": "c",
+                "label": "active"
+              },
+              {
+                "from": "g",
+                "to": "c",
+                "label": "empêche"
+              },
+              {
+                "from": "h",
+                "to": "d",
+                "label": "bloque"
+              }
+            ],
+            "legend": [
+              "Transmission normale",
+              "Action d'une drogue"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cercle-de-la-dependance",
+          "kind": "diagram",
+          "description": "Cercle vicieux de la dépendance en six étapes : consommation de la drogue, forte hausse de dopamine et plaisir, adaptation du cerveau (tolérance), doses de plus en plus fortes, dépendance, manque et sevrage à l'arrêt. Le manque pousse à reprendre la consommation, ce qui referme le cercle.",
+          "params": {
+            "layout": "cycle",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Consommation de la drogue",
+                "category": 1
+              },
+              {
+                "id": "n2",
+                "label": "Hausse de dopamine : plaisir",
+                "category": 1
+              },
+              {
+                "id": "n3",
+                "label": "Adaptation du cerveau : tolérance",
+                "category": 2
+              },
+              {
+                "id": "n4",
+                "label": "Doses de plus en plus fortes",
+                "category": 2
+              },
+              {
+                "id": "n5",
+                "label": "Dépendance psychique et physique",
+                "category": 3
+              },
+              {
+                "id": "n6",
+                "label": "Manque et sevrage à l'arrêt",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "n1",
+                "to": "n2"
+              },
+              {
+                "from": "n2",
+                "to": "n3"
+              },
+              {
+                "from": "n3",
+                "to": "n4"
+              },
+              {
+                "from": "n4",
+                "to": "n5"
+              },
+              {
+                "from": "n5",
+                "to": "n6"
+              },
+              {
+                "from": "n6",
+                "to": "n1",
+                "label": "reprise"
+              }
+            ],
+            "legend": [
+              "Plaisir",
+              "Adaptation",
+              "Dépendance"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "dopamine-et-tolerance",
+          "kind": "stat_chart",
+          "description": "Courbe fictive (résultats simplifiés) du taux de dopamine dans le noyau accumbens d'un rat, mesuré 30 minutes après la prise quotidienne d'une même dose de drogue pendant six jours (valeur au repos : 100). Taux : 300, 250, 200, 160, 130, 120. Le taux baisse chaque jour.",
+          "params": {
+            "chart": "line",
+            "series": [
+              300,
+              250,
+              200,
+              160,
+              130,
+              120
+            ],
+            "labels": [
+              "J1",
+              "J2",
+              "J3",
+              "J4",
+              "J5",
+              "J6"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "activite-neurone-et-cocaine",
+          "kind": "stat_chart",
+          "description": "Courbe fictive (résultats simplifiés) de la fréquence des potentiels d'action (par seconde) d'un neurone du noyau accumbens d'un rat, enregistrée toutes les 2 minutes. La cocaïne est injectée à 4 minutes. Fréquences : 5, 5, 5, 12, 20, 18, 14, 9, 6. Le maximum, 20, est atteint à 8 minutes, puis la fréquence redescend.",
+          "params": {
+            "chart": "line",
+            "series": [
+              5,
+              5,
+              5,
+              12,
+              20,
+              18,
+              14,
+              9,
+              6
+            ],
+            "labels": [
+              "0 min",
+              "2 min",
+              "4 min",
+              "6 min",
+              "8 min",
+              "10 min",
+              "12 min",
+              "14 min",
+              "16 min"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "dopamine-de-base-et-sevrage",
+          "kind": "stat_chart",
+          "description": "Courbe fictive (résultats simplifiés) du taux de base de dopamine d'un rat (mesuré avant la prise du jour, valeur au repos : 100), tous les 2 jours de J0 à J16. La drogue est donnée chaque jour de J0 à J6, puis arrêtée. Taux : 100, 90, 80, 70, 50, 55, 70, 85, 95. Le minimum, 50, est atteint à J8.",
+          "params": {
+            "chart": "line",
+            "series": [
+              100,
+              90,
+              80,
+              70,
+              50,
+              55,
+              70,
+              85,
+              95
+            ],
+            "labels": [
+              "J0",
+              "J2",
+              "J4",
+              "J6",
+              "J8",
+              "J10",
+              "J12",
+              "J14",
+              "J16"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir et classer les drogues",
+          "remember": "Une **drogue** est une substance, naturelle ou fabriquée, qui agit sur le système nerveux central : elle modifie l'activité du cerveau, donc l'humeur, les perceptions et le comportement, et elle peut entraîner une **dépendance**. Une drogue ne crée pas de message nerveux nouveau : elle modifie la communication entre les neurones. On la classe d'après son effet sur l'activité du système nerveux. Les **stimulants** l'accélèrent (cocaïne, amphétamines, nicotine). Les **dépresseurs** la ralentissent (alcool, morphine, héroïne). Les **perturbateurs** déforment les perceptions (cannabis, LSD). Une substance vendue légalement, comme l'alcool ou le tabac, ou un médicament pris hors prescription peut être une drogue : *légal* ne veut pas dire *sans danger*.",
+          "method": [
+            "Relever les effets observés sur le comportement et sur les fonctions de l'organisme (vigilance, humeur, perceptions, réflexes).",
+            "Comparer ces effets à l'état normal : l'activité du système nerveux est-elle accélérée, ralentie ou déformée ?",
+            "Classer la substance : stimulant, dépresseur ou perturbateur.",
+            "Conclure en nommant la classe et en rappelant que la substance agit sur le système nerveux."
+          ],
+          "example": {
+            "statement": "Après avoir bu plusieurs verres, un homme a la parole pâteuse, des réflexes lents et une grande somnolence. Classer l'alcool d'après ces effets.",
+            "steps": [
+              "Relever : parole pâteuse, réflexes lents, somnolence.",
+              "Comparer : par rapport à l'état normal, l'activité du système nerveux est ralentie.",
+              "Classer : une substance qui ralentit l'activité du système nerveux est un dépresseur.",
+              "Conclure : l'alcool est un dépresseur, une drogue qui agit sur le système nerveux malgré sa vente légale."
+            ]
+          },
+          "pitfall": "Ne pas classer l'alcool parmi les stimulants parce que le buveur paraît gai et bavard au début. Contre-exemple : après plusieurs verres, la parole devient pâteuse et le temps de réaction s'allonge. La gaieté du début vient d'une baisse du contrôle de soi, pas d'une accélération du système nerveux. Pour classer, regarde l'effet d'ensemble sur l'activité nerveuse, jamais le seul premier effet ni le caractère légal de la substance.",
+          "figure": "classification-des-drogues",
+          "exercise": {
+            "title": "Au club santé du lycée de San-Pédro : définir et classer",
+            "statement": "Le club santé du lycée de San-Pédro prépare une campagne de sensibilisation sur les drogues. À la première réunion, l'infirmière demande aux élèves de définir ce qu'est une drogue, puis de classer des substances d'après leurs effets. Dans cet exercice, tu appliques la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces définitions, laquelle est celle d'une drogue ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : la bonne définition parle d'une action sur le comportement et d'une dépendance possible. Étape 2 — Comparer : une drogue change l'activité du système nerveux, ce qu'un simple aliment ne fait pas. Étape 3 — Classer : la définition ne dépend ni de la loi ni de l'organe touché. Étape 4 — Conclure : une drogue agit sur le système nerveux et peut rendre dépendant. La définition « substance interdite » est l'erreur tentante : l'alcool et le tabac sont légaux et sont pourtant des drogues.",
+                "answers": [
+                  {
+                    "content": "Une substance interdite par la loi et vendue en cachette",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une substance toxique pour le foie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une substance qui agit sur le système nerveux, modifie le comportement et peut entraîner une dépendance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une substance qui soigne une maladie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À l'infirmerie du lycée, tu relies chaque description d'effets à la classe de drogue qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever les effets de chaque description. Étape 2 — Comparer à l'état normal : excitation, insomnie et cœur accéléré montrent une activité accélérée ; parole pâteuse et réflexes ralentis montrent une activité ralentie ; sons et couleurs inexistants montrent des perceptions déformées. Étape 3 — Classer : excitation, insomnie → stimulant ; parole pâteuse, réflexes ralentis → dépresseur ; sons et couleurs inexistants → perturbateur. Étape 4 — Conclure : chaque classe correspond à un type d'effet sur le système nerveux. L'erreur tentante est de ranger l'excitation parmi les perturbateurs : une perturbation concerne les perceptions, pas la vitesse d'activité.",
+                "answers": [
+                  {
+                    "content": "Excitation, insomnie, cœur et réflexes accélérés",
+                    "match": "Stimulant"
+                  },
+                  {
+                    "content": "Parole pâteuse, réflexes ralentis, somnolence",
+                    "match": "Dépresseur"
+                  },
+                  {
+                    "content": "Sons et couleurs perçus alors qu'ils n'existent pas",
+                    "match": "Perturbateur"
+                  }
+                ]
+              },
+              {
+                "content": "Une affiche du club santé cite des stimulants. Quelles sont les deux substances stimulantes de cette liste ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : on cherche les substances qui accélèrent l'activité du système nerveux. Étape 2 — Comparer : la cocaïne et la nicotine augmentent la vigilance et accélèrent le cœur ; l'héroïne et l'alcool ralentissent l'activité nerveuse. Étape 3 — Classer : cocaïne et nicotine sont des stimulants, héroïne et alcool des dépresseurs. Étape 4 — Conclure : les deux bonnes propositions sont la cocaïne et la nicotine.",
+                "answers": [
+                  {
+                    "content": "La cocaïne",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'héroïne",
+                    "correct": false
+                  },
+                  {
+                    "content": "La nicotine",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'alcool",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le cannabis déforme les perceptions de celui qui en consomme. Il est donc classé parmi les ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Relever : le cannabis modifie les perceptions. Étape 2 — Comparer : il ne fait ni accélérer franchement ni ralentir seulement l'activité nerveuse, il déforme la perception. Étape 3 — Classer : c'est le critère des perturbateurs. Étape 4 — Conclure : le cannabis est rangé parmi les perturbateurs. Le classer parmi les stimulants serait confondre perturbation des perceptions et accélération de l'activité.",
+                "answers": [
+                  {
+                    "content": "perturbateurs",
+                    "correct": true
+                  },
+                  {
+                    "content": "stimulants",
+                    "correct": false
+                  },
+                  {
+                    "content": "dépresseurs",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le tabac et l'alcool sont vendus légalement, donc ils ne sont pas des drogues. L'affirmation est :",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : la nicotine du tabac et l'alcool agissent sur le système nerveux. Étape 2 — Comparer : ils modifient le comportement, la vigilance ou les réflexes. Étape 3 — Classer : la nicotine est un stimulant, l'alcool un dépresseur. Étape 4 — Conclure : ce sont des drogues, car la définition repose sur l'action sur le système nerveux et la dépendance, pas sur la loi. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à définir et à classer des drogues, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une substance qui ralentit l'activité du système nerveux est un ___ ; une substance qui déforme les perceptions est un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever l'effet de chaque substance. Étape 2 — Comparer à l'état normal : l'activité est ralentie pour la substance qui ralentit, déformée pour celle qui déforme les perceptions. Étape 3 — Classer : ralentir donne un dépresseur, déformer les perceptions donne un perturbateur. Étape 4 — Conclure avec ces deux mots.",
+                "answers": [
+                  {
+                    "content": "dépresseur",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "perturbateur",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "hallucinogène",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Ralentir : pense à l'alcool. Déformer les perceptions : pense au cannabis."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour classer une substance.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever les effets d'abord, sans rien interpréter. Étape 2 — Comparer ensuite à l'état normal. Étape 3 — Classer seulement après la comparaison. Étape 4 — Conclure en nommant la classe. Classer avant de comparer est l'erreur tentante : on ne peut pas dire qu'une activité est accélérée sans la comparer à l'état normal.",
+                "answers": [
+                  {
+                    "content": "Relever les effets sur le comportement et les fonctions"
+                  },
+                  {
+                    "content": "Comparer ces effets à l'état normal"
+                  },
+                  {
+                    "content": "Classer la substance : stimulant, dépresseur ou perturbateur"
+                  },
+                  {
+                    "content": "Conclure en nommant la classe"
+                  }
+                ],
+                "hint": "On observe avant d'interpréter, et on conclut en dernier."
+              },
+              {
+                "content": "L'alcool est vendu légalement : il reste pourtant une drogue qui agit sur le système nerveux.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : l'alcool modifie les réflexes et la parole. Étape 2 — Comparer à l'état normal : l'activité nerveuse est ralentie. Étape 3 — Classer : c'est un dépresseur. Étape 4 — Conclure : légal ne veut pas dire sans danger, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève qui a pris une substance est très excité, ne dort plus et son cœur bat vite. Cette substance est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : excitation, insomnie, cœur rapide. Étape 2 — Comparer : l'activité du système nerveux est accélérée. Étape 3 — Classer : c'est un stimulant. Étape 4 — Conclure : la substance est un stimulant. Un dépresseur ralentirait au contraire l'activité.",
+                "answers": [
+                  {
+                    "content": "Un stimulant",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un dépresseur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un perturbateur",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'activité nerveuse est-elle accélérée, ralentie ou seulement déformée ?"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer l'action d'une drogue sur la synapse",
+          "remember": "Rappel : à une synapse chimique, le potentiel d'action qui arrive au bouton présynaptique provoque la **libération** d'un neurotransmetteur dans la fente synaptique. Il se **fixe** sur des récepteurs de la membrane postsynaptique, ce qui crée un PPSE (ou un PPSI). Puis il est **éliminé** : recapturé par le neurone présynaptique ou dégradé. Une drogue agit sur une de ces étapes, sans fabriquer de message nouveau. Quatre modes d'action : **mimer** le neurotransmetteur (se fixer sur ses récepteurs et les activer : morphine, héroïne, nicotine) ; **augmenter la libération** (amphétamines) ; **bloquer la recapture**, ce qui prolonge la présence du neurotransmetteur dans la fente (cocaïne) ; **bloquer les récepteurs** (se fixer dessus sans les activer, ce qui empêche le neurotransmetteur de les activer).",
+          "method": [
+            "Repérer l'étape de la transmission synaptique modifiée par la substance : libération, fixation sur les récepteurs ou élimination du neurotransmetteur.",
+            "Comparer l'enregistrement (PPSE) ou la quantité de neurotransmetteur dans la fente, avec et sans la substance.",
+            "Nommer le mécanisme : mimer, augmenter la libération, bloquer la recapture ou bloquer les récepteurs.",
+            "Conclure sur l'effet : la transmission synaptique est renforcée ou diminuée."
+          ],
+          "example": {
+            "statement": "Sur une synapse à dopamine, après un potentiel d'action présynaptique, la quantité de dopamine libérée est la même avec et sans la substance X. Mais en présence de X, la dopamine reste élevée dans la fente bien plus longtemps et le PPSE dure plus longtemps. Expliquer l'action de X.",
+            "steps": [
+              "Repérer : la libération est identique ; l'étape modifiée est l'élimination de la dopamine, donc sa recapture.",
+              "Comparer : avec X, la dopamine reste élevée plus longtemps dans la fente et le PPSE dure plus longtemps que sans X.",
+              "Nommer : X bloque la recapture de la dopamine, comme la cocaïne.",
+              "Conclure : la transmission est renforcée, car le neurone postsynaptique est stimulé plus longtemps."
+            ]
+          },
+          "pitfall": "Ne pas confondre mimer et bloquer les récepteurs : dans les deux cas la substance se fixe sur les récepteurs, mais elle les active dans le premier cas et pas dans le second. Contre-exemple : substance S1 seule, sans aucun neurotransmetteur libéré, PPSE de 3 mV : S1 mime. Substance S2 seule, PPSE de 0 mV, et le neurotransmetteur ajouté ne donne plus de PPSE : S2 bloque les récepteurs. Pour trancher, regarde toujours si un PPSE apparaît.",
+          "figure": "synapse-et-drogues",
+          "exercise": {
+            "title": "Au laboratoire : quatre substances, quatre mécanismes",
+            "statement": "Au laboratoire du lycée de San-Pédro, un professeur de SVT présente au club santé quatre substances A, B, C et D testées sur une même synapse à dopamine. Pour chaque substance, on compare la quantité de dopamine libérée, la durée de sa présence dans la fente et le PPSE enregistré. Dans cet exercice, tu appliques la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Sur une synapse à dopamine, on observe quatre résultats. Relie chaque substance à son mécanisme. A : sans aucune libération de dopamine, elle provoque un PPSE. B : elle provoque une libération de dopamine trois fois plus grande. C : la libération est normale mais la dopamine reste longtemps dans la fente. D : la libération est normale, mais aucun PPSE n'apparaît, même si l'on ajoute de la dopamine.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'étape modifiée pour chaque substance. Étape 2 — Comparer avec le témoin : A donne un PPSE sans libération, B augmente la libération, C prolonge la présence de la dopamine, D supprime le PPSE malgré la libération. Étape 3 — Nommer le mécanisme : mimer, augmenter la libération, bloquer la recapture, bloquer les récepteurs. Étape 4 — Conclure : A et B renforcent la transmission, C aussi, D la diminue.",
+                "answers": [
+                  {
+                    "content": "Substance A",
+                    "match": "Elle mime le neurotransmetteur"
+                  },
+                  {
+                    "content": "Substance B",
+                    "match": "Elle augmente la libération"
+                  },
+                  {
+                    "content": "Substance C",
+                    "match": "Elle bloque la recapture"
+                  },
+                  {
+                    "content": "Substance D",
+                    "match": "Elle bloque les récepteurs"
+                  }
+                ]
+              },
+              {
+                "content": "La cocaïne bloque la recapture de la dopamine. Quelle est la conséquence dans la fente synaptique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la recapture est l'étape d'élimination de la dopamine. Étape 2 — Comparer : si la recapture est bloquée, la dopamine n'est plus retirée de la fente. Étape 3 — Nommer : le mécanisme est le blocage de la recapture. Étape 4 — Conclure : la dopamine reste plus longtemps et la transmission est renforcée. Dire qu'elle disparaît plus vite confond blocage de la recapture et accélération de l'élimination.",
+                "answers": [
+                  {
+                    "content": "La dopamine y reste plus longtemps",
+                    "correct": true
+                  },
+                  {
+                    "content": "La dopamine y disparaît plus vite",
+                    "correct": false
+                  },
+                  {
+                    "content": "La dopamine n'y est plus libérée",
+                    "correct": false
+                  },
+                  {
+                    "content": "La dopamine y est détruite sur place",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La morphine se fixe sur les récepteurs d'un neurotransmetteur naturel et les active : on dit qu'elle ___ ce neurotransmetteur.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la morphine agit au niveau de la fixation sur les récepteurs. Étape 2 — Comparer : elle active les mêmes récepteurs que le neurotransmetteur naturel. Étape 3 — Nommer : une substance qui se fixe sur les récepteurs et les active mime le neurotransmetteur. Étape 4 — Conclure : la morphine mime un neurotransmetteur naturel.",
+                "answers": [
+                  {
+                    "content": "mime",
+                    "correct": true
+                  },
+                  {
+                    "content": "imite",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces mécanismes, lesquels renforcent la transmission synaptique ? Choisis les deux bonnes propositions.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer l'étape touchée par chaque mécanisme. Étape 2 — Comparer l'effet : bloquer la recapture garde le neurotransmetteur dans la fente, augmenter la libération en met davantage ; bloquer les récepteurs ou empêcher la libération réduit la transmission. Étape 3 — Nommer les deux mécanismes qui renforcent. Étape 4 — Conclure : bloquer la recapture et augmenter la libération.",
+                "answers": [
+                  {
+                    "content": "Bloquer la recapture du neurotransmetteur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Augmenter la libération du neurotransmetteur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Bloquer les récepteurs postsynaptiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Empêcher la libération du neurotransmetteur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une substance qui se fixe sur les récepteurs d'un neurotransmetteur provoque toujours un PPSE. L'affirmation est :",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la fixation sur les récepteurs peut avoir deux conséquences. Étape 2 — Comparer : une substance qui mime les active et crée un PPSE, une substance qui bloque les récepteurs ne les active pas et supprime le PPSE. Étape 3 — Nommer : mimer ou bloquer. Étape 4 — Conclure : se fixer ne suffit pas à activer, l'affirmation est fausse. C'est exactement le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer l'action d'une drogue sur une synapse, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La cocaïne bloque la ___ de la dopamine, qui reste donc longtemps dans la ___ synaptique.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la cocaïne agit sur l'élimination de la dopamine. Étape 2 — Comparer : la dopamine reste plus longtemps dans la fente. Étape 3 — Nommer : elle bloque la recapture. Étape 4 — Conclure : la transmission est renforcée.",
+                "answers": [
+                  {
+                    "content": "recapture",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "fente",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'élimination du neurotransmetteur se fait par recapture dans le neurone présynaptique. Où se trouve le neurotransmetteur entre deux neurones ?"
+              },
+              {
+                "content": "La nicotine se fixe sur les récepteurs de l'acétylcholine et les active. Son mécanisme est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la nicotine agit sur la fixation. Étape 2 — Comparer : elle active les récepteurs comme l'acétylcholine. Étape 3 — Nommer : elle mime l'acétylcholine. Étape 4 — Conclure : elle renforce la transmission. Bloquer les récepteurs voudrait dire ne pas les activer.",
+                "answers": [
+                  {
+                    "content": "Elle mime le neurotransmetteur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle bloque la recapture",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle bloque les récepteurs",
+                    "correct": false
+                  }
+                ],
+                "hint": "Active-t-elle les récepteurs, ou les laisse-t-elle inactifs ?"
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la transmission synaptique normale.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer les étapes dans l'ordre où elles ont lieu : le potentiel d'action arrive, puis le neurotransmetteur est libéré. Étape 2 — Comparer : il se fixe ensuite sur les récepteurs et crée le PPSE. Étape 3 — Nommer la dernière étape : l'élimination. Étape 4 — Conclure : c'est sur l'une de ces étapes qu'une drogue agit.",
+                "answers": [
+                  {
+                    "content": "Arrivée du potentiel d'action au bouton présynaptique"
+                  },
+                  {
+                    "content": "Libération du neurotransmetteur dans la fente"
+                  },
+                  {
+                    "content": "Fixation sur les récepteurs et naissance d'un PPSE"
+                  },
+                  {
+                    "content": "Élimination du neurotransmetteur par recapture ou dégradation"
+                  }
+                ],
+                "hint": "Pense au trajet du message : arrivée, libération, fixation, puis fin du message."
+              },
+              {
+                "content": "Une substance qui se fixe sur les récepteurs d'un neurotransmetteur sans les activer ___ la transmission.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : la substance agit sur les récepteurs. Étape 2 — Comparer : elle les occupe sans les activer, donc le neurotransmetteur ne peut plus les activer. Étape 3 — Nommer : elle bloque les récepteurs. Étape 4 — Conclure : la transmission est diminuée.",
+                "answers": [
+                  {
+                    "content": "diminue",
+                    "correct": true
+                  },
+                  {
+                    "content": "renforce",
+                    "correct": false
+                  },
+                  {
+                    "content": "ne change pas",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer la tolérance et la dépendance par le circuit de la récompense",
+          "remember": "Le **circuit de la récompense** est un ensemble de neurones à dopamine (de l'aire tegmentale ventrale vers le noyau accumbens et le cortex préfrontal). Il s'active lors des activités agréables et vitales, comme manger, et donne une sensation de plaisir qui incite à recommencer. Les drogues augmentent fortement la dopamine dans ce circuit. Quand la consommation se répète, le cerveau s'adapte (par exemple, il y a moins de récepteurs actifs). C'est la **tolérance** : pour le même effet, il faut augmenter les doses. La **dépendance psychique** est le besoin irrésistible de consommer. La **dépendance physique** est l'adaptation de l'organisme à la drogue : à l'arrêt apparaît le **syndrome de sevrage** (tremblements, sueurs, douleurs, anxiété). Le cercle vicieux s'installe : consommer, s'adapter, augmenter les doses, souffrir du manque, reprendre.",
+          "method": [
+            "Lire l'évolution du taux de dopamine (ou de l'effet ressenti) après chaque consommation.",
+            "Relier le plaisir ressenti à l'activation du circuit de la récompense par la dopamine.",
+            "Repérer l'adaptation : la même dose a moins d'effet, donc il faut augmenter les doses (tolérance).",
+            "Identifier les signes de dépendance : besoin irrésistible (psychique) et troubles à l'arrêt (physique, sevrage).",
+            "Conclure en décrivant le cercle vicieux de la dépendance."
+          ],
+          "example": {
+            "statement": "Dans une consultation d'addictologie, un patient décrit une drogue X. Au début, une prise faisait fortement monter la dopamine et lui donnait un plaisir intense. Après quelques mois, la même dose la fait monter bien moins et il double les doses. Quand il arrête deux jours, il tremble, transpire, souffre et ne pense qu'à consommer. Expliquer sa situation.",
+            "steps": [
+              "Lire : au début, une prise fait fortement monter la dopamine ; après quelques mois, la même dose la fait monter beaucoup moins.",
+              "Relier : le plaisir du début vient de l'activation du circuit de la récompense par la dopamine, et cette activation est devenue plus faible.",
+              "Repérer : la même dose a moins d'effet et il double les doses, c'est la tolérance.",
+              "Identifier : l'idée fixe de consommer est une dépendance psychique ; tremblements, sueurs et douleurs à l'arrêt sont une dépendance physique avec syndrome de sevrage.",
+              "Conclure : le patient est pris dans le cercle vicieux consommation, adaptation, augmentation des doses, manque, reprise."
+            ]
+          },
+          "pitfall": "Ne pas croire que « s'habituer » à une drogue, c'est mieux la supporter et pouvoir arrêter quand on veut. La tolérance est un signe que le cerveau s'est adapté, donc que la dépendance s'installe. Contre-exemple : une personne qui passe d'une dose à deux doses par jour pour obtenir le même effet n'est pas devenue plus résistante, elle a doublé son exposition. Après une longue pause, la tolérance diminue : reprendre l'ancienne dose peut provoquer une surdose.",
+          "figure": "cercle-de-la-dependance",
+          "exercise": {
+            "title": "Consultation d'addictologie : comprendre la tolérance et la dépendance",
+            "statement": "Dans une consultation d'addictologie, la docteure Konan explique la dépendance à Yao, 24 ans, avec une expérience fictive chez le rat (résultats simplifiés). On injecte la même dose de drogue chaque jour (prises quotidiennes) et on mesure, 30 minutes après, le taux de dopamine dans le noyau accumbens, en prenant pour valeur 100 le taux au repos. Résultats du jour 1 au jour 6 : 300, 250, 200, 160, 130, 120. Dans cet exercice, tu appliques la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "dopamine-et-tolerance",
+            "questions": [
+              {
+                "content": "Chez un rat, une même dose de drogue fait monter le taux de dopamine à 300 au jour 1 et à 120 au jour 6 (valeur au repos : 100). De combien l'augmentation par rapport au repos a-t-elle diminué entre la semaine 1 et la semaine 6 ?",
+                "question_type": "numeric",
+                "unit": "unités",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : au jour 1, le taux est 300 ; au jour 6, il est 120 ; le repos est 100. Étape 2 — Relier : l'augmentation mesure l'activation du circuit de la récompense. Étape 3 — Repérer l'adaptation : augmentation au jour 1 = 300 − 100 = 200 ; au jour 6 = 120 − 100 = 20 ; diminution = 200 − 20 = 180 unités. Étape 4 — Identifier : la même dose a bien moins d'effet. Étape 5 — Conclure : c'est la tolérance. Ne compare pas 300 et 120 directement : compare les augmentations par rapport au repos, car c'est elles qui mesurent l'effet de la drogue.",
+                "answers": [
+                  {
+                    "content": "180",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez le rat, la même dose de drogue fait monter le taux de dopamine à 300, puis seulement à 120 au sixième jour. Quel phénomène cela illustre-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : le taux de dopamine après la même dose passe de 300 à 120. Étape 2 — Relier : moins de dopamine, donc moins de plaisir. Étape 3 — Repérer : la même dose a moins d'effet, c'est la définition de la tolérance. Étape 4 — Identifier : le sevrage n'est pas en cause, aucun arrêt n'a eu lieu dans l'expérience. Étape 5 — Conclure : la tolérance.",
+                "answers": [
+                  {
+                    "content": "La tolérance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le syndrome de sevrage",
+                    "correct": false
+                  },
+                  {
+                    "content": "La dépendance physique à l'arrêt",
+                    "correct": false
+                  },
+                  {
+                    "content": "La surdose",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'origine du plaisir ressenti juste après la prise d'une drogue ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : après la prise, le taux de dopamine monte fortement. Étape 2 — Relier : la dopamine active le circuit de la récompense, source de plaisir. Étape 3 — Repérer : ce plaisir pousse à recommencer. Étape 4 — Identifier : il ne vient pas d'une destruction de neurones. Étape 5 — Conclure : la hausse de dopamine dans le circuit de la récompense.",
+                "answers": [
+                  {
+                    "content": "La forte hausse de dopamine dans le circuit de la récompense",
+                    "correct": true
+                  },
+                  {
+                    "content": "La destruction des neurones à dopamine",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'arrêt de la libération de tout neurotransmetteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le blocage de tous les récepteurs du cerveau",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Yao dit : « Si j'arrête deux jours, je tremble, je transpire et je ne pense qu'à consommer. » Quels sont les deux termes qui décrivent ces signes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire les signes décrits par Yao. Étape 2 — Relier le manque à l'adaptation du cerveau. Étape 3 — Repérer : la tolérance concerne la dose nécessaire, pas les signes d'arrêt. Étape 4 — Identifier : tremblements et sueurs à l'arrêt sont la dépendance physique (sevrage) ; l'idée fixe de consommer est la dépendance psychique. Étape 5 — Conclure : dépendance physique et dépendance psychique.",
+                "answers": [
+                  {
+                    "content": "La dépendance physique",
+                    "correct": true
+                  },
+                  {
+                    "content": "La dépendance psychique",
+                    "correct": true
+                  },
+                  {
+                    "content": "La tolérance",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'immunité",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Yao a besoin de doses de plus en plus fortes : son organisme est devenu plus résistant à la drogue, il peut donc arrêter quand il veut. L'affirmation est :",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : Yao doit augmenter les doses pour le même effet. Étape 2 — Relier : le plaisir diminue car le circuit de la récompense s'est adapté. Étape 3 — Repérer : c'est la tolérance, signe d'adaptation du cerveau. Étape 4 — Identifier : l'adaptation conduit à la dépendance, pas à la maîtrise. Étape 5 — Conclure : l'affirmation est fausse, il ne peut pas arrêter facilement.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer la tolérance et la dépendance, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quand il faut augmenter la dose pour obtenir le même effet, on parle de ___ ; les troubles qui apparaissent à l'arrêt forment le syndrome de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : on compare la dose et l'effet. Étape 2 — Relier le plaisir à la dopamine. Étape 3 — Repérer : une dose plus forte pour le même effet est la tolérance. Étape 4 — Identifier : les troubles à l'arrêt forment le syndrome de sevrage. Étape 5 — Conclure avec ces deux termes.",
+                "answers": [
+                  {
+                    "content": "tolérance",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "sevrage",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour la dose : le cerveau s'est adapté. Pour les troubles : ce qui arrive quand on arrête la consommation."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes du cercle vicieux de la dépendance.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire : on part de la consommation. Étape 2 — Relier : la hausse de dopamine donne le plaisir. Étape 3 — Repérer : le cerveau s'adapte, l'effet diminue. Étape 4 — Identifier : on augmente les doses, la dépendance s'installe et l'arrêt provoque le manque. Étape 5 — Conclure : le manque pousse à reprendre, le cercle recommence.",
+                "answers": [
+                  {
+                    "content": "Consommation de la drogue"
+                  },
+                  {
+                    "content": "Forte hausse de dopamine et plaisir"
+                  },
+                  {
+                    "content": "Adaptation du cerveau : l'effet diminue"
+                  },
+                  {
+                    "content": "Augmentation des doses"
+                  },
+                  {
+                    "content": "Dépendance, puis manque à l'arrêt"
+                  }
+                ],
+                "hint": "Le plaisir vient avant l'adaptation, et l'adaptation avant l'augmentation des doses."
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire chaque définition. Étape 2 — Relier : le circuit de la récompense procure le plaisir. Étape 3 — Repérer : la tolérance est l'effet plus faible pour la même dose. Étape 4 — Identifier : la dépendance psychique est le besoin irrésistible, la dépendance physique les troubles à l'arrêt. Étape 5 — Conclure : quatre termes, quatre définitions distinctes.",
+                "answers": [
+                  {
+                    "content": "Tolérance",
+                    "match": "Effet plus faible pour la même dose"
+                  },
+                  {
+                    "content": "Dépendance psychique",
+                    "match": "Besoin irrésistible de consommer"
+                  },
+                  {
+                    "content": "Dépendance physique",
+                    "match": "Troubles physiques à l'arrêt"
+                  },
+                  {
+                    "content": "Circuit de la récompense",
+                    "match": "Neurones à dopamine qui procurent le plaisir"
+                  }
+                ]
+              },
+              {
+                "content": "Quel neurotransmetteur est libéré en grande quantité dans le circuit de la récompense lors de la prise d'une drogue ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : le circuit de la récompense est un circuit de neurones à dopamine. Étape 2 — Relier : leur activation donne le plaisir. Étape 3 — Repérer : les drogues augmentent la dopamine. Étape 4 — Identifier : l'insuline est une hormone, pas un neurotransmetteur de ce circuit. Étape 5 — Conclure : la dopamine.",
+                "answers": [
+                  {
+                    "content": "La dopamine",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'acétylcholine",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'insuline",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le nom de ce neurotransmetteur est celui de la molécule du plaisir et de la motivation."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Évaluer les conséquences de la consommation et prévenir",
+          "remember": "La consommation de drogues a des conséquences à trois niveaux. **Sanitaires** : atteinte du système nerveux (attention, mémoire), atteinte d'organes (le tabac abîme les poumons et les artères, l'alcool abîme le foie), risque de surdose (avec les opiacés, la respiration peut devenir trop lente), risque d'infection par le sang quand on partage une seringue (VIH, hépatites). **Psychologiques** : anxiété, dépression, perte de contrôle. **Sociales** : échec scolaire, conflits avec la famille, accidents de la route, violence, perte d'emploi, dépenses. La **prévention** repose sur l'information, l'apprentissage du refus, le soutien de la famille et de l'école, et la prise en charge : consultation d'addictologie, accompagnement du sevrage. Une personne dépendante doit être aidée, pas rejetée.",
+          "method": [
+            "Identifier la substance consommée et son mode d'usage (fumée, bue, injectée).",
+            "Relever les conséquences observées et les classer : sanitaires, psychologiques ou sociales.",
+            "Relier chaque conséquence à son origine : action sur le système nerveux, toxicité pour un organe ou mode d'usage.",
+            "Proposer des mesures de prévention adaptées : informer, apprendre à refuser, soutenir, soigner."
+          ],
+          "example": {
+            "statement": "L'infirmière du lycée reçoit Ali, 17 ans, qui fume des cigarettes depuis un an. Il tousse, s'essouffle à la course, devient irritable sans cigarette, dépense son argent de poche en tabac et ses notes baissent. Analyser sa situation.",
+            "steps": [
+              "Identifier : la substance est le tabac, fumé, donc inhalé.",
+              "Relever : toux et essoufflement sont sanitaires ; irritabilité sans cigarette est psychologique ; argent dépensé et notes en baisse sont sociales.",
+              "Relier : la fumée inhalée agresse les voies respiratoires ; la nicotine agit sur le système nerveux et entraîne la dépendance, d'où l'irritabilité.",
+              "Proposer : informer Ali sur les risques, lui apprendre à refuser, associer sa famille et l'orienter vers une aide à l'arrêt."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une drogue vendue légalement est sans danger. Contre-exemple chiffré : un conducteur roule à environ 14 mètres par seconde (50 km/h). Si l'alcool allonge son temps de réaction de 0,4 seconde, sa voiture parcourt environ 14 × 0,4 = 5,6 mètres de plus avant qu'il freine, et cela peut suffire à renverser un piéton. Alcool et tabac sont légaux et pourtant dangereux. Ne pas croire non plus qu'« essayer une fois » n'engage à rien.",
+          "figure": null,
+          "exercise": {
+            "title": "La campagne du club santé : conséquences et prévention",
+            "statement": "Le club santé du lycée de San-Pédro prépare des affiches sur les conséquences de la consommation de drogues et sur la prévention. L'infirmière vérifie que les élèves savent classer les conséquences, en trouver l'origine et proposer des mesures adaptées. Dans cet exercice, tu appliques la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pour l'affiche du club santé, relie chaque conséquence à sa catégorie.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : chaque situation vient d'un usage ou d'une dépendance. Étape 2 — Relever et classer : l'infection touche le corps, donc elle est sanitaire ; l'anxiété et la dépression touchent le mental, donc elles sont psychologiques ; l'abandon des études et la rupture touchent la vie avec les autres, donc elles sont sociales. Étape 3 — Relier chaque conséquence à son origine. Étape 4 — Proposer ensuite la prévention adaptée.",
+                "answers": [
+                  {
+                    "content": "Infection par le VIH après le partage d'une seringue",
+                    "match": "Sanitaire"
+                  },
+                  {
+                    "content": "Anxiété et dépression apparues avec la consommation",
+                    "match": "Psychologique"
+                  },
+                  {
+                    "content": "Abandon des études et rupture avec la famille",
+                    "match": "Sociale"
+                  }
+                ]
+              },
+              {
+                "content": "Un consommateur de drogue injectée attrape le VIH. Quelle est l'origine du risque d'infection ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : la drogue est injectée avec une seringue. Étape 2 — Relever : l'infection par le VIH est une conséquence sanitaire. Étape 3 — Relier à l'origine : le virus se transmet par le sang, donc par une seringue partagée et contaminée, pas par l'action de la drogue sur le cerveau. Étape 4 — Proposer : ne jamais partager de matériel et se faire accompagner. Les autres propositions décrivent des effets sur le cerveau, pas un mode de transmission.",
+                "answers": [
+                  {
+                    "content": "Le partage d'une seringue contaminée par du sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'action de la drogue sur les récepteurs du cerveau",
+                    "correct": false
+                  },
+                  {
+                    "content": "La tolérance à la drogue",
+                    "correct": false
+                  },
+                  {
+                    "content": "La dépendance psychique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le club santé veut des mesures de prévention. Quelles sont les trois mesures adaptées ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier : il faut agir avant et après la consommation. Étape 2 — Relever les risques à éviter. Étape 3 — Relier chaque mesure à son but : informer évite d'ignorer les dangers, apprendre à refuser évite d'être entraîné, la consultation soigne la dépendance. Étape 4 — Proposer : ces trois mesures. Conseiller d'essayer une fois ignore le risque de dépendance, cacher ou rejeter isole l'élève.",
+                "answers": [
+                  {
+                    "content": "Informer les élèves sur les risques des drogues",
+                    "correct": true
+                  },
+                  {
+                    "content": "Apprendre aux élèves à refuser une proposition",
+                    "correct": true
+                  },
+                  {
+                    "content": "Orienter un élève en difficulté vers une consultation d'addictologie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Conseiller d'essayer une seule fois pour se faire une idée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Cacher le problème à la famille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rejeter l'élève dépendant",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un conducteur de moto-taxi roule à 20 mètres par seconde. Après avoir bu de l'alcool, son temps de réaction s'allonge de 0,5 seconde. Quelle distance supplémentaire sa moto parcourt-elle avant qu'il commence à freiner ?",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : la substance est l'alcool, un dépresseur qui ralentit le système nerveux. Étape 2 — Relever : la conséquence est un temps de réaction plus long, donc un risque d'accident (sanitaire et social). Étape 3 — Relier à l'origine : distance = vitesse × durée = 20 × 0,5 = 10 mètres de plus. Étape 4 — Proposer : ne pas conduire après avoir bu. Ces 10 mètres peuvent séparer un arrêt à temps d'une collision.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'alcool et le tabac sont vendus légalement, donc ils n'ont pas de conséquences graves sur la santé. L'affirmation est :",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : alcool et tabac sont des drogues légales. Étape 2 — Relever leurs conséquences : maladies du foie, des poumons, accidents. Étape 3 — Relier : la légalité ne dit rien de la toxicité. Étape 4 — Proposer : informer sur ces risques. L'affirmation est fausse, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à évaluer les conséquences de la consommation et à prévenir, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une conséquence qui touche la santé du consommateur est dite ___ ; une conséquence qui touche sa famille, son école ou son travail est dite ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier le type de conséquence. Étape 2 — Relever et classer : santé du corps donne sanitaire, vie avec les autres donne sociale. Étape 3 — Relier chaque catégorie à son origine. Étape 4 — Proposer ensuite une prévention adaptée.",
+                "answers": [
+                  {
+                    "content": "sanitaire",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "sociale",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un adjectif lié à la santé pour la santé du consommateur, un adjectif lié à la société pour sa famille et son école."
+              },
+              {
+                "content": "Partager une seringue expose à ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : la seringue est en contact avec le sang. Étape 2 — Relever : la conséquence est sanitaire. Étape 3 — Relier à l'origine : le sang d'une personne infectée peut contaminer la suivante (VIH, hépatites). Étape 4 — Proposer : ne jamais partager de matériel.",
+                "answers": [
+                  {
+                    "content": "une infection transmise par le sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "une tolérance plus forte",
+                    "correct": false
+                  },
+                  {
+                    "content": "un meilleur effet de la drogue",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour analyser le cas d'un élève consommateur.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier d'abord la substance. Étape 2 — Relever et classer les conséquences. Étape 3 — Relier chacune à son origine. Étape 4 — Proposer à la fin des mesures adaptées, car on ne peut pas prévenir ce que l'on n'a pas compris.",
+                "answers": [
+                  {
+                    "content": "Identifier la substance et son mode d'usage"
+                  },
+                  {
+                    "content": "Relever et classer les conséquences"
+                  },
+                  {
+                    "content": "Relier chaque conséquence à son origine"
+                  },
+                  {
+                    "content": "Proposer des mesures de prévention"
+                  }
+                ],
+                "hint": "On comprend avant d'agir : la prévention vient en dernier."
+              },
+              {
+                "content": "Une personne qui veut arrêter après une longue consommation peut être aidée par une consultation d'addictologie.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la dépendance est une conséquence sanitaire et psychologique. Étape 2 — Relever : le sevrage est difficile seul. Étape 3 — Relier : la consultation d'addictologie accompagne le sevrage et soutient la personne. Étape 4 — Proposer : orienter vers cette aide. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à ce qu'une personne dépendante peut recevoir comme aide pour le sevrage."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La cocaïne et la synapse à dopamine",
+          "statement": "Le club santé du lycée de San-Pédro prépare une séance sur la cocaïne. Le professeur de SVT donne deux documents. Document 1 (expérience fictive, résultats simplifiés) : chez un rat, on enregistre toutes les 2 minutes la fréquence des potentiels d'action (par seconde) d'un neurone du noyau accumbens. La cocaïne est injectée à 4 minutes. Fréquences de 0 à 16 minutes : 5, 5, 5, 12, 20, 18, 14, 9, 6. Document 2 (expérience fictive, résultats simplifiés) : sur une tranche de tissu cérébral, on stimule un neurone présynaptique à dopamine. La quantité de dopamine dans la fente, en unités arbitraires, atteint 10 au maximum avec ou sans cocaïne. Vingt millisecondes plus tard, elle est de 1 sans cocaïne et de 6 avec cocaïne. Document 3 : normalement, la dopamine retourne dans le neurone présynaptique grâce à des transporteurs de recapture.",
+          "exercise_type": "fixation",
+          "figure": "activite-neurone-et-cocaine",
+          "questions": [
+            {
+              "content": "Un neurone du noyau accumbens émet 5 potentiels d'action par seconde au repos. Après une injection de cocaïne, sa fréquence maximale est de 20 potentiels d'action par seconde. Combien de fois la fréquence maximale est-elle plus grande que la fréquence au repos ?",
+              "question_type": "numeric",
+              "unit": "fois",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire la courbe : fréquence au repos 5 par seconde, maximum 20 par seconde à 8 minutes. Étape 2 — Relier : cette fréquence mesure l'activité du neurone du circuit de la récompense. Étape 3 — Repérer l'adaptation ou la variation : rapport = 20 ÷ 5 = 4. Étape 4 — Identifier : l'activité est fortement accélérée, effet d'un stimulant. Étape 5 — Conclure : la fréquence est multipliée par 4 sous l'effet de la cocaïne. Une différence (20 − 5 = 15) répondrait à une autre question : on cherche un facteur de multiplication.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Après l'injection de cocaïne, la fréquence des potentiels d'action d'un neurone du circuit de la récompense passe de 5 à 20 par seconde. Quel est le sens de cette variation ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : la fréquence passe de 5 à 20 potentiels d'action par seconde. Étape 2 — Comparer à l'état normal : l'activité est accélérée. Étape 3 — Classer : une substance qui accélère l'activité nerveuse est un stimulant. Étape 4 — Conclure : la cocaïne est un stimulant. Un dépresseur donnerait l'effet inverse.",
+              "answers": [
+                {
+                  "content": "L'activité du neurone est fortement augmentée, ce qui est cohérent avec un effet stimulant",
+                  "correct": true
+                },
+                {
+                  "content": "L'activité du neurone est ralentie, ce qui est cohérent avec un effet dépresseur",
+                  "correct": false
+                },
+                {
+                  "content": "L'activité du neurone ne change pas",
+                  "correct": false
+                },
+                {
+                  "content": "Le neurone cesse d'émettre des messages",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur une synapse à dopamine, la cocaïne n'a pas changé le maximum de dopamine libérée (10 unités), mais 20 millisecondes plus tard il reste 6 unités avec cocaïne contre 1 sans cocaïne. Quel est le mécanisme d'action de la cocaïne ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer l'étape modifiée : le maximum est identique, donc la libération n'est pas changée ; la dopamine persiste, donc c'est l'élimination. Étape 2 — Comparer : 6 unités avec cocaïne contre 1 sans. Étape 3 — Nommer : la cocaïne bloque la recapture. Étape 4 — Conclure : la transmission est renforcée. Augmenter la libération aurait relevé le maximum, ce qui n'est pas le cas.",
+              "answers": [
+                {
+                  "content": "Elle bloque la recapture de la dopamine",
+                  "correct": true
+                },
+                {
+                  "content": "Elle augmente la libération de la dopamine",
+                  "correct": false
+                },
+                {
+                  "content": "Elle mime la dopamine sur les récepteurs",
+                  "correct": false
+                },
+                {
+                  "content": "Elle bloque les récepteurs de la dopamine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la chaîne d'événements qui explique l'effet de la cocaïne.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer d'abord l'action moléculaire : la cocaïne se fixe sur les transporteurs. Étape 2 — Comparer : sans recapture, la dopamine reste dans la fente. Étape 3 — Nommer la conséquence : les récepteurs restent activés. Étape 4 — Conclure : le PPSE se prolonge, la fréquence des potentiels d'action augmente, et le plaisir est ressenti. L'ordre va du niveau moléculaire au niveau de la sensation.",
+              "answers": [
+                {
+                  "content": "La cocaïne se fixe sur les transporteurs de recapture de la dopamine"
+                },
+                {
+                  "content": "La dopamine n'est plus recaptée et reste dans la fente"
+                },
+                {
+                  "content": "Les récepteurs postsynaptiques sont activés plus longtemps"
+                },
+                {
+                  "content": "Le PPSE dure plus longtemps et le neurone émet plus de potentiels d'action"
+                },
+                {
+                  "content": "Le consommateur ressent une stimulation et un plaisir intenses"
+                }
+              ]
+            },
+            {
+              "content": "Le maximum de dopamine est identique avec ou sans cocaïne, donc la cocaïne n'agit pas sur la synapse. L'affirmation est :",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le maximum est identique, donc la libération n'est pas modifiée. Étape 2 — Comparer : mais la dopamine reste élevée plus longtemps avec la cocaïne (6 contre 1 unité à 20 ms). Étape 3 — Nommer : l'étape modifiée est la recapture. Étape 4 — Conclure : la cocaïne agit bien sur la synapse, en bloquant la recapture. Un même maximum ne prouve pas l'absence d'action sur les autres étapes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À partir des documents, explique en quelques lignes comment l'on peut conclure que la cocaïne agit en bloquant la recapture de la dopamine, puis indique la classe de cette drogue.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Maximum de dopamine identique : la libération n'est pas modifiée",
+                "Dopamine plus élevée 20 ms plus tard avec la cocaïne",
+                "Conclusion : blocage de la recapture",
+                "Fréquence des potentiels d'action multipliée par 4 : stimulant"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Le maximum de dopamine est le même avec et sans cocaïne (10 unités) : la cocaïne ne modifie pas la libération. Étape 2 — Vingt millisecondes plus tard, il reste 6 unités avec cocaïne contre 1 sans cocaïne : la dopamine n'est plus éliminée normalement de la fente. Étape 3 — Comme la dopamine retourne dans le neurone présynaptique par des transporteurs de recapture, la cocaïne bloque cette recapture. Étape 4 — La transmission étant renforcée, la fréquence des potentiels d'action est multipliée par 4 (de 5 à 20 par seconde) : l'activité du système nerveux est accélérée, la cocaïne est un stimulant. Barème : libération inchangée (0,75 point) ; dopamine persistante (0,75 point) ; blocage de la recapture (0,75 point) ; classe stimulant justifiée (0,75 point).",
+              "answers": [],
+              "starter": "Le maximum de dopamine est le même, mais…"
+            }
+          ]
+        },
+        {
+          "title": "La cigarette : de la synapse à la dépendance",
+          "statement": "Awa et ses camarades du club santé du lycée de San-Pédro étudient la nicotine. L'infirmière donne les résultats d'expériences sur une synapse à acétylcholine, avec enregistrement du potentiel postsynaptique. Expérience 1 : stimulation du neurone présynaptique, sans substance ; de l'acétylcholine est libérée et le PPSE est de 3 mV. Expérience 2 : on applique de la nicotine sur la membrane postsynaptique, sans stimuler le neurone présynaptique (aucune libération d'acétylcholine) ; le PPSE est de 3 mV. Expérience 3 : on applique d'abord du curare, qui se fixe sur les récepteurs de l'acétylcholine, puis on stimule le neurone présynaptique ; l'acétylcholine est libérée normalement et le PPSE est de 0 mV. Expérience 4 : on applique le curare puis la nicotine, sans stimulation ; le PPSE est de 0 mV. Document 5 : chez le fumeur, la nicotine augmente la libération de dopamine dans le circuit de la récompense.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Sur une synapse à acétylcholine, la nicotine appliquée seule, sans libération d'acétylcholine, provoque un PPSE de 3 mV, comme l'acétylcholine. Que peut-on en conclure sur la nicotine ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer l'étape modifiée : aucune acétylcholine n'est libérée, donc la libération n'est pas en cause ; le PPSE vient de la fixation sur les récepteurs. Étape 2 — Comparer : le PPSE de 3 mV est identique à celui de l'acétylcholine. Étape 3 — Nommer : la nicotine mime l'acétylcholine. Étape 4 — Conclure : elle active les mêmes récepteurs. Augmenter la libération est impossible ici, puisque rien n'est libéré.",
+              "answers": [
+                {
+                  "content": "Elle mime l'acétylcholine en activant ses récepteurs",
+                  "correct": true
+                },
+                {
+                  "content": "Elle bloque la recapture de l'acétylcholine",
+                  "correct": false
+                },
+                {
+                  "content": "Elle bloque les récepteurs de l'acétylcholine",
+                  "correct": false
+                },
+                {
+                  "content": "Elle augmente la libération de l'acétylcholine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après application du curare, la stimulation du neurone présynaptique libère de l'acétylcholine mais le PPSE est de 0 mV ; avec le curare, la nicotine ne donne pas non plus de PPSE. Que fait le curare ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'acétylcholine est libérée normalement, donc la libération n'est pas en cause. Étape 2 — Comparer : le PPSE passe de 3 mV à 0 mV. Étape 3 — Nommer : le curare occupe les récepteurs sans les activer, c'est un blocage des récepteurs. Étape 4 — Conclure : il diminue la transmission. Il ne mime pas l'acétylcholine, sinon il produirait lui-même un PPSE.",
+              "answers": [
+                {
+                  "content": "Il bloque les récepteurs : ni l'acétylcholine ni la nicotine ne peuvent les activer",
+                  "correct": true
+                },
+                {
+                  "content": "Il empêche la libération de l'acétylcholine",
+                  "correct": false
+                },
+                {
+                  "content": "Il mime l'acétylcholine",
+                  "correct": false
+                },
+                {
+                  "content": "Il bloque la recapture de l'acétylcholine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le curare se fixe sur les récepteurs de l'acétylcholine sans les activer : il ___ ces récepteurs.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer l'étape touchée : la fixation sur les récepteurs. Étape 2 — Comparer les PPSE : 3 mV avec la nicotine, 0 mV avec le curare. Étape 3 — Nommer : le curare se fixe sans activer, il bloque les récepteurs, alors que la nicotine les active et mime l'acétylcholine. Étape 4 — Conclure : deux effets opposés sur la même étape.",
+              "answers": [
+                {
+                  "content": "bloque",
+                  "correct": true
+                },
+                {
+                  "content": "inhibe",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La nicotine augmente la vigilance et accélère le rythme du cœur. Elle est classée parmi les ___.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Relever : vigilance augmentée, cœur accéléré. Étape 2 — Comparer à l'état normal : l'activité du système nerveux est accélérée. Étape 3 — Classer : c'est le critère des stimulants. Étape 4 — Conclure : la nicotine est un stimulant. Un dépresseur ralentirait l'activité.",
+              "answers": [
+                {
+                  "content": "stimulants",
+                  "correct": true
+                },
+                {
+                  "content": "dépresseurs",
+                  "correct": false
+                },
+                {
+                  "content": "perturbateurs",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi un fumeur régulier peut-il devenir dépendant ? Choisis les trois propositions exactes.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Lire : le document 5 indique que la nicotine augmente la dopamine dans le circuit de la récompense. Étape 2 — Relier : cette hausse donne un plaisir qui incite à recommencer. Étape 3 — Repérer : le cerveau s'adapte, d'où la tolérance. Étape 4 — Identifier : à l'arrêt, le manque déclenche une envie de reprendre. Étape 5 — Conclure : ces trois propositions décrivent le cercle de la dépendance. Les deux autres sont fausses : la nicotine augmente la dopamine et ne détruit pas tous les neurones.",
+              "answers": [
+                {
+                  "content": "La nicotine augmente la libération de dopamine dans le circuit de la récompense",
+                  "correct": true
+                },
+                {
+                  "content": "Le cerveau s'adapte et il faut davantage de cigarettes pour le même effet",
+                  "correct": true
+                },
+                {
+                  "content": "À l'arrêt, le manque pousse à reprendre",
+                  "correct": true
+                },
+                {
+                  "content": "La nicotine détruit tous les neurones à dopamine dès la première cigarette",
+                  "correct": false
+                },
+                {
+                  "content": "La nicotine empêche toute libération de dopamine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À partir des expériences et du document 5, explique pourquoi la nicotine entraîne une dépendance chez le fumeur.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Nicotine qui mime l'acétylcholine à la synapse",
+                "Hausse de dopamine dans le circuit de la récompense",
+                "Tolérance : doses plus fortes pour le même effet",
+                "Dépendance et manque à l'arrêt"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Repérer : la nicotine se fixe sur les récepteurs de l'acétylcholine et les active, elle mime ce neurotransmetteur (expérience 2). Étape 2 — Relier : elle augmente la libération de dopamine dans le circuit de la récompense, ce qui procure un plaisir et incite à recommencer. Étape 3 — Le cerveau s'adapte : c'est la tolérance, le fumeur doit augmenter le nombre de cigarettes pour le même effet. Étape 4 — À l'arrêt, le manque (irritabilité, envie irrésistible) pousse à reprendre : c'est la dépendance. Barème : mécanisme à la synapse (1 point) ; hausse de dopamine et plaisir (1 point) ; tolérance (1 point) ; dépendance et manque (1 point).",
+              "answers": [],
+              "starter": "La nicotine se fixe sur les récepteurs de l'acétylcholine et…"
+            }
+          ]
+        },
+        {
+          "title": "Consultation d'addictologie : de la tolérance au sevrage",
+          "statement": "Lors d'une consultation d'addictologie, un médecin explique la dépendance à un patient. Il s'appuie sur une expérience fictive chez le rat (résultats simplifiés) : une drogue est donnée chaque jour de J0 à J6, puis arrêtée. On mesure tous les 2 jours, avant la prise du jour, le taux de base de dopamine dans le noyau accumbens, dont la valeur au repos est 100. Résultats de J0 à J16 : 100, 90, 80, 70, 50, 55, 70, 85, 95. Le médecin ajoute que, pendant la phase de baisse (J8), le rat est agité, tremble et cherche la drogue.",
+          "exercise_type": "evaluation",
+          "figure": "dopamine-de-base-et-sevrage",
+          "questions": [
+            {
+              "content": "Le taux de base de dopamine d'un rat est de 100 à J0 et de 70 à J6, pendant la période de consommation quotidienne. De combien a-t-il diminué entre J0 et J6 ?",
+              "question_type": "numeric",
+              "unit": "unités",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : taux de base 100 à J0 et 70 à J6. Étape 2 — Relier : ce taux reflète le fonctionnement du circuit de la récompense. Étape 3 — Repérer l'adaptation : 100 − 70 = 30 unités de baisse pendant la consommation quotidienne. Étape 4 — Identifier : cette adaptation est à l'origine de la tolérance et de la dépendance. Étape 5 — Conclure : la consommation répétée modifie le fonctionnement du cerveau, même quand la drogue n'est plus présente.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pendant la période de consommation (J0 à J6), le taux de base de dopamine passe de 100 à 70 chez le rat. Comment interpréter cette baisse ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : le taux de base baisse de 100 à 70. Étape 2 — Relier : le circuit de la récompense fonctionne différemment après plusieurs jours de drogue. Étape 3 — Repérer : c'est une adaptation, base de la tolérance et de la dépendance. Étape 4 — Conclure : le cerveau s'est adapté. Parler de destruction définitive est faux, puisque le taux remonte ensuite.",
+              "answers": [
+                {
+                  "content": "Le circuit de la récompense s'est adapté à la présence répétée de la drogue",
+                  "correct": true
+                },
+                {
+                  "content": "La drogue a définitivement détruit tous les neurones",
+                  "correct": false
+                },
+                {
+                  "content": "La drogue n'a aucun effet sur le cerveau",
+                  "correct": false
+                },
+                {
+                  "content": "Le rat a perdu la tolérance à la drogue",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience, le rat arrête la drogue après J6. Le taux de base atteint 50 à J8 et le rat tremble et cherche la drogue. Quelle période correspond au syndrome de sevrage ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : le minimum, 50, est atteint à J8, juste après l'arrêt. Étape 2 — Relier : le taux de base très bas s'accompagne de tremblements et de recherche de la drogue. Étape 3 — Repérer : les troubles à l'arrêt définissent le sevrage. Étape 4 — Identifier : ce sont des signes de dépendance physique et psychique. Étape 5 — Conclure : le sevrage est le plus marqué autour de J8.",
+              "answers": [
+                {
+                  "content": "Autour de J8, quand le taux de base est le plus bas après l'arrêt",
+                  "correct": true
+                },
+                {
+                  "content": "Autour de J0, avant toute consommation",
+                  "correct": false
+                },
+                {
+                  "content": "Autour de J16, quand le taux est revenu près de 95",
+                  "correct": false
+                },
+                {
+                  "content": "Pendant toute la consommation, à J2 et J4",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le taux de base de dopamine est revenu à 95 à J16 : on peut affirmer que la dépendance est définitivement guérie et qu'il n'y a plus de risque de rechute. L'affirmation est :",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : le taux de base remonte de 50 à 95 entre J8 et J16. Étape 2 — Relier : le fonctionnement du circuit se rétablit progressivement. Étape 3 — Repérer : mais le besoin irrésistible de consommer (dépendance psychique) peut persister. Étape 4 — Conclure : un taux presque normal ne suffit pas à garantir qu'il n'y aura pas de rechute ; l'accompagnement reste nécessaire. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces propositions, lesquelles expliquent qu'une personne qui arrête une drogue risque de rechuter ? Choisis les trois propositions exactes.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Lire : après l'arrêt, le taux de base est bas, d'où le manque. Étape 2 — Relier : consommer fait remonter la dopamine, donc soulage le manque. Étape 3 — Repérer : le besoin intense de consommer (dépendance psychique) peut durer. Étape 4 — Identifier : ces trois propositions décrivent le cercle de la dépendance. Étape 5 — Conclure : elles expliquent le risque de rechute. Les deux autres sont fausses : la production de dopamine se rétablit, et la drogue garde un effet.",
+              "answers": [
+                {
+                  "content": "Le manque provoque un malaise important après l'arrêt",
+                  "correct": true
+                },
+                {
+                  "content": "La dépendance psychique laisse un besoin intense de consommer",
+                  "correct": true
+                },
+                {
+                  "content": "Reprendre la drogue fait remonter la dopamine et soulage le manque",
+                  "correct": true
+                },
+                {
+                  "content": "La drogue a rendu le cerveau définitivement incapable de produire de la dopamine",
+                  "correct": false
+                },
+                {
+                  "content": "Après l'arrêt, la drogue ne peut plus jamais avoir d'effet",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe expliquant, à l'aide des données du document, comment la consommation répétée d'une drogue conduit à la dépendance, puis ce qui se passe à l'arrêt.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Adaptation et baisse du taux de base de dopamine (100 à 70)",
+                "Tolérance, déduite de l'adaptation et non lue sur la courbe",
+                "Sevrage à l'arrêt et taux minimum de 50",
+                "Cercle vicieux et reprise de la consommation"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lire : pendant la consommation quotidienne, le taux de base de dopamine baisse de 100 à 70 : le circuit de la récompense s'adapte. Étape 2 — Relier : on en déduit (ce n'est pas lu sur la courbe) que, pour retrouver le même effet, il faudrait augmenter les doses : c'est la tolérance. Étape 3 — À l'arrêt, le taux de base chute à 50 (J8) : le rat tremble et cherche la drogue, c'est le syndrome de sevrage. Étape 4 — Conclure : consommer soulage le manque, ce qui pousse à reprendre : c'est le cercle vicieux de la dépendance. Barème : adaptation et baisse du taux de base (1 point) ; tolérance déduite de l'adaptation (1 point) ; sevrage à l'arrêt et taux minimum de 50 (1 point) ; cercle vicieux et reprise de la consommation (1 point).",
+              "answers": [],
+              "starter": "Pendant la consommation, le taux de base de dopamine…"
+            }
+          ]
+        },
+        {
+          "title": "Le dossier du club santé : trois substances, une même méthode",
+          "statement": "Pour sa journée de sensibilisation à San-Pédro, le club santé reçoit de l'infirmière trois fiches de substances anonymes. Fiche 1 : après la prise, la personne est très excitée, ne dort plus et son cœur bat vite ; à la synapse à dopamine, la libération est normale mais la dopamine reste longtemps dans la fente, car la substance se fixe sur les transporteurs de recapture. Fiche 2 : la personne est somnolente, sa respiration est très ralentie, et elle ne sent plus la douleur ; à la synapse, la substance se fixe sur les récepteurs d'un neurotransmetteur naturel et les active comme lui. Fiche 3 : la personne perçoit des sons et des couleurs qui n'existent pas.",
+          "exercise_type": "evaluation",
+          "figure": "synapse-et-drogues",
+          "questions": [
+            {
+              "content": "Relie chaque substance à sa classe. Fiche 1 : excitation, insomnie, cœur rapide. Fiche 2 : somnolence, respiration ralentie, douleur supprimée. Fiche 3 : perception de sons et de couleurs inexistants.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Relever les effets de chaque fiche. Étape 2 — Comparer à l'état normal : la fiche 1 accélère l'activité, la fiche 2 la ralentit, la fiche 3 déforme les perceptions. Étape 3 — Classer : stimulant, dépresseur, perturbateur. Étape 4 — Conclure : chaque fiche correspond à une classe. Ne confonds pas excitation (stimulant) et perturbation des perceptions.",
+              "answers": [
+                {
+                  "content": "Fiche 1",
+                  "match": "Stimulant"
+                },
+                {
+                  "content": "Fiche 2",
+                  "match": "Dépresseur"
+                },
+                {
+                  "content": "Fiche 3",
+                  "match": "Perturbateur"
+                }
+              ]
+            },
+            {
+              "content": "Fiche 1 : à la synapse à dopamine, la libération est normale mais la dopamine reste longtemps dans la fente, car la substance se fixe sur les transporteurs de recapture. Quel est le mécanisme de cette substance ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer l'étape modifiée : la libération est normale, l'élimination est touchée. Étape 2 — Comparer : la dopamine reste plus longtemps dans la fente. Étape 3 — Nommer : la substance bloque la recapture, comme la cocaïne. Étape 4 — Conclure : la transmission est renforcée, ce qui explique la stimulation. Mimer ou augmenter la libération ne dépend pas des transporteurs de recapture.",
+              "answers": [
+                {
+                  "content": "Elle bloque la recapture de la dopamine",
+                  "correct": true
+                },
+                {
+                  "content": "Elle mime la dopamine",
+                  "correct": false
+                },
+                {
+                  "content": "Elle augmente la libération de dopamine",
+                  "correct": false
+                },
+                {
+                  "content": "Elle bloque les récepteurs de la dopamine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une substance de la fiche 2 est un dépresseur qui ralentit fortement la respiration. Pourquoi une dose trop forte est-elle dangereuse ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : somnolence profonde et respiration très ralentie. Étape 2 — Comparer : l'activité du système nerveux est fortement ralentie. Étape 3 — Classer : c'est un dépresseur. Étape 4 — Relier à la conséquence sanitaire : à forte dose, les centres nerveux qui commandent la respiration sont ralentis, d'où le risque de surdose. Accélérer le cœur ou halluciner décrit d'autres classes.",
+              "answers": [
+                {
+                  "content": "Elle ralentit l'activité des centres nerveux qui commandent la respiration, jusqu'à l'arrêt possible de la respiration",
+                  "correct": true
+                },
+                {
+                  "content": "Elle accélère trop le cœur",
+                  "correct": false
+                },
+                {
+                  "content": "Elle provoque une hallucination mortelle",
+                  "correct": false
+                },
+                {
+                  "content": "Elle rend le sujet trop actif",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève consomme tous les jours depuis des mois la substance de la fiche 1, doit augmenter la dose pour le même effet et ne peut plus s'en passer. Quels deux termes décrivent sa situation ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Lire : l'élève consomme et augmente la dose. Étape 2 — Relier : le plaisir vient de la dopamine. Étape 3 — Repérer : dose plus forte pour le même effet, c'est la tolérance. Étape 4 — Identifier : l'élève ne peut plus s'en passer, c'est la dépendance. Étape 5 — Conclure : tolérance et dépendance. Le sevrage n'apparaît qu'à l'arrêt, et il n'y a aucune immunité acquise contre une drogue.",
+              "answers": [
+                {
+                  "content": "La tolérance",
+                  "correct": true
+                },
+                {
+                  "content": "La dépendance",
+                  "correct": true
+                },
+                {
+                  "content": "L'immunité acquise",
+                  "correct": false
+                },
+                {
+                  "content": "Le syndrome de sevrage (qui n'apparaît qu'à l'arrêt)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le club santé veut une mesure de prévention complète pour les élèves du lycée. Laquelle choisir ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : la prévention doit toucher avant, pendant et après la consommation. Étape 2 — Relever les conséquences à éviter. Étape 3 — Relier à l'origine : le manque d'information, la pression des autres, la dépendance. Étape 4 — Proposer : informer, apprendre à refuser et soigner. Se taire, minimiser les drogues légales ou laisser essayer exposent à la dépendance.",
+              "answers": [
+                {
+                  "content": "Des séances d'information sur les risques, un apprentissage du refus et une orientation vers une consultation d'addictologie pour les élèves en difficulté",
+                  "correct": true
+                },
+                {
+                  "content": "Interdire d'en parler pour ne pas donner d'idées",
+                  "correct": false
+                },
+                {
+                  "content": "Dire que les drogues vendues légalement ne sont pas dangereuses",
+                  "correct": false
+                },
+                {
+                  "content": "Laisser chaque élève essayer pour se faire son opinion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un texte de synthèse, à partir des fiches et de tes connaissances : explique comment une drogue agit sur le système nerveux, pourquoi elle entraîne une dépendance, et propose deux mesures de prévention.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Action sur la synapse : un mécanisme nommé",
+                "Circuit de la récompense et dopamine",
+                "Tolérance et dépendance expliquées",
+                "Sevrage ou cercle vicieux",
+                "Deux mesures de prévention adaptées"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Une drogue n'invente pas de message nerveux : elle modifie la transmission à la synapse, par exemple en bloquant la recapture de la dopamine (fiche 1) ou en mimant un neurotransmetteur naturel (fiche 2). Étape 2 — Elle fait monter la dopamine dans le circuit de la récompense, ce qui donne du plaisir et incite à recommencer. Étape 3 — Le cerveau s'adapte : c'est la tolérance, il faut augmenter les doses ; apparaissent la dépendance psychique (besoin irrésistible) et la dépendance physique. À l'arrêt, le syndrome de sevrage pousse à reprendre : c'est un cercle vicieux. Étape 4 — Prévention : informer sur les risques et apprendre à refuser ; orienter vers une consultation d'addictologie. Barème : mécanisme à la synapse (1,5 point) ; dopamine et plaisir (1 point) ; tolérance et dépendance (1,5 point) ; sevrage ou cercle vicieux (1 point) ; deux mesures de prévention (1 point).",
+              "answers": [],
+              "starter": "Une drogue agit à la synapse en…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

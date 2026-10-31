@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Identity::UserRepositoryPort
 # Rôle : contrat de lecture des comptes et de leur PIN (bcrypt côté repository) ; anonymisation d'un compte
-# ADR  : 0026, 0028, 0036, 0050, 0055, 0082, 0084, 0094
+# ADR  : 0026, 0028, 0036, 0050, 0055, 0082, 0084, 0094, chargement-automatique-des-lecons-hors-production
 module Ports
   module Identity
     module UserRepositoryPort
@@ -55,6 +55,11 @@ module Ports
       # principale, sinon nil (ADR-0094 §4.2) ; current_school_id est ignoré pour les autres rôles
       def actor_for(user_id:, current_school_id: nil)
         raise NotImplementedError, "#{self.class} doit implémenter #actor_for"
+      end
+
+      # Le plus ancien membre actif de l'équipe (compte non anonymisé), auteur des chargements automatiques. → Entities::Identity::Actor | nil
+      def oldest_active_team_actor
+        raise NotImplementedError, "#{self.class} doit implémenter #oldest_active_team_actor"
       end
     end
   end
