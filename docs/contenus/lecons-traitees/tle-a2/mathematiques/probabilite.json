@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Probabilité",
@@ -8,1512 +8,1568 @@
       "level_name": "Tle",
       "material_name": "Mathématiques",
       "series_name": "A2",
-      "essentials": [
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "arbre-coup-d-envoi",
+          "kind": "diagram",
+          "description": "Arbre des choix pour le coup d'envoi d'un match : on part de la pièce lancée par l'arbitre, qui donne Pile ou Face (premier niveau). Sous chaque résultat, le capitaine choisit le maillot rouge ou bleu (second niveau). Chaque chemin du départ jusqu'au bas de l'arbre est un résultat possible.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "depart",
+                "label": "Lancer de la pièce"
+              },
+              {
+                "id": "pile",
+                "label": "Pile"
+              },
+              {
+                "id": "face",
+                "label": "Face"
+              },
+              {
+                "id": "pile_r",
+                "label": "Maillot rouge"
+              },
+              {
+                "id": "pile_b",
+                "label": "Maillot bleu"
+              },
+              {
+                "id": "face_r",
+                "label": "Maillot rouge"
+              },
+              {
+                "id": "face_b",
+                "label": "Maillot bleu"
+              }
+            ],
+            "edges": [
+              {
+                "from": "depart",
+                "to": "pile"
+              },
+              {
+                "from": "depart",
+                "to": "face"
+              },
+              {
+                "from": "pile",
+                "to": "pile_r"
+              },
+              {
+                "from": "pile",
+                "to": "pile_b"
+              },
+              {
+                "from": "face",
+                "to": "face_r"
+              },
+              {
+                "from": "face",
+                "to": "face_b"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
         {
           "name": "Expérience aléatoire, univers et événements",
-          "subtitle": "Issues, événements, contraire, « ou », « et »",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Décrire l'univers d'une expérience aléatoire et distinguer une issue d'un événement.</li>\n<li>Reconnaître l'événement certain, l'événement impossible et un événement élémentaire.</li>\n<li>Écrire le contraire, la réunion et l'intersection d'événements, et reconnaître deux événements incompatibles.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le bol de prénoms (l'univers).</strong> Après le repas du dimanche, maman a six cousins à table : Awa, Koffi, Yao, Mariam, Kouamé et Fatou. Elle écrit chaque prénom sur un papier et plie les six papiers dans un bol. La petite sœur en tire un, les yeux fermés : la personne tirée fera la vaisselle. Personne ne sait à l'avance qui sera tiré, mais tout le monde sait quels résultats sont possibles.</p>\n<p><em>Le pont.</em> Tirer un papier au hasard, c'est une <strong>expérience aléatoire</strong> : on connaît les résultats possibles, mais pas celui qui va sortir. Chaque prénom est une <strong>issue</strong> (un résultat possible). Le bol avec ses six prénoms, c'est l'<strong>univers</strong> $\\Omega$ (on lit « grand oméga ») : l'ensemble de toutes les issues, ici $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. Il a 6 éléments.</p>\n<p><em>Où l'image s'arrête.</em> L'univers liste les résultats possibles, pas les résultats probables. Papa n'est pas dans le bol : « Papa » n'est pas une issue.</p>\n<p><strong>2. Le groupe des filles (l'événement).</strong> Maman dit : « Si c'est une fille qui est tirée, elle aide aussi à ranger les assiettes. » Elle pense à un groupe de prénoms : Awa, Mariam et Fatou. Ce groupe ne désigne personne en particulier. Il dit seulement : « le papier tiré est dans ce groupe ».</p>\n<p><em>Le pont.</em> Ce groupe d'issues est un <strong>événement</strong> : $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$, « la personne tirée est une fille ». Un événement est une partie de l'univers. Il se <strong>réalise</strong> si l'issue obtenue en fait partie. Un événement qui ne contient qu'une seule issue est <strong>élémentaire</strong>, par exemple $\\{\\text{Yao}\\}$. L'événement qui contient toutes les issues, $\\Omega$, est <strong>certain</strong> : il se réalise toujours. L'événement qui ne contient aucune issue, noté $\\varnothing$, est <strong>impossible</strong> : il ne se réalise jamais (« Papa est tiré »).</p>\n<p><em>Où l'image s'arrête.</em> Ne confonds pas une issue (un prénom, Yao) et un événement (un ensemble d'issues, $\\{\\text{Yao}\\}$ ou $A$).</p>\n<p><strong>3. Les listes collées sur le frigo (contraire, « ou », « et »).</strong> Sur le frigo, il y a deux listes. La liste $A$ : les filles, soit Awa, Mariam, Fatou. La liste $B$ : ceux qui ont fini de manger en premier, soit Koffi, Mariam, Kouamé. Maman demande trois choses. Qui n'est pas sur la liste $A$ ? Qui est sur la liste $A$ ou sur la liste $B$ ? Qui est sur les deux listes à la fois ?</p>\n<p><em>Le pont.</em> Ceux qui ne sont pas sur la liste $A$ forment le <strong>contraire</strong> de $A$, noté $\\overline{A}$ : $\\{\\text{Koffi}, \\text{Yao}, \\text{Kouamé}\\}$. Ceux qui sont sur l'une ou l'autre liste (ou sur les deux) forment la <strong>réunion</strong> $A \\cup B$ : $\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. Ceux qui sont sur les deux listes forment l'<strong>intersection</strong> $A \\cap B$ : $\\{\\text{Mariam}\\}$. Si deux listes n'ont aucun prénom commun, leurs événements sont <strong>incompatibles</strong>.</p>\n<p><em>Où l'image s'arrête.</em> À la cuisine, « fromage ou dessert » veut dire l'un des deux, pas les deux. En mathématiques, « $A$ ou $B$ » accepte aussi le cas où les deux sont réalisés : Mariam est dans $A \\cup B$.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Vocabulaire.</strong> Une <strong>expérience aléatoire</strong> a plusieurs résultats possibles, appelés <strong>issues</strong>, et on ne sait pas lequel va se produire. L'<strong>univers</strong> $\\Omega$ est l'ensemble de toutes les issues. Un <strong>événement</strong> est une partie de $\\Omega$.</p>\n<ul>\n<li>Événement <strong>élémentaire</strong> : une seule issue.</li>\n<li>Événement <strong>certain</strong> : $\\Omega$. Événement <strong>impossible</strong> : $\\varnothing$.</li>\n<li><strong>Contraire</strong> de $A$, noté $\\overline{A}$ : les issues de $\\Omega$ qui ne sont pas dans $A$ (« $A$ ne se réalise pas »).</li>\n<li><strong>Réunion</strong> $A \\cup B$ : les issues qui sont dans $A$, ou dans $B$, ou dans les deux (« $A$ ou $B$ »).</li>\n<li><strong>Intersection</strong> $A \\cap B$ : les issues qui sont à la fois dans $A$ et dans $B$ (« $A$ et $B$ »).</li>\n<li>$A$ et $B$ sont <strong>incompatibles</strong> si $A \\cap B = \\varnothing$ : ils n'ont aucune issue commune et ne peuvent pas se réaliser ensemble.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>On reprend les six cousins avec $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Détermine $\\overline{A}$, $A \\cup B$, $A \\cap B$, puis dis si $A$ et $C = \\{\\text{Yao}, \\text{Koffi}\\}$ sont incompatibles.</strong></p>\n<ol>\n<li>$\\overline{A}$ : on garde les prénoms de $\\Omega$ qui ne sont pas dans $A$. Donc $\\overline{A} = \\{\\text{Koffi}, \\text{Yao}, \\text{Kouamé}\\}$. Contrôle : $A$ et $\\overline{A}$ ensemble font bien les 6 prénoms (3 + 3).</li>\n<li>$A \\cup B$ : on rassemble tous les prénoms des deux listes, sans écrire Mariam deux fois. Donc $A \\cup B = \\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$ : 5 prénoms.</li>\n<li>$A \\cap B$ : seul Mariam est dans les deux listes. Donc $A \\cap B = \\{\\text{Mariam}\\}$.</li>\n<li>$A \\cap C$ : aucun prénom de $A$ (Awa, Mariam, Fatou) n'est dans $C$ (Yao, Koffi). Donc $A \\cap C = \\varnothing$ : $A$ et $C$ sont incompatibles.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Lire « $A$ ou $B$ » comme « l'un des deux seulement », comme dans « fromage ou dessert ». En mathématiques, $A \\cup B$ contient aussi les issues qui sont dans $A$ <strong>et</strong> dans $B$ : ici, Mariam.</p>\n<p>Autre erreur fréquente : prendre pour contraire de $A$ n'importe quel autre événement. Le contraire de « c'est une fille » est « ce n'est pas une fille », c'est-à-dire exactement les issues qui restent dans $\\Omega$, pas seulement quelques-unes.</p>\n<h2>En une phrase</h2>\n<p>L'univers $\\Omega$ est le bol de tous les résultats possibles, un événement est un groupe d'issues de ce bol, et on le combine avec le contraire $\\overline{A}$ (« pas $A$ »), la réunion $A \\cup B$ (« $A$ ou $B$ ») et l'intersection $A \\cap B$ (« $A$ et $B$ »).</p>",
-          "exercises": [
+          "remember": "Une **expérience aléatoire** est une expérience dont on ne peut pas prévoir le résultat, mais dont on connaît tous les résultats possibles, appelés **éventualités**. L'**univers** $\\Omega$ est l'ensemble de toutes les éventualités. Un **événement** est un groupe d'éventualités. Il est **élémentaire** s'il n'en contient qu'une, **certain** s'il les contient toutes ($\\Omega$), **impossible** s'il n'en contient aucune ($\\emptyset$). Le **contraire** $\\overline{A}$ regroupe les éventualités qui ne sont pas dans $A$. « $A$ et $B$ » ($A \\cap B$) regroupe celles qui sont dans $A$ **et** dans $B$. « $A$ ou $B$ » ($A \\cup B$) regroupe celles qui sont dans $A$ **ou** dans $B$ (ou les deux). Deux événements sont **incompatibles** s'ils n'ont aucune éventualité commune : $A \\cap B = \\emptyset$.",
+          "method": [
+            "Décrire l'expérience : dire ce que l'on fait et ce que l'on observe.",
+            "Lister l'univers : écrire toutes les éventualités, sans oubli ni répétition.",
+            "Traduire l'événement : repérer les éventualités qui réalisent la phrase demandée.",
+            "Nommer l'événement : dire s'il est élémentaire, certain, impossible, contraire d'un autre, « $A$ et $B$ » ou « $A$ ou $B$ », et si deux événements sont incompatibles."
+          ],
+          "example": {
+            "statement": "Pour choisir le terrain du premier match du tournoi, le professeur d'EPS lance un dé cubique dont les faces sont numérotées de 1 à 6. On note $A$ : « le numéro est pair » et $B$ : « le numéro est supérieur ou égal à 5 ». Donner $\\overline{A}$, « $A$ et $B$ », « $A$ ou $B$ », et dire si $A$ et $B$ sont incompatibles.",
+            "steps": [
+              "Décrire : on lance un dé une fois et on observe le numéro de la face du dessus.",
+              "Lister : $\\Omega = \\{1\\,;\\,2\\,;\\,3\\,;\\,4\\,;\\,5\\,;\\,6\\}$, soit 6 éventualités.",
+              "Traduire : $A = \\{2\\,;\\,4\\,;\\,6\\}$ et $B = \\{5\\,;\\,6\\}$. Le contraire est $\\overline{A} = \\{1\\,;\\,3\\,;\\,5\\}$ (les numéros impairs).",
+              "Nommer : « $A$ et $B$ » $= \\{6\\}$ (le seul numéro dans les deux) ; « $A$ ou $B$ » $= \\{2\\,;\\,4\\,;\\,5\\,;\\,6\\}$ ; comme $6$ est commun, $A$ et $B$ ne sont pas incompatibles."
+            ]
+          },
+          "pitfall": "Ne pas confondre « et » et « ou ». Avec $A = \\{2\\,;\\,4\\,;\\,6\\}$ et $B = \\{5\\,;\\,6\\}$ : « $A$ et $B$ » ne contient que $6$ (les numéros qui sont dans les deux), alors que « $A$ ou $B$ » contient $2$, $4$, $5$ et $6$ (au moins un des deux). Le $6$ n'est écrit qu'une fois. Pour ne pas se tromper : « et » = ce qui est commun, « ou » = on rassemble tout.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître l'univers et les événements",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : décrire, lister, traduire, nommer. Le décor est le tirage au sort du tournoi inter-classes de football, dans la cour de l'école.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces situations de la cour de l'école, laquelle est une expérience aléatoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décrire : une expérience est aléatoire si on ne peut pas prévoir son résultat, tout en connaissant les résultats possibles. Tirer un papier au hasard dans un sac pour désigner une équipe répond à cela. Lire le score d'un match déjà terminé : le résultat est connu. Calculer $12 \\times 5$ : le résultat est certain. Mesurer la longueur du terrain : on obtient toujours la même mesure.",
+                "answers": [
+                  {
+                    "content": "On tire au hasard un papier dans un sac pour désigner l'équipe qui joue en premier.",
+                    "correct": true
+                  },
+                  {
+                    "content": "On lit sur le tableau d'affichage le score d'un match déjà terminé.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On calcule le prix de 12 ballons à 5 000 FCFA l'un.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On mesure la longueur du terrain avec un décamètre.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On tire un jeton dans un sac qui contient 8 jetons numérotés de 1 à 8 pour désigner le numéro du terrain. Combien l'univers $\\Omega$ contient-il d'éventualités ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décrire : on tire un jeton et on lit son numéro. Étape 2 — Lister l'univers : $\\Omega = \\{1\\,;\\,2\\,;\\,3\\,;\\,4\\,;\\,5\\,;\\,6\\,;\\,7\\,;\\,8\\}$. Il y a donc 8 éventualités, une par jeton. Attention à ne pas oublier le 8 ni à compter 7 en s'arrêtant trop tôt.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On tire un jeton dans un sac qui contient 8 jetons numérotés de 1 à 8. Soit $A$ l'événement « le numéro est un multiple de 3 ». Quelles sont les deux éventualités de $A$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Lister l'univers : $\\Omega = \\{1\\,;\\,\\dots\\,;\\,8\\}$. Étape 3 — Traduire : les multiples de 3 de $\\Omega$ sont $3$ et $6$, donc $A = \\{3\\,;\\,6\\}$. Le $9$ est un multiple de 3 mais il n'est pas dans $\\Omega$ (il n'y a pas de jeton 9). Le $1$ n'est pas un multiple de 3.",
+                "answers": [
+                  {
+                    "content": "$3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$9$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque événement à son nom. Le sac contient 8 jetons numérotés de 1 à 8 et on en tire un.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Nommer. « Le numéro est inférieur à 10 » : les 8 jetons conviennent, c'est l'événement certain. « Le numéro est 12 » : aucun jeton ne porte 12, c'est l'événement impossible. « Le numéro est 5 » : une seule éventualité, c'est un événement élémentaire. « Le numéro n'est pas 5 » : toutes les éventualités sauf le 5, c'est le contraire de « le numéro est 5 ».",
+                "answers": [
+                  {
+                    "content": "Le numéro est inférieur à 10",
+                    "match": "Événement certain"
+                  },
+                  {
+                    "content": "Le numéro est 12",
+                    "match": "Événement impossible"
+                  },
+                  {
+                    "content": "Le numéro est 5",
+                    "match": "Événement élémentaire"
+                  },
+                  {
+                    "content": "Le numéro n'est pas 5",
+                    "match": "Contraire de « le numéro est 5 »"
+                  }
+                ]
+              },
+              {
+                "content": "On tire un jeton dans un sac qui contient 8 jetons numérotés de 1 à 8. Soit $A$ : « le numéro est inférieur ou égal à 5 ». Combien d'éventualités contient le contraire $\\overline{A}$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Lister : $\\Omega$ a 8 éventualités. Étape 3 — Traduire : $A = \\{1\\,;\\,2\\,;\\,3\\,;\\,4\\,;\\,5\\}$. Étape 4 — Nommer le contraire : $\\overline{A}$ regroupe les numéros qui ne sont pas dans $A$, soit $\\{6\\,;\\,7\\,;\\,8\\}$ : 3 éventualités. On peut aussi faire $8 - 5 = 3$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On tire un jeton dans un sac qui contient 8 jetons numérotés de 1 à 8. Soit $A$ : « le numéro est pair » $= \\{2\\,;\\,4\\,;\\,6\\,;\\,8\\}$ et $B$ : « le numéro est un multiple de 4 » $= \\{4\\,;\\,8\\}$. L'événement « $A$ et $B$ » est égal à $\\{2\\,;\\,4\\,;\\,6\\,;\\,8\\}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Traduire : « $A$ et $B$ » regroupe seulement les éventualités qui sont dans $A$ et aussi dans $B$ : $\\{4\\,;\\,8\\}$. Étape 4 — Nommer : l'ensemble $\\{2\\,;\\,4\\,;\\,6\\,;\\,8\\}$ est « $A$ ou $B$ », pas « $A$ et $B$ ». C'est la confusion entre « et » et « ou » du piège. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans la cour, on lance un dé cubique numéroté de 1 à 6 pour désigner le capitaine. Soit $A$ : « le numéro est impair » et $B$ : « le numéro est inférieur ou égal à 2 ».",
+            "questions": [
+              {
+                "content": "Donne $A$ et $B$ en nombre d'éventualités : $A$ contient ___ éventualités et $B$ contient ___ éventualités.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Écris d'abord l'univers, puis barre les numéros qui ne conviennent pas.",
+                "explanation": "Étape 2 — Lister : $\\Omega = \\{1\\,;\\,2\\,;\\,3\\,;\\,4\\,;\\,5\\,;\\,6\\}$. Étape 3 — Traduire : $A = \\{1\\,;\\,3\\,;\\,5\\}$ contient 3 éventualités ; $B = \\{1\\,;\\,2\\}$ en contient 2.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'événement « $A$ et $B$ » ? « $A$ et $B$ » = ___",
+                "question_type": "select",
+                "explanation": "Étape 3 — Traduire : $A = \\{1\\,;\\,3\\,;\\,5\\}$ et $B = \\{1\\,;\\,2\\}$. Étape 4 — Nommer : le seul numéro commun est $1$, donc « $A$ et $B$ » $= \\{1\\}$. La proposition $\\{1\\,;\\,2\\,;\\,3\\,;\\,5\\}$ est « $A$ ou $B$ ».",
+                "answers": [
+                  {
+                    "content": "$\\{1\\}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\{1\\,;\\,2\\,;\\,3\\,;\\,5\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\{2\\}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'événement « le numéro est 7 » est un événement impossible pour ce dé.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Lister : l'univers est $\\{1\\,;\\,\\dots\\,;\\,6\\}$ et ne contient pas $7$. Étape 4 — Nommer : un événement sans éventualité est impossible. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Probabilité en situation d'équiprobabilité",
+          "remember": "La **probabilité** d'un événement mesure sa chance de se réaliser : c'est un nombre entre $0$ et $1$. Il y a **équiprobabilité** quand toutes les éventualités ont la même chance (dé non truqué, objets identiques tirés « au hasard »). Alors, pour un événement $A$ : $$P(A) = \\dfrac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}}$$ Les cas favorables sont les éventualités de $A$ ; les cas possibles sont celles de $\\Omega$. On a $0 \\leq P(A) \\leq 1$, $P(\\Omega) = 1$ (événement certain) et $P(\\emptyset) = 0$ (événement impossible). Une probabilité s'écrit en fraction, en nombre décimal ou en pourcentage : $\\dfrac{1}{4} = 0{,}25 = 25\\ \\%$.",
+          "method": [
+            "Vérifier l'équiprobabilité : les objets sont identiques et le tirage se fait « au hasard ».",
+            "Compter les cas possibles : le nombre d'éventualités de l'univers $\\Omega$.",
+            "Compter les cas favorables : le nombre d'éventualités qui réalisent l'événement $A$.",
+            "Calculer la fraction « cas favorables sur cas possibles », la simplifier si on peut, et la donner aussi en décimal ou en pourcentage si on le demande."
+          ],
+          "example": {
+            "statement": "Pour le tirage au sort du tournoi inter-classes, un sac contient 12 papiers identiques, un par équipe : 4 papiers « Terminale », 5 papiers « Première » et 3 papiers « Seconde ». Un élève tire un papier au hasard. Calculer la probabilité de l'événement $T$ : « l'équipe tirée est une équipe de Terminale ».",
+            "steps": [
+              "Vérifier : les papiers sont identiques et le tirage est fait au hasard, donc les 12 papiers ont la même chance : il y a équiprobabilité.",
+              "Compter les cas possibles : il y a 12 papiers, donc 12 cas possibles.",
+              "Compter les cas favorables : 4 papiers portent « Terminale », donc 4 cas favorables.",
+              "Calculer : $P(T) = \\dfrac{4}{12} = \\dfrac{1}{3}$, soit environ $0{,}33$ ou $33\\ \\%$."
+            ]
+          },
+          "pitfall": "Ne pas appliquer « cas favorables sur cas possibles » quand les cas n'ont pas la même chance. Un sac contient 1 maillot rouge et 9 maillots bleus, identiques au toucher. Il y a 2 couleurs, mais $P(\\text{rouge})$ n'est pas $\\dfrac{1}{2}$ : on compte les **maillots**, pas les couleurs, donc $P(\\text{rouge}) = \\dfrac{1}{10}$. De même, un match a trois issues (victoire, nul, défaite) qui n'ont pas chacune la probabilité $\\dfrac{1}{3}$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une probabilité avec des cas équiprobables",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : vérifier l'équiprobabilité, compter les cas possibles, compter les cas favorables, calculer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans quelle situation les cas sont-ils équiprobables ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier l'équiprobabilité. On tire « au hasard » un papier parmi 10 papiers identiques : chaque papier a la même chance. Les issues d'un match (victoire, nul, défaite) n'ont pas la même chance. Dans un sac de 1 maillot rouge et 9 maillots bleus, les deux couleurs n'ont pas la même chance (c'est le piège de la fiche). Pour la pluie, « il pleut » et « il ne pleut pas » n'ont pas la même chance, et ce n'est pas un tirage d'objets identiques.",
+                "answers": [
+                  {
+                    "content": "On tire au hasard un papier parmi 10 papiers identiques et on regarde son numéro.",
+                    "correct": true
+                  },
+                  {
+                    "content": "On observe l'issue d'un match : victoire, nul ou défaite.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On tire un maillot dans un sac de 1 maillot rouge et 9 maillots bleus et on regarde la couleur.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On regarde s'il pleut ou s'il ne pleut pas demain.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sac contient 20 papiers identiques pour désigner le poste des joueurs : 5 papiers « gardien » et 15 papiers « joueur de champ ». On tire un papier au hasard. Quelle est la probabilité de tirer « gardien » ? Donne-la sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : papiers identiques, tirage au hasard, donc équiprobabilité. Étape 2 — Compter les cas possibles : 20 papiers. Étape 3 — Compter les cas favorables : 5 papiers « gardien ». Étape 4 — Calculer : $P = \\dfrac{5}{20} = \\dfrac{1}{4} = 0{,}25$. Le piège serait de calculer $\\dfrac{5}{15}$ en oubliant que les 5 papiers « gardien » comptent aussi parmi les 20 possibles.",
+                "answers": [
+                  {
+                    "content": "0,25",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On lance un dé cubique non truqué, numéroté de 1 à 6. Quelle est la probabilité d'obtenir un numéro strictement supérieur à 4 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : dé non truqué, équiprobabilité. Étape 2 — Compter les cas possibles : 6 faces. Étape 3 — Compter les cas favorables : « strictement supérieur à 4 » donne $\\{5\\,;\\,6\\}$, soit 2 cas. Étape 4 — Calculer : $\\dfrac{2}{6} = \\dfrac{1}{3}$. La réponse $\\dfrac{1}{2}$ compte aussi le 4 ($\\geq 4$, pas $> 4$). La réponse $\\dfrac{2}{5}$ divise par 5 au lieu de 6. La réponse $\\dfrac{1}{6}$ ne compte qu'un seul cas favorable.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{1}{3}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{2}{5}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{6}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les 40 élèves d'une classe jouent un petit tournoi. Le professeur désigne un élève au hasard comme capitaine. 22 élèves de la classe sont des joueurs de l'équipe de l'école. Quelle est la probabilité, en pourcentage, que le capitaine désigné soit un joueur de l'équipe ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "unit": "%",
+                "explanation": "Étape 1 — Vérifier : désignation au hasard, équiprobabilité. Étape 2 — Compter les cas possibles : 40 élèves. Étape 3 — Compter les cas favorables : 22 joueurs. Étape 4 — Calculer : $\\dfrac{22}{40} = 0{,}55$, soit $55\\ \\%$. Pour passer d'un décimal à un pourcentage, on multiplie par 100.",
+                "answers": [
+                  {
+                    "content": "55",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les quatre étapes pour calculer une probabilité en situation d'équiprobabilité.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Vérifier l'équiprobabilité : sans elle, la formule ne s'applique pas. Étape 2 — Compter les cas possibles. Étape 3 — Compter les cas favorables. Étape 4 — Calculer la fraction. On ne peut pas calculer la fraction avant d'avoir compté les deux nombres, ni compter sans avoir vérifié que la situation s'y prête.",
+                "answers": [
+                  {
+                    "content": "Vérifier l'équiprobabilité."
+                  },
+                  {
+                    "content": "Compter les cas possibles."
+                  },
+                  {
+                    "content": "Compter les cas favorables."
+                  },
+                  {
+                    "content": "Calculer la fraction favorables sur possibles."
+                  }
+                ]
+              },
+              {
+                "content": "Un sac contient 1 maillot rouge et 9 maillots bleus, identiques au toucher. On en tire un au hasard. Comme il y a deux couleurs, la probabilité de tirer le maillot rouge est $\\dfrac{1}{2}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : on tire un maillot parmi des maillots identiques, c'est équiprobable pour les maillots, pas pour les couleurs. Étape 2 — Compter les cas possibles : 10 maillots. Étape 3 — Compter les cas favorables : 1 maillot rouge. Étape 4 — Calculer : $\\dfrac{1}{10}$. Dire $\\dfrac{1}{2}$ est le piège de la fiche : on a compté les couleurs au lieu des maillots.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Pour le tirage au sort, un sac contient 15 papiers identiques : 6 rouges, 5 jaunes et 4 verts. On tire un papier au hasard.",
+            "questions": [
+              {
+                "content": "Complète : la probabilité de tirer un papier rouge est égale à ___ cas favorables sur ___ cas possibles.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Les cas favorables sont les papiers rouges ; les cas possibles sont tous les papiers du sac.",
+                "explanation": "Étape 2 — Compter les cas possibles : 15 papiers. Étape 3 — Compter les cas favorables : 6 papiers rouges. Étape 4 — Calculer : $P(\\text{rouge}) = \\dfrac{6}{15}$, qui se simplifie en $\\dfrac{2}{5}$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "15",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "La probabilité de tirer un papier vert est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Compter les cas possibles : 15. Étape 3 — Compter les cas favorables : 4 papiers verts. Étape 4 — Calculer : $\\dfrac{4}{15}$. La proposition $\\dfrac{4}{11}$ oublie les verts dans le total ; $\\dfrac{1}{3}$ compte les 3 couleurs.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{4}{15}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{4}{11}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La fraction $\\dfrac{6}{15}$ peut se simplifier en $\\dfrac{2}{5}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Calculer : on divise le numérateur et le dénominateur par 3 : $\\dfrac{6 \\div 3}{15 \\div 3} = \\dfrac{2}{5}$. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dénombrer les cas possibles",
+          "remember": "Pour compter les cas sans en oublier, on utilise trois outils. L'**arbre** : chaque niveau est un choix, chaque branche une possibilité, chaque chemin un résultat. Le **tableau à double entrée** : les lignes donnent le premier choix, les colonnes le second, chaque case est un résultat. Quand on fait $n_1$ choix, puis $n_2$ choix, il y a $n_1 \\times n_2$ résultats. Une **combinaison simple** est un groupe de $2$ éléments choisis parmi $n$, **sans tenir compte de l'ordre** et sans répétition : leur nombre est $\\dfrac{n \\times (n-1)}{2}$. Exemple : $5$ équipes qui se rencontrent toutes une fois donnent $\\dfrac{5 \\times 4}{2} = 10$ matchs.",
+          "method": [
+            "Repérer le type de choix : des choix qui se suivent (l'ordre compte), ou un groupe de 2 éléments pris sans ordre.",
+            "Représenter la situation : dessiner l'arbre ou le tableau pour des choix successifs ; pour un groupe sans ordre, retenir « 2 parmi $n$ ».",
+            "Compter : multiplier les nombres de choix de chaque niveau, ou calculer $\\dfrac{n \\times (n-1)}{2}$ pour un groupe de 2.",
+            "Vérifier le total en recomptant les chemins de l'arbre ou les cases du tableau, puis l'utiliser comme nombre de cas possibles."
+          ],
+          "example": {
+            "statement": "Avant un match, l'arbitre lance une pièce (Pile ou Face) pour le coup d'envoi. Ensuite, le capitaine qui a gagné le tirage choisit le maillot de son équipe : rouge ou bleu. Combien y a-t-il de résultats possibles pour ces deux choix ?",
+            "steps": [
+              "Repérer : la pièce, puis le maillot. Ce sont deux choix qui se suivent, donc l'ordre compte.",
+              "Représenter : on dessine l'arbre de la figure. Premier niveau : Pile ou Face (2 branches). Deuxième niveau : rouge ou bleu (2 branches sous chaque).",
+              "Compter : 2 choix puis 2 choix, donc $2 \\times 2 = 4$ résultats.",
+              "Vérifier : on recompte les chemins de l'arbre. Il y en a 4 : Pile-rouge, Pile-bleu, Face-rouge, Face-bleu. Il y a donc 4 cas possibles."
+            ]
+          },
+          "pitfall": "Ne pas compter deux fois un groupe sans ordre. Quand 5 équipes se rencontrent une fois chacune, le match « A contre B » est le même que « B contre A ». Calculer $5 \\times 4 = 20$ est faux : chaque match est compté deux fois. Le bon calcul est $\\dfrac{5 \\times 4}{2} = 10$ matchs. Demande-toi toujours : « Si j'inverse les deux éléments, est-ce le même résultat ? » Si oui, on divise par 2.",
+          "figure": "arbre-coup-d-envoi",
+          "exercise": {
+            "title": "Compter les cas avec un arbre, un tableau ou une combinaison",
+            "statement": "Pour désigner l'équipe qui tire le premier penalty du tournoi, on lance deux dés cubiques et on lit leur somme. Le tableau à double entrée donne toutes les sommes possibles. Dans les questions, tu utilises la méthode de la fiche : repérer, représenter, compter, vérifier.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement_blocks": [
+              {
+                "type": "paragraph",
+                "text": "On lance deux dés cubiques numérotés de 1 à 6 et on lit la somme des deux faces. Le tableau donne la somme pour chaque couple de faces."
+              },
+              {
+                "type": "table",
+                "caption": "Somme des deux dés : lignes = premier dé, colonnes = second dé",
+                "headers": [
+                  "Dé 1 / Dé 2",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6"
+                ],
+                "rows": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7"
+                  ],
+                  [
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8"
+                  ],
+                  [
+                    "3",
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9"
+                  ],
+                  [
+                    "4",
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10"
+                  ],
+                  [
+                    "5",
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11"
+                  ],
+                  [
+                    "6",
+                    "7",
+                    "8",
+                    "9",
+                    "10",
+                    "11",
+                    "12"
+                  ]
+                ]
+              }
+            ],
+            "questions": [
+              {
+                "content": "Pour le coup d'envoi, on lance une pièce (Pile ou Face), puis on tire un jeton dans un sac de 3 jetons (rouge, bleu, vert). Combien y a-t-il de résultats possibles ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : deux choix qui se suivent, l'ordre compte. Étape 2 — Représenter : un arbre avec 2 branches (Pile, Face), puis 3 branches sous chacune. Étape 3 — Compter : $2 \\times 3 = 6$. Étape 4 — Vérifier : les chemins sont Pile-rouge, Pile-bleu, Pile-vert, Face-rouge, Face-bleu, Face-vert : 6. Additionner ($2 + 3 = 5$) est faux : on multiplie les choix successifs.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On lance deux dés cubiques et on construit le tableau à double entrée : les 6 valeurs du premier dé en lignes, les 6 valeurs du second dé en colonnes. Combien de cases (résultats) le tableau contient-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : deux lancers successifs, l'ordre compte (premier dé, second dé). Étape 2 — Représenter : un tableau de 6 lignes et 6 colonnes. Étape 3 — Compter : $6 \\times 6 = 36$ cases. Étape 4 — Vérifier : 6 lignes de 6 cases font bien 36. Il y a donc 36 cas possibles.",
+                "answers": [
+                  {
+                    "content": "36",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On lance deux dés cubiques et on lit la somme. Dans le tableau à double entrée de l'énoncé (6 lignes, 6 colonnes), combien de cases contiennent la somme 7 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Représenter : le tableau a une case par couple (premier dé, second dé). Étape 3 — Compter les cases de somme 7 : $1+6$, $2+5$, $3+4$, $4+3$, $5+2$, $6+1$, c'est-à-dire une case par ligne, soit 6 cases. Étape 4 — Vérifier : chaque ligne contient exactement une case égale à 7, donc 6 au total.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Six équipes participent à un tournoi en poule unique : chaque équipe rencontre une fois chacune des cinq autres. Combien de matchs seront joués ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : un match est un groupe de 2 équipes pris sans ordre (A contre B est le même match que B contre A). Étape 2 — Représenter : « 2 parmi 6 ». Étape 3 — Compter : $\\dfrac{6 \\times 5}{2} = \\dfrac{30}{2} = 15$. Étape 4 — Vérifier : $6 \\times 5 = 30$ compte chaque match deux fois ; on divise donc par 2. Il y a 15 matchs.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un groupe de 4 équipes joue en poule unique : chaque équipe rencontre une fois chacune des trois autres. Combien de matchs sont joués ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un match est un groupe de 2 équipes pris sans ordre. Étape 3 — Compter : $\\dfrac{4 \\times 3}{2} = 6$ matchs. Étape 4 — Vérifier en listant : AB, AC, AD, BC, BD, CD. La réponse 12 oublie de diviser par 2 (c'est le piège de la fiche). La réponse 16 calcule $4 \\times 4$. La réponse 8 additionne $4 + 4$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  },
+                  {
+                    "content": "12",
+                    "correct": false
+                  },
+                  {
+                    "content": "16",
+                    "correct": false
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On veut choisir 2 délégués parmi 8 élèves, sans tenir compte de l'ordre. Quelles sont les deux écritures qui donnent le nombre de choix possibles ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : un groupe de 2 élèves pris sans ordre. Étape 2 — Représenter : « 2 parmi 8 ». Étape 3 — Compter : $\\dfrac{8 \\times 7}{2} = \\dfrac{56}{2} = 28$. Les deux bonnes écritures sont donc $\\dfrac{8 \\times 7}{2}$ et $28$. Le calcul $8 \\times 7 = 56$ compte chaque groupe deux fois. Le calcul $8 \\times 2 = 16$ ne correspond à aucun raisonnement correct.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{8 \\times 7}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$28$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$8 \\times 7 = 56$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8 \\times 2 = 16$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un arbre a 3 branches au premier niveau, puis 4 branches sous chacune d'elles. Il possède 12 chemins.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Représenter : 3 branches au premier niveau, 4 sous chacune. Étape 3 — Compter : $3 \\times 4 = 12$ chemins. Étape 4 — Vérifier : 3 groupes de 4 chemins font 12. L'affirmation est vraie. Additionner donnerait 7, ce qui ne compte pas les chemins complets.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "À la buvette du tournoi, on choisit une boisson parmi 3 (bissap, gingembre, orange), puis un gâteau parmi 4.",
+            "questions": [
+              {
+                "content": "Complète : il y a ___ choix de boisson, puis ___ choix de gâteau.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Un nombre de branches par niveau de l'arbre.",
+                "explanation": "Étape 1 — Repérer : deux choix qui se suivent. Étape 2 — Représenter : l'arbre a 3 branches de boisson, puis 4 branches de gâteau sous chacune. Les deux nombres à relever sont donc 3 et 4.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Combien y a-t-il de façons de choisir une boisson puis un gâteau ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "On multiplie les nombres de choix de chaque niveau.",
+                "explanation": "Étape 3 — Compter : $3 \\times 4 = 12$. Étape 4 — Vérifier : 3 groupes de 4 chemins dans l'arbre, soit 12 chemins.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un groupe de 5 joueurs, on choisit 2 joueurs pour un duel, sans tenir compte de l'ordre. Le nombre de duels possibles est ___.",
+                "question_type": "select",
+                "hint": "Calcule 5 fois 4, puis divise par 2.",
+                "explanation": "Étape 1 — Repérer : un groupe de 2 joueurs pris sans ordre. Étape 3 — Compter : $\\dfrac{5 \\times 4}{2} = 10$. La proposition 20 oublie de diviser par 2 ; la proposition 25 calcule $5 \\times 5$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  },
+                  {
+                    "content": "20",
+                    "correct": false
+                  },
+                  {
+                    "content": "25",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Événement contraire",
+          "remember": "Le **contraire** de $A$, noté $\\overline{A}$, est l'événement « $A$ n'est pas réalisé ». $A$ et $\\overline{A}$ sont incompatibles et, à eux deux, ils contiennent toutes les éventualités de $\\Omega$. Donc $P(A) + P(\\overline{A}) = 1$, c'est-à-dire : $$P(\\overline{A}) = 1 - P(A)$$ Cette formule sert quand $\\overline{A}$ est plus simple à calculer que $A$, ou quand on connaît $P(A)$ et qu'on cherche la probabilité de « ne pas… ». Attention au contraire des mots : le contraire de « au moins 4 » est « strictement moins de 4 » (au plus 3).",
+          "method": [
+            "Identifier $A$ et son contraire $\\overline{A}$ : les écrire avec des mots (« ne pas », « strictement moins que », « aucun »).",
+            "Calculer la probabilité facile : $P(A)$ ou $P(\\overline{A})$, la plus simple des deux, en cas favorables sur cas possibles.",
+            "Appliquer la formule $P(\\overline{A}) = 1 - P(A)$ (ou $P(A) = 1 - P(\\overline{A})$).",
+            "Conclure par une phrase, avec la probabilité en fraction, en décimal ou en pourcentage."
+          ],
+          "example": {
+            "statement": "Dans une classe de 25 élèves, 5 élèves portent le maillot rouge pendant le tournoi. On désigne un élève au hasard. Calculer la probabilité que cet élève ne porte pas le maillot rouge.",
+            "steps": [
+              "Identifier : $A$ est « l'élève porte le maillot rouge » ; son contraire $\\overline{A}$ est « l'élève ne porte pas le maillot rouge ».",
+              "Calculer la probabilité facile : $P(A) = \\dfrac{5}{25} = \\dfrac{1}{5}$ (désignation au hasard, équiprobabilité).",
+              "Appliquer : $P(\\overline{A}) = 1 - P(A) = 1 - \\dfrac{1}{5} = \\dfrac{4}{5}$.",
+              "Conclure : la probabilité que l'élève ne porte pas le maillot rouge est $\\dfrac{4}{5}$, soit $0{,}8$ ou $80\\ \\%$."
+            ]
+          },
+          "pitfall": "Ne pas se tromper sur le contraire. On lance un dé cubique. Soit $A$ : « obtenir au moins 4 » $= \\{4\\,;\\,5\\,;\\,6\\}$. Son contraire est « obtenir strictement moins de 4 » $= \\{1\\,;\\,2\\,;\\,3\\}$, et non « obtenir au plus 4 », qui contient le $4$. Contrôle : $P(A) = \\dfrac{3}{6}$ et $P(\\overline{A}) = \\dfrac{3}{6}$, leur somme fait $1$. Avec $\\{1\\,;\\,2\\,;\\,3\\,;\\,4\\}$ on trouverait $\\dfrac{3}{6} + \\dfrac{4}{6} = \\dfrac{7}{6}$, qui dépasse $1$ : c'est impossible.",
+          "figure": null,
+          "exercise": {
+            "title": "Utiliser l'événement contraire",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : identifier, calculer la probabilité facile, appliquer la formule du contraire, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un sac contient 10 jetons numérotés de 1 à 10. On en tire un. Soit $A$ : « le numéro est supérieur ou égal à 7 ». Quel est le contraire de $A$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $A = \\{7\\,;\\,8\\,;\\,9\\,;\\,10\\}$. Le contraire regroupe tout le reste : $\\overline{A} = \\{1\\,;\\,\\dots\\,;\\,6\\}$, c'est-à-dire « le numéro est inférieur ou égal à 6 ». « Inférieur ou égal à 7 » contient le 7, qui est dans $A$. « Strictement supérieur à 7 » est une partie de $A$. « Strictement inférieur à 6 » oublie le 6.",
+                "answers": [
+                  {
+                    "content": "Le numéro est inférieur ou égal à 6.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le numéro est inférieur ou égal à 7.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le numéro est strictement supérieur à 7.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le numéro est strictement inférieur à 6.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Au tournoi, la probabilité qu'un élève tiré au sort joue au football est $0{,}35$. Quelle est la probabilité que cet élève ne joue pas au football ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $A$ « l'élève joue au football », $\\overline{A}$ « l'élève ne joue pas au football ». Étape 2 — La probabilité $P(A) = 0{,}35$ est donnée. Étape 3 — Appliquer : $P(\\overline{A}) = 1 - 0{,}35 = 0{,}65$. Étape 4 — Conclure : la probabilité est $0{,}65$. Répondre $0{,}35$ ou $-0{,}35$ serait une erreur de formule.",
+                "answers": [
+                  {
+                    "content": "0,65",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un sac contient 20 maillots identiques, dont 2 sont troués. On tire un maillot au hasard. Quelle est la probabilité que le maillot tiré ne soit pas troué ? Donne le résultat sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $A$ « le maillot est troué », $\\overline{A}$ « le maillot n'est pas troué ». Étape 2 — Calculer la probabilité facile : $P(A) = \\dfrac{2}{20} = 0{,}1$. Étape 3 — Appliquer : $P(\\overline{A}) = 1 - 0{,}1 = 0{,}9$. Étape 4 — Conclure : $0{,}9$, soit $90\\ \\%$.",
+                "answers": [
+                  {
+                    "content": "0,9",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète la formule du contraire : $P(A) + P(\\overline{A}) = $ ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Appliquer : $A$ et $\\overline{A}$ sont incompatibles et leur réunion est tout l'univers $\\Omega$, dont la probabilité est 1. Donc $P(A) + P(\\overline{A}) = 1$, d'où $P(\\overline{A}) = 1 - P(A)$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On lance un dé cubique non truqué. Soit $A$ : « obtenir 6 ». Quelle est la probabilité de $\\overline{A}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $\\overline{A}$ est « ne pas obtenir 6 ». Étape 2 — Calculer : $P(A) = \\dfrac{1}{6}$. Étape 3 — Appliquer : $P(\\overline{A}) = 1 - \\dfrac{1}{6} = \\dfrac{5}{6}$. La réponse $\\dfrac{1}{6}$ est la probabilité de $A$. La réponse $\\dfrac{6}{5}$ est supérieure à 1, donc impossible. La réponse $-\\dfrac{1}{6}$ est négative, donc impossible aussi.",
+                "answers": [
+                  {
+                    "content": "$\\dfrac{5}{6}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{1}{6}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{6}{5}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\dfrac{1}{6}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On lance un dé cubique numéroté de 1 à 6. Soit $A$ : « obtenir au moins 4 ». Le contraire de $A$ est « obtenir au plus 4 ».",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : $A = \\{4\\,;\\,5\\,;\\,6\\}$, donc $\\overline{A} = \\{1\\,;\\,2\\,;\\,3\\}$ : « obtenir strictement moins de 4 », ou « au plus 3 ». « Au plus 4 » contient le 4, qui est dans $A$. C'est le piège de la fiche. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Au tournoi, la probabilité que l'équipe de la classe gagne son premier match est $0{,}2$. On note $A$ : « l'équipe gagne ce match ».",
+            "questions": [
+              {
+                "content": "Complète : $P(\\overline{A}) = 1 - $ ___ $=$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Le contraire de « gagner » est « ne pas gagner » : on retire P(A) à 1.",
+                "explanation": "Étape 3 — Appliquer : $P(\\overline{A}) = 1 - P(A) = 1 - 0{,}2 = 0{,}8$. Le premier trou est $P(A) = 0{,}2$, le second est $0{,}8$.",
+                "answers": [
+                  {
+                    "content": "0,2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0,8",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un dé cubique est lancé. Le contraire de « obtenir au plus 2 » est « obtenir ___ ».",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : « au plus 2 » $= \\{1\\,;\\,2\\}$, donc le contraire est $\\{3\\,;\\,4\\,;\\,5\\,;\\,6\\}$ : « au moins 3 ». « Au moins 2 » contient le 2 ; « au plus 3 » contient le 1 et le 2.",
+                "answers": [
+                  {
+                    "content": "au moins 3",
+                    "correct": true
+                  },
+                  {
+                    "content": "au moins 2",
+                    "correct": false
+                  },
+                  {
+                    "content": "au plus 3",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sac contient 12 papiers identiques dont 3 sont verts. On tire un papier au hasard. Quelle est la probabilité qu'il ne soit pas vert ? Donne le résultat sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer la probabilité facile : $P(\\text{vert}) = \\dfrac{3}{12} = 0{,}25$. Étape 3 — Appliquer : $1 - 0{,}25 = 0{,}75$.",
+                "answers": [
+                  {
+                    "content": "0,75",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Réunion et intersection de deux événements",
+          "remember": "« $A$ et $B$ » ($A \\cap B$) : les éventualités qui sont dans $A$ **et** dans $B$. « $A$ ou $B$ » ($A \\cup B$) : celles qui sont dans $A$, dans $B$, ou dans les deux. Pour deux événements quelconques : $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$$ On retranche $P(A \\cap B)$ parce que les éventualités communes sont comptées deux fois. Si $A$ et $B$ sont **incompatibles** ($A \\cap B = \\emptyset$), alors $P(A \\cap B) = 0$ et $P(A \\cup B) = P(A) + P(B)$. Un tableau à double entrée des effectifs donne directement les nombres de « $A$ et $B$ ».",
+          "method": [
+            "Définir $A$ et $B$ avec des phrases, puis traduire « $A$ et $B$ » et « $A$ ou $B$ ».",
+            "Calculer $P(A)$ et $P(B)$ en cas favorables sur cas possibles.",
+            "Calculer $P(A \\cap B)$ : les cas communs sur les cas possibles (0 si $A$ et $B$ sont incompatibles).",
+            "Appliquer la formule $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.",
+            "Conclure en contrôlant que le résultat est compris entre $0$ et $1$ et qu'il est au moins égal à $P(A)$ et à $P(B)$."
+          ],
+          "example": {
+            "statement": "Dans une classe de 40 élèves, 22 jouent au football et 20 sont des filles. Parmi les filles, 6 jouent au football. On désigne un élève au hasard. Calculer la probabilité qu'il joue au football ou qu'il soit une fille.",
+            "steps": [
+              "Définir : $A$ « l'élève joue au football », $B$ « l'élève est une fille ». « $A$ et $B$ » : une fille qui joue au football. « $A$ ou $B$ » : un élève qui joue au football ou qui est une fille (ou les deux).",
+              "Calculer $P(A)$ et $P(B)$ : $P(A) = \\dfrac{22}{40}$ et $P(B) = \\dfrac{20}{40}$.",
+              "Calculer $P(A \\cap B)$ : 6 filles jouent au football, donc $P(A \\cap B) = \\dfrac{6}{40}$.",
+              "Appliquer : $P(A \\cup B) = \\dfrac{22}{40} + \\dfrac{20}{40} - \\dfrac{6}{40} = \\dfrac{36}{40} = \\dfrac{9}{10}$.",
+              "Conclure : $\\dfrac{9}{10} = 0{,}9$ est compris entre $0$ et $1$ et dépasse $P(A) = 0{,}55$ et $P(B) = 0{,}5$ : le résultat est cohérent. La probabilité est de $90\\ \\%$."
+            ]
+          },
+          "pitfall": "Ne pas additionner simplement $P(A) + P(B)$ quand $A$ et $B$ ont des éventualités communes. Dans l'exemple, $\\dfrac{22}{40} + \\dfrac{20}{40} = \\dfrac{42}{40}$, qui dépasse $1$ : une probabilité ne peut pas être supérieure à $1$. Les 6 filles qui jouent au football ont été comptées deux fois, une fois dans chaque groupe. Il faut retrancher $\\dfrac{6}{40}$ : on trouve $\\dfrac{36}{40}$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer la probabilité de « A ou B »",
+            "statement": "Dans la cour de l'école, on a interrogé 50 élèves pour savoir s'ils jouent au football. Le tableau à double entrée donne les effectifs. Dans les questions, tu utilises la méthode de la fiche : définir, calculer les probabilités de A et de B, calculer la probabilité de A et B, appliquer la formule, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi 50 élèves interrogés, on en désigne un au hasard. Soit $A$ : « l'élève joue au football » et $B$ : « l'élève est une fille ». Que signifie l'événement « $A$ et $B$ » ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir : « $A$ et $B$ » regroupe les éventualités qui sont dans $A$ et aussi dans $B$ : l'élève joue au football et c'est une fille, donc une fille qui joue au football. « Joue ou est une fille » est « $A$ ou $B$ ». « Ne joue pas » et « est un garçon » sont des contraires, pas l'intersection.",
+                "answers": [
+                  {
+                    "content": "L'élève est une fille qui joue au football.",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'élève joue au football ou est une fille.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élève est un garçon qui ne joue pas au football.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élève ne joue pas au football.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un groupe de 50 élèves, 28 jouent au football, 25 sont des filles, et 8 sont des filles qui jouent au football. On désigne un élève au hasard. Quelle est la probabilité de l'événement « l'élève est une fille qui joue au football » ? Donne le résultat sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : $A$ « joue au football », $B$ « est une fille » ; « $A$ et $B$ » est « une fille qui joue au football ». Étape 3 — Calculer $P(A \\cap B)$ : les cas communs sont les 8 filles qui jouent, sur 50 cas possibles. $P(A \\cap B) = \\dfrac{8}{50} = 0{,}16$.",
+                "answers": [
+                  {
+                    "content": "0,16",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un groupe de 50 élèves, 28 jouent au football (événement $A$), 25 sont des filles (événement $B$), et 8 sont des filles qui jouent au football. On désigne un élève au hasard. Calcule la probabilité de « $A$ ou $B$ », sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer : $P(A) = \\dfrac{28}{50} = 0{,}56$ et $P(B) = \\dfrac{25}{50} = 0{,}5$. Étape 3 — Calculer $P(A \\cap B) = \\dfrac{8}{50} = 0{,}16$. Étape 4 — Appliquer : $P(A \\cup B) = 0{,}56 + 0{,}5 - 0{,}16 = 0{,}9$. Étape 5 — Conclure : $0{,}9$ est entre 0 et 1 et dépasse 0,56 et 0,5. Sans retrancher 0,16, on aurait trouvé 1,06, supérieur à 1 : c'est impossible.",
+                "answers": [
+                  {
+                    "content": "0,9",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On tire un papier dans un sac. Soit $A$ : « le papier est rouge » avec $P(A) = 0{,}3$ et $B$ : « le papier est jaune » avec $P(B) = 0{,}45$. Un papier ne peut pas être à la fois rouge et jaune. Calcule $P(A \\cup B)$, sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : « $A$ et $B$ » serait « un papier à la fois rouge et jaune », ce qui est impossible. Étape 3 — Calculer : $A$ et $B$ sont incompatibles, donc $P(A \\cap B) = 0$. Étape 4 — Appliquer : $P(A \\cup B) = 0{,}3 + 0{,}45 - 0 = 0{,}75$. Étape 5 — Conclure : $0{,}75$ est entre 0 et 1 et dépasse 0,3 et 0,45.",
+                "answers": [
+                  {
+                    "content": "0,75",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour deux événements, on connaît $P(A) = 0{,}6$, $P(B) = 0{,}5$ et $P(A \\cup B) = 0{,}8$. Calcule $P(A \\cap B)$, sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Appliquer la formule $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ à l'envers. Étape 3 — On isole $P(A \\cap B) = P(A) + P(B) - P(A \\cup B) = 0{,}6 + 0{,}5 - 0{,}8 = 0{,}3$. Étape 5 — Conclure : $0{,}3$ est entre 0 et 1 et ne dépasse ni $P(A)$ ni $P(B)$, donc il est cohérent.",
+                "answers": [
+                  {
+                    "content": "0,3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Si $P(A) = 0{,}5$ et $P(B) = 0{,}4$, alors on a toujours $P(A \\cup B) = 0{,}9$.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Appliquer : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. L'addition $0{,}5 + 0{,}4 = 0{,}9$ n'est exacte que si $P(A \\cap B) = 0$, c'est-à-dire si $A$ et $B$ sont incompatibles. Si $A$ et $B$ ont des éventualités communes, il faut retrancher $P(A \\cap B)$ (c'est le piège de la fiche). Le mot « toujours » rend l'affirmation fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans un groupe de 20 élèves de la cour, 12 portent un maillot rouge (événement $R$), 9 portent des chaussures de football (événement $C$), et 5 portent les deux. On désigne un élève au hasard.",
+            "questions": [
+              {
+                "content": "Complète : la probabilité de $R$ vaut ___ sur 20, et la probabilité de $C$ vaut ___ sur 20.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Chaque probabilité est un nombre d'élèves sur 20.",
+                "explanation": "Étape 2 — Calculer $P(R)$ et $P(C)$ : 12 élèves portent un maillot rouge, donc $P(R) = \\dfrac{12}{20}$ ; 9 portent des chaussures, donc $P(C) = \\dfrac{9}{20}$.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $P(R \\cup C)$, sous forme décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "N'oublie pas de retrancher les élèves qui portent les deux.",
+                "explanation": "Étape 3 — Calculer $P(R \\cap C) = \\dfrac{5}{20}$. Étape 4 — Appliquer : $P(R \\cup C) = \\dfrac{12}{20} + \\dfrac{9}{20} - \\dfrac{5}{20} = \\dfrac{16}{20} = 0{,}8$.",
+                "answers": [
+                  {
+                    "content": "0,8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'élèves ne portent ni maillot rouge ni chaussures de football ? Réponse : ___ .",
+                "question_type": "select",
+                "explanation": "Étape 4 — Appliquer : 16 élèves portent un maillot rouge ou des chaussures ($12 + 9 - 5 = 16$). Il reste $20 - 16 = 4$ élèves. La proposition 8 vient de $20 - 12$ ; la proposition 11 vient de $20 - 9$, qui ne tient pas compte des maillots rouges.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  },
+                  {
+                    "content": "11",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le tirage au sort des équipes",
+          "statement": "Dix équipes participent au tournoi inter-classes : 5 équipes de Terminale, 3 de Première et 2 de Seconde. Pour désigner l'équipe du match d'ouverture, le professeur tire au hasard un papier dans un sac contenant 10 papiers identiques, un par équipe. Quatre équipes portent un maillot rouge, dont 2 équipes de Terminale. Tu appliques les probabilités, l'événement contraire et la réunion de deux événements.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Univers, issues et événements",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Un sac contient 10 papiers identiques, un par équipe (5 de Terminale, 3 de Première, 2 de Seconde). On tire un papier au hasard. Quel est le nombre de cas possibles ?",
+              "question_type": "single_choice",
+              "explanation": "Probabilité en situation d'équiprobabilité. Étape 1 — Vérifier : papiers identiques, tirage au hasard, équiprobabilité. Étape 2 — Compter les cas possibles : il y a un papier par équipe, soit $5 + 3 + 2 = 10$ cas possibles. Le nombre 3 est le nombre d'équipes de Première, le nombre 5 celui des équipes de Terminale, le nombre 4 celui des maillots rouges : ce ne sont pas des cas possibles, ce sont des parties de l'univers.",
+              "answers": [
                 {
-                  "content": "Maman met dans un bol six papiers portant les prénoms de six cousins, et on tire un papier au hasard. Que représente l'univers $\\Omega$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'univers est le bol entier : tous les résultats possibles, avant le tirage. Le prénom qui sort est une issue, pas l'univers. Et le nombre 6 est le nombre d'éléments de $\\Omega$, pas $\\Omega$ lui-même.",
-                  "answers": [
-                    {
-                      "content": "Le nombre de papiers dans le bol, c'est-à-dire 6.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le prénom qui sort réellement du bol.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ensemble de tous les résultats possibles du tirage : les six prénoms.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'ensemble des prénoms de filles seulement.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "10",
+                  "correct": true
                 },
                 {
-                  "content": "Dans l'expérience du bol de six prénoms, « la personne tirée est une fille » est un événement : c'est une partie de l'univers, un groupe d'issues.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Un événement est un groupe d'issues, donc une partie de $\\Omega$. « Une fille » regroupe Awa, Mariam et Fatou. Ne confonds pas avec une issue, qui est un seul prénom.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "3",
+                  "correct": false
                 },
                 {
-                  "content": "Dans l'expérience du bol de six prénoms, quelles sont les deux phrases exactes sur le vocabulaire ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Certain : $\\Omega$, toutes les issues. Impossible : $\\varnothing$, aucune issue. Un événement élémentaire ne contient qu'une seule issue, et une des erreurs est inversée : c'est un événement qui est un ensemble d'issues.",
-                  "answers": [
-                    {
-                      "content": "Une issue est un ensemble d'événements.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'événement impossible est $\\varnothing$ : il ne se réalise jamais.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'événement certain est $\\Omega$ : il se réalise toujours.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un événement élémentaire contient toujours deux issues.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5",
+                  "correct": false
                 },
                 {
-                  "content": "Dans le bol, il n'y a que les prénoms de six cousins : Awa, Koffi, Yao, Mariam, Kouamé, Fatou. On tire un papier. L'événement « le papier porte le prénom Papa » est :",
-                  "question_type": "single_choice",
-                  "explanation": "Papa n'est pas dans le bol : aucune issue ne réalise cet événement. C'est $\\varnothing$, l'événement impossible. Un événement élémentaire contient au moins une issue, ici il n'y en a aucune.",
-                  "answers": [
-                    {
-                      "content": "égal à l'univers $\\Omega$",
-                      "correct": false
-                    },
-                    {
-                      "content": "certain",
-                      "correct": false
-                    },
-                    {
-                      "content": "impossible",
-                      "correct": true
-                    },
-                    {
-                      "content": "élémentaire",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "En probabilités, « $A$ ou $B$ » se réalise quand $A$ se réalise, ou quand $B$ se réalise, ou quand les deux se réalisent.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. À la cuisine, « fromage ou dessert » exclut souvent d'avoir les deux. En mathématiques, le « ou » est large : la réunion $A \\cup B$ contient aussi les issues qui sont à la fois dans $A$ et dans $B$.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "4",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "Appliquer — Contraire, réunion et intersection",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Un sac contient 10 papiers identiques, un par équipe (5 de Terminale, 3 de Première, 2 de Seconde). On tire un papier au hasard. Quelle est la probabilité, sous forme décimale, que l'équipe tirée soit une équipe de Terminale ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Probabilité en situation d'équiprobabilité. Étape 1 — Vérifier : tirage au hasard de papiers identiques. Étape 2 — Compter les cas possibles : 10. Étape 3 — Compter les cas favorables : 5 équipes de Terminale. Étape 4 — Calculer : $\\dfrac{5}{10} = 0{,}5$.",
+              "answers": [
                 {
-                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Quel est le contraire $\\overline{A}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$\\overline{A}$ regroupe les issues de $\\Omega$ qui ne sont pas dans $A$ : Koffi, Yao, Kouamé. Vérifie : $A$ et $\\overline{A}$ ont 3 + 3 = 6 éléments, tout l'univers. Les autres propositions sont $A$ lui-même, une seule issue, ou $B$.",
-                  "answers": [
-                    {
-                      "content": "$\\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{\\text{Koffi}, \\text{Yao}, \\text{Kouamé}\\}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{\\text{Yao}\\}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Que vaut $A \\cup B$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A \\cup B$ rassemble les prénoms de $A$ ou de $B$, et on écrit chaque prénom une seule fois : Mariam n'apparaît qu'une fois. Yao n'est dans aucune des deux listes, donc $A \\cup B \\neq \\Omega$. $\\{\\text{Mariam}\\}$ est l'intersection.",
-                  "answers": [
-                    {
-                      "content": "$\\{\\text{Mariam}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\Omega$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Quelle est l'intersection $A \\cap B$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A \\cap B$ contient les issues présentes dans les deux listes à la fois : seule Mariam est une fille qui a fini en premier. Ne confonds pas avec la réunion, qui prend les prénoms de l'une ou l'autre liste. L'intersection n'est pas vide.",
-                  "answers": [
-                    {
-                      "content": "$\\{\\text{Awa}, \\text{Koffi}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\varnothing$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{\\text{Yao}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{\\text{Mariam}\\}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$ et on note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$. Quels sont les deux événements incompatibles avec $A$ ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Incompatible avec $A$ veut dire : aucune issue commune avec $A$. Koffi, Yao et Kouamé ne sont pas dans $A$. Mais Fatou et Mariam sont dans $A$ : les deux autres événements ont une issue commune avec $A$.",
-                  "answers": [
-                    {
-                      "content": "$\\{\\text{Yao}, \\text{Kouamé}\\}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\{\\text{Koffi}, \\text{Yao}\\}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\{\\text{Yao}, \\text{Fatou}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{\\text{Koffi}, \\text{Mariam}\\}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On tire un cube de bouillon au hasard parmi huit cubes numérotés de 1 à 8. Soit $A$ l'événement « le numéro est pair ». Quel est son contraire $\\overline{A}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le contraire de « pair » est « pas pair », donc impair : tous les numéros restants. Pair et impair font ensemble les 8 numéros. Pair, c'est $A$ lui-même. Le contraire n'est jamais un autre événement choisi au hasard.",
-                  "answers": [
-                    {
-                      "content": "« Le numéro est pair », c'est-à-dire $\\{2, 4, 6, 8\\}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "« Le numéro est supérieur à 4 », c'est-à-dire $\\{5, 6, 7, 8\\}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "« Le numéro est impair », c'est-à-dire $\\{1, 3, 5, 7\\}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "« Le numéro est 1 », c'est-à-dire $\\{1\\}$.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,5",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Décrire des événements avec des ensembles",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Dix équipes : 5 de Terminale, 4 portent un maillot rouge, et 2 équipes de Terminale portent un maillot rouge. On tire une équipe au hasard. Soit $T$ : « l'équipe est de Terminale » et $R$ : « l'équipe porte un maillot rouge ». Calcule $P(T \\cup R)$, sous forme décimale.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Réunion et intersection. Étape 1 — Définir : « $T$ et $R$ » est une équipe de Terminale en rouge ; « $T$ ou $R$ » est une équipe de Terminale ou en rouge. Étape 2 — Calculer $P(T) = \\dfrac{5}{10} = 0{,}5$ et $P(R) = \\dfrac{4}{10} = 0{,}4$. Étape 3 — Calculer $P(T \\cap R) = \\dfrac{2}{10} = 0{,}2$. Étape 4 — Appliquer : $0{,}5 + 0{,}4 - 0{,}2 = 0{,}7$. Sans retrancher $0{,}2$ on obtiendrait $0{,}9$, ce qui compterait deux fois les 2 équipes de Terminale en rouge. Étape 5 — Conclure : $0{,}7$.",
+              "answers": [
                 {
-                  "content": "On tire au hasard un jeton dans une calebasse qui contient dix jetons numérotés de 1 à 10. Soit $A$ l'événement « le numéro est un multiple de 3 » et $B$ l'événement « le numéro est supérieur ou égal à 7 ». Quelle est l'intersection $A \\cap B$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A = \\{3, 6, 9\\}$ et $B = \\{7, 8, 9, 10\\}$. Le seul numéro dans les deux est 9. Les jetons 3 et 6 sont dans $A$ mais pas dans $B$, car ils sont inférieurs à 7. L'intersection n'est donc pas vide.",
-                  "answers": [
-                    {
-                      "content": "$\\varnothing$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{9\\}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\{3, 6, 7, 8, 9, 10\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\{6, 9\\}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dix équipes dont 2 de Seconde. On tire une équipe au hasard. Quelle est la probabilité, sous forme décimale, que l'équipe tirée ne soit pas une équipe de Seconde ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Événement contraire. Étape 1 — Identifier : $A$ « l'équipe est de Seconde », $\\overline{A}$ « l'équipe n'est pas de Seconde ». Étape 2 — Calculer la probabilité facile : $P(A) = \\dfrac{2}{10} = 0{,}2$. Étape 3 — Appliquer : $P(\\overline{A}) = 1 - 0{,}2 = 0{,}8$. Étape 4 — Conclure : $0{,}8$, soit $80\\ \\%$. On pouvait aussi compter $5 + 3 = 8$ équipes sur 10.",
+              "answers": [
+                {
+                  "content": "0,8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans un groupe de 4 équipes, chaque équipe rencontre une fois chacune des trois autres. Combien de matchs sont joués ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Dénombrement. Étape 1 — Repérer : un match est un groupe de 2 équipes pris sans ordre. Étape 2 — Représenter : « 2 parmi 4 ». Étape 3 — Compter : $\\dfrac{4 \\times 3}{2} = 6$. Étape 4 — Vérifier en listant les matchs : AB, AC, AD, BC, BD, CD. Faire $4 \\times 3 = 12$ compterait chaque match deux fois.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On tire une équipe au hasard parmi 5 équipes de Terminale, 3 de Première et 2 de Seconde. Les événements « l'équipe est de Terminale » et « l'équipe est de Seconde » sont incompatibles.",
+              "question_type": "true_false",
+              "explanation": "Expérience aléatoire et événements. Étape 3 — Traduire : « Terminale » contient 5 papiers et « Seconde » en contient 2, et aucun papier n'est dans les deux. Étape 4 — Nommer : « Terminale et Seconde » est l'événement impossible, donc les deux événements sont incompatibles. L'affirmation est vraie : une équipe ne peut pas être à la fois de Terminale et de Seconde.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
                 },
                 {
-                  "content": "On tire au hasard un jeton dans une calebasse qui contient dix jetons numérotés de 1 à 10. Soit $A$ l'événement « le numéro est un multiple de 3 » et $B$ l'événement « le numéro est supérieur ou égal à 7 ». Combien d'issues contient $A \\cup B$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A = \\{3, 6, 9\\}$ (3 issues) et $B = \\{7, 8, 9, 10\\}$ (4 issues). Additionner 3 + 4 = 7 compte le 9 deux fois. La réunion est $\\{3, 6, 7, 8, 9, 10\\}$ : 6 issues.",
-                  "answers": [
-                    {
-                      "content": "4",
-                      "correct": false
-                    },
-                    {
-                      "content": "3",
-                      "correct": false
-                    },
-                    {
-                      "content": "7",
-                      "correct": false
-                    },
-                    {
-                      "content": "6",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "On tire au hasard un jeton dans une calebasse qui contient dix jetons numérotés de 1 à 10. Soit $A$ l'événement « le numéro est un multiple de 3 » et $B$ l'événement « le numéro est supérieur ou égal à 7 ». Quelles sont les trois affirmations exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "$\\overline{B}$ regroupe les numéros inférieurs à 7 : de 1 à 6. $\\overline{A}$ a 10 − 3 = 7 issues. $A$ et $B$ ont le 9 en commun, donc ne sont pas incompatibles. Et $A \\cup B$ n'a que 6 issues : 3 + 4 compte le 9 deux fois.",
-                  "answers": [
-                    {
-                      "content": "$A \\cup B$ contient 7 issues.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le contraire $\\overline{A}$ contient 7 issues.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$A \\cap B = \\{9\\}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le contraire $\\overline{B}$ est $\\{1, 2, 3, 4, 5, 6\\}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$A$ et $B$ sont incompatibles.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Deux événements incompatibles $A$ et $B$ peuvent avoir une issue en commun.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Incompatibles veut dire $A \\cap B = \\varnothing$ : aucune issue commune, donc ils ne peuvent pas se réaliser en même temps. Si une issue appartient aux deux, ils se réalisent ensemble avec elle.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ (les filles) et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$ (ceux qui ont fini de manger en premier). Quel événement correspond à « une fille qui n'a pas fini de manger en premier » ?",
-                  "question_type": "single_choice",
-                  "explanation": "« Et » se traduit par une intersection. « Une fille » est $A$ et « pas parmi les premiers » est $\\overline{B} = \\{\\text{Awa}, \\text{Yao}, \\text{Fatou}\\}$. Les deux ensemble : Awa et Fatou. $A \\cap B$ désigne au contraire les filles qui ont fini en premier.",
-                  "answers": [
-                    {
-                      "content": "$\\overline{A} \\cap B$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$A \\cap B$, soit $\\{\\text{Mariam}\\}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$A \\cup \\overline{B}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$A \\cap \\overline{B}$, soit $\\{\\text{Awa}, \\text{Fatou}\\}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "L'univers est $\\Omega = \\{\\text{Awa}, \\text{Koffi}, \\text{Yao}, \\text{Mariam}, \\text{Kouamé}, \\text{Fatou}\\}$. On note $A = \\{\\text{Awa}, \\text{Mariam}, \\text{Fatou}\\}$ et $B = \\{\\text{Koffi}, \\text{Mariam}, \\text{Kouamé}\\}$. Combien d'issues contient $\\overline{A \\cup B}$, c'est-à-dire « ni $A$ ni $B$ » ?",
-                  "question_type": "single_choice",
-                  "explanation": "$A \\cup B$ contient 5 prénoms : tous sauf Yao. Son contraire est donc $\\{\\text{Yao}\\}$, soit 1 issue. Yao n'est ni une fille, ni parmi ceux qui ont fini en premier.",
-                  "answers": [
-                    {
-                      "content": "0 issue",
-                      "correct": false
-                    },
-                    {
-                      "content": "3 issues",
-                      "correct": false
-                    },
-                    {
-                      "content": "1 issue : Yao",
-                      "correct": true
-                    },
-                    {
-                      "content": "2 issues",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": false
                 }
               ]
             }
           ]
         },
         {
-          "name": "Probabilité d'un événement et équiprobabilité",
-          "subtitle": "Cas favorables sur cas possibles, ou somme des probabilités des issues",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la probabilité d'un événement quand toutes les issues ont la même chance (équiprobabilité).</li>\n<li>Calculer la probabilité d'un événement quand les issues n'ont pas la même chance.</li>\n<li>Reconnaître une probabilité valable : un nombre entre 0 et 1, avec une somme égale à 1.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. L'assiette de beignets (l'équiprobabilité).</strong> Sur la table du repas de famille, il y a une assiette de 10 beignets de même taille, de même forme, bien mélangés. Trois contiennent du piment, sept sont nature. Papa en prend un, les yeux fermés. Chaque beignet a exactement la même chance d'être choisi. Il y a donc 3 chances sur 10 de tomber sur un beignet au piment.</p>\n<p><em>Le pont.</em> Chaque beignet est une issue, et les 10 issues ont la même chance : on dit qu'elles sont <strong>équiprobables</strong>. L'événement $A$ « le beignet contient du piment » a 3 issues : ce sont les <strong>cas favorables</strong>. Le nombre total de beignets, 10, est le nombre de <strong>cas possibles</strong>. La probabilité de $A$ est $P(A) = \\frac{3}{10}$.</p>\n<p><em>Où l'image s'arrête.</em> Si les beignets au piment sont posés sur le dessus et plus faciles à attraper, les issues n'ont plus la même chance : la formule « cas favorables sur cas possibles » ne marche plus. Et une probabilité de $\\frac{3}{10}$ ne promet pas que tu obtiendras « exactement 3 fois sur 10 » : elle mesure la chance, pas le résultat.</p>\n<p><strong>2. Le panier de fruits (issues qui n'ont pas la même chance).</strong> Dans un panier opaque, il y a 10 fruits : 5 mangues, 3 oranges et 2 ananas. Maman en prend un au hasard. Elle peut obtenir trois sortes de fruits, mais elle a bien plus de chances d'obtenir une mangue qu'un ananas : il y a 5 mangues contre 2 ananas.</p>\n<p><em>Le pont.</em> L'univers $\\Omega = \\{\\text{mangue}, \\text{orange}, \\text{ananas}\\}$ a 3 issues, mais elles ne sont pas équiprobables. On donne à chaque issue sa probabilité, qui est sa part du panier : $P(\\text{mangue}) = \\frac{5}{10} = \\frac{1}{2}$, $P(\\text{orange}) = \\frac{3}{10}$, $P(\\text{ananas}) = \\frac{2}{10} = \\frac{1}{5}$. Le panier entier est partagé entre les trois sortes de fruits : $\\frac{5}{10} + \\frac{3}{10} + \\frac{2}{10} = 1$. La probabilité d'un événement est la somme des probabilités de ses issues : $P(\\text{mangue ou ananas}) = \\frac{1}{2} + \\frac{1}{5} = \\frac{7}{10}$.</p>\n<p><em>Où l'image s'arrête.</em> Il y a 3 sortes de fruits, mais la probabilité d'un ananas n'est pas $\\frac{1}{3}$ : on ne divise par le nombre d'issues que si elles sont équiprobables.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Probabilité d'un événement.</strong> À chaque événement $A$ de l'univers, on associe un nombre $P(A)$ entre $0$ et $1$ qui mesure la chance que $A$ se réalise.</p>\n<ul>\n<li>$0 \\le P(A) \\le 1$, $P(\\varnothing) = 0$ et $P(\\Omega) = 1$.</li>\n<li>La somme des probabilités de toutes les issues vaut $1$.</li>\n<li>$P(A)$ est la somme des probabilités des issues de $A$.</li>\n</ul>\n<p><strong>Équiprobabilité.</strong> Si toutes les issues ont la même chance (on dit que le tirage se fait « au hasard » et que les objets sont indiscernables au toucher), alors $$P(A) = \\frac{\\text{nombre de cas favorables}}{\\text{nombre de cas possibles}} = \\frac{\\text{nombre d'issues de } A}{\\text{nombre d'issues de } \\Omega}.$$</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Un bocal contient 12 cubes de bouillon indiscernables au toucher : 5 de bœuf, 4 de poulet et 3 de poisson. On en tire un au hasard. Calcule la probabilité de tirer un cube de poulet, puis un cube de bœuf ou de poisson.</strong></p>\n<ol>\n<li>Le tirage est au hasard et les cubes sont indiscernables : les 12 cubes sont équiprobables. Cas possibles : 12.</li>\n<li>Poulet : 4 cas favorables. $P(\\text{poulet}) = \\frac{4}{12} = \\frac{1}{3}$ (on réduit la fraction).</li>\n<li>Bœuf ou poisson : $5 + 3 = 8$ cas favorables. $P = \\frac{8}{12} = \\frac{2}{3}$.</li>\n<li>Contrôle : $P(\\text{bœuf}) + P(\\text{poulet}) + P(\\text{poisson}) = \\frac{5}{12} + \\frac{4}{12} + \\frac{3}{12} = \\frac{12}{12} = 1$.</li>\n</ol>\n<p><strong>Dans le panier de fruits, on sait que $P(\\text{mangue}) = 0{,}5$ et $P(\\text{ananas}) = 0{,}2$. Quelle est $P(\\text{orange})$ ?</strong></p>\n<ol>\n<li>La somme des probabilités des trois issues vaut $1$ : $0{,}5 + P(\\text{orange}) + 0{,}2 = 1$.</li>\n<li>Donc $P(\\text{orange}) = 1 - 0{,}7 = 0{,}3$, ce qui correspond bien aux 3 oranges sur 10 fruits.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Diviser par le nombre d'issues sans vérifier qu'elles ont la même chance. Dans le panier de fruits, il y a 3 issues, mais $P(\\text{ananas})$ vaut $\\frac{2}{10} = \\frac{1}{5}$, pas $\\frac{1}{3}$.</p>\n<p>Comment le repérer : avant d'écrire « cas favorables sur cas possibles », demande-toi si chaque issue a bien la même chance. Si les objets sont en nombres différents, compte les objets, pas les sortes. Contrôle toujours ton résultat : une probabilité est entre $0$ et $1$, et la somme des probabilités des issues fait $1$.</p>\n<h2>En une phrase</h2>\n<p>Quand toutes les issues ont la même chance, la probabilité est « cas favorables sur cas possibles » ; sinon, on additionne les probabilités des issues, et le total de toutes les issues fait toujours $1$.</p>",
-          "exercises": [
+          "title": "Les maillots du tournoi",
+          "statement": "Pour le tournoi, une marchande prépare des maillots de 3 tailles (S, M, L) et de 4 couleurs (rouge, bleu, vert, jaune), un maillot de chaque taille et de chaque couleur : 12 maillots différents au total. Un élève prend un maillot au hasard parmi les 12. Tu utilises le dénombrement, l'équiprobabilité, le contraire et la réunion.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Probabilité et équiprobabilité",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Une marchande prépare des maillots de 3 tailles (S, M, L) et de 4 couleurs (rouge, bleu, vert, jaune), un maillot pour chaque taille et chaque couleur. Combien de maillots différents y a-t-il ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Dénombrement. Étape 1 — Repérer : deux choix qui se suivent, la taille puis la couleur. Étape 2 — Représenter : un arbre à 3 branches (tailles), puis 4 branches (couleurs) sous chacune. Étape 3 — Compter : $3 \\times 4 = 12$. Étape 4 — Vérifier : 3 groupes de 4 maillots font 12. Additionner $3 + 4 = 7$ serait faux.",
+              "answers": [
                 {
-                  "content": "Pour calculer une probabilité avec la formule « nombre de cas favorables sur nombre de cas possibles », quelle condition faut-il vérifier ?",
-                  "question_type": "single_choice",
-                  "explanation": "La formule repose sur le fait que chaque issue a la même chance, comme les beignets mélangés dans l'assiette. Le nombre d'issues, la taille de l'événement ou la numérotation ne comptent pas.",
-                  "answers": [
-                    {
-                      "content": "L'événement contient au moins la moitié des issues.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les issues sont toutes numérotées.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Toutes les issues ont la même chance (équiprobabilité).",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'univers contient exactement deux issues.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une probabilité est toujours un nombre compris entre 0 et 1.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. $0$ pour un événement impossible, $1$ pour un événement certain, et entre les deux pour tous les autres. Un résultat comme $\\frac{7}{5}$ ou $-0{,}2$ montre qu'il y a une erreur de calcul.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une assiette contient 10 beignets de même taille, bien mélangés : 3 au piment et 7 nature. Papa en prend un au hasard. Quelle est la probabilité qu'il contienne du piment ?",
-                  "question_type": "single_choice",
-                  "explanation": "Cas favorables : 3 beignets au piment. Cas possibles : 10 beignets en tout, pas 7. $\\frac{3}{7}$ compare les piments aux nature. $\\frac{7}{10}$ est la probabilité de tomber sur un beignet nature.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{7}{10}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{7}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{10}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "La somme des probabilités de toutes les issues d'un univers fini est égale à 1.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Les issues se partagent toute la chance : c'est le panier entier de fruits, divisé en parts de mangues, d'oranges et d'ananas. Si ta somme ne fait pas $1$, une probabilité est fausse ou une issue manque.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles sont les deux valeurs qui peuvent être une probabilité ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Une probabilité est comprise entre $0$ et $1$. $0{,}35$ et $\\frac{3}{4}$ sont bien dans cet intervalle. $1{,}2$ dépasse $1$ et $-0{,}1$ est négatif : ces deux valeurs ne peuvent jamais mesurer une chance.",
-                  "answers": [
-                    {
-                      "content": "$-0{,}1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{4}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1{,}2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}35$",
-                      "correct": true
-                    }
-                  ]
+                  "content": "12",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer une probabilité",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Parmi 12 maillots différents (3 tailles S, M, L et 4 couleurs, un maillot pour chaque taille et chaque couleur), on en prend un au hasard. Quelle est la probabilité de prendre un maillot de taille M ?",
+              "question_type": "single_choice",
+              "explanation": "Probabilité en situation d'équiprobabilité. Étape 1 — Vérifier : maillots pris au hasard, équiprobabilité. Étape 2 — Compter les cas possibles : 12. Étape 3 — Compter les cas favorables : un maillot M pour chacune des 4 couleurs, soit 4. Étape 4 — Calculer : $\\dfrac{4}{12} = \\dfrac{1}{3}$. La réponse $\\dfrac{1}{4}$ compte 3 cas (le nombre de tailles). La réponse $\\dfrac{1}{12}$ ne compte qu'un maillot. La réponse $\\dfrac{4}{3}$ dépasse 1, donc impossible.",
+              "answers": [
                 {
-                  "content": "Un bocal contient 12 cubes de bouillon indiscernables au toucher : 5 de bœuf, 4 de poulet et 3 de poisson. On en tire un au hasard. Quelle est la probabilité de tirer un cube de poulet ?",
-                  "question_type": "single_choice",
-                  "explanation": "4 cubes de poulet sur 12 cubes : $\\frac{4}{12} = \\frac{1}{3}$ après simplification par 4. $\\frac{1}{4}$ vient d'une division par 4 du mauvais nombre, $\\frac{1}{12}$ serait la chance d'un cube précis.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{12}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{3}$",
+                  "correct": true
                 },
                 {
-                  "content": "Un bocal contient 12 cubes de bouillon indiscernables au toucher : 5 de bœuf, 4 de poulet et 3 de poisson. On en tire un au hasard. Quelle est la probabilité de tirer un cube de bœuf ou de poisson ?",
-                  "question_type": "single_choice",
-                  "explanation": "Cas favorables : 5 + 3 = 8 cubes. $\\frac{8}{12} = \\frac{2}{3}$. $\\frac{5}{12}$ oublie le poisson. On peut contrôler : poulet ($\\frac{1}{3}$) et « bœuf ou poisson » ($\\frac{2}{3}$) font ensemble $1$.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{3}{4}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{5}{12}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{3}$",
-                      "correct": true
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{4}$",
+                  "correct": false
                 },
                 {
-                  "content": "Un panier opaque contient 10 fruits : 5 mangues, 3 oranges et 2 ananas. Maman en prend un au hasard. Quelle est la probabilité de prendre un ananas ?",
-                  "question_type": "single_choice",
-                  "explanation": "2 ananas sur 10 fruits : $\\frac{2}{10} = \\frac{1}{5}$. L'erreur $\\frac{1}{3}$ vient du fait qu'il y a 3 sortes de fruits, mais les sortes n'ont pas la même chance : on compte les fruits, pas les sortes.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{2}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{12}$",
+                  "correct": false
                 },
                 {
-                  "content": "Un panier contient des mangues, des oranges et des ananas. On prend un fruit au hasard, avec $P(\\text{mangue}) = 0{,}5$ et $P(\\text{ananas}) = 0{,}2$. Quelle est $P(\\text{orange})$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "La somme des trois probabilités vaut $1$ : $P(\\text{orange}) = 1 - 0{,}5 - 0{,}2 = 0{,}3$. $0{,}7$ est la probabilité d'avoir « mangue ou ananas » (0,5 + 0,2), pas celle de l'orange.",
-                  "answers": [
-                    {
-                      "content": "$0{,}25$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}7$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}5$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un panier opaque contient 10 fruits : 5 mangues, 3 oranges et 2 ananas. On prend un fruit au hasard. Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Mangue ou orange : $\\frac{5 + 3}{10} = \\frac{8}{10} = \\frac{4}{5}$. Ananas : $\\frac{2}{10} = \\frac{1}{5}$. L'orange vaut $\\frac{3}{10}$, pas $\\frac{1}{3}$. Et la somme des trois probabilités vaut $1$, pas $10$ : $10$ est le nombre de fruits.",
-                  "answers": [
-                    {
-                      "content": "La probabilité de prendre une orange est $\\frac{1}{3}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La somme $P(\\text{mangue}) + P(\\text{orange}) + P(\\text{ananas})$ vaut $10$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La probabilité de prendre un ananas est $\\frac{1}{5}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité de prendre une mangue ou une orange est $\\frac{4}{5}$.",
-                      "correct": true
-                    }
-                  ]
+                  "content": "$\\dfrac{4}{3}$",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Probabilités avec ou sans équiprobabilité",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Parmi 12 maillots différents (3 tailles S, M, L et 4 couleurs dont le rouge, un maillot pour chaque taille et chaque couleur), on en prend un au hasard. Soit $R$ : « le maillot est rouge » et $L$ : « le maillot est de taille L ». Calcule $P(R \\cup L)$, sous forme décimale.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Réunion et intersection. Étape 1 — Définir : « $R$ et $L$ » est le maillot rouge de taille L ; « $R$ ou $L$ » est un maillot rouge ou de taille L. Étape 2 — Calculer $P(R) = \\dfrac{3}{12}$ (un rouge par taille) et $P(L) = \\dfrac{4}{12}$ (un L par couleur). Étape 3 — Calculer $P(R \\cap L) = \\dfrac{1}{12}$. Étape 4 — Appliquer : $\\dfrac{3}{12} + \\dfrac{4}{12} - \\dfrac{1}{12} = \\dfrac{6}{12} = 0{,}5$. Étape 5 — Conclure : $0{,}5$. Sans retrancher le maillot rouge L, on obtiendrait $\\dfrac{7}{12}$.",
+              "answers": [
                 {
-                  "content": "Un tiroir contient 20 sachets d'épices indiscernables au toucher : 8 de gingembre, 7 de curcuma et le reste de poivre. On en prend un au hasard. Quelle est la probabilité de prendre un sachet de poivre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Poivre : $20 - 8 - 7 = 5$ sachets. $P = \\frac{5}{20} = \\frac{1}{4}$. Il faut d'abord calculer le nombre de sachets de poivre avant de diviser par le total.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{5}{8}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Parmi 12 maillots différents (3 tailles et 4 couleurs, dont le rouge, un maillot pour chaque taille et chaque couleur), on en prend un au hasard. Quelle est la probabilité que le maillot ne soit pas rouge ? Donne le résultat sous forme décimale.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Événement contraire. Étape 1 — Identifier : $A$ « le maillot est rouge », $\\overline{A}$ « le maillot n'est pas rouge ». Étape 2 — Calculer la probabilité facile : $P(A) = \\dfrac{3}{12} = 0{,}25$. Étape 3 — Appliquer : $P(\\overline{A}) = 1 - 0{,}25 = 0{,}75$. Étape 4 — Conclure : $0{,}75$. Contrôle : $9$ maillots non rouges sur $12$ donnent bien $0{,}75$.",
+              "answers": [
+                {
+                  "content": "0,75",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour la finale, on choisit 2 délégués au hasard parmi 6 capitaines, dont Awa et Bakary, sans tenir compte de l'ordre. Quelle est la probabilité qu'Awa et Bakary soient les deux délégués choisis ?",
+              "question_type": "single_choice",
+              "explanation": "Dénombrement puis probabilité. Étape 1 — Repérer : un groupe de 2 capitaines pris sans ordre. Étape 2 — Représenter : « 2 parmi 6 ». Étape 3 — Compter les cas possibles : $\\dfrac{6 \\times 5}{2} = 15$. Un seul groupe est favorable : {Awa, Bakary}. Probabilité : $\\dfrac{1}{15}$. La réponse $\\dfrac{1}{30}$ divise une deuxième fois par 2. La réponse $\\dfrac{2}{15}$ compte deux groupes, Awa-Bakary et Bakary-Awa, qui sont le même. La réponse $\\dfrac{1}{6}$ ignore le second choix.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{1}{15}$",
+                  "correct": true
                 },
                 {
-                  "content": "Un tiroir contient 20 sachets d'épices indiscernables au toucher : 8 de gingembre, 7 de curcuma et 5 de poivre. On en prend un au hasard. Quelle est la probabilité de prendre un sachet de gingembre ou de poivre ?",
-                  "question_type": "single_choice",
-                  "explanation": "Gingembre ou poivre : $8 + 5 = 13$ sachets sur 20, soit $\\frac{13}{20}$ (fraction déjà réduite). $\\frac{13}{15}$ divise par un mauvais total. $\\frac{7}{20}$ est la probabilité du curcuma, l'événement contraire.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{13}{20}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{7}{20}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{13}{15}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{30}$",
+                  "correct": false
                 },
                 {
-                  "content": "Une famille choisit une sauce parmi trois : tomate, arachide, graine. Les probabilités vérifient $P(\\text{arachide}) = 2 \\times P(\\text{tomate})$ et $P(\\text{graine}) = 3 \\times P(\\text{tomate})$. Que vaut $P(\\text{graine})$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec $x = P(\\text{tomate})$ : $x + 2x + 3x = 6x = 1$, donc $x = \\frac{1}{6}$. Alors $P(\\text{graine}) = 3 \\times \\frac{1}{6} = \\frac{1}{2}$. $\\frac{1}{6}$ est la probabilité de la tomate.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{6}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{2}{15}$",
+                  "correct": false
                 },
                 {
-                  "content": "Un tiroir contient 20 sachets d'épices indiscernables au toucher : 8 de gingembre, 7 de curcuma et 5 de poivre. On en prend un au hasard. Quelles sont les trois affirmations exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Gingembre : $\\frac{8}{20} = \\frac{2}{5}$. Curcuma : $\\frac{7}{20}$. La somme est $\\frac{8 + 7 + 5}{20} = 1$. Le poivre vaut $\\frac{5}{20} = \\frac{1}{4}$, pas $\\frac{1}{5}$. Et $\\frac{1}{3}$ vient du nombre de sortes d'épices, pas des sachets.",
-                  "answers": [
-                    {
-                      "content": "$P(\\text{gingembre}) = \\frac{2}{5}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P(\\text{poivre}) = \\frac{1}{5}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P(\\text{gingembre}) + P(\\text{curcuma}) + P(\\text{poivre}) = 1$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "$P(\\text{curcuma}) = \\frac{1}{3}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P(\\text{curcuma}) = \\frac{7}{20}$.",
-                      "correct": true
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{6}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque situation à la formule qui permet de la traiter.",
+              "question_type": "matching",
+              "explanation": "Chaque règle vient de la fiche correspondante. Équiprobabilité : on divise les cas favorables par les cas possibles. Contraire : $P(\\overline{A}) = 1 - P(A)$ (étape 3 de la fiche sur le contraire). Réunion : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ (étape 4 de la fiche). Événements incompatibles : $A \\cap B = \\emptyset$, donc $P(A \\cap B) = 0$ et l'on additionne seulement $P(A)$ et $P(B)$.",
+              "answers": [
+                {
+                  "content": "Cas qui ont tous la même chance",
+                  "match": "Cas favorables sur cas possibles"
                 },
                 {
-                  "content": "Un panier contient 10 fruits : 5 mangues, 3 oranges et 2 ananas. Comme il y a 3 sortes de fruits, la probabilité de prendre un ananas au hasard est $\\frac{1}{3}$.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Les trois sortes n'ont pas la même chance : il y a 2 ananas sur 10 fruits, donc $P(\\text{ananas}) = \\frac{2}{10} = \\frac{1}{5}$. On ne divise par le nombre de sortes que si toutes les issues sont équiprobables.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Calculer la probabilité de « ne pas… »",
+                  "match": "$1 - P(A)$"
                 },
                 {
-                  "content": "Une calebasse contient 8 jetons indiscernables au toucher, numérotés de 1 à 8. On en tire un au hasard. Quelle est la probabilité que le numéro soit un multiple de 3 ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les multiples de 3 entre 1 et 8 sont 3 et 6 : 2 cas favorables sur 8. $\\frac{2}{8} = \\frac{1}{4}$. $\\frac{3}{8}$ compterait un cas favorable de trop : le jeton 9 n'existe pas, la numérotation s'arrête à 8.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{8}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{8}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Calculer la probabilité de « A ou B »",
+                  "match": "$P(A) + P(B) - P(A \\cap B)$"
+                },
+                {
+                  "content": "Événements incompatibles",
+                  "match": "$P(A \\cap B) = 0$"
                 }
               ]
             }
           ]
         },
         {
-          "name": "Événement contraire, réunion et intersection",
-          "subtitle": "Calculer P(contraire) et P(A ou B) sans compter deux fois",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Calculer la probabilité de l'événement contraire.</li>\n<li>Calculer la probabilité d'une réunion, avec ou sans issues communes.</li>\n<li>Passer des effectifs d'un repas aux probabilités d'une réunion, d'une intersection ou de « ni l'un ni l'autre ».</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le gâteau entier (l'événement contraire).</strong> À la fin du repas de famille, maman apporte un gâteau entier. Elle en découpe une part, et il reste le reste du gâteau. La part et le reste, mis ensemble, redonnent exactement le gâteau entier. Si la part représente $\\frac{2}{5}$ du gâteau, le reste représente $1 - \\frac{2}{5} = \\frac{3}{5}$.</p>\n<p><em>Le pont.</em> Le gâteau entier, c'est la probabilité totale $1$. La part, c'est $P(A)$. Le reste, c'est $P(\\overline{A})$, la probabilité que $A$ ne se réalise pas. Donc $P(A) + P(\\overline{A}) = 1$, soit $P(\\overline{A}) = 1 - P(A)$.</p>\n<p><em>Où l'image s'arrête.</em> Une part de gâteau peut être de n'importe quelle taille, mais deux parts qui se recouvrent ne se partagent pas : $A$ et $\\overline{A}$ ne se recouvrent jamais.</p>\n<p><strong>2. Le comptage des invités (la réunion).</strong> Ce dimanche, 20 invités sont à table. Douze prennent du poulet, neuf prennent du poisson. Le secrétaire de la famille additionne : $12 + 9 = 21$. Mais il n'y a que 20 invités ! Quatre invités ont pris les deux plats : il les a comptés deux fois, une fois dans la liste du poulet et une fois dans celle du poisson. Pour savoir combien d'invités ont pris au moins un des deux plats, il enlève une fois ces 4 personnes : $12 + 9 - 4 = 17$.</p>\n<p><em>Le pont.</em> Les invités qui prennent du poulet forment l'événement $A$, ceux qui prennent du poisson l'événement $B$, ceux qui prennent les deux l'événement $A \\cap B$. Compter « poulet ou poisson », c'est $P(A \\cup B)$, et on a : $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B).$$ Avec les nombres : $\\frac{12}{20} + \\frac{9}{20} - \\frac{4}{20} = \\frac{17}{20}$.</p>\n<p><em>Où l'image s'arrête.</em> Si personne ne prenait les deux plats, il n'y aurait rien à soustraire : $P(A \\cap B) = 0$ et on additionne simplement. C'est le cas de deux événements incompatibles.</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Événement contraire.</strong> Pour tout événement $A$ : $$P(\\overline{A}) = 1 - P(A).$$</p>\n<p><strong>Réunion.</strong> Pour deux événements $A$ et $B$ : $$P(A \\cup B) = P(A) + P(B) - P(A \\cap B).$$</p>\n<p><strong>Événements incompatibles.</strong> Si $A \\cap B = \\varnothing$, alors $P(A \\cup B) = P(A) + P(B)$.</p>\n<ul>\n<li>« Ni $A$ ni $B$ » est le contraire de $A \\cup B$ : sa probabilité est $1 - P(A \\cup B)$.</li>\n<li>Comme $A$ est contenu dans $A \\cup B$, on a toujours $P(A \\cup B) \\ge P(A)$, et $P(A \\cup B) \\le 1$.</li>\n</ul>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), 4 prennent les deux. On choisit un invité au hasard. Calcule $P(A)$, $P(\\overline{A})$, $P(A \\cup B)$ et la probabilité qu'il ne prenne ni poulet ni poisson.</strong></p>\n<ol>\n<li>Les 20 invités sont équiprobables. $P(A) = \\frac{12}{20} = \\frac{3}{5}$, $P(B) = \\frac{9}{20}$, $P(A \\cap B) = \\frac{4}{20} = \\frac{1}{5}$.</li>\n<li>Contraire : $P(\\overline{A}) = 1 - \\frac{3}{5} = \\frac{2}{5}$. Contrôle : $20 - 12 = 8$ invités, et $\\frac{8}{20} = \\frac{2}{5}$.</li>\n<li>Réunion : $P(A \\cup B) = \\frac{12}{20} + \\frac{9}{20} - \\frac{4}{20} = \\frac{17}{20}$.</li>\n<li>Ni poulet ni poisson : $1 - \\frac{17}{20} = \\frac{3}{20}$. Contrôle : $20 - 17 = 3$ invités.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Écrire $P(A \\cup B) = P(A) + P(B)$ pour tous les événements. Ici, cela donnerait $\\frac{12}{20} + \\frac{9}{20} = \\frac{21}{20}$, qui dépasse $1$ : c'est impossible pour une probabilité.</p>\n<p>Comment le repérer : si le résultat dépasse $1$, ou si tu additionnes deux événements qui ont des issues communes sans avoir soustrait leur intersection, tu comptes des issues deux fois. Autre erreur : écrire $P(\\overline{A}) = P(A) - 1$, qui est négatif.</p>\n<h2>En une phrase</h2>\n<p>Le contraire, c'est le reste du gâteau : $P(\\overline{A}) = 1 - P(A)$ ; et pour « $A$ ou $B$ », on additionne puis on enlève une fois ce qui a été compté deux fois : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.</p>",
-          "exercises": [
+          "title": "Le sport préféré de la classe",
+          "statement": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Tu lis le tableau à double entrée et tu calcules des probabilités.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement_blocks": [
             {
-              "title": "Comprendre — Contraire et réunion",
-              "exercise_type": "fixation",
-              "questions": [
+              "type": "paragraph",
+              "text": "Chaque élève a indiqué un seul sport préféré. On désigne un élève au hasard."
+            },
+            {
+              "type": "table",
+              "caption": "Sport préféré des 40 élèves de la classe, selon le sexe",
+              "headers": [
+                "Élèves",
+                "Football",
+                "Basket",
+                "Athlétisme",
+                "Total"
+              ],
+              "rows": [
+                [
+                  "Filles",
+                  "6",
+                  "8",
+                  "6",
+                  "20"
+                ],
+                [
+                  "Garçons",
+                  "14",
+                  "3",
+                  "3",
+                  "20"
+                ],
+                [
+                  "Total",
+                  "20",
+                  "11",
+                  "9",
+                  "40"
+                ]
+              ]
+            }
+          ],
+          "questions": [
+            {
+              "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Quelle est la probabilité, sous forme décimale, que le capitaine préfère le football ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Probabilité en situation d'équiprobabilité. Étape 1 — Vérifier : désignation au hasard, équiprobabilité. Étape 2 — Compter les cas possibles : 40 élèves. Étape 3 — Compter les cas favorables : $6 + 14 = 20$ élèves préfèrent le football (colonne Total du tableau). Étape 4 — Calculer : $\\dfrac{20}{40} = 0{,}5$.",
+              "answers": [
                 {
-                  "content": "Pour un événement $A$, on sait que $P(A) = 0{,}3$. Que vaut la probabilité de l'événement contraire $\\overline{A}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans l'image du gâteau entier, la part $A$ fait $0{,}3$ et le reste fait $1 - 0{,}3 = 0{,}7$. $-0{,}7$ vient de $P(A) - 1$, et $1{,}3$ de $1 + P(A)$ : dans les deux cas, ce n'est pas une probabilité.",
-                  "answers": [
-                    {
-                      "content": "$0{,}7$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$-0{,}7$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}3$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour deux événements $A$ et $B$ quelconques, on a toujours $P(A \\cup B) = P(A) + P(B)$.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Cette égalité n'est vraie que si $A$ et $B$ sont incompatibles. Sinon, les issues communes sont comptées deux fois, comme les invités qui prennent poulet et poisson : il faut soustraire $P(A \\cap B)$.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "À quelle condition a-t-on $P(A \\cup B) = P(A) + P(B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il n'y a rien à soustraire s'il n'y a aucune issue commune : $P(A \\cap B) = 0$. Deux événements de même probabilité peuvent très bien avoir des issues communes. Et $A \\cup B = \\Omega$ ne dit rien de leur intersection.",
-                  "answers": [
-                    {
-                      "content": "Quand $A$ et $B$ sont incompatibles ($A \\cap B = \\varnothing$).",
-                      "correct": true
-                    },
-                    {
-                      "content": "Toujours, quels que soient $A$ et $B$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Quand $A \\cup B$ est l'univers $\\Omega$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Quand $A$ et $B$ ont la même probabilité.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'image du gâteau entier, la part $A$ et le reste $\\overline{A}$ forment ensemble tout le gâteau. Que vaut $P(A) + P(\\overline{A})$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un événement et son contraire n'ont aucune issue commune et couvrent tout l'univers : leurs probabilités se complètent pour faire $1$, la probabilité de $\\Omega$. D'où $P(\\overline{A}) = 1 - P(A)$.",
-                  "answers": [
-                    {
-                      "content": "$1$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$P(A)$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les invités qui prennent poulet et poisson figurent dans les deux listes : ils sont comptés deux fois. Par ailleurs $A \\subset A \\cup B$, donc $P(A \\cup B) \\ge P(A)$, pas l'inverse. Et $P(A) + P(B)$ calcule la réunion, pas l'intersection.",
-                  "answers": [
-                    {
-                      "content": "Pour tous événements $A$ et $B$, $P(A \\cup B) \\le P(A)$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "En calculant $P(A) + P(B)$, les issues de $A \\cap B$ sont comptées deux fois.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Pour tous événements $A$ et $B$, $P(A \\cap B) = P(A) + P(B)$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Pour tout événement $A$, $P(\\overline{A}) = 1 - P(A)$.",
-                      "correct": true
-                    }
-                  ]
+                  "content": "0,5",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer avec le contraire et la réunion",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Quelle est la probabilité, sous forme décimale, que le capitaine soit une fille qui préfère le basket ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Réunion et intersection. Étape 1 — Définir : $F$ « fille », $B$ « préfère le basket » ; « $F$ et $B$ » est une fille qui préfère le basket. Étape 3 — Calculer $P(F \\cap B)$ : on lit la case Filles-Basket, 8 élèves. $P(F \\cap B) = \\dfrac{8}{40} = 0{,}2$.",
+              "answers": [
                 {
-                  "content": "Pour un événement $A$, $P(A) = \\frac{2}{5}$. Quelle est la probabilité de $\\overline{A}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(\\overline{A}) = 1 - \\frac{2}{5} = \\frac{5}{5} - \\frac{2}{5} = \\frac{3}{5}$. $\\frac{5}{2}$ est supérieur à $1$ : ce ne peut pas être une probabilité. Le signe moins vient d'une soustraction faite dans le mauvais sens.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{5}{2}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$-\\frac{3}{5}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Deux événements incompatibles $A$ et $B$ vérifient $P(A) = 0{,}5$ et $P(B) = 0{,}3$. Que vaut $P(A \\cup B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les événements sont incompatibles : on additionne, $0{,}5 + 0{,}3 = 0{,}8$, sans rien soustraire. $0{,}2$ est la différence, $0{,}15$ est le produit, et $1{,}3$ aurait ajouté $1$ par erreur.",
-                  "answers": [
-                    {
-                      "content": "$0{,}2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}15$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}8$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "On sait que $P(A) = 0{,}6$, $P(B) = 0{,}5$ et $P(A \\cap B) = 0{,}2$. Que vaut $P(A \\cup B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(A \\cup B) = 0{,}6 + 0{,}5 - 0{,}2 = 0{,}9$. $1{,}1$ oublie de soustraire l'intersection et dépasse $1$. $1{,}3$ l'ajoute au lieu de la soustraire. Une probabilité ne dépasse jamais $1$.",
-                  "answers": [
-                    {
-                      "content": "$1{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1{,}1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}9$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "On sait que $P(A) = 0{,}4$, $P(B) = 0{,}5$ et $P(A \\cup B) = 0{,}7$. Que vaut $P(A \\cap B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On part de $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$, donc $P(A \\cap B) = 0{,}4 + 0{,}5 - 0{,}7 = 0{,}2$. $0{,}9$ est la somme $P(A) + P(B)$, qui compte l'intersection deux fois.",
-                  "answers": [
-                    {
-                      "content": "$0{,}9$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}2$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "20 invités sont à table et 12 prennent du poulet. On choisit un invité au hasard. Quelle est la probabilité qu'il ne prenne pas de poulet ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(\\text{poulet}) = \\frac{12}{20} = \\frac{3}{5}$, donc la probabilité du contraire est $1 - \\frac{3}{5} = \\frac{2}{5}$, soit 8 invités sur 20. $\\frac{3}{5}$ est la probabilité de prendre du poulet. $\\frac{12}{8}$ dépasse $1$.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{12}{8}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,2",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Le repas de famille en probabilités",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Soit $F$ « le capitaine est une fille » et $B$ « le capitaine préfère le basket ». Calcule $P(F \\cup B)$, sous forme décimale.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Réunion et intersection. Étape 1 — Définir : « $F$ ou $B$ » est une fille, ou un élève qui préfère le basket (ou les deux). Étape 2 — Calculer $P(F) = \\dfrac{20}{40} = 0{,}5$ et $P(B) = \\dfrac{11}{40} = 0{,}275$. Étape 3 — Calculer $P(F \\cap B) = \\dfrac{8}{40} = 0{,}2$ (case Filles-Basket). Étape 4 — Appliquer : $0{,}5 + 0{,}275 - 0{,}2 = 0{,}575$. Étape 5 — Conclure : $0{,}575$, entre 0 et 1 et au-dessus de 0,5 et 0,275. Additionner seulement $0{,}5 + 0{,}275$ donnerait $0{,}775$ : les 8 filles qui préfèrent le basket seraient comptées deux fois.",
+              "answers": [
                 {
-                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelle est la probabilité qu'il prenne du poulet ou du poisson ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(A \\cup B) = \\frac{12}{20} + \\frac{9}{20} - \\frac{4}{20} = \\frac{17}{20}$. $\\frac{21}{20}$ oublie de soustraire les 4 invités comptés deux fois et dépasse $1$. $\\frac{3}{20}$ est la probabilité de ne prendre aucun des deux plats.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{17}{20}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{21}{20}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{20}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelle est la probabilité qu'il ne prenne ni poulet ni poisson ?",
-                  "question_type": "single_choice",
-                  "explanation": "« Ni poulet ni poisson » est le contraire de « poulet ou poisson ». Donc $1 - \\frac{17}{20} = \\frac{3}{20}$. $\\frac{8}{20}$ est la probabilité de ne pas prendre de poulet : cet événement est plus grand, car il contient ceux qui prennent du poisson.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{20}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{17}{20}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{8}{20}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelle est la probabilité qu'il prenne du poulet mais pas de poisson ?",
-                  "question_type": "single_choice",
-                  "explanation": "Parmi les 12 invités qui prennent du poulet, 4 prennent aussi du poisson. Ceux qui prennent du poulet seulement : $12 - 4 = 8$, donc $\\frac{8}{20} = \\frac{2}{5}$. $\\frac{3}{5}$ est la probabilité de prendre du poulet, y compris avec du poisson.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{9}{20}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "20 invités sont à table. 12 prennent du poulet ($A$), 9 prennent du poisson ($B$), et 4 prennent les deux plats. On choisit un invité au hasard. Quelles sont les trois affirmations exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Les deux plats : $\\frac{4}{20} = \\frac{1}{5}$. Poisson : $\\frac{9}{20}$, donc pas de poisson : $1 - \\frac{9}{20} = \\frac{11}{20}$. En revanche $\\frac{21}{20}$ dépasse $1$, et ne pas prendre de poulet donne $\\frac{8}{20} = \\frac{2}{5}$, pas $\\frac{3}{5}$.",
-                  "answers": [
-                    {
-                      "content": "La probabilité de ne pas prendre de poisson est $\\frac{11}{20}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité de prendre les deux plats est $\\frac{1}{5}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité de prendre du poisson est $\\frac{9}{20}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité de prendre du poulet ou du poisson est $\\frac{21}{20}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La probabilité de ne pas prendre de poulet est $\\frac{3}{5}$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans une famille, on choisit une personne au hasard. L'événement $A$ « aime le piment » a pour probabilité $0{,}7$, l'événement $B$ « aime l'alloco » a pour probabilité $0{,}6$, et tout le monde aime au moins l'un des deux, donc $P(A \\cup B) = 1$. Quelle est $P(A \\cap B)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$P(A \\cap B) = P(A) + P(B) - P(A \\cup B) = 0{,}7 + 0{,}6 - 1 = 0{,}3$. $1{,}3$ est la somme $P(A) + P(B)$, qui dépasse $1$ à cause des personnes comptées deux fois. $0{,}42$ est le produit $0{,}7 \\times 0{,}6$, qui ne donne pas l'intersection ici.",
-                  "answers": [
-                    {
-                      "content": "$0{,}3$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1{,}3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}42$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}1$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Deux événements $A$ et $B$ ont pour probabilités $P(A) = 0{,}7$ et $P(B) = 0{,}6$. Alors $A$ et $B$ ne peuvent pas être incompatibles.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Si $A$ et $B$ étaient incompatibles, on aurait $P(A \\cup B) = 0{,}7 + 0{,}6 = 1{,}3$, ce qui dépasse $1$ : impossible. Ils ont donc des issues communes, comme les invités qui prennent deux plats.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0,575",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Quelle est la probabilité, sous forme décimale, que le capitaine ne préfère pas l'athlétisme ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Événement contraire. Étape 1 — Identifier : $A$ « préfère l'athlétisme », $\\overline{A}$ « ne préfère pas l'athlétisme ». Étape 2 — Calculer la probabilité facile : $P(A) = \\dfrac{6 + 3}{40} = \\dfrac{9}{40} = 0{,}225$. Étape 3 — Appliquer : $P(\\overline{A}) = 1 - 0{,}225 = 0{,}775$. Étape 4 — Conclure : $0{,}775$. On pouvait aussi compter $20 + 11 = 31$ élèves, d'où $\\dfrac{31}{40} = 0{,}775$.",
+              "answers": [
+                {
+                  "content": "0,775",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Les événements « préfère le football » et « préfère le basket » sont incompatibles.",
+              "question_type": "true_false",
+              "explanation": "Expérience aléatoire et événements. Étape 3 — Traduire : chaque élève a indiqué un seul sport préféré, donc aucun élève n'est à la fois dans « football » et dans « basket ». Étape 4 — Nommer : « football et basket » est l'événement impossible, les deux événements sont incompatibles. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Soit $G$ « le capitaine est un garçon » et $F$ « le capitaine préfère le football ». Quelle est la probabilité de « $G$ ou $F$ » ?",
+              "question_type": "single_choice",
+              "explanation": "Réunion et intersection. Étape 2 — Calculer $P(G) = \\dfrac{20}{40}$ et $P(F) = \\dfrac{20}{40}$. Étape 3 — Calculer $P(G \\cap F) = \\dfrac{14}{40}$ (case Garçons-Football). Étape 4 — Appliquer : $\\dfrac{20}{40} + \\dfrac{20}{40} - \\dfrac{14}{40} = \\dfrac{26}{40} = \\dfrac{13}{20}$. La réponse $1$ additionne sans retrancher l'intersection. La réponse $\\dfrac{14}{40}$ est seulement $P(G \\cap F)$. La réponse $\\dfrac{1}{2}$ n'est que $P(G)$ ou $P(F)$.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{13}{20}$",
+                  "correct": true
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{14}{40}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{1}{2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Un élève affirme : « La probabilité que le capitaine préfère le football ou l'athlétisme est la somme des deux probabilités. » Dis si c'est correct, justifie, puis calcule cette probabilité.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Dit que c'est correct car les deux événements sont incompatibles",
+                "Écrit P(A et B) = 0 ou cite la formule avec l'intersection nulle",
+                "Calcule 20/40 et 9/40",
+                "Trouve 29/40 ou 0,725"
+              ],
+              "starter": "C'est correct, car chaque élève…",
+              "explanation": "Corrigé modèle : c'est correct, car chaque élève n'a indiqué qu'un seul sport préféré, donc « football » et « athlétisme » sont incompatibles : $P(\\text{football} \\cap \\text{athlétisme}) = 0$. On applique donc $P(A \\cup B) = P(A) + P(B) - 0$. Étape 2 : $P(\\text{football}) = \\dfrac{20}{40}$ et $P(\\text{athlétisme}) = \\dfrac{9}{40}$. Étape 4 : $P = \\dfrac{20}{40} + \\dfrac{9}{40} = \\dfrac{29}{40} = 0{,}725$. Répartition : 1 point pour la justification par l'incompatibilité, 1 point pour les deux probabilités, 1 point pour le résultat.",
+              "answers": []
             }
           ]
         },
         {
-          "name": "Dénombrer pour calculer une probabilité",
-          "subtitle": "À compléter : probabilité conditionnelle, événements indépendants, combinaisons (programme A2 à confirmer)",
-          "content": "<h2>Ce que tu vas savoir faire</h2>\n<ul>\n<li>Compter le nombre de résultats possibles avec le principe multiplicatif et un arbre.</li>\n<li>Compter des tirages successifs avec remise et sans remise, l'ordre étant pris en compte.</li>\n<li>Calculer une probabilité en comptant les cas favorables et les cas possibles.</li>\n</ul>\n<h2>L'image pour comprendre</h2>\n<p><strong>1. Le menu du dimanche (le principe multiplicatif).</strong> Pour le repas de famille, maman compose un menu avec un plat et une boisson. Elle a 3 plats : attiéké-poisson, foutou-sauce, riz-sauce. Elle a 2 boissons : bissap et jus de gingembre. Elle dessine un arbre au dos d'un sachet : de chaque plat partent 2 branches, une par boisson. Elle compte les bouts de branches : $3 \\times 2 = 6$ menus. Si elle ajoute 2 desserts possibles, chacun des 6 menus se prolonge de 2 branches : $6 \\times 2 = 12$ menus.</p>\n<p><em>Le pont.</em> Un menu est une issue. Choisir le plat, c'est une étape avec 3 choix. Choisir la boisson, c'est une étape avec 2 choix, quel que soit le plat. Le nombre de résultats se calcule en <strong>multipliant</strong> le nombre de choix de chaque étape : c'est le <strong>principe multiplicatif</strong>.</p>\n<p><em>Où l'image s'arrête.</em> On multiplie seulement parce qu'il faut faire <strong>les deux</strong> choix (un plat <strong>et</strong> une boisson). Si l'on choisissait seulement soit un plat, soit une boisson, on additionnerait : $3 + 2 = 5$ possibilités.</p>\n<p><strong>2. Le tirage au sort des corvées (avec ou sans remise).</strong> Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : la sauce, puis la vaisselle. Maman tire un papier du bol pour la sauce, puis un second pour la vaisselle. Si elle <strong>remet</strong> le premier papier dans le bol, la même personne peut avoir les deux corvées : il y a $5 \\times 5 = 25$ résultats. Si elle <strong>ne le remet pas</strong>, le second tirage se fait parmi 4 papiers seulement : il y a $5 \\times 4 = 20$ résultats.</p>\n<p><em>Le pont.</em> Un résultat est un couple ordonné : (Awa, Koffi) signifie « Awa à la sauce, Koffi à la vaisselle ». Il est différent de (Koffi, Awa). Le bol, c'est l'ensemble des 5 prénoms. « Avec remise », il garde 5 papiers à chaque tirage. « Sans remise », il en perd un à chaque tirage.</p>\n<p><em>Où l'image s'arrête.</em> Ici, l'ordre compte : les deux tirages ont un rôle différent (sauce, vaisselle). Quand le tirage est au hasard, tous les résultats sont équiprobables et on calcule la probabilité par « cas favorables sur cas possibles ».</p>\n<h2>Ce qu'il faut retenir</h2>\n<blockquote>\n<p><strong>Principe multiplicatif.</strong> Si un choix se fait en plusieurs étapes, avec $n_1$ possibilités à la première, puis $n_2$ à la deuxième, et ainsi de suite, le nombre total de résultats est $n_1 \\times n_2 \\times \\cdots$ Un arbre aide à ne rien oublier.</p>\n<ul>\n<li><strong>Avec remise</strong> : deux tirages successifs parmi $n$ objets donnent $n \\times n = n^2$ résultats (ordonnés).</li>\n<li><strong>Sans remise</strong> : deux tirages successifs parmi $n$ objets donnent $n \\times (n - 1)$ résultats (ordonnés).</li>\n</ul>\n<p><strong>Probabilité.</strong> Quand tous les résultats sont équiprobables, $P(A) = \\frac{\\text{nombre de résultats de } A}{\\text{nombre total de résultats}}$. On compte l'un et l'autre avec le principe multiplicatif.</p>\n</blockquote>\n<h2>Exemple résolu</h2>\n<p><strong>Maman compose un menu au hasard : 1 plat parmi 3, 1 boisson parmi 2 (bissap, gingembre), 1 dessert parmi 2. Calcule le nombre de menus, puis la probabilité que le menu contienne du bissap.</strong></p>\n<ol>\n<li>Nombre de menus : $3 \\times 2 \\times 2 = 12$ (on multiplie car on choisit un plat, une boisson et un dessert).</li>\n<li>Menus avec du bissap : 3 plats, 1 boisson (le bissap), 2 desserts, donc $3 \\times 1 \\times 2 = 6$.</li>\n<li>Tous les menus sont équiprobables : $P = \\frac{6}{12} = \\frac{1}{2}$.</li>\n</ol>\n<p><strong>Cinq cousins tirent deux corvées sans remise : la sauce, puis la vaisselle. Quelle est la probabilité qu'Awa fasse la sauce ?</strong></p>\n<ol>\n<li>Nombre total de résultats : $5 \\times 4 = 20$.</li>\n<li>Awa à la sauce : 1 possibilité pour la sauce, puis 4 pour la vaisselle. Soit $1 \\times 4 = 4$ résultats.</li>\n<li>$P = \\frac{4}{20} = \\frac{1}{5}$. Contrôle : chacun des 5 cousins a la même chance d'avoir la sauce, donc $\\frac{1}{5}$.</li>\n</ol>\n<h2>Le piège à éviter</h2>\n<p>Additionner au lieu de multiplier : avec 3 plats et 2 boissons, il y a $3 \\times 2 = 6$ menus, pas $3 + 2 = 5$. Autre erreur : oublier d'enlever le papier déjà tiré quand le tirage se fait sans remise, et écrire $5 \\times 5$ au lieu de $5 \\times 4$.</p>\n<p>Comment le repérer : demande-toi s'il faut faire <strong>tous</strong> les choix (on multiplie) ou <strong>un seul</strong> d'entre eux (on additionne), et si l'objet tiré est remis ou non. Vérifie aussi que ta probabilité est comprise entre $0$ et $1$.</p>\n<h2>En une phrase</h2>\n<p>Pour compter les résultats d'un choix en plusieurs étapes, on multiplie les nombres de choix de chaque étape (en retirant l'objet déjà tiré si le tirage est sans remise), puis la probabilité est « cas favorables sur cas possibles ».</p>",
-          "exercises": [
+          "title": "Le match d'ouverture du tournoi",
+          "statement": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Cet exercice, guidé pas à pas, est au niveau du baccalauréat série A. Tu dénombres les matchs, puis tu calcules des probabilités avec le contraire et la réunion.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Compter avec le principe multiplicatif",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Combien de matchs seront joués au total ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Dénombrement. Étape 1 — Repérer : un match est un groupe de 2 équipes pris sans ordre (Tle A1 contre Tle A2 est le même match que l'inverse). Étape 2 — Représenter : « 2 parmi 6 ». Étape 3 — Compter : $\\dfrac{6 \\times 5}{2} = 15$ matchs. Étape 4 — Vérifier : $6 \\times 5 = 30$ compte chaque match deux fois, donc 15. Il y a 15 cas possibles pour le match d'ouverture.",
+              "answers": [
                 {
-                  "content": "Maman compose un menu avec un plat parmi 3 et une boisson parmi 2. Combien de menus différents peut-elle composer ?",
-                  "question_type": "single_choice",
-                  "explanation": "On choisit un plat et une boisson : on multiplie, $3 \\times 2 = 6$, comme les bouts de branches de l'arbre. $5$ vient de l'addition $3 + 2$, qui s'appliquerait pour choisir seulement un plat ou une boisson. $9$ est $3^2$.",
-                  "answers": [
-                    {
-                      "content": "1",
-                      "correct": false
-                    },
-                    {
-                      "content": "6",
-                      "correct": true
-                    },
-                    {
-                      "content": "5",
-                      "correct": false
-                    },
-                    {
-                      "content": "9",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour compter les menus composés d'un plat parmi 3 et d'une boisson parmi 2, on additionne le nombre de plats et le nombre de boissons.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Chaque plat peut être accompagné de chacune des deux boissons : de chaque plat partent 2 branches. On multiplie : $3 \\times 2 = 6$ menus. L'addition donnerait seulement 5.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "On fait un premier choix parmi $n$ possibilités, puis, quel que soit ce choix, un second parmi $p$ possibilités. Combien y a-t-il de résultats ?",
-                  "question_type": "single_choice",
-                  "explanation": "À chacune des $n$ possibilités du premier choix correspondent $p$ possibilités du second : on obtient $n$ paquets de $p$ résultats, soit $n \\times p$. L'addition correspondrait à un choix de l'un ou de l'autre, pas des deux.",
-                  "answers": [
-                    {
-                      "content": "$n - p$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$n \\times p$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$n + p$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$n^p$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Maman tire deux papiers de suite dans un bol de 5 prénoms, en remettant le premier papier avant le second tirage. Combien de résultats ordonnés peut-elle obtenir ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec remise, le bol contient 5 papiers à chaque tirage : $5 \\times 5 = 25$ résultats. $20$ serait le résultat sans remise ($5 \\times 4$). $10$ est $5 + 5$ : on additionne alors qu'on fait deux tirages.",
-                  "answers": [
-                    {
-                      "content": "10",
-                      "correct": false
-                    },
-                    {
-                      "content": "25",
-                      "correct": true
-                    },
-                    {
-                      "content": "20",
-                      "correct": false
-                    },
-                    {
-                      "content": "5",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Cinq prénoms sont dans un bol. On tire deux papiers de suite, sans remise, en notant l'ordre. Quelles sont les deux affirmations exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Sans remise, le papier tiré ne revient pas : il en reste 4, et le même prénom ne peut pas sortir deux fois. L'ordre est noté, donc (Awa, Koffi) et (Koffi, Awa) diffèrent. Le total est $5 \\times 4 = 20$, pas $9$.",
-                  "answers": [
-                    {
-                      "content": "Le nombre de résultats est $5 + 4 = 9$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le même prénom peut sortir aux deux tirages.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le résultat (Awa, Koffi) est différent du résultat (Koffi, Awa).",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au second tirage, il reste 4 papiers dans le bol.",
-                      "correct": true
-                    }
-                  ]
+                  "content": "15",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Dénombrer et calculer une probabilité",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Il y a 15 matchs possibles. Tle A2 joue 5 matchs (un contre chacune des 5 autres équipes). Quelle est la probabilité que Tle A2 joue le match d'ouverture ?",
+              "question_type": "single_choice",
+              "explanation": "Probabilité en situation d'équiprobabilité. Étape 1 — Vérifier : match tiré au hasard parmi 15, équiprobabilité. Étape 2 — Compter les cas possibles : 15. Étape 3 — Compter les cas favorables : les 5 matchs de Tle A2. Étape 4 — Calculer : $\\dfrac{5}{15} = \\dfrac{1}{3}$. La réponse $\\dfrac{1}{6}$ confond avec le choix d'une équipe parmi 6. La réponse $\\dfrac{5}{6}$ divise par 6 au lieu de 15 et dépasse la bonne valeur. La réponse $\\dfrac{1}{15}$ ne compte qu'un seul match favorable.",
+              "answers": [
                 {
-                  "content": "Un repas se compose d'une entrée parmi 2, d'un plat parmi 4 et d'un dessert parmi 3. Combien de repas différents peut-on composer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Trois choix à faire, tous nécessaires : $2 \\times 4 \\times 3 = 24$. $9$ vient de l'addition $2 + 4 + 3$. $12$ oublie un des trois choix : $4 \\times 3$ (l'entrée est oubliée).",
-                  "answers": [
-                    {
-                      "content": "14",
-                      "correct": false
-                    },
-                    {
-                      "content": "24",
-                      "correct": true
-                    },
-                    {
-                      "content": "12",
-                      "correct": false
-                    },
-                    {
-                      "content": "9",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{3}$",
+                  "correct": true
                 },
                 {
-                  "content": "Six prénoms sont dans un bol. On tire deux papiers de suite, sans remise, en notant l'ordre : le premier pour la sauce, le second pour la vaisselle. Combien de résultats y a-t-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Avec 6 prénoms : $6 \\times 5 = 30$ résultats, car au second tirage il reste 5 papiers. $36$ serait le cas avec remise ($6 \\times 6$). $12$ est $6 + 6$, et $15$ ne tient pas compte de l'ordre.",
-                  "answers": [
-                    {
-                      "content": "36",
-                      "correct": false
-                    },
-                    {
-                      "content": "15",
-                      "correct": false
-                    },
-                    {
-                      "content": "12",
-                      "correct": false
-                    },
-                    {
-                      "content": "30",
-                      "correct": true
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{6}$",
+                  "correct": false
                 },
                 {
-                  "content": "On lance trois fois de suite une pièce de monnaie (pile ou face). Combien y a-t-il de résultats ordonnés possibles ?",
-                  "question_type": "single_choice",
-                  "explanation": "Chaque lancer a 2 possibilités, et on fait les trois lancers : $2 \\times 2 \\times 2 = 8$. $6$ vient de l'addition $2 + 2 + 2$ et $9$ de $3 \\times 3$.",
-                  "answers": [
-                    {
-                      "content": "6",
-                      "correct": false
-                    },
-                    {
-                      "content": "3",
-                      "correct": false
-                    },
-                    {
-                      "content": "8",
-                      "correct": true
-                    },
-                    {
-                      "content": "9",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{5}{6}$",
+                  "correct": false
                 },
                 {
-                  "content": "Maman compose un menu au hasard : un plat parmi 3 et une boisson parmi 2 (bissap, jus de gingembre). Les 6 menus sont équiprobables. Quelle est la probabilité que le menu contienne du bissap ?",
-                  "question_type": "single_choice",
-                  "explanation": "Menus avec du bissap : 3 plats $\\times$ 1 boisson = 3, sur 6 menus. $P = \\frac{3}{6} = \\frac{1}{2}$. Cela se voit aussi par la boisson : une chance sur deux. $\\frac{1}{6}$ serait la chance d'un menu précis.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{2}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{3}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{6}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{2}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "On tire deux fois de suite un jeton dans une calebasse de 5 jetons numérotés de 1 à 5, en remettant le jeton après le premier tirage. Quelle est la probabilité d'obtenir deux fois le même numéro ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y a $5 \\times 5 = 25$ résultats. Deux fois le même numéro : (1, 1), (2, 2), (3, 3), (4, 4), (5, 5), soit 5 résultats. $P = \\frac{5}{25} = \\frac{1}{5}$. $\\frac{1}{25}$ n'est que la chance de (1, 1) par exemple.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{25}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{10}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{5}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$\\dfrac{1}{15}$",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Tirages et menus au hasard",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Soit $A$ : « le match met en jeu au moins une équipe de Terminale » (Tle A1 ou Tle A2). Les 4 autres équipes (1ère A, 1ère B, 3ème 1, 3ème 2) jouent entre elles. Combien de matchs ne mettent en jeu aucune équipe de Terminale ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Dénombrement. Étape 1 — Repérer : un match entre deux des 4 équipes qui ne sont pas de Terminale, sans ordre. Étape 2 — Représenter : « 2 parmi 4 ». Étape 3 — Compter : $\\dfrac{4 \\times 3}{2} = 6$ matchs. Étape 4 — Vérifier en listant : 1ère A-1ère B, 1ère A-3ème 1, 1ère A-3ème 2, 1ère B-3ème 1, 1ère B-3ème 2, 3ème 1-3ème 2.",
+              "answers": [
                 {
-                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Les tirages se font sans remise. Quelle est la probabilité qu'Awa fasse la sauce ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y a $5 \\times 4 = 20$ résultats. Awa à la sauce : $1 \\times 4 = 4$ résultats. $P = \\frac{4}{20} = \\frac{1}{5}$. $\\frac{1}{20}$ est la chance d'un couple précis, par exemple (Awa, Koffi).",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{4}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{20}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Les tirages se font sans remise. Quelle est la probabilité qu'Awa fasse la sauce et Koffi la vaisselle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Il y a $5 \\times 4 = 20$ résultats ordonnés, et un seul est (Awa, Koffi). $P = \\frac{1}{20}$. $\\frac{1}{10}$ confond (Awa, Koffi) avec (Koffi, Awa), qui est un autre résultat puisque l'ordre compte.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{20}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{2}{25}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{10}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Les tirages se font sans remise. Quelle est la probabilité qu'Awa ait au moins une des deux corvées ?",
-                  "question_type": "single_choice",
-                  "explanation": "Awa à la sauce : 4 résultats. Awa à la vaisselle : 4 résultats. Elle ne peut pas avoir les deux, donc $4 + 4 = 8$ résultats sur 20 : $\\frac{8}{20} = \\frac{2}{5}$. $\\frac{3}{5}$ est la chance qu'Awa n'ait aucune corvée.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{9}{20}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{2}{5}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\frac{1}{5}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{3}{5}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Maman compose un menu au hasard : un plat parmi 3, une boisson parmi 2 (bissap, jus de gingembre) et un dessert parmi 4 (dont la mangue). Tous les menus sont équiprobables. Quelle est la probabilité que le menu contienne du bissap et de la mangue ?",
-                  "question_type": "single_choice",
-                  "explanation": "Nombre de menus : $3 \\times 2 \\times 4 = 24$. Avec bissap et mangue : $3 \\times 1 \\times 1 = 3$. $P = \\frac{3}{24} = \\frac{1}{8}$.",
-                  "answers": [
-                    {
-                      "content": "$\\frac{1}{24}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{4}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{6}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\frac{1}{8}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Cinq cousins, Awa, Koffi, Yao, Mariam et Fatou, tirent au sort deux corvées : un papier du bol désigne la personne qui fait la sauce, puis un second papier désigne celle qui fait la vaisselle. Cette fois, le premier papier est remis dans le bol avant le second tirage. Quelles sont les trois affirmations exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Avec remise : $5 \\times 5 = 25$ résultats. Même prénom : 5 résultats, soit $\\frac{1}{5}$. (Awa, Awa) : $\\frac{1}{25}$. Deux prénoms différents : $1 - \\frac{1}{5} = \\frac{4}{5}$. Et (Awa, Koffi) est un seul résultat sur 25.",
-                  "answers": [
-                    {
-                      "content": "Il y a 25 résultats ordonnés possibles.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité de tirer deux prénoms différents est $\\frac{1}{5}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La probabilité de tirer deux fois le même prénom est $\\frac{1}{5}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité qu'Awa fasse les deux corvées est $\\frac{1}{25}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La probabilité de (Awa, Koffi) est $\\frac{1}{10}$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un menu se compose d'un plat parmi 3 et d'une boisson parmi 2, soit 6 menus. Si on ajoute un dessert au choix parmi 4, le nombre de menus devient $6 \\times 4 = 24$.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Chaque menu plat-boisson peut être prolongé par chacun des 4 desserts : le nombre de menus est multiplié par 4, ce qui donne 24. Additionner $6 + 4 = 10$ oublierait que chaque dessert s'associe à chaque menu.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "6",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Il y a 15 matchs possibles, dont 6 ne mettent en jeu aucune équipe de Terminale. Soit $A$ : « le match met en jeu au moins une équipe de Terminale ». Calcule $P(A)$, sous forme décimale.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Événement contraire. Étape 1 — Identifier : $\\overline{A}$ est « aucune équipe de Terminale ». Étape 2 — Calculer la probabilité facile : $P(\\overline{A}) = \\dfrac{6}{15} = 0{,}4$. Étape 3 — Appliquer : $P(A) = 1 - 0{,}4 = 0{,}6$. Étape 4 — Conclure : $P(A) = 0{,}6$. On peut contrôler : $15 - 6 = 9$ matchs avec au moins une Terminale, et $\\dfrac{9}{15} = 0{,}6$.",
+              "answers": [
+                {
+                  "content": "0,6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Soit $B$ : « le match oppose deux équipes du même niveau » (les deux Terminales, les deux Premières ou les deux Troisièmes). Combien de matchs réalisent $B$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Définition des événements. Étape 3 — Traduire : il y a un seul match entre les deux équipes de chaque niveau : Tle A1-Tle A2, 1ère A-1ère B, 3ème 1-3ème 2. Étape 4 — Nommer : $B$ contient 3 matchs, donc $P(B) = \\dfrac{3}{15} = 0{,}2$.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Soit $A$ : « au moins une équipe de Terminale » et $B$ : « deux équipes du même niveau ». Combien de matchs réalisent à la fois $A$ et $B$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Réunion et intersection. Étape 1 — Définir : « $A$ et $B$ » est un match qui oppose deux équipes du même niveau et met en jeu une équipe de Terminale. Étape 3 — Calculer $P(A \\cap B)$ : un match du même niveau avec une Terminale est forcément Tle A1-Tle A2. Il n'y en a qu'un : 1 match, donc $P(A \\cap B) = \\dfrac{1}{15}$.",
+              "answers": [
+                {
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Soit $A$ : « au moins une équipe de Terminale » avec $P(A) = \\dfrac{9}{15}$, et $B$ : « deux équipes du même niveau » avec $P(B) = \\dfrac{3}{15}$. On sait que $P(A \\cap B) = \\dfrac{1}{15}$. Quelle est la probabilité de « $A$ ou $B$ » ?",
+              "question_type": "single_choice",
+              "explanation": "Réunion et intersection. Étape 1 — Définir : « $A$ ou $B$ » est un match avec une Terminale ou entre équipes du même niveau. Étape 2 — On connaît $P(A) = \\dfrac{9}{15}$ et $P(B) = \\dfrac{3}{15}$. Étape 3 — $P(A \\cap B) = \\dfrac{1}{15}$. Étape 4 — Appliquer : $\\dfrac{9}{15} + \\dfrac{3}{15} - \\dfrac{1}{15} = \\dfrac{11}{15}$. La réponse $\\dfrac{12}{15}$ ne retranche pas l'intersection (le match Tle A1-Tle A2 est compté deux fois). La réponse $\\dfrac{10}{15}$ retranche 2 au lieu de 1. La réponse $\\dfrac{9}{15}$ oublie $B$.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{11}{15}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{12}{15}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{10}{15}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{9}{15}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Un élève écrit : « $P(A \\cup B) = P(A) + P(B)$ puisque les deux événements sont possibles à la fois dans le tournoi. » Explique pourquoi cette égalité est fausse ici, en citant le match concerné.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Rappelle que l'égalité n'est vraie que pour des événements incompatibles",
+                "Cite le match Tle A1-Tle A2 comme commun à A et à B",
+                "Corrige avec P(A ou B) = P(A) + P(B) − P(A et B)",
+                "Donne 11/15 ou compare 12/15 et 11/15"
+              ],
+              "starter": "Cette égalité est fausse car…",
+              "explanation": "Corrigé modèle : l'égalité $P(A \\cup B) = P(A) + P(B)$ n'est vraie que si $A$ et $B$ sont incompatibles. Ici le match Tle A1-Tle A2 réalise $A$ (il met en jeu des équipes de Terminale) et $B$ (il oppose deux équipes du même niveau) : $A \\cap B$ n'est pas vide. Ce match est compté deux fois dans $P(A) + P(B) = \\dfrac{12}{15}$. Il faut retrancher $P(A \\cap B) = \\dfrac{1}{15}$ : $P(A \\cup B) = \\dfrac{11}{15}$. Répartition : 1 point pour la condition d'incompatibilité, 1 point pour le match cité, 1 point pour la correction par la formule.",
+              "answers": []
             }
           ]
         }
