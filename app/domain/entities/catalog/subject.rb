@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::Subject
 # Rôle : un sujet de devoir d'une leçon (titre, notions mobilisées, ordre) ; ses exercices n'ont pas de notion
-# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille (§4)
+# ADR  : 0121 (§4)
 module Entities
   module Catalog
     class Subject

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Catalog::ImportError
 # Rôle : une erreur d'import localisée par son chemin JSON, avec un motif d'une liste fermée
-# ADR  : 0039, 0063, 0066, 0068, 0096, 0105, 0113, 0116, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0039, 0063, 0066, 0068, 0096, 0105, 0113, 0116, 0121
 module Entities
   module Catalog
     # path : notation JSON (« schools[412].type », « $ » pour le fichier) ; params : valeurs pour le message ;

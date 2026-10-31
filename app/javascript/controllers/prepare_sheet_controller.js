@@ -1,6 +1,6 @@
 // ⚡ FRONT · prepare_sheet_controller — une feuille « Prépare interros » / « Prépare devoirs » : brouillon, indice, refaire, recommencer
 // Rôle : garde dans localStorage les réponses non vérifiées de chaque exercice (clé lnclass-prepare-<owner>-<exercise_public_id> : le brouillon d'un élève ne se recharge pas dans le compte d'un autre sur le même appareil), montre ou cache l'indice, remet à blanc un exercice ou toute la feuille, sans requête
-// ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Comportement) · lecture et écriture du stockage sous try/catch : un navigateur qui le refuse ne casse rien
+// ADR  : 0121 · UDR : 0148 §3 (Comportement) · lecture et écriture du stockage sous try/catch : un navigateur qui le refuse ne casse rien
 import { Controller } from "@hotwired/stimulus"
 
 const PREFIX = "lnclass-prepare-"

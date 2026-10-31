@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::PrepareSheetsQuery
 # Rôle : les feuilles « Prépare interros » (une par notion, puis « Toute la leçon ») et « Prépare devoirs » (une par sujet) de la leçon : exercices, questions, indice, figure, dernière copie terminée de l'élève, classes de l'enseignant
-# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0113 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (remplace PrepareInterrosQuery, UDR-0139 §3.4)
+# ADR  : 0121, 0113 · UDR : 0148 §3 (remplace PrepareInterrosQuery, UDR-0139 §3.4)
 module Queries
   module Catalog
     class PrepareSheetsQuery

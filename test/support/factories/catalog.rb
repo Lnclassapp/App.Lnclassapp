@@ -46,7 +46,7 @@ module Factories
       Orm::Essential.create!(course:, name:, position:, author:, **factory_publication(status), **attributes)
     end
 
-    # ADR-XXXX sujets-de-devoir : un sujet de devoir d'une leçon, à la suite des sujets existants si la position n'est pas donnée.
+    # ADR-0121 : un sujet de devoir d'une leçon, à la suite des sujets existants si la position n'est pas donnée.
     def create_subject(course: create_course, title: "Sujet #{factory_sequence}", notions: "Notions mobilisées #{factory_sequence}",
                        position: nil, **attributes)
       position ||= course.subjects.maximum(:position).to_i + 1

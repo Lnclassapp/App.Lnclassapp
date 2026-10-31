@@ -1,6 +1,6 @@
 // ⚡ FRONT · assignment_batch_controller — le devoir que l'enseignant compose : cases « Choisir », bandeau d'envoi, sélection gardée d'une leçon à l'autre
 // Rôle : tient la liste des exercices choisis (identifiants publics, 10 au plus) dans localStorage (clé lnclass-batch-<enseignant>), coche les cases `[data-batch-choice]` de la page, affiche « n exercices choisis », ajoute les identifiants au formulaire « Envoyer à <classe> » ; vide la sélection quand le compte rendu de l'envoi arrive
-// ADR  : sujets-de-devoir (ajout du 2026-10-30) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Devoir composé par l'enseignant) · lecture et écriture du stockage sous try/catch : un navigateur qui le refuse garde la sélection le temps de la page
+// ADR  : sujets-de-devoir (ajout du 2026-10-30) · UDR : 0148 §3 (Devoir composé par l'enseignant) · lecture et écriture du stockage sous try/catch : un navigateur qui le refuse garde la sélection le temps de la page
 import { Controller } from "@hotwired/stimulus"
 
 // Les cases sont dans les feuilles, le bandeau est ailleurs dans la page : un clic sur une case se lit à l'écoute du document.

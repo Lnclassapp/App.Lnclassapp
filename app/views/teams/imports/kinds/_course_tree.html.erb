@@ -1,6 +1,6 @@
 <%# 🌐 UI · teams/imports/kinds/_course_tree — aide de l'import des cours complets, dans la modale de téléversement %>
 <%# Rôle : format 3, clés acceptées à chaque étage de l'arbre, exemple minimal, noms de niveaux, séries et matières acceptés %>
-<%# ADR  : 0035, 0039, 0091, 0068, 0113, 0116, XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : 0038, 0055 %>
+<%# ADR  : 0035, 0039, 0091, 0068, 0113, 0116, 0121 · UDR : 0038, 0055 %>
 <% referential = Queries::Catalog::ReferentialOptionsQuery.new.call %>
 <% own = ->(*keys) { keys.to_h { [ it, [ it ] ] } } %>
 <% tree = { "course" => own.("name", "subtitle", "level_name", "series_name", "material_name", "theme", "figures", "notions", "exercises", "subjects"),

@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/sheets/_question — une question de la feuille : étiquette de type, énoncé, champ ou propositions, verdict une fois corrigée %>
 <%# Rôle : QCM (radiogroup ou group), vrai ou faux (radiogroup), « Complète » et « Calcul » (champ) tels que la maquette ; les autres types gardent leur partiel de la copie ; sans champ pour l'enseignant et l'équipe ; jamais de bonne réponse ici %>
-<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0091 §4.4 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (QCM et Vrai ou faux : role=radiogroup, aria-checked ; champs : aria-label = l'intitulé) %>
+<%# ADR  : 0121, 0091 §4.4 · UDR : 0148 §3 (QCM et Vrai ou faux : role=radiogroup, aria-checked ; champs : aria-label = l'intitulé) %>
 <%# locals: (question:, fields: true, checked: false) -%>
 <%# question : PrepareSheetsQuery::Question · les champs se postent en copy[answers][<question_id>][display_order | response_text] %>
 <% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>

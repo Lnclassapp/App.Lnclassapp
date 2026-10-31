@@ -28,7 +28,7 @@ class Catalog::NotionAnchorsTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
-    # UDR-XXXX feuilles-prepare-interros-et-devoirs §3 : une feuille par notion, son repère est l'ancre de la notion.
+    # UDR-0148 §3 : une feuille par notion, son repère est l'ancre de la notion.
     assert_select "#notion-#{@with.slug}", 1
     assert_select ".ps-sheet#notion-#{@with.slug} .ps-exercise", 2
   end

@@ -1,6 +1,6 @@
 require "test_helper"
 
-# ADR-XXXX sujets-de-devoir §4 et §6 : un exercice de sujet n'a pas de notion, et un indice a de 1 à 400 caractères.
+# ADR-0121 §4 et §6 : un exercice de sujet n'a pas de notion, et un indice a de 1 à 400 caractères.
 class ExerciseSubjectConstraintTest < ActiveSupport::TestCase
   setup do
     @course = create_course

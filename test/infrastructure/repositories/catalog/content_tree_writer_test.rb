@@ -351,7 +351,7 @@ module Repositories
         assert_equal 8, Orm::Question.joins(exercise: { essential: :course }).where(courses: { slug: "ecologie" }).count
       end
 
-      # --- ADR-XXXX sujets-de-devoir : l'indice et les sujets de devoir ---
+      # --- ADR-0121 : l'indice et les sujets de devoir ---
 
       test "écrit les sujets d'une leçon neuve : numérotés de 1, exercices sans notion après ceux de la leçon, indice relu à l'identique" do
         hint = "Pense à\tl'unité,\nrelis l'énoncé \\ <b>"

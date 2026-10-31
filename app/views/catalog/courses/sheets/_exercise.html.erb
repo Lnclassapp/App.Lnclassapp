@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/sheets/_exercise — un exercice de la feuille : énoncé, figure, questions, indice, barre d'actions %>
 <%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; élève : champs et « Vérifier ma réponse » (un devoir à rendre : « Ce devoir est à rendre… » à la place) ; exercice déjà vérifié : son statut, « Voir ma correction » (la page de résultat, note sur 20) et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
-<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0091 §4.4 (aucune correction avant la vérification) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 · Stimulus : prepare-sheet, math %>
+<%# ADR  : 0121, 0091 §4.4 (aucune correction avant la vérification) · UDR : 0148 §3 · Stimulus : prepare-sheet, math %>
 <%# locals: (exercise:, mode:, targets: nil, classrooms: [], assignment_public_id: nil, return_to: "sheet") -%>
 <%# return_to : où la page de résultat ramène l'élève, "sheet" (l'exercice dans la leçon) ou "class" (« Ma classe ») ; jamais une adresse %>
 <%# assignment_public_id : l'exercice est un devoir à rendre (« Ma classe ») ; exercise.copy y est la copie rendue, nil avant : ni statut ni correction avant le rendu %>

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseRepository
 # Rôle : traduit Orm::Exercise, ses questions, propositions et images ↔ Entities::Assessment::Exercise, avec la publication des parents
-# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : blank, hint), XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0035, 0036, 0039, 0054, 0091, 0105, 0113, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : blank, hint), 0121
 module Repositories
   module Assessment
     class ExerciseRepository

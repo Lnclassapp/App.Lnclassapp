@@ -8,7 +8,7 @@ module Factories
     def create_exercise(essential: nil, course: nil, lesson_wide: false, title: "Exercice #{factory_sequence}", position: nil,
                         status: "published", questions: 2, author: nil, subject: nil, hint: nil, **attributes)
       essential = nil if lesson_wide
-      # ADR-XXXX sujets-de-devoir : un exercice de sujet n'a pas de notion ; la base refuse les deux (exercises_subject_without_essential).
+      # ADR-0121 : un exercice de sujet n'a pas de notion ; la base refuse les deux (exercises_subject_without_essential).
       essential ||= create_essential(course: course || create_course) unless lesson_wide || subject
       course = essential&.course || subject&.course || course || create_course
       position ||= Orm::Exercise.where(course_id: course.id).maximum(:position).to_i + 1

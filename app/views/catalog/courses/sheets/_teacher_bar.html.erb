@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/sheets/_teacher_bar — la barre de l'enseignant sous un exercice : « Choisir » pour le devoir, puis « Assigner à <classe> », une par classe %>
 <%# Rôle : à la place de « Vérifier ma réponse » et « Indice », dans la barre d'actions de la feuille ; la case « Choisir » (role="checkbox", état tenu par Stimulus assignment-batch) et la bascule d'assignation (classroom/assignments/_toggle, mode feuille) ; rend le bandeau d'envoi (_batch_bar) une seule fois par page %>
-<%# ADR  : 0048, 0072, sujets-de-devoir (ajout du 2026-10-30) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Vue enseignant, Devoir composé par l'enseignant) · Stimulus : assignment-batch · %>
+<%# ADR  : 0048, 0072, sujets-de-devoir (ajout du 2026-10-30) · UDR : 0148 §3 (Vue enseignant, Devoir composé par l'enseignant) · Stimulus : assignment-batch · %>
 <%# locals: (exercise:, targets:, classrooms:) -%>
 <% if targets && classrooms.any? %>
   <%# La case n'envoie rien : le bandeau lit les cases par data-batch-choice (l'identifiant public de l'exercice) et garde le choix dans le navigateur. %>

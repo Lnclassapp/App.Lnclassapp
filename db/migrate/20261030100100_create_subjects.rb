@@ -1,4 +1,4 @@
-# ADR-XXXX sujets-de-devoir §6 (prepare-interros-cahier, Lot 0) : le sujet de devoir d'une leçon ; ses exercices n'ont pas de notion.
+# ADR-0121 §6 (prepare-interros-cahier, Lot 0) : le sujet de devoir d'une leçon ; ses exercices n'ont pas de notion.
 class CreateSubjects < ActiveRecord::Migration[8.1]
   def change
     create_table :subjects do |t|

@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Références : [PRD](prd.md) · ADR-XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR-XXXX-feuilles-prepare-interros-et-devoirs · [maquettes](maquettes/).
+> Références : [PRD](prd.md) · ADR-0121 · UDR-0148 · [maquettes](maquettes/).
 
 ## Graphe
 

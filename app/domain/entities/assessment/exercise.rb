@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::Exercise
 # Rôle : un exercice d'une leçon (de notion ou de toute la leçon), son sujet, ses questions et les faits de publication de ses parents
-# ADR  : 0035, 0036, 0054, 0105, 0113, 0115, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0035, 0036, 0054, 0105, 0113, 0115, 0121
 module Entities
   module Assessment
     class Exercise
@@ -16,7 +16,7 @@ module Entities
                     :published_at, :archived_at, :parents_published
       # ADR-0115 : le sujet en blocs (document, tableau), facultatif ; sa validation (StatementBlocks) est au Lot E.
       attr_accessor :statement_blocks
-      # ADR-XXXX sujets-de-devoir : l'indice, une phrase montrée avant la vérification ; nil sans indice. subject_id : le sujet de
+      # ADR-0121 : l'indice, une phrase montrée avant la vérification ; nil sans indice. subject_id : le sujet de
       # devoir de l'exercice ; nil pour un exercice de notion ou de toute la leçon.
       attr_accessor :subject_id
       attr_reader :hint

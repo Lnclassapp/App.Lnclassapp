@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Assessment
-    # ADR-XXXX sujets-de-devoir §4 : l'indice facultatif d'un exercice (1 à 400 caractères) et son sujet de devoir.
+    # ADR-0121 §4 : l'indice facultatif d'un exercice (1 à 400 caractères) et son sujet de devoir.
     class ExerciseHintTest < ActiveSupport::TestCase
       def exercise(**attributes)
         Exercise.new(title: "Thalès", course_id: 1, exercise_type: "fixation", status: "draft", **attributes)

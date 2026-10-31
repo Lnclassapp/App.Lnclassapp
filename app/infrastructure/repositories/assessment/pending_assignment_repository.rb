@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::PendingAssignmentRepository
 # Rôle : les exercices que l'élève doit encore rendre à son enseignant (assignation active de sa classe principale, sans copie rendue)
-# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille (§4), 0048
+# ADR  : 0121 (§4), 0048
 module Repositories
   module Assessment
     class PendingAssignmentRepository

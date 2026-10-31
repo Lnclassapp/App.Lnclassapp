@@ -87,7 +87,7 @@ module Repositories
         assert found.publishable?
       end
 
-      # ADR-XXXX sujets-de-devoir : l'indice et le sujet de devoir sont relus ; un exercice de notion n'a ni l'un ni l'autre.
+      # ADR-0121 : l'indice et le sujet de devoir sont relus ; un exercice de notion n'a ni l'un ni l'autre.
       test "relit l'indice et le sujet de devoir d'un exercice de sujet" do
         subject = create_subject(course: @essential.course)
         record = create_exercise(subject:, hint: "Écris les côtés.")

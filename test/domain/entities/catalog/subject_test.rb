@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Catalog
-    # ADR-XXXX sujets-de-devoir §4 : un sujet de devoir d'une leçon (titre, notions mobilisées, ordre).
+    # ADR-0121 §4 : un sujet de devoir d'une leçon (titre, notions mobilisées, ordre).
     class SubjectTest < ActiveSupport::TestCase
       def subject(**attributes)
         Subject.new(course_id: 1, position: 1, title: "Sujet 1 · Thalès", notions: "Thalès, proportionnalité", **attributes)

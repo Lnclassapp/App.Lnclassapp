@@ -39,7 +39,7 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   # UDR-0137 (contenu-en-blocs, #318), maintenue par UDR-0141-fiche-de-revision-en-quatre-blocs : la fiche de révision reprend
   # les maquettes (Seyès, Kalam, Source Serif 4, graisse 700) dans un habillage à part. L'exception ne vaut que pour la feuille
-  # `course_sheet.css` (et son dossier), `prepare_sheet.css` (UDR-XXXX feuilles-prepare-interros-et-devoirs §3) et le partial `catalog/revision_sheets/`, et seulement pour les règles
+  # `course_sheet.css` (et son dossier), `prepare_sheet.css` (UDR-0148 §3) et le partial `catalog/revision_sheets/`, et seulement pour les règles
   # « une seule police », « palette froide » et « graisse 500 » : couleurs hexadécimales, attribut `style`, valeurs
   # arbitraires, palette par défaut, rayons, ombres et échelle d'espacement restent refusés partout, ces dossiers compris.
   SHEET_EXCEPTION = %r{\A(?:app/views/catalog/revision_sheets/|app/assets/stylesheets/course_sheet(?:/|\.css\z)|app/assets/stylesheets/prepare_sheet\.css\z)}

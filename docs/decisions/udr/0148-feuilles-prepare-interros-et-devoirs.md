@@ -1,8 +1,8 @@
-# UDR-XXXX : Les feuilles « Prépare interros » et « Prépare devoirs » de la page d'une leçon
+# UDR-0148 : Les feuilles « Prépare interros » et « Prépare devoirs » de la page d'une leçon
 <!-- index
 titre: Feuilles Prépare interros et Prépare devoirs
 statut: Accepté
-adr-lie: XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+adr-lie: 0121
 problematique: L'élève ne voit jamais une notion ni un sujet de devoir en entier et quitte la leçon pour chaque exercice
 -->
 
@@ -11,7 +11,7 @@ problematique: L'élève ne voit jamais une notion ni un sujet de devoir en enti
 | **Statut** | Accepté |
 | **Date** | 2026-10-30 |
 | **Chantier** | `docs/chantiers/prepare-interros-cahier` |
-| **ADR lié** | ADR-XXXX-sujets-de-devoir-et-verification-sur-la-feuille |
+| **ADR lié** | ADR-0121 |
 | **Remplacé par** | — |
 
 ---

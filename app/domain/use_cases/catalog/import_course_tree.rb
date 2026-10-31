@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Catalog::ImportCourseTree
 # Rôle : adaptateur d'import des leçons v3 (figures, notions à fiche, exercices avec indice, sujets de devoir, questions), tout en brouillon ; réimport d'un brouillon seulement
-# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : 0038
+# ADR  : 0035, 0039, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0121 · UDR : 0038
 module UseCases
   module Catalog
     class ImportCourseTree
@@ -13,7 +13,7 @@ module UseCases
       # ADR-0116 §4.1 : un exercice par notion, quatre problèmes pour toute la leçon.
       LESSON_EXERCISES = 4
       DEFAULT_THEME = "blue"
-      # ADR-XXXX sujets-de-devoir §4 : l'indice, le titre et les notions d'un sujet sont du texte seul, borné ; un cours a dix sujets au plus,
+      # ADR-0121 §4 : l'indice, le titre et les notions d'un sujet sont du texte seul, borné ; un cours a dix sujets au plus,
       # un sujet dix exercices au plus (bornes de l'adaptateur d'import seulement : la base ne les contraint pas).
       HINT_MAX = 400
       SUBJECT_TITLE_MAX = Entities::Catalog::Subject::TITLE_MAX

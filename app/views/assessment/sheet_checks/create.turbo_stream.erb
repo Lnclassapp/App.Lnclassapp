@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/sheet_checks/create — la réponse d'un refus de « Vérifier ma réponse » : le message dans l'exercice, réponses gardées %>
 <%# Rôle : le message s'ajoute à la fin du frame (le formulaire n'est pas remplacé) ; un succès ne passe pas ici : il redirige vers la page de résultat de la copie %>
-<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille (§4) · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Comportement, États) %>
+<%# ADR  : 0121 (§4) · UDR : 0148 §3 (Comportement, États) %>
 <%= turbo_stream.remove "sheet-error-#{@exercise_public_id}" %>
 <%= turbo_stream.append "sheet-exercise-#{@exercise_public_id}" do %>
   <%= render "assessment/sheet_checks/error", exercise_public_id: @exercise_public_id, code: @error_code, resume_at: @resume_at %>

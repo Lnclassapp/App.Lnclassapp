@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Assessment::PendingAssignmentRepositoryPort
 # Rôle : contrat de lecture « ce devoir est encore à rendre » : l'exercice est assigné à l'élève et il n'en a pas rendu de copie
-# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille (§4), 0048 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (devoir à rendre)
+# ADR  : 0121 (§4), 0048 · UDR : 0148 §3 (devoir à rendre)
 module Ports
   module Assessment
     module PendingAssignmentRepositoryPort

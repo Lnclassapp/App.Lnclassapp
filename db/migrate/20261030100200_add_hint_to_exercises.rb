@@ -1,4 +1,4 @@
-# ADR-XXXX sujets-de-devoir §6 (prepare-interros-cahier, Lot 0) : l'indice d'un exercice, une phrase facultative montrée avant la vérification.
+# ADR-0121 §6 (prepare-interros-cahier, Lot 0) : l'indice d'un exercice, une phrase facultative montrée avant la vérification.
 class AddHintToExercises < ActiveRecord::Migration[8.1]
   def change
     add_column :exercises, :hint, :text

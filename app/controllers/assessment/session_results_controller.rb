@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Assessment::SessionResultsController
 # Rôle : résultat d'une session terminée, pour l'élève propriétaire, l'enseignant d'une de ses classes actives et l'équipe
-# ADR  : 0026, 0028, 0033, 0054, 0094, 0115, XXXX sujets-de-devoir §4 · UDR : 0007, 0023, 0140, XXXX feuilles-prepare-interros §3 · lecture seule, aucun stream ; return_to : retour vers la feuille ou « Ma classe »
+# ADR  : 0026, 0028, 0033, 0054, 0094, 0115, 0121 §4 · UDR : 0007, 0023, 0140, 0148 §3 · lecture seule, aucun stream ; return_to : retour vers la feuille ou « Ma classe »
 module Assessment
   class SessionResultsController < AuthenticatedController
     include ReadsOwnLevel

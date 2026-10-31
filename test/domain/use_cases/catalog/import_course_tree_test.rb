@@ -375,7 +375,7 @@ module UseCases
         assert_equal [ before, "Calculer et simplifier" ], [ tree_counts, course.reload.subtitle ]
       end
 
-      # --- ADR-XXXX sujets-de-devoir §4, CA-9 : l'indice d'un exercice et les sujets de devoir ---
+      # --- ADR-0121 §4, CA-9 : l'indice d'un exercice et les sujets de devoir ---
 
       def subject_of(title, exercises: 4, notions: "Thalès · proportionnalité", **extra)
         { "title" => title, "notions" => notions, "exercises" => Array.new(exercises) { revision_exercise("#{title} · exercice #{it + 1}") } }.merge(extra)

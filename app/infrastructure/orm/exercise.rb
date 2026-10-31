@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Exercise
 # Rôle : table exercises, exercices d'une fiche, adressés par public_id
-# ADR  : 0029, 0035, 0054, 0113, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0029, 0035, 0054, 0113, 0121
 module Orm
   class Exercise < ApplicationRecord
     include HasPublicId

@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Course
 # Rôle : table courses, cours du catalogue (brouillon, publié, archivé), adressés par slug
-# ADR  : 0029, 0035, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0029, 0035, 0121
 module Orm
   class Course < ApplicationRecord
     include HasFrozenSlug

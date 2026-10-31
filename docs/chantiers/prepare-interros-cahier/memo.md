@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-30 |
 | **Branche** | `feature/prepare-interros-cahier` |
 | **Programme** | — |

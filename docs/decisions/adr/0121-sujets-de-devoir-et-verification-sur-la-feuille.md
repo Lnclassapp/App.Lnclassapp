@@ -1,4 +1,4 @@
-# ADR-XXXX : Le sujet de devoir et l'indice entrent dans le catalogue, et la copie se rend depuis la feuille de la leçon
+# ADR-0121 : Le sujet de devoir et l'indice entrent dans le catalogue, et la copie se rend depuis la feuille de la leçon
 <!-- index
 titre: Sujets de devoir, indice et copie rendue depuis la feuille
 statut: Accepté

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -43,12 +43,12 @@ module Ports
       # position : indicative ; l'écrivain numérote les exercices par leçon, dans l'ordre où il les reçoit.
       # statement_blocks : le sujet en blocs, déjà validé par l'adaptateur (ADR-0115) ; nil sans blocs.
       # figure_key (v3, ADR-0116 §4.3) : la clé de la figure de la leçon citée par l'exercice ; nil sans figure.
-      # hint (ADR-XXXX sujets-de-devoir §4) : l'indice montré avant la vérification, déjà nettoyé (1 à 400 caractères) ; nil sans indice.
+      # hint (ADR-0121 §4) : l'indice montré avant la vérification, déjà nettoyé (1 à 400 caractères) ; nil sans indice.
       ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions, :statement_blocks,
                                  :figure_key, :hint) do
         def initialize(statement_blocks: nil, figure_key: nil, hint: nil, **) = super
       end
-      # Un sujet de devoir (ADR-XXXX sujets-de-devoir §4) : title (1 à 200), notions (1 à 600, la phrase « Notions mobilisées »), position
+      # Un sujet de devoir (ADR-0121 §4) : title (1 à 200), notions (1 à 600, la phrase « Notions mobilisées »), position
       # (indicative : l'écrivain numérote les sujets de la leçon de 1, dans l'ordre reçu) et ses exercices, qui n'ont pas de notion
       # (essential_id nil, la base le garantit par exercises_subject_without_essential). course_id : l'id de la leçon, nil si elle est créée.
       SubjectNode = Data.define(:course_id, :position, :title, :notions, :exercises)
@@ -64,7 +64,7 @@ module Ports
       # existing_id : l'id d'une leçon déjà en base, réimportée : ni elle ni ses notions ne sont écrites, ses exercices sont archivés
       # puis remplacés par ceux du nœud ; nil pour une leçon à créer.
       # v3 : figures (Array<Hash> clés texte, jsonb tel quel), sheet_theme ("blue", "teal" ou "burgundy") et notions (NotionNode) ;
-      # un nœud v3 laisse essentials vide. subjects (SubjectNode, ADR-XXXX sujets-de-devoir) : les sujets de devoir de la leçon, écrits après
+      # un nœud v3 laisse essentials vide. subjects (SubjectNode, ADR-0121) : les sujets de devoir de la leçon, écrits après
       # elle et avant leurs exercices ; vide par défaut.
       CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials, :exercises,
                                :existing_id, :figures, :sheet_theme, :notions, :subjects) do

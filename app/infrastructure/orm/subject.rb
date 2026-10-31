@@ -1,6 +1,6 @@
 # 🔌 INFRA · Orm::Subject
 # Rôle : table subjects, sujets de devoir d'une leçon (titre, notions mobilisées, ordre) ; ses exercices n'ont pas de notion
-# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0121
 module Orm
   class Subject < ApplicationRecord
     self.table_name = "subjects"

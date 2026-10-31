@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ContentTreeWriter
 # Rôle : écrit en masse des arbres de contenu validés (cours → fiches → exercices → questions → propositions), tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, XXXX-sujets-de-devoir-et-verification-sur-la-feuille
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121
 module Repositories
   module Catalog
     class ContentTreeWriter
@@ -47,7 +47,7 @@ module Repositories
         # Les exercices de toute la leçon viennent après ceux des notions : sans notion, ils prennent la leçon de leur cours (ADR-0113 §4.1).
         lesson_wide = courses.flat_map { |course| course.exercises.map { |node| [ node, course_ids.fetch(course.slug), nil ] } } +
                       kept.flat_map { |course| course.exercises.map { |node| [ node, course.existing_id, nil ] } }
-        # Les sujets de devoir (ADR-XXXX §4) viennent après les exercices de la leçon : leurs exercices sont les derniers de la leçon.
+        # Les sujets de devoir (ADR-0121 §4) viennent après les exercices de la leçon : leurs exercices sont les derniers de la leçon.
         subjects = courses.flat_map { |course| course.subjects.map { |node| node.with(course_id: course_ids.fetch(course.slug)) } }
         counts = write_exercises(exercises, lesson_wide + subject_exercises(subjects, insert_subjects(subjects)))
 

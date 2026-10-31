@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · Classroom::ClassroomCoursesController
 # Rôle : une leçon vue depuis une classe (CL-11) : « Fiche de révision », « Prépare interros » et « Prépare devoirs », avec les bascules d'assignation de cette classe
-# ADR  : 0026, 0028, 0048, 0088, 0113, XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : 0006, 0028, 0139 §3.4, XXXX-feuilles-prepare-interros-et-devoirs §3
+# ADR  : 0026, 0028, 0048, 0088, 0113, 0121 · UDR : 0006, 0028, 0139 §3.4, 0148 §3
 module Classroom
   class ClassroomCoursesController < AuthenticatedController
     # Comme la page de la classe (D4) : l'élève lit ses cours sur ses propres pages.

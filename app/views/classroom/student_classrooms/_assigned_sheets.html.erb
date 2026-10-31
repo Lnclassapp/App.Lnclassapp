@@ -1,6 +1,6 @@
 <%# 🌐 UI · classroom/student_classrooms/_assigned_sheets — « Exercices assignés » de « Ma classe » : un envoi de l'enseignant, une feuille de cahier %>
 <%# Rôle : la plus récente en haut ; 3 exercices ou plus : « Prépare devoirs » (notions mobilisées), 1 ou 2 : « Prépare interros » (notion commune et « À retenir ») ; « Rendre à l'enseignant » avant ; après, statut, « Voir ma correction » (la page de résultat, qui ramène ici) et « Refaire l'exercice » ; ni « Recommencer » ni progression des leçons %>
-<%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0072 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (devoirs reçus par l'élève), 0076 §3.2 · memo Q12, Q13, Q17 %>
+<%# ADR  : 0121, 0072 · UDR : 0148 §3 (devoirs reçus par l'élève), 0076 §3.2 · memo Q12, Q13, Q17 %>
 <%# locals: (sheets:) -%>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
 <% if sheets.empty? %>
