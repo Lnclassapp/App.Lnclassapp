@@ -425,6 +425,24 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 - **SVT C** : la contraception hormonale (4e fiche de « Les cycles sexuels chez la femme ») et la méiose, le rendement chiffré de la respiration (36 à 38 ATP par glucose, 30,5 kJ par mole d'ATP et 2 870 kJ par mole de glucose : valeurs écrites par le rédacteur) sont à confirmer.
 - **Physique-Chimie C** : le repère de Frenet et le mouvement rectiligne sinusoïdal (« Cinématique du point »), la fermentation alcoolique, la liaison hydrogène et la distillation (« Les alcools ») ; les noms des produits d'oxydation (aldéhydes, cétones, acides) y sont cités sans nomenclature systématique, réservée à la leçon suivante ; le frottement par une relation `f = k·R_N` donnée dans l'énoncé, sans coefficient de frottement (« Mouvement du centre d'inertie d'un solide »).
 
+### Tle A1, A2, C et D, Français au format 3 (chantier `contenus-tle-francais`)
+
+Les 7 leçons distinctes de Français de Terminale (progression DPFC 2026-2027), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), niveau baccalauréat. Chaque leçon est écrite dans `tle-a1/francais/` et déclinée dans `tle-a2/`, `tle-c/` et `tle-d/`, où seuls `series_name` et le rang du `subtitle` changent : 26 fichiers (7 en A1 et A2, 6 en C et D, sans « Œuvre poétique »). Elles remplacent les 3 fichiers v1 de chacun de ces dossiers (lignes Français des tableaux Tle ci-dessus). Aucune figure. Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes, dont un de type BAC. Les textes supports sont écrits pour Lnclass ; les œuvres réelles ne sont citées que par de courtes références paraphrasées, avec auteur, titre et date.
+
+| Fichier | Cours | A1 / A2 | C / D | Notions | Exercices | Questions | Entraînement | Auto |
+|---|---|---:|---:|---:|---:|---:|---:|---:|
+| `francais/oeuvre-narrative.json` | Œuvre narrative | 1 | 1 | 4 | 8 | 49 | 13 | 86 % |
+| `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 2 | 3 | 4 | 8 | 51 | 17 | 88 % |
+| `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 3 | 2 | 4 | 8 | 48 | 16 | 81 % |
+| `francais/le-commentaire-compose.json` | Le commentaire composé | 4 | 4 | 4 | 8 | 50 | 20 | 84 % |
+| `francais/groupement-de-textes-theatraux.json` | Groupement de textes théâtraux | 5 | 5 | 4 | 8 | 48 | 16 | 90 % |
+| `francais/oeuvre-poetique.json` | Œuvre poétique | 6 | — | 4 | 8 | 50 | 17 | 92 % |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 7 | 6 | 4 | 8 | 55 | 15 | 84 % |
+
+Au total : 28 notions, 56 exercices, 351 questions notées et 114 questions d'entraînement. Chacun des 26 fichiers passe `script/contenus/valider.rb` sans erreur ni avertissement, ainsi que le contrôle de l'entraînement (règles du test de 3e), et chaque leçon a été relue par un agent distinct de son auteur.
+
+À faire valider par un enseignant de Français avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T7).
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
