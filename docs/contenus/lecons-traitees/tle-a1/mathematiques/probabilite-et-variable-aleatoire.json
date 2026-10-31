@@ -160,7 +160,7 @@
               {
                 "content": "On lance un dé cubique équilibré. Quelle est la probabilité d'obtenir un multiple de 3 ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décrire : on lance un dé non truqué, $\\Omega = \\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}$, les issues sont équiprobables. Étape 2 — Dénombrer les cas possibles : il y a 6 issues. Étape 3 — Dénombrer les cas favorables : les multiples de 3 sont 3 et 6, soit 2 cas. Étape 4 — Calculer : $p = \\frac{2}{6} = \\frac{1}{3}$. La proposition $\\frac{1}{6}$ ne compte qu'un seul cas favorable (oubli du 6). La proposition $\\frac{1}{2}$ confond avec « nombre pair ». La proposition $\\frac{2}{3}$ inverse numérateur et dénominateur de $\\frac{4}{6}$ (les non-multiples).",
+                "explanation": "Étape 1 — Décrire : on lance un dé non truqué, $\\Omega = \\{1 ; 2 ; 3 ; 4 ; 5 ; 6\\}$, les issues sont équiprobables. Étape 2 — Dénombrer les cas possibles : il y a 6 issues. Étape 3 — Dénombrer les cas favorables : les multiples de 3 sont 3 et 6, soit 2 cas. Étape 4 — Calculer : $p = \\frac{2}{6} = \\frac{1}{3}$. La proposition $\\frac{1}{6}$ ne compte qu'un seul cas favorable (oubli du 6). La proposition $\\frac{1}{2}$ confond avec « nombre pair ». La proposition $\\frac{2}{3} = \\frac{4}{6}$ est la probabilité du contraire (les 4 numéros qui ne sont pas multiples de 3).",
                 "answers": [
                   {
                     "content": "$\\frac{1}{3}$",
@@ -219,7 +219,7 @@
               {
                 "content": "On lance une pièce de 100 F équilibrée deux fois de suite. Quelle est la probabilité d'obtenir exactement une fois Face ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décrire : les issues sont PP, PF, FP, FF et elles sont équiprobables. Les trois « résultats » 0, 1 ou 2 Face ne sont pas équiprobables. Étape 2 — Dénombrer les cas possibles : 4 issues. Étape 3 — Dénombrer les cas favorables : PF et FP, soit 2 cas. Étape 4 — Calculer : $p = \\frac{2}{4} = \\frac{1}{2}$. La proposition $\\frac{1}{3}$ est le piège : elle compte seulement 3 « résultats » (0, 1 ou 2 Face) alors qu'ils n'ont pas la même chance. La proposition $\\frac{1}{4}$ ne compte qu'une issue (PF ou FP, pas les deux).",
+                "explanation": "Étape 1 — Décrire : les issues sont PP, PF, FP, FF et elles sont équiprobables. Les trois « résultats » 0, 1 ou 2 Face ne sont pas équiprobables. Étape 2 — Dénombrer les cas possibles : 4 issues. Étape 3 — Dénombrer les cas favorables : PF et FP, soit 2 cas. Étape 4 — Calculer : $p = \\frac{2}{4} = \\frac{1}{2}$. La proposition $\\frac{1}{3}$ est le piège : elle compte seulement 3 « résultats » (0, 1 ou 2 Face) alors qu'ils n'ont pas la même chance. La proposition $\\frac{1}{4}$ ne compte qu'une issue (PF ou FP, pas les deux). La proposition $\\frac{2}{3}$ compterait 3 cas favorables sur 4 issues, ou 2 sur 3 « résultats », deux erreurs de dénombrement.",
                 "answers": [
                   {
                     "content": "$\\frac{1}{2}$",
@@ -434,7 +434,7 @@
               {
                 "content": "On lance un dé cubique équilibré. $A$ : « le nombre est impair » ; $B$ : « le nombre est supérieur ou égal à 4 ». Quelle est la probabilité de $A \\cup B$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Traduire : on cherche « impair ou ≥ 4 », soit $A \\cup B$. Étape 2 — Calculer : $A = \\{1 ; 3 ; 5\\}$, $B = \\{4 ; 5 ; 6\\}$, $A \\cap B = \\{5\\}$, donc $p(A) = \\frac{3}{6}$, $p(B) = \\frac{3}{6}$, $p(A \\cap B) = \\frac{1}{6}$. Étape 3 — Choisir : le 5 est commun, donc cas général. Étape 4 — Appliquer : $\\frac{3}{6} + \\frac{3}{6} - \\frac{1}{6} = \\frac{5}{6}$. Vérification : $A \\cup B = \\{1 ; 3 ; 4 ; 5 ; 6\\}$, 5 numéros sur 6. La proposition $1$ vient de l'oubli de retrancher $p(A \\cap B)$ : $\\frac{3}{6} + \\frac{3}{6} = 1$, ce qui est faux car le 2 n'est ni impair ni ≥ 4.",
+                "explanation": "Étape 1 — Traduire : on cherche « impair ou ≥ 4 », soit $A \\cup B$. Étape 2 — Calculer : $A = \\{1 ; 3 ; 5\\}$, $B = \\{4 ; 5 ; 6\\}$, $A \\cap B = \\{5\\}$, donc $p(A) = \\frac{3}{6}$, $p(B) = \\frac{3}{6}$, $p(A \\cap B) = \\frac{1}{6}$. Étape 3 — Choisir : le 5 est commun, donc cas général. Étape 4 — Appliquer : $\\frac{3}{6} + \\frac{3}{6} - \\frac{1}{6} = \\frac{5}{6}$. Vérification : $A \\cup B = \\{1 ; 3 ; 4 ; 5 ; 6\\}$, 5 numéros sur 6. La proposition $\\frac{1}{6}$ est seulement $p(A \\cap B)$, la probabilité du 5 seul. La proposition $\\frac{2}{3} = \\frac{4}{6}$ est une erreur de comptage : $A \\cup B$ contient 5 numéros, pas 4. La proposition $1$ vient de l'oubli de retrancher $p(A \\cap B)$ : $\\frac{3}{6} + \\frac{3}{6} = 1$, ce qui est faux car le 2 n'est ni impair ni ≥ 4.",
                 "answers": [
                   {
                     "content": "$\\frac{5}{6}$",
@@ -637,7 +637,7 @@
                 ]
               },
               {
-                "content": "Un élève affirme que la loi d'un gain $X$ est : $p(X = 0) = 0{,}4$ ; $p(X = 100) = 0{,}4$ ; $p(X = 500) = 0{,}4$.",
+                "content": "Pour un gain $X$, on donne : $p(X = 0) = 0{,}4$ ; $p(X = 100) = 0{,}4$ ; $p(X = 500) = 0{,}4$. Ces trois valeurs forment une loi de probabilité de $X$.",
                 "question_type": "true_false",
                 "explanation": "Étape 4 — Présenter : on vérifie la somme des probabilités, qui doit valoir 1. Ici $0{,}4 + 0{,}4 + 0{,}4 = 1{,}2$, ce qui est supérieur à 1 : impossible pour une loi de probabilité. L'affirmation est fausse. L'erreur vient de l'étape 3 — Calculer : au moins une probabilité a été mal calculée.",
                 "answers": [
@@ -916,7 +916,7 @@
             {
               "content": "Au stand de dés de la kermesse, le joueur mise 100 F puis lance un dé cubique équilibré. Avec 6, il reçoit 400 F ; avec 4 ou 5, on lui rend sa mise de 100 F ; avec 1, 2 ou 3, il ne reçoit rien. Quelle est la probabilité que l'on rende sa mise au joueur ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Décrire : issues équiprobables. Étape 2 — Dénombrer les cas possibles : 6. Étape 3 — Dénombrer les cas favorables : on rend la mise avec 4 ou 5, soit 2 cas. Étape 4 — Calculer : $\\frac{2}{6} = \\frac{1}{3}$. La proposition $\\frac{1}{6}$ ne compte qu'un cas ; $\\frac{1}{2}$ compte 3 cas (4, 5 et 6).",
+              "explanation": "Étape 1 — Décrire : issues équiprobables. Étape 2 — Dénombrer les cas possibles : 6. Étape 3 — Dénombrer les cas favorables : on rend la mise avec 4 ou 5, soit 2 cas. Étape 4 — Calculer : $\\frac{2}{6} = \\frac{1}{3}$. La proposition $\\frac{1}{6}$ ne compte qu'un cas ; $\\frac{1}{2}$ compte 3 cas (4, 5 et 6) ; $\\frac{2}{3} = \\frac{4}{6}$ est la probabilité de ne pas rendre la mise (4 numéros sur 6), c'est-à-dire du contraire.",
               "answers": [
                 {
                   "content": "$\\frac{1}{3}$",
@@ -951,7 +951,7 @@
             {
               "content": "Au stand de dés de la kermesse, le joueur mise 100 F puis lance un dé cubique équilibré. Avec 6, il reçoit 400 F ; avec 4 ou 5, on lui rend sa mise de 100 F ; avec 1, 2 ou 3, il ne reçoit rien. $X$ est le gain algébrique en francs. Relie chaque valeur de $X$ à sa probabilité.",
               "question_type": "matching",
-              "explanation": "Étape 1 — Lister et définir : avec 6, $X = 400 - 100 = 300$ ; avec 4 ou 5, $X = 100 - 100 = 0$ ; avec 1, 2 ou 3, $X = 0 - 100 = -100$. Étape 2 — Écrire la loi : on regroupe les issues qui donnent la même valeur. Calcul : $p(X = 300) = \\frac{1}{6}$, $p(X = 0) = \\frac{2}{6} = \\frac{1}{3}$, $p(X = -100) = \\frac{3}{6} = \\frac{1}{2}$. Vérification : $\\frac{1}{6} + \\frac{2}{6} + \\frac{3}{6} = 1$.",
+              "explanation": "Étape 1 — Définir : avec 6, $X = 400 - 100 = 300$ ; avec 4 ou 5, $X = 100 - 100 = 0$ ; avec 1, 2 ou 3, $X = 0 - 100 = -100$. Étape 2 — Écrire : on regroupe les issues qui donnent la même valeur. Probabilités : $p(X = 300) = \\frac{1}{6}$, $p(X = 0) = \\frac{2}{6} = \\frac{1}{3}$, $p(X = -100) = \\frac{3}{6} = \\frac{1}{2}$. Vérification : $\\frac{1}{6} + \\frac{2}{6} + \\frac{3}{6} = 1$.",
               "answers": [
                 {
                   "content": "$X = 300$",
@@ -970,7 +970,7 @@
             {
               "content": "Au stand de dés de la kermesse, le joueur mise 100 F puis lance un dé cubique équilibré. Avec 6, il reçoit 400 F ; avec 4 ou 5, on lui rend sa mise de 100 F ; avec 1, 2 ou 3, il ne reçoit rien. $X$ est le gain algébrique en francs. Calcule l'espérance $E(X)$.",
               "question_type": "numeric",
-              "explanation": "Étape 1 — Définir : $X$ vaut 300, 0 ou −100 (gain algébrique = somme reçue − mise 100 F). Étape 2 — Écrire : $p(300) = \\frac{1}{6}$, $p(0) = \\frac{1}{3}$, $p(-100) = \\frac{1}{2}$. Étape 3 — Calculer : $E(X) = 300 \\times \\frac{1}{6} + 0 \\times \\frac{1}{3} + (-100) \\times \\frac{1}{2} = 50 + 0 - 50 = 0$. Étape 4 — Conclure : $E(X) = 0$ (voir la question suivante).",
+              "explanation": "Étape 1 — Définir : $X$ vaut 300, 0 ou −100 (gain algébrique = somme reçue − mise 100 F). Étape 2 — Écrire : $p(300) = \\frac{1}{6}$, $p(0) = \\frac{1}{3}$, $p(-100) = \\frac{1}{2}$. Étape 3 — Calculer : $E(X) = 300 \\times \\frac{1}{6} + 0 \\times \\frac{1}{3} + (-100) \\times \\frac{1}{2} = 50 + 0 - 50 = 0$. Étape 4 — Conclure : $E(X) = 0$.",
               "answers": [
                 {
                   "content": "0",
@@ -1077,7 +1077,7 @@
             {
               "content": "Une urne de loterie contient 8 boules indiscernables au toucher : 3 rouges et 5 noires. On tire simultanément 2 boules. $X$ est le nombre de boules rouges tirées. Quelle est la probabilité d'obtenir au moins une boule rouge ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Traduire : « au moins une rouge » a pour contraire « aucune rouge » ($X = 0$). Étape 2 — Calculer : $p(X = 0) = \\frac{10}{28} = \\frac{5}{14}$. Étape 3 — Choisir : formule du contraire. Étape 4 — Appliquer : $1 - \\frac{10}{28} = \\frac{18}{28} = \\frac{9}{14}$. La proposition $\\frac{5}{14}$ est la probabilité du contraire. La proposition $\\frac{15}{28}$ oublie le cas des 2 rouges ($\\frac{15}{28} + \\frac{3}{28} = \\frac{18}{28}$).",
+              "explanation": "Étape 1 — Traduire : « au moins une rouge » a pour contraire « aucune rouge » ($X = 0$). Étape 2 — Calculer : $p(X = 0) = \\frac{10}{28} = \\frac{5}{14}$. Étape 3 — Choisir : formule du contraire. Étape 4 — Appliquer : $1 - \\frac{10}{28} = \\frac{18}{28} = \\frac{9}{14}$. La proposition $\\frac{5}{14}$ est la probabilité du contraire. La proposition $\\frac{3}{28}$ est seulement $p(X = 2)$. La proposition $\\frac{15}{28}$ oublie le cas des 2 rouges ($\\frac{15}{28} + \\frac{3}{28} = \\frac{18}{28}$).",
               "answers": [
                 {
                   "content": "$\\frac{9}{14}$",
@@ -1100,7 +1100,7 @@
             {
               "content": "Une urne de loterie contient 8 boules indiscernables au toucher : 3 rouges et 5 noires. On tire simultanément 2 boules. $X$ est le nombre de boules rouges tirées. Calcule l'espérance $E(X)$ sous forme décimale.",
               "question_type": "numeric",
-              "explanation": "Étape 1 — Lister : $X$ prend les valeurs 0, 1, 2. Étape 2 — Écrire la loi : $p(0) = \\frac{10}{28}$, $p(1) = \\frac{15}{28}$, $p(2) = \\frac{3}{28}$ (somme $\\frac{28}{28} = 1$). Étape 3 — Calculer : $E(X) = 0 \\times \\frac{10}{28} + 1 \\times \\frac{15}{28} + 2 \\times \\frac{3}{28} = \\frac{15 + 6}{28} = \\frac{21}{28} = \\frac{3}{4} = 0{,}75$. Étape 4 — Interpréter : en répétant le tirage, on obtient en moyenne 0,75 boule rouge par tirage.",
+              "explanation": "Étape 1 — Définir : $X$ est un nombre de boules (il n'y a pas de mise) et prend les valeurs 0, 1, 2. Étape 2 — Écrire : $p(0) = \\frac{10}{28}$, $p(1) = \\frac{15}{28}$, $p(2) = \\frac{3}{28}$ (somme $\\frac{28}{28} = 1$). Étape 3 — Calculer : $E(X) = 0 \\times \\frac{10}{28} + 1 \\times \\frac{15}{28} + 2 \\times \\frac{3}{28} = \\frac{15 + 6}{28} = \\frac{21}{28} = \\frac{3}{4} = 0{,}75$. Étape 4 — Conclure : en répétant le tirage, on obtient en moyenne 0,75 boule rouge par tirage.",
               "answers": [
                 {
                   "content": "0,75",
@@ -1144,7 +1144,7 @@
             {
               "content": "Tombola de l'association des parents : 100 billets sont vendus 400 F l'un. Un billet gagne 10 000 F, 4 billets gagnent 2 500 F, 20 billets gagnent 500 F ; les 75 autres ne gagnent rien. Un joueur achète un billet tiré au hasard. $X$ est le gain algébrique en francs (lot reçu moins prix du billet). Relie chaque valeur de $X$ à sa probabilité.",
               "question_type": "matching",
-              "explanation": "Étape 1 — Définir : lot 10 000 F, $X = 10\\,000 - 400 = 9\\,600$ ; lot 2 500 F, $X = 2\\,100$ ; lot 500 F, $X = 100$ ; billet perdant, $X = 0 - 400 = -400$. Étape 2 — Écrire la loi : $p(9\\,600) = \\frac{1}{100} = 0{,}01$ ; $p(2\\,100) = \\frac{4}{100} = 0{,}04$ ; $p(100) = \\frac{20}{100} = 0{,}2$ ; $p(-400) = \\frac{75}{100} = 0{,}75$. Somme : $0{,}01 + 0{,}04 + 0{,}2 + 0{,}75 = 1$.",
+              "explanation": "Étape 1 — Définir : lot 10 000 F, $X = 10\\,000 - 400 = 9\\,600$ ; lot 2 500 F, $X = 2\\,100$ ; lot 500 F, $X = 100$ ; billet perdant, $X = 0 - 400 = -400$. Étape 2 — Écrire : $p(9\\,600) = \\frac{1}{100} = 0{,}01$ ; $p(2\\,100) = \\frac{4}{100} = 0{,}04$ ; $p(100) = \\frac{20}{100} = 0{,}2$ ; $p(-400) = \\frac{75}{100} = 0{,}75$. Somme : $0{,}01 + 0{,}04 + 0{,}2 + 0{,}75 = 1$.",
               "answers": [
                 {
                   "content": "$X = 9\\,600$",
@@ -1167,7 +1167,7 @@
             {
               "content": "Tombola de l'association des parents : 100 billets sont vendus 400 F l'un. Un billet gagne 10 000 F, 4 billets gagnent 2 500 F, 20 billets gagnent 500 F ; les 75 autres ne gagnent rien. Un joueur achète un billet tiré au hasard. $X$ est le gain algébrique en francs. Calcule l'espérance $E(X)$.",
               "question_type": "numeric",
-              "explanation": "Étape 1 — Définir : $X$ vaut 9 600, 2 100, 100 ou −400. Étape 2 — Écrire : probabilités 0,01 ; 0,04 ; 0,2 ; 0,75. Étape 3 — Calculer : $E(X) = 9\\,600 \\times 0{,}01 + 2\\,100 \\times 0{,}04 + 100 \\times 0{,}2 + (-400) \\times 0{,}75 = 96 + 84 + 20 - 300 = -100$. Étape 4 — Conclure : $E(X) = -100 < 0$ (voir la question suivante).",
+              "explanation": "Étape 1 — Définir : $X$ vaut 9 600, 2 100, 100 ou −400. Étape 2 — Écrire : probabilités 0,01 ; 0,04 ; 0,2 ; 0,75. Étape 3 — Calculer : $E(X) = 9\\,600 \\times 0{,}01 + 2\\,100 \\times 0{,}04 + 100 \\times 0{,}2 + (-400) \\times 0{,}75 = 96 + 84 + 20 - 300 = -100$. Étape 4 — Conclure : $E(X) = -100 < 0$, le jeu est défavorable au joueur.",
               "answers": [
                 {
                   "content": "-100",
@@ -1216,7 +1216,7 @@
             {
               "content": "Tombola de l'association des parents : 100 billets sont vendus 400 F l'un. Un billet gagne 10 000 F, 4 billets gagnent 2 500 F, 20 billets gagnent 500 F ; les 75 autres ne gagnent rien. Un joueur achète un billet tiré au hasard. L'association vend les 100 billets. En moyenne, combien gagne-t-elle par billet vendu ?",
               "question_type": "numeric",
-              "explanation": "Étape 1 — Définir : ce que perd le joueur, l'association le gagne : son gain algébrique est l'opposé de celui du joueur. Étape 3 — Calculer : elle encaisse 400 F par billet et rembourse en moyenne 300 F de lots (voir la question précédente), soit $400 - 300 = 100$ F, ou encore $-E(X) = 100$. Étape 4 — Conclure : le jeu est défavorable au joueur et favorable à l'organisateur, de 100 F par billet, soit $100 \\times 100 = 10\\,000$ F sur la tombola.",
+              "explanation": "Étape 1 — Définir : ce que perd le joueur, l'association le gagne : son gain algébrique est l'opposé de celui du joueur. Étape 3 — Calculer : elle encaisse 400 F par billet et rembourse en moyenne 300 F de lots (somme moyenne reçue : $10\\,000 \\times 0{,}01 + 2\\,500 \\times 0{,}04 + 500 \\times 0{,}2 = 300$ F), soit $400 - 300 = 100$ F, ou encore $-E(X) = 100$. Étape 4 — Conclure : le jeu est défavorable au joueur et favorable à l'organisateur, de 100 F par billet, soit $100 \\times 100 = 10\\,000$ F sur la tombola.",
               "answers": [
                 {
                   "content": "100",
@@ -1273,7 +1273,7 @@
             {
               "content": "Partie A. Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Calcule la probabilité que l'élève ne pratique aucun des deux sports, sous forme décimale.",
               "question_type": "numeric",
-              "explanation": "Étape 1 — Traduire : « ni football ni basket » est le contraire de $A \\cup B$. Étape 2 — Calculer : $p(A \\cup B) = 0{,}8$ (question précédente). Étape 3 — Choisir : formule du contraire. Étape 4 — Appliquer : $1 - 0{,}8 = 0{,}2$, soit 8 élèves sur 40.",
+              "explanation": "Étape 1 — Traduire : « ni football ni basket » est le contraire de $A \\cup B$. Étape 2 — Calculer : $p(A \\cup B) = 0{,}55 + 0{,}45 - 0{,}2 = 0{,}8$ (cas général). Étape 3 — Choisir : formule du contraire. Étape 4 — Appliquer : $1 - 0{,}8 = 0{,}2$, soit 8 élèves sur 40.",
               "answers": [
                 {
                   "content": "0,2",
@@ -1283,7 +1283,7 @@
               "tolerance": 0
             },
             {
-              "content": "Partie B. Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Quelle est la probabilité que l'élève pratique exactement un des deux sports ? Donne le résultat sous forme décimale.",
+              "content": "Partie A. Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Quelle est la probabilité que l'élève pratique exactement un des deux sports ? Donne le résultat sous forme décimale.",
               "question_type": "numeric",
               "explanation": "Étape 1 — Traduire : exactement un sport = au moins un sport, sauf les deux : $p(A \\cup B) - p(A \\cap B)$. Étape 2 — Calculer : $p(A \\cup B) = 0{,}8$ et $p(A \\cap B) = 0{,}2$. Étape 3 — Choisir : on retranche les élèves qui pratiquent les deux. Étape 4 — Appliquer : $0{,}8 - 0{,}2 = 0{,}6$. Vérification : 14 footballeurs seulement + 10 basketteurs seulement = 24 élèves sur 40, soit 0,6.",
               "answers": [
@@ -1308,7 +1308,7 @@
               "starter": "Si l'élève pratique les deux sports, X vaut…"
             },
             {
-              "content": "Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Cet élève joue à un jeu de la kermesse : il paie une mise de 250 F ; il reçoit 500 F s'il pratique les deux sports, 200 F s'il en pratique exactement un, et rien s'il n'en pratique aucun. $X$ est son gain algébrique en francs. Calcule l'espérance $E(X)$.",
+              "content": "Partie B. Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Cet élève joue à un jeu de la kermesse : il paie une mise de 250 F ; il reçoit 500 F s'il pratique les deux sports, 200 F s'il en pratique exactement un, et rien s'il n'en pratique aucun. $X$ est son gain algébrique en francs. Calcule l'espérance $E(X)$.",
               "question_type": "numeric",
               "explanation": "Étape 1 — Définir : $X$ vaut 250, −50 ou −250. Étape 2 — Écrire : probabilités 0,2 ; 0,6 ; 0,2. Étape 3 — Calculer : $E(X) = 250 \\times 0{,}2 + (-50) \\times 0{,}6 + (-250) \\times 0{,}2 = 50 - 30 - 50 = -30$. Étape 4 — Conclure : $E(X) = -30 < 0$.",
               "answers": [
@@ -1321,7 +1321,7 @@
               "unit": "F"
             },
             {
-              "content": "Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Cet élève joue à un jeu de la kermesse : il paie une mise de 250 F ; il reçoit 500 F s'il pratique les deux sports, 200 F s'il en pratique exactement un, et rien s'il n'en pratique aucun. $X$ est son gain algébrique en francs. L'espérance du gain algébrique est $E(X) = -30$ F. Quelle conclusion est correcte ?",
+              "content": "Partie B. Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Cet élève joue à un jeu de la kermesse : il paie une mise de 250 F ; il reçoit 500 F s'il pratique les deux sports, 200 F s'il en pratique exactement un, et rien s'il n'en pratique aucun. $X$ est son gain algébrique en francs. L'espérance du gain algébrique est $E(X) = -30$ F. Quelle conclusion est correcte ?",
               "question_type": "single_choice",
               "explanation": "Étape 4 — Conclure : $E(X) = -30 < 0$, donc le jeu est défavorable à l'élève, qui perd 30 F par partie en moyenne. Pas équitable : il faudrait $E(X) = 0$. Pas favorable : le signe est négatif. Pas « exactement 30 F à chaque partie » : le résultat d'une partie est −250, −50 ou +250 F ; −30 F est une moyenne.",
               "answers": [
@@ -1344,7 +1344,7 @@
               ]
             },
             {
-              "content": "Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Cet élève joue à un jeu de la kermesse : il paie une mise de 250 F ; il reçoit 500 F s'il pratique les deux sports, 200 F s'il en pratique exactement un, et rien s'il n'en pratique aucun. $X$ est son gain algébrique en francs. Quelle mise, en francs, rendrait ce jeu équitable ?",
+              "content": "Partie B. Dans un club de 40 élèves, 22 pratiquent le football (événement $A$), 18 pratiquent le basket (événement $B$) et 8 pratiquent les deux sports. On choisit un élève au hasard. Cet élève joue à un jeu de la kermesse : il paie une mise de 250 F ; il reçoit 500 F s'il pratique les deux sports, 200 F s'il en pratique exactement un, et rien s'il n'en pratique aucun. $X$ est son gain algébrique en francs. Quelle mise, en francs, rendrait ce jeu équitable ?",
               "question_type": "numeric",
               "explanation": "Étape 1 — Définir : avec une mise $m$, $X$ = somme reçue − $m$. Étape 2 — Écrire : sommes reçues 500 F (0,2), 200 F (0,6), 0 F (0,2). Étape 3 — Calculer : somme moyenne reçue $= 500 \\times 0{,}2 + 200 \\times 0{,}6 + 0 \\times 0{,}2 = 100 + 120 = 220$ F, donc $E(X) = 220 - m$. Étape 4 — Conclure : équitable si $E(X) = 0$, donc $m = 220$ F. Cohérent : avec $m = 250$, $E(X) = -30$.",
               "answers": [

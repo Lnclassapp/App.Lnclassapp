@@ -66,5 +66,5 @@ Aucun changement de code : figures des sortes existantes (`coordinate_plane`, `n
 
 | Métrique | Avant | Cible | Après |
 |---|---|---|---|
-| Leçons v3 de Maths en Tle A1 | 0 | 8 | |
-| Leçons v3 de Maths en Tle A2 | 0 | 7 | |
+| Leçons v3 de Maths en Tle A1 | 0 | 8 | 8 |
+| Leçons v3 de Maths en Tle A2 | 0 | 7 | 7 |

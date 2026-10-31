@@ -973,9 +973,9 @@
                 ]
               },
               {
-                "content": "Pour cette droite, on a $b = y_{G_1} - a = 3 - 2 = 1$, donc la formule est bonne ici même si elle oublie le $x$ de $G_1$.",
+                "content": "Pour cette droite, on a $b = y_{G_1} - a = 3 - 2 = 1$, donc la formule incomplète, qui oublie le $x$ de $G_1$, donne ici le bon résultat.",
                 "question_type": "true_false",
-                "explanation": "Étape 4 — la bonne formule est $b = y_{G_1} - a \\times x_{G_1}$. Ici $x_{G_1} = 1$, donc $a \\times 1 = a$ : les deux formules donnent le même résultat par hasard. L'affirmation est vraie, mais la formule sans $x_{G_1}$ est fausse dès que $x_{G_1} \\neq 1$.",
+                "explanation": "Étape 4 — la bonne formule est $b = y_{G_1} - a \\times x_{G_1}$. Ici $x_{G_1} = 1$, donc $a \\times 1 = a$ : la formule incomplète donne ici le bon résultat par hasard. L'affirmation est vraie, mais la formule sans $x_{G_1}$ est fausse dès que $x_{G_1} \\neq 1$.",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -1159,7 +1159,7 @@
             {
               "content": "Les valeurs de $x$ sont 2 ; 4 ; 6 ; 8 ; 10 ; 12 et celles de $y$ sont 10 ; 13 ; 16 ; 19 ; 25 ; 31. Quel est le couple $(x ; y)$ du quatrième mois ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Lire le tableau : on prend la quatrième valeur de $x$ (8) et la quatrième valeur de $y$ (19). Le couple est $(8 ; 19)$. $(19 ; 8)$ inverse l'abscisse et l'ordonnée (piège de la notion 1) ; $(6 ; 16)$ est le troisième couple ; $(10 ; 25)$ est le cinquième.",
+              "explanation": "Nuage de points, étape 1 — Lire le tableau : on prend la quatrième valeur de $x$ (8) et la quatrième valeur de $y$ (19). Le couple est $(8 ; 19)$. $(19 ; 8)$ inverse l'abscisse et l'ordonnée (piège de la notion 1) ; $(6 ; 16)$ est le troisième couple ; $(10 ; 25)$ est le cinquième.",
               "answers": [
                 {
                   "content": "$(8 ; 19)$",
@@ -1182,7 +1182,7 @@
             {
               "content": "Quand la dépense de publicité augmente de 2 à 12, les recettes ___ (valeurs : $y$ passe de 10 à 31).",
               "question_type": "select",
-              "explanation": "Étape 4 — Décrire le nuage : de gauche à droite, $x$ passe de 2 à 12 et $y$ passe de 10 à 31. Les points montent, donc les recettes augmentent quand la publicité augmente. Les autres propositions décriraient un nuage qui descend ou qui est à la même hauteur.",
+              "explanation": "Nuage de points, étape 4 — Décrire le nuage : de gauche à droite, $x$ passe de 2 à 12 et $y$ passe de 10 à 31. Les points montent, donc les recettes augmentent quand la publicité augmente. Les autres propositions décriraient un nuage qui descend ou qui est à la même hauteur.",
               "answers": [
                 {
                   "content": "diminuent",
@@ -1202,7 +1202,7 @@
               "content": "Calcule la moyenne $\\bar{x}$ des dépenses de publicité : 2 ; 4 ; 6 ; 8 ; 10 ; 12.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Calculer la moyenne de $x$ : $2 + 4 + 6 + 8 + 10 + 12 = 42$, puis $42 \\div 6 = 7$. Il y a 6 points, donc on divise par 6 (et non par 2). Donc $\\bar{x} = 7$.",
+              "explanation": "Point moyen, étape 1 — Calculer la moyenne de $x$ : $2 + 4 + 6 + 8 + 10 + 12 = 42$, puis $42 \\div 6 = 7$. Il y a 6 points, donc on divise par 6 (et non par 2). Donc $\\bar{x} = 7$.",
               "answers": [
                 {
                   "content": "7",
@@ -1214,7 +1214,7 @@
               "content": "Calcule la moyenne $\\bar{y}$ des recettes : 10 ; 13 ; 16 ; 19 ; 25 ; 31.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 2 — Calculer la moyenne de $y$ : $10 + 13 + 16 + 19 + 25 + 31 = 114$, puis $114 \\div 6 = 19$. Donc $\\bar{y} = 19$.",
+              "explanation": "Point moyen, étape 2 — Calculer la moyenne de $y$ : $10 + 13 + 16 + 19 + 25 + 31 = 114$, puis $114 \\div 6 = 19$. Donc $\\bar{y} = 19$.",
               "answers": [
                 {
                   "content": "19",
@@ -1225,7 +1225,7 @@
             {
               "content": "Pour cette série, on a $\\bar{x} = 7$ et $\\bar{y} = 19$. Quel est le point moyen $G$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 3 — Écrire $G$ : l'abscisse d'abord, donc $G(7 ; 19)$. La proposition $(19 ; 7)$ inverse les coordonnées ; $(42 ; 114)$ donne les sommes sans diviser ; $(7 ; 114)$ oublie de diviser la somme des $y$.",
+              "explanation": "Point moyen, étape 3 — Écrire $G$ : l'abscisse d'abord, donc $G(7 ; 19)$. La proposition $(19 ; 7)$ inverse les coordonnées ; $(42 ; 114)$ donne les sommes sans diviser ; $(7 ; 114)$ oublie de diviser la somme des $y$.",
               "answers": [
                 {
                   "content": "$G(19 ; 7)$",
@@ -1248,7 +1248,7 @@
             {
               "content": "Le point moyen $G(7 ; 19)$ est l'un des six points du tableau, dont les abscisses sont 2 ; 4 ; 6 ; 8 ; 10 ; 12.",
               "question_type": "true_false",
-              "explanation": "Étape 3 — Écrire $G$ puis le placer : son abscisse est 7. Aucun des six points n'a pour abscisse 7 (les abscisses sont 2, 4, 6, 8, 10, 12). Donc $G$ n'est pas un point du tableau. L'affirmation est fausse : le point moyen se place au centre du nuage, pas forcément sur un point.",
+              "explanation": "Point moyen, étape 3 — Écrire $G$ puis le placer : son abscisse est 7. Aucun des six points n'a pour abscisse 7 (les abscisses sont 2, 4, 6, 8, 10, 12). Donc $G$ n'est pas un point du tableau. L'affirmation est fausse : le point moyen se place au centre du nuage, pas forcément sur un point.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1271,7 +1271,7 @@
             {
               "content": "Les trois premiers points sont $(2 ; 16)$, $(3 ; 15)$ et $(4 ; 11)$. Quel est leur point moyen $G_1$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Ordonner et partager : les $x$ sont croissants, la première moitié est formée des trois premiers points. Étape 2 — Calculer $G_1$ : $\\bar{x} = (2 + 3 + 4) \\div 3 = 3$ et $\\bar{y} = (16 + 15 + 11) \\div 3 = 42 \\div 3 = 14$. Donc $G_1(3 ; 14)$. $(3 ; 42)$ oublie de diviser les $y$ ; $(14 ; 3)$ inverse ; $(4 ; 11)$ est un point du tableau, pas le point moyen.",
+              "explanation": "Mayer, étape 1 — Ordonner et partager : les $x$ sont croissants, la première moitié est formée des trois premiers points. Mayer, étape 2 — Calculer $G_1$ : $\\bar{x} = (2 + 3 + 4) \\div 3 = 3$ et $\\bar{y} = (16 + 15 + 11) \\div 3 = 42 \\div 3 = 14$. Donc $G_1(3 ; 14)$. $(3 ; 42)$ oublie de diviser les $y$ ; $(14 ; 3)$ inverse ; $(4 ; 11)$ est un point du tableau, pas le point moyen.",
               "answers": [
                 {
                   "content": "$G_1(3 ; 14)$",
@@ -1295,7 +1295,7 @@
               "content": "Les trois derniers points sont $(5 ; 9)$, $(6 ; 8)$ et $(7 ; 7)$. Quelle est l'ordonnée de leur point moyen $G_2$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 2 — Calculer $G_2$ : $\\bar{y} = (9 + 8 + 7) \\div 3 = 24 \\div 3 = 8$. L'ordonnée de $G_2$ est 8 (l'abscisse est $(5 + 6 + 7) \\div 3 = 6$, donc $G_2(6 ; 8)$).",
+              "explanation": "Mayer, étape 2 — Calculer $G_2$ : $\\bar{y} = (9 + 8 + 7) \\div 3 = 24 \\div 3 = 8$. L'ordonnée de $G_2$ est 8 (l'abscisse est $(5 + 6 + 7) \\div 3 = 6$, donc $G_2(6 ; 8)$).",
               "answers": [
                 {
                   "content": "8",
@@ -1307,7 +1307,7 @@
               "content": "Les points moyens sont $G_1(3 ; 14)$ et $G_2(6 ; 8)$. Calcule le coefficient directeur $a$ de la droite de Mayer.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 3 — Calculer le coefficient directeur : $a = \\dfrac{8 - 14}{6 - 3} = \\dfrac{-6}{3} = -2$. Il est négatif car le nuage descend.",
+              "explanation": "Mayer, étape 3 — Calculer le coefficient directeur : $a = \\dfrac{8 - 14}{6 - 3} = \\dfrac{-6}{3} = -2$. Il est négatif car le nuage descend.",
               "answers": [
                 {
                   "content": "-2",
@@ -1319,7 +1319,7 @@
               "content": "La droite de Mayer a pour coefficient directeur $a = -2$ et passe par $G_1(3 ; 14)$. Calcule l'ordonnée à l'origine $b$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 4 — Calculer l'ordonnée à l'origine : $b = y_{G_1} - a \\times x_{G_1} = 14 - (-2) \\times 3 = 14 + 6 = 20$. L'équation est $y = -2x + 20$ (Étape 5). Avec $14 - 2 \\times 3 = 8$, on oublierait que $a$ est négatif.",
+              "explanation": "Mayer, étape 4 — Calculer l'ordonnée à l'origine : $b = y_{G_1} - a \\times x_{G_1} = 14 - (-2) \\times 3 = 14 + 6 = 20$. L'équation est $y = -2x + 20$ (Mayer, étape 5). Avec $14 - 2 \\times 3 = 8$, on oublierait que $a$ est négatif.",
               "answers": [
                 {
                   "content": "20",
@@ -1331,7 +1331,7 @@
               "content": "La droite de Mayer est $y = -2x + 20$ ($x$ : prix du kilo en centaines de FCFA ; $y$ : quantité en dizaines de kg). Prévois la quantité vendue, en kg, pour un prix de 8 centaines de FCFA.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire l'équation : $y = -2x + 20$. Étape 2 — Remplacer : $x = 8$, donc $y = -2 \\times 8 + 20$. Étape 3 — Calculer : $y = -16 + 20 = 4$ dizaines de kg, soit 40 kg. Étape 4 — Conclure : on prévoit 40 kg vendus. Comme 8 est hors des valeurs observées (2 à 7), c'est une prévision.",
+              "explanation": "Estimation, étape 1 — Écrire l'équation : $y = -2x + 20$. Estimation, étape 2 — Remplacer : $x = 8$, donc $y = -2 \\times 8 + 20$. Estimation, étape 3 — Calculer : $y = -16 + 20 = 4$ dizaines de kg, soit 40 kg. Estimation, étape 4 — Conclure : on prévoit 40 kg vendus. Comme 8 est hors des valeurs observées (2 à 7), c'est une prévision.",
               "answers": [
                 {
                   "content": "40",
@@ -1344,7 +1344,7 @@
               "content": "La droite de Mayer est $y = -2x + 20$ ($x$ : prix en centaines de FCFA ; $y$ : quantité en dizaines de kg). Pour quel prix du kilo (en centaines de FCFA) vend-on 10 dizaines de kg ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 2 — Remplacer : c'est $y$ qui est donné, donc on écrit $-2x + 20 = 10$. Étape 3 — Calculer : $-2x = -10$, donc $x = 5$. Étape 4 — Conclure : un prix de 5 centaines de FCFA, soit 500 FCFA. Calculer $-2 \\times 10 + 20 = 0$ serait le piège (mettre 10 à la place de $x$).",
+              "explanation": "Estimation, étape 2 — Remplacer : c'est $y$ qui est donné, donc on écrit $-2x + 20 = 10$. Estimation, étape 3 — Calculer : $-2x = -10$, donc $x = 5$. Estimation, étape 4 — Conclure : un prix de 5 centaines de FCFA, soit 500 FCFA. Calculer $-2 \\times 10 + 20 = 0$ serait le piège (mettre 10 à la place de $x$).",
               "answers": [
                 {
                   "content": "5",
@@ -1355,7 +1355,7 @@
             {
               "content": "Le point moyen de la série, $G(4,5 ; 11)$, appartient à la droite $y = -2x + 20$.",
               "question_type": "true_false",
-              "explanation": "Étape 5 — vérifier que $G$ est sur la droite : on remplace $x$ par 4,5. $-2 \\times 4,5 + 20 = -9 + 20 = 11$, qui est l'ordonnée de $G$. L'affirmation est vraie. (Le point $G$ se calcule ainsi : $\\bar{x} = 27 \\div 6 = 4,5$ et $\\bar{y} = 66 \\div 6 = 11$.)",
+              "explanation": "Mayer, étape 5 — vérifier que $G$ est sur la droite : on remplace $x$ par 4,5. $-2 \\times 4,5 + 20 = -9 + 20 = 11$, qui est l'ordonnée de $G$. L'affirmation est vraie. (Le point $G$ se calcule ainsi : $\\bar{x} = 27 \\div 6 = 4,5$ et $\\bar{y} = 66 \\div 6 = 11$.)",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1379,7 +1379,7 @@
               "content": "Le rang du mois $x$ vaut 1 ; 2 ; 3 ; 4 ; 5 ; 6 ; 7 ; 8. Calcule la moyenne $\\bar{x}$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Calculer la moyenne de $x$ : $1 + 2 + \\dots + 8 = 36$, puis $36 \\div 8 = 4,5$, car il y a 8 points. Donc $\\bar{x} = 4,5$.",
+              "explanation": "Point moyen, étape 1 — Calculer la moyenne de $x$ : $1 + 2 + \\dots + 8 = 36$, puis $36 \\div 8 = 4,5$, car il y a 8 points. Donc $\\bar{x} = 4,5$.",
               "answers": [
                 {
                   "content": "4,5",
@@ -1391,7 +1391,7 @@
               "content": "Les recettes sont 5 ; 6 ; 8 ; 9 ; 13 ; 14 ; 16 ; 17. Calcule la moyenne $\\bar{y}$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 2 — Calculer la moyenne de $y$ : $5 + 6 + 8 + 9 + 13 + 14 + 16 + 17 = 88$, puis $88 \\div 8 = 11$. Donc $\\bar{y} = 11$ et $G(4,5 ; 11)$.",
+              "explanation": "Point moyen, étape 2 — Calculer la moyenne de $y$ : $5 + 6 + 8 + 9 + 13 + 14 + 16 + 17 = 88$, puis $88 \\div 8 = 11$. Donc $\\bar{y} = 11$ et $G(4,5 ; 11)$.",
               "answers": [
                 {
                   "content": "11",
@@ -1402,7 +1402,7 @@
             {
               "content": "Les quatre premiers points sont $(1 ; 5)$, $(2 ; 6)$, $(3 ; 8)$ et $(4 ; 9)$. Quel est leur point moyen $G_1$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Ordonner et partager : les quatre premiers mois forment le premier groupe. Étape 2 — Calculer $G_1$ : $\\bar{x} = 10 \\div 4 = 2,5$ et $\\bar{y} = (5 + 6 + 8 + 9) \\div 4 = 28 \\div 4 = 7$. Donc $G_1(2,5 ; 7)$. $(2,5 ; 28)$ oublie de diviser les $y$ ; $(7 ; 2,5)$ inverse ; $(4 ; 7)$ prend la mauvaise abscisse.",
+              "explanation": "Mayer, étape 1 — Ordonner et partager : les quatre premiers mois forment le premier groupe. Mayer, étape 2 — Calculer $G_1$ : $\\bar{x} = 10 \\div 4 = 2,5$ et $\\bar{y} = (5 + 6 + 8 + 9) \\div 4 = 28 \\div 4 = 7$. Donc $G_1(2,5 ; 7)$. $(2,5 ; 28)$ oublie de diviser les $y$ ; $(7 ; 2,5)$ inverse ; $(4 ; 7)$ prend la mauvaise abscisse.",
               "answers": [
                 {
                   "content": "$G_1(2,5 ; 7)$",
@@ -1426,7 +1426,7 @@
               "content": "Les points moyens sont $G_1(2,5 ; 7)$ et $G_2(6,5 ; 15)$. Calcule le coefficient directeur $a$ de la droite de Mayer.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 3 — Calculer le coefficient directeur : $a = \\dfrac{15 - 7}{6,5 - 2,5} = \\dfrac{8}{4} = 2$.",
+              "explanation": "Mayer, étape 3 — Calculer le coefficient directeur : $a = \\dfrac{15 - 7}{6,5 - 2,5} = \\dfrac{8}{4} = 2$.",
               "answers": [
                 {
                   "content": "2",
@@ -1437,7 +1437,7 @@
             {
               "content": "La droite de Mayer a pour coefficient directeur $a = 2$ et passe par $G_1(2,5 ; 7)$. Quelle est son équation ?",
               "question_type": "single_choice",
-              "explanation": "Étape 4 — Calculer l'ordonnée à l'origine : $b = 7 - 2 \\times 2,5 = 7 - 5 = 2$. Étape 5 — Écrire l'équation : $y = 2x + 2$. $y = 2x + 7$ prend $b = y_{G_1}$ sans calcul ; $y = 2x + 5$ oublie le $x$ de $G_1$ ($7 - 2$) ; $y = 7x + 2$ échange $a$ et $y_{G_1}$.",
+              "explanation": "Mayer, étape 4 — Calculer l'ordonnée à l'origine : $b = 7 - 2 \\times 2,5 = 7 - 5 = 2$. Mayer, étape 5 — Écrire l'équation : $y = 2x + 2$. $y = 2x + 7$ prend $b = y_{G_1}$ sans calcul ; $y = 2x + 5$ oublie le $x$ de $G_1$ ($7 - 2$) ; $y = 7x + 2$ échange $a$ et $y_{G_1}$.",
               "answers": [
                 {
                   "content": "$y = 2x + 7$",
@@ -1461,7 +1461,7 @@
               "content": "La droite d'ajustement est $y = 2x + 2$ ($x$ : rang du mois ; $y$ : recettes en dizaines de milliers de FCFA). Prévois les recettes du mois 10, en FCFA.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire l'équation : $y = 2x + 2$. Étape 2 — Remplacer : $x = 10$, donc $y = 2 \\times 10 + 2$. Étape 3 — Calculer : $y = 22$ dizaines de milliers de FCFA, soit 220 000 FCFA. Étape 4 — Conclure : on prévoit 220 000 FCFA ; comme 10 est hors des valeurs observées (1 à 8), c'est une prévision.",
+              "explanation": "Estimation, étape 1 — Écrire l'équation : $y = 2x + 2$. Estimation, étape 2 — Remplacer : $x = 10$, donc $y = 2 \\times 10 + 2$. Estimation, étape 3 — Calculer : $y = 22$ dizaines de milliers de FCFA, soit 220 000 FCFA. Estimation, étape 4 — Conclure : on prévoit 220 000 FCFA ; comme 10 est hors des valeurs observées (1 à 8), c'est une prévision.",
               "answers": [
                 {
                   "content": "220000",
@@ -1473,7 +1473,7 @@
             {
               "content": "Le point moyen $G(4,5 ; 11)$ appartient à la droite $y = 2x + 2$.",
               "question_type": "true_false",
-              "explanation": "Étape 5 — vérifier : on remplace $x$ par 4,5. $2 \\times 4,5 + 2 = 9 + 2 = 11$, qui est l'ordonnée de $G$. L'affirmation est vraie, comme le prévoit la méthode de Mayer.",
+              "explanation": "Mayer, étape 5 — vérifier : on remplace $x$ par 4,5. $2 \\times 4,5 + 2 = 9 + 2 = 11$, qui est l'ordonnée de $G$. L'affirmation est vraie, comme le prévoit la méthode de Mayer.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1496,20 +1496,20 @@
             {
               "content": "Les points $(1 ; 13)$, $(2 ; 15)$, $(3 ; 17)$, $(4 ; 24)$, $(5 ; 28)$ et $(6 ; 29)$ forment un nuage. Décris l'allure du nuage et explique pourquoi un ajustement affine est adapté.",
               "question_type": "written",
-              "points": 2,
+              "points": 3,
               "criteria": [
                 "Indiquer que les points montent (les ventes augmentent avec le rang de l'année)",
                 "Dire que les points sont proches d'une droite",
                 "Conclure qu'un ajustement affine convient"
               ],
-              "explanation": "Corrigé modèle : « Quand le rang de l'année $x$ augmente de 1 à 6, les ventes $y$ passent de 13 à 29 : les points montent de la gauche vers la droite. Ils sont proches d'une droite qui monte, donc un ajustement affine est adapté. » Étape 4 — Décrire le nuage : on dit si les points montent, descendent ou sont dispersés, et s'ils sont proches d'une droite. Barème : 1 point pour la direction du nuage (il monte), 1 point pour le lien avec une droite (les points sont presque alignés).",
+              "explanation": "Corrigé modèle : « Quand le rang de l'année $x$ augmente de 1 à 6, les ventes $y$ passent de 13 à 29 : les points montent de la gauche vers la droite. Ils sont proches d'une droite qui monte, donc un ajustement affine est adapté. » Nuage de points, étape 4 — Décrire le nuage : on dit si les points montent, descendent ou sont dispersés, et s'ils sont proches d'une droite. Barème : 1 point pour la direction du nuage (il monte), 1 point pour le lien avec une droite (les points sont presque alignés), 1 point pour la conclusion (un ajustement affine convient).",
               "answers": [],
               "starter": "Les points montent car…"
             },
             {
               "content": "Les valeurs de $x$ sont 1 ; 2 ; 3 ; 4 ; 5 ; 6 (somme 21) et celles de $y$ sont 13 ; 15 ; 17 ; 24 ; 28 ; 29 (somme 126). Quel est le point moyen $G$ de la série ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Calculer la moyenne de $x$ : $21 \\div 6 = 3,5$. Étape 2 — Calculer la moyenne de $y$ : $126 \\div 6 = 21$. Étape 3 — Écrire $G$ : $G(3,5 ; 21)$. $(21 ; 3,5)$ inverse les coordonnées ; $(21 ; 126)$ donne les sommes sans diviser ; $(3,5 ; 126)$ oublie de diviser les $y$.",
+              "explanation": "Point moyen, étape 1 — Calculer la moyenne de $x$ : $21 \\div 6 = 3,5$. Point moyen, étape 2 — Calculer la moyenne de $y$ : $126 \\div 6 = 21$. Point moyen, étape 3 — Écrire $G$ : $G(3,5 ; 21)$. $(21 ; 3,5)$ inverse les coordonnées ; $(21 ; 126)$ donne les sommes sans diviser ; $(3,5 ; 126)$ oublie de diviser les $y$.",
               "answers": [
                 {
                   "content": "$G(3,5 ; 21)$",
@@ -1532,7 +1532,7 @@
             {
               "content": "On partage la série en deux groupes de trois points : $(1 ; 13)$, $(2 ; 15)$, $(3 ; 17)$ et $(4 ; 24)$, $(5 ; 28)$, $(6 ; 29)$. Quel est le point moyen $G_1$ du premier groupe ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Ordonner et partager : les $x$ sont déjà croissants ; le premier groupe contient les trois premiers points. Étape 2 — Calculer $G_1$ : $\\bar{x} = 6 \\div 3 = 2$ et $\\bar{y} = (13 + 15 + 17) \\div 3 = 45 \\div 3 = 15$. Donc $G_1(2 ; 15)$. $(2 ; 45)$ oublie de diviser les $y$ ; $(15 ; 2)$ inverse ; $(5 ; 27)$ est le point moyen du second groupe.",
+              "explanation": "Mayer, étape 1 — Ordonner et partager : les $x$ sont déjà croissants ; le premier groupe contient les trois premiers points. Mayer, étape 2 — Calculer $G_1$ : $\\bar{x} = 6 \\div 3 = 2$ et $\\bar{y} = (13 + 15 + 17) \\div 3 = 45 \\div 3 = 15$. Donc $G_1(2 ; 15)$. $(2 ; 45)$ oublie de diviser les $y$ ; $(15 ; 2)$ inverse ; $(5 ; 27)$ est le point moyen du second groupe.",
               "answers": [
                 {
                   "content": "$G_1(2 ; 45)$",
@@ -1556,7 +1556,7 @@
               "content": "Le second groupe est formé de $(4 ; 24)$, $(5 ; 28)$ et $(6 ; 29)$. Quelle est l'ordonnée de son point moyen $G_2$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 2 — Calculer $G_2$ : $\\bar{y} = (24 + 28 + 29) \\div 3 = 81 \\div 3 = 27$. L'abscisse de $G_2$ est $(4 + 5 + 6) \\div 3 = 5$, donc $G_2(5 ; 27)$.",
+              "explanation": "Mayer, étape 2 — Calculer $G_2$ : $\\bar{y} = (24 + 28 + 29) \\div 3 = 81 \\div 3 = 27$. L'abscisse de $G_2$ est $(4 + 5 + 6) \\div 3 = 5$, donc $G_2(5 ; 27)$.",
               "answers": [
                 {
                   "content": "27",
@@ -1568,7 +1568,7 @@
               "content": "Les points moyens sont $G_1(2 ; 15)$ et $G_2(5 ; 27)$. Calcule le coefficient directeur $a$ de la droite de Mayer.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 3 — Calculer le coefficient directeur : $a = \\dfrac{27 - 15}{5 - 2} = \\dfrac{12}{3} = 4$. Chaque année, les ventes augmentent d'environ 4 dizaines de sacs.",
+              "explanation": "Mayer, étape 3 — Calculer le coefficient directeur : $a = \\dfrac{27 - 15}{5 - 2} = \\dfrac{12}{3} = 4$. Chaque année, les ventes augmentent d'environ 4 dizaines de sacs.",
               "answers": [
                 {
                   "content": "4",
@@ -1579,7 +1579,7 @@
             {
               "content": "La droite de Mayer a pour coefficient directeur $a = 4$ et passe par $G_1(2 ; 15)$. Quelle est son équation ?",
               "question_type": "single_choice",
-              "explanation": "Étape 4 — Calculer l'ordonnée à l'origine : $b = 15 - 4 \\times 2 = 15 - 8 = 7$. Étape 5 — Écrire l'équation : $y = 4x + 7$. Vérification avec $G(3,5 ; 21)$ : $4 \\times 3,5 + 7 = 14 + 7 = 21$. $y = 4x + 15$ prend $b = y_{G_1}$ sans calcul ; $y = 4x + 11$ oublie le $x$ de $G_1$ ($15 - 4$) ; $y = 4x + 23$ additionne au lieu de soustraire.",
+              "explanation": "Mayer, étape 4 — Calculer l'ordonnée à l'origine : $b = 15 - 4 \\times 2 = 15 - 8 = 7$. Mayer, étape 5 — Écrire l'équation : $y = 4x + 7$. Vérification avec $G(3,5 ; 21)$ : $4 \\times 3,5 + 7 = 14 + 7 = 21$. $y = 4x + 15$ prend $b = y_{G_1}$ sans calcul ; $y = 4x + 11$ oublie le $x$ de $G_1$ ($15 - 4$) ; $y = 4x + 23$ additionne au lieu de soustraire.",
               "answers": [
                 {
                   "content": "$y = 4x + 15$",
@@ -1603,7 +1603,7 @@
               "content": "La droite d'ajustement est $y = 4x + 7$ ($x$ : rang de l'année, 1 pour 2019 ; $y$ : ventes mensuelles en dizaines de sacs). Prévois les ventes mensuelles de 2026 (rang 8), en dizaines de sacs.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire l'équation : $y = 4x + 7$. Étape 2 — Remplacer : 2026 correspond à $x = 8$, donc $y = 4 \\times 8 + 7$. Étape 3 — Calculer : $y = 32 + 7 = 39$ dizaines de sacs, soit 390 sacs par mois. Étape 4 — Conclure : on prévoit 390 sacs ; comme le rang 8 est hors des valeurs observées (1 à 6), c'est une prévision.",
+              "explanation": "Estimation, étape 1 — Écrire l'équation : $y = 4x + 7$. Estimation, étape 2 — Remplacer : 2026 correspond à $x = 8$, donc $y = 4 \\times 8 + 7$. Estimation, étape 3 — Calculer : $y = 32 + 7 = 39$ dizaines de sacs, soit 390 sacs par mois. Estimation, étape 4 — Conclure : on prévoit 390 sacs ; comme le rang 8 est hors des valeurs observées (1 à 6), c'est une prévision.",
               "answers": [
                 {
                   "content": "39",
@@ -1616,7 +1616,7 @@
               "content": "La droite d'ajustement est $y = 4x + 7$ ($x$ : rang de l'année, 1 pour 2019). En quelle année les ventes mensuelles atteindront-elles 51 dizaines de sacs ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 2 — Remplacer : c'est $y$ qui est donné, donc on écrit $4x + 7 = 51$. Étape 3 — Calculer : $4x = 44$, donc $x = 11$. Étape 4 — Conclure : le rang 11 correspond à $2019 + 10 = 2029$. C'est une prévision lointaine, peu sûre. Calculer $4 \\times 51 + 7$ serait l'erreur de mettre 51 à la place de $x$.",
+              "explanation": "Estimation, étape 2 — Remplacer : c'est $y$ qui est donné, donc on écrit $4x + 7 = 51$. Estimation, étape 3 — Calculer : $4x = 44$, donc $x = 11$. Estimation, étape 4 — Conclure : le rang 11 correspond à $2019 + 10 = 2029$. C'est une prévision lointaine, peu sûre. Calculer $4 \\times 51 + 7$ serait l'erreur de mettre 51 à la place de $x$.",
               "answers": [
                 {
                   "content": "2029",

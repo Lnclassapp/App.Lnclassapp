@@ -582,7 +582,7 @@
                 "content": "On lance deux dés cubiques et on construit le tableau à double entrée : les 6 valeurs du premier dé en lignes, les 6 valeurs du second dé en colonnes. Combien de cases (résultats) le tableau contient-il ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : deux lancers successifs, l'ordre compte (premier dé, second dé). Étape 2 — Représenter : un tableau de 6 lignes et 6 colonnes. Étape 3 — Compter : $6 \\times 6 = 36$ cases. Étape 4 — Vérifier : 6 lignes de 6 cases font bien 36. Il y a donc 36 cas possibles.",
+                "explanation": "Étape 1 — Repérer : deux dés distincts : premier dé puis second dé, l'ordre compte. Étape 2 — Représenter : un tableau de 6 lignes et 6 colonnes. Étape 3 — Compter : $6 \\times 6 = 36$ cases. Étape 4 — Vérifier : 6 lignes de 6 cases font bien 36. Il y a donc 36 cas possibles.",
                 "answers": [
                   {
                     "content": "36",
@@ -942,6 +942,42 @@
             "statement": "Dans la cour de l'école, on a interrogé 50 élèves pour savoir s'ils jouent au football. Le tableau à double entrée donne les effectifs. Dans les questions, tu utilises la méthode de la fiche : définir, calculer les probabilités de A et de B, calculer la probabilité de A et B, appliquer la formule, conclure.",
             "exercise_type": "fixation",
             "figure": null,
+            "statement_blocks": [
+              {
+                "type": "paragraph",
+                "text": "On a interrogé 50 élèves dans la cour sur le football. Le tableau donne les effectifs."
+              },
+              {
+                "type": "table",
+                "caption": "Répartition de 50 élèves interrogés dans la cour",
+                "headers": [
+                  "Élèves",
+                  "Jouent au football",
+                  "Ne jouent pas au football",
+                  "Total"
+                ],
+                "rows": [
+                  [
+                    "Filles",
+                    "8",
+                    "17",
+                    "25"
+                  ],
+                  [
+                    "Garçons",
+                    "20",
+                    "5",
+                    "25"
+                  ],
+                  [
+                    "Total",
+                    "28",
+                    "22",
+                    "50"
+                  ]
+                ]
+              }
+            ],
             "questions": [
               {
                 "content": "Parmi 50 élèves interrogés, on en désigne un au hasard. Soit $A$ : « l'élève joue au football » et $B$ : « l'élève est une fille ». Que signifie l'événement « $A$ et $B$ » ?",
@@ -1006,7 +1042,7 @@
                 "content": "Pour deux événements, on connaît $P(A) = 0{,}6$, $P(B) = 0{,}5$ et $P(A \\cup B) = 0{,}8$. Calcule $P(A \\cap B)$, sous forme décimale.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 4 — Appliquer la formule $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ à l'envers. Étape 3 — On isole $P(A \\cap B) = P(A) + P(B) - P(A \\cup B) = 0{,}6 + 0{,}5 - 0{,}8 = 0{,}3$. Étape 5 — Conclure : $0{,}3$ est entre 0 et 1 et ne dépasse ni $P(A)$ ni $P(B)$, donc il est cohérent.",
+                "explanation": "Étape 4 — Appliquer la formule $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$ en isolant l'intersection : $P(A \\cap B) = P(A) + P(B) - P(A \\cup B) = 0{,}6 + 0{,}5 - 0{,}8 = 0{,}3$. Étape 5 — Conclure : $0{,}3$ est entre 0 et 1 et ne dépasse ni $P(A)$ ni $P(B)$, donc il est cohérent.",
                 "answers": [
                   {
                     "content": "0,3",
@@ -1252,7 +1288,7 @@
             {
               "content": "Pour la finale, on choisit 2 délégués au hasard parmi 6 capitaines, dont Awa et Bakary, sans tenir compte de l'ordre. Quelle est la probabilité qu'Awa et Bakary soient les deux délégués choisis ?",
               "question_type": "single_choice",
-              "explanation": "Dénombrement puis probabilité. Étape 1 — Repérer : un groupe de 2 capitaines pris sans ordre. Étape 2 — Représenter : « 2 parmi 6 ». Étape 3 — Compter les cas possibles : $\\dfrac{6 \\times 5}{2} = 15$. Un seul groupe est favorable : {Awa, Bakary}. Probabilité : $\\dfrac{1}{15}$. La réponse $\\dfrac{1}{30}$ divise une deuxième fois par 2. La réponse $\\dfrac{2}{15}$ compte deux groupes, Awa-Bakary et Bakary-Awa, qui sont le même. La réponse $\\dfrac{1}{6}$ ignore le second choix.",
+              "explanation": "Dénombrement puis probabilité. Étape 1 — Repérer : un groupe de 2 capitaines pris sans ordre. Étape 2 — Représenter : « 2 parmi 6 ». Étape 3 — Compter les cas possibles : $\\dfrac{6 \\times 5}{2} = 15$. Un seul groupe est favorable : {Awa, Bakary}. Probabilité : $\\dfrac{1}{15}$. La réponse $\\dfrac{1}{30}$ vient de l'oubli de la division par 2 : on a compté $6 \\times 5 = 30$ couples ordonnés au lieu de 15 groupes. La réponse $\\dfrac{2}{15}$ compte deux groupes, Awa-Bakary et Bakary-Awa, qui sont le même. La réponse $\\dfrac{1}{6}$ ignore le second choix.",
               "answers": [
                 {
                   "content": "$\\dfrac{1}{15}$",
@@ -1347,7 +1383,7 @@
               "content": "Les 40 élèves d'une classe ont chacun indiqué un seul sport préféré : 20 filles (6 football, 8 basket, 6 athlétisme) et 20 garçons (14 football, 3 basket, 3 athlétisme). On désigne un élève au hasard pour être le capitaine du tournoi. Quelle est la probabilité, sous forme décimale, que le capitaine préfère le football ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Probabilité en situation d'équiprobabilité. Étape 1 — Vérifier : désignation au hasard, équiprobabilité. Étape 2 — Compter les cas possibles : 40 élèves. Étape 3 — Compter les cas favorables : $6 + 14 = 20$ élèves préfèrent le football (colonne Total du tableau). Étape 4 — Calculer : $\\dfrac{20}{40} = 0{,}5$.",
+              "explanation": "Probabilité en situation d'équiprobabilité. Étape 1 — Vérifier : désignation au hasard, équiprobabilité. Étape 2 — Compter les cas possibles : 40 élèves. Étape 3 — Compter les cas favorables : $6 + 14 = 20$ élèves préfèrent le football (ligne Total du tableau, colonne Football). Étape 4 — Calculer : $\\dfrac{20}{40} = 0{,}5$.",
               "answers": [
                 {
                   "content": "0,5",
@@ -1436,8 +1472,7 @@
               "criteria": [
                 "Dit que c'est correct car les deux événements sont incompatibles",
                 "Écrit P(A et B) = 0 ou cite la formule avec l'intersection nulle",
-                "Calcule 20/40 et 9/40",
-                "Trouve 29/40 ou 0,725"
+                "Calcule 20/40 et 9/40, puis trouve 29/40 ou 0,725"
               ],
               "starter": "C'est correct, car chaque élève…",
               "explanation": "Corrigé modèle : c'est correct, car chaque élève n'a indiqué qu'un seul sport préféré, donc « football » et « athlétisme » sont incompatibles : $P(\\text{football} \\cap \\text{athlétisme}) = 0$. On applique donc $P(A \\cup B) = P(A) + P(B) - 0$. Étape 2 : $P(\\text{football}) = \\dfrac{20}{40}$ et $P(\\text{athlétisme}) = \\dfrac{9}{40}$. Étape 4 : $P = \\dfrac{20}{40} + \\dfrac{9}{40} = \\dfrac{29}{40} = 0{,}725$. Répartition : 1 point pour la justification par l'incompatibilité, 1 point pour les deux probabilités, 1 point pour le résultat.",
@@ -1558,14 +1593,13 @@
               ]
             },
             {
-              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Un élève écrit : « $P(A \\cup B) = P(A) + P(B)$ puisque les deux événements sont possibles à la fois dans le tournoi. » Explique pourquoi cette égalité est fausse ici, en citant le match concerné.",
+              "content": "Le tournoi réunit 6 équipes : Tle A1, Tle A2, 1ère A, 1ère B, 3ème 1 et 3ème 2. Chaque équipe rencontre une fois chacune des autres. Le match d'ouverture est tiré au hasard parmi tous les matchs possibles. Soit $A$ : « le match met en jeu au moins une équipe de Terminale » avec $P(A) = \\dfrac{9}{15}$, et $B$ : « le match oppose deux équipes du même niveau » avec $P(B) = \\dfrac{3}{15}$. Un élève écrit : « $P(A \\cup B) = P(A) + P(B)$ », en additionnant simplement les deux probabilités. Explique pourquoi cette égalité est fausse ici, en citant le match concerné.",
               "question_type": "written",
               "points": 3,
               "criteria": [
                 "Rappelle que l'égalité n'est vraie que pour des événements incompatibles",
                 "Cite le match Tle A1-Tle A2 comme commun à A et à B",
-                "Corrige avec P(A ou B) = P(A) + P(B) − P(A et B)",
-                "Donne 11/15 ou compare 12/15 et 11/15"
+                "Corrige avec P(A ou B) = P(A) + P(B) − P(A et B) et trouve 11/15"
               ],
               "starter": "Cette égalité est fausse car…",
               "explanation": "Corrigé modèle : l'égalité $P(A \\cup B) = P(A) + P(B)$ n'est vraie que si $A$ et $B$ sont incompatibles. Ici le match Tle A1-Tle A2 réalise $A$ (il met en jeu des équipes de Terminale) et $B$ (il oppose deux équipes du même niveau) : $A \\cap B$ n'est pas vide. Ce match est compté deux fois dans $P(A) + P(B) = \\dfrac{12}{15}$. Il faut retrancher $P(A \\cap B) = \\dfrac{1}{15}$ : $P(A \\cup B) = \\dfrac{11}{15}$. Répartition : 1 point pour la condition d'incompatibilité, 1 point pour le match cité, 1 point pour la correction par la formule.",

@@ -429,10 +429,10 @@
         },
         {
           "name": "Équations et inéquations avec l'exponentielle",
-          "remember": "Pour $k > 0$ : $e^{u} = k \\iff u = \\ln k$ ; $e^{u} \\geq k \\iff u \\geq \\ln k$ ; $e^{u} \\leq k \\iff u \\leq \\ln k$. La fonction $\\ln$ est croissante : le sens de l'inégalité ne change pas. Pour $k \\leq 0$ : $e^{u} = k$ n'a **aucune solution**, car $e^{u} > 0$. Enfin $e^{u} = e^{v} \\iff u = v$.",
+          "remember": "Pour $k > 0$ : $e^{u} = k \\iff u = \\ln k$ ; $e^{u} \\geq k \\iff u \\geq \\ln k$ ; $e^{u} \\leq k \\iff u \\leq \\ln k$. La fonction $\\ln$ est croissante : le sens de l'inégalité ne change pas. Pour $k \\leq 0$ : $e^{u} = k$ et $e^{u} \\leq k$ n'ont **aucune solution**, et $e^{u} \\geq k$ est vraie pour tout réel, car $e^{u} > 0$. Enfin $e^{u} = e^{v} \\iff u = v$.",
           "method": [
             "Isoler la puissance de $e$ d'un côté, pour obtenir une forme $e^{u} = k$ (ou $e^{u} \\geq k$, $e^{u} \\leq k$).",
-            "Contrôler le signe de $k$ : si $k \\leq 0$, l'équation n'a pas de solution ; sinon on continue.",
+            "Contrôler le signe de $k$ : si $k \\leq 0$, $e^{u} = k$ et $e^{u} \\leq k$ n'ont pas de solution, et $e^{u} \\geq k$ est vraie pour tout réel ; sinon on continue.",
             "Appliquer $\\ln$ aux deux membres, sans changer le sens de l'inégalité : $u = \\ln k$ (ou $u \\geq \\ln k$).",
             "Résoudre l'équation ou l'inéquation obtenue en $x$ et écrire l'ensemble des solutions."
           ],
@@ -655,7 +655,7 @@
         },
         {
           "name": "Dérivée de e^u et étude d'une fonction",
-          "remember": "La fonction exponentielle est dérivable sur $\\mathbb{R}$ et $(e^{x})' = e^{x}$. Pour une fonction $u$ dérivable : $(e^{u})' = u' \\times e^{u}$. Exemples : $(e^{2x})' = 2e^{2x}$ ; $(e^{-x+3})' = -e^{-x+3}$ ; $(e^{x^{2}-4x})' = (2x-4)e^{x^{2}-4x}$. Comme $e^{u} > 0$, le signe de $f'$ est celui de $u'$. Limites : $\\lim_{x \\to +\\infty} e^{x} = +\\infty$ et $\\lim_{x \\to -\\infty} e^{x} = 0$.",
+          "remember": "La fonction exponentielle est dérivable sur $\\mathbb{R}$ et $(e^{x})' = e^{x}$ : donc $e^{x}$ est une primitive de $e^{x}$. Pour une fonction $u$ dérivable : $(e^{u})' = u' \\times e^{u}$. Exemples : $(e^{2x})' = 2e^{2x}$ ; $(e^{-x+3})' = -e^{-x+3}$ ; $(e^{x^{2}-4x})' = (2x-4)e^{x^{2}-4x}$. Comme $e^{u} > 0$, le signe de $f'$ est celui de $u'$. Limites : $\\lim_{x \\to +\\infty} e^{x} = +\\infty$ et $\\lim_{x \\to -\\infty} e^{x} = 0$.",
           "method": [
             "Identifier la fonction $u$ placée dans l'exposant de $f(x) = e^{u(x)}$.",
             "Calculer la dérivée $u'$ de l'exposant.",
@@ -956,7 +956,7 @@
               {
                 "content": "Le nombre de bactéries d'un yaourt est $N(t) = 100\\,e^{0{,}35t}$, avec $t$ en heures. En prenant $e^{0{,}7} \\approx 2$, calcule $N(2)$.",
                 "question_type": "numeric",
-                "tolerance": 0,
+                "tolerance": 2,
                 "explanation": "Étape 1 — Lire : $N_{0} = 100$ et $k = 0{,}35$ (croissance). Étape 2 — Écrire : $N(t) = 100\\,e^{0{,}35t}$. Étape 3 — Calculer : $N(2) = 100\\,e^{0{,}35 \\times 2} = 100\\,e^{0{,}7} \\approx 100 \\times 2 = 200$. Étape 4 — Interpréter : il y a environ 200 bactéries au bout de 2 heures.",
                 "answers": [
                   {
@@ -969,7 +969,7 @@
               {
                 "content": "Une quantité de produit vaut $N(t) = 800\\,e^{-0{,}35t}$, avec $t$ en heures. En prenant $e^{-0{,}7} \\approx 0{,}5$, calcule $N(2)$.",
                 "question_type": "numeric",
-                "tolerance": 0,
+                "tolerance": 3,
                 "explanation": "Étape 1 — Lire : $N_{0} = 800$ et $k = -0{,}35$ (décroissance). Étape 2 — Écrire : $N(t) = 800\\,e^{-0{,}35t}$. Étape 3 — Calculer : $N(2) = 800\\,e^{-0{,}7} \\approx 800 \\times 0{,}5 = 400$. Étape 4 — Interpréter : la quantité a été divisée par $2$ en 2 heures.",
                 "answers": [
                   {
@@ -1004,7 +1004,7 @@
               {
                 "content": "Dans un laboratoire, une culture de bactéries compte $N(t) = 50\\,e^{0{,}35t}$ individus, avec $t$ en heures. Au bout de combien d'heures atteint-on 100 bactéries ? On prend $\\ln 2 \\approx 0{,}7$.",
                 "question_type": "numeric",
-                "tolerance": 0,
+                "tolerance": 0.05,
                 "explanation": "Étape 1 — Lire : $N_{0} = 50$ et $k = 0{,}35$. Étape 2 — Écrire : $N(t) = 50\\,e^{0{,}35t}$. Étape 3 — Calculer : $50\\,e^{0{,}35t} = 100$ donne $e^{0{,}35t} = 2$, donc $0{,}35t = \\ln 2 \\approx 0{,}7$ et $t \\approx 2$. Étape 4 — Interpréter : il faut environ 2 heures pour doubler.",
                 "answers": [
                   {
@@ -1136,7 +1136,7 @@
                   "correct": false
                 },
                 {
-                  "content": "Elle diminue, car $3\\,000$ est positif",
+                  "content": "Elle diminue, car $0{,}07 < 1$",
                   "correct": false
                 }
               ]
@@ -1144,7 +1144,7 @@
             {
               "content": "La population d'un village est $P(t) = 3\\,000\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $e^{0{,}7} \\approx 2$, calcule $P(10)$.",
               "question_type": "numeric",
-              "tolerance": 0,
+              "tolerance": 50,
               "explanation": "Étape 1 — Lire : $N_{0} = 3\\,000$ et $k = 0{,}07$. Étape 2 — Écrire : $P(t) = 3\\,000\\,e^{0{,}07t}$. Étape 3 — Calculer : $P(10) = 3\\,000\\,e^{0{,}07 \\times 10} = 3\\,000\\,e^{0{,}7} \\approx 3\\,000 \\times 2 = 6\\,000$. Étape 4 — Interpréter : en 2030, le village compte environ $6\\,000$ habitants.",
               "answers": [
                 {
@@ -1157,7 +1157,7 @@
             {
               "content": "La population d'un village est $P(t) = 3\\,000\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $\\ln 2 \\approx 0{,}7$, au bout de combien d'années atteint-elle $6\\,000$ habitants ?",
               "question_type": "numeric",
-              "tolerance": 0,
+              "tolerance": 0.2,
               "explanation": "Étape 1 — Lire : $N_{0} = 3\\,000$ et $k = 0{,}07$. Étape 2 — Écrire : $P(t) = 3\\,000\\,e^{0{,}07t}$. Étape 3 — Calculer : $3\\,000\\,e^{0{,}07t} = 6\\,000$ donne $e^{0{,}07t} = 2$, puis $0{,}07t = \\ln 2 \\approx 0{,}7$, donc $t \\approx 10$. Étape 4 — Interpréter : la population double en environ 10 ans.",
               "answers": [
                 {
@@ -1207,10 +1207,10 @@
               "content": "Le nombre de bactéries d'un yaourt est $B(t) = 500\\,e^{0{,}4t}$, avec $t$ en heures. On prend $\\ln 2 \\approx 0{,}7$. Au bout de combien d'heures atteint-on $1\\,000$ bactéries ? Arrondis à $0{,}1$ près.",
               "question_type": "numeric",
               "tolerance": 0.1,
-              "explanation": "Étape 1 — Isoler : $500\\,e^{0{,}4t} = 1\\,000$ donne $e^{0{,}4t} = 2$. Étape 2 — Contrôler : $2 > 0$. Étape 3 — Appliquer : $0{,}4t = \\ln 2 \\approx 0{,}7$. Étape 4 — Résoudre : $t \\approx \\dfrac{0{,}7}{0{,}4} = 1{,}75$ heure. On accepte une marge de $0{,}1$ en raison de l'arrondi de $\\ln 2$.",
+              "explanation": "Étape 1 — Isoler : $500\\,e^{0{,}4t} = 1\\,000$ donne $e^{0{,}4t} = 2$. Étape 2 — Contrôler : $2 > 0$. Étape 3 — Appliquer : $0{,}4t = \\ln 2 \\approx 0{,}7$. Étape 4 — Résoudre : $t \\approx \\dfrac{0{,}7}{0{,}4} = 1{,}75$ heure. Avec la valeur exacte de $\\ln 2$, on trouve $1{,}73$, soit $1{,}7$ à $0{,}1$ près ; on accepte donc une marge de $0{,}1$.",
               "answers": [
                 {
-                  "content": "1,75",
+                  "content": "1,7",
                   "correct": true
                 }
               ],
@@ -1433,7 +1433,7 @@
             {
               "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $e^{0{,}7} \\approx 2$, calcule $p(10)$.",
               "question_type": "numeric",
-              "tolerance": 0,
+              "tolerance": 0.5,
               "explanation": "Étape 1 — Lire : $N_{0} = 20$ et $k = 0{,}07$. Étape 2 — Écrire : $p(t) = 20\\,e^{0{,}07t}$. Étape 3 — Calculer : $p(10) = 20\\,e^{0{,}7} \\approx 20 \\times 2 = 40$. Étape 4 — Interpréter : en 2030, la ville compte environ $40$ milliers d'habitants.",
               "answers": [
                 {
@@ -1446,7 +1446,7 @@
             {
               "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $\\ln 4 = 2\\ln 2 \\approx 1{,}4$, au bout de combien d'années la population atteint-elle $80$ milliers ?",
               "question_type": "numeric",
-              "tolerance": 0,
+              "tolerance": 0.3,
               "explanation": "Étape 1 — Isoler : $20\\,e^{0{,}07t} = 80$ donne $e^{0{,}07t} = 4$. Étape 2 — Contrôler : $4 > 0$. Étape 3 — Appliquer : $0{,}07t = \\ln 4 \\approx 1{,}4$. Étape 4 — Résoudre : $t \\approx \\dfrac{1{,}4}{0{,}07} = 20$. La population atteint $80$ milliers au bout de 20 ans, soit en 2040.",
               "answers": [
                 {
@@ -1459,7 +1459,7 @@
             {
               "content": "Une ville a pour population (en milliers d'habitants) $p(t) = 20\\,e^{0{,}07t}$, avec $t$ en années depuis 2020. En prenant $\\ln 8 = 3\\ln 2 \\approx 2{,}1$, à partir de combien d'années a-t-on $p(t) \\geq 160$ ?",
               "question_type": "numeric",
-              "tolerance": 0,
+              "tolerance": 0.5,
               "explanation": "Étape 1 — Isoler : $20\\,e^{0{,}07t} \\geq 160$ donne $e^{0{,}07t} \\geq 8$. Étape 2 — Contrôler : $8 > 0$. Étape 3 — Appliquer : $\\ln$ est croissante, le sens ne change pas : $0{,}07t \\geq \\ln 8 \\approx 2{,}1$. Étape 4 — Résoudre : $t \\geq \\dfrac{2{,}1}{0{,}07} = 30$. La population atteint $160$ milliers à partir de 30 ans, soit en 2050.",
               "answers": [
                 {

@@ -696,7 +696,7 @@
               {
                 "content": "Une tontine rapporte $2\\,000$ FCFA la semaine 1, $3\\,000$ la semaine 2, $4\\,000$ la semaine 3, et ainsi de suite jusqu'à la semaine 10 (on ajoute toujours $1\\,000$). Quel est le total reçu ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Compter : de la semaine 1 à la semaine 10, il y a $10$ termes. Étape 2 — Identifier : suite arithmétique de premier terme $2\\,000$ et de raison $1\\,000$ ; le dernier terme est $2\\,000 + 9 \\times 1\\,000 = 11\\,000$. Étape 3 — Appliquer : $S = 10 \\times \\dfrac{2\\,000 + 11\\,000}{2}$. Étape 4 — Calculer : $S = 10 \\times 6\\,500 = 65\\,000$ FCFA. $130\\,000$ oublie de diviser par $2$. $58\\,500$ compte $9$ termes au lieu de $10$. $71\\,500$ en compte $11$.",
+                "explanation": "Étape 1 — Compter : de la semaine 1 à la semaine 10, il y a $10$ termes. Étape 2 — Identifier : suite arithmétique de premier terme $2\\,000$ et de raison $1\\,000$ ; le dernier terme est $2\\,000 + 9 \\times 1\\,000 = 11\\,000$. Étape 3 — Appliquer : $S = 10 \\times \\dfrac{2\\,000 + 11\\,000}{2}$. Étape 4 — Calculer : $S = 10 \\times 6\\,500 = 65\\,000$ FCFA. $130\\,000$ oublie de diviser par $2$. $58\\,500$ multiplie la moyenne $6\\,500$ par $9$ au lieu de $10$ (un terme de moins compté). $71\\,500$ la multiplie par $11$ (un terme de trop).",
                 "answers": [
                   {
                     "content": "$65\\,000$ FCFA",
@@ -1059,7 +1059,7 @@
               "content": "Mariam verse $8\\,000 + 1\\,500\\,n$ FCFA au mois $n$. À partir de quel mois (nombre entier) son versement dépasse-t-il $25\\,000$ FCFA ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Méthode : Étape 1 — Identifier : $u_n = 8\\,000 + 1\\,500\\,n$. Étape 2 — Écrire l'inéquation : $8\\,000 + 1\\,500\\,n > 25\\,000$. Étape 3 — Résoudre : $1\\,500\\,n > 17\\,000$, donc $n > \\frac{17\\,000}{1\\,500} \\approx 11{,}3$. Étape 4 — Conclure en arrondissant au-dessus : $n = 12$. Vérification : $u_{11} = 24\\,500 < 25\\,000$ et $u_{12} = 26\\,000 > 25\\,000$.",
+              "explanation": "Méthode (problème d'épargne ou de population) : Étape 1 — Lire : premier versement $8\\,000$, $1\\,500$ de plus par mois, seuil $25\\,000$. Étape 2 — Choisir : on ajoute un montant fixe, donc suite arithmétique de premier terme $8\\,000$ et de raison $1\\,500$. Étape 3 — Écrire : $u_n = 8\\,000 + 1\\,500\\,n$. Étape 4 — Calculer : on résout $8\\,000 + 1\\,500\\,n > 25\\,000$, soit $1\\,500\\,n > 17\\,000$, donc $n > \\frac{17\\,000}{1\\,500} \\approx 11{,}3$ ; on arrondit au-dessus : $n = 12$. Étape 5 — Conclure : à partir du mois 12. Vérification : $u_{11} = 24\\,500 < 25\\,000$ et $u_{12} = 26\\,000 > 25\\,000$.",
               "answers": [
                 {
                   "content": "12",
@@ -1168,7 +1168,7 @@
               "content": "Un village compte $5\\,000$ habitants en 2024 et sa population augmente de $20\\,\\%$ par an. Au bout de combien d'années (nombre entier) aura-t-il au moins $10\\,000$ habitants ? On donne $\\ln 2 \\approx 0{,}693$ et $\\ln 1{,}2 \\approx 0{,}182$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Méthode (seuil avec ln) : Étape 1 — Lire : $5\\,000$ habitants, hausse de $20\\,\\%$, seuil $10\\,000$. Étape 2 — Choisir : suite géométrique $u_n = 5\\,000 \\times 1{,}2^n$. Étape 3 — Résoudre : $5\\,000 \\times 1{,}2^n \\geq 10\\,000$ donne $1{,}2^n \\geq 2$, donc $n \\ln 1{,}2 \\geq \\ln 2$ et $n \\geq \\frac{0{,}693}{0{,}182} \\approx 3{,}8$. Étape 4 — Arrondir au-dessus : $n = 4$. Vérification : $u_3 = 8\\,640 < 10\\,000$ et $u_4 = 10\\,368 \\geq 10\\,000$. Étape 5 — Conclure : au bout de $4$ ans.",
+              "explanation": "Méthode (seuil avec ln) : Étape 1 — Lire : $5\\,000$ habitants, hausse de $20\\,\\%$, seuil $10\\,000$. Étape 2 — Choisir : pourcentage répété, donc suite géométrique de raison $q = 1{,}2$. Étape 3 — Écrire : $u_n = 5\\,000 \\times 1{,}2^n$. Étape 4 — Calculer : on résout $5\\,000 \\times 1{,}2^n \\geq 10\\,000$, soit $1{,}2^n \\geq 2$, donc $n \\ln 1{,}2 \\geq \\ln 2$ et $n \\geq \\frac{0{,}693}{0{,}182} \\approx 3{,}8$ ; on arrondit au-dessus : $n = 4$. Vérification : $u_3 = 8\\,640 < 10\\,000$ et $u_4 = 10\\,368 \\geq 10\\,000$. Étape 5 — Conclure : au bout de $4$ ans.",
               "answers": [
                 {
                   "content": "4",
@@ -1187,7 +1187,7 @@
             {
               "content": "Awa place 100 000 FCFA à 10 % par an. Relie chaque placement à la nature de la suite de son capital.",
               "question_type": "matching",
-              "explanation": "Méthode (choisir le modèle) : Étape 1 — Lire : capital $100\\,000$ FCFA, taux $10\\,\\%$. Étape 2 — Choisir : intérêts simples, suite arithmétique, raison $\\frac{100\\,000 \\times 10}{100} = 10\\,000$ ; intérêts composés, suite géométrique, raison $1 + \\frac{10}{100} = 1{,}1$ ; sans intérêt, on n'ajoute rien, raison $0$. Étape 3 — Écrire : $A_n = 100\\,000 + 10\\,000\\,n$ ; $B_n = 100\\,000 \\times 1{,}1^n$ ; $100\\,000$ constant. Étape 4 — Conclure : voir les trois liens.",
+              "explanation": "Méthode (choisir le modèle) : Étape 1 — Lire : capital $100\\,000$ FCFA, taux $10\\,\\%$. Étape 2 — Choisir : intérêts simples, suite arithmétique, raison $\\frac{100\\,000 \\times 10}{100} = 10\\,000$ ; intérêts composés, suite géométrique, raison $1 + \\frac{10}{100} = 1{,}1$ ; sans intérêt, on n'ajoute rien, raison $0$. Étape 3 — Écrire : $A_n = 100\\,000 + 10\\,000\\,n$ ; $B_n = 100\\,000 \\times 1{,}1^n$ ; $100\\,000$ constant. Étape 4 — Conclure : A est arithmétique de raison $10\\,000$, B est géométrique de raison $1{,}1$, et le compte sans intérêt est arithmétique de raison $0$. Remarque : une suite constante est aussi géométrique de raison $1$, mais l'énoncé ne propose que la raison $10\\,000$ et la raison $1{,}1$ pour A et B, donc la seule association possible pour le compte sans intérêt est celle de raison $0$.",
               "answers": [
                 {
                   "content": "Banque A, intérêts simples",
@@ -1303,7 +1303,7 @@
               "content": "Le capital de Kouassi est $c_n = 200\\,000 \\times 1{,}04^n$. Au bout de combien d'années (nombre entier) aura-t-il au moins $400\\,000$ FCFA ? On donne $\\ln 2 \\approx 0{,}693$ et $\\ln 1{,}04 \\approx 0{,}039$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Méthode (seuil avec ln) : Étape 1 — Lire : capital $200\\,000$, taux $4\\,\\%$, seuil $400\\,000$. Étape 2 — Choisir : suite géométrique $c_n = 200\\,000 \\times 1{,}04^n$. Étape 3 — Résoudre : $200\\,000 \\times 1{,}04^n \\geq 400\\,000$ donne $1{,}04^n \\geq 2$, donc $n \\ln 1{,}04 \\geq \\ln 2$ et $n \\geq \\frac{0{,}693}{0{,}039} \\approx 17{,}8$. Étape 4 — Arrondir au-dessus : $n = 18$. Étape 5 — Conclure : au bout de $18$ ans ($17$ ans ne suffisent pas).",
+              "explanation": "Méthode (seuil avec ln) : Étape 1 — Lire : capital $200\\,000$, taux $4\\,\\%$, seuil $400\\,000$. Étape 2 — Choisir : intérêts composés, donc suite géométrique de raison $q = 1{,}04$. Étape 3 — Écrire : $c_n = 200\\,000 \\times 1{,}04^n$. Étape 4 — Calculer : on résout $200\\,000 \\times 1{,}04^n \\geq 400\\,000$, soit $1{,}04^n \\geq 2$, donc $n \\ln 1{,}04 \\geq \\ln 2$ et $n \\geq \\frac{0{,}693}{0{,}039} \\approx 17{,}8$ ; on arrondit au-dessus : $n = 18$. Étape 5 — Conclure : au bout de $18$ ans ($17$ ans ne suffisent pas).",
               "answers": [
                 {
                   "content": "18",
