@@ -393,7 +393,7 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     # Feuille de la leçon (prepare-interros-cahier, Lot D) : « Assigner à <classe> » en bouton de la feuille, le premier plein.
     assert_select "#prepare-interros [id^='assignment_']", 4 # 2 exercices x 2 classes
-    assert_select "#prepare-interros .ps-btn--primary", 1
+    assert_select "#prepare-interros [id^='assignment_'] .ps-btn--primary", 1 # les bascules ; le bandeau d'envoi (Lot E) a les siens
     assert_select "##{toggle_id('Exercise', @exercise.public_id, classroom: without_days)} .ps-btn--primary",
                   text: tl("toggle.sheet_assign", classroom: "6ème 3")
     assert_select "##{toggle_id('Exercise', bilan.public_id, classroom: without_days)} .ps-btn:not(.ps-btn--primary)",

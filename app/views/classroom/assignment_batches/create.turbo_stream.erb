@@ -1,0 +1,24 @@
+<%# 🌐 UI · classroom/assignment_batches/create — le devoir composé est envoyé, ou refusé en place (422) %>
+<%# Rôle : succès : le compte rendu du bandeau (#sheet-batch-status, role="status") dit « Devoir envoyé à … » et nomme les exercices déjà assignés ; %>
+<%#        data-sent dit au navigateur de vider la sélection (Stimulus assignment-batch) ; les bascules des exercices créés passent à « ✓ Assigné à … » ; refus : toast seul, sélection gardée %>
+<%# ADR  : 0048, sujets-de-devoir (ajout du 2026-10-30) · UDR : feuilles-prepare-interros-et-devoirs §3 (Devoir composé par l'enseignant) · Stimulus : assignment-batch %>
+<% if @refusal %>
+  <%= turbo_stream_toast @refusal, type: :error, title: t("classroom.assignments.refusals.title") %>
+<% else %>
+  <%# Le compte rendu : « Devoir envoyé… » seulement s'il y a des assignations créées (tout déjà assigné : les exercices nommés seuls). %>
+  <%= turbo_stream.replace "sheet-batch-status" do %>
+    <div id="sheet-batch-status" class="ps-batch-status" role="status" aria-live="polite" data-sent="true" data-assignment-batch-target="status">
+      <% if @created.any? %><p><%= @message %></p><% end %>
+      <% if @skipped_titles.any? %><p><%= t("classroom.assignments.batch.already_assigned", titles: @skipped_titles.join(", ")) %></p><% end %>
+    </div>
+  <% end %>
+  <% @created.each do |assignment| %>
+    <% assignable = assignment.assignable %>
+    <%= turbo_stream.replace "assignment_#{@classroom.public_id}_#{assignable.type}_#{assignable.key}",
+                             partial: "classroom/assignments/toggle",
+                             locals: { classroom_public_id: @classroom.public_id, assignable_type: assignable.type,
+                                       assignable_key: assignable.key, assignable_name: assignable.name,
+                                       assignment_public_id: assignment.public_id, due_on: assignment.due_on,
+                                       classroom_name: @classroom.name, sheet: true } %>
+  <% end %>
+<% end %>
