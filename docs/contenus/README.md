@@ -425,6 +425,29 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 - **SVT C** : la contraception hormonale (4e fiche de « Les cycles sexuels chez la femme ») et la méiose, le rendement chiffré de la respiration (36 à 38 ATP par glucose, 30,5 kJ par mole d'ATP et 2 870 kJ par mole de glucose : valeurs écrites par le rédacteur) sont à confirmer.
 - **Physique-Chimie C** : le repère de Frenet et le mouvement rectiligne sinusoïdal (« Cinématique du point »), la fermentation alcoolique, la liaison hydrogène et la distillation (« Les alcools ») ; les noms des produits d'oxydation (aldéhydes, cétones, acides) y sont cités sans nomenclature systématique, réservée à la leçon suivante ; le frottement par une relation `f = k·R_N` donnée dans l'énoncé, sans coefficient de frottement (« Mouvement du centre d'inertie d'un solide »).
 
+### Tle C, SVT au format 3 (chantier `contenus-tle-svt-cd`)
+
+Les 10 premières leçons de SVT de Tle C (progression DPFC 2026-2027), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 de `tle-c/svt/` (lignes SVT du tableau Tle C ci-dessus). Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes de type BAC. Les leçons 2, 5 et 6 sont communes aux séries C et D : écrites ici, déclinées dans `tle-d/svt/`.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Entraînement | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 8 | 52 | 16 | 96 % | 5 | `plate female_reproductive_system`, `stat_chart line`, `diagram` |
+| 2 | `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme | 3 | 7 | 43 | 12 | 95 % | 2 | `diagram`, `stat_chart bars` |
+| 3 | `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule | 4 | 8 | 57 | 16 | 95 % | 5 | `stat_chart line`, `diagram` |
+| 4 | `svt/l-utilisation-de-l-energie-par-la-cellule-musculaire.json` | L'utilisation de l'énergie par la cellule musculaire | 4 | 8 | 52 | 16 | 92 % | 6 | `diagram`, `stat_chart line` |
+| 5 | `svt/le-systeme-de-defense-de-l-organisme.json` | Le système de défense de l'organisme | 5 | 9 | 61 | 20 | 97 % | 6 | `diagram`, `stat_chart line`, `plate blood_smear` |
+| 6 | `svt/l-infection-de-l-organisme-par-le-vih.json` | L'infection de l'organisme par le VIH | 4 | 8 | 49 | 16 | 96 % | 6 | `plate hiv_virus`, `diagram`, `stat_chart line` |
+| 7 | `svt/la-communication-nerveuse.json` | La communication nerveuse | 5 | 9 | 56 | 20 | 96 % | 4 | `stat_chart line`, `diagram` |
+| 8 | `svt/les-drogues-et-le-systeme-nerveux.json` | Les drogues et le système nerveux | 4 | 8 | 44 | 16 | 91 % | 6 | `diagram`, `stat_chart line` |
+| 9 | `svt/la-mise-en-place-des-gisements-petroliferes-en-cote-d-ivoire.json` | La mise en place des gisements pétrolifères en Côte d'Ivoire | 4 | 8 | 51 | 15 | 92 % | 4 | `map cote_d_ivoire`, `diagram`, `stat_chart line`, `stat_chart bars` |
+| 10 | `svt/l-exploitation-des-gisements-petroliferes.json` | L'exploitation des gisements pétrolifères | 4 | 8 | 53 | 16 | 94 % | 6 | `diagram`, `stat_chart bars`, `stat_chart line`, `map cote_d_ivoire` |
+
+Au total : 41 notions, 81 exercices, 518 questions notées, 163 questions d'entraînement et 50 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et a été relu par un agent distinct de son auteur.
+
+Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : arbre généalogique, coupe d'ovaire et endomètre, mitochondrie, sarcomère et fibre musculaire, myogramme, anticorps et phagocytose, cycle du VIH dans la cellule, neurone, synapse et plaque motrice, circuit de la récompense, coupe géologique et piège pétrolier, plateforme et forage rotatif, coupe sismique. Les courbes de potentiel sont décalées de +100 mV (`stat_chart` refuse les valeurs négatives) et chaque courbe ne porte qu'une série.
+
+À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
