@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::CloseExerciseSession
 # Rôle : seul point qui termine une session : score recalculé des tentatives, badge monté, lacune ouverte ou résolue
-# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune), 0115 (score en points)
+# ADR  : 0026, 0033, 0043, 0054, 0112, 0113 (§4.2 : un exercice de toute la leçon n'ouvre ni ne lève aucune lacune), 0115 (score en points), 0120-questions-a-plusieurs-cases-et-indice (§6 : score en fractions de points)
 module UseCases
   module Assessment
     class CloseExerciseSession
@@ -38,12 +38,13 @@ module UseCases
         Row.new(score_percent:, badge_level:, earned_now:)
       end
 
-      # [[points, juste]] des seules questions corrigées automatiquement de l'exercice : une réponse rédigée ou un cahier ne compte
-      # jamais, une question sans tentative est fausse, une tentative d'une autre question est ignorée (menace I11).
+      # [[points, part juste]] des seules questions corrigées automatiquement de l'exercice : une réponse rédigée ou un cahier ne compte
+      # jamais, une question sans tentative est fausse, une tentative d'une autre question est ignorée (menace I11). La part juste
+      # est 1 ou 0 pour une case, cases justes / cases sinon (Grading.share).
       def graded(session)
         attempts = @sessions.attempts(session_id: session.id).to_h { [ it.question_id, it ] }
         @exercises.find(id: session.exercise_id).questions.select(&:auto_graded?)
-                  .map { |question| [ question.points, attempts[question.id]&.correct == true ] }
+                  .map { |question| [ question.points, Entities::Assessment::Grading.share(question, attempts[question.id]) ] }
       end
 
       # Un badge ne monte que vers un palier strictement supérieur (ADR-0033).

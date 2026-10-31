@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_29_110000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_30_100000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -80,7 +80,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_110000) do
     t.bigint "question_id", null: false
     t.datetime "updated_at", null: false
     t.string "match_content", limit: 500
+    t.integer "blank", limit: 2, default: 0, null: false
     t.index ["question_id", "position"], name: "index_answers_on_question_id_and_position", unique: true
+    t.check_constraint "blank >= 0 AND blank <= 5", name: "answers_blank_range"
   end
 
   create_table "article_images", force: :cascade do |t|
@@ -347,6 +349,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_110000) do
     t.string "status", default: "started", null: false
     t.bigint "student_id", null: false
     t.datetime "updated_at", null: false
+    t.bigint "hinted_question_ids", default: [], null: false, array: true
     t.index ["classroom_assignment_id", "student_id"], name: "index_exercise_sessions_handed_in", where: "((status)::text = 'completed'::text)", include: ["score_percent"]
     t.index ["classroom_assignment_id"], name: "index_exercise_sessions_on_classroom_assignment_id"
     t.index ["completed_at"], name: "index_exercise_sessions_completed_on_completed_at", where: "((status)::text = 'completed'::text)", include: ["student_id", "score_percent"]
@@ -603,6 +606,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_110000) do
     t.bigint "selected_answer_ids", null: false, array: true
     t.string "response_text", limit: 2000
     t.boolean "unanswered", default: false, null: false
+    t.string "blank_responses", default: [], null: false, array: true
+    t.boolean "blank_results", default: [], null: false, array: true
     t.index ["exercise_session_id", "question_id"], name: "index_question_attempts_on_exercise_session_id_and_question_id", unique: true
     t.index ["question_id"], name: "index_question_attempts_on_question_id"
     t.check_constraint "unanswered OR cardinality(selected_answer_ids) > 0 OR response_text IS NOT NULL", name: "question_attempts_selected_answer_ids_present"
@@ -639,6 +644,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_29_110000) do
     t.string "unit", limit: 10
     t.string "starter", limit: 150
     t.string "criteria", default: [], null: false, array: true
+    t.string "hint", limit: 500
     t.index ["exercise_id", "position"], name: "index_questions_on_exercise_id_and_position", unique: true
     t.check_constraint "image_description IS NULL OR char_length(btrim(image_description::text)) >= 1", name: "questions_image_description_present"
     t.check_constraint "numeric_tolerance >= 0::numeric", name: "questions_numeric_tolerance_positive"

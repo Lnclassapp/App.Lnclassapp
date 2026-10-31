@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Assessment::ExerciseSessionRepository
 # Rôle : sessions d'exercice et tentatives immuables ; compteurs tenus en SQL, une seule session ouverte par exercice
-# ADR  : 0033, 0043, 0054, 0091, 0112, 0115
+# ADR  : 0033, 0043, 0054, 0091, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : cases, indice ouvert)
 module Repositories
   module Assessment
     class ExerciseSessionRepository
@@ -57,13 +57,22 @@ module Repositories
           written.each do |attempt|
             Orm::QuestionAttempt.create!(exercise_session_id: session_id, question_id: attempt.fetch(:question_id),
                                          selected_answer_ids: attempt.fetch(:selected_answer_ids), response_text: attempt[:response_text],
-                                         correct: attempt.fetch(:correct), unanswered: attempt.fetch(:unanswered, false), answered_at: at)
+                                         correct: attempt.fetch(:correct), unanswered: attempt.fetch(:unanswered, false), answered_at: at,
+                                         blank_responses: attempt.fetch(:blank_responses, []), blank_results: attempt.fetch(:blank_results, []))
           end
           Orm::ExerciseSession.where(id: session_id).update_all([ COPY_COUNTERS_SQL, written.size, written.count { it[:correct] }, written.size, at ])
         end
         :ok
       rescue ActiveRecord::RecordNotUnique
         :duplicate
+      end
+
+      # L'ouverture d'un indice : array_append seulement si la question n'y est pas, dans un seul UPDATE (il verrouille la ligne de la
+      # session), donc dix ouvertures donnent une seule mention, même concurrentes.
+      def record_hint(session_id:, question_id:)
+        opened = Orm::ExerciseSession.where(id: session_id).where("NOT (? = ANY(hinted_question_ids))", question_id)
+                                     .update_all([ "hinted_question_ids = array_append(hinted_question_ids, ?)", question_id ])
+        opened.positive? ? :recorded : :already_opened
       end
 
       def record_attempt(session_id:, question_id:, selected_answer_ids:, correct:, at:, response_text: nil)
@@ -82,7 +91,8 @@ module Repositories
         Orm::QuestionAttempt.where(exercise_session_id: session_id).order(:answered_at, :id).map do |record|
           Entities::Assessment::QuestionAttempt.new(session_id: record.exercise_session_id, question_id: record.question_id,
                                                     selected_answer_ids: record.selected_answer_ids, correct: record.correct,
-                                                    answered_at: record.answered_at, response_text: record.response_text)
+                                                    answered_at: record.answered_at, response_text: record.response_text,
+                                                    blank_responses: record.blank_responses, blank_results: record.blank_results)
         end
       end
 
@@ -116,7 +126,7 @@ module Repositories
           status: record.status, question_count: record.question_count, answered_count: record.answered_count,
           correct_count: record.correct_count, progress_percent: record.progress_percent, score_percent: record.score_percent,
           kind: record.kind, knowledge_gap_id: record.knowledge_gap_id, classroom_assignment_id: record.classroom_assignment_id,
-          started_at: record.started_at, completed_at: record.completed_at
+          started_at: record.started_at, completed_at: record.completed_at, hinted_question_ids: record.hinted_question_ids
         )
       end
     end

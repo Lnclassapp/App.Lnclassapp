@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Entities::Assessment::QuestionKinds::Written
 # Rôle : réponse rédigée : un texte de 2 000 caractères au plus, vide admis, jamais noté ; le corrigé type est obligatoire
-# ADR  : 0115 (§4 ; menace : docs/chantiers/correction-comme-en-classe/menace.md, W1 à W5)
+# ADR  : 0115 (§4 ; menace : docs/chantiers/correction-comme-en-classe/menace.md, W1 à W5), 0120-questions-a-plusieurs-cases-et-indice (§4 : une seule case)
 module Entities
   module Assessment
     module QuestionKinds
@@ -18,6 +18,7 @@ module Entities
           errors = []
           errors << :explanation_required if explanation.to_s.strip.empty?
           errors << :answers_not_allowed if answers.any?
+          errors.concat(Blanks.single_case_errors(answers))
           errors << :starter_too_long if starter.to_s.strip.length > STARTER_MAX
           errors.concat(criteria_errors(criteria))
         end
@@ -35,6 +36,9 @@ module Entities
         def self.well_formed?(_question, text)
           text.is_a?(String) && text.encoding == Encoding::UTF_8 && text.valid_encoding? && text.length <= TEXT_MAX && !text.include?("\0")
         end
+
+        # Une seule case, jamais notée : le verdict est faux.
+        def self.blank_results(question, response) = [ correct?(question, response) ]
 
         # Jamais notée par la machine (ADR-0115, D7).
         def self.correct?(_question, _text) = false

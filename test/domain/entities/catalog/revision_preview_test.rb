@@ -131,9 +131,11 @@ module Entities
         assert_not_predicate RevisionPreview.for_texts([]), :cut?
       end
 
-      def notion_sheet(remember: "un", steps: %w[a b], statement: "x", example_steps: %w[c d], pitfall: "p", figure: nil)
-        NotionSheet.new(remember:, method_steps: steps, example_statement: statement, example_steps:, pitfall:, figure_key: figure)
+      def notion_sheet(remember: "un", steps: %w[a b], statement: "x", example_steps: %w[c d], pitfall: "p", figure: nil, practice: nil)
+        NotionSheet.new(remember:, method_steps: steps, example_statement: statement, example_steps:, pitfall:, figure_key: figure, practice:)
       end
+
+      def practice = NotionPractice.new(statement: "Calcule.", questions: [], digest: "0123456789abcdef")
 
       test "notions: the blocks of the template are counted in reading order, a formula is one word, a figure none" do
         sheet = notion_sheet(remember: "Pour $a$ et $b$ positifs", steps: [ words(2), words(3) ], statement: words(4), example_steps: [ words(1), words(1) ],
@@ -155,6 +157,42 @@ module Entities
         assert preview.rest?(0, RevisionPreview::EXAMPLE)
         assert preview.rest?(0, RevisionPreview::PITFALL)
         assert preview.rest?(1), "la notion entière après la coupe"
+      end
+
+      test "CA-10: the practice block sits between the example and the pitfall and counts no word" do
+        assert_equal [ 0, 1, 2, 3, 4, 5 ], [ RevisionPreview::REMEMBER, RevisionPreview::METHOD, RevisionPreview::FIGURE,
+                                              RevisionPreview::EXAMPLE, RevisionPreview::PRACTICE, RevisionPreview::PITFALL ].sort
+        assert_operator RevisionPreview::EXAMPLE, :<, RevisionPreview::PRACTICE
+        assert_operator RevisionPreview::PRACTICE, :<, RevisionPreview::PITFALL
+        sheet = notion_sheet(remember: words(3), steps: [ words(1), words(1) ], statement: words(1), example_steps: [ words(1), words(1) ],
+                             pitfall: words(2), practice:)
+
+        assert_equal 3 + 2 + 3 + 2, RevisionPreview.for_notions([ sheet ]).total
+      end
+
+      test "CA-10: a cut before the practice hides the whole block, a cut after it keeps it whole, and it is never the block that crosses the limit" do
+        before = notion_sheet(remember: words(160), practice:)
+        other = notion_sheet(remember: words(5))
+        cut_early = RevisionPreview.for_notions([ before, other ])
+        assert cut_early.rest?(0, RevisionPreview::PRACTICE)
+        assert cut_early.rest?(0, RevisionPreview::PITFALL)
+
+        after_example = notion_sheet(statement: words(160), practice:)
+        cut_late = RevisionPreview.for_notions([ after_example, other ])
+        assert_not cut_late.rest?(0, RevisionPreview::EXAMPLE), "le bloc qui passe le seuil reste entier"
+        assert cut_late.rest?(0, RevisionPreview::PRACTICE)
+        assert_predicate cut_late, :cut?
+
+        after = notion_sheet(pitfall: words(160), practice:)
+        cut_after = RevisionPreview.for_notions([ after, other ])
+        assert_not cut_after.rest?(0, RevisionPreview::PRACTICE), "la coupe tombe après le bloc : il est visible en entier"
+        assert_not cut_after.rest?(0, RevisionPreview::PITFALL)
+      end
+
+      test "CA-2: a notion without practice has no practice block key" do
+        preview = RevisionPreview.for_notions([ notion_sheet(remember: words(160)), notion_sheet ])
+
+        assert_not preview.rest?(0, RevisionPreview::PRACTICE), "une clé inconnue reste visible"
       end
 
       test "notions: a short lesson has no cut" do

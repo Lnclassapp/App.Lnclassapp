@@ -1,11 +1,13 @@
 # 🌐 DELIVERY · routes du contexte catalog (lecture)
 # Rôle : catalogue, cours et fiches essentielles, adressés par slug ; pages publiques Niveau, Série et Matière, sans compte
-# ADR  : 0029, 0035, 0099 (§4.3), 0110 (fiche de cours), 0116
+# ADR  : 0029, 0035, 0099 (§4.3), 0110 (fiche de cours), 0116, 0119-entrainement-de-notion-corrige-sans-trace
 get "courses", to: "catalog/courses#index", as: :courses # gelé
 get "courses/:slug", to: "catalog/courses#show", as: :course
 get "courses/:course_slug/essentials/:slug", to: "catalog/essentials#show", as: :course_essential
 # Ancienne adresse de la fiche de cours : 301 vers la fiche de révision de la page de la leçon (CA-12, ADR-0116 §4.5).
 get "courses/:course_slug/fiche", to: "catalog/courses#fiche", as: :course_fiche
+# « Je m'entraîne » : le serveur juge les réponses de la notion et n'écrit rien (ADR entraînement corrigé sans trace §4).
+post "courses/:course_slug/notions/:slug/practice_check", to: "catalog/practice_checks#create", as: :practice_check
 
 # ADR-0099 §4.3 : adresses françaises, à slug figé (ADR-0029, ADR-0034), lisibles sans compte.
 get "niveaux", to: "catalog/level_pages#index", as: :public_levels

@@ -80,6 +80,53 @@ module Queries
         assert_equal RevisionSheetQuery::EMPTY, call(course)
       end
 
+      def add_notion_with_practice(course, *questions)
+        notion = revision_notion("Avec entraînement")
+        sheet = { "remember" => notion["remember"], "method" => notion["method"], "example" => notion["example"], "pitfall" => notion["pitfall"],
+                  "practice" => raw_practice(*questions) }
+        create_essential(course:, name: notion["name"], sheet:)
+      end
+
+      test "l'entraînement de la notion est rendu sans correction, sans explication et sans valeur attendue" do
+        course = lesson
+        add_notion_with_practice(course, numeric_question, choice_question)
+
+        practice = call(course).sheet.notions.first.practice
+
+        assert_kind_of Entities::Catalog::NotionPractice, practice
+        assert_equal 2, practice.questions.size
+        assert practice.questions.all? { it.explanation.nil? }
+        assert_equal [], practice.questions.first.answers
+        assert_equal [ nil, nil, nil ], practice.questions.last.answers.map(&:correct)
+        assert_equal %w[6 7 8], practice.questions.last.answers.map(&:content).sort
+      end
+
+      test "les propositions d'un ordre ou d'un relier sont mélangées, jamais dans l'ordre de la solution" do
+        course = lesson
+        add_notion_with_practice(course, ordering_question, matching_question)
+
+        ordering, matching = call(course).sheet.notions.first.practice.questions
+
+        assert_not_equal %w[Décomposer Séparer Calculer], ordering.answers.map(&:content)
+        assert_not_equal [ "3", "4", "5" ], matching.answers.map(&:match_content)
+        assert_equal %w[Calculer Décomposer Séparer], ordering.answers.map(&:content).sort
+      end
+
+      test "une notion sans entraînement n'en a pas" do
+        course = lesson
+        add_notion(course)
+
+        assert_nil call(course).sheet.notions.first.practice
+      end
+
+      test "la coupe compte l'entraînement pour zéro mot" do
+        course = lesson
+        add_notion_with_practice(course, numeric_question, choice_question, fill_blank_question)
+        add_notion(course, revision_notion("Autre"))
+
+        assert_nil call(course).cut, "l'entraînement n'ajoute aucun mot : la fiche reste courte"
+      end
+
       test "une leçon inconnue est vide" do
         assert_equal RevisionSheetQuery::EMPTY, RevisionSheetQuery.new.call(course_slug: "inconnue", actor: nil)
       end
