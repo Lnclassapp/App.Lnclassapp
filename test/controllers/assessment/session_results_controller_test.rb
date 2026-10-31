@@ -137,12 +137,14 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#question_review_#{@first.id}" do
       assert_select "*", text: /#{I18n.t("#{scope}.show.wrong")}/
       assert_select "*", text: /Combien de cellules donne la méiose \?/
-      assert_select "*", text: /Quatre cellules filles\./
+      # UDR-0149 §3 (ajout du 2026-10-31) : l'explication n'est plus sous la question, mais dans le bloc « Correction » de l'exercice.
+      assert_select "*", text: /Quatre cellules filles\./, count: 0
       assert_select "ul li", 4
       assert_select "li[data-correct]", text: /#{right(@first).content}/, count: 1
       assert_select "li[data-selected]:not([data-correct])", text: /#{wrong(@first).content}/, count: 1
       assert_select "*", text: /#{I18n.t("#{scope}.question_review.correct")}/
     end
+    assert_select "#session_correction", text: /a\. Quatre cellules filles\./
     assert_select "#question_review_#{@second.id}", text: /#{I18n.t("#{scope}.show.correct")}/
     assert_select "#question_review_#{@second.id} li[data-correct][data-selected]", 1
     # La correction se lit sans phrase d'aide (R4), 3 cartes puis « Voir plus » (R3) : 2 cartes ici, aucun bouton.
@@ -165,8 +167,37 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
       assert_select "*", text: /#{I18n.t("#{scope}.show.unanswered")}/
       assert_select "li[data-correct]", text: /#{right(@first).content}/
       assert_select "li[data-selected]", 0
-      assert_select "*", text: /Quatre cellules filles\./
+      assert_select "*", text: /Quatre cellules filles\./, count: 0
     end
+    assert_select "#session_correction", text: /a\. Quatre cellules filles\./
+  end
+
+  # UDR-0149 §3 (ajout du 2026-10-31, Touré) : un seul bloc « Correction » sous l'exercice, « a. … b. … » (lettre = rang de la question) ;
+  # une question sans explication est sautée sans décaler les lettres ; ✓ / ✗ et bonne réponse restent sur la question.
+  test "la correction tient en un bloc sous l'exercice : « a. … », « c. … », la question sans explication sautée" do
+    @second.update!(explanation: nil)
+    third = add_question(session: @session, explanation: "Trois cellules.")
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_review #session_correction", 1
+    assert_select "#session_correction h3", text: I18n.t("#{scope}.show.correction")
+    assert_select "#session_correction p", 2
+    assert_select "#session_correction p:nth-of-type(1)", text: "a. Quatre cellules filles."
+    assert_select "#session_correction p:nth-of-type(2)", text: "c. Trois cellules."
+    assert_select "#session_review ol", text: /Quatre cellules filles/, count: 0
+    assert_select "#question_review_#{third.id}", text: /Trois cellules/, count: 0
+    assert_select "#question_review_#{@first.id} li[data-correct]", text: /#{right(@first).content}/
+  end
+
+  test "sans aucune explication, pas de bloc « Correction »" do
+    @first.update!(explanation: nil)
+    sign_in_as @student
+
+    show
+
+    assert_select "#session_correction", 0
   end
 
   # CA-06 : une copie abandonnée n'a pas de correction ; une copie en cours non plus (CA-07).

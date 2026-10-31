@@ -4,6 +4,8 @@
 
 - 2026-10-31 : recette de `prepare-interros-cahier` impossible sur Staging (DRENA vides, ADR-0108) ; le contenu des sujets arrive par import, pas par seed.
 
+- 2026-10-31 (Lot B, Touré) : titre de chaque feuille numéroté (« Prépare interros n°N », « Prépare devoirs n°N ») avec le nom de la notion / du sujet en sous-titre `.ps-subject` (« Ma classe » comprise, N = rang parmi les envois de même type) ; correction de la page de résultat en un bloc `#session_correction` « a. … b. … » sous l'exercice ; « Je m'entraîne » (`practice_checks`) inchangé. UDR-0149 §3 amendé (ajout du 2026-10-31).
+
 ## Ce qui a dérapé
 
 ## Ce qu'on a appris sur la codebase

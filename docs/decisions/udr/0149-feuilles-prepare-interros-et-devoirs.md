@@ -124,6 +124,24 @@ des `_assigned_exercise`)
 - QCM et Vrai ou faux : `role="radiogroup"` et `aria-checked` ; champs avec `aria-label` = l'intitulé de la question.
 - Progression et résultat dans `aria-live="polite"`.
 
+**Ajout du 2026-10-31 (Touré)** : titres numérotés et correction en un bloc par exercice, pour toutes les leçons.
+- *Titre de la feuille* (remplace le point 2 de la structure ci-dessus pour la ligne de titre). Le `.ps-title` de `sheets/_sheet.html.erb` dit
+  « Prépare interros n°N » ou « Prépare devoirs n°N », en capitales comme avant (`text-transform` de `.ps-title`), clé
+  `catalog.courses.sheets.numbered_title.<kind>`. N est le rang de la feuille dans sa section : dans « Prépare interros », l'ordre des feuilles
+  (notions, puis « Toute la leçon » en dernière, donc N = le « n » de « Notion n / N ») ; dans « Prépare devoirs », l'ordre des sujets.
+  Le nom de la notion, de « Toute la leçon » ou le titre du sujet reste affiché juste dessous, dans une ligne italique `.ps-subject`
+  (classe `.ps-progress`, avant la progression, sans nouveau style), jamais supprimé. La feuille reçoit un local `number:`.
+  Dans « Ma classe » (`_assigned_sheets`, même partiel) : « Prépare interros n°N » / « Prépare devoirs n°N », N = rang de l'envoi parmi les
+  envois de même type, dans l'ordre d'affichage (le plus récent d'abord) ; l'ancien titre (nom de la notion ou « DEVOIR DU <date> ») passe en
+  sous-titre, et « À rendre le … » reste dessous.
+- *Correction* (page de résultat d'une copie, `assessment/session_results/show`, valable pour toute copie, feuille ou non). Une fois la
+  copie vérifiée ou rendue, l'explication n'est plus sous chaque question : un seul bloc `#session_correction` s'affiche sous la liste des
+  questions de l'exercice (fond `bg-mist`, `rounded-ln`), titré « Correction » (`h3`), puis un paragraphe par question qui a une explication :
+  « a. <explication> », « b. … » ; la lettre est le rang de la question dans l'exercice (a pour la 1re), une question sans explication est
+  sautée sans décaler les lettres, et le bloc est absent si aucune n'en a. Restent sur la question : ✓ / ✗ (verdict), « Ta réponse » et la bonne
+  réponse. Les réponses rédigées et le cahier gardent leur corrigé type dans leur partiel. Le bloc n'est pas replié par « Voir plus ».
+- *Hors de cette règle* : « Je m'entraîne » de la fiche (`catalog/practice_checks`) garde sa correction par question.
+
 ## 4. Conséquences
 
 - Dans la page de la leçon, la grille de cartes de UDR-0145 §3.2 disparaît au profit des feuilles. La page de l'exercice
