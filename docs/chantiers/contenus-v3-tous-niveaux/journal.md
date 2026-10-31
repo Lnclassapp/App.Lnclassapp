@@ -6,7 +6,7 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
-| 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | PRNUM |
+| 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
 
 ## À faire valider par un enseignant
 
