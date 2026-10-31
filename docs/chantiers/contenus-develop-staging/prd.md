@@ -21,7 +21,7 @@ Aucune policy nouvelle : le chargement n'est pas une action d'utilisateur. La li
 ### Chemin nominal
 
 1. Une PR qui modifie la leçon Thalès est fusionnée dans `Develop` ; Railway redéploie Develop.
-2. Au démarrage, après les migrations, l'application lit le nom de l'environnement : `Develop`.
+2. Au pré-déploiement (`db:prepare db:seed`), après les migrations, l'application lit le nom de l'environnement : `Develop`.
 3. Elle prend les leçons de `docs/contenus/lecons-traitees` qui portent au moins un sujet de devoir (aujourd'hui : Thalès).
 4. Pour chacune, elle compare l'empreinte du fichier à celle de son dernier chargement automatique réussi : différente (ou jamais chargée) → elle charge.
 5. Charger : le fichier passe par la vraie chaîne d'import (mêmes contrôles qu'à la main). Leçon absente : elle est créée entière. Leçon présente, publiée ou non : seuls ses exercices de notion, ses problèmes et ses sujets sont remplacés (résultats et devoirs envoyés qui s'y rattachent effacés) ; le cours, les notions et leurs fiches ne bougent pas ; les exercices se rattachent aux notions existantes par leur nom ; les figures qu'ils citent sont ajoutées ou mises à jour. Puis tout est publié.
@@ -99,7 +99,7 @@ Scénario: l'import à la main refuse toujours une leçon publiée
 |---|---|
 | Domaine | règle de reconnaissance de l'environnement (Develop, Staging, production, PR, inconnu) ; use case de chargement automatique (sélection des leçons à sujets, comparaison d'empreintes, chaîne d'import puis publication) ; l'adaptateur d'import a, pour ce seul appelant, un mode « exercices et sujets seulement » qui remplace ceux d'une leçon présente, publiée ou non |
 | Infrastructure | l'écrivain de l'arbre remplace les exercices, problèmes et sujets d'une leçon (effacement de leurs résultats comme pour un brouillon, notions et fiches gardées, figures citées fusionnées) ; dernière empreinte réussie lue dans les rapports d'import ; source des fichiers de leçon du dépôt ; tâche Rake `contenus:charger` sous verrou consultatif PostgreSQL |
-| Delivery | `bin/docker-entrypoint` lance la tâche après `db:prepare`, sans bloquer le démarrage |
+| Delivery | `db/seeds.rb` (au pré-déploiement Railway `db:prepare db:seed`, ADR-0052) lance la tâche par `db/seeds/contenus.rb` (production Rails, hors environnement de PR), sans jamais faire échouer le pré-déploiement ; pas `bin/docker-entrypoint`, dont le branchement ne se déclenche pas sur Railway |
 | UI | aucune vue modifiée ; un code d'erreur traduit (`unknown_environment`) |
 
 ## 6. Décisions rattachées

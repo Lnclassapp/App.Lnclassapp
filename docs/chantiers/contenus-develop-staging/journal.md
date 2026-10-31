@@ -11,6 +11,8 @@
 | 2026-10-31 | Libellé `notion_not_found` : « notion introuvable dans la **fiche de cours** : %{name} » (et non « dans la leçon »). | `test/i18n/locale_files_test.rb` interdit « leçon » (UDR-0007) dans les locales. | Non |
 | 2026-10-31 | Le use case reçoit `policy:` (ManageContentPolicy) et l'applique à l'auteur trouvé. | `test/architecture/use_case_policies_test.rb` exige une policy injectée (ADR-0028) ; inatteignable en pratique (l'auteur est de l'équipe) mais testé. | Non |
 | 2026-10-31 | Verrou consultatif lu hors du cache de requêtes (`connection.uncached`). | Dans les tests (cache actif) le second `pg_try_advisory_lock` renvoyait la réponse mémorisée du premier. | Non |
+| 2026-10-31 | Le branchement passe par `db/seeds.rb` (`"contenus" => %w[production]`, `db/seeds/contenus.rb` invoque `contenus:charger`) et non par `bin/docker-entrypoint` (modification annulée). | Le `CMD` du Dockerfile est `sh -c "... ./bin/thrust ./bin/rails server"` : le test de l'entrypoint (deux derniers arguments `./bin/rails server`) ne se déclenche jamais sur Railway. Le pré-déploiement `db:prepare db:seed` (.railway/railway.ts, ADR-0052) tourne en production Rails sur Develop, Staging et production. | Non (ADR §4.6 mis à jour) |
+| 2026-10-31 | Fichier inchangé : si le cours n'est pas publié ou s'il reste une notion ou un exercice en brouillon, la cascade de publication est relancée seule (sans réimport), journalisée ; un échec (résultat ou exception) est journalisé avec le nom de la leçon, jamais relancé. | Une publication qui échoue après un import réussi laissait la leçon en brouillon pour toujours (le rapport terminé fait croire à un chargement fait). Critère de la seed `lecons_completes.rb`, sauf les exercices archivés (la cascade ne peut pas les publier : ils relanceraient la cascade à chaque déploiement). | Non |
 
 ## Ce qui a dérapé
 
@@ -18,7 +20,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 - Le plan ne listait pas quelques fichiers indispensables, ajoutés par ce lot (lectures ou constantes seulement) : `app/domain/entities/catalog/import_error.rb` (+ son test, 39 → 41 codes : `ImportError` refuse tout code hors liste fermée), `CourseRepository#slugs_by_key` (+ port : retrouver le slug de la leçon que l'import vient d'écrire), `UserRepository#oldest_active_team_actor` (+ port : « plus ancien membre actif de l'équipe »).
 - Tests système non lancés : ce lot ne touche aucune vue, contrôleur, composant, CSS ni Stimulus. Les 88 erreurs `application.css introuvable` de `test/integration` viennent d'un worktree sans assets compilés, pas du lot.
-- Limite connue : si l'import réussit mais que la publication échoue en cours de route (exception), le rapport est « terminé » et le fichier ne sera pas retenté tant qu'il ne change pas ; un refus partiel de publication (exercice non publiable) laisse l'exercice en brouillon sans nouvelle ligne.
+- Limite connue : un exercice non publiable (question mal construite, image sans texte de remplacement) reste en brouillon et fait relancer la cascade à chaque déploiement (journalisé « laissé(s) en brouillon »), sans nouvelle ligne d'import.
 
 ## Ce qu'on a appris sur la codebase
 

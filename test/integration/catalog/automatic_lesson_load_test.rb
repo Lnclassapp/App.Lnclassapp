@@ -126,6 +126,19 @@ class Catalog::AutomaticLessonLoadTest < ActiveSupport::TestCase
     assert_equal 1, automatic_reports.count
   end
 
+  test "an unchanged file whose publication was interrupted is published again, without a new import line" do
+    seed_referential
+    charger("Develop")
+    course = Orm::Course.find_by!(name: @lesson["name"])
+    Orm::Exercise.where(course_id: course.id).first.update_columns(status: "draft", published_at: nil)
+
+    output = charger("Develop")
+
+    assert_includes output, "#{IMPORT_NAME} : republished"
+    assert_equal [ "published" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
+    assert_equal 1, automatic_reports.count
+  end
+
   test "a changed file is loaded again" do
     seed_referential
     charger("Develop")

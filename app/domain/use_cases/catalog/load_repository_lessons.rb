@@ -7,24 +7,28 @@ module UseCases
       KIND = "course_tree"
 
       # outcome : :skipped (production, PR, nom absent), :no_author (aucun membre d'équipe actif), :unknown_environment (une ligne refusée
-      # est laissée), :done. lessons : { nom d'import => :loaded | :unchanged | :not_started | :refused | :unpublished }.
+      # est laissée), :done. lessons : { nom d'import => :loaded | :unchanged | :not_started | :refused | :unpublished | :republished }.
       Summary = Data.define(:outcome, :lessons) do
         def initialize(lessons: {}, **) = super
       end
 
-      # source : LessonSourcePort ; reports : ImportReportRepositoryPort ; users : UserRepositoryPort ; courses : CourseRepositoryPort ;
+      # source : LessonSourcePort ; reports : ImportReportRepositoryPort ; users : UserRepositoryPort ; courses, essentials, exercises : les repositories
+      # du même nom (fiches et exercices en brouillon d'une leçon) ; logger : le journal du déploiement ;
       # taxonomy : TaxonomyRepository (lookup) ; start_import, run_import, publish_cascade : les use cases du même nom, cablés par l'appelant
       # (run_import avec l'adaptateur ImportCourseTree en mode replace_exercises) ; policy : Policies::Catalog::ManageContentPolicy.
-      def initialize(source:, reports:, users:, courses:, taxonomy:, start_import:, run_import:, publish_cascade:, policy:, clock:)
+      def initialize(source:, reports:, users:, courses:, essentials:, exercises:, taxonomy:, start_import:, run_import:, publish_cascade:, policy:, logger:, clock:)
         @source = source
         @reports = reports
         @users = users
         @courses = courses
+        @essentials = essentials
+        @exercises = exercises
         @taxonomy = taxonomy
         @start_import = start_import
         @run_import = run_import
         @publish_cascade = publish_cascade
         @policy = policy
+        @logger = logger
         @clock = clock
       end
 
@@ -55,7 +59,7 @@ module UseCases
       end
 
       def load(lesson, actor)
-        return :unchanged if @reports.last_loaded_checksum(kind: KIND, file_name: lesson.import_name) == lesson.checksum_sha256
+        return republish(lesson, actor) if @reports.last_loaded_checksum(kind: KIND, file_name: lesson.import_name) == lesson.checksum_sha256
 
         upload = Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(lesson.content), filename: lesson.import_name)
         started = @start_import.call(actor:, dto: Dtos::Catalog::ImportUploadInput.new(kind: KIND, files: [ upload ]))
@@ -64,8 +68,45 @@ module UseCases
         ran = @run_import.call(report_id: started.value.id)
         return :refused unless ran.success? && ran.value.status == "completed" && ran.value.error_count.zero?
 
-        @publish_cascade.call(actor:, root: :course, slug: slug_of(lesson)).success? ? :loaded : :unpublished
+        guarded(lesson) { publish(lesson, actor, slug_of(lesson), :loaded) }
       end
+
+      # Fichier inchangé : pas de réimport, mais une publication qui a échoué après un import réussi est reprise (même critère que
+      # db/seeds/demo/lecons_completes.rb : cours publié, aucun brouillon restant). Tout publié : rien.
+      def republish(lesson, actor)
+        guarded(lesson) do
+          slug = slug_of(lesson)
+          next :unchanged unless pending_publication?(slug)
+
+          publish(lesson, actor, slug, :republished)
+        end
+      end
+
+      def pending_publication?(slug)
+        course = @courses.find_by_slug(slug:)
+        course.status != "published" || @exercises.draft_public_ids(course_id: course.id).any? || @essentials.draft_slugs(course_id: course.id).any?
+      end
+
+      # La cascade de publication, journalisée ; un échec ne touche ni l'import ni les autres leçons.
+      def publish(lesson, actor, slug, done)
+        result = @publish_cascade.call(actor:, root: :course, slug:)
+        if result.failure?
+          @logger.error("[contenus] #{lesson_name(lesson)} : publication refusée (#{result.code})")
+          return :unpublished
+        end
+
+        @logger.info("[contenus] #{lesson_name(lesson)} : publiée, #{result.value.exercises} exercice(s) publié(s), #{result.value.skipped} laissé(s) en brouillon")
+        done
+      end
+
+      def guarded(lesson)
+        yield
+      rescue StandardError => error
+        @logger.error("[contenus] #{lesson_name(lesson)} : publication interrompue (#{error.class} : #{error.message})")
+        :unpublished
+      end
+
+      def lesson_name(lesson) = JSON.parse(lesson.content).fetch("courses").first["name"].to_s.squish
 
       # La leçon que l'import vient d'écrire (ou de remplacer), retrouvée par la clé de doublon de l'import.
       def slug_of(lesson)

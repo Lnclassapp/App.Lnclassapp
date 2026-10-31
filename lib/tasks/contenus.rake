@@ -27,7 +27,7 @@ namespace :contenus do
                          clock: Time.zone }
         exercises = Repositories::Assessment::ExerciseRepository.new
         result = UseCases::Catalog::LoadRepositoryLessons.new(
-          source: Repositories::Catalog::RepositoryLessonSource.new, reports:, users:, courses:, taxonomy:,
+          source: Repositories::Catalog::RepositoryLessonSource.new, reports:, users:, courses:, essentials:, exercises:, taxonomy:,
           start_import: UseCases::Catalog::StartImport.new(reports:, files:, queue: no_queue, transaction:, clock: Time.zone),
           run_import: UseCases::Catalog::RunImport.new(adapter:, schema: Repositories::Catalog::ImportSchemaValidator.new, reports:, files:,
                                                        users:, audit_log: dependencies[:audit_log], transaction:, clock: Time.zone),
@@ -37,7 +37,7 @@ namespace :contenus do
             publish_essential: UseCases::Catalog::PublishEssential.new(essentials:, **dependencies),
             publish_exercise: UseCases::Assessment::PublishExercise.new(exercises:, **dependencies)
           ),
-          policy: dependencies[:policy], clock: Time.zone
+          policy: dependencies[:policy], logger: Rails.logger, clock: Time.zone
         ).call(environment_name: ENV["RAILWAY_ENVIRONMENT_NAME"], pr_environment: PrEnvironment.active?)
         if result.failure?
           say.call("chargement refusé (#{result.code}) : rien n'est chargé.")

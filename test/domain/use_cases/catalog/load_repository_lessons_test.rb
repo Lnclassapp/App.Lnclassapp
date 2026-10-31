@@ -30,7 +30,18 @@ module UseCases
 
       class Courses
         include Ports::Catalog::CourseRepositoryPort
+        Course = Struct.new(:id, :status)
+        def initialize(status: "published") = @status = status
+        def find_by_slug(slug:) = Course.new(5, @status)
         def slugs_by_key = { [ "thales", 1, 2, nil ] => "thales", [ "thales", 1, 2, 9 ] => "thales-serie" }
+      end
+
+      class Drafts
+        include Ports::Assessment::ExerciseRepositoryPort
+        include Ports::Catalog::EssentialRepositoryPort
+        def initialize(exercises: [], essentials: []) = (@exercises = exercises) && (@essentials = essentials)
+        def draft_public_ids(course_id: nil, essential_id: nil) = @exercises
+        def draft_slugs(course_id:) = @essentials
       end
 
       Lookup = Struct.new(:level, :material) do
@@ -46,6 +57,12 @@ module UseCases
         @content = JSON.generate("courses" => [ { "name" => " Thalès ", "level_name" => "3ème", "material_name" => "Maths" } ])
         @lesson = Lesson.new(import_name: "chargement-automatique-3eme-maths-thales.json", checksum_sha256: Digest::SHA256.hexdigest(@content), content: @content)
         @calls = []
+        @logs = []
+        @logger = Object.new.tap do |logger|
+          logs = @logs
+          logger.define_singleton_method(:info) { |message| logs << [ :info, message ] }
+          logger.define_singleton_method(:error) { |message| logs << [ :error, message ] }
+        end
         @now = Time.zone.parse("2026-10-31 08:00")
       end
 
@@ -57,14 +74,15 @@ module UseCases
         ->(report_id:) { @calls << [ :run, report_id ]; result || Shared::Result.success(Struct.new(:status, :error_count).new(status, error_count)) }
       end
 
-      def cascade(result = Shared::Result.success)
+      def cascade(result = Shared::Result.success(UseCases::Catalog::PublishCascade::Summary.new(root: nil, essentials: 0, exercises: 3, skipped: 1)))
         ->(actor:, root:, slug:) { @calls << [ :cascade, actor, root, slug ]; result }
       end
 
-      def use_case(lessons: [ @lesson ], reports: Reports.new, users: Users.new(@actor), start: start_import, run: run_import, publish: cascade, policy: Policies::Catalog::ManageContentPolicy.new)
-        LoadRepositoryLessons.new(source: Source.new(lessons), reports:, users:, courses: Courses.new,
+      def use_case(lessons: [ @lesson ], reports: Reports.new, users: Users.new(@actor), start: start_import, run: run_import, publish: cascade, policy: Policies::Catalog::ManageContentPolicy.new,
+                   course_status: "published", drafts: Drafts.new)
+        LoadRepositoryLessons.new(source: Source.new(lessons), reports:, users:, courses: Courses.new(status: course_status), essentials: drafts, exercises: drafts,
                                   taxonomy: Taxonomy.new(Lookup.new(Level.new(1), Level.new(2))), start_import: start, run_import: run,
-                                  publish_cascade: publish, policy:, clock: Struct.new(:now).new(@now))
+                                  publish_cascade: publish, policy:, logger: @logger, clock: Struct.new(:now).new(@now))
       end
 
       def call(subject = use_case, name: "Develop", pr: false) = subject.call(environment_name: name, pr_environment: pr).value
@@ -130,6 +148,36 @@ module UseCases
         assert_empty @calls
       end
 
+      test "an unchanged file whose lesson still has drafts (exercise or notion) or is not published gets its publication again, without reimport" do
+        reports = Reports.new(loaded: { [ "course_tree", @lesson.import_name ] => @lesson.checksum_sha256 })
+        [ { drafts: Drafts.new(exercises: [ "abc" ]) }, { drafts: Drafts.new(essentials: [ "fiche" ]) }, { course_status: "draft" } ].each do |state|
+          @calls.clear
+          @logs.clear
+
+          assert_equal({ @lesson.import_name => :republished }, call(use_case(reports:, **state)).lessons, state.keys.to_s)
+          assert_equal [ [ :cascade, @actor, :course, "thales" ] ], @calls
+          assert_equal [ [ :info, "[contenus] Thalès : publiée, 3 exercice(s) publié(s), 1 laissé(s) en brouillon" ] ], @logs
+        end
+      end
+
+      test "an unchanged file whose lesson is fully published does nothing at all" do
+        reports = Reports.new(loaded: { [ "course_tree", @lesson.import_name ] => @lesson.checksum_sha256 })
+
+        assert_equal({ @lesson.import_name => :unchanged }, call(use_case(reports:)).lessons)
+        assert_empty @calls
+        assert_empty @logs
+      end
+
+      test "a republication that fails, by result or by exception, is logged with the lesson's name and raises nothing" do
+        reports = Reports.new(loaded: { [ "course_tree", @lesson.import_name ] => @lesson.checksum_sha256 })
+        raising = ->(actor:, root:, slug:) { raise "boom" }
+
+        assert_equal({ @lesson.import_name => :unpublished },
+                     call(use_case(reports:, course_status: "draft", publish: cascade(Shared::Result.failure(:conflict)))).lessons)
+        assert_equal({ @lesson.import_name => :unpublished }, call(use_case(reports:, course_status: "draft", publish: raising)).lessons)
+        assert_equal [ [ :error, "[contenus] Thalès : publication refusée (conflict)" ], [ :error, "[contenus] Thalès : publication interrompue (RuntimeError : boom)" ] ], @logs
+      end
+
       test "a file that differs from the last loaded checksum is loaded again" do
         reports = Reports.new(loaded: { [ "course_tree", @lesson.import_name ] => "autre" })
 
@@ -164,6 +212,7 @@ module UseCases
         publish = cascade(Shared::Result.failure(:conflict))
 
         assert_equal({ @lesson.import_name => :unpublished }, call(use_case(publish:)).lessons)
+        assert_equal [ [ :error, "[contenus] Thalès : publication refusée (conflict)" ] ], @logs
       end
     end
   end

@@ -15,7 +15,7 @@ Un seul cas d'usage, de bout en bout : pas de Lot 0 (aucune migration, aucune ro
 
 ## Lot A — Develop et Staging chargent seuls les leçons à sujets de devoir
 
-- **Couche**       : domaine + infrastructure + delivery (tâche de démarrage)
+- **Couche**       : domaine + infrastructure + delivery (tâche lancée au pré-déploiement)
 - **Fichiers**     : `app/domain/entities/catalog/automatic_load_stage.rb` (nouveau : Develop, Staging, production, PR, inconnu)
                      `app/domain/ports/catalog/lesson_source_port.rb` (nouveau : fichiers de leçon du dépôt, nom, empreinte, document)
                      `app/domain/use_cases/catalog/load_repository_lessons.rb` (nouveau)
@@ -24,7 +24,7 @@ Un seul cas d'usage, de bout en bout : pas de Lot 0 (aucune migration, aucune ro
                      `app/domain/ports/catalog/import_report_repository_port.rb` · `app/infrastructure/repositories/catalog/import_report_repository.rb` (dernière empreinte réussie par nom de fichier ; ligne refusée « environnement non reconnu »)
                      `app/infrastructure/repositories/catalog/repository_lesson_source.rb` (nouveau : lit `docs/contenus/lecons-traitees`)
                      `lib/tasks/contenus.rake` (nouveau : `contenus:charger`, verrou consultatif, jamais d'exception sortante)
-                     `bin/docker-entrypoint` (lance la tâche après `db:prepare`)
+                     `db/seeds.rb` · `db/seeds/contenus.rb` (nouveau : le pré-déploiement `db:prepare db:seed` lance la tâche ; production Rails, pas les PR)
                      `config/locales/teams/imports.fr.yml` (`unknown_environment`)
 - **Dépend de**    : —
 - **Test associé** : `test/domain/entities/catalog/automatic_load_stage_test.rb`
@@ -42,7 +42,7 @@ Un seul lot : pas de collision possible.
 | Fichier | Lot propriétaire |
 |---|---|
 | `config/locales/teams/imports.fr.yml` | Lot A |
-| `bin/docker-entrypoint` | Lot A |
+| `db/seeds.rb` · `db/seeds/contenus.rb` | Lot A |
 
 ## Dispatch
 
