@@ -1,0 +1,1877 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — L'ONU",
+      "subtitle": "Leçon 1 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "frise-onu",
+          "kind": "timeline",
+          "description": "Une frise de 1910 à 2020 qui place les repères de la leçon : traité de Versailles et Pacte de la SDN (1919), Charte de l'Atlantique (1941), Charte de l'ONU (1945), Déclaration universelle des droits de l'homme (1948), entrée de la Côte d'Ivoire (1960), Conseil de sécurité porté à quinze membres (1965), Conseil de tutelle suspendu (1994), ONUCI (2004-2017) et Objectifs de développement durable (2015). Le curseur règle le début de la frise.",
+          "params": {
+            "start": 1910,
+            "end": 2020,
+            "step": 10,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1920,
+                "to": 1946,
+                "label": "Société des Nations (SDN)"
+              },
+              {
+                "from": 2004,
+                "to": 2017,
+                "label": "ONUCI en Côte d'Ivoire"
+              }
+            ],
+            "events": [
+              {
+                "at": 1919,
+                "label": "Pacte de la SDN"
+              },
+              {
+                "at": 1941,
+                "label": "Charte de l'Atlantique"
+              },
+              {
+                "at": 1945,
+                "label": "Charte de l'ONU"
+              },
+              {
+                "at": 1948,
+                "label": "Déclaration universelle des droits de l'homme"
+              },
+              {
+                "at": 1960,
+                "label": "La Côte d'Ivoire entre à l'ONU"
+              },
+              {
+                "at": 1965,
+                "label": "Conseil de sécurité à 15 membres"
+              },
+              {
+                "at": 1994,
+                "label": "Conseil de tutelle suspendu"
+              },
+              {
+                "at": 2015,
+                "label": "Objectifs de développement durable"
+              }
+            ]
+          },
+          "controls": [
+            {
+              "param": "start",
+              "min": 1910,
+              "max": 1960,
+              "step": 10,
+              "label": "Début de la frise"
+            }
+          ]
+        },
+        {
+          "key": "organes-onu",
+          "kind": "diagram",
+          "description": "Un schéma en arbre : la racine ONU est reliée à ses six organes principaux, qui sont l'Assemblée générale, le Conseil de sécurité, le Secrétariat, la Cour internationale de justice, le Conseil économique et social et le Conseil de tutelle. Ce dernier est signalé à part, car ses activités sont suspendues depuis 1994. Les institutions spécialisées ne sont pas des organes.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "onu",
+                "label": "ONU"
+              },
+              {
+                "id": "ag",
+                "label": "Assemblée générale",
+                "category": 1
+              },
+              {
+                "id": "cs",
+                "label": "Conseil de sécurité",
+                "category": 1
+              },
+              {
+                "id": "sec",
+                "label": "Secrétariat",
+                "category": 1
+              },
+              {
+                "id": "cij",
+                "label": "Cour internationale de justice",
+                "category": 1
+              },
+              {
+                "id": "ecosoc",
+                "label": "Conseil économique et social",
+                "category": 1
+              },
+              {
+                "id": "tut",
+                "label": "Conseil de tutelle",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "onu",
+                "to": "ag"
+              },
+              {
+                "from": "onu",
+                "to": "cs"
+              },
+              {
+                "from": "onu",
+                "to": "sec"
+              },
+              {
+                "from": "onu",
+                "to": "cij"
+              },
+              {
+                "from": "onu",
+                "to": "ecosoc"
+              },
+              {
+                "from": "onu",
+                "to": "tut"
+              }
+            ],
+            "legend": [
+              "Organe en activité",
+              "Activités suspendues depuis 1994"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-sieges",
+          "kind": "map",
+          "description": "Une carte du monde. Les cinq membres permanents du Conseil de sécurité sont colorés : Chine, États-Unis, France, Royaume-Uni et Russie. La Côte d'Ivoire est colorée à part. Six villes sont repérées : New York (siège de l'ONU), Genève (OMS et OIT), La Haye (Cour internationale de justice), Paris (UNESCO), Rome (FAO) et Washington (FMI).",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "chn",
+                "category": 1
+              },
+              {
+                "id": "usa",
+                "category": 1
+              },
+              {
+                "id": "fra",
+                "category": 1
+              },
+              {
+                "id": "gbr",
+                "category": 1
+              },
+              {
+                "id": "rus",
+                "category": 1
+              },
+              {
+                "id": "civ",
+                "category": 2
+              }
+            ],
+            "places": [
+              {
+                "id": "new_york",
+                "label": "New York (siège de l'ONU)"
+              },
+              {
+                "id": "geneva",
+                "label": "Genève (OMS, OIT)"
+              },
+              {
+                "id": "the_hague",
+                "label": "La Haye (CIJ)"
+              },
+              {
+                "id": "paris",
+                "label": "Paris (UNESCO)"
+              },
+              {
+                "id": "rome",
+                "label": "Rome (FAO)"
+              },
+              {
+                "id": "washington",
+                "label": "Washington (FMI)"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "Membre permanent du Conseil de sécurité",
+              "Côte d'Ivoire (membre depuis 1960)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "De la SDN à l'ONU : la création",
+          "remember": "La **Société des Nations (SDN)** naît du traité de Versailles (1919). Son siège est à **Genève**. Elle échoue : elle n'a **pas d'armée**, ses décisions exigent l'**unanimité**, les **États-Unis** n'y entrent jamais et elle n'arrête pas les agressions des années 1930 (Mandchourie en 1931, Éthiopie en 1935). Elle est dissoute en 1946.\n\nEn **août 1941**, la **Charte de l'Atlantique** (Roosevelt et Churchill) annonce un futur système de paix. Le **1er janvier 1942**, 26 États signent la **Déclaration des Nations unies**. D'avril à juin 1945, la **conférence de San Francisco** rédige la **Charte des Nations unies**, signée le **26 juin 1945**. Elle **entre en vigueur le 24 octobre 1945**.\n\nL'ONU compte **51 États fondateurs**, son siège est à **New York** et elle réunit aujourd'hui **193 États membres**. La **Côte d'Ivoire** y entre le **20 septembre 1960**. Nouveauté : un **Conseil de sécurité** peut prendre des décisions obligatoires.",
+          "method": [
+            "Situer la SDN puis l'ONU dans le temps et dans l'espace.",
+            "Identifier les acteurs et les textes fondateurs.",
+            "Expliquer pourquoi la SDN a échoué et pourquoi l'ONU est créée.",
+            "Dégager ce que l'ONU change par rapport à la SDN."
+          ],
+          "example": {
+            "statement": "Présente la création de l'ONU et explique ce qu'elle change par rapport à la SDN.",
+            "steps": [
+              "Situer : la SDN naît à Versailles en 1919 (siège à Genève) ; la Charte de l'ONU est signée à San Francisco le 26 juin 1945, entre en vigueur le 24 octobre 1945, et le siège est à New York.",
+              "Identifier : Roosevelt et Churchill (Charte de l'Atlantique, 1941), les 26 États de la Déclaration des Nations unies (1942), puis les 51 États fondateurs.",
+              "Expliquer : la SDN n'avait pas d'armée, décidait à l'unanimité et n'a pas arrêté les agressions des années 1930 ; la Seconde Guerre mondiale a montré son échec.",
+              "Dégager : l'ONU est universelle, son Conseil de sécurité peut prendre des décisions obligatoires, et elle compte aujourd'hui 193 États membres, dont la Côte d'Ivoire depuis 1960."
+            ]
+          },
+          "pitfall": "Ne confonds pas la SDN et l'ONU, ni leurs dates. Genève est le siège de la SDN ; New York est celui de l'ONU. Le 26 juin 1945, la Charte est seulement signée ; elle ne s'applique qu'à partir du 24 octobre 1945. Contre-exemple : écrire « l'ONU est créée en 1919 » est faux, car 1919 est la date de la SDN. Avant d'écrire une date, demande-toi de quelle organisation parle le document.",
+          "figure": "frise-onu",
+          "practice": {
+            "statement": "Tu t'entraînes à situer et à expliquer la création de l'ONU avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La SDN avait son siège à ___ ; l'ONU a son siège à ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Situer dans l'espace : la SDN siège à Genève, l'ONU à New York. San Francisco est seulement la ville de la conférence de 1945.",
+                "answers": [
+                  {
+                    "content": "Genève",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "New York",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Paris",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "New York",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "Genève",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "San Francisco",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Une ville suisse pour la SDN, une ville américaine pour l'ONU."
+              },
+              {
+                "content": "La Charte est signée à ___ en 1945 et entre en vigueur le ___ octobre 1945 (en chiffres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : signature à San Francisco (26 juin 1945), entrée en vigueur le 24 octobre 1945.",
+                "answers": [
+                  {
+                    "content": "San Francisco",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "24",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La conférence de 1945 a lieu sur la côte ouest des États-Unis."
+              },
+              {
+                "content": "Les États-Unis ont été membres de la SDN.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer les causes : les États-Unis n'ont jamais adhéré à la SDN, ce qui l'a affaiblie. Ils sont membres fondateurs de l'ONU.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel texte d'août 1941 annonce les principes d'un futur système de paix ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier les textes fondateurs : la Charte de l'Atlantique (Roosevelt et Churchill, août 1941). Versailles et le Pacte datent de 1919 ; la Déclaration universelle date de 1948.",
+                "answers": [
+                  {
+                    "content": "La Charte de l'Atlantique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le traité de Versailles",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Déclaration universelle des droits de l'homme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Pacte de la SDN",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "De la SDN à l'ONU : la création",
+            "statement": "Dans cet exercice, tu présentes la création de l'ONU avec la méthode de la fiche : situer, identifier, expliquer, dégager.",
+            "exercise_type": "fixation",
+            "figure": "frise-onu",
+            "questions": [
+              {
+                "content": "Quelle organisation internationale précède l'ONU et naît du traité de Versailles en 1919 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : le traité de Versailles (1919) crée la SDN, dont le siège est à Genève. La Charte de l'Atlantique est un texte de 1941, pas une organisation, et l'OMS est une institution créée après 1945.",
+                "answers": [
+                  {
+                    "content": "La Société des Nations (SDN)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'Organisation de l'unité africaine (OUA)",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Charte de l'Atlantique",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Organisation mondiale de la santé (OMS)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces événements dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer dans le temps : 1919 (SDN), août 1941 (Charte de l'Atlantique), 1er janvier 1942 (Déclaration des Nations unies), 26 juin 1945 (signature), 24 octobre 1945 (entrée en vigueur). Ne confonds pas les deux dates de 1945 : on signe d'abord, la Charte s'applique ensuite.",
+                "answers": [
+                  {
+                    "content": "Création de la SDN (traité de Versailles, 1919)"
+                  },
+                  {
+                    "content": "Charte de l'Atlantique (août 1941)"
+                  },
+                  {
+                    "content": "Déclaration des Nations unies (1er janvier 1942)"
+                  },
+                  {
+                    "content": "Signature de la Charte à San Francisco (26 juin 1945)"
+                  },
+                  {
+                    "content": "Entrée en vigueur de la Charte (24 octobre 1945)"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois faiblesses de la SDN qui expliquent son échec ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Expliquer les causes : la SDN n'a pas d'armée, décide à l'unanimité et se prive des États-Unis. Elle n'arrête pas les agressions des années 1930. Son siège est à Genève (New York est le siège de l'ONU) et 51 est le nombre des États fondateurs de l'ONU.",
+                "answers": [
+                  {
+                    "content": "Elle n'a pas d'armée propre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ses décisions exigent l'unanimité",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les États-Unis n'en sont jamais membres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son siège est à New York",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle compte 51 États fondateurs",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La Charte des Nations unies entre en vigueur le 26 juin 1945.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : le 26 juin 1945, la Charte est signée à San Francisco. Elle entre en vigueur le 24 octobre 1945, qui devient la journée des Nations unies. C'est le piège de la fiche : deux dates en 1945.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Qu'est-ce qui change avec l'ONU par rapport à la SDN ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager les conséquences : l'ONU est plus efficace sur le papier, car son Conseil de sécurité peut décider de mesures obligatoires et que les États-Unis en sont membres fondateurs. Le siège est à New York, pas à Genève.",
+                "answers": [
+                  {
+                    "content": "Un Conseil de sécurité peut prendre des décisions obligatoires pour les États",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les décisions exigent toujours l'unanimité des États",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les États-Unis restent hors de l'organisation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le siège reste à Genève",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le siège de l'ONU est à ___ (nom de la ville).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer dans l'espace : le siège de l'ONU est à New York (États-Unis). Genève était la ville de la SDN : c'est la confusion à éviter.",
+                "answers": [
+                  {
+                    "content": "New York",
+                    "correct": true
+                  },
+                  {
+                    "content": "New-York",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La Charte des Nations unies : buts et principes",
+          "remember": "La **Charte des Nations unies** est le traité fondateur de l'ONU, signé à San Francisco le 26 juin 1945. Son préambule affirme la volonté de « préserver les générations futures du fléau de la guerre ».\n\n**Les buts** (ce que l'ONU veut obtenir) : maintenir la **paix et la sécurité internationales** ; développer des relations amicales entre les nations, fondées sur l'**égalité des droits** et le **droit des peuples à disposer d'eux-mêmes** ; réaliser la **coopération internationale** (économique, sociale, culturelle, humanitaire) et promouvoir le **respect des droits de l'homme**.\n\n**Les principes** (ce que les États respectent) : **égalité souveraine** des États, **bonne foi** dans les engagements, **règlement pacifique des différends**, **interdiction de la menace ou de l'emploi de la force**, **non-ingérence** dans les affaires intérieures des États. Exceptions à l'interdiction de la force : la **légitime défense** et une action décidée par le **Conseil de sécurité**.\n\nLa **Déclaration universelle des droits de l'homme** est adoptée par l'Assemblée générale le **10 décembre 1948**, à Paris.",
+          "method": [
+            "Présenter le document : sa nature, son auteur, sa date.",
+            "Repérer le but ou le principe qu'il exprime, avec les mots du texte.",
+            "Expliquer ce qu'il impose aux États ou ce qu'il permet à l'ONU.",
+            "Illustrer par un exemple et montrer une limite."
+          ],
+          "example": {
+            "statement": "Un document de la Charte demande aux membres de l'ONU de s'abstenir de recourir à la menace ou à l'emploi de la force dans leurs relations internationales. Analyse-le.",
+            "steps": [
+              "Présenter : c'est un article de la Charte des Nations unies, traité signé à San Francisco le 26 juin 1945 par les États fondateurs.",
+              "Repérer : le principe est l'interdiction de la menace ou de l'emploi de la force, lié au but de maintenir la paix et la sécurité internationales.",
+              "Expliquer : ce principe oblige les États à régler leurs différends par des moyens pacifiques (négociation, justice) et non par les armes.",
+              "Illustrer : un différend entre deux États peut être porté devant la Cour internationale de justice. Limite : la légitime défense et les décisions du Conseil de sécurité restent permises."
+            ]
+          },
+          "pitfall": "Ne confonds pas un but et un principe. Un but est ce que l'ONU veut obtenir (la paix) ; un principe est une règle que les États respectent pour y arriver (régler les différends sans la force). Ne dis pas non plus que la Charte interdit « toute » force : la légitime défense et les décisions du Conseil de sécurité sont deux exceptions. Contre-exemple : un État attaqué qui se défend ne viole pas la Charte.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes sur les buts et les principes de la Charte avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La Charte veut maintenir la ___ et la ___ internationales.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer le but : le premier but de l'ONU est de maintenir la paix et la sécurité internationales.",
+                "answers": [
+                  {
+                    "content": "paix",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "sécurité",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Deux mots : le contraire de la guerre, et le fait d'être protégé."
+              },
+              {
+                "content": "Quel principe oblige les États à résoudre leurs conflits par la négociation ou la justice ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer : le règlement pacifique des différends impose de renoncer aux armes pour résoudre un conflit. L'égalité souveraine concerne le statut des États, la non-ingérence leurs affaires intérieures.",
+                "answers": [
+                  {
+                    "content": "Le règlement pacifique des différends",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'égalité souveraine",
+                    "correct": false
+                  },
+                  {
+                    "content": "La non-ingérence",
+                    "correct": false
+                  },
+                  {
+                    "content": "La légitime défense",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le mot « pacifique » donne la réponse."
+              },
+              {
+                "content": "La Déclaration universelle des droits de l'homme est adoptée en 1948.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Présenter le document : adoptée le 10 décembre 1948 par l'Assemblée générale, à Paris, elle illustre le but du respect des droits de l'homme.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "La Charte : buts et principes",
+            "statement": "Dans cet exercice, tu analyses les buts et les principes de la Charte des Nations unies avec la méthode de la fiche : présenter, repérer, expliquer, illustrer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quels sont trois buts de l'ONU inscrits dans la Charte ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Repérer le but : la Charte fixe la paix et la sécurité, la coopération internationale et le respect des droits de l'homme. L'ONU ne gouverne pas les États et n'impose aucun régime politique : c'est le principe de non-ingérence.",
+                "answers": [
+                  {
+                    "content": "Maintenir la paix et la sécurité internationales",
+                    "correct": true
+                  },
+                  {
+                    "content": "Développer la coopération internationale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Promouvoir le respect des droits de l'homme",
+                    "correct": true
+                  },
+                  {
+                    "content": "Imposer un même régime politique à tous les États",
+                    "correct": false
+                  },
+                  {
+                    "content": "Gouverner à la place des États membres",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque principe de la Charte à son sens.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Expliquer ce que le principe impose : égalité souveraine (une voix par État à l'Assemblée), non-ingérence (affaires intérieures), règlement pacifique (négociation, justice) et légitime défense (seule exception à l'interdiction de la force avec une décision du Conseil de sécurité).",
+                "answers": [
+                  {
+                    "content": "Égalité souveraine",
+                    "match": "Chaque État compte pour une voix, quelle que soit sa taille"
+                  },
+                  {
+                    "content": "Non-ingérence",
+                    "match": "L'ONU n'intervient pas dans les affaires intérieures d'un État"
+                  },
+                  {
+                    "content": "Règlement pacifique",
+                    "match": "Les différends se règlent sans recourir à la force"
+                  },
+                  {
+                    "content": "Légitime défense",
+                    "match": "Un État attaqué a le droit de se défendre"
+                  }
+                ]
+              },
+              {
+                "content": "Qui adopte la Déclaration universelle des droits de l'homme, et quand ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Présenter le document : la Déclaration est un texte de l'Assemblée générale, adopté à Paris le 10 décembre 1948. Le 26 juin 1945 est la signature de la Charte, le 20 septembre 1960 l'entrée de la Côte d'Ivoire.",
+                "answers": [
+                  {
+                    "content": "L'Assemblée générale de l'ONU, le 10 décembre 1948",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Conseil de sécurité, le 26 juin 1945",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Cour internationale de justice, le 24 octobre 1945",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Assemblée générale, le 20 septembre 1960",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Selon la Charte, un État peut employer la force contre un autre État dès qu'il estime que ses intérêts sont menacés.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Expliquer : le principe est l'interdiction de la menace et de l'emploi de la force dans les relations internationales. Étape 4 — Illustrer et limiter : les seules exceptions sont la légitime défense et une action décidée par le Conseil de sécurité.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le principe de non-ingérence interdit à l'ONU d'intervenir dans les affaires ___ des États.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Expliquer : la non-ingérence protège les affaires intérieures des États. Elle admet une exception : une décision du Conseil de sécurité pour la paix et la sécurité internationales.",
+                "answers": [
+                  {
+                    "content": "intérieures",
+                    "correct": true
+                  },
+                  {
+                    "content": "extérieures",
+                    "correct": false
+                  },
+                  {
+                    "content": "commerciales",
+                    "correct": false
+                  },
+                  {
+                    "content": "militaires seulement",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle phrase résume le mieux le piège à éviter sur la force ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Illustrer et montrer la limite : l'interdiction est la règle ; la légitime défense et la décision du Conseil de sécurité sont les exceptions. Dire « sans aucune exception » est faux, dire « libre de choisir » aussi.",
+                "answers": [
+                  {
+                    "content": "La Charte interdit le recours à la force, sauf légitime défense ou décision du Conseil de sécurité",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Charte interdit toute force, sans aucune exception",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Charte autorise la force dès qu'un différend dure",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Charte laisse chaque État libre de choisir",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les organes de l'ONU et les institutions spécialisées",
+          "remember": "L'ONU a **six organes principaux** :\n- l'**Assemblée générale** : tous les États membres, **une voix chacun** ; elle délibère et adopte des **recommandations** ;\n- le **Conseil de sécurité** : **15 membres**, dont **5 permanents** avec **droit de veto** (États-Unis, Russie, Chine, France, Royaume-Uni) et **10 non permanents** élus pour 2 ans ; il a la **responsabilité principale du maintien de la paix** et ses décisions **s'imposent aux États**. Une décision de fond demande **9 voix** sans veto d'un membre permanent ;\n- le **Secrétariat**, dirigé par le **Secrétaire général** (mandat de 5 ans) ;\n- la **Cour internationale de justice (CIJ)**, à **La Haye**, qui juge les différends entre États ;\n- le **Conseil économique et social (ECOSOC)** ;\n- le **Conseil de tutelle**, **suspendu en 1994**.\n\nLes **institutions spécialisées** sont des organisations autonomes liées à l'ONU par accord : **UNESCO** (éducation, science, culture, Paris), **OMS** (santé, Genève), **FAO** (alimentation et agriculture, Rome), **OIT** (travail, Genève), **FMI** (monnaie, Washington).",
+          "method": [
+            "Nommer l'organe ou l'institution.",
+            "Préciser sa composition.",
+            "Décrire son rôle et ses pouvoirs.",
+            "Donner un exemple de son action ou situer son siège."
+          ],
+          "example": {
+            "statement": "Présente le Conseil de sécurité.",
+            "steps": [
+              "Nommer : le Conseil de sécurité est l'un des six organes principaux de l'ONU.",
+              "Préciser la composition : 15 membres, dont 5 permanents avec droit de veto et 10 non permanents élus pour 2 ans.",
+              "Décrire le rôle et les pouvoirs : il a la responsabilité principale du maintien de la paix, et ses décisions s'imposent aux États ; il faut 9 voix sans veto.",
+              "Donner un exemple : le Conseil décide l'envoi de Casques bleus, comme l'ONUCI en Côte d'Ivoire (2004-2017). Son siège est à New York, comme l'ONU."
+            ]
+          },
+          "pitfall": "Ne confonds pas organe et institution spécialisée. La CIJ est un organe de l'ONU ; l'UNESCO, l'OMS et la FAO sont des institutions autonomes. Ne confonds pas non plus recommandation et décision : l'Assemblée générale recommande, seul le Conseil de sécurité décide. Contre-exemple : une résolution de l'Assemblée adoptée par presque tous les États reste une recommandation.",
+          "figure": "organes-onu",
+          "practice": {
+            "statement": "Tu t'entraînes sur les organes et les institutions de l'ONU avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le Conseil de sécurité compte ___ membres, dont ___ membres permanents (en chiffres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Préciser la composition : 15 membres, dont 5 permanents ; les 10 autres sont élus pour 2 ans.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les permanents sont un tiers du total, soit cinq."
+              },
+              {
+                "content": "Quel organe réunit tous les États membres, chacun avec une voix ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer et Étape 2 — Préciser la composition : l'Assemblée générale réunit tous les États membres, une voix chacun. Le Conseil de sécurité n'en compte que 15.",
+                "answers": [
+                  {
+                    "content": "L'Assemblée générale",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Conseil de sécurité",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Secrétariat",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Cour internationale de justice",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le Secrétaire général de l'ONU est le chef de l'administration du Secrétariat.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Décrire le rôle : le Secrétaire général dirige le Secrétariat, organe administratif de l'ONU. Il est nommé pour 5 ans.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Les organes et les institutions spécialisées",
+            "statement": "Dans cet exercice, tu présentes les organes de l'ONU et ses institutions avec la méthode de la fiche : nommer, préciser la composition, décrire le rôle, donner un exemple ou un siège.",
+            "exercise_type": "fixation",
+            "figure": "organes-onu",
+            "questions": [
+              {
+                "content": "Relie chaque organe de l'ONU à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Nommer et Étape 3 — Décrire le rôle : l'Assemblée délibère et recommande, le Conseil de sécurité s'occupe de la paix, la Cour juge les différends entre États, le Secrétariat administre. Ne confonds pas ces rôles.",
+                "answers": [
+                  {
+                    "content": "Assemblée générale",
+                    "match": "Réunit tous les États membres, une voix chacun, et adopte des recommandations"
+                  },
+                  {
+                    "content": "Conseil de sécurité",
+                    "match": "A la responsabilité principale du maintien de la paix"
+                  },
+                  {
+                    "content": "Cour internationale de justice",
+                    "match": "Juge les différends entre États qui l'acceptent"
+                  },
+                  {
+                    "content": "Secrétariat",
+                    "match": "Assure l'administration de l'ONU sous l'autorité du Secrétaire général"
+                  }
+                ]
+              },
+              {
+                "content": "Quel organe peut prendre des décisions qui s'imposent aux États membres ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Décrire le rôle et les pouvoirs : seul le Conseil de sécurité prend des décisions obligatoires. Les résolutions de l'Assemblée sont des recommandations. L'UNESCO n'est pas un organe mais une institution spécialisée.",
+                "answers": [
+                  {
+                    "content": "Le Conseil de sécurité",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'Assemblée générale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Secrétariat",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'UNESCO",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont deux membres permanents du Conseil de sécurité ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Préciser la composition : les cinq membres permanents sont les États-Unis, la Russie, la Chine, la France et le Royaume-Uni. L'Allemagne, l'Inde et le Brésil peuvent être élus membres non permanents, mais ne sont pas permanents.",
+                "answers": [
+                  {
+                    "content": "La France",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Chine",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'Allemagne",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Inde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Brésil",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour adopter une décision de fond, un projet doit recueillir au moins combien de voix sur 15, sans veto d'un membre permanent ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Préciser la composition et le vote : le Conseil compte 15 membres (5 permanents, 10 non permanents). Une décision de fond demande au moins 9 voix, sans veto d'un membre permanent.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "L'organisation qui agit pour la santé dans le monde est ___.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Donner un exemple d'action : l'OMS agit pour la santé et siège à Genève. L'UNESCO s'occupe d'éducation, de science et de culture, la FAO d'alimentation et d'agriculture, l'OIT du travail.",
+                "answers": [
+                  {
+                    "content": "l'OMS",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'UNESCO",
+                    "correct": false
+                  },
+                  {
+                    "content": "la FAO",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'OIT",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Où siège la Cour internationale de justice ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Situer le siège : la Cour internationale de justice, organe principal de l'ONU, siège à La Haye. New York est le siège de l'ONU, Genève celui de l'OMS, Paris celui de l'UNESCO.",
+                "answers": [
+                  {
+                    "content": "À La Haye",
+                    "correct": true
+                  },
+                  {
+                    "content": "À New York",
+                    "correct": false
+                  },
+                  {
+                    "content": "À Genève",
+                    "correct": false
+                  },
+                  {
+                    "content": "À Paris",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'action de l'ONU : paix, décolonisation, développement",
+          "remember": "**Maintien de la paix.** Sur décision du Conseil de sécurité, l'ONU envoie des **Casques bleus** : soldats fournis par les États membres, ils surveillent un cessez-le-feu, protègent des civils, aident à organiser des élections. En Côte d'Ivoire, l'**ONUCI** est une mission de maintien de la paix présente de **2004 à 2017**.\n\n**Décolonisation.** La Charte prévoit des territoires sous **tutelle**, suivis par le **Conseil de tutelle** (le Togo et le Cameroun sous administration française, indépendants en 1960). Le **14 décembre 1960**, la **résolution 1514** de l'Assemblée générale proclame la nécessité de mettre fin au colonialisme et le droit des peuples à l'indépendance.\n\n**Développement.** Les **institutions spécialisées** (OMS, FAO, UNESCO) et les programmes comme le **PNUD** (1965) et l'**UNICEF** (1946) luttent contre la maladie, la faim et l'ignorance. Les **Objectifs du millénaire** (2000-2015) laissent la place en 2015 aux **17 Objectifs de développement durable** (agenda 2030).\n\n**Droits de l'homme.** La **Déclaration universelle** (1948) sert de référence commune.",
+          "method": [
+            "Identifier le domaine d'action : paix, décolonisation ou développement.",
+            "Nommer l'organe ou l'institution qui agit.",
+            "Décrire l'action menée : moyens, lieu, dates.",
+            "Évaluer le résultat et montrer au moins une limite."
+          ],
+          "example": {
+            "statement": "Présente l'action de l'ONU en Côte d'Ivoire entre 2004 et 2017.",
+            "steps": [
+              "Identifier : c'est une action de maintien de la paix.",
+              "Nommer : le Conseil de sécurité décide l'opération ; les Casques bleus sont fournis par des États membres et forment l'ONUCI.",
+              "Décrire : l'ONUCI est présente en Côte d'Ivoire de 2004 à 2017, avec des Casques bleus qui aident au maintien de la paix et à l'organisation d'élections.",
+              "Évaluer : la mission s'achève en 2017. Limite : l'ONU agit avec l'accord des États et reste dépendante des soldats et des moyens que ses membres fournissent."
+            ]
+          },
+          "pitfall": "Ne dis pas que « l'ONU donne l'indépendance » : la résolution 1514 proclame un droit, mais ce sont les peuples et les États concernés qui accèdent à l'indépendance. Ne dis pas non plus que l'ONU a « sa propre armée » : les Casques bleus sont fournis par les États. Contre-exemple : en 1960, l'indépendance du Togo et du Cameroun est le résultat d'un processus suivi par l'ONU, pas d'un décret de l'ONU.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes sur l'action de l'ONU avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Les ___ bleus sont des soldats fournis par les ___ membres de l'ONU.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Nommer l'acteur : les Casques bleus sont fournis par les États membres, sur décision du Conseil de sécurité.",
+                "answers": [
+                  {
+                    "content": "Casques",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Drapeaux",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Boucliers",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "États",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "Villes",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "Entreprises",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense à ce que ces soldats portent sur la tête, et à qui les envoie."
+              },
+              {
+                "content": "C'est l'ONU qui donne elle-même l'indépendance aux colonies.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Évaluer et montrer la limite : la résolution 1514 proclame un droit à l'indépendance, mais ce sont les peuples et les États concernés qui accèdent à l'indépendance.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle institution agit pour l'alimentation et l'agriculture ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Nommer l'institution : la FAO (siège à Rome) agit pour l'alimentation et l'agriculture. L'OMS s'occupe de santé, l'UNESCO d'éducation ; la CIJ est un organe judiciaire.",
+                "answers": [
+                  {
+                    "content": "La FAO",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'OMS",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'UNESCO",
+                    "correct": false
+                  },
+                  {
+                    "content": "La CIJ",
+                    "correct": false
+                  }
+                ],
+                "hint": "Son siège est à Rome."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "L'action de l'ONU : paix, décolonisation, développement",
+            "statement": "Dans cet exercice, tu présentes une action de l'ONU avec la méthode de la fiche : identifier le domaine, nommer l'acteur, décrire l'action, évaluer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque domaine d'action de l'ONU à un exemple.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le domaine d'action puis Étape 2 — Nommer l'acteur : Casques bleus pour la paix, Assemblée générale pour la décolonisation, PNUD pour le développement, OMS pour la santé.",
+                "answers": [
+                  {
+                    "content": "Maintien de la paix",
+                    "match": "Une opération de Casques bleus, comme l'ONUCI"
+                  },
+                  {
+                    "content": "Décolonisation",
+                    "match": "La résolution 1514 de l'Assemblée générale (1960)"
+                  },
+                  {
+                    "content": "Développement",
+                    "match": "Les programmes du PNUD"
+                  },
+                  {
+                    "content": "Santé",
+                    "match": "Les campagnes de l'OMS"
+                  }
+                ]
+              },
+              {
+                "content": "L'ONUCI est présente en Côte d'Ivoire de 2004 à ___ (en chiffres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Décrire l'action : l'Opération des Nations unies en Côte d'Ivoire (ONUCI) est une mission de maintien de la paix présente de 2004 à 2017.",
+                "answers": [
+                  {
+                    "content": "2017",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux actions de développement de l'ONU ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier le domaine : les Objectifs de développement durable et l'UNICEF relèvent du développement. Les Casques bleus relèvent de la paix, la CIJ de la justice, le veto du Conseil de sécurité.",
+                "answers": [
+                  {
+                    "content": "Les Objectifs de développement durable (2015)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les programmes de l'UNICEF pour les enfants",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'envoi de Casques bleus pour surveiller un cessez-le-feu",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le jugement d'un différend par la CIJ",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'exercice du droit de veto",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'ONU dispose de sa propre armée permanente.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Nommer l'acteur : les Casques bleus sont des soldats mis à disposition par les États membres, sur décision du Conseil de sécurité. Étape 4 — Limite : l'ONU dépend des États pour ses troupes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que proclame la résolution 1514 adoptée par l'Assemblée générale le 14 décembre 1960 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Décrire l'action : la résolution 1514 proclame le droit des peuples à l'indépendance. Étape 4 — Évaluer : elle soutient la décolonisation, mais ce sont les peuples et les États concernés qui accèdent à l'indépendance.",
+                "answers": [
+                  {
+                    "content": "La nécessité de mettre fin rapidement au colonialisme",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ONU accorde elle-même l'indépendance à chaque colonie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La création du Conseil de tutelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'interdiction de toute force armée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien d'objectifs compte l'agenda des Objectifs de développement durable adopté en 2015 ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Décrire l'action : l'agenda 2030, adopté en 2015, compte 17 Objectifs de développement durable. Il succède aux Objectifs du millénaire pour le développement (2000-2015).",
+                "answers": [
+                  {
+                    "content": "17",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les limites de l'ONU et la réforme du Conseil de sécurité",
+          "remember": "**Les limites de l'ONU.**\n- Le **droit de veto** : un seul membre permanent peut bloquer une décision de fond du Conseil de sécurité.\n- L'ONU n'a **pas d'armée propre** : les troupes et le budget dépendent des **États membres**.\n- Les résolutions de l'**Assemblée générale** sont des **recommandations**, non obligatoires.\n- L'ONU respecte la **souveraineté** des États : elle n'agit en général qu'avec leur accord ou sur décision du Conseil de sécurité.\n- La composition du Conseil reflète **1945** : aucun État africain n'est membre permanent.\n\n**Le vote.** Une décision de fond exige **9 voix sur 15**, sans vote contre d'un membre permanent. Une **abstention** n'est pas un veto.\n\n**La réforme.** En **1965**, le Conseil passe de **11 à 15 membres**. Depuis, le **G4** (Allemagne, Brésil, Inde, Japon) demande un siège permanent, et l'**Union africaine** (consensus d'Ezulwini, 2005) réclame deux sièges permanents pour l'Afrique. Le nombre de membres permanents est toujours **cinq**. Pistes discutées : élargir le Conseil, limiter l'usage du veto, mieux représenter les continents.",
+          "method": [
+            "Identifier la limite ou le blocage dans le document.",
+            "Expliquer son origine dans la Charte ou dans le fonctionnement de l'ONU.",
+            "Présenter la réforme proposée et qui la demande.",
+            "Discuter : peser avantages et obstacles, puis conclure."
+          ],
+          "example": {
+            "statement": "Un projet de résolution reçoit 14 voix pour et 1 voix contre, celle d'un membre permanent. Est-il adopté ? Que montre ce cas ?",
+            "steps": [
+              "Identifier : malgré 14 voix pour, le vote contre d'un membre permanent bloque la décision : c'est un veto.",
+              "Expliquer : la Charte exige 9 voix sans vote contre d'un membre permanent ; le veto est un privilège des cinq membres permanents depuis 1945.",
+              "Présenter : certains États proposent de limiter l'usage du veto ou d'élargir le nombre de membres permanents (G4, Union africaine).",
+              "Discuter : le veto protège l'accord des grandes puissances, mais il peut paralyser le Conseil ; les réformes demandent l'accord des États, ce qui explique leur lenteur."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'il faut l'unanimité des 15 membres, ni qu'une abstention vaut un veto. Contre-exemple : avec 9 voix pour, 6 abstentions et aucun vote contre d'un membre permanent, le projet est adopté. Seul un vote contre d'un membre permanent le bloque. Ne dis pas non plus que l'Assemblée générale peut imposer sa décision : ses résolutions sont des recommandations.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu t'entraînes sur les limites de l'ONU et sur la réforme avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le droit de ___ appartient aux ___ membres permanents du Conseil de sécurité (nombre en chiffres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier la limite : le veto appartient aux cinq membres permanents du Conseil de sécurité.",
+                "answers": [
+                  {
+                    "content": "veto",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier mot vient du latin et signifie « je m'oppose »."
+              },
+              {
+                "content": "Les résolutions de l'Assemblée générale s'imposent à tous les États.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Expliquer l'origine : l'Assemblée adopte des recommandations. Seul le Conseil de sécurité prend des décisions obligatoires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Demande-toi quel organe a le pouvoir de décider."
+              },
+              {
+                "content": "Quels pays forment le G4, qui demande un siège permanent au Conseil de sécurité ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Présenter la réforme et qui la demande : le G4 réunit l'Allemagne, le Brésil, l'Inde et le Japon. Les cinq membres permanents actuels ne demandent pas d'être ajoutés.",
+                "answers": [
+                  {
+                    "content": "L'Allemagne, le Brésil, l'Inde et le Japon",
+                    "correct": true
+                  },
+                  {
+                    "content": "La France, la Chine, la Russie et les États-Unis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Ghana, le Nigeria, l'Égypte et l'Afrique du Sud",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Côte d'Ivoire, le Mali, le Niger et le Togo",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Limites de l'ONU et réforme du Conseil de sécurité",
+            "statement": "Dans cet exercice, tu analyses les limites de l'ONU et les débats sur la réforme avec la méthode de la fiche : identifier, expliquer l'origine, présenter la réforme, discuter.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Qu'est-ce que le droit de veto ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier la limite : le veto est un pouvoir réservé aux cinq membres permanents. Étape 2 — Expliquer l'origine : la Charte l'a prévu en 1945. Le vote à l'Assemblée est un autre mécanisme.",
+                "answers": [
+                  {
+                    "content": "Le pouvoir d'un membre permanent de bloquer une décision de fond du Conseil de sécurité",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le droit de chaque État de voter à l'Assemblée générale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit du Secrétaire général de renvoyer un juge",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le droit d'un État de quitter l'ONU",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un projet qui obtient 10 voix pour et 5 abstentions, dont 2 de membres permanents, est adopté par le Conseil de sécurité.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Expliquer l'origine : il faut 9 voix sans vote contre d'un membre permanent. Une abstention n'est pas un veto. Ici 10 voix, aucun vote contre : le projet est adopté.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont trois limites de l'action de l'ONU ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier les limites : veto, absence d'armée propre, recommandations non obligatoires. L'ONU compte 193 États membres et la Charte prévoit bien le maintien de la paix.",
+                "answers": [
+                  {
+                    "content": "Le droit de veto peut bloquer le Conseil de sécurité",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ONU n'a pas d'armée propre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les résolutions de l'Assemblée générale ne sont que des recommandations",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ONU ne compte que 51 États membres",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Charte ne prévoit aucun maintien de la paix",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque acteur ou événement à sa demande ou à son effet.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Présenter la réforme et qui la demande : le G4 et l'Union africaine veulent des sièges permanents ; en 1965, le Conseil est élargi de 11 à 15 membres, mais le nombre de membres permanents reste cinq.",
+                "answers": [
+                  {
+                    "content": "Le G4 (Allemagne, Brésil, Inde, Japon)",
+                    "match": "Demande un siège permanent pour ses membres"
+                  },
+                  {
+                    "content": "L'Union africaine (consensus d'Ezulwini, 2005)",
+                    "match": "Demande deux sièges permanents pour l'Afrique"
+                  },
+                  {
+                    "content": "La réforme de 1965",
+                    "match": "Le Conseil de sécurité passe de 11 à 15 membres"
+                  }
+                ]
+              },
+              {
+                "content": "Depuis 1965, le Conseil de sécurité compte ___ membres.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Présenter la réforme : le Conseil passe de 11 à 15 membres en 1965 (10 non permanents). Ne confonds pas avec 51, nombre des États fondateurs de l'ONU.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  },
+                  {
+                    "content": "11",
+                    "correct": false
+                  },
+                  {
+                    "content": "21",
+                    "correct": false
+                  },
+                  {
+                    "content": "51",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un membre permanent s'abstient lors d'un vote. Que se passe-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Discuter : l'abstention n'est pas un veto. Étape 2 — Expliquer : seul un vote contre d'un membre permanent bloque la décision. Croire le contraire est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Le projet peut être adopté s'il obtient 9 voix et aucun veto",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le projet est rejeté automatiquement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le projet est adopté sans compter les voix",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Conseil doit voter une seconde fois à l'unanimité",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Des États en guerre à l'ONU : la création",
+          "statement": "Document : une frise chronologique (1910-2020). Elle place le Pacte de la SDN (1919), la période de la SDN (1920-1946), la Charte de l'Atlantique (1941), la Charte de l'ONU (1945), la Déclaration universelle des droits de l'homme (1948), l'entrée de la Côte d'Ivoire (1960), le Conseil de sécurité porté à 15 membres (1965), la suspension du Conseil de tutelle (1994), l'ONUCI (2004-2017) et les Objectifs de développement durable (2015). Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "frise-onu",
+          "questions": [
+            {
+              "content": "D'après la frise, pendant quelle période la SDN a-t-elle existé ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Présenter le document : c'est une frise chronologique. 2) Repérer : la période de la SDN va de 1920 à 1946. 3) Expliquer : elle est dissoute après la création de l'ONU. Les autres propositions sont des dates de la Charte de l'Atlantique, de l'ONU ou de l'ONUCI.",
+              "answers": [
+                {
+                  "content": "De 1920 à 1946",
+                  "correct": true
+                },
+                {
+                  "content": "De 1941 à 1945",
+                  "correct": false
+                },
+                {
+                  "content": "De 1945 à 1994",
+                  "correct": false
+                },
+                {
+                  "content": "De 1960 à 2017",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien d'années séparent le Pacte de la SDN (1919) de la signature de la Charte de l'ONU (1945) ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Repérer les deux dates : 1919 et 1945. 2) Calculer 1945 - 1919 = 26. La SDN précède donc l'ONU de vingt-six ans, avec la Seconde Guerre mondiale entre les deux.",
+              "answers": [
+                {
+                  "content": "26",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Remets ces repères de la frise dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1) Lire chaque date sur la frise. 2) Les classer du plus ancien au plus récent : 1919, 1941, 1945, 1948, 1960. Attention : la Charte est signée le 26 juin 1945 et entre en vigueur le 24 octobre 1945.",
+              "answers": [
+                {
+                  "content": "Pacte de la SDN (1919)"
+                },
+                {
+                  "content": "Charte de l'Atlantique (1941)"
+                },
+                {
+                  "content": "Charte de l'ONU (1945)"
+                },
+                {
+                  "content": "Déclaration universelle des droits de l'homme (1948)"
+                },
+                {
+                  "content": "La Côte d'Ivoire entre à l'ONU (1960)"
+                }
+              ]
+            },
+            {
+              "content": "La SDN a empêché la Seconde Guerre mondiale.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Situer : la guerre éclate en 1939, alors que la SDN existe depuis 1920. 2) Expliquer : elle n'avait pas d'armée, décidait à l'unanimité et n'a pas arrêté les agressions des années 1930. C'est pourquoi l'ONU est créée en 1945.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux différences entre l'ONU et la SDN ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Comparer. 2) Pour l'ONU : États-Unis membres fondateurs et Conseil de sécurité aux décisions obligatoires. Le siège de l'ONU est à New York ; l'ONU a une Charte ; plus de 50 États africains en sont aujourd'hui membres.",
+              "answers": [
+                {
+                  "content": "Les États-Unis sont membres fondateurs de l'ONU",
+                  "correct": true
+                },
+                {
+                  "content": "Le Conseil de sécurité peut prendre des décisions obligatoires",
+                  "correct": true
+                },
+                {
+                  "content": "L'ONU a son siège à Genève",
+                  "correct": false
+                },
+                {
+                  "content": "L'ONU n'a pas de charte écrite",
+                  "correct": false
+                },
+                {
+                  "content": "L'ONU ne compte aucun État africain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en cinq lignes pourquoi la SDN a échoué et ce que l'ONU change.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : La SDN, créée en 1919 et installée à Genève, n'avait pas d'armée, décidait à l'unanimité et les États-Unis n'en faisaient pas partie. Elle n'a pas arrêté les agressions des années 1930, et la Seconde Guerre mondiale éclate en 1939. En 1945, les vainqueurs signent la Charte de l'ONU à San Francisco. L'ONU a un Conseil de sécurité qui peut prendre des décisions obligatoires et compte les États-Unis parmi ses fondateurs. Barème : faiblesses (1) ; guerre de 1939 (0,5) ; changement de l'ONU (1) ; date de 1945 (0,5).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Cite au moins deux faiblesses de la SDN (pas d'armée, unanimité, absence des États-Unis)",
+                "Rappelle que la Seconde Guerre mondiale éclate en 1939",
+                "Cite un changement de l'ONU (Conseil de sécurité, États-Unis membres)",
+                "Donne la date de la Charte (1945)",
+                "Rédige des phrases courtes et claires"
+              ],
+              "starter": "La SDN a échoué parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Les organes et les institutions de l'ONU",
+          "statement": "Document : un schéma en arbre de l'ONU. La racine ONU est reliée à six organes principaux : Assemblée générale, Conseil de sécurité, Secrétariat, Cour internationale de justice, Conseil économique et social et Conseil de tutelle (suspendu depuis 1994). Réponds aux questions.",
+          "exercise_type": "fixation",
+          "figure": "organes-onu",
+          "questions": [
+            {
+              "content": "Depuis quelle année les activités du Conseil de tutelle sont-elles suspendues ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Nommer l'organe : le Conseil de tutelle. 2) Repérer dans le schéma : la légende indique « suspendues depuis 1994 ». 3) Expliquer : il avait suivi les territoires sous tutelle, qui sont tous devenus indépendants.",
+              "answers": [
+                {
+                  "content": "1994",
+                  "correct": true
+                },
+                {
+                  "content": "1945",
+                  "correct": false
+                },
+                {
+                  "content": "1960",
+                  "correct": false
+                },
+                {
+                  "content": "2004",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque institution spécialisée à son domaine.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Nommer l'institution. 2) Décrire son domaine : l'UNESCO pour l'éducation, la science et la culture, l'OMS pour la santé, la FAO pour l'alimentation et l'agriculture, l'OIT pour le travail.",
+              "answers": [
+                {
+                  "content": "UNESCO",
+                  "match": "Éducation, science et culture"
+                },
+                {
+                  "content": "OMS",
+                  "match": "Santé"
+                },
+                {
+                  "content": "FAO",
+                  "match": "Alimentation et agriculture"
+                },
+                {
+                  "content": "OIT",
+                  "match": "Travail"
+                }
+              ]
+            },
+            {
+              "content": "La Cour internationale de justice siège à ___. Écris le nom de la ville.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Nommer l'organe : la Cour internationale de justice. 2) Situer son siège : La Haye, aux Pays-Bas. Ne la place pas à New York, qui est le siège de l'ONU.",
+              "answers": [
+                {
+                  "content": "La Haye",
+                  "correct": true
+                },
+                {
+                  "content": "Haye",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels sont trois organes principaux de l'ONU ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1) Reprendre les six organes du schéma. 2) Éliminer les institutions : l'OMS et l'UNESCO sont des institutions spécialisées, pas des organes principaux.",
+              "answers": [
+                {
+                  "content": "L'Assemblée générale",
+                  "correct": true
+                },
+                {
+                  "content": "Le Conseil de sécurité",
+                  "correct": true
+                },
+                {
+                  "content": "La Cour internationale de justice",
+                  "correct": true
+                },
+                {
+                  "content": "L'OMS",
+                  "correct": false
+                },
+                {
+                  "content": "L'UNESCO",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Comment est composé le Conseil de sécurité ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Nommer l'organe. 2) Préciser la composition : 15 membres, 5 permanents et 10 élus pour 2 ans. 193 est le nombre d'États membres de l'ONU, 51 celui des fondateurs.",
+              "answers": [
+                {
+                  "content": "15 membres : 5 permanents avec droit de veto et 10 non permanents élus pour 2 ans",
+                  "correct": true
+                },
+                {
+                  "content": "193 membres, une voix chacun",
+                  "correct": false
+                },
+                {
+                  "content": "51 membres fondateurs",
+                  "correct": false
+                },
+                {
+                  "content": "6 membres, un par organe de l'ONU",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'UNESCO est l'un des six organes principaux de l'ONU.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1) Nommer. 2) Classer : l'UNESCO est une institution spécialisée autonome, liée à l'ONU par accord, qui siège à Paris. Les six organes sont ceux du schéma.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'ONU dans le monde : sièges et membres",
+          "statement": "Document : une carte du monde. Les cinq membres permanents du Conseil de sécurité (Chine, États-Unis, France, Royaume-Uni, Russie) sont colorés ; la Côte d'Ivoire l'est à part. Six villes sont repérées : New York (siège de l'ONU), Genève (OMS et OIT), La Haye (CIJ), Paris (UNESCO), Rome (FAO) et Washington (FMI). Réponds aux questions.",
+          "exercise_type": "evaluation",
+          "figure": "carte-sieges",
+          "questions": [
+            {
+              "content": "Relie chaque ville de la carte à ce qu'elle accueille.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1) Présenter le document : une carte des sièges. 2) Lire chaque légende : New York (siège de l'ONU), Genève (OMS), La Haye (CIJ), Rome (FAO). 3) Ne confonds pas les villes de la SDN (Genève) et de l'ONU (New York).",
+              "answers": [
+                {
+                  "content": "New York",
+                  "match": "Le siège de l'ONU"
+                },
+                {
+                  "content": "Genève",
+                  "match": "Le siège de l'OMS"
+                },
+                {
+                  "content": "La Haye",
+                  "match": "La Cour internationale de justice"
+                },
+                {
+                  "content": "Rome",
+                  "match": "Le siège de la FAO"
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces pays colorés ou repérés sur la carte, lequel est membre permanent du Conseil de sécurité ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Lire la légende : les cinq membres permanents sont colorés. 2) La France en fait partie. La Côte d'Ivoire est colorée à part, car elle est membre de l'ONU depuis 1960 mais pas permanente.",
+              "answers": [
+                {
+                  "content": "La France",
+                  "correct": true
+                },
+                {
+                  "content": "L'Allemagne",
+                  "correct": false
+                },
+                {
+                  "content": "Le Japon",
+                  "correct": false
+                },
+                {
+                  "content": "La Côte d'Ivoire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La Côte d'Ivoire est membre de l'ONU depuis ___.",
+              "question_type": "select",
+              "explanation": "Méthode : 1) Lire la légende de la carte. 2) Rappeler la date : la Côte d'Ivoire entre à l'ONU le 20 septembre 1960, après son indépendance.",
+              "answers": [
+                {
+                  "content": "1960",
+                  "correct": true
+                },
+                {
+                  "content": "1945",
+                  "correct": false
+                },
+                {
+                  "content": "1948",
+                  "correct": false
+                },
+                {
+                  "content": "1994",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux sièges situés aux États-Unis ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1) Repérer sur la carte la localisation de chaque ville. 2) New York et Washington sont aux États-Unis ; Genève est en Suisse, La Haye aux Pays-Bas, Rome en Italie.",
+              "answers": [
+                {
+                  "content": "New York (siège de l'ONU)",
+                  "correct": true
+                },
+                {
+                  "content": "Washington (FMI)",
+                  "correct": true
+                },
+                {
+                  "content": "Genève (OMS)",
+                  "correct": false
+                },
+                {
+                  "content": "La Haye (CIJ)",
+                  "correct": false
+                },
+                {
+                  "content": "Rome (FAO)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Combien de membres permanents du Conseil de sécurité sont colorés sur la carte ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : 1) Lire la légende. 2) Compter les pays de la première catégorie : Chine, États-Unis, France, Royaume-Uni, Russie, soit 5. La Côte d'Ivoire est dans une autre catégorie.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Présente en quelques lignes le rôle de deux villes repérées sur la carte dans l'organisation de l'ONU.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : New York accueille le siège de l'ONU et l'Assemblée générale, qui réunit les 193 États membres. La Haye accueille la Cour internationale de justice, organe de l'ONU qui juge les différends entre États. Genève abrite l'OMS, institution spécialisée pour la santé. Barème : deux villes correctes (1) ; organismes exacts (1) ; rôles (1) ; distinction organe / institution (1).",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Choisit deux villes de la carte (New York, Genève, La Haye, Paris, Rome ou Washington)",
+                "Associe chaque ville à son organisme exact",
+                "Précise le rôle de chaque organisme (paix, santé, justice, éducation, alimentation)",
+                "Distingue un organe de l'ONU d'une institution spécialisée",
+                "Rédige des phrases complètes"
+              ],
+              "starter": "New York accueille…"
+            }
+          ]
+        },
+        {
+          "title": "Commentaire de document : le préambule de la Charte",
+          "statement": "Sujet de type bac. Document : extrait du préambule de la Charte des Nations unies, signée à San Francisco le 26 juin 1945 : « Nous, peuples des Nations unies, résolus à préserver les générations futures du fléau de la guerre qui deux fois en l'espace d'une vie humaine a infligé à l'humanité d'indicibles souffrances… ». Méthode : présenter le document, le replacer dans son contexte, dégager les idées, puis conclure sur la portée du texte.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la nature du document ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1) Présenter le document : nature, auteur, date. Il s'agit du préambule de la Charte des Nations unies, traité signé à San Francisco le 26 juin 1945. Le texte s'exprime au nom des « peuples des Nations unies », pas d'un chef d'État.",
+              "answers": [
+                {
+                  "content": "Un traité international : la Charte des Nations unies",
+                  "correct": true
+                },
+                {
+                  "content": "Un discours d'un chef d'État ivoirien",
+                  "correct": false
+                },
+                {
+                  "content": "Un article de presse de 2004",
+                  "correct": false
+                },
+                {
+                  "content": "Un règlement intérieur de la SDN",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À quels événements renvoie l'expression « deux fois en l'espace d'une vie humaine » ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 2) Replacer dans le contexte : le texte est écrit en 1945, à la fin de la Seconde Guerre mondiale, et rappelle les deux guerres mondiales (1914-1918 et 1939-1945) qui ont frappé l'humanité.",
+              "answers": [
+                {
+                  "content": "Aux deux guerres mondiales (1914-1918 et 1939-1945)",
+                  "correct": true
+                },
+                {
+                  "content": "À la création et à la dissolution de la SDN",
+                  "correct": false
+                },
+                {
+                  "content": "Aux deux conférences de San Francisco",
+                  "correct": false
+                },
+                {
+                  "content": "À la signature et à l'entrée en vigueur de la Charte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le document a été signé à San Francisco en ___ (en chiffres).",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1) Présenter le document : la Charte est signée le 26 juin 1945 à San Francisco. Elle entre en vigueur le 24 octobre 1945.",
+              "answers": [
+                {
+                  "content": "1945",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel but de l'ONU ce passage exprime-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 3) Dégager l'idée : « préserver les générations futures du fléau de la guerre » exprime le premier but de l'ONU, le maintien de la paix et de la sécurité internationales. Le texte ne parle ni de commerce ni de colonies.",
+              "answers": [
+                {
+                  "content": "Maintenir la paix et la sécurité internationales",
+                  "correct": true
+                },
+                {
+                  "content": "Développer le commerce mondial",
+                  "correct": false
+                },
+                {
+                  "content": "Gouverner les colonies",
+                  "correct": false
+                },
+                {
+                  "content": "Choisir les dirigeants des États",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Commente ce document en un paragraphe : présente-le, replace-le dans son contexte, dégage son idée principale et montre en quoi l'ONU répond à l'échec de la SDN.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Ce document est l'ouverture du préambule de la Charte des Nations unies, traité signé à San Francisco le 26 juin 1945. Il est écrit à la fin de la Seconde Guerre mondiale, après deux guerres mondiales. Il exprime la volonté de préserver la paix, premier but de l'ONU. Cette volonté répond à l'échec de la SDN, qui n'avait pas d'armée, décidait à l'unanimité et n'a pas arrêté les agressions des années 1930. L'ONU se dote d'un Conseil de sécurité aux décisions obligatoires. Barème : présentation (1) ; contexte (1) ; idée principale (1) ; échec de la SDN et moyen de l'ONU (1).",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Présente la nature, la date et le lieu du document",
+                "Replace dans le contexte de la fin de la Seconde Guerre mondiale",
+                "Dégage l'idée principale : préserver la paix",
+                "Rappelle l'échec de la SDN",
+                "Cite un moyen de l'ONU : le Conseil de sécurité",
+                "Texte organisé en un paragraphe"
+              ],
+              "starter": "Ce document est le préambule de…"
+            },
+            {
+              "content": "Dissertation guidée. Sujet : l'ONU a-t-elle réussi à remplir les buts de sa Charte ? Rédige un développement avec une introduction, deux parties (I. Des buts et des moyens ; II. Des limites et des réformes) et une conclusion.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Introduction. Fondée en 1945, l'ONU veut maintenir la paix et développer la coopération. A-t-elle réussi à remplir ses buts ? I. Des buts et des moyens. La Charte fixe la paix, la coopération et le respect des droits de l'homme. Le Conseil de sécurité envoie des Casques bleus, comme l'ONUCI en Côte d'Ivoire de 2004 à 2017, et des institutions (OMS, UNESCO, FAO) agissent pour le développement ; la résolution 1514 de 1960 soutient la décolonisation. II. Des limites et des réformes. Le droit de veto peut bloquer le Conseil, l'ONU n'a pas d'armée propre et dépend des États. Le G4 et l'Union africaine demandent des sièges permanents. Conclusion. L'ONU a obtenu des résultats, mais son action reste limitée par ses règles ; sa réforme est débattue. Barème : introduction (1) ; partie I (2) ; partie II (2) ; conclusion nuancée (1) ; organisation et vocabulaire (2).",
+              "answers": [],
+              "points": 8,
+              "criteria": [
+                "Introduction : situe l'ONU (1945) et pose le sujet",
+                "Partie I : cite les buts (paix, coopération, droits de l'homme)",
+                "Partie I : cite des moyens (Conseil de sécurité, Casques bleus, ONUCI, institutions)",
+                "Partie II : cite des limites (veto, absence d'armée, souveraineté)",
+                "Partie II : cite un débat de réforme (G4, Union africaine)",
+                "Conclusion : répond à la question de façon nuancée",
+                "Organisation claire, vocabulaire du cours"
+              ],
+              "starter": "Fondée en 1945, l'ONU…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

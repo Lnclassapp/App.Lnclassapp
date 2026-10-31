@@ -1,0 +1,1854 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — De la fin de la guerre froide vers un monde multipolaire",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "schema-causes",
+          "kind": "diagram",
+          "description": "Schéma fléché des causes de la fin de la guerre froide. Deux difficultés du bloc de l'Est (économie planifiée en difficulté, course aux armements et guerre d'Afghanistan) poussent aux réformes de Gorbatchev. Ces réformes libèrent la contestation dans les pays de l'Est et favorisent le dialogue avec les États-Unis. Les deux conséquences mènent à la fin de la guerre froide.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "eco",
+                "label": "Économie planifiée en difficulté",
+                "category": 1
+              },
+              {
+                "id": "armes",
+                "label": "Course aux armements et guerre d'Afghanistan",
+                "category": 1
+              },
+              {
+                "id": "reformes",
+                "label": "Réformes de Gorbatchev : perestroïka, glasnost",
+                "category": 2
+              },
+              {
+                "id": "contest",
+                "label": "Contestation dans les pays de l'Est",
+                "category": 2
+              },
+              {
+                "id": "dialogue",
+                "label": "Dialogue avec les États-Unis",
+                "category": 3
+              },
+              {
+                "id": "fin",
+                "label": "Fin de la guerre froide"
+              }
+            ],
+            "edges": [
+              {
+                "from": "eco",
+                "to": "reformes",
+                "label": "pousse à"
+              },
+              {
+                "from": "armes",
+                "to": "reformes",
+                "label": "pousse à"
+              },
+              {
+                "from": "reformes",
+                "to": "contest",
+                "label": "libère"
+              },
+              {
+                "from": "reformes",
+                "to": "dialogue",
+                "label": "favorise"
+              },
+              {
+                "from": "contest",
+                "to": "fin"
+              },
+              {
+                "from": "dialogue",
+                "to": "fin"
+              }
+            ],
+            "legend": [
+              "Causes économiques et militaires",
+              "Causes politiques",
+              "Cause internationale"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-1985-2015",
+          "kind": "timeline",
+          "description": "Frise chronologique de 1985 à 2015. Trois périodes : la fin de la guerre froide (1985-1991), le moment unipolaire des États-Unis (1991-2001) et l'émergence d'un monde multipolaire (2001-2015). Les événements placés vont de l'arrivée de Gorbatchev en 1985 au groupe des BRICS en 2010, en passant par le mur de Berlin (1989) et la fin de l'URSS (1991).",
+          "params": {
+            "start": 1985,
+            "end": 2015,
+            "step": 5,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1985,
+                "to": 1991,
+                "label": "Fin de la guerre froide"
+              },
+              {
+                "from": 1991,
+                "to": 2001,
+                "label": "Moment unipolaire"
+              },
+              {
+                "from": 2001,
+                "to": 2015,
+                "label": "Monde multipolaire"
+              }
+            ],
+            "events": [
+              {
+                "at": 1985,
+                "label": "Gorbatchev dirige l'URSS"
+              },
+              {
+                "at": 1987,
+                "label": "Traité sur les euromissiles"
+              },
+              {
+                "at": 1989,
+                "label": "Ouverture du mur de Berlin"
+              },
+              {
+                "at": 1990,
+                "label": "Réunification allemande"
+              },
+              {
+                "at": 1991,
+                "label": "Fin de l'URSS ; CEI"
+              },
+              {
+                "at": 1993,
+                "label": "Union européenne"
+              },
+              {
+                "at": 2001,
+                "label": "Attentats du 11 septembre"
+              },
+              {
+                "at": 2002,
+                "label": "Union africaine"
+              },
+              {
+                "at": 2010,
+                "label": "L'Afrique du Sud rejoint les BRICS"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-poles",
+          "kind": "map",
+          "description": "Carte du monde des pôles de puissance. Teinte 1 : les États-Unis. Teinte 2 : quelques États membres de l'Union européenne (France, Allemagne, Italie, Espagne, Belgique, Pays-Bas, Pologne). Teinte 3 : la Russie. Teinte 4 : la Chine. Teinte 5 : trois autres pays des BRICS (Brésil, Inde, Afrique du Sud). Washington, Moscou et Berlin sont placées.",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "usa",
+                "category": 1
+              },
+              {
+                "id": "fra",
+                "category": 2
+              },
+              {
+                "id": "deu",
+                "category": 2
+              },
+              {
+                "id": "ita",
+                "category": 2
+              },
+              {
+                "id": "esp",
+                "category": 2
+              },
+              {
+                "id": "bel",
+                "category": 2
+              },
+              {
+                "id": "nld",
+                "category": 2
+              },
+              {
+                "id": "pol",
+                "category": 2
+              },
+              {
+                "id": "rus",
+                "category": 3
+              },
+              {
+                "id": "chn",
+                "category": 4
+              },
+              {
+                "id": "bra",
+                "category": 5
+              },
+              {
+                "id": "ind",
+                "category": 5
+              },
+              {
+                "id": "zaf",
+                "category": 5
+              }
+            ],
+            "places": [
+              {
+                "id": "washington",
+                "label": "Washington"
+              },
+              {
+                "id": "moscow",
+                "label": "Moscou"
+              },
+              {
+                "id": "berlin",
+                "label": "Berlin"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "États-Unis",
+              "Quelques États de l'Union européenne",
+              "Russie",
+              "Chine",
+              "Autres pays des BRICS (Brésil, Inde, Afrique du Sud)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les causes de la fin de la guerre froide",
+          "remember": "Dans les années 1980, l'URSS est en difficulté : **économie planifiée** peu efficace, pénuries, retard technologique, dépenses très lourdes de la **course aux armements** et de la guerre d'Afghanistan (1979-1989). En mars 1985, **Mikhaïl Gorbatchev** prend la direction du pays. Il lance deux réformes : la **perestroïka** (« restructuration » de l'économie et du système) et la **glasnost** (« transparence » : liberté d'information et d'expression). Il dialogue aussi avec les États-Unis : en décembre 1987, un traité supprime les euromissiles. Ces réformes libèrent la contestation dans les pays du bloc de l'Est. Les causes sont donc économiques, politiques et internationales.",
+          "method": [
+            "Situer la cause : sa date, son acteur (URSS, Gorbatchev, pays de l'Est) et son domaine (économie, politique, relations internationales).",
+            "Nommer la difficulté ou la réforme, puis la définir avec tes mots (perestroïka, glasnost, course aux armements).",
+            "Expliquer en quoi elle affaiblit le bloc de l'Est ou rapproche les deux camps.",
+            "Classer la cause (économique, politique ou internationale) et la relier à la fin de la guerre froide."
+          ],
+          "example": {
+            "statement": "Expliquer en quoi la glasnost contribue à la fin de la guerre froide.",
+            "steps": [
+              "Situer : la glasnost est lancée par Gorbatchev, dirigeant de l'URSS à partir de 1985, dans le domaine politique.",
+              "Nommer et définir : la glasnost, c'est la « transparence » : on peut s'informer, parler et critiquer plus librement.",
+              "Expliquer : les citoyens et les peuples du bloc de l'Est critiquent le régime communiste, et la contestation grandit.",
+              "Classer : c'est une cause politique ; elle affaiblit le contrôle communiste et prépare les changements de 1989."
+            ]
+          },
+          "pitfall": "Ne dis pas que les États-Unis ont « vaincu » l'URSS par une guerre : il n'y a jamais eu de combat direct entre les deux superpuissances. La guerre froide s'achève d'abord à cause des difficultés du bloc de l'Est et des réformes engagées, même si la course aux armements a pesé. Ne confonds pas non plus les deux réformes. Contre-exemple : autoriser un journal à critiquer le gouvernement relève de la glasnost, pas de la perestroïka.",
+          "figure": "schema-causes",
+          "practice": {
+            "statement": "Tu rappelles les causes de la fin de la guerre froide avec la méthode : situer, nommer, expliquer, classer.",
+            "questions": [
+              {
+                "content": "La perestroïka signifie ___ et la glasnost signifie ___.",
+                "question_type": "select",
+                "hint": "Une réforme parle de l'économie ; l'autre de la liberté de parler.",
+                "explanation": "Étape 2 — Nommer et définir : perestroïka = « restructuration » du système et de l'économie ; glasnost = « transparence » et liberté d'expression. Les deux mots viennent du russe.",
+                "answers": [
+                  {
+                    "content": "restructuration",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "transparence",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "aide économique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "transparence",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "restructuration",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "coexistence",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le dirigeant soviétique qui lance ces réformes à partir de 1985 s'appelle Mikhaïl ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer l'acteur : Mikhaïl Gorbatchev dirige l'URSS à partir de mars 1985. Il est à l'origine de la perestroïka et de la glasnost.",
+                "answers": [
+                  {
+                    "content": "Gorbatchev",
+                    "correct": true
+                  },
+                  {
+                    "content": "Gorbachev",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle cause de la fin de la guerre froide est une cause politique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Classer la cause : la glasnost relève du domaine politique (liberté d'expression). Les trois autres propositions sont des causes économiques ou militaires.",
+                "answers": [
+                  {
+                    "content": "Le coût de la course aux armements",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les pénuries dans les magasins soviétiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "La glasnost, qui libère la parole et la contestation",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le retard technologique de l'industrie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Les réformes de Gorbatchev et leurs causes",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la méthode (situer, nommer, expliquer, classer) aux causes de la fin de la guerre froide.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "En quelle année Mikhaïl Gorbatchev prend-il la direction de l'URSS ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer la cause : la date et l'acteur. Gorbatchev devient secrétaire général du Parti communiste de l'Union soviétique, donc dirigeant de l'URSS, en mars 1985. Les trois autres dates sont des pièges : 1979 est l'année de l'intervention soviétique en Afghanistan, 1989 celle de l'ouverture du mur de Berlin, 1991 celle de la fin de l'URSS.",
+                "answers": [
+                  {
+                    "content": "1985",
+                    "correct": true
+                  },
+                  {
+                    "content": "1979",
+                    "correct": false
+                  },
+                  {
+                    "content": "1989",
+                    "correct": false
+                  },
+                  {
+                    "content": "1991",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Nommer la difficulté ou la réforme et la définir : perestroïka veut dire « restructuration » (réforme de l'économie et du système) ; glasnost veut dire « transparence » (liberté de s'informer et de s'exprimer). La course aux armements et la guerre d'Afghanistan sont deux difficultés qui pèsent sur le budget de l'URSS. Ne confonds pas les deux réformes : l'une touche surtout l'économie, l'autre la liberté d'expression.",
+                "answers": [
+                  {
+                    "content": "Perestroïka",
+                    "match": "Restructuration de l'économie et du système soviétiques"
+                  },
+                  {
+                    "content": "Glasnost",
+                    "match": "Transparence : liberté d'information et d'expression"
+                  },
+                  {
+                    "content": "Course aux armements",
+                    "match": "Compétition pour fabriquer toujours plus d'armes, très coûteuse"
+                  },
+                  {
+                    "content": "Guerre d'Afghanistan (1979-1989)",
+                    "match": "Intervention militaire soviétique longue et coûteuse"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont trois difficultés de l'URSS dans les années 1980 ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Expliquer en quoi la cause affaiblit le bloc de l'Est : les pénuries, le retard technologique et les dépenses militaires épuisent l'économie soviétique. Étape 4 — Classer : ce sont des causes économiques et militaires. Les deux propositions fausses reprennent l'erreur classique : il n'y a jamais eu de guerre directe entre les États-Unis et l'URSS, et le territoire soviétique n'a pas été envahi.",
+                "answers": [
+                  {
+                    "content": "Une guerre directe perdue contre les États-Unis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une économie planifiée peu efficace, avec des pénuries",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une invasion du territoire soviétique par l'OTAN",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un retard technologique sur les pays occidentaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le coût de la course aux armements et de la guerre d'Afghanistan",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La glasnost est une réforme purement économique qui supprime l'économie planifiée.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Nommer et définir : glasnost signifie « transparence ». Elle concerne la liberté d'information et d'expression, donc le domaine politique. Étape 4 — Classer : c'est une cause politique. La réforme de l'économie, c'est la perestroïka (« restructuration »). L'affirmation confond les deux mots.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces faits dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer chaque fait par sa date : 1979, 1985, décembre 1987, 1989. Étape 3 — Expliquer : l'engagement en Afghanistan coûte cher, Gorbatchev arrive et réforme, puis il signe avec les États-Unis un traité qui supprime une catégorie de missiles nucléaires (les euromissiles), enfin l'URSS quitte l'Afghanistan. Cet ordre montre un rapprochement progressif avec l'Ouest.",
+                "answers": [
+                  {
+                    "content": "Intervention soviétique en Afghanistan (1979)"
+                  },
+                  {
+                    "content": "Gorbatchev dirige l'URSS (1985)"
+                  },
+                  {
+                    "content": "Traité sur les euromissiles signé à Washington (décembre 1987)"
+                  },
+                  {
+                    "content": "Fin du retrait soviétique d'Afghanistan (1989)"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les événements de 1989 à 1991 : de la chute du mur à la fin de l'URSS",
+          "remember": "En **1989**, des changements pacifiques secouent les pays du bloc de l'Est (en Pologne, des élections partiellement libres ont lieu en juin). Le **9 novembre 1989**, le mur de Berlin, construit en 1961, s'ouvre. Le **3 octobre 1990**, l'Allemagne est **réunifiée** : la RFA et la RDA (créées en 1949) forment un seul État. En **1991**, le Comecon (28 juin) puis le **pacte de Varsovie** (1er juillet) sont dissous. En **décembre 1991**, la Russie, l'Ukraine et la Biélorussie créent la **CEI** (Communauté des États indépendants), rejointe par la plupart des anciennes républiques. Le 25 décembre, Gorbatchev démissionne : l'**URSS** disparaît, et avec elle le bloc de l'Est. La guerre froide est terminée.",
+          "method": [
+            "Situer l'événement : sa date exacte et son lieu.",
+            "Identifier les acteurs et décrire en deux phrases ce qui se passe.",
+            "Expliquer la conséquence pour l'Allemagne, le bloc de l'Est ou l'URSS.",
+            "Replacer l'événement dans la chronologie 1989-1991 : ce qui le précède, ce qui le suit."
+          ],
+          "example": {
+            "statement": "Présenter la réunification allemande.",
+            "steps": [
+              "Situer : le 3 octobre 1990, en Allemagne, avec Berlin comme capitale.",
+              "Identifier les acteurs : la RFA et la RDA, soit le peuple allemand ; les quatre puissances de 1945 (États-Unis, URSS, Royaume-Uni, France) acceptent l'union.",
+              "Expliquer la conséquence : l'Allemagne, divisée depuis 1949, redevient un seul État ; la division de l'Europe en deux blocs perd son symbole.",
+              "Replacer : elle suit l'ouverture du mur (9 novembre 1989) et précède la dissolution du pacte de Varsovie (1991)."
+            ]
+          },
+          "pitfall": "Ne confonds pas les trois dates qui s'enchaînent. La chute du mur, c'est 1989 ; la réunification, 1990 ; la fin de l'URSS, 1991. Contre-exemple : écrire « le mur de Berlin tombe en 1991 » est faux, car il s'ouvre le 9 novembre 1989, onze mois avant la réunification. Ne confonds pas non plus l'URSS avec la Russie : la Russie est l'une des 15 républiques qui deviennent indépendantes.",
+          "figure": "frise-1985-2015",
+          "practice": {
+            "statement": "Tu fixes les dates de la fin du bloc de l'Est avec la méthode : situer, identifier, expliquer, replacer.",
+            "questions": [
+              {
+                "content": "Le mur de Berlin s'ouvre en ___ et l'Allemagne est réunifiée en ___.",
+                "question_type": "select",
+                "hint": "Les deux événements se suivent à environ un an d'écart.",
+                "explanation": "Étape 1 — Situer : le mur s'ouvre le 9 novembre 1989 ; l'Allemagne est réunifiée le 3 octobre 1990.",
+                "answers": [
+                  {
+                    "content": "1989",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1961",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1991",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1990",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1989",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1991",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "L'URSS disparaît officiellement en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : l'URSS cesse d'exister fin décembre 1991, après la démission de Gorbatchev le 25 décembre.",
+                "answers": [
+                  {
+                    "content": "1991",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que signifie le sigle CEI ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : la CEI est créée en décembre 1991 par des anciennes républiques soviétiques, dont la Russie. C'est une association d'États indépendants.",
+                "answers": [
+                  {
+                    "content": "Communauté des États indépendants",
+                    "correct": true
+                  },
+                  {
+                    "content": "Comité des États internationaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Confédération des Empires de l'Est",
+                    "correct": false
+                  },
+                  {
+                    "content": "Communauté économique impériale",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "De la chute du mur à la fin de l'URSS",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la méthode (situer, identifier, expliquer, replacer) aux événements de 1989 à 1991.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "À quelle date le mur de Berlin s'ouvre-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer l'événement : l'ouverture du mur de Berlin a lieu le 9 novembre 1989. Le 13 août 1961 est la date du début de sa construction, le 3 octobre 1990 celle de la réunification de l'Allemagne, le 25 décembre 1991 celle de la démission de Gorbatchev : ce sont les dates de piège.",
+                "answers": [
+                  {
+                    "content": "Le 13 août 1961",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le 9 novembre 1989",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le 3 octobre 1990",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le 25 décembre 1991",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque date à l'événement qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer chaque événement par sa date, puis Étape 4 — Replacer dans la chronologie : le mur s'ouvre (1989), l'Allemagne s'unit (1990), le pacte militaire de l'Est disparaît (juillet 1991), puis l'URSS elle-même (décembre 1991). Chaque étape ouvre la suivante.",
+                "answers": [
+                  {
+                    "content": "9 novembre 1989",
+                    "match": "Ouverture du mur de Berlin"
+                  },
+                  {
+                    "content": "3 octobre 1990",
+                    "match": "Réunification de l'Allemagne"
+                  },
+                  {
+                    "content": "1er juillet 1991",
+                    "match": "Dissolution officielle du pacte de Varsovie"
+                  },
+                  {
+                    "content": "25 décembre 1991",
+                    "match": "Démission de Gorbatchev et fin de l'URSS"
+                  }
+                ]
+              },
+              {
+                "content": "La réunification allemande a lieu avant l'ouverture du mur de Berlin.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Replacer dans la chronologie : le mur s'ouvre le 9 novembre 1989 ; l'Allemagne est réunifiée près d'un an plus tard, le 3 octobre 1990. L'ouverture du mur précède donc la réunification. Ne les confonds pas : l'un est un passage de la frontière, l'autre est l'union des deux États.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles organisations du bloc de l'Est disparaissent en 1991 ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Expliquer la conséquence pour le bloc de l'Est : l'alliance militaire (pacte de Varsovie) et l'organisation économique (Comecon) sont dissoutes en 1991. Étape 2 — Identifier : l'OTAN, bloc de l'Ouest, continue d'exister ; l'ONU aussi ; le Kominform a été dissous bien plus tôt, en 1956 (il est lié à 1947).",
+                "answers": [
+                  {
+                    "content": "L'OTAN",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pacte de Varsovie",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ONU",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Comecon",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Kominform",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la conséquence de la fin de l'URSS en décembre 1991 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Expliquer la conséquence : l'URSS cesse d'exister fin 1991. Ses 15 républiques deviennent indépendantes, la Russie étant l'une d'elles. La CEI (Communauté des États indépendants) est une simple association de la plupart de ces États, pas un nouveau bloc. Étape 4 — Replacer : c'est la dernière étape de la période 1989-1991.",
+                "answers": [
+                  {
+                    "content": "La Russie et l'URSS fusionnent en un seul État plus fort",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le bloc de l'Est se renforce autour de la CEI",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'URSS disparaît et ses républiques deviennent des États indépendants, dont la Russie",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'URSS entre dans l'OTAN",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le mur de Berlin a été construit en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Replacer l'événement dans la chronologie : le mur est construit en 1961 (lors de la période des crises de la guerre froide) et s'ouvre en 1989. Il sépare Berlin-Est et Berlin-Ouest pendant 28 ans.",
+                "answers": [
+                  {
+                    "content": "1961",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le moment unipolaire : l'hyperpuissance américaine",
+          "remember": "Après la fin de l'URSS en 1991, les **États-Unis** sont la seule superpuissance. Le monde est dit **unipolaire** (un seul pôle de puissance) et les États-Unis sont une **hyperpuissance** : ils dominent dans tous les domaines. Sur le plan **militaire**, leur armée est la plus puissante et ils dirigent l'OTAN, qui s'élargit à la Pologne, la Hongrie et la République tchèque en 1999. Sur le plan **économique**, ils sont la première économie mondiale et le dollar est la principale monnaie des échanges. Sur le plan **politique**, ils dirigent la coalition qui libère le Koweït, envahi par l'Irak, en 1991, avec l'accord de l'ONU. Sur le plan **culturel**, leur cinéma, leur musique, Internet et l'anglais se diffusent dans le monde. Cette domination a des limites : les attentats du 11 septembre 2001 montrent leur vulnérabilité.",
+          "method": [
+            "Définir le terme étudié (unipolaire, hyperpuissance) avec tes propres mots.",
+            "Identifier le domaine de puissance concerné : militaire, économique, politique ou culturel.",
+            "Illustrer ce domaine avec un fait daté (guerre du Golfe 1991, OTAN 1999…).",
+            "Nuancer : dégager une limite ou un défi à cette domination."
+          ],
+          "example": {
+            "statement": "Montrer, avec la guerre du Golfe, que les États-Unis dominent le monde en 1991.",
+            "steps": [
+              "Définir : unipolaire veut dire « un seul pôle dominant » ; une hyperpuissance domine dans tous les domaines.",
+              "Identifier le domaine : ici, le domaine militaire et politique, car il s'agit de diriger une coalition.",
+              "Illustrer : en janvier-février 1991, une coalition dirigée par les États-Unis libère le Koweït, envahi par l'Irak en août 1990.",
+              "Nuancer : la coalition réunit de nombreux États et agit avec l'accord de l'ONU ; en 2001, les attentats du 11 septembre montrent que les États-Unis sont vulnérables."
+            ]
+          },
+          "pitfall": "Ne confonds pas « dominer » et « décider seul ». Unipolaire ne veut pas dire que les États-Unis font ce qu'ils veulent : en 1991, la coalition agit avec l'accord de l'ONU et réunit de nombreux États. Contre-exemple : la Russie, l'Europe et la Chine restent des acteurs avec leurs propres choix. Ne dis pas non plus que l'URSS existe encore dans les années 1990 : elle a disparu en 1991.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu rappelles le monde des années 1990 avec la méthode : définir, identifier, illustrer, nuancer.",
+            "questions": [
+              {
+                "content": "Le monde est ___ quand une seule puissance domine, et ___ quand plusieurs puissances comptent.",
+                "question_type": "select",
+                "hint": "Le préfixe indique le nombre de pôles : uni, bi, multi.",
+                "explanation": "Étape 1 — Définir : unipolaire (un seul pôle), bipolaire (deux pôles, comme de 1947 à 1991), multipolaire (plusieurs pôles).",
+                "answers": [
+                  {
+                    "content": "unipolaire",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "bipolaire",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "multipolaire",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "multipolaire",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "unipolaire",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "bipolaire",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "En août 1990, l'Irak envahit le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Illustrer par un fait daté : cette invasion déclenche la guerre du Golfe. Une coalition dirigée par les États-Unis libère le Koweït au début de 1991.",
+                "answers": [
+                  {
+                    "content": "Koweït",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le cinéma, Internet et la langue anglaise illustrent la puissance américaine dans quel domaine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier le domaine de puissance : le cinéma, la musique, Internet et l'anglais diffusent l'influence américaine par la culture.",
+                "answers": [
+                  {
+                    "content": "Le domaine culturel",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le domaine militaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le domaine économique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le domaine diplomatique",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "L'hyperpuissance américaine après 1991",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la méthode (définir, identifier, illustrer, nuancer) à la domination des États-Unis dans les années 1990.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel mot désigne une puissance qui domine dans tous les domaines (militaire, économique, politique, culturel), comme les États-Unis après 1991 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir le terme : une hyperpuissance domine dans tous les domaines à la fois, et pas seulement l'un d'eux. Un satellite est un pays dépendant d'une grande puissance (comme ceux du bloc de l'Est) ; une puissance régionale ne pèse que dans sa région.",
+                "answers": [
+                  {
+                    "content": "Une hyperpuissance",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un satellite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une puissance régionale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un État neutre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque domaine de puissance à l'exemple qui l'illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier le domaine de puissance, puis Étape 3 — Illustrer avec un fait : l'armée et l'OTAN relèvent du militaire, le dollar et la taille de l'économie de l'économique, le cinéma et l'anglais du culturel, la coalition de 1991 du politique et du militaire.",
+                "answers": [
+                  {
+                    "content": "Militaire",
+                    "match": "L'armée la plus puissante, présente dans le monde, et l'OTAN"
+                  },
+                  {
+                    "content": "Économique",
+                    "match": "La première économie mondiale, avec le dollar comme monnaie des échanges"
+                  },
+                  {
+                    "content": "Culturel",
+                    "match": "Le cinéma, la musique, Internet et la langue anglaise"
+                  },
+                  {
+                    "content": "Politique",
+                    "match": "La direction de la coalition qui libère le Koweït en 1991"
+                  }
+                ]
+              },
+              {
+                "content": "Quels faits illustrent la domination des États-Unis dans les années 1990 ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Illustrer par des faits datés : la guerre du Golfe (1991) et l'élargissement de l'OTAN à d'anciens pays du bloc de l'Est (1999) montrent l'influence américaine. Étape 4 — Nuancer : l'OTAN ne disparaît pas en 1991, contrairement au pacte de Varsovie ; le Kominform date de 1947 ; le bloc de l'Est ne revient pas.",
+                "answers": [
+                  {
+                    "content": "La dissolution de l'OTAN après celle du pacte de Varsovie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La libération du Koweït en 1991 par une coalition dirigée par les États-Unis",
+                    "correct": true
+                  },
+                  {
+                    "content": "La création du Kominform",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'entrée de la Pologne, de la Hongrie et de la République tchèque dans l'OTAN en 1999",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le retour du bloc de l'Est",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En 1991, la guerre du Golfe est menée par les États-Unis seuls, sans l'accord de l'ONU.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Nuancer : la coalition réunit de nombreux États et agit dans le cadre de résolutions du Conseil de sécurité de l'ONU, après l'invasion du Koweït par l'Irak en août 1990. Les États-Unis dirigent l'opération, mais ne décident pas seuls : c'est la différence entre dominer et tout décider.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel événement de 2001 montre que les États-Unis restent vulnérables malgré leur puissance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Nuancer par une limite : les attentats du 11 septembre 2001, commis à New York et près de Washington, rappellent que même l'hyperpuissance peut être frappée. La crise de Cuba date de 1962, le mur de 1989, la guerre du Golfe de 1991 : ce sont des événements d'autres périodes.",
+                "answers": [
+                  {
+                    "content": "La crise de Cuba",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ouverture du mur de Berlin",
+                    "correct": false
+                  },
+                  {
+                    "content": "La guerre du Golfe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les attentats du 11 septembre",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'émergence d'un monde multipolaire",
+          "remember": "Un monde est **multipolaire** quand plusieurs pôles (États ou groupes d'États) comptent dans les décisions mondiales. Les États-Unis restent puissants, mais d'autres pôles montent : l'**Union européenne** (traité de Maastricht en vigueur en 1993, euro en 2002, élargissement vers l'Est en 2004), la **Chine** (réformes depuis 1978, OMC en 2001), la **Russie** (héritière de l'URSS, puissance nucléaire) et les **pays émergents**, à forte croissance. Le **BRIC** (Brésil, Russie, Inde, Chine), terme créé en 2001, devient les **BRICS** avec l'Afrique du Sud en 2010 : c'est un groupe de dialogue économique. Les **organisations régionales** renforcent les États : Union africaine (2002), CEDEAO (1975), ASEAN (1967), Mercosur (1991). L'Afrique, avec 54 États, est à la fois un acteur et un partenaire recherché par plusieurs pôles.",
+          "method": [
+            "Nommer le pôle ou le groupe étudié (État, union d'États, pays émergent, organisation régionale).",
+            "Situer ce pôle sur la carte du monde et indiquer sa date de naissance ou d'émergence.",
+            "Identifier les atouts de sa puissance : économie, population, armée, influence politique.",
+            "Dégager son rôle dans le monde multipolaire et ses limites."
+          ],
+          "example": {
+            "statement": "Présenter la Chine comme pôle de puissance.",
+            "steps": [
+              "Nommer : la Chine, État d'Asie, pays émergent et membre des BRICS.",
+              "Situer : en Asie de l'Est ; elle se réforme économiquement à partir de 1978 et entre à l'OMC en 2001.",
+              "Identifier les atouts : une population très nombreuse, une croissance rapide, une industrie qui exporte, un siège permanent au Conseil de sécurité de l'ONU et l'arme nucléaire.",
+              "Dégager le rôle : vers 2010, elle devient la deuxième économie mondiale, donc un pôle majeur ; mais son développement reste inégal selon les régions."
+            ]
+          },
+          "pitfall": "Ne confonds pas « émergent » avec « riche », ni « BRICS » avec une alliance militaire. Contre-exemple : la Chine est la deuxième économie mondiale par son PIB total, mais son PIB par habitant reste bien inférieur à celui des États-Unis (Banque mondiale, 2022). Les BRICS forment un groupe de dialogue et de coopération, pas un État ni un bloc militaire comme l'était le pacte de Varsovie.",
+          "figure": "carte-poles",
+          "practice": {
+            "statement": "Tu rappelles les pôles du monde multipolaire avec la méthode : nommer, situer, identifier, dégager.",
+            "questions": [
+              {
+                "content": "Le pays africain membre des BRICS depuis 2010 est l'Afrique du ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Nommer : l'Afrique du Sud rejoint le groupe en 2010, qui passe de BRIC à BRICS (le S est pour South Africa).",
+                "answers": [
+                  {
+                    "content": "Sud",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'Union africaine remplace en 2002 l'___, créée en 1963.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Situer par la date : l'Organisation de l'unité africaine (OUA), créée en 1963, devient l'Union africaine (UA) en 2002.",
+                "answers": [
+                  {
+                    "content": "OUA",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "OTAN",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "ONU",
+                    "correct": false,
+                    "blank": 0
+                  }
+                ]
+              },
+              {
+                "content": "Quelle organisation regroupe des États d'Afrique de l'Ouest depuis 1975 ?",
+                "question_type": "single_choice",
+                "hint": "Pense au « O » de Ouest.",
+                "explanation": "Étape 2 — Situer : la CEDEAO (Communauté économique des États de l'Afrique de l'Ouest) est créée en 1975. La Côte d'Ivoire en est membre.",
+                "answers": [
+                  {
+                    "content": "L'ASEAN",
+                    "correct": false
+                  },
+                  {
+                    "content": "La CEDEAO",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Mercosur",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Union européenne",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Les pôles du monde multipolaire",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la méthode (nommer, situer, identifier, dégager) aux pôles de puissance et aux organisations régionales.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Que veut dire « monde multipolaire » ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer le pôle ou le groupe, ici le terme : multipolaire signifie « plusieurs pôles ». Unipolaire, c'est un seul pôle (les années 1990) ; bipolaire, c'est deux blocs (1947-1991).",
+                "answers": [
+                  {
+                    "content": "Un monde où plusieurs pôles de puissance comptent dans les décisions mondiales",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un monde où une seule puissance domine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un monde où deux blocs s'opposent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un monde sans aucune puissance dominante ni organisation",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque pôle ou groupe à son trait principal.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Situer le pôle et indiquer sa date d'émergence, puis Étape 3 — Identifier ses atouts : l'Union européenne naît du traité de Maastricht et adopte l'euro en 2002 ; la Chine se réforme depuis 1978 et entre à l'OMC en 2001 ; la Russie hérite des atouts de l'URSS ; l'Inde est un pays émergent très peuplé.",
+                "answers": [
+                  {
+                    "content": "Union européenne",
+                    "match": "Traité de Maastricht (en vigueur en 1993), euro en 2002"
+                  },
+                  {
+                    "content": "Chine",
+                    "match": "Réformes économiques depuis 1978, entrée à l'OMC en 2001"
+                  },
+                  {
+                    "content": "Russie",
+                    "match": "Héritière de l'URSS, puissance nucléaire, membre de la CEI"
+                  },
+                  {
+                    "content": "Inde",
+                    "match": "Pays émergent très peuplé, membre des BRICS"
+                  }
+                ]
+              },
+              {
+                "content": "Quels pays émergents, autres que la Russie et la Chine, sont membres des BRICS ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Nommer les membres du groupe : le BRIC (Brésil, Russie, Inde, Chine) devient les BRICS quand l'Afrique du Sud le rejoint en 2010. Étape 2 — Situer : un pays émergent est un pays à forte croissance. Le Japon est une puissance déjà développée ; le Nigeria est le pays le plus peuplé d'Afrique, mais il n'est pas membre des BRICS dans cette période.",
+                "answers": [
+                  {
+                    "content": "Le Japon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Brésil",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Nigeria",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Inde",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'Afrique du Sud",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un monde multipolaire, les États-Unis ont disparu comme puissance.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Dégager le rôle de chaque pôle et ses limites : les États-Unis restent une très grande puissance. Multipolaire veut dire que d'autres pôles (Union européenne, Chine, Russie, pays émergents) comptent aussi. C'est un partage de l'influence, pas une disparition.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles organisations sont des organisations régionales africaines ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Nommer le groupe et Étape 2 — le situer : l'Union africaine (2002) couvre le continent ; la CEDEAO (1975) regroupe des États d'Afrique de l'Ouest, dont la Côte d'Ivoire. L'ASEAN est en Asie du Sud-Est, le Mercosur en Amérique du Sud, l'Union européenne en Europe.",
+                "answers": [
+                  {
+                    "content": "L'ASEAN",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Union africaine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Mercosur",
+                    "correct": false
+                  },
+                  {
+                    "content": "La CEDEAO",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'Union européenne",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le siège de l'Union africaine se trouve à ___, capitale de l'Éthiopie.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Situer le pôle : l'Union africaine, créée en 2002 pour succéder à l'OUA de 1963, a son siège à Addis-Abeba. Étape 4 — Son rôle est de renforcer l'unité et le poids de l'Afrique dans le monde.",
+                "answers": [
+                  {
+                    "content": "Addis-Abeba",
+                    "correct": true
+                  },
+                  {
+                    "content": "Addis Abeba",
+                    "correct": true
+                  },
+                  {
+                    "content": "Addis-Ababa",
+                    "correct": true
+                  },
+                  {
+                    "content": "Addis Ababa",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les nouvelles formes de conflits",
+          "remember": "Après la guerre froide, il y a moins de guerres entre États, mais plus de **conflits à l'intérieur des États** (guerres civiles) et de menaces **transnationales**. L'**éclatement de la Yougoslavie** dans les années 1990 en est un exemple en Europe ; le **Libéria** (à partir de 1989) et la **Sierra Leone** (à partir de 1991) en Afrique de l'Ouest. Le **terrorisme international** frappe avec les attentats du **11 septembre 2001** aux États-Unis, attribués au réseau Al-Qaïda : c'est un conflit **asymétrique**, où un groupe non étatique affronte des États. D'autres menaces apparaissent, comme les cyberattaques. Les réponses sont l'**ONU** (casques bleus), les **organisations régionales** (la CEDEAO envoie l'ECOMOG au Libéria en 1990) et les coalitions.",
+          "method": [
+            "Situer le conflit : sa date, son lieu et ses acteurs (États, groupes armés, réseaux).",
+            "Identifier son origine : tensions politiques, identitaires, économiques ou idéologiques.",
+            "Décrire sa forme : guerre civile, éclatement d'un État, terrorisme, conflit asymétrique, cyberattaque.",
+            "Dégager la réponse de la communauté internationale (ONU, organisation régionale, coalition) et ses limites."
+          ],
+          "example": {
+            "statement": "Présenter la guerre civile du Libéria.",
+            "steps": [
+              "Situer : le Libéria, en Afrique de l'Ouest ; la guerre civile commence en 1989 entre l'armée et des groupes armés.",
+              "Identifier l'origine : des rivalités politiques et des tensions entre groupes de la population.",
+              "Décrire la forme : une guerre civile, c'est-à-dire un conflit à l'intérieur de l'État, qui touche beaucoup de civils et pousse des réfugiés vers les pays voisins.",
+              "Dégager la réponse : en 1990, la CEDEAO envoie l'ECOMOG, force d'interposition ; l'ONU s'engage aussi ; la paix revient lentement, ce qui montre les limites de ces actions."
+            ]
+          },
+          "pitfall": "Ne crois pas que la fin de la guerre froide a mis fin aux guerres : les conflits changent de forme. Ne présente pas non plus le terrorisme comme une guerre entre deux États. Contre-exemple : les attentats du 11 septembre 2001 sont attribués à un réseau, Al-Qaïda, et non à l'armée d'un État. Pour chaque conflit, pose toujours les quatre questions : quand et où, pourquoi, sous quelle forme, avec quelle réponse.",
+          "figure": null,
+          "practice": {
+            "statement": "Tu rappelles les conflits de l'après-guerre froide avec la méthode : situer, identifier, décrire, dégager.",
+            "questions": [
+              {
+                "content": "Une guerre qui se déroule à l'intérieur d'un même pays, entre groupes du même État, s'appelle une guerre ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Décrire la forme : c'est une guerre civile, un conflit intra-étatique. Au Libéria, elle commence en 1989.",
+                "answers": [
+                  {
+                    "content": "civile",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les attentats du 11 septembre 2001 sont commis par un ___ et non par l'armée d'un ___.",
+                "question_type": "select",
+                "hint": "Le terrorisme international est le fait de réseaux, pas d'armées régulières.",
+                "explanation": "Étape 3 — Décrire la forme : les attentats sont attribués au réseau Al-Qaïda, un acteur non étatique. C'est ce qui rend le conflit asymétrique : un réseau face à des États.",
+                "answers": [
+                  {
+                    "content": "réseau terroriste",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "parti politique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "syndicat",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "État",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "réseau",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "continent",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quelle organisation envoie une force, l'ECOMOG, au Libéria en 1990 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Dégager la réponse : en 1990, la CEDEAO déploie l'ECOMOG, une force d'interposition. C'est un exemple d'organisation régionale qui agit pour la paix.",
+                "answers": [
+                  {
+                    "content": "La CEDEAO",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'OTAN",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'Union européenne",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ASEAN",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Les conflits de l'après-guerre froide",
+            "statement": "Dans cet exercice, tu appliques les quatre étapes de la méthode (situer, identifier, décrire, dégager) aux conflits apparus après 1991.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Après 1991, quel type de conflit devient plus fréquent que la guerre entre États ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Décrire la forme du conflit : après la guerre froide, les conflits sont surtout intra-étatiques (guerres civiles, éclatement d'États) et transnationaux (terrorisme). Les trois propositions fausses décrivent le monde bipolaire d'avant 1991 : le pacte de Varsovie a disparu.",
+                "answers": [
+                  {
+                    "content": "Les guerres civiles et les conflits à l'intérieur des États",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les guerres entre deux superpuissances",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les affrontements directs entre l'OTAN et le pacte de Varsovie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les guerres entre deux blocs",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque exemple à la forme de conflit ou de menace qu'il illustre.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer chaque exemple (date, lieu), puis Étape 3 — Décrire sa forme : l'éclatement de la Yougoslavie et la guerre du Libéria sont des conflits internes ; le 11 septembre 2001 est un acte de terrorisme international ; les casques bleus sont l'une des réponses de la communauté internationale (Étape 4).",
+                "answers": [
+                  {
+                    "content": "Yougoslavie dans les années 1990",
+                    "match": "Éclatement d'un État et guerres entre ses parties"
+                  },
+                  {
+                    "content": "Libéria à partir de 1989",
+                    "match": "Guerre civile en Afrique de l'Ouest"
+                  },
+                  {
+                    "content": "11 septembre 2001",
+                    "match": "Attentats terroristes contre les États-Unis"
+                  },
+                  {
+                    "content": "Casques bleus",
+                    "match": "Soldats de l'ONU envoyés pour maintenir la paix"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux caractéristiques d'un conflit asymétrique ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Décrire la forme : un conflit asymétrique oppose des acteurs de force très différente, souvent un réseau ou un groupe armé face à des armées régulières. Étape 2 — Identifier l'origine : ce sont souvent des tensions politiques ou idéologiques. Les trois propositions fausses décrivent des guerres classiques entre armées comparables.",
+                "answers": [
+                  {
+                    "content": "Deux armées régulières de force égale s'affrontent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les forces sont très inégales",
+                    "correct": true
+                  },
+                  {
+                    "content": "Deux superpuissances se battent directement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un groupe non étatique affronte un État ou des armées régulières",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le conflit oppose deux blocs organisés",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après 1991, les conflits opposent surtout deux blocs organisés autour de deux superpuissances.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer dans le temps : l'opposition entre deux blocs concerne la période 1947-1991. Après la fin de l'URSS, les conflits sont plus souvent internes aux États ou liés à des réseaux transnationaux. Étape 3 — Décrire la forme : il faut donc parler de guerres civiles, de terrorisme, de conflits asymétriques.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour étudier un conflit.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer d'abord (quand, où, qui) ; Étape 2 — Identifier l'origine (pourquoi) ; Étape 3 — Décrire la forme (guerre civile, terrorisme…) ; Étape 4 — Dégager la réponse (ONU, organisations régionales). On ne peut pas parler de la réponse avant de connaître le conflit.",
+                "answers": [
+                  {
+                    "content": "Situer le conflit : date, lieu, acteurs"
+                  },
+                  {
+                    "content": "Identifier son origine"
+                  },
+                  {
+                    "content": "Décrire sa forme"
+                  },
+                  {
+                    "content": "Dégager la réponse de la communauté internationale"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Gorbatchev et les réformes de l'URSS",
+          "statement": "Document : texte écrit pour Lnclass, qui résume le programme du dirigeant soviétique Mikhaïl Gorbatchev vers 1987 : l'économie planifiée fonctionne mal et les magasins manquent de produits ; il faut restructurer l'économie ; les citoyens doivent pouvoir s'informer et s'exprimer librement ; l'URSS doit réduire ses dépenses militaires et dialoguer avec les États-Unis. Tu utilises le document et ta leçon.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Dans le document, quelle réforme correspond à la phrase « il faut restructurer l'économie » ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Situer la cause : le document date de 1987, sous Gorbatchev. Étape 2 — Nommer et définir : « restructurer l'économie » est la définition de la perestroïka (« restructuration »). La glasnost est la transparence ; le plan Marshall (1947) et la doctrine Jdanov (1947) appartiennent à la naissance des blocs, étudiée dans la leçon précédente.",
+              "answers": [
+                {
+                  "content": "La perestroïka",
+                  "correct": true
+                },
+                {
+                  "content": "La glasnost",
+                  "correct": false
+                },
+                {
+                  "content": "Le plan Marshall",
+                  "correct": false
+                },
+                {
+                  "content": "La doctrine Jdanov",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le document, la liberté de « s'informer et de s'exprimer » correspond à la ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 2 — Nommer et définir : la glasnost, mot russe qui signifie « transparence », désigne la liberté de s'informer et de s'exprimer. Étape 4 — Classer : c'est une réforme politique.",
+              "answers": [
+                {
+                  "content": "glasnost",
+                  "correct": true
+                },
+                {
+                  "content": "la glasnost",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Selon le document, pourquoi l'URSS veut-elle dialoguer avec les États-Unis et réduire ses dépenses militaires ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Expliquer en quoi la cause rapproche les deux camps : les dépenses militaires pèsent sur une économie déjà en difficulté, donc le dialogue (par exemple le traité sur les euromissiles de décembre 1987) permet de les réduire. Étape 4 — Classer : c'est une cause internationale. Il n'y avait pas de guerre à gagner : la guerre froide est une rivalité sans combat direct.",
+              "answers": [
+                {
+                  "content": "Pour gagner la guerre contre les États-Unis",
+                  "correct": false
+                },
+                {
+                  "content": "Pour alléger le poids de la course aux armements sur son économie",
+                  "correct": true
+                },
+                {
+                  "content": "Pour quitter l'ONU",
+                  "correct": false
+                },
+                {
+                  "content": "Pour relancer le pacte de Varsovie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les réformes de Gorbatchev ont été lancées pour détruire le bloc de l'Est.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Expliquer : le document montre que Gorbatchev veut réformer l'économie, rendre le système plus efficace et réduire les dépenses militaires. Son but est de réformer le système, pas de le détruire. Étape 4 — Classer : c'est le résultat des réformes qui a surpris : la liberté d'expression libère la contestation dans les pays de l'Est.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque date à l'événement qui lui correspond.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Situer chaque fait par sa date : 1985 (arrivée au pouvoir), décembre 1987 (traité avec les États-Unis), 1989 (retrait d'Afghanistan), 1991 (disparition de l'URSS). Ces dates forment la chronologie de la fin de la guerre froide.",
+              "answers": [
+                {
+                  "content": "1985",
+                  "match": "Gorbatchev dirige l'URSS"
+                },
+                {
+                  "content": "Décembre 1987",
+                  "match": "Traité sur les euromissiles signé à Washington"
+                },
+                {
+                  "content": "1989",
+                  "match": "Fin du retrait soviétique d'Afghanistan"
+                },
+                {
+                  "content": "1991",
+                  "match": "Fin de l'URSS"
+                }
+              ]
+            },
+            {
+              "content": "À l'aide du document et de tes connaissances, explique en cinq lignes pourquoi Gorbatchev lance des réformes en URSS.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il relève une difficulté de l'URSS : économie planifiée, pénuries ou dépenses militaires (1 point)",
+                "Il nomme et définit perestroïka et glasnost (1 point)",
+                "Il explique le lien avec le dialogue avec les États-Unis ou la contestation (1 point)"
+              ],
+              "starter": "En 1987, l'URSS est en difficulté, donc Gorbatchev…",
+              "explanation": "Corrigé modèle. Étape 1 — Situer : vers 1987, Gorbatchev dirige l'URSS depuis 1985. Étape 2 — Nommer : l'économie planifiée fonctionne mal, avec des pénuries, et les dépenses militaires sont très lourdes ; il lance donc la perestroïka (restructuration de l'économie) et la glasnost (transparence). Étape 3 — Expliquer : il veut aussi dialoguer avec les États-Unis pour réduire les dépenses d'armement. Étape 4 — Classer : ce sont des causes économiques, politiques et internationales qui amènent la fin de la guerre froide. Barème : 1 point par critère.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "De la chute du mur à la fin de l'URSS",
+          "statement": "Tu utilises la frise chronologique de la leçon et tes connaissances sur les événements de 1989 à 1991.",
+          "exercise_type": "fixation",
+          "figure": "frise-1985-2015",
+          "questions": [
+            {
+              "content": "Remets ces événements dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Situer chaque événement : 9 novembre 1989, 3 octobre 1990, 1er juillet 1991, 25 décembre 1991. Étape 4 — Replacer dans la chronologie : chaque événement rend le suivant possible, du symbole de la division de l'Europe jusqu'à la disparition de l'URSS.",
+              "answers": [
+                {
+                  "content": "Ouverture du mur de Berlin"
+                },
+                {
+                  "content": "Réunification de l'Allemagne"
+                },
+                {
+                  "content": "Dissolution du pacte de Varsovie"
+                },
+                {
+                  "content": "Démission de Gorbatchev et fin de l'URSS"
+                }
+              ]
+            },
+            {
+              "content": "Quel événement symbolise la fin de la division de l'Europe en deux blocs en 1989 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Expliquer la conséquence : le mur de Berlin séparait depuis 1961 l'Est et l'Ouest. Son ouverture le 9 novembre 1989 symbolise la fin de la division. Le blocus de Berlin date de 1948, la crise de Cuba de 1962, le Comecon de 1949 : ce sont des événements du début de la guerre froide.",
+              "answers": [
+                {
+                  "content": "La crise de Cuba",
+                  "correct": false
+                },
+                {
+                  "content": "La création du Comecon",
+                  "correct": false
+                },
+                {
+                  "content": "L'ouverture du mur de Berlin",
+                  "correct": true
+                },
+                {
+                  "content": "Le blocus de Berlin",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'Allemagne est réunifiée le 3 octobre ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Situer : le 3 octobre 1990, la RFA et la RDA forment un seul État. Étape 4 — Replacer : cela suit l'ouverture du mur (1989).",
+              "answers": [
+                {
+                  "content": "1990",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles entités disparaissent entre 1990 et 1991 ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Identifier les acteurs : la RDA disparaît à la réunification (1990), le pacte de Varsovie est dissous (1991), l'URSS cesse d'exister fin 1991. Étape 3 — Expliquer : l'OTAN continue d'exister, et la Russie est l'État qui succède à l'URSS dans ses obligations internationales et son siège à l'ONU.",
+              "answers": [
+                {
+                  "content": "L'OTAN",
+                  "correct": false
+                },
+                {
+                  "content": "La RDA, en tant qu'État",
+                  "correct": true
+                },
+                {
+                  "content": "La Russie",
+                  "correct": false
+                },
+                {
+                  "content": "Le pacte de Varsovie",
+                  "correct": true
+                },
+                {
+                  "content": "L'URSS",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La CEI est un nouvel État qui remplace l'URSS avec un gouvernement commun.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Expliquer : la CEI (Communauté des États indépendants) est une association d'États devenus indépendants. Chaque État garde son propre gouvernement. Étape 2 — Identifier : les trois fondateurs de décembre 1991 sont la Russie, l'Ukraine et la Biélorussie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi la fin de l'URSS marque la fin de la guerre froide.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il rappelle que la guerre froide opposait deux blocs dirigés par les États-Unis et l'URSS (1 point)",
+                "Il cite la disparition du pacte de Varsovie et de l'URSS en 1991 (1 point)",
+                "Il conclut qu'il ne reste plus qu'une superpuissance (1 point)"
+              ],
+              "starter": "La guerre froide opposait deux blocs ; en 1991…",
+              "explanation": "Corrigé modèle. Étape 1 — Situer : de 1947 à 1991, la guerre froide oppose deux blocs, celui de l'Ouest autour des États-Unis et celui de l'Est autour de l'URSS. Étape 2 — Identifier : en 1991, le pacte de Varsovie est dissous, puis l'URSS disparaît en décembre. Étape 3 — Expliquer : sans URSS ni bloc de l'Est, il n'y a plus de rivalité entre deux camps. Étape 4 — Replacer : cela suit la chute du mur (1989) et la réunification (1990). Il ne reste qu'une superpuissance, les États-Unis. Barème : 1 point par critère.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Du monde unipolaire au monde multipolaire",
+          "statement": "Tu utilises la carte des pôles de puissance et le document. Document : texte écrit pour Lnclass, qui compare deux moments : en 1991, une seule superpuissance subsiste, les États-Unis ; vingt ans plus tard, vers 2010, plusieurs États et groupes d'États comptent dans les décisions du monde, dont l'Union européenne, la Chine, la Russie et les pays émergents des BRICS.",
+          "exercise_type": "evaluation",
+          "figure": "carte-poles",
+          "questions": [
+            {
+              "content": "Quel mot désigne le monde de 1991 décrit par le document, avec une seule superpuissance ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Définir le terme : unipolaire signifie « un seul pôle ». Bipolaire désignait le monde de 1947 à 1991, avec deux superpuissances ; multipolaire est le monde de 2010 décrit à la fin du document.",
+              "answers": [
+                {
+                  "content": "Unipolaire",
+                  "correct": true
+                },
+                {
+                  "content": "Bipolaire",
+                  "correct": false
+                },
+                {
+                  "content": "Multipolaire",
+                  "correct": false
+                },
+                {
+                  "content": "Neutre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque pôle à un atout de sa puissance.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Identifier les atouts de chaque pôle : l'Union européenne a un marché commun et l'euro (2002) ; la Chine, une industrie exportatrice et une forte croissance ; la Russie, l'arme nucléaire héritée de l'URSS et un siège permanent à l'ONU ; les États-Unis restent la première puissance militaire. Étape 1 — Nommer d'abord le pôle, puis seulement ses atouts.",
+              "answers": [
+                {
+                  "content": "Union européenne",
+                  "match": "Un grand marché et une monnaie commune, l'euro"
+                },
+                {
+                  "content": "Chine",
+                  "match": "Une croissance rapide et une industrie exportatrice"
+                },
+                {
+                  "content": "Russie",
+                  "match": "Une puissance nucléaire et un siège permanent au Conseil de sécurité"
+                },
+                {
+                  "content": "États-Unis",
+                  "match": "Une armée très puissante et la première économie mondiale"
+                }
+              ]
+            },
+            {
+              "content": "Quelles évolutions expliquent le passage vers un monde multipolaire ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 4 — Dégager le rôle de chaque pôle : l'Union européenne (1993), les pays émergents (BRICS) et la Chine (OMC en 2001) gagnent en poids. Les deux propositions fausses reprennent l'erreur du piège : les États-Unis restent puissants et l'URSS n'existe plus depuis 1991.",
+              "answers": [
+                {
+                  "content": "La disparition des États-Unis",
+                  "correct": false
+                },
+                {
+                  "content": "La construction de l'Union européenne",
+                  "correct": true
+                },
+                {
+                  "content": "Le retour de l'URSS",
+                  "correct": false
+                },
+                {
+                  "content": "La forte croissance des pays émergents",
+                  "correct": true
+                },
+                {
+                  "content": "L'essor économique de la Chine",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les BRICS sont une alliance militaire comparable au pacte de Varsovie.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Dégager les limites : les BRICS forment un groupe de dialogue et de coopération économique entre pays émergents. Ils n'ont ni armée commune ni traité de défense. Le pacte de Varsovie (1955-1991) était une alliance militaire dirigée par l'URSS.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle organisation africaine est créée en 2002 pour succéder à l'OUA ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Situer par la date : l'Union africaine naît en 2002 et succède à l'OUA de 1963. La CEDEAO (1975) est une organisation régionale d'Afrique de l'Ouest ; l'ASEAN est asiatique, le Mercosur sud-américain.",
+              "answers": [
+                {
+                  "content": "La CEDEAO",
+                  "correct": false
+                },
+                {
+                  "content": "L'Union africaine",
+                  "correct": true
+                },
+                {
+                  "content": "L'ASEAN",
+                  "correct": false
+                },
+                {
+                  "content": "Le Mercosur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En un paragraphe d'environ cinq lignes, montre que le monde de 2010 est multipolaire. Appuie-toi sur au moins trois pôles.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il définit multipolaire (plusieurs pôles de puissance) (1 point)",
+                "Il cite au moins trois pôles : Union européenne, Chine, Russie, pays émergents, États-Unis (1 point)",
+                "Il donne au moins un fait daté pour deux de ces pôles (1 point)",
+                "Il nuance : les États-Unis restent puissants (1 point)"
+              ],
+              "starter": "Un monde est multipolaire quand…",
+              "explanation": "Corrigé modèle. Étape 1 — Définir : un monde multipolaire est un monde où plusieurs pôles de puissance comptent. Étape 2 — Situer et identifier : vers 2010, l'Union européenne (traité de Maastricht en vigueur en 1993, euro en 2002), la Chine (membre de l'OMC depuis 2001) et les pays émergents des BRICS (dont l'Afrique du Sud depuis 2010) pèsent dans les décisions. Étape 3 — Illustrer : la Russie reste une puissance nucléaire. Étape 4 — Nuancer : les États-Unis demeurent très puissants, mais ne dominent plus seuls. Barème : 1 point par critère.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Sujet bac : de la fin de la guerre froide à un monde multipolaire",
+          "statement": "Exercice de niveau bac : commentaire de document et dissertation guidée. Document : texte écrit pour Lnclass, qui résume en substance l'allocution télévisée du 25 décembre 1991 de Mikhaïl Gorbatchev : il annonce qu'il cesse ses fonctions de président de l'URSS ; il rappelle les réformes engagées depuis 1985, qui ont apporté la liberté d'expression ; il indique que la course aux armements est arrêtée et que la guerre froide est terminée. Sujet : de 1985 à 2015, comment passe-t-on d'un monde bipolaire à un monde multipolaire ?",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les parties d'un plan de dissertation sur le sujet.",
+              "question_type": "ordering",
+              "explanation": "Méthode d'une dissertation. Étape 1 — Définir : l'introduction pose les termes (bipolaire, multipolaire) et la problématique. Étape 2 — Organiser en parties chronologiques et logiques : fin de la guerre froide (leçon, notions 1 et 2), moment unipolaire (notion 3), monde multipolaire (notion 4). Étape 3 — Conclure en répondant à la problématique.",
+              "answers": [
+                {
+                  "content": "Introduction : définir les termes et poser la problématique"
+                },
+                {
+                  "content": "I. La fin de la guerre froide (1985-1991)"
+                },
+                {
+                  "content": "II. Le moment unipolaire des États-Unis (années 1990)"
+                },
+                {
+                  "content": "III. L'émergence d'un monde multipolaire (depuis les années 2000)"
+                },
+                {
+                  "content": "Conclusion : répondre à la problématique"
+                }
+              ]
+            },
+            {
+              "content": "Quelle problématique convient au sujet ?",
+              "question_type": "single_choice",
+              "explanation": "Une bonne problématique pose une question de changement et d'explication sur toute la période du sujet. Étape 1 — Situer : 1985-2015. Les propositions fausses sont des pièges : il n'y a pas eu de victoire par les armes (pitfall de la notion 1), la crise de Cuba est de 1962, et chercher un « responsable » est un jugement, pas une analyse historique.",
+              "answers": [
+                {
+                  "content": "Pourquoi les États-Unis ont-ils vaincu l'URSS par les armes ?",
+                  "correct": false
+                },
+                {
+                  "content": "Quelles sont les dates de la crise de Cuba ?",
+                  "correct": false
+                },
+                {
+                  "content": "Qui est responsable de la fin de l'URSS ?",
+                  "correct": false
+                },
+                {
+                  "content": "Comment le monde passe-t-il, de 1985 à 2015, d'une organisation autour de deux superpuissances à plusieurs pôles de puissance ?",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont deux idées du document ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Commentaire de document. Étape 2 — Dégager les idées principales en les reformulant : le texte rappelle les réformes depuis 1985 (glasnost) et annonce la fin de la guerre froide. Étape 3 — Expliquer avec les connaissances : l'Union européenne naît en 1993 et le pacte de Varsovie est déjà dissous en 1991, ce qui élimine les deux propositions anachroniques ; il n'y a pas de guerre à déclarer.",
+              "answers": [
+                {
+                  "content": "Gorbatchev annonce la création de l'Union européenne",
+                  "correct": false
+                },
+                {
+                  "content": "Les réformes engagées depuis 1985 ont apporté la liberté d'expression",
+                  "correct": true
+                },
+                {
+                  "content": "Gorbatchev demande la reconstitution du pacte de Varsovie",
+                  "correct": false
+                },
+                {
+                  "content": "La course aux armements est arrêtée et la guerre froide est terminée",
+                  "correct": true
+                },
+                {
+                  "content": "Gorbatchev annonce une guerre contre les États-Unis",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Gorbatchev démissionne le 25 ___ 1991.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Présenter le document : l'allocution date du 25 décembre 1991, jour de la démission de Gorbatchev. L'URSS cesse d'exister quelques jours plus tard. Étape 4 — Confronter à la chronologie : le mur est tombé deux ans plus tôt, la CEI a été créée le mois précédent.",
+              "answers": [
+                {
+                  "content": "décembre",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans une dissertation, il suffit de raconter les événements dans l'ordre, sans les expliquer ni répondre à la problématique.",
+              "question_type": "true_false",
+              "explanation": "Une dissertation ne se réduit pas à un récit. Pour chaque événement, applique les étapes de la méthode : situer, expliquer (cause, conséquence), puis relier à la problématique. Une liste de faits sans lien avec la question est hors sujet.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Présente le document en quatre lignes (nature, auteur, date, idée générale), puis explique l'une de ses idées avec tes connaissances.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il présente la nature, l'auteur et la date du document (1 point)",
+                "Il reformule l'idée générale avec ses propres mots (1 point)",
+                "Il explique une idée avec des connaissances précises (glasnost, fin de la course aux armements, URSS en 1991) (1 point)"
+              ],
+              "starter": "Ce document est un résumé d'une allocution du 25 décembre 1991 de…",
+              "explanation": "Corrigé modèle. Étape 1 — Présenter : le document est le résumé d'une allocution télévisée prononcée le 25 décembre 1991 par Mikhaïl Gorbatchev, dirigeant de l'URSS, qui annonce son départ. Étape 2 — Dégager : il rappelle les réformes de 1985, la liberté d'expression et l'arrêt de la course aux armements. Étape 3 — Expliquer : la glasnost a libéré la parole ; la fin de la course aux armements soulage une économie en difficulté. Étape 4 — Confronter et conclure : le texte confirme la fin de la guerre froide, que la dissolution du pacte de Varsovie et de l'URSS achève. Barème : 1 point par critère.",
+              "answers": []
+            },
+            {
+              "content": "Sujet de synthèse. En un paragraphe organisé d'environ quinze lignes, montre comment le monde passe, de 1985 à 2015, d'un monde bipolaire à un monde multipolaire.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Il définit bipolaire, unipolaire et multipolaire (1 point)",
+                "Il explique la fin de la guerre froide avec des causes et des dates : Gorbatchev, 1989, 1991 (2 points)",
+                "Il présente le moment unipolaire des États-Unis, avec un exemple (1 point)",
+                "Il présente au moins deux pôles du monde multipolaire, dont un africain ou les BRICS (1 point)",
+                "Le paragraphe est organisé et se termine par une réponse à la question (1 point)"
+              ],
+              "starter": "De 1947 à 1991, le monde est bipolaire ; ensuite…",
+              "explanation": "Corrigé modèle. Introduction : de 1947 à 1991, le monde est bipolaire, autour des États-Unis et de l'URSS ; il devient ensuite unipolaire, puis multipolaire. I. Étape 1 — Situer la fin de la guerre froide : l'URSS de Gorbatchev (1985) est en difficulté ; la perestroïka et la glasnost libèrent la contestation ; le mur de Berlin s'ouvre en 1989, l'Allemagne est réunifiée en 1990, le pacte de Varsovie et l'URSS disparaissent en 1991. II. Étape 2 — Dans les années 1990, les États-Unis sont une hyperpuissance, comme le montre la guerre du Golfe (1991). III. Étape 3 — Depuis les années 2000, l'Union européenne (euro, 2002), la Chine (OMC, 2001), la Russie et les pays émergents des BRICS comptent, ainsi que des organisations régionales comme l'Union africaine (2002). Conclusion : le monde est passé de deux pôles à un seul, puis à plusieurs, et l'Afrique y est un acteur. Barème : 1 point par critère, avec 2 points pour la fin de la guerre froide.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
