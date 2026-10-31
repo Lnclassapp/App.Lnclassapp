@@ -1,9 +1,12 @@
 # 🌐 DELIVERY · Assessment::SessionResultsController
 # Rôle : résultat d'une session terminée, pour l'élève propriétaire, l'enseignant d'une de ses classes actives et l'équipe
-# ADR  : 0026, 0028, 0033, 0054, 0094, 0115 · UDR : 0007, 0023, 0140 · lecture seule, aucun stream
+# ADR  : 0026, 0028, 0033, 0054, 0094, 0115, 0121 §4 · UDR : 0007, 0023, 0140, 0149 §3 · lecture seule, aucun stream ; return_to : retour vers la feuille ou « Ma classe »
 module Assessment
   class SessionResultsController < AuthenticatedController
     include ReadsOwnLevel
+
+    # Où ramène « Retour » quand l'élève vient de la feuille de la leçon ou de « Ma classe » : deux cibles, jamais une adresse libre.
+    RETURN_TARGETS = %w[sheet class].freeze
 
     def show
       session = Repositories::Assessment::ExerciseSessionRepository.new.find_by_public_id(public_id: params[:public_id])
@@ -29,6 +32,7 @@ module Assessment
       @reveal = Policies::Assessment::RevealCorrectionPolicy.new.call(actor: current_actor, exercise:, session:).success?
       @result = query.call(public_id: session.public_id, reveal: @reveal)
       @owner = session.student_id == current_actor.user_id
+      @return_to = params[:return_to] if @owner && RETURN_TARGETS.include?(params[:return_to])
       @resume_at = restart_resume_at(session) if @owner
       @can_restart = @resume_at.nil? && Policies::Assessment::StartSessionPolicy.new.call(actor: current_actor, exercise:).success?
     end

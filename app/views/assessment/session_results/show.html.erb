@@ -10,6 +10,12 @@
 <% label = "text-2xs font-medium tracking-wide text-mute uppercase" %>
 <% page_title t(".page_title", title: result.exercise.title) %>
 <% lesson_href = course_path(result.course_slug, anchor: (result.essential ? "notion-#{result.essential.slug}" : "toute-la-lecon")) %>
+<%# Venu de la feuille de la leçon : retour à l'exercice sur la feuille ; venu d'un devoir rendu depuis « Ma classe » : retour à Ma classe. %>
+<% back_href, back_label = case @return_to
+                           when "sheet" then [ course_path(result.course_slug, anchor: "sheet-exercise-#{result.exercise.public_id}"), t(".back_to_lesson") ]
+                           when "class" then [ student_classroom_path, t(".back_to_class") ]
+                           else [ lesson_href, t(".back_to_lesson") ]
+                           end %>
 <%# UDR-0087 §3.6 : une colonne de 720 px dès 700 px. UDR écrans élève §3.6 bis (CA-E13) : dès 1 024 px, la note et « Recommencer »
     dans une colonne de 340 px collante à gauche, la correction à droite. %>
 <div id="session_result_layout"
@@ -109,7 +115,7 @@
         <%= ui_button t("assessment.exercises.show.redo"), type: :submit, variant: :brand, size: :lg, full: true, icon: "arrow-path" %>
       <% end %>
     <% end %>
-    <%= ui_button t(".back_to_lesson"), href: lesson_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
+    <%= ui_button back_label, href: back_href, variant: :secondary, size: :lg, full: true, data: { turbo_prefetch: false } %>
   </div>
 
   <%# ADR-0115, CA-25 : le sujet en blocs, rendu au-dessus de la correction pour la lire avec lui. %>
@@ -137,6 +143,16 @@
     </ol>
     <% if @owner %>
       <div class="mt-2"><%= ui_reveal_more result.review.size %></div>
+    <% end %>
+    <%# UDR-0149 §3 (ajout du 2026-10-31) : toutes les explications en un bloc sous l'exercice, « a. … b. … » (lettre = rang de la question) ; sans explication, la question est sautée ; les réponses rédigées et le cahier gardent leur corrigé type. %>
+    <% explained = result.review.select { it.auto_graded? && it.explanation.present? } %>
+    <% if explained.any? %>
+      <div id="session_correction" class="mt-4 rounded-ln bg-mist p-4" data-controller="math">
+        <h3 class="font-display text-lg font-medium"><%= t(".correction") %></h3>
+        <% explained.each do |question| %>
+          <p class="mt-2 text-sm whitespace-pre-line text-ink"><%= t(".correction_line", letter: ("a".ord + question.number - 1).chr, text: question.explanation) %></p>
+        <% end %>
+      </div>
     <% end %>
   <% end %>
 </div>

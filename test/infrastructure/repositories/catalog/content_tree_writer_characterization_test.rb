@@ -1,18 +1,17 @@
 require "test_helper"
 
 # IM-13, ADR-0068 §4 : l'écriture accélérée des arbres de contenu écrit exactement ce qu'écrivait l'écrivain d'avant.
-# Les 4 leçons de Tle D (nœuds d'avant le format 3) passent par ContentTreeWriter#write ; toutes les
+# Les 4 leçons de Tle D (nœuds d'avant le format 3, figées dans test/fixtures/files/lecons_v1 depuis que docs/ les réécrit en v3)
+# passent par ContentTreeWriter#write ; toutes les
 # lignes écrites sont comparées, champ par champ, à l'instantané pris AVANT l'optimisation
 # (test/fixtures/files/content_tree_snapshot.json). Cet instantané ne se régénère pas : si ce test rougit, c'est
 # l'implémentation qu'on corrige.
 module Repositories
   module Catalog
     class ContentTreeWriterCharacterizationTest < ActiveSupport::TestCase
-      # La leçon de SVT est passée au format 3 (chantier contenus-tle-svt-cd) : sa version d'avant est gardée en fixture.
-      LESSONS = (%w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools]
-                .map { Rails.root.join("docs/contenus/lecons-traitees/tle-d/#{it}.json") } +
-                 [ Rails.root.join("test/fixtures/files/legacy_lessons/tle-d/svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json") ])
-                .sort_by { File.basename(it) }
+      LESSONS = %w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools
+                   svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes]
+                .map { Rails.root.join("test/fixtures/files/lecons_v1/tle-d/#{it}.json") }.sort_by { File.basename(it) }
       SNAPSHOT = "content_tree_snapshot.json"
       TABLES = %w[courses essentials exercises questions answers action_text_rich_texts].freeze
       # Identifiants, horodatages de création et auteur : ils changent d'une base à l'autre, pas le contenu.
@@ -21,7 +20,7 @@ module Repositories
       # ADR-0115 : points (1 par défaut), unit, starter, criteria et statement_blocks viennent aussi après l'instantané ; l'import
       # d'aujourd'hui ne les écrit pas encore (Lot D), les lignes gardent leurs valeurs par défaut (vérifié à part).
       # ADR-0116 : figures, sheet_theme, sheet et figure_key (format 3) viennent aussi après lui ; ces nœuds d'avant les laissent à leur défaut.
-      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key hint blank].freeze
+      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key hint subject_id blank].freeze
 
       setup do
         seed_referential

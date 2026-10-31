@@ -26,7 +26,8 @@ module UseCases
         session = @sessions.find_by_public_id(public_id:, lock: true)
         return not_found if session.nil? || @policy.call(actor:, session:).failure?
 
-        question = @exercises.find(id: session.exercise_id)&.questions&.find { it.id == question_id }
+        exercise = @exercises.find(id: session.exercise_id)
+        question = exercise.questions.find { it.id == question_id } if exercise
         return not_found if question.nil? || question.hint.blank?
 
         @sessions.record_hint(session_id: session.id, question_id: question.id)

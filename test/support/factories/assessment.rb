@@ -6,13 +6,14 @@ module Factories
     # Each question is a single choice among 4 answers; the first one is the correct one.
     # The exercise belongs to a course: that of its essential, or the given one for a lesson-wide exercise (no essential).
     def create_exercise(essential: nil, course: nil, lesson_wide: false, title: "Exercice #{factory_sequence}", position: nil,
-                        status: "published", questions: 2, author: nil, **attributes)
+                        status: "published", questions: 2, author: nil, subject: nil, hint: nil, **attributes)
       essential = nil if lesson_wide
-      essential ||= create_essential(course: course || create_course) unless lesson_wide
-      course = essential&.course || course || create_course
+      # ADR-0121 : un exercice de sujet n'a pas de notion ; la base refuse les deux (exercises_subject_without_essential).
+      essential ||= create_essential(course: course || create_course) unless lesson_wide || subject
+      course = essential&.course || subject&.course || course || create_course
       position ||= Orm::Exercise.where(course_id: course.id).maximum(:position).to_i + 1
       Orm::Exercise.create!(course:, essential:, title:, position:, author: author || course.author,
-                            **factory_publication(status), **attributes).tap do |exercise|
+                            subject:, hint:, **factory_publication(status), **attributes).tap do |exercise|
         questions.times do |index|
           question = exercise.questions.create!(position: index + 1, content: "<p>Question #{index + 1}</p>",
                                                 question_type: "single_choice")
