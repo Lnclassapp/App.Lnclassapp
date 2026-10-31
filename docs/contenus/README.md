@@ -577,6 +577,26 @@ Au total : 40 notions, 80 exercices, 497 questions notées, 167 questions d'entr
 
 Schémas qu'aucune sorte ne dessine, en plus de ceux de la Tle C : spermatozoïde, ovocyte et stades de segmentation, testicule et tube séminifère, fleur, ovule et grain de pollen, paire de chromosomes et crossing-over, échiquier, îlot de Langerhans, cortex et bulbe. Points à faire valider : [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
 
+### Tle A1 et A2, SVT au format 3 (chantier `contenus-tle-svt-a`)
+
+Les 7 leçons de SVT de Tle A1 et A2 (progression DPFC 2026-2027, identique dans les deux séries), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), pour des élèves de série littéraire : documents à analyser plutôt que calculs. Chaque leçon est écrite dans `tle-a1/svt/` et copiée dans `tle-a2/svt/`, où seule `series_name` change. Elles remplacent les 3 fichiers v1 de chacun de ces dossiers (lignes SVT des tableaux Tle A1 et Tle A2 ci-dessus). Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes de type BAC.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Entraînement | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `svt/les-reactions-emotionnelles-chez-l-homme.json` | Les réactions émotionnelles chez l'Homme | 4 | 8 | 48 | 16 | 96 % | 3 | `diagram`, `stat_chart bars`, `stat_chart line` |
+| 2 | `svt/l-activite-cerebrale-chez-l-homme.json` | L'activité cérébrale chez l'Homme | 5 | 9 | 52 | 18 | 96 % | 9 | `diagram`, `stat_chart bars` |
+| 3 | `svt/l-origine-de-la-vie.json` | L'origine de la vie | 4 | 8 | 51 | 15 | 94 % | 4 | `diagram`, `stat_chart bars` |
+| 4 | `svt/l-evolution-de-la-lignee-humaine.json` | L'évolution de la lignée humaine | 5 | 9 | 52 | 11 | 92 % | 3 | `diagram`, `map africa`, `stat_chart bars` |
+| 5 | `svt/l-heredite-du-sexe-et-du-groupe-sanguin-chez-l-homme.json` | L'hérédité du sexe et du groupe sanguin chez l'Homme | 4 | 8 | 52 | 16 | 96 % | 4 | `diagram`, `stat_chart bars` |
+| 6 | `svt/les-previsions-genetiques.json` | Les prévisions génétiques | 4 | 8 | 48 | 16 | 94 % | 3 | `diagram` |
+| 7 | `svt/l-utilisation-des-nutriments-la-biosynthese-des-proteines.json` | L'utilisation des nutriments : la biosynthèse des protéines | 5 | 9 | 53 | 15 | 96 % | 4 | `diagram`, `stat_chart bars` |
+
+Au total, par série : 31 notions, 59 exercices, 356 questions notées, 107 questions d'entraînement et 30 figures. Chacun des 14 fichiers passe `script/contenus/valider.rb` sans erreur ni avertissement, ainsi que le contrôle de l'entraînement (règles du test de 3e), et chaque leçon a été relue par un agent distinct de son auteur.
+
+Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : cerveau et aires corticales, tracé d'électroencéphalogramme et hypnogramme, système nerveux et glandes surrénales, frise en millions ou milliards d'années (`timeline` s'arrête à −3000), crânes et squelettes, caryotype, échiquier de croisement, arbre généalogique, cellule et ribosome, double hélice d'ADN, hématies falciformes.
+
+À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T5).
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
