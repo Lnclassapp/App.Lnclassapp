@@ -1,7 +1,7 @@
 # 🔌 INFRA · Queries::Assessment::SessionPlayQuery
 # Rôle : écran d'une session : la copie entière (copy : toutes les questions sans aucune correction ni id révélateur, leurs images) ;
 #        call, la prochaine question et le verdict de la question tentée, ne sert plus que l'ancien mode (retiré au Lot E)
-# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105, 0112, 0115 · UDR : 0007, 0022, 0087, 0129, 0138 §3.2
+# ADR  : 0028, 0054, 0091 (§4.4 : rien de la solution dans la page), 0105, 0112, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4 : cases, indice) · UDR : 0007, 0022, 0087, 0129, 0138 §3.2
 module Queries
   module Assessment
     class SessionPlayQuery
@@ -17,8 +17,14 @@ module Queries
       # - prompts : la colonne de gauche d'un matching, dans l'ordre des positions, sans id.
       # Trous et nombre : rien de tout cela, aucune ligne answers n'est lue.
       # ADR-0115 : points, unité d'un nombre et début de phrase d'une réponse rédigée, montrés avant la réponse ; jamais le corrigé ni la grille.
-      Question = Data.define(:id, :number, :content, :question_type, :answers, :items, :prompts, :image, :points, :unit, :starter) do
-        def initialize(items: [], prompts: [], image: nil, points: BigDecimal("1"), unit: nil, starter: nil, **) = super
+      # ADR cases §4 : blanks, le nombre de cases (1 à 6, la plus haute case des réponses plus un) ; has_hint : la question a un indice
+      # (jamais son texte : il n'est dans la page qu'après l'ouverture, Lot B).
+      Question = Data.define(:id, :number, :content, :question_type, :answers, :items, :prompts, :image, :points, :unit, :starter,
+                             :blanks, :has_hint, :hint) do
+        def initialize(items: [], prompts: [], image: nil, points: BigDecimal("1"), unit: nil, starter: nil, blanks: 1, has_hint: false, hint: nil, **) = super
+        def hint? = has_hint
+        # Plusieurs cases : la phrase porte un champ par `___` (Assessment::BlanksHelper#blank_segments).
+        def multi_blank? = blanks > 1
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
         def expected_count = Entities::Assessment::Question::EXPECTED.fetch(question_type.to_sym)
         def multiple? = expected_count > 1
@@ -26,7 +32,10 @@ module Queries
         def counted? = Entities::Assessment::Question.kind_for(question_type)::AUTO_GRADED
       end
       # Jamais de colonne correct : une proposition montrée à l'élève ne dit pas si elle est juste. index : rang d'affichage.
-      Answer = Data.define(:id, :content, :index)
+      # blank : la case d'une proposition d'une liste à plusieurs cases (0 sinon).
+      Answer = Data.define(:id, :content, :index, :blank) do
+        def initialize(blank: 0, **) = super
+      end
       Item = Data.define(:index, :content)
       Pair = Data.define(:left, :right)
       # Assez pour <img> : adresse, texte de remplacement, dimensions contre le saut de mise en page (UDR-0129 §3.4).
@@ -39,10 +48,11 @@ module Queries
       end
 
       # La copie rendue à l'élève (UDR-0138 §3.2) : sujet et toutes les questions, mélange de la session. completed? et started? pour l'aiguillage.
-      # statement_blocks : le sujet en blocs de l'exercice (ADR-0115), nil sans blocs ; figure : la figure citée, nil sinon.
+      # statement_blocks : le sujet en blocs de l'exercice (ADR-0115), nil sans blocs ; figure : la figure citée, nil sinon ;
+      # hinted_question_ids : les questions dont l'élève a ouvert l'indice dans cette copie.
       Copy = Data.define(:session_public_id, :student_id, :status, :exercise_public_id, :exercise_title, :statement, :question_count,
-                         :questions, :statement_blocks, :figure) do
-        def initialize(statement_blocks: nil, figure: nil, **) = super
+                         :questions, :statement_blocks, :figure, :hinted_question_ids) do
+        def initialize(statement_blocks: nil, figure: nil, hinted_question_ids: [], **) = super
         def completed? = status == "completed"
         def started? = status == "started"
       end
@@ -78,24 +88,28 @@ module Queries
       # → Copy | nil. Les identifiants ne servent qu'au mélange, ici, côté serveur (ADR-0091 §4.4).
       def copy(public_id:)
         id, public_id, student_id, status, question_count, exercise_id, exercise_public_id, title, statement, statement_blocks,
-          figures, figure_key =
+          figures, figure_key, hinted_question_ids =
           Orm::ExerciseSession.joins(exercise: :course).where(public_id:)
                               .pick("exercise_sessions.id", "exercise_sessions.public_id", "exercise_sessions.student_id", "exercise_sessions.status",
                                     "exercise_sessions.question_count", "exercises.id", "exercises.public_id", "exercises.title", "exercises.statement",
-                                    "exercises.statement_blocks", "courses.figures", "exercises.figure_key")
+                                    "exercises.statement_blocks", "courses.figures", "exercises.figure_key",
+                                    "exercise_sessions.hinted_question_ids")
         return if id.nil?
 
-        rows = Orm::Question.where(exercise_id:).order(:position, :id).pluck(:id, :content, :question_type, :points, :unit, :starter)
+        rows = Orm::Question.where(exercise_id:).order(:position, :id).pluck(:id, :content, :question_type, :points, :unit, :starter, Arel.sql("hint IS NOT NULL"))
+        # Le texte d'un indice n'entre dans la copie que pour les questions dont l'ouverture est enregistrée (UDR §3.8).
+        hints = Orm::Question.where(id: hinted_question_ids).pluck(:id, :hint).to_h
         answers = Orm::Answer.where(question_id: rows.map(&:first)).order(:question_id, :position, :id)
-                             .pluck(:question_id, :id, :content, :match_content).group_by(&:first)
+                             .pluck(:question_id, :id, :content, :match_content, :blank).group_by(&:first)
         images = Orm::QuestionImage.where(question_id: rows.map(&:first)).pluck(:question_id, :public_id, :alt, :width, :height)
                                    .to_h { |question_id, *image| [ question_id, Image.new(*image) ] }
-        questions = rows.each_with_index.map do |(question_id, content, question_type, points, unit, starter), index|
+        questions = rows.each_with_index.map do |(question_id, content, question_type, points, unit, starter, has_hint), index|
+          rows_of = answers.fetch(question_id, []).map { it.drop(1) }
           Question.new(id: question_id, number: index + 1, content:, question_type:, answers: [], image: images[question_id], points:, unit:, starter:,
-                       **sheet(id, question_id, kind_name(question_type), answers.fetch(question_id, []).map { it.drop(1) }))
+                       blanks: (rows_of.map(&:last).max || 0) + 1, has_hint:, hint: hints[question_id], **sheet(id, question_id, kind_name(question_type), rows_of))
         end
         Copy.new(session_public_id: public_id, student_id:, status:, exercise_public_id:, exercise_title: title, statement:, question_count:,
-                 questions:, statement_blocks:, figure: self.class.figure_for(figures, figure_key))
+                 questions:, statement_blocks:, figure: self.class.figure_for(figures, figure_key), hinted_question_ids:)
       end
 
       private
@@ -105,7 +119,8 @@ module Queries
         case kind
         when "choice", "select"
           contents = rows.to_h { |id, content, _| [ id, content ] }
-          { answers: shuffled(session_id, question_id, contents.keys).each_with_index.map { |id, index| Answer.new(id:, content: contents[id], index:) } }
+          cases = rows.to_h { |id, _, _, blank| [ id, blank ] }
+          { answers: shuffled(session_id, question_id, contents.keys).each_with_index.map { |id, index| Answer.new(id:, content: contents[id], index:, blank: cases[id]) } }
         when "ordering" then { items: items(session_id, question_id, rows.to_h { |id, content, _| [ id, content ] }) }
         when "matching" then { prompts: rows.map { it[1] }, items: items(session_id, question_id, rows.to_h { |id, _, right| [ id, right ] }) }
         else {}

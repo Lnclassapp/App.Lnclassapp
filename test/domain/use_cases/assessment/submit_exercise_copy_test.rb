@@ -359,6 +359,32 @@ module UseCases
 
         assert_equal :not_found, use_case.call(actor: STUDENT, dto: Dtos::Assessment::CopyInput.new(session_public_id: "inconnue")).code
       end
+
+      def two_select
+        answers = [ Answer.new(id: 21, position: 1, content: "a", correct: true, blank: 0), Answer.new(id: 22, position: 2, content: "b", correct: false, blank: 0),
+                    Answer.new(id: 23, position: 3, content: "c", correct: true, blank: 1), Answer.new(id: 24, position: 4, content: "d", correct: false, blank: 1) ]
+        question = Question.new(id: 2, position: 1, content: "___ et ___", explanation: nil, question_type: "select", answers:)
+        Entities::Assessment::Exercise.new(id: 40, public_id: "ExErCiCe000040", course_id: 3, essential_id: 9, title: "Listes",
+                                           exercise_type: "fixation", status: "published", parents_published: true, questions: [ question ])
+      end
+
+      test "une liste à plusieurs cases : un indice non vide illisible ou hors bornes refuse la copie, une case vide reste vide" do
+        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: 5, question_id: 2, ids: [ 21, 22, 23, 24 ])
+        right = shuffled.index(21).to_s
+
+        [ "99", "-1", "abc" ].each do |bad|
+          result = submit({ "2" => { blanks: { "0" => right, "1" => bad } } }, exercise: two_select)
+
+          assert_equal [ :invalid, { answer_ids: [ :wrong_selection ] } ], [ result.code, result.errors[1] ], "saisie #{bad.inspect}"
+          assert_empty @sessions.copies
+        end
+
+        result = submit({ "2" => { blanks: { "0" => right, "1" => "" } } }, exercise: two_select)
+        attempt = @sessions.copies.sole[:attempts].sole
+
+        assert result.success?, result.errors.inspect
+        assert_equal [ [ true, false ], [ 21 ] ], [ attempt[:blank_results], attempt[:selected_answer_ids] ]
+      end
     end
   end
 end

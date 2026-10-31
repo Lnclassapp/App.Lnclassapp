@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::SubmitExerciseCopy
 # Rôle : l'élève rend la copie entière d'un exercice : toutes les réponses lues, corrigées, notées et la session close, en un envoi
-# ADR  : 0026, 0054, 0091 (§4.4 : indices d'affichage relus par AnswerShuffle), 0112, 0115 (réponse rédigée, cahier) · UDR : 0138
+# ADR  : 0026, 0054, 0091 (§4.4 : indices d'affichage relus par AnswerShuffle), 0112, 0115 (réponse rédigée, cahier), 0120-questions-a-plusieurs-cases-et-indice (§4 : une réponse et un verdict par case) · UDR : 0138
 module UseCases
   module Assessment
     class SubmitExerciseCopy
@@ -16,6 +16,12 @@ module UseCases
           super("copie non rendue")
         end
       end
+
+      # Les types qui jugent case par case (ADR cases §4) ; les autres n'ont jamais qu'une case.
+      BLANK_KINDS = [ Entities::Assessment::QuestionKinds::Numeric, Entities::Assessment::QuestionKinds::FillBlank,
+                      Entities::Assessment::QuestionKinds::Select ].freeze
+      BLANK_SEPARATOR = " ; ".freeze
+      INVALID_PICK = :invalid_pick
 
       def initialize(sessions:, exercises:, policy:, close:, transaction:, clock:)
         @sessions = sessions
@@ -106,12 +112,48 @@ module UseCases
       def attempt_for(session, question, input)
         return [ nil, input.errors.details.transform_values { |details| details.pluck(:error) } ] unless input.valid?
 
+        return multi_blank_attempt(session, question, input) if multi_blank?(question)
+
         response = response_for(question, session, input)
         return [ nil, question.kind::INVALID ] unless question.well_formed?(response)
         return [ nil, { response_text: [ :too_long ] } ] if too_long_for_short_answer?(question, response)
 
         [ { question_id: question.id, selected_answer_ids: response.is_a?(String) ? [] : response,
             response_text: (response if response.is_a?(String)), correct: question.correct?(response), unanswered: false }, nil ]
+      end
+
+      def multi_blank?(question) = question.blanks > 1 && BLANK_KINDS.include?(question.kind)
+
+      # Une question à plusieurs cases : une réponse par case, un verdict par case ; correct vaut « toutes les cases justes ».
+      # response_text garde les réponses mises bout à bout (la ligne doit porter une réponse), sauf pour une liste, dont les
+      # propositions choisies sont dans selected_answer_ids.
+      def multi_blank_attempt(session, question, input)
+        response = blank_response(question, session, input)
+        return [ nil, question.kind::INVALID ] unless question.well_formed?(response)
+
+        results = question.blank_results(response)
+        texts = question.kind.respond_to?(:blank_texts) ? question.kind.blank_texts(question, response) : response
+        select = question.kind.equal?(Entities::Assessment::QuestionKinds::Select)
+        [ { question_id: question.id, selected_answer_ids: (response.compact if select) || [], response_text: (texts.join(BLANK_SEPARATOR) unless select),
+            correct: results.all?, blank_responses: texts, blank_results: results, unanswered: false }, nil ]
+      end
+
+      # Un texte par case (chiffré, trous), ou l'identifiant de la proposition choisie dans chaque case (liste) : l'indice d'affichage
+      # posté se relit dans le mélange de la session. Une case sautée est vide ; une case en trop reste, pour que la copie soit refusée.
+      def blank_response(question, session, input)
+        posted = input.blanks + Array.new([ question.blanks - input.blanks.size, 0 ].max, "")
+        return posted unless question.kind.equal?(Entities::Assessment::QuestionKinds::Select)
+
+        shuffled = Entities::Assessment::AnswerShuffle.for(session_id: session.id, question_id: question.id, ids: question.answer_ids)
+        posted.map { |index| shown_id(shuffled, index) }
+      end
+
+      # Vide : la case est laissée vide (nil). Non vide, illisible ou hors bornes : INVALID_PICK, que well_formed? refuse.
+      def shown_id(shuffled, index)
+        return nil if index.strip.empty?
+
+        at = index.match?(Dtos::Assessment::AttemptInput::INTEGER) ? index.to_i : nil
+        at&.between?(0, shuffled.size - 1) ? shuffled[at] : INVALID_PICK
       end
 
       # Seule la réponse rédigée a droit à 2 000 caractères ; trous et nombre restent à 200 (menace W2).

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::EssentialRepositoryPort
 # Rôle : contrat de persistance des fiches essentielles d'un cours
-# ADR  : 0029, 0035, 0039
+# ADR  : 0029, 0035, 0039, 0119-entrainement-de-notion-corrige-sans-trace
 module Ports
   module Catalog
     module EssentialRepositoryPort
@@ -42,6 +42,13 @@ module Ports
       # → Set[String]
       def taken_slugs
         raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"
+      end
+
+      # La notion d'une leçon avec son entraînement, pour le juger sans rien écrire. statuses : les statuts de notion lisibles par l'acteur
+      # (["published"], ou brouillons compris pour l'équipe). → objet qui répond à slug, name, status, course_status, level_id et
+      # practice (Entities::Catalog::NotionPractice), ou nil si la leçon ou la notion est absente, d'un autre statut, ou sans entraînement
+      def practice_for(course_slug:, notion_slug:, statuses:)
+        raise NotImplementedError, "#{self.class} doit implémenter #practice_for"
       end
 
       # Publication en cascade : slugs des fiches brouillon du cours, dans l'ordre du cours. → [String]

@@ -65,6 +65,64 @@ module Entities
           assert_equal [ :duplicate_options ], twins.structure_errors
           assert_equal [ :blank_option ], empty.structure_errors
         end
+
+        # ADR cases §4 : 2 à 10 propositions par case, dont une seule correcte ; au plus 6 cases.
+        def multi(*cases, content: nil)
+          id = 0
+          answers = cases.each_with_index.flat_map do |flags, blank|
+            flags.map { |correct| Answer.new(id: id += 1, position: id, content: "Choix #{id}", correct:, blank:) }
+          end
+          Question.new(id: 9, position: 1, content: content || (%w[___] * cases.size).join(" puis "), explanation: nil, question_type: "select", answers:)
+        end
+
+        test "plusieurs cases : le verdict de chaque case, une proposition par case" do
+          two = multi([ false, true ], [ true, false, false ])
+
+          assert_equal 2, two.blanks
+          assert_equal [ true, true ], two.blank_results([ 2, 3 ])
+          assert_equal [ true, false ], two.blank_results([ 2, 4 ])
+          assert_equal [ false, false ], two.blank_results([ nil, nil ])
+          assert two.correct?([ 2, 3 ])
+          assert_not two.correct?([ 2, 4 ])
+          assert_not two.correct?([ 1, 3 ])
+        end
+
+        test "une question à une case a un seul verdict" do
+          assert_equal [ true ], question(false, true).blank_results([ 2 ])
+          assert_equal [ false ], question(false, true).blank_results([ 1 ])
+        end
+
+        test "plusieurs cases : bien formée si chaque proposition est de sa case, une case laissée vide est fausse" do
+          two = multi([ false, true ], [ true, false ])
+
+          assert two.well_formed?([ 2, 3 ])
+          assert two.well_formed?([ nil, 3 ])
+          assert_not two.well_formed?([ 3, 3 ])
+          assert_not two.well_formed?([ 2 ])
+          assert_not two.well_formed?([ 2, 3, 3 ])
+        end
+
+        test "structure : chaque case a ses propositions, autant de ___ que de cases" do
+          assert_empty multi([ true, false ], [ false, true, false ]).structure_errors
+          assert_equal [ :blank_markers_mismatch ], multi([ true, false ], [ false, true ], content: "Un ___").structure_errors
+          assert_equal [ :options_count ], multi([ true, false ], [ true ]).structure_errors
+          assert_equal [ :wrong_correct_count ], multi([ true, false ], [ false, false ]).structure_errors
+        end
+
+        test "structure : une case sans proposition est refusée" do
+          gap = multi([ true, false ], [ true, false ], [ true, false ]).then { it.with(answers: it.answers.reject { |a| a.blank == 1 }) }
+
+          assert_equal [ :blank_without_answer ], gap.structure_errors
+        end
+
+        test "structure : les propositions d'une case sont distinctes, mais deux cases peuvent répéter la même" do
+          same = Question.new(id: 9, position: 1, content: "___ ___", explanation: nil, question_type: "select",
+                              answers: [ Answer.new(id: 1, position: 1, content: "Vrai", correct: true, blank: 0), Answer.new(id: 2, position: 2, content: "Faux", correct: false, blank: 0),
+                                         Answer.new(id: 3, position: 3, content: "Vrai", correct: true, blank: 1), Answer.new(id: 4, position: 4, content: "Faux", correct: false, blank: 1) ])
+
+          assert_empty same.structure_errors
+          assert_equal [ :duplicate_options ], same.with(answers: same.answers.map { it.id == 4 ? it.with(content: "vrai") : it }).structure_errors
+        end
       end
     end
   end

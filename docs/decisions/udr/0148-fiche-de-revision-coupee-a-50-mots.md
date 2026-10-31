@@ -1,4 +1,4 @@
-# UDR-0147 : La fiche de révision coupée à 50 mots
+# UDR-0148 : La fiche de révision coupée à 50 mots
 <!-- index
 titre: Fiche de révision coupée à 50 mots
 statut: Accepté

@@ -41,4 +41,4 @@ Voir le memo.
 ## 6. Décisions
 
 - Pas d'ADR : ni port, ni table, ni contrat ne bougent ; seule la valeur d'une constante du domaine change.
-- UDR-0147, qui amende UDR-0139 §3.2 et UDR-0141.
+- UDR-0148, qui amende UDR-0139 §3.2 et UDR-0141.

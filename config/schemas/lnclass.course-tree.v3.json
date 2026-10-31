@@ -212,6 +212,33 @@
           "then": {
             "$ref": "#/$defs/exercise"
           }
+        },
+        "practice": {
+          "description": "Entraînement facultatif de la notion (ADR entraînement corrigé sans trace) : 1 à 6 questions sans points, image ni grille ; les règles de chaque question et l'empreinte sont vérifiées par l'adaptateur (Entities::Catalog::NotionPractice).",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "questions"
+          ],
+          "properties": {
+            "statement": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 1200
+            },
+            "questions": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "$ref": "#/$defs/practice_question"
+              }
+            }
+          }
         }
       }
     },
@@ -336,6 +363,80 @@
           ],
           "minimum": 0,
           "maximum": 99999999.9999
+        },
+        "hint": {
+          "description": "Indice facultatif (ADR questions à plusieurs cases) : 500 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "content",
+        "question_type",
+        "answers"
+      ]
+    },
+    "practice_question": {
+      "description": "Une question d'entraînement : celle d'un exercice noté, sans points, image ni grille.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "question_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "explanation": {
+          "description": "La correction rédigée, obligatoire pour toute question (ADR-0116 §4.1) : 20 à 2 000 caractères, vérifiés par l'adaptateur (raisons blank, too_short, too_long).",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unité d'une question numeric : 10 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10
+        },
+        "starter": {
+          "description": "Début de phrase d'une question written : 150 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 150
+        },
+        "answers": {
+          "description": "Dix propositions au plus par question.",
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/answer"
+          }
+        },
+        "tolerance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 99999999.9999
+        },
+        "hint": {
+          "description": "Indice facultatif (ADR questions à plusieurs cases) : 500 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
         }
       },
       "required": [
@@ -388,6 +489,15 @@
             "null"
           ],
           "maxLength": 500
+        },
+        "blank": {
+          "description": "La case (0 à 5) à laquelle la réponse se rattache ; 0 sans la clé.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
         }
       }
     }

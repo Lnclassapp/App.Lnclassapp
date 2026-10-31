@@ -1,4 +1,9 @@
 <%# 🌐 UI · assessment/session_results/kinds/_select_review — « Ta réponse » d'un choix dans une liste, dans la correction %>
 <%# Rôle : la proposition choisie, puis avec reveal la proposition correcte ; mêmes lignes qu'un choix à cocher %>
 <%# ADR  : 0115 · UDR : 0140 · locals: (question:, reveal:) %>
-<%= render "assessment/session_results/kinds/choice_review", question:, reveal: %>
+<%# Plusieurs cases (0120-questions-a-plusieurs-cases-et-indice §4) : la phrase et un verdict par case. %>
+<% if question.multi_blank? %>
+  <%= render "assessment/session_results/kinds/blanks_review", question:, reveal: %>
+<% else %>
+  <%= render "assessment/session_results/kinds/choice_review", question:, reveal: %>
+<% end %>

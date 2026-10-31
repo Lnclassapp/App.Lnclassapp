@@ -250,6 +250,69 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Une pyramide a pour base un carré de côté 9 cm et pour hauteur 10 cm.",
+            "questions": [
+              {
+                "content": "Quelle expression donne son volume ?",
+                "question_type": "select",
+                "hint": "Il faut l'aire de la base (pas son côté) et le facteur de la pyramide.",
+                "explanation": "Étape 1 — Identifier : la base est un carré de côté 9 cm, la hauteur est $h = 10$ cm. Étape 2 — Aire de la base : $B = 9 \\times 9 = 81$ cm². Étape 3 — Formule : $V = \\frac{1}{3} \\times B \\times h = \\frac{1}{3} \\times 81 \\times 10$. Sans le facteur $\\frac{1}{3}$ on obtiendrait le volume d'un pavé droit ; avec $9$ à la place de $B$, on oublie d'élever le côté au carré.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{3} \\times 81 \\times 10$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$81 \\times 10$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{1}{3} \\times 9 \\times 10$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{1}{2} \\times 81 \\times 10$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule le volume de cette pyramide en cm³.",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0.01,
+                "hint": "Calcule d'abord l'aire $B$ du carré, puis prends le tiers de $B \\times h$.",
+                "explanation": "Étape 1 — Identifier : base carrée de côté 9 cm, $h = 10$ cm, même unité. Étape 2 — $B = 9 \\times 9 = 81$ cm². Étape 3 — $V = \\frac{1}{3} \\times 81 \\times 10$. Étape 4 — $V = 27 \\times 10 = 270$ cm³.",
+                "answers": [
+                  {
+                    "content": "270",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux pyramides ont la même base carrée de côté 6 cm. La première a pour hauteur 5 cm, la seconde 7 cm. $V_1$ (cm³) = ___   $V_2$ (cm³) = ___",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0.01,
+                "hint": "L'aire de la base est la même pour les deux : calcule-la une seule fois.",
+                "explanation": "Étape 1 — Identifier : base carrée de côté 6 cm, hauteurs 5 cm et 7 cm. Étape 2 — $B = 6 \\times 6 = 36$ cm². Étape 3 — $V_1 = \\frac{1}{3} \\times 36 \\times 5$ et $V_2 = \\frac{1}{3} \\times 36 \\times 7$. Étape 4 — $V_1 = 12 \\times 5 = 60$ cm³ et $V_2 = 12 \\times 7 = 84$ cm³. Contrôle : la pyramide la plus haute a le plus grand volume.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "84",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -382,6 +445,71 @@
                   {
                     "content": "Faux",
                     "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un cône de révolution a pour diamètre de base 10 cm et pour hauteur 9 cm.",
+            "questions": [
+              {
+                "content": "Quel est le rayon de la base ? $r$ (cm) = ___",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "Le rayon est la moitié du diamètre.",
+                "explanation": "Étape 1 — Identifier : l'énoncé donne le diamètre 10 cm. Le rayon est la moitié du diamètre : $r = 10 \\div 2 = 5$ cm. La hauteur est $h = 9$ cm. Prendre 10 comme rayon serait l'erreur classique.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Donne la valeur exacte de son volume. $V$ = ___ $\\pi$ cm³",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Garde $\\pi$ dans le calcul : tu cherches le nombre qui multiplie $\\pi$.",
+                "explanation": "Étape 1 — Identifier : $r = 5$ cm, $h = 9$ cm. Étape 2 — $B = \\pi \\times 5^2 = 25\\pi$ cm². Étape 3 — $V = \\frac{1}{3} \\times 25\\pi \\times 9$. Étape 4 — $V = 25\\pi \\times 3 = 75\\pi$ cm³ (valeur exacte).",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Avec $\\pi \\approx 3{,}14$, donne la valeur approchée de ce volume en cm³.",
+                "question_type": "numeric",
+                "unit": "cm³",
+                "tolerance": 0.01,
+                "hint": "Remplace $\\pi$ par $3{,}14$ dans la valeur exacte.",
+                "explanation": "Étape 1 — Identifier : $r = 5$ cm, $h = 9$ cm. Étape 2 — $B = 25\\pi$. Étape 3 — $V = 75\\pi$ cm³. Étape 4 — Avec $\\pi \\approx 3{,}14$ : $V \\approx 75 \\times 3{,}14 = 235{,}5$ cm³.",
+                "answers": [
+                  {
+                    "content": "235.5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux cônes de révolution : le premier a pour rayon 3 cm et pour hauteur 6 cm, le second a pour rayon 6 cm et pour hauteur 3 cm. Donne leurs volumes exacts. $V_1$ = ___ $\\pi$ cm³   $V_2$ = ___ $\\pi$ cm³",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "N'oublie pas d'élever le rayon au carré avant de multiplier par la hauteur.",
+                "explanation": "Étape 1 — Identifier : $r_1 = 3$ cm, $h_1 = 6$ cm ; $r_2 = 6$ cm, $h_2 = 3$ cm. Étape 2 — $B_1 = 9\\pi$ cm² et $B_2 = 36\\pi$ cm². Étape 3 — $V_1 = \\frac{1}{3} \\times 9\\pi \\times 6$ et $V_2 = \\frac{1}{3} \\times 36\\pi \\times 3$. Étape 4 — $V_1 = 18\\pi$ cm³ et $V_2 = 36\\pi$ cm³. Le rayon est au carré : l'élargir pèse plus que d'allonger la hauteur.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "36",
+                    "correct": true,
+                    "blank": 1
                   }
                 ]
               }
@@ -522,6 +650,81 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Un cône de révolution a pour rayon 8 cm et pour hauteur 15 cm.",
+            "questions": [
+              {
+                "content": "Quelle expression donne son aire latérale ?",
+                "question_type": "select",
+                "hint": "La formule utilise la génératrice, pas la hauteur.",
+                "explanation": "Étape 1 — Identifier : $r = 8$ cm, $h = 15$ cm. Étape 2 — Génératrice : $g^2 = 8^2 + 15^2 = 64 + 225 = 289$, donc $g = 17$ cm. Étape 3 — $A = \\pi \\times r \\times g = \\pi \\times 8 \\times 17$. Avec $h$ à la place de $g$ on trouve une aire trop petite ; $\\pi r^2$ est l'aire de la base, pas l'aire latérale.",
+                "answers": [
+                  {
+                    "content": "$\\pi \\times 8 \\times 17$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\pi \\times 8 \\times 15$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\pi \\times 17 \\times 15$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\pi \\times 8^2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule la génératrice $g$ de ce cône.",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "La génératrice est l'hypoténuse du triangle formé par $r$ et $h$.",
+                "explanation": "Étape 1 — Repérer le triangle rectangle de côtés $r = 8$ cm et $h = 15$ cm, d'hypoténuse $g$. Étape 2 — Pythagore : $g^2 = 8^2 + 15^2 = 64 + 225 = 289$. Étape 3 et 4 — $g = \\sqrt{289} = 17$ cm.",
+                "answers": [
+                  {
+                    "content": "17",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Donne la valeur exacte de son aire latérale. $A$ = ___ $\\pi$ cm²",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Utilise la génératrice $g$ que tu viens de calculer.",
+                "explanation": "Étape 1 — Identifier : $r = 8$ cm, $h = 15$ cm. Étape 2 — $g = 17$ cm (Pythagore). Étape 3 — $A = \\pi \\times 8 \\times 17$. Étape 4 — $A = 136\\pi$ cm².",
+                "answers": [
+                  {
+                    "content": "136",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux cônes de révolution : le premier a pour rayon 12 cm et pour hauteur 5 cm, le second a pour rayon 15 cm et pour hauteur 8 cm. Donne leurs aires latérales exactes. $A_1$ = ___ $\\pi$ cm²   $A_2$ = ___ $\\pi$ cm²",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Calcule d'abord chaque génératrice avec Pythagore.",
+                "explanation": "Étape 1 — Identifier : $r_1 = 12$, $h_1 = 5$ ; $r_2 = 15$, $h_2 = 8$. Étape 2 — $g_1^2 = 12^2 + 5^2 = 169$ donc $g_1 = 13$ cm ; $g_2^2 = 15^2 + 8^2 = 289$ donc $g_2 = 17$ cm. Étape 3 — $A_1 = \\pi \\times 12 \\times 13$ et $A_2 = \\pi \\times 15 \\times 17$. Étape 4 — $A_1 = 156\\pi$ cm² et $A_2 = 255\\pi$ cm².",
+                "answers": [
+                  {
+                    "content": "156",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "255",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -658,6 +861,97 @@
                   {
                     "content": "Faux",
                     "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Une pyramide régulière a pour base un carré de côté 16 cm et pour hauteur 15 cm.",
+            "questions": [
+              {
+                "content": "Complète : cette pyramide a ___ faces latérales, et son apothème est ___ sa hauteur.",
+                "question_type": "select",
+                "hint": "Compte les côtés de la base ; l'apothème est le côté incliné du triangle rectangle.",
+                "explanation": "Étape 1 — Repérer : la base est un carré, donc $n = 4$ faces latérales. L'apothème est la hauteur d'une face latérale : il est incliné et touche le bord de la base, alors que la hauteur de la pyramide est verticale. Étape 2 — On le vérifie par le calcul : $a^2 = 15^2 + 8^2 = 289$, $a = 17$ cm, plus grand que $h = 15$ cm.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "plus grand que",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "égal à",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "plus petit que",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule l'apothème $a$ de cette pyramide.",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0.01,
+                "hint": "Pour une base carrée, utilise la moitié du côté.",
+                "explanation": "Étape 1 — Repérer : $c = 16$ cm, $h = 15$ cm, donc $\\frac{c}{2} = 8$ cm. Étape 2 — $a^2 = h^2 + \\left(\\frac{c}{2}\\right)^2 = 15^2 + 8^2 = 225 + 64 = 289$. Donc $a = 17$ cm.",
+                "answers": [
+                  {
+                    "content": "17",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule l'aire latérale de cette pyramide en cm².",
+                "question_type": "numeric",
+                "unit": "cm²",
+                "tolerance": 0.01,
+                "hint": "Calcule d'abord l'aire d'une seule face.",
+                "explanation": "Étape 1 — Repérer : $n = 4$, $c = 16$ cm, $h = 15$ cm. Étape 2 — $a^2 = 15^2 + 8^2 = 289$, donc $a = 17$ cm. Étape 3 — Une face : $\\frac{16 \\times 17}{2} = 136$ cm². Étape 4 — $A = 4 \\times 136 = 544$ cm².",
+                "answers": [
+                  {
+                    "content": "544",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux pyramides régulières ont des faces latérales d'apothème 5 cm et de base de côté 4 cm : la première a pour base un hexagone régulier (6 faces), la seconde un triangle équilatéral (3 faces). $A_1$ (cm²) = ___   $A_2$ (cm²) = ___",
+                "question_type": "numeric",
+                "unit": "cm²",
+                "tolerance": 0.01,
+                "hint": "Une face a la même aire dans les deux pyramides : seul $n$ change.",
+                "explanation": "Étape 1 — Repérer : $c = 4$ cm, $a = 5$ cm ; $n_1 = 6$ et $n_2 = 3$. Étape 2 — L'apothème est donné. Étape 3 — Une face : $\\frac{4 \\times 5}{2} = 10$ cm². Étape 4 — $A_1 = 6 \\times 10 = 60$ cm² et $A_2 = 3 \\times 10 = 30$ cm².",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "30",
+                    "correct": true,
+                    "blank": 1
                   }
                 ]
               }
