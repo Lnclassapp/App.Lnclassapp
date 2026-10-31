@@ -36,7 +36,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-31 |
+| **PR** | [#418](https://github.com/Lnclassapp/App.Lnclassapp/pull/418), fusionnée dans `Develop` le 2026-10-31 |
+| **ADR produits** | aucun |
+| **UDR produits** | aucun |
