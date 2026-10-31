@@ -1,0 +1,499 @@
+/*
+  🌐 UI · prepare_sheet.css — les feuilles « Prépare interros » et « Prépare devoirs » de la page d'une leçon, à l'identique des maquettes.
+  Rôle : styles des maquettes de Touré (docs/chantiers/prepare-interros-cahier/maquettes/) transcrits tels quels en classes `.ps-*` :
+         noir, blanc et gris (#d6d6d6, #f5f5f5, #e8e8e8, #999), rayon 0, police Source Serif 4 auto-hébergée. Isolé du reste de
+         l'application, chargé seulement sur la page d'une leçon (stylesheet_link_tag "prepare_sheet"), servi tel quel par Propshaft.
+  ADR  : 0121 · UDR-0149 (§3 Tokens : exception assumée)
+
+  Classes : .ps-page (fond gris, conteneur des feuilles) > .ps-sheet (feuille blanche de 880 px) > .ps-header (cartouche), .ps-title-block,
+  .ps-remember, .ps-exercise, .ps-footer. Dans .ps-exercise : .ps-exercise-top (.ps-exercise-main > .ps-exercise-head > .ps-status,
+  .ps-statement ; .ps-figure), .ps-question (.ps-question-row > .ps-question-label > .ps-tag ; .ps-choices-vf > .ps-choice-vf ;
+  .ps-input, .ps-input--num ; .ps-choices > .ps-choice > .ps-choice-letter ; .ps-verdict), .ps-hint, .ps-actions (.ps-btn--primary,
+  .ps-btn--hint, .ps-btn--redo, .ps-btn--choose). Devoir composé (Lot E) : .ps-batch (bandeau fixe) > .ps-batch-card > .ps-batch-status,
+  .ps-batch-limit, .ps-batch-row (.ps-batch-count). État choisi : aria-checked="true" sur .ps-choice et .ps-choice-vf, .ps-input--filled
+  sur un champ rempli. Réponse fausse : .ps-verdict--wrong (italique).
+*/
+
+/* ---- Police hébergée par Lnclass (OFL, sous-ensemble latin) : ADR-0049 interdit toute police tierce ------------------- */
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: normal;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("/source-serif-4-latin-wght-normal.woff2") format("woff2-variations");
+}
+
+@font-face {
+  font-family: "Source Serif 4";
+  font-style: italic;
+  font-weight: 200 900;
+  font-display: swap;
+  src: url("/source-serif-4-latin-wght-italic.woff2") format("woff2-variations");
+}
+
+/* ---- Page et feuille ------------------------------------------------------------------------------------------------ */
+
+.ps-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0px, (100vw - 700px) * 100, 32px);
+  padding: clamp(0px, (100vw - 700px) * 100, 32px) clamp(0px, (100vw - 700px) * 100, 12px) 64px;
+  background: #d6d6d6;
+  font-family: "Source Serif 4", "DejaVu Serif", Georgia, serif;
+  color: #000;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+.ps-page a {
+  color: #000;
+}
+
+.ps-page a:hover {
+  color: #333;
+}
+
+.ps-page :focus-visible,
+.ps-page input:focus {
+  outline: 2px solid #000;
+  outline-offset: 1px;
+}
+
+.ps-page [hidden] {
+  display: none;
+}
+
+.ps-sheet {
+  width: 100%;
+  max-width: 880px;
+  box-sizing: border-box;
+  background: #fff;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+  padding: clamp(20px, 4vw, 44px) clamp(16px, 5vw, 52px) 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Cartouche */
+.ps-header {
+  border: 2px solid #000;
+  padding: 12px 14px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr));
+  gap: 2px 16px;
+}
+
+.ps-header-title {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.ps-header-title--right,
+.ps-header-right {
+  text-align: right;
+}
+
+/* Titre et progression */
+.ps-title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.ps-title {
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
+  text-wrap: balance;
+}
+
+.ps-progress {
+  font-size: 15px;
+  font-style: italic;
+}
+
+/* « À retenir » et « Notions mobilisées » */
+.ps-remember {
+  border: 1px solid #000;
+  background: #f5f5f5;
+  padding: 8px 12px;
+  font-size: 15px;
+  text-wrap: pretty;
+}
+
+/* ---- Exercice ------------------------------------------------------------------------------------------------------- */
+
+.ps-exercise {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  border: 1px solid #999;
+  padding: 12px 14px;
+}
+
+.ps-exercise-top {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: flex-start;
+}
+
+.ps-exercise-main {
+  flex: 1 1 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ps-exercise-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  font-weight: 700;
+}
+
+.ps-status {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.ps-statement {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+.ps-figure {
+  max-width: 100%;
+  height: auto;
+  flex: none;
+}
+
+/* Figure d'un exercice : étiquettes lisibles. Téléphone : toute la colonne, centrée, 320 px au plus ; ordinateur : 300 px à côté de l'énoncé. */
+.ps-exercise-figure {
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
+}
+
+@media (min-width: 48rem) {
+  .ps-exercise-figure {
+    width: 300px;
+    margin-inline: 0;
+  }
+}
+
+/* Question */
+.ps-question {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ps-question-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 10px;
+}
+
+.ps-question-label {
+  flex: 1 1 220px;
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+  text-wrap: pretty;
+}
+
+.ps-tag {
+  flex: none;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border: 1px solid #000;
+  padding: 0 5px;
+  line-height: 1.6;
+}
+
+/* Vrai ou faux */
+.ps-choices-vf {
+  display: flex;
+  gap: 6px;
+}
+
+.ps-choice-vf {
+  min-width: 72px;
+  min-height: 38px;
+  padding: 4px 12px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+/* QCM */
+.ps-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.ps-choice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  text-align: left;
+  min-height: 40px;
+  padding: 6px 12px 6px 8px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 15.5px;
+  cursor: pointer;
+}
+
+.ps-choice-letter {
+  flex: none;
+  width: 22px;
+  font-weight: 700;
+}
+
+.ps-choice-label {
+  text-wrap: pretty;
+}
+
+.ps-choice[aria-checked="true"],
+.ps-choice-vf[aria-checked="true"] {
+  border-width: 2px;
+  background: #e8e8e8;
+}
+
+/* Champs : complète (texte) et calcul (nombre) */
+.ps-input {
+  width: 150px;
+  box-sizing: content-box;
+  font: inherit;
+  padding: 3px 8px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+  text-align: center;
+}
+
+.ps-input--num {
+  width: 84px;
+}
+
+.ps-input--filled {
+  border-width: 2px;
+}
+
+.ps-numeric {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Verdict d'une question, une fois l'exercice vérifié */
+.ps-verdict {
+  font-size: 14.5px;
+  font-weight: 700;
+  font-style: normal;
+}
+
+.ps-verdict--wrong {
+  font-style: italic;
+}
+
+/* Indice */
+.ps-hint {
+  border: 1px dashed #000;
+  padding: 8px 12px;
+  font-size: 15px;
+  text-wrap: pretty;
+}
+
+/* Barre d'actions */
+.ps-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  border-top: 1px solid #999;
+  padding-top: 10px;
+  margin-top: 4px;
+}
+
+.ps-btn {
+  min-height: 44px;
+  padding: 6px 14px;
+  border: 1px solid #000;
+  border-radius: 0;
+  background: #fff;
+  color: #000;
+  font: inherit;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.ps-btn:hover {
+  background: #f2f2f2;
+}
+
+.ps-btn--primary {
+  padding: 6px 22px;
+  background: #000;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.ps-btn--primary:hover {
+  background: #333;
+}
+
+.ps-btn--redo {
+  padding: 6px 16px;
+}
+
+.ps-btn[disabled],
+.ps-btn[aria-busy="true"] {
+  cursor: progress;
+}
+
+.ps-error {
+  margin: 0;
+  border: 2px solid #000;
+  padding: 8px 12px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+/* ---- Pied de feuille ------------------------------------------------------------------------------------------------ */
+
+.ps-footer {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  border-top: 1.5px solid #000;
+  padding-top: 10px;
+  font-size: 14px;
+}
+
+.ps-link-button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-size: 14px;
+  text-decoration: underline;
+  cursor: pointer;
+  color: #000;
+}
+
+/* ---- Devoir composé par l'enseignant (case « Choisir » et bandeau d'envoi) ------------------------------------------- */
+
+.ps-btn--choose {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ps-btn--choose::before {
+  content: "";
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: 2px solid currentColor;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ps-btn--choose[aria-checked="true"] {
+  background: #000;
+  color: #fff;
+  font-weight: 700;
+}
+
+.ps-btn--choose[aria-checked="true"]:hover {
+  background: #333;
+}
+
+.ps-btn--choose[aria-checked="true"]::before {
+  content: "✓";
+}
+
+/* Collé au bas de l'écran, au-dessus de la feuille ; invisible tant qu'aucun exercice n'est choisi. */
+.ps-batch {
+  position: fixed;
+  inset: auto 0 0 0;
+  z-index: 40;
+  display: flex;
+  justify-content: center;
+  padding: 0 8px 8px;
+  pointer-events: none;
+}
+
+.ps-batch[hidden],
+.ps-batch [hidden] {
+  display: none;
+}
+
+.ps-batch-card {
+  pointer-events: auto;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 880px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 2px solid #000;
+  background: #fff;
+  color: #000;
+  padding: 10px 14px;
+  font-size: 16px;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.15);
+}
+
+.ps-batch-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 16px;
+}
+
+.ps-batch-count {
+  font-weight: 700;
+}
+
+.ps-batch-status,
+.ps-batch-limit {
+  margin: 0;
+  font-size: 15px;
+}
+
+.ps-batch-status p {
+  margin: 0;
+}
+
+.ps-batch .ps-link-button {
+  min-height: 44px;
+  padding: 0 6px;
+  font-size: 15px;
+}

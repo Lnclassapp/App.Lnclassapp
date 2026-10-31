@@ -1,0 +1,64 @@
+<%# 🌐 UI · catalog/courses/sheets/_question — une question de la feuille : étiquette de type, énoncé, champ ou propositions, verdict une fois corrigée %>
+<%# Rôle : QCM (radiogroup ou group), vrai ou faux (radiogroup), « Complète » et « Calcul » (champ) tels que la maquette ; les autres types gardent leur partiel de la copie ; sans champ pour l'enseignant et l'équipe ; jamais de bonne réponse ici %>
+<%# ADR  : 0121, 0091 §4.4 · UDR : 0149 §3 (QCM et Vrai ou faux : role=radiogroup, aria-checked ; champs : aria-label = l'intitulé) %>
+<%# locals: (question:, fields: true, checked: false) -%>
+<%# question : PrepareSheetsQuery::Question · les champs se postent en copy[answers][<question_id>][display_order | response_text] %>
+<% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
+<% field = "copy[answers][#{question.id}]" %>
+<% label = "#{(96 + question.number).chr}. #{question.content.to_s.sub(marker, "…")}" %>
+<% name = question.content.to_s.sub(marker, t("assessment.exercise_sessions.kinds.fill_blank.blank")) %>
+<% filled = question.response.present? %>
+<% kind = question.kind %>
+<div class="ps-question">
+  <% if question.image %>
+    <%= tag.img src: question_image_path(question.image.public_id), alt: question.image.alt.to_s, width: question.image.width,
+                height: question.image.height, loading: "lazy", decoding: "async", class: "ps-figure" %>
+  <% end %>
+  <div class="ps-question-row">
+    <span class="ps-question-label">
+      <% if kind != :other %><span class="ps-tag"><%= t("catalog.courses.sheets.kinds.#{kind}") %></span><% end %>
+      <span data-controller="math"><%= label %></span>
+    </span>
+    <% case kind %>
+    <% when :true_false %>
+      <%= tag.div class: "ps-choices-vf", role: (fields ? "radiogroup" : nil), aria: { label: question.content } do %>
+        <% question.choices.each do |choice| %>
+          <%= render "catalog/courses/sheets/choice", choice:, question:, fields:, field:, css: "ps-choice-vf", role: "radio" %>
+        <% end %>
+      <% end %>
+    <% when :fill_in %>
+      <% if fields %>
+        <%= text_field_tag "#{field}[response_text]", question.response, id: "q#{question.id}-response_text", class: class_names("ps-input", "ps-input--filled": filled),
+                           placeholder: "…", autocomplete: "off", autocapitalize: "off", spellcheck: false, readonly: checked,
+                           maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX, "aria-label": name,
+                           data: { ps_field: true, action: "input->prepare-sheet#save" } %>
+      <% end %>
+    <% when :calculation %>
+      <% if fields %>
+        <div class="ps-numeric">
+          <%= text_field_tag "#{field}[response_text]", question.response, id: "q#{question.id}-response_text", inputmode: "decimal",
+                             class: class_names("ps-input", "ps-input--num", "ps-input--filled": filled), autocomplete: "off", spellcheck: false,
+                             readonly: checked, maxlength: Dtos::Assessment::AttemptInput::RESPONSE_TEXT_MAX, "aria-label": name,
+                             data: { ps_field: true, action: "input->prepare-sheet#save" } %>
+          <% if question.unit %><span><%= question.unit %></span><% end %>
+        </div>
+      <% elsif question.unit %>
+        <span>(<%= question.unit %>)</span>
+      <% end %>
+    <% end %>
+  </div>
+  <% if kind == :mcq %>
+    <%= tag.div class: "ps-choices", role: (fields ? (question.multiple ? "group" : "radiogroup") : nil), aria: { label: question.content } do %>
+      <% question.choices.each do |choice| %>
+        <%= render "catalog/courses/sheets/choice", choice:, question:, fields:, field:, css: "ps-choice", role: (question.multiple ? "checkbox" : "radio") %>
+      <% end %>
+    <% end %>
+  <% elsif kind == :other && fields %>
+    <%= fields_for field do |f| %>
+      <%= render "assessment/exercise_sessions/kinds/#{question.play.kind_name}", f:, question: question.play, number: "s#{question.id}", values: {} %>
+    <% end %>
+  <% end %>
+  <% if question.verdict %>
+    <span class="ps-verdict <%= "ps-verdict--wrong" unless question.verdict == :correct %>" data-ps="done"><%= t("catalog.courses.sheets.verdict.#{question.verdict}") %></span>
+  <% end %>
+</div>

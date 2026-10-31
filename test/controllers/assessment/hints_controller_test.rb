@@ -145,6 +145,21 @@ class Assessment::HintsControllerTest < ActionDispatch::IntegrationTest
     assert_equal [ @second.id ], @session.reload.hinted_question_ids
   end
 
+  test "si la copie ne se relit plus (supprimée entre-temps), la redirection n'a pas d'ancre" do
+    sign_in_as @student
+    original = Queries::Assessment::SessionPlayQuery.instance_method(:copy)
+    Queries::Assessment::SessionPlayQuery.define_method(:copy) { |**| nil }
+
+    begin
+      open_hint
+    ensure
+      Queries::Assessment::SessionPlayQuery.define_method(:copy, original)
+    end
+
+    assert_redirected_to exercise_session_path(@session.public_id)
+    assert_equal [ @second.id ], @session.reload.hinted_question_ids
+  end
+
   test "la copie reste hors d'atteinte d'un visiteur déconnecté" do
     open_hint
 

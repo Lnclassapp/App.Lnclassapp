@@ -46,9 +46,9 @@ module UseCases
         parents_published: true, questions: [ question(1), question(2, hint: "Pense au rapport."), question(3, hint: "Le coefficient.") ]
       )
 
-      def session(status: "started", student_id: 7)
+      def session(status: "started", student_id: 7, exercise_id: 40)
         Entities::Assessment::ExerciseSession.new(
-          id: 5, public_id: "SeSsIoN0000005", student_id:, exercise_id: 40, status:, question_count: 3, answered_count: 0,
+          id: 5, public_id: "SeSsIoN0000005", student_id:, exercise_id:, status:, question_count: 3, answered_count: 0,
           correct_count: 0, progress_percent: 0, score_percent: nil, kind: "standard", knowledge_gap_id: nil,
           classroom_assignment_id: nil, started_at: Time.utc(2026, 10, 28), completed_at: nil
         )
@@ -88,6 +88,13 @@ module UseCases
 
       test "une question d'un autre exercice : :not_found" do
         result = open_hint(999)
+
+        assert_equal :not_found, result.code
+        assert_empty @sessions.hinted
+      end
+
+      test "un exercice introuvable (supprimé depuis l'ouverture de la copie) : :not_found, rien d'enregistré" do
+        result = open_hint(2, stored: session(exercise_id: 41))
 
         assert_equal :not_found, result.code
         assert_empty @sessions.hinted

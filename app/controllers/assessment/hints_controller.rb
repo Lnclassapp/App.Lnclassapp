@@ -28,7 +28,8 @@ module Assessment
 
     # Rang de la question dans son exercice, lu sur la copie de l'élève.
     def number_of(question_id)
-      Queries::Assessment::SessionPlayQuery.new.copy(public_id: params[:public_id])&.questions&.find { it.id == question_id }&.number
+      copy = Queries::Assessment::SessionPlayQuery.new.copy(public_id: params[:public_id])
+      copy.questions.find { it.id == question_id }&.number if copy
     end
 
     def open_hint

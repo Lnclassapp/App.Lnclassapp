@@ -30,7 +30,7 @@ module Repositories
         return if row.nil?
 
         slug, name, status, course_status, level_id, series_id, sheet = row
-        practice = Entities::Catalog::NotionPractice.from_raw(sheet.is_a?(Hash) ? sheet["practice"] : nil)
+        practice = Entities::Catalog::NotionPractice.from_raw(sheet["practice"])
         PracticeNotion.new(slug:, name:, status:, course_status:, level_id:, series_id:, practice:) if practice
       end
 

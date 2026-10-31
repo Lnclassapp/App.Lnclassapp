@@ -1,0 +1,14 @@
+<%# 🌐 UI · assessment/sheet_checks/_error — le message d'une vérification qui n'est pas partie, ou d'un devoir à rendre, dans l'exercice de la feuille %>
+<%# Rôle : `p.ps-error` (role="alert" pour une réponse du serveur ; sans rôle quand la feuille s'affiche) : pause avec l'heure de reprise, exercice archivé, devoir à rendre (lien « Ma classe »), panne %>
+<%# ADR  : 0121 (§4) · UDR : 0149 §3 (États : erreur, devoir à rendre) %>
+<%# locals: (exercise_public_id:, code:, resume_at: nil, alert: true) -%>
+<%# code : :paused | :archived | :assigned_pending | :assignment_closed | :invalid_copy | :failed ; l'id `sheet-error-<public_id>` est remplacé à chaque nouvelle réponse %>
+<% message = case code
+   when :paused then t("assessment.sheet_checks.errors.paused", time: l(resume_at, format: :hour_minute))
+   when :assignment_closed then t("assessment.sheet_checks.errors.assignment_closed")
+   when :archived then t("assessment.sheet_checks.errors.archived")
+   when :invalid_copy then t("assessment.sheet_checks.errors.invalid_copy")
+   when :assigned_pending then t("assessment.sheet_checks.errors.assigned_pending_html", link: link_to(t("assessment.sheet_checks.class_link"), student_classroom_path))
+   else t("assessment.sheet_checks.errors.failed")
+   end %>
+<%= tag.p message, id: "sheet-error-#{exercise_public_id}", class: "ps-error", role: (alert ? "alert" : nil) %>

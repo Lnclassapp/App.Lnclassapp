@@ -156,6 +156,8 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0145](./0145-exercices-et-questions-en-cartes.md) | Exercices et questions en cartes | Accepté | 2026-10-30 | — | Un exercice s'affiche en quatre lignes différentes, sans matière ici, sans type là, sans action écrite ; les questions d'un exercice se suivent sans cadre ni format annoncé. |
 | [0146](./0146-libelles-courts-des-matieres.md) | Libellés courts des matières (Cours de l'élève) | Accepté | 2026-10-30 | — | Les noms entiers des matières alourdissent les pastilles « Matières » (ordinateur) et les titres de groupe (téléphone) de Cours ; le porteur veut « Maths », « PC », « HG ». |
 | [0147](./0147-je-m-entraine-dans-la-fiche.md) | Je m'entraîne dans la fiche, cases multiples et indice | Accepté | 2026-10-30 | 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice | L'élève lit la méthode et l'exemple corrigé d'une notion mais ne peut pas s'y essayer sur place, et les exercices ne savent ni demander plusieurs valeurs dans une phrase ni donner un indice. |
+| [0148](./0148-fiche-de-revision-coupee-a-50-mots.md) | Fiche de révision coupée à 50 mots | Accepté | 2026-10-31 | — | 150 mots avant « Voir plus » montraient presque toute une notion ; l'aperçu de la fiche doit être court |
+| [0149](./0149-feuilles-prepare-interros-et-devoirs.md) | Feuilles Prépare interros et Prépare devoirs | Accepté | 2026-10-30 | 0121 | L'élève ne voit jamais une notion ni un sujet de devoir en entier et quitte la leçon pour chaque exercice |
 <!-- index:end -->
 
 ---

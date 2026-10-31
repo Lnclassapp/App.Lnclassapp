@@ -1,10 +1,10 @@
 # 🔌 INFRA · Queries::Catalog::RevisionSheetQuery
-# Rôle : la « Fiche de révision » d'une leçon pour sa page : ses notions au gabarit des quatre blocs (et « Je m'entraîne » sans correction), ses figures et son thème, avec la coupe des 150 mots
-# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.3), 0119-entrainement-de-notion-corrige-sans-trace (§4) · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0139 §3.2, 0147-je-m-entraine-dans-la-fiche §3.1
+# Rôle : la « Fiche de révision » d'une leçon pour sa page : ses notions au gabarit des quatre blocs (et « Je m'entraîne » sans correction), ses figures et son thème, avec la coupe des 50 mots
+# ADR  : 0116-fiche-de-revision-par-notion-et-figures-parametrees (§4.3), 0119-entrainement-de-notion-corrige-sans-trace (§4) · UDR : 0141-fiche-de-revision-en-quatre-blocs §3.1, 0139 §3.2, 0147-je-m-entraine-dans-la-fiche §3.1, 0148-fiche-de-revision-coupee-a-50-mots
 module Queries
   module Catalog
     class RevisionSheetQuery
-      # kind : :sheet (au moins une notion à montrer) ou :empty ; sheet : Lesson | nil ; cut : la coupe des 150 mots
+      # kind : :sheet (au moins une notion à montrer) ou :empty ; sheet : Lesson | nil ; cut : la coupe des 50 mots
       # (Entities::Catalog::RevisionPreview), nil sans coupe.
       Revision = Data.define(:kind, :sheet, :cut)
       # course_slug : l'adresse de la leçon (le formulaire d'entraînement y revient) ; material, level : leurs noms ; theme : blue | teal | burgundy ; notions : [Notion].

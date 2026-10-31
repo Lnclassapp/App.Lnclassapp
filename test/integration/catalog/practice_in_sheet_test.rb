@@ -97,11 +97,11 @@ class Catalog::PracticeInSheetTest < ActionDispatch::IntegrationTest
   end
 
   test "CA-10: a long notion folds the whole practice block when the cut falls before it" do
-    long = revision_notion("Notion longue").merge("remember" => Array.new(160) { "mot" }.join(" "))
+    long = revision_notion("Notion longue").merge("remember" => Array.new(60) { "mot" }.join(" "))
     create_essential(course: @course, name: long["name"], sheet: { "remember" => long["remember"], "method" => long["method"], "example" => long["example"],
                                                                  "pitfall" => long["pitfall"], "practice" => raw_practice(numeric_question) })
 
-    # La coupe des 150 mots vit sur la page de la leçon vue depuis une classe ; la page de la leçon montre la fiche entière.
+    # La coupe des 50 mots vit sur la page de la leçon vue depuis une classe ; la page de la leçon montre la fiche entière.
     classroom = create_classroom(level: @course.level, series: @course.series)
     sign_in_as create_teacher(classrooms: [ classroom ])
     get classroom_course_path(classroom.public_id, @course.slug)

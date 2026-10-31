@@ -47,7 +47,7 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
         assert_selector "#import-help-course_tree h3", text: "Format du fichier"
         assert_selector "#import-help-course_tree", text: "Tout arrive en brouillon"
         assert_selector "#import-help-course_tree", text: "version 3"
-        assert_selector "#import-help-exercise-rule", text: "un exercice"
+        assert_selector "#import-help-exercise-rule", text: "un ou deux exercices"
         assert_selector "#import-help-exercise-rule", text: "quatre problèmes"
         assert_selector "#import-help-retired-version", text: "retirées"
         assert_selector "#import-help-keys details[open] code", text: "notions"
@@ -129,7 +129,7 @@ class Catalog::ImportCourseTreeTest < ApplicationSystemTestCase
       assert_selector "#import_counter_imported", text: "0"
       assert_selector "#import_counter_errors", text: "1"
       assert_selector "#import_errors li", count: 1
-      assert_selector "#import_errors li", text: /courses\[0\]\.notions\[1\].*il faut exactement un exercice par notion \(reçus : 0\)/m
+      assert_selector "#import_errors li", text: /courses\[0\]\.notions\[1\].*il faut un ou deux exercices par notion \(reçus : 0\)/m
     end
     assert_equal [ 0, 0 ], [ Orm::Course.count, Orm::Exercise.count ]
   end

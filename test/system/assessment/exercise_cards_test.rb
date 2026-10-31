@@ -24,19 +24,15 @@ class Assessment::ExerciseCardsTest < ApplicationSystemTestCase
   # Un vrai clic à la position du verbe : le lien étiré le reçoit (Selenium refuse de cliquer l'élément lui-même, qu'il recouvre).
   def click_at_center(element) = page.driver.browser.action.move_to(element.native).click.perform
 
-  test "CA-1, CA-3 : « Ma classe » : la carte à faire dit Commencer, la carte traitée dit 16/20 et Voir ma copie" do
+  # prepare-interros-cahier, Lot F : l'exercice à faire n'est plus une carte mais une feuille (CA-13) ; la carte traitée reste.
+  test "CA-1, CA-3 : « Ma classe » : l'exercice à faire est une feuille à rendre, la carte traitée dit 16/20 et Voir ma copie" do
     visit student_classroom_path
 
-    within "#exercise-#{@todo.public_id}" do
-      assert_text "La fixation du CO2"
-      assert_text "SVT · Fixation"
-      assert_text "Commencer"
-      # Toute la carte est le lien : le verbe (aria-hidden) mène à l'exercice comme le titre.
-      click_at_center(find("span", text: "Commencer"))
+    within "#sheet-exercise-#{@todo.public_id}" do
+      assert_text "Exercice 1"
+      assert_button "Rendre à l'enseignant"
     end
 
-    assert_selector "h1", text: "La fixation du CO2"
-    visit student_classroom_path
     within "#student_classroom_treated" do
       assert_text "16/20"
       click_at_center(find("span", text: "Voir ma copie"))

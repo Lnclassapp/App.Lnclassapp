@@ -50,6 +50,6 @@ class Classroom::TeacherFirstPathDesktopTest < ApplicationSystemTestCase
     find("body").send_keys(:escape)
     assert_no_selector "turbo-frame#modal dialog[open]"
     assert_equal 0, Orm::ClassroomAssignment.count
-    assert_equal "Assigner", page.evaluate_script("document.activeElement.textContent.trim()")
+    assert_equal "Assigner à Tle D 1", page.evaluate_script("document.activeElement.textContent.trim()")
   end
 end
