@@ -1,0 +1,1912 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Histoire — La montée des nationalismes en Afrique",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "frise-nationalismes",
+          "kind": "timeline",
+          "description": "Une frise de 1938 à 1962 qui place les repères de la leçon : Charte de l'Atlantique (1941), conférence de Brazzaville (1944), congrès panafricain de Manchester (1945), fondation du RDA à Bamako (1946), insurrection de Madagascar (1947), conférence de Bandung (1955), indépendance du Ghana (1957), vote de la Guinée (1958) et année 1960. Une période marque la Seconde Guerre mondiale, une autre la vague des indépendances.",
+          "params": {
+            "start": 1938,
+            "end": 1962,
+            "step": 2,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1939,
+                "to": 1945,
+                "label": "Seconde Guerre mondiale"
+              },
+              {
+                "from": 1956,
+                "to": 1960,
+                "label": "Vague des indépendances"
+              }
+            ],
+            "events": [
+              {
+                "at": 1941,
+                "label": "Charte de l'Atlantique"
+              },
+              {
+                "at": 1944,
+                "label": "Conférence de Brazzaville"
+              },
+              {
+                "at": 1945,
+                "label": "Congrès panafricain de Manchester"
+              },
+              {
+                "at": 1946,
+                "label": "RDA fondé à Bamako"
+              },
+              {
+                "at": 1947,
+                "label": "Insurrection à Madagascar"
+              },
+              {
+                "at": 1955,
+                "label": "Conférence de Bandung"
+              },
+              {
+                "at": 1957,
+                "label": "Indépendance du Ghana"
+              },
+              {
+                "at": 1958,
+                "label": "Le « non » de la Guinée"
+              },
+              {
+                "at": 1960,
+                "label": "Année de l'Afrique"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "causes-et-formes",
+          "kind": "diagram",
+          "description": "Un schéma fléché de haut en bas : les causes internes et les causes externes nourrissent la montée du nationalisme africain. Celle-ci prend deux formes, la lutte pacifique (partis, syndicats, négociations) et la lutte armée (Madagascar, Kenya). Les deux formes conduisent aux indépendances, qui sont placées en bas du schéma.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "ci",
+                "label": "Causes internes",
+                "category": 1
+              },
+              {
+                "id": "ce",
+                "label": "Causes externes",
+                "category": 2
+              },
+              {
+                "id": "nat",
+                "label": "Montée du nationalisme africain",
+                "category": 3
+              },
+              {
+                "id": "pac",
+                "label": "Lutte pacifique",
+                "category": 4
+              },
+              {
+                "id": "arm",
+                "label": "Lutte armée",
+                "category": 4
+              },
+              {
+                "id": "ind",
+                "label": "Indépendances",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "ci",
+                "to": "nat",
+                "label": "nourrissent"
+              },
+              {
+                "from": "ce",
+                "to": "nat",
+                "label": "encouragent"
+              },
+              {
+                "from": "nat",
+                "to": "pac",
+                "label": "partis, négociations"
+              },
+              {
+                "from": "nat",
+                "to": "arm",
+                "label": "Madagascar, Kenya"
+              },
+              {
+                "from": "pac",
+                "to": "ind"
+              },
+              {
+                "from": "arm",
+                "to": "ind"
+              }
+            ],
+            "legend": [
+              "Causes internes",
+              "Causes externes",
+              "Mouvement et résultat",
+              "Formes de lutte"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "carte-independances",
+          "kind": "map",
+          "description": "Une carte de l'Afrique qui classe les États selon la date de leur indépendance : avant 1957 (Libye, Soudan, Maroc, Tunisie), 1957-1959 (Ghana, Guinée), 1960 (dix-sept États dont la Côte d'Ivoire) et 1961-1963 (Sierra Leone, Ouganda, Rwanda, Burundi, Kenya). Les capitales Accra, Conakry, Bamako, Nairobi et Antananarivo sont repérées.",
+          "params": {
+            "base": "africa",
+            "areas": [
+              {
+                "id": "lby",
+                "category": 1
+              },
+              {
+                "id": "sdn",
+                "category": 1
+              },
+              {
+                "id": "mar",
+                "category": 1
+              },
+              {
+                "id": "tun",
+                "category": 1
+              },
+              {
+                "id": "gha",
+                "category": 2
+              },
+              {
+                "id": "gin",
+                "category": 2
+              },
+              {
+                "id": "cmr",
+                "category": 3
+              },
+              {
+                "id": "tgo",
+                "category": 3
+              },
+              {
+                "id": "mdg",
+                "category": 3
+              },
+              {
+                "id": "cod",
+                "category": 3
+              },
+              {
+                "id": "som",
+                "category": 3
+              },
+              {
+                "id": "ben",
+                "category": 3
+              },
+              {
+                "id": "ner",
+                "category": 3
+              },
+              {
+                "id": "bfa",
+                "category": 3
+              },
+              {
+                "id": "civ",
+                "category": 3
+              },
+              {
+                "id": "tcd",
+                "category": 3
+              },
+              {
+                "id": "caf",
+                "category": 3
+              },
+              {
+                "id": "cog",
+                "category": 3
+              },
+              {
+                "id": "gab",
+                "category": 3
+              },
+              {
+                "id": "sen",
+                "category": 3
+              },
+              {
+                "id": "mli",
+                "category": 3
+              },
+              {
+                "id": "nga",
+                "category": 3
+              },
+              {
+                "id": "mrt",
+                "category": 3
+              },
+              {
+                "id": "sle",
+                "category": 4
+              },
+              {
+                "id": "uga",
+                "category": 4
+              },
+              {
+                "id": "rwa",
+                "category": 4
+              },
+              {
+                "id": "bdi",
+                "category": 4
+              },
+              {
+                "id": "ken",
+                "category": 4
+              }
+            ],
+            "places": [
+              {
+                "id": "accra"
+              },
+              {
+                "id": "conakry"
+              },
+              {
+                "id": "bamako"
+              },
+              {
+                "id": "nairobi"
+              },
+              {
+                "id": "antananarivo"
+              }
+            ],
+            "legend": [
+              "Indépendance avant 1957",
+              "Indépendance de 1957 à 1959",
+              "Indépendance en 1960",
+              "Indépendance de 1961 à 1963"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Définir le nationalisme africain et le situer dans le temps",
+          "remember": "Le **nationalisme africain** est le mouvement par lequel des Africains, conscients de former un peuple et de subir la domination coloniale, réclament d'abord plus de droits (égalité, représentation, fin des abus), puis l'autonomie et l'**indépendance**. Il conduit à la **décolonisation**, c'est-à-dire l'accession des colonies à l'indépendance. Repères : **1941** Charte de l'Atlantique ; **1944** conférence de Brazzaville ; **1946** fondation du RDA à Bamako ; **1947** insurrection de Madagascar ; **1955** conférence de Bandung ; **1957** indépendance du Ghana ; **1958** vote de la Guinée ; **1960** « année de l'Afrique ». Avant 1945, les revendications visent surtout des réformes ; dans les années 1950, l'indépendance devient l'objectif.",
+          "method": [
+            "Définir le mot : dire qui revendique et ce qu'il revendique.",
+            "Situer le fait sur la frise : donner la date, le lieu et les acteurs.",
+            "Distinguer la revendication : réformes dans le cadre colonial, autonomie ou indépendance.",
+            "Relier le fait à la montée du mouvement : avant 1945, entre 1945 et 1955, ou après 1955."
+          ],
+          "example": {
+            "statement": "Document (texte écrit pour Lnclass) : en 1946, un instituteur africain écrit dans un journal de sa colonie que le travail forcé doit cesser et que les Africains doivent voter. Il ne parle pas d'indépendance. Que montre ce texte du nationalisme africain ?",
+            "steps": [
+              "Définir : c'est un Africain instruit qui revendique des droits face à l'administration coloniale ; ce texte exprime le nationalisme africain.",
+              "Situer : le texte date de 1946, juste après la Seconde Guerre mondiale, dans une colonie d'Afrique.",
+              "Distinguer : la revendication porte sur des réformes (fin du travail forcé, droit de vote) et non sur l'indépendance.",
+              "Relier : en 1946 le mouvement monte ; il demande d'abord des droits, et l'indépendance ne deviendra l'objectif principal que dans les années 1950."
+            ]
+          },
+          "pitfall": "Ne crois pas que tous les nationalistes réclament l'indépendance dès 1945. Contre-exemple : le RDA, fondé en 1946, demande d'abord l'égalité des droits et la fin des abus dans les colonies françaises ; la Guinée ne choisit l'indépendance qu'en 1958. Ne confonds pas non plus le **nationalisme** (le mouvement des Africains) avec la **décolonisation** (le résultat : les colonies deviennent indépendantes).",
+          "figure": "frise-nationalismes",
+          "exercise": {
+            "title": "Définir et situer le nationalisme africain",
+            "statement": "Dans cet exercice, tu définis le nationalisme africain et tu places ses repères avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle phrase définit le mieux le nationalisme africain ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir : dire qui revendique (des Africains) et ce qu'il revendique (droits, puis autonomie et indépendance). Étape 2 — Situer : le mouvement monte surtout après 1945. Étape 3 — Distinguer : la deuxième proposition décrit l'impérialisme, le contraire du nationalisme africain. Étape 4 — Relier : le mouvement conduit à la décolonisation.",
+                "answers": [
+                  {
+                    "content": "Un mouvement d'Africains qui réclament des droits, puis l'autonomie et l'indépendance face à la domination coloniale.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La politique d'un État européen qui cherche à conquérir de nouveaux territoires en Afrique.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'accord par lequel des États africains acceptent de rester des colonies.",
+                    "correct": false
+                  },
+                  {
+                    "content": "La décision d'une puissance coloniale de partager le pouvoir avec ses rivales.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces événements dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Situer sur la frise : Charte de l'Atlantique (août 1941), conférence de Brazzaville (30 janvier-8 février 1944), RDA à Bamako (octobre 1946), conférence de Bandung (avril 1955), indépendance du Ghana (6 mars 1957). Étape 4 — Relier : les premiers faits préparent la montée du mouvement, les derniers en sont le résultat.",
+                "answers": [
+                  {
+                    "content": "Charte de l'Atlantique (1941)"
+                  },
+                  {
+                    "content": "Conférence de Brazzaville (1944)"
+                  },
+                  {
+                    "content": "Fondation du RDA à Bamako (1946)"
+                  },
+                  {
+                    "content": "Conférence de Bandung (1955)"
+                  },
+                  {
+                    "content": "Indépendance du Ghana (1957)"
+                  }
+                ]
+              },
+              {
+                "content": "Le Ghana accède à l'indépendance en ___ (année en chiffres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Situer : le Ghana, ancienne colonie britannique de la Gold Coast, devient indépendant le 6 mars 1957. Étape 4 — Relier : c'est la première grande étape de la vague d'indépendances d'Afrique noire. Ne le confonds pas avec la Guinée (1958).",
+                "answers": [
+                  {
+                    "content": "1957",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "En 1946, tous les partis africains réclament déjà l'indépendance immédiate de leur colonie.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Distinguer la revendication : en 1946, les partis comme le RDA demandent d'abord l'égalité des droits et la fin des abus, dans le cadre colonial. Étape 4 — Relier : l'indépendance devient l'objectif principal dans les années 1950. C'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque date à l'événement correspondant.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Situer : chaque événement a sa date. Brazzaville en 1944, le RDA en octobre 1946, Bandung en avril 1955, le référendum de Guinée le 28 septembre 1958. Étape 4 — Relier : les trois premiers préparent le mouvement, le dernier en est une étape décisive.",
+                "answers": [
+                  {
+                    "content": "1944",
+                    "match": "Conférence de Brazzaville"
+                  },
+                  {
+                    "content": "1946",
+                    "match": "Fondation du RDA à Bamako"
+                  },
+                  {
+                    "content": "1955",
+                    "match": "Conférence de Bandung"
+                  },
+                  {
+                    "content": "1958",
+                    "match": "Le « non » de la Guinée au référendum"
+                  }
+                ]
+              },
+              {
+                "content": "Quel mot désigne le processus par lequel les colonies deviennent indépendantes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir : le nationalisme est le mouvement des Africains ; la décolonisation est le processus qui conduit les colonies à l'indépendance (étape 4 — Relier). L'impérialisme est la politique de domination, l'indigénat un régime de sanctions coloniales, le panafricanisme une idée de solidarité.",
+                "answers": [
+                  {
+                    "content": "La décolonisation",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'impérialisme",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'indigénat",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le panafricanisme",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à définir les mots du sujet et à situer les repères avec la méthode : définir, situer, distinguer, relier.",
+            "questions": [
+              {
+                "content": "Le mouvement des Africains qui réclament leurs droits s'appelle le ___ ; le processus qui mène les colonies à l'indépendance s'appelle la ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Définir : le nationalisme africain est le mouvement qui revendique ; la décolonisation est le résultat, l'accession à l'indépendance (étape 4 — Relier).",
+                "answers": [
+                  {
+                    "content": "nationalisme africain",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "impérialisme",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "colonialisme",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "décolonisation",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "colonisation",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "indigénat",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier mot désigne le mouvement, le second le processus."
+              },
+              {
+                "content": "Dans un texte de 1946, un Africain réclame le droit de vote et la fin du travail forcé. Que revendique-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Distinguer la revendication : voter et mettre fin au travail forcé sont des réformes dans le cadre colonial. Étape 4 — Relier : en 1946, le mouvement demande d'abord des droits.",
+                "answers": [
+                  {
+                    "content": "Des réformes dans le cadre colonial.",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'indépendance immédiate de sa colonie.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le retour aux frontières d'avant la colonisation.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La Guinée vote « non » au référendum et devient indépendante en ___ (année en chiffres).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Situer : le référendum a lieu le 28 septembre 1958 et l'indépendance est proclamée le 2 octobre 1958. Étape 4 — Relier : après le Ghana (1957), la Guinée est une étape décisive.",
+                "answers": [
+                  {
+                    "content": "1958",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est un an après le Ghana."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les causes internes du nationalisme africain",
+          "remember": "Les causes **internes** naissent dans les colonies elles-mêmes. **Les abus du système colonial** : le **travail forcé** (travail imposé sans salaire normal), l'**indigénat** (régime qui permet à l'administration de punir les « indigènes » sans procès), l'impôt, les cultures obligatoires, la discrimination entre citoyens et sujets. **Les acteurs africains** : les **élites instruites** (instituteurs, médecins, fonctionnaires formés dans les écoles coloniales), qui connaissent les idées de liberté et d'égalité ; les **anciens combattants**, qui ont servi dans les armées coloniales et comparent leurs sacrifices à leur sort ; les **syndicats**, qui défendent salaires et droits ; la **presse** africaine, qui fait connaître les revendications.",
+          "method": [
+            "Repérer le document : sa nature, son auteur et sa date.",
+            "Relever l'abus ou la revendication qu'il décrit.",
+            "Identifier l'acteur africain concerné : élites, anciens combattants, syndicats ou presse.",
+            "Classer le fait comme cause interne et expliquer son lien avec la montée du nationalisme."
+          ],
+          "example": {
+            "statement": "Document (texte écrit pour Lnclass) : tract d'un syndicat de cheminots africains, en 1947. « Nous travaillons autant que les ouvriers européens, pour un salaire plus bas. Nous demandons les mêmes droits. » Quelle cause interne apparaît ?",
+            "steps": [
+              "Repérer : c'est un tract, écrit par un syndicat de cheminots africains en 1947.",
+              "Relever : les ouvriers africains dénoncent un salaire inférieur à celui des Européens et demandent les mêmes droits.",
+              "Identifier : l'acteur est un syndicat, qui défend les salaires et les droits des travailleurs.",
+              "Classer : le texte naît dans la colonie, c'est une cause interne ; il montre que l'inégalité nourrit les revendications et fait monter le nationalisme."
+            ]
+          },
+          "pitfall": "Ne confonds pas cause interne et cause externe. Le travail forcé, la création d'un syndicat ou d'un journal africain naissent dans la colonie : ils sont internes. La Charte de l'ONU ou la conférence de Bandung viennent de l'extérieur : elles sont externes. Et ne prends pas l'acteur pour la cause : le syndicat est l'acteur, l'inégalité qu'il dénonce est la cause.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître les causes internes",
+            "statement": "Dans cet exercice, tu repères les causes internes du nationalisme africain avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quels sont deux abus du système colonial qui nourrissent le nationalisme africain ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Relever l'abus : le travail forcé et l'indigénat sont des abus du système colonial. Étape 4 — Classer : ce sont des causes internes, nées dans la colonie. Le droit de vote égal et la scolarisation de tous n'existaient pas sous le régime colonial.",
+                "answers": [
+                  {
+                    "content": "Le travail forcé",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'indigénat",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le droit de vote égal pour tous les habitants",
+                    "correct": false
+                  },
+                  {
+                    "content": "La scolarisation obligatoire de tous les enfants",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque acteur africain à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Identifier l'acteur : chaque acteur a son rôle. Les élites écrivent et formulent, les anciens combattants témoignent de leurs sacrifices dans les armées coloniales, les syndicats défendent les travailleurs, la presse diffuse. Étape 4 — Classer : tous sont des acteurs internes.",
+                "answers": [
+                  {
+                    "content": "Les élites instruites",
+                    "match": "Formulent les revendications politiques"
+                  },
+                  {
+                    "content": "Les anciens combattants",
+                    "match": "Comparent leurs sacrifices à leur sort"
+                  },
+                  {
+                    "content": "Les syndicats",
+                    "match": "Défendent les salaires et les droits"
+                  },
+                  {
+                    "content": "La presse africaine",
+                    "match": "Fait connaître les revendications"
+                  }
+                ]
+              },
+              {
+                "content": "L'indigénat permet à l'administration de punir des habitants sans passer par un tribunal.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever l'abus : l'indigénat est un régime de sanctions administratives appliqué aux « indigènes » sans procès. Étape 4 — Classer : c'est un abus colonial, donc une cause interne du nationalisme.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces faits, lequel est une cause interne ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on lit la nature et le lieu de chaque fait. Étape 4 — Classer : un journal africain naît dans la colonie, c'est une cause interne. Les trois autres propositions sont des textes ou des conférences internationales : ce sont des causes externes, le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "La création d'un journal africain qui dénonce les abus de l'administration.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Charte de l'Atlantique de 1941.",
+                    "correct": false
+                  },
+                  {
+                    "content": "La conférence de Bandung de 1955.",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Charte de l'ONU de 1945.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Document (texte écrit pour Lnclass) : en 1946, d'anciens tirailleurs africains écrivent à l'administration pour demander une pension égale à celle des soldats européens. Quel acteur apparaît ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : une lettre de 1946. Étape 2 — Relever : la demande d'une pension égale. Étape 3 — Identifier : les auteurs sont d'anciens tirailleurs, donc des anciens combattants. Étape 4 — Classer : ils agissent dans la colonie, c'est une cause interne.",
+                "answers": [
+                  {
+                    "content": "Les anciens combattants",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les syndicats de cheminots",
+                    "correct": false
+                  },
+                  {
+                    "content": "La presse étrangère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les chefs d'États européens",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le travail imposé aux Africains par l'administration coloniale sans salaire normal s'appelle le travail ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Relever l'abus : le travail forcé est imposé par l'administration. Étape 4 — Classer : c'est une cause interne. Il est aboli par une loi du 11 avril 1946.",
+                "answers": [
+                  {
+                    "content": "forcé",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les causes internes avec la méthode : repérer, relever, identifier l'acteur, classer.",
+            "questions": [
+              {
+                "content": "Les ___ sont les Africains qui ont servi dans les armées coloniales ; les ___ défendent les salaires et les droits des travailleurs.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Identifier l'acteur : les anciens combattants ont servi dans les armées coloniales, les syndicats défendent les salaires et les droits.",
+                "answers": [
+                  {
+                    "content": "anciens combattants",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "ancien combattant",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "syndicats",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "syndicat",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier mot a combattu, le second défend les travailleurs."
+              },
+              {
+                "content": "Un instituteur africain dénonce dans un journal les punitions sans procès infligées par l'administration. Quel abus vise-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever l'abus : les punitions sans procès sont l'indigénat. Étape 3 — Identifier : l'auteur est un membre de l'élite instruite, qui s'exprime par la presse.",
+                "answers": [
+                  {
+                    "content": "L'indigénat",
+                    "correct": true
+                  },
+                  {
+                    "content": "La conférence de Bandung",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le panafricanisme",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une cause interne naît dans la colonie, une cause externe vient de l'extérieur.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Classer : une cause interne naît dans la colonie (abus, élites, syndicats, presse). Une cause externe vient de l'extérieur (guerre, ONU, Bandung). C'est la distinction à garder en tête.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les causes externes du nationalisme africain",
+          "remember": "Les causes **externes** viennent de l'extérieur de la colonie. **Seconde Guerre mondiale** (1939-1945) : elle affaiblit les puissances coloniales, et l'Afrique y participe (soldats, matières premières). **Charte de l'Atlantique** (août 1941, Roosevelt et Churchill) : elle affirme le droit des peuples à choisir leur gouvernement. **Conférence de Brazzaville** (30 janvier-8 février 1944, réunie par de Gaulle) : elle promet des réformes (fin du travail forcé et de l'indigénat, assemblées locales) mais écarte l'indépendance. **ONU** (1945) : sa Charte affirme le droit des peuples à disposer d'eux-mêmes. **Panafricanisme** : solidarité entre Africains et Noirs de la diaspora, portée par les congrès panafricains (Manchester, 1945). **Conférence de Bandung** (avril 1955) : 29 États d'Asie et d'Afrique condamnent le colonialisme. **Les deux Grands** (États-Unis et URSS) se déclarent favorables au droit des peuples ; l'indépendance de l'Inde (1947) est un exemple.",
+          "method": [
+            "Situer l'événement : date, lieu et acteurs.",
+            "Relever ce qu'il affirme ou ce qu'il change pour les peuples colonisés.",
+            "Mesurer sa portée : promesse de réformes, principe affirmé ou exemple à suivre.",
+            "Classer le fait comme cause externe et expliquer son effet sur les nationalistes africains."
+          ],
+          "example": {
+            "statement": "Document (texte écrit pour Lnclass) : « En 1944, à Brazzaville, le général de Gaulle réunit des gouverneurs et des administrateurs. Ils annoncent des réformes pour les colonies françaises, mais écartent toute idée d'indépendance. » Quelle place ce fait occupe-t-il parmi les causes du nationalisme ?",
+            "steps": [
+              "Situer : la conférence a lieu à Brazzaville, du 30 janvier au 8 février 1944, pendant la guerre, à l'initiative du général de Gaulle.",
+              "Relever : elle annonce des réformes (fin du travail forcé et de l'indigénat, assemblées locales) mais refuse l'indépendance.",
+              "Mesurer : c'est une promesse de réformes ; elle donne de l'espoir aux Africains, sans répondre à tous leurs désirs.",
+              "Classer : la décision vient de la métropole, c'est une cause externe ; ses promesses encouragent les nationalistes à réclamer davantage."
+            ]
+          },
+          "pitfall": "Ne crois pas que la conférence de Brazzaville accorde l'indépendance : elle promet des réformes dans le cadre de l'empire français. Ne confonds pas non plus la Charte de l'Atlantique (1941, une déclaration de principes entre Roosevelt et Churchill) et la Charte de l'ONU (1945, un traité qui crée l'organisation). Une date, un acte : retiens-les ensemble.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître les causes externes",
+            "statement": "Dans cet exercice, tu classes les causes externes du nationalisme africain avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quels sont trois événements qui sont des causes externes du nationalisme africain ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Situer : chaque événement a une date et un lieu internationaux. Étape 4 — Classer : Bandung, la Charte de l'Atlantique et l'ONU viennent de l'extérieur, ce sont des causes externes. Le travail forcé et la presse africaine naissent dans la colonie : ce sont des causes internes.",
+                "answers": [
+                  {
+                    "content": "La conférence de Bandung (1955)",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Charte de l'Atlantique (1941)",
+                    "correct": true
+                  },
+                  {
+                    "content": "La création de l'ONU (1945)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le travail forcé",
+                    "correct": false
+                  },
+                  {
+                    "content": "La presse africaine",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces causes externes dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Situer : août 1941, janvier-février 1944, 26 juin 1945 (signature de la Charte de l'ONU), avril 1955. Étape 4 — Classer : toutes sont des causes externes qui s'enchaînent pendant et après la guerre.",
+                "answers": [
+                  {
+                    "content": "Charte de l'Atlantique (août 1941)"
+                  },
+                  {
+                    "content": "Conférence de Brazzaville (1944)"
+                  },
+                  {
+                    "content": "Charte de l'ONU (1945)"
+                  },
+                  {
+                    "content": "Conférence de Bandung (1955)"
+                  }
+                ]
+              },
+              {
+                "content": "La conférence de Brazzaville (1944) accorde l'indépendance aux colonies françaises d'Afrique.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever : la conférence annonce des réformes et écarte l'indépendance. Étape 3 — Mesurer : c'est une promesse de réformes, non l'indépendance. C'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Où se tient en avril 1955 la conférence qui réunit 29 États d'Asie et d'Afrique et condamne le colonialisme ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : la conférence d'avril 1955 se tient à Bandung, en Indonésie. Étape 2 — Relever : elle condamne le colonialisme. Brazzaville (1944), Manchester (congrès panafricain de 1945) et Bamako (RDA, 1946) sont d'autres lieux de la leçon.",
+                "answers": [
+                  {
+                    "content": "À Bandung",
+                    "correct": true
+                  },
+                  {
+                    "content": "À Brazzaville",
+                    "correct": false
+                  },
+                  {
+                    "content": "À Manchester",
+                    "correct": false
+                  },
+                  {
+                    "content": "À Bamako",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'idée de solidarité entre Africains et Noirs de la diaspora s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Relever ce qu'il affirme : le panafricanisme défend la solidarité entre Africains et Noirs de la diaspora. Étape 4 — Classer : c'est une idée venue en partie de l'extérieur du continent, portée par des congrès panafricains, donc une cause externe.",
+                "answers": [
+                  {
+                    "content": "panafricanisme",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la portée de la Charte de l'Atlantique (1941) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever : la Charte de l'Atlantique, signée en août 1941 par Roosevelt et Churchill, affirme le droit des peuples à choisir leur gouvernement. Étape 3 — Mesurer : c'est un principe, pas un traité. Elle ne crée pas l'ONU (1945) : ne confonds pas les deux chartes.",
+                "answers": [
+                  {
+                    "content": "Elle affirme le droit des peuples à choisir leur gouvernement.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle crée l'Organisation des Nations unies.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle accorde l'indépendance aux colonies africaines.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle abolit le travail forcé dans les colonies françaises.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer et à classer les causes externes avec la méthode : situer, relever, mesurer, classer.",
+            "questions": [
+              {
+                "content": "Après la guerre, la ___ de 1945 crée l'ONU, et la conférence de ___ en 1955 condamne le colonialisme.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Situer : la Charte de l'ONU est signée en 1945 ; la conférence de Bandung a lieu en 1955. Étape 4 — Classer : ce sont deux causes externes.",
+                "answers": [
+                  {
+                    "content": "Charte",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Charte de l'ONU",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Bandung",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Une charte crée l'organisation ; la conférence de 1955 se tient en Indonésie."
+              },
+              {
+                "content": "Quel événement a eu lieu le plus tôt ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : Charte de l'Atlantique (1941), Bandung (1955), Ghana (1957). Étape 4 — Classer : la Charte de l'Atlantique est la plus ancienne des causes externes de la leçon.",
+                "answers": [
+                  {
+                    "content": "La Charte de l'Atlantique",
+                    "correct": true
+                  },
+                  {
+                    "content": "La conférence de Bandung",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'indépendance du Ghana",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le général de Gaulle réunit la conférence de Brazzaville en 1944.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : la conférence se tient à Brazzaville, du 30 janvier au 8 février 1944, à l'initiative du général de Gaulle. Étape 4 — Classer : c'est une cause externe, venue de la métropole.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les formes de lutte des nationalistes africains",
+          "remember": "Les nationalistes emploient deux grandes formes de lutte. La lutte **pacifique** : création de **partis** (le **RDA**, Rassemblement démocratique africain, fondé à **Bamako** en octobre **1946** par des délégués de plusieurs colonies et présidé par Houphouët-Boigny), de syndicats et de journaux ; élections et représentants dans les assemblées ; grèves ; **négociations** avec la métropole. Elle obtient des réformes : abolition du travail forcé (loi du 11 avril 1946), loi-cadre Defferre (1956), qui donne plus de pouvoirs aux territoires. La lutte **armée** : elle apparaît quand les voies pacifiques sont fermées ou jugées insuffisantes. Exemples : **Madagascar** (insurrection de 1947, suivie d'une répression), **Kenya** (révolte des Mau Mau, à partir de 1952 ; indépendance en 1963). L'**Algérie** (guerre commencée en 1954) est étudiée dans une autre leçon.",
+          "method": [
+            "Identifier l'auteur de l'action et son statut.",
+            "Relever les moyens employés : parti, grève, négociation ou armes.",
+            "Classer la forme de lutte : pacifique ou armée.",
+            "Expliquer ce qui conduit à ce choix et quel résultat il obtient."
+          ],
+          "example": {
+            "statement": "Document (texte écrit pour Lnclass) : « En octobre 1946, à Bamako, des délégués venus de plusieurs colonies fondent un parti, le RDA. Ils demandent l'égalité des droits et présentent leurs revendications à l'administration et au Parlement. » Quelle forme de lutte apparaît ?",
+            "steps": [
+              "Identifier : les auteurs sont des délégués africains de plusieurs colonies, réunis à Bamako en octobre 1946.",
+              "Relever : ils fondent un parti, présentent leurs revendications et ne prennent pas les armes.",
+              "Classer : la fondation d'un parti et la présentation de revendications relèvent de la lutte pacifique.",
+              "Expliquer : le parti cherche à obtenir des droits par la voie politique ; cette voie obtient des réformes comme la fin du travail forcé."
+            ]
+          },
+          "pitfall": "Ne crois pas que toutes les colonies ont obtenu l'indépendance par les armes, ni qu'aucune ne l'a fait. Contre-exemple : le Ghana (1957) et la Guinée (1958) y parviennent sans guerre, par le parti, la mobilisation et le vote ; Madagascar (1947) et le Kenya (années 1950) connaissent la lutte armée. Retiens les deux formes et au moins un exemple de chacune.",
+          "figure": "causes-et-formes",
+          "exercise": {
+            "title": "Distinguer les formes de lutte",
+            "statement": "Dans cet exercice, tu classes les actions des nationalistes avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque action à sa forme de lutte.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Relever les moyens : un parti et une grève sont des moyens pacifiques ; une insurrection et une révolte armée emploient les armes. Étape 3 — Classer : lutte pacifique ou lutte armée.",
+                "answers": [
+                  {
+                    "content": "Fondation du RDA à Bamako en 1946",
+                    "match": "Un parti politique (lutte pacifique)"
+                  },
+                  {
+                    "content": "Grève des cheminots",
+                    "match": "Une action syndicale (lutte pacifique)"
+                  },
+                  {
+                    "content": "Insurrection de Madagascar en 1947",
+                    "match": "Un soulèvement contre l'administration française (lutte armée)"
+                  },
+                  {
+                    "content": "Révolte des Mau Mau au Kenya",
+                    "match": "Une révolte contre l'administration britannique (lutte armée)"
+                  }
+                ]
+              },
+              {
+                "content": "Où et quand le RDA est-il fondé ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier l'auteur de l'action : le RDA est fondé par des délégués de plusieurs colonies à Bamako, en octobre 1946. Étape 3 — Classer : c'est une action pacifique. Brazzaville, Accra et Bandung sont d'autres lieux de la leçon.",
+                "answers": [
+                  {
+                    "content": "À Bamako, en octobre 1946",
+                    "correct": true
+                  },
+                  {
+                    "content": "À Brazzaville, en 1944",
+                    "correct": false
+                  },
+                  {
+                    "content": "À Accra, en 1957",
+                    "correct": false
+                  },
+                  {
+                    "content": "À Bandung, en 1955",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La Guinée et le Ghana ont obtenu leur indépendance au terme d'une guerre.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Classer : le Ghana (1957) et la Guinée (1958) ont obtenu leur indépendance par la voie politique : partis, mobilisation, négociations, vote. Étape 4 — Expliquer : ils ne sont pas des exemples de lutte armée. C'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel exemple relève de la lutte armée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever les moyens : les Mau Mau ont recours à la révolte armée. Étape 3 — Classer : lutte armée. Le RDA, le vote de la Guinée et la loi-cadre relèvent de la voie politique ou législative.",
+                "answers": [
+                  {
+                    "content": "La révolte des Mau Mau au Kenya",
+                    "correct": true
+                  },
+                  {
+                    "content": "La fondation du RDA",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le vote de la Guinée en 1958",
+                    "correct": false
+                  },
+                  {
+                    "content": "La loi-cadre Defferre de 1956",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'insurrection qui éclate en 1947 contre la domination française concerne l'île de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : l'insurrection de mars 1947 concerne Madagascar. Étape 3 — Classer : c'est un exemple de lutte armée. Étape 4 — Expliquer : l'insurrection est suivie d'une répression.",
+                "answers": [
+                  {
+                    "content": "Madagascar",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont deux moyens de la lutte pacifique ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Relever les moyens : partis, syndicats et négociations sont des moyens pacifiques. Étape 3 — Classer : l'insurrection armée est la lutte armée ; refuser de discuter n'est pas un moyen d'action de la leçon.",
+                "answers": [
+                  {
+                    "content": "La création de partis et de syndicats",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les négociations avec la métropole",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'insurrection armée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le refus de toute discussion",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à classer les formes de lutte avec la méthode : identifier, relever, classer, expliquer.",
+            "questions": [
+              {
+                "content": "Un parti qui présente ses revendications à l'administration pratique la lutte ___ ; une insurrection comme celle de Madagascar en 1947 est une lutte ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Relever les moyens : un parti utilise la parole et le vote. Étape 3 — Classer : lutte pacifique pour le parti, lutte armée pour l'insurrection de 1947.",
+                "answers": [
+                  {
+                    "content": "pacifique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "armée",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "religieuse",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "armée",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "pacifique",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "électorale",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense aux moyens employés : la parole ou les armes."
+              },
+              {
+                "content": "Dans quel pays une révolte armée éclate-t-elle à partir de 1952 contre l'administration britannique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : au Kenya, colonie britannique, éclate la révolte des Mau Mau. Étape 3 — Classer : lutte armée. Le Ghana et la Guinée ont suivi la voie politique.",
+                "answers": [
+                  {
+                    "content": "Le Kenya",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Ghana",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Guinée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La loi-cadre Defferre de 1956 donne plus de pouvoirs aux territoires d'outre-mer.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Expliquer le résultat : les négociations et les pressions des partis africains obtiennent des réformes, dont la loi-cadre Defferre de 1956 qui élargit les pouvoirs des territoires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les grandes étapes et les acteurs des indépendances",
+          "remember": "Premières indépendances : la Libye (1951), le Soudan, le Maroc et la Tunisie (1956). **Ghana** : Kwame **Nkrumah** et son parti obtiennent l'indépendance de l'ancienne Gold Coast britannique, le **6 mars 1957**. **Guinée** : lors du référendum du **28 septembre 1958**, la Guinée de Sékou **Touré** vote « non » et devient indépendante le 2 octobre 1958. **1960**, « année de l'Afrique » : dix-sept États accèdent à l'indépendance, dont la Côte d'Ivoire (7 août 1960, étudiée dans la leçon suivante), le Sénégal de Léopold Sédar **Senghor** et le Nigeria. Après 1960 : Sierra Leone (1961), Ouganda (1962), Kenya (1963, avec Jomo **Kenyatta**). Les indépendances de 1960 suivent les premières étapes de 1957 et 1958.",
+          "method": [
+            "Lire la carte ou la frise : repérer le pays et sa date d'indépendance.",
+            "Associer le pays à son dirigeant et à son parti.",
+            "Classer l'indépendance par étape : avant 1957, de 1957 à 1959, en 1960 ou après.",
+            "Expliquer le rôle de l'événement dans l'accélération du mouvement."
+          ],
+          "example": {
+            "statement": "Document (description d'une carte, texte écrit pour Lnclass) : sur une carte de l'Afrique, le Ghana est coloré en « 1957-1959 » et le Sénégal en « 1960 ». Que peut-on en conclure sur la vague des indépendances ?",
+            "steps": [
+              "Lire : le Ghana est indépendant en 1957, le Sénégal en 1960.",
+              "Associer : le Ghana est lié à Kwame Nkrumah, le Sénégal à Léopold Sédar Senghor.",
+              "Classer : le Ghana appartient à l'étape 1957-1959, le Sénégal à l'étape de 1960.",
+              "Expliquer : l'indépendance du Ghana précède celle de 1960 et montre aux autres colonies que le but peut être atteint."
+            ]
+          },
+          "pitfall": "Ne crois pas que 1960 est l'année des premières indépendances africaines. Contre-exemple : la Libye (1951), le Soudan, le Maroc et la Tunisie (1956), le Ghana (1957) et la Guinée (1958) sont indépendants avant 1960. 1960 est l'année où le plus grand nombre d'États deviennent indépendants. Ne confonds pas non plus les dates du Ghana (1957) et de la Guinée (1958).",
+          "figure": "carte-independances",
+          "exercise": {
+            "title": "Situer les indépendances et leurs acteurs",
+            "statement": "Dans cet exercice, tu situes des indépendances et tu les associes à leurs acteurs avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque dirigeant au pays qu'il conduit à l'indépendance.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Associer le pays à son dirigeant : Nkrumah au Ghana (1957), Sékou Touré à la Guinée (1958), Senghor au Sénégal (1960), Kenyatta au Kenya (1963). Étape 3 — Classer : ces pays appartiennent à des étapes différentes.",
+                "answers": [
+                  {
+                    "content": "Kwame Nkrumah",
+                    "match": "Ghana"
+                  },
+                  {
+                    "content": "Sékou Touré",
+                    "match": "Guinée"
+                  },
+                  {
+                    "content": "Léopold Sédar Senghor",
+                    "match": "Sénégal"
+                  },
+                  {
+                    "content": "Jomo Kenyatta",
+                    "match": "Kenya"
+                  }
+                ]
+              },
+              {
+                "content": "Quel pays devient indépendant le 6 mars 1957 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire la date : 6 mars 1957. Étape 2 — Associer : c'est le Ghana de Kwame Nkrumah. Étape 3 — Classer : étape 1957-1959. La Guinée est de 1958, le Sénégal de 1960, le Kenya de 1963.",
+                "answers": [
+                  {
+                    "content": "Le Ghana",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Guinée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Sénégal",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Kenya",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Lors du référendum du 28 septembre 1958, la ___ vote « non » et devient indépendante (nom du pays).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : le référendum du 28 septembre 1958. Étape 2 — Associer : la Guinée de Sékou Touré. Étape 3 — Classer : étape 1957-1959.",
+                "answers": [
+                  {
+                    "content": "Guinée",
+                    "correct": true
+                  },
+                  {
+                    "content": "la Guinée",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets ces indépendances dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire les dates : Libye 1951, Ghana 1957, Guinée 1958, Sénégal 1960, Kenya 1963. Étape 3 — Classer : avant 1957, de 1957 à 1959, en 1960, puis après 1960.",
+                "answers": [
+                  {
+                    "content": "Libye (1951)"
+                  },
+                  {
+                    "content": "Ghana (1957)"
+                  },
+                  {
+                    "content": "Guinée (1958)"
+                  },
+                  {
+                    "content": "Sénégal (1960)"
+                  },
+                  {
+                    "content": "Kenya (1963)"
+                  }
+                ]
+              },
+              {
+                "content": "L'année 1960 est celle des premières indépendances africaines.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Classer par étape : la Libye (1951), le Soudan, le Maroc et la Tunisie (1956), le Ghana (1957) et la Guinée (1958) sont indépendants avant 1960. Étape 4 — Expliquer : 1960 est l'année où le plus grand nombre d'États accèdent à l'indépendance.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi l'indépendance du Ghana (1957) accélère-t-elle le mouvement ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Expliquer le rôle : le Ghana est un exemple pour les autres colonies, qui voient que l'objectif peut être atteint. Étape 3 — Classer : il ouvre l'étape 1957-1959, suivie de la vague de 1960. Les autres propositions sont contraires aux faits.",
+                "answers": [
+                  {
+                    "content": "Elle montre aux autres colonies que l'indépendance peut être atteinte.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle met fin au nationalisme africain.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle interdit aux autres colonies de réclamer l'indépendance.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle rend inutile la lutte des partis.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer les indépendances avec la méthode : lire, associer, classer, expliquer.",
+            "questions": [
+              {
+                "content": "Le Ghana de Nkrumah devient indépendant en ___ ; le Sénégal de Senghor en ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire les dates : Ghana 1957, Sénégal 1960. Étape 3 — Classer : l'un appartient à l'étape 1957-1959, l'autre à l'année 1960.",
+                "answers": [
+                  {
+                    "content": "1957",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1958",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1960",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1960",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1957",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1951",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le Ghana ouvre la vague, le Sénégal vient avec 1960."
+              },
+              {
+                "content": "Quel pays est indépendant avant 1957 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Classer l'indépendance par étape : la Tunisie est indépendante en 1956, avant le Ghana (1957). La Guinée est de 1958 et le Nigeria de 1960.",
+                "answers": [
+                  {
+                    "content": "La Tunisie",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Guinée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Nigeria",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le Kenya accède à l'indépendance en 1963, après la révolte des Mau Mau.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire la date : le Kenya devient indépendant en 1963. Étape 3 — Classer : étape après 1960. Étape 4 — Expliquer : c'est un cas où la lutte armée précède l'indépendance.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les causes du nationalisme africain",
+          "statement": "Document (texte écrit pour Lnclass) : en 1946, le journal d'une colonie d'Afrique publie la lettre d'un ancien tirailleur : « J'ai servi pendant la guerre. À mon retour, on me demande de travailler sans salaire sur les routes de l'administration. Pourquoi ? Que reste-t-il des promesses faites en 1944 ? » Tu classes les causes du nationalisme à partir de ce document.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la nature de ce document ?",
+              "question_type": "single_choice",
+              "explanation": "Pour présenter un document : donner sa nature (lettre publiée dans un journal), son auteur (un ancien tirailleur) et sa date (1946). Un traité, un discours à l'ONU et un rapport de Bandung auraient d'autres auteurs et d'autres dates. Cette présentation est la première étape de toute analyse de document.",
+              "answers": [
+                {
+                  "content": "Une lettre d'un ancien tirailleur, publiée dans un journal en 1946.",
+                  "correct": true
+                },
+                {
+                  "content": "Un traité signé entre deux États européens.",
+                  "correct": false
+                },
+                {
+                  "content": "Un discours prononcé à l'ONU en 1960.",
+                  "correct": false
+                },
+                {
+                  "content": "Un rapport de la conférence de Bandung.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels abus et quels acteurs ce document fait-il apparaître ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Pour dégager les idées d'un document, relever ce que l'auteur dénonce et qui parle. L'auteur dénonce le travail forcé sur les routes et parle en ancien combattant. Le droit de vote égal pour tous et les syndicats de cheminots n'apparaissent pas dans le texte.",
+              "answers": [
+                {
+                  "content": "Le travail forcé",
+                  "correct": true
+                },
+                {
+                  "content": "Les anciens combattants",
+                  "correct": true
+                },
+                {
+                  "content": "Le droit de vote égal pour tous",
+                  "correct": false
+                },
+                {
+                  "content": "Les syndicats de cheminots",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À quel fait de 1944 la lettre fait-elle allusion avec « les promesses faites en 1944 » ?",
+              "question_type": "single_choice",
+              "explanation": "En 1944, la conférence de Brazzaville annonce des réformes, dont la fin du travail forcé. L'ancien tirailleur constate que les promesses ne sont pas encore appliquées. Bandung est de 1955, la Charte de l'ONU de 1945 et l'indépendance du Ghana de 1957.",
+              "answers": [
+                {
+                  "content": "À la conférence de Brazzaville",
+                  "correct": true
+                },
+                {
+                  "content": "À la conférence de Bandung",
+                  "correct": false
+                },
+                {
+                  "content": "À la Charte de l'ONU",
+                  "correct": false
+                },
+                {
+                  "content": "À l'indépendance du Ghana",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque fait à la famille de causes correspondante.",
+              "question_type": "matching",
+              "explanation": "Pour classer une cause, on se demande si elle naît dans la colonie (interne) ou vient de l'extérieur (externe). Travail forcé et presse africaine naissent dans la colonie. La Charte de l'Atlantique et la conférence de Bandung sont des événements internationaux.",
+              "answers": [
+                {
+                  "content": "Le travail forcé",
+                  "match": "Un abus colonial (cause interne)"
+                },
+                {
+                  "content": "La presse africaine",
+                  "match": "Un acteur africain (cause interne)"
+                },
+                {
+                  "content": "La Charte de l'Atlantique",
+                  "match": "Un principe affirmé en 1941 (cause externe)"
+                },
+                {
+                  "content": "La conférence de Bandung",
+                  "match": "Une condamnation du colonialisme en 1955 (cause externe)"
+                }
+              ]
+            },
+            {
+              "content": "Cette lettre montre que la Seconde Guerre mondiale et les abus coloniaux nourrissent ensemble le mécontentement des Africains.",
+              "question_type": "true_false",
+              "explanation": "Le document relie deux faits : la participation à la guerre (cause externe, au sens où la guerre est un événement mondial) et les abus subis à son retour (cause interne). L'ancien combattant compare ses sacrifices à son sort. Les causes internes et externes se combinent pour faire monter le nationalisme.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les Africains qui ont servi dans les armées coloniales sont appelés les anciens ___.",
+              "question_type": "fill_blank",
+              "explanation": "Pour identifier un acteur, on le nomme avec le vocabulaire du programme : les anciens combattants. Ce sont, avec les élites instruites, les syndicats et la presse, des acteurs des causes internes.",
+              "answers": [
+                {
+                  "content": "combattants",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Formes de lutte et grandes étapes",
+          "statement": "Dans cet exercice, tu mobilises les formes de lutte et les étapes de la montée des nationalismes de 1946 à 1960. Tu t'appuies sur les repères de la leçon : RDA (1946), Madagascar (1947), Bandung (1955), Ghana (1957), Guinée (1958) et année 1960.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Remets ces faits dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Pour construire une chronologie, on cherche chaque date : RDA (octobre 1946), Madagascar (mars 1947), Bandung (avril 1955), Ghana (6 mars 1957), Guinée (28 septembre 1958). Les trois premiers faits préparent le mouvement, les deux derniers en sont des étapes décisives.",
+              "answers": [
+                {
+                  "content": "Fondation du RDA à Bamako"
+                },
+                {
+                  "content": "Insurrection de Madagascar"
+                },
+                {
+                  "content": "Conférence de Bandung"
+                },
+                {
+                  "content": "Indépendance du Ghana"
+                },
+                {
+                  "content": "Référendum en Guinée"
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque fait à sa forme de lutte.",
+              "question_type": "matching",
+              "explanation": "Pour classer une forme de lutte, on relève les moyens employés. Un parti et des négociations utilisent la parole, le vote et le dialogue. Une insurrection et une révolte emploient les armes.",
+              "answers": [
+                {
+                  "content": "Création d'un parti à Bamako",
+                  "match": "Un moyen politique (lutte pacifique)"
+                },
+                {
+                  "content": "Négociations avec la métropole",
+                  "match": "Un dialogue (lutte pacifique)"
+                },
+                {
+                  "content": "Insurrection de 1947 à Madagascar",
+                  "match": "Un soulèvement (lutte armée)"
+                },
+                {
+                  "content": "Révolte des Mau Mau au Kenya",
+                  "match": "Une révolte au Kenya (lutte armée)"
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la particularité de la conférence de Bandung (avril 1955) ?",
+              "question_type": "single_choice",
+              "explanation": "Bandung (Indonésie, avril 1955) réunit 29 États d'Asie et d'Afrique qui condamnent le colonialisme. La proposition sur les gouverneurs décrit Brazzaville (1944), la fondation du RDA date de 1946 et l'indépendance de la Guinée de 1958.",
+              "answers": [
+                {
+                  "content": "Elle réunit des États d'Asie et d'Afrique qui condamnent le colonialisme.",
+                  "correct": true
+                },
+                {
+                  "content": "Elle réunit des gouverneurs français autour du général de Gaulle.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle fonde le RDA.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle proclame l'indépendance de la Guinée.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le Ghana a obtenu son indépendance en 1957 sans lutte armée.",
+              "question_type": "true_false",
+              "explanation": "Le Ghana de Kwame Nkrumah a obtenu son indépendance (6 mars 1957) par la voie politique : parti, mobilisation et négociations. Cet exemple a encouragé les autres colonies. À l'opposé, le Kenya et Madagascar ont connu la lutte armée.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'année 1960 est appelée l'année de l'___.",
+              "question_type": "fill_blank",
+              "explanation": "Pour situer une date, on la rattache à son événement : en 1960, dix-sept États africains accèdent à l'indépendance, d'où le nom d'« année de l'Afrique ». Ne la confonds pas avec 1957 (Ghana) et 1958 (Guinée).",
+              "answers": [
+                {
+                  "content": "Afrique",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux pays d'Afrique devenus indépendants avant 1960 ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Pour classer par étape, on lit la date : le Ghana (1957) et la Guinée (1958) sont indépendants avant 1960. Le Sénégal est indépendant en 1960 et le Kenya en 1963.",
+              "answers": [
+                {
+                  "content": "Le Ghana",
+                  "correct": true
+                },
+                {
+                  "content": "La Guinée",
+                  "correct": true
+                },
+                {
+                  "content": "Le Sénégal",
+                  "correct": false
+                },
+                {
+                  "content": "Le Kenya",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les causes de la montée des nationalismes",
+          "statement": "Document 1 (texte écrit pour Lnclass) : extrait d'un journal africain de 1950. « Depuis la guerre, les peuples du monde réclament leur liberté. À l'ONU, on parle du droit des peuples à disposer d'eux-mêmes. Pourquoi les Africains en seraient-ils privés ? » Document 2 : tableau de dates. 1941 : Charte de l'Atlantique. 1944 : conférence de Brazzaville. 1945 : Charte de l'ONU. 1946 : fondation du RDA. 1955 : conférence de Bandung. Tu analyses ces documents et tu expliques les causes de la montée des nationalismes.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle idée principale le document 1 défend-il ?",
+              "question_type": "single_choice",
+              "explanation": "Pour dégager l'idée d'un document, on relève la question posée par l'auteur : pourquoi les Africains seraient-ils privés du droit des peuples ? Il demande qu'on applique aux Africains un principe déjà affirmé à l'ONU. Les autres propositions sont contraires au texte.",
+              "answers": [
+                {
+                  "content": "Les Africains ont, comme les autres peuples, le droit de disposer d'eux-mêmes.",
+                  "correct": true
+                },
+                {
+                  "content": "Les Africains doivent attendre que la métropole décide seule de leur avenir.",
+                  "correct": false
+                },
+                {
+                  "content": "L'ONU est une organisation inutile.",
+                  "correct": false
+                },
+                {
+                  "content": "Le travail forcé est nécessaire à l'économie des colonies.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À quel fait du document 2 le journaliste fait-il référence avec « à l'ONU, on parle du droit des peuples à disposer d'eux-mêmes » ?",
+              "question_type": "single_choice",
+              "explanation": "Pour relier un document à un repère, on cherche le fait cité : l'ONU, donc la Charte de 1945. Bandung (1955) est postérieure au texte de 1950 et ne peut donc pas être citée. Le RDA et Brazzaville ne concernent pas l'ONU. Cette cause est externe.",
+              "answers": [
+                {
+                  "content": "À la Charte de l'ONU de 1945",
+                  "correct": true
+                },
+                {
+                  "content": "À la conférence de Bandung de 1955",
+                  "correct": false
+                },
+                {
+                  "content": "À la fondation du RDA en 1946",
+                  "correct": false
+                },
+                {
+                  "content": "À la conférence de Brazzaville de 1944",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Parmi ces faits du tableau, lesquels sont des causes externes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Pour classer, on se demande si le fait vient de l'extérieur. Charte de l'Atlantique, Charte de l'ONU et conférence de Bandung sont des événements internationaux : causes externes. Le RDA et un journal africain naissent dans les colonies : causes internes, ou actions des nationalistes.",
+              "answers": [
+                {
+                  "content": "La Charte de l'Atlantique (1941)",
+                  "correct": true
+                },
+                {
+                  "content": "La Charte de l'ONU (1945)",
+                  "correct": true
+                },
+                {
+                  "content": "La conférence de Bandung (1955)",
+                  "correct": true
+                },
+                {
+                  "content": "La fondation du RDA (1946)",
+                  "correct": false
+                },
+                {
+                  "content": "La création d'un journal africain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets les faits du document 2 dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Pour dater, on lit le tableau : 1941, 1944, 1945, 1946 puis 1955. L'ordre montre que les causes externes précèdent et accompagnent la naissance des partis.",
+              "answers": [
+                {
+                  "content": "Charte de l'Atlantique"
+                },
+                {
+                  "content": "Conférence de Brazzaville"
+                },
+                {
+                  "content": "Charte de l'ONU"
+                },
+                {
+                  "content": "Fondation du RDA"
+                },
+                {
+                  "content": "Conférence de Bandung"
+                }
+              ]
+            },
+            {
+              "content": "Le document 1 est un exemple de lutte armée.",
+              "question_type": "true_false",
+              "explanation": "Pour classer une forme de lutte, on relève les moyens : le document 1 est un article de journal qui réclame un droit en s'appuyant sur l'ONU. C'est un moyen pacifique : la presse. La lutte armée, comme à Madagascar ou au Kenya, emploie les armes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À partir des deux documents et de tes connaissances, explique en une dizaine de lignes pourquoi les revendications des Africains se renforcent après 1945.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Présente le document 1 : un article d'un journal africain de 1950",
+                "Cite au moins deux causes externes datées (Atlantique, Brazzaville, ONU, Bandung)",
+                "Cite au moins une cause interne (abus coloniaux, élites, anciens combattants, syndicats, presse)",
+                "Relie ces causes à la montée du nationalisme",
+                "Utilise des dates exactes et un vocabulaire précis"
+              ],
+              "starter": "Le document 1 est un article d'un journal africain de 1950…",
+              "explanation": "Corrigé modèle : Le document 1 est un article d'un journal africain de 1950, qui réclame pour les Africains le droit des peuples à disposer d'eux-mêmes affirmé à l'ONU. Les revendications se renforcent d'abord à cause de causes externes : la Seconde Guerre mondiale affaiblit les puissances coloniales, la Charte de l'Atlantique (1941) affirme le droit des peuples à choisir leur gouvernement, la conférence de Brazzaville (1944) promet des réformes et la Charte de l'ONU (1945) reprend le droit des peuples à disposer d'eux-mêmes. Elles s'appuient sur des causes internes : le travail forcé et l'indigénat, dénoncés par les élites instruites, les anciens combattants, les syndicats et la presse. Ces causes se combinent et font monter le nationalisme, dont le RDA (1946) est une expression. Barème : document présenté (1), causes externes datées (1,5), cause interne (1), lien avec le nationalisme (1), dates et vocabulaire (0,5).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Les nationalismes africains de 1941 à 1960",
+          "statement": "Document (texte écrit pour Lnclass, discours imaginé) : « Camarades, voici dix ans que nous nous organisons. Nous avons créé notre parti, nous avons fait entendre nos revendications aux assemblées et dans nos journaux. Nous avons vu d'autres peuples, à Bandung, condamner la domination coloniale. Aujourd'hui, notre pays choisit son destin par le vote. » Un dirigeant d'un parti africain s'adresse à ses partisans en 1958. Tu fais le commentaire de ce document puis tu composes une réponse de synthèse sur la montée des nationalismes.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quelle est la nature et la date de ce document ?",
+              "question_type": "single_choice",
+              "explanation": "Pour présenter un document : nature (discours), auteur (un dirigeant de parti africain, personnage imaginé), date (1958). Les autres propositions ont une autre nature et une autre date. Cette présentation est la première étape du commentaire.",
+              "answers": [
+                {
+                  "content": "Un discours imaginé d'un dirigeant de parti africain, en 1958.",
+                  "correct": true
+                },
+                {
+                  "content": "Un traité entre deux puissances européennes, en 1885.",
+                  "correct": false
+                },
+                {
+                  "content": "Une résolution de l'ONU de 1945.",
+                  "correct": false
+                },
+                {
+                  "content": "Un compte rendu de la conférence de Brazzaville, en 1944.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles idées ce document exprime-t-il ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Pour dégager les idées, on relit les phrases du texte : le parti organisé depuis dix ans, les revendications faites aux assemblées et dans les journaux, la référence à Bandung. Le texte parle du vote, pas de la lutte armée, et cite la presse comme moyen d'action.",
+              "answers": [
+                {
+                  "content": "Un parti a organisé la lutte pendant dix ans.",
+                  "correct": true
+                },
+                {
+                  "content": "Les revendications ont été portées aux assemblées et dans la presse.",
+                  "correct": true
+                },
+                {
+                  "content": "Un événement international, Bandung, a encouragé le mouvement.",
+                  "correct": true
+                },
+                {
+                  "content": "La lutte armée est le seul moyen d'obtenir l'indépendance.",
+                  "correct": false
+                },
+                {
+                  "content": "Les partis africains n'ont jamais utilisé la presse.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle forme de lutte ce discours illustre-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Pour classer une forme de lutte, on relève les moyens : parti, assemblées, journaux, vote. Aucun recours aux armes : c'est la lutte pacifique. L'insurrection est la lutte armée (Madagascar, Kenya).",
+              "answers": [
+                {
+                  "content": "La lutte pacifique, par le parti, la presse et le vote.",
+                  "correct": true
+                },
+                {
+                  "content": "La lutte armée, par l'insurrection.",
+                  "correct": false
+                },
+                {
+                  "content": "L'impérialisme, par la conquête de territoires.",
+                  "correct": false
+                },
+                {
+                  "content": "Le travail forcé, par la contrainte.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans ce discours, la référence à Bandung est une cause externe du mouvement.",
+              "question_type": "true_false",
+              "explanation": "La conférence de Bandung (avril 1955) vient de l'extérieur de la colonie : elle réunit des États d'Asie et d'Afrique qui condamnent le colonialisme. Le discours la cite comme un encouragement : c'est une cause externe.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fais le commentaire du document : présente-le, dégage ses deux idées principales, puis explique à l'aide de tes connaissances comment ce parti a pu se renforcer en dix ans.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Présente le document : nature, auteur imaginé, date de 1958",
+                "Dégage deux idées : un parti organisé, des revendications portées par les assemblées et la presse",
+                "Explique un moyen d'action pacifique avec un exemple (RDA, 1946)",
+                "Cite une cause externe datée (Bandung, 1955, ou Brazzaville, 1944)",
+                "Cite une cause interne (abus, élites, syndicats, presse)",
+                "Organise le commentaire en trois parties"
+              ],
+              "starter": "Ce document est un discours imaginé de 1958…",
+              "explanation": "Corrigé modèle : Ce document est un discours imaginé, prononcé en 1958 par un dirigeant d'un parti africain devant ses partisans. Deux idées : le parti a organisé la lutte pendant dix ans, et il a fait entendre ses revendications dans les assemblées et la presse. Ce parti a pu se renforcer parce que des causes internes poussent les Africains à s'organiser : le travail forcé, l'indigénat, le rôle des élites, des anciens combattants, des syndicats et de la presse. Des causes externes l'encouragent : la Charte de l'ONU (1945), la conférence de Bandung (1955). Comme le RDA fondé à Bamako en 1946, il emploie des moyens pacifiques. Barème : présentation (1), deux idées (2), moyens pacifiques et exemple (1), cause externe datée (1), cause interne (0,5), organisation (0,5).",
+              "answers": []
+            },
+            {
+              "content": "Question de synthèse : dans une réponse organisée d'une quinzaine de lignes, montre comment, de 1941 à 1960, les causes internes et externes et les formes de lutte conduisent à l'indépendance de colonies africaines.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Définit le nationalisme africain",
+                "Présente les causes internes (abus coloniaux, élites, anciens combattants, syndicats, presse)",
+                "Présente les causes externes datées (guerre, Atlantique 1941, Brazzaville 1944, ONU 1945, Bandung 1955)",
+                "Distingue lutte pacifique (RDA 1946) et lutte armée (Madagascar 1947, Kenya)",
+                "Donne les étapes de 1957 à 1960 (Ghana, Guinée, année 1960) et un acteur",
+                "Organise la réponse en introduction, développement et conclusion",
+                "Utilise des dates exactes et un vocabulaire précis"
+              ],
+              "starter": "Le nationalisme africain est le mouvement…",
+              "explanation": "Corrigé modèle : Le nationalisme africain est le mouvement par lequel des Africains réclament des droits, puis l'indépendance. Il naît de causes internes : le travail forcé, l'indigénat et la discrimination provoquent la réaction des élites instruites, des anciens combattants, des syndicats et de la presse. Des causes externes l'encouragent : la Seconde Guerre mondiale, la Charte de l'Atlantique (1941), la conférence de Brazzaville (1944), la Charte de l'ONU (1945), le panafricanisme et la conférence de Bandung (1955). La lutte est pacifique dans la plupart des cas (RDA à Bamako en 1946, négociations) et armée ailleurs (Madagascar en 1947, Kenya). Les étapes sont l'indépendance du Ghana de Nkrumah (1957), le « non » de la Guinée de Sékou Touré (1958), puis l'année 1960, où dix-sept États deviennent indépendants. Barème : définition (1), causes internes (1,5), causes externes (1,5), formes de lutte (1,5), étapes et acteurs (1,5), organisation et précision (1).",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
