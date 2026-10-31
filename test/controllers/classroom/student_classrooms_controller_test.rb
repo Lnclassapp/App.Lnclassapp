@@ -76,7 +76,7 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select "button", text: I18n.t("catalog.courses.sheets.hand_in")
       assert_select "input[name=assignment_public_id][value=?]", Orm::ClassroomAssignment.sole.public_id
       assert_select "button", text: I18n.t("catalog.courses.sheets.check"), count: 0
-      assert_select ".ps-result", 0
+      assert_select "a", text: I18n.t("catalog.courses.sheets.see_correction"), count: 0
     end
     assert_select ".ps-footer .ps-link-button", 0
     assert_no_match "Commencer", css_select("#student_classroom_assigned").text

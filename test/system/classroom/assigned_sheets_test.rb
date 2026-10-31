@@ -1,8 +1,8 @@
 require "application_system_test_case"
 
-# prepare-interros-cahier, Lot F (CA-13, 14, 16 ; UDR feuilles-prepare-interros-et-devoirs §3, devoirs reçus) : « Ma classe » lit un
-# envoi comme une feuille ; l'élève rend chaque exercice à son enseignant (sans correction avant), lit sa note et sa correction,
-# puis le refait pour s'entraîner : la copie refaite n'est plus rattachée au devoir.
+# prepare-interros-cahier, Lot F puis F bis (CA-13, 14, 16 ; UDR feuilles-prepare-interros-et-devoirs §3, devoirs reçus) : « Ma classe » lit un
+# envoi comme une feuille ; l'élève rend chaque exercice à son enseignant (sans correction avant) et lit sa note et sa correction sur la page de
+# résultat, dont le retour mène à « Ma classe » ; refait, l'exercice se vérifie en copie d'entraînement, non rattachée au devoir.
 class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
   setup do
     @course = create_course(name: "Thalès")
@@ -47,8 +47,7 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
           assert_selector ".ps-exercise", count: 3
           assert_button "Rendre à l'enseignant", count: 3
           assert_no_button "Vérifier ma réponse"
-          assert_no_selector ".ps-result"
-          assert_no_button "Recommencer"
+          assert_no_link "Voir ma correction"
         end
       end
       assert_equal 0, page.evaluate_script("document.documentElement.scrollWidth - document.documentElement.clientWidth")
@@ -57,31 +56,35 @@ class Classroom::AssignedSheetsTest < ApplicationSystemTestCase
     end
   end
 
-  # CA-16
-  test "rendre à l'enseignant rattache la copie et montre la note et la correction ; refaire donne une copie d'entraînement non rattachée" do
+  # CA-16 (memo Q17, Q18) : rendre ou vérifier ouvre la page de résultat, dont le retour mène à « Ma classe ».
+  test "rendre à l'enseignant ouvre la page de résultat et rattache la copie ; refaire puis vérifier ouvre aussi le résultat, copie non rattachée" do
     first = @devoir.first
     visit student_classroom_path
-    address = current_url
     answer(first)
 
     within(frame(first)) { click_button "Rendre à l'enseignant" }
 
+    assert_selector "#session_grade", text: "20/20"
+    assert_selector "#session_review li[id^=question_review_]", count: 2
+    assert_equal [ @assignments.fetch(first).id ], sessions(first).pluck(:classroom_assignment_id)
+    click_link "Retour à Ma classe"
+
     within(frame(first)) do
-      assert_selector ".ps-result-grade", text: "Ta note : 10 / 10"
-      assert_selector ".ps-correction-item", count: 2
+      assert_selector ".ps-status", text: "Réussi"
+      assert_link "Voir ma correction"
       assert_button "Refaire l'exercice"
       assert_no_button "Rendre à l'enseignant"
     end
-    assert_equal address, current_url
-    assert_equal [ @assignments.fetch(first).id ], sessions(first).pluck(:classroom_assignment_id)
     # Les deux autres exercices du devoir attendent toujours d'être rendus, sans correction.
-    within(frame(@devoir.second)) { assert_button "Rendre à l'enseignant"; assert_no_selector ".ps-result" }
+    @devoir.drop(1).each { |exercise| within(frame(exercise)) { assert_button "Rendre à l'enseignant"; assert_no_link "Voir ma correction" } }
 
     within(frame(first)) { click_button "Refaire l'exercice" }
     answer(first, right: false)
     within(frame(first)) { click_button "Vérifier ma réponse" }
 
-    within(frame(first)) { assert_selector ".ps-result-grade", text: "Ta note : 0 / 10" }
+    assert_selector "#session_grade", text: "0/20"
     assert_equal [ @assignments.fetch(first).id, nil ], sessions(first).order(:id).pluck(:classroom_assignment_id)
+    click_link "Retour à Ma classe"
+    assert_selector "#student_classroom_assigned"
   end
 end

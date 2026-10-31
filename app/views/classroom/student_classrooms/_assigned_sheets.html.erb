@@ -1,5 +1,5 @@
 <%# 🌐 UI · classroom/student_classrooms/_assigned_sheets — « Exercices assignés » de « Ma classe » : un envoi de l'enseignant, une feuille de cahier %>
-<%# Rôle : la plus récente en haut ; 3 exercices ou plus : « Prépare devoirs » (notions mobilisées), 1 ou 2 : « Prépare interros » (notion commune et « À retenir ») ; « Rendre à l'enseignant » avant, puis note, correction et « Refaire l'exercice » ; ni « Recommencer » ni progression des leçons %>
+<%# Rôle : la plus récente en haut ; 3 exercices ou plus : « Prépare devoirs » (notions mobilisées), 1 ou 2 : « Prépare interros » (notion commune et « À retenir ») ; « Rendre à l'enseignant » avant ; après, statut, « Voir ma correction » (la page de résultat, qui ramène ici) et « Refaire l'exercice » ; ni « Recommencer » ni progression des leçons %>
 <%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille, 0072 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (devoirs reçus par l'élève), 0076 §3.2 · memo Q12, Q13, Q17 %>
 <%# locals: (sheets:) -%>
 <% content_for :head do %><%= stylesheet_link_tag "prepare_sheet" %><% end %>
@@ -23,7 +23,7 @@
                    subtitle: (t("classroom.student_classrooms.assigned_sheet.due_on", date: l(sheet.due_on, format: :due_long)) if sheet.due_on),
                    box_label: (devoirs ? t("catalog.courses.sheets.notions") : (t("catalog.courses.sheets.remember") if sheet.remember)),
                    box_text: (devoirs ? sheet.notions.to_sentence : sheet.remember),
-                   exercises: sheet.exercises, hand_ins: sheet.hand_ins, sheet_id: sheet.dom_id,
+                   exercises: sheet.exercises, hand_ins: sheet.hand_ins, return_to: "class", sheet_id: sheet.dom_id,
                    footer: t("catalog.courses.sheets.brand_line", course: t("catalog.courses.sheets.#{sheet.kind}_section")) %>
       <% end %>
     </div>
