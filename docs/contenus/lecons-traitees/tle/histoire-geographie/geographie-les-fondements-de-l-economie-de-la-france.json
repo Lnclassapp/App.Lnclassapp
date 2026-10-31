@@ -12,7 +12,7 @@
         {
           "key": "carte-france-position",
           "kind": "map",
-          "description": "Carte de l'Europe occidentale. La France est colorée au centre ; ses voisins terrestres (Belgique, Luxembourg, Allemagne, Suisse, Italie, Espagne) forment une deuxième teinte, et le Royaume-Uni, de l'autre côté de la Manche, une troisième. On lit Paris, Londres, Berlin, Rome et Genève : la France est un carrefour entre le nord et le sud de l'Europe.",
+          "description": "Carte de l'Europe occidentale. La France est colorée au centre ; ses voisins terrestres (Belgique, Allemagne, Suisse, Italie, Espagne) forment une deuxième teinte, et le Royaume-Uni, de l'autre côté de la Manche, une troisième. On lit Paris, Londres, Berlin, Rome et Genève : la France est un carrefour entre le nord et le sud de l'Europe.",
           "params": {
             "base": "world",
             "areas": [
@@ -22,10 +22,6 @@
               },
               {
                 "id": "bel",
-                "category": 2
-              },
-              {
-                "id": "lux",
                 "category": 2
               },
               {
@@ -243,7 +239,7 @@
         {
           "key": "schema-fondements-france",
           "kind": "diagram",
-          "description": "Schéma en arbre. Au sommet, les fondements de l'économie française. Cinq branches : naturels (position, relief, climats, fleuves), humains (population, qualification, recherche), historiques et politiques (industrialisation, plan, nationalisations), européens et financiers (CECA, euro, place de Paris) et énergétiques (nucléaire).",
+          "description": "Schéma en arbre. Au sommet, les fondements de l'économie française. Cinq branches : Naturels, Humains, Historiques et politiques, Européens et financiers, Énergétiques. Chacune porte un exemple : position, relief, climats, fleuves ; population, qualification, recherche ; plan, nationalisations, Trente Glorieuses ; CECA, marché unique, euro, place de Paris ; choix du nucléaire en 1974.",
           "params": {
             "layout": "tree",
             "direction": "down",
@@ -370,7 +366,7 @@
             "steps": [
               "Situer : la Seine coule dans le Bassin parisien, traverse Paris, puis se jette dans la Manche près du Havre, face au Royaume-Uni.",
               "Décrire : le relief est fait de plaines et de bas plateaux, le climat est océanique (doux et humide) et le fleuve est large et navigable.",
-              "Identifier : les sols sont fertiles et l'eau est abondante ; en revanche le sous-sol ne fournit pas de pétrole ni de gaz.",
+              "Identifier : les sols sont fertiles et l'eau est abondante ; en revanche le sous-sol fournit très peu de pétrole et de gaz.",
               "Expliquer : les sols fertiles permettent de grandes cultures de céréales ; le fleuve et le port du Havre relient Paris à la mer et au commerce mondial ; le manque d'énergie oblige à en importer."
             ]
           },
@@ -556,6 +552,14 @@
                   {
                     "content": "rares",
                     "correct": true
+                  },
+                  {
+                    "content": "insuffisantes",
+                    "correct": true
+                  },
+                  {
+                    "content": "restreintes",
+                    "correct": true
                   }
                 ]
               },
@@ -587,7 +591,7 @@
         },
         {
           "name": "Analyser les fondements humains de l'économie française",
-          "remember": "Les **fondements humains** sont les hommes et leurs compétences. **Effectifs** : environ 68 millions d'habitants en France en 2024 (source : INSEE, 1er janvier 2024) ; en métropole, environ 40 millions en 1946 contre environ 65 millions en 2020 (INSEE, ordres de grandeur). La hausse vient de la natalité d'après-guerre, de l'allongement de la vie et de l'immigration. Une grande population fournit des **travailleurs** et un **marché intérieur** de consommateurs. **Qualification** : scolarité obligatoire jusqu'à 16 ans, universités, grandes écoles et écoles d'ingénieurs forment une main-d'œuvre qualifiée. **Recherche et innovation** : organismes publics comme le CNRS et le CEA, centre spatial de Kourou (CNES créé en 1961), aéronautique à Toulouse, TGV mis en service en 1981. La recherche et le développement représentent environ 2,2 % du PIB (source : INSEE, 2021, ordre de grandeur).",
+          "remember": "Les **fondements humains** sont les hommes et leurs compétences. **Effectifs** : environ 68 millions d'habitants en France, outre-mer compris, en 2024 (source : INSEE, 1er janvier 2024) ; en métropole, environ 40 millions en 1946 contre environ 65 millions en 2020 (INSEE, ordres de grandeur). La hausse vient de la natalité d'après-guerre, de l'allongement de la vie et de l'immigration. Une grande population fournit des **travailleurs** et un **marché intérieur** de consommateurs. **Qualification** : scolarité obligatoire jusqu'à 16 ans, universités, grandes écoles et écoles d'ingénieurs forment une main-d'œuvre qualifiée. **Recherche et innovation** : organismes publics comme le CNRS et le CEA, centre spatial de Kourou d'où est tiré le lanceur Ariane (CNES créé en 1961), aéronautique à Toulouse, TGV mis en service en 1981. La recherche et le développement représentent environ 2,2 % du PIB (source : INSEE, 2021, ordre de grandeur).",
           "method": [
             "Dénombrer la population : effectif, évolution et structure, avec une source datée.",
             "Qualifier la main-d'œuvre : niveau de formation et écoles qui la préparent.",
@@ -732,17 +736,25 @@
                 ]
               },
               {
-                "content": "Plus un pays a d'habitants, plus il est automatiquement riche.",
-                "question_type": "true_false",
-                "explanation": "Étape 4 — Relier : l'effectif ne suffit pas. Sans formation, emplois et innovation, une population nombreuse ne produit pas plus de richesses. Étape 2 — Qualifier : c'est la qualification de la main-d'œuvre qui fait la différence.",
+                "content": "Que faut-il surtout, en plus du nombre d'habitants, pour qu'une population produise des richesses ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Qualifier : la main-d'œuvre doit être formée. Étape 4 — Relier : il faut aussi des emplois et de l'innovation pour transformer les effectifs en richesses. Sans cela, une population nombreuse ne produit pas davantage.",
                 "answers": [
                   {
-                    "content": "Vrai",
+                    "content": "Qu'elle compte plus de retraités que d'actifs",
                     "correct": false
                   },
                   {
-                    "content": "Faux",
+                    "content": "Qu'elle soit formée et qu'elle trouve des emplois",
                     "correct": true
+                  },
+                  {
+                    "content": "Qu'elle vive uniquement à la campagne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Qu'elle ne soit pas qualifiée",
+                    "correct": false
                   }
                 ]
               },
@@ -868,7 +880,7 @@
                 "hint": "L'une dit à qui appartient l'entreprise, l'autre dit combien produire."
               },
               {
-                "content": "Le premier Commissariat général au Plan, créé en 1946, est dirigé par Jean ___.",
+                "content": "Le Commissariat général au Plan, créé en 1946, est dirigé par Jean ___.",
                 "question_type": "fill_blank",
                 "explanation": "Étape 2 — Identifier : l'acteur du Plan est Jean Monnet, qui dirige le Commissariat général au Plan créé en 1946. Il prépare ensuite le premier plan, de 1947 à 1952.",
                 "answers": [
@@ -921,7 +933,7 @@
                 ]
               },
               {
-                "content": "Qui dirige le premier Commissariat général au Plan, créé en 1946 ?",
+                "content": "Qui dirige le Commissariat général au Plan, créé en 1946 ?",
                 "question_type": "single_choice",
                 "explanation": "Étape 2 — Identifier : l'acteur du Plan est Jean Monnet. Jean Fourastié est l'économiste qui a popularisé l'expression Trente Glorieuses. Robert Schuman est lié à la CECA. Charles de Gaulle dirige le gouvernement provisoire en 1945-1946, mais il ne dirige pas le Plan.",
                 "answers": [
@@ -1099,7 +1111,7 @@
                 ]
               },
               {
-                "content": "Le quartier d'affaires de l'ouest de Paris, où se trouvent de grandes entreprises, s'appelle La ___.",
+                "content": "Le quartier d'affaires de l'agglomération parisienne, où se trouvent de grandes entreprises, s'appelle La ___.",
                 "question_type": "fill_blank",
                 "explanation": "Étape 2 — Nommer : La Défense est le quartier d'affaires de l'ouest de Paris. Il fait partie de la place financière de Paris, avec la Bourse et les banques.",
                 "answers": [
@@ -1218,7 +1230,7 @@
                 ]
               },
               {
-                "content": "Quel quartier d'affaires de l'ouest de Paris regroupe de grandes entreprises et fait partie de la place financière ?",
+                "content": "Quel quartier d'affaires de l'agglomération parisienne regroupe de grandes entreprises et fait partie de la place financière ?",
                 "question_type": "single_choice",
                 "explanation": "Étape 2 — Nommer : La Défense est le grand quartier d'affaires de Paris. Montmartre, Belleville et le Marais sont des quartiers parisiens connus pour d'autres raisons (habitat, culture, commerce). Étape 4 — Relier : La Défense héberge des sièges de multinationales.",
                 "answers": [
@@ -1268,7 +1280,7 @@
         },
         {
           "name": "Expliquer le choix du nucléaire à partir d'un document statistique",
-          "remember": "La France a très peu de pétrole et de gaz. Quand le **premier choc pétrolier** éclate en 1973 (forte hausse du prix du pétrole), elle choisit en 1974 de construire un grand nombre de **centrales nucléaires**, exploitées par EDF, pour produire son électricité avec moins de pétrole importé. Résultat : la part du nucléaire dans la production d'électricité passe d'environ 8 % en 1973 à environ 75 % en 1990, puis reste proche de 71 % en 2019 (source : RTE et EDF, ordres de grandeur). Le pays possède plus de cinquante réacteurs. Le nucléaire réduit la dépendance au pétrole, mais l'uranium est importé. Un **document statistique** se lit avec méthode : titre, **source**, **dates**, **unité**. Un écart entre deux pourcentages se donne en **points de pourcentage**.",
+          "remember": "La France a très peu de pétrole et de gaz. Quand le **premier choc pétrolier** éclate en 1973 (forte hausse du prix du pétrole), elle choisit en 1974 de construire un grand nombre de **centrales nucléaires**, exploitées par EDF, pour produire son électricité avec moins de pétrole importé. Résultat : la part du nucléaire dans la production d'électricité passe d'environ 8 % en 1973 à environ 75 % en 1990, puis reste proche de 71 % en 2019 (source : RTE et EDF, ordres de grandeur). Le pays compte 56 réacteurs en service en 2019 (source : EDF). Le nucléaire réduit la dépendance au pétrole, mais l'uranium est importé. Un **document statistique** se lit avec méthode : titre, **source**, **dates**, **unité**. Un écart entre deux pourcentages se donne en **points de pourcentage**.",
           "method": [
             "Présenter le document : nature, titre, source, dates et unité.",
             "Relever les valeurs utiles : la plus ancienne et la plus récente.",
@@ -1499,7 +1511,7 @@
       "exercises": [
         {
           "title": "Lire un texte sur les atouts naturels et humains",
-          "statement": "Texte écrit pour Lnclass : « La France est un pays tourné vers l'Europe et vers les mers. Sa façade maritime touche la Manche, l'Atlantique et la Méditerranée, et elle a de nombreux voisins. Son relief mêle de vastes plaines, des massifs anciens et des montagnes jeunes comme les Alpes et les Pyrénées. Son climat tempéré permet des cultures variées. Son sous-sol contient peu de pétrole et de gaz. Sa population, d'environ 68 millions d'habitants en 2024 selon l'INSEE, est formée dans des universités et des grandes écoles, et soutenue par un réseau de centres de recherche. » Le document est un texte de présentation, sans auteur. La carte associée montre la France, ses voisins et Paris.",
+          "statement": "Texte écrit pour Lnclass : « La France est un pays tourné vers l'Europe et vers les mers. Sa façade maritime touche la Manche, l'Atlantique et la Méditerranée, et elle a de nombreux voisins. Son relief mêle de vastes plaines, des massifs anciens et des montagnes jeunes comme les Alpes et les Pyrénées. Son climat tempéré permet des cultures variées. Son sous-sol contient peu de pétrole et de gaz. Sa population, d'environ 68 millions d'habitants en 2024 (outre-mer compris, selon l'INSEE), est formée dans des universités et des grandes écoles, et soutenue par un réseau de centres de recherche. » Le document est un texte de présentation, sans auteur. La carte associée montre la France, ses voisins et Paris.",
           "exercise_type": "fixation",
           "figure": "carte-france-position",
           "questions": [
@@ -1703,7 +1715,7 @@
             {
               "content": "Quelle date correspond à l'entrée en vigueur du marché unique européen ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Situer : le marché unique entre en vigueur en 1993. 1986 est l'année de l'Acte unique, qui le prépare. 1957 est la date du traité de Rome. 2002 est la date des pièces et billets en euros.",
+              "explanation": "Étape 1 — Dater : le marché unique entre en vigueur en 1993. 1986 est l'année de l'Acte unique, qui le prépare. 1957 est la date du traité de Rome. 2002 est la date des pièces et billets en euros.",
               "answers": [
                 {
                   "content": "1957",
@@ -1811,14 +1823,14 @@
             {
               "content": "Même avec les centrales nucléaires, la France garde une dépendance énergétique. Laquelle ?",
               "question_type": "single_choice",
-              "explanation": "Étape 4 — Expliquer : le nucléaire réduit la dépendance au pétrole, mais le combustible, l'uranium, est importé. Les trois autres propositions sont absurdes ou fausses : le charbon lorrain est national, l'eau des Alpes est une ressource du pays et le vent ne s'importe pas.",
+              "explanation": "Étape 4 — Expliquer : le nucléaire réduit la dépendance au pétrole, mais le combustible, l'uranium, est importé. Les réacteurs ne fonctionnent pas au pétrole, la France produit elle-même l'essentiel de son électricité et les cuves ne sont pas refroidies au gaz.",
               "answers": [
                 {
-                  "content": "Elle importe tout son charbon lorrain",
+                  "content": "Il faut du pétrole pour faire fonctionner les réacteurs",
                   "correct": false
                 },
                 {
-                  "content": "Elle importe son eau des Alpes",
+                  "content": "Elle doit importer toute son électricité",
                   "correct": false
                 },
                 {
@@ -1826,7 +1838,7 @@
                   "correct": true
                 },
                 {
-                  "content": "Elle importe le vent pour ses éoliennes",
+                  "content": "Elle dépend du gaz pour refroidir les cuves",
                   "correct": false
                 }
               ]

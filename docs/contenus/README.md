@@ -333,6 +333,25 @@ Au total : 42 notions, 82 exercices, 463 questions et 22 figures. Chaque fichier
 - **Leçon 7** : la distinction entre taxe et redevance.
 - **Leçon 10** : le rattachement des peuples aux groupes Mandé et Gour, les termes « toukpê » et « sanankouya », et la carte, qui ne colorie que les districts où un groupe est majoritaire de façon sûre (Montagnes, Vallée du Bandama et Sassandra-Marahoué restent blancs). Aucune alliance précise entre deux peuples réels n'est affirmée.
 
+### Tle, Histoire-Géographie au format 3 (chantier `contenus-tle-histoire-geographie`) — `lecons-traitees/tle/`
+
+Les 10 premières leçons d'Histoire-Géographie de Tle de la progression DPFC 2026-2027, rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague T8 du programme `contenus-v3-tous-niveaux`). La progression d'HG est **commune à toutes les séries** : chaque leçon est un seul cours, **sans `series_name`**, rangé dans `tle/histoire-geographie/` (comme `1ere/` et `2nde/`), visible des classes de Tle A1, A2, C et D. Elles remplacent les 3 fichiers v1 du même intitulé, qui étaient copiés dans `tle-a1/`, `tle-a2/`, `tle-c/` et `tle-d/`. Chaque notion porte son « Je m'entraîne » (`practice`). Figures : sortes de l'ADR-0117, aucune sorte nouvelle (la France est dessinée sur le fond `world`).
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Entraînement | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `histoire-geographie/histoire-l-onu.json` | Histoire — L'ONU | 5 | 9 | 54 | 93 % | 16 | 3 | `diagram`, `map world`, `timeline` |
+| 2 | `histoire-geographie/geographie-les-fondements-du-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les fondements du développement économique de la Côte d'Ivoire | 5 | 9 | 55 | 91 % | 18 | 4 | `diagram`, `map cote_d_ivoire`, `stat_chart line` |
+| 3 | `histoire-geographie/histoire-l-ere-de-la-bipolarisation-de-1947-a-1991.json` | Histoire — L'ère de la bipolarisation de 1947 à 1991 | 5 | 9 | 56 | 93 % | 15 | 3 | `diagram`, `map world`, `timeline` |
+| 4 | `histoire-geographie/geographie-les-secteurs-d-activites-economiques-de-la-cote-d-ivoire.json` | Géographie — Les secteurs d'activités économiques de la Côte d'Ivoire | 5 | 9 | 55 | 89 % | 15 | 4 | `diagram`, `map cote_d_ivoire`, `stat_chart pie` |
+| 5 | `histoire-geographie/histoire-de-la-fin-de-la-guerre-froide-vers-un-monde-multipolaire.json` | Histoire — De la fin de la guerre froide vers un monde multipolaire | 5 | 9 | 52 | 90 % | 15 | 3 | `diagram`, `map world`, `timeline` |
+| 6 | `histoire-geographie/geographie-les-problemes-de-developpement-economique-de-la-cote-d-ivoire.json` | Géographie — Les problèmes de développement économique de la Côte d'Ivoire | 5 | 9 | 55 | 91 % | 25 | 4 | `diagram`, `map cote_d_ivoire`, `stat_chart line` |
+| 7 | `histoire-geographie/histoire-la-montee-des-nationalismes-en-afrique.json` | Histoire — La montée des nationalismes en Afrique | 5 | 9 | 54 | 94 % | 15 | 3 | `diagram`, `map africa`, `timeline` |
+| 8 | `histoire-geographie/histoire-l-accession-de-la-cote-d-ivoire-a-l-independance.json` | Histoire — L'accession de la Côte d'Ivoire à l'indépendance | 5 | 9 | 56 | 93 % | 15 | 4 | `diagram`, `map cote_d_ivoire`, `timeline` |
+| 9 | `histoire-geographie/geographie-les-fondements-de-l-economie-de-la-france.json` | Géographie — Les fondements de l'économie de la France | 5 | 9 | 58 | 91 % | 15 | 6 | `diagram`, `map world`, `stat_chart bars`, `timeline` |
+| 10 | `histoire-geographie/histoire-l-accession-de-l-algerie-a-l-independance.json` | Histoire — L'accession de l'Algérie à l'indépendance | 5 | 9 | 54 | 91 % | 15 | 5 | `diagram`, `map africa`, `timeline` |
+
+Au total : 50 notions, 90 exercices, 549 questions notées, 164 questions d'entraînement et 39 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement et `test/integration/contenus/tle_histoire_geographie_je_m_entraine_test.rb`. Chacun a été relu par un second rédacteur qui n'en était pas l'auteur ; défauts corrigés, dont : l'UEMOA créée à huit États (sept en 1994, huit depuis 1997), la CEI créée « le mois précédent » la démission de Gorbatchev (même mois), le GPRA situé au Caire en 1959 (Tunis), le charbon lorrain dit « national », des parts du PIB attribuées à une source non vérifiée (présentées désormais comme ordres de grandeur d'illustration). Points à faire valider par un enseignant : journal du chantier et du programme. Les leçons restent en brouillon jusqu'à cette relecture.
+
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 
 Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A1 et A2 n'ont pas de Physique-Chimie dans la progression.
