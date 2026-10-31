@@ -32,11 +32,14 @@ module UseCases
       SUBJECTS_DETAIL = "subjects_created"
       Node = Ports::Catalog::ContentTreeWriterPort
 
-      def initialize(courses:, essentials:, taxonomy:, writer:)
+      # replace_exercises : réservé au chargement automatique hors production (l'écran Imports ne le passe jamais). Une leçon déjà
+      # présente, publiée ou non, n'est alors ni refusée ni remplacée entière : seuls ses exercices, problèmes et sujets le sont.
+      def initialize(courses:, essentials:, taxonomy:, writer:, replace_exercises: false)
         @courses = courses
         @essentials = essentials
         @taxonomy = taxonomy
         @writer = writer
+        @replace_exercises = replace_exercises
       end
 
       # Une leçon n'a pas de parent : l'enveloppe ne cite aucune cible.
@@ -71,7 +74,7 @@ module UseCases
         details = DETAILS.to_h { |rows, detail| [ detail, created.fetch(rows) ] }
         subjects = fresh.sum { it.subjects.size }
         replaced.each do |node|
-          counts = @writer.replace_draft(course_id: node.existing_id, tree: node)
+          counts = replace(node)
           DETAILS.each { |rows, detail| details[detail] += counts.fetch(rows) }
           subjects += counts.fetch(:subjects)
         end
@@ -80,6 +83,12 @@ module UseCases
       end
 
       private
+
+      def replace(node)
+        return @writer.replace_draft(course_id: node.existing_id, tree: node) unless @replace_exercises
+
+        @writer.replace_exercises(course_id: node.existing_id, tree: node)
+      end
 
       # Clé de doublon de la leçon (celle de CourseRepository#existing_keys).
       def course_key(course, lookup)
@@ -90,11 +99,26 @@ module UseCases
       # ADR-0116 §4.4 : une leçon déjà en base est remplacée si elle et tout son contenu sont encore en brouillon, refusée sinon.
       # La clé n'est pas celle d'existing_keys : le moteur ne l'ignore pas comme un doublon.
       def replacement_item(course, path, lookup, key, existing_id)
+        return exercises_item(course, path, lookup, key, existing_id) if @replace_exercises
+
         unless replaceable?(@courses.status_for_update(id: existing_id))
           return Entities::Catalog::ImportItem.new(path:, errors: [ rule_error(path, "lesson_already_published", course: course["name"].squish) ])
         end
 
         # Ni le slug de la leçon ni ceux des notions ne sont tirés ici : l'écrivain garde le premier et choisit les seconds.
+        node = course_node(course, lookup, { course_slugs: Set.new, essential_slugs: Set.new }, existing_id:)
+        Entities::Catalog::ImportItem.new(path:, plan: node, key: [ :replace, *key ])
+      end
+
+      # Chargement automatique : la leçon présente garde son cours, ses notions et leurs fiches ; les exercices du fichier se rattachent
+      # aux notions en place par leur nom (squish). Une notion introuvable refuse la leçon, rien n'est remplacé.
+      def exercises_item(course, path, lookup, key, existing_id)
+        present = @essentials.names(course_id: existing_id).to_set(&:squish)
+        errors = Array(course["notions"]).each_with_index.filter_map do |notion, index|
+          rule_error("#{path}.notions[#{index}].name", "notion_not_found", name: notion["name"].squish) unless present.include?(notion["name"].squish)
+        end
+        return Entities::Catalog::ImportItem.new(path:, errors:) if errors.any?
+
         node = course_node(course, lookup, { course_slugs: Set.new, essential_slugs: Set.new }, existing_id:)
         Entities::Catalog::ImportItem.new(path:, plan: node, key: [ :replace, *key ])
       end

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::CourseRepositoryPort
 # Rôle : contrat de persistance des cours, un seul agrégat pour lire et écrire
-# ADR  : 0029, 0035, 0039, 0075, 0116
+# ADR  : 0029, 0035, 0039, 0075, 0116, chargement-automatique-des-lecons-hors-production
 module Ports
   module Catalog
     module CourseRepositoryPort
@@ -37,6 +37,11 @@ module Ports
       # Slugs déjà pris, pour les calculer avant une insertion en masse (Entities::Catalog::Slug). → Set[String]
       def taken_slugs
         raise NotImplementedError, "#{self.class} doit implémenter #taken_slugs"
+      end
+
+      # Les slugs des leçons existantes par clé de doublon, pour retrouver une leçon qu'un import vient d'écrire. → { clé d'existing_keys => slug }
+      def slugs_by_key
+        raise NotImplementedError, "#{self.class} doit implémenter #slugs_by_key"
       end
 
       # ADR-0116 §4.4 : le statut de la leçon et de ses contenus (notions, exercices), lus sous verrou (FOR UPDATE) dans la transaction

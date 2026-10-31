@@ -15,7 +15,7 @@ module Entities
       test "les erreurs d'enveloppe rejettent tout le fichier" do
         assert ImportError.new(path: "$.version", code: "version_unsupported").blocking?
         assert ImportError.new(path: "$.version", code: "format_retired").blocking?
-        assert_equal 39, ImportError::CODES.size # + subject_exercise_with_notion, too_many_subjects et too_many_subject_exercises (ADR sujets-de-devoir), format_retired, lesson_already_published, too_few_questions, example_steps_mismatch, figure_invalid, figure_missing, invalid_count et too_short (ADR-0116), national_code_taken (ADR-0063), taken et no_latin_character (ADR-0066), duplicate_in_files (ADR-0068), forbidden et not_enqueued (ADR-0096), essential_exercise_count, lesson_exercise_count essential_not_in_lesson, essential_missing_from_file et essential_name_ambiguous (ADR-0113)
+        assert_equal 41, ImportError::CODES.size # + unknown_environment et notion_not_found (ADR chargement-automatique), subject_exercise_with_notion, too_many_subjects et too_many_subject_exercises (ADR sujets-de-devoir), format_retired, lesson_already_published, too_few_questions, example_steps_mismatch, figure_invalid, figure_missing, invalid_count et too_short (ADR-0116), national_code_taken (ADR-0063), taken et no_latin_character (ADR-0066), duplicate_in_files (ADR-0068), forbidden et not_enqueued (ADR-0096), essential_exercise_count, lesson_exercise_count essential_not_in_lesson, essential_missing_from_file et essential_name_ambiguous (ADR-0113)
       end
 
       # ADR-0066 : un nom de DRENA déjà pris sous un autre slug est une erreur de la ligne.
