@@ -175,6 +175,20 @@
   flex: none;
 }
 
+/* Figure d'un exercice : étiquettes lisibles. Téléphone : toute la colonne, centrée, 320 px au plus ; ordinateur : 300 px à côté de l'énoncé. */
+.ps-exercise-figure {
+  width: 100%;
+  max-width: 320px;
+  margin-inline: auto;
+}
+
+@media (min-width: 48rem) {
+  .ps-exercise-figure {
+    width: 300px;
+    margin-inline: 0;
+  }
+}
+
 /* Question */
 .ps-question {
   display: flex;

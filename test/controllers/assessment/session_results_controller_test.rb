@@ -184,6 +184,7 @@ class Assessment::SessionResultsControllerTest < ActionDispatch::IntegrationTest
     assert_select "#session_review #session_correction", 1
     assert_select "#session_correction h3", text: I18n.t("#{scope}.show.correction")
     assert_select "#session_correction p", 2
+    assert_select "#session_correction[data-controller=math]", 1
     assert_select "#session_correction p:nth-of-type(1)", text: "a. Quatre cellules filles."
     assert_select "#session_correction p:nth-of-type(2)", text: "c. Trois cellules."
     assert_select "#session_review ol", text: /Quatre cellules filles/, count: 0
