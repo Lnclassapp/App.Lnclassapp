@@ -1,0 +1,1987 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Géographie — Les fondements de l'économie de la France",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Histoire-Géographie",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "carte-france-position",
+          "kind": "map",
+          "description": "Carte de l'Europe occidentale. La France est colorée au centre ; ses voisins terrestres (Belgique, Luxembourg, Allemagne, Suisse, Italie, Espagne) forment une deuxième teinte, et le Royaume-Uni, de l'autre côté de la Manche, une troisième. On lit Paris, Londres, Berlin, Rome et Genève : la France est un carrefour entre le nord et le sud de l'Europe.",
+          "params": {
+            "base": "world",
+            "areas": [
+              {
+                "id": "fra",
+                "category": 1
+              },
+              {
+                "id": "bel",
+                "category": 2
+              },
+              {
+                "id": "lux",
+                "category": 2
+              },
+              {
+                "id": "deu",
+                "category": 2
+              },
+              {
+                "id": "che",
+                "category": 2
+              },
+              {
+                "id": "ita",
+                "category": 2
+              },
+              {
+                "id": "esp",
+                "category": 2
+              },
+              {
+                "id": "gbr",
+                "category": 3
+              }
+            ],
+            "places": [
+              {
+                "id": "paris",
+                "label": "Paris"
+              },
+              {
+                "id": "london",
+                "label": "Londres"
+              },
+              {
+                "id": "berlin",
+                "label": "Berlin"
+              },
+              {
+                "id": "rome",
+                "label": "Rome"
+              },
+              {
+                "id": "geneva",
+                "label": "Genève"
+              }
+            ],
+            "legend": [
+              "France métropolitaine",
+              "Voisins terrestres de la France",
+              "Royaume-Uni, de l'autre côté de la Manche"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "population-france",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la population de la France métropolitaine, en millions d'habitants, en ordres de grandeur d'après l'INSEE : environ 40 en 1946, 53 en 1975, 59 en 2000 et 65 en 2020. On lit une hausse continue des effectifs en trois quarts de siècle.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              40,
+              53,
+              59,
+              65
+            ],
+            "labels": [
+              "1946",
+              "1975",
+              "2000",
+              "2020"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "frise-economie-france",
+          "kind": "timeline",
+          "description": "Frise chronologique de 1940 à 2005. Une période en couleur marque les Trente Glorieuses, de 1945 à 1975. Les événements placés : nationalisations de 1945, Commissariat au Plan en 1946, plan Marshall en 1948, CECA en 1951, traité de Rome en 1957, choc pétrolier en 1973, programme nucléaire en 1974, marché unique en 1993, euro en 1999 et 2002.",
+          "params": {
+            "start": 1940,
+            "end": 2005,
+            "step": 5,
+            "unit": "year",
+            "periods": [
+              {
+                "from": 1945,
+                "to": 1975,
+                "label": "Trente Glorieuses"
+              }
+            ],
+            "events": [
+              {
+                "at": 1945,
+                "label": "Nationalisation de Renault"
+              },
+              {
+                "at": 1946,
+                "label": "Commissariat au Plan"
+              },
+              {
+                "at": 1948,
+                "label": "Plan Marshall"
+              },
+              {
+                "at": 1951,
+                "label": "CECA"
+              },
+              {
+                "at": 1957,
+                "label": "Traité de Rome"
+              },
+              {
+                "at": 1973,
+                "label": "Choc pétrolier"
+              },
+              {
+                "at": 1974,
+                "label": "Programme nucléaire"
+              },
+              {
+                "at": 1993,
+                "label": "Marché unique"
+              },
+              {
+                "at": 1999,
+                "label": "Euro (paiements)"
+              },
+              {
+                "at": 2002,
+                "label": "Pièces et billets en euros"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-construction-europeenne",
+          "kind": "diagram",
+          "description": "Schéma fléché de gauche à droite, de la CECA à l'euro. La CECA de 1951 met en commun le charbon et l'acier ; le traité de Rome de 1957 crée la CEE ; l'Acte unique de 1986 prépare le marché unique de 1993 ; l'euro suit en 1999 pour les paiements et en 2002 en pièces et billets.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "ceca",
+                "label": "CECA, 1951 : charbon et acier",
+                "category": 1
+              },
+              {
+                "id": "cee",
+                "label": "CEE, 1957 : traité de Rome",
+                "category": 2
+              },
+              {
+                "id": "acte",
+                "label": "Acte unique, 1986",
+                "category": 2
+              },
+              {
+                "id": "mu",
+                "label": "Marché unique, 1993",
+                "category": 2
+              },
+              {
+                "id": "euro",
+                "label": "Euro, 1999 et 2002",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "ceca",
+                "to": "cee"
+              },
+              {
+                "from": "cee",
+                "to": "acte"
+              },
+              {
+                "from": "acte",
+                "to": "mu"
+              },
+              {
+                "from": "mu",
+                "to": "euro"
+              }
+            ],
+            "legend": [
+              "Charbon et acier",
+              "Marché commun puis marché unique",
+              "Monnaie"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "nucleaire-france",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la part du nucléaire dans la production d'électricité en France, en pourcentage, en ordres de grandeur d'après RTE et EDF : environ 8 % en 1973, 75 % en 1990 et 71 % en 2019. On lit la forte hausse entre 1973 et 1990.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              8,
+              75,
+              71
+            ],
+            "labels": [
+              "1973",
+              "1990",
+              "2019"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-fondements-france",
+          "kind": "diagram",
+          "description": "Schéma en arbre. Au sommet, les fondements de l'économie française. Cinq branches : naturels (position, relief, climats, fleuves), humains (population, qualification, recherche), historiques et politiques (industrialisation, plan, nationalisations), européens et financiers (CECA, euro, place de Paris) et énergétiques (nucléaire).",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "fond",
+                "label": "Fondements de l'économie française"
+              },
+              {
+                "id": "nat",
+                "label": "Naturels",
+                "category": 1
+              },
+              {
+                "id": "hum",
+                "label": "Humains",
+                "category": 1
+              },
+              {
+                "id": "his",
+                "label": "Historiques et politiques",
+                "category": 2
+              },
+              {
+                "id": "eur",
+                "label": "Européens et financiers",
+                "category": 3
+              },
+              {
+                "id": "ene",
+                "label": "Énergétiques",
+                "category": 4
+              },
+              {
+                "id": "nat_ex",
+                "label": "Position, relief, climats, fleuves",
+                "category": 1
+              },
+              {
+                "id": "hum_ex",
+                "label": "Population, qualification, recherche",
+                "category": 1
+              },
+              {
+                "id": "his_ex",
+                "label": "Plan, nationalisations, Trente Glorieuses",
+                "category": 2
+              },
+              {
+                "id": "eur_ex",
+                "label": "CECA, marché unique, euro, place de Paris",
+                "category": 3
+              },
+              {
+                "id": "ene_ex",
+                "label": "Choix du nucléaire en 1974",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "fond",
+                "to": "nat"
+              },
+              {
+                "from": "fond",
+                "to": "hum"
+              },
+              {
+                "from": "fond",
+                "to": "his"
+              },
+              {
+                "from": "fond",
+                "to": "eur"
+              },
+              {
+                "from": "fond",
+                "to": "ene"
+              },
+              {
+                "from": "nat",
+                "to": "nat_ex"
+              },
+              {
+                "from": "hum",
+                "to": "hum_ex"
+              },
+              {
+                "from": "his",
+                "to": "his_ex"
+              },
+              {
+                "from": "eur",
+                "to": "eur_ex"
+              },
+              {
+                "from": "ene",
+                "to": "ene_ex"
+              }
+            ],
+            "legend": [
+              "Naturels et humains",
+              "Historiques et politiques",
+              "Européens et financiers",
+              "Énergétiques"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Repérer les fondements naturels de l'économie française",
+          "remember": "Les **fondements naturels** sont les atouts (et les manques) que la nature donne à un pays. En France métropolitaine : une **position** de carrefour en Europe occidentale, avec des voisins nombreux (Belgique, Luxembourg, Allemagne, Suisse, Italie, Espagne) ; des **façades maritimes** sur la mer du Nord et la Manche, l'Atlantique et la Méditerranée, donc de grands ports (Le Havre, Marseille-Fos, Dunkerque) ; un **relief** varié : vastes plaines et bas plateaux (Bassin parisien, Aquitaine), massifs anciens (Massif central, Vosges) et montagnes jeunes (Alpes, Pyrénées) ; des **climats tempérés** (océanique à l'ouest, continental à l'est, méditerranéen au sud, montagnard en altitude), favorables à l'agriculture ; des **fleuves** (Seine, Loire, Garonne, Rhône) utiles au transport, à l'irrigation et à l'électricité (barrages). **Manque** : très peu de pétrole et de gaz, donc des importations d'énergie fossile.",
+          "method": [
+            "Situer le territoire par rapport à ses voisins et à ses mers.",
+            "Décrire le relief, le climat et les fleuves du territoire étudié.",
+            "Identifier les ressources naturelles disponibles et celles qui manquent.",
+            "Expliquer le lien entre chaque atout, ou chaque manque, et l'activité économique."
+          ],
+          "example": {
+            "statement": "Montrer que la vallée de la Seine est un atout naturel pour l'économie française.",
+            "steps": [
+              "Situer : la Seine coule dans le Bassin parisien, traverse Paris, puis se jette dans la Manche près du Havre, face au Royaume-Uni.",
+              "Décrire : le relief est fait de plaines et de bas plateaux, le climat est océanique (doux et humide) et le fleuve est large et navigable.",
+              "Identifier : les sols sont fertiles et l'eau est abondante ; en revanche le sous-sol ne fournit pas de pétrole ni de gaz.",
+              "Expliquer : les sols fertiles permettent de grandes cultures de céréales ; le fleuve et le port du Havre relient Paris à la mer et au commerce mondial ; le manque d'énergie oblige à en importer."
+            ]
+          },
+          "pitfall": "Ne confonds pas un **atout naturel** et un **aménagement humain**. La Manche est naturelle ; le tunnel sous la Manche, ouvert en 1994, est une construction. Autre erreur : croire que la France a toutes les ressources. Contre-exemple : elle importe presque tout son pétrole, car son sous-sol en contient très peu. Pose-toi toujours la question : est-ce que la nature l'a donné, ou est-ce que l'homme l'a construit ?",
+          "figure": "carte-france-position",
+          "practice": {
+            "statement": "Tu t'entraînes à repérer les fondements naturels avec la méthode : situer, décrire, identifier, expliquer.",
+            "questions": [
+              {
+                "content": "La France métropolitaine est ouverte au nord-ouest sur la ___ et au sud sur la ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Situer : on place le territoire par rapport à ses mers. La Manche borde le nord-ouest et la Méditerranée le sud. La Baltique, la mer Noire, la mer Rouge et la Caspienne ne touchent pas la France métropolitaine.",
+                "answers": [
+                  {
+                    "content": "mer Baltique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Manche",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "mer Rouge",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Méditerranée",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "mer Noire",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "mer Caspienne",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense à la mer entre la France et le Royaume-Uni, puis à la mer des plages de Marseille."
+              },
+              {
+                "content": "Le tunnel sous la Manche est un fondement naturel de l'économie française.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Identifier : on sépare ce que la nature donne de ce que l'homme construit. Le tunnel, ouvert en 1994, est un aménagement humain. Le fondement naturel est la Manche elle-même.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le climat de l'ouest de la France, doux et humide toute l'année, est dit ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Décrire : le climat de l'ouest est océanique, influencé par l'Atlantique. Le climat méditerranéen est sec en été et le climat continental a des hivers froids.",
+                "answers": [
+                  {
+                    "content": "océanique",
+                    "correct": true
+                  }
+                ],
+                "hint": "Il est influencé par l'océan Atlantique."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Repérer les fondements naturels de la France",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche (situer, décrire, identifier, expliquer) pour reconnaître les atouts naturels de la France métropolitaine.",
+            "exercise_type": "fixation",
+            "figure": "carte-france-position",
+            "questions": [
+              {
+                "content": "Parmi ces éléments, lequel est un fondement naturel de l'économie française ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Identifier : on cherche ce que la nature donne. Les plaines fertiles du Bassin parisien sont naturelles. Le tunnel, le port et le réseau ferroviaire sont construits par l'homme : ce sont des aménagements.",
+                "answers": [
+                  {
+                    "content": "Le tunnel sous la Manche",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les plaines fertiles du Bassin parisien",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le port de Marseille-Fos",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le réseau de trains à grande vitesse",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La France métropolitaine est bordée par la Manche, l'Atlantique et la Méditerranée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : on place le territoire par rapport à ses mers. Au nord, la Manche (et la mer du Nord) ; à l'ouest, l'océan Atlantique ; au sud-est, la Méditerranée. Ces façades maritimes expliquent de grands ports comme Le Havre et Marseille.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux fleuves français qui se jettent dans l'océan Atlantique ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Décrire : on relève où va chaque fleuve. La Loire et la Garonne (par l'estuaire de la Gironde) rejoignent l'Atlantique. La Seine se jette dans la Manche et le Rhône dans la Méditerranée. Le Rhin ne se jette pas dans la mer en France.",
+                "answers": [
+                  {
+                    "content": "La Seine",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Loire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Rhône",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Garonne",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le Rhin",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque climat de la France à la région où il domine.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Décrire : on associe chaque climat à son espace. L'océan adoucit l'ouest, la Méditerranée donne des étés secs au sud, l'altitude refroidit les montagnes et l'éloignement de l'océan durcit les hivers de l'est.",
+                "answers": [
+                  {
+                    "content": "Climat océanique",
+                    "match": "Bretagne et ouest du pays"
+                  },
+                  {
+                    "content": "Climat méditerranéen",
+                    "match": "Provence et Côte d'Azur"
+                  },
+                  {
+                    "content": "Climat montagnard",
+                    "match": "Alpes et Pyrénées"
+                  },
+                  {
+                    "content": "Climat continental",
+                    "match": "Est du pays, comme l'Alsace"
+                  }
+                ]
+              },
+              {
+                "content": "La France possède peu de pétrole et de gaz : ses ressources en énergie fossile sont ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Identifier : on repère ce qui manque. Le sous-sol français contient très peu de pétrole et de gaz, donc ses ressources en énergie fossile sont limitées. Étape 4 — Expliquer : ce manque oblige à importer de l'énergie ou à en produire autrement.",
+                "answers": [
+                  {
+                    "content": "limitées",
+                    "correct": true
+                  },
+                  {
+                    "content": "faibles",
+                    "correct": true
+                  },
+                  {
+                    "content": "rares",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces éléments, lequel est un aménagement humain et non un atout naturel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Identifier : le piège est de confondre le naturel et le construit. Le Rhône, le climat et la plaine existent sans l'homme. Le tunnel sous la Manche, ouvert en 1994, a été construit : c'est un aménagement humain.",
+                "answers": [
+                  {
+                    "content": "Le tunnel sous la Manche",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le fleuve Rhône",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le climat océanique",
+                    "correct": false
+                  },
+                  {
+                    "content": "La plaine de la Beauce",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser les fondements humains de l'économie française",
+          "remember": "Les **fondements humains** sont les hommes et leurs compétences. **Effectifs** : environ 68 millions d'habitants en France en 2024 (source : INSEE, 1er janvier 2024) ; en métropole, environ 40 millions en 1946 contre environ 65 millions en 2020 (INSEE, ordres de grandeur). La hausse vient de la natalité d'après-guerre, de l'allongement de la vie et de l'immigration. Une grande population fournit des **travailleurs** et un **marché intérieur** de consommateurs. **Qualification** : scolarité obligatoire jusqu'à 16 ans, universités, grandes écoles et écoles d'ingénieurs forment une main-d'œuvre qualifiée. **Recherche et innovation** : organismes publics comme le CNRS et le CEA, centre spatial de Kourou (CNES créé en 1961), aéronautique à Toulouse, TGV mis en service en 1981. La recherche et le développement représentent environ 2,2 % du PIB (source : INSEE, 2021, ordre de grandeur).",
+          "method": [
+            "Dénombrer la population : effectif, évolution et structure, avec une source datée.",
+            "Qualifier la main-d'œuvre : niveau de formation et écoles qui la préparent.",
+            "Repérer les lieux et organismes de recherche et d'innovation.",
+            "Relier effectifs, qualification et innovation à la production de richesses."
+          ],
+          "example": {
+            "statement": "Montrer que la population est un fondement humain de l'économie française, à partir d'ordres de grandeur de l'INSEE.",
+            "steps": [
+              "Dénombrer : la population de la métropole passe d'environ 40 millions en 1946 à environ 65 millions en 2020, soit 25 millions de plus (source : INSEE).",
+              "Qualifier : la scolarité est obligatoire jusqu'à 16 ans et les universités et grandes écoles forment techniciens, ingénieurs et cadres.",
+              "Repérer : le CNRS, le CEA et le CNES mènent des recherches ; Toulouse est un centre de l'aéronautique et Kourou une base spatiale.",
+              "Relier : plus d'habitants donnent plus de travailleurs et de consommateurs ; une main-d'œuvre qualifiée et la recherche permettent de fabriquer des produits à forte valeur, comme les avions et les trains à grande vitesse."
+            ]
+          },
+          "pitfall": "Ne confonds pas **population totale** et **population active**. Un pays de 65 millions d'habitants n'a pas 65 millions de travailleurs : les enfants, les étudiants et les retraités ne font pas partie des actifs, c'est-à-dire de ceux qui travaillent ou cherchent un emploi. Autre erreur : croire que plus d'habitants veut toujours dire plus de richesses. Sans formation ni emplois, une population nombreuse ne produit pas davantage.",
+          "figure": "population-france",
+          "practice": {
+            "statement": "Tu t'entraînes à analyser les fondements humains avec la méthode : dénombrer, qualifier, repérer, relier.",
+            "questions": [
+              {
+                "content": "La population ___ regroupe tous les habitants ; la population ___ regroupe ceux qui travaillent ou cherchent un emploi.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Dénombrer : on distingue l'effectif de tous les habitants (population totale) de celui des travailleurs et des demandeurs d'emploi (population active). Les enfants et les retraités comptent dans la première, pas dans la seconde.",
+                "answers": [
+                  {
+                    "content": "active",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "totale",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "rurale",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "active",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "totale",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "urbaine",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un retraité est un habitant, mais il ne travaille plus."
+              },
+              {
+                "content": "D'après l'INSEE (ordres de grandeur), la métropole compte environ 53 millions d'habitants en 1975 et environ 59 millions en 2000. Combien de millions d'habitants de plus en 2000 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Dénombrer : on relève 53 millions en 1975 et 59 millions en 2000. On calcule la différence : 59 − 53 = 6. La population a gagné environ 6 millions d'habitants.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "unit": "millions"
+              },
+              {
+                "content": "Un pays très peuplé est toujours plus riche qu'un pays peu peuplé.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Relier : le nombre d'habitants ne suffit pas. Il faut aussi des travailleurs formés, des emplois et de la recherche pour produire des richesses. La qualification compte autant que l'effectif.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Analyser les fondements humains",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche (dénombrer, qualifier, repérer, relier) avec des ordres de grandeur de l'INSEE sur la population de la France métropolitaine.",
+            "exercise_type": "fixation",
+            "figure": "population-france",
+            "questions": [
+              {
+                "content": "Selon l'INSEE (ordres de grandeur), la France métropolitaine compte environ 40 millions d'habitants en 1946 et environ 65 millions en 2020. Combien de millions d'habitants de plus en 2020 ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Dénombrer : on relève 40 millions en 1946 (départ) et 65 millions en 2020 (arrivée). On calcule la différence : 65 − 40 = 25. La population a augmenté d'environ 25 millions d'habitants.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ],
+                "unit": "millions"
+              },
+              {
+                "content": "Selon l'INSEE (ordres de grandeur), la métropole compte environ 40 millions d'habitants en 1946 et environ 65 millions en 2020. Par combien la population a-t-elle été multipliée (arrondi au dixième) ?",
+                "question_type": "numeric",
+                "tolerance": 0.05,
+                "explanation": "Étape 1 — Dénombrer : on relève 40 puis 65. On calcule le rapport : 65 ÷ 40 = 1,625, soit 1,6 après arrondi. La population a été multipliée par environ 1,6. Diviser 40 par 65 donnerait 0,6 : ce serait renverser le rapport.",
+                "answers": [
+                  {
+                    "content": "1,6",
+                    "correct": true
+                  }
+                ],
+                "unit": "fois"
+              },
+              {
+                "content": "Quel organisme public mène des recherches scientifiques en France ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Repérer : le CNRS est un organisme public de recherche. L'INSEE compte la population et mesure l'économie, la SNCF transporte des voyageurs et des marchandises, la Banque de France s'occupe de monnaie. Aucun des trois n'est un organisme de recherche scientifique.",
+                "answers": [
+                  {
+                    "content": "L'INSEE, qui produit les statistiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le CNRS",
+                    "correct": true
+                  },
+                  {
+                    "content": "La SNCF, qui gère les trains",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Banque de France",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Plus un pays a d'habitants, plus il est automatiquement riche.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Relier : l'effectif ne suffit pas. Sans formation, emplois et innovation, une population nombreuse ne produit pas plus de richesses. Étape 2 — Qualifier : c'est la qualification de la main-d'œuvre qui fait la différence.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux réalisations liées à la recherche et à l'innovation en France ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Repérer : le TGV et le lanceur Ariane sont des produits de la recherche et de l'ingénierie. Le traité de Rome et l'euro sont des décisions politiques et monétaires européennes, pas des innovations techniques.",
+                "answers": [
+                  {
+                    "content": "Le traité de Rome",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le TGV, en service depuis 1981",
+                    "correct": true
+                  },
+                  {
+                    "content": "La monnaie unique euro",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le lanceur spatial Ariane",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La population ___ regroupe les habitants qui travaillent ou cherchent un emploi.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Dénombrer : on distingue la population totale (tous les habitants) de la population active (ceux qui travaillent ou cherchent un emploi). Les enfants et les retraités n'en font pas partie.",
+                "answers": [
+                  {
+                    "content": "active",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pays compte 65 millions d'habitants. Quelle phrase est exacte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Dénombrer : le piège est de confondre population totale et population active. La population active ne contient que ceux qui travaillent ou cherchent un emploi : elle est donc toujours plus petite que la population totale.",
+                "answers": [
+                  {
+                    "content": "Sa population active est plus petite que 65 millions, car enfants et retraités n'en font pas partie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Tous les habitants font partie de la population active",
+                    "correct": false
+                  },
+                  {
+                    "content": "La population active est toujours plus grande que la population totale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seuls les ouvriers font partie de la population active",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer les fondements historiques et politiques",
+          "remember": "Les **fondements historiques et politiques** viennent du passé et des choix de l'État. **Révolution industrielle** : au XIXe siècle, la France s'industrialise grâce au charbon (Nord, Lorraine), au fer, au textile, à la métallurgie et au chemin de fer. **Après 1945**, l'État devient un acteur économique majeur. La **planification** : le Commissariat général au Plan, créé en 1946 et dirigé par Jean Monnet, fixe des objectifs de production (charbon, électricité, acier, transports) pour plusieurs années ; le premier plan couvre 1947-1952. Les **nationalisations** de 1945-1946 : l'État devient propriétaire d'entreprises (Renault, charbonnages, EDF-GDF, grandes banques). L'aide américaine du plan Marshall (à partir de 1948) aide la reconstruction. Ces choix lancent les **Trente Glorieuses** (1945-1975), expression de l'économiste Jean Fourastié : une croissance forte et continue, la modernisation, l'urbanisation et la consommation de masse. Le choc pétrolier de 1973 y met fin.",
+          "method": [
+            "Dater la mesure ou la période sur une frise chronologique.",
+            "Identifier les acteurs et la mesure : l'État, le plan, la nationalisation.",
+            "Expliquer le but de la mesure : reconstruire, moderniser, produire de l'énergie.",
+            "Conclure en reliant la mesure à ses effets sur la croissance."
+          ],
+          "example": {
+            "statement": "Expliquer la création d'EDF en 1946.",
+            "steps": [
+              "Dater : 1946, juste après la Seconde Guerre mondiale, en pleine reconstruction, au début des Trente Glorieuses.",
+              "Identifier : l'État nationalise les entreprises d'électricité et crée un grand établissement public, Électricité de France (EDF).",
+              "Expliquer : l'État veut produire assez d'électricité pour reconstruire et moderniser l'industrie, en suivant les objectifs du plan.",
+              "Conclure : une électricité plus abondante soutient la croissance des Trente Glorieuses ; c'est un exemple du rôle de l'État, fondement politique de l'économie française."
+            ]
+          },
+          "pitfall": "Ne confonds pas **nationalisation** et **planification**. La nationalisation change le **propriétaire** : l'État achète ou reprend une entreprise, comme Renault en 1945. La planification fixe des **objectifs** de production pour plusieurs années, y compris à des entreprises restées privées. Autre erreur : croire que l'État dirige alors toute l'économie. La plupart des entreprises restent privées après 1945.",
+          "figure": "frise-economie-france",
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer les fondements historiques et politiques avec la méthode : dater, identifier, expliquer, conclure.",
+            "questions": [
+              {
+                "content": "La nationalisation change le ___ d'une entreprise, alors que la planification fixe des ___ de production.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Identifier : la nationalisation fait passer une entreprise à l'État, c'est un changement de propriétaire. La planification, elle, fixe des objectifs de production sur plusieurs années. Ce sont deux mesures différentes.",
+                "answers": [
+                  {
+                    "content": "nom",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "propriétaire",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "salarié",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "objectifs",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "impôts",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "salaires",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'une dit à qui appartient l'entreprise, l'autre dit combien produire."
+              },
+              {
+                "content": "Le premier Commissariat général au Plan, créé en 1946, est dirigé par Jean ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier : l'acteur du Plan est Jean Monnet, qui dirige le Commissariat général au Plan créé en 1946. Il prépare ensuite le premier plan, de 1947 à 1952.",
+                "answers": [
+                  {
+                    "content": "Monnet",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les Trente Glorieuses désignent une période de forte croissance économique, de 1945 à 1975.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Dater : on place la période sur la frise, de 1945 à 1975. Étape 4 — Conclure : elle est « glorieuse » par sa croissance forte et continue, et non par des victoires militaires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Expliquer le rôle de l'État après 1945",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche (dater, identifier, expliquer, conclure) pour comprendre le rôle de l'État dans l'économie française après la Seconde Guerre mondiale.",
+            "exercise_type": "fixation",
+            "figure": "frise-economie-france",
+            "questions": [
+              {
+                "content": "Remets ces événements dans l'ordre chronologique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Dater : on place chaque événement sur la frise. Renault est nationalisé en 1945, le Commissariat général au Plan naît en 1946, la CECA en 1951 et le choc pétrolier survient en 1973, à la fin des Trente Glorieuses.",
+                "answers": [
+                  {
+                    "content": "Nationalisation de Renault (1945)"
+                  },
+                  {
+                    "content": "Création du Commissariat général au Plan (1946)"
+                  },
+                  {
+                    "content": "Traité de Paris créant la CECA (1951)"
+                  },
+                  {
+                    "content": "Premier choc pétrolier (1973)"
+                  }
+                ]
+              },
+              {
+                "content": "Qui dirige le premier Commissariat général au Plan, créé en 1946 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : l'acteur du Plan est Jean Monnet. Jean Fourastié est l'économiste qui a popularisé l'expression Trente Glorieuses. Robert Schuman est lié à la CECA. Charles de Gaulle dirige le gouvernement provisoire en 1945-1946, mais il ne dirige pas le Plan.",
+                "answers": [
+                  {
+                    "content": "Robert Schuman",
+                    "correct": false
+                  },
+                  {
+                    "content": "Jean Monnet",
+                    "correct": true
+                  },
+                  {
+                    "content": "Jean Fourastié",
+                    "correct": false
+                  },
+                  {
+                    "content": "Charles de Gaulle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une nationalisation est le passage d'une entreprise privée à la propriété de l'État.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier : nationaliser, c'est faire de l'État le propriétaire de l'entreprise. C'est le cas de Renault en 1945 et d'EDF en 1946. La planification, elle, ne change pas le propriétaire.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier : on associe chaque mesure à son effet. Nationalisation : le propriétaire change. Planification : des objectifs sont fixés. Trente Glorieuses : la période de croissance. Plan Marshall : l'aide américaine qui a aidé la reconstruction.",
+                "answers": [
+                  {
+                    "content": "Nationalisation",
+                    "match": "L'État devient propriétaire de l'entreprise"
+                  },
+                  {
+                    "content": "Planification",
+                    "match": "L'État fixe des objectifs de production pour plusieurs années"
+                  },
+                  {
+                    "content": "Trente Glorieuses",
+                    "match": "Période de forte croissance de 1945 à 1975"
+                  },
+                  {
+                    "content": "Plan Marshall",
+                    "match": "Aide économique américaine à l'Europe après la guerre"
+                  }
+                ]
+              },
+              {
+                "content": "La période de forte croissance de 1945 à 1975 est appelée les ___ Glorieuses.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Dater : la période dure environ trente ans, de 1945 à 1975, d'où le nom de Trente Glorieuses. Étape 4 — Conclure : elle correspond à une croissance forte et continue de l'économie française.",
+                "answers": [
+                  {
+                    "content": "Trente",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois entreprises ou groupes nationalisés en 1945-1946 ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 2 — Identifier : Renault (1945), les charbonnages et EDF (1946) sont nationalisés. Airbus n'existe pas encore (créé en 1970) et Carrefour est une entreprise privée. Le piège est de croire que l'État reprend toutes les entreprises : seules quelques grandes entreprises sont nationalisées.",
+                "answers": [
+                  {
+                    "content": "Airbus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Renault",
+                    "correct": true
+                  },
+                  {
+                    "content": "Carrefour",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les charbonnages",
+                    "correct": true
+                  },
+                  {
+                    "content": "Électricité de France",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Comprendre les fondements européens et financiers",
+          "remember": "**Construction européenne** : la **CECA** (traité de Paris, 1951) met en commun le charbon et l'acier de six pays dont la France, sur l'idée de Robert Schuman (déclaration du 9 mai 1950). Le **traité de Rome** (25 mars 1957) crée la **CEE** et un marché commun. Le **marché unique**, préparé par l'Acte unique de 1986, entre en vigueur en 1993 : libre circulation des marchandises, des services, des capitaux et des personnes. L'**euro**, monnaie unique, existe depuis 1999 pour les paiements, depuis 2002 en pièces et en billets. L'Union européenne compte plus de 440 millions d'habitants (source : Eurostat, 2023). **Capitaux et finance** : la **place financière de Paris** réunit banques, assurances et la Bourse de Paris (Euronext depuis 2000), avec le quartier d'affaires de La Défense. Les **entreprises multinationales** (présentes dans plusieurs pays), comme TotalEnergies, L'Oréal ou LVMH, investissent et vendent dans le monde, et des entreprises étrangères investissent en France.",
+          "method": [
+            "Situer l'étape ou l'institution : date, pays concernés.",
+            "Nommer l'institution ou la mesure et dire ce qu'elle met en commun.",
+            "Décrire ce que la mesure change pour les échanges, les capitaux ou la monnaie.",
+            "Relier cet effet au développement des entreprises françaises."
+          ],
+          "example": {
+            "statement": "Expliquer l'apport du marché unique de 1993 à l'économie française.",
+            "steps": [
+              "Situer : le marché unique entre en vigueur le 1er janvier 1993, entre les douze États de la Communauté européenne, dont la France.",
+              "Nommer : c'est le marché unique, préparé par l'Acte unique de 1986 ; il met en commun un grand espace d'échanges.",
+              "Décrire : marchandises, services, capitaux et personnes circulent librement, sans frontières douanières entre les États.",
+              "Relier : les entreprises françaises vendent à beaucoup plus de consommateurs et investissent plus facilement chez leurs voisins : c'est un fondement européen et financier de leur croissance."
+            ]
+          },
+          "pitfall": "Ne confonds pas les étapes de la construction européenne. La CECA (1951) ne concerne que le charbon et l'acier. Le traité de Rome (1957) crée la CEE, un marché commun, mais **pas l'euro**. Contre-exemple : l'euro apparaît plus de quarante ans après, en 1999 pour les paiements et en 2002 pour les pièces et billets. Retiens l'ordre : charbon-acier, marché commun, marché unique, monnaie unique.",
+          "figure": "schema-construction-europeenne",
+          "practice": {
+            "statement": "Tu t'entraînes à comprendre les fondements européens et financiers avec la méthode : situer, nommer, décrire, relier.",
+            "questions": [
+              {
+                "content": "La ___ de 1951 met en commun le charbon et l'acier ; le traité de ___ de 1957 crée la CEE.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Nommer : la CECA met en commun le charbon et l'acier en 1951 (traité de Paris). Le traité de Rome, en 1957, crée la CEE. Le piège est de mettre Paris pour 1957 : Paris est le lieu du traité de 1951.",
+                "answers": [
+                  {
+                    "content": "OTAN",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "CECA",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "CEE",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Rome",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "Paris",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "Maastricht",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'ordre est : charbon et acier d'abord, marché commun ensuite."
+              },
+              {
+                "content": "Une entreprise multinationale est présente dans plusieurs pays.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Relier : une multinationale installe des usines, des bureaux ou des magasins dans plusieurs pays. TotalEnergies, L'Oréal et LVMH en sont des exemples français.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le quartier d'affaires de l'ouest de Paris, où se trouvent de grandes entreprises, s'appelle La ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Nommer : La Défense est le quartier d'affaires de l'ouest de Paris. Il fait partie de la place financière de Paris, avec la Bourse et les banques.",
+                "answers": [
+                  {
+                    "content": "Défense",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est un quartier de tours de bureaux, à l'ouest de Paris."
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Comprendre la construction européenne et la finance",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche (situer, nommer, décrire, relier) pour comprendre le rôle de l'Europe et des capitaux dans l'économie française.",
+            "exercise_type": "fixation",
+            "figure": "schema-construction-europeenne",
+            "questions": [
+              {
+                "content": "Relie chaque date à l'événement européen correspondant.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Situer : on place chaque étape à sa date. 1951 : CECA. 1957 : CEE. 1993 : marché unique. 2002 : pièces et billets en euros. L'euro existait déjà pour les paiements depuis 1999.",
+                "answers": [
+                  {
+                    "content": "1951",
+                    "match": "Traité de Paris : naissance de la CECA"
+                  },
+                  {
+                    "content": "1957",
+                    "match": "Traité de Rome : naissance de la CEE"
+                  },
+                  {
+                    "content": "1993",
+                    "match": "Entrée en vigueur du marché unique"
+                  },
+                  {
+                    "content": "2002",
+                    "match": "Pièces et billets en euros"
+                  }
+                ]
+              },
+              {
+                "content": "Que met en commun la CECA, créée en 1951 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Nommer : CECA signifie Communauté européenne du charbon et de l'acier. Ces deux produits servaient à la guerre comme à la reconstruction : les mettre en commun rapproche la France et l'Allemagne. Les trois autres propositions ne sont pas l'objet de ce traité.",
+                "answers": [
+                  {
+                    "content": "Le pétrole et le gaz",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le charbon et l'acier",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le blé et le lait",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les automobiles et les avions",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le traité de Rome de 1957 a créé l'euro.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Nommer : le traité de Rome crée la CEE et un marché commun. Étape 1 — Situer : l'euro vient beaucoup plus tard, en 1999 pour les paiements et en 2002 pour les pièces et les billets.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux choses qui circulent librement dans le marché unique de 1993 ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Décrire : le marché unique fait circuler librement marchandises, services, capitaux et personnes. Les armées, les impôts et les programmes scolaires restent décidés par chaque État.",
+                "answers": [
+                  {
+                    "content": "Les armées nationales",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les marchandises",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les impôts nationaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les capitaux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les programmes scolaires",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La monnaie unique européenne s'appelle l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Nommer : la monnaie unique est l'euro. Étape 3 — Décrire : elle supprime le change entre les pays de la zone euro, ce qui facilite les échanges des entreprises françaises.",
+                "answers": [
+                  {
+                    "content": "euro",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel quartier d'affaires de l'ouest de Paris regroupe de grandes entreprises et fait partie de la place financière ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Nommer : La Défense est le grand quartier d'affaires de Paris. Montmartre, Belleville et le Marais sont des quartiers parisiens connus pour d'autres raisons (habitat, culture, commerce). Étape 4 — Relier : La Défense héberge des sièges de multinationales.",
+                "answers": [
+                  {
+                    "content": "Montmartre",
+                    "correct": false
+                  },
+                  {
+                    "content": "La Défense",
+                    "correct": true
+                  },
+                  {
+                    "content": "Belleville",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Marais",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle phrase distingue correctement la CECA et la CEE ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : le piège est d'inverser les dates. La CECA date de 1951 et concerne le charbon et l'acier. La CEE date de 1957 et crée un marché commun. Ni l'une ni l'autre ne crée l'euro.",
+                "answers": [
+                  {
+                    "content": "La CECA (1951) met en commun le charbon et l'acier ; la CEE (1957) crée un marché commun",
+                    "correct": true
+                  },
+                  {
+                    "content": "La CECA (1957) crée un marché commun ; la CEE (1951) met en commun le charbon et l'acier",
+                    "correct": false
+                  },
+                  {
+                    "content": "La CECA et la CEE créent toutes les deux l'euro",
+                    "correct": false
+                  },
+                  {
+                    "content": "La CEE (1951) précède la CECA (1957)",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer le choix du nucléaire à partir d'un document statistique",
+          "remember": "La France a très peu de pétrole et de gaz. Quand le **premier choc pétrolier** éclate en 1973 (forte hausse du prix du pétrole), elle choisit en 1974 de construire un grand nombre de **centrales nucléaires**, exploitées par EDF, pour produire son électricité avec moins de pétrole importé. Résultat : la part du nucléaire dans la production d'électricité passe d'environ 8 % en 1973 à environ 75 % en 1990, puis reste proche de 71 % en 2019 (source : RTE et EDF, ordres de grandeur). Le pays possède plus de cinquante réacteurs. Le nucléaire réduit la dépendance au pétrole, mais l'uranium est importé. Un **document statistique** se lit avec méthode : titre, **source**, **dates**, **unité**. Un écart entre deux pourcentages se donne en **points de pourcentage**.",
+          "method": [
+            "Présenter le document : nature, titre, source, dates et unité.",
+            "Relever les valeurs utiles : la plus ancienne et la plus récente.",
+            "Calculer l'écart en points de pourcentage ou le rapport entre les valeurs.",
+            "Expliquer le résultat par le contexte : choc pétrolier, ressources fossiles limitées."
+          ],
+          "example": {
+            "statement": "Analyser un diagramme en barres de la part du nucléaire dans la production d'électricité en France : environ 8 % en 1973 et environ 75 % en 1990 (source : RTE et EDF, ordres de grandeur).",
+            "steps": [
+              "Présenter : diagramme en barres, source RTE et EDF, dates 1973 et 1990, unité : pourcentage de la production d'électricité.",
+              "Relever : 8 % en 1973 (valeur de départ) et 75 % en 1990 (valeur d'arrivée).",
+              "Calculer : 75 − 8 = 67 points de pourcentage ; et 75 ÷ 8 ≈ 9, la part est environ neuf fois plus grande.",
+              "Expliquer : après le choc pétrolier de 1973, le programme nucléaire lancé en 1974 permet de produire l'électricité en France avec moins de pétrole importé."
+            ]
+          },
+          "pitfall": "Ne confonds pas **points de pourcentage** et **pourcentage**. Quand la part passe de 8 % à 75 %, elle augmente de **67 points**, et non de 67 %. Contre-exemple : une augmentation de 67 % ferait passer 8 % à environ 13 %. Écris donc toujours « 67 points » pour l'écart entre deux pourcentages, et n'oublie jamais la source et les dates.",
+          "figure": "nucleaire-france",
+          "practice": {
+            "statement": "Tu t'entraînes à analyser un document statistique avec la méthode : présenter, relever, calculer, expliquer.",
+            "questions": [
+              {
+                "content": "L'écart entre deux pourcentages se donne en ___ de pourcentage et se calcule par une ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Calculer : pour comparer deux pourcentages, on les soustrait et on écrit le résultat en points de pourcentage. Le rapport (une division) donne seulement un nombre de fois.",
+                "answers": [
+                  {
+                    "content": "fois",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "points",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "mètres",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "soustraction",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "division",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "multiplication",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "De 20 % à 30 %, on gagne 10 ..."
+              },
+              {
+                "content": "Une part passe de 10 % à 40 % de la production. Quel est l'écart, en points de pourcentage ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Relever : départ 10 %, arrivée 40 %. Étape 3 — Calculer : 40 − 10 = 30. L'écart est de 30 points de pourcentage.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ],
+                "unit": "points"
+              },
+              {
+                "content": "Quel événement de 1973 conduit la France à choisir le nucléaire en 1974 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Expliquer : le contexte est la hausse brutale du prix du pétrole en 1973. La CECA (1951), le traité de Rome (1957) et l'euro (1999) sont d'autres étapes de l'histoire économique.",
+                "answers": [
+                  {
+                    "content": "La création de la CECA",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le premier choc pétrolier",
+                    "correct": true
+                  },
+                  {
+                    "content": "La signature du traité de Rome",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'arrivée de l'euro",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "exercise": {
+            "title": "Lire un document statistique sur le nucléaire",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche (présenter, relever, calculer, expliquer). Document : part du nucléaire dans la production d'électricité en France, en pourcentage, ordres de grandeur d'après RTE et EDF : environ 8 % en 1973, environ 75 % en 1990 et environ 71 % en 2019.",
+            "exercise_type": "fixation",
+            "figure": "nucleaire-france",
+            "questions": [
+              {
+                "content": "D'après RTE et EDF (ordres de grandeur), la part du nucléaire dans la production d'électricité est d'environ 8 % en 1973 et d'environ 75 % en 1990. Quel est l'écart, en points de pourcentage ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Relever : 8 % en 1973 (départ) et 75 % en 1990 (arrivée). Étape 3 — Calculer : 75 − 8 = 67. L'écart est de 67 points de pourcentage. Écrire 67 % serait faux : on ne soustrait pas des pourcentages pour en donner un nouveau.",
+                "answers": [
+                  {
+                    "content": "67",
+                    "correct": true
+                  }
+                ],
+                "unit": "points"
+              },
+              {
+                "content": "D'après RTE et EDF (ordres de grandeur), la part du nucléaire est d'environ 8 % en 1973 et d'environ 75 % en 1990. Environ combien de fois plus grande est la part en 1990 (arrondi à l'unité) ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Relever : 8 et 75. Étape 3 — Calculer : 75 ÷ 8 = 9,375, soit 9 après arrondi. La part est environ neuf fois plus grande. Diviser 8 par 75 renverserait le rapport.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ],
+                "unit": "fois"
+              },
+              {
+                "content": "Quel événement de 1973 pousse la France à lancer son programme nucléaire en 1974 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Expliquer : en 1973, le prix du pétrole monte fortement. Comme la France a très peu de pétrole, elle cherche à produire son électricité autrement. La CECA (1951) et le traité de Rome (1957) sont antérieurs ; le mur de Berlin tombe en 1989.",
+                "answers": [
+                  {
+                    "content": "La chute du mur de Berlin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le premier choc pétrolier",
+                    "correct": true
+                  },
+                  {
+                    "content": "La création de la CECA",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le traité de Rome",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La France possède de grandes réserves de pétrole dans son sous-sol.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Expliquer : on relie au contexte. Le sous-sol français contient très peu de pétrole et de gaz, donc le pays importe cette énergie. C'est l'une des raisons du programme nucléaire de 1974.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont deux raisons du choix du nucléaire en 1974 ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Expliquer : le choc pétrolier de 1973 et le manque d'énergie fossile expliquent le choix. La France n'a pas de grandes ressources d'uranium (il est importé) et le traité de Rome ne parle pas de centrales nucléaires.",
+                "answers": [
+                  {
+                    "content": "La France possède beaucoup d'uranium",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dépendre moins du pétrole importé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le traité de Rome oblige à construire des centrales",
+                    "correct": false
+                  },
+                  {
+                    "content": "Produire en France l'électricité nécessaire à l'industrie et aux ménages",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le programme nucléaire est lancé en 1974, après le premier choc ___ de 1973.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Expliquer : le choc pétrolier de 1973 désigne la forte hausse du prix du pétrole. Elle montre la fragilité d'un pays qui importe son énergie, d'où le choix de 1974.",
+                "answers": [
+                  {
+                    "content": "pétrolier",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La part du nucléaire passe d'environ 8 % à environ 75 %. Quelle phrase est correcte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer : le piège est de confondre points et pourcentage. 75 − 8 = 67 points. Une hausse de 67 % ferait passer 8 % à environ 13 %. La part n'a pas été divisée par 9, elle a été multipliée par environ 9.",
+                "answers": [
+                  {
+                    "content": "La part a augmenté d'environ 67 points de pourcentage",
+                    "correct": true
+                  },
+                  {
+                    "content": "La part a augmenté d'environ 67 %",
+                    "correct": false
+                  },
+                  {
+                    "content": "La part a augmenté de 8 points de pourcentage",
+                    "correct": false
+                  },
+                  {
+                    "content": "La part a été divisée par 9",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Lire un texte sur les atouts naturels et humains",
+          "statement": "Texte écrit pour Lnclass : « La France est un pays tourné vers l'Europe et vers les mers. Sa façade maritime touche la Manche, l'Atlantique et la Méditerranée, et elle a de nombreux voisins. Son relief mêle de vastes plaines, des massifs anciens et des montagnes jeunes comme les Alpes et les Pyrénées. Son climat tempéré permet des cultures variées. Son sous-sol contient peu de pétrole et de gaz. Sa population, d'environ 68 millions d'habitants en 2024 selon l'INSEE, est formée dans des universités et des grandes écoles, et soutenue par un réseau de centres de recherche. » Le document est un texte de présentation, sans auteur. La carte associée montre la France, ses voisins et Paris.",
+          "exercise_type": "fixation",
+          "figure": "carte-france-position",
+          "questions": [
+            {
+              "content": "Quelle est l'idée principale du texte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : le texte présente les atouts naturels (mers, relief, climat) et humains (population formée) de la France, et note un manque : peu de pétrole et de gaz. Le texte ne compare pas la population de la France à celle des autres pays et n'affirme jamais que la France vit de son pétrole.",
+              "answers": [
+                {
+                  "content": "La France dispose d'atouts naturels et humains, mais manque d'énergie fossile",
+                  "correct": true
+                },
+                {
+                  "content": "La France est le pays le plus peuplé d'Europe",
+                  "correct": false
+                },
+                {
+                  "content": "La France n'a aucun atout naturel",
+                  "correct": false
+                },
+                {
+                  "content": "La France vit surtout de son pétrole",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois mers ou océans qui bordent la France métropolitaine d'après le texte ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Relever : le texte cite la Manche, l'Atlantique et la Méditerranée. La Baltique et la mer Rouge ne touchent pas la France métropolitaine. On relève dans le texte, on n'ajoute pas ce qu'on croit savoir.",
+              "answers": [
+                {
+                  "content": "La mer Baltique",
+                  "correct": false
+                },
+                {
+                  "content": "La Manche",
+                  "correct": true
+                },
+                {
+                  "content": "La mer Rouge",
+                  "correct": false
+                },
+                {
+                  "content": "L'océan Atlantique",
+                  "correct": true
+                },
+                {
+                  "content": "La Méditerranée",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après le texte, la France possède de grandes réserves de pétrole et de gaz.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Expliquer : le texte dit que le sous-sol contient peu de pétrole et de gaz. La France importe donc l'essentiel de son énergie fossile, ce qui l'a conduite à d'autres choix énergétiques.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque ensemble de relief à sa description.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Décrire : on situe chaque relief et on précise sa nature. Les Alpes et les Pyrénées sont des montagnes jeunes, le Massif central est un massif ancien et plus usé, le Bassin parisien est une grande plaine entourée de plateaux.",
+              "answers": [
+                {
+                  "content": "Les Alpes",
+                  "match": "Montagne jeune, à l'est du pays"
+                },
+                {
+                  "content": "Le Massif central",
+                  "match": "Massif ancien, au centre du pays"
+                },
+                {
+                  "content": "Le Bassin parisien",
+                  "match": "Vaste plaine entourée de plateaux, au nord"
+                },
+                {
+                  "content": "Les Pyrénées",
+                  "match": "Montagne jeune, à la frontière avec l'Espagne"
+                }
+              ]
+            },
+            {
+              "content": "Selon le texte, la population de la France est d'environ 68 ___ d'habitants en 2024 (source : INSEE).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Dénombrer : on relève l'effectif et son unité. Le texte donne environ 68 millions d'habitants en 2024 (source : INSEE). L'unité est le million, pas le milliard.",
+              "answers": [
+                {
+                  "content": "millions",
+                  "correct": true
+                },
+                {
+                  "content": "million",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases pourquoi une main-d'œuvre qualifiée est un atout pour l'économie, en donnant un exemple français.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Une main-d'œuvre qualifiée est définie ou expliquée (1 point)",
+                "Le lien avec la production de richesses est clair (1 point)",
+                "Un exemple français exact : aéronautique, TGV, recherche (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Une main-d'œuvre qualifiée est formée par des universités, des grandes écoles et des écoles d'ingénieurs. Elle sait concevoir et fabriquer des produits complexes qui se vendent cher. En France, les ingénieurs de Toulouse construisent des avions, et la recherche a permis le TGV, en service depuis 1981. Ce qui rapporte les points : la définition (1 point), le lien avec les richesses (1 point), l'exemple exact (1 point).",
+              "answers": [],
+              "starter": "Une main-d'œuvre qualifiée est un atout parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Situer dans le temps de la reconstruction à la monnaie unique",
+          "statement": "Dans cet exercice, tu situes les grandes étapes de l'économie française et de la construction européenne entre 1945 et 2002. La frise associée marque les Trente Glorieuses, de 1945 à 1975, et place les principaux événements.",
+          "exercise_type": "fixation",
+          "figure": "frise-economie-france",
+          "questions": [
+            {
+              "content": "Remets ces étapes dans l'ordre chronologique.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Dater : on place chaque événement sur la frise. 1945 : Renault. 1951 : CECA. 1957 : CEE. 1993 : marché unique. 2002 : pièces et billets en euros. Le repère : la monnaie unique vient en dernier, bien après le marché commun.",
+              "answers": [
+                {
+                  "content": "Nationalisation de Renault (1945)"
+                },
+                {
+                  "content": "Traité de Paris créant la CECA (1951)"
+                },
+                {
+                  "content": "Traité de Rome créant la CEE (1957)"
+                },
+                {
+                  "content": "Entrée en vigueur du marché unique (1993)"
+                },
+                {
+                  "content": "Pièces et billets en euros (2002)"
+                }
+              ]
+            },
+            {
+              "content": "Le traité de Rome date de 1957 et les pièces et billets en euros de 2002. Combien d'années séparent ces deux événements ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Dater : on relève 1957 et 2002. On calcule la durée : 2002 − 1957 = 45. Il s'écoule 45 ans entre le traité de Rome et l'arrivée des pièces et des billets en euros.",
+              "answers": [
+                {
+                  "content": "45",
+                  "correct": true
+                }
+              ],
+              "unit": "ans"
+            },
+            {
+              "content": "Relie chaque date à l'événement correspondant.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Dater : on place chaque événement sur la frise. Le Commissariat général au Plan naît en 1946, l'aide du plan Marshall commence en 1948, le traité de Rome est signé en 1957 et le choc pétrolier éclate en 1973.",
+              "answers": [
+                {
+                  "content": "1946",
+                  "match": "Création du Commissariat général au Plan"
+                },
+                {
+                  "content": "1948",
+                  "match": "Début de l'aide du plan Marshall"
+                },
+                {
+                  "content": "1957",
+                  "match": "Traité de Rome"
+                },
+                {
+                  "content": "1973",
+                  "match": "Premier choc pétrolier"
+                }
+              ]
+            },
+            {
+              "content": "Les Trente Glorieuses se terminent vers 1975, après le choc pétrolier de 1973.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Dater : les Trente Glorieuses vont de 1945 à 1975. La hausse du prix du pétrole de 1973 en marque la fin : la croissance devient plus lente. Étape 4 — Conclure : on relie la fin de la période à un événement précis.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle date correspond à l'entrée en vigueur du marché unique européen ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Situer : le marché unique entre en vigueur en 1993. 1986 est l'année de l'Acte unique, qui le prépare. 1957 est la date du traité de Rome. 2002 est la date des pièces et billets en euros.",
+              "answers": [
+                {
+                  "content": "1957",
+                  "correct": false
+                },
+                {
+                  "content": "1986",
+                  "correct": false
+                },
+                {
+                  "content": "1993",
+                  "correct": true
+                },
+                {
+                  "content": "2002",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi la période de 1945 à 1975 est appelée les Trente Glorieuses.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Les dates 1945 et 1975 sont données (0,5 point)",
+                "La croissance forte et continue est citée (1 point)",
+                "Un exemple : reconstruction, plan ou nationalisations (0,5 point)"
+              ],
+              "explanation": "Corrigé modèle : De 1945 à 1975, soit trente ans, l'économie française connaît une croissance forte et continue. Après la guerre, l'État reconstruit grâce au plan, aux nationalisations et à l'aide américaine, et le pays se modernise. Ce qui rapporte les points : les dates (0,5 point), la croissance (1 point), un exemple (0,5 point).",
+              "answers": [],
+              "starter": "La période de 1945 à 1975 est appelée les Trente Glorieuses parce que…"
+            }
+          ]
+        },
+        {
+          "title": "Analyser un document statistique sur l'électricité",
+          "statement": "Document : diagramme en barres de la part du nucléaire dans la production d'électricité en France, en pourcentage, en ordres de grandeur d'après RTE et EDF : environ 8 % en 1973, environ 75 % en 1990 et environ 71 % en 2019. Complément écrit pour Lnclass : en 1973, le prix du pétrole monte fortement. En 1974, la France lance un programme de centrales nucléaires. Consigne : tu analyses ce document avec la méthode de la leçon.",
+          "exercise_type": "evaluation",
+          "figure": "nucleaire-france",
+          "questions": [
+            {
+              "content": "Quelle est la nature du document ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : on donne la nature du document, sa source et ses dates. Ici : diagramme en barres, source RTE et EDF, dates 1973, 1990 et 2019, unité en pourcentage. Ce n'est ni une carte, ni un texte politique, ni un tableau de salaires.",
+              "answers": [
+                {
+                  "content": "Un diagramme en barres donnant des pourcentages, avec une source et des dates",
+                  "correct": true
+                },
+                {
+                  "content": "Une carte des centrales nucléaires",
+                  "correct": false
+                },
+                {
+                  "content": "Un texte écrit par un homme d'État",
+                  "correct": false
+                },
+                {
+                  "content": "Un tableau des salaires par métier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le document, de combien de points de pourcentage la part du nucléaire augmente-t-elle entre 1973 et 1990 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Relever : 8 % en 1973 et 75 % en 1990. Étape 3 — Calculer : 75 − 8 = 67 points de pourcentage. On écrit des points, pas des pourcents, car on compare deux pourcentages.",
+              "answers": [
+                {
+                  "content": "67",
+                  "correct": true
+                }
+              ],
+              "unit": "points"
+            },
+            {
+              "content": "D'après le document, environ combien de fois la part du nucléaire de 1990 est-elle plus grande que celle de 1973 (arrondi à l'unité) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Relever : 8 et 75. Étape 3 — Calculer : 75 ÷ 8 = 9,375, soit environ 9. La part du nucléaire est environ neuf fois plus grande en 1990 qu'en 1973.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ],
+              "unit": "fois"
+            },
+            {
+              "content": "D'après le document, la part du nucléaire en 2019 est inférieure à celle de 1990.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Relever : 71 % en 2019 et 75 % en 1990. Étape 3 — Calculer : 71 − 75 = −4, donc la part de 2019 est inférieure de 4 points à celle de 1990. Elle reste pourtant bien plus élevée qu'en 1973.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Même avec les centrales nucléaires, la France garde une dépendance énergétique. Laquelle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Expliquer : le nucléaire réduit la dépendance au pétrole, mais le combustible, l'uranium, est importé. Les trois autres propositions sont absurdes ou fausses : le charbon lorrain est national, l'eau des Alpes est une ressource du pays et le vent ne s'importe pas.",
+              "answers": [
+                {
+                  "content": "Elle importe tout son charbon lorrain",
+                  "correct": false
+                },
+                {
+                  "content": "Elle importe son eau des Alpes",
+                  "correct": false
+                },
+                {
+                  "content": "Elle importe l'uranium qui sert de combustible",
+                  "correct": true
+                },
+                {
+                  "content": "Elle importe le vent pour ses éoliennes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe : présente le document puis explique la forte hausse de la part du nucléaire entre 1973 et 1990.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Présente la nature, la source, les dates et l'unité (1 point)",
+                "Relève et calcule : 8 % à 75 %, soit 67 points (1 point)",
+                "Cite le choc pétrolier de 1973 et le choix de 1974 (1 point)",
+                "Relie à la faiblesse des ressources en énergie fossile (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Ce diagramme en barres, établi d'après RTE et EDF, donne la part du nucléaire dans la production d'électricité en France, en pourcentage, en 1973, 1990 et 2019. Cette part passe d'environ 8 % à environ 75 % entre 1973 et 1990, soit une hausse de 67 points. Cette hausse s'explique par le choc pétrolier de 1973 : la France, qui a très peu de pétrole et de gaz, décide en 1974 de construire de nombreuses centrales pour produire son électricité avec moins de pétrole importé. Barème : présentation (1 point), calcul (1 point), choc pétrolier et choix de 1974 (1 point), lien avec les ressources fossiles limitées (1 point).",
+              "answers": [],
+              "starter": "Ce diagramme en barres montre que…"
+            }
+          ]
+        },
+        {
+          "title": "Commentaire de document : les fondements de l'économie française",
+          "statement": "Document écrit pour Lnclass, sans auteur : « Au lendemain de la Seconde Guerre mondiale, la France doit se reconstruire. L'État crée un Commissariat général au Plan, nationalise le charbon, l'électricité et de grandes entreprises, et reçoit l'aide américaine. Dans les années 1950, six pays mettent en commun leur charbon et leur acier, puis ouvrent un grand marché. Quand le prix du pétrole bondit en 1973, la France choisit le nucléaire pour produire son électricité. Elle s'appuie aussi sur ses fleuves, ses plaines fertiles et ses ports, sur une population nombreuse et formée, et sur une place financière, Paris, où se rassemblent banques et grandes entreprises. » Le schéma associé classe les fondements de l'économie française. Consigne : tu fais le commentaire de ce document.",
+          "exercise_type": "evaluation",
+          "figure": "schema-fondements-france",
+          "questions": [
+            {
+              "content": "Quelle est l'idée générale du document ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Présenter : on lit le document en entier et on dégage son idée. Il cite l'État, l'Europe, l'énergie, les fleuves, la population et la finance : aucun fondement n'est présenté comme seul. Un commentaire commence toujours par la nature du document et son idée générale.",
+              "answers": [
+                {
+                  "content": "L'économie française repose sur plusieurs fondements qui se combinent",
+                  "correct": true
+                },
+                {
+                  "content": "L'économie française repose uniquement sur l'État",
+                  "correct": false
+                },
+                {
+                  "content": "L'économie française repose uniquement sur ses ressources naturelles",
+                  "correct": false
+                },
+                {
+                  "content": "L'économie française repose uniquement sur l'Europe",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément du texte au fondement qu'il illustre.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Relever : on associe chaque élément du texte à un fondement. Le Plan est une décision de l'État (historique et politique). Les fleuves et les plaines sont donnés par la nature. La CECA relève de la construction européenne. La place de Paris concerne les capitaux.",
+              "answers": [
+                {
+                  "content": "Le Commissariat général au Plan",
+                  "match": "Fondement historique et politique"
+                },
+                {
+                  "content": "Les fleuves et les plaines fertiles",
+                  "match": "Fondement naturel"
+                },
+                {
+                  "content": "La mise en commun du charbon et de l'acier",
+                  "match": "Fondement européen"
+                },
+                {
+                  "content": "La place financière de Paris",
+                  "match": "Fondement financier"
+                }
+              ]
+            },
+            {
+              "content": "D'après le document, le choc pétrolier de 1973 conduit la France à choisir le nucléaire.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Relever : le texte écrit que le prix du pétrole bondit en 1973 et que la France choisit le nucléaire. Étape 4 — Expliquer : le lien est une cause et une conséquence, que le texte indique avec « quand ».",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le choix du nucléaire répond à la faiblesse des ressources en énergie ___ de la France.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 4 — Expliquer : la France a très peu de pétrole et de gaz, des énergies fossiles. Le programme nucléaire permet de produire l'électricité avec moins de pétrole importé.",
+              "answers": [
+                {
+                  "content": "fossile",
+                  "correct": true
+                },
+                {
+                  "content": "fossiles",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de l'introduction d'une dissertation sur les fondements de l'économie française.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Présenter : l'introduction va du plus général au plus précis. On accroche le lecteur par un fait ou une date, on définit les termes (fondements, économie), on pose la problématique sous forme de question, puis on annonce le plan.",
+              "answers": [
+                {
+                  "content": "Présenter le sujet par un fait ou une date"
+                },
+                {
+                  "content": "Définir les termes du sujet"
+                },
+                {
+                  "content": "Poser la problématique"
+                },
+                {
+                  "content": "Annoncer le plan"
+                }
+              ]
+            },
+            {
+              "content": "Présente le document (nature, source, idée générale), puis relève deux fondements qu'il cite en les rattachant à une catégorie de la leçon.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Nature du document : texte de présentation, sans auteur (0,5 point)",
+                "Idée générale exacte (0,5 point)",
+                "Deux fondements relevés dans le texte (1 point)",
+                "Chaque fondement rattaché à la bonne catégorie (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Ce document est un texte de présentation écrit pour Lnclass, sans auteur. Il explique que l'économie française repose sur plusieurs fondements. Il cite, par exemple, la création du Commissariat général au Plan, qui relève des fondements historiques et politiques, et la mise en commun du charbon et de l'acier, qui relève des fondements européens. Barème : nature (0,5 point), idée générale (0,5 point), deux fondements (1 point), catégories (1 point).",
+              "answers": [],
+              "starter": "Ce document est…"
+            },
+            {
+              "content": "Dissertation guidée : à l'aide du document et de tes connaissances, montre que l'économie française repose sur des fondements naturels, humains, historiques et politiques, européens et financiers, et énergétiques, qui se combinent.",
+              "question_type": "written",
+              "points": 8,
+              "criteria": [
+                "Introduction : sujet défini, problématique et plan annoncé (1 point)",
+                "Fondements naturels exacts avec un exemple (1 point)",
+                "Fondements humains avec un chiffre daté et sourcé (1 point)",
+                "Fondements historiques et politiques : plan, nationalisations, Trente Glorieuses (1,5 point)",
+                "Fondements européens et financiers : CECA, marché unique, euro, Paris (1,5 point)",
+                "Fondements énergétiques : choc pétrolier de 1973, choix de 1974 (1 point)",
+                "Conclusion : les fondements se combinent (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Introduction. L'économie d'un pays repose sur des fondements, c'est-à-dire des conditions qui permettent de produire. Comment l'économie française s'est-elle construite ? Nous verrons les atouts naturels et humains, puis le rôle de l'histoire et de l'Europe, enfin le choix énergétique. Première partie. La France bénéficie d'un climat tempéré, de plaines fertiles, de fleuves, de trois façades maritimes et d'une population d'environ 68 millions d'habitants en 2024 (INSEE), formée dans des universités et des grandes écoles. Deuxième partie. Après 1945, l'État planifie, nationalise EDF et Renault, et lance les Trente Glorieuses. Avec la CECA (1951), le traité de Rome (1957), le marché unique (1993) et l'euro (1999 et 2002), les entreprises françaises accèdent à un grand marché, tandis que Paris est une place financière. Troisième partie. Après le choc pétrolier de 1973, la France choisit le nucléaire en 1974 pour produire son électricité avec moins de pétrole importé. Conclusion. Aucun fondement ne suffit seul : c'est leur combinaison qui explique la puissance économique de la France. Barème : introduction (1 point), naturel (1 point), humain (1 point), historique et politique (1,5 point), européen et financier (1,5 point), énergie (1 point), conclusion (1 point).",
+              "answers": [],
+              "starter": "L'économie d'un pays repose sur des fondements, c'est-à-dire…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
