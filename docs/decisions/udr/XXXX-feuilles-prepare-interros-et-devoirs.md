@@ -98,14 +98,15 @@ des `_assigned_exercise`)
   classe » (`return_to=class`). `return_to` ne prend que ces deux valeurs, jamais une adresse ; sinon le retour d'aujourd'hui.
   Rien d'autre ne change sur cette page.
 - Stimulus `prepare-sheet` (`app/javascript/controllers/prepare_sheet_controller.js`) : garde les réponses non vérifiées
-  dans `localStorage` (clé `lnclass-prepare-<exercise_public_id>`, lecture et écriture sous try/catch) ; « Indice »
+  dans `localStorage` (clé `lnclass-prepare-<propriétaire>-<exercise_public_id>`, le propriétaire étant l'id de l'élève connecté ou `visitor`, posé par le serveur (`data-prepare-sheet-owner-value`) : un brouillon ne se recharge pas dans le compte d'un autre sur le même appareil ; lecture et écriture sous try/catch) ; « Indice »
   montre ou cache l'encadré (`aria-expanded`) ; « Refaire l'exercice » et « Recommencer… » remettent à blanc dans le
   navigateur, sans requête : la prochaine vérification ouvre une nouvelle copie.
 - Rechargement : un exercice dont l'élève a une copie terminée et qui n'a pas été remis à blanc s'affiche vérifié (statut,
   « Voir ma correction », « Refaire l'exercice »).
 - Vue enseignant : pas de champ ; « Assigner à <classe> » / « ✓ Assigné à <classe> » à la place de « Vérifier ma réponse »
   et « Indice », même style ; la bascule `classroom/assignments/toggle` d'aujourd'hui, une par classe. Équipe : idem, sans
-  « Assigner ».
+  « Assigner », et le statut éditorial de chaque exercice (« Brouillon » / « Publié », `catalog.content_status.*`) à droite
+  de l'en-tête de l'exercice, en `.ps-status` ; les autres rôles ne le voient pas.
 - Visiteur : « Vérifier ma réponse » est un lien vers la connexion.
 
 **États obligatoires**

@@ -16,7 +16,8 @@ module Assessment
       result.success? ? show_result(result.value) : refused(error_code(result), result.errors[:resume_at])
     rescue ActiveRecord::ActiveRecordError => error
       # Une panne n'est jamais avalée : elle est signalée, et l'élève relit « Réessaie » avec ses réponses.
-      Rails.error.report(error, handled: true, severity: :error, source: "sheet_check")
+      Rails.error.report(error, handled: true, severity: :error, source: "sheet_check",
+                                context: { user_id: current_actor.user_id, exercise_public_id:, assignment_public_id: })
       refused(:failed)
     end
 
@@ -62,12 +63,14 @@ module Assessment
 
     def course_slug = @course_slug ||= Queries::Assessment::ExerciseDetailQuery.new.call(public_id: exercise_public_id, reveal: false).course.slug
 
-    # :paused (resume_at), :assigned_pending (CA-17), :assignment_closed (devoir déjà rendu), :archived (exercice absent ou archivé), sinon :failed.
+    # :paused (resume_at), :assigned_pending (CA-17), :assignment_closed (devoir déjà rendu), :archived (exercice absent ou archivé),
+    # :invalid_copy (une réponse refusée par la copie : pas un nombre, trop longue, mauvaise sélection), sinon :failed.
     def error_code(result)
       base = result.errors.fetch(:base, [])
       return :paused if base.include?(:paused)
       return :assigned_pending if base.include?(:assigned_pending)
       return :assignment_closed if base.include?(:assignment_closed)
+      return :invalid_copy if result.code == :invalid
 
       result.code == :not_found || base.include?(:exercise_archived) ? :archived : :failed
     end
@@ -78,6 +81,7 @@ module Assessment
       when :assigned_pending then t("assessment.sheet_checks.errors.assigned_pending_html", link: t("assessment.sheet_checks.class_link"))
       when :assignment_closed then t("assessment.sheet_checks.errors.assignment_closed")
       when :archived then t("assessment.sheet_checks.errors.archived")
+      when :invalid_copy then t("assessment.sheet_checks.errors.invalid_copy")
       else t("assessment.sheet_checks.errors.failed")
       end
     end

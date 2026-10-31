@@ -15,10 +15,12 @@ module UseCases
       class SpyStart
         attr_reader :calls
 
-        def initialize(failure: nil, session_id: 100)
+        # assignment_id : l'assignation (celle de assignment() : 55) que la session reçoit quand elle doit être rattachée.
+        def initialize(failure: nil, session_id: 100, assignment_id: 55)
           @calls = []
           @failure = failure
           @session_id = session_id
+          @assignment_id = assignment_id
         end
 
         def call(actor:, exercise_public_id:, restart:, attach_assignment:)
@@ -27,7 +29,8 @@ module UseCases
 
           Shared::Result.success(Session.new(id: @session_id, public_id: "sess#{@session_id}", student_id: actor.user_id, exercise_id: 40,
                                              status: "started", question_count: 2, answered_count: 0, correct_count: 0, progress_percent: 0,
-                                             score_percent: nil, kind: "standard", knowledge_gap_id: nil, classroom_assignment_id: nil,
+                                             score_percent: nil, kind: "standard", knowledge_gap_id: nil,
+                                             classroom_assignment_id: (@assignment_id if attach_assignment),
                                              started_at: Time.utc(2026, 10, 30), completed_at: nil))
         end
       end
@@ -247,6 +250,13 @@ module UseCases
 
         assert_equal [ :conflict, [ :assignment_closed ] ], [ result.code, result.errors[:base] ]
         assert_empty @start.calls
+        assert_empty @submit.dtos
+      end
+
+      test "le devoir retiré entre la vérification et l'ouverture : la session non rattachée annule tout (:conflict, :assignment_closed)" do
+        result = check(assignment_public_id: "AsSiGn00000001", assignments: [ assignment ], pending: [ PUBLIC_ID ], start: SpyStart.new(assignment_id: nil))
+
+        assert_equal [ :conflict, [ :assignment_closed ] ], [ result.code, result.errors[:base] ]
         assert_empty @submit.dtos
       end
 

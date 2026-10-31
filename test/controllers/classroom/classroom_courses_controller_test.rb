@@ -110,6 +110,7 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
 
     assert_response :success
     assert_select "#prepare-interros turbo-frame[id^=sheet-exercise-]", 3
+    assert_select "#prepare-interros .ps-exercise-head .ps-status", count: 3, text: "Publié"
     no_toggle
   end
 

@@ -135,7 +135,13 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     original = repository.instance_method(:start)
     repository.define_method(:start) { |**| raise ActiveRecord::StatementInvalid, "panne" }
     reported = []
-    subscriber = Struct.new(:reported) { def report(error, **) = reported << error.class }.new(reported)
+    contexts = []
+    subscriber = Struct.new(:reported, :contexts) do
+      def report(error, context: {}, **)
+        reported << error.class
+        contexts << context.slice(:user_id, :exercise_public_id, :assignment_public_id)
+      end
+    end.new(reported, contexts)
     Rails.error.subscribe(subscriber)
 
     begin
@@ -148,6 +154,32 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_response :unprocessable_entity
     assert_select "template p.ps-error[role=alert]", text: "La copie n'est pas partie. Réessaie."
     assert_equal [ ActiveRecord::StatementInvalid ], reported
+    assert_equal [ { user_id: @student.id, exercise_public_id: @exercise.public_id, assignment_public_id: nil } ], contexts
+  end
+
+  test "une réponse illisible (un nombre attendu) : un message qui la désigne, pas « La copie n'est pas partie » (R1)" do
+    numeric = create_exercise(essential: @notion, questions: 0)
+    create_kind_question(exercise: numeric, question_type: "numeric", answers: [ "4" ])
+    sign_in_as @student
+
+    assert_no_difference -> { Orm::ExerciseSession.count } do
+      post exercise_sheet_check_path(numeric.public_id), params: { copy: { answers: { numeric.questions.first.id.to_s => { response_text: "abc" } } } }, headers: STREAM
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]", text: "Une réponse n'est pas lisible : vérifie-la (un nombre est attendu pour un calcul), puis réessaie."
+    assert_no_match(/La copie n'est pas partie/, response.body)
+  end
+
+  test "sans JavaScript, une réponse illisible revient à la leçon avec son message (R1)" do
+    numeric = create_exercise(essential: @notion, questions: 0)
+    create_kind_question(exercise: numeric, question_type: "numeric", answers: [ "4" ])
+    sign_in_as @student
+
+    post exercise_sheet_check_path(numeric.public_id), params: { copy: { answers: { numeric.questions.first.id.to_s => { response_text: "abc" } } } }
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{numeric.public_id}")
+    assert_match(/Une réponse n'est pas lisible/, flash[:alert])
   end
 
   test "un exercice assigné et pas encore rendu est refusé sans ouvrir de session, avec le lien « Ma classe » (CA-17)" do

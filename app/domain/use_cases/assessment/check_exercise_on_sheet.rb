@@ -48,10 +48,11 @@ module UseCases
         return allowed if allowed.failure?
 
         handing_in = !assignment_public_id.nil?
-        refusal = handing_in ? refuse_hand_in(actor, exercise, assignment_public_id) : refuse_practice(actor, exercise)
+        assignment = (@assignments.find_by_public_id(public_id: assignment_public_id) if handing_in)
+        refusal = handing_in ? refuse_hand_in(actor, exercise, assignment) : refuse_practice(actor, exercise)
         return refusal if refusal
 
-        rolled_back { @transaction.call { check(actor, exercise, answers, handing_in) } }
+        rolled_back { @transaction.call { check(actor, exercise, answers, assignment) } }
       end
 
       private
@@ -66,8 +67,7 @@ module UseCases
         Shared::Result.failure(:conflict, errors: { base: [ :assigned_pending ] }) if to_hand_in?(actor, exercise)
       end
 
-      def refuse_hand_in(actor, exercise, assignment_public_id)
-        assignment = @assignments.find_by_public_id(public_id: assignment_public_id)
+      def refuse_hand_in(actor, exercise, assignment)
         membership = @memberships.primary_for(student_id: actor.user_id)
         return Shared::Result.failure(:forbidden) unless own_assignment?(assignment, membership, exercise.public_id)
 
@@ -83,9 +83,13 @@ module UseCases
         @pending.pending_exercise_public_ids(student_id: actor.user_id, exercise_public_ids: [ exercise.public_id ]).include?(exercise.public_id)
       end
 
-      def check(actor, exercise, answers, handing_in)
-        started = @start.call(actor:, exercise_public_id: exercise.public_id, restart: true, attach_assignment: handing_in)
+      # assignment : le devoir vérifié (nil pour un entraînement).
+      def check(actor, exercise, answers, assignment)
+        started = @start.call(actor:, exercise_public_id: exercise.public_id, restart: true, attach_assignment: !assignment.nil?)
         return started if started.failure?
+
+        # Le devoir a pu être retiré entre la vérification et l'ouverture : une copie « rendue » sans rattachement serait perdue pour l'enseignant.
+        raise Rollback.new(Shared::Result.failure(:conflict, errors: { base: [ :assignment_closed ] })) if assignment && started.value.classroom_assignment_id != assignment.id
 
         dto = Dtos::Assessment::CopyInput.new(session_public_id: started.value.public_id,
                                               answers: in_session_order(exercise, started.value, answers))

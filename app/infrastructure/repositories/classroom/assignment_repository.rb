@@ -38,13 +38,19 @@ module Repositories
 
       # Une transaction ; chaque #create a son point de sauvegarde, un doublon écarte l'exercice sans abîmer les autres.
       def create_batch(assignments:)
+        results = {}
+        Orm::ClassroomAssignment.transaction do
+          # Deux envois simultanés des mêmes exercices dans l'ordre inverse se bloqueraient mutuellement : on écrit toujours dans l'ordre
+          # croissant d'assignable.id ; created et skipped, eux, gardent l'ordre demandé.
+          assignments.each_with_index.sort_by { |assignment, index| [ assignment.assignable.id, index ] }.each do |assignment, index|
+            results[index] = create(assignment:)
+          end
+        end
         created = []
         skipped = []
-        Orm::ClassroomAssignment.transaction do
-          assignments.each do |assignment|
-            result = create(assignment:)
-            result.success? ? created << result.value : skipped << assignment.assignable
-          end
+        assignments.each_with_index do |assignment, index|
+          result = results.fetch(index)
+          result.success? ? created << result.value : skipped << assignment.assignable
         end
         ::Shared::Result.success(BatchCreation.new(created:, skipped:))
       end

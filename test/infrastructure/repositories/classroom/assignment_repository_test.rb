@@ -67,6 +67,16 @@ module Repositories
         assert_equal 3, Orm::ClassroomAssignment.where(classroom_id: @classroom.id, batch_public_id: "Ab3dEf5hJk7mNp").count
       end
 
+      test "un envoi écrit dans l'ordre croissant des exercices (pas de blocage entre deux envois) et rend l'ordre demandé" do
+        exercises = [ @exercise, create_exercise(essential: @essential, title: "B"), create_exercise(essential: @essential, title: "C") ].reverse
+
+        result = @repository.create_batch(assignments: batch_of(*exercises))
+
+        assert_equal exercises.map(&:public_id), result.value.created.map { it.assignable.key }
+        written = Orm::ClassroomAssignment.where(batch_public_id: "Ab3dEf5hJk7mNp").order(:id).pluck(:assignable_id)
+        assert_equal exercises.map(&:id).sort, written
+      end
+
       test "un exercice déjà assigné est écarté et nommé, les autres partent" do
         other = create_exercise(essential: @essential, title: "B")
         third = create_exercise(essential: @essential, title: "C")

@@ -21,9 +21,10 @@ module Queries
         def progress_id = "sheet-progress-#{dom_id}"
       end
       # copy : la dernière copie terminée de l'élève (Copy), nil sans copie ou hors élève ; questions : [Question] ;
-      # due : un élève qui doit encore rendre cet exercice à son enseignant (CA-17) : la feuille ne le vérifie pas.
-      SheetExercise = Data.define(:public_id, :number, :title, :statement, :statement_blocks, :figure, :hint, :questions, :copy, :due) do
-        def initialize(due: false, **) = super
+      # due : un élève qui doit encore rendre cet exercice à son enseignant (CA-17) : la feuille ne le vérifie pas ;
+      # status : le statut éditorial ("draft" | "published"), que seule l'équipe lit sur la feuille.
+      SheetExercise = Data.define(:public_id, :number, :title, :statement, :statement_blocks, :figure, :hint, :questions, :copy, :due, :status) do
+        def initialize(due: false, status: nil, **) = super
       end
       # passed : toutes les questions justes ; la note de la copie est celle de sa page de résultat (sur 20).
       Copy = Data.define(:session_public_id, :passed)
@@ -72,12 +73,12 @@ module Queries
         questions = questions(ids)
         copies = actor&.student? ? copies(ids, actor.user_id, questions) : {}
         due = actor&.student? ? due_public_ids(rows, actor.user_id) : Set.new
-        rows.to_h do |id, public_id, title, _status, _essential_id, _subject_id, statement, statement_blocks, figure_key, hint|
+        rows.to_h do |id, public_id, title, status, _essential_id, _subject_id, statement, statement_blocks, figure_key, hint|
           copy, corrected = copies[id]
           [ id, SheetExercise.new(public_id:, number: 0, title:, statement:, statement_blocks:,
                                   figure: Queries::Assessment::SessionPlayQuery.figure_for(figures, figure_key),
                                   hint: hint.presence, questions: question_list(questions.fetch(id, []), corrected), copy:,
-                                  due: due.include?(public_id)) ]
+                                  due: due.include?(public_id), status:) ]
         end
       end
 
@@ -101,7 +102,8 @@ module Queries
 
       def devoirs(course_id, rows, built)
         by_subject = rows.group_by { it[5] }
-        subjects = Orm::Subject.where(id: by_subject.keys.compact).order(:position, :id).pluck(:id, :position, :title, :notions)
+        # Le sujet doit être de cette leçon : un exercice rattaché au sujet d'une autre leçon ne s'affiche jamais.
+        subjects = Orm::Subject.where(id: by_subject.keys.compact, course_id:).order(:position, :id).pluck(:id, :position, :title, :notions)
         subjects.each_with_index.map do |(id, position, title, notions), index|
           sheet(:subject, "sujet-#{position}", title, notions, index + 1, subjects.size, by_subject[id], built)
         end
