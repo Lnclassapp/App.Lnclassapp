@@ -192,6 +192,7 @@ Sur l'ensemble de la leçon (exercices des notions et problèmes), **au moins la
 
 #### Règles communes
 
+- L'application **mélange l'ordre des propositions** à l'affichage (sauf `ordering`) : une correction ne désigne jamais une proposition par son rang (« la première », « la dernière »), mais par son contenu.
 - Chaque proposition fait 500 caractères au plus. Les propositions fausses sont **plausibles** : chacune correspond à une erreur réelle d'élève (oubli d'étape, signe, confusion avec le piège), jamais à une réponse absurde.
 - Les nombres sont choisis pour que les calculs se fassent à la main, sans calculatrice.
 - Varie les types : une leçon qui n'a que des `single_choice` lasse l'élève. Prends le type qui teste le mieux le savoir-faire (un accord s'écrit en `fill_blank`, une chronologie se remet en ordre en `ordering`, une justification se rédige en `written`).
