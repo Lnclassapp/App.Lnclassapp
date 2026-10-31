@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-31 |
 | **Branche** | `feature/sujets-thales-feuilles` |
 | **Programme** | — |
