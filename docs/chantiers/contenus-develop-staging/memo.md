@@ -43,11 +43,12 @@ La leçon Thalès refaite (#423) est fusionnée mais absente de Develop et Stagi
 | Où voir ce qui a été chargé, refusé, ou l’avertissement de nom inconnu ? | « Écran Imports » | Chaque passage laisse une ligne « Chargement automatique » dans l’écran Imports de l’équipe, avec le détail comme un import à la main (chargées, remplacées, refusées et pourquoi) ; l’avertissement de nom inconnu y figure aussi, sans aucun contenu chargé. |
 | La première fois, toutes les leçons sont-elles remises à jour ? | « Je travaille sur Prépare interros et Prépare devoirs seulement » | Seules les leçons retravaillées pour ces feuilles, reconnues à leurs sujets de devoir, sont chargées : aujourd’hui la seule leçon Thalès. Les autres leçons de Develop et Staging ne sont jamais touchées. Une leçon chargée n’est remplacée ensuite que si son fichier a changé. |
 | (Précision au lancement) | « Je travaille sur interros et devoirs, et non la leçon » | Ce qui doit arriver, ce sont les exercices des feuilles « Prépare interros » et les sujets de « Prépare devoirs ». |
+| Que devient le cours (texte des fiches, À retenir, méthode, exemple) quand les exercices et sujets arrivent ? | « On ne le touche pas » | Sur une leçon déjà présente, seuls les exercices des notions, les problèmes de la leçon et les sujets de devoir sont remplacés ; le cours et ses fiches restent tels quels. Les exercices se rattachent aux notions existantes par leur nom ; une notion du fichier absente de l’environnement refuse la leçon (ligne d’import). Les figures citées par les exercices et sujets sont ajoutées ou mises à jour, les autres restent. Une leçon absente est chargée entière. |
 
 ## Cas limites identifiés
 
-- Leçon déjà publiée sur l’environnement : remplacée, ses résultats et devoirs envoyés effacés, puis republiée.
-- Leçon en brouillon sur l’environnement : remplacée puis publiée.
+- Leçon déjà présente (publiée ou brouillon) : ses exercices, problèmes et sujets sont remplacés, les résultats et devoirs envoyés qui s’y rattachent effacés, puis publiés ; le cours et les fiches ne bougent pas.
+- Notion du fichier introuvable par son nom dans la leçon de l’environnement : la leçon est refusée dans sa ligne d’import, rien n’est remplacé.
 - Leçon absente : chargée puis publiée.
 - Niveau ou matière absent : leçon non chargée, nommée dans la ligne de l’écran Imports, retentée au déploiement suivant.
 - Fichier inchangé depuis le dernier chargement : rien n’est fait, et la ligne le dit.

@@ -31,7 +31,7 @@ Un seul cas d'usage, de bout en bout : pas de Lot 0 (aucune migration, aucune ro
                      `test/domain/use_cases/catalog/load_repository_lessons_test.rb`
                      `test/integration/catalog/automatic_lesson_load_test.rb` (vraie base : les 7 scénarios du PRD §4)
                      `test/domain/use_cases/catalog/import_course_tree_test.rb` (l'import à la main refuse toujours une leçon publiée)
-- **Done quand**   : avec `RAILWAY_ENVIRONMENT_NAME=Develop`, `bin/rails contenus:charger` sur une base où Thalès est publiée avec l'ancien contenu et une séance d'élève remplace la leçon (4 sujets, 2 exercices par notion, tout publié, séance effacée) et laisse une ligne terminée dans l'écran Imports ; relancé, il ne fait rien ; avec `production`, rien ; avec `Recette`, une ligne refusée « environnement non reconnu : Recette ».
+- **Done quand**   : avec `RAILWAY_ENVIRONMENT_NAME=Develop`, `bin/rails contenus:charger` sur une base où Thalès est publiée avec l'ancien contenu et une séance d'élève remplace ses exercices et sujets (4 sujets, 2 exercices par notion, tout publié, séance effacée, texte des fiches inchangé) et laisse une ligne terminée dans l'écran Imports ; relancé, il ne fait rien ; avec `production`, rien ; avec `Recette`, une ligne refusée « environnement non reconnu : Recette ».
 
 ---
 

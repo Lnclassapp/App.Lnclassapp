@@ -4,7 +4,7 @@
 
 ## 1. Contexte
 
-Les feuilles « Prépare interros » et « Prépare devoirs » que Touré retravaille (aujourd'hui Thalès : 4 sujets de devoir, deux exercices par notion) vivent dans un fichier de leçon du dépôt et n'arrivent dans Develop et Staging que par un import à la main, que l'application refuse dès que la leçon y est publiée. À chaque démarrage sur Develop ou Staging, l'application charge seule les leçons du dépôt qui portent des sujets de devoir, en remplaçant l'ancienne version, effacement des résultats de test compris. La production n'est jamais touchée.
+Les feuilles « Prépare interros » et « Prépare devoirs » que Touré retravaille (aujourd'hui Thalès : 4 sujets de devoir, deux exercices par notion) vivent dans un fichier de leçon du dépôt et n'arrivent dans Develop et Staging que par un import à la main, que l'application refuse dès que la leçon y est publiée. À chaque démarrage sur Develop ou Staging, l'application charge seule les leçons du dépôt qui portent des sujets de devoir, en remplaçant les exercices des feuilles « Prépare interros » et les sujets de « Prépare devoirs », effacement des résultats de test qui s'y rattachent compris ; le cours et ses fiches ne sont pas touchés. La production n'est jamais touchée.
 
 ## 2. Acteurs et permissions
 
@@ -24,7 +24,7 @@ Aucune policy nouvelle : le chargement n'est pas une action d'utilisateur. La li
 2. Au démarrage, après les migrations, l'application lit le nom de l'environnement : `Develop`.
 3. Elle prend les leçons de `docs/contenus/lecons-traitees` qui portent au moins un sujet de devoir (aujourd'hui : Thalès).
 4. Pour chacune, elle compare l'empreinte du fichier à celle de son dernier chargement automatique réussi : différente (ou jamais chargée) → elle charge.
-5. Charger : la leçon passe par la vraie chaîne d'import (mêmes contrôles qu'à la main) ; si elle existe déjà, publiée ou non, son contenu est remplacé, résultats et devoirs envoyés effacés ; puis tout est publié.
+5. Charger : le fichier passe par la vraie chaîne d'import (mêmes contrôles qu'à la main). Leçon absente : elle est créée entière. Leçon présente, publiée ou non : seuls ses exercices de notion, ses problèmes et ses sujets sont remplacés (résultats et devoirs envoyés qui s'y rattachent effacés) ; le cours, les notions et leurs fiches ne bougent pas ; les exercices se rattachent aux notions existantes par leur nom ; les figures qu'ils citent sont ajoutées ou mises à jour. Puis tout est publié.
 6. L'écran Imports montre une ligne « Cours complets », fichier `chargement-automatique-…json`, statut terminé.
 7. Même chose sur Staging au déploiement suivant de `Staging`.
 
@@ -36,6 +36,7 @@ Aucune policy nouvelle : le chargement n'est pas une action d'utilisateur. La li
 | Nom d'environnement inconnu | rien n'est chargé ; une ligne refusée dans Imports, erreur « environnement non reconnu : <nom> » ; l'application démarre |
 | Fichier inchangé depuis le dernier chargement réussi | rien n'est chargé, aucune ligne |
 | Niveau ou matière absent (Staging sans référentiel) | la leçon est refusée dans sa ligne (erreur de l'import ordinaire) ; retentée au déploiement suivant |
+| Notion du fichier introuvable par son nom dans la leçon présente | la leçon est refusée dans sa ligne d'import, rien n'est remplacé |
 | Fichier invalide | refusé dans sa ligne, avec les erreurs de l'import ordinaire ; l'application démarre |
 | Aucun membre d'équipe actif | rien n'est chargé, avertissement dans le journal du déploiement |
 | Un import est déjà en cours, ou un autre démarrage charge déjà | rien n'est chargé cette fois ; journal du déploiement |
@@ -48,6 +49,7 @@ Scénario: une leçon publiée est remplacée sur Develop
   Étant donné l'environnement "Develop" et la leçon Thalès publiée avec un ancien contenu et une séance d'élève
   Quand le chargement automatique tourne
   Alors la leçon Thalès a les 4 sujets et 2 exercices par notion du fichier, tous publiés
+  Et le texte de ses fiches (À retenir, méthode, exemple, piège) est celui d'avant
   Et l'ancienne séance de l'élève n'existe plus
   Et une ligne d'import « Cours complets » terminée existe, au nom du plus ancien membre de l'équipe
 
@@ -79,6 +81,12 @@ Scénario: un référentiel absent refuse la leçon sans bloquer
   Et la ligne d'import porte l'erreur du niveau inconnu
   Et le chargement se termine sans exception
 
+Scénario: une notion introuvable refuse la leçon
+  Étant donné l'environnement "Develop" et la leçon Thalès présente dont une notion porte un autre nom que dans le fichier
+  Quand le chargement automatique tourne
+  Alors aucun exercice ni sujet de Thalès ne change
+  Et la ligne d'import porte l'erreur « notion introuvable » avec le nom de la notion
+
 Scénario: l'import à la main refuse toujours une leçon publiée
   Étant donné la leçon Thalès publiée
   Quand l'équipe l'importe depuis l'écran Imports
@@ -89,8 +97,8 @@ Scénario: l'import à la main refuse toujours une leçon publiée
 
 | Couche | Éléments prévus |
 |---|---|
-| Domaine | règle de reconnaissance de l'environnement (Develop, Staging, production, PR, inconnu) ; use case de chargement automatique (sélection des leçons à sujets, comparaison d'empreintes, chaîne d'import puis publication) ; l'adaptateur d'import accepte, pour ce seul appelant, de remplacer une leçon publiée |
-| Infrastructure | l'écrivain de l'arbre remplace une leçon publiée sur demande explicite (même effacement que pour un brouillon) ; dernière empreinte réussie lue dans les rapports d'import ; source des fichiers de leçon du dépôt ; tâche Rake `contenus:charger` sous verrou consultatif PostgreSQL |
+| Domaine | règle de reconnaissance de l'environnement (Develop, Staging, production, PR, inconnu) ; use case de chargement automatique (sélection des leçons à sujets, comparaison d'empreintes, chaîne d'import puis publication) ; l'adaptateur d'import a, pour ce seul appelant, un mode « exercices et sujets seulement » qui remplace ceux d'une leçon présente, publiée ou non |
+| Infrastructure | l'écrivain de l'arbre remplace les exercices, problèmes et sujets d'une leçon (effacement de leurs résultats comme pour un brouillon, notions et fiches gardées, figures citées fusionnées) ; dernière empreinte réussie lue dans les rapports d'import ; source des fichiers de leçon du dépôt ; tâche Rake `contenus:charger` sous verrou consultatif PostgreSQL |
 | Delivery | `bin/docker-entrypoint` lance la tâche après `db:prepare`, sans bloquer le démarrage |
 | UI | aucune vue modifiée ; un code d'erreur traduit (`unknown_environment`) |
 

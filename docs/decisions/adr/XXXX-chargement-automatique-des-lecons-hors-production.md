@@ -38,12 +38,12 @@ Les leçons sont rédigées dans le dépôt (`docs/contenus/lecons-traitees`, fo
 
 ## 4. Décision
 
-> **Nous chargeons, à chaque démarrage d'un environnement Railway nommé `Develop` ou `Staging` (casse ignorée), les leçons du dépôt qui portent au moins un sujet de devoir, par la chaîne d'import ordinaire, en remplaçant une leçon existante même publiée, puis en publiant tout.**
+> **Nous chargeons, à chaque démarrage d'un environnement Railway nommé `Develop` ou `Staging` (casse ignorée), les leçons du dépôt qui portent au moins un sujet de devoir, par la chaîne d'import ordinaire ; une leçon présente, même publiée, n'y voit remplacés que ses exercices de notion, ses problèmes et ses sujets de devoir, son cours et ses fiches restant intacts ; puis tout est publié.**
 
 1. **Repérage.** `production` (toute casse), un environnement de PR (`PrEnvironment.active?`) ou l'absence de `RAILWAY_ENVIRONMENT_NAME` : rien. `Develop` ou `Staging` : chargement. Tout autre nom : rien n'est chargé, une ligne d'import `course_tree` refusée porte l'erreur `unknown_environment` (« environnement non reconnu : <nom> »).
 2. **Sélection.** Les fichiers v3 dont la leçon a une clé `subjects` non vide.
 3. **Changement.** L'empreinte SHA-256 du fichier est comparée à celle du dernier rapport `course_tree` terminé dont le fichier s'appelle `chargement-automatique-<niveau>-<matière>-<fichier>` ; égale : rien, aucune ligne.
-4. **Remplacement.** Pour ce seul appelant, l'adaptateur d'import remplace une leçon publiée ; l'écrivain efface son contenu comme pour un brouillon (séances, tentatives, badges, lacunes, devoirs envoyés, lectures), garde son id et son slug, réécrit le contenu, puis la cascade de publication publie la leçon et sa descendance. L'import à la main garde son refus `lesson_already_published`.
+4. **Remplacement.** Leçon absente : créée entière. Leçon présente, publiée ou non : pour ce seul appelant, l’adaptateur d’import passe en mode « exercices et sujets seulement » ; l’écrivain efface les exercices de la leçon (notions et problèmes), ses sujets et ce qui s’y rattache (séances, tentatives, badges, lacunes nées de ces séances, devoirs envoyés), garde le cours, les notions, leurs fiches et leurs lectures, réécrit exercices et sujets en les rattachant aux notions existantes par leur nom (une notion introuvable refuse la leçon), et fusionne dans les figures de la leçon celles que ces exercices et sujets citent. La cascade de publication publie ensuite ce qui est en brouillon. L’import à la main garde son refus `lesson_already_published`.
 5. **Auteur.** Le plus ancien membre actif de l'équipe ; s'il n'y en a pas, rien n'est chargé (journal).
 6. **Sûreté du démarrage.** Tâche `contenus:charger` lancée par `bin/docker-entrypoint` après `db:prepare`, sous un verrou consultatif PostgreSQL ; toute erreur est journalisée et le serveur démarre.
 
@@ -56,10 +56,11 @@ Les leçons sont rédigées dans le dépôt (`docs/contenus/lecons-traitees`, fo
 
 ### 🔴 Coûts consentis
 
-- Les résultats des élèves et les devoirs envoyés sur une leçon remplacée sont effacés sur Develop et Staging à chaque changement de son fichier.
+- Les résultats des élèves et les devoirs envoyés sur les exercices et sujets remplacés sont effacés sur Develop et Staging à chaque changement de son fichier.
 - Un renommage de l'environnement Staging chez Railway arrête le chargement (la ligne d'avertissement le dit, mais il faut la lire).
 - Le démarrage s'allonge du temps d'un import quand un fichier a changé.
-- Le remplacement d'une leçon publiée existe désormais dans le code : son accès est réservé à cet appelant, et un test garde le refus de l'import à la main.
+- Une correction du texte d’une fiche ne suit pas : elle reste à importer à la main.
+- Le remplacement des exercices d’une leçon publiée existe désormais dans le code : son accès est réservé à cet appelant, et un test garde le refus de l'import à la main.
 
 ## 6. Liens
 
