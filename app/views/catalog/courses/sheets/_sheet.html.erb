@@ -2,8 +2,10 @@
 <%# Rôle : cartouche, titre et progression, encadré « À retenir » / « Notions mobilisées », exercices, pied et « Recommencer… » ; aucune variable d'instance, aucune requête : tout vient des locals (rendu aussi par « Ma classe ») %>
 <%# ADR  : XXXX-sujets-de-devoir-et-verification-sur-la-feuille · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 · Stimulus : prepare-sheet (élève et visiteur seulement) %>
 <%# `mode` et `targets` ne servent qu'aux exercices ; la progression se calcule sur `exercises` ; son repère est `sheet-progress-<sheet_id>` (la réponse de la vérification le remplace) %>
+<%# reset_label : sans lui, pas de « Recommencer… » (un devoir reçu) ; hand_ins : { exercice => assignation } d'« Ma classe », le bouton noir d'un exercice non rendu y est « Rendre à l'enseignant » %>
+<%# return_to : où la page de résultat ramène l'élève, "sheet" (la leçon) ou "class" (« Ma classe », rendu comme vérifié) ; transmis tel quel à chaque exercice %>
 <%# kind : :interros | :devoirs ; exercises : [PrepareSheetsQuery::SheetExercise] ; mode : :student | :visitor | :teacher | :team ; subtitle : ligne sous la progression (« À rendre le … ») %>
-<%# locals: (kind:, material:, header_left:, header_right:, title:, exercises:, footer:, reset_label:, sheet_id:, subtitle: nil, box_label: nil, box_text: nil, mode: :student, targets: nil, classrooms: []) -%>
+<%# locals: (kind:, material:, header_left:, header_right:, title:, exercises:, footer:, sheet_id:, reset_label: nil, hand_ins: {}, return_to: "sheet", subtitle: nil, box_label: nil, box_text: nil, mode: :student, targets: nil, classrooms: []) -%>
 <% interactive = %i[student visitor].include?(mode) %>
 <% data = interactive ? { controller: "prepare-sheet" } : {} %>
 <% passed = exercises.count { it.copy&.passed } %>
@@ -23,11 +25,11 @@
     <div class="ps-remember"><b><%= box_label %></b> <%= box_text %></div>
   <% end %>
   <% exercises.each do |exercise| %>
-    <%= render "catalog/courses/sheets/exercise", exercise:, mode:, targets:, classrooms: %>
+    <%= render "catalog/courses/sheets/exercise", exercise:, mode:, targets:, classrooms:, assignment_public_id: hand_ins[exercise.public_id], return_to: %>
   <% end %>
   <div class="ps-footer">
     <span><%= footer %></span>
-    <% if interactive %>
+    <% if interactive && reset_label.present? %>
       <button type="button" class="ps-link-button" data-action="prepare-sheet#resetAll"><%= reset_label %></button>
     <% end %>
   </div>
