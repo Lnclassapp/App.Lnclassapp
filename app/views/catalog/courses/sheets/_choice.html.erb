@@ -1,14 +1,14 @@
 <%# 🌐 UI · catalog/courses/sheets/_choice — une proposition d'un QCM ou d'un vrai ou faux : bouton à état (aria-checked), ou simple ligne pour qui ne répond pas %>
 <%# Rôle : le bouton porte un champ caché désactivé que prepare-sheet active quand la proposition est cochée ; l'indice posté est le rang dans l'ordre de la feuille, jamais un id %>
-<%# ADR  : 0121, 0091 §4.4 · UDR : 0149 §3 %>
+<%# ADR  : 0121, 0091 §4.4 · UDR : 0149 §3 · Stimulus : math (le LaTeX du contenu est rendu par KaTeX côté client) %>
 <%# locals: (choice:, question:, fields:, field:, css:, role:) -%>
 <%# choice : PrepareSheetsQuery::Choice ; css : "ps-choice" (QCM) ou "ps-choice-vf" ; role : "radio" ou "checkbox" %>
 <% mcq = css == "ps-choice" %>
 <% inner = capture do %>
   <% if mcq %>
-    <b class="ps-choice-letter"><%= choice.letter %>.</b><span class="ps-choice-label"><%= choice.content %></span>
+    <b class="ps-choice-letter"><%= choice.letter %>.</b><span class="ps-choice-label" data-controller="math"><%= choice.content %></span>
   <% else %>
-    <%= choice.content %>
+    <span data-controller="math"><%= choice.content %></span>
   <% end %>
 <% end %>
 <% if fields %>

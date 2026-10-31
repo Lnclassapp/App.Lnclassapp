@@ -12,6 +12,7 @@ module UseCases
       PUBLIC_ID_LENGTH = 14
       # ADR-0116 §4.1 : un exercice par notion, quatre problèmes pour toute la leçon.
       LESSON_EXERCISES = 4
+      ESSENTIAL_EXERCISES = (1..2) # exercices d'une notion
       DEFAULT_THEME = "blue"
       # ADR-0121 §4 : l'indice, le titre et les notions d'un sujet sont du texte seul, borné ; un cours a dix sujets au plus,
       # un sujet dix exercices au plus (bornes de l'adaptateur d'import seulement : la base ne les contraint pas).
@@ -162,13 +163,19 @@ module UseCases
         return errors unless notion.is_a?(Hash)
 
         errors += Entities::Catalog::ContentNode.validate_figure_citation(notion["figure"], figure_keys, "#{path}.figure")
-        exercise = notion["exercise"]
-        unless exercise.is_a?(Hash)
-          count = exercise.is_a?(Array) ? exercise.size : 0
-          return errors << rule_error("#{path}.exercise", "essential_exercise_count", course: course_name.to_s.squish, name: notion["name"].to_s.squish, count:)
+        exercises = notion_exercises(notion)
+        unless ESSENTIAL_EXERCISES.cover?(exercises.size)
+          return errors << rule_error("#{path}.exercise", "essential_exercise_count", course: course_name.to_s.squish, name: notion["name"].to_s.squish, count: exercises.size)
         end
 
-        errors + exercise_errors(exercise, "#{path}.exercise", figure_keys)
+        # Un objet garde son chemin `.exercise` ; une liste donne `.exercise[0]`, `.exercise[1]`.
+        errors + (notion["exercise"].is_a?(Array) ? exercises.each_with_index.flat_map { |e, i| exercise_errors(e, "#{path}.exercise[#{i}]", figure_keys) } : exercise_errors(exercises.first, "#{path}.exercise", figure_keys))
+      end
+
+      # Les exercices d'une notion : `exercise` est un objet (un exercice) ou une liste (de un à deux, ADR-0116 amendé le 2026-10-31).
+      def notion_exercises(notion)
+        exercise = notion["exercise"]
+        exercise.is_a?(Hash) ? [ exercise ] : (exercise.is_a?(Array) ? exercise : [])
       end
 
       # Quatre problèmes pour toute la leçon, chacun avec son sujet. La leçon est refusée entière.
@@ -233,7 +240,7 @@ module UseCases
         Node::NotionNode.new(
           slug: slug_for("#{course_name} #{notion['name'].squish}", "essential", data.fetch(:essential_slugs)), course_id: nil,
           name: notion["name"].squish, position: index + 1, sheet: sheet_hash(sheet, notion),
-          exercises: [ exercise_node(notion["exercise"]) ]
+          exercises: notion_exercises(notion).map { exercise_node(it) }
         )
       end
 

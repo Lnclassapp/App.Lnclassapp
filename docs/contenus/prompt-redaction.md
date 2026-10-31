@@ -11,7 +11,7 @@ Tu rédiges **une leçon** de Lnclass, dans la matière donnée par l'ENTRÉE, u
 Une leçon est faite de :
 
 - **des notions** (1 à 12, en général 2 à 5), chacune avec sa **fiche de révision au gabarit fixe en 4 blocs** : À retenir · La méthode · Un exemple corrigé · Le piège à éviter ;
-- **un exercice d'application par notion** ;
+- **un ou deux exercices d'application par notion** (un seul par défaut ; un second, aux types de questions mélangés, quand la notion le mérite) ;
 - **4 problèmes** de synthèse, type interrogation, devoir et BEPC ;
 - **des figures paramétrées** (0 à 12) que les notions et les exercices citent par leur clé ;
 - des questions **corrigées automatiquement** (au moins la moitié de la leçon) et, quand la matière le demande, des questions **rédigées** avec leur corrigé modèle et leur barème.
@@ -61,7 +61,7 @@ Ici, chaque étape de l'exemple commence par le verbe de l'étape de la méthode
 
 ## Selon la matière
 
-Le gabarit est le même partout : 4 blocs par notion, un exercice par notion, 4 problèmes. Ce qui change, c'est ce qu'on met dedans.
+Le gabarit est le même partout : 4 blocs par notion, un ou deux exercices par notion, 4 problèmes. Ce qui change, c'est ce qu'on met dedans.
 
 | Matière | À retenir | La méthode | Un exemple corrigé | Le piège | Les 4 problèmes (interrogation, interrogation, devoir, BEPC) |
 |---|---|---|---|---|---|
@@ -304,6 +304,8 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
   }] }
 ```
 
+- `exercise` d'une notion : un objet (un exercice), ou, depuis le 2026-10-31 (ADR-0116), une **liste de 1 à 2 objets** de même forme (`"exercise": [ { … }, { … } ]`). Une liste vide, ou 3 exercices et plus, est refusé (`essential_exercise_count`). Chaque exercice a 5 questions au moins ; mélange les types (QCM, vrai ou faux, complète, calcul…) et reste dans le niveau du premier exercice. Les chemins d'erreur sont `notions[i].exercise[j]…`.
+
 - `name` : l'intitulé exact de la leçon dans la progression. `subtitle` : « Leçon N — progression DPFC 2026-2027 ». `level_name` : `6ème` … `Tle`. `material_name` : exactement « Mathématiques », « Français », « Histoire-Géographie », « SVT », « Physique-Chimie », « EDHC » (1er cycle seulement) ou « Philosophie » (1ère et Tle). `series_name` : seulement à partir de la 2nde.
 - `theme` (facultatif) : `blue`, `teal` ou `burgundy` ; absent = `blue`. Varie les thèmes d'une leçon à l'autre.
 - `notions` : 1 à 12, noms **uniques**. Un seul cours par fichier.
@@ -311,7 +313,7 @@ Un seul fichier contient **toute la leçon**. Le résultat est **uniquement** ce
 ## Contrôle final (avant de rendre)
 
 - [ ] Chaque notion a ses 4 blocs ; `method` a 2 à 8 étapes ; `example.steps` a **autant d'étapes** que `method`, et l'étape *n* applique l'étape *n*.
-- [ ] Exactement 1 exercice par notion et exactement 4 problèmes, de 5 questions au moins chacun.
+- [ ] 1 ou 2 exercices par notion (3 sont refusés) et exactement 4 problèmes, de 5 questions au moins chacun.
 - [ ] Chaque question a une correction de 20 à 2 000 caractères ; dans l'exercice d'une notion, elle reprend les étapes et les mots de La méthode ; dans un problème, elle donne la méthode détaillée, réutilisable en interrogation.
 - [ ] Chaque question respecte la règle de son type (propositions, bonnes propositions, `___`, paires, étapes) ; chaque proposition fausse est plausible.
 - [ ] Au moins la moitié des questions de la leçon sont corrigées automatiquement ; chaque question `written` a `answers: []`, un corrigé modèle, un barème `points` et 2 à 8 `criteria`.

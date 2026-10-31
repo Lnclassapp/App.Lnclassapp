@@ -30,7 +30,7 @@
     <div class="ps-page">
       <% prepare.interros.each do |sheet| %>
         <% wide = sheet.kind == :lesson_wide %>
-        <%= render "catalog/courses/sheets/sheet", kind: :interros, mode:, material: prepare.material_name,
+        <%= render "catalog/courses/sheets/sheet", kind: :interros, number: sheet.number, mode:, material: prepare.material_name,
                    header_left: t("catalog.courses.sheets.brand_line", course: prepare.course_name),
                    header_right: t("catalog.courses.sheets.notion_position", level: prepare.level_name, number: sheet.number, total: sheet.total),
                    title: (wide ? t("catalog.courses.show.lesson_wide_title") : sheet.title),
@@ -47,7 +47,7 @@
     <h2 id="devoirs_title" class="mb-4 font-display text-xl font-medium"><%= t("catalog.courses.sheets.devoirs_section") %></h2>
     <div class="ps-page">
       <% prepare.devoirs.each do |sheet| %>
-        <%= render "catalog/courses/sheets/sheet", kind: :devoirs, mode:, material: prepare.material_name,
+        <%= render "catalog/courses/sheets/sheet", kind: :devoirs, number: sheet.number, mode:, material: prepare.material_name,
                    header_left: t("catalog.courses.sheets.brand_line", course: prepare.course_name),
                    header_right: t("catalog.courses.sheets.subject_position", level: prepare.level_name, number: sheet.number, total: sheet.total),
                    title: sheet.title, box_label: t("catalog.courses.sheets.notions"), box_text: sheet.note,

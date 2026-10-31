@@ -115,14 +115,15 @@ module UseCases
         assert_equal (1..7).to_a, Orm::Exercise.where(course_id: course.id).order(:position).pluck(:position)
       end
 
-      # CA-3
-      test "a notion without exercise, or with two, is refused and the report names the notion" do
+      # CA-3 (amendé le 2026-10-31) : une notion porte un ou deux exercices.
+      test "a notion without exercise, or with three, is refused and the report names the notion" do
         missing = lesson
         missing["notions"][1].delete("exercise")
-        two = lesson("name" => "Autre")
-        two["notions"][0]["exercise"] = [ two["notions"][0]["exercise"], two["notions"][0]["exercise"] ]
+        three = lesson("name" => "Autre")
+        exercise = three["notions"][0]["exercise"]
+        three["notions"][0]["exercise"] = [ exercise, exercise, exercise ]
 
-        report = run_import(envelope(missing, two))
+        report = run_import(envelope(missing, three))
 
         assert_equal [ 0, 2 ], report.values_at(:imported_count, :error_count)
         assert_equal [ [ "courses[0].notions[1].exercise", "essential_exercise_count" ], [ "courses[1].notions[0].exercise", "essential_exercise_count" ] ],
@@ -130,7 +131,33 @@ module UseCases
         assert_equal [ 0, 0, 0, 0, 0 ], tree_counts
         item = validate(missing)
         assert_equal({ course: "Racines carrées", name: "Calculer avec des racines", count: 0 }, item.errors.first.params)
-        assert_equal 2, validate(two).errors.first.params[:count]
+        assert_equal 3, validate(three).errors.first.params[:count]
+        assert_equal [ [ "courses[0].notions[0].exercise", "essential_exercise_count" ] ], pairs(validate(lesson.tap { it["notions"][0]["exercise"] = [] }))
+      end
+
+      test "a notion with two exercises (list) or one (list or object) is imported, both attached to the notion in order" do
+        two = lesson
+        first = two["notions"][0]["exercise"]
+        second = Marshal.load(Marshal.dump(first)).merge("title" => "Second exercice de la notion")
+        two["notions"][0]["exercise"] = [ first, second ]
+        two["notions"][1]["exercise"] = [ two["notions"][1]["exercise"] ]
+
+        report = run_import(envelope(two))
+
+        assert_equal [ 1, 0 ], report.values_at(:imported_count, :error_count), report.import_errors.inspect
+        course = Orm::Course.find_by!(slug: "racines-carrees")
+        notion = course.essentials.order(:position).first
+        assert_equal [ first["title"], "Second exercice de la notion" ], notion.exercises.order(:position).pluck(:title)
+        assert_equal 1, course.essentials.order(:position).second.exercises.count
+        assert_equal 4, Orm::Exercise.where(course_id: course.id, essential_id: nil).count
+      end
+
+      test "an invalid exercise inside the list is reported at its own index" do
+        bad = lesson
+        exercise = bad["notions"][0]["exercise"]
+        bad["notions"][0]["exercise"] = [ exercise, exercise.merge("questions" => exercise["questions"].first(2)) ]
+
+        assert_includes pairs(validate(bad)), [ "courses[0].notions[0].exercise[1].questions", "too_few_questions" ]
       end
 
       # CA-4
