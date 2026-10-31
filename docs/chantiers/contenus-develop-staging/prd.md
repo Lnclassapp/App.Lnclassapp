@@ -104,7 +104,7 @@ Scénario: l'import à la main refuse toujours une leçon publiée
 
 ## 6. Décisions rattachées
 
-- ADR-XXXX-chargement-automatique-des-lecons-hors-production — repérage par le nom, remplacement d'une leçon publiée hors production, empreinte lue dans les rapports d'import.
+- ADR-0122 — repérage par le nom, remplacement d'une leçon publiée hors production, empreinte lue dans les rapports d'import.
 - Pas d'UDR : aucune vue créée ni modifiée (la ligne d'import existante suffit ; seul un libellé d'erreur s'ajoute).
 
 ## 7. Mesures

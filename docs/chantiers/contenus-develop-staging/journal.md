@@ -45,10 +45,10 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 
 | | |
 |---|---|
-| **Livré le** | AAAA-MM-JJ |
-| **PR** | |
-| **ADR produits** | |
-| **UDR produits** | |
+| **Livré le** | 2026-10-31 |
+| **PR** | [Lnclassapp/App.Lnclassapp#429](https://github.com/Lnclassapp/App.Lnclassapp/pull/429) vers `Develop` |
+| **ADR produits** | ADR-0122 (statut Proposé : à valider par Kamkara) |
+| **UDR produits** | — (aucune vue modifiée) |
 
 ## Challenger (2026-10-31, orchestrateur, distinct de l'exécutant)
 

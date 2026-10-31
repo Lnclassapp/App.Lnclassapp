@@ -1,4 +1,4 @@
-# ADR-XXXX : Les leçons à sujets de devoir se chargent seules sur Develop et Staging
+# ADR-0122 : Les leçons à sujets de devoir se chargent seules sur Develop et Staging
 <!-- index
 titre: Chargement automatique des leçons hors production
 statut: Proposé

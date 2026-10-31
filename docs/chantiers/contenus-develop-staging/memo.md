@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | planifié |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-31 |
 | **Branche** | `feature/contenus-develop-staging` |
 | **Programme** | — |
