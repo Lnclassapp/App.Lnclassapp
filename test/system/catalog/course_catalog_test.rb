@@ -54,7 +54,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
         assert_selector "#course_header h1", text: "Génétique et évolution"
       end
       assert_current_path course_path(@course.slug)
-      assert_selector "#fiche-de-revision .katex", count: 1, visible: :all
+      assert_selector "#fiche-de-revision .katex", count: 1
       assert_selector "#prepare-interros"
 
       assert_not resource_loaded?("trix"), "une page sans formulaire ne charge pas Trix"
@@ -96,7 +96,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
     sign_in_as create_team_member
     assert_current_path team_home_path
     visit course_path(course.slug)
-    assert_selector "#fiche-de-revision .katex", count: 1, visible: :all
+    assert_selector "#fiche-de-revision .katex", count: 1
     # Any violation of the Content Security Policy is recorded, to be asserted empty.
     page.execute_script(<<~JS)
       window.cspViolations = []
@@ -120,7 +120,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
       end
       assert_toast t("teams.courses.update.updated", name: "Mutation et diversité")
       assert_no_selector "turbo-frame#modal dialog[open]"
-      assert_selector "#fiche-de-revision .katex", count: 1, visible: :all
+      assert_selector "#fiche-de-revision .katex", count: 1
     end
     stored = course.reload.content.body.to_html
     assert_includes stored, "<strong>Mutation ponctuelle</strong>"
@@ -140,7 +140,7 @@ class Catalog::CourseCatalogTest < ApplicationSystemTestCase
         click_on t("teams.courses.edit.submit")
       end
       assert_selector "#course_header h1", text: "Mutations"
-      assert_selector "#fiche-de-revision .katex", count: 1, visible: :all
+      assert_selector "#fiche-de-revision .katex", count: 1
       assert_no_text "$\\frac{1}{2}$"
     end
 

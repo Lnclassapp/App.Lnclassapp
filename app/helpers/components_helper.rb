@@ -94,9 +94,7 @@ module ComponentsHelper
   # UDR-0089 §3.4 : `:phone_sheet`, la même feuille sous 700 px seulement (palier du téléphone, UDR-0086 §3.5).
   # Mouvement réduit : ui-dialog ne glisse qu'en motion-safe (motion-reduce:animate-none, moins spécifique que open:, ne
   # l'arrêtait pas).
-  # `:full` couvre toute la fenêtre, en-tête collé en haut au défilement (fiche de révision d'une leçon).
-  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", phone_sheet: "dialog-phone-sheet", drawer: "dialog-drawer",
-                       full: "dialog-full" }.freeze
+  MODAL_PLACEMENTS = { center: nil, sheet: "dialog-sheet", phone_sheet: "dialog-phone-sheet", drawer: "dialog-drawer" }.freeze
   # Poignée d'une feuille, cachée dès que la feuille redevient une modale centrée.
   SHEET_HANDLES = { sheet: "lg:hidden", phone_sheet: "min-[700px]:hidden" }.freeze
   DROPDOWN_ALIGNS = { start: "left-0", end: "right-0" }.freeze
