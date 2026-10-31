@@ -448,6 +448,27 @@ Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : arbre 
 
 À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
 
+### Tle D, SVT au format 3 (chantier `contenus-tle-svt-cd`)
+
+Les 10 premières leçons de SVT de Tle D, rédigées le 2026-10-31 au même format que la Tle C ci-dessus. Elles remplacent les 3 fichiers v1 de `tle-d/svt/` (lignes SVT du tableau Tle D). Les leçons 4, 7 et 8 sont les leçons 2, 5 et 6 de Tle C : même contenu, seuls `series_name` et `subtitle` changent. Les 7 autres sont propres à la série D.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Entraînement | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères | 3 | 7 | 40 | 12 | 92 % | 6 | `plate female_reproductive_system`, `diagram`, `stat_chart line` |
+| 2 | `svt/le-fonctionnement-des-organes-sexuels-chez-l-homme.json` | Le fonctionnement des organes sexuels chez l'Homme | 3 | 7 | 48 | 12 | 96 % | 5 | `diagram`, `plate female_reproductive_system`, `stat_chart line` |
+| 3 | `svt/la-reproduction-chez-les-spermaphytes.json` | La reproduction chez les spermaphytes | 4 | 8 | 49 | 16 | 96 % | 5 | `diagram`, `stat_chart line` |
+| 4 | `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme | 3 | 7 | 43 | 12 | 95 % | 2 | `diagram`, `stat_chart bars` |
+| 5 | `svt/la-transmission-de-deux-caracteres-hereditaires-chez-les-etres-vivants.json` | La transmission de deux caractères héréditaires chez les êtres vivants | 4 | 8 | 51 | 20 | 96 % | 8 | `stat_chart bars`, `diagram` |
+| 6 | `svt/le-maintien-de-la-constance-du-milieu-interieur.json` | Le maintien de la constance du milieu intérieur | 4 | 8 | 49 | 20 | 94 % | 5 | `stat_chart line`, `diagram`, `plate digestive_system` |
+| 7 | `svt/le-systeme-de-defense-de-l-organisme.json` | Le système de défense de l'organisme | 5 | 9 | 61 | 20 | 97 % | 6 | `diagram`, `stat_chart line`, `plate blood_smear` |
+| 8 | `svt/l-infection-de-l-organisme-par-le-vih.json` | L'infection de l'organisme par le VIH | 4 | 8 | 49 | 16 | 96 % | 6 | `plate hiv_virus`, `diagram`, `stat_chart line` |
+| 9 | `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 5 | 9 | 53 | 19 | 96 % | 6 | `diagram`, `stat_chart line`, `stat_chart bars` |
+| 10 | `svt/le-fonctionnement-du-tissu-nerveux.json` | Le fonctionnement du tissu nerveux | 5 | 9 | 54 | 20 | 94 % | 5 | `diagram`, `stat_chart line` |
+
+Au total : 40 notions, 80 exercices, 497 questions notées, 167 questions d'entraînement et 54 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement ; chaque leçon propre à la série D a été relue par un agent distinct de son auteur.
+
+Schémas qu'aucune sorte ne dessine, en plus de ceux de la Tle C : spermatozoïde, ovocyte et stades de segmentation, testicule et tube séminifère, fleur, ovule et grain de pollen, paire de chromosomes et crossing-over, échiquier, îlot de Langerhans, cortex et bulbe. Points à faire valider : [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
+
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
