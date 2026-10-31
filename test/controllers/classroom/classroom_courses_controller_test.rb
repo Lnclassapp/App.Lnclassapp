@@ -32,13 +32,14 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "a[href='#{classroom_path(@classroom.public_id)}']", text: including("Tle D 1")
     assert_select "#fiche-de-revision h2", text: "Fiche de révision"
     assert_select "#prepare-interros h2", text: "Prépare interros"
-    assert_select "#prepare-interros ul#prepare-interros-grid > li > span#notion-#{@meiose.slug}[aria-label=?]", "La méiose"
-    assert_select "#prepare-interros #notion-#{@mitose.slug}", 1
-    assert_select "#prepare-interros ul#prepare-interros-grid > li > span#toute-la-lecon[aria-label=?]", tl("lesson_wide_title")
-    assert_select "#prepare-interros h3", text: "La méiose", count: 0
-    assert_select "#prepare-interros h3", text: tl("lesson_wide_title"), count: 0
-    assert_select "#prepare-interros li#exercise-#{@ex_wide.public_id}"
-    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id} a[href='#{exercise_path(@ex_meiose.public_id)}']"
+    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-title", text: "Prépare interros n°1"
+    assert_select "#prepare-interros .ps-sheet#notion-#{@meiose.slug} .ps-subject", text: "La méiose"
+    assert_select "#prepare-interros .ps-sheet#notion-#{@mitose.slug} .ps-exercise", 1
+    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-title", text: /\APrépare interros n°\d+\z/
+    assert_select "#prepare-interros .ps-sheet#toute-la-lecon .ps-subject", text: tl("lesson_wide_title")
+    assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_wide.public_id}"
+    assert_select "#prepare-interros turbo-frame#sheet-exercise-#{@ex_meiose.public_id}"
+    assert_select "#prepare-interros .ps-input, #prepare-interros [data-ps-choice]", 0
     # CA-05 : aucun ancien intitulé.
     assert_no_match(/Révisions de la leçon|Fiche de cours/, response.body)
   end
@@ -57,46 +58,8 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     assert_select "##{toggle_id(@classroom, @ex_mitose)}", text: including(toggle("assigned"))
     assert_select "form[action='#{archive_assignment_path(assignment.public_id)}']"
     assert_select "[id^='assignment_#{other.public_id}']", 0
-    assert_select ".ui-button-primary", 1
-    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ui-button-primary"
-  end
-
-  # UDR-0145 §3.2 ter : les évaluations vont dans « Prépare devoirs », les fixations dans « Prépare interros », jamais l'inverse.
-  test "evaluations go to « Prépare devoirs » with their toggles, fixations stay in « Prépare interros »" do
-    eval_mitose = create_exercise(essential: @mitose, title: "Devoir mitose", exercise_type: "evaluation")
-    eval_wide = create_lesson_wide_exercise(course: @course, title: "Devoir de la leçon", exercise_type: "evaluation")
-    sign_in_as @teacher
-
-    get classroom_course_path(@classroom.public_id, @course.slug)
-
-    assert_select "section#prepare-devoirs[aria-labelledby=prepare_devoirs_title] h2#prepare_devoirs_title", text: tl("prepare_devoirs_title")
-    assert_select "section#prepare-devoirs", text: including(tl("prepare_devoirs_intro"))
-    assert_select "ul#prepare-devoirs-grid li[id^=exercise-]", 2
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_mitose.public_id}"
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_wide.public_id}"
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{@ex_meiose.public_id}", 0
-    assert_select "ul#prepare-interros-grid li#exercise-#{eval_mitose.public_id}", 0
-    assert_select "ul#prepare-interros-grid li#exercise-#{eval_wide.public_id}", 0
-    assert_select "ul#prepare-interros-grid li#exercise-#{@ex_meiose.public_id}"
-    assert_select "ul#prepare-devoirs-grid li#exercise-#{eval_mitose.public_id} ##{toggle_id(@classroom, eval_mitose)}"
-    assert_select ".ui-button-primary", 1
-    # Chaque repère n'existe qu'une fois : « notion-mitose » a déjà sa fixation, « toute-la-lecon » la sienne.
-    assert_select "##{"notion-#{@mitose.slug}"}", 1
-    assert_select "#toute-la-lecon", 1
-    assert_select "ul#prepare-devoirs-grid span[id]", 0
-  end
-
-  test "a notion with only an evaluation carries its anchor in « Prépare devoirs », which is absent without evaluation" do
-    sign_in_as @teacher
-    get classroom_course_path(@classroom.public_id, @course.slug)
-    assert_select "section#prepare-devoirs", 0
-
-    @ex_mitose.update!(exercise_type: "evaluation")
-    get classroom_course_path(@classroom.public_id, @course.slug)
-
-    assert_select "##{"notion-#{@mitose.slug}"}", 1
-    assert_select "ul#prepare-devoirs-grid > li > span#notion-#{@mitose.slug}"
-    assert_select "ul#prepare-interros-grid span#notion-#{@mitose.slug}", 0
+    assert_select "#prepare-interros [id^='assignment_'] .ps-btn--primary", 1
+    assert_select "##{toggle_id(@classroom, @ex_meiose)} .ps-btn--primary"
   end
 
   # UDR-0013 : une leçon d'un autre niveau que la classe, atteinte par l'URL, n'existe pas sur la page de la classe.
@@ -148,8 +111,8 @@ class Classroom::ClassroomCoursesControllerTest < ActionDispatch::IntegrationTes
     get classroom_course_path(@classroom.public_id, @course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros li[id^=exercise-]", 3
-    assert_select "#prepare-interros li#exercise-#{@ex_meiose.public_id}", text: including(I18n.t("catalog.content_status.published"))
+    assert_select "#prepare-interros turbo-frame[id^=sheet-exercise-]", 3
+    assert_select "#prepare-interros .ps-exercise-head .ps-status", count: 3, text: "Publié"
     no_toggle
   end
 

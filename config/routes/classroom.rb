@@ -1,6 +1,6 @@
 # 🌐 DELIVERY · routes du contexte classroom
-# Rôle : inscription de l'élève, adhésion par lien, lien d'une classe, fiche et retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, jours de séance et suivi
-# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, 0084, 0085, 0086, 0095, 0097, 0109
+# Rôle : inscription de l'élève, adhésion par lien, lien d'une classe, fiche et retrait d'un élève, accueils élève et enseignant, historique de l'élève, page de classe, assignations, envois de plusieurs exercices, jours de séance et suivi
+# ADR  : 0030, 0036, 0040, 0041, 0048, 0072, sujets-de-devoir (ajout du 2026-10-30), 0084, 0085, 0086, 0095, 0097, 0109
 # IL-02 (ADR-0085, Lot F) : l'ancienne entrée « join » mène à l'inscription élève (le code revient, voir classroom-codes plus bas).
 get "join", to: redirect("/student-signup")
 get "c/:code", to: "classroom/joins#new", as: :join_classroom
@@ -46,6 +46,9 @@ get "classrooms/:classroom_public_id/courses/:course_slug/essentials/:essential_
 get "classrooms/:classroom_public_id/assignments/new", to: "classroom/assignments#new", as: :new_classroom_assignment
 post "classrooms/:classroom_public_id/assignments", to: "classroom/assignments#create", as: :classroom_assignments
 get "classrooms/:classroom_public_id/assignments/:public_id", to: "classroom/assignment_follow_ups#show", as: :classroom_assignment
+# ADR sujets-de-devoir (ajout du 2026-10-30) : un envoi de 1 à 10 exercices à la classe. Nom et chemin gelés par le Lot 0b ;
+# le contrôleur est celui du Lot E.
+post "classrooms/:classroom_public_id/assignment_batches", to: "classroom/assignment_batches#create", as: :classroom_assignment_batches
 get "classrooms/:classroom_public_id/session_days/edit", to: "classroom/session_days#edit", as: :edit_classroom_session_days
 patch "classrooms/:classroom_public_id/session_days", to: "classroom/session_days#update", as: :classroom_session_days
 patch "assignments/:public_id/archive", to: "classroom/assignments#archive", as: :archive_assignment

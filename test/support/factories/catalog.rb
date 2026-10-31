@@ -46,6 +46,13 @@ module Factories
       Orm::Essential.create!(course:, name:, position:, author:, **factory_publication(status), **attributes)
     end
 
+    # ADR-0121 : un sujet de devoir d'une leçon, à la suite des sujets existants si la position n'est pas donnée.
+    def create_subject(course: create_course, title: "Sujet #{factory_sequence}", notions: "Notions mobilisées #{factory_sequence}",
+                       position: nil, **attributes)
+      position ||= course.subjects.maximum(:position).to_i + 1
+      Orm::Subject.create!(course:, title:, notions:, position:, **attributes)
+    end
+
     # Returns { levels:, series:, materials: }, each indexed by slug.
     def seed_referential
       levels = LEVELS.each_with_index.to_h { |(name, cycle), index| [ name, create_level(name:, position: index + 1, cycle:) ] }

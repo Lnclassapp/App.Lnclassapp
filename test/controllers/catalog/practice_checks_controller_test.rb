@@ -101,6 +101,18 @@ class Catalog::PracticeChecksControllerTest < ActionDispatch::IntegrationTest
     assert_select ".sheet-practice-correction", count: 0
   end
 
+  test "CA-8: past the limit, a changed practice still answers 409 with the reload link, never the verdict" do
+    sign_in_as @student
+    30.times { check({}) }
+
+    check({ "0" => { "blanks" => { "0" => "4,8" } } }, digest: "0000000000000000")
+
+    assert_response :conflict
+    assert_select ".sheet-verdict[data-verdict='wrong']", text: pt("changed")
+    assert_select "form", count: 0
+    assert_select ".sheet-practice-correction", count: 0
+  end
+
   test "CA-8: the limit is per account, another student is still served" do
     sign_in_as @student
     31.times { check({}) }

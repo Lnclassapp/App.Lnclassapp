@@ -1,0 +1,1775 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le maintien de la constance du milieu intérieur",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "glycemie-repas",
+          "kind": "stat_chart",
+          "description": "Courbe de la glycémie, en g/L, d'un jeune en bonne santé qui mange de l'attiéké-poisson à 0 h, mesurée de 0 h à 4 h. Elle part de 0,9 g/L, monte jusqu'à 1,4 g/L une heure après le repas, redescend à 1,0 g/L à 2 h, puis se stabilise autour de 0,9 g/L.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0.9,
+              1.2,
+              1.4,
+              1.2,
+              1.0,
+              0.9,
+              0.9,
+              0.9,
+              0.9
+            ],
+            "labels": [
+              "0 h",
+              "0,5 h",
+              "1 h",
+              "1,5 h",
+              "2 h",
+              "2,5 h",
+              "3 h",
+              "3,5 h",
+              "4 h"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "glycemie-insuline",
+          "kind": "stat_chart",
+          "description": "Courbe de la glycémie, en g/L, d'un chien sain à jeun qui reçoit une injection d'insuline à 0 min, mesurée de 0 à 120 min. Elle part de 1,0 g/L, descend jusqu'à 0,5 g/L à 60 min, puis remonte à 0,7 g/L à 90 min et à 0,9 g/L à 120 min.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1.0,
+              0.8,
+              0.6,
+              0.55,
+              0.5,
+              0.6,
+              0.7,
+              0.8,
+              0.9
+            ],
+            "labels": [
+              "0 min",
+              "15 min",
+              "30 min",
+              "45 min",
+              "60 min",
+              "75 min",
+              "90 min",
+              "105 min",
+              "120 min"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "glycemie-repas-diabete",
+          "kind": "stat_chart",
+          "description": "Courbe de la glycémie, en g/L, d'une patiente diabétique qui mange de l'attiéké-poisson à 0 h, mesurée de 0 h à 4 h. Elle part de 1,8 g/L, monte jusqu'à 2,6 g/L une heure après le repas, puis redescend très lentement et reste à 1,9 g/L quatre heures après.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1.8,
+              2.2,
+              2.6,
+              2.5,
+              2.3,
+              2.2,
+              2.1,
+              2.0,
+              1.9
+            ],
+            "labels": [
+              "0 h",
+              "0,5 h",
+              "1 h",
+              "1,5 h",
+              "2 h",
+              "2,5 h",
+              "3 h",
+              "3,5 h",
+              "4 h"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "boucle-glycemie",
+          "kind": "diagram",
+          "description": "Schéma fléché en cycle de la régulation de la glycémie : la glycémie est détectée par les îlots de Langerhans du pancréas, qui sécrètent l'insuline ou le glucagon ; ces hormones agissent sur le foie et les autres cellules, qui stockent ou libèrent du glucose et corrigent la glycémie.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "gly",
+                "label": "Glycémie (référence : 1 g/L)"
+              },
+              {
+                "id": "ilots",
+                "label": "Îlots de Langerhans du pancréas"
+              },
+              {
+                "id": "foie",
+                "label": "Foie et autres cellules"
+              }
+            ],
+            "edges": [
+              {
+                "from": "gly",
+                "to": "ilots",
+                "label": "est détectée par"
+              },
+              {
+                "from": "ilots",
+                "to": "foie",
+                "label": "insuline ou glucagon"
+              },
+              {
+                "from": "foie",
+                "to": "gly",
+                "label": "stocke ou libère du glucose"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-digestif-numeros",
+          "kind": "plate",
+          "description": "Planche de l'appareil digestif dont trois organes sont numérotés sans légende : le foie (1), le pancréas (2) et l'estomac (3). Le pancréas est surligné. Elle sert à repérer les organes qui interviennent dans la régulation de la glycémie.",
+          "params": {
+            "plate": "digestive_system",
+            "labels": [
+              {
+                "part": "liver"
+              },
+              {
+                "part": "pancreas"
+              },
+              {
+                "part": "stomach"
+              }
+            ],
+            "highlight": [
+              "pancreas"
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le milieu intérieur et la constance de la glycémie",
+          "remember": "Les cellules du corps baignent dans le **milieu intérieur** : le plasma sanguin, la lymphe et le liquide interstitiel. Elles y puisent leurs nutriments et leur dioxygène, et y rejettent leurs déchets. Ce milieu a des **constantes** (la glycémie, le pH du sang, la température du corps) qui varient peu autour d'une valeur de référence : c'est la **constance du milieu intérieur**. La **glycémie** est le taux de glucose dans le sang ; sa valeur de référence est d'environ **1 g/L**. Au-dessus, c'est une **hyperglycémie** ; en dessous, une **hypoglycémie**. Constante ne veut pas dire figée : la glycémie oscille un peu, puis revient vers 1 g/L.",
+          "method": [
+            "Repérer la grandeur mesurée (la glycémie), son unité et la situation (à jeun, après un repas, après un effort).",
+            "Comparer chaque valeur avec la valeur de référence d'environ 1 g/L.",
+            "Décrire la variation : sens (hausse ou baisse), amplitude, et retour ou non vers la valeur de référence.",
+            "Conclure : un retour rapide vers 1 g/L montre que la constante est maintenue ; un écart durable montre qu'elle est perturbée."
+          ],
+          "example": {
+            "statement": "Après un repas d'attiéké-poisson, un lycéen d'Abidjan a une glycémie de 0,9 g/L à jeun, de 1,4 g/L une heure après le repas et de 1,0 g/L trois heures après. La constante est-elle maintenue ?",
+            "steps": [
+              "Repérer : la grandeur mesurée est la glycémie, en g/L, avant puis après un repas.",
+              "Comparer : 0,9 g/L est proche de 1 g/L ; 1,4 g/L est au-dessus (hyperglycémie passagère) ; 1,0 g/L est la valeur de référence.",
+              "Décrire : la glycémie monte de 0,5 g/L après le repas, puis redescend et revient à 1,0 g/L en trois heures.",
+              "Conclure : le retour à la valeur de référence est rapide, donc la constance de la glycémie est maintenue."
+            ]
+          },
+          "pitfall": "Ne confonds pas **constante** et **figée**. Une hausse à 1,4 g/L après un repas n'est pas une anomalie si la glycémie revient vers 1 g/L en quelques heures. À l'inverse, une glycémie qui reste à 2,3 g/L à jeun, jour après jour, est stable mais elle n'est pas normale : la constante est perturbée. Ce qui compte, c'est l'écart avec 1 g/L et le retour.",
+          "figure": null,
+          "exercise": {
+            "title": "Le milieu intérieur et la glycémie",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Au centre antidiabétique d'Abidjan, une infirmière explique à des lycéens ce qu'est le milieu intérieur et comment lire une glycémie. Dans cet exercice, tu appliques la méthode de la fiche pour interpréter des valeurs de glycémie.",
+            "questions": [
+              {
+                "content": "Parmi ces liquides, lequel ne fait PAS partie du milieu intérieur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche les liquides qui baignent les cellules. Étape 2 — Comparer : le plasma, la lymphe et le liquide interstitiel sont à l'extérieur des cellules, ils les entourent. Étape 3 — Décrire : le liquide intracellulaire (cytosol) est à l'intérieur de la cellule, ce n'est pas un liquide qui la baigne. Étape 4 — Conclure : seul le contenu des cellules n'est pas du milieu intérieur. Croire que tout liquide du corps en fait partie est l'erreur tentante.",
+                "answers": [
+                  {
+                    "content": "Le liquide intracellulaire (cytosol)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le plasma sanguin",
+                    "correct": false
+                  },
+                  {
+                    "content": "La lymphe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le liquide interstitiel qui baigne les cellules",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la valeur de référence de la glycémie d'un sujet sain, en g/L ?",
+                "question_type": "numeric",
+                "unit": "g/L",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la grandeur est la glycémie, exprimée en g/L. Étape 2 — Comparer : toutes les valeurs se jugent par rapport à la valeur de référence. Étape 3 — Décrire : chez un sujet sain, la glycémie oscille autour de 1 g/L. Étape 4 — Conclure : la valeur de référence est de 1 g/L. 0,1 ou 10 g/L seraient des erreurs d'ordre de grandeur.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un lycéen a une glycémie de 1,0 g/L à jeun. Cette valeur est égale à la valeur de référence.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la glycémie est mesurée à jeun, en g/L. Étape 2 — Comparer : la valeur de référence est d'environ 1 g/L et le lycéen a 1,0 g/L. Étape 3 — Décrire : il n'y a aucun écart. Étape 4 — Conclure : l'affirmation est vraie, il n'a ni hyperglycémie ni hypoglycémie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un patient a une glycémie à jeun de 2,3 g/L trois jours de suite. Que peut-on conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : trois mesures à jeun, en g/L. Étape 2 — Comparer : 2,3 g/L est bien au-dessus de 1 g/L. Étape 3 — Décrire : l'écart dure plusieurs jours et il n'y a pas de retour vers 1 g/L. Étape 4 — Conclure : c'est une hyperglycémie durable, la constante est perturbée. La stabilité d'une valeur n'est pas la constance : il faut qu'elle soit proche de 1 g/L.",
+                "answers": [
+                  {
+                    "content": "Il a une hyperglycémie durable : la constante de la glycémie est perturbée",
+                    "correct": true
+                  },
+                  {
+                    "content": "La constante est maintenue, car la valeur est stable d'un jour à l'autre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a une hypoglycémie, car la valeur est élevée",
+                    "correct": false
+                  },
+                  {
+                    "content": "La glycémie est normale, car elle varie entre les jours",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : chaque terme désigne soit une grandeur, soit un écart, soit un ensemble de liquides. Étape 2 — Comparer : « hyper » signifie au-dessus de 1 g/L, « hypo » en dessous. Étape 3 — Décrire : la glycémie est le taux de glucose dans le sang ; le milieu intérieur regroupe plasma, lymphe et liquide interstitiel. Étape 4 — Conclure : les quatre paires se déduisent de ces définitions.",
+                "answers": [
+                  {
+                    "content": "Glycémie",
+                    "match": "Taux de glucose dans le sang"
+                  },
+                  {
+                    "content": "Hyperglycémie",
+                    "match": "Glycémie supérieure à la valeur de référence"
+                  },
+                  {
+                    "content": "Hypoglycémie",
+                    "match": "Glycémie inférieure à la valeur de référence"
+                  },
+                  {
+                    "content": "Milieu intérieur",
+                    "match": "Liquides qui baignent les cellules : plasma, lymphe, liquide interstitiel"
+                  }
+                ]
+              },
+              {
+                "content": "Une glycémie qui monte à 1,4 g/L une heure après un repas puis revient à 1,0 g/L prouve que la constante de la glycémie n'est pas maintenue.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la glycémie est mesurée avant et après un repas. Étape 2 — Comparer : 1,4 g/L est au-dessus de 1 g/L, mais 1,0 g/L est la valeur de référence. Étape 3 — Décrire : la hausse est passagère et le retour est rapide. Étape 4 — Conclure : la constante est maintenue, l'affirmation est fausse. Une variation n'est pas une perte de constance tant que la glycémie revient vers 1 g/L.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire une glycémie et à juger si la constante du milieu intérieur est maintenue, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le taux de glucose dans le sang s'appelle la ___ ; chez un sujet sain, sa valeur de référence est d'environ ___ g/L.",
+                "question_type": "fill_blank",
+                "hint": "Le préfixe « glyc- » évoque le sucre. La valeur de référence est un nombre entier simple.",
+                "explanation": "Étape 1 — Repérer : la grandeur est le taux de glucose dans le sang. Étape 2 — Comparer : on la compare à une valeur de référence. Étape 3 — Décrire : elle oscille faiblement autour de cette valeur. Étape 4 — Conclure : c'est la glycémie, de référence 1 g/L.",
+                "answers": [
+                  {
+                    "content": "glycémie",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1,0",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Après un long match de maracana, un joueur a une glycémie de 0,6 g/L. De quoi s'agit-il ?",
+                "question_type": "single_choice",
+                "hint": "Compare 0,6 à 1 : est-ce au-dessus ou en dessous ?",
+                "explanation": "Étape 1 — Repérer : glycémie mesurée après un effort. Étape 2 — Comparer : 0,6 g/L est inférieur à 1 g/L. Étape 3 — Décrire : l'écart est de 0,4 g/L en dessous de la référence. Étape 4 — Conclure : c'est une hypoglycémie. L'effort consomme du glucose, il ne fait pas monter la glycémie.",
+                "answers": [
+                  {
+                    "content": "D'une hypoglycémie, car la valeur est inférieure à 1 g/L",
+                    "correct": true
+                  },
+                  {
+                    "content": "D'une hyperglycémie, car le joueur a fait un effort",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'une glycémie normale, car 0,6 est proche de 1",
+                    "correct": false
+                  },
+                  {
+                    "content": "D'une hypoglycémie, car la valeur est supérieure à 1 g/L",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour interpréter une courbe de glycémie.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer vient en premier : on sait ce qu'on lit. Étape 2 — Comparer : on situe chaque valeur par rapport à 1 g/L. Étape 3 — Décrire : on dit comment la glycémie évolue. Étape 4 — Conclure : on tranche. On ne peut pas conclure avant d'avoir comparé et décrit.",
+                "answers": [
+                  {
+                    "content": "Repérer la grandeur mesurée, son unité et la situation."
+                  },
+                  {
+                    "content": "Comparer les valeurs avec la référence d'environ 1 g/L."
+                  },
+                  {
+                    "content": "Décrire la variation et le retour éventuel vers la référence."
+                  },
+                  {
+                    "content": "Conclure sur le maintien ou la perturbation de la constante."
+                  }
+                ]
+              },
+              {
+                "content": "La température centrale du corps, d'environ 37 °C, est une constante du milieu intérieur, comme la glycémie.",
+                "question_type": "true_false",
+                "hint": "Une constante est une grandeur qui varie peu autour d'une valeur de référence.",
+                "explanation": "Étape 1 — Repérer : la température est une grandeur mesurable du corps. Étape 2 — Comparer : elle varie très peu autour de 37 °C. Étape 3 — Décrire : comme la glycémie, elle reste proche d'une valeur de référence. Étape 4 — Conclure : c'est bien une constante du milieu intérieur.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les trois liquides qui forment le milieu intérieur ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer : on cherche les liquides qui baignent les cellules. Étape 2 — Comparer : la sueur et l'urine sont éliminées hors du corps, elles ne baignent pas les cellules. Étape 3 — Décrire : le plasma, la lymphe et le liquide interstitiel les entourent. Étape 4 — Conclure : ce sont les trois composants du milieu intérieur.",
+                "answers": [
+                  {
+                    "content": "Le plasma sanguin",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lymphe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le liquide interstitiel",
+                    "correct": true
+                  },
+                  {
+                    "content": "La sueur",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'urine",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le foie et le pancréas dans la régulation de la glycémie",
+          "remember": "Après un repas, le glucose digéré passe dans le sang. Sous l'effet de l'insuline, le foie et les muscles stockent l'excès de glucose sous forme de **glycogène** : c'est la **glycogénogenèse**. Entre les repas, sous l'effet du glucagon, le foie hydrolyse son glycogène (**glycogénolyse**) et fabrique aussi du glucose à partir d'autres molécules (**néoglucogenèse**) : il libère du glucose dans le sang. Le **pancréas** est une glande mixte : sa partie **exocrine** déverse le suc pancréatique dans le tube digestif ; sa partie **endocrine**, les **îlots de Langerhans**, déverse des hormones dans le sang. Les **cellules β** sécrètent l'**insuline**, hormone **hypoglycémiante** (elle fait baisser la glycémie). Les **cellules α** sécrètent le **glucagon**, hormone **hyperglycémiante** (elle fait monter la glycémie).",
+          "method": [
+            "Repérer l'organe ou les cellules étudiés, la modification faite (ablation, greffe, injection) et la grandeur mesurée.",
+            "Comparer la glycémie obtenue avec celle du témoin normal : hausse, baisse ou aucun changement.",
+            "Déduire le rôle : si la suppression fait monter la glycémie, l'organe la fait baisser ; si l'injection la fait baisser, la substance est hypoglycémiante ; et inversement.",
+            "Conclure en nommant l'organe ou les cellules, la substance (insuline ou glucagon) et son effet sur la glycémie."
+          ],
+          "example": {
+            "statement": "Dans une expérience, on enlève le pancréas d'un chien dont la glycémie est de 1 g/L. Quelques jours plus tard, elle est de 3 g/L. On injecte alors un extrait de pancréas et la glycémie redescend à 1,2 g/L. Quel est le rôle du pancréas ?",
+            "steps": [
+              "Repérer : l'organe étudié est le pancréas, la modification est son ablation puis l'injection d'un extrait, la grandeur mesurée est la glycémie.",
+              "Comparer : après l'ablation, la glycémie passe de 1 à 3 g/L (hausse) ; après l'injection, elle redescend à 1,2 g/L (baisse).",
+              "Déduire : la suppression du pancréas fait monter la glycémie, donc le pancréas la fait baisser ; l'extrait la rétablit, donc il contient la substance active.",
+              "Conclure : le pancréas produit une substance hypoglycémiante (on sait aujourd'hui que c'est l'insuline) qui fait baisser la glycémie."
+            ]
+          },
+          "pitfall": "Ne raisonne pas à l'envers. Un chien privé de pancréas a une glycémie de 3 g/L au lieu de 1 g/L : cela ne veut pas dire que le pancréas fait monter la glycémie. C'est parce que le pancréas manque que la glycémie monte : il la freine. Quand on supprime un organe et que la valeur augmente, l'organe exerçait un effet qui la baisse.",
+          "figure": null,
+          "exercise": {
+            "title": "Le foie, le pancréas et les hormones de la glycémie",
+            "exercise_type": "fixation",
+            "figure": "appareil-digestif-numeros",
+            "statement": "Dans un laboratoire de physiologie, on étudie le rôle du foie et du pancréas à partir de schémas et d'expériences sur des animaux. Dans cet exercice, tu appliques la méthode de la fiche pour dire quel organe fait quoi.",
+            "questions": [
+              {
+                "content": "Sur la planche de l'appareil digestif, l'organe numéroté 2 est une glande située derrière l'estomac, qui déverse du suc pancréatique dans l'intestin et des hormones dans le sang. Comment s'appelle-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche un organe qui sécrète à la fois dans le tube digestif et dans le sang. Étape 2 — Comparer : le foie et la vésicule biliaire ne sécrètent pas d'hormones de la glycémie, l'estomac n'est pas une glande mixte de ce type. Étape 3 — Déduire : une glande à la fois exocrine et endocrine, c'est le pancréas. Étape 4 — Conclure : l'organe numéro 2 est le pancréas.",
+                "answers": [
+                  {
+                    "content": "Le pancréas",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le foie",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'estomac",
+                    "correct": false
+                  },
+                  {
+                    "content": "La vésicule biliaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur le rôle du foie dans la régulation de la glycémie ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : l'organe étudié est le foie. Étape 2 — Comparer : après un repas, la glycémie monte et le foie met le glucose en réserve ; entre les repas, la glycémie tend à baisser et il en libère. Étape 3 — Déduire : le foie est un réservoir de glucose, sous forme de glycogène. Étape 4 — Conclure : il stocke puis libère le glucose. L'insuline et le glucagon viennent du pancréas, pas du foie.",
+                "answers": [
+                  {
+                    "content": "Il stocke l'excès de glucose sous forme de glycogène après un repas",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il libère du glucose dans le sang entre les repas en hydrolysant son glycogène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il sécrète l'insuline et le glucagon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il transforme le glycogène en amidon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il détruit le glucose pour faire baisser la glycémie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : quatre éléments, deux hormones, une réserve, une structure. Étape 2 — Comparer : l'insuline fait baisser la glycémie, le glucagon la fait monter. Étape 3 — Déduire : l'insuline vient des cellules β, le glucagon des cellules α, toutes dans les îlots de Langerhans. Étape 4 — Conclure : le glycogène est la réserve de glucose du foie.",
+                "answers": [
+                  {
+                    "content": "Insuline",
+                    "match": "Hormone hypoglycémiante sécrétée par les cellules β"
+                  },
+                  {
+                    "content": "Glucagon",
+                    "match": "Hormone hyperglycémiante sécrétée par les cellules α"
+                  },
+                  {
+                    "content": "Glycogène",
+                    "match": "Forme de réserve du glucose, stockée surtout dans le foie"
+                  },
+                  {
+                    "content": "Îlots de Langerhans",
+                    "match": "Amas de cellules endocrines du pancréas"
+                  }
+                ]
+              },
+              {
+                "content": "Chez un chien dont la glycémie est de 1 g/L, on enlève le pancréas. Quelques jours après, elle atteint 3 g/L. Que peut-on conclure sur le rôle du pancréas ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'organe est le pancréas, la modification est son ablation, la grandeur est la glycémie. Étape 2 — Comparer : la glycémie passe de 1 à 3 g/L, elle augmente. Étape 3 — Déduire : la suppression de l'organe fait monter la glycémie, donc l'organe la fait baisser. Étape 4 — Conclure : le pancréas est hypoglycémiant. Dire qu'il la fait monter est l'erreur de raisonnement à l'envers.",
+                "answers": [
+                  {
+                    "content": "Le pancréas fait baisser la glycémie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le pancréas fait monter la glycémie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pancréas n'a aucun rôle dans la glycémie",
+                    "correct": false
+                  },
+                  {
+                    "content": "La glycémie monte uniquement parce que le chien mange davantage",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Entre les repas, le foie libère du glucose dans le sang en hydrolysant son ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : l'organe est le foie, entre les repas. Étape 2 — Comparer : la glycémie tend à baisser quand on n'a pas mangé. Étape 3 — Déduire : le foie doit fournir du glucose à partir de sa réserve. Étape 4 — Conclure : cette réserve est le glycogène, que le foie hydrolyse pour libérer du glucose.",
+                "answers": [
+                  {
+                    "content": "glycogène",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On détruit les cellules β d'un rat et sa glycémie augmente. On peut conclure que les cellules β font monter la glycémie.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les cellules β sont détruites, la grandeur est la glycémie. Étape 2 — Comparer : la glycémie augmente. Étape 3 — Déduire : la suppression de ces cellules fait monter la glycémie, donc elles la font baisser (par l'insuline). Étape 4 — Conclure : l'affirmation est fausse, c'est le raisonnement à l'envers.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à relier un organe ou un type de cellules à son effet sur la glycémie, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans les îlots de Langerhans, les cellules ___ sécrètent l'insuline et les cellules ___ sécrètent le glucagon.",
+                "question_type": "fill_blank",
+                "hint": "Dans l'alphabet grec, α vient avant β. Les deux hormones sont opposées.",
+                "explanation": "Étape 1 — Repérer : les îlots de Langerhans contiennent deux types de cellules endocrines. Étape 2 — Comparer : l'insuline fait baisser la glycémie, le glucagon la fait monter. Étape 3 — Déduire : les cellules β sécrètent l'insuline et les cellules α le glucagon. Étape 4 — Conclure : β pour l'insuline, α pour le glucagon.",
+                "answers": [
+                  {
+                    "content": "β",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "bêta",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "α",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "alpha",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "On détruit les cellules β des îlots de Langerhans d'un lapin avec une toxine : sa glycémie passe de 1 à 2,5 g/L. Que peut-on en déduire ?",
+                "question_type": "single_choice",
+                "hint": "Quand on supprime quelque chose et que la valeur monte, ce qui a été supprimé la faisait baisser.",
+                "explanation": "Étape 1 — Repérer : les cellules β sont détruites, la grandeur est la glycémie. Étape 2 — Comparer : la glycémie augmente de 1 à 2,5 g/L. Étape 3 — Déduire : sans ces cellules la glycémie monte, donc elles la font baisser. Étape 4 — Conclure : elles sont hypoglycémiantes, par l'insuline.",
+                "answers": [
+                  {
+                    "content": "Les cellules β font baisser la glycémie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les cellules β font monter la glycémie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les cellules β sont inutiles",
+                    "correct": false
+                  },
+                  {
+                    "content": "La toxine fabrique du glucose dans le sang",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le pancréas est à la fois une glande exocrine et une glande endocrine.",
+                "question_type": "true_false",
+                "hint": "Exocrine : déversé dans une cavité ou vers l'extérieur (ici le tube digestif) ; endocrine : déversé dans le sang.",
+                "explanation": "Étape 1 — Repérer : l'organe étudié est le pancréas. Étape 2 — Comparer : il verse le suc pancréatique dans le tube digestif (exocrine) et des hormones dans le sang (endocrine). Étape 3 — Déduire : il a deux fonctions. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le glucagon est une hormone ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : la substance est le glucagon, la grandeur est la glycémie. Étape 2 — Comparer : le glucagon fait libérer du glucose par le foie, la glycémie monte. Étape 3 — Déduire : une substance qui fait monter la glycémie est hyperglycémiante. Étape 4 — Conclure : le glucagon est hyperglycémiant.",
+                "answers": [
+                  {
+                    "content": "hyperglycémiante",
+                    "correct": true
+                  },
+                  {
+                    "content": "hypoglycémiante",
+                    "correct": false
+                  },
+                  {
+                    "content": "sans effet sur la glycémie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Où se trouvent les cellules α et β ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche le lieu de sécrétion de l'insuline et du glucagon. Étape 2 — Comparer : le foie stocke le glucose mais ne sécrète pas ces hormones. Étape 3 — Déduire : ces hormones sont fabriquées par la partie endocrine du pancréas. Étape 4 — Conclure : les cellules α et β sont dans les îlots de Langerhans.",
+                "answers": [
+                  {
+                    "content": "Dans les îlots de Langerhans du pancréas",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans le foie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans l'intestin grêle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans les muscles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque mécanisme du foie à sa description.",
+                "question_type": "matching",
+                "hint": "Le suffixe « -genèse » signifie fabrication ; « -lyse » signifie coupure.",
+                "explanation": "Étape 1 — Repérer : trois mécanismes du foie, liés au glucose. Étape 2 — Comparer : l'insuline est hypoglycémiante, elle fait stocker le glucose ; le glucagon est hyperglycémiant, il fait libérer du glucose. Étape 3 — Déduire : la glycogénogenèse (stockage) dépend de l'insuline ; la glycogénolyse et la néoglucogenèse (production de glucose) dépendent du glucagon. Étape 4 — Conclure : chaque mécanisme se relie à l'hormone dont l'effet va dans le même sens.",
+                "answers": [
+                  {
+                    "content": "Glycogénogenèse",
+                    "match": "Synthèse de glycogène à partir du glucose, sous l'effet de l'insuline"
+                  },
+                  {
+                    "content": "Glycogénolyse",
+                    "match": "Hydrolyse du glycogène en glucose, sous l'effet du glucagon"
+                  },
+                  {
+                    "content": "Néoglucogenèse",
+                    "match": "Fabrication de glucose à partir d'autres molécules, sous l'effet du glucagon"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le système de régulation de la glycémie",
+          "remember": "Un **système de régulation** maintient une grandeur près d'une valeur de référence. Il comprend un **capteur** qui détecte l'écart, un **centre** qui élabore la réponse, des **messagers** qui la transportent et des **effecteurs** qui la réalisent. Pour la glycémie (référence : environ 1 g/L), les cellules des îlots de Langerhans du pancréas détectent la glycémie du sang qui les traverse et sécrètent l'hormone adaptée ; les effecteurs sont le foie et les autres organes. **Hyperglycémie** : les cellules β sécrètent l'insuline, le foie stocke le glucose et les cellules en consomment davantage, la glycémie baisse. **Hypoglycémie** : les cellules α sécrètent le glucagon, le foie libère du glucose, la glycémie monte. L'effet corrige l'écart et arrête sa cause : c'est une **rétroaction négative**.",
+          "method": [
+            "Identifier la grandeur réglée et le sens de l'écart par rapport à 1 g/L (hyperglycémie ou hypoglycémie).",
+            "Repérer le capteur et le centre qui détectent cet écart, et le message envoyé (insuline ou glucagon).",
+            "Désigner les effecteurs qui reçoivent le message et décrire leur action sur la glycémie.",
+            "Conclure : si l'action ramène la glycémie vers 1 g/L et arrête la sécrétion de départ, c'est une rétroaction négative."
+          ],
+          "example": {
+            "statement": "Après un repas d'attiéké-poisson, la glycémie de Koffi atteint 1,4 g/L. Décrire comment elle est régulée.",
+            "steps": [
+              "Identifier : la grandeur réglée est la glycémie ; à 1,4 g/L elle est au-dessus de 1 g/L, c'est une hyperglycémie.",
+              "Repérer : les cellules β des îlots de Langerhans du pancréas détectent la hausse et sécrètent de l'insuline dans le sang.",
+              "Désigner : le foie, effecteur, transforme du glucose en glycogène, et les autres cellules consomment plus de glucose : la glycémie baisse.",
+              "Conclure : la glycémie revient vers 1 g/L et la sécrétion d'insuline diminue : c'est une rétroaction négative."
+            ]
+          },
+          "pitfall": "Ne comprends pas « négative » comme « qui fait baisser ». La rétroaction négative est celle dont l'effet s'oppose à la variation de départ. Si la glycémie tombe à 0,6 g/L et que le glucagon la fait remonter vers 1 g/L, la glycémie augmente, et pourtant c'est bien une rétroaction négative : on corrige l'écart dans le sens contraire.",
+          "figure": null,
+          "exercise": {
+            "title": "La boucle de régulation de la glycémie",
+            "exercise_type": "fixation",
+            "figure": "boucle-glycemie",
+            "statement": "Au centre antidiabétique d'Abidjan, un médecin explique à des élèves comment le corps règle la glycémie, avec un schéma fléché de la boucle de régulation. Dans cet exercice, tu appliques la méthode de la fiche pour décrire les éléments et le fonctionnement de la boucle.",
+            "questions": [
+              {
+                "content": "Relie chaque élément de la régulation de la glycémie à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : la grandeur réglée est la glycémie, autour de 1 g/L. Étape 2 — Repérer : les îlots de Langerhans détectent l'écart et envoient un message, l'hormone. Étape 3 — Désigner : le foie reçoit le message et agit sur la glycémie, c'est un effecteur. Étape 4 — Conclure : chaque élément a un rôle précis dans la boucle.",
+                "answers": [
+                  {
+                    "content": "Îlots de Langerhans",
+                    "match": "Détectent la glycémie et sécrètent l'hormone adaptée"
+                  },
+                  {
+                    "content": "Insuline et glucagon",
+                    "match": "Messagers chimiques transportés par le sang"
+                  },
+                  {
+                    "content": "Foie",
+                    "match": "Effecteur : stocke ou libère du glucose"
+                  },
+                  {
+                    "content": "Glycémie",
+                    "match": "Grandeur réglée, maintenue autour de 1 g/L"
+                  }
+                ]
+              },
+              {
+                "content": "La glycémie d'un sujet atteint 1,5 g/L. Quelles cellules sont stimulées en premier ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : 1,5 g/L est au-dessus de 1 g/L, c'est une hyperglycémie. Étape 2 — Repérer : le capteur et centre est l'îlot de Langerhans ; face à une hausse, ce sont les cellules β qui sécrètent l'insuline. Étape 3 — Désigner : l'insuline agira sur le foie et les cellules. Étape 4 — Conclure : les cellules β sont stimulées. Les cellules α répondent à une baisse, pas à une hausse.",
+                "answers": [
+                  {
+                    "content": "Les cellules β des îlots de Langerhans, qui sécrètent l'insuline",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les cellules α des îlots de Langerhans, qui sécrètent le glucagon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les cellules du foie, qui sécrètent l'insuline",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les cellules de l'intestin grêle, qui sécrètent le glucagon",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la correction d'une hypoglycémie.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Identifier : on part d'une hypoglycémie à 0,6 g/L. Étape 2 — Repérer : les cellules α détectent la baisse et sécrètent le glucagon, message transporté par le sang. Étape 3 — Désigner : le foie, effecteur, hydrolyse son glycogène et libère du glucose. Étape 4 — Conclure : la glycémie remonte vers 1 g/L, et la sécrétion de glucagon cesse.",
+                "answers": [
+                  {
+                    "content": "La glycémie tombe à 0,6 g/L."
+                  },
+                  {
+                    "content": "Les cellules α des îlots de Langerhans sont stimulées."
+                  },
+                  {
+                    "content": "Le glucagon est sécrété et circule dans le sang."
+                  },
+                  {
+                    "content": "Le foie hydrolyse son glycogène et libère du glucose."
+                  },
+                  {
+                    "content": "La glycémie remonte vers 1 g/L."
+                  }
+                ]
+              },
+              {
+                "content": "La régulation de la glycémie fonctionne par une rétroaction ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : la glycémie s'écarte de 1 g/L. Étape 2 — Repérer : le pancréas détecte l'écart et sécrète l'hormone adaptée. Étape 3 — Désigner : les effecteurs agissent dans le sens contraire à l'écart. Étape 4 — Conclure : l'effet s'oppose à la cause, c'est une rétroaction négative. Une rétroaction positive amplifierait l'écart.",
+                "answers": [
+                  {
+                    "content": "négative",
+                    "correct": true
+                  },
+                  {
+                    "content": "positive",
+                    "correct": false
+                  },
+                  {
+                    "content": "nulle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux propositions qui désignent des effecteurs de la régulation de la glycémie ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : la grandeur réglée est la glycémie. Étape 2 — Repérer : les cellules β détectent l'écart et l'insuline est le message, ce ne sont pas des effecteurs. Étape 3 — Désigner : les effecteurs exécutent la réponse, ici le foie et les cellules qui consomment le glucose. Étape 4 — Conclure : ce sont les deux effecteurs.",
+                "answers": [
+                  {
+                    "content": "Le foie, qui stocke ou libère du glucose",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les cellules, comme celles des muscles, qui consomment le glucose",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les cellules β, qui détectent la glycémie",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'insuline, qui est le message",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le glucose du sang, qui est la grandeur réglée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quand le glucagon fait remonter la glycémie de 0,6 à 1 g/L, la glycémie augmente : ce n'est donc pas une rétroaction négative.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la glycémie est trop basse (0,6 g/L). Étape 2 — Repérer : le glucagon est sécrété par les cellules α. Étape 3 — Désigner : le foie libère du glucose, la glycémie remonte. Étape 4 — Conclure : l'effet s'oppose à l'écart de départ et arrête sa cause, c'est une rétroaction négative. « Négatif » ne signifie pas « qui diminue ».",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à décrire la boucle de régulation de la glycémie, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "En cas d'hyperglycémie, les cellules β sécrètent l'___ ; en cas d'hypoglycémie, les cellules α sécrètent le ___.",
+                "question_type": "fill_blank",
+                "hint": "Une hormone fait baisser la glycémie, l'autre la fait monter.",
+                "explanation": "Étape 1 — Identifier : l'hyperglycémie est une hausse, l'hypoglycémie est une baisse. Étape 2 — Repérer : les cellules β répondent à la hausse par l'insuline. Étape 3 — Désigner : les cellules α répondent à la baisse par le glucagon, et le foie libère du glucose. Étape 4 — Conclure : insuline pour la hausse, glucagon pour la baisse.",
+                "answers": [
+                  {
+                    "content": "insuline",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "glucagon",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quand la glycémie est revenue à 1 g/L, la sécrétion d'insuline diminue. Comment appelle-t-on ce mécanisme ?",
+                "question_type": "single_choice",
+                "hint": "L'effet obtenu freine ce qui l'a déclenché.",
+                "explanation": "Étape 1 — Identifier : la glycémie est revenue à la référence. Étape 2 — Repérer : les cellules β détectent ce retour. Étape 3 — Désigner : la cause de la sécrétion a disparu, donc l'insuline n'est plus sécrétée. Étape 4 — Conclure : l'effet a arrêté sa cause, c'est une rétroaction négative.",
+                "answers": [
+                  {
+                    "content": "Une rétroaction négative",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une rétroaction positive",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une sécrétion exocrine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une digestion",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les cellules des îlots de Langerhans sont sensibles directement à la glycémie du sang qui les traverse.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la grandeur est la glycémie. Étape 2 — Repérer : les cellules α et β jouent le rôle de capteur : leur sécrétion change selon la glycémie du sang qui les baigne. Étape 3 — Désigner : elles agissent ensuite sur le foie par l'hormone. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La glycémie d'un sujet est de 1,3 g/L. Que fait son foie ?",
+                "question_type": "single_choice",
+                "hint": "À 1,3 g/L, la glycémie est trop haute : le foie doit-il en prendre ou en donner ?",
+                "explanation": "Étape 1 — Identifier : 1,3 g/L est au-dessus de 1 g/L, c'est une hyperglycémie. Étape 2 — Repérer : les cellules β sécrètent de l'insuline. Étape 3 — Désigner : sous l'effet de l'insuline, le foie stocke le glucose en glycogène. Étape 4 — Conclure : la glycémie baisse vers 1 g/L. Libérer du glucose ferait monter la glycémie, ce qui aggraverait l'écart.",
+                "answers": [
+                  {
+                    "content": "Il transforme du glucose en glycogène et le stocke",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il hydrolyse son glycogène pour libérer du glucose",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il sécrète du glucagon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'a aucune action sur la glycémie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les diabètes, quand la régulation de la glycémie est perturbée",
+          "remember": "Le **diabète** est une **hyperglycémie chronique** : la glycémie à jeun est égale ou supérieure à 1,26 g/L, à deux mesures, souvent avec du glucose dans les urines (**glycosurie**). Dans le **diabète de type 1**, les cellules β ne fabriquent plus assez d'insuline : l'insulinémie (taux d'insuline dans le sang) est très faible ; il apparaît souvent chez le jeune et se traite par des **injections d'insuline**. Dans le **diabète de type 2**, l'insuline est présente, parfois en quantité élevée, mais les cellules cibles y répondent mal ; il apparaît plutôt chez l'adulte et est favorisé par le surpoids et la sédentarité ; on le traite par l'alimentation, l'activité physique et des médicaments.",
+          "method": [
+            "Relever la glycémie à jeun du patient et la comparer à la valeur de référence de 1 g/L.",
+            "Examiner l'insulinémie : très faible, normale ou élevée.",
+            "Mettre en relation insulinémie et glycémie : insuline très faible (type 1), ou insulinémie normale ou élevée mais cellules peu sensibles à l'insuline (type 2).",
+            "Conclure sur le type de diabète et sur le traitement adapté."
+          ],
+          "example": {
+            "statement": "Au centre antidiabétique d'Abidjan, le patient A, 15 ans, a une glycémie à jeun de 2,8 g/L et une insulinémie très faible. Le patient B, 55 ans, en surpoids, a une glycémie à jeun de 1,9 g/L et une insulinémie supérieure à la normale. Quel est le type de diabète de chacun ?",
+            "steps": [
+              "Relever : 2,8 g/L et 1,9 g/L sont nettement supérieurs à 1 g/L : les deux patients ont une hyperglycémie à jeun.",
+              "Examiner : l'insulinémie du patient A est très faible ; celle du patient B est élevée.",
+              "Mettre en relation : chez A, l'insuline manque, donc le glucose n'est pas stocké ; chez B, l'insuline est présente mais n'abaisse pas la glycémie, donc les cellules cibles y répondent mal.",
+              "Conclure : A a un diabète de type 1, traité par injections d'insuline ; B a un diabète de type 2, traité par l'alimentation, l'activité physique et des médicaments."
+            ]
+          },
+          "pitfall": "Ne crois pas que tous les diabétiques manquent d'insuline ni qu'on les soigne tous par des injections. Un patient de type 2 a une glycémie de 1,9 g/L alors que son insulinémie est élevée : l'insuline est là, mais les cellules cibles y répondent mal. Lui en injecter davantage ne s'attaque pas à la cause. Regarde toujours l'insulinémie avant de conclure.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître un diabète de type 1 ou de type 2",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Au centre antidiabétique d'Abidjan, des patients passent des analyses : glycémie à jeun et insulinémie. Dans cet exercice, tu appliques la méthode de la fiche pour reconnaître le type de diabète et son traitement.",
+            "questions": [
+              {
+                "content": "Un jeune de 14 ans a une glycémie à jeun de 2,6 g/L et une insulinémie très faible. De quel type de diabète s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : 2,6 g/L est bien supérieur à 1 g/L, c'est une hyperglycémie. Étape 2 — Examiner : l'insulinémie est très faible. Étape 3 — Mettre en relation : l'insuline manque, donc le glucose n'est pas stocké et la glycémie reste élevée. Étape 4 — Conclure : c'est un diabète de type 1. Le type 2 aurait une insulinémie normale ou élevée.",
+                "answers": [
+                  {
+                    "content": "Diabète de type 1",
+                    "correct": true
+                  },
+                  {
+                    "content": "Diabète de type 2",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'est pas diabétique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Hypoglycémie chronique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une femme de 58 ans, en surpoids, a une glycémie à jeun de 1,9 g/L et une insulinémie élevée. Quelle conclusion est la bonne ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : 1,9 g/L est supérieur à 1 g/L, il y a une hyperglycémie. Étape 2 — Examiner : l'insulinémie est élevée. Étape 3 — Mettre en relation : malgré beaucoup d'insuline, la glycémie reste haute, donc les cellules cibles y répondent mal. Étape 4 — Conclure : c'est un diabète de type 2. Une insulinémie élevée ne garantit pas une glycémie normale.",
+                "answers": [
+                  {
+                    "content": "Diabète de type 2 : l'insuline est présente mais les cellules cibles y répondent mal",
+                    "correct": true
+                  },
+                  {
+                    "content": "Diabète de type 1 : les cellules β ont cessé de produire l'insuline",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun diabète : l'insulinémie élevée assure la régulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Hypoglycémie : l'insulinémie élevée fait trop baisser la glycémie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le diabète de type 1, les injections d'insuline compensent l'insuline que le pancréas ne fournit plus.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le diabète de type 1 se manifeste par une hyperglycémie. Étape 2 — Examiner : l'insulinémie est très faible. Étape 3 — Mettre en relation : l'insuline manque, il faut donc l'apporter. Étape 4 — Conclure : les injections d'insuline sont le traitement du type 1, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux caractéristiques d'un diabète ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : le diabète est une hyperglycémie chronique, la glycémie à jeun est égale ou supérieure à 1,26 g/L à deux mesures. Étape 2 — Examiner : l'insulinémie varie selon le type, elle n'est pas toujours nulle. Étape 3 — Mettre en relation : une glycémie très élevée s'accompagne de glucose dans les urines. Étape 4 — Conclure : ce sont les deux caractéristiques. Un retour à 1 g/L après un repas est normal.",
+                "answers": [
+                  {
+                    "content": "Une glycémie à jeun égale ou supérieure à 1,26 g/L, à deux mesures",
+                    "correct": true
+                  },
+                  {
+                    "content": "La présence de glucose dans les urines quand l'hyperglycémie est importante",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une glycémie qui revient à 1 g/L trois heures après un repas",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une insulinémie toujours nulle, chez tous les diabétiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une glycémie à jeun durablement inférieure à 0,5 g/L",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un patient dont les cellules cibles répondent mal à l'insuline, bien qu'elle soit présente, a un diabète de type ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : le patient a une hyperglycémie. Étape 2 — Examiner : l'insuline est présente dans le sang. Étape 3 — Mettre en relation : les cellules cibles ne répondent pas correctement. Étape 4 — Conclure : c'est un diabète de type 2.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true
+                  },
+                  {
+                    "content": "II",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le traitement de base d'un diabète de type 2 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : le patient de type 2 a une hyperglycémie. Étape 2 — Examiner : son insulinémie n'est pas faible. Étape 3 — Mettre en relation : le problème vient de la réponse des cellules, pas du manque d'insuline. Étape 4 — Conclure : on agit par l'alimentation, l'activité physique et des médicaments ; l'insuline n'est utilisée que dans certains cas.",
+                "answers": [
+                  {
+                    "content": "Rééquilibrer l'alimentation, pratiquer une activité physique et prendre des médicaments qui aident à baisser la glycémie",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des injections d'insuline pour tous les patients, car l'insuline manque toujours",
+                    "correct": false
+                  },
+                  {
+                    "content": "Arrêter totalement de manger",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une greffe de foie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les diabètes et leurs traitements, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un diabète avec une insulinémie très faible est de type ___ ; un diabète avec une insulinémie élevée est de type ___.",
+                "question_type": "fill_blank",
+                "hint": "Regarde l'insulinémie : manque d'insuline ou mauvaise réponse des cellules ?",
+                "explanation": "Étape 1 — Relever : dans les deux cas, la glycémie à jeun est supérieure à 1 g/L. Étape 2 — Examiner : très faible dans un cas, élevée dans l'autre. Étape 3 — Mettre en relation : l'insuline manque dans le premier cas, les cellules y répondent mal dans le second. Étape 4 — Conclure : type 1 puis type 2.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "I",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "II",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un diabétique de type 1 s'injecte de l'insuline mais saute son repas. Que risque-t-il ?",
+                "question_type": "single_choice",
+                "hint": "L'insuline est hypoglycémiante.",
+                "explanation": "Étape 1 — Relever : le patient reçoit de l'insuline. Étape 2 — Examiner : l'insuline injectée s'ajoute, sans glucose apporté par le repas. Étape 3 — Mettre en relation : l'insuline fait baisser la glycémie, qui peut passer sous 1 g/L. Étape 4 — Conclure : le risque est une hypoglycémie.",
+                "answers": [
+                  {
+                    "content": "Une hypoglycémie, car l'insuline fait baisser la glycémie sans apport de glucose",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une hyperglycémie, car l'insuline fait monter la glycémie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien, car le foie compense toujours",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un diabète de type 2",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La présence de glucose dans les urines (glycosurie) traduit une hyperglycémie importante.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : la glycémie est très au-dessus de 1 g/L. Étape 2 — Examiner : le glucose n'est plus entièrement retenu et passe dans les urines. Étape 3 — Mettre en relation : la glycosurie suit l'hyperglycémie. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever : trois termes liés à l'hyperglycémie. Étape 2 — Examiner : le type 1 se caractérise par une insulinémie très faible, le type 2 par une mauvaise réponse à l'insuline. Étape 3 — Mettre en relation : chaque traitement s'adapte à la cause. Étape 4 — Conclure : la glycosurie est le glucose dans les urines.",
+                "answers": [
+                  {
+                    "content": "Diabète de type 1",
+                    "match": "Manque d'insuline, traité par injections d'insuline"
+                  },
+                  {
+                    "content": "Diabète de type 2",
+                    "match": "Cellules cibles répondant mal à l'insuline, traité par alimentation, activité physique et médicaments"
+                  },
+                  {
+                    "content": "Glycosurie",
+                    "match": "Présence de glucose dans les urines"
+                  }
+                ]
+              },
+              {
+                "content": "Un patient a une glycémie à jeun de 2,2 g/L et une insulinémie très faible. Pourquoi une injection d'insuline améliore-t-elle sa glycémie ?",
+                "question_type": "single_choice",
+                "hint": "Pense à ce qui manque dans le sang de ce patient.",
+                "explanation": "Étape 1 — Relever : 2,2 g/L est supérieur à 1 g/L. Étape 2 — Examiner : l'insulinémie est très faible. Étape 3 — Mettre en relation : l'insuline manque, donc l'injection comble ce manque. Étape 4 — Conclure : l'insuline apportée fait baisser la glycémie. Elle est hypoglycémiante, pas hyperglycémiante.",
+                "answers": [
+                  {
+                    "content": "Parce que l'insuline manque et que l'injection apporte l'hormone absente",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que ses cellules répondent mal à l'insuline",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'insuline est hyperglycémiante",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'insuline remplace le glucose",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La glycémie d'un lycéen après un repas d'attiéké-poisson",
+          "exercise_type": "fixation",
+          "figure": "glycemie-repas",
+          "statement": "À midi, Koffi, lycéen de 16 ans à Abidjan, mange de l'attiéké-poisson. Sa glycémie est mesurée avant le repas (0 h) puis plusieurs fois après. Résultats donnés par l'énoncé, en g/L : 0 h : 0,9 ; 0,5 h : 1,2 ; 1 h : 1,4 ; 1,5 h : 1,2 ; 2 h : 1,0 ; 2,5 h : 0,9 ; 3 h : 0,9 ; 3,5 h : 0,9 ; 4 h : 0,9.",
+          "questions": [
+            {
+              "content": "La glycémie de Koffi vaut 0,9 g/L avant le repas, 1,2 g/L à 0,5 h, 1,4 g/L à 1 h, puis redescend. Quelle est sa glycémie maximale, en g/L ?",
+              "question_type": "numeric",
+              "unit": "g/L",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : la grandeur est la glycémie en g/L, avant et après le repas. Étape 2 — Comparer : on lit les valeurs 0,9 ; 1,2 ; 1,4 ; 1,2 ; 1,0 ; 0,9 ; 0,9 ; 0,9 ; 0,9. Étape 3 — Décrire : la courbe monte jusqu'à un sommet puis redescend. Étape 4 — Conclure : le maximum est de 1,4 g/L, une heure après le repas. 0,9 g/L est la valeur de départ, pas le maximum.",
+              "answers": [
+                {
+                  "content": "1,4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La glycémie de Koffi passe de 0,9 g/L avant le repas à 1,4 g/L une heure après, puis revient à 1,0 g/L à 2 h. Que montre ce retour à environ 1 g/L ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : on lit une glycémie en g/L après un repas. Étape 2 — Comparer : 1,4 g/L est au-dessus de 1 g/L, puis 1,0 g/L est la référence. Étape 3 — Décrire : la hausse est passagère, le retour à environ 1 g/L se fait en deux heures. Étape 4 — Conclure : la constante est maintenue, la régulation fonctionne. Une variation passagère n'est pas un diabète : le diabète est une hyperglycémie durable.",
+              "answers": [
+                {
+                  "content": "Que la constante de la glycémie est maintenue grâce à une régulation efficace",
+                  "correct": true
+                },
+                {
+                  "content": "Que Koffi est diabétique, car la glycémie a varié",
+                  "correct": false
+                },
+                {
+                  "content": "Que le repas n'a eu aucun effet sur le sang",
+                  "correct": false
+                },
+                {
+                  "content": "Que le glucose a disparu du milieu intérieur",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après le repas, la glycémie de Koffi monte de 0,9 à 1,4 g/L en une heure. Quelle est l'origine de cette hausse ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la hausse suit un repas riche en glucides. Étape 2 — Comparer : avant le repas la glycémie est de 0,9 g/L, une heure après de 1,4 g/L. Étape 3 — Décrire : le glucose digéré est absorbé par l'intestin grêle et passe dans le sang. Étape 4 — Conclure : la hausse vient de l'absorption intestinale. Le pancréas ne sécrète pas de glucose : il sécrète des hormones qui règlent la glycémie.",
+              "answers": [
+                {
+                  "content": "Le glucose issu de la digestion de l'attiéké passe de l'intestin grêle dans le sang",
+                  "correct": true
+                },
+                {
+                  "content": "Le foie fabrique du glucose à partir de l'insuline",
+                  "correct": false
+                },
+                {
+                  "content": "Les cellules α libèrent du glucose dans le sang",
+                  "correct": false
+                },
+                {
+                  "content": "Le pancréas sécrète du glucose",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les événements qui expliquent la courbe de la glycémie de Koffi après son repas.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer : après le repas, le glucose passe dans le sang et la glycémie monte. Étape 2 — Comparer : l'écart avec 1 g/L est détecté par les cellules β, qui sécrètent l'insuline. Étape 3 — Décrire : sous l'effet de l'insuline, le foie stocke le glucose en glycogène, et les cellules en consomment davantage. Étape 4 — Conclure : la glycémie revient vers 1 g/L et la sécrétion d'insuline diminue, c'est la rétroaction négative.",
+              "answers": [
+                {
+                  "content": "Le glucose digéré passe dans le sang : la glycémie monte à 1,4 g/L."
+                },
+                {
+                  "content": "Les cellules β des îlots de Langerhans sécrètent de l'insuline."
+                },
+                {
+                  "content": "Le foie stocke du glucose sous forme de glycogène et les cellules en consomment davantage."
+                },
+                {
+                  "content": "La glycémie redescend vers 1 g/L et la sécrétion d'insuline diminue."
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque phase de la courbe de glycémie de Koffi à son explication.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer : la courbe a trois phases. Étape 2 — Comparer : pendant la hausse, le glucose arrive dans le sang. Étape 3 — Décrire : pendant la baisse, l'insuline fait stocker le glucose dans le foie et le fait consommer par les cellules ; à la fin, la glycémie est proche de 1 g/L. Étape 4 — Conclure : chaque phase correspond à une étape de la régulation.",
+              "answers": [
+                {
+                  "content": "De 0 h à 1 h, la glycémie monte",
+                  "match": "Le glucose digéré passe dans le sang"
+                },
+                {
+                  "content": "De 1 h à 2 h, la glycémie baisse",
+                  "match": "L'insuline fait stocker et consommer le glucose"
+                },
+                {
+                  "content": "Après 3 h, la glycémie reste vers 0,9 g/L",
+                  "match": "Le retour vers la référence diminue la sécrétion d'insuline"
+                }
+              ]
+            },
+            {
+              "content": "Quelle hormone est responsable de la baisse de la glycémie de Koffi entre 1 h et 2 h, et quelles cellules la sécrètent ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la glycémie baisse après une hausse, c'est un retour depuis une hyperglycémie. Étape 2 — Comparer : l'hormone qui fait baisser la glycémie est hypoglycémiante, c'est l'insuline. Étape 3 — Décrire : elle est sécrétée par les cellules β des îlots de Langerhans. Étape 4 — Conclure : insuline et cellules β. Le glucagon, hyperglycémiant, serait sécrété en cas de baisse.",
+              "answers": [
+                {
+                  "content": "L'insuline, sécrétée par les cellules β des îlots de Langerhans",
+                  "correct": true
+                },
+                {
+                  "content": "Le glucagon, sécrété par les cellules α",
+                  "correct": false
+                },
+                {
+                  "content": "L'insuline, sécrétée par les cellules du foie",
+                  "correct": false
+                },
+                {
+                  "content": "Le glucagon, sécrété par les cellules β",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Insuline et glucagon chez le chien",
+          "exercise_type": "fixation",
+          "figure": "glycemie-insuline",
+          "statement": "Après un match de maracana, des élèves d'un lycée de Yopougon se demandent comment leur glycémie reste proche de 1 g/L malgré l'effort. Leur professeur leur présente deux expériences faites sur des chiens sains, à jeun, dont les résultats sont donnés par l'énoncé. Expérience 1 : on injecte de l'insuline à 0 min ; glycémie en g/L à 0, 15, 30, 45, 60, 75, 90, 105 et 120 min : 1,0 ; 0,8 ; 0,6 ; 0,55 ; 0,5 ; 0,6 ; 0,7 ; 0,8 ; 0,9. Expérience 2 : on injecte du glucagon à 0 min ; glycémie en g/L à 0, 15, 30, 60 et 120 min : 1,0 ; 1,4 ; 1,6 ; 1,5 ; 1,1.",
+          "questions": [
+            {
+              "content": "Après l'injection d'insuline à un chien sain, la glycémie passe de 1,0 g/L à 0 min à 0,8 g/L à 15 min, 0,6 g/L à 30 min, 0,55 g/L à 45 min, 0,5 g/L à 60 min, puis remonte. Quelle est la glycémie la plus basse atteinte, en g/L ?",
+              "question_type": "numeric",
+              "unit": "g/L",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on lit la glycémie après une injection d'insuline. Étape 2 — Comparer : les valeurs sont 1,0 ; 0,8 ; 0,6 ; 0,55 ; 0,5 ; 0,6 ; 0,7 ; 0,8 ; 0,9. Étape 3 — Décrire : la glycémie descend jusqu'à un minimum puis remonte. Étape 4 — Conclure : le minimum est de 0,5 g/L, à 60 min.",
+              "answers": [
+                {
+                  "content": "0,5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un chien sain reçoit de l'insuline : sa glycémie passe de 1,0 à 0,5 g/L en une heure. Que peut-on conclure sur l'insuline ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la substance injectée est l'insuline, la grandeur mesurée est la glycémie. Étape 2 — Comparer : la glycémie baisse de 1,0 à 0,5 g/L. Étape 3 — Déduire : une substance dont l'injection fait baisser la glycémie est hypoglycémiante. Étape 4 — Conclure : l'insuline est hypoglycémiante.",
+              "answers": [
+                {
+                  "content": "Elle est hypoglycémiante : elle fait baisser la glycémie",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est hyperglycémiante : elle fait monter la glycémie",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'a pas d'effet sur la glycémie",
+                  "correct": false
+                },
+                {
+                  "content": "Elle fabrique du glucose dans le sang",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un chien sain reçoit de l'insuline à 0 min. Sa glycémie descend à 0,5 g/L à 60 min, puis remonte à 0,9 g/L à 120 min. Quelle explication est la plus cohérente avec la régulation ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : à 0,5 g/L, la glycémie est sous 1 g/L, c'est une hypoglycémie. Étape 2 — Repérer : les cellules α des îlots détectent la baisse et sécrètent du glucagon. Étape 3 — Désigner : le foie hydrolyse son glycogène et libère du glucose. Étape 4 — Conclure : la glycémie remonte vers 1 g/L, rétroaction négative. Plus d'insuline ferait encore baisser la glycémie.",
+              "answers": [
+                {
+                  "content": "La baisse de la glycémie stimule les cellules α, qui sécrètent du glucagon ; le foie libère du glucose et la glycémie remonte vers 1 g/L",
+                  "correct": true
+                },
+                {
+                  "content": "L'insuline injectée se transforme en glucose et fait monter la glycémie",
+                  "correct": false
+                },
+                {
+                  "content": "Le chien a mangé pendant l'expérience",
+                  "correct": false
+                },
+                {
+                  "content": "Les cellules β sécrètent davantage d'insuline, ce qui fait remonter la glycémie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On injecte du glucagon à un chien sain : sa glycémie passe de 1,0 g/L à 1,6 g/L en 30 min. Que peut-on conclure sur le glucagon ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la substance est le glucagon, la grandeur est la glycémie. Étape 2 — Comparer : la glycémie monte de 1,0 à 1,6 g/L. Étape 3 — Déduire : l'injection fait monter la glycémie, donc le glucagon est hyperglycémiant. Étape 4 — Conclure : il agit sur le foie, qui libère du glucose ; il est sécrété par les cellules α et non par les cellules β.",
+              "answers": [
+                {
+                  "content": "Il est hyperglycémiant : il fait monter la glycémie",
+                  "correct": true
+                },
+                {
+                  "content": "Il est hypoglycémiant : il fait baisser la glycémie",
+                  "correct": false
+                },
+                {
+                  "content": "Il est sécrété par les cellules β",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'a pas d'effet sur le foie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pendant un match de maracana, les muscles consomment beaucoup de glucose et la glycémie d'un joueur tend à descendre sous 1 g/L. Quelle hormone est alors sécrétée et par quelles cellules ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : la glycémie tend à descendre sous 1 g/L, c'est une hypoglycémie. Étape 2 — Repérer : les cellules α détectent la baisse et sécrètent du glucagon. Étape 3 — Désigner : le foie libère du glucose et la glycémie remonte. Étape 4 — Conclure : glucagon et cellules α. L'insuline, qui fait encore baisser la glycémie, aggraverait l'hypoglycémie.",
+              "answers": [
+                {
+                  "content": "Le glucagon, par les cellules α des îlots de Langerhans",
+                  "correct": true
+                },
+                {
+                  "content": "L'insuline, par les cellules β",
+                  "correct": false
+                },
+                {
+                  "content": "Le glucagon, par les cellules β",
+                  "correct": false
+                },
+                {
+                  "content": "L'insuline, par les cellules du foie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les deux expériences montrent que l'insuline et le glucagon ont des effets opposés. Explique, en quelques lignes, comment ces deux hormones permettent de maintenir la glycémie proche de 1 g/L.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Insuline : hypoglycémiante, sécrétée par les cellules β quand la glycémie est trop haute",
+                "Glucagon : hyperglycémiant, sécrété par les cellules α quand la glycémie est trop basse",
+                "Rôle du foie : stockage du glucose sous forme de glycogène puis libération du glucose",
+                "Idée de rétroaction négative : l'effet corrige l'écart et arrête sa cause"
+              ],
+              "starter": "Quand la glycémie est trop haute, …",
+              "explanation": "Corrigé modèle : Quand la glycémie dépasse 1 g/L, les cellules β des îlots de Langerhans sécrètent l'insuline, hormone hypoglycémiante : le foie stocke le glucose sous forme de glycogène et les cellules en consomment davantage, la glycémie baisse. Quand la glycémie descend sous 1 g/L, les cellules α sécrètent le glucagon, hormone hyperglycémiante : le foie hydrolyse son glycogène et libère du glucose, la glycémie monte. Dans les deux cas, l'effet corrige l'écart et arrête sa cause : c'est une rétroaction négative qui maintient la glycémie vers 1 g/L. Barème : 1 point pour l'insuline, 1 point pour le glucagon, 0,5 point pour le rôle du foie, 0,5 point pour la rétroaction négative.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Deux patientes au centre antidiabétique d'Abidjan",
+          "exercise_type": "evaluation",
+          "figure": "glycemie-repas-diabete",
+          "statement": "Au centre antidiabétique d'Abidjan, deux patientes mangent de l'attiéké-poisson à 0 h. Aya, 14 ans, a une glycémie à jeun de 1,8 g/L et une insulinémie très faible, à jeun comme après le repas. Mme Yao, 58 ans, en surpoids, a une glycémie à jeun de 1,9 g/L et une insulinémie supérieure à la normale. Glycémie d'Aya en g/L à 0 h, 0,5 h, 1 h, 1,5 h, 2 h, 2,5 h, 3 h, 3,5 h et 4 h : 1,8 ; 2,2 ; 2,6 ; 2,5 ; 2,3 ; 2,2 ; 2,1 ; 2,0 ; 1,9. Chez un sujet sain, les mêmes mesures donnent : 0,9 ; 1,2 ; 1,4 ; 1,2 ; 1,0 ; 0,9 ; 0,9 ; 0,9 ; 0,9 (résultats donnés par l'énoncé).",
+          "questions": [
+            {
+              "content": "Aya a 1,8 g/L à jeun et 1,9 g/L quatre heures après son repas ; un sujet sain a 0,9 g/L à jeun et 0,9 g/L quatre heures après. Que montre la comparaison ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : la glycémie à jeun d'Aya est de 1,8 g/L, celle du sujet sain de 0,9 g/L. Étape 2 — Comparer : quatre heures après le repas, Aya est à 1,9 g/L, le sujet sain à 0,9 g/L. Étape 3 — Mettre en relation : Aya reste durablement au-dessus de 1 g/L, sans retour à la référence. Étape 4 — Conclure : sa régulation est perturbée, c'est un diabète. La baisse entre 1 h et 4 h est trop lente pour être normale.",
+              "answers": [
+                {
+                  "content": "Aya a une glycémie à jeun déjà élevée et qui ne revient pas vers 1 g/L : sa régulation est perturbée",
+                  "correct": true
+                },
+                {
+                  "content": "Aya a une glycémie normale, car elle varie comme celle du sujet sain",
+                  "correct": false
+                },
+                {
+                  "content": "Aya a une hypoglycémie, car sa glycémie baisse après 1 h",
+                  "correct": false
+                },
+                {
+                  "content": "Aya a la même régulation que le sujet sain, avec un décalage d'une heure",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une heure après le repas, la glycémie d'Aya est de 2,6 g/L et celle d'un sujet sain de 1,4 g/L. Quel est l'écart entre les deux, en g/L ?",
+              "question_type": "numeric",
+              "unit": "g/L",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : à 1 h, la glycémie d'Aya est de 2,6 g/L, celle du sujet sain de 1,4 g/L. Étape 2 — Calculer l'écart : $2{,}6 - 1{,}4 = 1{,}2$. Étape 3 — Mettre en relation : cet écart montre que l'hyperglycémie d'Aya est bien plus forte que la hausse normale après un repas. Étape 4 — Conclure : l'écart est de 1,2 g/L, signe que sa régulation ne corrige plus l'hyperglycémie.",
+              "answers": [
+                {
+                  "content": "1,2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Aya a une insulinémie très faible et une glycémie à jeun de 1,8 g/L. Quel diagnostic est le bon ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : 1,8 g/L est supérieur à 1 g/L, c'est une hyperglycémie à jeun. Étape 2 — Examiner : l'insulinémie est très faible. Étape 3 — Mettre en relation : sans insuline, le glucose n'est pas stocké par le foie ni consommé par les cellules, la glycémie reste élevée. Étape 4 — Conclure : diabète de type 1. Dans le type 2, l'insulinémie ne serait pas faible.",
+              "answers": [
+                {
+                  "content": "Diabète de type 1 : l'insuline manque",
+                  "correct": true
+                },
+                {
+                  "content": "Diabète de type 2 : les cellules cibles répondent mal à l'insuline",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun diabète : l'insulinémie très faible est normale",
+                  "correct": false
+                },
+                {
+                  "content": "Hypoglycémie : l'insulinémie est trop basse",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Mme Yao a une glycémie à jeun de 1,9 g/L et une insulinémie supérieure à la normale. Quelles sont les deux conclusions exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Relever : 1,9 g/L est supérieur à 1 g/L. Étape 2 — Examiner : l'insulinémie est élevée, donc les cellules β fonctionnent. Étape 3 — Mettre en relation : malgré l'insuline, la glycémie reste haute, donc les cellules cibles répondent mal. Étape 4 — Conclure : c'est un diabète de type 2. Des cellules β détruites donneraient une insulinémie très faible, et l'insuline n'est pas sécrétée par le foie.",
+              "answers": [
+                {
+                  "content": "Son pancréas sécrète bien de l'insuline",
+                  "correct": true
+                },
+                {
+                  "content": "Ses cellules cibles répondent mal à l'insuline",
+                  "correct": true
+                },
+                {
+                  "content": "Ses cellules β sont détruites",
+                  "correct": false
+                },
+                {
+                  "content": "Son foie fabrique trop d'insuline",
+                  "correct": false
+                },
+                {
+                  "content": "Elle a une hypoglycémie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque personne au traitement adapté.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Relever : Aya et Mme Yao ont une hyperglycémie, le sujet sain non. Étape 2 — Examiner : l'insuline manque chez Aya, elle est présente chez Mme Yao. Étape 3 — Mettre en relation : on apporte l'insuline qui manque à Aya, on agit sur la réponse des cellules chez Mme Yao. Étape 4 — Conclure : à chacun son traitement, et aucun pour le sujet sain.",
+              "answers": [
+                {
+                  "content": "Aya, diabétique de type 1",
+                  "match": "Injections d'insuline adaptées aux repas"
+                },
+                {
+                  "content": "Mme Yao, diabétique de type 2",
+                  "match": "Alimentation équilibrée, activité physique et médicaments"
+                },
+                {
+                  "content": "Un sujet sain",
+                  "match": "Aucun traitement : sa régulation suffit"
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi Aya ne peut pas se passer d'injections d'insuline, alors qu'un régime et une activité physique suffisent souvent au début chez Mme Yao.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Chez Aya, l'insulinémie est très faible : l'insuline manque",
+                "Sans insuline, le glucose n'est ni stocké par le foie ni consommé par les cellules, la glycémie reste élevée",
+                "Chez Mme Yao, l'insuline est présente mais les cellules y répondent mal",
+                "L'alimentation et l'activité physique améliorent la réponse des cellules, mais ne remplacent pas l'insuline absente"
+              ],
+              "starter": "Chez Aya, l'insuline …",
+              "explanation": "Corrigé modèle : Chez Aya, diabétique de type 1, l'insulinémie est très faible : les cellules β ne fabriquent plus assez d'insuline. Sans cette hormone, le foie ne stocke pas le glucose en glycogène et les cellules n'en consomment pas assez : la glycémie reste élevée. Il faut donc apporter l'insuline par injection. Chez Mme Yao, diabétique de type 2, l'insuline est présente mais les cellules cibles y répondent mal. L'alimentation équilibrée et l'activité physique améliorent leur réponse, ce qui peut suffire au début. Barème : 1 point pour le manque d'insuline chez Aya, 0,5 point pour l'effet de ce manque, 1 point pour la mauvaise réponse des cellules chez Mme Yao, 0,5 point pour le rôle de l'alimentation et de l'activité physique.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Le pancréas et la régulation de la glycémie : analyse d'expériences",
+          "exercise_type": "evaluation",
+          "figure": "boucle-glycemie",
+          "statement": "Pour comprendre le rôle du pancréas, on étudie trois expériences historiques réalisées sur des chiens, dont les résultats sont donnés par l'énoncé. Expérience A : on obstrue le canal par lequel le pancréas déverse son suc dans l'intestin ; les cellules exocrines dégénèrent, les îlots de Langerhans restent intacts, et la glycémie reste à 1 g/L. Expérience B : on enlève le pancréas d'un chien (la glycémie passe de 1 à 3 g/L), puis on greffe un fragment de pancréas sous la peau, loin de sa position d'origine ; la glycémie redescend à 1,1 g/L. Expérience C : un pancréas isolé est perfusé avec un liquide contenant du glucose. À 2 g/L de glucose, la sécrétion d'insuline passe de 8 à 40 unités arbitraires et celle de glucagon baisse de 10 à 3 ; à 0,5 g/L, la sécrétion de glucagon passe de 10 à 30 unités arbitraires et celle d'insuline baisse de 8 à 2.",
+          "questions": [
+            {
+              "content": "Quand on obstrue le canal du pancréas, les cellules exocrines dégénèrent, les îlots de Langerhans restent intacts et la glycémie reste à 1 g/L. Que montre cette expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la modification est l'obstruction du canal, la grandeur mesurée est la glycémie. Étape 2 — Comparer : la glycémie reste à 1 g/L, comme chez le témoin. Étape 3 — Déduire : la partie exocrine, qui dégénère, n'est pas nécessaire au maintien de la glycémie ; les îlots intacts suffisent. Étape 4 — Conclure : la régulation dépend de la partie endocrine du pancréas. Dire que le suc pancréatique règle la glycémie est faux, puisque la glycémie reste normale sans lui.",
+              "answers": [
+                {
+                  "content": "Le maintien de la glycémie ne dépend pas du suc pancréatique déversé dans l'intestin, mais des îlots de Langerhans",
+                  "correct": true
+                },
+                {
+                  "content": "Le maintien de la glycémie dépend du suc pancréatique déversé dans l'intestin",
+                  "correct": false
+                },
+                {
+                  "content": "Le pancréas n'a aucun rôle dans la glycémie",
+                  "correct": false
+                },
+                {
+                  "content": "Les cellules exocrines sécrètent l'insuline",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Après l'ablation du pancréas d'un chien, la glycémie passe de 1 à 3 g/L. Un fragment de pancréas greffé sous la peau, loin de sa position d'origine, la ramène à 1,1 g/L. Que montre cette greffe ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : l'ablation, puis la greffe d'un fragment de pancréas à un autre endroit, et la glycémie mesurée. Étape 2 — Comparer : la glycémie monte à 3 g/L sans pancréas, puis redescend à 1,1 g/L avec le greffon. Étape 3 — Déduire : le greffon, privé de son canal digestif, rétablit quand même la glycémie. Étape 4 — Conclure : il agit par une substance qui passe dans le sang, une hormone. L'insuline est une hormone du pancréas, la peau n'en fabrique pas.",
+              "answers": [
+                {
+                  "content": "Le pancréas agit à distance, par une substance transportée par le sang (une hormone), sans lien avec le tube digestif",
+                  "correct": true
+                },
+                {
+                  "content": "Le pancréas agit uniquement par son canal qui s'ouvre dans l'intestin",
+                  "correct": false
+                },
+                {
+                  "content": "La greffe ramène la glycémie car le chien a moins mangé",
+                  "correct": false
+                },
+                {
+                  "content": "La peau fabrique de l'insuline",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience C, à 2 g/L de glucose, l'insuline passe de 8 à 40 unités arbitraires et le glucagon baisse de 10 à 3 ; à 0,5 g/L, le glucagon passe de 10 à 30 et l'insuline baisse de 8 à 2. Quelles sont les deux conclusions exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : un pancréas isolé, donc sans foie ni autre organe, est perfusé avec du glucose. Étape 2 — Comparer : à 2 g/L l'insuline monte et le glucagon baisse ; à 0,5 g/L le glucagon monte et l'insuline baisse. Étape 3 — Déduire : les sécrétions changent dès que la concentration en glucose du liquide de perfusion change, donc les cellules des îlots détectent elles-mêmes la glycémie. Étape 4 — Conclure : l'hyperglycémie stimule l'insuline et freine le glucagon. Le pancréas sécrète du glucagon en hypoglycémie, et le foie n'est pas nécessaire ici.",
+              "answers": [
+                {
+                  "content": "Les cellules des îlots de Langerhans sont sensibles directement à la glycémie",
+                  "correct": true
+                },
+                {
+                  "content": "Une hyperglycémie stimule la sécrétion d'insuline et freine celle de glucagon",
+                  "correct": true
+                },
+                {
+                  "content": "Le pancréas ne sécrète rien quand la glycémie est basse",
+                  "correct": false
+                },
+                {
+                  "content": "La sécrétion d'insuline augmente quand la glycémie baisse",
+                  "correct": false
+                },
+                {
+                  "content": "Le foie est indispensable à ces sécrétions",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience C, la sécrétion d'insuline d'un pancréas isolé est de 2 unités arbitraires quand le liquide contient 0,5 g/L de glucose et de 40 unités arbitraires à 2 g/L. Par combien la sécrétion d'insuline est-elle multipliée quand la concentration en glucose du liquide de perfusion quadruple ?",
+              "question_type": "numeric",
+              "unit": "",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on compare la sécrétion d'insuline à deux glycémies. Étape 2 — Comparer : 2 unités à 0,5 g/L, 40 unités à 2 g/L. Étape 3 — Calculer le rapport : $40 \\div 2 = 20$. Étape 4 — Conclure : la sécrétion d'insuline est multipliée par 20 quand la concentration en glucose du liquide de perfusion est multipliée par 4, ce qui traduit la forte sensibilité des cellules β à la glycémie.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans la régulation de la glycémie, le foie joue le rôle d'___.",
+              "question_type": "select",
+              "explanation": "Étape 1 — Identifier : la grandeur réglée est la glycémie, détectée par les îlots de Langerhans. Étape 2 — Repérer : le message est une hormone, insuline ou glucagon. Étape 3 — Désigner : le foie reçoit ce message et stocke ou libère du glucose, il exécute la réponse. Étape 4 — Conclure : c'est un effecteur.",
+              "answers": [
+                {
+                  "content": "effecteur",
+                  "correct": true
+                },
+                {
+                  "content": "capteur",
+                  "correct": false
+                },
+                {
+                  "content": "hormone",
+                  "correct": false
+                },
+                {
+                  "content": "grandeur réglée",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience C, quand la concentration en glucose du liquide de perfusion baisse de 2 à 0,5 g/L, la sécrétion d'insuline passe de 40 à 2 unités arbitraires et celle de glucagon de 3 à 30 : ces réponses tendraient, dans l'organisme, à corriger la variation de la glycémie.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : la concentration en glucose du liquide de perfusion baisse de 2 à 0,5 g/L. Étape 2 — Repérer : les cellules β réduisent leur sécrétion (de 40 à 2 unités) et les cellules α l'augmentent (de 3 à 30 unités). Étape 3 — Désigner : sur un pancréas isolé, la boucle n'est pas fermée, on ne voit pas la glycémie changer. Étape 4 — Conclure : dans l'organisme, moins d'insuline et plus de glucagon tendraient à faire remonter la glycémie, donc à corriger la variation, ce qui est la logique d'une rétroaction négative.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En utilisant les trois expériences A, B et C, explique comment le pancréas règle la glycémie. Décris la boucle de régulation (capteur et centre, messagers, effecteurs) pour une hyperglycémie après un repas d'attiéké-poisson.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Les îlots de Langerhans (partie endocrine) règlent la glycémie, pas le suc pancréatique (expérience A)",
+                "Ils agissent par des hormones transportées par le sang (greffe, expérience B)",
+                "Les cellules des îlots détectent la glycémie : capteur et centre (expérience C)",
+                "Hyperglycémie : cellules β, insuline, foie et cellules effecteurs, stockage et consommation du glucose",
+                "Retour vers 1 g/L et arrêt de la sécrétion : rétroaction négative"
+              ],
+              "starter": "L'expérience A montre que …",
+              "explanation": "Corrigé modèle : L'expérience A montre que la glycémie reste normale quand la partie exocrine dégénère : la régulation dépend des îlots de Langerhans. L'expérience B montre qu'un greffon éloigné rétablit la glycémie : le pancréas agit par une hormone transportée par le sang. L'expérience C montre que la sécrétion d'insuline et de glucagon change avec la glycémie d'un pancréas isolé : les cellules des îlots détectent elles-mêmes la glycémie, elles sont à la fois capteur et centre. Après le repas, la glycémie dépasse 1 g/L : les cellules β sécrètent l'insuline, qui agit sur le foie, effecteur, et sur les cellules : le foie stocke le glucose en glycogène et les cellules en consomment davantage. La glycémie revient vers 1 g/L et la sécrétion d'insuline diminue : c'est une rétroaction négative. En hypoglycémie, le même système sécrète le glucagon. Barème : 1 point pour l'expérience A, 1 point pour la greffe, 1 point pour la détection de la glycémie, 1 point pour la boucle (cellules β, insuline, foie), 1 point pour la rétroaction négative.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

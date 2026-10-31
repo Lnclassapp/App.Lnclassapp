@@ -63,16 +63,23 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     create_exercise_session(student: @student, exercise:, status: "completed", score_percent: score).tap { it.update!(completed_at: at) }
   end
 
-  # CA-2 : un exercice commencé dit « Reprendre », jamais « Commencer ».
-  test "an assigned exercise with a session in progress says « Reprendre »" do
+  # CA-13, CA-16 (prepare-interros-cahier, Lot F) : un exercice assigné se lit sur une feuille, avec « Rendre à l'enseignant » ;
+  # une session commencée n'y change rien, et ni note ni correction n'est écrite avant le rendu.
+  test "CA-16: an assigned exercise is on a sheet with « Rendre à l'enseignant », without grade nor correction, even after a started session" do
     exercise = assign("En cours", course: course_named("Génétique"))
     create_exercise_session(student: @student, exercise:, status: "started")
     sign_in_as @student
 
     get student_classroom_path
 
-    assert_select "#exercise-#{exercise.public_id}", text: including("Reprendre")
-    assert_select "#exercise-#{exercise.public_id}", text: including("Commencer"), count: 0
+    assert_select "#student_classroom_assigned .ps-sheet #sheet-exercise-#{exercise.public_id}" do
+      assert_select "button", text: I18n.t("catalog.courses.sheets.hand_in")
+      assert_select "input[name=assignment_public_id][value=?]", Orm::ClassroomAssignment.sole.public_id
+      assert_select "button", text: I18n.t("catalog.courses.sheets.check"), count: 0
+      assert_select "a", text: I18n.t("catalog.courses.sheets.see_correction"), count: 0
+    end
+    assert_select ".ps-footer .ps-link-button", 0
+    assert_no_match "Commencer", css_select("#student_classroom_assigned").text
   end
 
   def sections = css_select("#student_classroom [id^=student_classroom_]:not([id$=_title])").map { it["id"] }
@@ -185,24 +192,64 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_no_match "Sans exercice", response.body
   end
 
-  # CA-5 : 3 lignes visibles, les suivantes masquées, « Voir plus » ; un exercice déjà fait n'est pas « assigné ».
-  test "the assigned exercises not done yet: 3 lines, then « Voir plus », each line to its exercise, without a button" do
+  # CA-13, CA-14 : un envoi, une feuille ; 3 exercices ou plus « Prépare devoirs », 1 ou 2 « Prépare interros » ; la plus récente en haut.
+  test "CA-13, CA-14: one sheet per send, the right form by count, the newest first; an exercise already done stays on its sheet" do
     genetics = course_named("Génétique")
-    exercises = (1..4).map { assign("Exercice #{it}", course: genetics, at: it.hours.ago) }
-    complete(assign("Déjà fait", course: genetics, at: 1.minute.ago), 90, at: 1.minute.ago)
+    notion = create_essential(course: genetics, name: "La méiose", sheet: { "remember" => "Deux divisions." })
+    send_batch = lambda do |count, at, batch|
+      Array.new(count) { create_exercise(essential: notion) }.each do
+        create_assignment(classroom: @classroom, assignable: it, assigned_at: at, batch_public_id: batch)
+      end
+    end
+    three = send_batch.(3, 2.hours.ago, "BATCHTHREEXXXX")
+    two = send_batch.(2, 1.hour.ago, "BATCHTWOXXXXXX")
+    complete(three.first, 90, at: 1.minute.ago)
     sign_in_as @student
 
     get student_classroom_path
 
-    assert_select "#student_classroom_assigned[data-controller=reveal]" do
-      assert_select "li", 4
-      assert_select "li:not([hidden])", 3
-      assert_select "li[hidden][data-reveal-target=item]", 1
-      assert_select "li a[href=?]", exercise_path(exercises.first.public_id), text: including("Exercice 1")
-      assert_select "button[data-action='reveal#more']", text: I18n.t("components.reveal.more")
-      assert_select "form, input[type=submit]", 0
+    sheets = css_select("#student_classroom_assigned .ps-sheet")
+    assert_equal [ "PRÉPARE INTERROS", "PRÉPARE DEVOIRS" ], sheets.map { it.at_css(".ps-header-title").text }
+    assert_select "#student_classroom_assigned .ps-sheet:first-child" do
+      assert_select ".ps-title", text: "Prépare interros n°1"
+      assert_select ".ps-subject", text: "La méiose"
+      assert_select ".ps-remember", text: including("Deux divisions.")
+      assert_select ".ps-exercise", two.size
     end
-    assert_select "#student_classroom_assigned", text: including("Déjà fait"), count: 0
+    assert_select "#student_classroom_assigned .ps-sheet:last-child" do
+      assert_select ".ps-title", text: "Prépare devoirs n°1"
+      assert_select ".ps-subject", text: /\ADEVOIR DU /
+      assert_select ".ps-remember", text: including("Notions mobilisées :")
+      assert_select ".ps-exercise", three.size
+    end
+    assert_select "#student_classroom_assigned[data-controller=reveal]", 0
+  end
+
+  test "CA-14: two exercises of different notions: no « À retenir »" do
+    genetics = course_named("Génétique")
+    [ create_exercise(essential: create_essential(course: genetics, sheet: { "remember" => "A" })),
+      create_exercise(essential: create_essential(course: genetics, sheet: { "remember" => "B" })) ].each do
+      create_assignment(classroom: @classroom, assignable: it, batch_public_id: "BATCHMIXEDXXXX")
+    end
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_select "#student_classroom_assigned .ps-header-title", text: "PRÉPARE INTERROS"
+    assert_select ".ps-remember", 0
+  end
+
+  # Sécurité : seule la classe de l'élève est lue.
+  test "a student never reads the sheets of another classroom" do
+    other_classroom = create_classroom(level: @classroom.level, series: @classroom.series, name: "Tle D 2")
+    create_assignment(classroom: other_classroom, assignable: create_exercise(essential: create_essential(course: course_named("Secret"))),
+                      batch_public_id: "BATCHOTHERXXXX")
+    sign_in_as @student
+
+    get student_classroom_path
+
+    assert_select "#student_classroom_assigned .ps-sheet", 0
+    assert_no_match "Secret", response.body
   end
 
   # CA-6 : une ligne par exercice traité, au meilleur score sur 20, vers le résultat de sa dernière session.
@@ -230,9 +277,9 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     assert_no_match "Autre élève", response.body
   end
 
-  # CA-6 (UDR-0086 §3.4) : la note en vert à partir de 14/20, en encre en dessous, jamais en rouge ; l'échéance en retard,
-  # d'aujourd'hui ou de demain en orange (warning, UDR-0062), une échéance plus lointaine sans orange.
-  test "the grades green from 14/20, never red; the due dates late, today or tomorrow in orange" do
+  # CA-6 (UDR-0086 §3.4) : la note en vert à partir de 14/20, en encre en dessous, jamais en rouge. Les devoirs reçus sont des feuilles
+  # noir et blanc (prepare-interros-cahier) : plus d'orange d'échéance, « À rendre le … » s'écrit sous le titre.
+  test "the grades green from 14/20, never red" do
     genetics = course_named("Génétique")
     complete(create_exercise(essential: create_essential(course: genetics), title: "Réussi"), 75, at: 2.hours.ago)
     complete(create_exercise(essential: create_essential(course: genetics), title: "À revoir"), 45, at: 1.hour.ago)
@@ -240,11 +287,6 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
     complete(create_exercise(essential: create_essential(course: genetics), title: "Juste"), 68, at: 3.hours.ago)
     # Le seuil bas : 66 % s'affiche 13/20, à l'encre.
     complete(create_exercise(essential: create_essential(course: genetics), title: "Presque"), 66, at: 4.hours.ago)
-    { "En retard" => -1, "Pour aujourd'hui" => 0, "Pour demain" => 1, "Plus tard" => 5 }.each do |title, days|
-      # Une échéance tombe de 1 à 7 jours après l'assignation (contrainte classroom_assignments_due_on_within_a_week).
-      exercise = assign(title, course: genetics, at: days > 1 ? 1.day.ago : 3.days.ago)
-      Orm::ClassroomAssignment.find_by!(assignable_id: exercise.id).update!(due_on: Date.current + days)
-    end
     sign_in_as @student
 
     get student_classroom_path
@@ -257,9 +299,19 @@ class Classroom::StudentClassroomsControllerTest < ActionDispatch::IntegrationTe
       assert_select "li .text-ink", text: "13/20"
       assert_select "li .text-success", text: "13/20", count: 0
     end
-    assert_select "#student_classroom [class*=red], #student_classroom [class*=error], #student_classroom [class*=danger]", 0
-    orange = ->(title) { css_select("#student_classroom_assigned li").find { it.text.include?(title) }.css(".text-warning").size }
-    assert_equal [ 1, 1, 1, 0 ], [ "En retard", "Pour aujourd'hui", "Pour demain", "Plus tard" ].map(&orange)
+    assert_select "#student_classroom_treated [class*=red], #student_classroom_treated [class*=error], #student_classroom_treated [class*=danger]", 0
+  end
+
+  # L'échéance d'un devoir reçu : « À rendre le … » sous le titre de sa feuille.
+  test "the due date of a received sheet is written under its title" do
+    exercise = assign("Pour demain", course: course_named("Génétique"), at: 1.day.ago)
+    Orm::ClassroomAssignment.find_by!(assignable_id: exercise.id).update!(due_on: Date.current + 2)
+    sign_in_as @student
+
+    get student_classroom_path
+
+    due = I18n.t("classroom.student_classrooms.assigned_sheet.due_on", date: I18n.l(Date.current + 2, format: :due_long))
+    assert_select "#student_classroom_assigned .ps-title-block", text: including(due)
   end
 
   test "nothing assigned, nothing treated: the empty state of each section" do

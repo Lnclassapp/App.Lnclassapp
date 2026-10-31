@@ -1,7 +1,8 @@
 require "test_helper"
 
 # IM-13, ADR-0068 §4 : l'écriture accélérée des arbres de contenu écrit exactement ce qu'écrivait l'écrivain d'avant.
-# Les 4 leçons de Tle D (nœuds d'avant le format 3) passent par ContentTreeWriter#write ; toutes les
+# Les 4 leçons de Tle D (nœuds d'avant le format 3, figées dans test/fixtures/files/lecons_v1 depuis que docs/ les réécrit en v3)
+# passent par ContentTreeWriter#write ; toutes les
 # lignes écrites sont comparées, champ par champ, à l'instantané pris AVANT l'optimisation
 # (test/fixtures/files/content_tree_snapshot.json). Cet instantané ne se régénère pas : si ce test rougit, c'est
 # l'implémentation qu'on corrige. Les 4 fichiers v1 sont figés sous test/fixtures/files/lecons_v1/ : les vagues v3 remplacent ceux de docs/.
@@ -19,7 +20,7 @@ module Repositories
       # ADR-0115 : points (1 par défaut), unit, starter, criteria et statement_blocks viennent aussi après l'instantané ; l'import
       # d'aujourd'hui ne les écrit pas encore (Lot D), les lignes gardent leurs valeurs par défaut (vérifié à part).
       # ADR-0116 : figures, sheet_theme, sheet et figure_key (format 3) viennent aussi après lui ; ces nœuds d'avant les laissent à leur défaut.
-      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key hint blank].freeze
+      ADDED_LATER = %w[numeric_tolerance match_content points unit starter criteria statement_blocks figures sheet_theme sheet figure_key hint subject_id blank].freeze
 
       setup do
         seed_referential

@@ -79,7 +79,7 @@ ui_back_link « Cours »
 | Pas de fiche cahier, du texte | `ui_card padding: :lg` ; le texte Action Text de la leçon, puis pour chaque notion publiée, dans l'ordre : `h3.font-display.text-lg.font-medium` (titre de la notion), son texte Action Text ; le tout sous `data-controller="math"` |
 | Ni fiche ni texte | `ui_empty_state title: t(".revision_empty"), icon: "document-text"` ; pas de « Voir plus » |
 
-**La coupe des 150 mots** (calcul serveur, `Entities::Catalog::RevisionPreview`, Ruby pur) :
+**La coupe des 150 mots** (ramenée à **50 mots** par UDR-0148) (calcul serveur, `Entities::Catalog::RevisionPreview`, Ruby pur) :
 
 - on parcourt les blocs dans l'ordre de lecture (pages, sections, blocs ; ou texte de la leçon puis notions, un paragraphe Action Text = un bloc) ;
 - on compte les mots du **texte seul** : paragraphes, encadrés, explications simples, étapes, cellules de tableau, intertitres ; une formule `$…$` compte un mot ; figure, média et exercice d'entraînement comptent zéro ;

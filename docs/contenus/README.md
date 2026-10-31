@@ -49,9 +49,6 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 | `mathematiques/limites-et-continuite.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
 | `mathematiques/probabilite-conditionnelle-et-variable-aleatoire.json` | Probabilité conditionnelle et variable aléatoire (Maths) | 3 | 9 | 54 |
 | `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions (Maths) | 3 | 9 | 51 |
-| `physique-chimie/cinematique-du-point.json` | Cinématique du point (Physique) | 3 | 9 | 45 |
-| `physique-chimie/les-alcools.json` | Les alcools (Chimie) | 3 | 9 | 54 |
-| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide (Physique) | 4 | 12 | 60 |
 | `svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères (SVT) | 3 | 9 | 53 |
 | `svt/le-fonctionnement-des-organes-sexuels-chez-l-homme.json` | Le fonctionnement des organes sexuels chez l'Homme (SVT) | 3 | 9 | 54 |
 | `svt/la-reproduction-chez-les-spermaphytes.json` | La reproduction chez les spermaphytes (SVT) | 3 | 9 | 54 |
@@ -84,9 +81,39 @@ Les 4 premiers fichiers ont été importés le 2026-09-29 sur une base neuve, pa
 À faire valider par un enseignant, car le programme détaillé n'était pas disponible :
 
 - **Maths** : les asymptotes ne sont pas traitées, faute de place en 3 fiches de révision. Dans « Dérivabilité et étude de fonctions », l'inégalité des accroissements finis et les dérivées successives ne le sont pas non plus (signalées dans le sous-titre de la dernière fiche de révision). Deux explications de « Limites et continuité » dépassent 400 caractères (450 et 444).
-- **Physique** : il faut vérifier que le repère de Frenet et le recours à une primitive sont au programme.
-- **Chimie** : il faut vérifier que la règle de Markovnikov est au programme. DNPH, Fehling et Schiff chevauchent peut-être la leçon suivante sur les aldéhydes et cétones.
+- **Physique-Chimie** : leçons réécrites au format 3, voir « Tle C et D, Physique-Chimie au format 3 ».
 - **SVT** : l'hCG, le corps jaune et la progestérone sont traités au minimum, parce qu'ils relèvent aussi de la leçon suivante.
+
+### Tle C et D, Physique-Chimie au format 3 (chantier `contenus-tle-physique-chimie`)
+
+Les 10 premières leçons de Physique-Chimie de Tle C et de Tle D (progression DPFC 2026-2027), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), vague T3 du programme `contenus-v3-tous-niveaux`. **12 leçons distinctes, 20 fichiers** : une leçon commune aux deux séries est écrite une fois puis copiée avec la série et le rang de chacune (« Fabrication d'un savon » : rang 8 en C, 9 en D ; « Oscillations mécaniques libres » : 9 en C, 8 en D ; la leçon 6 garde l'intitulé de chaque série). Elles remplacent les 6 fichiers v1 de Tle C et D. Aucune sorte de figure nouvelle : repère, courbe, molécule, schéma fléché.
+
+| Série | Rang | Fichier | Cours | Notions | Exercices | Questions | Je m'entraîne | Auto | Figures | Sortes |
+|---|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| C | 1 | `tle-c/physique-chimie/cinematique-du-point.json` | Cinématique du point | 4 | 8 | 54 | 12 | 98 % | 5 | `coordinate_plane`, `stat_chart line` |
+| C | 2 | `tle-c/physique-chimie/les-alcools.json` | Les alcools | 5 | 9 | 58 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| C | 3 | `tle-c/physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide | 4 | 8 | 53 | 12 | 96 % | 4 | `coordinate_plane`, `stat_chart line` |
+| C | 4 | `tle-c/physique-chimie/composes-carbonyles-aldehydes-et-cetones.json` | Composés carbonylés : aldéhydes et cétones | 5 | 9 | 51 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| C | 5 | `tle-c/physique-chimie/interaction-gravitationnelle.json` | Interaction gravitationnelle | 4 | 8 | 53 | 12 | 98 % | 3 | `coordinate_plane`, `stat_chart line` |
+| C | 6 | `tle-c/physique-chimie/mouvements-dans-les-champs-g-et-e-uniformes.json` | Mouvements dans les champs g⃗ et E⃗ uniformes | 4 | 8 | 57 | 12 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| C | 7 | `tle-c/physique-chimie/acides-carboxyliques-et-derives.json` | Acides carboxyliques et dérivés | 4 | 8 | 45 | 12 | 98 % | 7 | `diagram`, `molecule`, `stat_chart bars`, `stat_chart line` |
+| C | 8 | `tle-c/physique-chimie/fabrication-d-un-savon.json` | Fabrication d'un savon | 5 | 9 | 58 | 15 | 98 % | 3 | `diagram`, `molecule` |
+| C | 9 | `tle-c/physique-chimie/oscillations-mecaniques-libres.json` | Oscillations mécaniques libres | 5 | 9 | 52 | 15 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| C | 10 | `tle-c/physique-chimie/champ-magnetique.json` | Champ magnétique | 4 | 8 | 51 | 12 | 98 % | 4 | `coordinate_plane`, `stat_chart line` |
+| D | 1 | `tle-d/physique-chimie/cinematique-du-point.json` | Cinématique du point | 4 | 8 | 54 | 12 | 98 % | 5 | `coordinate_plane`, `stat_chart line` |
+| D | 2 | `tle-d/physique-chimie/les-alcools.json` | Les alcools | 5 | 9 | 58 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| D | 3 | `tle-d/physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide | 4 | 8 | 53 | 12 | 96 % | 4 | `coordinate_plane`, `stat_chart line` |
+| D | 4 | `tle-d/physique-chimie/composes-carbonyles-aldehydes-et-cetones.json` | Composés carbonylés : aldéhydes et cétones | 5 | 9 | 51 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| D | 5 | `tle-d/physique-chimie/les-amines.json` | Les amines | 5 | 9 | 57 | 15 | 98 % | 6 | `diagram`, `molecule` |
+| D | 6 | `tle-d/physique-chimie/mouvements-dans-les-champs-g-et-e-uniformes.json` | Mouvements dans les champs (g⃗ et E⃗) uniformes | 4 | 8 | 57 | 12 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| D | 7 | `tle-d/physique-chimie/acides-carboxyliques-et-derives.json` | Acides carboxyliques et dérivés | 4 | 8 | 45 | 12 | 98 % | 7 | `diagram`, `molecule`, `stat_chart bars`, `stat_chart line` |
+| D | 8 | `tle-d/physique-chimie/oscillations-mecaniques-libres.json` | Oscillations mécaniques libres | 5 | 9 | 52 | 15 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| D | 9 | `tle-d/physique-chimie/fabrication-d-un-savon.json` | Fabrication d'un savon | 5 | 9 | 58 | 15 | 98 % | 3 | `diagram`, `molecule` |
+| D | 10 | `tle-d/physique-chimie/les-acides-amines.json` | Les acides α-aminés | 4 | 8 | 45 | 12 | 96 % | 5 | `diagram`, `molecule` |
+
+Leçons distinctes : 53 notions, 634 questions notées, 159 questions « Je m'entraîne », 57 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et le contrôle de « Je m'entraîne » des tests de 3e. Chaque leçon a été relue par un sous-agent distinct de son auteur, qui a refait chaque calcul ; les défauts trouvés (une courbe d'énergie fausse, des arrondis intermédiaires, des étapes de méthode mal citées, des distracteurs peu plausibles) sont corrigés.
+
+**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Si les cours v1 de Tle C ou D sont déjà dans une base, les renommer et les archiver avant d'importer.
 
 ### 6ème, 5ème et 4ème — `lecons-traitees/6eme/`, `5eme/`, `4eme/`
 
@@ -206,12 +233,12 @@ Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le mê
 
 ### 3ème, mathématiques au format 3 — le pilote (chantier `refonte-contenus-maths`)
 
-Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un exercice. La leçon a en plus 4 problèmes de 5 questions ou plus.
+Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un ou deux exercices (la leçon Thalès en a deux par notion depuis le 2026-10-31, aux types de questions mélangés). La leçon a en plus 4 problèmes de 5 questions ou plus. La leçon Thalès a aussi 4 sujets de devoir de 4 exercices chacun (16 exercices, 95 questions), comptés dans le tableau, avec trois figures de plus (triangle ABC avec M et N, papillon, triangle ABC avec D et E) que ses exercices citent : un schéma fixe, car la figure interactive affiche ses propres longueurs, qui contrediraient l'énoncé.
 
 | # | Fichier | Cours | Notions | Figures | Exercices | Questions |
 |---:|---|---|---:|---:|---:|---:|
 | 1 | `mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 0 | 8 | 54 |
-| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 2 | 7 | 40 |
+| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 4 | 26 | 153 |
 | 3 | `mathematiques/racines-carrees.json` | Racines carrées | 6 | 2 | 10 | 52 |
 | 4 | `mathematiques/triangle-rectangle.json` | Triangle rectangle | 4 | 5 | 8 | 46 |
 | 5 | `mathematiques/calcul-numerique.json` | Calcul numérique | 4 | 1 | 8 | 41 |
@@ -221,7 +248,7 @@ Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le
 | 9 | `mathematiques/pyramides-et-cones.json` | Pyramides et cônes | 4 | 4 | 8 | 40 |
 | 10 | `mathematiques/statistique.json` | Statistique | 5 | 4 | 9 | 49 |
 
-Au total : 42 notions, 34 figures, 82 exercices et 455 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
+Au total : 42 notions, 36 figures, 101 exercices et 568 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
 
 ### 3ème, Français au format 3 (chantier `contenus-3e-francais`)
 
@@ -430,9 +457,6 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 | `mathematiques/barycentre-et-lignes-de-niveaux.json` | Barycentre et lignes de niveaux (Mathématiques) | 1 | 4 | 12 | 72 |
 | `mathematiques/limites-et-continuite.json` | Limites et continuité (Mathématiques) | 2 | 5 | 15 | 75 |
 | `mathematiques/divisibilite-dans.json` | Divisibilité dans ℤ (Mathématiques) | 3 | 4 | 12 | 67 |
-| `physique-chimie/cinematique-du-point.json` | Cinématique du point (Physique-Chimie) | 1 | 5 | 15 | 75 |
-| `physique-chimie/les-alcools.json` | Les alcools (Physique-Chimie) | 2 | 4 | 12 | 72 |
-| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide (Physique-Chimie) | 3 | 4 | 12 | 70 |
 | `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme (SVT) | 1 | 4 | 12 | 72 |
 | `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme (SVT) | 2 | 4 | 12 | 71 |
 | `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule (SVT) | 3 | 4 | 12 | 68 |
@@ -469,7 +493,51 @@ Les 3 leçons de mathématiques de ce tableau (format v1) sont remplacées par l
 - **Maths A1 et A2** : le niveau (calculs concrets, peu de démonstrations) est à confirmer avec un enseignant de série A.
 - **SVT A1 et A2** : le vocabulaire (drogues, dépendance, tolérance, imagerie TEP, synapses) est peut-être dense pour des littéraires ; « L'origine de la vie » a un « À compléter » sur le rattachement au programme de la série A.
 - **SVT C** : la contraception hormonale (4e fiche de « Les cycles sexuels chez la femme ») et la méiose, le rendement chiffré de la respiration (36 à 38 ATP par glucose, 30,5 kJ par mole d'ATP et 2 870 kJ par mole de glucose : valeurs écrites par le rédacteur) sont à confirmer.
-- **Physique-Chimie C** : le repère de Frenet et le mouvement rectiligne sinusoïdal (« Cinématique du point »), la fermentation alcoolique, la liaison hydrogène et la distillation (« Les alcools ») ; les noms des produits d'oxydation (aldéhydes, cétones, acides) y sont cités sans nomenclature systématique, réservée à la leçon suivante ; le frottement par une relation `f = k·R_N` donnée dans l'énoncé, sans coefficient de frottement (« Mouvement du centre d'inertie d'un solide »).
+- **Physique-Chimie C** : leçons réécrites au format 3, voir « Tle C et D, Physique-Chimie au format 3 ».
+
+### Tle C, SVT au format 3 (chantier `contenus-tle-svt-cd`)
+
+Les 10 premières leçons de SVT de Tle C (progression DPFC 2026-2027), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Elles remplacent les 3 fichiers v1 de `tle-c/svt/` (lignes SVT du tableau Tle C ci-dessus). Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes de type BAC. Les leçons 2, 5 et 6 sont communes aux séries C et D : écrites ici, déclinées dans `tle-d/svt/`.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Entraînement | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme | 4 | 8 | 52 | 16 | 96 % | 5 | `plate female_reproductive_system`, `stat_chart line`, `diagram` |
+| 2 | `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme | 3 | 7 | 43 | 12 | 95 % | 2 | `diagram`, `stat_chart bars` |
+| 3 | `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule | 4 | 8 | 57 | 16 | 95 % | 5 | `stat_chart line`, `diagram` |
+| 4 | `svt/l-utilisation-de-l-energie-par-la-cellule-musculaire.json` | L'utilisation de l'énergie par la cellule musculaire | 4 | 8 | 52 | 16 | 92 % | 6 | `diagram`, `stat_chart line` |
+| 5 | `svt/le-systeme-de-defense-de-l-organisme.json` | Le système de défense de l'organisme | 5 | 9 | 61 | 20 | 97 % | 6 | `diagram`, `stat_chart line`, `plate blood_smear` |
+| 6 | `svt/l-infection-de-l-organisme-par-le-vih.json` | L'infection de l'organisme par le VIH | 4 | 8 | 49 | 16 | 96 % | 6 | `plate hiv_virus`, `diagram`, `stat_chart line` |
+| 7 | `svt/la-communication-nerveuse.json` | La communication nerveuse | 5 | 9 | 56 | 20 | 96 % | 4 | `stat_chart line`, `diagram` |
+| 8 | `svt/les-drogues-et-le-systeme-nerveux.json` | Les drogues et le système nerveux | 4 | 8 | 44 | 16 | 91 % | 6 | `diagram`, `stat_chart line` |
+| 9 | `svt/la-mise-en-place-des-gisements-petroliferes-en-cote-d-ivoire.json` | La mise en place des gisements pétrolifères en Côte d'Ivoire | 4 | 8 | 51 | 15 | 92 % | 4 | `map cote_d_ivoire`, `diagram`, `stat_chart line`, `stat_chart bars` |
+| 10 | `svt/l-exploitation-des-gisements-petroliferes.json` | L'exploitation des gisements pétrolifères | 4 | 8 | 53 | 16 | 94 % | 6 | `diagram`, `stat_chart bars`, `stat_chart line`, `map cote_d_ivoire` |
+
+Au total : 41 notions, 81 exercices, 518 questions notées, 163 questions d'entraînement et 50 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et a été relu par un agent distinct de son auteur.
+
+Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : arbre généalogique, coupe d'ovaire et endomètre, mitochondrie, sarcomère et fibre musculaire, myogramme, anticorps et phagocytose, cycle du VIH dans la cellule, neurone, synapse et plaque motrice, circuit de la récompense, coupe géologique et piège pétrolier, plateforme et forage rotatif, coupe sismique. Les courbes de potentiel sont décalées de +100 mV (`stat_chart` refuse les valeurs négatives) et chaque courbe ne porte qu'une série.
+
+À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
+
+### Tle D, SVT au format 3 (chantier `contenus-tle-svt-cd`)
+
+Les 10 premières leçons de SVT de Tle D, rédigées le 2026-10-31 au même format que la Tle C ci-dessus. Elles remplacent les 3 fichiers v1 de `tle-d/svt/` (lignes SVT du tableau Tle D). Les leçons 4, 7 et 8 sont les leçons 2, 5 et 6 de Tle C : même contenu, seuls `series_name` et `subtitle` changent. Les 7 autres sont propres à la série D.
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Entraînement | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| 1 | `svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères | 3 | 7 | 40 | 12 | 92 % | 6 | `plate female_reproductive_system`, `diagram`, `stat_chart line` |
+| 2 | `svt/le-fonctionnement-des-organes-sexuels-chez-l-homme.json` | Le fonctionnement des organes sexuels chez l'Homme | 3 | 7 | 48 | 12 | 96 % | 5 | `diagram`, `plate female_reproductive_system`, `stat_chart line` |
+| 3 | `svt/la-reproduction-chez-les-spermaphytes.json` | La reproduction chez les spermaphytes | 4 | 8 | 49 | 16 | 96 % | 5 | `diagram`, `stat_chart line` |
+| 4 | `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme | 3 | 7 | 43 | 12 | 95 % | 2 | `diagram`, `stat_chart bars` |
+| 5 | `svt/la-transmission-de-deux-caracteres-hereditaires-chez-les-etres-vivants.json` | La transmission de deux caractères héréditaires chez les êtres vivants | 4 | 8 | 51 | 20 | 96 % | 8 | `stat_chart bars`, `diagram` |
+| 6 | `svt/le-maintien-de-la-constance-du-milieu-interieur.json` | Le maintien de la constance du milieu intérieur | 4 | 8 | 49 | 20 | 94 % | 5 | `stat_chart line`, `diagram`, `plate digestive_system` |
+| 7 | `svt/le-systeme-de-defense-de-l-organisme.json` | Le système de défense de l'organisme | 5 | 9 | 61 | 20 | 97 % | 6 | `diagram`, `stat_chart line`, `plate blood_smear` |
+| 8 | `svt/l-infection-de-l-organisme-par-le-vih.json` | L'infection de l'organisme par le VIH | 4 | 8 | 49 | 16 | 96 % | 6 | `plate hiv_virus`, `diagram`, `stat_chart line` |
+| 9 | `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 5 | 9 | 53 | 19 | 96 % | 6 | `diagram`, `stat_chart line`, `stat_chart bars` |
+| 10 | `svt/le-fonctionnement-du-tissu-nerveux.json` | Le fonctionnement du tissu nerveux | 5 | 9 | 54 | 20 | 94 % | 5 | `diagram`, `stat_chart line` |
+
+Au total : 40 notions, 80 exercices, 497 questions notées, 167 questions d'entraînement et 54 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement ; chaque leçon propre à la série D a été relue par un agent distinct de son auteur.
+
+Schémas qu'aucune sorte ne dessine, en plus de ceux de la Tle C : spermatozoïde, ovocyte et stades de segmentation, testicule et tube séminifère, fleur, ovule et grain de pollen, paire de chromosomes et crossing-over, échiquier, îlot de Langerhans, cortex et bulbe. Points à faire valider : [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T4).
 
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
