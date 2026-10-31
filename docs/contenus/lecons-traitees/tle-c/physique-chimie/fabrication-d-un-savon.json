@@ -1,0 +1,1858 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Fabrication d'un savon",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "glycerol",
+          "kind": "molecule",
+          "description": "La molécule de glycérol (propane-1,2,3-triol) en formule développée : trois atomes de carbone alignés, reliés par des liaisons simples. Chaque carbone porte un groupe hydroxyle O–H ; les deux carbones des extrémités portent deux atomes d'hydrogène, le carbone central un seul. Ce sont ces trois groupes alcool qui sont estérifiés dans un triglycéride.",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 5
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 6,
+                "y": 5
+              },
+              {
+                "id": "c3",
+                "element": "C",
+                "x": 10,
+                "y": 5
+              },
+              {
+                "id": "o1",
+                "element": "O",
+                "x": 2,
+                "y": 3
+              },
+              {
+                "id": "o2",
+                "element": "O",
+                "x": 6,
+                "y": 3
+              },
+              {
+                "id": "o3",
+                "element": "O",
+                "x": 10,
+                "y": 3
+              },
+              {
+                "id": "ho1",
+                "element": "H",
+                "x": 2,
+                "y": 1
+              },
+              {
+                "id": "ho2",
+                "element": "H",
+                "x": 6,
+                "y": 1
+              },
+              {
+                "id": "ho3",
+                "element": "H",
+                "x": 10,
+                "y": 1
+              },
+              {
+                "id": "ha1",
+                "element": "H",
+                "x": 0,
+                "y": 5
+              },
+              {
+                "id": "ha2",
+                "element": "H",
+                "x": 2,
+                "y": 7
+              },
+              {
+                "id": "hb",
+                "element": "H",
+                "x": 6,
+                "y": 7
+              },
+              {
+                "id": "hc1",
+                "element": "H",
+                "x": 10,
+                "y": 7
+              },
+              {
+                "id": "hc2",
+                "element": "H",
+                "x": 12,
+                "y": 5
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "c3",
+                1
+              ],
+              [
+                "c1",
+                "o1",
+                1
+              ],
+              [
+                "c2",
+                "o2",
+                1
+              ],
+              [
+                "c3",
+                "o3",
+                1
+              ],
+              [
+                "o1",
+                "ho1",
+                1
+              ],
+              [
+                "o2",
+                "ho2",
+                1
+              ],
+              [
+                "o3",
+                "ho3",
+                1
+              ],
+              [
+                "c1",
+                "ha1",
+                1
+              ],
+              [
+                "c1",
+                "ha2",
+                1
+              ],
+              [
+                "c2",
+                "hb",
+                1
+              ],
+              [
+                "c3",
+                "hc1",
+                1
+              ],
+              [
+                "c3",
+                "hc2",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "etapes-fabrication",
+          "kind": "diagram",
+          "description": "Schéma fléché des étapes de fabrication d'un savon : mélange de l'huile, de la soude et de l'éthanol, chauffage à reflux où a lieu la saponification, relargage dans l'eau salée, filtration du savon solide, puis rinçage et séchage. Le filtrat, qui contient le glycérol, est écarté. Deux couleurs distinguent la réaction et la séparation.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "melange",
+                "label": "Mélange : huile, soude, éthanol",
+                "category": 1
+              },
+              {
+                "id": "reflux",
+                "label": "Chauffage à reflux (saponification)",
+                "category": 1
+              },
+              {
+                "id": "relargage",
+                "label": "Relargage : versement dans l'eau salée",
+                "category": 2
+              },
+              {
+                "id": "filtration",
+                "label": "Filtration du savon solide",
+                "category": 2
+              },
+              {
+                "id": "sechage",
+                "label": "Rinçage et séchage du savon",
+                "category": 2
+              },
+              {
+                "id": "filtrat",
+                "label": "Filtrat : glycérol et eau salée",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "melange",
+                "to": "reflux",
+                "label": "ballon et réfrigérant"
+              },
+              {
+                "from": "reflux",
+                "to": "relargage",
+                "label": "après refroidissement"
+              },
+              {
+                "from": "relargage",
+                "to": "filtration"
+              },
+              {
+                "from": "filtration",
+                "to": "sechage",
+                "label": "solide"
+              },
+              {
+                "from": "filtration",
+                "to": "filtrat",
+                "label": "liquide"
+              }
+            ],
+            "legend": [
+              "Réaction chimique",
+              "Séparation et purification"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "ion-ethanoate",
+          "kind": "molecule",
+          "description": "L'ion éthanoate CH3–COO−, un ion carboxylate court qui sert à comprendre le principe du savon. À gauche, un groupe CH3 (la queue, ici très courte) est relié au carbone du groupe carboxylate. Ce carbone porte un oxygène par une double liaison et un oxygène par une liaison simple, qui porte la charge négative non dessinée (la tête).",
+          "params": {
+            "mode": "custom",
+            "atoms": [
+              {
+                "id": "c1",
+                "element": "C",
+                "x": 2,
+                "y": 6
+              },
+              {
+                "id": "h1",
+                "element": "H",
+                "x": 2,
+                "y": 4
+              },
+              {
+                "id": "h2",
+                "element": "H",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "h3",
+                "element": "H",
+                "x": 2,
+                "y": 8
+              },
+              {
+                "id": "c2",
+                "element": "C",
+                "x": 6,
+                "y": 6
+              },
+              {
+                "id": "o1",
+                "element": "O",
+                "x": 6,
+                "y": 3
+              },
+              {
+                "id": "o2",
+                "element": "O",
+                "x": 9,
+                "y": 6
+              }
+            ],
+            "bonds": [
+              [
+                "c1",
+                "h1",
+                1
+              ],
+              [
+                "c1",
+                "h2",
+                1
+              ],
+              [
+                "c1",
+                "h3",
+                1
+              ],
+              [
+                "c1",
+                "c2",
+                1
+              ],
+              [
+                "c2",
+                "o1",
+                2
+              ],
+              [
+                "c2",
+                "o2",
+                1
+              ]
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les corps gras : les triglycérides",
+          "remember": "Un **corps gras** (huile de palme, beurre de karité…) est surtout formé de **triglycérides**. Un triglycéride est un **triester** du **glycérol** (propane-1,2,3-triol, $\\text{CH}_2\\text{OH}-\\text{CHOH}-\\text{CH}_2\\text{OH}$) et de trois **acides gras** : des acides carboxyliques à longue chaîne carbonée. À connaître : l'acide **palmitique** $\\text{C}_{15}\\text{H}_{31}\\text{C}\\text{O}\\text{O}\\text{H}$ et l'acide **stéarique** $\\text{C}_{17}\\text{H}_{35}\\text{C}\\text{O}\\text{O}\\text{H}$ (chaînes saturées), l'acide **oléique** $\\text{C}_{17}\\text{H}_{33}\\text{C}\\text{O}\\text{O}\\text{H}$ (une double liaison C=C dans la chaîne). Formule semi-développée d'un triglycéride : $\\text{CH}_2(\\text{OCOR}_1)-\\text{CH}(\\text{OCOR}_2)-\\text{CH}_2(\\text{OCOR}_3)$, où $\\text{R}_{1}$, $\\text{R}_{2}$ et $\\text{R}_{3}$ sont les chaînes carbonées. Il se forme par estérification : 1 glycérol + 3 acides gras donnent 1 triglycéride + 3 molécules d'eau. Les chaînes saturées donnent des corps gras plutôt solides, les chaînes insaturées des corps gras plutôt liquides.",
+          "method": [
+            "Repérer le glycérol : le squelette $\\text{C}_3\\text{H}_5$ dont les trois groupes OH sont remplacés par trois groupes ester.",
+            "Identifier les trois acides gras en lisant les chaînes carbonées liées aux groupes ester.",
+            "Écrire la formule du triglycéride : $\\text{C}_3\\text{H}_5(\\text{OCOR})_3$ si les trois chaînes sont identiques.",
+            "Calculer la formule brute (compter les atomes de C, H et O) puis la masse molaire avec C = 12, H = 1, O = 16 g/mol."
+          ],
+          "example": {
+            "statement": "Dans une savonnerie artisanale de Côte d'Ivoire, on modélise l'huile de palme par la tripalmitine, triglycéride de l'acide palmitique $\\text{C}_{15}\\text{H}_{31}\\text{C}\\text{O}\\text{O}\\text{H}$. Donner sa formule et sa masse molaire.",
+            "steps": [
+              "Repérer : le glycérol porte trois groupes OH ; dans le triglycéride, chacun devient un groupe ester, donc le squelette est $\\text{C}_{3}\\text{H}_{5}$ avec trois groupes $\\text{O}\\text{C}\\text{O}\\text{R}$.",
+              "Identifier : les trois chaînes sont identiques et valent $\\text{C}_{15}\\text{H}_{31}$ : c'est l'acide palmitique $\\text{C}_{15}\\text{H}_{31}\\text{C}\\text{O}\\text{O}\\text{H}$.",
+              "Écrire : la formule est $\\text{C}_3\\text{H}_5(\\text{OCOC}_{15}\\text{H}_{31})_3$.",
+              "Calculer : C = 3 + 3 × 16 = 51 ; H = 5 + 3 × 31 = 98 ; O = 6. La formule brute est $\\text{C}_{51}\\text{H}_{98}\\text{O}_{6}$ et $M = 51 \\times 12 + 98 \\times 1 + 6 \\times 16 = 806$ g/mol."
+            ]
+          },
+          "pitfall": "Ne pas oublier le carbone du groupe ester : chaque acide gras compte 1 carbone de plus que sa chaîne. Contre-exemple : pour la tripalmitine, compter 15 carbones par acide donne $3 + 3 \\times 15 = 48$ carbones et $M = 48 \\times 12 + 98 + 96 = 770$ g/mol, au lieu de 51 carbones et 806 g/mol. Vérifie toujours : acide palmitique = $\\text{C}_{15}\\text{H}_{31}$ + COOH = 16 carbones.",
+          "figure": "glycerol",
+          "exercise": {
+            "title": "Reconnaître et écrire un triglycéride",
+            "exercise_type": "fixation",
+            "figure": "glycerol",
+            "statement": "Dans cet exercice, tu reconnais un triglycéride et tu calcules sa formule et sa masse molaire avec la méthode de la fiche. Masses molaires atomiques : C = 12, H = 1, O = 16 g/mol.",
+            "questions": [
+              {
+                "content": "Quelle est la nature chimique d'un triglycéride ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer le glycérol : il porte trois groupes OH. Étape 2 — Identifier les acides gras : chaque OH réagit avec un acide gras. Le produit porte donc trois groupes ester : c'est un triester du glycérol et de trois acides gras. Un sel de sodium d'acide gras est un savon, pas un triglycéride.",
+                "answers": [
+                  {
+                    "content": "Un triester du glycérol et de trois acides gras",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un triacide du glycérol et de trois alcools",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un ester du glycérol et d'un seul acide gras",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un sel de sodium d'un acide gras",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un triglycéride, les trois groupes OH du glycérol sont libres.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer le glycérol : ses trois groupes OH ont réagi avec trois acides gras. Dans le triglycéride, ils sont remplacés par trois groupes ester. L'affirmation est fausse : les groupes OH ne sont pas libres. Ils le sont dans le glycérol seul.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'acide gras de formule $\\text{C}_{17}\\text{H}_{33}\\text{COOH}$, dont la chaîne porte une double liaison C=C, s'appelle l'acide ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier l'acide gras : la chaîne $\\text{C}_{17}\\text{H}_{33}$ est insaturée (une double liaison C=C), c'est l'acide oléique. L'acide stéarique $\\text{C}_{17}\\text{H}_{35}\\text{COOH}$ a le même nombre de carbones mais une chaîne saturée.",
+                "answers": [
+                  {
+                    "content": "oléique",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La tristéarine est le triglycéride de l'acide stéarique $\\text{C}_{17}\\text{H}_{35}\\text{COOH}$. Sa formule est $\\text{C}_3\\text{H}_5(\\text{OCOC}_{17}\\text{H}_{35})_3$. Calcule sa masse molaire avec C = 12, H = 1, O = 16 g/mol.",
+                "question_type": "numeric",
+                "unit": "g/mol",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Écrire la formule : $\\text{C}_3\\text{H}_5(\\text{OCOC}_{17}\\text{H}_{35})_3$. Étape 4 — Calculer : C = 3 + 3 × 18 = 57 ; H = 5 + 3 × 35 = 110 ; O = 6. La formule brute est $\\text{C}_{57}\\text{H}_{110}\\text{O}_6$ et $M = 57 \\times 12 + 110 + 6 \\times 16 = 684 + 110 + 96 = 890$ g/mol.",
+                "answers": [
+                  {
+                    "content": "890",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'oléine est le triglycéride de l'acide oléique $\\text{C}_{17}\\text{H}_{33}\\text{COOH}$. Quelle est sa formule brute ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire la formule : $\\text{C}_3\\text{H}_5(\\text{OCOC}_{17}\\text{H}_{33})_3$. Étape 4 — Calculer : C = 3 + 3 × 18 = 57 ; H = 5 + 3 × 33 = 104 ; O = 6. C54 oublie les 3 carbones du glycérol, et 110 hydrogènes est la valeur de la tristéarine, dont la chaîne est saturée.",
+                "answers": [
+                  {
+                    "content": "$\\text{C}_{57}\\text{H}_{104}\\text{O}_6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\text{C}_{54}\\text{H}_{104}\\text{O}_6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\text{C}_{57}\\text{H}_{110}\\text{O}_6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\text{C}_{51}\\text{H}_{98}\\text{O}_6$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la formule brute de la tripalmitine, triglycéride de l'acide palmitique $\\text{C}_{15}\\text{H}_{31}\\text{COOH}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier : l'acide palmitique compte 15 + 1 = 16 carbones. Étape 3 — Écrire : $\\text{C}_3\\text{H}_5(\\text{OCOC}_{15}\\text{H}_{31})_3$. Étape 4 — Calculer : C = 3 + 3 × 16 = 51 ; H = 5 + 93 = 98 ; O = 6. Le piège est de compter 15 carbones par acide, ce qui donne 48 carbones, ou d'oublier qu'un groupe ester porte 2 oxygènes, ce qui donne 3 O au lieu de 3 × 2 = 6.",
+                "answers": [
+                  {
+                    "content": "$\\text{C}_{51}\\text{H}_{98}\\text{O}_6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\text{C}_{48}\\text{H}_{98}\\text{O}_6$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\text{C}_{51}\\text{H}_{98}\\text{O}_3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\text{C}_{45}\\text{H}_{98}\\text{O}_6$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Les corps gras contiennent des acides gras liés au glycérol. Tu dois les reconnaître par leur formule.",
+            "questions": [
+              {
+                "content": "Relie chaque acide gras à sa formule.",
+                "question_type": "matching",
+                "hint": "Compte les atomes de carbone, puis cherche la double liaison.",
+                "explanation": "Étape 2 — Identifier les acides gras par leur chaîne : palmitique = chaîne à 15 carbones ; stéarique = chaîne à 17 carbones saturée ; oléique = chaîne à 17 carbones avec une double liaison, donc 2 hydrogènes de moins.",
+                "answers": [
+                  {
+                    "content": "Acide palmitique",
+                    "match": "$\\text{C}_{15}\\text{H}_{31}\\text{COOH}$"
+                  },
+                  {
+                    "content": "Acide stéarique",
+                    "match": "$\\text{C}_{17}\\text{H}_{35}\\text{COOH}$"
+                  },
+                  {
+                    "content": "Acide oléique",
+                    "match": "$\\text{C}_{17}\\text{H}_{33}\\text{COOH}$"
+                  }
+                ]
+              },
+              {
+                "content": "Calcule la masse molaire de l'acide palmitique $\\text{C}_{15}\\text{H}_{31}\\text{COOH}$, avec C = 12, H = 1, O = 16 g/mol.",
+                "question_type": "numeric",
+                "unit": "g/mol",
+                "tolerance": 0,
+                "hint": "N'oublie pas le C et le H du groupe COOH.",
+                "explanation": "Étape 4 — Calculer : la formule brute est $\\text{C}_{16}\\text{H}_{32}\\text{O}_2$ (15 + 1 carbones, 31 + 1 hydrogènes, 2 oxygènes). $M = 16 \\times 12 + 32 \\times 1 + 2 \\times 16 = 192 + 32 + 32 = 256$ g/mol.",
+                "answers": [
+                  {
+                    "content": "256",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le glycérol réagit avec trois molécules d'acide palmitique. Quels sont les deux produits de cette estérification ?",
+                "question_type": "multiple_correct_2",
+                "hint": "Écris : 1 glycérol + 3 acides gras donnent … + … ",
+                "explanation": "Étape 1 — Repérer : le glycérol a trois groupes OH. Chacun réagit avec un groupe COOH et libère une molécule d'eau. On obtient donc 1 triglycéride et 3 molécules d'eau. Le savon n'apparaît qu'avec une base, et l'éthanol n'intervient pas.",
+                "answers": [
+                  {
+                    "content": "Un triglycéride",
+                    "correct": true
+                  },
+                  {
+                    "content": "Trois molécules d'eau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Trois molécules de savon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Trois molécules d'éthanol",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La saponification d'un triglycéride",
+          "remember": "La **saponification** est la réaction d'un triglycéride avec une base forte : la soude $\\text{Na}^{+}$ + $\\text{H}\\text{O}^{-}$ ou la potasse $\\text{K}^{+}$ + $\\text{H}\\text{O}^{-}$. Elle donne du **glycérol** et des **carboxylates**, qui forment le **savon** (un savon est un mélange de carboxylates de sodium ou de potassium $\\text{R}\\text{C}\\text{O}\\text{O}\\text{Na}$, $\\text{R}\\text{C}\\text{O}\\text{O}\\text{K}$). Pour trois chaînes identiques : $\\text{C}_3\\text{H}_5(\\text{OCO}R)_3 + 3\\,(\\text{Na}^+ + \\text{HO}^-) \\rightarrow \\text{C}_3\\text{H}_5(\\text{OH})_3 + 3\\,(R\\text{COO}^- + \\text{Na}^+)$. Une mole de triglycéride consomme 3 moles d'ions $\\text{H}\\text{O}^{-}$ et forme 3 moles de carboxylate. Cette réaction est **lente** à froid, d'où le chauffage, et **totale** : elle ne s'arrête pas avant la disparition du réactif limitant, contrairement à l'hydrolyse acide, lente et limitée. Elle est totale car l'ion carboxylate ne réagit pas avec le glycérol.",
+          "method": [
+            "Identifier le triglycéride (ses chaînes R) et la base utilisée, soude ou potasse.",
+            "Écrire les réactifs : le triglycéride et trois fois les ions de la base, par exemple $3\\,(\\text{Na}^+ + \\text{HO}^-)$.",
+            "Écrire les produits : le glycérol et trois carboxylates $\\text{R-COO}^-$ accompagnés de leurs ions $\\text{Na}^+$ ou $\\text{K}^+$.",
+            "Vérifier le bilan : mêmes atomes et mêmes charges des deux côtés, puis somme des masses molaires égale."
+          ],
+          "example": {
+            "statement": "Écrire l'équation de la saponification de la tristéarine $\\text{C}_3\\text{H}_5(\\text{OCOC}_{17}\\text{H}_{35})_3$ ($M = 890$ g/mol) par la soude et vérifier le bilan de masse. Données : $M(\\text{NaOH}) = 40$, $M(\\text{glycérol}) = 92$, $M(\\text{stéarate de sodium}) = 306$ g/mol.",
+            "steps": [
+              "Identifier : le triglycéride est la tristéarine, de chaîne $\\text{R} = \\text{C}_{17}\\text{H}_{35}$ ; la base est la soude $\\text{Na}^+ + \\text{HO}^-$.",
+              "Écrire les réactifs : $\\text{C}_3\\text{H}_5(\\text{OCOC}_{17}\\text{H}_{35})_3 + 3\\,(\\text{Na}^+ + \\text{HO}^-)$.",
+              "Écrire les produits : $\\text{C}_3\\text{H}_5(\\text{OH})_3 + 3\\,(\\text{C}_{17}\\text{H}_{35}\\text{COO}^- + \\text{Na}^+)$, glycérol et stéarate de sodium.",
+              "Vérifier : réactifs $890 + 3 \\times 40 = 1010$ g ; produits $92 + 3 \\times 306 = 1010$ g. Les masses sont égales et les charges aussi : l'équation est équilibrée."
+            ]
+          },
+          "pitfall": "Ne pas confondre saponification et hydrolyse d'un ester. L'hydrolyse est limitée, donne un acide gras et utilise de l'eau ; la saponification est totale, donne un carboxylate et utilise une base. Ne pas oublier non plus le coefficient 3. Contre-exemple : avec un seul $\\text{NaOH}$ pour la tripalmitine, les réactifs pèsent $806 + 40 = 846$ g et les produits $92 + 278 = 370$ g : le bilan est faux. Avec trois $\\text{NaOH}$ : $806 + 120 = 926$ g et $92 + 3 \\times 278 = 926$ g.",
+          "figure": null,
+          "exercise": {
+            "title": "Écrire et analyser une saponification",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu écris l'équation d'une saponification et tu vérifies son bilan. Masses molaires : tripalmitine 806, glycérol 92, palmitate de sodium 278, soude 40 g/mol.",
+            "questions": [
+              {
+                "content": "Quels sont les produits de la saponification de la tripalmitine par la soude ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le triglycéride est la tripalmitine, la base est la soude. Étape 3 — Écrire les produits : le glycérol et le carboxylate $\\text{C}_{15}\\text{H}_{31}\\text{COO}^-$ avec $\\text{Na}^+$, c'est-à-dire le palmitate de sodium. Glycérol et acide palmitique sont les produits de l'hydrolyse acide, pas de la saponification.",
+                "answers": [
+                  {
+                    "content": "Du glycérol et du palmitate de sodium",
+                    "correct": true
+                  },
+                  {
+                    "content": "Du glycérol et de l'acide palmitique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du palmitate de sodium et de l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "De l'éthanol et du palmitate de sodium",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La saponification d'un triglycéride par la soude est une réaction totale.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Écrire les produits : le carboxylate formé ne réagit pas avec le glycérol, il n'y a pas de réaction inverse. La réaction continue donc jusqu'à la disparition du réactif limitant : elle est totale. L'hydrolyse acide, elle, est limitée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien de moles d'ions $\\text{HO}^-$ réagissent avec 1 mole de triglycéride lors d'une saponification complète ?",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Écrire les réactifs : $\\text{triglycéride} + 3\\,(\\text{Na}^+ + \\text{HO}^-)$. Chacun des trois groupes ester consomme un ion $\\text{HO}^-$, donc 3 mol pour 1 mol de triglycéride. Répondre 1 mol est le piège classique : on oublie le coefficient 3.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour la saponification de la tripalmitine ($M = 806$ g/mol) par la soude ($M = 40$ g/mol), les produits sont le glycérol ($M = 92$ g/mol) et 3 palmitate de sodium ($M = 278$ g/mol chacun). Calcule la masse des produits formés à partir de 1 mol de tripalmitine, en grammes.",
+                "question_type": "numeric",
+                "unit": "g",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Vérifier le bilan : masse des réactifs $806 + 3 \\times 40 = 926$ g. Masse des produits $92 + 3 \\times 278 = 92 + 834 = 926$ g. Les masses sont égales : la masse se conserve.",
+                "answers": [
+                  {
+                    "content": "926",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La saponification d'un triglycéride par la potasse donne un carboxylate de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Écrire les produits : la base est la potasse $\\text{K}^+ + \\text{HO}^-$ ; les ions qui accompagnent le carboxylate sont donc les ions $\\text{K}^+$. Le savon est un carboxylate de potassium. Avec la soude, c'est un carboxylate de sodium.",
+                "answers": [
+                  {
+                    "content": "potassium",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle équation décrit correctement la saponification d'un triglycéride par la soude ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire les réactifs : 3 ions $\\text{HO}^-$ pour 1 triglycéride. Étape 3 — Écrire les produits : 1 glycérol et 3 carboxylates. Étape 4 — Vérifier : trois groupes ester donnent trois carboxylates. L'équation avec trois molécules d'eau est l'hydrolyse, limitée ; les équations avec 1 ion $\\text{HO}^-$ ou 3 glycérol ne respectent pas la conservation des atomes.",
+                "answers": [
+                  {
+                    "content": "1 triglycéride + 3 ions $\\text{HO}^-$ donnent 1 glycérol + 3 ions carboxylate",
+                    "correct": true
+                  },
+                  {
+                    "content": "1 triglycéride + 1 ion $\\text{HO}^-$ donnent 1 glycérol + 1 ion carboxylate",
+                    "correct": false
+                  },
+                  {
+                    "content": "1 triglycéride + 3 molécules d'eau donnent 1 glycérol + 3 acides gras",
+                    "correct": false
+                  },
+                  {
+                    "content": "1 triglycéride + 3 ions $\\text{HO}^-$ donnent 3 glycérol + 1 ion carboxylate",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Pour 1 mole de triglycéride, la saponification suit toujours les mêmes proportions.",
+            "questions": [
+              {
+                "content": "Dans la saponification, 1 mol de triglycéride réagit avec ___ mol d'ions $\\text{HO}^-$ et forme ___ mol de glycérol et ___ mol de carboxylate.",
+                "question_type": "select",
+                "hint": "Un triglycéride possède 3 groupes ester.",
+                "explanation": "Étape 2 — Écrire les réactifs : 1 triglycéride + 3 ions $\\text{HO}^-$. Étape 3 — Écrire les produits : 1 glycérol + 3 carboxylates, un par groupe ester. Étape 4 — Vérifier : 3 groupes ester consommés, 3 carboxylates formés.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "3",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "2",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 2
+                  },
+                  {
+                    "content": "1",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "2",
+                    "correct": false,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Calcule la masse molaire du stéarate de potassium $\\text{C}_{17}\\text{H}_{35}\\text{COOK}$ (C = 12, H = 1, O = 16, K = 39 g/mol).",
+                "question_type": "numeric",
+                "unit": "g/mol",
+                "tolerance": 0,
+                "hint": "Le stéarate compte 18 carbones : 17 dans la chaîne et 1 dans COO.",
+                "explanation": "Étape 4 — Vérifier avec les masses molaires : la formule brute est $\\text{C}_{18}\\text{H}_{35}\\text{O}_2\\text{K}$. $M = 18 \\times 12 + 35 + 2 \\times 16 + 39 = 216 + 35 + 32 + 39 = 322$ g/mol.",
+                "answers": [
+                  {
+                    "content": "322",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La potasse est utilisée pour saponifier un corps gras. Quel est le savon obtenu ?",
+                "question_type": "single_choice",
+                "hint": "Cherche l'ion métallique de la base.",
+                "explanation": "Étape 1 — Identifier la base : la potasse $\\text{K}^+ + \\text{HO}^-$. Étape 3 — Écrire les produits : les carboxylates sont accompagnés d'ions $\\text{K}^+$ ; le savon de potassium est mou, celui de sodium est dur. L'acide gras est un produit d'hydrolyse acide.",
+                "answers": [
+                  {
+                    "content": "Un savon de potassium, mou",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un savon de sodium, dur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du glycérol seul",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un acide gras",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Fabriquer un savon : reflux et relargage",
+          "remember": "On fabrique un savon en chauffant un corps gras avec une solution concentrée de soude ou de potasse. L'**éthanol** est un solvant commun : l'huile et la solution aqueuse ne se mélangent pas, l'éthanol les met en contact. Le **chauffage à reflux** accélère la réaction lente sans perdre de matière : un réfrigérant condense les vapeurs, qui retombent dans le ballon. Le **relargage** consiste à verser le mélange refroidi dans de l'eau salée (chlorure de sodium) : le savon y est très peu soluble, il précipite ; le glycérol reste dissous. On filtre, on rince, on sèche. Le savon de **sodium** est **dur**, le savon de **potassium** est **mou**. En Côte d'Ivoire, les savonneries industrielles utilisent l'huile de palme et la soude ; l'artisanat utilise des corps gras comme l'huile de palme ou le beurre de karité avec une potasse traditionnelle tirée de cendres de végétaux.",
+          "method": [
+            "Mélanger dans un ballon le corps gras, la solution concentrée de soude ou de potasse et l'éthanol.",
+            "Chauffer à reflux : monter un réfrigérant à eau sur le ballon et chauffer plusieurs minutes.",
+            "Relarguer : verser le mélange refroidi dans de l'eau salée pour faire précipiter le savon.",
+            "Filtrer le savon solide, puis le rincer et le sécher."
+          ],
+          "example": {
+            "statement": "Un élève prépare un savon avec 10 mL d'huile de palme, 10 mL d'éthanol et 20 mL de solution concentrée de soude. Décrire sa démarche et dire à quoi sert chaque étape.",
+            "steps": [
+              "Mélanger : l'élève verse l'huile, la soude et l'éthanol dans le ballon ; l'éthanol rend le mélange homogène pour que les réactifs se rencontrent.",
+              "Chauffer à reflux : il monte le réfrigérant et chauffe plusieurs minutes ; la saponification, lente, est accélérée et les vapeurs condensées retombent dans le ballon.",
+              "Relarguer : il verse le mélange refroidi dans de l'eau salée ; le savon, peu soluble dans l'eau salée, précipite et le glycérol reste dissous.",
+              "Filtrer : il recueille le savon solide sur le filtre, le rince avec un peu d'eau froide puis le laisse sécher."
+            ]
+          },
+          "pitfall": "Ne pas croire que le relargage fabrique du savon. Le savon est déjà formé dans le ballon pendant le reflux ; l'eau salée sert seulement à le séparer. Contre-exemple : si le ballon contient 0,300 mol de palmitate de sodium avant le relargage, on ne peut jamais récupérer plus de $0{,}300 \\times 278 = 83{,}4$ g de savon, quelle que soit la quantité d'eau salée versée.",
+          "figure": "etapes-fabrication",
+          "exercise": {
+            "title": "Les étapes de la fabrication d'un savon",
+            "exercise_type": "fixation",
+            "figure": "etapes-fabrication",
+            "statement": "Dans cet exercice, tu justifies chaque étape de la fabrication d'un savon avec la méthode de la fiche : mélanger, chauffer à reflux, relarguer, filtrer.",
+            "questions": [
+              {
+                "content": "Quel est le rôle de l'éthanol dans le mélange d'huile et de solution de soude ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Mélanger : l'huile et la solution aqueuse de soude ne sont pas miscibles, elles forment deux couches. L'éthanol se mélange aux deux : il joue le rôle de solvant commun et permet aux réactifs de se rencontrer. Faire précipiter le savon est le rôle de l'eau salée, et condenser les vapeurs celui du réfrigérant.",
+                "answers": [
+                  {
+                    "content": "Il est un solvant commun qui met l'huile et la soude en contact",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il fait précipiter le savon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il condense les vapeurs dans le ballon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il réagit avec la soude pour former le savon",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le chauffage à reflux permet de chauffer longtemps sans perdre les vapeurs du mélange.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chauffer à reflux : le réfrigérant à eau condense les vapeurs, qui retombent dans le ballon. La quantité de matière reste la même et la réaction, lente, est accélérée par la chaleur. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les quatre étapes de la fabrication du savon.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Mélanger : on prépare le mélange. Étape 2 — Chauffer à reflux : la saponification a lieu. Étape 3 — Relarguer : l'eau salée fait précipiter le savon formé. Étape 4 — Filtrer : on sépare, rince et sèche le solide. Le relargage ne peut pas avoir lieu avant le reflux, car le savon n'existe pas encore.",
+                "answers": [
+                  {
+                    "content": "Mélanger l'huile, la soude et l'éthanol dans un ballon."
+                  },
+                  {
+                    "content": "Chauffer à reflux avec un réfrigérant."
+                  },
+                  {
+                    "content": "Verser le mélange refroidi dans de l'eau salée."
+                  },
+                  {
+                    "content": "Filtrer, rincer et sécher le savon."
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi verse-t-on le mélange dans de l'eau salée plutôt que dans de l'eau pure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Relarguer : dans l'eau pure, le savon reste en partie dissous, on le perd. Dans l'eau salée, il est très peu soluble : il précipite et peut être filtré (Étape 4). Le glycérol, lui, reste dissous dans le filtrat. L'eau salée ne fait pas avancer la réaction : celle-ci est terminée.",
+                "answers": [
+                  {
+                    "content": "Le savon est très peu soluble dans l'eau salée : il précipite et on le récupère",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'eau salée continue la saponification",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau salée dissout le glycérol et le savon",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau salée neutralise l'éthanol",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un savon fabriqué avec de la soude est un savon ___ (dur ou mou).",
+                "question_type": "fill_blank",
+                "explanation": "Rappel de la fiche : le savon de sodium, obtenu avec la soude, est dur ; le savon de potassium, obtenu avec la potasse, est mou. Ce choix se fait à l'Étape 1 — Mélanger, quand on choisit la base.",
+                "answers": [
+                  {
+                    "content": "dur",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Avant le relargage, un ballon contient 0,300 mol de palmitate de sodium. Quelle quantité de savon peut-on récupérer au maximum après relargage et filtration ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Relarguer : l'eau salée sépare le savon déjà formé, elle n'en crée pas. Étape 4 — Filtrer : on récupère au mieux les 0,300 mol, en pratique un peu moins à cause des pertes. Dire que le relargage ajoute du savon est l'erreur de la fiche.",
+                "answers": [
+                  {
+                    "content": "Au plus 0,300 mol",
+                    "correct": true
+                  },
+                  {
+                    "content": "0,300 mol de plus que dans le ballon",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,900 mol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une quantité qui dépend de la masse de sel ajoutée",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu analyses un montage de fabrication de savon.",
+            "questions": [
+              {
+                "content": "Quels sont les deux avantages du chauffage à reflux ?",
+                "question_type": "multiple_correct_2",
+                "hint": "Pense à la température et au réfrigérant.",
+                "explanation": "Étape 2 — Chauffer à reflux : la chaleur accélère la saponification, lente, et le réfrigérant condense les vapeurs qui retombent dans le ballon. Le reflux ne rend pas la réaction réversible : elle reste totale.",
+                "answers": [
+                  {
+                    "content": "Il accélère la réaction lente",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il évite de perdre les vapeurs du mélange",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il rend la réaction réversible",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il remplace l'eau salée du relargage",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'opération qui consiste à verser le mélange refroidi dans de l'eau salée pour séparer le savon s'appelle le ___.",
+                "question_type": "fill_blank",
+                "hint": "Le sel fait « sortir » le savon de la solution.",
+                "explanation": "Étape 3 — Relarguer : le sel rend le savon peu soluble, il « sort » de la solution et précipite. C'est le relargage.",
+                "answers": [
+                  {
+                    "content": "relargage",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au cours du relargage, le glycérol précipite et reste sur le filtre avec le savon.",
+                "question_type": "true_false",
+                "hint": "Le glycérol est très soluble dans l'eau.",
+                "explanation": "Étape 3 — Relarguer : le glycérol reste dissous dans l'eau salée. Étape 4 — Filtrer : il passe dans le filtrat, tandis que le savon solide reste sur le filtre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Bilan de matière et rendement d'une saponification",
+          "remember": "Dans l'équation $\\text{C}_3\\text{H}_5(\\text{OCO}R)_3 + 3\\,(\\text{Na}^+ + \\text{HO}^-) \\rightarrow \\text{C}_3\\text{H}_5(\\text{OH})_3 + 3\\,(R\\text{COO}^- + \\text{Na}^+)$, les quantités sont dans les proportions 1 : 3 : 1 : 3. Quantité de matière : $n = \\dfrac{m}{M}$. Le **réactif limitant** est celui qui disparaît en premier : on compare $n(\\text{triglycéride})$ à $\\dfrac{n(\\text{HO}^-)}{3}$ ; le plus petit désigne le limitant. La quantité de savon formée vaut 3 fois la quantité de triglycéride qui réagit. La masse théorique est $m_{th} = n \\times M$. Le **rendement** est $r = \\dfrac{m_{exp}}{m_{th}} \\times 100$, en pourcentage, toujours inférieur ou égal à 100 %. Un rendement inférieur à 100 % vient des pertes (filtrat, rinçage), pas d'une réaction limitée.",
+          "method": [
+            "Écrire l'équation et relever les coefficients : 1 triglycéride, 3 ions $\\text{HO}^-$, 1 glycérol, 3 carboxylates.",
+            "Calculer les quantités de matière initiales avec $n = \\dfrac{m}{M}$.",
+            "Déterminer le réactif limitant : comparer $n(\\text{triglycéride})$ et $\\dfrac{n(\\text{HO}^-)}{3}$.",
+            "Calculer la quantité de savon, $n_{savon} = 3 \\times n(\\text{triglycéride qui réagit})$, puis la masse théorique $m_{th} = n \\times M$.",
+            "Calculer le rendement $r = \\dfrac{m_{exp}}{m_{th}} \\times 100$."
+          ],
+          "example": {
+            "statement": "On fait réagir 80,6 g de tripalmitine ($M = 806$ g/mol) avec 18 g de soude ($M = 40$ g/mol). Après relargage, filtration et séchage, on récupère 75 g de palmitate de sodium ($M = 278$ g/mol). Calculer le rendement.",
+            "steps": [
+              "Écrire l'équation : $\\text{tripalmitine} + 3\\,(\\text{Na}^+ + \\text{HO}^-) \\rightarrow \\text{glycérol} + 3\\,\\text{palmitate de sodium}$ ; coefficients 1, 3, 1, 3.",
+              "Calculer : $n(\\text{tripalmitine}) = \\dfrac{80{,}6}{806} = 0{,}100$ mol ; $n(\\text{NaOH}) = \\dfrac{18}{40} = 0{,}45$ mol.",
+              "Déterminer le limitant : $n(\\text{tripalmitine}) = 0{,}100$ mol et $\\dfrac{n(\\text{NaOH})}{3} = 0{,}15$ mol. Le plus petit est 0,100 : la tripalmitine est le réactif limitant.",
+              "Calculer le savon : $n_{savon} = 3 \\times 0{,}100 = 0{,}300$ mol, puis $m_{th} = 0{,}300 \\times 278 = 83{,}4$ g.",
+              "Calculer le rendement : $r = \\dfrac{75}{83{,}4} \\times 100 \\approx 90$ %."
+            ]
+          },
+          "pitfall": "Ne pas oublier le facteur 3 entre la quantité de triglycéride et celle de savon. Contre-exemple : avec $n(\\text{tripalmitine}) = 0{,}100$ mol, écrire $n_{savon} = 0{,}100$ mol donne $m_{th} = 0{,}100 \\times 278 = 27{,}8$ g ; avec 75 g récupérés, le rendement serait $\\dfrac{75}{27{,}8} \\times 100 \\approx 270$ %, ce qui est impossible. Un rendement supérieur à 100 % signale toujours une erreur de calcul.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une masse de savon et un rendement",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode du bilan de matière à une saponification de la tripalmitine par la soude. Masses molaires : tripalmitine 806, soude 40, palmitate de sodium 278 g/mol.",
+            "questions": [
+              {
+                "content": "On dispose de 40,3 g de tripalmitine ($M = 806$ g/mol). Calcule sa quantité de matière.",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0.001,
+                "explanation": "Étape 2 — Calculer les quantités de matière : $n = \\dfrac{m}{M} = \\dfrac{40{,}3}{806} = 0{,}05$ mol.",
+                "answers": [
+                  {
+                    "content": "0.05",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On dispose de 12 g de soude NaOH ($M = 40$ g/mol). Calcule sa quantité de matière.",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0.001,
+                "explanation": "Étape 2 — Calculer les quantités de matière : $n = \\dfrac{m}{M} = \\dfrac{12}{40} = 0{,}30$ mol.",
+                "answers": [
+                  {
+                    "content": "0.3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On fait réagir 0,05 mol de tripalmitine avec 0,30 mol de soude. Quel est le réactif limitant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire l'équation : 1 tripalmitine pour 3 NaOH. Étape 3 — Déterminer le limitant : $n(\\text{tripalmitine}) = 0{,}05$ mol et $\\dfrac{n(\\text{NaOH})}{3} = \\dfrac{0{,}30}{3} = 0{,}10$ mol. Le plus petit est 0,05 : la tripalmitine est limitante. Comparer directement 0,05 et 0,30 oublie le coefficient 3, et comparer les masses (40,3 g et 12 g) n'a pas de sens : on compare des quantités de matière.",
+                "answers": [
+                  {
+                    "content": "La tripalmitine",
+                    "correct": true
+                  },
+                  {
+                    "content": "La soude",
+                    "correct": false
+                  },
+                  {
+                    "content": "La soude, car sa masse (12 g) est plus petite que celle de la tripalmitine (40,3 g)",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas savoir sans connaître les masses",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "0,05 mol de tripalmitine est le réactif limitant. Calcule la masse théorique de palmitate de sodium formé ($M = 278$ g/mol).",
+                "question_type": "numeric",
+                "unit": "g",
+                "tolerance": 0.1,
+                "explanation": "Étape 4 — Calculer la quantité de savon : $n_{savon} = 3 \\times 0{,}05 = 0{,}15$ mol, puis $m_{th} = n \\times M = 0{,}15 \\times 278 = 41{,}7$ g.",
+                "answers": [
+                  {
+                    "content": "41.7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La masse théorique de palmitate de sodium est 41,7 g. On récupère 33,36 g de savon sec. Calcule le rendement, en pourcentage.",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0.5,
+                "explanation": "Étape 5 — Calculer le rendement : $r = \\dfrac{m_{exp}}{m_{th}} \\times 100 = \\dfrac{33{,}36}{41{,}7} \\times 100 = 80$ %.",
+                "answers": [
+                  {
+                    "content": "80",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève trouve un rendement de 270 % pour sa saponification. Que conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 5 — Calculer le rendement : $r = \\dfrac{m_{exp}}{m_{th}} \\times 100$ ne peut pas dépasser 100 %, car on ne récupère pas plus que la quantité théorique. 270 % indique une erreur, par exemple l'oubli du facteur 3 à l'Étape 4, qui divise $m_{th}$ par 3. Un excès de soude ne change pas la masse théorique, fixée par le limitant.",
+                "answers": [
+                  {
+                    "content": "Il a fait une erreur de calcul : un rendement ne dépasse pas 100 %",
+                    "correct": true
+                  },
+                  {
+                    "content": "La réaction est très efficace",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réaction est limitée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le rendement est correct si la soude est en excès",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu calcules les quantités de matière d'une saponification de la tristéarine.",
+            "questions": [
+              {
+                "content": "On fait réagir 89 g de tristéarine ($M = 890$ g/mol) avec un excès de soude. Quantité de tristéarine : ___ mol. Quantité maximale de stéarate de sodium formé : ___ mol.",
+                "question_type": "numeric",
+                "unit": "mol",
+                "tolerance": 0.001,
+                "hint": "Pense au facteur 3 pour le savon.",
+                "explanation": "Étape 2 — Calculer : $n(\\text{tristéarine}) = \\dfrac{89}{890} = 0{,}100$ mol. Étape 3 — Déterminer le limitant : la soude est en excès, donc la tristéarine est limitante. Étape 4 — Calculer le savon : $n_{savon} = 3 \\times 0{,}100 = 0{,}300$ mol.",
+                "answers": [
+                  {
+                    "content": "0.1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0.3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule la masse théorique de stéarate de sodium ($M = 306$ g/mol) pour 0,300 mol de savon.",
+                "question_type": "numeric",
+                "unit": "g",
+                "tolerance": 0.1,
+                "hint": "Multiplie la quantité par la masse molaire.",
+                "explanation": "Étape 4 — Calculer la masse théorique : $m_{th} = n \\times M = 0{,}300 \\times 306 = 91{,}8$ g.",
+                "answers": [
+                  {
+                    "content": "91.8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un rendement de 85 % signifie que la saponification n'est pas totale.",
+                "question_type": "true_false",
+                "hint": "Où peut-on perdre du savon ?",
+                "explanation": "Étape 5 — Calculer le rendement : la saponification est totale, la réaction ne s'arrête que quand le limitant a disparu. Un rendement de 85 % vient de pertes de savon (filtrat, rinçage), pas d'un équilibre chimique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Pouvoir détergent du savon et eaux dures",
+          "remember": "L'ion carboxylate $\\text{R}\\text{-}\\text{C}\\text{O}\\text{O}^{-}$ est **amphiphile**. Sa **tête** $\\text{C}\\text{O}\\text{O}^{-}$ est **hydrophile** (attirée par l'eau). Sa **queue**, la chaîne carbonée R, est **hydrophobe** (fuit l'eau) et **lipophile** (attirée par les graisses). Dans l'eau, les ions s'assemblent en **micelles** autour d'une salissure grasse : les queues plongent dans la graisse, les têtes restent au contact de l'eau. La graisse, dispersée en petites gouttes, est emportée au rinçage. Dans une **eau dure**, riche en ions $\\text{Ca}^{2+}$ et $\\text{Mg}^{2+}$, il se forme un solide : $2\\,\\text{RCOO}^- + \\text{Ca}^{2+} \\rightarrow (\\text{RCOO})_2\\text{Ca}$. Le savon est consommé et l'eau mousse peu. En **milieu acide** (ions $\\text{H}_{3}\\text{O}^{+}$), $\\text{RCOO}^- + \\text{H}_3\\text{O}^+ \\rightarrow \\text{RCOOH} + \\text{H}_2\\text{O}$ : l'acide gras est insoluble, le savon perd son pouvoir détergent.",
+          "method": [
+            "Repérer dans l'ion carboxylate la tête $\\text{COO}^-$ et la queue carbonée R.",
+            "Associer à chaque partie sa nature : tête hydrophile, queue hydrophobe et lipophile.",
+            "Décrire l'orientation des ions face à la graisse : queues dans la graisse, têtes dans l'eau (micelle).",
+            "Vérifier le milieu : eau dure (ions $\\text{Ca}^{2+}$, $\\text{Mg}^{2+}$) ou milieu acide (ions $\\text{H}_3\\text{O}^+$).",
+            "Conclure sur l'efficacité du savon : une réaction qui consomme les ions carboxylate fait baisser le pouvoir détergent."
+          ],
+          "example": {
+            "statement": "Une élève lave un pagne taché d'huile de palme avec du palmitate de sodium, dans une eau de puits riche en ions $\\text{Ca}^{2+}$. Expliquer comment le savon agit et ce que l'eau dure change.",
+            "steps": [
+              "Repérer : l'ion palmitate $\\text{C}_{15}\\text{H}_{31}\\text{COO}^-$ a pour tête $\\text{COO}^-$ et pour queue la chaîne $\\text{C}_{15}\\text{H}_{31}$.",
+              "Associer : la tête $\\text{COO}^-$ est hydrophile ; la chaîne $\\text{C}_{15}\\text{H}_{31}$ est hydrophobe et lipophile, donc attirée par l'huile.",
+              "Décrire : les queues plongent dans la tache d'huile, les têtes sont dans l'eau : des micelles se forment et la graisse part avec l'eau de rinçage.",
+              "Vérifier : l'eau est dure, elle contient des ions $\\text{Ca}^{2+}$, qui réagissent avec le savon : $2\\,\\text{C}_{15}\\text{H}_{31}\\text{COO}^- + \\text{Ca}^{2+} \\rightarrow (\\text{C}_{15}\\text{H}_{31}\\text{COO})_2\\text{Ca}$ (solide).",
+              "Conclure : une partie du savon est consommée en solide : il en reste moins pour former des micelles, l'eau mousse peu et le lavage est moins efficace."
+            ]
+          },
+          "pitfall": "Ne pas confondre la tête et la queue. Contre-exemple : l'ion stéarate $\\text{C}_{17}\\text{H}_{35}\\text{COO}^-$ a une queue de 17 carbones et une tête d'un seul groupe $\\text{COO}^-$. La grande partie de l'ion est donc hydrophobe et lipophile ; seule la tête $\\text{COO}^-$ aime l'eau. La queue va dans la graisse, jamais la tête.",
+          "figure": "ion-ethanoate",
+          "exercise": {
+            "title": "Comprendre l'action du savon et des eaux dures",
+            "exercise_type": "fixation",
+            "figure": "ion-ethanoate",
+            "statement": "Dans cet exercice, tu décris l'action d'un savon sur une graisse et l'effet d'une eau dure avec la méthode de la fiche : repérer, associer, décrire, vérifier, conclure.",
+            "questions": [
+              {
+                "content": "Relie chaque élément à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : la tête est $\\text{COO}^-$, la queue la chaîne R. Étape 2 — Associer : tête hydrophile, queue hydrophobe et lipophile. Étape 3 — Décrire : la micelle regroupe les queues au centre et les têtes vers l'eau.",
+                "answers": [
+                  {
+                    "content": "Tête carboxylate",
+                    "match": "Hydrophile : attirée par l'eau"
+                  },
+                  {
+                    "content": "Queue carbonée",
+                    "match": "Hydrophobe et lipophile : attirée par les graisses"
+                  },
+                  {
+                    "content": "Micelle",
+                    "match": "Amas d'ions, queues vers l'intérieur, têtes vers l'eau"
+                  }
+                ]
+              },
+              {
+                "content": "Dans une micelle qui entoure une gouttelette d'huile, quelle partie des ions est tournée vers l'eau ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Décrire l'orientation : les queues lipophiles plongent dans la graisse, les têtes hydrophiles restent au contact de l'eau. Les queues ne peuvent pas être vers l'eau : elles la fuient.",
+                "answers": [
+                  {
+                    "content": "Les têtes carboxylate",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les queues carbonées",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les têtes et les queues indifféremment",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune partie : les ions restent séparés de l'eau",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ion carboxylate est dit amphiphile car il a une partie hydrophile et une partie lipophile.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Associer : la tête $\\text{COO}^-$ est hydrophile, la chaîne carbonée est hydrophobe et lipophile. Avoir les deux natures dans le même ion, c'est être amphiphile.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un savon de palmitate de sodium est utilisé dans une eau dure contenant des ions calcium $\\text{Ca}^{2+}$. Que se forme-t-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Vérifier le milieu : l'eau est dure, elle contient $\\text{Ca}^{2+}$. Il se forme $2\\,\\text{RCOO}^- + \\text{Ca}^{2+} \\rightarrow (\\text{RCOO})_2\\text{Ca}$, un solide. Étape 5 — Conclure : le savon est consommé, il y a moins de micelles. L'acide palmitique se forme en milieu acide, pas en eau dure.",
+                "answers": [
+                  {
+                    "content": "Un solide, le palmitate de calcium",
+                    "correct": true
+                  },
+                  {
+                    "content": "De l'acide palmitique dissous",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du glycérol",
+                    "correct": false
+                  },
+                  {
+                    "content": "Davantage de micelles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une eau dure contient des ions calcium $\\text{Ca}^{2+}$ et des ions ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Vérifier le milieu : une eau dure est riche en ions $\\text{Ca}^{2+}$ et en ions magnésium $\\text{Mg}^{2+}$. Ces deux ions précipitent avec les ions carboxylate du savon.",
+                "answers": [
+                  {
+                    "content": "magnésium",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle partie de l'ion stéarate $\\text{C}_{17}\\text{H}_{35}\\text{COO}^-$ pénètre dans une tache de graisse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : tête $\\text{COO}^-$ et queue $\\text{C}_{17}\\text{H}_{35}$. Étape 2 — Associer : la queue est lipophile, la tête hydrophile. Étape 3 — Décrire : la queue plonge dans la graisse. Confondre tête et queue est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "La chaîne $\\text{C}_{17}\\text{H}_{35}$, hydrophobe et lipophile",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le groupe $\\text{COO}^-$, hydrophile",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ion tout entier, sans orientation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune partie : la graisse repousse l'ion",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu décris la structure d'une micelle de savon.",
+            "questions": [
+              {
+                "content": "Dans une micelle, les ___ sont tournées vers l'eau et les ___ sont au centre, avec la graisse.",
+                "question_type": "select",
+                "hint": "La queue aime les graisses.",
+                "explanation": "Étape 3 — Décrire l'orientation : les têtes hydrophiles restent au contact de l'eau, les queues lipophiles se regroupent au centre avec la graisse.",
+                "answers": [
+                  {
+                    "content": "têtes hydrophiles",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "queues lipophiles",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "queues lipophiles",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "têtes hydrophiles",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Dans le solide $(\\text{RCOO})_2\\text{Ca}$ formé en eau dure, combien d'ions carboxylate sont associés à un ion $\\text{Ca}^{2+}$ ?",
+                "question_type": "numeric",
+                "unit": "ions",
+                "tolerance": 0,
+                "hint": "Compte les charges pour obtenir un ensemble neutre.",
+                "explanation": "Étape 4 — Vérifier le milieu : l'ion $\\text{Ca}^{2+}$ porte 2 charges positives, chaque carboxylate une charge négative. Il faut 2 carboxylates pour que le solide soit neutre.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que se passe-t-il quand on ajoute un acide (ions $\\text{H}_3\\text{O}^+$) à une solution de savon ?",
+                "question_type": "single_choice",
+                "hint": "Écris la réaction de l'ion carboxylate avec $\\text{H}_3\\text{O}^+$.",
+                "explanation": "Étape 4 — Vérifier le milieu : en présence de $\\text{H}_3\\text{O}^+$, $\\text{RCOO}^- + \\text{H}_3\\text{O}^+ \\rightarrow \\text{RCOOH} + \\text{H}_2\\text{O}$. Étape 5 — Conclure : l'acide gras est insoluble, il n'y a plus d'ions carboxylate pour former des micelles.",
+                "answers": [
+                  {
+                    "content": "L'ion carboxylate se transforme en acide gras insoluble : le savon perd son pouvoir détergent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le savon forme davantage de micelles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le savon se transforme en triglycéride",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien : le savon agit de la même façon",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une savonnerie artisanale et l'huile de palme",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Dans une savonnerie artisanale de Côte d'Ivoire, une coopérative fabrique du savon à partir d'huile de palme. On modélise l'huile par la tripalmitine $\\text{C}_{51}\\text{H}_{98}\\text{O}_6$ et on la fait réagir avec de la soude. Masses molaires atomiques : C = 12, H = 1, O = 16, Na = 23 g/mol.",
+          "questions": [
+            {
+              "content": "La tripalmitine est le triglycéride de l'acide palmitique $\\text{C}_{15}\\text{H}_{31}\\text{COOH}$. Elle est un :",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer le glycérol : ses trois groupes OH sont estérifiés. Étape 2 — Identifier les acides gras : les trois chaînes sont $\\text{C}_{15}\\text{H}_{31}$, donc trois acides palmitiques. La tripalmitine est un triester du glycérol et de trois acides palmitiques. Le sel de sodium est le savon, pas l'huile.",
+              "answers": [
+                {
+                  "content": "Triester du glycérol et de trois acides palmitiques",
+                  "correct": true
+                },
+                {
+                  "content": "Sel de sodium de l'acide palmitique",
+                  "correct": false
+                },
+                {
+                  "content": "Ester du glycérol et d'un seul acide palmitique",
+                  "correct": false
+                },
+                {
+                  "content": "Acide carboxylique à trois fonctions acide",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule la masse molaire de la tripalmitine $\\text{C}_{51}\\text{H}_{98}\\text{O}_6$ (C = 12, H = 1, O = 16 g/mol).",
+              "question_type": "numeric",
+              "unit": "g/mol",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Calculer la masse molaire : $M = 51 \\times 12 + 98 \\times 1 + 6 \\times 16 = 612 + 98 + 96 = 806$ g/mol. Chaque terme est le nombre d'atomes multiplié par sa masse molaire atomique.",
+              "answers": [
+                {
+                  "content": "806",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle équation décrit la saponification de la tripalmitine par la soude ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : le triglycéride est la tripalmitine, la base est la soude. Étape 2 — Écrire les réactifs : 1 tripalmitine et 3 $\\text{NaOH}$. Étape 3 — Écrire les produits : 1 glycérol et 3 palmitate de sodium. Étape 4 — Vérifier : $806 + 120 = 926$ g et $92 + 3 \\times 278 = 926$ g. La proposition avec 3 $\\text{H}_2\\text{O}$ est l'hydrolyse, limitée ; celles avec 1 $\\text{NaOH}$ ou 3 glycérol ne conservent pas les atomes.",
+              "answers": [
+                {
+                  "content": "Tripalmitine + 3 $\\text{NaOH}$ donnent glycérol + 3 palmitate de sodium",
+                  "correct": true
+                },
+                {
+                  "content": "Tripalmitine + $\\text{NaOH}$ donnent glycérol + palmitate de sodium",
+                  "correct": false
+                },
+                {
+                  "content": "Tripalmitine + 3 $\\text{H}_2\\text{O}$ donnent glycérol + 3 acide palmitique",
+                  "correct": false
+                },
+                {
+                  "content": "Tripalmitine + 3 $\\text{NaOH}$ donnent 3 glycérol + palmitate de sodium",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On saponifie 403 g de tripalmitine ($M = 806$ g/mol) avec de la soude ($M = 40$ g/mol). Quelle masse minimale de soude, en grammes, faut-il pour saponifier toute la tripalmitine ?",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0.1,
+              "explanation": "Étape 1 — Relever les coefficients : 1 tripalmitine pour 3 NaOH. Étape 2 — Calculer : $n(\\text{tripalmitine}) = \\dfrac{403}{806} = 0{,}500$ mol. Il faut $n(\\text{NaOH}) = 3 \\times 0{,}500 = 1{,}50$ mol, soit $m = 1{,}50 \\times 40 = 60$ g. Oublier le facteur 3 donnerait 20 g, trop peu.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "403 g de tripalmitine (0,500 mol) sont saponifiés par un excès de soude. Calcule la masse théorique de palmitate de sodium ($M = 278$ g/mol).",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0.5,
+              "explanation": "Étape 3 — Déterminer le limitant : la soude est en excès, la tripalmitine est limitante. Étape 4 — Calculer le savon : $n_{savon} = 3 \\times 0{,}500 = 1{,}50$ mol, puis $m_{th} = 1{,}50 \\times 278 = 417$ g.",
+              "answers": [
+                {
+                  "content": "417",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le savon obtenu avec la soude est un savon mou.",
+              "question_type": "true_false",
+              "explanation": "Rappel : le savon de sodium, obtenu avec la soude, est dur ; le savon de potassium, obtenu avec la potasse, est mou. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Fabriquer un savon au laboratoire du lycée",
+          "exercise_type": "fixation",
+          "figure": "etapes-fabrication",
+          "statement": "Au laboratoire d'un lycée, des élèves fabriquent un savon à partir de tristéarine (modèle du beurre de karité, riche en acide stéarique) et de soude. Masses molaires : tristéarine 890, soude 40, stéarate de sodium 306 g/mol.",
+          "questions": [
+            {
+              "content": "Remets dans l'ordre les étapes du protocole.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Mélanger les réactifs avec l'éthanol. Étape 2 — Chauffer à reflux : la saponification a lieu. Étape 3 — Relarguer dans l'eau salée : le savon précipite. Étape 4 — Filtrer le solide, puis le rincer et le sécher. Chaque étape suppose la précédente : on ne peut pas relarguer un savon qui n'existe pas encore.",
+              "answers": [
+                {
+                  "content": "Mélanger la tristéarine, la soude et l'éthanol dans un ballon."
+                },
+                {
+                  "content": "Chauffer à reflux avec un réfrigérant à eau."
+                },
+                {
+                  "content": "Verser le mélange refroidi dans de l'eau salée."
+                },
+                {
+                  "content": "Filtrer le savon solide."
+                },
+                {
+                  "content": "Rincer et sécher le savon."
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément du protocole à son rôle.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Mélanger : l'éthanol est le solvant commun. Étape 2 — Chauffer à reflux : la chaleur accélère la réaction lente et le réfrigérant condense les vapeurs. Étape 3 — Relarguer : l'eau salée fait précipiter le savon, très peu soluble dans l'eau salée.",
+              "answers": [
+                {
+                  "content": "Réfrigérant à eau",
+                  "match": "Condenser les vapeurs qui retombent dans le ballon"
+                },
+                {
+                  "content": "Éthanol",
+                  "match": "Solvant commun de l'huile et de la soude"
+                },
+                {
+                  "content": "Eau salée",
+                  "match": "Faire précipiter le savon (relargage)"
+                },
+                {
+                  "content": "Chauffage",
+                  "match": "Accélérer la saponification, lente"
+                }
+              ]
+            },
+            {
+              "content": "On dispose de 89 g de tristéarine (0,100 mol) et de 15 g de soude (0,375 mol). Quel est le réactif limitant ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever les coefficients : 1 tristéarine pour 3 NaOH. Étape 2 — Quantités : 0,100 mol et 0,375 mol. Étape 3 — Déterminer le limitant : $n(\\text{tristéarine}) = 0{,}100$ mol et $\\dfrac{n(\\text{NaOH})}{3} = 0{,}125$ mol. Le plus petit est 0,100 : la tristéarine est limitante. Comparer 0,100 et 0,375 sans diviser par 3 donnerait le même résultat ici, mais pas toujours.",
+              "answers": [
+                {
+                  "content": "La tristéarine",
+                  "correct": true
+                },
+                {
+                  "content": "La soude",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun : les deux sont en quantités égales",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "89 g de tristéarine (0,100 mol) réagissent avec de la soude en excès suffisant. Calcule la masse théorique de stéarate de sodium ($M = 306$ g/mol).",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0.1,
+              "explanation": "Étape 4 — Calculer le savon : $n_{savon} = 3 \\times 0{,}100 = 0{,}300$ mol, puis $m_{th} = 0{,}300 \\times 306 = 91{,}8$ g.",
+              "answers": [
+                {
+                  "content": "91.8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La masse théorique de stéarate de sodium est 91,8 g. Les élèves récupèrent 73,5 g de savon sec. Calcule le rendement, en pourcentage.",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0.5,
+              "explanation": "Étape 5 — Calculer le rendement : $r = \\dfrac{m_{exp}}{m_{th}} \\times 100 = \\dfrac{73{,}5}{91{,}8} \\times 100 \\approx 80$ %. Le rendement est inférieur à 100 % à cause des pertes de savon dans le filtrat et au rinçage.",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi le chauffage se fait-il à reflux plutôt que dans un ballon ouvert ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Chauffer à reflux : dans un ballon ouvert, l'éthanol et l'eau s'évaporeraient et la composition changerait. Le réfrigérant condense les vapeurs, qui retombent dans le ballon. Faire précipiter le savon est le rôle du relargage (Étape 3), pas du reflux.",
+              "answers": [
+                {
+                  "content": "Le réfrigérant condense les vapeurs, qui retombent dans le ballon : pas de perte de matière",
+                  "correct": true
+                },
+                {
+                  "content": "Le reflux fait précipiter le savon",
+                  "correct": false
+                },
+                {
+                  "content": "Le reflux rend la saponification limitée",
+                  "correct": false
+                },
+                {
+                  "content": "Le reflux remplace l'éthanol",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un savon mou à la potasse et au beurre de karité",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Dans un village du nord de la Côte d'Ivoire, on fabrique un savon mou avec du beurre de karité et de la potasse tirée de cendres de végétaux. On modélise le beurre de karité par l'oléine $\\text{C}_{57}\\text{H}_{104}\\text{O}_6$, triglycéride de l'acide oléique, saponifiée par la potasse KOH. Masses molaires atomiques : C = 12, H = 1, O = 16, K = 39 g/mol ; $M(\\text{glycérol}) = 92$ g/mol.",
+          "questions": [
+            {
+              "content": "Calcule la masse molaire de l'oléine $\\text{C}_{57}\\text{H}_{104}\\text{O}_6$ (C = 12, H = 1, O = 16 g/mol).",
+              "question_type": "numeric",
+              "unit": "g/mol",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Calculer : $M = 57 \\times 12 + 104 \\times 1 + 6 \\times 16 = 684 + 104 + 96 = 884$ g/mol.",
+              "answers": [
+                {
+                  "content": "884",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Combien de moles d'oléate de potassium se forment à partir de 1 mol d'oléine, saponifiée complètement par la potasse ?",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever les coefficients : l'équation est $\\text{oléine} + 3\\,(\\text{K}^+ + \\text{HO}^-) \\rightarrow \\text{glycérol} + 3\\,(\\text{C}_{17}\\text{H}_{33}\\text{COO}^- + \\text{K}^+)$. Les proportions sont 1 : 3 : 1 : 3, donc 1 mol d'oléine donne 3 mol d'oléate de potassium. Répondre 1 oublie le coefficient 3.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la masse molaire de l'oléate de potassium $\\text{C}_{17}\\text{H}_{33}\\text{COOK}$ (C = 12, H = 1, O = 16, K = 39 g/mol).",
+              "question_type": "numeric",
+              "unit": "g/mol",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Calculer : la formule brute est $\\text{C}_{18}\\text{H}_{33}\\text{O}_2\\text{K}$. $M = 18 \\times 12 + 33 + 2 \\times 16 + 39 = 216 + 33 + 32 + 39 = 320$ g/mol.",
+              "answers": [
+                {
+                  "content": "320",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On fait réagir 88,4 g d'oléine (0,100 mol) avec 33,6 g de potasse ($M = 56$ g/mol, soit 0,600 mol). Quel est le réactif limitant ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Déterminer le limitant : $n(\\text{oléine}) = 0{,}100$ mol et $\\dfrac{n(\\text{KOH})}{3} = \\dfrac{0{,}600}{3} = 0{,}200$ mol. Le plus petit est 0,100 : l'oléine est limitante. Comparer les masses (33,6 g et 88,4 g) est le piège : on compare les quantités de matière divisées par les coefficients, et le limitant est celui qui disparaît en premier.",
+              "answers": [
+                {
+                  "content": "L'oléine",
+                  "correct": true
+                },
+                {
+                  "content": "La potasse",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun : les deux réagissent entièrement",
+                  "correct": false
+                },
+                {
+                  "content": "La potasse, car sa masse (33,6 g) est plus petite que celle de l'oléine (88,4 g)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "0,100 mol d'oléine est le réactif limitant. Calcule la masse théorique d'oléate de potassium ($M = 320$ g/mol).",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0.1,
+              "explanation": "Étape 4 — Calculer le savon : $n_{savon} = 3 \\times 0{,}100 = 0{,}300$ mol, puis $m_{th} = 0{,}300 \\times 320 = 96{,}0$ g.",
+              "answers": [
+                {
+                  "content": "96",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La masse théorique d'oléate de potassium est 96,0 g. On récupère 86,4 g de savon. Calcule le rendement, en pourcentage.",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0.5,
+              "explanation": "Étape 5 — Calculer le rendement : $r = \\dfrac{86{,}4}{96{,}0} \\times 100 = 90$ %.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "0,100 mol d'oléine réagit entièrement. Calcule la masse de glycérol formé ($M = 92$ g/mol).",
+              "question_type": "numeric",
+              "unit": "g",
+              "tolerance": 0.1,
+              "explanation": "Étape 4 — Calculer : l'équation donne 1 glycérol pour 1 oléine, donc $n(\\text{glycérol}) = 0{,}100$ mol et $m = 0{,}100 \\times 92 = 9{,}2$ g. Vérification : réactifs consommés $88{,}4 + 0{,}300 \\times 56 = 105{,}2$ g ; produits $96{,}0 + 9{,}2 = 105{,}2$ g.",
+              "answers": [
+                {
+                  "content": "9.2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le savon d'oléate de potassium est utilisé dans une eau riche en ions magnésium $\\text{Mg}^{2+}$. Quelle est la conséquence ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Vérifier le milieu : l'eau est dure, elle contient $\\text{Mg}^{2+}$. Il se forme $2\\,\\text{RCOO}^- + \\text{Mg}^{2+} \\rightarrow (\\text{RCOO})_2\\text{Mg}$, solide. Étape 5 — Conclure : les ions carboxylate sont consommés, il y a moins de micelles et un lavage moins efficace.",
+              "answers": [
+                {
+                  "content": "Une partie du savon précipite sous forme d'oléate de magnésium : le lavage est moins efficace",
+                  "correct": true
+                },
+                {
+                  "content": "Le savon forme plus de micelles",
+                  "correct": false
+                },
+                {
+                  "content": "Le savon se transforme en glycérol",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune conséquence",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une savonnerie industrielle d'Abidjan",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Une savonnerie industrielle d'Abidjan saponifie de l'huile de palme, modélisée par la tripalmitine $\\text{C}_{51}\\text{H}_{98}\\text{O}_6$ ($M = 806$ g/mol), avec de la soude. Un lot utilise 40,3 kg de tripalmitine et 7,2 kg de soude ($M = 40$ g/mol). Le palmitate de sodium a pour masse molaire 278 g/mol. Après relargage, filtration et séchage, l'usine récupère 37,5 kg de savon.",
+          "questions": [
+            {
+              "content": "Le savon formé a pour nom palmitate de ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Identifier : la base est la soude, les ions qui accompagnent le carboxylate $\\text{C}_{15}\\text{H}_{31}\\text{COO}^-$ sont $\\text{Na}^+$. Le savon est le palmitate de sodium, un savon dur.",
+              "answers": [
+                {
+                  "content": "sodium",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la quantité de tripalmitine de ce lot : 40,3 kg (soit 40 300 g), $M = 806$ g/mol.",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0.5,
+              "explanation": "Étape 2 — Calculer : $n = \\dfrac{m}{M} = \\dfrac{40\\,300}{806} = 50$ mol.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la quantité de soude de ce lot : 7,2 kg (soit 7 200 g), $M = 40$ g/mol.",
+              "question_type": "numeric",
+              "unit": "mol",
+              "tolerance": 0.5,
+              "explanation": "Étape 2 — Calculer : $n = \\dfrac{7\\,200}{40} = 180$ mol.",
+              "answers": [
+                {
+                  "content": "180",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le lot contient 50 mol de tripalmitine et 180 mol de soude. Quel est le réactif limitant ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever les coefficients : 1 tripalmitine pour 3 NaOH. Étape 3 — Déterminer le limitant : $n(\\text{tripalmitine}) = 50$ mol et $\\dfrac{n(\\text{NaOH})}{3} = \\dfrac{180}{3} = 60$ mol. Le plus petit est 50 : la tripalmitine est limitante, la soude est en léger excès.",
+              "answers": [
+                {
+                  "content": "La tripalmitine",
+                  "correct": true
+                },
+                {
+                  "content": "La soude",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux sont limitants",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun des deux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La tripalmitine (50 mol) est le réactif limitant. Calcule la masse théorique de palmitate de sodium ($M = 278$ g/mol), en kilogrammes.",
+              "question_type": "numeric",
+              "unit": "kg",
+              "tolerance": 0.1,
+              "explanation": "Étape 4 — Calculer le savon : $n_{savon} = 3 \\times 50 = 150$ mol, puis $m_{th} = 150 \\times 278 = 41\\,700$ g, soit 41,7 kg.",
+              "answers": [
+                {
+                  "content": "41.7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La masse théorique de savon est 41,7 kg et l'usine récupère 37,5 kg. Calcule le rendement, en pourcentage.",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0.5,
+              "explanation": "Étape 5 — Calculer le rendement : $r = \\dfrac{37{,}5}{41{,}7} \\times 100 \\approx 89{,}9$ %, soit environ 90 %.",
+              "answers": [
+                {
+                  "content": "90",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le rendement de l'usine est d'environ 90 %. Quelles sont les deux causes possibles de cette perte ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 5 — Calculer le rendement : un rendement inférieur à 100 % vient des pertes de savon au relargage, à la filtration, au rinçage et au séchage. La saponification est totale : ce n'est pas un équilibre. Le glycérol ne réagit pas avec le savon.",
+              "answers": [
+                {
+                  "content": "Une partie du savon reste dissoute dans le filtrat et les eaux de rinçage",
+                  "correct": true
+                },
+                {
+                  "content": "Une partie du savon est perdue lors de la filtration et du séchage",
+                  "correct": true
+                },
+                {
+                  "content": "La saponification est une réaction limitée",
+                  "correct": false
+                },
+                {
+                  "content": "Le glycérol détruit une partie du savon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique, en quelques lignes, comment le savon élimine une tache d'huile sur un vêtement.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "L'ion carboxylate possède une tête…",
+              "criteria": [
+                "Tête hydrophile et queue lipophile nommées",
+                "Queues dans la graisse, têtes dans l'eau",
+                "Formation de micelles",
+                "La graisse dispersée est emportée par le rinçage"
+              ],
+              "explanation": "Corrigé modèle : l'ion carboxylate est amphiphile : sa tête $\\text{COO}^-$ est hydrophile, sa queue carbonée est hydrophobe et lipophile. Dans l'eau, les queues plongent dans la tache d'huile et les têtes restent dans l'eau. Les ions forment des micelles qui emprisonnent la graisse en petites gouttes. Le rinçage emporte les micelles. Barème : 1 point pour la structure amphiphile (tête et queue), 1 point pour les orientations (queues dans la graisse, têtes dans l'eau), 0,5 point pour les micelles, 0,5 point pour le rinçage qui évacue la graisse.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
