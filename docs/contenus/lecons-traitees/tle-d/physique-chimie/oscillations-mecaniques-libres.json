@@ -1,0 +1,1748 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Oscillations mécaniques libres",
+      "subtitle": "Leçon 8 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Physique-Chimie",
+      "series_name": "D",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "forces-ressort-horizontal",
+          "kind": "coordinate_plane",
+          "description": "Un ressort horizontal relie un point fixe W en (0 ; 0) à un solide S placé en (5 ; 0). O, en (3 ; 0), est la position d'équilibre : le ressort est donc étiré de 2 unités. Trois vecteurs partent de S : le poids P vers le bas, la réaction R du plan vers le haut, de même longueur que P, et la force du ressort T, horizontale, dirigée vers O, donc vers W.",
+          "params": {
+            "xmin": -1,
+            "xmax": 8,
+            "ymin": -3,
+            "ymax": 3,
+            "points": [
+              {
+                "id": "W",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "O",
+                "x": 3,
+                "y": 0
+              },
+              {
+                "id": "S",
+                "x": 5,
+                "y": 0
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 5,
+                "y2": 0
+              }
+            ],
+            "vectors": [
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -2,
+                "ox": 5,
+                "oy": 0
+              },
+              {
+                "label": "R",
+                "dx": 0,
+                "dy": 2,
+                "ox": 5,
+                "oy": 0
+              },
+              {
+                "label": "T",
+                "dx": -2,
+                "dy": 0,
+                "ox": 5,
+                "oy": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "longueur-ressort",
+          "kind": "stat_chart",
+          "description": "Courbe de la longueur L du ressort d'un pendule élastique, en cm, sur une période propre T0, de 0 à T0 par pas de T0/16. L part du maximum 24 cm, descend à 20 cm en T0/4, atteint 16 cm en T0/2, remonte à 20 cm en 3T0/4 et revient à 24 cm en T0. C'est une sinusoïde autour de la longueur à vide 20 cm, d'amplitude 4 cm : x(t) = L - 20 est sinusoïdal.",
+          "params": {
+            "chart": "line",
+            "series": [
+              24.0,
+              23.7,
+              22.83,
+              21.53,
+              20.0,
+              18.47,
+              17.17,
+              16.3,
+              16.0,
+              16.3,
+              17.17,
+              18.47,
+              20.0,
+              21.53,
+              22.83,
+              23.7,
+              24.0
+            ],
+            "labels": [
+              "0",
+              "T0/16",
+              "T0/8",
+              "3T0/16",
+              "T0/4",
+              "5T0/16",
+              "3T0/8",
+              "7T0/16",
+              "T0/2",
+              "9T0/16",
+              "5T0/8",
+              "11T0/16",
+              "3T0/4",
+              "13T0/16",
+              "7T0/8",
+              "15T0/16",
+              "T0"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "energie-potentielle",
+          "kind": "stat_chart",
+          "description": "Courbe de l'énergie potentielle élastique Ep, en mJ, d'un pendule élastique (k = 50 N/m, amplitude 4 cm, énergie mécanique 40 mJ), de 0 à T0 par pas de T0/16. Ep part de 40 mJ, tombe à 0 en T0/4, remonte à 40 mJ en T0/2, retombe à 0 en 3T0/4 et revient à 40 mJ en T0 : Ep oscille avec la période T0/2. L'énergie cinétique vaut Ec = 40 - Ep, en mJ.",
+          "params": {
+            "chart": "line",
+            "series": [
+              40.0,
+              34.14,
+              20.0,
+              5.86,
+              0.0,
+              5.86,
+              20.0,
+              34.14,
+              40.0,
+              34.14,
+              20.0,
+              5.86,
+              0.0,
+              5.86,
+              20.0,
+              34.14,
+              40.0
+            ],
+            "labels": [
+              "0",
+              "T0/16",
+              "T0/8",
+              "3T0/16",
+              "T0/4",
+              "5T0/16",
+              "3T0/8",
+              "7T0/16",
+              "T0/2",
+              "9T0/16",
+              "5T0/8",
+              "11T0/16",
+              "3T0/4",
+              "13T0/16",
+              "7T0/8",
+              "15T0/16",
+              "T0"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "pendule-simple",
+          "kind": "coordinate_plane",
+          "description": "Un pendule simple : le point d'attache O est en (0 ; 6), le solide M en (3 ; 2), relié à O par un fil de longueur 5 unités. Le segment vertical de (0 ; 6) à (0 ; 0) donne la verticale de référence. Deux vecteurs partent de M : le poids P, vertical vers le bas, et la tension T du fil, dirigée de M vers O. L'angle entre le fil et la verticale est l'angle theta (dessin schématique).",
+          "params": {
+            "xmin": -2,
+            "xmax": 6,
+            "ymin": 0,
+            "ymax": 7,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 6
+              },
+              {
+                "id": "M",
+                "x": 3,
+                "y": 2
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 6,
+                "x2": 3,
+                "y2": 2
+              },
+              {
+                "x1": 0,
+                "y1": 6,
+                "x2": 0,
+                "y2": 0
+              }
+            ],
+            "vectors": [
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -2,
+                "ox": 3,
+                "oy": 2
+              },
+              {
+                "label": "T",
+                "dx": -1.5,
+                "dy": 2,
+                "ox": 3,
+                "oy": 2
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "oscillations-amorties",
+          "kind": "stat_chart",
+          "description": "Courbe de la longueur L, en cm, du ressort d'un amortisseur après un lâcher, de 0 à 2T par pas de T/8 (T est la pseudo-période). La longueur à l'équilibre est 20 cm. L part de 24 cm et coupe plusieurs fois la valeur 20 cm, mais ses maxima successifs diminuent : 24 cm en 0, 22,4 cm en T, 21,44 cm en 2T. L'amplitude 4 cm, puis 2,4 cm, puis 1,44 cm décroît : c'est le régime pseudo-périodique.",
+          "params": {
+            "chart": "line",
+            "series": [
+              24.0,
+              22.65,
+              20.0,
+              17.66,
+              16.9,
+              17.94,
+              20.0,
+              21.81,
+              22.4,
+              21.59,
+              20.0,
+              18.6,
+              18.14,
+              18.77,
+              20.0,
+              21.09,
+              21.44
+            ],
+            "labels": [
+              "0",
+              "T/8",
+              "T/4",
+              "3T/8",
+              "T/2",
+              "5T/8",
+              "3T/4",
+              "7T/8",
+              "T",
+              "9T/8",
+              "5T/4",
+              "11T/8",
+              "3T/2",
+              "13T/8",
+              "7T/4",
+              "15T/8",
+              "2T"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "retour-sans-oscillation",
+          "kind": "stat_chart",
+          "description": "Courbe de la longueur L, en cm, du ressort d'un amortisseur très freiné, de 0 à 16 s par pas de 1 s. La longueur à l'équilibre est 20 cm. L part de 24 cm et décroît sans cesse : 22,94 cm en 4 s, 21,62 cm en 8 s, 20,8 cm en 12 s, 20,37 cm en 16 s. Elle tend vers 20 cm sans jamais passer en dessous : le solide revient vers l'équilibre sans osciller, c'est le régime apériodique.",
+          "params": {
+            "chart": "line",
+            "series": [
+              24.0,
+              23.89,
+              23.64,
+              23.31,
+              22.94,
+              22.58,
+              22.23,
+              21.91,
+              21.62,
+              21.37,
+              21.15,
+              20.96,
+              20.8,
+              20.66,
+              20.54,
+              20.45,
+              20.37
+            ],
+            "labels": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "14",
+              "15",
+              "16"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Équation différentielle du pendule élastique horizontal",
+          "remember": "Un **pendule élastique horizontal** est un solide S, de masse $m$ et de centre d'inertie G, accroché à un ressort à spires non jointives, de raideur $k$ (en N/m) et de masse négligeable. Il glisse **sans frottement** sur un plan horizontal. On repère G par son abscisse $x$ sur un axe $Ox$ : l'origine O est la position d'équilibre (ressort ni étiré ni comprimé), donc $x$ est l'allongement du ressort. Forces sur S : le poids $\\vec P$ et la réaction $\\vec R$ du plan, verticales, qui se compensent ; la force de rappel du ressort $\\vec T = -kx\\,\\vec i$, toujours dirigée vers O. Le théorème du centre d'inertie $\\sum \\vec F = m\\vec a$, projeté sur $Ox$, donne $-kx = m\\ddot x$, soit l'**équation différentielle** $\\ddot x + \\frac{k}{m}\\,x = 0$, de la forme $\\ddot x + \\omega_0^2\\,x = 0$ avec $\\omega_0^2 = \\frac{k}{m}$. Les oscillations sont dites **libres** : on écarte S de O, puis on l'abandonne sans autre action.",
+          "method": [
+            "Préciser le système, le référentiel (galiléen), l'axe $Ox$ et l'origine O à la position d'équilibre.",
+            "Faire le bilan des forces appliquées au solide : poids, réaction du plan, force du ressort $-kx\\,\\vec i$.",
+            "Appliquer le théorème du centre d'inertie, puis projeter sur l'axe $Ox$.",
+            "Écrire l'équation sous la forme $\\ddot x + \\frac{k}{m}\\,x = 0$ et identifier $\\omega_0^2$."
+          ],
+          "example": {
+            "statement": "Dans un atelier de mécanique, un chariot S de masse $m = 0{,}50$ kg glisse sans frottement sur un rail horizontal. Il est relié à un ressort de raideur $k = 200$ N/m, de masse négligeable. Établir l'équation différentielle du mouvement de son centre d'inertie et donner $\\omega_0^2$.",
+            "steps": [
+              "Préciser : système = le chariot S ; référentiel = le rail de l'atelier, supposé galiléen ; axe $Ox$ le long du rail, origine O à la position d'équilibre.",
+              "Faire le bilan : le poids $\\vec P$ et la réaction $\\vec R$ (verticales, elles se compensent) et la force du ressort $\\vec T = -kx\\,\\vec i$.",
+              "Appliquer : $\\vec P + \\vec R + \\vec T = m\\vec a$ ; projeté sur $Ox$ : $-kx = m\\ddot x$.",
+              "Écrire : $\\ddot x + \\frac{200}{0{,}50}\\,x = 0$, soit $\\ddot x + 400\\,x = 0$ ; donc $\\omega_0^2 = 400\\ \\text{s}^{-2}$."
+            ]
+          },
+          "pitfall": "Ne pas se tromper de signe : la force du ressort est $-kx\\,\\vec i$, jamais $+kx\\,\\vec i$. Contre-exemple : le ressort est étiré de 3 cm ($x = +0{,}03$ m). La force doit ramener le solide vers O, donc pointer dans le sens négatif de $Ox$ : $T = -k \\times 0{,}03 < 0$. Avec $+kx$, le solide serait repoussé plus loin : il ne reviendrait jamais et ne ferait pas d'oscillations. Attention aussi au rapport : c'est $\\frac{k}{m}$, pas $\\frac{m}{k}$ ni $k \\times m$. Pour $k = 200$ N/m et $m = 0{,}50$ kg, le bon coefficient est 400, pas 0,0025.",
+          "figure": "forces-ressort-horizontal",
+          "exercise": {
+            "title": "Établir l'équation différentielle d'un pendule élastique",
+            "exercise_type": "fixation",
+            "figure": "forces-ressort-horizontal",
+            "statement": "Un solide S de masse m glisse sans frottement sur un plan horizontal, accroché à un ressort de raideur k. Dans chaque question, applique la méthode de la fiche : préciser, faire le bilan des forces, appliquer le théorème du centre d'inertie, écrire l'équation.",
+            "questions": [
+              {
+                "content": "Un solide glisse sans frottement sur un plan horizontal, accroché à un ressort. Quelle est la seule force qui a une composante sur l'axe horizontal Ox ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Faire le bilan : le poids $\\vec P$ et la réaction $\\vec R$ sont verticaux, ils n'ont aucune composante sur $Ox$ (et se compensent). Il n'y a pas de frottement. Seule la force du ressort $\\vec T = -kx\\,\\vec i$ est horizontale : c'est elle qui produit le mouvement. L'erreur est de croire que le poids agit sur $Ox$ : il est perpendiculaire à l'axe.",
+                "answers": [
+                  {
+                    "content": "La force de rappel du ressort",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le poids du solide",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réaction du plan",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une force de frottement du plan",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois forces appliquées au solide S qui glisse sans frottement sur le plan horizontal, accroché à un ressort ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Préciser : le système est le solide S, dans un référentiel galiléen. Étape 2 — Faire le bilan des forces : le poids $\\vec P$, la réaction $\\vec R$ du plan (sans frottement, elle est perpendiculaire au plan) et la force du ressort $\\vec T$. On ne compte pas de frottement, l'énoncé dit qu'il n'y en a pas, ni de « force d'inertie » : le théorème du centre d'inertie ne s'applique qu'aux forces réelles.",
+                "answers": [
+                  {
+                    "content": "Le poids du solide",
+                    "correct": true
+                  },
+                  {
+                    "content": "La force de rappel du ressort",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une force d'inertie dirigée vers l'extérieur",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réaction du plan",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une force de frottement du plan",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de masse $m = 0{,}40$ kg est accroché à un ressort de raideur $k = 100$ N/m, sur un plan horizontal sans frottement. Quelle est l'équation différentielle de son mouvement, d'inconnue $x(t)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Préciser : système S, axe $Ox$ d'origine O à l'équilibre. Étape 2 — Faire le bilan : $\\vec P$, $\\vec R$ (qui se compensent) et $\\vec T = -kx\\,\\vec i$. Étape 3 — Appliquer : $-kx = m\\ddot x$. Étape 4 — Écrire : $\\ddot x + \\frac{k}{m}\\,x = 0$ avec $\\frac{k}{m} = \\frac{100}{0{,}40} = 250$. Donc $\\ddot x + 250\\,x = 0$. Les autres réponses viennent d'un signe faux (ressort qui repousse), du rapport inversé $\\frac{m}{k} = 0{,}004$ ou du produit $k \\times m = 40$.",
+                "answers": [
+                  {
+                    "content": "$\\ddot x - 250\\,x = 0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ddot x + 0{,}004\\,x = 0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ddot x + 250\\,x = 0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\ddot x + 40\\,x = 0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de masse $m = 0{,}30$ kg est accroché à un ressort de raideur $k = 90$ N/m, sur un plan horizontal sans frottement. Son équation différentielle s'écrit $\\ddot x + \\omega_0^2\\,x = 0$. Calcule $\\omega_0^2$ (en unités SI).",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Préciser : système S sur le plan horizontal sans frottement. Étape 2 — Faire le bilan : $\\vec P$ et $\\vec R$ se compensent, reste $\\vec T = -kx\\,\\vec i$. Étape 3 — Appliquer : $-kx = m\\ddot x$. Étape 4 — Écrire : $\\ddot x + \\frac{k}{m}\\,x = 0$, donc $\\omega_0^2 = \\frac{k}{m} = \\frac{90}{0{,}30} = 300\\ \\text{s}^{-2}$.",
+                "answers": [
+                  {
+                    "content": "300",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un ressort horizontal est étiré : le solide est en $x > 0$. La force du ressort sur le solide est alors dirigée dans le sens positif de l'axe $Ox$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Faire le bilan : la force du ressort s'écrit $\\vec T = -kx\\,\\vec i$. Pour $x > 0$, sa composante $-kx$ est négative : la force est dirigée dans le sens négatif de $Ox$, vers O. C'est une force de rappel, qui ramène le solide vers la position d'équilibre. L'affirmation est donc fausse : avec le signe $+kx$, le solide serait repoussé et s'éloignerait de O.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à établir l'équation différentielle d'un solide attaché à un ressort horizontal, sans frottement.",
+            "questions": [
+              {
+                "content": "Le solide est écarté vers $x > 0$ : la force du ressort est dirigée vers ___ et sa valeur algébrique sur l'axe $Ox$ est ___.",
+                "question_type": "select",
+                "hint": "Une force de rappel ramène le solide vers O, et son signe est opposé à celui de $x$.",
+                "explanation": "Étape 2 — Faire le bilan : la force du ressort est une force de rappel, elle est dirigée vers l'origine O, la position d'équilibre. Sa valeur algébrique sur $Ox$ est $-kx$ : négative quand $x > 0$.",
+                "answers": [
+                  {
+                    "content": "l'origine O",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le sens de l'allongement",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le haut",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$-kx$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$+kx$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$-\\frac{x}{k}$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de masse $m = 0{,}10$ kg est accroché à un ressort de raideur $k = 40$ N/m sur un plan horizontal sans frottement. Calcule le coefficient $\\omega_0^2$ de l'équation $\\ddot x + \\omega_0^2\\,x = 0$ (en unités SI).",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Divise la raideur par la masse : $\\frac{40}{0{,}10}$.",
+                "explanation": "Étape 3 — Appliquer le théorème du centre d'inertie : $-kx = m\\ddot x$. Étape 4 — Écrire : $\\ddot x + \\frac{k}{m}\\,x = 0$, donc $\\omega_0^2 = \\frac{40}{0{,}10} = 400\\ \\text{s}^{-2}$.",
+                "answers": [
+                  {
+                    "content": "400",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "En projetant le théorème du centre d'inertie sur l'axe $Ox$ pour un solide accroché à un ressort horizontal, sans frottement, on obtient :",
+                "question_type": "single_choice",
+                "hint": "Projette chaque force sur l'axe horizontal.",
+                "explanation": "Étape 3 — Appliquer : $\\vec P + \\vec R + \\vec T = m\\vec a$. Sur $Ox$, $P$ et $R$ n'ont pas de composante, $T_x = -kx$ et $a_x = \\ddot x$. Donc $-kx = m\\ddot x$. L'accélération est la dérivée seconde de $x$, pas la dérivée première, et le poids est vertical.",
+                "answers": [
+                  {
+                    "content": "$-kx = m\\ddot x$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$kx = m\\ddot x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-kx = m\\dot x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-mg = m\\ddot x$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Solution de l'équation : période, amplitude et phase",
+          "remember": "Pour le pendule élastique horizontal, la solution de $\\ddot x + \\omega_0^2\\,x = 0$ est $x(t) = X_m\\cos(\\omega_0 t + \\varphi)$. $X_m > 0$ est l'**amplitude** (en m), $\\omega_0 = \\sqrt{\\frac{k}{m}}$ la **pulsation propre** (en rad/s), $\\varphi$ la **phase à l'origine** (en rad). La **période propre** est $T_0 = \\frac{2\\pi}{\\omega_0} = 2\\pi\\sqrt{\\frac{m}{k}}$ (en s) et la **fréquence propre** $f_0 = \\frac{1}{T_0}$ (en Hz). La vitesse est $v = \\dot x = -X_m\\omega_0\\sin(\\omega_0 t + \\varphi)$. $T_0$ ne dépend que de $m$ et de $k$ : ni de l'amplitude, ni des conditions initiales. $X_m$ et $\\varphi$ sont fixés par les **conditions initiales** : $x(0) = X_m\\cos\\varphi$ et $v(0) = -X_m\\omega_0\\sin\\varphi$. Cas utiles : lâché sans vitesse en $x_0 > 0$, $\\varphi = 0$ et $X_m = x_0$ ; lâché sans vitesse en $x_0 < 0$, $\\varphi = \\pi$ et $X_m = |x_0|$.",
+          "method": [
+            "Calculer la pulsation propre $\\omega_0 = \\sqrt{k/m}$, puis la période propre $T_0 = 2\\pi/\\omega_0$.",
+            "Écrire $x(t) = X_m\\cos(\\omega_0 t + \\varphi)$ et sa dérivée $v(t) = -X_m\\omega_0\\sin(\\omega_0 t + \\varphi)$.",
+            "Écrire les conditions initiales en remplaçant $t$ par 0 dans $x(t)$ et dans $v(t)$.",
+            "Résoudre le système pour trouver $X_m$ et $\\varphi$, puis écrire $x(t)$ avec ses valeurs numériques."
+          ],
+          "example": {
+            "statement": "Le chariot de l'atelier ($m = 0{,}50$ kg, $k = 200$ N/m) est écarté de 4 cm dans le sens positif ($x_0 = +0{,}04$ m), puis lâché sans vitesse à $t = 0$. Donner sa période propre et écrire $x(t)$.",
+            "steps": [
+              "Calculer : $\\omega_0 = \\sqrt{\\frac{200}{0{,}50}} = \\sqrt{400} = 20$ rad/s ; $T_0 = \\frac{2\\pi}{20} \\approx 0{,}31$ s.",
+              "Écrire : $x(t) = X_m\\cos(20\\,t + \\varphi)$ et $v(t) = -20\\,X_m\\sin(20\\,t + \\varphi)$.",
+              "Écrire les conditions initiales : $x(0) = X_m\\cos\\varphi = 0{,}04$ m et $v(0) = -20\\,X_m\\sin\\varphi = 0$.",
+              "Résoudre : $v(0) = 0$ donne $\\sin\\varphi = 0$, donc $\\varphi = 0$ ou $\\pi$ ; comme $X_m\\cos\\varphi = 0{,}04 > 0$, $\\varphi = 0$ et $X_m = 0{,}04$ m. Donc $x(t) = 0{,}04\\cos(20\\,t)$ (en m)."
+            ]
+          },
+          "pitfall": "Ne pas croire que la période propre dépend de l'amplitude, ni qu'elle est proportionnelle à la masse. Contre-exemple : avec $k = 200$ N/m, un solide de 0,50 kg a $T_0 \\approx 0{,}31$ s, qu'on l'écarte de 2 cm ou de 8 cm. Si on quadruple la masse (2,0 kg), $T_0 = 2\\pi\\sqrt{\\frac{2{,}0}{200}} \\approx 0{,}63$ s : elle est **doublée**, pas multipliée par 4, car $T_0$ varie comme $\\sqrt{m}$. Autre erreur : écrire $\\varphi = 0$ dans tous les cas. Lâché en $x_0 = -0{,}04$ m, on trouve $\\varphi = \\pi$.",
+          "figure": "longueur-ressort",
+          "exercise": {
+            "title": "Période, amplitude et phase d'un pendule élastique",
+            "exercise_type": "fixation",
+            "figure": "longueur-ressort",
+            "statement": "Un solide de masse m, accroché à un ressort horizontal de raideur k, oscille sans frottement autour de sa position d'équilibre O. Dans chaque question, applique la méthode : calculer ω0 et T0, écrire x(t) et v(t), écrire les conditions initiales, résoudre.",
+            "questions": [
+              {
+                "content": "Un solide de masse $m = 0{,}80$ kg est accroché à un ressort de raideur $k = 45$ N/m, sur un plan horizontal sans frottement. Calcule sa pulsation propre $\\omega_0$.",
+                "question_type": "numeric",
+                "unit": "rad/s",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Calculer la pulsation propre : $\\omega_0 = \\sqrt{\\frac{k}{m}} = \\sqrt{\\frac{45}{0{,}80}} = \\sqrt{56{,}25} = 7{,}5$ rad/s. On peut vérifier : $7{,}5^2 = 56{,}25$.",
+                "answers": [
+                  {
+                    "content": "7.5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de masse $m = 1{,}0$ kg est accroché à un ressort de raideur $k = 25$ N/m, sur un plan horizontal sans frottement. Calcule sa période propre $T_0$ (avec $\\pi \\approx 3{,}14$).",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Calculer : $\\omega_0 = \\sqrt{\\frac{25}{1{,}0}} = 5$ rad/s, puis $T_0 = \\frac{2\\pi}{\\omega_0} = \\frac{2 \\times 3{,}14}{5} \\approx 1{,}26$ s. On retrouve le même résultat avec $T_0 = 2\\pi\\sqrt{\\frac{m}{k}} = 2\\pi \\times 0{,}2$.",
+                "answers": [
+                  {
+                    "content": "1.26",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un solide est lâché sans vitesse, à $t = 0$, depuis l'abscisse $x_0 = -0{,}05$ m. Dans $x(t) = X_m\\cos(\\omega_0 t + \\varphi)$ avec $X_m > 0$, quelles sont les valeurs de $X_m$ et de $\\varphi$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire : $x(t) = X_m\\cos(\\omega_0 t + \\varphi)$ et $v(t) = -X_m\\omega_0\\sin(\\omega_0 t + \\varphi)$. Étape 3 — Écrire les conditions initiales : $X_m\\cos\\varphi = -0{,}05$ et $-X_m\\omega_0\\sin\\varphi = 0$. Étape 4 — Résoudre : $\\sin\\varphi = 0$ donc $\\varphi = 0$ ou $\\pi$. Comme $X_m > 0$ et $X_m\\cos\\varphi < 0$, on a $\\cos\\varphi = -1$, donc $\\varphi = \\pi$ et $X_m = 0{,}05$ m. Une amplitude est toujours positive : $X_m = -0{,}05$ m est exclu.",
+                "answers": [
+                  {
+                    "content": "$X_m = -0{,}05$ m et $\\varphi = 0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X_m = 0{,}05$ m et $\\varphi = \\pi$ rad",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X_m = 0{,}05$ m et $\\varphi = 0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X_m = 0{,}05$ m et $\\varphi = \\frac{\\pi}{2}$ rad",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À $t = 0$, un solide de pulsation propre $\\omega_0 = 20$ rad/s passe par la position d'équilibre ($x = 0$) avec la vitesse $v_0 = +0{,}6$ m/s. Quelles sont les valeurs de $X_m$ et de $\\varphi$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire les conditions initiales : $x(0) = X_m\\cos\\varphi = 0$ et $v(0) = -20\\,X_m\\sin\\varphi = 0{,}6$. Étape 4 — Résoudre : $\\cos\\varphi = 0$ donc $\\varphi = \\pm\\frac{\\pi}{2}$. Comme $v(0) > 0$ et $X_m > 0$, il faut $\\sin\\varphi < 0$, donc $\\varphi = -\\frac{\\pi}{2}$ et $\\sin\\varphi = -1$. Alors $X_m = \\frac{0{,}6}{20} = 0{,}03$ m. Oublier $\\omega_0$ donnerait 0,6 m, et se tromper de signe donnerait $+\\frac{\\pi}{2}$.",
+                "answers": [
+                  {
+                    "content": "$X_m = 0{,}03$ m et $\\varphi = -\\frac{\\pi}{2}$ rad",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X_m = 0{,}03$ m et $\\varphi = +\\frac{\\pi}{2}$ rad",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X_m = 0{,}6$ m et $\\varphi = -\\frac{\\pi}{2}$ rad",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X_m = 12$ m et $\\varphi = 0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On lâche sans vitesse un même solide, accroché au même ressort, depuis une abscisse deux fois plus grande : sa période propre double.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : $T_0 = 2\\pi\\sqrt{\\frac{m}{k}}$ ne contient ni l'amplitude ni l'abscisse initiale. Étape 4 — Résoudre : l'abscisse initiale ne change que $X_m$ (qui double), pas $T_0$. L'affirmation est fausse. Contre-exemple : $m = 0{,}50$ kg et $k = 200$ N/m donnent $T_0 \\approx 0{,}31$ s pour 2 cm comme pour 4 cm.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes avec $T_0 = 2\\pi\\sqrt{\\frac{m}{k}}$ et les conditions initiales d'un pendule élastique horizontal sans frottement.",
+            "questions": [
+              {
+                "content": "On quadruple la masse accrochée au ressort. La période propre $T_0$ est alors ___. Si on double l'amplitude du mouvement, $T_0$ est ___.",
+                "question_type": "select",
+                "hint": "$\\sqrt{4} = 2$. Cherche si l'amplitude figure dans la formule de $T_0$.",
+                "explanation": "Étape 1 — Calculer : $T_0 = 2\\pi\\sqrt{\\frac{m}{k}}$. Avec $4m$, $T_0' = 2\\pi\\sqrt{\\frac{4m}{k}} = 2\\,T_0$ : la période est multipliée par 2, car $\\sqrt{4} = 2$. L'amplitude n'apparaît pas dans la formule : $T_0$ est inchangée.",
+                "answers": [
+                  {
+                    "content": "multipliée par 2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "multipliée par 4",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "divisée par 2",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "inchangée",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "multipliée par 2",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "divisée par 2",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un pendule élastique a une période propre $T_0 = 0{,}25$ s. Calcule sa fréquence propre $f_0$.",
+                "question_type": "numeric",
+                "unit": "Hz",
+                "tolerance": 0,
+                "hint": "$f_0 = \\frac{1}{T_0}$.",
+                "explanation": "Étape 1 — Calculer : la fréquence est l'inverse de la période, $f_0 = \\frac{1}{T_0} = \\frac{1}{0{,}25} = 4$ Hz. Le solide effectue 4 oscillations complètes par seconde.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un solide est lâché sans vitesse, à $t = 0$, depuis $x_0 = +0{,}02$ m. Quelle est la phase à l'origine $\\varphi$ dans $x(t) = X_m\\cos(\\omega_0 t + \\varphi)$ ?",
+                "question_type": "single_choice",
+                "hint": "La vitesse initiale est nulle : que vaut $\\sin\\varphi$ ? Le signe de $x_0$ donne celui de $\\cos\\varphi$.",
+                "explanation": "Étape 3 — Écrire les conditions initiales : $X_m\\cos\\varphi = 0{,}02$ et $-X_m\\omega_0\\sin\\varphi = 0$. Étape 4 — Résoudre : $\\sin\\varphi = 0$ et $\\cos\\varphi > 0$, donc $\\varphi = 0$ et $X_m = 0{,}02$ m. Pour $\\varphi = \\pi$, on aurait $x(0) = -X_m < 0$.",
+                "answers": [
+                  {
+                    "content": "$\\varphi = 0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\varphi = \\pi$ rad",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\varphi = \\frac{\\pi}{2}$ rad",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\varphi = -\\frac{\\pi}{2}$ rad",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Étude énergétique du pendule élastique",
+          "remember": "Pour le pendule élastique horizontal, l'**énergie cinétique** est $E_c = \\frac{1}{2}mv^2$ et l'**énergie potentielle élastique** est $E_p = \\frac{1}{2}kx^2$ (nulle quand le ressort n'est pas déformé, en $x = 0$ ; l'énergie potentielle de pesanteur reste constante, le plan étant horizontal). L'**énergie mécanique** est $E_m = E_c + E_p = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2$. Sans frottement, $E_m$ se **conserve** : $E_m = \\frac{1}{2}kX_m^2 = \\frac{1}{2}mv_{max}^2$ avec $v_{max} = X_m\\omega_0$. En $x = \\pm X_m$ : $v = 0$, $E_c = 0$ et $E_p$ est maximale. En $x = 0$ : $E_p = 0$ et $E_c$ est maximale. $E_c$ et $E_p$ varient avec le temps, avec la période $\\frac{T_0}{2}$, mais leur somme reste constante. Comme $E_m$ est constante, $\\frac{dE_m}{dt} = 0$, d'où $\\dot x\\,(m\\ddot x + kx) = 0$ : on retrouve $\\ddot x + \\frac{k}{m}\\,x = 0$.",
+          "method": [
+            "Choisir deux positions : l'une où $x$ et $v$ sont connus (souvent l'extrémité, où $v = 0$), l'autre où l'on cherche une grandeur.",
+            "Écrire l'énergie mécanique à chaque position : $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2$.",
+            "Égaler les deux expressions (conservation de $E_m$, sans frottement) et isoler l'inconnue.",
+            "Calculer en unités SI (m, kg, N/m) et donner le résultat avec son unité (J ou m/s)."
+          ],
+          "example": {
+            "statement": "Le chariot de l'atelier ($m = 0{,}50$ kg, $k = 200$ N/m) est lâché sans vitesse en $x_0 = 0{,}04$ m. Calculer son énergie mécanique et sa vitesse au passage par la position d'équilibre O.",
+            "steps": [
+              "Choisir : position A, en $x = 0{,}04$ m avec $v = 0$ ; position O, en $x = 0$, où la vitesse $v$ est inconnue.",
+              "Écrire : en A, $E_m = \\frac{1}{2}\\times 200 \\times 0{,}04^2 = 0{,}16$ J ; en O, $E_m = \\frac{1}{2}\\,m\\,v^2 + 0$.",
+              "Égaler : $\\frac{1}{2}\\,m\\,v^2 = 0{,}16$ J, donc $v^2 = \\frac{2 \\times 0{,}16}{0{,}50} = 0{,}64$.",
+              "Calculer : $v = \\sqrt{0{,}64} = 0{,}80$ m/s. On vérifie $v_{max} = X_m\\omega_0 = 0{,}04 \\times 20 = 0{,}80$ m/s."
+            ]
+          },
+          "pitfall": "Ne pas oublier de convertir les centimètres en mètres, ni le carré. Contre-exemple : avec $k = 200$ N/m et $x = 4$ cm, écrire $\\frac{1}{2}\\times 200 \\times 4^2 = 1\\,600$ J est absurde pour un petit chariot. Avec $x = 0{,}04$ m : $\\frac{1}{2}\\times 200 \\times 0{,}04^2 = 0{,}16$ J. Attention aussi : c'est la somme $E_m$ qui est constante, pas $E_c$ ni $E_p$. Au passage par O, $E_p = 0$ mais $E_m = E_c$ n'est pas nulle.",
+          "figure": "energie-potentielle",
+          "exercise": {
+            "title": "Énergie mécanique et vitesse d'un pendule élastique",
+            "exercise_type": "fixation",
+            "figure": "energie-potentielle",
+            "statement": "Un solide de masse m = 0,50 kg, accroché à un ressort horizontal de raideur k = 50 N/m, oscille sans frottement avec l'amplitude Xm = 10 cm. Dans chaque question, applique la méthode : choisir deux positions, écrire Em, égaler, calculer.",
+            "questions": [
+              {
+                "content": "Pour un pendule élastique horizontal sans frottement, d'amplitude $X_m$ et de raideur $k$, quelle est l'expression de l'énergie mécanique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : à l'extrémité $x = X_m$, la vitesse est nulle. Étape 2 — Écrire : $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2 = 0 + \\frac{1}{2}kX_m^2$. L'oubli du facteur $\\frac{1}{2}$ ou du carré donne des réponses fausses, et la masse $m$ n'intervient pas à cet endroit.",
+                "answers": [
+                  {
+                    "content": "$E_m = \\frac{1}{2}kX_m^2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$E_m = kX_m^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$E_m = \\frac{1}{2}kX_m$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$E_m = \\frac{1}{2}mX_m^2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un pendule élastique horizontal sans frottement a pour raideur $k = 50$ N/m et pour amplitude $X_m = 10$ cm. Calcule son énergie mécanique.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0.001,
+                "explanation": "Étape 1 — Choisir : à l'extrémité $x = X_m$, on a $v = 0$. Étape 2 — Écrire : $E_m = \\frac{1}{2}kX_m^2$. Étape 4 — Calculer en unités SI : $X_m = 0{,}10$ m, donc $E_m = \\frac{1}{2}\\times 50 \\times 0{,}10^2 = 0{,}25$ J.",
+                "answers": [
+                  {
+                    "content": "0.25",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le pendule élastique horizontal de masse $m = 0{,}50$ kg, de raideur $k = 50$ N/m et d'amplitude $X_m = 10$ cm oscille sans frottement. Calcule sa vitesse au passage par la position d'équilibre.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Choisir : position extrême ($v = 0$, $x = 0{,}10$ m) et position O ($x = 0$). Étape 2 — Écrire : $E_m = 0{,}25$ J en A ; en O, $E_m = \\frac{1}{2}mv^2$. Étape 3 — Égaler : $v^2 = \\frac{2 \\times 0{,}25}{0{,}50} = 1$. Étape 4 — Calculer : $v = 1$ m/s. Vérification : $X_m\\omega_0 = 0{,}10 \\times \\sqrt{\\frac{50}{0{,}50}} = 0{,}10 \\times 10 = 1$ m/s.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le pendule élastique horizontal de masse $m = 0{,}50$ kg, de raideur $k = 50$ N/m et d'amplitude $X_m = 10$ cm oscille sans frottement. Calcule sa vitesse quand il passe en $x = 6{,}0$ cm.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Choisir : l'extrémité ($x = 0{,}10$ m, $v = 0$) et la position $x = 0{,}060$ m. Étape 2 — Écrire : $E_m = 0{,}25$ J ; en $x = 0{,}060$ m, $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}\\times 50 \\times 0{,}060^2 = \\frac{1}{2}mv^2 + 0{,}09$. Étape 3 — Égaler : $\\frac{1}{2}mv^2 = 0{,}25 - 0{,}09 = 0{,}16$ J, donc $v^2 = \\frac{2 \\times 0{,}16}{0{,}50} = 0{,}64$. Étape 4 — Calculer : $v = 0{,}8$ m/s.",
+                "answers": [
+                  {
+                    "content": "0.8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Au passage par la position d'équilibre ($x = 0$), l'énergie mécanique d'un pendule élastique oscillant sans frottement est nulle, car l'allongement est nul.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire : $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2$. En $x = 0$, seule $E_p$ est nulle : $E_m = \\frac{1}{2}mv^2 = E_{c,max}$. Étape 3 — Égaler : $E_m$ est constante et vaut $\\frac{1}{2}kX_m^2$. Pour $k = 50$ N/m et $X_m = 0{,}10$ m, $E_m = 0{,}25$ J en O comme partout ailleurs. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes avec $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2$ pour un pendule élastique horizontal sans frottement.",
+            "questions": [
+              {
+                "content": "À l'abscisse $x = X_m$, la vitesse est ___ et l'énergie potentielle élastique est ___.",
+                "question_type": "select",
+                "hint": "À l'extrémité, le solide fait demi-tour.",
+                "explanation": "Étape 1 — Choisir la position extrême $x = X_m$ : le solide s'arrête pour repartir en sens inverse, donc $v = 0$. Étape 2 — Écrire : $E_m = 0 + \\frac{1}{2}kX_m^2$ : toute l'énergie mécanique est potentielle, $E_p$ est maximale.",
+                "answers": [
+                  {
+                    "content": "nulle",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "maximale",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "égale à $X_m\\omega_0$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "maximale",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "nulle",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "égale à $E_c$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un pendule élastique horizontal sans frottement a une raideur $k = 200$ N/m et une amplitude $X_m = 2{,}0$ cm. Calcule son énergie mécanique.",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0.001,
+                "hint": "$2{,}0$ cm $= 0{,}020$ m.",
+                "explanation": "Étape 2 — Écrire : à l'extrémité $v = 0$, donc $E_m = \\frac{1}{2}kX_m^2$. Étape 4 — Calculer en unités SI : $X_m = 0{,}020$ m, donc $E_m = \\frac{1}{2}\\times 200 \\times 0{,}020^2 = 0{,}040$ J.",
+                "answers": [
+                  {
+                    "content": "0.04",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes qui permettent de retrouver l'équation différentielle à partir de l'énergie mécanique.",
+                "question_type": "ordering",
+                "hint": "On part de l'expression de Em, puis on utilise sa conservation.",
+                "explanation": "Étape 2 — Écrire d'abord $E_m = \\frac{1}{2}m\\dot x^2 + \\frac{1}{2}kx^2$. Sans frottement, $E_m$ se conserve, donc sa dérivée est nulle. Dériver donne $m\\dot x\\,\\ddot x + kx\\,\\dot x = 0$, soit $\\dot x\\,(m\\ddot x + kx) = 0$. On simplifie par $\\dot x$, non nul en général : $\\ddot x + \\frac{k}{m}\\,x = 0$.",
+                "answers": [
+                  {
+                    "content": "Écrire $E_m = \\frac{1}{2}m\\dot x^2 + \\frac{1}{2}kx^2$."
+                  },
+                  {
+                    "content": "Dire que $E_m$ est constante, donc $\\frac{dE_m}{dt} = 0$."
+                  },
+                  {
+                    "content": "Dériver : $m\\dot x\\,\\ddot x + kx\\,\\dot x = 0$."
+                  },
+                  {
+                    "content": "Simplifier par $\\dot x$ : $\\ddot x + \\frac{k}{m}\\,x = 0$."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le pendule simple",
+          "remember": "Un **pendule simple** est un petit solide de masse $m$, assimilé à un point, accroché à un fil inextensible, de masse négligeable et de longueur $\\ell$, fixé en O. On le repère par l'angle $\\theta$ entre le fil et la verticale. Forces : le poids $\\vec P$ et la tension $\\vec T$ du fil. Le théorème du centre d'inertie, projeté sur la tangente à la trajectoire (accélération $\\ell\\ddot\\theta$), donne $m\\ell\\ddot\\theta = -mg\\sin\\theta$. Pour de **petites oscillations** ($\\theta_m \\leq 10^\\circ$ environ, $\\theta$ en radians), $\\sin\\theta \\approx \\theta$ et $\\ddot\\theta + \\frac{g}{\\ell}\\,\\theta = 0$. C'est la même équation que pour le ressort : $\\theta(t) = \\theta_m\\cos(\\omega_0 t + \\varphi)$ avec $\\omega_0 = \\sqrt{\\frac{g}{\\ell}}$ et $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$ ($\\ell$ en m, $g$ en N/kg, $T_0$ en s). $T_0$ ne dépend ni de la masse $m$ ni de l'amplitude $\\theta_m$ (si elle reste petite) ; il augmente avec $\\ell$ et diminue quand $g$ augmente.",
+          "method": [
+            "Vérifier que l'amplitude est petite ($\\theta_m \\leq 10^\\circ$ environ) : on peut alors écrire $\\sin\\theta \\approx \\theta$.",
+            "Relever la longueur $\\ell$ (du point d'attache au centre d'inertie du solide, en m) et la valeur de $g$ donnée par l'énoncé.",
+            "Écrire $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$ et faire l'application numérique.",
+            "Conclure : donner $T_0$ en secondes, et $f_0 = \\frac{1}{T_0}$ en hertz si on le demande."
+          ],
+          "example": {
+            "statement": "Le balancier d'une horloge, de longueur $\\ell = 0{,}40$ m, oscille avec l'amplitude $\\theta_m = 5^\\circ$. On l'assimile à un pendule simple, avec $g = 10$ N/kg. Calculer sa période propre et sa fréquence propre.",
+            "steps": [
+              "Vérifier : $\\theta_m = 5^\\circ \\leq 10^\\circ$, ce sont de petites oscillations, donc $\\sin\\theta \\approx \\theta$.",
+              "Relever : $\\ell = 0{,}40$ m et $g = 10$ N/kg.",
+              "Écrire et calculer : $T_0 = 2\\pi\\sqrt{\\frac{0{,}40}{10}} = 2\\pi\\sqrt{0{,}04} = 2\\pi \\times 0{,}20 \\approx 1{,}26$ s.",
+              "Conclure : $T_0 \\approx 1{,}26$ s et $f_0 = \\frac{1}{1{,}26} \\approx 0{,}80$ Hz."
+            ]
+          },
+          "pitfall": "Ne pas croire que la période dépend de la masse. Contre-exemple : deux balançoires de même longueur $\\ell = 2{,}5$ m, avec $g = 10$ N/kg, ont $T_0 = 2\\pi\\sqrt{\\frac{2{,}5}{10}} = 2\\pi \\times 0{,}5 \\approx 3{,}14$ s, que l'enfant pèse 20 kg ou l'adulte 80 kg. Seule la longueur compte : quadrupler $\\ell$ double $T_0$, il n'est pas multiplié par 4. Enfin, la formule n'est valable que pour de petits angles : à $60^\\circ$, elle n'est plus correcte.",
+          "figure": "pendule-simple",
+          "exercise": {
+            "title": "Période d'un pendule simple",
+            "exercise_type": "fixation",
+            "figure": "pendule-simple",
+            "statement": "Un pendule simple est un petit solide accroché à un fil inextensible de longueur ℓ. Dans chaque question, applique la méthode : vérifier que les oscillations sont petites, relever ℓ et g, écrire T0, conclure.",
+            "questions": [
+              {
+                "content": "La période propre d'un pendule simple, pour de petites oscillations, dépend de la masse du solide suspendu.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$. La masse $m$ ne figure pas dans la formule : elle se simplifie dans $m\\ell\\ddot\\theta = -mg\\sin\\theta$. L'affirmation est fausse. Exemple : avec $\\ell = 2{,}5$ m et $g = 10$ N/kg, $T_0 \\approx 3{,}14$ s pour une masse de 20 kg comme pour 80 kg.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pendule simple de longueur $\\ell = 0{,}90$ m oscille avec de petits angles, avec $g = 10$ N/kg. Calcule sa période propre (avec $\\pi \\approx 3{,}14$).",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 0.02,
+                "explanation": "Étape 1 — Vérifier : les oscillations sont petites (énoncé). Étape 2 — Relever : $\\ell = 0{,}90$ m, $g = 10$ N/kg. Étape 3 — Écrire et calculer : $T_0 = 2\\pi\\sqrt{\\frac{0{,}90}{10}} = 2\\pi\\sqrt{0{,}09} = 2\\pi \\times 0{,}30 \\approx 1{,}88$ s. Étape 4 — Conclure : $T_0 \\approx 1{,}88$ s.",
+                "answers": [
+                  {
+                    "content": "1.88",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On veut un pendule simple de période propre $T_0 = 2{,}0$ s, avec $g = 10$ N/kg. Calcule sa longueur $\\ell$, en mètres (avec $\\pi^2 \\approx 9{,}87$).",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0.02,
+                "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$, donc $T_0^2 = 4\\pi^2\\,\\frac{\\ell}{g}$ et $\\ell = \\frac{g\\,T_0^2}{4\\pi^2}$. Application numérique : $\\ell = \\frac{10 \\times 2{,}0^2}{4 \\times 9{,}87} = \\frac{40}{39{,}5} \\approx 1{,}01$ m. Étape 4 — Conclure : $\\ell \\approx 1{,}01$ m, soit environ 1 m (un balancier de grande horloge).",
+                "answers": [
+                  {
+                    "content": "1.01",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On quadruple la longueur $\\ell$ d'un pendule simple, sans changer $g$ ni l'amplitude (petite). Que devient sa période propre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$. Avec $4\\ell$ : $T_0' = 2\\pi\\sqrt{\\frac{4\\ell}{g}} = 2\\,T_0$, car $\\sqrt{4} = 2$. Elle n'est pas multipliée par 4 : $T_0$ varie comme la racine carrée de $\\ell$.",
+                "answers": [
+                  {
+                    "content": "Elle est multipliée par 2",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est multipliée par 4",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est multipliée par 16",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle ne change pas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour un pendule simple de longueur 1,0 m, quelle amplitude permet d'utiliser la formule $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : la formule suppose $\\sin\\theta \\approx \\theta$, donc de petits angles, $\\theta_m \\leq 10^\\circ$ environ. Seule $8^\\circ$ convient. À $45^\\circ$, $60^\\circ$ ou $90^\\circ$, $\\sin\\theta$ s'écarte trop de $\\theta$ (par exemple $60^\\circ = 1{,}05$ rad, alors que $\\sin 60^\\circ = 0{,}87$).",
+                "answers": [
+                  {
+                    "content": "$\\theta_m = 8^\\circ$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\theta_m = 45^\\circ$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\theta_m = 60^\\circ$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\theta_m = 90^\\circ$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes avec $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$ pour de petites oscillations d'un pendule simple.",
+            "questions": [
+              {
+                "content": "La période propre d'un pendule simple dépend de ___ et ne dépend pas de ___.",
+                "question_type": "select",
+                "hint": "Regarde ce qui figure dans la formule de T0.",
+                "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$. La longueur $\\ell$ et $g$ y figurent ; la masse n'y figure pas, et l'amplitude non plus tant qu'elle reste petite.",
+                "answers": [
+                  {
+                    "content": "la longueur du fil",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "la masse du solide",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'amplitude (petite)",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "la masse du solide",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "la longueur du fil",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "la valeur de g",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un pendule simple de longueur $\\ell = 0{,}10$ m oscille avec de petits angles, avec $g = 10$ N/kg. Calcule sa période propre (avec $\\pi \\approx 3{,}14$).",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 0.01,
+                "hint": "$\\sqrt{0{,}01} = 0{,}10$.",
+                "explanation": "Étape 2 — Relever : $\\ell = 0{,}10$ m et $g = 10$ N/kg. Étape 3 — Écrire et calculer : $T_0 = 2\\pi\\sqrt{\\frac{0{,}10}{10}} = 2\\pi\\sqrt{0{,}01} = 2\\pi \\times 0{,}10 \\approx 0{,}63$ s.",
+                "answers": [
+                  {
+                    "content": "0.63",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pendule simple est transporté sur la Lune, où $g = 1{,}6$ N/kg au lieu de 10 N/kg sur Terre. Sa période propre, pour de petites oscillations :",
+                "question_type": "single_choice",
+                "hint": "$g$ est au dénominateur sous la racine.",
+                "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$. Quand $g$ diminue, $\\frac{\\ell}{g}$ augmente, donc $T_0$ augmente : ici $T_0' = T_0\\sqrt{\\frac{10}{1{,}6}} = 2{,}5\\,T_0$. La masse ne change rien, mais le poids, plus faible, ramène moins vite le solide vers la verticale.",
+                "answers": [
+                  {
+                    "content": "devient plus grande",
+                    "correct": true
+                  },
+                  {
+                    "content": "devient plus petite",
+                    "correct": false
+                  },
+                  {
+                    "content": "ne change pas",
+                    "correct": false
+                  },
+                  {
+                    "content": "devient nulle",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les oscillations libres amorties (étude qualitative)",
+          "remember": "Dans la réalité, des **frottements** (air, huile d'un amortisseur) s'exercent sur le solide : les oscillations libres sont **amorties**. L'énergie mécanique $E_m$ n'est plus constante : elle diminue, car l'énergie perdue est transférée au milieu extérieur sous forme de chaleur (transfert thermique). Selon l'intensité des frottements, on distingue deux régimes. Régime **pseudo-périodique** (frottements faibles) : le solide passe plusieurs fois par la position d'équilibre, l'amplitude décroît d'une oscillation à l'autre, et la **pseudo-période** $T$ (durée entre deux maxima successifs de même sens) est un peu plus grande que $T_0$. Régime **apériodique** (frottements forts) : le solide revient vers la position d'équilibre sans osciller, c'est-à-dire sans la dépasser. Un amortisseur de moto sert à limiter les oscillations de la roue après une bosse.",
+          "method": [
+            "Observer l'enregistrement de $x(t)$ : le solide repasse-t-il plusieurs fois par la position d'équilibre $x = 0$ ?",
+            "Comparer les amplitudes successives : décroissent-elles d'une oscillation à l'autre ?",
+            "Mesurer la pseudo-période entre deux maxima successifs de même sens, s'il y en a, et la comparer à $T_0$.",
+            "Conclure sur le régime (pseudo-périodique ou apériodique) et sur l'énergie mécanique, qui diminue."
+          ],
+          "example": {
+            "statement": "Pour tester l'amortisseur d'une moto, un mécanicien écarte la suspension de 4 cm de sa position d'équilibre, puis la relâche. Il relève l'écart $x$ : la courbe coupe plusieurs fois l'axe $x = 0$, et les maxima successifs valent $+4{,}0$ cm à $t = 0$, $+2{,}4$ cm à $t = 0{,}80$ s et $+1{,}44$ cm à $t = 1{,}60$ s. Quel est le régime ?",
+            "steps": [
+              "Observer : la courbe coupe plusieurs fois l'axe $x = 0$, donc la suspension dépasse plusieurs fois la position d'équilibre.",
+              "Comparer : 4,0 cm, puis 2,4 cm, puis 1,44 cm : les amplitudes décroissent.",
+              "Mesurer : deux maxima successifs sont séparés de $0{,}80 - 0 = 0{,}80$ s, donc la pseudo-période est $T = 0{,}80$ s.",
+              "Conclure : il y a des oscillations d'amplitude décroissante, c'est le régime pseudo-périodique ; l'énergie mécanique diminue à chaque oscillation (frottements de l'amortisseur)."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une amplitude qui diminue signifie un régime apériodique. Contre-exemple : amplitudes 4,0 cm, puis 2,4 cm, puis 1,44 cm. Elles diminuent, mais le solide dépasse chaque fois la position d'équilibre : le régime est pseudo-périodique. Un régime apériodique n'a aucune oscillation : l'écart passe de 4 cm à 0 sans changer de signe. De même, l'énergie mécanique perdue n'est pas détruite : elle est transférée sous forme de chaleur au milieu extérieur.",
+          "figure": "oscillations-amorties",
+          "exercise": {
+            "title": "Reconnaître le régime d'un enregistrement",
+            "exercise_type": "fixation",
+            "figure": "retour-sans-oscillation",
+            "statement": "Un solide accroché à un ressort est écarté de sa position d'équilibre, puis relâché dans un milieu qui le freine. On étudie le régime de son mouvement. Dans chaque question, applique la méthode : observer, comparer, mesurer, conclure.",
+            "questions": [
+              {
+                "content": "Dans un amortisseur de moto, l'énergie mécanique du ressort et de la roue diminue au cours des oscillations. Que devient l'énergie perdue ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure sur l'énergie mécanique : avec des frottements, elle diminue. L'énergie ne disparaît pas : elle est transférée sous forme de chaleur à l'huile de l'amortisseur et à l'air. L'énergie cinétique ne grossit pas : le solide ralentit.",
+                "answers": [
+                  {
+                    "content": "Elle est transférée au milieu extérieur sous forme de chaleur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est détruite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est stockée dans l'énergie cinétique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle augmente la raideur du ressort",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En régime pseudo-périodique, le solide passe plusieurs fois par sa position d'équilibre, avec une amplitude qui diminue.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : le régime pseudo-périodique se reconnaît à plusieurs passages par $x = 0$. Étape 2 — Comparer : les amplitudes décroissent à cause des frottements. L'affirmation est vraie. Dans le régime apériodique, au contraire, il n'y a aucun dépassement de la position d'équilibre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide est écarté de 5 cm de sa position d'équilibre, puis relâché dans une huile très visqueuse. Il revient vers la position d'équilibre en 2 s, sans jamais la dépasser. Quel est le régime ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : le solide ne dépasse jamais la position d'équilibre, il n'y repasse pas. Étape 2 — Comparer : il n'y a pas d'oscillation, donc pas d'amplitudes successives. Étape 4 — Conclure : c'est le régime apériodique, dû à des frottements forts. Un régime pseudo-périodique demanderait plusieurs passages par $x = 0$.",
+                "answers": [
+                  {
+                    "content": "Apériodique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Pseudo-périodique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Périodique, sans frottement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a pas de régime",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un enregistrement montre deux maxima successifs de même sens, aux dates $t_1 = 0{,}35$ s et $t_2 = 1{,}15$ s. Calcule la pseudo-période $T$.",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 0.01,
+                "explanation": "Étape 3 — Mesurer : la pseudo-période est la durée entre deux maxima successifs de même sens : $T = t_2 - t_1 = 1{,}15 - 0{,}35 = 0{,}80$ s. Étape 4 — Conclure : $T = 0{,}80$ s, valeur un peu supérieure à la période propre $T_0$ du même système sans frottement.",
+                "answers": [
+                  {
+                    "content": "0.8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un enregistrement montre l'amplitude d'un solide qui passe de 4 cm à 1,4 cm, avec plusieurs passages par la position d'équilibre. Un élève répond « apériodique, puisque l'amplitude diminue ». Quel est le bon régime ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : le solide passe plusieurs fois par $x = 0$, donc il oscille. Étape 2 — Comparer : l'amplitude décroît. Étape 4 — Conclure : c'est le régime pseudo-périodique. L'élève confond « l'amplitude diminue » avec « il n'y a plus d'oscillation » : seul le régime apériodique n'oscille pas du tout.",
+                "answers": [
+                  {
+                    "content": "Pseudo-périodique : la diminution de l'amplitude ne suffit pas, il y a des oscillations",
+                    "correct": true
+                  },
+                  {
+                    "content": "Apériodique, comme dit l'élève",
+                    "correct": false
+                  },
+                  {
+                    "content": "Périodique, sans frottement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun régime",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les régimes des oscillations libres amorties.",
+            "questions": [
+              {
+                "content": "Quand les frottements sont faibles, le régime est ___ ; quand ils sont très forts, le régime est ___.",
+                "question_type": "select",
+                "hint": "Fort frottement : le solide ne peut plus dépasser la position d'équilibre.",
+                "explanation": "Étape 4 — Conclure sur le régime : des frottements faibles laissent le solide osciller autour de la position d'équilibre, avec une amplitude décroissante (pseudo-périodique). Des frottements forts l'empêchent d'osciller : il revient à l'équilibre sans la dépasser (apériodique).",
+                "answers": [
+                  {
+                    "content": "pseudo-périodique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "apériodique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "périodique",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "apériodique",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "pseudo-périodique",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "périodique",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quand le solide subit des frottements, son énergie mécanique reste constante.",
+                "question_type": "true_false",
+                "hint": "Compare avec le cas sans frottement.",
+                "explanation": "Étape 4 — Conclure sur l'énergie mécanique : avec des frottements, elle diminue, car de l'énergie est transférée au milieu extérieur sous forme de chaleur. Elle ne reste constante que sans frottement. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un régime où l'amplitude décroît à chaque oscillation, avec plusieurs passages par la position d'équilibre, est dit pseudo-___.",
+                "question_type": "fill_blank",
+                "hint": "Le mot commence par la lettre p.",
+                "explanation": "Étape 1 — Observer : plusieurs passages par $x = 0$. Étape 2 — Comparer : amplitudes décroissantes. Étape 4 — Conclure : le régime est pseudo-périodique. Le mot « pseudo » rappelle que le mouvement n'est pas exactement périodique : l'amplitude change.",
+                "answers": [
+                  {
+                    "content": "périodique",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le banc d'essai de l'atelier",
+          "exercise_type": "fixation",
+          "figure": "forces-ressort-horizontal",
+          "statement": "Dans un atelier de mécanique, on teste un ressort sur un banc horizontal à coussin d'air : un chariot S de masse m = 0,20 kg, sans frottement, est accroché à un ressort de raideur k = 20 N/m, de masse négligeable. On l'écarte de 5 cm dans le sens positif de l'axe Ox (x0 = +0,05 m), l'origine O étant la position d'équilibre, puis on le lâche sans vitesse à t = 0.",
+          "questions": [
+            {
+              "content": "Un chariot de masse $m = 0{,}20$ kg, accroché à un ressort horizontal de raideur $k = 20$ N/m, oscille sans frottement. Son équation différentielle est $\\ddot x + \\omega_0^2\\,x = 0$. Calcule la pulsation propre $\\omega_0$.",
+              "question_type": "numeric",
+              "unit": "rad/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Préciser : système = chariot S, référentiel du banc galiléen. Étape 2 — Faire le bilan : $\\vec P$ et $\\vec R$ se compensent, reste $\\vec T = -kx\\,\\vec i$. Étape 3 — Appliquer le théorème du centre d'inertie : $-kx = m\\ddot x$. Étape 4 — Écrire : $\\ddot x + \\frac{k}{m}\\,x = 0$, donc $\\omega_0^2 = \\frac{20}{0{,}20} = 100\\ \\text{s}^{-2}$ et $\\omega_0 = \\sqrt{100} = 10$ rad/s.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot de masse $m = 0{,}20$ kg, accroché à un ressort de raideur $k = 20$ N/m, a une pulsation propre $\\omega_0 = 10$ rad/s. Calcule sa période propre $T_0$ (avec $\\pi \\approx 3{,}14$).",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0.01,
+              "explanation": "Pour calculer une période à partir de la pulsation : $T_0 = \\frac{2\\pi}{\\omega_0} = \\frac{2 \\times 3{,}14}{10} \\approx 0{,}63$ s. On retrouve ce résultat avec $T_0 = 2\\pi\\sqrt{\\frac{m}{k}} = 2\\pi\\sqrt{0{,}010} = 2\\pi \\times 0{,}10 \\approx 0{,}63$ s. Le chariot fait environ 1,6 oscillation par seconde.",
+              "answers": [
+                {
+                  "content": "0.63",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot ($\\omega_0 = 10$ rad/s) est lâché sans vitesse à $t = 0$ depuis $x_0 = +0{,}05$ m. Quelle est l'expression de $x(t)$, en mètres ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer : $\\omega_0 = 10$ rad/s. Étape 2 — Écrire : $x(t) = X_m\\cos(10\\,t + \\varphi)$ et $v(t) = -10\\,X_m\\sin(10\\,t + \\varphi)$. Étape 3 — Écrire les conditions initiales : $X_m\\cos\\varphi = 0{,}05$ et $-10\\,X_m\\sin\\varphi = 0$. Étape 4 — Résoudre : $\\sin\\varphi = 0$ et $\\cos\\varphi > 0$ donnent $\\varphi = 0$ et $X_m = 0{,}05$ m. Donc $x(t) = 0{,}05\\cos(10\\,t)$. La phase $\\pi$ correspondrait à un lâcher en $x_0 = -0{,}05$ m ; le sinus, à un lancer depuis O.",
+              "answers": [
+                {
+                  "content": "$x(t) = 0{,}05\\cos(10\\,t)$",
+                  "correct": true
+                },
+                {
+                  "content": "$x(t) = 0{,}05\\cos(10\\,t + \\pi)$",
+                  "correct": false
+                },
+                {
+                  "content": "$x(t) = 0{,}05\\sin(10\\,t)$",
+                  "correct": false
+                },
+                {
+                  "content": "$x(t) = 0{,}5\\cos(10\\,t)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le chariot de pulsation propre $\\omega_0 = 10$ rad/s oscille avec l'amplitude $X_m = 0{,}05$ m. Calcule sa vitesse maximale.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0.01,
+              "explanation": "Étape 2 — Écrire : $v(t) = -X_m\\omega_0\\sin(\\omega_0 t + \\varphi)$, dont la valeur maximale est $v_{max} = X_m\\omega_0$. Application : $v_{max} = 0{,}05 \\times 10 = 0{,}50$ m/s. Elle est atteinte au passage par O. Contrôle par l'énergie : $\\frac{1}{2}mv_{max}^2 = \\frac{1}{2}\\times 0{,}20 \\times 0{,}50^2 = 0{,}025$ J $= \\frac{1}{2}kX_m^2$.",
+              "answers": [
+                {
+                  "content": "0.5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un chariot de raideur $k = 20$ N/m oscille sans frottement avec l'amplitude $X_m = 5{,}0$ cm. Calcule son énergie mécanique, en joules.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0.001,
+              "explanation": "Étape 1 — Choisir : à l'extrémité, $x = X_m$ et $v = 0$. Étape 2 — Écrire : $E_m = \\frac{1}{2}kX_m^2$. Étape 4 — Calculer en unités SI : $X_m = 0{,}050$ m, donc $E_m = \\frac{1}{2}\\times 20 \\times 0{,}050^2 = 0{,}025$ J. Avec les centimètres, on obtiendrait un résultat 10 000 fois trop grand.",
+              "answers": [
+                {
+                  "content": "0.025",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot de masse $m = 0{,}20$ kg, de raideur $k = 20$ N/m, oscille sans frottement avec $X_m = 5{,}0$ cm, soit $E_m = 0{,}025$ J. Calcule son énergie cinétique quand il passe en $x = 3{,}0$ cm.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0.0005,
+              "explanation": "Étape 1 — Choisir : l'extrémité (où $E_m$ est connue) et la position $x = 0{,}030$ m. Étape 2 — Écrire : $E_p = \\frac{1}{2}kx^2 = \\frac{1}{2}\\times 20 \\times 0{,}030^2 = 0{,}009$ J. Étape 3 — Égaler : $E_c = E_m - E_p = 0{,}025 - 0{,}009 = 0{,}016$ J. Étape 4 — Calculer : $E_c = 0{,}016$ J, soit une vitesse $v = \\sqrt{\\frac{2 \\times 0{,}016}{0{,}20}} = 0{,}40$ m/s.",
+              "answers": [
+                {
+                  "content": "0.016",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La balançoire de la cour",
+          "exercise_type": "fixation",
+          "figure": "pendule-simple",
+          "statement": "Dans la cour de l'école, une balançoire est suspendue par des chaînes de longueur ℓ = 2,5 m. On l'assimile à un pendule simple, avec g = 10 N/kg. Les enfants la lancent avec de petits angles, d'amplitude θm = 8°.",
+          "questions": [
+            {
+              "content": "Une balançoire de longueur $\\ell = 2{,}5$ m, lancée avec l'amplitude $\\theta_m = 8^\\circ$, peut être étudiée avec la formule $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Vérifier : la formule suppose de petites oscillations, $\\theta_m \\leq 10^\\circ$ environ, pour avoir $\\sin\\theta \\approx \\theta$. Ici $8^\\circ \\leq 10^\\circ$ : la formule s'applique. L'affirmation est vraie. Avec $60^\\circ$, ce ne serait plus le cas.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une balançoire assimilée à un pendule simple de longueur $\\ell = 2{,}5$ m, avec $g = 10$ N/kg, oscille avec de petits angles. L'équation différentielle est $\\ddot\\theta + \\frac{g}{\\ell}\\,\\theta = 0$. Calcule $\\frac{g}{\\ell}$ (en unités SI).",
+              "question_type": "numeric",
+              "unit": "s⁻²",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : $\\theta_m = 8^\\circ$, petites oscillations. Étape 2 — Relever : $\\ell = 2{,}5$ m et $g = 10$ N/kg. Équation du pendule simple : $m\\ell\\ddot\\theta = -mg\\sin\\theta \\approx -mg\\theta$, d'où $\\ddot\\theta + \\frac{g}{\\ell}\\,\\theta = 0$ avec $\\frac{g}{\\ell} = \\frac{10}{2{,}5} = 4\\ \\text{s}^{-2}$, donc $\\omega_0 = 2$ rad/s.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une balançoire assimilée à un pendule simple de longueur $\\ell = 2{,}5$ m, avec $g = 10$ N/kg, oscille avec de petits angles. Calcule sa période propre (avec $\\pi \\approx 3{,}14$).",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Vérifier : petites oscillations. Étape 2 — Relever : $\\ell = 2{,}5$ m, $g = 10$ N/kg. Étape 3 — Écrire et calculer : $T_0 = 2\\pi\\sqrt{\\frac{2{,}5}{10}} = 2\\pi\\sqrt{0{,}25} = 2\\pi \\times 0{,}5 = \\pi \\approx 3{,}14$ s. Étape 4 — Conclure : $T_0 \\approx 3{,}14$ s.",
+              "answers": [
+                {
+                  "content": "3.14",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une balançoire a une période propre $T_0 \\approx 3{,}14$ s. Calcule sa fréquence propre $f_0$, en hertz.",
+              "question_type": "numeric",
+              "unit": "Hz",
+              "tolerance": 0.01,
+              "explanation": "Étape 4 — Conclure : $f_0 = \\frac{1}{T_0} = \\frac{1}{3{,}14} \\approx 0{,}32$ Hz. La balançoire fait environ 0,32 oscillation complète par seconde, soit une oscillation toutes les 3 secondes.",
+              "answers": [
+                {
+                  "content": "0.32",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un enfant de 20 kg est remplacé sur la même balançoire (longueur 2,5 m, petites oscillations) par un adulte de 80 kg. Que devient la période propre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$. La masse n'y figure pas : elle se simplifie dans $m\\ell\\ddot\\theta = -mg\\sin\\theta$. $T_0 \\approx 3{,}14$ s dans les deux cas. L'erreur est de croire qu'un solide plus lourd est plus lent : la masse accroît à la fois le poids et l'inertie, et les deux effets se compensent.",
+              "answers": [
+                {
+                  "content": "Elle ne change pas",
+                  "correct": true
+                },
+                {
+                  "content": "Elle double",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est multipliée par 4",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est divisée par 4",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les élèves veulent que la balançoire (longueur $\\ell = 2{,}5$ m) ait une période deux fois plus petite. Quelle longueur de chaîne faut-il, en mètres ?",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0.001,
+              "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$ varie comme $\\sqrt{\\ell}$. Pour diviser $T_0$ par 2, il faut diviser $\\ell$ par $2^2 = 4$. Application : $\\ell' = \\frac{2{,}5}{4} = 0{,}625$ m. Vérification : $T_0' = 2\\pi\\sqrt{\\frac{0{,}625}{10}} = 2\\pi \\times 0{,}25 \\approx 1{,}57$ s, la moitié de 3,14 s.",
+              "answers": [
+                {
+                  "content": "0.625",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque grandeur du pendule simple à son effet sur la période propre T0 (petites oscillations).",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Écrire : $T_0 = 2\\pi\\sqrt{\\frac{\\ell}{g}}$. La longueur $\\ell$ est au numérateur sous la racine : si elle augmente, $T_0$ augmente. $g$ est au dénominateur : si $g$ augmente, $T_0$ diminue. La masse $m$ ne figure pas dans la formule : $T_0$ n'en dépend pas.",
+              "answers": [
+                {
+                  "content": "La longueur du fil",
+                  "match": "$T_0$ augmente quand elle augmente"
+                },
+                {
+                  "content": "La masse du solide",
+                  "match": "$T_0$ ne dépend pas d'elle"
+                },
+                {
+                  "content": "L'intensité de la pesanteur g",
+                  "match": "$T_0$ diminue quand elle augmente"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Mesurer la raideur d'un ressort de moto",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Dans un atelier, un mécanicien veut connaître la raideur k d'un ressort. Il l'attache à un solide S de masse m = 0,40 kg, posé sur un rail horizontal sans frottement. Il écarte S, le lâche et chronomètre 10 oscillations complètes : 3,14 s. Il refait ensuite une expérience : à t = 0, S passe par la position d'équilibre O avec la vitesse +0,80 m/s, dans le sens positif de l'axe Ox. On prend π = 3,14.",
+          "questions": [
+            {
+              "content": "Un solide effectue 10 oscillations complètes en 3,14 s. Calcule sa période propre $T_0$.",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0.001,
+              "explanation": "Pour déterminer la période, on divise la durée par le nombre d'oscillations : $T_0 = \\frac{3{,}14}{10} = 0{,}314$ s. Mesurer plusieurs oscillations réduit l'erreur due au chronométrage à la main : l'incertitude de lecture est partagée entre les 10 périodes.",
+              "answers": [
+                {
+                  "content": "0.314",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un solide a une période propre $T_0 = 0{,}314$ s. Calcule sa pulsation propre $\\omega_0$ (avec $\\pi \\approx 3{,}14$).",
+              "question_type": "numeric",
+              "unit": "rad/s",
+              "tolerance": 0.1,
+              "explanation": "Étape 1 — Calculer : $\\omega_0 = \\frac{2\\pi}{T_0} = \\frac{2 \\times 3{,}14}{0{,}314} = 20$ rad/s.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un solide de masse $m = 0{,}40$ kg, accroché à un ressort horizontal de raideur $k$, a pour pulsation propre $\\omega_0 = 20$ rad/s. Calcule $k$, en N/m.",
+              "question_type": "numeric",
+              "unit": "N/m",
+              "tolerance": 1,
+              "explanation": "Étapes 1 à 3 — Préciser, faire le bilan, appliquer : $-kx = m\\ddot x$. Étape 4 — Écrire : $\\ddot x + \\frac{k}{m}\\,x = 0$, donc $\\omega_0^2 = \\frac{k}{m}$ et $k = m\\,\\omega_0^2$. Application numérique : $k = 0{,}40 \\times 20^2 = 0{,}40 \\times 400 = 160$ N/m. Contrôle par la période : $T_0 = 2\\pi\\sqrt{\\frac{0{,}40}{160}} = 2\\pi \\times 0{,}05 = 0{,}314$ s.",
+              "answers": [
+                {
+                  "content": "160",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le solide ($m = 0{,}40$ kg, $\\omega_0 = 20$ rad/s) passe à $t = 0$ par $x = 0$ avec la vitesse $v_0 = +0{,}80$ m/s. Dans $x(t) = X_m\\cos(\\omega_0 t + \\varphi)$ avec $X_m > 0$, quelles sont les valeurs de $X_m$ et de $\\varphi$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Écrire : $x(t) = X_m\\cos(20\\,t + \\varphi)$ et $v(t) = -20\\,X_m\\sin(20\\,t + \\varphi)$. Étape 3 — Écrire les conditions initiales : $x(0) = X_m\\cos\\varphi = 0$ et $v(0) = -20\\,X_m\\sin\\varphi = 0{,}80$. Étape 4 — Résoudre : $\\cos\\varphi = 0$ donc $\\varphi = \\pm\\frac{\\pi}{2}$ ; $v(0) > 0$ avec $X_m > 0$ impose $\\sin\\varphi < 0$, donc $\\varphi = -\\frac{\\pi}{2}$ et $\\sin\\varphi = -1$. Alors $X_m = \\frac{0{,}80}{20} = 0{,}040$ m. Avec $+\\frac{\\pi}{2}$, la vitesse initiale serait négative.",
+              "answers": [
+                {
+                  "content": "$X_m = 0{,}040$ m et $\\varphi = -\\frac{\\pi}{2}$ rad",
+                  "correct": true
+                },
+                {
+                  "content": "$X_m = 0{,}040$ m et $\\varphi = +\\frac{\\pi}{2}$ rad",
+                  "correct": false
+                },
+                {
+                  "content": "$X_m = 0{,}80$ m et $\\varphi = -\\frac{\\pi}{2}$ rad",
+                  "correct": false
+                },
+                {
+                  "content": "$X_m = 0{,}040$ m et $\\varphi = 0$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le solide de masse $m = 0{,}40$ kg passe par la position d'équilibre à la vitesse de 0,80 m/s, sans frottement. Calcule son énergie mécanique, en joules.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0.002,
+              "explanation": "Étape 1 — Choisir : la position O, où $x = 0$ et $v = 0{,}80$ m/s. Étape 2 — Écrire : $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2 = \\frac{1}{2}mv^2$ puisque $x = 0$. Étape 4 — Calculer : $E_m = \\frac{1}{2}\\times 0{,}40 \\times 0{,}80^2 = 0{,}128$ J. Contrôle : $\\frac{1}{2}kX_m^2 = \\frac{1}{2}\\times 160 \\times 0{,}040^2 = 0{,}128$ J.",
+              "answers": [
+                {
+                  "content": "0.128",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le solide ($m = 0{,}40$ kg, $k = 160$ N/m, $E_m = 0{,}128$ J) oscille sans frottement. Calcule sa vitesse quand il passe en $x = 2{,}4$ cm.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Choisir : O (où $E_m$ est connue) et $x = 0{,}024$ m. Étape 2 — Écrire : $E_p = \\frac{1}{2}\\times 160 \\times 0{,}024^2 = 0{,}04608$ J. Étape 3 — Égaler : $\\frac{1}{2}mv^2 = 0{,}128 - 0{,}04608 = 0{,}08192$ J, donc $v^2 = \\frac{2 \\times 0{,}08192}{0{,}40} = 0{,}4096$. Étape 4 — Calculer : $v = 0{,}64$ m/s, inférieure à la vitesse maximale 0,80 m/s, comme attendu.",
+              "answers": [
+                {
+                  "content": "0.64",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le solide ($k = 160$ N/m, amplitude $X_m = 4{,}0$ cm) oscille sans frottement. Pour quelle valeur absolue de l'abscisse, en cm, son énergie cinétique est-elle égale à son énergie potentielle ?",
+              "question_type": "numeric",
+              "unit": "cm",
+              "tolerance": 0.02,
+              "explanation": "Étape 1 — Choisir : la position cherchée $x$, où $E_c = E_p$. Étape 2 — Écrire : $E_m = E_c + E_p = 2E_p$, avec $E_m = \\frac{1}{2}kX_m^2$ et $E_p = \\frac{1}{2}kx^2$. Étape 3 — Égaler : $\\frac{1}{2}kX_m^2 = 2 \\times \\frac{1}{2}kx^2$, donc $x^2 = \\frac{X_m^2}{2}$ et $|x| = \\frac{X_m}{\\sqrt{2}}$. Étape 4 — Calculer : $|x| = \\frac{4{,}0}{1{,}414} \\approx 2{,}83$ cm. À cette abscisse, chaque énergie vaut la moitié de $E_m$.",
+              "answers": [
+                {
+                  "content": "2.83",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les amortisseurs d'une moto",
+          "exercise_type": "evaluation",
+          "figure": "oscillations-amorties",
+          "statement": "Dans un atelier, un mécanicien étudie la suspension arrière d'une moto. Il la modélise par un solide de masse m = 20 kg accroché à un ressort de raideur k = 2 000 N/m, qui oscille suivant un axe Ox d'origine O à la position d'équilibre. Il écarte la suspension de 4,0 cm dans le sens positif, puis la relâche sans vitesse. L'enregistrement de l'écart x coupe plusieurs fois l'axe x = 0 ; ses maxima successifs valent +4,0 cm à t = 0, +2,4 cm à t = 0,63 s et +1,44 cm à t = 1,26 s. La figure montre la longueur L = 20 cm + x du ressort. On prend π = 3,14.",
+          "questions": [
+            {
+              "content": "Une suspension de moto, écartée de 4,0 cm, relâchée, passe plusieurs fois par sa position d'équilibre avec des maxima successifs de +4,0 cm, +2,4 cm puis +1,44 cm. Quel est son régime ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : l'enregistrement coupe plusieurs fois l'axe $x = 0$ : il y a des oscillations. Étape 2 — Comparer : 4,0 cm, 2,4 cm, 1,44 cm, les amplitudes décroissent. Étape 4 — Conclure : c'est le régime pseudo-périodique. Il n'est pas apériodique, car le solide dépasse la position d'équilibre ; il n'est pas périodique, car l'amplitude diminue.",
+              "answers": [
+                {
+                  "content": "Pseudo-périodique",
+                  "correct": true
+                },
+                {
+                  "content": "Apériodique",
+                  "correct": false
+                },
+                {
+                  "content": "Périodique, sans frottement",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun régime : le solide s'arrête tout de suite",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une suspension modélisée par un solide de masse $m = 20$ kg sur un ressort de raideur $k = 2\\,000$ N/m oscillerait sans frottement avec la période propre $T_0 = 2\\pi\\sqrt{\\frac{m}{k}}$. Calcule $T_0$ (avec $\\pi \\approx 3{,}14$).",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Calculer : $\\omega_0 = \\sqrt{\\frac{k}{m}} = \\sqrt{\\frac{2\\,000}{20}} = \\sqrt{100} = 10$ rad/s. Alors $T_0 = \\frac{2\\pi}{\\omega_0} = \\frac{2 \\times 3{,}14}{10} \\approx 0{,}63$ s.",
+              "answers": [
+                {
+                  "content": "0.63",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour cette suspension, la période propre sans frottement est $T_0 \\approx 0{,}63$ s et la pseudo-période mesurée est $T = 0{,}63$ s. Que peut-on conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Mesurer et comparer : la pseudo-période, durée entre deux maxima successifs ($1{,}26 - 0{,}63 = 0{,}63$ s), est un peu supérieure à $T_0$, et pratiquement égale ici à $T_0 \\approx 0{,}63$ s. Étape 4 — Conclure : quand les frottements sont faibles, $T$ reste voisine de $T_0$. On peut comparer les deux durées : la pseudo-période est la période du mouvement amorti.",
+              "answers": [
+                {
+                  "content": "T est à peu près égale à T0 : les frottements sont faibles",
+                  "correct": true
+                },
+                {
+                  "content": "T est très supérieure à T0 : les frottements sont forts",
+                  "correct": false
+                },
+                {
+                  "content": "T est inférieure à T0 : les frottements accélèrent le mouvement",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas comparer une période et une pseudo-période",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La suspension ($k = 2\\,000$ N/m) est écartée de 4,0 cm puis relâchée sans vitesse. Calcule son énergie mécanique initiale, en joules.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Choisir : la position initiale, où $v = 0$ et $x = 0{,}040$ m. Étape 2 — Écrire : $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2 = \\frac{1}{2}kx^2$. Étape 4 — Calculer en unités SI : $E_m = \\frac{1}{2}\\times 2\\,000 \\times 0{,}040^2 = 1000 \\times 0{,}0016 = 1{,}6$ J.",
+              "answers": [
+                {
+                  "content": "1.6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La suspension ($k = 2\\,000$ N/m) a un maximum de 4,0 cm à $t = 0$, puis un maximum de 2,4 cm une pseudo-période plus tard, où sa vitesse est nulle. Calcule l'énergie mécanique perdue pendant cette pseudo-période, en joules.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Choisir : le maximum de 4,0 cm (début) et le maximum de 2,4 cm (une pseudo-période plus tard), où $v = 0$. Étape 2 — Écrire : $E_m = \\frac{1}{2}kX^2$ : au début 1,6 J ; ensuite $\\frac{1}{2}\\times 2\\,000 \\times 0{,}024^2 = 1000 \\times 0{,}000576 = 0{,}576$ J. Étape 3 — Comparer : l'énergie perdue est $1{,}6 - 0{,}576 = 1{,}024$ J. Étape 4 — Calculer : environ 1,02 J, transférés sous forme de chaleur à l'huile de l'amortisseur et à l'air : l'énergie n'est pas détruite.",
+              "answers": [
+                {
+                  "content": "1.02",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si le fluide de l'amortisseur est beaucoup plus visqueux, la suspension peut revenir à sa position d'équilibre sans osciller (régime apériodique).",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Conclure : l'intensité des frottements détermine le régime. Des frottements faibles donnent le régime pseudo-périodique ; des frottements forts, comme ceux d'une huile très visqueuse, peuvent empêcher toute oscillation : le solide revient vers $x = 0$ sans la dépasser, c'est le régime apériodique. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi l'énergie mécanique de la suspension diminue au cours des oscillations, ce que devient l'énergie perdue, et pourquoi une moto est équipée d'amortisseurs.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Les frottements exercés par l'huile et par l'air…",
+              "criteria": [
+                "Les frottements dissipent de l'énergie, donc l'énergie mécanique diminue",
+                "L'énergie perdue est transférée sous forme de chaleur au milieu extérieur, elle n'est pas détruite",
+                "L'amortisseur freine les oscillations : l'amplitude décroît vite (régime pseudo-périodique, voire apériodique)"
+              ],
+              "explanation": "Corrigé modèle : la suspension subit des frottements (huile de l'amortisseur, air). Ces forces s'opposent au mouvement et font diminuer l'énergie mécanique $E_m = \\frac{1}{2}mv^2 + \\frac{1}{2}kx^2$ : ici, elle passe de 1,6 J à 0,576 J en une pseudo-période. L'énergie perdue n'est pas détruite : elle est transférée au milieu extérieur sous forme de chaleur. Sans amortisseur, la moto continuerait à osciller après chaque bosse avec une amplitude presque constante ; avec lui, l'amplitude diminue vite (régime pseudo-périodique, ou apériodique si le fluide est très visqueux). Barème sur 3 points : 1 point pour la diminution de l'énergie par les frottements, 1 point pour la destination de l'énergie (chaleur), 1 point pour le rôle de l'amortisseur.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

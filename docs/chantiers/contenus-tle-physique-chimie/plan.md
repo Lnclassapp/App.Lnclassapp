@@ -66,7 +66,7 @@ Lot V — relecture indépendante, corrections, déclinaison par série, README,
 - [x] ADR : sans objet (aucun contrat nouveau)
 - [x] UDR : sans objet (aucune vue)
 - [x] `plan.md` : 4 champs par lot, collision remplie
-- [ ] 20 fichiers qui passent `valider.rb` sans avertissement
-- [ ] Relecture indépendante faite, corrections reportées
-- [ ] PR prête vers `Develop` avec la ligne de preuve `bin/ci-quiet`
-- [ ] `journal.md` clos
+- [x] 20 fichiers qui passent `valider.rb` sans avertissement
+- [x] Relecture indépendante faite, corrections reportées
+- [x] PR prête vers `Develop` avec la ligne de preuve `bin/ci-quiet`
+- [x] `journal.md` clos

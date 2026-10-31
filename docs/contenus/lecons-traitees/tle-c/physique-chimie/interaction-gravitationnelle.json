@@ -508,7 +508,7 @@
               {
                 "content": "À quelle altitude h le champ de gravitation terrestre vaut-il $\\frac{g_0}{4}$ ? (R est le rayon de la Terre.)",
                 "question_type": "single_choice",
-                "explanation": "Étape 3 — Écrire : $g = g_0\\,\\frac{R^2}{(R+h)^2} = \\frac{g_0}{4}$ donne $(R+h)^2 = 4R^2$, donc $R + h = 2R$. Étape 2 — Calculer : $h = R$. L'erreur $h = 2R$ vient de la confusion entre altitude et distance au centre : $r = 2R$ correspond à $h = R$.",
+                "explanation": "Étape 2 — Calculer : la distance au centre est $r = R + h$. Étape 3 — Écrire : $g = g_0\\,\\frac{R^2}{r^2} = \\frac{g_0}{4}$ donne $r^2 = 4R^2$, donc $r = 2R$. Étape 4 — Conclure : $h = r - R = R$. L'erreur $h = 2R$ vient de la confusion entre altitude et distance au centre : $r = 2R$ correspond à $h = R$.",
                 "answers": [
                   {
                     "content": "$h = \\frac{R}{2}$",
@@ -872,7 +872,7 @@
               {
                 "content": "Choisis les trois conditions que doit remplir un satellite géostationnaire.",
                 "question_type": "multiple_correct_3",
-                "explanation": "Étape 1 — Écrire la condition du problème : un satellite immobile pour un observateur terrestre tourne avec la Terre, donc dans le même sens et avec la période sidérale $T = 86\\,164$ s, sur une orbite circulaire équatoriale. Une orbite polaire fait défiler la Terre sous le satellite ; à 400 km d'altitude, la période est d'environ 1 h 33 min, et la vitesse de 8 km/s correspond à une orbite basse.",
+                "explanation": "Étape 1 — Écrire la condition du problème : un satellite immobile pour un observateur terrestre tourne avec la Terre, donc dans le même sens et avec la période sidérale $T = 86\\,164$ s, sur une orbite circulaire équatoriale. Une orbite polaire fait défiler la Terre sous le satellite ; à 400 km d'altitude, la période est d'environ 1 h 32 min, et la vitesse de 8 km/s correspond à une orbite basse.",
                 "answers": [
                   {
                     "content": "Son orbite est circulaire et située dans le plan équatorial",
@@ -1209,7 +1209,7 @@
               "question_type": "numeric",
               "unit": "min",
               "tolerance": 0.3,
-              "explanation": "Étape 4 — Exprimer : $T = \\frac{2\\pi\\,r}{v}$. Étape 5 — Faire l'application numérique : $T = \\frac{2\\pi\\times 7{,}17\\times 10^{6}}{7{,}45\\times 10^{3}} \\approx 6{,}05\\times 10^{3}$ s, soit $\\frac{6\\,045}{60} \\approx 100{,}8$ min.",
+              "explanation": "Étape 4 — Exprimer : $T = \\frac{2\\pi\\,r}{v}$. Étape 5 — Faire l'application numérique : $T = \\frac{2\\pi\\times 7{,}17\\times 10^{6}}{7{,}45\\times 10^{3}} \\approx 6{,}05\\times 10^{3}$ s, soit $\\frac{6\\,047}{60} \\approx 100{,}8$ min.",
               "answers": [
                 {
                   "content": "100.8",
@@ -1218,11 +1218,11 @@
               ]
             },
             {
-              "content": "Le satellite a une période de révolution de 6 045 s. Combien de tours complets effectue-t-il en 24 h (86 400 s) ?",
+              "content": "Le satellite a une période de révolution de 6 047 s. Combien de tours complets effectue-t-il en 24 h (86 400 s) ?",
               "question_type": "numeric",
               "unit": "tours",
               "tolerance": 0,
-              "explanation": "Étape 1 — Repérer : $T = 6\\,045$ s et la durée est $86\\,400$ s. Étape 2 — Calculer le nombre de tours : $\\frac{86\\,400}{6\\,045} \\approx 14{,}3$. Il effectue donc 14 tours complets en 24 h. Arrondir à 15 serait faux : le quinzième tour n'est pas terminé.",
+              "explanation": "Étape 1 — Repérer : $T = 6\\,047$ s et la durée est $86\\,400$ s. Étape 2 — Calculer le nombre de tours : $\\frac{86\\,400}{6\\,047} \\approx 14{,}3$. Il effectue donc 14 tours complets en 24 h. Arrondir à 15 serait faux : le quinzième tour n'est pas terminé.",
               "answers": [
                 {
                   "content": "14",
@@ -1233,10 +1233,10 @@
             {
               "content": "Ce satellite est-il géostationnaire ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Écrire la condition : pour être géostationnaire, la période doit valoir 86 164 s. Ici $T = 6\\,045$ s est bien plus petite, donc le satellite n'est pas immobile par rapport au sol : il fait presque 14 tours pendant que la Terre en fait un. Sa vitesse (7,45 km/s) est plus grande, et non plus faible, que celle d'un satellite géostationnaire (3,07 km/s).",
+              "explanation": "Étape 1 — Écrire la condition : pour être géostationnaire, la période doit valoir 86 164 s. Ici $T = 6\\,047$ s est bien plus petite, donc le satellite n'est pas immobile par rapport au sol : il fait presque 14 tours pendant que la Terre en fait un. Sa vitesse (7,45 km/s) est plus grande, et non plus faible, que celle d'un satellite géostationnaire (3,07 km/s).",
               "answers": [
                 {
-                  "content": "Non, car sa période (6 045 s) n'est pas égale à la période de rotation sidérale de la Terre (86 164 s)",
+                  "content": "Non, car sa période (6 047 s) n'est pas égale à la période de rotation sidérale de la Terre (86 164 s)",
                   "correct": true
                 },
                 {
@@ -1343,7 +1343,7 @@
               "question_type": "numeric",
               "unit": "h",
               "tolerance": 0.05,
-              "explanation": "Étape 4 — Exprimer : $T = \\frac{2\\pi\\,r}{v}$. Étape 5 — Faire l'application numérique : $T = \\frac{2\\pi\\times 2{,}657\\times 10^{7}}{3{,}87\\times 10^{3}} \\approx 4{,}31\\times 10^{4}$ s, soit $\\frac{43\\,120}{3\\,600} \\approx 11{,}98$ h. La période est proche de 12 h.",
+              "explanation": "Étape 4 — Exprimer : $T = \\frac{2\\pi\\,r}{v}$. Étape 5 — Faire l'application numérique : $T = \\frac{2\\pi\\times 2{,}657\\times 10^{7}}{3{,}87\\times 10^{3}} \\approx 4{,}31\\times 10^{4}$ s, soit $\\frac{43\\,140}{3\\,600} \\approx 11{,}98$ h. La période est proche de 12 h.",
               "answers": [
                 {
                   "content": "11.98",

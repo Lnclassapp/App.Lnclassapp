@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (PR #415) |
 | **Ouvert le** | 2026-10-31 |
 | **Branche** | `feature/contenus-tle-physique-chimie` |
 | **Programme** | contenus-v3-tous-niveaux (vague T3) |

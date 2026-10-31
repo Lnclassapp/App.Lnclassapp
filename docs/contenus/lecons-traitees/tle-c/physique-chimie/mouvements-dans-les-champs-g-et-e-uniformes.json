@@ -164,7 +164,7 @@
         {
           "key": "trajectoire-coup-franc",
           "kind": "coordinate_plane",
-          "description": "Trajectoire d'un coup franc tiré de O avec v0 = 25 m/s, sin α = 0,28 et cos α = 0,96 (g = 10 N/kg, air négligé), en mètres. Le mur de 1,80 m de haut est à l'abscisse 9,6 m ; la ligne de but, haute de 2,44 m (barre transversale), est à l'abscisse 24 m. Le sommet S est en (16,8 ; 2,45). Le ballon passe à 2,0 m au-dessus du mur et à 2,0 m à la ligne de but.",
+          "description": "Trajectoire d'un coup franc tiré de O avec v0 = 25 m/s, sin α = 0,28 et cos α = 0,96 (g = 10 N/kg, air négligé), en mètres. Le mur de 1,80 m de haut est à l'abscisse 9,6 m ; la ligne de but, haute de 2,44 m (barre transversale), est à l'abscisse 24 m. Le sommet S est en (16,8 ; 2,45). Le ballon passe à 2,0 m de hauteur à l'aplomb du mur (20 cm au-dessus) et à 2,0 m de hauteur à la ligne de but, sous la barre.",
           "params": {
             "xmin": 0,
             "xmax": 36,
@@ -374,7 +374,7 @@
               {
                 "id": "M4",
                 "x": 4,
-                "y": 0.18
+                "y": 0.17
               },
               {
                 "id": "S",
@@ -419,11 +419,11 @@
                 "x1": 3,
                 "y1": 0.1,
                 "x2": 4,
-                "y2": 0.18
+                "y2": 0.17
               },
               {
                 "x1": 4,
-                "y1": 0.18,
+                "y1": 0.17,
                 "x2": 5,
                 "y2": 0.27
               },
@@ -1356,7 +1356,7 @@
             {
               "content": "Le ballon est en vol, l'air est négligé. Quelle est la seule force qui s'exerce sur lui, et que vaut son accélération ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Définir : système = le ballon, référentiel terrestre galiléen. Étape 2 — Faire le bilan : le poids seul, car l'air est négligé et le pied n'est plus en contact. Étape 3 — Appliquer la deuxième loi de Newton : $m\\vec a = m\\vec g$, donc $\\vec a = \\vec g$. Le mouvement sur Ox est uniforme parce que la composante horizontale de $\\vec a$ est nulle, mais le vecteur accélération n'est pas nul : c'est le piège de la troisième proposition.",
+              "explanation": "Étape 1 — Définir : système = le ballon, référentiel terrestre galiléen. Étape 2 — Faire le bilan : le poids seul, car l'air est négligé et le pied n'est plus en contact. Étape 3 — Appliquer la deuxième loi de Newton : $m\\vec a = m\\vec g$, donc $\\vec a = \\vec g$. Le mouvement sur Ox est uniforme parce que la composante horizontale de $\\vec a$ est nulle, mais le vecteur accélération n'est pas nul : c'est le piège de la proposition « $\\vec a = \\vec 0$ ».",
               "answers": [
                 {
                   "content": "Son poids ; $\\vec a = \\vec g$",
@@ -1592,7 +1592,7 @@
             {
               "content": "Le ballon part avec $v_0 = 25$ m/s, $\\sin\\alpha = 0{,}28$ et $\\cos\\alpha = 0{,}96$ ; $g = 10$ N/kg (air négligé). Quelle est l'équation de sa trajectoire $y(x)$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Définir : le ballon, seul son poids agit, Oy vers le haut. Étape 3 — Appliquer la deuxième loi de Newton : $a_x = 0$, $a_y = -10$. Étape 4 — Intégrer : $v_{0x} = 25\\times0{,}96 = 24$ m/s et $v_{0y} = 25\\times0{,}28 = 7$ m/s, donc $x = 24t$ et $y = -5t^2 + 7t$. Étape 5 — Éliminer le temps : $t = x/24$, d'où $y = -5\\,x^2/576 + 7x/24$. L'oubli du facteur $\\dfrac{1}{2}$ donnerait 1152, l'inversion sinus/cosinus donnerait $24/7$, et le signe + ferait monter le ballon sans fin.",
+              "explanation": "Étape 1 — Définir : le ballon, seul son poids agit, Oy vers le haut. Étape 3 — Appliquer la deuxième loi de Newton : $a_x = 0$, $a_y = -10$. Étape 4 — Intégrer : $v_{0x} = 25\\times0{,}96 = 24$ m/s et $v_{0y} = 25\\times0{,}28 = 7$ m/s, donc $x = 24t$ et $y = -5t^2 + 7t$. Étape 5 — Éliminer le temps : $t = x/24$, d'où $y = -5\\,x^2/576 + 7x/24$. Diviser deux fois par 2 (5 au numérateur et $2\\times576$ au dénominateur) donnerait 1152, prendre $1/\\tan\\alpha$ au lieu de $\\tan\\alpha$ donnerait $24/7$, et le signe + ferait monter le ballon sans fin.",
               "answers": [
                 {
                   "content": "$y = \\dfrac{7}{24}\\,x - \\dfrac{5}{576}\\,x^2$",

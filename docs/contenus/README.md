@@ -49,9 +49,6 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 | `mathematiques/limites-et-continuite.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
 | `mathematiques/probabilite-conditionnelle-et-variable-aleatoire.json` | Probabilité conditionnelle et variable aléatoire (Maths) | 3 | 9 | 54 |
 | `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions (Maths) | 3 | 9 | 51 |
-| `physique-chimie/cinematique-du-point.json` | Cinématique du point (Physique) | 3 | 9 | 45 |
-| `physique-chimie/les-alcools.json` | Les alcools (Chimie) | 3 | 9 | 54 |
-| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide (Physique) | 4 | 12 | 60 |
 | `svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes.json` | Le devenir des cellules sexuelles chez les mammifères (SVT) | 3 | 9 | 53 |
 | `svt/le-fonctionnement-des-organes-sexuels-chez-l-homme.json` | Le fonctionnement des organes sexuels chez l'Homme (SVT) | 3 | 9 | 54 |
 | `svt/la-reproduction-chez-les-spermaphytes.json` | La reproduction chez les spermaphytes (SVT) | 3 | 9 | 54 |
@@ -82,9 +79,39 @@ Les 4 premiers fichiers ont été importés le 2026-09-29 sur une base neuve, pa
 À faire valider par un enseignant, car le programme détaillé n'était pas disponible :
 
 - **Maths** : les asymptotes ne sont pas traitées, faute de place en 3 fiches de révision. Dans « Dérivabilité et étude de fonctions », l'inégalité des accroissements finis et les dérivées successives ne le sont pas non plus (signalées dans le sous-titre de la dernière fiche de révision). Deux explications de « Limites et continuité » dépassent 400 caractères (450 et 444).
-- **Physique** : il faut vérifier que le repère de Frenet et le recours à une primitive sont au programme.
-- **Chimie** : il faut vérifier que la règle de Markovnikov est au programme. DNPH, Fehling et Schiff chevauchent peut-être la leçon suivante sur les aldéhydes et cétones.
+- **Physique-Chimie** : leçons réécrites au format 3, voir « Tle C et D, Physique-Chimie au format 3 ».
 - **SVT** : l'hCG, le corps jaune et la progestérone sont traités au minimum, parce qu'ils relèvent aussi de la leçon suivante.
+
+### Tle C et D, Physique-Chimie au format 3 (chantier `contenus-tle-physique-chimie`)
+
+Les 10 premières leçons de Physique-Chimie de Tle C et de Tle D (progression DPFC 2026-2027), rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), vague T3 du programme `contenus-v3-tous-niveaux`. **12 leçons distinctes, 20 fichiers** : une leçon commune aux deux séries est écrite une fois puis copiée avec la série et le rang de chacune (« Fabrication d'un savon » : rang 8 en C, 9 en D ; « Oscillations mécaniques libres » : 9 en C, 8 en D ; la leçon 6 garde l'intitulé de chaque série). Elles remplacent les 6 fichiers v1 de Tle C et D. Aucune sorte de figure nouvelle : repère, courbe, molécule, schéma fléché.
+
+| Série | Rang | Fichier | Cours | Notions | Exercices | Questions | Je m'entraîne | Auto | Figures | Sortes |
+|---|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| C | 1 | `tle-c/physique-chimie/cinematique-du-point.json` | Cinématique du point | 4 | 8 | 54 | 12 | 98 % | 5 | `coordinate_plane`, `stat_chart line` |
+| C | 2 | `tle-c/physique-chimie/les-alcools.json` | Les alcools | 5 | 9 | 58 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| C | 3 | `tle-c/physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide | 4 | 8 | 53 | 12 | 96 % | 4 | `coordinate_plane`, `stat_chart line` |
+| C | 4 | `tle-c/physique-chimie/composes-carbonyles-aldehydes-et-cetones.json` | Composés carbonylés : aldéhydes et cétones | 5 | 9 | 51 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| C | 5 | `tle-c/physique-chimie/interaction-gravitationnelle.json` | Interaction gravitationnelle | 4 | 8 | 53 | 12 | 98 % | 3 | `coordinate_plane`, `stat_chart line` |
+| C | 6 | `tle-c/physique-chimie/mouvements-dans-les-champs-g-et-e-uniformes.json` | Mouvements dans les champs g⃗ et E⃗ uniformes | 4 | 8 | 57 | 12 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| C | 7 | `tle-c/physique-chimie/acides-carboxyliques-et-derives.json` | Acides carboxyliques et dérivés | 4 | 8 | 45 | 12 | 98 % | 7 | `diagram`, `molecule`, `stat_chart bars`, `stat_chart line` |
+| C | 8 | `tle-c/physique-chimie/fabrication-d-un-savon.json` | Fabrication d'un savon | 5 | 9 | 58 | 15 | 98 % | 3 | `diagram`, `molecule` |
+| C | 9 | `tle-c/physique-chimie/oscillations-mecaniques-libres.json` | Oscillations mécaniques libres | 5 | 9 | 52 | 15 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| C | 10 | `tle-c/physique-chimie/champ-magnetique.json` | Champ magnétique | 4 | 8 | 51 | 12 | 98 % | 4 | `coordinate_plane`, `stat_chart line` |
+| D | 1 | `tle-d/physique-chimie/cinematique-du-point.json` | Cinématique du point | 4 | 8 | 54 | 12 | 98 % | 5 | `coordinate_plane`, `stat_chart line` |
+| D | 2 | `tle-d/physique-chimie/les-alcools.json` | Les alcools | 5 | 9 | 58 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| D | 3 | `tle-d/physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide | 4 | 8 | 53 | 12 | 96 % | 4 | `coordinate_plane`, `stat_chart line` |
+| D | 4 | `tle-d/physique-chimie/composes-carbonyles-aldehydes-et-cetones.json` | Composés carbonylés : aldéhydes et cétones | 5 | 9 | 51 | 15 | 98 % | 4 | `diagram`, `molecule` |
+| D | 5 | `tle-d/physique-chimie/les-amines.json` | Les amines | 5 | 9 | 57 | 15 | 98 % | 6 | `diagram`, `molecule` |
+| D | 6 | `tle-d/physique-chimie/mouvements-dans-les-champs-g-et-e-uniformes.json` | Mouvements dans les champs (g⃗ et E⃗) uniformes | 4 | 8 | 57 | 12 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| D | 7 | `tle-d/physique-chimie/acides-carboxyliques-et-derives.json` | Acides carboxyliques et dérivés | 4 | 8 | 45 | 12 | 98 % | 7 | `diagram`, `molecule`, `stat_chart bars`, `stat_chart line` |
+| D | 8 | `tle-d/physique-chimie/oscillations-mecaniques-libres.json` | Oscillations mécaniques libres | 5 | 9 | 52 | 15 | 98 % | 6 | `coordinate_plane`, `stat_chart line` |
+| D | 9 | `tle-d/physique-chimie/fabrication-d-un-savon.json` | Fabrication d'un savon | 5 | 9 | 58 | 15 | 98 % | 3 | `diagram`, `molecule` |
+| D | 10 | `tle-d/physique-chimie/les-acides-amines.json` | Les acides α-aminés | 4 | 8 | 45 | 12 | 96 % | 5 | `diagram`, `molecule` |
+
+Leçons distinctes : 53 notions, 634 questions notées, 159 questions « Je m'entraîne », 57 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et le contrôle de « Je m'entraîne » des tests de 3e. Chaque leçon a été relue par un sous-agent distinct de son auteur, qui a refait chaque calcul ; les défauts trouvés (une courbe d'énergie fausse, des arrondis intermédiaires, des étapes de méthode mal citées, des distracteurs peu plausibles) sont corrigés.
+
+**Brouillon.** Aucun enseignant ne les a relues : les points à faire valider sont dans le journal du programme [`contenus-v3-tous-niveaux`](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant). Si les cours v1 de Tle C ou D sont déjà dans une base, les renommer et les archiver avant d'importer.
 
 ### 6ème, 5ème et 4ème — `lecons-traitees/6eme/`, `5eme/`, `4eme/`
 
@@ -386,9 +413,6 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 | `mathematiques/barycentre-et-lignes-de-niveaux.json` | Barycentre et lignes de niveaux (Mathématiques) | 1 | 4 | 12 | 72 |
 | `mathematiques/limites-et-continuite.json` | Limites et continuité (Mathématiques) | 2 | 5 | 15 | 75 |
 | `mathematiques/divisibilite-dans.json` | Divisibilité dans ℤ (Mathématiques) | 3 | 4 | 12 | 67 |
-| `physique-chimie/cinematique-du-point.json` | Cinématique du point (Physique-Chimie) | 1 | 5 | 15 | 75 |
-| `physique-chimie/les-alcools.json` | Les alcools (Physique-Chimie) | 2 | 4 | 12 | 72 |
-| `physique-chimie/mouvement-du-centre-d-inertie-d-un-solide.json` | Mouvement du centre d'inertie d'un solide (Physique-Chimie) | 3 | 4 | 12 | 70 |
 | `svt/les-cycles-sexuels-chez-la-femme.json` | Les cycles sexuels chez la femme (SVT) | 1 | 4 | 12 | 72 |
 | `svt/la-transmission-d-un-caractere-hereditaire-chez-l-homme.json` | La transmission d'un caractère héréditaire chez l'Homme (SVT) | 2 | 4 | 12 | 71 |
 | `svt/la-production-d-energie-par-la-cellule.json` | La production d'énergie par la cellule (SVT) | 3 | 4 | 12 | 68 |
@@ -423,7 +447,7 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 - **Maths A1 et A2** : le niveau (calculs concrets, peu de démonstrations) est à confirmer avec un enseignant de série A.
 - **SVT A1 et A2** : le vocabulaire (drogues, dépendance, tolérance, imagerie TEP, synapses) est peut-être dense pour des littéraires ; « L'origine de la vie » a un « À compléter » sur le rattachement au programme de la série A.
 - **SVT C** : la contraception hormonale (4e fiche de « Les cycles sexuels chez la femme ») et la méiose, le rendement chiffré de la respiration (36 à 38 ATP par glucose, 30,5 kJ par mole d'ATP et 2 870 kJ par mole de glucose : valeurs écrites par le rédacteur) sont à confirmer.
-- **Physique-Chimie C** : le repère de Frenet et le mouvement rectiligne sinusoïdal (« Cinématique du point »), la fermentation alcoolique, la liaison hydrogène et la distillation (« Les alcools ») ; les noms des produits d'oxydation (aldéhydes, cétones, acides) y sont cités sans nomenclature systématique, réservée à la leçon suivante ; le frottement par une relation `f = k·R_N` donnée dans l'énoncé, sans coefficient de frottement (« Mouvement du centre d'inertie d'un solide »).
+- **Physique-Chimie C** : leçons réécrites au format 3, voir « Tle C et D, Physique-Chimie au format 3 ».
 
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 

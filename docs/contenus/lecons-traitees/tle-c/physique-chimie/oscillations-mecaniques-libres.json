@@ -125,21 +125,21 @@
             "chart": "line",
             "series": [
               40.0,
-              38.48,
               34.14,
-              27.65,
               20.0,
-              12.35,
               5.86,
-              1.52,
               0.0,
-              1.52,
               5.86,
-              12.35,
               20.0,
-              27.65,
               34.14,
-              38.48,
+              40.0,
+              34.14,
+              20.0,
+              5.86,
+              0.0,
+              5.86,
+              20.0,
+              34.14,
               40.0
             ],
             "labels": [
@@ -221,7 +221,7 @@
         {
           "key": "oscillations-amorties",
           "kind": "stat_chart",
-          "description": "Courbe de la longueur L, en cm, du ressort d'un amortisseur après un lâcher, de 0 à 2T par pas de T/8 (T est la pseudo-période). La longueur au repos est 20 cm. L part de 24 cm et coupe plusieurs fois la valeur 20 cm, mais ses maxima successifs diminuent : 24 cm en 0, 22,4 cm en T, 21,44 cm en 2T. L'amplitude 4 cm, puis 2,4 cm, puis 1,44 cm décroît : c'est le régime pseudo-périodique.",
+          "description": "Courbe de la longueur L, en cm, du ressort d'un amortisseur après un lâcher, de 0 à 2T par pas de T/8 (T est la pseudo-période). La longueur à l'équilibre est 20 cm. L part de 24 cm et coupe plusieurs fois la valeur 20 cm, mais ses maxima successifs diminuent : 24 cm en 0, 22,4 cm en T, 21,44 cm en 2T. L'amplitude 4 cm, puis 2,4 cm, puis 1,44 cm décroît : c'est le régime pseudo-périodique.",
           "params": {
             "chart": "line",
             "series": [
@@ -268,7 +268,7 @@
         {
           "key": "retour-sans-oscillation",
           "kind": "stat_chart",
-          "description": "Courbe de la longueur L, en cm, du ressort d'un amortisseur très freiné, de 0 à 16 s par pas de 1 s. La longueur au repos est 20 cm. L part de 24 cm et décroît sans cesse : 22,94 cm en 4 s, 21,62 cm en 8 s, 20,8 cm en 12 s, 20,37 cm en 16 s. Elle tend vers 20 cm sans jamais passer en dessous : le solide revient vers l'équilibre sans osciller, c'est le régime apériodique.",
+          "description": "Courbe de la longueur L, en cm, du ressort d'un amortisseur très freiné, de 0 à 16 s par pas de 1 s. La longueur à l'équilibre est 20 cm. L part de 24 cm et décroît sans cesse : 22,94 cm en 4 s, 21,62 cm en 8 s, 20,8 cm en 12 s, 20,37 cm en 16 s. Elle tend vers 20 cm sans jamais passer en dessous : le solide revient vers l'équilibre sans osciller, c'est le régime apériodique.",
           "params": {
             "chart": "line",
             "series": [
@@ -1421,7 +1421,7 @@
               "question_type": "numeric",
               "unit": "s⁻²",
               "tolerance": 0,
-              "explanation": "Étape 1 — Vérifier : $\\theta_m = 8^\\circ$, petites oscillations. Étape 2 — Relever : $\\ell = 2{,}5$ m et $g = 10$ N/kg. Pour cette étape de l'équation : $m\\ell\\ddot\\theta = -mg\\sin\\theta \\approx -mg\\theta$, d'où $\\ddot\\theta + \\frac{g}{\\ell}\\,\\theta = 0$ avec $\\frac{g}{\\ell} = \\frac{10}{2{,}5} = 4\\ \\text{s}^{-2}$, donc $\\omega_0 = 2$ rad/s.",
+              "explanation": "Étape 1 — Vérifier : $\\theta_m = 8^\\circ$, petites oscillations. Étape 2 — Relever : $\\ell = 2{,}5$ m et $g = 10$ N/kg. Équation du pendule simple : $m\\ell\\ddot\\theta = -mg\\sin\\theta \\approx -mg\\theta$, d'où $\\ddot\\theta + \\frac{g}{\\ell}\\,\\theta = 0$ avec $\\frac{g}{\\ell} = \\frac{10}{2{,}5} = 4\\ \\text{s}^{-2}$, donc $\\omega_0 = 2$ rad/s.",
               "answers": [
                 {
                   "content": "4",
@@ -1549,7 +1549,7 @@
               "question_type": "numeric",
               "unit": "N/m",
               "tolerance": 1,
-              "explanation": "Étape 1 — Préciser et faire le bilan : $-kx = m\\ddot x$, donc $\\ddot x + \\frac{k}{m}\\,x = 0$ et $\\omega_0^2 = \\frac{k}{m}$. Étape 2 — Isoler : $k = m\\,\\omega_0^2$. Application numérique : $k = 0{,}40 \\times 20^2 = 0{,}40 \\times 400 = 160$ N/m. Contrôle par la période : $T_0 = 2\\pi\\sqrt{\\frac{0{,}40}{160}} = 2\\pi \\times 0{,}05 = 0{,}314$ s.",
+              "explanation": "Étapes 1 à 3 — Préciser, faire le bilan, appliquer : $-kx = m\\ddot x$. Étape 4 — Écrire : $\\ddot x + \\frac{k}{m}\\,x = 0$, donc $\\omega_0^2 = \\frac{k}{m}$ et $k = m\\,\\omega_0^2$. Application numérique : $k = 0{,}40 \\times 20^2 = 0{,}40 \\times 400 = 160$ N/m. Contrôle par la période : $T_0 = 2\\pi\\sqrt{\\frac{0{,}40}{160}} = 2\\pi \\times 0{,}05 = 0{,}314$ s.",
               "answers": [
                 {
                   "content": "160",
@@ -1700,7 +1700,7 @@
               ]
             },
             {
-              "content": "La suspension ($k = 2\\,000$ N/m) a un maximum de 4,0 cm à $t = 0$, puis un maximum de 2,4 cm une pseudo-période plus tard, où sa vitesse est nulle. Calcule l'énergie mécanique perdue pendant cette période, en joules.",
+              "content": "La suspension ($k = 2\\,000$ N/m) a un maximum de 4,0 cm à $t = 0$, puis un maximum de 2,4 cm une pseudo-période plus tard, où sa vitesse est nulle. Calcule l'énergie mécanique perdue pendant cette pseudo-période, en joules.",
               "question_type": "numeric",
               "unit": "J",
               "tolerance": 0.01,
