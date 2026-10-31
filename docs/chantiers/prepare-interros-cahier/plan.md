@@ -2,7 +2,7 @@
 
 > Le nombre d'agents n'est pas décidé ici : il est **égal au nombre de lots sans dépendance en attente**.
 > Format des lots gelé dans [`guide/conventions.md`](../../guide/conventions.md#6-format-dun-lot).
-> Références : [PRD](prd.md) · ADR-0121 · UDR-0148 · [maquettes](maquettes/).
+> Références : [PRD](prd.md) · ADR-0121 · UDR-0149 · [maquettes](maquettes/).
 
 ## Graphe
 
@@ -198,7 +198,7 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 - **Couche**       : infrastructure + ui
 - **Fichiers**     : `app/infrastructure/queries/catalog/prepare_sheets_query.rb` (`Question#hint`)
                      `app/views/catalog/courses/sheets/_exercise.html.erb` (boîte de l'indice et bouton)
-                     `docs/decisions/udr/0148-feuilles-prepare-interros-et-devoirs.md` (§3, une ligne)
+                     `docs/decisions/udr/0149-feuilles-prepare-interros-et-devoirs.md` (§3, une ligne)
 - **Dépend de**    : Lot F, Lot R
 - **Test associé** : `test/infrastructure/queries/catalog/prepare_sheets_query_test.rb` · `test/controllers/catalog/courses_controller_test.rb`
 - **Done quand**   : un exercice sans indice d'exercice mais dont une question a un indice montre « Indice » ; la boîte affiche

@@ -1,10 +1,10 @@
 # 🧠 DOMAINE · Entities::Catalog::RevisionPreview
-# Rôle : la coupe de la « Fiche de révision » d'une leçon : 150 mots de texte, puis la fin du bloc qui atteint le seuil
-# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113, 0116-fiche-de-revision-par-notion · UDR : 0139 §3.2, 0141-fiche-de-revision-en-quatre-blocs §3.1, 0147-je-m-entraine-dans-la-fiche §3.7
+# Rôle : la coupe de la « Fiche de révision » d'une leçon : 50 mots de texte, puis la fin du bloc qui atteint le seuil
+# ADR  : 0110-fiche-de-cours-en-donnees-importees, 0113, 0116-fiche-de-revision-par-notion · UDR : 0139 §3.2, 0141-fiche-de-revision-en-quatre-blocs §3.1, 0147-je-m-entraine-dans-la-fiche §3.7, 0148-fiche-de-revision-coupee-a-50-mots
 module Entities
   module Catalog
     class RevisionPreview
-      LIMIT = 150
+      LIMIT = 50
 
       MATH = /\$[^$]+\$/
       # Les blocs d'une notion, dans l'ordre de lecture ; la figure se place entre La méthode et l'exemple, « Je m'entraîne » entre l'exemple et le piège.

@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · UseCases::Assessment::CheckExerciseOnSheet
 # Rôle : « Vérifier ma réponse » sur la feuille de la leçon : ouvre une session neuve, rend la copie et la ferme, en une seule transaction
-# ADR  : 0121 (§4, §6), 0054, 0091 (§4.4), 0112, 0115 · UDR : 0148 §3
+# ADR  : 0121 (§4, §6), 0054, 0091 (§4.4), 0112, 0115 · UDR : 0149 §3
 module UseCases
   module Assessment
     class CheckExerciseOnSheet

@@ -178,7 +178,7 @@ Alors aucune feuille ne dépasse de l'écran et chaque bouton fait au moins 44 p
 ## 6. Décisions rattachées
 
 - ADR-0121 — sujet de devoir, indice, copie rendue depuis la feuille.
-- UDR-0148 — les deux feuilles, à l'identique des maquettes.
+- UDR-0149 — les deux feuilles, à l'identique des maquettes.
 
 ## 7. Mesures
 

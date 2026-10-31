@@ -1,6 +1,6 @@
 <%# 🌐 UI · catalog/courses/sheets/_batch_bar — le bandeau du devoir composé : « n exercices choisis · Vider · Envoyer à <classe> » %>
 <%# Rôle : collé au bas de l'écran, caché tant qu'aucun exercice n'est choisi ; un bouton « Envoyer à <classe> » par classe de l'enseignant pour ce niveau (POST des exercices choisis, ajoutés par Stimulus au moment de l'envoi) ; #sheet-batch-status reçoit le compte rendu de l'envoi (Turbo Stream) %>
-<%# ADR  : 0048, sujets-de-devoir (ajout du 2026-10-30) · UDR : 0148 §3 (Devoir composé par l'enseignant) · Stimulus : assignment-batch %>
+<%# ADR  : 0048, sujets-de-devoir (ajout du 2026-10-30) · UDR : 0149 §3 (Devoir composé par l'enseignant) · Stimulus : assignment-batch %>
 <%# locals: (classrooms:) -%>
 <%# Les exemples « 1 exercice choisi » / « 2 exercices choisis » servent de gabarits : Stimulus remplace le nombre. %>
 <%= tag.div id: "sheet-batch-bar", class: "ps-batch", hidden: true,

@@ -1,6 +1,6 @@
 <%# 🌐 UI · assessment/sheet_checks/_error — le message d'une vérification qui n'est pas partie, ou d'un devoir à rendre, dans l'exercice de la feuille %>
 <%# Rôle : `p.ps-error` (role="alert" pour une réponse du serveur ; sans rôle quand la feuille s'affiche) : pause avec l'heure de reprise, exercice archivé, devoir à rendre (lien « Ma classe »), panne %>
-<%# ADR  : 0121 (§4) · UDR : 0148 §3 (États : erreur, devoir à rendre) %>
+<%# ADR  : 0121 (§4) · UDR : 0149 §3 (États : erreur, devoir à rendre) %>
 <%# locals: (exercise_public_id:, code:, resume_at: nil, alert: true) -%>
 <%# code : :paused | :archived | :assigned_pending | :assignment_closed | :invalid_copy | :failed ; l'id `sheet-error-<public_id>` est remplacé à chaque nouvelle réponse %>
 <% message = case code

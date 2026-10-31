@@ -66,6 +66,8 @@ Règle : **une vague = une matière d'un niveau**, coupée en deux par groupe de
 | D4 | Leçons v1 déjà rangées pour ces niveaux | remplacées par le fichier v3 du même intitulé (comme en 3ème) · gardées à côté | **remplacées** ; l'historique git les garde | toutes |
 | D5 | Taille et parallélisme | 1 vague = 1 matière d'un niveau, ≤ 17 leçons, 3 sessions en parallèle · regrouper les petites vagues de série A | **comme ci-dessus** | toutes |
 
+**Tranché par le porteur (2026-10-31)** : D1 = les 7 matières (ni anglais, ni EPS, ni musique, ni autres langues ou arts) ; D2 = rien à compléter en 3ème ; D3 = série E ignorée ; D4 = v1 remplacées ; D5 = accepté.
+
 ## Registre des contradictions
 
 | Sources | Écart | Tranché par |
@@ -74,11 +76,11 @@ Règle : **une vague = une matière d'un niveau**, coupée en deux par groupe de
 
 ## Portes du programme
 
-- [ ] Feuille de route validée par le porteur (D1 à D5)
+- [x] Feuille de route validée par le porteur (D1 à D5, 2026-10-31)
 - [ ] Tle : 8 vagues fusionnées, 87 leçons rangées
 - [ ] 1ère : 9 vagues fusionnées, 93 leçons
 - [ ] 2nde : 7 vagues fusionnées, 68 leçons
-- [ ] 3ème complétée selon D2
+- [x] 3ème : rien à compléter (D2)
 - [ ] 4ème, 5ème, 6ème : 6 vagues chacune
 - [ ] Points « à faire valider par un enseignant » tous inscrits au journal ; leçons en brouillon
 - [ ] Index des chantiers mis à jour à la clôture, `journal.md` clos
