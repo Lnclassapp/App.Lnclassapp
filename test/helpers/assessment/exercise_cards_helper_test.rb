@@ -5,16 +5,9 @@ module Assessment
   class ExerciseCardsHelperTest < ActionView::TestCase
     helper ComponentsHelper, DueDateHelper, BadgesHelper, Catalog::ContentStatusHelper
 
-    Home = Queries::Classroom::StudentHomeQuery
     Treated = Queries::Classroom::StudentClassroomQuery::TreatedRow
     Overview = Queries::Classroom::ClassroomOverviewQuery
     Counts = Queries::Classroom::AssignmentFollowUpQuery::Counts
-
-    def assigned(started: nil, due_on: Time.zone.today + 3, exercise_type: "fixation")
-      Home::ExerciseRow.new(public_id: "ex1", title: "La fixation du CO2", material_name: "SVT", material_category: "science",
-                            material_slug: "svt", exercise_type:, badge_level: nil, best_score_percent: nil, completed_count: 0,
-                            started_session_public_id: started, due_on:)
-    end
 
     def treated(score)
       Treated.new("ex2", "Les fonctions", "Maths", "maths", "science", score, "sess9", Time.current, "evaluation")
@@ -26,26 +19,6 @@ module Assessment
     end
 
     def text(html) = Nokogiri::HTML.fragment(html.to_s).text.squish
-
-    test "assigné non commencé : titre, SVT, Fixation, échéance, Commencer, lien vers l'exercice (CA-1)" do
-      card = exercise_card_for_assigned(assigned)
-
-      assert_equal "exercise-ex1", card.dom_id
-      assert_equal exercise_path("ex1"), card.href
-      assert_equal [ "La fixation du CO2", "SVT", "svt", "Fixation", "Commencer" ],
-                   [ card.title, card.material_name, card.material_slug, card.type_label, card.action ]
-      assert_match(/À rendre/, text(card.status))
-      assert_nil card.meta
-      assert_nil card.progress
-    end
-
-    test "assigné commencé : Reprendre (CA-2) ; une évaluation se dit Évaluation ; sans échéance, pas d'état" do
-      card = exercise_card_for_assigned(assigned(started: "s1", due_on: nil, exercise_type: "evaluation"))
-
-      assert_equal "Reprendre", card.action
-      assert_equal "Évaluation", card.type_label
-      assert_nil card.status
-    end
 
     test "traité à 16/20 : note verte, Acquis, Voir ma copie vers le résultat (CA-3)" do
       card = exercise_card_for_treated(treated(80))

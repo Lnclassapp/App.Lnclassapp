@@ -21,6 +21,7 @@
 | 2026-10-31 (fusion de Develop) | « Prépare devoirs » par type d'exercice (UDR-0145 §3.2 ter, PR #403) est remplacé par les feuilles de sujets ; `Catalog::PrepareSectionsHelper`, `_prepare_interros` et `_exercise_row` sont retirés, les clés `prepare_devoirs_*` non reprises | La page de la leçon suit les maquettes du chantier ; une évaluation sans sujet reste dans la feuille de sa notion ou dans « Toute la leçon » | non (UDR du chantier) |
 | 2026-10-31 (fusion de Develop) | Migration `add_hint_to_exercises` renumérotée `20261030100200` : `20261030100000` est déjà pris sur Develop par `add_blanks_and_hints` (ADR-0120) | Deux migrations de même version font échouer `db:migrate` ; une base locale qui a joué l'ancienne version doit être recréée | non |
 | 2026-10-31 (fusion de Develop) | Deux indices coexistent : `exercises.hint` (la feuille, ce chantier) et `questions.hint` (une question, ADR-0120, ouverture gardée sur la copie) | Ils ne servent pas au même écran ; les unifier est une décision du porteur, hors de ce chantier | à arbitrer |
+| 2026-10-31 (Lot Z) | Nettoyage de clôture. Retiré : `good_answer`, `explanation` et `other_answer` de `PrepareSheetsQuery` (champs, calcul, colonne lue) et de `StudentAssignedSheetsQuery#unanswered` ; les règles `.ps-result*` et `.ps-correction*` de `prepare_sheet.css` ; `StudentClassroomQuery#assigned_exercises` (champ de `Row`, méthode, test) et `StudentHomeQuery#assigned_exercises(classroom_id:, student_id:)` (méthode publique que lui seul appelait) ; `exercise_card_for_assigned` (helper et ses 2 tests) ; les clés `assessment.exercises.card.{start,resume,redo,review,open,to_review,questions}`. Gardé : `card.{view_copy,follow,separator,pending}` (lues par `exercise_card_for_treated`, `exercise_card_for_assignment` et `_card`), le partial `assessment/exercises/_card` et le helper (encore rendus par « Exercices traités » et la classe de l'enseignant), le champ `assigned_exercises` de `StudentHomeQuery::Row` (lu par l'accueil), `due_badge` (lu par `next_step/_exercise`), les assertions `assert_select ".ps-result", 0` (elles gardent l'absence d'un bloc résultat sur la feuille) | Plus aucune vue, JS, helper ni test ne lisait ce qui est retiré (grep `app/`, `test/`, `config/`, `script/`) ; le reste a encore un lecteur. L'UDR-0145 §3.1 cite encore `exercise_card_for_assigned` et ses verbes : à ne pas relire comme état courant | Non |
 
 ## Ce qui a dérapé
 
@@ -147,7 +148,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 |---|---|---|
 | Navigation aux flèches dans un `radiogroup` (QCM, Vrai ou faux) | La maquette n'a que le clic et le Tab ; chaque proposition reste un bouton atteignable | À décider |
 | Brouillon local des questions de type `:other` | Hors maquette ; leur interaction d'aujourd'hui reste telle quelle | À décider |
-| Clés `assessment.exercises.card.*` de la carte de leçon, plus utilisées | Fichiers de langue au Lot 0 | Nettoyage à la clôture |
+| Clés `assessment.exercises.card.*` de la carte de leçon, plus utilisées | Fichiers de langue au Lot 0 | Soldé au Lot Z |
 | `sheets/_teacher_bar.html.erb` : version minimale (bascules d'aujourd'hui) | Remplie par le Lot D | Soldé au Lot D |
 
 ## Clôture

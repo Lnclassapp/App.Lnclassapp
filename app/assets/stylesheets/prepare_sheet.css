@@ -9,7 +9,7 @@
   .ps-remember, .ps-exercise, .ps-footer. Dans .ps-exercise : .ps-exercise-top (.ps-exercise-main > .ps-exercise-head > .ps-status,
   .ps-statement ; .ps-figure), .ps-question (.ps-question-row > .ps-question-label > .ps-tag ; .ps-choices-vf > .ps-choice-vf ;
   .ps-input, .ps-input--num ; .ps-choices > .ps-choice > .ps-choice-letter ; .ps-verdict), .ps-hint, .ps-actions (.ps-btn--primary,
-  .ps-btn--hint, .ps-btn--redo, .ps-btn--choose), .ps-result. Devoir composé (Lot E) : .ps-batch (bandeau fixe) > .ps-batch-card > .ps-batch-status,
+  .ps-btn--hint, .ps-btn--redo, .ps-btn--choose). Devoir composé (Lot E) : .ps-batch (bandeau fixe) > .ps-batch-card > .ps-batch-status,
   .ps-batch-limit, .ps-batch-row (.ps-batch-count). État choisi : aria-checked="true" sur .ps-choice et .ps-choice-vf, .ps-input--filled
   sur un champ rempli. Réponse fausse : .ps-verdict--wrong (italique).
 */
@@ -357,65 +357,6 @@
 .ps-btn[disabled],
 .ps-btn[aria-busy="true"] {
   cursor: progress;
-}
-
-/* ---- Résultat ------------------------------------------------------------------------------------------------------- */
-
-.ps-result {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border: 2px solid #000;
-  padding: 12px 14px;
-}
-
-.ps-result-head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 4px 16px;
-  border-bottom: 1px solid #000;
-  padding-bottom: 8px;
-}
-
-.ps-result-grade {
-  font-size: 22px;
-  font-weight: 700;
-}
-
-.ps-result-mention {
-  font-size: 17px;
-  font-weight: 700;
-  font-style: italic;
-}
-
-.ps-result-detail {
-  flex-basis: 100%;
-  font-size: 14px;
-}
-
-.ps-correction-title {
-  font-size: 16px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.ps-correction-item {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  padding: 6px 0;
-  border-bottom: 1px dotted #999;
-  font-size: 15px;
-  text-wrap: pretty;
-}
-
-.ps-correction-line {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
 }
 
 .ps-error {

@@ -105,8 +105,7 @@ module Queries
         assert_equal [ "Vrai", "Faux" ], questions.last.choices.map(&:content)
         assert_equal [ 0, 1 ], questions.last.choices.map(&:index)
         assert_equal "cm", questions.second.unit
-        assert_equal [ nil, nil, nil ], questions.map(&:good_answer), "aucune correction avant la vérification"
-        assert_equal [ nil, nil, nil ], questions.map(&:explanation)
+        assert_equal [ nil, nil, nil ], questions.map(&:verdict), "aucune correction avant la vérification"
       end
 
       test "une question à choix unique est un QCM, lettrée A, B, C… dans l'ordre des positions" do
@@ -158,8 +157,8 @@ module Queries
         text, mcq = copy.questions
 
         assert_equal [ session.public_id, false ], [ copy.copy.session_public_id, copy.copy.passed ]
-        assert_equal [ :correct, "AC", "AC", "Même droite." ], [ text.verdict, text.response, text.good_answer, text.explanation ]
-        assert_equal [ :wrong, "B. Juste", "La B." ], [ mcq.verdict, mcq.good_answer, mcq.explanation ]
+        assert_equal [ :correct, "AC" ], [ text.verdict, text.response ]
+        assert_equal :wrong, mcq.verdict
         assert_equal [ true, false, false ], mcq.choices.map(&:picked)
         assert_equal 0, sheet.passed
         assert_not_nil b
