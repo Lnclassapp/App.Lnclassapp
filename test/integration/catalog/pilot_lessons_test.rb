@@ -59,7 +59,7 @@ class Catalog::PilotLessonsTest < ActiveSupport::TestCase
       assert_equal course["notions"].map { it["name"] }, notions.map(&:name)
       notions.each { |notion| assert_equal 4, notion.sheet.slice("remember", "method", "example", "pitfall").size, notion.name }
       exercises = Orm::Exercise.where(essential: notions).or(Orm::Exercise.where(course: imported))
-      assert_equal course["notions"].size + 4 + course["subjects"].to_a.sum { it["exercises"].size }, exercises.count
+      assert_equal course["notions"].sum { Array.wrap(it["exercise"]).size } + 4 + course["subjects"].to_a.sum { it["exercises"].size }, exercises.count
       assert_equal course["subjects"].to_a.map { it["title"] }, imported.subjects.map(&:title), slug
       assert_equal course["subjects"].to_a.sum { |subject| subject["exercises"].count { it["figure"] } },
                    Orm::Exercise.where(subject: imported.subjects).where.not(figure_key: nil).count, slug

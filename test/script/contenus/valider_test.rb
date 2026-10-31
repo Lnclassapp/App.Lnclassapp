@@ -41,10 +41,20 @@ class ContenusValiderTest < ActiveSupport::TestCase
     end
   end
 
-  test "CA-3 : une notion sans exercice ou avec deux exercices, et le rapport la nomme" do
+  test "CA-3 : une notion sans exercice ou avec trois exercices, et le rapport la nomme" do
     assert_refused mutated { it["notions"][1].delete("exercise") }, "essential_exercise_count", "notions[1].exercise"
-    two = mutated { it["notions"][0]["exercise"] = [ it["notions"][0]["exercise"], it["notions"][0]["exercise"] ] }
-    assert_refused two, "essential_exercise_count", "notions[0].exercise"
+    assert_refused mutated { it["notions"][1]["exercise"] = [] }, "essential_exercise_count", "notions[1].exercise"
+    three = mutated { |course| course["notions"][0]["exercise"] = Array.new(3) { |i| course["notions"][0]["exercise"].merge("title" => "Exercice #{i}") } }
+    assert_refused three, "essential_exercise_count", "notions[0].exercise"
+  end
+
+  test "CA-3 : une notion porte un ou deux exercices (objet ou liste), chacun contrôlé à son indice" do
+    exercise = revision_sheet_document.dig("courses", 0, "notions", 0, "exercise")
+    one = mutated { |course| course["notions"][0]["exercise"] = [ exercise ] }
+    two = mutated { |course| course["notions"][0]["exercise"] = [ exercise, exercise.merge("title" => "Second") ] }
+    [ one, two ].each { |document| assert_empty check(document).reasons }
+    short = mutated { |course| course["notions"][0]["exercise"] = [ exercise, exercise.merge("questions" => exercise["questions"].first(2)) ] }
+    assert_refused short, "too_few_questions", "notions[0].exercise[1].questions"
   end
 
   test "CA-4 : trois ou cinq problèmes" do
