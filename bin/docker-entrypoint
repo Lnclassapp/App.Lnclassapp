@@ -3,6 +3,8 @@
 # If running the rails server then create or migrate existing database
 if [ "${@: -2:1}" == "./bin/rails" ] && [ "${@: -1:1}" == "server" ]; then
   ./bin/rails db:prepare
+  # Develop et Staging chargent seuls les leçons à sujets de devoir ; la tâche ne sort jamais en erreur, `|| true` le garantit aussi.
+  ./bin/rails contenus:charger || true
 fi
 
 exec "${@}"

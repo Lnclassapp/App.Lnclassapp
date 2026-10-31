@@ -11,9 +11,9 @@ module UseCases
         @author = create_team_member(team_role: "content", second_factor: false)
       end
 
-      def adapter(writer: Repositories::Catalog::ContentTreeWriter.new)
+      def adapter(writer: Repositories::Catalog::ContentTreeWriter.new, replace_exercises: false)
         ImportCourseTree.new(courses: Repositories::Catalog::CourseRepository.new, essentials: Repositories::Catalog::EssentialRepository.new,
-                             taxonomy: Repositories::Catalog::TaxonomyRepository.new, writer:)
+                             taxonomy: Repositories::Catalog::TaxonomyRepository.new, writer:, replace_exercises:)
       end
 
       def run_import(*documents, adapter: self.adapter, author: @author)
@@ -400,6 +400,73 @@ module UseCases
         assert_equal [ [ "courses[0]", "lesson_already_published" ] ], report_pairs(report)
         assert_equal({ "course" => "Racines carrées" }, report.import_errors.first["params"])
         assert_equal [ before, "Calculer et simplifier" ], [ tree_counts, course.reload.subtitle ]
+      end
+
+      # --- Chargement automatique hors production : seuls les exercices, problèmes et sujets d'une leçon présente sont remplacés ---
+
+      def publish_lesson
+        course = Orm::Course.find_by!(slug: "racines-carrees")
+        course.update_columns(status: "published", published_at: Time.current)
+        Orm::Essential.where(course_id: course.id).update_all(status: "published", published_at: Time.current)
+        Orm::Exercise.where(course_id: course.id).update_all(status: "published", published_at: Time.current)
+        course
+      end
+
+      test "by hand, a published lesson stays refused whatever the file holds (the replace mode is opt-in)" do
+        run_import(envelope(lesson))
+        course = publish_lesson
+        before = Orm::Exercise.where(course_id: course.id).pluck(:id).sort
+
+        report = run_import(envelope(lesson("subtitle" => "Nouveau")))
+
+        assert_equal [ [ "courses[0]", "lesson_already_published" ] ], report_pairs(report)
+        assert_equal before, Orm::Exercise.where(course_id: course.id).pluck(:id).sort
+      end
+
+      test "in replace mode a published lesson keeps its course and sheets, and gets the exercises of the file in draft" do
+        run_import(envelope(lesson))
+        course = publish_lesson
+        notion_ids = course.essentials.order(:position).pluck(:id)
+        file = lesson("subtitle" => "Changé", "name" => "Racines carrées", "theme" => "teal").tap { it["exercises"].each { |e| e["title"] = "Nouveau #{e['title']}" } }
+
+        report = run_import(envelope(file), adapter: adapter(replace_exercises: true))
+
+        assert_equal [ "completed", 1, 0 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal [ "published", "Calculer et simplifier", "blue" ], course.reload.values_at(:status, :subtitle, :sheet_theme)
+        assert_equal notion_ids, course.essentials.order(:position).pluck(:id)
+        assert_equal [ "published" ], course.essentials.distinct.pluck(:status)
+        assert_equal [ "draft" ], Orm::Exercise.where(course_id: course.id).distinct.pluck(:status)
+        assert_equal 6, Orm::Exercise.where(course_id: course.id).count
+        assert_equal 4, Orm::Exercise.where(course_id: course.id, essential_id: nil).where("title LIKE 'Nouveau %'").count
+        assert_equal 0, report.details.fetch("essentials_created")
+      end
+
+      test "in replace mode a draft lesson is treated the same way, and an absent lesson is created whole" do
+        run_import(envelope(lesson))
+        course = Orm::Course.find_by!(slug: "racines-carrees")
+        notion_ids = course.essentials.order(:position).pluck(:id)
+        other = lesson("name" => "Autre leçon")
+
+        report = run_import(envelope(lesson, other), adapter: adapter(replace_exercises: true))
+
+        assert_equal [ "completed", 2, 0 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal notion_ids, course.reload.essentials.order(:position).pluck(:id)
+        assert_equal 2, Orm::Course.count
+        assert_equal [ "draft" ], Orm::Course.where(name: "Autre leçon").first.essentials.distinct.pluck(:status)
+      end
+
+      test "in replace mode a notion of the file missing from the lesson refuses it with the notion's name, and nothing is replaced" do
+        run_import(envelope(lesson))
+        course = publish_lesson
+        before = Orm::Exercise.where(course_id: course.id).pluck(:id).sort
+        file = lesson(notions: [ revision_notion("Simplifier une racine carrée", figure: "triangle-thales"), revision_notion("  Une   notion nouvelle ") ])
+
+        report = run_import(envelope(file), adapter: adapter(replace_exercises: true))
+
+        assert_equal [ "completed", 0, 1 ], report.values_at(:status, :imported_count, :error_count)
+        assert_equal [ [ "courses[0].notions[1].name", "notion_not_found" ] ], report_pairs(report)
+        assert_equal({ "name" => "Une notion nouvelle" }, report.import_errors.first["params"])
+        assert_equal before, Orm::Exercise.where(course_id: course.id).pluck(:id).sort
       end
 
       # --- ADR-0121 §4, CA-9 : l'indice d'un exercice et les sujets de devoir ---
