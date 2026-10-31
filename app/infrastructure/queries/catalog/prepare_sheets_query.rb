@@ -29,8 +29,8 @@ module Queries
       Copy = Data.define(:session_public_id, :passed)
       # kind : :mcq · :true_false · :fill_in · :calculation · :other (play : la question de la session de lecture, pour son partiel) ;
       # multiple : un QCM à 2 ou 3 réponses justes ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
-      # verdict :correct | :wrong | :empty, good_answer, explanation) n'est lue que pour un exercice corrigé : nil avant.
-      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :choices, :play, :image, :response, :verdict, :good_answer, :explanation)
+      # verdict :correct | :wrong | :empty) n'est lue que pour un exercice corrigé : nil avant.
+      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :choices, :play, :image, :response, :verdict)
       # index : le rang dans l'ordre de la feuille (celui que la feuille poste) ; picked : l'élève l'a coché dans sa copie corrigée.
       Choice = Data.define(:index, :letter, :content, :picked)
 
@@ -129,20 +129,20 @@ module Queries
       end
 
       # { exercise_id => [Row] } : questions, propositions et images en trois lectures pour toute la leçon (ni N+1, ni une par exercice).
-      QuestionRow = Data.define(:id, :type, :content, :explanation, :unit, :starter, :answers, :image)
+      QuestionRow = Data.define(:id, :type, :content, :unit, :starter, :answers, :image)
       AnswerRow = Data.define(:id, :content, :match_content, :correct)
 
       def questions(exercise_ids)
         rows = Orm::Question.where(exercise_id: exercise_ids).order(:exercise_id, :position, :id)
-                            .pluck(:exercise_id, :id, :question_type, :content, :explanation, :unit, :starter)
+                            .pluck(:exercise_id, :id, :question_type, :content, :unit, :starter)
         ids = rows.map { it[1] }
         answers = Orm::Answer.where(question_id: ids).order(:question_id, :position, :id)
                              .pluck(:question_id, :id, :content, :match_content, :correct).group_by(&:first)
         images = Orm::QuestionImage.where(question_id: ids).pluck(:question_id, :public_id, :alt, :width, :height)
                                    .to_h { |question_id, *image| [ question_id, Queries::Assessment::SessionPlayQuery::Image.new(*image) ] }
         rows.group_by(&:first).transform_values do |list|
-          list.map do |_, id, type, content, explanation, unit, starter|
-            QuestionRow.new(id:, type:, content:, explanation:, unit:, starter:, image: images[id],
+          list.map do |_, id, type, content, unit, starter|
+            QuestionRow.new(id:, type:, content:, unit:, starter:, image: images[id],
                             answers: answers.fetch(id, []).map { AnswerRow.new(*it.drop(1)) })
           end
         end
@@ -177,9 +177,7 @@ module Queries
                      multiple: Entities::Assessment::Question::EXPECTED.fetch(row.type.to_sym, 1) > 1,
                      choices: (choices(row, picked) if %i[mcq true_false].include?(kind)),
                      play: (play(row, number) if kind == :other),
-                     response: (text if corrected), verdict:,
-                     good_answer: (good_answer(row, kind) if corrected && auto_graded?(row)),
-                     explanation: (row.explanation.presence if corrected))
+                     response: (text if corrected), verdict:)
       end
 
       def auto_graded?(row) = Entities::Assessment::Question.kind_for(row.type)::AUTO_GRADED
@@ -187,27 +185,6 @@ module Queries
       def choices(row, picked)
         row.answers.each_with_index.map do |answer, index|
           Choice.new(index:, letter: ("A".ord + index).chr, content: answer.content, picked: picked.include?(answer.id))
-        end
-      end
-
-      # La bonne réponse telle que la maquette l'écrit : « B. texte » (QCM), « Vrai », la première réponse acceptée, la valeur et son unité.
-      def good_answer(row, kind)
-        correct = row.answers.each_with_index.select { |answer, _| answer.correct }
-        case kind
-        when :mcq then correct.map { |answer, index| "#{("A".ord + index).chr}. #{answer.content}" }.join(", ")
-        when :true_false then correct.map { |answer, _| answer.content }.join(", ")
-        when :fill_in then row.answers.first&.content
-        when :calculation then [ row.answers.first&.content, row.unit.presence ].compact.join(" ")
-        else other_answer(row)
-        end
-      end
-
-      # Select : la proposition juste ; ordre : les étapes dans le bon ordre ; relier : les paires.
-      def other_answer(row)
-        case Entities::Assessment::Question.kind_name_for(row.type)
-        when "select" then row.answers.find(&:correct)&.content
-        when "ordering" then row.answers.map(&:content).join(" → ")
-        when "matching" then row.answers.map { "#{it.content} → #{it.match_content}" }.join(" ; ")
         end
       end
 

@@ -10,14 +10,6 @@ module Assessment
 
     CARD_SCOPE = "assessment.exercises.card".freeze
 
-    # « Ma classe », à faire : StudentHomeQuery::ExerciseRow.
-    def exercise_card_for_assigned(row)
-      Card.new(dom_id: "exercise-#{row.public_id}", href: exercise_path(row.public_id), title: row.title,
-               material_name: row.material_name, material_slug: row.material_slug, type_label: exercise_type_label(row.exercise_type),
-               meta: nil, status: due_badge(row.due_on), action: card_t(row.started_session_public_id ? :resume : :start),
-               progress: nil)
-    end
-
     # « Ma classe », traités : StudentClassroomQuery::TreatedRow. La couleur de la note ne porte jamais seule le sens : le texte reste.
     def exercise_card_for_treated(row)
       status = safe_join([ grade_tag(row.best_score_percent),

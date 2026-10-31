@@ -93,7 +93,7 @@ module Queries
       # CA-16 : avant de rendre, ni note ni correction ni réponse d'une copie d'entraînement antérieure (la feuille rend ce qu'on lui donne).
       def unanswered(exercise)
         questions = exercise.questions.map do |question|
-          question.with(response: nil, verdict: nil, good_answer: nil, explanation: nil,
+          question.with(response: nil, verdict: nil,
                         choices: question.choices&.map { it.with(picked: false) })
         end
         exercise.with(copy: nil, questions:)

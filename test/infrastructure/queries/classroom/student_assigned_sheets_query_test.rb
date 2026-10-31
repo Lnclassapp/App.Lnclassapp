@@ -119,7 +119,7 @@ module Queries
         shown = sheets.sole.exercises.sole
 
         assert_nil shown.copy
-        assert_equal [ [ nil ] * 4 ], shown.questions.map { [ it.verdict, it.explanation, it.good_answer, it.response ] }
+        assert_equal [ [ nil ] * 2 ], shown.questions.map { [ it.verdict, it.response ] }
         assert_equal [ false ], shown.questions.flat_map(&:choices).map(&:picked).uniq
         assert_equal false, shown.due
       end
