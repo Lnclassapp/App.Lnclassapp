@@ -19,13 +19,16 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 - **Erreurs scientifiques trouvées seulement en relecture** : 36 / 38 ATP entre C3 et C4 ; racine dorsale « non motrice » par un raisonnement faux (C7) ; blastocyste qui « entre dans l'utérus » (D1) ; seuil du diabète à 1 g/L (D6) ; gènes ebony et vestigial de la drosophile présentés comme liés (D5). La relecture indépendante (Opus) est indispensable.
 - **Fichiers temporaires partagés** : deux relecteurs parallèles écrivaient `flat.txt` dans le même dossier et ont lu la mauvaise leçon. Règle : préfixer par le code de la leçon.
 - **Rapports d'auteur non fiables** : un rédacteur a rendu « placeholder », un autre a reconnu ne pas avoir refait ses calculs. Toujours relire.
-- **Redémarrage du conteneur, puis limite d'usage** pendant le lot D : agents repris par message ; le lot C, déjà commité, a été poussé aussitôt.
+- **Redémarrage du conteneur, puis limite d'usage** pendant le lot D : agents repris par message ; le lot C, déjà commité, a été poussé aussitôt. Un correcteur interrompu n'avait rien écrit : vérifier le fichier (grep d'une formule attendue) avant de croire une correction faite.
+- **Leçon D10 trop proche de C7** : deux énoncés recopiés mot pour mot malgré la consigne « ne la recopie pas » ; trouvé en relecture, réécrits.
+- **Geste volontaire présenté comme réflexe médullaire** (D10, relais) et dressage présenté comme réflexe conditionnel (D9) : les situations de la vie courante doivent être choisies pour la notion, pas l'inverse.
 
 ## Ce qu'on a appris sur la codebase
 
 - `valider.rb` refuse « u.a. » dans `unit` (`unit_invalid`) : écrire « ua » ou rien.
 - `duplicate_accepted` compare les variantes acceptées sans accents : « ovocyte » et « ovocyté » sont un doublon.
 - `hint` et `blank` ne sont admis que dans `practice`.
+- Deux tests lisent des leçons v1 de `tle-d/` (`content_tree_writer_characterization_test`, `rich_text_sanitizer_test`) : remplacer une leçon v1 les casse. La version d'avant de « Le devenir des cellules sexuelles » est gardée dans `test/fixtures/files/legacy_lessons/`, et le test du nettoyeur ignore les fichiers au format 3. Les vagues suivantes qui remplacent des v1 de `tle-d/` (maths, physique-chimie) devront faire de même.
 - Une `stat_chart` ne porte qu'une série et des valeurs de 0 à 1 000 000 ; un `diagram` en arbre n'a qu'un parent par nœud (pas d'arbre généalogique).
 
 ## Dette laissée derrière
@@ -40,7 +43,7 @@ Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette secti
 
 | | |
 |---|---|
-| **Livré le** | Lot C : 2026-10-31 (PR prête, fusion par l'orchestrateur) ; lot D : PR suivante |
-| **PR** | `feature/contenus-tle-svt-cd` vers `Develop` (Tle C) |
+| **Livré le** | 2026-10-31 (PR prêtes, fusion par l'orchestrateur) |
+| **PR** | #421 (Tle C, `feature/contenus-tle-svt-cd`) · Tle D (`feature/contenus-tle-svt-d`), toutes deux vers `Develop` |
 | **ADR produits** | aucun (ADR-0116, ADR-0117 du programme) |
 | **UDR produits** | aucune (UDR-0142, UDR-0147 du programme) |

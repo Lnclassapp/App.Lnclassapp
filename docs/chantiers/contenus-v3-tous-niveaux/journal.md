@@ -6,6 +6,8 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
+| 2026-10-31 | T4 (1/2) | Tle C | SVT | 10 (dont 3 communes à C et D) | #421 |
+| 2026-10-31 | T4 (2/2) | Tle D | SVT | 10 (7 propres + 3 déclinées de Tle C) | `feature/contenus-tle-svt-d` |
 | 2026-10-31 | T4 (1/2) | Tle C | SVT | 10 (dont 3 communes à C et D) | `feature/contenus-tle-svt-cd` |
 | 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
 
@@ -25,6 +27,13 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 | T4 | C8 Les drogues et le système nerveux | Classement stimulants / dépresseurs / perturbateurs ; aire tegmentale ventrale et noyau accumbens à nommer ? Amphétamines réduites à « libération augmentée » ; curare pour illustrer le blocage des récepteurs ; tolérance par baisse de la réponse dopaminergique (modèle simplifié). |
 | T4 | C9 La mise en place des gisements pétrolifères en Côte d'Ivoire | Vocabulaire (kérogène, fenêtre à huile, migration, 4 pièges) ; fenêtre 60–120 °C et gradient 3 °C/100 m donnés par l'énoncé ; marge ivoirienne en partie transformante (Romanche, Saint-Paul) à mentionner ? Limites du bassin émergé. |
 | T4 | C10 L'exploitation des gisements pétrolifères | Sismique réflexion (z = v × t / 2), récupération assistée / secondaire, craquage, gravimétrie : au programme ? Fractions de distillation sans températures ; PETROCI et SIR (Vridi) cités sans chiffre. |
+| T4 | D1 Le devenir des cellules sexuelles chez les mammifères | « Caryogamie » (en fait réunion des chromosomes sur le fuseau) : formulation DPFC suffisante ? hCG limitée à « signe de gestation, sécrétée dès l'implantation » ; durées de vie simplifiées (ovocyte 24 h, spermatozoïdes 3 jours) ; annexes et placenta non traités. |
+| T4 | D2 Le fonctionnement des organes sexuels chez l'Homme | Inhibine, contraception, PMA non traitées (notion de maîtrise de la reproduction ?) ; rôle de la FSH (Sertoli) ; ovulation 24–36 h après le début du pic de LH ; rétrocontrôle négatif conclu sans ovariectomie. |
+| T4 | D3 La reproduction chez les spermaphytes | Gymnospermes absents malgré le titre ; sac embryonnaire sans synergides ni antipodes ; pollen mûr à 2 cellules ; autogamie = même fleur ou même pied ; graines albuminées / exalbuminées, « anémochorie, zoochorie » non nommées ; cycle 2n / n avec albumen 3n à part. |
+| T4 | D5 La transmission de deux caractères héréditaires | Pourcentage de recombinaison sans centimorgan ni carte factorielle ; notations AB//ab, A//a B//b ; gène « noir » (N/n) lié à vg (ébène réservé aux gènes indépendants) ; r du maïs forme × couleur fixé à 4 % ; absence de crossing-over chez le mâle drosophile. |
+| T4 | D6 Le maintien de la constance du milieu intérieur | Seuil du diabète 1,26 g/L (ou 1,10 dans les manuels ?) ; îlots « capteur et centre » ; néoglucogenèse et lipogenèse : niveau attendu ; expériences historiques (ligature, greffe, pancréas perfusé) ; une seule régulation traitée (glycémie). |
+| T4 | D9 Le réflexe conditionnel | Liaison temporaire : centre auditif → centre salivaire bulbaire, ou → représentation corticale du centre gustatif ? « Stimulus absolu », « inhibition externe » ; dressage (conditionnement opérant) présenté comme réflexe conditionnel ; chien sans cortex « 0 goutte ». |
+| T4 | D10 Le fonctionnement du tissu nerveux | Substances grise et blanche, pompe Na+/K+, « canaux voltage-dépendants », tétrodotoxine au programme de Tle D ? Concentrations ioniques et vitesses de référence ; réalisme de l'examen de conduction (problème 3) ; proximité acceptable avec la leçon C7. |
 | T3 | Mouvement du centre d'inertie d'un solide | Mouvement circulaire (virage, pendule conique) non traité : à ajouter s'il relève de cette leçon. |
 | T3 | Mouvement du centre d'inertie d'un solide | Frottement donné en newtons, sans coefficient ni angle de frottement ; « se sentir plus lourd » dans l'ascenseur (N = m(g + a)) sans le terme « poids apparent ». |
 | T3 | Mouvement du centre d'inertie d'un solide | v² − v₀² = 2a·d supposée acquise de la leçon 1 ; g = 10 N/kg partout. |
