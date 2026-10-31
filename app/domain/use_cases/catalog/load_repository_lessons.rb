@@ -7,7 +7,8 @@ module UseCases
       KIND = "course_tree"
 
       # outcome : :skipped (production, PR, nom absent), :no_author (aucun membre d'équipe actif), :unknown_environment (une ligne refusée
-      # est laissée), :done. lessons : { nom d'import => :loaded | :unchanged | :not_started | :refused | :unpublished | :republished }.
+      # est laissée), :done. lessons : { nom d'import => :loaded | :unchanged | :not_started | :refused | :unpublished | :partially_published |
+      # :republished | :failed }.
       Summary = Data.define(:outcome, :lessons) do
         def initialize(lessons: {}, **) = super
       end
@@ -32,7 +33,8 @@ module UseCases
         @clock = clock
       end
 
-      # → Result(Summary) | :forbidden (l'auteur n'a plus le droit de gérer les contenus). Les erreurs d'un fichier restent dans sa ligne d'import ; une exception imprévue remonte à l'appelant.
+      # → Result(Summary) | :forbidden (l'auteur n'a plus le droit de gérer les contenus). Les erreurs d'un fichier restent dans sa ligne d'import ;
+      # une exception sur une leçon est journalisée avec son nom (statut :failed) et les leçons suivantes sont tentées.
       def call(environment_name:, pr_environment:)
         stage = Entities::Catalog::AutomaticLoadStage.for(name: environment_name, pr_environment:)
         return done(:skipped) if stage.skip?
@@ -44,7 +46,7 @@ module UseCases
         return allowed if allowed.failure?
         return reject_unknown(stage, actor) if stage.unknown?
 
-        done(:done, @source.lessons.to_h { [ it.import_name, load(it, actor) ] })
+        done(:done, @source.lessons.to_h { [ it.import_name, load_safely(it, actor) ] })
       end
 
       private
@@ -58,15 +60,29 @@ module UseCases
         done(:unknown_environment)
       end
 
+      def load_safely(lesson, actor)
+        load(lesson, actor)
+      rescue StandardError => error
+        @logger.error("[contenus] #{lesson_name(lesson)} : échec (#{error.class} : #{error.message})")
+        :failed
+      end
+
       def load(lesson, actor)
         return republish(lesson, actor) if @reports.last_loaded_checksum(kind: KIND, file_name: lesson.import_name) == lesson.checksum_sha256
 
         upload = Dtos::Catalog::ImportUploadInput::Upload.new(io: StringIO.new(lesson.content), filename: lesson.import_name)
         started = @start_import.call(actor:, dto: Dtos::Catalog::ImportUploadInput.new(kind: KIND, files: [ upload ]))
-        return :not_started if started.failure?
+        if started.failure?
+          @logger.error("[contenus] #{lesson_name(lesson)} : import non démarré (#{started.code} #{started.errors})")
+          return :not_started
+        end
 
         ran = @run_import.call(report_id: started.value.id)
-        return :refused unless ran.success? && ran.value.status == "completed" && ran.value.error_count.zero?
+        if ran.failure?
+          @logger.error("[contenus] #{lesson_name(lesson)} : import en échec (#{ran.code})")
+          return :refused
+        end
+        return :refused unless ran.value.status == "completed" && ran.value.error_count.zero?
 
         guarded(lesson) { publish(lesson, actor, slug_of(lesson), :loaded) }
       end
@@ -95,7 +111,13 @@ module UseCases
           return :unpublished
         end
 
-        @logger.info("[contenus] #{lesson_name(lesson)} : publiée, #{result.value.exercises} exercice(s) publié(s), #{result.value.skipped} laissé(s) en brouillon")
+        skipped = result.value.skipped
+        if skipped.positive?
+          @logger.warn("[contenus] #{lesson_name(lesson)} : #{skipped} exercice(s) laissé(s) en brouillon (non publiables), #{result.value.exercises} publié(s)")
+          return :partially_published
+        end
+
+        @logger.info("[contenus] #{lesson_name(lesson)} : publiée, #{result.value.exercises} exercice(s) publié(s)")
         done
       end
 
@@ -112,7 +134,7 @@ module UseCases
       def slug_of(lesson)
         course = JSON.parse(lesson.content).fetch("courses").first
         lookup = @taxonomy.lookup
-        key = [ Entities::Shared::NaturalKey.compact(course["name"]), lookup.resolve_level(course["level_name"]).id,
+        key = [ Entities::Shared::NaturalKey.compact(course["name"].squish), lookup.resolve_level(course["level_name"]).id,
                 lookup.resolve_material(course["material_name"]).id, lookup.resolve_series(course["series_name"])&.id ]
         @courses.slugs_by_key.fetch(key)
       end

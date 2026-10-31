@@ -94,6 +94,18 @@ class SeedsTest < ActiveSupport::TestCase
     ENV["RAILWAY_ENVIRONMENT_NAME"] = previous
   end
 
+  test "the contenus seed never fails the pre-deploy: an error of the task is logged and printed" do
+    Rails.application.load_tasks unless Rake::Task.task_defined?("contenus:charger")
+    logged = []
+
+    output = stub_method(Rails.logger, :error, ->(message) { logged << message }) do
+      stub_method(Rake::Task["contenus:charger"], :invoke, ->(*) { raise "boom" }) { as_production { run_seeds } }
+    end
+
+    assert_includes output, "[contenus] chargement automatique impossible : RuntimeError : boom"
+    assert_equal [ "[contenus] chargement automatique impossible : RuntimeError : boom" ], logged
+  end
+
   test "development and test do not load lessons, and a PR environment is left out of the contenus seed" do
     assert_no_match "[contenus]", run_seeds
     assert_match(/"contenus" => %w\[production\]/, Rails.root.join("db/seeds.rb").read)

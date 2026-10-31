@@ -30,6 +30,9 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
 - `ActiveRecord::Base.connection_pool.checkout` dans un test rend la connexion partagée (même session PostgreSQL) : pour simuler « un autre démarrage » tenant le verrou, il faut une vraie connexion `PG.connect`.
 - Le verrou consultatif est un verrou de session : un test qui échoue avant `pg_advisory_unlock` le laisse sur la connexion partagée de tout le processus de test.
 
+- Comportement connu, hors PRD : une notion présente en base mais absente du fichier perd ses exercices (la leçon est remplacée exercices et sujets) sans en recevoir de nouveaux ; seule la présence en base d'une notion du fichier est contrôlée (`notion_not_found`), pas l'inverse.
+- Suites de revue (commit « suites des revues ») : journal d'erreur quand un import ne démarre pas ou échoue (`:not_started`, `:refused`) ; cascade qui laisse des exercices en brouillon → avertissement et statut `:partially_published` ; fichier de leçon illisible → avertissement avec son chemin ; une exception par leçon est attrapée par leçon (`:failed`, journal avec le nom, la classe et le message) et les leçons suivantes sont tentées ; en-tête de `contenus.rake` et `db/seeds/contenus.rb` protégé par un `rescue` (le pré-déploiement n'échoue jamais à cause des leçons) ; `slug_of` nettoie le nom comme l'import (`squish`, sans effet sur la clé qui le fait déjà) ; tests de `last_loaded_checksum` (dernier réussi, imported 0, error > 0, refusé, échoué) et de `oldest_active_team_actor` (ordre par `created_at`, rôle, anonymisé).
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.

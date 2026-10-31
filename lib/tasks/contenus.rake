@@ -1,15 +1,16 @@
 # Chargement automatique des leçons à sujets de devoir (ADR chargement-automatique-des-lecons-hors-production) : lancé par
-# bin/docker-entrypoint après db:prepare. Develop et Staging seulement (RAILWAY_ENVIRONMENT_NAME), sous un verrou consultatif
-# PostgreSQL ; ne sort jamais en erreur : le serveur démarre quoi qu'il arrive.
+# db/seeds/contenus.rb au pré-déploiement Railway (`bin/rails db:prepare db:seed`). Develop et Staging seulement
+# (RAILWAY_ENVIRONMENT_NAME), sous un verrou consultatif PostgreSQL ; ne sort jamais en erreur : le pré-déploiement n'échoue pas à cause d'elle.
 namespace :contenus do
   desc "Charge les leçons à sujets de devoir du dépôt (Develop et Staging) : exercices et sujets seulement, puis publication"
   task charger: :environment do
     say = ->(message) { puts "[contenus] #{message}" }
-    connection = ActiveRecord::Base.connection
+    connection = nil
     # Hors du cache de requêtes : un verrou se redemande, il ne se relit pas.
     advisory = ->(function) { connection.uncached { connection.select_value("SELECT #{function}(hashtext('contenus:charger'))") } }
     locked = false
     begin
+      connection = ActiveRecord::Base.connection
       locked = advisory.call("pg_try_advisory_lock")
       if locked
         transaction = Repositories::Shared::Transaction.new

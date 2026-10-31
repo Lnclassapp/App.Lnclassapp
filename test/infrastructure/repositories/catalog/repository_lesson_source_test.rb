@@ -4,7 +4,12 @@ module Repositories
   module Catalog
     # La source des leçons du dépôt : seules les leçons au format 3 qui portent des sujets de devoir.
     class RepositoryLessonSourceTest < ActiveSupport::TestCase
-      setup { @root = Pathname(Dir.mktmpdir) }
+      setup do
+        @root = Pathname(Dir.mktmpdir)
+        @warnings = []
+        warnings = @warnings
+        @logger = Object.new.tap { |logger| logger.define_singleton_method(:warn) { |message| warnings << message } }
+      end
       teardown { FileUtils.remove_entry(@root) }
 
       def write(path, content)
@@ -17,7 +22,7 @@ module Repositories
         raw = JSON.pretty_generate(lesson(subjects: [ { "title" => "S" } ]))
         write("3eme/mathematiques/thales.json", raw)
 
-        found = RepositoryLessonSource.new(root: @root).lessons
+        found = RepositoryLessonSource.new(root: @root, logger: @logger).lessons
 
         assert_equal [ "chargement-automatique-3eme-mathematiques-thales.json" ], found.map(&:import_name)
         assert_equal [ Digest::SHA256.hexdigest(raw) ], found.map(&:checksum_sha256)
@@ -34,7 +39,8 @@ module Repositories
         write("3eme/mathematiques/cours-texte.json", { "version" => 3, "courses" => [ "x" ] })
         write("3eme/direct.json", lesson(subjects: [ { "title" => "S" } ]))
 
-        assert_empty RepositoryLessonSource.new(root: @root).lessons
+        assert_empty RepositoryLessonSource.new(root: @root, logger: @logger).lessons
+        assert_equal [ "[contenus] fichier de leçon illisible, ignoré : #{@root.join('3eme/mathematiques/cassee.json')}" ], @warnings
       end
 
       test "lists the lessons in a stable order" do

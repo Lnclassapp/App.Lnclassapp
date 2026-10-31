@@ -33,7 +33,7 @@ module UseCases
         Course = Struct.new(:id, :status)
         def initialize(status: "published") = @status = status
         def find_by_slug(slug:) = Course.new(5, @status)
-        def slugs_by_key = { [ "thales", 1, 2, nil ] => "thales", [ "thales", 1, 2, 9 ] => "thales-serie" }
+        def slugs_by_key = { [ "thales", 1, 2, nil ] => "thales", [ "thales", 1, 2, 9 ] => "thales-serie", [ "pythagore", 1, 2, nil ] => "pythagore" }
       end
 
       class Drafts
@@ -61,6 +61,7 @@ module UseCases
         @logger = Object.new.tap do |logger|
           logs = @logs
           logger.define_singleton_method(:info) { |message| logs << [ :info, message ] }
+          logger.define_singleton_method(:warn) { |message| logs << [ :warn, message ] }
           logger.define_singleton_method(:error) { |message| logs << [ :error, message ] }
         end
         @now = Time.zone.parse("2026-10-31 08:00")
@@ -74,7 +75,7 @@ module UseCases
         ->(report_id:) { @calls << [ :run, report_id ]; result || Shared::Result.success(Struct.new(:status, :error_count).new(status, error_count)) }
       end
 
-      def cascade(result = Shared::Result.success(UseCases::Catalog::PublishCascade::Summary.new(root: nil, essentials: 0, exercises: 3, skipped: 1)))
+      def cascade(result = Shared::Result.success(UseCases::Catalog::PublishCascade::Summary.new(root: nil, essentials: 0, exercises: 3, skipped: 0)))
         ->(actor:, root:, slug:) { @calls << [ :cascade, actor, root, slug ]; result }
       end
 
@@ -156,7 +157,7 @@ module UseCases
 
           assert_equal({ @lesson.import_name => :republished }, call(use_case(reports:, **state)).lessons, state.keys.to_s)
           assert_equal [ [ :cascade, @actor, :course, "thales" ] ], @calls
-          assert_equal [ [ :info, "[contenus] Thalès : publiée, 3 exercice(s) publié(s), 1 laissé(s) en brouillon" ] ], @logs
+          assert_equal [ [ :info, "[contenus] Thalès : publiée, 3 exercice(s) publié(s)" ] ], @logs
         end
       end
 
@@ -206,6 +207,51 @@ module UseCases
         assert_equal :forbidden, result.code
         assert_empty @calls
         assert_empty reports.rejections
+      end
+
+      test "an import that cannot start is logged with the lesson's name and the code, for an invalid upload as for one already running" do
+        [ [ :invalid, { files: [ :blank ] } ], [ :conflict, { kind: [ :already_running ] } ] ].each do |code, errors|
+          @logs.clear
+
+          result = call(use_case(start: start_import(Shared::Result.failure(code, errors:)))).lessons
+
+          assert_equal({ @lesson.import_name => :not_started }, result)
+          assert_equal [ [ :error, "[contenus] Thalès : import non démarré (#{code} #{errors})" ] ], @logs
+        end
+      end
+
+      test "a run that fails outright is logged and counted refused" do
+        call(use_case(run: run_import(result: Shared::Result.failure(:forbidden))))
+
+        assert_equal [ [ :error, "[contenus] Thalès : import en échec (forbidden)" ] ], @logs
+      end
+
+      test "a cascade that leaves exercises in draft warns with their number and reports the lesson partially published" do
+        partial = cascade(Shared::Result.success(UseCases::Catalog::PublishCascade::Summary.new(root: nil, essentials: 0, exercises: 3, skipped: 2)))
+        reports = Reports.new(loaded: { [ "course_tree", @lesson.import_name ] => @lesson.checksum_sha256 })
+
+        assert_equal({ @lesson.import_name => :partially_published }, call(use_case(publish: partial)).lessons)
+        assert_equal({ @lesson.import_name => :partially_published }, call(use_case(publish: partial, reports:, course_status: "draft")).lessons)
+        assert_equal [ [ :warn, "[contenus] Thalès : 2 exercice(s) laissé(s) en brouillon (non publiables), 3 publié(s)" ] ] * 2, @logs
+      end
+
+      test "an exception on one lesson (checksum lookup, start, run) is logged with its name and class, and the next lessons are still tried" do
+        second_content = JSON.generate("courses" => [ { "name" => "Pythagore", "level_name" => "3ème", "material_name" => "Maths" } ])
+        second = Lesson.new(import_name: "chargement-automatique-3eme-maths-pythagore.json", checksum_sha256: "y", content: second_content)
+        failing = Class.new(Reports) do
+          def last_loaded_checksum(kind:, file_name:) = file_name.include?("thales") ? raise("base coupée") : super
+        end
+        exploding_start = ->(actor:, dto:) { raise ArgumentError, "plus de place" }
+        exploding_run = ->(report_id:) { raise "job tué" }
+
+        result = call(use_case(lessons: [ @lesson, second ], reports: failing.new)).lessons
+
+        assert_equal({ @lesson.import_name => :failed, second.import_name => :loaded }, result)
+        assert_equal [ [ :error, "[contenus] Thalès : échec (RuntimeError : base coupée)" ] ], @logs.first(1)
+        assert_equal :failed, call(use_case(start: exploding_start)).lessons.fetch(@lesson.import_name)
+        assert_equal :failed, call(use_case(run: exploding_run)).lessons.fetch(@lesson.import_name)
+        assert_includes @logs.map(&:last), "[contenus] Thalès : échec (ArgumentError : plus de place)"
+        assert_includes @logs.map(&:last), "[contenus] Thalès : échec (RuntimeError : job tué)"
       end
 
       test "a cascade that fails leaves the lesson loaded but unpublished" do
