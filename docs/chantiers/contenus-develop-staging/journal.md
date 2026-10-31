@@ -49,3 +49,10 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+
+## Challenger (2026-10-31, orchestrateur, distinct de l'exécutant)
+
+Base de développement remise à zéro, `bin/rails contenus:charger` lancé à la main :
+- `Develop`, leçon absente : `loaded` (4 sujets, 26 exercices, tout publié). Relancé : `unchanged`, aucune ligne.
+- Texte « À retenir » d'une fiche modifié en base, une question du fichier modifiée : `loaded` ; la question nouvelle est là, la fiche garde le texte de la base, 0 brouillon, cours publié.
+- `Recette` : rien chargé, ligne refusée `unknown_environment` (Recette). `production` : rien, aucune ligne.
