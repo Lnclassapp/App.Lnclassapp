@@ -2,7 +2,7 @@ require "test_helper"
 
 module Entities
   module Catalog
-    # UDR-0139 §3.2 : la coupe de la fiche de révision. 150 mots de texte, coupe après le premier bloc qui atteint le seuil ;
+    # UDR-0139 §3.2 : la coupe de la fiche de révision. 50 mots de texte, coupe après le premier bloc qui atteint le seuil ;
     # une formule vaut un mot, une figure aucun.
     class RevisionPreviewTest < ActiveSupport::TestCase
       def words(count) = Array.new(count) { "mot" }.join(" ")
@@ -36,19 +36,19 @@ module Entities
         assert_raises(ArgumentError) { preview({ "type" => "inconnu" }) }
       end
 
-      test "the cut falls after the first block that brings the total to 150 or more, at the end of the block" do
-        sheet = preview(paragraph(100), paragraph(60), paragraph(10), paragraph(10))
+      test "the cut falls after the first block that brings the total to 50 or more, at the end of the block" do
+        sheet = preview(paragraph(30), paragraph(25), paragraph(10), paragraph(10))
 
         assert_predicate sheet, :cut?
         assert_not sheet.rest?(0, 0, 0)
         assert_not sheet.rest?(0, 0, 1), "le bloc qui passe le seuil reste entier"
         assert sheet.rest?(0, 0, 2)
         assert sheet.rest?(0, 0, 3)
-        assert_equal 181, sheet.total
+        assert_equal 76, sheet.total
       end
 
-      test "a block that brings the total to exactly 150 words ends the visible part" do
-        sheet = preview(paragraph(149), paragraph(5))
+      test "a block that brings the total to exactly 50 words ends the visible part" do
+        sheet = preview(paragraph(49), paragraph(5))
 
         assert_not sheet.rest?(0, 0, 0)
         assert sheet.rest?(0, 0, 1)
@@ -61,22 +61,22 @@ module Entities
         assert_not sheet.rest?(0, 0, 0)
       end
 
-      test "up to 150 words in all, there is no cut" do
-        sheet = preview(paragraph(100), paragraph(20))
+      test "up to 50 words in all, there is no cut" do
+        sheet = preview(paragraph(30), paragraph(10))
         assert_not_predicate sheet, :cut?
         assert_not sheet.rest?(0, 0, 1)
 
-        exact = preview(paragraph(100), paragraph(49))
-        assert_equal 150, exact.total
+        exact = preview(paragraph(30), paragraph(19))
+        assert_equal 50, exact.total
         assert_not_predicate exact, :cut?
       end
 
       test "figures, media and exercises count for no word; they are hidden when they follow the cut" do
         figure = { "type" => "media", "kind" => "thales_figure" }
         exercise = { "type" => "exercise", "title" => "Un exercice avec des mots #{words(40)}" }
-        sheet = preview(paragraph(100), figure, exercise, paragraph(60), figure)
+        sheet = preview(paragraph(30), figure, exercise, paragraph(25), figure)
 
-        assert_equal 161, sheet.total
+        assert_equal 56, sheet.total
         assert_not sheet.rest?(0, 0, 1), "la figure compte zéro : le seuil n'est pas atteint"
         assert_not sheet.rest?(0, 0, 3)
         assert sheet.rest?(0, 0, 4)
@@ -94,15 +94,15 @@ module Entities
 
       test "the titles of the page and of the sections count with the block that follows them" do
         header = { "title" => words(20), "intro" => words(30) }
-        sheet = RevisionPreview.for_sheet([ page(paragraph(100), paragraph(5), header:) ])
+        sheet = RevisionPreview.for_sheet([ page(paragraph(10), paragraph(5), header:) ])
 
-        assert_equal 20 + 30 + 1 + 100 + 5, sheet.total
+        assert_equal 20 + 30 + 1 + 10 + 5, sheet.total
         assert_not sheet.rest?(0, 0, 0)
-        assert sheet.rest?(0, 0, 1), "50 + 1 + 100 atteint 150 dès le premier bloc"
+        assert sheet.rest?(0, 0, 1), "50 + 1 + 10 atteint 50 dès le premier bloc"
       end
 
       test "a page or a section that lies entirely after the cut is rest as a whole" do
-        first = { "sections" => [ { "title" => "S1", "blocks" => [ paragraph(100), paragraph(60) ] },
+        first = { "sections" => [ { "title" => "S1", "blocks" => [ paragraph(30), paragraph(25) ] },
                                   { "title" => "S2", "blocks" => [ paragraph(10) ] } ] }
         second = page(paragraph(10))
         sheet = RevisionPreview.for_sheet([ first, second ])
@@ -115,13 +115,13 @@ module Entities
       end
 
       test "texts: the lesson text and the notions are cut at the end of a paragraph, titles included" do
-        sheet = RevisionPreview.for_texts([ { title: nil, blocks: [ words(100), words(20) ] },
-                                            { title: "La notion", blocks: [ words(40), words(5) ] },
+        sheet = RevisionPreview.for_texts([ { title: nil, blocks: [ words(30), words(10) ] },
+                                            { title: "La notion", blocks: [ words(10), words(5) ] },
                                             { title: "Autre", blocks: [ words(5) ] } ])
 
         assert_predicate sheet, :cut?
         assert_not sheet.rest?(0, 1)
-        assert_not sheet.rest?(1, 0), "2 + 120 + 40 atteint 150 au premier paragraphe de la notion"
+        assert_not sheet.rest?(1, 0), "2 + 40 + 10 atteint 50 au premier paragraphe de la notion"
         assert sheet.rest?(1, 1)
         assert sheet.rest?(2)
       end
@@ -143,8 +143,8 @@ module Entities
         assert_equal 5 + 5 + 4 + 2 + 5, preview.total
       end
 
-      test "notions: the cut falls after the first block that reaches 150 words and the rest is keyed by notion and block" do
-        long = notion_sheet(remember: words(100), steps: [ words(30), words(30) ], figure: "f")
+      test "notions: the cut falls after the first block that reaches 50 words and the rest is keyed by notion and block" do
+        long = notion_sheet(remember: words(30), steps: [ words(15), words(15) ], figure: "f")
         other = notion_sheet(remember: words(10))
         preview = RevisionPreview.for_notions([ long, other ])
 

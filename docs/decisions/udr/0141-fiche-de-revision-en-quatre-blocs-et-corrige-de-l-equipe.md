@@ -42,7 +42,7 @@ L'équipe relit une leçon importée en brouillon avant de la publier ; les corr
 | Au moins une notion à montrer (publiée, ou toutes pour l'équipe) | feuille `course_sheet` chargée (`content_for :head`, comme aujourd'hui) ; `render "catalog/revision_sheets/sheet", sheet: revision.sheet, cut: revision.cut` |
 | Aucune notion à montrer | `ui_empty_state title: t(".revision_empty"), icon: "document-text"` ; pas de « Voir plus » |
 
-La coupe des 150 mots (UDR-0139 §3.2) compte, dans l'ordre de lecture : À retenir, chaque étape de méthode, l'énoncé de l'exemple, chaque étape de l'exemple, le piège ; une formule `$…$` compte un mot ; une figure compte zéro. Les cibles `rest` se posent par bloc (`.sheet-box`, `.sheet-card`, `figure`), ou sur la `section` entière quand elle est toute après la coupe.
+La coupe des 150 mots (UDR-0139 §3.2 ; 50 mots depuis UDR-0147) compte, dans l'ordre de lecture : À retenir, chaque étape de méthode, l'énoncé de l'exemple, chaque étape de l'exemple, le piège ; une formule `$…$` compte un mot ; une figure compte zéro. Les cibles `rest` se posent par bloc (`.sheet-box`, `.sheet-card`, `figure`), ou sur la `section` entière quand elle est toute après la coupe.
 
 ### 3.2 Partial `catalog/revision_sheets/_sheet` (remplace `catalog/course_sheets/_sheet`)
 
