@@ -193,6 +193,112 @@
             ]
           },
           "controls": []
+        },
+        {
+          "key": "triangle-abc-mn",
+          "kind": "geometry",
+          "description": "Un triangle ABC avec le point M sur le côté [AB] et le point N sur le côté [AC]. Le segment [MN] est tracé : c'est la droite (MN), à comparer avec la droite (BC). Le dessin est un schéma à main levée : les longueurs et le parallélisme sont ceux de l'énoncé, pas ceux qu'on croit lire.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 6.5,
+                "y": 9.5
+              },
+              {
+                "id": "B",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": 14,
+                "y": 0
+              },
+              {
+                "id": "M",
+                "x": 3.25,
+                "y": 4.75
+              },
+              {
+                "id": "N",
+                "x": 10.25,
+                "y": 4.75
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "A"
+              ],
+              [
+                "M",
+                "N"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "papillon-abc-mn",
+          "kind": "geometry",
+          "description": "Un papillon de Thalès : les droites (BM) et (CN) se coupent en A, avec B, A, M alignés dans cet ordre, ainsi que C, A, N. Les segments [BC] et [MN] sont tracés de part et d'autre de A : on les compare. Le dessin est un schéma à main levée : les longueurs et le parallélisme sont ceux de l'énoncé.",
+          "params": {
+            "points": [
+              {
+                "id": "B",
+                "x": -7,
+                "y": 6
+              },
+              {
+                "id": "C",
+                "x": -2,
+                "y": 6
+              },
+              {
+                "id": "A",
+                "x": -0.48,
+                "y": 0.64
+              },
+              {
+                "id": "M",
+                "x": 7.6,
+                "y": -6
+              },
+              {
+                "id": "N",
+                "x": 1.4,
+                "y": -6
+              }
+            ],
+            "segments": [
+              [
+                "B",
+                "M"
+              ],
+              [
+                "C",
+                "N"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "M",
+                "N"
+              ]
+            ]
+          },
+          "controls": []
         }
       ],
       "notions": [
@@ -1421,7 +1527,7 @@
           "notions": "propriété de Thalès (calculer une longueur), réciproque (prouver un parallélisme), contraposée (prouver un non-parallélisme), périmètres.",
           "exercises": [
             {
-              "title": "Sujet 1 · Exercice 1",
+              "title": "Exercice 1",
               "statement": "L'unité est le centimètre. ABC est un triangle tel que AB = 8, AC = 10 et BC = 12. M est le point de [AB] tel que AM = 2, et N est un point de [AC]. Les droites (MN) et (BC) sont parallèles.",
               "exercise_type": "evaluation",
               "hint": "Commence par le coefficient AM/AB : toutes les longueurs de AMN s'obtiennent en multipliant celles de ABC par ce nombre.",
@@ -1511,10 +1617,11 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "triangle-abc-mn"
             },
             {
-              "title": "Sujet 1 · Exercice 2",
+              "title": "Exercice 2",
               "statement": "L'unité est le centimètre. Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On donne AM = 4,5 ; AB = 7,5 ; AN = 3 ; AC = 5 et BC = 6,5.",
               "exercise_type": "evaluation",
               "hint": "Deux étapes : d'abord prouver le parallélisme, ensuite l'utiliser pour calculer.",
@@ -1601,10 +1708,11 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "triangle-abc-mn"
             },
             {
-              "title": "Sujet 1 · Exercice 3",
+              "title": "Exercice 3",
               "statement": "L'unité est le centimètre. Les points B, A, M sont alignés dans cet ordre, ainsi que C, A, N. On donne AB = 6, AM = 9, AC = 4 et AN = 5.",
               "exercise_type": "evaluation",
               "hint": "Compare les rapports. Pour la dernière question, cherche AN tel que AN/AC soit égal à AM/AB.",
@@ -1691,10 +1799,11 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "papillon-abc-mn"
             },
             {
-              "title": "Sujet 1 · Exercice 4",
+              "title": "Exercice 4",
               "statement": "L'unité est le centimètre. Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On donne AM = 3,6 ; AB = 6 ; AN = 4,8 ; AC = 8 et MN = 4,2.",
               "exercise_type": "evaluation",
               "hint": "Prouve d'abord le parallélisme. Pour BC, la longueur inconnue est au dénominateur : MN/BC = 0,6.",
@@ -1781,7 +1890,8 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "triangle-abc-mn"
             }
           ]
         },
@@ -1790,7 +1900,7 @@
           "notions": "propriété de Thalès en configuration triangle et papillon, théorème de Pythagore, proportionnalité et prix.",
           "exercises": [
             {
-              "title": "Sujet 2 · Exercice 1",
+              "title": "Exercice 1",
               "statement": "À Yamoussoukro, Awa veut connaître la hauteur AD d'un fromager. Elle plante verticalement un bâton [BC] de 1,5 m. L'extrémité de l'ombre du bâton et celle de l'arbre se rejoignent en S. Les points S, B, A sont alignés sur le sol, ainsi que S, C, D. SB = 2 m et SA = 24 m.",
               "exercise_type": "evaluation",
               "hint": "Le triangle SAD est un agrandissement du triangle SBC. Pour SC, pense au théorème de Pythagore.",
@@ -1883,7 +1993,7 @@
               ]
             },
             {
-              "title": "Sujet 2 · Exercice 2",
+              "title": "Exercice 2",
               "statement": "Sur le plan d'un toit, A est le sommet. Les poutres [AB] et [AC] mesurent 5 m et la base [BC] mesure 8 m. Le menuisier fixe une traverse [MN], parallèle à (BC), avec M sur [AB], N sur [AC] et AM = 2 m.",
               "exercise_type": "evaluation",
               "hint": "Le coefficient est AM/AB = 2/5.",
@@ -1980,11 +2090,12 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "triangle-abc-mn"
             },
             {
-              "title": "Sujet 2 · Exercice 3",
-              "statement": "Pour estimer la largeur d'une rivière, Koffi plante des piquets et obtient la figure ci-dessus : les droites (BM) et (CN) se coupent en A et (BC) // (MN). Il mesure AB = 4 m, AC = 3 m, BC = 5 m et AN = 18 m.",
+              "title": "Exercice 3",
+              "statement": "Pour estimer la largeur d'une rivière, Koffi plante des piquets et obtient la configuration suivante : les droites (BM) et (CN) se coupent en A et (BC) // (MN). Il mesure AB = 4 m, AC = 3 m, BC = 5 m et AN = 18 m.",
               "exercise_type": "evaluation",
               "hint": "A est entre B et M : la distance BM est la somme de deux longueurs.",
               "questions": [
@@ -2073,10 +2184,11 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "papillon-abc-mn"
             },
             {
-              "title": "Sujet 2 · Exercice 4",
+              "title": "Exercice 4",
               "statement": "Au même moment de la journée, à Daloa, Moussa mesure 1,75 m et son ombre mesure 2,5 m. Un poteau électrique vertical a une ombre de 10 m. Les extrémités des deux ombres coïncident au même point S, et les pieds de Moussa et du poteau sont alignés avec S.",
               "exercise_type": "evaluation",
               "hint": "Le grand triangle (poteau, ombre) est un agrandissement du petit triangle (Moussa, ombre).",
@@ -2181,7 +2293,7 @@
           "notions": "les trois propriétés (directe, réciproque, contraposée), ordre des points, comparaison de fractions, aires et coefficient de réduction.",
           "exercises": [
             {
-              "title": "Sujet 3 · Exercice 1",
+              "title": "Exercice 1",
               "statement": "L'unité est le centimètre. M est un point de [AB] et N un point de [AC]. On donne AB = 9, AC = 12, AM = 3, AN = 4 et BC = 10,5.",
               "exercise_type": "evaluation",
               "hint": "Simplifie les fractions 3/9 et 4/12 avant de les comparer.",
@@ -2268,10 +2380,11 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "triangle-abc-mn"
             },
             {
-              "title": "Sujet 3 · Exercice 2",
+              "title": "Exercice 2",
               "statement": "Les points A, M, B et A, N, C sont alignés dans le même ordre. On trouve AM/AB = 3/7 et AN/AC = 4/9.",
               "exercise_type": "evaluation",
               "hint": "Deux fractions a/b et c/d sont égales si et seulement si a × d = b × c.",
@@ -2351,7 +2464,7 @@
               ]
             },
             {
-              "title": "Sujet 3 · Exercice 3",
+              "title": "Exercice 3",
               "statement": "Dans le triangle ABC, (MN) // (BC) avec M ∈ [AB] et N ∈ [AC]. On sait que AM/AB = 0,4, BC = 10 cm et que l'aire du triangle ABC est 75 cm².",
               "exercise_type": "evaluation",
               "hint": "Les longueurs sont multipliées par k, les aires par k².",
@@ -2441,10 +2554,11 @@
                     }
                   ]
                 }
-              ]
+              ],
+              "figure": "triangle-abc-mn"
             },
             {
-              "title": "Sujet 3 · Exercice 4",
+              "title": "Exercice 4",
               "statement": "L'unité est le centimètre. Les points B, A, M sont alignés dans cet ordre, ainsi que C, A, N. On donne AB = 5 ; AC = 7 ; AM = 7,5 ; AN = 10,5 et BC = 6.",
               "exercise_type": "evaluation",
               "hint": "Dans un papillon aussi, la réciproque demande des rapports égaux et le même ordre des points.",
@@ -2528,6 +2642,385 @@
                     {
                       "content": "Faux",
                       "correct": false
+                    }
+                  ]
+                }
+              ],
+              "figure": "papillon-abc-mn"
+            }
+          ]
+        },
+        {
+          "title": "Sujet 4 · Bilan : calculer, prouver, résoudre",
+          "notions": "propriété de Thalès (triangle et papillon), réciproque (prouver un parallélisme), contraposée (prouver un non-parallélisme), agrandissement et réduction, problème de la vie courante (terrain, prix).",
+          "exercises": [
+            {
+              "title": "Exercice 1",
+              "statement": "L'unité est le centimètre. Dans le triangle ABC, M est un point de [AB] et N un point de [AC] tels que (MN) // (BC). On donne AM = 6, AB = 15, AC = 12 et MN = 8.",
+              "exercise_type": "evaluation",
+              "figure": "triangle-abc-mn",
+              "hint": "Le coefficient AM/AB sert pour toutes les longueurs. Pour BC, qui est au dénominateur, on divise MN par ce coefficient.",
+              "questions": [
+                {
+                  "content": "Pour calculer AN et BC, on utilise…",
+                  "question_type": "single_choice",
+                  "explanation": "On sait que (MN) // (BC) et on cherche des longueurs : c'est la propriété de Thalès.",
+                  "answers": [
+                    {
+                      "content": "la réciproque de la propriété de Thalès",
+                      "correct": false
+                    },
+                    {
+                      "content": "la propriété de Thalès",
+                      "correct": true
+                    },
+                    {
+                      "content": "la contraposée de la propriété de Thalès",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le coefficient AM/AB.",
+                  "question_type": "numeric",
+                  "explanation": "AM/AB = 6 ÷ 15 = 0,4.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "0.4",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule AN.",
+                  "question_type": "numeric",
+                  "explanation": "AN = AC × 0,4 = 12 × 0,4 = 4,8 cm.",
+                  "unit": "cm",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "4.8",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule BC.",
+                  "question_type": "numeric",
+                  "explanation": "MN/BC = 0,4, donc BC = MN ÷ 0,4 = 8 ÷ 0,4 = 20 cm.",
+                  "unit": "cm",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "20",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule NC.",
+                  "question_type": "numeric",
+                  "explanation": "N est sur [AC], donc NC = AC − AN = 12 − 4,8 = 7,2 cm.",
+                  "unit": "cm",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "7.2",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le triangle ABC est un agrandissement du triangle AMN, de coefficient 2,5.",
+                  "question_type": "true_false",
+                  "explanation": "ABC s'obtient à partir de AMN en multipliant par 1 ÷ 0,4 = 2,5 : c'est un agrandissement. Vérification : 8 × 2,5 = 20 cm = BC.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 2",
+              "statement": "L'unité est le centimètre. Les points B, A, M sont alignés dans cet ordre, ainsi que C, A, N. On donne AB = 4, AM = 10, AC = 6, AN = 15 et BC = 5.",
+              "exercise_type": "evaluation",
+              "figure": "papillon-abc-mn",
+              "hint": "Compare d'abord les deux rapports, sans oublier de vérifier l'ordre des points. Si le parallélisme est prouvé, tu peux ensuite calculer MN.",
+              "questions": [
+                {
+                  "content": "Calcule AM/AB.",
+                  "question_type": "numeric",
+                  "explanation": "AM/AB = 10 ÷ 4 = 2,5.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "2.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule AN/AC.",
+                  "question_type": "numeric",
+                  "explanation": "AN/AC = 15 ÷ 6 = 2,5.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "2.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on conclure sur les droites (BC) et (MN) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les rapports sont égaux (2,5) et les points B, A, M et C, A, N sont alignés dans le même ordre : (BC) et (MN) sont parallèles.",
+                  "answers": [
+                    {
+                      "content": "Elles ne sont pas parallèles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "On ne peut rien conclure.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles sont parallèles.",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : « D'après la ___ de la propriété de Thalès, (BC) // (MN). »",
+                  "question_type": "fill_blank",
+                  "explanation": "Les rapports sont égaux et les points sont dans le même ordre : c'est la réciproque qui prouve le parallélisme.",
+                  "answers": [
+                    {
+                      "content": "réciproque",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule MN.",
+                  "question_type": "numeric",
+                  "explanation": "(BC) // (MN), donc MN/BC = 2,5 et MN = BC × 2,5 = 5 × 2,5 = 12,5 cm.",
+                  "unit": "cm",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "12.5",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le triangle AMN est un agrandissement du triangle ABC.",
+                  "question_type": "true_false",
+                  "explanation": "Le coefficient 2,5 est supérieur à 1 : AMN est un agrandissement de ABC.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 3",
+              "statement": "L'unité est le centimètre. M est un point de [AB] et N un point de [AC]. On donne AB = 8, AM = 5, AC = 12, AN = 7 et BC = 10.",
+              "exercise_type": "evaluation",
+              "figure": "triangle-abc-mn",
+              "hint": "Pour comparer deux fractions, utilise le produit en croix : a/b = c/d seulement si a × d = b × c.",
+              "questions": [
+                {
+                  "content": "Calcule AM/AB.",
+                  "question_type": "numeric",
+                  "explanation": "AM/AB = 5 ÷ 8 = 0,625.",
+                  "tolerance": 0.001,
+                  "answers": [
+                    {
+                      "content": "0.625",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule AN/AC (arrondi au centième).",
+                  "question_type": "numeric",
+                  "explanation": "AN/AC = 7 ÷ 12 ≈ 0,58.",
+                  "tolerance": 0.005,
+                  "answers": [
+                    {
+                      "content": "0.58",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Les rapports AM/AB et AN/AC sont égaux.",
+                  "question_type": "true_false",
+                  "explanation": "AM × AC = 5 × 12 = 60 et AN × AB = 7 × 8 = 56. Les produits en croix sont différents (60 ≠ 56), donc 5/8 ≠ 7/12.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Que peut-on conclure sur les droites (MN) et (BC) ?",
+                  "question_type": "single_choice",
+                  "explanation": "Les rapports sont différents : (MN) et (BC) ne sont pas parallèles.",
+                  "answers": [
+                    {
+                      "content": "Elles sont parallèles.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Elles ne sont pas parallèles.",
+                      "correct": true
+                    },
+                    {
+                      "content": "On ne peut rien conclure.",
+                      "correct": false
+                    }
+                  ]
+                },
+                {
+                  "content": "Complète : « Les rapports sont différents donc, d'après la ___ de la propriété de Thalès, les droites ne sont pas parallèles. »",
+                  "question_type": "fill_blank",
+                  "explanation": "Des rapports différents prouvent un non-parallélisme : c'est la contraposée.",
+                  "answers": [
+                    {
+                      "content": "contraposée",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Si AN valait 7,5 cm, les droites (MN) et (BC) seraient parallèles.",
+                  "question_type": "true_false",
+                  "explanation": "Il faudrait AN/AC = AM/AB = 0,625, soit AN = 12 × 0,625 = 7,5 cm. Les points sont dans le même ordre : d'après la réciproque, (MN) // (BC).",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": true
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": false
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "title": "Exercice 4",
+              "statement": "Un terrain a la forme d'un triangle ABC tel que AB = 40 m, AC = 60 m et BC = 80 m. Pour séparer une parcelle, le propriétaire tend une clôture [MN] parallèle à (BC), avec M sur [AB], N sur [AC] et AM = 30 m. Le grillage coûte 1 800 F CFA le mètre.",
+              "exercise_type": "evaluation",
+              "figure": "triangle-abc-mn",
+              "hint": "Le coefficient AM/AB donne AN et MN. Le prix du grillage dépend de la longueur de la clôture [MN], pas de celle du terrain.",
+              "questions": [
+                {
+                  "content": "Pourquoi peut-on appliquer la propriété de Thalès ?",
+                  "question_type": "single_choice",
+                  "explanation": "M est sur [AB], N est sur [AC] et la clôture (MN) est parallèle à (BC) : toutes les conditions de la propriété de Thalès sont réunies.",
+                  "answers": [
+                    {
+                      "content": "Le triangle ABC est isocèle.",
+                      "correct": false
+                    },
+                    {
+                      "content": "Les points M et N sont les milieux des côtés.",
+                      "correct": false
+                    },
+                    {
+                      "content": "La clôture (MN) est parallèle à (BC), avec M sur [AB] et N sur [AC].",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le coefficient AM/AB.",
+                  "question_type": "numeric",
+                  "explanation": "AM/AB = 30 ÷ 40 = 0,75.",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "0.75",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule AN.",
+                  "question_type": "numeric",
+                  "explanation": "AN = AC × 0,75 = 60 × 0,75 = 45 m.",
+                  "unit": "m",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "45",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule la longueur MN de la clôture.",
+                  "question_type": "numeric",
+                  "explanation": "MN = BC × 0,75 = 80 × 0,75 = 60 m.",
+                  "unit": "m",
+                  "tolerance": 0.01,
+                  "answers": [
+                    {
+                      "content": "60",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Calcule le prix du grillage de la clôture.",
+                  "question_type": "numeric",
+                  "explanation": "Prix = 60 × 1 800 = 108 000 F CFA.",
+                  "unit": "F CFA",
+                  "tolerance": 0,
+                  "answers": [
+                    {
+                      "content": "108000",
+                      "correct": true
+                    }
+                  ]
+                },
+                {
+                  "content": "Le périmètre du triangle AMN est de 130 m.",
+                  "question_type": "true_false",
+                  "explanation": "P(AMN) = AM + AN + MN = 30 + 45 + 60 = 135 m, et non 130 m. Vérification : P(ABC) = 40 + 60 + 80 = 180 m et 180 × 0,75 = 135 m.",
+                  "answers": [
+                    {
+                      "content": "Vrai",
+                      "correct": false
+                    },
+                    {
+                      "content": "Faux",
+                      "correct": true
                     }
                   ]
                 }
