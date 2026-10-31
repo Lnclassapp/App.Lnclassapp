@@ -1,0 +1,1458 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Fonctions exponentielles et fonctions puissances",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "tangente-exp-origine",
+          "kind": "coordinate_plane",
+          "description": "Un repère (la courbe de l'exponentielle n'est pas tracée) où l'on lit trois choses sur la fonction exponentielle : la droite d'équation y = x + 1, tangente à la courbe au point A(0 ; 1), l'axe des abscisses y = 0, asymptote horizontale en moins l'infini, et le point B(1 ; 2,72) de la courbe, situé au-dessus de la tangente au point C(1 ; 2).",
+          "params": {
+            "xmin": -4,
+            "xmax": 4,
+            "ymin": -1,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "A",
+                "x": 0,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 1,
+                "y": 2.72
+              },
+              {
+                "id": "C",
+                "x": 1,
+                "y": 2
+              }
+            ],
+            "lines": [
+              {
+                "a": 1,
+                "b": 1
+              },
+              {
+                "a": 0,
+                "b": 0
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 2,
+                "x2": 1,
+                "y2": 2.72
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "refroidissement-plat",
+          "kind": "coordinate_plane",
+          "description": "Un repère pour le refroidissement d'un plat (la courbe n'est pas tracée) : l'axe horizontal donne le temps en minutes, l'axe vertical la température en degrés, de 0 à 50 (le départ à 80 degrés sort du cadre). La droite horizontale y = 20 est l'asymptote. Les points B(10 ; 42,1), C(20 ; 28,1) et D(30 ; 23) sont sur la courbe et s'approchent de cette droite.",
+          "params": {
+            "xmin": -2,
+            "xmax": 40,
+            "ymin": 0,
+            "ymax": 50,
+            "points": [
+              {
+                "id": "B",
+                "x": 10,
+                "y": 42.1
+              },
+              {
+                "id": "C",
+                "x": 20,
+                "y": 28.1
+              },
+              {
+                "id": "D",
+                "x": 30,
+                "y": 23
+              }
+            ],
+            "lines": [
+              {
+                "a": 0,
+                "b": 20
+              }
+            ],
+            "segments": []
+          },
+          "controls": []
+        },
+        {
+          "key": "cacao-maximum",
+          "kind": "coordinate_plane",
+          "description": "Un repère pour la production de cacao (la courbe n'est pas tracée) : l'axe horizontal donne le nombre de mois après la floraison, l'axe vertical la quantité récoltée en centaines de kg. Les points N(10 ; 5,4) et P(20 ; 1,5) sont sur la courbe. L'axe des abscisses y = 0 est l'asymptote en plus l'infini.",
+          "params": {
+            "xmin": -2,
+            "xmax": 25,
+            "ymin": -1,
+            "ymax": 9,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "N",
+                "x": 10,
+                "y": 5.4
+              },
+              {
+                "id": "P",
+                "x": 20,
+                "y": 1.5
+              }
+            ],
+            "lines": [
+              {
+                "a": 0,
+                "b": 0
+              }
+            ],
+            "segments": []
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Utiliser les propriétés algébriques de l'exponentielle",
+          "remember": "La fonction exponentielle, notée $\\exp$ ou $x \\mapsto e^{x}$, est la réciproque de la fonction $\\ln$ : pour tout réel $x$ et tout $y > 0$, $e^{x} = y \\iff x = \\ln y$, avec $\\ln(e^{x}) = x$ et $e^{\\ln y} = y$. Elle est définie sur $\\mathbb{R}$, strictement positive, et $e^{0} = 1$, $e^{1} = e$. Pour tous réels $a$ et $b$ et tout entier $n$ : $e^{a+b} = e^{a} \\times e^{b}$ ; $e^{-a} = \\dfrac{1}{e^{a}}$ ; $e^{a-b} = \\dfrac{e^{a}}{e^{b}}$ ; $(e^{a})^{n} = e^{na}$.",
+          "method": [
+            "Repérer la propriété à utiliser : produit, quotient, inverse ou puissance d'exponentielles.",
+            "Appliquer la propriété pour écrire le résultat sous la forme d'une seule exponentielle $e^{\\dots}$.",
+            "Calculer l'exposant en réduisant les termes en $x$ et les nombres.",
+            "Conclure en vérifiant que le résultat est sous la forme demandée."
+          ],
+          "example": {
+            "statement": "Simplifier, pour tout réel $x$, l'expression $A = \\dfrac{e^{3x+1} \\times e^{-x}}{e^{x+2}}$.",
+            "steps": [
+              "Repérer : au numérateur un produit $e^{3x+1} \\times e^{-x}$, puis un quotient par $e^{x+2}$.",
+              "Appliquer : $A = e^{(3x+1) + (-x) - (x+2)}$.",
+              "Calculer l'exposant : $(3x+1) + (-x) - (x+2) = 3x + 1 - x - x - 2 = x - 1$.",
+              "Conclure : $A = e^{x-1}$, une seule exponentielle."
+            ]
+          },
+          "pitfall": "Ne pas écrire $e^{a+b} = e^{a} + e^{b}$. Contre-exemple : avec $a = b = 0$, on a $e^{0+0} = e^{0} = 1$, mais $e^{0} + e^{0} = 2$. De même, $e^{a} \\times e^{b}$ ne vaut pas $e^{ab}$ : avec $a = 2$ et $b = 3$, $e^{2} \\times e^{3} = e^{5}$ et non $e^{6}$. Un produit d'exponentielles s'obtient en additionnant les exposants.",
+          "figure": null,
+          "exercise": {
+            "title": "Simplifier des expressions avec l'exponentielle",
+            "statement": "Dans cet exercice, tu simplifies des expressions avec les propriétés algébriques de l'exponentielle, en suivant la méthode de la fiche : repérer, appliquer, calculer l'exposant, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Simplifie $e^{2} \\times e^{5}$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est un produit de deux exponentielles, on utilise $e^{a} \\times e^{b} = e^{a+b}$. Étape 2 — Appliquer : $e^{2} \\times e^{5} = e^{2+5}$. Étape 3 — Calculer l'exposant : $2 + 5 = 7$. Étape 4 — Conclure : $e^{7}$. La proposition $e^{10}$ multiplie les exposants ($2 \\times 5$) : c'est une confusion avec $(e^{a})^{b}$. La proposition $e^{3}$ soustrait au lieu d'additionner.",
+                "answers": [
+                  {
+                    "content": "$e^{10}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{7}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2e^{7}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{3}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Simplifie $\\dfrac{e^{6}}{e^{2}}$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est un quotient d'exponentielles, on utilise $\\dfrac{e^{a}}{e^{b}} = e^{a-b}$. Étape 2 — Appliquer : $\\dfrac{e^{6}}{e^{2}} = e^{6-2}$. Étape 3 — Calculer l'exposant : $6 - 2 = 4$. Étape 4 — Conclure : $e^{4}$. La proposition $e^{3}$ divise les exposants ($6 \\div 2$) au lieu de les soustraire.",
+                "answers": [
+                  {
+                    "content": "$e^{3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{8}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{12}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour tout réel $x$, $e^{x+3} \\times e^{2x-3} = e^{kx}$. Détermine le nombre $k$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : c'est un produit d'exponentielles. Étape 2 — Appliquer : $e^{x+3} \\times e^{2x-3} = e^{(x+3) + (2x-3)}$. Étape 3 — Calculer l'exposant : $(x+3) + (2x-3) = 3x$. Étape 4 — Conclure : le résultat est $e^{3x}$, donc $k = 3$. Le nombre $3$ qui disparaît dans l'exposant est une simplification, pas une erreur : $+3$ et $-3$ s'annulent.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux écritures égales à $e^{2x}$, pour tout réel $x$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on a une puissance et un produit d'exponentielles. Étape 2 — Appliquer : $(e^{x})^{2} = e^{2x}$ et $e^{x} \\times e^{x} = e^{x+x}$. Étape 3 — Calculer l'exposant : $x + x = 2x$. Étape 4 — Conclure : $(e^{x})^{2}$ et $e^{x} \\times e^{x}$ valent $e^{2x}$. Les écritures $2e^{x}$ et $e^{x} + e^{x}$ sont égales entre elles, mais elles valent $2 \\times e^{x}$, pas $e^{2x}$. Enfin $e^{x^{2}}$ a pour exposant $x^{2}$.",
+                "answers": [
+                  {
+                    "content": "$(e^{x})^{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2e^{x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{x} \\times e^{x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{x} + e^{x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{x^{2}}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour tout réel $x$, $e^{x+1} = e^{x} + e$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'exposant $x + 1$ est une somme, donc on a un produit d'exponentielles. Étape 2 — Appliquer : $e^{x+1} = e^{x} \\times e^{1}$. Étape 3 — Calculer : $e^{x+1} = e \\times e^{x}$. Étape 4 — Conclure : l'égalité proposée est fausse. Contre-exemple : pour $x = 0$, $e^{0+1} = e$ alors que $e^{0} + e = 1 + e$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans tout cet exercice, $x$ désigne un réel quelconque.",
+            "questions": [
+              {
+                "content": "Écris chaque nombre sous la forme $e^{a}$. On a $e^{4} \\times e^{-1} = e^{a}$ avec $a = $ ___ et $\\dfrac{e^{5}}{e^{-2}} = e^{b}$ avec $b = $ ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : un produit, puis un quotient d'exponentielles. Étape 2 — Appliquer : $e^{4} \\times e^{-1} = e^{4 + (-1)}$ et $\\dfrac{e^{5}}{e^{-2}} = e^{5 - (-2)}$. Étape 3 — Calculer l'exposant : $4 - 1 = 3$ et $5 + 2 = 7$. Étape 4 — Conclure : $a = 3$ et $b = 7$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour un quotient, on soustrait les exposants. Attention à $5 - (-2)$."
+              },
+              {
+                "content": "Simplifie $\\dfrac{e^{3x} \\times e^{-x}}{e^{x}}$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un produit au numérateur, un quotient par $e^{x}$. Étape 2 — Appliquer : $e^{3x + (-x) - x}$. Étape 3 — Calculer l'exposant : $3x - x - x = x$. Étape 4 — Conclure : $e^{x}$. La proposition $e^{2x}$ oublie de diviser par $e^{x}$ ; la proposition $e^{3x}$ ajoute $x$ au lieu de le retrancher.",
+                "answers": [
+                  {
+                    "content": "$e^{2x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{3x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{-x}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète : $\\dfrac{1}{e^{2x}} = e^{___}$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : c'est l'inverse d'une exponentielle, on utilise $\\dfrac{1}{e^{a}} = e^{-a}$. Étape 2 — Appliquer : $\\dfrac{1}{e^{2x}} = e^{-(2x)}$. Étape 3 — Calculer l'exposant : $-(2x) = -2x$. Étape 4 — Conclure : $\\dfrac{1}{e^{2x}} = e^{-2x}$.",
+                "answers": [
+                  {
+                    "content": "-2x",
+                    "correct": true
+                  },
+                  {
+                    "content": "-2*x",
+                    "correct": true
+                  }
+                ],
+                "hint": "L'inverse de $e^{a}$ est $e^{-a}$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résoudre une équation ou une inéquation avec l'exponentielle",
+          "remember": "La fonction exponentielle est strictement croissante sur $\\mathbb{R}$ et $e^{x} > 0$ pour tout $x$. Donc, pour tous réels $a$ et $b$ : $e^{a} = e^{b} \\iff a = b$ et $e^{a} < e^{b} \\iff a < b$ (le sens de l'inégalité est conservé). Pour un réel $k > 0$ : $e^{x} = k \\iff x = \\ln k$, $e^{x} < k \\iff x < \\ln k$ et $e^{x} > k \\iff x > \\ln k$. Si $k \\leq 0$ : $e^{x} = k$ n'a aucune solution et $e^{x} > k$ est vraie pour tout $x$. Quand $e^{2x}$ et $e^{x}$ apparaissent, on pose $X = e^{x}$ (avec $X > 0$).",
+          "method": [
+            "Isoler l'exponentielle pour obtenir $e^{u(x)} = k$ (ou poser $X = e^{x}$ si $e^{2x}$ et $e^{x}$ apparaissent).",
+            "Vérifier le signe de $k$ : comme $e^{u(x)} > 0$, une équation $e^{u(x)} = k$ avec $k \\leq 0$ n'a aucune solution.",
+            "Appliquer $\\ln$ ou comparer les exposants : $e^{u} = k \\iff u = \\ln k$ ; $e^{u} < e^{v} \\iff u < v$, avec le même sens.",
+            "Résoudre l'équation ou l'inéquation obtenue en $x$.",
+            "Conclure en donnant l'ensemble $S$ des solutions."
+          ],
+          "example": {
+            "statement": "Résoudre dans $\\mathbb{R}$ l'équation $e^{2x-1} = 5$.",
+            "steps": [
+              "Isoler : l'exponentielle est déjà isolée, $e^{2x-1} = 5$, avec $u(x) = 2x - 1$ et $k = 5$.",
+              "Vérifier le signe : $k = 5 > 0$, l'équation peut avoir des solutions.",
+              "Appliquer $\\ln$ : $e^{2x-1} = 5 \\iff 2x - 1 = \\ln 5$.",
+              "Résoudre : $2x = 1 + \\ln 5$, donc $x = \\dfrac{1 + \\ln 5}{2}$.",
+              "Conclure : $S = \\left\\{ \\dfrac{1 + \\ln 5}{2} \\right\\}$."
+            ]
+          },
+          "pitfall": "Ne pas oublier que $e^{x}$ est toujours strictement positif : l'équation $e^{x} = -3$ n'a aucune solution, et il ne faut pas écrire $x = \\ln(-3)$, qui n'existe pas. Autre piège : ne pas écrire $e^{x} = 4 \\iff x = 4$ ou $x = e^{4}$. Contre-exemple : $e^{4} \\approx 54{,}6$ n'est pas $4$. La bonne réponse est $x = \\ln 4$, car $e^{\\ln 4} = 4$.",
+          "figure": null,
+          "exercise": {
+            "title": "Résoudre des équations et des inéquations avec l'exponentielle",
+            "statement": "Dans cet exercice, tu résous des équations et des inéquations contenant des exponentielles, avec la méthode de la fiche : isoler, vérifier le signe, appliquer ln, résoudre, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $e^{x} = 4$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Isoler : l'exponentielle est déjà isolée, $e^{x} = 4$. Étape 2 — Vérifier le signe : $4 > 0$, il y a une solution. Étape 3 — Appliquer $\\ln$ : $e^{x} = 4 \\iff x = \\ln 4$. Étape 4 — Résoudre : il n'y a rien d'autre à calculer. Étape 5 — Conclure : $S = \\{\\ln 4\\}$. Les propositions $\\{4\\}$ et $\\{e^{4}\\}$ oublient que la réciproque de $e^{x}$ est $\\ln$. La proposition $\\emptyset$ confond avec le cas $k \\leq 0$.",
+                "answers": [
+                  {
+                    "content": "$S = \\{4\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{e^{4}\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\{\\ln 4\\}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$S = \\emptyset$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $e^{3x-2} = e^{7}$. Donne la valeur de $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Isoler : les deux membres sont déjà des exponentielles, $e^{3x-2} = e^{7}$. Étape 2 — Vérifier le signe : $e^{7} > 0$, donc l'équation peut avoir des solutions. Étape 3 — Comparer les exposants : $e^{3x-2} = e^{7} \\iff 3x - 2 = 7$. Étape 4 — Résoudre : $3x = 9$, donc $x = 3$. Étape 5 — Conclure : $S = \\{3\\}$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $e^{2x+1} < e$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Isoler : $e^{2x+1} < e^{1}$, car $e = e^{1}$. Étape 2 — Vérifier le signe : $e > 0$, rien ne bloque. Étape 3 — Comparer les exposants : l'exponentielle est croissante, donc le sens est conservé : $2x + 1 < 1$. Étape 4 — Résoudre : $2x < 0$, donc $x < 0$. Étape 5 — Conclure : $S = \\,]-\\infty\\,;\\,0[$. La proposition $]0\\,;\\,+\\infty[$ renverse le sens à tort. La proposition avec $\\dfrac{e-1}{2}$ traite $e$ comme un exposant : $e$ est ici $e^{1}$.",
+                "answers": [
+                  {
+                    "content": "$S = \\,]0\\,;\\,+\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\,]-\\infty\\,;\\,0[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$S = \\,]-\\infty\\,;\\,\\dfrac{e-1}{2}[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S = \\,]-\\infty\\,;\\,1[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $e^{2x} - 3e^{x} + 2 = 0$. Quelles sont les deux solutions ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Isoler : on pose $X = e^{x}$, avec $X > 0$, et l'équation devient $X^{2} - 3X + 2 = 0$. Étape 2 — Vérifier le signe : on résout en $X$, $\\Delta = 9 - 8 = 1$, donc $X = \\dfrac{3 - 1}{2} = 1$ ou $X = \\dfrac{3 + 1}{2} = 2$ ; les deux sont strictement positifs, on garde les deux. Étape 3 — Appliquer $\\ln$ : $e^{x} = 1 \\iff x = \\ln 1 = 0$ et $e^{x} = 2 \\iff x = \\ln 2$. Étape 4 — Résoudre : les deux équations en $x$ sont résolues. Étape 5 — Conclure : $S = \\{0\\,;\\,\\ln 2\\}$. Les propositions $1$ et $2$ sont les valeurs de $X$, pas de $x$.",
+                "answers": [
+                  {
+                    "content": "$0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\ln 2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln 3$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'équation $e^{x} = -3$ admet une solution dans $\\mathbb{R}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Isoler : l'exponentielle est isolée, $e^{x} = -3$. Étape 2 — Vérifier le signe : $k = -3 \\leq 0$, or $e^{x} > 0$ pour tout $x$. Étape 3 — Appliquer $\\ln$ : impossible, $\\ln(-3)$ n'existe pas. Étape 4 — Résoudre : il n'y a rien à résoudre, l'équation n'a aucune solution. Étape 5 — Conclure : $S = \\emptyset$. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Résous dans $\\mathbb{R}$ chaque équation ou inéquation.",
+            "questions": [
+              {
+                "content": "L'équation $2e^{x} = 12$ a pour solution $x = \\ln(___)$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Isoler : on divise par 2, $e^{x} = 6$. Étape 2 — Vérifier le signe : $6 > 0$. Étape 3 — Appliquer $\\ln$ : $e^{x} = 6 \\iff x = \\ln 6$. Étape 4 — Résoudre : rien d'autre à calculer. Étape 5 — Conclure : $S = \\{\\ln 6\\}$. Écrire $\\ln 12$ oublie de diviser par 2 d'abord.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "hint": "Isole d'abord $e^{x}$ en divisant les deux membres par 2."
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $e^{x} - 5 > 0$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Isoler : $e^{x} > 5$. Étape 2 — Vérifier le signe : $5 > 0$. Étape 3 — Appliquer $\\ln$ : l'exponentielle est croissante, donc $e^{x} > 5 \\iff x > \\ln 5$. Étape 4 — Résoudre : l'inégalité est déjà sous la forme $x > \\ln 5$. Étape 5 — Conclure : $S = \\,]\\ln 5\\,;\\,+\\infty[$. La proposition $]-\\infty\\,;\\,\\ln 5[$ renverse le sens à tort.",
+                "answers": [
+                  {
+                    "content": "$]\\ln 5\\,;\\,+\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-\\infty\\,;\\,\\ln 5[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]5\\,;\\,+\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]e^{5}\\,;\\,+\\infty[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $e^{2x-3} = 1$. Donne la valeur de $x$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Isoler : $e^{2x-3} = 1 = e^{0}$. Étape 2 — Vérifier le signe : $1 > 0$. Étape 3 — Appliquer $\\ln$ : $e^{2x-3} = 1 \\iff 2x - 3 = \\ln 1 = 0$. Étape 4 — Résoudre : $2x = 3$, donc $x = 1{,}5$. Étape 5 — Conclure : $S = \\{1{,}5\\}$.",
+                "answers": [
+                  {
+                    "content": "1,5",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer une limite avec l'exponentielle",
+          "remember": "$\\lim_{x \\to +\\infty} e^{x} = +\\infty$ et $\\lim_{x \\to -\\infty} e^{x} = 0$ (la droite $y = 0$ est asymptote horizontale en $-\\infty$). Croissances comparées : $\\lim_{x \\to +\\infty} \\dfrac{e^{x}}{x} = +\\infty$, plus généralement $\\lim_{x \\to +\\infty} \\dfrac{e^{x}}{x^{n}} = +\\infty$, et $\\lim_{x \\to -\\infty} x\\,e^{x} = 0$, plus généralement $\\lim_{x \\to -\\infty} x^{n} e^{x} = 0$ ($n$ entier non nul) : en $+\\infty$, l'exponentielle l'emporte sur toute puissance de $x$. Enfin $\\lim_{x \\to 0} \\dfrac{e^{x} - 1}{x} = 1$ (c'est le nombre dérivé de $\\exp$ en $0$). Pour $e^{u(x)}$, on calcule d'abord la limite de $u(x)$.",
+          "method": [
+            "Calculer la limite de chaque terme avec les limites de $e^{x}$ en $+\\infty$ et en $-\\infty$ (et celle de l'exposant s'il y en a un).",
+            "Si la somme ou le produit donne une forme indéterminée ($+\\infty - \\infty$, $0 \\times \\infty$, $\\frac{\\infty}{\\infty}$), repérer la croissance comparée à utiliser.",
+            "Transformer l'expression pour faire apparaître $\\dfrac{e^{x}}{x}$ ou $x\\,e^{x}$ : factoriser le terme dominant.",
+            "Conclure avec la limite de référence et la règle des signes."
+          ],
+          "example": {
+            "statement": "Calculer $\\lim_{x \\to +\\infty} (e^{x} - x)$.",
+            "steps": [
+              "Calculer les limites : $e^{x} \\to +\\infty$ et $x \\to +\\infty$, donc on obtient la forme indéterminée $+\\infty - \\infty$.",
+              "Repérer la croissance comparée : $\\lim_{x \\to +\\infty} \\dfrac{e^{x}}{x} = +\\infty$ va nous servir.",
+              "Transformer : pour $x > 0$, $e^{x} - x = x\\left(\\dfrac{e^{x}}{x} - 1\\right)$.",
+              "Conclure : $\\dfrac{e^{x}}{x} - 1 \\to +\\infty$ et $x \\to +\\infty$, donc le produit tend vers $+\\infty$ : $\\lim_{x \\to +\\infty} (e^{x} - x) = +\\infty$."
+            ]
+          },
+          "pitfall": "Ne pas conclure sur une forme indéterminée avec une règle inventée : « $\\frac{\\infty}{\\infty} = 1$ » est faux. Contre-exemple chiffré : pour $x = 20$, $e^{20} \\approx 485\\,000\\,000$, donc $\\dfrac{e^{20}}{20} \\approx 24\\,000\\,000$, et non $1$. De même, $\\lim_{x \\to -\\infty} x\\,e^{x}$ n'est pas $-\\infty$ : $e^{x}$ tend vers $0$ beaucoup plus vite que $x$ ne tend vers $-\\infty$, et le produit tend vers $0$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer des limites avec l'exponentielle",
+            "statement": "Dans cet exercice, tu calcules des limites de fonctions contenant l'exponentielle, avec la méthode de la fiche : calculer les limites, repérer la croissance comparée, transformer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la limite de $e^{x}$ quand $x$ tend vers $-\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer la limite : quand $x \\to -\\infty$, $e^{x} = \\dfrac{1}{e^{-x}}$ avec $-x \\to +\\infty$, donc $e^{-x} \\to +\\infty$ et $e^{x} \\to 0$. Étape 2 — Il n'y a pas de forme indéterminée. Étape 3 — Il n'y a rien à transformer. Étape 4 — Conclure : $\\lim_{x \\to -\\infty} e^{x} = 0$. Une exponentielle est positive, donc $-\\infty$ est impossible ; $+\\infty$ est sa limite en $+\\infty$.",
+                "answers": [
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $\\dfrac{1}{1 + e^{-x}}$ quand $x$ tend vers $+\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer les limites : quand $x \\to +\\infty$, $-x \\to -\\infty$, donc $e^{-x} \\to 0$ et $1 + e^{-x} \\to 1$. Étape 2 — Pas de forme indéterminée : le dénominateur tend vers $1$, qui n'est pas $0$. Étape 3 — Rien à transformer. Étape 4 — Conclure : $\\dfrac{1}{1 + e^{-x}} \\to \\dfrac{1}{1} = 1$. La proposition $\\dfrac{1}{2}$ remplace $e^{-x}$ par $1$ au lieu de $0$ : elle calcule $\\dfrac{1}{1+1}$.",
+                "answers": [
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\lim_{x \\to -\\infty} \\left(x\\,e^{x} + 3\\right)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer les limites : $x \\to -\\infty$ et $e^{x} \\to 0$, donc $x\\,e^{x}$ est de la forme $-\\infty \\times 0$. Étape 2 — Repérer la croissance comparée : $\\lim_{x \\to -\\infty} x\\,e^{x} = 0$. Étape 3 — Transformer : rien à faire, l'expression est déjà de la forme de référence plus $3$. Étape 4 — Conclure : $\\lim (x\\,e^{x} + 3) = 0 + 3 = 3$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $x - e^{x}$ quand $x$ tend vers $+\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer les limites : $x \\to +\\infty$ et $e^{x} \\to +\\infty$, c'est la forme $+\\infty - \\infty$. Étape 2 — Repérer la croissance comparée : $\\lim_{x \\to +\\infty} \\dfrac{e^{x}}{x} = +\\infty$. Étape 3 — Transformer : pour $x > 0$, $x - e^{x} = x\\left(1 - \\dfrac{e^{x}}{x}\\right)$. Étape 4 — Conclure : $1 - \\dfrac{e^{x}}{x} \\to -\\infty$ et $x \\to +\\infty$, donc le produit tend vers $-\\infty$. La proposition $+\\infty$ croit que $x$ l'emporte sur $e^{x}$, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quand $x$ tend vers $+\\infty$, $\\dfrac{e^{x}}{x}$ est de la forme $\\dfrac{\\infty}{\\infty}$, donc sa limite est $1$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer les limites : $e^{x} \\to +\\infty$ et $x \\to +\\infty$, c'est la forme indéterminée $\\dfrac{\\infty}{\\infty}$. Étape 2 — Repérer la croissance comparée : $\\lim_{x \\to +\\infty} \\dfrac{e^{x}}{x} = +\\infty$. Étape 3 — Il n'y a rien à transformer. Étape 4 — Conclure : la limite est $+\\infty$ et non $1$. Une forme indéterminée n'a pas de valeur imposée : pour $x = 20$, $\\dfrac{e^{20}}{20}$ est déjà de l'ordre de $24$ millions.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Calcule chacune des limites demandées.",
+            "questions": [
+              {
+                "content": "On a $\\lim_{x \\to -\\infty} (e^{x} + 2) = $ ___ et $\\lim_{x \\to +\\infty} (e^{-x} - 3) = $ ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer les limites : quand $x \\to -\\infty$, $e^{x} \\to 0$, donc $e^{x} + 2 \\to 2$ ; quand $x \\to +\\infty$, $-x \\to -\\infty$, donc $e^{-x} \\to 0$ et $e^{-x} - 3 \\to -3$. Étape 2 — Aucune forme indéterminée. Étape 3 — Rien à transformer. Étape 4 — Conclure : les limites valent $2$ et $-3$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pour $e^{-x}$ quand $x \\to +\\infty$, regarde d'abord la limite de l'exposant $-x$."
+              },
+              {
+                "content": "Quelle est la limite de $e^{x} - 2x$ quand $x$ tend vers $+\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer les limites : $e^{x} \\to +\\infty$ et $2x \\to +\\infty$, forme $+\\infty - \\infty$. Étape 2 — Repérer la croissance comparée : $\\lim_{x \\to +\\infty} \\dfrac{e^{x}}{x} = +\\infty$. Étape 3 — Transformer : pour $x > 0$, $e^{x} - 2x = x\\left(\\dfrac{e^{x}}{x} - 2\\right)$. Étape 4 — Conclure : $\\dfrac{e^{x}}{x} - 2 \\to +\\infty$ et $x \\to +\\infty$, donc la limite est $+\\infty$.",
+                "answers": [
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $(x - 1)e^{x}$ quand $x$ tend vers $-\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer les limites : $x - 1 \\to -\\infty$ et $e^{x} \\to 0$, forme $-\\infty \\times 0$. Étape 2 — Repérer la croissance comparée : $\\lim_{x \\to -\\infty} x\\,e^{x} = 0$. Étape 3 — Transformer : $(x - 1)e^{x} = x\\,e^{x} - e^{x}$. Étape 4 — Conclure : $x\\,e^{x} \\to 0$ et $e^{x} \\to 0$, donc la limite est $0 - 0 = 0$. La proposition $-\\infty$ applique la règle « $-\\infty \\times$ quelque chose » sans voir que ce facteur tend vers $0$.",
+                "answers": [
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": true
+                  }
+                ],
+                "hint": "Développe le produit pour retrouver $x\\,e^{x}$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dériver et primitiver une fonction exponentielle composée",
+          "remember": "Si $u$ est dérivable sur un intervalle $I$, alors $e^{u}$ est dérivable sur $I$ et $(e^{u})' = u'\\,e^{u}$. En particulier $(e^{x})' = e^{x}$ et, pour des réels $a$ et $b$, $(e^{ax+b})' = a\\,e^{ax+b}$. Comme $e^{u} > 0$, le signe de $u'\\,e^{u}$ est celui de $u'$. Réciproquement, une primitive sur $I$ de $u'\\,e^{u}$ est $e^{u}$ ; toutes les primitives sont $e^{u} + c$ avec $c$ réel. Pour une fonction $k\\,u'\\,e^{u}$, une primitive est $k\\,e^{u}$.",
+          "method": [
+            "Identifier la fonction $u(x)$ placée en exposant et calculer $u'(x)$.",
+            "Reconnaître la forme : $e^{u}$ à dériver, ou $u'\\,e^{u}$ (à une constante près) à primitiver.",
+            "Appliquer la formule : $(e^{u})' = u'\\,e^{u}$, ou une primitive de $u'\\,e^{u}$ est $e^{u}$.",
+            "Conclure : étudier le signe de la dérivée avec $e^{u} > 0$, ou vérifier la primitive en la dérivant."
+          ],
+          "example": {
+            "statement": "Soit $f(x) = e^{x^{2} - 4x}$ sur $\\mathbb{R}$. Calculer $f'(x)$, donner le sens de variation de $f$, puis une primitive de $f'$.",
+            "steps": [
+              "Identifier : l'exposant est $u(x) = x^{2} - 4x$, donc $u'(x) = 2x - 4$.",
+              "Reconnaître : $f = e^{u}$ est à dériver, et sa dérivée sera de la forme $u'\\,e^{u}$, donc facile à primitiver.",
+              "Appliquer : $f'(x) = (2x - 4)\\,e^{x^{2} - 4x}$ ; une primitive de $f'$ est $e^{x^{2} - 4x} = f$.",
+              "Conclure : $e^{u} > 0$, donc $f'(x)$ a le signe de $2x - 4$ : $f$ est décroissante sur $]-\\infty\\,;\\,2]$ et croissante sur $[2\\,;\\,+\\infty[$, avec le minimum $f(2) = e^{-4}$."
+            ]
+          },
+          "pitfall": "Ne pas oublier le facteur $u'$ en dérivant, ni le facteur $\\frac{1}{a}$ en primitivant. Contre-exemple : $(e^{2x})' = 2e^{2x}$ et non $e^{2x}$ ; au voisinage de $0$, $e^{2x}$ vaut environ $1 + 2x$, donc sa pente en $0$ est $2$. De même, une primitive de $e^{2x}$ est $\\dfrac{1}{2}e^{2x}$ : en dérivant $e^{2x}$, on obtient $2e^{2x}$, pas $e^{2x}$.",
+          "figure": "tangente-exp-origine",
+          "exercise": {
+            "title": "Dériver et primitiver avec l'exponentielle",
+            "statement": "Dans cet exercice, tu dérives des fonctions de la forme e puissance u et tu cherches des primitives de u' e puissance u, avec la méthode de la fiche : identifier, reconnaître, appliquer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la dérivée de $f(x) = e^{3x}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = 3x$, donc $u'(x) = 3$. Étape 2 — Reconnaître : $f = e^{u}$ est à dériver. Étape 3 — Appliquer : $f'(x) = u'(x)\\,e^{u(x)} = 3e^{3x}$. Étape 4 — Conclure : $f'(x) = 3e^{3x}$, qui est strictement positive. La proposition $e^{3x}$ oublie $u'$ ; la proposition $3x\\,e^{3x-1}$ applique la règle des puissances de $x$, qui ne convient pas ici.",
+                "answers": [
+                  {
+                    "content": "$e^{3x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3e^{3x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3x\\,e^{3x-1}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$3e^{x}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la dérivée de $g(x) = e^{x^{2}+1}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = x^{2} + 1$, donc $u'(x) = 2x$. Étape 2 — Reconnaître : $g = e^{u}$ est à dériver. Étape 3 — Appliquer : $g'(x) = 2x\\,e^{x^{2}+1}$. Étape 4 — Conclure : $g'(x)$ a le signe de $2x$, car $e^{x^{2}+1} > 0$. La proposition $(x^{2}+1)\\,e^{x^{2}+1}$ multiplie par $u$ au lieu de $u'$ ; la proposition $e^{2x}$ dérive l'exposant sans garder l'exponentielle.",
+                "answers": [
+                  {
+                    "content": "$(x^{2}+1)\\,e^{x^{2}+1}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{2x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2x\\,e^{x^{2}+1}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2x\\,e^{2x}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x) = e^{2x-4}$. Calcule $f'(2)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x) = 2x - 4$, donc $u'(x) = 2$. Étape 2 — Reconnaître : $f = e^{u}$ est à dériver. Étape 3 — Appliquer : $f'(x) = 2e^{2x-4}$, donc $f'(2) = 2e^{0}$. Étape 4 — Conclure : $e^{0} = 1$, donc $f'(2) = 2$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est une primitive de $h(x) = 2x\\,e^{x^{2}}$ sur $\\mathbb{R}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = x^{2}$, donc $u'(x) = 2x$. Étape 2 — Reconnaître : $h = u'\\,e^{u}$ exactement. Étape 3 — Appliquer : une primitive de $u'\\,e^{u}$ est $e^{u}$, soit $e^{x^{2}}$. Étape 4 — Conclure : on vérifie en dérivant, $(e^{x^{2}})' = 2x\\,e^{x^{2}} = h(x)$. La proposition $2e^{x^{2}}$ se dérive en $4x\\,e^{x^{2}}$, et $\\dfrac{1}{2}e^{x^{2}}$ en $x\\,e^{x^{2}}$ : aucune ne redonne $h$.",
+                "answers": [
+                  {
+                    "content": "$2e^{x^{2}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x^{2}e^{x^{2}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}e^{x^{2}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{x^{2}}$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une primitive de $k(x) = e^{2x}$ sur $\\mathbb{R}$ est la fonction $K(x) = e^{2x}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : $u(x) = 2x$, donc $u'(x) = 2$. Étape 2 — Reconnaître : $k = e^{2x}$ n'est pas exactement $u'\\,e^{u} = 2e^{2x}$ : il manque le facteur $2$, donc $k = \\dfrac{1}{2}u'\\,e^{u}$. Étape 3 — Appliquer : une primitive est $\\dfrac{1}{2}e^{2x}$. Étape 4 — Conclure : on vérifie en dérivant, $K'(x) = 2e^{2x} \\neq e^{2x}$. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On considère la fonction $f$ définie sur $\\mathbb{R}$ par $f(x) = e^{-x^{2}+2x}$.",
+            "questions": [
+              {
+                "content": "Quelle est la dérivée de $f(x) = e^{-x^{2}+2x}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x) = -x^{2} + 2x$, donc $u'(x) = -2x + 2$. Étape 2 — Reconnaître : $f = e^{u}$ est à dériver. Étape 3 — Appliquer : $f'(x) = (-2x + 2)\\,e^{-x^{2}+2x}$. Étape 4 — Conclure : $f'$ a le signe de $-2x + 2$. La première proposition multiplie par $u$ au lieu de $u'$ ; la dernière se trompe de signe dans $u'$.",
+                "answers": [
+                  {
+                    "content": "$(-x^{2}+2x)\\,e^{-x^{2}+2x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(-2x+2)\\,e^{-x^{2}+2x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$e^{-2x+2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(-2x-2)\\,e^{-x^{2}+2x}$",
+                    "correct": false
+                  }
+                ],
+                "hint": "L'exposant est $u(x) = -x^{2} + 2x$ : calcule $u'(x)$, puis multiplie par $e^{u}$."
+              },
+              {
+                "content": "Calcule $f'(1)$ pour $f(x) = e^{-x^{2}+2x}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x) = -x^{2} + 2x$, donc $u'(x) = -2x + 2$. Étape 2 — Reconnaître : $f = e^{u}$ est à dériver. Étape 3 — Appliquer : $f'(x) = (-2x + 2)\\,e^{-x^{2}+2x}$, donc $f'(1) = (-2 + 2)\\,e^{1} = 0 \\times e$. Étape 4 — Conclure : $f'(1) = 0$, donc la courbe a une tangente horizontale en $x = 1$, où $f$ est maximale.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La fonction $F(x) = e^{3x} + c$ est une primitive de $3e^{3x}$ sur $\\mathbb{R}$. Détermine la constante $c$ pour que $F(0) = 5$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x) = 3x$, donc $u'(x) = 3$. Étape 2 — Reconnaître : $3e^{3x} = u'\\,e^{u}$ exactement. Étape 3 — Appliquer : les primitives sont $e^{3x} + c$, et $F(0) = e^{0} + c = 1 + c$. Étape 4 — Conclure : $1 + c = 5$ donne $c = 4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Utiliser les fonctions exponentielles de base a et les fonctions puissances",
+          "remember": "Pour $a > 0$ et $x$ réel : $a^{x} = e^{x \\ln a}$. La fonction $x \\mapsto a^{x}$ est définie sur $\\mathbb{R}$, strictement positive, dérivable, et $(a^{x})' = \\ln a \\times a^{x}$. Elle est strictement croissante si $a > 1$ (limite $+\\infty$ en $+\\infty$, $0$ en $-\\infty$) et strictement décroissante si $0 < a < 1$ (limite $0$ en $+\\infty$, $+\\infty$ en $-\\infty$). Les règles des puissances restent vraies : $a^{x+y} = a^{x} \\times a^{y}$. Pour $x > 0$ et $\\alpha$ réel : $x^{\\alpha} = e^{\\alpha \\ln x}$, dérivable sur $]0\\,;\\,+\\infty[$ avec $(x^{\\alpha})' = \\alpha\\,x^{\\alpha - 1}$.",
+          "method": [
+            "Écrire la puissance avec l'exponentielle : $a^{x} = e^{x \\ln a}$ (si $a > 0$) ou $x^{\\alpha} = e^{\\alpha \\ln x}$ (si $x > 0$).",
+            "Dériver ou calculer à l'aide de la forme $e^{u}$, avec $u(x) = x \\ln a$ ou $u(x) = \\alpha \\ln x$.",
+            "Simplifier avec le résultat connu : $(a^{x})' = \\ln a \\times a^{x}$ ou $(x^{\\alpha})' = \\alpha\\,x^{\\alpha - 1}$.",
+            "Conclure en étudiant le signe de $\\ln a$ ($a > 1$ : croissante ; $0 < a < 1$ : décroissante) ou la valeur demandée."
+          ],
+          "example": {
+            "statement": "Soit $f(x) = 3^{x}$ sur $\\mathbb{R}$. Calculer $f'(x)$ et donner le sens de variation de $f$.",
+            "steps": [
+              "Écrire : $a = 3 > 0$, donc $3^{x} = e^{x \\ln 3}$.",
+              "Dériver : $u(x) = x \\ln 3$, donc $u'(x) = \\ln 3$ et $f'(x) = \\ln 3 \\times e^{x \\ln 3}$.",
+              "Simplifier : $e^{x \\ln 3} = 3^{x}$, donc $f'(x) = \\ln 3 \\times 3^{x}$.",
+              "Conclure : $3 > 1$ donc $\\ln 3 > 0$, et $3^{x} > 0$ ; $f'(x) > 0$ et $f$ est strictement croissante sur $\\mathbb{R}$."
+            ]
+          },
+          "pitfall": "Ne pas dériver $a^{x}$ avec la règle des puissances : $(a^{x})' \\neq x\\,a^{x-1}$. Contre-exemple : pour $f(x) = 2^{x}$, la règle fausse donnerait $f'(0) = 0 \\times 2^{-1} = 0$, alors que $2^{x}$ passe de $1$ (en $x = 0$) à $2$ (en $x = 1$) : elle n'est pas plate en $0$. La bonne formule donne $f'(0) = \\ln 2 \\times 2^{0} = \\ln 2 \\approx 0{,}69$. La règle $(x^{\\alpha})' = \\alpha\\,x^{\\alpha-1}$ vaut quand la variable est en bas, pas en exposant.",
+          "figure": null,
+          "exercise": {
+            "title": "Dériver des fonctions de la forme a puissance x et x puissance alpha",
+            "statement": "Dans cet exercice, tu utilises les fonctions exponentielles de base a et les fonctions puissances, avec la méthode de la fiche : écrire avec l'exponentielle, dériver, simplifier, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est l'écriture de $5^{x}$ avec l'exponentielle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $a = 5 > 0$, donc $5^{x} = e^{x \\ln 5}$. Étape 2 — Dériver : il n'y a pas de dérivée demandée ici. Étape 3 — Simplifier : l'exposant est $u(x) = x \\ln 5$. Étape 4 — Conclure : $5^{x} = e^{x \\ln 5}$. La proposition $e^{5x}$ oublie le logarithme ; la proposition $e^{5\\ln x}$ est $x^{5}$, où la variable est en bas.",
+                "answers": [
+                  {
+                    "content": "$e^{5x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5e^{x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{5 \\ln x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$e^{x \\ln 5}$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la dérivée de $f(x) = 2^{x}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $2^{x} = e^{x \\ln 2}$. Étape 2 — Dériver : $u(x) = x \\ln 2$, $u'(x) = \\ln 2$, donc $f'(x) = \\ln 2 \\times e^{x \\ln 2}$. Étape 3 — Simplifier : $e^{x \\ln 2} = 2^{x}$, donc $f'(x) = \\ln 2 \\times 2^{x}$. Étape 4 — Conclure : $f'(x) = \\ln 2 \\times 2^{x} > 0$, $f$ est croissante. La proposition $x\\,2^{x-1}$ applique la règle des puissances ; $2^{x}$ oublie le facteur $\\ln 2$.",
+                "answers": [
+                  {
+                    "content": "$x\\,2^{x-1}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2^{x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln 2 \\times 2^{x}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{2^{x}}{\\ln 2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La fonction $x \\mapsto \\left(\\dfrac{1}{2}\\right)^{x}$ est strictement décroissante sur $\\mathbb{R}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $\\left(\\dfrac{1}{2}\\right)^{x} = e^{x \\ln(1/2)}$. Étape 2 — Dériver : $u(x) = x \\ln\\dfrac{1}{2}$, donc $u'(x) = \\ln\\dfrac{1}{2}$. Étape 3 — Simplifier : la dérivée vaut $\\ln\\dfrac{1}{2} \\times \\left(\\dfrac{1}{2}\\right)^{x}$. Étape 4 — Conclure : $\\dfrac{1}{2} < 1$ donc $\\ln\\dfrac{1}{2} = -\\ln 2 < 0$, et la dérivée est strictement négative : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x) = x^{3/2}$ sur $]0\\,;\\,+\\infty[$. Calcule $f'(4)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $x^{3/2} = e^{\\frac{3}{2}\\ln x}$, avec $x > 0$. Étape 2 — Dériver : $u(x) = \\dfrac{3}{2}\\ln x$, $u'(x) = \\dfrac{3}{2x}$, donc $f'(x) = \\dfrac{3}{2x}\\,x^{3/2}$. Étape 3 — Simplifier : $f'(x) = \\dfrac{3}{2}\\,x^{1/2}$, c'est bien $\\alpha\\,x^{\\alpha-1}$. Étape 4 — Conclure : $f'(4) = \\dfrac{3}{2}\\times\\sqrt{4} = \\dfrac{3}{2}\\times 2 = 3$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour tout réel $x$, la dérivée de $3^{x}$ est $x \\times 3^{x-1}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $3^{x} = e^{x \\ln 3}$. Étape 2 — Dériver : $u'(x) = \\ln 3$, donc la dérivée est $\\ln 3 \\times e^{x \\ln 3}$. Étape 3 — Simplifier : $(3^{x})' = \\ln 3 \\times 3^{x}$. Étape 4 — Conclure : l'affirmation est fausse. Contre-exemple : en $x = 0$, $x \\times 3^{x-1} = 0$, alors que $3^{x}$ passe de $1$ à $3$ entre $0$ et $1$ et n'est pas plate en $0$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans cet exercice, $x$ est un réel (strictement positif quand une puissance de $x$ est en jeu).",
+            "questions": [
+              {
+                "content": "Complète : $4^{x} = e^{x \\ln(___)}$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Écrire : pour $a > 0$, $a^{x} = e^{x \\ln a}$. Étape 2 — Dériver : il n'y a pas de dérivée demandée. Étape 3 — Simplifier : ici $a = 4$. Étape 4 — Conclure : $4^{x} = e^{x \\ln 4}$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "Dans $a^{x} = e^{x \\ln a}$, le nombre dans le logarithme est la base $a$."
+              },
+              {
+                "content": "Que peut-on dire de la fonction $x \\mapsto 0{,}8^{x}$ sur $\\mathbb{R}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $0{,}8^{x} = e^{x \\ln 0{,}8}$. Étape 2 — Dériver : $u'(x) = \\ln 0{,}8$, donc la dérivée est $\\ln 0{,}8 \\times 0{,}8^{x}$. Étape 3 — Simplifier : $0{,}8^{x} > 0$. Étape 4 — Conclure : $0 < 0{,}8 < 1$ donc $\\ln 0{,}8 < 0$ et la dérivée est négative : la fonction est strictement décroissante. La proposition « croissante » suppose à tort que la base est supérieure à $1$.",
+                "answers": [
+                  {
+                    "content": "Elle est strictement croissante.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est strictement décroissante.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est constante.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est croissante puis décroissante.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $g(x) = x^{5/2}$ sur $]0\\,;\\,+\\infty[$. Calcule $g'(4)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $x^{5/2} = e^{\\frac{5}{2}\\ln x}$, avec $x > 0$. Étape 2 — Dériver : $u'(x) = \\dfrac{5}{2x}$, donc $g'(x) = \\dfrac{5}{2x}\\,x^{5/2}$. Étape 3 — Simplifier : $g'(x) = \\dfrac{5}{2}\\,x^{3/2}$. Étape 4 — Conclure : $4^{3/2} = (\\sqrt{4})^{3} = 8$, donc $g'(4) = \\dfrac{5}{2}\\times 8 = 20$.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "hint": "$\\alpha - 1 = \\dfrac{5}{2} - 1 = \\dfrac{3}{2}$, et $4^{3/2} = (\\sqrt{4})^{3}$."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Une culture de bactéries qui double",
+          "statement": "Une culture contient 100 bactéries à l'instant $t = 0$ (en heures). Leur nombre double toutes les 2 heures. On modélise le nombre de bactéries à l'instant $t \\geq 0$ par $N(t) = 100 \\times 2^{t/2}$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une culture de bactéries est modélisée par $N(t) = 100 \\times 2^{t/2}$, où $t$ est en heures. Calcule le nombre de bactéries à l'instant $t = 4$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $N(4) = 100 \\times 2^{4/2}$. Étape 2 — Calculer : $4/2 = 2$ et $2^{2} = 4$. Étape 3 — Conclure : $N(4) = 100 \\times 4 = 400$ bactéries. On retrouve bien deux doublements en 4 heures : $100 \\to 200 \\to 400$.",
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $N(t) = 100 \\times 2^{t/2}$, quelle est l'écriture de $N(t)$ avec l'exponentielle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : pour $a = 2 > 0$, $2^{t/2} = e^{\\frac{t}{2}\\ln 2}$. Étape 2 — Calculer : on garde le facteur $100$. Étape 3 — Conclure : $N(t) = 100\\,e^{\\frac{t}{2}\\ln 2}$. La proposition $100\\,e^{t/2}$ oublie $\\ln 2$ ; la proposition $100\\,e^{t \\ln 2}$ oublie le $\\dfrac{1}{2}$ de l'exposant et correspond à un doublement chaque heure ; $e^{2\\ln t}$ est $t^{2}$.",
+              "answers": [
+                {
+                  "content": "$100\\,e^{t/2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$100\\,e^{\\frac{t}{2}\\ln 2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$100\\,e^{2\\ln t}$",
+                  "correct": false
+                },
+                {
+                  "content": "$100\\,e^{t \\ln 2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $N(t) = 100 \\times 2^{t/2}$, quelle est la dérivée $N'(t)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $N(t) = 100\\,e^{\\frac{t}{2}\\ln 2}$. Étape 2 — Dériver : $u(t) = \\dfrac{t}{2}\\ln 2$, donc $u'(t) = \\dfrac{\\ln 2}{2}$ et $N'(t) = 100 \\times \\dfrac{\\ln 2}{2}\\,e^{u(t)}$. Étape 3 — Simplifier : $N'(t) = 50 \\ln 2 \\times 2^{t/2}$. Étape 4 — Conclure : $N'(t) > 0$, la culture croît. La proposition $50\\,t \\times 2^{t/2-1}$ applique la règle des puissances de $x$ à une variable en exposant, ce qui est faux.",
+              "answers": [
+                {
+                  "content": "$50 \\ln 2 \\times 2^{t/2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$50\\,t \\times 2^{t/2 - 1}$",
+                  "correct": false
+                },
+                {
+                  "content": "$100 \\times 2^{t/2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{100}{\\ln 2}\\times 2^{t/2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une culture est modélisée par $N(t) = 100 \\times 2^{t/2}$, où $t$ est en heures. Au bout de combien d'heures y a-t-il 1 600 bactéries ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Isoler : $100 \\times 2^{t/2} = 1600$ donne $2^{t/2} = 16$. Étape 2 — Vérifier le signe : $16 > 0$, et on réécrit $16 = 2^{4}$. Étape 3 — Appliquer $\\ln$ (ou comparer les exposants) : $e^{\\frac{t}{2}\\ln 2} = e^{4\\ln 2}$ donne $\\dfrac{t}{2}\\ln 2 = 4\\ln 2$. Étape 4 — Résoudre : $\\dfrac{t}{2} = 4$, donc $t = 8$. Étape 5 — Conclure : il faut 8 heures, soit 4 doublements.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $N(t) = 100 \\times 2^{t/2}$, que vaut $\\lim_{t \\to +\\infty} \\dfrac{N(t)}{e^{t}}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $\\dfrac{N(t)}{e^{t}} = 100\\,e^{\\frac{t}{2}\\ln 2 - t} = 100\\,e^{t\\left(\\frac{\\ln 2}{2} - 1\\right)}$. Étape 2 — Calculer la limite de l'exposant : $\\ln 2 < 1$ donc $\\dfrac{\\ln 2}{2} - 1 < 0$ et l'exposant tend vers $-\\infty$. Étape 3 — Conclure : $\\lim_{x \\to -\\infty} e^{x} = 0$, donc la limite est $0$. L'exponentielle de base $e$ croît plus vite que la base $2$ : la proposition $+\\infty$ confond les deux.",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$100$",
+                  "correct": false
+                },
+                {
+                  "content": "$1$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le refroidissement d'un plat",
+          "statement": "Un plat sort du four à 80 °C dans une pièce à 20 °C. On note $\\theta(t)$ sa température en °C, $t$ minutes après sa sortie, avec $\\theta(t) = 20 + 60\\,e^{-t/10}$ pour $t \\geq 0$.",
+          "exercise_type": "fixation",
+          "figure": "refroidissement-plat",
+          "questions": [
+            {
+              "content": "Un plat refroidit selon $\\theta(t) = 20 + 60\\,e^{-t/10}$ (en °C, $t$ en minutes). Calcule sa température à la sortie du four ($t = 0$).",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $\\theta(0) = 20 + 60\\,e^{0}$. Étape 2 — Calculer : $e^{0} = 1$. Étape 3 — Conclure : $\\theta(0) = 20 + 60 = 80$ °C, ce qui correspond à l'énoncé.",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un plat refroidit selon $\\theta(t) = 20 + 60\\,e^{-t/10}$ (en °C, $t$ en minutes). Quelle est la limite de $\\theta(t)$ quand $t$ tend vers $+\\infty$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer la limite de l'exposant : quand $t \\to +\\infty$, $-\\dfrac{t}{10} \\to -\\infty$. Étape 2 — Appliquer la limite de l'exponentielle : $e^{-t/10} \\to 0$. Étape 3 — Conclure : $\\theta(t) \\to 20 + 60 \\times 0 = 20$. La température tend vers celle de la pièce ; la droite $y = 20$ est asymptote horizontale à la courbe.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $\\theta(t) = 20 + 60\\,e^{-t/10}$, quelle est la dérivée $\\theta'(t)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $u(t) = -\\dfrac{t}{10}$, donc $u'(t) = -\\dfrac{1}{10}$. Étape 2 — Reconnaître : $\\theta = 20 + 60\\,e^{u}$, la constante $20$ disparaît. Étape 3 — Appliquer : $\\theta'(t) = 60 \\times \\left(-\\dfrac{1}{10}\\right)e^{-t/10}$. Étape 4 — Conclure : $\\theta'(t) = -6\\,e^{-t/10}$, strictement négative : le plat refroidit. La proposition $-60\\,e^{-t/10}$ oublie le facteur $u'$ ; la proposition $6\\,e^{-t/10}$ oublie le signe.",
+              "answers": [
+                {
+                  "content": "$6\\,e^{-t/10}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-60\\,e^{-t/10}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-6\\,e^{-t/10}$",
+                  "correct": true
+                },
+                {
+                  "content": "$-\\dfrac{1}{10}\\,e^{-t/10}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $\\theta(t) = 20 + 60\\,e^{-t/10}$, à quel instant $t$ (en minutes) la température est-elle de 50 °C ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Isoler l'exponentielle : $20 + 60\\,e^{-t/10} = 50$ donne $e^{-t/10} = \\dfrac{30}{60} = \\dfrac{1}{2}$. Étape 2 — Vérifier le signe : $\\dfrac{1}{2} > 0$. Étape 3 — Appliquer $\\ln$ : $-\\dfrac{t}{10} = \\ln\\dfrac{1}{2} = -\\ln 2$. Étape 4 — Résoudre : $t = 10\\ln 2$ (environ 6,9 minutes). Étape 5 — Conclure : la solution est positive, elle convient. La proposition $\\dfrac{\\ln 2}{10}$ oublie de multiplier par $10$.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{\\ln 2}{10}$",
+                  "correct": false
+                },
+                {
+                  "content": "$10\\ln 2$",
+                  "correct": true
+                },
+                {
+                  "content": "$-10\\ln 2$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\ln 20$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le plat refroidit selon $\\theta(t) = 20 + 60\\,e^{-t/10}$. Il atteint exactement 20 °C au bout d'un temps fini.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Isoler l'exponentielle : $\\theta(t) = 20$ donne $60\\,e^{-t/10} = 0$, soit $e^{-t/10} = 0$. Étape 2 — Vérifier le signe : $k = 0 \\leq 0$, or $e^{u} > 0$ pour tout réel. Étape 3 — Conclure : l'équation n'a aucune solution. La température se rapproche de 20 °C sans jamais l'atteindre : $\\theta(t) > 20$ pour tout $t$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La production de cacao d'une parcelle",
+          "statement": "Une coopérative modélise la quantité de cabosses de cacao récoltées (en centaines de kg) sur une parcelle, $x$ mois après la floraison, par $f(x) = 4x\\,e^{-x/5}$, pour $x \\in [0\\,;\\,+\\infty[$.",
+          "exercise_type": "evaluation",
+          "figure": "cacao-maximum",
+          "questions": [
+            {
+              "content": "Pour $f(x) = 4x\\,e^{-x/5}$ sur $[0\\,;\\,+\\infty[$, quelle est la dérivée $f'(x)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $f = v \\times e^{u}$ avec $v(x) = 4x$ et $u(x) = -\\dfrac{x}{5}$, donc $v'(x) = 4$ et $u'(x) = -\\dfrac{1}{5}$. Étape 2 — Reconnaître : c'est un produit, on dérive avec $(vw)' = v'w + vw'$ et $(e^{u})' = u'\\,e^{u}$. Étape 3 — Appliquer : $f'(x) = 4\\,e^{-x/5} + 4x \\times \\left(-\\dfrac{1}{5}\\right)e^{-x/5} = \\left(4 - \\dfrac{4x}{5}\\right)e^{-x/5}$. Étape 4 — Conclure : on factorise, $f'(x) = \\dfrac{4}{5}(5 - x)\\,e^{-x/5}$. La proposition $4(1-x)\\,e^{-x/5}$ vient d'un $u'$ pris égal à $-1$ au lieu de $-\\dfrac{1}{5}$.",
+              "answers": [
+                {
+                  "content": "$4(1-x)\\,e^{-x/5}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{4}{5}(5-x)\\,e^{-x/5}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{4}{5}(5+x)\\,e^{-x/5}$",
+                  "correct": false
+                },
+                {
+                  "content": "$-\\dfrac{4}{5}x\\,e^{-x/5}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $f(x) = 4x\\,e^{-x/5}$ sur $[0\\,;\\,+\\infty[$, on a $f'(x) = \\dfrac{4}{5}(5-x)\\,e^{-x/5}$. En quelle valeur de $x$ la fonction $f$ atteint-elle son maximum ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : le signe de $f'(x)$ est celui de $5 - x$ car $\\dfrac{4}{5} > 0$ et $e^{-x/5} > 0$. Étape 2 — Reconnaître : $f'(x) > 0$ pour $x < 5$, $f'(5) = 0$ et $f'(x) < 0$ pour $x > 5$. Étape 3 — Appliquer : $f$ est croissante sur $[0\\,;\\,5]$, puis décroissante sur $[5\\,;\\,+\\infty[$. Étape 4 — Conclure : le maximum est atteint en $x = 5$, soit 5 mois après la floraison.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $f(x) = 4x\\,e^{-x/5}$, quelle est la valeur maximale de $f$ (en centaines de kg), atteinte en $x = 5$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : le maximum est atteint en $x = 5$. Étape 2 — Reconnaître : on calcule $f(5) = 4 \\times 5 \\times e^{-5/5}$. Étape 3 — Appliquer : $e^{-5/5} = e^{-1} = \\dfrac{1}{e}$. Étape 4 — Conclure : $f(5) = \\dfrac{20}{e} \\approx 7{,}4$. La proposition $20e^{-5}$ oublie de diviser $5$ par $5$ dans l'exposant ; $\\dfrac{4}{e}$ oublie le facteur $5$ ; $20e$ oublie le signe moins.",
+              "answers": [
+                {
+                  "content": "$20e$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{4}{e}$",
+                  "correct": false
+                },
+                {
+                  "content": "$20e^{-5}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{20}{e}$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $f(x) = 4x\\,e^{-x/5}$, calcule $\\lim_{x \\to +\\infty} f(x)$. On pourra écrire $f(x) = 20 \\times \\dfrac{x/5}{e^{x/5}}$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer les limites : $x \\to +\\infty$ et $e^{-x/5} \\to 0$, forme $\\infty \\times 0$ indéterminée. Étape 2 — Repérer la croissance comparée : avec $X = \\dfrac{x}{5}$, $\\lim_{X \\to +\\infty} \\dfrac{e^{X}}{X} = +\\infty$. Étape 3 — Transformer : $f(x) = 20 \\times \\dfrac{X}{e^{X}} = \\dfrac{20}{\\,e^{X}/X\\,}$. Étape 4 — Conclure : le dénominateur tend vers $+\\infty$, donc $\\lim f = 0$. La production tend vers $0$ sans s'annuler, car $f(x) > 0$ pour $x > 0$ : la droite $y = 0$ est asymptote.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $f(x) = 4x\\,e^{-x/5}$, la coopérative fixe un seuil de récolte $k = 5$ centaines de kg. On rappelle que $f(0) = 0$, que $f$ croît jusqu'à $\\dfrac{20}{e} \\approx 7{,}4$ puis décroît vers $0$. Combien de valeurs de $x$ vérifient $f(x) = 5$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Identifier : on étudie les variations de $f$ : croissante de $0$ à $\\dfrac{20}{e}$ sur $[0\\,;\\,5]$, décroissante de $\\dfrac{20}{e}$ vers $0$ sur $[5\\,;\\,+\\infty[$. Étape 2 — Reconnaître : $\\dfrac{20}{e} \\approx 7{,}4 > 5 > 0$, car $e < 4$ donne $\\dfrac{20}{e} > 5$. Étape 3 — Appliquer : $f$ est continue et strictement monotone sur chaque intervalle, donc elle prend la valeur $5$ une fois sur $]0\\,;\\,5[$ et une fois sur $]5\\,;\\,+\\infty[$. Étape 4 — Conclure : l'équation $f(x) = 5$ a exactement 2 solutions : le seuil est franchi à la hausse, puis à la baisse.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une population de poissons en milieu limité",
+          "statement": "Un étang piscicole reçoit 100 tilapias à l'instant $t = 0$ (en années). Le milieu ne peut pas nourrir plus de 1 000 poissons. On modélise leur nombre à l'instant $t \\geq 0$ par $P(t) = \\dfrac{1000}{1 + 9\\,e^{-t/2}}$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un étang est modélisé par $P(t) = \\dfrac{1000}{1 + 9\\,e^{-t/2}}$ ($t$ en années). Calcule $P(0)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $P(0) = \\dfrac{1000}{1 + 9\\,e^{0}}$. Étape 2 — Calculer : $e^{0} = 1$, donc le dénominateur vaut $1 + 9 = 10$. Étape 3 — Conclure : $P(0) = \\dfrac{1000}{10} = 100$ poissons, ce qui correspond à l'énoncé.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un étang est modélisé par $P(t) = \\dfrac{1000}{1 + 9\\,e^{-t/2}}$ ($t$ en années). Calcule $\\lim_{t \\to +\\infty} P(t)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer la limite de l'exposant : $-\\dfrac{t}{2} \\to -\\infty$ quand $t \\to +\\infty$. Étape 2 — Appliquer la limite de l'exponentielle : $e^{-t/2} \\to 0$, donc $1 + 9\\,e^{-t/2} \\to 1$. Étape 3 — Conclure : $P(t) \\to \\dfrac{1000}{1} = 1000$. La droite $y = 1000$ est asymptote horizontale : c'est la capacité du milieu.",
+              "answers": [
+                {
+                  "content": "1000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(t) = \\dfrac{1000}{1 + 9\\,e^{-t/2}}$, quelle est la dérivée $P'(t)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $P = \\dfrac{1000}{D}$ avec $D(t) = 1 + 9\\,e^{-t/2}$. Étape 2 — Reconnaître : on a $D'(t) = 9 \\times \\left(-\\dfrac{1}{2}\\right)e^{-t/2} = -\\dfrac{9}{2}\\,e^{-t/2}$ avec $(e^{u})' = u'\\,e^{u}$. Étape 3 — Appliquer : $\\left(\\dfrac{1000}{D}\\right)' = -\\dfrac{1000\\,D'}{D^{2}}$. Étape 4 — Conclure : $P'(t) = \\dfrac{1000 \\times \\frac{9}{2}\\,e^{-t/2}}{D^{2}} = \\dfrac{4500\\,e^{-t/2}}{(1 + 9\\,e^{-t/2})^{2}}$. La première proposition perd le signe ; la deuxième oublie le facteur $\\dfrac{1}{2}$.",
+              "answers": [
+                {
+                  "content": "$\\dfrac{-4500\\,e^{-t/2}}{(1 + 9\\,e^{-t/2})^{2}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{9000\\,e^{-t/2}}{(1 + 9\\,e^{-t/2})^{2}}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{4500\\,e^{-t/2}}{(1 + 9\\,e^{-t/2})^{2}}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\dfrac{1000}{(1 + 9\\,e^{-t/2})^{2}}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La fonction $P(t) = \\dfrac{1000}{1 + 9\\,e^{-t/2}}$ est strictement croissante sur $[0\\,;\\,+\\infty[$ et le nombre de poissons reste inférieur à 1 000.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Identifier : $P'(t) = \\dfrac{4500\\,e^{-t/2}}{(1 + 9\\,e^{-t/2})^{2}}$. Étape 2 — Reconnaître : $e^{-t/2} > 0$ et le carré est strictement positif. Étape 3 — Appliquer : $P'(t) > 0$, donc $P$ est strictement croissante. Pour la borne, $1 + 9\\,e^{-t/2} > 1$, donc $P(t) < 1000$. Étape 4 — Conclure : l'affirmation est vraie, la population se rapproche de 1 000 sans l'atteindre.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(t) = \\dfrac{1000}{1 + 9\\,e^{-t/2}}$, à quel instant $t$ la population atteint-elle 500 poissons ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Isoler l'exponentielle : $\\dfrac{1000}{1 + 9\\,e^{-t/2}} = 500$ donne $1 + 9\\,e^{-t/2} = 2$, soit $e^{-t/2} = \\dfrac{1}{9}$. Étape 2 — Vérifier le signe : $\\dfrac{1}{9} > 0$. Étape 3 — Appliquer $\\ln$ : $-\\dfrac{t}{2} = -\\ln 9 = -2\\ln 3$. Étape 4 — Résoudre : $t = 2\\ln 9 = 4\\ln 3 \\approx 4{,}4$ ans. Étape 5 — Conclure : $t = 4\\ln 3$. La proposition $\\ln 9$ oublie de multiplier par $2$.",
+              "answers": [
+                {
+                  "content": "$\\ln 9$",
+                  "correct": false
+                },
+                {
+                  "content": "$4\\ln 3$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\ln 3$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac{\\ln 9}{2}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $P(t) = \\dfrac{1000}{1 + 9\\,e^{-t/2}}$, quelles sont les valeurs de $t$ pour lesquelles $P(t) > 900$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Isoler l'exponentielle : comme $1 + 9\\,e^{-t/2} > 0$, $\\dfrac{1000}{1 + 9\\,e^{-t/2}} > 900$ équivaut à $1 + 9\\,e^{-t/2} < \\dfrac{10}{9}$, soit $e^{-t/2} < \\dfrac{1}{81}$. Étape 2 — Vérifier le signe : $\\dfrac{1}{81} > 0$. Étape 3 — Appliquer $\\ln$ : l'exponentielle est croissante, donc $-\\dfrac{t}{2} < \\ln\\dfrac{1}{81} = -4\\ln 3$. Étape 4 — Résoudre : en multipliant par $-2$, le sens change : $t > 8\\ln 3 \\approx 8{,}8$. Étape 5 — Conclure : il faut attendre plus de $8\\ln 3$ ans. La proposition $t < 8\\ln 3$ oublie de changer le sens en multipliant par $-2$.",
+              "answers": [
+                {
+                  "content": "$t > 4\\ln 3$",
+                  "correct": false
+                },
+                {
+                  "content": "$t < 8\\ln 3$",
+                  "correct": false
+                },
+                {
+                  "content": "$t > \\ln 9$",
+                  "correct": false
+                },
+                {
+                  "content": "$t > 8\\ln 3$",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
