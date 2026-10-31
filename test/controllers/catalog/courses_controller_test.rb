@@ -768,14 +768,64 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "section#fiche-de-revision", text: including("Deux divisions successives.")
     assert_select "section#fiche-de-revision h4", text: "1. La méiose"
     assert_select "section#prepare-interros[data-turbo-prefetch=false] h2", text: tl("show.prepare_title")
-    assert_select "section#prepare-interros", text: including(tl("show.prepare_intro"))
-    assert_select "section#prepare-interros ul#prepare-interros-grid > li > span#notion-#{meiose.slug}[aria-label=?]", "La méiose"
-    assert_select "section#prepare-interros h3", text: "La méiose", count: 0
+    assert_select "section#prepare-interros .ps-sheet#notion-#{meiose.slug} .ps-title", text: "La méiose"
     assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
     assert_no_match(/Fiche en brouillon/, response.body)
     assert_select "#content_status_course_#{@course.slug}", 0
     assert_select "#course-actions-menu", 0
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
+  end
+
+  # Lot H : un seul bouton « Indice » et une seule boîte par exercice ; l'indice de l'exercice d'abord, puis celui de chaque question, lettré.
+  def hint_sheet_exercise(hint: nil, question_hints: {})
+    exercise = create_exercise(essential: create_essential(course: @course, name: "Notion indices"), hint:, questions: 2)
+    exercise.questions.order(:position).each_with_index { |question, index| question.update!(hint: question_hints[index]) }
+    exercise
+  end
+
+  test "Lot H: an exercise without its own hint but with a question hint shows « Indice » and the lettered line" do
+    exercise = hint_sheet_exercise(question_hints: { 1 => "Relis la propriété." })
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    frame = "turbo-frame#sheet-exercise-#{exercise.public_id}"
+    assert_select "#{frame} button.ps-btn--hint[aria-controls=?]", "hint-#{exercise.public_id}", text: "Indice"
+    assert_select "#{frame} #hint-#{exercise.public_id}.ps-hint[hidden]", text: "Indice : b. Relis la propriété."
+    assert_select "#{frame} .ps-hint", 1
+  end
+
+  test "Lot H: the hint box reads the exercise hint first, then one line per question that has one" do
+    exercise = hint_sheet_exercise(hint: "Pense à Thalès.", question_hints: { 0 => "Vois le triangle.", 1 => "<b>Calcule</b>" })
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    box = css_select("#hint-#{exercise.public_id}").first
+    assert_equal "Indice : Pense à Thalès. a. Vois le triangle. b. <b>Calcule</b>", box.text.squish
+    assert_select "#hint-#{exercise.public_id} b", 1, "seul « Indice : » est en gras : le texte des indices est échappé"
+  end
+
+  test "Lot H: an exercise and questions without any hint have neither the button nor the box" do
+    exercise = hint_sheet_exercise
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id}"
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} .ps-hint", 0
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} button.ps-btn--hint", 0
+  end
+
+  test "Lot H: the teacher reads no hint box even when a question has a hint" do
+    exercise = hint_sheet_exercise(hint: "Pense à Thalès.", question_hints: { 0 => "Vois le triangle." })
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
+
+    get course_path(@course.slug)
+
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id}"
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} .ps-hint", 0
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} button.ps-btn--hint", 0
   end
 
   test "a draft or archived course, or an unknown slug, answers 404 outside the team (CA-04)" do
@@ -862,76 +912,6 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
     assert_select "#course-actions-menu", 0
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
-  end
-
-  # UDR-0145 §3.2 ter : « Prépare devoirs » porte les évaluations ; chaque repère n'existe qu'une fois sur la page.
-  def prepare_split_fixtures
-    @fix = create_exercise(essential: @split_a = create_essential(course: @course, name: "Notion A", position: 1), title: "Fixation A")
-    @eval_a = create_exercise(essential: @split_a, title: "Devoir A", exercise_type: "evaluation")
-    @split_b = create_essential(course: @course, name: "Notion B", position: 2)
-    @eval_b = create_exercise(essential: @split_b, title: "Devoir B", exercise_type: "evaluation")
-    @eval_wide = create_lesson_wide_exercise(course: @course, title: "Devoir large", exercise_type: "evaluation")
-  end
-
-  def assert_prepare_split
-    assert_select "section#prepare-interros[data-turbo-prefetch=false] ul#prepare-interros-grid li#exercise-#{@fix.public_id}"
-    assert_select "section#prepare-interros li#exercise-#{@eval_a.public_id}", 0
-    assert_select "section#prepare-devoirs[aria-labelledby=prepare_devoirs_title][data-turbo-prefetch=false] h2", text: tl("show.prepare_devoirs_title")
-    assert_select "section#prepare-devoirs", text: including(tl("show.prepare_devoirs_intro"))
-    assert_select "section#prepare-devoirs ul#prepare-devoirs-grid li[id^=exercise-]", 3
-    assert_select "section#prepare-devoirs li#exercise-#{@fix.public_id}", 0
-    assert_select "#notion-#{@split_a.slug}", 1
-    assert_select "#notion-#{@split_b.slug}", 1
-    assert_select "#toute-la-lecon", 1
-    assert_select "section#prepare-interros #notion-#{@split_a.slug}", 1
-    assert_select "section#prepare-devoirs ul#prepare-devoirs-grid > li > span#notion-#{@split_b.slug}", 1
-    assert_select "section#prepare-devoirs ul#prepare-devoirs-grid > li > span#toute-la-lecon", 1
-    assert_select "section#prepare-interros", text: including(tl("show.exercises_empty")), count: 0
-  end
-
-  test "a student reads fixations in « Prépare interros » and evaluations in « Prépare devoirs », each anchor once" do
-    prepare_split_fixtures
-    sign_in_as create_student_for(@course)
-
-    get course_path(@course.slug)
-
-    assert_response :success
-    assert_prepare_split
-  end
-
-  test "a teacher gets the toggles under the evaluation cards of « Prépare devoirs »" do
-    prepare_split_fixtures
-    classroom = create_classroom(level: @tle, series: @course.series)
-    sign_in_as create_teacher(classrooms: [ classroom ])
-
-    get course_path(@course.slug)
-
-    assert_response :success
-    assert_prepare_split
-    assert_select "section#prepare-devoirs li#exercise-#{@eval_a.public_id} [id^='assignment_#{classroom.public_id}_Exercise_']", 1
-    assert_select "section#prepare-interros li#exercise-#{@fix.public_id} [id^='assignment_#{classroom.public_id}_Exercise_']", 1
-    assert_select ".ui-button-primary", 1
-  end
-
-  test "without any evaluation there is no « Prépare devoirs » section" do
-    create_exercise(essential: create_essential(course: @course, name: "Notion A"))
-    sign_in_as create_student_for(@course)
-
-    get course_path(@course.slug)
-
-    assert_select "section#prepare-interros ul#prepare-interros-grid li[id^=exercise-]", 1
-    assert_select "section#prepare-devoirs", 0
-    assert_select "#prepare-devoirs-grid", 0
-  end
-
-  test "with only evaluations « Prépare interros » shows its empty state" do
-    create_lesson_wide_exercise(course: @course, exercise_type: "evaluation")
-    sign_in_as create_student_for(@course)
-
-    get course_path(@course.slug)
-
-    assert_select "#prepare-interros", text: including(tl("show.exercises_empty"))
-    assert_select "#prepare-devoirs-grid li[id^=exercise-]", 1
   end
 
   test "a course without content shows both sections empty, without the former sheet button" do

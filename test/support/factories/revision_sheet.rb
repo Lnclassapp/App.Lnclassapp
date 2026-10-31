@@ -35,6 +35,19 @@ module Factories
         "controls" => [] }
     end
 
+    # Un sujet de devoir (ADR sujets-de-devoir §4) : titre, notions mobilisées et `exercises` exercices complets, sans notion.
+    def revision_subject(title, exercises: 4, notions: "Théorème de Thalès · proportionnalité")
+      { "title" => title, "notions" => notions, "exercises" => Array.new(exercises) { revision_exercise("#{title} · exercice #{it + 1}") } }
+    end
+
+    # La leçon Thalès : indice sur l'exercice de chaque notion et 3 sujets de 4 exercices (CA-9). Retourne l'enveloppe complète.
+    def revision_thales_document(**overrides)
+      notions = [ "Théorème de Thalès", "Réciproque de Thalès" ].map do |name|
+        revision_notion(name).tap { it["exercise"]["hint"] = "Commence par repérer les deux droites parallèles." }
+      end
+      revision_sheet_document(name: "Thalès", notions:, subjects: Array.new(3) { revision_subject("Sujet #{it + 1} · Thalès") }, **overrides)
+    end
+
     # Une leçon : 2 notions, 1 figure, 1 exercice par notion, 4 problèmes, 5 questions chacun. Retourne l'enveloppe complète ;
     # `overrides` remplace des clés de la leçon.
     def revision_sheet_document(**overrides)

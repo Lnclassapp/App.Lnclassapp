@@ -41,19 +41,16 @@ class Classroom::AssignmentToggleTest < ApplicationSystemTestCase
     sign_in_teacher
     visit classroom_course_path(@classroom.public_id, @course.slug)
     assert_selector "h1", text: "Génétique"
-    assert_selector "#prepare-interros li[id^=exercise-]", count: 2
+    assert_selector "#prepare-interros turbo-frame[id^=sheet-exercise-]", count: 2
     assert_selector "#assignment_#{@classroom.public_id}_Exercise_#{@phases.public_id}"
     assert_no_selector "#assignment_#{@classroom.public_id}_Essential_#{@meiose.slug}"
-
-    click_on "Les phases"
-    assert_current_path exercise_path(@phases.public_id)
   end
 
   # PRD, chemin nominal A ; plan, Lot C « Done quand ».
   test "without days, « Assigner » asks the days; Monday and Thursday give « Pour jeu. 8 oct. », then one click is enough" do
     sign_in_teacher
     visit lesson_path
-    assert_selector "#prepare-interros li[id^=exercise-]", count: 2
+    assert_selector "#prepare-interros turbo-frame[id^=sheet-exercise-]", count: 2
 
     assert_no_page_reload do
       within(toggle("Exercise", @phases.public_id)) { click_on "Assigner" }

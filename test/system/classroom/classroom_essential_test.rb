@@ -24,7 +24,7 @@ class Classroom::ClassroomEssentialTest < ApplicationSystemTestCase
   test "assign an exercise, then withdraw it, without a page reload" do
     visit classroom_course_path(@classroom.public_id, @course.slug)
     assert_selector "h1", text: "Génétique"
-    assert_selector "#prepare-interros li [id^='assignment_']", count: 2
+    assert_selector "#prepare-interros [id^='assignment_']", count: 2
     assert_no_text "Brouillon"
 
     due = I18n.l(Time.zone.today.next_occurring(:tuesday), format: :due_short)

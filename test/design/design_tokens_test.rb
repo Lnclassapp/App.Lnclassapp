@@ -39,10 +39,10 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   # UDR-0137 (contenu-en-blocs, #318), maintenue par UDR-0141-fiche-de-revision-en-quatre-blocs : la fiche de révision reprend
   # les maquettes (Seyès, Kalam, Source Serif 4, graisse 700) dans un habillage à part. L'exception ne vaut que pour la feuille
-  # `course_sheet.css` (et son dossier) et le partial `catalog/revision_sheets/`, et seulement pour les règles
+  # `course_sheet.css` (et son dossier), `prepare_sheet.css` (UDR-0149 §3) et le partial `catalog/revision_sheets/`, et seulement pour les règles
   # « une seule police », « palette froide » et « graisse 500 » : couleurs hexadécimales, attribut `style`, valeurs
   # arbitraires, palette par défaut, rayons, ombres et échelle d'espacement restent refusés partout, ces dossiers compris.
-  SHEET_EXCEPTION = %r{\A(?:app/views/catalog/revision_sheets/|app/assets/stylesheets/course_sheet(?:/|\.css\z))}
+  SHEET_EXCEPTION = %r{\A(?:app/views/catalog/revision_sheets/|app/assets/stylesheets/course_sheet(?:/|\.css\z)|app/assets/stylesheets/prepare_sheet\.css\z)}
   SHEET_FONTS = /Kalam|Source Serif/i
 
   def self.sheet_exception?(relative_path) = SHEET_EXCEPTION.match?(relative_path.to_s)
@@ -141,12 +141,12 @@ class DesignTokensTest < ActiveSupport::TestCase
 
   test "the sheet exception covers the sheet stylesheet and the revision sheet partial, and nothing else" do
     %w[app/views/catalog/revision_sheets/_sheet.html.erb app/assets/stylesheets/course_sheet.css
-       app/assets/stylesheets/course_sheet/reading.css].each { assert self.class.sheet_exception?(it), it }
+       app/assets/stylesheets/course_sheet/reading.css app/assets/stylesheets/prepare_sheet.css].each { assert self.class.sheet_exception?(it), it }
 
     %w[app/views/catalog/courses/show.html.erb app/views/catalog/revision_sheets_extra/show.html.erb
        app/views/catalog/essentials/show.html.erb app/views/homepage/index.html.erb app/helpers/catalog/sheet_text_helper.rb
        app/javascript/controllers/glossary_controller.js
-       app/assets/stylesheets/course_sheet_other.css app/assets/stylesheets/application.tailwind.css
+       app/assets/stylesheets/course_sheet_other.css app/assets/stylesheets/prepare_sheet_other.css app/assets/stylesheets/application.tailwind.css
        app/views/layouts/application.html.erb].each { assert_not self.class.sheet_exception?(it), it }
   end
 

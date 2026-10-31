@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_30_100000) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_30_110000) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
   enable_extension "pg_trgm"
@@ -163,11 +163,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_100000) do
     t.string "public_id", limit: 14, null: false
     t.string "status", default: "active", null: false
     t.datetime "updated_at", null: false
+    t.string "batch_public_id", limit: 14
     t.index ["archived_by_id"], name: "index_classroom_assignments_on_archived_by_id"
     t.index ["assignable_type", "assignable_id"], name: "idx_on_assignable_type_assignable_id_89cda988b0"
     t.index ["assigned_at"], name: "index_classroom_assignments_on_assigned_at"
     t.index ["assigned_by_id"], name: "index_classroom_assignments_on_assigned_by_id"
     t.index ["classroom_id", "assignable_type", "assignable_id"], name: "index_classroom_assignments_one_active", unique: true, where: "((status)::text = 'active'::text)"
+    t.index ["classroom_id", "batch_public_id"], name: "index_classroom_assignments_on_classroom_and_batch"
     t.index ["classroom_id"], name: "index_classroom_assignments_on_classroom_id"
     t.index ["public_id"], name: "index_classroom_assignments_on_public_id", unique: true
     t.check_constraint "(status::text = 'archived'::text) = (archived_at IS NOT NULL)", name: "classroom_assignments_archived_at_iff_archived"
@@ -384,14 +386,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_100000) do
     t.bigint "course_id", null: false
     t.jsonb "statement_blocks"
     t.string "figure_key"
+    t.text "hint"
+    t.bigint "subject_id"
     t.index ["author_id"], name: "index_exercises_on_author_id"
     t.index ["course_id", "position"], name: "index_exercises_on_course_id_and_position", unique: true
     t.index ["course_id"], name: "index_exercises_on_course_id"
     t.index ["essential_id", "status"], name: "index_exercises_on_essential_id_and_status"
     t.index ["public_id"], name: "index_exercises_on_public_id", unique: true
     t.index ["status"], name: "index_exercises_on_status"
+    t.index ["subject_id"], name: "index_exercises_on_subject_id"
     t.check_constraint "exercise_type::text = ANY (ARRAY['fixation'::character varying::text, 'evaluation'::character varying::text])", name: "exercises_exercise_type_values"
+    t.check_constraint "hint IS NULL OR char_length(btrim(hint)) >= 1 AND char_length(btrim(hint)) <= 400", name: "exercises_hint_length"
     t.check_constraint "status::text = ANY (ARRAY['draft'::character varying::text, 'published'::character varying::text, 'archived'::character varying::text])", name: "exercises_status_values"
+    t.check_constraint "subject_id IS NULL OR essential_id IS NULL", name: "exercises_subject_without_essential"
   end
 
   create_table "import_reports", force: :cascade do |t|
@@ -942,6 +949,19 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_100000) do
     t.index ["key"], name: "index_solid_queue_semaphores_on_key", unique: true
   end
 
+  create_table "subjects", force: :cascade do |t|
+    t.bigint "course_id", null: false
+    t.integer "position", null: false
+    t.string "title", limit: 200, null: false
+    t.text "notions", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id", "position"], name: "index_subjects_on_course_id_and_position", unique: true
+    t.index ["course_id"], name: "index_subjects_on_course_id"
+    t.check_constraint "char_length(btrim(notions)) >= 1 AND char_length(btrim(notions)) <= 600", name: "subjects_notions_length"
+    t.check_constraint "char_length(btrim(title::text)) >= 1", name: "subjects_title_present"
+  end
+
   create_table "teacher_classrooms", force: :cascade do |t|
     t.bigint "classroom_id", null: false
     t.datetime "created_at", null: false
@@ -1078,6 +1098,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_100000) do
   add_foreign_key "exercise_sessions", "users", column: "student_id", on_delete: :restrict
   add_foreign_key "exercises", "courses", on_delete: :restrict
   add_foreign_key "exercises", "essentials", on_delete: :restrict
+  add_foreign_key "exercises", "subjects", on_delete: :restrict
   add_foreign_key "exercises", "users", column: "author_id", on_delete: :restrict
   add_foreign_key "import_reports", "users", column: "imported_by_id", on_delete: :restrict
   add_foreign_key "invitations", "schools", on_delete: :restrict
@@ -1127,6 +1148,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_30_100000) do
   add_foreign_key "solid_queue_ready_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_recurring_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
   add_foreign_key "solid_queue_scheduled_executions", "solid_queue_jobs", column: "job_id", on_delete: :cascade
+  add_foreign_key "subjects", "courses", on_delete: :restrict
   add_foreign_key "teacher_classrooms", "classrooms", on_delete: :restrict
   add_foreign_key "teacher_classrooms", "users", column: "teacher_id", on_delete: :restrict
   add_foreign_key "teacher_profiles", "users", on_delete: :restrict
