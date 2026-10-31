@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Mouvement du centre d'inertie d'un solide",
@@ -8,1500 +8,1436 @@
       "level_name": "Tle",
       "material_name": "Physique-Chimie",
       "series_name": "D",
-      "essentials": [
+      "theme": "burgundy",
+      "figures": [
         {
-          "name": "Le centre d'inertie et le principe de l'inertie",
-          "subtitle": "Trouver le point qui résume le mouvement d'un solide et le cadre où le principe de l'inertie s'applique",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Repérer ou calculer la position du centre d'inertie d'un solide.</li><li>Reconnaître un solide isolé ou pseudo-isolé et énoncer le principe de l'inertie.</li><li>Choisir un référentiel galiléen adapté au mouvement étudié.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 — Le bâton de la majorette.</strong> Au défilé de l'école, une majorette lance son bâton en l'air en le faisant tourner. Les deux bouts du bâton font des boucles compliquées. Mais si tu regardes seulement le milieu du bâton, il suit une courbe simple et régulière, comme une petite bille lancée seule.</p><p><strong>Le pont.</strong> Le bâton, c'est le <strong>solide</strong>. Son milieu, c'est son <strong>centre d'inertie</strong> G : le point dont le mouvement reste le plus simple, même quand le solide tourne sur lui-même. Pour étudier le mouvement d'ensemble du bâton, on étudie le mouvement de ce seul point.</p><p><strong>La limite de l'image.</strong> Le bâton est homogène et symétrique : G est en son milieu. Pour un marteau, G n'est pas au milieu du manche : il est près de la tête, la partie la plus lourde.</p><p><strong>Image 2 — Le sac dans le gbaka.</strong> Un sac de riz est posé sur le plancher d'un gbaka. Tant que le gbaka roule tout droit à vitesse constante, le sac reste immobile. Quand le chauffeur freine brusquement, le sac glisse vers l'avant, alors que personne ne l'a poussé.</p><p><strong>Le pont.</strong> Le sac, c'est un solide <strong>pseudo-isolé</strong> : son poids et la réaction du plancher se compensent (on néglige les frottements). Vu depuis la route, il garde sa vitesse : c'est le <strong>principe de l'inertie</strong>. La route (le sol) est un <strong>référentiel galiléen</strong>. Le gbaka qui freine n'en est pas un : dedans, le sac se met en mouvement sans qu'aucune force ne le pousse.</p><p><strong>La limite de l'image.</strong> Le sac n'est pas « projeté » vers l'avant par une force. Il continue simplement tout droit à la même vitesse, pendant que le gbaka ralentit sous lui.</p><h2>Ce qu'il faut retenir</h2><p>Un <em>solide isolé</em> ne subit aucune force. Un <em>solide pseudo-isolé</em> subit des forces dont la somme vectorielle est nulle : $\\sum \\vec F_{ext} = \\vec 0$. Les forces <em>extérieures</em> sont exercées par des objets qui ne font pas partie du système étudié.</p><blockquote><p><strong>Centre d'inertie G</strong> : point d'un solide dont le mouvement est le plus simple. Pour un solide homogène qui possède un centre de symétrie, G est ce centre. Pour un système de deux solides de masses $m_1$ et $m_2$, de centres d'inertie $G_1$ et $G_2$ : $(m_1 + m_2)\\,\\overrightarrow{OG} = m_1\\,\\overrightarrow{OG_1} + m_2\\,\\overrightarrow{OG_2}$, soit sur un axe $x_G = \\dfrac{m_1 x_1 + m_2 x_2}{m_1 + m_2}$. Dans un champ de pesanteur uniforme, G est confondu avec le centre de gravité.</p><p><strong>Principe de l'inertie</strong> : dans un référentiel galiléen, le centre d'inertie d'un solide isolé ou pseudo-isolé est soit au repos, soit en mouvement rectiligne uniforme. Réciproquement, si G est au repos ou en mouvement rectiligne uniforme dans un référentiel galiléen, alors $\\sum \\vec F_{ext} = \\vec 0$.</p><p><strong>Référentiel galiléen</strong> : référentiel dans lequel le principe de l'inertie est vérifié. Le référentiel terrestre l'est en bonne approximation pour les mouvements de courte durée sur Terre. On utilise le référentiel géocentrique pour les satellites de la Terre et le référentiel héliocentrique pour les planètes. Tout référentiel en mouvement rectiligne uniforme par rapport à un référentiel galiléen est galiléen.</p></blockquote><h2>Exemple résolu</h2><p>Une tige de masse négligeable, longue de 60 cm, porte à ses extrémités deux petites boules : $m_1 = 200\\ \\text{g}$ en A et $m_2 = 100\\ \\text{g}$ en B. On lance ce système sur une table horizontale à coussin d'air. Les positions de G, enregistrées toutes les 40 ms, sont alignées et séparées de 8 mm.</p><ol><li><strong>Position de G.</strong> On prend un axe d'origine A, orienté vers B : $x_1 = 0$ et $x_2 = 60\\ \\text{cm}$. Alors $x_G = \\dfrac{200 \\times 0 + 100 \\times 60}{200 + 100} = 20\\ \\text{cm}$. G est à 20 cm de A, plus près de la boule la plus lourde.</li><li><strong>Nature du mouvement de G.</strong> Les positions sont alignées : le mouvement est rectiligne. Elles sont également espacées : il est uniforme. Sa vitesse vaut $v = \\dfrac{8 \\times 10^{-3}}{40 \\times 10^{-3}} = 0{,}2\\ \\text{m/s}$.</li><li><strong>Conclusion.</strong> Dans le référentiel terrestre, supposé galiléen, G est en mouvement rectiligne uniforme. D'après la réciproque du principe de l'inertie, $\\sum \\vec F_{ext} = \\vec 0$ : le poids du système est compensé par la poussée de l'air de la table. Le système est pseudo-isolé.</li><li><strong>Remarque.</strong> Pendant ce temps, les boules A et B peuvent tourner autour de G et décrire des courbes. Seul G va tout droit : c'est le milieu du bâton de la majorette.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'un objet en mouvement a forcément besoin d'une force dans le sens de son mouvement. Un palet qui glisse à vitesse constante sur une table à coussin d'air n'est poussé par rien dans le sens de son mouvement : les forces qu'il subit se compensent.</p><p>Pour repérer l'erreur, demande-toi : le vecteur vitesse de G change-t-il, en valeur ou en direction ? S'il ne change pas, la somme des forces extérieures est nulle, même si l'objet avance vite.</p><h2>En une phrase</h2><p>Je résume le solide par son centre d'inertie G ; dans un référentiel galiléen, si les forces se compensent, G reste au repos ou va tout droit à vitesse constante.</p>",
-          "exercises": [
+          "key": "plan-incline-forces",
+          "kind": "coordinate_plane",
+          "description": "Un plan incliné d'environ 30° représenté par un segment oblique qui monte vers la droite, avec sa base horizontale et son côté vertical. Une caisse, de centre d'inertie G posé sur le plan, glisse vers le bas. Trois vecteurs partent de G : le poids P, vertical vers le bas ; la réaction normale RN, perpendiculaire au plan ; la force de frottement f, parallèle au plan et dirigée vers le haut de la pente.",
+          "params": {
+            "xmin": 0,
+            "xmax": 12,
+            "ymin": 0,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "G",
+                "x": 5.5,
+                "y": 3.6
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 10,
+                "y2": 6.2
+              },
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 10,
+                "y2": 1
+              },
+              {
+                "x1": 10,
+                "y1": 1,
+                "x2": 10,
+                "y2": 6.2
+              }
+            ],
+            "vectors": [
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -2.5,
+                "ox": 5.5,
+                "oy": 3.6
+              },
+              {
+                "label": "RN",
+                "dx": -1.1,
+                "dy": 1.9,
+                "ox": 5.5,
+                "oy": 3.6
+              },
+              {
+                "label": "f",
+                "dx": 0.9,
+                "dy": 0.52,
+                "ox": 5.5,
+                "oy": 3.6
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "vitesse-chariot",
+          "kind": "stat_chart",
+          "description": "Courbe de la vitesse d'un conteneur tiré par un chariot élévateur, en m/s, en fonction du temps de 0 à 5 s. La vitesse part de 0 et croît de 2 m/s chaque seconde : 0, 2, 4, 6, 8, 10 m/s. La courbe est une droite qui monte : l'accélération est constante et vaut 2 m/s².",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10
+            ],
+            "labels": [
+              "0 s",
+              "1 s",
+              "2 s",
+              "3 s",
+              "4 s",
+              "5 s"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "conteneur-cable",
+          "kind": "coordinate_plane",
+          "description": "Un conteneur soulevé par le câble d'une grue, vu de côté. Le centre d'inertie G est au point de coordonnées (6 ; 5). Deux vecteurs partent de G : la tension T du câble, vers le haut, de longueur 4,2 ; le poids P, vers le bas, de longueur 4. Échelle : 1 unité représente 5000 N. T est un peu plus longue que P : le conteneur démarre et accélère vers le haut.",
+          "params": {
+            "xmin": 0,
+            "xmax": 12,
+            "ymin": 0,
+            "ymax": 10,
+            "points": [
+              {
+                "id": "G",
+                "x": 6,
+                "y": 5
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 0.5,
+                "x2": 11,
+                "y2": 0.5
+              }
+            ],
+            "vectors": [
+              {
+                "label": "T",
+                "dx": 0,
+                "dy": 4.2,
+                "ox": 6,
+                "oy": 5
+              },
+              {
+                "label": "P",
+                "dx": 0,
+                "dy": -4,
+                "ox": 6,
+                "oy": 5
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "vitesse-grue",
+          "kind": "stat_chart",
+          "description": "Courbe de la vitesse du conteneur soulevé par la grue, en m/s, de 0 à 18 s. De 0 à 4 s, la vitesse passe de 0 à 2 m/s. De 4 s à 14 s, elle reste égale à 2 m/s. De 14 s à 18 s, elle redescend de 2 m/s à 0. Les points sont donnés toutes les 2 s : 0, 1, 2, 2, 2, 2, 2, 2, 1, 0.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              1,
+              2,
+              2,
+              2,
+              2,
+              2,
+              2,
+              1,
+              0
+            ],
+            "labels": [
+              "0 s",
+              "2 s",
+              "4 s",
+              "6 s",
+              "8 s",
+              "10 s",
+              "12 s",
+              "14 s",
+              "16 s",
+              "18 s"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Centre d'inertie, référentiel galiléen et principe d'inertie",
+          "remember": "Le **centre d'inertie** G d'un solide est le point dont le mouvement représente celui de tout le solide. Pour un solide homogène de forme simple, c'est son centre géométrique. On étudie le mouvement de G dans un **référentiel galiléen** : un référentiel où le principe d'inertie s'applique. Le référentiel terrestre (le sol, le quai) est galiléen pour une expérience de courte durée. **Principe d'inertie** : dans un référentiel galiléen, si la somme des forces extérieures est nulle ($\\sum \\vec{F}_{ext} = \\vec{0}$), G est au repos ou en mouvement rectiligne uniforme (MRU). Réciproquement, si G est au repos ou en MRU, alors $\\sum \\vec{F}_{ext} = \\vec{0}$.",
+          "method": [
+            "Définir le système (le solide étudié) et le référentiel d'étude, supposé galiléen.",
+            "Faire le bilan des forces extérieures : poids, réaction du support, tension, frottement, avec leur direction et leur sens.",
+            "Écrire la condition : si G est au repos ou en MRU, alors $\\sum \\vec{F}_{ext} = \\vec{0}$ ; et si $\\sum \\vec{F}_{ext} = \\vec{0}$, G est au repos ou en MRU.",
+            "Calculer l'intensité de la force inconnue en projetant sur un axe, ou conclure sur le mouvement de G."
+          ],
+          "example": {
+            "statement": "Un conteneur de masse $m = 2000$ kg repose sur le quai horizontal du port d'Abidjan. On prend $g = 10$ N/kg. Calculer l'intensité de la réaction du quai.",
+            "steps": [
+              "Définir : le système est le conteneur ; le référentiel est le quai (référentiel terrestre), supposé galiléen.",
+              "Faire le bilan : le poids $\\vec{P}$ (vertical, vers le bas) et la réaction $\\vec{R}$ du quai (verticale, vers le haut).",
+              "Écrire la condition : G est au repos, donc $\\vec{P} + \\vec{R} = \\vec{0}$.",
+              "Calculer : en projetant sur l'axe vertical orienté vers le haut, $R - P = 0$, donc $R = P = mg = 2000 \\times 10 = 20000$ N."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'il faut une force dans le sens du mouvement pour qu'un solide avance à vitesse constante. Contre-exemple : un chariot pousse un conteneur à vitesse constante avec une force de 800 N. Le frottement vaut aussi 800 N, donc $\\sum \\vec{F}_{ext} = \\vec{0}$ : il n'y a pas de force « en trop ». Une somme nulle ne veut pas dire « immobile » : G peut être en MRU. Pour toute accélération, il faut une somme non nulle.",
+          "figure": null,
+          "exercise": {
+            "title": "Équilibre et mouvement rectiligne uniforme",
+            "statement": "Dans cet exercice, tu appliques le principe d'inertie avec la méthode de la fiche. Tu prends g = 10 N/kg et le référentiel terrestre, supposé galiléen.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un conteneur est posé, immobile, sur le quai horizontal. Que vaut la somme des forces extérieures qui s'exercent sur lui ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le quai (galiléen). Étape 2 — Faire le bilan : le poids (vers le bas) et la réaction du quai (vers le haut). Étape 3 — Écrire la condition : G est au repos, donc $\\sum \\vec{F}_{ext} = \\vec{0}$ (principe d'inertie). Étape 4 — Conclure : la somme est nulle. Ce n'est ni le poids seul ni la réaction seule : les deux forces se compensent.",
+                "answers": [
+                  {
+                    "content": "Elle est nulle.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est égale à son poids.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est égale à la réaction du quai.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est dirigée vers le haut.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un chariot élévateur roule en ligne droite à la vitesse constante de 5 m/s sur le quai. La somme des forces qui s'exercent sur lui est nulle.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Définir : système = le chariot, référentiel = le quai (galiléen). Étape 2 — Faire le bilan : poids, réaction, force motrice, frottements. Étape 3 — Écrire la condition : G est en mouvement rectiligne uniforme, donc $\\sum \\vec{F}_{ext} = \\vec{0}$. Étape 4 — Conclure : l'affirmation est vraie. Une vitesse constante (en valeur et en direction) ne demande aucune force résultante.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de 150 kg est immobile sur un sol horizontal. On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la caisse, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : le poids $\\vec{P}$ et la réaction $\\vec{R}$ du sol. Étape 3 — Écrire la condition : G est au repos, donc $\\vec{P} + \\vec{R} = \\vec{0}$. Étape 4 — Calculer : $R = P = mg = 150 \\times 10 = 1500$ N.",
+                "answers": [
+                  {
+                    "content": "1500",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une grue maintient immobile, en l'air, un conteneur de masse 3000 kg. On prend g = 10 N/kg. Quelle est l'intensité de la tension du câble ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : le poids (vers le bas) et la tension du câble (vers le haut). Étape 3 — Écrire la condition : G est au repos, donc $\\vec{P} + \\vec{T} = \\vec{0}$. Étape 4 — Calculer : $T = P = mg = 3000 \\times 10 = 30000$ N.",
+                "answers": [
+                  {
+                    "content": "30000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un wagonnet roule à vitesse constante sur des rails rectilignes et horizontaux. Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Définir : système = le wagonnet, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids, réaction des rails, force motrice, frottements. Étape 3 — Écrire la condition : vitesse constante en ligne droite, donc MRU et $\\sum \\vec{F}_{ext} = \\vec{0}$. Étape 4 — Conclure : les deux premières affirmations sont vraies. La force motrice est égale aux frottements (pas plus grande), et la réaction compense exactement le poids.",
+                "answers": [
+                  {
+                    "content": "Son centre d'inertie a un mouvement rectiligne uniforme.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La somme des forces extérieures est nulle.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La force motrice est forcément plus grande que les frottements.",
+                    "correct": false
+                  },
+                  {
+                    "content": "La réaction des rails est plus petite que le poids.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un chariot pousse un conteneur sur le quai avec une force horizontale de 1200 N. Le conteneur avance en ligne droite à vitesse constante. Quelle est l'intensité du frottement horizontal du quai sur le conteneur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le quai (galiléen). Étape 2 — Faire le bilan : sur l'axe horizontal, la force du chariot (1200 N, sens du mouvement) et le frottement (sens opposé). Étape 3 — Écrire la condition : vitesse constante, donc $\\sum \\vec{F}_{ext} = \\vec{0}$. Étape 4 — Calculer : $1200 - f = 0$, donc $f = 1200$ N. L'idée « il avance, donc la force motrice gagne » est fausse : sans accélération, les forces se compensent.",
+                "answers": [
+                  {
+                    "content": "0 N, car le conteneur avance.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Plus de 1200 N.",
+                    "correct": false
+                  },
+                  {
+                    "content": "1200 N.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Moins de 1200 N.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu as vu que la somme des forces est nulle au repos et en mouvement rectiligne uniforme. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Un solide est en mouvement rectiligne uniforme dans un référentiel galiléen. La somme des forces extérieures est ___ et le vecteur vitesse de son centre d'inertie est ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Écrire la condition : en MRU, $\\sum \\vec{F}_{ext} = \\vec{0}$ (principe d'inertie). La vitesse de G est alors constante : même valeur, même direction, même sens.",
+                "answers": [
+                  {
+                    "content": "nulle",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "non nulle",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "constant",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "variable",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense à la phrase du principe d'inertie : « somme nulle, repos ou MRU »."
+              },
+              {
+                "content": "Une caisse de 40 kg est immobile sur le sol horizontal. On prend g = 10 N/kg. Quelle est l'intensité de la réaction du sol ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la caisse. Étape 2 — Faire le bilan : poids et réaction. Étape 3 — Écrire la condition : G est au repos, donc $R = P$. Étape 4 — Calculer : $R = mg = 40 \\times 10 = 400$ N.",
+                "answers": [
+                  {
+                    "content": "400",
+                    "correct": true
+                  }
+                ],
+                "hint": "Au repos, la réaction compense le poids : $R = mg$."
+              },
+              {
+                "content": "Un conteneur posé sur le quai est immobile. Aucune force ne s'exerce donc sur lui.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Faire le bilan : le poids et la réaction du quai s'exercent bien sur le conteneur. Étape 3 — Écrire la condition : ce sont deux forces opposées dont la somme est nulle. Immobile veut dire « somme nulle », pas « aucune force ».",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte les forces : il y a au moins le poids."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Théorème du centre d'inertie",
+          "remember": "**Théorème du centre d'inertie** : dans un référentiel galiléen, la somme vectorielle des forces extérieures appliquées à un solide de masse $m$ est égale au produit de sa masse par le vecteur accélération de son centre d'inertie : $$\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$$ Unités : force en newtons (N), masse en kilogrammes (kg), accélération en m/s². Le vecteur $\\vec{a}_G$ a la même direction et le même sens que la somme des forces. Si $\\sum \\vec{F}_{ext} = \\vec{0}$, on retrouve le principe d'inertie. Si la somme des forces est constante, de même direction que la vitesse, $a_G$ est constante : le mouvement est rectiligne uniformément varié, avec $v = a_G t + v_0$ et $x = \\frac{1}{2} a_G t^2 + v_0 t + x_0$.",
+          "method": [
+            "Définir le système et le référentiel d'étude, supposé galiléen.",
+            "Faire le bilan des forces extérieures et les représenter sur un schéma.",
+            "Écrire le théorème du centre d'inertie : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$.",
+            "Projeter la relation sur un axe orienté dans le sens du mouvement.",
+            "Résoudre : calculer $a_G$, puis $v$ et $x$ avec les équations horaires du mouvement uniformément varié."
+          ],
+          "example": {
+            "statement": "Sur le quai horizontal d'Abidjan, un chariot élévateur tire un conteneur de masse $m = 2000$ kg, initialement au repos, avec une force horizontale $F = 5000$ N. Le frottement est horizontal, de valeur $f = 1000$ N. On prend $g = 10$ N/kg. Calculer l'accélération, puis la vitesse et la distance parcourue après 5 s.",
+            "steps": [
+              "Définir : le système est le conteneur ; le référentiel est le quai, supposé galiléen.",
+              "Faire le bilan : le poids $\\vec{P}$ (vertical, vers le bas), la réaction normale $\\vec{R}_N$ (verticale, vers le haut), la traction $\\vec{F}$ (horizontale, sens du mouvement) et le frottement $\\vec{f}$ (horizontal, sens opposé).",
+              "Écrire le théorème : $\\vec{P} + \\vec{R}_N + \\vec{F} + \\vec{f} = m\\,\\vec{a}_G$.",
+              "Projeter sur l'axe $Ox$ horizontal, dans le sens du mouvement : $P$ et $R_N$ sont perpendiculaires à $Ox$, donc $F - f = m\\,a_G$.",
+              "Résoudre : $a_G = \\dfrac{F - f}{m} = \\dfrac{5000 - 1000}{2000} = 2$ m/s². Puis $v = a_G t = 2 \\times 5 = 10$ m/s et $x = \\frac{1}{2} a_G t^2 = \\frac{1}{2} \\times 2 \\times 25 = 25$ m."
+            ]
+          },
+          "pitfall": "Ne compte pas $m\\,\\vec{a}_G$ comme une force du bilan, et n'oublie aucune force dans la projection. Contre-exemple : avec $m = 2000$ kg, $F = 5000$ N et $f = 1000$ N, si tu oublies le frottement, tu trouves $a_G = 5000 / 2000 = 2{,}5$ m/s² au lieu de $2$ m/s² : une erreur de 25 %. Le poids et la réaction, perpendiculaires à l'axe horizontal, n'interviennent pas dans la projection horizontale.",
+          "figure": "vitesse-chariot",
+          "exercise": {
+            "title": "Appliquer le théorème du centre d'inertie sur un plan horizontal",
+            "statement": "Dans cet exercice, tu appliques le théorème du centre d'inertie avec la méthode de la fiche. Les mouvements se font sur un plan horizontal, dans le référentiel du sol, supposé galiléen.",
+            "exercise_type": "fixation",
+            "figure": "vitesse-chariot",
+            "questions": [
+              {
+                "content": "Quelle est l'écriture correcte du théorème du centre d'inertie, dans un référentiel galiléen ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire le théorème du centre d'inertie : la somme des forces extérieures est égale à la masse multipliée par l'accélération de G, soit $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. Les autres écritures sont fausses : la vitesse n'intervient pas dans le second membre, la masse multiplie l'accélération (elle ne la divise pas), et $m\\vec{g}$ est seulement le poids, une force parmi d'autres.",
+                "answers": [
+                  {
+                    "content": "$\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\sum \\vec{F}_{ext} = m\\,\\vec{v}_G$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sum \\vec{F}_{ext} = \\vec{a}_G / m$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\sum \\vec{F}_{ext} = m\\,\\vec{g}$ dans tous les cas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un conteneur de masse 1500 kg subit une somme de forces horizontale de 3000 N. Quelle est la valeur de l'accélération de son centre d'inertie, en m/s² ?",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le sol (galiléen). Étape 3 — Écrire le théorème : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. Étape 4 — Projeter sur l'axe de la somme des forces : $\\sum F = m\\,a_G$. Étape 5 — Résoudre : $a_G = \\sum F / m = 3000 / 1500 = 2$ m/s².",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de 800 kg, initialement au repos, est tirée sur le sol horizontal par une force horizontale de 2400 N. Le frottement horizontal vaut 400 N. Quelle est son accélération, en m/s² ?",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la caisse, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids et réaction (verticaux), traction $F = 2400$ N, frottement $f = 400$ N (sens opposé). Étape 3 — Écrire le théorème : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. Étape 4 — Projeter sur l'axe horizontal : $F - f = m\\,a_G$. Étape 5 — Résoudre : $a_G = (2400 - 400) / 800 = 2000 / 800 = 2{,}5$ m/s².",
+                "answers": [
+                  {
+                    "content": "2.5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un camion de masse 4000 kg démarre du repos. La somme des forces horizontales qui s'exercent sur lui vaut 6000 N. Quelle est sa vitesse après 8 s, en m/s ?",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = le camion, référentiel = le sol (galiléen). Étape 3 — Écrire le théorème : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. Étape 4 — Projeter sur l'axe horizontal : $\\sum F = m\\,a_G$. Étape 5 — Résoudre : $a_G = 6000 / 4000 = 1{,}5$ m/s², puis $v = a_G t = 1{,}5 \\times 8 = 12$ m/s (le camion part du repos, donc $v_0 = 0$).",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un solide se déplace dans un référentiel galiléen. Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Écrire le théorème : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$ avec $m > 0$ : $\\vec{a}_G$ a donc le sens de la somme des forces. Si cette somme est non nulle, l'accélération n'est pas nulle et la vitesse varie. En revanche $m\\,a_G$ est le second membre du théorème, pas une force du bilan, et un solide subit en général d'autres forces que son poids (réaction, tension, frottement).",
+                "answers": [
+                  {
+                    "content": "Le vecteur accélération de G a le même sens que la somme des forces.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Si la somme des forces est constante et non nulle, la vitesse de G varie.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La quantité $m\\,a_G$ s'ajoute aux forces dans le bilan.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le poids est toujours la seule force qui s'exerce sur le solide.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de masse 1000 kg est tiré sur un plan horizontal par une force horizontale de 4000 N. Le frottement horizontal vaut 1000 N. Quelle est son accélération ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir : système = le solide, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : traction 4000 N, frottement 1000 N en sens opposé (poids et réaction se compensent). Étape 3 — Écrire le théorème : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. Étape 4 — Projeter : $F - f = m\\,a_G$. Étape 5 — Résoudre : $a_G = (4000 - 1000) / 1000 = 3$ m/s². Oublier $f$ donne 4 m/s², ajouter $f$ donne 5 m/s² : les deux sont fausses car le frottement s'oppose au mouvement.",
+                "answers": [
+                  {
+                    "content": "3 m/s²",
+                    "correct": true
+                  },
+                  {
+                    "content": "4 m/s², en oubliant le frottement",
+                    "correct": false
+                  },
+                  {
+                    "content": "5 m/s², en ajoutant le frottement",
+                    "correct": false
+                  },
+                  {
+                    "content": "3000 m/s², en oubliant de diviser par la masse",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à écrire et à utiliser la relation $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$.",
+            "questions": [
+              {
+                "content": "Pour un solide de masse $m$ et d'accélération $a_G$, la somme des forces vaut $\\sum F = ___$ et elle a la même ___ que le vecteur $\\vec{a}_G$.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Écrire le théorème du centre d'inertie : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. La masse est positive : le vecteur somme des forces et le vecteur $\\vec{a}_G$ ont donc même direction et même sens (leurs valeurs, elles, ne sont pas égales).",
+                "answers": [
+                  {
+                    "content": "$m \\times a_G$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$m / a_G$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$a_G / m$",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "direction et le même sens",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "valeur",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "unité",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Rappelle-toi : $F = m \\times a$."
+              },
+              {
+                "content": "Un solide de 50 kg subit une somme de forces de 200 N le long de son mouvement. Quelle est son accélération, en m/s² ?",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Écrire le théorème : $\\sum F = m\\,a_G$. Étape 5 — Résoudre : $a_G = 200 / 50 = 4$ m/s².",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise la force par la masse."
+              },
+              {
+                "content": "Si la somme des forces extérieures est nulle, l'accélération du centre d'inertie est nulle.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Écrire le théorème : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. Si $\\sum \\vec{F}_{ext} = \\vec{0}$, alors $m\\,\\vec{a}_G = \\vec{0}$ et, comme $m \\neq 0$, $\\vec{a}_G = \\vec{0}$ : G est au repos ou en MRU.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Remplace $\\sum F$ par 0 dans la relation."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Solide sur un plan incliné, avec ou sans frottement",
+          "remember": "Un solide de masse $m$ sur un plan incliné d'un angle $\\alpha$ par rapport à l'horizontale subit son poids $\\vec{P}$ (vertical, $P = mg$) et la réaction du plan. **Sans frottement**, la réaction $\\vec{R}_N$ est perpendiculaire au plan. **Avec frottement**, la réaction se décompose en $\\vec{R}_N$ (perpendiculaire au plan) et une force de frottement $\\vec{f}$, parallèle au plan et opposée au mouvement. On prend un axe $Ox$ parallèle au plan, orienté dans le sens du mouvement, et un axe $Oy$ perpendiculaire au plan. Le poids a pour composantes : $P\\sin\\alpha$ le long du plan, $P\\cos\\alpha$ perpendiculairement. En descente : $P\\sin\\alpha - f = m\\,a_G$ sur $Ox$, et $R_N = P\\cos\\alpha$ sur $Oy$. Sans frottement, $a_G = g\\sin\\alpha$ : elle ne dépend pas de la masse. Pour une montée tirée par un câble parallèle au plan : $T - P\\sin\\alpha - f = m\\,a_G$.",
+          "method": [
+            "Définir le système et le référentiel d'étude (le sol), supposé galiléen.",
+            "Faire le bilan des forces : poids $\\vec{P}$, réaction normale $\\vec{R}_N$, frottement $\\vec{f}$ éventuel, tension éventuelle.",
+            "Choisir le repère : $Ox$ parallèle au plan dans le sens du mouvement, $Oy$ perpendiculaire au plan.",
+            "Écrire le théorème du centre d'inertie : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$.",
+            "Projeter sur $Ox$ (avec la composante $P\\sin\\alpha$ du poids) et sur $Oy$ (où $a_y = 0$, donc $R_N = P\\cos\\alpha$).",
+            "Résoudre : calculer $a_G$, puis la vitesse ou la distance, ou la force inconnue."
+          ],
+          "example": {
+            "statement": "Une caisse de masse $m = 50$ kg glisse sur une rampe inclinée de $\\alpha = 30°$ sur l'horizontale. Elle part du repos. Le frottement, parallèle à la rampe, vaut $f = 100$ N. On prend $g = 10$ N/kg. Calculer l'accélération puis la vitesse après 2 s.",
+            "steps": [
+              "Définir : le système est la caisse ; le référentiel est le sol (la rampe), supposé galiléen.",
+              "Faire le bilan : le poids $P = mg = 500$ N (vertical), la réaction normale $\\vec{R}_N$ (perpendiculaire à la rampe) et le frottement $f = 100$ N (parallèle à la rampe, vers le haut).",
+              "Choisir le repère : $Ox$ le long de la rampe, vers le bas (sens du mouvement) ; $Oy$ perpendiculaire à la rampe.",
+              "Écrire le théorème : $\\vec{P} + \\vec{R}_N + \\vec{f} = m\\,\\vec{a}_G$.",
+              "Projeter : sur $Ox$, $P\\sin\\alpha - f = m\\,a_G$ ; sur $Oy$, $R_N - P\\cos\\alpha = 0$.",
+              "Résoudre : $a_G = \\dfrac{500 \\times 0{,}5 - 100}{50} = \\dfrac{150}{50} = 3$ m/s². Puis $v = a_G t = 3 \\times 2 = 6$ m/s."
+            ]
+          },
+          "pitfall": "Ne confonds pas $\\sin\\alpha$ et $\\cos\\alpha$ : le long du plan, la composante du poids est $P\\sin\\alpha$, pas $P\\cos\\alpha$. Contre-exemple : pour $\\alpha = 0$ (plan horizontal), le poids n'a aucune composante le long du plan, et $P\\sin 0 = 0$ est juste, alors que $P\\cos 0 = P$ ferait accélérer la caisse comme en chute libre. Chiffré : avec $P = 500$ N et $\\alpha = 30°$, la composante le long du plan vaut $500 \\times 0{,}5 = 250$ N, et non $500 \\times 0{,}87 \\approx 433$ N. N'écris pas non plus $R_N = P$ : sur un plan incliné, $R_N = P\\cos\\alpha$.",
+          "figure": "plan-incline-forces",
+          "exercise": {
+            "title": "Descendre et monter un plan incliné",
+            "statement": "Dans cet exercice, tu appliques la méthode du plan incliné. Tu prends g = 10 N/kg, sin 30° = 0,5, cos 30° ≈ 0,87 et le référentiel du sol, supposé galiléen. Sur la figure, un solide glisse vers le bas d'un plan incliné et subit son poids, la réaction normale et un frottement.",
+            "exercise_type": "fixation",
+            "figure": "plan-incline-forces",
+            "questions": [
+              {
+                "content": "Un solide de poids P est posé sur un plan incliné d'un angle α. Quelle est la composante du poids parallèle au plan ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Choisir le repère : $Ox$ parallèle au plan, $Oy$ perpendiculaire. Étape 5 — Projeter : sur $Ox$, le poids a pour composante $P\\sin\\alpha$ (elle vaut 0 si le plan est horizontal et $P$ s'il est vertical). La composante perpendiculaire au plan est $P\\cos\\alpha$ : c'est la confusion classique.",
+                "answers": [
+                  {
+                    "content": "$P\\sin\\alpha$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$P\\cos\\alpha$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$P\\tan\\alpha$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$P$ tout entier",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de 20 kg est lâchée sans vitesse sur un plan incliné de 30° sur l'horizontale, sans frottement. On prend g = 10 N/kg. Quelle est son accélération, en m/s² ?",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la caisse, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids et réaction normale (pas de frottement). Étape 3 — Choisir le repère : $Ox$ le long du plan vers le bas. Étape 4 — Écrire le théorème : $\\vec{P} + \\vec{R}_N = m\\,\\vec{a}_G$. Étape 5 — Projeter sur $Ox$ : $P\\sin\\alpha = m\\,a_G$, soit $mg\\sin\\alpha = m\\,a_G$. Étape 6 — Résoudre : $a_G = g\\sin\\alpha = 10 \\times 0{,}5 = 5$ m/s² (la masse s'est simplifiée).",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un solide de 40 kg est posé sur un plan incliné de 60° sur l'horizontale. On prend g = 10 N/kg et cos 60° = 0,5. Quelle est l'intensité de la réaction normale du plan, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = le solide, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = 40 \\times 10 = 400$ N, réaction normale $R_N$. Étape 3 — Choisir le repère : $Oy$ perpendiculaire au plan. Étape 4 — Écrire le théorème. Étape 5 — Projeter sur $Oy$ où $a_y = 0$ : $R_N - P\\cos\\alpha = 0$. Étape 6 — Résoudre : $R_N = 400 \\times 0{,}5 = 200$ N. Ce n'est pas 400 N : la réaction n'est égale au poids que sur un plan horizontal.",
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de 100 kg descend un plan incliné de 30° sur l'horizontale, partant du repos. Le frottement, parallèle au plan, vaut 150 N. On prend g = 10 N/kg. Quelle est son accélération, en m/s² ?",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la caisse, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = 1000$ N, réaction normale, frottement $f = 150$ N vers le haut de la pente. Étape 3 — Choisir le repère : $Ox$ vers le bas du plan. Étape 4 — Écrire le théorème. Étape 5 — Projeter sur $Ox$ : $P\\sin\\alpha - f = m\\,a_G$. Étape 6 — Résoudre : $a_G = (1000 \\times 0{,}5 - 150) / 100 = 350 / 100 = 3{,}5$ m/s².",
+                "answers": [
+                  {
+                    "content": "3.5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un treuil tire une caisse de 100 kg vers le haut d'un plan incliné de 30°, à vitesse constante, avec un câble parallèle au plan. Le frottement vaut 150 N. On prend g = 10 N/kg. Quelle est la tension du câble, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la caisse, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = 1000$ N, réaction normale, tension $T$ (vers le haut du plan), frottement $f = 150$ N (vers le bas du plan, opposé au mouvement). Étape 3 — Choisir le repère : $Ox$ vers le haut du plan. Étape 4 — Écrire le théorème. Étape 5 — Projeter sur $Ox$ : $T - P\\sin\\alpha - f = m\\,a_G$. Étape 6 — Résoudre : vitesse constante, donc $a_G = 0$ et $T = 1000 \\times 0{,}5 + 150 = 650$ N.",
+                "answers": [
+                  {
+                    "content": "650",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sur une rampe inclinée de 30°, quelle est l'intensité de la composante du poids, parallèle à la rampe, pour une caisse de 100 kg (g = 10 N/kg) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Faire le bilan : le poids vaut $P = mg = 100 \\times 10 = 1000$ N. Étape 5 — Projeter sur $Ox$ (parallèle à la rampe) : composante $P\\sin\\alpha = 1000 \\times 0{,}5 = 500$ N. La valeur 866 N correspond à $P\\cos\\alpha$, composante perpendiculaire à la rampe. 1000 N serait la composante pour une rampe verticale.",
+                "answers": [
+                  {
+                    "content": "500 N",
+                    "correct": true
+                  },
+                  {
+                    "content": "866 N, en utilisant le cosinus",
+                    "correct": false
+                  },
+                  {
+                    "content": "1000 N, en prenant tout le poids",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 N, car la caisse est posée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sans frottement, l'accélération d'un solide qui descend un plan incliné ne dépend pas de sa masse.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Écrire le théorème : $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$. Étape 5 — Projeter sur $Ox$ : $mg\\sin\\alpha = m\\,a_G$. Étape 6 — Résoudre : la masse se simplifie, $a_G = g\\sin\\alpha$. Deux caisses de masses différentes lâchées sur la même rampe sans frottement ont la même accélération.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Voici les deux équations de projection sur un plan incliné. Complète-les.",
+            "questions": [
+              {
+                "content": "Un solide descend un plan incliné de $\\alpha$ avec un frottement $f$. Sur l'axe $Ox$ parallèle au plan, orienté vers le bas : $P\\sin\\alpha ___ f = m\\,a_G$. Sur l'axe $Oy$ perpendiculaire au plan : $R_N = ___$.",
+                "question_type": "select",
+                "explanation": "Étape 5 — Projeter sur $Ox$ : le poids tire vers le bas ($+P\\sin\\alpha$) et le frottement s'oppose au mouvement ($-f$), donc $P\\sin\\alpha - f = m\\,a_G$. Projeter sur $Oy$ : $a_y = 0$, donc $R_N - P\\cos\\alpha = 0$ et $R_N = P\\cos\\alpha$.",
+                "answers": [
+                  {
+                    "content": "−",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "+",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "$P\\cos\\alpha$",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$P\\sin\\alpha$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$P$",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le frottement s'oppose au mouvement : de quel signe est-il sur $Ox$ ?"
+              },
+              {
+                "content": "Un solide de 10 kg est posé sur un plan incliné de 60° sur l'horizontale. On prend g = 10 N/kg et cos 60° = 0,5. Quelle est l'intensité de la réaction normale, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Faire le bilan : $P = mg = 10 \\times 10 = 100$ N. Étape 5 — Projeter sur $Oy$ : $R_N = P\\cos\\alpha = 100 \\times 0{,}5 = 50$ N.",
+                "answers": [
+                  {
+                    "content": "50",
+                    "correct": true
+                  }
+                ],
+                "hint": "$R_N = P\\cos\\alpha$ : pense à la composante perpendiculaire."
+              },
+              {
+                "content": "Sur un plan incliné sans frottement, la réaction du plan est égale au poids du solide.",
+                "question_type": "true_false",
+                "explanation": "Étape 5 — Projeter sur $Oy$ : $R_N = P\\cos\\alpha$. Comme $\\cos\\alpha < 1$ pour un plan incliné, $R_N < P$. L'égalité $R = P$ n'est vraie que sur un plan horizontal ($\\alpha = 0$).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule $R_N$ avec le cosinus de l'angle."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mouvement vertical : câble de grue et ascenseur",
+          "remember": "Un solide suspendu à un câble (grue, treuil, cabine d'ascenseur) subit son poids $\\vec{P}$ (vers le bas, $P = mg$) et la tension $\\vec{T}$ du câble (vers le haut). En orientant l'axe vertical vers le haut, le théorème du centre d'inertie donne $T - mg = m\\,a_G$, soit $T = m\\,(g + a_G)$, où $a_G$ est la valeur algébrique de l'accélération sur cet axe. Si $a_G > 0$ (accélération vers le haut) : $T > P$. Si $a_G = 0$ (repos ou vitesse constante) : $T = P$. Si $a_G < 0$ (accélération vers le bas) : $T < P$. Dans un ascenseur, la force exercée par le plancher sur une personne est $R = m\\,(g + a_G)$ : on se sent plus lourd quand $a_G > 0$, plus léger quand $a_G < 0$.",
+          "method": [
+            "Définir le système et le référentiel d'étude (le sol), supposé galiléen.",
+            "Faire le bilan des forces : le poids $\\vec{P}$ vers le bas, la tension $\\vec{T}$ (ou la réaction $\\vec{R}$ du plancher) vers le haut.",
+            "Écrire le théorème du centre d'inertie : $\\vec{P} + \\vec{T} = m\\,\\vec{a}_G$.",
+            "Projeter sur l'axe vertical orienté vers le haut : $T - mg = m\\,a_G$, en donnant à $a_G$ le signe que fixe le mouvement.",
+            "Résoudre : calculer $T = m\\,(g + a_G)$, ou $a_G$ si la tension est donnée."
+          ],
+          "example": {
+            "statement": "Une grue du port d'Abidjan soulève un conteneur de masse $m = 2000$ kg. Au démarrage, la vitesse de G passe de 0 à 1 m/s en 2 s, avec une accélération constante vers le haut. On prend $g = 10$ N/kg. Calculer la tension du câble.",
+            "steps": [
+              "Définir : le système est le conteneur ; le référentiel est le quai, supposé galiléen.",
+              "Faire le bilan : le poids $P = mg = 20000$ N (vers le bas) et la tension $\\vec{T}$ du câble (vers le haut).",
+              "Écrire le théorème : $\\vec{P} + \\vec{T} = m\\,\\vec{a}_G$.",
+              "Projeter sur l'axe vertical vers le haut : $T - mg = m\\,a_G$, avec $a_G = \\dfrac{1 - 0}{2} = +0{,}5$ m/s² (positive : la vitesse vers le haut augmente).",
+              "Résoudre : $T = m\\,(g + a_G) = 2000 \\times (10 + 0{,}5) = 21000$ N."
+            ]
+          },
+          "pitfall": "Ne crois pas que la tension égale le poids dès que le conteneur monte. $T = P$ seulement si $a_G = 0$ (repos ou vitesse constante). Contre-exemple chiffré avec $m = 2000$ kg et $g = 10$ N/kg : au démarrage ($a_G = +0{,}5$ m/s²), $T = 21000$ N, plus que $P = 20000$ N ; au freinage de fin de montée ($a_G = -0{,}5$ m/s²), $T = 2000 \\times 9{,}5 = 19000$ N, moins que $P$. C'est l'accélération qui compte, pas le sens de la vitesse.",
+          "figure": "conteneur-cable",
+          "exercise": {
+            "title": "Câble de grue et ascenseur",
+            "statement": "Dans cet exercice, tu appliques la méthode au mouvement vertical d'un solide suspendu. Tu prends g = 10 N/kg et le référentiel du sol, supposé galiléen. L'axe vertical est orienté vers le haut.",
+            "exercise_type": "fixation",
+            "figure": "conteneur-cable",
+            "questions": [
+              {
+                "content": "Une cabine d'ascenseur monte en accélérant vers le haut. Comment la tension du câble se compare-t-elle au poids de la cabine et de ses passagers ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Faire le bilan : le poids vers le bas, la tension vers le haut. Étape 3 — Écrire le théorème : $\\vec{P} + \\vec{T} = m\\,\\vec{a}_G$. Étape 4 — Projeter sur l'axe vertical vers le haut : $T - mg = m\\,a_G$ avec $a_G > 0$. Étape 5 — Résoudre : $T = m\\,(g + a_G) > mg$. La tension est donc plus grande que le poids ; elle ne lui est égale que si $a_G = 0$.",
+                "answers": [
+                  {
+                    "content": "Elle est plus grande que le poids.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est égale au poids.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est plus petite que le poids.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est nulle.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une charge de 500 kg monte avec une accélération de 2 m/s² vers le haut. On prend g = 10 N/kg. Quelle est la tension du câble, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la charge, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = 5000$ N, tension $T$. Étape 3 — Écrire le théorème : $\\vec{P} + \\vec{T} = m\\,\\vec{a}_G$. Étape 4 — Projeter vers le haut : $T - mg = m\\,a_G$ avec $a_G = +2$ m/s². Étape 5 — Résoudre : $T = 500 \\times (10 + 2) = 6000$ N.",
+                "answers": [
+                  {
+                    "content": "6000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une grue soulève un conteneur de 800 kg à la vitesse constante de 0,5 m/s. On prend g = 10 N/kg. Quelle est la tension du câble, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids et tension. Étape 3 — Écrire le théorème : $\\vec{P} + \\vec{T} = m\\,\\vec{a}_G$. Étape 4 — Projeter vers le haut : $T - mg = m\\,a_G$ avec $a_G = 0$ (vitesse constante). Étape 5 — Résoudre : $T = mg = 800 \\times 10 = 8000$ N.",
+                "answers": [
+                  {
+                    "content": "8000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une personne de 60 kg est dans un ascenseur qui démarre vers le haut avec une accélération de 1 m/s². On prend g = 10 N/kg. Quelle est l'intensité de la force exercée par le plancher sur la personne, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = la personne, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = 600$ N (vers le bas), réaction $R$ du plancher (vers le haut). Étape 3 — Écrire le théorème : $\\vec{P} + \\vec{R} = m\\,\\vec{a}_G$. Étape 4 — Projeter vers le haut : $R - mg = m\\,a_G$ avec $a_G = +1$ m/s². Étape 5 — Résoudre : $R = 60 \\times (10 + 1) = 660$ N : la personne se sent plus lourde.",
+                "answers": [
+                  {
+                    "content": "660",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un conteneur de 2000 kg monte, puis freine en fin de course : son accélération est de 0,5 m/s² dirigée vers le bas. On prend g = 10 N/kg. Quelle est la tension du câble, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = 20000$ N, tension $T$. Étape 3 — Écrire le théorème. Étape 4 — Projeter sur l'axe vertical vers le haut : l'accélération est dirigée vers le bas, donc $a_G = -0{,}5$ m/s² et $T - mg = m\\,a_G$. Étape 5 — Résoudre : $T = 2000 \\times (10 - 0{,}5) = 19000$ N, inférieure au poids.",
+                "answers": [
+                  {
+                    "content": "19000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un conteneur de 1000 kg monte à la vitesse constante de 2 m/s. On prend g = 10 N/kg. Quelle est la tension du câble ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = 10000$ N et tension $T$. Étape 3 — Écrire le théorème. Étape 4 — Projeter vers le haut : $T - mg = m\\,a_G$ avec $a_G = 0$ (vitesse constante, MRU). Étape 5 — Résoudre : $T = mg = 10000$ N. La vitesse n'apparaît pas dans la formule : seule l'accélération compte.",
+                "answers": [
+                  {
+                    "content": "10000 N",
+                    "correct": true
+                  },
+                  {
+                    "content": "12000 N, en ajoutant la vitesse à g",
+                    "correct": false
+                  },
+                  {
+                    "content": "Plus de 10000 N, parce que le conteneur monte",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 N, parce que G n'accélère pas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ascenseur démarre vers le bas : son accélération est dirigée vers le bas. Quelles affirmations sont vraies pour un passager ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Écrire le théorème : $\\vec{P} + \\vec{R} = m\\,\\vec{a}_G$. Étape 4 — Projeter vers le haut : $R - mg = m\\,a_G$ avec $a_G < 0$. Étape 5 — Résoudre : $R = m\\,(g + a_G) < mg$. Le passager se sent plus léger. La somme des forces n'est pas nulle puisque $a_G \\neq 0$, et $R$ n'est pas supérieure au poids.",
+                "answers": [
+                  {
+                    "content": "Son accélération est dirigée vers le bas.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La force exercée par le plancher est inférieure à son poids.",
+                    "correct": true
+                  },
+                  {
+                    "content": "La force exercée par le plancher est supérieure à son poids.",
+                    "correct": false
+                  },
+                  {
+                    "content": "La somme des forces est nulle.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Révise le cas du solide suspendu à un câble ou posé dans un ascenseur.",
+            "questions": [
+              {
+                "content": "Un conteneur monte à vitesse ___ ; la tension du câble est alors ___ à son poids.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Projeter vers le haut : $T - mg = m\\,a_G$. Vitesse constante signifie $a_G = 0$, donc $T = mg$ : la tension est égale au poids.",
+                "answers": [
+                  {
+                    "content": "constante",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "croissante",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "égale",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "supérieure",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "inférieure",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Vitesse constante veut dire accélération nulle."
+              },
+              {
+                "content": "Une charge de 100 kg accélère vers le haut avec $a_G = 3$ m/s². On prend g = 10 N/kg. Quelle est la tension du câble, en N ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Projeter vers le haut : $T - mg = m\\,a_G$. Étape 5 — Résoudre : $T = m\\,(g + a_G) = 100 \\times 13 = 1300$ N.",
+                "answers": [
+                  {
+                    "content": "1300",
+                    "correct": true
+                  }
+                ],
+                "hint": "Utilise $T = m\\,(g + a_G)$."
+              },
+              {
+                "content": "Dans $T - mg = m\\,a_G$, la valeur algébrique $a_G$ est ___ (positive ou négative ?) quand l'accélération est dirigée vers le haut, l'axe étant orienté vers le haut.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Projeter : l'axe est orienté vers le haut. Un vecteur accélération dirigé vers le haut a une valeur algébrique positive ; dirigé vers le bas, négative.",
+                "answers": [
+                  {
+                    "content": "positive",
+                    "correct": true
+                  },
+                  {
+                    "content": "positif",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le signe suit l'orientation de l'axe."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un chariot élévateur pousse un conteneur",
+          "statement": "Au port autonome d'Abidjan, un chariot élévateur pousse un conteneur de masse m = 4000 kg sur le quai horizontal. Le conteneur, au repos au départ, subit une force motrice horizontale F = 6000 N exercée par le chariot et une force de frottement horizontale constante f = 2000 N. On prend g = 10 N/kg et on étudie le mouvement du centre d'inertie G dans le référentiel du quai, supposé galiléen.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Centre d'inertie, solide pseudo-isolé et référentiel galiléen",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quel est le poids du conteneur, en N ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le quai (galiléen). Étape 2 — Faire le bilan : le poids, de valeur $P = mg$. Application : $P = 4000 \\times 10 = 40000$ N.",
+              "answers": [
                 {
-                  "content": "Une majorette lance son bâton homogène en le faisant tourner. Pendant le vol, le point du bâton qui a le mouvement le plus simple est son milieu, c'est-à-dire son centre d'inertie.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Le bâton est homogène et symétrique : son centre d'inertie G est en son milieu. C'est le seul point dont le mouvement reste simple, alors que les bouts font des boucles. L'erreur tentante est de croire que tous les points d'un solide ont le même mouvement : c'est faux dès que le solide tourne.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Qu'appelle-t-on un solide pseudo-isolé ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un solide pseudo-isolé subit des forces, mais leur somme vectorielle est nulle, comme le sac dans le gbaka (poids et réaction se compensent). L'erreur la plus fréquente est de le confondre avec un solide isolé, qui ne subit aucune force du tout. Pseudo-isolé ne veut pas dire immobile : il peut être en mouvement rectiligne uniforme.",
-                  "answers": [
-                    {
-                      "content": "Un solide soumis à des forces dont la somme vectorielle est nulle",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un solide qui ne subit aucune force",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un solide qui reste toujours immobile",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un solide soumis à une seule force",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces affirmations sur le principe de l'inertie, lesquelles sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Dans un référentiel galiléen, G d'un solide pseudo-isolé est au repos ou en mouvement rectiligne uniforme ; et la réciproque est vraie. L'erreur la plus fréquente est de penser qu'un mouvement à vitesse constante exige une force dans le sens du mouvement : les forces se compensent. Le principe n'est pas vrai dans tous les référentiels, par exemple dans un gbaka qui freine.",
-                  "answers": [
-                    {
-                      "content": "Dans un référentiel galiléen, le centre d'inertie d'un solide pseudo-isolé peut être en mouvement rectiligne uniforme.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Si le centre d'inertie d'un solide est au repos dans un référentiel galiléen, la somme des forces extérieures qu'il subit est nulle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un solide pseudo-isolé est forcément immobile.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le principe de l'inertie est vérifié dans n'importe quel référentiel.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un solide en mouvement rectiligne uniforme subit forcément une force dans le sens de son mouvement.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour étudier le mouvement d'un satellite qui tourne autour de la Terre, quel référentiel galiléen choisit-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "On choisit le référentiel géocentrique, lié au centre de la Terre et à des étoiles lointaines. L'erreur tentante est de prendre le référentiel terrestre : il tourne avec la Terre, ce qui n'est pas négligeable sur la durée d'un tour de satellite. Le référentiel héliocentrique sert pour les planètes autour du Soleil.",
-                  "answers": [
-                    {
-                      "content": "Le référentiel géocentrique",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le référentiel terrestre",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le référentiel héliocentrique",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le référentiel lié au satellite",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un sac est posé sur le plancher d'un gbaka qui roule. Le chauffeur freine brusquement et le sac glisse vers l'avant. Quelle interprétation est juste ?",
-                  "question_type": "single_choice",
-                  "explanation": "Vu depuis la route (référentiel galiléen), le sac garde sa vitesse : c'est le principe de l'inertie. C'est le gbaka qui ralentit sous lui. L'erreur tentante est d'inventer une force qui pousse le sac vers l'avant : aucun objet n'exerce cette force. Le gbaka qui freine n'est pas un référentiel galiléen.",
-                  "answers": [
-                    {
-                      "content": "Vu depuis la route, le sac garde la vitesse qu'il avait : c'est le gbaka qui ralentit sous lui.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une force pousse le sac vers l'avant pendant le freinage.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le gbaka qui freine est un référentiel galiléen.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le sac glisse parce que son poids augmente pendant le freinage.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "40000",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Positionner le centre d'inertie et utiliser le principe de l'inertie",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelle est l'intensité de la réaction normale du quai sur le conteneur ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : le mouvement est horizontal, donc l'accélération verticale est nulle. Projection sur l'axe vertical vers le haut : $R_N - P = m \\times 0$, donc $R_N = P = 40000$ N. La force motrice (6000 N) et le frottement (2000 N) sont horizontaux : ils n'interviennent pas dans cette projection. Ne mélange pas les axes.",
+              "answers": [
                 {
-                  "content": "Une tige de masse négligeable, longue de 40 cm, porte une boule de masse $m_1 = 300\\ \\text{g}$ à l'extrémité A et une boule de masse $m_2 = 100\\ \\text{g}$ à l'extrémité B. À quelle distance de A se trouve le centre d'inertie G du système ?",
-                  "question_type": "single_choice",
-                  "explanation": "Axe d'origine A : $x_G = \\dfrac{300 \\times 0 + 100 \\times 40}{300 + 100} = 10\\ \\text{cm}$. G est plus près de la boule la plus lourde. L'erreur tentante est de répondre 20 cm, le milieu : ce n'est vrai que si les deux masses sont égales. Inverser les masses donne 30 cm.",
-                  "answers": [
-                    {
-                      "content": "$10\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$20\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$30\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$13{,}3\\ \\text{cm}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0 N",
+                  "correct": false
                 },
                 {
-                  "content": "Un anneau métallique homogène a la forme d'un cercle. Où se trouve son centre d'inertie ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'anneau homogène a un centre de symétrie : le centre du cercle. C'est donc son centre d'inertie, même s'il n'y a pas de matière en ce point. L'erreur tentante est de croire que G doit forcément être dans la matière du solide : G est un point défini par la répartition des masses.",
-                  "answers": [
-                    {
-                      "content": "Au centre du cercle, en un point où il n'y a pas de matière",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sur l'anneau, au point le plus bas",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il n'en a pas, car son centre est vide",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sur l'anneau, en n'importe quel point",
-                      "correct": false
-                    }
-                  ]
+                  "content": "2000 N",
+                  "correct": false
                 },
                 {
-                  "content": "Un palet glisse sur une table horizontale à coussin d'air. Les positions de son centre d'inertie, enregistrées toutes les 50 ms, sont alignées et séparées de 1,5 cm. Quelle est la vitesse de G ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le mouvement est rectiligne uniforme : $v = \\dfrac{1{,}5 \\times 10^{-2}}{50 \\times 10^{-3}} = 0{,}3\\ \\text{m/s}$. L'erreur tentante est d'oublier les conversions en mètres et en secondes, ce qui donne 0,03 ou 3. On travaille toujours en unités SI.",
-                  "answers": [
-                    {
-                      "content": "$0{,}3\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$3\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}03\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}075\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "40000 N",
+                  "correct": true
                 },
                 {
-                  "content": "Une lampe de masse $500\\ \\text{g}$ est suspendue au plafond par un fil. Elle est au repos. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de la tension du fil ?",
-                  "question_type": "single_choice",
-                  "explanation": "G est au repos dans le référentiel terrestre : $\\vec P + \\vec T = \\vec 0$, donc $T = P = m g = 0{,}5 \\times 10 = 5\\ \\text{N}$. L'erreur tentante est de dire 0 N parce que la lampe ne bouge pas : au repos, les forces se compensent, elles ne disparaissent pas. Garder 500 sans convertir donne 5 000 N.",
-                  "answers": [
-                    {
-                      "content": "$5\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}5\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\,000\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un camion roule en ligne droite à la vitesse constante de 60 km/h, sur une route horizontale. Le référentiel terrestre est supposé galiléen. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "G est en mouvement rectiligne uniforme : la somme des forces extérieures est nulle, donc les forces qui font avancer le camion compensent exactement les frottements. L'erreur la plus fréquente est de croire que la force motrice doit être plus grande que les frottements : ce serait vrai seulement si le camion accélérait.",
-                  "answers": [
-                    {
-                      "content": "La somme des forces extérieures appliquées au camion est nulle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les forces qui font avancer le camion compensent exactement les forces de frottement.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La force qui fait avancer le camion est plus grande que les frottements, sinon il ne pourrait pas avancer.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le camion est un solide isolé.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La somme des forces extérieures est dirigée dans le sens du mouvement.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "6000 N",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Centre d'inertie et principe de l'inertie",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Quelle est l'accélération du conteneur, en m/s² ?",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Écrire le théorème du centre d'inertie : $\\vec{P} + \\vec{R}_N + \\vec{F} + \\vec{f} = m\\,\\vec{a}_G$. Étape 4 — Projeter sur l'axe horizontal dans le sens du mouvement : $F - f = m\\,a_G$. Étape 5 — Résoudre : $a_G = (6000 - 2000) / 4000 = 1$ m/s². Si on oubliait le frottement, on trouverait 1,5 m/s² : c'est faux.",
+              "answers": [
                 {
-                  "content": "Une barre homogène de masse $1\\ \\text{kg}$ et de longueur $1\\ \\text{m}$ porte, à son extrémité B, un objet de masse $0{,}5\\ \\text{kg}$. À quelle distance de l'autre extrémité A se trouve le centre d'inertie du système ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le centre d'inertie de la barre est en son milieu, à 50 cm de A. Donc $x_G = \\dfrac{1 \\times 50 + 0{,}5 \\times 100}{1 + 0{,}5} = \\dfrac{100}{1{,}5} \\approx 66{,}7\\ \\text{cm}$. L'erreur tentante est de faire la moyenne simple de 50 et 100 (75 cm) : il faut pondérer chaque position par sa masse.",
-                  "answers": [
-                    {
-                      "content": "$66{,}7\\ \\text{cm}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$75\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$50\\ \\text{cm}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$33{,}3\\ \\text{cm}$",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "1",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la vitesse du conteneur 6 s après le départ, en m/s ?",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Méthode : la somme des forces est constante, donc $a_G$ est constante et le mouvement est rectiligne uniformément accéléré. Équation horaire de la vitesse : $v = a_G t + v_0$ avec $v_0 = 0$. Application : $v = 1 \\times 6 = 6$ m/s.",
+              "answers": [
                 {
-                  "content": "Un palet autoporteur est lancé sur une table horizontale. Les positions de son centre d'inertie, enregistrées toutes les 20 ms, sont alignées et séparées de 6 mm. Le référentiel terrestre est supposé galiléen. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Positions alignées et également espacées : mouvement rectiligne uniforme, avec $v = \\dfrac{6 \\times 10^{-3}}{20 \\times 10^{-3}} = 0{,}3\\ \\text{m/s}$. Le palet est pseudo-isolé : la poussée de l'air compense son poids. L'erreur la plus fréquente est de chercher une force horizontale dans le sens du mouvement : il n'y en a pas.",
-                  "answers": [
-                    {
-                      "content": "Le mouvement de G est rectiligne uniforme.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La vitesse de G vaut $0{,}3\\ \\text{m/s}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La poussée de l'air compense le poids du palet.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le palet subit une force horizontale dans le sens de son mouvement.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La vitesse de G vaut $3\\ \\text{m/s}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le palet est un solide isolé.",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle distance le conteneur a-t-il parcourue en 6 s, en m ?",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Méthode : équation horaire de la position, avec $x_0 = 0$ et $v_0 = 0$ : $x = \\frac{1}{2} a_G t^2$. Application : $x = \\frac{1}{2} \\times 1 \\times 6^2 = \\frac{1}{2} \\times 36 = 18$ m. On peut vérifier avec la vitesse moyenne : $(0 + 6)/2 = 3$ m/s, et $3 \\times 6 = 18$ m.",
+              "answers": [
                 {
-                  "content": "Le référentiel terrestre est supposé galiléen. Un référentiel lié à un car qui roule en ligne droite à vitesse constante par rapport au sol est lui aussi galiléen.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Tout référentiel en mouvement rectiligne uniforme par rapport à un référentiel galiléen est galiléen. L'erreur tentante est de penser qu'un référentiel en mouvement ne peut jamais être galiléen : ce qui compte, c'est qu'il n'accélère pas. Un car qui freine ou qui tourne, lui, n'est pas galiléen.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "18",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Par le théorème de l'énergie cinétique (acquis de 1ère), la variation d'énergie cinétique du conteneur est égale au travail de la somme des forces. Calcule ce travail pour les 18 m parcourus, en J. Il doit être égal à 1/2 m v² avec v = 6 m/s.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode : le poids et la réaction sont perpendiculaires au déplacement, leur travail est nul. Le travail de la somme des forces vaut $(F - f) \\times d = 4000 \\times 18 = 72000$ J. Vérification avec l'énergie cinétique : $\\frac{1}{2} m v^2 = \\frac{1}{2} \\times 4000 \\times 36 = 72000$ J. Les deux méthodes (dynamique, puis énergie) donnent le même résultat.",
+              "answers": [
                 {
-                  "content": "Une caisse de 40 kg est tirée sur un sol horizontal par une corde horizontale. Elle avance en ligne droite à vitesse constante. Les frottements du sol équivalent à une force constante de 120 N, opposée au mouvement. Quelle est la valeur de la tension de la corde ?",
-                  "question_type": "single_choice",
-                  "explanation": "Mouvement rectiligne uniforme : sur l'horizontale, la tension compense exactement le frottement, donc $T = 120\\ \\text{N}$. L'erreur tentante est de croire qu'il faut plus de 120 N pour que la caisse avance : c'est seulement nécessaire pour la faire accélérer. Le poids (400 N) est vertical et compensé par la réaction du sol.",
-                  "answers": [
-                    {
-                      "content": "$120\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Plus de $120\\ \\text{N}$, sinon la caisse n'avancerait pas",
-                      "correct": false
-                    },
-                    {
-                      "content": "$400\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0\\ \\text{N}$, car la vitesse est constante",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'espace, loin de tout astre, un astronaute lance une clé à molette en la faisant tourner sur elle-même. Aucune force ne s'exerce sur la clé. Comment se déplace son centre d'inertie, dans un référentiel galiléen ?",
-                  "question_type": "single_choice",
-                  "explanation": "La clé est un solide isolé : d'après le principe de l'inertie, G va en ligne droite à vitesse constante, pendant que la clé tourne autour de G, comme le bâton de la majorette. L'erreur tentante est de penser que la clé va ralentir puis s'arrêter faute de force : sans force, rien ne change sa vitesse.",
-                  "answers": [
-                    {
-                      "content": "En ligne droite, à vitesse constante, pendant que la clé tourne autour de lui",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il tourne en rond comme les bouts de la clé",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il ralentit puis s'arrête, car plus rien ne le pousse",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il reste immobile, car aucune force ne s'exerce",
-                      "correct": false
-                    }
-                  ]
+                  "content": "72000",
+                  "correct": true
                 }
               ]
             }
           ]
         },
         {
-          "name": "Le théorème du centre d'inertie",
-          "subtitle": "Relier la somme des forces extérieures à l'accélération du centre d'inertie",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Énoncer le théorème du centre d'inertie.</li><li>Faire le bilan des forces extérieures et appliquer le théorème avec la méthode en 5 étapes.</li><li>Calculer une accélération, une force ou une masse à partir de ce théorème.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le pousse-pousse au marché.</strong> Au marché d'Adjamé, un pousseur démarre avec son pousse-pousse, la charrette à bras. Plus il pousse fort, plus la charrette prend vite de la vitesse. Si elle est chargée de sacs d'ignames, la même poussée la fait accélérer moins vite. Et si un camarade tire la charrette vers l'arrière, c'est la différence des deux efforts qui compte.</p><p><strong>Le pont.</strong> La poussée, le tirage du camarade et le frottement des roues, ce sont les <strong>forces extérieures</strong>. Leur somme vectorielle, c'est $\\sum \\vec F_{ext}$. Le chargement, c'est la <strong>masse</strong> $m$ : plus elle est grande, plus il est difficile de changer la vitesse. La rapidité avec laquelle la vitesse change, c'est l'<strong>accélération</strong> $\\vec a_G$ du centre d'inertie.</p><p><strong>La limite de l'image.</strong> Dans l'image, on pense à une poussée « vers l'avant ». Mais $\\vec a_G$ a la direction et le sens de la somme des forces, pas forcément ceux de la vitesse. Quand la charrette ralentit, elle avance encore, mais la somme des forces et $\\vec a_G$ sont dirigées vers l'arrière.</p><h2>Ce qu'il faut retenir</h2><p>La <em>somme vectorielle</em> des forces s'obtient en ajoutant les vecteurs, pas leurs valeurs. Les forces <em>intérieures</em>, exercées entre les parties du système, n'interviennent pas.</p><blockquote><p><strong>Théorème du centre d'inertie</strong> : dans un référentiel galiléen, la somme vectorielle des forces extérieures appliquées à un solide est égale au produit de sa masse par le vecteur accélération de son centre d'inertie :</p><p>$$\\sum \\vec F_{ext} = m\\,\\vec a_G$$</p><p>avec les forces en newtons (N), $m$ en kilogrammes (kg) et $a_G$ en $\\text{m/s}^2$.</p><p>Conséquences : $\\vec a_G$ a la même direction et le même sens que $\\sum \\vec F_{ext}$. Si $\\sum \\vec F_{ext}$ est constante, $\\vec a_G$ est constante. Si $\\sum \\vec F_{ext} = \\vec 0$, on retrouve le principe de l'inertie.</p></blockquote><p><strong>La méthode, en 5 étapes :</strong></p><ol><li>Préciser le <strong>système</strong> étudié.</li><li>Choisir un <strong>référentiel galiléen</strong>, souvent le référentiel terrestre.</li><li>Faire le <strong>bilan des forces extérieures</strong> : poids $\\vec P$, réaction $\\vec R$ du support, tension $\\vec T$ d'un fil ou d'un câble, force de frottement $\\vec f$…</li><li>Écrire le <strong>théorème</strong> : $\\vec P + \\vec R + \\ldots = m\\,\\vec a_G$.</li><li><strong>Projeter</strong> cette relation sur des axes orientés (un axe dans le sens du mouvement, un axe perpendiculaire) et résoudre.</li></ol><h2>Exemple résolu</h2><p>Une caisse de masse $m = 50\\ \\text{kg}$, au repos sur un sol horizontal, est tirée par une corde horizontale de tension $T = 200\\ \\text{N}$. Le sol exerce une force de frottement constante $f = 50\\ \\text{N}$, opposée au mouvement. On prend $g = 10\\ \\text{N/kg}$. Calcule l'accélération, la réaction du sol, puis la vitesse et la distance parcourue au bout de 3 s.</p><ol><li><strong>Système et référentiel.</strong> Le système est la caisse. Le référentiel terrestre est supposé galiléen.</li><li><strong>Bilan des forces.</strong> Le poids $\\vec P$ (vertical, vers le bas, $P = m g = 500\\ \\text{N}$), la réaction normale $\\vec R$ du sol (verticale, vers le haut), la tension $\\vec T$ (horizontale, dans le sens du mouvement), le frottement $\\vec f$ (horizontal, sens contraire).</li><li><strong>Théorème.</strong> $\\vec P + \\vec R + \\vec T + \\vec f = m\\,\\vec a_G$.</li><li><strong>Projection sur l'axe horizontal</strong>, orienté dans le sens du mouvement : $T - f = m\\,a$, donc $a = \\dfrac{200 - 50}{50} = 3\\ \\text{m/s}^2$.</li><li><strong>Projection sur l'axe vertical</strong> : G ne monte ni ne descend, donc $R - P = 0$ et $R = 500\\ \\text{N}$.</li><li><strong>Mouvement.</strong> $a$ est constante : le mouvement est rectiligne uniformément varié, avec $v_0 = 0$. À $t = 3\\ \\text{s}$ : $v = a\\,t = 9\\ \\text{m/s}$ et $x = \\frac{1}{2}a\\,t^2 = 13{,}5\\ \\text{m}$.</li></ol><h2>Le piège à éviter</h2><p>Projeter sans orienter les axes, en donnant le signe + à toutes les forces. Sur un axe orienté dans le sens du mouvement, une force de sens contraire, comme le frottement, compte en négatif : on écrit $T - f$, pas $T + f$.</p><p>Autre erreur : ajouter une force qui n'existe pas. Chaque force du bilan doit avoir un auteur : la Terre, le sol, la corde, l'air. Une force sans auteur, comme « la force de l'élan », n'existe pas.</p><h2>En une phrase</h2><p>Dans un référentiel galiléen, je fais le bilan des forces extérieures, j'écris $\\sum \\vec F_{ext} = m\\,\\vec a_G$ et je projette sur des axes orientés pour trouver l'accélération.</p>",
-          "exercises": [
+          "title": "Une caisse glisse sur une rampe de chargement",
+          "statement": "Sur un quai du port d'Abidjan, une caisse de masse m = 80 kg est lâchée sans vitesse en haut d'une rampe de chargement inclinée de α = 30° sur l'horizontale, de longueur L = 3,6 m. On prend g = 10 N/kg et sin 30° = 0,5. On étudie le mouvement de G dans le référentiel du quai, supposé galiléen.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Énoncé et sens du théorème du centre d'inertie",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelle est l'intensité de la composante du poids parallèle à la rampe, en N ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Définir : système = la caisse, référentiel = le quai (galiléen). Étape 2 — Faire le bilan : le poids $P = mg = 80 \\times 10 = 800$ N. Étape 3 — Choisir le repère : $Ox$ le long de la rampe, vers le bas. Étape 5 — Projeter : composante $P\\sin\\alpha = 800 \\times 0{,}5 = 400$ N.",
+              "answers": [
                 {
-                  "content": "Quel est l'énoncé exact du théorème du centre d'inertie ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans un référentiel galiléen, la somme des forces extérieures est égale à $m\\,\\vec a_G$. L'erreur la plus fréquente est d'écrire $m\\,\\vec v_G$ : les forces changent la vitesse, elles ne la fixent pas. Les forces intérieures n'interviennent pas, et le théorème n'est valable que dans un référentiel galiléen.",
-                  "answers": [
-                    {
-                      "content": "Dans un référentiel galiléen, $\\sum \\vec F_{ext} = m\\,\\vec a_G$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans un référentiel galiléen, $\\sum \\vec F_{ext} = m\\,\\vec v_G$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans n'importe quel référentiel, $\\sum \\vec F_{ext} = m\\,\\vec a_G$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans un référentiel galiléen, la somme des forces intérieures est égale à $m\\,\\vec a_G$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un mobile se déplace vers la droite en ralentissant, dans un référentiel galiléen. La somme des forces extérieures qu'il subit est dirigée vers la droite.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. Le mobile ralentit : son accélération est dirigée vers la gauche, à l'opposé de la vitesse. Or la somme des forces a le sens de $\\vec a_G$ : elle est donc dirigée vers la gauche. L'erreur tentante est de croire que la somme des forces a toujours le sens du mouvement, comme la charrette qu'on pousse.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Un pousseur fait démarrer un pousse-pousse au marché, pendant qu'un camarade le tire vers l'arrière. Quelles correspondances avec le théorème du centre d'inertie sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le chargement correspond à la masse $m$, et la différence entre poussée et tirage correspond à la somme des forces. L'erreur la plus fréquente est d'associer la somme des forces à la vitesse : elle détermine l'accélération. Et plus la charrette est chargée, plus la même poussée donne une petite accélération, car $a = \\dfrac{F}{m}$.",
-                  "answers": [
-                    {
-                      "content": "Le chargement de sacs d'ignames correspond à la masse $m$ du système.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La différence entre la poussée et le tirage du camarade correspond à la somme des forces extérieures.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La vitesse de la charrette correspond à la somme des forces extérieures.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Plus la charrette est chargée, plus la même poussée lui donne une grande accélération.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On étudie le système « caisse », qui glisse sur un sol horizontal en étant tirée par une corde. Quelles forces font partie du bilan des forces extérieures ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le bilan contient les forces exercées sur la caisse par d'autres objets : le poids (par la Terre), la réaction du sol, la tension de la corde. L'erreur la plus fréquente est d'ajouter « la force de l'élan », qui n'a pas d'auteur. La force exercée par la caisse sur la corde s'exerce sur la corde, pas sur le système.",
-                  "answers": [
-                    {
-                      "content": "Le poids de la caisse, exercé par la Terre",
-                      "correct": true
-                    },
-                    {
-                      "content": "La réaction du sol sur la caisse",
-                      "correct": true
-                    },
-                    {
-                      "content": "La tension de la corde sur la caisse",
-                      "correct": true
-                    },
-                    {
-                      "content": "La force de l'élan de la caisse",
-                      "correct": false
-                    },
-                    {
-                      "content": "La force exercée par la caisse sur la corde",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un référentiel galiléen, la somme des forces extérieures appliquées à un solide est constante et non nulle. Que peut-on dire du vecteur accélération de son centre d'inertie ?",
-                  "question_type": "single_choice",
-                  "explanation": "D'après $\\sum \\vec F_{ext} = m\\,\\vec a_G$, si la somme est constante, $\\vec a_G$ est constante, avec la même direction et le même sens. L'erreur tentante est de dire que $\\vec a_G$ a le sens de la vitesse : ce n'est vrai que si le mouvement est accéléré. Une force constante donne une accélération constante, pas une accélération qui augmente.",
-                  "answers": [
-                    {
-                      "content": "Il est constant, de même direction et de même sens que la somme des forces.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il est nul, car la somme des forces est constante.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il a toujours la direction et le sens de la vitesse.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il augmente sans cesse avec le temps.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "400",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer avec le théorème du centre d'inertie",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "En l'absence de frottement, quelle est l'accélération de la caisse, en m/s² ?",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Écrire le théorème : $\\vec{P} + \\vec{R}_N = m\\,\\vec{a}_G$. Étape 5 — Projeter sur $Ox$ : $P\\sin\\alpha = m\\,a_G$. Étape 6 — Résoudre : $a_G = g\\sin\\alpha = 10 \\times 0{,}5 = 5$ m/s² (ou $400 / 80 = 5$ m/s²).",
+              "answers": [
                 {
-                  "content": "Une caisse de 20 kg glisse sur un sol horizontal. Elle est tirée par une corde horizontale de tension 100 N et subit une force de frottement constante de 40 N, opposée au mouvement. Le référentiel terrestre est galiléen. Quelle est la valeur de l'accélération de la caisse ?",
-                  "question_type": "single_choice",
-                  "explanation": "Projection sur l'axe orienté dans le sens du mouvement : $T - f = m\\,a$, donc $a = \\dfrac{100 - 40}{20} = 3\\ \\text{m/s}^2$. L'erreur tentante est d'oublier le frottement ($5\\ \\text{m/s}^2$) ou de l'ajouter à la tension ($7\\ \\text{m/s}^2$) : il s'oppose au mouvement, il compte en négatif.",
-                  "answers": [
-                    {
-                      "content": "$3\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$5\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$7\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}33\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une voiture de 1 000 kg roule sur une route droite et horizontale. Elle passe de 0 à 20 m/s en 10 s, avec une accélération constante. Quelle est la valeur de la somme des forces extérieures qu'elle subit ?",
-                  "question_type": "single_choice",
-                  "explanation": "D'abord l'accélération : $a = \\dfrac{20 - 0}{10} = 2\\ \\text{m/s}^2$. Puis $F = m\\,a = 1\\,000 \\times 2 = 2\\,000\\ \\text{N}$. L'erreur tentante est de multiplier la masse par la vitesse (20 000 N) : le théorème relie les forces à l'accélération, pas à la vitesse.",
-                  "answers": [
-                    {
-                      "content": "$2\\,000\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$20\\,000\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$200\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$10\\,000\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une cabine d'ascenseur de masse 400 kg monte en accélérant. Son accélération est verticale, vers le haut, de valeur $1\\ \\text{m/s}^2$. On prend $g = 10\\ \\text{N/kg}$ et on néglige les frottements. Quelle est la tension du câble ?",
-                  "question_type": "single_choice",
-                  "explanation": "Axe vertical orienté vers le haut : $T - m g = m\\,a$, donc $T = m\\,(g + a) = 400 \\times 11 = 4\\,400\\ \\text{N}$. L'erreur tentante est de répondre 4 000 N (le poids) : cela vaut seulement à vitesse constante. Une erreur de signe donne 3 600 N, valeur d'une cabine qui accélère vers le bas.",
-                  "answers": [
-                    {
-                      "content": "$4\\,400\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4\\,000\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$3\\,600\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$400\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un chariot est tiré sur un sol horizontal par une force horizontale constante de 30 N. Les frottements sont négligeables. Son accélération vaut $1{,}5\\ \\text{m/s}^2$. Quelle est sa masse ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sur l'axe du mouvement : $F = m\\,a$, donc $m = \\dfrac{F}{a} = \\dfrac{30}{1{,}5} = 20\\ \\text{kg}$. L'erreur tentante est de multiplier au lieu de diviser (45 kg). Vérifie l'ordre de grandeur : une force plus grande que l'accélération donne une masse plus grande que 1 kg.",
-                  "answers": [
-                    {
-                      "content": "$20\\ \\text{kg}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$45\\ \\text{kg}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}05\\ \\text{kg}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\ \\text{kg}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une moto de 200 kg roule à 15 m/s sur une route droite et horizontale. Le conducteur freine : la somme des forces extérieures vaut alors 1 500 N, opposée au mouvement, et reste constante. Combien de temps met la moto pour s'arrêter ?",
-                  "question_type": "single_choice",
-                  "explanation": "Axe orienté dans le sens du mouvement : $a = -\\dfrac{1\\,500}{200} = -7{,}5\\ \\text{m/s}^2$. Puis $0 = 15 - 7{,}5\\,t$, donc $t = 2\\ \\text{s}$. L'erreur tentante est de diviser l'accélération par la vitesse (0,5 s). Pour une durée, on divise un écart de vitesse par l'accélération.",
-                  "answers": [
-                    {
-                      "content": "$2\\ \\text{s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}5\\ \\text{s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$7{,}5\\ \\text{s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$15\\ \\text{s}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Mener l'étude dynamique d'un solide",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Toujours sans frottement, quelle est la vitesse de la caisse en bas de la rampe, en m/s ? Utilise la relation $v^2 = 2\\,a_G\\,L$ pour un mouvement uniformément accéléré partant du repos.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Méthode : l'accélération est constante, la caisse part du repos. On élimine le temps entre $v = a_G t$ et $x = \\frac{1}{2} a_G t^2$ : $v^2 = 2\\,a_G\\,x$. Application avec $x = L = 3{,}6$ m : $v^2 = 2 \\times 5 \\times 3{,}6 = 36$, donc $v = 6$ m/s.",
+              "answers": [
                 {
-                  "content": "Un chariot de 10 kg, au repos, est tiré sur un sol horizontal par une force horizontale constante de 50 N. Les frottements équivalent à une force constante de 10 N, opposée au mouvement. On prend $g = 10\\ \\text{N/kg}$ ; le référentiel terrestre est galiléen. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Horizontal : $a = \\dfrac{50 - 10}{10} = 4\\ \\text{m/s}^2$. Vertical : $R = m g = 100\\ \\text{N}$. À 2 s : $v = 4 \\times 2 = 8\\ \\text{m/s}$ et $x = \\frac{1}{2} \\times 4 \\times 2^2 = 8\\ \\text{m}$. L'erreur la plus fréquente est d'oublier le $\\frac{1}{2}$ dans $x$ (16 m). Une force constante donne un mouvement uniformément varié, pas uniforme.",
-                  "answers": [
-                    {
-                      "content": "L'accélération du chariot vaut $4\\ \\text{m/s}^2$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La réaction normale du sol vaut $100\\ \\text{N}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Au bout de 2 s, la vitesse du chariot vaut $8\\ \\text{m/s}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'accélération du chariot vaut $5\\ \\text{m/s}^2$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Au bout de 2 s, le chariot a parcouru $16\\ \\text{m}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le mouvement est rectiligne uniforme, car la force est constante.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un frottement constant f = 300 N, parallèle à la rampe, s'oppose maintenant au mouvement. Quelle est l'accélération de la caisse, en m/s² ?",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Faire le bilan : poids, réaction normale, frottement $f = 300$ N vers le haut de la rampe. Étape 4 — Écrire le théorème. Étape 5 — Projeter sur $Ox$ (vers le bas) : $P\\sin\\alpha - f = m\\,a_G$. Étape 6 — Résoudre : $a_G = (400 - 300) / 80 = 100 / 80 = 1{,}25$ m/s².",
+              "answers": [
+                {
+                  "content": "1.25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec ce frottement de 300 N, quelle est la vitesse de la caisse en bas de la rampe (L = 3,6 m), en m/s ?",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Méthode : $a_G = 1{,}25$ m/s² est constante, départ du repos. Relation $v^2 = 2\\,a_G\\,L$. Application : $v^2 = 2 \\times 1{,}25 \\times 3{,}6 = 9$, donc $v = 3$ m/s. Le frottement a réduit la vitesse d'arrivée de 6 à 3 m/s.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si le frottement valait f = 400 N, quelle serait l'accélération de la caisse lâchée sans vitesse ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 5 — Projeter sur $Ox$ : $P\\sin\\alpha - f = m\\,a_G$. Étape 6 — Résoudre : $400 - 400 = 80\\,a_G$, donc $a_G = 0$. Si la caisse avait déjà de la vitesse, elle descendrait à vitesse constante (principe d'inertie). Les autres propositions oublient le frottement, l'ajoutent, ou confondent newton et m/s².",
+              "answers": [
+                {
+                  "content": "0 m/s² : la somme des forces le long de la rampe est nulle",
+                  "correct": true
                 },
                 {
-                  "content": "Une voiture de 800 kg roule à 72 km/h sur une route droite et horizontale. Elle freine avec une accélération constante et s'arrête sur une distance de 40 m. Quelle est la valeur de la somme des forces extérieures pendant le freinage ?",
-                  "question_type": "single_choice",
-                  "explanation": "$72\\ \\text{km/h} = 20\\ \\text{m/s}$. Relation sans le temps : $0 - 20^2 = 2a \\times 40$, donc $a = -5\\ \\text{m/s}^2$ et $F = 800 \\times 5 = 4\\,000\\ \\text{N}$. L'erreur tentante est d'oublier le facteur 2 (8 000 N). Garder 72 sans convertir donne une valeur absurde de plus de 50 000 N.",
-                  "answers": [
-                    {
-                      "content": "$4\\,000\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$8\\,000\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$51\\,840\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\,000\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5 m/s², comme sans frottement",
+                  "correct": false
                 },
                 {
-                  "content": "Une cabine d'ascenseur de 500 kg descend. Juste avant l'arrêt, elle ralentit avec une accélération verticale de valeur $2\\ \\text{m/s}^2$. On prend $g = 10\\ \\text{N/kg}$ et on néglige les frottements. Quelle est la tension du câble pendant cette phase ?",
-                  "question_type": "single_choice",
-                  "explanation": "La cabine descend en ralentissant : $\\vec a_G$ est dirigée vers le haut. Axe vers le haut : $T - m g = m\\,a$, donc $T = 500 \\times (10 + 2) = 6\\,000\\ \\text{N}$. L'erreur tentante est de penser que l'accélération est vers le bas parce que la cabine descend : cela donne 4 000 N, valeur d'une cabine qui descend en accélérant.",
-                  "answers": [
-                    {
-                      "content": "$6\\,000\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4\\,000\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\,000\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1\\,000\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "10 m/s², en ajoutant le frottement",
+                  "correct": false
                 },
                 {
-                  "content": "Deux caisses A (6 kg) et B (4 kg), reliées par un fil horizontal, glissent sans frottement sur un sol horizontal. Une force horizontale de 20 N tire la caisse A, et A tire B par le fil. Quelle est la tension du fil ?",
-                  "question_type": "single_choice",
-                  "explanation": "Système {A + B} : le fil est intérieur, donc $20 = (6 + 4)\\,a$ et $a = 2\\ \\text{m/s}^2$. Système {B} : le fil est extérieur, donc $T = 4 \\times 2 = 8\\ \\text{N}$. L'erreur tentante est de croire que le fil transmet toute la force (20 N) : une partie sert à accélérer A. Appliquer le calcul à A au lieu de B donne 12 N.",
-                  "answers": [
-                    {
-                      "content": "$8\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$20\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$12\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide de 2 kg se déplace sur un axe horizontal $(Ox)$, dans un référentiel galiléen. Son équation horaire est $x(t) = 1{,}5\\,t^2 + 2\\,t$ (unités SI). Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "On dérive deux fois : $v = 3\\,t + 2$, puis $a = 3\\ \\text{m/s}^2$, constante. Donc $\\sum F = m\\,a = 2 \\times 3 = 6\\ \\text{N}$, constante. L'erreur la plus fréquente est de prendre le coefficient 1,5 pour l'accélération : dans $x = \\frac{1}{2}a\\,t^2 + \\ldots$, ce coefficient vaut $\\frac{a}{2}$.",
-                  "answers": [
-                    {
-                      "content": "La somme des forces extérieures a pour valeur $6\\ \\text{N}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La somme des forces extérieures est constante.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La somme des forces extérieures a pour valeur $3\\ \\text{N}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La somme des forces extérieures a pour valeur $4\\ \\text{N}$, car $m \\times v_0 = 2 \\times 2$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La somme des forces extérieures est nulle à $t = 0$, car le solide part de l'origine.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "400 m/s², en confondant force et accélération",
+                  "correct": false
                 }
               ]
             }
           ]
         },
         {
-          "name": "Le mouvement d'un solide sur un plan incliné",
-          "subtitle": "Avec ou sans frottement",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Représenter les forces qui s'exercent sur un solide posé sur un plan incliné et les projeter sur des axes adaptés.</li><li>Calculer l'accélération d'un solide qui monte ou descend une pente, avec ou sans frottement.</li><li>En déduire une vitesse, une distance, une durée ou la valeur d'une force de frottement.</li></ul><h2>L'image pour comprendre</h2><p><strong>La petite voiture dans la rue en pente.</strong> À Abobo, un enfant lâche sa petite voiture en bois en haut d'une rue en pente. Plus la rue est raide, plus la voiture prend vite de la vitesse. Sur une rue presque plate, elle avance à peine. Si la rue est en terre rugueuse, elle accélère moins que sur le goudron lisse.</p><p><strong>Le pont.</strong> La rue, c'est le <strong>plan incliné</strong>, qui fait un angle $\\alpha$ avec l'horizontale. La voiture, c'est le solide, résumé par son centre d'inertie G. Une partie seulement du poids tire la voiture vers le bas de la pente : c'est la composante $m g \\sin\\alpha$, d'autant plus grande que la rue est raide. L'autre partie, $m g \\cos\\alpha$, appuie la voiture contre la rue : elle est compensée par la réaction. La terre rugueuse, c'est la <strong>force de frottement</strong> $\\vec f$, qui s'oppose au mouvement.</p><p><strong>La limite de l'image.</strong> Une petite voiture roule sur ses roues ; dans les exercices, le solide glisse. Et dans la réalité, le frottement n'est pas toujours constant : on le suppose constant pour pouvoir calculer.</p><h2>Ce qu'il faut retenir</h2><p>On choisit un axe $(Ox)$ parallèle à la pente, orienté dans le sens du mouvement, et un axe $(Oy)$ perpendiculaire à la pente. L'angle entre le poids $\\vec P$ et l'axe $(Oy)$ vaut aussi $\\alpha$. La <em>réaction normale</em> $\\vec R_N$ est la partie de la réaction du plan perpendiculaire à la pente.</p><blockquote><p>Un solide de masse $m$ glisse sur un plan incliné d'angle $\\alpha$. La force de frottement $\\vec f$, de valeur $f$ constante, est parallèle à la pente et opposée au mouvement. Dans le référentiel terrestre, supposé galiléen, avec l'axe $(Ox)$ orienté dans le sens du mouvement :</p><ul><li>Réaction normale du plan : $R_N = m g \\cos\\alpha$, car le solide ne quitte pas le plan.</li><li>Le solide <strong>descend</strong> : $a = g \\sin\\alpha - \\dfrac{f}{m}$ ; sans frottement, $a = g \\sin\\alpha$.</li><li>Le solide <strong>monte</strong>, après avoir été lancé : $a = -\\left(g \\sin\\alpha + \\dfrac{f}{m}\\right)$ ; il ralentit.</li></ul><p>L'accélération est constante : le mouvement de G est rectiligne uniformément varié.</p></blockquote><h2>Exemple résolu</h2><p>Un solide de masse $m = 2\\ \\text{kg}$ est lâché sans vitesse en haut d'un plan incliné d'angle $\\alpha = 30^\\circ$. Il descend en subissant une force de frottement constante $f = 4\\ \\text{N}$. On prend $g = 10\\ \\text{N/kg}$. Calcule son accélération, la réaction normale, puis sa vitesse après 6 m de descente.</p><ol><li><strong>Système et référentiel.</strong> Le système est le solide ; le référentiel terrestre est supposé galiléen.</li><li><strong>Bilan des forces.</strong> Le poids $\\vec P$, la réaction normale $\\vec R_N$ du plan, la force de frottement $\\vec f$, dirigée vers le haut de la pente.</li><li><strong>Théorème.</strong> $\\vec P + \\vec R_N + \\vec f = m\\,\\vec a_G$.</li><li><strong>Projection sur $(Ox)$</strong>, orienté vers le bas de la pente : $m g \\sin\\alpha - f = m\\,a$, donc $a = 10 \\times 0{,}5 - \\dfrac{4}{2} = 3\\ \\text{m/s}^2$.</li><li><strong>Projection sur $(Oy)$</strong> : $R_N - m g \\cos\\alpha = 0$, donc $R_N = 2 \\times 10 \\times \\cos 30^\\circ \\approx 17{,}3\\ \\text{N}$.</li><li><strong>Vitesse après 6 m.</strong> Le mouvement est uniformément varié, avec $v_0 = 0$ : $v^2 = 2\\,a\\,d = 2 \\times 3 \\times 6 = 36$, donc $v = 6\\ \\text{m/s}$. Il a fallu $t = \\dfrac{v}{a} = 2\\ \\text{s}$.</li><li><strong>Comparaison.</strong> Sans frottement, on aurait $a = g \\sin\\alpha = 5\\ \\text{m/s}^2$, quelle que soit la masse.</li></ol><h2>Le piège à éviter</h2><p>Projeter le poids avec le mauvais angle, en écrivant $m g \\cos\\alpha$ le long de la pente. Vérifie avec un cas limite : si $\\alpha = 0$, le plan est horizontal et le solide n'est pas entraîné. La composante le long de la pente doit donc être nulle : c'est $\\sin 0 = 0$, et non $\\cos 0 = 1$.</p><p>Autre piège : quand le solide monte, le frottement est dirigé vers le bas de la pente, dans le même sens que la composante du poids. Les deux freinent le solide : on les ajoute.</p><h2>En une phrase</h2><p>Sur une pente d'angle $\\alpha$, le poids tire le solide le long de la pente avec $m g \\sin\\alpha$, la réaction compense $m g \\cos\\alpha$ et le frottement freine : j'en déduis une accélération constante.</p>",
-          "exercises": [
+          "title": "Une grue soulève un conteneur en trois phases",
+          "statement": "Une grue du port d'Abidjan soulève un conteneur de masse m = 2000 kg posé sur le quai. Le mouvement de G, vertical, se fait en trois phases : accélération constante de 0 à 2 m/s en 4 s ; vitesse constante de 2 m/s pendant 10 s ; freinage uniforme de 2 m/s à 0 en 4 s. On prend g = 10 N/kg et le référentiel du quai, supposé galiléen. La courbe v(t) est tracée sur la figure.",
+          "exercise_type": "evaluation",
+          "figure": "vitesse-grue",
+          "questions": [
             {
-              "title": "Comprendre — Les forces sur un plan incliné",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelle est l'accélération du conteneur pendant la phase de démarrage (de 0 à 4 s), en m/s² ?",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Méthode : sur la courbe, la vitesse passe de 0 à 2 m/s en 4 s, en ligne droite : l'accélération est constante. $a_1 = \\dfrac{\\Delta v}{\\Delta t} = \\dfrac{2 - 0}{4} = 0{,}5$ m/s², positive car la vitesse vers le haut augmente.",
+              "answers": [
                 {
-                  "content": "Un solide de masse $m$ est posé sur un plan incliné d'angle $\\alpha$ avec l'horizontale. Quelle est la valeur de la composante de son poids parallèle à la pente ?",
-                  "question_type": "single_choice",
-                  "explanation": "La composante du poids le long de la pente vaut $m g \\sin\\alpha$. Vérifie avec $\\alpha = 0$ : sur un plan horizontal, le poids ne tire pas le long du plan, et $\\sin 0 = 0$. L'erreur la plus fréquente est d'écrire $m g \\cos\\alpha$ : c'est la composante perpendiculaire à la pente, compensée par la réaction.",
-                  "answers": [
-                    {
-                      "content": "$m g \\sin\\alpha$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$m g \\cos\\alpha$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$m g$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$m g \\tan\\alpha$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide est lâché sans vitesse sur un plan incliné, et les frottements sont négligeables. Son accélération ne dépend pas de sa masse.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Sans frottement, $m g \\sin\\alpha = m\\,a$, donc $a = g \\sin\\alpha$ : la masse se simplifie. Un petit et un gros solide lâchés sur la même pente lisse descendent ensemble. L'erreur tentante est de croire que le plus lourd descend plus vite : il est plus tiré, mais il est aussi plus difficile à mettre en mouvement.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un enfant lâche sa petite voiture en haut d'une rue en pente. Quelles correspondances entre cette image et l'étude d'un plan incliné sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Une rue plus raide correspond à un angle $\\alpha$ plus grand, donc à une composante $m g \\sin\\alpha$ plus grande. La terre rugueuse correspond au frottement. L'erreur la plus fréquente est de croire que la partie du poids qui appuie contre la rue fait accélérer : elle est compensée par la réaction. Sur une rue plate, rien ne tire la voiture le long du sol.",
-                  "answers": [
-                    {
-                      "content": "Plus la rue est raide, plus $\\alpha$ est grand, et plus la composante $m g \\sin\\alpha$ est grande.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La terre rugueuse de la rue correspond à la force de frottement, opposée au mouvement.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La partie du poids qui appuie la voiture contre la rue la fait accélérer.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sur une rue parfaitement plate, la voiture lâchée sans vitesse se met à accélérer.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide glisse sur un plan incliné d'angle $\\alpha$. Il subit son poids, la réaction du plan et éventuellement un frottement parallèle à la pente. Quelle est la valeur de la réaction normale $R_N$ du plan ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le solide reste sur le plan : sur l'axe perpendiculaire à la pente, $R_N - m g \\cos\\alpha = 0$, donc $R_N = m g \\cos\\alpha$. L'erreur la plus fréquente est d'écrire $R_N = m g$ comme sur un sol horizontal : sur une pente, la réaction ne compense qu'une partie du poids.",
-                  "answers": [
-                    {
-                      "content": "$R_N = m g \\cos\\alpha$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$R_N = m g$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$R_N = m g \\sin\\alpha$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$R_N = 0$, car le solide glisse",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide est lancé vers le haut d'un plan incliné ; il monte en subissant des frottements. Quels sont la direction et le sens de son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "Pendant la montée, la composante du poids le long de la pente et le frottement sont tous deux dirigés vers le bas de la pente. Leur somme, donc $\\vec a_G$, est parallèle à la pente, vers le bas : le solide ralentit. L'erreur tentante est de donner à l'accélération le sens du mouvement : ce n'est vrai que si le solide accélère.",
-                  "answers": [
-                    {
-                      "content": "Parallèle à la pente, vers le bas : le solide ralentit.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Parallèle à la pente, vers le haut, dans le sens du mouvement.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Verticale, vers le bas, comme le poids.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Nulle, tant que le solide monte.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "0.5",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer une accélération et une vitesse sur un plan incliné",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelle est la tension du câble pendant le démarrage, en N ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Définir : système = le conteneur, référentiel = le quai (galiléen). Étape 2 — Faire le bilan : poids $P = 20000$ N, tension $T_1$. Étape 3 — Écrire le théorème : $\\vec{P} + \\vec{T}_1 = m\\,\\vec{a}_G$. Étape 4 — Projeter vers le haut : $T_1 - mg = m\\,a_1$. Étape 5 — Résoudre : $T_1 = m\\,(g + a_1) = 2000 \\times 10{,}5 = 21000$ N.",
+              "answers": [
                 {
-                  "content": "Un solide glisse sans frottement vers le bas d'un plan incliné d'angle $30^\\circ$. On prend $g = 10\\ \\text{m/s}^2$. Quelle est la valeur de son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans frottement, $a = g \\sin\\alpha = 10 \\times \\sin 30^\\circ = 10 \\times 0{,}5 = 5\\ \\text{m/s}^2$. L'erreur tentante est d'utiliser le cosinus, ce qui donne environ $8{,}7\\ \\text{m/s}^2$. Une autre est de répondre $g$ : ce serait une chute verticale, pas une glissade sur une pente.",
-                  "answers": [
-                    {
-                      "content": "$5\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$8{,}7\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$10\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}5\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide de 4 kg descend un plan incliné d'angle $30^\\circ$. Il subit une force de frottement constante de 8 N, opposée au mouvement. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "Projection le long de la pente, vers le bas : $a = g \\sin\\alpha - \\dfrac{f}{m} = 5 - \\dfrac{8}{4} = 3\\ \\text{m/s}^2$. L'erreur tentante est d'ignorer le frottement ($5\\ \\text{m/s}^2$) ou de l'ajouter ($7\\ \\text{m/s}^2$) : il freine la descente, il se retranche. Le cosinus donne environ $6{,}7\\ \\text{m/s}^2$.",
-                  "answers": [
-                    {
-                      "content": "$3\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$5\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$7\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$6{,}7\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide de 2 kg est posé sur un plan incliné d'angle $60^\\circ$. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de la réaction normale du plan ?",
-                  "question_type": "single_choice",
-                  "explanation": "$R_N = m g \\cos\\alpha = 2 \\times 10 \\times \\cos 60^\\circ = 20 \\times 0{,}5 = 10\\ \\text{N}$. L'erreur tentante est d'utiliser $\\sin 60^\\circ$, ce qui donne environ 17,3 N, ou de prendre tout le poids (20 N). Plus la pente est raide, plus la réaction normale est petite.",
-                  "answers": [
-                    {
-                      "content": "$10\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$17{,}3\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$20\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide part du repos en haut d'un plan incliné long de 4 m. Il descend avec une accélération constante de $2\\ \\text{m/s}^2$. Quelle est sa vitesse en bas du plan ?",
-                  "question_type": "single_choice",
-                  "explanation": "Relation sans le temps : $v^2 - 0 = 2\\,a\\,d = 2 \\times 2 \\times 4 = 16$, donc $v = 4\\ \\text{m/s}$. L'erreur la plus fréquente est d'oublier la racine carrée et de répondre 16 m/s. Oublier le facteur 2 donne $\\sqrt 8 \\approx 2{,}8\\ \\text{m/s}$.",
-                  "answers": [
-                    {
-                      "content": "$4\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$16\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2{,}8\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$8\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide est lancé vers le haut d'un plan incliné d'angle $30^\\circ$, sans frottement, avec une vitesse de 5 m/s. On prend $g = 10\\ \\text{m/s}^2$. Quelle distance parcourt-il le long de la pente avant de s'arrêter ?",
-                  "question_type": "single_choice",
-                  "explanation": "Axe dans le sens de la montée : $a = -g \\sin\\alpha = -5\\ \\text{m/s}^2$. Puis $0 - 5^2 = 2 \\times (-5) \\times d$, donc $d = 2{,}5\\ \\text{m}$. L'erreur tentante est de prendre $a = -g$ comme pour une chute verticale (1,25 m) ; une autre est d'oublier le facteur 2 (5 m).",
-                  "answers": [
-                    {
-                      "content": "$2{,}5\\ \\text{m}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1{,}25\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1{,}44\\ \\text{m}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "21000",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Étudier le mouvement d'un solide sur un plan incliné",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Quelle est la tension du câble pendant la phase à vitesse constante, en N ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Méthode : vitesse constante en ligne droite, donc $a_G = 0$ (principe d'inertie). Projection vers le haut : $T_2 - mg = 0$, donc $T_2 = mg = 2000 \\times 10 = 20000$ N. Le conteneur monte, mais $T_2$ est égale au poids : c'est l'accélération qui compte, pas le mouvement.",
+              "answers": [
                 {
-                  "content": "Un solide de 500 g est lâché sans vitesse en haut d'un plan incliné d'angle $30^\\circ$, long de 6 m. Il glisse en subissant une force de frottement constante de 1 N. On prend $g = 10\\ \\text{N/kg}$ ; le référentiel terrestre est galiléen. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "$a = 10 \\times 0{,}5 - \\dfrac{1}{0{,}5} = 3\\ \\text{m/s}^2$. En bas : $v^2 = 2 \\times 3 \\times 6 = 36$, donc $v = 6\\ \\text{m/s}$, atteinte en $t = \\dfrac{6}{3} = 2\\ \\text{s}$. $R_N = 5 \\cos 30^\\circ \\approx 4{,}3\\ \\text{N}$, pas 5 N. L'erreur la plus fréquente est d'oublier le frottement et de garder $a = 5\\ \\text{m/s}^2$.",
-                  "answers": [
-                    {
-                      "content": "L'accélération du solide vaut $3\\ \\text{m/s}^2$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le solide arrive en bas du plan avec une vitesse de $6\\ \\text{m/s}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le solide met $2\\ \\text{s}$ pour descendre le plan.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'accélération vaut $5\\ \\text{m/s}^2$, car la masse n'intervient pas.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La réaction normale du plan vaut $5\\ \\text{N}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le mouvement est rectiligne uniforme, car le frottement compense le poids.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide de 2 kg descend un plan incliné d'angle $30^\\circ$. On mesure une accélération constante de $4\\ \\text{m/s}^2$. On prend $g = 10\\ \\text{N/kg}$. Quelle est la valeur de la force de frottement, supposée constante ?",
-                  "question_type": "single_choice",
-                  "explanation": "Projection vers le bas de la pente : $m g \\sin\\alpha - f = m\\,a$, donc $f = 2 \\times 10 \\times 0{,}5 - 2 \\times 4 = 10 - 8 = 2\\ \\text{N}$. L'erreur tentante est de répondre 8 N, en prenant $m\\,a$ pour le frottement : $m\\,a$ est la somme des forces, pas une force du bilan. Le cosinus donne 9,3 N.",
-                  "answers": [
-                    {
-                      "content": "$2\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$8\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$18\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$9{,}3\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide de 1 kg est lancé vers le haut d'un plan incliné d'angle $30^\\circ$ avec une vitesse de 8 m/s. Une force de frottement constante de 3 N s'oppose au mouvement. On prend $g = 10\\ \\text{N/kg}$. Quelle distance parcourt-il avant de s'arrêter ?",
-                  "question_type": "single_choice",
-                  "explanation": "En montée, poids et frottement freinent tous deux : $a = -\\left(5 + \\dfrac{3}{1}\\right) = -8\\ \\text{m/s}^2$. Puis $0 - 8^2 = 2 \\times (-8) \\times d$, donc $d = 4\\ \\text{m}$. L'erreur tentante est de retrancher le frottement comme en descente ($a = -2$, d'où 16 m). Oublier le frottement donne 6,4 m.",
-                  "answers": [
-                    {
-                      "content": "$4\\ \\text{m}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$6{,}4\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$16\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$3{,}2\\ \\text{m}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide de 3 kg est maintenu immobile sur un plan incliné d'angle $30^\\circ$ par un fil parallèle à la pente. Les frottements sont négligeables. On prend $g = 10\\ \\text{N/kg}$. Quelle est la tension du fil ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le solide est au repos : $\\vec P + \\vec R_N + \\vec T = \\vec 0$. Le long de la pente : $T = m g \\sin\\alpha = 3 \\times 10 \\times 0{,}5 = 15\\ \\text{N}$. L'erreur tentante est d'utiliser le cosinus (environ 26 N) ou de prendre tout le poids (30 N) : le fil ne retient que la partie du poids parallèle à la pente.",
-                  "answers": [
-                    {
-                      "content": "$15\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$26\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$30\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0\\ \\text{N}$, car le solide est immobile",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide de masse $m$ descend un plan incliné d'angle $20^\\circ$ à vitesse constante. Le référentiel terrestre est galiléen. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Vitesse constante en ligne droite : mouvement rectiligne uniforme, donc $\\sum \\vec F_{ext} = \\vec 0$. Le long de la pente, le frottement compense $m g \\sin 20^\\circ$. L'erreur la plus fréquente est de croire qu'il n'y a pas de frottement : sans lui, le solide accélérerait avec $a = g \\sin 20^\\circ$. La réaction normale vaut $m g \\cos 20^\\circ$, pas $m g$.",
-                  "answers": [
-                    {
-                      "content": "La somme des forces extérieures appliquées au solide est nulle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La force de frottement a pour valeur $m g \\sin 20^\\circ$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il n'y a pas de frottement, sinon le solide ralentirait.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'accélération du solide vaut $g \\sin 20^\\circ$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La réaction normale du plan vaut $m g$.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "20000",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Quelle est la tension du câble pendant le freinage, en N ? Pendant cette phase, la vitesse vers le haut diminue de 2 m/s à 0 en 4 s.",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Méthode : $a_3 = \\dfrac{0 - 2}{4} = -0{,}5$ m/s² (négative : accélération dirigée vers le bas). Projection vers le haut : $T_3 - mg = m\\,a_3$. Résolution : $T_3 = m\\,(g + a_3) = 2000 \\times 9{,}5 = 19000$ N, inférieure au poids.",
+              "answers": [
+                {
+                  "content": "19000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la hauteur totale dont le conteneur est monté, en m ? Elle est égale à l'aire sous la courbe v(t).",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Méthode : la hauteur est l'aire sous la courbe $v(t)$. Phase 1 (triangle) : $\\frac{1}{2} \\times 4 \\times 2 = 4$ m. Phase 2 (rectangle) : $2 \\times 10 = 20$ m. Phase 3 (triangle) : $\\frac{1}{2} \\times 4 \\times 2 = 4$ m. Total : $4 + 20 + 4 = 28$ m.",
+              "answers": [
+                {
+                  "content": "28",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pendant laquelle des trois phases la tension du câble est-elle la plus grande ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : $T = m\\,(g + a_G)$ dépend de l'accélération, pas de la vitesse. Valeurs : $T_1 = 21000$ N (avec $a_1 = +0{,}5$), $T_2 = 20000$ N ($a_2 = 0$), $T_3 = 19000$ N ($a_3 = -0{,}5$). La plus grande est celle du démarrage, la plus petite celle du freinage.",
+              "answers": [
+                {
+                  "content": "Pendant le démarrage",
+                  "correct": true
+                },
+                {
+                  "content": "Pendant la vitesse constante, car le conteneur monte le plus vite",
+                  "correct": false
+                },
+                {
+                  "content": "Pendant le freinage, car la grue retient le conteneur",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est la même pendant les trois phases",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Par le théorème de l'énergie cinétique (acquis de 1ère) entre le départ et l'arrêt, la variation d'énergie cinétique est nulle. Calcule alors le travail de la tension du câble sur toute la montée, en J (hauteur 28 m).",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode : théorème de l'énergie cinétique : $\\Delta E_c = W(\\vec{P}) + W(\\vec{T})$. Le conteneur part du repos et finit au repos : $\\Delta E_c = 0$. Le travail du poids vaut $-mgh = -20000 \\times 28 = -560000$ J. Donc $W(\\vec{T}) = +560000$ J. Contrôle phase par phase : $21000 \\times 4 + 20000 \\times 20 + 19000 \\times 4 = 84000 + 400000 + 76000 = 560000$ J.",
+              "answers": [
+                {
+                  "content": "560000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un ouvrier affirme : « Pendant la phase à vitesse constante, le conteneur monte, donc la tension du câble est plus grande que son poids. » Cette affirmation est-elle juste ? Justifie ta réponse avec le théorème du centre d'inertie.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Applique le théorème $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$ au conteneur dans le référentiel du quai",
+                "Constate que la vitesse constante en ligne droite donne $a_G = 0$",
+                "Conclut que $T = P = 20000$ N : l'affirmation est fausse",
+                "Précise que seule l'accélération, pas la montée, fait varier T"
+              ],
+              "explanation": "Corrigé modèle : l'affirmation est fausse. Dans le référentiel du quai (galiléen), j'applique le théorème du centre d'inertie au conteneur : $\\vec{P} + \\vec{T} = m\\,\\vec{a}_G$. Pendant cette phase la vitesse est constante et le mouvement rectiligne, donc $a_G = 0$. En projetant sur l'axe vertical vers le haut, $T - mg = 0$, donc $T = mg = 20000$ N : la tension est égale au poids. La tension n'est supérieure au poids que lorsque le conteneur accélère vers le haut. Répartition : 0,5 point pour le théorème, 0,5 pour $a_G = 0$, 0,5 pour $T = P$ et la conclusion « fausse », 0,5 pour l'explication que seule l'accélération fait varier T.",
+              "answers": [],
+              "starter": "Dans le référentiel du quai, galiléen…"
             }
           ]
         },
         {
-          "name": "Le mouvement circulaire uniforme",
-          "subtitle": "Accélération centripète, véhicule dans un virage plat ou relevé, et pendule conique",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Appliquer le théorème du centre d'inertie à un solide en mouvement circulaire uniforme.</li><li>Trouver la force qui fait tourner un véhicule dans un virage plat ou relevé, et calculer une vitesse limite ou l'angle d'un virage.</li><li>Étudier un pendule conique : tension du fil, angle du fil et vitesse angulaire.</li></ul><h2>L'image pour comprendre</h2><p><strong>Image 1 — La pierre au bout de la ficelle.</strong> Tu fais tourner au-dessus de ta tête une pierre attachée à une ficelle, comme un berger avec sa fronde. Pour qu'elle tourne, ta main doit tirer sans arrêt la ficelle vers elle. Si la ficelle casse, la pierre ne part pas en s'éloignant de ta main : elle file tout droit, dans la direction qu'elle avait à cet instant.</p><p><strong>Le pont.</strong> Ta main, c'est le <strong>centre</strong> du cercle. La ficelle qui tire vers ta main, c'est la force dirigée vers le centre, appelée force <strong>centripète</strong>. Elle ne change pas la valeur de la vitesse, elle change sa direction : c'est l'<strong>accélération centripète</strong>. La pierre qui file tout droit quand la ficelle casse, c'est le <strong>principe de l'inertie</strong> : sans force, G va en ligne droite.</p><p><strong>La limite de l'image.</strong> Ta main bouge un peu et la ficelle n'est pas parfaitement horizontale. Dans l'étude, le centre est fixe et le cercle est dans un plan.</p><p><strong>Image 2 — Le gbaka dans le virage.</strong> Sur une route plate, un gbaka prend un virage. Par temps sec, ses pneus « accrochent » la route et il tourne. Sur une route mouillée ou couverte de sable, s'il va trop vite, il dérape vers l'extérieur. Sur l'autoroute, les grands virages sont <strong>relevés</strong> : la route penche vers l'intérieur, comme un cycliste qui se penche pour tourner.</p><p><strong>Le pont.</strong> L'accroche des pneus, c'est la <strong>force de frottement latérale</strong> exercée par la route : sur un virage plat, c'est elle qui joue le rôle de la ficelle. Le dérapage arrive quand la route ne peut plus fournir une force assez grande. Sur un virage relevé, la réaction de la route est penchée vers l'intérieur : une partie de cette réaction tire le véhicule vers le centre, même sans frottement.</p><p><strong>La limite de l'image.</strong> Les passagers se sentent « poussés vers l'extérieur ». Aucune force ne les pousse ainsi : leur corps tend à continuer tout droit, et c'est le siège ou la portière qui les pousse vers l'intérieur. Dans un référentiel galiléen, la « force centrifuge » n'existe pas.</p><h2>Ce qu'il faut retenir</h2><p>Dans un <em>mouvement circulaire uniforme</em> (MCU) de rayon $r$, la valeur $v$ de la vitesse est constante. La <em>vitesse angulaire</em> $\\omega$, en $\\text{rad/s}$, est l'angle balayé par seconde : $v = r\\,\\omega$. Un virage <em>relevé</em> est incliné d'un angle $\\alpha$ vers l'intérieur.</p><blockquote><p><strong>Accélération du MCU</strong> : $\\vec a_G$ est dirigée vers le centre du cercle (centripète), de valeur $a_G = \\dfrac{v^2}{r} = r\\,\\omega^2$.</p><p><strong>Théorème du centre d'inertie appliqué au MCU</strong> : dans un référentiel galiléen, la somme des forces extérieures est dirigée vers le centre, de valeur $\\sum F = m\\,\\dfrac{v^2}{r}$. Si cette somme disparaît, G part en ligne droite, tangentiellement au cercle.</p><p><strong>Virage plat</strong> : la force de frottement latérale est centripète, $f = m\\,\\dfrac{v^2}{r}$. Si la route peut fournir au plus $f_{max}$, la vitesse maximale est $v_{max} = \\sqrt{\\dfrac{f_{max}\\,r}{m}}$.</p><p><strong>Virage relevé d'angle $\\alpha$, sans frottement latéral</strong> : $R\\cos\\alpha = m g$ et $R\\sin\\alpha = m\\,\\dfrac{v^2}{r}$, d'où $\\tan\\alpha = \\dfrac{v^2}{r\\,g}$.</p><p><strong>Pendule conique</strong> : une bille de masse $m$, au bout d'un fil de longueur $L$, tourne à la vitesse angulaire $\\omega$ dans un plan horizontal ; le fil fait l'angle $\\theta$ avec la verticale. Le rayon vaut $r = L\\sin\\theta$, et : $T = m\\,\\omega^2 L$ ; $\\cos\\theta = \\dfrac{g}{\\omega^2 L}$. Ce mouvement n'est possible que si $\\omega^2 > \\dfrac{g}{L}$.</p></blockquote><h2>Exemple résolu</h2><h3>Un pendule conique</h3><p>Une bille de masse $m = 100\\ \\text{g}$, attachée à un fil de longueur $L = 50\\ \\text{cm}$, tourne dans un plan horizontal à $\\omega = 5\\ \\text{rad/s}$. On prend $g = 10\\ \\text{N/kg}$ et on néglige l'air. Calcule l'angle du fil, la tension, le rayon et la vitesse.</p><ol><li><strong>Système, référentiel, forces.</strong> La bille, dans le référentiel terrestre supposé galiléen. Elle subit son poids $\\vec P$ (vertical) et la tension $\\vec T$ (le long du fil, vers le point d'attache).</li><li><strong>Théorème.</strong> $\\vec P + \\vec T = m\\,\\vec a_G$, avec $\\vec a_G$ horizontale, vers le centre, de valeur $r\\,\\omega^2$.</li><li><strong>Projection horizontale</strong> (vers le centre) : $T\\sin\\theta = m\\,r\\,\\omega^2 = m\\,L\\sin\\theta\\,\\omega^2$, donc $T = m\\,\\omega^2 L = 0{,}1 \\times 25 \\times 0{,}5 = 1{,}25\\ \\text{N}$.</li><li><strong>Projection verticale</strong> : G ne monte ni ne descend, donc $T\\cos\\theta - m g = 0$ et $\\cos\\theta = \\dfrac{m g}{T} = \\dfrac{1}{1{,}25} = 0{,}8$, soit $\\theta \\approx 37^\\circ$.</li><li><strong>Rayon et vitesse.</strong> $\\sin\\theta = 0{,}6$, donc $r = 0{,}5 \\times 0{,}6 = 0{,}3\\ \\text{m}$ et $v = r\\,\\omega = 1{,}5\\ \\text{m/s}$.</li></ol><h3>Un virage relevé</h3><p>Un virage de rayon $r = 100\\ \\text{m}$ doit être pris à $72\\ \\text{km/h}$ sans frottement latéral. On convertit : $v = 20\\ \\text{m/s}$. Alors $\\tan\\alpha = \\dfrac{20^2}{100 \\times 10} = 0{,}4$, soit $\\alpha \\approx 22^\\circ$.</p><h2>Le piège à éviter</h2><p>Ajouter une « force centrifuge » dans le bilan des forces, pour « équilibrer » la force centripète. Dans un référentiel galiléen, cette force n'existe pas : elle n'a pas d'auteur. Et un solide en MCU n'est pas en équilibre : son accélération n'est pas nulle.</p><p>Pour repérer l'erreur, vérifie ta somme des forces : elle doit être dirigée vers le centre et valoir $m\\,\\dfrac{v^2}{r}$, jamais zéro. Pour le pendule conique, n'oublie pas non plus que le rayon est $L\\sin\\theta$, et non la longueur $L$ du fil.</p><h2>En une phrase</h2><p>Pour tourner à vitesse constante, il faut une somme de forces dirigée vers le centre, de valeur $m\\,\\dfrac{v^2}{r}$ : la tension d'un fil, le frottement de la route ou la réaction d'un virage relevé.</p>",
-          "exercises": [
+          "title": "Un treuil tire une caisse sur une rampe",
+          "statement": "Pour charger un camion au port d'Abidjan, un treuil tire une caisse de masse m = 100 kg le long d'une rampe inclinée de α = 30° sur l'horizontale, par un câble parallèle à la rampe. Le frottement est une force constante f = 300 N, parallèle à la rampe et opposée au mouvement. On prend g = 10 N/kg et sin 30° = 0,5. Référentiel : le sol (la rampe), supposé galiléen.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Accélération et forces dans un mouvement circulaire uniforme",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Quelle est l'intensité de la composante du poids parallèle à la rampe, en N ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Définir : système = la caisse, référentiel = le sol (galiléen). Étape 2 — Faire le bilan : poids $P = mg = 1000$ N. Étape 3 — Choisir le repère : $Ox$ le long de la rampe. Étape 5 — Projeter : composante $P\\sin\\alpha = 1000 \\times 0{,}5 = 500$ N.",
+              "answers": [
                 {
-                  "content": "Dans un mouvement circulaire uniforme, la valeur de la vitesse est constante. Donc l'accélération du centre d'inertie est nulle.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. La valeur de la vitesse est constante, mais sa direction change sans cesse. L'accélération est donc non nulle : elle est dirigée vers le centre et vaut $\\dfrac{v^2}{r}$. L'erreur tentante est de confondre « vitesse constante en valeur » et « vecteur vitesse constant », comme la pierre de la fronde qu'il faut tirer sans arrêt.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Un solide décrit un cercle de rayon $r$ à vitesse de valeur $v$ constante. Comment est son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "En MCU, $\\vec a_G$ est dirigée vers le centre (centripète) et vaut $\\dfrac{v^2}{r}$. L'erreur la plus fréquente est de la croire nulle parce que la vitesse est constante en valeur. Elle n'est pas tangente : une composante tangente changerait la valeur de la vitesse.",
-                  "answers": [
-                    {
-                      "content": "Dirigée vers le centre du cercle, de valeur $\\dfrac{v^2}{r}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Nulle, car la vitesse est constante",
-                      "correct": false
-                    },
-                    {
-                      "content": "Tangente au cercle, de valeur $\\dfrac{v^2}{r}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dirigée vers l'extérieur du cercle, de valeur $\\dfrac{v^2}{r}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Tu fais tourner au-dessus de ta tête une pierre attachée à une ficelle, dans un plan horizontal. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La tension de la ficelle est la force centripète qui fait tourner la pierre. Si la ficelle casse, la pierre n'a plus de force horizontale : elle part tout droit, tangentiellement au cercle. L'erreur la plus fréquente est d'imaginer une force centrifuge qui la tirerait vers l'extérieur : cette force n'a pas d'auteur.",
-                  "answers": [
-                    {
-                      "content": "La tension de la ficelle est la force dirigée vers le centre qui fait tourner la pierre.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Si la ficelle casse, la pierre part en ligne droite, tangentiellement au cercle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Si la ficelle casse, la pierre part dans la direction de la ficelle, en s'éloignant de la main.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une force centrifuge tire la pierre vers l'extérieur et compense la tension.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une voiture prend un virage à vitesse constante sur une route horizontale (virage plat). Quelle force la fait tourner ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sur un virage plat, le poids et la réaction normale sont verticaux : ils se compensent. La seule force horizontale dirigée vers le centre est le frottement latéral de la route sur les pneus. L'erreur tentante est de citer la force centrifuge, qui n'existe pas dans un référentiel galiléen. Sans frottement (route mouillée ou sablée), la voiture dérape.",
-                  "answers": [
-                    {
-                      "content": "La force de frottement latérale exercée par la route sur les pneus, dirigée vers le centre du virage",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le poids de la voiture",
-                      "correct": false
-                    },
-                    {
-                      "content": "La force centrifuge",
-                      "correct": false
-                    },
-                    {
-                      "content": "La réaction normale de la route, verticale",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une bille accrochée à un fil tourne à vitesse angulaire constante dans un plan horizontal : c'est un pendule conique. Le fil, de longueur $L$, fait un angle $\\theta$ avec la verticale. On néglige l'air. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La bille subit seulement son poids et la tension. Leur somme est horizontale, vers le centre, car c'est la direction de $\\vec a_G$. Le rayon vaut $L\\sin\\theta$. L'erreur la plus fréquente est de croire que la tension compense le poids : seule sa partie verticale le compense, sa partie horizontale fait tourner la bille.",
-                  "answers": [
-                    {
-                      "content": "La bille subit deux forces : son poids et la tension du fil.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La somme de ces deux forces est horizontale, dirigée vers le centre du cercle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le rayon du cercle vaut $L\\sin\\theta$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La tension du fil compense exactement le poids de la bille.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le rayon du cercle est égal à la longueur $L$ du fil.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La bille subit aussi une force centrifuge qui équilibre la tension.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "500",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer dans un mouvement circulaire uniforme",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "La caisse monte à vitesse constante. Quelle est la tension du câble, en N ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Faire le bilan : poids, réaction normale, tension $T$ (vers le haut de la rampe), frottement $f = 300$ N (vers le bas, opposé au mouvement). Étape 3 — Axe $Ox$ vers le haut de la rampe. Étape 4 — Écrire le théorème. Étape 5 — Projeter sur $Ox$ : $T - P\\sin\\alpha - f = m\\,a_G$ avec $a_G = 0$ (vitesse constante). Étape 6 — Résoudre : $T = 500 + 300 = 800$ N.",
+              "answers": [
                 {
-                  "content": "Un mobile décrit un cercle de rayon $2\\ \\text{m}$ à la vitesse constante de $4\\ \\text{m/s}$. Quelle est la valeur de son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "$a = \\dfrac{v^2}{r} = \\dfrac{4^2}{2} = 8\\ \\text{m/s}^2$. L'erreur tentante est d'oublier le carré ($\\dfrac{4}{2} = 2$) ou de multiplier par le rayon au lieu de diviser (32). Une autre est de répondre 0 parce que la vitesse est constante : sa direction change.",
-                  "answers": [
-                    {
-                      "content": "$8\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$32\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une bille de 200 g, attachée à un fil horizontal dont l'autre bout est fixé au centre d'une table horizontale sans frottement, décrit un cercle de rayon $0{,}5\\ \\text{m}$ à $3\\ \\text{m/s}$. Quelle est la tension du fil ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le poids et la réaction de la table se compensent. La tension est la seule force horizontale : $T = m\\,\\dfrac{v^2}{r} = 0{,}2 \\times \\dfrac{9}{0{,}5} = 3{,}6\\ \\text{N}$. L'erreur tentante est d'oublier le carré de la vitesse (1,2 N) ou de prendre le poids (2 N) : ici, le fil ne porte pas la bille, il la fait tourner.",
-                  "answers": [
-                    {
-                      "content": "$3{,}6\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$1{,}2\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}9\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une voiture de 1 000 kg prend un virage plat de rayon $50\\ \\text{m}$ à $54\\ \\text{km/h}$. Quelle force de frottement latérale la route doit-elle exercer ?",
-                  "question_type": "single_choice",
-                  "explanation": "On convertit : $54\\ \\text{km/h} = 15\\ \\text{m/s}$. Puis $f = m\\,\\dfrac{v^2}{r} = 1\\,000 \\times \\dfrac{225}{50} = 4\\,500\\ \\text{N}$. L'erreur tentante est de garder 54 sans convertir, ce qui donne 58 320 N. Oublier le carré donne 300 N.",
-                  "answers": [
-                    {
-                      "content": "$4\\,500\\ \\text{N}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$58\\,320\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$300\\ \\text{N}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$10\\,000\\ \\text{N}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un virage relevé de rayon $80\\ \\text{m}$ est construit pour être pris à $72\\ \\text{km/h}$ sans frottement latéral. On prend $g = 10\\ \\text{m/s}^2$. Que vaut la tangente de l'angle $\\alpha$ du virage ?",
-                  "question_type": "single_choice",
-                  "explanation": "$v = 20\\ \\text{m/s}$, donc $\\tan\\alpha = \\dfrac{v^2}{r\\,g} = \\dfrac{400}{80 \\times 10} = 0{,}5$. L'erreur tentante est d'inverser la formule ($\\dfrac{r\\,g}{v^2} = 2$) : vérifie qu'un virage pris plus vite doit être plus relevé, donc $v^2$ est au numérateur.",
-                  "answers": [
-                    {
-                      "content": "$0{,}5$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}9$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}25$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une bille, au bout d'un fil de longueur $40\\ \\text{cm}$, tourne en pendule conique à la vitesse angulaire $\\omega = 10\\ \\text{rad/s}$. On prend $g = 10\\ \\text{m/s}^2$. Que vaut $\\cos\\theta$, où $\\theta$ est l'angle du fil avec la verticale ?",
-                  "question_type": "single_choice",
-                  "explanation": "$\\cos\\theta = \\dfrac{g}{\\omega^2 L} = \\dfrac{10}{100 \\times 0{,}4} = 0{,}25$. L'erreur tentante est d'inverser la fraction (4) ou d'oublier le carré de $\\omega$ (2,5). Un cosinus plus grand que 1 est impossible : c'est un bon moyen de repérer l'erreur.",
-                  "answers": [
-                    {
-                      "content": "$0{,}25$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2{,}5$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}5$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "800",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Étudier un virage et un pendule conique",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Au démarrage, la caisse monte avec une accélération de 0,5 m/s² le long de la rampe. Quelle est la tension du câble, en N ?",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 0,
+              "explanation": "Méthode (même projection que ci-dessus) : $T - P\\sin\\alpha - f = m\\,a_G$ avec $a_G = +0{,}5$ m/s² vers le haut de la rampe. Résolution : $T = m\\,a_G + P\\sin\\alpha + f = 100 \\times 0{,}5 + 500 + 300 = 850$ N, plus grande qu'à vitesse constante. On ne peut pas reprendre 800 N : l'accélération ajoute $m\\,a_G = 50$ N.",
+              "answers": [
                 {
-                  "content": "Une bille de 50 g, au bout d'un fil de longueur $1\\ \\text{m}$, tourne en pendule conique. Le fil fait un angle de $60^\\circ$ avec la verticale. On prend $g = 10\\ \\text{N/kg}$ et on néglige l'air. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Vertical : $T\\cos 60^\\circ = m g$, donc $T = \\dfrac{0{,}5}{0{,}5} = 1\\ \\text{N}$. Rayon : $r = \\sin 60^\\circ \\approx 0{,}87\\ \\text{m}$. Et $T = m\\,\\omega^2 L$ donne $\\omega^2 = 20$, soit $\\omega \\approx 4{,}5\\ \\text{rad/s}$. L'erreur la plus fréquente est de croire que la tension vaut le poids (0,5 N), ou d'oublier la racine carrée.",
-                  "answers": [
-                    {
-                      "content": "La tension du fil vaut $1\\ \\text{N}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le rayon du cercle vaut environ $0{,}87\\ \\text{m}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La vitesse angulaire vaut environ $4{,}5\\ \\text{rad/s}$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La tension du fil vaut $0{,}5\\ \\text{N}$, comme le poids.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le rayon du cercle vaut $1\\ \\text{m}$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La vitesse angulaire vaut $20\\ \\text{rad/s}$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une moto et son pilote ont une masse totale de 200 kg. Ils abordent un virage plat de rayon $40\\ \\text{m}$. La route peut exercer au plus une force de frottement latérale de $2\\,000\\ \\text{N}$. Quelle est la vitesse maximale pour ne pas déraper ?",
-                  "question_type": "single_choice",
-                  "explanation": "$v_{max} = \\sqrt{\\dfrac{f_{max}\\,r}{m}} = \\sqrt{\\dfrac{2\\,000 \\times 40}{200}} = \\sqrt{400} = 20\\ \\text{m/s}$, soit 72 km/h. L'erreur la plus fréquente est d'oublier la racine carrée (400 m/s). Diviser par le rayon au lieu de multiplier donne 0,5 m/s, une vitesse absurde.",
-                  "answers": [
-                    {
-                      "content": "$20\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$400\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}5\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$14{,}1\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un virage relevé de rayon $200\\ \\text{m}$ a une inclinaison telle que $\\tan\\alpha = 0{,}2$. On prend $g = 10\\ \\text{m/s}^2$. À quelle vitesse faut-il le prendre pour n'avoir besoin d'aucun frottement latéral ?",
-                  "question_type": "single_choice",
-                  "explanation": "$\\tan\\alpha = \\dfrac{v^2}{r\\,g}$, donc $v^2 = r\\,g\\tan\\alpha = 200 \\times 10 \\times 0{,}2 = 400$ et $v = 20\\ \\text{m/s}$, soit 72 km/h. L'erreur tentante est d'oublier $g$ ($v^2 = 40$, d'où 6,3 m/s) ou d'inverser la formule, ce qui donne 100 m/s.",
-                  "answers": [
-                    {
-                      "content": "$20\\ \\text{m/s}$, soit $72\\ \\text{km/h}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$6{,}3\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$100\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$400\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un véhicule prend un virage relevé d'angle $\\alpha$, sans frottement latéral, à vitesse constante. La réaction de la route a une valeur plus grande que le poids du véhicule.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Sur la verticale, $R\\cos\\alpha = m g$, donc $R = \\dfrac{m g}{\\cos\\alpha}$, plus grand que $m g$ car $\\cos\\alpha < 1$. La réaction doit à la fois porter le véhicule et le pousser vers le centre. L'erreur tentante est de croire que $R = m g$ comme sur une route plate, où la réaction ne fait que compenser le poids.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un passager de gbaka se sent poussé vers l'extérieur quand le véhicule prend un virage à vitesse constante. On raisonne dans le référentiel terrestre, galiléen. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le passager décrit un arc de cercle : la somme des forces qu'il subit est dirigée vers le centre. Son corps tend à continuer tout droit, et c'est le siège ou la portière qui le pousse vers l'intérieur. L'erreur la plus fréquente est de croire à une force centrifuge : ce qu'il ressent, c'est son inertie, comme la pierre qui file quand la ficelle casse.",
-                  "answers": [
-                    {
-                      "content": "La somme des forces exercées sur le passager est dirigée vers le centre du virage.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le passager tend à continuer tout droit ; le siège ou la portière le pousse vers l'intérieur pour le faire tourner.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une force centrifuge pousse le passager vers l'extérieur du virage.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La somme des forces exercées sur le passager est nulle, car sa vitesse est constante.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'accélération du passager est dirigée vers l'extérieur du virage.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "850",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "Le câble casse alors que la caisse monte à 2 m/s. Quelle est l'intensité de l'accélération de la caisse juste après la rupture, en m/s² ?",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Méthode : après la rupture, il reste le poids, la réaction normale et le frottement. La caisse monte encore, donc le frottement est dirigé vers le bas de la rampe. Projection sur l'axe $Ox$ vers le haut : $-P\\sin\\alpha - f = m\\,a_G$. Résolution : $a_G = -(500 + 300) / 100 = -8$ m/s². Elle est dirigée vers le bas de la rampe et son intensité vaut 8 m/s² : la caisse ralentit.",
+              "answers": [
+                {
+                  "content": "8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle distance la caisse parcourt-elle encore vers le haut avant de s'arrêter, en m ? Utilise $v^2 - v_0^2 = 2\\,a_G\\,d$.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Méthode : mouvement uniformément varié, avec $v_0 = 2$ m/s, $v = 0$ et $a_G = -8$ m/s². Relation $v^2 - v_0^2 = 2\\,a_G\\,d$ : $0 - 4 = 2 \\times (-8) \\times d$, donc $d = 4 / 16 = 0{,}25$ m.",
+              "answers": [
+                {
+                  "content": "0.25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Par le théorème de l'énergie cinétique (acquis de 1ère), calcule la variation d'énergie cinétique de la caisse entre la rupture et l'arrêt, en J. Compare avec le travail de la somme des forces sur 0,25 m.",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode : $\\Delta E_c = \\frac{1}{2} m v^2 - \\frac{1}{2} m v_0^2 = 0 - \\frac{1}{2} \\times 100 \\times 2^2 = -200$ J. Contrôle avec le travail : le poids (composante 500 N) et le frottement (300 N) s'opposent au déplacement de 0,25 m, donc $W = -(500 + 300) \\times 0{,}25 = -200$ J. La dynamique et l'énergie donnent le même résultat.",
+              "answers": [
+                {
+                  "content": "-200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige, comme dans un devoir, la solution complète de la question « tension du câble au démarrage » : système et référentiel, bilan des forces, théorème, projection, résultat.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Définit le système (la caisse) et le référentiel galiléen (le sol)",
+                "Fait le bilan : poids, réaction normale, tension, frottement",
+                "Écrit le théorème $\\sum \\vec{F}_{ext} = m\\,\\vec{a}_G$ et choisit l'axe parallèle à la rampe vers le haut",
+                "Projette : $T - P\\sin\\alpha - f = m\\,a_G$",
+                "Calcule $T = 850$ N avec son unité"
+              ],
+              "explanation": "Corrigé modèle : Système : la caisse ; référentiel : le sol, supposé galiléen. Bilan : poids $\\vec{P}$ (vertical, $P = 1000$ N), réaction normale $\\vec{R}_N$ (perpendiculaire à la rampe), tension $\\vec{T}$ (parallèle à la rampe, vers le haut), frottement $\\vec{f}$ (parallèle à la rampe, vers le bas, $f = 300$ N). Théorème du centre d'inertie : $\\vec{P} + \\vec{R}_N + \\vec{T} + \\vec{f} = m\\,\\vec{a}_G$. Projection sur l'axe $Ox$ le long de la rampe vers le haut : $T - P\\sin\\alpha - f = m\\,a_G$. Donc $T = 100 \\times 0{,}5 + 1000 \\times 0{,}5 + 300 = 850$ N. Barème : 0,5 pour le système et le référentiel, 0,5 pour le bilan, 1 pour le théorème et l'axe, 1 pour la projection, 1 pour le résultat chiffré avec son unité.",
+              "answers": [],
+              "starter": "Système : la caisse. Référentiel : le sol…"
             }
           ]
         }

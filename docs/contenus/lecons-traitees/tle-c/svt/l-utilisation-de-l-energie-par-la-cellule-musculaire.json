@@ -1,0 +1,1706 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'utilisation de l'énergie par la cellule musculaire",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "sarcomere-bandes",
+          "kind": "diagram",
+          "description": "Schéma fléché d'un sarcomère, lu de gauche à droite entre deux stries Z : bande I (actine seule), bord de la bande A (actine et myosine), zone H au centre (myosine seule), second bord de la bande A, seconde bande I. Les couleurs distinguent les filaments présents dans chaque région. Ce n'est pas une planche dessinée.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "z1",
+                "label": "Strie Z",
+                "category": 4
+              },
+              {
+                "id": "i1",
+                "label": "Bande I : actine seule",
+                "category": 1
+              },
+              {
+                "id": "a1",
+                "label": "Bande A (bord) : actine et myosine",
+                "category": 2
+              },
+              {
+                "id": "h",
+                "label": "Zone H : myosine seule",
+                "category": 3
+              },
+              {
+                "id": "a2",
+                "label": "Bande A (bord) : actine et myosine",
+                "category": 2
+              },
+              {
+                "id": "i2",
+                "label": "Bande I : actine seule",
+                "category": 1
+              },
+              {
+                "id": "z2",
+                "label": "Strie Z",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "z1",
+                "to": "i1"
+              },
+              {
+                "from": "i1",
+                "to": "a1"
+              },
+              {
+                "from": "a1",
+                "to": "h"
+              },
+              {
+                "from": "h",
+                "to": "a2"
+              },
+              {
+                "from": "a2",
+                "to": "i2"
+              },
+              {
+                "from": "i2",
+                "to": "z2"
+              }
+            ],
+            "legend": [
+              "Actine seule",
+              "Actine et myosine",
+              "Myosine seule",
+              "Limite du sarcomère"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "niveaux-du-muscle",
+          "kind": "diagram",
+          "description": "Schéma fléché des niveaux d'organisation d'un muscle strié squelettique, du plus grand au plus petit : le muscle est formé de faisceaux, un faisceau de fibres musculaires, une fibre de myofibrilles, une myofibrille de sarcomères, un sarcomère de myofilaments d'actine et de myosine.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "m",
+                "label": "Muscle strié squelettique"
+              },
+              {
+                "id": "fa",
+                "label": "Faisceau de fibres"
+              },
+              {
+                "id": "fi",
+                "label": "Fibre musculaire (une cellule)"
+              },
+              {
+                "id": "my",
+                "label": "Myofibrille"
+              },
+              {
+                "id": "sa",
+                "label": "Sarcomère (unité contractile)"
+              },
+              {
+                "id": "fil",
+                "label": "Myofilaments d'actine et de myosine"
+              }
+            ],
+            "edges": [
+              {
+                "from": "m",
+                "to": "fa",
+                "label": "est formé de"
+              },
+              {
+                "from": "fa",
+                "to": "fi",
+                "label": "est formé de"
+              },
+              {
+                "from": "fi",
+                "to": "my",
+                "label": "renferme"
+              },
+              {
+                "from": "my",
+                "to": "sa",
+                "label": "est une suite de"
+              },
+              {
+                "from": "sa",
+                "to": "fil",
+                "label": "contient"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-des-ponts",
+          "kind": "diagram",
+          "description": "Cycle d'une tête de myosine pendant la contraction : fixée à l'actine, elle bascule et fait glisser le filament d'actine ; un ATP se fixe et la détache ; l'hydrolyse de l'ATP la redresse ; si le Ca²⁺ est présent, elle se fixe de nouveau à l'actine et le cycle recommence.",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Tête de myosine fixée à l'actine (pont)"
+              },
+              {
+                "id": "n2",
+                "label": "Basculement de la tête : l'actine glisse vers le centre"
+              },
+              {
+                "id": "n3",
+                "label": "Un ATP se fixe : la tête se détache de l'actine"
+              },
+              {
+                "id": "n4",
+                "label": "L'ATP est hydrolysé en ADP et Pi : la tête se redresse"
+              }
+            ],
+            "edges": [
+              {
+                "from": "n1",
+                "to": "n2",
+                "label": "énergie utilisée"
+              },
+              {
+                "from": "n2",
+                "to": "n3",
+                "label": "ATP"
+              },
+              {
+                "from": "n3",
+                "to": "n4",
+                "label": "hydrolyse"
+              },
+              {
+                "from": "n4",
+                "to": "n1",
+                "label": "si Ca²⁺"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "calcium-tension",
+          "kind": "stat_chart",
+          "description": "Courbe de la tension développée par des fibres musculaires (en pourcentage de la tension maximale) selon la concentration en ions Ca²⁺ libres (en µmol/L) : 0 % à 0,01 ; 5 % à 0,1 ; 35 % à 0,5 ; 80 % à 1 ; puis 100 % à 5 et à 10.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              5,
+              35,
+              80,
+              100,
+              100
+            ],
+            "labels": [
+              "0,01",
+              "0,1",
+              "0,5",
+              "1",
+              "5",
+              "10"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "temperature-match",
+          "kind": "stat_chart",
+          "description": "Courbe de la température centrale d'un joueur de football (en °C) mesurée toutes les 15 minutes pendant une séance de jeu : 37,0 au départ ; 38,0 à 15 minutes ; 38,6 à 30 minutes ; 38,9 à 45 minutes ; 39,0 à 60 minutes.",
+          "params": {
+            "chart": "line",
+            "series": [
+              37.0,
+              38.0,
+              38.6,
+              38.9,
+              39.0
+            ],
+            "labels": [
+              "0 min",
+              "15 min",
+              "30 min",
+              "45 min",
+              "60 min"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lactate-effort",
+          "kind": "stat_chart",
+          "description": "Courbe de la concentration en acide lactique du sang (en mmol/L) d'un lycéen avant puis pendant une course de 6 minutes à allure soutenue : 1,0 au repos ; 4,0 à 1 minute ; 7,0 à 2 minutes ; 9,0 à 3 minutes ; 10,5 à 4 minutes ; 11,5 à 5 minutes ; 12,0 à 6 minutes.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1.0,
+              4.0,
+              7.0,
+              9.0,
+              10.5,
+              11.5,
+              12.0
+            ],
+            "labels": [
+              "Repos",
+              "1 min",
+              "2 min",
+              "3 min",
+              "4 min",
+              "5 min",
+              "6 min"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "L'organisation du muscle strié squelettique",
+          "remember": "Un muscle strié squelettique, relié aux os par des tendons, est formé de **faisceaux** de **fibres musculaires** : une fibre est une cellule très allongée. Chaque fibre renferme de nombreuses **myofibrilles** parallèles, entourées de mitochondries et d'un **réticulum sarcoplasmique**. Au microscope, une myofibrille est striée : des **bandes sombres (bandes A)** alternent avec des **bandes claires (bandes I)**. Le milieu de chaque bande claire porte une **strie Z**. Le **sarcomère** est la portion de myofibrille comprise entre deux stries Z : c'est l'unité contractile. Il contient deux sortes de **myofilaments** : les filaments fins d'**actine**, fixés aux stries Z, et les filaments épais de **myosine**, au centre. La bande I ne contient que de l'actine ; la bande A contient la myosine, et sa partie centrale plus claire, la **zone H**, contient la myosine seule.",
+          "method": [
+            "Repérer le niveau d'organisation observé : muscle, faisceau de fibres, fibre, myofibrille ou sarcomère.",
+            "Décrire les striations : bandes sombres (A), bandes claires (I), strie Z et zone H, avec leurs longueurs si elles sont données.",
+            "Situer les filaments : l'actine dans la bande I et sur les bords de la bande A, la myosine dans toute la bande A.",
+            "Conclure : nommer la structure (le sarcomère, entre deux stries Z, est l'unité contractile) et dire son rôle."
+          ],
+          "example": {
+            "statement": "Au laboratoire de l'université, on observe au microscope électronique une myofibrille prélevée dans le muscle de la cuisse d'un footballeur. On voit une alternance régulière de bandes sombres de 1,6 µm et de bandes claires. Une fine strie sombre, la strie Z, traverse le milieu de chaque bande claire ; deux stries Z voisines sont distantes de 2,4 µm. Au centre de chaque bande sombre se trouve une zone un peu plus claire. Sur la photographie, la myofibrille est vue en coupe longitudinale. Présenter cette observation avec la méthode.",
+            "steps": [
+              "Repérer : la photographie montre une seule myofibrille, vue en coupe longitudinale (dans la longueur).",
+              "Décrire : des bandes sombres de 1,6 µm alternent avec des bandes claires ; une strie Z traverse chaque bande claire ; une zone plus claire (zone H) occupe le centre de chaque bande sombre.",
+              "Situer : l'actine occupe la bande claire et les bords de la bande sombre ; la myosine occupe toute la bande sombre, et elle est seule dans la zone H.",
+              "Conclure : la portion de 2,4 µm comprise entre deux stries Z est un sarcomère, l'unité contractile de la myofibrille."
+            ]
+          },
+          "pitfall": "Ne confonds ni les niveaux d'organisation, ni les bandes avec les filaments. La bande A n'est pas le sarcomère : dans un sarcomère de 2,4 µm, la bande A mesure 1,6 µm, et les 0,8 µm restants sont de la bande I. La bande A n'est pas non plus faite de myosine seule : sur ses bords elle contient aussi de l'actine ; seule la zone H est de la myosine seule. Et une fibre contient des myofibrilles, jamais l'inverse. Avant de répondre, nomme d'abord le niveau, puis les bandes, puis les filaments.",
+          "figure": "sarcomere-bandes",
+          "exercise": {
+            "title": "Reconnaître les niveaux d'organisation et les bandes du muscle",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à l'organisation du muscle strié squelettique, des faisceaux jusqu'aux filaments d'un sarcomère. Le schéma fléché montre les régions d'un sarcomère entre deux stries Z.",
+            "exercise_type": "fixation",
+            "figure": "sarcomere-bandes",
+            "questions": [
+              {
+                "content": "Quel est le plus petit élément contractile d'une myofibrille de muscle strié squelettique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on parle d'une myofibrille, donc d'un niveau déjà très petit. Étape 2 — Décrire : elle est striée, avec des stries Z régulièrement espacées. Étape 3 — Situer : entre deux stries Z se trouvent actine et myosine côte à côte. Étape 4 — Conclure : la portion entre deux stries Z est le sarcomère, unité contractile. La bande A n'en est qu'une partie, et la fibre ou le faisceau sont des niveaux bien plus grands.",
+                "answers": [
+                  {
+                    "content": "Le sarcomère",
+                    "correct": true
+                  },
+                  {
+                    "content": "La fibre musculaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "La bande A seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le faisceau de fibres",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La portion de myofibrille comprise entre deux stries Z voisines s'appelle le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le niveau est la myofibrille. Étape 2 — Décrire : on y voit des stries Z qui se répètent. Étape 3 — Situer : entre deux stries Z, les filaments d'actine et de myosine se recouvrent en partie. Étape 4 — Conclure : cette portion est le sarcomère.",
+                "answers": [
+                  {
+                    "content": "sarcomère",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque région du sarcomère à ce qu'elle contient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : le sarcomère est lu de strie Z à strie Z. Étape 2 — Décrire : bande I claire, bande A sombre, zone H plus claire au centre de la bande A. Étape 3 — Situer : l'actine est fixée aux stries Z et occupe la bande I ; la myosine occupe toute la bande A ; au centre, dans la zone H, il n'y a que de la myosine. Étape 4 — Conclure : bande I = actine seule, zone H = myosine seule, bande A = myosine (et actine sur les bords), strie Z = point d'attache de l'actine.",
+                "answers": [
+                  {
+                    "content": "Bande I",
+                    "match": "Filaments d'actine seuls"
+                  },
+                  {
+                    "content": "Zone H",
+                    "match": "Filaments de myosine seuls"
+                  },
+                  {
+                    "content": "Bande A",
+                    "match": "Myosine, avec de l'actine sur ses bords"
+                  },
+                  {
+                    "content": "Strie Z",
+                    "match": "Point d'attache des filaments d'actine"
+                  }
+                ]
+              },
+              {
+                "content": "Une myofibrille est formée de 12 sarcomères alignés bout à bout. Chaque sarcomère mesure 2,4 µm. Quelle est la longueur de la myofibrille ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : le niveau est la myofibrille, suite de sarcomères. Étape 2 — Décrire : 12 sarcomères de 2,4 µm chacun. Étape 3 — Situer : ils sont alignés bout à bout, donc leurs longueurs s'ajoutent. Étape 4 — Conclure : $12 \\times 2{,}4 = 28{,}8$ µm. Répondre 2,4 µm confondrait la myofibrille avec un seul sarcomère.",
+                "answers": [
+                  {
+                    "content": "28,8",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "µm"
+              },
+              {
+                "content": "Range ces niveaux d'organisation du muscle, du plus grand au plus petit.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on classe cinq niveaux emboîtés. Étape 2 — Décrire : le muscle est le plus grand, le sarcomère le plus petit. Étape 3 — Situer : un muscle contient des faisceaux, un faisceau des fibres, une fibre des myofibrilles, une myofibrille des sarcomères. Étape 4 — Conclure : muscle, faisceau, fibre, myofibrille, sarcomère. Mettre la fibre après la myofibrille serait l'erreur du piège : la fibre contient les myofibrilles.",
+                "answers": [
+                  {
+                    "content": "Muscle"
+                  },
+                  {
+                    "content": "Faisceau de fibres"
+                  },
+                  {
+                    "content": "Fibre musculaire"
+                  },
+                  {
+                    "content": "Myofibrille"
+                  },
+                  {
+                    "content": "Sarcomère"
+                  }
+                ]
+              },
+              {
+                "content": "La bande A d'un sarcomère correspond au sarcomère tout entier.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on compare une bande à un sarcomère. Étape 2 — Décrire : sur l'exemple, la bande A mesure 1,6 µm et le sarcomère 2,4 µm. Étape 3 — Situer : le sarcomère contient la bande A et, en plus, la bande I (0,8 µm). Étape 4 — Conclure : la bande A n'est qu'une partie du sarcomère. C'est le piège de la fiche : confondre une bande avec le sarcomère.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer l'actine et la myosine dans un sarcomère, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un sarcomère, les filaments fins sont faits d'___ et les filaments épais de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on étudie un sarcomère. Étape 2 — Décrire : on voit des filaments fins fixés aux stries Z et des filaments épais au centre. Étape 3 — Situer : les filaments fins sont d'actine, les épais de myosine. Étape 4 — Conclure : actine puis myosine.",
+                "answers": [
+                  {
+                    "content": "actine",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "myosine",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les filaments fins sont fixés aux stries Z ; les filaments épais occupent le centre du sarcomère."
+              },
+              {
+                "content": "Une coupe transversale d'une myofibrille, faite au centre de la zone H, ne montre que de gros points (filaments épais). Que contient la zone H ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la coupe est faite au centre du sarcomère. Étape 2 — Décrire : on ne voit que de gros filaments. Étape 3 — Situer : les filaments épais sont de myosine, aucun fin n'est présent. Étape 4 — Conclure : la zone H contient la myosine seule. Si l'actine était présente, on verrait aussi de petits points.",
+                "answers": [
+                  {
+                    "content": "De l'actine seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la myosine seule",
+                    "correct": true
+                  },
+                  {
+                    "content": "De l'actine et de la myosine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni actine ni myosine",
+                    "correct": false
+                  }
+                ],
+                "hint": "Au centre du sarcomère, on ne voit que de gros points : cherche à quel filament ils correspondent."
+              },
+              {
+                "content": "Les stries Z délimitent le sarcomère.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on parle du sarcomère. Étape 2 — Décrire : une strie Z traverse le milieu de chaque bande claire. Étape 3 — Situer : le sarcomère est compris entre deux stries Z voisines. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles propositions désignent des éléments contenus dans une fibre musculaire ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer : la fibre est une cellule allongée. Étape 2 — Décrire : on y voit des myofibrilles parallèles, des mitochondries et un réticulum sarcoplasmique. Étape 3 — Situer : le faisceau regroupe plusieurs fibres et le tendon relie le muscle à l'os : ils sont en dehors de la fibre. Étape 4 — Conclure : myofibrilles, réticulum sarcoplasmique et mitochondries.",
+                "answers": [
+                  {
+                    "content": "Un tendon",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des myofibrilles",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un faisceau de fibres",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un réticulum sarcoplasmique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des mitochondries",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le mécanisme de la contraction musculaire",
+          "remember": "Quand un muscle se contracte, ses sarcomères se raccourcissent. Les mesures montrent que la **bande A garde sa longueur**, alors que la **bande I** et la **zone H** diminuent (la zone H peut disparaître). Les filaments ne se raccourcissent donc pas : les filaments fins d'**actine** **glissent** entre les filaments épais de **myosine**, vers le centre du sarcomère. Le mécanisme est le suivant. Des ions **Ca²⁺**, libérés par le réticulum sarcoplasmique, permettent aux **têtes de myosine** de se fixer sur l'actine et de former des ponts. Chaque tête bascule et fait glisser l'actine, grâce à l'énergie libérée par l'hydrolyse de l'**ATP**. La fixation d'un nouvel ATP détache la tête, qui se redresse et peut se fixer de nouveau tant que le Ca²⁺ est présent. Sans ATP, les têtes restent fixées : le muscle est rigide (rigidité cadavérique).",
+          "method": [
+            "Comparer les mesures du sarcomère au repos et contracté : sarcomère, bande A, bande I et zone H.",
+            "Repérer ce qui change et ce qui reste constant.",
+            "Interpréter : une longueur constante n'est pas raccourcie ; ce qui varie est le recouvrement des filaments, donc ils glissent.",
+            "Conclure en nommant le mécanisme (glissement de l'actine entre les filaments de myosine) et le rôle du Ca²⁺ et de l'ATP."
+          ],
+          "example": {
+            "statement": "Sur une myofibrille du muscle de la cuisse d'un sprinteur, on mesure au repos : sarcomère 2,4 µm, bande A 1,6 µm, bande I 0,8 µm, zone H 0,4 µm. Contractée, la même myofibrille donne : sarcomère 2,0 µm, bande A 1,6 µm, bande I 0,4 µm, zone H 0 µm. Expliquer le raccourcissement du sarcomère avec la méthode.",
+            "steps": [
+              "Comparer : au repos le sarcomère mesure 2,4 µm, contracté 2,0 µm ; la bande A reste à 1,6 µm ; la bande I passe de 0,8 à 0,4 µm ; la zone H passe de 0,4 à 0 µm.",
+              "Repérer : le sarcomère, la bande I et la zone H diminuent de 0,4 µm chacun ; la bande A ne change pas.",
+              "Interpréter : la bande A, qui contient la myosine, garde sa longueur, donc les filaments ne se raccourcissent pas ; ce sont les zones sans recouvrement (bande I, zone H) qui diminuent : les filaments glissent.",
+              "Conclure : les filaments d'actine glissent entre les filaments de myosine, grâce aux ponts formés en présence de Ca²⁺ et à l'énergie de l'hydrolyse de l'ATP."
+            ]
+          },
+          "pitfall": "Ne crois pas que la contraction raccourcit les filaments, comme on raccourcit un élastique. Contre-exemple chiffré : si les filaments de myosine se raccourcissaient, la bande A (1,6 µm) diminuerait ; or elle reste à 1,6 µm. Le sarcomère perd 0,4 µm (2,4 puis 2,0) et la bande I perd exactement 0,4 µm (0,8 puis 0,4) : ce sont les zones sans recouvrement qui diminuent. Ne dis pas non plus que l'ATP raccourcit les filaments : il fournit l'énergie et détache les têtes de myosine.",
+          "figure": "cycle-des-ponts",
+          "exercise": {
+            "title": "Expliquer le raccourcissement du sarcomère",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche aux mesures d'un sarcomère et au rôle du Ca²⁺ et de l'ATP. Le schéma fléché montre le cycle d'une tête de myosine.",
+            "exercise_type": "fixation",
+            "figure": "cycle-des-ponts",
+            "questions": [
+              {
+                "content": "Pendant la contraction d'un muscle strié, quelle région du sarcomère garde la même longueur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer : au repos comme contracté, la bande A mesure la même longueur (1,6 µm dans l'exemple). Étape 2 — Repérer : la bande I, la zone H et le sarcomère changent ; la bande A reste constante. Étape 3 — Interpréter : la bande A contient la myosine, donc les filaments épais ne se raccourcissent pas. Étape 4 — Conclure : c'est la bande A. Dire la bande I est l'erreur du piège : elle diminue.",
+                "answers": [
+                  {
+                    "content": "La bande A",
+                    "correct": true
+                  },
+                  {
+                    "content": "La bande I",
+                    "correct": false
+                  },
+                  {
+                    "content": "La zone H",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sarcomère entier",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sarcomère mesure 2,6 µm au repos et 2,2 µm contracté. De combien de micromètres se raccourcit-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Comparer : repos 2,6 µm, contracté 2,2 µm. Étape 2 — Repérer : la longueur diminue, c'est ce qui change. Étape 3 — Interpréter : le raccourcissement est la différence des deux mesures. Étape 4 — Conclure : $2{,}6 - 2{,}2 = 0{,}4$ µm.",
+                "answers": [
+                  {
+                    "content": "0,4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "µm"
+              },
+              {
+                "content": "Pendant la contraction, les filaments d'actine et de myosine raccourcissent.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Comparer : la bande A (myosine) garde sa longueur et la bande I diminue de la même valeur que le sarcomère. Étape 2 — Repérer : seule la zone de recouvrement change. Étape 3 — Interpréter : des filaments qui garderaient leur longueur et se recouvriraient davantage glissent, ils ne raccourcissent pas. Étape 4 — Conclure : l'affirmation est fausse, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes d'un cycle d'une tête de myosine, en partant de la tête fixée à l'actine.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Comparer : la tête fixée forme un pont avec l'actine. Étape 2 — Repérer : elle bascule d'abord et fait glisser l'actine. Étape 3 — Interpréter : il faut ensuite un ATP pour la détacher, puis l'hydrolyse de cet ATP la redresse. Étape 4 — Conclure : basculement, détachement par l'ATP, redressement par hydrolyse, nouvelle fixation si le Ca²⁺ est présent.",
+                "answers": [
+                  {
+                    "content": "Basculement de la tête : l'actine glisse vers le centre du sarcomère"
+                  },
+                  {
+                    "content": "Fixation d'un ATP : la tête se détache de l'actine"
+                  },
+                  {
+                    "content": "Hydrolyse de l'ATP : la tête se redresse"
+                  },
+                  {
+                    "content": "Nouvelle fixation sur l'actine, si le Ca²⁺ est présent"
+                  }
+                ]
+              },
+              {
+                "content": "Après la mort, le muscle devient rigide (rigidité cadavérique). Quelle en est la cause ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer : un muscle rigide a ses ponts actine-myosine encore formés. Étape 2 — Repérer : après la mort, la cellule ne fabrique plus d'ATP. Étape 3 — Interpréter : c'est la fixation d'un ATP qui détache les têtes ; sans ATP, elles restent accrochées. Étape 4 — Conclure : la rigidité vient du manque d'ATP. Dire que les filaments se raccourcissent est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Il n'y a plus d'ATP : les têtes de myosine restent fixées à l'actine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les filaments d'actine se sont raccourcis",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Ca²⁺ n'est plus libéré, donc les ponts se défont",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les filaments de myosine ont disparu",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'ion libéré par le réticulum sarcoplasmique, qui permet aux têtes de myosine de se fixer sur l'actine, est l'ion ___ (écris son nom).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Comparer : un muscle stimulé se contracte, au repos non. Étape 2 — Repérer : la différence est la libération d'un ion dans le sarcoplasme. Étape 3 — Interpréter : cet ion rend possible la liaison des têtes de myosine à l'actine. Étape 4 — Conclure : c'est l'ion calcium, noté Ca²⁺.",
+                "answers": [
+                  {
+                    "content": "calcium",
+                    "correct": true
+                  },
+                  {
+                    "content": "ions calcium",
+                    "correct": true
+                  },
+                  {
+                    "content": "ion calcium",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ca2+",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ca²⁺",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire les mesures d'un sarcomère et à dire le rôle du Ca²⁺ et de l'ATP, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Pendant la contraction, la bande ___ garde sa longueur, tandis que la zone ___ se raccourcit jusqu'à disparaître.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Comparer : au repos et contracté, les mesures de la bande A sont identiques. Étape 2 — Repérer : la zone H diminue jusqu'à 0. Étape 3 — Interpréter : la bande A contient la myosine qui ne se raccourcit pas, et la zone H est sans actine, elle diminue quand l'actine glisse. Étape 4 — Conclure : bande A, zone H.",
+                "answers": [
+                  {
+                    "content": "A",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "H",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Cherche la région qui contient toute la myosine, puis celle qui ne contient que de la myosine."
+              },
+              {
+                "content": "Un sarcomère contracté mesure 2,2 µm et sa bande A mesure 1,6 µm. Quelle est la longueur de sa bande I ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Comparer : le sarcomère est formé de la bande A et de la bande I. Étape 2 — Repérer : la bande A (1,6 µm) est constante ; on cherche la bande I. Étape 3 — Interpréter : bande I = sarcomère − bande A. Étape 4 — Conclure : $2{,}2 - 1{,}6 = 0{,}6$ µm.",
+                "answers": [
+                  {
+                    "content": "0,6",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "µm",
+                "hint": "Le sarcomère se compose de la bande A et de la bande I mises bout à bout."
+              },
+              {
+                "content": "Sans ions Ca²⁺, les têtes de myosine ne peuvent pas se fixer sur l'actine.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Comparer : un muscle sans Ca²⁺ libre ne se contracte pas. Étape 2 — Repérer : le Ca²⁺ est libéré par le réticulum sarcoplasmique lors de la contraction. Étape 3 — Interpréter : il rend possible la fixation des têtes sur l'actine. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux rôles de l'ATP dans la contraction ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Comparer : un muscle sans ATP reste rigide. Étape 2 — Repérer : l'ATP intervient à deux moments du cycle. Étape 3 — Interpréter : sa fixation détache la tête de l'actine et son hydrolyse libère l'énergie utilisée. Étape 4 — Conclure : les deux rôles sont l'énergie et le détachement. Les filaments ne se raccourcissent pas, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Il raccourcit les filaments d'actine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Son hydrolyse libère l'énergie utilisée par les têtes de myosine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il stocke le Ca²⁺ dans le réticulum sarcoplasmique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa fixation détache les têtes de myosine de l'actine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il transforme la myosine en actine",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les phénomènes énergétiques et thermiques de la contraction",
+          "remember": "La contraction musculaire consomme de l'énergie. La source immédiate est l'**hydrolyse de l'ATP** : ATP + H₂O → ADP + Pi + énergie. Une mole d'ATP libère environ 30,5 kJ. Le muscle est un transformateur d'énergie : l'énergie chimique de l'ATP devient du **travail mécanique** (le mouvement) et de la **chaleur**. Seule une partie sert au travail : le **rendement** du muscle vaut environ 25 %, donc environ 75 % de l'énergie dépensée est dégagée sous forme de chaleur. Énergie dépensée = travail + chaleur. Rendement = travail mécanique ÷ énergie dépensée. C'est pourquoi un joueur qui court a chaud : sa température centrale s'élève. Ne confonds pas ce rendement (travail ÷ énergie dépensée, environ 25 %) avec celui de la respiration, qui est la part de l'énergie du glucose stockée dans l'ATP. Le muscle ne contient qu'une très faible réserve d'ATP.",
+          "method": [
+            "Relever l'énergie dépensée par le muscle (énergie libérée par l'hydrolyse de l'ATP).",
+            "Identifier le travail mécanique fourni (le mouvement produit).",
+            "Calculer la chaleur dégagée (énergie dépensée − travail), puis le rendement (travail ÷ énergie dépensée).",
+            "Conclure : dire quelle part de l'énergie sert au mouvement et quelle part est dégagée en chaleur."
+          ],
+          "example": {
+            "statement": "Pendant un sprint, les muscles d'un joueur de l'équipe du lycée dépensent 8 kJ d'énergie et fournissent un travail mécanique de 2 kJ. Calculer la chaleur dégagée et le rendement.",
+            "steps": [
+              "Relever : l'énergie dépensée par les muscles est de 8 kJ.",
+              "Identifier : le travail mécanique fourni est de 2 kJ.",
+              "Calculer : chaleur = $8 - 2 = 6$ kJ ; rendement = $2 \\div 8 = 0{,}25$, soit 25 %.",
+              "Conclure : un quart de l'énergie dépensée sert au mouvement, les trois quarts sont dégagés en chaleur."
+            ]
+          },
+          "pitfall": "Ne crois pas que toute l'énergie dépensée devient du mouvement (rendement de 100 %), et ne confonds pas énergie dépensée et travail. Contre-exemple chiffré : un muscle qui dépense 400 kJ avec un rendement de 25 % fournit un travail de $400 \\times 0{,}25 = 100$ kJ ; la chaleur vaut $400 - 100 = 300$ kJ. La chaleur n'est pas un défaut de fonctionnement : c'est la plus grosse part de l'énergie dépensée. Calcule toujours la chaleur par différence.",
+          "figure": null,
+          "exercise": {
+            "title": "Faire le bilan énergétique d'une contraction",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever l'énergie dépensée, identifier le travail, calculer la chaleur et le rendement, puis conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle molécule fournit directement à la fibre musculaire l'énergie de la contraction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : l'énergie dépensée par le muscle vient de la rupture d'une liaison de l'ATP. Étape 2 — Identifier : cette énergie est utilisée par les têtes de myosine. Étape 3 — Calculer : une mole d'ATP hydrolysée libère environ 30,5 kJ. Étape 4 — Conclure : c'est l'ATP. Le glucose ne fournit l'énergie qu'indirectement, en servant à refaire de l'ATP ; l'ADP est le produit de l'hydrolyse.",
+                "answers": [
+                  {
+                    "content": "L'ATP",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le glucose",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ADP",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un muscle dépense 12 kJ d'énergie et fournit un travail mécanique de 3 kJ. Quelle quantité de chaleur dégage-t-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : énergie dépensée 12 kJ. Étape 2 — Identifier : travail 3 kJ. Étape 3 — Calculer : chaleur = $12 - 3 = 9$ kJ. Étape 4 — Conclure : le muscle dégage 9 kJ de chaleur. Répondre 3 kJ confondrait la chaleur avec le travail.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "kJ"
+              },
+              {
+                "content": "Un muscle dépense 12 kJ d'énergie et fournit un travail mécanique de 3 kJ. Quel est son rendement, en pourcentage ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : énergie dépensée 12 kJ. Étape 2 — Identifier : travail 3 kJ. Étape 3 — Calculer : rendement = $3 \\div 12 = 0{,}25$, soit 25 %. Étape 4 — Conclure : un quart de l'énergie sert au mouvement. Calculer $3 \\div 9$ serait l'erreur : on divise par l'énergie dépensée, pas par la chaleur.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Au cours d'un effort, 2 mol d'ATP sont hydrolysées. Une mole d'ATP libère 30,5 kJ. Quelle énergie est libérée ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : 2 mol d'ATP hydrolysées, 30,5 kJ par mole. Étape 2 — Identifier : l'énergie libérée est proportionnelle à la quantité d'ATP. Étape 3 — Calculer : $2 \\times 30{,}5 = 61$ kJ. Étape 4 — Conclure : 61 kJ sont libérés, dont environ les trois quarts en chaleur.",
+                "answers": [
+                  {
+                    "content": "61",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "kJ"
+              },
+              {
+                "content": "Le muscle transforme toute l'énergie qu'il dépense en travail mécanique.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le muscle dépense de l'énergie chimique. Étape 2 — Identifier : une partie seulement devient travail. Étape 3 — Calculer : avec un rendement d'environ 25 %, le reste, environ 75 %, est de la chaleur. Étape 4 — Conclure : l'affirmation est fausse, c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles affirmations sur le rendement du muscle sont exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : le muscle dépense de l'énergie. Étape 2 — Identifier : une part devient travail. Étape 3 — Calculer : énergie dépensée = travail + chaleur, donc la chaleur est la part non transformée en travail et le rendement est inférieur à 1. Étape 4 — Conclure : ces deux affirmations sont exactes. La chaleur vient de l'énergie dépensée par le muscle et augmente avec l'effort.",
+                "answers": [
+                  {
+                    "content": "La chaleur vient uniquement du frottement des os",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est inférieur à 100 %",
+                    "correct": true
+                  },
+                  {
+                    "content": "Plus le muscle travaille, moins il dégage de chaleur",
+                    "correct": false
+                  },
+                  {
+                    "content": "La chaleur dégagée est la part de l'énergie qui n'est pas transformée en travail",
+                    "correct": true
+                  },
+                  {
+                    "content": "La chaleur est créée sans dépense d'énergie",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à faire le bilan énergétique d'un muscle, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "L'énergie libérée par l'hydrolyse de l'___ sert à produire du travail mécanique et de la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : la source d'énergie est l'hydrolyse de l'ATP. Étape 2 — Identifier : le muscle produit un travail mécanique. Étape 3 — Calculer : le travail ne représente qu'environ 25 % de l'énergie dépensée. Étape 4 — Conclure : le reste est dégagé sous forme de chaleur.",
+                "answers": [
+                  {
+                    "content": "ATP",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "chaleur",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le muscle est un transformateur : il reçoit de l'énergie chimique et en rend deux formes."
+              },
+              {
+                "content": "Un muscle dépense 20 kJ avec un rendement de 25 %. Quel travail mécanique fournit-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : énergie dépensée 20 kJ. Étape 2 — Identifier : on cherche le travail ; rendement = travail ÷ énergie dépensée. Étape 3 — Calculer : travail = $20 \\times 0{,}25 = 5$ kJ. Étape 4 — Conclure : le muscle fournit 5 kJ de travail et dégage 15 kJ de chaleur.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "kJ"
+              },
+              {
+                "content": "Le rendement d'un muscle est de 0,25. Quelle part de l'énergie dépensée est dégagée en chaleur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : toute l'énergie dépensée représente 100 %. Étape 2 — Identifier : le travail en représente 25 %. Étape 3 — Calculer : $100 - 25 = 75$ %. Étape 4 — Conclure : 75 % de l'énergie est dégagée en chaleur. Répondre 25 % confondrait la chaleur avec le travail.",
+                "answers": [
+                  {
+                    "content": "75 %",
+                    "correct": true
+                  },
+                  {
+                    "content": "25 %",
+                    "correct": false
+                  },
+                  {
+                    "content": "100 %",
+                    "correct": false
+                  },
+                  {
+                    "content": "0,25 %",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le travail mécanique d'un muscle est toujours supérieur à la chaleur qu'il dégage.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : le muscle dépense de l'énergie. Étape 2 — Identifier : le travail est une part de cette énergie. Étape 3 — Calculer : avec un rendement d'environ 25 %, la chaleur est environ trois fois plus grande que le travail. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La régénération de l'ATP selon l'effort",
+          "remember": "Le stock d'ATP du muscle est très faible : il ne couvre que quelques secondes d'effort. L'ATP est donc **régénéré** en continu à partir de l'ADP, par trois voies. (1) La **phosphocréatine** : phosphocréatine + ADP → créatine + ATP. Voie immédiate, sans dioxygène, mais très brève (réserve limitée). (2) La **fermentation lactique** : le glucose est transformé en acide lactique, sans dioxygène, avec 2 ATP par glucose. Voie rapide mais peu rentable et limitée. (3) La **respiration** : le glucose est dégradé en présence de dioxygène, avec environ 38 ATP par glucose. Voie lente à démarrer (le dioxygène doit arriver aux muscles) mais durable et très rentable. Les voies se relaient : un effort bref et intense (100 m) utilise la phosphocréatine puis la fermentation lactique ; un effort long et modéré (marathon) utilise surtout la respiration.",
+          "method": [
+            "Relever la durée et l'intensité de l'effort.",
+            "Examiner si l'apport de dioxygène aux muscles est suffisant (consommation de O₂, taux d'acide lactique).",
+            "Associer la voie de régénération de l'ATP : phosphocréatine (effort très bref), fermentation lactique (dioxygène insuffisant), respiration (dioxygène suffisant, effort long).",
+            "Conclure en nommant la voie dominante et le nombre d'ATP qu'elle fournit par glucose."
+          ],
+          "example": {
+            "statement": "Kouassi, de l'équipe de football du lycée, court un 100 m en 12 s à vitesse maximale. Indiquer la voie qui régénère l'essentiel de son ATP.",
+            "steps": [
+              "Relever : l'effort dure 12 s et son intensité est maximale.",
+              "Examiner : en 12 s, la respiration et la circulation n'ont pas le temps d'augmenter l'apport de dioxygène aux muscles, qui reste insuffisant.",
+              "Associer : l'effort est très bref et le dioxygène insuffisant, donc c'est la phosphocréatine qui régénère l'ATP, puis la fermentation lactique qui la relaie.",
+              "Conclure : la voie dominante est la phosphocréatine, relayée par la fermentation lactique (2 ATP par glucose) ; la respiration (38 ATP par glucose) intervient peu."
+            ]
+          },
+          "pitfall": "Ne crois pas que le muscle choisit une seule voie, ni que l'ATP est stocké en grande quantité. Contre-exemple chiffré : un marathon dure environ 4 h, soit $4 \\times 3\\,600 = 14\\,400$ s, alors que le stock d'ATP ne couvre que quelques secondes : l'ATP est régénéré en continu. Les voies se relaient : sur un 100 m la phosphocréatine domine mais la fermentation lactique commence déjà ; sur un marathon la respiration domine mais un sprint final fait appel à la phosphocréatine. Compare aussi les rendements : 38 ATP par glucose en respiration contre 2 en fermentation lactique, soit 19 fois plus.",
+          "figure": null,
+          "exercise": {
+            "title": "Associer la voie de régénération de l'ATP à l'effort",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever la durée et l'intensité de l'effort, examiner l'apport de dioxygène, associer la voie, puis conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque voie de régénération de l'ATP à sa caractéristique.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Relever : on compare trois voies selon leur durée et leur rythme. Étape 2 — Examiner : deux voies se passent de dioxygène, la respiration en a besoin. Étape 3 — Associer : la phosphocréatine est immédiate mais brève ; la fermentation lactique est rapide, forme de l'acide lactique et rapporte 2 ATP par glucose ; la respiration démarre lentement mais rapporte environ 38 ATP par glucose. Étape 4 — Conclure : chaque voie correspond à sa caractéristique.",
+                "answers": [
+                  {
+                    "content": "Phosphocréatine",
+                    "match": "Immédiate, sans dioxygène, très brève"
+                  },
+                  {
+                    "content": "Fermentation lactique",
+                    "match": "Rapide, sans dioxygène, 2 ATP par glucose, forme de l'acide lactique"
+                  },
+                  {
+                    "content": "Respiration",
+                    "match": "Lente à démarrer, avec dioxygène, environ 38 ATP par glucose"
+                  }
+                ]
+              },
+              {
+                "content": "Un coureur amateur court un marathon en environ 4 h à allure régulière. Quelle voie fournit l'essentiel de son ATP ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : effort d'environ 4 h, intensité modérée et régulière. Étape 2 — Examiner : sur une telle durée, le dioxygène arrive en quantité suffisante aux muscles. Étape 3 — Associer : la phosphocréatine s'épuise en quelques secondes et la fermentation lactique est limitée ; seule la respiration est durable. Étape 4 — Conclure : la voie dominante est la respiration, à environ 38 ATP par glucose. Croire que l'ATP est stocké en grande quantité est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "La phosphocréatine seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "La respiration",
+                    "correct": true
+                  },
+                  {
+                    "content": "La fermentation lactique seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune : l'ATP est stocké en grande quantité dans le muscle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une cellule musculaire dégrade complètement 3 molécules de glucose par la respiration, à raison de 38 ATP par glucose. Combien d'ATP forme-t-elle ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : 3 molécules de glucose, dégradation complète. Étape 2 — Examiner : elle se fait en présence de dioxygène, donc c'est la respiration. Étape 3 — Associer : la respiration rapporte 38 ATP par glucose. Étape 4 — Conclure : $3 \\times 38 = 114$ ATP. Utiliser 2 ATP par glucose serait confondre avec la fermentation lactique.",
+                "answers": [
+                  {
+                    "content": "114",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "ATP"
+              },
+              {
+                "content": "Au cours d'un effort, une seule voie fournit l'ATP du début à la fin.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : un effort a une durée et une intensité qui varient. Étape 2 — Examiner : l'apport de dioxygène augmente avec le temps. Étape 3 — Associer : la phosphocréatine fournit l'ATP d'abord, la fermentation lactique la relaie, puis la respiration devient dominante. Étape 4 — Conclure : les voies se relaient, l'affirmation est fausse. C'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi l'ATP doit-il être régénéré en continu pendant un effort ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : la contraction consomme de l'ATP dès le début de l'effort. Étape 2 — Examiner : le muscle n'en contient que très peu, de quoi tenir quelques secondes. Étape 3 — Associer : l'ATP consommé est reformé à partir de l'ADP par la phosphocréatine, la fermentation lactique ou la respiration. Étape 4 — Conclure : la réserve est très faible, donc la régénération doit être continue.",
+                "answers": [
+                  {
+                    "content": "Parce que le stock d'ATP du muscle est très faible",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que l'ATP est détruit par le dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'ATP est transformé en glucose",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'ATP ne sert qu'à la fin de l'effort",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Range ces voies dans l'ordre où elles prennent le relais au cours d'un effort intense qui se prolonge.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Relever : l'effort est intense et se prolonge. Étape 2 — Examiner : le dioxygène met du temps à arriver aux muscles. Étape 3 — Associer : la voie immédiate vient d'abord (phosphocréatine), la voie rapide sans dioxygène la relaie (fermentation lactique), puis la respiration prend le relais quand le dioxygène est suffisant. Étape 4 — Conclure : phosphocréatine, fermentation lactique, respiration.",
+                "answers": [
+                  {
+                    "content": "Phosphocréatine"
+                  },
+                  {
+                    "content": "Fermentation lactique"
+                  },
+                  {
+                    "content": "Respiration"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à associer une voie de régénération de l'ATP à un effort, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "En l'absence de dioxygène, le muscle régénère l'ATP avec la phosphocréatine et la fermentation ___ ; la dégradation complète du glucose avec du dioxygène s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Relever : on distingue les voies selon la présence de dioxygène. Étape 2 — Examiner : sans dioxygène, il reste la phosphocréatine et une fermentation. Étape 3 — Associer : le glucose donne de l'acide lactique, c'est la fermentation lactique ; avec dioxygène il est dégradé complètement, c'est la respiration. Étape 4 — Conclure : lactique, respiration.",
+                "answers": [
+                  {
+                    "content": "lactique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "respiration",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le glucose dégradé sans dioxygène donne de l'acide lactique ; avec dioxygène, il donne du CO₂ et de l'eau."
+              },
+              {
+                "content": "Pendant un match, un footballeur joue pendant plusieurs minutes à allure modérée. Quelle voie fournit l'essentiel de son ATP ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : effort de plusieurs minutes, intensité modérée. Étape 2 — Examiner : le dioxygène a le temps d'arriver aux muscles. Étape 3 — Associer : la respiration est la voie durable et rentable. Étape 4 — Conclure : la voie dominante est la respiration.",
+                "answers": [
+                  {
+                    "content": "La respiration",
+                    "correct": true
+                  },
+                  {
+                    "content": "La phosphocréatine seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "La fermentation lactique seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune voie, le muscle a assez d'ATP en réserve",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un muscle dégrade 5 molécules de glucose par fermentation lactique, à raison de 2 ATP par glucose. Combien d'ATP forme-t-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : 5 molécules de glucose. Étape 2 — Examiner : la fermentation lactique se fait sans dioxygène. Étape 3 — Associer : elle rapporte 2 ATP par glucose. Étape 4 — Conclure : $5 \\times 2 = 10$ ATP.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "ATP"
+              },
+              {
+                "content": "La phosphocréatine permet de régénérer l'ATP à partir de l'ADP.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : on cherche la voie la plus rapide. Étape 2 — Examiner : elle fonctionne sans dioxygène. Étape 3 — Associer : phosphocréatine + ADP → créatine + ATP. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le sarcomère d'un sprinteur au repos et en contraction",
+          "statement": "Au lycée, à Abidjan, le professeur de SVT présente les mesures faites au microscope électronique sur une myofibrille du muscle de la cuisse d'un sprinteur de l'équipe de football, au repos puis contractée. Au repos : sarcomère 2,4 µm, bande A 1,6 µm, bande I 0,8 µm, zone H 0,4 µm. Contractée : sarcomère 2,0 µm, bande A 1,6 µm, bande I 0,4 µm, zone H 0 µm. Des coupes transversales de la myofibrille au repos, à trois niveaux, montrent : au niveau 1 (centre de la zone H), seulement de gros filaments ; au niveau 2 (dans la bande I), seulement de fins filaments ; au niveau 3 (bord de la bande A), de gros filaments entourés de fins filaments. Le schéma fléché rappelle les niveaux d'organisation du muscle.",
+          "exercise_type": "fixation",
+          "figure": "niveaux-du-muscle",
+          "questions": [
+            {
+              "content": "Un sarcomère mesure 2,4 µm au repos et 2,0 µm contracté. De combien se raccourcit-il ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Comparer les deux mesures du sarcomère : 2,4 µm au repos, 2,0 µm contracté. Étape 2 — Repérer ce qui change : la longueur diminue. Étape 3 — Interpréter : le raccourcissement est la différence entre les deux mesures. Étape 4 — Conclure : $2{,}4 - 2{,}0 = 0{,}4$ µm.",
+              "answers": [
+                {
+                  "content": "0,4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "µm"
+            },
+            {
+              "content": "Une myofibrille est une suite de 1 000 sarcomères alignés bout à bout. Chaque sarcomère se raccourcit de 0,4 µm. De combien de micromètres la myofibrille se raccourcit-elle ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Comparer : la myofibrille est une suite de sarcomères, tous raccourcis de 0,4 µm. Étape 2 — Repérer : les sarcomères sont bout à bout, donc leurs raccourcissements s'ajoutent. Étape 3 — Interpréter : raccourcissement total = nombre de sarcomères × raccourcissement de chacun. Étape 4 — Conclure : $1\\,000 \\times 0{,}4 = 400$ µm, soit 0,4 mm.",
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "µm"
+            },
+            {
+              "content": "Les mesures donnent une bande A de 1,6 µm au repos comme contractée, et une bande I de 0,8 µm puis 0,4 µm. Quelle conclusion en tires-tu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Comparer : bande A 1,6 puis 1,6 µm ; bande I 0,8 puis 0,4 µm. Étape 2 — Repérer : la bande A est constante, la bande I diminue de 0,4 µm, comme le sarcomère. Étape 3 — Interpréter : la bande A contient la myosine, donc la myosine ne se raccourcit pas ; ce qui diminue est la zone sans recouvrement. Étape 4 — Conclure : les filaments glissent. Dire que la bande A raccourcit contredit la mesure.",
+              "answers": [
+                {
+                  "content": "Les filaments ne se raccourcissent pas : ils glissent les uns entre les autres",
+                  "correct": true
+                },
+                {
+                  "content": "Les filaments de myosine se raccourcissent de 0,4 µm",
+                  "correct": false
+                },
+                {
+                  "content": "Le sarcomère se raccourcit parce que la bande A se raccourcit",
+                  "correct": false
+                },
+                {
+                  "content": "La bande I s'allonge pendant la contraction",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une coupe transversale faite au centre de la zone H ne montre que de gros filaments. Que peut-on en déduire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Comparer : trois coupes à trois niveaux montrent des contenus différents. Étape 2 — Repérer : au centre de la zone H, on ne voit que de gros filaments. Étape 3 — Interpréter : les gros filaments sont de myosine, on les retrouve dans toute la bande A ; l'absence de fins filaments signifie qu'il n'y a pas d'actine en zone H. Étape 4 — Conclure : la zone H contient la myosine seule.",
+              "answers": [
+                {
+                  "content": "La zone H contient de l'actine et de la myosine",
+                  "correct": false
+                },
+                {
+                  "content": "Les gros filaments sont d'actine et les fins sont de la myosine",
+                  "correct": false
+                },
+                {
+                  "content": "Les gros filaments sont de la myosine et la zone H ne contient pas d'actine",
+                  "correct": true
+                },
+                {
+                  "content": "La zone H ne contient aucun filament",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À la contraction maximale, la zone H mesure 0 µm. Quelles propositions sont exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Comparer : zone H de 0,4 µm au repos, 0 µm contractée. Étape 2 — Repérer : la zone H est la partie de la bande A où il n'y a que de la myosine. Étape 3 — Interpréter : si elle disparaît, l'actine occupe toute la bande A, donc les filaments d'actine des deux côtés atteignent le centre. Étape 4 — Conclure : ces deux propositions sont exactes ; la bande A garde 1,6 µm et les stries Z se rapprochent.",
+              "answers": [
+                {
+                  "content": "La bande A est devenue plus courte que la zone H",
+                  "correct": false
+                },
+                {
+                  "content": "La zone H a disparu, car l'actine occupe toute la bande A",
+                  "correct": true
+                },
+                {
+                  "content": "Les filaments de myosine ont disparu",
+                  "correct": false
+                },
+                {
+                  "content": "Les filaments d'actine venus des deux stries Z atteignent le centre de la bande A",
+                  "correct": true
+                },
+                {
+                  "content": "Les stries Z se sont éloignées l'une de l'autre",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'organisation d'un muscle strié squelettique, quel niveau est une cellule allongée qui renferme les myofibrilles ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Comparer les niveaux d'organisation : muscle, faisceau, fibre, myofibrille, sarcomère. Étape 2 — Repérer celui qui est une cellule : c'est la fibre. Étape 3 — Interpréter : la fibre renferme les myofibrilles, qui se composent de sarcomères ; le faisceau regroupe plusieurs fibres. Étape 4 — Conclure : la fibre musculaire.",
+              "answers": [
+                {
+                  "content": "Le faisceau",
+                  "correct": false
+                },
+                {
+                  "content": "La fibre musculaire",
+                  "correct": true
+                },
+                {
+                  "content": "Le sarcomère",
+                  "correct": false
+                },
+                {
+                  "content": "Le muscle entier",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige la démonstration qui, à partir des mesures du sarcomère au repos et contracté, conduit à conclure que les filaments glissent.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les mesures au repos et contracté sont comparées",
+                "La bande A constante est reliée à des filaments non raccourcis",
+                "La diminution de la bande I et de la zone H est citée",
+                "La conclusion nomme le glissement de l'actine entre les filaments de myosine"
+              ],
+              "explanation": "Corrigé modèle : Au repos, le sarcomère mesure 2,4 µm, la bande A 1,6 µm, la bande I 0,8 µm et la zone H 0,4 µm. Contracté, il mesure 2,0 µm, la bande A 1,6 µm, la bande I 0,4 µm et la zone H 0 µm. La bande A, qui contient la myosine, ne change pas de longueur, donc les filaments épais ne se raccourcissent pas. Le sarcomère perd 0,4 µm, exactement comme la bande I, et la zone H disparaît : ce sont les zones sans recouvrement qui diminuent. Les filaments fins d'actine glissent donc entre les filaments épais de myosine, vers le centre du sarcomère. Barème : mesures comparées (1 point), bande A constante donc filaments non raccourcis (1 point), bande I et zone H qui diminuent (0,5 point), conclusion sur le glissement (0,5 point).",
+              "answers": [],
+              "starter": "La bande A garde la même longueur, donc…"
+            }
+          ]
+        },
+        {
+          "title": "Le rôle de l'ATP et du Ca²⁺ dans la contraction",
+          "statement": "Pour comprendre la contraction, un chercheur utilise des fibres musculaires dont la membrane a été rendue perméable, ce qui permet de contrôler leur milieu. Résultats d'expérience donnés par l'énoncé. Expérience 1 : fibres dans une solution contenant du Mg²⁺ et du Ca²⁺ (1 µmol/L) sans ATP : aucun raccourcissement. Expérience 2 : même solution, avec de l'ATP : les fibres se raccourcissent. Expérience 3 : solution avec ATP, mais avec une substance qui fixe le Ca²⁺ (Ca²⁺ libre presque nul) : aucun raccourcissement. Expérience 4 : des fibres restées raccourcies et rigides, sans ATP, sont placées dans une solution contenant de l'ATP mais pas de Ca²⁺ libre : elles s'allongent. La courbe donne la tension développée (en % de la tension maximale) selon la concentration en Ca²⁺ libre, en présence d'ATP.",
+          "exercise_type": "fixation",
+          "figure": "calcium-tension",
+          "questions": [
+            {
+              "content": "Dans l'expérience 1 (Mg²⁺ et Ca²⁺ sans ATP) les fibres ne se raccourcissent pas ; dans l'expérience 2 (même solution avec ATP) elles se raccourcissent. Que conclus-tu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Comparer les deux expériences : mêmes ions Mg²⁺ et Ca²⁺, sans ATP puis avec ATP. Étape 2 — Repérer ce qui change : seule la présence d'ATP ; le raccourcissement n'apparaît qu'avec l'ATP. Étape 3 — Interpréter : un seul facteur varie, donc c'est lui qui rend la contraction possible. Étape 4 — Conclure : l'ATP est indispensable. On ne peut rien dire du Ca²⁺ avec cette seule comparaison.",
+              "answers": [
+                {
+                  "content": "L'ATP est indispensable à la contraction",
+                  "correct": true
+                },
+                {
+                  "content": "Le Ca²⁺ est inutile à la contraction",
+                  "correct": false
+                },
+                {
+                  "content": "L'ATP empêche la contraction",
+                  "correct": false
+                },
+                {
+                  "content": "La contraction se fait sans énergie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience 2 (ATP et Ca²⁺) les fibres se raccourcissent ; dans l'expérience 3 (ATP, mais Ca²⁺ libre presque nul) elles ne se raccourcissent pas. Que conclus-tu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Comparer les deux expériences : toutes deux contiennent de l'ATP, l'une avec Ca²⁺ libre, l'autre presque sans. Étape 2 — Repérer ce qui change : seule la présence de Ca²⁺ libre ; le raccourcissement disparaît quand il manque. Étape 3 — Interpréter : un seul facteur varie, c'est lui qui conditionne la contraction. Étape 4 — Conclure : le Ca²⁺ libre est indispensable ; l'ATP seul ne suffit pas.",
+              "answers": [
+                {
+                  "content": "L'ATP suffit à lui seul pour déclencher la contraction",
+                  "correct": false
+                },
+                {
+                  "content": "Le Ca²⁺ libre est indispensable à la contraction",
+                  "correct": true
+                },
+                {
+                  "content": "Le Ca²⁺ empêche la contraction",
+                  "correct": false
+                },
+                {
+                  "content": "La substance ajoutée détruit l'ATP",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après la courbe (0 % à 0,01 ; 5 % à 0,1 ; 35 % à 0,5 ; 80 % à 1 ; 100 % à 5 et à 10 µmol/L de Ca²⁺), quelle est la tension développée à 1 µmol/L de Ca²⁺, en pourcentage de la tension maximale ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Observer le document : la tension (en %) selon la concentration en Ca²⁺ libre. Étape 2 — Repérer la valeur demandée sur l'axe horizontal : 1 µmol/L. Étape 3 — Lire la tension correspondante : 80 %.",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Selon la courbe (35 % à 0,5 ; 80 % à 1 ; 100 % à 5 et à 10 µmol/L de Ca²⁺), à partir de quelle concentration parmi celles-ci la tension maximale est-elle atteinte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Observer : la tension croît avec la concentration. Étape 2 — Repérer : 35 % à 0,5 et 80 % à 1 ne sont pas le maximum. Étape 3 — Lire : la tension vaut 100 % dès 5 µmol/L, puis reste à 100 % à 10. La tension maximale est donc atteinte à partir de 5 µmol/L (parmi les valeurs données).",
+              "answers": [
+                {
+                  "content": "0,5 µmol/L",
+                  "correct": false
+                },
+                {
+                  "content": "1 µmol/L",
+                  "correct": false
+                },
+                {
+                  "content": "5 µmol/L",
+                  "correct": true
+                },
+                {
+                  "content": "Elle n'est jamais atteinte",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Des fibres raccourcies et rigides, sans ATP, sont placées dans une solution avec ATP mais sans Ca²⁺ libre : elles s'allongent. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Observer : fibres rigides car les ponts sont encore formés (pas d'ATP). Étape 2 — Comparer : on ajoute de l'ATP sans Ca²⁺ libre. Étape 3 — Interpréter : la fixation de l'ATP détache les têtes ; sans Ca²⁺, elles ne peuvent pas se refixer. Étape 4 — Conclure : la fibre se relâche. L'ATP ne raccourcit pas les filaments.",
+              "answers": [
+                {
+                  "content": "L'ATP détache les têtes de myosine de l'actine, et sans Ca²⁺ elles ne se refixent pas : la fibre se relâche",
+                  "correct": true
+                },
+                {
+                  "content": "L'ATP provoque le raccourcissement des filaments",
+                  "correct": false
+                },
+                {
+                  "content": "L'ATP fabrique du Ca²⁺",
+                  "correct": false
+                },
+                {
+                  "content": "Les têtes de myosine se fixent plus fortement à l'actine en l'absence de Ca²⁺",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque événement du cycle de la tête de myosine à son effet.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Comparer les événements du cycle : fixation d'ATP, hydrolyse, basculement, présence de Ca²⁺. Étape 2 — Repérer l'effet de chacun sur la tête de myosine ou sur l'actine. Étape 3 — Interpréter : l'ATP qui se fixe détache la tête ; son hydrolyse la redresse ; le basculement de la tête fixée fait glisser l'actine ; le Ca²⁺ rend possible la fixation sur l'actine. Étape 4 — Conclure : chaque événement est relié à son effet.",
+              "answers": [
+                {
+                  "content": "Fixation d'un ATP sur la tête",
+                  "match": "La tête se détache de l'actine"
+                },
+                {
+                  "content": "Hydrolyse de l'ATP",
+                  "match": "La tête se redresse"
+                },
+                {
+                  "content": "Basculement de la tête fixée",
+                  "match": "L'actine glisse vers le centre du sarcomère"
+                },
+                {
+                  "content": "Présence de Ca²⁺",
+                  "match": "Les têtes peuvent se fixer sur l'actine"
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi un muscle devient rigide après la mort (rigidité cadavérique).",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Il n'y a plus de production d'ATP après la mort",
+                "Les têtes de myosine restent fixées à l'actine faute d'ATP",
+                "La conclusion relie ces ponts permanents à la rigidité du muscle"
+              ],
+              "explanation": "Corrigé modèle : Après la mort, la cellule ne produit plus d'ATP. Or la fixation d'un ATP sur la tête de myosine est nécessaire pour la détacher de l'actine. Sans ATP, les ponts entre actine et myosine restent formés : les filaments ne peuvent plus glisser et le muscle reste rigide. Barème : plus de production d'ATP (1 point), têtes restées fixées à l'actine (1 point), conclusion : muscle rigide (1 point).",
+              "answers": [],
+              "starter": "Après la mort, la cellule ne fabrique plus…"
+            }
+          ]
+        },
+        {
+          "title": "L'énergie et la chaleur d'un joueur de football",
+          "statement": "Lors d'une séance de jeu de l'équipe de football du lycée, à Abidjan, on suit un milieu de terrain. Au cours d'une série de sprints, les muscles de ses jambes hydrolysent 2 mol d'ATP. Une mole d'ATP libère 30,5 kJ en s'hydrolysant. Le travail mécanique fourni par les muscles pendant cette série est de 15,25 kJ. On mesure aussi sa température centrale toutes les 15 minutes : la courbe donne 37,0 °C au départ, 38,0 °C à 15 min, 38,6 °C à 30 min, 38,9 °C à 45 min et 39,0 °C à 60 min.",
+          "exercise_type": "evaluation",
+          "figure": "temperature-match",
+          "questions": [
+            {
+              "content": "Les muscles hydrolysent 2 mol d'ATP, à 30,5 kJ par mole. Quelle énergie est libérée ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever : 2 mol d'ATP hydrolysées, 30,5 kJ par mole. Étape 2 — Identifier : l'énergie est proportionnelle à la quantité d'ATP. Étape 3 — Calculer : $2 \\times 30{,}5 = 61$ kJ. Étape 4 — Conclure : 61 kJ sont libérés.",
+              "answers": [
+                {
+                  "content": "61",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "kJ"
+            },
+            {
+              "content": "Les muscles dépensent 61 kJ d'énergie et fournissent un travail mécanique de 15,25 kJ. Quelle quantité de chaleur dégagent-ils, en kJ ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever : énergie dépensée 61 kJ. Étape 2 — Identifier : travail 15,25 kJ. Étape 3 — Calculer : chaleur = énergie dépensée − travail = $61 - 15{,}25 = 45{,}75$ kJ. Étape 4 — Conclure : les muscles dégagent 45,75 kJ de chaleur, soit trois fois le travail ($3 \\times 15{,}25 = 45{,}75$).",
+              "answers": [
+                {
+                  "content": "45,75",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "kJ"
+            },
+            {
+              "content": "Les muscles dépensent 61 kJ d'énergie et fournissent un travail mécanique de 15,25 kJ. Quel est leur rendement ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Relever : énergie dépensée 61 kJ. Étape 2 — Identifier : travail 15,25 kJ. Étape 3 — Calculer : rendement = travail ÷ énergie dépensée = $15{,}25 \\div 61 = 0{,}25$, soit 25 %. Étape 4 — Conclure : le rendement est de 25 %. Répondre 75 % donnerait la part de chaleur ; 4 % viendrait d'une division à l'envers.",
+              "answers": [
+                {
+                  "content": "25 %",
+                  "correct": true
+                },
+                {
+                  "content": "75 %",
+                  "correct": false
+                },
+                {
+                  "content": "15,25 %",
+                  "correct": false
+                },
+                {
+                  "content": "4 %",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après la courbe de température du joueur (37,0 °C au départ, 38,0 à 15 min, 38,6 à 30 min, 38,9 à 45 min, 39,0 à 60 min), quelle est sa température à 30 minutes ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Observer : la courbe donne la température en fonction du temps. Étape 2 — Repérer l'abscisse 30 min. Étape 3 — Lire la valeur correspondante : 38,6 °C. Les autres valeurs correspondent à 15 min, 45 min et au départ.",
+              "answers": [
+                {
+                  "content": "38,0 °C",
+                  "correct": false
+                },
+                {
+                  "content": "38,6 °C",
+                  "correct": true
+                },
+                {
+                  "content": "38,9 °C",
+                  "correct": false
+                },
+                {
+                  "content": "37,0 °C",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après la même courbe (37,0 °C au départ et 38,6 °C à 30 min), de combien de degrés la température du joueur s'est-elle élevée en 30 minutes ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Observer : deux points de la courbe, 0 min et 30 min. Étape 2 — Lire : 37,0 °C puis 38,6 °C. Étape 3 — Calculer l'élévation : $38{,}6 - 37{,}0 = 1{,}6$ °C.",
+              "answers": [
+                {
+                  "content": "1,6",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "°C"
+            },
+            {
+              "content": "Si le rendement du muscle était de 100 %, l'activité des muscles n'élèverait pas la température du joueur.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Relever : énergie dépensée = travail + chaleur. Étape 2 — Identifier : avec un rendement de 100 %, tout deviendrait travail. Étape 3 — Calculer : chaleur = $\\text{énergie} - \\text{travail} = 0$. Étape 4 — Conclure : sans chaleur dégagée, les muscles n'échaufferaient pas le joueur. La température monte parce que le rendement est d'environ 25 %.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique l'élévation de la température centrale du joueur au cours de la séance, en utilisant le bilan énergétique des muscles.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "L'énergie vient de l'hydrolyse de l'ATP",
+                "Le rendement est inférieur à 100 % et une valeur chiffrée est donnée",
+                "La chaleur dégagée est reliée à l'élévation de température"
+              ],
+              "explanation": "Corrigé modèle : Pour se contracter, les muscles hydrolysent de l'ATP et libèrent de l'énergie (61 kJ pour 2 mol). Seul le quart de cette énergie devient travail mécanique (15,25 kJ, rendement de 25 %) ; le reste, 45,75 kJ, est dégagé sous forme de chaleur. La chaleur dégagée par l'ensemble des contractions pendant la séance s'accumule dans l'organisme du joueur, dont la température centrale passe de 37,0 °C à 39,0 °C en 60 minutes. Barème : énergie libérée par l'hydrolyse de l'ATP (1 point), rendement inférieur à 100 % avec les valeurs (1 point), chaleur dégagée expliquant l'élévation (1 point).",
+              "answers": [],
+              "starter": "Les muscles hydrolysent de l'ATP, donc…"
+            }
+          ]
+        },
+        {
+          "title": "Sprint de 100 m et course de 6 minutes : les voies de l'ATP",
+          "statement": "Kouadio, joueur de l'équipe de football du lycée, fait deux efforts à l'entraînement. Document 1, un sprint de 100 m en 12 s : le dosage dans le muscle de sa cuisse, en pourcentage de la valeur de repos, donne pour l'ATP 100 au repos et 90 après le sprint, et pour la phosphocréatine 100 au repos et 40 après le sprint. Document 2, une course de 6 minutes à allure soutenue. Sa consommation de dioxygène (en L/min) vaut 0,3 au repos, puis 1,8 ; 2,6 ; 3,0 ; 3,2 ; 3,3 ; 3,3 à la fin des minutes 1 à 6. La courbe donne sa concentration en acide lactique dans le sang (en mmol/L) : 1,0 au repos, puis 4,0 ; 7,0 ; 9,0 ; 10,5 ; 11,5 ; 12,0 à la fin des minutes 1 à 6.",
+          "exercise_type": "evaluation",
+          "figure": "lactate-effort",
+          "questions": [
+            {
+              "content": "Après un sprint de 12 s, le dosage dans le muscle donne : ATP 100 puis 90, phosphocréatine 100 puis 40 (en % de la valeur de repos). Que conclus-tu ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Relever : sprint de 12 s, effort bref et intense. Étape 2 — Examiner les dosages : l'ATP passe de 100 à 90, presque constant ; la phosphocréatine passe de 100 à 40, elle a beaucoup diminué. Étape 3 — Associer : une molécule qui diminue alors que l'ATP se maintient le renouvelle, c'est la voie de la phosphocréatine (phosphocréatine + ADP → créatine + ATP). Étape 4 — Conclure : la phosphocréatine a régénéré l'ATP. Croire que l'ATP chute de moitié serait lire 90 pour 50.",
+              "answers": [
+                {
+                  "content": "La phosphocréatine a servi à régénérer l'ATP, dont la quantité reste presque constante",
+                  "correct": true
+                },
+                {
+                  "content": "La phosphocréatine ne sert à rien, seul l'ATP est utilisé",
+                  "correct": false
+                },
+                {
+                  "content": "La phosphocréatine est produite par la contraction",
+                  "correct": false
+                },
+                {
+                  "content": "L'ATP a diminué de moitié, il n'est donc pas renouvelé",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "D'après le document 2 (0,3 L/min au repos puis 1,8 ; 2,6 ; 3,0 ; 3,2 ; 3,3 ; 3,3 aux minutes 1 à 6), quelle est la consommation de dioxygène à la fin de la minute 4 ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Observer : la consommation de dioxygène en fonction du temps. Étape 2 — Repérer la fin de la minute 4. Étape 3 — Lire : 3,2 L/min.",
+              "answers": [
+                {
+                  "content": "3,2",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "L/min"
+            },
+            {
+              "content": "La consommation de dioxygène de Kouadio passe de 0,3 L/min au repos à 3,3 L/min après 5 minutes, puis reste à 3,3. Que dit-elle de la respiration ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Relever : course de 6 minutes à allure soutenue. Étape 2 — Examiner : la consommation de dioxygène monte progressivement avant d'atteindre un palier. Étape 3 — Associer : au début, l'apport de dioxygène est insuffisant, donc d'autres voies complètent ; la respiration devient dominante quand le palier est atteint. Étape 4 — Conclure : la respiration se met en route progressivement.",
+              "answers": [
+                {
+                  "content": "Elle ne démarre pas instantanément : au début, le dioxygène apporté ne suffit pas à fournir tout l'ATP",
+                  "correct": true
+                },
+                {
+                  "content": "Elle fournit tout l'ATP dès la première seconde",
+                  "correct": false
+                },
+                {
+                  "content": "Elle s'arrête après 4 minutes",
+                  "correct": false
+                },
+                {
+                  "content": "Le dioxygène n'a aucun rôle dans la course",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La concentration en acide lactique du sang vaut 1,0 mmol/L au repos et 12,0 mmol/L à la fin de la minute 6. De combien a-t-elle augmenté ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Observer : la courbe de la concentration en acide lactique. Étape 2 — Repérer les valeurs au repos (1,0) et à la minute 6 (12,0). Étape 3 — Calculer : $12{,}0 - 1{,}0 = 11{,}0$ mmol/L.",
+              "answers": [
+                {
+                  "content": "11",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mmol/L"
+            },
+            {
+              "content": "La concentration en acide lactique augmente de 3,0 ; 3,0 ; 2,0 ; 1,5 ; 1,0 puis 0,5 mmol/L au fil des minutes. Quelles propositions sont exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Relever : course de 6 minutes à allure soutenue. Étape 2 — Examiner : la consommation de dioxygène passe de 0,3 à 3,3 L/min, mais lentement ; l'acide lactique monte vite au début puis de moins en moins. Étape 3 — Associer : l'acide lactique est le produit de la fermentation lactique ; sa formation rapide au début traduit un dioxygène insuffisant ; le ralentissement traduit la montée de la respiration. Étape 4 — Conclure : les deux propositions sont exactes. La respiration forme du CO₂ et de l'eau, pas d'acide lactique.",
+              "answers": [
+                {
+                  "content": "L'acide lactique augmente parce que la respiration en produit",
+                  "correct": false
+                },
+                {
+                  "content": "Pendant les premières minutes, une partie de l'ATP vient de la fermentation lactique, car le dioxygène est encore insuffisant",
+                  "correct": true
+                },
+                {
+                  "content": "La phosphocréatine est transformée en acide lactique",
+                  "correct": false
+                },
+                {
+                  "content": "La hausse ralentit ensuite parce que la respiration prend en charge une part croissante de l'ATP",
+                  "correct": true
+                },
+                {
+                  "content": "La concentration en acide lactique reste constante pendant la course",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour former 76 ATP par fermentation lactique, à raison de 2 ATP par glucose, combien de molécules de glucose faut-il dégrader ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever : 76 ATP à former. Étape 2 — Examiner : la fermentation lactique rapporte 2 ATP par glucose. Étape 3 — Calculer : $76 \\div 2 = 38$ molécules de glucose. Étape 4 — Conclure : il en faut 38, alors que la respiration (38 ATP par glucose) n'en demanderait que 2 : la fermentation lactique est 19 fois moins rentable.",
+              "answers": [
+                {
+                  "content": "38",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "glucoses"
+            },
+            {
+              "content": "Compare les voies qui régénèrent l'ATP pendant un sprint de 100 m et pendant un marathon, en justifiant le choix de la voie dominante dans chaque cas.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Pour le sprint, la phosphocréatine puis la fermentation lactique sont citées et justifiées",
+                "Pour le marathon, la respiration est citée et justifiée par le dioxygène et la durée",
+                "Les rendements en ATP par glucose (2 et 38) sont comparés",
+                "La réponse oppose effort bref et intense à effort long et modéré"
+              ],
+              "explanation": "Corrigé modèle : Pendant un sprint de 100 m (environ 12 s, intensité maximale), le dioxygène n'a pas le temps d'arriver en quantité suffisante aux muscles. L'ATP est régénéré surtout par la phosphocréatine (phosphocréatine + ADP → créatine + ATP), voie immédiate et brève, relayée par la fermentation lactique (2 ATP par glucose). Pendant un marathon (plusieurs heures, intensité modérée), le dioxygène est fourni en quantité suffisante : la respiration, durable et rentable (environ 38 ATP par glucose), fournit l'essentiel de l'ATP. Barème : sprint, voie dominante justifiée (1,5 point), marathon, voie dominante justifiée (1,5 point), rendements en ATP par glucose comparés (0,5 point), opposition effort bref et intense / effort long et modéré (0,5 point).",
+              "answers": [],
+              "starter": "Pendant le sprint, le dioxygène…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

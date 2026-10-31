@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Cinématique du point",
@@ -8,1094 +8,1616 @@
       "level_name": "Tle",
       "material_name": "Physique-Chimie",
       "series_name": "D",
-      "essentials": [
+      "theme": "blue",
+      "figures": [
         {
-          "name": "Repérer un mouvement : référentiel, position, vitesse et accélération",
-          "subtitle": "Dire où est le mobile, à quelle vitesse il va et comment sa vitesse change",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Choisir un référentiel et un repère pour décrire un mouvement.</li><li>Écrire le vecteur position, puis en déduire les équations horaires et la trajectoire.</li><li>Calculer les vecteurs vitesse et accélération en dérivant par rapport au temps.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le gbaka.</strong> Tu es assis dans un gbaka qui roule vers Adjamé. Ton voisin de banc ne bouge pas par rapport à toi. Mais pour la vendeuse d'eau glacée au bord de la route, vous passez tous les deux à toute allure. Pour dire où se trouve le gbaka, l'apprenti compte les mètres depuis le dernier arrêt et regarde sa montre.</p><p><strong>Le pont.</strong> Le gbaka, ou le bord de la route, c'est le <strong>référentiel</strong> : l'objet par rapport auquel tu regardes le mouvement. Le dernier arrêt, c'est l'<strong>origine O</strong> du repère. La flèche qui part de l'arrêt et pointe vers le gbaka, c'est le <strong>vecteur position</strong> $\\overrightarrow{OM}$. La montre de l'apprenti, c'est le <strong>repère de temps</strong>. Quand le gbaka roule, cette flèche change : c'est la <strong>vitesse</strong>. Quand le chauffeur appuie sur l'accélérateur, freine ou tourne le volant, la vitesse change : c'est l'<strong>accélération</strong>.</p><p><strong>La limite de l'image.</strong> Le compteur du gbaka donne seulement la valeur de la vitesse. Le vecteur vitesse, lui, a aussi une direction et un sens. Dans un virage pris avec le compteur bloqué, la direction de la vitesse change : il y a quand même une accélération.</p><h2>Ce qu'il faut retenir</h2><p>Le <em>mobile</em> est le point M dont on étudie le mouvement. Dériver une grandeur par rapport au temps, c'est calculer à quel rythme elle change.</p><blockquote><p><strong>Référentiel</strong> : objet de référence par rapport auquel on étudie le mouvement. On lui associe un repère d'espace $(O ; \\vec i, \\vec j, \\vec k)$ et un repère de temps (une origine des dates et une unité, la seconde). Le mouvement dépend du référentiel choisi. Exemples : référentiel terrestre (le sol), géocentrique (centre de la Terre), héliocentrique (centre du Soleil).</p><p><strong>Vecteur position</strong> : $\\overrightarrow{OM} = x\\,\\vec i + y\\,\\vec j + z\\,\\vec k$. Les fonctions $x(t)$, $y(t)$, $z(t)$ sont les <strong>équations horaires</strong>. La <strong>trajectoire</strong> est l'ensemble des positions successives du mobile ; on obtient son équation en éliminant $t$ entre $x(t)$ et $y(t)$.</p><p><strong>Vecteur vitesse</strong> : $\\vec v = \\dfrac{d\\overrightarrow{OM}}{dt}$, soit $v_x = \\dfrac{dx}{dt}$, $v_y = \\dfrac{dy}{dt}$, $v_z = \\dfrac{dz}{dt}$. Il est tangent à la trajectoire et orienté dans le sens du mouvement. Sa valeur est $v = \\sqrt{v_x^2 + v_y^2 + v_z^2}$, en $\\text{m/s}$.</p><p><strong>Vecteur accélération</strong> : $\\vec a = \\dfrac{d\\vec v}{dt} = \\dfrac{d^2\\overrightarrow{OM}}{dt^2}$, soit $a_x = \\dfrac{dv_x}{dt}$, $a_y = \\dfrac{dv_y}{dt}$, $a_z = \\dfrac{dv_z}{dt}$. Sa valeur s'exprime en $\\text{m/s}^2$.</p></blockquote><h2>Exemple résolu</h2><p>Un mobile M se déplace dans un plan. Ses équations horaires sont $x(t) = 2t + 1$ et $y(t) = t^2$ (unités SI : mètre et seconde). Étudie-le à la date $t = 2\\ \\text{s}$.</p><ol><li><strong>Position.</strong> On remplace $t$ par 2 : $x = 5\\ \\text{m}$ et $y = 4\\ \\text{m}$. Donc $\\overrightarrow{OM} = 5\\,\\vec i + 4\\,\\vec j$.</li><li><strong>Vitesse.</strong> On dérive chaque coordonnée : $v_x = 2$ et $v_y = 2t$. À $t = 2\\ \\text{s}$ : $v_x = 2\\ \\text{m/s}$ et $v_y = 4\\ \\text{m/s}$. Sa valeur est $v = \\sqrt{2^2 + 4^2} = \\sqrt{20} \\approx 4{,}5\\ \\text{m/s}$.</li><li><strong>Accélération.</strong> On dérive encore : $a_x = 0$ et $a_y = 2\\ \\text{m/s}^2$. Le vecteur accélération est constant : $\\vec a = 2\\,\\vec j$.</li><li><strong>Trajectoire.</strong> De $x = 2t + 1$, on tire $t = \\dfrac{x - 1}{2}$. On remplace dans $y$ : $y = \\dfrac{(x - 1)^2}{4}$. La trajectoire est une portion de parabole.</li></ol><h2>Le piège à éviter</h2><p>Confondre l'<strong>équation horaire</strong> $y(t)$ et l'<strong>équation de la trajectoire</strong> $y(x)$. Dans l'exemple, $y = t^2$ ne donne pas la forme du chemin : elle dit où est le mobile à chaque date. La forme du chemin, c'est $y = \\dfrac{(x - 1)^2}{4}$.</p><p>Pour repérer l'erreur, regarde la variable. S'il y a $t$, c'est une équation horaire. S'il n'y a que $x$ et $y$, c'est l'équation de la trajectoire.</p><h2>En une phrase</h2><p>Je choisis un référentiel, j'écris $\\overrightarrow{OM}$, je dérive une fois pour avoir la vitesse et deux fois pour avoir l'accélération.</p>",
-          "exercises": [
+          "key": "trajectoire-drone",
+          "kind": "coordinate_plane",
+          "description": "Plan (x en m, y en m) montrant la trajectoire d'un drone de surveillance de l'autoroute du Nord : x(t) = 4t et y(t) = 0,5t². Les points marquent les positions aux dates 0, 1, 2, 3 et 4 s. En M (t = 3 s), le vecteur vitesse v de coordonnées (4 ; 3) et le vecteur accélération a de coordonnées (0 ; 1) sont tracés avec la même unité graphique que les axes.",
+          "params": {
+            "xmin": 0,
+            "xmax": 24,
+            "ymin": 0,
+            "ymax": 12,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "M1",
+                "x": 4,
+                "y": 0.5
+              },
+              {
+                "id": "M2",
+                "x": 8,
+                "y": 2
+              },
+              {
+                "id": "M",
+                "x": 12,
+                "y": 4.5
+              },
+              {
+                "id": "M4",
+                "x": 16,
+                "y": 8
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 4,
+                "y2": 0.5
+              },
+              {
+                "x1": 4,
+                "y1": 0.5,
+                "x2": 8,
+                "y2": 2
+              },
+              {
+                "x1": 8,
+                "y1": 2,
+                "x2": 12,
+                "y2": 4.5
+              },
+              {
+                "x1": 12,
+                "y1": 4.5,
+                "x2": 16,
+                "y2": 8
+              }
+            ],
+            "vectors": [
+              {
+                "label": "v",
+                "dx": 4,
+                "dy": 3,
+                "ox": 12,
+                "oy": 4.5
+              },
+              {
+                "label": "a",
+                "dx": 0,
+                "dy": 1,
+                "ox": 12,
+                "oy": 4.5
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "repere-de-frenet",
+          "kind": "coordinate_plane",
+          "description": "Un gbaka dans une bretelle circulaire de centre O et de rayon 5 m (cercle schématisé par un polygone). Au point M(3 ; 4), le vecteur vitesse v (-4 ; 3), de valeur 5 m/s, est tangent à la trajectoire. L'accélération tangentielle a_t (-1,6 ; 1,2), de valeur 2 m/s², est parallèle à v. L'accélération normale a_n (-3 ; -4), de valeur 5 m/s², pointe vers O. Le vecteur a est leur somme (-4,6 ; -2,8).",
+          "params": {
+            "xmin": -8,
+            "xmax": 8,
+            "ymin": -8,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "M",
+                "x": 3,
+                "y": 4
+              }
+            ],
+            "segments": [
+              {
+                "x1": 5,
+                "y1": 0,
+                "x2": 4,
+                "y2": 3
+              },
+              {
+                "x1": 4,
+                "y1": 3,
+                "x2": 3,
+                "y2": 4
+              },
+              {
+                "x1": 3,
+                "y1": 4,
+                "x2": 0,
+                "y2": 5
+              },
+              {
+                "x1": 0,
+                "y1": 5,
+                "x2": -3,
+                "y2": 4
+              },
+              {
+                "x1": -3,
+                "y1": 4,
+                "x2": -4,
+                "y2": 3
+              },
+              {
+                "x1": -4,
+                "y1": 3,
+                "x2": -5,
+                "y2": 0
+              },
+              {
+                "x1": -5,
+                "y1": 0,
+                "x2": -4,
+                "y2": -3
+              },
+              {
+                "x1": -4,
+                "y1": -3,
+                "x2": -3,
+                "y2": -4
+              },
+              {
+                "x1": -3,
+                "y1": -4,
+                "x2": 0,
+                "y2": -5
+              },
+              {
+                "x1": 0,
+                "y1": -5,
+                "x2": 3,
+                "y2": -4
+              },
+              {
+                "x1": 3,
+                "y1": -4,
+                "x2": 4,
+                "y2": -3
+              },
+              {
+                "x1": 4,
+                "y1": -3,
+                "x2": 5,
+                "y2": 0
+              }
+            ],
+            "vectors": [
+              {
+                "label": "v",
+                "dx": -4,
+                "dy": 3,
+                "ox": 3,
+                "oy": 4
+              },
+              {
+                "label": "a_t",
+                "dx": -1.6,
+                "dy": 1.2,
+                "ox": 3,
+                "oy": 4
+              },
+              {
+                "label": "a_n",
+                "dx": -3,
+                "dy": -4,
+                "ox": 3,
+                "oy": 4
+              },
+              {
+                "label": "a",
+                "dx": -4.6,
+                "dy": -2.8,
+                "ox": 3,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "abscisse-gbaka",
+          "kind": "stat_chart",
+          "description": "Courbe de l'abscisse x(t) d'un gbaka qui démarre sans vitesse initiale à l'origine O de l'axe, avec une accélération constante de 2 m/s² : x(t) = t². En abscisse, la date t de 0 à 10 s ; en ordonnée, la position x en mètres, de 0 m à t = 0 s jusqu'à 100 m à t = 10 s. La courbe est une portion de parabole.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              1,
+              4,
+              9,
+              16,
+              25,
+              36,
+              49,
+              64,
+              81,
+              100
+            ],
+            "labels": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "vitesse-gbaka",
+          "kind": "stat_chart",
+          "description": "Courbe de la vitesse v(t) du même gbaka, qui démarre sans vitesse initiale avec une accélération constante de 2 m/s² : v(t) = 2t. En abscisse, la date t de 0 à 10 s ; en ordonnée, la vitesse en m/s, de 0 à t = 0 s jusqu'à 20 m/s à t = 10 s. La courbe est une droite, dont le coefficient directeur est l'accélération.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              2,
+              4,
+              6,
+              8,
+              10,
+              12,
+              14,
+              16,
+              18,
+              20
+            ],
+            "labels": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9",
+              "10"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "mouvement-circulaire-uniforme",
+          "kind": "coordinate_plane",
+          "description": "Une roue de rayon R = 5 m en mouvement circulaire uniforme, de centre O (cercle schématisé par un polygone). Le point mobile M(0 ; 5) a une abscisse angulaire θ = π/2 rad, mesurée depuis l'axe Ox (point A(5 ; 0)). Avec ω = 1 rad/s, le vecteur vitesse v (-5 ; 0), de valeur 5 m/s, est tangent au cercle ; l'accélération a_n (0 ; -5), de valeur 5 m/s², pointe vers O.",
+          "params": {
+            "xmin": -8,
+            "xmax": 8,
+            "ymin": -8,
+            "ymax": 8,
+            "points": [
+              {
+                "id": "O",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "A",
+                "x": 5,
+                "y": 0
+              },
+              {
+                "id": "M",
+                "x": 0,
+                "y": 5
+              }
+            ],
+            "segments": [
+              {
+                "x1": 5,
+                "y1": 0,
+                "x2": 3,
+                "y2": 4
+              },
+              {
+                "x1": 3,
+                "y1": 4,
+                "x2": 0,
+                "y2": 5
+              },
+              {
+                "x1": 0,
+                "y1": 5,
+                "x2": -3,
+                "y2": 4
+              },
+              {
+                "x1": -3,
+                "y1": 4,
+                "x2": -5,
+                "y2": 0
+              },
+              {
+                "x1": -5,
+                "y1": 0,
+                "x2": -3,
+                "y2": -4
+              },
+              {
+                "x1": -3,
+                "y1": -4,
+                "x2": 0,
+                "y2": -5
+              },
+              {
+                "x1": 0,
+                "y1": -5,
+                "x2": 3,
+                "y2": -4
+              },
+              {
+                "x1": 3,
+                "y1": -4,
+                "x2": 5,
+                "y2": 0
+              },
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 5,
+                "y2": 0
+              },
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 0,
+                "y2": 5
+              }
+            ],
+            "vectors": [
+              {
+                "label": "v",
+                "dx": -5,
+                "dy": 0,
+                "ox": 0,
+                "oy": 5
+              },
+              {
+                "label": "a_n",
+                "dx": 0,
+                "dy": -5,
+                "ox": 0,
+                "oy": 5
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Vecteurs position, vitesse et accélération",
+          "remember": "Un **référentiel** est l'objet de référence par rapport auquel on étudie le mouvement ; on lui associe un **repère** $(O ; \\vec{i}, \\vec{j}, \\vec{k})$. La position du mobile $M$ est donnée par le **vecteur position** $\\vec{OM} = x\\,\\vec{i} + y\\,\\vec{j} + z\\,\\vec{k}$ ; les fonctions $x(t)$, $y(t)$, $z(t)$ sont les **équations horaires**. Le **vecteur vitesse** est la dérivée du vecteur position : $\\vec{v} = \\dfrac{d\\vec{OM}}{dt}$, de coordonnées $v_x = \\dfrac{dx}{dt}$, $v_y = \\dfrac{dy}{dt}$ ; il est tangent à la trajectoire, dans le sens du mouvement. Le **vecteur accélération** est la dérivée du vecteur vitesse : $\\vec{a} = \\dfrac{d\\vec{v}}{dt}$, de coordonnées $a_x = \\dfrac{dv_x}{dt}$, $a_y = \\dfrac{dv_y}{dt}$. Les valeurs sont $v = \\sqrt{v_x^2 + v_y^2}$ en m/s et $a = \\sqrt{a_x^2 + a_y^2}$ en m/s². La **trajectoire** est l'ensemble des positions occupées : on l'obtient en éliminant $t$ entre $x(t)$ et $y(t)$.",
+          "method": [
+            "Écrire les équations horaires $x(t)$ et $y(t)$ dans le repère choisi.",
+            "Dériver une première fois chaque coordonnée par rapport à $t$ pour obtenir $v_x$ et $v_y$.",
+            "Dériver une seconde fois, cette fois $v_x$ et $v_y$, pour obtenir $a_x$ et $a_y$.",
+            "Remplacer $t$ par la date demandée, puis calculer les valeurs $v = \\sqrt{v_x^2 + v_y^2}$ et $a = \\sqrt{a_x^2 + a_y^2}$.",
+            "Éliminer $t$ entre $x(t)$ et $y(t)$ pour obtenir l'équation de la trajectoire."
+          ],
+          "example": {
+            "statement": "Un drone de surveillance de l'autoroute du Nord décolle du bord de la chaussée. Dans le repère $(O ; \\vec{i}, \\vec{j})$ ($x$ le long de la route, $y$ l'altitude), ses équations horaires sont $x(t) = 4t$ et $y(t) = 0{,}5\\,t^2$ (en m, $t$ en s). Donner $\\vec{v}$, $\\vec{a}$ et leurs valeurs à $t = 3$ s, puis la trajectoire.",
+            "steps": [
+              "Écrire : $x(t) = 4t$ et $y(t) = 0{,}5\\,t^2$.",
+              "Dériver une première fois : $v_x = \\dfrac{dx}{dt} = 4$ et $v_y = \\dfrac{dy}{dt} = t$.",
+              "Dériver une seconde fois : $a_x = \\dfrac{dv_x}{dt} = 0$ et $a_y = \\dfrac{dv_y}{dt} = 1$.",
+              "Remplacer $t = 3$ s : $\\vec{v}(4 ; 3)$ donc $v = \\sqrt{16 + 9} = 5$ m/s ; $\\vec{a}(0 ; 1)$ donc $a = 1$ m/s².",
+              "Éliminer $t$ : $t = \\dfrac{x}{4}$, donc $y = 0{,}5 \\times \\dfrac{x^2}{16} = \\dfrac{x^2}{32}$ : la trajectoire est une parabole."
+            ]
+          },
+          "pitfall": "Ne pas obtenir la valeur de la vitesse en additionnant les coordonnées. Contre-exemple : $\\vec{v}(3 ; 4)$ en m/s. Additionner donne $3 + 4 = 7$ m/s, ce qui est faux : la valeur est $v = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$ m/s. Une valeur est toujours une racine de la somme des carrés. Et n'écris pas non plus $a = \\dfrac{dv}{dt}$ pour la valeur de l'accélération : en général, ce n'est pas le cas (voir le repère de Frenet).",
+          "figure": "trajectoire-drone",
+          "exercise": {
+            "title": "Position, vitesse et accélération d'un mobile",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : écrire les équations horaires, dériver deux fois, calculer les valeurs, éliminer le temps.",
+            "questions": [
+              {
+                "content": "Le vecteur vitesse $\\vec{v}$ d'un mobile est défini comme :",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Dériver une première fois : la vitesse s'obtient en dérivant les coordonnées du vecteur position, donc $\\vec{v} = \\dfrac{d\\vec{OM}}{dt}$. Le quotient distance sur durée est la vitesse moyenne, pas la vitesse à un instant. C'est l'accélération qui est la dérivée de la vitesse, et non l'inverse.",
+                "answers": [
+                  {
+                    "content": "la dérivée du vecteur position par rapport au temps",
+                    "correct": true
+                  },
+                  {
+                    "content": "le quotient de la distance parcourue par la durée du trajet",
+                    "correct": false
+                  },
+                  {
+                    "content": "la dérivée du vecteur accélération par rapport au temps",
+                    "correct": false
+                  },
+                  {
+                    "content": "la primitive du vecteur position",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un taxi roule sur l'autoroute dans le sens de l'axe $Ox$ avec $x(t) = 2t^2 + 5t$ (en m, $t$ en s). Calcule $v_x$ à $t = 3$ s.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $x(t) = 2t^2 + 5t$. Étape 2 — Dériver une première fois : $v_x = \\dfrac{dx}{dt} = 4t + 5$. Étape 4 — Remplacer $t = 3$ : $v_x = 4 \\times 3 + 5 = 17$ m/s.",
+                "answers": [
+                  {
+                    "content": "17",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un taxi a pour équation horaire $x(t) = 2t^2 + 5t$ (en m, $t$ en s). Calcule son accélération $a_x$.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $x(t) = 2t^2 + 5t$. Étape 2 — Dériver une première fois : $v_x = 4t + 5$. Étape 3 — Dériver une seconde fois : $a_x = \\dfrac{dv_x}{dt} = 4$ m/s². L'accélération est constante, elle ne dépend pas de $t$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un gbaka a un vecteur vitesse de coordonnées $v_x = 6$ m/s et $v_y = 8$ m/s. Calcule la valeur de sa vitesse.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Calculer la valeur : $v = \\sqrt{v_x^2 + v_y^2} = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10$ m/s. On n'additionne pas $6 + 8 = 14$ : c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un mobile a pour équations horaires $x(t) = 3t$ et $y(t) = t^2$ (en m, $t$ en s). Quelle est l'équation de sa trajectoire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $x = 3t$ et $y = t^2$. Étape 5 — Éliminer $t$ : $t = \\dfrac{x}{3}$, donc $y = \\left(\\dfrac{x}{3}\\right)^2 = \\dfrac{x^2}{9}$. L'erreur $y = \\dfrac{x^2}{3}$ oublie d'élever le 3 au carré.",
+                "answers": [
+                  {
+                    "content": "$y = \\dfrac{x^2}{3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y = \\dfrac{x^2}{9}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$y = 3x^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y = 9x^2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un mobile a pour vecteur vitesse $\\vec{v}(3 ; 4)$ en m/s. Sa vitesse vaut $3 + 4 = 7$ m/s.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Calculer la valeur : $v = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$ m/s. On n'additionne pas les coordonnées : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux propriétés vraies du vecteur vitesse $\\vec{v}$ d'un mobile ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Dériver une première fois : le vecteur vitesse est tangent à la trajectoire et orienté dans le sens du mouvement. Il n'est pas dirigé vers un centre (ce serait l'accélération dans un mouvement circulaire uniforme) et il n'est pas perpendiculaire à la trajectoire.",
+                "answers": [
+                  {
+                    "content": "Il est toujours dirigé vers le centre de la trajectoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est tangent à la trajectoire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est toujours perpendiculaire à la trajectoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a le sens du mouvement",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un mobile a pour équations horaires $x(t) = 3t^2$ et $y(t) = 4t$ (en m, $t$ en s).",
+            "questions": [
+              {
+                "content": "À $t = 2$ s, calcule les coordonnées de la vitesse : $v_x$ = ___ m/s   $v_y$ = ___ m/s",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $x(t) = 3t^2$ et $y(t) = 4t$. Étape 2 — Dériver une première fois : $v_x = 6t$ et $v_y = 4$. Étape 4 — Remplacer $t = 2$ : $v_x = 6 \\times 2 = 12$ m/s et $v_y = 4$ m/s.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Dérive $3t^2$ en $6t$ ; la dérivée de $4t$ est $4$."
+              },
+              {
+                "content": "Un mobile a pour ordonnée $y(t) = 4t$ (en m, $t$ en s). Quelle est son accélération $a_y$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Dériver une première fois : $v_y = 4$. Étape 3 — Dériver une seconde fois : $a_y = 0$. La vitesse selon $y$ est constante, donc l'accélération selon $y$ est nulle.",
+                "answers": [
+                  {
+                    "content": "4 m/s²",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4t$",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": true
+                  },
+                  {
+                    "content": "8 m/s²",
+                    "correct": false
+                  }
+                ],
+                "hint": "Dérive deux fois : la dérivée d'une constante est nulle."
+              },
+              {
+                "content": "Le vecteur vitesse est toujours ___ à la trajectoire.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Dériver une première fois : le vecteur vitesse est la dérivée du vecteur position, il est tangent à la trajectoire et dirigé dans le sens du mouvement.",
+                "answers": [
+                  {
+                    "content": "tangent",
+                    "correct": true
+                  },
+                  {
+                    "content": "tangente",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pense à une pierre qui s'échappe d'une fronde : dans quelle direction part-elle ?"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le repère de Frenet : accélérations tangentielle et normale",
+          "remember": "Le **repère de Frenet** $(M ; \\vec{\\tau}, \\vec{n})$ est lié au mobile : $\\vec{\\tau}$ est unitaire, tangent à la trajectoire et orienté dans le sens du mouvement ; $\\vec{n}$ est unitaire, perpendiculaire à $\\vec{\\tau}$ et dirigé vers l'intérieur de la courbure (vers le centre de courbure). Dans ce repère, $\\vec{v} = v\\,\\vec{\\tau}$ et $\\vec{a} = a_t\\,\\vec{\\tau} + a_n\\,\\vec{n}$ avec : l'**accélération tangentielle** $a_t = \\dfrac{dv}{dt}$ (elle traduit la variation de la valeur de la vitesse) et l'**accélération normale** $a_n = \\dfrac{v^2}{\\rho}$ (elle traduit le changement de direction), où $\\rho$ est le **rayon de courbure** de la trajectoire. La valeur de l'accélération est $a = \\sqrt{a_t^2 + a_n^2}$. Si $a_t > 0$, la vitesse augmente (mouvement accéléré) ; si $a_t < 0$, elle diminue (mouvement retardé) ; si $a_t = 0$, la vitesse est constante (mouvement uniforme). En ligne droite, $\\rho$ est infini et $a_n = 0$.",
+          "method": [
+            "Repérer la trajectoire, le rayon de courbure $\\rho$ et la valeur $v$ de la vitesse à l'instant étudié.",
+            "Calculer l'accélération tangentielle $a_t = \\dfrac{dv}{dt}$ en dérivant la valeur de la vitesse.",
+            "Calculer l'accélération normale $a_n = \\dfrac{v^2}{\\rho}$.",
+            "Calculer la valeur de l'accélération $a = \\sqrt{a_t^2 + a_n^2}$.",
+            "Conclure sur la nature du mouvement avec le signe de $a_t$ : accéléré, retardé ou uniforme."
+          ],
+          "example": {
+            "statement": "Un gbaka quitte l'autoroute du Nord par une bretelle en arc de cercle de rayon $\\rho = 50$ m. Sa vitesse est $v(t) = 4 + 1{,}5\\,t$ (en m/s, $t$ en s). Étudier son accélération à $t = 4$ s.",
+            "steps": [
+              "Repérer : la trajectoire est un arc de cercle, $\\rho = 50$ m ; à $t = 4$ s, $v = 4 + 1{,}5 \\times 4 = 10$ m/s.",
+              "Calculer $a_t$ : $a_t = \\dfrac{dv}{dt} = 1{,}5$ m/s².",
+              "Calculer $a_n$ : $a_n = \\dfrac{v^2}{\\rho} = \\dfrac{10^2}{50} = 2$ m/s².",
+              "Calculer $a$ : $a = \\sqrt{1{,}5^2 + 2^2} = \\sqrt{2{,}25 + 4} = \\sqrt{6{,}25} = 2{,}5$ m/s².",
+              "Conclure : $a_t = 1{,}5 > 0$, donc le mouvement est accéléré."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une vitesse constante donne une accélération nulle. Contre-exemple : un taxi prend un virage circulaire de rayon $\\rho = 50$ m à vitesse constante $v = 10$ m/s. Alors $a_t = 0$, mais $a_n = \\dfrac{10^2}{50} = 2$ m/s², donc $a = 2$ m/s² et non $0$. La direction de la vitesse change : il y a toujours une accélération normale dans un virage. Ne confonds pas $a_t$ (valeur de la vitesse) et $a_n$ (direction).",
+          "figure": "repere-de-frenet",
+          "exercise": {
+            "title": "Accélérations tangentielle et normale",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche à des mobiles de l'autoroute : repérer, calculer $a_t$ et $a_n$, calculer $a$, conclure.",
+            "questions": [
+              {
+                "content": "Dans le repère de Frenet, le vecteur vitesse d'un mobile est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le repère de Frenet est lié au mobile, $\\vec{\\tau}$ est tangent à la trajectoire. Le vecteur vitesse s'écrit $\\vec{v} = v\\,\\vec{\\tau}$ : il est tangent et dans le sens du mouvement. Le vecteur $\\vec{n}$ porte l'accélération normale, jamais la vitesse.",
+                "answers": [
+                  {
+                    "content": "dirigé vers le centre de courbure",
+                    "correct": false
+                  },
+                  {
+                    "content": "porté par le vecteur $\\vec{n}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "perpendiculaire à la trajectoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "tangent à la trajectoire et de même sens que le mouvement",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un taxi roule à $v = 20$ m/s dans un virage de rayon de courbure $\\rho = 200$ m. Calcule son accélération normale $a_n$.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $v = 20$ m/s et $\\rho = 200$ m. Étape 3 — Calculer $a_n$ : $a_n = \\dfrac{v^2}{\\rho} = \\dfrac{20^2}{200} = \\dfrac{400}{200} = 2$ m/s².",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La valeur de la vitesse d'un gbaka est $v(t) = 10 + 2t$ (en m/s, $t$ en s). Calcule son accélération tangentielle $a_t$.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $v(t) = 10 + 2t$. Étape 2 — Calculer $a_t$ : $a_t = \\dfrac{dv}{dt} = 2$ m/s². Elle est constante et positive.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un mobile a une accélération tangentielle $a_t = 3$ m/s² et une accélération normale $a_n = 4$ m/s². Calcule la valeur $a$ de son accélération.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 4 — Calculer $a$ : $a = \\sqrt{a_t^2 + a_n^2} = \\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$ m/s². On n'additionne pas $3 + 4 = 7$ : $a_t$ et $a_n$ sont perpendiculaires.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un taxi prend un virage circulaire à vitesse constante. Son accélération est nulle.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — $a_t = \\dfrac{dv}{dt} = 0$ car la vitesse est constante. Étape 3 — $a_n = \\dfrac{v^2}{\\rho}$ n'est pas nul, car $\\rho$ est fini. Étape 4 — $a = \\sqrt{0 + a_n^2} = a_n \\neq 0$. L'accélération n'est pas nulle : c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un gbaka roule en ligne droite sur l'autoroute et accélère. Quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : la trajectoire est une droite, donc $\\rho$ est infini. Étape 3 — Calculer $a_n$ : $a_n = \\dfrac{v^2}{\\rho} = 0$. Étape 2 — La vitesse augmente, donc $a_t \\neq 0$ : $\\vec{a} = a_t\\,\\vec{\\tau}$ est porté par la direction de $\\vec{v}$. Les deux autres propositions sont fausses.",
+                "answers": [
+                  {
+                    "content": "$a_t = 0$, car la trajectoire est une droite",
+                    "correct": false
+                  },
+                  {
+                    "content": "$a_n = 0$, car le rayon de courbure est infini",
+                    "correct": true
+                  },
+                  {
+                    "content": "$a_n = \\dfrac{v^2}{\\rho}$ est maximale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le vecteur accélération a la même direction que le vecteur vitesse",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu étudies l'accélération de véhicules qui prennent la bretelle de sortie de l'autoroute.",
+            "questions": [
+              {
+                "content": "Un taxi roule à $v = 10$ m/s dans un virage de rayon $\\rho = 25$ m. Calcule $a_n$.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $v = 10$ m/s et $\\rho = 25$ m. Étape 3 — Calculer $a_n$ : $a_n = \\dfrac{v^2}{\\rho} = \\dfrac{100}{25} = 4$ m/s².",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule $v^2$ avant de diviser par $\\rho$."
+              },
+              {
+                "content": "Un gbaka a une accélération tangentielle $a_t > 0$ : son mouvement est ___.",
+                "question_type": "select",
+                "explanation": "Étape 5 — Conclure : $a_t = \\dfrac{dv}{dt} > 0$ signifie que la valeur de la vitesse augmente. Le mouvement est accéléré. Il serait retardé pour $a_t < 0$ et uniforme pour $a_t = 0$.",
+                "answers": [
+                  {
+                    "content": "retardé",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "accéléré",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "uniforme",
+                    "correct": false,
+                    "blank": 0
+                  }
+                ],
+                "hint": "$a_t$ est la dérivée de la valeur de la vitesse : que se passe-t-il quand elle est positive ?"
+              },
+              {
+                "content": "L'accélération normale $\\vec{a_n}$ est dirigée vers le centre de courbure de la trajectoire.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer $a_n = \\dfrac{v^2}{\\rho}$ : cette valeur est positive et multiplie le vecteur $\\vec{n}$, qui est dirigé vers le centre de courbure. Le vecteur $\\vec{a_n}$ pointe donc vers ce centre : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le vecteur $\\vec{n}$ est dirigé vers l'intérieur du virage."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mouvements rectilignes uniforme et uniformément varié",
+          "remember": "Un mouvement est **rectiligne** si la trajectoire est une droite ; on l'étudie sur un axe $Ox$ avec l'origine des espaces $O$ et l'origine des dates $t = 0$. **Mouvement rectiligne uniforme (MRU)** : la vitesse $v$ est constante et $a = 0$ ; équation horaire $x = x_0 + vt$. **Mouvement rectiligne uniformément varié (MRUV)** : l'accélération $a$ est constante et non nulle ; $v = v_0 + at$ et $x = \\dfrac{1}{2}at^2 + v_0 t + x_0$ ; sans le temps : $v^2 - v_0^2 = 2a(x - x_0)$. Ici $x_0$ et $v_0$ sont la position et la vitesse à $t = 0$. Si $a$ et $v$ ont le même signe, la valeur de la vitesse augmente (mouvement accéléré) ; s'ils ont des signes opposés, elle diminue (mouvement retardé). Unités SI : m, s, m/s, m/s². Pour convertir : $1$ m/s $= 3{,}6$ km/h.",
+          "method": [
+            "Choisir l'axe, l'origine des espaces et l'origine des dates, puis relever $x_0$, $v_0$ et $a$ en unités SI.",
+            "Identifier le mouvement : $a = 0$ donne un MRU ; $a$ constante non nulle donne un MRUV (accéléré ou retardé selon les signes de $a$ et $v$).",
+            "Écrire les équations horaires $x(t)$ et $v(t)$ avec les valeurs numériques.",
+            "Résoudre : remplacer $t$ ou $x$ selon la question, ou utiliser $v^2 - v_0^2 = 2a(x - x_0)$ quand le temps n'est pas demandé.",
+            "Vérifier l'unité et la cohérence du résultat (signe, ordre de grandeur)."
+          ],
+          "example": {
+            "statement": "Sur l'autoroute du Nord, un gbaka roule à 72 km/h. Le chauffeur freine avec une accélération constante $a = -4$ m/s². Calculer la durée et la distance de freinage jusqu'à l'arrêt.",
+            "steps": [
+              "Choisir : axe $Ox$ dans le sens du mouvement, $O$ au point où le freinage commence, $t = 0$ à cet instant. $x_0 = 0$, $v_0 = \\dfrac{72}{3{,}6} = 20$ m/s, $a = -4$ m/s².",
+              "Identifier : $a$ est constante et non nulle, c'est un MRUV ; $a < 0$ et $v > 0$, donc le mouvement est retardé.",
+              "Écrire : $v(t) = 20 - 4t$ et $x(t) = -2t^2 + 20t$.",
+              "Résoudre : à l'arrêt $v = 0$, donc $20 - 4t = 0$ et $t = 5$ s ; alors $x(5) = -2 \\times 25 + 20 \\times 5 = 50$ m. Contrôle : $0 - 20^2 = 2 \\times (-4) \\times x$ donne $x = 50$ m.",
+              "Vérifier : la durée est $5$ s et la distance $50$ m, en unités SI. Contrôle : vitesse moyenne $\\dfrac{20 + 0}{2} = 10$ m/s, et $10 \\times 5 = 50$ m."
+            ]
+          },
+          "pitfall": "Ne pas mettre une vitesse en km/h dans une formule en unités SI. Contre-exemple : un taxi roule à 90 km/h et freine avec $a = -5$ m/s². Avec $v_0 = 90$, on trouverait $d = \\dfrac{90^2}{2 \\times 5} = 810$ m, ce qui est absurde. Il faut convertir : $v_0 = \\dfrac{90}{3{,}6} = 25$ m/s, donc $d = \\dfrac{25^2}{2 \\times 5} = 62{,}5$ m. Pense aussi au signe : un freinage donne $a < 0$ quand l'axe est dans le sens du mouvement.",
+          "figure": "abscisse-gbaka",
+          "exercise": {
+            "title": "MRU et MRUV sur l'autoroute",
+            "exercise_type": "fixation",
+            "figure": "vitesse-gbaka",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever les données, identifier le mouvement, écrire les équations horaires, résoudre, vérifier. La figure montre la vitesse d'un gbaka qui démarre.",
+            "questions": [
+              {
+                "content": "Un taxi roule à vitesse constante de 25 m/s. À $t = 0$, il est en $x_0 = 100$ m. Calcule son abscisse à $t = 8$ s.",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir et relever : $x_0 = 100$ m, $v = 25$ m/s. Étape 2 — Identifier : la vitesse est constante, $a = 0$, c'est un MRU. Étape 3 — Écrire : $x(t) = 100 + 25t$. Étape 4 — Résoudre : $x(8) = 100 + 25 \\times 8 = 300$ m. Étape 5 — Vérifier : 200 m parcourus en 8 s, cohérent avec 25 m/s.",
+                "answers": [
+                  {
+                    "content": "300",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un gbaka part avec $v_0 = 5$ m/s et une accélération constante $a = 2$ m/s². Calcule sa vitesse à $t = 10$ s.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $v_0 = 5$ m/s et $a = 2$ m/s². Étape 2 — Identifier : $a$ constante non nulle, MRUV accéléré. Étape 3 — Écrire : $v(t) = 5 + 2t$. Étape 4 — Résoudre : $v(10) = 5 + 2 \\times 10 = 25$ m/s. Étape 5 — Vérifier : la vitesse a augmenté, ce qui est cohérent avec $a > 0$.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un taxi démarre sans vitesse initiale en $x_0 = 0$ avec $a = 3$ m/s². Calcule son abscisse à $t = 4$ s.",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $x_0 = 0$, $v_0 = 0$, $a = 3$ m/s². Étape 2 — Identifier : MRUV accéléré. Étape 3 — Écrire : $x(t) = \\dfrac{1}{2} \\times 3 \\times t^2 = 1{,}5\\,t^2$. Étape 4 — Résoudre : $x(4) = 1{,}5 \\times 16 = 24$ m. Étape 5 — Vérifier : unité en mètres.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un taxi a $v_0 = 10$ m/s et $a = 2$ m/s². Sa vitesse après avoir parcouru 24 m est $v$. Calcule $v$ avec $v^2 - v_0^2 = 2a(x - x_0)$.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $v_0 = 10$ m/s, $a = 2$ m/s², $x - x_0 = 24$ m. Étape 4 — Résoudre sans le temps : $v^2 = v_0^2 + 2a(x - x_0) = 100 + 2 \\times 2 \\times 24 = 196$, donc $v = \\sqrt{196} = 14$ m/s. Étape 5 — Vérifier : $14 > 10$, la vitesse a augmenté car $a > 0$.",
+                "answers": [
+                  {
+                    "content": "14",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un gbaka a la vitesse $v = +20$ m/s et l'accélération $a = -3$ m/s², sur un axe orienté dans le sens du mouvement. Quelle est la nature de son mouvement ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $v = +20$ m/s, $a = -3$ m/s². Étape 2 — Identifier : $a$ est constante et non nulle, donc MRUV ; $a$ et $v$ ont des signes opposés, donc le mouvement est retardé. Ce n'est pas un MRU, car $a \\neq 0$.",
+                "answers": [
+                  {
+                    "content": "MRUV accéléré",
+                    "correct": false
+                  },
+                  {
+                    "content": "MRUV retardé",
+                    "correct": true
+                  },
+                  {
+                    "content": "MRU",
+                    "correct": false
+                  },
+                  {
+                    "content": "Mouvement à vitesse nulle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un chauffeur lit 108 km/h au compteur. Exprime cette vitesse en m/s.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $v = 108$ km/h. Étape 5 — Vérifier l'unité : les formules sont en unités SI, on convertit. $v = \\dfrac{108}{3{,}6} = 30$ m/s. Garder 108 dans une formule en m et en s est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La courbe $v(t) = 2t$ d'un gbaka qui démarre est une droite (en m/s, $t$ en s). Calcule son accélération, égale au coefficient directeur.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Identifier : la courbe $v(t)$ est une droite, donc $a$ est constante, c'est un MRUV. Étape 3 — Écrire : $v = v_0 + at$ avec $v_0 = 0$, donc $a = \\dfrac{v}{t} = \\dfrac{20}{10} = 2$ m/s², par exemple entre $t = 0$ et $t = 10$ s.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un gbaka démarre en $x_0 = 0$ avec $v_0 = 0$ et $a = 2$ m/s². Calcule son abscisse à $t = 6$ s.",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $x_0 = 0$, $v_0 = 0$, $a = 2$ m/s². Étape 3 — Écrire : $x(t) = \\dfrac{1}{2} \\times 2 \\times t^2 = t^2$. Étape 4 — Résoudre : $x(6) = 6^2 = 36$ m. Étape 5 — Vérifier : le résultat est en mètres et positif, cohérent avec un démarrage dans le sens de l'axe.",
+                "answers": [
+                  {
+                    "content": "36",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un taxi démarre en $x_0 = 0$ avec une vitesse initiale $v_0 = 10$ m/s et une accélération constante $a = 2$ m/s².",
+            "questions": [
+              {
+                "content": "Complète son équation horaire : $x(t)$ = ___ $t^2$ + ___ $t$",
+                "question_type": "numeric",
+                "unit": "",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $x_0 = 0$, $v_0 = 10$ m/s, $a = 2$ m/s². Étape 3 — Écrire : $x(t) = \\dfrac{1}{2}at^2 + v_0 t + x_0 = \\dfrac{1}{2} \\times 2 \\times t^2 + 10t = 1 \\times t^2 + 10t$. Le coefficient de $t^2$ est donc 1 et celui de $t$ est 10.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le coefficient de $t^2$ est $\\dfrac{1}{2}a$."
+              },
+              {
+                "content": "Un taxi roule à 10 m/s et freine avec $a = -5$ m/s². Calcule sa distance d'arrêt.",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $v_0 = 10$ m/s, $a = -5$ m/s², vitesse finale $v = 0$. Étape 4 — Résoudre sans le temps : $0 - 10^2 = 2 \\times (-5) \\times d$, donc $-100 = -10\\,d$ et $d = 10$ m. Étape 5 — Vérifier : distance positive en mètres.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "hint": "Utilise $v^2 - v_0^2 = 2a(x - x_0)$ avec $v = 0$."
+              },
+              {
+                "content": "Un gbaka roule à 72 km/h. Quelle est sa vitesse en unités SI ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : $v = 72$ km/h. Étape 5 — Vérifier l'unité : on divise par $3{,}6$. $v = \\dfrac{72}{3{,}6} = 20$ m/s. Multiplier par $3{,}6$ donnerait $259{,}2$, qui est faux.",
+                "answers": [
+                  {
+                    "content": "72 m/s",
+                    "correct": false
+                  },
+                  {
+                    "content": "259,2 m/s",
+                    "correct": false
+                  },
+                  {
+                    "content": "20 m/s",
+                    "correct": true
+                  },
+                  {
+                    "content": "7,2 m/s",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pour passer de km/h à m/s, on divise par $3{,}6$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Mouvements circulaires uniforme et uniformément varié",
+          "remember": "Dans un **mouvement circulaire**, la trajectoire est un cercle de centre $O$ et de rayon $R$. La position de $M$ est repérée par l'**abscisse angulaire** $\\theta$ (en rad), angle entre une direction de référence et $\\vec{OM}$ ; l'abscisse curviligne est $s = R\\theta$. La **vitesse angulaire** est $\\omega = \\dfrac{d\\theta}{dt}$ (en rad/s) et $v = R\\omega$. **Mouvement circulaire uniforme** : $\\omega$ constante, $\\theta = \\omega t + \\theta_0$, période $T = \\dfrac{2\\pi}{\\omega}$ (en s), fréquence $f = \\dfrac{1}{T}$ (en Hz) ; $a_t = 0$ et $a = a_n = R\\omega^2 = \\dfrac{v^2}{R}$, dirigée vers le centre. **Mouvement circulaire uniformément varié** : l'accélération angulaire $\\alpha = \\dfrac{d\\omega}{dt}$ est constante ; $\\omega = \\alpha t + \\omega_0$ et $\\theta = \\dfrac{1}{2}\\alpha t^2 + \\omega_0 t + \\theta_0$ ; $a_t = R\\alpha$ et $a_n = R\\omega^2$. Un tour vaut $2\\pi$ rad.",
+          "method": [
+            "Relever le rayon $R$ et les données angulaires ($\\omega$, $T$, $f$, ou $\\omega_0$, $\\alpha$, $\\theta_0$).",
+            "Convertir les données en unités SI : un tour vaut $2\\pi$ rad, donc $\\omega = 2\\pi n$ avec $n$ en tours par seconde ; $1$ tr/min $= \\dfrac{1}{60}$ tr/s.",
+            "Écrire la loi du mouvement : $\\theta(t) = \\omega t + \\theta_0$ en uniforme (et $T = \\dfrac{2\\pi}{\\omega}$), $\\omega(t)$ et $\\theta(t)$ en uniformément varié.",
+            "Relier au mouvement du point : $v = R\\omega$ et $a_n = R\\omega^2$ (et $a_t = R\\alpha$ si $\\omega$ varie).",
+            "Conclure avec les unités : rad, rad/s, m/s, m/s²."
+          ],
+          "example": {
+            "statement": "La roue d'un gbaka, de rayon $R = 0{,}30$ m, tourne à 300 tr/min autour de son axe (mouvement circulaire uniforme). Calculer $\\omega$, $T$, la vitesse $v$ et l'accélération $a_n$ d'un point de la jante. On prend $\\pi \\approx 3{,}14$.",
+            "steps": [
+              "Relever : $R = 0{,}30$ m et la fréquence de rotation $300$ tr/min.",
+              "Convertir : $300$ tr/min $= \\dfrac{300}{60} = 5$ tr/s, donc $\\omega = 2\\pi \\times 5 = 10\\pi \\approx 31{,}4$ rad/s.",
+              "Écrire : le mouvement est uniforme, donc $\\theta(t) = \\omega t + \\theta_0$ et $T = \\dfrac{2\\pi}{\\omega} = \\dfrac{2\\pi}{10\\pi} = 0{,}2$ s.",
+              "Relier : $v = R\\omega = 0{,}30 \\times 10\\pi = 3\\pi \\approx 9{,}4$ m/s ; $a_n = R\\omega^2 = 0{,}30 \\times (10\\pi)^2 = 30\\pi^2 \\approx 296$ m/s².",
+              "Conclure : $\\omega \\approx 31{,}4$ rad/s, $T = 0{,}2$ s, $v \\approx 9{,}4$ m/s et $a_n \\approx 296$ m/s², dirigée vers l'axe ; $a_t = 0$."
+            ]
+          },
+          "pitfall": "Ne pas oublier de convertir les tours par minute en radians par seconde. Contre-exemple : une roue de rayon $R = 0{,}30$ m tourne à 300 tr/min. Si on écrit $\\omega = 300$, on trouve $v = 0{,}30 \\times 300 = 90$ m/s, soit 324 km/h pour une roue de gbaka : c'est absurde. La bonne valeur est $\\omega = 10\\pi \\approx 31{,}4$ rad/s, donc $v \\approx 9{,}4$ m/s. N'écris jamais un nombre de tours ou de degrés dans $v = R\\omega$ : $\\omega$ est en rad/s.",
+          "figure": "mouvement-circulaire-uniforme",
+          "exercise": {
+            "title": "Mouvements circulaires : roues et rond-points",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche : relever, convertir, écrire la loi du mouvement, relier au point, conclure. Quand c'est utile, prends $\\pi \\approx 3{,}14$.",
+            "questions": [
+              {
+                "content": "Une roue de rayon $R = 0{,}5$ m tourne à la vitesse angulaire $\\omega = 8$ rad/s. Calcule la vitesse $v$ d'un point de sa jante.",
+                "question_type": "numeric",
+                "unit": "m/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 0{,}5$ m, $\\omega = 8$ rad/s (déjà en unités SI, pas de conversion). Étape 4 — Relier : $v = R\\omega = 0{,}5 \\times 8 = 4$ m/s. Étape 5 — Conclure : $v = 4$ m/s.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un point d'une poulie de rayon $R = 0{,}5$ m tourne uniformément à $\\omega = 4$ rad/s. Calcule son accélération $a_n$.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 0{,}5$ m et $\\omega = 4$ rad/s. Étape 4 — Relier : $a_n = R\\omega^2 = 0{,}5 \\times 4^2 = 0{,}5 \\times 16 = 8$ m/s². Étape 5 — Conclure : $a_n = 8$ m/s², dirigée vers le centre.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un point tourne uniformément avec $\\omega = \\pi$ rad/s. Calcule sa période $T$.",
+                "question_type": "numeric",
+                "unit": "s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $\\omega = \\pi$ rad/s. Étape 3 — Écrire : le mouvement est uniforme, donc $T = \\dfrac{2\\pi}{\\omega} = \\dfrac{2\\pi}{\\pi} = 2$ s. Étape 5 — Conclure : la période est de 2 s.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une roue de gbaka effectue 3 tours par seconde. Calcule sa vitesse angulaire en rad/s, avec $\\pi \\approx 3{,}14$.",
+                "question_type": "numeric",
+                "unit": "rad/s",
+                "tolerance": 0.05,
+                "explanation": "Étape 1 — Relever : $n = 3$ tr/s. Étape 2 — Convertir : un tour vaut $2\\pi$ rad, donc $\\omega = 2\\pi \\times 3 = 6\\pi \\approx 6 \\times 3{,}14 = 18{,}84$ rad/s. Étape 5 — Conclure : $\\omega \\approx 18{,}8$ rad/s.",
+                "answers": [
+                  {
+                    "content": "18.84",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un disque part du repos ($\\omega_0 = 0$) avec une accélération angulaire constante $\\alpha = 2$ rad/s². Calcule sa vitesse angulaire à $t = 5$ s.",
+                "question_type": "numeric",
+                "unit": "rad/s",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $\\omega_0 = 0$, $\\alpha = 2$ rad/s². Étape 3 — Écrire la loi du mouvement uniformément varié : $\\omega(t) = \\alpha t + \\omega_0 = 2t$. Étape 5 — Conclure : $\\omega(5) = 2 \\times 5 = 10$ rad/s.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un mouvement circulaire uniforme, l'accélération du point est nulle.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Relier : $a_t = 0$ car la vitesse $v = R\\omega$ est constante, mais $a_n = R\\omega^2 \\neq 0$. L'accélération vaut $R\\omega^2$ et pointe vers le centre : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une roue tourne à 60 tr/min. Exprime sa vitesse angulaire en rad/s, avec $\\pi \\approx 3{,}14$.",
+                "question_type": "numeric",
+                "unit": "rad/s",
+                "tolerance": 0.02,
+                "explanation": "Étape 1 — Relever : $60$ tr/min. Étape 2 — Convertir : $60$ tr/min $= \\dfrac{60}{60} = 1$ tr/s, donc $\\omega = 2\\pi \\times 1 = 2\\pi \\approx 6{,}28$ rad/s. Écrire $\\omega = 60$ est l'erreur du piège : ce serait un nombre de tours par minute, pas des rad/s.",
+                "answers": [
+                  {
+                    "content": "6.28",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu étudies le mouvement d'un point d'une roue ou d'un disque.",
+            "questions": [
+              {
+                "content": "Dans un mouvement circulaire uniforme, la vitesse angulaire $\\omega$ est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire la loi du mouvement : en uniforme, $\\theta(t) = \\omega t + \\theta_0$, ce qui suppose $\\omega$ constante. Elle n'est ni nulle (le point tourne), ni proportionnelle à $t$ (ce serait un mouvement uniformément varié). Et $\\omega = \\dfrac{v}{R}$, pas $v \\times R$.",
+                "answers": [
+                  {
+                    "content": "proportionnelle à la date $t$",
+                    "correct": false
+                  },
+                  {
+                    "content": "nulle",
+                    "correct": false
+                  },
+                  {
+                    "content": "égale à $v \\times R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "constante",
+                    "correct": true
+                  }
+                ],
+                "hint": "Dans un mouvement uniforme, rien ne change au cours du temps."
+              },
+              {
+                "content": "Un point d'un disque de rayon $R = 2$ m a une accélération angulaire $\\alpha = 3$ rad/s². Calcule son accélération tangentielle $a_t$.",
+                "question_type": "numeric",
+                "unit": "m/s²",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Relever : $R = 2$ m et $\\alpha = 3$ rad/s². Étape 4 — Relier : $a_t = R\\alpha = 2 \\times 3 = 6$ m/s².",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "hint": "Pour un point du cercle, $a_t = R\\alpha$."
+              },
+              {
+                "content": "Relie chaque grandeur à son unité dans le système international.",
+                "question_type": "matching",
+                "explanation": "Étape 5 — Conclure avec les unités : $\\omega$ s'exprime en rad/s, la période en secondes, la fréquence en hertz ($f = \\dfrac{1}{T}$) et la vitesse $v = R\\omega$ en m/s.",
+                "answers": [
+                  {
+                    "content": "Vitesse angulaire $\\omega$",
+                    "match": "rad/s"
+                  },
+                  {
+                    "content": "Période $T$",
+                    "match": "s"
+                  },
+                  {
+                    "content": "Fréquence $f$",
+                    "match": "Hz"
+                  },
+                  {
+                    "content": "Vitesse $v$",
+                    "match": "m/s"
+                  }
+                ],
+                "hint": "La fréquence est l'inverse de la période."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un gbaka et un taxi sur l'autoroute du Nord",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Un gbaka roule sur l'autoroute du Nord à vitesse constante de 72 km/h. À la date $t = 0$, il se trouve à $x_0 = 2\\,000$ m du péage, pris comme origine $O$ de l'axe $Ox$ orienté vers le nord. Au même instant, un taxi passe au péage ($x_0 = 0$) et roule à vitesse constante de 25 m/s dans le même sens.",
+          "questions": [
             {
-              "title": "Comprendre — Référentiel, trajectoire et vecteurs du mouvement",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Un gbaka roule à 72 km/h. Exprime sa vitesse en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever en unités SI : $v = 72$ km/h, donc $v = \\dfrac{72}{3{,}6} = 20$ m/s. Cette conversion sert à toutes les questions suivantes.",
+              "answers": [
                 {
-                  "content": "Un passager est assis dans un gbaka qui roule. Dans le référentiel lié au gbaka, ce passager est immobile.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Par rapport au gbaka, la position du passager ne change pas : il est immobile dans ce référentiel. Par rapport à la route (référentiel terrestre), il est en mouvement. L'erreur tentante est de croire qu'un objet est « en mouvement » ou « immobile » tout court : cela dépend toujours du référentiel choisi.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Qu'est-ce qu'un référentiel ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un référentiel est l'objet de référence par rapport auquel on décrit le mouvement, comme le gbaka ou le bord de la route dans l'image. L'erreur la plus fréquente est de le confondre avec la trajectoire : la trajectoire est le chemin suivi par le mobile, elle dépend du référentiel mais ce n'est pas lui.",
-                  "answers": [
-                    {
-                      "content": "Un objet de référence par rapport auquel on étudie le mouvement du mobile",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'ensemble des positions successives occupées par le mobile",
-                      "correct": false
-                    },
-                    {
-                      "content": "La valeur de la vitesse du mobile à un instant donné",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'origine des dates choisie pour mesurer le temps",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le vecteur vitesse d'un mobile est toujours…",
-                  "question_type": "single_choice",
-                  "explanation": "Le vecteur vitesse est tangent à la trajectoire et orienté dans le sens du mouvement : c'est la direction que prend le gbaka à cet instant. L'erreur tentante est de le croire toujours dirigé comme l'accélération : dans un freinage, par exemple, $\\vec v$ et $\\vec a$ sont de sens contraires.",
-                  "answers": [
-                    {
-                      "content": "de même direction et de même sens que le vecteur accélération",
-                      "correct": false
-                    },
-                    {
-                      "content": "tangent à la trajectoire et orienté dans le sens du mouvement",
-                      "correct": true
-                    },
-                    {
-                      "content": "perpendiculaire à la trajectoire",
-                      "correct": false
-                    },
-                    {
-                      "content": "dirigé de l'origine O du repère vers le mobile",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'image du gbaka, quelles correspondances sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Le dernier arrêt, d'où l'on mesure les positions, joue le rôle de l'origine O. Accélérer, freiner ou tourner le volant change le vecteur vitesse : l'accélération n'est donc pas nulle. En revanche, le compteur ne donne que la valeur de la vitesse, pas sa direction ni son sens. Et le passager et la vendeuse ne voient pas le même mouvement, car ils ne sont pas dans le même référentiel.",
-                  "answers": [
-                    {
-                      "content": "Le dernier arrêt, d'où l'apprenti compte les mètres, correspond à l'origine O du repère.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le chauffeur qui appuie sur l'accélérateur, freine ou tourne le volant correspond à une accélération non nulle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le compteur du gbaka donne à lui seul le vecteur vitesse complet.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le passager et la vendeuse au bord de la route voient exactement le même mouvement du voisin de banc.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle relation définit le vecteur accélération $\\vec a$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'accélération mesure à quel rythme le vecteur vitesse change : $\\vec a = \\dfrac{d\\vec v}{dt}$, c'est la dérivée de la vitesse, donc la dérivée seconde de la position. L'erreur tentante est de dériver une seule fois la position : $\\dfrac{d\\overrightarrow{OM}}{dt}$, c'est la vitesse, pas l'accélération.",
-                  "answers": [
-                    {
-                      "content": "$\\vec a = \\dfrac{d\\overrightarrow{OM}}{dt}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\vec a = \\dfrac{\\vec v}{t}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\vec a = \\vec v \\times t$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\vec a = \\dfrac{d\\vec v}{dt}$",
-                      "correct": true
-                    }
-                  ]
+                  "content": "20",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer position, vitesse et accélération",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le gbaka roule en ligne droite à vitesse constante. Quelle est son accélération ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Identifier : la vitesse est constante en valeur et en direction (ligne droite), c'est un mouvement rectiligne uniforme, donc $a = 0$. En effet $a_t = \\dfrac{dv}{dt} = 0$ et $a_n = 0$ (rayon de courbure infini). L'accélération n'est pas égale à la vitesse.",
+              "answers": [
                 {
-                  "content": "Un mobile a pour équations horaires $x(t) = 3t$ et $y(t) = -t^2 + 4$ (unités SI). Quelle est sa position à la date $t = 1\\ \\text{s}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On remplace $t$ par 1 : $x = 3 \\times 1 = 3\\ \\text{m}$ et $y = -1^2 + 4 = 3\\ \\text{m}$. L'erreur tentante est d'écrire $-1^2 = +1$, ce qui donne $y = 5\\ \\text{m}$ : le signe moins s'applique au carré.",
-                  "answers": [
-                    {
-                      "content": "$M(1\\ \\text{m} ; 3\\ \\text{m})$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$M(3\\ \\text{m} ; 5\\ \\text{m})$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$M(3\\ \\text{m} ; 3\\ \\text{m})$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$M(3\\ \\text{m} ; 4\\ \\text{m})$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$a = 0$",
+                  "correct": true
                 },
                 {
-                  "content": "Un mobile a pour équations horaires $x(t) = 3t$ et $y(t) = -t^2 + 4$ (unités SI). Quelles sont les coordonnées de son vecteur vitesse ?",
-                  "question_type": "single_choice",
-                  "explanation": "On dérive chaque coordonnée par rapport au temps : $v_x = 3$ et $v_y = -2t$ (la dérivée d'une constante comme 4 est nulle). L'erreur tentante est de garder le 4 dans $v_y$ : une constante disparaît quand on dérive.",
-                  "answers": [
-                    {
-                      "content": "$v_x = 3t$ et $v_y = -t^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v_x = 3$ et $v_y = -2t + 4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v_x = 3$ et $v_y = -2t$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$v_x = 0$ et $v_y = -2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$a = 20$ m/s²",
+                  "correct": false
                 },
                 {
-                  "content": "Un mobile a pour vecteur vitesse $\\vec v = 3\\,\\vec i - 2t\\,\\vec j$ (unités SI). Quelle est la valeur de sa vitesse à la date $t = 2\\ \\text{s}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "À $t = 2\\ \\text{s}$ : $v_x = 3\\ \\text{m/s}$ et $v_y = -4\\ \\text{m/s}$. La valeur est $v = \\sqrt{3^2 + (-4)^2} = \\sqrt{25} = 5\\ \\text{m/s}$. L'erreur tentante est d'additionner les coordonnées ($3 + 4 = 7$) : on additionne leurs carrés, puis on prend la racine.",
-                  "answers": [
-                    {
-                      "content": "$25\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$-1\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$7\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$a = 72$ m/s²",
+                  "correct": false
                 },
                 {
-                  "content": "Un mobile a pour équations horaires $x(t) = 3t$ et $y(t) = -t^2 + 4$ (unités SI). Son vecteur accélération est constant.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. En dérivant deux fois : $a_x = 0$ et $a_y = -2\\ \\text{m/s}^2$. Le vecteur $\\vec a = -2\\,\\vec j$ ne dépend pas de $t$ : il est constant. L'erreur tentante est de penser que, puisque la vitesse change, l'accélération change aussi : une vitesse qui varie régulièrement correspond à une accélération constante.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un mobile a pour équations horaires $x(t) = 3t$ et $y(t) = -t^2 + 4$ (unités SI). Quelle est l'équation de sa trajectoire ?",
-                  "question_type": "single_choice",
-                  "explanation": "On élimine $t$ : de $x = 3t$ on tire $t = \\dfrac{x}{3}$, donc $t^2 = \\dfrac{x^2}{9}$ et $y = -\\dfrac{x^2}{9} + 4$. L'erreur tentante est de donner $y = -t^2 + 4$ : c'est une équation horaire, pas la trajectoire, car elle contient encore $t$.",
-                  "answers": [
-                    {
-                      "content": "$y = -t^2 + 4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$y = -\\dfrac{x^2}{9} + 4$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$y = -9x^2 + 4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$y = -\\dfrac{x^2}{3} + 4$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "$a$ est constante et non nulle",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Étudier le mouvement d'un point dans le plan",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le gbaka est en $x_0 = 2\\,000$ m à $t = 0$ et roule à 20 m/s. Calcule son abscisse à $t = 60$ s.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $x_0 = 2\\,000$ m, $v = 20$ m/s. Étape 2 — Identifier : MRU. Étape 3 — Écrire : $x(t) = 2\\,000 + 20t$. Étape 4 — Résoudre : $x(60) = 2\\,000 + 20 \\times 60 = 3\\,200$ m. Étape 5 — Vérifier : le gbaka a avancé de 1 200 m.",
+              "answers": [
                 {
-                  "content": "Un point M se déplace dans un plan muni d'un repère $(O ; \\vec i, \\vec j)$. Ses équations horaires sont $x(t) = 2t$ et $y(t) = t^2 - 2t$ (unités SI). À quelle date le vecteur vitesse est-il parallèle à l'axe $(Ox)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$\\vec v$ a pour coordonnées $v_x = 2$ et $v_y = 2t - 2$. Il est parallèle à $(Ox)$ quand $v_y = 0$, soit $t = 1\\ \\text{s}$. L'erreur tentante est de chercher quand $y = 0$ (ce qui donne $t = 2\\ \\text{s}$) : là, c'est la position qui est sur l'axe, pas la vitesse qui lui est parallèle.",
-                  "answers": [
-                    {
-                      "content": "Jamais, car $v_x$ n'est jamais nul",
-                      "correct": false
-                    },
-                    {
-                      "content": "$t = 1\\ \\text{s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$t = 0\\ \\text{s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$t = 2\\ \\text{s}$",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "3200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le gbaka a pour équation horaire $x(t) = 2\\,000 + 20t$ (en m, $t$ en s). À quelle date atteint-il $x = 5\\,000$ m ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $x(t) = 2\\,000 + 20t$. Étape 4 — Résoudre : $2\\,000 + 20t = 5\\,000$ donne $20t = 3\\,000$, donc $t = 150$ s. Étape 5 — Vérifier : $2\\,000 + 20 \\times 150 = 5\\,000$ m.",
+              "answers": [
                 {
-                  "content": "Un point M a pour équations horaires $x(t) = 2t$ et $y(t) = t^2 - 2t$ (unités SI). Quelle est la valeur de sa vitesse à la date $t = 1\\ \\text{s}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "$v_x = 2$ et $v_y = 2t - 2$. À $t = 1\\ \\text{s}$ : $v_x = 2\\ \\text{m/s}$ et $v_y = 0$, donc $v = \\sqrt{2^2 + 0^2} = 2\\ \\text{m/s}$. L'erreur tentante est d'oublier le terme $-2t$ en dérivant ($v_y = 2t$) : on trouve alors $\\sqrt{8} \\approx 2{,}8\\ \\text{m/s}$. Autre piège : $v_y = 0$ ne veut pas dire que la vitesse est nulle, car $v_x$ ne l'est pas.",
-                  "answers": [
-                    {
-                      "content": "$2\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\sqrt{2} \\approx 2{,}8\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "150",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taxi, parti de $x_0 = 0$ à 25 m/s, rattrape le gbaka d'équation $x_G(t) = 2\\,000 + 20t$. À quelle date a lieu la rencontre ?",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $x_T(t) = 25t$ pour le taxi, $x_G(t) = 2\\,000 + 20t$ pour le gbaka. Étape 4 — Résoudre : à la rencontre, $x_T = x_G$, donc $25t = 2\\,000 + 20t$, soit $5t = 2\\,000$ et $t = 400$ s. Étape 5 — Vérifier : le taxi gagne 5 m par seconde sur le gbaka et doit combler 2 000 m.",
+              "answers": [
                 {
-                  "content": "Un point M a pour équations horaires $x(t) = 2t$ et $y(t) = t^2 - 2t$ (unités SI), avec $t \\ge 0$. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "En dérivant deux fois : $a_x = 0$ et $a_y = 2$, donc $\\vec a = 2\\,\\vec j$, constant, de valeur $2\\ \\text{m/s}^2$. Avec $t = \\dfrac{x}{2}$, on obtient $y = \\dfrac{x^2}{4} - x$ : une parabole. L'erreur tentante est de conclure « droite » parce que $x$ est proportionnel à $t$ : la forme de la trajectoire dépend des deux coordonnées. Enfin, $\\vec a$ ne s'annule jamais, même quand la vitesse est la plus petite.",
-                  "answers": [
-                    {
-                      "content": "Le vecteur accélération est constant et sa valeur vaut $2\\ \\text{m/s}^2$.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le vecteur accélération est nul à $t = 1\\ \\text{s}$, car la vitesse y est la plus petite.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La valeur de l'accélération est $a = 2t$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La trajectoire est une droite, car $x$ est proportionnel à $t$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La trajectoire a pour équation $y = \\dfrac{x^2}{4} - x$ : c'est une portion de parabole.",
-                      "correct": true
-                    }
-                  ]
-                },
+                  "content": "400",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taxi ($x_T = 25t$) et le gbaka se rencontrent à $t = 400$ s. Calcule l'abscisse de la rencontre, en mètres.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Résoudre : on remplace $t = 400$ s dans l'équation du taxi : $x_T = 25 \\times 400 = 10\\,000$ m. Étape 5 — Vérifier avec le gbaka : $2\\,000 + 20 \\times 400 = 10\\,000$ m. Les deux valeurs sont égales, la rencontre a lieu à 10 km du péage.",
+              "answers": [
                 {
-                  "content": "Un point M a pour vecteur vitesse $\\vec v = 4\\,\\vec i + (6t - 3)\\,\\vec j$ (unités SI). À la date $t = 0$, il se trouve en O. Quelle est son équation horaire $y(t)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On cherche $y(t)$ dont la dérivée vaut $6t - 3$ : c'est $y = 3t^2 - 3t + C$ (on « remonte » la dérivée). Comme $y(0) = 0$, on a $C = 0$. L'erreur tentante est d'oublier de diviser par 2 en remontant $6t$ : $6t^2$ a pour dérivée $12t$, pas $6t$.",
-                  "answers": [
-                    {
-                      "content": "$y(t) = 3t^2 - 3t$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$y(t) = 6$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$y(t) = 6t - 3$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$y(t) = 6t^2 - 3t$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un taxi roule sur un boulevard droit, à vitesse constante. Le chauffeur est assis au volant. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Dans le référentiel terrestre, le chauffeur avance avec le taxi : il est en mouvement. Dans le référentiel du taxi, il ne bouge pas, et c'est l'arbre du bord de la route qui défile. Le mouvement dépend donc du référentiel. Enfin, en ligne droite à vitesse constante, $\\vec v$ ne change pas : l'accélération est nulle. L'erreur tentante est de croire qu'« aller vite » veut dire « accélérer » : c'est le changement de vitesse qui compte, pas sa valeur.",
-                  "answers": [
-                    {
-                      "content": "Dans le référentiel terrestre, le chauffeur est en mouvement.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans le référentiel terrestre, l'accélération du taxi n'est pas nulle, car il roule vite.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans le référentiel lié au taxi, un arbre du bord de la route est en mouvement.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans le référentiel lié au taxi, le chauffeur est immobile.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le mouvement du chauffeur est le même dans tous les référentiels.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "10000",
+                  "correct": true
                 }
               ]
             }
           ]
         },
         {
-          "name": "Les mouvements rectilignes uniforme et uniformément varié",
-          "subtitle": "Reconnaître un MRU ou un MRUV et utiliser leurs équations horaires",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Reconnaître un mouvement rectiligne uniforme (MRU) ou uniformément varié (MRUV).</li><li>Écrire et utiliser les équations horaires $x(t)$ et $v(t)$ de ces mouvements.</li><li>Dire si un mouvement est accéléré ou retardé.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le car sur l'autoroute du Nord.</strong> Sur une longue ligne droite, le chauffeur garde le compteur bloqué à 72 km/h : chaque seconde, le car avance de 20 m, ni plus ni moins. Au péage, il s'arrête puis repart : à chaque seconde, le compteur gagne la même quantité, par exemple 2 m/s de plus. À l'approche d'un contrôle, il freine régulièrement : le compteur perd la même quantité à chaque seconde.</p><p><strong>Le pont.</strong> La route droite, c'est la <strong>trajectoire rectiligne</strong>, portée par un axe $(Ox)$. La borne où tu déclenches ton chronomètre, c'est la position initiale $x_0$. Le compteur bloqué, c'est le <strong>MRU</strong> : vitesse constante, accélération nulle. « Gagner 2 m/s chaque seconde », c'est une accélération constante $a = 2\\ \\text{m/s}^2$ : c'est le <strong>MRUV accéléré</strong>. « Perdre la même quantité chaque seconde », c'est le <strong>MRUV retardé</strong>.</p><p><strong>La limite de l'image.</strong> Un vrai chauffeur n'accélère jamais de façon parfaitement régulière : le MRUV est un modèle. Et dans l'image, « freiner » veut dire que $\\vec a$ est de sens contraire à $\\vec v$, pas forcément que $a$ est négatif (voir le piège).</p><h2>Ce qu'il faut retenir</h2><p><em>Rectiligne</em> : la trajectoire est une droite. <em>Uniforme</em> : la valeur de la vitesse est constante. <em>Uniformément varié</em> : la vitesse change de la même quantité à chaque seconde. Le mobile se déplace sur un axe $(Ox)$ ; $x_0$ et $v_0$ sont sa position et sa vitesse à $t = 0$.</p><p><strong>Mouvement rectiligne uniforme (MRU)</strong> :</p><ul><li>Accélération : $a = 0$.</li><li>Vitesse : $v = v_0$ (constante).</li><li>Position : $x = v_0\\,t + x_0$.</li></ul><p><strong>Mouvement rectiligne uniformément varié (MRUV)</strong> :</p><ul><li>Accélération : $a$ constante, non nulle.</li><li>Vitesse : $v = a\\,t + v_0$.</li><li>Position : $x = \\frac{1}{2}a\\,t^2 + v_0\\,t + x_0$.</li><li>Relation sans le temps : $v^2 - v_0^2 = 2a\\,(x - x_0)$.</li></ul><blockquote><p>Un MRUV est <strong>accéléré</strong> si $\\vec a$ et $\\vec v$ ont le même sens, c'est-à-dire si $a$ et $v$ ont le même signe ($a \\cdot v > 0$). Il est <strong>retardé</strong> (le mobile freine) s'ils sont de sens contraires ($a \\cdot v < 0$).</p></blockquote><h2>Exemple résolu</h2><p>Une voiture roule sur une route droite à $v_0 = 20\\ \\text{m/s}$ (72 km/h). L'axe $(Ox)$ est orienté dans le sens du mouvement. À $t = 0$, en $x_0 = 0$, le conducteur freine avec $a = -4\\ \\text{m/s}^2$. Quand s'arrête-t-elle, et sur quelle distance ?</p><ol><li><strong>Nature du mouvement.</strong> $a$ est constante et de signe contraire à $v$ : c'est un MRUV retardé.</li><li><strong>Équations horaires.</strong> $v = -4t + 20$ et $x = \\frac{1}{2}(-4)\\,t^2 + 20t = -2t^2 + 20t$.</li><li><strong>Date de l'arrêt.</strong> La voiture s'arrête quand $v = 0$ : $-4t + 20 = 0$, donc $t = 5\\ \\text{s}$.</li><li><strong>Distance de freinage.</strong> $x(5) = -2 \\times 25 + 20 \\times 5 = 50\\ \\text{m}$.</li><li><strong>Vérification.</strong> Avec la relation sans le temps : $0^2 - 20^2 = 2 \\times (-4) \\times (x - 0)$, soit $-400 = -8x$ et $x = 50\\ \\text{m}$. Les deux méthodes concordent.</li></ol><h2>Le piège à éviter</h2><p>Croire que $a < 0$ veut toujours dire « le mobile freine ». Le signe de $a$ dépend seulement du sens choisi pour l'axe. Si $v = -3\\ \\text{m/s}$ et $a = -2\\ \\text{m/s}^2$, les deux vecteurs ont le même sens : le mobile <strong>accélère</strong>.</p><p>Pour repérer l'erreur, compare toujours les signes de $a$ et de $v$ au même instant. Même signe : accéléré. Signes contraires : retardé.</p><h2>En une phrase</h2><p>MRU : accélération nulle et $x = v\\,t + x_0$ ; MRUV : accélération constante et $x = \\frac{1}{2}a\\,t^2 + v_0\\,t + x_0$ ; je compare les signes de $a$ et $v$ pour savoir s'il accélère ou freine.</p>",
-          "exercises": [
+          "title": "Un taxi freine avant le péage",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Un taxi roule à 90 km/h sur l'autoroute du Nord et arrive au péage. À la date $t = 0$, le chauffeur freine avec une accélération constante $a = -5$ m/s². On prend l'origine $O$ au point où le freinage commence, l'axe $Ox$ dans le sens du mouvement.",
+          "questions": [
             {
-              "title": "Comprendre — Reconnaître un MRU et un MRUV",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Un taxi roule à 90 km/h. Exprime sa vitesse en m/s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever en unités SI : $v_0 = 90$ km/h, donc $v_0 = \\dfrac{90}{3{,}6} = 25$ m/s. Utiliser 90 dans une formule en m et en s serait l'erreur d'unité classique.",
+              "answers": [
                 {
-                  "content": "Un mouvement rectiligne uniforme (MRU) est un mouvement…",
-                  "question_type": "single_choice",
-                  "explanation": "Dans un MRU, la trajectoire est une droite et le vecteur vitesse ne change pas : c'est le car au compteur bloqué sur la ligne droite. L'erreur tentante est d'oublier la trajectoire : une vitesse de valeur constante sur un cercle donne un mouvement uniforme, mais pas rectiligne.",
-                  "answers": [
-                    {
-                      "content": "dont la vitesse augmente de la même quantité à chaque seconde",
-                      "correct": false
-                    },
-                    {
-                      "content": "dont la trajectoire est une droite et dont l'accélération est constante et non nulle",
-                      "correct": false
-                    },
-                    {
-                      "content": "dont la trajectoire est une droite et dont le vecteur vitesse est constant",
-                      "correct": true
-                    },
-                    {
-                      "content": "dont la valeur de la vitesse est constante, quelle que soit la forme de la trajectoire",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un mouvement rectiligne uniformément varié, la vitesse augmente, ou diminue, de la même quantité à chaque seconde.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. L'accélération $a = \\dfrac{dv}{dt}$ est constante : la vitesse change donc de $a$ mètres par seconde à chaque seconde, comme le compteur du car qui gagne 2 m/s chaque seconde. L'erreur tentante est de croire que c'est la position qui change de la même quantité chaque seconde : ça, c'est le MRU.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'image du car, le compteur « gagne 2 m/s à chaque seconde ». À quoi cela correspond-il ?",
-                  "question_type": "single_choice",
-                  "explanation": "Gagner 2 m/s de vitesse chaque seconde, c'est une accélération $a = 2\\ \\text{m/s}^2$ : le car est en MRUV accéléré. L'erreur tentante est de lire « 2 m/s » comme la vitesse du car : 2 m/s, c'est ce que la vitesse gagne chaque seconde, pas sa valeur.",
-                  "answers": [
-                    {
-                      "content": "Une distance parcourue de 2 m à chaque seconde",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une vitesse constante $v = 2\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une accélération constante $a = 2\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un mouvement rectiligne uniforme",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces équations horaires ($x$ en mètres, $t$ en secondes), lesquelles correspondent à un mouvement rectiligne uniformément varié ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Un MRUV a une équation horaire du second degré en $t$ : $x = \\frac{1}{2}a\\,t^2 + v_0\\,t + x_0$ avec $a \\ne 0$. C'est le cas de $3t^2 - 2t + 1$ et de $-0{,}5\\,t^2 + 4$ (ici $v_0 = 0$). L'erreur tentante est de prendre $5t + 2$ : c'est du premier degré, donc un MRU. $x = 4$ décrit un mobile immobile, et $2t^3$ donne une accélération qui varie avec le temps.",
-                  "answers": [
-                    {
-                      "content": "$x = 4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$x = -0{,}5\\,t^2 + 4$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$x = 3t^2 - 2t + 1$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$x = 5t + 2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$x = 2t^3$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un mouvement rectiligne uniformément varié est accéléré lorsque…",
-                  "question_type": "single_choice",
-                  "explanation": "Le mouvement est accéléré quand $\\vec a$ et $\\vec v$ ont le même sens, donc quand $a$ et $v$ ont le même signe : $a \\cdot v > 0$. L'erreur tentante est de répondre « $a > 0$ » : si $v < 0$ et $a > 0$, le mobile freine.",
-                  "answers": [
-                    {
-                      "content": "$\\vec a$ et $\\vec v$ ont le même sens, c'est-à-dire $a \\cdot v > 0$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$a > 0$, dans tous les cas",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\vec a$ et $\\vec v$ sont de sens contraires",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v > 0$, dans tous les cas",
-                      "correct": false
-                    }
-                  ]
+                  "content": "25",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Utiliser les équations horaires du MRU et du MRUV",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Le taxi a $v = +25$ m/s et $a = -5$ m/s² : quelle est la nature de son mouvement ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Identifier : $a$ est constante et non nulle, c'est un MRUV. $a$ et $v$ ont des signes opposés, donc la valeur de la vitesse diminue : le mouvement est retardé. Ce n'est pas un MRU, car $a \\neq 0$.",
+              "answers": [
                 {
-                  "content": "Une moto roule en mouvement rectiligne uniforme à $v = 15\\ \\text{m/s}$. À $t = 0$, elle est en $x_0 = 20\\ \\text{m}$. Quelle est sa position à $t = 4\\ \\text{s}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "En MRU, $x = v\\,t + x_0 = 15 \\times 4 + 20 = 80\\ \\text{m}$. L'erreur tentante est d'oublier $x_0$ et de trouver 60 m : la moto ne partait pas de l'origine.",
-                  "answers": [
-                    {
-                      "content": "$80\\ \\text{m}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$60\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$40\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$35\\ \\text{m}$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "MRUV accéléré",
+                  "correct": false
                 },
                 {
-                  "content": "Un mobile a pour équation horaire $x(t) = 2t^2 - 4t + 1$ (unités SI). Quelle est son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "On identifie avec $x = \\frac{1}{2}a\\,t^2 + v_0\\,t + x_0$ : $\\frac{1}{2}a = 2$, donc $a = 4\\ \\text{m/s}^2$. On peut aussi dériver deux fois : $v = 4t - 4$, puis $a = 4$. L'erreur tentante est de lire directement le coefficient de $t^2$ (2) : c'est la moitié de l'accélération.",
-                  "answers": [
-                    {
-                      "content": "$a = -4\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a = 2\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a = 4\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$a = 1\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "MRUV retardé",
+                  "correct": true
                 },
                 {
-                  "content": "Un mobile a pour équation horaire $x(t) = 2t^2 - 4t + 1$ (unités SI). Quelle est l'expression de sa vitesse $v(t)$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On dérive : $v = \\dfrac{dx}{dt} = 4t - 4$. La vitesse initiale vaut donc $v_0 = -4\\ \\text{m/s}$. L'erreur tentante est d'oublier de multiplier par l'exposant en dérivant $2t^2$ : la dérivée de $2t^2$ est $4t$, pas $2t$.",
-                  "answers": [
-                    {
-                      "content": "$v(t) = 4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v(t) = 4t - 4 + 1$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v(t) = 2t - 4$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v(t) = 4t - 4$",
-                      "correct": true
-                    }
-                  ]
+                  "content": "MRU",
+                  "correct": false
                 },
                 {
-                  "content": "Un vélo part du repos sur une route droite, avec une accélération constante $a = 0{,}5\\ \\text{m/s}^2$. Quelle est la valeur de sa vitesse après avoir parcouru $16\\ \\text{m}$ ?",
-                  "question_type": "single_choice",
-                  "explanation": "On n'a pas la durée : on utilise la relation sans le temps $v^2 - v_0^2 = 2a\\,(x - x_0)$. Avec $v_0 = 0$ : $v^2 = 2 \\times 0{,}5 \\times 16 = 16$, donc $v = 4\\ \\text{m/s}$. L'erreur tentante est d'oublier la racine carrée : 16, c'est $v^2$, pas $v$.",
-                  "answers": [
-                    {
-                      "content": "$4\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$8\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2{,}8\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$16\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Sur un axe $(Ox)$, un mobile en MRUV a, à un instant donné, une vitesse $v = -3\\ \\text{m/s}$ et une accélération $a = -2\\ \\text{m/s}^2$. À cet instant, son mouvement est retardé.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. $a$ et $v$ ont le même signe ($a \\cdot v = 6 > 0$) : $\\vec a$ et $\\vec v$ ont le même sens, le mouvement est accéléré. L'erreur tentante est de voir « $a$ négatif » et de conclure « il freine » : le signe seul de $a$ dépend du sens de l'axe, il faut le comparer à celui de $v$.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "Mouvement circulaire uniforme",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Étudier un freinage et un rattrapage",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le taxi a $v_0 = 25$ m/s et $a = -5$ m/s². Calcule la durée du freinage jusqu'à l'arrêt.",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Écrire : $v(t) = 25 - 5t$. Étape 4 — Résoudre : à l'arrêt $v = 0$, donc $25 - 5t = 0$ et $t = 5$ s. Étape 5 — Vérifier : $v(5) = 25 - 25 = 0$.",
+              "answers": [
                 {
-                  "content": "Un car roule à $72\\ \\text{km/h}$ sur une route droite. Le chauffeur freine avec une accélération constante, et le car s'arrête en $4\\ \\text{s}$. L'axe est orienté dans le sens du mouvement. Quelle est l'accélération du car ?",
-                  "question_type": "single_choice",
-                  "explanation": "On convertit d'abord : $72\\ \\text{km/h} = \\dfrac{72}{3{,}6} = 20\\ \\text{m/s}$. Puis $a = \\dfrac{v - v_0}{t} = \\dfrac{0 - 20}{4} = -5\\ \\text{m/s}^2$ (négative, car de sens contraire à la vitesse). L'erreur tentante est d'oublier la conversion et de trouver $-18\\ \\text{m/s}^2$ : en physique, on travaille en m/s.",
-                  "answers": [
-                    {
-                      "content": "$-5\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$-18\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$5\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$-0{,}2\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taxi a $v_0 = 25$ m/s et $a = -5$ m/s². Calcule sa distance de freinage jusqu'à l'arrêt.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Relever : $x_0 = 0$, $v_0 = 25$ m/s, $a = -5$ m/s², $v = 0$. Étape 4 — Résoudre sans le temps : $v^2 - v_0^2 = 2a(x - x_0)$ donne $0 - 625 = 2 \\times (-5) \\times x$, donc $x = \\dfrac{625}{10} = 62{,}5$ m. Étape 5 — Vérifier : vitesse moyenne $12{,}5$ m/s pendant $5$ s donne $62{,}5$ m.",
+              "answers": [
+                {
+                  "content": "62.5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taxi a pour vitesse $v(t) = 25 - 5t$ (en m/s, $t$ en s). Calcule sa vitesse à $t = 3$ s.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Écrire : $v(t) = 25 - 5t$. Étape 4 — Résoudre : $v(3) = 25 - 5 \\times 3 = 10$ m/s. Étape 5 — Vérifier : $10 < 25$, la vitesse a diminué, ce qui est cohérent avec $a < 0$.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si la vitesse initiale du taxi est doublée (50 m/s), la distance de freinage avec $a = -5$ m/s² est elle aussi doublée.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Résoudre : $0 - v_0^2 = 2a\\,d$ donne $d = \\dfrac{v_0^2}{2 \\times 5} = \\dfrac{v_0^2}{10}$. Pour $v_0 = 25$ m/s, $d = 62{,}5$ m ; pour $v_0 = 50$ m/s, $d = \\dfrac{2\\,500}{10} = 250$ m. La distance est multipliée par 4, car elle dépend de $v_0^2$. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
                 },
                 {
-                  "content": "Un car roule sur une route droite à $v_0 = 20\\ \\text{m/s}$. Il freine avec une accélération constante $a = -5\\ \\text{m/s}^2$ (axe orienté dans le sens du mouvement). Quelle distance parcourt-il avant de s'arrêter ?",
-                  "question_type": "single_choice",
-                  "explanation": "Relation sans le temps : $0 - 20^2 = 2 \\times (-5) \\times d$, soit $d = \\dfrac{400}{10} = 40\\ \\text{m}$. L'erreur tentante est d'oublier le facteur 2 et de trouver 80 m. Autre erreur : oublier le signe de $a$ dans $x = \\frac{1}{2}a\\,t^2 + v_0\\,t$, ce qui donne 120 m.",
-                  "answers": [
-                    {
-                      "content": "$80\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$400\\ \\text{m}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$40\\ \\text{m}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$120\\ \\text{m}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un mobile se déplace sur un axe $(Ox)$ avec $x(t) = -t^2 + 6t$ (unités SI), pour $t \\ge 0$. Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "On dérive : $v = -2t + 6$ et $a = -2\\ \\text{m/s}^2$. Entre 0 et 3 s, $v > 0$ et $a < 0$ : signes contraires, le mouvement est retardé. Après 3 s, $v < 0$ et $a < 0$ : même signe, il est accéléré (le mobile repart en sens inverse). L'erreur tentante est de dire « retardé tout le temps car $a < 0$ ». À $t = 3\\ \\text{s}$, c'est la vitesse qui s'annule, pas l'accélération.",
-                  "answers": [
-                    {
-                      "content": "La vitesse initiale du mobile est nulle.",
-                      "correct": false
-                    },
-                    {
-                      "content": "À $t = 3\\ \\text{s}$, l'accélération est nulle.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Après $t = 3\\ \\text{s}$, le mouvement est accéléré.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Entre $t = 0$ et $t = 3\\ \\text{s}$, le mouvement est retardé.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le mouvement est retardé pendant toute la durée, car $a < 0$.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "À $t = 0$, une moto A démarre du repos à l'origine d'un axe, avec une accélération constante $a = 2\\ \\text{m/s}^2$. Au même instant, un vélo B passe à l'origine, dans le même sens, à la vitesse constante de $8\\ \\text{m/s}$. À quelle date A rattrape-t-il B ?",
-                  "question_type": "single_choice",
-                  "explanation": "$x_A = \\frac{1}{2} \\times 2 \\times t^2 = t^2$ et $x_B = 8t$. A rattrape B quand $x_A = x_B$ : $t^2 = 8t$, donc $t = 8\\ \\text{s}$ (la solution $t = 0$ est le départ). L'erreur tentante est de répondre 4 s : à cette date, A et B ont la même vitesse, mais A est encore derrière (16 m contre 32 m).",
-                  "answers": [
-                    {
-                      "content": "$t = 16\\ \\text{s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$t = 4\\ \\text{s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$t = 8\\ \\text{s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "Jamais, car B est plus rapide que A au départ",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un mobile en mouvement rectiligne uniformément varié passe de $v_0 = 2\\ \\text{m/s}$ à $v = 8\\ \\text{m/s}$ sur une distance de $15\\ \\text{m}$. Quelle est son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "Relation sans le temps : $8^2 - 2^2 = 2a \\times 15$, soit $60 = 30a$ et $a = 2\\ \\text{m/s}^2$. L'erreur tentante est de diviser l'écart de vitesse par la distance ($\\dfrac{6}{15} = 0{,}4$) : on divise un écart de vitesse par une durée, pas par une distance.",
-                  "answers": [
-                    {
-                      "content": "$0{,}4\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1{,}2\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Faux",
+                  "correct": true
                 }
               ]
             }
           ]
         },
         {
-          "name": "Le mouvement circulaire uniforme",
-          "subtitle": "Vitesse angulaire, période et accélération dirigée vers le centre",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Calculer la vitesse angulaire, la période, la fréquence et la vitesse d'un mouvement circulaire uniforme.</li><li>Décrire les vecteurs vitesse et accélération dans le repère de Frenet.</li><li>Calculer l'accélération d'un mobile sur un cercle.</li></ul><h2>L'image pour comprendre</h2><p><strong>Le caillou au bout d'une ficelle.</strong> Tu attaches un caillou au bout d'une ficelle et tu le fais tourner au-dessus de ta tête, toujours au même rythme. Ta main doit tirer sans arrêt la ficelle vers elle, sinon le caillou ne resterait pas sur le cercle. Si la ficelle casse, le caillou ne part pas vers l'extérieur, le long de la ficelle : il part tout droit, dans la direction qu'il suivait à cet instant.</p><p><strong>Le pont.</strong> Ta main, c'est le centre O du cercle ; la longueur de la ficelle, c'est le rayon $R$ ; le caillou, c'est le mobile M. La direction que prend le caillou quand la ficelle casse, c'est la direction du <strong>vecteur vitesse</strong> : tangente au cercle. La ficelle tendue vers ta main montre la direction du <strong>vecteur accélération</strong> : vers le centre. « Toujours au même rythme », c'est le mot <strong>uniforme</strong> : la valeur de la vitesse ne change pas.</p><p><strong>La limite de l'image.</strong> La ficelle exerce une force, ce n'est pas une accélération : elle montre seulement la direction de $\\vec a$. De plus, une fois lâché, le caillou finit par retomber à cause de son poids : le « tout droit » ne vaut que juste après la rupture, vu de dessus.</p><h2>Ce qu'il faut retenir</h2><p>Le mobile M décrit un cercle de centre O et de rayon $R$. On le repère par son <em>abscisse angulaire</em> $\\theta$ (l'angle parcouru, en radians) ou par son <em>abscisse curviligne</em> $s$ (la longueur d'arc, en mètres) : $s = R\\,\\theta$.</p><blockquote><p><strong>Vitesse angulaire</strong> : $\\omega = \\dfrac{d\\theta}{dt}$, en $\\text{rad/s}$. <strong>Vitesse</strong> : $v = R\\,\\omega$, en $\\text{m/s}$.</p><p><strong>Repère de Frenet</strong> $(M ; \\vec\\tau, \\vec n)$ : $\\vec\\tau$ est tangent au cercle, dans le sens du mouvement ; $\\vec n$ est perpendiculaire à $\\vec\\tau$ et dirigé vers le centre. On a $\\vec v = v\\,\\vec\\tau$ et $\\vec a = a_t\\,\\vec\\tau + a_n\\,\\vec n$, avec $a_t = \\dfrac{dv}{dt}$ (accélération tangentielle) et $a_n = \\dfrac{v^2}{R}$ (accélération normale).</p><p><strong>Mouvement circulaire uniforme (MCU)</strong> : $\\omega$ est constante. Équations horaires : $\\theta = \\omega\\,t + \\theta_0$ et $s = v\\,t + s_0$. Période $T = \\dfrac{2\\pi}{\\omega}$ (durée d'un tour, en s) ; fréquence $N = \\dfrac{1}{T}$ (nombre de tours par seconde, en Hz). L'accélération est <strong>centripète</strong>, c'est-à-dire dirigée vers le centre : $a_t = 0$ et $a = a_n = \\dfrac{v^2}{R} = R\\,\\omega^2$.</p></blockquote><h2>Exemple résolu</h2><p>Un manège de rayon $R = 5\\ \\text{m}$ fait un tour complet en $10\\ \\text{s}$, à rythme constant. Un enfant est assis au bord. Calcule $N$, $\\omega$, $v$ et $a$.</p><ol><li><strong>Période et fréquence.</strong> Un tour dure 10 s : $T = 10\\ \\text{s}$, donc $N = \\dfrac{1}{10} = 0{,}1\\ \\text{Hz}$.</li><li><strong>Vitesse angulaire.</strong> $\\omega = \\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{10} \\approx 0{,}63\\ \\text{rad/s}$.</li><li><strong>Vitesse.</strong> $v = R\\,\\omega = 5 \\times 0{,}628 \\approx 3{,}1\\ \\text{m/s}$. Contrôle : en un tour, l'enfant parcourt $2\\pi R \\approx 31{,}4\\ \\text{m}$ en 10 s, soit bien $3{,}1\\ \\text{m/s}$.</li><li><strong>Accélération.</strong> Le mouvement est uniforme, donc $a_t = 0$ et $a = \\dfrac{v^2}{R} = \\dfrac{3{,}14^2}{5} \\approx 2{,}0\\ \\text{m/s}^2$, dirigée vers le centre du manège.</li></ol><h2>Le piège à éviter</h2><p>Croire qu'en MCU l'accélération est nulle « parce que la vitesse est constante ». C'est seulement la <strong>valeur</strong> $v$ qui est constante. La direction du vecteur vitesse tourne sans arrêt avec le mobile : $\\vec v$ change, donc $\\vec a \\ne \\vec 0$.</p><p>Pour repérer l'erreur, pense au repère de Frenet : en MCU, $a_t = 0$, mais $a_n = \\dfrac{v^2}{R}$ n'est jamais nul. Autre réflexe : convertis toujours les tours par minute en radians par seconde avant de calculer.</p><h2>En une phrase</h2><p>En MCU, la vitesse garde la même valeur $v = R\\,\\omega$ mais tourne avec le mobile, donc l'accélération vaut $\\dfrac{v^2}{R}$ et pointe toujours vers le centre.</p>",
-          "exercises": [
+          "title": "Une bretelle de sortie de l'autoroute du Nord",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Un gbaka quitte l'autoroute du Nord par une bretelle en arc de cercle de rayon $R = 50$ m. Il freine : la valeur de sa vitesse est $v(t) = 16 - 1{,}5\\,t$ (en m/s, $t$ en s), la date $t = 0$ étant l'entrée dans la bretelle. On étudie le mouvement à la date $t = 4$ s.",
+          "questions": [
             {
-              "title": "Comprendre — Vitesse et accélération sur un cercle",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Calcule la valeur de la vitesse du gbaka à $t = 4$ s, avec $v(t) = 16 - 1{,}5\\,t$.",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : la trajectoire est un arc de cercle de rayon $R = 50$ m ; on remplace $t = 4$ s : $v(4) = 16 - 1{,}5 \\times 4 = 16 - 6 = 10$ m/s.",
+              "answers": [
                 {
-                  "content": "Dans un mouvement circulaire uniforme, le vecteur accélération est nul, car la valeur de la vitesse ne change pas.",
-                  "question_type": "true_false",
-                  "explanation": "Faux. La valeur $v$ ne change pas, mais la direction de $\\vec v$ tourne sans arrêt : $\\vec v$ change, donc $\\vec a$ n'est pas nul. Il vaut $\\dfrac{v^2}{R}$ et pointe vers le centre. Souviens-toi du caillou : ta main doit tirer la ficelle en permanence pour qu'il reste sur le cercle.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans un mouvement circulaire uniforme, le vecteur accélération est dirigé…",
-                  "question_type": "single_choice",
-                  "explanation": "En MCU, $a_t = 0$ : il ne reste que l'accélération normale, dirigée vers le centre (accélération centripète), comme la ficelle tendue vers ta main. L'erreur tentante est de dire « vers l'extérieur » : quand la ficelle casse, le caillou part tout droit, tangent au cercle, pas vers l'extérieur.",
-                  "answers": [
-                    {
-                      "content": "vers le centre du cercle",
-                      "correct": true
-                    },
-                    {
-                      "content": "tangentiellement au cercle, dans le sens du mouvement",
-                      "correct": false
-                    },
-                    {
-                      "content": "vers l'extérieur du cercle",
-                      "correct": false
-                    },
-                    {
-                      "content": "nulle part, car il est nul",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Dans l'image du caillou qui tourne au bout d'une ficelle, quelles correspondances sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Ta main est au centre O, et la direction que prend le caillou quand la ficelle casse est celle du vecteur vitesse, tangente au cercle. La longueur de la ficelle correspond au rayon $R$, pas à la vitesse angulaire. Et le caillou ne part pas le long de la ficelle vers l'extérieur : c'est l'erreur la plus répandue.",
-                  "answers": [
-                    {
-                      "content": "La longueur de la ficelle correspond à la vitesse angulaire $\\omega$.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La direction que prend le caillou quand la ficelle casse est celle du vecteur vitesse, tangente au cercle.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Quand la ficelle casse, le caillou part vers l'extérieur, le long de la ficelle.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ta main correspond au centre O du cercle.",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "La période $T$ d'un mouvement circulaire uniforme est…",
-                  "question_type": "single_choice",
-                  "explanation": "La période est la durée d'un tour complet, en secondes. L'erreur tentante est de la confondre avec la fréquence $N$, qui est le nombre de tours par seconde : $N = \\dfrac{1}{T}$.",
-                  "answers": [
-                    {
-                      "content": "la distance parcourue pendant un tour",
-                      "correct": false
-                    },
-                    {
-                      "content": "la durée d'un tour complet",
-                      "correct": true
-                    },
-                    {
-                      "content": "le nombre de tours effectués en une seconde",
-                      "correct": false
-                    },
-                    {
-                      "content": "l'angle parcouru en une seconde",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pour un mouvement circulaire uniforme de rayon $R$ et de vitesse angulaire $\\omega$, quelles relations sont justes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "On a $v = R\\,\\omega$, $T = \\dfrac{2\\pi}{\\omega}$ et $a = \\dfrac{v^2}{R}$. L'erreur tentante est $v = \\dfrac{\\omega}{R}$ : plus on est loin du centre, plus on va vite, donc $v$ augmente avec $R$. Et $a$ n'est pas nulle en MCU.",
-                  "answers": [
-                    {
-                      "content": "$v = \\dfrac{\\omega}{R}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a = 0$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$T = 2\\pi\\,\\omega$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$T = \\dfrac{2\\pi}{\\omega}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$v = R\\,\\omega$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$a = \\dfrac{v^2}{R}$",
-                      "correct": true
-                    }
-                  ]
+                  "content": "10",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Calculer vitesse angulaire, période, vitesse et accélération",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "La valeur de la vitesse est $v(t) = 16 - 1{,}5\\,t$ (en m/s, $t$ en s). Calcule l'accélération tangentielle $a_t$.",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Calculer $a_t$ : $a_t = \\dfrac{dv}{dt} = -1{,}5$ m/s². Elle est négative : la valeur de la vitesse diminue. Elle est constante pendant toute la bretelle.",
+              "answers": [
                 {
-                  "content": "Une roue tourne à raison de 2 tours par seconde. Quelle est sa vitesse angulaire ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un tour vaut $2\\pi$ radians. Avec $N = 2\\ \\text{Hz}$ : $\\omega = 2\\pi N = 4\\pi \\approx 12{,}6\\ \\text{rad/s}$. L'erreur tentante est de répondre 2 rad/s : ce sont des tours par seconde, pas des radians par seconde.",
-                  "answers": [
-                    {
-                      "content": "$\\omega = 2\\ \\text{rad/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\omega = \\pi \\approx 3{,}14\\ \\text{rad/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\omega = 0{,}5\\ \\text{rad/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\omega = 4\\pi \\approx 12{,}6\\ \\text{rad/s}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Un point d'un manège décrit un cercle de rayon $R = 4\\ \\text{m}$ avec une vitesse angulaire constante $\\omega = 0{,}5\\ \\text{rad/s}$. Quelle est la valeur de sa vitesse ?",
-                  "question_type": "single_choice",
-                  "explanation": "$v = R\\,\\omega = 4 \\times 0{,}5 = 2\\ \\text{m/s}$. L'erreur tentante est de diviser ($\\dfrac{\\omega}{R}$ ou $\\dfrac{R}{\\omega}$) : plus le point est loin du centre, plus il va vite, donc on multiplie par $R$.",
-                  "answers": [
-                    {
-                      "content": "$8\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$2\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$4{,}5\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$0{,}125\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un point décrit un cercle de rayon $R = 4\\ \\text{m}$ avec une vitesse angulaire constante $\\omega = 0{,}5\\ \\text{rad/s}$. Quelle est la valeur de son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "En MCU, $a = R\\,\\omega^2 = 4 \\times 0{,}5^2 = 1\\ \\text{m/s}^2$ (ou $\\dfrac{v^2}{R} = \\dfrac{2^2}{4} = 1$). L'erreur tentante est de répondre 0 parce que le mouvement est uniforme : la direction de la vitesse change, donc l'accélération existe.",
-                  "answers": [
-                    {
-                      "content": "$0\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$16\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$1\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$2\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "L'aiguille des secondes d'une montre fait un tour en une minute. Quelle est sa vitesse angulaire ?",
-                  "question_type": "single_choice",
-                  "explanation": "$T = 60\\ \\text{s}$, donc $\\omega = \\dfrac{2\\pi}{T} = \\dfrac{2\\pi}{60} \\approx 0{,}105\\ \\text{rad/s}$. L'erreur tentante est d'oublier le $2\\pi$ et d'écrire $\\dfrac{1}{60}$ : cela donne la fréquence en tours par seconde, pas la vitesse angulaire en radians par seconde.",
-                  "answers": [
-                    {
-                      "content": "$\\omega = 2\\pi \\times 60 \\approx 377\\ \\text{rad/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\omega = \\dfrac{2\\pi}{60} \\approx 0{,}105\\ \\text{rad/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$\\omega = 60\\ \\text{rad/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\omega = \\dfrac{1}{60} \\approx 0{,}017\\ \\text{rad/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Deux enfants sont assis sur le même manège en rotation : l'un à 1 m du centre, l'autre à 3 m. Ils ont la même vitesse angulaire, mais l'enfant placé à 3 m a une vitesse trois fois plus grande.",
-                  "question_type": "true_false",
-                  "explanation": "Vrai. Tout le manège tourne du même angle dans le même temps : même $\\omega$. Mais $v = R\\,\\omega$, donc à 3 m la vitesse est trois fois plus grande qu'à 1 m. L'erreur tentante est de croire que tous les points d'un objet qui tourne ont la même vitesse : ils ont la même vitesse angulaire, pas la même vitesse.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "-1.5",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "S'évaluer — Étudier un mouvement circulaire uniforme",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Le gbaka roule à 10 m/s dans un arc de cercle de rayon 50 m. Calcule son accélération normale $a_n$.",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Calculer $a_n$ : $a_n = \\dfrac{v^2}{\\rho} = \\dfrac{10^2}{50} = \\dfrac{100}{50} = 2$ m/s², avec $\\rho = R = 50$ m. Elle est dirigée vers le centre de l'arc.",
+              "answers": [
                 {
-                  "content": "Un ventilateur tourne à 600 tours par minute. Le bout d'une pale est à $R = 0{,}25\\ \\text{m}$ de l'axe. Quelle est la valeur de sa vitesse ?",
-                  "question_type": "single_choice",
-                  "explanation": "On convertit : 600 tr/min = 10 tr/s, donc $\\omega = 2\\pi \\times 10 = 20\\pi \\approx 62{,}8\\ \\text{rad/s}$. Puis $v = R\\,\\omega = 0{,}25 \\times 62{,}8 \\approx 15{,}7\\ \\text{m/s}$. L'erreur tentante est de multiplier directement $600 \\times 0{,}25 = 150$ : les tours par minute ne sont pas des radians par seconde.",
-                  "answers": [
-                    {
-                      "content": "$v = 2{,}5\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v \\approx 15{,}7\\ \\text{m/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$v \\approx 942\\ \\text{m/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v = 150\\ \\text{m/s}$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le bout d'une pale de ventilateur tourne à $\\omega = 20\\pi\\ \\text{rad/s}$ (environ $62{,}8\\ \\text{rad/s}$), à $R = 0{,}25\\ \\text{m}$ de l'axe. Que peut-on dire de son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le mouvement est circulaire uniforme : $a = R\\,\\omega^2 = 0{,}25 \\times (62{,}8)^2 \\approx 9{,}9 \\times 10^{2}\\ \\text{m/s}^2$, dirigée vers l'axe (centripète). L'erreur tentante est de répondre 0 « car la vitesse est constante » : seule sa valeur l'est, sa direction tourne.",
-                  "answers": [
-                    {
-                      "content": "$a \\approx 9{,}9 \\times 10^{2}\\ \\text{m/s}^2$, dirigée vers l'axe",
-                      "correct": true
-                    },
-                    {
-                      "content": "$a = 0$, car la vitesse est constante",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a \\approx 9{,}9 \\times 10^{2}\\ \\text{m/s}^2$, dirigée vers l'extérieur",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a \\approx 3{,}9 \\times 10^{3}\\ \\text{m/s}^2$, dirigée vers l'axe",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un point M décrit un cercle de rayon $R = 2\\ \\text{m}$. Son abscisse angulaire est $\\theta(t) = 3t + 1$ ($\\theta$ en radians, $t$ en secondes). Quelles affirmations sont justes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "$\\omega = \\dfrac{d\\theta}{dt} = 3\\ \\text{rad/s}$ (constante : c'est un MCU) et $v = R\\,\\omega = 6\\ \\text{m/s}$. L'erreur tentante est d'additionner les coefficients ($3 + 1 = 4$) : le 1 est l'angle de départ $\\theta_0$, il disparaît en dérivant. Ici $a = R\\,\\omega^2 = 18\\ \\text{m/s}^2$, et $T = \\dfrac{2\\pi}{3} \\approx 2{,}1\\ \\text{s}$, pas 3 s.",
-                  "answers": [
-                    {
-                      "content": "$\\omega = 4\\ \\text{rad/s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$\\omega = 3\\ \\text{rad/s}$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$T = 3\\ \\text{s}$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a = 6\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$v = 6\\ \\text{m/s}$",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Une voiture prend un virage circulaire de rayon $R = 50\\ \\text{m}$ à la vitesse constante de $54\\ \\text{km/h}$. Quelle est la valeur de son accélération ?",
-                  "question_type": "single_choice",
-                  "explanation": "On convertit : $54\\ \\text{km/h} = 15\\ \\text{m/s}$. Puis $a = \\dfrac{v^2}{R} = \\dfrac{225}{50} = 4{,}5\\ \\text{m/s}^2$, dirigée vers le centre du virage. L'erreur tentante est d'oublier la conversion ($\\dfrac{54^2}{50} \\approx 58{,}3$) ou de répondre 0 parce que le compteur ne bouge pas.",
-                  "answers": [
-                    {
-                      "content": "$0\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$4{,}5\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$0{,}3\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$58{,}3\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un mobile décrit un cercle de rayon $R = 10\\ \\text{m}$. À un instant, sa vitesse vaut $v = 10\\ \\text{m/s}$ et elle augmente de $2\\ \\text{m/s}$ à chaque seconde. Quelles sont les coordonnées de son accélération dans le repère de Frenet ?",
-                  "question_type": "single_choice",
-                  "explanation": "$a_t = \\dfrac{dv}{dt} = 2\\ \\text{m/s}^2$ (la vitesse gagne 2 m/s chaque seconde) et $a_n = \\dfrac{v^2}{R} = \\dfrac{100}{10} = 10\\ \\text{m/s}^2$. L'erreur tentante est de prendre $a_t = 0$ par réflexe du MCU : ici, la vitesse change de valeur, le mouvement n'est pas uniforme.",
-                  "answers": [
-                    {
-                      "content": "$a_t = 10\\ \\text{m/s}^2$ et $a_n = 2\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a_t = 0$ et $a_n = 10\\ \\text{m/s}^2$",
-                      "correct": false
-                    },
-                    {
-                      "content": "$a_t = 2\\ \\text{m/s}^2$ et $a_n = 10\\ \\text{m/s}^2$",
-                      "correct": true
-                    },
-                    {
-                      "content": "$a_t = 2\\ \\text{m/s}^2$ et $a_n = 1\\ \\text{m/s}^2$",
-                      "correct": false
-                    }
-                  ]
+                  "content": "2",
+                  "correct": true
                 }
               ]
+            },
+            {
+              "content": "À $t = 4$ s, le gbaka a $a_t = -1{,}5$ m/s² et $a_n = 2$ m/s². Calcule la valeur $a$ de son accélération.",
+              "question_type": "numeric",
+              "unit": "m/s²",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Calculer $a$ : $a = \\sqrt{a_t^2 + a_n^2} = \\sqrt{(-1{,}5)^2 + 2^2} = \\sqrt{2{,}25 + 4} = \\sqrt{6{,}25} = 2{,}5$ m/s². Le signe de $a_t$ disparaît à cause du carré.",
+              "answers": [
+                {
+                  "content": "2.5",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le gbaka a $a_t = -1{,}5$ m/s² à $t = 4$ s, avec $v > 0$. Quelle est la nature de son mouvement ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 5 — Conclure sur la nature du mouvement : $a_t = -1{,}5 < 0$ avec $v > 0$, donc la valeur de la vitesse diminue : le mouvement est retardé. Le mouvement n'est pas uniforme car $a_t \\neq 0$, et il n'est pas rectiligne car $a_n \\neq 0$.",
+              "answers": [
+                {
+                  "content": "Mouvement accéléré : la valeur de la vitesse augmente",
+                  "correct": false
+                },
+                {
+                  "content": "Mouvement uniforme : la valeur de la vitesse est constante",
+                  "correct": false
+                },
+                {
+                  "content": "Mouvement retardé : la valeur de la vitesse diminue",
+                  "correct": true
+                },
+                {
+                  "content": "Mouvement rectiligne, car $a_n \\neq 0$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le gbaka roule à $v = 10$ m/s sur un cercle de rayon $R = 50$ m. Calcule sa vitesse angulaire $\\omega$ en rad/s.",
+              "question_type": "numeric",
+              "unit": "rad/s",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Relier : $v = R\\omega$, donc $\\omega = \\dfrac{v}{R} = \\dfrac{10}{50} = 0{,}2$ rad/s. Étape 5 — Vérifier : $R\\omega = 50 \\times 0{,}2 = 10$ m/s.",
+              "answers": [
+                {
+                  "content": "0.2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pendant le freinage dans la bretelle (rayon 50 m), l'accélération normale $a_n$ reste constante.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Calculer $a_n$ : $a_n = \\dfrac{v^2}{\\rho}$ avec $\\rho = 50$ m constant, mais $v$ diminue. À $t = 4$ s, $a_n = \\dfrac{100}{50} = 2$ m/s², et à $t = 8$ s, $v = 4$ m/s donne $a_n = \\dfrac{16}{50} = 0{,}32$ m/s². $a_n$ diminue : l'affirmation est fausse, contrairement à $a_t$ qui reste constante.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le dépassement sur l'autoroute du Nord",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Sur l'autoroute du Nord, un taxi A passe au péage ($x = 0$) à la date $t = 0$ avec une vitesse constante de 15 m/s. Au même instant, un taxi B démarre du péage sans vitesse initiale, avec une accélération constante $a_B = 1{,}5$ m/s². Les deux roulent sur le même axe $Ox$, dans le même sens. Le taxi B veut dépasser le taxi A.",
+          "questions": [
+            {
+              "content": "Le taxi B part de $x_0 = 0$ avec $v_0 = 0$ et $a_B = 1{,}5$ m/s². Quelle est son équation horaire ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Relever : $x_0 = 0$, $v_0 = 0$, $a = 1{,}5$ m/s². Étape 2 — Identifier : MRUV accéléré. Étape 3 — Écrire : $x(t) = \\dfrac{1}{2}at^2 + v_0 t + x_0 = \\dfrac{1}{2} \\times 1{,}5 \\times t^2 = 0{,}75\\,t^2$. L'erreur $1{,}5\\,t^2$ oublie le facteur $\\dfrac{1}{2}$.",
+              "answers": [
+                {
+                  "content": "$x_B(t) = 1{,}5\\,t^2$",
+                  "correct": false
+                },
+                {
+                  "content": "$x_B(t) = 0{,}75\\,t^2 + 15\\,t$",
+                  "correct": false
+                },
+                {
+                  "content": "$x_B(t) = 1{,}5\\,t$",
+                  "correct": false
+                },
+                {
+                  "content": "$x_B(t) = 0{,}75\\,t^2$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taxi A roule à 15 m/s depuis $x_0 = 0$. Calcule son abscisse à $t = 10$ s.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Identifier : la vitesse est constante, c'est un MRU. Étape 3 — Écrire : $x_A(t) = 15t$. Étape 4 — Résoudre : $x_A(10) = 15 \\times 10 = 150$ m.",
+              "answers": [
+                {
+                  "content": "150",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les taxis ont pour équations $x_A(t) = 15t$ et $x_B(t) = 0{,}75\\,t^2$. Calcule la date $t > 0$ à laquelle B rattrape A.",
+              "question_type": "numeric",
+              "unit": "s",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Résoudre : à la rencontre, $x_A = x_B$ donc $15t = 0{,}75\\,t^2$. Comme $t > 0$, on divise par $t$ : $15 = 0{,}75\\,t$, donc $t = \\dfrac{15}{0{,}75} = 20$ s. La solution $t = 0$ correspond au départ commun, pas au dépassement.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les taxis se rencontrent à $t = 20$ s, avec $x_A(t) = 15t$. Calcule l'abscisse de la rencontre.",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Résoudre : $x_A(20) = 15 \\times 20 = 300$ m. Étape 5 — Vérifier avec B : $x_B(20) = 0{,}75 \\times 20^2 = 0{,}75 \\times 400 = 300$ m. Les deux valeurs sont égales, ce qui confirme la date.",
+              "answers": [
+                {
+                  "content": "300",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taxi B a $a_B = 1{,}5$ m/s² et part du repos. Calcule sa vitesse à la rencontre ($t = 20$ s).",
+              "question_type": "numeric",
+              "unit": "m/s",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Écrire : $v_B(t) = a_B t = 1{,}5\\,t$. Étape 4 — Résoudre : $v_B(20) = 1{,}5 \\times 20 = 30$ m/s. Étape 5 — Vérifier : $30$ m/s $= 30 \\times 3{,}6 = 108$ km/h. Contrôle sans le temps : $v^2 = 2 \\times 1{,}5 \\times 300 = 900$ donc $v = 30$ m/s.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À $t = 10$ s, avec $x_A = 15t$ et $x_B = 0{,}75\\,t^2$, calcule la distance qui sépare A (devant) de B (derrière).",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Résoudre : $x_A(10) = 15 \\times 10 = 150$ m et $x_B(10) = 0{,}75 \\times 10^2 = 75$ m. La distance est $x_A - x_B = 150 - 75 = 75$ m. Étape 5 — Vérifier : A est devant B, donc la différence est positive.",
+              "answers": [
+                {
+                  "content": "75",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Compare les vitesses de A et de B à la rencontre ($t = 20$ s), puis explique ce que cela implique pour la suite du mouvement. Données : $v_A = 15$ m/s, $v_B = 30$ m/s.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Compare $v_B = 30$ m/s à $v_A = 15$ m/s",
+                "Conclut que B roule plus vite que A à cet instant",
+                "Déduit que B passe devant A après la rencontre"
+              ],
+              "explanation": "Corrigé modèle : à $t = 20$ s, $v_B = 30$ m/s est supérieure à $v_A = 15$ m/s. Le taxi B se déplace donc plus vite que le taxi A à cet instant : il gagne de la distance sur lui à chaque seconde. Après la rencontre, B passe devant A et l'écart entre les deux véhicules augmente : c'est un dépassement. Barème : 0,5 pour la comparaison chiffrée, 0,5 pour le fait que B est plus rapide, 1 pour la conclusion sur le dépassement.",
+              "answers": [],
+              "starter": "À la rencontre, le taxi B roule…"
             }
           ]
         }

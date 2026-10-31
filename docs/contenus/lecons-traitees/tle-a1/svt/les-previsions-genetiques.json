@@ -1,0 +1,1770 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les prévisions génétiques",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "A1",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "arbre-decision-dominance",
+          "kind": "diagram",
+          "description": "Schéma fléché de décision pour lire un arbre généalogique. Première question : deux parents sains ont-ils un enfant malade ? Si oui, l'allèle de la maladie est récessif. Sinon, deuxième question : deux parents malades ont-ils un enfant sain ? Si oui, l'allèle est dominant. Sinon, aucun couple ne permet de conclure.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Question",
+              "Conclusion"
+            ],
+            "nodes": [
+              {
+                "id": "q1",
+                "label": "Deux parents sains ont-ils un enfant malade ?",
+                "category": 1
+              },
+              {
+                "id": "q2",
+                "label": "Deux parents malades ont-ils un enfant sain ?",
+                "category": 1
+              },
+              {
+                "id": "rec",
+                "label": "Allèle de la maladie récessif",
+                "category": 2
+              },
+              {
+                "id": "dom",
+                "label": "Allèle de la maladie dominant",
+                "category": 2
+              },
+              {
+                "id": "rien",
+                "label": "Pas de couple décisif : chercher d'autres indices",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "q1",
+                "to": "rec",
+                "label": "oui"
+              },
+              {
+                "from": "q1",
+                "to": "q2",
+                "label": "non"
+              },
+              {
+                "from": "q2",
+                "to": "dom",
+                "label": "oui"
+              },
+              {
+                "from": "q2",
+                "to": "rien",
+                "label": "non"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "croisement-drepanocytose",
+          "kind": "diagram",
+          "description": "Schéma fléché du croisement de deux parents A//S, porteurs sains de la drépanocytose. Chaque parent produit des gamètes A ou S. Les enfants possibles sont A//A (sain, probabilité 1/4), A//S (porteur sain, probabilité 2/4) et S//S (malade, probabilité 1/4).",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Parents",
+              "Gamètes",
+              "Enfant"
+            ],
+            "nodes": [
+              {
+                "id": "pere",
+                "label": "Père A//S",
+                "category": 1
+              },
+              {
+                "id": "mere",
+                "label": "Mère A//S",
+                "category": 1
+              },
+              {
+                "id": "gp",
+                "label": "Gamètes du père : A ou S",
+                "category": 2
+              },
+              {
+                "id": "gm",
+                "label": "Gamètes de la mère : A ou S",
+                "category": 2
+              },
+              {
+                "id": "aa",
+                "label": "A//A sain : 1/4",
+                "category": 3
+              },
+              {
+                "id": "as",
+                "label": "A//S porteur sain : 2/4",
+                "category": 3
+              },
+              {
+                "id": "ss",
+                "label": "S//S malade : 1/4",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "pere",
+                "to": "gp",
+                "label": "produit"
+              },
+              {
+                "from": "mere",
+                "to": "gm",
+                "label": "produit"
+              },
+              {
+                "from": "gp",
+                "to": "aa"
+              },
+              {
+                "from": "gm",
+                "to": "aa"
+              },
+              {
+                "from": "gp",
+                "to": "as"
+              },
+              {
+                "from": "gm",
+                "to": "as"
+              },
+              {
+                "from": "gp",
+                "to": "ss"
+              },
+              {
+                "from": "gm",
+                "to": "ss"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "demarche-conseil-genetique",
+          "kind": "diagram",
+          "description": "Schéma fléché de la démarche du conseil génétique en cinq temps : le dépistage (test d'Emmel, électrophorèse de l'hémoglobine), l'écriture des génotypes du couple, le calcul du risque avec l'échiquier, l'information du couple par le conseiller, puis la décision libre du couple.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Examen et calcul",
+              "Information et décision"
+            ],
+            "nodes": [
+              {
+                "id": "d1",
+                "label": "Dépistage : test d'Emmel, électrophorèse",
+                "category": 1
+              },
+              {
+                "id": "d2",
+                "label": "Génotypes du couple",
+                "category": 1
+              },
+              {
+                "id": "d3",
+                "label": "Risque calculé avec l'échiquier",
+                "category": 1
+              },
+              {
+                "id": "d4",
+                "label": "Le conseiller informe le couple",
+                "category": 2
+              },
+              {
+                "id": "d5",
+                "label": "Le couple décide librement",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "d1",
+                "to": "d2"
+              },
+              {
+                "from": "d2",
+                "to": "d3"
+              },
+              {
+                "from": "d3",
+                "to": "d4"
+              },
+              {
+                "from": "d4",
+                "to": "d5"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Déterminer si un allèle est dominant ou récessif à partir d'un arbre généalogique",
+          "remember": "Le **phénotype** est le caractère observable (malade ou sain) ; le **génotype** est la paire d'allèles qui le commande. Un allèle **dominant** s'exprime même en un seul exemplaire ; un allèle **récessif** ne s'exprime que s'il est présent en deux exemplaires. Une personne hétérozygote pour un allèle récessif de maladie est saine : c'est un **porteur sain**. Un arbre généalogique range les personnes par générations (I, II, III) et les numérote (I-1, I-2…). Deux règles : **deux parents sains qui ont un enfant malade** montrent que l'allèle de la maladie est **récessif** (les parents sont hétérozygotes) ; **deux parents malades qui ont un enfant sain** montrent qu'il est **dominant** (les parents sont hétérozygotes).",
+          "method": [
+            "Lire l'arbre : relever, génération par génération, les personnes atteintes et les personnes saines.",
+            "Chercher le couple décisif : deux parents de même phénotype qui ont un enfant de phénotype différent.",
+            "Appliquer la règle : parents sains et enfant malade, allèle récessif ; parents malades et enfant sain, allèle dominant.",
+            "Conclure : nommer l'allèle (dominant ou récessif), écrire les génotypes des parents et justifier."
+          ],
+          "example": {
+            "statement": "Famille fictive d'Abidjan, albinisme (absence de pigment dans la peau). Génération I : I-1 (homme) et I-2 (femme) ont une pigmentation normale. Génération II : leur fille II-1 est albinos, leur fils II-2 a une pigmentation normale. On note $N$ l'allèle normal et $a$ l'allèle de l'albinisme. L'allèle $a$ est-il dominant ou récessif ?",
+            "steps": [
+              "Lire l'arbre : I-1 et I-2 sont sains ; II-1 est atteinte (albinos) ; II-2 est sain.",
+              "Chercher le couple décisif : I-1 et I-2, deux parents sains, ont un enfant malade, II-1.",
+              "Appliquer la règle : deux parents sains et un enfant malade, donc l'allèle de l'albinisme est récessif.",
+              "Conclure : l'allèle $a$ est récessif ; I-1 et I-2 sont $N//a$ (porteurs sains) et II-1 est $a//a$, car elle a reçu $a$ de chacun."
+            ]
+          },
+          "pitfall": "Ne conclus pas « dominant » parce que tous les membres de la famille sont malades. Contre-exemple : deux parents malades ont 4 enfants, tous malades. Si l'allèle est récessif, les parents sont $a//a$ et leurs enfants sont tous $a//a$ : ce cas est donc possible aussi. Seul un couple décisif (parents sains avec un enfant malade, ou parents malades avec un enfant sain) permet de conclure.",
+          "figure": "arbre-decision-dominance",
+          "exercise": {
+            "title": "Dominant ou récessif ? Lire un arbre généalogique",
+            "statement": "Dans cet exercice, tu lis des arbres généalogiques décrits en texte (générations I, II, III) et tu décides si l'allèle d'une maladie est dominant ou récessif, avec la méthode de la fiche. Familles fictives.",
+            "exercise_type": "fixation",
+            "figure": "arbre-decision-dominance",
+            "questions": [
+              {
+                "content": "Deux parents non atteints d'une maladie ont un enfant atteint. Cela montre que l'allèle responsable de la maladie est dominant.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire l'arbre : les deux parents sont sains, l'enfant est malade. Étape 2 — Chercher le couple décisif : c'est ce couple. Étape 3 — Appliquer la règle : parents sains et enfant malade, donc allèle récessif. Étape 4 — Conclure : les parents sont hétérozygotes (porteurs sains). Si l'allèle était dominant, l'enfant aurait reçu l'allèle de la maladie d'un parent, qui serait malade. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, I-1 (homme) et I-2 (femme) sont tous deux atteints d'une maladie héréditaire. Leur fille II-1 est atteinte, leur fils II-2 est sain. Que peut-on conclure sur l'allèle de la maladie ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'arbre : I-1 et I-2 sont malades, II-1 est malade, II-2 est sain. Étape 2 — Chercher le couple décisif : I-1 et I-2, deux parents malades, ont un enfant sain, II-2. Étape 3 — Appliquer la règle : parents malades et enfant sain, allèle dominant. Étape 4 — Conclure : l'allèle est dominant et les parents sont hétérozygotes. Le fait que II-1 soit malade ne permet pas de conclure à lui seul.",
+                "answers": [
+                  {
+                    "content": "Il est récessif, car leur fille II-1 est atteinte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est récessif, car leur fils II-2 est sain",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est dominant, car deux parents malades ont un enfant sain",
+                    "correct": true
+                  },
+                  {
+                    "content": "On ne peut rien conclure, car il n'y a que deux enfants",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un allèle qui ne s'exprime que lorsqu'il est présent en double exemplaire est dit ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : on nomme l'allèle. Un allèle qui ne s'exprime qu'en double exemplaire est dit récessif ; il reste caché chez l'hétérozygote, qui est un porteur sain. Un allèle dominant, lui, s'exprime dès qu'il est présent une seule fois.",
+                "answers": [
+                  {
+                    "content": "récessif",
+                    "correct": true
+                  },
+                  {
+                    "content": "récessive",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, les parents I-1 et I-2 ne sont pas atteints d'une maladie, mais leur enfant II-1 l'est. Quelles sont les deux affirmations exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Chercher le couple décisif : I-1 et I-2, deux parents sains, ont un enfant malade. Étape 3 — Appliquer la règle : l'allèle est récessif. Étape 4 — Conclure : II-1 est $a//a$ et a reçu un $a$ de chaque parent ; I-1 et I-2, sains, sont donc $N//a$, des porteurs sains. Dire que les parents ne portent aucun allèle de la maladie est faux : ils en ont chacun un exemplaire.",
+                "answers": [
+                  {
+                    "content": "L'allèle de la maladie est récessif",
+                    "correct": true
+                  },
+                  {
+                    "content": "I-1 et I-2 sont hétérozygotes (porteurs sains)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'allèle de la maladie est dominant",
+                    "correct": false
+                  },
+                  {
+                    "content": "I-1 et I-2 ne portent aucun allèle de la maladie",
+                    "correct": false
+                  },
+                  {
+                    "content": "II-1 a reçu l'allèle de la maladie d'un seul de ses parents",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, I-1 (homme) et I-2 (femme) sont tous deux atteints d'une maladie. Leurs quatre enfants II-1 à II-4 sont tous atteints. Peut-on conclure que l'allèle de la maladie est dominant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'arbre : les six personnes sont malades. Étape 2 — Chercher le couple décisif : il n'y en a pas, car aucun enfant ne diffère de ses parents. Étape 3 — Appliquer la règle : elle ne s'applique pas. Si l'allèle est récessif, les parents $a//a$ n'ont que des enfants $a//a$ : ce cas est possible. On ne peut donc pas conclure.",
+                "answers": [
+                  {
+                    "content": "Oui, car tous les membres de la famille sont atteints",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : si l'allèle est récessif, des parents $a//a$ n'ont que des enfants $a//a$, ce cas est possible aussi",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, car il y a quatre enfants atteints",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non, car l'allèle est sûrement récessif",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour savoir si un allèle est dominant ou récessif.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire l'arbre. Étape 2 — Chercher le couple décisif. Étape 3 — Appliquer la règle. Étape 4 — Conclure. On ne peut pas appliquer la règle avant d'avoir trouvé le couple décisif, ni conclure avant d'avoir appliqué la règle.",
+                "answers": [
+                  {
+                    "content": "Lire l'arbre : relever les personnes atteintes et saines"
+                  },
+                  {
+                    "content": "Chercher le couple décisif"
+                  },
+                  {
+                    "content": "Appliquer la règle des parents et de l'enfant"
+                  },
+                  {
+                    "content": "Conclure en nommant l'allèle et les génotypes"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un allèle dominant ou récessif, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une personne hétérozygote pour un allèle récessif de maladie est saine : on l'appelle un ___ ; elle possède ___ exemplaire(s) de l'allèle récessif.",
+                "question_type": "fill_blank",
+                "hint": "Il porte l'allèle sans être malade.",
+                "explanation": "Étape 4 — Conclure : l'allèle récessif est caché par l'allèle normal chez l'hétérozygote, qui est donc sain. On l'appelle un porteur sain : il possède un seul exemplaire de l'allèle récessif et peut le transmettre.",
+                "answers": [
+                  {
+                    "content": "porteur sain",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "porteuse saine",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "porteur",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, I-1 et I-2 ont une pigmentation normale, mais leur fille II-1 est albinos. Que peut-on dire de l'allèle de l'albinisme ?",
+                "question_type": "single_choice",
+                "hint": "Parents sains, enfant atteint : que cachent les parents ?",
+                "explanation": "Étape 1 — Lire l'arbre : I-1 et I-2 sont sains, II-1 est atteinte. Étape 2 — Chercher le couple décisif : I-1 et I-2. Étape 3 — Appliquer la règle : parents sains et enfant malade, allèle récessif. Étape 4 — Conclure : l'allèle de l'albinisme est récessif ; I-1 et I-2 sont $N//a$.",
+                "answers": [
+                  {
+                    "content": "Il est récessif",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est dominant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est dominant chez les filles seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas savoir",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux parents malades qui ont un enfant sain montrent que l'allèle de la maladie est récessif.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher le couple décisif : deux parents malades ont un enfant sain. Étape 3 — Appliquer la règle : parents malades et enfant sain, allèle dominant, pas récessif. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, I-1 et I-2 sont tous deux atteints, et leur enfant II-1 est sain. Quels sont les génotypes de I-1 et I-2 si l'allèle de la maladie est noté $M$ et l'allèle normal $n$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher le couple décisif : deux parents malades ont un enfant sain, II-1. Étape 3 — Appliquer la règle : allèle dominant. Étape 4 — Conclure : II-1 est $n//n$ et a reçu un $n$ de chaque parent, donc I-1 et I-2, malades, sont $M//n$.",
+                "answers": [
+                  {
+                    "content": "$M//M$ pour chacun",
+                    "correct": false
+                  },
+                  {
+                    "content": "$n//n$ pour chacun",
+                    "correct": false
+                  },
+                  {
+                    "content": "$M//n$ pour chacun",
+                    "correct": true
+                  },
+                  {
+                    "content": "$M//M$ et $n//n$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Reconnaître une transmission autosomale ou liée au chromosome X",
+          "remember": "Un gène peut être porté par un **autosome** (la maladie touche aussi bien les filles que les garçons) ou par le chromosome **X** (transmission **liée au chromosome X**). La femme est $X//X$, l'homme $X//Y$ : il n'a qu'un seul X, donc l'allèle porté par son X s'exprime toujours, même récessif. Pour un allèle **récessif lié à X**, noté $X^{h}$ (allèle normal $X^{H}$) : une femme est atteinte seulement si elle est $X^{h}//X^{h}$ ; elle est saine et **porteuse** si elle est $X^{H}//X^{h}$ ; un homme est atteint dès qu'il est $X^{h}//Y$. Un garçon reçoit son X de sa **mère** et son Y de son père : une fille atteinte a donc un **père atteint**, et une mère atteinte a tous ses **fils atteints**. L'hémophilie (maladie) et le daltonisme (anomalie de la vision des couleurs) sont récessifs et liés à X. Notation de la leçon : $A//S$, $X^{h}//Y$.",
+          "method": [
+            "Lire l'arbre : relever le sexe de chaque personne atteinte et le phénotype de son père et de sa mère.",
+            "Chercher un indice d'exclusion : une fille atteinte dont le père est sain, ou une mère atteinte dont un fils est sain.",
+            "Tester l'hypothèse « liée à X » : écrire les génotypes qu'elle impose et voir si elle mène à une contradiction.",
+            "Conclure : transmission autosomale si l'hypothèse est impossible ; sinon, dire que « liée à X » est possible, sans l'affirmer."
+          ],
+          "example": {
+            "statement": "Famille fictive. L'allèle d'une maladie héréditaire est déjà reconnu récessif. Génération I : I-1 (homme) et I-2 (femme) ne sont pas atteints. Génération II : leur fille II-1 est atteinte, leur fils II-2 n'est pas atteint. La maladie est-elle autosomale ou liée à X ?",
+            "steps": [
+              "Lire l'arbre : II-1 est une fille atteinte ; son père I-1 est sain, sa mère I-2 est saine ; II-2 est un garçon sain.",
+              "Chercher un indice d'exclusion : II-1 est une fille atteinte dont le père est sain.",
+              "Tester l'hypothèse « liée à X » : II-1 serait $X^{h}//X^{h}$ et aurait reçu un $X^{h}$ de son père, qui serait $X^{h}//Y$, donc atteint. Or I-1 est sain : contradiction.",
+              "Conclure : l'hypothèse « liée à X » est impossible, donc la transmission est autosomale (récessive)."
+            ]
+          },
+          "pitfall": "Ne conclus pas « liée à X » parce que seuls des garçons sont atteints. Contre-exemple : deux parents $N//a$ ont deux fils atteints $a//a$ ; la maladie est autosomale, et pourtant seuls des garçons sont malades. Sans indice d'exclusion, écris seulement « liée à X est possible ». Et ne dis pas qu'une fille ne peut jamais être atteinte : une fille $X^{h}//X^{h}$ existe quand son père est atteint et sa mère porteuse.",
+          "figure": null,
+          "exercise": {
+            "title": "Autosomal ou lié à X ? Raisonner sur les chromosomes",
+            "statement": "Dans cet exercice, tu décides si une maladie récessive est autosomale ou liée au chromosome X, avec la méthode de la fiche. Les familles sont fictives et décrites en texte.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Un homme a un chromosome X et un chromosome Y. Pourquoi un allèle récessif porté par son chromosome X s'exprime-t-il toujours chez lui ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Tester l'hypothèse : l'homme est $X^{h}//Y$ ; il n'a qu'un seul X, donc un seul allèle pour ce gène. Aucun allèle normal ne peut cacher l'allèle récessif, qui s'exprime. Ce n'est pas l'allèle qui devient dominant : c'est l'absence d'un deuxième exemplaire.",
+                "answers": [
+                  {
+                    "content": "Parce qu'il n'a qu'un seul X : aucun autre allèle ne cache l'allèle récessif",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que l'allèle récessif devient dominant chez l'homme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que le chromosome Y porte aussi cet allèle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que l'homme a deux chromosomes X",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'hémophilie est une maladie récessive liée à X. L'allèle normal est $X^{H}$ et l'allèle de l'hémophilie est $X^{h}$. Quel est le génotype d'un garçon hémophile ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Tester l'hypothèse : un garçon a un X et un Y. Pour être atteint, son seul X porte l'allèle récessif, donc il est $X^{h}//Y$. Le génotype $X^{h}//X^{h}$ est celui d'une fille atteinte, et $X^{H}//Y$ celui d'un garçon sain.",
+                "answers": [
+                  {
+                    "content": "$X^{h}//X^{h}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{h}//Y$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$X^{H}//Y$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$X^{H}//X^{h}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une fille peut être atteinte d'une maladie récessive liée au chromosome X.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Tester l'hypothèse : une fille atteinte est $X^{h}//X^{h}$. Elle a reçu un $X^{h}$ de sa mère (porteuse ou atteinte) et un $X^{h}$ de son père, qui est donc atteint. C'est possible, mais rare. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, l'allèle d'une maladie est récessif. I-1 (femme) est atteinte, I-2 (homme) est sain. Leurs deux enfants, II-1 (fils) et II-2 (fille), sont sains. La maladie est-elle autosomale ou liée à X ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'arbre : la mère I-1 est atteinte, son fils II-1 est sain. Étape 2 — Chercher un indice d'exclusion : une mère atteinte dont un fils est sain. Étape 3 — Tester l'hypothèse « liée à X » : I-1 serait $X^{h}//X^{h}$ et donnerait $X^{h}$ à son fils, qui serait atteint. Or II-1 est sain : contradiction. Étape 4 — Conclure : transmission autosomale.",
+                "answers": [
+                  {
+                    "content": "Autosomale, car une mère atteinte a un fils sain",
+                    "correct": true
+                  },
+                  {
+                    "content": "Liée à X, car la mère est atteinte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Liée à X, car la fille est saine",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas conclure, car il y a seulement deux enfants",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une famille fictive, l'allèle d'une maladie est récessif. Les parents I-1 et I-2 sont sains ; leurs trois enfants atteints II-1, II-2 et II-3 sont des garçons. Peut-on affirmer que la maladie est liée à X ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire l'arbre : trois garçons atteints, parents sains. Étape 2 — Chercher un indice d'exclusion : il n'y a ni fille atteinte d'un père sain, ni mère atteinte. Étape 3 — Tester l'hypothèse « liée à X » : elle est possible (mère porteuse $X^{H}//X^{h}$). Mais l'hypothèse autosomale (parents $N//a$) l'est aussi. Étape 4 — Conclure : « liée à X » est possible, mais on ne peut pas l'affirmer.",
+                "answers": [
+                  {
+                    "content": "Oui, car seuls des garçons sont atteints",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, car les parents sont sains",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : « liée à X » est possible, mais la transmission autosomale l'est aussi",
+                    "correct": true
+                  },
+                  {
+                    "content": "Non, car la maladie est forcément autosomale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour une maladie récessive liée à X (allèle normal $X^{H}$, allèle malade $X^{h}$), relie chaque personne à ses chromosomes sexuels.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Tester l'hypothèse : une femme avec un X normal et un X malade ($X^{H}//X^{h}$) est saine et porteuse. Deux X malades ($X^{h}//X^{h}$) : femme atteinte. Un X malade et un Y ($X^{h}//Y$) : homme atteint, car il n'a pas d'autre X. Un X normal et un Y ($X^{H}//Y$) : homme sain.",
+                "answers": [
+                  {
+                    "content": "Femme saine, porteuse",
+                    "match": "Un X normal et un X malade"
+                  },
+                  {
+                    "content": "Femme atteinte",
+                    "match": "Deux X malades"
+                  },
+                  {
+                    "content": "Homme atteint",
+                    "match": "Un X malade et un Y"
+                  },
+                  {
+                    "content": "Homme sain",
+                    "match": "Un X normal et un Y"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer un gène sur un autosome d'un gène sur le chromosome X, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un homme a ___ chromosome X et ___ chromosome Y.",
+                "question_type": "fill_blank",
+                "hint": "Le génotype sexuel de l'homme s'écrit $X//Y$.",
+                "explanation": "Étape 3 — Tester l'hypothèse : l'homme est $X//Y$, il n'a donc qu'un seul chromosome X et un seul chromosome Y. La femme, elle, est $X//X$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "une",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "un",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "une",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un garçon reçoit son chromosome X de son père.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Tester l'hypothèse : un garçon est $X//Y$. Son Y vient de son père, donc son X vient de sa mère. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le daltonisme (anomalie de la vision des couleurs) est récessif et lié à X. Une femme a le génotype $X^{D}//X^{d}$. Que peut-on dire d'elle ?",
+                "question_type": "single_choice",
+                "hint": "Un seul allèle récessif est caché par l'allèle normal.",
+                "explanation": "Étape 3 — Tester l'hypothèse : $X^{D}//X^{d}$ porte un allèle normal et un allèle du daltonisme. L'allèle récessif est caché : elle voit normalement, et elle est porteuse. Elle peut transmettre $X^{d}$ à ses enfants.",
+                "answers": [
+                  {
+                    "content": "Elle est daltonienne",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle voit normalement et elle est porteuse",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle voit normalement et ne peut pas transmettre le daltonisme",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est daltonienne seulement si son père l'est",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour une maladie récessive liée à X, une fille est atteinte. Que peut-on dire de son père ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Chercher un indice d'exclusion : une fille atteinte est $X^{h}//X^{h}$. Étape 3 — Tester l'hypothèse « liée à X » : elle a reçu un $X^{h}$ de son père, qui est donc $X^{h}//Y$ : il est atteint. Si son père était sain, la maladie ne serait pas liée à X.",
+                "answers": [
+                  {
+                    "content": "Il est forcément atteint",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est forcément sain",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est porteur sain",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut rien dire de lui",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer le risque qu'un enfant soit atteint",
+          "remember": "Un enfant reçoit **un allèle de chaque parent**, au hasard. Un parent hétérozygote ($A//S$) forme deux types de gamètes, $A$ et $S$, chacun avec la probabilité $\\frac{1}{2}$ ; un parent homozygote ($S//S$) n'en forme qu'un seul type. L'**échiquier de croisement** donne la probabilité de chaque génotype : nombre de cases du génotype sur nombre total de cases, écrite en fraction. Exemple de la **drépanocytose** (allèle $A$ normal, allèle $S$ récessif) : $A//S \\times A//S$ donne $\\frac{1}{4}$ d'enfants malades ($S//S$), $\\frac{2}{4}$ de porteurs sains ($A//S$) et $\\frac{1}{4}$ d'enfants sains ($A//A$). Pour une maladie récessive liée à X, avec une mère porteuse $X^{H}//X^{h}$ et un père sain $X^{H}//Y$ : aucune fille atteinte, et un garçon sur deux est atteint, soit $\\frac{1}{4}$ des enfants. Le risque est le même à **chaque** grossesse.",
+          "method": [
+            "Écrire le génotype de chaque parent, en le déduisant du phénotype et de la famille (un parent sain qui a un enfant malade d'une maladie récessive est hétérozygote).",
+            "Former les gamètes de chaque parent et la probabilité de chacun.",
+            "Construire l'échiquier de croisement : associer chaque gamète de la mère à chaque gamète du père, case par case.",
+            "Conclure : compter les cases du génotype cherché et écrire la probabilité en fraction."
+          ],
+          "example": {
+            "statement": "Un couple, tous deux sains, a déjà un enfant drépanocytaire ($S//S$). La drépanocytose est autosomale récessive. Quelle est la probabilité que leur prochain enfant soit drépanocytaire ?",
+            "steps": [
+              "Écrire le génotype de chaque parent : leur enfant $S//S$ a reçu un $S$ de chacun, et ils sont sains, donc les deux parents sont $A//S$.",
+              "Former les gamètes : chaque parent produit des gamètes $A$ ou $S$, chacun avec la probabilité $\\frac{1}{2}$.",
+              "Construire l'échiquier : les 4 cases sont $A//A$, $A//S$, $S//A$ et $S//S$.",
+              "Conclure : 1 case sur 4 est $S//S$, donc la probabilité est $\\frac{1}{4}$."
+            ]
+          },
+          "pitfall": "Ne crois pas que le risque « s'épuise » après un enfant malade. Contre-exemple : un couple $A//S$ et $A//S$ a un premier enfant malade ; pour le deuxième, l'échiquier est le même, le risque reste $\\frac{1}{4}$, et ils peuvent même avoir deux enfants malades de suite. Les probabilités ne gardent aucun souvenir des naissances précédentes. Et $\\frac{1}{4}$ ne veut pas dire « exactement 1 enfant malade sur 4 ».",
+          "figure": "croisement-drepanocytose",
+          "exercise": {
+            "title": "Calculer un risque avec l'échiquier de croisement",
+            "statement": "Dans cet exercice, tu calcules le risque qu'un enfant soit atteint, en fraction, avec la méthode de la fiche (génotypes, gamètes, échiquier, conclusion).",
+            "exercise_type": "fixation",
+            "figure": "croisement-drepanocytose",
+            "questions": [
+              {
+                "content": "Un parent a le génotype $A//S$. Quels gamètes forme-t-il, et avec quelle probabilité ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire le génotype : $A//S$. Étape 2 — Former les gamètes : les deux allèles se séparent, donc $A$ ou $S$, chacun avec la probabilité $\\frac{1}{2}$. Écrire seulement $A$ parce qu'il est dominant serait oublier que le gamète $S$ existe aussi : la dominance joue sur le phénotype, pas sur les gamètes.",
+                "answers": [
+                  {
+                    "content": "$A$ ou $S$, chacun avec la probabilité $\\frac{1}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Seulement $A$, car $A$ est dominant",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A$ ou $S$, chacun avec la probabilité $\\frac{1}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un seul type de gamète, $A//S$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux parents $A//S$ attendent un enfant. Quel est, en pourcentage, le risque que cet enfant soit drépanocytaire ($S//S$) ?",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $A//S$ et $A//S$. Étape 2 — Former les gamètes : $A$ ou $S$ pour chacun. Étape 3 — Construire l'échiquier : $A//A$, $A//S$, $S//A$, $S//S$. Étape 4 — Conclure : 1 case sur 4, soit $\\frac{1}{4}$, c'est-à-dire 25 %.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un père $S//S$ (drépanocytaire) et une mère $A//S$ attendent un enfant. Quelle est la probabilité que l'enfant soit drépanocytaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $S//S$ et $A//S$. Étape 2 — Former les gamètes : le père donne toujours $S$ ; la mère donne $A$ ou $S$. Étape 3 — Construire l'échiquier : $S//A$ et $S//S$ (chacun deux fois sur 4). Étape 4 — Conclure : 2 cases sur 4 sont $S//S$, soit $\\frac{2}{4} = \\frac{1}{2}$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "1",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un père $A//A$ et une mère $S//S$ attendent un enfant. Quelle est la probabilité que l'enfant soit drépanocytaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $A//A$ et $S//S$. Étape 2 — Former les gamètes : le père ne donne que $A$, la mère que $S$. Étape 3 — Construire l'échiquier : toutes les cases sont $A//S$. Étape 4 — Conclure : 0 case sur 4 est $S//S$, donc la probabilité est 0 ; tous les enfants sont porteurs sains $A//S$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 : tous les enfants sont $A//S$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "1",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une mère porteuse $X^{H}//X^{h}$ et un père sain $X^{H}//Y$ attendent un enfant. La maladie est récessive et liée à X. Quelle est la probabilité que l'enfant soit un garçon atteint ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $X^{H}//X^{h}$ et $X^{H}//Y$. Étape 2 — Former les gamètes : la mère donne $X^{H}$ ou $X^{h}$ ; le père donne $X^{H}$ ou $Y$. Étape 3 — Construire l'échiquier : $X^{H}//X^{H}$, $X^{H}//Y$, $X^{h}//X^{H}$, $X^{h}//Y$. Étape 4 — Conclure : 1 case sur 4 est $X^{h}//Y$ (garçon atteint), soit $\\frac{1}{4}$. Le chiffre $\\frac{1}{2}$ est celui des garçons atteints parmi les seuls garçons, pas parmi tous les enfants.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un couple $A//S$ et $A//S$ a déjà eu un enfant drépanocytaire. Le risque pour leur prochain enfant est donc plus faible que $\\frac{1}{4}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Construire l'échiquier : il est identique à chaque grossesse, puisque les gamètes sont toujours $A$ ou $S$. Étape 4 — Conclure : le risque est $\\frac{1}{4}$ à chaque fois, quelles que soient les naissances précédentes. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à calculer un risque en fraction avec l'échiquier de croisement, sur l'albinisme et le daltonisme.",
+            "questions": [
+              {
+                "content": "Un parent $N//a$ forme deux types de gamètes, $N$ et $a$, chacun avec la probabilité ___ ; un parent $N//N$ ne forme qu'___ type de gamète.",
+                "question_type": "fill_blank",
+                "hint": "Deux gamètes également probables : la probabilité s'écrit avec le chiffre 2 au dénominateur.",
+                "explanation": "Étape 2 — Former les gamètes : un hétérozygote $N//a$ donne $N$ ou $a$, chacun avec la probabilité $\\frac{1}{2}$ ; un homozygote $N//N$ ne donne que $N$, donc un seul type.",
+                "answers": [
+                  {
+                    "content": "1/2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "0,5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un demi",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "½",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Deux parents $N//a$ (pigmentation normale) attendent un enfant. L'albinisme est autosomal récessif. Quelle est la probabilité que l'enfant soit albinos ($a//a$) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $N//a$ et $N//a$. Étape 2 — Former les gamètes : $N$ ou $a$. Étape 3 — Construire l'échiquier : $N//N$, $N//a$, $a//N$, $a//a$. Étape 4 — Conclure : 1 case sur 4, soit $\\frac{1}{4}$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un père $N//a$ et une mère $N//N$ attendent un enfant. Quelle est la probabilité que l'enfant soit albinos ?",
+                "question_type": "single_choice",
+                "hint": "Un enfant albinos doit recevoir $a$ de chacun de ses deux parents.",
+                "explanation": "Étape 1 — Écrire : $N//a$ et $N//N$. Étape 2 — Former les gamètes : le père donne $N$ ou $a$ ; la mère donne seulement $N$. Étape 3 — Construire l'échiquier : $N//N$, $N//a$, $N//N$, $N//a$. Étape 4 — Conclure : aucune case $a//a$, donc la probabilité est 0 ; chaque enfant a une probabilité de $\\frac{1}{2}$ d'être porteur sain.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le daltonisme est récessif et lié à X. Une mère porteuse $X^{D}//X^{d}$ et un père daltonien $X^{d}//Y$ attendent un enfant. Quelle est la probabilité que l'enfant soit une fille daltonienne ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $X^{D}//X^{d}$ et $X^{d}//Y$. Étape 2 — Former les gamètes : la mère donne $X^{D}$ ou $X^{d}$ ; le père donne $X^{d}$ ou $Y$. Étape 3 — Construire l'échiquier : $X^{D}//X^{d}$, $X^{D}//Y$, $X^{d}//X^{d}$, $X^{d}//Y$. Étape 4 — Conclure : 1 case sur 4 est $X^{d}//X^{d}$, soit $\\frac{1}{4}$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{4}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Utiliser le dépistage pour le conseil génétique",
+          "remember": "La **drépanocytose** est une maladie héréditaire de l'**hémoglobine**, la protéine des hématies qui transporte le dioxygène. L'allèle $A$ commande l'hémoglobine normale (HbA), l'allèle $S$ l'hémoglobine anormale (HbS) : en manque de dioxygène, les hématies qui contiennent de l'HbS se déforment en **faucille**. $A//A$ : sain ; $A//S$ : sain, **porteur** ; $S//S$ : **malade**. Deux examens de **dépistage** : le **test d'Emmel** place le sang dans un milieu pauvre en dioxygène et cherche des hématies en faucille ; il dit s'il y a de l'HbS, mais ne distingue pas $A//S$ de $S//S$. L'**électrophorèse de l'hémoglobine** sépare les hémoglobines en bandes : $A//A$ une bande (A), $A//S$ deux bandes (A et S), $S//S$ une bande (S). Le **conseil génétique** est une consultation où un professionnel informe un couple du risque de transmettre une maladie. Il **informe, il ne décide pas** : un risque n'est pas une certitude, et la décision appartient au couple. Cette leçon n'est pas un avis médical.",
+          "method": [
+            "Lire le résultat de l'examen de chaque futur parent et en déduire son génotype.",
+            "Écrire les génotypes du couple et repérer si chacun peut donner l'allèle $S$.",
+            "Évaluer le risque d'un enfant malade avec l'échiquier de croisement, en fraction.",
+            "Conclure en informant : donner le risque comme une probabilité et rappeler que la décision appartient au couple, après l'avis d'un médecin."
+          ],
+          "example": {
+            "statement": "Un couple prépare son mariage et consulte au centre de santé (résultats fictifs, simplifiés). L'électrophorèse du futur époux montre une seule bande, celle de l'hémoglobine S. Celle de la future épouse montre une seule bande, celle de l'hémoglobine A. Quel est le risque que leur enfant soit drépanocytaire ?",
+            "steps": [
+              "Lire le résultat : l'époux a une seule bande S, donc il est $S//S$ ; l'épouse a une seule bande A, donc elle est $A//A$.",
+              "Écrire les génotypes du couple : $S//S$ et $A//A$. L'époux ne donne que $S$ ; l'épouse ne donne que $A$, elle ne peut pas donner l'allèle $S$.",
+              "Évaluer le risque : l'échiquier donne quatre cases $S//A$, c'est-à-dire $A//S$. Aucune case $S//S$, donc le risque est $\\frac{0}{4} = 0$ ; chaque enfant a une probabilité de 1 d'être porteur sain ($A//S$).",
+              "Conclure en informant : aucun enfant du couple ne sera drépanocytaire, mais chaque enfant sera porteur sain ($A//S$), avec une probabilité de 1. Le couple est informé ; pour toute décision, il consulte un médecin."
+            ]
+          },
+          "pitfall": "Ne confonds pas « porteur » et « malade », ni « test d'Emmel positif » et « drépanocytaire ». Contre-exemple : deux personnes ont un test d'Emmel positif ; l'une est $A//S$ (saine) et l'autre $S//S$ (malade). Pour un couple $A//S$ et $A//S$, le risque est $\\frac{1}{4}$ par enfant, donc $\\frac{3}{4}$ de chances d'avoir un enfant non malade. Et le conseiller ne dit jamais « ne vous mariez pas » : il informe, le couple décide.",
+          "figure": "demarche-conseil-genetique",
+          "exercise": {
+            "title": "Dépistage et conseil génétique pour un couple",
+            "statement": "Dans cet exercice, tu lis des résultats de dépistage de la drépanocytose et tu en tires le risque pour un couple, avec la méthode de la fiche. Résultats fictifs et simplifiés ; cet exercice n'est pas un avis médical.",
+            "exercise_type": "fixation",
+            "figure": "demarche-conseil-genetique",
+            "questions": [
+              {
+                "content": "Relie chaque examen ou étape à ce qu'il apporte dans le conseil génétique.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire le résultat de l'examen : le test d'Emmel repère les hématies en faucille en milieu pauvre en dioxygène ; l'électrophorèse sépare les hémoglobines A et S en bandes, ce qui donne le génotype ; le conseil génétique informe le couple du risque, sans décider à sa place.",
+                "answers": [
+                  {
+                    "content": "Test d'Emmel",
+                    "match": "Montre des hématies en faucille en milieu pauvre en dioxygène"
+                  },
+                  {
+                    "content": "Électrophorèse de l'hémoglobine",
+                    "match": "Sépare les hémoglobines A et S en bandes"
+                  },
+                  {
+                    "content": "Conseil génétique",
+                    "match": "Informe le couple du risque, sans décider à sa place"
+                  }
+                ]
+              },
+              {
+                "content": "L'électrophorèse de l'hémoglobine d'un futur époux montre deux bandes, une bande A et une bande S. Quel est son génotype, et est-il malade ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le résultat : deux bandes (A et S) correspondent au génotype $A//S$. Étape 2 — Écrire le génotype : $A//S$ est celui d'un porteur sain. Il peut donner l'allèle $S$ à ses enfants, mais il n'est pas malade : l'allèle $A$ est dominant.",
+                "answers": [
+                  {
+                    "content": "$A//S$ : il est porteur sain, pas malade",
+                    "correct": true
+                  },
+                  {
+                    "content": "$S//S$ : il est malade",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A//A$ : il est sain et ne porte pas l'allèle S",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A//S$ : il est malade, car l'hémoglobine S est présente",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'électrophorèse d'une future épouse montre une seule bande, celle de l'hémoglobine S. Quel est son génotype ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le résultat : une seule bande S signifie qu'elle ne fabrique que de l'hémoglobine S. Étape 2 — Écrire le génotype : $S//S$, elle est atteinte de drépanocytose. Une personne $A//S$ aurait deux bandes.",
+                "answers": [
+                  {
+                    "content": "$A//S$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A//A$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S//S$",
+                    "correct": true
+                  },
+                  {
+                    "content": "On ne peut pas savoir avec une électrophorèse",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les deux membres d'un couple ont deux bandes à l'électrophorèse, A et S. Quel risque le conseiller annonce-t-il pour chaque enfant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le résultat : deux bandes, donc $A//S$ pour chacun. Étape 2 — Écrire les génotypes : $A//S$ et $A//S$, chacun peut donner $S$. Étape 3 — Évaluer le risque : l'échiquier donne $A//A$, $A//S$, $S//A$, $S//S$. Étape 4 — Conclure : 1 case sur 4 est $S//S$, soit un risque de $\\frac{1}{4}$ à chaque enfant.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "0",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{3}{4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une personne dont le test d'Emmel est positif est forcément atteinte de drépanocytose.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire le résultat : un test d'Emmel positif montre de l'hémoglobine S. Il est positif pour $S//S$ (malade) mais aussi pour $A//S$ (sain, porteur), car les deux fabriquent de l'hémoglobine S. Il faut l'électrophorèse pour trancher. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un couple dont les deux membres sont $A//S$ consulte au centre de santé. Écris en 3 ou 4 phrases ce que dit le conseiller : le risque pour un enfant (en fraction) et le rôle du couple dans la décision.",
+                "question_type": "written",
+                "points": 3,
+                "criteria": [
+                  "Les génotypes A//S sont donnés et les deux personnes sont dites porteuses saines",
+                  "Le risque pour un enfant est donné en fraction : 1/4",
+                  "Le risque est présenté comme une probabilité, pas comme une certitude",
+                  "Le conseiller informe et laisse la décision au couple"
+                ],
+                "starter": "Vous êtes tous les deux de génotype…",
+                "explanation": "Corrigé modèle : Étape 1 — Lire le résultat : vous avez chacun un génotype $A//S$ : vous êtes porteurs sains, vous n'êtes pas malades. Étape 2 — Écrire les génotypes du couple : $A//S$ et $A//S$, chacun peut donner l'allèle $S$. Étape 3 — Évaluer le risque : l'échiquier de croisement donne $A//A$, $A//S$, $S//A$ et $S//S$ : à chaque enfant, le risque d'une drépanocytose ($S//S$) est de $\\frac{1}{4}$. C'est une probabilité, pas une certitude. Étape 4 — Conclure en informant : je vous informe, mais la décision vous appartient, et vous pouvez en parler à un médecin. Ce qui rapporte les points : génotypes $A//S$ et porteurs sains (1 point) ; risque $\\frac{1}{4}$ (1 point) ; risque présenté comme une probabilité (0,5 point) ; décision laissée au couple (0,5 point).",
+                "answers": []
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un résultat de dépistage et à comprendre le rôle du conseil génétique, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "À l'électrophorèse, une personne $A//A$ montre ___ bande et une personne $A//S$ montre ___ bandes.",
+                "question_type": "fill_blank",
+                "hint": "Compte les hémoglobines différentes que fabrique la personne.",
+                "explanation": "Étape 1 — Lire le résultat : $A//A$ ne fabrique que l'hémoglobine A, donc une seule bande. $A//S$ fabrique les hémoglobines A et S, donc deux bandes.",
+                "answers": [
+                  {
+                    "content": "une",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "deux",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une personne $A//S$ est malade de drépanocytose.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire le résultat : $A//S$ a deux bandes. Étape 2 — Écrire le génotype : l'allèle $S$ est récessif, caché par l'allèle $A$. La personne est un porteur sain, pas un malade. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le test d'Emmel d'une personne est négatif : aucune hématie ne se met en faucille. Quel est son génotype ?",
+                "question_type": "single_choice",
+                "hint": "Sans hémoglobine S, aucun allèle S n'est présent.",
+                "explanation": "Étape 1 — Lire le résultat de l'examen : un test d'Emmel négatif montre qu'il n'y a pas d'hémoglobine S. Étape 2 — Écrire le génotype : sans allèle $S$, la personne est $A//A$. Un test positif aurait pu correspondre à $A//S$ ou à $S//S$.",
+                "answers": [
+                  {
+                    "content": "$A//A$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$A//S$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$S//S$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$A//S$ ou $S//S$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le conseiller peut-il dire à un couple $A//S$ et $A//S$ lequel de leurs enfants sera drépanocytaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Évaluer le risque : l'échiquier donne des probabilités, $\\frac{1}{4}$ pour un enfant $S//S$ à chaque grossesse. Étape 4 — Conclure en informant : une probabilité ne désigne aucun enfant en particulier. Le conseiller donne le risque, il ne peut pas prédire quel enfant sera atteint.",
+                "answers": [
+                  {
+                    "content": "Oui, le premier enfant sera sain et le deuxième sera malade",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui, l'électrophorèse indique l'ordre des naissances",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : il donne seulement une probabilité, pas une certitude pour un enfant précis",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, le test d'Emmel désigne l'enfant malade",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La famille d'Aya : lire l'arbre généalogique",
+          "statement": "Aya et Yao préparent leur mariage et passent au centre de santé pour un conseil génétique, car la drépanocytose touche la famille d'Aya. Famille d'Aya (fictive, résultats simplifiés). Génération I : I-1 (homme) et I-2 (femme), non atteints. Génération II, leurs trois enfants : II-1 (garçon), atteint ; II-2 (fille), atteinte ; II-3 (fille, Aya), non atteinte. L'électrophorèse de l'hémoglobine d'Aya montre deux bandes, A et S. L'allèle normal est noté $A$ et l'allèle de la drépanocytose $S$.",
+          "exercise_type": "fixation",
+          "figure": "arbre-decision-dominance",
+          "questions": [
+            {
+              "content": "Les parents I-1 et I-2 ne sont pas atteints, mais leurs enfants II-1 et II-2 le sont. Que peut-on dire de l'allèle $S$ de la drépanocytose ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire l'arbre : I-1 et I-2 sont sains ; II-1 et II-2 sont malades. Étape 2 — Chercher le couple décisif : I-1 et I-2, deux parents sains, ont des enfants malades. Étape 3 — Appliquer la règle : parents sains et enfant malade, allèle récessif. Étape 4 — Conclure : l'allèle $S$ est récessif.",
+              "answers": [
+                {
+                  "content": "Il est dominant",
+                  "correct": false
+                },
+                {
+                  "content": "Il est récessif",
+                  "correct": true
+                },
+                {
+                  "content": "Il est dominant chez les filles et récessif chez les garçons",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas savoir",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'allèle $S$ est récessif. II-2 est une fille atteinte, et son père I-1 n'est pas atteint. La drépanocytose est-elle autosomale ou liée à X ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire l'arbre : II-2 est une fille atteinte, son père I-1 est sain. Étape 2 — Chercher un indice d'exclusion : une fille atteinte dont le père est sain. Étape 3 — Tester l'hypothèse « liée à X » : II-2 porterait l'allèle de la maladie sur ses deux X et en aurait reçu un de son père, qui serait atteint ; or il est sain, contradiction. Étape 4 — Conclure : la transmission est autosomale.",
+              "answers": [
+                {
+                  "content": "Autosomale, car une fille atteinte a un père sain",
+                  "correct": true
+                },
+                {
+                  "content": "Liée à X, car il y a un garçon atteint dans la famille",
+                  "correct": false
+                },
+                {
+                  "content": "Liée à X, car la maladie touche II-1 et II-2",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas conclure, car il y a trop peu d'enfants",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les génotypes de I-1 et I-2, sains, qui ont des enfants $S//S$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Appliquer la règle : allèle $S$ récessif. Étape 4 — Conclure : II-1 et II-2, $S//S$, ont reçu un $S$ de chaque parent. I-1 et I-2 portent donc chacun un $S$ ; comme ils sont sains, l'allèle $A$ cache $S$ : ils sont $A//S$. Le génotype $A//A$ ne peut pas donner $S$.",
+              "answers": [
+                {
+                  "content": "$A//A$ pour chacun",
+                  "correct": false
+                },
+                {
+                  "content": "$A//S$ pour chacun",
+                  "correct": true
+                },
+                {
+                  "content": "$S//S$ pour chacun",
+                  "correct": false
+                },
+                {
+                  "content": "$A//A$ pour I-1 et $S//S$ pour I-2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Aya est atteinte de drépanocytose, car son électrophorèse montre de l'hémoglobine S.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire le résultat : deux bandes, A et S. Étape 2 — Écrire le génotype : $A//S$. Étape 3 — Appliquer la règle : $S$ est récessif, donc caché par $A$. Étape 4 — Conclure : Aya est porteuse saine, elle n'est pas malade. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "I-1 et I-2 attendent un quatrième enfant. Quel est, en pourcentage, le risque que cet enfant soit drépanocytaire ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire les génotypes : $A//S$ et $A//S$. Étape 2 — Former les gamètes : $A$ ou $S$ pour chacun. Étape 3 — Construire l'échiquier : $A//A$, $A//S$, $S//A$, $S//S$. Étape 4 — Conclure : 1 case sur 4, soit $\\frac{1}{4}$, c'est-à-dire 25 %.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève écrit : « II-1 et II-2 sont malades, donc l'allèle $S$ est dominant. » Pourquoi ce raisonnement est-il faux ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Chercher le couple décisif : I-1 et I-2, deux parents sains, ont des enfants malades. Étape 3 — Appliquer la règle : cela prouve un allèle récessif. Un allèle dominant s'exprimerait chez au moins un parent. Le nombre d'enfants atteints ne change pas la règle.",
+              "answers": [
+                {
+                  "content": "Parce que deux parents sains ont des enfants malades, ce qui montre un allèle récessif",
+                  "correct": true
+                },
+                {
+                  "content": "Parce qu'il y a deux enfants malades et un seul sain",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que II-1 est un garçon",
+                  "correct": false
+                },
+                {
+                  "content": "Parce qu'Aya est porteuse",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Au centre de santé : le couple d'Aya et de Yao",
+          "statement": "Au centre de santé, Yao passe l'électrophorèse de l'hémoglobine : une seule bande, celle de l'hémoglobine A. Aya, elle, montre deux bandes, A et S. Le conseiller étudie le risque pour les futurs enfants du couple (résultats fictifs, simplifiés). La drépanocytose est autosomale récessive : l'allèle normal est $A$, l'allèle de la maladie $S$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le génotype de Yao, dont l'électrophorèse montre une seule bande, celle de l'hémoglobine A ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire le résultat de l'examen : une seule bande A, donc une seule sorte d'hémoglobine, la normale. Étape 2 — Écrire le génotype : $A//A$. Yao n'a pas d'allèle $S$.",
+              "answers": [
+                {
+                  "content": "$A//A$",
+                  "correct": true
+                },
+                {
+                  "content": "$A//S$",
+                  "correct": false
+                },
+                {
+                  "content": "$S//S$",
+                  "correct": false
+                },
+                {
+                  "content": "$A//S$ ou $S//S$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes du conseil génétique pour ce couple.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Lire le résultat de l'examen de chaque futur parent. Étape 2 — Écrire les génotypes du couple. Étape 3 — Évaluer le risque avec l'échiquier de croisement. Étape 4 — Conclure en informant le couple. Le risque ne se calcule qu'une fois les génotypes connus.",
+              "answers": [
+                {
+                  "content": "Lire le résultat de l'examen de chaque futur parent"
+                },
+                {
+                  "content": "Écrire les génotypes du couple"
+                },
+                {
+                  "content": "Évaluer le risque avec l'échiquier de croisement"
+                },
+                {
+                  "content": "Conclure en informant le couple, qui décide"
+                }
+              ]
+            },
+            {
+              "content": "Quels gamètes forment Yao ($A//A$) et Aya ($A//S$) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Écrire les génotypes et former les gamètes : $A//A$ ne donne que des gamètes $A$ ; $A//S$ donne $A$ ou $S$, chacun avec la probabilité $\\frac{1}{2}$. Yao ne peut donc pas donner l'allèle $S$.",
+              "answers": [
+                {
+                  "content": "Yao : $A$ ou $S$ ; Aya : $A$ seulement",
+                  "correct": false
+                },
+                {
+                  "content": "Yao : $A$ seulement ; Aya : $A$ ou $S$",
+                  "correct": true
+                },
+                {
+                  "content": "Yao et Aya : $A$ ou $S$",
+                  "correct": false
+                },
+                {
+                  "content": "Yao : $A$ seulement ; Aya : $S$ seulement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel pourcentage des enfants du couple est attendu avec le génotype $A//S$ (porteur sain) ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $A//A$ et $A//S$. Étape 2 — Former les gamètes : Yao donne $A$ ; Aya donne $A$ ou $S$. Étape 3 — Construire l'échiquier : $A//A$, $A//S$, $A//A$, $A//S$. Étape 4 — Conclure : 2 cases sur 4 sont $A//S$, soit $\\frac{1}{2}$, c'est-à-dire 50 %.",
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le risque qu'un enfant du couple soit drépanocytaire ($S//S$) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Construire l'échiquier : $A//A$, $A//S$, $A//A$, $A//S$. Étape 4 — Conclure : aucune case $S//S$, donc le risque est 0. Pour être $S//S$, un enfant doit recevoir un $S$ de chaque parent, et Yao ne peut donner que $A$.",
+              "answers": [
+                {
+                  "content": "$\\frac{1}{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{1}{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "0 : aucun enfant ne sera drépanocytaire",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{3}{4}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Comme Aya est porteuse de l'allèle $S$, tous les enfants du couple seront drépanocytaires.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Évaluer le risque : l'échiquier de ce couple ne contient aucune case $S//S$. Étape 4 — Conclure : aucun enfant ne sera drépanocytaire ; chaque enfant a une probabilité de $\\frac{1}{2}$ d'être porteur sain. Être porteur n'est pas être malade. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le daltonisme dans la famille d'Ama",
+          "statement": "Ama, cousine d'Aya, prépare aussi son mariage avec Kouadio. Le daltonisme (anomalie de la vision des couleurs) est récessif et lié au chromosome X : l'allèle normal est noté $X^{D}$, l'allèle du daltonisme $X^{d}$. Famille d'Ama (fictive, résultats simplifiés). Génération I : I-1 (homme, père d'Ama) est daltonien, I-2 (femme) voit normalement. Génération II : leur fille II-1, Ama, voit normalement. Kouadio voit normalement.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le génotype de I-1, le père d'Ama, qui est daltonien ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Tester l'hypothèse « liée à X » : un homme a un seul X. Pour être daltonien, son X porte l'allèle récessif, donc I-1 est $X^{d}//Y$. Un homme ne peut pas être $X^{d}//X^{d}$.",
+              "answers": [
+                {
+                  "content": "$X^{d}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{d}//Y$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{D}//Y$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//X^{d}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Ama voit normalement, mais son père est daltonien. Quel est son génotype ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire l'arbre : le père d'Ama est daltonien. Étape 3 — Tester l'hypothèse « liée à X » : une fille reçoit le X de son père, donc Ama a reçu $X^{d}$. Comme elle voit normalement, son autre X, venu de sa mère, porte $X^{D}$. Étape 4 — Conclure : Ama est $X^{D}//X^{d}$, porteuse saine. Elle ne peut pas être $X^{D}//X^{D}$, car elle a reçu $X^{d}$ de son père.",
+              "answers": [
+                {
+                  "content": "$X^{D}//X^{D}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{d}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//X^{d}$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{D}//Y$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Kouadio voit normalement. Quel est son génotype ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire l'arbre : Kouadio est un homme voyant normalement. Étape 3 — Tester l'hypothèse « liée à X » : un homme est $X//Y$ et n'a qu'un seul X ; voyant normalement, son X porte l'allèle normal. Étape 4 — Conclure : $X^{D}//Y$. Il ne peut pas être porteur : un homme porteur sain n'existe pas pour un caractère récessif lié à X.",
+              "answers": [
+                {
+                  "content": "$X^{D}//X^{d}$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//Y$",
+                  "correct": true
+                },
+                {
+                  "content": "$X^{d}//Y$",
+                  "correct": false
+                },
+                {
+                  "content": "$X^{D}//X^{D}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les filles d'Ama et de Kouadio seront toutes daltoniennes.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Former les gamètes : Ama donne $X^{D}$ ou $X^{d}$ ; Kouadio donne $X^{D}$ ou $Y$. Étape 3 — Construire l'échiquier : $X^{D}//X^{D}$, $X^{D}//Y$, $X^{d}//X^{D}$, $X^{d}//Y$. Les deux filles possibles ont reçu le $X^{D}$ de leur père : aucune n'est daltonienne. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la probabilité qu'un enfant d'Ama et de Kouadio soit un garçon daltonien ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $X^{D}//X^{d}$ et $X^{D}//Y$. Étape 2 — Former les gamètes : $X^{D}$ ou $X^{d}$ ; $X^{D}$ ou $Y$. Étape 3 — Construire l'échiquier : $X^{D}//X^{D}$, $X^{D}//Y$, $X^{d}//X^{D}$, $X^{d}//Y$. Étape 4 — Conclure : 1 case sur 4 est $X^{d}//Y$, soit $\\frac{1}{4}$.",
+              "answers": [
+                {
+                  "content": "$\\frac{1}{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\frac{1}{2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\frac{3}{4}$",
+                  "correct": false
+                },
+                {
+                  "content": "0",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes pourquoi Ama est sûrement porteuse de l'allèle du daltonisme alors qu'elle voit normalement, puis donne le risque d'avoir un garçon daltonien. Appuie-toi sur les génotypes et sur l'échiquier.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Le père est écrit X^d//Y et Ama a reçu son X^d de lui",
+                "Ama est écrite X^D//X^d : elle voit normalement, mais elle est porteuse",
+                "L'échiquier contient les quatre cases X^D//X^D, X^D//Y, X^d//X^D, X^d//Y",
+                "Le risque est donné en fraction : 1/4 pour un garçon daltonien"
+              ],
+              "starter": "Le père d'Ama est daltonien, donc…",
+              "explanation": "Corrigé modèle : Le père d'Ama est daltonien, donc $X^{d}//Y$. Ama est une fille : elle a reçu le X de son père, donc elle a reçu $X^{d}$. Comme elle voit normalement, son autre X porte l'allèle normal : elle est $X^{D}//X^{d}$, porteuse saine. Kouadio est $X^{D}//Y$. L'échiquier donne $X^{D}//X^{D}$, $X^{D}//Y$, $X^{d}//X^{D}$ et $X^{d}//Y$ : un enfant sur 4 est un garçon daltonien, soit une probabilité de $\\frac{1}{4}$. Barème : père $X^{d}//Y$ et X reçu du père (1 point) ; Ama $X^{D}//X^{d}$ porteuse (1 point) ; échiquier correct (0,5 point) ; probabilité $\\frac{1}{4}$ (0,5 point).",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Un conseil génétique avant le mariage de Kouamé et d'Adjoua",
+          "statement": "Kouamé et Adjoua préparent leur mariage. Au centre de santé, un conseiller leur présente deux documents (résultats fictifs, simplifiés). Document 1 : le test d'Emmel est positif pour Kouamé et positif pour Adjoua (des hématies en forme de faucille apparaissent dans un milieu pauvre en dioxygène). Document 2 : l'électrophorèse de l'hémoglobine montre deux bandes, A et S, pour Kouamé comme pour Adjoua. Aucun des deux n'a jamais été malade. La drépanocytose est autosomale récessive : l'allèle normal est $A$, l'allèle de la maladie $S$.",
+          "exercise_type": "evaluation",
+          "figure": "croisement-drepanocytose",
+          "questions": [
+            {
+              "content": "Le test d'Emmel est positif pour Kouamé et pour Adjoua. Que montre ce document, et que ne montre-t-il pas ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire le résultat de l'examen : un test d'Emmel positif montre la présence d'hémoglobine S, car des hématies se mettent en faucille. Il ne distingue pas $A//S$ (sain, porteur) de $S//S$ (malade). Dire que les deux sont malades serait lire un test d'Emmel positif comme un diagnostic : il faut l'électrophorèse.",
+              "answers": [
+                {
+                  "content": "Il montre que les deux sont malades de la drépanocytose",
+                  "correct": false
+                },
+                {
+                  "content": "Il montre de l'hémoglobine S, mais ne dit pas si la personne est $A//S$ ou $S//S$",
+                  "correct": true
+                },
+                {
+                  "content": "Il montre que les deux sont $A//A$",
+                  "correct": false
+                },
+                {
+                  "content": "Il donne directement le risque pour les enfants",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Document 2 : Kouamé et Adjoua ont chacun deux bandes, A et S. Quels sont leurs génotypes ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire le résultat : deux bandes (A et S) correspondent à $A//S$. Étape 2 — Écrire les génotypes du couple : $A//S$ et $A//S$. Chacun est porteur sain, et chacun peut donner l'allèle $S$. Avec une seule bande S, on aurait $S//S$.",
+              "answers": [
+                {
+                  "content": "$A//S$ pour chacun : porteurs sains",
+                  "correct": true
+                },
+                {
+                  "content": "$S//S$ pour chacun : malades",
+                  "correct": false
+                },
+                {
+                  "content": "$A//A$ pour chacun",
+                  "correct": false
+                },
+                {
+                  "content": "$A//S$ pour Kouamé et $S//S$ pour Adjoua",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est, en pourcentage, le risque que leur enfant soit drépanocytaire ?",
+              "question_type": "numeric",
+              "unit": "%",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire : $A//S$ et $A//S$. Étape 2 — Former les gamètes : $A$ ou $S$, chacun avec la probabilité $\\frac{1}{2}$. Étape 3 — Construire l'échiquier : $A//A$, $A//S$, $S//A$, $S//S$. Étape 4 — Conclure : 1 case sur 4, soit $\\frac{1}{4}$, c'est-à-dire 25 %.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour un enfant du couple $A//S$ et $A//S$, quelles sont les trois affirmations exactes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 3 — Construire l'échiquier : $A//A$, $A//S$, $S//A$, $S//S$. Étape 4 — Conclure : 1 case sur 4 est $A//A$, 2 cases sur 4 sont $A//S$ et 1 case sur 4 est $S//S$. Les affirmations « tous les enfants seront porteurs » et « les trois premiers enfants seront sains, le quatrième malade » sont fausses : le risque est le même à chaque enfant.",
+              "answers": [
+                {
+                  "content": "La probabilité d'un enfant sain $A//A$ est $\\frac{1}{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "La probabilité d'un enfant porteur sain $A//S$ est $\\frac{1}{2}$",
+                  "correct": true
+                },
+                {
+                  "content": "La probabilité d'un enfant drépanocytaire $S//S$ est $\\frac{1}{4}$",
+                  "correct": true
+                },
+                {
+                  "content": "Tous les enfants seront porteurs sains",
+                  "correct": false
+                },
+                {
+                  "content": "Les trois premiers enfants seront sains et le quatrième sera malade",
+                  "correct": false
+                },
+                {
+                  "content": "Un enfant sur deux sera drépanocytaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que peut dire le conseiller au couple à propos de la décision d'avoir des enfants ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Conclure en informant : le conseiller donne le risque comme une probabilité, explique ce que les examens montrent et ne montrent pas, puis laisse la décision au couple, qui peut consulter un médecin. Il ne décide pas à la place du couple, ne peut pas promettre qu'un enfant sera sain, et ne peut pas guérir la maladie.",
+              "answers": [
+                {
+                  "content": "Il explique le risque de $\\frac{1}{4}$ à chaque enfant et le couple décide librement",
+                  "correct": true
+                },
+                {
+                  "content": "Il interdit le mariage, car le risque existe",
+                  "correct": false
+                },
+                {
+                  "content": "Il garantit que le premier enfant sera sain",
+                  "correct": false
+                },
+                {
+                  "content": "Il décide du nombre d'enfants du couple",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige la réponse du conseiller à Kouamé et à Adjoua : donne leurs génotypes, le risque pour un enfant en fraction, une limite du test d'Emmel, et à qui revient la décision.",
+              "question_type": "written",
+              "points": 5,
+              "criteria": [
+                "Les génotypes A//S sont donnés et les deux personnes sont dites porteuses saines",
+                "Le risque 1/4 par enfant est justifié avec l'échiquier de croisement",
+                "Une limite est dite : le test d'Emmel ne distingue pas A//S de S//S, il faut l'électrophorèse",
+                "Le conseiller informe et la décision revient au couple",
+                "Le vocabulaire est correct : allèle, génotype, porteur sain"
+              ],
+              "starter": "Vous êtes tous les deux de génotype…",
+              "explanation": "Corrigé modèle : Vous avez chacun deux bandes, A et S, donc un génotype $A//S$ : vous êtes porteurs sains, vous n'êtes pas malades. L'échiquier de croisement donne $A//A$, $A//S$, $S//A$ et $S//S$ : pour chaque enfant, le risque d'une drépanocytose ($S//S$) est de $\\frac{1}{4}$, et le même à chaque grossesse. C'est une probabilité : elle ne dit pas quel enfant sera atteint. Le test d'Emmel seul ne distingue pas $A//S$ de $S//S$ : il faut l'électrophorèse pour le savoir. Je vous informe, mais la décision vous appartient ; vous pouvez en parler à un médecin. Barème : génotypes $A//S$ et porteurs sains (1 point) ; risque $\\frac{1}{4}$ expliqué avec l'échiquier (1,5 point) ; limite du test d'Emmel (1 point) ; décision laissée au couple (1 point) ; vocabulaire correct (0,5 point).",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
