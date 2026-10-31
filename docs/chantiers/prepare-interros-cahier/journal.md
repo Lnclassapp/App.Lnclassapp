@@ -31,6 +31,7 @@
 Les impasses, les hypothèses fausses, le temps perdu et sa cause. **Cette section est la plus utile du fichier** : c'est la seule trace de ce qu'il ne faut pas refaire.
 
 - …
+- **Recette impossible sur Staging** (2026-10-31) : Touré n'a pas pu s'inscrire sur `app-staging.lnclass.com`, la liste des DRENA y est vide. Staging ne reçoit aucune donnée de test (ADR-0108) : DRENA et établissements s'y créent à la main par un compte de l'équipe. Recette faite à la place sur l'environnement de PR, semé de 3 établissements et de comptes fictifs (PIN 2468).
 
 ## Ce qu'on a appris sur la codebase
 
