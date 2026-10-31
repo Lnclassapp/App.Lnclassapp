@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Catalog::PrepareSheetsQuery
 # Rôle : les feuilles « Prépare interros » (une par notion, puis « Toute la leçon ») et « Prépare devoirs » (une par sujet) de la leçon : exercices, questions, indice, figure, dernière copie terminée de l'élève, classes de l'enseignant
-# ADR  : 0121, 0113 · UDR : 0148 §3 (remplace PrepareInterrosQuery, UDR-0139 §3.4)
+# ADR  : 0121, 0113, 0120 · UDR : 0148 §3 (remplace PrepareInterrosQuery, UDR-0139 §3.4)
 module Queries
   module Catalog
     class PrepareSheetsQuery
@@ -30,8 +30,9 @@ module Queries
       Copy = Data.define(:session_public_id, :passed)
       # kind : :mcq · :true_false · :fill_in · :calculation · :other (play : la question de la session de lecture, pour son partiel) ;
       # multiple : un QCM à 2 ou 3 réponses justes ; choices : [Choice] d'un QCM ou d'un vrai ou faux ; image : l'image au-dessus de l'énoncé, nil sinon. La correction (response,
-      # verdict :correct | :wrong | :empty) n'est lue que pour un exercice corrigé : nil avant.
-      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :choices, :play, :image, :response, :verdict)
+      # verdict :correct | :wrong | :empty) n'est lue que pour un exercice corrigé : nil avant ; hint : l'indice de la question (ADR-0120), nil
+      # s'il est vide, lu dans la boîte de l'indice de l'exercice.
+      Question = Data.define(:id, :number, :kind, :content, :unit, :multiple, :choices, :play, :image, :response, :verdict, :hint)
       # index : le rang dans l'ordre de la feuille (celui que la feuille poste) ; picked : l'élève l'a coché dans sa copie corrigée.
       Choice = Data.define(:index, :letter, :content, :picked)
 
@@ -131,20 +132,20 @@ module Queries
       end
 
       # { exercise_id => [Row] } : questions, propositions et images en trois lectures pour toute la leçon (ni N+1, ni une par exercice).
-      QuestionRow = Data.define(:id, :type, :content, :unit, :starter, :answers, :image)
+      QuestionRow = Data.define(:id, :type, :content, :unit, :starter, :hint, :answers, :image)
       AnswerRow = Data.define(:id, :content, :match_content, :correct)
 
       def questions(exercise_ids)
         rows = Orm::Question.where(exercise_id: exercise_ids).order(:exercise_id, :position, :id)
-                            .pluck(:exercise_id, :id, :question_type, :content, :unit, :starter)
+                            .pluck(:exercise_id, :id, :question_type, :content, :unit, :starter, :hint)
         ids = rows.map { it[1] }
         answers = Orm::Answer.where(question_id: ids).order(:question_id, :position, :id)
                              .pluck(:question_id, :id, :content, :match_content, :correct).group_by(&:first)
         images = Orm::QuestionImage.where(question_id: ids).pluck(:question_id, :public_id, :alt, :width, :height)
                                    .to_h { |question_id, *image| [ question_id, Queries::Assessment::SessionPlayQuery::Image.new(*image) ] }
         rows.group_by(&:first).transform_values do |list|
-          list.map do |_, id, type, content, unit, starter|
-            QuestionRow.new(id:, type:, content:, unit:, starter:, image: images[id],
+          list.map do |_, id, type, content, unit, starter, hint|
+            QuestionRow.new(id:, type:, content:, unit:, starter:, hint:, image: images[id],
                             answers: answers.fetch(id, []).map { AnswerRow.new(*it.drop(1)) })
           end
         end
@@ -179,7 +180,7 @@ module Queries
                      multiple: Entities::Assessment::Question::EXPECTED.fetch(row.type.to_sym, 1) > 1,
                      choices: (choices(row, picked) if %i[mcq true_false].include?(kind)),
                      play: (play(row, number) if kind == :other),
-                     response: (text if corrected), verdict:)
+                     response: (text if corrected), verdict:, hint: row.hint.presence)
       end
 
       def auto_graded?(row) = Entities::Assessment::Question.kind_for(row.type)::AUTO_GRADED

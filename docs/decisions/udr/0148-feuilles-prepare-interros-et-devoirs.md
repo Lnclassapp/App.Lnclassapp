@@ -46,6 +46,8 @@ UDR-0145 §3.2. La seule adaptation est la vue de l'enseignant, que la maquette 
      les autres types : leur partiel `exercise_sessions/kinds/*` d'aujourd'hui, dans le même cadre) ; l'encadré pointillé
      « Indice : » ; la barre « Vérifier ma réponse » (noir) · « Indice » (blanc, absent sans indice) ou
      « Refaire l'exercice » ; une fois la copie rendue, « Voir ma correction » (lien vers sa page de résultat) à la place d'un bloc de résultat ;
+     la boîte de l'indice (une seule par exercice, un seul bouton « Indice ») dit l'indice de l'exercice, puis une ligne par question qui
+     en a un, « b. <indice> » (lettre de la question) ; l'exercice n'a ni bouton ni boîte si ni lui ni ses questions n'en ont (Lot H, 2026-10-31) ;
   5. pied : « Lnclass · Prépare interros · Notion n » ou « … · Sujet n », et le lien souligné « Recommencer cette notion »
      ou « Recommencer ce sujet ».
 - Résultat (Lot C bis, Touré, 2026-10-30, memo Q18) : la feuille n'a ni « Ta note », ni mention, ni correction. La note sur 20 et la

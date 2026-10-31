@@ -191,6 +191,23 @@ l'équipe, et seul du texte est ajouté (aucun fichier, aucun chemin, aucune URL
 
 ---
 
+## Lot H — Indices des questions sur la feuille
+
+> Ajouté le 2026-10-31 (décision de Touré, PR #416) : l'indice de l'exercice d'abord, puis ceux des questions (ADR-0120, `questions.hint`), le jour même. Design inchangé : un seul bouton « Indice » par exercice, une seule boîte.
+
+- **Couche**       : infrastructure + ui
+- **Fichiers**     : `app/infrastructure/queries/catalog/prepare_sheets_query.rb` (`Question#hint`)
+                     `app/views/catalog/courses/sheets/_exercise.html.erb` (boîte de l'indice et bouton)
+                     `docs/decisions/udr/0148-feuilles-prepare-interros-et-devoirs.md` (§3, une ligne)
+- **Dépend de**    : Lot F, Lot R
+- **Test associé** : `test/infrastructure/queries/catalog/prepare_sheets_query_test.rb` · `test/controllers/catalog/courses_controller_test.rb`
+- **Done quand**   : un exercice sans indice d'exercice mais dont une question a un indice montre « Indice » ; la boîte affiche
+                     l'indice de l'exercice puis, une ligne par question qui en a un, « b. <indice> » (lettre de la question) ;
+                     sans aucun indice, ni bouton ni boîte ; l'enseignant et l'équipe ne voient toujours aucune boîte ; un devoir
+                     à rendre vu depuis la leçon n'a toujours ni « Vérifier » ni « Indice » (CA-17)
+
+---
+
 ## Vérification de collision
 
 | Fichier | Lot propriétaire |
