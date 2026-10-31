@@ -1,0 +1,1707 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Fonctions logarithmes",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "domaine-et-solutions",
+          "kind": "number_line",
+          "description": "Une droite graduée de −5 à 8. L'intervalle ]1 ; +∞[, domaine de l'équation, est en surbrillance. Le point 4, solution trouvée, est dans ce domaine ; le point −4, solution algébrique rejetée, est en dehors.",
+          "params": {
+            "min": -5,
+            "max": 8,
+            "step": 1,
+            "points": [
+              {
+                "value": -4,
+                "label": "−4 (rejeté)"
+              },
+              {
+                "value": 4,
+                "label": "4 (solution)"
+              }
+            ],
+            "intervals": [
+              {
+                "from": 1,
+                "to": 8,
+                "from_open": true,
+                "to_open": false
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "etude-de-fonction",
+          "kind": "diagram",
+          "description": "Les étapes d'une étude de fonction avec ln, de haut en bas : domaine de définition, limites aux bornes, dérivée, signe de la dérivée et variations, théorème des valeurs intermédiaires, puis encadrement de la solution d'une équation.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "n1",
+                "label": "Domaine de définition"
+              },
+              {
+                "id": "n2",
+                "label": "Limites aux bornes"
+              },
+              {
+                "id": "n3",
+                "label": "Dérivée"
+              },
+              {
+                "id": "n4",
+                "label": "Signe de la dérivée et variations"
+              },
+              {
+                "id": "n5",
+                "label": "Théorème des valeurs intermédiaires"
+              },
+              {
+                "id": "n6",
+                "label": "Encadrement de la solution"
+              }
+            ],
+            "edges": [
+              {
+                "from": "n1",
+                "to": "n2"
+              },
+              {
+                "from": "n2",
+                "to": "n3"
+              },
+              {
+                "from": "n3",
+                "to": "n4"
+              },
+              {
+                "from": "n4",
+                "to": "n5"
+              },
+              {
+                "from": "n5",
+                "to": "n6"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Calculer avec les propriétés du logarithme népérien",
+          "remember": "La fonction logarithme népérien, notée $\\ln$, est définie sur $]0\\ ;\\ +\\infty[$ : c'est la primitive de $x \\mapsto \\dfrac{1}{x}$ qui s'annule en 1. Donc $\\ln 1 = 0$, et comme sa dérivée $\\dfrac{1}{x}$ est positive, $\\ln$ est strictement croissante : $\\ln x<0$ sur $]0\\ ;\\ 1[$ et $\\ln x>0$ sur $]1\\ ;\\ +\\infty[$. Pour $a>0$, $b>0$ et $n$ entier relatif : $\\ln(ab)=\\ln a+\\ln b$ ; $\\ln\\dfrac{a}{b}=\\ln a-\\ln b$ ; $\\ln\\dfrac{1}{a}=-\\ln a$ ; $\\ln(a^n)=n\\ln a$ ; $\\ln\\sqrt{a}=\\dfrac12\\ln a$. Le logarithme transforme un produit en somme.",
+          "method": [
+            "Décomposer l'argument en un produit, un quotient ou une puissance de nombres dont on connaît le logarithme.",
+            "Appliquer la propriété qui convient : $\\ln(ab)$, $\\ln\\dfrac{a}{b}$ ou $\\ln(a^n)$.",
+            "Remplacer chaque logarithme connu par sa valeur ou par la lettre qui le désigne.",
+            "Réduire l'expression obtenue."
+          ],
+          "example": {
+            "statement": "On note $a=\\ln 2$ et $b=\\ln 3$. Exprimer $\\ln\\dfrac{8}{3}+\\ln 6$ en fonction de $a$ et $b$.",
+            "steps": [
+              "Décomposer : $8=2^3$ et $6=2\\times 3$.",
+              "Appliquer : $\\ln\\dfrac{8}{3}=\\ln(2^3)-\\ln 3=3\\ln 2-\\ln 3$ et $\\ln 6=\\ln 2+\\ln 3$.",
+              "Remplacer : $\\ln 2=a$ et $\\ln 3=b$, donc $\\ln\\dfrac{8}{3}=3a-b$ et $\\ln 6=a+b$.",
+              "Réduire : $(3a-b)+(a+b)=4a$. On retrouve $\\ln\\left(\\dfrac{8}{3}\\times 6\\right)=\\ln 16=4\\ln 2$."
+            ]
+          },
+          "pitfall": "Ne pas écrire $\\ln(a+b)=\\ln a+\\ln b$ : le logarithme transforme un produit en somme, il ne sait pas traiter une somme placée sous le $\\ln$. Contre-exemple : $\\ln(1+1)=\\ln 2$, qui est strictement positif, alors que $\\ln 1+\\ln 1=0+0=0$. Autre confusion : $\\dfrac{\\ln 8}{\\ln 2}=3$ n'est pas $\\ln\\dfrac{8}{2}=\\ln 4=2\\ln 2$. Avant d'écrire, demande-toi : y a-t-il un produit, un quotient ou une puissance sous le $\\ln$ ? Si c'est une somme, rien ne se simplifie.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer avec les propriétés de ln",
+            "statement": "On note $a=\\ln 2$ et $b=\\ln 3$. Tu appliques la méthode de la fiche pour exprimer des logarithmes.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On note $a=\\ln 2$. Exprime $\\ln 8$ en fonction de $a$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : $8=2^3$. Étape 2 — Appliquer : $\\ln(2^3)=3\\ln 2$. Étape 3 — Remplacer : $\\ln 2=a$, donc $\\ln 8=3a$. Étape 4 — Réduire : il n'y a rien à réduire. La proposition $8a$ multiplie par 8 au lieu de faire passer l'exposant en facteur ; $a^3$ met $a$ au cube ; $a+3$ ajoute l'exposant au lieu de le multiplier.",
+                "answers": [
+                  {
+                    "content": "$3a$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$a+3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8a$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$a^3$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On note $a=\\ln 2$ et $b=\\ln 3$. Exprime $\\ln 18$ en fonction de $a$ et $b$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : $18=2\\times 3^2$. Étape 2 — Appliquer : $\\ln 18=\\ln 2+\\ln(3^2)=\\ln 2+2\\ln 3$. Étape 3 — Remplacer : $\\ln 2=a$ et $\\ln 3=b$. Étape 4 — Réduire : $\\ln 18=a+2b$. La proposition $2a+b$ attribue l'exposant 2 au mauvais nombre ; $2ab$ transforme la somme en produit, ce que la propriété ne permet pas.",
+                "answers": [
+                  {
+                    "content": "$2a+b$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$a+2b$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2ab$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$a+b+2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On note $a=\\ln 2$. Exprime $\\ln\\dfrac{1}{4}$ en fonction de $a$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : $\\dfrac14=\\dfrac{1}{2^2}$, donc $\\ln\\dfrac14=-\\ln(2^2)$. Étape 2 — Appliquer : $\\ln\\dfrac1x=-\\ln x$ et $\\ln(2^2)=2\\ln 2$. Étape 3 — Remplacer : $\\ln 2=a$. Étape 4 — Réduire : $\\ln\\dfrac14=-2a$. Le logarithme d'un nombre inférieur à 1 est négatif : $2a$ est donc faux, car $a=\\ln 2>0$.",
+                "answers": [
+                  {
+                    "content": "$2a$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-4a$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-2a$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{a}{4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sachant que $\\ln 2\\approx 0,69$ et $\\ln 3\\approx 1,10$, donne une valeur approchée de $\\ln 12$.",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Décomposer : $12=2^2\\times 3$. Étape 2 — Appliquer : $\\ln 12=2\\ln 2+\\ln 3$. Étape 3 — Remplacer : $\\ln 12\\approx 2\\times 0,69+1,10$. Étape 4 — Réduire : $1,38+1,10=2,48$. Si tu écris $\\ln 12\\approx 0,69+1,10$, tu oublies que $4=2^2$ fait sortir un facteur 2.",
+                "answers": [
+                  {
+                    "content": "2,48",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Complète : $\\ln 5+\\ln 2=\\ln(___)$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Appliquer la propriété $\\ln a+\\ln b=\\ln(ab)$ dans le sens inverse : $\\ln 5+\\ln 2=\\ln(5\\times 2)=\\ln 10$. L'erreur tentante $\\ln 7$ vient de $\\ln(a+b)=\\ln a+\\ln b$, qui est fausse : le logarithme d'une somme ne se calcule pas ainsi.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles égalités sont vraies pour tous les réels $x>0$ et $y>0$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Appliquer la propriété qui convient. Le produit devient une somme : $\\ln(xy)=\\ln x+\\ln y$. Le quotient devient une différence : $\\ln\\dfrac{x}{y}=\\ln x-\\ln y$. Les deux autres sont fausses : $\\ln(1+1)=\\ln 2\\neq \\ln 1+\\ln 1=0$, et $\\ln(x^2)=2\\ln x$, qui n'est pas $(\\ln x)^2$ (pour $x=2$ : $2\\ln 2\\approx 1,39$ et $(\\ln 2)^2\\approx 0,48$).",
+                "answers": [
+                  {
+                    "content": "$\\ln(x^2)=(\\ln x)^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln(xy)=\\ln x+\\ln y$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\ln\\dfrac{x}{y}=\\ln x-\\ln y$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\ln(x+y)=\\ln x+\\ln y$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'égalité $\\ln(2+3)=\\ln 2+\\ln 3$ est vraie.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Décomposer : sous le $\\ln$, il y a une somme, pas un produit. Étape 2 — Appliquer : aucune propriété ne s'applique à une somme. On a $\\ln(2+3)=\\ln 5$, alors que $\\ln 2+\\ln 3=\\ln 6$. Comme $\\ln 5\\neq\\ln 6$ ($\\ln$ est strictement croissante), l'égalité est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On note $p=\\ln 5$ et $q=\\ln 7$. Tu exprimes des logarithmes à l'aide de $p$ et $q$.",
+            "questions": [
+              {
+                "content": "Écris $\\ln 175$ sous la forme $\\alpha p+\\beta q$ avec $p=\\ln 5$ et $q=\\ln 7$. Donne $\\alpha$ = ___ et $\\beta$ = ___ .",
+                "question_type": "numeric",
+                "hint": "Cherche combien de fois 5 divise 175, puis ce qui reste.",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : $175=5^2\\times 7$. Étape 2 — Appliquer : $\\ln 175=\\ln(5^2)+\\ln 7=2\\ln 5+\\ln 7$. Étape 3 — Remplacer : $\\ln 5=p$ et $\\ln 7=q$. Étape 4 — Réduire : $\\ln 175=2p+q$, donc $\\alpha=2$ et $\\beta=1$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "On note $q=\\ln 7$. Exprime $\\ln\\dfrac{1}{49}$ en fonction de $q$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : $\\dfrac{1}{49}=\\dfrac{1}{7^2}$. Étape 2 — Appliquer : $\\ln\\dfrac{1}{49}=-\\ln(7^2)=-2\\ln 7$. Étape 3 — Remplacer : $\\ln 7=q$. Étape 4 — Réduire : le résultat est $-2q$. Il est négatif car $\\dfrac1{49}<1$.",
+                "answers": [
+                  {
+                    "content": "$-2q$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2q$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-49q$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{q}{49}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Complète : $\\ln 3-\\ln 12=-\\ln(___)$.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Appliquer $\\ln a-\\ln b=\\ln\\dfrac{a}{b}$ : $\\ln 3-\\ln 12=\\ln\\dfrac{3}{12}=\\ln\\dfrac14$. Étape 3 — Remplacer : $\\ln\\dfrac14=-\\ln 4$. La réponse est donc 4. La valeur 9 vient de la soustraction $12-3$ placée sous le $\\ln$, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Résoudre une équation ou une inéquation avec ln",
+          "remember": "La fonction $\\ln$ est strictement croissante sur $]0\\ ;\\ +\\infty[$. Donc, pour $A>0$ et $B>0$ : $\\ln A=\\ln B\\iff A=B$ et $\\ln A\\lt\\ln B\\iff A\\lt B$ (le sens de l'inégalité est conservé). L'expression $\\ln A$ n'existe que si $A>0$ : on cherche toujours le domaine d'abord. On met un nombre sous forme de logarithme avec $0=\\ln 1$ et $2\\ln 3=\\ln 9$. Signe : $\\ln x\\ge 0\\iff x\\ge 1$ et $\\ln x\\le 0\\iff 0<x\\le 1$.",
+          "method": [
+            "Déterminer le domaine : écrire que chaque expression placée sous un $\\ln$ est strictement positive.",
+            "Ramener l'équation ou l'inéquation à la forme $\\ln A=\\ln B$ (ou $\\ln A<\\ln B$) avec les propriétés de $\\ln$.",
+            "Supprimer les logarithmes grâce à la stricte croissance : $A=B$ (ou $A<B$), puis résoudre.",
+            "Ne garder que les solutions qui appartiennent au domaine, puis conclure."
+          ],
+          "example": {
+            "statement": "Résoudre dans $\\mathbb{R}$ : $\\ln(x-1)+\\ln(x+1)=\\ln 15$.",
+            "steps": [
+              "Déterminer le domaine : $x-1>0$ et $x+1>0$, donc $x>1$. Le domaine est $]1\\ ;\\ +\\infty[$.",
+              "Ramener : $\\ln(x-1)+\\ln(x+1)=\\ln\\big((x-1)(x+1)\\big)=\\ln(x^2-1)$, donc l'équation devient $\\ln(x^2-1)=\\ln 15$.",
+              "Supprimer les logarithmes : $x^2-1=15$, donc $x^2=16$, soit $x=4$ ou $x=-4$.",
+              "Ne garder que les solutions du domaine : $-4\\notin\\ ]1\\ ;\\ +\\infty[$ est rejeté, et $4>1$ convient. Donc $S=\\{4\\}$."
+            ]
+          },
+          "pitfall": "Ne pas oublier le domaine. Une équation peut avoir une solution algébrique qui n'est pas une solution, car $\\ln$ n'est définie que pour les nombres strictement positifs. Contre-exemple : $\\ln x+\\ln(x-3)=\\ln 4$ conduit à $x^2-3x-4=0$, donc à $x=4$ ou $x=-1$. Pourtant $\\ln(-1)$ n'existe pas : seule $x=4$ est solution. Dernier réflexe : vérifie chaque solution trouvée dans le domaine écrit à l'étape 1.",
+          "figure": "domaine-et-solutions",
+          "exercise": {
+            "title": "Équations et inéquations avec ln",
+            "statement": "Tu résous des équations et des inéquations avec ln en suivant la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est l'ensemble de définition de la fonction $x\\mapsto\\ln(2x-6)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer le domaine : $\\ln(2x-6)$ existe si $2x-6>0$, c'est-à-dire $x>3$. L'inégalité est stricte car $\\ln 0$ n'existe pas : $3$ est exclu, ce qui élimine $[3\\ ;\\ +\\infty[$. L'intervalle $]6\\ ;\\ +\\infty[$ vient d'un oubli de la division par 2.",
+                "answers": [
+                  {
+                    "content": "$[3\\ ;\\ +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]3\\ ;\\ +\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-\\infty\\ ;\\ 3[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]6\\ ;\\ +\\infty[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $\\ln(2x-4)=\\ln 6$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer le domaine : $2x-4>0$, donc $x>2$. Étape 2 — Ramener : l'équation est déjà de la forme $\\ln A=\\ln B$. Étape 3 — Supprimer les logarithmes : $2x-4=6$, donc $2x=10$ et $x=5$. Étape 4 — Ne garder que les solutions du domaine : $5>2$ convient. Donc $S=\\{5\\}$. La valeur 3 oublie le $-4$ ; la valeur 10 oublie de diviser par 2.",
+                "answers": [
+                  {
+                    "content": "$\\{3\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\{10\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\{5\\}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\varnothing$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $\\ln x+\\ln(x-2)=\\ln 8$. Donne la seule solution.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Déterminer le domaine : $x>0$ et $x-2>0$, donc $x>2$. Étape 2 — Ramener : $\\ln x+\\ln(x-2)=\\ln\\big(x(x-2)\\big)$, donc $\\ln\\big(x(x-2)\\big)=\\ln 8$. Étape 3 — Supprimer les logarithmes : $x^2-2x=8$, soit $x^2-2x-8=0$. Le discriminant est $4+32=36$, donc $x=\\dfrac{2\\pm 6}{2}$, soit $x=4$ ou $x=-2$. Étape 4 — Ne garder que les solutions du domaine : $-2$ est rejeté (il n'est pas supérieur à 2). Donc $S=\\{4\\}$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $\\ln(3x+1)\\ge\\ln 7$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer le domaine : $3x+1>0$, donc $x>-\\dfrac13$. Étape 2 — Ramener : l'inéquation est déjà de la forme $\\ln A\\ge\\ln B$. Étape 3 — Supprimer les logarithmes : $\\ln$ est croissante, le sens est conservé, donc $3x+1\\ge 7$ et $x\\ge 2$. Étape 4 — Ne garder que les solutions du domaine : $[2\\ ;\\ +\\infty[$ est inclus dans le domaine. L'intervalle $\\left]-\\dfrac13\\ ;\\ 2\\right]$ inverse le sens de l'inégalité.",
+                "answers": [
+                  {
+                    "content": "$]2\\ ;\\ +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\left]-\\dfrac13\\ ;\\ 2\\right]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\left]-\\dfrac13\\ ;\\ +\\infty\\right[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[2\\ ;\\ +\\infty[$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de résolution de $\\ln(x+1)=\\ln(7-x)$.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Déterminer le domaine, toujours en premier : $-1<x<7$. Étape 2 — Ramener à $\\ln A=\\ln B$ : c'est déjà fait. Étape 3 — Supprimer les logarithmes : $x+1=7-x$ donne $x=3$. Étape 4 — Ne garder que les solutions du domaine : $3$ est dans $]-1\\ ;\\ 7[$. Résoudre avant d'écrire le domaine expose à garder une fausse solution.",
+                "answers": [
+                  {
+                    "content": "Déterminer le domaine : $x+1>0$ et $7-x>0$, donc $-1<x<7$."
+                  },
+                  {
+                    "content": "Ramener : l'équation est déjà de la forme $\\ln A=\\ln B$."
+                  },
+                  {
+                    "content": "Supprimer les logarithmes : $x+1=7-x$, donc $2x=6$ et $x=3$."
+                  },
+                  {
+                    "content": "Conclure : $3\\in\\ ]-1\\ ;\\ 7[$, donc $S=\\{3\\}$."
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $2\\ln x=\\ln 36$. Donne la seule solution.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Déterminer le domaine : $x>0$. Étape 2 — Ramener : $2\\ln x=\\ln(x^2)$ pour $x>0$, donc l'équation devient $\\ln(x^2)=\\ln 36$. Étape 3 — Supprimer les logarithmes : $x^2=36$, donc $x=6$ ou $x=-6$. Étape 4 — Ne garder que les solutions du domaine : $-6$ est négatif, il est rejeté. Donc $S=\\{6\\}$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'ensemble des solutions de l'inéquation $\\ln x\\le 0$ est $]-\\infty\\ ;\\ 1]$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Déterminer le domaine : $\\ln x$ n'existe que pour $x>0$. Étape 3 — Supprimer les logarithmes : $\\ln x\\le 0=\\ln 1$ donne $x\\le 1$. Étape 4 — Ne garder que les solutions du domaine : on garde les $x$ de $]0\\ ;\\ +\\infty[$ qui sont inférieurs ou égaux à 1, soit $]0\\ ;\\ 1]$. Écrire $]-\\infty\\ ;\\ 1]$ oublie le domaine.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On résout dans $\\mathbb{R}$ des équations et des inéquations avec ln, en commençant toujours par le domaine.",
+            "questions": [
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $\\ln(x+3)+\\ln(x-1)=\\ln 5$. Donne la seule solution.",
+                "question_type": "numeric",
+                "hint": "Écris d'abord $x-1>0$ : le domaine est une seule condition.",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Déterminer le domaine : $x+3>0$ et $x-1>0$, donc $x>1$. Étape 2 — Ramener : $\\ln\\big((x+3)(x-1)\\big)=\\ln 5$. Étape 3 — Supprimer les logarithmes : $x^2+2x-3=5$, soit $x^2+2x-8=0$. Le discriminant est $4+32=36$, donc $x=\\dfrac{-2\\pm 6}{2}$, soit $x=2$ ou $x=-4$. Étape 4 — Ne garder que les solutions du domaine : $-4$ est rejeté. Donc $S=\\{2\\}$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Résous dans $\\mathbb{R}$ : $\\ln(x-1)\\le\\ln 4$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer le domaine : $x-1>0$, donc $x>1$. Étape 2 — Ramener : l'inéquation est de la forme $\\ln A\\le\\ln B$. Étape 3 — Supprimer les logarithmes : $x-1\\le 4$, donc $x\\le 5$. Étape 4 — Ne garder que les solutions du domaine : $x>1$ et $x\\le 5$ donnent $]1\\ ;\\ 5]$. L'intervalle $]-\\infty\\ ;\\ 5]$ oublie le domaine.",
+                "answers": [
+                  {
+                    "content": "$]1\\ ;\\ 5]$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$[5\\ ;\\ +\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]-\\infty\\ ;\\ 5]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$]1\\ ;\\ +\\infty[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'équation $\\ln x=\\ln(2x-3)$ a pour unique solution $x=$ ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Déterminer le domaine : $x>0$ et $2x-3>0$, donc $x>\\dfrac32$. Étape 2 — Ramener : l'équation est de la forme $\\ln A=\\ln B$. Étape 3 — Supprimer les logarithmes : $x=2x-3$, donc $x=3$. Étape 4 — Ne garder que les solutions du domaine : $3>\\dfrac32$ convient.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer une limite avec ln",
+          "remember": "Limites de référence : $\\lim_{x\\to+\\infty}\\ln x=+\\infty$ et $\\lim_{x\\to 0^+}\\ln x=-\\infty$. Croissances comparées : $\\lim_{x\\to+\\infty}\\dfrac{\\ln x}{x}=0$ et $\\lim_{x\\to 0^+}x\\ln x=0$ ; plus généralement, pour $n$ entier $n\\ge 1$, $\\lim_{x\\to+\\infty}\\dfrac{\\ln x}{x^n}=0$ et $\\lim_{x\\to 0^+}x^n\\ln x=0$. Autre limite : $\\lim_{x\\to 0}\\dfrac{\\ln(1+x)}{x}=1$ (c'est le nombre dérivé de $\\ln$ en 1). Composée : si $u(x)\\to+\\infty$ alors $\\ln u(x)\\to+\\infty$ ; si $u(x)\\to 0^+$ alors $\\ln u(x)\\to-\\infty$. En $+\\infty$, $x$ l'emporte sur $\\ln x$.",
+          "method": [
+            "Calculer la limite de chaque terme (et celle de l'expression sous le $\\ln$) pour repérer une forme indéterminée.",
+            "Si la forme est indéterminée, transformer l'expression : factoriser le terme dominant ou faire apparaître $\\dfrac{\\ln x}{x}$ ou $x\\ln x$.",
+            "Appliquer la limite de référence ou la croissance comparée qui convient.",
+            "Conclure avec les opérations sur les limites."
+          ],
+          "example": {
+            "statement": "Calculer $\\lim_{x\\to+\\infty}\\,(x-\\ln x)$.",
+            "steps": [
+              "Calculer : quand $x\\to+\\infty$, $x\\to+\\infty$ et $\\ln x\\to+\\infty$. C'est la forme indéterminée $+\\infty-\\infty$.",
+              "Transformer : pour $x>0$, $x-\\ln x=x\\left(1-\\dfrac{\\ln x}{x}\\right)$.",
+              "Appliquer : par croissance comparée, $\\dfrac{\\ln x}{x}\\to 0$, donc $1-\\dfrac{\\ln x}{x}\\to 1$.",
+              "Conclure : $x\\to+\\infty$ et le facteur tend vers $1>0$, donc $\\lim_{x\\to+\\infty}(x-\\ln x)=+\\infty$."
+            ]
+          },
+          "pitfall": "Ne pas conclure une forme indéterminée au hasard (« $\\dfrac{\\infty}{\\infty}=1$ » ou « $0\\times\\infty=0$ »). Contre-exemple : en $+\\infty$, les trois quotients $\\dfrac{\\ln x}{x}$, $\\dfrac{x}{\\ln x}$ et $\\dfrac{x}{x}$ sont tous de la forme $\\dfrac{\\infty}{\\infty}$, mais leurs limites valent respectivement $0$, $+\\infty$ et $1$. Seule la croissance comparée tranche : $x$ l'emporte sur $\\ln x$ en $+\\infty$.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer des limites avec ln",
+            "statement": "Tu calcules des limites avec ln, en $+\\infty$ et en $0$, en suivant la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la limite de $\\ln x$ quand $x$ tend vers $0$ par valeurs supérieures ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer la limite : $x\\to 0^+$, donc $\\ln x$ prend des valeurs de plus en plus négatives (c'est une limite de référence). Étape 3 — Appliquer la limite de référence : $\\lim_{x\\to 0^+}\\ln x=-\\infty$. Étape 4 — Conclure : la réponse est $-\\infty$. La valeur $0$ confond avec $\\ln 1=0$ ; $+\\infty$ est la limite en $+\\infty$.",
+                "answers": [
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $\\ln(x^2+1)$ quand $x$ tend vers $+\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer la limite de l'expression sous le $\\ln$ : $x^2+1\\to+\\infty$. Étape 3 — Appliquer : si $u(x)\\to+\\infty$, alors $\\ln u(x)\\to+\\infty$. Étape 4 — Conclure : $\\lim_{x\\to+\\infty}\\ln(x^2+1)=+\\infty$. La valeur $0$ serait la limite de $\\ln 1$, atteinte en $x=0$ seulement.",
+                "answers": [
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\lim_{x\\to 0^+}\\,(3+x\\ln x)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : quand $x\\to 0^+$, $x\\to 0$ et $\\ln x\\to-\\infty$ : c'est une forme indéterminée $0\\times(-\\infty)$. Étape 2 — Transformer : le terme $x\\ln x$ est exactement celui de la croissance comparée. Étape 3 — Appliquer : $\\lim_{x\\to 0^+}x\\ln x=0$. Étape 4 — Conclure : $3+0=3$. Écrire $-\\infty$ ou $0$ pour $x\\ln x$ sans cette règle est une erreur.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $2x-3\\ln x$ quand $x$ tend vers $+\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $2x\\to+\\infty$ et $3\\ln x\\to+\\infty$ : forme indéterminée $+\\infty-\\infty$. Étape 2 — Transformer : $2x-3\\ln x=x\\left(2-3\\,\\dfrac{\\ln x}{x}\\right)$. Étape 3 — Appliquer : $\\dfrac{\\ln x}{x}\\to 0$, donc le facteur tend vers $2$. Étape 4 — Conclure : $x\\to+\\infty$ et le facteur tend vers $2>0$, donc la limite est $+\\infty$. La réponse $-\\infty$ croit à tort que $\\ln x$ l'emporte sur $x$.",
+                "answers": [
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $x\\ln x-2\\ln x$ quand $x$ tend vers $0$ par valeurs supérieures ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : $x\\ln x\\to 0$ (croissance comparée) et $\\ln x\\to-\\infty$. Étape 2 — Transformer : $x\\ln x-2\\ln x=\\ln x\\,(x-2)$. Étape 3 — Appliquer : quand $x\\to 0^+$, $\\ln x\\to-\\infty$ et $x-2\\to-2$. Étape 4 — Conclure : $(-\\infty)\\times(-2)=+\\infty$. La réponse $-\\infty$ oublie le signe négatif du facteur $x-2$.",
+                "answers": [
+                  {
+                    "content": "$+\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\lim_{x\\to 0}\\dfrac{\\ln(1+x)}{x}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : en $x=0$, le numérateur $\\ln(1+0)=0$ et le dénominateur vaut $0$ : forme indéterminée $\\dfrac00$. Étape 2 — Transformer : $\\dfrac{\\ln(1+x)}{x}=\\dfrac{\\ln(1+x)-\\ln 1}{x}$, c'est le taux d'accroissement de $\\ln$ en 1. Étape 3 — Appliquer : ce taux tend vers le nombre dérivé $\\ln'(1)=\\dfrac{1}{1}=1$. Étape 4 — Conclure : la limite vaut $1$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles limites sont égales à $0$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Appliquer les croissances comparées : $\\lim_{x\\to+\\infty}\\dfrac{\\ln x}{x}=0$ et $\\lim_{x\\to 0^+}x\\ln x=0$. Les deux autres ne sont pas nulles : $\\dfrac{x}{\\ln x}$ est l'inverse de $\\dfrac{\\ln x}{x}$, qui tend vers $0$ par valeurs positives, donc elle tend vers $+\\infty$ ; et $\\lim_{x\\to 0^+}\\ln x=-\\infty$.",
+                "answers": [
+                  {
+                    "content": "$\\lim_{x\\to 0^+}x\\ln x$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\lim_{x\\to+\\infty}\\dfrac{x}{\\ln x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\lim_{x\\to 0^+}\\ln x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\lim_{x\\to+\\infty}\\dfrac{\\ln x}{x}$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Comme $\\ln x\\to+\\infty$ et $x\\to+\\infty$, la limite de $\\dfrac{\\ln x}{x}$ en $+\\infty$ est $1$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer : $\\dfrac{\\ln x}{x}$ est de la forme indéterminée $\\dfrac{\\infty}{\\infty}$, qui ne vaut pas 1 automatiquement. Étape 3 — Appliquer la croissance comparée : $\\lim_{x\\to+\\infty}\\dfrac{\\ln x}{x}=0$, car $x$ l'emporte sur $\\ln x$. Par exemple pour $x=1000$, $\\ln x\\approx 6,9$ et $\\dfrac{\\ln x}{x}\\approx 0,007$ : le quotient est très proche de $0$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On calcule des limites avec ln en $+\\infty$ et en $0$ par valeurs supérieures.",
+            "questions": [
+              {
+                "content": "Calcule $\\lim_{x\\to 0^+}(5+x\\ln x)=$ ___ et $\\lim_{x\\to+\\infty}\\left(2+\\dfrac{\\ln x}{x}\\right)=$ ___ .",
+                "question_type": "numeric",
+                "hint": "Les deux limites de référence valent $0$ : il reste la constante.",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer : $x\\ln x$ est de la forme $0\\times(-\\infty)$ et $\\dfrac{\\ln x}{x}$ de la forme $\\dfrac{\\infty}{\\infty}$ : deux formes indéterminées. Étape 2 — Transformer : aucune transformation n'est nécessaire, ce sont des croissances comparées. Étape 3 — Appliquer : $x\\ln x\\to 0$ en $0^+$ et $\\dfrac{\\ln x}{x}\\to 0$ en $+\\infty$. Étape 4 — Conclure : $5+0=5$ et $2+0=2$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $x-2\\ln x$ quand $x$ tend vers $+\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer : forme indéterminée $+\\infty-\\infty$. Étape 2 — Transformer : $x-2\\ln x=x\\left(1-2\\,\\dfrac{\\ln x}{x}\\right)$. Étape 3 — Appliquer : $\\dfrac{\\ln x}{x}\\to 0$, donc le facteur tend vers $1$. Étape 4 — Conclure : $x\\to+\\infty$ fois un facteur qui tend vers $1$ donne $+\\infty$.",
+                "answers": [
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La limite de $\\dfrac{\\ln x}{x^2}$ quand $x$ tend vers $+\\infty$ est ___ .",
+                "question_type": "select",
+                "hint": "Sépare $x^2$ en $x\\times x$.",
+                "explanation": "Étape 1 — Calculer : forme indéterminée $\\dfrac{\\infty}{\\infty}$. Étape 2 — Transformer : $\\dfrac{\\ln x}{x^2}=\\dfrac{\\ln x}{x}\\times\\dfrac1x$. Étape 3 — Appliquer : $\\dfrac{\\ln x}{x}\\to 0$ et $\\dfrac1x\\to 0$. Étape 4 — Conclure : le produit tend vers $0$ (c'est la croissance comparée avec $n=2$).",
+                "answers": [
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dériver ln u et primitiver u'/u",
+          "remember": "Si $u$ est dérivable et strictement positive sur un intervalle $I$, alors $\\ln u$ est dérivable sur $I$ et $(\\ln u)'=\\dfrac{u'}{u}$. En particulier $(\\ln x)'=\\dfrac1x$ sur $]0\\ ;\\ +\\infty[$. Réciproquement, sur un intervalle où $u>0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln u$ ; sur un intervalle où $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln(-u)$. Les primitives d'une fonction sur un intervalle diffèrent d'une constante.",
+          "method": [
+            "Identifier la fonction $u$ placée dans le $\\ln$ et vérifier que $u>0$ sur l'intervalle étudié.",
+            "Calculer $u'$ (pour une primitive, vérifier que $u'$ est au numérateur et $u$ au dénominateur).",
+            "Appliquer : $(\\ln u)'=\\dfrac{u'}{u}$, ou « une primitive de $\\dfrac{u'}{u}$ est $\\ln u$ ».",
+            "Simplifier le résultat, et pour une primitive la contrôler en la dérivant."
+          ],
+          "example": {
+            "statement": "Dériver la fonction $f$ définie sur $\\mathbb{R}$ par $f(x)=\\ln(x^2+1)$.",
+            "steps": [
+              "Identifier : $u(x)=x^2+1$. Comme $x^2\\ge 0$, on a $u(x)\\ge 1>0$ sur $\\mathbb{R}$.",
+              "Calculer : $u'(x)=2x$.",
+              "Appliquer : $f'(x)=\\dfrac{u'(x)}{u(x)}=\\dfrac{2x}{x^2+1}$.",
+              "Simplifier : la fraction est irréductible. Contrôle : $f'(x)$ a le signe de $x$, et $\\ln(x^2+1)$ est minimale en $x=0$, ce qui est cohérent."
+            ]
+          },
+          "pitfall": "Ne pas oublier $u'$ au numérateur, et ne pas écrire $(\\ln u)'=\\dfrac1u$. Contre-exemple : pour $f(x)=\\ln(2x+1)$, on a $f'(x)=\\dfrac{2}{2x+1}$ et non $\\dfrac{1}{2x+1}$ : en $x=0$ la pente est $2$ (près de $0$, $\\ln(1+2x)$ vaut environ $2x$), pas $1$. Pour une primitive, vérifie le numérateur : une primitive de $\\dfrac{x}{x^2+1}$ est $\\dfrac12\\ln(x^2+1)$ et non $\\ln(x^2+1)$, car ici $u'=2x$ et non $x$.",
+          "figure": null,
+          "exercise": {
+            "title": "Dériver ln u et primitiver u'/u",
+            "statement": "Tu dérives des fonctions de la forme ln u et tu cherches des primitives de la forme u'/u avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dérive la fonction $f(x)=\\ln(3x+2)$ sur $\\left]-\\dfrac23\\ ;\\ +\\infty\\right[$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x)=3x+2$, positive sur $\\left]-\\dfrac23\\ ;\\ +\\infty\\right[$. Étape 2 — Calculer : $u'(x)=3$. Étape 3 — Appliquer : $f'(x)=\\dfrac{u'(x)}{u(x)}=\\dfrac{3}{3x+2}$. Étape 4 — Simplifier : rien à simplifier. La proposition $\\dfrac1{3x+2}$ oublie $u'$ ; $\\dfrac{3x+2}{3}$ inverse la fraction.",
+                "answers": [
+                  {
+                    "content": "$f'(x)=\\dfrac{3}{3x+2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(x)=\\dfrac{1}{3x+2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x)=\\dfrac{3x+2}{3}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x)=3\\ln(3x+2)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dérive la fonction $g(x)=\\ln(x^2+4)$ sur $\\mathbb{R}$.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x)=x^2+4\\ge 4>0$ sur $\\mathbb{R}$. Étape 2 — Calculer : $u'(x)=2x$. Étape 3 — Appliquer : $g'(x)=\\dfrac{2x}{x^2+4}$. Étape 4 — Simplifier : rien à simplifier. La proposition $\\dfrac{x}{x^2+4}$ oublie le facteur 2 de $u'$ ; $\\dfrac{1}{x^2+4}$ oublie $u'$ entièrement.",
+                "answers": [
+                  {
+                    "content": "$g'(x)=\\dfrac{1}{x^2+4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$g'(x)=\\dfrac{2x}{x^2+4}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$g'(x)=2x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$g'(x)=\\dfrac{x}{x^2+4}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=\\ln(x^2-4x+5)$ sur $\\mathbb{R}$. Calcule $f'(3)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x)=x^2-4x+5=(x-2)^2+1\\ge 1>0$ sur $\\mathbb{R}$. Étape 2 — Calculer : $u'(x)=2x-4$. Étape 3 — Appliquer : $f'(x)=\\dfrac{2x-4}{x^2-4x+5}$. Étape 4 — Simplifier et calculer en $x=3$ : $u'(3)=2$ et $u(3)=9-12+5=2$, donc $f'(3)=\\dfrac22=1$.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la primitive de $x\\mapsto\\dfrac{2x}{x^2+1}$ sur $\\mathbb{R}$ qui s'annule en $0$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x)=x^2+1>0$ sur $\\mathbb{R}$. Étape 2 — Calculer : $u'(x)=2x$, qui est bien le numérateur. Étape 3 — Appliquer : une primitive est $\\ln(x^2+1)$. Étape 4 — Contrôler : en $x=0$, $\\ln(0+1)=0$, donc elle s'annule en $0$ (la proposition avec $+1$ vaut $1$ en $0$). Les propositions avec $\\dfrac12$ ou $2$ ont une dérivée qui n'est pas $\\dfrac{2x}{x^2+1}$.",
+                "answers": [
+                  {
+                    "content": "$\\ln(x^2+1)+1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac12\\ln(x^2+1)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln(x^2+1)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$2\\ln(x^2+1)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur $]-\\infty\\ ;\\ 1[$, quelle est une primitive de $x\\mapsto\\dfrac{1}{x-1}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x)=x-1$ et sur $]-\\infty\\ ;\\ 1[$ on a $u<0$. Étape 2 — Calculer : $u'(x)=1$. Étape 3 — Appliquer : comme $u<0$, une primitive de $\\dfrac{u'}{u}$ est $\\ln(-u)=\\ln(1-x)$. Étape 4 — Contrôler : la dérivée de $\\ln(1-x)$ est $\\dfrac{-1}{1-x}=\\dfrac{1}{x-1}$. La proposition $\\ln(x-1)$ n'existe pas pour $x<1$.",
+                "answers": [
+                  {
+                    "content": "$\\ln(x-1)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-\\ln(1-x)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{1}{1-x}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln(1-x)$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une primitive de $x\\mapsto\\dfrac{x}{x^2+1}$ sur $\\mathbb{R}$ s'écrit $k\\ln(x^2+1)$. Donne $k$ en écriture décimale.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x)=x^2+1>0$. Étape 2 — Calculer : $u'(x)=2x$, alors que le numérateur est $x$, soit $\\dfrac12 u'(x)$. Étape 3 — Appliquer : $\\dfrac{x}{x^2+1}=\\dfrac12\\times\\dfrac{u'}{u}$, donc une primitive est $\\dfrac12\\ln(x^2+1)$. Étape 4 — Contrôler : la dérivée de $\\dfrac12\\ln(x^2+1)$ est $\\dfrac12\\times\\dfrac{2x}{x^2+1}=\\dfrac{x}{x^2+1}$. Donc $k=0,5$.",
+                "answers": [
+                  {
+                    "content": "0,5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La dérivée de $x\\mapsto\\ln(2x+1)$ sur $\\left]-\\dfrac12\\ ;\\ +\\infty\\right[$ est $x\\mapsto\\dfrac{1}{2x+1}$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : $u(x)=2x+1>0$ sur l'intervalle. Étape 2 — Calculer : $u'(x)=2$. Étape 3 — Appliquer : $(\\ln u)'=\\dfrac{u'}{u}=\\dfrac{2}{2x+1}$. Le numérateur est $2$, pas $1$ : l'affirmation est fausse. Avec $\\dfrac1{2x+1}$ on oublie $u'$, ce qui est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On dérive des fonctions ln u et on cherche des primitives de $\\dfrac{u'}{u}$.",
+            "questions": [
+              {
+                "content": "Soit $h(x)=\\ln(x^2+2x+2)$ sur $\\mathbb{R}$. Calcule $h'(1)$ en écriture décimale.",
+                "question_type": "numeric",
+                "hint": "Pour $x^2+2x+2$, la dérivée est $2x+2$.",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $u(x)=x^2+2x+2=(x+1)^2+1>0$ sur $\\mathbb{R}$. Étape 2 — Calculer : $u'(x)=2x+2$. Étape 3 — Appliquer : $h'(x)=\\dfrac{2x+2}{x^2+2x+2}$. Étape 4 — Simplifier et calculer en $x=1$ : $u'(1)=4$ et $u(1)=5$, donc $h'(1)=\\dfrac45=0,8$.",
+                "answers": [
+                  {
+                    "content": "0,8",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est une primitive de $x\\mapsto\\dfrac{2x+1}{x^2+x+1}$ sur $\\mathbb{R}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $u(x)=x^2+x+1$, positive sur $\\mathbb{R}$ (son discriminant $1-4=-3$ est négatif et le coefficient de $x^2$ est positif). Étape 2 — Calculer : $u'(x)=2x+1$, qui est bien le numérateur. Étape 3 — Appliquer : une primitive est $\\ln(x^2+x+1)$. Étape 4 — Contrôler : sa dérivée est $\\dfrac{2x+1}{x^2+x+1}$.",
+                "answers": [
+                  {
+                    "content": "$\\ln(x^2+x+1)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\dfrac{1}{2}\\ln(x^2+x+1)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\ln(2x+1)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\dfrac{x^2+x+1}{2x+1}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur $]0\\ ;\\ +\\infty[$, la dérivée de $x\\mapsto\\ln(5x)$ s'écrit $\\dfrac{1}{u}$. Complète : $u=$ ___ .",
+                "question_type": "fill_blank",
+                "hint": "Simplifie la fraction $\\dfrac{5}{5x}$.",
+                "explanation": "Étape 1 — Identifier : $u(x)=5x>0$ sur $]0\\ ;\\ +\\infty[$. Étape 2 — Calculer : $u'(x)=5$. Étape 3 — Appliquer : $\\dfrac{u'(x)}{u(x)}=\\dfrac{5}{5x}$. Étape 4 — Simplifier : $\\dfrac{5}{5x}=\\dfrac1x$. La dérivée de $\\ln(5x)$ est la même que celle de $\\ln x$, car $\\ln(5x)=\\ln 5+\\ln x$ et $\\ln 5$ est une constante.",
+                "answers": [
+                  {
+                    "content": "x",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer avec le logarithme décimal",
+          "remember": "Le logarithme décimal d'un réel $x>0$ est $\\log x=\\dfrac{\\ln x}{\\ln 10}$. Il a les mêmes propriétés algébriques que $\\ln$, et de plus $\\log 1=0$, $\\log 10=1$ et, pour tout entier relatif $n$, $\\log(10^n)=n$. Exemples : $\\log 1000=3$ et $\\log 0,01=-2$. Plus généralement, pour une base $a>0$, $a\\neq 1$ : $\\log_a x=\\dfrac{\\ln x}{\\ln a}$ ; par exemple $\\log_2 8=3$. Le logarithme décimal sert en chimie (pH $=-\\log[\\mathrm{H_3O^+}]$) et en acoustique (niveau sonore $L=10\\log\\dfrac{I}{I_0}$).",
+          "method": [
+            "Décomposer l'argument en un produit ou un quotient de nombres et de puissances entières de $10$.",
+            "Appliquer $\\log(ab)=\\log a+\\log b$, $\\log\\dfrac{a}{b}=\\log a-\\log b$ et $\\log(10^n)=n$.",
+            "Remplacer chaque logarithme connu par la valeur donnée dans l'énoncé.",
+            "Calculer, puis interpréter le résultat dans la situation (pH, décibels…)."
+          ],
+          "example": {
+            "statement": "Un jus d'orange a une concentration $[\\mathrm{H_3O^+}]=4\\times 10^{-4}$ mol/L. Sachant que $\\log 2\\approx 0,30$, calculer son pH, défini par $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$.",
+            "steps": [
+              "Décomposer : $4\\times 10^{-4}=2^2\\times 10^{-4}$.",
+              "Appliquer : $\\log(4\\times 10^{-4})=\\log(2^2)+\\log(10^{-4})=2\\log 2-4$.",
+              "Remplacer : $\\log 2\\approx 0,30$, donc $\\log(4\\times 10^{-4})\\approx 0,60-4=-3,40$.",
+              "Calculer : $\\mathrm{pH}=-(-3,40)=3,4$. Le pH est inférieur à $7$ : la solution est acide."
+            ]
+          },
+          "pitfall": "Ne pas se tromper de signe avec $\\log(10^n)$, et ne pas écrire $\\log(a+b)=\\log a+\\log b$. Contre-exemple : $\\log 0,001=\\log(10^{-3})=-3$, et non $3$ ; et $\\log(10+10)=\\log 20=\\log 2+1\\approx 1,30$, alors que $\\log 10+\\log 10=2$. Pour le pH, une concentration inférieure à $1$ a un logarithme négatif : le signe moins de la formule rend le pH positif.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer avec le logarithme décimal",
+            "statement": "On utilise le logarithme décimal $\\log$ avec les valeurs approchées $\\log 2\\approx 0,30$ et $\\log 3\\approx 0,48$. Tu suis la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Calcule $\\log 1000$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : $1000=10^3$. Étape 2 — Appliquer : $\\log(10^n)=n$. Étape 3 — Remplacer : aucune valeur donnée n'est nécessaire. Étape 4 — Calculer : $\\log 1000=3$. La réponse $1000$ ou $\\ln 1000$ confond avec une autre fonction.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\log 0,01$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : $0,01=10^{-2}$. Étape 2 — Appliquer : $\\log(10^{-2})=-2$. Étape 3 — Remplacer : aucune valeur donnée n'est nécessaire. Étape 4 — Calculer : $\\log 0,01=-2$. Le logarithme d'un nombre inférieur à $1$ est négatif : la réponse $2$ est donc fausse.",
+                "answers": [
+                  {
+                    "content": "-2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Sachant que $\\log 2\\approx 0,30$, quelle est la valeur approchée de $\\log 200$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : $200=2\\times 10^2$. Étape 2 — Appliquer : $\\log 200=\\log 2+\\log(10^2)=\\log 2+2$. Étape 3 — Remplacer : $\\log 2\\approx 0,30$. Étape 4 — Calculer : $0,30+2=2,30$. La valeur $0,60$ vient de $2\\times 0,30$ ; $1,30$ oublie un facteur 10.",
+                "answers": [
+                  {
+                    "content": "$0,60$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2,30$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$1,30$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2,00$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sachant que $\\log 2\\approx 0,30$ et $\\log 3\\approx 0,48$, calcule une valeur approchée de $\\log 600$.",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Décomposer : $600=2\\times 3\\times 10^2$. Étape 2 — Appliquer : $\\log 600=\\log 2+\\log 3+\\log(10^2)=\\log 2+\\log 3+2$. Étape 3 — Remplacer : $\\log 2\\approx 0,30$ et $\\log 3\\approx 0,48$. Étape 4 — Calculer : $0,30+0,48+2=2,78$.",
+                "answers": [
+                  {
+                    "content": "2,78",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une boisson a une concentration $[\\mathrm{H_3O^+}]=3\\times 10^{-5}$ mol/L. Sachant que $\\log 3\\approx 0,48$, calcule son pH $=-\\log[\\mathrm{H_3O^+}]$.",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Décomposer : $3\\times 10^{-5}$ est déjà un produit d'un nombre et d'une puissance de $10$. Étape 2 — Appliquer : $\\log(3\\times 10^{-5})=\\log 3-5$. Étape 3 — Remplacer : $\\log 3\\approx 0,48$, donc $\\log(3\\times 10^{-5})\\approx -4,52$. Étape 4 — Calculer : $\\mathrm{pH}=4,52$. Oublier le signe moins de la formule donnerait $-4,52$, impossible pour un pH ici.",
+                "answers": [
+                  {
+                    "content": "4,52",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\log_2 32$, le logarithme de base $2$ de $32$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : $32=2^5$. Étape 2 — Appliquer : $\\log_2 32=\\dfrac{\\ln 32}{\\ln 2}=\\dfrac{5\\ln 2}{\\ln 2}$. Étape 3 — Remplacer : $\\ln 2$ se simplifie. Étape 4 — Calculer : $\\log_2 32=5$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'égalité $\\log 0,001=3$ est vraie.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Décomposer : $0,001=10^{-3}$. Étape 2 — Appliquer : $\\log(10^{-3})=-3$. Étape 4 — Calculer et conclure : $\\log 0,001=-3$, et non $3$. Un nombre inférieur à $1$ a un logarithme négatif.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "On utilise le logarithme décimal avec $\\log 2\\approx 0,30$ et $\\log 5\\approx 0,70$.",
+            "questions": [
+              {
+                "content": "Calcule $\\log 100000=$ ___ et $\\log 0,1=$ ___ .",
+                "question_type": "numeric",
+                "hint": "Compte les zéros ; pour $0,1$, écris-le avec un exposant négatif.",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : $100000=10^5$ et $0,1=10^{-1}$. Étape 2 — Appliquer : $\\log(10^n)=n$. Étape 3 — Remplacer : aucune valeur donnée n'est nécessaire. Étape 4 — Calculer : $\\log 100000=5$ et $\\log 0,1=-1$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Sachant que $\\log 5\\approx 0,70$, calcule une valeur approchée de $\\log 5000$.",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Décomposer : $5000=5\\times 10^3$. Étape 2 — Appliquer : $\\log 5000=\\log 5+\\log(10^3)=\\log 5+3$. Étape 3 — Remplacer : $\\log 5\\approx 0,70$. Étape 4 — Calculer : $0,70+3=3,7$.",
+                "answers": [
+                  {
+                    "content": "3,7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une solution a une concentration $[\\mathrm{H_3O^+}]=2\\times 10^{-5}$ mol/L. Sachant que $\\log 2\\approx 0,30$, son pH $=-\\log[\\mathrm{H_3O^+}]$ vaut ___ .",
+                "question_type": "select",
+                "hint": "Le pH est l'opposé du logarithme.",
+                "explanation": "Étape 1 — Décomposer : $2\\times 10^{-5}$ est un produit d'un nombre et d'une puissance de $10$. Étape 2 — Appliquer : $\\log(2\\times 10^{-5})=\\log 2-5$. Étape 3 — Remplacer : $\\log 2\\approx 0,30$, donc $\\log\\approx-4,70$. Étape 4 — Calculer : $\\mathrm{pH}=4,7$. La valeur $5,3$ vient de $5+0,30$ : le $\\log 2$ se soustrait de $5$, il ne s'y ajoute pas.",
+                "answers": [
+                  {
+                    "content": "$5,3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-4,7$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$4,7$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$3,7$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le pH de quelques solutions courantes",
+          "statement": "En chimie, le pH d'une solution se calcule par $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$, où $[\\mathrm{H_3O^+}]$ est la concentration en ions oxonium en mol/L et $\\log$ le logarithme décimal. On donne $\\log 2\\approx 0,30$ et $\\log 3\\approx 0,48$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Le jus de citron vert a une concentration $[\\mathrm{H_3O^+}]=10^{-2}$ mol/L. Calcule son pH $=-\\log[\\mathrm{H_3O^+}]$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : la concentration est déjà une puissance de $10$ : $10^{-2}$. Étape 2 — Appliquer : $\\log(10^{-2})=-2$. Étape 3 — Remplacer : aucune valeur donnée n'est nécessaire. Étape 4 — Calculer : $\\mathrm{pH}=-(-2)=2$. La solution est très acide (pH inférieur à 7).",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une solution a un pH égal à $5$ (avec $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$). Quelle est sa concentration $[\\mathrm{H_3O^+}]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : on cherche $c$ tel que $-\\log c=5$, donc $\\log c=-5$. Étape 2 — Appliquer : $\\log(10^{-5})=-5$ et $\\log$ est strictement croissante, donc $c=10^{-5}$. Étape 3 — Remplacer : aucune valeur n'est nécessaire. Étape 4 — Calculer et interpréter : $c=10^{-5}$ mol/L. La proposition $10^5$ oublie le signe de l'exposant ; une concentration ne peut pas être négative.",
+              "answers": [
+                {
+                  "content": "$10^{5}$ mol/L",
+                  "correct": false
+                },
+                {
+                  "content": "$\\dfrac15$ mol/L",
+                  "correct": false
+                },
+                {
+                  "content": "$-5$ mol/L",
+                  "correct": false
+                },
+                {
+                  "content": "$10^{-5}$ mol/L",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une boisson a une concentration $[\\mathrm{H_3O^+}]=2\\times 10^{-4}$ mol/L. Sachant que $\\log 2\\approx 0,30$, calcule son pH $=-\\log[\\mathrm{H_3O^+}]$.",
+              "question_type": "numeric",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Décomposer : $2\\times 10^{-4}$ est le produit de $2$ et de $10^{-4}$. Étape 2 — Appliquer : $\\log(2\\times 10^{-4})=\\log 2+\\log(10^{-4})=\\log 2-4$. Étape 3 — Remplacer : $\\log 2\\approx 0,30$, donc $\\log\\approx -3,70$. Étape 4 — Calculer : $\\mathrm{pH}=3,7$.",
+              "answers": [
+                {
+                  "content": "3,7",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'eau de pluie a une concentration $[\\mathrm{H_3O^+}]=3\\times 10^{-6}$ mol/L. Sachant que $\\log 3\\approx 0,48$, calcule son pH $=-\\log[\\mathrm{H_3O^+}]$.",
+              "question_type": "numeric",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Décomposer : $3\\times 10^{-6}$ est le produit de $3$ et de $10^{-6}$. Étape 2 — Appliquer : $\\log(3\\times 10^{-6})=\\log 3-6$. Étape 3 — Remplacer : $\\log 3\\approx 0,48$, donc $\\log\\approx -5,52$. Étape 4 — Calculer : $\\mathrm{pH}=5,52$. Le pH est légèrement inférieur à $7$ : la pluie est faiblement acide.",
+              "answers": [
+                {
+                  "content": "5,52",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quand la concentration $[\\mathrm{H_3O^+}]$ d'une solution est multipliée par $10$, comment varie son pH $=-\\log[\\mathrm{H_3O^+}]$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : la nouvelle concentration est $10c$. Étape 2 — Appliquer : $\\log(10c)=\\log 10+\\log c=1+\\log c$. Étape 3 — Remplacer : $\\mathrm{pH}'=-(1+\\log c)=-1-\\log c$. Étape 4 — Calculer : $\\mathrm{pH}'=\\mathrm{pH}-1$. Une solution plus concentrée en ions est plus acide, donc son pH baisse.",
+              "answers": [
+                {
+                  "content": "Il diminue de $1$",
+                  "correct": true
+                },
+                {
+                  "content": "Il augmente de $1$",
+                  "correct": false
+                },
+                {
+                  "content": "Il est multiplié par $10$",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne change pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La solution A a un pH égal à $3$ et la solution B un pH égal à $5$ (avec $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$). Combien de fois la solution A est-elle plus concentrée en ions $\\mathrm{H_3O^+}$ que la solution B ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : $[\\mathrm{H_3O^+}]_A=10^{-3}$ et $[\\mathrm{H_3O^+}]_B=10^{-5}$. Étape 2 — Appliquer : on divise, $\\dfrac{10^{-3}}{10^{-5}}=10^{2}$. Étape 3 — Remplacer : aucune valeur n'est nécessaire. Étape 4 — Calculer : le rapport vaut $100$. Deux unités de pH d'écart correspondent à un facteur $100$, et non à un facteur $2$.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque concentration $[\\mathrm{H_3O^+}]$ au pH correspondant (avec $\\mathrm{pH}=-\\log[\\mathrm{H_3O^+}]$).",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Décomposer : chaque concentration est une puissance de $10$. Étape 2 — Appliquer : $\\log(10^n)=n$. Étape 4 — Calculer : $\\mathrm{pH}=-\\log(10^{-1})=1$, $-\\log(10^{-7})=7$ et $-\\log(10^{-12})=12$. Le pH est donc l'opposé de l'exposant : plus l'exposant est négatif, plus le pH est grand.",
+              "answers": [
+                {
+                  "content": "$10^{-1}$ mol/L",
+                  "match": "1"
+                },
+                {
+                  "content": "$10^{-7}$ mol/L",
+                  "match": "7"
+                },
+                {
+                  "content": "$10^{-12}$ mol/L",
+                  "match": "12"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le niveau sonore en décibels",
+          "statement": "Le niveau sonore, en décibels (dB), d'un son d'intensité $I$ (en W/m²) est $L=10\\log\\dfrac{I}{I_0}$, avec $I_0=10^{-12}$ W/m² (seuil d'audition) et $\\log$ le logarithme décimal. On donne $\\log 2\\approx 0,30$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un son a une intensité $I=10^{-6}$ W/m². Calcule son niveau sonore $L=10\\log\\dfrac{I}{I_0}$ avec $I_0=10^{-12}$ W/m².",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "dB",
+              "explanation": "Étape 1 — Décomposer : $\\dfrac{I}{I_0}=\\dfrac{10^{-6}}{10^{-12}}=10^{6}$. Étape 2 — Appliquer : $\\log(10^6)=6$. Étape 3 — Remplacer : aucune valeur donnée n'est nécessaire. Étape 4 — Calculer : $L=10\\times 6=60$ dB, soit le niveau d'une conversation.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un son a pour intensité $I=I_0=10^{-12}$ W/m². Calcule son niveau sonore $L=10\\log\\dfrac{I}{I_0}$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "dB",
+              "explanation": "Étape 1 — Décomposer : $\\dfrac{I}{I_0}=1$. Étape 2 — Appliquer : $\\log 1=0$. Étape 3 — Remplacer : aucune valeur n'est nécessaire. Étape 4 — Calculer : $L=10\\times 0=0$ dB. C'est le seuil d'audition, le son le plus faible que l'oreille perçoit.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un son a un niveau sonore de $80$ dB (avec $L=10\\log\\dfrac{I}{I_0}$ et $I_0=10^{-12}$ W/m²). Quelle est son intensité $I$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : $80=10\\log\\dfrac{I}{I_0}$, donc $\\log\\dfrac{I}{I_0}=8$. Étape 2 — Appliquer : $\\log(10^8)=8$ et $\\log$ est strictement croissante, donc $\\dfrac{I}{I_0}=10^8$. Étape 3 — Remplacer : $I_0=10^{-12}$. Étape 4 — Calculer : $I=10^8\\times 10^{-12}=10^{-4}$ W/m². La proposition $8\\times 10^{-12}$ multiplie $I_0$ par $8$ au lieu de $10^8$.",
+              "answers": [
+                {
+                  "content": "$10^{-8}$ W/m²",
+                  "correct": false
+                },
+                {
+                  "content": "$10^{-4}$ W/m²",
+                  "correct": true
+                },
+                {
+                  "content": "$10^{8}$ W/m²",
+                  "correct": false
+                },
+                {
+                  "content": "$8\\times 10^{-12}$ W/m²",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Deux haut-parleurs identiques émettent chacun un son de $70$ dB. Leurs intensités s'additionnent. Sachant que $\\log 2\\approx 0,30$, calcule le niveau sonore total (avec $L=10\\log\\dfrac{I}{I_0}$).",
+              "question_type": "numeric",
+              "tolerance": 0.1,
+              "unit": "dB",
+              "explanation": "Étape 1 — Décomposer : chaque haut-parleur a une intensité $I_1$ avec $70=10\\log\\dfrac{I_1}{I_0}$ ; l'intensité totale est $2I_1$. Étape 2 — Appliquer : $L=10\\log\\dfrac{2I_1}{I_0}=10\\log 2+10\\log\\dfrac{I_1}{I_0}$. Étape 3 — Remplacer : $\\log 2\\approx 0,30$, donc $10\\log 2\\approx 3$. Étape 4 — Calculer : $L\\approx 3+70=73$ dB. Doubler l'intensité n'ajoute que $3$ dB, et non $70$ dB.",
+              "answers": [
+                {
+                  "content": "73",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dix machines identiques émettent chacune un son de $60$ dB. Leurs intensités s'additionnent. Calcule le niveau sonore total (avec $L=10\\log\\dfrac{I}{I_0}$).",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "dB",
+              "explanation": "Étape 1 — Décomposer : l'intensité totale est $10I_1$, où $I_1$ est l'intensité d'une machine ($60=10\\log\\dfrac{I_1}{I_0}$). Étape 2 — Appliquer : $L=10\\log 10+10\\log\\dfrac{I_1}{I_0}$ avec $\\log 10=1$. Étape 3 — Remplacer : $10\\log 10=10$. Étape 4 — Calculer : $L=10+60=70$ dB. Multiplier l'intensité par $10$ ajoute toujours $10$ dB.",
+              "answers": [
+                {
+                  "content": "70",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Si l'intensité d'un son est multipliée par $100$, son niveau sonore $L=10\\log\\dfrac{I}{I_0}$ augmente de $100$ dB.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Décomposer : la nouvelle intensité est $100I$. Étape 2 — Appliquer : $\\log(100I)=\\log(10^2)+\\log I=2+\\log I$. Étape 3 — Remplacer : $L'=10\\times 2+10\\log\\dfrac{I}{I_0}$. Étape 4 — Calculer : $L'=L+20$. Le niveau augmente de $20$ dB seulement : le logarithme écrase les grands rapports.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque intensité $I$ au niveau sonore correspondant (avec $L=10\\log\\dfrac{I}{I_0}$ et $I_0=10^{-12}$ W/m²).",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Décomposer : $\\dfrac{I}{I_0}$ vaut respectivement $1$, $10^{3}$ et $10^{9}$. Étape 2 — Appliquer : $\\log 1=0$, $\\log(10^3)=3$ et $\\log(10^9)=9$. Étape 4 — Calculer : $L=0$ dB, $L=10\\times 3=30$ dB et $L=10\\times 9=90$ dB.",
+              "answers": [
+                {
+                  "content": "$I=10^{-12}$ W/m²",
+                  "match": "0 dB"
+                },
+                {
+                  "content": "$I=10^{-9}$ W/m²",
+                  "match": "30 dB"
+                },
+                {
+                  "content": "$I=10^{-3}$ W/m²",
+                  "match": "90 dB"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'épargne de Moussa et ses objectifs",
+          "statement": "Moussa place 50 000 F sur un compte d'épargne en mobile money. Chaque trimestre, son capital augmente de 10 %. Après $n$ trimestres ($n$ entier naturel), son capital est $C(n)=50\\,000\\times 1,1^n$ francs. On donne $\\ln 2\\approx 0,693$, $\\ln 3\\approx 1,099$, $\\ln 5\\approx 1,609$ et $\\ln 1,1\\approx 0,0953$.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,1^n$ francs. Quelle égalité est vraie pour tout entier naturel $n$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : $1,1^n$ est une puissance d'exposant entier $n$ de $a=1,1>0$. Étape 2 — Appliquer la propriété $\\ln(a^n)=n\\ln a$. Étape 3 — Remplacer : $\\ln(1,1^n)=n\\ln 1,1$. Les autres propositions viennent de confusions : l'exposant sort en facteur, il ne s'ajoute pas et ne devient pas exposant de $\\ln 1,1$.",
+              "answers": [
+                {
+                  "content": "$\\ln(1,1^n)=\\ln n\\times 1,1$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\ln(1,1^n)=(\\ln 1,1)^n$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\ln(1,1^n)=n+\\ln 1,1$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\ln(1,1^n)=n\\ln 1,1$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Moussa cherche le plus petit nombre $n$ de trimestres tel que $50\\,000\\times 1,1^n\\ge 100\\,000$. Remets dans l'ordre les étapes de la résolution.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Simplifier : on divise par $50\\,000$, ce qui donne $1,1^n\\ge 2$. Étape 2 — Appliquer $\\ln$ : elle est strictement croissante, le sens est conservé, et $\\ln(1,1^n)=n\\ln 1,1$. Étape 3 — Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{0,693}{0,0953}\\approx 7,3$. Étape 4 — Conclure : le premier entier supérieur à $7,3$ est $8$. Cette méthode sert pour tout objectif d'épargne.",
+              "answers": [
+                {
+                  "content": "Simplifier l'inégalité : $1,1^n\\ge 2$."
+                },
+                {
+                  "content": "Appliquer $\\ln$ aux deux membres, car $\\ln$ est croissante : $n\\ln 1,1\\ge\\ln 2$."
+                },
+                {
+                  "content": "Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{\\ln 2}{\\ln 1,1}\\approx 7,3$."
+                },
+                {
+                  "content": "Conclure : $n$ est un entier, donc le plus petit est $n=8$."
+                }
+              ]
+            },
+            {
+              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,1^n$ francs. Avec $\\ln 3\\approx 1,099$ et $\\ln 1,1\\approx 0,0953$, quel est le plus petit nombre entier $n$ de trimestres pour que son capital atteigne au moins $150\\,000$ F ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "trimestres",
+              "explanation": "Étape 1 — Simplifier : $50\\,000\\times 1,1^n\\ge 150\\,000$ équivaut à $1,1^n\\ge 3$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,1\\ge\\ln 3$. Étape 3 — Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{1,099}{0,0953}\\approx 11,5$. Étape 4 — Conclure : $n$ est entier, donc $n=12$. La valeur $11$ ne suffit pas, car $11,5$ est supérieur à $11$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Moussa a un capital $C(n)=50\\,000\\times 1,1^n$ francs. Avec $\\ln 5\\approx 1,609$ et $\\ln 1,1\\approx 0,0953$, quel est le plus petit nombre entier $n$ de trimestres pour que son capital atteigne au moins $250\\,000$ F ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "trimestres",
+              "explanation": "Étape 1 — Simplifier : $50\\,000\\times 1,1^n\\ge 250\\,000$ équivaut à $1,1^n\\ge 5$. Étape 2 — Appliquer $\\ln$ : $n\\ln 1,1\\ge\\ln 5$. Étape 3 — Diviser par $\\ln 1,1>0$ : $n\\ge\\dfrac{1,609}{0,0953}\\approx 16,9$. Étape 4 — Conclure : $n$ est entier, donc $n=17$. Arrondir à $16$ serait une erreur : le capital n'aurait pas encore atteint $250\\,000$ F.",
+              "answers": [
+                {
+                  "content": "17",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec $C(n)=50\\,000\\times 1,1^n$, $\\ln 2\\approx 0,693$ et $\\ln 1,1\\approx 0,0953$, le capital de Moussa atteint $100\\,000$ F au bout de $7$ trimestres.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Simplifier : il faut $1,1^7\\ge 2$. Étape 2 — Appliquer $\\ln$ : cela revient à $7\\ln 1,1\\ge\\ln 2$. Étape 3 — Calculer : $7\\times 0,0953=0,6671$, inférieur à $\\ln 2\\approx 0,693$. Étape 4 — Conclure : $1,1^7<2$, donc le capital est encore inférieur à $100\\,000$ F. Il faut $8$ trimestres.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour atteindre un capital $K$ (en francs) en partant de $50\\,000$ F à 10 % par trimestre, la durée en trimestres est donnée par $T(K)=\\dfrac{\\ln K-\\ln 50000}{\\ln 1,1}$ pour $K>0$. Quelle est sa dérivée ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $\\ln 50000$ et $\\ln 1,1$ sont des constantes ; seul $\\ln K$ dépend de $K$. Étape 2 — Calculer : $(\\ln K)'=\\dfrac1K$, et la constante a pour dérivée $0$. Étape 3 — Appliquer : $T'(K)=\\dfrac{1}{\\ln 1,1}\\times\\dfrac1K=\\dfrac{1}{K\\ln 1,1}$. Étape 4 — Interpréter : la dérivée est positive, donc plus le capital visé est grand, plus il faut de temps.",
+              "answers": [
+                {
+                  "content": "$T'(K)=\\dfrac{1}{K\\ln 1,1}$",
+                  "correct": true
+                },
+                {
+                  "content": "$T'(K)=\\dfrac{1}{K}$",
+                  "correct": false
+                },
+                {
+                  "content": "$T'(K)=\\dfrac{\\ln K}{\\ln 1,1}$",
+                  "correct": false
+                },
+                {
+                  "content": "$T'(K)=\\dfrac{1}{\\ln 1,1}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec $T(K)=\\dfrac{\\ln K-\\ln 50000}{\\ln 1,1}$ pour $K>0$, on a $T(K)<0$ si et seulement si $K<50\\,000$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer le signe du dénominateur : $\\ln 1,1>0$ car $1,1>1$. Étape 2 — Étudier le numérateur : $T(K)<0$ équivaut à $\\ln K-\\ln 50000<0$, c'est-à-dire $\\ln K<\\ln 50000$. Étape 3 — Appliquer la stricte croissance de $\\ln$ : cela équivaut à $K<50000$. Étape 4 — Interpréter : une durée négative correspond à un capital inférieur à la mise de départ.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le bénéfice d'un fabricant de jus de bissap",
+          "statement": "Un fabricant de jus de bissap produit chaque semaine $x$ centaines de bouteilles, avec $1\\le x\\le 12$. Son bénéfice hebdomadaire, en dizaines de milliers de francs, est $B(x)=4\\ln x-x+1$. On donne $\\ln 2\\approx 0,693$, $\\ln 10\\approx 2,303$ et $\\ln 11\\approx 2,398$. On étudie le bénéfice en suivant les étapes du schéma : domaine, limites, dérivée, variations, puis rentabilité.",
+          "exercise_type": "evaluation",
+          "figure": "etude-de-fonction",
+          "questions": [
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ (en dizaines de milliers de francs), pour $x$ centaines de bouteilles. Calcule $B(1)$, le bénéfice pour $100$ bouteilles.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Domaine : $x=1$ est dans l'intervalle $[1\\ ;\\ 12]$. Étape 2 — Remplacer : $B(1)=4\\ln 1-1+1$. Étape 3 — Calculer : $\\ln 1=0$, donc $B(1)=0-1+1=0$. Pour $100$ bouteilles, le fabricant ne gagne rien : le bénéfice est nul.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ pour $x$ dans $[1\\ ;\\ 12]$. Quelle est la dérivée $B'$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Dériver terme à terme : $(4\\ln x)'=\\dfrac4x$ et $(-x+1)'=-1$. Étape 2 — Appliquer : $B'(x)=\\dfrac4x-1$. Étape 3 — Réduire au même dénominateur : $B'(x)=\\dfrac{4-x}{x}$. La proposition $\\dfrac{x-4}{x}$ se trompe de signe ; $\\dfrac4x+1$ oublie le signe moins de $-x$.",
+              "answers": [
+                {
+                  "content": "$B'(x)=\\dfrac{x-4}{x}$",
+                  "correct": false
+                },
+                {
+                  "content": "$B'(x)=\\dfrac{4-x}{x}$",
+                  "correct": true
+                },
+                {
+                  "content": "$B'(x)=4-x$",
+                  "correct": false
+                },
+                {
+                  "content": "$B'(x)=\\dfrac{4}{x}+1$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ pour $x$ dans $[1\\ ;\\ 12]$, avec $B'(x)=\\dfrac{4-x}{x}$. Quel est le sens de variation de $B$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Signe de la dérivée : $x>0$, donc $B'(x)$ a le signe de $4-x$. Étape 2 — Résoudre : $4-x>0$ pour $x<4$ et $4-x<0$ pour $x>4$. Étape 3 — Conclure : $B$ est croissante sur $[1\\ ;\\ 4]$ et décroissante sur $[4\\ ;\\ 12]$ : elle admet un maximum en $x=4$.",
+              "answers": [
+                {
+                  "content": "$B$ est décroissante sur $[1\\ ;\\ 4]$ puis croissante sur $[4\\ ;\\ 12]$",
+                  "correct": false
+                },
+                {
+                  "content": "$B$ est croissante sur $[1\\ ;\\ 12]$",
+                  "correct": false
+                },
+                {
+                  "content": "$B$ est croissante sur $[1\\ ;\\ 4]$ puis décroissante sur $[4\\ ;\\ 12]$",
+                  "correct": true
+                },
+                {
+                  "content": "$B$ est décroissante sur $[1\\ ;\\ 12]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ pour $x$ (en centaines de bouteilles) dans $[1\\ ;\\ 12]$ : $B$ est croissante sur $[1\\ ;\\ 4]$ et décroissante sur $[4\\ ;\\ 12]$. Pour combien de bouteilles le bénéfice est-il maximal ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "bouteilles",
+              "explanation": "Étape 1 — Lire les variations : le maximum de $B$ est atteint en $x=4$, là où $B'$ s'annule et change de signe. Étape 2 — Convertir : $x$ est en centaines de bouteilles, donc $x=4$ correspond à $4\\times 100=400$ bouteilles. Étape 3 — Conclure : le fabricant a intérêt à produire $400$ bouteilles. La réponse $4$ oublie l'unité (centaines).",
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ (en dizaines de milliers de francs). Avec $\\ln 2\\approx 0,693$, donne une valeur approchée du bénéfice maximal $B(4)$.",
+              "question_type": "numeric",
+              "tolerance": 0.001,
+              "explanation": "Étape 1 — Remplacer : $B(4)=4\\ln 4-4+1=4\\ln 4-3$. Étape 2 — Appliquer les propriétés de $\\ln$ : $\\ln 4=\\ln(2^2)=2\\ln 2$, donc $B(4)=8\\ln 2-3$. Étape 3 — Calculer : $8\\times 0,693=5,544$, donc $B(4)\\approx 2,544$. Étape 4 — Interpréter : $2,544$ dizaines de milliers de francs, soit environ $25\\,440$ F.",
+              "answers": [
+                {
+                  "content": "2,544",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$, définie sur $]0\\ ;\\ +\\infty[$ pour l'étude mathématique. Quelle est la limite de $B(x)$ quand $x$ tend vers $+\\infty$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Limites : $4\\ln x\\to+\\infty$ et $-x\\to-\\infty$ : forme indéterminée $+\\infty-\\infty$. Étape 2 — Transformer : $B(x)=x\\left(4\\,\\dfrac{\\ln x}{x}-1+\\dfrac1x\\right)$ pour $x>0$. Étape 3 — Appliquer la croissance comparée : $\\dfrac{\\ln x}{x}\\to 0$ et $\\dfrac1x\\to 0$, donc le facteur tend vers $-1$. Étape 4 — Conclure : $x\\to+\\infty$ fois un facteur qui tend vers $-1$ donne $-\\infty$. Produire énormément de bouteilles fait perdre de l'argent.",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$4$",
+                  "correct": false
+                },
+                {
+                  "content": "$-\\infty$",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ (en dizaines de milliers de francs). Avec $\\ln 11\\approx 2,398$, calcule une valeur approchée de $B(11)$.",
+              "question_type": "numeric",
+              "tolerance": 0.001,
+              "explanation": "Étape 1 — Remplacer : $B(11)=4\\ln 11-11+1=4\\ln 11-10$. Étape 2 — Calculer : $4\\times 2,398=9,592$. Étape 3 — Conclure : $B(11)\\approx 9,592-10=-0,408$. Le bénéfice est négatif : à $1\\,100$ bouteilles, le fabricant perd de l'argent.",
+              "answers": [
+                {
+                  "content": "-0,408",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$, avec $B(1)=0$, $B$ croissante sur $[1\\ ;\\ 4]$ et décroissante sur $[4\\ ;\\ 12]$. On donne $B(10)\\approx 0,212>0$ et $B(11)\\approx -0,408<0$. Quel est le plus grand nombre entier de centaines de bouteilles pour lequel le bénéfice est strictement positif ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "unit": "centaines",
+              "explanation": "Étape 1 — Sur $]1\\ ;\\ 4]$ : $B$ est strictement croissante à partir de $B(1)=0$, donc $B(x)>0$. Étape 2 — Sur $[4\\ ;\\ 12]$ : $B$ est strictement décroissante, $B(10)>0$ et $B(11)<0$ ; donc $B(x)>0$ jusqu'à un réel $\\beta$ compris entre $10$ et $11$ (théorème des valeurs intermédiaires). Étape 3 — Conclure : le plus grand entier de centaines est $10$, soit $1\\,000$ bouteilles.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le bénéfice est $B(x)=4\\ln x-x+1$ pour $x$ dans $[1\\ ;\\ 12]$ ($x$ en centaines de bouteilles). Produire $1\\,200$ bouteilles est plus rentable que produire $400$ bouteilles.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Traduire : $1\\,200$ bouteilles correspondent à $x=12$ et $400$ bouteilles à $x=4$. Étape 2 — Comparer avec les variations : $B$ est décroissante sur $[4\\ ;\\ 12]$, donc $B(12)<B(4)$. Étape 3 — Conclure : le maximum du bénéfice est en $x=4$. De plus $B(12)<B(11)<0$ : à $1\\,200$ bouteilles, le fabricant perd de l'argent.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
