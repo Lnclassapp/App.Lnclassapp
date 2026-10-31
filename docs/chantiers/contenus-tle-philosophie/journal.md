@@ -44,4 +44,4 @@
 | | |
 |---|---|
 | **Livré le** | 2026-10-31 |
-| **PR** | |
+| **PR** | #426 (test `rich_text_sanitizer_test.rb:33` rouge : décision attendue) |

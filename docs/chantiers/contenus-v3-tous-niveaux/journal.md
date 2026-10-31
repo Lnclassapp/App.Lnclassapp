@@ -6,7 +6,7 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
-| 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | à venir |
+| 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
 
 ## À faire valider par un enseignant
 
