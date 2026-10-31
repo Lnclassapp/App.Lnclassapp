@@ -44,6 +44,8 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 
 ### Tle D — `lecons-traitees/tle-d/`
 
+> **Philosophie** : les fichiers `philosophie/` de ce dossier sont désormais au format 3 (chantier `contenus-tle-philosophie`, section « Tle, Philosophie au format 3 » plus bas).
+
 | Fichier | Fiche de cours | Fiches de révision | Exercices | Questions |
 |---|---|---:|---:|---:|
 | `mathematiques/limites-et-continuite.json` | Limites et continuité (Maths) | 3 | 9 | 51 |
@@ -444,6 +446,8 @@ Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, 
 
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 
+> **Philosophie** : les fichiers `philosophie/` de ce dossier sont désormais au format 3 (chantier `contenus-tle-philosophie`, section « Tle, Philosophie au format 3 » plus bas).
+
 Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A1 et A2 n'ont pas de Physique-Chimie dans la progression.
 
 Les 6 leçons de mathématiques de A1 et A2 de ces tableaux (format v1) sont remplacées par leur version au format 3 : voir « Tle A1 et A2, mathématiques au format 3 ».
@@ -596,6 +600,39 @@ Au total, par série : 31 notions, 59 exercices, 356 questions notées, 107 ques
 Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : cerveau et aires corticales, tracé d'électroencéphalogramme et hypnogramme, système nerveux et glandes surrénales, frise en millions ou milliards d'années (`timeline` s'arrête à −3000), crânes et squelettes, caryotype, échiquier de croisement, arbre généalogique, cellule et ribosome, double hélice d'ADN, hématies falciformes.
 
 À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague T5).
+
+### Tle, Philosophie au format 3 (chantier `contenus-tle-philosophie`)
+
+Les 10 premières leçons de Philosophie de la progression DPFC 2026-2027 pour les séries A1, A2, C et D (série E ignorée, décision D3 du programme `contenus-v3-tous-niveaux`), rédigées le 2026-10-31 au format `lnclass.course-tree` v3. Chaque leçon est écrite une fois puis déclinée en un fichier par série : seuls `series_name` et le rang du sous-titre changent. « L'histoire et l'humanité » n'existe qu'en A1 et A2 ; en C et D, les leçons suivantes reculent d'un rang. **38 fichiers** (A1 10, A2 10, C 9, D 9) dans `tle-a1/`, `tle-a2/`, `tle-c/`, `tle-d/`, qui remplacent les 12 fichiers v1 du même intitulé. Aucune figure. Les questions rédigées ont un corrigé modèle, un barème et des critères ; elles notent l'argumentation, jamais l'opinion. Les thèses d'auteurs sont paraphrasées et référencées ; les textes supports sont écrits pour Lnclass.
+
+| Rang A1/A2 | Rang C/D | Fichier | Cours | Notions | Exercices | Questions | Auto |
+|---:|---:|---|---|---:|---:|---:|---:|
+| 1 | 1 | `philosophie/la-dissertation-philosophique.json` | La dissertation philosophique | 4 | 8 | 49 | 78 % |
+| 2 | 2 | `philosophie/le-commentaire-de-texte-philosophique.json` | Le commentaire de texte philosophique | 4 | 8 | 50 | 80 % |
+| 3 | 3 | `philosophie/la-connaissance-de-l-homme.json` | La connaissance de l'homme | 4 | 8 | 42 | 79 % |
+| 4 | 4 | `philosophie/la-vie-en-societe.json` | La vie en société | 3 | 7 | 42 | 79 % |
+| 5 | 5 | `philosophie/dieu-et-la-religion.json` | Dieu et la religion | 4 | 8 | 53 | 75 % |
+| 6 | — | `philosophie/l-histoire-et-l-humanite.json` | L'histoire et l'humanité | 4 | 8 | 50 | 80 % |
+| 7 | 6 | `philosophie/la-valeur-de-la-philosophie.json` | La valeur de la philosophie | 4 | 8 | 50 | 80 % |
+| 8 | 7 | `philosophie/progres-et-bonheur.json` | Progrès et bonheur | 4 | 8 | 48 | 79 % |
+| 9 | 8 | `philosophie/langage-et-verite.json` | Langage et vérité | 4 | 8 | 48 | 77 % |
+| 10 | 9 | `philosophie/la-connaissance-scientifique.json` | La connaissance scientifique | 4 | 8 | 48 | 79 % |
+
+Au total : 39 notions, 79 exercices et 480 questions par série complète (A1, A2). Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement. Chaque leçon a été relue par un relecteur indépendant (autre modèle que l'auteur) : 0 défaut bloquant, 5 à 7 défauts à corriger par leçon (attributions, barèmes, réponses justes refusées, corrections qui désignaient une proposition par son rang), tous corrigés.
+
+Les leçons restent en brouillon. À faire valider par un enseignant de philosophie :
+
+- **L1 Dissertation** : Terminologie des plans (dialectique thèse/antithèse/dépassement ou synthèse ; analytique/progressif) et lien forme du sujet → plan présenté comme tendance ; structure de l'introduction (amorce, sujet, problème/problématique, annonce du plan) ; paragraphe idée-argument-exemple-bilan avec référence d'auteur facultative.
+- **L2 Commentaire** : Explication en 5 gestes (situer, définir, reformuler/justifier, illustrer, relier) ; place de l'évaluation de l'intérêt (dernier moment du développement) ; 4 temps de l'introduction ; connecteurs (certes… mais, sans doute… mais, ainsi) ; textes supports tous écrits pour Lnclass ; Usage de « problème » (la difficulté) et « problématique » (la question) dans le commentaire, aligné sur L1.
+- **L3 Connaissance de l'homme** : Périmètre de la notion « sciences humaines » (Durkheim, 1895, « considérer les faits sociaux comme des choses ») face aux leçons 4 et 10 ; dates de 1re publication Freud (« L'Interprétation des rêves » datée 1900, « Psychopathologie de la vie quotidienne » 1901, « Une difficulté de la psychanalyse » 1917) ; inconscient présenté comme hypothèse.
+- **L4 Vie en société** : Aristote, « Politique » (IVe s. av. J.-C.), animal politique et langage ; Hobbes, « Léviathan », 1651 (guerre de chacun contre chacun, paraphrase) ; Rousseau, « Du contrat social », 1762, citation « L'homme est né libre, et partout il est dans les fers » ; Kant, « insociable sociabilité » (1784) ; Montesquieu, « De l'esprit des lois », 1748 ; travail et échanges non traités ; Kant, « insociable sociabilité » tiré d'un texte sur l'histoire (proximité avec L6) ; état de nature de Hobbes présenté comme hypothèse ; justice traitée sans auteur.
+- **L5 Dieu et la religion** : Durkheim, « Les formes élémentaires de la vie religieuse », 1912 ; étymologie de « religion » (relier / recueillir) présentée comme discutée ; Descartes, 3e Méditation (idée d'infini) ; pari de Pascal (« Pensées », 1670) comme raison d'agir ; Kant, 1781 (ni prouver ni réfuter) ; Feuerbach 1841 ; Freud, « L'Avenir d'une illusion », 1927 (sens d'illusion) ; Marx 1844, « l'opium du peuple » ; Locke 1689 et Voltaire 1763 sur la tolérance ; laïcité de l'État ivoirien (Constitution, aucun article cité) ; neutralité d'ensemble ; Kant, « faire place à la croyance » : préface de la 2e édition (1787) ; titre de Marx 1844 ; article de la Constitution ivoirienne sur la laïcité non cité.
+- **L6 Histoire et humanité** : Rousseau, perfectibilité (1755) ; Hegel, « Leçons sur la philosophie de l'histoire » (publication posthume, 1837), raison dans l'histoire et « ruse de la raison » ; Marx et Engels 1848 ; Marx, « Le 18 Brumaire de Louis Bonaparte », 1852 ; Pascal, petite cause imprévue ; objection de la contingence sans auteur ; indépendance de la Côte d'Ivoire le 7 août 1960 ; Pascal rangé dans la réponse « hasard » ; conclusion « le sens de l'histoire se construit ».
+- **L7 Valeur de la philosophie** : Platon, « Théétète », et Aristote, « Métaphysique » : l'étonnement (paraphrase) ; Descartes, lettre-préface des « Principes de la philosophie », 1647 (arbre, yeux fermés) ; Russell, « Problèmes de philosophie », 1912, chap. XV ; Tempels, « La philosophie bantoue », 1945 (Présence africaine 1949), force vitale ; Hountondji, 1976, ethnophilosophie ; Towa, 1971 ; Kagame, « La philosophie bantu-rwandaise de l'être », 1956 (paraphrase) ; équilibre des positions dans le débat sur la philosophie africaine ; la notion « philosophie, sciences et religion » face à la leçon 10.
+- **L8 Progrès et bonheur** : Condorcet, 1795, perfectibilité indéfinie (fill_blank « perfectibilité ») ; Descartes, « maîtres et possesseurs de la nature », 1637, VIe partie ; Rousseau, 1750 ; Épicure, « Lettre à Ménécée », classement des désirs ; Épictète, « Manuel », ce qui dépend de nous ; Kant, 1785, bonheur concept indéterminé ; Formule « ni naturels ni nécessaires » attribuée à la « Lettre à Ménécée » (plutôt Maxime capitale XXIX) ; « Discours sur les sciences et les arts » daté 1750 (diffusé 1751).
+- **L9 Langage et vérité** : Descartes, lettre au marquis de Newcastle, 1646 (paraphrase) ; Benveniste, abeilles (article de 1952, recueil « Problèmes de linguistique générale », 1966) ; Saussure, 1916 ; Bergson, « Le Rire », 1900, mots-étiquettes ; Platon, « Gorgias » ; Aristote, vérité-adéquation ; cohérence sans auteur ; définitions de sophisme, mensonge, erreur.
+- **L10 Connaissance scientifique** : Bachelard, 1938, obstacle épistémologique et rupture ; Claude Bernard, 1865 ; Popper, 1934, réfutabilité (cygne noir) ; Copernic, 1543 ; Rabelais, « Pantagruel », 1532, « Science sans conscience n'est que ruine de l'âme » ; faits : anophèle femelle, Aedes de jour, Jenner 1796, éradication de la variole 1980 (OMS).
+- **Toutes les leçons** : la méthode de l'introduction (amorce, sujet cité, problématique, annonce du plan) et du paragraphe argumenté, alignée sur la leçon 1 ; les barèmes des questions rédigées (1 à 8 points).
 
 ### 1ère — `lecons-traitees/1ere-a1/`, `1ere-a2/`, `1ere-c/`, `1ere-d/`, `1ere/`
 
