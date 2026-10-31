@@ -68,6 +68,14 @@ module Queries
         assert_nil call(nil).interros.second.exercises.first.hint
       end
 
+      test "chaque question porte son indice (ADR-0120), nil s'il est vide" do
+        @e1.questions.order(:position).first.update!(hint: "Pense au rapport.")
+
+        questions = call(nil).interros.first.exercises.first.questions
+
+        assert_equal [ "Pense au rapport.", nil ], questions.map(&:hint)
+      end
+
       test "les sujets de devoir forment une section à part, un sujet sans exercice visible n'y figure pas" do
         subject = create_subject(course: @course, title: "Sujet A", notions: "Thalès, réciproque")
         create_subject(course: @course, title: "Sujet vide", notions: "Rien")

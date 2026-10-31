@@ -776,6 +776,58 @@ class Catalog::CoursesControllerTest < ActionDispatch::IntegrationTest
     assert_select "a[href='#{assignments_href(@course.slug)}']", 0
   end
 
+  # Lot H : un seul bouton « Indice » et une seule boîte par exercice ; l'indice de l'exercice d'abord, puis celui de chaque question, lettré.
+  def hint_sheet_exercise(hint: nil, question_hints: {})
+    exercise = create_exercise(essential: create_essential(course: @course, name: "Notion indices"), hint:, questions: 2)
+    exercise.questions.order(:position).each_with_index { |question, index| question.update!(hint: question_hints[index]) }
+    exercise
+  end
+
+  test "Lot H: an exercise without its own hint but with a question hint shows « Indice » and the lettered line" do
+    exercise = hint_sheet_exercise(question_hints: { 1 => "Relis la propriété." })
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    frame = "turbo-frame#sheet-exercise-#{exercise.public_id}"
+    assert_select "#{frame} button.ps-btn--hint[aria-controls=?]", "hint-#{exercise.public_id}", text: "Indice"
+    assert_select "#{frame} #hint-#{exercise.public_id}.ps-hint[hidden]", text: "Indice : b. Relis la propriété."
+    assert_select "#{frame} .ps-hint", 1
+  end
+
+  test "Lot H: the hint box reads the exercise hint first, then one line per question that has one" do
+    exercise = hint_sheet_exercise(hint: "Pense à Thalès.", question_hints: { 0 => "Vois le triangle.", 1 => "<b>Calcule</b>" })
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    box = css_select("#hint-#{exercise.public_id}").first
+    assert_equal "Indice : Pense à Thalès. a. Vois le triangle. b. <b>Calcule</b>", box.text.squish
+    assert_select "#hint-#{exercise.public_id} b", 1, "seul « Indice : » est en gras : le texte des indices est échappé"
+  end
+
+  test "Lot H: an exercise and questions without any hint have neither the button nor the box" do
+    exercise = hint_sheet_exercise
+    sign_in_as create_student_for(@course)
+
+    get course_path(@course.slug)
+
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id}"
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} .ps-hint", 0
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} button.ps-btn--hint", 0
+  end
+
+  test "Lot H: the teacher reads no hint box even when a question has a hint" do
+    exercise = hint_sheet_exercise(hint: "Pense à Thalès.", question_hints: { 0 => "Vois le triangle." })
+    sign_in_as create_teacher(material: @svt, classrooms: [ create_classroom(level: @tle, series: @course.series) ])
+
+    get course_path(@course.slug)
+
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id}"
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} .ps-hint", 0
+    assert_select "turbo-frame#sheet-exercise-#{exercise.public_id} button.ps-btn--hint", 0
+  end
+
   test "a draft or archived course, or an unknown slug, answers 404 outside the team (CA-04)" do
     [ create_student_for(@course), create_teacher ].each do |user|
       sign_in_as user
