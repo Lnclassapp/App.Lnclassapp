@@ -1,20 +1,16 @@
-<%# 🌐 UI · catalog/courses/sheets/_teacher_bar — la barre de l'enseignant sous un exercice : ses bascules d'assignation, une par classe %>
-<%# Rôle : à la place de « Vérifier ma réponse » et « Indice » ; les bascules d'aujourd'hui (classroom/assignments/_toggle), le Lot D les remplace par « Assigner à <classe> » %>
+<%# 🌐 UI · catalog/courses/sheets/_teacher_bar — la barre de l'enseignant sous un exercice : « Assigner à <classe> », une par classe %>
+<%# Rôle : à la place de « Vérifier ma réponse » et « Indice », dans la barre d'actions de la feuille ; la bascule d'assignation (classroom/assignments/_toggle, mode feuille) %>
 <%# ADR  : 0048, 0072 · UDR : XXXX-feuilles-prepare-interros-et-devoirs §3 (Vue enseignant) · %>
 <%# locals: (exercise:, targets:, classrooms:) -%>
 <% if targets && classrooms.any? %>
-  <ul class="w-full divide-y divide-line rounded-ln border border-line">
-    <% classrooms.each do |target| %>
-      <% assignment = targets.states[[ target.public_id, exercise.public_id ]] %>
-      <%# Les exercices se rendent dans l'ordre de la page : le premier « Assigner » est plein (UDR-0134 §3.13). %>
-      <% first_assign = assignment.nil? && !@primary_assign_taken %>
-      <% @primary_assign_taken ||= first_assign %>
-      <li>
-        <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
-                   assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
-                   assignment_public_id: assignment&.assignment_public_id, due_on: assignment&.due_on,
-                   needs_session_days: target.needs_session_days, compact: true, primary: first_assign %>
-      </li>
-    <% end %>
-  </ul>
+  <% classrooms.each do |target| %>
+    <% assignment = targets.states[[ target.public_id, exercise.public_id ]] %>
+    <%# Les exercices se rendent dans l'ordre de la page : le premier « Assigner » est plein (UDR-0134 §3.13). %>
+    <% first_assign = assignment.nil? && !@primary_assign_taken %>
+    <% @primary_assign_taken ||= first_assign %>
+    <%= render "classroom/assignments/toggle", classroom_public_id: target.public_id, assignable_type: "Exercise",
+               assignable_key: exercise.public_id, assignable_name: exercise.title, classroom_name: target.name,
+               assignment_public_id: assignment&.assignment_public_id, due_on: assignment&.due_on,
+               needs_session_days: target.needs_session_days, sheet: true, primary: first_assign %>
+  <% end %>
 <% end %>

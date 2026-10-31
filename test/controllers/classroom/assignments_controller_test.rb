@@ -391,10 +391,13 @@ class Classroom::AssignmentsControllerTest < ActionDispatch::IntegrationTest
     get course_path(@course.slug)
 
     assert_response :success
-    assert_select "#prepare-interros li [id^='assignment_']", 4 # 2 exercices x 2 classes
-    assert_select "#prepare-interros .ui-button-primary", 1
-    assert_select "##{toggle_id('Exercise', @exercise.public_id, classroom: without_days)} .ui-button-primary", text: /#{tl('toggle.assign')}/
-    assert_select "##{toggle_id('Exercise', bilan.public_id, classroom: without_days)} .ui-button-secondary", text: /#{tl('toggle.assign')}/
+    # Feuille de la leçon (prepare-interros-cahier, Lot D) : « Assigner à <classe> » en bouton de la feuille, le premier plein.
+    assert_select "#prepare-interros [id^='assignment_']", 4 # 2 exercices x 2 classes
+    assert_select "#prepare-interros .ps-btn--primary", 1
+    assert_select "##{toggle_id('Exercise', @exercise.public_id, classroom: without_days)} .ps-btn--primary",
+                  text: tl("toggle.sheet_assign", classroom: "6ème 3")
+    assert_select "##{toggle_id('Exercise', bilan.public_id, classroom: without_days)} .ps-btn:not(.ps-btn--primary)",
+                  text: tl("toggle.sheet_assign", classroom: "6ème 3")
   end
 
   test "the days modal: 404 for an unknown or unpublished exercise or an archived classroom, 403 for the team or another teacher" do

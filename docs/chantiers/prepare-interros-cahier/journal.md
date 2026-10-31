@@ -84,6 +84,18 @@ Découvertes sur du code existant, pièges, dépendances non documentées.
   `revision_thales_document`. Un test par `RunImport` couvre l'import Thalès (indices, 3 sujets), CA-9, un type inattendu, un texte trop
   long et le volume.
 
+### Lot D — assigner depuis la feuille
+
+- La bascule `classroom/assignments/_toggle` a un mode `sheet` (local `sheet:`, ou paramètre `sheet=1`) : « Assigner à <classe> » (`.ps-btn`, le
+  premier de la page plein) puis « ✓ Assigné à <classe> » (`role="status"`, avec l'échéance) et « Retirer ». Les streams `create` / `archive`
+  rendent la bascule sans le local `sheet` : le mode voyage donc avec la requête, comme `compact` (le formulaire poste `sheet=1`).
+- Fichiers ajoutés au lot (hors fiche, inévitables) : `config/locales/classroom/assignments.fr.yml` (`sheet_assign`, `sheet_assigned`,
+  `sheet_archive`) ; tests adaptés aux nouveaux libellés et à l'absence de liste `ul > li` : `catalog_assignment_test`, `classroom_essential_test`,
+  `teacher_first_path_desktop_test`, `assignments_controller_test`.
+- Limite connue : la modale des jours (`classroom/assignments/new.html.erb`) ne renvoie que `compact=1`, pas `sheet=1` ; la première assignation d'une
+  classe sans jour rend donc un instant la ligne compacte, puis le rafraîchissement par morphing (`@days_saved`) remet la feuille.
+- Les gabarits d'`exercises/show` (page de l'exercice) restent en ligne compacte : le mode `sheet` ne les touche pas.
+
 ## Dette laissée derrière
 
 Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
@@ -93,7 +105,7 @@ Ce qu'on a consciemment choisi de ne pas faire, et ce qu'il faudra reprendre.
 | Navigation aux flèches dans un `radiogroup` (QCM, Vrai ou faux) | La maquette n'a que le clic et le Tab ; chaque proposition reste un bouton atteignable | À décider |
 | Brouillon local des questions de type `:other` | Hors maquette ; leur interaction d'aujourd'hui reste telle quelle | À décider |
 | Clés `assessment.exercises.card.*` de la carte de leçon, plus utilisées | Fichiers de langue au Lot 0 | Nettoyage à la clôture |
-| `sheets/_teacher_bar.html.erb` : version minimale (bascules d'aujourd'hui) | Remplie par le Lot D | Lot D |
+| `sheets/_teacher_bar.html.erb` : version minimale (bascules d'aujourd'hui) | Remplie par le Lot D | Soldé au Lot D |
 
 ## Clôture
 
