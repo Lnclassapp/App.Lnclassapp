@@ -8,7 +8,7 @@
 <%# locals: (kind:, material:, header_left:, header_right:, title:, exercises:, footer:, sheet_id:, reset_label: nil, hand_ins: {}, return_to: "sheet", subtitle: nil, box_label: nil, box_text: nil, mode: :student, targets: nil, classrooms: []) -%>
 <% interactive = %i[student visitor].include?(mode) %>
 <%# owner : à qui est le brouillon du navigateur (clé lnclass-prepare-<owner>-<exercice>) : l'élève connecté, ou « visitor » ; lu ici, comme _batch_bar lit current_actor, pour ne changer ni les appelants ni leurs locals %>
-<% owner = current_actor.user_id || "visitor" %>
+<% owner = current_actor&.user_id || "visitor" %>
 <% data = interactive ? { controller: "prepare-sheet", prepare_sheet_owner_value: owner } : {} %>
 <% passed = exercises.count { it.copy&.passed } %>
 <%= tag.div id: sheet_id, class: "ps-sheet", data: data do %>
