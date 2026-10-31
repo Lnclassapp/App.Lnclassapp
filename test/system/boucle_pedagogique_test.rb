@@ -291,9 +291,8 @@ class BouclePedagogiqueTest < ApplicationSystemTestCase
     assert_selector "#prepare-interros"
 
     # La notion n'a plus de page (ADR-0113) : « Prépare interros » de la leçon porte l'exercice, et chaque classe y a son « Assigner ».
-    # UDR-0145 §3.2 bis : l'ancre de la notion est sur la première carte de la grille.
-    assert_selector "#prepare-interros-grid li:has(> #notion-#{Orm::Essential.find_by!(name: ESSENTIAL).slug})", text: EXERCISE
     exercise = Orm::Exercise.find_by!(title: EXERCISE)
+    assert_selector ".ps-sheet#notion-#{Orm::Essential.find_by!(name: ESSENTIAL).slug} #sheet-exercise-#{exercise.public_id}"
     assert_no_page_reload do
       within("[id='assignment_#{classroom.public_id}_Exercise_#{exercise.public_id}']") { click_on "Assigner" }
       # No session days yet: « Assigner » opens the days modal (UDR-0062 §3.4), which asks for a day (no « Plus tard »).

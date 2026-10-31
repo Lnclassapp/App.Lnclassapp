@@ -324,6 +324,102 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Pendant un match, tu repères auteur, receveur et effet d'une force.",
+            "questions": [
+              {
+                "content": "Un ballon roule vers le but quand le gardien plonge et détourne le tir. L'auteur de la force est ___, le receveur est ___, et l'effet sur la direction du ballon est ___.",
+                "question_type": "select",
+                "hint": "Avant l'action du gardien, le ballon bougeait-il déjà ?",
+                "explanation": "Étape 1 — Repérer : le gardien agit sur le ballon, il est l'auteur et le ballon est le receveur. Étape 2 — Comparer : le ballon roulait déjà et il change de direction. Étape 3 — Nommer : c'est une modification du mouvement, pas une mise en mouvement.",
+                "answers": [
+                  {
+                    "content": "le ballon",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le gardien",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le but",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le but",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "le gardien",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "le ballon",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "une mise en mouvement",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "une déformation",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "une modification du mouvement",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "On écrase une éponge dans la main, puis elle reprend sa forme. Quel effet de la force observe-t-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer : l'éponge change de forme pendant que la main appuie. Étape 2 — Nommer : c'est une déformation, qui disparaît quand la force cesse. Une force peut déformer un corps de façon durable ou non.",
+                "answers": [
+                  {
+                    "content": "Une mise en mouvement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une modification du mouvement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une déformation qui disparaît",
+                    "correct": true
+                  },
+                  {
+                    "content": "Aucun effet",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un cycliste freine et sa vitesse diminue : la force des freins a mis le vélo en mouvement.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Comparer : le vélo bougeait déjà avant l'action des freins. Étape 2 — Nommer : les freins modifient son mouvement (la vitesse diminue), ils ne le mettent pas en mouvement.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -471,6 +567,82 @@
                   {
                     "content": "Le ballon subit encore la force du pied, qui continue à le pousser vers le haut",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Autour d'un ballon, tu classes des actions mécaniques.",
+            "questions": [
+              {
+                "content": "Le pied frappe le ballon : action ___, force ___. La Terre attire le ballon en l'air : action ___, force ___.",
+                "question_type": "select",
+                "hint": "Demande-toi si l'auteur touche le receveur, puis si la zone d'action est petite ou étendue.",
+                "explanation": "Étape 1 — Pied et ballon : le pied touche le ballon (contact) sur une toute petite zone (force localisée). Étape 2 — Terre et ballon : la Terre n'est pas en contact avec le ballon en l'air (action à distance), et le poids est réparti dans tout le corps (force répartie).",
+                "answers": [
+                  {
+                    "content": "à distance",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "de contact",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "répartie",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "localisée",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "de contact",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "à distance",
+                    "correct": true,
+                    "blank": 2
+                  },
+                  {
+                    "content": "localisée",
+                    "correct": false,
+                    "blank": 3
+                  },
+                  {
+                    "content": "répartie",
+                    "correct": true,
+                    "blank": 3
+                  }
+                ]
+              },
+              {
+                "content": "Comment classe-t-on le poids d'un corps ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Se demander : la Terre touche-t-elle le corps ? Non, elle agit à distance. Étape 2 — Observer : le poids s'exerce dans tout le volume du corps, il est réparti.",
+                "answers": [
+                  {
+                    "content": "Action de contact, localisée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Action à distance, localisée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Action de contact, répartie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Action à distance, répartie",
+                    "correct": true
                   }
                 ]
               }
@@ -658,6 +830,78 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Tu donnes les caractéristiques d'une force, avec $g = 10$ N/kg.",
+            "questions": [
+              {
+                "content": "Le poids d'un sac de crampons suspendu a pour point d'application ___, pour droite d'action ___ et pour sens ___.",
+                "question_type": "select",
+                "hint": "Le poids est l'attraction de la Terre sur le sac.",
+                "explanation": "Étape 1 — Repérer : le poids s'applique au centre de gravité G du sac. Étape 2 — Droite d'action : la verticale passant par G. Étape 3 — Sens : vers le bas, vers la Terre.",
+                "answers": [
+                  {
+                    "content": "le point de suspension",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le centre de gravité G du sac",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le sol",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "l'horizontale",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "une oblique",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "la verticale",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "vers le haut",
+                    "correct": false,
+                    "blank": 2
+                  },
+                  {
+                    "content": "vers le bas",
+                    "correct": true,
+                    "blank": 2
+                  },
+                  {
+                    "content": "vers la droite",
+                    "correct": false,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Un sac a une masse de 2,5 kg. Quelle est l'intensité de son poids ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "hint": "Utilise $P = m \\times g$ avec la masse en kilogrammes.",
+                "explanation": "Étape 1 — Relever : $m = 2{,}5$ kg et $g = 10$ N/kg. Étape 2 — Calculer : $P = m \\times g = 2{,}5 \\times 10 = 25$ N. Étape 3 — Conclure : l'intensité du poids est 25 N, pas 2,5 N.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -828,6 +1072,59 @@
                   {
                     "content": "Sa droite d'action est horizontale",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu représentes des forces par des vecteurs à l'échelle.",
+            "questions": [
+              {
+                "content": "Échelle : 1 cm pour 20 N. Longueur du vecteur de la force $F_1$ = 50 N : ___   Longueur du vecteur de la force $F_2$ = 120 N : ___",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "hint": "Longueur du vecteur = intensité divisée par le nombre de newtons que représente 1 cm.",
+                "explanation": "Étape 1 — Lire : l'échelle est 1 cm pour 20 N. Étape 2 — Calculer : $F_1$, 50 ÷ 20 = 2,5 cm ; $F_2$, 120 ÷ 20 = 6 cm.",
+                "answers": [
+                  {
+                    "content": "2.5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un vecteur force mesure 2,5 cm. L'échelle est 1 cm pour 40 N. Quelle est l'intensité de la force ?",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 0,
+                "hint": "Pour lire une force sur un dessin, multiplie la longueur par les newtons que représente 1 cm.",
+                "explanation": "Étape 1 — Lire : l'échelle est 1 cm pour 40 N. Étape 2 — Calculer : intensité = longueur × newtons par cm = 2,5 × 40 = 100 N.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le poids d'un ballon de masse 0,6 kg est représenté à l'échelle 1 cm pour 2 N ($g = 10$ N/kg). Quelle est la longueur du vecteur ?",
+                "question_type": "numeric",
+                "unit": "cm",
+                "tolerance": 0,
+                "hint": "Calcule d'abord l'intensité du poids en newtons.",
+                "explanation": "Étape 1 — Calculer l'intensité : $P = m \\times g = 0{,}6 \\times 10 = 6$ N. Étape 2 — Lire l'échelle : 1 cm pour 2 N. Étape 3 — Calculer la longueur : 6 ÷ 2 = 3 cm.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
                   }
                 ]
               }

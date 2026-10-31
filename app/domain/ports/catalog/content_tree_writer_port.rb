@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Ports::Catalog::ContentTreeWriterPort
 # Rôle : contrat d'écriture en masse d'arbres de contenu déjà validés et identifiés, tout en draft
-# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116
+# ADR  : 0035, 0039, 0068, 0091, 0105, 0113, 0115, 0116, 0119-entrainement-de-notion-corrige-sans-trace, 0120-questions-a-plusieurs-cases-et-indice, 0121
 module Ports
   module Catalog
     module ContentTreeWriterPort
@@ -10,14 +10,17 @@ module Ports
 
       # Nœuds que remplissent les imports I1 à I3. slug et public_id sont tirés par le domaine avant l'insertion.
       # course_id (resp. essential_id) vaut nil pour un nœud porté par son parent, l'id du parent existant sinon.
-      AnswerNode = Data.define(:position, :content, :correct, :match_content) do
-        def initialize(match_content: nil, **) = super
+      # blank : la case (0 à 5) de la réponse, 0 pour une question à une seule case.
+      AnswerNode = Data.define(:position, :content, :correct, :match_content, :blank) do
+        def initialize(match_content: nil, blank: 0, **) = super
       end
       # image_description : l'image annoncée par l'import, jamais l'image (ADR-0105 §4.6) ; nil sans image.
       # ADR-0115 : points (BigDecimal, 1 par défaut), unit et starter (nil s'ils sont vides), criteria (sans critère vide).
+      # hint : l'indice facultatif (nil s'il est vide).
       QuestionNode = Data.define(:position, :content, :explanation, :question_type, :answers, :numeric_tolerance, :image_description,
-                                 :points, :unit, :starter, :criteria) do
-        def initialize(numeric_tolerance: nil, image_description: nil, points: BigDecimal("1"), unit: nil, starter: nil, criteria: [], **) = super
+                                 :points, :unit, :starter, :criteria, :hint) do
+        def initialize(numeric_tolerance: nil, image_description: nil, points: BigDecimal("1"), unit: nil, starter: nil, criteria: [], hint: nil,
+                       **) = super
 
         # Une question d'un fichier d'import déjà validé (ContentNode), commune aux trois imports. L'ancienne application
         # nomme is_correct ce que le schéma nomme correct ; hors choix, chaque élément est juste (ADR-0091 §4.2).
@@ -27,24 +30,31 @@ module Ports
           answers = Array(question["answers"]).each_with_index.map do |answer, rank|
             AnswerNode.new(position: rank + 1, content: answer["content"].strip,
                            correct: !choice || answer.fetch("correct") { answer["is_correct"] } == true,
-                           match_content: answer["match"].to_s.strip.presence)
+                           match_content: answer["match"].to_s.strip.presence, blank: answer["blank"] || 0)
           end
           new(position:, content: question["content"].strip, explanation: question["explanation"].to_s.strip.presence,
               question_type: question["question_type"], numeric_tolerance: question["tolerance"]&.then { BigDecimal(it.to_s) }, answers:,
               image_description: question.dig("image", "description")&.squish,
               points: question["points"]&.then { BigDecimal(it.to_s) } || BigDecimal("1"), unit: question["unit"].to_s.strip.presence,
-              starter: question["starter"].to_s.strip.presence, criteria: Array(question["criteria"]).map { it.to_s.strip }.reject(&:empty?))
+              starter: question["starter"].to_s.strip.presence, criteria: Array(question["criteria"]).map { it.to_s.strip }.reject(&:empty?),
+              hint: question["hint"].to_s.strip.presence)
         end
       end
       # position : indicative ; l'écrivain numérote les exercices par leçon, dans l'ordre où il les reçoit.
       # statement_blocks : le sujet en blocs, déjà validé par l'adaptateur (ADR-0115) ; nil sans blocs.
       # figure_key (v3, ADR-0116 §4.3) : la clé de la figure de la leçon citée par l'exercice ; nil sans figure.
+      # hint (ADR-0121 §4) : l'indice montré avant la vérification, déjà nettoyé (1 à 400 caractères) ; nil sans indice.
       ExerciseNode = Data.define(:public_id, :essential_id, :title, :statement, :exercise_type, :position, :questions, :statement_blocks,
-                                 :figure_key) do
-        def initialize(statement_blocks: nil, figure_key: nil, **) = super
+                                 :figure_key, :hint) do
+        def initialize(statement_blocks: nil, figure_key: nil, hint: nil, **) = super
       end
+      # Un sujet de devoir (ADR-0121 §4) : title (1 à 200), notions (1 à 600, la phrase « Notions mobilisées »), position
+      # (indicative : l'écrivain numérote les sujets de la leçon de 1, dans l'ordre reçu) et ses exercices, qui n'ont pas de notion
+      # (essential_id nil, la base le garantit par exercises_subject_without_essential). course_id : l'id de la leçon, nil si elle est créée.
+      SubjectNode = Data.define(:course_id, :position, :title, :notions, :exercises)
       # Une notion v3 (ADR-0116 §4.1, §4.3) : sheet est la fiche au gabarit fixe, { remember:, method: [], example: { statement:, steps: [] },
-      # pitfall:, figure_key: } (clés texte, jsonb tel quel) ; exercises : l'exercice de la notion. Pas de content (retiré).
+      # pitfall:, figure_key:, practice: (facultatif : l'entraînement de la notion, ADR-0119) } (clés texte, jsonb tel quel) ; exercises : l'exercice
+      # de la notion. Pas de content (retiré).
       NotionNode = Data.define(:slug, :course_id, :name, :position, :sheet, :exercises)
       # existing_id : l'id de la notion déjà en base d'une leçon réimportée (ADR-0113 §4.4) ; nil pour une notion à créer.
       EssentialNode = Data.define(:slug, :course_id, :name, :subtitle, :content, :position, :exercises, :existing_id) do
@@ -54,10 +64,11 @@ module Ports
       # existing_id : l'id d'une leçon déjà en base, réimportée : ni elle ni ses notions ne sont écrites, ses exercices sont archivés
       # puis remplacés par ceux du nœud ; nil pour une leçon à créer.
       # v3 : figures (Array<Hash> clés texte, jsonb tel quel), sheet_theme ("blue", "teal" ou "burgundy") et notions (NotionNode) ;
-      # un nœud v3 laisse essentials vide.
+      # un nœud v3 laisse essentials vide. subjects (SubjectNode, ADR-0121) : les sujets de devoir de la leçon, écrits après
+      # elle et avant leurs exercices ; vide par défaut.
       CourseNode = Data.define(:slug, :name, :subtitle, :content, :level_id, :series_id, :material_id, :essentials, :exercises,
-                               :existing_id, :figures, :sheet_theme, :notions) do
-        def initialize(exercises: [], existing_id: nil, figures: [], sheet_theme: "blue", notions: [], **) = super
+                               :existing_id, :figures, :sheet_theme, :notions, :subjects) do
+        def initialize(exercises: [], existing_id: nil, figures: [], sheet_theme: "blue", notions: [], subjects: [], **) = super
       end
 
       # Appelé dans une transaction ; une table après l'autre, parents d'abord (insert_all ou COPY, ADR-0068) ; lève si la base refuse.
@@ -70,7 +81,8 @@ module Ports
       # ADR-0116 §4.4 : remplace entière une leçon encore en brouillon, dans la transaction de l'appelant, la leçon verrouillée (FOR UPDATE) :
       # exercices, questions, réponses, séances et tentatives sur ces exercices, notions et leurs lectures, puis réécriture depuis `tree`
       # (CourseNode v3 avec existing_id: course_id). La leçon garde son id et son slug. Lève si un contenu n'est plus en brouillon.
-      # → { courses:, essentials:, exercises:, questions:, answers: } (lignes créées)
+      # Les sujets du nœud (tree.subjects) sont réécrits avec la leçon : l'indice (ExerciseNode#hint) et le rattachement au sujet suivent.
+      # → { courses:, essentials:, exercises:, questions:, answers:, subjects: } (lignes créées)
       def replace_draft(course_id:, tree:)
         raise NotImplementedError, "#{self.class} doit implémenter #replace_draft"
       end

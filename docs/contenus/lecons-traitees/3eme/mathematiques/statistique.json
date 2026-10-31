@@ -229,6 +229,87 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Pendant les vacances, 50 élèves ont déclaré le nombre de livres lus : 0 livre (effectif 5), 1 livre (effectif 20), 2 livres (effectif 15) et 3 livres (effectif inconnu).",
+            "questions": [
+              {
+                "content": "Quel est l'effectif des élèves qui ont lu 3 livres ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "La somme de tous les effectifs doit être égale à l'effectif total $N = 50$.",
+                "explanation": "Étape 1 — Repérer : le caractère est le nombre de livres lus, avec les valeurs 0, 1, 2 et 3. Étape 2 — Compter : l'effectif total est $N = 50$ et la somme des effectifs doit être égale à $N$. Les effectifs connus font $5 + 20 + 15 = 40$, donc l'effectif de 3 livres est $50 - 40 = 10$. Étape 4 — Vérifier : $5 + 20 + 15 + 10 = 50$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule les fréquences en pourcentage. 0 livre : ___ %   1 livre : ___ %   2 livres : ___ %",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "hint": "Divise chaque effectif par l'effectif total $N = 50$, puis multiplie par 100.",
+                "explanation": "Étape 1 — Repérer : le caractère est le nombre de livres lus, avec $N = 50$. Étape 2 — Compter : les effectifs sont 5, 20 et 15. Étape 3 — Calculer : $\\frac{5}{50} = 0{,}1$, soit 10 % ; $\\frac{20}{50} = 0{,}4$, soit 40 % ; $\\frac{15}{50} = 0{,}3$, soit 30 %. Étape 4 — Vérifier : avec les 20 % de la valeur 3 ($\\frac{10}{50} = 0{,}2$), $10 + 40 + 30 + 20 = 100$ %.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "40",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "30",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Dans un tableau d'effectifs et de fréquences, la somme des effectifs est égale à ___ et la somme des fréquences est égale à ___.",
+                "question_type": "select",
+                "hint": "Relis la définition de l'effectif total $N$, puis celle de la fréquence $\\dfrac{\\text{effectif}}{N}$.",
+                "explanation": "Étape 4 — Vérifier : la somme des effectifs est l'effectif total $N$ (ici 50), et la somme des fréquences vaut 1, soit 100 %. Ici : $0{,}1 + 0{,}4 + 0{,}3 + 0{,}2 = 1$. Piège : mélanger les deux sommes, ou croire que la somme des fréquences vaut $N$.",
+                "answers": [
+                  {
+                    "content": "$N$",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le plus grand effectif",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le nombre de valeurs du caractère",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1, soit 100 %",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "$N$",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "le nombre de valeurs du caractère",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -369,6 +450,86 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Une équipe de football a marqué le nombre de buts suivant en 10 matchs : 0 but (effectif 2), 1 but (effectif 4), 2 buts (effectif 3) et 4 buts (effectif 1).",
+            "questions": [
+              {
+                "content": "Étape de multiplication : 1 × 4 = ___   2 × 3 = ___   4 × 1 = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Multiplie la valeur (le nombre de buts) par son effectif (le nombre de matchs).",
+                "explanation": "Étape 1 — Multiplier chaque valeur par son effectif : $0 \\times 2 = 0$ ; $1 \\times 4 = 4$ ; $2 \\times 3 = 6$ ; $4 \\times 1 = 4$. On obtient donc 4, 6 et 4 pour les trois dernières valeurs.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Calcule le nombre moyen de buts par match.",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Divise la somme des produits par l'effectif total, pas par le nombre de valeurs différentes.",
+                "explanation": "Étape 1 — Multiplier : $0 \\times 2 = 0$ ; $1 \\times 4 = 4$ ; $2 \\times 3 = 6$ ; $4 \\times 1 = 4$. Étape 2 — Additionner : $0 + 4 + 6 + 4 = 14$. Étape 3 — Calculer l'effectif total : $N = 2 + 4 + 3 + 1 = 10$. Étape 4 — Diviser : $\\frac{14}{10} = 1{,}4$ but par match. Piège : $\\frac{0+1+2+4}{4} = 1{,}75$ ignore les effectifs.",
+                "answers": [
+                  {
+                    "content": "1.4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Des colis sont regroupés en classes de masse (en kg) : $[0\\,;\\,20[$ effectif 6, $[20\\,;\\,40[$ effectif 10, $[40\\,;\\,60[$ effectif 4. Quels sont les centres des classes ? ___ kg   ___ kg   ___ kg",
+                "question_type": "numeric",
+                "unit": "kg",
+                "tolerance": 0,
+                "explanation": "Pour une série en classes, on remplace chaque classe par son centre $\\frac{a+b}{2}$ : $\\frac{0+20}{2} = 10$ ; $\\frac{20+40}{2} = 30$ ; $\\frac{40+60}{2} = 50$. Ces centres servent à l'étape 1 — Multiplier chaque centre par l'effectif de sa classe.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "30",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "50",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Avec les classes $[0\\,;\\,20[$ effectif 6, $[20\\,;\\,40[$ effectif 10 et $[40\\,;\\,60[$ effectif 4, calcule la moyenne approchée de la masse des colis.",
+                "question_type": "numeric",
+                "unit": "kg",
+                "tolerance": 0,
+                "hint": "Utilise les centres 10, 30 et 50 comme valeurs, avec les effectifs des classes.",
+                "explanation": "Étape 1 — Multiplier chaque centre par son effectif : $10 \\times 6 = 60$ ; $30 \\times 10 = 300$ ; $50 \\times 4 = 200$. Étape 2 — Additionner : $60 + 300 + 200 = 560$. Étape 3 — Calculer l'effectif total : $N = 6 + 10 + 4 = 20$. Étape 4 — Diviser : $\\frac{560}{20} = 28$ kg.",
+                "answers": [
+                  {
+                    "content": "28",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -502,6 +663,98 @@
                   },
                   {
                     "content": "2",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Un magasin relève la pointure des chaussures vendues en une journée : 38 (effectif 4), 39 (effectif 7), 40 (effectif 12), 41 (effectif 9) et 43 (effectif 3).",
+            "questions": [
+              {
+                "content": "Le mode de cette série est la pointure ___.",
+                "question_type": "select",
+                "hint": "Cherche d'abord le plus grand effectif, puis lis la pointure qui lui correspond.",
+                "explanation": "Étape 1 — Repérer : le plus grand effectif du tableau est 12. Étape 2 — Lire : l'effectif 12 correspond à la pointure 40, donc le mode est 40. Piège : 12 est l'effectif du mode, pas le mode ; 43 est la plus grande pointure, pas la plus fréquente.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  },
+                  {
+                    "content": "12",
+                    "correct": false
+                  },
+                  {
+                    "content": "43",
+                    "correct": false
+                  },
+                  {
+                    "content": "39",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule l'étendue. Plus grande pointure : ___   Plus petite pointure : ___   Étendue : ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "L'étendue est une différence entre la plus grande et la plus petite valeur.",
+                "explanation": "Étape 3 — Calculer l'étendue : la plus grande pointure est 43, la plus petite est 38, donc l'étendue est $43 - 38 = 5$. Piège : $43 + 38 = 81$ est une somme, pas un écart.",
+                "answers": [
+                  {
+                    "content": "43",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "38",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Le mode de la série est 12, car c'est le plus grand nombre du tableau des effectifs. Vrai ou faux ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le plus grand effectif est bien 12. Étape 2 — Lire la valeur qui correspond : c'est la pointure 40. Le mode est donc 40 et non 12 : 12 est un effectif, le mode est une valeur. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le temps d'attente (en min) de 17 clients est regroupé en classes de même amplitude : $[0\\,;\\,5[$ effectif 3, $[5\\,;\\,10[$ effectif 8, $[10\\,;\\,15[$ effectif 6. La classe modale est ___.",
+                "question_type": "select",
+                "hint": "La classe modale est la classe de plus grand effectif.",
+                "explanation": "Étape 1 — Repérer : le plus grand effectif est 8. Étape 2 — Lire la classe qui correspond : c'est $[5\\,;\\,10[$, donc la classe modale est $[5\\,;\\,10[$. Piège : 8 est un effectif, pas une classe.",
+                "answers": [
+                  {
+                    "content": "$[5\\,;\\,10[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$[0\\,;\\,5[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[10\\,;\\,15[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "8",
                     "correct": false
                   }
                 ]
@@ -647,6 +900,75 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Sept élèves ont obtenu les notes sur 20 suivantes : 11 ; 4 ; 16 ; 9 ; 13 ; 7 ; 12.",
+            "questions": [
+              {
+                "content": "Après avoir rangé les notes, indique l'effectif total et le rang de la valeur du milieu. $N$ = ___   rang = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Quand $N$ est impair, le rang du milieu est $\\frac{N+1}{2}$.",
+                "explanation": "Étape 1 — Ranger dans l'ordre croissant : 4 ; 7 ; 9 ; 11 ; 12 ; 13 ; 16. Étape 2 — Calculer $N = 7$, impair : le rang du milieu est $\\frac{7+1}{2} = 4$.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la médiane de ces sept notes ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Range d'abord les notes, puis lis la valeur de rang 4.",
+                "explanation": "Étape 1 — Ranger : 4 ; 7 ; 9 ; 11 ; 12 ; 13 ; 16. Étape 2 — Calculer $N = 7$, impair : le rang du milieu est 4. Étape 3 — Lire la valeur de rang 4 : c'est 11. Étape 4 — Conclure : la médiane est 11. Piège : 9, au milieu de la liste non rangée (11 ; 4 ; 16 ; 9 ; 13 ; 7 ; 12), est une erreur.",
+                "answers": [
+                  {
+                    "content": "11",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Six élèves ont obtenu 5 ; 15 ; 9 ; 12 ; 8 ; 10. Après avoir rangé, quelles sont les deux valeurs centrales ? ___ et ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Pour $N$ pair, les rangs du milieu sont $\\frac{N}{2}$ et $\\frac{N}{2}+1$.",
+                "explanation": "Étape 1 — Ranger : 5 ; 8 ; 9 ; 10 ; 12 ; 15. Étape 2 — Calculer $N = 6$, pair : les rangs du milieu sont $\\frac{6}{2} = 3$ et 4. Étape 3 — Lire les deux valeurs centrales : les valeurs de rang 3 et 4 sont 9 et 10.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour la série 5 ; 8 ; 9 ; 10 ; 12 ; 15, quelle est la médiane ?",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Fais la moyenne des deux valeurs centrales.",
+                "explanation": "Étape 1 — Ranger : la série est déjà rangée. Étape 2 — Calculer $N = 6$, pair : les rangs du milieu sont 3 et 4. Étape 3 — Lire : les valeurs centrales sont 9 et 10. Étape 4 — Conclure : la médiane est $\\frac{9 + 10}{2} = 9{,}5$.",
+                "answers": [
+                  {
+                    "content": "9.5",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -775,6 +1097,93 @@
                   {
                     "content": "Faux",
                     "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans un lycée de 200 élèves, on a relevé le mode de transport : bus 90 élèves, marche 60 élèves, vélo 30 élèves, moto 20 élèves. On veut les représenter dans un diagramme circulaire.",
+            "questions": [
+              {
+                "content": "Calcule l'angle de chaque secteur. Bus : ___ °   Marche : ___ °   Vélo : ___ °",
+                "question_type": "numeric",
+                "unit": "°",
+                "tolerance": 0,
+                "hint": "Divise l'effectif par $N = 200$ puis multiplie par $360^\\circ$.",
+                "explanation": "Étape 1 — Identifier : ce sont des parts d'un tout, avec $N = 90 + 60 + 30 + 20 = 200$. Étape 2 — Choisir : le diagramme circulaire. Étape 3 — Calculer : bus $\\frac{90}{200} \\times 360 = 162^\\circ$ ; marche $\\frac{60}{200} \\times 360 = 108^\\circ$ ; vélo $\\frac{30}{200} \\times 360 = 54^\\circ$.",
+                "answers": [
+                  {
+                    "content": "162",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "108",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "54",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ]
+              },
+              {
+                "content": "Calcule l'angle du secteur de la moto.",
+                "question_type": "numeric",
+                "unit": "°",
+                "tolerance": 0,
+                "hint": "L'angle est l'effectif divisé par $N$, fois $360^\\circ$ : il n'est pas égal à l'effectif.",
+                "explanation": "Étape 3 — Calculer : $\\frac{20}{200} \\times 360 = 0{,}1 \\times 360 = 36^\\circ$. Étape 4 — Vérifier avec les autres secteurs : $162 + 108 + 54 + 36 = 360^\\circ$. Piège : 20° recopie l'effectif comme angle.",
+                "answers": [
+                  {
+                    "content": "36",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On compare le nombre de buts marqués par match (0, 1, 2 ou 3), des valeurs isolées. Le diagramme adapté est ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : les données sont des valeurs isolées. Étape 2 — Choisir : le diagramme en bâtons, où la hauteur d'un bâton est l'effectif. L'histogramme sert pour des classes de même amplitude et le diagramme circulaire pour les parts d'un tout.",
+                "answers": [
+                  {
+                    "content": "en bâtons",
+                    "correct": true
+                  },
+                  {
+                    "content": "un histogramme",
+                    "correct": false
+                  },
+                  {
+                    "content": "circulaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un diagramme circulaire, la somme des angles de tous les secteurs vaut ___.",
+                "question_type": "select",
+                "hint": "Un tour complet de cercle.",
+                "explanation": "Étape 4 — Vérifier : les angles d'un diagramme circulaire ont pour somme $360^\\circ$. Ici : $162 + 108 + 54 + 36 = 360^\\circ$. Piège : 100 correspond à la somme des fréquences en pourcentage, pas à celle des angles.",
+                "answers": [
+                  {
+                    "content": "$360^\\circ$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$180^\\circ$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$100^\\circ$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$N$",
+                    "correct": false
                   }
                 ]
               }

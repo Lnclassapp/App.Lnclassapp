@@ -1,8 +1,23 @@
 <%# 🌐 UI · assessment/exercise_sessions/kinds/_select — choix dans une liste : un menu natif à la place du trou, ou sous la question %>
 <%# Rôle : la phrase coupée sur `___` comme _fill_blank ; propositions dans le mélange de la session, valeur = indice d'affichage (jamais l'id) ; aucune bonne réponse dans la page %>
-<%# ADR  : 0091 §4.4, 0115 · UDR : 0087 §3.4, §3.10, 0140 §3 (select natif, première option vide, aria-label = la phrase avec « blanc ») · sans JavaScript, le menu marche tel quel %>
+<%# ADR  : 0091 §4.4, 0115, 0120-questions-a-plusieurs-cases-et-indice §4 · UDR : 0087 §3.4, §3.10, 0140 §3 (select natif, première option vide, aria-label = la phrase avec « blanc »), 0147-je-m-entraine-dans-la-fiche §3.3 (plusieurs cases : un menu par `___`) · sans JavaScript, le menu marche tel quel %>
 <%# locals: (f:, question:, number:, values: {}) -%>
 <% marker = Entities::Assessment::QuestionKinds::FillBlank::MARKER %>
+<% if question.multi_blank? %>
+  <% typed = values[:blanks].is_a?(Hash) ? values[:blanks] : {} %>
+  <%# Plusieurs cases : un menu à la place de chaque `___`, avec les propositions de sa case ; la valeur est l'indice d'affichage. %>
+  <% cells = blank_segments(question.content).map do |kind, part|
+       next part if kind == :text
+
+       picked_index = typed[part.to_s].to_s
+       select_tag("#{f.object_name}[blanks][#{part}]",
+                  options_for_select(question.answers.select { it.blank == part }.map { [ it.content, it.index ] }, (picked_index.to_i if picked_index.match?(/\A\d+\z/))),
+                  include_blank: t("assessment.exercise_sessions.kinds.select.choose"), id: "q#{number}-blank-#{part}",
+                  "aria-label": t("assessment.exercise_sessions.show.blank_label", index: part + 1, number:),
+                  class: "mx-1 min-h-tap max-w-full rounded-ln border-2 border-brand-strong bg-brand-soft px-3 py-1 font-medium text-ink focus:outline-2 focus:outline-offset-2 focus:outline-brand")
+     end %>
+  <div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= safe_join(cells) %></div>
+<% else %>
 <% before, after = question.content.split(marker, 2) %>
 <% inline = question.content.include?(marker) %>
 <% glued, after = after.to_s.match(/\A(\S*)(.*)\z/m).captures %>
@@ -19,4 +34,5 @@
   <div class="rounded-card border border-line bg-white p-4 text-lg leading-loose whitespace-pre-line text-ink sm:p-5"><%= before %><span data-gap class="whitespace-nowrap"><%= field %><%= glued %></span><%= after %></div>
 <% else %>
   <%= field %>
+<% end %>
 <% end %>

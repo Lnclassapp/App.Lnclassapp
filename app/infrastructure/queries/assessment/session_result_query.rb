@@ -1,6 +1,6 @@
 # 🔌 INFRA · Queries::Assessment::SessionResultQuery
 # Rôle : résultat d'une session terminée (score, note, appréciation, points, maîtrise, badge, progrès, effet sur la fiche) et sa correction ; sans reveal, seuls les choix
-# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115 · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
+# ADR  : 0028, 0033, 0043, 0054, 0079, 0091, 0094, 0101, 0112, 0113, 0115, 0120-questions-a-plusieurs-cases-et-indice (§4) · UDR : 0007, 0023, 0073, 0087, 0120, 0138 §3.4, 0140 · sécurité n° 29
 module Queries
   module Assessment
     class SessionResultQuery
@@ -26,12 +26,23 @@ module Queries
       # numeric_tolerance ne sont remplis qu'avec reveal, pour les quatre nouveaux types.
       # ADR-0115 : points, unit (réponse chiffrée), criteria (grille d'une réponse rédigée, avec reveal seulement). Pour une
       # réponse rédigée ou du cahier, explanation est le corrigé type : sans reveal, la query ne le rend pas.
+      # ADR cases §4 : une question à plusieurs cases porte, par case, la réponse de l'élève (blank_responses) et son verdict
+      # (blank_results) ; blank_solutions, avec reveal seulement, les réponses acceptées de chaque case. hinted : l'élève a ouvert
+      # l'indice de cette question (Lot B l'affiche, sans rien dire du texte).
       ReviewQuestion = Data.define(:id, :number, :content, :explanation, :correct, :answers, :question_type, :response_text,
-                                   :pairs, :solution, :numeric_tolerance, :unanswered, :points, :unit, :criteria) do
+                                   :pairs, :solution, :numeric_tolerance, :unanswered, :points, :unit, :criteria,
+                                   :blank_responses, :blank_results, :blank_solutions, :hinted, :blanks) do
         def initialize(question_type: "single_choice", response_text: nil, pairs: [], solution: [], numeric_tolerance: nil,
-                       unanswered: false, points: BigDecimal("1"), unit: nil, criteria: [], **) = super
+                       unanswered: false, points: BigDecimal("1"), unit: nil, criteria: [], blank_responses: [], blank_results: [],
+                       blank_solutions: [], hinted: false, blanks: 1, **) = super
         def kind_name = Entities::Assessment::Question.kind_name_for(question_type)
         def auto_graded? = Entities::Assessment::Question.kind_for(question_type)::AUTO_GRADED
+        # Plusieurs cases : le nombre de cases de la question (blanks), pas celui des verdicts : une copie laissée vide n'en enregistre aucun.
+        def multi_blank? = blanks > 1
+        def hinted? = hinted
+        # La part de la question que sa réponse rapporte, de 0 à 1 : la règle de Grading.share, que la clôture applique à la note.
+        def share = Entities::Assessment::Grading.share_of(blanks:, correct:, blank_results:)
+        def earned_points = points.to_r * share
       end
       # Sans reveal, correct vaut nil : la colonne n'est pas lue, et seules les propositions cochées le sont.
       ReviewAnswer = Data.define(:id, :content, :selected, :correct)
@@ -40,24 +51,26 @@ module Queries
       # Types dont la réponse est une proposition cochée ou choisie, et types sans élément ni proposition.
       CHOICE_KINDS = %w[choice select].freeze
       WRITTEN_KINDS = %w[written notebook].freeze
+      BLANK_KINDS = %w[numeric fill_blank select].freeze
       Pair = Data.define(:left, :right)
 
       SESSION_COLUMNS = %w[exercise_sessions.id exercise_sessions.public_id exercise_sessions.student_id users.first_name
                            users.last_name exercise_sessions.score_percent exercise_sessions.correct_count
                            exercise_sessions.question_count exercises.id exercises.public_id exercises.title exercises.statement_blocks essentials.slug
                            essentials.name courses.slug exercise_sessions.completed_at exercise_sessions.kind
-                           exercise_sessions.knowledge_gap_id].freeze
+                           exercise_sessions.knowledge_gap_id exercise_sessions.hinted_question_ids].freeze
 
       # reveal : décidé en amont par RevealCorrectionPolicy. → Row | nil
       def call(public_id:, reveal:)
         id, public_id, student_id, first_name, last_name, score_percent, correct_count, question_count, exercise_id,
-          exercise_public_id, title, statement_blocks, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id =
+          exercise_public_id, title, statement_blocks, essential_slug, essential_name, course_slug, completed_at, kind, knowledge_gap_id,
+          hinted_question_ids =
           Orm::ExerciseSession.joins(:student, exercise: :course)
                               .joins("LEFT OUTER JOIN essentials ON essentials.id = exercises.essential_id")
                               .where(public_id:).pick(*SESSION_COLUMNS)
         return if id.nil?
 
-        review = review(id, exercise_id, reveal)
+        review = review(id, exercise_id, reveal, hinted_question_ids)
         Row.new(session_public_id: public_id, student_id:, student_name: "#{first_name} #{last_name}",
                 exercise: ExerciseRow.new(public_id: exercise_public_id, title:, statement_blocks:),
                 essential: (EssentialRow.new(slug: essential_slug, name: essential_name, course_slug:) if essential_slug), course_slug:,
@@ -93,8 +106,10 @@ module Queries
 
       def points(review)
         graded, manual = review.partition(&:auto_graded?)
-        Points.new(earned: graded.select { it.correct == true }.sum(&:points), graded: graded.sum(&:points), manual: manual.sum(&:points),
-                   weighted: review.any? { it.points != 1 })
+        # ADR cases §6 : en fractions de points, montrés en décimal ; une question à une case rapporte tout ou rien, comme avant.
+        earned = BigDecimal(graded.sum(Rational(0), &:earned_points), 15)
+        Points.new(earned:, graded: graded.sum(&:points), manual: manual.sum(&:points),
+                   weighted: review.any? { it.points != 1 || it.multi_blank? })
       end
 
       # Historique de l'élève sur l'exercice, toutes classes et assignations confondues : ses sessions terminées, standard
@@ -121,37 +136,59 @@ module Queries
         Entities::Assessment::GapOutcome.call(session_id:, session_kind: kind, knowledge_gap_id:, gap:)
       end
 
-      def review(session_id, exercise_id, reveal)
+      def review(session_id, exercise_id, reveal, hinted_question_ids = [])
         questions = Orm::Question.where(exercise_id:).order(:position, :id)
                                  .pluck(:id, :content, :explanation, :question_type, :points, :unit, :criteria,
                                         *(reveal ? [ :numeric_tolerance ] : []))
         attempts = Orm::QuestionAttempt.where(exercise_session_id: session_id)
-                                       .pluck(:question_id, :correct, :selected_answer_ids, :response_text, :unanswered)
-                                       .to_h { |question_id, correct, selected, text, unanswered| [ question_id, [ correct, selected, text, unanswered ] ] }
+                                       .pluck(:question_id, :correct, :selected_answer_ids, :response_text, :unanswered, :blank_responses, :blank_results)
+                                       .to_h { |question_id, *attempt| [ question_id, attempt ] }
         kinds = questions.to_h { |id, _, _, question_type| [ id, kind_name(question_type) ] }
         choice_ids = kinds.select { |_, kind| CHOICE_KINDS.include?(kind) }.keys
         answers = reveal ? all_answers(choice_ids, attempts) : selected_answers(attempts.slice(*choice_ids))
-        elements = elements(kinds.reject { |_, kind| CHOICE_KINDS.include?(kind) || WRITTEN_KINDS.include?(kind) || !(reveal || ELEMENT_KINDS.include?(kind)) }.keys)
+        blanks = blank_counts(kinds)
+        elements = elements(kinds.select { |_, kind| elements_needed?(kind, reveal) }.keys, reveal)
         questions.each_with_index.map do |(id, content, explanation, question_type, points, unit, criteria, tolerance), index|
-          correct, selected, response_text, unanswered = attempts.fetch(id, [ nil, [], nil, false ])
+          correct, selected, response_text, unanswered, blank_responses, blank_results = attempts.fetch(id, [ nil, [], nil, false, [], [] ])
           # Le corrigé type d'une réponse rédigée ou du cahier ne se rend qu'avec reveal ; la grille aussi.
           written = WRITTEN_KINDS.include?(kind_name(question_type))
           ReviewQuestion.new(id:, number: index + 1, content:, explanation: (explanation if reveal || !written), correct:, question_type:,
                              response_text:, unanswered:, points:, unit:, criteria: (reveal ? criteria : []),
-                             answers: answers.fetch(id, []),
+                             answers: answers.fetch(id, []), blank_responses:, blank_results:, blanks: blanks.fetch(id, 1), hinted: hinted_question_ids.include?(id),
+                             blank_solutions: (blank_solutions(kind_name(question_type), elements.fetch(id, [])) if reveal) || [],
                              **kind_review(kind_name(question_type), elements.fetch(id, []), selected, reveal, tolerance))
         end
       end
 
+      # Le nombre de cases de chaque question qui juge case par case (la plus haute case + 1, comme Question#blanks), lu sur les
+      # propositions seules : sans reveal, ni leur texte ni leur correction ne sortent. { question_id => Integer }
+      def blank_counts(kinds)
+        ids = kinds.select { |_, kind| BLANK_KINDS.include?(kind) }.keys
+        return {} if ids.empty?
+
+        Orm::Answer.where(question_id: ids).group(:question_id).maximum(:blank).transform_values { it.to_i + 1 }
+      end
+
       def kind_name(question_type) = Entities::Assessment::Question.kind_name_for(question_type)
+
+      # L'ordre et relier se lisent toujours ; avec reveal, les trous, le nombre et la liste (leurs cases et réponses acceptées).
+      def elements_needed?(kind, reveal) = ELEMENT_KINDS.include?(kind) || (reveal && %w[fill_blank numeric select].include?(kind))
+
+      # Les réponses acceptées de chaque case, dans l'ordre des cases, pour une question à plusieurs cases (sinon []) ; une liste ne
+      # garde que la proposition correcte de chaque case. rows : [[id, contenu, côté droit, case, correct]].
+      def blank_solutions(kind, rows)
+        return [] unless %w[fill_blank numeric select].include?(kind) && rows.any? { it[3].to_i.positive? }
+
+        rows.group_by { it[3].to_i }.sort.map { |_, case_rows| (kind == "select" ? case_rows.select { it[4] } : case_rows).map { it[1] } }
+      end
 
       # Les éléments des nouveaux types, une requête : l'ordre et relier pour rendre la réponse de l'élève ; les trous et
       # le nombre seulement avec reveal, puisque l'élève a sa réponse dans response_text. { question_id => [[id, content, match]] }
-      def elements(question_ids)
+      def elements(question_ids, reveal)
         return {} if question_ids.empty?
 
         Orm::Answer.where(question_id: question_ids).order(:question_id, :position, :id)
-                   .pluck(:question_id, :id, :content, :match_content)
+                   .pluck(:question_id, :id, :content, :match_content, *(reveal ? %i[blank correct] : []))
                    .group_by(&:first).transform_values { |rows| rows.map { it.drop(1) } }
       end
 

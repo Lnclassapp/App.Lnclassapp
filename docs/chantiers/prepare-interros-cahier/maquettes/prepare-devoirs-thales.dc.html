@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+<template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="#333"/><text x="50" y="62" font-size="30" font-family="Georgia,serif" font-weight="700" fill="#fff" text-anchor="middle">PD</text></svg></template>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,700;1,8..60,400&display=swap" rel="stylesheet">
+<style>body{margin:0;background:#d6d6d6;-webkit-font-smoothing:antialiased}a{color:#000}a:hover{color:#333}html{scroll-behavior:smooth}input:focus{outline:2px solid #000;outline-offset:1px}</style>
+<script src="signalement-erreurs/lnclass-signalement.js" data-email="contact@lnclass.com" data-fiche="Prépare devoirs — La propriété de Thalès (Maths 3e)" data-zone="main"></script>
+</helmet>
+<main style="display:flex;flex-direction:column;align-items:center;gap:clamp(0px,(100vw - 700px) * 100,32px);padding:clamp(0px,(100vw - 700px) * 100,32px) clamp(0px,(100vw - 700px) * 100,12px) 64px;font-family:'Source Serif 4','DejaVu Serif',Georgia,serif;color:#000;font-size:16px;line-height:1.5">
+<sc-for list="{{ notions }}" as="no" hint-placeholder-count="1">
+<div data-screen-label="Sujet {{ no.num }}" id="{{ no.id }}" style="width:100%;max-width:880px;box-sizing:border-box;background:#fff;box-shadow:0 8px 28px rgba(0,0,0,.15);padding:clamp(20px,4vw,44px) clamp(16px,5vw,52px) 48px;display:flex;flex-direction:column;gap:16px">
+<div style="border:2px solid #000;padding:12px 14px;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:2px 16px">
+<b style="font-size:18px">PRÉPARE DEVOIRS</b>
+<b style="font-size:18px;text-align:right">MATHÉMATIQUES</b>
+<span>Lnclass · La propriété de Thalès</span>
+<span style="text-align:right">Classe de 3<sup>e</sup> · Sujet {{ no.num }} / 3</span>
+</div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+<b style="font-size:22px;text-align:center;text-transform:uppercase;text-wrap:balance">{{ no.title }}</b>
+<i style="font-size:15px">{{ no.score }}</i>
+</div>
+<div style="border:1px solid #000;background:#f5f5f5;padding:8px 12px;font-size:15px;text-wrap:pretty"><b>Notions mobilisées :</b> {{ no.rappel }}</div>
+<sc-for list="{{ no.exs }}" as="ex" hint-placeholder-count="3">
+<div style="display:flex;flex-direction:column;gap:10px;border:1px solid #999;padding:12px 14px">
+<div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-start">
+<div style="flex:1 1 320px;display:flex;flex-direction:column;gap:4px">
+<div style="display:flex;justify-content:space-between;gap:10px"><b>Exercice {{ ex.n }}</b><span style="font-size:14px;font-weight:700">{{ ex.status }}</span></div>
+<p style="margin:0;text-wrap:pretty">{{ ex.enonce }}</p>
+</div>
+<sc-if value="{{ ex.figTri }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 200 140" width="190" height="133" style="max-width:100%;height:auto;flex:none"><polygon points="100,14 20,126 186,126" fill="none" stroke="#000" stroke-width="1.5"></polygon><line x1="64" y1="64.4" x2="140" y2="64.4" stroke="#000" stroke-width="1.5"></line><g font-family="Georgia,serif" font-style="italic" font-size="15" fill="#000"><text x="95" y="10">A</text><text x="6" y="136">B</text><text x="188" y="136">C</text><text x="48" y="66">M</text><text x="144" y="66">N</text></g></svg></sc-if>
+<sc-if value="{{ ex.figPap }}" hint-placeholder-val="{{ false }}"><svg viewBox="0 0 200 160" width="190" height="152" style="max-width:100%;height:auto;flex:none"><line x1="30" y1="22" x2="176" y2="142" stroke="#000" stroke-width="1.5"></line><line x1="80" y1="22" x2="114" y2="142" stroke="#000" stroke-width="1.5"></line><line x1="30" y1="22" x2="80" y2="22" stroke="#000" stroke-width="1.5"></line><line x1="114" y1="142" x2="176" y2="142" stroke="#000" stroke-width="1.5"></line><g font-family="Georgia,serif" font-style="italic" font-size="15" fill="#000"><text x="16" y="18">B</text><text x="84" y="18">C</text><text x="104" y="78">A</text><text x="178" y="156">M</text><text x="100" y="156">N</text></g></svg></sc-if>
+</div>
+<sc-for list="{{ ex.qs }}" as="q" hint-placeholder-count="1">
+<div style="display:flex;flex-direction:column;gap:6px">
+<div style="display:flex;align-items:center;flex-wrap:wrap;gap:8px 10px">
+<span style="flex:1 1 220px;display:flex;gap:8px;align-items:baseline;text-wrap:pretty"><span style="flex:none;font-size:11.5px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;border:1px solid #000;padding:0 5px;line-height:1.6">{{ q.tag }}</span><span>{{ q.label }}</span></span>
+<sc-if value="{{ q.isVf }}" hint-placeholder-val="{{ false }}"><div style="display:flex;gap:6px"><sc-for list="{{ q.choices }}" as="c" hint-placeholder-count="2"><button onClick="{{ c.pick }}" style="min-width:72px;min-height:38px;padding:4px 12px;border:1px solid #000;border-width:{{ c.bw }};border-radius:0;background:{{ c.bg }};color:#000;font:inherit;font-size:15px;cursor:pointer">{{ c.label }}</button></sc-for></div></sc-if>
+<sc-if value="{{ q.isTxt }}" hint-placeholder-val="{{ false }}"><input type="text" value="{{ q.value }}" onChange="{{ q.onChange }}" onKeyDown="{{ q.onKey }}" placeholder="…" style="width:150px;font:inherit;padding:3px 8px;border:1px solid #000;border-width:{{ q.bw }};border-radius:0;background:#fff;text-align:center"></sc-if>
+<sc-if value="{{ q.isNum }}" hint-placeholder-val="{{ false }}"><div style="display:flex;align-items:center;gap:6px"><span>{{ q.prefix }}</span><input type="text" inputmode="decimal" value="{{ q.value }}" onChange="{{ q.onChange }}" onKeyDown="{{ q.onKey }}" style="width:84px;font:inherit;padding:3px 8px;border:1px solid {{ q.bd }};border-width:{{ q.bw }};border-radius:0;background:#fff;text-align:center"><span>{{ q.unit }}</span></div></sc-if>
+</div>
+<sc-if value="{{ q.isMcq }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:6px">
+<sc-for list="{{ q.choices }}" as="c" hint-placeholder-count="3"><button onClick="{{ c.pick }}" style="display:flex;align-items:flex-start;gap:10px;text-align:left;min-height:40px;padding:6px 12px 6px 8px;border:1px solid #000;border-width:{{ c.bw }};border-radius:0;background:{{ c.bg }};color:#000;font:inherit;font-size:15.5px;cursor:pointer"><b style="flex:none;width:22px">{{ c.letter }}.</b><span style="text-wrap:pretty">{{ c.label }}</span></button></sc-for>
+</div></sc-if>
+<sc-if value="{{ q.show }}" hint-placeholder-val="{{ false }}"><span style="font-size:14.5px;font-weight:700;font-style:{{ q.fs }}">{{ q.verdict }}</span></sc-if>
+</div>
+</sc-for>
+<sc-if value="{{ ex.showInd }}" hint-placeholder-val="{{ false }}"><div style="border:1px dashed #000;padding:8px 12px;font-size:15px;text-wrap:pretty"><b>Indice :</b> {{ ex.indice }}</div></sc-if>
+<div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-top:1px solid #999;padding-top:10px;margin-top:4px">
+<sc-if value="{{ ex.notChecked }}" hint-placeholder-val="{{ true }}"><button onClick="{{ ex.check }}" style="min-height:44px;padding:6px 22px;border:1px solid #000;border-radius:0;background:#000;color:#fff;font:inherit;font-size:16px;font-weight:700;cursor:pointer" style-hover="background:#333">Vérifier ma réponse</button></sc-if>
+<sc-if value="{{ ex.notChecked }}" hint-placeholder-val="{{ true }}"><button onClick="{{ ex.toggleInd }}" style="min-height:44px;padding:6px 14px;border:1px solid #000;border-radius:0;background:#fff;color:#000;font:inherit;font-size:15px;cursor:pointer" style-hover="background:#f2f2f2">{{ ex.indLabel }}</button></sc-if>
+<sc-if value="{{ ex.checked }}" hint-placeholder-val="{{ false }}"><button onClick="{{ ex.retry }}" style="min-height:44px;padding:6px 16px;border:1px solid #000;border-radius:0;background:#fff;color:#000;font:inherit;font-size:15px;cursor:pointer" style-hover="background:#f2f2f2">Refaire l'exercice</button></sc-if>
+</div>
+<sc-if value="{{ ex.checked }}" hint-placeholder-val="{{ false }}"><div style="display:flex;flex-direction:column;gap:10px;border:2px solid #000;padding:12px 14px">
+<div style="display:flex;flex-wrap:wrap;align-items:baseline;justify-content:space-between;gap:4px 16px;border-bottom:1px solid #000;padding-bottom:8px">
+<b style="font-size:22px">Ta note : {{ ex.note }} / 10</b>
+<b style="font-size:17px;font-style:italic">Mention : {{ ex.mention }}</b>
+<span style="flex-basis:100%;font-size:14px">{{ ex.detail }}</span>
+</div>
+<b style="font-size:16px;text-transform:uppercase;letter-spacing:.04em">Correction</b>
+<sc-for list="{{ ex.cor }}" as="r" hint-placeholder-count="4"><div style="display:flex;flex-direction:column;gap:2px;padding:6px 0;border-bottom:1px dotted #999;font-size:15px;text-wrap:pretty">
+<div style="display:flex;flex-wrap:wrap;gap:4px 10px"><b>{{ r.letter }}.</b><b>{{ r.verdict }}</b><span>Bonne réponse : <b>{{ r.good }}</b></span></div>
+<span><i>Explication :</i> {{ r.expl }}</span>
+</div></sc-for>
+</div></sc-if>
+</div>
+</sc-for>
+<div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;border-top:1.5px solid #000;padding-top:10px;font-size:14px">
+<span>Lnclass · Prépare devoirs · Sujet {{ no.num }}</span>
+<button onClick="{{ no.reset }}" style="border:none;background:none;padding:0;font:inherit;font-size:14px;text-decoration:underline;cursor:pointer;color:#000">Recommencer ce sujet</button>
+</div>
+</div>
+</sc-for>
+</main>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;notion&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;toutes&quot;,&quot;s1&quot;,&quot;s2&quot;,&quot;s3&quot;],&quot;default&quot;:&quot;toutes&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Sujet&quot;}}">
+const Q=(t,label,o)=>({t,label,...o});
+const N=[
+ {id:'s1',title:'Sujet 1 · Calculer, démontrer, conclure',rappel:'propriété de Thalès (calculer une longueur), réciproque (prouver un parallélisme), contraposée (prouver un non-parallélisme), périmètres.',exs:[
+  {fig:'tri',enonce:'L\'unité est le centimètre. ABC est un triangle tel que AB = 8, AC = 10 et BC = 12. M est le point de [AB] tel que AM = 2, et N est un point de [AC]. Les droites (MN) et (BC) sont parallèles.',qs:[
+   Q('mcq','a. Pour calculer AN et MN, on utilise…',{opts:['la propriété de Thalès','la réciproque de la propriété de Thalès','la contraposée de la propriété de Thalès'],ok:0}),
+   Q('num','b. Calcule le coefficient AM/AB.',{prefix:'AM/AB =',unit:'',ans:0.25}),
+   Q('num','c. Calcule AN.',{prefix:'AN =',unit:'cm',ans:2.5}),
+   Q('num','d. Calcule MN.',{prefix:'MN =',unit:'cm',ans:3}),
+   Q('num','e. Calcule le périmètre du triangle AMN.',{prefix:'P =',unit:'cm',ans:7.5}),
+   Q('vf','f. Le périmètre de AMN est le quart du périmètre de ABC.',{ok:0})],
+   indice:'Commence par le coefficient AM/AB : toutes les longueurs de AMN s\'obtiennent en multipliant celles de ABC par ce nombre.',
+   correction:'a. On sait que (MN) // (BC) et on cherche des longueurs : c\'est la propriété de Thalès. b. AM/AB = 2 ÷ 8 = 0,25. c. AN = AC × 0,25 = 10 × 0,25 = 2,5 cm. d. MN = BC × 0,25 = 12 × 0,25 = 3 cm. e. P(AMN) = AM + AN + MN = 2 + 2,5 + 3 = 7,5 cm. f. P(ABC) = 8 + 10 + 12 = 30 cm et 30 ÷ 4 = 7,5 cm : les périmètres sont aussi multipliés par le coefficient 0,25.'},
+  {fig:'tri',enonce:'L\'unité est le centimètre. Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On donne AM = 4,5 ; AB = 7,5 ; AN = 3 ; AC = 5 et BC = 6,5.',qs:[
+   Q('num','a. Calcule AM/AB.',{prefix:'AM/AB =',unit:'',ans:0.6}),
+   Q('num','b. Calcule AN/AC.',{prefix:'AN/AC =',unit:'',ans:0.6}),
+   Q('txt','c. Complète : « D\'après la … de la propriété de Thalès, (MN) // (BC). »',{acc:['réciproque']}),
+   Q('mcq','d. Pour calculer ensuite MN, on utilise…',{opts:['la propriété de Thalès','la réciproque','la contraposée'],ok:0}),
+   Q('num','e. Calcule MN.',{prefix:'MN =',unit:'cm',ans:3.9}),
+   Q('vf','f. Le triangle AMN est un agrandissement du triangle ABC.',{ok:1})],
+   indice:'Deux étapes : d\'abord prouver le parallélisme, ensuite l\'utiliser pour calculer.',
+   correction:'a. AM/AB = 4,5 ÷ 7,5 = 0,6. b. AN/AC = 3 ÷ 5 = 0,6. c. Les rapports sont égaux et les points sont dans le même ordre : la réciproque prouve que (MN) // (BC). d. Une fois le parallélisme démontré, on calcule une longueur avec la propriété de Thalès. e. MN = BC × 0,6 = 6,5 × 0,6 = 3,9 cm. f. Le coefficient 0,6 est inférieur à 1 : AMN est une réduction, pas un agrandissement.'},
+  {fig:'pap',enonce:'L\'unité est le centimètre. Les points B, A, M sont alignés dans cet ordre, ainsi que C, A, N. On donne AB = 6, AM = 9, AC = 4 et AN = 5.',qs:[
+   Q('num','a. Calcule AM/AB.',{prefix:'AM/AB =',unit:'',ans:1.5}),
+   Q('num','b. Calcule AN/AC.',{prefix:'AN/AC =',unit:'',ans:1.25}),
+   Q('vf','c. Les deux rapports sont égaux.',{ok:1}),
+   Q('mcq','d. Que peut-on conclure ?',{opts:['(BC) et (MN) sont parallèles.','(BC) et (MN) ne sont pas parallèles.','On ne peut rien conclure.'],ok:1}),
+   Q('txt','e. Complète : « On utilise la … de la propriété de Thalès. »',{acc:['contraposée']}),
+   Q('num','f. Quelle longueur AN faudrait-il pour que (BC) et (MN) soient parallèles ?',{prefix:'AN =',unit:'cm',ans:6})],
+   indice:'Compare les rapports. Pour la dernière question, cherche AN tel que AN/AC soit égal à AM/AB.',
+   correction:'a. AM/AB = 9 ÷ 6 = 1,5. b. AN/AC = 5 ÷ 4 = 1,25. c. 1,5 ≠ 1,25 : les rapports sont différents. d. Avec des rapports différents, les droites ne peuvent pas être parallèles. e. Des rapports différents prouvent un non-parallélisme : c\'est la contraposée. f. Il faudrait AN/AC = 1,5, soit AN = 4 × 1,5 = 6 cm.'},
+  {fig:'tri',enonce:'L\'unité est le centimètre. Les points A, M, B sont alignés dans cet ordre, ainsi que A, N, C. On donne AM = 3,6 ; AB = 6 ; AN = 4,8 ; AC = 8 et MN = 4,2.',qs:[
+   Q('num','a. Calcule AM/AB.',{prefix:'AM/AB =',unit:'',ans:0.6}),
+   Q('num','b. Calcule AN/AC.',{prefix:'AN/AC =',unit:'',ans:0.6}),
+   Q('mcq','c. Que peut-on conclure sur les droites (MN) et (BC) ?',{opts:['Elles sont parallèles.','Elles ne sont pas parallèles.','On ne peut rien conclure.'],ok:0}),
+   Q('num','d. Calcule BC.',{prefix:'BC =',unit:'cm',ans:7}),
+   Q('vf','e. MB = 2,4 cm.',{ok:0}),
+   Q('txt','f. Complète : « On a d\'abord utilisé la … de la propriété de Thalès, puis la propriété de Thalès. »',{acc:['réciproque']})],
+   indice:'Prouve d\'abord le parallélisme. Pour BC, la longueur inconnue est au dénominateur : MN/BC = 0,6.',
+   correction:'a. AM/AB = 3,6 ÷ 6 = 0,6. b. AN/AC = 4,8 ÷ 8 = 0,6. c. Rapports égaux et points dans le même ordre : d\'après la réciproque, (MN) // (BC). d. MN/BC = 0,6, donc BC = MN ÷ 0,6 = 4,2 ÷ 0,6 = 7 cm. e. M est sur [AB], donc MB = AB − AM = 6 − 3,6 = 2,4 cm. f. Le parallélisme a été prouvé avec la réciproque, puis utilisé pour calculer BC avec la propriété directe.'},
+ ]},
+ {id:'s2',title:'Sujet 2 · Problèmes de la vie courante',rappel:'propriété de Thalès en configuration triangle et papillon, théorème de Pythagore, proportionnalité et prix.',exs:[
+  {fig:null,enonce:'À Yamoussoukro, Awa veut connaître la hauteur AD d\'un fromager. Elle plante verticalement un bâton [BC] de 1,5 m. L\'extrémité de l\'ombre du bâton et celle de l\'arbre se rejoignent en S. Les points S, B, A sont alignés sur le sol, ainsi que S, C, D. SB = 2 m et SA = 24 m.',qs:[
+   Q('mcq','a. Pourquoi les droites (BC) et (AD) sont-elles parallèles ?',{opts:['Elles sont toutes deux perpendiculaires au sol.','Elles ont la même longueur.','Le soleil est très haut.'],ok:0}),
+   Q('num','b. Calcule SA/SB.',{prefix:'SA/SB =',unit:'',ans:12}),
+   Q('num','c. Calcule la hauteur AD du fromager.',{prefix:'AD =',unit:'m',ans:18}),
+   Q('num','d. Le triangle SBC est rectangle en B. Calcule SC.',{prefix:'SC =',unit:'m',ans:2.5}),
+   Q('num','e. Déduis-en la longueur SD.',{prefix:'SD =',unit:'m',ans:30}),
+   Q('vf','f. L\'arbre est 12 fois plus haut que le bâton.',{ok:0})],
+   indice:'Le triangle SAD est un agrandissement du triangle SBC. Pour SC, pense au théorème de Pythagore.',
+   correction:'a. Deux droites perpendiculaires à une même droite (le sol) sont parallèles entre elles. b. SA/SB = 24 ÷ 2 = 12. c. D\'après la propriété de Thalès, AD/BC = SA/SB = 12, donc AD = 1,5 × 12 = 18 m. d. Pythagore : SC² = SB² + BC² = 4 + 2,25 = 6,25, donc SC = 2,5 m. e. SD/SC = 12, donc SD = 2,5 × 12 = 30 m. f. AD/BC = 18 ÷ 1,5 = 12 : l\'arbre est bien 12 fois plus haut.'},
+  {fig:'tri',enonce:'Sur le plan d\'un toit, A est le sommet. Les poutres [AB] et [AC] mesurent 5 m et la base [BC] mesure 8 m. Le menuisier fixe une traverse [MN], parallèle à (BC), avec M sur [AB], N sur [AC] et AM = 2 m.',qs:[
+   Q('mcq','a. Pour calculer la longueur de la traverse, on utilise…',{opts:['la propriété de Thalès','la réciproque','la contraposée'],ok:0}),
+   Q('num','b. Calcule AN.',{prefix:'AN =',unit:'m',ans:2}),
+   Q('num','c. Calcule la longueur MN de la traverse.',{prefix:'MN =',unit:'m',ans:3.2}),
+   Q('vf','d. La traverse mesure 40 % de la base BC.',{ok:0}),
+   Q('num','e. Le bois coûte 2 500 F CFA le mètre. Calcule le prix de la traverse.',{prefix:'Prix =',unit:'F CFA',ans:8000}),
+   Q('mcq','f. Si le menuisier place la traverse plus près du sommet (AM = 1 m), la traverse devient…',{opts:['plus courte','plus longue','identique'],ok:0})],
+   indice:'Le coefficient est AM/AB = 2/5.',
+   correction:'a. La traverse est parallèle à (BC) et on cherche une longueur : propriété de Thalès. b. AN/AC = AM/AB = 2/5, donc AN = 5 × 2 ÷ 5 = 2 m. c. MN = BC × 2/5 = 8 × 0,4 = 3,2 m. d. MN/BC = 3,2 ÷ 8 = 0,4, soit 40 %. e. 3,2 × 2 500 = 8 000 F CFA. f. Avec AM = 1 m, le coefficient devient 1/5 : MN = 8 ÷ 5 = 1,6 m, la traverse est plus courte.'},
+  {fig:'pap',enonce:'Pour estimer la largeur d\'une rivière, Koffi plante des piquets et obtient la figure ci-dessus : les droites (BM) et (CN) se coupent en A et (BC) // (MN). Il mesure AB = 4 m, AC = 3 m, BC = 5 m et AN = 18 m.',qs:[
+   Q('mcq','a. Dans quelle configuration de Thalès est-on ?',{opts:['La configuration « triangle »','La configuration « papillon »','Aucune des deux'],ok:1}),
+   Q('num','b. Calcule AN/AC.',{prefix:'AN/AC =',unit:'',ans:6}),
+   Q('num','c. Calcule AM.',{prefix:'AM =',unit:'m',ans:24}),
+   Q('num','d. Calcule MN.',{prefix:'MN =',unit:'m',ans:30}),
+   Q('vf','e. MN est 6 fois plus long que BC.',{ok:0}),
+   Q('num','f. Calcule la distance BM.',{prefix:'BM =',unit:'m',ans:28})],
+   indice:'A est entre B et M : la distance BM est la somme de deux longueurs.',
+   correction:'a. Les deux droites se croisent en A et les segments parallèles sont de part et d\'autre de A : c\'est le papillon. b. AN/AC = 18 ÷ 3 = 6. c. D\'après la propriété de Thalès, AM/AB = AN/AC = 6, donc AM = 4 × 6 = 24 m. d. MN/BC = 6, donc MN = 5 × 6 = 30 m. e. MN/BC = 30 ÷ 5 = 6 : c\'est vrai. f. A est entre B et M, donc BM = AB + AM = 4 + 24 = 28 m.'},
+  {fig:null,enonce:'Au même moment de la journée, à Daloa, Moussa mesure 1,75 m et son ombre mesure 2,5 m. Un poteau électrique vertical a une ombre de 10 m. Les extrémités des deux ombres coïncident au même point S, et les pieds de Moussa et du poteau sont alignés avec S.',qs:[
+   Q('mcq','a. Pourquoi peut-on appliquer la propriété de Thalès ?',{opts:['Moussa et le poteau sont verticaux, donc parallèles.','Moussa et le poteau ont la même hauteur.','Les deux ombres sont égales.'],ok:0}),
+   Q('mcq','b. Dans quelle configuration est-on ?',{opts:['La configuration « triangle »','La configuration « papillon »','Aucune des deux'],ok:0}),
+   Q('num','c. Calcule le coefficient : ombre du poteau ÷ ombre de Moussa.',{prefix:'k =',unit:'',ans:4}),
+   Q('num','d. Calcule la hauteur du poteau.',{prefix:'h =',unit:'m',ans:7}),
+   Q('vf','e. Si l\'ombre du poteau mesurait 15 m, il mesurerait 10,5 m.',{ok:0}),
+   Q('num','f. Au même moment, quelle serait l\'ombre d\'un arbre de 14 m ?',{prefix:'Ombre =',unit:'m',ans:20})],
+   indice:'Le grand triangle (poteau, ombre) est un agrandissement du petit triangle (Moussa, ombre).',
+   correction:'a. Deux droites verticales sont perpendiculaires au sol, donc parallèles entre elles. b. Les deux triangles ont le sommet S en commun et sont du même côté : c\'est la configuration triangle. c. k = 10 ÷ 2,5 = 4. d. D\'après la propriété de Thalès, h = 1,75 × 4 = 7 m. e. 15 ÷ 2,5 = 6 et 1,75 × 6 = 10,5 m : c\'est vrai. f. 14 ÷ 1,75 = 8, donc l\'ombre vaut 2,5 × 8 = 20 m.'},
+ ]},
+ {id:'s3',title:'Sujet 3 · Raisonner et rédiger',rappel:'les trois propriétés (directe, réciproque, contraposée), ordre des points, comparaison de fractions, aires et coefficient de réduction.',exs:[
+  {fig:'tri',enonce:'L\'unité est le centimètre. M est un point de [AB] et N un point de [AC]. On donne AB = 9, AC = 12, AM = 3, AN = 4 et BC = 10,5.',qs:[
+   Q('num','a. Calcule AM/AB (arrondi au centième).',{prefix:'AM/AB ≈',unit:'',ans:1/3}),
+   Q('num','b. Calcule AN/AC (arrondi au centième).',{prefix:'AN/AC ≈',unit:'',ans:1/3}),
+   Q('mcq','c. Les rapports sont égaux. Que faut-il encore vérifier pour appliquer la réciproque ?',{opts:['Rien de plus.','Que les points sont alignés dans le même ordre.','La longueur MN.'],ok:1}),
+   Q('vf','d. Si M est sur [AB] et N sur [AC], les points sont dans le même ordre.',{ok:0}),
+   Q('num','e. Calcule MN.',{prefix:'MN =',unit:'cm',ans:3.5}),
+   Q('txt','f. Complète : « Le triangle AMN est une … du triangle ABC. »',{acc:['réduction']})],
+   indice:'Simplifie les fractions 3/9 et 4/12 avant de les comparer.',
+   correction:'a. 3/9 = 1/3 ≈ 0,33. b. 4/12 = 1/3 ≈ 0,33. c. La réciproque a deux conditions : rapports égaux et même ordre des points. d. M entre A et B, N entre A et C : les points A, M, B et A, N, C sont dans le même ordre. e. (MN) // (BC) d\'après la réciproque, puis MN = 10,5 × 1/3 = 3,5 cm avec la propriété de Thalès. f. Le coefficient 1/3 est inférieur à 1 : AMN est une réduction de ABC.'},
+  {fig:null,enonce:'Les points A, M, B et A, N, C sont alignés dans le même ordre. On trouve AM/AB = 3/7 et AN/AC = 4/9.',qs:[
+   Q('vf','a. Pour comparer 3/7 et 4/9, on peut comparer les produits 3 × 9 et 4 × 7.',{ok:0}),
+   Q('num','b. Calcule 3 × 9 − 4 × 7.',{prefix:'',unit:'',ans:-1}),
+   Q('mcq','c. Les fractions 3/7 et 4/9 sont donc…',{opts:['égales','différentes'],ok:1}),
+   Q('mcq','d. Quelle rédaction est correcte ?',{opts:['AM/AB ≠ AN/AC, donc d\'après la propriété de Thalès, (MN) et (BC) ne sont pas parallèles.','AM/AB ≠ AN/AC, donc d\'après la contraposée de la propriété de Thalès, (MN) et (BC) ne sont pas parallèles.','Comme (MN) et (BC) ne sont pas parallèles, AM/AB ≠ AN/AC.'],ok:1}),
+   Q('txt','e. Complète : « Les rapports sont différents donc, d\'après la … de la propriété de Thalès, les droites ne sont pas parallèles. »',{acc:['contraposée']})],
+   indice:'Deux fractions a/b et c/d sont égales si et seulement si a × d = b × c.',
+   correction:'a. C\'est le produit en croix : 3/7 = 4/9 seulement si 3 × 9 = 4 × 7. b. 3 × 9 = 27 et 4 × 7 = 28, donc 27 − 28 = −1. c. Les produits sont différents (27 ≠ 28), donc les fractions sont différentes. d. On part des rapports différents et on cite la contraposée ; A cite la mauvaise propriété et C part de la conclusion. e. Des rapports différents prouvent un non-parallélisme : c\'est la contraposée.'},
+  {fig:'tri',enonce:'Dans le triangle ABC, (MN) // (BC) avec M ∈ [AB] et N ∈ [AC]. On sait que AM/AB = 0,4, BC = 10 cm et que l\'aire du triangle ABC est 75 cm².',qs:[
+   Q('num','a. Calcule MN.',{prefix:'MN =',unit:'cm',ans:4}),
+   Q('mcq','b. Dans une réduction de coefficient 0,4, les aires sont multipliées par…',{opts:['0,4','0,8','0,16'],ok:2}),
+   Q('num','c. Calcule l\'aire du triangle AMN.',{prefix:'Aire =',unit:'cm²',ans:12}),
+   Q('num','d. Calcule l\'aire du trapèze MNCB.',{prefix:'Aire =',unit:'cm²',ans:63}),
+   Q('vf','e. Si on double toutes les longueurs d\'une figure, son aire est doublée.',{ok:1}),
+   Q('num','f. Quel coefficient AM/AB faudrait-il pour que l\'aire de AMN soit 27 cm² ?',{prefix:'AM/AB =',unit:'',ans:0.6})],
+   indice:'Les longueurs sont multipliées par k, les aires par k².',
+   correction:'a. D\'après la propriété de Thalès, MN = BC × 0,4 = 4 cm. b. Les aires sont multipliées par le carré du coefficient : 0,4² = 0,16. c. 75 × 0,16 = 12 cm². d. Aire(MNCB) = 75 − 12 = 63 cm². e. Les longueurs × 2 donnent une aire × 2² = × 4, pas × 2. f. Il faut k² = 27 ÷ 75 = 0,36, donc k = 0,6.'},
+  {fig:'pap',enonce:'L\'unité est le centimètre. Les points B, A, M sont alignés dans cet ordre, ainsi que C, A, N. On donne AB = 5 ; AC = 7 ; AM = 7,5 ; AN = 10,5 et BC = 6.',qs:[
+   Q('num','a. Calcule AM/AB.',{prefix:'AM/AB =',unit:'',ans:1.5}),
+   Q('num','b. Calcule AN/AC.',{prefix:'AN/AC =',unit:'',ans:1.5}),
+   Q('txt','c. Complète : « Les points B, A, M et C, A, N sont alignés dans le même … »',{acc:['ordre']}),
+   Q('mcq','d. Pour prouver que (BC) // (MN), on utilise…',{opts:['la propriété de Thalès','la réciproque de la propriété de Thalès','la contraposée de la propriété de Thalès'],ok:1}),
+   Q('num','e. Calcule MN.',{prefix:'MN =',unit:'cm',ans:9}),
+   Q('vf','f. Les côtés du triangle AMN sont proportionnels à ceux du triangle ABC.',{ok:0})],
+   indice:'Dans un papillon aussi, la réciproque demande des rapports égaux et le même ordre des points.',
+   correction:'a. AM/AB = 7,5 ÷ 5 = 1,5. b. AN/AC = 10,5 ÷ 7 = 1,5. c. Le même ordre des points est la deuxième condition de la réciproque. d. Rapports égaux et même ordre : la réciproque prouve que (BC) // (MN). e. D\'après la propriété de Thalès, MN = BC × 1,5 = 6 × 1,5 = 9 cm. f. AM/AB = AN/AC = MN/BC = 1,5 : les côtés sont proportionnels, AMN est un agrandissement de ABC.'},
+ ]},
+];
+const frn=x=>String(Math.round(x*1000)/1000).replace('.',',');
+const TAG={mcq:'QCM',vf:'Vrai ou faux',txt:'Complète',num:'Calcul'};
+const norm=s=>String(s??'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[\s()[\]«»"'.…]/g,'');
+const LET=['A','B','C','D'];
+const num=v=>{const s=String(v??'').trim().replace(/\s/g,'').replace(',','.');return s===''||isNaN(+s)?null:+s;};
+const KEY='lnclass-prepare-devoirs-thales-v2';
+
+class Component extends DCLogic {
+  state={inp:{},chk:{},open:{}};
+  componentDidMount(){try{const s=JSON.parse(localStorage.getItem(KEY)||'null');if(s)this.setState(s);}catch(_){}}
+  componentDidUpdate(){try{localStorage.setItem(KEY,JSON.stringify(this.state));}catch(_){}}
+  qOk(k,q){const v=this.state.inp[k];if(q.t==='num')return num(v)!==null&&Math.abs(num(v)-q.ans)<0.011;if(q.t==='txt')return v!=null&&norm(v)!==''&&q.acc.some(x=>norm(x)===norm(v));return v===q.ok;}
+  set(k,v,ek){if(this.state.chk[ek])return;this.setState(s=>({inp:{...s.inp,[k]:v},chk:{...s.chk,[ek]:false}}));}
+  renderVals(){
+    const {inp,chk,open}=this.state;
+    let solved=0,count=0;
+    const want=this.props.notion??'toutes';
+    const notions=N.map((no,ni)=>{
+      let ns=0;
+      const exs=no.exs.map((ex,ei)=>{
+        const ek=no.id+'e'+ei, checked=!!chk[ek];
+        const allOk=ex.qs.every((q,qi)=>this.qOk(ek+'q'+qi,q));
+        if(checked&&allOk)ns++;
+        const qs=ex.qs.map((q,qi)=>{
+          const k=ek+'q'+qi, ok=this.qOk(k,q), v=inp[k];
+          const base={label:q.label,isNum:q.t==='num',isMcq:q.t==='mcq',isVf:q.t==='vf',isTxt:q.t==='txt',tag:TAG[q.t],show:checked,verdict:ok?'✓ Juste':(v===undefined||v==='')?'À compléter':'✗ À revoir',fs:ok?'normal':'italic'};
+          if(q.t==='num'||q.t==='txt')return {...base,prefix:q.prefix,unit:q.unit,value:v??'',bd:'#000',bw:checked?'2px':'1px',
+            onChange:e=>this.set(k,e.target.value,ek),onKey:e=>{if(e.key==='Enter')this.setState(s=>({chk:{...s.chk,[ek]:true}}));}};
+          return {...base,choices:(q.t==='vf'?['Vrai','Faux']:q.opts).map((label,ci)=>({label,letter:LET[ci],bg:v===ci?'#e8e8e8':'#fff',bw:v===ci?'2px':'1px',pick:()=>this.set(k,ci,ek)}))};
+        });
+        return {n:ei+1,enonce:ex.enonce,figTri:ex.fig==='tri',figPap:ex.fig==='pap',qs,indice:ex.indice,correction:ex.correction,
+          status:checked?(allOk?'Réussi':'À revoir'):'',
+          checked,notChecked:!checked,
+          ...(()=>{const ok=ex.qs.filter((q,qi)=>this.qOk(ek+'q'+qi,q)).length, tot=ex.qs.length, note=Math.round(ok/tot*20)/2;
+            const parts=ex.correction.split(/\s(?=[b-h]\.\s)/).map(s=>s.replace(/^[a-h]\.\s*/,''));
+            return {note:frn(note),mention:note>=9?'Excellent':note>=7?'Très bien':note>=5?'Assez bien':'À retravailler',
+              detail:ok+' bonne'+(ok>1?'s':'')+' réponse'+(ok>1?'s':'')+' sur '+tot+'.',
+              cor:ex.qs.map((q,qi)=>{const k=ek+'q'+qi,v=inp[k],good=this.qOk(k,q),empty=v===undefined||v===null||v==='';
+                const g=q.t==='mcq'?LET[q.ok]+'. '+q.opts[q.ok]:q.t==='vf'?['Vrai','Faux'][q.ok]:q.t==='txt'?q.acc[0]:frn(Math.round(q.ans*100)/100)+(q.unit&&q.unit.length<4?' '+q.unit:'');
+                return {letter:String.fromCharCode(97+qi),verdict:good?'✓ Juste':empty?'✗ Sans réponse':'✗ Faux',good:g,expl:parts[qi]||ex.correction};})};})(),
+          retry:()=>this.setState(s=>{const f=o=>Object.fromEntries(Object.entries(o).filter(([k])=>!k.startsWith(ek)));return {inp:f(s.inp),chk:f(s.chk)};}),
+          hasMsg:checked,msg:allOk?'Tout est juste, bravo !':'Certaines réponses sont à revoir.',
+          showInd:!!open[ek+'i'],showCor:!!open[ek+'c'],
+          indLabel:open[ek+'i']?'Masquer l\'indice':'Indice',corLabel:open[ek+'c']?'Masquer la correction':'Correction',
+          check:()=>this.setState(s=>({chk:{...s.chk,[ek]:true}})),
+          toggleInd:()=>this.setState(s=>({open:{...s.open,[ek+'i']:!s.open[ek+'i']}})),
+          toggleCor:()=>this.setState(s=>({open:{...s.open,[ek+'c']:!s.open[ek+'c']}}))};
+      });
+      solved+=ns;count+=no.exs.length;
+      return {reset:()=>this.setState(s=>{const f=o=>Object.fromEntries(Object.entries(o).filter(([k])=>!k.startsWith(no.id)));return {inp:f(s.inp),chk:f(s.chk),open:f(s.open)};}),id:no.id,href:'#'+no.id,num:ni+1,title:no.title,rappel:no.rappel,exs,score:ns+' / '+no.exs.length+' exercice'+(ns>1?'s':'')+' réussi'+(ns>1?'s':'')};
+    });
+    return {notions:notions.filter(x=>want==='toutes'||x.id===want),total:'Progression : '+solved+' / '+count+' exercices réussis',resetAll:()=>this.setState({inp:{},chk:{},open:{}})};
+  }
+}
+</script>
+</body>
+</html>

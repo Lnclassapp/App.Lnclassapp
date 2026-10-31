@@ -1,6 +1,6 @@
 # 🧠 DOMAINE · Dtos::Assessment::CopyInput
 # Rôle : la copie rendue par l'élève : une réponse par question (AttemptInput) ou nil quand elle est laissée vide
-# ADR  : 0054, 0091 (§4.4 : jamais d'identifiant pour l'ordre et relier), 0112 · UDR : 0138
+# ADR  : 0054, 0091 (§4.4 : jamais d'identifiant pour l'ordre et relier), 0112, 0120-questions-a-plusieurs-cases-et-indice (§4 : blanks) · UDR : 0138
 module Dtos
   module Assessment
     class CopyInput
@@ -9,7 +9,7 @@ module Dtos
 
       # Une copie n'a jamais plus de réponses que cette borne ; le use case la compare au nombre réel de questions.
       MAX_ANSWERS = 100
-      FIELDS = %i[answer_ids response_text display_order].freeze
+      FIELDS = %i[answer_ids response_text display_order blanks].freeze
       INTEGER = AttemptInput::INTEGER
 
       attribute :session_public_id, :string
@@ -58,7 +58,15 @@ module Dtos
       # Rien cochée, texte vide, aucun indice d'affichage choisi (relier : « Choisis… » partout) → question vide.
       def blank_fields?(fields)
         Array(fields[:answer_ids]).all? { it.to_s.strip.empty? } && blank_text?(fields[:response_text]) &&
-          Array(fields[:display_order]).all? { it.to_s.strip.empty? }
+          Array(fields[:display_order]).all? { it.to_s.strip.empty? } && blank_cases?(fields[:blanks])
+      end
+
+      # Aucune case remplie (ou choisie) : la question est vide. Une forme illisible n'est pas vide, AttemptInput la refuse.
+      def blank_cases?(blanks)
+        return true if blanks.nil?
+        return false unless blanks.respond_to?(:each_pair) || blanks.is_a?(Array)
+
+        (blanks.respond_to?(:each_pair) ? blanks.each_pair.map(&:last) : blanks).all? { it.is_a?(String) && blank_text?(it) }
       end
     end
   end

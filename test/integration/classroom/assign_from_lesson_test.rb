@@ -58,7 +58,7 @@ class Classroom::AssignFromLessonTest < ActionDispatch::IntegrationTest
   test "the whole-lesson rows carry a toggle for each classroom the teacher teaches" do
     get course_path(@course.slug)
 
-    assert_select "#prepare-interros-grid li:has(#toute-la-lecon) ##{toggle_id(@classroom, @wide)}"
+    assert_select ".ps-sheet#toute-la-lecon ##{toggle_id(@classroom, @wide)}"
   end
 
   test "the page lists only the classrooms the teacher teaches" do

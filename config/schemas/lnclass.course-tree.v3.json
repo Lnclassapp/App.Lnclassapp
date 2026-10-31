@@ -106,6 +106,13 @@
           "items": {
             "$ref": "#/$defs/exercise"
           }
+        },
+        "subjects": {
+          "description": "Les sujets de devoir de la leçon, facultatifs : dix au plus, compté par l'adaptateur (raison too_many_subjects).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/subject"
+          }
         }
       }
     },
@@ -212,6 +219,33 @@
           "then": {
             "$ref": "#/$defs/exercise"
           }
+        },
+        "practice": {
+          "description": "Entraînement facultatif de la notion (ADR entraînement corrigé sans trace) : 1 à 6 questions sans points, image ni grille ; les règles de chaque question et l'empreinte sont vérifiées par l'adaptateur (Entities::Catalog::NotionPractice).",
+          "type": [
+            "object",
+            "null"
+          ],
+          "additionalProperties": false,
+          "required": [
+            "questions"
+          ],
+          "properties": {
+            "statement": {
+              "type": [
+                "string",
+                "null"
+              ],
+              "maxLength": 1200
+            },
+            "questions": {
+              "type": "array",
+              "maxItems": 6,
+              "items": {
+                "$ref": "#/$defs/practice_question"
+              }
+            }
+          }
         }
       }
     },
@@ -259,6 +293,13 @@
           "items": {
             "$ref": "#/$defs/question"
           }
+        },
+        "hint": {
+          "description": "L'indice montré avant la vérification (ADR sujets-de-devoir §4) : facultatif ; sa longueur (1 à 400 caractères) est vérifiée par l'adaptateur, qui nomme la raison.",
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -336,6 +377,80 @@
           ],
           "minimum": 0,
           "maximum": 99999999.9999
+        },
+        "hint": {
+          "description": "Indice facultatif (ADR questions à plusieurs cases) : 500 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
+        }
+      },
+      "required": [
+        "content",
+        "question_type",
+        "answers"
+      ]
+    },
+    "practice_question": {
+      "description": "Une question d'entraînement : celle d'un exercice noté, sans points, image ni grille.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 2000
+        },
+        "question_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "explanation": {
+          "description": "La correction rédigée, obligatoire pour toute question (ADR-0116 §4.1) : 20 à 2 000 caractères, vérifiés par l'adaptateur (raisons blank, too_short, too_long).",
+          "type": "string"
+        },
+        "unit": {
+          "description": "Unité d'une question numeric : 10 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 10
+        },
+        "starter": {
+          "description": "Début de phrase d'une question written : 150 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 150
+        },
+        "answers": {
+          "description": "Dix propositions au plus par question.",
+          "type": "array",
+          "maxItems": 10,
+          "items": {
+            "$ref": "#/$defs/answer"
+          }
+        },
+        "tolerance": {
+          "type": [
+            "number",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 99999999.9999
+        },
+        "hint": {
+          "description": "Indice facultatif (ADR questions à plusieurs cases) : 500 caractères au plus.",
+          "type": [
+            "string",
+            "null"
+          ],
+          "maxLength": 500
         }
       },
       "required": [
@@ -388,6 +503,100 @@
             "null"
           ],
           "maxLength": 500
+        },
+        "blank": {
+          "description": "La case (0 à 5) à laquelle la réponse se rattache ; 0 sans la clé.",
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0,
+          "maximum": 5
+        }
+      }
+    },
+    "subject_exercise": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "statement",
+        "exercise_type"
+      ],
+      "properties": {
+        "title": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "statement": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 5000
+        },
+        "exercise_type": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 40
+        },
+        "figure": {
+          "$ref": "#/$defs/figure_key"
+        },
+        "statement_blocks": {
+          "description": "Le sujet en blocs (ADR-0115) : dix blocs au plus, objets ; leurs types et leurs textes sont vérifiés par l'adaptateur (paragraph, box, table).",
+          "type": [
+            "array",
+            "null"
+          ],
+          "maxItems": 10,
+          "items": {
+            "type": "object"
+          }
+        },
+        "questions": {
+          "description": "Cinq à trente questions par exercice (ADR-0116 §4.1), comptées par l'adaptateur (raisons too_few_questions et invalid_count).",
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/question"
+          }
+        },
+        "hint": {
+          "description": "L'indice montré avant la vérification (ADR sujets-de-devoir §4) : facultatif ; sa longueur (1 à 400 caractères) est vérifiée par l'adaptateur, qui nomme la raison.",
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "notion": {
+          "description": "Refusée par l'adaptateur si elle est non vide : un exercice de sujet n'a pas de notion (raison subject_exercise_with_notion, qui nomme le sujet).",
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      }
+    },
+    "subject": {
+      "description": "Un sujet de devoir (ADR sujets-de-devoir §4) : titre, notions mobilisées et ses exercices. Les bornes (titre 1 à 200, notions 1 à 600, 10 exercices au plus) sont vérifiées par l'adaptateur, pour noter l'erreur à sa raison propre.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "title",
+        "notions",
+        "exercises"
+      ],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "notions": {
+          "type": "string"
+        },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/subject_exercise"
+          }
         }
       }
     }

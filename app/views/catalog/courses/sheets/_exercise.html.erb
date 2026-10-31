@@ -1,0 +1,86 @@
+<%# 🌐 UI · catalog/courses/sheets/_exercise — un exercice de la feuille : énoncé, figure, questions, indice, barre d'actions %>
+<%# Rôle : le frame `sheet-exercise-<public_id>` que la vérification remplace ; élève : champs et « Vérifier ma réponse » (un devoir à rendre : « Ce devoir est à rendre… » à la place) ; exercice déjà vérifié : son statut, « Voir ma correction » (la page de résultat, note sur 20) et « Refaire l'exercice » ; enseignant : pas de champ, ses bascules (_teacher_bar) ; équipe : pas de champ %>
+<%# ADR  : 0121, 0120, 0091 §4.4 (aucune correction avant la vérification) · UDR : 0149 §3 · Stimulus : prepare-sheet, math %>
+<%# locals: (exercise:, mode:, targets: nil, classrooms: [], assignment_public_id: nil, return_to: "sheet") -%>
+<%# return_to : où la page de résultat ramène l'élève, "sheet" (l'exercice dans la leçon) ou "class" (« Ma classe ») ; jamais une adresse %>
+<%# assignment_public_id : l'exercice est un devoir à rendre (« Ma classe ») ; exercise.copy y est la copie rendue, nil avant : ni statut ni correction avant le rendu %>
+<% fields = %i[student visitor].include?(mode) %>
+<% copy = exercise.copy %>
+<%# Un seul « Indice » par exercice : celui de l'exercice, puis ceux de ses questions (une ligne lettrée chacune, comme _question). %>
+<% question_hints = exercise.questions.select { it.hint.present? } %>
+<% hinted = exercise.hint.present? || question_hints.any? %>
+<% checked = !copy.nil? %>
+<%# Un devoir pas encore rendu : « Rendre à l'enseignant » et le devoir posté ; une fois rendu (ou refait), « Vérifier ma réponse », sans devoir. %>
+<% hand_in = fields && assignment_public_id.present? && !checked %>
+<% frame_data = { prepare_sheet_target: ("exercise" if fields), exercise_id: exercise.public_id, checked: checked, copy: copy&.session_public_id }.compact %>
+<%# Le formulaire n'existe que pour qui répond : les bascules de l'enseignant sont des formulaires, qui ne s'imbriquent pas. %>
+<% body = capture do %>
+  <div class="ps-exercise-top">
+    <div class="ps-exercise-main">
+      <div class="ps-exercise-head">
+        <b><%= t("catalog.courses.sheets.exercise", number: exercise.number) %></b>
+        <span class="ps-status" data-ps="done" <%= tag.attributes(hidden: !checked) %>><%= t("catalog.courses.sheets.#{copy.passed ? :passed : :to_review}") if checked %></span>
+        <%# L'équipe lit le statut éditorial de chaque exercice (brouillon ou publié) ; les autres rôles ne le voient pas. %>
+        <% if mode == :team && exercise.status.present? %><span class="ps-status"><%= t("catalog.content_status.#{exercise.status}") %></span><% end %>
+      </div>
+      <% if exercise.statement.present? %>
+        <div class="ps-statement" data-controller="math"><%= simple_format(exercise.statement) %></div>
+      <% end %>
+      <% if exercise.statement_blocks.present? %>
+        <div class="space-y-3"><%= render "assessment/statement_blocks/blocks", blocks: exercise.statement_blocks %></div>
+      <% end %>
+    </div>
+    <% if exercise.figure %>
+      <div class="ps-figure w-48 [&_figure]:rounded-none [&_figure]:border-0 [&_figure]:bg-transparent [&_figure]:p-0"><%= render "catalog/figures/figure", figure: exercise.figure, frame: :app %></div>
+    <% end %>
+  </div>
+  <% exercise.questions.each do |question| %>
+    <%= render "catalog/courses/sheets/question", question:, fields:, checked: %>
+  <% end %>
+  <% if fields && hinted %>
+    <div id="hint-<%= exercise.public_id %>" class="ps-hint" data-ps="hint" hidden>
+      <b><%= t("catalog.courses.sheets.hint_label") %></b> <%= exercise.hint %>
+      <% question_hints.each do |question| %>
+        <div><%= "#{(96 + question.number).chr}. #{question.hint}" %></div>
+      <% end %>
+    </div>
+  <% end %>
+  <div class="ps-actions">
+    <% if fields && exercise.due && assignment_public_id.blank? %>
+      <%# CA-17 : un devoir à rendre ne se vérifie pas depuis la leçon ; ni « Vérifier ma réponse », ni « Indice ». %>
+      <%= render "assessment/sheet_checks/error", exercise_public_id: exercise.public_id, code: :assigned_pending, alert: false %>
+    <% elsif fields %>
+      <% if mode == :visitor %>
+        <%= link_to t("catalog.courses.sheets.check"), new_session_path, class: "ps-btn ps-btn--primary", data: { ps: "blank" } %>
+      <% else %>
+        <%= hidden_field_tag :assignment_public_id, assignment_public_id, id: nil if hand_in %>
+        <%= tag.button t("catalog.courses.sheets.#{hand_in ? :hand_in : :check}"), type: :submit, class: "ps-btn ps-btn--primary",
+                        data: { ps: "blank", turbo_submits_with: t("catalog.courses.sheets.checking") }, hidden: checked %>
+      <% end %>
+      <% if hinted %>
+        <%= tag.button t("catalog.courses.sheets.hint"), type: :button, class: "ps-btn ps-btn--hint", hidden: checked,
+                        aria: { expanded: false, controls: "hint-#{exercise.public_id}" },
+                        data: { ps: "blank", action: "prepare-sheet#hint", label_show: t("catalog.courses.sheets.hint"), label_hide: t("catalog.courses.sheets.hide_hint") } %>
+      <% end %>
+      <% if checked && mode == :student %>
+        <%= link_to t("catalog.courses.sheets.see_correction"), exercise_session_result_path(copy.session_public_id, return_to:),
+                    class: "ps-btn ps-btn--redo", data: { ps: "done", turbo_frame: "_top", turbo_prefetch: false } %>
+      <% end %>
+      <%= tag.button t("catalog.courses.sheets.redo"), type: :button, class: "ps-btn ps-btn--redo", hidden: !checked,
+                      data: { ps: "done", action: "prepare-sheet#redo" } %>
+    <% elsif mode == :teacher %>
+      <%= render "catalog/courses/sheets/teacher_bar", exercise:, targets:, classrooms: %>
+    <% end %>
+  </div>
+<% end %>
+<%= turbo_frame_tag "sheet-exercise-#{exercise.public_id}", class: "ps-exercise", data: frame_data do %>
+  <% if fields %>
+    <%# La copie rendue ouvre la page de résultat : le formulaire vise toute la page, pas le frame. %>
+    <%= form_with url: exercise_sheet_check_path(exercise.public_id), method: :post, class: "contents", html: { novalidate: true }, data: { turbo_frame: "_top" } do %>
+      <%= hidden_field_tag :return_to, return_to, id: nil if mode == :student %>
+      <%= body %>
+    <% end %>
+  <% else %>
+    <%= body %>
+  <% end %>
+<% end %>

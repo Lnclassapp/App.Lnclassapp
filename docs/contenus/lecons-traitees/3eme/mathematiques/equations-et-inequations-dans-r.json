@@ -249,6 +249,79 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Dans cet entraînement, tu résous des équations du premier degré dans $\\mathbb{R}$ en suivant les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Résous l'équation $7x + 4 = 25$. $x$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Le $+4$ change de membre : quel signe prend-il ?",
+                "explanation": "Étape 1 — Développer et réduire : rien à développer. Étape 2 — Regrouper : $7x = 25 - 4$ (le $+4$ change de membre et de signe). Étape 3 — Réduire : $7x = 21$. Étape 4 — Diviser par $7$ : $x = \\frac{21}{7} = 3$. Étape 5 — Vérifier : $7 \\times 3 + 4 = 25$. Donc $S = \\{3\\}$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On résout $3(x + 2) - 5 = 4x - 7$. Après développement, regroupement des termes en $x$ dans le membre de gauche et réduction, on obtient $ax = b$. $a$ = ___   $b$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Développe d'abord $3(x + 2)$, puis réduis le membre de gauche.",
+                "explanation": "Étape 1 — Développer et réduire : $3x + 6 - 5 = 4x - 7$, soit $3x + 1 = 4x - 7$. Étape 2 — Regrouper : $3x - 4x = -7 - 1$. Étape 3 — Réduire : $-x = -8$, donc $a = -1$ et $b = -8$. Étape 4 — Diviser par $-1$ : $x = 8$. Étape 5 — Vérifier : $3(8 + 2) - 5 = 25$ et $4 \\times 8 - 7 = 25$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-8",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour résoudre $5x - 9 = 2x + 6$, quelle est l'étape de regroupement correcte ?",
+                "question_type": "select",
+                "hint": "Chaque terme qui change de membre change de signe.",
+                "explanation": "Étape 1 — Développer et réduire : rien à faire. Étape 2 — Regrouper : le $2x$ passe à gauche en devenant $-2x$, le $-9$ passe à droite en devenant $+9$. On obtient $5x - 2x = 6 + 9$, soit $3x = 15$ et $x = 5$. Les autres propositions oublient de changer un signe ou changent un signe de trop.",
+                "answers": [
+                  {
+                    "content": "$5x - 2x = 6 + 9$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$5x - 2x = 6 - 9$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5x + 2x = 6 + 9$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$5x - 2x = -6 - 9$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous l'équation $9x - 5 = 4x + 20$. $x$ = ___",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Développer et réduire : rien à développer. Étape 2 — Regrouper : $9x - 4x = 20 + 5$. Étape 3 — Réduire : $5x = 25$. Étape 4 — Diviser par $5$ : $x = 5$. Étape 5 — Vérifier : $9 \\times 5 - 5 = 40$ et $4 \\times 5 + 20 = 40$. Donc $S = \\{5\\}$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -408,6 +481,83 @@
                   {
                     "content": "Vrai",
                     "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans cet entraînement, tu résous des équations produit nul dans $\\mathbb{R}$ et tu donnes les solutions de la plus petite à la plus grande.",
+            "questions": [
+              {
+                "content": "Résous $(3x - 12)(x + 7) = 0$. Plus petite solution = ___   plus grande solution = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Un facteur nul suffit : écris deux équations.",
+                "explanation": "Étape 1 — Le produit est déjà égal à $0$ et factorisé. Étape 2 — L'un des facteurs est nul : $3x - 12 = 0$ ou $x + 7 = 0$. Étape 3 — Résoudre : $x = \\frac{12}{3} = 4$ ou $x = -7$. Étape 4 — Conclure : $S = \\{-7 ; 4\\}$.",
+                "answers": [
+                  {
+                    "content": "-7",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Résous $x(x - 6) = 4x$. Plus petite solution = ___   plus grande solution = ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Passe $4x$ dans le membre de gauche, puis mets $x$ en facteur au lieu de diviser par $x$.",
+                "explanation": "Étape 1 — Se ramener à $0$ et factoriser : $x(x - 6) - 4x = x[(x - 6) - 4] = x(x - 10) = 0$. Étape 2 — L'un des facteurs est nul : $x = 0$ ou $x - 10 = 0$. Étape 3 — Résoudre : $x = 0$ ou $x = 10$. Étape 4 — Conclure : $S = \\{0 ; 10\\}$.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Résous $(x - 2)(x + 4) = (x - 2)(3x - 1)$. Plus petite solution = ___   plus grande solution = ___",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Le facteur commun est $(x - 2)$ : factorise-le.",
+                "explanation": "Étape 1 — Se ramener à $0$ et factoriser : $(x - 2)[(x + 4) - (3x - 1)] = (x - 2)(-2x + 5) = 0$. Étape 2 — L'un des facteurs est nul : $x - 2 = 0$ ou $-2x + 5 = 0$. Étape 3 — Résoudre : $x = 2$ ou $x = \\frac{5}{2} = 2{,}5$. Étape 4 — Conclure : $S = \\{2 ; 2{,}5\\}$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2.5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Pour résoudre $(x - 3)(x + 2) = 5$, on peut écrire : $x - 3 = 5$ ou $x + 2 = 5$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Se ramener à $0$ : la règle du produit nul ne s'applique que si le produit est égal à $0$. Ici le produit vaut $5$, donc on ne peut pas écrire que l'un des facteurs vaut $5$. Il faut d'abord développer et passer le $5$ à gauche pour obtenir une équation de la forme $A \\times B = 0$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
                   }
                 ]
               }
@@ -577,6 +727,89 @@
                 ]
               }
             ]
+          },
+          "practice": {
+            "statement": "Dans cet entraînement, tu résous des inéquations du premier degré dans $\\mathbb{R}$ et tu écris les solutions sous forme d'intervalle.",
+            "questions": [
+              {
+                "content": "On a obtenu $-3x > 12$. En divisant par $-3$, on obtient : $x$ ___ $-4$",
+                "question_type": "select",
+                "hint": "Regarde le signe du nombre par lequel tu divises.",
+                "explanation": "Étape 4 — Diviser par $-3$ : le nombre est négatif, donc le sens s'inverse. $-3x > 12$ donne $x < -4$. Vérification : pour $x = -5$, $-3 \\times (-5) = 15 > 12$.",
+                "answers": [
+                  {
+                    "content": "<",
+                    "correct": true
+                  },
+                  {
+                    "content": ">",
+                    "correct": false
+                  },
+                  {
+                    "content": "≤",
+                    "correct": false
+                  },
+                  {
+                    "content": "≥",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Résous $-3x + 4 > 16$. Les solutions sont les $x$ strictement inférieurs à la borne ___",
+                "question_type": "numeric",
+                "tolerance": 0.01,
+                "hint": "Après avoir regroupé, n'oublie pas d'inverser le sens en divisant par un nombre négatif.",
+                "explanation": "Étape 1 — Développer et réduire : rien à développer. Étape 2 — Regrouper : $-3x > 16 - 4$. Étape 3 — Réduire : $-3x > 12$. Étape 4 — Diviser par $-3$ (négatif) : le sens s'inverse, $x < -4$. Étape 5 — Intervalle : $S = ]-\\infty ; -4[$.",
+                "answers": [
+                  {
+                    "content": "-4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Les solutions de $x \\geq 2$ s'écrivent : $S =$ ___ $2 ; +\\infty[$. Le crochet en $2$ est ___",
+                "question_type": "select",
+                "hint": "Une inégalité large (avec « égal ») inclut la borne.",
+                "explanation": "Étape 5 — Écrire l'intervalle : l'inégalité est large ($\\geq$), donc la borne $2$ est incluse : le crochet est fermé et se place vers l'intérieur, $S = [2 ; +\\infty[$. En $+\\infty$, le crochet est toujours ouvert.",
+                "answers": [
+                  {
+                    "content": "[",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "]",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "fermé",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "ouvert",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le plus petit nombre entier solution de $3(x + 1) < 5x - 7$ ? ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Résous d'abord l'inéquation ; la borne est-elle incluse ?",
+                "explanation": "Étape 1 — Développer et réduire : $3x + 3 < 5x - 7$. Étape 2 — Regrouper : $3x - 5x < -7 - 3$. Étape 3 — Réduire : $-2x < -10$. Étape 4 — Diviser par $-2$ : le sens s'inverse, $x > 5$. Étape 5 — Intervalle : $S = ]5 ; +\\infty[$. La borne $5$ est exclue, donc le plus petit entier solution est $6$. Vérification : pour $x = 6$, $3 \\times 7 = 21 < 23$ ; pour $x = 5$, $3 \\times 6 = 18$ n'est pas inférieur à $18$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
           }
         },
         {
@@ -719,6 +952,82 @@
                   {
                     "content": "$11$ trajets",
                     "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans cet entraînement, tu mets de petits problèmes de la vie courante en équation ou en inéquation.",
+            "questions": [
+              {
+                "content": "Un taxi compte $500$ F de prise en charge plus $250$ F par kilomètre. Une course coûte $3\\,000$ F. Avec $x$ le nombre de kilomètres, quelle équation traduit la situation ?",
+                "question_type": "select",
+                "hint": "Qu'est-ce qui est payé une seule fois, et qu'est-ce qui dépend du nombre de kilomètres ?",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de kilomètres. Étape 2 — Traduire : la prise en charge est fixe ($500$) et les kilomètres sont payés $250$ F chacun ($250x$). Donc $500 + 250x = 3\\,000$. Le prix par kilomètre se multiplie par $x$, pas la prise en charge.",
+                "answers": [
+                  {
+                    "content": "$500 + 250x = 3\\,000$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$500x + 250 = 3\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(500 + 250)x = 3\\,000$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$250 + 500x = 3\\,000$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avec la même tarification ($500$ F + $250$ F par km), une course coûte $3\\,000$ F. Quelle distance a été parcourue ?",
+                "question_type": "numeric",
+                "unit": "km",
+                "tolerance": 0.01,
+                "hint": "Retire d'abord la prise en charge du prix total.",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est la distance en km. Étape 2 — Traduire : $500 + 250x = 3\\,000$. Étape 3 — Résoudre : $250x = 2\\,500$, donc $x = 10$. Étape 4 — Vérifier : $500 + 250 \\times 10 = 3\\,000$. Étape 5 — Conclure : la course fait $10$ km.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dispose de $15\\,000$ F. Il a déjà dépensé $3\\,000$ F et veut acheter des stylos à $1\\,100$ F l'un. Quel est le nombre maximal de stylos qu'il peut acheter ? ___",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "hint": "Le résultat est-il un nombre entier de stylos ?",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre de stylos. Étape 2 — Traduire : $3\\,000 + 1\\,100x \\leq 15\\,000$. Étape 3 — Résoudre : $1\\,100x \\leq 12\\,000$, donc $x \\leq 10{,}9$ environ. Étape 4 — Vérifier : $x$ doit être entier ; $11$ stylos coûteraient $12\\,100$ F, ce qui dépasse $12\\,000$ F. Étape 5 — Conclure : il peut acheter $10$ stylos au plus.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un père a $45$ ans et sa fille $9$ ans. Dans $x$ années, l'âge du père sera le quadruple de celui de sa fille. $x$ (ans) = ___   âge du père alors (ans) = ___",
+                "question_type": "numeric",
+                "unit": "ans",
+                "tolerance": 0,
+                "hint": "Dans $x$ années, le père aura $45 + x$ ans et sa fille $9 + x$.",
+                "explanation": "Étape 1 — Choisir l'inconnue : $x$ est le nombre d'années à attendre. Étape 2 — Traduire : $45 + x = 4(9 + x)$. Étape 3 — Résoudre : $45 + x = 36 + 4x$, soit $9 = 3x$, donc $x = 3$. Étape 4 — Vérifier : le père aura $48$ ans, la fille $12$ ans, et $4 \\times 12 = 48$. Étape 5 — Conclure : dans $3$ ans, le père aura $48$ ans.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "48",
+                    "correct": true,
+                    "blank": 1
                   }
                 ]
               }

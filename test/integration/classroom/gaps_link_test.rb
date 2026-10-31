@@ -49,10 +49,8 @@ class Classroom::GapsLinkTest < ActionDispatch::IntegrationTest
 
     get course_path(@course.slug)
 
-    # UDR-0145 §3.2 bis : l'ancre est le premier enfant du <li> de la première carte de la notion.
-    assert_select "##{anchor}", 1
-    assert_select "#prepare-interros-grid li > span##{anchor}", 1
+    assert_select ".ps-sheet##{anchor}", 1
     exercise = Orm::Exercise.find_by!(essential: @notion)
-    assert_select "li:has(> span##{anchor}) a[href=?]", exercise_path(exercise.public_id)
+    assert_select ".ps-sheet##{anchor} turbo-frame#sheet-exercise-#{exercise.public_id}"
   end
 end

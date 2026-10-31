@@ -1,0 +1,18 @@
+# Vérifier un exercice sur la feuille de la leçon — ADR-0121 (§4), UDR-0149 (§3)
+# Messages d'erreur de l'exercice, affichés dans un `p role="alert"`, réponses gardées. La note et la correction d'une copie sont
+# celles de la page de résultat (assessment.session_results.show), sur 20.
+fr:
+  assessment:
+    sheet_checks:
+      errors:
+        # time : « 10 h 50 ».
+        paused: "Tu as rendu 3 copies d'affilée. Tu pourras recommencer à %{time}."
+        archived: "Cet exercice n'existe plus."
+        # La copie a refusé une saisie (pas un nombre, trop longue, mauvaise sélection) : l'élève la corrige, ce n'est pas une panne.
+        invalid_copy: "Une réponse n'est pas lisible : vérifie-la (un nombre est attendu pour un calcul), puis réessaie."
+        failed: "La copie n'est pas partie. Réessaie."
+        # « Rendre à l'enseignant » sur un devoir déjà rendu, ou retiré par l'enseignant.
+        assignment_closed: "Ce devoir n'est plus à rendre."
+        # CA-17 : le devoir assigné et pas encore rendu se rend depuis « Ma classe » ; link : le lien vers « Ma classe ».
+        assigned_pending_html: "Ce devoir est à rendre : ouvre-le dans %{link}."
+      class_link: "Ma classe"
