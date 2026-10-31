@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | bugfix |
-| **Statut** | en cours |
+| **Statut** | livré |
 | **Ouvert le** | 2026-10-31 |
 | **Branche** | `bugfix/couverture-train` |
 | **Programme** | — |

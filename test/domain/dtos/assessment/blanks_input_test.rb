@@ -26,12 +26,29 @@ module Dtos
         assert_equal [ :invalid ], input({ "0" => "a\0b" }).tap(&:valid?).errors.details[:response_text].pluck(:error)
       end
 
+      test "une case aux octets invalides est gardée telle quelle puis refusée, sans exception" do
+        subject = input({ "0" => "a\xFFb" })
+
+        assert_equal [ "a\xFFb" ], subject.blanks
+        assert_not subject.valid?
+        assert_equal [ :invalid ], subject.errors.details[:response_text].pluck(:error)
+      end
+
       test "la copie lit blanks, et une question dont toutes les cases sont vides reste sans réponse" do
         copy = CopyInput.new(session_public_id: "abc", answers: { "7" => { blanks: { "0" => "3", "1" => "" } }, "8" => { blanks: { "0" => " ", "1" => "" } } })
 
         assert copy.valid?
         assert_equal [ "3", "" ], copy.answers.fetch(7).blanks
         assert_nil copy.answers.fetch(8)
+      end
+
+      test "la copie lit aussi des cases postées en liste ; une forme illisible n'est pas une question vide" do
+        copy = CopyInput.new(session_public_id: "abc", answers: { "7" => { blanks: [ "3", "" ] }, "8" => { blanks: [ " ", "" ] }, "9" => { blanks: "texte" } })
+
+        assert_equal [ "3", "" ], copy.answers.fetch(7).blanks
+        assert_nil copy.answers.fetch(8)
+        assert_instance_of AttemptInput, copy.answers.fetch(9)
+        assert_not copy.answers.fetch(9).valid?
       end
     end
   end

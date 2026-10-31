@@ -85,8 +85,6 @@ module UseCases
                                               assigned_by_id: actor.user_id, assigned_at: now, archived_at: nil, due_on:, batch_public_id:)
         end
         created = @assignments.create_batch(assignments:)
-        return created if created.failure?
-
         Shared::Result.success(Sent.new(classroom:, created: created.value.created, skipped: created.value.skipped))
       end
     end

@@ -100,6 +100,27 @@ class Classroom::AssignmentBatchesControllerTest < ActionDispatch::IntegrationTe
     assert_equal 1, Orm::ClassroomAssignment.count
   end
 
+  test "without Turbo, an exercise already assigned is named after the sending in the one message" do
+    create_assignment(classroom: @classroom, assignable: @exercises[1], by: @teacher)
+    sign_in_as @teacher
+
+    post batch_path, params: { exercise_public_ids: ids(@exercises[0], @exercises[1]) }, headers: { "HTTP_REFERER" => course_url(@thales.slug) }
+
+    assert_redirected_to course_url(@thales.slug)
+    assert_equal "#{tl('batch.done', classroom: '3e 1', count: 1)} #{tl('batch.already_assigned', titles: 'Exercice 2')}", flash[:notice]
+  end
+
+  test "without Turbo, when all are already assigned only the skipped exercises are named" do
+    create_assignment(classroom: @classroom, assignable: @exercises[0], by: @teacher)
+    sign_in_as @teacher
+
+    post batch_path, params: { exercise_public_ids: ids(@exercises[0]) }, headers: { "HTTP_REFERER" => course_url(@thales.slug) }
+
+    assert_redirected_to course_url(@thales.slug)
+    assert_equal tl("batch.already_assigned", titles: "Exercice 1"), flash[:notice]
+    assert_equal 1, Orm::ClassroomAssignment.count
+  end
+
   # --- Refus : droits ---------------------------------------------------------------------------------------------------
 
   test "another teacher's classroom: 403, nothing written" do

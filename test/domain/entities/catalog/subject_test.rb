@@ -25,6 +25,13 @@ module Entities
         assert_predicate subject(notions: "a" * 600), :valid?
       end
 
+      test "un titre ou des notions absents (nil) restent absents et sont refusés" do
+        assert_nil subject(title: nil).title
+        assert_not subject(title: nil).valid?
+        assert_nil subject(notions: nil).notions
+        assert_not subject(notions: nil).valid?
+      end
+
       test "le cours et la position sont obligatoires, la position est positive" do
         assert_not subject(course_id: nil).valid?
         assert_not subject(position: 0).valid?
