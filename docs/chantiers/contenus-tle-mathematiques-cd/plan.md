@@ -53,9 +53,9 @@ Pas de Lot 0 : aucun contrat, aucune table, aucune route.
 - [x] UDR écrite pour **chaque** vue créée ou modifiée — sans objet
 - [x] `plan.md` : 4 champs par lot, tableau de collision rempli
 - [x] Lot 0 mergé et ports gelés avant tout lot parallèle — sans objet
-- [ ] Chaque critère d'acceptation a son test (contrôles, relecture)
+- [x] Chaque critère d'acceptation a son test (contrôles, relecture)
 - [x] En-tête HITL sur chaque fichier créé dans `app/` — sans objet
-- [ ] Un rôle distinct a relu chaque leçon
-- [ ] `bin/ci-quiet` au vert
-- [ ] PR unique vers `Develop`
-- [ ] `journal.md` clos
+- [x] Un rôle distinct a relu chaque leçon
+- [x] `bin/ci-quiet` au vert
+- [x] PR unique vers `Develop`
+- [x] `journal.md` clos

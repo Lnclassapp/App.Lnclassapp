@@ -4,13 +4,13 @@ require "test_helper"
 # Les 4 leçons de Tle D (nœuds d'avant le format 3) passent par ContentTreeWriter#write ; toutes les
 # lignes écrites sont comparées, champ par champ, à l'instantané pris AVANT l'optimisation
 # (test/fixtures/files/content_tree_snapshot.json). Cet instantané ne se régénère pas : si ce test rougit, c'est
-# l'implémentation qu'on corrige.
+# l'implémentation qu'on corrige. Les 4 fichiers v1 sont figés sous test/fixtures/files/lecons_v1/ : les vagues v3 remplacent ceux de docs/.
 module Repositories
   module Catalog
     class ContentTreeWriterCharacterizationTest < ActiveSupport::TestCase
       LESSONS = %w[mathematiques/limites-et-continuite physique-chimie/cinematique-du-point physique-chimie/les-alcools
                    svt/le-devenir-des-cellules-sexuelles-chez-les-mammiferes]
-                .map { Rails.root.join("docs/contenus/lecons-traitees/tle-d/#{it}.json") }.sort_by { File.basename(it) }
+                .map { Rails.root.join("test/fixtures/files/lecons_v1/tle-d/#{it}.json") }.sort_by { File.basename(it) }
       SNAPSHOT = "content_tree_snapshot.json"
       TABLES = %w[courses essentials exercises questions answers action_text_rich_texts].freeze
       # Identifiants, horodatages de création et auteur : ils changent d'une base à l'autre, pas le contenu.

@@ -232,7 +232,7 @@
                 "content": "Calcule $\\int_1^4 \\dfrac{1}{\\sqrt{x}}\\,dx$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $f(x) = \\frac{1}{\\sqrt{x}}$ est continue sur $[1\\,;4]$ ; $a = 1$, $b = 4$. Étape 2 — Déterminer une primitive : $F(x) = 2\\sqrt{x}$. Étape 3 — Calculer : $F(4) = 2 \\times 2 = 4$ et $F(1) = 2 \\times 1 = 2$. Étape 4 — Conclure : $\\int_1^4 f(x)\\,dx = 4 - 2 = 2$.",
+                "explanation": "Étape 1 — Identifier : $f(x) = \\frac{1}{\\sqrt{x}}$ est continue sur $[1\\,;4]$ ; $a = 1$, $b = 4$. Étape 2 — Déterminer une primitive : $F(x) = 2\\sqrt{x}$. Étape 3 — Calculer : $F(4) = 2 \\times 2 = 4$ et $F(1) = 2 \\times 1 = 2$. Étape 4 — Conclure : $\\int_1^4 f(x)\\,dx = 4 - 2 = 2$. L'erreur tentante est d'écrire $F(x) = \\sqrt{x}$ en oubliant le facteur 2 : on trouverait $2 - 1 = 1$.",
                 "answers": [
                   {
                     "content": "2",
@@ -294,7 +294,7 @@
                 "content": "Le débit d'un robinet est $q(t) = 6t + 2$ (en litres par minute, $t$ en minutes). Quelle quantité d'eau, en litres, s'écoule entre $t = 0$ et $t = 5$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $f = q$, $a = 0$, $b = 5$ ; $q$ est continue sur $[0\\,;5]$. Étape 2 — Déterminer une primitive : $F(t) = 3t^2 + 2t$. Étape 3 — Calculer : $F(5) = 75 + 10 = 85$ et $F(0) = 0$. Étape 4 — Conclure : $\\int_0^5 q(t)\\,dt = 85$ litres.",
+                "explanation": "Étape 1 — Identifier : $f = q$, $a = 0$, $b = 5$ ; $q$ est continue sur $[0\\,;5]$. Étape 2 — Déterminer une primitive : $F(t) = 3t^2 + 2t$. Étape 3 — Calculer : $F(5) = 75 + 10 = 85$ et $F(0) = 0$. Étape 4 — Conclure : $\\int_0^5 q(t)\\,dt = 85$ litres. L'erreur tentante est de calculer $q(5) - q(0) = 32 - 2 = 30$ : c'est la différence des débits, pas la quantité d'eau.",
                 "answers": [
                   {
                     "content": "85",
@@ -392,7 +392,7 @@
             "figure": null,
             "questions": [
               {
-                "content": "On donne $\\int_0^3 f = 4$ et $\\int_3^7 f = 5$. Que vaut $\\int_0^7 f$ ?",
+                "content": "Soit $f$ continue sur $[0\\,;7]$, avec $\\int_0^3 f = 4$ et $\\int_3^7 f = 5$. Que vaut $\\int_0^7 f$ ?",
                 "question_type": "single_choice",
                 "explanation": "Étape 1 — Repérer : la borne 3 est intermédiaire, donc on utilise la relation de Chasles. Étape 2 — Vérifier : $f$ est continue et $0 \\leq 3 \\leq 7$. Étape 3 — Appliquer : $\\int_0^7 f = \\int_0^3 f + \\int_3^7 f = 4 + 5$. Étape 4 — Conclure : $9$. La proposition $20$ multiplie au lieu d'additionner ; $-1$ ou $1$ soustraient.",
                 "answers": [
@@ -415,7 +415,7 @@
                 ]
               },
               {
-                "content": "On donne $\\int_1^4 f = 6$ et $\\int_1^4 g = -2$. Calcule $\\int_1^4 (3f - 2g)$.",
+                "content": "Soit $f$ et $g$ continues sur $[1\\,;4]$, avec $\\int_1^4 f = 6$ et $\\int_1^4 g = -2$. Calcule $\\int_1^4 (3f - 2g)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Repérer : $3f - 2g$ est une combinaison de multiples, donc la linéarité s'applique. Étape 2 — Vérifier : $f$ et $g$ sont continues sur $[1\\,;4]$ et $1 \\leq 4$. Étape 3 — Appliquer : $\\int_1^4 (3f - 2g) = 3 \\times 6 - 2 \\times (-2) = 18 + 4$. Étape 4 — Conclure : $22$. Attention au signe : $-2 \\times (-2) = +4$.",
@@ -427,10 +427,10 @@
                 ]
               },
               {
-                "content": "On donne $\\int_0^2 f = 7$ et $\\int_0^5 f = 19$. Calcule $\\int_2^5 f$.",
+                "content": "Soit $f$ continue sur $[0\\,;5]$, avec $\\int_0^2 f = 7$ et $\\int_0^5 f = 19$. Calcule $\\int_2^5 f$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : la borne 2 est intermédiaire entre 0 et 5 : Chasles. Étape 2 — Vérifier : $f$ est continue et $0 \\leq 2 \\leq 5$. Étape 3 — Appliquer : $\\int_0^5 f = \\int_0^2 f + \\int_2^5 f$, donc $19 = 7 + \\int_2^5 f$. Étape 4 — Conclure : $\\int_2^5 f = 19 - 7 = 12$.",
+                "explanation": "Étape 1 — Repérer : la borne 2 est intermédiaire entre 0 et 5 : Chasles. Étape 2 — Vérifier : $f$ est continue et $0 \\leq 2 \\leq 5$. Étape 3 — Appliquer : $\\int_0^5 f = \\int_0^2 f + \\int_2^5 f$, donc $19 = 7 + \\int_2^5 f$. Étape 4 — Conclure : $\\int_2^5 f = 19 - 7 = 12$. L'erreur tentante est d'additionner : $19 + 7 = 26$ ; or c'est $\\int_0^5 f$ qui est la somme des deux morceaux.",
                 "answers": [
                   {
                     "content": "12",
@@ -456,7 +456,7 @@
               {
                 "content": "Soit $f$ et $g$ deux fonctions continues sur $[0\\,;1]$ telles que $f(x) \\leq g(x)$ pour tout $x$ de $[0\\,;1]$. Quelles affirmations sont vraies ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : on compare deux fonctions, donc l'ordre s'applique. Étape 2 — Vérifier : $0 \\leq 1$ et $f \\leq g$ sur tout $[0\\,;1]$. Étape 3 — Appliquer : $\\int_0^1 f \\leq \\int_0^1 g$, et comme $g - f \\geq 0$, la positivité donne $\\int_0^1 (g - f) \\geq 0$. Étape 4 — Conclure : les deux premières affirmations sont vraies. La troisième inverse l'ordre ; la quatrième est le piège du produit.",
+                "explanation": "Étape 1 — Repérer : on compare deux fonctions, donc l'ordre s'applique. Étape 2 — Vérifier : $0 \\leq 1$ et $f \\leq g$ sur tout $[0\\,;1]$. Étape 3 — Appliquer : $\\int_0^1 f \\leq \\int_0^1 g$, et comme $g - f \\geq 0$, la positivité donne $\\int_0^1 (g - f) \\geq 0$. Étape 4 — Conclure : $\\int_0^1 f \\leq \\int_0^1 g$ et $\\int_0^1 (g - f) \\geq 0$ sont vraies ; $\\int_0^1 f \\geq \\int_0^1 g$ inverse l'ordre ; $\\int_0^1 f\\,g = \\int_0^1 f \\times \\int_0^1 g$ est le piège du produit.",
                 "answers": [
                   {
                     "content": "$\\int_0^1 (g - f) \\geq 0$",
@@ -505,10 +505,10 @@
             "statement": "Une pompe de débit $h(t)$ (en litres par minute) remplit un bassin. On connaît certaines intégrales de $h$ et tu utilises les propriétés de la fiche.",
             "questions": [
               {
-                "content": "On donne $\\int_0^1 h = 3$ et $\\int_1^4 h = 5$. Alors $\\int_0^4 h = $ ___ et $\\int_1^4 2h = $ ___",
+                "content": "Soit $h$ continue sur $[0\\,;4]$, avec $\\int_0^1 h = 3$ et $\\int_1^4 h = 5$. Alors $\\int_0^4 h = $ ___ et $\\int_1^4 2h = $ ___",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : Chasles pour la première, linéarité pour la seconde. Étape 2 — Vérifier : $h$ est continue et $0 \\leq 1 \\leq 4$. Étape 3 — Appliquer : $\\int_0^4 h = 3 + 5 = 8$ et $\\int_1^4 2h = 2 \\times 5 = 10$. Étape 4 — Conclure : $8$ et $10$.",
+                "explanation": "Étape 1 — Repérer : Chasles pour $\\int_0^4 h$, linéarité pour $\\int_1^4 2h$. Étape 2 — Vérifier : $h$ est continue et $0 \\leq 1 \\leq 4$. Étape 3 — Appliquer : $\\int_0^4 h = 3 + 5 = 8$ et $\\int_1^4 2h = 2 \\times 5 = 10$. Étape 4 — Conclure : $8$ et $10$.",
                 "answers": [
                   {
                     "content": "8",
@@ -524,24 +524,24 @@
                 "hint": "Chasles pour additionner deux intégrales voisines, linéarité pour le facteur 2."
               },
               {
-                "content": "On donne $\\int_0^2 h = 6$ et $\\int_0^2 k = 1$. Que vaut $\\int_0^2 (h + 4k)$ ?",
+                "content": "Soit $h$ et $k$ continues sur $[0\\,;2]$, avec $\\int_0^2 h = 6$ et $\\int_0^2 k = 1$. Que vaut $\\int_0^2 (h + 4k)$ ?",
                 "question_type": "single_choice",
                 "explanation": "Étape 1 — Repérer : somme de multiples, donc linéarité. Étape 2 — Vérifier : $h$ et $k$ continues, $0 \\leq 2$. Étape 3 — Appliquer : $\\int_0^2 (h + 4k) = 6 + 4 \\times 1$. Étape 4 — Conclure : $10$. La proposition $7$ oublie le facteur 4 ; $24$ multiplie les deux intégrales.",
                 "answers": [
-                  {
-                    "content": "$11$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$24$",
-                    "correct": false
-                  },
                   {
                     "content": "$10$",
                     "correct": true
                   },
                   {
                     "content": "$7$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$11$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$24$",
                     "correct": false
                   }
                 ]
@@ -591,25 +591,21 @@
             "figure": null,
             "questions": [
               {
-                "content": "Pour calculer $\\int_0^1 (2x + 1)\\,e^x\\,dx$ par parties, quel choix est le bon ?",
-                "question_type": "single_choice",
-                "explanation": "Étape 1 — Choisir : $2x + 1$ est un polynôme, qui se simplifie en dérivant ($v' = 2$) ; $e^x$ se primitive facilement : $v = 2x + 1$ et $u' = e^x$. Étape 2 — Calculer : $u = e^x$, $v' = 2$. Étape 3 — Appliquer la formule. Étape 4 — Calculer l'intégrale restante $\\int 2e^x$. Le choix inverse donnerait $u = x^2 + x$ et une intégrale restante plus lourde.",
+                "content": "Remets dans l'ordre les étapes de l'intégration par parties.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Choisir : on commence toujours par repérer $v$ (celui qui se simplifie) et $u'$. Étape 2 — Calculer $u$ et $v'$ : on ne peut pas écrire la formule sans eux. Étape 3 — Appliquer la formule : crochet moins intégrale de $u\\,v'$. Étape 4 — Calculer le crochet et la nouvelle intégrale, puis conclure. L'erreur tentante est de calculer le crochet avant d'avoir $u$ et $v'$.",
                 "answers": [
                   {
-                    "content": "$v(x) = 2x + 1$ et $u'(x) = e^x$",
-                    "correct": true
+                    "content": "Choisir $v$, le facteur qui se simplifie en dérivant, et $u'$, l'autre facteur."
                   },
                   {
-                    "content": "$v(x) = e^x$ et $u'(x) = 2x + 1$",
-                    "correct": false
+                    "content": "Calculer $u$, une primitive de $u'$, et $v'$, la dérivée de $v$."
                   },
                   {
-                    "content": "$v(x) = 2x + 1$ et $u'(x) = 1$",
-                    "correct": false
+                    "content": "Écrire $\\left[u\\,v\\right]_a^b - \\int_a^b u\\,v'$."
                   },
                   {
-                    "content": "$v(x) = e^x$ et $u'(x) = e^x$",
-                    "correct": false
+                    "content": "Calculer le crochet et la nouvelle intégrale, puis conclure."
                   }
                 ]
               },
@@ -640,7 +636,7 @@
                 "content": "Calcule $\\int_1^e \\ln x\\,dx$ en écrivant $\\ln x = 1 \\times \\ln x$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Choisir : $v(x) = \\ln x$ (qui devient $\\frac{1}{x}$) et $u'(x) = 1$. Étape 2 — Calculer : $u(x) = x$ et $v'(x) = \\frac{1}{x}$. Étape 3 — Appliquer : $\\left[x \\ln x\\right]_1^e - \\int_1^e x \\times \\frac{1}{x}\\,dx$. Étape 4 — Calculer : le crochet vaut $e \\times 1 - 0 = e$ et $\\int_1^e 1\\,dx = e - 1$ ; donc $e - (e - 1) = 1$.",
+                "explanation": "Étape 1 — Choisir : $v(x) = \\ln x$ (qui devient $\\frac{1}{x}$) et $u'(x) = 1$. Étape 2 — Calculer : $u(x) = x$ et $v'(x) = \\frac{1}{x}$. Étape 3 — Appliquer : $\\left[x \\ln x\\right]_1^e - \\int_1^e x \\times \\frac{1}{x}\\,dx$. Étape 4 — Calculer : le crochet vaut $e \\times 1 - 0 = e$ et $\\int_1^e 1\\,dx = e - 1$ ; donc $e - (e - 1) = 1$. L'erreur tentante est de s'arrêter au crochet, qui vaut $e$, en oubliant l'intégrale restante $e - 1$.",
                 "answers": [
                   {
                     "content": "1",
@@ -803,12 +799,12 @@
             "Conclure en unités d'aire, puis convertir avec l'aire réelle d'une unité d'aire."
           ],
           "example": {
-            "statement": "Une parcelle de plantation est limitée par l'axe des abscisses, les droites $x = 0$ et $x = 3$, et la courbe de $f(x) = 4x - x^2$. Dans le repère, 1 unité représente 10 m. Calculer l'aire de la parcelle.",
+            "statement": "Un champ est limité par l'axe des abscisses, les droites $x = 0$ et $x = 3$, et la courbe de $f(x) = 4x - x^2$. Dans le repère, 1 unité représente 10 m. Calculer l'aire du champ.",
             "steps": [
               "Étudier le signe : $f(x) = x(4 - x)$ est positive sur $[0\\,;3]$, car $x \\geq 0$ et $4 - x \\geq 1$.",
               "Écrire : l'aire vaut $\\int_0^3 (4x - x^2)\\,dx$ u.a., puisque $f \\geq 0$.",
               "Calculer : $F(x) = 2x^2 - \\frac{x^3}{3}$ ; $F(3) = 18 - 9 = 9$ et $F(0) = 0$, donc l'intégrale vaut $9$.",
-              "Conclure : l'aire est $9$ u.a. ; comme 1 u.a. $= 10 \\times 10 = 100$ m², la parcelle mesure $900$ m²."
+              "Conclure : l'aire est $9$ u.a. ; comme 1 u.a. $= 10 \\times 10 = 100$ m², le champ mesure $900$ m²."
             ]
           },
           "pitfall": "Ne pas confondre intégrale et aire. L'intégrale peut être nulle ou négative, l'aire est toujours positive. Contre-exemple : $\\int_{-1}^{1} x\\,dx = 0$, mais le domaine entre la droite $y = x$ et l'axe n'est pas vide : il y a deux triangles de $\\frac{1}{2}$ u.a., soit $1$ u.a. au total. Il faut étudier le signe et découper l'intervalle quand il change.",
@@ -859,7 +855,7 @@
                 "content": "Calcule l'aire, en unités d'aire, du domaine compris entre les courbes de $f(x) = 3x$ et $g(x) = x^2$ pour $x$ entre 0 et 3 (on a $f \\geq g$ sur $[0\\,;3]$).",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Étudier le signe : $f(x) - g(x) = 3x - x^2 = x(3 - x) \\geq 0$ sur $[0\\,;3]$. Étape 2 — Écrire : l'aire vaut $\\int_0^3 (3x - x^2)\\,dx$. Étape 3 — Calculer : $F(x) = \\frac{3x^2}{2} - \\frac{x^3}{3}$ ; $F(3) = 13{,}5 - 9 = 4{,}5$ et $F(0) = 0$. Étape 4 — Conclure : $4{,}5$ u.a.",
+                "explanation": "Étape 1 — Étudier le signe : $f(x) - g(x) = 3x - x^2 = x(3 - x) \\geq 0$ sur $[0\\,;3]$. Étape 2 — Écrire : l'aire vaut $\\int_0^3 (3x - x^2)\\,dx$. Étape 3 — Calculer : $F(x) = \\frac{3x^2}{2} - \\frac{x^3}{3}$ ; $F(3) = 13{,}5 - 9 = 4{,}5$ et $F(0) = 0$. Étape 4 — Conclure : $4{,}5$ u.a. L'erreur tentante est d'intégrer $f$ seule : $\\int_0^3 3x\\,dx = 13{,}5$, sans soustraire l'aire sous la courbe de $g$.",
                 "answers": [
                   {
                     "content": "4,5",
@@ -909,7 +905,7 @@
                 "content": "Un repère orthogonal a pour unités 20 m sur l'axe des abscisses et 5 m sur l'axe des ordonnées. Une parcelle a pour aire $\\int_1^3 f(x)\\,dx = 3{,}5$ u.a. (avec $f \\geq 0$). Quelle est son aire en m² ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Étudier le signe : $f \\geq 0$ sur $[1\\,;3]$, donc l'aire est égale à l'intégrale. Étape 2 — Écrire : l'aire vaut $3{,}5$ u.a. Étape 3 — Calculer l'aire d'une unité d'aire : $20 \\times 5 = 100$ m². Étape 4 — Conclure : $3{,}5 \\times 100 = 350$ m².",
+                "explanation": "Étape 1 — Étudier le signe : $f \\geq 0$ sur $[1\\,;3]$, donc l'aire est égale à l'intégrale. Étape 2 — Écrire : l'aire vaut $\\int_1^3 f = 3{,}5$ u.a. Étape 3 — Calculer : l'intégrale est donnée, $3{,}5$. Étape 4 — Conclure : 1 u.a. $= 20 \\times 5 = 100$ m², donc $3{,}5 \\times 100 = 350$ m². Multiplier seulement par 20 ou par 5 donnerait un résultat faux.",
                 "answers": [
                   {
                     "content": "350",
@@ -991,7 +987,7 @@
               "Conclure : la température moyenne est $23$ °C."
             ]
           },
-          "pitfall": "Ne pas confondre la valeur moyenne avec la moyenne des valeurs aux bornes. Contre-exemple : avec la serre ci-dessus, $T(0) = 20$ et $T(6) = 20 + 18 - 18 = 20$, donc $\\frac{T(0) + T(6)}{2} = 20$, alors que la valeur moyenne est $23$ °C. La température monte jusqu'à $24{,}5$ °C en $t = 3$ : la moyenne tient compte de toute la journée. N'oublie pas non plus de diviser par $b - a$.",
+          "pitfall": "Ne pas confondre la valeur moyenne avec la moyenne des valeurs aux bornes. Contre-exemple : avec la serre ci-dessus, $T(0) = 20$ et $T(6) = 20 + 18 - 18 = 20$, donc $\\frac{T(0) + T(6)}{2} = 20$, alors que la valeur moyenne est $23$ °C. La température monte jusqu'à $24{,}5$ °C en $t = 3$ : la moyenne tient compte de toute la période de 6 h à 12 h. N'oublie pas non plus de diviser par $b - a$.",
           "figure": "serre-moyenne",
           "exercise": {
             "title": "Calculer des valeurs moyennes",
@@ -1003,7 +999,7 @@
                 "content": "Calcule la valeur moyenne de $f(x) = 3x^2$ sur $[0\\,;2]$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $f(x) = 3x^2$, $a = 0$, $b = 2$, donc $b - a = 2$. Étape 2 — Calculer l'intégrale : $F(x) = x^3$ et $\\int_0^2 f = 8 - 0 = 8$. Étape 3 — Diviser : $\\mu = \\frac{8}{2}$. Étape 4 — Conclure : la valeur moyenne est $4$.",
+                "explanation": "Étape 1 — Identifier : $f(x) = 3x^2$, $a = 0$, $b = 2$, donc $b - a = 2$. Étape 2 — Calculer l'intégrale : $F(x) = x^3$ et $\\int_0^2 f = 8 - 0 = 8$. Étape 3 — Diviser : $\\mu = \\frac{8}{2}$. Étape 4 — Conclure : la valeur moyenne est $4$. L'erreur tentante est d'oublier la division : on trouverait $8$, qui est l'intégrale et non la valeur moyenne.",
                 "answers": [
                   {
                     "content": "4",
@@ -1026,7 +1022,7 @@
               {
                 "content": "Sur $[0\\,;3]$, on sait que $2 \\leq f(x) \\leq 5$. Quel encadrement de $\\int_0^3 f(x)\\,dx$ donne l'inégalité de la moyenne ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $m = 2$, $M = 5$, $a = 0$, $b = 3$, donc $b - a = 3$. Étape 2 — Calculer les bornes : $m(b - a) = 6$ et $M(b - a) = 15$. Étape 3 — Diviser : en divisant par 3, on retrouve $2 \\leq \\mu \\leq 5$. Étape 4 — Conclure : $6 \\leq \\int_0^3 f \\leq 15$. La proposition $2 \\leq \\dots \\leq 5$ oublie de multiplier par la longueur 3, qui donne l'encadrement de $\\mu$ et non de l'intégrale.",
+                "explanation": "Étape 1 — Identifier : $m = 2$, $M = 5$, $a = 0$, $b = 3$, donc $b - a = 3$. Étape 2 — Calculer l'intégrale : on l'encadre, $m(b - a) = 6$ et $M(b - a) = 15$. Étape 3 — Diviser : en divisant par 3, on retrouve $2 \\leq \\mu \\leq 5$. Étape 4 — Conclure : $6 \\leq \\int_0^3 f \\leq 15$. La proposition $2 \\leq \\dots \\leq 5$ oublie de multiplier par la longueur 3, qui donne l'encadrement de $\\mu$ et non de l'intégrale.",
                 "answers": [
                   {
                     "content": "$6 \\leq \\int_0^3 f \\leq 15$",
@@ -1065,7 +1061,7 @@
                 "content": "Le débit d'un forage est $q(t) = 3t^2 + 1$ (en litres par minute, $t$ en minutes). Quel est le débit moyen, en litres par minute, entre $t = 0$ et $t = 4$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $f = q$, $a = 0$, $b = 4$, donc $b - a = 4$. Étape 2 — Calculer l'intégrale : $F(t) = t^3 + t$ ; $F(4) = 68$ et $F(0) = 0$, donc $\\int_0^4 q = 68$. Étape 3 — Diviser : $\\mu = \\frac{68}{4}$. Étape 4 — Conclure : le débit moyen est $17$ L/min.",
+                "explanation": "Étape 1 — Identifier : $f = q$, $a = 0$, $b = 4$, donc $b - a = 4$. Étape 2 — Calculer l'intégrale : $F(t) = t^3 + t$ ; $F(4) = 68$ et $F(0) = 0$, donc $\\int_0^4 q = 68$. Étape 3 — Diviser : $\\mu = \\frac{68}{4}$. Étape 4 — Conclure : le débit moyen est $17$ L/min. L'erreur tentante est d'oublier la division par 4 : on trouverait $68$ au lieu de $17$.",
                 "answers": [
                   {
                     "content": "17",
@@ -1078,7 +1074,7 @@
                 "content": "La température moyenne d'une journée sur $[0\\,;8]$ (en heures) est de 22 °C. Quelle est la valeur de $\\int_0^8 T(t)\\,dt$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : $a = 0$, $b = 8$, donc $b - a = 8$, et $\\mu = 22$. Étape 2 — Calculer l'intégrale : on part de $\\mu = \\frac{1}{b - a}\\int_a^b T$, donc $\\int_a^b T = \\mu\\,(b - a)$. Étape 3 — Diviser est remplacé ici par multiplier : $22 \\times 8$. Étape 4 — Conclure : $\\int_0^8 T = 176$ (°C·h).",
+                "explanation": "Étape 1 — Identifier : $a = 0$, $b = 8$, donc $b - a = 8$, et $\\mu = 22$. Étape 2 — Calculer l'intégrale : on part de $\\mu = \\frac{1}{b - a}\\int_a^b T$, donc $\\int_a^b T = \\mu\\,(b - a)$. Étape 3 — Diviser : ici on fait l'opération inverse de la division, on multiplie par $b - a$ : $22 \\times 8 = 176$. Si on divisait encore, on trouverait $2{,}75$, ce qui est absurde. Étape 4 — Conclure : $\\int_0^8 T = 176$ (°C·h).",
                 "answers": [
                   {
                     "content": "176",
@@ -1160,25 +1156,25 @@
           "figure": null,
           "questions": [
             {
-              "content": "Le débit d'une gouttière est $q(t) = 3t^2 + 4t$ (L/min). Quelle fonction est une primitive de $q$ sur $[0\\,;3]$ ?",
-              "question_type": "single_choice",
-              "explanation": "Étape 1 — Identifier : $q(t) = 3t^2 + 4t$ est continue sur $[0\\,;3]$. Étape 2 — Déterminer une primitive : $3t^2$ a pour primitive $t^3$ et $4t$ a pour primitive $2t^2$, donc $F(t) = t^3 + 2t^2$. Vérification : $F'(t) = 3t^2 + 4t$. La proposition $6t + 4$ est la dérivée de $q$ ; $3t^3 + 4t^2$ oublie de diviser par le nouvel exposant.",
+              "content": "Relie chaque fonction à l'une de ses primitives.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Identifier : chaque fonction est un polynôme continu sur $[0\\,;3]$. Étape 2 — Déterminer une primitive terme à terme : $3t^2 \\to t^3$ et $4t \\to 2t^2$ ; $6t \\to 3t^2$ et $4 \\to 4t$ ; $t^2 \\to \\frac{t^3}{3}$ ; $4 \\to 4t$. Vérification : on dérive chaque primitive et on retrouve la fonction. L'erreur tentante est de relier une fonction à sa dérivée : $6t + 4$ est la dérivée de $3t^2 + 4t$, mais c'est $3t^2 + 4t$ qui est une primitive de $6t + 4$.",
               "answers": [
                 {
-                  "content": "$t^3 + 4t^2$",
-                  "correct": false
-                },
-                {
-                  "content": "$t^3 + 2t^2$",
-                  "correct": true
+                  "content": "$3t^2 + 4t$",
+                  "match": "$t^3 + 2t^2$"
                 },
                 {
                   "content": "$6t + 4$",
-                  "correct": false
+                  "match": "$3t^2 + 4t$"
                 },
                 {
-                  "content": "$3t^3 + 4t^2$",
-                  "correct": false
+                  "content": "$t^2$",
+                  "match": "$\\dfrac{t^3}{3}$"
+                },
+                {
+                  "content": "$4$",
+                  "match": "$4t$"
                 }
               ]
             },
@@ -1186,7 +1182,7 @@
               "content": "Le débit d'une gouttière est $q(t) = 3t^2 + 4t$ (L/min). Quelle quantité d'eau, en litres, est recueillie entre $t = 0$ et $t = 3$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Identifier : $f = q$, $a = 0$, $b = 3$ ; $q$ est continue. Étape 2 — Déterminer une primitive : $F(t) = t^3 + 2t^2$. Étape 3 — Calculer : $F(3) = 27 + 18 = 45$ et $F(0) = 0$. Étape 4 — Conclure : $\\int_0^3 q(t)\\,dt = 45$ litres.",
+              "explanation": "Étape 1 — Identifier : $f = q$, $a = 0$, $b = 3$ ; $q$ est continue. Étape 2 — Déterminer une primitive : $F(t) = t^3 + 2t^2$. Étape 3 — Calculer : $F(3) = 27 + 18 = 45$ et $F(0) = 0$. Étape 4 — Conclure : $\\int_0^3 q(t)\\,dt = 45$ litres. L'erreur tentante est de calculer $q(3) = 39$ : c'est le débit à l'instant 3, pas la quantité d'eau recueillie.",
               "answers": [
                 {
                   "content": "45",
@@ -1199,7 +1195,7 @@
               "content": "Pour la gouttière de débit $q$, on a $\\int_0^1 q(t)\\,dt = 3$ et $\\int_0^3 q(t)\\,dt = 45$ (en litres). Quelle quantité d'eau est recueillie entre $t = 1$ et $t = 3$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Repérer : la borne 1 est intermédiaire entre 0 et 3 : relation de Chasles. Étape 2 — Vérifier : $q$ est continue et $0 \\leq 1 \\leq 3$. Étape 3 — Appliquer : $\\int_0^3 q = \\int_0^1 q + \\int_1^3 q$, donc $45 = 3 + \\int_1^3 q$. Étape 4 — Conclure : $\\int_1^3 q = 42$ litres.",
+              "explanation": "Étape 1 — Repérer : la borne 1 est intermédiaire entre 0 et 3 : relation de Chasles. Étape 2 — Vérifier : $q$ est continue et $0 \\leq 1 \\leq 3$. Étape 3 — Appliquer : $\\int_0^3 q = \\int_0^1 q + \\int_1^3 q$, donc $45 = 3 + \\int_1^3 q$. Étape 4 — Conclure : $\\int_1^3 q = 42$ litres. L'erreur tentante est d'additionner : $45 + 3 = 48$ ; or $45$ est déjà le total, et on retire la première minute.",
               "answers": [
                 {
                   "content": "42",
@@ -1212,7 +1208,7 @@
               "content": "La gouttière a pour débit $q(t) = 3t^2 + 4t$ (L/min) et elle fournit 45 litres entre $t = 0$ et $t = 3$. Quel est son débit moyen, en litres par minute, sur $[0\\,;3]$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Identifier : $a = 0$, $b = 3$, donc $b - a = 3$ minutes. Étape 2 — Calculer l'intégrale : $\\int_0^3 q = 45$. Étape 3 — Diviser : $\\mu = \\frac{45}{3}$. Étape 4 — Conclure : le débit moyen est $15$ L/min.",
+              "explanation": "Étape 1 — Identifier : $a = 0$, $b = 3$, donc $b - a = 3$ minutes. Étape 2 — Calculer l'intégrale : $\\int_0^3 q = 45$. Étape 3 — Diviser : $\\mu = \\frac{45}{3}$. Étape 4 — Conclure : le débit moyen est $15$ L/min. L'erreur tentante est de répondre $45$, c'est-à-dire d'oublier de diviser par $3$.",
               "answers": [
                 {
                   "content": "15",
@@ -1270,7 +1266,7 @@
             {
               "content": "Quel est le signe de $f(x) = -x^2 + 2x + 3 = (3 - x)(x + 1)$ sur $[0\\,;3]$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Étudier le signe : sur $[0\\,;3]$, $3 - x \\geq 0$ et $x + 1 > 0$, donc le produit $(3 - x)(x + 1)$ est positif ou nul. Étape 2 — Écrire : comme $f \\geq 0$, l'aire sera $\\int_0^3 f$. La proposition « $f \\leq 0$ » ne regarde que le terme $-x^2$ ; $f(1) = 4$ montre que $f$ ne change pas de signe en 1.",
+              "explanation": "Étape 1 — Étudier le signe : sur $[0\\,;3]$, $3 - x \\geq 0$ et $x + 1 > 0$, donc le produit $(3 - x)(x + 1)$ est positif ou nul. Étape 2 — Écrire : comme $f \\geq 0$, l'aire sera $\\int_0^3 f$. La proposition « $f \\leq 0$ » ne regarde que le terme $-x^2$ ; $f(1) = 4$ montre que $f$ ne change pas de signe en 1 ; et $f(2) = 3 > 0$ montre que $f$ reste positive au-delà de 1.",
               "answers": [
                 {
                   "content": "$f(x) \\geq 0$, car $3 - x \\geq 0$ et $x + 1 > 0$",
@@ -1285,7 +1281,7 @@
                   "correct": false
                 },
                 {
-                  "content": "$f(x) = 0$ pour tout $x$ de $[0\\,;3]$",
+                  "content": "$f(x) \\geq 0$ seulement sur $[0\\,;1]$",
                   "correct": false
                 }
               ]
@@ -1317,7 +1313,7 @@
               "content": "Calcule l'aire, en unités d'aire, du domaine limité par la courbe de $f(x) = -x^2 + 2x + 3$ (positive), l'axe des abscisses et les droites $x = 0$ et $x = 3$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Étudier le signe : $f \\geq 0$ sur $[0\\,;3]$. Étape 2 — Écrire : l'aire vaut $\\int_0^3 f(x)\\,dx$. Étape 3 — Calculer : $F(x) = -\\frac{x^3}{3} + x^2 + 3x$ ; $F(3) = -9 + 9 + 9 = 9$ et $F(0) = 0$. Étape 4 — Conclure : l'aire est $9$ u.a.",
+              "explanation": "Étape 1 — Étudier le signe : $f \\geq 0$ sur $[0\\,;3]$. Étape 2 — Écrire : l'aire vaut $\\int_0^3 f(x)\\,dx$. Étape 3 — Calculer : $F(x) = -\\frac{x^3}{3} + x^2 + 3x$ ; $F(3) = -9 + 9 + 9 = 9$ et $F(0) = 0$. Étape 4 — Conclure : l'aire est $9$ u.a. L'erreur tentante est de calculer $f(3) - f(0) = 0 - 3 = -3$ au lieu de $F(3) - F(0)$.",
               "answers": [
                 {
                   "content": "9",
@@ -1434,7 +1430,7 @@
               "content": "Calcule $\\int_1^e \\ln x\\,dx$ en utilisant la primitive $F(x) = x\\ln x - x$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Identifier : $f(x) = \\ln x$, $a = 1$, $b = e$ ; $f$ est continue sur $[1\\,;e]$. Étape 2 — Déterminer une primitive : $F(x) = x\\ln x - x$. Étape 3 — Calculer : $F(e) = e - e = 0$ et $F(1) = 0 - 1 = -1$. Étape 4 — Conclure : $\\int_1^e \\ln x\\,dx = 0 - (-1) = 1$.",
+              "explanation": "Étape 1 — Identifier : $f(x) = \\ln x$, $a = 1$, $b = e$ ; $f$ est continue sur $[1\\,;e]$. Étape 2 — Déterminer une primitive : $F(x) = x\\ln x - x$. Étape 3 — Calculer : $F(e) = e - e = 0$ et $F(1) = 0 - 1 = -1$. Étape 4 — Conclure : $\\int_1^e \\ln x\\,dx = 0 - (-1) = 1$. L'erreur tentante est d'oublier $F(1) = -1$ et de répondre $0$.",
               "answers": [
                 {
                   "content": "1",
@@ -1446,7 +1442,7 @@
               "content": "La parcelle a pour aire $1$ u.a. et 1 unité représente 10 m sur chaque axe. Quelle est son aire en m² ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire : l'aire vaut $1$ u.a. Étape 2 — Calculer l'aire d'une unité d'aire : $10 \\times 10 = 100$ m². Étape 3 — Multiplier : $1 \\times 100$. Étape 4 — Conclure : la parcelle mesure $100$ m².",
+              "explanation": "Étape 1 — Écrire : l'aire vaut $1$ u.a. Étape 2 — Calculer l'aire d'une unité d'aire : $10 \\times 10 = 100$ m². Étape 3 — Multiplier : $1 \\times 100$. Étape 4 — Conclure : la parcelle mesure $100$ m². L'erreur tentante est de répondre $1$ m², en oubliant la conversion de l'unité d'aire.",
               "answers": [
                 {
                   "content": "100",

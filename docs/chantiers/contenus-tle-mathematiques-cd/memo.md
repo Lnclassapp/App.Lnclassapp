@@ -3,7 +3,7 @@
 | | |
 |---|---|
 | **Type de cycle** | feature |
-| **Statut** | en cours |
+| **Statut** | livré (PR vers `Develop`, leçons en brouillon) |
 | **Ouvert le** | 2026-10-31 |
 | **Branche** | `feature/contenus-tle-mathematiques-cd` |
 | **Programme** | contenus-v3-tous-niveaux (vague T1) |

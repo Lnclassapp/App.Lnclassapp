@@ -8,7 +8,7 @@ Les contenus pédagogiques de Lnclass et la méthode pour les écrire : les **pr
 | [`prompt-redaction.md`](prompt-redaction.md) | Le prompt unique et autoportant pour rédiger une leçon au **format v3**, dans les 6 matières du 1er cycle (section « Selon la matière » : ce que deviennent les blocs, textes et citations, faits et sources ; tous les types de questions de l'import, questions rédigées avec corrigé modèle, barème et critères, 50 % au moins corrigées automatiquement) : gabarit en 4 blocs par notion (À retenir, La méthode en étapes numérotées, Un exemple corrigé qui applique chaque étape, Le piège à éviter), un exercice par notion et 4 problèmes type interrogation/devoir de 3ème (BEPC), 5 questions au moins avec une correction qui refait la méthode, figures paramétrées (5 sortes). Il produit **un seul fichier** `lnclass.course-tree` version 3 |
 | [`prompt-redaction-lot.md`](prompt-redaction-lot.md) | La version « lot par niveau » : pour une matière et un niveau (Français 3ème…), il prend les leçons de la progression, les rédige une par une avec `prompt-redaction.md`, les contrôle (script puis relecture IA indépendante) et les range dans `lecons-traitees/`. Un appel = une matière et un niveau |
 | [`../../script/contenus/valider.rb`](../../script/contenus/valider.rb) | Le contrôle hors ligne d'un fichier v3 : `ruby script/contenus/valider.rb fichier.json`. Ruby pur, code de sortie 1 s'il y a une erreur. Mêmes règles et mêmes raisons que l'import (`format_retired`, `example_steps_mismatch`, `essential_exercise_count`, `lesson_exercise_count`, `too_few_questions`, `figure_invalid`, `figure_missing`…), plus des avertissements de rédaction |
-| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français) et `3eme/` (60 leçons au format 3, les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) |
+| [`lecons-traitees/`](lecons-traitees/) | Les leçons déjà rédigées avec ce prompt, un fichier `lnclass.course-tree` par fiche de cours complète, rangées par niveau et série, puis par matière. Pour l’instant `tle-d/` (18 leçons, 3 par matière, en Maths, Physique-Chimie, SVT, Histoire-Géographie, Philosophie et Français ; les 10 leçons de Maths de Tle C et de Tle D au format 3) et `3eme/` (60 leçons au format 3, les 10 premières de la progression en Maths, Français, Histoire-Géographie, SVT, Physique-Chimie et EDHC) |
 
 ## Le principe
 
@@ -64,6 +64,8 @@ Si la progression a déjà été importée, la fiche de cours de la leçon exist
 | `francais/oeuvre-narrative.json` | Œuvre narrative | 3 | 9 | 54 |
 | `francais/la-dissertation-litteraire.json` | La dissertation littéraire | 3 | 9 | 52 |
 | `francais/preparation-a-l-oral-du-baccalaureat.json` | Préparation à l'oral du Baccalauréat | 3 | 9 | 51 |
+
+Les 3 leçons de mathématiques de ce tableau (format v1) sont remplacées par leur version au format 3 : voir « Tle C et D, mathématiques au format 3 ».
 
 Les 9 leçons d'Histoire-Géographie, de Philosophie et de Français ont d'abord eu **un exercice par fiche de révision** (format court de démonstration, 2026-10-06). Elles ont été **complétées le 2026-10-10** à 3 exercices par fiche de révision (Comprendre, Appliquer, S'évaluer), soit 54 exercices et 311 questions ajoutés, avec le prompt [`prompt-redaction.md`](prompt-redaction.md). Chacune a ensuite été relue par un second rédacteur (calculs refaits, dates et faits vérifiés), et les défauts trouvés ont été corrigés, dans l'ancien contenu comme dans le nouveau : par exemple « 17 États africains entrent à l'ONU en 1960 » (16 États africains, 17 nouveaux membres avec Chypre), la citation de Socrate donnée comme texte exact, ou « le dernier mot du poème » qui était l'avant-dernier vers. Les 18 leçons de Tle D passent `script/contenus/valider.rb` et s'importent ensemble sans erreur sur une base jetable : 18 cours, 55 fiches, 165 exercices, 949 questions, 3 835 propositions. Aucun enseignant ne les a encore relues.
 
@@ -335,6 +337,48 @@ Au total : 42 notions, 82 exercices, 463 questions et 22 figures. Chaque fichier
 - **Leçon 7** : la distinction entre taxe et redevance.
 - **Leçon 10** : le rattachement des peuples aux groupes Mandé et Gour, les termes « toukpê » et « sanankouya », et la carte, qui ne colorie que les districts où un groupe est majoritaire de façon sûre (Montagnes, Vallée du Bandama et Sassandra-Marahoué restent blancs). Aucune alliance précise entre deux peuples réels n'est affirmée.
 
+### Tle C et D, mathématiques au format 3 (chantier `contenus-tle-mathematiques-cd`)
+
+Les 10 leçons de Mathématiques de la progression DPFC 2026-2027 de Tle C et de Tle D, rédigées le 2026-10-31 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague T1 du programme `contenus-v3-tous-niveaux`). 14 leçons distinctes, 20 fichiers : les 6 leçons communes aux deux séries (Limites et continuité, Dérivabilité et étude de fonctions, Primitives, Fonctions logarithmes, Fonctions exponentielles, Nombres complexes) ont un fichier par série, avec les mêmes notions et des problèmes 3 et 4 au niveau de chaque série. « Fonctions exponentielles et fonctions puissances » (C) et « Fonctions exponentielles et puissances » (D) gardent le titre de leur progression. Les fichiers remplacent les 6 fichiers v1 du même nom (Barycentre, Limites et Divisibilité en C ; Limites, Probabilité et Dérivabilité en D). Chaque notion a sa fiche en 4 blocs, un exercice et « Je m'entraîne » ; chaque leçon a 4 problèmes (2 de fixation, 2 d'évaluation dont un au niveau du baccalauréat). Aucune sorte de figure nouvelle : les courbes, tableaux de variations, solides et coniques sont décrits par des points, segments et droites (dette notée au journal du chantier).
+
+#### Tle C
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/barycentre-et-lignes-de-niveaux.json` | Barycentre et lignes de niveaux | 5 | 9 | 47 | 98 % | 8 | `geometry` |
+| 2 | `mathematiques/limites-et-continuite.json` | Limites et continuité | 5 | 9 | 52 | 100 % | 2 | `coordinate_plane` |
+| 3 | `mathematiques/divisibilite-dans.json` | Divisibilité dans ℤ | 4 | 8 | 55 | 98 % | 3 | `number_line`, `diagram`, `coordinate_plane` |
+| 4 | `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 5 | 9 | 58 | 98 % | 5 | `coordinate_plane` |
+| 5 | `mathematiques/geometrie-analytique-de-l-espace.json` | Géométrie analytique de l'espace | 4 | 8 | 47 | 96 % | 0 | — |
+| 6 | `mathematiques/primitives.json` | Primitives | 4 | 8 | 54 | 98 % | 0 | — |
+| 7 | `mathematiques/fonctions-logarithmes.json` | Fonctions logarithmes | 5 | 9 | 73 | 99 % | 2 | `number_line`, `diagram` |
+| 8 | `mathematiques/coniques.json` | Coniques | 5 | 9 | 57 | 98 % | 7 | `coordinate_plane` |
+| 9 | `mathematiques/fonctions-exponentielles-et-fonctions-puissances.json` | Fonctions exponentielles et fonctions puissances | 5 | 9 | 46 | 100 % | 3 | `coordinate_plane` |
+| 10 | `mathematiques/nombres-complexes.json` | Nombres complexes | 5 | 9 | 67 | 100 % | 3 | `coordinate_plane` |
+
+Au total : 47 notions, 87 exercices, 556 questions notées et 33 figures.
+
+#### Tle D
+
+| # | Fichier | Cours | Notions | Exercices | Questions | Auto | Figures | Sortes |
+|---:|---|---|---:|---:|---:|---:|---:|---|
+| 1 | `mathematiques/limites-et-continuite.json` | Limites et continuité | 5 | 9 | 52 | 100 % | 1 | `coordinate_plane` |
+| 2 | `mathematiques/probabilite-conditionnelle-et-variable-aleatoire.json` | Probabilité conditionnelle et variable aléatoire | 5 | 9 | 63 | 97 % | 4 | `diagram`, `stat_chart bars` |
+| 3 | `mathematiques/derivabilite-et-etude-de-fonctions.json` | Dérivabilité et étude de fonctions | 5 | 9 | 60 | 98 % | 4 | `coordinate_plane` |
+| 4 | `mathematiques/primitives.json` | Primitives | 4 | 8 | 54 | 100 % | 0 | — |
+| 5 | `mathematiques/fonctions-logarithmes.json` | Fonctions logarithmes | 5 | 9 | 70 | 100 % | 2 | `number_line`, `diagram` |
+| 6 | `mathematiques/fonctions-exponentielles-et-puissances.json` | Fonctions exponentielles et puissances | 5 | 9 | 46 | 100 % | 3 | `coordinate_plane` |
+| 7 | `mathematiques/suites-numeriques.json` | Suites numériques | 5 | 9 | 58 | 100 % | 2 | `coordinate_plane` |
+| 8 | `mathematiques/nombres-complexes.json` | Nombres complexes | 5 | 9 | 65 | 100 % | 3 | `coordinate_plane` |
+| 9 | `mathematiques/calcul-integral.json` | Calcul intégral | 5 | 9 | 56 | 98 % | 3 | `coordinate_plane` |
+| 10 | `mathematiques/nombres-complexes-et-geometrie-du-plan.json` | Nombres complexes et géométrie du plan | 4 | 8 | 45 | 96 % | 5 | `coordinate_plane`, `geometry` |
+
+Au total : 48 notions, 88 exercices, 569 questions notées et 27 figures.
+
+Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et « Je m'entraîne » respecte les règles de `Entities::Catalog::NotionPractice`. Chaque leçon a été relue par un second rédacteur (calculs refaits), et les défauts trouvés ont été corrigés. Les leçons restent en brouillon.
+
+À faire valider par un enseignant de mathématiques avant publication : le rattachement de chaque notion au programme de la série, le niveau des problèmes de type bac et leurs barèmes. La liste par leçon est dans le journal du chantier [`contenus-tle-mathematiques-cd`](../chantiers/contenus-tle-mathematiques-cd/journal.md).
+
 ### Tle A1, A2 et C — `lecons-traitees/tle-a1/`, `tle-a2/`, `tle-c/`
 
 Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A1 et A2 n'ont pas de Physique-Chimie dans la progression.
@@ -401,6 +445,8 @@ Les 3 premières leçons de chaque matière des séries A1, A2 et C de Terminale
 | `philosophie/la-dissertation-philosophique.json` | La dissertation philosophique (Philosophie) | 1 | 3 | 9 | 52 |
 | `philosophie/le-commentaire-de-texte-philosophique.json` | Le commentaire de texte philosophique (Philosophie) | 2 | 3 | 9 | 54 |
 | `philosophie/la-connaissance-de-l-homme.json` | La connaissance de l'homme (Philosophie) | 3 | 3 | 9 | 52 |
+
+Les 3 leçons de mathématiques de ce tableau (format v1) sont remplacées par leur version au format 3 : voir « Tle C et D, mathématiques au format 3 ».
 
 **48 cours, 169 fiches, 507 exercices, 2911 questions, 11635 propositions.** Tous passent `script/contenus/valider.rb`. Importés ensemble en un seul envoi sur une base jetable par la vraie chaîne d'import : **48 cours créés, sans erreur ni refus** (169 fiches, 507 exercices, 2 911 questions, 11 635 propositions).
 

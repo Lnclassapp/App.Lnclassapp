@@ -206,7 +206,7 @@
         {
           "key": "place-carree",
           "kind": "coordinate_plane",
-          "description": "Une place carrée sur le plan d'un quartier : les lampadaires A(1 ; 1), B(5 ; 1), C(1 ; 5) et D(5 ; 5), et la fontaine Ω(3 ; 3) au centre. Les segments AB, BD, DC et CA forment le carré ; les diagonales AD et BC se coupent en Ω.",
+          "description": "Le plan d'un quartier dans un repère orthonormé direct d'unité 10 m. Trois lampadaires sont placés en A(1 ; 1), B(5 ; 1) et C(1 ; 5). Les segments AB et AC sont tracés depuis A ; on lit leurs longueurs et l'angle qu'ils forment.",
           "params": {
             "xmin": 0,
             "xmax": 6,
@@ -227,16 +227,6 @@
                 "id": "C",
                 "x": 1,
                 "y": 5
-              },
-              {
-                "id": "D",
-                "x": 5,
-                "y": 5
-              },
-              {
-                "id": "Ω",
-                "x": 3,
-                "y": 3
               }
             ],
             "segments": [
@@ -247,31 +237,7 @@
                 "y2": 1
               },
               {
-                "x1": 5,
-                "y1": 1,
-                "x2": 5,
-                "y2": 5
-              },
-              {
-                "x1": 5,
-                "y1": 5,
-                "x2": 1,
-                "y2": 5
-              },
-              {
                 "x1": 1,
-                "y1": 5,
-                "x2": 1,
-                "y2": 1
-              },
-              {
-                "x1": 1,
-                "y1": 1,
-                "x2": 5,
-                "y2": 5
-              },
-              {
-                "x1": 5,
                 "y1": 1,
                 "x2": 1,
                 "y2": 5
@@ -344,7 +310,7 @@
                 "tolerance": 0
               },
               {
-                "content": "Les points $A(1)$, $B(2)$ et $C(1-i)$ ont pour quotient $Z=\\dfrac{z_C-z_A}{z_B-z_A}=-i$. Quelle est la mesure de l'angle orienté $(\\overrightarrow{AB},\\overrightarrow{AC})$ modulo $2\\pi$ ?",
+                "content": "Les points $A(1)$, $B(2)$ et $C(1-i)$ sont placés sur le plan d'un quartier. Avec $Z=\\dfrac{z_C-z_A}{z_B-z_A}$, quelle est la mesure de l'angle orienté $(\\overrightarrow{AB},\\overrightarrow{AC})$ modulo $2\\pi$ ?",
                 "question_type": "single_choice",
                 "explanation": "Étape 1 — Écrire : $z_B-z_A=1$ et $z_C-z_A=-i$. Étape 2 — Calculer : $Z=\\dfrac{-i}{1}=-i$. Étape 3 — Déterminer : $|Z|=1$ et $-i=\\cos\\left(-\\dfrac\\pi2\\right)+i\\sin\\left(-\\dfrac\\pi2\\right)$, donc $\\arg Z=-\\dfrac\\pi2$. Étape 4 — Conclure : $(\\overrightarrow{AB},\\overrightarrow{AC})\\equiv-\\dfrac\\pi2\\ [2\\pi]$. La proposition $\\dfrac\\pi2$ est l'angle de $\\overrightarrow{AC}$ vers $\\overrightarrow{AB}$ : on s'est trompé de sens.",
                 "answers": [
@@ -955,24 +921,24 @@
                 "tolerance": 0
               },
               {
-                "content": "La rotation de centre $\\Omega(1)$ et d'angle $\\dfrac\\pi2$ transforme $M(3)$ en $M'$. Quelle est l'affixe de $M'$ ?",
+                "content": "La rotation de centre $\\Omega(2)$ et d'angle $\\dfrac\\pi2$ transforme $M(5)$ en $M'$. Quelle est l'affixe de $M'$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : rotation de centre $\\omega=1$ et d'angle $\\dfrac\\pi2$. Étape 2 — Écrire : $z'-1=i(z-1)$. Étape 3 — Remplacer : $z-1=2$, donc $z'-1=2i$ et $z'=1+2i$. Étape 4 — Conclure : $M'(1+2i)$. La proposition $3i$ vient de $z'=iz$ : elle oublie le centre, qui ne resterait pas en place ($i\\times1\\neq1$).",
+                "explanation": "Étape 1 — Identifier : rotation de centre $\\omega=2$ et d'angle $\\dfrac\\pi2$. Étape 2 — Écrire : $z'-2=i(z-2)$. Étape 3 — Remplacer : $z-2=3$, donc $z'-2=3i$ et $z'=2+3i$. Étape 4 — Conclure : $M'(2+3i)$. La proposition $5i$ vient de $z'=iz$ : elle oublie le centre, qui ne resterait pas en place ($i\\times2\\neq2$).",
                 "answers": [
                   {
-                    "content": "$1+2i$",
+                    "content": "$2+3i$",
                     "correct": true
+                  },
+                  {
+                    "content": "$5i$",
+                    "correct": false
                   },
                   {
                     "content": "$3i$",
                     "correct": false
                   },
                   {
-                    "content": "$2i$",
-                    "correct": false
-                  },
-                  {
-                    "content": "$1+3i$",
+                    "content": "$2+5i$",
                     "correct": false
                   }
                 ]
@@ -1086,7 +1052,7 @@
             {
               "content": "Avec $E(1)$, $M(3+2i)$ et $D(-1+2i)$, quelle est la valeur de $Z=\\dfrac{z_D-z_E}{z_M-z_E}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Écrire : $z_D-z_E=-2+2i$ et $z_M-z_E=2+2i$. Étape 2 — Calculer : $Z=\\dfrac{(-2+2i)(2-2i)}{(2+2i)(2-2i)}=\\dfrac{-4+4i+4i-4i^2}{8}=\\dfrac{8i}{8}=i$. Étape 3 — Repérer : $Z$ est imaginaire pur de module $1$. La valeur $-i$ vient d'un quotient inversé ; $1+i$ d'un oubli de division par le conjugué.",
+              "explanation": "Étape 1 — Écrire : $z_D-z_E=-2+2i$ et $z_M-z_E=2+2i$. Étape 2 — Calculer : $Z=\\dfrac{(-2+2i)(2-2i)}{(2+2i)(2-2i)}=\\dfrac{-4+4i+4i-4i^2}{8}=\\dfrac{8i}{8}=i$. Étape 3 — Repérer : $Z$ est imaginaire pur de module $1$. La valeur $-i$ vient d'un quotient inversé ; $2i$ vient d'un dénominateur $(2+2i)(2-2i)$ compté $4$ au lieu de $8$ ; $1$ confond le quotient $Z$ avec son module $|Z|=1$.",
               "answers": [
                 {
                   "content": "$i$",
@@ -1097,7 +1063,7 @@
                   "correct": false
                 },
                 {
-                  "content": "$1+i$",
+                  "content": "$2i$",
                   "correct": false
                 },
                 {
@@ -1107,7 +1073,7 @@
               ]
             },
             {
-              "content": "Sachant que $Z=i$, quelle est la nature du triangle $EMD$ ?",
+              "content": "Avec $E(1)$, $M(3+2i)$, $D(-1+2i)$ et $Z=\\dfrac{z_D-z_E}{z_M-z_E}=i$, quelle est la nature du triangle $EMD$ ?",
               "question_type": "single_choice",
               "explanation": "Étape 1 — Écrire : $Z=\\dfrac{z_D-z_E}{z_M-z_E}=i$. Étape 2 — Calculer : fait. Étape 3 — Repérer : $Z$ est imaginaire pur et $|Z|=1$. Étape 4 — Conclure : $(EM)\\perp(ED)$ et $EM=ED$, donc $EMD$ est rectangle isocèle en $E$. Il n'est pas simplement rectangle : le module vaut bien $1$.",
               "answers": [
@@ -1434,7 +1400,7 @@
             {
               "content": "La fontaine $\\Omega$ est le milieu de $[AD]$ avec $A(1+i)$ et $D(5+5i)$. On a $z_\\Omega=a+ia$. Quelle est la valeur de $a$ ?",
               "question_type": "numeric",
-              "explanation": "Étape 1 — Écrire : le milieu a pour affixe $\\dfrac{z_A+z_D}{2}$. Étape 2 — Calculer : $\\dfrac{1+i+5+5i}{2}=\\dfrac{6+6i}{2}=3+3i$. Étape 3 — Conclure : $\\Omega(3+3i)$ et $a=3$. Les diagonales d'un carré se coupent en leur milieu.",
+              "explanation": "Étape 1 — Écrire : le milieu a pour affixe $\\dfrac{z_A+z_D}{2}$. Étape 2 — Calculer : $\\dfrac{1+i+5+5i}{2}=\\dfrac{6+6i}{2}=3+3i$. Étape 3 — Conclure : $\\Omega(3+3i)$ et $a=3$. Les diagonales du parallélogramme $ABDC$ se coupent en leur milieu.",
               "answers": [
                 {
                   "content": "3",
@@ -1502,7 +1468,7 @@
               ]
             },
             {
-              "content": "Montre que $ABDC$ est un carré.",
+              "content": "Avec $A(1+i)$, $B(5+i)$, $C(1+5i)$ et $D(5+5i)$, montre que $ABDC$ est un carré.",
               "question_type": "written",
               "explanation": "Corrigé modèle. Étape 1 — Écrire : $ABDC$ est un parallélogramme par construction ($z_D=z_B+z_C-z_A$). Étape 2 — Calculer : $Z=\\dfrac{z_C-z_A}{z_B-z_A}=\\dfrac{4i}{4}=i$. Étape 3 — Repérer : $Z$ est imaginaire pur, donc $(AB)\\perp(AC)$, et $|Z|=1$, donc $AB=AC$. Étape 4 — Conclure : un parallélogramme qui a un angle droit et deux côtés consécutifs égaux est un carré. Points : 1 pour le parallélogramme, 1 pour le quotient $Z=i$, 1 pour la conclusion.",
               "answers": [],

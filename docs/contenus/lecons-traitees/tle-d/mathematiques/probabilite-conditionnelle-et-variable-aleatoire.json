@@ -482,7 +482,7 @@
             "statement": "Un commerçant du marché reçoit ses mangues de deux fournisseurs. Le fournisseur $F_1$ livre 70 % des mangues et $F_2$ les 30 % restantes. Une mangue de $F_1$ est abîmée avec la probabilité 0,10 ; une mangue de $F_2$ avec la probabilité 0,20. On prend une mangue au hasard ; $G$ est l'événement « la mangue est abîmée ».",
             "questions": [
               {
-                "content": "Complète les probabilités de chemins : $P(F_1 \\cap G) = $ ___ et $P(F_2 \\cap G) = $ ___",
+                "content": "Une mangue vient du fournisseur $F_1$ (70 % des mangues, abîmées avec la probabilité 0,10) ou de $F_2$ (30 %, abîmées avec la probabilité 0,20) ; $G$ : « la mangue est abîmée ». Complète : $P(F_1 \\cap G) = $ ___ et $P(F_2 \\cap G) = $ ___",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "hint": "Un chemin se calcule en multipliant les probabilités de ses branches.",
@@ -515,7 +515,7 @@
               {
                 "content": "Dans le même cas (70 % de $F_1$, 30 % de $F_2$ ; mangues abîmées à 10 % pour $F_1$ et 20 % pour $F_2$), on prend une mangue abîmée. Calcule la probabilité qu'elle vienne de $F_1$, $P_G(F_1)$, arrondie au centième.",
                 "question_type": "numeric",
-                "tolerance": 0.01,
+                "tolerance": 0.005,
                 "hint": "Divise la probabilité du chemin $F_1 \\cap G$ par $P(G)$.",
                 "explanation": "Étape 1 — Construire l'arbre : $P(F_1 \\cap G) = 0{,}07$ et $P(F_2 \\cap G) = 0{,}06$. Étape 2 — Vérifier : les sommes des branches valent 1. Étape 3 — Calculer les chemins vers $G$ : 0,07 et 0,06. Étape 4 — Additionner : $P(G) = 0{,}13$. Étape 5 — Diviser : $P_G(F_1) = \\dfrac{0{,}07}{0{,}13} = \\dfrac{7}{13} \\approx 0{,}54$.",
                 "answers": [
@@ -530,7 +530,7 @@
         },
         {
           "name": "Événements indépendants",
-          "remember": "Deux événements $A$ et $B$ sont indépendants si $P(A \\cap B) = P(A) \\times P(B)$. Si $P(A) \\neq 0$, cela équivaut à $P_A(B) = P(B)$ : savoir que $A$ est réalisé ne change pas la probabilité de $B$. Alors $A$ et $\\overline{B}$, $\\overline{A}$ et $B$, $\\overline{A}$ et $\\overline{B}$ sont aussi indépendants. Deux événements incompatibles ($A \\cap B = \\emptyset$) de probabilités non nulles ne sont jamais indépendants.",
+          "remember": "Deux événements $A$ et $B$ sont indépendants si $P(A \\cap B) = P(A) \\times P(B)$. Si $P(A) \\neq 0$, cela équivaut à $P_A(B) = P(B)$ : savoir que $A$ est réalisé ne change pas la probabilité de $B$. Alors $A$ et $\\overline{B}$, $\\overline{A}$ et $B$, $\\overline{A}$ et $\\overline{B}$ sont aussi indépendants. Deux événements incompatibles ($A \\cap B = \\emptyset$) de probabilités non nulles ne sont jamais indépendants. Rappel de 1ère : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$.",
           "method": [
             "Calculer $P(A)$, $P(B)$ et $P(A \\cap B)$.",
             "Calculer le produit $P(A) \\times P(B)$.",
@@ -600,7 +600,7 @@
                 "content": "Deux événements indépendants $R$ et $S$ vérifient $P(R) = 0{,}4$ et $P(S) = 0{,}5$. Calcule $P(R \\cup S)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Calculer : $P(R) = 0{,}4$ et $P(S) = 0{,}5$. Étape 2 — Calculer le produit : $P(R \\cap S) = 0{,}4 \\times 0{,}5 = 0{,}2$ par indépendance. Étape 3 — Appliquer $P(R \\cup S) = P(R) + P(S) - P(R \\cap S) = 0{,}4 + 0{,}5 - 0{,}2$. Étape 4 — Conclure : $P(R \\cup S) = 0{,}7$. Oublier de retrancher $P(R \\cap S)$ donne 0,9, ce qui compte deux fois les cas où $R$ et $S$ ont lieu ensemble.",
+                "explanation": "Étape 1 — Calculer : $P(R) = 0{,}4$ et $P(S) = 0{,}5$. Étape 2 — Calculer le produit : $P(R \\cap S) = 0{,}4 \\times 0{,}5 = 0{,}2$ par indépendance. Étape 3 — Comparer : l'indépendance de $R$ et $S$ est donnée, donc $P(R \\cap S) = 0{,}2$ est la bonne valeur de l'intersection. Étape 4 — Conclure avec la formule de 1ère $P(R \\cup S) = P(R) + P(S) - P(R \\cap S) = 0{,}4 + 0{,}5 - 0{,}2 = 0{,}7$. Oublier de retrancher $P(R \\cap S)$ donne 0,9, ce qui compte deux fois les cas où $R$ et $S$ ont lieu ensemble.",
                 "answers": [
                   {
                     "content": "0,7",
@@ -634,7 +634,7 @@
               {
                 "content": "On lance un dé équilibré à 6 faces. Les événements $C$ « résultat supérieur ou égal à 5 » et $D$ « résultat inférieur ou égal à 3 » ne peuvent pas se réaliser en même temps. Sont-ils indépendants ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer : $P(C) = \\dfrac{1}{3}$, $P(D) = \\dfrac{1}{2}$ et $C \\cap D = \\emptyset$, donc $P(C \\cap D) = 0$. Étape 2 — Calculer le produit : $\\dfrac{1}{3} \\times \\dfrac{1}{2} = \\dfrac{1}{6}$. Étape 3 — Comparer : $0 \\neq \\dfrac{1}{6}$. Étape 4 — Conclure : $C$ et $D$ ne sont pas indépendants. Être incompatibles n'est pas être indépendants : au contraire, si $C$ a lieu, $D$ devient impossible.",
+                "explanation": "Étape 1 — Calculer : $P(C) = \\dfrac{1}{3}$, $P(D) = \\dfrac{1}{2}$ et $C \\cap D = \\emptyset$, donc $P(C \\cap D) = 0$. Étape 2 — Calculer le produit : $\\dfrac{1}{3} \\times \\dfrac{1}{2} = \\dfrac{1}{6}$. Étape 3 — Comparer : $0 \\neq \\dfrac{1}{6}$. Étape 4 — Conclure : $C$ et $D$ ne sont pas indépendants. La proposition « $P(C \\cap D) = \\dfrac{1}{6}$ » est fausse : $C$ et $D$ n'ont aucun résultat commun, donc l'intersection vaut 0 et non le produit. Être incompatibles n'est pas être indépendants : au contraire, si $C$ a lieu, $D$ devient impossible.",
                 "answers": [
                   {
                     "content": "Oui, car ils sont incompatibles",
@@ -645,7 +645,7 @@
                     "correct": true
                   },
                   {
-                    "content": "Oui, car $P(C \\cap D) = 0$ est un nombre fixe",
+                    "content": "Oui : $P(C \\cap D) = P(C) \\times P(D) = \\dfrac{1}{6}$",
                     "correct": false
                   },
                   {
@@ -660,7 +660,7 @@
             "statement": "Une urne de la kermesse contient 10 billets numérotés de 1 à 10. On en tire un au hasard. On note $A$ « le numéro est pair », $B$ « le numéro est un multiple de 5 » et $C$ « le numéro est inférieur ou égal à 3 ».",
             "questions": [
               {
-                "content": "Complète : $P(A) = $ ___ et $P(B) = $ ___",
+                "content": "Une urne contient 10 billets numérotés de 1 à 10, tirés au hasard. $A$ : « le numéro est pair » ; $B$ : « le numéro est un multiple de 5 ». Complète : $P(A) = $ ___ et $P(B) = $ ___",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "hint": "Compte les numéros qui conviennent, puis divise par 10.",
@@ -1008,7 +1008,7 @@
                 "content": "Un élève tire 3 fois un billet, avec remise, dans une urne où 1 billet sur 5 est gagnant. $X$ est le nombre de billets gagnants, $X \\sim \\mathcal{B}(3\\,;\\,0{,}2)$ et $P(X = 0) = 0{,}512$. Calcule la probabilité d'obtenir au moins un billet gagnant, $P(X \\geq 1)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Reconnaître : « au moins un » est l'événement contraire de « aucun ». Étape 2 — Identifier : $X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$. Étape 3 — Écrire : $P(X \\geq 1) = 1 - P(X = 0)$. Étape 4 — Calculer : $P(X = 0) = 0{,}8^3 = 0{,}512$, donc $P(X \\geq 1) = 1 - 0{,}512 = 0{,}488$.",
+                "explanation": "Étape 1 — Reconnaître : succès = billet gagnant, $p = 0{,}2$. Étape 2 — Identifier : $X$ suit $\\mathcal{B}(3\\,;\\,0{,}2)$ ; « au moins un » est l'événement contraire de « aucun ». Étape 3 — Écrire : $P(X \\geq 1) = 1 - P(X = 0)$ avec $P(X = 0) = \\binom{3}{0} \\times 0{,}2^0 \\times 0{,}8^3$. Étape 4 — Calculer : $P(X = 0) = 0{,}8^3 = 0{,}512$, donc $P(X \\geq 1) = 1 - 0{,}512 = 0{,}488$.",
                 "answers": [
                   {
                     "content": "0,488",
@@ -1049,7 +1049,7 @@
             "statement": "Un joueur de l'équipe du quartier réussit un penalty avec la probabilité 0,6. Il tire 3 penaltys, de façon indépendante. On note $Z$ le nombre de buts marqués.",
             "questions": [
               {
-                "content": "Le nombre $Z$ de buts marqués suit la loi binomiale de paramètres n = ___ et p = ___",
+                "content": "Un joueur réussit un penalty avec la probabilité 0,6 et tire 3 penaltys indépendants. Le nombre $Z$ de buts marqués suit la loi binomiale de paramètres n = ___ et p = ___",
                 "question_type": "select",
                 "hint": "$n$ est le nombre de tirs ; $p$ est la probabilité de réussir un tir.",
                 "explanation": "Étape 1 — Reconnaître : le succès est « marquer un but », de probabilité $p = 0{,}6$. Étape 2 — Identifier : le joueur tire 3 penaltys identiques et indépendants, donc $n = 3$ et $Z$ suit $\\mathcal{B}(3\\,;\\,0{,}6)$. La valeur 0,4 est la probabilité d'un échec, pas d'un succès.",
@@ -1161,7 +1161,7 @@
             {
               "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Un billet gagnant est tiré. Calcule la probabilité qu'il vienne de l'urne $U_1$, $P_G(U_1)$, arrondie au centième.",
               "question_type": "numeric",
-              "tolerance": 0.01,
+              "tolerance": 0.005,
               "explanation": "Étape 1 — Construire l'arbre. Étape 2 — Vérifier les sommes des branches. Étape 3 — Calculer les chemins vers $G$ : 0,10 (par $U_1$) et 0,12 (par $U_2$). Étape 4 — Additionner : $P(G) = 0{,}22$. Étape 5 — Diviser : $P_G(U_1) = \\dfrac{P(U_1 \\cap G)}{P(G)} = \\dfrac{0{,}10}{0{,}22} = \\dfrac{5}{11} \\approx 0{,}45$. Ne pas répondre 0,25 : c'est $P_{U_1}(G)$, la probabilité de gagner sachant $U_1$, qui est un conditionnement dans l'autre sens.",
               "answers": [
                 {
@@ -1196,8 +1196,8 @@
             {
               "content": "Au stand de tombola, le joueur choisit l'urne $U_1$ (probabilité 0,4) ou l'urne $U_2$ (probabilité 0,6), puis tire un billet dans l'urne choisie. 25 % des billets de $U_1$ et 20 % des billets de $U_2$ sont gagnants ($G$). Le billet tiré est perdant. Calcule la probabilité qu'il vienne de l'urne $U_2$, $P_{\\overline{G}}(U_2)$, arrondie au centième.",
               "question_type": "numeric",
-              "tolerance": 0.01,
-              "explanation": "Étape 1 — Construire l'arbre : le chemin $U_2 \\to \\overline{G}$ a pour probabilité $0{,}6 \\times 0{,}8 = 0{,}48$ et le chemin $U_1 \\to \\overline{G}$ a pour probabilité $0{,}4 \\times 0{,}75 = 0{,}30$. Étape 2 — Vérifier : les branches de chaque nœud ont pour somme 1. Étape 3 — Additionner : $P(\\overline{G}) = 0{,}48 + 0{,}30 = 0{,}78$ (on vérifie : $1 - 0{,}22 = 0{,}78$). Étape 4 — Diviser : $P_{\\overline{G}}(U_2) = \\dfrac{0{,}48}{0{,}78} = \\dfrac{8}{13} \\approx 0{,}62$.",
+              "tolerance": 0.005,
+              "explanation": "Étape 1 — Construire l'arbre, avec $U_1$ (0,4), $U_2$ (0,6) puis $G$ et $\\overline{G}$ sur chaque branche. Étape 2 — Vérifier : les branches de chaque nœud ont pour somme 1. Étape 3 — Calculer les chemins vers $\\overline{G}$ : $P(U_2 \\cap \\overline{G}) = 0{,}6 \\times 0{,}8 = 0{,}48$ et $P(U_1 \\cap \\overline{G}) = 0{,}4 \\times 0{,}75 = 0{,}30$. Étape 4 — Additionner : $P(\\overline{G}) = 0{,}48 + 0{,}30 = 0{,}78$ (on vérifie : $1 - 0{,}22 = 0{,}78$). Étape 5 — Diviser : $P_{\\overline{G}}(U_2) = \\dfrac{0{,}48}{0{,}78} = \\dfrac{8}{13} \\approx 0{,}62$.",
               "answers": [
                 {
                   "content": "0,62",
@@ -1431,7 +1431,7 @@
               "question_type": "numeric",
               "tolerance": 0,
               "unit": "F",
-              "explanation": "Étape 1 — Lister : l'organisateur gagne ce que le joueur perd. Étape 2 — D'après la question précédente, le joueur perd en moyenne 50 F par tour. Étape 3 — Calculer : pour 300 tours, $300 \\times 50 = 15\\,000$ F. Étape 4 — Conclure : bénéfice moyen de 15 000 F. C'est une moyenne : le bénéfice réel varie autour de cette valeur.",
+              "explanation": "Étape 1 — Lister : le gain net d'un joueur est $N = G - 2{,}5$ (en centaines de francs). Étape 2 — Les probabilités de $G$ sont inchangées, avec $E(G) = 2$. Étape 3 — Calculer l'espérance : $E(N) = E(G) - 2{,}5 = 2 - 2{,}5 = -0{,}5$ centaine de francs, soit $-50$ F par tour : l'organisateur gagne 50 F par tour en moyenne. Étape 4 — Pour 300 tours, $300 \\times 50 = 15\\,000$ F. Le bénéfice moyen est de 15 000 F ; c'est une moyenne, le bénéfice réel varie autour de cette valeur.",
               "answers": [
                 {
                   "content": "15000",
@@ -1509,18 +1509,18 @@
             {
               "content": "Une grande production contient 10 % de bouteilles défectueuses. On prélève 3 bouteilles de façon indépendante. Le nombre $X$ de bouteilles défectueuses suit une loi binomiale. Laquelle ?",
               "question_type": "single_choice",
-              "explanation": "Partie B. Étape 1 — Reconnaître : le succès est « la bouteille est défectueuse », $p = 0{,}1$. Étape 2 — Identifier : 3 prélèvements identiques et indépendants, donc $n = 3$ et $X$ suit $\\mathcal{B}(3\\,;\\,0{,}1)$. La loi $\\mathcal{B}(3\\,;\\,0{,}9)$ prend la probabilité d'une bouteille conforme.",
+              "explanation": "Partie B. Étape 1 — Reconnaître : le succès est « la bouteille est défectueuse », $p = 0{,}1$. Étape 2 — Identifier : 3 prélèvements identiques et indépendants, donc $n = 3$ et $X$ suit $\\mathcal{B}(3\\,;\\,0{,}1)$. La loi $\\mathcal{B}(3\\,;\\,0{,}9)$ prend la probabilité d'une bouteille conforme ; $\\mathcal{B}(3\\,;\\,0{,}08)$ reprend le taux de la seule chaîne $C_1$ au lieu de la probabilité 0,1 de toute la production.",
               "answers": [
                 {
                   "content": "$\\mathcal{B}(3\\,;\\,0{,}1)$",
                   "correct": true
                 },
                 {
-                  "content": "$\\mathcal{B}(10\\,;\\,0{,}3)$",
+                  "content": "$\\mathcal{B}(3\\,;\\,0{,}9)$",
                   "correct": false
                 },
                 {
-                  "content": "$\\mathcal{B}(3\\,;\\,0{,}9)$",
+                  "content": "$\\mathcal{B}(3\\,;\\,0{,}08)$",
                   "correct": false
                 },
                 {
@@ -1570,7 +1570,7 @@
               "content": "Une usine produit du jus de bissap sur deux chaînes de remplissage : la chaîne $C_1$ remplit 50 % des bouteilles et la chaîne $C_2$ les 50 % restantes. Une bouteille de $C_1$ est défectueuse ($D$) avec la probabilité 0,08, une bouteille de $C_2$ avec la probabilité 0,12. On prélève 3 bouteilles indépendantes dans une grande production où 10 % des bouteilles sont défectueuses. Le lot est refusé si au moins une bouteille prélevée est défectueuse. Calcule la probabilité que le lot soit refusé.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Partie B. Étape 1 — Reconnaître : $X$, le nombre de bouteilles défectueuses, suit $\\mathcal{B}(3\\,;\\,0{,}1)$. Étape 2 — Identifier : « au moins une » se note $X \\geq 1$, événement contraire de $X = 0$. Étape 3 — Écrire : $P(X \\geq 1) = 1 - P(X = 0)$. Étape 4 — Calculer : $P(X = 0) = 0{,}9^3 = 0{,}729$, donc $P(X \\geq 1) = 1 - 0{,}729 = 0{,}271$. Vérification : $0{,}243 + 3 \\times 0{,}01 \\times 0{,}9 + 0{,}001 = 0{,}243 + 0{,}027 + 0{,}001 = 0{,}271$.",
+              "explanation": "Partie B. Étape 1 — Reconnaître : le succès est « défectueuse », $p = 0{,}1$. Étape 2 — Identifier : 3 prélèvements indépendants, donc $X$ suit $\\mathcal{B}(3\\,;\\,0{,}1)$ ; « au moins une » se note $X \\geq 1$, événement contraire de $X = 0$. Étape 3 — Écrire : $P(X \\geq 1) = 1 - P(X = 0)$ avec $P(X = 0) = \\binom{3}{0} \\times 0{,}1^0 \\times 0{,}9^3$. Étape 4 — Calculer : $P(X = 0) = 0{,}9^3 = 0{,}729$, donc $P(X \\geq 1) = 1 - 0{,}729 = 0{,}271$. Vérification : $0{,}243 + 3 \\times 0{,}01 \\times 0{,}9 + 0{,}001 = 0{,}243 + 0{,}027 + 0{,}001 = 0{,}271$.",
               "answers": [
                 {
                   "content": "0,271",
