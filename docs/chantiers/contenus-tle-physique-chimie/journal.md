@@ -96,3 +96,7 @@
 | **PR** | #415 `feature/contenus-tle-physique-chimie` → `Develop` |
 | **ADR produits** | Aucun |
 | **UDR produits** | Aucune |
+
+## Correctif de tests (lot T)
+
+`bin/ci-quiet` a rougi sur deux tests qui lisaient les leçons v1 de Tle D dans `docs/` comme données de test (caractérisation de `ContentTreeWriter`, `RichTextSanitizer`). Les 5 fichiers v1 qu'ils utilisent sont figés dans `test/fixtures/files/lecons_v1/tle-d/` et les tests y pointent : les vagues T1 et T4 (maths, SVT) pourront remplacer leurs v1 sans casser ces tests. Ce qu'il ne faut pas refaire : un test qui lit `docs/contenus/` comme fixture.
