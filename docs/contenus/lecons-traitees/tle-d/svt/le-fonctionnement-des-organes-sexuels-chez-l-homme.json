@@ -1,6 +1,6 @@
 {
   "format": "lnclass.course-tree",
-  "version": 1,
+  "version": 3,
   "courses": [
     {
       "name": "Le fonctionnement des organes sexuels chez l'Homme",
@@ -8,1301 +8,1561 @@
       "level_name": "Tle",
       "material_name": "SVT",
       "series_name": "D",
-      "essentials": [
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "axe-testicule",
+          "kind": "diagram",
+          "description": "Schéma fléché en cycle de la régulation du testicule : l'hypothalamus stimule l'hypophyse par la GnRH, l'hypophyse stimule le testicule par la LH et la FSH, et le testicule freine l'hypothalamus et l'hypophyse par la testostérone (rétrocontrôle négatif).",
+          "params": {
+            "layout": "cycle",
+            "nodes": [
+              {
+                "id": "hyp",
+                "label": "Hypothalamus"
+              },
+              {
+                "id": "hyph",
+                "label": "Hypophyse"
+              },
+              {
+                "id": "test",
+                "label": "Testicule"
+              }
+            ],
+            "edges": [
+              {
+                "from": "hyp",
+                "to": "hyph",
+                "label": "GnRH (stimule)"
+              },
+              {
+                "from": "hyph",
+                "to": "test",
+                "label": "LH et FSH (stimulent)"
+              },
+              {
+                "from": "test",
+                "to": "hyp",
+                "label": "Testostérone (freine)"
+              },
+              {
+                "from": "test",
+                "to": "hyph",
+                "label": "Testostérone (freine)"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "appareil-genital-feminin-noms",
+          "kind": "plate",
+          "description": "Planche de l'appareil génital féminin avec ses légendes : l'ovaire, où mûrissent les follicules, le pavillon et la trompe (oviducte) qui recueillent l'ovocyte, l'utérus et sa muqueuse, l'endomètre, puis le col de l'utérus et le vagin.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "labels": [
+              {
+                "part": "ovary",
+                "text": "ovaire"
+              },
+              {
+                "part": "infundibulum",
+                "text": "pavillon"
+              },
+              {
+                "part": "oviduct",
+                "text": "trompe (oviducte)"
+              },
+              {
+                "part": "uterus",
+                "text": "utérus"
+              },
+              {
+                "part": "endometrium",
+                "text": "endomètre"
+              },
+              {
+                "part": "cervix",
+                "text": "col de l'utérus"
+              },
+              {
+                "part": "vagina",
+                "text": "vagin"
+              }
+            ],
+            "highlight": [
+              "ovary"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "axe-ovaire",
+          "kind": "diagram",
+          "description": "Schéma fléché de la régulation du cycle de la femme : l'hypothalamus stimule l'hypophyse par la GnRH, l'hypophyse stimule l'ovaire par la FSH et la LH, l'ovaire agit sur l'utérus par ses hormones et agit en retour sur l'hypophyse par un rétrocontrôle négatif ou positif.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "hyp",
+                "label": "Hypothalamus"
+              },
+              {
+                "id": "hyph",
+                "label": "Hypophyse"
+              },
+              {
+                "id": "ov",
+                "label": "Ovaire"
+              },
+              {
+                "id": "ut",
+                "label": "Utérus"
+              }
+            ],
+            "edges": [
+              {
+                "from": "hyp",
+                "to": "hyph",
+                "label": "GnRH"
+              },
+              {
+                "from": "hyph",
+                "to": "ov",
+                "label": "FSH et LH"
+              },
+              {
+                "from": "ov",
+                "to": "ut",
+                "label": "Œstrogènes, progestérone"
+              },
+              {
+                "from": "ov",
+                "to": "hyph",
+                "label": "Rétrocontrôle négatif ou positif"
+              },
+              {
+                "from": "ov",
+                "to": "hyp",
+                "label": "Rétrocontrôle négatif ou positif"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lh-rat-castre",
+          "kind": "stat_chart",
+          "description": "Courbe du taux de LH dans le sang d'un lot de rats mâles, en unités arbitraires, de J0 à J42. Les rats sont castrés à J0 : la LH monte jusqu'à 55 unités. Des injections de testostérone commencent à J21 : la LH redescend à 10 unités, sa valeur de départ.",
+          "params": {
+            "chart": "line",
+            "series": [
+              10,
+              40,
+              55,
+              55,
+              20,
+              10,
+              10
+            ],
+            "labels": [
+              "J0",
+              "J7",
+              "J14",
+              "J21",
+              "J28",
+              "J35",
+              "J42"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "lh-cycle",
+          "kind": "stat_chart",
+          "description": "Courbe du taux de LH dans le sang d'une femme au cours d'un cycle de 28 jours, en unités arbitraires, dosé du jour 1 au jour 27 (avec un dosage en plus au jour 12). La LH reste basse, puis monte brusquement jusqu'à 60 unités au jour 13 : c'est le pic de LH, avant de retomber.",
+          "params": {
+            "chart": "line",
+            "series": [
+              5,
+              5,
+              5,
+              5,
+              6,
+              8,
+              10,
+              60,
+              12,
+              8,
+              6,
+              5,
+              5,
+              5,
+              5
+            ],
+            "labels": [
+              "J1",
+              "J3",
+              "J5",
+              "J7",
+              "J9",
+              "J11",
+              "J12",
+              "J13",
+              "J15",
+              "J17",
+              "J19",
+              "J21",
+              "J23",
+              "J25",
+              "J27"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
         {
           "name": "Le fonctionnement du testicule et sa régulation",
-          "subtitle": "Produire spermatozoïdes et testostérone, sous le contrôle de l'hypothalamus et de l'hypophyse",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Situer, dans le testicule, la production des spermatozoïdes et celle de la testostérone.</li><li>Décrire les étapes de la spermatogenèse.</li><li>Expliquer comment l'hypothalamus et l'hypophyse règlent le fonctionnement du testicule.</li></ul><h2>L'image pour comprendre</h2><p><strong>Première image : l'école en anneau.</strong> Imagine une école construite en anneau autour d'une cour. Les plus petits élèves ont leur classe contre le mur extérieur. Chaque année, ils avancent d'une salle vers la cour. Les diplômés sortent par la cour et partent par l'allée centrale. Des éducateurs, debout du mur jusqu'à la cour, nourrissent et accompagnent chaque élève. Dehors, entre les écoles du quartier, de petites maisons abritent une radio qui diffuse un message dans tout le quartier.</p><p><strong>Le pont.</strong> L'école en anneau, c'est un <strong>tube séminifère</strong>, un des nombreux petits tubes enroulés qui remplissent le testicule. Les plus petits élèves, ce sont les <strong>spermatogonies</strong>, des cellules à $2n$ chromosomes collées à la paroi du tube. Avancer vers la cour, c'est la <strong>spermatogenèse</strong>, la fabrication des spermatozoïdes. Les diplômés, ce sont les <strong>spermatozoïdes</strong>, libérés dans la <strong>lumière</strong> du tube, c'est-à-dire son canal central. Les éducateurs, ce sont les <strong>cellules de Sertoli</strong>. Les petites maisons entre les écoles, c'est le <strong>tissu interstitiel</strong>, situé entre les tubes, avec ses <strong>cellules de Leydig</strong>. Le message de la radio, c'est la <strong>testostérone</strong>, une hormone : une substance transportée par le sang, qui agit sur des organes éloignés.</p><p><strong>Là où l'image s'arrête.</strong> Un élève ne change pas en grandissant. Les cellules de la spermatogenèse, elles, passent par la méiose : elles partent avec $2n$ chromosomes et arrivent avec $n$. Et une seule cellule de départ donne plusieurs spermatozoïdes : un « petit élève » donne plusieurs « diplômés ».</p><p><strong>Deuxième image : la cuisine du maquis.</strong> La patronne du maquis envoie régulièrement des messages à la cheffe cuisinière. La cheffe envoie alors deux serveurs à la cuisine pour lancer la préparation des plats. Les plats prêts sont posés sur le comptoir. Quand la patronne voit le comptoir plein, elle ralentit ses messages ; quand il se vide, elle les relance. Ainsi, il y a toujours à peu près la même quantité de plats sur le comptoir.</p><p><strong>Le pont.</strong> La patronne, c'est l'<strong>hypothalamus</strong>, une petite zone à la base du cerveau. Ses messages, c'est la <strong>GnRH</strong>, une hormone libérée par bouffées régulières (on dit de façon pulsatile). La cheffe, c'est l'<strong>hypophyse</strong>, une petite glande située juste sous le cerveau. Les deux serveurs, ce sont la <strong>FSH</strong> et la <strong>LH</strong>, deux hormones appelées gonadostimulines, car elles stimulent les gonades (les testicules ou les ovaires). La cuisine, c'est le testicule. Les plats sur le comptoir, c'est la testostérone dans le sang. Ralentir quand le comptoir est plein, c'est le <strong>rétrocontrôle négatif</strong>.</p><p><strong>Là où l'image s'arrête.</strong> L'hypothalamus et l'hypophyse ne « voient » rien : leurs cellules possèdent des récepteurs qui détectent la quantité de testostérone dans le sang. Et la patronne ne s'arrête jamais complètement : le système garde un taux de testostérone à peu près constant.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>Le testicule a deux fonctions : il produit les spermatozoïdes et il sécrète une hormone, la testostérone.</li><li>La <strong>spermatogenèse</strong> a lieu dans les tubes séminifères, de la paroi vers la lumière. Elle se déroule en continu, de la puberté jusqu'à la fin de la vie, et dure environ 74 jours chez l'homme :<ol><li><strong>Multiplication</strong> : les spermatogonies ($2n$) se divisent par mitoses ; certaines grossissent et deviennent des <strong>spermatocytes I</strong> ($2n$).</li><li><strong>Méiose</strong> : chaque spermatocyte I donne 2 <strong>spermatocytes II</strong> ($n$), puis 4 <strong>spermatides</strong> ($n$).</li><li><strong>Différenciation</strong> : chaque spermatide se transforme en <strong>spermatozoïde</strong> (formation de l'acrosome et du flagelle, perte de la plus grande partie du cytoplasme).</li></ol></li><li>Les <strong>cellules de Sertoli</strong> soutiennent et nourrissent les cellules de la spermatogenèse. Stimulées par la FSH et la testostérone, elles permettent la spermatogenèse. Elles sécrètent aussi l'<strong>inhibine</strong>.</li><li>Les <strong>cellules de Leydig</strong>, dans le tissu interstitiel, sécrètent la testostérone sous l'action de la LH. La testostérone permet la spermatogenèse, l'apparition des caractères sexuels secondaires (barbe, voix grave, musculature) et le comportement sexuel.</li><li>La spermatogenèse exige une température d'environ 35 °C, plus basse que celle du corps : c'est pourquoi les testicules sont logés dans le scrotum (les bourses), hors de l'abdomen.</li><li><strong>Régulation</strong> : l'hypothalamus sécrète la GnRH, qui stimule l'hypophyse. L'hypophyse sécrète la LH (qui agit sur les cellules de Leydig) et la FSH (qui agit sur les cellules de Sertoli).</li><li><strong>Rétrocontrôle négatif</strong> : la testostérone freine la sécrétion de GnRH et de LH ; l'inhibine freine la sécrétion de FSH. Le taux de testostérone reste ainsi à peu près constant.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> On réalise trois expériences sur des rats adultes. (1) On retire l'hypophyse d'un rat : ses testicules diminuent de volume, son taux de testostérone s'effondre et la spermatogenèse s'arrête. (2) On retire les testicules d'un autre rat (castration) : son taux de LH augmente fortement. (3) Chez un rat castré, on injecte de la testostérone : son taux de LH redevient normal. Interprète ces résultats.</p><ol><li><strong>Expérience 1.</strong> Sans hypophyse, le testicule ne fonctionne plus. Donc l'hypophyse stimule le testicule.</li><li><strong>Expérience 2.</strong> Sans testicule, la LH augmente. Donc, normalement, le testicule freine l'hypophyse.</li><li><strong>Expérience 3.</strong> La testostérone seule suffit à rétablir le taux normal de LH. Donc c'est la testostérone qui exerce ce frein.</li><li><strong>Conclusion.</strong> L'hypophyse stimule le testicule par la LH, et le testicule freine l'hypophyse par la testostérone : c'est un rétrocontrôle négatif. Le comptoir plein fait ralentir la cuisine.</li></ol><h2>Le piège à éviter</h2><p>Beaucoup d'élèves inversent les cibles des deux hormones de l'hypophyse, ou écrivent que la testostérone est fabriquée dans les tubes séminifères. C'est faux : la testostérone vient des cellules de Leydig, situées <strong>entre</strong> les tubes, et c'est la LH qui les stimule.</p><p>Pour repérer l'erreur, retiens : « L comme LH, L comme Leydig ». La FSH, elle, agit sur les cellules de Sertoli, dans les tubes.</p><h2>En une phrase</h2><p>Dans le testicule, les tubes séminifères fabriquent les spermatozoïdes et les cellules de Leydig fabriquent la testostérone ; l'hypothalamus et l'hypophyse les stimulent, et la testostérone les freine en retour pour garder un taux constant.</p>",
-          "exercises": [
-            {
-              "title": "Comprendre — Les cellules du testicule et leurs rôles",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Chez l'homme, où sont fabriqués les spermatozoïdes ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les spermatozoïdes naissent dans les tubes séminifères, de la paroi vers la lumière : ce sont les « diplômés » de l'école en anneau. L'erreur tentante est l'épididyme : les spermatozoïdes y mûrissent et y sont stockés, mais ils n'y sont pas fabriqués.",
-                  "answers": [
-                    {
-                      "content": "Dans les tubes séminifères du testicule",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans l'épididyme",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans les cellules de Leydig",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans la prostate",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles cellules du testicule sécrètent la testostérone ?",
-                  "question_type": "single_choice",
-                  "explanation": "La testostérone est sécrétée par les cellules de Leydig, dans le tissu situé entre les tubes : ce sont les petites maisons avec leur radio. L'erreur tentante est les cellules de Sertoli : elles sont dans les tubes et nourrissent les futurs spermatozoïdes, mais ne sécrètent pas la testostérone.",
-                  "answers": [
-                    {
-                      "content": "Les cellules de Leydig",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les cellules de Sertoli",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatogonies",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatides",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Rappel de l'image : une école est construite en anneau autour d'une cour ; les plus petits élèves sont contre le mur extérieur et avancent vers la cour ; des éducateurs, debout du mur jusqu'à la cour, nourrissent et accompagnent chaque élève. Dans cette image, que représentent les éducateurs ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les éducateurs qui nourrissent et accompagnent les élèves de la paroi jusqu'à la lumière, ce sont les cellules de Sertoli. L'erreur tentante est les cellules de Leydig : elles correspondent aux petites maisons situées dehors, entre les écoles, pas à l'intérieur du tube.",
-                  "answers": [
-                    {
-                      "content": "Les cellules de Sertoli",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les cellules de Leydig",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatogonies",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les spermatozoïdes",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelles hormones, sécrétées par l'hypophyse, agissent directement sur le testicule ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'hypophyse sécrète la FSH et la LH, les deux « serveurs » envoyés à la cuisine. L'erreur tentante est la GnRH : elle est sécrétée par l'hypothalamus et agit sur l'hypophyse, pas sur le testicule.",
-                  "answers": [
-                    {
-                      "content": "La FSH",
-                      "correct": true
-                    },
-                    {
-                      "content": "La LH",
-                      "correct": true
-                    },
-                    {
-                      "content": "La GnRH",
-                      "correct": false
-                    },
-                    {
-                      "content": "La testostérone",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez l'homme, la spermatogenèse se déroule en continu, de la puberté jusqu'à la fin de la vie.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : à partir de la puberté, les tubes séminifères produisent des spermatozoïdes sans interruption, toute la vie. Ne confonds pas avec la femme, chez qui les ovaires fonctionnent par cycles et s'arrêtent à la ménopause.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces affirmations sur la testostérone, lesquelles sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La testostérone permet la spermatogenèse, fait apparaître les caractères sexuels secondaires et freine l'hypothalamus et l'hypophyse. L'erreur tentante est de croire qu'elle stimule la LH : c'est l'inverse, elle la freine, comme le comptoir plein qui fait ralentir la patronne.",
-                  "answers": [
-                    {
-                      "content": "Elle est nécessaire à la spermatogenèse.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle fait apparaître les caractères sexuels secondaires, comme la barbe et la voix grave.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle freine la sécrétion de GnRH et de LH.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle stimule la sécrétion de LH par l'hypophyse.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle est sécrétée par les cellules de Sertoli.",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "Appliquer — Raisonner sur la spermatogenèse et ses conditions",
-              "exercise_type": "fixation",
-              "questions": [
-                {
-                  "content": "Chez l'homme, $2n = 46$. Combien de chromosomes contient une spermatide ?",
-                  "question_type": "single_choice",
-                  "explanation": "Une spermatide est issue de la méiose : elle contient $n = 46 \\div 2 = 23$ chromosomes. L'erreur tentante est 46 : c'est le nombre des spermatogonies et des spermatocytes I, avant la méiose.",
-                  "answers": [
-                    {
-                      "content": "23",
-                      "correct": true
-                    },
-                    {
-                      "content": "46",
-                      "correct": false
-                    },
-                    {
-                      "content": "92",
-                      "correct": false
-                    },
-                    {
-                      "content": "12",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un spermatocyte I achève sa méiose. Combien de spermatides obtient-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "La méiose comporte deux divisions : le spermatocyte I donne 2 spermatocytes II, puis chacun donne 2 spermatides, soit 4 spermatides. L'erreur tentante est 2 : c'est le résultat de la première division seulement.",
-                  "answers": [
-                    {
-                      "content": "4",
-                      "correct": true
-                    },
-                    {
-                      "content": "2",
-                      "correct": false
-                    },
-                    {
-                      "content": "1",
-                      "correct": false
-                    },
-                    {
-                      "content": "8",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quel est l'ordre correct des cellules de la spermatogenèse, de la paroi du tube vers sa lumière ?",
-                  "question_type": "single_choice",
-                  "explanation": "On part des spermatogonies collées à la paroi, puis les spermatocytes I, les spermatocytes II, les spermatides, et enfin les spermatozoïdes libérés dans la lumière. L'erreur tentante est de placer la spermatide avant les spermatocytes : elle n'apparaît qu'à la fin de la méiose.",
-                  "answers": [
-                    {
-                      "content": "Spermatogonie → spermatocyte I → spermatocyte II → spermatide → spermatozoïde",
-                      "correct": true
-                    },
-                    {
-                      "content": "Spermatogonie → spermatide → spermatocyte I → spermatocyte II → spermatozoïde",
-                      "correct": false
-                    },
-                    {
-                      "content": "Spermatocyte I → spermatogonie → spermatocyte II → spermatide → spermatozoïde",
-                      "correct": false
-                    },
-                    {
-                      "content": "Spermatozoïde → spermatide → spermatocyte II → spermatocyte I → spermatogonie",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez un jeune homme, un testicule n'est jamais descendu dans le scrotum et reste dans l'abdomen. Ce testicule sécrète de la testostérone, mais ne produit pas de spermatozoïdes. Quelle est l'explication la plus probable ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans l'abdomen, la température est d'environ 37 °C : trop chaude pour la spermatogenèse, qui exige environ 35 °C. Les cellules de Leydig, elles, continuent de fonctionner. L'erreur tentante est d'accuser l'hypophyse : la testostérone est sécrétée, donc la LH arrive bien au testicule.",
-                  "answers": [
-                    {
-                      "content": "La température de l'abdomen est trop élevée pour la spermatogenèse.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'hypophyse ne sécrète plus de LH.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ce testicule n'a pas de cellules de Leydig.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La testostérone détruit les spermatozoïdes dans l'abdomen.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez un rat adulte, on détruit uniquement les cellules de Leydig. Quelles conséquences observe-t-on ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Sans cellules de Leydig, la testostérone chute. Le frein sur l'hypothalamus et l'hypophyse disparaît, donc la LH augmente : le comptoir est vide, la patronne relance la cuisine. L'erreur tentante est « la LH baisse » : c'est oublier que la testostérone freinait la LH.",
-                  "answers": [
-                    {
-                      "content": "Le taux de testostérone dans le sang chute.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le taux de LH dans le sang augmente.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le taux de LH dans le sang diminue.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les cellules de Sertoli se mettent à sécréter de la testostérone pour compenser.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La spermatogenèse s'accélère.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un homme prend un médicament qui empêche la LH de se fixer sur les cellules de Leydig. Son taux de testostérone va diminuer.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : les cellules de Leydig ne sécrètent la testostérone que si la LH les stimule. Si la LH ne peut plus agir, le « serveur » n'arrive plus à la cuisine, et la production de testostérone baisse.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "title": "S'évaluer — Exploiter des expériences sur la régulation du testicule",
-              "exercise_type": "evaluation",
-              "questions": [
-                {
-                  "content": "Chez un rat adulte, on retire les deux testicules. Quelques jours plus tard, les taux de LH et de FSH dans son sang ont fortement augmenté. Quelle conclusion peux-tu tirer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans testicules, la LH et la FSH augmentent : c'est donc que les testicules les freinaient. C'est le rétrocontrôle négatif. L'erreur tentante est de dire que les testicules stimulent l'hypophyse : dans ce cas, leur ablation aurait fait baisser la LH et la FSH.",
-                  "answers": [
-                    {
-                      "content": "Normalement, les testicules freinent la sécrétion de LH et de FSH.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Normalement, les testicules stimulent la sécrétion de LH et de FSH.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La LH et la FSH sont fabriquées par les testicules.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'hypophyse fonctionne indépendamment des testicules.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "On retire l'hypophyse d'un rat adulte : son taux de testostérone s'effondre. On lui injecte alors de la LH chaque jour : son taux de testostérone redevient normal. Quelle conclusion peux-tu tirer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Seule la LH a été injectée, et la testostérone revient : la LH stimule donc la sécrétion de testostérone par les cellules de Leydig. L'erreur tentante est « la LH agit sur l'hypothalamus » : ici, la LH suffit à rétablir la testostérone sans passer par l'hypophyse, qui a été retirée.",
-                  "answers": [
-                    {
-                      "content": "La LH stimule la sécrétion de testostérone par le testicule.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La LH agit sur l'hypothalamus pour qu'il sécrète de la testostérone.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La testostérone est sécrétée par l'hypophyse.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La FSH seule suffit à rétablir la sécrétion de testostérone.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un sportif se dope en prenant, pendant plusieurs mois, de fortes doses de testostérone de synthèse. Quelles conséquences peut-on prévoir ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Le sang est chargé en testostérone : le rétrocontrôle négatif freine fortement la GnRH, la LH et la FSH. Ses cellules de Leydig, moins stimulées, produisent moins de testostérone, et la spermatogenèse diminue. L'erreur tentante est « la LH augmente » : un comptoir trop plein fait ralentir la cuisine, pas l'accélérer.",
-                  "answers": [
-                    {
-                      "content": "La sécrétion de LH par son hypophyse diminue.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ses propres cellules de Leydig produisent moins de testostérone.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sa production de spermatozoïdes peut diminuer, voire s'arrêter.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La sécrétion de LH par son hypophyse augmente.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ses testicules grossissent, car ils sont plus stimulés.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un homme a un taux de testostérone très bas, alors que ses taux de LH et de FSH sont très élevés. Où se situe probablement l'anomalie ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'hypophyse envoie beaucoup de LH et de FSH : elle fonctionne, et elle n'est plus freinée. C'est donc le testicule qui ne répond pas. L'erreur tentante est l'hypophyse : si elle était en panne, la LH et la FSH seraient basses, pas élevées.",
-                  "answers": [
-                    {
-                      "content": "Dans les testicules",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans l'hypophyse",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans l'hypothalamus",
-                      "correct": false
-                    },
-                    {
-                      "content": "Il n'y a aucune anomalie.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un homme a des taux bas de testostérone, de LH et de FSH. On lui injecte de la GnRH : ses taux de LH, de FSH, puis de testostérone augmentent. Où se situe probablement l'anomalie ?",
-                  "question_type": "single_choice",
-                  "explanation": "La GnRH injectée fait réagir l'hypophyse, puis le testicule : ces deux organes fonctionnent. C'est donc l'hypothalamus qui ne sécrète pas assez de GnRH : la patronne n'envoie plus ses messages. L'erreur tentante est l'hypophyse, mais elle répond normalement à la GnRH.",
-                  "answers": [
-                    {
-                      "content": "Dans l'hypothalamus",
-                      "correct": true
-                    },
-                    {
-                      "content": "Dans l'hypophyse",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans les testicules",
-                      "correct": false
-                    },
-                    {
-                      "content": "Dans les cellules de Sertoli",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez l'homme, la GnRH agit directement sur les cellules de Leydig pour déclencher la sécrétion de testostérone.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : la GnRH de l'hypothalamus agit sur l'hypophyse, qui sécrète alors la LH. C'est la LH qui stimule les cellules de Leydig. La patronne parle à la cheffe, pas directement à la cuisine.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
+          "remember": "Le testicule a **deux fonctions**. Dans les **tubes séminifères**, il fabrique les **spermatozoïdes** : la spermatogenèse, continue de la puberté à la fin de la vie, va de la paroi vers la lumière du tube (spermatogonie, spermatocyte, spermatide, spermatozoïde) avec l'appui des **cellules de Sertoli**, qui soutiennent et nourrissent les cellules en formation. Dans le **tissu interstitiel**, entre les tubes, les **cellules de Leydig** sécrètent la **testostérone**, hormone des caractères sexuels secondaires. **Régulation** : l'hypothalamus sécrète la **GnRH** par bouffées ; elle stimule l'hypophyse, qui sécrète la **LH** (elle stimule les cellules de Leydig) et la **FSH** (elle agit sur les tubes séminifères). La testostérone **freine** en retour l'hypothalamus et l'hypophyse : c'est un **rétrocontrôle négatif**, qui garde un taux de testostérone à peu près constant.",
+          "method": [
+            "Repérer ce qui est modifié (organe retiré, hormone injectée) et ce qui est mesuré (taux d'hormone, spermatogenèse).",
+            "Comparer le résultat avec la situation normale : dire si la grandeur mesurée augmente, diminue ou ne change pas.",
+            "Déduire le rôle : si la suppression fait baisser la grandeur, l'organe la stimule ; si elle la fait monter, il la freine ; si une injection rétablit la valeur normale, cette hormone suffit.",
+            "Conclure en nommant les organes, les hormones, les cellules cibles et le type de contrôle (stimulation ou rétrocontrôle négatif)."
+          ],
+          "example": {
+            "statement": "Au laboratoire de recherche d'une clinique de Cocody, on étudie des rats mâles adultes. Après ablation de l'hypophyse, la testostérone du sang s'effondre et la spermatogenèse s'arrête. Après castration (ablation des testicules), le taux de LH augmente fortement ; si l'on injecte ensuite de la testostérone aux rats castrés, il redevient normal. Interpréter ces résultats.",
+            "steps": [
+              "Repérer : on retire l'hypophyse, puis les testicules, puis on injecte de la testostérone ; on mesure la testostérone, la spermatogenèse et la LH.",
+              "Comparer : sans hypophyse, la testostérone baisse et la spermatogenèse s'arrête ; sans testicules, la LH augmente ; avec la testostérone injectée, la LH redevient normale.",
+              "Déduire : sans hypophyse tout baisse, donc l'hypophyse stimule le testicule ; sans testicules la LH monte, donc le testicule la freine ; la testostérone injectée suffit à rétablir la LH normale.",
+              "Conclure : l'hypophyse stimule le testicule par la LH et la FSH, et le testicule freine l'hypophyse par la testostérone : c'est un rétrocontrôle négatif."
+            ]
+          },
+          "pitfall": "Ne confonds pas les deux fonctions du testicule ni le sens du contrôle. La testostérone n'est pas fabriquée dans les tubes séminifères mais par les cellules de Leydig, entre les tubes : retiens « L comme LH, L comme Leydig ». Et la testostérone ne stimule pas l'hypophyse. Contre-exemple : après castration, la LH passe de 10 à 50 unités ; si la testostérone stimulait l'hypophyse, la LH aurait baissé. Elle monte parce que le frein a disparu.",
+          "figure": "axe-testicule",
+          "exercise": {
+            "title": "Le testicule et sa régulation au laboratoire",
+            "statement": "Au laboratoire d'analyses d'une clinique de Cocody, le Dr Koné étudie le fonctionnement du testicule chez l'Homme et chez le rat. Dans cet exercice, tu appliques la méthode de la fiche pour situer les fonctions du testicule et interpréter des expériences de régulation.",
+            "exercise_type": "fixation",
+            "figure": "axe-testicule",
+            "questions": [
+              {
+                "content": "Dans le testicule de l'Homme, quelles cellules sécrètent la testostérone ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la testostérone est une hormone, donc elle n'est pas fabriquée dans les tubes où se forment les spermatozoïdes, mais dans le tissu interstitiel, entre les tubes. Étape 2 — Comparer : les tubes séminifères produisent les gamètes, le tissu interstitiel produit l'hormone. Étape 3 — Déduire : la cellule du tissu interstitiel est la cellule de Leydig, stimulée par la LH. Étape 4 — Conclure : testostérone = cellules de Leydig. Confondre avec les cellules de Sertoli est l'erreur tentante : elles soutiennent et nourrissent les cellules de la spermatogenèse dans les tubes, elles ne sécrètent pas la testostérone.",
+                "answers": [
+                  {
+                    "content": "Les cellules de Leydig, situées dans le tissu interstitiel",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les cellules de Sertoli, situées dans les tubes séminifères",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les spermatogonies, situées contre la paroi des tubes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les spermatozoïdes, situés dans la lumière des tubes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après la puberté, la spermatogenèse fonctionne par cycles, comme le fonctionnement de l'ovaire chez la femme.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on compare le rythme de la spermatogenèse (tubes séminifères) et celui de l'ovaire. Étape 2 — Comparer : de la puberté à la fin de la vie, de nouveaux spermatozoïdes sont fabriqués en continu, alors que l'ovaire fonctionne par cycles d'environ 28 jours. Étape 3 — Déduire : la spermatogenèse n'est pas cyclique. Étape 4 — Conclure : l'affirmation est fausse, car chez l'homme la spermatogenèse est continue et le taux de testostérone reste à peu près constant.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les cellules de la spermatogenèse, de la paroi du tube séminifère vers sa lumière.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : la spermatogenèse se déroule de la paroi du tube vers sa lumière. Étape 2 — Comparer : les cellules proches de la paroi sont les plus jeunes. Étape 3 — Déduire l'ordre : la spermatogonie se divise et donne un spermatocyte I ; la méiose donne les spermatocytes II, puis les spermatides ; chaque spermatide se différencie en spermatozoïde, libéré dans la lumière. Étape 4 — Conclure : spermatogonie, spermatocyte I, spermatocyte II, spermatide, spermatozoïde.",
+                "answers": [
+                  {
+                    "content": "Spermatogonie"
+                  },
+                  {
+                    "content": "Spermatocyte I"
+                  },
+                  {
+                    "content": "Spermatocyte II"
+                  },
+                  {
+                    "content": "Spermatide"
+                  },
+                  {
+                    "content": "Spermatozoïde"
+                  }
+                ]
+              },
+              {
+                "content": "Chez un rat adulte, la castration fait passer le taux de LH de 10 à 50 unités arbitraires en trois semaines. Que peut-on en déduire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on retire les testicules et on mesure la LH. Étape 2 — Comparer : la LH passe de 10 à 50 unités, elle augmente. Étape 3 — Déduire : la suppression du testicule fait monter la LH, donc le testicule la freine. Étape 4 — Conclure : le testicule freine l'hypophyse, c'est un rétrocontrôle négatif. Dire que le testicule stimule la LH est l'erreur tentante : la LH aurait alors baissé après castration.",
+                "answers": [
+                  {
+                    "content": "Normalement, le testicule stimule la sécrétion de LH par l'hypophyse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Normalement, le testicule freine la sécrétion de LH par l'hypophyse",
+                    "correct": true
+                  },
+                  {
+                    "content": "La LH est fabriquée par le testicule",
+                    "correct": false
+                  },
+                  {
+                    "content": "La sécrétion de LH ne dépend pas du testicule",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un rat castré reçoit des injections de testostérone et son taux de LH redevient normal. Quelles conclusions sont correctes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on injecte de la testostérone à un rat castré et on mesure la LH. Étape 2 — Comparer : la LH, élevée après castration, redevient normale. Étape 3 — Déduire : la testostérone seule rétablit le frein, donc elle freine la sécrétion de LH. Étape 4 — Conclure : la testostérone exerce un rétrocontrôle négatif sur l'hypophyse. Elle est sécrétée par le testicule, non par l'hypophyse.",
+                "answers": [
+                  {
+                    "content": "La testostérone suffit à exercer le frein sur la sécrétion de LH",
+                    "correct": true
+                  },
+                  {
+                    "content": "La testostérone stimule la sécrétion de LH par l'hypophyse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il s'agit d'un rétrocontrôle négatif",
+                    "correct": true
+                  },
+                  {
+                    "content": "La testostérone est sécrétée par l'hypophyse",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il s'agit d'un rétrocontrôle positif",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque hormone à son rôle dans la régulation du testicule.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'organe qui sécrète chaque hormone : hypothalamus pour la GnRH, hypophyse pour la LH et la FSH, testicule pour la testostérone. Étape 2 — Comparer les cibles : la GnRH stimule l'hypophyse, la LH stimule les cellules de Leydig, la FSH agit sur les tubes séminifères. Étape 3 — Déduire le sens : la testostérone agit en retour et freine. Étape 4 — Conclure par la boucle : hypothalamus, hypophyse, testicule, puis frein de la testostérone.",
+                "answers": [
+                  {
+                    "content": "GnRH",
+                    "match": "Hormone de l'hypothalamus qui stimule l'hypophyse"
+                  },
+                  {
+                    "content": "LH",
+                    "match": "Hormone de l'hypophyse qui stimule les cellules de Leydig"
+                  },
+                  {
+                    "content": "FSH",
+                    "match": "Hormone de l'hypophyse qui agit sur les tubes séminifères"
+                  },
+                  {
+                    "content": "Testostérone",
+                    "match": "Hormone du testicule qui freine l'hypothalamus et l'hypophyse"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « Après castration, la LH augmente, donc la testostérone stimule l'hypophyse. » Quelle est son erreur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la castration supprime la source de testostérone. Étape 2 — Comparer : la LH augmente. Étape 3 — Déduire : une hormone qui stimulerait l'hypophyse ferait baisser la LH en disparaissant ; ici la LH monte, donc la testostérone freine. Étape 4 — Conclure : l'élève a inversé le sens du contrôle, c'est un rétrocontrôle négatif.",
+                "answers": [
+                  {
+                    "content": "Si la testostérone stimulait l'hypophyse, la LH baisserait après castration ; comme elle augmente, la testostérone la freine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il n'y a aucune erreur : la testostérone stimule bien l'hypophyse",
+                    "correct": false
+                  },
+                  {
+                    "content": "La castration supprime l'hypophyse, d'où la hausse de LH",
+                    "correct": false
+                  },
+                  {
+                    "content": "La LH augmente car la testostérone injectée la fabrique",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer les fonctions du testicule et à interpréter une expérience de régulation, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La testostérone est sécrétée par les cellules de ___, situées dans le tissu ___ du testicule, entre les tubes séminifères.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la testostérone est une hormone, fabriquée entre les tubes et non dans les tubes. Étape 2 — Comparer : le tissu entre les tubes s'appelle le tissu interstitiel. Étape 3 — Déduire : la cellule qui y sécrète la testostérone est la cellule de Leydig, stimulée par la LH. Étape 4 — Conclure : cellules de Leydig, tissu interstitiel.",
+                "answers": [
+                  {
+                    "content": "Leydig",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "cellules de Leydig",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "interstitiel",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "interstitiel du testicule",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense à « L comme LH, L comme Leydig », et au tissu qui se trouve entre les tubes."
+              },
+              {
+                "content": "La LH stimule les cellules de Leydig, qui sécrètent alors la testostérone.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la LH est une hormone de l'hypophyse. Étape 2 — Comparer : sa cible dans le testicule est le tissu interstitiel. Étape 3 — Déduire : elle stimule les cellules de Leydig, donc la sécrétion de testostérone. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Qui est la cible de la LH : les tubes ou le tissu interstitiel ?"
+              },
+              {
+                "content": "Après ablation de l'hypophyse chez un rat adulte, la testostérone du sang s'effondre. Que peut-on en déduire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on retire l'hypophyse et on mesure la testostérone. Étape 2 — Comparer : la testostérone baisse. Étape 3 — Déduire : sans l'organe, la grandeur baisse, donc l'organe la stimule. Étape 4 — Conclure : l'hypophyse stimule le testicule par la LH et la FSH. Dire qu'elle freine est l'erreur tentante : le taux aurait alors augmenté.",
+                "answers": [
+                  {
+                    "content": "L'hypophyse freine normalement le testicule",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hypophyse fabrique la testostérone",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hypophyse stimule normalement le testicule",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le testicule n'a pas besoin de l'hypophyse",
+                    "correct": false
+                  }
+                ],
+                "hint": "Si on supprime un organe et que la grandeur baisse, que faisait cet organe ?"
+              },
+              {
+                "content": "Les testicules sont logés dans le scrotum, hors de l'abdomen, car la spermatogenèse exige une température ___ à celle du corps.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Repérer : la spermatogenèse a lieu dans les tubes séminifères du testicule. Étape 2 — Comparer : le scrotum est situé hors de l'abdomen, donc moins chaud que l'intérieur du corps. Étape 3 — Déduire : la spermatogenèse a besoin d'une température plus basse. Étape 4 — Conclure : inférieure à celle du corps.",
+                "answers": [
+                  {
+                    "content": "égale",
+                    "correct": false
+                  },
+                  {
+                    "content": "inférieure",
+                    "correct": true
+                  },
+                  {
+                    "content": "supérieure",
+                    "correct": false
+                  }
+                ],
+                "hint": "Le scrotum est à l'extérieur de l'abdomen : est-il plus chaud ou plus frais ?"
+              }
+            ]
+          }
         },
         {
           "name": "Les cycles de l'ovaire et de l'utérus",
-          "subtitle": "Suivre les follicules, l'ovulation, le corps jaune et les transformations de l'endomètre au cours du cycle",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Décrire l'évolution des follicules et l'ovulation au cours du cycle de l'ovaire.</li><li>Relier les hormones de l'ovaire aux modifications de l'utérus.</li><li>Repérer le jour de l'ovulation à partir de la durée du cycle ou de la température au réveil.</li></ul><h2>L'image pour comprendre</h2><p><strong>Première image : le centre de formation de football.</strong> Au début de chaque mois, une vingtaine de jeunes d'un centre de formation commencent un stage de sélection. Au bout de deux semaines, un seul est retenu : il quitte le centre pour aller jouer à l'étranger. Les autres abandonnent. Après son départ, son encadrement reste sur place et anime une radio de supporters pendant environ deux semaines. Si aucune bonne nouvelle n'arrive de l'étranger, la radio ferme, et un nouveau stage commence.</p><p><strong>Le pont.</strong> Le centre de formation, c'est l'<strong>ovaire</strong>. Les jeunes, ce sont les <strong>follicules</strong> : de petits sacs de cellules qui entourent chacun un ovocyte. Le stage, c'est la <strong>phase folliculaire</strong>, pendant laquelle quelques follicules grossissent. Le jeune retenu, c'est le <strong>follicule mûr</strong>, aussi appelé follicule de De Graaf. Partir à l'étranger, c'est l'<strong>ovulation</strong> : le follicule mûr éclate et libère l'ovocyte II hors de l'ovaire. Les jeunes qui abandonnent, ce sont les follicules qui dégénèrent (on parle d'atrésie). L'encadrement resté sur place, ce sont les cellules du follicule vidé, qui forment le <strong>corps jaune</strong>. La radio, ce sont les hormones du corps jaune, surtout la <strong>progestérone</strong>. La bonne nouvelle, c'est l'hormone hCG de l'embryon, que tu connais déjà.</p><p><strong>Là où l'image s'arrête.</strong> Un follicule ne fait aucun effort pour être choisi : ce sont les hormones qui décident. Et un centre de formation recrute de nouveaux jeunes chaque année, alors que la femme naît avec tous ses follicules : ce stock ne se renouvelle jamais et s'épuise vers la <strong>ménopause</strong>, vers 50 ans.</p><p><strong>Deuxième image : le champ du paysan.</strong> À chaque saison, le paysan laboure son champ pour rendre la terre épaisse et meuble. Ensuite, il l'arrose et y met de l'engrais pour accueillir une graine. Si aucune graine n'est semée à temps, il arrache tout, nettoie le champ et recommence la saison suivante.</p><p><strong>Le pont.</strong> Le champ, c'est l'<strong>endomètre</strong>, la muqueuse (la couche interne) de l'utérus. Labourer, c'est la <strong>phase proliférative</strong> : sous l'action des <strong>œstrogènes</strong>, hormones sécrétées par les follicules, l'endomètre s'épaissit. Arroser et mettre l'engrais, c'est la <strong>phase sécrétoire</strong> : sous l'action de la progestérone et des œstrogènes du corps jaune, les glandes de l'endomètre se ramifient et ses vaisseaux s'enroulent. On parle de <strong>dentelle utérine</strong>. La graine, c'est l'embryon. Tout arracher, ce sont les <strong>règles</strong> : la couche superficielle de l'endomètre se détache et s'écoule avec du sang.</p><p><strong>Là où l'image s'arrête.</strong> Le paysan décide lui-même ; l'utérus, lui, obéit aux hormones de l'ovaire. Sans hormones ovariennes, l'endomètre reste mince et il n'y a plus de cycle. Ce sont les deux cycles, celui de l'ovaire et celui de l'utérus, qui avancent ensemble.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>De la puberté à la ménopause, l'ovaire et l'utérus fonctionnent par <strong>cycles</strong> d'environ 28 jours en moyenne. Le jour 1 du cycle est le premier jour des règles.</li><li><strong>Cycle ovarien</strong> :<ul><li><strong>Phase folliculaire</strong> (du jour 1 à l'ovulation) : quelques follicules grossissent (follicule primordial, primaire, secondaire, cavitaire avec sa cavité), puis un seul devient follicule mûr, d'environ 2 cm. Les follicules sécrètent des <strong>œstrogènes</strong>, en quantité croissante.</li><li><strong>Ovulation</strong> (vers le jour 14 d'un cycle de 28 jours) : le follicule mûr éclate et libère l'ovocyte II.</li><li><strong>Phase lutéale</strong> (après l'ovulation) : le follicule vidé devient le <strong>corps jaune</strong>, qui sécrète de la <strong>progestérone</strong> et des œstrogènes. Sans fécondation, il dégénère au bout d'environ 14 jours.</li></ul></li><li>La phase lutéale dure presque toujours 14 jours : l'ovulation a lieu environ 14 jours <strong>avant</strong> les règles suivantes. Jour de l'ovulation $\\approx$ durée du cycle $- 14$.</li><li><strong>Cycle utérin</strong> :<ul><li><strong>Menstruation</strong> (les règles, environ du jour 1 au jour 5) : destruction de la couche superficielle de l'endomètre, provoquée par la chute des hormones du corps jaune.</li><li><strong>Phase proliférative</strong> (jusqu'à l'ovulation) : sous l'action des œstrogènes, l'endomètre s'épaissit. Autour de l'ovulation, la glaire cervicale devient abondante et filante.</li><li><strong>Phase sécrétoire</strong> (après l'ovulation) : sous l'action de la progestérone et des œstrogènes, l'endomètre forme la dentelle utérine, prête pour une nidation. La glaire redevient épaisse.</li></ul></li><li>La <strong>température au réveil</strong> est plus basse avant l'ovulation. Juste après l'ovulation, elle monte d'environ 0,3 à 0,5 °C sous l'effet de la progestérone, et reste haute pendant toute la phase lutéale : c'est le plateau thermique.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> Mme Kouassi a des cycles réguliers de 30 jours. Ses règles commencent le 3 mars. (a) Quel jour du cycle, et à quelle date, a lieu l'ovulation ? (b) Au jour 22 du cycle, quelle structure de l'ovaire est active, quelle hormone domine, et dans quel état est l'endomètre ?</p><ol><li><strong>Jour de l'ovulation.</strong> La phase lutéale dure 14 jours, donc l'ovulation a lieu au jour $30 - 14 = 16$.</li><li><strong>Date de l'ovulation.</strong> Le jour 1 est le 3 mars, donc le jour 16 est le $3 + 15 = 18$ mars.</li><li><strong>Jour 22 : l'ovaire.</strong> Le jour 22 vient après l'ovulation : on est en phase lutéale. Le corps jaune est actif et sécrète surtout de la progestérone.</li><li><strong>Jour 22 : l'utérus.</strong> Sous l'action de la progestérone, l'endomètre est en phase sécrétoire : c'est la dentelle utérine. La température au réveil est sur son plateau haut.</li></ol><h2>Le piège à éviter</h2><p>Beaucoup d'élèves placent l'ovulation au 14e jour, quelle que soit la durée du cycle. C'est faux : le chiffre 14 compte les jours <strong>avant</strong> les règles suivantes, pas après le début du cycle. Pour un cycle de 28 jours, les deux coïncident ; pour un cycle de 32 jours, l'ovulation a lieu au jour 18.</p><p>Pour repérer l'erreur : si le cycle ne dure pas 28 jours et que la réponse donne le jour 14, recalcule avec « durée du cycle moins 14 ».</p><h2>En une phrase</h2><p>Chaque mois, l'ovaire fait mûrir un follicule qui libère un ovocyte, puis devient un corps jaune ; ses œstrogènes puis sa progestérone préparent l'endomètre, et quand le corps jaune s'arrête, l'endomètre tombe : ce sont les règles.</p>",
-          "exercises": [
+          "remember": "De la puberté à la ménopause, l'ovaire et l'utérus fonctionnent par **cycles** d'environ 28 jours en moyenne. Le **jour 1** est le premier jour des règles. **Cycle ovarien** : la **phase folliculaire** (jusqu'à l'ovulation) voit grossir quelques follicules, dont un seul devient **follicule mûr** ; les follicules sécrètent des **œstrogènes**. L'**ovulation** libère l'ovocyte II. La **phase lutéale** suit : le follicule vidé devient le **corps jaune**, qui sécrète de la **progestérone** et des œstrogènes ; sans fécondation il dégénère. La phase lutéale dure environ **14 jours**, donc **jour de l'ovulation = durée du cycle − 14**. **Cycle utérin** : **règles** (chute de la couche superficielle de l'endomètre), **phase proliférative** (les œstrogènes épaississent l'endomètre), **phase sécrétoire** (la progestérone forme la dentelle utérine, prête à la nidation). Après l'ovulation, la température au réveil monte et reste haute : c'est le **plateau thermique**, dû à la progestérone.",
+          "method": [
+            "Repérer le jour 1 du cycle (premier jour des règles) et la durée du cycle.",
+            "Calculer le jour de l'ovulation : durée du cycle moins 14 jours.",
+            "Situer le jour étudié par rapport à l'ovulation : avant, c'est la phase folliculaire ; après, c'est la phase lutéale.",
+            "Déduire l'état de l'ovaire, l'hormone dominante et l'état de l'endomètre pour ce jour."
+          ],
+          "example": {
+            "statement": "À la consultation de fertilité d'une clinique de Cocody, Mme Kouassi a des cycles réguliers de 30 jours ; ses règles commencent le 3 mars. À quelle date a lieu l'ovulation ? Au jour 22 du cycle, quelle structure de l'ovaire est active, quelle hormone domine et dans quel état est l'endomètre ?",
+            "steps": [
+              "Repérer : le jour 1 du cycle est le 3 mars et le cycle dure 30 jours.",
+              "Calculer : l'ovulation a lieu au jour $30 - 14 = 16$, soit le $3 + 15 = 18$ mars.",
+              "Situer : le jour 22 vient après le jour 16, donc on est en phase lutéale.",
+              "Déduire : le corps jaune est actif et la progestérone domine ; l'endomètre est en phase sécrétoire (dentelle utérine) et la température est sur son plateau haut."
+            ]
+          },
+          "pitfall": "Ne place pas l'ovulation au 14e jour quelle que soit la durée du cycle. Le nombre 14 est la durée de la phase lutéale : il se compte avant les règles suivantes, pas depuis le début du cycle. Contre-exemple : pour un cycle de 32 jours, l'ovulation a lieu au jour $32 - 14 = 18$, et non au jour 14. Les deux coïncident seulement pour un cycle de 28 jours.",
+          "figure": "appareil-genital-feminin-noms",
+          "exercise": {
+            "title": "Dater les événements du cycle à la consultation de fertilité",
+            "statement": "À la consultation de fertilité d'une clinique de Cocody, le Dr Bamba reçoit des patientes qui veulent connaître leur période d'ovulation. Dans cet exercice, tu appliques la méthode de la fiche pour dater l'ovulation et décrire l'état de l'ovaire et de l'utérus.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une patiente a des cycles réguliers de 32 jours. À quel jour du cycle a lieu l'ovulation ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le jour 1 est le premier jour des règles et le cycle dure 32 jours. Étape 2 — Calculer : jour de l'ovulation = durée du cycle − 14 = $32 - 14 = 18$. Étape 3 — Situer : avant le jour 18 on est en phase folliculaire, après en phase lutéale. Étape 4 — Déduire : l'ovulation a lieu au jour 18. Écrire 14 est l'erreur tentante : ce nombre est la durée de la phase lutéale, pas le jour de l'ovulation.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true
+                  }
+                ],
+                "unit": "jour"
+              },
+              {
+                "content": "Les règles d'une patiente commencent le 5 juin et ses cycles réguliers durent 28 jours. Quel jour de juin a lieu l'ovulation ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le jour 1 du cycle est le 5 juin ; le cycle dure 28 jours. Étape 2 — Calculer : l'ovulation a lieu au jour $28 - 14 = 14$. Le jour 14 est le $5 + 13 = 18$ juin. Étape 3 — Situer : avant le 18 juin, phase folliculaire ; après, phase lutéale. Étape 4 — Déduire : l'ovulation a lieu le 18 juin.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez une femme au cycle régulier de 28 jours, quelle structure de l'ovaire est active au jour 24 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le cycle dure 28 jours, le jour étudié est le jour 24. Étape 2 — Calculer : l'ovulation a lieu au jour $28 - 14 = 14$. Étape 3 — Situer : le jour 24 vient après le jour 14, donc on est en phase lutéale. Étape 4 — Déduire : le follicule vidé est devenu le corps jaune, qui sécrète la progestérone. Le follicule mûr, qui précède l'ovulation, est l'erreur tentante.",
+                "answers": [
+                  {
+                    "content": "Le corps jaune",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le follicule mûr",
+                    "correct": false
+                  },
+                  {
+                    "content": "Plusieurs follicules en croissance",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ovocyte II seul",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque fait du cycle à ce qu'il provoque dans l'utérus.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'hormone et le moment du cycle. Étape 2 — Calculer ou situer : avant l'ovulation, les follicules sécrètent des œstrogènes ; après, le corps jaune sécrète la progestérone ; sans fécondation il dégénère. Étape 3 — Situer : phase folliculaire pour les œstrogènes, phase lutéale pour la progestérone. Étape 4 — Déduire l'état de l'endomètre : épaissi, puis en dentelle utérine, puis éliminé par les règles.",
+                "answers": [
+                  {
+                    "content": "Œstrogènes des follicules",
+                    "match": "Phase proliférative : l'endomètre s'épaissit"
+                  },
+                  {
+                    "content": "Progestérone du corps jaune",
+                    "match": "Phase sécrétoire : l'endomètre forme la dentelle utérine"
+                  },
+                  {
+                    "content": "Chute des hormones du corps jaune",
+                    "match": "Règles : la couche superficielle de l'endomètre se détache"
+                  }
+                ]
+              },
+              {
+                "content": "Dans un cycle de 28 jours, quelles affirmations sur la phase lutéale sont correctes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : la phase lutéale est la phase du corps jaune. Étape 2 — Calculer : elle dure environ 14 jours, donc l'ovulation a lieu au jour $28 - 14 = 14$. Étape 3 — Situer : elle commence à l'ovulation et se termine avec les règles suivantes. Étape 4 — Déduire : le corps jaune y est actif ; la croissance de plusieurs follicules appartient à la phase folliculaire.",
+                "answers": [
+                  {
+                    "content": "Elle est marquée par la croissance de plusieurs follicules",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle commence à l'ovulation",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle commence avec les règles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle dure environ 14 jours",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle se termine à l'ovulation",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un cycle régulier de 35 jours, l'ovulation a lieu au jour 14.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le cycle dure 35 jours. Étape 2 — Calculer : jour de l'ovulation = $35 - 14 = 21$. Étape 3 — Situer : le jour 14 est donc encore en phase folliculaire. Étape 4 — Déduire : l'ovulation a lieu au jour 21, non au jour 14 ; le jour 14 ne vaut que pour un cycle de 28 jours.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les événements d'un cycle sans fécondation, à partir des règles.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : le cycle commence au jour 1 par les règles. Étape 2 — Calculer : l'ovulation a lieu environ 14 jours avant les règles suivantes. Étape 3 — Situer : avant l'ovulation les follicules grossissent (phase folliculaire) ; après, le corps jaune se forme puis dégénère (phase lutéale). Étape 4 — Déduire l'ordre : règles, croissance des follicules, ovulation, corps jaune, dégénérescence du corps jaune.",
+                "answers": [
+                  {
+                    "content": "Les règles"
+                  },
+                  {
+                    "content": "La croissance des follicules"
+                  },
+                  {
+                    "content": "L'ovulation"
+                  },
+                  {
+                    "content": "La formation du corps jaune"
+                  },
+                  {
+                    "content": "La dégénérescence du corps jaune"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à dater l'ovulation et à décrire l'état de l'ovaire et de l'utérus, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Pour un cycle régulier de 29 jours, l'ovulation a lieu au jour ___ et la phase lutéale dure ___ jours.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le cycle dure 29 jours. Étape 2 — Calculer : le jour de l'ovulation est $29 - 14 = 15$. Étape 3 — Situer : la phase lutéale va de l'ovulation aux règles suivantes. Étape 4 — Déduire : elle dure environ 14 jours, une durée à peu près constante.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "quinze",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "14",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "quatorze",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Jour de l'ovulation = durée du cycle moins 14. Et la phase lutéale dure environ 14 jours, à peu près constante."
+              },
+              {
+                "content": "Quelle hormone provoque la montée de la température au réveil après l'ovulation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la température monte juste après l'ovulation. Étape 2 — Calculer ou situer : on est alors en phase lutéale. Étape 3 — Situer : la phase lutéale est celle du corps jaune. Étape 4 — Déduire : le corps jaune sécrète la progestérone, responsable du plateau thermique.",
+                "answers": [
+                  {
+                    "content": "Les œstrogènes des follicules en croissance",
+                    "correct": false
+                  },
+                  {
+                    "content": "La FSH",
+                    "correct": false
+                  },
+                  {
+                    "content": "La progestérone sécrétée par le corps jaune",
+                    "correct": true
+                  },
+                  {
+                    "content": "La testostérone",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quelle structure ovarienne apparaît après l'ovulation, et quelle hormone sécrète-t-elle surtout ?"
+              },
+              {
+                "content": "Le premier jour du cycle est le premier jour des règles.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le jour 1 du cycle est le premier jour des règles. Étape 2 — Calculer : tous les jours du cycle se comptent à partir de ce jour. Étape 3 — Situer : l'ovulation est après le jour 1, avant les règles suivantes. Étape 4 — Déduire : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une patiente a des cycles réguliers de 26 jours. À quel jour du cycle a lieu l'ovulation ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : le cycle dure 26 jours. Étape 2 — Calculer : $26 - 14 = 12$. Étape 3 — Situer : après le jour 12, on est en phase lutéale. Étape 4 — Déduire : l'ovulation a lieu au jour 12.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "unit": "jour",
+                "hint": "Soustrais 14 à la durée du cycle."
+              }
+            ]
+          }
+        },
+        {
+          "name": "La régulation hormonale du cycle de la femme",
+          "remember": "L'hypothalamus sécrète la **GnRH** par bouffées ; elle stimule l'hypophyse, qui sécrète la **FSH** et la **LH**. La FSH fait grossir les follicules ; la LH déclenche l'ovulation, puis permet la formation et le maintien du corps jaune. Les follicules sécrètent l'**œstradiol** ; le corps jaune sécrète la **progestérone** et des œstrogènes. **Rétrocontrôle négatif** : un taux modéré d'œstradiol en phase folliculaire, puis la progestérone et les œstrogènes du corps jaune en phase lutéale, freinent la sécrétion de FSH et de LH. **Rétrocontrôle positif** : à la fin de la phase folliculaire, un taux élevé d'œstradiol maintenu environ 48 heures stimule l'hypothalamus et l'hypophyse, d'où le **pic de LH** ; l'ovulation a lieu environ un jour plus tard. Sans fécondation, le corps jaune dégénère, les hormones ovariennes chutent, ce qui provoque les règles et lève le frein : la FSH remonte et un nouveau cycle commence.",
+          "method": [
+            "Lire les courbes ou les résultats : repérer chaque hormone et le sens de sa variation (hausse, baisse, pic).",
+            "Rapprocher les variations dans le temps : dire quelle hormone varie en premier et laquelle réagit ensuite.",
+            "Déduire le sens du contrôle : si la hausse d'une hormone ovarienne fait baisser FSH et LH, c'est un rétrocontrôle négatif ; si elle déclenche un pic de LH, c'est un rétrocontrôle positif.",
+            "Conclure en nommant l'organe qui sécrète, l'organe cible, l'hormone et son effet sur l'ovulation ou sur le cycle."
+          ],
+          "example": {
+            "statement": "Au laboratoire d'une clinique de Cocody, on étudie des guenons. (1) Après ablation des ovaires, les taux de FSH et de LH deviennent très élevés. (2) Chez une guenon sans ovaires, une faible dose d'œstradiol fait baisser la LH. (3) Chez une autre guenon sans ovaires, une forte dose d'œstradiol maintenue deux jours provoque un pic net de LH. Interpréter ces résultats.",
+            "steps": [
+              "Lire : sans ovaires, la FSH et la LH montent ; avec une faible dose d'œstradiol, la LH baisse ; avec une forte dose maintenue deux jours, la LH fait un pic.",
+              "Rapprocher : c'est l'œstradiol, donné avant, qui est suivi d'une variation de la LH : elle baisse avec une faible dose, elle fait un pic avec une forte dose.",
+              "Déduire : une faible dose qui fait baisser la LH est un rétrocontrôle négatif ; une forte dose maintenue qui déclenche un pic de LH est un rétrocontrôle positif.",
+              "Conclure : l'ovaire, par l'œstradiol, agit sur l'hypothalamus et l'hypophyse, qu'il freine ou stimule selon le taux et la durée ; le pic de LH déclenche l'ovulation."
+            ]
+          },
+          "pitfall": "Ne dis pas que l'ovulation est déclenchée par la progestérone ou par la FSH. Elle est déclenchée par le **pic de LH**, lui-même provoqué par un taux élevé d'œstradiol maintenu environ deux jours. Contre-exemple : avant l'ovulation, la progestérone est presque nulle (autour de 1 unité) alors que la LH monte à 60 unités ; la progestérone n'apparaît en quantité qu'après l'ovulation, et elle freine la LH.",
+          "figure": "axe-ovaire",
+          "exercise": {
+            "title": "La régulation hormonale du cycle de la femme",
+            "statement": "Au laboratoire d'analyses d'une clinique de Cocody, la biologiste dose des hormones chez des patientes pour comprendre comment le cycle est réglé. Dans cet exercice, tu appliques la méthode de la fiche pour lire des résultats hormonaux et en déduire le sens du contrôle.",
+            "exercise_type": "fixation",
+            "figure": "axe-ovaire",
+            "questions": [
+              {
+                "content": "Quelle hormone déclenche directement l'ovulation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : à la fin de la phase folliculaire, la LH fait un pic. Étape 2 — Rapprocher : l'ovulation a lieu environ un jour après ce pic. Étape 3 — Déduire : la LH est la cause, l'ovulation la conséquence. Étape 4 — Conclure : l'ovulation est déclenchée par le pic de LH. La progestérone est l'erreur tentante : elle n'apparaît en quantité qu'après l'ovulation.",
+                "answers": [
+                  {
+                    "content": "Le pic de LH",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le pic de progestérone",
+                    "correct": false
+                  },
+                  {
+                    "content": "La FSH",
+                    "correct": false
+                  },
+                  {
+                    "content": "La GnRH sécrétée par l'ovaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pendant la phase folliculaire, un taux modéré d'œstradiol freine la sécrétion de FSH et de LH.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : l'œstradiol augmente peu à peu tandis que la LH reste basse. Étape 2 — Rapprocher : la hausse modérée d'œstradiol est suivie d'une LH qui ne monte pas. Étape 3 — Déduire : c'est un rétrocontrôle négatif. Étape 4 — Conclure : l'ovaire freine l'hypophyse par un taux modéré d'œstradiol, l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque hormone à l'organe ou à la structure qui la sécrète.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire le rôle de chaque hormone dans l'axe hypothalamus, hypophyse, ovaire. Étape 2 — Rapprocher chaque hormone de son organe : la GnRH vient de l'hypothalamus, la FSH de l'hypophyse. Étape 3 — Déduire : les follicules sécrètent l'œstradiol avant l'ovulation, le corps jaune sécrète la progestérone après. Étape 4 — Conclure : hypothalamus, hypophyse, follicules, corps jaune.",
+                "answers": [
+                  {
+                    "content": "GnRH",
+                    "match": "Hypothalamus"
+                  },
+                  {
+                    "content": "FSH",
+                    "match": "Hypophyse"
+                  },
+                  {
+                    "content": "Œstradiol",
+                    "match": "Follicules en croissance"
+                  },
+                  {
+                    "content": "Progestérone",
+                    "match": "Corps jaune"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles caractéristiques décrivent le rétrocontrôle positif qui précède l'ovulation ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Lire : avant l'ovulation, l'œstradiol atteint un taux élevé et la LH fait un pic. Étape 2 — Rapprocher : le pic de LH suit un taux élevé d'œstradiol maintenu environ 48 heures. Étape 3 — Déduire : l'hormone stimule l'hypothalamus et l'hypophyse, c'est un rétrocontrôle positif. Étape 4 — Conclure : le follicule mûr, par l'œstradiol, déclenche le pic de LH. La progestérone du corps jaune agit après l'ovulation et freine la LH.",
+                "answers": [
+                  {
+                    "content": "Un taux élevé d'œstradiol",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une baisse de la sécrétion de LH",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un taux maintenu environ 48 heures",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une action de la progestérone du corps jaune",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une stimulation de l'hypothalamus et de l'hypophyse",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une action de la testostérone",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sans fécondation, le corps jaune dégénère. Quelle proposition décrit les conséquences ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : à la fin du cycle, la progestérone et les œstrogènes chutent. Étape 2 — Rapprocher : cette chute précède les règles et la remontée de la FSH. Étape 3 — Déduire : l'endomètre n'est plus soutenu, donc il se détache ; le frein sur l'hypophyse disparaît. Étape 4 — Conclure : règles, FSH qui remonte, début d'un nouveau cycle.",
+                "answers": [
+                  {
+                    "content": "La progestérone augmente et l'endomètre s'épaissit encore",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les hormones ovariennes chutent : ce sont les règles, et la FSH remonte pour un nouveau cycle",
+                    "correct": true
+                  },
+                  {
+                    "content": "La LH fait un nouveau pic qui déclenche une seconde ovulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien ne change : l'endomètre reste en dentelle utérine",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'ovulation est provoquée par la progestérone sécrétée par le corps jaune.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : la progestérone est faible avant l'ovulation et forte après. Étape 2 — Rapprocher : le pic de LH précède l'ovulation, la progestérone la suit. Étape 3 — Déduire : un effet ne peut pas précéder sa cause ; la progestérone vient du corps jaune, qui se forme après l'ovulation. Étape 4 — Conclure : l'ovulation est déclenchée par le pic de LH.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'hormone sécrétée par l'hypothalamus, qui stimule l'hypophyse par bouffées, s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : l'axe commence par l'hypothalamus. Étape 2 — Rapprocher : l'hypothalamus agit sur l'hypophyse, qui sécrète FSH et LH. Étape 3 — Déduire : l'hormone qui fait le lien est la GnRH. Étape 4 — Conclure : la GnRH est sécrétée par bouffées par l'hypothalamus et stimule l'hypophyse.",
+                "answers": [
+                  {
+                    "content": "GnRH",
+                    "correct": true
+                  },
+                  {
+                    "content": "Gn-RH",
+                    "correct": true
+                  },
+                  {
+                    "content": "gonadolibérine",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire des résultats hormonaux et à reconnaître un rétrocontrôle négatif ou positif, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un taux modéré d'œstradiol exerce un rétrocontrôle ___ sur l'hypophyse, alors qu'un taux élevé maintenu environ deux jours exerce un rétrocontrôle ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : deux situations, un taux modéré et un taux élevé maintenu. Étape 2 — Rapprocher : le taux modéré est suivi d'une LH basse, le taux élevé maintenu d'un pic de LH. Étape 3 — Déduire : freiner est un rétrocontrôle négatif, stimuler un rétrocontrôle positif. Étape 4 — Conclure : négatif, puis positif.",
+                "answers": [
+                  {
+                    "content": "négatif",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "positif",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Qui freine ? Qui provoque le pic de LH ? Freiner, c'est négatif ; stimuler, c'est positif."
+              },
+              {
+                "content": "Après ablation des ovaires chez une guenon, les taux de FSH et de LH deviennent très élevés. Pourquoi ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : sans ovaires, FSH et LH montent. Étape 2 — Rapprocher : la hausse suit la suppression des ovaires. Étape 3 — Déduire : si la suppression fait monter, l'organe freinait : c'est le rétrocontrôle négatif. Étape 4 — Conclure : les hormones ovariennes freinent l'hypophyse.",
+                "answers": [
+                  {
+                    "content": "Les ovaires freinaient normalement l'hypophyse, et ce frein a disparu",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les ovaires stimulaient normalement l'hypophyse",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hypophyse fabrique les hormones ovariennes",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'hypothalamus ne sécrète plus de GnRH",
+                    "correct": false
+                  }
+                ],
+                "hint": "Si on supprime un organe et que la grandeur monte, cet organe la freinait."
+              },
+              {
+                "content": "Le pic de ___ provoque l'ovulation.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire : à la fin de la phase folliculaire, une hormone hypophysaire fait un pic. Étape 2 — Rapprocher : l'ovulation a lieu environ un jour après ce pic. Étape 3 — Déduire : c'est la LH ; la progestérone, elle, n'existe en quantité qu'après l'ovulation. Étape 4 — Conclure : le pic de LH provoque l'ovulation.",
+                "answers": [
+                  {
+                    "content": "FSH",
+                    "correct": false
+                  },
+                  {
+                    "content": "LH",
+                    "correct": true
+                  },
+                  {
+                    "content": "progestérone",
+                    "correct": false
+                  },
+                  {
+                    "content": "testostérone",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les événements qui déclenchent l'ovulation.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire : l'ovulation est la dernière conséquence. Étape 2 — Rapprocher : l'œstradiol élevé précède le pic de LH. Étape 3 — Déduire : taux élevé, maintenu environ deux jours, stimule l'hypothalamus et l'hypophyse. Étape 4 — Conclure : œstradiol élevé, durée de 48 heures, pic de LH, ovulation.",
+                "answers": [
+                  {
+                    "content": "Le follicule mûr sécrète beaucoup d'œstradiol"
+                  },
+                  {
+                    "content": "L'œstradiol reste élevé environ 48 heures"
+                  },
+                  {
+                    "content": "L'hypothalamus et l'hypophyse sont stimulés : pic de LH"
+                  },
+                  {
+                    "content": "L'ovulation a lieu"
+                  }
+                ],
+                "hint": "Remonte la chaîne : ovulation, pic de LH, puis ce qui le provoque."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "La régulation du testicule chez le rat",
+          "statement": "Le laboratoire de recherche d'une clinique de Cocody étudie la régulation du testicule sur des rats mâles adultes. Un lot de rats est castré (ablation des deux testicules) juste après le dosage du jour J0. À partir de J21, juste après le dosage de ce jour, on leur injecte chaque jour de la testostérone jusqu'à la fin de l'expérience. Chaque semaine, on dose la LH du sang, en unités arbitraires (u.a.) : J0 : 10 ; J7 : 40 ; J14 : 55 ; J21 : 55 ; J28 : 20 ; J35 : 10 ; J42 : 10.",
+          "exercise_type": "fixation",
+          "figure": "lh-rat-castre",
+          "questions": [
             {
-              "title": "Comprendre — Les étapes des cycles de l'ovaire et de l'utérus",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Des rats sont castrés au jour J0. Leur taux de LH vaut 10 u.a. à J0 et 55 u.a. à J14. De combien d'u.a. la LH a-t-elle augmenté entre J0 et J14 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : lire la courbe, puis calculer. Étape 1 — Lire : la LH vaut 10 u.a. à J0 et 55 u.a. à J14. Étape 2 — Calculer l'augmentation : valeur finale moins valeur initiale, soit $55 - 10 = 45$. Étape 3 — Conclure : la LH a augmenté de 45 u.a. en deux semaines après la castration. Attention à ne pas écrire 55, qui est la valeur finale et non l'augmentation.",
+              "answers": [
                 {
-                  "content": "Qu'appelle-t-on l'ovulation ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'ovulation est la libération de l'ovocyte II par l'éclatement du follicule mûr : le jeune retenu quitte le centre. L'erreur tentante est de la confondre avec les règles : celles-ci correspondent à la destruction de l'endomètre, au début du cycle.",
-                  "answers": [
-                    {
-                      "content": "La libération de l'ovocyte II par l'éclatement du follicule mûr",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'écoulement de sang qui marque le début du cycle",
-                      "correct": false
-                    },
-                    {
-                      "content": "La fixation de l'embryon dans l'endomètre",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le début de la croissance d'un follicule primordial",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Quelle structure sécrète surtout la progestérone pendant la seconde moitié du cycle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Après l'ovulation, le follicule vidé devient le corps jaune, qui sécrète la progestérone : c'est la radio de l'encadrement resté sur place. L'erreur tentante est le follicule mûr : il sécrète surtout des œstrogènes, avant l'ovulation.",
-                  "answers": [
-                    {
-                      "content": "Le corps jaune",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le follicule mûr",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'hypophyse",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'endomètre",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Rappel de l'image : chaque mois, une vingtaine de jeunes d'un centre de formation de football commencent un stage ; un seul est retenu et part jouer à l'étranger ; les autres abandonnent. Dans cette image, que représentent les jeunes qui abandonnent ?",
-                  "question_type": "single_choice",
-                  "explanation": "Les jeunes qui abandonnent, ce sont les follicules qui commencent à grossir mais dégénèrent sans ovuler : c'est l'atrésie. L'erreur tentante est le corps jaune : il correspond à l'encadrement qui reste après le départ du jeune retenu, donc au follicule qui a ovulé.",
-                  "answers": [
-                    {
-                      "content": "Les follicules qui dégénèrent sans ovuler",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le corps jaune",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les ovocytes II libérés à l'ovulation",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les cellules de l'endomètre éliminées pendant les règles",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pendant la phase proliférative du cycle utérin, quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Pendant la phase proliférative, l'endomètre s'épaissit sous l'action des œstrogènes : le paysan laboure son champ. L'erreur tentante est d'attribuer cet épaississement à la progestérone : elle n'agit qu'après l'ovulation, pendant la phase sécrétoire.",
-                  "answers": [
-                    {
-                      "content": "L'endomètre s'épaissit.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ce sont surtout les œstrogènes qui agissent sur l'endomètre.",
-                      "correct": true
-                    },
-                    {
-                      "content": "C'est surtout la progestérone du corps jaune qui agit sur l'endomètre.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La couche superficielle de l'endomètre se détache.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'endomètre forme déjà la dentelle utérine.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Le premier jour du cycle sexuel de la femme correspond au premier jour des règles.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : par convention, on compte le cycle à partir du premier jour des règles. Les règles marquent donc le début d'un nouveau cycle, et non la fin du précédent.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces affirmations sur la température d'une femme mesurée chaque matin au réveil, lesquelles sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La température est basse avant l'ovulation, puis monte d'environ 0,3 à 0,5 °C juste après, sous l'effet de la progestérone, et reste haute jusqu'aux règles. L'erreur tentante est d'attribuer la montée aux œstrogènes : ils sont élevés avant l'ovulation, quand la température est encore basse.",
-                  "answers": [
-                    {
-                      "content": "Elle est plus basse pendant la phase folliculaire.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle monte d'environ 0,3 à 0,5 °C juste après l'ovulation.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sa montée est due à la progestérone.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sa montée est due au pic d'œstrogènes de la phase folliculaire.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle reste la même pendant tout le cycle.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "45",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Dater l'ovulation et lire les phases du cycle",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Des rats castrés au jour J0 voient leur taux de LH passer de 10 u.a. à 55 u.a. en deux semaines. Que peut-on en déduire ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : on retire les testicules et on mesure la LH. Étape 2 — Comparer : la LH passe de 10 à 55 u.a., elle augmente. Étape 3 — Déduire : la suppression de l'organe fait monter la grandeur, donc l'organe la freine. Étape 4 — Conclure : le testicule freine l'hypophyse. Dire qu'il la stimule est l'erreur tentante : la LH aurait alors baissé.",
+              "answers": [
                 {
-                  "content": "Une femme a des cycles réguliers de 32 jours. Quel jour du cycle a lieu son ovulation ?",
-                  "question_type": "single_choice",
-                  "explanation": "La phase lutéale dure 14 jours : l'ovulation a lieu au jour $32 - 14 = 18$. L'erreur tentante est le jour 16, la moitié du cycle : or c'est la phase folliculaire qui s'allonge quand le cycle est plus long, pas les deux phases à parts égales.",
-                  "answers": [
-                    {
-                      "content": "Le jour 18",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le jour 14",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le jour 16",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le jour 20",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Normalement, le testicule freine la sécrétion de LH par l'hypophyse",
+                  "correct": true
                 },
                 {
-                  "content": "Une femme a des cycles réguliers de 28 jours. Au jour 21 de son cycle, quelle structure trouve-t-on dans son ovaire, à côté des petits follicules ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'ovulation a eu lieu vers le jour 14 ; au jour 21, on est en pleine phase lutéale, et le corps jaune est actif. L'erreur tentante est le follicule mûr : il a déjà éclaté au moment de l'ovulation.",
-                  "answers": [
-                    {
-                      "content": "Un corps jaune actif",
-                      "correct": true
-                    },
-                    {
-                      "content": "Un follicule mûr prêt à éclater",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un follicule cavitaire en pleine croissance, qui va ovuler dans deux jours",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un ovocyte II libéré qui attend dans l'ovaire",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Normalement, le testicule stimule la sécrétion de LH",
+                  "correct": false
                 },
                 {
-                  "content": "Une femme a des cycles réguliers de 26 jours. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'ovulation a lieu au jour $26 - 14 = 12$, et la phase lutéale va du jour 13 au jour 26, soit 14 jours. L'erreur tentante est le jour 14 : il ne vaut que pour un cycle de 28 jours.",
-                  "answers": [
-                    {
-                      "content": "Son ovulation a lieu vers le jour 12.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sa phase lutéale va du jour 13 au jour 26.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son ovulation a lieu le jour 14.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sa phase folliculaire dure 14 jours.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Son corps jaune se forme dès le jour 5.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La castration supprime la sécrétion de LH",
+                  "correct": false
                 },
                 {
-                  "content": "Une femme a un cycle de 28 jours. Sa température au réveil est de 36,5 °C du jour 1 au jour 14, puis de 36,9 °C du jour 16 au jour 28 ; elle redescend avec les règles suivantes. Quand a eu lieu l'ovulation ?",
-                  "question_type": "single_choice",
-                  "explanation": "La température monte juste après l'ovulation, sous l'effet de la progestérone du corps jaune. L'ovulation se situe donc vers le jour 14, juste avant la montée. L'erreur tentante est le jour 28 : la baisse de température marque la fin du corps jaune et l'arrivée des règles, pas l'ovulation.",
-                  "answers": [
-                    {
-                      "content": "Vers le jour 14, juste avant la montée de la température",
-                      "correct": true
-                    },
-                    {
-                      "content": "Vers le jour 28, quand la température redescend",
-                      "correct": false
-                    },
-                    {
-                      "content": "Vers le jour 21, au milieu du plateau haut",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le jour 1, au début des règles",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une observation de l'endomètre d'une femme montre une muqueuse épaisse, des glandes très ramifiées et des vaisseaux enroulés. À quelle phase du cycle utérin est-elle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Des glandes ramifiées et des vaisseaux enroulés, c'est la dentelle utérine de la phase sécrétoire, après l'ovulation : le champ est arrosé et prêt pour la graine. L'erreur tentante est la phase proliférative : l'endomètre y épaissit, mais ses glandes restent droites.",
-                  "answers": [
-                    {
-                      "content": "La phase sécrétoire, après l'ovulation",
-                      "correct": true
-                    },
-                    {
-                      "content": "La phase proliférative, avant l'ovulation",
-                      "correct": false
-                    },
-                    {
-                      "content": "La menstruation",
-                      "correct": false
-                    },
-                    {
-                      "content": "Avant la puberté",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Une femme naît avec un stock de follicules qui ne se renouvelle pas au cours de sa vie.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : tous les follicules sont formés avant la naissance, et leur nombre ne fait que diminuer. Quand le stock est épuisé, vers 50 ans, les cycles s'arrêtent : c'est la ménopause. C'est là que l'image du centre de formation s'arrête.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La LH est fabriquée par le testicule",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Relier l'ovaire, l'utérus et leurs hormones",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Chez ces rats castrés, des injections quotidiennes de testostérone commencent à J21 : la LH passe de 55 u.a. (J21) à 20 u.a. (J28), puis à 10 u.a. (J35). Que peut-on conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : on injecte de la testostérone à des rats castrés. Étape 2 — Comparer : la LH redescend de 55 à 10 u.a., sa valeur de départ. Étape 3 — Déduire : une hormone qui rétablit la valeur normale suffit à exercer l'effet du testicule, donc la testostérone freine la LH. Étape 4 — Conclure : la testostérone est l'hormone du frein.",
+              "answers": [
                 {
-                  "content": "Chez une guenon, on retire les deux ovaires : ses cycles s'arrêtent et son endomètre devient mince. On lui injecte alors des œstrogènes : son endomètre s'épaissit de nouveau. Quelle conclusion peux-tu tirer ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans ovaires, plus de cycle utérin ; avec des œstrogènes, l'endomètre se reconstruit : l'ovaire commande donc l'utérus par ses hormones. L'erreur tentante est « les œstrogènes provoquent les règles » : ici, ils épaississent l'endomètre, ils ne le détruisent pas.",
-                  "answers": [
-                    {
-                      "content": "L'ovaire commande l'utérus par ses hormones ; les œstrogènes font épaissir l'endomètre.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'utérus commande le fonctionnement de l'ovaire.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'endomètre fabrique lui-même les hormones qui le font épaissir.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les œstrogènes provoquent la destruction de l'endomètre.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La testostérone stimule la sécrétion de LH",
+                  "correct": false
                 },
                 {
-                  "content": "Mme Bamba a des cycles réguliers de 35 jours. Quelles affirmations sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Étape 1 : l'ovulation a lieu au jour $35 - 14 = 21$. Étape 2 : la phase lutéale dure 14 jours, donc la phase folliculaire (20 jours) est plus longue. Étape 3 : l'ovocyte vit environ 24 heures, il est fécondable vers les jours 21 et 22. L'erreur tentante est le jour 14, valable seulement pour un cycle de 28 jours.",
-                  "answers": [
-                    {
-                      "content": "Son ovulation a lieu vers le jour 21.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Sa phase folliculaire est plus longue que sa phase lutéale.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son ovocyte est fécondable vers les jours 21 et 22.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son ovulation a lieu vers le jour 14.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Sa phase lutéale dure 21 jours.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La testostérone suffit à freiner la sécrétion de LH, comme le faisait le testicule",
+                  "correct": true
                 },
                 {
-                  "content": "Chez une femelle de mammifère en phase lutéale, on détruit le corps jaune. Quelques jours plus tard, les règles apparaissent. Quelle est l'explication ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le corps jaune maintenait l'endomètre grâce à la progestérone. Détruit, il ne sécrète plus : la progestérone chute, l'endomètre n'est plus entretenu et se détache. L'erreur tentante est de croire que le corps jaune sécrète une hormone qui déclenche les règles : c'est au contraire l'arrêt de ses hormones qui les provoque.",
-                  "answers": [
-                    {
-                      "content": "La chute de la progestérone entraîne la destruction de l'endomètre.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le corps jaune détruit libère une hormone qui déclenche les règles.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le taux d'œstrogènes augmente brusquement et détruit l'endomètre.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une nouvelle ovulation a lieu immédiatement et déclenche les règles.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La testostérone n'a aucun effet sur la LH",
+                  "correct": false
                 },
                 {
-                  "content": "On dose les hormones de l'ovaire chez une femme ayant un cycle de 28 jours. Au jour 7 : œstrogènes moyens, progestérone presque nulle. Au jour 21 : progestérone élevée, œstrogènes moyens. Quelle structure de l'ovaire est responsable de ces sécrétions à chacune de ces dates ?",
-                  "question_type": "single_choice",
-                  "explanation": "Au jour 7, sans progestérone, c'est la phase folliculaire : les follicules en croissance sécrètent les œstrogènes. Au jour 21, la progestérone élevée signe le corps jaune. L'erreur tentante est d'inverser : le corps jaune n'existe qu'après l'ovulation.",
-                  "answers": [
-                    {
-                      "content": "Jour 7 : les follicules en croissance ; jour 21 : le corps jaune",
-                      "correct": true
-                    },
-                    {
-                      "content": "Jour 7 : le corps jaune ; jour 21 : les follicules en croissance",
-                      "correct": false
-                    },
-                    {
-                      "content": "Jour 7 : le follicule mûr qui éclate ; jour 21 : les follicules primordiaux",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le corps jaune aux deux dates",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La testostérone est fabriquée par l'hypophyse",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le contrôle exercé par la testostérone sur l'hypothalamus et l'hypophyse est un ___ négatif.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 1 — Repérer : la testostérone, sécrétée par le testicule, agit sur l'hypothalamus et l'hypophyse qui le stimulent. Étape 2 — Comparer : quand elle est présente, la LH reste normale ; quand elle disparaît, la LH monte. Étape 3 — Déduire : l'organe commandé freine l'organe qui le commande. Étape 4 — Conclure : c'est un rétrocontrôle négatif.",
+              "answers": [
+                {
+                  "content": "rétrocontrôle",
+                  "correct": true
                 },
                 {
-                  "content": "Si une fécondation a lieu, le corps jaune dégénère quand même au bout de 14 jours, et les règles arrivent normalement.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : l'embryon sécrète l'hormone hCG, qui maintient le corps jaune. La progestérone reste élevée, l'endomètre est conservé et les règles n'arrivent pas : la « bonne nouvelle » est arrivée, la radio ne ferme pas.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
+                  "content": "feed-back",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On retire l'hypophyse à des rats adultes. Quelles observations sont attendues ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 1 — Repérer : on retire l'hypophyse, qui sécrète la LH et la FSH. Étape 2 — Comparer : sans LH et FSH, le testicule n'est plus stimulé. Étape 3 — Déduire : les cellules de Leydig ne sécrètent plus de testostérone et la spermatogenèse s'arrête, le testicule diminue de volume. Étape 4 — Conclure : l'hypophyse stimule le testicule. Le taux de LH ne peut pas augmenter puisque l'hypophyse est retirée.",
+              "answers": [
+                {
+                  "content": "Le volume des testicules diminue",
+                  "correct": true
                 },
                 {
-                  "content": "Chez une femme, la température au réveil reste la même pendant tout le cycle, sans plateau haut, et son taux de progestérone reste toujours très bas. Quelles conclusions peux-tu tirer ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Pas de plateau thermique et pas de progestérone : il n'y a pas de corps jaune, donc il n'y a pas eu d'ovulation. L'erreur tentante est « son corps jaune est trop actif » : un corps jaune actif ferait au contraire monter la progestérone et la température.",
-                  "answers": [
-                    {
-                      "content": "Elle n'a probablement pas ovulé.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Aucun corps jaune ne s'est formé dans ses ovaires.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Son corps jaune est trop actif.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Son endomètre forme chaque mois une dentelle utérine normale.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle est enceinte.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Le taux de testostérone augmente",
+                  "correct": false
+                },
+                {
+                  "content": "La spermatogenèse s'arrête",
+                  "correct": true
+                },
+                {
+                  "content": "La spermatogenèse s'accélère",
+                  "correct": false
+                },
+                {
+                  "content": "Le taux de testostérone s'effondre",
+                  "correct": true
+                },
+                {
+                  "content": "Le taux de LH du sang augmente",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre la boucle de régulation du testicule, à partir de l'hypothalamus.",
+              "question_type": "ordering",
+              "explanation": "Méthode : Étape 1 — Repérer l'organe qui commande : l'hypothalamus. Étape 2 — Suivre la commande : la GnRH stimule l'hypophyse, qui sécrète la LH et la FSH. Étape 3 — Déduire l'effet : la LH stimule les cellules de Leydig, qui sécrètent la testostérone. Étape 4 — Conclure par le retour : la testostérone freine l'hypothalamus et l'hypophyse, d'où un taux à peu près constant.",
+              "answers": [
+                {
+                  "content": "L'hypothalamus sécrète la GnRH"
+                },
+                {
+                  "content": "L'hypophyse sécrète la LH et la FSH"
+                },
+                {
+                  "content": "Les cellules de Leydig sécrètent la testostérone"
+                },
+                {
+                  "content": "La testostérone freine l'hypothalamus et l'hypophyse"
                 }
               ]
             }
           ]
         },
         {
-          "name": "La régulation hormonale du cycle de la femme",
-          "subtitle": "Le dialogue entre l'hypothalamus, l'hypophyse et l'ovaire, et le pic de LH qui déclenche l'ovulation",
-          "content": "<h2>Ce que tu vas savoir faire</h2><ul><li>Expliquer le rôle de la GnRH, de la FSH et de la LH dans le cycle de la femme.</li><li>Distinguer le rétrocontrôle négatif et le rétrocontrôle positif.</li><li>Expliquer le déclenchement de l'ovulation et l'arrivée des règles.</li></ul><h2>L'image pour comprendre</h2><p><strong>Première image : le DJ du maquis.</strong> Au maquis, la musique fait danser la foule, et la foule crie. D'habitude, quand les clients crient un peu plus fort, le DJ baisse le volume pour garder une ambiance calme. Mais un soir, la piste se remplit et la foule crie très fort pendant longtemps. Le DJ change alors de règle : plus elle crie, plus il monte le son, jusqu'à lancer le grand tube de la soirée à fond. Après ce moment, la soirée se calme.</p><p><strong>Le pont.</strong> Le DJ, c'est l'ensemble <strong>hypothalamus–hypophyse</strong> : l'hypothalamus sécrète la GnRH, qui fait sécréter la FSH et la LH par l'hypophyse. Le son, ce sont la <strong>FSH</strong> et la <strong>LH</strong>, qui stimulent l'ovaire. La foule qui crie, c'est l'<strong>œstradiol</strong>, le principal œstrogène sécrété par les follicules en croissance. Baisser le son quand la foule crie un peu plus, c'est le <strong>rétrocontrôle négatif</strong> : plus d'œstradiol, moins de FSH et de LH. Changer de règle, c'est le passage au <strong>rétrocontrôle positif</strong> : quand le taux d'œstradiol dépasse un seuil élevé pendant environ deux jours, il stimule l'hypothalamus et l'hypophyse au lieu de les freiner. Le grand tube lancé à fond, c'est le <strong>pic de LH</strong>, qui déclenche l'ovulation.</p><p><strong>Là où l'image s'arrête.</strong> Le DJ choisit ; l'hypophyse, elle, ne choisit rien : le changement de règle est automatique et dépend seulement du taux d'œstradiol et de la durée pendant laquelle il reste élevé. Et les hormones ne voyagent pas par le son, mais par le sang.</p><p><strong>Deuxième image : l'homme qui scie sa propre branche.</strong> Un homme est assis sur une branche de manguier. Pour passer le temps, il scie cette branche, juste entre lui et le tronc. Au bout d'un moment, la branche casse et il tombe. Une fois l'homme tombé, plus personne ne gêne l'arbre, qui peut faire pousser une nouvelle branche.</p><p><strong>Le pont.</strong> L'homme, c'est le <strong>corps jaune</strong>. La branche qui le porte, c'est la LH, dont il a besoin pour se maintenir. Scier la branche, c'est le rétrocontrôle négatif exercé par la progestérone et les œstrogènes du corps jaune : ils freinent la sécrétion de LH et de FSH. La chute, c'est la dégénérescence du corps jaune, environ 14 jours après l'ovulation. Les hormones de l'ovaire chutent : ce sont les règles. La nouvelle branche, c'est le nouveau cycle : le frein a disparu, la FSH remonte et de nouveaux follicules se mettent à grossir.</p><p><strong>Là où l'image s'arrête.</strong> Si un embryon est présent, son hormone hCG remplace la LH : c'est comme si quelqu'un tendait une corde à l'homme. Le corps jaune est maintenu et les règles n'arrivent pas.</p><h2>Ce qu'il faut retenir</h2><blockquote><ul><li>L'<strong>hypothalamus</strong> sécrète la <strong>GnRH</strong> par bouffées régulières. Elle stimule l'<strong>hypophyse</strong>, qui sécrète la <strong>FSH</strong> et la <strong>LH</strong>.</li><li>La FSH fait grossir les follicules. La LH déclenche l'ovulation, puis permet la formation et le maintien du corps jaune.</li><li>Les follicules sécrètent l'<strong>œstradiol</strong> ; le corps jaune sécrète la <strong>progestérone</strong> et des œstrogènes. Ces hormones agissent sur l'utérus et, en retour, sur l'hypothalamus et l'hypophyse.</li><li><strong>Rétrocontrôle négatif</strong> : pendant la plus grande partie de la phase folliculaire, un taux modéré d'œstradiol freine la sécrétion de FSH et de LH. Pendant la phase lutéale, la progestérone et les œstrogènes du corps jaune les freinent fortement.</li><li><strong>Rétrocontrôle positif</strong> : à la fin de la phase folliculaire, le follicule mûr sécrète beaucoup d'œstradiol. Quand ce taux reste au-dessus d'un seuil élevé pendant environ 48 heures, il stimule l'hypothalamus et l'hypophyse : c'est le <strong>pic de LH</strong> (accompagné d'un petit pic de FSH). L'ovulation a lieu environ un jour à un jour et demi après le début de ce pic.</li><li><strong>Fin du cycle</strong> : sans fécondation, le corps jaune dégénère. La progestérone et les œstrogènes chutent, ce qui provoque les règles et lève le frein sur l'hypophyse : la FSH remonte et un nouveau cycle commence.</li><li>Le système est donc une boucle : l'hypothalamus et l'hypophyse commandent l'ovaire, l'ovaire commande l'utérus, et l'ovaire informe en retour l'hypothalamus et l'hypophyse. Le rétrocontrôle positif n'existe que chez la femme.</li></ul></blockquote><h2>Exemple résolu</h2><p><strong>Énoncé.</strong> On réalise trois expériences chez des guenons. (1) Après ablation des ovaires, les taux de FSH et de LH deviennent très élevés. (2) Chez une guenon sans ovaires, on injecte une faible dose d'œstradiol : la LH diminue. (3) Chez une autre guenon sans ovaires, on maintient une forte dose d'œstradiol pendant deux jours : la LH présente alors un pic très net. Interprète ces résultats.</p><ol><li><strong>Expérience 1.</strong> Sans ovaires, la FSH et la LH montent. Donc, normalement, les ovaires freinent l'hypophyse.</li><li><strong>Expérience 2.</strong> Une faible dose d'œstradiol fait baisser la LH : c'est un rétrocontrôle négatif. Le DJ baisse le son.</li><li><strong>Expérience 3.</strong> Une forte dose d'œstradiol, maintenue deux jours, fait au contraire exploser la LH : c'est un rétrocontrôle positif. Le DJ lance le grand tube.</li><li><strong>Conclusion.</strong> La même hormone a deux effets opposés selon son taux et sa durée. Cela explique le pic de LH qui déclenche l'ovulation, quand le follicule mûr sécrète beaucoup d'œstradiol.</li></ol><h2>Le piège à éviter</h2><p>Beaucoup d'élèves écrivent que c'est la progestérone, ou la FSH, qui déclenche l'ovulation. C'est faux : l'ovulation est déclenchée par le <strong>pic de LH</strong>, lui-même provoqué par un taux élevé et prolongé d'<strong>œstradiol</strong>. La progestérone n'apparaît en grande quantité qu'après l'ovulation, et elle freine la LH.</p><p>Pour repérer l'erreur, remonte la chaîne : ovulation ← pic de LH ← beaucoup d'œstradiol pendant environ deux jours.</p><h2>En une phrase</h2><p>L'hypothalamus et l'hypophyse commandent l'ovaire par la FSH et la LH ; l'ovaire les freine d'habitude en retour, mais juste avant l'ovulation, beaucoup d'œstradiol les emballe et provoque le pic de LH qui libère l'ovocyte.</p>",
-          "exercises": [
+          "title": "Dater l'ovulation de Mme Aya à la consultation de fertilité",
+          "statement": "Mme Aya N'Guessan consulte la gynécologue d'une clinique de Cocody pour un projet de grossesse. Ses cycles sont réguliers et durent 31 jours ; ses dernières règles ont commencé le 8 septembre. Elle prend sa température au réveil chaque matin : du jour 1 au jour 17 elle reste entre 36,4 et 36,5 °C ; du jour 18 au jour 31, entre 36,8 et 36,9 °C. Le laboratoire d'analyses dose aussi sa progestérone au jour 24 : le taux est très supérieur à celui du jour 10.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
             {
-              "title": "Comprendre — Les hormones du cycle et leurs rétrocontrôles",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Mme Aya a des cycles réguliers de 31 jours. À quel jour du cycle a lieu son ovulation ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer : le jour 1 est le premier jour des règles et le cycle dure 31 jours. Étape 2 — Calculer : jour de l'ovulation = durée du cycle − 14 = $31 - 14 = 17$. Étape 3 — Situer : avant le jour 17 on est en phase folliculaire, après en phase lutéale. Étape 4 — Conclure : l'ovulation a lieu au jour 17.",
+              "answers": [
                 {
-                  "content": "Chez la femme, qu'est-ce qui déclenche directement l'ovulation ?",
-                  "question_type": "single_choice",
-                  "explanation": "C'est le pic de LH, le grand tube lancé à fond par le DJ, qui fait éclater le follicule mûr. L'erreur tentante est la progestérone : elle n'est sécrétée en grande quantité qu'après l'ovulation, par le corps jaune.",
-                  "answers": [
-                    {
-                      "content": "Le pic de LH",
-                      "correct": true
-                    },
-                    {
-                      "content": "La progestérone du corps jaune",
-                      "correct": false
-                    },
-                    {
-                      "content": "La FSH, qui fait grossir les follicules",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'hormone hCG",
-                      "correct": false
-                    }
-                  ]
-                },
+                  "content": "17",
+                  "correct": true
+                }
+              ],
+              "unit": "jour"
+            },
+            {
+              "content": "Le jour 1 du cycle de Mme Aya est le 8 septembre et son ovulation a lieu au jour 17. Quel jour de septembre a lieu l'ovulation ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer : jour 1 = 8 septembre, ovulation au jour 17. Étape 2 — Calculer : le jour 17 est 16 jours après le jour 1, soit $8 + 16 = 24$. Étape 3 — Situer : l'ovulation a lieu le 24 septembre ; avant, phase folliculaire, après, phase lutéale. Étape 4 — Conclure : le 24 septembre. Attention à ne pas écrire $8 + 17 = 25$ : le jour 1 est déjà le 8.",
+              "answers": [
                 {
-                  "content": "Qu'appelle-t-on un rétrocontrôle négatif ?",
-                  "question_type": "single_choice",
-                  "explanation": "Dans un rétrocontrôle négatif, l'hormone produite par un organe freine la sécrétion des hormones qui stimulent cet organe : le DJ baisse le son quand la foule crie. L'erreur tentante est la proposition inverse : une hormone qui augmente la sécrétion des stimulines décrit le rétrocontrôle positif.",
-                  "answers": [
-                    {
-                      "content": "Une hormone produite par un organe freine la sécrétion des hormones qui stimulent cet organe.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une hormone produite par un organe augmente la sécrétion des hormones qui stimulent cet organe.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une hormone détruit l'organe qui la produit.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'arrêt définitif des cycles à la ménopause.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Rappel de l'image : au maquis, la musique fait crier la foule ; d'habitude, le DJ baisse le son quand la foule crie un peu plus ; mais un soir, la foule crie très fort pendant longtemps, et le DJ change de règle : plus elle crie, plus il monte le son. Que représente ce changement de règle ?",
-                  "question_type": "single_choice",
-                  "explanation": "Le changement de règle, c'est le passage au rétrocontrôle positif : un taux d'œstradiol au-dessus d'un seuil élevé, pendant environ deux jours, stimule l'hypophyse au lieu de la freiner. L'erreur tentante est le rétrocontrôle négatif : il correspond à l'habitude du DJ de baisser le son.",
-                  "answers": [
-                    {
-                      "content": "Le passage au rétrocontrôle positif, quand l'œstradiol reste au-dessus d'un seuil élevé pendant environ deux jours",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le rétrocontrôle négatif exercé par l'œstradiol",
-                      "correct": false
-                    },
-                    {
-                      "content": "La dégénérescence du corps jaune",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'arrivée des règles",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez la femme, quelles hormones sont sécrétées par l'hypophyse ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "L'hypophyse sécrète la FSH et la LH, le « son » envoyé à l'ovaire. L'erreur tentante est la GnRH : elle vient de l'hypothalamus et agit sur l'hypophyse. L'œstradiol et la progestérone, eux, sont sécrétés par l'ovaire.",
-                  "answers": [
-                    {
-                      "content": "La FSH",
-                      "correct": true
-                    },
-                    {
-                      "content": "La LH",
-                      "correct": true
-                    },
-                    {
-                      "content": "La GnRH",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'œstradiol",
-                      "correct": false
-                    },
-                    {
-                      "content": "La progestérone",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Pendant la phase lutéale, la progestérone et les œstrogènes du corps jaune exercent un rétrocontrôle négatif sur l'hypothalamus et l'hypophyse.",
-                  "question_type": "true_false",
-                  "explanation": "C'est vrai : pendant la phase lutéale, les hormones du corps jaune freinent fortement la sécrétion de FSH et de LH. C'est l'homme qui scie sa propre branche : en freinant la LH, le corps jaune prépare sa propre fin.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": true
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Parmi ces affirmations sur la FSH et la LH chez la femme, lesquelles sont exactes ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "La FSH fait grossir les follicules ; la LH déclenche l'ovulation par son pic, puis maintient le corps jaune. L'erreur tentante est de croire que la LH vient de l'hypothalamus : l'hypothalamus sécrète la GnRH, et c'est l'hypophyse qui sécrète la LH et la FSH.",
-                  "answers": [
-                    {
-                      "content": "La FSH stimule la croissance des follicules.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le pic de LH déclenche l'ovulation.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La LH permet la formation et le maintien du corps jaune.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La FSH est sécrétée par l'ovaire.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La LH est sécrétée par l'hypothalamus.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "24",
+                  "correct": true
                 }
               ]
             },
             {
-              "title": "Appliquer — Prévoir les effets d'une modification hormonale",
-              "exercise_type": "fixation",
-              "questions": [
+              "content": "Mme Aya a une température de 36,4 à 36,5 °C du jour 1 au jour 17, puis de 36,8 à 36,9 °C du jour 18 au jour 31. Quelle hormone explique cette montée de température ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : la température monte au jour 18. Étape 2 — Calculer : l'ovulation a lieu au jour $31 - 14 = 17$, donc la montée suit l'ovulation. Étape 3 — Situer : à partir du jour 18, on est en phase lutéale. Étape 4 — Déduire : le corps jaune sécrète la progestérone, responsable du plateau thermique. Les œstrogènes dominent avant l'ovulation, quand la température est basse.",
+              "answers": [
                 {
-                  "content": "Chez une femelle de mammifère adulte, on retire les deux ovaires. Comment évoluent ses taux de FSH et de LH ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans ovaires, plus d'œstradiol ni de progestérone pour freiner l'hypophyse : la FSH et la LH augmentent fortement. L'erreur tentante est « elles diminuent » : ce serait vrai si les ovaires stimulaient l'hypophyse, mais ils la freinent.",
-                  "answers": [
-                    {
-                      "content": "Ils augmentent fortement.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Ils diminuent fortement.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ils ne changent pas.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Ils deviennent nuls.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La progestérone sécrétée par le corps jaune",
+                  "correct": true
                 },
                 {
-                  "content": "Chez une guenon dont on a retiré les ovaires, on maintient une forte dose d'œstradiol dans le sang pendant deux jours. Qu'observe-t-on ?",
-                  "question_type": "single_choice",
-                  "explanation": "Un taux élevé d'œstradiol maintenu environ deux jours déclenche le rétrocontrôle positif : la LH présente un pic. L'erreur tentante est « une ovulation » : sans ovaires, il n'y a aucun follicule à faire éclater, même si le pic de LH a lieu.",
-                  "answers": [
-                    {
-                      "content": "Un pic de LH",
-                      "correct": true
-                    },
-                    {
-                      "content": "Une ovulation suivie de la formation d'un corps jaune",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une chute durable de la LH jusqu'à zéro",
-                      "correct": false
-                    },
-                    {
-                      "content": "Une forte hausse de la progestérone",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Les œstrogènes sécrétés par les follicules",
+                  "correct": false
                 },
                 {
-                  "content": "Chez une femme, l'hypophyse ne sécrète plus ni FSH ni LH. Quelle est la conséquence sur ses ovaires ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans FSH, les follicules ne grossissent plus ; sans LH, pas d'ovulation ni de corps jaune : le DJ est muet, la foule ne danse plus. L'erreur tentante est « les ovaires fonctionnent seuls » : ils ont besoin des hormones de l'hypophyse.",
-                  "answers": [
-                    {
-                      "content": "Les follicules ne grossissent plus et il n'y a plus d'ovulation.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les ovaires continuent leurs cycles normalement, sans l'hypophyse.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le corps jaune se maintient indéfiniment.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Les ovulations deviennent plus fréquentes.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La FSH sécrétée par l'hypophyse",
+                  "correct": false
                 },
                 {
-                  "content": "La pilule contraceptive combinée apporte chaque jour, à dose constante, un œstrogène et un progestatif (une molécule proche de la progestérone). Pourquoi empêche-t-elle l'ovulation ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "La pilule maintient un rétrocontrôle négatif permanent : FSH et LH restent basses. Le taux d'œstrogènes ne monte jamais assez haut, assez longtemps, pour déclencher le pic de LH. L'erreur tentante est « elle détruit les follicules » : son effet est réversible, les cycles reprennent à l'arrêt.",
-                  "answers": [
-                    {
-                      "content": "Elle maintient un rétrocontrôle négatif qui garde la FSH et la LH à un niveau bas.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le taux d'œstrogènes n'atteint jamais le seuil qui déclenche le pic de LH.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Elle détruit définitivement le stock de follicules.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle provoque un pic de LH chaque jour.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Elle remplace la GnRH et stimule l'hypophyse.",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Un taux élevé d'œstradiol freine toujours l'hypophyse, quelle que soit la durée pendant laquelle il reste élevé.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : un taux élevé d'œstradiol maintenu environ deux jours au-dessus d'un seuil provoque au contraire le pic de LH. C'est le rétrocontrôle positif : le DJ change de règle quand la foule crie fort longtemps.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez une femme, un médicament bloque la sécrétion de GnRH par l'hypothalamus. Quelles conséquences peut-on prévoir ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans GnRH, l'hypophyse n'est plus stimulée : la FSH et la LH chutent, les follicules ne mûrissent pas et il n'y a pas d'ovulation. L'erreur tentante est « la FSH et la LH augmentent » : c'est ce qui arrive quand on retire les ovaires, pas quand on bloque l'hypothalamus.",
-                  "answers": [
-                    {
-                      "content": "La FSH et la LH chutent, et il n'y a plus d'ovulation.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La FSH et la LH augmentent fortement.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ovulation a lieu normalement, car l'ovaire n'a pas besoin de l'hypothalamus.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le corps jaune se maintient pendant plusieurs mois.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "La GnRH sécrétée par l'hypothalamus",
+                  "correct": false
                 }
               ]
             },
             {
-              "title": "S'évaluer — Interpréter des dosages hormonaux au cours du cycle",
-              "exercise_type": "evaluation",
-              "questions": [
+              "content": "Au jour 26 du cycle de Mme Aya (cycle de 31 jours), dans quel état est son endomètre ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : cycle de 31 jours, jour étudié 26. Étape 2 — Calculer : l'ovulation a lieu au jour 17. Étape 3 — Situer : le jour 26 vient après, donc phase lutéale. Étape 4 — Déduire : la progestérone domine et l'endomètre est en phase sécrétoire. Les règles n'arrivent qu'à la fin du cycle, après la chute des hormones.",
+              "answers": [
                 {
-                  "content": "Chez une femme ayant un cycle de 28 jours, on observe : aux jours 11 et 12, un taux d'œstradiol très élevé ; au jour 13, un taux de LH environ dix fois plus élevé que d'habitude ; au jour 14, l'ovulation. Quelle relation peux-tu établir ?",
-                  "question_type": "single_choice",
-                  "explanation": "L'œstradiol élevé pendant deux jours précède le pic de LH, qui précède l'ovulation : l'œstradiol déclenche le pic par rétrocontrôle positif, et le pic déclenche l'ovulation. L'erreur tentante est d'inverser cause et effet : le pic de LH arrive après la hausse d'œstradiol, il ne peut pas l'avoir provoquée.",
-                  "answers": [
-                    {
-                      "content": "Le taux élevé d'œstradiol déclenche le pic de LH, qui déclenche l'ovulation.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le pic de LH provoque la hausse de l'œstradiol, qui déclenche l'ovulation.",
-                      "correct": false
-                    },
-                    {
-                      "content": "L'ovulation provoque la hausse de l'œstradiol et de la LH.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La progestérone déclenche le pic de LH et l'ovulation.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "En phase proliférative, en cours d'épaississement",
+                  "correct": false
                 },
                 {
-                  "content": "Une femme n'a pas été fécondée au cours de son cycle. Parmi ces événements de fin de cycle, lesquels sont exacts ?",
-                  "question_type": "multiple_correct_3",
-                  "explanation": "Sans hCG, le corps jaune dégénère : la progestérone et les œstrogènes chutent, l'endomètre se détache, et le frein sur l'hypophyse est levé, donc la FSH remonte. C'est l'homme qui tombe de sa branche. L'erreur tentante est « la progestérone augmente et provoque les règles » : c'est sa chute qui les provoque.",
-                  "answers": [
-                    {
-                      "content": "Le corps jaune dégénère.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les taux de progestérone et d'œstrogènes chutent, ce qui déclenche les règles.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Le frein sur l'hypophyse est levé : la FSH remonte et de nouveaux follicules grossissent.",
-                      "correct": true
-                    },
-                    {
-                      "content": "La progestérone augmente brusquement et provoque les règles.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un pic de LH provoque les règles.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "En train de se détacher pendant les règles",
+                  "correct": false
                 },
                 {
-                  "content": "Chez une femme, les follicules grossissent normalement en début de cycle, mais son taux d'œstradiol reste modéré et ne dépasse jamais le seuil élevé. Quelle conséquence peut-on prévoir ?",
-                  "question_type": "single_choice",
-                  "explanation": "Sans taux élevé et prolongé d'œstradiol, pas de rétrocontrôle positif, donc pas de pic de LH : il n'y a ni ovulation ni corps jaune. L'erreur tentante est « l'ovulation a lieu normalement » : la croissance des follicules ne suffit pas, il faut le pic de LH.",
-                  "answers": [
-                    {
-                      "content": "Il n'y a pas de pic de LH, donc pas d'ovulation ni de corps jaune.",
-                      "correct": true
-                    },
-                    {
-                      "content": "L'ovulation a lieu normalement au jour 14.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le pic de LH est plus fort que la normale.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Le corps jaune se forme sans ovulation.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "En phase sécrétoire, en dentelle utérine",
+                  "correct": true
                 },
                 {
-                  "content": "Chez une femme ménopausée, le stock de follicules est épuisé. Comment sont ses taux de FSH et de LH ?",
-                  "question_type": "single_choice",
-                  "explanation": "Plus de follicules, donc plus d'œstradiol ni de progestérone pour freiner l'hypophyse : la FSH et la LH sont très élevées. L'erreur tentante est « très basses » : on pense que tout s'arrête, mais c'est le frein qui a disparu, pas l'hypophyse.",
-                  "answers": [
-                    {
-                      "content": "Très élevés, car l'ovaire ne les freine plus",
-                      "correct": true
-                    },
-                    {
-                      "content": "Très bas, car l'hypophyse s'arrête avec l'ovaire",
-                      "correct": false
-                    },
-                    {
-                      "content": "Normaux, car l'hypophyse ne dépend pas de l'ovaire",
-                      "correct": false
-                    },
-                    {
-                      "content": "Nuls, car il n'y a plus de cycle",
-                      "correct": false
-                    }
-                  ]
-                },
-                {
-                  "content": "Chez l'homme comme chez la femme, un rétrocontrôle positif provoque régulièrement un pic de LH.",
-                  "question_type": "true_false",
-                  "explanation": "C'est faux : chez l'homme, la testostérone exerce seulement un rétrocontrôle négatif, et la LH reste à un niveau à peu près stable. Le rétrocontrôle positif, qui provoque le pic de LH, n'existe que chez la femme, avant l'ovulation.",
-                  "answers": [
-                    {
-                      "content": "Vrai",
-                      "correct": false
-                    },
-                    {
-                      "content": "Faux",
-                      "correct": true
-                    }
-                  ]
-                },
-                {
-                  "content": "Pendant la grossesse, l'hormone hCG de l'embryon maintient le corps jaune, puis le placenta sécrète à son tour de grandes quantités d'œstrogènes et de progestérone. Quelles conséquences sur le cycle peut-on prévoir ?",
-                  "question_type": "multiple_correct_2",
-                  "explanation": "Les œstrogènes et la progestérone restent élevés : ils freinent la FSH et la LH par rétrocontrôle négatif, donc aucun follicule ne mûrit et il n'y a pas d'ovulation. L'endomètre est maintenu : pas de règles. L'erreur tentante est « la FSH augmente » : c'est le frein, et non sa levée, qui domine.",
-                  "answers": [
-                    {
-                      "content": "La FSH et la LH restent basses, à cause du rétrocontrôle négatif.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Il n'y a pas de nouvelle ovulation pendant la grossesse.",
-                      "correct": true
-                    },
-                    {
-                      "content": "Les règles continuent d'arriver chaque mois.",
-                      "correct": false
-                    },
-                    {
-                      "content": "Un pic de LH a lieu chaque mois.",
-                      "correct": false
-                    },
-                    {
-                      "content": "La FSH augmente fortement, car le corps jaune est maintenu.",
-                      "correct": false
-                    }
-                  ]
+                  "content": "Encore mince, comme au début du cycle",
+                  "correct": false
                 }
               ]
+            },
+            {
+              "content": "Un taux de progestérone très élevé au jour 24, par rapport au jour 10, confirme que Mme Aya a bien ovulé ce mois-là.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Lire : la progestérone est faible au jour 10 et très élevée au jour 24. Étape 2 — Rapprocher : le jour 10 est avant l'ovulation, le jour 24 après. Étape 3 — Déduire : la progestérone est sécrétée par le corps jaune, qui ne se forme qu'après une ovulation. Étape 4 — Conclure : son taux élevé confirme l'ovulation. C'est aussi ce que montre le plateau thermique.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une voisine de Mme Aya affirme : « L'ovulation a toujours lieu le 14e jour du cycle. » De combien de jours cette affirmation se trompe-t-elle pour le cycle de 31 jours de Mme Aya ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Repérer : cycle de 31 jours. Étape 2 — Calculer : l'ovulation a lieu au jour $31 - 14 = 17$, non au jour 14. Étape 3 — Situer : l'écart est $17 - 14 = 3$ jours. Étape 4 — Conclure : l'erreur est de 3 jours. Le nombre 14 est la durée de la phase lutéale, pas le jour de l'ovulation.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "unit": "jours"
+            }
+          ]
+        },
+        {
+          "title": "Les hormones d'un cycle dosées au laboratoire d'analyses",
+          "statement": "Le laboratoire d'analyses d'une clinique de Cocody a dosé, chez Mme Fatou Diabaté dont le cycle dure 28 jours, la LH, l'œstradiol et la progestérone du sang tous les deux jours, avec un dosage en plus au jour 12 (unités arbitraires).\nJours : 1, 3, 5, 7, 9, 11, 12, 13, 15, 17, 19, 21, 23, 25, 27.\nŒstradiol : 20, 20, 25, 35, 55, 80, 100, 90, 50, 45, 70, 75, 70, 40, 20.\nLH : 5, 5, 5, 5, 6, 8, 10, 60, 12, 8, 6, 5, 5, 5, 5.\nProgestérone : 1, 1, 1, 1, 1, 1, 1, 2, 6, 14, 20, 22, 18, 9, 3.\nLa courbe montre la LH. Ces résultats sont donnés par l'énoncé.",
+          "exercise_type": "evaluation",
+          "figure": "lh-cycle",
+          "questions": [
+            {
+              "content": "Au cours d'un cycle de 28 jours, la LH vaut : 5, 5, 5, 5, 6, 8, 10, 60, 12, 8, 6, 5, 5, 5, 5 u.a. aux jours 1, 3, 5, 7, 9, 11, 12, 13, 15, 17, 19, 21, 23, 25 et 27. À quel jour observe-t-on le pic de LH ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire la courbe : la LH reste voisine de 5 u.a., sauf une valeur de 60 u.a. Étape 2 — Repérer le maximum : 60 u.a. est la plus grande valeur. Étape 3 — Lire son jour : c'est le jour 13. Étape 4 — Conclure : le pic de LH a lieu au jour 13.",
+              "answers": [
+                {
+                  "content": "Au jour 1",
+                  "correct": false
+                },
+                {
+                  "content": "Au jour 7",
+                  "correct": false
+                },
+                {
+                  "content": "Au jour 13",
+                  "correct": true
+                },
+                {
+                  "content": "Au jour 21",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez une femme au cycle de 28 jours, le pic de LH a lieu au jour 13. À quel moment a lieu l'ovulation ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire : le pic de LH est au jour 13. Étape 2 — Rapprocher : l'ovulation a lieu environ un jour (24 à 36 heures) après le début du pic, donc vers le jour 14. Étape 3 — Contrôler par le calcul : jour de l'ovulation = $28 - 14 = 14$, ce qui concorde. Étape 4 — Conclure : l'ovulation a lieu vers le jour 14, juste après le pic de LH.",
+              "answers": [
+                {
+                  "content": "Vers le jour 7, au milieu de la phase folliculaire",
+                  "correct": false
+                },
+                {
+                  "content": "Environ un jour après le pic, vers le jour 14",
+                  "correct": true
+                },
+                {
+                  "content": "Vers le jour 21, au milieu de la phase lutéale",
+                  "correct": false
+                },
+                {
+                  "content": "Vers le jour 28, avec les règles",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'œstradiol atteint son maximum de 100 u.a. au jour 12, alors que la LH vaut encore 10 u.a. ; la LH fait son pic de 60 u.a. au jour 13. Le taux élevé d'œstradiol précède et déclenche le pic de LH : c'est un rétrocontrôle positif.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Lire : œstradiol 55, 80 puis 100 u.a. aux jours 9, 11 et 12 ; LH 6, 8 puis 10 u.a. aux mêmes jours, puis 60 u.a. au jour 13. Étape 2 — Rapprocher : le taux d'œstradiol est élevé, et il reste élevé environ deux jours, avant que la LH ne s'envole. Étape 3 — Déduire : une hormone ovarienne dont la hausse déclenche un pic de LH exerce un rétrocontrôle positif. Étape 4 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À partir du jour 19, la progestérone vaut 20 u.a., l'œstradiol 70 u.a. et la LH reste à 6 u.a. Quelles interprétations sont correctes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Lire : au jour 19, la progestérone est élevée (20 u.a.) et la LH est basse (6 u.a.). Étape 2 — Rapprocher : le jour 19 est après l'ovulation du jour 14, donc en phase lutéale. Étape 3 — Déduire : le corps jaune sécrète la progestérone et des œstrogènes, qui freinent la LH par rétrocontrôle négatif, et l'endomètre est en phase sécrétoire. Étape 4 — Conclure : les deux propositions justes sont « le corps jaune sécrète la progestérone et des œstrogènes » et « la LH reste basse à cause du rétrocontrôle négatif exercé par la progestérone et les œstrogènes ». Un second pic de LH n'a pas lieu car il faudrait un rétrocontrôle positif, qui n'existe qu'avant l'ovulation.",
+              "answers": [
+                {
+                  "content": "Le follicule mûr sécrète beaucoup d'œstradiol et déclenche un second pic de LH",
+                  "correct": false
+                },
+                {
+                  "content": "Le corps jaune sécrète la progestérone et des œstrogènes",
+                  "correct": true
+                },
+                {
+                  "content": "La progestérone provoque un nouveau pic de LH",
+                  "correct": false
+                },
+                {
+                  "content": "La LH reste basse à cause du rétrocontrôle négatif exercé par la progestérone et les œstrogènes",
+                  "correct": true
+                },
+                {
+                  "content": "L'endomètre est en phase proliférative",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Entre les jours 1 et 9, un taux modéré d'œstradiol (de 20 à 55 u.a.) s'accompagne d'une LH basse (autour de 5 u.a.) : c'est un rétrocontrôle ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 1 — Lire : jours 1 à 9, œstradiol de 20 à 55 u.a. et LH autour de 5 u.a. Étape 2 — Rapprocher : la hausse modérée d'œstradiol ne s'accompagne pas d'une hausse de LH ; la LH reste basse. Étape 3 — Déduire : une hormone ovarienne qui garde la LH basse la freine, c'est un rétrocontrôle négatif. Étape 4 — Conclure : négatif. Le rétrocontrôle positif n'apparaît que quand l'œstradiol est élevé et maintenu, autour du jour 13.",
+              "answers": [
+                {
+                  "content": "négatif",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque période d'un cycle de 28 jours à l'état de l'endomètre.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Lire : le jour 1 est le premier jour des règles ; l'ovulation a lieu au jour $28 - 14 = 14$. Étape 2 — Situer chaque période par rapport à l'ovulation. Étape 3 — Déduire : avant l'ovulation, les œstrogènes épaississent l'endomètre ; après, la progestérone le prépare à la nidation. Étape 4 — Conclure : règles, phase proliférative, phase sécrétoire.",
+              "answers": [
+                {
+                  "content": "Jours 1 à 5",
+                  "match": "Règles : la couche superficielle de l'endomètre se détache"
+                },
+                {
+                  "content": "Jours 6 à 14",
+                  "match": "Phase proliférative : l'endomètre s'épaissit sous les œstrogènes"
+                },
+                {
+                  "content": "Jours 15 à 28",
+                  "match": "Phase sécrétoire : dentelle utérine sous la progestérone"
+                }
+              ]
+            },
+            {
+              "content": "Entre les jours 21 et 27, la progestérone passe de 22 à 3 u.a. et l'œstradiol de 75 à 20 u.a. Quelle en est la cause et quelle en est la conséquence ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire : progestérone et œstradiol s'effondrent entre les jours 21 et 27. Étape 2 — Rapprocher : le jour 27 est proche des règles suivantes. Étape 3 — Déduire : la source de ces hormones, le corps jaune, a dégénéré faute de fécondation ; sans leur frein, la FSH remonte. Étape 4 — Conclure : les règles surviennent et un nouveau cycle commence.",
+              "answers": [
+                {
+                  "content": "Le corps jaune dégénère sans fécondation ; la chute des hormones provoque les règles et lève le frein sur l'hypophyse",
+                  "correct": true
+                },
+                {
+                  "content": "Le follicule mûr vient d'éclater ; l'endomètre commence à s'épaissir",
+                  "correct": false
+                },
+                {
+                  "content": "L'hypophyse cesse de sécréter la FSH ; il n'y aura plus de cycle",
+                  "correct": false
+                },
+                {
+                  "content": "Un embryon s'est implanté ; l'endomètre est maintenu",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À l'aide des résultats du laboratoire (jours 11, 12 et 13 : œstradiol 80, 100 puis 90 u.a., LH 8, 10 puis 60 u.a. ; progestérone voisine de 1 à 2 u.a. jusqu'au jour 13), explique comment est déclenché le pic de LH et pourquoi la progestérone n'en est pas la cause.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Cite l'œstradiol élevé et maintenu comme cause du pic de LH",
+                "Nomme le rétrocontrôle positif",
+                "Dit que la progestérone est quasi nulle avant l'ovulation",
+                "Conclut que le pic de LH déclenche l'ovulation"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lire : l'œstradiol atteint 100 u.a. au jour 12 alors que la LH vaut 10 u.a., puis la LH fait un pic de 60 u.a. au jour 13. Étape 2 — Rapprocher : le maximum d'œstradiol sécrété par le follicule mûr précède le pic de LH. Étape 3 — Déduire : un taux élevé d'œstradiol, maintenu environ deux jours, stimule l'hypothalamus et l'hypophyse : c'est un rétrocontrôle positif. Étape 4 — Conclure : le pic de LH déclenche l'ovulation. La progestérone vaut seulement 1 à 2 u.a. jusqu'au jour 13 : elle ne peut pas déclencher un pic qui la précède, et elle ne monte qu'après l'ovulation, avec le corps jaune. Barème : 1 point pour l'œstradiol élevé, 1 point pour le rétrocontrôle positif, 0,5 point pour la progestérone quasi nulle, 0,5 point pour la conclusion.",
+              "answers": [],
+              "starter": "Le follicule mûr sécrète…"
+            }
+          ]
+        },
+        {
+          "title": "Comparer la régulation du testicule et celle de l'ovaire",
+          "statement": "Au laboratoire d'une clinique de Cocody, on compare la régulation des gonades chez un singe mâle et une guenon adultes. Document 1, chez le mâle, taux de LH en u.a. : avant castration 10 ; trois semaines après castration 50 ; chez un castré recevant de la testostérone pendant trois semaines 12. Document 2, chez la femelle, taux de LH en u.a. : avant ovariectomie 8 ; trois semaines après ovariectomie 48 ; chez une ovariectomisée recevant une faible dose d'œstradiol continue 15 ; chez une ovariectomisée recevant une forte dose d'œstradiol pendant deux jours 90. Ces résultats sont donnés par l'énoncé.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Chez un singe mâle, la LH passe de 10 à 50 u.a. après castration. Chez une guenon, la LH passe de 8 à 48 u.a. après ovariectomie. Quelle conclusion commune peut-on tirer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Lire : la LH augmente après l'ablation des gonades dans les deux cas. Étape 2 — Comparer avec la situation normale : 10 contre 50 u.a. chez le mâle, 8 contre 48 u.a. chez la femelle. Étape 3 — Déduire : la suppression de l'organe fait monter la grandeur, donc l'organe la freine. Étape 4 — Conclure : les gonades exercent un rétrocontrôle négatif sur l'hypophyse.",
+              "answers": [
+                {
+                  "content": "Chez le mâle comme chez la femelle, les gonades freinent normalement l'hypophyse",
+                  "correct": true
+                },
+                {
+                  "content": "Chez le mâle comme chez la femelle, les gonades stimulent normalement l'hypophyse",
+                  "correct": false
+                },
+                {
+                  "content": "Les gonades fabriquent la LH",
+                  "correct": false
+                },
+                {
+                  "content": "La LH ne dépend pas des gonades",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Chez la guenon, la LH passe de 8 u.a. avant ovariectomie à 48 u.a. après. Par combien la LH est-elle multipliée ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : Étape 1 — Lire : valeur avant 8 u.a., valeur après 48 u.a. Étape 2 — Calculer le rapport : $48 \\div 8 = 6$. Étape 3 — Conclure : la LH est multipliée par 6 après l'ablation des ovaires, ce qui montre la force du frein exercé normalement par l'ovaire.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Chez la guenon, l'œstradiol peut freiner ou au contraire stimuler la sécrétion de LH, selon son taux et la durée pendant laquelle il reste élevé.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 1 — Lire : faible dose continue, LH 15 u.a., proche du normal ; forte dose pendant deux jours, LH 90 u.a., un pic. Étape 2 — Comparer : la même hormone donne deux effets opposés. Étape 3 — Déduire : le faible taux exerce un rétrocontrôle négatif, le fort taux maintenu un rétrocontrôle positif. Étape 4 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles conclusions les documents permettent-ils de tirer ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 1 — Lire : castré + testostérone, LH 12 u.a. ; ovariectomisée + faible dose d'œstradiol, LH 15 u.a. Étape 2 — Comparer : dans les deux cas, la LH redescend vers sa valeur normale. Étape 3 — Déduire : ces deux hormones freinent la LH, donc rétrocontrôle négatif. Étape 4 — Conclure : les deux propositions justes sont « chez le mâle, la testostérone exerce un rétrocontrôle négatif sur l'hypophyse » et « chez la femelle, une faible dose d'œstradiol exerce un rétrocontrôle négatif ». La forte dose d'œstradiol (LH 90 u.a.) montre que la femelle n'a pas un frein permanent.",
+              "answers": [
+                {
+                  "content": "Chez la femelle, l'œstradiol freine toujours la LH, quelle que soit sa dose",
+                  "correct": false
+                },
+                {
+                  "content": "Chez le mâle, la testostérone exerce un rétrocontrôle négatif sur l'hypophyse",
+                  "correct": true
+                },
+                {
+                  "content": "Les gonades n'ont aucun effet sur la LH",
+                  "correct": false
+                },
+                {
+                  "content": "Chez la femelle, une faible dose d'œstradiol exerce un rétrocontrôle négatif",
+                  "correct": true
+                },
+                {
+                  "content": "Chez le mâle, la testostérone provoque un pic de LH",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque cellule ou structure de la gonade à sa production ou à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 1 — Repérer la gonade : testicule pour Leydig et Sertoli, ovaire pour follicules et corps jaune. Étape 2 — Distinguer l'hormone ou la fonction de chaque structure. Étape 3 — Déduire le lien : Leydig sécrète la testostérone, les follicules l'œstradiol, le corps jaune la progestérone et des œstrogènes. Étape 4 — Conclure : les cellules de Sertoli ne sécrètent pas d'hormone sexuelle, elles soutiennent la spermatogenèse.",
+              "answers": [
+                {
+                  "content": "Cellules de Leydig",
+                  "match": "Sécrètent la testostérone"
+                },
+                {
+                  "content": "Follicules en croissance",
+                  "match": "Sécrètent l'œstradiol"
+                },
+                {
+                  "content": "Corps jaune",
+                  "match": "Sécrète la progestérone et des œstrogènes"
+                },
+                {
+                  "content": "Cellules de Sertoli",
+                  "match": "Soutiennent et nourrissent les cellules de la spermatogenèse"
+                }
+              ]
+            },
+            {
+              "content": "Une maladie détruit les cellules de Leydig d'un homme adulte. Que deviennent les taux de testostérone et de LH ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer : les cellules de Leydig sécrètent la testostérone. Étape 2 — Comparer : sans elles, la testostérone s'effondre. Étape 3 — Déduire : le frein disparaît comme après une castration, donc la LH monte. Étape 4 — Conclure : testostérone basse et LH élevée.",
+              "answers": [
+                {
+                  "content": "La testostérone est basse et la LH est basse",
+                  "correct": false
+                },
+                {
+                  "content": "La testostérone est basse et la LH est élevée",
+                  "correct": true
+                },
+                {
+                  "content": "La testostérone est élevée et la LH est basse",
+                  "correct": false
+                },
+                {
+                  "content": "La testostérone et la LH restent normales",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "En un paragraphe, explique pourquoi la testostérone de l'homme reste à peu près constante alors que les hormones de la femme varient au cours du cycle. Appuie-toi sur les documents et sur tes connaissances.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Chez l'homme : rétrocontrôle négatif seul, taux à peu près constant (1 point)",
+                "Spermatogenèse continue (0,5 point)",
+                "Chez la femme : rétrocontrôle négatif puis positif, pic de LH (1 point)",
+                "Corps jaune qui dégénère, d'où le cycle (0,5 point)",
+                "Cite les hormones : GnRH, LH, FSH, testostérone, œstradiol, progestérone (1 point)"
+              ],
+              "explanation": "Corrigé modèle : Chez l'homme, la testostérone sécrétée par les cellules de Leydig freine l'hypothalamus et l'hypophyse : c'est un rétrocontrôle négatif, comme chez le singe mâle du Document 1 (LH à 50 u.a. après castration, à 12 u.a. avec la testostérone). Ce seul frein, exercé sur la GnRH et la LH (la FSH agissant sur les tubes séminifères), maintient un taux à peu près constant de LH et de testostérone, donc la spermatogenèse est continue. Chez la femme, l'œstradiol exerce d'abord un rétrocontrôle négatif à faible taux (LH 15 u.a. dans le Document 2), mais un taux élevé maintenu environ deux jours exerce un rétrocontrôle positif (LH 90 u.a.) : c'est le pic de LH, qui déclenche l'ovulation. Puis le corps jaune sécrète progestérone et œstrogènes, qui freinent la FSH et la LH, avant de dégénérer : les hormones chutent, d'où le caractère cyclique. Barème : 1 point pour le rétrocontrôle négatif chez l'homme et le taux constant, 0,5 point pour la spermatogenèse continue, 1 point pour le rétrocontrôle négatif puis positif et le pic de LH, 0,5 point pour le corps jaune qui dégénère et le cycle, 1 point pour les hormones nommées (GnRH, LH, FSH, testostérone, œstradiol, progestérone).",
+              "answers": [],
+              "starter": "Chez l'homme, la testostérone…"
             }
           ]
         }
