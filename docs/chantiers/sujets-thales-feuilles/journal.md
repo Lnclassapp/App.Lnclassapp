@@ -5,6 +5,7 @@
 - 2026-10-31 : recette de `prepare-interros-cahier` impossible sur Staging (DRENA vides, ADR-0108) ; le contenu des sujets arrive par import, pas par seed.
 
 - 2026-10-31 (Lot B, Touré) : titre de chaque feuille numéroté (« Prépare interros n°N », « Prépare devoirs n°N ») avec le nom de la notion / du sujet en sous-titre `.ps-subject` (« Ma classe » comprise, N = rang parmi les envois de même type) ; correction de la page de résultat en un bloc `#session_correction` « a. … b. … » sous l'exercice ; « Je m'entraîne » (`practice_checks`) inchangé. UDR-0149 §3 amendé (ajout du 2026-10-31).
+- 2026-10-31 (Lot D, Touré) : une notion porte **un ou deux exercices**, chacun avec des types de questions mélangés. Forme retenue : la clé `exercise` accepte un objet (tous les fichiers v3 existants, inchangés) ou une liste de 1 à 2 objets ; `essential_exercise_count` refuse 0 et 3 ou plus. Thalès : un 2e exercice par notion (6 questions chacun : QCM, vrai ou faux, complète, calcul, 2 réponses justes, calcul ou QCM). ADR-0116 amendé (et renvoi dans ADR-0113 §4.4).
 
 ## Ce qui a dérapé
 
