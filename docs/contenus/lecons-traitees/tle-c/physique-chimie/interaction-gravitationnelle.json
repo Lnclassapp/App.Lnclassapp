@@ -1,0 +1,1503 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Interaction gravitationnelle",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Physique-Chimie",
+      "series_name": "C",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "attraction-mutuelle",
+          "kind": "coordinate_plane",
+          "description": "Deux corps A et B, de centres placés en (−4 ; 0) et (4 ; 0), sont reliés par le segment AB. Deux vecteurs de même longueur, tracés sur la droite AB, représentent les forces d'attraction : celle de B sur A part de A vers B, celle de A sur B part de B vers A. Les deux forces ont même valeur et des sens opposés.",
+          "params": {
+            "xmin": -6,
+            "xmax": 6,
+            "ymin": -3,
+            "ymax": 3,
+            "points": [
+              {
+                "id": "A",
+                "x": -4,
+                "y": 0
+              },
+              {
+                "id": "B",
+                "x": 4,
+                "y": 0
+              }
+            ],
+            "segments": [
+              {
+                "x1": -4,
+                "y1": 0,
+                "x2": 4,
+                "y2": 0
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F(B sur A)",
+                "dx": 3,
+                "dy": 0,
+                "ox": -4,
+                "oy": 0
+              },
+              {
+                "label": "F(A sur B)",
+                "dx": -3,
+                "dy": 0,
+                "ox": 4,
+                "oy": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "g-selon-altitude",
+          "kind": "stat_chart",
+          "description": "Courbe du champ de gravitation terrestre g (en N/kg) en fonction de l'altitude h (en km), de 0 à 20 000 km par pas de 2 000 km. Elle part de 9,8 N/kg à la surface et décroît de plus en plus lentement : 3,70 N/kg à 4 000 km, 1,48 N/kg à 10 000 km, 0,57 N/kg à 20 000 km. Le champ diminue mais ne s'annule jamais.",
+          "params": {
+            "chart": "line",
+            "series": [
+              9.8,
+              5.68,
+              3.7,
+              2.6,
+              1.93,
+              1.48,
+              1.18,
+              0.96,
+              0.79,
+              0.67,
+              0.57
+            ],
+            "labels": [
+              "0",
+              "2000",
+              "4000",
+              "6000",
+              "8000",
+              "10000",
+              "12000",
+              "14000",
+              "16000",
+              "18000",
+              "20000"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "orbite-circulaire",
+          "kind": "coordinate_plane",
+          "description": "La Terre T est au centre (0 ; 0). Un satellite occupe quatre positions successives, S en (4 ; 0), puis (0 ; 4), (−4 ; 0) et (0 ; −4) sur une orbite circulaire de rayon 4. En S, la force F est un vecteur dirigé vers T et la vitesse v un vecteur tangent à l'orbite, perpendiculaire à F. En (0 ; 4), F pointe aussi vers T et v est tangent.",
+          "params": {
+            "xmin": -6,
+            "xmax": 6,
+            "ymin": -6,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "T",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "S",
+                "x": 4,
+                "y": 0
+              },
+              {
+                "id": "S2",
+                "x": 0,
+                "y": 4
+              },
+              {
+                "id": "S3",
+                "x": -4,
+                "y": 0
+              },
+              {
+                "id": "S4",
+                "x": 0,
+                "y": -4
+              }
+            ],
+            "vectors": [
+              {
+                "label": "F",
+                "dx": -2,
+                "dy": 0,
+                "ox": 4,
+                "oy": 0
+              },
+              {
+                "label": "v",
+                "dx": 0,
+                "dy": 2,
+                "ox": 4,
+                "oy": 0
+              },
+              {
+                "label": "F",
+                "dx": 0,
+                "dy": -2,
+                "ox": 0,
+                "oy": 4
+              },
+              {
+                "label": "v",
+                "dx": -2,
+                "dy": 0,
+                "ox": 0,
+                "oy": 4
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "La loi de l'attraction universelle",
+          "remember": "Deux corps A et B, de masses $m_A$ et $m_B$, dont les centres sont distants de $d$, s'attirent. Cette loi est la **loi de Newton de l'attraction universelle** (corps ponctuels ou à répartition sphérique de masse). Les deux forces ont **même droite d'action** (la droite AB), **même valeur** et des **sens opposés** : $\\vec{F}_{A/B} = -\\vec{F}_{B/A}$. Leur valeur est $F = G\\,\\frac{m_A \\times m_B}{d^2}$, avec $F$ en newtons (N), les masses en kilogrammes (kg), $d$ en mètres (m) et la constante de gravitation $G = 6{,}67\\times 10^{-11}\\ \\text{N·m}^2\\text{·kg}^{-2}$. Si une masse double, $F$ double ; si $d$ double, $F$ est divisée par 4.",
+          "method": [
+            "Relever les données et les convertir en unités SI : masses en kg, distance entre les centres en m.",
+            "Écrire la loi : $F = G\\,\\frac{m_A \\times m_B}{d^2}$.",
+            "Calculer l'application numérique et donner le résultat en newtons.",
+            "Représenter les deux forces : même droite AB, sens opposés, même valeur."
+          ],
+          "example": {
+            "statement": "Un satellite de télécommunication de masse $m = 2{,}0\\times 10^{3}$ kg est à $d = 7{,}0\\times 10^{6}$ m du centre de la Terre, de masse $M = 6{,}0\\times 10^{24}$ kg. Calculer la valeur de la force d'attraction de la Terre sur le satellite et dire comment la représenter.",
+            "steps": [
+              "Relever : $M = 6{,}0\\times 10^{24}$ kg, $m = 2{,}0\\times 10^{3}$ kg, $d = 7{,}0\\times 10^{6}$ m ; tout est déjà en unités SI.",
+              "Écrire : $F = G\\,\\frac{M \\times m}{d^2}$.",
+              "Calculer : $F = 6{,}67\\times 10^{-11}\\times\\frac{6{,}0\\times 10^{24}\\times 2{,}0\\times 10^{3}}{(7{,}0\\times 10^{6})^2} \\approx 1{,}6\\times 10^{4}$ N.",
+              "Représenter : la force de la Terre sur le satellite est dirigée vers le centre de la Terre ; la force du satellite sur la Terre a la même valeur $1{,}6\\times 10^{4}$ N, sur la même droite, en sens opposé."
+            ]
+          },
+          "pitfall": "Ne pas oublier de **mettre la distance au carré**, ni de laisser une distance en kilomètres. Contre-exemple : deux corps distants de $d$ puis de $2d$. À $2d$, $F$ est divisée par $2^2 = 4$ et non par 2. Si $F = 80$ N à $d$, alors $F = 20$ N à $2d$ (et non 40 N). Garde aussi en tête que la Terre attire le satellite avec la même valeur que le satellite attire la Terre : la masse la plus grande ne subit pas la plus grande force.",
+          "figure": "attraction-mutuelle",
+          "exercise": {
+            "title": "Calculer et représenter une force d'attraction",
+            "statement": "Dans cet exercice, tu appliques la loi de l'attraction universelle. Utilise G = 6,67×10⁻¹¹ N·m²·kg⁻², et la masse de la Terre M = 5,97×10²⁴ kg quand elle est nécessaire.",
+            "exercise_type": "fixation",
+            "figure": "attraction-mutuelle",
+            "questions": [
+              {
+                "content": "Deux corps de masses $m_A$ et $m_B$, dont les centres sont distants de $d$, s'attirent. Quelle est la valeur de la force d'attraction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : les grandeurs sont deux masses et une distance. Étape 2 — Écrire la loi : la force est proportionnelle au produit des masses et inversement proportionnelle au carré de la distance, donc $F = G\\,\\frac{m_A \\times m_B}{d^2}$. L'expression avec $d$ seul oublie le carré, celle avec $m_A + m_B$ remplace le produit par une somme, celle où $G$ est au dénominateur inverse la constante.",
+                "answers": [
+                  {
+                    "content": "$F = G\\,\\frac{m_A \\times m_B}{d^2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$F = G\\,\\frac{m_A \\times m_B}{d}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$F = G\\,\\frac{m_A + m_B}{d^2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$F = \\frac{m_A \\times m_B}{G\\,d^2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La Terre attire la Lune avec une force plus grande que celle avec laquelle la Lune attire la Terre, parce que la Terre est plus massive.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Relever : deux corps, la Terre et la Lune. Étape 2 — Écrire la loi : $F = G\\,\\frac{m_T \\times m_L}{d^2}$ ; l'expression est symétrique en $m_T$ et $m_L$. Étape 4 — Représenter : les deux forces ont même droite, même valeur et des sens opposés. L'affirmation est donc fausse : la masse la plus grande ne subit pas une force plus grande.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux boules de masses 5,0 kg et 20 kg ont leurs centres distants de 0,50 m. Calcule la valeur de la force d'attraction entre elles, en nanonewtons (1 nN = 10⁻⁹ N). On donne G = 6,67×10⁻¹¹ N·m²·kg⁻².",
+                "question_type": "numeric",
+                "unit": "nN",
+                "tolerance": 0.1,
+                "explanation": "Étape 1 — Relever : $m_A = 5{,}0$ kg, $m_B = 20$ kg, $d = 0{,}50$ m, déjà en unités SI. Étape 2 — Écrire : $F = G\\,\\frac{m_A \\times m_B}{d^2}$. Étape 3 — Calculer : $F = 6{,}67\\times 10^{-11}\\times\\frac{5{,}0\\times 20}{0{,}50^2} = 6{,}67\\times 10^{-11}\\times 400 = 2{,}67\\times 10^{-8}$ N, soit 26,7 nN. Cette force est minuscule : c'est pourquoi on ne sent pas l'attraction entre deux objets du quotidien.",
+                "answers": [
+                  {
+                    "content": "26.7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite de télévision de masse 3,0×10³ kg est à 4,2×10⁷ m du centre de la Terre (M = 5,97×10²⁴ kg). Calcule la valeur de la force d'attraction de la Terre sur le satellite. On donne G = 6,67×10⁻¹¹ N·m²·kg⁻².",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 1,
+                "explanation": "Étape 1 — Relever : $M = 5{,}97\\times 10^{24}$ kg, $m = 3{,}0\\times 10^{3}$ kg, $d = 4{,}2\\times 10^{7}$ m. Étape 2 — Écrire : $F = G\\,\\frac{M \\times m}{d^2}$. Étape 3 — Calculer : numérateur $6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}\\times 3{,}0\\times 10^{3} \\approx 1{,}195\\times 10^{18}$ ; dénominateur $(4{,}2\\times 10^{7})^2 = 1{,}764\\times 10^{15}$ ; donc $F \\approx 677$ N.",
+                "answers": [
+                  {
+                    "content": "677",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La distance entre deux corps est doublée, leurs masses restent les mêmes. Que devient la valeur de la force d'attraction ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire la loi : $F = G\\,\\frac{m_A \\times m_B}{d^2}$. Étape 3 — Calculer avec $d' = 2d$ : $F' = G\\,\\frac{m_A \\times m_B}{(2d)^2} = \\frac{F}{4}$. L'erreur la plus tentante, diviser par 2, oublie que la distance est élevée au carré.",
+                "answers": [
+                  {
+                    "content": "Elle est divisée par 2",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est multipliée par 2",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est divisée par 4",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est multipliée par 4",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque changement à son effet sur la valeur de la force d'attraction.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Écrire la loi : $F = G\\,\\frac{m_A \\times m_B}{d^2}$. Étape 3 — Calculer l'effet : $m_A \\to 2m_A$ donne $\\times 2$ ; $d \\to 2d$ donne $\\div 4$ ; $d \\to 3d$ donne $\\div 9$ ; $m_A \\to 2m_A$ et $m_B \\to 2m_B$ donnent $2\\times 2 = \\times 4$.",
+                "answers": [
+                  {
+                    "content": "La masse d'un corps est doublée",
+                    "match": "F est multipliée par 2"
+                  },
+                  {
+                    "content": "La distance est doublée",
+                    "match": "F est divisée par 4"
+                  },
+                  {
+                    "content": "La distance est triplée",
+                    "match": "F est divisée par 9"
+                  },
+                  {
+                    "content": "Les deux masses sont doublées",
+                    "match": "F est multipliée par 4"
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces propositions sur les deux forces d'attraction entre la Terre et un satellite, choisis les deux exactes.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Représenter : les deux forces ont même droite d'action, même valeur et des sens opposés. Elles s'appliquent à deux corps différents (la Terre et le satellite) : elles ne s'annulent pas, car on ne les ajoute que si elles agissent sur le même corps. Le satellite subit donc bien la force de la Terre.",
+                "answers": [
+                  {
+                    "content": "Elles ont la même valeur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles ont le même sens",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles s'annulent, donc le satellite ne subit aucune force",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles ont des sens opposés",
+                    "correct": true
+                  },
+                  {
+                    "content": "La force sur le plus massif des deux corps est la plus grande",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à manipuler la loi de l'attraction universelle.",
+            "questions": [
+              {
+                "content": "Si la distance entre deux corps est multipliée par 3, la valeur de la force d'attraction est ___ par ___.",
+                "question_type": "select",
+                "hint": "La distance est au carré : calcule 3².",
+                "explanation": "Étape 2 — Écrire : $F = G\\,\\frac{m_A m_B}{d^2}$. Étape 3 — Calculer : avec $d' = 3d$, $F' = \\frac{F}{3^2} = \\frac{F}{9}$. La force est divisée par 9.",
+                "answers": [
+                  {
+                    "content": "divisée",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "multipliée",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "9",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "3",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "6",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Avant de calculer F, il faut convertir la distance entre les centres en ___ (unité SI de longueur).",
+                "question_type": "fill_blank",
+                "hint": "L'unité SI de longueur commence par la lettre m.",
+                "explanation": "Étape 1 — Relever et convertir : la constante $G$ s'exprime avec des mètres et des kilogrammes. Une distance de 7 000 km doit s'écrire $7{,}0\\times 10^{6}$ m avant l'application numérique.",
+                "answers": [
+                  {
+                    "content": "mètres",
+                    "correct": true
+                  },
+                  {
+                    "content": "mètre",
+                    "correct": true
+                  },
+                  {
+                    "content": "m",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite météorologique de masse 500 kg est à 2,0×10⁷ m du centre de la Terre (M = 5,97×10²⁴ kg). Calcule la valeur de la force d'attraction de la Terre sur lui. On donne G = 6,67×10⁻¹¹ N·m²·kg⁻².",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 1,
+                "hint": "N'oublie pas de mettre d au carré : (2,0×10⁷)² = 4,0×10¹⁴.",
+                "explanation": "Étape 1 — Relever : $M = 5{,}97\\times 10^{24}$ kg, $m = 500$ kg, $d = 2{,}0\\times 10^{7}$ m. Étape 2 — Écrire : $F = G\\,\\frac{M m}{d^2}$. Étape 3 — Calculer : $F = 6{,}67\\times 10^{-11}\\times\\frac{5{,}97\\times 10^{24}\\times 500}{(2{,}0\\times 10^{7})^2} \\approx 498$ N.",
+                "answers": [
+                  {
+                    "content": "497.7",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le champ de gravitation",
+          "remember": "Un astre de masse $M$ et de rayon $R$ crée en tout point P, à la distance $r$ de son centre, un **champ de gravitation** $\\vec{g}$ (noté aussi $\\vec{G}$) : une masse $m$ placée en P subit la force $\\vec{F} = m\\,\\vec{g}$. Le champ est **radial** et **centripète** (dirigé vers le centre de l'astre) ; sa valeur est $g = \\frac{G\\,M}{r^2}$, en N/kg. À la surface, $r = R$ et $g_0 = \\frac{G\\,M}{R^2}$ (pour la Terre, $g_0 = 9{,}8$ N/kg). À l'altitude $h$, $r = R + h$ et $g = \\frac{G\\,M}{(R+h)^2} = g_0\\,\\frac{R^2}{(R+h)^2}$. Le champ diminue quand l'altitude augmente, mais ne s'annule jamais.",
+          "method": [
+            "Repérer l'astre, sa masse $M$ (ou son champ $g_0$ en surface) et son rayon $R$, puis convertir en unités SI.",
+            "Calculer la distance au centre : $r = R + h$, avec $h$ l'altitude.",
+            "Écrire $g = \\frac{G\\,M}{r^2}$ ou $g = g_0\\,\\frac{R^2}{(R+h)^2}$, puis faire l'application numérique en N/kg.",
+            "Conclure en donnant $g$, et si besoin la force $F = m\\,g$ exercée sur une masse $m$."
+          ],
+          "example": {
+            "statement": "Un satellite de télécommunication de masse 500 kg est à l'altitude $h = 1\\,600$ km. On prend $R = 6\\,400$ km et $g_0 = 9{,}8$ N/kg. Calculer le champ de gravitation à cette altitude et la force subie par le satellite.",
+            "steps": [
+              "Repérer : l'astre est la Terre, $R = 6\\,400$ km $= 6{,}4\\times 10^{6}$ m, $g_0 = 9{,}8$ N/kg, $h = 1{,}6\\times 10^{6}$ m, $m = 500$ kg.",
+              "Calculer : $r = R + h = 6\\,400 + 1\\,600 = 8\\,000$ km $= 8{,}0\\times 10^{6}$ m.",
+              "Écrire : $g = g_0\\,\\frac{R^2}{r^2} = 9{,}8\\times\\left(\\frac{6\\,400}{8\\,000}\\right)^2 = 9{,}8\\times 0{,}64 = 6{,}27$ N/kg.",
+              "Conclure : $g \\approx 6{,}27$ N/kg, dirigé vers le centre de la Terre, et $F = m\\,g = 500\\times 6{,}27 \\approx 3{,}1\\times 10^{3}$ N."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'altitude $h$ avec la distance $r$ au centre de la Terre : $r = R + h$. Contre-exemple : à l'altitude $h = 6\\,400$ km $= R$, un élève qui prend $r = h$ trouve $g = g_0 \\times \\left(\\frac{6\\,400}{6\\,400}\\right)^2 = 9{,}8$ N/kg, comme au sol, ce qui est absurde. En réalité $r = 12\\,800$ km, donc $g = 9{,}8 \\times \\frac{1}{4} = 2{,}45$ N/kg. Calcule d'abord $r$.",
+          "figure": "g-selon-altitude",
+          "exercise": {
+            "title": "Calculer un champ de gravitation à une altitude donnée",
+            "statement": "Dans cet exercice, tu calcules le champ de gravitation d'un astre en surface et en altitude. Quand rien d'autre n'est dit, prends R = 6 400 km pour la Terre et g₀ = 9,8 N/kg.",
+            "exercise_type": "fixation",
+            "figure": "g-selon-altitude",
+            "questions": [
+              {
+                "content": "Calcule le champ de gravitation terrestre à l'altitude h = 3 200 km (R = 6 400 km, g₀ = 9,8 N/kg).",
+                "question_type": "numeric",
+                "unit": "N/kg",
+                "tolerance": 0.02,
+                "explanation": "Étape 1 — Repérer : $R = 6\\,400$ km, $h = 3\\,200$ km, $g_0 = 9{,}8$ N/kg. Étape 2 — Calculer : $r = R + h = 9\\,600$ km. Étape 3 — Écrire : $g = g_0\\,\\frac{R^2}{r^2} = 9{,}8\\times\\left(\\frac{6\\,400}{9\\,600}\\right)^2 = 9{,}8\\times\\frac{4}{9} \\approx 4{,}36$ N/kg. Étape 4 — Conclure : $g \\approx 4{,}36$ N/kg.",
+                "answers": [
+                  {
+                    "content": "4.36",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Lune a pour masse $M_L = 7{,}35\\times 10^{22}$ kg et pour rayon $R_L = 1{,}74\\times 10^{6}$ m. Calcule le champ de gravitation à sa surface, avec G = 6,67×10⁻¹¹ N·m²·kg⁻².",
+                "question_type": "numeric",
+                "unit": "N/kg",
+                "tolerance": 0.01,
+                "explanation": "Étape 1 — Repérer : l'astre est la Lune, $M_L = 7{,}35\\times 10^{22}$ kg et $R_L = 1{,}74\\times 10^{6}$ m (soit $h = 0$). Étape 2 — Calculer : $r = R_L = 1{,}74\\times 10^{6}$ m. Étape 3 — Écrire : $g = \\frac{G\\,M_L}{R_L^2} = \\frac{6{,}67\\times 10^{-11}\\times 7{,}35\\times 10^{22}}{(1{,}74\\times 10^{6})^2} \\approx 1{,}62$ N/kg. Étape 4 — Conclure : $g_L \\approx 1{,}62$ N/kg, environ six fois moins que sur Terre.",
+                "answers": [
+                  {
+                    "content": "1.62",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la direction et le sens du champ de gravitation de la Terre en un point P situé au-dessus de l'Atlantique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire : le champ de gravitation est radial : sa direction est celle de la droite qui joint P au centre de la Terre, et il est centripète, c'est-à-dire orienté vers ce centre. Étape 4 — Conclure : la force $\\vec{F} = m\\,\\vec{g}$ a le même sens que $\\vec{g}$.",
+                "answers": [
+                  {
+                    "content": "Tangent à la surface de la Terre, vers l'est",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dirigé vers le centre de la Terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dirigé à l'opposé du centre de la Terre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dirigé vers le pôle Nord",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "À l'altitude h = R (c'est-à-dire à une hauteur égale au rayon de la Terre), le champ de gravitation est égal à g₀ divisé par 2.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer : $r = R + h = 2R$. Étape 3 — Écrire : $g = g_0\\,\\frac{R^2}{(2R)^2} = \\frac{g_0}{4}$. L'affirmation est fausse : le champ est divisé par 4 et non par 2, car la distance au centre est doublée et elle intervient au carré.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite de masse 800 kg est à l'altitude h = 3 200 km (R = 6 400 km, g₀ = 9,8 N/kg). Calcule la valeur de la force qu'exerce la Terre sur lui.",
+                "question_type": "numeric",
+                "unit": "N",
+                "tolerance": 5,
+                "explanation": "Étape 1 — Repérer : $m = 800$ kg, $R = 6\\,400$ km, $h = 3\\,200$ km. Étape 2 — Calculer : $r = 9\\,600$ km. Étape 3 — Écrire : $g = 9{,}8\\times\\left(\\frac{6\\,400}{9\\,600}\\right)^2 \\approx 4{,}356$ N/kg. Étape 4 — Conclure : $F = m\\,g = 800\\times 4{,}356 \\approx 3\\,484$ N.",
+                "answers": [
+                  {
+                    "content": "3484",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "À quelle altitude h le champ de gravitation terrestre vaut-il $\\frac{g_0}{4}$ ? (R est le rayon de la Terre.)",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire : $g = g_0\\,\\frac{R^2}{(R+h)^2} = \\frac{g_0}{4}$ donne $(R+h)^2 = 4R^2$, donc $R + h = 2R$. Étape 2 — Calculer : $h = R$. L'erreur $h = 2R$ vient de la confusion entre altitude et distance au centre : $r = 2R$ correspond à $h = R$.",
+                "answers": [
+                  {
+                    "content": "$h = \\frac{R}{2}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$h = 2R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$h = 4R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$h = R$",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à utiliser le champ de gravitation de la Terre.",
+            "questions": [
+              {
+                "content": "Le champ de gravitation est dirigé ___ le centre de l'astre et s'exprime en ___.",
+                "question_type": "select",
+                "hint": "Regarde la relation F = m·g : quelle unité donne g = F/m ?",
+                "explanation": "Étape 3 — Écrire : le champ $\\vec{g}$ est centripète, donc dirigé vers le centre de l'astre. Comme $F = m\\,g$, $g = F/m$ s'exprime en newtons par kilogramme (N/kg).",
+                "answers": [
+                  {
+                    "content": "vers",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "à l'opposé de",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "N/kg",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "N·kg",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "m/s",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Calcule le champ de gravitation terrestre à l'altitude h = 12 800 km (R = 6 400 km, g₀ = 9,8 N/kg).",
+                "question_type": "numeric",
+                "unit": "N/kg",
+                "tolerance": 0.01,
+                "hint": "Compare r à R : r vaut combien de fois R ?",
+                "explanation": "Étape 1 — Repérer : $R = 6\\,400$ km et $h = 12\\,800$ km. Étape 2 — Calculer : $r = R + h = 19\\,200$ km, soit $3R$. Étape 3 — Écrire : $g = 9{,}8\\times\\left(\\frac{6\\,400}{19\\,200}\\right)^2 = \\frac{9{,}8}{9} \\approx 1{,}09$ N/kg.",
+                "answers": [
+                  {
+                    "content": "1.09",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite est à l'altitude h. Quelle distance utilise-t-on dans l'expression $g = \\frac{G\\,M}{r^2}$ ?",
+                "question_type": "single_choice",
+                "hint": "Le champ se calcule à partir du centre de la Terre, pas de sa surface.",
+                "explanation": "Étape 2 — Calculer : le champ se mesure à partir du centre de l'astre, donc $r = R + h$ : le rayon de l'astre plus l'altitude au-dessus de sa surface.",
+                "answers": [
+                  {
+                    "content": "$r = h$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$r = R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$r = R + h$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$r = R - h$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le mouvement circulaire d'un satellite",
+          "remember": "On étudie un satellite de masse $m$ en orbite circulaire de rayon $r = R + h$ autour de la Terre (masse $M$) dans le **référentiel géocentrique** : son origine est le centre de la Terre, ses axes pointent vers des étoiles lointaines supposées fixes ; on le considère comme galiléen. La seule force est la gravitation : $\\vec{F} = m\\,\\vec{g}$. La deuxième loi de Newton $\\vec{F} = m\\,\\vec{a}$ donne $\\vec{a} = \\vec{g}$ : l'accélération est **centripète**, sa composante tangentielle est nulle, donc la vitesse est constante : le mouvement est **circulaire uniforme**. Avec $a = \\frac{v^2}{r}$ et $a = \\frac{G\\,M}{r^2}$ : $v = \\sqrt{\\frac{G\\,M}{r}}$ ; la **période** est $T = \\frac{2\\pi\\,r}{v}$. La vitesse ne dépend pas de la masse du satellite.",
+          "method": [
+            "Préciser le référentiel géocentrique et le système {satellite} ; faire le bilan des forces : seule la gravitation s'exerce.",
+            "Appliquer la deuxième loi de Newton $\\vec{F} = m\\,\\vec{a}$ : $\\vec{a} = \\vec{g}$, centripète, de valeur $\\frac{G\\,M}{r^2}$.",
+            "Projeter sur la tangente et la normale : $a_t = 0$ donc $v$ est constante, et $a_n = \\frac{v^2}{r}$.",
+            "Exprimer la vitesse $v = \\sqrt{\\frac{G\\,M}{r}}$ et la période $T = \\frac{2\\pi\\,r}{v}$.",
+            "Faire l'application numérique en unités SI ($r$ en m) et conclure."
+          ],
+          "example": {
+            "statement": "Un satellite météorologique est à l'altitude $h = 800$ km. On prend $R = 6\\,400$ km, $M = 6{,}0\\times 10^{24}$ kg et $G = 6{,}67\\times 10^{-11}$ SI. Calculer sa vitesse et sa période.",
+            "steps": [
+              "Préciser : référentiel géocentrique, système {satellite} ; la seule force est la gravitation de la Terre.",
+              "Appliquer : $\\vec{F} = m\\,\\vec{a}$ avec $\\vec{F} = m\\,\\vec{g}$, donc $\\vec{a} = \\vec{g}$, centripète, de valeur $\\frac{G\\,M}{r^2}$.",
+              "Projeter : $a_t = 0$ donc la vitesse est constante (mouvement uniforme) et $a_n = \\frac{v^2}{r} = \\frac{G\\,M}{r^2}$.",
+              "Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$ et $T = \\frac{2\\pi\\,r}{v}$, avec $r = 6\\,400 + 800 = 7\\,200$ km $= 7{,}2\\times 10^{6}$ m.",
+              "Faire l'application numérique : $v = \\sqrt{\\frac{6{,}67\\times 10^{-11}\\times 6{,}0\\times 10^{24}}{7{,}2\\times 10^{6}}} \\approx 7{,}46\\times 10^{3}$ m/s et $T = \\frac{2\\pi\\times 7{,}2\\times 10^{6}}{7{,}46\\times 10^{3}} \\approx 6{,}07\\times 10^{3}$ s, soit environ 1 h 41 min."
+            ]
+          },
+          "pitfall": "Ne pas croire que la vitesse dépend de la masse du satellite, ni qu'un satellite plus haut va plus vite. Contre-exemple : à $r = 7{,}2\\times 10^{6}$ m, un satellite de 100 kg et un de 1 000 kg ont la même vitesse $7{,}46\\times 10^{3}$ m/s, car $m$ disparaît de $v = \\sqrt{\\frac{G\\,M}{r}}$. À $r = 4{,}2\\times 10^{7}$ m, $v \\approx 3{,}09\\times 10^{3}$ m/s : plus l'orbite est haute, plus le satellite est lent.",
+          "figure": "orbite-circulaire",
+          "exercise": {
+            "title": "Étudier le mouvement circulaire d'un satellite",
+            "statement": "Dans cet exercice, tu suis la méthode pour étudier un satellite en orbite circulaire autour de la Terre, dans le référentiel géocentrique. Utilise G = 6,67×10⁻¹¹ N·m²·kg⁻², M = 5,97×10²⁴ kg et R = 6 370 km.",
+            "exercise_type": "fixation",
+            "figure": "orbite-circulaire",
+            "questions": [
+              {
+                "content": "Un satellite décrit une orbite circulaire de rayon r autour de la Terre de masse M. Quelle est l'expression de sa vitesse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Appliquer la deuxième loi de Newton : $a = \\frac{G\\,M}{r^2}$. Étape 3 — Projeter : $a_n = \\frac{v^2}{r}$, donc $\\frac{v^2}{r} = \\frac{G\\,M}{r^2}$. Étape 4 — Exprimer : $v^2 = \\frac{G\\,M}{r}$ et $v = \\sqrt{\\frac{G\\,M}{r}}$. La proposition $\\sqrt{\\frac{G\\,M}{r^2}}$ correspond à $\\sqrt{g}$ : ce n'est pas une vitesse.",
+                "answers": [
+                  {
+                    "content": "$v = \\frac{G\\,M}{r}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$v = \\sqrt{\\frac{G\\,M}{r^2}}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$v = \\sqrt{\\frac{G\\,M}{r}}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$v = \\frac{G\\,M}{r^2}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite d'observation est à l'altitude h = 600 km (R = 6 370 km). Calcule sa vitesse, en km/s.",
+                "question_type": "numeric",
+                "unit": "km/s",
+                "tolerance": 0.02,
+                "explanation": "Étape 1 — Préciser : référentiel géocentrique, seule force : la gravitation. Étape 4 — Exprimer : $r = R + h = 6\\,970$ km $= 6{,}97\\times 10^{6}$ m et $v = \\sqrt{\\frac{G\\,M}{r}}$. Étape 5 — Faire l'application numérique : $v = \\sqrt{\\frac{6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}}{6{,}97\\times 10^{6}}} \\approx 7{,}56\\times 10^{3}$ m/s, soit 7,56 km/s.",
+                "answers": [
+                  {
+                    "content": "7.56",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour le même satellite (h = 600 km, R = 6 370 km), calcule sa période de révolution, en minutes.",
+                "question_type": "numeric",
+                "unit": "min",
+                "tolerance": 0.3,
+                "explanation": "Étape 4 — Exprimer : $T = \\frac{2\\pi\\,r}{v}$ avec $r = 6{,}97\\times 10^{6}$ m et $v \\approx 7{,}56\\times 10^{3}$ m/s. Étape 5 — Faire l'application numérique : $T = \\frac{2\\pi\\times 6{,}97\\times 10^{6}}{7{,}56\\times 10^{3}} \\approx 5{,}79\\times 10^{3}$ s, soit $\\frac{5\\,794}{60} \\approx 96{,}6$ min.",
+                "answers": [
+                  {
+                    "content": "96.6",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La vitesse d'un satellite en orbite circulaire autour de la Terre dépend de sa masse : un satellite lourd va plus vite qu'un satellite léger sur la même orbite.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Projeter : $\\frac{v^2}{r} = \\frac{G\\,M}{r^2}$ car la masse $m$ du satellite se simplifie dans $m\\,a = m\\,g$. Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$ ne contient pas $m$. L'affirmation est fausse : à même rayon, tous les satellites ont la même vitesse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux satellites tournent autour de la Terre sur des orbites circulaires de rayons $r_A$ et $r_B = 4\\,r_A$. Que vaut le rapport $\\frac{v_B}{v_A}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$. Étape 5 — Conclure : $\\frac{v_B}{v_A} = \\sqrt{\\frac{r_A}{r_B}} = \\sqrt{\\frac{1}{4}} = \\frac{1}{2}$. L'erreur $\\frac{1}{4}$ oublie la racine carrée, l'erreur 2 inverse le rapport : le satellite le plus éloigné est le plus lent.",
+                "answers": [
+                  {
+                    "content": "$\\frac{1}{4}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{1}{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "2",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{1}{16}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour étudier le mouvement d'un satellite en orbite circulaire.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Préciser le référentiel et les forces. Étape 2 — Appliquer $\\vec{F} = m\\,\\vec{a}$. Étape 3 — Projeter pour montrer $a_t = 0$ et écrire $a_n = \\frac{v^2}{r}$. Étape 4 — Exprimer $v$ et $T$. Étape 5 — Faire l'application numérique. On ne peut pas écrire $v$ avant d'avoir projeté l'accélération.",
+                "answers": [
+                  {
+                    "content": "Préciser le référentiel géocentrique et faire le bilan des forces"
+                  },
+                  {
+                    "content": "Appliquer la deuxième loi de Newton : l'accélération est centripète"
+                  },
+                  {
+                    "content": "Projeter sur la tangente et la normale pour montrer que le mouvement est uniforme"
+                  },
+                  {
+                    "content": "Exprimer la vitesse et la période"
+                  },
+                  {
+                    "content": "Faire l'application numérique en unités SI"
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux caractéristiques du mouvement d'un satellite en orbite circulaire autour de la Terre, dans le référentiel géocentrique ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Appliquer la deuxième loi de Newton : la force est dirigée vers le centre de la Terre, donc l'accélération n'est pas nulle. Étape 3 — Projeter : $a_t = 0$, donc la valeur de la vitesse est constante, mais le vecteur vitesse change de direction à chaque instant, donc il n'est pas constant. La trajectoire est un cercle centré sur la Terre.",
+                "answers": [
+                  {
+                    "content": "La trajectoire est un cercle de centre le centre de la Terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le vecteur vitesse reste constant",
+                    "correct": false
+                  },
+                  {
+                    "content": "La force est tangente à la trajectoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "La valeur de la vitesse est constante",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'accélération est nulle",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur le mouvement circulaire d'un satellite.",
+            "questions": [
+              {
+                "content": "Le référentiel adapté à l'étude d'un satellite de la Terre est le référentiel ___.",
+                "question_type": "fill_blank",
+                "hint": "Son nom vient du grec « géo » : la Terre.",
+                "explanation": "Étape 1 — Préciser le référentiel : l'origine est le centre de la Terre et les axes pointent vers des étoiles lointaines fixes : c'est le référentiel géocentrique, supposé galiléen pour la durée de l'étude.",
+                "answers": [
+                  {
+                    "content": "géocentrique",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite en orbite circulaire a un mouvement ___ ; son accélération est dirigée vers ___.",
+                "question_type": "select",
+                "hint": "L'accélération a le même sens que la force de gravitation.",
+                "explanation": "Étape 2 — Appliquer la deuxième loi de Newton : $\\vec{a} = \\vec{g}$, dirigée vers le centre de la Terre. Étape 3 — Projeter : $a_t = 0$, donc la valeur de la vitesse est constante : le mouvement est uniforme.",
+                "answers": [
+                  {
+                    "content": "uniforme",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "accéléré",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "ralenti",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "le centre de la Terre",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "l'avant du satellite",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "l'extérieur de l'orbite",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite de masse quelconque est à r = 8,0×10⁶ m du centre de la Terre (M = 6,0×10²⁴ kg, G = 6,67×10⁻¹¹ SI). Calcule sa vitesse, en km/s.",
+                "question_type": "numeric",
+                "unit": "km/s",
+                "tolerance": 0.02,
+                "hint": "Calcule d'abord G×M, divise par r, puis prends la racine carrée.",
+                "explanation": "Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$. Étape 5 — Faire l'application numérique : $v = \\sqrt{\\frac{6{,}67\\times 10^{-11}\\times 6{,}0\\times 10^{24}}{8{,}0\\times 10^{6}}} = \\sqrt{5{,}0\\times 10^{7}} \\approx 7{,}07\\times 10^{3}$ m/s, soit 7,07 km/s.",
+                "answers": [
+                  {
+                    "content": "7.07",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le satellite géostationnaire et la troisième loi de Kepler",
+          "remember": "Un satellite **géostationnaire** reste immobile pour un observateur terrestre. Il faut trois conditions : l'orbite est **circulaire**, dans le **plan équatorial**, parcourue **dans le sens de rotation de la Terre** ; la période est égale à la **période de rotation sidérale** de la Terre, $T = 86\\,164$ s (23 h 56 min 4 s). Pour une orbite circulaire, $T = \\frac{2\\pi\\,r}{v}$ et $v^2 = \\frac{G\\,M}{r}$ donnent la **troisième loi de Kepler** : $\\frac{T^2}{r^3} = \\frac{4\\pi^2}{G\\,M}$, même valeur pour tous les satellites d'un même astre. Pour la Terre, on trouve $r \\approx 4{,}215\\times 10^{7}$ m, soit une altitude $h = r - R \\approx 3{,}58\\times 10^{4}$ km.",
+          "method": [
+            "Écrire la condition du problème : $T = 86\\,164$ s pour un satellite géostationnaire, ou deux orbites autour du même astre pour comparer.",
+            "Écrire la troisième loi de Kepler : $\\frac{T^2}{r^3} = \\frac{4\\pi^2}{G\\,M}$.",
+            "Isoler l'inconnue : $r = \\left(\\frac{G\\,M\\,T^2}{4\\pi^2}\\right)^{1/3}$, ou $T = 2\\pi\\sqrt{\\frac{r^3}{G\\,M}}$.",
+            "Faire l'application numérique en unités SI ($T$ en s, $r$ en m), puis calculer l'altitude $h = r - R$ si on la demande."
+          ],
+          "example": {
+            "statement": "Un satellite de télévision est géostationnaire. Calculer le rayon de son orbite et son altitude. On donne $G = 6{,}67\\times 10^{-11}$ SI, $M = 5{,}97\\times 10^{24}$ kg, $R = 6{,}37\\times 10^{6}$ m et $T = 86\\,164$ s.",
+            "steps": [
+              "Écrire la condition : le satellite est géostationnaire, donc sa période est la période sidérale $T = 86\\,164$ s, sur une orbite circulaire équatoriale.",
+              "Écrire la loi : $\\frac{T^2}{r^3} = \\frac{4\\pi^2}{G\\,M}$.",
+              "Isoler : $r^3 = \\frac{G\\,M\\,T^2}{4\\pi^2}$, donc $r = \\left(\\frac{G\\,M\\,T^2}{4\\pi^2}\\right)^{1/3}$.",
+              "Faire l'application numérique : $r^3 = \\frac{6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}\\times 86\\,164^2}{4\\pi^2} \\approx 7{,}49\\times 10^{22}$ m³, donc $r \\approx 4{,}215\\times 10^{7}$ m ; altitude $h = r - R \\approx 4{,}215\\times 10^{7} - 6{,}37\\times 10^{6} \\approx 3{,}58\\times 10^{7}$ m."
+            ]
+          },
+          "pitfall": "Ne pas confondre le rayon $r$ de l'orbite avec l'altitude $h$. Contre-exemple : $r = 4{,}215\\times 10^{7}$ m est la distance au centre de la Terre. L'altitude, mesurée depuis le sol, est $h = r - R = 4{,}215\\times 10^{7} - 6{,}37\\times 10^{6} = 3{,}58\\times 10^{7}$ m. Écrire que le satellite est à 42 150 km au-dessus de l'équateur est faux : il est à environ 35 800 km. Ne remplace pas non plus $T$ par 24 h : la Terre fait un tour sur elle-même en 86 164 s.",
+          "figure": null,
+          "exercise": {
+            "title": "Étudier un satellite géostationnaire",
+            "statement": "Dans cet exercice, tu appliques la troisième loi de Kepler et les conditions d'un satellite géostationnaire. Utilise G = 6,67×10⁻¹¹ SI, M = 5,97×10²⁴ kg, R = 6 370 km et T = 86 164 s pour la période de rotation sidérale de la Terre.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Choisis les trois conditions que doit remplir un satellite géostationnaire.",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Écrire la condition du problème : un satellite immobile pour un observateur terrestre tourne avec la Terre, donc dans le même sens et avec la période sidérale $T = 86\\,164$ s, sur une orbite circulaire équatoriale. Une orbite polaire fait défiler la Terre sous le satellite ; à 400 km d'altitude, la période est d'environ 1 h 33 min, et la vitesse de 8 km/s correspond à une orbite basse.",
+                "answers": [
+                  {
+                    "content": "Son orbite est circulaire et située dans le plan équatorial",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa période est égale à la période de rotation sidérale de la Terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son altitude est de 400 km",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il tourne dans le même sens que la Terre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son orbite passe par les deux pôles",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sa vitesse est de 8 km/s",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule le rayon de l'orbite d'un satellite géostationnaire, en km (G = 6,67×10⁻¹¹ SI, M = 5,97×10²⁴ kg, T = 86 164 s).",
+                "question_type": "numeric",
+                "unit": "km",
+                "tolerance": 20,
+                "explanation": "Étape 1 — Écrire la condition : $T = 86\\,164$ s. Étape 2 — Écrire la loi : $\\frac{T^2}{r^3} = \\frac{4\\pi^2}{G\\,M}$. Étape 3 — Isoler : $r = \\left(\\frac{G\\,M\\,T^2}{4\\pi^2}\\right)^{1/3}$. Étape 4 — Faire l'application numérique : $r^3 \\approx 7{,}49\\times 10^{22}$ m³, donc $r \\approx 4{,}215\\times 10^{7}$ m, soit 42 150 km.",
+                "answers": [
+                  {
+                    "content": "42150",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule l'altitude d'un satellite géostationnaire, en km (rayon de l'orbite 4,215×10⁷ m, rayon de la Terre R = 6 370 km).",
+                "question_type": "numeric",
+                "unit": "km",
+                "tolerance": 20,
+                "explanation": "Étape 1 — Écrire la condition : géostationnaire, donc $r = 4{,}215\\times 10^{7}$ m $= 42\\,150$ km. Étape 4 — Faire l'application numérique et conclure : l'altitude est $h = r - R = 42\\,150 - 6\\,370 = 35\\,780$ km. Ne pas donner 42 150 km, qui est la distance au centre de la Terre.",
+                "answers": [
+                  {
+                    "content": "35780",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule la vitesse d'un satellite géostationnaire sur son orbite, en km/s (rayon de l'orbite r = 4,215×10⁷ m, période T = 86 164 s).",
+                "question_type": "numeric",
+                "unit": "km/s",
+                "tolerance": 0.02,
+                "explanation": "Étape 1 — Écrire la condition : le satellite fait un tour de $2\\pi r$ en $T = 86\\,164$ s. Étape 4 — Faire l'application numérique : $v = \\frac{2\\pi\\,r}{T} = \\frac{2\\pi\\times 4{,}215\\times 10^{7}}{86\\,164} \\approx 3{,}07\\times 10^{3}$ m/s, soit 3,07 km/s. On retrouve $v = \\sqrt{\\frac{G\\,M}{r}}$ avec la même valeur.",
+                "answers": [
+                  {
+                    "content": "3.07",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite géostationnaire peut rester immobile au-dessus d'Abidjan, qui est située au nord de l'équateur.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire la condition : un satellite géostationnaire est sur une orbite dans le plan équatorial. Abidjan est au nord de l'équateur : le satellite ne peut pas être exactement à sa verticale. Pour les émissions de télévision en Côte d'Ivoire, on utilise des satellites géostationnaires situés au-dessus de l'équateur, qui voient le pays sous un angle.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite tourne autour de la Terre sur une orbite circulaire de rayon r = 2,0×10⁷ m. Calcule sa période, en heures (G = 6,67×10⁻¹¹ SI, M = 5,97×10²⁴ kg).",
+                "question_type": "numeric",
+                "unit": "h",
+                "tolerance": 0.05,
+                "explanation": "Étape 2 — Écrire la loi : $\\frac{T^2}{r^3} = \\frac{4\\pi^2}{G\\,M}$. Étape 3 — Isoler : $T = 2\\pi\\sqrt{\\frac{r^3}{G\\,M}}$. Étape 4 — Faire l'application numérique : $T = 2\\pi\\sqrt{\\frac{(2{,}0\\times 10^{7})^3}{6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}}} \\approx 2{,}82\\times 10^{4}$ s, soit $\\frac{28\\,160}{3\\,600} \\approx 7{,}82$ h.",
+                "answers": [
+                  {
+                    "content": "7.82",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux satellites tournent autour de la Terre sur des orbites circulaires de rayons $r_1$ et $r_2 = 2\\,r_1$. Que vaut le rapport $\\frac{T_2}{T_1}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire la loi : $\\frac{T^2}{r^3}$ est la même constante pour les deux satellites. Étape 3 — Isoler : $\\frac{T_2^2}{T_1^2} = \\frac{r_2^3}{r_1^3} = 2^3 = 8$. Donc $\\frac{T_2}{T_1} = \\sqrt{8} = 2\\sqrt{2} \\approx 2{,}83$. L'erreur 2 suppose $T$ proportionnelle à $r$ ; l'erreur 8 oublie la racine carrée.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": false
+                  },
+                  {
+                    "content": "4",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2\\sqrt{2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur les satellites géostationnaires et la loi de Kepler.",
+            "questions": [
+              {
+                "content": "Un satellite géostationnaire a une période égale à la période de rotation ___ de la Terre.",
+                "question_type": "fill_blank",
+                "hint": "L'adjectif vient d'un mot latin qui désigne les étoiles.",
+                "explanation": "Étape 1 — Écrire la condition du problème : la période d'un satellite géostationnaire est la période de rotation sidérale de la Terre, $T = 86\\,164$ s, soit un peu moins de 24 h.",
+                "answers": [
+                  {
+                    "content": "sidérale",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un satellite géostationnaire tourne dans le plan ___, dans le ___ sens que la Terre.",
+                "question_type": "select",
+                "hint": "Pense à un satellite qui reste au-dessus d'un point de l'équateur.",
+                "explanation": "Étape 1 — Écrire la condition du problème : pour rester immobile au-dessus d'un point de l'équateur, le satellite tourne dans le plan équatorial et dans le même sens que la Terre, de l'ouest vers l'est.",
+                "answers": [
+                  {
+                    "content": "équatorial",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "polaire",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "tangent à l'orbite de la Lune",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "même",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "sens contraire",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "aucun",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'écriture de la troisième loi de Kepler pour une orbite circulaire de rayon r autour d'un astre de masse M ?",
+                "question_type": "single_choice",
+                "hint": "T est au carré, r au cube.",
+                "explanation": "Étape 2 — Écrire la loi : à partir de $T = \\frac{2\\pi r}{v}$ et $v^2 = \\frac{G\\,M}{r}$, on obtient $T^2 = \\frac{4\\pi^2 r^2}{v^2} = \\frac{4\\pi^2 r^3}{G\\,M}$, donc $\\frac{T^2}{r^3} = \\frac{4\\pi^2}{G\\,M}$.",
+                "answers": [
+                  {
+                    "content": "$\\frac{T^2}{r^3} = \\frac{4\\pi^2}{G\\,M}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\frac{T}{r} = \\frac{4\\pi^2}{G\\,M}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{T^2}{r^2} = \\frac{4\\pi^2}{G\\,M}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\frac{T^3}{r^2} = \\frac{4\\pi^2}{G\\,M}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un satellite de télévision au-dessus de l'équateur",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Un opérateur de télévision utilise un satellite de masse 1,5×10³ kg placé sur une orbite géostationnaire, à l'altitude h = 3,58×10⁷ m au-dessus de l'équateur. Données : G = 6,67×10⁻¹¹ SI ; masse de la Terre M = 5,97×10²⁴ kg ; rayon de la Terre R = 6 370 km ; g₀ = 9,8 N/kg.",
+          "questions": [
+            {
+              "content": "Un satellite est à l'altitude h = 3,58×10⁷ m = 35 800 km. Calcule la distance r entre son centre et le centre de la Terre, en km (R = 6 370 km).",
+              "question_type": "numeric",
+              "unit": "km",
+              "tolerance": 0.5,
+              "explanation": "Étape 1 — Repérer les données : $R = 6\\,370$ km et $h = 35\\,800$ km. Étape 2 — Calculer la distance au centre : $r = R + h = 6\\,370 + 35\\,800 = 42\\,170$ km $= 4{,}217\\times 10^{7}$ m. L'erreur classique est de prendre $r = h$.",
+              "answers": [
+                {
+                  "content": "42170",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le satellite a pour masse 1,5×10³ kg et se trouve à r = 4,217×10⁷ m du centre de la Terre (M = 5,97×10²⁴ kg, G = 6,67×10⁻¹¹ SI). Calcule la valeur de la force d'attraction exercée par la Terre sur lui.",
+              "question_type": "numeric",
+              "unit": "N",
+              "tolerance": 1,
+              "explanation": "Étape 1 — Relever : $M = 5{,}97\\times 10^{24}$ kg, $m = 1{,}5\\times 10^{3}$ kg, $d = 4{,}217\\times 10^{7}$ m. Étape 2 — Écrire la loi : $F = G\\,\\frac{M\\,m}{d^2}$. Étape 3 — Calculer : $F = 6{,}67\\times 10^{-11}\\times\\frac{5{,}97\\times 10^{24}\\times 1{,}5\\times 10^{3}}{(4{,}217\\times 10^{7})^2} \\approx 3{,}36\\times 10^{2}$ N. Cette force est dirigée vers le centre de la Terre ; le satellite attire la Terre avec la même valeur.",
+              "answers": [
+                {
+                  "content": "335.9",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un satellite de masse 1,5×10³ kg subit de la part de la Terre une force de 335,9 N à 4,217×10⁷ m du centre de la Terre. Calcule la valeur du champ de gravitation terrestre à cette distance, en N/kg.",
+              "question_type": "numeric",
+              "unit": "N/kg",
+              "tolerance": 0.002,
+              "explanation": "Étape 3 — Écrire : le champ de gravitation est lié à la force par $F = m\\,g$, donc $g = \\frac{F}{m} = \\frac{335{,}9}{1{,}5\\times 10^{3}} \\approx 0{,}224$ N/kg. Étape 4 — Conclure : on obtient la même valeur avec $g = \\frac{G\\,M}{r^2} = \\frac{6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}}{(4{,}217\\times 10^{7})^2}$.",
+              "answers": [
+                {
+                  "content": "0.224",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au sol, le champ de gravitation terrestre vaut g₀ = 9,8 N/kg. À l'altitude de 35 800 km, il vaut 0,224 N/kg. Environ combien de fois le champ est-il plus faible en altitude qu'au sol ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $g_0 = 9{,}8$ N/kg et $g = 0{,}224$ N/kg. Étape 2 — Calculer le rapport : $\\frac{g_0}{g} = \\frac{9{,}8}{0{,}224} \\approx 43{,}8$, soit environ 44. On vérifie avec $\\left(\\frac{r}{R}\\right)^2 = \\left(\\frac{42\\,170}{6\\,370}\\right)^2 \\approx 43{,}8$. Le champ diminue, mais il ne s'annule pas : le satellite reste soumis à la gravitation.",
+              "answers": [
+                {
+                  "content": "Environ 2 fois",
+                  "correct": false
+                },
+                {
+                  "content": "Environ 44 fois",
+                  "correct": true
+                },
+                {
+                  "content": "Environ 4 fois",
+                  "correct": false
+                },
+                {
+                  "content": "Environ 1 000 fois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À l'altitude du satellite géostationnaire, le champ de gravitation est nul : le satellite flotte parce qu'il n'est soumis à aucune force.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : à $r = 4{,}217\\times 10^{7}$ m, $g = \\frac{G\\,M}{r^2} \\approx 0{,}224$ N/kg et non pas 0. Étape 2 — Appliquer la deuxième loi de Newton : la gravitation est la seule force et elle donne au satellite l'accélération $a = g$ qui le fait tourner autour de la Terre. Le satellite tombe en permanence vers la Terre, mais sa vitesse l'empêche de s'en rapprocher. L'affirmation est donc fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la vitesse du satellite sur son orbite circulaire de rayon r = 4,217×10⁷ m, en km/s (M = 5,97×10²⁴ kg, G = 6,67×10⁻¹¹ SI).",
+              "question_type": "numeric",
+              "unit": "km/s",
+              "tolerance": 0.02,
+              "explanation": "Étape 1 — Préciser : référentiel géocentrique, seule force : la gravitation. Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$. Étape 5 — Faire l'application numérique : $v = \\sqrt{\\frac{6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}}{4{,}217\\times 10^{7}}} \\approx 3{,}07\\times 10^{3}$ m/s, soit 3,07 km/s.",
+              "answers": [
+                {
+                  "content": "3.07",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un satellite météorologique à orbite basse",
+          "exercise_type": "fixation",
+          "figure": "orbite-circulaire",
+          "statement": "Un satellite météorologique de masse 1,2×10³ kg décrit une orbite circulaire à l'altitude h = 800 km autour de la Terre. Il photographie les nuages au-dessus de l'Afrique de l'Ouest. Données : G = 6,67×10⁻¹¹ SI ; M = 5,97×10²⁴ kg ; R = 6 370 km ; période de rotation sidérale de la Terre : 86 164 s.",
+          "questions": [
+            {
+              "content": "Un satellite est à l'altitude h = 800 km (R = 6 370 km). Calcule le rayon r de son orbite, en km.",
+              "question_type": "numeric",
+              "unit": "km",
+              "tolerance": 0.5,
+              "explanation": "Étape 1 — Repérer : $R = 6\\,370$ km et $h = 800$ km. Étape 2 — Calculer la distance au centre : $r = R + h = 6\\,370 + 800 = 7\\,170$ km $= 7{,}17\\times 10^{6}$ m.",
+              "answers": [
+                {
+                  "content": "7170",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la vitesse du satellite sur son orbite de rayon r = 7,17×10⁶ m, en km/s (M = 5,97×10²⁴ kg, G = 6,67×10⁻¹¹ SI).",
+              "question_type": "numeric",
+              "unit": "km/s",
+              "tolerance": 0.02,
+              "explanation": "Étape 1 — Préciser : référentiel géocentrique, seule force : la gravitation, qui donne un mouvement circulaire uniforme. Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$. Étape 5 — Faire l'application numérique : $v = \\sqrt{\\frac{6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}}{7{,}17\\times 10^{6}}} \\approx 7{,}45\\times 10^{3}$ m/s, soit 7,45 km/s.",
+              "answers": [
+                {
+                  "content": "7.45",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le satellite a une vitesse v ≈ 7,45×10³ m/s sur une orbite de rayon r = 7,17×10⁶ m. Calcule sa période de révolution, en minutes.",
+              "question_type": "numeric",
+              "unit": "min",
+              "tolerance": 0.3,
+              "explanation": "Étape 4 — Exprimer : $T = \\frac{2\\pi\\,r}{v}$. Étape 5 — Faire l'application numérique : $T = \\frac{2\\pi\\times 7{,}17\\times 10^{6}}{7{,}45\\times 10^{3}} \\approx 6{,}05\\times 10^{3}$ s, soit $\\frac{6\\,045}{60} \\approx 100{,}8$ min.",
+              "answers": [
+                {
+                  "content": "100.8",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le satellite a une période de révolution de 6 045 s. Combien de tours complets effectue-t-il en 24 h (86 400 s) ?",
+              "question_type": "numeric",
+              "unit": "tours",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : $T = 6\\,045$ s et la durée est $86\\,400$ s. Étape 2 — Calculer le nombre de tours : $\\frac{86\\,400}{6\\,045} \\approx 14{,}3$. Il effectue donc 14 tours complets en 24 h. Arrondir à 15 serait faux : le quinzième tour n'est pas terminé.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Ce satellite est-il géostationnaire ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire la condition : pour être géostationnaire, la période doit valoir 86 164 s. Ici $T = 6\\,045$ s est bien plus petite, donc le satellite n'est pas immobile par rapport au sol : il fait presque 14 tours pendant que la Terre en fait un. Sa vitesse (7,45 km/s) est plus grande, et non plus faible, que celle d'un satellite géostationnaire (3,07 km/s).",
+              "answers": [
+                {
+                  "content": "Non, car sa période (6 045 s) n'est pas égale à la période de rotation sidérale de la Terre (86 164 s)",
+                  "correct": true
+                },
+                {
+                  "content": "Oui, car il tourne autour de la Terre",
+                  "correct": false
+                },
+                {
+                  "content": "Oui, car sa trajectoire est circulaire",
+                  "correct": false
+                },
+                {
+                  "content": "Non, car sa vitesse est trop faible",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À altitude plus basse, la vitesse d'un satellite autour de la Terre est plus grande : le satellite météorologique à 800 km va plus vite qu'un satellite géostationnaire.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$ diminue quand $r$ augmente. Étape 5 — Conclure : à $r = 7{,}17\\times 10^{6}$ m, $v \\approx 7{,}45$ km/s ; à $r = 4{,}217\\times 10^{7}$ m, $v \\approx 3{,}07$ km/s. L'affirmation est vraie : plus l'orbite est basse, plus le satellite va vite.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les satellites de positionnement GPS",
+          "exercise_type": "evaluation",
+          "figure": "g-selon-altitude",
+          "statement": "Les satellites de positionnement GPS, utilisés dans les téléphones et les gbakas équipés de navigation, circulent sur des orbites circulaires à l'altitude h = 20 200 km. La courbe de l'énoncé montre comment le champ de gravitation terrestre diminue avec l'altitude. Données : G = 6,67×10⁻¹¹ SI ; M = 5,97×10²⁴ kg ; R = 6 370 km ; rayon de l'orbite géostationnaire r_G = 4,215×10⁷ m ; période sidérale T_G = 86 164 s.",
+          "questions": [
+            {
+              "content": "Le champ de gravitation terrestre $g = g_0\\,\\frac{R^2}{(R+h)^2}$ est tracé en fonction de l'altitude h de 0 à 20 000 km. Comment varie g ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $g = g_0\\,\\frac{R^2}{(R+h)^2}$. Étape 2 — Calculer pour quelques valeurs : $h = 0$ donne 9,8 N/kg, $h = 4\\,000$ km donne environ 3,7 N/kg, $h = 20\\,000$ km donne environ 0,57 N/kg. La fonction décroît, mais plus lentement quand $h$ grandit, et reste strictement positive : ce n'est pas une droite.",
+              "answers": [
+                {
+                  "content": "Il décroît, de plus en plus lentement, sans jamais s'annuler",
+                  "correct": true
+                },
+                {
+                  "content": "Il décroît régulièrement, comme une droite, jusqu'à s'annuler",
+                  "correct": false
+                },
+                {
+                  "content": "Il croît quand h augmente",
+                  "correct": false
+                },
+                {
+                  "content": "Il reste égal à g₀ à toutes les altitudes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un satellite GPS est à l'altitude h = 20 200 km (R = 6 370 km). Calcule le rayon r de son orbite, en km.",
+              "question_type": "numeric",
+              "unit": "km",
+              "tolerance": 0.5,
+              "explanation": "Étape 1 — Repérer : $R = 6\\,370$ km et $h = 20\\,200$ km. Étape 2 — Calculer : $r = R + h = 6\\,370 + 20\\,200 = 26\\,570$ km $= 2{,}657\\times 10^{7}$ m.",
+              "answers": [
+                {
+                  "content": "26570",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule le champ de gravitation terrestre à la distance r = 2,657×10⁷ m du centre de la Terre, en N/kg (M = 5,97×10²⁴ kg, G = 6,67×10⁻¹¹ SI).",
+              "question_type": "numeric",
+              "unit": "N/kg",
+              "tolerance": 0.005,
+              "explanation": "Étape 1 — Repérer : $M = 5{,}97\\times 10^{24}$ kg et $r = 2{,}657\\times 10^{7}$ m. Étape 3 — Écrire : $g = \\frac{G\\,M}{r^2} = \\frac{6{,}67\\times 10^{-11}\\times 5{,}97\\times 10^{24}}{(2{,}657\\times 10^{7})^2} = \\frac{3{,}982\\times 10^{14}}{7{,}06\\times 10^{14}} \\approx 0{,}564$ N/kg. Ce résultat est cohérent avec la courbe, qui donne environ 0,57 N/kg à 20 000 km.",
+              "answers": [
+                {
+                  "content": "0.564",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la vitesse d'un satellite GPS sur son orbite de rayon r = 2,657×10⁷ m, en km/s (M = 5,97×10²⁴ kg, G = 6,67×10⁻¹¹ SI).",
+              "question_type": "numeric",
+              "unit": "km/s",
+              "tolerance": 0.02,
+              "explanation": "Étape 1 — Préciser : référentiel géocentrique, seule force : la gravitation. Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{r}}$. Étape 5 — Faire l'application numérique : $v = \\sqrt{\\frac{3{,}982\\times 10^{14}}{2{,}657\\times 10^{7}}} \\approx 3{,}87\\times 10^{3}$ m/s, soit 3,87 km/s.",
+              "answers": [
+                {
+                  "content": "3.87",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la période de révolution d'un satellite GPS de rayon d'orbite r = 2,657×10⁷ m et de vitesse v = 3,87×10³ m/s, en heures.",
+              "question_type": "numeric",
+              "unit": "h",
+              "tolerance": 0.05,
+              "explanation": "Étape 4 — Exprimer : $T = \\frac{2\\pi\\,r}{v}$. Étape 5 — Faire l'application numérique : $T = \\frac{2\\pi\\times 2{,}657\\times 10^{7}}{3{,}87\\times 10^{3}} \\approx 4{,}31\\times 10^{4}$ s, soit $\\frac{43\\,120}{3\\,600} \\approx 11{,}98$ h. La période est proche de 12 h.",
+              "answers": [
+                {
+                  "content": "11.98",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après la troisième loi de Kepler, calcule le rapport $\\frac{T_{GPS}}{T_G}$ de la période d'un satellite GPS (r = 2,657×10⁷ m) à celle d'un satellite géostationnaire (r_G = 4,215×10⁷ m).",
+              "question_type": "numeric",
+              "tolerance": 0.01,
+              "explanation": "Étape 2 — Écrire la loi : $\\frac{T^2}{r^3}$ est la même constante pour les deux satellites. Étape 3 — Isoler : $\\frac{T_{GPS}}{T_G} = \\left(\\frac{r}{r_G}\\right)^{3/2} = \\left(\\frac{2{,}657}{4{,}215}\\right)^{3/2} = 0{,}6304^{1{,}5} \\approx 0{,}50$. On retrouve la valeur $\\frac{11{,}98}{23{,}93} \\approx 0{,}50$ obtenue avec les périodes en heures.",
+              "answers": [
+                {
+                  "content": "0.50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un satellite GPS a une période d'environ la moitié de la période sidérale de la Terre. Combien de tours effectue-t-il autour de la Terre pendant un jour sidéral ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $T_{GPS} \\approx 0{,}50\\,T_G$. Étape 2 — Calculer le nombre de tours : $\\frac{T_G}{T_{GPS}} \\approx \\frac{1}{0{,}50} = 2$. Il fait donc 2 tours pendant que la Terre en fait un, comme le montre sa période d'environ 12 h.",
+              "answers": [
+                {
+                  "content": "1 tour",
+                  "correct": false
+                },
+                {
+                  "content": "2 tours",
+                  "correct": true
+                },
+                {
+                  "content": "4 tours",
+                  "correct": false
+                },
+                {
+                  "content": "12 tours",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La Lune, satellite naturel de la Terre",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "La Lune tourne autour de la Terre sur une orbite que l'on suppose circulaire, dans le référentiel géocentrique. Elle éclaire les nuits d'Abidjan et provoque les marées. Données : G = 6,67×10⁻¹¹ SI ; masse de la Terre M = 5,97×10²⁴ kg ; masse de la Lune M_L = 7,35×10²² kg ; distance entre les centres de la Terre et de la Lune d = 3,84×10⁸ m.",
+          "questions": [
+            {
+              "content": "Calcule la valeur de la force d'attraction exercée par la Terre sur la Lune, en unités de 10²⁰ N (G = 6,67×10⁻¹¹ SI, M = 5,97×10²⁴ kg, M_L = 7,35×10²² kg, d = 3,84×10⁸ m).",
+              "question_type": "numeric",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Relever : $M = 5{,}97\\times 10^{24}$ kg, $M_L = 7{,}35\\times 10^{22}$ kg, $d = 3{,}84\\times 10^{8}$ m. Étape 2 — Écrire la loi : $F = G\\,\\frac{M\\,M_L}{d^2}$. Étape 3 — Calculer : $F = 6{,}67\\times 10^{-11}\\times\\frac{5{,}97\\times 10^{24}\\times 7{,}35\\times 10^{22}}{(3{,}84\\times 10^{8})^2} \\approx 1{,}98\\times 10^{20}$ N, soit 1,98 en unités de $10^{20}$ N.",
+              "answers": [
+                {
+                  "content": "1.98",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La Terre attire la Lune avec une force de valeur 1,98×10²⁰ N. Quelle est la valeur de la force exercée par la Lune sur la Terre ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Représenter les forces : les deux forces ont même droite d'action, même valeur et des sens opposés. La Lune attire donc la Terre avec $1{,}98\\times 10^{20}$ N. L'erreur est de croire que la plus petite masse subit la plus petite force : la formule est symétrique en $M$ et $M_L$.",
+              "answers": [
+                {
+                  "content": "1,98×10²⁰ N, de sens opposé",
+                  "correct": true
+                },
+                {
+                  "content": "Beaucoup plus petite, car la Lune est moins massive",
+                  "correct": false
+                },
+                {
+                  "content": "Beaucoup plus grande, car la Lune tourne autour de la Terre",
+                  "correct": false
+                },
+                {
+                  "content": "Nulle, car la Terre est immobile",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule le champ de gravitation de la Terre à la distance d = 3,84×10⁸ m de son centre, en unités de 10⁻³ N/kg (G = 6,67×10⁻¹¹ SI, M = 5,97×10²⁴ kg).",
+              "question_type": "numeric",
+              "tolerance": 0.02,
+              "explanation": "Étape 1 — Repérer : $M = 5{,}97\\times 10^{24}$ kg et $r = d = 3{,}84\\times 10^{8}$ m. Étape 3 — Écrire : $g = \\frac{G\\,M}{r^2} = \\frac{3{,}982\\times 10^{14}}{(3{,}84\\times 10^{8})^2} = \\frac{3{,}982\\times 10^{14}}{1{,}475\\times 10^{17}} \\approx 2{,}70\\times 10^{-3}$ N/kg.",
+              "answers": [
+                {
+                  "content": "2.70",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la vitesse de la Lune sur son orbite circulaire de rayon d = 3,84×10⁸ m autour de la Terre, en km/s (G = 6,67×10⁻¹¹ SI, M = 5,97×10²⁴ kg).",
+              "question_type": "numeric",
+              "unit": "km/s",
+              "tolerance": 0.01,
+              "explanation": "Étape 1 — Préciser : référentiel géocentrique, seule force : la gravitation de la Terre. Étape 4 — Exprimer : $v = \\sqrt{\\frac{G\\,M}{d}}$. Étape 5 — Faire l'application numérique : $v = \\sqrt{\\frac{3{,}982\\times 10^{14}}{3{,}84\\times 10^{8}}} = \\sqrt{1{,}037\\times 10^{6}} \\approx 1{,}02\\times 10^{3}$ m/s, soit 1,02 km/s.",
+              "answers": [
+                {
+                  "content": "1.02",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Calcule la période de révolution de la Lune autour de la Terre, en jours (1 jour = 86 400 s), avec la troisième loi de Kepler (G = 6,67×10⁻¹¹ SI, M = 5,97×10²⁴ kg, d = 3,84×10⁸ m).",
+              "question_type": "numeric",
+              "unit": "j",
+              "tolerance": 0.1,
+              "explanation": "Étape 2 — Écrire la loi : $\\frac{T^2}{d^3} = \\frac{4\\pi^2}{G\\,M}$. Étape 3 — Isoler : $T = 2\\pi\\sqrt{\\frac{d^3}{G\\,M}}$. Étape 4 — Faire l'application numérique : $T = 2\\pi\\sqrt{\\frac{(3{,}84\\times 10^{8})^3}{3{,}982\\times 10^{14}}} \\approx 2{,}37\\times 10^{6}$ s, soit $\\frac{2{,}37\\times 10^{6}}{86\\,400} \\approx 27{,}4$ jours.",
+              "answers": [
+                {
+                  "content": "27.4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La période de révolution de la Lune est plus petite que celle d'un satellite géostationnaire.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Écrire la condition : un satellite géostationnaire a $T = 86\\,164$ s (environ 1 jour), sur une orbite de rayon $4{,}215\\times 10^{7}$ m. Étape 2 — Écrire la loi : $\\frac{T^2}{r^3}$ est constante, donc plus le rayon est grand, plus la période est grande. L'orbite de la Lune ($3{,}84\\times 10^{8}$ m) est plus grande et sa période (27,4 jours) bien plus longue. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique pourquoi un satellite géostationnaire est nécessairement sur une orbite située dans le plan équatorial.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "La force de gravitation est dirigée vers…",
+              "criteria": [
+                "Le centre de la Terre est le centre de l'orbite, car la force est dirigée vers lui",
+                "Le plan de l'orbite contient donc le centre de la Terre",
+                "Le cercle d'un parallèle autre que l'équateur n'a pas son centre au centre de la Terre : seul l'équateur convient"
+              ],
+              "explanation": "Corrigé modèle : la seule force qui s'exerce sur le satellite est la gravitation, dirigée vers le centre de la Terre. L'accélération est centripète : le centre de l'orbite circulaire est donc le centre de la Terre et son plan contient ce centre. Pour que le satellite reste à la verticale d'un point du sol, ce point décrit un cercle dont le plan est perpendiculaire à l'axe des pôles. Seul le cercle de l'équateur est centré sur le centre de la Terre ; le cercle d'un autre parallèle a son centre sur l'axe, au-dessus ou au-dessous. Le satellite géostationnaire est donc dans le plan équatorial. Barème : 1 point pour le centre de l'orbite, 1 point pour le plan qui contient le centre de la Terre, 1 point pour la conclusion sur l'équateur.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
