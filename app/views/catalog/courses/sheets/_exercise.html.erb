@@ -31,14 +31,14 @@
       <% end %>
     </div>
     <% if exercise.figure %>
-      <div class="ps-figure w-48 [&_figure]:rounded-none [&_figure]:border-0 [&_figure]:bg-transparent [&_figure]:p-0"><%= render "catalog/figures/figure", figure: exercise.figure, frame: :app %></div>
+      <div class="ps-figure ps-exercise-figure [&_figure]:rounded-none [&_figure]:border-0 [&_figure]:bg-transparent [&_figure]:p-0"><%= render "catalog/figures/figure", figure: exercise.figure, frame: :app %></div>
     <% end %>
   </div>
   <% exercise.questions.each do |question| %>
     <%= render "catalog/courses/sheets/question", question:, fields:, checked: %>
   <% end %>
   <% if fields && hinted %>
-    <div id="hint-<%= exercise.public_id %>" class="ps-hint" data-ps="hint" hidden>
+    <div id="hint-<%= exercise.public_id %>" class="ps-hint" data-ps="hint" data-controller="math" hidden>
       <b><%= t("catalog.courses.sheets.hint_label") %></b> <%= exercise.hint %>
       <% question_hints.each do |question| %>
         <div><%= "#{(96 + question.number).chr}. #{question.hint}" %></div>

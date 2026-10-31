@@ -1,0 +1,1766 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'infection de l'organisme par le VIH",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "vih-noms",
+          "kind": "plate",
+          "description": "Planche du VIH avec ses noms. À l'extérieur, l'enveloppe porte les glycoprotéines gp120 et gp41, par lesquelles le virus se fixe sur un lymphocyte T4. À l'intérieur, la matrice protéique et la capside enferment l'ARN viral et la transcriptase inverse. La gp120, qui reconnaît le récepteur CD4, est surlignée.",
+          "params": {
+            "plate": "hiv_virus",
+            "labels": [
+              {
+                "part": "envelope",
+                "text": "enveloppe"
+              },
+              {
+                "part": "gp120",
+                "text": "glycoprotéine gp120"
+              },
+              {
+                "part": "gp41",
+                "text": "glycoprotéine gp41"
+              },
+              {
+                "part": "matrix",
+                "text": "matrice protéique"
+              },
+              {
+                "part": "capsid",
+                "text": "capside"
+              },
+              {
+                "part": "rna",
+                "text": "ARN viral"
+              },
+              {
+                "part": "reverse_transcriptase",
+                "text": "transcriptase inverse"
+              }
+            ],
+            "highlight": [
+              "gp120"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "vih-numeros",
+          "kind": "plate",
+          "description": "Planche du VIH sans légende. Sept parties sont repérées par les numéros 1 à 7 : l'enveloppe, la glycoprotéine gp120, la glycoprotéine gp41, la matrice protéique, la capside, l'ARN viral et la transcriptase inverse. L'élève doit retrouver le nom de chaque partie d'après sa place dans le virus.",
+          "params": {
+            "plate": "hiv_virus",
+            "labels": [
+              {
+                "part": "envelope"
+              },
+              {
+                "part": "gp120"
+              },
+              {
+                "part": "gp41"
+              },
+              {
+                "part": "matrix"
+              },
+              {
+                "part": "capsid"
+              },
+              {
+                "part": "rna"
+              },
+              {
+                "part": "reverse_transcriptase"
+              }
+            ],
+            "numbering": "numbers"
+          },
+          "controls": []
+        },
+        {
+          "key": "cycle-vih",
+          "kind": "diagram",
+          "description": "Schéma fléché en cycle de la multiplication du VIH. Le virus se fixe sur CD4, fusionne avec la cellule, son ARN est copié en ADN, l'ADN est intégré à celui de la cellule, la cellule produit les constituants viraux, qui s'assemblent, puis les virus sortent par bourgeonnement et vont infecter d'autres cellules.",
+          "params": {
+            "layout": "cycle",
+            "direction": "down",
+            "legend": [
+              "Entrée dans la cellule",
+              "Matériel génétique",
+              "Production et sortie"
+            ],
+            "nodes": [
+              {
+                "id": "fix",
+                "label": "Fixation sur CD4",
+                "category": 1
+              },
+              {
+                "id": "fus",
+                "label": "Fusion avec la membrane",
+                "category": 1
+              },
+              {
+                "id": "ti",
+                "label": "Transcription inverse : ARN vers ADN",
+                "category": 2
+              },
+              {
+                "id": "int",
+                "label": "Intégration à l'ADN de la cellule",
+                "category": 2
+              },
+              {
+                "id": "prod",
+                "label": "Production des ARN et des protéines virales",
+                "category": 3
+              },
+              {
+                "id": "ass",
+                "label": "Assemblage",
+                "category": 3
+              },
+              {
+                "id": "bou",
+                "label": "Bourgeonnement",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "fix",
+                "to": "fus"
+              },
+              {
+                "from": "fus",
+                "to": "ti"
+              },
+              {
+                "from": "ti",
+                "to": "int"
+              },
+              {
+                "from": "int",
+                "to": "prod"
+              },
+              {
+                "from": "prod",
+                "to": "ass"
+              },
+              {
+                "from": "ass",
+                "to": "bou"
+              },
+              {
+                "from": "bou",
+                "to": "fix",
+                "label": "infecte une autre cellule"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "evolution-lt4",
+          "kind": "stat_chart",
+          "description": "Courbe fictive du taux de LT4, en nombre par mm³ de sang, mesuré après une contamination : 700 au 1er mois, 900 au 6e mois, 880 à 1 an, 820 à 2 ans, 760 à 3 ans, 700 à 4 ans, 560 à 6 ans, 380 à 8 ans, 150 à 10 ans et 80 à 11 ans. La courbe remonte d'abord entre le 1er et le 6e mois, puis diminue lentement et s'effondre.",
+          "params": {
+            "chart": "line",
+            "series": [
+              700,
+              900,
+              880,
+              820,
+              760,
+              700,
+              560,
+              380,
+              150,
+              80
+            ],
+            "labels": [
+              "1 mois",
+              "6 mois",
+              "1 an",
+              "2 ans",
+              "3 ans",
+              "4 ans",
+              "6 ans",
+              "8 ans",
+              "10 ans",
+              "11 ans"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "charge-virale",
+          "kind": "stat_chart",
+          "description": "Courbe fictive de la charge virale, en milliers de copies par mL de sang : 500 au 1er mois, 20 au 6e mois, 18 à 1 an et à 2 ans, 20 à 3 ans, 25 à 4 ans, 40 à 6 ans, 120 à 8 ans, 500 à 10 ans et 900 à 11 ans. Pic initial, longue période basse, puis remontée.",
+          "params": {
+            "chart": "line",
+            "series": [
+              500,
+              20,
+              18,
+              18,
+              20,
+              25,
+              40,
+              120,
+              500,
+              900
+            ],
+            "labels": [
+              "1 mois",
+              "6 mois",
+              "1 an",
+              "2 ans",
+              "3 ans",
+              "4 ans",
+              "6 ans",
+              "8 ans",
+              "10 ans",
+              "11 ans"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "suivi-sous-arv",
+          "kind": "stat_chart",
+          "description": "Courbe fictive de la charge virale d'une patiente, en copies par mL de sang : 300 000 au mois 0, 40 000 au mois 1, 2 000 au mois 3, 50 au mois 6 et au mois 12 sous antirétroviraux. Après l'arrêt du traitement, elle remonte à 5 000 au mois 13 puis à 120 000 au mois 14. Les dates ne sont pas régulièrement espacées.",
+          "params": {
+            "chart": "line",
+            "series": [
+              300000,
+              40000,
+              2000,
+              50,
+              50,
+              5000,
+              120000
+            ],
+            "labels": [
+              "M0",
+              "M1",
+              "M3",
+              "M6",
+              "M12",
+              "M13",
+              "M14"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le VIH et ses cellules cibles",
+          "remember": "Le **VIH** (virus de l'immunodéficience humaine) est un **rétrovirus** : son matériel génétique est de l'**ARN** et il porte une enzyme, la **transcriptase inverse**. De l'extérieur vers l'intérieur : une **enveloppe**, qui porte les glycoprotéines **gp120** et **gp41** ; une **matrice protéique** ; une **capside**, qui renferme l'**ARN viral** et la transcriptase inverse. Un virus n'a pas de métabolisme propre : il ne se multiplie que dans une cellule vivante (parasite intracellulaire). Le VIH reconnaît ses cellules par complémentarité : sa **gp120** se fixe sur le récepteur membranaire **CD4**. Les cellules qui portent CD4, les **lymphocytes T4** (LT4) en premier, sont les **cellules cibles**. Les hématies, les lymphocytes B et les lymphocytes T8 n'ont pas CD4 : le VIH ne s'y fixe pas. Les LT4 coordonnent la réponse immunitaire : quand le VIH les détruit, les défenses s'affaiblissent.",
+          "method": [
+            "Repérer les molécules de reconnaissance : la glycoprotéine gp120 du virus et le récepteur que la cellule porte à sa membrane.",
+            "Vérifier si la cellule étudiée porte le récepteur CD4 à sa surface.",
+            "Conclure : la cellule est une cellule cible si elle porte CD4 ; sinon le virus ne s'y fixe pas.",
+            "Déduire la conséquence : si la cellule cible est un LT4, son infection affaiblit la coordination de la réponse immunitaire."
+          ],
+          "example": {
+            "statement": "Au laboratoire associé au centre de dépistage de Yamoussoukro, un technicien met du VIH en présence de trois cultures de cellules : des hématies, des lymphocytes B et des lymphocytes T4. Après trois jours, seule la culture de LT4 contient de nouveaux virus. Les LT4 portent le récepteur CD4 ; les deux autres types de cellules n'en portent pas. Expliquer ce résultat en suivant la méthode.",
+            "steps": [
+              "Repérer : le virus porte la gp120 ; chaque cellule porte, ou non, à sa membrane un récepteur capable de recevoir la gp120.",
+              "Vérifier : les LT4 portent CD4 ; les hématies et les lymphocytes B n'en portent pas.",
+              "Conclure : seuls les LT4 sont des cellules cibles : la gp120 se fixe sur CD4, le virus entre et se multiplie ; sur les deux autres cultures, il ne se fixe pas.",
+              "Déduire : les LT4 coordonnent la réponse immunitaire ; si le VIH les infecte et les détruit, les défenses de l'organisme s'affaiblissent."
+            ]
+          },
+          "pitfall": "Ne pas croire que le VIH attaque tous les globules blancs ni qu'il se fixe n'importe où. Contre-exemple : des lymphocytes T8, eux aussi des globules blancs, sont mis en culture avec du VIH : aucun nouveau virus n'apparaît, car ils portent CD8 et non CD4. Le VIH ne se fixe que sur les cellules qui portent CD4. Avant de conclure, vérifie toujours le récepteur de la cellule.",
+          "figure": "vih-noms",
+          "exercise": {
+            "title": "Le VIH et ses cellules cibles",
+            "statement": "Dans cet exercice, tu identifies les parties du VIH, puis tu reconnais ses cellules cibles avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "vih-numeros",
+            "questions": [
+              {
+                "content": "Pourquoi dit-on que le VIH est un rétrovirus ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : dans la capside du VIH, on trouve de l'ARN viral et une enzyme, la transcriptase inverse. Étape 2 — Vérifier : cette enzyme copie l'ARN en ADN, c'est-à-dire dans le sens inverse de la copie habituelle (ADN vers ARN) : d'où le nom de rétrovirus. Étape 3 — Conclure : la bonne proposition est « Son matériel génétique est de l'ARN et il possède une enzyme qui copie cet ARN en ADN ». La proposition « matériel génétique en ADN » est l'erreur tentante : le VIH n'a pas d'ADN dans sa capside. Un virus ne se multiplie jamais seul : il lui faut une cellule.",
+                "answers": [
+                  {
+                    "content": "Son matériel génétique est de l'ARN et il possède une enzyme qui copie cet ARN en ADN",
+                    "correct": true
+                  },
+                  {
+                    "content": "Son matériel génétique est de l'ADN, copié en ARN dans la cellule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il se multiplie seul dans le sang, sans avoir besoin de cellule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est entouré d'une paroi, comme une bactérie",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le schéma du VIH est numéroté de 1 à 7. Relie chaque numéro à la partie du virus qu'il désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : on lit l'enveloppe (1), qui porte les deux glycoprotéines gp120 (2) et gp41 (3), puis la matrice (4) et la capside (5). Étape 2 — Vérifier : à l'intérieur de la capside se trouvent l'ARN viral (6) et la transcriptase inverse (7). Étape 3 — Conclure : les associations sont 2 = gp120, 3 = gp41, 5 = capside, 6 = ARN viral, 7 = transcriptase inverse. Le numéro 1, l'enveloppe, est l'extérieur du virus ; ne le confonds pas avec la capside, plus profonde.",
+                "answers": [
+                  {
+                    "content": "Numéro 2",
+                    "match": "Glycoprotéine gp120"
+                  },
+                  {
+                    "content": "Numéro 3",
+                    "match": "Glycoprotéine gp41"
+                  },
+                  {
+                    "content": "Numéro 5",
+                    "match": "Capside"
+                  },
+                  {
+                    "content": "Numéro 6",
+                    "match": "ARN viral"
+                  },
+                  {
+                    "content": "Numéro 7",
+                    "match": "Transcriptase inverse"
+                  }
+                ]
+              },
+              {
+                "content": "Un technicien met du VIH en présence de quatre cultures de cellules humaines. Dans laquelle trouvera-t-il de nouveaux virus au bout de trois jours ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le virus se fixe grâce à sa gp120, sur un récepteur de la cellule. Étape 2 — Vérifier : seuls les LT4 portent CD4 ; les LT8 portent CD8, les lymphocytes B et les hématies n'ont pas CD4. Étape 3 — Conclure : seule la culture de LT4 est une culture de cellules cibles : le virus y entre et s'y multiplie. Étape 4 — Déduire : l'infection des LT4 affaiblit la coordination de la réponse immunitaire. Penser que tout globule blanc est une cible est l'erreur tentante : il faut regarder le récepteur.",
+                "answers": [
+                  {
+                    "content": "Dans la culture de lymphocytes T8, qui sont aussi des globules blancs",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans la culture de lymphocytes T4, qui portent le récepteur CD4",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans la culture d'hématies, très nombreuses dans le sang",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans la culture de lymphocytes B, qui fabriquent les anticorps",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le VIH se fixe sur ses cellules cibles grâce à sa glycoprotéine gp120, qui reconnaît le récepteur ___ présent à la membrane des lymphocytes T4.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la molécule du virus qui sert à la fixation est la gp120. Étape 2 — Vérifier : le récepteur membranaire des LT4 qui la reconnaît s'appelle CD4. Étape 3 — Conclure : la réponse est CD4. Ne la confonds pas avec CD8, récepteur des lymphocytes T8, sur lequel le VIH ne se fixe pas.",
+                "answers": [
+                  {
+                    "content": "CD4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces affirmations sur le VIH, lesquelles sont exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : un virus n'a pas de métabolisme propre ; c'est un parasite intracellulaire. Étape 2 — Vérifier : la gp120 assure la fixation sur CD4 et la gp41 la fusion ; ces glycoprotéines sont dans l'enveloppe. Étape 3 — Conclure : sont exactes « Il ne peut se multiplier qu'à l'intérieur d'une cellule vivante » et « Les glycoprotéines de son enveloppe servent à la fixation sur la cellule cible ». Les trois autres propositions sont fausses : un virus ne se divise pas, il n'infecte que les cellules à CD4, et la capside du VIH contient de l'ARN.",
+                "answers": [
+                  {
+                    "content": "Il ne peut se multiplier qu'à l'intérieur d'une cellule vivante",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il se multiplie seul dans le plasma en se divisant en deux",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il infecte toutes les cellules de l'organisme sans distinction",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les glycoprotéines de son enveloppe servent à la fixation sur la cellule cible",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa capside renferme de l'ADN double brin",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le VIH infecte tous les globules blancs, y compris les lymphocytes T8 et les lymphocytes B.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : la fixation exige la gp120 et un récepteur. Étape 2 — Vérifier : les lymphocytes T8 et B n'ont pas CD4 à leur surface. Étape 3 — Conclure : le VIH ne s'y fixe pas ; l'affirmation est fausse. Les LT4 sont la cible principale parce qu'ils portent CD4. Étape 4 — Déduire : c'est la destruction des LT4, et non de tous les globules blancs, qui affaiblit la coordination des défenses.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à relier le VIH à ses cellules cibles, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le VIH reconnaît sa cellule cible grâce à sa glycoprotéine ___, qui se lie au récepteur ___ de la cellule.",
+                "question_type": "fill_blank",
+                "hint": "Une case pour le virus, une case pour la cellule : pense à la clé et à la serrure.",
+                "explanation": "Étape 1 — Repérer : côté virus, la molécule de reconnaissance est la glycoprotéine gp120 (case 1). Étape 2 — Vérifier : côté cellule, le récepteur membranaire qui la reconnaît est CD4 (case 2). Étape 3 — Conclure : gp120 se lie à CD4.",
+                "answers": [
+                  {
+                    "content": "gp120",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "CD4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Une hématie, qui ne porte pas le récepteur CD4, est une cellule cible du VIH.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le virus a besoin de sa gp120 et d'un récepteur. Étape 2 — Vérifier : l'hématie ne porte pas CD4. Étape 3 — Conclure : ce n'est pas une cellule cible ; l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que devient la défense de l'organisme quand le VIH détruit beaucoup de lymphocytes T4 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les LT4 portent CD4, donc ce sont des cellules cibles. Étape 2 — Vérifier : ils coordonnent la réponse immunitaire (acquis de la leçon précédente). Étape 3 — Conclure : leur destruction désorganise la défense. Étape 4 — Déduire : l'organisme se défend de moins en moins bien.",
+                "answers": [
+                  {
+                    "content": "Les anticorps sont fabriqués en plus grand nombre",
+                    "correct": false
+                  },
+                  {
+                    "content": "La coordination de la réponse immunitaire diminue et les défenses s'affaiblissent",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les hématies prennent le relais de la défense",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien ne change : les LT4 ne servent pas à la défense",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans l'enveloppe du VIH, la molécule qui se fixe sur le récepteur CD4 est la ___.",
+                "question_type": "select",
+                "hint": "La transcriptase inverse et la matrice sont à l'intérieur du virus.",
+                "explanation": "Étape 1 — Repérer : l'enveloppe porte deux glycoprotéines. Étape 2 — Vérifier : c'est la gp120 qui reconnaît CD4 ; la gp41 intervient ensuite dans la fusion. Étape 3 — Conclure : la glycoprotéine gp120.",
+                "answers": [
+                  {
+                    "content": "glycoprotéine gp41",
+                    "correct": false
+                  },
+                  {
+                    "content": "transcriptase inverse",
+                    "correct": false
+                  },
+                  {
+                    "content": "glycoprotéine gp120",
+                    "correct": true
+                  },
+                  {
+                    "content": "matrice protéique",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le cycle de réplication du VIH",
+          "remember": "Dans une cellule cible, le VIH se multiplie en plusieurs étapes. 1) **Fixation** : la gp120 se lie à CD4. 2) **Fusion** : l'enveloppe du virus fusionne avec la membrane de la cellule ; la capside entre dans le cytoplasme et libère l'ARN viral. 3) **Transcription inverse** : la transcriptase inverse copie l'ARN viral en ADN viral (sens inverse de la transcription habituelle, ADN vers ARN). 4) **Intégration** : l'ADN viral entre dans le noyau et s'insère dans l'ADN de la cellule ; il s'appelle alors **provirus**. 5) **Production** : la cellule, avec ses propres moyens, copie le provirus en ARN viraux et fabrique des protéines virales. 6) **Assemblage** : ces constituants forment de nouveaux virus. 7) **Bourgeonnement** : les nouveaux virus sortent en emportant un morceau de membrane, qui devient leur enveloppe. Ils vont infecter d'autres cellules cibles ; la cellule hôte, épuisée, finit par mourir.",
+          "method": [
+            "Repérer l'entrée du virus : la fixation sur CD4, puis la fusion qui libère l'ARN viral dans la cellule.",
+            "Suivre le matériel génétique : l'ARN viral est copié en ADN (transcription inverse), puis cet ADN est intégré à l'ADN de la cellule.",
+            "Identifier ce que fabrique la cellule : à partir du provirus, elle produit des ARN viraux et des protéines virales.",
+            "Ordonner la sortie : les constituants s'assemblent, puis les nouveaux virus sortent par bourgeonnement.",
+            "Conclure : la cellule a fabriqué de nouveaux virus, qui vont infecter d'autres cellules cibles."
+          ],
+          "example": {
+            "statement": "Au club santé du lycée de Yamoussoukro, une élève doit expliquer au tableau comment un seul VIH se multiplie dans un lymphocyte T4. Elle part d'un virus fixé sur la cellule. Présenter son exposé en suivant la méthode.",
+            "steps": [
+              "Repérer : la gp120 se fixe sur CD4, l'enveloppe fusionne avec la membrane, la capside entre dans la cellule et libère l'ARN viral.",
+              "Suivre : la transcriptase inverse copie l'ARN en ADN viral ; cet ADN entre dans le noyau et s'intègre à l'ADN du lymphocyte : c'est un provirus.",
+              "Identifier : le lymphocyte, avec ses propres moyens, copie le provirus en ARN viraux et fabrique les protéines virales.",
+              "Ordonner : les ARN et les protéines s'assemblent en nouveaux virus, qui sortent par bourgeonnement en emportant un morceau de membrane.",
+              "Conclure : un seul virus a donné de nombreux virus, prêts à infecter d'autres lymphocytes T4."
+            ]
+          },
+          "pitfall": "Ne pas dire que le VIH se multiplie en se divisant en deux, comme une bactérie. Contre-exemple : une bactérie placée dans un milieu nutritif se divise seule ; un virus laissé seul, sans cellule vivante, ne produit rien. Les nouveaux VIH sont fabriqués par la cellule, à partir de l'ADN viral intégré. Ne confonds pas non plus la transcription inverse (ARN vers ADN) et la transcription (ADN vers ARN).",
+          "figure": "cycle-vih",
+          "exercise": {
+            "title": "Le cycle de réplication du VIH",
+            "statement": "Dans cet exercice, tu retrouves les étapes de la multiplication du VIH dans un lymphocyte T4, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "cycle-vih",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les étapes de la multiplication du VIH dans un lymphocyte T4.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer l'entrée : la fixation, puis la fusion. Étape 2 — Suivre le matériel génétique : l'ARN est copié en ADN (transcription inverse), puis intégré. Étape 3 — Identifier la production : la cellule fabrique les constituants viraux. Étape 4 — Ordonner la sortie : assemblage, puis bourgeonnement. L'erreur tentante est de placer l'intégration avant la transcription inverse : l'ADN viral n'existe pas avant d'avoir été copié à partir de l'ARN.",
+                "answers": [
+                  {
+                    "content": "Fixation de la gp120 sur CD4"
+                  },
+                  {
+                    "content": "Fusion de l'enveloppe avec la membrane de la cellule"
+                  },
+                  {
+                    "content": "Transcription inverse de l'ARN viral en ADN"
+                  },
+                  {
+                    "content": "Intégration de l'ADN viral à l'ADN de la cellule"
+                  },
+                  {
+                    "content": "Assemblage des nouveaux virus"
+                  },
+                  {
+                    "content": "Bourgeonnement des nouveaux virus"
+                  }
+                ]
+              },
+              {
+                "content": "Que produit la transcriptase inverse au cours du cycle du VIH ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : après la fusion, l'ARN viral est libre dans le cytoplasme. Étape 2 — Suivre le matériel génétique : la transcriptase inverse le copie en ADN viral, ce qui permet ensuite l'intégration. Étape 3 — Conclure : elle produit de l'ADN à partir de l'ARN. La proposition « de l'ARN à partir de l'ADN » décrit la transcription habituelle, pas la transcription inverse.",
+                "answers": [
+                  {
+                    "content": "De l'ADN viral, à partir de l'ARN viral",
+                    "correct": true
+                  },
+                  {
+                    "content": "De l'ARN, à partir de l'ADN de la cellule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des protéines virales, à partir de l'ARN viral",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des anticorps contre le virus",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque étape du cycle du VIH à ce qui s'y passe.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer l'entrée : fixation (gp120 sur CD4), puis fusion (enveloppe et membrane). Étape 2 — Suivre le matériel génétique : transcription inverse (ARN vers ADN), puis intégration (insertion dans l'ADN de la cellule). Étape 3 — Conclure : chaque étape correspond à une seule action. Ne confonds pas fixation et fusion : la première est une reconnaissance, la seconde une union des membranes.",
+                "answers": [
+                  {
+                    "content": "Fixation",
+                    "match": "La gp120 se lie au récepteur CD4"
+                  },
+                  {
+                    "content": "Fusion",
+                    "match": "L'enveloppe du virus s'unit à la membrane de la cellule"
+                  },
+                  {
+                    "content": "Transcription inverse",
+                    "match": "L'ARN viral est copié en ADN viral"
+                  },
+                  {
+                    "content": "Intégration",
+                    "match": "L'ADN viral s'insère dans l'ADN de la cellule"
+                  }
+                ]
+              },
+              {
+                "content": "Quand l'ADN du VIH est inséré dans l'ADN d'une cellule, on l'appelle un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : l'ARN viral est entré dans la cellule. Étape 2 — Suivre le matériel génétique : il est copié en ADN, puis cet ADN est intégré à l'ADN de la cellule. Étape 3 — Conclure : l'ADN viral intégré se nomme provirus. La cellule le copie ensuite comme l'un de ses propres gènes.",
+                "answers": [
+                  {
+                    "content": "provirus",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces affirmations sur la fabrication de nouveaux VIH, lesquelles sont exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : un virus n'a pas de machinerie de synthèse. Étape 2 — Identifier ce que fabrique la cellule : elle produit ARN et protéines virales avec ses propres moyens. Étape 3 — Ordonner la sortie : le bourgeonnement emporte un morceau de membrane qui devient l'enveloppe. Étape 4 — Conclure : sont exactes « Les protéines virales sont fabriquées par la cellule, avec ses propres moyens » et « L'enveloppe des nouveaux virus provient de la membrane de la cellule ». La transcriptase inverse est une enzyme du virus, et l'ADN viral est intégré.",
+                "answers": [
+                  {
+                    "content": "Le VIH apporte ses propres ribosomes pour fabriquer ses protéines",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les protéines virales sont fabriquées par la cellule, avec ses propres moyens",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'ADN viral reste libre dans le cytoplasme et n'est jamais intégré",
+                    "correct": false
+                  },
+                  {
+                    "content": "La transcriptase inverse est une enzyme de la cellule",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'enveloppe des nouveaux virus provient de la membrane de la cellule",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le VIH se multiplie en se divisant en deux, comme une bactérie.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : le virus doit d'abord entrer dans une cellule. Étape 2 — Suivre le matériel génétique : son ARN est copié en ADN puis intégré. Étape 3 — Identifier ce que fabrique la cellule : ce sont les cellules qui produisent les nouveaux virus. Étape 4 — Conclure : un virus ne se divise pas ; l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à suivre le matériel génétique du VIH dans la cellule, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans la cellule, l'ARN viral est copié en ___ par la transcriptase inverse ; cet ADN s'insère ensuite dans l'ADN de la cellule : c'est l'___.",
+                "question_type": "fill_blank",
+                "hint": "Première case : le produit de la transcriptase inverse. Deuxième case : le nom de l'étape qui suit.",
+                "explanation": "Étape 1 — Repérer : après la fusion, l'ARN viral est dans le cytoplasme. Étape 2 — Suivre le matériel génétique : la transcriptase inverse le copie en ADN (case 1), puis cet ADN est inséré dans l'ADN de la cellule : c'est l'intégration (case 2).",
+                "answers": [
+                  {
+                    "content": "ADN",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "intégration",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Le bourgeonnement a lieu avant l'assemblage des nouveaux virus.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : les constituants viraux sont d'abord fabriqués par la cellule. Étape 2 — Ordonner la sortie : ils s'assemblent, puis les virus sortent par bourgeonnement. L'affirmation inverse l'ordre : elle est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans quelle partie de la cellule l'ADN viral est-il intégré à l'ADN de la cellule ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'ARN viral est libéré dans le cytoplasme. Étape 2 — Suivre le matériel génétique : l'ADN viral obtenu entre dans le noyau, là où se trouve l'ADN de la cellule, et s'y intègre. Étape 3 — Conclure : dans le noyau.",
+                "answers": [
+                  {
+                    "content": "Dans le noyau",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans la membrane plasmique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans les ribosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans la capside",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre : intégration, fixation, transcription inverse.",
+                "question_type": "ordering",
+                "hint": "L'ADN viral doit exister avant d'être intégré.",
+                "explanation": "Étape 1 — Repérer l'entrée : la fixation vient en premier. Étape 2 — Suivre le matériel génétique : l'ARN est d'abord copié en ADN (transcription inverse), puis cet ADN est intégré.",
+                "answers": [
+                  {
+                    "content": "Fixation"
+                  },
+                  {
+                    "content": "Transcription inverse"
+                  },
+                  {
+                    "content": "Intégration"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'évolution de l'infection et le dépistage",
+          "remember": "Après la contamination, l'infection évolue en trois phases. **Primo-infection** (premières semaines) : le virus se multiplie très vite, la **charge virale** (quantité de virus dans le sang) est très élevée, le taux de LT4 baisse et les premiers anticorps anti-VIH apparaissent. **Phase asymptomatique** (souvent plusieurs années) : aucun signe, la charge virale est basse, mais le virus se multiplie toujours et les LT4 diminuent lentement. **SIDA** (syndrome d'immunodéficience acquise) : les LT4 sont très peu nombreux (moins de 200 par mm³ de sang environ), la charge virale remonte et des maladies opportunistes (tuberculose, certaines pneumonies) s'installent, car les défenses ne sont plus coordonnées. Une personne dont le sang contient des anticorps anti-VIH est **séropositive** ; ce n'est pas avoir le SIDA. Le **dépistage** recherche ces anticorps (test rapide, test ELISA, avec confirmation). Pendant la **fenêtre sérologique**, quelques semaines après la contamination, les anticorps ne sont pas encore détectables : un test négatif trop tôt doit être refait.",
+          "method": [
+            "Repérer la grandeur suivie sur chaque courbe (charge virale, taux de LT4, anticorps) et l'échelle de temps.",
+            "Décrire la variation de chaque grandeur, période par période : montée, chute, plateau.",
+            "Associer chaque période à sa phase (primo-infection, phase asymptomatique, SIDA) ou à l'état du test (séronégatif, séropositif).",
+            "Conclure en reliant les variations : la baisse des LT4 explique l'affaiblissement des défenses."
+          ],
+          "example": {
+            "statement": "Au centre de dépistage volontaire de Yamoussoukro, un conseiller présente aux élèves du club santé le suivi fictif d'une personne infectée. Au 1er mois : charge virale de 500 000 copies par mL et 700 LT4 par mm³. Du 6e mois à la 4e année : charge virale entre 18 000 et 25 000 copies par mL, LT4 de 900 à 700 par mm³. À la 10e année : charge virale de 500 000 copies par mL et 150 LT4 par mm³. Nommer chaque période et expliquer, en suivant la méthode.",
+            "steps": [
+              "Repérer : on suit la charge virale (copies par mL) et le taux de LT4 (par mm³) sur plus de dix ans.",
+              "Décrire : au 1er mois, charge virale très élevée et LT4 en baisse ; du 6e mois à la 4e année, charge virale basse et LT4 qui baissent lentement ; à la 10e année, charge virale à nouveau très élevée et LT4 effondrés.",
+              "Associer : le 1er mois est la primo-infection ; du 6e mois à la 4e année, c'est la phase asymptomatique ; à la 10e année, c'est le stade SIDA (LT4 sous 200 par mm³).",
+              "Conclure : le virus détruit peu à peu les LT4 ; leur effondrement explique l'affaiblissement des défenses et l'arrivée des maladies opportunistes."
+            ]
+          },
+          "pitfall": "Ne pas confondre séropositif et malade du SIDA, ni croire qu'une personne sans symptômes n'est pas infectée. Contre-exemple : une personne contaminée depuis cinq ans peut avoir le même aspect qu'avant ; pourtant ses anticorps sont présents (elle est séropositive) et le virus se multiplie toujours. Elle n'a le SIDA que lorsque ses LT4 sont effondrés et que des maladies opportunistes apparaissent. Ne conclus jamais d'un seul test négatif fait trop tôt : refais-le après la fenêtre sérologique.",
+          "figure": "evolution-lt4",
+          "exercise": {
+            "title": "L'évolution de l'infection et le dépistage",
+            "statement": "Dans cet exercice, tu lis l'évolution d'une infection par le VIH et tu interprètes des tests de dépistage, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "charge-virale",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les trois phases de l'infection par le VIH, de la contamination au stade final.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on suit l'infection dans le temps. Étape 2 — Décrire : d'abord charge virale très élevée, puis charge basse sans signe, enfin LT4 effondrés avec maladies opportunistes. Étape 3 — Associer : primo-infection, phase asymptomatique, SIDA. Étape 4 — Conclure : le SIDA est toujours le stade final, jamais le premier.",
+                "answers": [
+                  {
+                    "content": "Primo-infection"
+                  },
+                  {
+                    "content": "Phase asymptomatique"
+                  },
+                  {
+                    "content": "SIDA"
+                  }
+                ]
+              },
+              {
+                "content": "Une personne dont le sang contient des anticorps anti-VIH est dite ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le dépistage recherche des anticorps anti-VIH. Étape 2 — Associer : leur présence correspond à l'état de séropositivité ; leur absence à la séronégativité. Étape 3 — Conclure : la personne est séropositive. Attention : séropositive ne veut pas dire malade du SIDA.",
+                "answers": [
+                  {
+                    "content": "séropositive",
+                    "correct": true
+                  },
+                  {
+                    "content": "séropositif",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un suivi fictif, le taux de LT4 est de 900 par mm³ au 6e mois et de 380 par mm³ à la 8e année. De combien de LT4 par mm³ le taux a-t-il baissé ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : on compare le taux de LT4 à deux dates, 900 puis 380 par mm³. Étape 2 — Décrire : le taux a baissé, car 380 est plus petit que 900 ; la baisse se calcule par 900 − 380 = 520. Étape 3 — Associer : cette baisse de 520 LT4 par mm³ en plus de sept ans est celle de la phase asymptomatique. Étape 4 — Conclure : la baisse est de 520 LT4 par mm³. Une soustraction dans le mauvais sens (380 − 900) donnerait un nombre négatif.",
+                "answers": [
+                  {
+                    "content": "520",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Trois semaines après un risque de contamination, un jeune fait un test rapide : le résultat est négatif. Que peut-on conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le test cherche des anticorps, qui mettent quelques semaines à apparaître. Étape 2 — Décrire : à trois semaines, on est peut-être dans la fenêtre sérologique. Étape 3 — Associer : un test négatif trop tôt ne prouve rien. Étape 4 — Conclure : il faut refaire le test plus tard. La proposition « le virus est certainement absent » est l'erreur tentante : un test négatif ne vaut que s'il est fait après la fenêtre sérologique.",
+                "answers": [
+                  {
+                    "content": "On ne peut pas exclure l'infection : les anticorps peuvent ne pas être encore détectables, il faut refaire le test plus tard",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le virus est certainement absent de son sang",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est séropositif, car il y a eu un risque",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a le SIDA, mais le test ne le montre pas",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une personne séropositive qui n'a aucun symptôme depuis cinq ans n'est plus infectée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : pendant la phase asymptomatique, il n'y a pas de signes. Étape 2 — Décrire : la charge virale est basse mais le virus se multiplie toujours et les LT4 baissent lentement. Étape 3 — Associer : l'absence de symptômes est la phase asymptomatique, pas une guérison. Étape 4 — Conclure : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pendant la phase asymptomatique, pourquoi le taux de LT4 baisse-t-il lentement alors qu'il n'y a aucun signe ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on suit le taux de LT4 au fil des années. Étape 2 — Décrire : il diminue lentement, sans signe de maladie. Étape 3 — Associer : le virus infecte et détruit des LT4 en continu pendant la phase asymptomatique. Étape 4 — Conclure : la baisse prépare l'effondrement du stade SIDA. L'idée d'un virus endormi est l'erreur tentante : la charge virale est basse, mais pas nulle.",
+                "answers": [
+                  {
+                    "content": "Le virus est endormi et ne fait rien pendant cette phase",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le virus continue à se multiplier dans les LT4 et à les détruire, même sans signe visible",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les LT4 sont détruits par les anticorps anti-VIH",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les LT4 se transforment en hématies",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire les phases de l'infection et à interpréter un dépistage, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La charge virale est ___ pendant la primo-infection, et le taux de LT4 est ___ au stade SIDA.",
+                "question_type": "fill_blank",
+                "hint": "Pense à la courbe de la charge virale au tout début, et à celle des LT4 à la fin.",
+                "explanation": "Étape 1 — Repérer : on suit la charge virale puis le taux de LT4. Étape 2 — Décrire : pendant la primo-infection, la charge virale est très élevée (case 1) ; au stade SIDA, les LT4 sont effondrés, donc le taux est très bas (case 2). Étape 3 — Associer : ces deux valeurs caractérisent les deux phases.",
+                "answers": [
+                  {
+                    "content": "élevée",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "haute",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "forte",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "bas",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "faible",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "effondré",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Que recherche un test de dépistage comme le test rapide ou le test ELISA ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : un test de dépistage cherche une trace de l'infection. Étape 2 — Associer : ces tests détectent les anticorps anti-VIH. Étape 3 — Conclure : leur présence indique la séropositivité.",
+                "answers": [
+                  {
+                    "content": "Les anticorps anti-VIH dans le sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les hématies infectées",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les lymphocytes T8",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les maladies opportunistes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Être séropositif signifie avoir le SIDA.",
+                "question_type": "true_false",
+                "hint": "Une personne peut être séropositive pendant la phase asymptomatique.",
+                "explanation": "Étape 1 — Repérer : séropositif désigne la présence d'anticorps anti-VIH. Étape 2 — Associer : le SIDA est le stade où les LT4 sont effondrés et où des maladies opportunistes apparaissent. Étape 3 — Conclure : on peut être séropositif pendant des années sans avoir le SIDA ; l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels signes marquent l'entrée dans le stade SIDA ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on observe le taux de LT4 et l'état de santé. Étape 2 — Décrire : les LT4 sont effondrés et la charge virale remonte. Étape 3 — Associer : avec des maladies opportunistes, c'est le stade SIDA. Les anticorps sont présents depuis la primo-infection ; la fièvre passagère évoque plutôt la primo-infection.",
+                "answers": [
+                  {
+                    "content": "Des anticorps qui apparaissent pour la première fois",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une charge virale très élevée avec des LT4 en grand nombre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des LT4 très bas (moins de 200 par mm³ environ) et des maladies opportunistes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une fièvre passagère de quelques jours",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La transmission, la prévention et le traitement",
+          "remember": "Le VIH est présent dans le **sang**, le **sperme**, les **sécrétions vaginales** et le **lait maternel**. Il se transmet quand l'un de ces liquides passe dans le sang d'une autre personne ou touche une muqueuse. Trois voies : **sexuelle** (rapports non protégés), **sanguine** (seringue ou lame souillée partagée, transfusion non contrôlée) et **de la mère à l'enfant** (grossesse, accouchement, allaitement). Le VIH ne se transmet pas par une poignée de main, un repas partagé, un moustique ou une accolade. **Prévention** : préservatif, matériel à usage unique ou stérilisé, dépistage, suivi et traitement des femmes enceintes séropositives. **Antirétroviraux (ARV)** : médicaments qui bloquent une étape du cycle du virus (transcriptase inverse, intégration, fusion). Associés en plusieurs médicaments (trithérapie), ils bloquent plusieurs étapes à la fois et limitent le risque que des virus échappent au traitement ; ils baissent la charge virale, laissent remonter les LT4 et retardent le SIDA, mais ne guérissent pas : le provirus reste intégré aux cellules, donc le traitement se prend sans interruption.",
+          "method": [
+            "Identifier le liquide du corps en cause (sang, sperme, sécrétions vaginales, lait maternel) ou l'absence de tels liquides.",
+            "Vérifier s'il existe une porte d'entrée : passage du liquide dans le sang ou contact avec une muqueuse.",
+            "Conclure : avec un liquide en cause et une porte d'entrée, le risque existe ; sinon il n'y a pas de transmission.",
+            "Proposer la mesure de prévention adaptée à la voie de transmission."
+          ],
+          "example": {
+            "statement": "Au club santé du lycée de Yamoussoukro, un élève demande : « Peut-on attraper le VIH en partageant la gourde d'un camarade séropositif ? » Répondre en suivant la méthode.",
+            "steps": [
+              "Identifier : le liquide en cause est la salive laissée sur le goulot ; ce n'est pas l'un des liquides qui transmettent le VIH (sang, sperme, sécrétions vaginales, lait maternel).",
+              "Vérifier : boire à la gourde ne fait passer aucun de ces liquides dans le sang et ne cause aucune plaie ; il n'y a pas de porte d'entrée pour un liquide en cause.",
+              "Conclure : il n'y a pas de transmission du VIH en partageant une gourde.",
+              "Proposer : aucune précaution particulière n'est nécessaire pour une gourde ; en revanche, une lame de rasoir ou une aiguille, qui peuvent être souillées de sang, ne se partagent jamais."
+            ]
+          },
+          "pitfall": "Ne pas croire que le VIH se transmet par les gestes de la vie quotidienne (poignée de main, repas partagé, moustique), ni que les antirétroviraux guérissent. Contre-exemple : partager la table d'un camarade séropositif ne transmet rien, alors qu'une lame de rasoir souillée de sang et partagée peut transmettre. Et un patient dont la charge virale est devenue très basse sous ARV n'est pas guéri : s'il arrête son traitement, le virus se multiplie à nouveau.",
+          "figure": null,
+          "exercise": {
+            "title": "La transmission, la prévention et le traitement",
+            "statement": "Dans cet exercice, tu juges des situations à risque, tu choisis une mesure de prévention et tu expliques le rôle des antirétroviraux, avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces situations, lesquelles présentent un risque de transmission du VIH si l'une des personnes est séropositive ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier le liquide : sperme ou sécrétions vaginales, sang, lait maternel. Étape 2 — Vérifier la porte d'entrée : muqueuse, plaie ou passage dans le sang. Étape 3 — Conclure : le rapport sexuel sans préservatif, la lame de rasoir souillée de sang et l'allaitement par une mère séropositive non suivie ont chacun un liquide en cause et une porte d'entrée. Une poignée de main, un moustique ou un repas ne font passer aucun de ces liquides dans le sang : ce sont les erreurs tentantes.",
+                "answers": [
+                  {
+                    "content": "Une poignée de main",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un rapport sexuel sans préservatif",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une piqûre de moustique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le partage d'une lame de rasoir souillée de sang",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un repas partagé dans la même assiette",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'allaitement par une mère séropositive qui n'est pas suivie",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un moustique qui a piqué une personne séropositive peut transmettre le VIH à la personne qu'il pique ensuite.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : le liquide en cause serait le sang, mais le moustique ne réinjecte pas le sang d'une personne à l'autre. Étape 2 — Vérifier : le VIH ne se multiplie pas dans le moustique et il n'y a pas de passage de sang d'une personne à l'autre. Étape 3 — Conclure : il n'y a pas de transmission par les moustiques ; l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque voie de transmission à la mesure de prévention la mieux adaptée.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier le liquide en cause pour chaque voie : sperme et sécrétions vaginales, sang, ou sang et lait maternel. Étape 2 — Vérifier la porte d'entrée. Étape 3 — Conclure sur le risque. Étape 4 — Proposer la mesure adaptée : le préservatif fait barrière pour la voie sexuelle, le matériel à usage unique évite le contact avec du sang, et le traitement de la femme enceinte protège l'enfant.",
+                "answers": [
+                  {
+                    "content": "Voie sexuelle",
+                    "match": "Utiliser un préservatif à chaque rapport"
+                  },
+                  {
+                    "content": "Voie sanguine",
+                    "match": "Utiliser une seringue neuve à usage unique"
+                  },
+                  {
+                    "content": "Voie de la mère à l'enfant",
+                    "match": "Dépister la femme enceinte et la traiter par antirétroviraux"
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le principe d'action des antirétroviraux ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le virus se multiplie en suivant les étapes de son cycle. Étape 2 — Vérifier : un antirétroviral bloque l'une de ces étapes (par exemple la transcriptase inverse). Étape 3 — Conclure : la multiplication du virus diminue, donc la charge virale baisse. Les ARV ne détruisent pas le provirus : c'est pourquoi ils ne guérissent pas. Étape 4 — Proposer : un traitement pris sans interruption.",
+                "answers": [
+                  {
+                    "content": "Ils bloquent une étape du cycle du virus, ce qui réduit sa multiplication",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils détruisent le provirus intégré à l'ADN des cellules",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils fabriquent des anticorps qui éliminent le virus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils remplacent les lymphocytes T4 détruits",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sous antirétroviraux efficaces, la ___ virale d'un patient baisse fortement.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Identifier : les ARV bloquent une étape du cycle du VIH. Étape 2 — Vérifier : moins de virus sont fabriqués. Étape 3 — Conclure : la quantité de virus dans le sang, appelée charge virale, baisse. Les LT4, eux, remontent.",
+                "answers": [
+                  {
+                    "content": "charge",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un patient sous antirétroviraux a une charge virale devenue très basse. Que doit-il faire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : la charge virale est basse grâce aux ARV. Étape 2 — Vérifier : le provirus est toujours intégré à l'ADN de certaines cellules. Étape 3 — Conclure : si le traitement s'arrête, le virus se remet à se multiplier. Étape 4 — Proposer : continuer le traitement tous les jours, comme prescrit. Penser être guéri est l'erreur tentante.",
+                "answers": [
+                  {
+                    "content": "Arrêter son traitement, car il est guéri",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ne prendre ses médicaments que lorsqu'il se sent fatigué",
+                    "correct": false
+                  },
+                  {
+                    "content": "Continuer son traitement sans interruption, car le provirus reste dans ses cellules",
+                    "correct": true
+                  },
+                  {
+                    "content": "Remplacer ses médicaments par des tisanes",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les voies de transmission, les mesures de prévention et le rôle des antirétroviraux, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Les trois voies de transmission du VIH sont la voie sexuelle, la voie ___ et la voie de la mère à l'enfant. Pour éviter la voie sanguine, on utilise une seringue neuve, à ___ unique.",
+                "question_type": "fill_blank",
+                "hint": "Un des liquides en cause est le sang : quelle voie porte son nom ?",
+                "explanation": "Étape 1 — Identifier : les liquides en cause sont le sperme et les sécrétions vaginales, le sang, et le sang ou le lait maternel. Étape 2 — Conclure : les trois voies sont la voie sexuelle, la voie sanguine (case 1) et la voie de la mère à l'enfant. Étape 3 — Proposer : pour la voie sanguine, une seringue neuve à usage unique (case 2).",
+                "answers": [
+                  {
+                    "content": "sanguine",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "usage",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ]
+              },
+              {
+                "content": "Avec un suivi et un traitement par antirétroviraux de la mère, le risque de transmission du VIH à l'enfant peut être fortement réduit.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : la voie de la mère à l'enfant (grossesse, accouchement, allaitement). Étape 2 — Vérifier : les ARV font baisser la charge virale de la mère. Étape 3 — Proposer : dépister et traiter la femme enceinte réduit fortement le risque. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'effet d'un traitement efficace par antirétroviraux sur le taux de LT4 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : les ARV bloquent une étape du cycle. Étape 2 — Vérifier : moins de LT4 sont infectés et détruits. Étape 3 — Conclure : le taux de LT4 remonte et le SIDA est retardé.",
+                "answers": [
+                  {
+                    "content": "Il remonte, car la multiplication du virus diminue",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il baisse encore plus vite",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il ne change jamais",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il devient nul",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux amies se percent les oreilles avec la même aiguille non stérilisée. Quelle voie de transmission du VIH est en cause si l'une est séropositive ?",
+                "question_type": "single_choice",
+                "hint": "Que porte l'aiguille, et où va-t-elle ?",
+                "explanation": "Étape 1 — Identifier : une aiguille peut être souillée de sang. Étape 2 — Vérifier : elle perce la peau, donc le sang passe dans le sang de l'autre personne. Étape 3 — Conclure : voie sanguine. Étape 4 — Proposer : utiliser du matériel à usage unique ou stérilisé.",
+                "answers": [
+                  {
+                    "content": "La voie sanguine",
+                    "correct": true
+                  },
+                  {
+                    "content": "La voie sexuelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "La voie de la mère à l'enfant",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune : une aiguille ne transmet pas le VIH",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Pourquoi le VIH n'infecte-t-il que certaines cellules ?",
+          "statement": "Au laboratoire d'analyses voisin du centre de dépistage de Yamoussoukro, un technicien montre aux élèves du club santé des cultures de cellules humaines. Chaque culture reçoit la même quantité de VIH ; trois jours plus tard, on cherche de nouveaux virus. Résultats :\nCulture 1 : lymphocytes T4. Nombreux nouveaux virus.\nCulture 2 : lymphocytes T8. Aucun nouveau virus.\nCulture 3 : lymphocytes B. Aucun nouveau virus.\nCulture 4 : hématies. Aucun nouveau virus.\nCulture 5 : lymphocytes T4 traités avant l'infection par un anticorps qui se fixe sur leur récepteur CD4 et le masque. Très peu de nouveaux virus.\nCulture 6 : lymphocytes T4 traités avant l'infection par un anticorps sans lien avec CD4. Nombreux nouveaux virus.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Du VIH est mis en présence de six cultures de cellules. Les résultats sont les suivants. Culture 1, LT4 : nombreux nouveaux virus. Culture 2, LT8 : aucun. Culture 3, lymphocytes B : aucun. Culture 4, hématies : aucun. Culture 5, LT4 dont CD4 est masqué par un anticorps : très peu. Culture 6, LT4 traités par un anticorps sans lien avec CD4 : nombreux. Quelles cultures montrent une multiplication importante du virus ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer dans chaque culture la présence de nouveaux virus. 2. Comparer : beaucoup en 1 et 6, très peu en 5, aucun en 2, 3 et 4. 3. Conclure : le virus se multiplie nettement dans les cultures 1 et 6. Le virus a été donné à toutes les cultures, mais il ne se multiplie que dans celles où il peut entrer : recevoir le virus ne suffit pas.",
+              "answers": [
+                {
+                  "content": "Toutes les cultures, puisque toutes ont reçu le virus",
+                  "correct": false
+                },
+                {
+                  "content": "Les cultures 1 et 6, dont les LT4 ont leur récepteur CD4 libre",
+                  "correct": true
+                },
+                {
+                  "content": "Les cultures 1 à 4, qui contiennent des cellules sanguines",
+                  "correct": false
+                },
+                {
+                  "content": "Les cultures 5 et 6, qui ont reçu un anticorps",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le VIH ne se multiplie ni dans des lymphocytes T8, ni dans des lymphocytes B, ni dans des hématies, mais se multiplie dans des lymphocytes T4. Quelle hypothèse explique ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la différence entre les cultures : seul le type de cellule change. 2. Formuler une hypothèse qui explique cette différence : la fixation du virus dépend d'un récepteur. 3. Vérifier : c'est cohérent avec la gp120 qui reconnaît CD4 (notion 1). 4. Conclure : seuls les LT4 ont le récepteur. L'hypothèse du noyau est fausse : les LT8 et les lymphocytes B ont aussi un noyau.",
+              "answers": [
+                {
+                  "content": "Les LT4 portent à leur surface un récepteur auquel le VIH se fixe, que les trois autres types de cellules n'ont pas",
+                  "correct": true
+                },
+                {
+                  "content": "Les LT8, les lymphocytes B et les hématies détruisent le virus dès son arrivée",
+                  "correct": false
+                },
+                {
+                  "content": "Les LT8, les lymphocytes B et les hématies sont trop petits pour être infectés",
+                  "correct": false
+                },
+                {
+                  "content": "Seuls les LT4 possèdent un noyau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la culture 6, les LT4 sont traités avant l'infection par un anticorps sans lien avec CD4, puis reçoivent le VIH. Quel est le rôle de cette culture ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer ce qui change entre les cultures 5 et 6 : seul le type d'anticorps diffère. 2. Comparer : très peu de virus en 5, beaucoup en 6. 3. Conclure : la culture 6 est une culture témoin ; sans elle, on ne pourrait pas savoir si c'est l'anticorps en général ou le masquage de CD4 qui bloque l'infection.",
+              "answers": [
+                {
+                  "content": "Montrer qu'un anticorps quelconque n'empêche pas l'infection : la baisse observée en culture 5 vient bien du masquage de CD4",
+                  "correct": true
+                },
+                {
+                  "content": "Montrer que les anticorps détruisent le VIH",
+                  "correct": false
+                },
+                {
+                  "content": "Montrer que les LT4 n'ont pas besoin de CD4",
+                  "correct": false
+                },
+                {
+                  "content": "Compter les LT8 de la culture 2",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une expérience, le VIH se multiplie dans des LT4, très peu dans des LT4 dont CD4 est masqué, et pas du tout dans des LT8, des lymphocytes B et des hématies. Quelles conclusions sont justifiées ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Repérer les deux comparaisons : types de cellules différents (cultures 1 à 4), puis CD4 libre ou masqué (cultures 1, 5 et 6). 2. Conclure de chaque comparaison : le virus se multiplie seulement avec CD4 accessible, donc CD4 est nécessaire à l'entrée. 3. Éliminer les conclusions non justifiées : l'expérience ne montre ni que l'anticorps détruit le virus, ni que le virus infecte toutes les cellules.",
+              "answers": [
+                {
+                  "content": "Le VIH infecte toutes les cellules du sang",
+                  "correct": false
+                },
+                {
+                  "content": "Le récepteur CD4 est nécessaire à l'entrée du VIH dans la cellule",
+                  "correct": true
+                },
+                {
+                  "content": "L'anticorps utilisé en culture 5 détruit le VIH",
+                  "correct": false
+                },
+                {
+                  "content": "Le VIH ne se multiplie que dans des cellules qui portent CD4, comme les LT4",
+                  "correct": true
+                },
+                {
+                  "content": "Les LT4 fabriquent des anticorps qui bloquent le virus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La glycoprotéine du VIH qui reconnaît le récepteur CD4 des LT4 et assure la fixation du virus s'appelle la ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Repérer les deux glycoprotéines de l'enveloppe : gp120 et gp41. 2. Rappeler leur rôle : la gp120 reconnaît CD4 pour la fixation, la gp41 intervient ensuite dans la fusion. 3. Conclure : gp120. Étape 1 de la notion 1 — Repérer les molécules de reconnaissance.",
+              "answers": [
+                {
+                  "content": "gp120",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le technicien explique que, chez une personne infectée, les LT4 sont détruits peu à peu. Quelle est la conséquence pour la défense de l'organisme ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer le rôle des LT4 : ils coordonnent la réponse immunitaire (acquis de la leçon précédente : LT4, lymphocytes B, anticorps, LT8). 2. Raisonner : moins de LT4, c'est moins de coordination. 3. Conclure : les défenses s'affaiblissent. Les lymphocytes B ne fabriquent pas de virus : ils fabriquent des anticorps.",
+              "answers": [
+                {
+                  "content": "La coordination de la réponse immunitaire diminue, donc les défenses s'affaiblissent",
+                  "correct": true
+                },
+                {
+                  "content": "Les hématies deviennent plus nombreuses pour compenser",
+                  "correct": false
+                },
+                {
+                  "content": "Rien ne change : les LT4 ne participent pas à la défense",
+                  "correct": false
+                },
+                {
+                  "content": "Les lymphocytes B fabriquent davantage de virus",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Où agissent les substances sur le cycle du VIH ?",
+          "statement": "Pour comprendre comment agissent des médicaments contre le VIH, un laboratoire étudie des lymphocytes T4 infectés. Quatre cultures sont comparées après 24 heures (résultats fournis par l'énoncé) :\nCulture A, sans substance : ADN viral présent dans la cellule : oui ; ADN viral intégré à l'ADN de la cellule : oui ; nouveaux virus : oui.\nCulture B, avec la substance X : ARN viral dans le cytoplasme : oui ; ADN viral : non ; ADN intégré : non ; nouveaux virus : non.\nCulture C, avec la substance Y : ARN viral dans le cytoplasme : oui ; ADN viral : oui ; ADN intégré : non ; nouveaux virus : non.\nCulture D, avec la substance Z : ARN viral dans le cytoplasme : non ; ADN viral : non ; ADN intégré : non ; nouveaux virus : non. Les virus restent à l'extérieur des cellules.",
+          "exercise_type": "fixation",
+          "figure": "cycle-vih",
+          "questions": [
+            {
+              "content": "Remets dans l'ordre cinq étapes de la multiplication du VIH dans un lymphocyte T4.",
+              "question_type": "ordering",
+              "explanation": "Méthode : 1. Repérer l'entrée du virus : fixation puis fusion. 2. Suivre le matériel génétique : ARN copié en ADN (transcription inverse), puis intégré. 3. Ordonner la sortie : le bourgeonnement vient en dernier. Chaque étape suppose la précédente : sans ADN viral, il ne peut pas y avoir d'intégration.",
+              "answers": [
+                {
+                  "content": "Fixation sur CD4"
+                },
+                {
+                  "content": "Fusion avec la membrane de la cellule"
+                },
+                {
+                  "content": "Transcription inverse de l'ARN en ADN"
+                },
+                {
+                  "content": "Intégration de l'ADN viral à l'ADN de la cellule"
+                },
+                {
+                  "content": "Bourgeonnement des nouveaux virus"
+                }
+              ]
+            },
+            {
+              "content": "Dans la culture B (substance X), l'ARN viral est dans le cytoplasme, mais on ne trouve ni ADN viral ni nouveaux virus. Quelle étape la substance X bloque-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer jusqu'où le virus est allé : l'ARN est dans le cytoplasme, donc la fixation et la fusion ont eu lieu. 2. Suivre le matériel génétique : l'étape suivante est la transcription inverse (ARN vers ADN). 3. Constater que l'ADN viral est absent, donc cette étape n'a pas eu lieu. 4. Conclure : X bloque la transcription inverse. La fixation n'est pas en cause, puisque l'ARN est entré.",
+              "answers": [
+                {
+                  "content": "La transcription inverse, qui copie l'ARN viral en ADN",
+                  "correct": true
+                },
+                {
+                  "content": "La fixation du virus sur CD4",
+                  "correct": false
+                },
+                {
+                  "content": "L'intégration de l'ADN viral à l'ADN de la cellule",
+                  "correct": false
+                },
+                {
+                  "content": "Le bourgeonnement des nouveaux virus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la culture C (substance Y), l'ADN viral est présent dans la cellule, mais il n'est pas intégré et il n'y a pas de nouveaux virus. Quelle étape la substance Y bloque-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer jusqu'où le virus est allé : l'ADN viral existe, donc la transcription inverse a eu lieu. 2. Suivre le matériel génétique : l'étape suivante est l'intégration. 3. Constater qu'elle n'a pas eu lieu. 4. Conclure : Y bloque l'intégration, et sans intégration la cellule ne produit pas de nouveaux virus.",
+              "answers": [
+                {
+                  "content": "La transcription inverse",
+                  "correct": false
+                },
+                {
+                  "content": "L'intégration de l'ADN viral à l'ADN de la cellule",
+                  "correct": true
+                },
+                {
+                  "content": "La fusion de l'enveloppe avec la membrane",
+                  "correct": false
+                },
+                {
+                  "content": "La fixation sur CD4",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la culture D (substance Z), on ne trouve pas d'ARN viral dans le cytoplasme et les virus restent à l'extérieur des cellules. Quelle étape la substance Z bloque-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer : aucun ARN viral dans le cytoplasme, donc le contenu du virus n'est pas entré. 2. Raisonner : la capside entre après la fixation et la fusion. 3. Conclure : Z bloque l'entrée du virus. Les étapes de la transcription inverse, de l'intégration et de l'assemblage sont plus tardives : elles ne peuvent pas expliquer l'absence d'ARN dans le cytoplasme.",
+              "answers": [
+                {
+                  "content": "La transcription inverse",
+                  "correct": false
+                },
+                {
+                  "content": "L'intégration",
+                  "correct": false
+                },
+                {
+                  "content": "L'entrée du virus dans la cellule, par la fixation ou la fusion",
+                  "correct": true
+                },
+                {
+                  "content": "L'assemblage des nouveaux virus",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour que la cellule produise de nouveaux virus, l'ADN viral doit d'abord être ___ à l'ADN de la cellule.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : 1. Rappeler l'étape après la transcription inverse : l'intégration. 2. Observer la culture C : ADN viral présent mais non intégré donne zéro nouveau virus. 3. Conclure : l'ADN viral doit être intégré à l'ADN de la cellule pour que la cellule le copie.",
+              "answers": [
+                {
+                  "content": "intégré",
+                  "correct": true
+                },
+                {
+                  "content": "inséré",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans la culture C, la cellule fabrique de nouveaux virus parce que l'ADN viral est présent.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Lire le résultat : ADN viral présent, mais nouveaux virus : non. 2. Raisonner : la présence d'ADN viral ne suffit pas, il faut qu'il soit intégré. 3. Conclure : l'affirmation est fausse. Confondre ADN viral présent et ADN viral intégré est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le suivi d'une personne infectée par le VIH",
+          "statement": "Un conseiller du centre de dépistage volontaire de Yamoussoukro présente aux élèves du club santé le suivi fictif de Yao, contaminé à une date connue. Test rapide à la 3e semaine : négatif. Test rapide et test de confirmation au 3e mois : positifs. La courbe donne la charge virale de Yao, en milliers de copies par mL de sang, à dix dates : 1er mois 500 ; 6e mois 20 ; 1 an 18 ; 2 ans 18 ; 3 ans 20 ; 4 ans 25 ; 6 ans 40 ; 8 ans 120 ; 10 ans 500 ; 11 ans 900. Son taux de LT4, en nombre par mm³ de sang, aux mêmes dates : 700 ; 900 ; 880 ; 820 ; 760 ; 700 ; 560 ; 380 ; 150 ; 80. À partir de la 10e année, Yao fait une tuberculose.",
+          "exercise_type": "evaluation",
+          "figure": "charge-virale",
+          "questions": [
+            {
+              "content": "Le test rapide de Yao, fait à la 3e semaine après la contamination, est négatif, mais ses tests du 3e mois sont positifs. Comment l'expliquer ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer ce que cherche le test rapide : des anticorps anti-VIH. 2. Comparer les dates : négatif à 3 semaines, positif à 3 mois. 3. Raisonner : les anticorps mettent quelques semaines à apparaître en quantité détectable, c'est la fenêtre sérologique. 4. Conclure : Yao était déjà infecté à la 3e semaine, mais le test ne pouvait pas encore le montrer. Une guérison n'est pas en cause : la charge virale du 1er mois est très élevée.",
+              "answers": [
+                {
+                  "content": "À la 3e semaine, ses anticorps n'étaient pas encore détectables : c'était la fenêtre sérologique",
+                  "correct": true
+                },
+                {
+                  "content": "Il a guéri entre la 3e semaine et le 3e mois",
+                  "correct": false
+                },
+                {
+                  "content": "Le virus n'était pas dans son sang à la 3e semaine",
+                  "correct": false
+                },
+                {
+                  "content": "Le test du 3e mois cherche autre chose que des anticorps",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque période du suivi de Yao à ce qu'elle représente.",
+              "question_type": "matching",
+              "explanation": "Méthode : 1. Repérer pour chaque période la charge virale, les LT4 et les signes. 2. Décrire : très élevée au début, basse puis lente baisse des LT4, effondrement des LT4 avec maladie opportuniste à la fin. 3. Associer : primo-infection, phase asymptomatique, SIDA ; des tests positifs montrent des anticorps, donc la séropositivité.",
+              "answers": [
+                {
+                  "content": "1er mois, charge virale de 500 milliers de copies par mL",
+                  "match": "Primo-infection"
+                },
+                {
+                  "content": "Du 6e mois à la 4e année, charge virale basse et LT4 de 900 à 700 par mm³",
+                  "match": "Phase asymptomatique"
+                },
+                {
+                  "content": "10e année, LT4 à 150 par mm³ et tuberculose",
+                  "match": "SIDA"
+                },
+                {
+                  "content": "Tests positifs au 3e mois",
+                  "match": "Séropositivité : anticorps détectables"
+                }
+              ]
+            },
+            {
+              "content": "Le taux de LT4 de Yao est de 700 par mm³ à la 4e année et de 150 par mm³ à la 10e année. De combien de LT4 par mm³ a-t-il baissé entre ces deux dates ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer les deux valeurs : 700 puis 150. 2. Constater que le taux a baissé. 3. Calculer : 700 − 150 = 550. 4. Conclure : la baisse est de 550 LT4 par mm³, ce qui montre l'effondrement progressif des LT4.",
+              "answers": [
+                {
+                  "content": "550",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Entre le 6e mois et la 4e année, la charge virale de Yao passe de 20 à 25 milliers de copies par mL et il ne ressent aucun signe. Quelle conclusion est correcte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer : charge virale basse mais jamais nulle, LT4 qui baissent de 900 à 700. 2. Décrire : plateau de charge virale, baisse lente des LT4. 3. Associer : c'est la phase asymptomatique. 4. Conclure : le virus agit en silence. Une charge basse n'est pas une charge nulle.",
+              "answers": [
+                {
+                  "content": "Le virus a disparu de son organisme",
+                  "correct": false
+                },
+                {
+                  "content": "Le virus se multiplie toujours, lentement, et détruit peu à peu les LT4 ; l'absence de signes n'est pas une guérison",
+                  "correct": true
+                },
+                {
+                  "content": "Le virus est inactif, donc les LT4 ne baissent pas",
+                  "correct": false
+                },
+                {
+                  "content": "Yao est au stade SIDA depuis le 6e mois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À la 10e année, Yao a 150 LT4 par mm³ et une charge virale de 500 milliers de copies par mL ; il fait une tuberculose. Quels éléments justifient de dire qu'il est au stade SIDA ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : 1. Repérer les critères du SIDA : LT4 très bas, charge virale élevée, maladies opportunistes. 2. Comparer aux valeurs de Yao à 10 ans : 150 est inférieur à 200, 500 est très supérieur à 20, tuberculose présente. 3. Conclure : les trois critères sont réunis. Les anticorps ne disparaissent pas ; les LT4 sont plus bas, non plus hauts, qu'au 6e mois.",
+              "answers": [
+                {
+                  "content": "Ses anticorps anti-VIH ont disparu",
+                  "correct": false
+                },
+                {
+                  "content": "Son taux de LT4 est inférieur à 200 par mm³ environ",
+                  "correct": true
+                },
+                {
+                  "content": "Son taux de LT4 est plus élevé qu'au 6e mois",
+                  "correct": false
+                },
+                {
+                  "content": "Sa charge virale est remontée à un niveau très élevé",
+                  "correct": true
+                },
+                {
+                  "content": "Sa charge virale est plus basse qu'au 6e mois",
+                  "correct": false
+                },
+                {
+                  "content": "Il fait une maladie opportuniste, la tuberculose",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique, en t'appuyant sur le rôle des LT4, pourquoi Yao fait une tuberculose à la 10e année alors qu'il n'avait aucune maladie les années précédentes.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Les LT4 coordonnent la réponse immunitaire, donc…",
+              "criteria": [
+                "Rappeler que les LT4 coordonnent la réponse immunitaire",
+                "Dire que le VIH détruit les LT4 au fil des années",
+                "Relier le faible taux de LT4 (150 par mm³) à l'affaiblissement des défenses",
+                "Nommer la tuberculose comme maladie opportuniste"
+              ],
+              "explanation": "Corrigé modèle : Les lymphocytes T4 coordonnent la réponse immunitaire : sans eux, les lymphocytes B et T8 ne sont plus bien activés. Le VIH infecte et détruit les LT4 en continu ; le taux de Yao est passé de 900 à 150 par mm³. À la 10e année, ses défenses ne sont plus assez coordonnées pour empêcher un microbe comme celui de la tuberculose de s'installer : c'est une maladie opportuniste, signe du stade SIDA. Barème : 1 point pour le rôle des LT4, 1 point pour la destruction des LT4 avec la valeur, 1 point pour la conclusion sur la maladie opportuniste.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Un traitement par antirétroviraux",
+          "statement": "Fatou, une enseignante fictive de Yamoussoukro, est séropositive et suivie dans un centre de santé. Elle commence au mois 0 un traitement qui associe trois antirétroviraux agissant sur des étapes différentes du cycle du VIH. Charge virale de Fatou, en copies par mL de sang : mois 0 : 300 000 ; mois 1 : 40 000 ; mois 3 : 2 000 ; mois 6 : 50 ; mois 12 : 50. Son taux de LT4, par mm³ : mois 0 : 150 ; mois 3 : 300 ; mois 12 : 420. Après le mois 12, une rupture de médicaments la conduit à arrêter son traitement. Charge virale : mois 13 : 5 000 ; mois 14 : 120 000. Son taux de LT4 au mois 14 est de 300 par mm³.",
+          "exercise_type": "evaluation",
+          "figure": "suivi-sous-arv",
+          "questions": [
+            {
+              "content": "Pendant les 6 premiers mois du traitement, la charge virale de Fatou passe de 300 000 à 50 copies par mL et ses LT4 de 150 à 300 par mm³ (mois 3). Que peut-on en conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer les deux grandeurs suivies : charge virale et LT4. 2. Décrire : la charge virale chute, les LT4 remontent. 3. Raisonner : si moins de virus sont fabriqués, moins de LT4 sont détruits. 4. Conclure : les antirétroviraux bloquent la multiplication du virus. Rien ne montre une guérison.",
+              "answers": [
+                {
+                  "content": "Le traitement bloque la multiplication du virus : la charge virale baisse et les LT4 remontent",
+                  "correct": true
+                },
+                {
+                  "content": "Le traitement détruit tous les LT4 infectés et guérit Fatou",
+                  "correct": false
+                },
+                {
+                  "content": "Le traitement fabrique des anticorps qui éliminent le virus",
+                  "correct": false
+                },
+                {
+                  "content": "La charge virale baisse seule, sans effet du traitement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La charge virale de Fatou est de 300 000 copies par mL au mois 0 et de 2 000 au mois 3. Par combien a-t-elle été divisée ?",
+              "question_type": "numeric",
+              "unit": "fois",
+              "tolerance": 0,
+              "explanation": "Méthode : 1. Repérer les deux valeurs : 300 000 puis 2 000. 2. Écrire le rapport : 300 000 ÷ 2 000. 3. Calculer : 300 000 ÷ 2 000 = 150. 4. Conclure : elle a été divisée par 150. Une soustraction (298 000) donnerait une baisse, pas le facteur demandé.",
+              "answers": [
+                {
+                  "content": "150",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les valeurs du mois 6 et du mois 12 montrent que Fatou est guérie du VIH.",
+              "question_type": "true_false",
+              "explanation": "Méthode : 1. Repérer : la charge virale est très basse (50) grâce au traitement. 2. Constater la suite : après l'arrêt, elle remonte (5 000 puis 120 000). 3. Raisonner : si le virus avait disparu, la charge ne remonterait pas. 4. Conclure : l'affirmation est fausse ; le traitement contrôle le virus sans l'éliminer.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Après l'arrêt du traitement, la charge virale de Fatou remonte à 5 000 puis à 120 000 copies par mL. Quelle est l'explication ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Repérer la remontée de la charge virale après l'arrêt. 2. Rappeler ce que font les ARV : ils bloquent des étapes du cycle, ils ne détruisent pas le provirus (notion 4 et notion 2). 3. Raisonner : le provirus intégré à l'ADN des cellules est copié dès que le blocage cesse. 4. Conclure : le virus se multiplie de nouveau. Penser que le virus vient de l'extérieur est l'erreur tentante.",
+              "answers": [
+                {
+                  "content": "Le provirus est resté intégré dans des cellules ; sans médicament, le virus se multiplie de nouveau",
+                  "correct": true
+                },
+                {
+                  "content": "Les antirétroviraux avaient détruit tous les provirus, mais le virus est revenu de l'extérieur",
+                  "correct": false
+                },
+                {
+                  "content": "Les LT4 de Fatou fabriquent à nouveau des anticorps contre le virus",
+                  "correct": false
+                },
+                {
+                  "content": "L'arrêt du traitement transforme les LT4 en VIH",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fatou prend trois antirétroviraux qui agissent sur des étapes différentes du cycle du VIH. Quels avantages cette association présente-t-elle ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : 1. Rappeler le cycle : fixation, fusion, transcription inverse, intégration, production, assemblage, bourgeonnement. 2. Raisonner : plusieurs médicaments, sur plusieurs étapes, font chuter la multiplication plus fort qu'un seul. 3. Conclure : l'association bloque plusieurs étapes et limite les échappements du virus. Elle ne détruit pas le provirus et exige une prise régulière.",
+              "answers": [
+                {
+                  "content": "Elle bloque plusieurs étapes de la multiplication du virus à la fois",
+                  "correct": true
+                },
+                {
+                  "content": "Elle détruit le provirus dans toutes les cellules",
+                  "correct": false
+                },
+                {
+                  "content": "Elle limite le risque que le virus échappe au traitement",
+                  "correct": true
+                },
+                {
+                  "content": "Elle remplace les LT4 détruits par de nouvelles cellules",
+                  "correct": false
+                },
+                {
+                  "content": "Elle rend inutile de prendre le traitement tous les jours",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Fatou attend un enfant. Quelle mesure protège le mieux son enfant de l'infection par le VIH ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : 1. Identifier la voie de transmission en cause : de la mère à l'enfant (grossesse, accouchement, allaitement). 2. Vérifier la porte d'entrée : le passage du sang de la mère vers l'enfant (placenta, accouchement) et, pour le lait, les muqueuses digestives de l'enfant qui l'avale. 3. Conclure : le risque existe mais n'est pas inévitable. 4. Proposer : suivre et traiter la mère par ARV fait baisser sa charge virale et réduit fortement le risque. Arrêter le traitement ferait remonter la charge virale.",
+              "answers": [
+                {
+                  "content": "Un suivi médical avec traitement par antirétroviraux de la mère pendant la grossesse",
+                  "correct": true
+                },
+                {
+                  "content": "Éviter de toucher son enfant et d'embrasser sa joue",
+                  "correct": false
+                },
+                {
+                  "content": "Arrêter son traitement pour ne pas fatiguer son corps",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune mesure n'existe : l'enfant sera forcément infecté",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe qui explique l'effet des antirétroviraux sur la charge virale et les LT4 de Fatou, puis pourquoi le traitement doit être pris sans interruption.",
+              "question_type": "written",
+              "points": 4,
+              "starter": "Sous traitement, la charge virale…",
+              "criteria": [
+                "Décrire la baisse de la charge virale (300 000 à 50) sous traitement",
+                "Décrire la remontée des LT4 (150 à 420)",
+                "Expliquer que les ARV bloquent des étapes du cycle sans détruire le provirus",
+                "Expliquer la remontée de la charge virale après l'arrêt (5 000 puis 120 000)"
+              ],
+              "explanation": "Corrigé modèle : Sous traitement, la charge virale de Fatou passe de 300 000 à 50 copies par mL en six mois et ses LT4 de 150 à 420 par mm³ au mois 12 : les antirétroviraux bloquent des étapes du cycle du virus, donc moins de virus sont fabriqués et moins de LT4 sont détruits. Mais ils ne détruisent pas le provirus intégré à l'ADN des cellules. Après l'arrêt, la charge virale remonte à 5 000 puis à 120 000 : le virus se multiplie de nouveau. Le traitement doit donc être pris sans interruption. Barème : 1 point par critère.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

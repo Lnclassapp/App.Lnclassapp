@@ -5,7 +5,7 @@ require "test_helper"
 # passent par ContentTreeWriter#write ; toutes les
 # lignes écrites sont comparées, champ par champ, à l'instantané pris AVANT l'optimisation
 # (test/fixtures/files/content_tree_snapshot.json). Cet instantané ne se régénère pas : si ce test rougit, c'est
-# l'implémentation qu'on corrige.
+# l'implémentation qu'on corrige. Les 4 fichiers v1 sont figés sous test/fixtures/files/lecons_v1/ : les vagues v3 remplacent ceux de docs/.
 module Repositories
   module Catalog
     class ContentTreeWriterCharacterizationTest < ActiveSupport::TestCase
