@@ -204,7 +204,7 @@ Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le mê
 
 ### 3ème, mathématiques au format 3 — le pilote (chantier `refonte-contenus-maths`)
 
-Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un ou deux exercices (la leçon Thalès en a deux par notion depuis le 2026-10-31, aux types de questions mélangés). La leçon a en plus 4 problèmes de 5 questions ou plus. La leçon Thalès a aussi 4 sujets de devoir de 4 exercices chacun (16 exercices, 95 questions), comptés dans le tableau, avec deux figures de plus (triangle ABC, papillon) que ses exercices citent.
+Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un ou deux exercices (la leçon Thalès en a deux par notion depuis le 2026-10-31, aux types de questions mélangés). La leçon a en plus 4 problèmes de 5 questions ou plus. La leçon Thalès a aussi 4 sujets de devoir de 4 exercices chacun (16 exercices, 95 questions), comptés dans le tableau, avec trois figures de plus (triangle ABC avec M et N, papillon, triangle ABC avec D et E) que ses exercices citent : un schéma fixe, car la figure interactive affiche ses propres longueurs, qui contrediraient l'énoncé.
 
 | # | Fichier | Cours | Notions | Figures | Exercices | Questions |
 |---:|---|---|---:|---:|---:|---:|

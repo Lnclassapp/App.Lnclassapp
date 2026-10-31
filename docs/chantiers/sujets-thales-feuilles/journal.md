@@ -23,3 +23,4 @@
 | **PR** | |
 | **ADR produits** | |
 | **UDR produits** | |
+- Captures interros (lot D) : les exercices de notion citaient la figure interactive, dont la légende affiche ses propres longueurs (AD = 4, AB = 12…) qui contredisent l'énoncé. Corrigé par un schéma fixe `triangle-abc-de` ; la figure interactive reste dans « À retenir ».

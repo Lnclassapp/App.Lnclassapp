@@ -248,6 +248,59 @@
           "controls": []
         },
         {
+          "key": "triangle-abc-de",
+          "kind": "geometry",
+          "description": "Un triangle ABC avec le point D sur le côté [AB] et le point E sur le côté [AC]. Le segment [DE] est tracé : c'est la droite (DE), à comparer avec la droite (BC). Le dessin est un schéma à main levée : les longueurs et le parallélisme sont ceux de l'énoncé, pas ceux qu'on croit lire.",
+          "params": {
+            "points": [
+              {
+                "id": "A",
+                "x": 6.5,
+                "y": 9.5
+              },
+              {
+                "id": "B",
+                "x": 0,
+                "y": 0
+              },
+              {
+                "id": "C",
+                "x": 14,
+                "y": 0
+              },
+              {
+                "id": "D",
+                "x": 3.25,
+                "y": 4.75
+              },
+              {
+                "id": "E",
+                "x": 10.25,
+                "y": 4.75
+              }
+            ],
+            "segments": [
+              [
+                "A",
+                "B"
+              ],
+              [
+                "B",
+                "C"
+              ],
+              [
+                "C",
+                "A"
+              ],
+              [
+                "D",
+                "E"
+              ]
+            ]
+          },
+          "controls": []
+        },
+        {
           "key": "papillon-abc-mn",
           "kind": "geometry",
           "description": "Un papillon de Thalès : les droites (BM) et (CN) se coupent en A, avec B, A, M alignés dans cet ordre, ainsi que C, A, N. Les segments [BC] et [MN] sont tracés de part et d'autre de A : on les compare. Le dessin est un schéma à main levée : les longueurs et le parallélisme sont ceux de l'énoncé.",
@@ -327,7 +380,7 @@
               "title": "Calculer des longueurs avec Thalès",
               "statement": "Dans cet exercice, tu calcules des longueurs dans un triangle coupé par une parallèle, avec la méthode de la fiche.",
               "exercise_type": "fixation",
-              "figure": "thales-direct",
+              "figure": "triangle-abc-de",
               "questions": [
                 {
                   "content": "Dans le triangle $ABC$, $D$ est un point de $[AB]$, $E$ un point de $[AC]$ et $(DE) \\parallel (BC)$. On peut écrire : $\\frac{AD}{AB} = \\frac{AE}{AC}$.",
@@ -461,7 +514,7 @@
               "title": "Calculer d'autres longueurs avec Thalès",
               "statement": "Dans cet exercice, tu calcules encore des longueurs dans un triangle coupé par une parallèle, avec d'autres données et la méthode de la fiche.",
               "exercise_type": "fixation",
-              "figure": "thales-direct",
+              "figure": "triangle-abc-de",
               "hint": "Commence par écrire l'égalité de Thalès en partant du sommet $A$, puis garde seulement les deux rapports qui contiennent l'inconnue.",
               "questions": [
                 {
@@ -658,7 +711,7 @@
               "title": "Prouver un parallélisme avec la réciproque",
               "statement": "Dans cet exercice, tu prouves que deux droites sont parallèles avec la méthode de la fiche.",
               "exercise_type": "fixation",
-              "figure": "reciproque-thales",
+              "figure": "triangle-abc-de",
               "questions": [
                 {
                   "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 2$ cm, $AB = 5$ cm, $AE = 3$ cm et $AC = 7{,}5$ cm. Les droites $(DE)$ et $(BC)$ sont parallèles.",
@@ -800,7 +853,7 @@
               "title": "Reconnaître des droites parallèles",
               "statement": "Dans cet exercice, tu prouves que deux droites sont parallèles avec la réciproque de Thalès, sur d'autres configurations et avec la méthode de la fiche.",
               "exercise_type": "fixation",
-              "figure": "reciproque-thales",
+              "figure": "triangle-abc-de",
               "hint": "Calcule les deux rapports $\\frac{AD}{AB}$ et $\\frac{AE}{AC}$ séparément, simplifie-les, puis compare-les.",
               "questions": [
                 {
@@ -1016,7 +1069,7 @@
               "title": "Prouver que deux droites ne sont pas parallèles",
               "statement": "Dans cet exercice, tu montres que deux droites ne sont pas parallèles avec la méthode de la fiche.",
               "exercise_type": "fixation",
-              "figure": "reciproque-thales",
+              "figure": "triangle-abc-de",
               "questions": [
                 {
                   "content": "Dans le triangle $ABC$, $D \\in [AB]$ et $E \\in [AC]$. On donne $AD = 2$ cm, $AB = 5$ cm, $AE = 3$ cm et $AC = 7$ cm. Les droites $(DE)$ et $(BC)$ sont parallèles.",
@@ -1158,7 +1211,7 @@
               "title": "Détecter des droites non parallèles",
               "statement": "Dans cet exercice, tu montres que deux droites ne sont pas parallèles, avec d'autres données et la méthode de la fiche.",
               "exercise_type": "fixation",
-              "figure": "reciproque-thales",
+              "figure": "triangle-abc-de",
               "hint": "Calcule $\\frac{AD}{AB}$ et $\\frac{AE}{AC}$, puis compare-les avec les produits en croix, sans jamais arrondir.",
               "questions": [
                 {
