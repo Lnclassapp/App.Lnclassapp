@@ -243,6 +243,93 @@ class Assessment::SheetChecksControllerTest < ActionDispatch::IntegrationTest
     assert_equal "Cet exercice n'existe plus.", flash[:alert]
   end
 
+  # Un refus dans l'exercice (Turbo Stream) se relit, sans JavaScript, dans le message de retour à la leçon : un par code d'erreur.
+  test "sans JavaScript, la pause revient à la leçon avec l'heure de reprise" do
+    3.times { create_exercise_session(student: @student, exercise: @exercise, status: "completed", completed_at: 5.minutes.ago) }
+    sign_in_as @student
+
+    check(headers: {})
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_match(/Tu as rendu 3 copies d'affilée\. Tu pourras recommencer à \d{2} h \d{2}\./, flash[:alert])
+  end
+
+  test "sans JavaScript, un devoir à rendre revient à la leçon avec le lien « Ma classe »" do
+    create_assignment(classroom: @classroom, assignable: @exercise)
+    sign_in_as @student
+
+    check(headers: {})
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal "Ce devoir est à rendre : ouvre-le dans Ma classe.", flash[:alert]
+  end
+
+  test "sans JavaScript, rendre un devoir déjà rendu revient à la leçon avec son message" do
+    assignment = create_assignment(classroom: @classroom, assignable: @exercise)
+    sign_in_as @student
+    check(assignment_public_id: assignment.public_id)
+
+    check(headers: {}, assignment_public_id: assignment.public_id)
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal "Ce devoir n'est plus à rendre.", flash[:alert]
+  end
+
+  test "sans JavaScript, une panne revient à la leçon avec « Réessaie. »" do
+    sign_in_as @student
+    repository = Repositories::Assessment::ExerciseSessionRepository
+    original = repository.instance_method(:start)
+    repository.define_method(:start) { |**| raise ActiveRecord::StatementInvalid, "panne" }
+
+    begin
+      check(headers: {})
+    ensure
+      repository.define_method(:start, original)
+    end
+
+    assert_redirected_to course_path(@course.slug, anchor: "sheet-exercise-#{@exercise.public_id}")
+    assert_equal "La copie n'est pas partie. Réessaie.", flash[:alert]
+  end
+
+  test "une copie déjà enregistrée par une autre requête : « La copie n'est pas partie. Réessaie. », rien n'est écrit" do
+    sign_in_as @student
+    repository = Repositories::Assessment::ExerciseSessionRepository
+    original = repository.instance_method(:record_copy)
+    repository.define_method(:record_copy) { |**| :duplicate }
+
+    begin
+      assert_no_difference -> { Orm::ExerciseSession.where(status: "completed").count } do
+        check
+      end
+    ensure
+      repository.define_method(:record_copy, original)
+    end
+
+    assert_response :unprocessable_entity
+    assert_select "template p.ps-error[role=alert]", text: "La copie n'est pas partie. Réessaie."
+  end
+
+  # Ce que l'élève poste est lu champ par champ : tout ce qui n'est pas un champ de copie est ignoré, jamais une erreur serveur.
+  test "sans copie postée ou avec des réponses qui ne sont pas des champs, la copie est lue vide : aucune bonne réponse" do
+    sign_in_as @student
+
+    post exercise_sheet_check_path(@exercise.public_id), headers: STREAM
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: "x" }, headers: STREAM
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: { answers: "x" } }, headers: STREAM
+
+    assert_response :see_other
+    assert_equal [ 0, 0, 0 ], Orm::ExerciseSession.where(student: @student, status: "completed").pluck(:correct_count)
+  end
+
+  test "un champ de réponse qui n'est pas un ensemble de champs est lu vide : aucune bonne réponse" do
+    sign_in_as @student
+
+    post exercise_sheet_check_path(@exercise.public_id), params: { copy: { answers: { @questions.first.id.to_s => "x" } } }, headers: STREAM
+
+    assert_response :see_other
+    assert_equal [ 0 ], Orm::ExerciseSession.where(student: @student, status: "completed").pluck(:correct_count)
+  end
+
   test "un visiteur est envoyé à la connexion, sans copie" do
     check
 

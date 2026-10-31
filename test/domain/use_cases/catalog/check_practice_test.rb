@@ -188,6 +188,31 @@ module UseCases
         end
       end
 
+      # Les propositions d'un entraînement à listes : leurs indices d'affichage, par identifiant (0 : juste de la case 0, 1 : faux, 2 : juste de la case 1, 3 : faux).
+      def picks(*ids) = ids.each_with_index.to_h { |id, blank| [ blank.to_s, id.nil? ? "" : display_index(@practice, @practice.questions.first, id).to_s ] }
+
+      test "une liste à une case : juste ou fausse selon la proposition choisie, sur l'indice d'affichage posté" do
+        use_case = build(select_question)
+
+        assert_equal [ :correct ], check(use_case, { "0" => { "blanks" => picks(0) } }).value.questions.first.verdicts
+        assert_equal [ :wrong ], check(use_case, { "0" => { "blanks" => picks(1) } }).value.questions.first.verdicts
+        assert_equal [ :blank ], check(use_case, { "0" => { "blanks" => "x" } }).value.questions.first.verdicts
+      end
+
+      test "des listes à plusieurs cases : un verdict par case, une case laissée vide est à compléter" do
+        use_case = build(select_question(blanks: 2))
+
+        assert_equal [ :correct, :correct ], check(use_case, { "0" => { "blanks" => picks(0, 2) } }).value.questions.first.verdicts
+        assert_equal [ :correct, :wrong ], check(use_case, { "0" => { "blanks" => picks(0, 3) } }).value.questions.first.verdicts
+        assert_equal [ :wrong, :blank ], check(use_case, { "0" => { "blanks" => picks(1, nil) } }).value.questions.first.verdicts
+      end
+
+      test "une saisie qui n'est pas un ensemble de réponses, un choix ou un ordre illisible sont jugés sans exception" do
+        assert_equal [ :blank ], check(build(numeric_question), nil).value.questions.first.verdicts
+        assert_equal [ :wrong ], check(build(choice_question), { "0" => { "ids" => [ "abc" ] } }).value.questions.first.verdicts
+        assert_equal [ :wrong ], check(build(ordering_question), { "0" => { "order" => [ "a", "b", "c" ] } }).value.questions.first.verdicts
+      end
+
       test "une bonne réponse écrite is_correct est reconnue comme correct" do
         raw = choice_question.merge("answers" => [ { "content" => "7", "is_correct" => true }, { "content" => "8", "is_correct" => false } ])
         question = Entities::Catalog::NotionPractice.from_raw(raw_practice(raw)).questions.first

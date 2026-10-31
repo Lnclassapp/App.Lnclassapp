@@ -124,6 +124,17 @@ module Queries
         assert_equal false, shown.due
       end
 
+      test "avant de rendre, une question sans proposition (un calcul) reste sans proposition ni correction" do
+        exercise = create_exercise(essential: @thales, questions: 0)
+        create_kind_question(exercise:, question_type: "numeric", content: "Calcule MN.", answers: [ "6" ])
+        send_batch([ exercise ])
+
+        question = sheets.sole.exercises.sole.questions.sole
+
+        assert_nil question.choices
+        assert_equal [ nil, nil ], [ question.verdict, question.response ]
+      end
+
       test "après avoir rendu : la copie rendue, sa note et sa correction" do
         exercise = thales(1).first
         assignment = send_batch([ exercise ]).first
@@ -164,6 +175,13 @@ module Queries
 
         assert_empty sheets
         assert_empty sheets(create_student)
+      end
+
+      test "sans acteur, ou pour un autre rôle qu'un élève, aucun devoir reçu" do
+        send_batch(thales(3))
+
+        assert_empty StudentAssignedSheetsQuery.new.call(actor: nil)
+        assert_empty StudentAssignedSheetsQuery.new.call(actor: Actor.new(user_id: @teacher.id, role: :teacher))
       end
 
       test "ni l'assignation retirée, ni l'exercice archivé ou non publié n'apparaissent ; un envoi vidé disparaît" do

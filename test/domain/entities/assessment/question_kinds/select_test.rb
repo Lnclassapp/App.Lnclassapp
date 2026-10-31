@@ -109,6 +109,13 @@ module Entities
           assert_equal [ :wrong_correct_count ], multi([ true, false ], [ false, false ]).structure_errors
         end
 
+        test "plusieurs cases : une case sans proposition correcte n'est jamais juste, quoi qu'on y choisisse" do
+          gap = multi([ true, false ], [ true, false ], [ true, false ]).then { it.with(answers: it.answers.reject { |a| a.blank == 1 }) }
+
+          assert_equal [ true, false, true ], gap.blank_results([ 1, 3, 5 ])
+          assert_not gap.correct?([ 1, 3, 5 ])
+        end
+
         test "structure : une case sans proposition est refusée" do
           gap = multi([ true, false ], [ true, false ], [ true, false ]).then { it.with(answers: it.answers.reject { |a| a.blank == 1 }) }
 

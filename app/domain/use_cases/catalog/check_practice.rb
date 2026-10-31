@@ -122,8 +122,7 @@ module UseCases
         picked = Array.new(question.blanks) { shuffled_at(shuffled, given[it.to_s]) }
         return [ select_verdict(question, picked.first) ] if question.blanks == 1
 
-        by_id = question.answers.index_by(&:id)
-        results = question.blank_results(picked.map { by_id[it]&.content.to_s })
+        results = question.blank_results(picked)
         picked.each_with_index.map { |id, index| id.nil? ? :blank : (results[index] ? :correct : :wrong) }
       end
 

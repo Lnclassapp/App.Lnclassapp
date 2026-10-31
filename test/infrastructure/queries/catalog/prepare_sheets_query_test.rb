@@ -138,6 +138,33 @@ module Queries
         assert_nil questions.last.verdict
       end
 
+      test "relier et rédigé sont rendus par la session de lecture : les éléments mélangés pour relier, rien de plus pour un rédigé" do
+        exercise = create_exercise(essential: @n1, title: "Ex relier", questions: 0, position: 42)
+        create_kind_question(exercise:, question_type: "matching", content: "Relie", answers: [ [ "a", "1" ], [ "b", "2" ], [ "c", "3" ] ])
+        create_kind_question(exercise:, question_type: "written", content: "Explique", answers: [])
+
+        matching, written = call(nil).interros.first.exercises.find { it.public_id == exercise.public_id }.questions.map(&:play)
+
+        assert_equal %w[matching written], [ matching.kind_name, written.kind_name ]
+        assert_equal %w[a b c], matching.prompts
+        assert_equal %w[1 2 3], matching.items.map(&:content).sort
+        assert_equal [ 0, 1, 2 ], matching.items.map(&:index)
+        assert_empty written.answers
+      end
+
+      test "l'image d'une question est portée par la question, avec son texte de remplacement" do
+        exercise = create_exercise(essential: @n1, title: "Ex image", questions: 2, position: 43)
+        with_image, without = exercise.questions.order(:position).to_a
+        image = create_question_image(question: with_image, alt: "Un triangle ABC")
+
+        questions = call(nil).interros.first.exercises.find { it.public_id == exercise.public_id }.questions
+
+        assert_equal [ image.public_id, "Un triangle ABC" ], [ questions.first.image.public_id, questions.first.image.alt ]
+        assert_equal with_image.id, questions.first.id
+        assert_nil questions.last.image
+        assert_equal without.id, questions.last.id
+      end
+
       test "l'élève sans copie voit chaque exercice à faire, la progression à zéro" do
         student = create_student
 

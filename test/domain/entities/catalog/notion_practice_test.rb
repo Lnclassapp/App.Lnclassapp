@@ -117,6 +117,7 @@ module Entities
       test "l'énoncé est un texte de 1 200 caractères au plus" do
         assert_equal [ [ "statement", "too_long" ] ], paths(NotionPractice.errors_for(raw(statement: "a" * 1_201)))
         assert_equal [ [ "statement", "schema" ] ], paths(NotionPractice.errors_for(raw(statement: 3)))
+        assert_empty NotionPractice.errors_for(raw.except("statement"))
       end
 
       test "des questions qui ne sont pas des objets ne font pas lever" do
