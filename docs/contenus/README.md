@@ -204,12 +204,12 @@ Tous les fichiers de ce lot ont depuis été réécrits au format 3, sous le mê
 
 ### 3ème, mathématiques au format 3 — le pilote (chantier `refonte-contenus-maths`)
 
-Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un exercice. La leçon a en plus 4 problèmes de 5 questions ou plus.
+Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le 2026-10-29 au format `lnclass.course-tree` v3. Chaque notion a une fiche en quatre blocs (À retenir, La méthode, Un exemple corrigé, Le piège à éviter), éventuellement une figure, et un ou deux exercices (la leçon Thalès en a deux par notion depuis le 2026-10-31, aux types de questions mélangés). La leçon a en plus 4 problèmes de 5 questions ou plus. La leçon Thalès a aussi 4 sujets de devoir de 4 exercices chacun (16 exercices, 95 questions), comptés dans le tableau, avec trois figures de plus (triangle ABC avec M et N, papillon, triangle ABC avec D et E) que ses exercices citent : un schéma fixe, car la figure interactive affiche ses propres longueurs, qui contrediraient l'énoncé.
 
 | # | Fichier | Cours | Notions | Figures | Exercices | Questions |
 |---:|---|---|---:|---:|---:|---:|
 | 1 | `mathematiques/calcul-litteral.json` | Calcul littéral | 4 | 0 | 8 | 54 |
-| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 2 | 7 | 40 |
+| 2 | `mathematiques/proprietes-de-thales-dans-un-triangle.json` | Propriétés de Thalès dans un triangle | 3 | 4 | 26 | 153 |
 | 3 | `mathematiques/racines-carrees.json` | Racines carrées | 6 | 2 | 10 | 52 |
 | 4 | `mathematiques/triangle-rectangle.json` | Triangle rectangle | 4 | 5 | 8 | 46 |
 | 5 | `mathematiques/calcul-numerique.json` | Calcul numérique | 4 | 1 | 8 | 41 |
@@ -219,7 +219,7 @@ Les 10 leçons de mathématiques de la progression DPFC 2026-2027, rédigées le
 | 9 | `mathematiques/pyramides-et-cones.json` | Pyramides et cônes | 4 | 4 | 8 | 40 |
 | 10 | `mathematiques/statistique.json` | Statistique | 5 | 4 | 9 | 49 |
 
-Au total : 42 notions, 34 figures, 82 exercices et 455 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
+Au total : 42 notions, 36 figures, 101 exercices et 568 questions. Chaque fichier passe `script/contenus/valider.rb` sans avertissement. Chacun a été relu par un second rédacteur, qui a refait les calculs et corrigé 40 défauts. Chacun s'importe en brouillon par la vraie chaîne d'import ; c'est vérifié par `test/integration/catalog/pilot_lessons_test.rb`. Les points à faire trancher par un enseignant sont dans [`validation-enseignant.md`](../chantiers/refonte-contenus-maths/validation-enseignant.md).
 
 ### 3ème, Français au format 3 (chantier `contenus-3e-francais`)
 

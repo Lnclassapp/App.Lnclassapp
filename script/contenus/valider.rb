@@ -30,6 +30,7 @@ module Contenus
     QUESTIONS = (5..30)
     EXPLANATION = (20..2_000)
     PROBLEMS = 4
+    ESSENTIAL_EXERCISES = (1..2)
     NOTION_TEXT_MAX = 1_200
     STEP_MAX = 300
     AUTO_GRADED_MIN = 50 # % des questions de la leçon corrigées par la machine
@@ -222,11 +223,19 @@ module Contenus
       sheet(notion, path)
       figure_ref(notion["figure"], "#{path}.figure", figures)
       exercise = notion["exercise"]
-      return exercise(exercise, "#{path}.exercise", figures, steps: Array(notion["method"]).grep(String)) if exercise.is_a?(Hash)
+      exercises = notion_exercises(exercise)
+      unless ESSENTIAL_EXERCISES.cover?(exercises.size)
+        return fail_at("#{path}.exercise", "essential_exercise_count", "un ou deux exercices par notion, trouvé #{exercises.size}")
+      end
 
-      count = exercise.is_a?(Array) ? exercise.size : 0
-      fail_at("#{path}.exercise", "essential_exercise_count", "un exercice exactement par notion, trouvé #{count}")
+      steps = Array(notion["method"]).grep(String)
+      return exercise(exercise, "#{path}.exercise", figures, steps:) if exercise.is_a?(Hash)
+
+      exercises.each_with_index { |item, i| exercise(item, "#{path}.exercise[#{i}]", figures, steps:) }
     end
+
+    # `exercise` : un objet (un exercice) ou une liste de un à deux exercices.
+    def notion_exercises(exercise) = exercise.is_a?(Hash) ? [ exercise ] : (exercise.is_a?(Array) ? exercise : [])
 
     # Gabarit des 4 blocs : le schéma refuse les bornes de taille (« schema »), l'entité NotionSheet le reste (blank, too_long,
     # example_steps_mismatch).
@@ -423,7 +432,7 @@ module Contenus
 
     # ADR-0115 : au moins la moitié des questions de la leçon sont corrigées par la machine (les rédigées et le cahier ne le sont pas).
     def auto_graded_share(course, path)
-      exercises = Array(course["notions"]).grep(Hash).map { it["exercise"] } + Array(course["exercises"])
+      exercises = Array(course["notions"]).grep(Hash).flat_map { notion_exercises(it["exercise"]) } + Array(course["exercises"])
       questions = exercises.grep(Hash).flat_map { Array(it["questions"]).grep(Hash) }
       return if questions.empty?
 
