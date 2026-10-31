@@ -16,7 +16,7 @@ Pas de Lot 0 : aucun contrat, aucune table, aucune route.
 ## Lot R1 — Leçons communes à A1 et A2
 
 - **Couche**       : contenus
-- **Fichiers**     : `tle-a1/mathematiques/` et `tle-a2/mathematiques/` : `etude-de-fonctions-polynomes-et-de-fonctions-rationnelles`, `fonction-logarithme-neperien`, `fonction-exponentielle-neperienne`, `statistique-a-deux-variables`, `suites-numeriques`, `systemes-d-equations-lineaires-dans-r-r`
+- **Fichiers**     : `tle-a1/mathematiques/` et `tle-a2/mathematiques/` : `etude-de-fonctions-polynomes-et-de-fonctions-rationnelles`, `fonction-logarithme-neperien`, `fonction-exponentielle-neperienne`, `statistique-a-deux-variables`, `suites-numeriques`, `systemes-d-equations-lineaires-dans`
 - **Dépend de**    : —
 - **Test associé** : `valider.rb` et contrôle de l'entraînement sans erreur ni avertissement.
 - **Done quand**   : 12 fichiers v3 aux intitulés exacts, versions A1 et A2 aux mêmes notions, A2 sans appui sur les leçons absentes de sa progression.
