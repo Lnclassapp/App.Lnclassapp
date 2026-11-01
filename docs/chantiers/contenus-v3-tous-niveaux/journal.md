@@ -15,6 +15,7 @@
 | 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
 | 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | #427 |
 | 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
+| 2026-11-01 | P8 | 1ère (A, C, D) | Français | 11 distinctes (30 fichiers : 10 en A, 10 en C, 10 en D) | à venir |
 
 ## À faire valider par un enseignant
 
@@ -22,6 +23,17 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Vague | Leçon | Point à valider |
 |---|---|---|
+| P8 | Œuvre poétique | Rattachements Hugo/romantisme, Mallarmé/symbolisme, Leconte de Lisle/Parnasse, Senghor/négritude ; dates (Contemplations 1856, Fleurs du mal 1857, Alcools 1913, Chants d'ombre 1945) ; rimes plates/croisées/embrassées, sonnet 4+4+3+3 ; « Avant l'aube » / « Marché d'aurore » inventés pour la leçon |
+| P8 | Lecture des consignes et élaboration de plan | Types de sujet du programme de 1ère ; noms et nombre des plans (thématique, dialectique, analytique) ; introduction en 4 temps, conclusion en 2 ; sens des verbes d'action (discuter, justifier…) ; « Vous direz ce que vous en pensez » appelle-t-il toujours le plan dialectique |
+| P8 | Le commentaire composé | Conclusion bilan + ouverture, présent d'analyse, 2 ou 3 axes, introduction en 4 moments ; interdiction « fond / forme » comme plan ; titres d'axe en phrases ; « apostrophe » rangée sous l'énonciation |
+| P8 | Le rythme dans le texte | Définitions du rejet et du contre-rejet (manuels variables) ; décasyllabe 4/6 ; diérèse et synérèse non traitées ; valeurs expressives des sons (tendances) ; la notion « sonorités » relève-t-elle de cette leçon |
+| P8 | La focalisation | Terminologie de Genette (zéro, interne, externe ; Figures III, 1972) sans « omniscient » ni « vision par derrière » ; « point de vue » non distingué de « focalisation » ; exception de l'autobiographie ; effets rattachés à chaque focalisation |
+| P8 | Groupement de textes romanesques | Dates et titres (L'Enfant noir 1953, Climbié 1956, Les Soleils des indépendances 1968) ; définitions de genre (nouvelle, conte) ; courants (réalisme, naturalisme) non traités ; forme attendue du commentaire comparé et de la synthèse |
+| P8 | Les tonalités littéraires | « Tonalité » et « registre » traités comme synonymes ; élégiaque = lyrisme triste ; fantastique = hésitation naturel / surnaturel ; ironie citée seulement comme moyen de la satire ; textes discutables (Mme Awa, vendeur de beignets) |
+| P8 | Résumé du texte argumentatif | Règle de comptage des mots (élision = 1, trait d'union = 1), tolérance de 10 %, réduction au quart ; règle « même énonciation, pas de citation, pas de commentaire » ; « mots de reprise » ; aucune discussion après le résumé affirmée |
+| P8 | L'argumentation | Typologie des raisonnements (déduction, induction, analogie, concession-réfutation) ; convaincre / persuader / délibérer ; trois sophismes au programme de 1ère ? |
+| P8 | L'implicite | Distinction présupposé / sous-entendu et « test de la question » ; place de l'ironie (procédé de l'implicite) ; « même » comme indice de présupposé ; litote vs euphémisme ; faits de Corneille (1637), La Fontaine, Molière (1668) |
+| P8 | Les valeurs des temps verbaux (C, D) | Valeurs retenues (présent actuel / vérité générale / habitude / narration / historique, passé simple / imparfait / passé composé, plus-que-parfait, passé antérieur, futur, conditionnel) ; narration et historique distingués ; conditionnel « longtemps classé comme un mode » (usage DPFC) ; passé antérieur limité aux subordonnées temporelles ; conditionnel passé et irréel du passé non enseignés |
 | T8 | Toutes (10) | Dates, acteurs et rattachements au programme de chaque leçon, et chiffres économiques (L2 population INS ; L4 parts du PIB et de l'emploi données comme ordres de grandeur ; L6 couvert forestier, pauvreté, PPTE ; L9 population INSEE, nucléaire, R&D) : table détaillée dans `docs/chantiers/contenus-tle-histoire-geographie/journal.md` |
 | T7 | Toutes | Barèmes des questions rédigées (3 à 6 points, 8 pour les sujets de type BAC) proposés par le rédacteur ; forme des sujets « de type baccalauréat » (aucune règle d'épreuve officielle citée) ; dates et faits des œuvres réelles citées, vérifiés par le relecteur seulement. |
 | T7 | Œuvre narrative | Vocabulaire du récit retenu (schéma narratif en 5 temps, adjuvant / opposant, focalisation, analepse, scène / sommaire / ellipse / pause) ; « avait glissé » analepse ou simple antériorité ; « poussière rouge » métaphore ou hypallage ; problème 4 qui mêle un paragraphe de commentaire et un de dissertation ; faits de « L'Enfant noir » (Kouroussa, Tindican), « Une si longue lettre », « Une vie de boy », « Allah n'est pas obligé ». |

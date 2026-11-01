@@ -662,7 +662,7 @@ Au total : 28 notions, 56 exercices, 351 questions notées et 114 questions d'en
 
 Les 3 premières leçons de chaque matière de Première (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-10 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A, C et D ont des progressions différentes, et Histoire-Géographie est commune à toutes les séries. Dans le référentiel de Develop, la 1ère n'a que les séries A, C et D : les anciens jeux « 1ère A1 » et « 1ère A2 », au contenu identique, sont fusionnés en « 1ère A ».
 
-#### 1ère A1 et A2 (15 chacune)
+#### 1ère A1 et A2 (12 chacune, hors Français)
 
 Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour une série « A » que le référentiel n'ouvre pas en 1ère, elles ont été séparées le 2026-10-23.
 
@@ -677,14 +677,11 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `svt/le-reflexe-conditionnel.json` | Le réflexe conditionnel | 1 | 4 | 12 | 64 |
 | `svt/les-effets-des-drogues-sur-le-comportement.json` | Les effets des drogues sur le comportement | 2 | 4 | 12 | 65 |
 | `svt/les-anomalies-chromosomiques.json` | Les anomalies chromosomiques | 3 | 3 | 9 | 54 |
-| `francais/oeuvre-poetique.json` | Œuvre poétique | 1 | 4 | 12 | 64 |
-| `francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 2 | 3 | 9 | 45 |
-| `francais/le-commentaire-compose.json` | Le commentaire composé | 3 | 4 | 12 | 64 |
 | `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
 | `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
 | `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
 
-#### 1ère C (15)
+#### 1ère C (12, hors Français)
 
 | Fichier | Cours | Rang | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|---:|
@@ -697,14 +694,11 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `svt/le-role-et-la-structure-des-gonades-des-mammiferes.json` | Le rôle et la structure des gonades des mammifères | 1 | 4 | 12 | 68 |
 | `svt/la-division-meiotique.json` | La division méiotique | 2 | 4 | 12 | 70 |
 | `svt/la-gametogenese-chez-les-mammiferes.json` | La gamétogénèse chez les mammifères | 3 | 4 | 12 | 64 |
-| `francais/oeuvre-poetique.json` | Œuvre poétique | 1 | 4 | 12 | 64 |
-| `francais/le-commentaire-compose.json` | Le commentaire composé | 2 | 4 | 12 | 64 |
-| `francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 3 | 3 | 9 | 45 |
 | `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
 | `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
 | `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
 
-#### 1ère D (15)
+#### 1ère D (12, hors Français)
 
 | Fichier | Cours | Rang | Fiches | Exercices | Questions |
 |---|---|---:|---:|---:|---:|
@@ -717,9 +711,6 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `svt/les-fonctions-des-gonades.json` | Les fonctions des gonades | 1 | 3 | 9 | 51 |
 | `svt/la-division-meiotique.json` | La division méiotique | 2 | 4 | 12 | 70 |
 | `svt/la-gametogenese.json` | La gamétogenèse | 3 | 4 | 12 | 64 |
-| `francais/oeuvre-poetique.json` | Œuvre poétique | 1 | 4 | 12 | 64 |
-| `francais/le-commentaire-compose.json` | Le commentaire composé | 2 | 4 | 12 | 64 |
-| `francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 3 | 3 | 9 | 45 |
 | `philosophie/la-methode-de-lecture-de-texte.json` | La méthode de lecture de texte | 1 | 3 | 9 | 48 |
 | `philosophie/la-redaction-de-l-introduction.json` | La rédaction de l'introduction | 2 | 4 | 12 | 60 |
 | `philosophie/la-redaction-de-la-conclusion.json` | La rédaction de la conclusion | 3 | 3 | 9 | 53 |
@@ -732,7 +723,61 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 | `histoire-geographie/geographie-dynamisme-demographique-et-qualite-de-la-vie-en-cote-d-ivoire.json` | Géographie — Dynamisme démographique et qualité de la vie en Côte d'Ivoire | 2 | 3 | 9 | 51 |
 | `histoire-geographie/histoire-les-revolutions-industrielles.json` | Histoire — Les révolutions industrielles | 3 | 3 | 9 | 54 |
 
-**48 cours, 177 fiches, 531 exercices, 2998 questions, 11289 propositions.** Tous passent `script/contenus/valider.rb`, et `ctrlchars.rb` ne signale aucun caractère de contrôle. Les 63 cours de la version précédente (1ère A1 et A2 séparées) avaient été importés en deux envois sur une base jetable, sans refus ; **le lot actuel de 48 cours n'a pas été réimporté**.
+**36 cours, 133 fiches, 399 exercices, 2306 questions** (hors Français, remplacé ci-dessous ; 12 fichiers v1 de Français retirés). Tous passent `script/contenus/valider.rb`, et `ctrlchars.rb` ne signale aucun caractère de contrôle. Les 63 cours de la version précédente (1ère A1 et A2 séparées) avaient été importés en deux envois sur une base jetable, sans refus ; **le lot actuel n'a pas été réimporté**.
+
+#### 1ère — Français, 11 leçons (A, C, D)
+
+Les 11 leçons distinctes de Français de 1ère de la progression DPFC 2026-2027, rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md) (vague P8 du programme `contenus-v3-tous-niveaux`, chantier [`contenus-1ere-francais`](../chantiers/contenus-1ere-francais/memo.md)). Écrites une fois dans `1ere-a/francais/` (la dernière, propre à C et D, dans `1ere-c/`), puis déclinées en C et D : seuls `series_name` et le rang du `subtitle` changent. « Groupement de textes romanesques » n’existe qu’en A ; « Les valeurs des temps verbaux » qu’en C et D. Elles remplacent les 12 fichiers v1 de `1ere-a1/`, `1ere-a2/`, `1ere-c/` et `1ere-d/` (la série A de 1ère remplace A1 et A2). Chaque notion porte son « Je m’entraîne ». Aucune figure ; textes écrits pour Lnclass ; relecture indépendante par Opus, un tour.
+
+
+##### 1ère A
+
+| Fichier | Cours | Rang | Fiches | Exercices | Questions | Entraînement |
+|---|---|---:|---:|---:|---:|---:|
+| `francais/oeuvre-poetique.json` | Œuvre poétique | 1 | 4 | 8 | 56 | 16 |
+| `francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 2 | 4 | 8 | 50 | 12 |
+| `francais/le-commentaire-compose.json` | Le commentaire composé | 3 | 4 | 8 | 57 | 14 |
+| `francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 4 | 8 | 50 | 12 |
+| `francais/la-focalisation.json` | La focalisation | 5 | 4 | 8 | 49 | 16 |
+| `francais/groupement-de-textes-romanesques.json` | Groupement de textes romanesques | 6 | 4 | 8 | 55 | 16 |
+| `francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 7 | 5 | 9 | 54 | 15 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 8 | 4 | 8 | 60 | 12 |
+| `francais/l-argumentation.json` | L'argumentation | 9 | 4 | 8 | 52 | 12 |
+| `francais/l-implicite.json` | L'implicite | 10 | 4 | 8 | 49 | 12 |
+
+##### 1ère C
+
+| Fichier | Cours | Rang | Fiches | Exercices | Questions | Entraînement |
+|---|---|---:|---:|---:|---:|---:|
+| `francais/oeuvre-poetique.json` | Œuvre poétique | 1 | 4 | 8 | 56 | 16 |
+| `francais/le-commentaire-compose.json` | Le commentaire composé | 2 | 4 | 8 | 57 | 14 |
+| `francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 3 | 4 | 8 | 50 | 12 |
+| `francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 4 | 8 | 50 | 12 |
+| `francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 5 | 9 | 54 | 15 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 6 | 4 | 8 | 60 | 12 |
+| `francais/la-focalisation.json` | La focalisation | 7 | 4 | 8 | 49 | 16 |
+| `francais/l-argumentation.json` | L'argumentation | 8 | 4 | 8 | 52 | 12 |
+| `francais/l-implicite.json` | L'implicite | 9 | 4 | 8 | 49 | 12 |
+| `francais/les-valeurs-des-temps-verbaux.json` | Les valeurs des temps verbaux | 10 | 4 | 8 | 50 | 15 |
+
+##### 1ère D
+
+| Fichier | Cours | Rang | Fiches | Exercices | Questions | Entraînement |
+|---|---|---:|---:|---:|---:|---:|
+| `francais/oeuvre-poetique.json` | Œuvre poétique | 1 | 4 | 8 | 56 | 16 |
+| `francais/le-commentaire-compose.json` | Le commentaire composé | 2 | 4 | 8 | 57 | 14 |
+| `francais/lecture-des-consignes-et-elaboration-de-plan.json` | Lecture des consignes et élaboration de plan | 3 | 4 | 8 | 50 | 12 |
+| `francais/le-rythme-dans-le-texte.json` | Le rythme dans le texte | 4 | 4 | 8 | 50 | 12 |
+| `francais/les-tonalites-litteraires.json` | Les tonalités littéraires | 5 | 5 | 9 | 54 | 15 |
+| `francais/resume-du-texte-argumentatif.json` | Résumé du texte argumentatif | 6 | 4 | 8 | 60 | 12 |
+| `francais/la-focalisation.json` | La focalisation | 7 | 4 | 8 | 49 | 16 |
+| `francais/l-argumentation.json` | L'argumentation | 8 | 4 | 8 | 52 | 12 |
+| `francais/l-implicite.json` | L'implicite | 9 | 4 | 8 | 49 | 12 |
+| `francais/les-valeurs-des-temps-verbaux.json` | Les valeurs des temps verbaux | 10 | 4 | 8 | 50 | 15 |
+
+**123 notions, 243 exercices, 1586 questions notées et 409 d’entraînement** pour les 30 fichiers. Tous passent `script/contenus/valider.rb` sans erreur ni avertissement et le contrôle de l’entraînement.
+
+À faire valider par un enseignant de Français avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P8).
 
 **Ce qui a été repris, ce qui a été rédigé.**
 
