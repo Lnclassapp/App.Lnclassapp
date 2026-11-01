@@ -95,7 +95,7 @@
       "notions": [
         {
           "name": "Image d'un point par une transformation usuelle",
-          "remember": "Dans un repère orthonormé, $M(x\\,;y)$ a pour image $M'(x'\\,;y')$. **Translation** de vecteur $\\vec u(a\\,;b)$ : $\\overrightarrow{MM'}=\\vec u$, donc $x'=x+a$ et $y'=y+b$. **Symétrie centrale** de centre $A(a\\,;b)$ : $A$ est le milieu de $[MM']$, donc $x'=2a-x$ et $y'=2b-y$. **Symétrie axiale** d'axe $(d)$ : $(d)$ est la médiatrice de $[MM']$ si $M\\notin(d)$ ; pour $(d):x=a$, $M'(2a-x\\,;y)$. **Homothétie** de centre $\\Omega(a\\,;b)$ et de rapport $k\\neq0$ : $\\overrightarrow{\\Omega M'}=k\\overrightarrow{\\Omega M}$, donc $x'=a+k(x-a)$ et $y'=b+k(y-b)$. Translations, symétries et rotations conservent les distances ; une homothétie de rapport $k$ les multiplie par $|k|$.",
+          "remember": "Dans un repère orthonormé, $M(x\\,;y)$ a pour image $M'(x'\\,;y')$. **Translation** de vecteur $\\vec u(a\\,;b)$ : $\\overrightarrow{MM'}=\\vec u$, donc $x'=x+a$ et $y'=y+b$. **Symétrie centrale** de centre $A(a\\,;b)$ : $A$ est le milieu de $[MM']$, donc $x'=2a-x$ et $y'=2b-y$. **Symétrie axiale** d'axe $(d)$ : $(d)$ est la médiatrice de $[MM']$ si $M\\notin(d)$ ; pour $(d):x=a$, $M'(2a-x\\,;y)$. **Homothétie** de centre $\\Omega(a\\,;b)$ et de rapport $k\\neq0$ : $\\overrightarrow{\\Omega M'}=k\\overrightarrow{\\Omega M}$, donc $x'=a+k(x-a)$ et $y'=b+k(y-b)$. Translations et symétries conservent les distances ; une homothétie de rapport $k$ les multiplie par $|k|$.",
           "method": [
             "Identifier la transformation et relever ses éléments : vecteur, centre, axe ou rapport.",
             "Écrire la relation qui lie $M$ et $M'$ pour cette transformation.",
@@ -215,7 +215,7 @@
               {
                 "content": "Parmi ces transformations, lesquelles conservent toujours les distances, c'est-à-dire $M'N'=MN$ pour tous points $M$ et $N$ ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Identifier : on regarde le type de chaque transformation. Étape 2 — Écrire : une translation et une symétrie axiale conservent les distances. Une homothétie de rapport $k$ multiplie les distances par $|k|$. Étape 3 — Calculer : avec $k=2$, $M'N'=2MN$ ; avec $k=\\dfrac13$, $M'N'=\\dfrac13MN$. Étape 4 — Conclure : seules la translation et la symétrie axiale conviennent.",
+                "explanation": "Étape 1 — Identifier : on regarde le type de chaque transformation. Étape 2 — Écrire : une translation et une symétrie axiale conservent les distances. Une homothétie de rapport $k$ multiplie les distances par $|k|$. Étape 3 — Calculer : avec $k=2$, $M'N'=2MN$ ; avec $k=\\dfrac13$, $M'N'=\\dfrac13MN$. Étape 4 — Contrôler puis conclure : seules la translation et la symétrie axiale conviennent.",
                 "answers": [
                   {
                     "content": "Une translation",
@@ -236,24 +236,24 @@
                 ]
               },
               {
-                "content": "Dans un repère orthonormé, on applique la symétrie centrale de centre $A(1\\,;2)$ au point $M(3\\,;1)$. Quelle est l'image $M'$ ?",
+                "content": "Dans un repère orthonormé, on applique la symétrie centrale de centre $A(2\\,;0)$ au point $M(6\\,;3)$. Quelle est l'image $M'$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : symétrie centrale de centre $A(1\\,;2)$. Étape 2 — Écrire : $A$ est le milieu de $[MM']$, donc $x'=2a-x$ et $y'=2b-y$. Étape 3 — Calculer : $x'=2-3=-1$ et $y'=4-1=3$. Étape 4 — Contrôler : le milieu de $[MM']$ est $(1\\,;2)=A$. Le couple $(-2\\,;1)$ vient de $a-x$ et $b-y$ (facteur $2$ oublié) ; $(2\\,;1{,}5)$ est le milieu de $[MA]$ ; $(-3\\,;-1)$ est l'image par la symétrie de centre $O$.",
+                "explanation": "Étape 1 — Identifier : symétrie centrale de centre $A(2\\,;0)$. Étape 2 — Écrire : $A$ est le milieu de $[MM']$, donc $x'=2a-x$ et $y'=2b-y$. Étape 3 — Calculer : $x'=4-6=-2$ et $y'=0-3=-3$. Étape 4 — Contrôler : le milieu de $[MM']$ est $\\left(\\dfrac{6-2}{2}\\,;\\dfrac{3-3}{2}\\right)=(2\\,;0)=A$. Le couple $(-4\\,;-3)$ vient de $a-x$ et $b-y$ (facteur $2$ oublié) ; $(4\\,;1{,}5)$ est le milieu de $[MA]$ ; $(-6\\,;-3)$ est l'image par la symétrie de centre $O$.",
                 "answers": [
                   {
-                    "content": "$(-1\\,;3)$",
+                    "content": "$(-2\\,;-3)$",
                     "correct": true
                   },
                   {
-                    "content": "$(-2\\,;1)$",
+                    "content": "$(-4\\,;-3)$",
                     "correct": false
                   },
                   {
-                    "content": "$(2\\,;1{,}5)$",
+                    "content": "$(4\\,;1{,}5)$",
                     "correct": false
                   },
                   {
-                    "content": "$(-3\\,;-1)$",
+                    "content": "$(-6\\,;-3)$",
                     "correct": false
                   }
                 ]
@@ -284,7 +284,8 @@
               },
               {
                 "content": "L'image de $M(6\\,;1)$ par la symétrie centrale de centre $O(0\\,;0)$ a pour abscisse ___.",
-                "question_type": "fill_blank",
+                "question_type": "numeric",
+                "tolerance": 0,
                 "explanation": "Étape 1 — Identifier : symétrie centrale de centre $O$. Étape 2 — Écrire : $x'=2\\times0-x$. Étape 3 — Calculer : $x'=-6$. Étape 4 — Contrôler : le milieu de $[MM']$ est $O$.",
                 "answers": [
                   {
@@ -339,9 +340,9 @@
             "figure": null,
             "questions": [
               {
-                "content": "On note $S\\circ t$ la composée « $t$ puis $S$ » de deux transformations $t$ et $S$. Quelle transformation s'applique en premier ?",
+                "content": "On considère la composée $S\\circ t$ de deux transformations $t$ et $S$. Quelle transformation s'applique en premier ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Lire l'ordre : dans $g\\circ f$, la transformation $f$, écrite à droite, s'applique en premier. Ici $t$ s'applique d'abord, puis $S$. Étape 2 — Calculer $M_1=t(M)$ ; Étape 3 — Calculer $M'=S(M_1)$. Lire de gauche à droite (appliquer $S$ d'abord) est l'erreur la plus fréquente.",
+                "explanation": "Étape 1 — Lire l'ordre : dans $g\\circ f$, la transformation $f$, écrite à droite, s'applique en premier. Ici $t$ s'applique d'abord, puis $S$. Étape 2 — Calculer $M_1=t(M)$ ; Étape 3 — Calculer $M'=S(M_1)$. Lire de gauche à droite (appliquer $S$ d'abord) est l'erreur la plus fréquente. « Les deux en même temps » est impossible : on applique les transformations l'une après l'autre. « La transformation qui a le plus grand rapport » n'a aucun lien avec l'ordre, qui se lit dans l'écriture $S\\circ t$.",
                 "answers": [
                   {
                     "content": "$t$, écrite à droite dans $S\\circ t$",
@@ -489,7 +490,7 @@
                 "content": "On applique d'abord la translation de vecteur $\\vec u(1\\,;2)$, puis la symétrie centrale de centre $O(0\\,;0)$, au point $M(3\\,;1)$. On obtient $M'(___\\,;\\,___)$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Lire l'ordre : la translation d'abord. Étape 2 — Calculer $M_1=(3+1\\,;1+2)=(4\\,;3)$. Étape 3 — Calculer $M'=S(M_1)=(-4\\,;-3)$. Étape 4 — Recommencer dans l'autre ordre donnerait $(-2\\,;-1)$ : l'ordre compte.",
+                "explanation": "Étape 1 — Lire l'ordre : la translation d'abord. Étape 2 — Calculer $M_1=(3+1\\,;1+2)=(4\\,;3)$. Étape 3 — Calculer $M'=S(M_1)=(-4\\,;-3)$. Étape 4 — Recommencer dans l'autre ordre donnerait $(-2\\,;1)$ : l'ordre compte.",
                 "answers": [
                   {
                     "content": "-4",
@@ -638,7 +639,7 @@
               {
                 "content": "Parmi ces composées, lesquelles sont des translations ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Identifier : on regarde la position des axes ou des centres. Étape 2 — Choisir la propriété : deux axes parallèles distincts ou deux centres distincts donnent une translation. Étape 3 — Calculer : deux axes sécants donnent une rotation (d'angle $80^\\circ$ dans le troisième cas ; $180^\\circ$, donc la symétrie centrale de centre $O$, dans le dernier cas). Étape 4 — Conclure : seules les deux premières composées sont des translations.",
+                "explanation": "Étape 1 — Identifier : on regarde la position des axes ou des centres. Étape 2 — Choisir la propriété : deux axes parallèles distincts ou deux centres distincts donnent une translation. Étape 3 — Calculer : deux axes sécants donnent une rotation (d'angle $80^\\circ$ pour des axes sécants avec $40^\\circ$ ; $180^\\circ$, donc la symétrie centrale de centre $O$, pour des axes perpendiculaires). Étape 4 — Vérifier sur un point, puis conclure : pour des axes sécants, $O$ est invariant, ce qui exclut une translation ; seules les composées d'axes parallèles distincts et de deux symétries centrales de centres distincts sont des translations.",
                 "answers": [
                   {
                     "content": "$S_{d_2}\\circ S_{d_1}$ avec $(d_1)$ et $(d_2)$ parallèles et distinctes",
@@ -659,24 +660,24 @@
                 ]
               },
               {
-                "content": "Dans un repère orthonormé, $(d_1):x=1$ et $(d_2):x=4$. La composée $S_{d_2}\\circ S_{d_1}$ est la translation de vecteur :",
+                "content": "Dans un repère orthonormé, $(d_1):x=-1$ et $(d_2):x=3$. La composée $S_{d_2}\\circ S_{d_1}$ est la translation de vecteur :",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : axes parallèles $x=1$ et $x=4$, $(d_1)$ d'abord. Étape 2 — Choisir la propriété : translation. Étape 3 — Calculer : $2\\overrightarrow{HK}=2\\times(3\\,;0)=(6\\,;0)$. Étape 4 — Vérifier avec $M(0\\,;0)$ : $(2\\,;0)$ puis $(6\\,;0)$. Le vecteur $(3\\,;0)$ oublie le facteur $2$ ; $(-6\\,;0)$ correspond à $S_{d_1}\\circ S_{d_2}$ ; $(5\\,;0)$ additionne les abscisses des axes.",
+                "explanation": "Étape 1 — Identifier : axes parallèles $x=-1$ et $x=3$, $(d_1)$ d'abord. Étape 2 — Choisir la propriété : translation. Étape 3 — Calculer : $H(-1\\,;0)$ et $K(3\\,;0)$, donc $2\\overrightarrow{HK}=2\\times(4\\,;0)=(8\\,;0)$. Étape 4 — Vérifier sur un point, puis conclure : avec $M(0\\,;0)$, $(-2\\,;0)$ puis $(8\\,;0)$. Le vecteur $(4\\,;0)$ oublie le facteur $2$ ; $(-8\\,;0)$ correspond à $S_{d_1}\\circ S_{d_2}$ ; $(2\\,;0)$ additionne les abscisses des axes.",
                 "answers": [
                   {
-                    "content": "$(6\\,;0)$",
+                    "content": "$(8\\,;0)$",
                     "correct": true
                   },
                   {
-                    "content": "$(3\\,;0)$",
+                    "content": "$(4\\,;0)$",
                     "correct": false
                   },
                   {
-                    "content": "$(-6\\,;0)$",
+                    "content": "$(-8\\,;0)$",
                     "correct": false
                   },
                   {
-                    "content": "$(5\\,;0)$",
+                    "content": "$(2\\,;0)$",
                     "correct": false
                   }
                 ]
@@ -707,7 +708,8 @@
               },
               {
                 "content": "Deux droites se coupent en $O$ avec $(\\vec u_1,\\vec u_2)=45^\\circ$ ; $S_{d_2}\\circ S_{d_1}$ est la rotation de centre $O$ d'angle ___ degrés.",
-                "question_type": "fill_blank",
+                "question_type": "numeric",
+                "tolerance": 0,
                 "explanation": "Étape 1 — Identifier : axes sécants en $O$. Étape 2 — Choisir la propriété : rotation de centre $O$. Étape 3 — Calculer : $2\\times45^\\circ=90^\\circ$. Étape 4 — Vérifier : un point de $(d_1)$ tourne de $90^\\circ$.",
                 "answers": [
                   {
@@ -720,7 +722,7 @@
               {
                 "content": "La composée d'une symétrie axiale d'axe $(d)$ avec elle-même, $S_d\\circ S_d$, laisse tout point à sa place.",
                 "question_type": "true_false",
-                "explanation": "Étape 1 — Identifier : même axe, $(d_1)=(d_2)$. Étape 2 — Choisir la propriété : $M_1=S_d(M)$ puis $S_d(M_1)=M$. Étape 3 — Calculer : $M'=M$. Étape 4 — Conclure : la composée est l'identité (aucun déplacement).",
+                "explanation": "Étape 1 — Identifier : même axe, $(d_1)=(d_2)$. Étape 2 — Choisir la propriété : $M_1=S_d(M)$ puis $S_d(M_1)=M$. Étape 3 — Calculer : $M'=M$. Étape 4 — Vérifier sur un point, puis conclure : la composée est l'identité (aucun déplacement).",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -827,7 +829,7 @@
               {
                 "content": "Relie chaque transformation à ses éléments caractéristiques.",
                 "question_type": "matching",
-                "explanation": "Étape 1 — Reconnaître : on identifie chaque transformation. Étape 2 — Choisir ce qui la détermine : une translation est donnée par son vecteur ; une rotation par son centre et son angle ; une homothétie par son centre et son rapport ; une symétrie axiale par son axe. Étapes 3 et 4 : pour construire ou vérifier, on utilise ces éléments.",
+                "explanation": "Étape 1 — Reconnaître : on identifie chaque transformation et ses éléments caractéristiques : une translation est donnée par son vecteur ; une rotation par son centre et son angle ; une homothétie par son centre et son rapport ; une symétrie axiale par son axe. Pour construire ou vérifier une décomposition, on utilise ces éléments.",
                 "answers": [
                   {
                     "content": "Translation",
@@ -919,7 +921,8 @@
               },
               {
                 "content": "Une rotation d'angle $80^\\circ$ est la composée de deux symétries axiales dont les axes forment un angle de ___ degrés.",
-                "question_type": "fill_blank",
+                "question_type": "numeric",
+                "tolerance": 0,
                 "explanation": "Étape 1 — Reconnaître : rotation d'angle $80^\\circ$. Étape 2 — Choisir le premier axe : une droite par le centre. Étape 3 — Construire le second axe : angle $\\dfrac{80^\\circ}{2}=40^\\circ$. Étape 4 — Vérifier : $2\\times40^\\circ=80^\\circ$.",
                 "answers": [
                   {
@@ -983,7 +986,7 @@
               "content": "Dans un repère orthonormé, on applique au point $M(1\\,;2)$ la symétrie centrale de centre $A(3\\,;1)$, puis celle de centre $B(8\\,;4)$. Quelle est l'abscisse de l'image finale ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Lire l'ordre : $S_A$ d'abord, puis $S_B$. Étape 2 — Calculer $M_1=S_A(M)=(2\\times3-1\\,;2\\times1-2)=(5\\,;0)$. Étape 3 — Calculer $M'=S_B(M_1)=(2\\times8-5\\,;2\\times4-0)=(11\\,;8)$. Étape 4 — Vérifier avec la propriété : $S_B\\circ S_A$ est la translation de vecteur $2\\overrightarrow{AB}=(10\\,;6)$ et $M+(10\\,;6)=(11\\,;8)$. L'abscisse est $11$.",
+              "explanation": "Étape 1 — Lire l'ordre : $S_A$ d'abord, puis $S_B$. Étape 2 — Calculer $M_1=S_A(M)=(2\\times3-1\\,;2\\times1-2)=(5\\,;0)$. Étape 3 — Calculer $M'=S_B(M_1)=(2\\times8-5\\,;2\\times4-0)=(11\\,;8)$. Étape 4 — Recommencer dans l'autre ordre, puis comparer : $S_A\\circ S_B$ donne $(-9\\,;-4)$, autre résultat. Contrôle avec la propriété : $S_B\\circ S_A$ est la translation de vecteur $2\\overrightarrow{AB}=(10\\,;6)$ et $M+(10\\,;6)=(11\\,;8)$. L'abscisse est $11$.",
               "answers": [
                 {
                   "content": "11",
@@ -1033,7 +1036,7 @@
               "content": "Mme Kouassi imprime le motif de départ, puis ses images par les translations de vecteurs $\\vec u$, $2\\vec u$, $3\\vec u$, …, $7\\vec u$ : cela fait 8 motifs au total. Chaque motif brodé coûte 150 FCFA. Quel est le coût total, en FCFA ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Compter : le motif de départ plus 7 images, soit $1+7=8$ motifs. Étape 2 — Écrire : coût total $=8\\times150$. Étape 3 — Calculer : $8\\times150=1\\,200$. Étape 4 — Conclure : le coût est de 1 200 FCFA. Oublier le motif de départ donnerait $7\\times150=1\\,050$ FCFA.",
+              "explanation": "Le motif de départ plus 7 images font $1+7=8$ motifs. Le coût total est $8\\times150=1\\,200$ FCFA. Oublier le motif de départ donnerait $7\\times150=1\\,050$ FCFA.",
               "answers": [
                 {
                   "content": "1200",
@@ -1077,7 +1080,7 @@
             {
               "content": "Les axes $(d_1):x=2$ et $(d_2):x=7$ sont parallèles. Quelle est la nature de la composée $S_{d_2}\\circ S_{d_1}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Identifier : deux symétries axiales, $(d_1)$ d'abord ; les axes $x=2$ et $x=7$ sont parallèles et distincts. Étape 2 — Choisir la propriété : deux axes parallèles donnent une translation. Étape 3 — Calculer : le vecteur est horizontal, de norme $2\\times5=10$. Étape 4 — Vérifier : $M(0\\,;1)\\mapsto(4\\,;1)\\mapsto(10\\,;1)$. Une rotation ou une symétrie centrale exigerait des axes sécants.",
+              "explanation": "Étape 1 — Identifier : deux symétries axiales, $(d_1)$ d'abord ; les axes $x=2$ et $x=7$ sont parallèles et distincts. Étape 2 — Choisir la propriété : deux axes parallèles donnent une translation. Étape 3 — Calculer : le vecteur est horizontal, de norme $2\\times5=10$. Étape 4 — Vérifier : $M(0\\,;1)\\mapsto(4\\,;1)\\mapsto(10\\,;1)$. Une rotation ou une symétrie centrale exigerait des axes sécants. Une symétrie axiale est exclue : deux symétries axiales d'axes distincts ne donnent jamais une symétrie axiale ; ici, c'est une translation de vecteur non nul $(10\\,;0)$.",
               "answers": [
                 {
                   "content": "Une translation",
@@ -1113,7 +1116,7 @@
               "content": "Dans un repère orthonormé, on remplace le second axe par $(d_2):x=9$, le premier restant $(d_1):x=2$. $S_{d_2}\\circ S_{d_1}$ est alors une translation de vecteur $(a\\,;0)$. Quelle est la valeur de $a$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Identifier : axes parallèles $x=2$ et $x=9$. Étape 2 — Choisir la propriété : translation. Étape 3 — Calculer : $2\\overrightarrow{HK}=2\\times(9-2)=14$, donc $a=14$. Étape 4 — Vérifier avec $M(0\\,;1)$ : $(4\\,;1)$ puis $(14\\,;1)$.",
+              "explanation": "Étape 1 — Identifier : axes parallèles $x=2$ et $x=9$. Étape 2 — Choisir la propriété : translation. Étape 3 — Calculer : $2\\overrightarrow{HK}=2\\times(7\\,;0)=(14\\,;0)$, donc $a=14$. Étape 4 — Vérifier avec $M(0\\,;1)$ : $(4\\,;1)$ puis $(14\\,;1)$.",
               "answers": [
                 {
                   "content": "14",
@@ -1137,7 +1140,7 @@
               "content": "Chaque carreau à motif coûte 1 800 FCFA. M. Koné pose trois carreaux, le carreau de départ $M$ et ses deux images successives. Quel est le coût de ces trois carreaux, en FCFA ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Compter : le carreau de départ plus deux images, soit $3$ carreaux. Étape 2 — Écrire : coût $=3\\times1\\,800$. Étape 3 — Calculer : $3\\times1\\,800=5\\,400$. Étape 4 — Conclure : le coût est de 5 400 FCFA.",
+              "explanation": "Le carreau de départ plus deux images font $3$ carreaux. Le coût est $3\\times1\\,800=5\\,400$ FCFA.",
               "answers": [
                 {
                   "content": "5400",
@@ -1181,7 +1184,7 @@
             {
               "content": "Les axes $(d_1)=(Ox)$ et $(d_2):y=x$ se coupent en $O$ et forment un angle de $45^\\circ$. Quelle est la composée $S_{d_2}\\circ S_{d_1}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Identifier : deux symétries axiales d'axes sécants en $O$. Étape 2 — Choisir la propriété : deux axes sécants donnent une rotation de centre $O$. Étape 3 — Calculer : l'angle est $2\\times45^\\circ=90^\\circ$. Étape 4 — Vérifier avec $M(3\\,;1)$ : $(3\\,;-1)$ puis $(-1\\,;3)=r(M)$. La rotation de $45^\\circ$ oublie le facteur $2$ ; la symétrie centrale serait un angle de $180^\\circ$.",
+              "explanation": "Étape 1 — Identifier : deux symétries axiales d'axes sécants en $O$. Étape 2 — Choisir la propriété : deux axes sécants donnent une rotation de centre $O$. Étape 3 — Calculer : l'angle est $2\\times45^\\circ=90^\\circ$. Étape 4 — Vérifier avec $M(3\\,;1)$ : $(3\\,;-1)$ puis $(-1\\,;3)=r(M)$. La rotation de $45^\\circ$ oublie le facteur $2$ ; la symétrie centrale serait un angle de $180^\\circ$. Une translation est exclue : $O$ est invariant par la composée, alors qu'une translation de vecteur non nul n'a aucun point invariant.",
               "answers": [
                 {
                   "content": "La rotation de centre $O$ et d'angle $90^\\circ$",
@@ -1231,7 +1234,7 @@
               "content": "La rosace est obtenue en répétant la rotation de centre $O$ et d'angle $45^\\circ$ à partir d'un motif, jusqu'à revenir au motif de départ. Combien de motifs différents (motif de départ compris) la rosace compte-t-elle ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Reconnaître : rotation d'angle $45^\\circ$. Étape 2 — Écrire : après $n$ applications, l'angle est $n\\times45^\\circ$. Étape 3 — Calculer : on revient au départ quand $n\\times45^\\circ=360^\\circ$, soit $n=\\dfrac{360}{45}=8$. Étape 4 — Conclure : la rosace compte $8$ motifs différents.",
+              "explanation": "Après $n$ applications de la rotation d'angle $45^\\circ$, l'angle total est $n\\times45^\\circ$. On revient au motif de départ quand $n\\times45^\\circ=360^\\circ$, soit $n=\\dfrac{360}{45}=8$. La rosace compte donc $8$ motifs différents.",
               "answers": [
                 {
                   "content": "8",
@@ -1243,7 +1246,7 @@
               "content": "Une rosace compte 8 motifs différents et chaque motif brodé coûte 175 FCFA. Quel est le coût de tous les motifs, en FCFA ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Compter : 8 motifs. Étape 2 — Écrire : coût $=8\\times175$. Étape 3 — Calculer : $8\\times175=1\\,400$. Étape 4 — Conclure : le coût est de 1 400 FCFA.",
+              "explanation": "La rosace compte 8 motifs. Le coût est $8\\times175=1\\,400$ FCFA.",
               "answers": [
                 {
                   "content": "1400",
@@ -1253,7 +1256,7 @@
               "unit": "FCFA"
             },
             {
-              "content": "Dans un repère orthonormé d'origine $O$, $(d_1)$ et $(d_2)$ sont deux droites sécantes en $O$ qui ne sont pas perpendiculaires. Explique pourquoi $S_{d_2}\\circ S_{d_1}$ n'est pas une translation.",
+              "content": "Dans un repère orthonormé d'origine $O$, $(d_1)$ et $(d_2)$ sont deux droites sécantes en $O$. Explique pourquoi $S_{d_2}\\circ S_{d_1}$ n'est pas une translation.",
               "question_type": "written",
               "points": 2,
               "criteria": [
@@ -1262,7 +1265,7 @@
                 "Une translation de vecteur non nul n'a aucun point invariant",
                 "Conclusion : c'est une rotation, pas une translation"
               ],
-              "explanation": "Corrigé modèle : Étape 1 — Identifier : les axes sont sécants en $O$. Étape 2 — Écrire : $O\\in(d_1)$ et $O\\in(d_2)$, donc $S_{d_1}(O)=O$ et $S_{d_2}(O)=O$. Étape 3 — Conclure : $O$ est invariant par $S_{d_2}\\circ S_{d_1}$. Une translation de vecteur non nul n'a aucun point invariant, puisque $\\overrightarrow{MM'}=\\vec u\\neq\\vec0$. Donc c'est une rotation de centre $O$ (propriété sur les axes sécants). Points : 0,5 par critère.",
+              "explanation": "Corrigé modèle : Étape 1 — Identifier : les axes sont sécants en $O$. Étape 2 — Choisir la propriété : deux axes sécants donnent une rotation de centre $O$. Étape 3 — Calculer : $O\\in(d_1)$ et $O\\in(d_2)$, donc $S_{d_1}(O)=O$ et $S_{d_2}(O)=O$ : $O$ est invariant par $S_{d_2}\\circ S_{d_1}$. Étape 4 — Vérifier sur un point, puis conclure : une translation de vecteur non nul n'a aucun point invariant, puisque $\\overrightarrow{MM'}=\\vec u\\neq\\vec0$. Donc la composée est une rotation de centre $O$, pas une translation. Points : 0,5 par critère.",
               "answers": [],
               "starter": "Le point $O$ est sur les deux axes, donc..."
             }
@@ -1322,7 +1325,7 @@
               ]
             },
             {
-              "content": "Le triangle $ABC$ a pour aire $1$ cm$^2$ ($AB=2$ cm, $AC=1$ cm, angle droit en $A$). On le transforme par l'homothétie de centre $O$ et de rapport $6$. Quelle est l'aire, en cm$^2$, de l'image ? (Une homothétie de rapport $k$ multiplie les aires par $k^2$.)",
+              "content": "Le triangle $ABC$ a pour aire $1$ cm$^2$ ($AB=2$ cm, $AC=1$ cm, angle droit en $A$). On le transforme par l'homothétie de centre $O$ et de rapport $6$. Quelle est l'aire, en cm$^2$, de l'image ?",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Étape 1 — Identifier : homothétie de rapport $k=6$. Étape 2 — Écrire : les longueurs sont multipliées par $|k|=6$ et les aires par $k^2$. Étape 3 — Calculer : $A'=1\\times6^2=36$ cm$^2$. Étape 4 — Contrôler : côtés $12$ cm et $6$ cm, aire $\\dfrac12\\times12\\times6=36$ cm$^2$. La valeur $6$ multiplierait l'aire par $k$ au lieu de $k^2$.",
@@ -1335,9 +1338,9 @@
               "unit": "cm²"
             },
             {
-              "content": "Pour revenir au triangle $ABC$ depuis son image par $h_2\\circ h_1$, on applique l'homothétie de centre $O$ et de rapport ___.",
+              "content": "Soient $h_1$ et $h_2$ les homothéties de centre $O$ et de rapports $2$ et $3$. Pour revenir au triangle $ABC$ depuis son image par $h_2\\circ h_1$, on applique l'homothétie de centre $O$ et de rapport ___.",
               "question_type": "select",
-              "explanation": "Étape 1 — Identifier : $h_2\\circ h_1$ est l'homothétie de centre $O$ et de rapport $6$. Étape 2 — Écrire : on cherche $k'$ avec $\\overrightarrow{OM''}=k'\\times6\\overrightarrow{OM}=\\overrightarrow{OM}$. Étape 3 — Calculer : $k'=\\dfrac16$. Étape 4 — Contrôler : les rapports se multiplient, $6\\times\\dfrac16=1$. Le rapport $6$ agrandirait encore ; $-6$ retournerait le motif ; $\\dfrac12$ annule seulement $h_1$.",
+              "explanation": "Étape 1 — Identifier : $h_2\\circ h_1$ est l'homothétie de centre $O$ et de rapport $6$. Étape 2 — Écrire : on cherche $k'$ avec $\\overrightarrow{OM''}=k'\\times6\\overrightarrow{OM}=\\overrightarrow{OM}$. Étape 3 — Calculer : $k'=\\dfrac16$. Étape 4 — Contrôler : les rapports se multiplient, $6\\times\\dfrac16=1$. Le rapport $6$ agrandirait encore ; $-6$ donnerait la composée de rapport $6\\times(-6)=-36$ : le motif serait retourné et aussi agrandi ; $\\dfrac12$ annule seulement $h_1$.",
               "answers": [
                 {
                   "content": "$\\dfrac16$",
@@ -1370,7 +1373,7 @@
               ]
             },
             {
-              "content": "Après $h_2\\circ h_1$, le côté $[AB]$ de longueur $2$ cm devient $[A_2B_2]$. Mme Diabaté borde ce côté avec du galon à 25 FCFA le centimètre. Quel est le coût du galon, en FCFA ?",
+              "content": "Soient $h_1$ et $h_2$ les homothéties de centre $O$ et de rapports $2$ et $3$, avec $A(1\\,;1)$ et $B(3\\,;1)$ dans un repère orthonormé (unité : 1 cm). Après $h_2\\circ h_1$, le côté $[AB]$ de longueur $2$ cm devient $[A_2B_2]$. Mme Diabaté borde ce côté avec du galon à 25 FCFA le centimètre. Quel est le coût du galon, en FCFA ?",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Étape 1 — Identifier : homothétie de rapport $6$. Étape 2 — Écrire : $A_2B_2=6\\times AB$. Étape 3 — Calculer : $A_2B_2=6\\times2=12$ cm, donc le coût est $12\\times25=300$. Étape 4 — Contrôler : $A_2(6\\,;6)$ et $B_2(18\\,;6)$, longueur $18-6=12$ cm. Le coût est de 300 FCFA.",
@@ -1392,7 +1395,7 @@
                 "$\\overrightarrow{OM_2}=3\\overrightarrow{OM_1}$",
                 "Conclusion : $\\overrightarrow{OM_2}=6\\overrightarrow{OM}$ pour tout $M$"
               ],
-              "explanation": "Corrigé modèle : Étape 1 — Soit $M$ un point, $M_1=h_1(M)$ et $M_2=h_2(M_1)$. Étape 2 — Par définition de $h_1$, $\\overrightarrow{OM_1}=2\\overrightarrow{OM}$. Étape 3 — Par définition de $h_2$, $\\overrightarrow{OM_2}=3\\overrightarrow{OM_1}$. Étape 4 — Donc $\\overrightarrow{OM_2}=3\\times2\\overrightarrow{OM}=6\\overrightarrow{OM}$ pour tout $M$ : $h_2\\circ h_1$ est l'homothétie de centre $O$ et de rapport $6$. Barème : 0,5 pour l'introduction des points, 0,5 pour chacune des deux relations, 1,5 au total pour la conclusion et le calcul.",
+              "explanation": "Corrigé modèle : Étape 1 — Lire l'ordre : $h_1$ s'applique d'abord ; soit $M$ un point, $M_1=h_1(M)$ et $M_2=h_2(M_1)$. Étape 2 — Calculer $M_1$ : par définition de $h_1$, $\\overrightarrow{OM_1}=2\\overrightarrow{OM}$. Étape 3 — Calculer $M_2$ : par définition de $h_2$, $\\overrightarrow{OM_2}=3\\overrightarrow{OM_1}=3\\times2\\overrightarrow{OM}=6\\overrightarrow{OM}$. Étape 4 — Recommencer dans l'autre ordre, puis comparer : $h_1\\circ h_2$ donne aussi $2\\times3\\overrightarrow{OM}=6\\overrightarrow{OM}$. Pour tout $M$, $h_2\\circ h_1$ est donc l'homothétie de centre $O$ et de rapport $6$. Barème : 0,5 pour l'introduction des points, 0,5 pour chacune des deux relations, 1,5 au total pour la conclusion et le calcul.",
               "answers": [],
               "starter": "Soit $M$ un point et $M_1=h_1(M)$..."
             }
