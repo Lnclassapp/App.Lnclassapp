@@ -187,7 +187,7 @@
               {
                 "content": "Soit $G$ le barycentre de $(A,5)$ et $(B,-3)$. Où est situé $G$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $5+(-3)=2\\neq0$, donc $G$ existe. Étape 2 — Écrire : $5\\overrightarrow{GA}-3\\overrightarrow{GB}=\\vec0$. Étape 3 — Exprimer : $\\overrightarrow{AG}=\\dfrac{-3}{2}\\overrightarrow{AB}=-\\dfrac32\\overrightarrow{AB}$. Étape 4 — Placer : le rapport est négatif, donc $G$ est de l'autre côté de $A$ par rapport à $B$, avec $AG=\\dfrac32AB$. Les coefficients sont de signes contraires : $G$ est hors du segment $[AB]$. Le milieu ne correspond qu'à des coefficients égaux.",
+                "explanation": "Étape 1 — Vérifier : $5+(-3)=2\\neq0$, donc $G$ existe. Étape 2 — Écrire : $5\\overrightarrow{GA}-3\\overrightarrow{GB}=\\vec0$. Étape 3 — Exprimer : $\\overrightarrow{AG}=\\dfrac{-3}{2}\\overrightarrow{AB}=-\\dfrac32\\overrightarrow{AB}$. Étape 4 — Placer : le rapport est négatif, donc $G$ est de l'autre côté de $A$ par rapport à $B$, avec $AG=\\dfrac32AB$. Les coefficients sont de signes contraires : $G$ est hors du segment $[AB]$. Le milieu ne correspond qu'à des coefficients égaux. « Sur le segment $[AB]$, plus près de $B$ » est faux : un point du segment exige des coefficients de même signe. « Hors du segment, du côté de $B$ » est faux : le rapport $-\\dfrac32$ est négatif, donc $G$ est du côté opposé à $B$ par rapport à $A$.",
                 "answers": [
                   {
                     "content": "Sur la droite $(AB)$, hors du segment $[AB]$, du côté de $A$",
@@ -251,7 +251,7 @@
             "statement": "Sur un étal de marché, une règle $[AB]$ sert de balance. On y suspend des sacs de riz.",
             "questions": [
               {
-                "content": "Soit $G$ le barycentre de $(A,2)$ et $(B,3)$. Alors $\\overrightarrow{AG}=\\dfrac{___}{___}\\overrightarrow{AB}$.",
+                "content": "Soit $G$ le barycentre de $(A,2)$ et $(B,3)$. Le dénominateur est la somme des coefficients et le numérateur le coefficient de $B$. Alors $\\overrightarrow{AG}=\\dfrac{___}{___}\\overrightarrow{AB}$.",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Vérifier : $2+3=5\\neq0$. Étape 2 — Écrire : $2\\overrightarrow{GA}+3\\overrightarrow{GB}=\\vec0$. Étape 3 — Exprimer : le numérateur est le coefficient de $B$, soit $3$, et le dénominateur la somme $5$. Étape 4 — Placer : $G$ est aux trois cinquièmes de $A$ vers $B$.",
@@ -441,7 +441,7 @@
             "statement": "Trois bananeraies $A$, $B$, $C$ envoient leur récolte vers un point de collecte $G$, barycentre des points pondérés par les tonnes récoltées.",
             "questions": [
               {
-                "content": "Soit $G$ le barycentre de $(A,1)$, $(B,3)$ et $(C,2)$. Alors $\\overrightarrow{AG}=\\dfrac{___\\overrightarrow{AB}+___\\overrightarrow{AC}}{___}$.",
+                "content": "Soit $G$ le barycentre de $(A,1)$, $(B,3)$ et $(C,2)$. Le dénominateur est la somme des trois coefficients, non simplifiée. Alors $\\overrightarrow{AG}=\\dfrac{___\\overrightarrow{AB}+___\\overrightarrow{AC}}{___}$.",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Vérifier : $1+3+2=6\\neq0$. Étape 2 — Écrire : $\\overrightarrow{GA}+3\\overrightarrow{GB}+2\\overrightarrow{GC}=\\vec0$. Étape 3 — Exprimer : $6\\overrightarrow{GA}+3\\overrightarrow{AB}+2\\overrightarrow{AC}=\\vec0$. Étape 4 — Conclure : $\\overrightarrow{AG}=\\dfrac{3\\overrightarrow{AB}+2\\overrightarrow{AC}}{6}$.",
@@ -544,13 +544,13 @@
                 ]
               },
               {
-                "content": "Soit $H$ le barycentre de $(A,1)$ et $(B,3)$. On écrit $\\overrightarrow{AH}=k\\overrightarrow{AB}$. Quelle est la valeur de $k$ ?",
+                "content": "Soit $G$ le barycentre de $(A,2)$, $(B,2)$ et $(C,1)$, et $H$ le barycentre de $(A,2)$ et $(B,2)$. On écrit $\\overrightarrow{HG}=k\\overrightarrow{HC}$. Quelle est la valeur de $k$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $1+3=4\\neq0$. Étape 2 — Regrouper : on cherche le barycentre partiel $H$ de $(A,1)$ et $(B,3)$. Étape 3 — Remplacer par la formule à deux points : $\\overrightarrow{AH}=\\dfrac{3}{1+3}\\overrightarrow{AB}$. Étape 4 — Placer : $k=\\dfrac34=0{,}75$ : $H$ est aux trois quarts de $[AB]$ en partant de $A$.",
+                "explanation": "Étape 1 — Vérifier : $2+2+1=5\\neq0$ et $2+2=4\\neq0$, donc on peut regrouper $A$ et $B$. Étape 2 — Regrouper : $H$ est le barycentre partiel de $(A,2)$ et $(B,2)$, affecté de $2+2=4$. Étape 3 — Remplacer : $G$ est le barycentre de $(H,4)$ et $(C,1)$. Étape 4 — Placer : $\\overrightarrow{HG}=\\dfrac{1}{4+1}\\overrightarrow{HC}=\\dfrac15\\overrightarrow{HC}$, donc $k=0{,}2$. La valeur $0{,}25$ oublie le coefficient de $C$ au dénominateur ; la valeur $0{,}8$ inverse les coefficients de $H$ et de $C$.",
                 "answers": [
                   {
-                    "content": "0,75",
+                    "content": "0,2",
                     "correct": true
                   }
                 ]
@@ -585,7 +585,7 @@
               {
                 "content": "Soit $I$ le milieu de $[BC]$ et $G$ le barycentre de $(A,2)$, $(B,1)$ et $(C,1)$. Que peut-on dire de $G$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : $2+1+1=4\\neq0$ et $1+1=2\\neq0$. Étape 2 — Regrouper : le barycentre partiel de $(B,1)$ et $(C,1)$ est $I$, avec le coefficient $2$. Étape 3 — Remplacer : $G$ est le barycentre de $(A,2)$ et $(I,2)$. Étape 4 — Placer : $\\overrightarrow{AG}=\\dfrac{2}{2+2}\\overrightarrow{AI}=\\dfrac12\\overrightarrow{AI}$ : $G$ est le milieu de $[AI]$. Les rapports $\\dfrac13$ et $\\dfrac23$ viennent d'une erreur sur le coefficient de $I$.",
+                "explanation": "Étape 1 — Vérifier : $2+1+1=4\\neq0$ et $1+1=2\\neq0$. Étape 2 — Regrouper : le barycentre partiel de $(B,1)$ et $(C,1)$ est $I$, avec le coefficient $2$. Étape 3 — Remplacer : $G$ est le barycentre de $(A,2)$ et $(I,2)$. Étape 4 — Placer : $\\overrightarrow{AG}=\\dfrac{2}{2+2}\\overrightarrow{AI}=\\dfrac12\\overrightarrow{AI}$ : $G$ est le milieu de $[AI]$. Le milieu de $[BC]$ est le point $I$ lui-même, qui sert seulement au regroupement : $G$ n'est pas $I$, car $A$ porte aussi un coefficient, donc $G$ est le milieu de $[AI]$ et non de $[BC]$. Les rapports $\\dfrac13$ et $\\dfrac23$ viennent d'une erreur sur le coefficient de $I$.",
                 "answers": [
                   {
                     "content": "$G$ est le milieu de $[AI]$",
@@ -634,7 +634,7 @@
             "statement": "Dans un atelier, trois outils $A$, $B$, $C$ sont pondérés par leur masse. On regroupe deux outils pour simplifier le calcul.",
             "questions": [
               {
-                "content": "Soit $G$ le barycentre de $(A,2)$, $(B,2)$ et $(C,4)$, et $I$ le milieu de $[AB]$. Alors $G$ est le barycentre de $(I,___)$ et $(C,___)$.",
+                "content": "Soit $G$ le barycentre de $(A,2)$, $(B,2)$ et $(C,4)$, et $I$ le milieu de $[AB]$. Alors $G$ est le barycentre de $(I,___)$ et $(C,___)$, en gardant les coefficients de départ : $I$ porte la somme des coefficients regroupés, et $C$ garde le sien.",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Vérifier : $2+2+4=8\\neq0$ et $2+2=4\\neq0$. Étape 2 — Regrouper : $I$ est le barycentre de $(A,2)$ et $(B,2)$, affecté de $2+2=4$. Étape 3 — Remplacer : $G$ est le barycentre de $(I,4)$ et $(C,4)$. Étape 4 — Placer : $G$ est le milieu de $[IC]$.",
@@ -656,7 +656,7 @@
                 "content": "Soit $G$ le barycentre de $(A,1)$, $(B,2)$ et $(C,3)$, et $H$ le barycentre de $(B,2)$ et $(C,3)$. Quel coefficient porte $H$ pour que $G$ soit le barycentre de $(A,1)$ et $(H,\\ldots)$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $2+3=5\\neq0$. Étape 2 — Regrouper : $H$ est le barycentre de $(B,2)$ et $(C,3)$. Étape 3 — Remplacer : il porte la somme $2+3=5$.",
+                "explanation": "Étape 1 — Vérifier : $1+2+3=6\\neq0$ pour le système complet et $2+3=5\\neq0$ pour le regroupement. Étape 2 — Regrouper : $H$ est le barycentre de $(B,2)$ et $(C,3)$. Étape 3 — Remplacer : il porte la somme $2+3=5$.",
                 "answers": [
                   {
                     "content": "5",
@@ -909,7 +909,7 @@
               {
                 "content": "Pour tout point $M$, à quoi est égal $4\\overrightarrow{MA}-4\\overrightarrow{MB}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer : $4+(-4)=0$. Étape 2 — Distinguer : la somme est nulle, donc le vecteur ne dépend pas de $M$ et $G$ n'existe pas. Étape 3 — Appliquer : en prenant $M=B$, on obtient $4\\overrightarrow{BA}-4\\overrightarrow{BB}=4\\overrightarrow{BA}$. Étape 4 — Conclure : $4\\overrightarrow{BA}$. Ce n'est pas le vecteur nul (sauf si $A=B$), et pas $4\\overrightarrow{AB}$ (sens opposé).",
+                "explanation": "Étape 1 — Calculer : $4+(-4)=0$. Étape 2 — Distinguer : la somme est nulle, donc le vecteur ne dépend pas de $M$ et $G$ n'existe pas. Étape 3 — Appliquer : en prenant $M=B$, on obtient $4\\overrightarrow{BA}-4\\overrightarrow{BB}=4\\overrightarrow{BA}$. Étape 4 — Conclure : $4\\overrightarrow{BA}$. La proposition avec $8\\overrightarrow{MG}$ où $G$ est le milieu de $[AB]$ est fausse : le milieu exigerait des coefficients égaux, alors qu'ils sont opposés et que leur somme est nulle. Ce n'est pas le vecteur nul (sauf si $A=B$), et pas $4\\overrightarrow{AB}$ (sens opposé).",
                 "answers": [
                   {
                     "content": "$4\\overrightarrow{BA}$",
@@ -985,7 +985,7 @@
             "statement": "Dans un atelier, on étudie l'équilibre d'une barre $[AB]$ chargée de masses placées en $A$ et en $B$.",
             "questions": [
               {
-                "content": "Soit $G$ le barycentre de $(A,___)$ et $(B,___)$. Pour tout point $M$, $3\\overrightarrow{MA}+\\overrightarrow{MB}=4\\overrightarrow{MG}$.",
+                "content": "Soit $G$ le barycentre de $(A,___)$ et $(B,___)$. Pour tout point $M$, avec les coefficients exacts de l'expression, $3\\overrightarrow{MA}+\\overrightarrow{MB}=4\\overrightarrow{MG}$.",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Calculer : la somme des coefficients vaut $4$. Étape 2 — Distinguer : la somme est non nulle. Étape 3 — Appliquer : $\\alpha\\overrightarrow{MA}+\\beta\\overrightarrow{MB}=(\\alpha+\\beta)\\overrightarrow{MG}$ avec $\\alpha=3$ et $\\beta=1$. Étape 4 — Conclure : $G$ est le barycentre de $(A,3)$ et $(B,1)$.",
@@ -1104,7 +1104,7 @@
               "content": "Le menuisier remplace le sac de $B$ par un sac de 12 kg sur la planche $[AB]$ de 60 cm, et garde 4 kg en $A$. Quelle est la longueur $AG'$, où $G'$ est le barycentre de $(A,4)$ et $(B,12)$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Vérifier : $4+12=16\\neq0$. Étape 2 — Écrire : $4§G'A§+12§G'B§=\\vec0$. Étape 3 — Exprimer : $§AG'§=\\dfrac{12}{16}\\overrightarrow{AB}=\\dfrac34\\overrightarrow{AB}$. Étape 4 — Placer : $AG'=\\dfrac34\\times60=45$ cm. Le pivot s'est rapproché de $B$, qui porte maintenant la plus grosse masse.",
+              "explanation": "Étape 1 — Vérifier : $4+12=16\\neq0$. Étape 2 — Écrire : $4\\overrightarrow{G'A}+12\\overrightarrow{G'B}=\\vec0$. Étape 3 — Exprimer : $\\overrightarrow{AG'}=\\dfrac{12}{16}\\overrightarrow{AB}=\\dfrac34\\overrightarrow{AB}$. Étape 4 — Placer : $AG'=\\dfrac34\\times60=45$ cm. Le pivot s'est rapproché de $B$, qui porte maintenant la plus grosse masse.",
               "answers": [
                 {
                   "content": "45",
@@ -1163,7 +1163,7 @@
             {
               "content": "Soit $G$ le barycentre de $(A,2)$, $(B,1)$ et $(C,3)$. Quelle expression donne $\\overrightarrow{AG}$ en fonction de $\\overrightarrow{AB}$ et $\\overrightarrow{AC}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Vérifier : $2+1+3=6\\neq0$. Étape 2 — Écrire : $2\\overrightarrow{GA}+\\overrightarrow{GB}+3\\overrightarrow{GC}=\\vec0$. Étape 3 — Exprimer : $2\\overrightarrow{GA}+(\\overrightarrow{GA}+\\overrightarrow{AB})+3(\\overrightarrow{GA}+\\overrightarrow{AC})=\\vec0$, soit $6\\overrightarrow{GA}+\\overrightarrow{AB}+3\\overrightarrow{AC}=\\vec0$. Étape 4 — Conclure : $\\overrightarrow{AG}=\\dfrac{\\overrightarrow{AB}+3\\overrightarrow{AC}}{6}=\\dfrac16\\overrightarrow{AB}+\\dfrac12\\overrightarrow{AC}$. La proposition avec $4$ divise par la somme de deux coefficients seulement ; celle qui échange $\\dfrac16$ et $\\dfrac12$ échange les coefficients de $B$ et $C$.",
+              "explanation": "Étape 1 — Vérifier : $2+1+3=6\\neq0$. Étape 2 — Écrire : $2\\overrightarrow{GA}+\\overrightarrow{GB}+3\\overrightarrow{GC}=\\vec0$. Étape 3 — Exprimer : $2\\overrightarrow{GA}+(\\overrightarrow{GA}+\\overrightarrow{AB})+3(\\overrightarrow{GA}+\\overrightarrow{AC})=\\vec0$, soit $6\\overrightarrow{GA}+\\overrightarrow{AB}+3\\overrightarrow{AC}=\\vec0$. Étape 4 — Conclure : $\\overrightarrow{AG}=\\dfrac{\\overrightarrow{AB}+3\\overrightarrow{AC}}{6}=\\dfrac16\\overrightarrow{AB}+\\dfrac12\\overrightarrow{AC}$. La proposition avec $4$ divise par la somme de deux coefficients seulement ; celle avec $\\dfrac13\\overrightarrow{AB}$ divise le coefficient de $B$ par $3$ au lieu de la somme $6$ ; celle qui échange $\\dfrac16$ et $\\dfrac12$ échange les coefficients de $B$ et $C$.",
               "answers": [
                 {
                   "content": "$\\overrightarrow{AG}=\\dfrac16\\overrightarrow{AB}+\\dfrac12\\overrightarrow{AC}$",
@@ -1279,7 +1279,7 @@
             {
               "content": "Soit $G'$ le barycentre de $(A,6)$ et $(B,-4)$. Où se trouve $G'$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Vérifier : $6+(-4)=2\\neq0$, donc $G'$ existe. Étape 3 — Exprimer : $§AG'§=\\dfrac{-4}{2}\\overrightarrow{AB}=-2\\overrightarrow{AB}$. Étape 4 — Placer : le rapport est négatif, donc $G'$ est de l'autre côté de $A$ par rapport à $B$, à une distance $2\\times24=48$ cm de $A$. Il est hors du segment car les coefficients sont de signes contraires.",
+              "explanation": "Étape 1 — Vérifier : $6+(-4)=2\\neq0$, donc $G'$ existe. Étape 3 — Exprimer : $\\overrightarrow{AG'}=\\dfrac{-4}{2}\\overrightarrow{AB}=-2\\overrightarrow{AB}$. Étape 4 — Placer : le rapport est négatif, donc $G'$ est de l'autre côté de $A$ par rapport à $B$, à une distance $2\\times24=48$ cm de $A$. Il est hors du segment car les coefficients sont de signes contraires. « Sur le segment $[AB]$, près de $A$ » est faux : un point du segment exige un rapport compris entre $0$ et $1$, et ici il vaut $-2$. « Hors du segment, du côté de $B$ » est faux : le côté de $B$ demanderait un rapport supérieur à $1$.",
               "answers": [
                 {
                   "content": "Hors du segment $[AB]$, du côté de $A$",
@@ -1385,7 +1385,7 @@
             {
               "content": "Soit $G$ le barycentre de $(A,1)$, $(B,1)$ et $(C,2)$ et $I$ le milieu de $[AB]$. Que peut-on dire de $G$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Vérifier : $1+1+2=4\\neq0$ et $1+1=2\\neq0$. Étape 2 — Regrouper : $I$ est le barycentre de $(A,1)$ et $(B,1)$, affecté de $1+1=2$. Étape 3 — Remplacer : $G$ est le barycentre de $(I,2)$ et $(C,2)$. Étape 4 — Placer : $\\overrightarrow{IG}=\\dfrac{2}{4}\\overrightarrow{IC}=\\dfrac12\\overrightarrow{IC}$ : $G$ est le milieu de $[IC]$. Le rapport $\\dfrac23$ vient d'un coefficient $1$ donné à $I$ au lieu de $2$.",
+              "explanation": "Étape 1 — Vérifier : $1+1+2=4\\neq0$ et $1+1=2\\neq0$. Étape 2 — Regrouper : $I$ est le barycentre de $(A,1)$ et $(B,1)$, affecté de $1+1=2$. Étape 3 — Remplacer : $G$ est le barycentre de $(I,2)$ et $(C,2)$. Étape 4 — Placer : $\\overrightarrow{IG}=\\dfrac{2}{4}\\overrightarrow{IC}=\\dfrac12\\overrightarrow{IC}$ : $G$ est le milieu de $[IC]$. Le milieu de $[AB]$ est $I$ lui-même, qui sert au regroupement : $G$ n'est pas $I$, car $C$ porte aussi un coefficient. Le milieu de $[BC]$ ne convient pas non plus : $B$ et $C$ ne sont pas regroupés ici, et $G$ est sur la droite $(IC)$. Le rapport $\\dfrac23$ vient d'un coefficient $1$ donné à $I$ au lieu de $2$.",
               "answers": [
                 {
                   "content": "$G$ est le milieu de $[IC]$",
@@ -1402,6 +1402,30 @@
                 {
                   "content": "$G$ est le milieu de $[BC]$",
                   "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Soit $G$ le barycentre de $(A,1)$, $(B,1)$ et $(C,2)$. Pour tout point $M$, $\\overrightarrow{MA}+\\overrightarrow{MB}+2\\overrightarrow{MC}=k\\overrightarrow{MG}$. Quelle est la valeur de $k$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer : $1+1+2=4$. Étape 2 — Distinguer : la somme n'est pas nulle ; $G$ est le barycentre de $(A,1)$, $(B,1)$, $(C,2)$. Étape 3 — Appliquer : en introduisant $G$ par Chasles, l'expression vaut $4\\overrightarrow{MG}+(\\overrightarrow{GA}+\\overrightarrow{GB}+2\\overrightarrow{GC})=4\\overrightarrow{MG}$. Étape 4 — Conclure : $k=4$. La valeur $2$ ou $3$ oublie un des coefficients dans la somme.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour tout point $M$, on pose $\\vec u=\\overrightarrow{MA}+\\overrightarrow{MB}-2\\overrightarrow{MC}$, avec $A(2\\,;0)$, $B(6\\,;2)$ et $C(4\\,;3)$. Quelle est l'ordonnée de $\\vec u$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer : $1+1-2=0$. Étape 2 — Distinguer : la somme est nulle, donc $\\vec u$ ne dépend pas de $M$ et $G$ n'existe pas. Étape 3 — Appliquer : pour $M=C$, $\\vec u=\\overrightarrow{CA}+\\overrightarrow{CB}$, avec $\\overrightarrow{CA}(-2\\,;-3)$ et $\\overrightarrow{CB}(2\\,;-1)$. Étape 4 — Conclure : $\\vec u(0\\,;-4)$, d'ordonnée $-4$.",
+              "answers": [
+                {
+                  "content": "-4",
+                  "correct": true
                 }
               ]
             },
