@@ -1,0 +1,1653 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Étude et représentation graphique d'une fonction",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "theme": "burgundy",
+      "figures": [],
+      "notions": [
+        {
+          "name": "Déterminer le domaine et la parité",
+          "remember": "Le domaine de définition $D_f$ est l'ensemble des réels $x$ pour lesquels $f(x)$ se calcule : un dénominateur ne doit pas être nul, sous une racine carrée l'expression doit être positive ou nulle, un polynôme est défini sur $\\mathbb{R}$. La fonction $f$ est paire si $D_f$ est symétrique par rapport à $0$ (si $x\\in D_f$, alors $-x\\in D_f$) et si $f(-x)=f(x)$ : sa courbe est symétrique par rapport à l'axe des ordonnées. Elle est impaire si $D_f$ est symétrique et si $f(-x)=-f(x)$ : sa courbe est symétrique par rapport à l'origine. Pour une fonction paire ou impaire, on étudie $f$ sur $D_f\\cap[0\\,;+\\infty[$ (l'ensemble d'étude), puis on complète la courbe par symétrie.",
+          "method": [
+            "Déterminer le domaine : écrire les conditions d'existence (dénominateur non nul, expression sous une racine positive) et les résoudre.",
+            "Vérifier que le domaine est symétrique par rapport à $0$ : pour chaque $x$ du domaine, $-x$ doit y être aussi.",
+            "Calculer $f(-x)$, puis le comparer à $f(x)$ et à $-f(x)$.",
+            "Conclure : donner la parité, la symétrie de la courbe et l'ensemble d'étude."
+          ],
+          "example": {
+            "statement": "Étudier le domaine et la parité de $f(x)=\\dfrac{x^2}{x^2-4}$.",
+            "steps": [
+              "Déterminer le domaine : $f(x)$ existe si $x^2-4\\neq0$, donc $x\\neq2$ et $x\\neq-2$ ; $D_f=\\mathbb{R}\\setminus\\{-2\\,;2\\}$.",
+              "Vérifier la symétrie : si $x\\in D_f$, alors $-x\\neq\\pm2$, donc $-x\\in D_f$ ; le domaine est symétrique par rapport à $0$.",
+              "Calculer : $f(-x)=\\dfrac{(-x)^2}{(-x)^2-4}=\\dfrac{x^2}{x^2-4}=f(x)$.",
+              "Conclure : $f(-x)=f(x)$, donc $f$ est paire ; sa courbe est symétrique par rapport à l'axe des ordonnées. On étudie $f$ sur $[0\\,;2[\\,\\cup\\,]2\\,;+\\infty[$."
+            ]
+          },
+          "pitfall": "Ne pas conclure sans vérifier le domaine, ni croire qu'une fonction non paire est forcément impaire. Contre-exemple 1 : $f(x)=x^2$ sur $[-1\\,;3]$ vérifie $f(-x)=f(x)$, mais $3\\in D_f$ et $-3\\notin D_f$ : elle n'est pas paire. Contre-exemple 2 : $f(x)=x^2+x$ donne $f(1)=2$ et $f(-1)=0$, qui ne sont ni égaux ni opposés : elle n'est ni paire ni impaire. Contrôle toujours le domaine, puis compare à $f(x)$ et à $-f(x)$.",
+          "figure": null,
+          "exercise": {
+            "title": "Domaine et parité avec la méthode",
+            "statement": "Dans cet exercice, tu détermines le domaine et la parité de fonctions avec la méthode de la fiche : déterminer, vérifier, calculer, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est le domaine de définition de $f(x)=\\dfrac{3x}{x-5}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer le domaine : $f(x)$ existe si $x-5\\neq0$, donc $x\\neq5$ et $D_f=\\mathbb{R}\\setminus\\{5\\}$. Les autres étapes (symétrie, parité) ne sont pas demandées ici. La proposition $\\mathbb{R}\\setminus\\{0\\}$ confond la valeur interdite avec le zéro du numérateur ; $\\mathbb{R}\\setminus\\{-5\\}$ est une erreur de signe ; $\\mathbb{R}$ oublie la condition sur le dénominateur.",
+                "answers": [
+                  {
+                    "content": "$\\mathbb{R}\\setminus\\{5\\}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\mathbb{R}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathbb{R}\\setminus\\{0\\}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathbb{R}\\setminus\\{-5\\}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien de valeurs de $x$ sont interdites pour $f(x)=\\dfrac{2}{x^2-9}$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Déterminer le domaine : $f(x)$ existe si $x^2-9\\neq0$. Or $x^2-9=(x-3)(x+3)=0$ pour $x=3$ ou $x=-3$. Il y a donc 2 valeurs interdites. Se limiter à $x=3$ est l'erreur de celui qui oublie la racine négative de $x^2=9$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La fonction $f(x)=x^3-4x$ est impaire.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Déterminer le domaine : un polynôme est défini sur $\\mathbb{R}$. Étape 2 — Vérifier la symétrie : $\\mathbb{R}$ est symétrique par rapport à $0$. Étape 3 — Calculer : $f(-x)=(-x)^3-4(-x)=-x^3+4x=-(x^3-4x)=-f(x)$. Étape 4 — Conclure : $f(-x)=-f(x)$, donc $f$ est impaire. Dire « Faux » vient d'une confusion entre $-f(x)$ et $f(x)$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la parité de $g(x)=x^2+x$, définie sur $\\mathbb{R}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer le domaine : $D_g=\\mathbb{R}$. Étape 2 — Vérifier la symétrie : $\\mathbb{R}$ est symétrique. Étape 3 — Calculer : $g(-x)=x^2-x$. Cette expression est différente de $g(x)=x^2+x$ et de $-g(x)=-x^2-x$ : par exemple $g(1)=2$ et $g(-1)=0$. Étape 4 — Conclure : $g$ n'est ni paire ni impaire. Répondre « paire » ne regarde que le terme $x^2$ ; répondre « impaire » ne regarde que le terme $x$.",
+                "answers": [
+                  {
+                    "content": "Ni paire ni impaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Paire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Impaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Paire et impaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces fonctions, lesquelles sont paires (choisis-en deux) ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Calculer $f(-x)$ pour chaque fonction (les domaines $\\mathbb{R}$ et $\\mathbb{R}\\setminus\\{0\\}$ sont symétriques, étapes 1 et 2). Pour $x^4-2x^2$ : $f(-x)=x^4-2x^2=f(x)$. Pour $\\frac1{x^2}$ : $f(-x)=\\frac1{x^2}=f(x)$. Étape 4 — Conclure : ces deux fonctions sont paires. $\\frac{x}{x^2+1}$ et $x^3+x$ donnent $f(-x)=-f(x)$ : elles sont impaires. $x^2-x$ donne $x^2+x$ : ni paire ni impaire.",
+                "answers": [
+                  {
+                    "content": "$x\\mapsto x^4-2x^2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x\\mapsto\\dfrac{1}{x^2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x\\mapsto\\dfrac{x}{x^2+1}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x\\mapsto x^3+x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x\\mapsto x^2-x$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La fonction $f(x)=x^2$, définie seulement sur l'intervalle $[-2\\,;5]$, est paire.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Déterminer le domaine : $D_f=[-2\\,;5]$. Étape 2 — Vérifier la symétrie : $5\\in D_f$ mais $-5\\notin D_f$, donc le domaine n'est pas symétrique par rapport à $0$. Étape 4 — Conclure : $f$ n'est pas paire, même si le calcul $f(-x)=(-x)^2=x^2=f(x)$ semble le montrer. C'est le piège : on a sauté l'étape 2.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une fonction paire $f$ a pour domaine $\\mathbb{R}\\setminus\\{-3\\,;3\\}$. Sur quel ensemble suffit-il de l'étudier ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Déterminer le domaine : il est donné, $D_f=\\mathbb{R}\\setminus\\{-3\\,;3\\}$. Étape 2 — Vérifier : il est symétrique. Étape 4 — Conclure : comme $f$ est paire, on l'étudie sur $D_f\\cap[0\\,;+\\infty[=[0\\,;3[\\,\\cup\\,]3\\,;+\\infty[$, puis on complète par symétrie par rapport à l'axe des ordonnées. $[0\\,;+\\infty[$ oublie que $3$ est interdit ; étudier tout le domaine ne profite pas de la parité.",
+                "answers": [
+                  {
+                    "content": "$[0\\,;3[\\,\\cup\\,]3\\,;+\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$]-\\infty\\,;0]$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\mathbb{R}\\setminus\\{-3\\,;3\\}$ tout entier",
+                    "correct": false
+                  },
+                  {
+                    "content": "$[0\\,;+\\infty[$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à repérer les valeurs interdites et à reconnaître une fonction paire ou impaire.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=\\dfrac{1}{x^2-1}$, les deux valeurs interdites sont $x=$ ___ (la plus petite) et $x=$ ___ (la plus grande).",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "On résout $x^2-1=0$, soit $(x-1)(x+1)=0$ : les valeurs interdites sont $-1$ et $1$.",
+                "answers": [
+                  {
+                    "content": "-1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Factorise $x^2-1$ avec $a^2-b^2=(a-b)(a+b)$."
+              },
+              {
+                "content": "La fonction $f(x)=x^5-x$ est impaire.",
+                "question_type": "true_false",
+                "explanation": "$f(-x)=(-x)^5-(-x)=-x^5+x=-(x^5-x)=-f(x)$ et le domaine $\\mathbb{R}$ est symétrique : $f$ est impaire.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Calcule $f(-x)$ et compare à $-f(x)$."
+              },
+              {
+                "content": "La fonction $h(x)=\\dfrac{x}{x^2+4}$ est définie sur $\\mathbb{R}$. Que dire de sa courbe ?",
+                "question_type": "single_choice",
+                "explanation": "Le domaine $\\mathbb{R}$ est symétrique et $h(-x)=\\dfrac{-x}{x^2+4}=-h(x)$ : $h$ est impaire, donc sa courbe est symétrique par rapport à l'origine.",
+                "answers": [
+                  {
+                    "content": "Elle est symétrique par rapport à l'origine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est symétrique par rapport à l'axe des ordonnées",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est symétrique par rapport à l'axe des abscisses",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle n'a aucune symétrie",
+                    "correct": false
+                  }
+                ],
+                "hint": "Compare $h(-x)$ à $h(x)$ puis à $-h(x)$."
+              },
+              {
+                "content": "Si $f$ est paire, sa courbe est symétrique par rapport à ___.",
+                "question_type": "select",
+                "explanation": "Pour une fonction paire, les points $(x\\,;f(x))$ et $(-x\\,;f(x))$ sont tous deux sur la courbe : elle est symétrique par rapport à l'axe des ordonnées.",
+                "answers": [
+                  {
+                    "content": "l'axe des ordonnées",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'axe des abscisses",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'origine",
+                    "correct": false
+                  },
+                  {
+                    "content": "la droite d'équation $y=x$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Calculer les limites et trouver les asymptotes",
+          "remember": "On calcule les limites de $f$ aux bornes de son domaine. En $\\pm\\infty$, un polynôme a la limite de son terme de plus haut degré ; une fraction rationnelle a la limite du quotient de ses termes de plus haut degré. Près d'une valeur interdite $a$, on étudie le signe du dénominateur de chaque côté. Si $\\lim_{x\\to a}f(x)=\\pm\\infty$ (à gauche ou à droite), la droite $x=a$ est asymptote verticale. Si $\\lim_{x\\to\\pm\\infty}f(x)=\\ell$, la droite $y=\\ell$ est asymptote horizontale. Si $f(x)=ax+b+r(x)$ avec $a\\neq0$ et $\\lim_{x\\to\\pm\\infty}r(x)=0$, la droite $y=ax+b$ est asymptote oblique ; le signe de $r(x)$ donne la position de la courbe par rapport à elle.",
+          "method": [
+            "Repérer les bornes où il faut une limite : les valeurs interdites (à gauche et à droite), $-\\infty$ et $+\\infty$.",
+            "Calculer la limite de $f$ à chaque borne : terme de plus haut degré en $\\pm\\infty$, signe du dénominateur près d'une valeur interdite.",
+            "Interpréter : une limite infinie en $a$ donne l'asymptote verticale $x=a$ ; une limite finie $\\ell$ en $\\pm\\infty$ donne l'asymptote horizontale $y=\\ell$.",
+            "Chercher une asymptote oblique : écrire $f(x)=ax+b+r(x)$, vérifier que $r(x)\\to0$, puis étudier le signe de $r(x)$ pour la position de la courbe."
+          ],
+          "example": {
+            "statement": "Chercher les asymptotes de la courbe de $f(x)=\\dfrac{x^2-x+3}{x-1}$.",
+            "steps": [
+              "Repérer : $D_f=\\mathbb{R}\\setminus\\{1\\}$ ; les bornes sont $-\\infty$, $1^-$, $1^+$ et $+\\infty$.",
+              "Calculer : en $1^+$, le numérateur tend vers $3$ et le dénominateur vers $0^+$, donc $\\lim f=+\\infty$ ; en $1^-$, le dénominateur tend vers $0^-$, donc $\\lim f=-\\infty$. En $\\pm\\infty$, $f(x)$ a la limite de $\\frac{x^2}{x}=x$ : $-\\infty$ en $-\\infty$ et $+\\infty$ en $+\\infty$.",
+              "Interpréter : la limite est infinie en $1$, donc la droite $x=1$ est asymptote verticale. Il n'y a pas de limite finie en $\\pm\\infty$, donc pas d'asymptote horizontale.",
+              "Chercher : $x(x-1)+3=x^2-x+3$, donc $f(x)=x+\\dfrac{3}{x-1}$. Comme $\\dfrac{3}{x-1}\\to0$ en $\\pm\\infty$, la droite $y=x$ est asymptote oblique. Le signe de $\\dfrac{3}{x-1}$ montre que la courbe est au-dessus de la droite pour $x>1$ et en dessous pour $x<1$."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une valeur interdite donne toujours une asymptote verticale. Contre-exemple : $f(x)=\\dfrac{x^2-1}{x-1}$ n'est pas définie en $1$, mais pour $x\\neq1$, $f(x)=\\dfrac{(x-1)(x+1)}{x-1}=x+1$, donc $\\lim_{x\\to1}f(x)=2$ : la limite est finie, il n'y a pas d'asymptote en $x=1$. Calcule toujours la limite avant de conclure.",
+          "figure": null,
+          "exercise": {
+            "title": "Limites et asymptotes avec la méthode",
+            "statement": "Dans cet exercice, tu calcules des limites et tu cherches des asymptotes avec la méthode de la fiche : repérer, calculer, interpréter, chercher.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Calcule $\\lim_{x\\to+\\infty}\\dfrac{4x^2-3x+1}{2x^2+5}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : on cherche la limite en $+\\infty$. Étape 2 — Calculer : numérateur et dénominateur tendent vers $+\\infty$ ; on garde les termes de plus haut degré : $\\dfrac{4x^2}{2x^2}=2$. Étape 3 — Interpréter : la limite est finie, égale à $2$ : la droite $y=2$ est asymptote horizontale. Répondre $+\\infty$ ou $\\frac{4}{5}$ vient d'un oubli de la règle du plus haut degré.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $f(x)=\\dfrac{3x+1}{x-2}$ quand $x$ tend vers $2$ par valeurs supérieures à $2$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : $2$ est une valeur interdite ; on étudie $2^+$. Étape 2 — Calculer : le numérateur tend vers $3\\times2+1=7>0$ et le dénominateur vers $0^+$, donc $\\lim f=+\\infty$. Étape 3 — Interpréter : la droite $x=2$ est asymptote verticale. $-\\infty$ viendrait de $2^-$ ; $7$ ignore le dénominateur.",
+                "answers": [
+                  {
+                    "content": "$+\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$-\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$7$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'asymptote horizontale de la courbe de $f(x)=\\dfrac{2x+1}{x-3}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les bornes sont $-\\infty$, $3$ et $+\\infty$. Étape 2 — Calculer : en $\\pm\\infty$, $f(x)$ a la limite de $\\dfrac{2x}{x}=2$. Étape 3 — Interpréter : limite finie $2$, donc asymptote horizontale $y=2$ (la droite $x=3$ est l'asymptote verticale). $y=3$ confond avec la valeur interdite ; $y=\\frac12$ inverse le quotient.",
+                "answers": [
+                  {
+                    "content": "$y=2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$y=3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=\\dfrac12$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x=2$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles droites sont des asymptotes verticales de la courbe de $f(x)=\\dfrac{x+2}{(x-1)(x+3)}$ (choisis-en deux) ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : les valeurs interdites sont $1$ et $-3$. Étape 2 — Calculer : en $1$, le numérateur tend vers $3$ et le dénominateur vers $0$ ; en $-3$, le numérateur tend vers $-1$ et le dénominateur vers $0$ ; dans les deux cas la limite est infinie. Étape 3 — Interpréter : $x=1$ et $x=-3$ sont asymptotes verticales. $x=-2$ annule le numérateur, pas le dénominateur ; $y=0$ est une asymptote horizontale ; $x=3$ est une erreur de signe.",
+                "answers": [
+                  {
+                    "content": "$x=1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x=-3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$x=-2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$x=3$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On a $f(x)=2x+1+\\dfrac{3}{x+1}$ pour $x\\neq-1$. Quelle est l'asymptote oblique de la courbe de $f$ en $+\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Chercher une asymptote oblique : $f(x)=ax+b+r(x)$ avec $a=2$, $b=1$ et $r(x)=\\dfrac{3}{x+1}$. Comme $r(x)\\to0$ en $+\\infty$, la droite $y=2x+1$ est asymptote oblique. $y=2x+3$ confond $b$ avec le numérateur de la fraction ; $y=2x$ oublie $b$ ; $y=x+1$ oublie le coefficient $2$.",
+                "answers": [
+                  {
+                    "content": "$y=2x+1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$y=2x+3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=2x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=x+1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour $f(x)=\\dfrac{x^2-4}{x-2}$ avec $x\\neq2$, la droite $x=2$ est asymptote verticale.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : $2$ est une valeur interdite. Étape 2 — Calculer : pour $x\\neq2$, $f(x)=\\dfrac{(x-2)(x+2)}{x-2}=x+2$, donc $\\lim_{x\\to2}f(x)=4$. Étape 3 — Interpréter : la limite est finie, il n'y a pas d'asymptote verticale. Une valeur interdite ne suffit pas : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque information sur $f$ à la conséquence pour sa courbe.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Interpréter : une limite infinie en un réel $a$ donne l'asymptote verticale $x=a$ ; une limite finie $\\ell$ en $+\\infty$ donne l'asymptote horizontale $y=\\ell$. Étape 4 — Chercher : si $f(x)-(ax+b)$ tend vers $0$ avec $a\\neq0$, la droite $y=ax+b$ est asymptote oblique. Enfin, une limite finie en un réel (ici $7$ en $2$) ne donne aucune asymptote verticale.",
+                "answers": [
+                  {
+                    "content": "$\\lim_{x\\to4^+}f(x)=-\\infty$",
+                    "match": "Asymptote verticale d'équation $x=4$"
+                  },
+                  {
+                    "content": "$\\lim_{x\\to+\\infty}f(x)=5$",
+                    "match": "Asymptote horizontale d'équation $y=5$"
+                  },
+                  {
+                    "content": "$\\lim_{x\\to+\\infty}\\left[f(x)-(3x-1)\\right]=0$",
+                    "match": "Asymptote oblique d'équation $y=3x-1$"
+                  },
+                  {
+                    "content": "$\\lim_{x\\to2}f(x)=7$",
+                    "match": "Pas d'asymptote verticale en $x=2$"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire les asymptotes d'une fraction rationnelle.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=\\dfrac{6x-1}{2x+4}$, l'asymptote verticale est $x=$ ___ et l'asymptote horizontale est $y=$ ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Le dénominateur s'annule pour $2x+4=0$, soit $x=-2$ ; le numérateur vaut $-13$ en ce point, donc la limite est infinie. En $\\pm\\infty$, $f(x)$ a la limite de $\\dfrac{6x}{2x}=3$.",
+                "answers": [
+                  {
+                    "content": "-2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Résous $2x+4=0$, puis divise les termes de plus haut degré."
+              },
+              {
+                "content": "Quelle est la limite de $\\dfrac{x^2+1}{x}$ quand $x$ tend vers $-\\infty$ ?",
+                "question_type": "single_choice",
+                "explanation": "En $-\\infty$, $\\dfrac{x^2+1}{x}$ a la limite de $\\dfrac{x^2}{x}=x$, donc $-\\infty$.",
+                "answers": [
+                  {
+                    "content": "$-\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Garde le terme de plus haut degré en haut et en bas."
+              },
+              {
+                "content": "Pour $f(x)=x+\\dfrac{2}{x}$, la droite $y=x$ est asymptote oblique en $+\\infty$.",
+                "question_type": "true_false",
+                "explanation": "$f(x)-x=\\dfrac{2}{x}$ tend vers $0$ en $+\\infty$, donc la droite $y=x$ est asymptote oblique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Étudie la limite de $f(x)-x$."
+              },
+              {
+                "content": "Si $\\lim_{x\\to+\\infty}f(x)=-4$, la courbe de $f$ admet ___.",
+                "question_type": "select",
+                "explanation": "Une limite finie $\\ell$ en $+\\infty$ donne l'asymptote horizontale $y=\\ell$, ici $y=-4$.",
+                "answers": [
+                  {
+                    "content": "une asymptote horizontale d'équation $y=-4$",
+                    "correct": true
+                  },
+                  {
+                    "content": "une asymptote verticale d'équation $x=-4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "une asymptote oblique d'équation $y=-4x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "aucune asymptote",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Dériver et dresser le tableau de variations",
+          "remember": "Soit $f$ dérivable sur un intervalle $I$. Si $f'(x)>0$ sur $I$, $f$ est strictement croissante ; si $f'(x)<0$ sur $I$, $f$ est strictement décroissante. Si $f'$ s'annule en $x_0$ en changeant de signe, $f(x_0)$ est un extremum local : maximum si $f'$ passe de $+$ à $-$, minimum si $f'$ passe de $-$ à $+$. Rappels : $(x^n)'=nx^{n-1}$ et $\\left(\\dfrac{u}{v}\\right)'=\\dfrac{u'v-uv'}{v^2}$. Le tableau de variations réunit trois lignes : les valeurs de $x$ (avec les bornes), le signe de $f'(x)$ et les variations de $f$ (flèches, valeurs aux extrema, limites aux bornes).",
+          "method": [
+            "Calculer la dérivée $f'(x)$ et la factoriser.",
+            "Étudier le signe de $f'(x)$ : chercher ses racines, puis donner son signe sur chaque intervalle.",
+            "Déduire les variations : $f$ est croissante où $f'>0$ et décroissante où $f'<0$.",
+            "Dresser le tableau : placer les valeurs de $x$, le signe de $f'$, les flèches, les valeurs aux extrema et les limites aux bornes."
+          ],
+          "example": {
+            "statement": "Dresser le tableau de variations de $f(x)=x^3-6x^2+9x+1$ sur $\\mathbb{R}$.",
+            "steps": [
+              "Calculer : $f'(x)=3x^2-12x+9=3(x^2-4x+3)=3(x-1)(x-3)$.",
+              "Étudier le signe : les racines de $f'$ sont $1$ et $3$ ; $f'(x)>0$ sur $]-\\infty\\,;1[$, $f'(x)<0$ sur $]1\\,;3[$ et $f'(x)>0$ sur $]3\\,;+\\infty[$.",
+              "Déduire : $f$ est croissante sur $]-\\infty\\,;1]$, décroissante sur $[1\\,;3]$, croissante sur $[3\\,;+\\infty[$.",
+              "Dresser : première ligne $x$ : $-\\infty$, $1$, $3$, $+\\infty$ ; deuxième ligne $f'(x)$ : $+$, $0$, $-$, $0$, $+$ ; troisième ligne $f(x)$ : de $-\\infty$ en montant jusqu'à $f(1)=5$ (maximum local), en descendant jusqu'à $f(3)=1$ (minimum local), puis en montant vers $+\\infty$."
+            ]
+          },
+          "pitfall": "Ne pas croire que $f'(x_0)=0$ suffit pour avoir un extremum : il faut que $f'$ change de signe. Contre-exemple : $f(x)=x^3$ a pour dérivée $f'(x)=3x^2$, qui s'annule en $0$ mais reste positive de chaque côté ; $f$ est strictement croissante sur $\\mathbb{R}$ et n'a aucun extremum. Ne confonds pas non plus le signe de $f'$ (les variations) avec le signe de $f$ : une fonction peut être décroissante et positive.",
+          "figure": null,
+          "exercise": {
+            "title": "Variations avec la méthode",
+            "statement": "Dans cet exercice, tu étudies les variations de fonctions avec la méthode de la fiche : calculer, étudier le signe, déduire, dresser le tableau.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quelle est la dérivée factorisée de $f(x)=2x^3-3x^2-12x+4$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer la dérivée : $f'(x)=6x^2-6x-12=6(x^2-x-2)$. Comme $x^2-x-2=(x-2)(x+1)$, on obtient $f'(x)=6(x-2)(x+1)$. $6(x+2)(x-1)$ donne $6x^2+6x-12$ (erreur de signes) ; $(x-2)(x+1)$ oublie le facteur $6$ ; $12(x-2)(x+1)$ double ce facteur.",
+                "answers": [
+                  {
+                    "content": "$f'(x)=6(x-2)(x+1)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(x)=6(x+2)(x-1)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x)=(x-2)(x+1)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x)=12(x-2)(x+1)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On a $f'(x)=6(x-2)(x+1)$. Quel est le signe de $f'(x)$ sur l'intervalle $]-1\\,;2[$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Étudier le signe : les racines de $f'$ sont $-1$ et $2$. Pour $x\\in]-1\\,;2[$ on a $x-2<0$ et $x+1>0$, donc le produit $(x-2)(x+1)$ est négatif, et $6\\times(\\text{négatif})$ aussi. Sur cet intervalle $f'$ ne s'annule pas, donc elle ne change pas de signe.",
+                "answers": [
+                  {
+                    "content": "Négatif",
+                    "correct": true
+                  },
+                  {
+                    "content": "Positif",
+                    "correct": false
+                  },
+                  {
+                    "content": "Nul",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il change de signe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On a $f'(x)=6(x-2)(x+1)$ sur $\\mathbb{R}$. Quelles sont les variations de $f$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Étudier le signe : $f'>0$ sur $]-\\infty\\,;-1[$, $f'<0$ sur $]-1\\,;2[$, $f'>0$ sur $]2\\,;+\\infty[$. Étape 3 — Déduire les variations : $f$ est croissante, puis décroissante, puis croissante. La proposition inverse les signes de $f'$ ; « croissante sur $\\mathbb{R}$ » oublie les deux racines.",
+                "answers": [
+                  {
+                    "content": "Croissante sur $]-\\infty\\,;-1]$, décroissante sur $[-1\\,;2]$, croissante sur $[2\\,;+\\infty[$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Décroissante sur $]-\\infty\\,;-1]$, croissante sur $[-1\\,;2]$, décroissante sur $[2\\,;+\\infty[$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Croissante sur $\\mathbb{R}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "Décroissante sur $]-\\infty\\,;-1]$, croissante sur $[-1\\,;+\\infty[$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=2x^3-3x^2-12x+4$. Le maximum local de $f$ est atteint en $x=-1$. Calcule sa valeur $f(-1)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer la dérivée : $f'(x)=6(x-2)(x+1)$, qui s'annule en $-1$. Étape 3 — Déduire : $f'$ passe de $+$ à $-$ en $-1$, donc $f(-1)$ est un maximum local. Étape 4 — Dresser le tableau, on y écrit la valeur : $f(-1)=2\\times(-1)-3\\times1-12\\times(-1)+4=-2-3+12+4=11$.",
+                "answers": [
+                  {
+                    "content": "11",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $f(x)=2x^3-3x^2-12x+4$. Le minimum local de $f$ est atteint en $x=2$. Calcule sa valeur $f(2)$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Calculer la dérivée : $f'(x)=6(x-2)(x+1)$, qui s'annule en $2$. Étape 3 — Déduire : $f'$ passe de $-$ à $+$ en $2$, donc $f(2)$ est un minimum local. Étape 4 — Dresser le tableau, on y écrit la valeur : $f(2)=2\\times8-3\\times4-12\\times2+4=16-12-24+4=-16$.",
+                "answers": [
+                  {
+                    "content": "-16",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La fonction $g(x)=x^3+2$ vérifie $g'(0)=0$ ; elle admet donc un extremum en $0$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Calculer la dérivée : $g'(x)=3x^2$, qui s'annule en $0$. Étape 2 — Étudier le signe : $3x^2\\geq0$ pour tout $x$, donc $g'$ ne change pas de signe en $0$. Étape 3 — Déduire : $g$ est strictement croissante sur $\\mathbb{R}$, sans extremum. Une dérivée nulle ne suffit pas, il faut un changement de signe.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les quatre étapes de l'étude des variations d'une fonction.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Calculer la dérivée et la factoriser : sans factorisation on ne voit pas son signe. Étape 2 — Étudier le signe de la dérivée. Étape 3 — Déduire les variations : croissante où $f'>0$, décroissante où $f'<0$. Étape 4 — Dresser le tableau avec les extrema et les limites. On ne peut pas déduire les variations avant d'avoir étudié le signe de $f'$.",
+                "answers": [
+                  {
+                    "content": "Calculer la dérivée et la factoriser."
+                  },
+                  {
+                    "content": "Étudier le signe de la dérivée."
+                  },
+                  {
+                    "content": "Déduire les variations de la fonction."
+                  },
+                  {
+                    "content": "Dresser le tableau de variations avec les extrema et les limites."
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la dérivée de $f(x)=\\dfrac{x^2}{x-1}$ sur $\\mathbb{R}\\setminus\\{1\\}$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Calculer la dérivée : avec $u=x^2$ et $v=x-1$, on a $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{2x(x-1)-x^2\\times1}{(x-1)^2}=\\dfrac{x^2-2x}{(x-1)^2}=\\dfrac{x(x-2)}{(x-1)^2}$. $2x$ dérive seulement le numérateur ; la deuxième proposition oublie le carré du dénominateur ; la troisième additionne $u'v$ et $uv'$ au lieu de les soustraire.",
+                "answers": [
+                  {
+                    "content": "$f'(x)=\\dfrac{x(x-2)}{(x-1)^2}$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(x)=2x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x)=\\dfrac{x(x-2)}{x-1}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$f'(x)=\\dfrac{3x^2-2x}{(x-1)^2}$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à dériver, à lire le signe d'une dérivée et à repérer un extremum.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=x^2-4x+1$, la dérivée s'annule en $x=$ ___ et la valeur de $f$ en ce point est ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "$f'(x)=2x-4$ s'annule pour $x=2$, et $f(2)=4-8+1=-3$. La dérivée passe de $-$ à $+$ : c'est un minimum.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "-3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Résous $f'(x)=0$, puis remplace $x$ dans $f$."
+              },
+              {
+                "content": "On sait que $f'(x)>0$ sur $]-\\infty\\,;2[$ et $f'(x)<0$ sur $]2\\,;+\\infty[$. Que représente $f(2)$ ?",
+                "question_type": "single_choice",
+                "explanation": "La dérivée passe de $+$ à $-$ en $2$ : $f$ croît puis décroît, donc $f(2)$ est un maximum local.",
+                "answers": [
+                  {
+                    "content": "Un maximum local",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un minimum local",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni l'un ni l'autre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une valeur toujours nulle",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde comment le signe de $f'$ change en $2$."
+              },
+              {
+                "content": "Si $f'(x)<0$ sur un intervalle $I$, alors $f$ est strictement décroissante sur $I$.",
+                "question_type": "true_false",
+                "explanation": "C'est la propriété de la fiche : une dérivée strictement négative sur un intervalle donne une fonction strictement décroissante.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La dérivée de $f(x)=x^3+3x$ est $f'(x)=3x^2+$ ___.",
+                "question_type": "fill_blank",
+                "explanation": "On dérive terme à terme : $(x^3)'=3x^2$ et $(3x)'=3$, donc $f'(x)=3x^2+3$, toujours positive.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "La dérivée de $ax$ est $a$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Placer les points particuliers et tracer la courbe",
+          "remember": "Les points particuliers d'une courbe sont : le point d'intersection avec l'axe des ordonnées, $(0\\,;f(0))$ si $0\\in D_f$ ; les points d'intersection avec l'axe des abscisses, d'abscisses les solutions de $f(x)=0$ ; les extrema, lus dans le tableau de variations. La tangente au point d'abscisse $a$ a pour équation $y=f'(a)(x-a)+f(a)$ ; en un extremum, $f'(a)=0$ et la tangente est horizontale, d'équation $y=f(a)$. Pour tracer : repère, asymptotes en pointillés, points particuliers, tangentes, puis courbe qui respecte le tableau de variations. Si $f$ est paire ou impaire, on complète par symétrie.",
+          "method": [
+            "Rassembler les résultats de l'étude : domaine, parité, limites, asymptotes et tableau de variations.",
+            "Calculer les points particuliers : $f(0)$, les solutions de $f(x)=0$ et les valeurs aux extrema.",
+            "Déterminer les tangentes utiles avec $y=f'(a)(x-a)+f(a)$, dont les tangentes horizontales aux extrema.",
+            "Tracer dans un repère : asymptotes en pointillés, points, tangentes, puis la courbe qui suit les variations ; compléter par symétrie si $f$ est paire ou impaire."
+          ],
+          "example": {
+            "statement": "Tracer la courbe de $f(x)=x^3-3x^2+4$ définie sur $\\mathbb{R}$. Son tableau de variations est : $f$ croissante sur $]-\\infty\\,;0]$ de $-\\infty$ à $4$, décroissante sur $[0\\,;2]$ de $4$ à $0$, croissante sur $[2\\,;+\\infty[$ de $0$ à $+\\infty$.",
+            "steps": [
+              "Rassembler : $D_f=\\mathbb{R}$ ; $f$ n'est ni paire ni impaire ($f(-1)=0$, $f(1)=2$) ; il n'y a pas d'asymptote ; les variations sont données ci-dessus.",
+              "Calculer : $f(0)=4$ donne le point $(0\\,;4)$, maximum local ; $f(x)=(x+1)(x-2)^2$, donc $f(x)=0$ pour $x=-1$ ou $x=2$, d'où les points $(-1\\,;0)$ et $(2\\,;0)$, ce dernier étant le minimum local.",
+              "Déterminer : $f'(x)=3x^2-6x=3x(x-2)$, donc les tangentes en $0$ et en $2$ sont horizontales : $y=4$ et $y=0$. En $a=1$ : $f(1)=2$, $f'(1)=-3$, donc $y=-3(x-1)+2=-3x+5$.",
+              "Tracer : on place $(-1\\,;0)$, $(0\\,;4)$, $(1\\,;2)$ et $(2\\,;0)$ avec leurs tangentes ; la courbe monte depuis le bas à gauche en passant par $(-1\\,;0)$ jusqu'à $(0\\,;4)$, descend par $(1\\,;2)$ jusqu'à $(2\\,;0)$, puis remonte vers le haut à droite."
+            ]
+          },
+          "pitfall": "Ne pas confondre $f(a)$ et $f'(a)$ dans l'équation de la tangente $y=f'(a)(x-a)+f(a)$. Contre-exemple : pour $f(x)=x^2$ en $a=1$, on a $f(1)=1$ et $f'(1)=2$, donc la tangente est $y=2(x-1)+1=2x-1$. Si on inverse, on obtient $y=1(x-1)+2=x+1$, une droite qui passe par $(1\\,;2)$, point qui n'est pas sur la courbe. Le coefficient directeur est $f'(a)$, et la tangente passe par $(a\\,;f(a))$.",
+          "figure": null,
+          "exercise": {
+            "title": "Points particuliers et tracé avec la méthode",
+            "statement": "Dans cet exercice, tu prépares le tracé de courbes avec la méthode de la fiche : rassembler, calculer, déterminer, tracer.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "La courbe de $f(x)=x^2-4x+3$ coupe l'axe des ordonnées en un point. Donne son ordonnée.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer les points particuliers : l'intersection avec l'axe des ordonnées est le point d'abscisse $0$, d'ordonnée $f(0)=0-0+3=3$. Le point est $(0\\,;3)$. Répondre $-4$ ou $1$ confond avec un coefficient ou une racine.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les points d'intersection de la courbe de $f(x)=x^2-4x+3$ avec l'axe des abscisses (choisis-en deux) ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Calculer les points particuliers : on résout $f(x)=0$, soit $x^2-4x+3=(x-1)(x-3)=0$, donc $x=1$ ou $x=3$. Les points sont $(1\\,;0)$ et $(3\\,;0)$. $(-1\\,;0)$ et $(-3\\,;0)$ sont des erreurs de signe ; $(0\\,;3)$ est l'intersection avec l'axe des ordonnées.",
+                "answers": [
+                  {
+                    "content": "$(1\\,;0)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(3\\,;0)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(-1\\,;0)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(-3\\,;0)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(0\\,;3)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est l'équation de la tangente à la courbe de $f(x)=x^2$ au point d'abscisse $3$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Déterminer la tangente : $f(3)=9$ et $f'(x)=2x$, donc $f'(3)=6$. L'équation est $y=6(x-3)+9=6x-9$. $y=9x-21$ inverse $f(3)$ et $f'(3)$ ; $y=6x+9$ se trompe de signe ; $y=6x-18$ oublie d'ajouter $f(3)$.",
+                "answers": [
+                  {
+                    "content": "$y=6x-9$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$y=9x-21$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=6x+9$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=6x-18$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le coefficient directeur de la tangente à la courbe de $f(x)=x^3-3x$ au point d'abscisse $2$ ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 3 — Déterminer la tangente : le coefficient directeur est $f'(2)$. Or $f'(x)=3x^2-3$, donc $f'(2)=3\\times4-3=9$. Répondre $f(2)=2$ est le piège : on confond $f(a)$ et $f'(a)$.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La courbe d'une fonction impaire est symétrique par rapport à l'axe des ordonnées.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Tracer, en complétant par symétrie : une fonction impaire vérifie $f(-x)=-f(x)$, donc sa courbe est symétrique par rapport à l'origine. C'est la fonction paire qui a une courbe symétrique par rapport à l'axe des ordonnées.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une fonction paire $f$ vérifie $f(2)=5$. Quel autre point est sur sa courbe ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Tracer, en complétant par symétrie : $f$ est paire, donc $f(-2)=f(2)=5$ et le point $(-2\\,;5)$ est sur la courbe (symétrique de $(2\\,;5)$ par rapport à l'axe des ordonnées). $(-2\\,;-5)$ serait le point d'une fonction impaire.",
+                "answers": [
+                  {
+                    "content": "$(-2\\,;5)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(-2\\,;-5)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(5\\,;2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(2\\,;-5)$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les quatre étapes pour tracer une courbe.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Rassembler les résultats de l'étude. Étape 2 — Calculer les points particuliers. Étape 3 — Déterminer les tangentes utiles. Étape 4 — Tracer la courbe. On ne trace qu'à la fin : sans les points, les tangentes et les asymptotes, la courbe n'est pas guidée.",
+                "answers": [
+                  {
+                    "content": "Rassembler les résultats de l'étude (domaine, parité, limites, tableau de variations)."
+                  },
+                  {
+                    "content": "Calculer les points particuliers."
+                  },
+                  {
+                    "content": "Déterminer les tangentes utiles."
+                  },
+                  {
+                    "content": "Tracer la courbe dans un repère."
+                  }
+                ]
+              },
+              {
+                "content": "Une fonction dérivable $f$ admet un maximum local en $x=a$. La tangente à sa courbe en ce point est la droite horizontale d'équation $y=$ ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Déterminer la tangente : en un extremum, $f'(a)=0$, donc $y=f'(a)(x-a)+f(a)=f(a)$. La hauteur de la droite est $f(a)$, pas $f'(a)$ qui vaut $0$ : c'est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "$f(a)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$f'(a)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$a$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une fonction $f$, dérivable sur $\\mathbb{R}$, a pour tableau de variations : croissante sur $]-\\infty\\,;0]$ de $-\\infty$ à $2$, décroissante sur $[0\\,;3]$ de $2$ à $-4$, croissante sur $[3\\,;+\\infty[$ de $-4$ à $+\\infty$. En quels points sa courbe a-t-elle une tangente horizontale (choisis-en deux) ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Rassembler les résultats : le tableau indique deux extrema, un maximum $2$ en $x=0$ et un minimum $-4$ en $x=3$. Étape 3 — Déterminer les tangentes : en un extremum $f'(a)=0$, donc la tangente est horizontale en $(0\\,;2)$ et en $(3\\,;-4)$. $(0\\,;-4)$, $(3\\,;2)$ et $(2\\,;0)$ mélangent l'abscisse et l'ordonnée.",
+                "answers": [
+                  {
+                    "content": "$(0\\,;2)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(3\\,;-4)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(0\\,;-4)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(3\\,;2)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(2\\,;0)$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à calculer des points particuliers et des tangentes.",
+            "questions": [
+              {
+                "content": "Pour $f(x)=x^2-2x-3$, l'ordonnée à l'origine est ___ et l'abscisse positive du point d'intersection avec l'axe des abscisses est ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "$f(0)=-3$. Ensuite $x^2-2x-3=(x-3)(x+1)=0$ donne $x=3$ ou $x=-1$ ; l'abscisse positive est $3$.",
+                "answers": [
+                  {
+                    "content": "-3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Calcule $f(0)$, puis factorise $x^2-2x-3$."
+              },
+              {
+                "content": "Quelle est la tangente à la courbe de $f(x)=x^2+3x+1$ au point d'abscisse $0$ ?",
+                "question_type": "single_choice",
+                "explanation": "$f(0)=1$ et $f'(x)=2x+3$, donc $f'(0)=3$. La tangente est $y=3(x-0)+1=3x+1$.",
+                "answers": [
+                  {
+                    "content": "$y=3x+1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$y=x+3$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=3x$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$y=2x+1$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Utilise $y=f'(a)(x-a)+f(a)$ avec $a=0$."
+              },
+              {
+                "content": "Si $f$ est impaire et $f(1)=4$, le point $(-1\\,;-4)$ est sur sa courbe.",
+                "question_type": "true_false",
+                "explanation": "Pour une fonction impaire, $f(-1)=-f(1)=-4$ : le point $(-1\\,;-4)$ est le symétrique de $(1\\,;4)$ par rapport à l'origine.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La courbe de $f(x)=x^2-6x$ a une tangente horizontale au point d'abscisse ___.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "$f'(x)=2x-6$ s'annule pour $x=3$ : la tangente est horizontale en ce point, d'équation $y=f(3)=-9$.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "Une tangente horizontale a un coefficient directeur nul."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le rendement d'une parcelle de manioc",
+          "statement": "Sur une parcelle de manioc près de Daloa, M. Koffi mesure le rendement en fonction de la dose d'engrais. Pour une dose de $x$ dizaines de kilogrammes par hectare ($0\\leq x\\leq5$), le rendement, en centaines de kilogrammes de manioc par hectare, est $R(x)=-2x^3+15x^2-24x+20$. Dans cet exercice, tu étudies les variations de $R$ sur l'intervalle $[0\\,;5]$.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pour $R(x)=-2x^3+15x^2-24x+20$, calcule $R'(2)$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer la dérivée : $R'(x)=-2\\times3x^2+15\\times2x-24=-6x^2+30x-24$. On remplace ensuite $x$ par $2$ : $R'(2)=-6\\times4+30\\times2-24=-24+60-24=12$. Comme $R'(2)>0$, le rendement augmente quand la dose passe par $2$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la dérivée factorisée de $R(x)=-2x^3+15x^2-24x+20$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer la dérivée et la factoriser : $R'(x)=-6x^2+30x-24=-6(x^2-5x+4)=-6(x-1)(x-4)$, car $1\\times4=4$ et $1+4=5$. Vérification : $-6(x-1)(x-4)=-6x^2+30x-24$. $-6(x+1)(x+4)$ donne $-6x^2-30x-24$ ; $6(x-1)(x-4)$ a le mauvais signe de tête ; $-6(x-1)(x+4)$ donne $-6x^2-18x+24$.",
+              "answers": [
+                {
+                  "content": "$R'(x)=-6(x-1)(x-4)$",
+                  "correct": true
+                },
+                {
+                  "content": "$R'(x)=-6(x+1)(x+4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$R'(x)=6(x-1)(x-4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$R'(x)=-6(x-1)(x+4)$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On a $R'(x)=-6(x-1)(x-4)$ sur $[0\\,;5]$. Quelles sont les variations de $R$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Étudier le signe de $R'(x)$ : les racines sont $1$ et $4$. Sur $[0\\,;1[$, les deux facteurs $x-1$ et $x-4$ sont négatifs, leur produit est positif, et $-6\\times$ positif est négatif. Sur $]1\\,;4[$, le produit est négatif et $R'>0$. Sur $]4\\,;5]$, le produit est positif et $R'<0$. Étape 3 — Déduire les variations : $R$ décroît, croît, puis décroît. La première autre proposition inverse tous les signes.",
+              "answers": [
+                {
+                  "content": "Décroissante sur $[0\\,;1]$, croissante sur $[1\\,;4]$, décroissante sur $[4\\,;5]$",
+                  "correct": true
+                },
+                {
+                  "content": "Croissante sur $[0\\,;1]$, décroissante sur $[1\\,;4]$, croissante sur $[4\\,;5]$",
+                  "correct": false
+                },
+                {
+                  "content": "Croissante sur $[0\\,;5]$",
+                  "correct": false
+                },
+                {
+                  "content": "Décroissante sur $[0\\,;4]$, croissante sur $[4\\,;5]$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $R(x)=-2x^3+15x^2-24x+20$ sur $[0\\,;5]$, avec $R$ décroissante sur $[0\\,;1]$, croissante sur $[1\\,;4]$ et décroissante sur $[4\\,;5]$, quelle dose $x$ donne le rendement maximal ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Dresser le tableau : on compare les valeurs aux extrema et aux bornes. $R(0)=20$, $R(1)=-2+15-24+20=9$, $R(4)=-128+240-96+20=36$, $R(5)=-250+375-120+20=25$. Le plus grand rendement est $R(4)=36$, atteint pour $x=4$. Répondre $5$ oublie que $R$ décroît après $4$ ; répondre $0$ ou $1$ ignore les valeurs de $R$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $R(x)=-2x^3+15x^2-24x+20$ sur $[0\\,;5]$, avec $R$ décroissante sur $[0\\,;1]$, croissante sur $[1\\,;4]$ et décroissante sur $[4\\,;5]$, quel est le rendement minimal, en centaines de kilogrammes par hectare ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Dresser le tableau : les candidats au minimum sont $R(0)=20$, $R(1)=-2+15-24+20=9$, $R(4)=36$ et $R(5)=-250+375-120+20=25$. Le plus petit est $R(1)=9$. Le rendement minimal est donc $9$ centaines de kilogrammes par hectare (soit $900$ kg), pour une dose de $1$ dizaine de kilogrammes.",
+              "answers": [
+                {
+                  "content": "9",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec $R(x)=-2x^3+15x^2-24x+20$, le rendement pour la dose $x=5$ est supérieur au rendement pour la dose $x=0$.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Dresser le tableau, on y lit les valeurs : $R(0)=20$ et $R(5)=-2\\times125+15\\times25-24\\times5+20=-250+375-120+20=25$. Comme $25>20$, l'affirmation est vraie. Le raisonnement « $R$ décroît à la fin, donc $R(5)<R(0)$ » est faux : $R$ a d'abord monté jusqu'à $36$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le coût moyen d'une coopérative d'anacarde",
+          "statement": "Une coopérative de planteurs d'anacardiers de Korhogo modélise un coût moyen, en dizaines de milliers de FCFA par tonne, par la fonction $f$ définie par $f(x)=\\dfrac{2x+3}{x-1}$, où $x$ désigne un volume en dizaines de tonnes. Dans cet exercice, tu mènes une étude de $f$ avec le plan d'étude : domaine, limites, asymptotes, dérivée.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Quel est le domaine de définition de $f(x)=\\dfrac{2x+3}{x-1}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer le domaine : $f(x)$ existe si $x-1\\neq0$, donc $x\\neq1$ et $D_f=\\mathbb{R}\\setminus\\{1\\}$. $-\\frac32$ est le zéro du numérateur, pas la valeur interdite ; $-1$ est une erreur de signe ; $\\mathbb{R}$ oublie la condition sur le dénominateur.",
+              "answers": [
+                {
+                  "content": "$\\mathbb{R}\\setminus\\{1\\}$",
+                  "correct": true
+                },
+                {
+                  "content": "$\\mathbb{R}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{R}\\setminus\\left\\{-\\dfrac32\\right\\}$",
+                  "correct": false
+                },
+                {
+                  "content": "$\\mathbb{R}\\setminus\\{-1\\}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule $\\lim_{x\\to+\\infty}\\dfrac{2x+3}{x-1}$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on cherche la limite en $+\\infty$. Étape 2 — Calculer : on garde les termes de plus haut degré, $\\dfrac{2x}{x}=2$. Étape 3 — Interpréter : la limite est finie, égale à $2$ : la droite $y=2$ est asymptote horizontale. La limite en $-\\infty$ est aussi $2$.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la limite de $f(x)=\\dfrac{2x+3}{x-1}$ quand $x$ tend vers $1$ par valeurs supérieures à $1$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $1$ est la valeur interdite, on étudie $1^+$. Étape 2 — Calculer : le numérateur tend vers $2\\times1+3=5>0$ et le dénominateur vers $0^+$, donc $\\lim f=+\\infty$. Étape 3 — Interpréter : la droite $x=1$ est asymptote verticale. $-\\infty$ serait la limite en $1^-$.",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$-\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$5$",
+                  "correct": false
+                },
+                {
+                  "content": "$2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les asymptotes de la courbe de $f(x)=\\dfrac{2x+3}{x-1}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Interpréter les limites : $\\lim_{x\\to1^+}f=+\\infty$ donne l'asymptote verticale $x=1$ ; $\\lim_{x\\to\\pm\\infty}f=2$ donne l'asymptote horizontale $y=2$. La deuxième proposition échange les deux droites ; la troisième prend le zéro du numérateur ; la quatrième oublie la limite infinie en $1$.",
+              "answers": [
+                {
+                  "content": "$x=1$ (verticale) et $y=2$ (horizontale)",
+                  "correct": true
+                },
+                {
+                  "content": "$x=2$ (verticale) et $y=1$ (horizontale)",
+                  "correct": false
+                },
+                {
+                  "content": "$x=-\\dfrac32$ (verticale) et $y=2$ (horizontale)",
+                  "correct": false
+                },
+                {
+                  "content": "Seulement $y=2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la dérivée de $f(x)=\\dfrac{2x+3}{x-1}$ sur $\\mathbb{R}\\setminus\\{1\\}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer la dérivée : avec $u=2x+3$ et $v=x-1$, $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{2(x-1)-(2x+3)}{(x-1)^2}=\\dfrac{-5}{(x-1)^2}$. La proposition $\\frac{5}{(x-1)^2}$ inverse le signe ; $2$ dérive seulement le numérateur ; la dernière oublie le carré.",
+              "answers": [
+                {
+                  "content": "$f'(x)=\\dfrac{-5}{(x-1)^2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$f'(x)=\\dfrac{5}{(x-1)^2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x)=2$",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x)=\\dfrac{-5}{x-1}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La fonction $f(x)=\\dfrac{2x+3}{x-1}$ est strictement décroissante sur $]1\\,;+\\infty[$.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Calculer la dérivée : $f'(x)=\\dfrac{-5}{(x-1)^2}$. Étape 2 — Étudier le signe : $-5<0$ et $(x-1)^2>0$ pour $x\\neq1$, donc $f'(x)<0$. Étape 3 — Déduire : $f$ est strictement décroissante sur $]1\\,;+\\infty[$ (et aussi sur $]-\\infty\\,;1[$).",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La courbe de $f(x)=\\dfrac{2x+3}{x-1}$ coupe l'axe des abscisses en un point. Donne son abscisse.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 2 — Calculer les points particuliers : $f(x)=0$ équivaut, pour $x\\neq1$, à $2x+3=0$, soit $x=-\\dfrac32=-1{,}5$. Ce réel est bien dans le domaine. Le point est $(-1{,}5\\,;0)$. La valeur $1$ est la valeur interdite, pas une solution.",
+              "answers": [
+                {
+                  "content": "-1,5",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le coût moyen d'une plantation d'hévéa",
+          "statement": "Une plantation d'hévéas de Bongouanou vend son caoutchouc par lots. Le coût moyen de production, en dizaines de milliers de FCFA par tonne, d'un lot de $x$ tonnes ($x>1$) est $C(x)=\\dfrac{x^2-2x+5}{x-1}$. Dans cet exercice, tu étudies $C$ pas à pas. La courbe de $C$ sera tracée dans un repère à partir de ton étude ; aucune figure n'est donnée.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "On veut écrire $C(x)=x-1+\\dfrac{b}{x-1}$ pour $x>1$. Donne la valeur de $b$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Chercher une asymptote oblique : on écrit $C(x)=ax+b+r(x)$. Ici $(x-1)^2=x^2-2x+1$, donc $x^2-2x+5=(x-1)^2+4$. En divisant par $x-1$ : $C(x)=x-1+\\dfrac{4}{x-1}$. Donc $b=4$. Contrôle avec $x=3$ : $C(3)=\\frac{8}{2}=4$ et $3-1+\\frac42=4$.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On a $C(x)=x-1+\\dfrac{4}{x-1}$. Quelle est l'asymptote oblique de la courbe de $C$ en $+\\infty$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Chercher une asymptote oblique : $C(x)=ax+b+r(x)$ avec $a=1$, $b=-1$ et $r(x)=\\dfrac{4}{x-1}$. Comme $r(x)\\to0$ en $+\\infty$, la droite $y=x-1$ est asymptote oblique. $y=x+4$ confond avec le numérateur de la fraction ; $y=x$ oublie le $-1$ ; $y=4$ est une droite horizontale.",
+              "answers": [
+                {
+                  "content": "$y=x-1$",
+                  "correct": true
+                },
+                {
+                  "content": "$y=x+4$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=x$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=4$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $x>1$, la courbe de $C(x)=x-1+\\dfrac{4}{x-1}$ est au-dessus de la droite $y=x-1$.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Chercher la position : on étudie le signe de $C(x)-(x-1)=\\dfrac{4}{x-1}$. Pour $x>1$, $4>0$ et $x-1>0$, donc cette différence est strictement positive : la courbe est au-dessus de la droite.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la limite de $C(x)=\\dfrac{x^2-2x+5}{x-1}$ quand $x$ tend vers $1$ par valeurs supérieures à $1$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : $1$ est la valeur interdite, on étudie $1^+$. Étape 2 — Calculer : le numérateur tend vers $1-2+5=4>0$ et le dénominateur vers $0^+$, donc $\\lim C=+\\infty$. Étape 3 — Interpréter : la droite $x=1$ est asymptote verticale. $4$ ignore le dénominateur ; $-\\infty$ viendrait de $1^-$.",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$-\\infty$",
+                  "correct": false
+                },
+                {
+                  "content": "$4$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On donne $C'(x)=\\dfrac{(x-3)(x+1)}{(x-1)^2}$ pour $x>1$. Quelles sont les variations de $C$ sur $]1\\,;+\\infty[$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Étudier le signe de $C'(x)$ : pour $x>1$, $(x-1)^2>0$ et $x+1>0$, donc $C'(x)$ a le signe de $x-3$. Il est négatif sur $]1\\,;3[$, nul en $3$, positif sur $]3\\,;+\\infty[$. Étape 3 — Déduire les variations : $C$ décroît sur $]1\\,;3]$ puis croît sur $[3\\,;+\\infty[$. La première autre proposition inverse les signes.",
+              "answers": [
+                {
+                  "content": "Décroissante sur $]1\\,;3]$, puis croissante sur $[3\\,;+\\infty[$",
+                  "correct": true
+                },
+                {
+                  "content": "Croissante sur $]1\\,;3]$, puis décroissante sur $[3\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "Croissante sur $]1\\,;+\\infty[$",
+                  "correct": false
+                },
+                {
+                  "content": "Décroissante sur $]1\\,;+\\infty[$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $C(x)=\\dfrac{x^2-2x+5}{x-1}$, avec $C$ décroissante sur $]1\\,;3]$ puis croissante sur $[3\\,;+\\infty[$, quel est le coût moyen minimal, en dizaines de milliers de FCFA par tonne ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 4 — Dresser le tableau : le minimum est atteint en $x=3$, où la dérivée change de signe de $-$ à $+$. $C(3)=\\dfrac{9-6+5}{2}=\\dfrac82=4$. Le coût moyen minimal est donc $4$ dizaines de milliers de FCFA par tonne, soit $40\\,000$ FCFA, pour un lot de $3$ tonnes.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La courbe de $C(x)=\\dfrac{x^2-2x+5}{x-1}$ a un minimum en $x=3$ avec $C(3)=4$ et $C'(3)=0$. Quelle est l'équation de sa tangente au point d'abscisse $3$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Déterminer les tangentes : $y=C'(3)(x-3)+C(3)=0\\times(x-3)+4=4$. La tangente en un extremum est horizontale, d'équation $y=C(3)$. $x=3$ est une droite verticale ; $y=3$ prend l'abscisse pour l'ordonnée ; $y=0$ prend $C'(3)$ pour $C(3)$ (piège de la fiche).",
+              "answers": [
+                {
+                  "content": "$y=4$",
+                  "correct": true
+                },
+                {
+                  "content": "$x=3$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=3$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=0$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dresse le tableau de variations de $C(x)=\\dfrac{x^2-2x+5}{x-1}$ sur $]1\\,;+\\infty[$ : décris la ligne de $x$, la ligne du signe de $C'$ et la ligne de $C$, avec les limites aux bornes et le minimum. On donne $C'(x)=\\dfrac{(x-3)(x+1)}{(x-1)^2}$.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "La ligne de x : 1, 3, +infini",
+                "Le signe de C' : négatif sur ]1 ; 3[, nul en 3, positif ensuite",
+                "La ligne de C : flèche descendante de +infini à 4, puis montante de 4 à +infini",
+                "Les limites en 1 (par valeurs supérieures) et en +infini sont justifiées"
+              ],
+              "explanation": "Corrigé modèle : première ligne, $x$ : $1$, $3$, $+\\infty$. Deuxième ligne, $C'(x)$ : $-$ sur $]1\\,;3[$, $0$ en $3$, $+$ sur $]3\\,;+\\infty[$. Troisième ligne, $C(x)$ : de $+\\infty$ (limite en $1^+$, car le numérateur tend vers $4$ et le dénominateur vers $0^+$) la flèche descend jusqu'à $C(3)=4$, puis monte vers $+\\infty$ (limite en $+\\infty$, car $C(x)$ se comporte comme $x$). Barème sur 3 : ligne de $x$ et signe de $C'$ : 1 point ; ligne de $C$ avec flèches et valeur $4$ : 1 point ; limites justifiées : 1 point.",
+              "answers": [],
+              "starter": "Première ligne, x : 1, 3, +infini…"
+            }
+          ]
+        },
+        {
+          "title": "L'écart de rendement d'une parcelle de cacaoyers",
+          "statement": "Un agronome modélise l'écart de rendement d'une parcelle de cacaoyers de Gagnoa par rapport à la moyenne de la région, en centaines de kilogrammes, selon l'écart $x$ (en dizaines de jours, positif ou négatif) entre la date de taille et une date de référence. Il utilise la fonction $f$ définie sur $\\mathbb{R}$ par $f(x)=\\dfrac{4x}{x^2+1}$. Dans cet exercice, tu fais une étude complète de $f$ : domaine, parité, limites, variations et tangente. La courbe n'est pas donnée : tu la décris à partir de tes résultats.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pourquoi le domaine de $f(x)=\\dfrac{4x}{x^2+1}$ est-il $\\mathbb{R}$ tout entier ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Déterminer le domaine : $f(x)$ existe si $x^2+1\\neq0$. Or $x^2\\geq0$, donc $x^2+1\\geq1>0$ : le dénominateur ne s'annule jamais et $D_f=\\mathbb{R}$. Le numérateur s'annule en $0$ mais cela ne gêne pas ; $f$ n'est pas un polynôme, c'est une fraction ; $x^2+1=0$ n'a pas de solution réelle.",
+              "answers": [
+                {
+                  "content": "Parce que $x^2+1\\geq1$ ne s'annule jamais",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que le numérateur $4x$ ne s'annule jamais",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que $x^2+1$ s'annule en $x=-1$",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que $f$ est un polynôme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La fonction $f(x)=\\dfrac{4x}{x^2+1}$ est impaire.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Déterminer le domaine : $D_f=\\mathbb{R}$. Étape 2 — Vérifier la symétrie : $\\mathbb{R}$ est symétrique par rapport à $0$. Étape 3 — Calculer : $f(-x)=\\dfrac{4(-x)}{(-x)^2+1}=\\dfrac{-4x}{x^2+1}=-f(x)$. Étape 4 — Conclure : $f$ est impaire ; sa courbe est symétrique par rapport à l'origine, donc on peut l'étudier sur $[0\\,;+\\infty[$.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Calcule $\\lim_{x\\to+\\infty}\\dfrac{4x}{x^2+1}$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on cherche la limite en $+\\infty$. Étape 2 — Calculer : numérateur et dénominateur tendent vers $+\\infty$ ; on garde les termes de plus haut degré : $\\dfrac{4x}{x^2}=\\dfrac4x$, qui tend vers $0$. Étape 3 — Interpréter : la limite est finie, égale à $0$. Répondre $4$ ou $+\\infty$ oublie que le dénominateur est de plus haut degré.",
+              "answers": [
+                {
+                  "content": "0",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle est l'asymptote horizontale de la courbe de $f(x)=\\dfrac{4x}{x^2+1}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Interpréter : $\\lim_{x\\to\\pm\\infty}f(x)=0$, limite finie, donc la droite $y=0$ est asymptote horizontale. Il n'y a pas d'asymptote verticale car le domaine est $\\mathbb{R}$. $y=4$ prend le coefficient du numérateur ; $x=0$ est l'axe des ordonnées.",
+              "answers": [
+                {
+                  "content": "$y=0$ (l'axe des abscisses)",
+                  "correct": true
+                },
+                {
+                  "content": "$y=4$",
+                  "correct": false
+                },
+                {
+                  "content": "$x=0$",
+                  "correct": false
+                },
+                {
+                  "content": "Elle n'en a pas",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la dérivée de $f(x)=\\dfrac{4x}{x^2+1}$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Calculer la dérivée : avec $u=4x$ et $v=x^2+1$, $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{4(x^2+1)-4x\\times2x}{(x^2+1)^2}=\\dfrac{4-4x^2}{(x^2+1)^2}$. $\\frac4{2x}$ divise les dérivées ; la deuxième proposition additionne au lieu de soustraire ; la dernière oublie le carré du dénominateur.",
+              "answers": [
+                {
+                  "content": "$f'(x)=\\dfrac{4-4x^2}{(x^2+1)^2}$",
+                  "correct": true
+                },
+                {
+                  "content": "$f'(x)=\\dfrac{4}{2x}$",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x)=\\dfrac{4x^2+4+8x^2}{(x^2+1)^2}$",
+                  "correct": false
+                },
+                {
+                  "content": "$f'(x)=\\dfrac{4-4x^2}{x^2+1}$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On a $f'(x)=\\dfrac{4(1-x)(1+x)}{(x^2+1)^2}$. Pour quelles valeurs de $x$ la dérivée s'annule-t-elle (choisis-en deux) ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Étudier le signe : $(x^2+1)^2>0$ ne s'annule jamais, donc $f'(x)=0$ équivaut à $(1-x)(1+x)=0$, soit $x=1$ ou $x=-1$. $f'$ est positive entre $-1$ et $1$, négative ailleurs. $x=0$ annule $f$, pas $f'$ ($f'(0)=4$) ; $4$ est le coefficient du numérateur ; $2$ est la valeur de $f(1)$.",
+              "answers": [
+                {
+                  "content": "$x=1$",
+                  "correct": true
+                },
+                {
+                  "content": "$x=-1$",
+                  "correct": true
+                },
+                {
+                  "content": "$x=0$",
+                  "correct": false
+                },
+                {
+                  "content": "$x=4$",
+                  "correct": false
+                },
+                {
+                  "content": "$x=2$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $f(x)=\\dfrac{4x}{x^2+1}$, avec $f$ croissante sur $[-1\\,;1]$ et décroissante sur $[1\\,;+\\infty[$, quelle est la valeur du maximum de $f$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Déduire les variations : $f'$ passe de $+$ à $-$ en $1$, donc le maximum de $f$ est $f(1)$. Étape 4 — Dresser le tableau, on y écrit la valeur : $f(1)=\\dfrac{4\\times1}{1+1}=\\dfrac42=2$. Par imparité, le minimum est $f(-1)=-2$.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Pour $f(x)=\\dfrac{4x}{x^2+1}$, quelle est l'équation de la tangente à la courbe au point d'abscisse $0$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Déterminer les tangentes : $f(0)=0$ et $f'(0)=\\dfrac{4-0}{1}=4$. L'équation est $y=f'(0)(x-0)+f(0)=4x$. $y=4$ confond $f'(0)$ avec $f(0)$ ; $y=0$ serait la tangente si $f'(0)$ valait $0$ ; $y=x$ oublie le coefficient $4$.",
+              "answers": [
+                {
+                  "content": "$y=4x$",
+                  "correct": true
+                },
+                {
+                  "content": "$y=4$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=0$",
+                  "correct": false
+                },
+                {
+                  "content": "$y=x$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour $f(x)=\\dfrac{4x}{x^2+1}$, décris la courbe en quelques phrases : sa symétrie, la valeur de ses deux extrema, son asymptote et sa tangente à l'origine. On donne $f(1)=2$, $f(-1)=-2$, $\\lim_{x\\to\\pm\\infty}f(x)=0$ et $f'(0)=4$.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "La symétrie par rapport à l'origine est justifiée par l'imparité",
+                "Le maximum 2 en x = 1 et le minimum -2 en x = -1 sont donnés",
+                "L'asymptote horizontale y = 0 est citée avec sa limite",
+                "La tangente en 0, d'équation y = 4x, est donnée",
+                "La courbe est décrite de gauche à droite en suivant les variations"
+              ],
+              "explanation": "Corrigé modèle : $f$ est impaire, donc la courbe est symétrique par rapport à l'origine. Elle passe par l'origine avec la tangente $y=4x$. Elle monte de $f(-1)=-2$ (minimum, point $(-1\\,;-2)$) jusqu'à $f(1)=2$ (maximum, point $(1\\,;2)$), en passant par $O$. Pour $x<-1$, elle est décroissante et s'approche de l'axe des abscisses par en dessous ; pour $x>1$, elle est décroissante et s'approche de l'axe des abscisses par au-dessus : la droite $y=0$ est asymptote horizontale. Barème sur 4 : symétrie 1 point ; extrema 1 point ; asymptote 0,5 point ; tangente 0,5 point ; description cohérente 1 point.",
+              "answers": [],
+              "starter": "La fonction f est impaire, donc…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
