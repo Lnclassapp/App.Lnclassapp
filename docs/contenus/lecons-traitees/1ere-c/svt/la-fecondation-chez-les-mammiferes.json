@@ -1,0 +1,1281 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La fécondation chez les mammifères",
+      "subtitle": "Leçon 4 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "appareil-genital-feminin",
+          "kind": "plate",
+          "description": "Planche de l'appareil reproducteur féminin avec quatre étiquettes : ovaire, trompe (oviducte), pavillon et utérus. La trompe est surlignée : c'est là que l'ovocyte II recueilli par le pavillon rencontre les spermatozoïdes, donc le lieu de la fécondation. L'utérus est le lieu où l'embryon s'installe plus tard.",
+          "params": {
+            "plate": "female_reproductive_system",
+            "labels": [
+              {
+                "part": "ovary"
+              },
+              {
+                "part": "oviduct"
+              },
+              {
+                "part": "infundibulum"
+              },
+              {
+                "part": "uterus"
+              }
+            ],
+            "highlight": [
+              "oviduct"
+            ],
+            "numbering": "names"
+          },
+          "controls": []
+        },
+        {
+          "key": "etapes-fecondation",
+          "kind": "diagram",
+          "description": "Schéma fléché de haut en bas des cinq événements de la fécondation : pénétration du spermatozoïde, fin de la deuxième division de méiose de l'ovocyte II, présence de deux pronucléi à 23 chromosomes, caryogamie, puis œuf à 46 chromosomes. Chaque flèche indique l'événement qui suit.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "pen",
+                "label": "Pénétration du spermatozoïde"
+              },
+              {
+                "id": "meio",
+                "label": "Fin de la méiose : ovule et 2e globule polaire"
+              },
+              {
+                "id": "pron",
+                "label": "Deux pronucléi à 23 chromosomes"
+              },
+              {
+                "id": "cary",
+                "label": "Caryogamie"
+              },
+              {
+                "id": "oeuf",
+                "label": "Œuf à 46 chromosomes"
+              }
+            ],
+            "edges": [
+              {
+                "from": "pen",
+                "to": "meio"
+              },
+              {
+                "from": "meio",
+                "to": "pron"
+              },
+              {
+                "from": "pron",
+                "to": "cary"
+              },
+              {
+                "from": "cary",
+                "to": "oeuf"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "alternance-meiose-fecondation",
+          "kind": "diagram",
+          "description": "Cycle de l'espèce humaine en quatre étapes : l'adulte à 46 chromosomes subit la méiose, qui donne des gamètes à 23 chromosomes ; la fécondation réunit deux gamètes et forme un œuf à 46 chromosomes ; l'œuf se divise par mitoses et se développe en un nouvel adulte à 46 chromosomes.",
+          "params": {
+            "layout": "cycle",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "adulte",
+                "label": "Adulte : 46 chromosomes"
+              },
+              {
+                "id": "meiose",
+                "label": "Méiose"
+              },
+              {
+                "id": "gametes",
+                "label": "Gamètes : 23 chromosomes"
+              },
+              {
+                "id": "fecond",
+                "label": "Fécondation : œuf à 46 chromosomes"
+              }
+            ],
+            "edges": [
+              {
+                "from": "adulte",
+                "to": "meiose"
+              },
+              {
+                "from": "meiose",
+                "to": "gametes"
+              },
+              {
+                "from": "gametes",
+                "to": "fecond"
+              },
+              {
+                "from": "fecond",
+                "to": "adulte",
+                "label": "mitoses"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "taux-fiv-spermatozoides",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, résultats simplifiés d'une expérience fictive : pourcentage d'ovocytes fécondés après 6 heures selon le nombre de spermatozoïdes par ovocyte, en milliers. 1 : 5 % ; 10 : 40 % ; 50 : 80 % ; 100 : 85 % ; 200 : 85 %. Le pourcentage augmente puis reste stable à partir de 100 milliers.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              5,
+              40,
+              80,
+              85,
+              85
+            ],
+            "labels": [
+              "1",
+              "10",
+              "50",
+              "100",
+              "200"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "taux-fecondation-boites",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres, résultats simplifiés d'une expérience fictive : pourcentage d'ovocytes fécondés dans trois boîtes de culture. Boîte A (spermatozoïdes normaux) : 80 %. Boîte B (acrosome des spermatozoïdes rendu inactif) : 0 %. Boîte C (acrosome inactif, spermatozoïde injecté dans l'ovocyte) : 60 %.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              80,
+              0,
+              60
+            ],
+            "labels": [
+              "Boîte A",
+              "Boîte B",
+              "Boîte C"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le rapprochement des gamètes et la pénétration du spermatozoïde",
+          "remember": "La **fécondation** est l'union d'un spermatozoïde et d'un ovocyte II, le gamète femelle. Elle a lieu dans la **trompe** (oviducte), peu après l'ovulation. L'ovocyte II expulsé de l'ovaire est **bloqué en métaphase de la deuxième division de méiose** ; il est entouré de la **zone pellucide** et de cellules folliculaires. Parmi les spermatozoïdes déposés dans les voies génitales, une petite partie seulement atteint la trompe. Le spermatozoïde traverse les cellules folliculaires, puis libère les enzymes de son **acrosome** (**réaction acrosomique**) qui digèrent la zone pellucide. Sa membrane **fusionne** avec celle de l'ovocyte et son noyau entre dans le cytoplasme. Les **granules corticaux** de l'ovocyte libèrent alors leur contenu : la zone pellucide est modifiée et aucun autre spermatozoïde ne peut entrer. C'est le **blocage de la polyspermie**.",
+          "method": [
+            "Situer la fécondation : le lieu de la rencontre et l'état du gamète femelle à ce moment.",
+            "Décrire la traversée des enveloppes par le spermatozoïde : cellules folliculaires, puis zone pellucide grâce à l'acrosome.",
+            "Repérer la fusion des membranes et l'entrée du noyau du spermatozoïde dans le cytoplasme de l'ovocyte.",
+            "Conclure sur le blocage de la polyspermie : un seul spermatozoïde féconde l'ovocyte."
+          ],
+          "example": {
+            "statement": "Au laboratoire d'un centre de santé, un biologiste met un ovocyte II entouré de cellules folliculaires en présence de spermatozoïdes, en dehors du corps (FIV). Au microscope, il voit plusieurs spermatozoïdes collés à la zone pellucide. L'un d'eux a perdu son acrosome, a traversé la zone pellucide et sa tête touche la membrane de l'ovocyte. Quelques minutes plus tard, les autres spermatozoïdes se détachent de la zone pellucide. Analyser ces observations.",
+            "steps": [
+              "Situer : dans le corps, la rencontre a lieu dans la trompe ; en FIV, on la reproduit dans une boîte. Le gamète femelle est un ovocyte II, bloqué en métaphase de la deuxième division de méiose.",
+              "Décrire : les spermatozoïdes traversent les cellules folliculaires ; celui qui a perdu son acrosome a libéré ses enzymes (réaction acrosomique) et a digéré la zone pellucide.",
+              "Repérer : la tête du spermatozoïde touche la membrane de l'ovocyte ; les deux membranes fusionnent et le noyau du spermatozoïde entre dans le cytoplasme.",
+              "Conclure : les autres spermatozoïdes se détachent parce que la zone pellucide a été modifiée par les granules corticaux. Un seul spermatozoïde a fécondé l'ovocyte : la polyspermie est bloquée."
+            ]
+          },
+          "pitfall": "Ne pas croire que plusieurs spermatozoïdes peuvent entrer dans le même ovocyte. Contre-exemple chiffré : un spermatozoïde apporte 23 chromosomes et l'ovocyte en apporte 23 ; avec un deuxième spermatozoïde, on aurait 23 + 23 + 23 = 69 chromosomes, un nombre faux pour l'espèce humaine (46). Le blocage de la polyspermie garantit donc 46. Ne dis pas non plus « l'ovule » pour le gamète femelle au moment de la rencontre : c'est un ovocyte II, qui ne devient ovule qu'après l'entrée du spermatozoïde.",
+          "figure": "appareil-genital-feminin",
+          "exercise": {
+            "title": "Suivre le spermatozoïde jusqu'à l'ovocyte II",
+            "exercise_type": "fixation",
+            "figure": "appareil-genital-feminin",
+            "statement": "Dans cet exercice, tu situes la fécondation et tu suis le spermatozoïde jusqu'à l'intérieur de l'ovocyte II, avec les étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Chez la femme, où a lieu la fécondation en temps normal ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : l'ovocyte II expulsé à l'ovulation est recueilli par le pavillon et avance dans la trompe, où il rencontre les spermatozoïdes. La fécondation a donc lieu dans la trompe. L'utérus est le lieu où l'embryon s'installe plus tard ; l'ovaire libère seulement l'ovocyte II.",
+                "answers": [
+                  {
+                    "content": "Dans la trompe (oviducte)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans la cavité de l'utérus",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le vagin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le follicule de l'ovaire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est l'état du gamète femelle au moment où le spermatozoïde le rencontre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Situer : à l'ovulation, l'ovaire libère un ovocyte II, bloqué en métaphase de la deuxième division de méiose. Ce n'est pas encore un ovule : la méiose ne s'achève qu'après l'entrée du spermatozoïde. L'ovocyte I et l'ovogonie sont des stades plus précoces, restés dans l'ovaire.",
+                "answers": [
+                  {
+                    "content": "Un ovocyte II bloqué en métaphase de la deuxième division de méiose",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un ovule qui a déjà terminé sa méiose",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un ovocyte I bloqué en prophase de la première division",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une ovogonie qui se multiplie par mitoses",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le trajet du spermatozoïde jusqu'au noyau de l'ovocyte II.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Décrire : le spermatozoïde traverse d'abord les cellules folliculaires, puis la zone pellucide, qu'il digère avec les enzymes de son acrosome. Étape 3 — Repérer : sa membrane fusionne alors avec celle de l'ovocyte, et enfin son noyau entre dans le cytoplasme.",
+                "answers": [
+                  {
+                    "content": "Traversée des cellules folliculaires"
+                  },
+                  {
+                    "content": "Traversée de la zone pellucide"
+                  },
+                  {
+                    "content": "Fusion des membranes du spermatozoïde et de l'ovocyte II"
+                  },
+                  {
+                    "content": "Entrée du noyau du spermatozoïde dans le cytoplasme"
+                  }
+                ]
+              },
+              {
+                "content": "Les enzymes qui digèrent la zone pellucide sont libérées par l'___ de la tête du spermatozoïde.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Décrire : pour traverser la zone pellucide, le spermatozoïde libère les enzymes contenues dans son acrosome (réaction acrosomique). Le flagelle sert à nager, le noyau porte les 23 chromosomes : aucun des deux ne digère la zone pellucide.",
+                "answers": [
+                  {
+                    "content": "acrosome",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quand un spermatozoïde a pénétré dans l'ovocyte II, d'autres spermatozoïdes peuvent encore y entrer sans difficulté.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : après la fusion des membranes, les granules corticaux libèrent leur contenu et modifient la zone pellucide. Aucun autre spermatozoïde ne peut entrer : c'est le blocage de la polyspermie. Sinon, l'œuf aurait 23 + 23 + 23 = 69 chromosomes, comme le montre le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément à son rôle dans la pénétration du spermatozoïde.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Décrire : le spermatozoïde traverse les cellules folliculaires, puis la zone pellucide grâce aux enzymes de son acrosome. Étape 4 — Conclure : les granules corticaux, une fois la fusion faite, modifient la zone pellucide et bloquent la polyspermie.",
+                "answers": [
+                  {
+                    "content": "Acrosome",
+                    "match": "Libère des enzymes qui digèrent la zone pellucide"
+                  },
+                  {
+                    "content": "Granules corticaux de l'ovocyte",
+                    "match": "Libèrent un contenu qui bloque la polyspermie"
+                  },
+                  {
+                    "content": "Zone pellucide",
+                    "match": "Enveloppe que le spermatozoïde doit traverser"
+                  },
+                  {
+                    "content": "Cellules folliculaires",
+                    "match": "Entourent l'ovocyte II à l'ovulation"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à suivre le spermatozoïde et à expliquer le blocage de la polyspermie.",
+            "questions": [
+              {
+                "content": "Le spermatozoïde traverse d'abord les cellules ___, puis la zone ___ de l'ovocyte II.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Décrire : les cellules folliculaires entourent l'ovocyte II ; la zone pellucide est l'enveloppe transparente située juste sous elles. Le spermatozoïde les traverse dans cet ordre.",
+                "answers": [
+                  {
+                    "content": "folliculaires",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "pellucide",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense aux enveloppes de l'ovocyte, de la plus externe à la plus interne : des cellules, puis une enveloppe transparente."
+              },
+              {
+                "content": "Les granules corticaux de l'ovocyte libèrent leur contenu après la fusion des membranes. Quel est l'effet ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : le contenu des granules corticaux modifie la zone pellucide, ce qui empêche l'entrée d'un deuxième spermatozoïde (blocage de la polyspermie). La digestion de la zone pellucide est faite avant, par l'acrosome.",
+                "answers": [
+                  {
+                    "content": "Aucun autre spermatozoïde ne peut plus entrer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils digèrent la zone pellucide pour le premier spermatozoïde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils déclenchent immédiatement la caryogamie",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils attirent d'autres spermatozoïdes vers l'ovocyte",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "En FIV, l'ovocyte II est mis en présence des spermatozoïdes hors du corps de la femme, mais la pénétration du spermatozoïde se déroule de la même façon.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Situer : en FIV, on reproduit dans une boîte la rencontre qui a lieu dans la trompe. Étapes 2 et 3 : le spermatozoïde traverse les mêmes enveloppes et fusionne avec l'ovocyte de la même manière.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le déroulement de la fécondation : de l'ovocyte II à l'œuf",
+          "remember": "Quand le spermatozoïde entre, l'ovocyte II **achève sa deuxième division de méiose** : il expulse le **deuxième globule polaire** et devient un **ovule**, à 23 chromosomes à une chromatide. Son noyau forme le **pronucléus femelle**. Le noyau du spermatozoïde gonfle et devient le **pronucléus mâle**, lui aussi à 23 chromosomes. Les deux pronucléi sont **haploïdes** (n = 23). Ils se rapprochent, leurs enveloppes disparaissent et leurs chromosomes se rassemblent : c'est la **caryogamie**. La cellule obtenue est l'**œuf** (ou **zygote**), **diploïde** : 46 chromosomes, dont 23 d'origine maternelle et 23 d'origine paternelle, associés en 23 paires de chromosomes homologues.",
+          "method": [
+            "Repérer l'état de l'ovocyte II avant, puis après l'entrée du spermatozoïde : méiose bloquée, puis achevée.",
+            "Compter les chromosomes de chaque noyau : pronucléus femelle et pronucléus mâle.",
+            "Décrire le rapprochement et la fusion des deux pronucléi : la caryogamie.",
+            "Conclure sur la nature de l'œuf : nombre de chromosomes et origine de chaque lot."
+          ],
+          "example": {
+            "statement": "Au laboratoire d'un centre de santé, un biologiste suit un ovocyte II humain fécondé en FIV (observation simplifiée). Peu après l'entrée du spermatozoïde, il voit apparaître un deuxième petit globule à côté du premier globule polaire. Quelques heures plus tard, la cellule contient deux noyaux de même taille, l'un d'origine maternelle et l'autre d'origine paternelle, chacun avec 23 chromosomes à une chromatide. Enfin, il ne voit plus qu'un seul noyau, qui contient 46 chromosomes. Analyser ces observations.",
+            "steps": [
+              "Repérer : avant l'entrée du spermatozoïde, l'ovocyte II est bloqué en métaphase de la deuxième division de méiose ; après, il l'achève et expulse ce nouveau petit globule, le deuxième globule polaire. Il devient un ovule.",
+              "Compter : le pronucléus femelle et le pronucléus mâle ont chacun 23 chromosomes à une chromatide : ils sont haploïdes (n = 23).",
+              "Décrire : les deux pronucléi se rapprochent, leurs enveloppes disparaissent et leurs chromosomes se rassemblent : c'est la caryogamie.",
+              "Conclure : la cellule obtenue est l'œuf, diploïde : 23 + 23 = 46 chromosomes, dont 23 d'origine maternelle et 23 d'origine paternelle, qui forment 23 paires."
+            ]
+          },
+          "pitfall": "Ne pas confondre l'ovule et l'œuf. L'ovule est le gamète femelle achevé : il a 23 chromosomes (n). L'œuf n'existe qu'après la caryogamie : il a 46 chromosomes (2n). Contre-exemple chiffré : si tu écris « l'ovule a 46 chromosomes », l'œuf aurait 46 + 23 = 69 chromosomes en ajoutant ceux du spermatozoïde, ce qui est faux. Compte toujours les chromosomes de chaque cellule avant d'additionner.",
+          "figure": "etapes-fecondation",
+          "exercise": {
+            "title": "De l'ovocyte II à l'œuf, étape par étape",
+            "exercise_type": "fixation",
+            "figure": "etapes-fecondation",
+            "statement": "Dans cet exercice, tu suis l'ovocyte II fécondé jusqu'à l'œuf, en comptant les chromosomes à chaque étape comme dans la fiche.",
+            "questions": [
+              {
+                "content": "Que fait l'ovocyte II quand le spermatozoïde pénètre dans son cytoplasme ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : l'ovocyte II est bloqué en métaphase de la deuxième division de méiose. L'entrée du spermatozoïde lève ce blocage : la méiose s'achève, le deuxième globule polaire est expulsé et l'ovocyte devient un ovule. La première division s'est terminée avant l'ovulation.",
+                "answers": [
+                  {
+                    "content": "Il achève sa deuxième division de méiose et expulse le deuxième globule polaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il commence sa première division de méiose",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il se divise par mitose en deux cellules identiques",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il dégénère car il est devenu diploïde",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien de chromosomes contient le pronucléus mâle de l'espèce humaine ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Compter : le pronucléus mâle est le noyau du spermatozoïde, un gamète haploïde (n). Dans l'espèce humaine, n = 23. Écrire 46 serait confondre le gamète avec une cellule du corps.",
+                "answers": [
+                  {
+                    "content": "23",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur les pronucléi de l'espèce humaine ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Compter : le pronucléus femelle (noyau de l'ovule) et le pronucléus mâle (noyau du spermatozoïde) ont chacun 23 chromosomes. Un seul chromosome de chaque paire est présent dans un pronucléus, donc il n'y a pas de paires : c'est dans l'œuf, avec 46 chromosomes, que se forment les 23 paires.",
+                "answers": [
+                  {
+                    "content": "Le pronucléus femelle contient 23 chromosomes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le pronucléus mâle contient 23 chromosomes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Chaque pronucléus contient 46 chromosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pronucléus mâle est le noyau de l'ovule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les pronucléi contiennent chacun 23 paires de chromosomes",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les événements de la fécondation.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : l'entrée du spermatozoïde fait achever la méiose. Étape 2 — Compter : les deux pronucléi ont 23 chromosomes. Étape 3 — Décrire : ils fusionnent par la caryogamie. Étape 4 — Conclure : la cellule obtenue est l'œuf à 46 chromosomes.",
+                "answers": [
+                  {
+                    "content": "Pénétration du spermatozoïde dans l'ovocyte II"
+                  },
+                  {
+                    "content": "Fin de la deuxième division de méiose et expulsion du deuxième globule polaire"
+                  },
+                  {
+                    "content": "Formation des deux pronucléi à 23 chromosomes"
+                  },
+                  {
+                    "content": "Caryogamie"
+                  },
+                  {
+                    "content": "Œuf à 46 chromosomes"
+                  }
+                ]
+              },
+              {
+                "content": "La fusion des deux pronucléi s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Décrire : les enveloppes des deux pronucléi disparaissent et leurs chromosomes se rassemblent dans une seule cellule. Ce phénomène est la caryogamie. Il ne faut pas le confondre avec la fusion des membranes du spermatozoïde et de l'ovocyte, qui a lieu plus tôt.",
+                "answers": [
+                  {
+                    "content": "caryogamie",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "L'ovule humain possède 46 chromosomes, comme l'œuf.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Compter : l'ovule est un gamète haploïde, avec 23 chromosomes. Étape 4 — Conclure : seul l'œuf, formé après la caryogamie, a 46 chromosomes. Confondre les deux, c'est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à compter les chromosomes pendant la fécondation.",
+            "questions": [
+              {
+                "content": "Le pronucléus mâle contient ___ chromosomes et l'œuf, après la caryogamie, en contient ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Compter : le pronucléus mâle est haploïde, n = 23 chromosomes. Étape 4 — Conclure : après la caryogamie, l'œuf est diploïde : 23 + 23 = 46 chromosomes.",
+                "answers": [
+                  {
+                    "content": "23",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "46",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un gamète est haploïde (n) ; l'œuf est diploïde (2n)."
+              },
+              {
+                "content": "Combien de chromosomes de l'œuf humain viennent de la mère ?",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Conclure : l'œuf contient 46 chromosomes. La moitié vient du pronucléus femelle, donc de la mère : 46 : 2 = 23, l'autre moitié du pronucléus mâle.",
+                "answers": [
+                  {
+                    "content": "23",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le deuxième globule polaire est expulsé avant l'entrée du spermatozoïde dans l'ovocyte II.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : avant l'entrée du spermatozoïde, l'ovocyte II est bloqué en métaphase de la deuxième division de méiose. C'est l'entrée du spermatozoïde qui permet d'achever la méiose et d'expulser le deuxième globule polaire.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le rôle de la fécondation",
+          "remember": "La **fécondation** rétablit l'état **diploïde** : deux gamètes à n chromosomes donnent un œuf à 2n chromosomes (chez l'humain, 23 + 23 = 46). La **méiose** réduit le nombre de chromosomes (2n vers n) et la fécondation le rétablit (n vers 2n). Cette **alternance méiose–fécondation** maintient le **nombre de chromosomes de l'espèce** de génération en génération. La fécondation réunit aussi deux lots de chromosomes d'origines différentes, qui se rencontrent au hasard : chaque œuf a une combinaison nouvelle, d'où la **diversité des individus** d'une même famille. Enfin, l'œuf se divise par mitoses : la fécondation marque le début du développement de l'embryon.",
+          "method": [
+            "Identifier le nombre de chromosomes des gamètes (n) et de l'œuf (2n) dans l'espèce étudiée.",
+            "Comparer ces nombres avant et après la fécondation : ce qui est rétabli.",
+            "Associer la méiose et la fécondation : l'alternance qui maintient le nombre de chromosomes.",
+            "Conclure sur les deux rôles : conservation du nombre de chromosomes de l'espèce et diversité des individus."
+          ],
+          "example": {
+            "statement": "Dans un cabinet de consultation, une sage-femme explique à un couple pourquoi leur enfant a, comme eux, 46 chromosomes dans ses cellules, alors que chacun d'eux n'a donné qu'une cellule reproductrice, et pourquoi il ne ressemble exactement ni à l'un ni à l'autre. Expliquer en suivant la méthode.",
+            "steps": [
+              "Identifier : chaque gamète humain a 23 chromosomes (n) ; l'œuf et les cellules de l'enfant en ont 46 (2n).",
+              "Comparer : avant la fécondation, il y a deux cellules à 23 chromosomes ; après, une seule à 46. La fécondation rétablit le nombre 2n : 23 + 23 = 46.",
+              "Associer : les parents ont 46 chromosomes ; la méiose a réduit ce nombre à 23 dans chaque gamète, puis la fécondation l'a rétabli. Cette alternance maintient 46 chromosomes de génération en génération.",
+              "Conclure : la fécondation conserve le nombre de chromosomes de l'espèce et réunit 23 chromosomes de la mère et 23 du père en une combinaison nouvelle : l'enfant ressemble à ses parents sans être identique à l'un ou à l'autre."
+            ]
+          },
+          "pitfall": "Ne pas confondre les rôles de la méiose et de la fécondation. La méiose réduit le nombre de chromosomes ; la fécondation le rétablit. Contre-exemple chiffré : sans méiose, deux gamètes à 46 chromosomes donneraient un œuf à 46 + 46 = 92 chromosomes, puis 184 à la génération suivante : le nombre doublerait à chaque génération. C'est parce que les gamètes ont 23 chromosomes que l'œuf en a 46.",
+          "figure": "alternance-meiose-fecondation",
+          "exercise": {
+            "title": "Le rôle de la fécondation dans le cycle de l'espèce",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Dans cet exercice, tu expliques le rôle de la fécondation avec les étapes de la fiche : nombres de chromosomes, alternance avec la méiose et diversité.",
+            "questions": [
+              {
+                "content": "Les gamètes d'une espèce de mammifère ont 19 chromosomes chacun. Combien de chromosomes l'œuf de cette espèce contient-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : chaque gamète a n = 19 chromosomes. Étape 2 — Comparer : la fécondation réunit deux gamètes, donc 19 + 19 = 38. L'œuf a 2n = 38 chromosomes. Répondre 19 reviendrait à oublier le lot apporté par l'autre parent.",
+                "answers": [
+                  {
+                    "content": "38",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quel événement rétablit le nombre 2n de chromosomes après la formation des gamètes ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer : les gamètes ont n chromosomes et l'œuf 2n ; c'est donc l'union des deux gamètes, la fécondation, qui rétablit 2n. Étape 3 — Associer : la méiose fait l'inverse, de 2n vers n. L'ovulation libère seulement l'ovocyte II.",
+                "answers": [
+                  {
+                    "content": "La fécondation",
+                    "correct": true
+                  },
+                  {
+                    "content": "La méiose",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'ovulation",
+                    "correct": false
+                  },
+                  {
+                    "content": "La mitose de l'œuf",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La méiose seule suffit à maintenir le même nombre de chromosomes de génération en génération.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Associer : la méiose divise le nombre de chromosomes par deux. Sans fécondation pour le rétablir, il serait divisé par deux à chaque génération (46, puis 23, puis moins encore), et l'espèce disparaîtrait. Il faut l'alternance méiose–fécondation.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces propositions, lesquelles décrivent deux rôles de la fécondation ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Conclure : la fécondation rétablit 2n et réunit deux lots de chromosomes d'origines différentes. La réduction du nombre de chromosomes et la séparation des homologues sont des phénomènes de la méiose ; la production des gamètes se fait dans les gonades, avant la fécondation.",
+                "answers": [
+                  {
+                    "content": "Rétablir le nombre diploïde de chromosomes de l'espèce",
+                    "correct": true
+                  },
+                  {
+                    "content": "Réunir des chromosomes de la mère et du père en une combinaison nouvelle",
+                    "correct": true
+                  },
+                  {
+                    "content": "Réduire de moitié le nombre de chromosomes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Produire les gamètes dans les gonades",
+                    "correct": false
+                  },
+                  {
+                    "content": "Séparer les chromosomes homologues d'une paire",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez une espèce fictive à 2n = 4, chaque parent peut produire 4 types de gamètes différents, par simple brassage des chromosomes. Combien de types d'œufs différents peut-on obtenir par rencontre au hasard de ces gamètes ?",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Conclure sur la diversité : chaque type de gamète du père peut rencontrer chaque type de gamète de la mère. On a donc 4 × 4 = 16 combinaisons possibles. Un seul type de gamète par parent donnerait 1 seul type d'œuf : la fécondation au hasard multiplie les possibilités.",
+                "answers": [
+                  {
+                    "content": "16",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le cycle des chromosomes d'une espèce.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Associer : l'adulte à 2n forme des gamètes à n par la méiose. Étape 2 — Comparer : la fécondation réunit deux gamètes et donne un œuf à 2n, qui se développera en un adulte à 2n.",
+                "answers": [
+                  {
+                    "content": "Adulte à 2n chromosomes"
+                  },
+                  {
+                    "content": "Méiose dans les gonades"
+                  },
+                  {
+                    "content": "Gamètes à n chromosomes"
+                  },
+                  {
+                    "content": "Fécondation"
+                  },
+                  {
+                    "content": "Œuf à 2n chromosomes"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève écrit : « La méiose rétablit le nombre de chromosomes de l'espèce. » Quelle correction est exacte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Associer : la méiose passe de 2n à n, la fécondation de n à 2n. L'élève confond les deux rôles, c'est le piège de la fiche. La mitose de l'œuf conserve 2n chromosomes dans chaque cellule fille, elle ne rétablit rien.",
+                "answers": [
+                  {
+                    "content": "La méiose réduit ce nombre ; c'est la fécondation qui le rétablit",
+                    "correct": true
+                  },
+                  {
+                    "content": "La méiose double ce nombre et la fécondation le réduit",
+                    "correct": false
+                  },
+                  {
+                    "content": "La méiose et la fécondation ne changent pas ce nombre",
+                    "correct": false
+                  },
+                  {
+                    "content": "C'est la mitose de l'œuf qui rétablit ce nombre",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Entraîne-toi à relier la méiose, la fécondation et le nombre de chromosomes.",
+            "questions": [
+              {
+                "content": "L'œuf d'une espèce contient 24 chromosomes. Combien de chromosomes contient chacun de ses gamètes ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : l'œuf a 2n = 24 chromosomes. Étape 2 — Comparer : il est formé par deux gamètes qui apportent chacun la moitié, donc 24 : 2 = 12 chromosomes par gamète.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "hint": "L'œuf est formé de deux lots égaux de chromosomes, un par gamète."
+              },
+              {
+                "content": "Quelle suite d'événements maintient constant le nombre de chromosomes d'une espèce ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Associer : la méiose réduit le nombre de chromosomes (2n vers n) et la fécondation le rétablit (n vers 2n). Avec la fécondation seule, le nombre doublerait ; avec la méiose seule, il diminuerait de moitié à chaque génération.",
+                "answers": [
+                  {
+                    "content": "La méiose puis la fécondation, à chaque génération",
+                    "correct": true
+                  },
+                  {
+                    "content": "La fécondation seule, répétée à chaque génération",
+                    "correct": false
+                  },
+                  {
+                    "content": "La mitose seule, répétée à chaque génération",
+                    "correct": false
+                  },
+                  {
+                    "content": "La méiose seule, répétée à chaque génération",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Deux enfants d'un même couple, qui ne sont pas de vrais jumeaux, ont en général des combinaisons de chromosomes différentes.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : chaque parent produit des gamètes variés et les gamètes se rencontrent au hasard. Chaque œuf a donc une combinaison de chromosomes nouvelle : les enfants se ressemblent sans être identiques.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Consultation : comprendre la fécondation in vitro",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Awa et Koffi consultent au centre de santé de leur quartier. Le médecin leur explique le principe de la fécondation in vitro (FIV), une technique d'aide à la procréation : des ovocytes II sont prélevés dans les ovaires de la femme, puis mis en présence de spermatozoïdes dans une boîte de culture, en dehors du corps. Il décrit ensuite ce que l'on voit au microscope. Tu l'aides à comprendre avec ce que tu sais de la fécondation.",
+          "questions": [
+            {
+              "content": "Pourquoi le médecin prélève-t-il des ovocytes II, et non des ovules ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : situer la fécondation (étape 1 de la notion sur la pénétration). À l'ovulation, l'ovaire libère un ovocyte II, bloqué en métaphase de la deuxième division de méiose ; c'est ce gamète que le spermatozoïde féconde. L'ovule n'apparaît qu'après l'entrée du spermatozoïde, quand la méiose s'achève, et il a 23 chromosomes, pas 46. L'ovocyte II n'est pas un œuf : il n'a pas encore reçu le lot de chromosomes du spermatozoïde.",
+              "answers": [
+                {
+                  "content": "Parce que le gamète femelle présent à l'ovulation est un ovocyte II, bloqué en métaphase de la deuxième division de méiose",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que l'ovule a déjà 46 chromosomes et ne peut plus être fécondé",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que l'ovocyte II est déjà un œuf prêt à se diviser",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que les ovules n'existent que dans l'utérus de la femme",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans une FIV, la fécondation a lieu dans l'utérus de la femme.",
+              "question_type": "true_false",
+              "explanation": "Méthode : situer. Dans le corps, la fécondation a lieu dans la trompe. En FIV, elle a lieu hors du corps, dans une boîte de culture, c'est ce que veut dire « in vitro ». Dans les deux cas, ce n'est jamais dans l'utérus, qui reçoit l'embryon plus tard.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Au contact de la zone pellucide, le spermatozoïde libère les enzymes de son acrosome : c'est la réaction ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : décrire la traversée des enveloppes. Les enzymes de l'acrosome digèrent la zone pellucide ; on appelle cette libération la réaction acrosomique. Elle précède la fusion des membranes du spermatozoïde et de l'ovocyte.",
+              "answers": [
+                {
+                  "content": "acrosomique",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le biologiste fait des observations au microscope. Relie chaque observation à son interprétation.",
+              "question_type": "matching",
+              "explanation": "Méthode : repérer, compter, décrire (notions sur la pénétration et le déroulement). Un spermatozoïde sans acrosome dans la zone pellucide montre que ses enzymes ont été libérées. Le nouveau petit globule est le deuxième globule polaire (le premier était déjà là à l'ovulation) : la méiose est achevée. Deux noyaux à 23 chromosomes sont les pronucléi, et un noyau unique à 46 chromosomes montre que la caryogamie a eu lieu.",
+              "answers": [
+                {
+                  "content": "Une tête de spermatozoïde sans acrosome est dans la zone pellucide",
+                  "match": "La réaction acrosomique a eu lieu"
+                },
+                {
+                  "content": "Un deuxième petit globule apparaît à côté du premier globule polaire",
+                  "match": "La deuxième division de méiose est achevée"
+                },
+                {
+                  "content": "La cellule contient deux noyaux de 23 chromosomes",
+                  "match": "Les deux pronucléi sont formés"
+                },
+                {
+                  "content": "La cellule contient un seul noyau de 46 chromosomes",
+                  "match": "La caryogamie a eu lieu"
+                }
+              ]
+            },
+            {
+              "content": "Un ovocyte II est par erreur pénétré par deux spermatozoïdes. Combien de chromosomes l'œuf contiendrait-il ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : compter. Le spermatozoïde apporte 23 chromosomes, et l'ovocyte devenu ovule en apporte 23. Avec deux spermatozoïdes : 23 + 23 + 23 = 69 chromosomes. Ce nombre n'est pas 46, celui de l'espèce : un tel œuf n'est pas viable. Le blocage de la polyspermie évite cette situation.",
+              "answers": [
+                {
+                  "content": "69",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Combien de spermatozoïdes faut-il en FIV ?",
+          "exercise_type": "fixation",
+          "figure": "taux-fiv-spermatozoides",
+          "statement": "Dans un laboratoire fictif d'un centre de santé, un biologiste cherche la quantité de spermatozoïdes à mettre avec chaque ovocyte II pour réussir une FIV. Résultats simplifiés d'une expérience fictive : pour 1, 10, 50, 100 et 200 milliers de spermatozoïdes par ovocyte, le pourcentage d'ovocytes fécondés après 6 heures est de 5, 40, 80, 85 et 85. Un ovocyte est reconnu fécondé quand on voit deux pronucléi dans sa cellule.",
+          "questions": [
+            {
+              "content": "Avec 50 milliers de spermatozoïdes par ovocyte, quel est le pourcentage d'ovocytes fécondés ?",
+              "question_type": "numeric",
+              "explanation": "Méthode d'analyse d'une courbe ou d'un diagramme : lire, repérer, conclure. Étape 1 — Lire : on cherche la barre de 50 milliers de spermatozoïdes par ovocyte. Étape 2 — Repérer sa hauteur : 80. Le pourcentage d'ovocytes fécondés est donc 80 %.",
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ],
+              "unit": "%",
+              "tolerance": 0
+            },
+            {
+              "content": "Quelle conclusion peut-on tirer des barres de 100 et de 200 milliers de spermatozoïdes par ovocyte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : lire, comparer, conclure. Étape 1 — Lire : 85 % pour 100 milliers et 85 % pour 200 milliers. Étape 2 — Comparer : la valeur ne change plus, c'est un plateau. Étape 3 — Conclure : au-delà de 100 milliers, ajouter des spermatozoïdes n'augmente plus le pourcentage. Il ne vaut pas 100 %, donc tous les ovocytes ne sont pas fécondés, et le diagramme ne dit rien de la polyspermie.",
+              "answers": [
+                {
+                  "content": "Au-delà de 100 milliers, ajouter des spermatozoïdes n'augmente plus le pourcentage d'ovocytes fécondés",
+                  "correct": true
+                },
+                {
+                  "content": "Plus on ajoute de spermatozoïdes, plus le pourcentage augmente, sans limite",
+                  "correct": false
+                },
+                {
+                  "content": "Avec 200 milliers de spermatozoïdes, tous les ovocytes sont fécondés",
+                  "correct": false
+                },
+                {
+                  "content": "Avec 100 milliers de spermatozoïdes, la polyspermie devient impossible",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec 10 milliers de spermatozoïdes par ovocyte, combien d'ovocytes sont fécondés dans un lot de 50 ovocytes ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : lire, puis calculer. Étape 1 — Lire : pour 10 milliers de spermatozoïdes par ovocyte, 40 % des ovocytes sont fécondés. Étape 2 — Calculer : 40 % de 50 = 50 × 40 : 100 = 20 ovocytes fécondés.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec 100 milliers de spermatozoïdes par ovocyte, 15 % des ovocytes ne sont pas fécondés.",
+              "question_type": "true_false",
+              "explanation": "Méthode : lire, puis calculer. Étape 1 — Lire : 85 % des ovocytes sont fécondés avec 100 milliers de spermatozoïdes. Étape 2 — Calculer : 100 − 85 = 15, donc 15 % ne le sont pas. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un ovocyte fécondé normalement, observé juste avant la caryogamie, montre :",
+              "question_type": "single_choice",
+              "explanation": "Notion sur le déroulement de la fécondation : repérer, compter, décrire. Étape 2 — Compter : avant la caryogamie, il y a le pronucléus femelle et le pronucléus mâle, de 23 chromosomes chacun. Un noyau de 46 chromosomes n'apparaît qu'après la caryogamie. Trois pronucléi indiqueraient une polyspermie, avec 69 chromosomes.",
+              "answers": [
+                {
+                  "content": "Deux pronucléi, de 23 chromosomes chacun",
+                  "correct": true
+                },
+                {
+                  "content": "Un seul noyau de 46 chromosomes",
+                  "correct": false
+                },
+                {
+                  "content": "Un seul noyau de 23 chromosomes",
+                  "correct": false
+                },
+                {
+                  "content": "Trois pronucléi de 23 chromosomes chacun",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le biologiste observe deux pronucléi dans un ovocyte. Explique pourquoi c'est le signe d'une fécondation normale, par un seul spermatozoïde.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : un pronucléus est le noyau de l'ovule, l'autre le noyau du spermatozoïde. Chacun a 23 chromosomes, et ils formeront un œuf à 23 + 23 = 46 chromosomes. Si deux spermatozoïdes étaient entrés, on verrait trois pronucléi et 69 chromosomes : il n'y en a que deux, donc un seul spermatozoïde a fécondé l'ovocyte (monospermie). Barème : 1 point pour l'origine des deux pronucléi et les 23 chromosomes, 1 point pour la conclusion sur la monospermie.",
+              "answers": [],
+              "points": 2,
+              "criteria": [
+                "Dit que les deux pronucléi viennent de l'ovule et du spermatozoïde",
+                "Indique 23 chromosomes dans chaque pronucléus",
+                "Conclut qu'un seul spermatozoïde est entré, sinon il y aurait trois pronucléi"
+              ],
+              "starter": "Les deux pronucléi sont…"
+            }
+          ]
+        },
+        {
+          "title": "Consultation de conseil : le nombre de chromosomes de l'enfant",
+          "exercise_type": "evaluation",
+          "figure": "alternance-meiose-fecondation",
+          "statement": "Lors d'une consultation prénatale, une sage-femme présente à Mariam et Issouf un schéma du cycle des chromosomes de l'espèce humaine : les cellules du corps ont 46 chromosomes, les gamètes en ont 23 et l'œuf en a 46. Elle veut leur montrer pourquoi ce nombre reste le même de génération en génération et pourquoi leurs enfants se ressemblent sans être identiques.",
+          "questions": [
+            {
+              "content": "Relie chaque cellule à son contenu en chromosomes.",
+              "question_type": "matching",
+              "explanation": "Méthode : identifier le nombre de chromosomes (étape 1 de la notion sur le rôle de la fécondation), en s'appuyant sur la méiose. Le spermatozoïde est un gamète haploïde : 23 chromosomes à une chromatide. L'ovocyte II a fini la première division de méiose : 23 chromosomes à deux chromatides. L'ovocyte I n'a pas encore divisé : 46 chromosomes à deux chromatides. Une cellule du corps hors division, comme une cellule de peau, a 46 chromosomes à une chromatide, comme l'œuf qui l'a produite par mitoses.",
+              "answers": [
+                {
+                  "content": "Spermatozoïde",
+                  "match": "23 chromosomes à une chromatide"
+                },
+                {
+                  "content": "Ovocyte II",
+                  "match": "23 chromosomes à deux chromatides"
+                },
+                {
+                  "content": "Ovocyte I",
+                  "match": "46 chromosomes à deux chromatides"
+                },
+                {
+                  "content": "Cellule de peau, hors division",
+                  "match": "46 chromosomes à une chromatide"
+                }
+              ]
+            },
+            {
+              "content": "Sans méiose, les gamètes auraient autant de chromosomes que les cellules du corps. L'œuf de la première génération a 46 chromosomes. Combien de chromosomes aurait l'œuf de la troisième génération ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : comparer avant et après chaque fécondation. Étape 1 — Identifier : sans méiose, chaque gamète a le nombre de chromosomes de la cellule qui l'a produit. Étape 2 — Calculer : première génération, 46 ; deuxième, 46 + 46 = 92 ; troisième, 92 + 92 = 184. Le nombre double à chaque génération, ce qui est impossible : la méiose est donc nécessaire.",
+              "answers": [
+                {
+                  "content": "184",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Deux enfants du couple, qui ne sont pas de vrais jumeaux, ne sont pas identiques. Quelle explication est exacte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : identifier, comparer, associer, conclure. Étape 3 — Associer : la méiose produit des gamètes variés. Étape 4 — Conclure : la fécondation réunit au hasard un gamète du père et un gamète de la mère, donc chaque œuf a une combinaison nouvelle de 23 + 23 chromosomes. La fécondation ne modifie pas les chromosomes : elle les associe.",
+              "answers": [
+                {
+                  "content": "Chaque gamète a une combinaison de chromosomes différente et les gamètes se rencontrent au hasard",
+                  "correct": true
+                },
+                {
+                  "content": "La fécondation modifie les chromosomes de chaque parent avant de les réunir",
+                  "correct": false
+                },
+                {
+                  "content": "Chaque enfant reçoit 46 chromosomes de sa mère et aucun de son père",
+                  "correct": false
+                },
+                {
+                  "content": "Les enfants d'un même couple ont toujours exactement les mêmes chromosomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les trois rôles de la fécondation ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : conclure sur les rôles (étape 4). La fécondation rétablit 2n, associe deux lots de chromosomes d'origines différentes et déclenche le développement : l'œuf se divise par mitoses. La réduction du nombre de chromosomes et la séparation des homologues relèvent de la méiose, et les spermatozoïdes sont produits dans les testicules, avant la fécondation.",
+              "answers": [
+                {
+                  "content": "Rétablir le nombre diploïde de chromosomes",
+                  "correct": true
+                },
+                {
+                  "content": "Réunir 23 chromosomes de la mère et 23 du père en une combinaison nouvelle",
+                  "correct": true
+                },
+                {
+                  "content": "Marquer le début du développement de l'embryon, car l'œuf se divise par mitoses",
+                  "correct": true
+                },
+                {
+                  "content": "Réduire de moitié le nombre de chromosomes",
+                  "correct": false
+                },
+                {
+                  "content": "Produire les spermatozoïdes dans les testicules",
+                  "correct": false
+                },
+                {
+                  "content": "Séparer les chromosomes homologues d'une paire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un spermatozoïde d'Issouf contient une copie de chacun de ses 46 chromosomes.",
+              "question_type": "true_false",
+              "explanation": "Méthode : identifier. Issouf a 46 chromosomes, en 23 paires. À la méiose, les chromosomes homologues d'une paire sont séparés : un spermatozoïde reçoit un seul chromosome de chaque paire, soit 23 chromosomes, et non 46. S'il en avait 46, l'œuf en aurait 69 ou 92.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige un court paragraphe qui explique à Mariam et Issouf pourquoi la méiose et la fécondation se complètent pour garder 46 chromosomes à chaque génération.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : les cellules du corps humain ont 46 chromosomes. Par la méiose, chaque gamète n'en reçoit que 23. À la fécondation, le spermatozoïde et l'ovule s'unissent : 23 + 23 = 46 chromosomes dans l'œuf, qui les transmet à toutes les cellules de l'enfant. Sans méiose, le nombre doublerait à chaque génération ; sans fécondation, il serait divisé par deux. Il faut donc les deux. Barème : 1 point pour la méiose, 1 point pour la fécondation, 1 point pour le raisonnement qui montre la nécessité des deux phénomènes, 1 point pour des phrases claires et un vocabulaire exact.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Dit que la méiose passe de 46 à 23 chromosomes dans les gamètes",
+                "Dit que la fécondation rétablit 46 chromosomes dans l'œuf (23 + 23)",
+                "Montre qu'il faut les deux phénomènes, avec ce qui arriverait sans l'un d'eux",
+                "Phrases claires et vocabulaire exact (gamète, œuf, chromosome)"
+              ],
+              "starter": "La méiose et la fécondation…"
+            }
+          ]
+        },
+        {
+          "title": "Une expérience de FIV : pourquoi l'acrosome est-il nécessaire ?",
+          "exercise_type": "evaluation",
+          "figure": "taux-fecondation-boites",
+          "statement": "Un biologiste fictif d'un centre de santé veut comprendre le rôle de l'acrosome. Résultats simplifiés d'une expérience fictive. Boîte A : ovocytes II avec leur zone pellucide et spermatozoïdes normaux ; 80 % des ovocytes sont fécondés (deux pronucléi). Boîte B : ovocytes II avec leur zone pellucide et spermatozoïdes dont les enzymes de l'acrosome ont été rendues inactives ; aucun ovocyte n'est fécondé, et les spermatozoïdes restent collés à la zone pellucide. Boîte C : mêmes spermatozoïdes qu'en B, mais chacun est injecté directement dans le cytoplasme d'un ovocyte II ; 60 % des ovocytes sont fécondés.",
+          "questions": [
+            {
+              "content": "Que montre la comparaison des boîtes A et B ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode d'analyse d'une expérience : observer, comparer, conclure. Étape 1 — Observer : en A, 80 % de fécondation ; en B, 0 %, et les spermatozoïdes restent collés à la zone pellucide. Étape 2 — Comparer : la seule différence est l'acrosome, inactif en B. Étape 3 — Conclure : sans enzymes de l'acrosome, la zone pellucide n'est pas traversée et il n'y a pas de fécondation. L'acrosome agit avant la fusion des membranes, pas sur les pronucléi.",
+              "answers": [
+                {
+                  "content": "Des spermatozoïdes dont l'acrosome est inactif ne traversent pas la zone pellucide et ne fécondent pas",
+                  "correct": true
+                },
+                {
+                  "content": "Les spermatozoïdes n'ont pas besoin de traverser la zone pellucide pour féconder",
+                  "correct": false
+                },
+                {
+                  "content": "L'acrosome sert à fusionner les deux pronucléi",
+                  "correct": false
+                },
+                {
+                  "content": "La zone pellucide empêche toujours la fécondation",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que montre la comparaison des boîtes B et C ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : observer, comparer, conclure. Étape 1 — Observer : en B, 0 % ; en C, 60 %, avec les mêmes spermatozoïdes. Étape 2 — Comparer : en C, le spermatozoïde est placé dans le cytoplasme, sans avoir à traverser la zone pellucide. Étape 3 — Conclure : ces spermatozoïdes peuvent féconder ; ce qui bloquait en B, c'est la traversée de la zone pellucide.",
+              "answers": [
+                {
+                  "content": "Le défaut des spermatozoïdes de B vient de la traversée de la zone pellucide, pas de la suite de la fécondation",
+                  "correct": true
+                },
+                {
+                  "content": "Les spermatozoïdes de B ne peuvent jamais féconder, même injectés",
+                  "correct": false
+                },
+                {
+                  "content": "L'ovocyte II féconde sans spermatozoïde quand on l'injecte",
+                  "correct": false
+                },
+                {
+                  "content": "La zone pellucide est inutile dans toutes les conditions",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la boîte C, 50 ovocytes sont utilisés. Combien sont fécondés ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : lire puis calculer. Étape 1 — Lire : 60 % des ovocytes sont fécondés en C. Étape 2 — Calculer : 60 % de 50 = 50 × 60 : 100 = 30 ovocytes fécondés.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans un ovocyte fécondé de la boîte C, que peut-on observer quelques heures après l'injection ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode du déroulement de la fécondation : repérer, compter. Étape 1 — Repérer : l'entrée du spermatozoïde, même par injection, permet à l'ovocyte II d'achever la méiose et d'expulser le deuxième globule polaire. Étape 2 — Compter : on voit deux pronucléi de 23 chromosomes. Un seul pronucléus de 46 chromosomes n'existe pas avant la caryogamie, et les enzymes de l'acrosome sont ici inactives et inutiles. Trois pronucléi seraient un signe de polyspermie.",
+              "answers": [
+                {
+                  "content": "Deux pronucléi de 23 chromosomes chacun",
+                  "correct": true
+                },
+                {
+                  "content": "Un deuxième globule polaire, signe que la méiose de l'ovocyte est achevée",
+                  "correct": true
+                },
+                {
+                  "content": "Un seul pronucléus de 46 chromosomes avant la caryogamie",
+                  "correct": false
+                },
+                {
+                  "content": "Des enzymes de l'acrosome qui digèrent la zone pellucide",
+                  "correct": false
+                },
+                {
+                  "content": "Trois pronucléi de 23 chromosomes chacun",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les événements qui conduisent à l'œuf dans la boîte A.",
+              "question_type": "ordering",
+              "explanation": "Méthode : suivre le spermatozoïde (notion sur la pénétration), puis l'ovocyte (notion sur le déroulement). Le spermatozoïde traverse les cellules folliculaires, puis la zone pellucide grâce à l'acrosome, fusionne avec l'ovocyte et son noyau entre. L'ovocyte achève alors sa méiose, les deux pronucléi se forment, puis la caryogamie donne l'œuf.",
+              "answers": [
+                {
+                  "content": "Traversée des cellules folliculaires par le spermatozoïde"
+                },
+                {
+                  "content": "Réaction acrosomique et traversée de la zone pellucide"
+                },
+                {
+                  "content": "Fusion des membranes et entrée du noyau du spermatozoïde"
+                },
+                {
+                  "content": "Fin de la méiose de l'ovocyte et formation des deux pronucléi"
+                },
+                {
+                  "content": "Caryogamie et formation de l'œuf à 46 chromosomes"
+                }
+              ]
+            },
+            {
+              "content": "Dans la boîte B, l'absence de fécondation s'explique par l'impossibilité de fusionner les deux pronucléi.",
+              "question_type": "true_false",
+              "explanation": "Méthode : conclure à partir de l'observation. En B, les spermatozoïdes restent collés à la zone pellucide : la fécondation s'arrête avant l'entrée du noyau, donc avant la formation des pronucléi. La caryogamie n'est jamais atteinte, mais ce n'est pas sa fusion qui est en cause, comme le montre le résultat de la boîte C, où des pronucléi se forment.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "En boîte A, un technicien observe des ovocytes avec trois pronucléi. Quelle est la conclusion exacte sur le nombre de chromosomes de l'œuf ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : compter les chromosomes de chaque noyau. Trois pronucléi de 23 chromosomes viennent d'un pronucléus femelle et de deux pronucléi mâles : deux spermatozoïdes sont entrés (polyspermie). L'œuf aurait 23 + 23 + 23 = 69 chromosomes, au lieu de 46, et il ne serait pas viable.",
+              "answers": [
+                {
+                  "content": "Deux spermatozoïdes sont entrés : l'œuf aurait 69 chromosomes et ne serait pas viable",
+                  "correct": true
+                },
+                {
+                  "content": "Un seul spermatozoïde est entré : l'œuf aurait 46 chromosomes",
+                  "correct": false
+                },
+                {
+                  "content": "L'ovocyte est parthénogénétique : l'œuf aurait 23 chromosomes",
+                  "correct": false
+                },
+                {
+                  "content": "Trois ovocytes ont fusionné : l'œuf aurait 138 chromosomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige la conclusion de cette expérience : montre, avec les résultats des trois boîtes, le rôle de l'acrosome dans la fécondation.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : en A, avec des spermatozoïdes normaux, 80 % des ovocytes sont fécondés. En B, quand les enzymes de l'acrosome sont inactives, 0 % des ovocytes sont fécondés et les spermatozoïdes restent collés à la zone pellucide : l'acrosome est donc nécessaire pour la traverser. En C, avec les mêmes spermatozoïdes injectés dans l'ovocyte, 60 % des ovocytes sont fécondés : le spermatozoïde peut fusionner et former un pronucléus si la zone pellucide n'a pas à être traversée. L'acrosome a donc pour rôle de digérer la zone pellucide. Barème : 1 point pour les résultats, 1 point pour la comparaison A et B, 1 point pour la comparaison B et C, 1 point pour la conclusion, 1 point pour la rédaction claire et le vocabulaire exact.",
+              "answers": [],
+              "points": 5,
+              "criteria": [
+                "Cite les résultats des boîtes A, B et C avec leurs pourcentages",
+                "Compare A et B pour relier l'acrosome à la traversée de la zone pellucide",
+                "Compare B et C pour montrer que la fusion et la suite de la fécondation restent possibles",
+                "Conclut clairement sur le rôle de l'acrosome",
+                "Rédige en phrases claires et sans erreur de vocabulaire"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
