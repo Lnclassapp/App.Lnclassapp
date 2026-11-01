@@ -77,7 +77,7 @@ Règle : **une vague = une matière d'un niveau**, coupée en deux par groupe de
 ## Portes du programme
 
 - [x] Feuille de route validée par le porteur (D1 à D5, 2026-10-31)
-- [ ] Tle : 8 vagues fusionnées, 87 leçons rangées
+- [x] Tle : 9 PR fusionnées (#415, #420 à #422, #424 à #428), 82 leçons distinctes (5 de moins que prévu : leçons communes sous deux intitulés)
 - [ ] 1ère : 9 vagues fusionnées, 93 leçons
 - [ ] 2nde : 7 vagues fusionnées, 68 leçons
 - [x] 3ème : rien à compléter (D2)

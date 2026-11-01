@@ -11,3 +11,11 @@ Exigences par leçon (format lnclass.course-tree v3) : fiche par notion en 4 blo
 Si une figure exige une sorte ou un paramètre nouveau : amendement d'ADR d'abord, captures 390 px + ordinateur envoyées au porteur (jamais commitées), tests, code dans la même PR. Sinon, aucun code.
 
 Livraison : chantier docs/chantiers/<slug>/ (memo avec `Programme : contenus-v3-tous-niveaux`, prd, plan, journal), branche feature/<slug>, 1 commit par lot, 40 commits max, PR prête (pas brouillon) vers `Develop` avec la ligne de preuve `bin/ci-quiet` ; sous-agents de revue seulement si du code est touché (règles CLAUDE.md). Ne fusionne pas toi-même. Ajoute ta ligne dans « Fin de vague » du journal du programme (dans ta PR). Ne supprime jamais de données de production. À la fin, réponds en une ligne : niveau, matière, nombre de leçons, PR.
+
+## Modèles et sobriété (décision du porteur, 2026-11-01, à partir de la 1ère)
+
+- La session de vague tourne sur **Sonnet** : cadrage du chantier, rédaction, déclinaisons, contrôles, PR.
+- La **relecture indépendante** de chaque leçon se fait avec un sous-agent **Opus** (`model: "opus"`), distinct de l'auteur ; Opus aussi pour les points délicats (philosophie, chiffres et faits à valider).
+- Les **vérifications de CI** (`bin/ci-quiet`, verdict) passent par l'agent `verificateur-ci` (**Haiku**).
+- Au plus 3 sous-agents en même temps. Les leçons de Tle fusionnées (`docs/contenus/lecons-traitees/tle*/`) servent de modèle.
+- Les tests qui lisaient les v1 de Tle D lisent désormais `test/fixtures/files/lecons_v1/` : remplacer une v1 dans `docs/` ne casse plus rien ; ne touche pas aux tests.

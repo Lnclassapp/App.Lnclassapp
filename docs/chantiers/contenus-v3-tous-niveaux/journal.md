@@ -6,15 +6,15 @@
 
 | Date | Vague | Niveau | Matière | Leçons | PR |
 |---|---|---|---|---|---|
-| 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
-| 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | `feature/contenus-tle-francais` |
-| 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
-| 2026-10-31 | T5 | Tle A1, A2 | SVT | 7 (communes à A1 et A2, 14 fichiers) | `feature/contenus-tle-svt-a` |
-| 2026-10-31 | T2 | Tle (A1, A2) | Mathématiques | 9 leçons (15 fichiers) | #424 |
 | 2026-10-31 | T1 | Tle (C, D) | Mathématiques | 14 leçons (20 fichiers) | #420 |
+| 2026-10-31 | T2 | Tle (A1, A2) | Mathématiques | 9 leçons (15 fichiers) | #424 |
+| 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
 | 2026-10-31 | T4 (1/2) | Tle C | SVT | 10 (dont 3 communes à C et D) | #421 |
 | 2026-10-31 | T4 (2/2) | Tle D | SVT | 10 (7 propres + 3 déclinées de Tle C) | #422 |
-| 2026-10-31 | T3 | Tle (C, D) | Physique-Chimie | 12 distinctes (20 fichiers) ; la feuille de route en comptait 13, C6 et D6 étant la même leçon | #415 |
+| 2026-10-31 | T5 | Tle A1, A2 | SVT | 7 (communes à A1 et A2, 14 fichiers) | #425 |
+| 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
+| 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | #427 |
+| 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
 
 ## À faire valider par un enseignant
 
@@ -136,6 +136,8 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Date | Décision | Pourquoi | Promue en ADR ? |
 |---|---|---|---|
+| 2026-11-01 | Tle fusionnée par l'orchestrateur : Develop intégré dans chaque branche, journaux et index résolus par union des lignes, `bin/ci-quiet` rejoué, preuve en commentaire de PR | Les 9 PR touchaient les mêmes journaux | Non |
+| 2026-11-01 | À partir de la 1ère, sessions de vague sur Sonnet ; Opus pour la relecture indépendante et les points délicats (philosophie, chiffres à valider) ; Haiku pour les vérifications de CI (porteur) | Coût : ~110 $ et la limite d'usage atteinte pour 3 vagues Opus en Tle | Non (applique ADR-0104) |
 | 2026-10-31 | T8 : l'HG de Tle, sans série, est rangée dans `lecons-traitees/tle/histoire-geographie/` (comme `1ere/`, `2nde/`) ; les copies v1 par série sont retirées | Un cours sans série copié dans 4 dossiers ferait 4 doublons à l'import | Non |
 
 ## Ce qui a dérapé
