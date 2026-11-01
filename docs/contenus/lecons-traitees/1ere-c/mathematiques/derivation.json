@@ -211,7 +211,7 @@
               "Simplifier : $C'(x)=3x^2-12x+20$, valable sur $[0\\,;+\\infty[$ (et même sur $\\mathbb R$, car $C$ est un polynôme)."
             ]
           },
-          "pitfall": "Ne pas oublier de baisser l'exposant ni de dériver la constante en elle-même. Contre-exemple : $f(x)=x^2$ a pour nombre dérivé $f'(3)=6$ (calculé avec la définition) ; la bonne formule $2x$ donne bien $6$, alors que « $x$ » donne $3$ et « $2x^2$ » donne $18$. De même $(x^2+7)'=2x$, et non $2x+7$ : une constante a pour dérivée $0$.",
+          "pitfall": "Ne pas oublier de baisser l'exposant ni de garder la constante : sa dérivée est $0$. Contre-exemple : $f(x)=x^2$ a pour nombre dérivé $f'(3)=6$ (calculé avec la définition) ; la bonne formule $2x$ donne bien $6$, alors que « $x$ » donne $3$ et « $2x^2$ » donne $18$. De même $(x^2+7)'=2x$, et non $2x+7$ : une constante a pour dérivée $0$.",
           "figure": null,
           "exercise": {
             "title": "Dériver avec les fonctions usuelles",
@@ -245,7 +245,7 @@
               {
                 "content": "Quelle est la dérivée de $f(x)=x^2-5x+9$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : trois termes, $x^2$, $-5x$ et la constante $9$. Étape 2 — Dériver : $(x^2)'=2x$ ; $(-5x)'=-5$ ; $(9)'=0$. Étape 3 — Additionner : $2x-5+0$. Étape 4 — Simplifier : $f'(x)=2x-5$, sur $\\mathbb R$. La proposition $2x+4$ garde $9$ comme si sa dérivée était $9$ ; $x-5$ oublie le facteur $2$ ; la dernière ne dérive pas $-5x$.",
+                "explanation": "Étape 1 — Repérer : trois termes, $x^2$, $-5x$ et la constante $9$. Étape 2 — Dériver : $(x^2)'=2x$ ; $(-5x)'=-5$ ; $(9)'=0$. Étape 3 — Additionner : $2x-5+0$. Étape 4 — Simplifier : $f'(x)=2x-5$, sur $\\mathbb R$. La proposition $2x+4$ garde $9$ comme si sa dérivée était $9$ ; $x-5$ oublie le facteur $2$ ; $2x-5x+9$ ne dérive pas $-5x$.",
                 "answers": [
                   {
                     "content": "$2x-5$",
@@ -280,7 +280,7 @@
               {
                 "content": "Sur $]0\\,;+\\infty[$, quelle est la dérivée de $f(x)=3\\sqrt x-\\dfrac2x$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : deux termes, $3\\sqrt x$ (coefficient $3$) et $-\\frac2x=-2\\times\\frac1x$ (coefficient $-2$). Étape 2 — Dériver : $(3\\sqrt x)'=\\dfrac{3}{2\\sqrt x}$ et $\\left(-2\\times\\frac1x\\right)'=-2\\times\\left(-\\frac1{x^2}\\right)=\\dfrac2{x^2}$. Étape 3 — Additionner : $\\dfrac3{2\\sqrt x}+\\dfrac2{x^2}$. Étape 4 — Simplifier : c'est le résultat, valable sur $]0\\,;+\\infty[$. La deuxième proposition oublie que $(\\frac1x)'$ est négatif et que le coefficient est $-2$ ; la troisième oublie le $2$ de $2\\sqrt x$ ; la dernière garde $\\frac2x$ au lieu de $\\frac2{x^2}$.",
+                "explanation": "Étape 1 — Repérer : deux termes, $3\\sqrt x$ (coefficient $3$) et $-\\frac2x=-2\\times\\frac1x$ (coefficient $-2$). Étape 2 — Dériver : $(3\\sqrt x)'=\\dfrac{3}{2\\sqrt x}$ et $\\left(-2\\times\\frac1x\\right)'=-2\\times\\left(-\\frac1{x^2}\\right)=\\dfrac2{x^2}$. Étape 3 — Additionner : $\\dfrac3{2\\sqrt x}+\\dfrac2{x^2}$. Étape 4 — Simplifier : c'est le résultat, valable sur $]0\\,;+\\infty[$. La proposition $\\dfrac3{2\\sqrt x}-\\dfrac2{x^2}$ oublie que $(\\frac1x)'$ est négatif et que le coefficient est $-2$ ; $\\dfrac3{\\sqrt x}+\\dfrac2{x^2}$ oublie le $2$ de $2\\sqrt x$ ; $\\dfrac3{2\\sqrt x}-\\dfrac2x$ garde $\\frac2x$ au lieu de $\\frac2{x^2}$.",
                 "answers": [
                   {
                     "content": "$\\dfrac3{2\\sqrt x}+\\dfrac2{x^2}$",
@@ -378,7 +378,7 @@
               {
                 "content": "Sur $]0\\,;+\\infty[$, la dérivée de $f(x)=\\sqrt x$ est ___",
                 "question_type": "select",
-                "explanation": "Étape 1 — Repérer : la fonction usuelle $\\sqrt x$. Étape 2 — Dériver : la formule du tableau donne $\\dfrac1{2\\sqrt x}$. La proposition $\\frac1{\\sqrt x}$ oublie le $2$ ; $-\\frac1{x^2}$ est la dérivée de $\\frac1x$.",
+                "explanation": "Étape 1 — Repérer : la fonction usuelle $\\sqrt x$. Étape 2 — Dériver : la formule du tableau donne $\\dfrac1{2\\sqrt x}$. La proposition $\\frac1{\\sqrt x}$ oublie le $2$ ; $-\\frac1{x^2}$ est la dérivée de $\\frac1x$ ; $2\\sqrt x$ met le $2$ au numérateur alors qu'il est au dénominateur dans la formule.",
                 "answers": [
                   {
                     "content": "$\\dfrac1{2\\sqrt x}$",
@@ -489,7 +489,7 @@
               {
                 "content": "Sur $\\mathbb R$, quelle est la dérivée de $h(x)=\\dfrac{x}{x^2+1}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : un quotient avec $u(x)=x$ et $v(x)=x^2+1$, qui ne s'annule jamais. Étape 2 — Dériver : $u'(x)=1$ et $v'(x)=2x$. Étape 3 — Appliquer : $h'(x)=\\dfrac{1\\times(x^2+1)-x\\times2x}{(x^2+1)^2}$. Étape 4 — Simplifier : le numérateur vaut $x^2+1-2x^2=1-x^2$. La proposition $\\frac1{2x}$ fait $\\frac{u'}{v'}$ ; $\\frac{x^2-1}{(x^2+1)^2}$ inverse $u'v-uv'$ ; la dernière oublie de multiplier $u$ par $v'$ en entier.",
+                "explanation": "Étape 1 — Identifier : un quotient avec $u(x)=x$ et $v(x)=x^2+1$, qui ne s'annule jamais. Étape 2 — Dériver : $u'(x)=1$ et $v'(x)=2x$. Étape 3 — Appliquer : $h'(x)=\\dfrac{1\\times(x^2+1)-x\\times2x}{(x^2+1)^2}$. Étape 4 — Simplifier : le numérateur vaut $x^2+1-2x^2=1-x^2$. La proposition $\\frac1{2x}$ fait $\\frac{u'}{v'}$ ; $\\frac{x^2-1}{(x^2+1)^2}$ inverse $u'v-uv'$ ; $\\frac{x^2+1-2x}{(x^2+1)^2}$ oublie de multiplier $u$ par $v'$ en entier.",
                 "answers": [
                   {
                     "content": "$\\dfrac{1-x^2}{(x^2+1)^2}$",
@@ -576,7 +576,7 @@
               {
                 "content": "Pour un quotient $f=\\dfrac uv$ avec $v$ non nulle, $f'=$ ___",
                 "question_type": "select",
-                "explanation": "Étape 1 — Identifier : un quotient $\\frac uv$. Étape 3 — Appliquer : la formule est $\\dfrac{u'v-uv'}{v^2}$, avec $u'v$ en premier. La proposition avec $+$ est la formule du produit au numérateur ; $\\frac{u'}{v'}$ est le piège de la fiche ; la dernière inverse les deux termes.",
+                "explanation": "Étape 1 — Identifier : un quotient $\\frac uv$. Étape 3 — Appliquer : la formule est $\\dfrac{u'v-uv'}{v^2}$, avec $u'v$ en premier. La proposition avec $+$ est la formule du produit au numérateur ; $\\frac{u'}{v'}$ est le piège de la fiche ; $\\frac{uv'-u'v}{v^2}$ inverse les deux termes.",
                 "answers": [
                   {
                     "content": "$\\dfrac{u'v-uv'}{v^2}$",
@@ -766,7 +766,7 @@
               {
                 "content": "La tangente à la courbe de $f$ au point d'abscisse $a$ est horizontale lorsque ___",
                 "question_type": "select",
-                "explanation": "Étape 3 — Appliquer : la tangente est $y=f'(a)(x-a)+f(a)$ ; elle est horizontale quand son coefficient directeur $f'(a)$ est nul. La proposition $f(a)=0$ dit seulement que la courbe coupe l'axe des abscisses.",
+                "explanation": "Étape 3 — Appliquer : la tangente est $y=f'(a)(x-a)+f(a)$ ; elle est horizontale quand son coefficient directeur $f'(a)$ est nul. La proposition $f(a)=0$ dit seulement que la courbe coupe l'axe des abscisses ; $a=0$ place le point d'abscisse $0$ sans rien dire de la pente ; $f'(a)=1$ donne une tangente de pente $1$, pas horizontale.",
                 "answers": [
                   {
                     "content": "$f'(a)=0$",
@@ -819,7 +819,7 @@
               {
                 "content": "Quel est le sens de variation de $f(x)=x^2-6x+5$ sur $\\mathbb R$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Dériver : $f'(x)=2x-6=2(x-3)$. Étape 2 — Étudier : $f'(x)<0$ si $x<3$ et $f'(x)>0$ si $x>3$. Étape 3 — Déduire : $f$ est décroissante sur $]-\\infty\\,;3]$ et croissante sur $[3\\,;+\\infty[$. Étape 4 — Calculer : $f(3)=9-18+5=-4$, c'est le minimum. La deuxième proposition inverse les signes de $f'$ ; les deux autres ignorent le changement de signe en $3$.",
+                "explanation": "Étape 1 — Dériver : $f'(x)=2x-6=2(x-3)$. Étape 2 — Étudier : $f'(x)<0$ si $x<3$ et $f'(x)>0$ si $x>3$. Étape 3 — Déduire : $f$ est décroissante sur $]-\\infty\\,;3]$ et croissante sur $[3\\,;+\\infty[$. Étape 4 — Calculer : $f(3)=9-18+5=-4$, c'est le minimum. La proposition « Croissante sur $]-\\infty\\,;3]$, puis décroissante sur $[3\\,;+\\infty[$ » inverse les signes de $f'$ ; « Croissante sur $\\mathbb R$ » et « Décroissante sur $\\mathbb R$ » ignorent le changement de signe en $3$.",
                 "answers": [
                   {
                     "content": "Décroissante sur $]-\\infty\\,;3]$, puis croissante sur $[3\\,;+\\infty[$",
@@ -877,7 +877,7 @@
               {
                 "content": "Si $f'(x)<0$ sur un intervalle $I$, alors $f$ est ___ sur $I$.",
                 "question_type": "fill_blank",
-                "explanation": "Étape 1 — Dériver : on suppose connue la dérivée $f'$. Étape 2 — Étudier : son signe est négatif sur $I$. Étape 3 — Déduire : $f'<0$ sur $I$ signifie que $f$ est strictement décroissante sur $I$. Étape 4 — Calculer : aucune valeur à calculer ici.",
+                "explanation": "Étape 3 — Déduire : $f'<0$ sur $I$ signifie que $f$ est strictement décroissante sur $I$.",
                 "answers": [
                   {
                     "content": "décroissante",
@@ -958,7 +958,7 @@
               {
                 "content": "Si $f'(x)>0$ sur un intervalle $I$, alors $f$ est ___ sur $I$.",
                 "question_type": "select",
-                "explanation": "Étape 3 — Déduire : $f'>0$ sur $I$ signifie que $f$ est strictement croissante sur $I$. La proposition « négative » confond le signe de $f'$ avec celui de $f$.",
+                "explanation": "Étape 3 — Déduire : $f'>0$ sur $I$ signifie que $f$ est strictement croissante sur $I$. La proposition « décroissante » inverse le sens ; « constante » demanderait $f'=0$ ; « négative » confond le signe de $f'$ avec celui de $f$.",
                 "answers": [
                   {
                     "content": "croissante",
@@ -999,7 +999,7 @@
       "exercises": [
         {
           "title": "La course d'un sprinter à Bouaké",
-          "statement": "Un sprinter de Bouaké s'élance pour un 100 mètres d'entraînement. Sa distance parcourue, en mètres, après $t$ secondes ($0\\leq t\\leq6$) est modélisée par $d(t)=t^2+4t$.",
+          "statement": "Un sprinter de Bouaké s'élance pour un sprint de 60 m d'entraînement. Sa distance parcourue, en mètres, après $t$ secondes ($0\\leq t\\leq6$) est modélisée par $d(t)=t^2+4t$.",
           "exercise_type": "fixation",
           "figure": null,
           "questions": [
@@ -1007,7 +1007,7 @@
               "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes. Quelle distance a-t-il parcourue à $t=5$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Remplacer : $d(5)=5^2+4\\times5$. Étape 2 — Calculer : $25+20=45$. Étape 3 — Conclure : il a parcouru $45$ mètres après $5$ secondes.",
+              "explanation": "Calcul direct : $d(5)=5^2+4\\times5=25+20=45$. Il a parcouru $45$ mètres après $5$ secondes.",
               "unit": "m",
               "answers": [
                 {
@@ -1032,7 +1032,7 @@
             {
               "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes. Quelle est la fonction dérivée $d'$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Repérer : deux termes, $t^2$ et $4t$ (coefficient $4$). Étape 2 — Dériver : $(t^2)'=2t$ et $(4t)'=4$. Étape 3 — Additionner : $2t+4$. Étape 4 — Simplifier : $d'(t)=2t+4$, sur $\\mathbb R$. La proposition $t+4$ oublie le facteur $2$ ; $2t$ oublie la dérivée de $4t$ ; $t^2+4$ ne dérive que $4t$. Contrôle : $d'(2)=8$, comme avec la définition.",
+              "explanation": "Étape 1 — Repérer : deux termes, $t^2$ et $4t$ (coefficient $4$). Étape 2 — Dériver : $(t^2)'=2t$ et $(4t)'=4$. Étape 3 — Additionner : $2t+4$. Étape 4 — Simplifier : $d'(t)=2t+4$, sur $[0\\,;6]$. La proposition $t+4$ oublie le facteur $2$ ; $2t$ oublie la dérivée de $4t$ ; $t^2+4$ ne dérive que $4t$. Contrôle : $d'(2)=8$, comme avec la définition.",
               "answers": [
                 {
                   "content": "$d'(t)=2t+4$",
@@ -1056,7 +1056,7 @@
               "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes, avec $d'(t)=2t+4$. Quelle est sa vitesse instantanée à $t=4$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Repérer : la vitesse instantanée à l'instant $a$ est le nombre dérivé $d'(a)$. Étape 2 — Dériver : $d'(t)=2t+4$. Étape 3 — Remplacer : $d'(4)=2\\times4+4$. Étape 4 — Conclure : $d'(4)=12$, soit $12$ m/s. Attention : $d(4)=32$ est la distance parcourue, pas la vitesse.",
+              "explanation": "(1) La vitesse instantanée à l'instant $a$ est le nombre dérivé $d'(a)$. (2) On a $d'(t)=2t+4$. (3) On remplace $t$ par $4$ : $d'(4)=2\\times4+4=12$. La vitesse vaut $12$ m/s. Attention : $d(4)=32$ est la distance parcourue, pas la vitesse.",
               "unit": "m/s",
               "answers": [
                 {
@@ -1068,7 +1068,7 @@
             {
               "content": "Un sprinter parcourt $d(t)=t^2+4t$ mètres en $t$ secondes. Quelle est l'équation de la tangente à la courbe de $d$ au point d'abscisse $1$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Calculer : $d(1)=1+4=5$. Étape 2 — Dériver : $d'(t)=2t+4$, donc $d'(1)=6$. Étape 3 — Appliquer : $y=6(t-1)+5$. Étape 4 — Simplifier : $y=6t-6+5=6t-1$. La proposition $y=6t+5$ prend $d(1)$ pour l'ordonnée à l'origine ; $y=6t-6$ oublie le $+d(1)$ ; $y=5t+1$ échange pente et ordonnée.",
+              "explanation": "Étape 1 — Calculer : $d(1)=1+4=5$. Étape 2 — Dériver : $d'(t)=2t+4$, donc $d'(1)=6$. Étape 3 — Appliquer : $y=6(t-1)+5$. Étape 4 — Simplifier : $y=6t-6+5=6t-1$. La proposition $y=6t+5$ prend $d(1)$ pour l'ordonnée à l'origine ; $y=6t-6$ oublie le $+d(1)$ ; $y=-t+6$ échange pente et ordonnée.",
               "answers": [
                 {
                   "content": "$y=6t-1$",
@@ -1083,7 +1083,7 @@
                   "correct": false
                 },
                 {
-                  "content": "$y=5t+1$",
+                  "content": "$y=-t+6$",
                   "correct": false
                 }
               ]
@@ -1114,7 +1114,7 @@
             {
               "content": "Le coût moyen d'un maillot est $M(x)=\\dfrac{x^2+16}{x}$ sur $]0\\,;+\\infty[$. Quelle est la dérivée $M'(x)$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Identifier : un quotient avec $u(x)=x^2+16$ et $v(x)=x$, qui ne s'annule pas sur $]0\\,;+\\infty[$. Étape 2 — Dériver : $u'(x)=2x$ et $v'(x)=1$. Étape 3 — Appliquer : $M'(x)=\\dfrac{2x\\times x-(x^2+16)\\times1}{x^2}$. Étape 4 — Simplifier : le numérateur vaut $2x^2-x^2-16=x^2-16$. La proposition $2x$ fait $\\frac{u'}{v'}$ ; $\\frac{3x^2+16}{x^2}$ met un $+$ au lieu du $-$ ; la dernière divise par $v$ au lieu de $v^2$. Contrôle : $M(x)=x+\\frac{16}x$ donne $1-\\frac{16}{x^2}$.",
+              "explanation": "Étape 1 — Identifier : un quotient avec $u(x)=x^2+16$ et $v(x)=x$, qui ne s'annule pas sur $]0\\,;+\\infty[$. Étape 2 — Dériver : $u'(x)=2x$ et $v'(x)=1$. Étape 3 — Appliquer : $M'(x)=\\dfrac{2x\\times x-(x^2+16)\\times1}{x^2}$. Étape 4 — Simplifier : le numérateur vaut $2x^2-x^2-16=x^2-16$. La proposition $2x$ fait $\\frac{u'}{v'}$ ; $\\frac{3x^2+16}{x^2}$ met un $+$ au lieu du $-$ ; $\\dfrac{x^2-16}{x}$ divise par $v$ au lieu de $v^2$. Contrôle : $M(x)=x+\\frac{16}x$ donne $1-\\frac{16}{x^2}$.",
               "answers": [
                 {
                   "content": "$\\dfrac{x^2-16}{x^2}$",
@@ -1138,7 +1138,7 @@
               "content": "Le coût moyen est $M(x)=\\dfrac{x^2+16}{x}$, avec $M'(x)=\\dfrac{x^2-16}{x^2}$ sur $]0\\,;+\\infty[$. Calcule $M'(2)$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Repérer : on remplace $x$ par $2$ dans la fonction dérivée donnée. Étape 2 — Calculer le numérateur : $2^2-16=4-16=-12$. Étape 3 — Calculer le dénominateur : $2^2=4$. Étape 4 — Conclure : $M'(2)=\\dfrac{-12}{4}=-3$. Le coût moyen baisse quand on passe de $200$ maillots à un peu plus.",
+              "explanation": "(1) On remplace $x$ par $2$ dans $M'(x)=\\dfrac{x^2-16}{x^2}$. (2) Numérateur : $2^2-16=4-16=-12$. (3) Dénominateur : $2^2=4$. (4) Quotient : $M'(2)=\\dfrac{-12}{4}=-3$. Le coût moyen baisse quand on passe de $200$ maillots à un peu plus.",
               "answers": [
                 {
                   "content": "-3",
@@ -1149,7 +1149,7 @@
             {
               "content": "Le coût moyen est $M(x)=\\dfrac{x^2+16}{x}$, avec $M'(x)=\\dfrac{(x-4)(x+4)}{x^2}$ sur $]0\\,;+\\infty[$. Quel est le sens de variation de $M$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Dériver : $M'(x)=\\dfrac{(x-4)(x+4)}{x^2}$. Étape 2 — Étudier : sur $]0\\,;+\\infty[$, $x+4>0$ et $x^2>0$, donc $M'(x)$ a le signe de $x-4$ : négatif sur $]0\\,;4[$, positif sur $]4\\,;+\\infty[$. Étape 3 — Déduire : $M$ est décroissante sur $]0\\,;4]$ et croissante sur $[4\\,;+\\infty[$. Étape 4 — Calculer : $M(4)=8$. La deuxième proposition inverse les signes ; les deux autres ignorent le changement de signe.",
+              "explanation": "Étape 1 — Dériver : $M'(x)=\\dfrac{(x-4)(x+4)}{x^2}$. Étape 2 — Étudier : sur $]0\\,;+\\infty[$, $x+4>0$ et $x^2>0$, donc $M'(x)$ a le signe de $x-4$ : négatif sur $]0\\,;4[$, positif sur $]4\\,;+\\infty[$. Étape 3 — Déduire : $M$ est décroissante sur $]0\\,;4]$ et croissante sur $[4\\,;+\\infty[$. Étape 4 — Calculer : $M(4)=8$. La proposition « Croissante sur $]0\\,;4]$, puis décroissante sur $[4\\,;+\\infty[$ » inverse les signes ; « Croissante sur $]0\\,;+\\infty[$ » et « Décroissante sur $]0\\,;+\\infty[$ » ignorent le changement de signe en $4$.",
               "answers": [
                 {
                   "content": "Décroissante sur $]0\\,;4]$, puis croissante sur $[4\\,;+\\infty[$",
@@ -1185,7 +1185,6 @@
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Étape 1 — Dériver : $M'$ s'annule en $4$ en passant de $-$ à $+$. Étape 2 — Étudier : c'est un minimum. Étape 3 — Déduire : le coût minimal est $M(4)$. Étape 4 — Calculer : $M(4)=\\dfrac{16+16}{4}=8$ milliers de FCFA par maillot. Ne pas confondre avec $x=4$, qui est le nombre de centaines de maillots.",
-              "unit": "milliers",
               "answers": [
                 {
                   "content": "8",
@@ -1231,7 +1230,7 @@
             {
               "content": "Le bénéfice du tournoi est $B(x)=-x^3+6x^2-9x+20$. Quelle est la fonction dérivée $B'$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Repérer : quatre termes, $-x^3$, $6x^2$, $-9x$ et la constante $20$. Étape 2 — Dériver : $(-x^3)'=-3x^2$ ; $(6x^2)'=12x$ ; $(-9x)'=-9$ ; $(20)'=0$. Étape 3 — Additionner : $-3x^2+12x-9$. Étape 4 — Simplifier : $B'(x)=-3x^2+12x-9$. La proposition $-3x^2+6x-9$ oublie de multiplier par $2$ la dérivée de $6x^2$ ; $3x^2+12x-9$ perd le signe de $-x^3$ ; la dernière garde la constante $20$ comme si sa dérivée valait $20$.",
+              "explanation": "Étape 1 — Repérer : quatre termes, $-x^3$, $6x^2$, $-9x$ et la constante $20$. Étape 2 — Dériver : $(-x^3)'=-3x^2$ ; $(6x^2)'=12x$ ; $(-9x)'=-9$ ; $(20)'=0$. Étape 3 — Additionner : $-3x^2+12x-9$. Étape 4 — Simplifier : $B'(x)=-3x^2+12x-9$. La proposition $-3x^2+6x-9$ oublie de multiplier par $2$ la dérivée de $6x^2$ ; $3x^2+12x-9$ perd le signe de $-x^3$ ; $B'(x)=-3x^2+12x-9+20$ garde la constante $20$ comme si sa dérivée valait $20$.",
               "answers": [
                 {
                   "content": "$B'(x)=-3x^2+12x-9$",
@@ -1281,7 +1280,7 @@
             {
               "content": "On a $B'(x)=-3(x-1)(x-3)$ sur $[0\\,;5]$. Quel est le sens de variation de $B$ sur $[0\\,;5]$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Dériver : $B'(x)=-3(x-1)(x-3)$. Étape 2 — Étudier : $-3<0$ ; le produit $(x-1)(x-3)$ est positif hors de $[1\\,;3]$ et négatif entre $1$ et $3$ ; donc $B'<0$ sur $]0\\,;1[$, $B'>0$ sur $]1\\,;3[$ et $B'<0$ sur $]3\\,;5]$. Étape 3 — Déduire : $B$ décroît, croît, puis décroît. Étape 4 — Calculer : $B(1)=16$, $B(3)=20$. La première proposition oublie le facteur $-3$, qui renverse les signes.",
+              "explanation": "Étape 1 — Dériver : $B'(x)=-3(x-1)(x-3)$. Étape 2 — Étudier : $-3<0$ ; le produit $(x-1)(x-3)$ est positif hors de $[1\\,;3]$ et négatif entre $1$ et $3$ ; donc $B'<0$ sur $]0\\,;1[$, $B'>0$ sur $]1\\,;3[$ et $B'<0$ sur $]3\\,;5]$. Étape 3 — Déduire : $B$ décroît, croît, puis décroît. Étape 4 — Calculer : $B(1)=16$, $B(3)=20$. La proposition « Croissante sur $[0\\,;1]$, décroissante sur $[1\\,;3]$, croissante sur $[3\\,;5]$ » oublie le facteur $-3$, qui renverse les signes ; « Croissante sur $[0\\,;5]$ » ignore les changements de signe de $B'$ en $1$ et en $3$ ; « Décroissante sur $[0\\,;3]$, croissante sur $[3\\,;5]$ » oublie que $B$ croît sur $[1\\,;3]$ et décroît sur $[3\\,;5]$.",
               "answers": [
                 {
                   "content": "Décroissante sur $[0\\,;1]$, croissante sur $[1\\,;3]$, décroissante sur $[3\\,;5]$",
@@ -1347,10 +1346,10 @@
           "figure": null,
           "questions": [
             {
-              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq3$ et $C(x)=6x-9$ si $x>3$. Calcule $C(3)$ avec la première expression : tu dois trouver la même valeur avec $6x-9$ en $x=3$. Quelle est cette valeur ?",
+              "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq3$ et $C(x)=6x-9$ si $x>3$. Pour étudier la continuité de $C$ en $3$, calcule $C(3)$ avec la première expression. Quelle est cette valeur ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Écrire : en $x=3$, on utilise la ligne $x\\leq3$ : $C(3)=3^2$. Étape 2 — Simplifier : $C(3)=9$. Étape 3 — Calculer : avec l'autre ligne, $6\\times3-9=9$. Étape 4 — Conclure : les deux expressions donnent $9$, donc $C$ est continue en $3$. Ce n'est pas encore la dérivabilité : il faut comparer les pentes.",
+              "explanation": "Étape 1 — Première expression : en $x=3$, on utilise la ligne $x\\leq3$, donc $C(3)=3^2=9$. Étape 2 — Seconde expression : $6\\times3-9=9$. Étape 3 — Comparaison : les deux expressions donnent $9$, donc $C$ est continue en $3$. Ce n'est pas encore la dérivabilité : il faut comparer les pentes.",
               "answers": [
                 {
                   "content": "9",
@@ -1385,7 +1384,7 @@
             {
               "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq3$ et $C(x)=6x-9$ si $x>3$. Le nombre dérivé à gauche en $3$ vaut $6$ et le nombre dérivé à droite vaut $6$. Que peut-on conclure ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Écrire : les deux taux d'accroissement sont $6+h$ (à gauche) et $6$ (à droite). Étape 2 — Simplifier : c'est déjà fait. Étape 3 — Calculer : les limites à gauche et à droite existent et sont égales à $6$. Étape 4 — Conclure : $C$ est dérivable en $3$ et $C'(3)=6$. La proposition « pas dérivable » serait vraie si les deux nombres étaient différents ; $C'(3)=9$ confond le nombre dérivé avec $C(3)$.",
+              "explanation": "Étape 1 — Écrire : les deux taux d'accroissement sont $6+h$ (à gauche) et $6$ (à droite). Étape 2 — Simplifier : c'est déjà fait. Étape 3 — Calculer : les limites à gauche et à droite existent et sont égales à $6$. Étape 4 — Conclure : $C$ est dérivable en $3$ et $C'(3)=6$. La proposition « $C$ est continue en $3$ mais n'est pas dérivable en $3$ » serait vraie si les deux nombres dérivés étaient différents, ce qui n'est pas le cas ; « $C$ n'est pas continue en $3$ » est fausse, car une fonction dérivable en un point y est continue (et les deux expressions donnent $9$) ; $C'(3)=9$ confond le nombre dérivé avec $C(3)$.",
               "answers": [
                 {
                   "content": "$C$ est dérivable en $3$ et $C'(3)=6$",
@@ -1408,7 +1407,7 @@
             {
               "content": "Le prix est $C(x)=x^2$ si $0\\leq x\\leq3$ et $C(x)=6x-9$ si $x>3$, et $C'(3)=6$. Quelle est l'équation de la tangente à la courbe de $C$ au point d'abscisse $3$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Calculer : $C(3)=9$. Étape 2 — Dériver : $C'(3)=6$ (ici vérifié avec les limites à gauche et à droite). Étape 3 — Appliquer : $y=6(x-3)+9$. Étape 4 — Simplifier : $y=6x-18+9=6x-9$. C'est exactement la ligne $6x-9$ de la grille : à partir de $3$, la courbe suit sa tangente. La proposition $y=6x+9$ se trompe de signe ; $y=9x-6$ échange pente et ordonnée ; $y=6x$ oublie le $+C(3)$ et le $-3$.",
+              "explanation": "Étape 1 — Calculer : $C(3)=9$. Étape 2 — Dériver : $C'(3)=6$ (ici vérifié avec les limites à gauche et à droite). Étape 3 — Appliquer : $y=6(x-3)+9$. Étape 4 — Simplifier : $y=6x-18+9=6x-9$. C'est exactement la ligne $6x-9$ de la grille : à partir de $3$, la courbe suit sa tangente. La proposition $y=6x+9$ se trompe de signe ; $y=-9x+6$ échange pente et ordonnée ; $y=6x$ oublie le $+C(3)$ et le $-3$.",
               "answers": [
                 {
                   "content": "$y=6x-9$",
@@ -1419,7 +1418,7 @@
                   "correct": false
                 },
                 {
-                  "content": "$y=9x-6$",
+                  "content": "$y=-9x+6$",
                   "correct": false
                 },
                 {
