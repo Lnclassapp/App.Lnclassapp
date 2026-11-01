@@ -1,0 +1,1145 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Dénombrement",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "theme": "blue",
+      "figures": [],
+      "notions": [
+        {
+          "name": "Réunion, intersection et complémentaire",
+          "remember": "Le **cardinal** d'un ensemble fini $E$, noté $\\text{card}(E)$, est son nombre d'éléments. Pour deux parties $A$ et $B$ de $E$ : $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$. « $A$ **ou** $B$ » (au moins l'un des deux) se note $A \\cup B$ ; « $A$ **et** $B$ » (les deux à la fois) se note $A \\cap B$. Si $A$ et $B$ n'ont aucun élément commun ($A \\cap B = \\varnothing$, on dit qu'ils sont **disjoints**), alors $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B)$. Le **complémentaire** $\\overline{A}$ de $A$ dans $E$ (les éléments de $E$ qui ne sont pas dans $A$) vérifie $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A)$.",
+          "method": [
+            "Nommer l'ensemble de départ $E$ et les parties $A$ et $B$ de l'énoncé, puis relever leurs cardinaux.",
+            "Repérer les éléments qui sont dans $A$ et dans $B$ : ils sont comptés deux fois quand on additionne.",
+            "Appliquer la formule $\\text{card}(A \\cup B) = \\text{card}(A) + \\text{card}(B) - \\text{card}(A \\cap B)$, ou $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A)$ pour un complémentaire.",
+            "Vérifier que le résultat est un entier compris entre 0 et $\\text{card}(E)$."
+          ],
+          "example": {
+            "statement": "Dans une classe de 40 élèves, 25 jouent au football et 18 jouent au handball ; 7 élèves jouent aux deux sports. Combien d'élèves jouent à au moins un des deux sports ?",
+            "steps": [
+              "Nommer : $E$ est la classe, $\\text{card}(E) = 40$ ; $F$ est l'ensemble des footballeurs, $\\text{card}(F) = 25$ ; $H$ est l'ensemble des handballeurs, $\\text{card}(H) = 18$.",
+              "Repérer : les 7 élèves qui jouent aux deux sports sont dans $F \\cap H$ ; ils sont comptés deux fois dans $25 + 18$.",
+              "Appliquer : $\\text{card}(F \\cup H) = 25 + 18 - 7 = 36$.",
+              "Vérifier : 36 est un entier compris entre 0 et 40. Les 4 élèves restants ne jouent à aucun des deux sports : $40 - 36 = 4$."
+            ]
+          },
+          "pitfall": "Ne pas oublier de soustraire l'intersection. Contre-exemple avec la classe de 40 élèves : $25 + 18 = 43$ élèves, ce qui est impossible puisque la classe n'en compte que 40. Les 7 élèves qui jouent aux deux sports étaient comptés deux fois : $25 + 18 - 7 = 36$. Si ta somme dépasse $\\text{card}(E)$, tu as oublié l'intersection.",
+          "figure": null,
+          "exercise": {
+            "title": "Les clubs du lycée",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "Le professeur principal fait le point sur les clubs et les loisirs de ses élèves. Tu appliques la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans une classe de 40 élèves, 25 jouent au football et 18 au handball ; $x$ élèves jouent aux deux sports. Quelle expression donne le nombre d'élèves qui jouent à au moins un des deux sports ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Nommer : $E$ est la classe, $F$ les footballeurs ($25$) et $H$ les handballeurs ($18$). Étape 2 — Repérer : les $x$ élèves qui jouent aux deux sports sont dans $F \\cap H$, donc comptés deux fois. Étape 3 — Appliquer : $\\text{card}(F \\cup H) = 25 + 18 - x$. Étape 4 — Vérifier : si $x = 0$, on retrouve $43$, ce qui dépasse $40$ : $x$ ne peut pas être nul ici. La proposition $25 + 18$ oublie l'intersection (c'est le piège de la fiche). $25 \\times 18$ est un produit, qui sert pour des choix successifs. $40 - 25 - 18$ vaut $-3$ : un cardinal n'est jamais négatif.",
+                "answers": [
+                  {
+                    "content": "$25 + 18 - x$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$25 + 18$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$25 \\times 18$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$40 - 25 - 18$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un club de lecture compte 35 élèves, un club de théâtre en compte 28, et 12 élèves sont inscrits aux deux clubs. Combien d'élèves sont inscrits à au moins un des deux clubs ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $L$ est le club de lecture, $\\text{card}(L) = 35$ ; $T$ est le club de théâtre, $\\text{card}(T) = 28$. Étape 2 — Repérer : les 12 élèves inscrits aux deux clubs sont dans $L \\cap T$ ; ils sont comptés deux fois. Étape 3 — Appliquer : $\\text{card}(L \\cup T) = 35 + 28 - 12 = 51$. Étape 4 — Vérifier : 51 est un entier positif. Additionner 35 + 28 = 63 compterait deux fois les 12 élèves des deux clubs.",
+                "answers": [
+                  {
+                    "content": "51",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un lycée compte 60 élèves de 1ère. 35 sont inscrits au club de lecture, 28 au club de théâtre et 12 aux deux clubs. Combien d'élèves ne sont inscrits à aucun des deux clubs ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des 60 élèves, $L$ le club de lecture ($35$) et $T$ le club de théâtre ($28$). Étape 2 — Repérer : les 12 élèves des deux clubs sont dans $L \\cap T$. Étape 3 — Appliquer : d'abord $\\text{card}(L \\cup T) = 35 + 28 - 12 = 51$ ; puis le complémentaire de $L \\cup T$ vérifie $\\text{card}(\\overline{L \\cup T}) = 60 - 51 = 9$. Étape 4 — Vérifier : 9 est compris entre 0 et 60. Calculer 60 − 35 − 28 = −3 est absurde : on a retiré deux fois les 12 élèves des deux clubs.",
+                "answers": [
+                  {
+                    "content": "9",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une classe de 45 élèves, 30 aiment les mathématiques et 22 aiment le français. Chaque élève aime au moins l'une des deux matières. Combien d'élèves aiment les deux matières ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est la classe, $\\text{card}(E) = 45$ ; $M$ (mathématiques) a pour cardinal $30$ et $F$ (français) a pour cardinal $22$ ; tous les élèves sont dans $M \\cup F$, donc $\\text{card}(M \\cup F) = 45$. Étape 2 — Repérer : on cherche $x = \\text{card}(M \\cap F)$, les élèves comptés deux fois. Étape 3 — Appliquer : $45 = 30 + 22 - x$, donc $x = 52 - 45$. Étape 4 — Vérifier : $x = 7$ : c'est un entier compris entre 0 et 22, et $30 - 7 = 23$ élèves aiment seulement les mathématiques, $22 - 7 = 15$ seulement le français, soit $23 + 15 + 7 = 45$. Répondre 52 est impossible : cela dépasse l'effectif de la classe.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un lycée compte 1 200 élèves, dont 480 sont internes. Combien d'élèves ne sont pas internes ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des 1 200 élèves, $A$ celui des 480 internes. Étape 2 — Repérer : ici il n'y a qu'une partie $A$ : on cherche son complémentaire $\\overline{A}$. Étape 3 — Appliquer : $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A) = 1200 - 480 = 720$. Étape 4 — Vérifier : 720 est compris entre 0 et 1 200, et $720 + 480 = 1200$.",
+                "answers": [
+                  {
+                    "content": "720",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une classe, 20 élèves ont une calculatrice et 15 élèves ont un compas. Affirmation : « Exactement 35 élèves ont au moins l'un des deux objets ». Cette affirmation est-elle exacte ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Nommer : $C$ est l'ensemble des élèves qui ont une calculatrice ($20$), $K$ celui des élèves qui ont un compas ($15$). Étape 2 — Repérer : certains élèves peuvent avoir les deux objets : ils sont dans $C \\cap K$. Étape 3 — Appliquer : $\\text{card}(C \\cup K) = 20 + 15 - \\text{card}(C \\cap K) = 35 - \\text{card}(C \\cap K)$. Étape 4 — Vérifier : on n'obtient 35 que si personne n'a les deux objets, ce que l'énoncé ne dit pas : l'affirmation n'est pas toujours exacte. Additionner 20 + 15 sans regarder l'intersection est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Dans une classe de 40 élèves, 20 ont un livre de mathématiques (ensemble $M$), 16 ont un cahier d'exercices (ensemble $C$) et 8 ont les deux.",
+            "questions": [
+              {
+                "content": "Pour compter les élèves qui ont $M$ ou $C$, on calcule $20 + 16 -$ ___ $=$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est la classe ($40$), $M$ ($20$) et $C$ ($16$). Étape 2 — Repérer : les élèves qui ont les deux sont dans $M \\cap C$ : ils sont $8$, c'est la première case. Étape 3 — Appliquer : $\\text{card}(M \\cup C) = 20 + 16 - 8 = 28$ : c'est la seconde case. Étape 4 — Vérifier : 28 est compris entre 0 et 40.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "28",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les élèves qui ont les deux sont comptés deux fois quand on additionne."
+              },
+              {
+                "content": "Dans une classe de 40 élèves, 20 ont un livre de mathématiques, 16 ont un cahier d'exercices et 8 ont les deux. Combien d'élèves n'ont ni livre ni cahier ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Nommer : $E$ est la classe ($40$) ; $M$ et $C$ comme dans l'énoncé. Étape 2 — Repérer : $M \\cap C$ compte $8$ élèves. Étape 3 — Appliquer : $\\text{card}(M \\cup C) = 20 + 16 - 8 = 28$, puis $\\text{card}(\\overline{M \\cup C}) = 40 - 28 = 12$. Étape 4 — Vérifier : 12 est compris entre 0 et 40.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule d'abord le nombre d'élèves qui ont au moins un des deux objets."
+              },
+              {
+                "content": "Pour deux parties $A$ et $B$ d'un ensemble $E$, le nombre $\\text{card}(A \\cup B)$ peut être plus grand que $\\text{card}(E)$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Nommer : $A$ et $B$ sont des parties de $E$. Étape 2 — Repérer : $A \\cup B$ est formé d'éléments de $E$ uniquement. Étape 3 — Appliquer : donc $\\text{card}(A \\cup B) \\leq \\text{card}(E)$ ; la somme $\\text{card}(A) + \\text{card}(B)$ peut dépasser $\\text{card}(E)$, mais pas la réunion. Étape 4 — Vérifier : le résultat d'un dénombrement de réunion reste toujours compris entre 0 et $\\text{card}(E)$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Principe multiplicatif et p-listes",
+          "remember": "**Principe multiplicatif** : si une situation se décompose en $p$ choix successifs, avec $n_1$ possibilités pour le premier choix, $n_2$ pour le deuxième (quel que soit le premier), …, $n_p$ pour le dernier, le nombre de résultats est $n_1 \\times n_2 \\times \\cdots \\times n_p$. **Produit cartésien** : $\\text{card}(A \\times B) = \\text{card}(A) \\times \\text{card}(B)$ ; un élément de $A \\times B$ est un couple $(a\\,;b)$ et l'ordre compte : $(a\\,;b) \\neq (b\\,;a)$. Une **$p$-liste** d'un ensemble à $n$ éléments est une liste ordonnée de $p$ éléments, répétitions permises (tirages **avec remise**) : il y en a $n^p$.",
+          "method": [
+            "Décomposer la situation en choix successifs, et dire si l'ordre compte et si les répétitions sont permises.",
+            "Compter les possibilités de chaque choix.",
+            "Multiplier ces nombres, ou écrire $n^p$ si les $p$ choix ont tous $n$ possibilités.",
+            "Contrôler que le résultat est un entier et que chaque résultat possible est compté une seule fois."
+          ],
+          "example": {
+            "statement": "Le cadenas du casier de Koffi a un code de 3 chiffres, chacun choisi de 0 à 9 (un chiffre peut se répéter). Combien de codes différents existe-t-il ?",
+            "steps": [
+              "Décomposer : on choisit le 1er, le 2e puis le 3e chiffre, soit 3 choix successifs ; l'ordre compte (123 et 321 sont deux codes) et les répétitions sont permises (007 est un code).",
+              "Compter : il y a 10 possibilités à chaque choix (les chiffres 0, 1, …, 9).",
+              "Multiplier : $10 \\times 10 \\times 10 = 10^3 = 1000$.",
+              "Contrôler : 1 000 est un entier ; les codes vont de 000 à 999, soit exactement 1 000 codes, chacun compté une seule fois."
+            ]
+          },
+          "pitfall": "Ne pas additionner les nombres de choix. Contre-exemple : un code de 2 chiffres pris dans $\\{1\\,;2\\,;3\\}$, répétitions permises. Écrire $3 + 3 = 6$ est faux : on peut écrire $11, 12, 13, 21, 22, 23, 31, 32, 33$, soit $3 \\times 3 = 9$ codes. On **additionne** quand on choisit l'un **ou** l'autre (cas qui s'excluent), on **multiplie** quand on fait un choix **puis** un autre.",
+          "figure": null,
+          "exercise": {
+            "title": "Codes, tenues et grilles",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "À l'école, on compte des codes, des tenues et des grilles de réponses. Tu appliques la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Pour la fête de l'école, Awa choisit un polo parmi 4 et un short parmi 3. Combien de tenues différentes (un polo et un short) peut-elle composer ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : choisir un polo, puis un short : 2 choix successifs ; l'ordre ne change pas la tenue et il n'y a pas de répétition à gérer. Étape 2 — Compter : 4 possibilités pour le polo, 3 pour le short. Étape 3 — Multiplier : $4 \\times 3 = 12$. Étape 4 — Contrôler : 12 tenues, chacune comptée une fois (un couple polo-short). La proposition 7 additionne $4 + 3$ : c'est le piège de la fiche. 64 et 81 sont $4^3$ et $3^4$ : les choix n'ont pas le même nombre de possibilités, on ne peut pas écrire une puissance.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  },
+                  {
+                    "content": "7",
+                    "correct": false
+                  },
+                  {
+                    "content": "64",
+                    "correct": false
+                  },
+                  {
+                    "content": "81",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le code du cadenas d'une armoire de classe compte 4 chiffres, chacun de 0 à 9, avec répétitions possibles. Combien de codes existe-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : 4 choix successifs (un chiffre après l'autre) ; l'ordre compte et les répétitions sont permises. Étape 2 — Compter : 10 possibilités à chaque choix. Étape 3 — Multiplier : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$. Étape 4 — Contrôler : les codes vont de 0000 à 9999 : 10 000 codes. Écrire 10 × 4 = 40 additionne ou multiplie mal : les choix se multiplient, ils ne s'additionnent pas.",
+                "answers": [
+                  {
+                    "content": "10000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le mot de passe de la salle informatique est formé de 2 lettres de l'alphabet (26 lettres, répétitions permises) suivies d'un chiffre de 0 à 9. Combien de mots de passe existe-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : 3 choix successifs : une lettre, une autre lettre, puis un chiffre ; l'ordre compte, les répétitions sont permises. Étape 2 — Compter : 26 possibilités pour la 1re lettre, 26 pour la 2e, 10 pour le chiffre. Étape 3 — Multiplier : $26 \\times 26 \\times 10 = 676 \\times 10 = 6760$. Étape 4 — Contrôler : 6 760 est un entier ; chaque mot de passe est compté une seule fois. Additionner 26 + 26 + 10 = 62 est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "6760",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour un comité, on choisit un président parmi 5 garçons, puis une vice-présidente parmi 6 filles. Combien de couples (président ; vice-présidente) peut-on former ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : 2 choix successifs : le président, puis la vice-présidente ; on forme un couple de l'ensemble $G \\times F$. Étape 2 — Compter : 5 possibilités pour le président, 6 pour la vice-présidente. Étape 3 — Multiplier : $\\text{card}(G \\times F) = 5 \\times 6 = 30$. Étape 4 — Contrôler : 30 couples, chacun compté une seule fois. Additionner 5 + 6 = 11 donnerait le nombre de personnes, pas le nombre de couples.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un devoir comporte 5 questions à choix multiples ; chaque question propose 4 propositions et on en coche une seule. Le nombre de grilles de réponses possibles est $4^5 =$ ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Décomposer : 5 choix successifs (une réponse par question) ; l'ordre compte (la question 1 n'est pas la question 2) et les répétitions sont permises (on peut cocher la même lettre deux fois). Étape 2 — Compter : 4 possibilités à chaque choix. Étape 3 — Multiplier : $4 \\times 4 \\times 4 \\times 4 \\times 4 = 4^5 = 1024$. Étape 4 — Contrôler : 1 024 est un entier, et chaque grille est comptée une fois. Écrire 4 × 5 = 20 est le piège de la fiche : les choix se multiplient.",
+                "answers": [
+                  {
+                    "content": "1024",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un code de 2 chiffres est pris dans {1 ; 2 ; 3}, les répétitions étant permises. Affirmation : « Il y a 3 + 3 = 6 codes possibles ». Cette affirmation est-elle exacte ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Décomposer : 2 choix successifs (1er chiffre, 2e chiffre) ; l'ordre compte, les répétitions sont permises. Étape 2 — Compter : 3 possibilités à chaque choix. Étape 3 — Multiplier : $3 \\times 3 = 9$. Étape 4 — Contrôler : On les liste pour contrôler : 11, 12, 13, 21, 22, 23, 31, 32, 33, soit 9 codes, pas 6. Le nombre 6 vient d'une addition des choix : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Le cadenas du casier d'Adjoua a un code de 3 chiffres, chacun pris parmi 1, 2, 3, 4 et 5 (un chiffre peut se répéter).",
+            "questions": [
+              {
+                "content": "Chaque chiffre a ___ possibilités et il y a 3 choix successifs, donc le nombre de codes est ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : 3 choix successifs, l'ordre compte, répétitions permises. Étape 2 — Compter : 5 possibilités à chaque choix : c'est la première case. Étape 3 — Multiplier : $5 \\times 5 \\times 5 = 5^3 = 125$ : c'est la seconde case. Étape 4 — Contrôler : 125 est un entier ; les codes vont de 111 à 555 avec des chiffres de 1 à 5 : chacun est compté une fois.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "125",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Multiplie le nombre de possibilités de chaque choix."
+              },
+              {
+                "content": "À la cantine, un menu se compose d'un plat parmi 3 et d'une boisson parmi 2. Combien de menus différents peut-on composer ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Décomposer : 2 choix successifs : le plat, puis la boisson. Étape 2 — Compter : 3 possibilités pour le plat, 2 pour la boisson. Étape 3 — Multiplier : $3 \\times 2 = 6$. Étape 4 — Contrôler : 6 menus, chacun compté une fois. La proposition 5 additionne $3 + 2$ : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  },
+                  {
+                    "content": "5",
+                    "correct": false
+                  },
+                  {
+                    "content": "8",
+                    "correct": false
+                  },
+                  {
+                    "content": "9",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un plat puis une boisson : deux choix qui se suivent."
+              },
+              {
+                "content": "Combien de codes de 2 chiffres peut-on écrire avec les chiffres 1, 2, 3, 4 et 5, les répétitions étant permises ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Décomposer : 2 choix successifs, l'ordre compte, répétitions permises. Étape 2 — Compter : 5 possibilités à chaque choix. Étape 3 — Multiplier : $5 \\times 5 = 5^2 = 25$. Étape 4 — Contrôler : 25 codes, de 11 à 55.",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Arrangements et permutations",
+          "remember": "Pour un entier $n \\geq 1$, la **factorielle** de $n$ est $n! = 1 \\times 2 \\times \\cdots \\times n$ ; par convention $0! = 1$. Un **arrangement** de $p$ éléments d'un ensemble à $n$ éléments ($1 \\leq p \\leq n$) est une liste **ordonnée** de $p$ éléments **distincts** (tirages sans remise, l'ordre compte). Leur nombre est $A_n^p = n(n-1)(n-2)\\cdots(n-p+1)$, un produit de $p$ facteurs, soit $A_n^p = \\dfrac{n!}{(n-p)!}$. Une **permutation** de $n$ éléments est un arrangement de $n$ éléments parmi $n$ : il y en a $A_n^n = n!$.",
+          "method": [
+            "Vérifier que l'ordre compte et que les éléments sont distincts (pas de répétition).",
+            "Identifier $n$, le nombre d'éléments disponibles, et $p$, le nombre d'éléments placés.",
+            "Écrire $A_n^p = n(n-1)\\cdots(n-p+1)$, produit de $p$ facteurs ; si $p = n$, c'est $n!$.",
+            "Calculer le produit et contrôler que $p \\leq n$."
+          ],
+          "example": {
+            "statement": "Huit élèves participent à la course du 100 m de l'école. Combien de podiums différents (1er, 2e et 3e) peut-on obtenir, sans ex aequo ?",
+            "steps": [
+              "Vérifier : l'ordre compte (être 1er n'est pas être 2e) et un élève ne peut pas occuper deux places : les éléments sont distincts.",
+              "Identifier : $n = 8$ élèves disponibles et $p = 3$ places.",
+              "Écrire : $A_8^3 = 8 \\times 7 \\times 6$ (3 facteurs).",
+              "Calculer : $8 \\times 7 \\times 6 = 336$ podiums, et $p = 3 \\leq n = 8$."
+            ]
+          },
+          "pitfall": "Ne pas confondre arrangement et $p$-liste. Pour le podium de 3 élèves parmi 8, écrire $8^3 = 512$ est faux : cela compterait des podiums où le même élève serait 1er et 2e. Le bon calcul retire, à chaque place, un élève déjà placé : $8 \\times 7 \\times 6 = 336$. Dans $A_n^p$ il y a $p$ facteurs, pas $n$ : $A_5^2 = 5 \\times 4 = 20$, et non $5 \\times 4 \\times 3 \\times 2 \\times 1$.",
+          "figure": null,
+          "exercise": {
+            "title": "Podiums, files et bureaux",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "À l'école, on classe, on range et on désigne des élèves. Tu appliques la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Relie chaque situation à l'outil de dénombrement qui convient.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Vérifier : on regarde si l'ordre compte et si les éléments peuvent se répéter. Étape 2 — Identifier : on repère $n$ et $p$ dans chaque situation. Étape 3 — Écrire : le code de 3 chiffres autorise les répétitions : $10^3$, c'est une $p$-liste ; le bureau de 3 postes parmi 10 élèves distincts donne $A_{10}^3 = 10 \\times 9 \\times 8$, c'est un arrangement ; les 6 livres rangés tous ensemble donnent $A_6^6 = 6!$, c'est une permutation. Étape 4 — Calculer : $p \\leq n$ dans les deux derniers cas ($3 \\leq 10$ et $6 \\leq 6$).",
+                "answers": [
+                  {
+                    "content": "Choisir un code de 3 chiffres, répétitions permises",
+                    "match": "$p$-liste"
+                  },
+                  {
+                    "content": "Choisir un président, un secrétaire et un trésorier différents parmi 10 élèves",
+                    "match": "Arrangement"
+                  },
+                  {
+                    "content": "Ranger 6 livres différents sur une étagère",
+                    "match": "Permutation"
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $A_6^2$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $A_6^2$ est un arrangement : l'ordre compte, les éléments sont distincts. Étape 2 — Identifier : $n = 6$ et $p = 2$. Étape 3 — Écrire : $A_6^2 = 6 \\times 5$ (2 facteurs). Étape 4 — Calculer : $6 \\times 5 = 30$, et $2 \\leq 6$. Écrire $6^2 = 36$ confond arrangement et $p$-liste (piège de la fiche).",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Cinq élèves doivent s'asseoir sur un banc de 5 places. De combien de façons différentes peuvent-ils s'installer ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (Aya à gauche n'est pas Aya à droite) et chaque élève occupe une seule place : c'est une permutation. Étape 2 — Identifier : $n = 5$ et $p = 5$. Étape 3 — Écrire : $A_5^5 = 5! = 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$, et $p = 5 \\leq n = 5$. Écrire 5 × 5 = 25 ou 5^5 oublie que chaque élève ne s'assoit qu'une fois.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un comité doit désigner un président, un secrétaire et un trésorier, tous différents, parmi 12 candidats. Combien de bureaux différents peut-on former ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (président n'est pas secrétaire) et une personne ne cumule pas deux postes : les éléments sont distincts. Étape 2 — Identifier : $n = 12$ candidats et $p = 3$ postes. Étape 3 — Écrire : $A_{12}^3 = 12 \\times 11 \\times 10$ (3 facteurs). Étape 4 — Calculer : $12 \\times 11 \\times 10 = 1320$ bureaux, et $3 \\leq 12$. Écrire $12^3 = 1728$ autoriserait la même personne à occuper plusieurs postes (piège de la fiche).",
+                "answers": [
+                  {
+                    "content": "1320",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Trouve l'entier $n \\geq 2$ tel que $A_n^2 = 42$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $A_n^2$ est un arrangement de 2 éléments parmi $n$. Étape 2 — Identifier : $p = 2$ et $n$ est l'inconnue, avec $n \\geq 2$. Étape 3 — Écrire : $A_n^2 = n(n-1)$, donc $n(n-1) = 42$, soit $n^2 - n - 42 = 0$, soit $(n-7)(n+6) = 0$. Étape 4 — Calculer : $n = 7$ ou $n = -6$ ; on garde $n = 7$ car $n \\geq 2$. Contrôle : $A_7^2 = 7 \\times 6 = 42$. La solution $n = -6$ est rejetée : un nombre d'éléments est un entier positif.",
+                "answers": [
+                  {
+                    "content": "7",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Affirmation : « Le nombre de façons de classer les 4 premiers d'une course de 6 coureurs est $6^4 = 1296$ ». Cette affirmation est-elle exacte ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (1er, 2e, 3e, 4e) et un coureur ne peut pas occuper deux places : les éléments sont distincts. Étape 2 — Identifier : $n = 6$ coureurs et $p = 4$ places. Étape 3 — Écrire : $A_6^4 = 6 \\times 5 \\times 4 \\times 3$ (4 facteurs). Étape 4 — Calculer : $6 \\times 5 \\times 4 \\times 3 = 360$, et $4 \\leq 6$. Le nombre $6^4 = 1296$ est celui d'une $p$-liste : il compterait des classements où le même coureur est 1er et 2e (piège de la fiche).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La valeur de $0!$ est ___ .",
+                "question_type": "select",
+                "explanation": "Étape 1 — Vérifier : $0!$ est une factorielle ; la définition de la fiche donne une convention pour $0$. Étape 2 — Identifier : $n = 0$. Étape 3 — Écrire : par convention $0! = 1$, ce qui permet d'écrire $A_n^n = \\dfrac{n!}{0!} = n!$. Étape 4 — Calculer : 1 est un entier positif, et il garde la formule cohérente. Répondre 0 confond le produit vide avec zéro : un produit vide vaut 1.",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true
+                  },
+                  {
+                    "content": "0",
+                    "correct": false
+                  },
+                  {
+                    "content": "2",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Sept élèves se présentent à la finale de saut en longueur de l'école. On classe les trois premiers, sans ex aequo.",
+            "questions": [
+              {
+                "content": "Le nombre de podiums est $A_7^3 = 7 \\times$ ___ $\\times$ ___ $=$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : l'ordre compte et un élève ne peut pas être classé deux fois. Étape 2 — Identifier : $n = 7$ et $p = 3$. Étape 3 — Écrire : $A_7^3 = 7 \\times 6 \\times 5$ : les deux premières cases valent 6 et 5. Étape 4 — Calculer : $7 \\times 6 \\times 5 = 210$ : c'est la dernière case, et $3 \\leq 7$.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "210",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ],
+                "hint": "Chaque place retire un élève déjà classé."
+              },
+              {
+                "content": "Calcule $4!$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $4!$ est la factorielle de 4, c'est-à-dire $A_4^4$. Étape 2 — Identifier : $n = 4$ et $p = 4$. Étape 3 — Écrire : $4! = 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $4 \\times 3 \\times 2 \\times 1 = 24$.",
+                "answers": [
+                  {
+                    "content": "24",
+                    "correct": true
+                  }
+                ],
+                "hint": "Multiplie tous les entiers de 1 à 4."
+              },
+              {
+                "content": "De combien de façons peut-on ranger 3 livres différents sur une étagère ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : l'ordre des livres compte et chaque livre n'est posé qu'une fois : c'est une permutation. Étape 2 — Identifier : $n = 3$ et $p = 3$. Étape 3 — Écrire : $A_3^3 = 3! = 3 \\times 2 \\times 1$. Étape 4 — Calculer : $3 \\times 2 \\times 1 = 6$. La proposition 27 est $3^3$ : c'est le piège de la fiche (on poserait le même livre plusieurs fois).",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  },
+                  {
+                    "content": "3",
+                    "correct": false
+                  },
+                  {
+                    "content": "9",
+                    "correct": false
+                  },
+                  {
+                    "content": "27",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Combinaisons",
+          "remember": "Une **combinaison** de $p$ éléments d'un ensemble à $n$ éléments ($0 \\leq p \\leq n$) est une **partie** à $p$ éléments : l'ordre ne compte pas et les éléments sont distincts (tirage **simultané**). Leur nombre est $C_n^p = \\dfrac{A_n^p}{p!} = \\dfrac{n(n-1)\\cdots(n-p+1)}{p!} = \\dfrac{n!}{p!\\,(n-p)!}$. En effet, chaque groupe de $p$ éléments donne $p!$ arrangements (on le range dans tous les ordres possibles). Propriétés : $C_n^p = C_n^{n-p}$, $C_n^0 = C_n^n = 1$ et $C_n^1 = n$.",
+          "method": [
+            "Vérifier que l'ordre ne compte pas (on choisit un groupe) et que les éléments sont distincts.",
+            "Identifier $n$, le nombre d'éléments disponibles, et $p$, la taille du groupe.",
+            "Écrire $C_n^p = \\dfrac{A_n^p}{p!} = \\dfrac{n(n-1)\\cdots(n-p+1)}{p!}$.",
+            "Calculer en simplifiant avant de multiplier, en passant à $C_n^{n-p}$ si $p$ est grand."
+          ],
+          "example": {
+            "statement": "Une classe de 10 élèves doit choisir un comité de 3 élèves, sans fonction particulière. Combien de comités différents peut-on former ?",
+            "steps": [
+              "Vérifier : on choisit un groupe de 3 élèves sans fonction ; l'ordre ne compte pas, car (Aya, Yao, Koffi) et (Koffi, Aya, Yao) forment le même comité.",
+              "Identifier : $n = 10$ élèves disponibles et $p = 3$ élèves dans le groupe.",
+              "Écrire : $C_{10}^3 = \\dfrac{A_{10}^3}{3!} = \\dfrac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1}$.",
+              "Calculer : en simplifiant, $\\dfrac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1} = 10 \\times 3 \\times 4 = 120$ comités."
+            ]
+          },
+          "pitfall": "Ne pas utiliser $A_n^p$ quand l'ordre ne compte pas : chaque groupe serait compté plusieurs fois. Contre-exemple : le groupe $\\{$Aya, Yao, Koffi$\\}$ donne $3! = 6$ arrangements (Aya-Yao-Koffi, Aya-Koffi-Yao, …) mais un seul comité. Ainsi $A_{10}^3 = 720$ compte chaque comité 6 fois, d'où $\\dfrac{720}{6} = 120$. Question de contrôle : « si j'échange deux éléments, ai-je un autre résultat ? » Non : combinaison. Oui : arrangement.",
+          "figure": null,
+          "exercise": {
+            "title": "Comités, tirages et délégations",
+            "exercise_type": "fixation",
+            "figure": null,
+            "statement": "À l'école, on forme des groupes sans fonction particulière. Tu appliques la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "On choisit 2 délégués de classe, sans fonction particulière, parmi 20 candidats. Quelle expression donne le nombre de choix possibles ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Vérifier : on choisit un groupe de 2 délégués sans fonction : l'ordre ne compte pas. Étape 2 — Identifier : $n = 20$ candidats et $p = 2$. Étape 3 — Écrire : $C_{20}^2 = \\dfrac{A_{20}^2}{2!} = \\dfrac{20 \\times 19}{2}$. Étape 4 — Calculer : $\\dfrac{20 \\times 19}{2} = 190$ choix. $A_{20}^2$ compte l'ordre : chaque duo serait compté deux fois (piège de la fiche). $20^2$ est une $p$-liste, avec répétitions. $2^{20}$ n'a pas de rapport avec le choix d'un groupe.",
+                "answers": [
+                  {
+                    "content": "$C_{20}^2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$A_{20}^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$20^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2^{20}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $C_6^2$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $C_6^2$ compte des groupes : l'ordre ne compte pas. Étape 2 — Identifier : $n = 6$ et $p = 2$. Étape 3 — Écrire : $C_6^2 = \\dfrac{A_6^2}{2!} = \\dfrac{6 \\times 5}{2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{30}{2} = 15$. Répondre 30 donnerait $A_6^2$ : chaque groupe est compté deux fois.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $C_8^5$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $C_8^5$ compte des groupes de 5 éléments : l'ordre ne compte pas. Étape 2 — Identifier : $n = 8$ et $p = 5$. Étape 3 — Écrire : $C_8^5 = \\dfrac{8 \\times 7 \\times 6 \\times 5 \\times 4}{5!}$, avec 5 grand : on passe plutôt à $C_8^{8-5} = C_8^3$. Étape 4 — Calculer : $C_8^3 = \\dfrac{8 \\times 7 \\times 6}{3 \\times 2 \\times 1} = 8 \\times 7 = 56$. Choisir 5 éléments à garder revient à choisir les 3 à laisser.",
+                "answers": [
+                  {
+                    "content": "56",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un sac contient 12 boules numérotées. On en tire 3 en même temps. Combien de tirages différents peut-on obtenir ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : les boules sortent en même temps : l'ordre ne compte pas, et les boules sont distinctes (numérotées). Étape 2 — Identifier : $n = 12$ boules et $p = 3$. Étape 3 — Écrire : $C_{12}^3 = \\dfrac{12 \\times 11 \\times 10}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{12 \\times 11 \\times 10}{6} = 2 \\times 11 \\times 10 = 220$ tirages. Répondre 1320 donnerait $A_{12}^3$ : chaque tirage serait compté 6 fois (piège de la fiche).",
+                "answers": [
+                  {
+                    "content": "220",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Trouve l'entier $n \\geq 2$ tel que $C_n^2 = 45$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $C_n^2$ compte des groupes de 2 éléments parmi $n$. Étape 2 — Identifier : $p = 2$ et $n$ est l'inconnue, avec $n \\geq 2$. Étape 3 — Écrire : $C_n^2 = \\dfrac{n(n-1)}{2}$, donc $n(n-1) = 90$, soit $n^2 - n - 90 = 0$, soit $(n-10)(n+9) = 0$. Étape 4 — Calculer : $n = 10$ ou $n = -9$ ; on garde $n = 10$ car $n \\geq 2$. Contrôle : $C_{10}^2 = \\dfrac{10 \\times 9}{2} = 45$. Oublier de diviser par 2 donnerait n(n − 1) = 45, qui n'a pas de solution entière.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Affirmation : « Choisir 2 délégués sans fonction particulière parmi 5 candidats peut se faire de 5 × 4 = 20 façons ». Cette affirmation est-elle exacte ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : on choisit un groupe sans fonction : l'ordre ne compte pas. Étape 2 — Identifier : $n = 5$ et $p = 2$. Étape 3 — Écrire : $C_5^2 = \\dfrac{5 \\times 4}{2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{20}{2} = 10$ groupes, pas 20. Le nombre 20 compte (Aya, Yao) et (Yao, Aya) comme deux choix différents : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux égalités exactes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Vérifier : les égalités portent sur des nombres de groupes. Étape 2 — Identifier : $n = 7$ dans tous les cas. Étape 3 — Écrire : $C_7^2 = \\dfrac{7 \\times 6}{2} = 21$ et $C_7^5 = C_7^{7-5} = C_7^2 = 21$ : première égalité exacte. $C_7^1 = \\dfrac{7}{1} = 7$ : deuxième égalité exacte. Étape 4 — Calculer : $A_7^2 = 42 \\neq 21$ ; $C_7^0 = 1$ (un seul groupe vide) et non 0 ; $C_7^7 = 1$ (un seul groupe : tout l'ensemble) et non 7.",
+                "answers": [
+                  {
+                    "content": "$C_7^2 = C_7^5$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$C_7^1 = 7$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$C_7^2 = A_7^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$C_7^0 = 0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$C_7^7 = 7$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "L'école doit choisir 2 élèves parmi 9 pour porter le drapeau lors de la cérémonie, sans tâche différente pour les deux.",
+            "questions": [
+              {
+                "content": "Le nombre de choix est $C_9^2 = (9 \\times$ ___ $) \\div$ ___ $=$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : les deux porteurs ont la même tâche : l'ordre ne compte pas. Étape 2 — Identifier : $n = 9$ et $p = 2$. Étape 3 — Écrire : $C_9^2 = \\dfrac{A_9^2}{2!} = \\dfrac{9 \\times 8}{2}$ : les deux premières cases valent 8 et 2. Étape 4 — Calculer : $\\dfrac{72}{2} = 36$ : c'est la dernière case.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "36",
+                    "correct": true,
+                    "blank": 2
+                  }
+                ],
+                "hint": "Le numérateur est un produit de 2 facteurs, le dénominateur est 2 !."
+              },
+              {
+                "content": "Calcule $C_5^3$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Vérifier : $C_5^3$ compte des groupes de 3 parmi 5 : l'ordre ne compte pas. Étape 2 — Identifier : $n = 5$ et $p = 3$. Étape 3 — Écrire : on passe à $C_5^{5-3} = C_5^2 = \\dfrac{5 \\times 4}{2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{20}{2} = 10$.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "hint": "Passe à $C_5^2$ pour simplifier."
+              },
+              {
+                "content": "Affirmation : « $C_{10}^7 = C_{10}^3$ ». Cette affirmation est-elle exacte ?",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Vérifier : les deux nombres comptent des groupes : l'ordre ne compte pas. Étape 2 — Identifier : $n = 10$ avec $p = 7$ et $p = 3$. Étape 3 — Écrire : $C_{10}^7 = C_{10}^{10-7} = C_{10}^3$ : choisir 7 éléments à garder revient à choisir les 3 à laisser. Étape 4 — Calculer : on contrôle : $C_{10}^3 = \\dfrac{10 \\times 9 \\times 8}{6} = 120$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le comité du club d'environnement",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Il forme des comités. Dans cet exercice, tu combines les méthodes des fiches sur les combinaisons, les arrangements et les complémentaires.",
+          "questions": [
+            {
+              "content": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Le club forme un comité de 3 membres, sans fonction particulière. Quelle expression donne le nombre de comités possibles ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 3 membres sans fonction : l'ordre ne compte pas et les élèves sont distincts. Étape 2 — Identifier : $n = 12$ et $p = 3$. Étape 3 — Écrire : $C_{12}^3 = \\dfrac{A_{12}^3}{3!} = \\dfrac{12 \\times 11 \\times 10}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{1320}{6} = 220$ comités. Le nombre $1320 = A_{12}^3$ compte chaque comité 6 fois, car l'ordre compterait. $12^3$ serait une $p$-liste avec répétitions, impossible pour des membres distincts. $12 \\times 3$ n'a pas de sens ici.",
+              "answers": [
+                {
+                  "content": "$C_{12}^3 = 220$",
+                  "correct": true
+                },
+                {
+                  "content": "$A_{12}^3 = 1320$",
+                  "correct": false
+                },
+                {
+                  "content": "$12^3 = 1728$",
+                  "correct": false
+                },
+                {
+                  "content": "$12 \\times 3 = 36$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Combien de comités de 3 membres peut-on former avec 3 filles uniquement ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 3 filles : l'ordre ne compte pas. Étape 2 — Identifier : $n = 7$ filles et $p = 3$. Étape 3 — Écrire : $C_7^3 = \\dfrac{7 \\times 6 \\times 5}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{210}{6} = 35$ comités. Prendre les 12 élèves au lieu des 7 filles donnerait 220.",
+              "answers": [
+                {
+                  "content": "35",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Combien de comités de 3 membres comptent au moins un garçon ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des comités de 3 membres ($\\text{card}(E) = 220$) ; $A$ est l'ensemble des comités sans garçon, c'est-à-dire de 3 filles ($\\text{card}(A) = 35$). Étape 2 — Repérer : « au moins un garçon » est le contraire de « aucun garçon » : on cherche le complémentaire $\\overline{A}$. Étape 3 — Appliquer : $\\text{card}(\\overline{A}) = \\text{card}(E) - \\text{card}(A) = 220 - 35 = 185$. Étape 4 — Vérifier : 185 est compris entre 0 et 220. Compter directement les comités à 1, 2 et 3 garçons est possible mais plus long : $105 + 70 + 10 = 185$.",
+              "answers": [
+                {
+                  "content": "185",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Le club désigne un bureau de 3 membres : un président, un secrétaire et un trésorier, tous différents. Combien de bureaux différents peut-on former ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte (président, secrétaire et trésorier sont des postes différents) et un élève ne cumule pas deux postes : c'est un arrangement. Étape 2 — Identifier : $n = 12$ et $p = 3$. Étape 3 — Écrire : $A_{12}^3 = 12 \\times 11 \\times 10$ (3 facteurs). Étape 4 — Calculer : $12 \\times 11 \\times 10 = 1320$ bureaux, et $3 \\leq 12$. Calculer 220 oublierait les postes : le même groupe de 3 élèves peut former 6 bureaux différents.",
+              "answers": [
+                {
+                  "content": "1320",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Combien de comités de 3 membres comptent exactement 2 filles et 1 garçon ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : deux choix successifs : un groupe de 2 filles, puis un garçon ; ils sont indépendants. Étape 2 — Compter : $C_7^2 = \\dfrac{7 \\times 6}{2} = 21$ groupes de 2 filles ; $C_5^1 = 5$ choix de garçon. Étape 3 — Multiplier : $21 \\times 5 = 105$. Étape 4 — Contrôler : 105 comités, chacun compté une fois (sa composition est unique). Additionner 21 + 5 = 26 est le piège de la fiche sur le principe multiplicatif.",
+              "answers": [
+                {
+                  "content": "105",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Combien de comités de 3 membres comptent exactement 2 garçons (et donc 1 fille) ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : deux choix successifs : un groupe de 2 garçons, puis une fille ; ils sont indépendants. Étape 2 — Compter : $C_5^2 = \\dfrac{5 \\times 4}{2} = 10$ groupes de 2 garçons ; $C_7^1 = 7$ choix de fille. Étape 3 — Multiplier : $10 \\times 7 = 70$. Étape 4 — Contrôler : 70 comités. Contrôle : 35 (3 filles) + 105 (2 filles) + 70 (1 fille) + 10 (3 garçons) = 220, le total des comités.",
+              "answers": [
+                {
+                  "content": "70",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les codes de la salle informatique",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Le directeur étudie le nombre de codes possibles. Tu utilises le principe multiplicatif, les arrangements et le complémentaire.",
+          "questions": [
+            {
+              "content": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Combien de codes sont possibles, les chiffres pouvant se répéter ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : 4 choix successifs ; l'ordre compte et les répétitions sont permises. Étape 2 — Compter : 10 possibilités à chaque choix. Étape 3 — Multiplier : $10 \\times 10 \\times 10 \\times 10 = 10^4 = 10\\,000$. Étape 4 — Contrôler : les codes vont de 0000 à 9999 : 10 000 codes.",
+              "answers": [
+                {
+                  "content": "10000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Combien de codes ont leurs 4 chiffres tous différents ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte et les chiffres sont distincts : c'est un arrangement. Étape 2 — Identifier : $n = 10$ chiffres disponibles et $p = 4$ places. Étape 3 — Écrire : $A_{10}^4 = 10 \\times 9 \\times 8 \\times 7$ (4 facteurs). Étape 4 — Calculer : $10 \\times 9 \\times 8 \\times 7 = 5040$ codes, et $4 \\leq 10$. Écrire $10^4$ autoriserait les répétitions (piège de la fiche sur les arrangements).",
+              "answers": [
+                {
+                  "content": "5040",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Combien de codes ont au moins deux chiffres identiques ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des codes ($\\text{card}(E) = 10\\,000$) ; $A$ est l'ensemble des codes à 4 chiffres tous différents ($\\text{card}(A) = 5040$). Étape 2 — Repérer : « au moins deux chiffres identiques » est le contraire de « tous différents » : c'est $\\overline{A}$. Étape 3 — Appliquer : $\\text{card}(\\overline{A}) = 10\\,000 - 5040 = 4960$. Étape 4 — Vérifier : 4 960 est compris entre 0 et 10 000. Compter directement les codes avec 2, 3 ou 4 chiffres identiques serait long : le complémentaire est la bonne méthode.",
+              "answers": [
+                {
+                  "content": "4960",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Combien de codes commencent par le chiffre 7 ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : le premier chiffre est imposé (7) ; il reste 3 choix successifs, l'ordre compte, les répétitions sont permises. Étape 2 — Compter : 1 possibilité pour le premier chiffre, 10 pour chacun des trois suivants. Étape 3 — Multiplier : $1 \\times 10 \\times 10 \\times 10 = 1000$. Étape 4 — Contrôler : 1 000 codes, de 7000 à 7999. $10^4$ est le nombre total de codes, sans la contrainte. $7^4$ et $4 \\times 7$ n'ont pas de sens ici.",
+              "answers": [
+                {
+                  "content": "$10^3 = 1000$",
+                  "correct": true
+                },
+                {
+                  "content": "$10^4 = 10\\,000$",
+                  "correct": false
+                },
+                {
+                  "content": "$7^4 = 2401$",
+                  "correct": false
+                },
+                {
+                  "content": "$4 \\times 7 = 28$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Les chiffres pairs sont 0, 2, 4, 6 et 8. Le nombre de codes formés uniquement de chiffres pairs est ___ .",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Décomposer : 4 choix successifs ; l'ordre compte, les répétitions sont permises, mais chaque chiffre doit être pair. Étape 2 — Compter : 5 possibilités à chaque choix (0, 2, 4, 6, 8). Étape 3 — Multiplier : $5 \\times 5 \\times 5 \\times 5 = 5^4 = 625$. Étape 4 — Contrôler : 625 est un entier ; les codes vont de 0000 à 8888 avec des chiffres pairs. Écrire 5 × 4 = 20 additionne ou confond le nombre de choix avec le nombre de chiffres.",
+              "answers": [
+                {
+                  "content": "625",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Combien de codes ont 4 chiffres tous différents et un premier chiffre différent de 0 ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : 4 choix successifs : le premier chiffre est non nul, les autres sont différents des précédents. Étape 2 — Compter : 9 possibilités pour le premier (de 1 à 9) ; 9 pour le deuxième (les 10 chiffres sauf celui déjà pris, 0 est maintenant permis) ; 8 pour le troisième ; 7 pour le quatrième. Étape 3 — Multiplier : $9 \\times 9 \\times 8 \\times 7 = 81 \\times 56 = 4536$. Étape 4 — Contrôler : 4 536 est inférieur aux 5 040 codes de chiffres distincts : c'est cohérent, puisqu'on a retiré ceux qui commencent par 0 ($1 \\times 9 \\times 8 \\times 7 = 504$ ; $5040 - 504 = 4536$). Écrire 9 × 8 × 7 × 6 oublierait que le zéro redevient possible à partir du 2e chiffre.",
+              "answers": [
+                {
+                  "content": "4536",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les équipes de la journée sportive",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Une classe de 1ère compte 30 élèves : 18 filles et 12 garçons. Pour la journée sportive, le professeur forme des équipes et désigne des responsables. Tu justifies chaque calcul avec la méthode de la fiche concernée.",
+          "questions": [
+            {
+              "content": "Une classe de 1ère compte 30 élèves : 18 filles et 12 garçons. Le professeur forme une équipe de 4 élèves, sans rôle particulier. Combien d'équipes différentes peut-il former ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 4 élèves sans rôle : l'ordre ne compte pas, les élèves sont distincts. Étape 2 — Identifier : $n = 30$ et $p = 4$. Étape 3 — Écrire : $C_{30}^4 = \\dfrac{30 \\times 29 \\times 28 \\times 27}{4 \\times 3 \\times 2 \\times 1}$. Étape 4 — Calculer : on simplifie : $\\dfrac{30 \\times 29 \\times 28 \\times 27}{24} = 29 \\times 27 \\times 35 = 27405$, car $\\dfrac{30 \\times 28}{24} = 35$. Le produit $30 \\times 29 \\times 28 \\times 27 = 657\\,720$ est $A_{30}^4$ : il compte chaque équipe 24 fois.",
+              "answers": [
+                {
+                  "content": "27405",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une classe de 1ère compte 30 élèves : 18 filles et 12 garçons. Combien d'équipes de 4 élèves sont formées uniquement de filles ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 4 filles : l'ordre ne compte pas. Étape 2 — Identifier : $n = 18$ filles et $p = 4$. Étape 3 — Écrire : $C_{18}^4 = \\dfrac{18 \\times 17 \\times 16 \\times 15}{4 \\times 3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{18 \\times 17 \\times 16 \\times 15}{24} = 17 \\times 15 \\times 12 = 3060$, car $\\dfrac{18 \\times 16}{24} = 12$.",
+              "answers": [
+                {
+                  "content": "3060",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une classe de 1ère compte 30 élèves : 18 filles et 12 garçons. Combien d'équipes de 4 élèves comptent au moins un garçon ? (On rappelle qu'il y a 27 405 équipes de 4 élèves et 3 060 équipes de 4 filles.)",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des équipes de 4 élèves ($27\\,405$) ; $A$ celui des équipes sans garçon ($3060$). Étape 2 — Repérer : « au moins un garçon » est le contraire de « aucun garçon » : on cherche $\\overline{A}$. Étape 3 — Appliquer : $\\text{card}(\\overline{A}) = 27\\,405 - 3060 = 24\\,345$. Étape 4 — Vérifier : 24 345 est compris entre 0 et 27 405.",
+              "answers": [
+                {
+                  "content": "24345",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une classe de 1ère compte 30 élèves : 18 filles et 12 garçons. Combien d'équipes de 4 élèves comptent exactement 2 filles et 2 garçons ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : deux choix successifs : un groupe de 2 filles, puis un groupe de 2 garçons ; l'ordre ne compte pas à l'intérieur de chaque groupe. Étape 2 — Compter : $C_{18}^2 = \\dfrac{18 \\times 17}{2} = 153$ et $C_{12}^2 = \\dfrac{12 \\times 11}{2} = 66$. Étape 3 — Multiplier : $153 \\times 66 = 10\\,098$. Étape 4 — Contrôler : 10 098 est inférieur au total de 27 405 équipes : c'est cohérent. Additionner 153 + 66 = 219 est le piège du principe multiplicatif.",
+              "answers": [
+                {
+                  "content": "10098",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une classe de 1ère compte 30 élèves : 18 filles et 12 garçons. Le professeur désigne un bureau de 3 élèves : un président, qui est un garçon, puis un secrétaire et un trésorier, choisis parmi les 29 autres élèves et différents l'un de l'autre. Combien de bureaux différents peut-il désigner ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : trois choix successifs : le président, puis le secrétaire, puis le trésorier ; l'ordre compte et un élève ne cumule pas deux postes. Étape 2 — Compter : 12 possibilités pour le président (un garçon), 29 pour le secrétaire (les autres élèves), 28 pour le trésorier. Étape 3 — Multiplier : $12 \\times 29 \\times 28 = 12 \\times 812 = 9744$. Étape 4 — Contrôler : 9 744 est un entier ; chaque bureau est compté une fois. Le produit $29 \\times 28$ est $A_{29}^2$ : c'est l'arrangement des deux derniers postes.",
+              "answers": [
+                {
+                  "content": "9744",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Dans une autre classe de $n$ élèves, le professeur désigne un délégué et un adjoint, qui sont deux élèves différents. Il y a 870 choix possibles. Trouve $n$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : le délégué et l'adjoint ont des rôles différents : l'ordre compte, les élèves sont distincts. Étape 2 — Identifier : $p = 2$ postes et $n$ est l'inconnue. Étape 3 — Écrire : $A_n^2 = n(n-1) = 870$, donc $n^2 - n - 870 = 0$. Le discriminant est $\\Delta = 1 + 3480 = 3481 = 59^2$, d'où $n = \\dfrac{1 \\pm 59}{2}$. Étape 4 — Calculer : $n = 30$ ou $n = -29$ ; on garde $n = 30$. Contrôle : $30 \\times 29 = 870$. La solution négative est rejetée : un effectif est un entier positif.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un élève affirme : « Le nombre d'équipes de 4 élèves comptant au moins un garçon est $C_{12}^1 \\times C_{29}^3$ : on choisit un garçon, puis 3 autres élèves parmi les 29 restants. » Montre que cette affirmation est fausse et explique l'erreur. (On rappelle qu'il y a 27 405 équipes de 4 élèves en tout et que $C_{29}^3 = 3654$.)",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Calculer $12 \\times 3654 = 43\\,848$",
+                "Comparer à 27 405, le nombre total d'équipes, et conclure que le résultat est impossible",
+                "Expliquer qu'une équipe avec plusieurs garçons est comptée plusieurs fois"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Calculer : $C_{12}^1 \\times C_{29}^3 = 12 \\times 3654 = 43\\,848$. Étape 2 — Comparer : il n'y a que $27\\,405$ équipes de 4 élèves en tout, et $43\\,848 > 27\\,405$ : une partie ne peut pas dépasser le tout, donc l'affirmation est fausse. Étape 3 — Expliquer : une équipe qui contient 2 garçons est obtenue 2 fois (on peut « choisir d'abord » l'un ou l'autre), une équipe de 3 garçons 3 fois, etc. Elle est donc comptée plusieurs fois. La bonne méthode passe par le complémentaire : $27\\,405 - 3060 = 24\\,345$. Barème : 1 point pour le calcul de 43 848, 1 point pour la comparaison avec 27 405 et la conclusion, 1 point pour l'explication des doubles comptages.",
+              "answers": [],
+              "starter": "Le calcul donne… alors que le nombre total d'équipes est…"
+            }
+          ]
+        },
+        {
+          "title": "Le tirage de la kermesse",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "À la kermesse de l'école, un sac contient 10 jetons discernables (numérotés) : 4 rouges, 3 verts et 3 jaunes. Les élèves tirent des jetons. Tu dénombres les tirages possibles en justifiant chaque méthode.",
+          "questions": [
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire 3 jetons en même temps. Combien de tirages différents peut-on obtenir ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : les jetons sortent en même temps : l'ordre ne compte pas, les jetons sont distincts. Étape 2 — Identifier : $n = 10$ jetons et $p = 3$. Étape 3 — Écrire : $C_{10}^3 = \\dfrac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{720}{6} = 120$ tirages. Répondre 720 compterait chaque tirage 6 fois (piège de la fiche sur les combinaisons).",
+              "answers": [
+                {
+                  "content": "120",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire 3 jetons en même temps. Combien de tirages sont formés de 3 jetons de la même couleur ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : on cherche des groupes de 3 jetons : l'ordre ne compte pas. Trois jetons de la même couleur : ou rouges, ou verts, ou jaunes ; ces trois cas s'excluent (cas disjoints), donc on additionne. Étape 2 — Identifier : rouges : $n = 4$, $p = 3$ ; verts : $n = 3$, $p = 3$ ; jaunes : $n = 3$, $p = 3$. Étape 3 — Écrire : $C_4^3 + C_3^3 + C_3^3$, avec $C_4^3 = C_4^1 = 4$ et $C_3^3 = 1$. Étape 4 — Calculer : $4 + 1 + 1 = 6$ tirages. Multiplier les trois cas serait faux : on ne tire pas « rouges et verts et jaunes » à la fois, ces cas s'excluent.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire 3 jetons en même temps. Combien de tirages comptent un jeton de chaque couleur ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : trois choix successifs et indépendants : un rouge, un vert, un jaune. Étape 2 — Compter : 4 possibilités pour le rouge, 3 pour le vert, 3 pour le jaune. Étape 3 — Multiplier : $4 \\times 3 \\times 3 = 36$. Étape 4 — Contrôler : 36 tirages, chacun compté une fois (une couleur par jeton). Additionner 4 + 3 + 3 = 10 donnerait le nombre de jetons, pas de tirages.",
+              "answers": [
+                {
+                  "content": "36",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire 3 jetons en même temps. Combien de tirages comptent exactement 2 jetons rouges ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Décomposer : deux choix successifs : un groupe de 2 jetons rouges, puis 1 jeton non rouge. Étape 2 — Compter : $C_4^2 = \\dfrac{4 \\times 3}{2} = 6$ groupes de 2 rouges ; il y a $10 - 4 = 6$ jetons non rouges. Étape 3 — Multiplier : $6 \\times 6 = 36$. Étape 4 — Contrôler : 36 tirages, inférieur au total de 120. Choisir le 3e jeton parmi les 8 restants (rouge compris) compterait aussi des tirages à 3 rouges.",
+              "answers": [
+                {
+                  "content": "36",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire 3 jetons en même temps. Combien de tirages comptent au moins un jeton rouge ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Nommer : $E$ est l'ensemble des 120 tirages de 3 jetons ; $A$ celui des tirages sans jeton rouge, c'est-à-dire de 3 jetons pris parmi les 6 non rouges. Étape 2 — Repérer : « au moins un rouge » est le contraire de « aucun rouge » : c'est $\\overline{A}$. Étape 3 — Appliquer : $\\text{card}(A) = C_6^3 = \\dfrac{6 \\times 5 \\times 4}{6} = 20$, donc $\\text{card}(\\overline{A}) = 120 - 20 = 100$. Étape 4 — Vérifier : 100 est compris entre 0 et 120.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire successivement 3 jetons, en remettant chaque jeton dans le sac avant le tirage suivant, et on note la liste des jetons dans l'ordre. Combien de résultats sont possibles ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Décomposer : 3 choix successifs ; l'ordre compte et, avec remise, les répétitions sont permises : c'est une $p$-liste. Étape 2 — Compter : 10 possibilités à chaque tirage. Étape 3 — Multiplier : $10 \\times 10 \\times 10 = 10^3 = 1000$. Étape 4 — Contrôler : 1 000 listes, de la plus petite à la plus grande. $A_{10}^3 = 720$ est le nombre de listes sans remise. $C_{10}^3 = 120$ ignore l'ordre. $10 \\times 3$ n'a pas de sens ici.",
+              "answers": [
+                {
+                  "content": "$10^3 = 1000$",
+                  "correct": true
+                },
+                {
+                  "content": "$A_{10}^3 = 720$",
+                  "correct": false
+                },
+                {
+                  "content": "$C_{10}^3 = 120$",
+                  "correct": false
+                },
+                {
+                  "content": "$10 \\times 3 = 30$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire successivement 3 jetons, sans remettre les jetons tirés, et on note la liste dans l'ordre. Combien de résultats sont possibles ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Vérifier : l'ordre compte et un jeton tiré n'est pas remis : les éléments sont distincts. Étape 2 — Identifier : $n = 10$ et $p = 3$. Étape 3 — Écrire : $A_{10}^3 = 10 \\times 9 \\times 8$ (3 facteurs). Étape 4 — Calculer : $10 \\times 9 \\times 8 = 720$, et $3 \\leq 10$. On retrouve 720 = 6 × 120 : chaque tirage simultané de 3 jetons donne 3! = 6 listes.",
+              "answers": [
+                {
+                  "content": "720",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire 3 jetons en même temps. On range les tirages selon le nombre de jetons rouges obtenus. Calcule le nombre de tirages pour 0, 1, 2 puis 3 jetons rouges, et vérifie que leur somme est le nombre total de tirages.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Calculer les 4 cas : 0 rouge (20), 1 rouge (60), 2 rouges (36) et 3 rouges (4)",
+                "Utiliser des combinaisons et le principe multiplicatif, avec le calcul détaillé",
+                "Additionner les 4 résultats et retrouver 120",
+                "Justifier pourquoi on additionne les 4 cas (cas qui s'excluent)"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Décomposer : le nombre de jetons rouges est 0, 1, 2 ou 3 ; ces quatre cas s'excluent, donc on additionnera leurs nombres. Étape 2 — Compter : 0 rouge : 3 jetons parmi les 6 non rouges, $C_6^3 = 20$. 1 rouge : un rouge parmi 4 et 2 non rouges parmi 6, $C_4^1 \\times C_6^2 = 4 \\times 15 = 60$. 2 rouges : $C_4^2 \\times C_6^1 = 6 \\times 6 = 36$. 3 rouges : $C_4^3 = 4$. Étape 3 — Multiplier puis additionner : $20 + 60 + 36 + 4 = 120$. Étape 4 — Contrôler : on retrouve $C_{10}^3 = 120$, le nombre total de tirages. Barème : 2 points pour les quatre calculs (0,5 point chacun), 1 point pour l'emploi correct des combinaisons et du principe multiplicatif, 0,5 point pour la somme, 0,5 point pour la justification de l'addition.",
+              "answers": [],
+              "starter": "Il y a quatre cas : 0, 1, 2 ou 3 jeton(s) rouge(s). Pour 0 rouge…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
