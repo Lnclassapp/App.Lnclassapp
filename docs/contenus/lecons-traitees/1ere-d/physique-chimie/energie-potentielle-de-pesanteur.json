@@ -1,0 +1,1344 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Énergie potentielle de pesanteur",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Physique-Chimie",
+      "series_name": "D",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "cocotier-axe-oz",
+          "kind": "coordinate_plane",
+          "description": "Un cocotier vu de côté, à l'échelle 1 unité pour 1 m. Le sol est le segment horizontal à z = 0. Le tronc est le segment vertical qui monte jusqu'à 12 m. Une noix de coco N est au sommet, à 12 m. Un axe Oz, vecteur vertical dirigé vers le haut, part du sol à droite de l'arbre. L'origine de l'axe est au sol : l'énergie potentielle y est nulle.",
+          "params": {
+            "xmin": 0,
+            "xmax": 10,
+            "ymin": 0,
+            "ymax": 14,
+            "points": [
+              {
+                "id": "N",
+                "x": 2,
+                "y": 12
+              },
+              {
+                "id": "O",
+                "x": 6,
+                "y": 0
+              }
+            ],
+            "segments": [
+              {
+                "x1": 0,
+                "y1": 0,
+                "x2": 10,
+                "y2": 0
+              },
+              {
+                "x1": 2,
+                "y1": 0,
+                "x2": 2,
+                "y2": 12
+              }
+            ],
+            "vectors": [
+              {
+                "label": "z",
+                "dx": 0,
+                "dy": 13,
+                "ox": 6,
+                "oy": 0
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rampe-chantier",
+          "kind": "coordinate_plane",
+          "description": "Une rampe de chantier vue de côté, à l'échelle 1 unité pour 1 m. Le point A est en bas de la rampe, le point B en haut, le point C est sous B à la hauteur de A. La rampe AB mesure 5 m, la base AC mesure 4 m et la hauteur BC mesure 3 m. Le sommet B est donc 3 m plus haut que A.",
+          "params": {
+            "xmin": 0,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 5,
+            "points": [
+              {
+                "id": "A",
+                "x": 1,
+                "y": 1
+              },
+              {
+                "id": "B",
+                "x": 5,
+                "y": 4
+              },
+              {
+                "id": "C",
+                "x": 5,
+                "y": 1
+              }
+            ],
+            "segments": [
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 5,
+                "y2": 4
+              },
+              {
+                "x1": 1,
+                "y1": 1,
+                "x2": 5,
+                "y2": 1
+              },
+              {
+                "x1": 5,
+                "y1": 1,
+                "x2": 5,
+                "y2": 4
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Énergie potentielle de pesanteur d'un système solide-Terre",
+          "remember": "Un solide proche de la Terre et la Terre forment le **système solide-Terre**. Ce système possède une **énergie potentielle de pesanteur** $E_{pp}$, liée à l'altitude $z$ du centre d'inertie du solide. On oriente l'axe $Oz$ **vers le haut** et on place l'origine $O$ à l'**état de référence**, où l'on décide que $E_{pp} = 0$. Alors : $$E_{pp} = mgz$$ avec $E_{pp}$ en joules (J), $m$ en kilogrammes, $g$ en N/kg et $z$ en mètres. Au-dessus de l'origine ($z > 0$), $E_{pp}$ est positive ; en dessous ($z < 0$), elle est négative ; à l'origine, elle est nulle.",
+          "method": [
+            "Choisir l'axe $Oz$ vertical orienté vers le haut et l'origine, où $E_{pp} = 0$.",
+            "Lire l'altitude $z$ du centre d'inertie, en mètres et avec son signe.",
+            "Écrire la formule $E_{pp} = mgz$ avec $m$ en kg et $g$ en N/kg.",
+            "Calculer l'énergie en joules et interpréter son signe."
+          ],
+          "example": {
+            "statement": "Une noix de coco de masse $0{,}5$ kg est au sommet d'un cocotier, à 12 m du sol. On prend $g = 10$ N/kg. Calculer son énergie potentielle de pesanteur, le sol étant l'état de référence.",
+            "steps": [
+              "Choisir : l'axe $Oz$ est vertical vers le haut et l'origine est au sol, donc $E_{pp} = 0$ au sol.",
+              "Lire : le centre d'inertie de la noix est à $z = +12$ m.",
+              "Écrire : $E_{pp} = mgz$ avec $m = 0{,}5$ kg et $g = 10$ N/kg.",
+              "Calculer : $E_{pp} = 0{,}5 \\times 10 \\times 12 = 60$ J. Elle est positive car la noix est au-dessus de l'origine."
+            ]
+          },
+          "pitfall": "Ne mets jamais l'altitude en centimètres dans la formule. Contre-exemple : un sac de 2 kg est à 50 cm du sol. Avec $z = 50$, on trouverait $2 \\times 10 \\times 50 = 1000$ J, ce qui est faux. Avec $z = 0{,}5$ m, on trouve $2 \\times 10 \\times 0{,}5 = 10$ J. Convertis toujours $z$ en mètres, et garde son signe.",
+          "figure": "cocotier-axe-oz",
+          "exercise": {
+            "title": "Calculer une énergie potentielle de pesanteur",
+            "statement": "Dans cet exercice, tu calcules des énergies potentielles de pesanteur avec la méthode de la fiche. Tu prends g = 10 N/kg, l'axe Oz vers le haut et l'origine au niveau de référence indiqué.",
+            "exercise_type": "fixation",
+            "figure": "cocotier-axe-oz",
+            "questions": [
+              {
+                "content": "Dans le Système international, en quelle unité exprime-t-on l'énergie potentielle de pesanteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Écrire la formule : $E_{pp} = mgz$ avec $m$ en kg, $g$ en N/kg et $z$ en m. L'unité est donc N/kg × kg × m = N·m, c'est-à-dire le joule. Le newton est l'unité d'une force (le poids), le watt celle d'une puissance : ce ne sont pas des unités d'énergie.",
+                "answers": [
+                  {
+                    "content": "Le joule (J)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le newton (N)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le watt (W)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le kilogramme (kg)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une mangue de masse 0,4 kg est accrochée à 10 m au-dessus du sol. On prend g = 10 N/kg, l'axe Oz vers le haut et l'origine au sol. Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : Oz vers le haut, origine au sol. Étape 2 — Lire : $z = +10$ m. Étape 3 — Écrire : $E_{pp} = mgz$. Étape 4 — Calculer : $E_{pp} = 0{,}4 \\times 10 \\times 10 = 40$ J, positive car la mangue est au-dessus de l'origine.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un seau de 5 kg est descendu au fond d'un puits, à 4 m sous le niveau du sol. On prend g = 10 N/kg, l'axe Oz vers le haut et l'origine au niveau du sol. Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : Oz vers le haut, origine au niveau du sol. Étape 2 — Lire : le seau est sous l'origine, donc $z = -4$ m. Étape 3 — Écrire : $E_{pp} = mgz$. Étape 4 — Calculer : $E_{pp} = 5 \\times 10 \\times (-4) = -200$ J. Le résultat est négatif car le seau est en dessous de l'origine.",
+                "answers": [
+                  {
+                    "content": "-200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un pot de 3 kg est posé sur une étagère située à 150 cm du sol. On prend g = 10 N/kg, l'axe Oz vers le haut et l'origine au sol. Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : Oz vers le haut, origine au sol. Étape 2 — Lire : $z = 150$ cm $= 1{,}5$ m (conversion en mètres). Étape 3 — Écrire : $E_{pp} = mgz$. Étape 4 — Calculer : $E_{pp} = 3 \\times 10 \\times 1{,}5 = 45$ J. Avec $z = 150$ on trouverait 4500 J, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "45",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un solide posé sur le sol, pris comme origine de l'axe Oz, a une énergie potentielle de pesanteur nulle.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir : l'origine est au sol, là où $E_{pp} = 0$. Étape 2 — Lire : le solide est posé sur le sol, donc $z = 0$. Étape 3 — Écrire : $E_{pp} = mgz$. Étape 4 — Calculer : $E_{pp} = mg \\times 0 = 0$ J. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces affirmations sur $E_{pp} = mgz$ (axe Oz vers le haut, origine au sol), lesquelles sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Écrire : $E_{pp} = mgz$ est proportionnelle à $m$ : à altitude égale, doubler la masse double l'énergie. Étape 4 — Interpréter son signe : sous l'origine, $z < 0$, donc $E_{pp} < 0$. Elle se mesure en joules, pas en newtons, elle dépend de $z$, et elle est négative sous l'origine : elle n'est donc pas toujours positive.",
+                "answers": [
+                  {
+                    "content": "À altitude égale, l'énergie est deux fois plus grande si la masse est doublée.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un objet situé sous l'origine a une énergie potentielle négative.",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'énergie potentielle s'exprime en newtons.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'énergie potentielle ne dépend pas de l'altitude.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'énergie potentielle est toujours positive.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un sac de 2 kg est à 50 cm du sol. On prend g = 10 N/kg, l'axe Oz vers le haut et l'origine au sol. Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Lire l'altitude en mètres : $z = 50$ cm $= 0{,}5$ m. Étape 3 — Écrire : $E_{pp} = mgz$. Étape 4 — Calculer : $E_{pp} = 2 \\times 10 \\times 0{,}5 = 10$ J. Le piège : garder $z = 50$ donne 1000 J (centimètres non convertis) ; oublier $g$ donne 1 J.",
+                "answers": [
+                  {
+                    "content": "10 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "1000 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "1 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "100 J",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu as vu comment calculer une énergie potentielle de pesanteur. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Avec l'axe Oz vers le haut, un objet situé au-dessus de l'origine a une énergie potentielle de pesanteur ___ ; un objet situé au-dessous de l'origine a une énergie potentielle de pesanteur ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Choisir : l'origine est le niveau où $E_{pp} = 0$. Étape 4 — Interpréter le signe : au-dessus de l'origine, $z > 0$ donc $E_{pp} = mgz > 0$ ; en dessous, $z < 0$ et $E_{pp} < 0$.",
+                "answers": [
+                  {
+                    "content": "positive",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "négative",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "positive",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "négative",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le signe de $E_{pp}$ est celui de $z$."
+              },
+              {
+                "content": "Une caisse de 3 kg est à 4 m au-dessus de l'origine de l'axe Oz (vers le haut). On prend g = 10 N/kg. Quelle est son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : Oz vers le haut. Étape 2 — Lire : $z = +4$ m. Étape 3 — Écrire : $E_{pp} = mgz$. Étape 4 — Calculer : $E_{pp} = 3 \\times 10 \\times 4 = 120$ J.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ],
+                "hint": "Multiplie $m$, $g$ et $z$."
+              },
+              {
+                "content": "L'énergie potentielle de pesanteur $mgz$ s'exprime en newtons.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Écrire la formule avec $m$ en kg, $g$ en N/kg et $z$ en m : le produit s'exprime en joules. Le newton est l'unité d'une force, par exemple du poids $mg$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le poids $mg$ est en N, puis on multiplie par une longueur."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Choisir l'état de référence",
+          "remember": "L'**état de référence** est la position où l'on décide que $E_{pp} = 0$. On le choisit librement : le sol, le plancher d'un étage, le fond d'un puits… On place l'origine $O$ de l'axe $Oz$ (vers le haut) à ce niveau, et $z$ est l'altitude mesurée depuis ce niveau : $E_{pp} = mgz$. **Changer de référence change la valeur de $E_{pp}$** (et parfois son signe), mais **pas la différence** d'énergie potentielle entre deux positions. Le choix de la référence doit toujours être précisé.",
+          "method": [
+            "Repérer le niveau choisi comme état de référence et y placer l'origine $O$ de l'axe $Oz$.",
+            "Mesurer l'altitude de chaque position par rapport à cette origine, avec son signe.",
+            "Calculer l'énergie potentielle de chaque position avec $E_{pp} = mgz$.",
+            "Calculer la différence entre les deux positions et vérifier qu'elle ne dépend pas de la référence."
+          ],
+          "example": {
+            "statement": "Sur un chantier, un seau de 10 kg passe d'un point A, à 3 m du sol, à un point B, à 8 m du sol. On prend $g = 10$ N/kg. Calculer l'énergie potentielle en A et en B avec le sol, puis avec le niveau de A comme référence.",
+            "steps": [
+              "Repérer : première référence, le sol ($O$ au sol) ; seconde référence, le niveau de A ($O$ en A).",
+              "Mesurer : avec le sol, $z_A = 3$ m et $z_B = 8$ m ; avec A, $z_A = 0$ et $z_B = 5$ m.",
+              "Calculer : avec le sol, $E_{pp}(A) = 10 \\times 10 \\times 3 = 300$ J et $E_{pp}(B) = 800$ J ; avec A, $E_{pp}(A) = 0$ J et $E_{pp}(B) = 500$ J.",
+              "Calculer la différence : $800 - 300 = 500$ J avec le sol, $500 - 0 = 500$ J avec A. Les valeurs changent, la différence reste 500 J."
+            ]
+          },
+          "pitfall": "Ne mélange jamais deux références dans un même calcul. Contre-exemple : pour le seau de 10 kg, un élève calcule $E_{pp}(A) = 300$ J avec le sol, mais $E_{pp}(B) = 500$ J avec A comme référence. Il trouve $500 - 300 = 200$ J, alors que la bonne différence est 500 J. Choisis une seule référence, puis garde-la pour toutes les positions.",
+          "figure": null,
+          "exercise": {
+            "title": "Changer d'état de référence",
+            "statement": "Dans cet exercice, tu compares des énergies potentielles de pesanteur selon l'état de référence choisi. Tu prends g = 10 N/kg et l'axe Oz vers le haut, avec son origine au niveau de référence indiqué.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "L'état de référence de l'énergie potentielle de pesanteur peut être choisi librement par celui qui résout le problème.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'état de référence est le niveau où l'on décide $E_{pp} = 0$. Ce choix est libre (sol, étage, fond d'un puits) ; il faut seulement le préciser et le garder pour tous les calculs du problème. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une cabine d'ascenseur de 800 kg est au 3e étage, à 9 m au-dessus du rez-de-chaussée. On prend g = 10 N/kg, l'axe Oz vers le haut et le rez-de-chaussée comme référence. Quelle est l'énergie potentielle de la cabine ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : référence = le rez-de-chaussée, $O$ à ce niveau. Étape 2 — Mesurer : $z = +9$ m. Étape 3 — Calculer : $E_{pp} = mgz = 800 \\times 10 \\times 9 = 72000$ J.",
+                "answers": [
+                  {
+                    "content": "72000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La même cabine de 800 kg se trouve au rez-de-chaussée. On prend g = 10 N/kg, l'axe Oz vers le haut et, cette fois, le niveau du 3e étage (à 9 m du rez-de-chaussée) comme référence. Quelle est l'énergie potentielle de la cabine ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : la référence est le niveau du 3e étage, $O$ à ce niveau. Étape 2 — Mesurer : le rez-de-chaussée est 9 m sous l'origine, donc $z = -9$ m. Étape 3 — Calculer : $E_{pp} = 800 \\times 10 \\times (-9) = -72000$ J. Le signe négatif vient de la position sous l'origine.",
+                "answers": [
+                  {
+                    "content": "-72000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On change l'état de référence de l'énergie potentielle de pesanteur. Qu'est-ce qui ne change pas ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer : en changeant d'origine, toutes les altitudes $z$ changent de la même quantité, donc chaque $E_{pp}$ change. Étape 4 — Calculer la différence : $mg(z_B - z_A)$ ne change pas, car le décalage s'annule dans la soustraction. La valeur et le signe de $E_{pp}$ changent avec la référence, et l'origine est justement ce que l'on déplace.",
+                "answers": [
+                  {
+                    "content": "La différence d'énergie potentielle entre deux positions",
+                    "correct": true
+                  },
+                  {
+                    "content": "La valeur de l'énergie potentielle en chaque position",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le signe de l'énergie potentielle en chaque position",
+                    "correct": false
+                  },
+                  {
+                    "content": "La position de l'origine de l'axe Oz",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un seau de 5 kg passe d'un point A, à 2 m du sol, à un point B, à 10 m du sol. On prend g = 10 N/kg, l'axe Oz vers le haut et le sol comme référence. Quelle est la différence $E_{pp}(B) - E_{pp}(A)$ ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : référence = le sol. Étape 2 — Mesurer : $z_A = 2$ m et $z_B = 10$ m. Étape 3 — Calculer : $E_{pp}(A) = 5 \\times 10 \\times 2 = 100$ J et $E_{pp}(B) = 5 \\times 10 \\times 10 = 500$ J. Étape 4 — Calculer la différence : $500 - 100 = 400$ J.",
+                "answers": [
+                  {
+                    "content": "400",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Avec comme référence le niveau d'un balcon, un objet situé 2 m sous le balcon a une énergie potentielle de pesanteur ___ (positive, négative ou nulle).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : l'origine de l'axe $Oz$ est au niveau du balcon. Étape 2 — Mesurer : l'objet est 2 m sous l'origine, donc $z = -2$ m. Étape 3 — Calculer : $E_{pp} = mgz$ avec $z < 0$ donne un résultat négatif. La réponse est « négative ».",
+                "answers": [
+                  {
+                    "content": "négative",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un seau de 10 kg est en A, à 3 m du sol, puis en B, à 8 m du sol. On prend g = 10 N/kg et le sol comme référence unique. Quelle est la différence $E_{pp}(B) - E_{pp}(A)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : une seule référence, le sol. Étape 2 — Mesurer : $z_A = 3$ m et $z_B = 8$ m. Étape 3 — Calculer : $E_{pp}(A) = 300$ J et $E_{pp}(B) = 800$ J. Étape 4 — Calculer la différence : $800 - 300 = 500$ J. Le piège : 200 J vient d'un mélange de deux références ; 800 J et 300 J sont les énergies en B et en A, pas leur différence.",
+                "answers": [
+                  {
+                    "content": "500 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "200 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "800 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "300 J",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu as vu que la référence est libre et que seule la différence d'énergie potentielle reste la même. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Quand on choisit une autre référence, les valeurs de $E_{pp}$ changent mais ___ reste identique.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Calculer la différence : $mg(z_B - z_A)$ ne dépend pas de l'origine de l'axe, car le décalage des altitudes s'annule. Les valeurs et les signes de $E_{pp}$, eux, changent avec la référence.",
+                "answers": [
+                  {
+                    "content": "la différence d'énergie potentielle entre deux positions",
+                    "correct": true
+                  },
+                  {
+                    "content": "l'énergie potentielle en chaque position",
+                    "correct": false
+                  },
+                  {
+                    "content": "le signe de l'énergie potentielle",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à l'étape où l'on soustrait les deux énergies."
+              },
+              {
+                "content": "Une caisse de 4 kg est à 5 m du sol. On prend g = 10 N/kg et pour référence le niveau situé à 2 m au-dessus du sol. Quelle est l'énergie potentielle de la caisse ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : l'origine est à 2 m au-dessus du sol. Étape 2 — Mesurer : $z = 5 - 2 = 3$ m. Étape 3 — Calculer : $E_{pp} = 4 \\times 10 \\times 3 = 120$ J.",
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ],
+                "hint": "Mesure l'altitude depuis l'origine choisie, pas depuis le sol."
+              },
+              {
+                "content": "Changer l'état de référence modifie la différence d'énergie potentielle entre deux positions.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Calculer la différence : $mg(z_B - z_A)$ est la même quelle que soit la référence. Ce sont les valeurs de $E_{pp}$ prises une à une qui changent, pas leur différence.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Variation d'énergie potentielle et travail du poids",
+          "remember": "Quand le solide passe d'un point A (altitude $z_A$) à un point B (altitude $z_B$), l'axe $Oz$ étant vers le haut : $$\\Delta E_{pp} = E_{pp}(B) - E_{pp}(A) = mg(z_B - z_A).$$ Le travail du poids (leçon sur le travail d'une force) est $W_{AB}(\\vec P) = mg(z_A - z_B)$. Donc : $$\\Delta E_{pp} = -W_{AB}(\\vec P).$$ Quand le solide **descend**, le poids a un travail positif (moteur) et $E_{pp}$ **diminue**. Quand il **monte**, le travail du poids est négatif (résistant) et $E_{pp}$ **augmente**. $\\Delta E_{pp}$ ne dépend ni de la référence ni du chemin suivi.",
+          "method": [
+            "Repérer les altitudes $z_A$ (départ) et $z_B$ (arrivée) sur l'axe $Oz$ vers le haut.",
+            "Calculer la variation d'altitude $z_B - z_A$, avec son signe.",
+            "Calculer $\\Delta E_{pp} = mg(z_B - z_A)$ en joules.",
+            "Déduire le travail du poids $W_{AB}(\\vec P) = -\\Delta E_{pp}$ et conclure sur son signe."
+          ],
+          "example": {
+            "statement": "Dans une chute d'eau de 40 m de hauteur, 500 kg d'eau tombent du sommet A au pied B. On prend $g = 10$ N/kg. Calculer la variation d'énergie potentielle de pesanteur et le travail du poids.",
+            "steps": [
+              "Repérer : avec Oz vers le haut et l'origine au pied de la chute, $z_A = 40$ m et $z_B = 0$.",
+              "Calculer la variation d'altitude : $z_B - z_A = 0 - 40 = -40$ m.",
+              "Calculer : $\\Delta E_{pp} = 500 \\times 10 \\times (-40) = -200000$ J.",
+              "Déduire : $W_{AB}(\\vec P) = -\\Delta E_{pp} = +200000$ J. Le travail est positif (moteur) car l'eau descend."
+            ]
+          },
+          "pitfall": "Ne confonds pas les signes. Contre-exemple : un seau de 10 kg descend de 5 m. Le poids a un travail positif, $W = mg \\times 5 = 500$ J. Écrire $\\Delta E_{pp} = +500$ J serait faux : le seau est plus bas, son énergie potentielle diminue, donc $\\Delta E_{pp} = -500$ J. Retiens : $\\Delta E_{pp} = -W(\\vec P)$, et toujours « arrivée moins départ ».",
+          "figure": null,
+          "exercise": {
+            "title": "Variation d'énergie potentielle et travail du poids",
+            "statement": "Dans cet exercice, tu calcules des variations d'énergie potentielle de pesanteur et le travail du poids avec la méthode de la fiche. Tu prends g = 10 N/kg et l'axe Oz vers le haut.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une noix de coco de 0,5 kg tombe du sommet d'un cocotier, à 12 m du sol, jusqu'au sol. On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : avec l'origine au sol, $z_A = 12$ m et $z_B = 0$. Étape 2 — Calculer la variation d'altitude : $z_B - z_A = -12$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 0{,}5 \\times 10 \\times (-12) = -60$ J. La noix descend, donc son énergie potentielle diminue.",
+                "answers": [
+                  {
+                    "content": "-60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La même noix de coco (0,5 kg) tombe de 12 m jusqu'au sol. On prend g = 10 N/kg. Quel est le travail du poids de la noix pendant la chute ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $z_A = 12$ m et $z_B = 0$. Étape 3 — Calculer : $\\Delta E_{pp} = 0{,}5 \\times 10 \\times (-12) = -60$ J. Étape 4 — Déduire : $W_{AB}(\\vec P) = -\\Delta E_{pp} = +60$ J. On retrouve $mg(z_A - z_B) = 0{,}5 \\times 10 \\times 12 = 60$ J. Le travail est positif : le poids est moteur.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une cabine d'ascenseur de 600 kg monte du rez-de-chaussée à un point situé à 12 m de hauteur. On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : avec l'origine au rez-de-chaussée, $z_A = 0$ et $z_B = 12$ m. Étape 2 — Calculer la variation d'altitude : $z_B - z_A = +12$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 600 \\times 10 \\times 12 = 72000$ J. Elle est positive car la cabine monte.",
+                "answers": [
+                  {
+                    "content": "72000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La même cabine de 600 kg monte de 12 m. On prend g = 10 N/kg. Quel est le travail du poids de la cabine pendant la montée ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer la variation d'altitude : $z_B - z_A = +12$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 600 \\times 10 \\times 12 = 72000$ J. Étape 4 — Déduire : $W_{AB}(\\vec P) = -\\Delta E_{pp} = -72000$ J. Le travail est négatif : le poids est résistant quand la cabine monte.",
+                "answers": [
+                  {
+                    "content": "-72000",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quand un solide descend, son énergie potentielle de pesanteur augmente.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer la variation d'altitude : en descendant, $z_B - z_A < 0$. Étape 3 — Calculer : $\\Delta E_{pp} = mg(z_B - z_A) < 0$. L'énergie potentielle diminue, l'affirmation est fausse. Étape 4 — Le poids a alors un travail positif, $W = -\\Delta E_{pp} > 0$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles relations sont exactes pour un solide qui passe de A à B (axe Oz vers le haut) ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Calculer : $\\Delta E_{pp} = mg(z_B - z_A)$ est la définition de la variation (arrivée moins départ). Étape 4 — Déduire : comme $W_{AB}(\\vec P) = mg(z_A - z_B)$, on a $\\Delta E_{pp} = -W_{AB}(\\vec P)$. Les relations $\\Delta E_{pp} = W$ et $\\Delta E_{pp} = mg(z_A - z_B)$ ont le mauvais signe. Et $\\Delta E_{pp}$ ne dépend pas de la référence.",
+                "answers": [
+                  {
+                    "content": "$\\Delta E_{pp} = mg(z_B - z_A)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\Delta E_{pp} = -W_{AB}(\\vec P)$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$\\Delta E_{pp} = W_{AB}(\\vec P)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\Delta E_{pp} = mg(z_A - z_B)$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$\\Delta E_{pp}$ change quand on change l'état de référence",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation au signe de la variation d'énergie potentielle de pesanteur de l'objet.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Calculer la variation d'altitude, puis Étape 3 : une noix qui tombe a $z_B - z_A < 0$, donc $\\Delta E_{pp}$ est négative ; une cabine qui monte a $z_B - z_A > 0$, donc $\\Delta E_{pp}$ est positive ; un livre qui reste sur la table garde la même altitude, donc $\\Delta E_{pp}$ est nulle.",
+                "answers": [
+                  {
+                    "content": "Une noix de coco tombe d'un cocotier.",
+                    "match": "ΔEpp négative"
+                  },
+                  {
+                    "content": "Une cabine d'ascenseur monte.",
+                    "match": "ΔEpp positive"
+                  },
+                  {
+                    "content": "Un livre reste posé sur une table.",
+                    "match": "ΔEpp nulle"
+                  }
+                ]
+              },
+              {
+                "content": "Un seau de 10 kg descend de 5 m. On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer la variation d'altitude : $z_B - z_A = -5$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 10 \\times 10 \\times (-5) = -500$ J. Étape 4 — Déduire : $W = +500$ J, moteur. Le piège : +500 J est le travail du poids, pas la variation d'énergie potentielle ; -50 J oublie $g$.",
+                "answers": [
+                  {
+                    "content": "-500 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "+500 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "-50 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "0 J",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu as vu le lien entre la variation d'énergie potentielle et le travail du poids. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Un sac de ciment de 25 kg est hissé du sol jusqu'à 4 m de hauteur. On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation de son énergie potentielle de pesanteur ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : $z_A = 0$ et $z_B = 4$ m. Étape 2 — Calculer : $z_B - z_A = +4$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 25 \\times 10 \\times 4 = 1000$ J.",
+                "answers": [
+                  {
+                    "content": "1000",
+                    "correct": true
+                  }
+                ],
+                "hint": "Arrivée moins départ : $z_B - z_A$."
+              },
+              {
+                "content": "Quand un solide descend, le travail de son poids est positif.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer : en descendant, $z_B - z_A < 0$ donc $\\Delta E_{pp} < 0$. Étape 4 — Déduire : $W = -\\Delta E_{pp} > 0$. Le poids est moteur dans une descente.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quand l'altitude d'un solide diminue, le travail de son poids est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Calculer : l'altitude diminue, donc $z_B - z_A < 0$ et $\\Delta E_{pp} < 0$. Étape 4 — Déduire : $W = -\\Delta E_{pp}$ est positif.",
+                "answers": [
+                  {
+                    "content": "positif",
+                    "correct": true
+                  },
+                  {
+                    "content": "négatif",
+                    "correct": false
+                  },
+                  {
+                    "content": "toujours nul",
+                    "correct": false
+                  }
+                ],
+                "hint": "Utilise $W = -\\Delta E_{pp}$."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Variation d'altitude sur un plan incliné",
+          "remember": "Sur un plan incliné faisant un angle $\\alpha$ avec l'horizontale, un solide qui parcourt la distance $L$ le long de la ligne de plus grande pente change d'altitude de $$h = L\\sin\\alpha.$$ Seule la variation d'altitude compte pour l'énergie potentielle et pour le travail du poids : $\\Delta E_{pp} = \\pm mgh$ et $W(\\vec P) = \\mp mgh$ (signe du haut en montant, du bas en descendant). Le **chemin suivi ne change rien** : rampe, escalier ou ascenseur, le résultat est le même pour la même différence d'altitude. Valeurs utiles : $\\sin 30° = 0{,}5$.",
+          "method": [
+            "Schématiser le trajet et repérer le départ A et l'arrivée B sur l'axe $Oz$ vertical vers le haut.",
+            "Calculer la variation d'altitude, $h = L\\sin\\alpha$ : elle vaut $+h$ en montant et $-h$ en descendant.",
+            "Calculer la variation d'énergie potentielle $\\Delta E_{pp} = mg(z_B - z_A)$.",
+            "Déduire le travail du poids $W = -\\Delta E_{pp}$ et conclure : le chemin suivi ne change rien."
+          ],
+          "example": {
+            "statement": "Sur un chantier, une brouette chargée, de masse totale 50 kg, monte du bas A au haut B d'une rampe de 10 m inclinée de $30°$ sur l'horizontale. On prend $g = 10$ N/kg. Calculer $\\Delta E_{pp}$ et le travail du poids.",
+            "steps": [
+              "Schématiser : A est en bas, B en haut, la rampe mesure $L = 10$ m, et $Oz$ est vertical vers le haut.",
+              "Calculer la variation d'altitude : $h = L\\sin\\alpha = 10 \\times 0{,}5 = 5$ m ; la brouette monte, donc $z_B - z_A = +5$ m.",
+              "Calculer : $\\Delta E_{pp} = 50 \\times 10 \\times 5 = 2500$ J.",
+              "Déduire : $W(\\vec P) = -2500$ J (résistant). Avec un escalier de même dénivelé de 5 m, le résultat serait le même."
+            ]
+          },
+          "pitfall": "Ne remplace pas la hauteur $h$ par la longueur $L$ de la rampe. Contre-exemple : pour la brouette de 50 kg, un élève écrit $\\Delta E_{pp} = mgL = 50 \\times 10 \\times 10 = 5000$ J. Or seule l'altitude compte : $h = L\\sin 30° = 5$ m, donc $\\Delta E_{pp} = 2500$ J. Cherche toujours d'abord la variation d'altitude.",
+          "figure": "rampe-chantier",
+          "exercise": {
+            "title": "Plan incliné et variation d'altitude",
+            "statement": "Dans cet exercice, tu calcules des variations d'altitude, d'énergie potentielle et de travail du poids sur des plans inclinés avec la méthode de la fiche. Tu prends g = 10 N/kg, l'axe Oz vers le haut et sin 30° = 0,5.",
+            "exercise_type": "fixation",
+            "figure": "rampe-chantier",
+            "questions": [
+              {
+                "content": "Un camion de chantier monte une pente de 20 m de long, inclinée de 30° sur l'horizontale. De combien son altitude augmente-t-elle ?",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Schématiser : départ en bas, arrivée en haut, $L = 20$ m, $\\alpha = 30°$. Étape 2 — Calculer la variation d'altitude : $h = L\\sin\\alpha = 20 \\times 0{,}5 = 10$ m. Avec $L$ à la place de $h$ on trouverait 20 m, ce qui est faux.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de 40 kg est tirée de A à B sur une rampe de 5 m, dont le sommet B est 3 m plus haut que A. On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Schématiser : A en bas, B en haut, $Oz$ vers le haut. Étape 2 — Calculer la variation d'altitude : la caisse monte de $h = 3$ m (la longueur 5 m de la rampe ne sert pas ici). Étape 3 — Calculer : $\\Delta E_{pp} = 40 \\times 10 \\times 3 = 1200$ J.",
+                "answers": [
+                  {
+                    "content": "1200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La même caisse de 40 kg monte de A à B, 3 m plus haut. On prend g = 10 N/kg. Quel est le travail du poids de la caisse pendant la montée ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer la variation d'altitude : $z_B - z_A = +3$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 40 \\times 10 \\times 3 = 1200$ J. Étape 4 — Déduire : $W(\\vec P) = -\\Delta E_{pp} = -1200$ J. Le travail est négatif : le poids est résistant.",
+                "answers": [
+                  {
+                    "content": "-1200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La même caisse de 40 kg redescend de B à A, 3 m plus bas. On prend g = 10 N/kg. Quel est le travail du poids de la caisse pendant la descente ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 2 — Calculer la variation d'altitude : $z_A - z_B = -3$ m en descendant. Étape 3 — Calculer : $\\Delta E_{pp} = 40 \\times 10 \\times (-3) = -1200$ J. Étape 4 — Déduire : $W(\\vec P) = -\\Delta E_{pp} = +1200$ J. Le poids est moteur dans la descente.",
+                "answers": [
+                  {
+                    "content": "1200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La caisse de 40 kg monte de 3 m, d'abord par une rampe de 5 m, puis par un escalier de même dénivelé. Le travail de son poids est différent dans les deux cas.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer la variation d'altitude : dans les deux cas, elle vaut $+3$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 40 \\times 10 \\times 3 = 1200$ J. Étape 4 — Conclure : $W = -1200$ J dans les deux cas. Le chemin suivi ne change rien, l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une caisse de 40 kg monte une rampe de 10 m inclinée de 30° sur l'horizontale. On prend g = 10 N/kg et sin 30° = 0,5. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Schématiser : la caisse monte, $L = 10$ m, $\\alpha = 30°$. Étape 2 — Calculer : $h = 10 \\times 0{,}5 = 5$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 40 \\times 10 \\times 5 = 2000$ J. Le piège : 4000 J utilise $L = 10$ m au lieu de $h$ ; 200 J oublie $g$ ; -2000 J aurait le bon signe seulement pour une descente.",
+                "answers": [
+                  {
+                    "content": "2000 J",
+                    "correct": true
+                  },
+                  {
+                    "content": "4000 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "200 J",
+                    "correct": false
+                  },
+                  {
+                    "content": "-2000 J",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode pour trouver le travail du poids sur un plan incliné.",
+                "question_type": "ordering",
+                "explanation": "La méthode se déroule ainsi : Étape 1 — Schématiser le trajet et repérer A et B sur l'axe Oz. Étape 2 — Calculer la variation d'altitude $h = L\\sin\\alpha$. Étape 3 — Calculer $\\Delta E_{pp} = mg(z_B - z_A)$. Étape 4 — Déduire le travail du poids $W = -\\Delta E_{pp}$. On ne peut pas calculer $\\Delta E_{pp}$ avant d'avoir la variation d'altitude.",
+                "answers": [
+                  {
+                    "content": "Schématiser le trajet et repérer le départ A et l'arrivée B sur l'axe Oz."
+                  },
+                  {
+                    "content": "Calculer la variation d'altitude $h = L\\sin\\alpha$."
+                  },
+                  {
+                    "content": "Calculer la variation d'énergie potentielle $\\Delta E_{pp} = mg(z_B - z_A)$."
+                  },
+                  {
+                    "content": "Déduire le travail du poids $W = -\\Delta E_{pp}$."
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu as vu comment trouver la variation d'altitude sur un plan incliné. Vérifie-le sur de petites situations.",
+            "questions": [
+              {
+                "content": "Un sac de 10 kg est tiré sur 6 m le long d'une rampe inclinée de 30° sur l'horizontale, du bas vers le haut. On prend g = 10 N/kg et sin 30° = 0,5. Quelle est la variation de son énergie potentielle ?",
+                "question_type": "numeric",
+                "unit": "J",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Schématiser : le sac monte, $L = 6$ m. Étape 2 — Calculer : $h = 6 \\times 0{,}5 = 3$ m. Étape 3 — Calculer : $\\Delta E_{pp} = 10 \\times 10 \\times 3 = 300$ J.",
+                "answers": [
+                  {
+                    "content": "300",
+                    "correct": true
+                  }
+                ],
+                "hint": "Cherche d'abord la hauteur $h = L\\sin\\alpha$."
+              },
+              {
+                "content": "Un solide descend de 4 m le long d'une pente inclinée de 30° sur l'horizontale. Son altitude a diminué de 4 m.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer la variation d'altitude : $h = L\\sin\\alpha = 4 \\times 0{,}5 = 2$ m. Son altitude a diminué de 2 m, pas de 4 m : 4 m est la longueur parcourue sur la pente.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un solide monte de 2 m d'altitude, d'abord par une pente, puis par un escalier. Le travail de son poids est :",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : $W = -mg(z_B - z_A)$ ne dépend que de la variation d'altitude (2 m dans les deux cas), pas du chemin suivi.",
+                "answers": [
+                  {
+                    "content": "le même dans les deux cas",
+                    "correct": true
+                  },
+                  {
+                    "content": "plus grand sur la pente",
+                    "correct": false
+                  },
+                  {
+                    "content": "plus grand par l'escalier",
+                    "correct": false
+                  }
+                ],
+                "hint": "Seule la différence d'altitude compte."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le cocotier du village",
+          "exercise_type": "fixation",
+          "figure": "cocotier-axe-oz",
+          "statement": "Dans un village de la côte, une noix de coco de masse 0,5 kg est au sommet d'un cocotier, à 12 m du sol. Elle tombe dans un trou de 2 m de profondeur creusé au pied de l'arbre. Tu prends g = 10 N/kg et l'axe Oz vers le haut.",
+          "questions": [
+            {
+              "content": "La noix de coco de 0,5 kg est au sommet du cocotier, à 12 m du sol. On prend g = 10 N/kg, l'axe Oz vers le haut et le sol comme référence. Quelle est son énergie potentielle de pesanteur ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Choisir l'axe Oz vers le haut et l'origine au sol, où $E_{pp} = 0$. 2) Lire l'altitude : $z = +12$ m. 3) Écrire $E_{pp} = mgz$. 4) Calculer : $E_{pp} = 0{,}5 \\times 10 \\times 12 = 60$ J, positive car la noix est au-dessus de l'origine.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La noix de coco de 0,5 kg se trouve au fond d'un trou, à 2 m sous le niveau du sol. On prend g = 10 N/kg, l'axe Oz vers le haut et le sol comme référence. Quelle est son énergie potentielle de pesanteur ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Origine au sol. 2) La noix est sous l'origine : $z = -2$ m. 3) $E_{pp} = mgz$. 4) $E_{pp} = 0{,}5 \\times 10 \\times (-2) = -10$ J. Le signe négatif traduit une position en dessous de l'état de référence.",
+              "answers": [
+                {
+                  "content": "-10",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La noix de coco de 0,5 kg tombe du sommet du cocotier (à 12 m au-dessus du sol) jusqu'au fond d'un trou (à 2 m sous le sol). On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer $z_A = +12$ m (départ) et $z_B = -2$ m (arrivée). 2) Variation d'altitude : $z_B - z_A = -2 - 12 = -14$ m. 3) $\\Delta E_{pp} = mg(z_B - z_A) = 0{,}5 \\times 10 \\times (-14) = -70$ J. On retrouve aussi $-10 - 60 = -70$ J avec les deux énergies du problème.",
+              "answers": [
+                {
+                  "content": "-70",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La noix de coco de 0,5 kg tombe de 12 m au-dessus du sol jusqu'à 2 m sous le sol. On prend g = 10 N/kg. Quel est le travail de son poids pendant cette chute ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. On utilise $W_{AB}(\\vec P) = -\\Delta E_{pp}$. Avec $\\Delta E_{pp} = -70$ J, on obtient $W = +70$ J. Contrôle avec la leçon sur le travail : $W = mg(z_A - z_B) = 0{,}5 \\times 10 \\times 14 = 70$ J. Le travail est positif car la noix descend : le poids est moteur.",
+              "answers": [
+                {
+                  "content": "70",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "On prend maintenant le sommet du cocotier comme état de référence (axe Oz vers le haut, origine au sommet). Quelle est alors l'énergie potentielle de la noix de 0,5 kg quand elle est encore au sommet ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. 1) L'origine est au sommet, où l'on décide $E_{pp} = 0$. 2) La noix est à l'origine : $z = 0$. 3) $E_{pp} = mg \\times 0 = 0$ J. Les 60 J étaient la valeur avec le sol comme référence ; -60 J serait l'énergie de la noix au niveau du sol avec cette nouvelle référence ($z = -12$ m), pas au sommet ; 120 J ne correspond à aucune position.",
+              "answers": [
+                {
+                  "content": "0 J",
+                  "correct": true
+                },
+                {
+                  "content": "60 J",
+                  "correct": false
+                },
+                {
+                  "content": "-60 J",
+                  "correct": false
+                },
+                {
+                  "content": "120 J",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec le sommet du cocotier comme référence, la variation d'énergie potentielle de la noix entre le sommet et le fond du trou n'est plus égale à -70 J.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Avec l'origine au sommet : $z_A = 0$ et $z_B = -14$ m, donc $\\Delta E_{pp} = 0{,}5 \\times 10 \\times (-14) = -70$ J. La variation est la même qu'avec le sol comme référence : changer d'état de référence modifie les valeurs de $E_{pp}$, pas leur différence. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'ascenseur d'un immeuble du Plateau",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Dans un immeuble du Plateau, à Abidjan, une cabine d'ascenseur chargée a une masse de 800 kg. Les étages sont séparés de 3 m. Le rez-de-chaussée est à l'altitude 0. Tu prends g = 10 N/kg et l'axe Oz vers le haut.",
+          "questions": [
+            {
+              "content": "Une cabine de 800 kg est au 4e étage, à 12 m au-dessus du rez-de-chaussée. On prend g = 10 N/kg, l'axe Oz vers le haut et le rez-de-chaussée comme référence. Quelle est son énergie potentielle de pesanteur ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Origine au rez-de-chaussée. 2) $z = +12$ m. 3) $E_{pp} = mgz$. 4) $E_{pp} = 800 \\times 10 \\times 12 = 96000$ J.",
+              "answers": [
+                {
+                  "content": "96000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La cabine de 800 kg descend du 4e étage (12 m) au 1er étage (3 m). On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer $z_A = 12$ m (départ) et $z_B = 3$ m (arrivée). 2) Variation d'altitude : $z_B - z_A = -9$ m. 3) $\\Delta E_{pp} = 800 \\times 10 \\times (-9) = -72000$ J. L'énergie potentielle diminue car la cabine descend.",
+              "answers": [
+                {
+                  "content": "-72000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La cabine de 800 kg descend du 4e étage au 1er étage (9 m plus bas). On prend g = 10 N/kg. Quel est le travail de son poids ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. On utilise $W_{AB}(\\vec P) = -\\Delta E_{pp}$ avec $\\Delta E_{pp} = -72000$ J, donc $W = +72000$ J. Contrôle : $W = mg(z_A - z_B) = 800 \\times 10 \\times 9 = 72000$ J. Le travail est positif : le poids est moteur dans la descente.",
+              "answers": [
+                {
+                  "content": "72000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La cabine de 800 kg est au rez-de-chaussée. On prend g = 10 N/kg, l'axe Oz vers le haut et, cette fois, le niveau du 4e étage (12 m au-dessus du rez-de-chaussée) comme référence. Quelle est son énergie potentielle de pesanteur ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) L'origine est au niveau du 4e étage. 2) Le rez-de-chaussée est 12 m sous l'origine : $z = -12$ m. 3) $E_{pp} = mgz$. 4) $E_{pp} = 800 \\times 10 \\times (-12) = -96000$ J.",
+              "answers": [
+                {
+                  "content": "-96000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque trajet de la cabine au signe du travail de son poids.",
+              "question_type": "matching",
+              "explanation": "Méthode. Le travail du poids vaut $W = -\\Delta E_{pp} = mg(z_A - z_B)$. Du rez-de-chaussée au 4e étage, l'altitude augmente : $W < 0$. Du 4e étage au 2e étage, elle diminue : $W > 0$. Si la cabine reste au 3e étage, la variation d'altitude est nulle : $W = 0$.",
+              "answers": [
+                {
+                  "content": "La cabine monte du rez-de-chaussée au 4e étage.",
+                  "match": "Travail du poids négatif"
+                },
+                {
+                  "content": "La cabine descend du 4e étage au 2e étage.",
+                  "match": "Travail du poids positif"
+                },
+                {
+                  "content": "La cabine reste au 3e étage.",
+                  "match": "Travail du poids nul"
+                }
+              ]
+            },
+            {
+              "content": "Le travail du poids de la cabine entre deux étages dépend de l'état de référence choisi pour l'énergie potentielle.",
+              "question_type": "true_false",
+              "explanation": "Méthode. $W_{AB}(\\vec P) = mg(z_A - z_B)$ ne dépend que de la différence d'altitude entre les deux étages. Changer l'état de référence décale toutes les altitudes de la même quantité, ce qui s'annule dans la différence. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une rampe sur un chantier",
+          "exercise_type": "evaluation",
+          "figure": "rampe-chantier",
+          "statement": "Sur un chantier d'Abidjan, un ouvrier fait monter un chariot de masse 100 kg, parti du repos, du point A au point B d'une rampe. La rampe AB mesure 5 m et son sommet B est 3 m plus haut que A. L'ouvrier exerce une force constante de 700 N, parallèle à la rampe et dirigée vers le haut. Les frottements sont négligés. Tu prends g = 10 N/kg et l'axe Oz vers le haut.",
+          "questions": [
+            {
+              "content": "Un chariot de 100 kg monte de A à B, le sommet B étant 3 m plus haut que A. On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle de pesanteur ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Repérer $A$ en bas et $B$ à 3 m plus haut sur l'axe Oz vers le haut. 2) Variation d'altitude : $z_B - z_A = +3$ m (la longueur de la rampe, 5 m, n'entre pas dans ce calcul). 3) $\\Delta E_{pp} = mg(z_B - z_A) = 100 \\times 10 \\times 3 = 3000$ J.",
+              "answers": [
+                {
+                  "content": "3000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot de 100 kg monte de A à B, 3 m plus haut. On prend g = 10 N/kg. Quel est le travail de son poids ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. On utilise $W_{AB}(\\vec P) = -\\Delta E_{pp}$. Avec $\\Delta E_{pp} = +3000$ J, on obtient $W = -3000$ J. Contrôle : $W = mg(z_A - z_B) = 100 \\times 10 \\times (-3) = -3000$ J. Le travail est négatif : le poids s'oppose à la montée.",
+              "answers": [
+                {
+                  "content": "-3000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'ouvrier exerce sur le chariot une force constante de 700 N, parallèle à la rampe et dirigée vers le haut. Le chariot parcourt la rampe AB de 5 m. Quel est le travail de cette force ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Données : $F = 700$ N, $AB = 5$ m, angle entre la force et le déplacement : $\\alpha = 0°$. 2) Formule : $W(\\vec F) = F \\times AB \\times \\cos\\alpha$. 3) Calcul : $W = 700 \\times 5 \\times 1 = 3500$ J. Le travail est positif : la force est motrice.",
+              "answers": [
+                {
+                  "content": "3500",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les frottements étant négligés, la réaction normale de la rampe, perpendiculaire au déplacement, a un travail nul.",
+              "question_type": "true_false",
+              "explanation": "Méthode. Pour une force perpendiculaire au déplacement, l'angle vaut $90°$ et $\\cos 90° = 0$. Donc $W(\\vec R) = R \\times AB \\times 0 = 0$. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le chariot de 100 kg part du repos en A. Il est soumis à la force de 700 N (travail 3500 J), à son poids (travail -3000 J) et à la réaction normale (travail nul). Quelle est son énergie cinétique en B ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Système : le chariot, dans le référentiel du chantier. 2) Théorème de l'énergie cinétique : $\\Delta E_c = \\sum W$. 3) Calcul : $E_c(B) - E_c(A) = 3500 + (-3000) + 0 = 500$ J. 4) Départ au repos : $E_c(A) = 0$, donc $E_c(B) = 500$ J.",
+              "answers": [
+                {
+                  "content": "500",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le chariot de 100 kg monte maintenant de 3 m par un escalier de chantier au lieu de la rampe. Que vaut le travail de son poids ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode. Le travail du poids ne dépend que de la variation d'altitude : ici $+3$ m, donc $W = -mg \\times 3 = -3000$ J, comme sur la rampe. Le chemin suivi ne change rien. Le piège : -5000 J viendrait de la longueur 5 m de la rampe prise à la place de l'altitude.",
+              "answers": [
+                {
+                  "content": "-3000 J, comme sur la rampe",
+                  "correct": true
+                },
+                {
+                  "content": "-1500 J",
+                  "correct": false
+                },
+                {
+                  "content": "-5000 J",
+                  "correct": false
+                },
+                {
+                  "content": "0 J",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une chute d'eau dans l'ouest du pays",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Dans l'ouest du pays, une chute d'eau a une hauteur de 20 m. À chaque seconde, une masse de 500 kg d'eau tombe du sommet A au pied B de la chute. Tu prends g = 10 N/kg et l'axe Oz vers le haut.",
+          "questions": [
+            {
+              "content": "Une masse de 500 kg d'eau est au sommet d'une chute de 20 m. On prend g = 10 N/kg, l'axe Oz vers le haut et le pied de la chute comme référence. Quelle est son énergie potentielle de pesanteur ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Origine au pied de la chute. 2) Altitude du sommet : $z = +20$ m. 3) $E_{pp} = mgz$. 4) $E_{pp} = 500 \\times 10 \\times 20 = 100000$ J.",
+              "answers": [
+                {
+                  "content": "100000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une masse de 500 kg d'eau tombe du sommet au pied d'une chute de 20 m. On prend g = 10 N/kg et l'axe Oz vers le haut. Quelle est la variation $\\Delta E_{pp}$ de son énergie potentielle ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) $z_A = 20$ m, $z_B = 0$. 2) $z_B - z_A = -20$ m. 3) $\\Delta E_{pp} = 500 \\times 10 \\times (-20) = -100000$ J. L'énergie potentielle diminue car l'eau descend.",
+              "answers": [
+                {
+                  "content": "-100000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une masse de 500 kg d'eau tombe de 20 m. On prend g = 10 N/kg. Quel est le travail de son poids ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. $W_{AB}(\\vec P) = -\\Delta E_{pp} = +100000$ J. Contrôle : $W = mg(z_A - z_B) = 500 \\times 10 \\times 20 = 100000$ J. Le travail est positif : le poids est moteur.",
+              "answers": [
+                {
+                  "content": "100000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À chaque seconde, 500 kg d'eau tombent du sommet au pied de la chute, et le poids de cette eau a un travail de 100000 J. Quelle est la puissance moyenne du poids de l'eau qui tombe ?",
+              "question_type": "numeric",
+              "unit": "W",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) Données : $W = 100000$ J et durée $\\Delta t = 1$ s (ce travail est fourni à chaque seconde). 2) Formule de la puissance moyenne : $P = \\dfrac{W}{\\Delta t}$. 3) Calcul : $P = \\dfrac{100000}{1} = 100000$ W, soit 100 kW.",
+              "answers": [
+                {
+                  "content": "100000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une masse de 500 kg d'eau est au sommet d'une chute de 20 m. On prend g = 10 N/kg, l'axe Oz vers le haut et, cette fois, une plateforme située à mi-hauteur (10 m au-dessus du pied) comme référence. Quelle est l'énergie potentielle de pesanteur de l'eau au sommet ?",
+              "question_type": "numeric",
+              "unit": "J",
+              "tolerance": 0,
+              "explanation": "Méthode. 1) L'origine est à la plateforme. 2) Le sommet est à $20 - 10 = 10$ m au-dessus de l'origine : $z = +10$ m. 3) $E_{pp} = mgz$. 4) $E_{pp} = 500 \\times 10 \\times 10 = 50000$ J. La valeur change avec la référence ; la variation sur toute la chute, elle, reste -100000 J.",
+              "answers": [
+                {
+                  "content": "50000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont vraies pour l'eau qui tombe du sommet au pied de la chute ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode. L'eau descend, donc $z_B - z_A < 0$ et $\\Delta E_{pp} = mg(z_B - z_A) < 0$ : l'énergie potentielle diminue. Comme $W = -\\Delta E_{pp}$, le travail du poids est positif (moteur). La variation $\\Delta E_{pp}$ ne dépend pas de l'état de référence. Les affirmations fausses : $\\Delta E_{pp} = W$ a le mauvais signe, et l'énergie du pied de la chute n'est nulle que si l'on prend le pied comme référence.",
+              "answers": [
+                {
+                  "content": "La variation d'énergie potentielle de l'eau est négative.",
+                  "correct": true
+                },
+                {
+                  "content": "Le travail du poids de l'eau est positif.",
+                  "correct": true
+                },
+                {
+                  "content": "La variation d'énergie potentielle ne dépend pas de l'état de référence.",
+                  "correct": true
+                },
+                {
+                  "content": "La variation d'énergie potentielle est égale au travail du poids.",
+                  "correct": false
+                },
+                {
+                  "content": "L'énergie potentielle de l'eau au pied de la chute est nulle quelle que soit la référence.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un élève affirme : « L'eau perd de l'énergie potentielle en tombant, donc le travail de son poids est négatif. » Corrige son raisonnement en utilisant la relation entre $\\Delta E_{pp}$ et le travail du poids.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "La variation d'énergie potentielle est négative, mais…",
+              "criteria": [
+                "Dit que l'énergie potentielle diminue car l'altitude diminue",
+                "Écrit la relation $W = -\\Delta E_{pp}$",
+                "Conclut que le travail du poids est positif (poids moteur)",
+                "Appuie la conclusion sur un calcul ou sur le signe de la variation d'altitude"
+              ],
+              "explanation": "Corrigé modèle : l'élève a raison de dire que l'énergie potentielle diminue : $z_B - z_A < 0$, donc $\\Delta E_{pp} = mg(z_B - z_A) < 0$. Mais le travail du poids vaut $W_{AB}(\\vec P) = -\\Delta E_{pp}$, donc il est positif : ici $W = +100000$ J pour 500 kg d'eau tombant de 20 m. Le poids est moteur quand l'eau descend. Barème (3 points) : 1 point pour la diminution de $E_{pp}$ justifiée par $z_B - z_A < 0$ ; 1 point pour la relation $W = -\\Delta E_{pp}$ ; 1 point pour la conclusion « travail positif, poids moteur » appuyée sur un calcul ou sur le signe de $z_B - z_A$.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
