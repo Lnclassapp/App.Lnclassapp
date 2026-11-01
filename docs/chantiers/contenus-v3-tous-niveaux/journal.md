@@ -15,6 +15,7 @@
 | 2026-10-31 | T6 | Tle (A1, A2, C, D) | Philosophie | 10 (38 fichiers) | #426 |
 | 2026-10-31 | T7 | Tle A1, A2, C, D | Français | 7 (26 fichiers) | #427 |
 | 2026-10-31 | T8 | Tle (toutes séries, sans série) | Histoire-Géographie | 10 | #428 |
+| 2026-11-01 | P5 | 1ère (C, D) | SVT | 16 distinctes (20 fichiers : 4 communes déclinées en D) | à renseigner |
 
 ## À faire valider par un enseignant
 
@@ -22,6 +23,22 @@ Chaque vague y ajoute ses points (faits, valeurs, vocabulaire, barèmes) avant d
 
 | Vague | Leçon | Point à valider |
 |---|---|---|
+| P5 | 1ère C1 Rôle et structure des gonades | Niveau de détail (cellules de Sertoli, stades du follicule, corps jaune, œstrogènes/progestérone) ; « glandes annexes » volontairement vague ; spermatogenèse et ovogenèse hors leçon ; règle simplifiée « corps jaune = ovulation déjà eue ». |
+| P5 | 1ère D1 Fonctions des gonades | Caractères sexuels secondaires cités et hiérarchie primaire/secondaire (plumage du coq retiré : non dépendant de la testostérone) ; programme jusqu'aux cellules de Leydig et au corps jaune ; follicule mûr sécrète aussi des œstrogènes ; ligature des canaux déférents non abordée. |
+| P5 | 1ère C2/D2 Division méiotique | Crossing-over, brassage en 2^n, allèle, chromatide au programme de 1ère ; haploïdes dès la fin de la division I ; nombres de chromosomes ail, maïs, drosophile, pois, oignon ; 4e problème un peu facile. |
+| P5 | 1ère C3 Gamétogénèse chez les mammifères | Caryotypes mouton 2n = 54 et lapin 2n = 44 ; blocages de l'ovogenèse (prophase I, métaphase II) ; acrosome ; lapine/brebis ou femme comme support ; second globule polaire ; « un ovocyte I reprend la méiose à chaque cycle ». |
+| P5 | 1ère D3 Gamétogénèse | Acrosome (rôle non décrit) ; globule polaire et blocages au programme de 1ère D ; nombres de chromosomes souris 40, rat 42, chat 38, porc 38, cobaye 64, bovins et caprins 60 ; « follicule mûr » ; simplification « un ovocyte I reprend la méiose à chaque cycle » (truie). |
+| P5 | 1ère C4 Fécondation chez les mammifères | Détermination du sexe XX/XY non traitée ; pronucléi, caryogamie, réaction acrosomique, granules corticaux, polyspermie au programme ; noyau unique à 46 chromosomes après la caryogamie (les enveloppes disparaissent chez les mammifères) ; « trois pronucléi = polyspermie » ; question des 16 œufs (2n = 4 fictif). |
+| P5 | 1ère C5/D5 Synthèse des protéines | Place de la leçon ; ARNt, anticodon, universalité du code au programme de 1ère ; extrait du code génétique ; sens de lecture du brin transcrit ; expérience à l'uridine fictive. |
+| P5 | 1ère C6 Transmission d'un caractère héréditaire | Croisement-test au programme de 1ère C ; dihybridisme, hérédité liée au sexe, codominance exclus (Tle ?) ; notations R//r et [R] ; modèles cacao, igname, bovins simplifiés. |
+| P5 | 1ère D4 Monohybridisme | Croisement-test et 2/3 d'hétérozygotes parmi les dominants au programme de 1ère D ; codominance et gène létal ; exemples cobaye, tomate, haricot, drosophile simplifiés. |
+| P5 | 1ère C7 Structure interne du globe | Lithosphère/asthénosphère et gradient géothermique au programme de 1ère C ; valeurs (Moho, 100 km, 30 °C/km, noyau de fer) ; données fictives (mine à 115 °C à 3 km, vitesse P constante dans le noyau externe). |
+| P5 | 1ère D6 Activités internes du globe | Calcul de distance épicentrale, nuée ardente, types hawaïen et péléen ; rift est-africain et arc des Petites Antilles ; niveau plutôt descriptif ; vitesses simplifiées 8 et 4 km/s ; RDC en surbrillance sur la carte du rift. |
+| P5 | 1ère C8/D7 Mouvements des plaques | Anomalies magnétiques, inversions et date d'environ 800 000 ans, subduction/collision, San Andreas au programme ; moteur (convection) omis ; vitesses simplifiées (2 cm/an) ; carte limitée à l'Afrique et l'Amérique du Sud. |
+| P5 | 1ère C9/D8 Échanges d'ions du sol | CEC et meq au programme ; CEC = somme des cations sans Al3+, pH lié aux seuls H+ ; effet réel du chaulage ; nitrates et anion non retenu ; notion de poils absorbants ; fractionnement de l'engrais, compost. |
+| P5 | 1ère D9 Évolution des sols tropicaux | Noms et détail des horizons du profil ferrallitique ; forêt/savane (litière) ; culture sur brûlis et silice lessivée ; mot « lessivage » pour les ions dissous ; « cations » accepté pour « bases » ; place de la chaux. |
+| P5 | 1ère C10 Photosynthèse | Place dans le programme ; spectre d'absorption, pigments par nom, respiration en rappel ; phases claire/sombre non traitées ; bilan simplifié 6 CO2 + 6 H2O ; « oxygène » accepté pour « dioxygène ». |
+| P5 | 1ère D10 Réflexe inné | Centre du réflexe pupillaire « encéphale » (mésencéphale non nommé) ; salivation « bulbe » ; réflexe rotulien ; termes réflexe cérébral/bulbaire et Bell-Magendie ; grenouille sans tête et destruction de la moelle ; modèle temps de réaction = conduction + traversée du centre ; une racine dorsale pour toute une jambe. |
 | T8 | Toutes (10) | Dates, acteurs et rattachements au programme de chaque leçon, et chiffres économiques (L2 population INS ; L4 parts du PIB et de l'emploi données comme ordres de grandeur ; L6 couvert forestier, pauvreté, PPTE ; L9 population INSEE, nucléaire, R&D) : table détaillée dans `docs/chantiers/contenus-tle-histoire-geographie/journal.md` |
 | T7 | Toutes | Barèmes des questions rédigées (3 à 6 points, 8 pour les sujets de type BAC) proposés par le rédacteur ; forme des sujets « de type baccalauréat » (aucune règle d'épreuve officielle citée) ; dates et faits des œuvres réelles citées, vérifiés par le relecteur seulement. |
 | T7 | Œuvre narrative | Vocabulaire du récit retenu (schéma narratif en 5 temps, adjuvant / opposant, focalisation, analepse, scène / sommaire / ellipse / pause) ; « avait glissé » analepse ou simple antériorité ; « poussière rouge » métaphore ou hypallage ; problème 4 qui mêle un paragraphe de commentaire et un de dissertation ; faits de « L'Enfant noir » (Kouroussa, Tindican), « Une si longue lettre », « Une vie de boy », « Allah n'est pas obligé ». |

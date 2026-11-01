@@ -756,6 +756,39 @@ Même texte dans `1ere-a1/` et `1ere-a2/`, à la série près : écrites pour un
 - **Français et Philosophie** : la règle du e muet, les formes fixes (sonnet, ballade), le nombre de parties d'une dissertation, les connecteurs et la réfutation.
 - **Histoire-Géographie** : l'IDH et le taux de scolarisation (à citer avec une source), la date de la seconde révolution industrielle (« vers 1850 », « vers 1870 »), les lois sur le travail des enfants.
 
+### 1ère C et D, SVT au format 3 (chantier `contenus-1ere-svt-cd`)
+
+Les 10 premières leçons de SVT de 1ère C et de 1ère D (progression DPFC 2026-2027), rédigées le 2026-11-01 au format `lnclass.course-tree` v3 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md), vague P5 du programme `contenus-v3-tous-niveaux` (rédaction Sonnet, relecture indépendante Opus). **16 leçons distinctes, 20 fichiers** : 4 leçons sont communes aux deux séries (méiose, synthèse des protéines, mouvements des plaques, échanges d'ions) et écrites une fois, copiées avec la série et le rang de D (seuls `series_name` et `subtitle` changent) ; 3 paires proches (C1/D1, C3/D3, C6/D4) partagent le socle mais ont chacune leur intitulé, leurs notions et leurs exercices. Elles remplacent les 6 fichiers v1 de `1ere-c/svt/` et `1ere-d/svt/`. Chaque notion a sa fiche en 4 blocs, un exercice et un bloc « Je m'entraîne » ; chaque leçon a 4 problèmes.
+
+| Série | # | Fichier | Cours | Notions | Exercices | Questions | Entraînement | Auto | Figures | Sortes |
+|---|---:|---|---|---:|---:|---:|---:|---:|---:|---|
+| C | 1 | `1ere-c/svt/le-role-et-la-structure-des-gonades-des-mammiferes.json` | Le rôle et la structure des gonades des mammifères | 4 | 8 | 46 | 10 | 96 % | 4 | `diagram`, `plate female_reproductive_system`, `stat_chart bars` |
+| C | 2 | `1ere-c/svt/la-division-meiotique.json` | La division méiotique | 4 | 8 | 46 | 13 | 98 % | 1 | `diagram` |
+| C | 3 | `1ere-c/svt/la-gametogenese-chez-les-mammiferes.json` | La gamétogénèse chez les mammifères | 4 | 8 | 48 | 13 | 96 % | 3 | `diagram`, `stat_chart bars` |
+| C | 4 | `1ere-c/svt/la-fecondation-chez-les-mammiferes.json` | La fécondation chez les mammifères | 3 | 7 | 44 | 9 | 93 % | 5 | `plate female_reproductive_system`, `diagram`, `stat_chart bars` |
+| C | 5 | `1ere-c/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 8 | 57 | 16 | 96 % | 2 | `diagram`, `stat_chart bars` |
+| C | 6 | `1ere-c/svt/la-transmission-d-un-caractere-hereditaire.json` | La transmission d'un caractère héréditaire | 4 | 8 | 51 | 12 | 96 % | 2 | `diagram`, `stat_chart bars` |
+| C | 7 | `1ere-c/svt/la-structure-interne-du-globe-terrestre.json` | La structure interne du globe terrestre | 4 | 8 | 49 | 14 | 98 % | 2 | `diagram` |
+| C | 8 | `1ere-c/svt/les-mouvements-des-plaques-lithospheriques.json` | Les mouvements des plaques lithosphériques | 4 | 8 | 51 | 16 | 96 % | 3 | `map world`, `stat_chart line`, `diagram` |
+| C | 9 | `1ere-c/svt/les-echanges-d-ions-au-niveau-du-sol.json` | Les échanges d'ions au niveau du sol | 4 | 8 | 52 | 12 | 96 % | 4 | `plate root_hairs`, `diagram`, `stat_chart bars` |
+| C | 10 | `1ere-c/svt/la-photosynthese.json` | La photosynthèse | 4 | 8 | 48 | 12 | 96 % | 4 | `stat_chart line`, `diagram` |
+| D | 1 | `1ere-d/svt/les-fonctions-des-gonades.json` | Les fonctions des gonades | 4 | 8 | 50 | 12 | 96 % | 4 | `diagram`, `stat_chart bars`, `plate female_reproductive_system` |
+| D | 2 | `1ere-d/svt/la-division-meiotique.json` | La division méiotique | 4 | 8 | 46 | 13 | 98 % | 1 | `diagram` |
+| D | 3 | `1ere-d/svt/la-gametogenese.json` | La gamétogénèse | 4 | 8 | 50 | 12 | 96 % | 4 | `diagram`, `stat_chart bars`, `plate female_reproductive_system` |
+| D | 4 | `1ere-d/svt/la-transmission-d-un-caractere-hereditaire-le-monohybridisme.json` | La transmission d'un caractère héréditaire : le monohybridisme | 4 | 8 | 52 | 12 | 96 % | 2 | `diagram`, `stat_chart bars` |
+| D | 5 | `1ere-d/svt/la-synthese-des-proteines.json` | La synthèse des protéines | 4 | 8 | 57 | 16 | 96 % | 2 | `diagram`, `stat_chart bars` |
+| D | 6 | `1ere-d/svt/les-activites-internes-du-globe-terrestre.json` | Les activités internes du globe terrestre | 4 | 8 | 48 | 12 | 98 % | 3 | `stat_chart line`, `diagram`, `map africa` |
+| D | 7 | `1ere-d/svt/les-mouvements-des-plaques-lithospheriques.json` | Les mouvements des plaques lithosphériques | 4 | 8 | 51 | 16 | 96 % | 3 | `map world`, `stat_chart line`, `diagram` |
+| D | 8 | `1ere-d/svt/les-echanges-d-ions-au-niveau-du-sol.json` | Les échanges d'ions au niveau du sol | 4 | 8 | 52 | 12 | 96 % | 4 | `plate root_hairs`, `diagram`, `stat_chart bars` |
+| D | 9 | `1ere-d/svt/l-evolution-des-sols-tropicaux.json` | L'évolution des sols tropicaux | 4 | 8 | 54 | 12 | 96 % | 5 | `plate soil_profile`, `diagram`, `stat_chart bars` |
+| D | 10 | `1ere-d/svt/le-reflexe-inne.json` | Le réflexe inné | 5 | 9 | 56 | 13 | 95 % | 3 | `diagram`, `stat_chart line` |
+
+Au total : 80 notions, 160 exercices, 1008 questions notées, 257 questions d'entraînement et 61 figures. Chaque fichier passe `script/contenus/valider.rb` sans erreur ni avertissement, et a été relu par un agent distinct de son auteur.
+
+Schémas qu'aucune sorte ne dessine (décrits en texte ou en `diagram`) : testicule et tube séminifère, méiose, fécondation, ribosome et traduction, coupe du globe et coupe de subduction, complexe argilo-humique, chloroplaste, moelle épinière et œil. Les courbes sont à une seule série et à valeurs positives.
+
+À faire valider par un enseignant de SVT avant publication : les points listés dans le [journal du programme](../chantiers/contenus-v3-tous-niveaux/journal.md#à-faire-valider-par-un-enseignant) (vague P5).
+
 ### 2nde — `lecons-traitees/2nde-a/`, `2nde-c/`, `2nde/`
 
 Les 3 premières leçons de chaque matière de Seconde (progression DPFC 2026-2027, rangs 1 à 3), rédigées le 2026-10-11 avec [`prompt-redaction-lot.md`](prompt-redaction-lot.md). Les séries A et C ont des progressions différentes en Mathématiques, SVT et Français ; Physique-Chimie et Histoire-Géographie ont des premières leçons communes.

@@ -40,4 +40,4 @@ Pas de Lot 0 : aucun contrat, aucune table, aucune route.
 | README des contenus, journal du programme | Clôture |
 
 ## Portes de sortie
-- [x] memo, prd, plan complets · [ ] lots livrés · [ ] `bin/ci-quiet` vert · [ ] PR vers `Develop` · [ ] journal clos
+- [x] memo, prd, plan complets · [x] lots livrés · [ ] `bin/ci-quiet` vert · [ ] PR vers `Develop` · [x] journal clos
