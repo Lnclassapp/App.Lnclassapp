@@ -1,0 +1,1454 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La photosynthèse",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "courbe-lumiere",
+          "kind": "stat_chart",
+          "description": "Courbe d'une expérience fictive : volume de dioxygène produit en une heure (en mL) par une plante aquatique selon l'intensité lumineuse (en % de la lumière maximale). Lecture : 0, 12, 24, 36, 44, 48, 48, 48 puis 48 mL pour 0, 10, 20, 30, 40, 50, 60, 80 et 100 %. La courbe monte puis forme un plateau.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              12,
+              24,
+              36,
+              44,
+              48,
+              48,
+              48,
+              48
+            ],
+            "labels": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "80",
+              "100 %"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-co2",
+          "kind": "stat_chart",
+          "description": "Courbe d'une expérience fictive : volume de dioxygène produit en une heure (en mL) par des plants de tomate de serre selon la teneur de l'air en dioxyde de carbone (en %). Lecture : 0, 10, 19, 26, 30 et 30 mL pour 0, 0,02, 0,04, 0,06, 0,08 et 0,10 %. La courbe monte puis forme un plateau.",
+          "params": {
+            "chart": "line",
+            "series": [
+              0,
+              10,
+              19,
+              26,
+              30,
+              30
+            ],
+            "labels": [
+              "0",
+              "0,02",
+              "0,04",
+              "0,06",
+              "0,08",
+              "0,10 %"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "courbe-temperature",
+          "kind": "stat_chart",
+          "description": "Courbe d'une expérience fictive : volume de dioxygène produit en une heure (en mL) par de jeunes plants en pépinière selon la température (en °C). Lecture : 6, 10, 20, 28, 34, 36, 30, 14 et 2 mL pour 10, 15, 20, 25, 30, 35, 40, 45 et 50 °C. La courbe monte jusqu'à un maximum puis redescend.",
+          "params": {
+            "chart": "line",
+            "series": [
+              6,
+              10,
+              20,
+              28,
+              34,
+              36,
+              30,
+              14,
+              2
+            ],
+            "labels": [
+              "10",
+              "15",
+              "20",
+              "25",
+              "30",
+              "35",
+              "40",
+              "45",
+              "50 °C"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "bilan-photosynthese",
+          "kind": "diagram",
+          "description": "Schéma fléché du bilan de la photosynthèse. Le dioxyde de carbone et l'eau entrent dans la feuille verte, qui reçoit la lumière et contient les chloroplastes. De la feuille sortent le glucose, matière organique, et le dioxygène. Les couleurs distinguent les entrées, la feuille et les sorties.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "co2",
+                "label": "Dioxyde de carbone",
+                "category": 1
+              },
+              {
+                "id": "eau",
+                "label": "Eau",
+                "category": 1
+              },
+              {
+                "id": "feuille",
+                "label": "Feuille verte : chloroplastes et lumière",
+                "category": 2
+              },
+              {
+                "id": "glucose",
+                "label": "Glucose",
+                "category": 3
+              },
+              {
+                "id": "o2",
+                "label": "Dioxygène",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "co2",
+                "to": "feuille"
+              },
+              {
+                "from": "eau",
+                "to": "feuille"
+              },
+              {
+                "from": "feuille",
+                "to": "glucose"
+              },
+              {
+                "from": "feuille",
+                "to": "o2"
+              }
+            ],
+            "legend": [
+              "Ce qui entre",
+              "Lieu de la photosynthèse",
+              "Ce qui sort"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le chloroplaste et les pigments chlorophylliens",
+          "remember": "Le **chloroplaste** est un organite (une petite structure de la cellule) vert. Il se trouve dans les cellules chlorophylliennes des feuilles, des tiges vertes et des algues vertes. C'est le lieu de la **photosynthèse**. Il contient des **pigments** : la **chlorophylle**, verte, et des pigments jaunes et orangés, les xanthophylles et les carotènes. Pour les séparer, on fait une **chromatographie** : chaque pigment monte dans le papier à une vitesse différente. La chlorophylle absorbe surtout la lumière **rouge** et la lumière **bleu-violet** ; elle renvoie le vert, c'est pourquoi les feuilles paraissent vertes. Les cellules des racines n'ont pas de chloroplastes.",
+          "method": [
+            "Localiser les grains verts dans la cellule observée au microscope et nommer l'organite : le chloroplaste.",
+            "Extraire les pigments en broyant la feuille dans l'alcool, puis les séparer par chromatographie.",
+            "Identifier chaque pigment par sa couleur et sa place sur le chromatogramme.",
+            "Conclure sur le rôle de la chlorophylle en reliant la couleur de la feuille à la lumière qu'elle absorbe."
+          ],
+          "example": {
+            "statement": "Au microscope, les cellules d'une feuille de laitue du jardin scolaire montrent des grains verts. On broie la feuille dans l'alcool et on réalise une chromatographie (résultats simplifiés). De haut en bas, le papier montre quatre bandes : orange, jaune, vert-bleu puis vert-jaune. Nomme l'organite et les pigments, puis conclus.",
+            "steps": [
+              "Localiser : les grains verts sont dans le cytoplasme des cellules chlorophylliennes ; ce sont les chloroplastes.",
+              "Extraire : la feuille est broyée dans l'alcool, puis l'extrait est séparé par chromatographie ; quatre bandes colorées apparaissent.",
+              "Identifier : la bande orange est le carotène, la bande jaune est la xanthophylle, et les deux bandes vertes sont les chlorophylles.",
+              "Conclure : la chlorophylle absorbe le rouge et le bleu-violet et renvoie le vert ; la feuille paraît verte et sa chlorophylle capte l'énergie lumineuse."
+            ]
+          },
+          "pitfall": "Ne dis pas que la feuille est verte parce que la chlorophylle absorbe le vert : c'est l'inverse. Contre-exemple (résultats simplifiés) : pour un extrait de chlorophylle, l'absorption est d'environ 90 % dans le rouge et 85 % dans le bleu-violet, mais de 10 % seulement dans le vert. La lumière verte, peu absorbée, est renvoyée vers l'œil. Une couleur perçue est celle de la lumière renvoyée, pas celle de la lumière absorbée.",
+          "figure": null,
+          "exercise": {
+            "title": "Le chloroplaste et ses pigments",
+            "statement": "Dans cet exercice, tu localises le chloroplaste et tu identifies les pigments d'une feuille avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans quel organite de la cellule se déroule la photosynthèse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser : au microscope, les cellules d'une feuille montrent des grains verts dans le cytoplasme. Ces grains sont les chloroplastes. Étape 4 — Conclure : ils contiennent la chlorophylle et sont le lieu de la photosynthèse. Le noyau porte l'information génétique de la cellule et la paroi la protège et la soutient : ni l'un ni l'autre ne réalise la photosynthèse.",
+                "answers": [
+                  {
+                    "content": "Le chloroplaste",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "La paroi",
+                    "correct": false
+                  },
+                  {
+                    "content": "La vacuole",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les cellules d'une racine de manioc, enfouie dans le sol du jardin scolaire, contiennent des chloroplastes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Localiser : les chloroplastes se trouvent dans les cellules chlorophylliennes, c'est-à-dire celles des feuilles, des tiges vertes et des algues vertes. Une racine enterrée n'est pas éclairée et n'est pas verte : ses cellules n'ont pas de chloroplastes. L'affirmation est donc fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque pigment de la feuille à sa couleur.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Identifier : chaque pigment est reconnu par sa couleur sur le chromatogramme. La chlorophylle est verte, le carotène est orange et la xanthophylle est jaune. Le carotène et la xanthophylle forment les pigments jaunes et orangés, qui sont masqués par la chlorophylle dans une feuille verte.",
+                "answers": [
+                  {
+                    "content": "Chlorophylle",
+                    "match": "Vert"
+                  },
+                  {
+                    "content": "Carotène",
+                    "match": "Orange"
+                  },
+                  {
+                    "content": "Xanthophylle",
+                    "match": "Jaune"
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour séparer les pigments d'une feuille.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Extraire : on broie d'abord la feuille dans l'alcool pour obtenir un extrait vert. On dépose cet extrait sur le papier, puis on plonge le bas du papier dans le solvant. Le solvant monte et entraîne les pigments à des vitesses différentes : c'est la chromatographie. Étape 3 — Identifier : on observe alors les bandes colorées, une par pigment.",
+                "answers": [
+                  {
+                    "content": "Broyer la feuille dans l'alcool avec un peu de sable"
+                  },
+                  {
+                    "content": "Déposer une goutte de l'extrait sur le papier"
+                  },
+                  {
+                    "content": "Plonger le bas du papier dans le solvant"
+                  },
+                  {
+                    "content": "Laisser le solvant monter dans le papier"
+                  },
+                  {
+                    "content": "Observer les bandes colorées obtenues"
+                  }
+                ]
+              },
+              {
+                "content": "Pourquoi une feuille de laitue paraît-elle verte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : la chlorophylle absorbe surtout la lumière rouge et la lumière bleu-violet. Elle renvoie le vert vers nos yeux, donc la feuille paraît verte. L'idée que la chlorophylle absorbe le vert est l'erreur classique : si elle absorbait le vert, la feuille ne le renverrait pas.",
+                "answers": [
+                  {
+                    "content": "Sa chlorophylle renvoie surtout la lumière verte",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sa chlorophylle absorbe surtout la lumière verte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle contient surtout du carotène orange",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle absorbe toutes les lumières de la même façon",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles lumières la chlorophylle absorbe-t-elle surtout ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Conclure : le spectre d'absorption de la chlorophylle présente deux zones d'absorption forte, le rouge et le bleu-violet. Dans le vert, l'absorption est faible, puisque cette lumière est renvoyée. Dire qu'elle absorbe toutes les lumières de la même façon est faux : une feuille serait alors noire.",
+                "answers": [
+                  {
+                    "content": "La lumière rouge",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lumière bleu-violet",
+                    "correct": true
+                  },
+                  {
+                    "content": "La lumière verte",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune lumière visible",
+                    "correct": false
+                  },
+                  {
+                    "content": "Toutes les lumières de la même façon",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à localiser le chloroplaste et à lire un chromatogramme.",
+            "questions": [
+              {
+                "content": "Le ___ est l'organite vert de la cellule où se déroule la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Localiser : les grains verts des cellules de feuille sont les chloroplastes. Étape 4 — Conclure : c'est dans le chloroplaste, grâce à la chlorophylle, que se déroule la photosynthèse.",
+                "answers": [
+                  {
+                    "content": "chloroplaste",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "photosynthèse",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier trou est un organite vert, le second un phénomène qui fabrique de la matière organique."
+              },
+              {
+                "content": "Sur un chromatogramme de feuille, quelle bande est orange ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Identifier : le carotène est orange, la xanthophylle est jaune et la chlorophylle est verte. Le chloroplaste n'est pas un pigment, c'est l'organite qui contient les pigments.",
+                "answers": [
+                  {
+                    "content": "Le carotène",
+                    "correct": true
+                  },
+                  {
+                    "content": "La chlorophylle",
+                    "correct": false
+                  },
+                  {
+                    "content": "La xanthophylle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le chloroplaste",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La chlorophylle absorbe surtout la lumière verte.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : la chlorophylle absorbe surtout le rouge et le bleu-violet. Elle renvoie le vert, donc l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les échanges gazeux et l'amidon : les mettre en évidence",
+          "remember": "Une plante verte **éclairée** absorbe du **dioxyde de carbone** ($CO_2$) et rejette du **dioxygène** ($O_2$). Le $CO_2$ entre par les stomates des feuilles ; pour une plante aquatique, il est dissous dans l'eau. Les tests : le **bleu de bromothymol** (BBT) est jaune dans une eau riche en $CO_2$ et bleu dans une eau qui en contient peu ; une **allumette incandescente** se ravive dans le $O_2$ ; l'**eau iodée** devient bleu-noir au contact de l'**amidon**, réserve de glucides, et reste jaune-brun sans amidon. Une feuille éclairée fabrique de l'amidon ; il n'y en a pas à l'obscurité ni dans une zone sans chlorophylle. Pour conclure, on compare toujours à un **témoin**. La plante respire aussi, de jour comme de nuit : elle consomme alors du $O_2$ et rejette du $CO_2$.",
+          "method": [
+            "Formuler l'hypothèse : dire quelle substance on cherche et quel facteur, comme la lumière ou la chlorophylle, on teste.",
+            "Choisir le test adapté : bleu de bromothymol pour le $CO_2$, allumette incandescente pour le $O_2$, eau iodée pour l'amidon.",
+            "Comparer le lot testé à un lot témoin, identique sauf pour le facteur étudié.",
+            "Conclure : dire si l'hypothèse est validée et relier le facteur au résultat."
+          ],
+          "example": {
+            "statement": "Deux tubes contiennent la même eau, additionnée de bleu de bromothymol (vert au départ), et un brin d'élodée. Le tube A est éclairé, le tube B est enveloppé de papier aluminium. Après deux heures (résultats simplifiés), A est bleu et B est jaune. Que peut-on conclure ?",
+            "steps": [
+              "Formuler : l'hypothèse est que l'élodée éclairée absorbe du $CO_2$ ; le facteur testé est la lumière.",
+              "Choisir : le bleu de bromothymol convient, car sa couleur change avec le $CO_2$ dissous (jaune si l'eau en est riche, bleu si elle en contient peu).",
+              "Comparer : le tube B, à l'obscurité, est le témoin ; il ne diffère de A que par la lumière.",
+              "Conclure : dans A le bleu de bromothymol bleuit, donc le $CO_2$ a diminué ; dans B il jaunit, car la plante respire sans photosynthèse. L'élodée éclairée absorbe du $CO_2$ : l'hypothèse est validée."
+            ]
+          },
+          "pitfall": "Ne conclus pas sans témoin. Contre-exemple : avec le seul tube A, le bleu de bromothymol bleuit en deux heures ; on pourrait croire que l'eau ou l'élodée seule suffit. Le tube B, enveloppé de papier aluminium, jaunit : le résultat dépend donc bien de la lumière. Un seul tube prouve que quelque chose se passe, deux tubes qui ne diffèrent que par la lumière prouvent que la lumière est la cause.",
+          "figure": null,
+          "exercise": {
+            "title": "Prouver les échanges gazeux et l'amidon",
+            "statement": "Dans cet exercice, tu choisis les tests et tu interprètes des expériences sur les échanges gazeux et l'amidon, avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel réactif colore l'amidon en bleu-noir ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Choisir : le test adapté à l'amidon est l'eau iodée, qui devient bleu-noir en sa présence et reste jaune-brun sans amidon. Le bleu de bromothymol sert à suivre le dioxyde de carbone dissous, l'eau de chaux à reconnaître le dioxyde de carbone d'un gaz, et l'alcool sert à décolorer la feuille.",
+                "answers": [
+                  {
+                    "content": "L'eau iodée",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le bleu de bromothymol",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'eau de chaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'alcool",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque test à ce qu'il met en évidence.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Choisir : chaque substance a son test. Le bleu de bromothymol change de couleur selon le dioxyde de carbone dissous, l'allumette incandescente se ravive dans le dioxygène, l'eau iodée bleuit avec l'amidon et l'eau de chaux se trouble avec le dioxyde de carbone.",
+                "answers": [
+                  {
+                    "content": "Bleu de bromothymol",
+                    "match": "Variation du dioxyde de carbone dissous dans l'eau"
+                  },
+                  {
+                    "content": "Allumette incandescente",
+                    "match": "Présence de dioxygène"
+                  },
+                  {
+                    "content": "Eau iodée",
+                    "match": "Présence d'amidon"
+                  },
+                  {
+                    "content": "Eau de chaux",
+                    "match": "Présence de dioxyde de carbone dans un gaz"
+                  }
+                ]
+              },
+              {
+                "content": "Une feuille panachée (zones vertes et zones blanches) est restée à la lumière, puis elle est décolorée et traitée à l'eau iodée. Où apparaît la couleur bleu-noir ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Formuler : l'hypothèse est que l'amidon se forme là où il y a de la chlorophylle. Étape 3 — Comparer : les zones blanches, sans chlorophylle, servent de comparaison aux zones vertes. Étape 4 — Conclure : seules les zones vertes bleuissent, donc la chlorophylle est nécessaire à la fabrication d'amidon. Si les zones blanches bleuissaient aussi, la chlorophylle ne serait pas nécessaire.",
+                "answers": [
+                  {
+                    "content": "Seulement dans les zones vertes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans toute la feuille",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement dans les zones blanches",
+                    "correct": false
+                  },
+                  {
+                    "content": "Nulle part",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un tube contenant un brin d'élodée éclairé, un gaz s'accumule et ravive une allumette incandescente : c'est le ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir : l'allumette incandescente est le test du dioxygène, qui entretient la combustion. Étape 4 — Conclure : l'élodée éclairée rejette du dioxygène. Le dioxyde de carbone, lui, ne ravive pas l'allumette ; il trouble l'eau de chaux.",
+                "answers": [
+                  {
+                    "content": "dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "oxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "O2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour prouver que la lumière est nécessaire à la fabrication d'amidon, il suffit d'analyser une feuille restée à la lumière.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : sans lot témoin, on ne peut rien conclure. Il faut comparer avec une feuille ou une zone identique mais privée de lumière. Si les deux avaient de l'amidon, la lumière ne serait pas nécessaire ; seule la comparaison permet de trancher.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quels échanges de gaz caractérisent la photosynthèse d'une plante verte éclairée ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Conclure : la plante éclairée absorbe du dioxyde de carbone (le bleu de bromothymol bleuit) et rejette du dioxygène (l'allumette se ravive). Absorber du dioxygène et rejeter du dioxyde de carbone caractérisent la respiration, qui existe aussi mais qui n'est pas la photosynthèse.",
+                "answers": [
+                  {
+                    "content": "Elle absorbe du dioxyde de carbone",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle rejette du dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle absorbe du dioxygène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle rejette du dioxyde de carbone",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle absorbe de l'azote",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à choisir le bon test et à suivre le protocole de l'amidon.",
+            "questions": [
+              {
+                "content": "L'eau iodée colore l'___ en ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Choisir : l'eau iodée est le test de l'amidon. Elle reste jaune-brun sans amidon et devient bleu-noir avec amidon.",
+                "answers": [
+                  {
+                    "content": "amidon",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "bleu-noir",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "bleu noir",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "C'est le test de la réserve de glucides des plantes ; la couleur est foncée."
+              },
+              {
+                "content": "Un tube de bleu de bromothymol qui devient jaune contient une eau plus riche en dioxyde de carbone.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Choisir : le bleu de bromothymol est jaune dans une eau riche en dioxyde de carbone et bleu dans une eau qui en contient peu. Un tube qui jaunit signale donc plus de dioxyde de carbone.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le traitement d'une feuille avant la recherche d'amidon.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Choisir : le protocole de l'eau iodée suit un ordre. L'eau bouillante tue les cellules, l'alcool chaud enlève la chlorophylle verte qui masquerait la couleur, le rinçage enlève l'alcool, puis l'eau iodée révèle l'amidon et on observe.",
+                "answers": [
+                  {
+                    "content": "Plonger la feuille dans l'eau bouillante"
+                  },
+                  {
+                    "content": "Décolorer la feuille dans l'alcool chaud"
+                  },
+                  {
+                    "content": "Rincer la feuille à l'eau"
+                  },
+                  {
+                    "content": "Recouvrir la feuille d'eau iodée"
+                  },
+                  {
+                    "content": "Observer la couleur obtenue"
+                  }
+                ],
+                "hint": "On décolore avant d'ajouter le réactif, et on observe en dernier."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les facteurs de la photosynthèse et leurs courbes",
+          "remember": "L'**intensité photosynthétique** se mesure par la quantité de dioxygène produit, ou de dioxyde de carbone absorbé, par unité de temps. Elle dépend de trois facteurs : l'**intensité lumineuse**, la **teneur en $CO_2$** et la **température**. Quand on fait varier un facteur et qu'on garde les autres constants, la courbe de la lumière et celle du $CO_2$ **montent puis forment un plateau** ; la courbe de la température **monte jusqu'à un optimum puis redescend**. Le **facteur limitant** est celui dont l'insuffisance empêche l'intensité d'augmenter. Sur la partie croissante, c'est le facteur étudié ; sur le plateau, c'est un autre facteur. En serre, on règle ces facteurs pour augmenter la production des plantes.",
+          "method": [
+            "Lire l'axe horizontal (le facteur étudié), l'axe vertical (l'intensité) et leurs unités.",
+            "Décrire l'allure de la courbe en citant des valeurs : croissance, plateau, optimum, décroissance.",
+            "Identifier le facteur limitant sur chaque partie de la courbe.",
+            "Conclure en reliant l'effet du facteur à l'intensité de la photosynthèse."
+          ],
+          "example": {
+            "statement": "Dans une expérience fictive, on mesure le volume de dioxygène produit en une heure par une plante aquatique pour des intensités lumineuses croissantes (en % de la lumière maximale) : 0 % donne 0 mL ; 10 % donne 12 mL ; 20 % donne 24 mL ; 30 % donne 36 mL ; 40 % donne 44 mL ; 50 % donne 48 mL ; 60 %, 80 % et 100 % donnent 48 mL. Analyse la courbe.",
+            "steps": [
+              "Lire : l'axe horizontal donne l'intensité lumineuse (en %), l'axe vertical le volume de dioxygène produit (en mL par heure).",
+              "Décrire : de 0 à 30 %, la courbe monte de 0 à 36 mL/h ; elle monte plus lentement jusqu'à 48 mL/h à 50 %, puis reste au plateau de 48 mL/h.",
+              "Identifier : jusqu'à 30 %, la lumière est le facteur limitant ; à partir de 50 %, un autre facteur, comme le $CO_2$ ou la température, est limitant.",
+              "Conclure : la lumière augmente l'intensité de la photosynthèse jusqu'à une valeur maximale ; au-delà, plus de lumière ne change plus rien."
+            ]
+          },
+          "pitfall": "Ne crois pas que plus de lumière (ou plus de chaleur) donne toujours plus de photosynthèse. Contre-exemple (expérience fictive) : à 50 % de lumière la production est de 48 mL/h, et à 100 % elle est encore de 48 mL/h. Doubler la lumière n'ajoute rien. Pour la température, la production passe de 36 mL/h à 35 °C à 14 mL/h à 45 °C : trop de chaleur la fait baisser.",
+          "figure": "courbe-lumiere",
+          "exercise": {
+            "title": "Lire les courbes des facteurs",
+            "statement": "Dans cet exercice, tu lis des courbes d'expériences fictives et tu identifies les facteurs limitants avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "courbe-lumiere",
+            "questions": [
+              {
+                "content": "Dans une expérience fictive, une plante aquatique produit 0, 12, 24, 36, 44, 48, 48 mL de dioxygène par heure pour 0, 10, 20, 30, 40, 50, 60 % de la lumière maximale. Quelle valeur atteint le plateau ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : l'axe horizontal donne l'intensité lumineuse en % et l'axe vertical le volume de dioxygène produit en mL par heure. Étape 2 — Décrire : la courbe monte de 0 à 48 mL/h, puis reste à 48 mL/h à 50 % et à 60 %. Le plateau est donc à 48 mL/h.",
+                "answers": [
+                  {
+                    "content": "48",
+                    "correct": true
+                  }
+                ],
+                "unit": "mL/h",
+                "tolerance": 0
+              },
+              {
+                "content": "Dans une expérience fictive, une plante aquatique produit 0, 12, 24, 36, 44, 48, 48 mL de dioxygène par heure pour 0, 10, 20, 30, 40, 50, 60 % de la lumière maximale. À 20 % de lumière, quel est le facteur limitant ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire : à 20 %, la courbe est encore en pleine croissance (24 mL/h, contre 36 mL/h à 30 %). Étape 3 — Identifier : sur la partie croissante, c'est le facteur étudié, ici la lumière, qui limite l'intensité. Le dioxyde de carbone et la température deviendraient limitants seulement sur le plateau.",
+                "answers": [
+                  {
+                    "content": "La lumière",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le dioxyde de carbone",
+                    "correct": false
+                  },
+                  {
+                    "content": "La température",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun facteur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une expérience fictive, une plante produit 48 mL de dioxygène par heure à 60 % de la lumière maximale et 48 mL par heure à 100 %. En passant de 60 % à 100 % de lumière, la photosynthèse augmente encore.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Décrire : de 60 % à 100 %, la valeur reste à 48 mL/h : c'est un plateau. Étape 3 — Identifier : sur le plateau, la lumière n'est plus limitante, un autre facteur l'est. Étape 4 — Conclure : ajouter de la lumière ne change plus rien. Croire qu'un facteur en plus donne toujours plus de photosynthèse est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans une expérience fictive, de jeunes plants produisent 6, 20, 34, 36, 30, 14 mL de dioxygène par heure à 10, 20, 30, 35, 40, 45 °C. À quelle température la production est-elle la plus forte ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire : l'axe horizontal donne la température en °C et l'axe vertical la production de dioxygène en mL/h. Étape 2 — Décrire : la courbe monte jusqu'à 36 mL/h, puis redescend à 30 et à 14 mL/h. Le maximum, appelé optimum, est à 35 °C.",
+                "answers": [
+                  {
+                    "content": "35",
+                    "correct": true
+                  }
+                ],
+                "unit": "°C",
+                "tolerance": 0
+              },
+              {
+                "content": "Quels sont les trois facteurs étudiés qui font varier l'intensité de la photosynthèse ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 4 — Conclure : l'intensité de la photosynthèse dépend de la lumière, du dioxyde de carbone et de la température. La hauteur de la plante et la longueur des racines ne sont pas des facteurs du milieu qui règlent la photosynthèse de la feuille.",
+                "answers": [
+                  {
+                    "content": "L'intensité lumineuse",
+                    "correct": true
+                  },
+                  {
+                    "content": "La teneur en dioxyde de carbone",
+                    "correct": true
+                  },
+                  {
+                    "content": "La température",
+                    "correct": true
+                  },
+                  {
+                    "content": "La hauteur de la plante au départ",
+                    "correct": false
+                  },
+                  {
+                    "content": "La longueur des racines",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes d'analyse d'une courbe.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Lire : on commence par les axes et les unités, sinon les valeurs n'ont pas de sens. Étape 2 — Décrire : on cite des valeurs de la courbe. Étape 3 — Identifier : on cherche le facteur limitant sur chaque partie. Étape 4 — Conclure : on relie le facteur à l'intensité de la photosynthèse.",
+                "answers": [
+                  {
+                    "content": "Lire les axes et les unités"
+                  },
+                  {
+                    "content": "Décrire l'allure en citant des valeurs"
+                  },
+                  {
+                    "content": "Identifier le facteur limitant"
+                  },
+                  {
+                    "content": "Conclure sur l'effet du facteur"
+                  }
+                ]
+              },
+              {
+                "content": "Sur le plateau d'une courbe de lumière, la lumière n'est plus le facteur ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Identifier : sur le plateau, augmenter la lumière ne change plus l'intensité. La lumière n'est plus le facteur limitant ; c'est un autre facteur, comme le dioxyde de carbone ou la température, qui limite.",
+                "answers": [
+                  {
+                    "content": "limitant",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un plateau et un facteur limitant.",
+            "questions": [
+              {
+                "content": "Quand une courbe atteint un ___, le facteur étudié n'est plus ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Identifier : sur un plateau, la valeur ne change plus quand on augmente le facteur étudié. Ce facteur n'est donc plus limitant ; un autre facteur l'est.",
+                "answers": [
+                  {
+                    "content": "plateau",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "limitant",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier mot désigne la partie plate de la courbe ; le second dit ce que devient le facteur."
+              },
+              {
+                "content": "Dans une expérience fictive, une plante produit 10 mL de dioxygène par heure à 20 % de lumière, 20 mL à 40 %, et 20 mL à 60 %. Quelle production attends-tu à 80 % de lumière, dans les mêmes conditions ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Décrire : de 40 % à 60 %, la valeur reste à 20 mL/h : la courbe a atteint un plateau. Étape 3 — Identifier : sur le plateau, la lumière n'est plus limitante. À 80 %, la production reste donc à 20 mL/h.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true
+                  }
+                ],
+                "unit": "mL/h",
+                "tolerance": 0
+              },
+              {
+                "content": "Une courbe de température monte, atteint un maximum à 35 °C, puis redescend. Comment appelle-t-on ce maximum ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Décrire : une courbe qui monte jusqu'à un maximum puis redescend présente un optimum. Un plateau est une partie plate qui ne redescend pas.",
+                "answers": [
+                  {
+                    "content": "L'optimum",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le plateau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le témoin",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le seuil de saturation",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le bilan global de la photosynthèse",
+          "remember": "La **photosynthèse** est la fabrication de **matière organique** (des glucides) à partir de **matière minérale** ($CO_2$ et eau), grâce à l'**énergie lumineuse** captée par la chlorophylle des chloroplastes. Bilan simplifié : $$6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$$ avec la lumière et la chlorophylle au-dessus de la flèche. $C_6H_{12}O_6$ est le **glucose**. L'énergie lumineuse est transformée en **énergie chimique**, stockée dans le glucose. Une partie du glucose est mise en réserve sous forme d'amidon. La plante verte est ainsi **autotrophe** : elle fabrique sa propre matière organique, dont les animaux dépendent.",
+          "method": [
+            "Identifier les substances qui entrent (les réactifs) et celles qui sortent (les produits).",
+            "Écrire l'équation avec les formules chimiques, la lumière et la chlorophylle au-dessus de la flèche.",
+            "Équilibrer en comptant les atomes de $C$, $H$ et $O$ de chaque côté de la flèche.",
+            "Interpréter le bilan : matière minérale transformée en matière organique, énergie lumineuse transformée en énergie chimique."
+          ],
+          "example": {
+            "statement": "Un grand arbre de la forêt classée fabrique du glucose à la lumière. Écris et équilibre le bilan de sa photosynthèse, puis interprète-le.",
+            "steps": [
+              "Identifier : le dioxyde de carbone et l'eau entrent ; le glucose et le dioxygène sortent.",
+              "Écrire : $CO_2 + H_2O \\rightarrow C_6H_{12}O_6 + O_2$, avec la lumière et la chlorophylle au-dessus de la flèche.",
+              "Équilibrer : 6 atomes de C à droite, donc $6\\,CO_2$ ; 12 atomes de H à droite, donc $6\\,H_2O$ ; il y a alors $12 + 6 = 18$ atomes de O à gauche et $6 + 12 = 18$ à droite avec $6\\,O_2$.",
+              "Interpréter : le $CO_2$ et l'eau, matière minérale, sont transformés en glucose, matière organique ; l'énergie lumineuse est transformée en énergie chimique stockée dans le glucose."
+            ]
+          },
+          "pitfall": "Ne confonds pas la photosynthèse et la respiration. Dans la photosynthèse, la plante absorbe du $CO_2$ et rejette du $O_2$, à la lumière seulement ; dans la respiration, elle consomme du $O_2$ et rejette du $CO_2$, de jour comme de nuit. Contre-exemple chiffré : dans le bilan, 6 molécules de $CO_2$ sont absorbées et 6 molécules de $O_2$ sont rejetées ; écrire $6\\,CO_2$ à droite et $6\\,O_2$ à gauche inverserait le sens du phénomène.",
+          "figure": "bilan-photosynthese",
+          "exercise": {
+            "title": "Écrire et lire le bilan de la photosynthèse",
+            "statement": "Dans cet exercice, tu écris, tu équilibres et tu interprètes le bilan de la photosynthèse avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "bilan-photosynthese",
+            "questions": [
+              {
+                "content": "Quelle est la formule du glucose ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le glucose est la matière organique qui sort de la photosynthèse. Étape 2 — Écrire : sa formule est $C_6H_{12}O_6$. $C_{12}H_{22}O_{11}$ est la formule du saccharose, $CO_2$ celle du dioxyde de carbone.",
+                "answers": [
+                  {
+                    "content": "$C_6H_{12}O_6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$C_{12}H_{22}O_{11}$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$CO_2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$C_6H_6O_{12}$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans le bilan simplifié de la photosynthèse, 6 molécules de dioxyde de carbone donnent 6 molécules de dioxygène. Combien de molécules de dioxygène sont produites à partir de 18 molécules de dioxyde de carbone ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Écrire : le bilan est $6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$. Étape 3 — Équilibrer : 6 $CO_2$ donnent 6 $O_2$, soit autant de molécules de dioxygène que de dioxyde de carbone. Avec 18 molécules de $CO_2$, soit trois fois plus, on obtient 18 molécules de $O_2$.",
+                "answers": [
+                  {
+                    "content": "18",
+                    "correct": true
+                  }
+                ],
+                "unit": "molécules",
+                "tolerance": 0
+              },
+              {
+                "content": "Pendant la photosynthèse, l'énergie ___ est transformée en énergie chimique stockée dans le glucose.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Interpréter : la chlorophylle capte l'énergie lumineuse, et la plante la transforme en énergie chimique stockée dans le glucose. L'énergie lumineuse est donc la forme d'énergie qui entre.",
+                "answers": [
+                  {
+                    "content": "lumineuse",
+                    "correct": true
+                  },
+                  {
+                    "content": "solaire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque substance à son rôle dans la photosynthèse.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Identifier : le dioxyde de carbone et l'eau entrent, le glucose et le dioxygène sortent. Étape 4 — Interpréter : le dioxyde de carbone est de la matière minérale, le glucose de la matière organique, le dioxygène est rejeté et la chlorophylle capte l'énergie lumineuse.",
+                "answers": [
+                  {
+                    "content": "Dioxyde de carbone",
+                    "match": "Matière minérale absorbée"
+                  },
+                  {
+                    "content": "Dioxygène",
+                    "match": "Gaz rejeté dans l'air"
+                  },
+                  {
+                    "content": "Glucose",
+                    "match": "Matière organique fabriquée"
+                  },
+                  {
+                    "content": "Chlorophylle",
+                    "match": "Pigment qui capte la lumière"
+                  }
+                ]
+              },
+              {
+                "content": "Pendant la photosynthèse, la plante consomme du dioxygène et rejette du dioxyde de carbone.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : dans le bilan de la photosynthèse, le dioxyde de carbone entre et le dioxygène sort. L'affirmation décrit la respiration, qui est un autre phénomène. Il ne faut pas les confondre.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le bilan équilibré de la photosynthèse est : ___",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : le $CO_2$ et l'eau entrent, le glucose et le $O_2$ sortent. Étape 3 — Équilibrer : avec 6 $CO_2$ et 6 $H_2O$, il y a 6 C, 12 H et 18 O de chaque côté. La version non équilibrée n'a pas le même nombre d'atomes. L'équation qui place le glucose et le $O_2$ à gauche est celle de la respiration, dans le sens inverse.",
+                "answers": [
+                  {
+                    "content": "$6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$CO_2 + H_2O \\rightarrow C_6H_{12}O_6 + O_2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6\\,O_2 + C_6H_{12}O_6 \\rightarrow 6\\,CO_2 + 6\\,H_2O$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6\\,CO_2 + 6\\,H_2O \\rightarrow 6\\,C_6H_{12}O_6 + O_2$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire le bilan de la photosynthèse.",
+            "questions": [
+              {
+                "content": "La photosynthèse transforme la matière ___ (dioxyde de carbone, eau) en matière ___ (glucose).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Interpréter : le dioxyde de carbone et l'eau sont de la matière minérale. Le glucose est de la matière organique, fabriquée par la plante.",
+                "answers": [
+                  {
+                    "content": "minérale",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "organique",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier trou qualifie des substances sans carbone organique, le second la matière des êtres vivants."
+              },
+              {
+                "content": "Dans le bilan de la photosynthèse, le dioxyde de carbone est un produit.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : le dioxyde de carbone est absorbé : il entre, c'est un réactif. Les produits sont le glucose et le dioxygène.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour une molécule de glucose formée, combien de molécules d'eau sont absorbées dans le bilan simplifié $6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Équilibrer : dans le bilan équilibré, le coefficient devant $H_2O$ est 6 pour une molécule de glucose. Il faut donc 6 molécules d'eau.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "unit": "molécules",
+                "tolerance": 0
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Le jardin scolaire : la lumière et l'amidon",
+          "statement": "Le club de SVT du lycée plante des haricots dans le jardin scolaire. Une plante en pot est gardée 48 heures à l'obscurité. Une bande de papier aluminium est alors fixée sur une de ses feuilles, puis la plante est exposée 6 heures au soleil. La feuille est ensuite plongée dans l'eau bouillante, décolorée dans l'alcool chaud, rincée, puis recouverte d'eau iodée. Résultats simplifiés : la zone découverte devient bleu-noir, la zone sous la bande reste jaune-brun.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Pourquoi la plante est-elle gardée 48 heures à l'obscurité avant l'expérience ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : avant de tester un facteur, on part d'un état connu. Étape 1 — Formuler : on veut savoir si la lumière permet de fabriquer de l'amidon, il faut donc que la feuille n'en contienne pas au départ. À l'obscurité, la plante consomme son amidon et n'en fabrique pas. Les autres propositions ne correspondent pas à ce but : l'obscurité ne fait pas fabriquer de chlorophylle et n'y produit pas de dioxygène.",
+              "answers": [
+                {
+                  "content": "Pour que ses feuilles n'aient plus d'amidon au départ",
+                  "correct": true
+                },
+                {
+                  "content": "Pour qu'elle fabrique plus de chlorophylle",
+                  "correct": false
+                },
+                {
+                  "content": "Pour qu'elle produise du dioxygène",
+                  "correct": false
+                },
+                {
+                  "content": "Pour tuer ses cellules",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le traitement de la feuille avant l'observation.",
+              "question_type": "ordering",
+              "explanation": "Méthode du test de l'amidon. L'eau bouillante tue les cellules et ramollit la feuille. L'alcool chaud enlève la chlorophylle, qui masquerait la couleur du test. Le rinçage enlève l'alcool et rend la feuille souple. L'eau iodée est ajoutée en dernier : elle bleuit en présence d'amidon.",
+              "answers": [
+                {
+                  "content": "Plonger la feuille dans l'eau bouillante"
+                },
+                {
+                  "content": "Décolorer la feuille dans l'alcool chaud"
+                },
+                {
+                  "content": "Rincer la feuille à l'eau"
+                },
+                {
+                  "content": "Recouvrir la feuille d'eau iodée"
+                }
+              ]
+            },
+            {
+              "content": "La zone sous la bande reste jaune-brun, car elle ne contient pas d'___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : on lit la couleur de l'eau iodée. Elle devient bleu-noir avec l'amidon et reste jaune-brun sans amidon. La zone sous la bande reste jaune-brun : elle ne contient donc pas d'amidon.",
+              "answers": [
+                {
+                  "content": "amidon",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelle conclusion permet ce résultat ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Comparer : les deux zones sont sur la même feuille et ne diffèrent que par la lumière. Étape 4 — Conclure : seule la zone éclairée a de l'amidon, donc la lumière est nécessaire à sa fabrication. La proposition qui dit le contraire contredit le résultat, et celle sur la chlorophylle ne peut pas être conclue : la chlorophylle est présente dans les deux zones.",
+              "answers": [
+                {
+                  "content": "La lumière est nécessaire à la fabrication d'amidon dans la feuille",
+                  "correct": true
+                },
+                {
+                  "content": "La lumière détruit l'amidon dans la feuille",
+                  "correct": false
+                },
+                {
+                  "content": "L'amidon se forme seulement dans l'obscurité",
+                  "correct": false
+                },
+                {
+                  "content": "La chlorophylle est inutile à la fabrication d'amidon",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La zone sous la bande et la zone découverte ont la même chlorophylle, donc la différence de résultat s'explique seulement par la lumière.",
+              "question_type": "true_false",
+              "explanation": "Méthode : on isole le facteur étudié. Les deux zones appartiennent à la même feuille verte, donc elles ont la même chlorophylle, la même eau et la même température. La seule différence est la lumière, et c'est elle qui explique la différence d'amidon.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La serre : le dioxyde de carbone et le rendement",
+          "statement": "Dans une serre du jardin scolaire, le club de SVT cultive des tomates. Une expérience fictive mesure le volume de dioxygène produit en une heure par un plant de tomate pour différentes teneurs de l'air en dioxyde de carbone. L'air extérieur en contient environ 0,04 %. Résultats simplifiés : 0 mL à 0 %, 10 mL à 0,02 %, 19 mL à 0,04 %, 26 mL à 0,06 %, 30 mL à 0,08 % et 30 mL à 0,10 %.",
+          "exercise_type": "fixation",
+          "figure": "courbe-co2",
+          "questions": [
+            {
+              "content": "Quel volume de dioxygène le plant produit-il en une heure dans l'air normal, à 0,04 % de dioxyde de carbone ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Lire : l'axe horizontal donne la teneur en $CO_2$ en %, l'axe vertical le volume de dioxygène en mL par heure. On cherche la valeur pour 0,04 %. Étape 2 — Décrire : à 0,04 %, la production est de 19 mL. Elle est de 10 mL à 0,02 % et de 26 mL à 0,06 %.",
+              "answers": [
+                {
+                  "content": "19",
+                  "correct": true
+                }
+              ],
+              "unit": "mL",
+              "tolerance": 0
+            },
+            {
+              "content": "Comment décrire la courbe ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 2 — Décrire. La production passe de 0 mL à 30 mL entre 0 % et 0,08 %, puis reste à 30 mL à 0,10 %. C'est une croissance suivie d'un plateau. Une courbe qui redescend serait celle d'un optimum, comme pour la température. Elle n'est pas constante, puisque les valeurs changent de 0 à 30 mL.",
+              "answers": [
+                {
+                  "content": "Elle monte puis forme un plateau à partir de 0,08 %",
+                  "correct": true
+                },
+                {
+                  "content": "Elle monte puis redescend après un optimum",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est constante de 0 à 0,10 %",
+                  "correct": false
+                },
+                {
+                  "content": "Elle diminue quand la teneur en $CO_2$ augmente",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Jusqu'à quelle teneur en dioxyde de carbone, en %, enrichir l'air de la serre augmente-t-il encore la production ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Décrire : la production monte jusqu'à 30 mL à 0,08 % puis reste à 30 mL à 0,10 %. Étape 3 — Identifier : au-delà de 0,08 %, le $CO_2$ n'est plus limitant. Enrichir l'air jusqu'à 0,08 % est utile, davantage serait inutile.",
+              "answers": [
+                {
+                  "content": "0,08",
+                  "correct": true
+                }
+              ],
+              "unit": "%",
+              "tolerance": 0
+            },
+            {
+              "content": "Quels autres facteurs le jardinier doit-il régler dans la serre pour bien faire photosynthétiser les tomates ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 3 — Identifier : au plateau du $CO_2$, un autre facteur peut limiter la photosynthèse. Les facteurs de la photosynthèse sont la lumière, le $CO_2$ et la température. La couleur des pots, le nombre de graines et la forme des étiquettes n'agissent pas sur la photosynthèse de la feuille.",
+              "answers": [
+                {
+                  "content": "L'intensité lumineuse",
+                  "correct": true
+                },
+                {
+                  "content": "La température",
+                  "correct": true
+                },
+                {
+                  "content": "La couleur des pots",
+                  "correct": false
+                },
+                {
+                  "content": "Le nombre de graines dans le sachet",
+                  "correct": false
+                },
+                {
+                  "content": "La forme des étiquettes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans cette expérience, un plant placé dans de l'air sans dioxyde de carbone (0 %) produit encore du dioxygène par photosynthèse.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Décrire : à 0 % de $CO_2$, la production est de 0 mL. Étape 4 — Conclure : sans $CO_2$, qui est un réactif du bilan, la photosynthèse ne peut pas avoir lieu. Le bilan $6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$ montre que le $CO_2$ entre dans la réaction.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À partir de 0,08 %, la courbe forme un plateau : le dioxyde de carbone n'est plus le facteur ___.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 3 — Identifier. Sur un plateau, augmenter le facteur étudié ne change plus l'intensité. À partir de 0,08 %, le $CO_2$ n'est plus le facteur limitant ; un autre facteur, comme la lumière ou la température, l'est.",
+              "answers": [
+                {
+                  "content": "limitant",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La plantation : la température et la photosynthèse",
+          "statement": "Un planteur installe de jeunes plants dans une pépinière. Une expérience fictive mesure le volume de dioxygène produit en une heure par ces plants, à lumière et à teneur en dioxyde de carbone constantes, pour plusieurs températures. Résultats simplifiés, en mL à 10, 15, 20, 25, 30, 35, 40, 45 et 50 °C : 6, 10, 20, 28, 34, 36, 30, 14 et 2.",
+          "exercise_type": "evaluation",
+          "figure": "courbe-temperature",
+          "questions": [
+            {
+              "content": "À quelle température la production de dioxygène est-elle la plus forte ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Lire : l'axe horizontal donne la température en °C, l'axe vertical la production de dioxygène en mL par heure. Étape 2 — Décrire : la courbe monte jusqu'à 36 mL à 35 °C, puis redescend. Le maximum, ou optimum, est à 35 °C.",
+              "answers": [
+                {
+                  "content": "35",
+                  "correct": true
+                }
+              ],
+              "unit": "°C",
+              "tolerance": 0
+            },
+            {
+              "content": "Que se passe-t-il entre 35 °C et 45 °C ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 2 — Décrire. À 35 °C la production est de 36 mL, à 40 °C de 30 mL, à 45 °C de 14 mL : elle diminue. Elle ne s'annule pas dès 40 °C, puisqu'elle vaut encore 30 mL, et elle ne reste pas constante.",
+              "answers": [
+                {
+                  "content": "La production diminue de 36 mL à 14 mL",
+                  "correct": true
+                },
+                {
+                  "content": "La production augmente de 36 mL à 14 mL",
+                  "correct": false
+                },
+                {
+                  "content": "La production reste à 36 mL",
+                  "correct": false
+                },
+                {
+                  "content": "La production s'annule dès 40 °C",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont justes d'après les résultats ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 2 — Décrire, en vérifiant chaque valeur. La production est maximale à 35 °C (36 mL), faible à 10 °C (6 mL) et presque nulle à 50 °C (2 mL). Elle n'augmente pas toujours avec la température, puisqu'elle redescend après 35 °C, et elle vaut 14 mL à 45 °C contre 30 mL à 40 °C.",
+              "answers": [
+                {
+                  "content": "La production est maximale à 35 °C",
+                  "correct": true
+                },
+                {
+                  "content": "À 10 °C la production est faible (6 mL)",
+                  "correct": true
+                },
+                {
+                  "content": "À 50 °C la production est presque nulle (2 mL)",
+                  "correct": true
+                },
+                {
+                  "content": "La production augmente toujours avec la température",
+                  "correct": false
+                },
+                {
+                  "content": "La production à 45 °C est supérieure à celle à 40 °C",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "De combien de mL la production augmente-t-elle entre 20 °C et 30 °C ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Décrire avec des valeurs. À 20 °C la production est de 20 mL, à 30 °C elle est de 34 mL. L'augmentation est $34 - 20 = 14$ mL.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ],
+              "unit": "mL",
+              "tolerance": 0
+            },
+            {
+              "content": "Le facteur limitant d'une courbe est toujours la lumière.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 3 — Identifier. Le facteur limitant dépend de la situation : c'est le facteur étudié sur la partie croissante, et un autre facteur sur le plateau. Ici le facteur étudié est la température, et la lumière est maintenue constante. Dire qu'il s'agit toujours de la lumière est faux.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "À partir des valeurs, explique en trois ou quatre phrases pourquoi un planteur n'a pas intérêt à laisser la température monter à 45 °C dans la pépinière, même si la lumière est abondante.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : D'après les résultats, la production de dioxygène est maximale à 35 °C (36 mL par heure) puis diminue à 30 mL à 40 °C et à 14 mL à 45 °C. Au-delà de l'optimum, la température devient défavorable : même avec beaucoup de lumière, l'intensité de la photosynthèse baisse. Le planteur a donc intérêt à ombrager ou à arroser pour garder une température proche de 35 °C. Barème : valeurs citées (1 point), diminution après l'optimum (1 point), la lumière ne compense pas (0,5 point), conclusion (0,5 point).",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "Cite des valeurs de la courbe (36 mL à 35 °C et 14 mL à 45 °C)",
+                "Dit que la production diminue après l'optimum",
+                "Dit que la lumière abondante ne compense pas la température trop élevée",
+                "Conclut sur le choix d'une température proche de l'optimum"
+              ],
+              "starter": "D'après les résultats, la production est maximale à…"
+            }
+          ]
+        },
+        {
+          "title": "La forêt et les algues : producteurs de matière et de dioxygène",
+          "statement": "Une classe visite une forêt classée, puis une lagune où flottent des algues vertes microscopiques. Le professeur rappelle que les arbres et les algues vertes contiennent des chloroplastes. Le bilan simplifié de leur photosynthèse est $6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$. Dans un modèle simplifié, des algues absorbent 30 molécules de dioxyde de carbone pendant une heure d'éclairement.",
+          "exercise_type": "evaluation",
+          "figure": "bilan-photosynthese",
+          "questions": [
+            {
+              "content": "Pourquoi les algues vertes peuvent-elles réaliser la photosynthèse ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Localiser : la photosynthèse se déroule dans les chloroplastes, qui contiennent la chlorophylle. Étape 4 — Conclure : la chlorophylle capte l'énergie lumineuse. Les algues vertes ont des chloroplastes, donc elles photosynthétisent. Elles ont besoin de lumière, et les pigments orange (carotènes) ne suffisent pas à les rendre vertes.",
+              "answers": [
+                {
+                  "content": "Elles contiennent des chloroplastes avec de la chlorophylle",
+                  "correct": true
+                },
+                {
+                  "content": "Elles ont des racines qui absorbent le dioxygène",
+                  "correct": false
+                },
+                {
+                  "content": "Elles contiennent seulement des pigments orange",
+                  "correct": false
+                },
+                {
+                  "content": "Elles n'ont pas besoin de lumière",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le modèle simplifié, 30 molécules de dioxyde de carbone sont absorbées. Combien de molécules de dioxygène sont produites ?",
+              "question_type": "numeric",
+              "explanation": "Méthode du bilan. Étape 2 — Écrire : $6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$. Étape 3 — Équilibrer : 6 $CO_2$ donnent 6 $O_2$, soit autant de $O_2$ que de $CO_2$. Avec 30 molécules de $CO_2$, on obtient 30 molécules de $O_2$.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "molécules",
+              "tolerance": 0
+            },
+            {
+              "content": "Un flacon d'algues vertes est placé à l'obscurité. Pourquoi la teneur en dioxygène de l'eau diminue-t-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Identifier. À l'obscurité, la photosynthèse s'arrête, faute d'énergie lumineuse : il n'y a plus de dioxygène produit. Les algues continuent à respirer, c'est-à-dire à consommer du dioxygène et à rejeter du dioxyde de carbone. La teneur en dioxygène diminue donc. Les autres propositions décrivent la photosynthèse, qui nécessite de la lumière.",
+              "answers": [
+                {
+                  "content": "Les algues respirent et ne font plus de photosynthèse",
+                  "correct": true
+                },
+                {
+                  "content": "Les algues produisent plus de dioxygène sans lumière",
+                  "correct": false
+                },
+                {
+                  "content": "Les algues fabriquent du glucose sans lumière",
+                  "correct": false
+                },
+                {
+                  "content": "Les algues absorbent du dioxyde de carbone sans lumière",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les arbres et les algues vertes fabriquent de la matière ___ à partir de matière minérale.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 4 — Interpréter le bilan. Le dioxyde de carbone et l'eau sont de la matière minérale. Le glucose, fabriqué grâce à l'énergie lumineuse, est de la matière organique. Les arbres et les algues vertes sont des producteurs de matière organique.",
+              "answers": [
+                {
+                  "content": "organique",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sur la forêt sont justes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 4 — Interpréter le bilan. Les arbres absorbent du $CO_2$ et rejettent du $O_2$ à la lumière ; ils fabriquent du glucose avec l'énergie lumineuse. Ils respirent pourtant de jour comme de nuit, comme toutes les cellules vivantes. La photosynthèse n'a pas lieu dans les racines, qui n'ont pas de chloroplastes.",
+              "answers": [
+                {
+                  "content": "Les arbres absorbent du dioxyde de carbone pendant la photosynthèse",
+                  "correct": true
+                },
+                {
+                  "content": "Les arbres rejettent du dioxygène à la lumière",
+                  "correct": true
+                },
+                {
+                  "content": "Les arbres fabriquent du glucose grâce à l'énergie lumineuse",
+                  "correct": true
+                },
+                {
+                  "content": "Les arbres ne respirent jamais",
+                  "correct": false
+                },
+                {
+                  "content": "La photosynthèse se déroule dans les racines des arbres",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À partir du bilan de la photosynthèse, explique en quelques phrases pourquoi les animaux de la forêt et de la lagune dépendent des arbres et des algues vertes.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : Les arbres et les algues vertes contiennent des chloroplastes. Grâce à la chlorophylle, ils captent l'énergie lumineuse et transforment le dioxyde de carbone et l'eau, matière minérale, en glucose, matière organique, selon $6\\,CO_2 + 6\\,H_2O \\rightarrow C_6H_{12}O_6 + 6\\,O_2$. Ils rejettent aussi du dioxygène. Les animaux ne fabriquent pas leur matière organique : ils se nourrissent des plantes ou d'animaux qui s'en nourrissent, et ils utilisent le dioxygène pour respirer. Barème : bilan (1 point), matière organique (1 point), dioxygène (1 point), énergie lumineuse et chlorophylle (0,5 point), rédaction (0,5 point).",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "Cite le bilan ou ses substances (CO2, eau, glucose, O2)",
+                "Dit que les arbres et les algues fabriquent de la matière organique",
+                "Dit que le dioxygène est rejeté et utile à la respiration des animaux",
+                "Mentionne le rôle de l'énergie lumineuse et de la chlorophylle",
+                "Rédige avec des phrases courtes et le vocabulaire exact"
+              ],
+              "starter": "Les arbres et les algues vertes fabriquent…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
