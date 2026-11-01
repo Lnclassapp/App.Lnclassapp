@@ -1,0 +1,1719 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Le réflexe inné",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "arc-reflexe",
+          "kind": "diagram",
+          "description": "Schéma fléché de l'arc réflexe, de gauche à droite : le récepteur capte le stimulus, le nerf sensitif conduit le message vers le centre nerveux, le centre nerveux élabore la réponse, le nerf moteur la conduit à l'effecteur, qui réalise la réponse. Les couleurs distinguent la voie sensitive, le centre et la voie motrice.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "rec",
+                "label": "Récepteur",
+                "category": 1
+              },
+              {
+                "id": "ns",
+                "label": "Nerf sensitif",
+                "category": 1
+              },
+              {
+                "id": "cn",
+                "label": "Centre nerveux",
+                "category": 2
+              },
+              {
+                "id": "nm",
+                "label": "Nerf moteur",
+                "category": 3
+              },
+              {
+                "id": "eff",
+                "label": "Effecteur",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "rec",
+                "to": "ns"
+              },
+              {
+                "from": "ns",
+                "to": "cn",
+                "label": "message sensitif"
+              },
+              {
+                "from": "cn",
+                "to": "nm",
+                "label": "message moteur"
+              },
+              {
+                "from": "nm",
+                "to": "eff"
+              }
+            ],
+            "legend": [
+              "Voie sensitive",
+              "Centre nerveux",
+              "Voie motrice"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "moelle-racines",
+          "kind": "diagram",
+          "description": "Schéma fléché du trajet du message dans un réflexe médullaire : la peau (récepteur) envoie le message par la racine dorsale vers la moelle épinière, puis la moelle l'envoie par la racine ventrale jusqu'au muscle (effecteur). La moelle épinière n'a pas de planche dédiée : ce schéma montre seulement le sens de conduction dans chaque racine.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "peau",
+                "label": "Peau (récepteur)",
+                "category": 1
+              },
+              {
+                "id": "rd",
+                "label": "Racine dorsale",
+                "category": 1
+              },
+              {
+                "id": "moelle",
+                "label": "Moelle épinière",
+                "category": 2
+              },
+              {
+                "id": "rv",
+                "label": "Racine ventrale",
+                "category": 3
+              },
+              {
+                "id": "muscle",
+                "label": "Muscle (effecteur)",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "peau",
+                "to": "rd",
+                "label": "stimulus"
+              },
+              {
+                "from": "rd",
+                "to": "moelle",
+                "label": "vers la moelle"
+              },
+              {
+                "from": "moelle",
+                "to": "rv"
+              },
+              {
+                "from": "rv",
+                "to": "muscle",
+                "label": "hors de la moelle"
+              }
+            ],
+            "legend": [
+              "Voie sensitive",
+              "Centre nerveux",
+              "Voie motrice"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "temps-reponse-distance",
+          "kind": "stat_chart",
+          "description": "Courbe d'une expérience fictive (résultats simplifiés) : le temps de réponse du muscle, en millisecondes, selon la distance entre le point de stimulation du nerf et le muscle. Pour 10, 20, 30, 40 et 50 cm, le muscle répond après 4, 6, 8, 10 et 12 ms : le temps augmente de 2 ms chaque fois que la distance augmente de 10 cm.",
+          "params": {
+            "chart": "line",
+            "series": [
+              4,
+              6,
+              8,
+              10,
+              12
+            ],
+            "labels": [
+              "10 cm",
+              "20 cm",
+              "30 cm",
+              "40 cm",
+              "50 cm"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître un réflexe inné",
+          "remember": "Un **réflexe inné** est une réponse automatique d'un organe à une stimulation précise. Il a quatre caractères : il est **stéréotypé** (même stimulus, même réponse à chaque fois), **involontaire** (la personne ne le décide pas), **héréditaire** (présent dès la naissance, sans apprentissage) et **rapide**. Un **geste volontaire** est décidé et réfléchi ; un geste **appris** (entraînement, habitude) s'acquiert avec le temps : ni l'un ni l'autre n'est un réflexe inné.",
+          "method": [
+            "Identifier le stimulus (ce qui déclenche) et la réponse (ce qui se produit).",
+            "Vérifier si la réponse est stéréotypée (toujours la même) et involontaire (sans décision).",
+            "Vérifier si la réponse existe dès la naissance, sans apprentissage (caractère héréditaire), et si elle est rapide.",
+            "Conclure : si les quatre caractères sont réunis, c'est un réflexe inné ; sinon, c'est un geste volontaire ou appris."
+          ],
+          "example": {
+            "statement": "Un nouveau-né reçoit une goutte de lait dans la bouche : ses glandes salivaires sécrètent de la salive. Est-ce un réflexe inné ?",
+            "steps": [
+              "Identifier : le stimulus est le lait dans la bouche ; la réponse est la sécrétion de salive.",
+              "Vérifier : la réponse est toujours la même pour ce stimulus et le bébé ne la décide pas : elle est stéréotypée et involontaire.",
+              "Vérifier : le bébé n'a rien appris, la réponse existe dès la naissance (héréditaire) et elle est rapide.",
+              "Conclure : les quatre caractères sont réunis, la salivation du nouveau-né est un réflexe inné."
+            ]
+          },
+          "pitfall": "Ne pas croire que tout geste rapide est un réflexe. Contre-exemple : un gardien de but qui plonge pour arrêter un tir est très rapide, mais son geste est décidé et appris à l'entraînement. Il n'est ni involontaire ni présent à la naissance : ce n'est pas un réflexe inné. Pour éviter l'erreur, vérifie toujours les quatre caractères, pas seulement la rapidité.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître un réflexe inné",
+            "statement": "Dans cet exercice, tu reconnais les réflexes innés avec les quatre étapes de la fiche, dans la cuisine, sur le terrain et dans la rue.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Parmi ces caractères, lequel n'est PAS un caractère d'un réflexe inné ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 et Étape 3 — Vérifier : un réflexe inné est stéréotypé, involontaire, héréditaire (présent dès la naissance) et rapide. Un caractère acquis par l'entraînement est celui d'un geste appris, pas d'un réflexe inné. Étape 4 — Conclure : seul « il s'acquiert par l'entraînement » est à rejeter.",
+                "answers": [
+                  {
+                    "content": "Il s'acquiert par l'entraînement",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est stéréotypé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est involontaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est rapide",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un footballeur qui tire un penalty en visant le coin gauche accomplit un réflexe inné.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Identifier : le stimulus est la position du ballon, la réponse est le tir. Étape 2 — Vérifier : le joueur décide du coin visé, le geste n'est pas involontaire. Étape 3 — Vérifier : il a été appris à l'entraînement, il n'existe pas à la naissance. Étape 4 — Conclure : c'est un geste volontaire et appris, donc faux.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles situations sont des réflexes innés ? Choisis les trois bonnes propositions.",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Identifier : pour chaque situation, on cherche stimulus et réponse. Étape 2 et Étape 3 — Vérifier : la jambe qui se détend, la main qui se retire et la pupille qui se resserre sont stéréotypées, involontaires, présentes dès la naissance et rapides. Freiner, dribbler et écrire sont décidés et appris. Étape 4 — Conclure : les trois premières sont des réflexes innés.",
+                "answers": [
+                  {
+                    "content": "La jambe se détend quand le médecin frappe le tendon sous la rotule",
+                    "correct": true
+                  },
+                  {
+                    "content": "La main se retire de la casserole brûlante",
+                    "correct": true
+                  },
+                  {
+                    "content": "La pupille se resserre quand on sort d'une pièce sombre en plein soleil",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le conducteur freine à un feu rouge",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le joueur dribble un adversaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'élève écrit son nom",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque caractère du réflexe inné à sa signification.",
+                "question_type": "matching",
+                "explanation": "Étape 2 et Étape 3 — Vérifier : stéréotypé veut dire que le stimulus donne toujours la même réponse ; involontaire, que la personne ne la décide pas ; héréditaire, que le réflexe existe dès la naissance sans apprentissage ; rapide, que la réponse suit presque aussitôt le stimulus. Ce sont les quatre caractères à contrôler avant de conclure.",
+                "answers": [
+                  {
+                    "content": "Stéréotypé",
+                    "match": "Même réponse à chaque fois pour le même stimulus"
+                  },
+                  {
+                    "content": "Involontaire",
+                    "match": "Se produit sans que la personne le décide"
+                  },
+                  {
+                    "content": "Héréditaire",
+                    "match": "Présent dès la naissance, sans apprentissage"
+                  },
+                  {
+                    "content": "Rapide",
+                    "match": "Réponse en très peu de temps"
+                  }
+                ]
+              },
+              {
+                "content": "Un réflexe présent dès la naissance, sans aucun apprentissage, est dit ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Vérifier : une réponse qui existe dès la naissance, sans apprentissage, est présente chez tous les individus de l'espèce et se transmet : on dit qu'elle est innée, ou héréditaire. Étape 4 — Conclure : c'est le caractère qui distingue le réflexe inné d'un geste appris.",
+                "answers": [
+                  {
+                    "content": "inné",
+                    "correct": true
+                  },
+                  {
+                    "content": "héréditaire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le gardien de but qui plonge sur un tir tendu fait un ___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Identifier : le stimulus est le tir, la réponse est le plongeon. Étape 2 — Vérifier : le gardien décide de plonger. Étape 3 — Vérifier : il a appris ce geste en s'entraînant, il est rapide mais pas inné. Étape 4 — Conclure : c'est un geste volontaire appris. Piège : la rapidité seule ne suffit pas à faire un réflexe inné.",
+                "answers": [
+                  {
+                    "content": "geste volontaire acquis par l'entraînement",
+                    "correct": true
+                  },
+                  {
+                    "content": "réflexe inné",
+                    "correct": false
+                  },
+                  {
+                    "content": "réflexe de salivation",
+                    "correct": false
+                  },
+                  {
+                    "content": "réflexe rotulien",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître un réflexe inné avec les quatre étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Un enfant qui ferme les yeux quand un grain de sable arrive dans son œil accomplit un geste qu'il a décidé et appris.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Vérifier : la fermeture des paupières est involontaire et stéréotypée. Étape 3 — Vérifier : le bébé le fait déjà, sans avoir appris. Étape 4 — Conclure : c'est un réflexe inné, donc l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Demande-toi si l'enfant a eu besoin d'apprendre ce geste."
+              },
+              {
+                "content": "Quelle réponse est un réflexe inné chez un nouveau-né ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : on cherche stimulus et réponse. Étape 3 — Vérifier : seule la salivation existe dès la naissance sans apprentissage. Dribbler, lire et choisir un jouet demandent un apprentissage ou une décision. Étape 4 — Conclure : la salivation est le réflexe inné.",
+                "answers": [
+                  {
+                    "content": "La salivation quand du lait arrive dans la bouche",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le dribble avec un ballon",
+                    "correct": false
+                  },
+                  {
+                    "content": "La lecture d'une enseigne dans la rue",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le choix d'un jouet",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche ce que le bébé sait déjà faire le jour de sa naissance."
+              },
+              {
+                "content": "Un geste décidé par la personne est dit ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Vérifier : un réflexe est involontaire. Un geste décidé par la personne est volontaire. Étape 4 — Conclure : ce n'est donc pas un réflexe inné.",
+                "answers": [
+                  {
+                    "content": "volontaire",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "L'arc réflexe",
+          "remember": "L'**arc réflexe** est le trajet suivi par le message nerveux dans un réflexe. Il comprend cinq éléments, toujours dans le même ordre : le **récepteur**, qui capte le stimulus ; le **nerf sensitif**, qui conduit le message vers le centre nerveux ; le **centre nerveux** (moelle épinière ou encéphale), qui élabore la réponse ; le **nerf moteur**, qui conduit la commande du centre vers l'effecteur ; l'**effecteur** (muscle ou glande), qui exécute la réponse. Le sens de circulation est toujours le même.",
+          "method": [
+            "Repérer le stimulus et la réponse du réflexe.",
+            "Nommer le récepteur (qui capte le stimulus) et l'effecteur (qui réalise la réponse).",
+            "Relier le récepteur au centre nerveux par le nerf sensitif, puis le centre à l'effecteur par le nerf moteur.",
+            "Ordonner le trajet complet, du récepteur à l'effecteur."
+          ],
+          "example": {
+            "statement": "Dans la cuisine, un doigt touche une plaque chaude et la main se retire aussitôt. Écrire l'arc réflexe du retrait de la main.",
+            "steps": [
+              "Repérer : le stimulus est la chaleur sur le doigt ; la réponse est la contraction des muscles du bras, qui retire la main.",
+              "Nommer : le récepteur est la peau du doigt, sensible à la chaleur ; l'effecteur est un muscle du bras.",
+              "Relier : le nerf sensitif conduit le message de la peau du doigt vers la moelle épinière ; le nerf moteur conduit la commande de la moelle vers le muscle du bras.",
+              "Ordonner : peau du doigt, nerf sensitif, moelle épinière, nerf moteur, muscle du bras."
+            ]
+          },
+          "pitfall": "Ne pas nommer les nerfs d'après la réponse finale. Contre-exemple : le nerf qui part de la peau du doigt vers la moelle est sensitif, même si le retrait de la main est un mouvement. Seul compte le sens de conduction : vers le centre nerveux, le nerf est sensitif ; depuis le centre vers l'effecteur, il est moteur.",
+          "figure": "arc-reflexe",
+          "exercise": {
+            "title": "Décrire un arc réflexe",
+            "statement": "Dans cet exercice, tu écris des arcs réflexes avec les quatre étapes de la fiche. Le schéma montre l'ordre des cinq éléments.",
+            "exercise_type": "fixation",
+            "figure": "arc-reflexe",
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les cinq éléments de l'arc réflexe, du stimulus à la réponse.",
+                "question_type": "ordering",
+                "explanation": "Étape 4 — Ordonner : le message part du récepteur, suit le nerf sensitif jusqu'au centre nerveux, puis le nerf moteur jusqu'à l'effecteur. Étape 3 — Relier : le nerf sensitif va vers le centre, le nerf moteur part du centre. L'ordre ne change jamais.",
+                "answers": [
+                  {
+                    "content": "Récepteur"
+                  },
+                  {
+                    "content": "Nerf sensitif"
+                  },
+                  {
+                    "content": "Centre nerveux"
+                  },
+                  {
+                    "content": "Nerf moteur"
+                  },
+                  {
+                    "content": "Effecteur"
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque élément de l'arc réflexe à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Nommer : le récepteur capte le stimulus et l'effecteur réalise la réponse. Étape 3 — Relier : le nerf sensitif conduit le message vers le centre nerveux, qui élabore la réponse ; le nerf moteur conduit la commande vers l'effecteur. Chaque élément a un seul rôle.",
+                "answers": [
+                  {
+                    "content": "Récepteur",
+                    "match": "Capte le stimulus"
+                  },
+                  {
+                    "content": "Nerf sensitif",
+                    "match": "Conduit le message vers le centre nerveux"
+                  },
+                  {
+                    "content": "Centre nerveux",
+                    "match": "Élabore la réponse"
+                  },
+                  {
+                    "content": "Nerf moteur",
+                    "match": "Conduit la commande vers l'effecteur"
+                  },
+                  {
+                    "content": "Effecteur",
+                    "match": "Réalise la réponse"
+                  }
+                ]
+              },
+              {
+                "content": "Dans le retrait de la main d'une plaque chaude, quel est l'effecteur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la réponse est la contraction qui retire la main. Étape 2 — Nommer : l'élément qui réalise cette réponse est un muscle du bras, c'est l'effecteur. La peau du doigt est le récepteur, la moelle épinière le centre, le nerf moteur seulement la voie de conduction.",
+                "answers": [
+                  {
+                    "content": "Un muscle du bras",
+                    "correct": true
+                  },
+                  {
+                    "content": "La peau du doigt",
+                    "correct": false
+                  },
+                  {
+                    "content": "La moelle épinière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nerf moteur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un nerf sensitif conduit le message nerveux du centre nerveux vers l'effecteur.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Relier : le nerf sensitif conduit le message vers le centre nerveux, depuis le récepteur. C'est le nerf moteur qui conduit la commande du centre vers l'effecteur. Piège : on ne nomme pas un nerf d'après la réponse finale, mais d'après son sens de conduction.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le lait arrive dans la bouche d'un nouveau-né : l'effecteur de ce réflexe est la glande ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la réponse est la sécrétion de salive. Étape 2 — Nommer : l'organe qui sécrète la salive est la glande salivaire, c'est donc l'effecteur. Un effecteur peut être un muscle ou une glande.",
+                "answers": [
+                  {
+                    "content": "salivaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "salivaires",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Réflexe pupillaire : une forte lumière arrive dans l'œil et la pupille se resserre. Quelles propositions sont justes ? Choisis les deux bonnes.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : le stimulus est la lumière, la réponse est le resserrement de la pupille. Étape 2 — Nommer : la rétine capte la lumière, c'est le récepteur ; les muscles de l'iris resserrent la pupille, ils sont les effecteurs. Piège : un nerf conduit le message, il ne capte pas le stimulus.",
+                "answers": [
+                  {
+                    "content": "Le récepteur est la rétine, sensible à la lumière",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'effecteur est formé des muscles de l'iris",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le récepteur est le muscle de l'iris",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'effecteur est la rétine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nerf moteur capte la lumière",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à écrire un arc réflexe avec les quatre étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un réflexe, le nerf ___ conduit le message vers le centre nerveux et le nerf ___ conduit la commande vers l'effecteur.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Relier : le nerf sensitif va du récepteur au centre nerveux ; le nerf moteur va du centre nerveux à l'effecteur. Étape 4 — Ordonner : le sens est toujours le même.",
+                "answers": [
+                  {
+                    "content": "sensitif",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "moteur",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le premier nerf rencontré après le récepteur est celui qui informe le centre."
+              },
+              {
+                "content": "Dans un réflexe, quel élément élabore la réponse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Relier : le message arrive au centre nerveux par le nerf sensitif, puis la commande repart par le nerf moteur. Le centre nerveux est l'élément qui élabore la réponse.",
+                "answers": [
+                  {
+                    "content": "Le centre nerveux",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le récepteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nerf sensitif",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'effecteur",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les racines de la moelle épinière",
+          "remember": "De chaque côté de la moelle épinière part un nerf rachidien, formé de deux **racines** : la **racine dorsale** (côté du dos), qui porte un renflement, le ganglion spinal, et la **racine ventrale** (côté du ventre). Dans une expérience, après la section d'une racine, on excite le **bout central** (resté relié à la moelle) ou le **bout périphérique** (relié à l'organe). **Loi de Bell-Magendie** : la racine dorsale est **sensitive** (elle conduit le message vers la moelle) et la racine ventrale est **motrice** (elle conduit le message hors de la moelle).",
+          "method": [
+            "Relever la racine coupée et l'effet de la section sur la sensibilité et sur le mouvement.",
+            "Repérer le bout excité (central ou périphérique) et la réponse obtenue.",
+            "Déduire le sens de conduction de la racine : vers la moelle ou hors de la moelle.",
+            "Conclure en nommant la racine : sensitive si elle conduit vers la moelle, motrice si elle conduit hors de la moelle."
+          ],
+          "example": {
+            "statement": "Expérience fictive sur une grenouille (résultats simplifiés). On coupe une racine d'un nerf rachidien de la patte. Plus aucun pincement de la patte ne provoque de retrait. L'excitation du bout central de cette racine fait contracter la patte, celle du bout périphérique ne donne rien. Quelle est cette racine ?",
+            "steps": [
+              "Relever : la racine coupée est une racine du nerf de la patte ; après la section, la patte ne réagit plus au pincement : le message du stimulus n'arrive plus à la moelle.",
+              "Repérer : l'excitation du bout central (côté moelle) provoque une contraction ; celle du bout périphérique (côté patte) ne provoque rien.",
+              "Déduire : le message de l'excitation passe vers la moelle, qui commande la réponse : la racine conduit vers la moelle.",
+              "Conclure : une racine qui conduit vers la moelle est sensitive : c'est la racine dorsale."
+            ]
+          },
+          "pitfall": "Ne pas confondre les deux bouts d'une racine coupée. Contre-exemple : sur la racine ventrale, l'excitation du bout central ne donne rien, mais celle du bout périphérique fait contracter le muscle. Si tu te trompes de bout, tu conclus l'inverse de la loi de Bell-Magendie. Le bout central est celui qui reste relié à la moelle, le bout périphérique celui qui est relié à l'organe.",
+          "figure": "moelle-racines",
+          "exercise": {
+            "title": "Interpréter des sections de racines",
+            "statement": "Dans cet exercice, tu interprètes des expériences de section et d'excitation des racines (résultats simplifiés, expériences fictives) avec les quatre étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "moelle-racines",
+            "questions": [
+              {
+                "content": "Relie chaque notion à sa signification.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Déduire et Étape 4 — Conclure : la loi de Bell-Magendie dit que la racine dorsale est sensitive et la racine ventrale motrice. Étape 2 — Repérer : le bout central reste relié à la moelle, le bout périphérique est relié à l'organe. Ces quatre définitions servent à lire toute expérience.",
+                "answers": [
+                  {
+                    "content": "Racine dorsale",
+                    "match": "Sensitive : conduit le message vers la moelle"
+                  },
+                  {
+                    "content": "Racine ventrale",
+                    "match": "Motrice : conduit le message hors de la moelle"
+                  },
+                  {
+                    "content": "Bout central",
+                    "match": "Partie de la racine restée reliée à la moelle"
+                  },
+                  {
+                    "content": "Bout périphérique",
+                    "match": "Partie de la racine reliée à l'organe"
+                  }
+                ]
+              },
+              {
+                "content": "On coupe la racine ventrale d'un nerf de la patte et on excite son bout périphérique : la patte se contracte. Que conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer : l'excitation du bout périphérique, relié au muscle, le fait contracter. Étape 3 — Déduire : le message passe vers le muscle, hors de la moelle. Étape 4 — Conclure : la racine ventrale est motrice. Piège : un message vers la moelle donnerait un effet en excitant le bout central, pas le périphérique.",
+                "answers": [
+                  {
+                    "content": "La racine ventrale conduit le message de la moelle vers le muscle",
+                    "correct": true
+                  },
+                  {
+                    "content": "La racine ventrale conduit le message vers la moelle",
+                    "correct": false
+                  },
+                  {
+                    "content": "La racine ventrale conduit dans les deux sens",
+                    "correct": false
+                  },
+                  {
+                    "content": "La racine ventrale n'a aucun rôle",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On coupe la racine dorsale d'une patte et on excite son bout périphérique : la patte se contracte.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : le bout périphérique est le bout relié à la patte. Étape 3 — Déduire : la racine dorsale conduit le message vers la moelle, pas vers la patte. Étape 4 — Conclure : excité côté patte, le message ne va nulle part, il n'y a pas de contraction. Piège : se tromper de bout fait conclure l'inverse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "D'après la loi de Bell-Magendie, la racine ___ de la moelle épinière est sensitive.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Déduire : la racine dorsale conduit le message vers la moelle. Étape 4 — Conclure : une racine qui conduit vers la moelle est sensitive, c'est la racine dorsale (postérieure). La racine ventrale (antérieure) est motrice.",
+                "answers": [
+                  {
+                    "content": "dorsale",
+                    "correct": true
+                  },
+                  {
+                    "content": "postérieure",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après la section de la racine dorsale d'une patte, quelles observations sont attendues ? Choisis les deux bonnes.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Relever : la section de la racine dorsale supprime la sensibilité de la patte sans paralyser ses muscles. Étape 2 — Repérer : seul le bout central, resté relié à la moelle, donne une réponse. Étape 3 — Déduire : la racine dorsale conduit vers la moelle. Les muscles sont commandés par la racine ventrale, restée intacte.",
+                "answers": [
+                  {
+                    "content": "La patte perd sa sensibilité : un pincement ne provoque plus de retrait",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'excitation du bout central provoque une réponse",
+                    "correct": true
+                  },
+                  {
+                    "content": "La patte est paralysée : aucun muscle ne peut se contracter",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'excitation du bout périphérique provoque une contraction",
+                    "correct": false
+                  },
+                  {
+                    "content": "La moelle épinière cesse de fonctionner",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une racine est coupée : l'excitation de son bout central ne donne rien, l'excitation de son bout périphérique fait contracter le muscle. Quelle est cette racine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer : le bout périphérique donne une contraction, le bout central ne donne rien. Étape 3 — Déduire : le message passe hors de la moelle, vers le muscle. Étape 4 — Conclure : la racine est motrice, c'est la racine ventrale. Piège : confondre les deux bouts ferait choisir la racine dorsale.",
+                "answers": [
+                  {
+                    "content": "La racine ventrale",
+                    "correct": true
+                  },
+                  {
+                    "content": "La racine dorsale",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une racine qui conduit dans les deux sens",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas conclure",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à interpréter des expériences sur les racines avec les quatre étapes de la fiche.",
+            "questions": [
+              {
+                "content": "La racine ___ est sensitive et la racine ___ est motrice.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Conclure : d'après la loi de Bell-Magendie, la racine dorsale conduit le message vers la moelle (sensitive) et la racine ventrale le conduit hors de la moelle (motrice).",
+                "answers": [
+                  {
+                    "content": "dorsale",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "postérieure",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "ventrale",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "antérieure",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense au dos pour la racine qui apporte les messages sensitifs."
+              },
+              {
+                "content": "Après la section de la racine ventrale d'une patte, que devient la patte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : la racine ventrale est motrice. Étape 3 — Déduire : sans elle, la commande de la moelle n'arrive plus au muscle. La racine dorsale, intacte, garde la sensibilité. Étape 4 — Conclure : la patte est sensible mais paralysée.",
+                "answers": [
+                  {
+                    "content": "Elle reste sensible mais ne peut plus se contracter",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle devient insensible mais peut encore se contracter",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle devient insensible et ne peut plus se contracter",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle reste sensible et se contracte normalement",
+                    "correct": false
+                  }
+                ],
+                "hint": "La racine coupée est motrice : qu'est-ce qui n'arrive plus au muscle ?"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les réflexes médullaires et cérébraux",
+          "remember": "Un réflexe est **médullaire** quand son centre nerveux est la **moelle épinière** (réflexe rotulien, retrait de la main). Il est **cérébral** quand son centre nerveux est dans l'**encéphale** ; si ce centre est le **bulbe rachidien**, on parle de réflexe **bulbaire** (salivation du nouveau-né). Pour situer le centre, on supprime une partie du système nerveux : si le réflexe disparaît, le centre était dans la partie détruite.",
+          "method": [
+            "Repérer le stimulus, la réponse et la région du corps concernée.",
+            "Observer l'effet d'une séparation de la tête ou de la destruction d'un centre nerveux possible.",
+            "Situer le centre nerveux : là où la destruction supprime le réflexe.",
+            "Classer le réflexe : médullaire si le centre est la moelle épinière, cérébral (bulbaire si c'est le bulbe) si le centre est dans l'encéphale."
+          ],
+          "example": {
+            "statement": "Expérience fictive sur une grenouille (résultats simplifiés). Le pincement de la patte provoque son retrait. On sépare la tête du corps : le retrait persiste. On détruit ensuite la moelle épinière avec une fine tige : le retrait disparaît. Classer ce réflexe.",
+            "steps": [
+              "Repérer : le stimulus est le pincement, la réponse est le retrait de la patte, la région est un membre.",
+              "Observer : sans la tête, le retrait persiste ; après destruction de la moelle épinière, il disparaît.",
+              "Situer : le centre nerveux est la moelle épinière, car sa destruction supprime le réflexe alors que la tête n'est pas nécessaire.",
+              "Classer : le centre est la moelle épinière, c'est un réflexe médullaire."
+            ]
+          },
+          "pitfall": "Ne pas croire que le centre d'un réflexe est toujours le cerveau. Contre-exemple : la main se retire d'une casserole brûlante avant même que l'on sente la brûlure, car la moelle épinière commande le mouvement ; le cerveau est informé ensuite. Une grenouille sans tête retire encore sa patte : le centre n'est donc pas dans l'encéphale.",
+          "figure": null,
+          "exercise": {
+            "title": "Situer le centre nerveux d'un réflexe",
+            "statement": "Dans cet exercice, tu situes le centre nerveux de plusieurs réflexes (expériences fictives, résultats simplifiés) avec les quatre étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est le centre nerveux du réflexe rotulien ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le stimulus est le coup sous la rotule, la région est un membre. Étape 3 — Situer : le centre nerveux des réflexes des membres est la moelle épinière. Étape 4 — Classer : c'est un réflexe médullaire.",
+                "answers": [
+                  {
+                    "content": "La moelle épinière",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le bulbe rachidien",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cerveau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le nerf moteur",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une grenouille dont on a séparé la tête retire encore sa patte quand on la pince : le centre nerveux de ce réflexe est donc dans l'encéphale.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Observer : le retrait persiste sans la tête. Étape 3 — Situer : si le centre était dans l'encéphale, le réflexe disparaîtrait avec la tête. Le centre est donc la moelle épinière. Étape 4 — Classer : réflexe médullaire. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Chez un chien (expérience fictive), du lait déposé dans la bouche provoque la salivation. La destruction du bulbe rachidien supprime la salivation, la moelle épinière étant intacte. Comment classer ce réflexe ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Observer : la destruction du bulbe supprime le réflexe. Étape 3 — Situer : le centre nerveux est le bulbe rachidien, dans l'encéphale. Étape 4 — Classer : réflexe cérébral, bulbaire. Piège : la moelle épinière intacte ne suffit pas à faire un réflexe médullaire.",
+                "answers": [
+                  {
+                    "content": "Réflexe cérébral, plus précisément bulbaire",
+                    "correct": true
+                  },
+                  {
+                    "content": "Réflexe médullaire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Geste volontaire appris",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut pas le classer",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels réflexes sont médullaires ? Choisis les deux bonnes propositions.",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : on cherche la région concernée. Étape 3 — Situer : le réflexe rotulien et le retrait de la main ont leur centre dans la moelle épinière. La salivation a son centre dans le bulbe rachidien. Le tir et la lecture sont des gestes volontaires. Étape 4 — Classer : deux réflexes médullaires.",
+                "answers": [
+                  {
+                    "content": "Le réflexe rotulien",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le retrait de la main d'une plaque brûlante",
+                    "correct": true
+                  },
+                  {
+                    "content": "La salivation du nouveau-né",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le tir d'un joueur de football",
+                    "correct": false
+                  },
+                  {
+                    "content": "La lecture d'un panneau",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un réflexe dont le centre nerveux est la moelle épinière est dit ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Situer : le centre nerveux est la moelle épinière. Étape 4 — Classer : on appelle ce réflexe médullaire, du mot « moelle ». Un réflexe dont le centre est dans l'encéphale est dit cérébral.",
+                "answers": [
+                  {
+                    "content": "médullaire",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le retrait de la main d'une plaque brûlante est commandé par ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Observer : on retire sa main avant d'avoir senti la brûlure, ce qui montre que le cerveau n'est pas le centre. Étape 3 — Situer : le centre est la moelle épinière. Étape 4 — Classer : réflexe médullaire. Piège : croire que le cerveau commande tous les réflexes.",
+                "answers": [
+                  {
+                    "content": "la moelle épinière",
+                    "correct": true
+                  },
+                  {
+                    "content": "le cerveau seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "le bulbe rachidien",
+                    "correct": false
+                  },
+                  {
+                    "content": "les muscles du bras",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer le centre nerveux d'un réflexe avec les quatre étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Le réflexe de salivation du nouveau-né est un réflexe médullaire.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Situer : le centre nerveux de la salivation est le bulbe rachidien, qui fait partie de l'encéphale. Étape 4 — Classer : c'est un réflexe cérébral, bulbaire, non médullaire.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Où se trouve le centre : dans la moelle épinière ou dans le bulbe ?"
+              },
+              {
+                "content": "Quel est le centre nerveux d'un réflexe bulbaire ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Situer : un réflexe bulbaire a son centre dans le bulbe rachidien, situé dans l'encéphale. Étape 4 — Classer : c'est un réflexe cérébral.",
+                "answers": [
+                  {
+                    "content": "Le bulbe rachidien",
+                    "correct": true
+                  },
+                  {
+                    "content": "La moelle épinière",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le muscle effecteur",
+                    "correct": false
+                  },
+                  {
+                    "content": "La racine dorsale",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une grenouille sans tête retire encore sa patte : le centre de ce réflexe est la ___ épinière.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Observer : le retrait persiste sans la tête. Étape 3 — Situer : le centre est la moelle épinière. Étape 4 — Classer : réflexe médullaire.",
+                "answers": [
+                  {
+                    "content": "moelle",
+                    "correct": true
+                  }
+                ],
+                "hint": "C'est la partie du système nerveux contenue dans la colonne vertébrale."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le temps de réaction et la vitesse de l'influx",
+          "remember": "Le message nerveux se propage dans un nerf sous forme d'**influx nerveux**. Sa **vitesse** est $v = \\frac{d}{t}$ : $d$ en mètres, $t$ en secondes (1 ms = 0,001 s), $v$ en m/s. On stimule le nerf en deux points et on mesure le temps de réponse du muscle : la **différence** des distances divisée par la **différence** des temps donne la vitesse. Le **temps de réaction** d'un réflexe est le temps total entre stimulation et réponse ; il comprend le temps de conduction dans les nerfs et le temps de traversée du centre nerveux. Les valeurs de la leçon sont des résultats simplifiés.",
+          "method": [
+            "Relever, pour chaque point de stimulation, la distance au muscle et le temps de réponse.",
+            "Calculer l'écart de distance et l'écart de temps entre les deux points.",
+            "Calculer la vitesse $v = \\frac{d}{t}$ avec l'écart de distance en mètres et l'écart de temps en secondes.",
+            "Conclure : calculer un temps de conduction $t = \\frac{d}{v}$ ; le temps restant du temps total est le temps de traversée du centre nerveux."
+          ],
+          "example": {
+            "statement": "Expérience fictive (résultats simplifiés). On stimule un nerf moteur en deux points. Au point P1, à 0,50 m du muscle, le muscle répond après 12 ms. Au point P2, à 0,20 m du muscle, il répond après 6 ms. Calculer la vitesse de l'influx, puis le temps de conduction sur 0,50 m.",
+            "steps": [
+              "Relever : P1 est à 0,50 m avec 12 ms ; P2 est à 0,20 m avec 6 ms.",
+              "Calculer l'écart de distance : 0,50 − 0,20 = 0,30 m ; l'écart de temps : 12 − 6 = 6 ms = 0,006 s.",
+              "Calculer la vitesse : $v = \\frac{0{,}30}{0{,}006} = 50$ m/s.",
+              "Conclure : le temps de conduction sur 0,50 m est $t = \\frac{0{,}50}{50} = 0{,}010$ s = 10 ms ; le temps restant, 12 − 10 = 2 ms, correspond à la partie hors conduction (réponse du muscle)."
+            ]
+          },
+          "pitfall": "Ne pas diviser la distance totale par le temps total. Contre-exemple : avec P1, 0,50 m divisé par 12 ms donne environ 42 m/s, alors que la vitesse est 50 m/s. Le temps total contient aussi la durée de la réponse du muscle, qui ne dépend pas de la distance. Les deux points sont comparés pour que cette durée disparaisse de la différence. Autre erreur : oublier de convertir les ms en s.",
+          "figure": "temps-reponse-distance",
+          "exercise": {
+            "title": "Calculer une vitesse de l'influx",
+            "statement": "Dans cet exercice, tu calcules des vitesses et des temps de conduction avec les quatre étapes de la fiche. Les valeurs sont des résultats simplifiés d'expériences fictives. La courbe donne le temps de réponse du muscle selon la distance de stimulation.",
+            "exercise_type": "fixation",
+            "figure": "temps-reponse-distance",
+            "questions": [
+              {
+                "content": "Expérience fictive (résultats simplifiés). On stimule un nerf moteur en deux points. Au point P1, à 0,50 m du muscle, le muscle répond après 8 ms. Au point P2, à 0,20 m du muscle, il répond après 5 ms. Calcule la vitesse de l'influx nerveux.",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : P1 à 0,50 m avec 8 ms ; P2 à 0,20 m avec 5 ms. Étape 2 — Calculer les écarts : 0,50 − 0,20 = 0,30 m et 8 − 5 = 3 ms = 0,003 s. Étape 3 — Calculer la vitesse : $v = 0{,}30 / 0{,}003 = 100$ m/s. Piège : 0,50 m divisé par 8 ms donnerait 62,5 m/s, ce qui est faux, car le temps total contient la durée de la réponse du muscle.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ],
+                "unit": "m/s",
+                "tolerance": 0
+              },
+              {
+                "content": "Pourquoi calcule-t-on la vitesse avec les écarts entre deux points de stimulation, et non avec la distance et le temps d'un seul point ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Calculer les écarts : le temps total contient le temps de conduction et la durée de la réponse du muscle. Cette durée est la même pour P1 et P2, donc elle disparaît dans la différence des temps. Étape 3 — Calculer la vitesse : on obtient alors la vitesse de l'influx seule.",
+                "answers": [
+                  {
+                    "content": "La durée de la réponse du muscle est la même aux deux points et disparaît dans la différence",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que l'influx va plus vite entre les deux points",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que les deux points donnent toujours le même temps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce qu'il est interdit de stimuler un seul point",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un influx nerveux se propage à 40 m/s dans un nerf. Combien de millisecondes met-il pour parcourir 0,60 m ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : la distance est 0,60 m, la vitesse 40 m/s. Étape 3 — Calculer la vitesse : $v = d / t$, donc $t = d / v$. Étape 4 — Conclure : $t = 0{,}60 / 40 = 0{,}015$ s, soit 15 ms (1 s = 1 000 ms). Piège : oublier de convertir les secondes en millisecondes.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ],
+                "unit": "ms",
+                "tolerance": 0
+              },
+              {
+                "content": "Dans un réflexe, le temps total entre la stimulation et la réponse est 18 ms. Le temps de conduction dans les nerfs est 15 ms. Quel est le temps de traversée du centre nerveux ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : temps total 18 ms, temps de conduction 15 ms. Étape 4 — Conclure : le temps restant est le temps de traversée du centre nerveux, soit 18 − 15 = 3 ms. Le temps de réaction comprend les deux durées.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "unit": "ms",
+                "tolerance": 0
+              },
+              {
+                "content": "Le temps de réaction d'un réflexe est égal au seul temps de conduction du message dans les nerfs.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : le temps de réaction est le temps total entre stimulation et réponse. Il comprend le temps de conduction dans les nerfs et le temps de traversée du centre nerveux. L'affirmation oublie cette seconde durée, elle est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Deux points de stimulation sont à 0,60 m et 0,30 m du muscle ; le muscle répond après 9 ms et 3 ms. Quelle est la vitesse de l'influx ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Relever : 0,60 m avec 9 ms et 0,30 m avec 3 ms. Étape 2 — Calculer les écarts : 0,30 m et 6 ms = 0,006 s. Étape 3 — Calculer la vitesse : 0,30 / 0,006 = 50 m/s. Piège : garder 6 sans convertir donne 0,05 m/s ; une erreur de conversion d'un facteur 10 donne 5 ou 500 m/s.",
+                "answers": [
+                  {
+                    "content": "50 m/s",
+                    "correct": true
+                  },
+                  {
+                    "content": "0,05 m/s",
+                    "correct": false
+                  },
+                  {
+                    "content": "500 m/s",
+                    "correct": false
+                  },
+                  {
+                    "content": "5 m/s",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à calculer une vitesse de l'influx avec les quatre étapes de la fiche.",
+            "questions": [
+              {
+                "content": "Expérience fictive (résultats simplifiés). L'écart de distance entre deux points de stimulation est 0,24 m et l'écart de temps de réponse est 4 ms. Quelle est la vitesse de l'influx ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Calculer les écarts : 0,24 m et 4 ms = 0,004 s. Étape 3 — Calculer la vitesse : $v = 0{,}24 / 0{,}004 = 60$ m/s.",
+                "answers": [
+                  {
+                    "content": "60",
+                    "correct": true
+                  }
+                ],
+                "unit": "m/s",
+                "tolerance": 0,
+                "hint": "Convertis d'abord les millisecondes en secondes."
+              },
+              {
+                "content": "Pour calculer la vitesse de l'influx, on divise l'écart de ___ par l'écart de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Calculer les écarts : on compare deux points de stimulation. Étape 3 — Calculer la vitesse : $v = d / t$, avec l'écart de distance en mètres et l'écart de temps en secondes.",
+                "answers": [
+                  {
+                    "content": "distance",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "temps",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "durée",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La vitesse est une distance parcourue pendant un temps."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode de calcul.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 à Étape 4 : on relève d'abord les données, on calcule les écarts, puis la vitesse, et enfin on conclut. L'ordre des étapes de la fiche ne change pas.",
+                "answers": [
+                  {
+                    "content": "Relever les distances et les temps de réponse"
+                  },
+                  {
+                    "content": "Calculer l'écart de distance et l'écart de temps"
+                  },
+                  {
+                    "content": "Calculer la vitesse avec le temps en secondes"
+                  },
+                  {
+                    "content": "Conclure avec un temps de conduction ou de traversée du centre"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Sur le terrain de football : le réflexe rotulien",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Pendant un match de quartier, le médecin du club examine un joueur. Il frappe doucement le tendon sous la rotule avec un petit marteau : la jambe se détend aussitôt, sans que le joueur le décide. Les valeurs chiffrées sont des résultats simplifiés.",
+          "questions": [
+            {
+              "content": "Le médecin frappe plusieurs fois le tendon : la jambe se détend chaque fois de la même façon. Ce caractère montre que la réponse est stéréotypée.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la notion « Reconnaître un réflexe inné » : Étape 1 — Identifier : le stimulus est le coup sur le tendon, la réponse est l'extension de la jambe. Étape 2 — Vérifier : une même réponse à chaque coup est un caractère stéréotypé. Étape 4 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Sur le terrain, quelles situations sont des réflexes innés ? Choisis les trois bonnes propositions.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 1 — Identifier le stimulus et la réponse. Étape 2 — Vérifier : le tendon, la paupière et la pupille réagissent de façon stéréotypée et involontaire. Étape 3 — Vérifier : ces réponses existent dès la naissance. Plonger, dribbler et siffler sont décidés et appris. Étape 4 — Conclure : trois réflexes innés.",
+              "answers": [
+                {
+                  "content": "La jambe se détend quand on frappe le tendon sous la rotule",
+                  "correct": true
+                },
+                {
+                  "content": "La paupière se ferme quand de la terre projetée arrive vers l'œil",
+                  "correct": true
+                },
+                {
+                  "content": "La pupille se resserre quand les projecteurs du stade s'allument",
+                  "correct": true
+                },
+                {
+                  "content": "Le gardien plonge après avoir lu la trajectoire du ballon",
+                  "correct": false
+                },
+                {
+                  "content": "L'attaquant dribble le défenseur",
+                  "correct": false
+                },
+                {
+                  "content": "L'arbitre siffle une faute",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre l'arc du réflexe rotulien, du stimulus à la réponse.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la notion « L'arc réflexe » : Étape 2 — Nommer : les récepteurs captent l'étirement, le muscle de la cuisse réalise la réponse. Étape 3 — Relier : le nerf sensitif conduit vers la moelle, le nerf moteur en part. Étape 4 — Ordonner : récepteur, nerf sensitif, centre, nerf moteur, effecteur.",
+              "answers": [
+                {
+                  "content": "Récepteurs d'étirement du muscle de la cuisse"
+                },
+                {
+                  "content": "Nerf sensitif"
+                },
+                {
+                  "content": "Moelle épinière (centre nerveux)"
+                },
+                {
+                  "content": "Nerf moteur"
+                },
+                {
+                  "content": "Muscle de la cuisse (effecteur)"
+                }
+              ]
+            },
+            {
+              "content": "Quel est le centre nerveux du réflexe rotulien ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Les réflexes médullaires et cérébraux » : Étape 1 — Repérer : la réponse concerne un membre. Étape 3 — Situer : le centre nerveux des réflexes des membres est la moelle épinière. Étape 4 — Classer : réflexe médullaire. Piège : le cerveau n'est pas le centre de tous les réflexes.",
+              "answers": [
+                {
+                  "content": "La moelle épinière",
+                  "correct": true
+                },
+                {
+                  "content": "Le bulbe rachidien",
+                  "correct": false
+                },
+                {
+                  "content": "Le cerveau",
+                  "correct": false
+                },
+                {
+                  "content": "Le muscle de la cuisse",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le message sensitif parcourt 0,60 m jusqu'à la moelle à la vitesse de 60 m/s. Combien de millisecondes dure ce trajet ?",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion « Le temps de réaction et la vitesse de l'influx » : Étape 1 — Relever : d = 0,60 m, v = 60 m/s. Étape 4 — Conclure : $t = d / v = 0{,}60 / 60 = 0{,}010$ s = 10 ms. Piège : oublier de convertir les secondes en millisecondes.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "ms",
+              "tolerance": 0
+            },
+            {
+              "content": "Après une blessure, un joueur ne ressent plus rien sur sa jambe mais peut encore la bouger. Quelle racine de la moelle épinière est probablement touchée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Les racines de la moelle épinière » : Étape 1 — Relever : la sensibilité est perdue, le mouvement est conservé. Étape 3 — Déduire : le message sensitif n'arrive plus à la moelle. Étape 4 — Conclure : la racine dorsale (sensitive) est touchée ; la racine ventrale, motrice, fonctionne encore.",
+              "answers": [
+                {
+                  "content": "La racine dorsale, qui est sensitive",
+                  "correct": true
+                },
+                {
+                  "content": "La racine ventrale, qui est motrice",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux racines à la fois",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune racine, seule la moelle compte",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Dans la cuisine : le retrait de la main",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Dans la cuisine, Fatou touche par mégarde le couvercle brûlant d'une marmite : sa main se retire aussitôt, avant même qu'elle ait senti la douleur. Plus tard, elle saisit volontairement un torchon pour soulever la marmite.",
+          "questions": [
+            {
+              "content": "Relie chaque élément de l'arc réflexe du retrait de la main à l'élément correspondant chez Fatou.",
+              "question_type": "matching",
+              "explanation": "Méthode de la notion « L'arc réflexe » : Étape 1 — Repérer : stimulus = chaleur, réponse = retrait de la main. Étape 2 — Nommer : récepteur = peau du doigt, effecteur = muscle du bras. Étape 3 — Relier : nerf sensitif du doigt vers la moelle, nerf moteur de la moelle vers le muscle. Étape 4 — Ordonner : récepteur, nerf sensitif, centre, nerf moteur, effecteur.",
+              "answers": [
+                {
+                  "content": "Récepteur",
+                  "match": "Peau du doigt sensible à la chaleur"
+                },
+                {
+                  "content": "Nerf sensitif",
+                  "match": "Fibres qui vont du doigt à la moelle épinière"
+                },
+                {
+                  "content": "Centre nerveux",
+                  "match": "Moelle épinière"
+                },
+                {
+                  "content": "Nerf moteur",
+                  "match": "Fibres qui vont de la moelle aux muscles du bras"
+                },
+                {
+                  "content": "Effecteur",
+                  "match": "Muscle du bras qui retire la main"
+                }
+              ]
+            },
+            {
+              "content": "Fatou retire sa main avant d'avoir senti la douleur : cela montre que la moelle épinière commande ce réflexe et que le cerveau est informé ensuite.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la notion « Les réflexes médullaires et cérébraux » : Étape 2 — Observer : la main se retire avant que la douleur soit sentie. Étape 3 — Situer : le centre nerveux est la moelle épinière, qui répond sans attendre le cerveau. Étape 4 — Classer : réflexe médullaire. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quand Fatou saisit le torchon pour soulever la marmite, de quel type est son geste ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Reconnaître un réflexe inné » : Étape 1 — Identifier : le stimulus est l'envie de soulever la marmite. Étape 2 — Vérifier : Fatou décide du geste, il n'est pas involontaire. Étape 3 — Vérifier : on apprend à utiliser un torchon. Étape 4 — Conclure : geste volontaire appris, non réflexe.",
+              "answers": [
+                {
+                  "content": "Un geste volontaire appris",
+                  "correct": true
+                },
+                {
+                  "content": "Un réflexe inné médullaire",
+                  "correct": false
+                },
+                {
+                  "content": "Un réflexe inné bulbaire",
+                  "correct": false
+                },
+                {
+                  "content": "Un réflexe rotulien",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont deux caractères du retrait de la main de Fatou ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 2 — Vérifier : le retrait se produit sans décision (involontaire) et se fait toujours de la même façon (stéréotypé). Étape 3 — Vérifier : il est rapide, et présent dès la naissance sans apprentissage. Les trois autres propositions décrivent un geste volontaire et appris, ce qui est le piège de la notion.",
+              "answers": [
+                {
+                  "content": "Il est involontaire",
+                  "correct": true
+                },
+                {
+                  "content": "Il est stéréotypé",
+                  "correct": true
+                },
+                {
+                  "content": "Il est décidé après réflexion",
+                  "correct": false
+                },
+                {
+                  "content": "Il a été appris à l'école",
+                  "correct": false
+                },
+                {
+                  "content": "Il est lent à se produire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le muscle du bras qui retire la main est l'___ de ce réflexe.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la notion « L'arc réflexe » : Étape 1 — Repérer : la réponse est le retrait de la main. Étape 2 — Nommer : l'organe qui réalise la réponse est un muscle du bras, c'est l'effecteur. La peau du doigt est le récepteur.",
+              "answers": [
+                {
+                  "content": "effecteur",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases pourquoi le retrait de la main de Fatou est un réflexe inné. Cite au moins deux caractères.",
+              "question_type": "written",
+              "points": 2,
+              "criteria": [
+                "Cite au moins deux caractères du réflexe inné (stéréotypé, involontaire, héréditaire, rapide)",
+                "Relie chaque caractère à la situation de Fatou",
+                "Conclut clairement que c'est un réflexe inné"
+              ],
+              "explanation": "Corrigé modèle : Le retrait de la main de Fatou est un réflexe inné. Il est involontaire : elle retire sa main avant d'avoir décidé quoi que ce soit. Il est stéréotypé : devant une chaleur intense, la réponse est toujours la même. Il est rapide et présent dès la naissance, sans apprentissage. Les quatre caractères sont réunis, c'est donc un réflexe inné. Barème : 1 point pour deux caractères cités et reliés à la situation, 1 point pour la conclusion claire.",
+              "answers": [],
+              "starter": "Le retrait de la main est un réflexe inné car…"
+            }
+          ]
+        },
+        {
+          "title": "Au laboratoire : sections de racines et vitesse de l'influx",
+          "exercise_type": "evaluation",
+          "figure": "moelle-racines",
+          "statement": "Au laboratoire, des élèves de 1ère D réalisent quatre expériences fictives sur une grenouille (résultats simplifiés). Expérience 1 : la racine dorsale d'une patte est coupée ; l'excitation du bout périphérique ne donne rien, celle du bout central fait contracter la patte. Expérience 2 : la racine ventrale est coupée ; l'excitation du bout central ne donne rien, celle du bout périphérique fait contracter le muscle. Expérience 3 : la tête est séparée du corps ; le pincement de la patte provoque encore son retrait, qui disparaît après destruction de la moelle épinière. Expérience 4 : un nerf moteur est stimulé à 0,45 m du muscle (réponse après 16 ms) puis à 0,15 m (réponse après 6 ms).",
+          "questions": [
+            {
+              "content": "Que montre l'expérience 1 sur la racine dorsale ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Les racines de la moelle épinière » : Étape 1 — Relever : la racine dorsale est coupée. Étape 2 — Repérer : le bout central (côté moelle) donne une contraction, le bout périphérique ne donne rien. Étape 3 — Déduire : le message passe vers la moelle. Étape 4 — Conclure : la racine dorsale est sensitive.",
+              "answers": [
+                {
+                  "content": "Elle conduit le message vers la moelle épinière : elle est sensitive",
+                  "correct": true
+                },
+                {
+                  "content": "Elle conduit le message hors de la moelle : elle est motrice",
+                  "correct": false
+                },
+                {
+                  "content": "Elle conduit le message dans les deux sens",
+                  "correct": false
+                },
+                {
+                  "content": "Elle ne joue aucun rôle dans le réflexe",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans l'expérience 2, l'absence de réponse à l'excitation du bout central de la racine ventrale montre que cette racine conduit le message vers la moelle.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 2 — Repérer : le bout central, relié à la moelle, ne donne rien ; le bout périphérique fait contracter le muscle. Étape 3 — Déduire : le message passe hors de la moelle, vers le muscle. Étape 4 — Conclure : la racine ventrale est motrice. L'affirmation inverse est fausse : un message vers la moelle donnerait une réponse en excitant le bout central.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La loi de ___-Magendie dit que la racine dorsale est sensitive et la racine ventrale motrice.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode de la notion « Les racines de la moelle épinière » : Étape 4 — Conclure. Les expériences 1 et 2 vérifient la loi de Bell-Magendie : la racine dorsale conduit vers la moelle (sensitive), la racine ventrale conduit hors de la moelle (motrice).",
+              "answers": [
+                {
+                  "content": "Bell",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que montre l'expérience 3 sur le centre nerveux du retrait de la patte ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Les réflexes médullaires et cérébraux » : Étape 1 — Repérer : le pincement provoque le retrait. Étape 2 — Observer : le retrait persiste sans la tête et disparaît quand on détruit la moelle. Étape 3 — Situer : le centre est la moelle épinière. Étape 4 — Classer : réflexe médullaire.",
+              "answers": [
+                {
+                  "content": "C'est la moelle épinière : le réflexe est médullaire",
+                  "correct": true
+                },
+                {
+                  "content": "C'est l'encéphale : le réflexe est cérébral",
+                  "correct": false
+                },
+                {
+                  "content": "C'est le muscle de la patte",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut rien conclure",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Expérience 4 : calcule la vitesse de l'influx dans le nerf moteur.",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion « Le temps de réaction et la vitesse de l'influx » : Étape 1 — Relever : 0,45 m avec 16 ms et 0,15 m avec 6 ms. Étape 2 — Calculer les écarts : 0,30 m et 10 ms = 0,010 s. Étape 3 — Calculer la vitesse : 0,30 / 0,010 = 30 m/s. Piège : 0,45 / 16 ms donnerait environ 28 m/s, valeur fausse.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "unit": "m/s",
+              "tolerance": 0
+            },
+            {
+              "content": "Remets dans l'ordre le trajet du message nerveux lors du pincement de la patte d'une grenouille normale.",
+              "question_type": "ordering",
+              "explanation": "Méthode de la notion « L'arc réflexe » : Étape 2 — Nommer : la peau est le récepteur, le muscle l'effecteur. Étape 3 — Relier : la racine dorsale (sensitive) conduit vers la moelle, la racine ventrale (motrice) conduit vers le muscle. Étape 4 — Ordonner : peau, racine dorsale, moelle, racine ventrale, muscle.",
+              "answers": [
+                {
+                  "content": "Peau de la patte (récepteur)"
+                },
+                {
+                  "content": "Racine dorsale"
+                },
+                {
+                  "content": "Moelle épinière"
+                },
+                {
+                  "content": "Racine ventrale"
+                },
+                {
+                  "content": "Muscle de la patte (effecteur)"
+                }
+              ]
+            },
+            {
+              "content": "Rédige la conclusion des expériences 1 et 2 : quel est le rôle de chaque racine ? Appuie-toi sur les résultats de chaque expérience.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Donne le rôle de la racine dorsale (sensitive, vers la moelle) à partir de l'expérience 1",
+                "Donne le rôle de la racine ventrale (motrice, hors de la moelle) à partir de l'expérience 2",
+                "Justifie chaque rôle par le bout excité qui donne une réponse",
+                "Nomme la loi de Bell-Magendie"
+              ],
+              "explanation": "Corrigé modèle : Dans l'expérience 1, seule l'excitation du bout central de la racine dorsale, relié à la moelle, donne une réponse : le message va vers la moelle, la racine dorsale est sensitive. Dans l'expérience 2, seule l'excitation du bout périphérique de la racine ventrale, relié au muscle, donne une réponse : le message va de la moelle vers le muscle, la racine ventrale est motrice. C'est la loi de Bell-Magendie. Barème : 1 point par racine bien justifiée, 1 point pour la loi nommée.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Dans la rue : trois réflexes et leur temps de réaction",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Awa sort d'un magasin sombre et marche dans une rue ensoleillée : ses pupilles se resserrent. Plus loin, elle pose le pied sur un caillou pointu et le retire aussitôt. À la maison, son petit frère nouveau-né salive quand sa mère lui donne le lait. Pour le retrait du pied, on suppose (résultats simplifiés) que le trajet total des nerfs sensitif et moteur est de 1,2 m, l'influx allant à 60 m/s, et que le délai mesuré entre le contact et le début du mouvement est de 32 ms.",
+          "questions": [
+            {
+              "content": "Quels sont trois caractères du réflexe pupillaire d'Awa ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode de la notion « Reconnaître un réflexe inné » : Étape 2 — Vérifier : la réponse est stéréotypée et involontaire. Étape 3 — Vérifier : elle est présente dès la naissance. Étape 4 — Conclure : c'est un réflexe inné. Les trois autres propositions décrivent un geste appris ou volontaire, ce qui est le piège de la notion.",
+              "answers": [
+                {
+                  "content": "Même réponse à chaque forte lumière",
+                  "correct": true
+                },
+                {
+                  "content": "Il se produit sans que la personne le décide",
+                  "correct": true
+                },
+                {
+                  "content": "Il existe dès la naissance sans apprentissage",
+                  "correct": true
+                },
+                {
+                  "content": "Il est appris à l'école",
+                  "correct": false
+                },
+                {
+                  "content": "Il ne se produit que si Awa y pense",
+                  "correct": false
+                },
+                {
+                  "content": "Il dépend de l'entraînement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque élément du réflexe pupillaire à son rôle.",
+              "question_type": "matching",
+              "explanation": "Méthode de la notion « L'arc réflexe » : Étape 1 — Repérer : le stimulus est la lumière, la réponse est le resserrement de la pupille. Étape 2 — Nommer : la rétine capte la lumière (récepteur), les muscles de l'iris resserrent la pupille (effecteur). Étape 3 — Relier : le centre nerveux est dans l'encéphale, et non dans la moelle épinière.",
+              "answers": [
+                {
+                  "content": "Rétine",
+                  "match": "Récepteur sensible à la lumière"
+                },
+                {
+                  "content": "Muscles de l'iris",
+                  "match": "Effecteur qui resserre la pupille"
+                },
+                {
+                  "content": "Encéphale",
+                  "match": "Centre nerveux du réflexe"
+                }
+              ]
+            },
+            {
+              "content": "Comment classer les trois réflexes : pupille d'Awa, retrait de son pied, salivation du nouveau-né ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode de la notion « Les réflexes médullaires et cérébraux » : Étape 3 — Situer : le centre du retrait du pied est la moelle épinière, celui de la salivation est le bulbe rachidien, celui de la pupille est dans l'encéphale. Étape 4 — Classer : un réflexe médullaire, un réflexe bulbaire, un réflexe cérébral. Piège : croire que le centre est toujours le cerveau.",
+              "answers": [
+                {
+                  "content": "Retrait du pied : médullaire ; salivation : bulbaire ; pupille : cérébral",
+                  "correct": true
+                },
+                {
+                  "content": "Tous les trois sont médullaires",
+                  "correct": false
+                },
+                {
+                  "content": "Tous les trois sont bulbaires",
+                  "correct": false
+                },
+                {
+                  "content": "Pupille : médullaire ; retrait du pied : cérébral ; salivation : volontaire",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Retrait du pied : calcule le temps de conduction du message sur le trajet total de 1,2 m à 60 m/s.",
+              "question_type": "numeric",
+              "explanation": "Méthode de la notion « Le temps de réaction et la vitesse de l'influx » : Étape 1 — Relever : d = 1,2 m, v = 60 m/s. Étape 4 — Conclure : $t = d / v = 1{,}2 / 60 = 0{,}020$ s = 20 ms. Piège : oublier de convertir les secondes en millisecondes.",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "ms",
+              "tolerance": 0
+            },
+            {
+              "content": "Retrait du pied : le délai mesuré est de 32 ms. Calcule le temps de traversée du centre nerveux.",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever : le délai total (temps de réaction) est 32 ms, la conduction dure 20 ms. Étape 4 — Conclure : le temps restant est le temps de traversée du centre nerveux : 32 − 20 = 12 ms.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "ms",
+              "tolerance": 0
+            },
+            {
+              "content": "Awa fait un signe de la main à une amie : ce geste est un réflexe inné.",
+              "question_type": "true_false",
+              "explanation": "Méthode de la notion « Reconnaître un réflexe inné » : Étape 1 — Identifier : le stimulus est l'envie de saluer, la réponse est le signe de la main. Étape 2 — Vérifier : Awa le décide, il n'est pas involontaire. Étape 3 — Vérifier : on apprend à saluer. Étape 4 — Conclure : geste volontaire appris, non réflexe.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe qui montre que le retrait du pied d'Awa suit un arc réflexe. Cite les cinq éléments dans l'ordre, avec leur rôle dans cette situation.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Nomme le récepteur : la peau du pied, sensible à la pointe du caillou",
+                "Nomme le nerf sensitif et le sens de conduction, vers la moelle épinière",
+                "Nomme le centre nerveux : la moelle épinière",
+                "Nomme le nerf moteur et l'effecteur : un muscle de la jambe",
+                "Respecte l'ordre du trajet et conclut que c'est un réflexe médullaire"
+              ],
+              "explanation": "Corrigé modèle : Le stimulus est la pointe du caillou ; la réponse est le retrait du pied. Le récepteur est la peau du pied, qui capte le stimulus. Le nerf sensitif conduit le message de la peau du pied vers la moelle épinière, qui est le centre nerveux et élabore la réponse. Le nerf moteur conduit la commande de la moelle épinière vers un muscle de la jambe, l'effecteur, qui retire le pied. Le centre étant la moelle épinière, c'est un réflexe médullaire. Barème : 1 point pour le récepteur, 1 pour le nerf sensitif et le centre, 1 pour le nerf moteur et l'effecteur, 1 pour l'ordre et la conclusion.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
