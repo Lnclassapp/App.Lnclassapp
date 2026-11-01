@@ -1,0 +1,1892 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La transmission de deux caractères héréditaires chez les êtres vivants",
+      "subtitle": "Leçon 5 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "teal",
+      "figures": [
+        {
+          "key": "effectifs-f2-drosophile",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la F2 de 640 drosophiles : 361 grises aux yeux rouges, 119 grises aux yeux bruns, 122 ébène aux yeux rouges et 38 ébène aux yeux bruns. La première barre est très haute, les deux suivantes sont proches l'une de l'autre, la dernière est la plus petite.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              361,
+              119,
+              122,
+              38
+            ],
+            "labels": [
+              "Gris, yeux rouges",
+              "Gris, yeux bruns",
+              "Ébène, yeux rouges",
+              "Ébène, yeux bruns"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "demarche-croisement-test",
+          "kind": "diagram",
+          "description": "Arbre de décision pour interpréter un croisement-test. À partir du croisement d'un double hétérozygote avec un double récessif, on regarde la descendance : quatre phénotypes à 1/4 chacun mènent à des gènes indépendants ; deux phénotypes à 1/2 chacun mènent à des gènes liés en liaison absolue ; quatre phénotypes dont deux majoritaires mènent à des gènes liés en liaison partielle.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "legend": [
+              "Départ",
+              "Résultat observé",
+              "Conclusion"
+            ],
+            "nodes": [
+              {
+                "id": "depart",
+                "label": "Croisement-test : double hétérozygote × double récessif",
+                "category": 1
+              },
+              {
+                "id": "quatre",
+                "label": "4 phénotypes à 1/4 chacun",
+                "category": 2
+              },
+              {
+                "id": "deux",
+                "label": "2 phénotypes à 1/2 chacun",
+                "category": 2
+              },
+              {
+                "id": "inegaux",
+                "label": "4 phénotypes : 2 majoritaires, 2 minoritaires",
+                "category": 2
+              },
+              {
+                "id": "indep",
+                "label": "Gènes indépendants",
+                "category": 3
+              },
+              {
+                "id": "absolue",
+                "label": "Gènes liés, liaison absolue",
+                "category": 3
+              },
+              {
+                "id": "partielle",
+                "label": "Gènes liés, liaison partielle",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "depart",
+                "to": "quatre"
+              },
+              {
+                "from": "depart",
+                "to": "deux"
+              },
+              {
+                "from": "depart",
+                "to": "inegaux"
+              },
+              {
+                "from": "quatre",
+                "to": "indep",
+                "label": "brassage interchromosomique"
+              },
+              {
+                "from": "deux",
+                "to": "absolue",
+                "label": "pas de crossing-over"
+              },
+              {
+                "from": "inegaux",
+                "to": "partielle",
+                "label": "crossing-over"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "origine-recombines",
+          "kind": "diagram",
+          "description": "Schéma de l'origine des gamètes recombinés chez un hybride dont les deux gènes sont liés. À la prophase I, un crossing-over a lieu ou non entre les deux gènes. Sans échange, la méiose donne des gamètes parentaux majoritaires ; avec échange, elle donne aussi des gamètes recombinés minoritaires. Ils s'unissent à un gamète du double récessif pour donner la descendance.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Méiose",
+              "Gamètes",
+              "Descendance"
+            ],
+            "nodes": [
+              {
+                "id": "cellule",
+                "label": "Hybride : un chromosome N L et son homologue n l",
+                "category": 1
+              },
+              {
+                "id": "prophase",
+                "label": "Prophase I : crossing-over entre les gènes, ou non",
+                "category": 1
+              },
+              {
+                "id": "parentaux",
+                "label": "Gamètes parentaux majoritaires : NL et nl",
+                "category": 2
+              },
+              {
+                "id": "recombines",
+                "label": "Gamètes recombinés minoritaires : Nl et nL",
+                "category": 2
+              },
+              {
+                "id": "fecondation",
+                "label": "Fécondation par un gamète nl du double récessif",
+                "category": 3
+              },
+              {
+                "id": "descendance",
+                "label": "Descendants parentaux (majorité) et recombinés (minorité)",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "cellule",
+                "to": "prophase"
+              },
+              {
+                "from": "prophase",
+                "to": "parentaux",
+                "label": "pas d'échange : 2 parentaux"
+              },
+              {
+                "from": "prophase",
+                "to": "recombines",
+                "label": "échange : 2 parentaux + 2 recombinés"
+              },
+              {
+                "from": "parentaux",
+                "to": "fecondation"
+              },
+              {
+                "from": "recombines",
+                "to": "fecondation"
+              },
+              {
+                "from": "fecondation",
+                "to": "descendance"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "effectifs-test-mais",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la descendance d'un croisement-test chez le maïs, sur 1000 grains : 481 lisses colorés, 479 ridés incolores, 21 lisses incolores et 19 ridés colorés. Deux barres très hautes et presque égales, deux barres très basses et presque égales.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              481,
+              479,
+              21,
+              19
+            ],
+            "labels": [
+              "Lisses colorés",
+              "Ridés incolores",
+              "Lisses incolores",
+              "Ridés colorés"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "effectifs-f2-pois",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la F2 de 800 graines de pois : 450 lisses jaunes, 151 lisses vertes, 148 ridées jaunes et 51 ridées vertes. Une barre très haute, deux barres moyennes presque égales et une barre basse.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              450,
+              151,
+              148,
+              51
+            ],
+            "labels": [
+              "Lisses jaunes",
+              "Lisses vertes",
+              "Ridées jaunes",
+              "Ridées vertes"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "effectifs-test-mais-liaison",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la descendance d'un croisement-test chez le maïs (premier couple de gènes), sur 1000 grains : 482 lisses colorés, 478 ridés incolores, 22 lisses incolores et 18 ridés colorés. Deux barres très hautes, deux barres basses.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              482,
+              478,
+              22,
+              18
+            ],
+            "labels": [
+              "Lisses colorés",
+              "Ridés incolores",
+              "Lisses incolores",
+              "Ridés colorés"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "effectifs-test-drosophile",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la descendance d'un croisement-test d'une femelle hybride de drosophile, sur 2000 descendants : 884 gris à ailes longues, 876 noirs à ailes vestigiales, 124 gris à ailes vestigiales et 116 noirs à ailes longues. Deux barres hautes presque égales, deux barres basses presque égales.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              884,
+              876,
+              124,
+              116
+            ],
+            "labels": [
+              "Gris, longues",
+              "Noir, vestigiales",
+              "Gris, vestigiales",
+              "Noir, longues"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "effectifs-test-mais-croise",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la descendance d'un croisement-test chez le maïs, sur 1000 grains : 485 lisses incolores, 475 ridés colorés, 21 lisses colorés et 19 ridés incolores. Deux barres très hautes presque égales, deux barres basses presque égales.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              485,
+              475,
+              21,
+              19
+            ],
+            "labels": [
+              "Lisses incolores",
+              "Ridés colorés",
+              "Lisses colorés",
+              "Ridés incolores"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Interpréter un croisement entre lignées pures (F1 et F2)",
+          "remember": "Le **dihybridisme** est l'étude de la transmission de **deux caractères** à la fois. Une **lignée pure** est formée d'individus homozygotes, qui redonnent toujours le même phénotype quand ils se reproduisent entre eux. On croise deux lignées pures qui diffèrent par deux caractères : leurs descendants forment la **F1** (première génération filiale). Si la F1 est **homogène** (tous les individus sont identiques), ses individus sont des **hybrides**, hétérozygotes pour les deux gènes ($A//a\\ B//b$), et ils expriment les deux caractères dominants. Croisés entre eux (ou autofécondés), ils donnent la **F2**, qui compte **quatre phénotypes** : deux reproduisent les combinaisons des parents, deux sont de nouvelles combinaisons (phénotypes **recombinés**). Si les deux gènes sont **indépendants** (portés par deux paires de chromosomes différentes), la F2 est en proportions $9/16$, $3/16$, $3/16$ et $1/16$, qu'on écrit $9/3/3/1$. Pris à part, chaque caractère reste en $3/4$ et $1/4$.",
+          "method": [
+            "Repérer les phénotypes des deux lignées pures parentales et celui de la F1, puis dire si la F1 est homogène.",
+            "Déduire la dominance de chaque caractère d'après la F1, puis écrire les génotypes des parents et de la F1 (double hétérozygote).",
+            "Calculer les proportions des quatre phénotypes de la F2 : diviser chaque effectif par le total, puis les rapporter à 16.",
+            "Conclure : des proportions proches de $9/3/3/1$ montrent que les deux gènes sont indépendants, donc portés par deux paires de chromosomes différentes."
+          ],
+          "example": {
+            "statement": "Au jardin du laboratoire du lycée, on croise deux lignées pures de pois : l'une à graines lisses et jaunes, l'autre à graines ridées et vertes. Toutes les graines de la F1 sont lisses et jaunes. Les plantes de la F1 sont autofécondées ; la F2 compte 1600 graines : 904 lisses jaunes, 297 lisses vertes, 303 ridées jaunes et 96 ridées vertes. Analyser ce croisement.",
+            "steps": [
+              "Repérer : les parents purs sont [lisse, jaune] et [ridé, vert] ; la F1 est homogène, toute [lisse, jaune].",
+              "Déduire : lisse et jaune sont dominants (notés $L$ et $J$), ridé et vert sont récessifs ($l$ et $j$). Parents : $L//L\\ J//J$ et $l//l\\ j//j$ ; F1 : $L//l\\ J//j$, double hétérozygote.",
+              "Calculer : $1600 \\div 16 = 100$. Donc $904 \\div 100 \\approx 9$, $297 \\div 100 \\approx 3$, $303 \\div 100 \\approx 3$ et $96 \\div 100 \\approx 1$.",
+              "Conclure : la F2 est proche de $9/3/3/1$ (les petits écarts viennent du hasard de la fécondation) : les gènes de la forme et de la couleur sont indépendants, portés par deux paires de chromosomes différentes."
+            ]
+          },
+          "pitfall": "Ne conclus pas à l'indépendance dès que tu vois quatre phénotypes : compare-les à $9/3/3/1$. Contre-exemple : une F2 de 1600 grains de maïs compte 1056 grains [lisses colorés], 144 [lisses incolores], 144 [ridés colorés] et 256 [ridés incolores]. Il y a bien quatre phénotypes, mais $1600 \\div 16 = 100$ et les rapports sont 10,6 / 1,4 / 1,4 / 2,6, loin de $9/3/3/1$ : les gènes ne sont pas indépendants. À l'inverse, des effectifs un peu différents de 900 / 300 / 300 / 100 ne prouvent rien contre l'indépendance : le hasard de la fécondation crée de petits écarts.",
+          "figure": null,
+          "exercise": {
+            "title": "Analyser un croisement chez la drosophile",
+            "statement": "Au laboratoire du lycée, on élève des drosophiles (mouches du vinaigre). On croise une lignée pure de drosophiles à corps gris et yeux rouges avec une lignée pure à corps ébène et yeux bruns. Toutes les drosophiles de la F1 ont le corps gris et les yeux rouges. Croisées entre elles, elles donnent une F2 de 640 drosophiles : 361 grises aux yeux rouges, 119 grises aux yeux bruns, 122 ébène aux yeux rouges et 38 ébène aux yeux bruns. On note $G/g$ le gène de la couleur du corps et $R/r$ celui de la couleur des yeux (majuscule : allèle dominant).",
+            "exercise_type": "fixation",
+            "figure": "effectifs-f2-drosophile",
+            "questions": [
+              {
+                "content": "Les parents purs sont [gris, rouges] et [ébène, bruns] ; toute la F1 est [gris, rouges]. Que peut-on en déduire sur les allèles ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : les parents purs sont [gris, rouges] et [ébène, bruns] ; la F1 est homogène, toute [gris, rouges]. Étape 2 — Déduire : les caractères qui s'expriment en F1, gris et rouge, sont dominants ; ébène et brun, absents en F1, sont récessifs. Une F1 homogène ne prouve pas l'absence de dominance : au contraire, c'est elle qui la révèle.",
+                "answers": [
+                  {
+                    "content": "Gris et rouge sont dominants ; ébène et brun sont récessifs.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ébène et brun sont dominants, car ce sont les caractères du second parent.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Gris est dominant, mais rouge est récessif.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun allèle n'est dominant, car la F1 est homogène.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Avec les notations $G/g$ (corps) et $R/r$ (yeux), quel est le génotype des drosophiles de la F1 ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Déduire : la lignée grise-rouge pure est $G//G\\ R//R$ et la lignée ébène-brune pure est $g//g\\ r//r$. Chaque parent donne un gamète $GR$ ou $gr$, donc la F1 reçoit $GR$ et $gr$ : elle est $G//g\\ R//r$, double hétérozygote. Écrire $G//G\\ R//R$ serait oublier l'allèle récessif reçu du second parent.",
+                "answers": [
+                  {
+                    "content": "$G//g\\ R//r$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$G//G\\ R//R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$G//g\\ R//R$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$g//g\\ r//r$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si les deux gènes sont indépendants, combien de drosophiles [ébène, bruns] attend-on dans une F2 de 640 drosophiles ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Calculer : les doubles récessifs représentent $1/16$ de la F2. $640 \\div 16 = 40$. On attend donc 40 drosophiles [ébène, bruns] ; on en observe 38, ce qui est très proche.",
+                "answers": [
+                  {
+                    "content": "40",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "mouches"
+              },
+              {
+                "content": "Les effectifs observés en F2 (361, 119, 122 et 38) sont compatibles avec deux gènes indépendants.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : $640 \\div 16 = 40$. Alors $361 \\div 40 \\approx 9{,}0$, $119 \\div 40 \\approx 3{,}0$, $122 \\div 40 \\approx 3{,}1$ et $38 \\div 40 \\approx 1$. Étape 4 — Conclure : les rapports sont proches de $9/3/3/1$, donc l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les deux phénotypes recombinés de la F2, c'est-à-dire absents chez les parents purs ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Repérer : les parents purs sont [gris, rouges] et [ébène, bruns]. Étape 3 — Calculer : la F2 compte quatre phénotypes. Deux sont ceux des parents ; les deux autres, [gris, bruns] (119) et [ébène, rouges] (122), associent un caractère de chaque parent : ce sont les phénotypes recombinés.",
+                "answers": [
+                  {
+                    "content": "Corps gris et yeux bruns",
+                    "correct": true
+                  },
+                  {
+                    "content": "Corps ébène et yeux rouges",
+                    "correct": true
+                  },
+                  {
+                    "content": "Corps gris et yeux rouges",
+                    "correct": false
+                  },
+                  {
+                    "content": "Corps ébène et yeux bruns",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève remarque que 361, 119, 122 et 38 ne sont pas exactement 360, 120, 120 et 40, et il en conclut que les gènes ne sont pas indépendants. Que lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer : les rapports sont 9,0 / 3,0 / 3,1 / 0,95, très proches de $9/3/3/1$. Étape 4 — Conclure : la fécondation réunit les gamètes au hasard, donc les effectifs fluctuent un peu autour des valeurs théoriques. Exiger l'égalité exacte est l'erreur du piège : seul un écart net des rapports écarterait l'indépendance.",
+                "answers": [
+                  {
+                    "content": "Il a tort : de petits écarts dus au hasard de la fécondation sont normaux ; les rapports restent proches de 9/3/3/1.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : pour deux gènes indépendants, les effectifs doivent être exactement 360, 120, 120 et 40.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : dès que les effectifs diffèrent des valeurs théoriques, les gènes sont liés.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort : seule la F1 permet de conclure, jamais la F2.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un croisement entre lignées pures et à prévoir les proportions de la F2, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Quand tous les individus de la F1 sont identiques, la F1 est dite ___ ; chacun est hétérozygote pour les deux gènes, c'est un ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : tous les individus de la F1 sont identiques, la F1 est donc homogène. Étape 2 — Déduire : ils reçoivent un gamète de chaque lignée pure, donc deux allèles différents pour chaque gène : chacun est un hybride (un double hétérozygote).",
+                "answers": [
+                  {
+                    "content": "homogène",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "hybride",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "dihybride",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "double hétérozygote",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Premier mot : tous pareils. Second mot : deux allèles différents pour chacun des deux gènes."
+              },
+              {
+                "content": "Dans la F2 de deux gènes indépendants, les individus qui ont le caractère dominant du premier gène représentent $3/4$ du total, quelle que soit la couleur.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : les individus au caractère dominant du premier gène regroupent deux phénotypes, de proportions $9/16$ et $3/16$, soit $12/16 = 3/4$. Étape 4 — Conclure : chaque caractère, pris à part, retrouve la proportion $3/4$ et $1/4$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ],
+                "hint": "Additionne les deux phénotypes qui partagent ce caractère dominant."
+              },
+              {
+                "content": "Des pois à graines lisses et jaunes sont croisés, en lignées pures, avec des pois à graines ridées et vertes ; la F1 est toute lisse et jaune. Si les gènes sont indépendants, combien de graines [lisses, jaunes] attend-on dans une F2 de 480 graines ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Déduire : lisse et jaune sont dominants, la F1 est double hétérozygote. Étape 3 — Calculer : $480 \\div 16 = 30$, donc $9 \\times 30 = 270$. Étape 4 — Conclure : on attend 270 graines [lisses, jaunes].",
+                "answers": [
+                  {
+                    "content": "270",
+                    "correct": true
+                  }
+                ],
+                "hint": "Calcule d'abord la valeur d'une case sur 16, puis multiplie par 9.",
+                "tolerance": 0,
+                "unit": "graines"
+              },
+              {
+                "content": "Quelles proportions de phénotypes attend-on dans la F2 issue de deux gènes indépendants ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Calculer : la F2 compte 16 cases égales. Les deux caractères dominants forment 9 cases, chaque mélange dominant-récessif 3 cases, les deux récessifs 1 case. Étape 4 — Conclure : 9/16, 3/16, 3/16 et 1/16. Les proportions de 1/4 chacune appartiennent à un autre croisement, le croisement-test.",
+                "answers": [
+                  {
+                    "content": "9/16, 3/16, 3/16 et 1/16",
+                    "correct": true
+                  },
+                  {
+                    "content": "1/4, 1/4, 1/4 et 1/4",
+                    "correct": false
+                  },
+                  {
+                    "content": "3/4 et 1/4",
+                    "correct": false
+                  },
+                  {
+                    "content": "9/16 et 7/16",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : une lignée pure est homozygote ; la F1 est la première génération issue de leur croisement. Étape 2 — Déduire : les individus de la F1 sont hétérozygotes pour les deux gènes, ce sont des hybrides. Étape 4 — Conclure : un phénotype recombiné associe un caractère de chaque lignée pure.",
+                "answers": [
+                  {
+                    "content": "Lignée pure",
+                    "match": "Individus homozygotes qui redonnent le même phénotype entre eux"
+                  },
+                  {
+                    "content": "F1",
+                    "match": "Première génération issue du croisement de deux lignées pures"
+                  },
+                  {
+                    "content": "Hybride",
+                    "match": "Individu hétérozygote pour les deux gènes étudiés"
+                  },
+                  {
+                    "content": "Phénotype recombiné",
+                    "match": "Combinaison de caractères qu'aucune des deux lignées pures ne présentait"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Prévoir une descendance avec un échiquier de croisement (gènes indépendants)",
+          "remember": "À la **méiose**, chaque gamète reçoit un seul chromosome de chaque paire. Quand deux gènes sont portés par deux paires de chromosomes différentes, les paires se répartissent **indépendamment** l'une de l'autre à l'anaphase de la première division : c'est le **brassage interchromosomique**. Un double hétérozygote $A//a\\ B//b$ produit donc **quatre sortes de gamètes**, en proportions égales : $AB$, $Ab$, $aB$ et $ab$ ($1/4$ chacun). Un parent hétérozygote pour un seul gène, par exemple $a//a\\ B//b$, n'en produit que deux : $aB$ et $ab$ ($1/2$ chacun). Un gamète porte **un seul allèle par gène**. L'**échiquier de croisement** place les gamètes d'un parent en lignes, ceux de l'autre en colonnes ; chaque case est un génotype d'enfant, de probabilité égale au produit des proportions de ses deux gamètes. Entre deux doubles hétérozygotes, il compte 16 cases et donne $9/3/3/1$.",
+          "method": [
+            "Écrire les génotypes des deux parents à partir de leurs phénotypes et de ceux de leurs parents ou de leurs descendants.",
+            "Écrire les gamètes de chaque parent avec leurs proportions : chaque paire de chromosomes donne un allèle, indépendamment de l'autre paire.",
+            "Construire l'échiquier de croisement : gamètes d'un parent en lignes, ceux de l'autre en colonnes, un génotype par case.",
+            "Lire dans l'échiquier le phénotype de chaque case, puis compter les cases de chaque phénotype.",
+            "Calculer les proportions : cases d'un phénotype ÷ nombre total de cases."
+          ],
+          "example": {
+            "statement": "On croise une plante de pois à graines lisses et jaunes, hybride pour les deux gènes, avec une plante à graines ridées et jaunes dont l'un des parents avait des graines vertes. Les gènes de la forme et de la couleur sont indépendants (lisse $L$ et jaune $J$ dominants). Prévoir la descendance.",
+            "steps": [
+              "Écrire : parent 1, lisse jaune et hybride : $L//l\\ J//j$ ; parent 2, ridé (donc $l//l$) et jaune avec un parent vert : $J//j$, soit $l//l\\ J//j$.",
+              "Écrire les gamètes : parent 1 donne $LJ$, $Lj$, $lJ$, $lj$ ($1/4$ chacun) ; parent 2 donne $lJ$ et $lj$ ($1/2$ chacun).",
+              "Construire : 4 lignes ($LJ$, $Lj$, $lJ$, $lj$) et 2 colonnes ($lJ$, $lj$), soit 8 cases égales de probabilité $1/8$.",
+              "Lire : $LJ{\\times}lJ$, $LJ{\\times}lj$ et $Lj{\\times}lJ$ donnent [lisse jaune] (3 cases) ; $Lj{\\times}lj$ donne [lisse vert] (1) ; $lJ{\\times}lJ$, $lJ{\\times}lj$ et $lj{\\times}lJ$ donnent [ridé jaune] (3) ; $lj{\\times}lj$ donne [ridé vert] (1).",
+              "Calculer : [lisse jaune] $3/8$ ; [lisse vert] $1/8$ ; [ridé jaune] $3/8$ ; [ridé vert] $1/8$. La somme vaut $8/8$."
+            ]
+          },
+          "pitfall": "Ne réduis pas un double hétérozygote à deux gamètes. Écrire seulement $LJ$ et $lj$ revient à croire que les deux allèles gardés d'un même parent restent toujours ensemble. Contre-exemple : avec ces deux seuls gamètes, le croisement $L//l\\ J//j$ × $L//l\\ J//j$ ne donnerait que des graines [lisses jaunes] et [ridées vertes]. Or des graines [lisses vertes] existent en F2 (3/16). Les paires de chromosomes se répartissent indépendamment : écris les quatre gamètes $LJ$, $Lj$, $lJ$, $lj$. N'écris pas non plus $Ll$ ou $Jj$ : un gamète n'a qu'un allèle par gène.",
+          "figure": null,
+          "exercise": {
+            "title": "Prévoir la descendance de drosophiles",
+            "statement": "Chez la drosophile, on étudie la couleur du corps (gris $G$ dominant, ébène $g$) et la couleur des yeux (rouge $R$ dominant, brun $r$). Les deux gènes sont indépendants. On croise une femelle de génotype $G//g\\ R//r$ avec un mâle de génotype $G//g\\ r//r$.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quels gamètes la femelle $G//g\\ R//r$ produit-elle ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire les gamètes : la paire du gène $G/g$ donne $G$ ou $g$, la paire du gène $R/r$ donne $R$ ou $r$, indépendamment. Les combinaisons sont $GR$, $Gr$, $gR$, $gr$, à $1/4$ chacune. Se limiter à $GR$ et $gr$ est l'erreur du piège : cela suppose que les allèles d'un même parent restent ensemble.",
+                "answers": [
+                  {
+                    "content": "$GR$, $Gr$, $gR$ et $gr$, en proportions égales ($1/4$ chacun)",
+                    "correct": true
+                  },
+                  {
+                    "content": "$GR$ et $gr$ seulement, ($1/2$ chacun)",
+                    "correct": false
+                  },
+                  {
+                    "content": "$G//g$ et $R//r$, car elle est hétérozygote",
+                    "correct": false
+                  },
+                  {
+                    "content": "$Gg$ et $Rr$, ($1/2$ chacun)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels gamètes le mâle $G//g\\ r//r$ produit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire les gamètes : le gène $R/r$ est homozygote, donc tous les gamètes portent $r$ ; le gène $G/g$ est hétérozygote, donc la moitié porte $G$ et la moitié $g$. Le mâle donne $Gr$ et $gr$ à $1/2$ chacun.",
+                "answers": [
+                  {
+                    "content": "$Gr$ et $gr$, ($1/2$ chacun)",
+                    "correct": true
+                  },
+                  {
+                    "content": "$GR$, $Gr$, $gR$ et $gr$ ($1/4$ chacun)",
+                    "correct": false
+                  },
+                  {
+                    "content": "$gr$ seulement",
+                    "correct": false
+                  },
+                  {
+                    "content": "$Gg$ et $rr$ ($1/2$ chacun)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien de cases compte l'échiquier du croisement $G//g\\ R//r$ × $G//g\\ r//r$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Écrire : la femelle donne 4 sortes de gamètes, le mâle 2. Étape 3 — Construire : 4 lignes × 2 colonnes = 8 cases, chacune de probabilité $1/8$.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Dans la descendance du croisement $G//g\\ R//r$ × $G//g\\ r//r$, quel pourcentage de drosophiles est [gris, bruns] ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Construire l'échiquier : lignes $GR$, $Gr$, $gR$, $gr$ ; colonnes $Gr$, $gr$. Étape 4 — Lire : sont [gris, bruns] les cases $Gr{\\times}Gr$, $Gr{\\times}gr$ et $gr{\\times}Gr$, soit 3 cases sur 8. Étape 5 — Calculer : $3/8 = 0{,}375$, soit 37,5 %.",
+                "answers": [
+                  {
+                    "content": "37,5",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Dans cette descendance, quels sont les deux phénotypes qui ont chacun une proportion de $1/8$ ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Lire : [gris, rouges] occupe 3 cases, [gris, bruns] 3 cases, [ébène, rouges] 1 case ($gR{\\times}gr$) et [ébène, bruns] 1 case ($gr{\\times}gr$). Étape 5 — Calculer : les deux phénotypes ébène ont chacun $1/8$ ; les deux phénotypes gris ont chacun $3/8$.",
+                "answers": [
+                  {
+                    "content": "Corps ébène et yeux rouges",
+                    "correct": true
+                  },
+                  {
+                    "content": "Corps ébène et yeux bruns",
+                    "correct": true
+                  },
+                  {
+                    "content": "Corps gris et yeux rouges",
+                    "correct": false
+                  },
+                  {
+                    "content": "Corps gris et yeux bruns",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un double hétérozygote $G//g\\ R//r$ dont les gènes sont indépendants produit seulement deux sortes de gamètes, $GR$ et $gr$.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire les gamètes : chaque paire de chromosomes se répartit indépendamment de l'autre, donc il y a 4 sortes de gamètes : $GR$, $Gr$, $gR$ et $gr$. L'affirmation est fausse : seule une liaison absolue donnerait deux gamètes, ce qui n'est pas le cas pour des gènes indépendants.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La répartition indépendante des paires de chromosomes homologues, qui donne les quatre sortes de gamètes, a lieu pendant ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Écrire les gamètes : le brassage interchromosomique est la répartition au hasard des chromosomes de chaque paire, à l'anaphase de la première division de la méiose. La fécondation, elle, réunit un gamète de chaque parent au hasard ; elle ne forme pas les gamètes.",
+                "answers": [
+                  {
+                    "content": "l'anaphase de la première division de la méiose",
+                    "correct": true
+                  },
+                  {
+                    "content": "la fécondation",
+                    "correct": false
+                  },
+                  {
+                    "content": "l'interphase qui précède la méiose",
+                    "correct": false
+                  },
+                  {
+                    "content": "la prophase d'une mitose",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à écrire des gamètes et à construire des échiquiers, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un individu $A//a\\ B//b$ dont les gènes sont indépendants produit ___ sortes de gamètes, chacune en proportion ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Écrire les gamètes : $A$ ou $a$ pour la première paire, $B$ ou $b$ pour la seconde, indépendamment : $2 \\times 2 = 4$ sortes, soit $AB$, $Ab$, $aB$ et $ab$, à $1/4$ chacune.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "quatre",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1/4",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "un quart",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "25%",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "25 %",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Chaque paire donne 2 possibilités ; les deux paires se combinent."
+              },
+              {
+                "content": "On croise $A//a\\ B//B$ avec $A//a\\ B//b$ (gènes indépendants, $A$ et $B$ dominants). Quel pourcentage de la descendance est [A, B] ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Écrire : le premier parent donne $AB$ et $aB$ ($1/2$ chacun), le second $AB$, $Ab$, $aB$, $ab$ ($1/4$ chacun). Étape 3 — Construire : 2 lignes × 4 colonnes = 8 cases. Étape 4 — Lire : seules les 2 cases $aB{\\times}aB$ et $aB{\\times}ab$ ne sont pas [A, B]. Étape 5 — Calculer : $6/8 = 75$ %.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ],
+                "hint": "Le premier parent ne donne que des gamètes B : tous les enfants ont au moins un B.",
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "L'échiquier du croisement entre deux doubles hétérozygotes à gènes indépendants compte 16 cases, dont 9 donnent le phénotype des deux caractères dominants.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Écrire les gamètes : chaque parent donne 4 sortes de gamètes. Étape 3 — Construire : 4 × 4 = 16 cases. Étape 4 — Lire : 9 cases portent au moins un allèle dominant de chaque gène. Étape 5 — Calculer : 9/16 pour les deux caractères dominants. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Combien de sortes de gamètes produit un individu $a//a\\ B//b$, et dans quelles proportions ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire les gamètes : le gène $a/a$ est homozygote, tous les gamètes portent $a$. Le gène $B/b$ est hétérozygote, donc la moitié porte $B$ et la moitié $b$. Les gamètes sont $aB$ et $ab$, à $1/2$ chacun.",
+                "answers": [
+                  {
+                    "content": "2 sortes, $aB$ et $ab$, à $1/2$ chacune",
+                    "correct": true
+                  },
+                  {
+                    "content": "4 sortes, à $1/4$ chacune",
+                    "correct": false
+                  },
+                  {
+                    "content": "1 seule sorte, $aB$",
+                    "correct": false
+                  },
+                  {
+                    "content": "2 sortes, $aa$ et $Bb$, à $1/2$ chacune",
+                    "correct": false
+                  }
+                ],
+                "hint": "Un gène homozygote ne donne qu'un allèle."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode de l'échiquier de croisement.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Écrire les génotypes, car on ne peut pas trouver les gamètes sans eux. Étape 2 — Écrire les gamètes, car ils remplissent les lignes et les colonnes. Étape 3 — Construire l'échiquier. Étape 4 — Lire les phénotypes case par case. Étape 5 — Calculer les proportions en divisant par le nombre total de cases.",
+                "answers": [
+                  {
+                    "content": "Écrire les génotypes des deux parents."
+                  },
+                  {
+                    "content": "Écrire les gamètes de chaque parent avec leurs proportions."
+                  },
+                  {
+                    "content": "Construire l'échiquier de croisement."
+                  },
+                  {
+                    "content": "Lire le phénotype de chaque case."
+                  },
+                  {
+                    "content": "Calculer les proportions de chaque phénotype."
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Distinguer gènes indépendants et gènes liés avec un croisement-test",
+          "remember": "Le **croisement-test** croise un individu **double hétérozygote** avec un individu **double récessif** ($a//a\\ b//b$, noté $ab//ab$ quand les gènes sont liés). Le double récessif ne produit qu'**un seul type de gamète** ($ab$), qui n'apporte que des allèles récessifs : chaque phénotype de la descendance révèle donc un gamète de l'hybride, dans la même proportion. **Gènes indépendants** (deux paires de chromosomes) : l'hybride $A//a\\ B//b$ donne 4 gamètes à $1/4$, d'où **4 phénotypes à $1/4$** ($1/1/1/1$). **Gènes liés** (portés par la même paire de chromosomes) : on écrit côte à côte les allèles d'un même chromosome, par exemple $AB//ab$. **Liaison absolue** : l'hybride ne donne que 2 gamètes ($AB$ et $ab$, $1/2$ chacun), d'où **2 phénotypes** seulement. **Liaison partielle** : l'hybride donne 4 gamètes inégaux, d'où 4 phénotypes dont 2 **majoritaires** (à peu près égaux) et 2 **minoritaires** (à peu près égaux).",
+          "method": [
+            "Repérer le croisement-test : un double hétérozygote croisé avec un double récessif, qui ne donne qu'un seul type de gamète.",
+            "Déduire les gamètes de l'hybride : chaque phénotype de la descendance correspond à un gamète de l'hybride, dans la même proportion.",
+            "Comparer les proportions observées aux trois situations : 4 phénotypes à 1/4 chacun, 2 phénotypes à 1/2 chacun, 4 phénotypes dont 2 majoritaires.",
+            "Conclure : gènes indépendants, gènes liés avec liaison absolue, ou gènes liés avec liaison partielle ; pour des gènes liés, écrire l'hybride avec les deux gènes sur la même paire ($AB//ab$)."
+          ],
+          "example": {
+            "statement": "Au laboratoire du lycée, une drosophile F1 de corps gris et yeux rouges ($G//g\\ R//r$), issue de deux lignées pures, est croisée avec une drosophile à corps ébène et yeux bruns. La descendance compte 800 drosophiles : 202 grises aux yeux rouges, 199 grises aux yeux bruns, 197 ébène aux yeux rouges et 202 ébène aux yeux bruns. Les gènes sont-ils indépendants ou liés ?",
+            "steps": [
+              "Repérer : l'hybride double hétérozygote est croisé avec un double récessif [ébène, bruns] ($g//g\\ r//r$) qui ne donne que des gamètes $gr$ : c'est un croisement-test.",
+              "Déduire : les 4 phénotypes de la descendance correspondent aux 4 gamètes de l'hybride : $GR$ (gris, rouges), $Gr$ (gris, bruns), $gR$ (ébène, rouges) et $gr$ (ébène, bruns).",
+              "Comparer : $800 \\div 4 = 200$ ; les effectifs (202, 199, 197 et 202) sont proches de $1/4$ chacun, soit $1/1/1/1$.",
+              "Conclure : 4 phénotypes à 1/4 chacun signifient 4 gamètes à 1/4 : les gènes sont indépendants, portés par deux paires de chromosomes différentes."
+            ]
+          },
+          "pitfall": "Ne conclus pas « gènes indépendants » dès que tu vois quatre phénotypes, ni « gènes liés » dès que tu vois deux phénotypes plus nombreux. Compare les proportions : quatre phénotypes à $1/4$ chacun donnent des gènes indépendants ; quatre phénotypes inégaux donnent une liaison partielle. Contre-exemple : 455 [gris, longues], 445 [noir, vestigiales], 55 [gris, vestigiales] et 45 [noir, longues] font bien quatre phénotypes, mais deux sont environ neuf fois plus nombreux que les autres : les gènes sont liés. Et retiens que la descendance révèle les gamètes de l'**hybride**, pas ceux du double récessif.",
+          "figure": "demarche-croisement-test",
+          "exercise": {
+            "title": "Interpréter des croisements-tests",
+            "statement": "Dans cet exercice, tu interprètes des résultats de croisements-tests avec la méthode de la fiche. À chaque fois, un hybride issu de deux lignées pures est croisé avec un double récessif.",
+            "exercise_type": "fixation",
+            "figure": "demarche-croisement-test",
+            "questions": [
+              {
+                "content": "Chez la drosophile, une femelle hybride double hétérozygote est croisée avec un mâle double récessif. La descendance compte 1000 drosophiles réparties en quatre phénotypes : 252, 249, 251 et 248 individus. Que conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est un croisement-test. Étape 2 — Déduire : les 4 phénotypes révèlent 4 gamètes de l'hybride. Étape 3 — Comparer : 1000 ÷ 4 = 250, et les effectifs sont proches de 250 chacun, soit 1/1/1/1. Étape 4 — Conclure : les gènes sont indépendants. Les liaisons absolue et partielle donnent des proportions inégales ou deux phénotypes seulement.",
+                "answers": [
+                  {
+                    "content": "Les gènes sont indépendants.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les gènes sont liés avec liaison absolue.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les gènes sont liés avec liaison partielle.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On ne peut rien conclure sans connaître les lignées pures.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la drosophile, un mâle hybride [gris, longues], issu d'une lignée pure grise à ailes longues et d'une lignée pure à corps noir et ailes vestigiales, est croisé avec une femelle [noir, vestigiales] (double récessive). La descendance compte 1000 drosophiles, avec seulement deux phénotypes : 503 [gris, longues] et 497 [noir, vestigiales]. Que conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est un croisement-test. Étape 2 — Déduire : l'hybride ne donne que 2 types de gamètes. Étape 3 — Comparer : 2 phénotypes à environ 1/2 chacun. Étape 4 — Conclure : les deux gènes sont portés par la même paire de chromosomes, sans aucun échange entre eux : liaison absolue (chez la drosophile mâle, il n'y a pas de crossing-over). Des gènes indépendants donneraient 4 phénotypes.",
+                "answers": [
+                  {
+                    "content": "Les gènes sont liés, avec liaison absolue.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les gènes sont indépendants.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les gènes sont liés, avec liaison partielle.",
+                    "correct": false
+                  },
+                  {
+                    "content": "L'un des deux gènes est lié au sexe.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Chez la drosophile, une femelle hybride [gris, longues] est croisée avec un mâle [noir, vestigiales] (double récessif). La descendance compte 1000 drosophiles : 430 [gris, longues], 425 [noir, vestigiales], 75 [gris, vestigiales] et 70 [noir, longues]. Que conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : c'est un croisement-test. Étape 2 — Déduire : l'hybride produit 4 types de gamètes. Étape 3 — Comparer : deux phénotypes sont majoritaires (430 et 425), deux sont minoritaires (75 et 70), ce n'est ni 1/1/1/1 ni 2 phénotypes. Étape 4 — Conclure : gènes liés, avec liaison partielle.",
+                "answers": [
+                  {
+                    "content": "Les gènes sont liés, avec liaison partielle.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les gènes sont indépendants.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les gènes sont liés, avec liaison absolue.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les gènes sont liés au chromosome X.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un croisement-test, les phénotypes de la descendance révèlent les gamètes du parent double récessif.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Déduire : le double récessif ne produit qu'un seul type de gamète, qui n'apporte que des allèles récessifs. Les phénotypes de la descendance sont donc décidés par les gamètes de l'autre parent, l'hybride. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un élève observe la descendance d'un croisement-test d'une femelle hybride de drosophile, soit 1000 individus : 440, 430, 65 et 65 pour quatre phénotypes. Il conclut : « Il y a quatre phénotypes, donc les gènes sont indépendants. » Que lui répondre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Comparer : si les gènes étaient indépendants, chaque phénotype compterait environ 250 individus. Ici 440 et 430 d'un côté, 65 et 65 de l'autre : les proportions sont inégales. Étape 4 — Conclure : liaison partielle. Le nombre de phénotypes ne suffit pas, il faut comparer leurs proportions.",
+                "answers": [
+                  {
+                    "content": "Il a tort : les quatre phénotypes ne sont pas à 1/4 chacun ; deux sont majoritaires, donc les gènes sont liés avec liaison partielle.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : quatre phénotypes signifient toujours quatre gamètes à 1/4.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort : des gènes liés ne donnent jamais quatre phénotypes.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison, car 440 et 430 sont presque égaux.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque résultat d'un croisement-test à son interprétation.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Comparer : quatre phénotypes à 1/4 viennent de 4 gamètes égaux, donc de gènes sur deux paires différentes. Deux phénotypes à 1/2 viennent de 2 gamètes seulement, donc d'une liaison sans échange. Étape 4 — Conclure : quatre phénotypes dont deux majoritaires viennent de gamètes parentaux et recombinés : liaison partielle.",
+                "answers": [
+                  {
+                    "content": "4 phénotypes à 1/4 chacun",
+                    "match": "Gènes indépendants"
+                  },
+                  {
+                    "content": "2 phénotypes à 1/2 chacun",
+                    "match": "Gènes liés, liaison absolue"
+                  },
+                  {
+                    "content": "4 phénotypes dont 2 majoritaires et 2 minoritaires",
+                    "match": "Gènes liés, liaison partielle"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un croisement-test et à distinguer gènes indépendants et gènes liés, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un croisement-test, le double récessif ne produit qu'___ sorte de gamète ; les phénotypes de la descendance révèlent donc les gamètes de l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le double récessif a le génotype $ab//ab$ (ou $a//a\\ b//b$), donc une seule sorte de gamète, $ab$. Étape 2 — Déduire : cette sorte unique n'apporte que des allèles récessifs, donc chaque phénotype de la descendance correspond à un gamète de l'hybride.",
+                "answers": [
+                  {
+                    "content": "une",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "un",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "hybride",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "double hétérozygote",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "dihybride",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Combien de gamètes différents donne un individu homozygote pour les deux gènes ?"
+              },
+              {
+                "content": "Si un croisement-test donne quatre phénotypes en proportions égales, les deux gènes sont portés par la même paire de chromosomes.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : quatre phénotypes à 1/4 chacun révèlent quatre gamètes à 1/4 chez l'hybride. Étape 4 — Conclure : c'est la signature de gènes indépendants, donc portés par deux paires de chromosomes différentes. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quand les gènes sont liés, quelle écriture représente le double récessif ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le double récessif porte uniquement des allèles récessifs, sur les deux chromosomes de la paire. Il s'écrit $ab//ab$. $AB//ab$ et $Ab//aB$ sont des hybrides ; $AB//AB$ est un double dominant homozygote.",
+                "answers": [
+                  {
+                    "content": "$ab//ab$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$AB//ab$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$Ab//aB$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$AB//AB$",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les deux chromosomes de la paire portent les mêmes allèles récessifs."
+              },
+              {
+                "content": "Un croisement-test donne quatre phénotypes en proportions égales. Combien de sortes de gamètes l'hybride produit-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Déduire : chaque phénotype de la descendance correspond à un gamète de l'hybride. Étape 3 — Comparer : quatre phénotypes égaux, donc quatre sortes de gamètes à 1/4 chacune.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "hint": "Un phénotype de la descendance pour chaque gamète de l'hybride.",
+                "tolerance": 0
+              },
+              {
+                "content": "Quels sont les deux résultats possibles d'un croisement-test quand les gènes sont liés ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Comparer : la liaison absolue donne 2 phénotypes à 1/2 ; la liaison partielle donne 4 phénotypes inégaux. Quatre phénotypes à 1/4 chacun révèlent des gènes indépendants. Un seul phénotype supposerait que l'hybride ne donne qu'un type de gamète, ce qui est impossible pour un double hétérozygote. Étape 4 — Conclure en choisissant les deux résultats de gènes liés.",
+                "answers": [
+                  {
+                    "content": "Deux phénotypes seulement, à 1/2 chacun",
+                    "correct": true
+                  },
+                  {
+                    "content": "Quatre phénotypes inégaux, deux majoritaires et deux minoritaires",
+                    "correct": true
+                  },
+                  {
+                    "content": "Quatre phénotypes à 1/4 chacun",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un seul phénotype",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Expliquer la liaison partielle et calculer le pourcentage de recombinaison",
+          "remember": "Deux gènes sont **liés** quand ils sont portés par la **même paire de chromosomes homologues**. Ils ne se séparent pas toujours : à la prophase de la première division de la méiose, deux chromatides de chromosomes homologues peuvent échanger des segments. C'est le **crossing-over** (enjambement), à l'origine du **brassage intrachromosomique**. Il crée des gamètes **recombinés** (nouvelle combinaison d'allèles), toujours minoritaires, à côté des gamètes **parentaux** (non recombinés), majoritaires. Les phénotypes **parentaux** sont ceux des lignées pures de départ ; les phénotypes **recombinés** sont les deux autres. Dans un croisement-test : $r = \\dfrac{\\text{descendants recombinés}}{\\text{total des descendants}} \\times 100$. Chaque gamète parental représente $(100 - r)/2$ % des gamètes de l'hybride, chaque gamète recombiné $r/2$ %. Une liaison absolue correspond à $r = 0$ %. Chez la drosophile mâle, il n'y a pas de crossing-over : un mâle hybride ne produit que des gamètes parentaux.",
+          "method": [
+            "Identifier les phénotypes parentaux (ceux des lignées pures de départ, les plus nombreux) et les phénotypes recombinés (les moins nombreux).",
+            "Écrire le génotype de l'hybride en plaçant sur chaque chromosome les allèles de la lignée pure correspondante, par exemple $AB//ab$.",
+            "Calculer le pourcentage de recombinaison : (descendants recombinés ÷ total) × 100.",
+            "Écrire les gamètes de l'hybride avec leurs proportions : chaque gamète parental $(100 - r)/2$ %, chaque gamète recombiné $r/2$ %.",
+            "Expliquer les gamètes recombinés par un crossing-over entre les deux gènes, à la prophase de la première division de la méiose."
+          ],
+          "example": {
+            "statement": "Une femelle hybride, issue d'une lignée pure de drosophiles grises à ailes longues et d'une lignée pure à corps noir et ailes vestigiales (F1 grise, à ailes longues), est croisée avec un mâle noir à ailes vestigiales. La descendance compte 1000 drosophiles : 415 [gris, longues], 415 [noir, vestigiales], 85 [gris, vestigiales] et 85 [noir, longues]. On note $N$ gris et $n$ noir, $L$ ailes longues et $l$ vestigiales (dominants : $N$, $L$). Interpréter ce croisement.",
+            "steps": [
+              "Identifier : les phénotypes parentaux, ceux des lignées pures, sont [gris, longues] et [noir, vestigiales] (415 chacun, les plus nombreux). Les phénotypes recombinés sont [gris, vestigiales] et [noir, longues] (85 chacun).",
+              "Écrire le génotype : la F1 a reçu $NL$ d'une lignée et $nl$ de l'autre, donc elle est $NL//nl$ (les gènes $N$ et $L$ sont sur la même paire).",
+              "Calculer : descendants recombinés $= 85 + 85 = 170$ ; $r = 170 \\div 1000 \\times 100 = 17$ %.",
+              "Écrire les gamètes : $NL$ et $nl$ (parentaux) $(100 - 17)/2 = 41{,}5$ % chacun ; $Nl$ et $nL$ (recombinés) $17/2 = 8{,}5$ % chacun.",
+              "Expliquer : les gamètes $Nl$ et $nL$ naissent d'un crossing-over entre les gènes $N$ et $L$, à la prophase I, par échange de segments entre chromatides de chromosomes homologues."
+            ]
+          },
+          "pitfall": "Ne calcule pas $r$ avec un seul des deux phénotypes recombinés. Contre-exemple : avec 415 / 415 / 85 / 85 sur 1000, écrire $r = 85 \\div 1000 = 8{,}5$ % est faux : il faut ajouter les deux recombinés, $r = (85 + 85) \\div 1000 = 17$ %. Ne suppose pas non plus que les phénotypes parentaux sont ceux de l'hybride : si l'hybride vient d'une lignée [A, b] et d'une lignée [a, B], les parentaux sont [A, b] et [a, B], même si l'hybride est [A, B]. Les parentaux sont toujours les deux phénotypes des lignées pures de départ, qui sont aussi les plus nombreux.",
+          "figure": "origine-recombines",
+          "exercise": {
+            "title": "Interpréter un croisement-test chez le maïs",
+            "statement": "Dans un champ d'une station de recherche agronomique près de Bouaké, on croise deux lignées pures de maïs : l'une à grains lisses et colorés, l'autre à grains ridés et incolores. Tous les grains de la F1 sont lisses et colorés. Une plante de la F1 est croisée avec une plante à grains ridés et incolores. La descendance compte 1000 grains : 481 lisses colorés, 479 ridés incolores, 21 lisses incolores et 19 ridés colorés. On note $L/l$ le gène de la forme et $C/c$ celui de la couleur (majuscule : allèle dominant).",
+            "exercise_type": "fixation",
+            "figure": "effectifs-test-mais",
+            "questions": [
+              {
+                "content": "Quels sont les deux phénotypes recombinés de cette descendance ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier : les phénotypes parentaux sont ceux des lignées pures, [lisse, coloré] (481) et [ridé, incolore] (479), les plus nombreux. Les phénotypes recombinés sont les deux autres, [lisse, incolore] (21) et [ridé, coloré] (19), les moins nombreux.",
+                "answers": [
+                  {
+                    "content": "Lisses incolores",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ridés colorés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Lisses colorés",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ridés incolores",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le génotype de la plante F1, issue d'une lignée lisse-colorée et d'une lignée ridée-incolore, sachant que les gènes sont liés ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Écrire le génotype : la F1 reçoit $LC$ de la lignée lisse-colorée et $lc$ de la lignée ridée-incolore. Elle est donc $LC//lc$. $Lc//lC$ serait un hybride de lignées [lisse, incolore] et [ridé, coloré] ; l'écriture $L//l\\ C//c$ est celle de gènes indépendants.",
+                "answers": [
+                  {
+                    "content": "$LC//lc$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$Lc//lC$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$L//l\\ C//c$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$LC//LC$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le pourcentage de recombinaison entre les gènes de la forme et de la couleur des grains ?",
+                "question_type": "numeric",
+                "explanation": "Étape 3 — Calculer : recombinés $= 21 + 19 = 40$ ; $r = 40 \\div 1000 \\times 100 = 4$ %. Utiliser seulement 21 donnerait 2,1 %, erreur du piège : il faut ajouter les deux phénotypes recombinés.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Quel pourcentage des gamètes de l'hybride $LC//lc$ porte l'association $LC$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Écrire les gamètes : $LC$ est un gamète parental, donc sa proportion est $(100 - 4)/2 = 48$ %. Les deux gamètes parentaux $LC$ et $lc$ ont 48 % chacun, les deux gamètes recombinés $Lc$ et $lC$ ont 2 % chacun.",
+                "answers": [
+                  {
+                    "content": "48",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Les grains lisses incolores et ridés colorés viennent de gamètes produits grâce à un ___ entre les deux gènes, à la prophase de la première division de la méiose.",
+                "question_type": "select",
+                "explanation": "Étape 5 — Expliquer : les gamètes recombinés $Lc$ et $lC$ naissent d'un crossing-over, échange de segments entre chromatides de chromosomes homologues, à la prophase I. Le brassage interchromosomique concerne des gènes situés sur des paires différentes, ce qui n'est pas le cas ici.",
+                "answers": [
+                  {
+                    "content": "crossing-over",
+                    "correct": true
+                  },
+                  {
+                    "content": "brassage interchromosomique",
+                    "correct": false
+                  },
+                  {
+                    "content": "mitose",
+                    "correct": false
+                  },
+                  {
+                    "content": "croisement-test",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On peut calculer le pourcentage de recombinaison en divisant seulement les 21 grains lisses incolores par 1000, ce qui donne 2,1 %.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : les descendants recombinés sont les deux phénotypes minoritaires, $21 + 19 = 40$. Le pourcentage est $40 \\div 1000 \\times 100 = 4$ %. Ne compter qu'un seul phénotype recombiné sous-estime $r$ de moitié environ : l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à expliquer la liaison partielle et à calculer un pourcentage de recombinaison, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "L'échange de segments entre chromatides de chromosomes homologues à la prophase I s'appelle le ___ ; il produit des gamètes ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 5 — Expliquer : l'échange de segments entre chromatides de chromosomes homologues est le crossing-over (ou enjambement). Il produit des gamètes recombinés, c'est-à-dire porteurs d'une nouvelle combinaison d'allèles, absente des chromosomes parentaux.",
+                "answers": [
+                  {
+                    "content": "crossing-over",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "crossing over",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "enjambement",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "recombinés",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "recombiné",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un nom en anglais ou « enjambement » ; puis le mot qui désigne une nouvelle combinaison d'allèles."
+              },
+              {
+                "content": "Un croisement-test d'une femelle hybride de drosophile donne 800 descendants : 380 [A, B], 384 [a, b], 20 [A, b] et 16 [a, B]. Les phénotypes parentaux sont [A, B] et [a, b]. Quel est le pourcentage de recombinaison ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Identifier : les phénotypes parentaux sont [A, B] et [a, b] ; les recombinés sont [A, b] (20) et [a, B] (16). Étape 3 — Calculer : recombinés $= 20 + 16 = 36$ ; $r = 36 \\div 800 \\times 100 = 4{,}5$ %.",
+                "answers": [
+                  {
+                    "content": "4,5",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les recombinés sont les deux phénotypes les moins nombreux.",
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Une liaison absolue correspond à un pourcentage de recombinaison de 0 %.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Calculer : en liaison absolue, aucun crossing-over n'a lieu entre les deux gènes, il n'y a donc aucun descendant recombiné. r = 0 ÷ total × 100 = 0 %. Étape 4 — Écrire les gamètes : l'hybride ne donne que ses deux gamètes parentaux, à 50 % chacun. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un hybride $AB//ab$ a un pourcentage de recombinaison $r = 10$ %. Quel pourcentage de ses gamètes porte l'association $Ab$ ?",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Écrire les gamètes : $Ab$ est un gamète recombiné, donc sa proportion est $r/2 = 10/2 = 5$ %. Les gamètes parentaux $AB$ et $ab$ ont chacun $(100 - 10)/2 = 45$ %. Étape 5 — Expliquer : $Ab$ provient d'un crossing-over entre les deux gènes.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les deux gamètes recombinés se partagent r.",
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur le crossing-over ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 5 — Expliquer : le crossing-over a lieu à la prophase I de la méiose et échange des segments entre chromatides de chromosomes homologues. Il ne se produit ni à la fécondation, qui réunit seulement deux gamètes, ni entre chromosomes non homologues.",
+                "answers": [
+                  {
+                    "content": "Il a lieu à la prophase de la première division de la méiose",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il échange des segments entre chromatides de chromosomes homologues",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a lieu lors de la fécondation",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il se produit entre deux chromosomes non homologues",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Deux caractères du pois : forme et couleur des graines",
+          "statement": "Au jardin du laboratoire du lycée, on étudie la forme (lisse ou ridée) et la couleur (jaune ou verte) des graines du pois. On croise une lignée pure à graines lisses et vertes avec une lignée pure à graines ridées et jaunes. Toutes les graines de la F1 sont lisses et jaunes. Les plantes de la F1 sont autofécondées : la F2 compte 800 graines, soit 450 lisses jaunes, 151 lisses vertes, 148 ridées jaunes et 51 ridées vertes. On note $L/l$ le gène de la forme et $J/j$ celui de la couleur (majuscule : allèle dominant).",
+          "exercise_type": "fixation",
+          "figure": "effectifs-f2-pois",
+          "questions": [
+            {
+              "content": "Que peut-on déduire de la F1, toute lisse et jaune, à partir de parents purs [lisse, vert] et [ridé, jaune] ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : la F1 est homogène et montre les caractères [lisse, jaune]. Étape 2 — Déduire : « lisse » vient du premier parent, « jaune » du second, et ils s'expriment tous deux en F1 : ils sont dominants. « Ridé » et « vert » ne s'expriment qu'à l'état homozygote : ils sont récessifs. Une F1 homogène révèle la dominance, elle ne l'exclut pas.",
+              "answers": [
+                {
+                  "content": "Lisse et jaune sont dominants ; ridé et vert sont récessifs.",
+                  "correct": true
+                },
+                {
+                  "content": "Lisse et vert sont dominants, car ce sont les caractères du premier parent.",
+                  "correct": false
+                },
+                {
+                  "content": "Lisse est dominant mais jaune est récessif.",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun caractère n'est dominant, car la F1 est homogène.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les génotypes des deux lignées pures parentales, [lisse, vert] et [ridé, jaune] ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Écrire les génotypes : une lignée pure est homozygote pour les deux gènes. Le parent [lisse, vert] est $L//L\\ j//j$ (vert est récessif, donc $j//j$). Le parent [ridé, jaune] est $l//l\\ J//J$ (jaune est dominant, un parent pur n'a que $J$). La F1 reçoit $Lj$ d'un parent et $lJ$ de l'autre : elle est $L//l\\ J//j$.",
+              "answers": [
+                {
+                  "content": "$L//L\\ j//j$ et $l//l\\ J//J$",
+                  "correct": true
+                },
+                {
+                  "content": "$L//L\\ J//J$ et $l//l\\ j//j$",
+                  "correct": false
+                },
+                {
+                  "content": "$L//l\\ j//j$ et $l//l\\ J//j$",
+                  "correct": false
+                },
+                {
+                  "content": "$L//L\\ j//j$ et $l//l\\ J//j$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Si les deux gènes sont indépendants, combien de graines [lisses, vertes] attend-on dans la F2 de 800 graines ?",
+              "question_type": "numeric",
+              "explanation": "Étape 3 — Calculer les proportions : en F2 de gènes indépendants, [lisse, vert] représente $3/16$. $800 \\div 16 = 50$, donc $3 \\times 50 = 150$. Le résultat observé (151) est très proche de 150.",
+              "answers": [
+                {
+                  "content": "150",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "graines"
+            },
+            {
+              "content": "Quels sont les deux phénotypes de la F2 qui ne sont pas ceux des lignées pures parentales ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : les parents purs sont [lisse, vert] et [ridé, jaune]. Les phénotypes recombinés de la F2 sont les deux autres combinaisons : [lisse, jaune] et [ridé, vert]. Attention : [lisse, jaune] est le phénotype de la F1 et le plus fréquent de la F2, mais il est nouveau par rapport aux lignées parentales.",
+              "answers": [
+                {
+                  "content": "Graines lisses et jaunes",
+                  "correct": true
+                },
+                {
+                  "content": "Graines ridées et vertes",
+                  "correct": true
+                },
+                {
+                  "content": "Graines lisses et vertes",
+                  "correct": false
+                },
+                {
+                  "content": "Graines ridées et jaunes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les effectifs observés en F2 sont compatibles avec des gènes indépendants.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Calculer : $800 \\div 16 = 50$. Alors $450 \\div 50 = 9{,}0$, $151 \\div 50 \\approx 3{,}0$, $148 \\div 50 \\approx 3{,}0$ et $51 \\div 50 \\approx 1$. Étape 4 — Conclure : les rapports sont proches de $9/3/3/1$, donc les gènes sont indépendants : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On croise une plante de la F1 avec une plante à graines ridées et vertes. Si les gènes sont indépendants, combien de graines [lisses, jaunes] attend-on parmi 400 graines ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : c'est un croisement-test. Étape 2 — Déduire : l'hybride $L//l\\ J//j$ produit 4 gamètes à $1/4$. Étape 3 — Comparer : la descendance a 4 phénotypes à $1/4$. Étape 4 — Conclure : $400 \\times 1/4 = 100$ graines [lisses, jaunes].",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "graines"
+            }
+          ]
+        },
+        {
+          "title": "Deux couples de gènes du maïs à la station de recherche",
+          "statement": "Dans un champ d'une station de recherche agronomique près de Bouaké, on étudie deux couples de gènes du maïs. Couple A : la forme du grain (lisse $L$ dominant, ridé $l$) et sa couleur (coloré $C$ dominant, incolore $c$). Une lignée pure lisse-colorée est croisée avec une lignée pure ridée-incolore ; la F1 est lisse-colorée. Une plante F1 est croisée avec une plante ridée-incolore : sur 1000 grains, 482 lisses colorés, 478 ridés incolores, 22 lisses incolores et 18 ridés colorés. Couple B : la taille de la plante (haute $T$ dominante, naine $t$) et la forme du grain. Un hybride [haut, lisse] ($T//t\\ L//l$), issu de deux lignées pures, est croisé avec une plante naine à grains ridés : sur 1000 grains, 247 hauts lisses, 251 hauts ridés, 253 nains lisses et 249 nains ridés.",
+          "exercise_type": "fixation",
+          "figure": "effectifs-test-mais-liaison",
+          "questions": [
+            {
+              "content": "Pour le couple A (croisement-test : 482 lisses colorés, 478 ridés incolores, 22 lisses incolores, 18 ridés colorés), quelle est la conclusion ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le croisement-test : hybride F1 × double récessif. Étape 2 — Déduire : l'hybride produit quatre types de gamètes. Étape 3 — Comparer : deux phénotypes majoritaires (482 et 478) et deux minoritaires (22 et 18), ni 1/1/1/1 ni deux phénotypes seulement. Étape 4 — Conclure : gènes liés, avec liaison partielle. Dire que les gènes sont sur deux paires différentes reviendrait à conclure à l'indépendance, ce que ces proportions excluent.",
+              "answers": [
+                {
+                  "content": "Les gènes sont liés, avec liaison partielle.",
+                  "correct": true
+                },
+                {
+                  "content": "Les gènes sont indépendants.",
+                  "correct": false
+                },
+                {
+                  "content": "Les gènes sont liés, avec liaison absolue.",
+                  "correct": false
+                },
+                {
+                  "content": "Les gènes de la forme et de la couleur sont portés par deux paires de chromosomes différentes.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour le couple B (croisement-test : 247 hauts lisses, 251 hauts ridés, 253 nains lisses, 249 nains ridés), quelle est la conclusion ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le croisement-test. Étape 2 — Déduire : l'hybride donne quatre gamètes. Étape 3 — Comparer : $1000 \\div 4 = 250$ et les quatre effectifs (247, 251, 253, 249) sont proches de 250, soit $1/1/1/1$. Étape 4 — Conclure : gènes indépendants. De petits écarts sont dus au hasard de la fécondation.",
+              "answers": [
+                {
+                  "content": "Les gènes sont indépendants.",
+                  "correct": true
+                },
+                {
+                  "content": "Les gènes sont liés, avec liaison partielle.",
+                  "correct": false
+                },
+                {
+                  "content": "Les gènes sont liés, avec liaison absolue.",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas conclure, car les effectifs ne sont pas exactement égaux.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le pourcentage de recombinaison entre les gènes de la forme et de la couleur du grain (couple A) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Identifier : les phénotypes parentaux sont [lisse, coloré] et [ridé, incolore] ; les recombinés sont [lisse, incolore] (22) et [ridé, coloré] (18). Étape 2 — Calculer : $(22 + 18) \\div 1000 \\times 100 = 4$ %.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Pour le couple B, quel pourcentage des gamètes de l'hybride $T//t\\ L//l$ porte à la fois $t$ et $l$ ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Déduire : le croisement-test montre quatre phénotypes à $1/4$, donc l'hybride produit quatre gamètes, $TL$, $Tl$, $tL$ et $tl$, à $1/4$ chacun. Le gamète $tl$ représente $1/4$, soit 25 % des gamètes.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Remets dans l'ordre la démarche d'interprétation d'un croisement-test.",
+              "question_type": "ordering",
+              "explanation": "La démarche suit les étapes de la fiche. Étape 1 — Repérer le croisement-test. Étape 2 — Déduire les gamètes de l'hybride. Étape 3 — Comparer les proportions à 1/1/1/1, à 2 phénotypes ou à 4 phénotypes inégaux. Étape 4 — Conclure sur la position des gènes. Enfin, seulement si les gènes sont liés avec liaison partielle, calculer le pourcentage de recombinaison : il n'a aucun sens pour des gènes indépendants.",
+              "answers": [
+                {
+                  "content": "Repérer le croisement-test d'un double hétérozygote avec un double récessif."
+                },
+                {
+                  "content": "Déduire les gamètes de l'hybride à partir des phénotypes de la descendance."
+                },
+                {
+                  "content": "Comparer les proportions observées aux trois situations possibles."
+                },
+                {
+                  "content": "Conclure : gènes indépendants, liaison absolue ou liaison partielle."
+                },
+                {
+                  "content": "Calculer le pourcentage de recombinaison si les gènes sont liés."
+                }
+              ]
+            },
+            {
+              "content": "Pour le couple A, quelles sont les trois affirmations exactes ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : identifier les recombinés, calculer r, expliquer par un crossing-over. Les phénotypes [lisse, incolore] et [ridé, coloré] sont minoritaires, donc recombinés ; r = 40 ÷ 1000 × 100 = 4 % ; les gamètes recombinés viennent d'un crossing-over à la prophase I. Les trois autres affirmations décrivent des gènes indépendants (4 gamètes à 1/4, deux paires différentes) ou une erreur sur le double récessif, qui ne donne qu'une sorte de gamète.",
+              "answers": [
+                {
+                  "content": "Les phénotypes [lisse, incolore] et [ridé, coloré] sont les phénotypes recombinés",
+                  "correct": true
+                },
+                {
+                  "content": "Le pourcentage de recombinaison est de 4 %",
+                  "correct": true
+                },
+                {
+                  "content": "Les gamètes recombinés de l'hybride résultent d'un crossing-over entre les deux gènes",
+                  "correct": true
+                },
+                {
+                  "content": "Les quatre sortes de gamètes de l'hybride sont produites à 1/4 chacune",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux gènes sont portés par deux paires de chromosomes différentes",
+                  "correct": false
+                },
+                {
+                  "content": "Le double récessif produit quatre sortes de gamètes",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'élevage de drosophiles du laboratoire du lycée",
+          "statement": "Dans l'élevage de drosophiles du laboratoire du lycée, on réalise deux croisements-tests. Expérience 1 : une lignée pure à corps gris et ailes longues est croisée avec une lignée pure à corps noir et ailes vestigiales ; toute la F1 est [gris, longues]. Une femelle de la F1 est croisée avec un mâle [noir, vestigiales] : sur 2000 descendants, 884 [gris, longues], 876 [noir, vestigiales], 124 [gris, vestigiales] et 116 [noir, longues]. Expérience 2 : une femelle hybride [gris, yeux rouges] ($G//g\\ R//r$), issue de deux lignées pures, est croisée avec un mâle [ébène, yeux bruns] : sur 800 descendants, 198 [gris, rouges], 203 [gris, bruns], 201 [ébène, rouges] et 198 [ébène, bruns]. Notations (allèles dominants) : expérience 1, $N$ corps gris ($n$ noir) et $L$ ailes longues ; expérience 2, $G$ corps gris et $R$ yeux rouges.",
+          "exercise_type": "evaluation",
+          "figure": "effectifs-test-drosophile",
+          "questions": [
+            {
+              "content": "Que conclure de l'expérience 1 sur la position des gènes de la couleur du corps et de la forme des ailes ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : (1) repérer un croisement-test ; (2) déduire que l'hybride produit 4 types de gamètes ; (3) comparer les proportions : 884 et 876 d'un côté, 124 et 116 de l'autre, donc deux phénotypes majoritaires et deux minoritaires, ni 1/1/1/1 ni deux phénotypes ; (4) conclure : gènes liés, liaison partielle. Des gènes sur deux paires différentes donneraient quatre phénotypes à 1/4 chacun, soit environ 500 individus chacun.",
+              "answers": [
+                {
+                  "content": "Ils sont liés, avec liaison partielle.",
+                  "correct": true
+                },
+                {
+                  "content": "Ils sont indépendants.",
+                  "correct": false
+                },
+                {
+                  "content": "Ils sont liés, avec liaison absolue.",
+                  "correct": false
+                },
+                {
+                  "content": "Ils sont portés par deux paires de chromosomes différentes.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Que conclure de l'expérience 2 sur les gènes de la couleur du corps et de la couleur des yeux ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : (1) croisement-test ; (2) quatre gamètes chez l'hybride ; (3) $800 \\div 4 = 200$ et les effectifs (198, 203, 201, 198) sont proches de 200, soit 1/1/1/1 ; (4) conclusion : gènes indépendants, portés par deux paires de chromosomes différentes. Le nombre de phénotypes ne suffit pas, il faut comparer leurs proportions.",
+              "answers": [
+                {
+                  "content": "Ils sont indépendants.",
+                  "correct": true
+                },
+                {
+                  "content": "Ils sont liés, avec liaison partielle.",
+                  "correct": false
+                },
+                {
+                  "content": "Ils sont liés, avec liaison absolue.",
+                  "correct": false
+                },
+                {
+                  "content": "On ne peut pas conclure, car il y a quatre phénotypes.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le génotype de la femelle F1 de l'expérience 1, en notant les allèles de chaque chromosome ?",
+              "question_type": "single_choice",
+              "explanation": "Comme les gènes sont liés (expérience 1), on écrit les allèles de chaque chromosome côte à côte. La F1 est issue d'une lignée $NL//NL$ (gris, longues) et d'une lignée $nl//nl$ (noir, vestigiales) : elle reçoit $NL$ d'une lignée et $nl$ de l'autre. Son génotype est $NL//nl$. $N//n\\ L//l$ est l'écriture de gènes indépendants ; $Nl//nL$ viendrait de lignées [gris, vestigiales] et [noir, longues].",
+              "answers": [
+                {
+                  "content": "$NL//nl$",
+                  "correct": true
+                },
+                {
+                  "content": "$Nl//nL$",
+                  "correct": false
+                },
+                {
+                  "content": "$N//n\\ L//l$",
+                  "correct": false
+                },
+                {
+                  "content": "$NL//NL$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le pourcentage de recombinaison entre les deux gènes de l'expérience 1 ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : (1) identifier : parentaux [gris, longues] et [noir, vestigiales] (884 et 876), recombinés [gris, vestigiales] (124) et [noir, longues] (116) ; (2) calculer : $(124 + 116) \\div 2000 \\times 100 = 240 \\div 2000 \\times 100 = 12$ %.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "On refait l'expérience 1 sur 3000 descendants, avec le même pourcentage de recombinaison de 12 % et deux types recombinés en proportions égales. Combien de drosophiles [gris, vestigiales] attend-on ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : (1) la femelle F1 donne les gamètes recombinés $Nl$ et $nL$ à $r/2 = 6$ % chacun. (2) Le mâle double récessif ne donne que $nl$, donc 6 % des descendants sont $Nl//nl$, soit [gris, vestigiales]. (3) $3000 \\times 6/100 = 180$.",
+              "answers": [
+                {
+                  "content": "180",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "mouches"
+            },
+            {
+              "content": "Quelles sont les deux affirmations exactes sur ces deux expériences ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Dans l'expérience 2, les gènes sont indépendants : quatre gamètes à 1/4 par brassage interchromosomique. Dans l'expérience 1, les gènes sont liés : les deux phénotypes minoritaires viennent de gamètes recombinés, issus d'un crossing-over, et les quatre gamètes ne sont pas à 1/4. Les deux autres affirmations inversent les conclusions des deux expériences.",
+              "answers": [
+                {
+                  "content": "Dans l'expérience 2, la femelle F1 produit quatre sortes de gamètes à 1/4 chacune grâce au brassage interchromosomique",
+                  "correct": true
+                },
+                {
+                  "content": "Dans l'expérience 1, les drosophiles [gris, vestigiales] et [noir, longues] proviennent de gamètes recombinés",
+                  "correct": true
+                },
+                {
+                  "content": "Dans l'expérience 1, la femelle F1 produit quatre sortes de gamètes à 1/4 chacune",
+                  "correct": false
+                },
+                {
+                  "content": "Dans l'expérience 2, les deux gènes sont portés par la même paire de chromosomes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Explique comment apparaissent, dans l'expérience 1, les drosophiles [gris, vestigiales], absentes des deux lignées pures. Appuie-toi sur les chromosomes et sur la méiose de la femelle F1.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Les gènes sont portés par la même paire de chromosomes : la F1 est $NL//nl$ (0,5 pt)",
+                "Un crossing-over a lieu entre les deux gènes, à la prophase I de la méiose de la femelle (1 pt)",
+                "Il se forme un gamète recombiné $Nl$, en proportion minoritaire (6 %) (0,5 pt)",
+                "Ce gamète s'unit à un gamète $nl$ du mâle : descendant $Nl//nl$, [gris, vestigiales] (1 pt)"
+              ],
+              "explanation": "Corrigé modèle : les gènes de la couleur du corps et de la forme des ailes sont portés par la même paire de chromosomes ; la femelle F1 est $NL//nl$ (0,5 pt). Pendant la prophase de la première division de sa méiose, un crossing-over a lieu entre les deux gènes : deux chromatides de chromosomes homologues échangent des segments (1 pt). Il se forme des gamètes recombinés $Nl$ et $nL$, minoritaires (6 % chacun) en plus des gamètes parentaux $NL$ et $nl$ (44 % chacun) (0,5 pt). Quand un gamète $Nl$ s'unit à un gamète $nl$ du mâle double récessif, on obtient un descendant $Nl//nl$, de phénotype [gris, vestigiales] (1 pt). Total : 3 points.",
+              "answers": [],
+              "starter": "Les gènes sont portés par la même paire de chromosomes…"
+            }
+          ]
+        },
+        {
+          "title": "Des lignées de maïs croisées autrement",
+          "statement": "À la station de recherche agronomique près de Bouaké, on croise une lignée pure de maïs à grains lisses et incolores avec une lignée pure à grains ridés et colorés. Toute la F1 a des grains lisses et colorés. Une plante de la F1 est croisée avec une plante à grains ridés et incolores. La descendance compte 1000 grains : 485 lisses incolores, 475 ridés colorés, 21 lisses colorés et 19 ridés incolores. On note $L/l$ le gène de la forme et $C/c$ celui de la couleur (majuscule : allèle dominant).",
+          "exercise_type": "evaluation",
+          "figure": "effectifs-test-mais-croise",
+          "questions": [
+            {
+              "content": "Que peut-on déduire de la F1, toute lisse et colorée ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : (1) repérer : parents purs [lisse, incolore] et [ridé, coloré], F1 homogène [lisse, coloré] ; (2) déduire : « lisse » et « coloré » s'expriment en F1 alors qu'ils viennent chacun d'un parent différent : ils sont dominants. « Ridé » et « incolore » sont récessifs.",
+              "answers": [
+                {
+                  "content": "Lisse et coloré sont dominants ; ridé et incolore sont récessifs.",
+                  "correct": true
+                },
+                {
+                  "content": "Incolore et ridé sont dominants, car ils sont présents chez les parents.",
+                  "correct": false
+                },
+                {
+                  "content": "Lisse est dominant mais coloré est récessif.",
+                  "correct": false
+                },
+                {
+                  "content": "Aucun allèle n'est dominant, car la F1 est homogène.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le génotype de la plante F1, les gènes étant liés ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : la F1 reçoit $Lc$ de la lignée [lisse, incolore] ($Lc//Lc$) et $lC$ de la lignée [ridé, coloré] ($lC//lC$). Elle est $Lc//lC$. Écrire $LC//lc$ serait placer ensemble les allèles dominants parce que la plante F1 est [lisse, coloré], alors que ses chromosomes viennent des lignées parentales. $L//l\\ C//c$ est l'écriture de gènes indépendants.",
+              "answers": [
+                {
+                  "content": "$Lc//lC$",
+                  "correct": true
+                },
+                {
+                  "content": "$LC//lc$",
+                  "correct": false
+                },
+                {
+                  "content": "$L//l\\ C//c$",
+                  "correct": false
+                },
+                {
+                  "content": "$lc//lc$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels sont les deux phénotypes parentaux de cette descendance ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : les phénotypes parentaux sont ceux des lignées pures de départ, [lisse, incolore] et [ridé, coloré] (485 et 475, les plus nombreux). [Lisse, coloré] est le phénotype de la F1, pas celui d'une lignée parentale ; il est ici minoritaire (21). Les phénotypes recombinés sont [lisse, coloré] et [ridé, incolore].",
+              "answers": [
+                {
+                  "content": "Grains lisses et incolores",
+                  "correct": true
+                },
+                {
+                  "content": "Grains ridés et colorés",
+                  "correct": true
+                },
+                {
+                  "content": "Grains lisses et colorés",
+                  "correct": false
+                },
+                {
+                  "content": "Grains ridés et incolores",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est le pourcentage de recombinaison entre les gènes de la forme et de la couleur ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : recombinés $= 21 + 19 = 40$ ; $r = 40 \\div 1000 \\times 100 = 4$ %.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Quel pourcentage des gamètes de la plante F1 porte l'association $LC$ ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : $LC$ n'est pas une combinaison des lignées parentales ($Lc$ et $lC$) : c'est un gamète recombiné. Sa proportion est $r/2 = 4/2 = 2$ %. Les gamètes parentaux $Lc$ et $lC$ ont chacun $(100 - 4)/2 = 48$ %.",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Si les deux gènes étaient indépendants, combien de grains de chaque phénotype attendrait-on dans une descendance de 1000 grains issue du même croisement-test ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : pour des gènes indépendants, l'hybride produit 4 gamètes à 1/4, donc la descendance du croisement-test compte 4 phénotypes à 1/4, soit 250 grains chacun. Les résultats observés (485, 475, 21, 19) s'en écartent nettement, ce qui confirme la liaison partielle.",
+              "answers": [
+                {
+                  "content": "Environ 250 grains de chacun des quatre phénotypes",
+                  "correct": true
+                },
+                {
+                  "content": "Environ 450 grains pour deux phénotypes et 50 pour les deux autres",
+                  "correct": false
+                },
+                {
+                  "content": "Environ 500 grains pour deux phénotypes seulement",
+                  "correct": false
+                },
+                {
+                  "content": "Environ 100 grains pour le phénotype récessif et 300 pour les trois autres",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige l'interprétation complète de ce croisement-test : position des gènes, pourcentage de recombinaison, gamètes de la plante F1 avec leurs proportions et origine des grains minoritaires.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Il reconnaît le croisement-test : un seul type de gamète $lc$ pour le double récessif (0,5 pt)",
+                "Il compare les proportions : 2 phénotypes majoritaires, 2 minoritaires, donc liaison partielle (1 pt)",
+                "Il identifie parentaux (lisses incolores, ridés colorés) et recombinés (0,5 pt)",
+                "Il calcule $r = 40/1000 = 4$ % (0,5 pt)",
+                "Il donne les gamètes : $Lc$ et $lC$ à 48 %, $LC$ et $lc$ à 2 % (1 pt)",
+                "Il explique les recombinés par un crossing-over à la prophase I (0,5 pt)"
+              ],
+              "explanation": "Corrigé modèle : le croisement est un croisement-test, car la F1 hybride est croisée avec un double récessif $lc//lc$ qui ne donne que des gamètes $lc$ (0,5 pt). Les phénotypes de la descendance révèlent donc les gamètes de la F1 : deux phénotypes sont majoritaires (485 et 475), deux minoritaires (21 et 19), ce qui n'est ni 1/1/1/1 ni deux phénotypes : les gènes sont liés, avec liaison partielle (1 pt). Les phénotypes parentaux sont [lisse, incolore] et [ridé, coloré], ceux des lignées pures ; les recombinés sont [lisse, coloré] et [ridé, incolore] (0,5 pt). $r = (21 + 19) \\div 1000 \\times 100 = 4$ % (0,5 pt). La F1, de génotype $Lc//lC$, produit les gamètes parentaux $Lc$ et $lC$ à 48 % chacun et les gamètes recombinés $LC$ et $lc$ à 2 % chacun (1 pt). Les gamètes recombinés viennent d'un crossing-over entre les deux gènes, à la prophase de la première division de la méiose, par échange de segments entre chromatides de chromosomes homologues (0,5 pt). Total : 4 points.",
+              "answers": [],
+              "starter": "Les gènes sont portés par la même paire de chromosomes, car…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

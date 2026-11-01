@@ -1,0 +1,1562 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La mise en place des gisements pétrolifères en Côte d'Ivoire",
+      "subtitle": "Leçon 9 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "littoral-grand-lahou-assinie",
+          "kind": "map",
+          "description": "Carte de la Côte d'Ivoire avec la zone littorale du golfe de Guinée, où se trouve une partie à terre du bassin sédimentaire côtier. Cinq localités sont placées : Grand-Lahou, Dabou, Abidjan, Grand-Bassam et Assinie. Un trait relie Grand-Lahou à Assinie : c'est l'itinéraire de la sortie géologique.",
+          "params": {
+            "base": "cote_d_ivoire",
+            "areas": [
+              {
+                "id": "coastal_strip",
+                "category": 1
+              }
+            ],
+            "places": [
+              {
+                "id": "grand_lahou"
+              },
+              {
+                "id": "dabou"
+              },
+              {
+                "id": "abidjan"
+              },
+              {
+                "id": "grand_bassam"
+              },
+              {
+                "id": "assinie"
+              }
+            ],
+            "routes": [
+              {
+                "from": "grand_lahou",
+                "to": "assinie",
+                "label": "Sortie géologique"
+              }
+            ],
+            "legend": [
+              "Zone littorale (contours schématiques)"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "de-la-matiere-organique-au-gisement",
+          "kind": "diagram",
+          "description": "Schéma fléché en huit étapes, de haut en bas : la matière organique se dépose en milieu confiné pauvre en dioxygène, elle est enfouie et devient kérogène dans la roche mère, la chaleur la transforme en hydrocarbures, ceux-ci migrent vers le haut, traversent la roche réservoir et sont arrêtés sous la roche couverture, dans un piège : c'est le gisement.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "mo",
+                "label": "Matière organique déposée avec les sédiments"
+              },
+              {
+                "id": "conf",
+                "label": "Milieu confiné, pauvre en dioxygène : conservation"
+              },
+              {
+                "id": "enf",
+                "label": "Enfouissement sous de nouveaux sédiments"
+              },
+              {
+                "id": "ker",
+                "label": "Kérogène dans la roche mère"
+              },
+              {
+                "id": "hc",
+                "label": "Hydrocarbures formés (fenêtre à huile)"
+              },
+              {
+                "id": "mig",
+                "label": "Migration vers le haut"
+              },
+              {
+                "id": "res",
+                "label": "Roche réservoir poreuse et perméable"
+              },
+              {
+                "id": "pie",
+                "label": "Piège sous la roche couverture : gisement"
+              }
+            ],
+            "edges": [
+              {
+                "from": "mo",
+                "to": "conf",
+                "label": "se conserve"
+              },
+              {
+                "from": "conf",
+                "to": "enf"
+              },
+              {
+                "from": "enf",
+                "to": "ker",
+                "label": "se transforme"
+              },
+              {
+                "from": "ker",
+                "to": "hc",
+                "label": "chauffage"
+              },
+              {
+                "from": "hc",
+                "to": "mig",
+                "label": "expulsion"
+              },
+              {
+                "from": "mig",
+                "to": "res",
+                "label": "remplit"
+              },
+              {
+                "from": "res",
+                "to": "pie",
+                "label": "est fermé par"
+              }
+            ],
+            "legend": []
+          },
+          "controls": []
+        },
+        {
+          "key": "temperature-profondeur",
+          "kind": "stat_chart",
+          "description": "Courbe de la température mesurée dans un bassin sédimentaire en fonction de la profondeur : 30 degrés à la surface, 60 degrés à 1000 mètres, 90 degrés à 2000 mètres, 120 degrés à 3000 mètres et 150 degrés à 4000 mètres. La température augmente de 3 degrés tous les 100 mètres : la courbe est une droite.",
+          "params": {
+            "chart": "line",
+            "series": [
+              30,
+              60,
+              90,
+              120,
+              150
+            ],
+            "labels": [
+              "0 m",
+              "1000 m",
+              "2000 m",
+              "3000 m",
+              "4000 m"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "porosite-de-quatre-roches",
+          "kind": "stat_chart",
+          "description": "Diagramme en barres de la porosité, en pourcentage du volume, de quatre roches mesurées en laboratoire : sable 35, grès 20, argile 40 et sel gemme 1. La porosité dit quelle part du volume est vide ; elle ne dit pas si les vides sont reliés entre eux, donc elle ne donne pas la perméabilité.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              35,
+              20,
+              40,
+              1
+            ],
+            "labels": [
+              "Sable",
+              "Grès",
+              "Argile",
+              "Sel gemme"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Le bassin sédimentaire côtier ivoirien",
+          "remember": "Un **bassin sédimentaire** est une dépression de l'écorce terrestre qui s'enfonce lentement (c'est la **subsidence**) et se remplit de sédiments (sables, argiles, calcaires) déposés en couches superposées, les **strates** : les plus anciennes sont en bas. Le **bassin sédimentaire côtier ivoirien** borde le golfe de Guinée, au sud du pays : il occupe une partie du littoral (à l'ouest, le socle affleure) et se prolonge en mer (offshore). Il est né de l'**ouverture de l'océan Atlantique** (au Crétacé) : la croûte s'est étirée, amincie et fracturée par des **failles**, puis le bassin s'est affaissé et a reçu des sédiments. Des couches riches en matière organique peuvent s'y trouver : c'est ce qui le rend intéressant pour le pétrole.",
+          "method": [
+            "Localiser le bassin : repérer sa position par rapport à la côte et au golfe de Guinée.",
+            "Identifier l'événement à l'origine du bassin : l'ouverture de l'Atlantique, avec étirement, amincissement et fracturation de la croûte.",
+            "Relier l'affaissement (la subsidence) à l'accumulation des sédiments en strates superposées.",
+            "Conclure sur l'intérêt pétrolier : un bassin épais peut contenir de la matière organique enfouie."
+          ],
+          "example": {
+            "statement": "Pendant la sortie de Grand-Lahou à Assinie, on observe sur la carte que le littoral longe le golfe de Guinée. À Abidjan, un géologue d'une société pétrolière présente un modèle simplifié du bassin, avec un sondage qui traverse 3 000 m de sédiments marins empilés en strates, recoupés par des failles. Que montre ce document sur l'origine et l'intérêt du bassin ?",
+            "steps": [
+              "Localiser : le bassin borde le golfe de Guinée, au sud de la Côte d'Ivoire, sur une partie du littoral et en mer.",
+              "Identifier : l'ouverture de l'Atlantique a étiré, aminci et fracturé la croûte ; les failles en sont la trace.",
+              "Relier : le bassin s'est affaissé (subsidence) et a accumulé 3 000 m de sédiments en strates superposées.",
+              "Conclure : un bassin aussi épais peut contenir de la matière organique enfouie ; il est intéressant pour le pétrole."
+            ]
+          },
+          "pitfall": "Ne pas confondre le **bassin sédimentaire** et le **gisement**. Le bassin est une vaste région remplie de roches ; le pétrole n'occupe qu'une petite partie de certaines couches. Contre-exemple : un sondage traverse 3 000 m de sédiments, mais la couche qui contient le pétrole n'en fait que 50 m, soit environ 1,7 % de l'épaisseur. Retiens : le bassin est le **cadre**, le gisement est une **accumulation locale** dans ce cadre.",
+          "figure": "littoral-grand-lahou-assinie",
+          "exercise": {
+            "title": "Situer le bassin côtier et expliquer sa formation",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour situer le bassin sédimentaire côtier ivoirien et expliquer comment il s'est formé.",
+            "exercise_type": "fixation",
+            "figure": "littoral-grand-lahou-assinie",
+            "questions": [
+              {
+                "content": "Où se trouve le bassin sédimentaire côtier ivoirien ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser : le bassin côtier borde le golfe de Guinée. Il se trouve donc au sud, sur une partie du littoral, et se prolonge en mer (offshore). Les régions du nord, de l'ouest montagneux ou du centre ne bordent pas le golfe de Guinée : ce sont de mauvaises localisations.",
+                "answers": [
+                  {
+                    "content": "Au sud du pays, le long du golfe de Guinée, sur une partie du littoral et en mer",
+                    "correct": true
+                  },
+                  {
+                    "content": "Au nord du pays, dans la région des savanes",
+                    "correct": false
+                  },
+                  {
+                    "content": "À l'ouest, dans la zone des montagnes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Au centre du pays, autour de Yamoussoukro",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un bassin sédimentaire est une dépression qui s'enfonce lentement et se remplit de sédiments déposés en couches superposées.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Relier : un bassin s'affaisse (subsidence) et accumule des sédiments en strates superposées, les plus anciennes en bas. L'affirmation reprend exactement cette définition : elle est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le lent affaissement d'un bassin, qui se poursuit pendant qu'il se remplit de sédiments, s'appelle la ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Relier : l'affaissement lent du bassin s'appelle la subsidence. C'est elle qui crée la place pour que les sédiments s'accumulent en strates épaisses.",
+                "answers": [
+                  {
+                    "content": "subsidence",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux conséquences de l'ouverture de l'océan Atlantique pour la croûte de cette région ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Identifier : l'ouverture de l'Atlantique étire la croûte, l'amincit et la fracture par des failles. Un épaississement par des volcans ou un soulèvement qui vide le bassin sont le contraire de ce qui se passe : un bassin s'affaisse et se remplit.",
+                "answers": [
+                  {
+                    "content": "La croûte est étirée et amincie",
+                    "correct": true
+                  },
+                  {
+                    "content": "La croûte est fracturée par des failles",
+                    "correct": true
+                  },
+                  {
+                    "content": "La croûte est épaissie par un empilement de volcans géants",
+                    "correct": false
+                  },
+                  {
+                    "content": "La croûte se soulève et le bassin se vide de ses sédiments",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les événements qui ont donné le bassin côtier.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Identifier : la croûte continentale est d'abord étirée et fracturée, puis l'océan Atlantique s'ouvre. Étape 3 — Relier : la croûte amincie s'affaisse (subsidence), ce qui permet l'accumulation des sédiments en strates. L'ordre est donc : étirement et fracturation, ouverture, affaissement, accumulation.",
+                "answers": [
+                  {
+                    "content": "Étirement et fracturation de la croûte continentale"
+                  },
+                  {
+                    "content": "Ouverture de l'océan Atlantique"
+                  },
+                  {
+                    "content": "Affaissement du bassin (subsidence)"
+                  },
+                  {
+                    "content": "Accumulation des sédiments en strates superposées"
+                  }
+                ]
+              },
+              {
+                "content": "Un sondage traverse 2 000 m de sédiments du bassin, dont une couche de 40 m contient du pétrole. Quelle conclusion est exacte ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : un bassin épais peut contenir de la matière organique, mais le pétrole n'occupe qu'une petite partie de certaines couches (40 m sur 2 000 m, soit 2 %). L'erreur tentante est de confondre le bassin, qui est le cadre, avec le gisement, qui est une accumulation locale, et d'imaginer un lac de pétrole.",
+                "answers": [
+                  {
+                    "content": "Les 2 000 m de sédiments sont remplis de pétrole",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le bassin est un grand cadre rempli de roches ; le pétrole n'est piégé que dans une petite partie, ici 40 m sur 2 000 m",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le bassin et le gisement sont la même chose",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le pétrole forme un lac souterrain sous tout le bassin",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à situer le bassin côtier et à expliquer sa formation, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Le bassin côtier s'est formé à la suite de l'ouverture de l'océan ___, et il borde le golfe de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Localiser : le bassin borde le golfe de Guinée. Étape 2 — Identifier : il est né de l'ouverture de l'océan Atlantique, qui a étiré et fracturé la croûte.",
+                "answers": [
+                  {
+                    "content": "Atlantique",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Guinée",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense à l'océan que l'on voit depuis le littoral ivoirien et au nom du golfe."
+              },
+              {
+                "content": "La subsidence désigne le soulèvement lent d'une chaîne de montagnes.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Relier : la subsidence est l'inverse d'un soulèvement. C'est l'affaissement lent d'un bassin, qui laisse la place aux sédiments. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier : les failles sont les cassures laissées par la fracturation de la croûte. Étape 3 — Relier : la subsidence est l'affaissement qui permet l'accumulation des strates. Étape 1 — Localiser : la partie du bassin située en mer s'appelle l'offshore.",
+                "answers": [
+                  {
+                    "content": "Strate",
+                    "match": "Couche de sédiments déposée à un moment donné"
+                  },
+                  {
+                    "content": "Faille",
+                    "match": "Cassure de la croûte avec déplacement des deux blocs"
+                  },
+                  {
+                    "content": "Offshore",
+                    "match": "Partie du bassin située en mer"
+                  },
+                  {
+                    "content": "Subsidence",
+                    "match": "Affaissement lent du bassin"
+                  }
+                ],
+                "hint": "Une strate est une couche ; une faille est une cassure."
+              }
+            ]
+          }
+        },
+        {
+          "name": "De la matière organique au kérogène",
+          "remember": "Le pétrole vient surtout de la **matière organique** : restes d'êtres vivants microscopiques (plancton, algues) des eaux marines, qui tombent sur le fond après leur mort et se mêlent aux sédiments fins (vases, argiles). En présence de dioxygène, cette matière est détruite (oxydation, bactéries). Elle ne se conserve que dans un **milieu confiné** : eau calme, mal renouvelée, **pauvre en dioxygène**, avec un dépôt assez rapide de sédiments qui la recouvrent. Enfouie, elle se transforme lentement en **kérogène**, substance solide insoluble, matière première des hydrocarbures. Une roche riche en kérogène est une **roche mère**, souvent une argile noire.",
+          "method": [
+            "Repérer le milieu de dépôt : eau calme ou agitée, renouvelée ou confinée, et sa teneur en dioxygène.",
+            "Relier cette teneur en dioxygène à la conservation ou à la destruction de la matière organique déposée.",
+            "Conclure : dire si la roche formée est riche en matière organique, donc si elle peut être une roche mère."
+          ],
+          "example": {
+            "statement": "Deux sites de dépôt anciens sont décrits. Site A : eau agitée et bien oxygénée, dépôt de sables. Site B : fond d'un golfe calme, eau peu renouvelée et sans dioxygène, vases noires pleines de débris de plancton. Lequel peut donner une roche mère ?",
+            "steps": [
+              "Repérer : le site A a une eau agitée et oxygénée ; le site B est calme, confiné et sans dioxygène.",
+              "Relier : en A, le dioxygène détruit la matière organique ; en B, son absence la conserve.",
+              "Conclure : A donne un sable pauvre en matière organique ; B donne une argile noire riche en matière organique, donc une roche mère possible."
+            ]
+          },
+          "pitfall": "Ne pas croire que le pétrole vient de gros animaux, comme les dinosaures : il vient surtout de plancton et d'algues microscopiques. Ne pas croire non plus qu'un milieu très riche en vie donne forcément une roche mère. Contre-exemple : un récif, riche en vie mais en eau agitée et oxygénée, ne conserve presque rien ; un fond de golfe sans dioxygène, même moins productif, conserve la matière organique.",
+          "figure": "de-la-matiere-organique-au-gisement",
+          "exercise": {
+            "title": "Reconnaître un milieu qui conserve la matière organique",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour décider si un milieu de dépôt peut donner une roche mère.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "D'où vient l'essentiel de la matière organique à l'origine du pétrole ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la matière organique déposée au fond des eaux marines vient des êtres vivants microscopiques. Étape 3 — Conclure : la roche mère est issue surtout de plancton et d'algues. L'idée des dinosaures est la confusion classique : les gros animaux sont trop rares pour former de telles quantités.",
+                "answers": [
+                  {
+                    "content": "Du plancton et des algues microscopiques des eaux marines",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des dinosaures et des gros animaux",
+                    "correct": false
+                  },
+                  {
+                    "content": "De la lave des volcans",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du sable des plages",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans une eau agitée et bien oxygénée, la matière organique déposée est bien conservée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'eau est agitée et riche en dioxygène. Étape 2 — Relier : le dioxygène détruit la matière organique (oxydation, bactéries). Étape 3 — Conclure : elle n'est pas conservée, l'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un milieu où l'eau est calme, mal renouvelée et pauvre en dioxygène est un milieu ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : une eau calme, mal renouvelée et pauvre en dioxygène caractérise un milieu confiné. C'est ce milieu qui conserve la matière organique (étape 2 — Relier).",
+                "answers": [
+                  {
+                    "content": "confiné",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les trois conditions qui favorisent la formation d'une roche mère ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 1 — Repérer le milieu : il faut de la matière organique abondante, une eau pauvre en dioxygène et un recouvrement rapide par des sédiments. Étape 2 — Relier : les courants forts et l'eau oxygénée apportent du dioxygène et détruisent la matière organique, ce sont les conditions inverses.",
+                "answers": [
+                  {
+                    "content": "Une grande quantité de plancton et d'algues",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une eau pauvre en dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un dépôt assez rapide de sédiments fins qui recouvrent la matière organique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des courants forts qui brassent l'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une eau très oxygénée qui renouvelle le fond",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : la matière organique vient d'êtres vivants microscopiques et le milieu confiné est pauvre en dioxygène. Étape 3 — Conclure : le kérogène est la forme solide que prend la matière organique enfouie, et une roche qui en est riche s'appelle roche mère.",
+                "answers": [
+                  {
+                    "content": "Matière organique",
+                    "match": "Restes d'êtres vivants microscopiques"
+                  },
+                  {
+                    "content": "Milieu confiné",
+                    "match": "Eau calme, mal renouvelée, pauvre en dioxygène"
+                  },
+                  {
+                    "content": "Kérogène",
+                    "match": "Substance solide issue de la matière organique enfouie"
+                  },
+                  {
+                    "content": "Roche mère",
+                    "match": "Roche riche en kérogène"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dit : « Le récif corallien est très riche en vie, donc c'est la meilleure roche mère. » Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le récif est en eau agitée et bien oxygénée. Étape 2 — Relier : le dioxygène détruit la matière organique. Étape 3 — Conclure : malgré la richesse en vie, la roche formée est pauvre en matière organique. Ce n'est pas la quantité de vie qui compte, mais la conservation.",
+                "answers": [
+                  {
+                    "content": "Vrai : plus il y a de vie, plus il y a de matière organique conservée",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux : l'eau du récif est agitée et oxygénée, la matière organique y est détruite",
+                    "correct": true
+                  },
+                  {
+                    "content": "Vrai : le calcaire du récif se transforme en kérogène",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux : un récif ne contient aucun être vivant",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître les conditions de conservation de la matière organique, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Dans un milieu ___ en dioxygène, la matière organique se conserve ; dans un milieu ___ en dioxygène, elle est détruite.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on compare la teneur en dioxygène du milieu. Étape 2 — Relier : un milieu pauvre en dioxygène conserve la matière organique ; un milieu riche en dioxygène la détruit.",
+                "answers": [
+                  {
+                    "content": "pauvre",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "riche",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense au rôle du dioxygène : il détruit ou il conserve ?"
+              },
+              {
+                "content": "Le kérogène est un liquide qui s'écoule facilement.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Conclure : le kérogène est une substance solide insoluble, produite par la transformation de la matière organique enfouie. Il ne s'écoule pas ; ce sont les hydrocarbures formés ensuite qui pourront bouger. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces sédiments, lequel est le meilleur candidat pour une roche mère ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche un milieu calme et confiné. Étape 2 — Relier : seul le golfe sans dioxygène conserve la matière organique. Étape 3 — Conclure : l'argile noire riche en plancton est le meilleur candidat ; les sables, galets et calcaires d'eau agitée en sont pauvres.",
+                "answers": [
+                  {
+                    "content": "Une argile noire finement litée, riche en débris de plancton, déposée dans un golfe sans dioxygène",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un sable grossier lavé par les vagues",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des galets roulés par une rivière rapide",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un calcaire clair déposé en eau agitée et oxygénée",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le milieu calme, sans dioxygène, et la couleur noire due à la matière organique."
+              },
+              {
+                "content": "Remets dans l'ordre les étapes qui conduisent au kérogène.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : le plancton meurt et tombe sur le fond, où il se mêle aux sédiments. Étape 2 — Relier : le milieu pauvre en dioxygène le conserve, puis de nouveaux sédiments le recouvrent. Étape 3 — Conclure : l'enfouissement le transforme lentement en kérogène.",
+                "answers": [
+                  {
+                    "content": "Mort du plancton, qui tombe sur le fond"
+                  },
+                  {
+                    "content": "Mélange aux sédiments fins dans un milieu pauvre en dioxygène"
+                  },
+                  {
+                    "content": "Recouvrement par de nouveaux sédiments"
+                  },
+                  {
+                    "content": "Transformation lente en kérogène pendant l'enfouissement"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La formation des hydrocarbures et leur migration",
+          "remember": "Quand la roche mère est enfouie, la **température** augmente avec la profondeur (gradient géothermique). Sous l'effet de la chaleur, le kérogène se fragmente (craquage) en **hydrocarbures** : de l'**huile** (le pétrole) puis du **gaz**. La **fenêtre à huile** est l'intervalle de températures, donc de profondeurs, où se forme surtout l'huile ; les sujets la donnent (de l'ordre de 60 à 120 °C). En deçà de 60 °C (moins profond), la roche mère est **immature** (pas encore d'hydrocarbures) ; au-delà de 120 °C (plus profond), il se forme surtout du **gaz**. Les hydrocarbures, moins denses que l'eau qui imprègne les roches, sont expulsés de la roche mère puis **migrent** vers le haut dans les roches perméables, jusqu'à être arrêtés par une roche imperméable ou à atteindre la surface.",
+          "method": [
+            "Lire la température à la profondeur de la roche mère (courbe, tableau ou gradient donné).",
+            "Comparer cette température aux limites de la fenêtre à huile.",
+            "Déduire le produit formé : rien (roche mère immature), de l'huile ou surtout du gaz.",
+            "Indiquer le sens de la migration : vers le haut, car les hydrocarbures sont moins denses que l'eau."
+          ],
+          "example": {
+            "statement": "Dans un bassin, la température est de 30 °C à la surface et augmente de 3 °C tous les 100 m. La fenêtre à huile va de 60 °C à 120 °C. Une roche mère est enfouie à 2 000 m. Que forme-t-elle, et où vont les hydrocarbures ?",
+            "steps": [
+              "Lire : à 2 000 m, la température vaut 30 + 20 × 3 = 90 °C.",
+              "Comparer : 90 °C est compris entre 60 °C et 120 °C, donc dans la fenêtre à huile.",
+              "Déduire : la roche mère forme surtout de l'huile, ni roche mère immature ni gaz seul.",
+              "Indiquer : les hydrocarbures, moins denses que l'eau, migrent vers le haut dans les roches perméables."
+            ]
+          },
+          "pitfall": "Ne pas croire que plus la roche mère est profonde, plus elle donne de pétrole. Au-delà de la fenêtre à huile, il se forme surtout du gaz. Contre-exemple (30 °C en surface, +3 °C par 100 m, fenêtre de 60 à 120 °C) : à 800 m, 54 °C, la roche mère est immature ; à 2 000 m, 90 °C, c'est de l'huile ; à 4 000 m, 150 °C, c'est surtout du gaz.",
+          "figure": "temperature-profondeur",
+          "exercise": {
+            "title": "Prévoir ce que forme une roche mère enfouie",
+            "statement": "Dans cet exercice, la température est de 30 °C à la surface et augmente de 3 °C tous les 100 m. La fenêtre à huile va de 60 °C à 120 °C. Tu appliques la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "temperature-profondeur",
+            "questions": [
+              {
+                "content": "La température est de 30 °C à la surface et augmente de 3 °C tous les 100 m. Quelle est la température à 1 500 m de profondeur ?",
+                "question_type": "numeric",
+                "unit": "°C",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : 1 500 m contiennent 15 fois 100 m, donc la hausse est de 15 × 3 = 45 °C. La température vaut 30 + 45 = 75 °C. L'erreur tentante est d'oublier les 30 °C de la surface et de répondre 45.",
+                "answers": [
+                  {
+                    "content": "75",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une roche mère est à 75 °C. La fenêtre à huile va de 60 °C à 120 °C. Que forme-t-elle surtout ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Comparer : 75 °C est compris entre 60 °C et 120 °C, donc dans la fenêtre à huile. Étape 3 — Déduire : la roche mère forme surtout de l'huile. Elle serait immature sous 60 °C et donnerait surtout du gaz au-dessus de 120 °C.",
+                "answers": [
+                  {
+                    "content": "De l'huile",
+                    "correct": true
+                  },
+                  {
+                    "content": "Rien : elle est immature",
+                    "correct": false
+                  },
+                  {
+                    "content": "Surtout du gaz",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des hydrocarbures détruits",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La température est de 30 °C à la surface et augmente de 3 °C tous les 100 m. À quelle profondeur la température atteint-elle 105 °C ?",
+                "question_type": "numeric",
+                "unit": "m",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : la hausse totale est 105 − 30 = 75 °C. Comme la température gagne 3 °C par 100 m, il faut 75 ÷ 3 = 25 tranches de 100 m, soit 2 500 m. Vérification : 30 + 25 × 3 = 105 °C.",
+                "answers": [
+                  {
+                    "content": "2500",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une fois formés, les hydrocarbures migrent vers le bas, car ils sont plus lourds que l'eau.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Indiquer : les hydrocarbures sont moins denses que l'eau qui imprègne les roches. Ils migrent donc vers le haut, dans les roches perméables. L'affirmation inverse est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La fenêtre à huile va de 60 °C à 120 °C. Relie chaque température de roche mère à ce qui s'y forme surtout.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Comparer : 45 °C est sous 60 °C, 90 °C est dans la fenêtre, 140 °C est au-dessus de 120 °C. Étape 3 — Déduire : 45 °C donne un kérogène immature, 90 °C surtout de l'huile, 140 °C surtout du gaz.",
+                "answers": [
+                  {
+                    "content": "45 °C",
+                    "match": "Rien : kérogène immature"
+                  },
+                  {
+                    "content": "90 °C",
+                    "match": "Surtout de l'huile"
+                  },
+                  {
+                    "content": "140 °C",
+                    "match": "Surtout du gaz"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dit : « Plus la roche mère est profonde, plus elle donne de pétrole. » La température est de 30 °C en surface, +3 °C par 100 m ; la fenêtre à huile va de 60 °C à 120 °C. Que forme une roche mère à 4 000 m ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : à 4 000 m, la température vaut 30 + 40 × 3 = 150 °C. Étape 2 — Comparer : 150 °C dépasse 120 °C, on est hors de la fenêtre à huile. Étape 3 — Déduire : il se forme surtout du gaz. La profondeur n'augmente pas le pétrole indéfiniment.",
+                "answers": [
+                  {
+                    "content": "Surtout du gaz, car 150 °C est au-dessus de la fenêtre à huile",
+                    "correct": true
+                  },
+                  {
+                    "content": "Encore plus d'huile, car elle est plus profonde",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien, car elle est immature",
+                    "correct": false
+                  },
+                  {
+                    "content": "Exactement autant d'huile qu'à 2 000 m",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire une température, la comparer à la fenêtre à huile et prévoir le produit formé, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La température est de 30 °C à la surface et augmente de 3 °C tous les 100 m. Quelle est la température à 2 500 m de profondeur ?",
+                "question_type": "numeric",
+                "unit": "°C",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : 2 500 m contiennent 25 tranches de 100 m, soit 25 × 3 = 75 °C de hausse. La température vaut 30 + 75 = 105 °C.",
+                "answers": [
+                  {
+                    "content": "105",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compte le nombre de tranches de 100 m, puis n'oublie pas la température de surface."
+              },
+              {
+                "content": "Une roche mère dont la température est inférieure à 60 °C est ___ ; entre 60 °C et 120 °C, elle forme surtout de l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Comparer : sous 60 °C on est avant la fenêtre à huile. Étape 3 — Déduire : la roche mère est immature, elle ne forme pas encore d'hydrocarbures ; entre 60 °C et 120 °C elle forme surtout de l'huile.",
+                "answers": [
+                  {
+                    "content": "immature",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "huile",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Avant la fenêtre : pas encore mûre. Dans la fenêtre : le pétrole."
+              },
+              {
+                "content": "Les hydrocarbures sont moins denses que l'eau qui imprègne les roches, ce qui explique qu'ils remontent.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Indiquer : moins denses que l'eau, les hydrocarbures sont poussés vers le haut, dans les roches perméables. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La température est de 30 °C en surface et augmente de 3 °C tous les 100 m ; la fenêtre à huile va de 60 °C à 120 °C. Que forme une roche mère à 3 500 m ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : à 3 500 m, la température vaut 30 + 35 × 3 = 135 °C. Étape 2 — Comparer : 135 °C dépasse 120 °C. Étape 3 — Déduire : la roche mère est au-delà de la fenêtre à huile et forme surtout du gaz.",
+                "answers": [
+                  {
+                    "content": "Surtout du gaz",
+                    "correct": true
+                  },
+                  {
+                    "content": "Surtout de l'huile",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien : elle est immature",
+                    "correct": false
+                  },
+                  {
+                    "content": "De l'eau douce",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Roche réservoir, roche couverture et piège",
+          "remember": "Pour qu'un **gisement** existe, il faut réunir : une roche mère, une migration, une **roche réservoir**, une **roche couverture** et un **piège**. Le réservoir est **poreux** (il a des vides qui stockent les fluides) et **perméable** (les vides sont reliés, les fluides circulent) : sable, grès. La couverture est **imperméable** (argile compacte, sel) et surmonte le réservoir. La **porosité** est la part de vides : $\\text{porosité} = \\dfrac{V_{\\text{vides}}}{V_{\\text{total}}} \\times 100$. Une roche peut être très poreuse et imperméable (une argile, dont les vides minuscules, très mal reliés, ne laissent presque pas circuler les fluides). Le **piège** retient les hydrocarbures : **anticlinal** (pli en voûte), **par faille**, **dôme de sel**, ou **biseau stratigraphique** (le réservoir s'amincit contre une roche imperméable). Dans le réservoir, les fluides se rangent par densité : gaz en haut, huile au milieu, eau en bas.",
+          "method": [
+            "Lire la porosité et la perméabilité de chaque couche donnée par l'énoncé.",
+            "Attribuer à chaque couche son rôle : réservoir si elle est poreuse et perméable, couverture si elle est imperméable.",
+            "Vérifier la géométrie : la couverture doit surmonter le réservoir et former un piège (voûte, faille, biseau, dôme de sel).",
+            "Conclure : le gisement existe seulement si la roche mère, la migration, le réservoir, la couverture et le piège sont réunis."
+          ],
+          "example": {
+            "statement": "Un sondage traverse deux couches. La couche Y, au-dessus, est une argile de porosité 40 %, imperméable. La couche X, en dessous, est un sable de porosité 35 %, perméable, et elle forme une voûte (un pli) sous Y. Une roche mère profonde a envoyé des hydrocarbures vers le haut. Un gisement est-il possible ?",
+            "steps": [
+              "Lire : X a 35 % de porosité et est perméable ; Y a 40 % de porosité et est imperméable.",
+              "Attribuer : X est poreux et perméable, c'est le réservoir ; Y est imperméable, c'est la couverture, malgré ses 40 % de porosité.",
+              "Vérifier : Y surmonte X, et X forme une voûte sous Y : c'est un piège anticlinal.",
+              "Conclure : roche mère, migration, réservoir, couverture et piège sont réunis ; un gisement est possible dans X."
+            ]
+          },
+          "pitfall": "Ne pas confondre **porosité** et **perméabilité**. Une roche très poreuse n'est pas forcément un réservoir. Contre-exemple : une argile peut avoir 40 % de porosité, plus que le grès à 20 %, mais ses vides sont minuscules, très mal reliés, et ne laissent presque pas circuler les fluides : elle est imperméable, donc c'est une couverture et pas un réservoir. Pour être réservoir, il faut les deux : poreuse **et** perméable.",
+          "figure": "porosite-de-quatre-roches",
+          "exercise": {
+            "title": "Distinguer réservoir, couverture et piège",
+            "statement": "Dans cet exercice, tu appliques la méthode de la fiche pour décider du rôle de chaque couche et pour reconnaître un piège.",
+            "exercise_type": "fixation",
+            "figure": "porosite-de-quatre-roches",
+            "questions": [
+              {
+                "content": "Quelles qualités doit avoir une roche réservoir ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Attribuer : le réservoir stocke les hydrocarbures grâce à ses vides (porosité) et les laisse circuler grâce à des vides reliés (perméabilité). Il faut les deux. Une roche riche en kérogène est une roche mère.",
+                "answers": [
+                  {
+                    "content": "Être poreuse et perméable",
+                    "correct": true
+                  },
+                  {
+                    "content": "Être poreuse et imperméable",
+                    "correct": false
+                  },
+                  {
+                    "content": "Être imperméable et sans vides",
+                    "correct": false
+                  },
+                  {
+                    "content": "Être riche en kérogène",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux roches qui peuvent servir de couverture ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Attribuer : une couverture est imperméable et bloque la remontée. L'argile compacte et le sel gemme le sont. Le sable et le grès, poreux et perméables, laissent passer les fluides : ce sont des réservoirs possibles, pas des couvertures.",
+                "answers": [
+                  {
+                    "content": "Une argile compacte, imperméable",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un sel gemme, imperméable",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un sable propre, poreux et perméable",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un grès poreux et perméable",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un piège en forme de voûte, créé par un pli, s'appelle un piège ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Vérifier la géométrie : un pli en voûte sous une couverture imperméable forme un piège anticlinal. Les autres pièges sont par faille, par dôme de sel ou en biseau stratigraphique.",
+                "answers": [
+                  {
+                    "content": "anticlinal",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque type de piège à sa description.",
+                "question_type": "matching",
+                "explanation": "Étape 3 — Vérifier la géométrie : dans les quatre cas, un réservoir est fermé par une roche imperméable. Seule la forme change : une voûte, une faille, un amincissement du réservoir ou une masse de sel qui remonte.",
+                "answers": [
+                  {
+                    "content": "Anticlinal",
+                    "match": "Pli en voûte sous une couverture"
+                  },
+                  {
+                    "content": "Par faille",
+                    "match": "Réservoir bloqué par une faille contre une roche imperméable"
+                  },
+                  {
+                    "content": "Biseau stratigraphique",
+                    "match": "Réservoir qui s'amincit jusqu'à disparaître contre une roche imperméable"
+                  },
+                  {
+                    "content": "Dôme de sel",
+                    "match": "Couches relevées contre le flanc d'une masse de sel imperméable"
+                  }
+                ]
+              },
+              {
+                "content": "Un échantillon de grès de 200 cm³ contient 50 cm³ de vides. Quelle est sa porosité ?",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : le volume des vides est 50 cm³ et le volume total 200 cm³. Porosité = vides ÷ total × 100 = 50 ÷ 200 × 100 = 25 %. Une erreur fréquente est de diviser par le volume de roche solide (150 cm³).",
+                "answers": [
+                  {
+                    "content": "25",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un réservoir qui contient du gaz, de l'huile et de l'eau, range les fluides de haut en bas.",
+                "question_type": "ordering",
+                "explanation": "Étape 3 — Vérifier la géométrie : les fluides se rangent par densité. Le gaz, le moins dense, occupe le haut, l'huile est au milieu, et l'eau, la plus dense, est en bas.",
+                "answers": [
+                  {
+                    "content": "Gaz"
+                  },
+                  {
+                    "content": "Huile"
+                  },
+                  {
+                    "content": "Eau"
+                  }
+                ]
+              },
+              {
+                "content": "Une argile a une porosité de 40 %, supérieure à celle d'un grès à 20 %. Peut-elle être la roche réservoir ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : 40 % de porosité, mais l'argile est imperméable. Étape 2 — Attribuer : un réservoir doit être poreux et perméable ; l'argile n'est que poreuse, c'est une couverture. L'erreur est de confondre porosité et perméabilité.",
+                "answers": [
+                  {
+                    "content": "Non : ses vides sont minuscules et très mal reliés, elle est imperméable, donc c'est une couverture",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui : elle est plus poreuse que le grès, donc meilleur réservoir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Oui : une roche très poreuse est toujours perméable",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : l'argile n'a aucun vide",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à attribuer un rôle à chaque couche et à reconnaître un piège, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une roche réservoir stocke les hydrocarbures grâce à sa ___ et les laisse circuler grâce à sa ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Attribuer : le réservoir est poreux, ses vides stockent les fluides, et perméable, ses vides reliés les laissent circuler.",
+                "answers": [
+                  {
+                    "content": "porosité",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "perméabilité",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les vides stockent ; leur communication fait circuler."
+              },
+              {
+                "content": "Une roche couverture doit être imperméable.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Attribuer : la couverture doit empêcher la remontée des hydrocarbures vers la surface. Elle doit donc être imperméable. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une couche a une porosité de 30 % mais elle est imperméable. Quel rôle peut-elle jouer ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : 30 % de porosité, imperméable. Étape 2 — Attribuer : un réservoir doit être aussi perméable. Cette couche est imperméable, c'est donc une couverture possible, qui doit surmonter le réservoir.",
+                "answers": [
+                  {
+                    "content": "Roche couverture",
+                    "correct": true
+                  },
+                  {
+                    "content": "Roche réservoir",
+                    "correct": false
+                  },
+                  {
+                    "content": "Roche mère obligatoirement",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucun rôle : elle est trop poreuse",
+                    "correct": false
+                  }
+                ],
+                "hint": "Regarde la perméabilité, pas la porosité."
+              },
+              {
+                "content": "Un échantillon de sable de 400 cm³ contient 60 cm³ de vides. Quelle est sa porosité ?",
+                "question_type": "numeric",
+                "unit": "%",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Lire : 60 cm³ de vides pour 400 cm³ au total. Calculer : 60 ÷ 400 × 100 = 15 %.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ],
+                "hint": "Divise le volume des vides par le volume total, puis multiplie par 100."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Sortie géologique sur le littoral, de Grand-Lahou à Assinie",
+          "statement": "Ta classe fait une sortie géologique sur le littoral, de Grand-Lahou à Assinie. Le professeur explique que le bassin sédimentaire côtier ivoirien s'étend sous une partie de ce littoral et se prolonge en mer. Au bord de la lagune, vous observez des couches de sable et d'argile empilées, et une cassure qui décale les couches.",
+          "exercise_type": "fixation",
+          "figure": "littoral-grand-lahou-assinie",
+          "questions": [
+            {
+              "content": "Laquelle de ces localités ne se trouve pas sur la bordure sud du pays, le long du golfe de Guinée ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Localiser : le bassin côtier borde le golfe de Guinée, au sud. Grand-Lahou, Grand-Bassam et Assinie sont sur le littoral. Korhogo est au nord du pays, loin du golfe : elle n'appartient pas à la bande littorale.",
+              "answers": [
+                {
+                  "content": "Korhogo",
+                  "correct": true
+                },
+                {
+                  "content": "Grand-Bassam",
+                  "correct": false
+                },
+                {
+                  "content": "Assinie",
+                  "correct": false
+                },
+                {
+                  "content": "Grand-Lahou",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Au bord de la lagune, des couches de sable et d'argile sont empilées. Quelles sont les deux conclusions exactes ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 3 — Relier : un bassin qui s'affaisse accumule des sédiments en strates superposées, déposées successivement. Principe de superposition : sans bouleversement, les plus anciennes sont en bas. Ce ne sont pas des laves, et elles ne se sont pas formées en même temps, sinon il n'y aurait pas de strates.",
+              "answers": [
+                {
+                  "content": "Ces couches sont des sédiments déposés l'un après l'autre en strates",
+                  "correct": true
+                },
+                {
+                  "content": "Les couches les plus anciennes sont en bas, les plus récentes en haut",
+                  "correct": true
+                },
+                {
+                  "content": "Ces couches sont des coulées de lave refroidies",
+                  "correct": false
+                },
+                {
+                  "content": "Toutes ces couches se sont formées en même temps",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une cassure qui décale des couches de roches, comme celle observée sur le terrain, est une faille.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Identifier : une faille est une cassure de roches avec déplacement des deux blocs, donc elle décale les couches. Les failles du bassin sont la trace de la fracturation de la croûte. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les événements qui expliquent ce que vous observez.",
+              "question_type": "ordering",
+              "explanation": "Étape 2 — Identifier : la croûte est d'abord étirée et fracturée, ce qui crée les failles, puis l'Atlantique s'ouvre. Étape 3 — Relier : la croûte amincie s'affaisse, et le bassin accumule des sédiments en strates.",
+              "answers": [
+                {
+                  "content": "Étirement et fracturation de la croûte avec formation de failles"
+                },
+                {
+                  "content": "Ouverture de l'océan Atlantique"
+                },
+                {
+                  "content": "Affaissement du bassin (subsidence)"
+                },
+                {
+                  "content": "Dépôt de sédiments en strates superposées"
+                }
+              ]
+            },
+            {
+              "content": "Dans un modèle simplifié de bassin, un sondage présenté à Abidjan donne trois séries de strates de 1 200 m, 800 m et 1 000 m d'épaisseur. Quelle est l'épaisseur totale de sédiments ?",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : trois épaisseurs sont données. Étape 3 — Relier : les séries sont empilées, on additionne leurs épaisseurs : 1 200 + 800 + 1 000 = 3 000 m. L'épaisseur totale se calcule en additionnant les séries, empilées les unes sur les autres.",
+              "answers": [
+                {
+                  "content": "3000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en trois ou quatre phrases comment l'ouverture de l'Atlantique a créé le bassin sédimentaire côtier et pourquoi ce bassin peut intéresser une société pétrolière.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "L'ouverture de l'Atlantique étire, amincit et fracture la croûte (failles)",
+                "Le bassin s'affaisse (subsidence) et se remplit de sédiments en strates",
+                "Le bassin peut contenir de la matière organique enfouie, donc des hydrocarbures",
+                "Phrases claires, vocabulaire scientifique correct"
+              ],
+              "explanation": "Corrigé modèle : Au Crétacé, l'ouverture de l'océan Atlantique a étiré, aminci et fracturé la croûte, ce qui a créé des failles. La zone amincie s'est affaissée : c'est la subsidence. Le bassin ainsi formé s'est rempli de sédiments déposés en strates superposées, qui peuvent contenir de la matière organique. Enfouie, cette matière peut donner des hydrocarbures, d'où l'intérêt d'une société pétrolière. Barème : 1 point pour l'origine, 1 point pour l'affaissement et les strates, 1 point pour l'intérêt pétrolier, 1 point pour la clarté et le vocabulaire.",
+              "answers": [],
+              "starter": "Lors de l'ouverture de l'Atlantique, la croûte…"
+            }
+          ]
+        },
+        {
+          "title": "Visite au siège d'une société pétrolière à Abidjan",
+          "statement": "Ta classe visite le siège d'une société pétrolière à Abidjan. Un géologue présente trois carottes de roche issues du bassin côtier. Carotte A : sable grossier, déposé en eau agitée et bien oxygénée, sans matière organique visible. Carotte B : argile noire finement litée, riche en restes de plancton, déposée dans un golfe calme dont l'eau profonde, pauvre en dioxygène, ne se renouvelait pas. Carotte C : calcaire clair de récif, déposé en eau claire et agitée.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Parmi les carottes A, B et C décrites dans l'énoncé, laquelle peut être une roche mère ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer le milieu : A et C se sont déposées en eau agitée et oxygénée ; B s'est déposée dans un golfe calme et pauvre en dioxygène. Étape 2 — Relier : le dioxygène détruit la matière organique en A et en C, alors qu'en B elle se conserve. Étape 3 — Conclure : seule B est riche en matière organique, c'est la roche mère possible.",
+              "answers": [
+                {
+                  "content": "La carotte B, l'argile noire riche en restes de plancton",
+                  "correct": true
+                },
+                {
+                  "content": "La carotte A, le sable grossier",
+                  "correct": false
+                },
+                {
+                  "content": "La carotte C, le calcaire de récif",
+                  "correct": false
+                },
+                {
+                  "content": "Aucune des trois",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La matière organique de la carotte B vient surtout d'êtres vivants microscopiques, comme le plancton.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : l'énoncé parle de restes de plancton dans une argile noire. Le pétrole vient surtout de plancton et d'algues microscopiques, pas de gros animaux. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la carotte B, la matière organique s'est conservée parce que l'eau était ___ en dioxygène.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 2 — Relier : l'eau pauvre en dioxygène ne détruit pas la matière organique, elle la conserve. Étape 3 — Conclure : lors de l'enfouissement, la matière organique conservée se transforme lentement en kérogène, ce qui fait de la carotte B une roche mère. Une eau riche en dioxygène, comme pour A et C, la détruirait.",
+              "answers": [
+                {
+                  "content": "pauvre",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les deux raisons pour lesquelles la carotte A, le sable grossier, ne peut pas être une roche mère ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Repérer : la carotte A s'est déposée en eau agitée et oxygénée. Étape 2 — Relier : le dioxygène détruit la matière organique, d'où une teneur presque nulle. Étape 3 — Conclure : ce n'est pas une roche mère. La dureté du sable et sa position ne sont pas la cause.",
+              "answers": [
+                {
+                  "content": "L'eau agitée et oxygénée a détruit la matière organique",
+                  "correct": true
+                },
+                {
+                  "content": "Elle ne contient presque pas de matière organique",
+                  "correct": true
+                },
+                {
+                  "content": "Le sable est trop dur pour contenir du kérogène",
+                  "correct": false
+                },
+                {
+                  "content": "Elle est déposée trop près de la surface pour être enfouie",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque carotte à son interprétation.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Repérer : on classe les carottes selon leur milieu. Étape 2 — Relier : A et C ont connu une eau oxygénée qui détruit la matière organique ; B a connu un milieu confiné qui la conserve. Étape 3 — Conclure : seule B peut être une roche mère.",
+              "answers": [
+                {
+                  "content": "A : sable grossier d'eau agitée",
+                  "match": "Matière organique détruite, pas de roche mère"
+                },
+                {
+                  "content": "B : argile noire riche en plancton",
+                  "match": "Matière organique conservée, roche mère possible"
+                },
+                {
+                  "content": "C : calcaire clair de récif",
+                  "match": "Eau agitée et oxygénée, pas de roche mère"
+                }
+              ]
+            },
+            {
+              "content": "Justifie en quelques lignes pourquoi la carotte B, et non la carotte C, est une bonne roche mère, même si le récif de la carotte C était riche en vie.",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Le milieu de B est confiné et pauvre en dioxygène",
+                "Le dioxygène détruit la matière organique dans le milieu de C",
+                "La conservation compte plus que la quantité de vie",
+                "Conclusion claire : B est roche mère"
+              ],
+              "explanation": "Corrigé modèle : La carotte B s'est déposée dans un golfe calme, dont l'eau profonde, pauvre en dioxygène, ne se renouvelait pas : la matière organique s'y est conservée puis transformée en kérogène. La carotte C vient d'un récif en eau agitée et oxygénée : le dioxygène détruit la matière organique. Même riche en vie, ce milieu n'a presque rien conservé. Ce qui compte est la conservation, pas la quantité de vie. Barème : 4 points, 1 point par critère.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Dans quelle roche mère l'huile s'est-elle formée ?",
+          "statement": "Un géologue d'une société pétrolière à Abidjan étudie le bassin côtier. Dans un modèle simplifié de bassin, on suppose que la température est de 30 °C à la surface, 60 °C à 1 000 m, 90 °C à 2 000 m, 120 °C à 3 000 m et 150 °C à 4 000 m. La fenêtre à huile va de 60 °C à 120 °C. Les températures varient de façon régulière avec la profondeur.",
+          "exercise_type": "evaluation",
+          "figure": "temperature-profondeur",
+          "questions": [
+            {
+              "content": "À partir des données de l'énoncé (30 °C à la surface, 150 °C à 4 000 m), de combien de degrés la température augmente-t-elle en moyenne pour 100 m de profondeur ?",
+              "question_type": "numeric",
+              "unit": "°C",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire la température : de 30 °C à 150 °C, la hausse est de 120 °C. Elle correspond à 4 000 m, soit 40 tranches de 100 m. Étape 2 — Comparer : la hausse est répartie sur 40 tranches de 100 m, donc 120 ÷ 40 = 3 °C par 100 m. On vérifie : de 0 à 1 000 m, 30 °C devient 60 °C, soit 3 °C par 100 m.",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La température est de 30 °C à la surface et augmente de 3 °C tous les 100 m. Quelle est la température à 2 500 m ?",
+              "question_type": "numeric",
+              "unit": "°C",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : 2 500 m contiennent 25 tranches de 100 m, donc la hausse est de 25 × 3 = 75 °C. La température vaut 30 + 75 = 105 °C. Cette valeur est bien comprise entre 90 °C (2 000 m) et 120 °C (3 000 m) : c'est cohérent.",
+              "answers": [
+                {
+                  "content": "105",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La fenêtre à huile va de 60 °C à 120 °C. D'après les données de l'énoncé (60 °C à 1 000 m, 120 °C à 3 000 m), quelle épaisseur de roche la fenêtre à huile occupe-t-elle ?",
+              "question_type": "numeric",
+              "unit": "m",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : 60 °C est mesuré à 1 000 m et 120 °C à 3 000 m. Étape 2 — Comparer : la fenêtre à huile commence à 1 000 m et s'arrête à 3 000 m. Son épaisseur est 3 000 − 1 000 = 2 000 m. Une roche mère située dans cet intervalle forme surtout de l'huile.",
+              "answers": [
+                {
+                  "content": "2000",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "D'après les données de l'énoncé (30 °C en surface, +3 °C par 100 m) et une fenêtre à huile de 60 °C à 120 °C, quelles sont les trois roches mères qui forment surtout de l'huile ? Leurs profondeurs sont : 800 m, 1 500 m, 2 000 m, 2 800 m, 3 500 m.",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Lire : 800 m donne 54 °C, 1 500 m donne 75 °C, 2 000 m donne 90 °C, 2 800 m donne 114 °C, 3 500 m donne 135 °C. Étape 2 — Comparer : seules 75, 90 et 114 °C sont entre 60 et 120 °C. Étape 3 — Déduire : 800 m est immature (54 °C) et 3 500 m donne surtout du gaz (135 °C).",
+              "answers": [
+                {
+                  "content": "Celle de 1 500 m",
+                  "correct": true
+                },
+                {
+                  "content": "Celle de 2 000 m",
+                  "correct": true
+                },
+                {
+                  "content": "Celle de 2 800 m",
+                  "correct": true
+                },
+                {
+                  "content": "Celle de 800 m",
+                  "correct": false
+                },
+                {
+                  "content": "Celle de 3 500 m",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une roche mère est progressivement enfouie de 500 m à 3 500 m, dans un bassin où la température est de 30 °C en surface, +3 °C par 100 m, et la fenêtre à huile de 60 °C à 120 °C. Quelle succession correcte vit-elle ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : à 500 m, 45 °C ; à 3 500 m, 135 °C. Étape 2 — Comparer : 45 °C est sous 60 °C, la roche mère est immature ; entre 1 000 m et 3 000 m elle est dans la fenêtre à huile ; au-delà de 3 000 m, elle dépasse 120 °C. Étape 3 — Déduire : immature, huile, puis gaz. L'enfouissement ne fait qu'augmenter la température, l'ordre ne peut donc pas s'inverser.",
+              "answers": [
+                {
+                  "content": "Immature, puis formation d'huile, puis formation de gaz",
+                  "correct": true
+                },
+                {
+                  "content": "Formation de gaz, puis d'huile, puis immature",
+                  "correct": false
+                },
+                {
+                  "content": "Formation d'huile, puis immature, puis gaz",
+                  "correct": false
+                },
+                {
+                  "content": "Huile pendant tout l'enfouissement",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une fois l'huile formée dans cette roche mère, elle reste sur place, car elle est plus lourde que l'eau.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Indiquer : l'huile est moins dense que l'eau qui imprègne les roches. Elle est expulsée de la roche mère et migre vers le haut dans les roches perméables. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Un collègue affirme qu'une roche mère enfouie à 3 600 m a formé surtout de l'huile. En utilisant les données de l'énoncé, critique cette affirmation en quelques lignes.",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Calcul de la température à 3 600 m (138 °C)",
+                "Comparaison avec la fenêtre à huile (60 à 120 °C)",
+                "Conclusion : surtout du gaz, pas de l'huile"
+              ],
+              "explanation": "Corrigé modèle : Étape 1 — Lire : à 3 600 m, la température vaut 30 + 36 × 3 = 138 °C. Étape 2 — Comparer : 138 °C dépasse 120 °C, limite haute de la fenêtre à huile. Étape 3 — Déduire : cette roche mère forme surtout du gaz, pas de l'huile. Seule une roche mère enfouie entre 1 000 m et 3 000 m forme surtout de l'huile. Barème : 1 point pour le calcul, 1 point pour la comparaison, 1 point pour la conclusion.",
+              "answers": []
+            }
+          ]
+        },
+        {
+          "title": "Du plancton au gisement : le dossier d'une société pétrolière",
+          "statement": "Une société pétrolière installée à Abidjan présente à des élèves le dossier d'une zone du bassin côtier. D'après des mesures, la coupe géologique est la suivante (aucun schéma n'est donné ; décris-la à partir du texte). Du bas vers le haut : une argile noire riche en matière organique, profondément enfouie ; un sable de porosité 35 % et perméable, déformé en voûte (un pli) ; une argile compacte, imperméable, qui recouvre toute la voûte ; puis des sables et argiles peu profonds.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque couche de la coupe décrite dans l'énoncé à son rôle.",
+              "question_type": "matching",
+              "explanation": "Étape 2 — Attribuer : l'argile noire riche en matière organique est la roche mère. Le sable poreux et perméable est le réservoir, et l'argile imperméable qui le recouvre est la couverture. Étape 3 — Vérifier la géométrie : le sable en voûte sous la couverture forme un piège anticlinal.",
+              "answers": [
+                {
+                  "content": "Argile noire riche en matière organique, profondément enfouie",
+                  "match": "Roche mère"
+                },
+                {
+                  "content": "Sable poreux et perméable déformé en voûte",
+                  "match": "Roche réservoir"
+                },
+                {
+                  "content": "Argile compacte imperméable qui recouvre la voûte",
+                  "match": "Roche couverture"
+                },
+                {
+                  "content": "Voûte du réservoir fermée par la couverture",
+                  "match": "Piège anticlinal"
+                }
+              ]
+            },
+            {
+              "content": "Le sable déformé en voûte est recouvert par une argile compacte imperméable. Quel type de piège est ainsi formé ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 3 — Vérifier la géométrie : un réservoir déformé en voûte (pli) sous une couverture imperméable forme un piège anticlinal. Il n'y a ni faille, ni masse de sel, ni amincissement du réservoir dans la description, donc les autres types sont exclus.",
+              "answers": [
+                {
+                  "content": "Un piège anticlinal",
+                  "correct": true
+                },
+                {
+                  "content": "Un piège par faille",
+                  "correct": false
+                },
+                {
+                  "content": "Un biseau stratigraphique",
+                  "correct": false
+                },
+                {
+                  "content": "Un dôme de sel",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un échantillon de grès de 1 000 cm³ a une porosité de 20 %. Quel volume de vides contient-il, en mL (1 cm³ = 1 mL) ?",
+              "question_type": "numeric",
+              "unit": "mL",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Lire : la porosité est 20 % et le volume total 1 000 cm³. Volume des vides = porosité × volume total = 20 ÷ 100 × 1 000 = 200 cm³, soit 200 mL. Ce volume stocke les fluides, mais il ne dit rien de la perméabilité.",
+              "answers": [
+                {
+                  "content": "200",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes de la mise en place d'un gisement.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer : la matière organique se dépose et se conserve en milieu confiné. Puis l'enfouissement la transforme en kérogène (roche mère), la chaleur forme les hydrocarbures dans la fenêtre à huile, ils migrent vers le haut, et le piège sous la couverture les arrête.",
+              "answers": [
+                {
+                  "content": "Dépôt de matière organique en milieu confiné pauvre en dioxygène"
+                },
+                {
+                  "content": "Enfouissement et transformation en kérogène dans la roche mère"
+                },
+                {
+                  "content": "Chauffage : formation d'hydrocarbures dans la fenêtre à huile"
+                },
+                {
+                  "content": "Migration des hydrocarbures vers le haut"
+                },
+                {
+                  "content": "Piégeage dans le réservoir sous la roche couverture"
+                }
+              ]
+            },
+            {
+              "content": "Un sondage trouve le réservoir de cette voûte rempli d'eau, sans hydrocarbures. Quelles sont les deux explications possibles ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 4 — Conclure : un gisement demande roche mère mature, migration, réservoir, couverture étanche et piège. Si la roche mère est immature, il n'y a pas d'hydrocarbures ; si la couverture est fracturée, ils ont fui. Un réservoir très poreux stocke bien, et une couverture très imperméable ferme bien le piège : ce sont des atouts.",
+              "answers": [
+                {
+                  "content": "La roche mère n'a jamais atteint la fenêtre à huile : elle est restée immature",
+                  "correct": true
+                },
+                {
+                  "content": "La couverture est coupée par une faille et les hydrocarbures ont fui",
+                  "correct": true
+                },
+                {
+                  "content": "Le réservoir est trop poreux pour stocker du pétrole",
+                  "correct": false
+                },
+                {
+                  "content": "La couverture est trop imperméable pour fermer le piège",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une roche très poreuse est forcément un bon réservoir.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Attribuer : un réservoir doit être poreux et perméable. Une argile peut avoir 40 % de porosité et être imperméable : elle sert de couverture, pas de réservoir. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe qui explique comment se met en place un gisement, de la mort du plancton jusqu'au piégeage des hydrocarbures. Appuie-toi sur la coupe décrite.",
+              "question_type": "written",
+              "points": 6,
+              "criteria": [
+                "Conservation de la matière organique en milieu confiné pauvre en dioxygène",
+                "Enfouissement, kérogène, roche mère",
+                "Formation des hydrocarbures dans la fenêtre à huile par la chaleur",
+                "Migration vers le haut car moins denses que l'eau",
+                "Réservoir poreux et perméable, couverture imperméable, piège anticlinal",
+                "Texte construit, vocabulaire scientifique exact"
+              ],
+              "explanation": "Corrigé modèle : Le plancton mort se dépose sur le fond d'un golfe calme dont l'eau est pauvre en dioxygène : la matière organique se conserve et les sédiments la recouvrent. Enfouie, elle devient du kérogène dans la roche mère. Quand la température atteint la fenêtre à huile, le kérogène forme des hydrocarbures. Moins denses que l'eau, ils migrent vers le haut et envahissent le sable, poreux et perméable : c'est le réservoir. L'argile compacte, imperméable, les arrête, et la voûte forme un piège anticlinal : le gisement est en place. Barème : 1 point par critère.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

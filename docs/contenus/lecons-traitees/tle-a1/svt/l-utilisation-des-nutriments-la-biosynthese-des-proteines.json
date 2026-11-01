@@ -1,0 +1,1717 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "L'utilisation des nutriments : la biosynthèse des protéines",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "SVT",
+      "series_name": "A1",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "aliment-cellule",
+          "kind": "diagram",
+          "description": "Schéma fléché du devenir des protéines d'un repas. Les protéines de l'aliment sont coupées en acides aminés par la digestion. Les acides aminés passent dans le sang et arrivent à la cellule. La cellule les assemble pour fabriquer ses propres protéines : structure, enzymes, hormones ou anticorps.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Repas",
+              "Sang",
+              "Cellule"
+            ],
+            "nodes": [
+              {
+                "id": "al",
+                "label": "Protéines de l'aliment (poisson, haricots)",
+                "category": 1
+              },
+              {
+                "id": "aa",
+                "label": "Acides aminés libres",
+                "category": 1
+              },
+              {
+                "id": "sg",
+                "label": "Acides aminés dans le sang",
+                "category": 2
+              },
+              {
+                "id": "ce",
+                "label": "Cellule : fabrication de ses protéines",
+                "category": 3
+              },
+              {
+                "id": "pr",
+                "label": "Structure, enzymes, hormones, anticorps",
+                "category": 3
+              }
+            ],
+            "edges": [
+              {
+                "from": "al",
+                "to": "aa",
+                "label": "digestion"
+              },
+              {
+                "from": "aa",
+                "to": "sg",
+                "label": "absorption"
+              },
+              {
+                "from": "sg",
+                "to": "ce",
+                "label": "transport"
+              },
+              {
+                "from": "ce",
+                "to": "pr",
+                "label": "assemblage"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "resultats-marquage",
+          "kind": "stat_chart",
+          "description": "Diagramme en bâtons, expérience fictive aux résultats simplifiés. Cinq minutes après l'apport d'acides aminés radioactifs, on compte sur 100 grains de radioactivité : 5 dans le noyau, 92 dans le cytoplasme et 3 à l'extérieur de la cellule. Presque toute la radioactivité est dans le cytoplasme.",
+          "params": {
+            "chart": "bars",
+            "series": [
+              5,
+              92,
+              3
+            ],
+            "labels": [
+              "Noyau",
+              "Cytoplasme",
+              "Extérieur de la cellule"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "adn-vers-proteine",
+          "kind": "diagram",
+          "description": "Schéma fléché de l'expression d'un gène. Dans le noyau, le gène (portion d'ADN) est transcrit en ARN messager. L'ARN messager sort du noyau et gagne le cytoplasme. Sur un ribosome, il est traduit grâce au code génétique : les acides aminés s'assemblent en chaîne et forment la protéine.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Noyau",
+              "Cytoplasme"
+            ],
+            "nodes": [
+              {
+                "id": "adn",
+                "label": "Gène (portion d'ADN)",
+                "category": 1
+              },
+              {
+                "id": "arn",
+                "label": "ARN messager",
+                "category": 1
+              },
+              {
+                "id": "rib",
+                "label": "Ribosome",
+                "category": 2
+              },
+              {
+                "id": "pro",
+                "label": "Protéine (chaîne d'acides aminés)",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "adn",
+                "to": "arn",
+                "label": "transcription"
+              },
+              {
+                "from": "arn",
+                "to": "rib",
+                "label": "sortie du noyau"
+              },
+              {
+                "from": "rib",
+                "to": "pro",
+                "label": "traduction"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "mutation-hemoglobine",
+          "kind": "diagram",
+          "description": "Schéma fléché d'une mutation. Un changement dans le gène de l'hémoglobine modifie l'ARN messager copié, donc un codon. Un acide aminé de l'hémoglobine est changé, la protéine devient anormale et les hématies prennent une forme de faucille : c'est la drépanocytose.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "legend": [
+              "Information",
+              "Conséquence"
+            ],
+            "nodes": [
+              {
+                "id": "g",
+                "label": "Gène de l'hémoglobine modifié (mutation)",
+                "category": 1
+              },
+              {
+                "id": "a",
+                "label": "ARN messager modifié : un codon change",
+                "category": 1
+              },
+              {
+                "id": "p",
+                "label": "Hémoglobine : un acide aminé changé",
+                "category": 2
+              },
+              {
+                "id": "h",
+                "label": "Hématies en forme de faucille",
+                "category": 2
+              }
+            ],
+            "edges": [
+              {
+                "from": "g",
+                "to": "a",
+                "label": "transcription"
+              },
+              {
+                "from": "a",
+                "to": "p",
+                "label": "traduction"
+              },
+              {
+                "from": "p",
+                "to": "h",
+                "label": "déformation"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Reconnaître une protéine et son rôle",
+          "remember": "Une **protéine** est une grande molécule formée d'une **chaîne d'acides aminés**. Il existe **20 sortes** d'acides aminés : comme les lettres d'un mot, leur **nature** et leur **ordre** donnent à chaque protéine sa forme et son rôle. Les protéines des aliments de la cantine (poisson, œufs, haricots) sont coupées en acides aminés par la digestion ; ceux-ci passent dans le sang et arrivent aux cellules, qui s'en servent pour **fabriquer leurs propres protéines**. Les protéines ont quatre grands rôles : la **structure** (construire et réparer les muscles, la peau), les **enzymes** (accélérer une réaction, comme l'amylase de la salive), les **hormones** (messagers portés par le sang, comme l'insuline) et les **anticorps** (défendre contre les microbes). Un acide aminé est un maillon ; la protéine est la chaîne entière.",
+          "method": [
+            "Lire le document : relever la substance citée et ce qu'elle fait dans l'organisme.",
+            "Rapprocher cette action des rôles connus : structure, enzyme, hormone, anticorps.",
+            "Conclure en nommant le rôle, et le justifier avec un mot du document."
+          ],
+          "example": {
+            "statement": "Un document du centre de santé de Daloa dit : « L'insuline, une protéine fabriquée par le pancréas, passe dans le sang et agit sur le foie et les muscles pour faire baisser le taux de sucre dans le sang. » Quel est le rôle de l'insuline ?",
+            "steps": [
+              "Lire : la substance citée est l'insuline ; elle passe dans le sang et agit à distance sur le foie et les muscles.",
+              "Rapprocher : une substance portée par le sang qui agit sur d'autres organes correspond au rôle d'hormone, pas à celui de structure, d'enzyme ou d'anticorps.",
+              "Conclure : l'insuline est une protéine qui a le rôle d'hormone, car le sang la transporte jusqu'à des organes sur lesquels elle agit."
+            ]
+          },
+          "pitfall": "Ne confonds pas une protéine et un acide aminé, ni les protéines de l'aliment et celles de ton corps. Contre-exemple : après un repas de poisson, les protéines du poisson ne deviennent pas des protéines de ton muscle telles quelles. Elles sont coupées en acides aminés, puis chaque cellule fabrique ses propres protéines avec ces maillons. Un acide aminé est un maillon, une protéine est la chaîne entière.",
+          "figure": "aliment-cellule",
+          "exercise": {
+            "title": "Reconnaître des protéines et leurs rôles",
+            "statement": "Dans cet exercice, tu reconnais ce qu'est une protéine et tu identifies son rôle avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "aliment-cellule",
+            "questions": [
+              {
+                "content": "Qu'est-ce qu'une protéine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le document : la définition donne une chaîne formée de maillons. Étape 2 — Rapprocher : les maillons sont les acides aminés (20 sortes). Étape 3 — Conclure : une protéine est une chaîne d'acides aminés. Un seul acide aminé n'est qu'un maillon, pas une protéine.",
+                "answers": [
+                  {
+                    "content": "Une chaîne d'acides aminés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Un seul acide aminé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une réserve de sucre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une molécule d'eau liée à un sel minéral",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque situation au rôle de la protéine concernée.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Lire : on relève ce que fait la substance. Étape 2 — Rapprocher : couper l'amidon = accélérer une réaction, donc enzyme ; neutraliser un microbe = défense, donc anticorps ; agir à distance par le sang = hormone ; reconstruire des fibres = structure. Étape 3 — Conclure : chaque situation a son rôle.",
+                "answers": [
+                  {
+                    "content": "Une protéine de la salive coupe l'amidon du riz en molécules plus petites",
+                    "match": "Enzyme"
+                  },
+                  {
+                    "content": "Une protéine du sang se fixe sur un microbe pour le neutraliser",
+                    "match": "Anticorps"
+                  },
+                  {
+                    "content": "Une protéine fabriquée par une glande, portée par le sang, agit sur un organe éloigné",
+                    "match": "Hormone"
+                  },
+                  {
+                    "content": "Des protéines du muscle permettent de reconstruire les fibres après un effort",
+                    "match": "Structure"
+                  }
+                ]
+              },
+              {
+                "content": "Les protéines du poisson mangé à la cantine passent telles quelles dans les cellules du muscle.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : le poisson apporte des protéines. Étape 2 — Rapprocher : la digestion coupe ces protéines en acides aminés, qui passent dans le sang. Étape 3 — Conclure : l'affirmation est fausse, car chaque cellule fabrique ses propres protéines avec les acides aminés reçus.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur les protéines ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Lire : on relève les affirmations sur la composition. Étape 2 — Rapprocher : il y a 20 sortes d'acides aminés et la protéine en est la chaîne. Étape 3 — Conclure : ces deux propositions sont exactes. Les protéines ont quatre rôles différents, et c'est justement l'ordre des acides aminés qui les distingue.",
+                "answers": [
+                  {
+                    "content": "Il existe 20 sortes d'acides aminés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une protéine est une chaîne d'acides aminés",
+                    "correct": true
+                  },
+                  {
+                    "content": "Toutes les protéines ont le même rôle",
+                    "correct": false
+                  },
+                  {
+                    "content": "Deux protéines différentes ont toujours les mêmes acides aminés dans le même ordre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une protéine est un acide aminé unique",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pendant la digestion, les protéines des aliments sont coupées en ___, qui passent ensuite dans le sang.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : la digestion coupe les protéines de l'aliment. Étape 2 — Rapprocher : les maillons de la chaîne sont les acides aminés. Étape 3 — Conclure : la réponse est « acides aminés ».",
+                "answers": [
+                  {
+                    "content": "acides aminés",
+                    "correct": true
+                  },
+                  {
+                    "content": "acide aminé",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Après un repas de haricots, que font les cellules d'un muscle avec les acides aminés qui arrivent par le sang ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire : des acides aminés arrivent à la cellule par le sang. Étape 2 — Rapprocher : la cellule assemble ces maillons en chaînes. Étape 3 — Conclure : elle fabrique ses propres protéines. Croire que les protéines du haricot passent telles quelles est l'erreur à éviter : elles ont été coupées en acides aminés avant.",
+                "answers": [
+                  {
+                    "content": "Elles les utilisent pour fabriquer leurs propres protéines",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elles les utilisent telles quelles comme protéines du haricot",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles les transforment en eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elles les renvoient sans les utiliser",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à reconnaître une protéine et son rôle, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Il existe ___ sortes d'acides aminés. Une protéine est une ___ d'acides aminés.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire : on relève la composition d'une protéine. Étape 2 — Rapprocher : 20 sortes de maillons, assemblés l'un après l'autre. Étape 3 — Conclure : 20 sortes, une chaîne.",
+                "answers": [
+                  {
+                    "content": "20",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "vingt",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "chaîne",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense aux lettres de l'alphabet qui forment des mots : ici, les maillons forment une chaîne."
+              },
+              {
+                "content": "Un anticorps est une protéine qui défend l'organisme contre les microbes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Lire : on relève l'action (défendre contre les microbes). Étape 2 — Rapprocher : c'est le rôle des anticorps. Étape 3 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La pepsine de l'estomac accélère la digestion des protéines : c'est une protéine qui a le rôle d'___.",
+                "question_type": "select",
+                "explanation": "Étape 1 — Lire : la pepsine accélère une réaction de digestion. Étape 2 — Rapprocher : accélérer une réaction est le rôle d'une enzyme. Étape 3 — Conclure : la pepsine est une enzyme.",
+                "answers": [
+                  {
+                    "content": "hormone",
+                    "correct": false
+                  },
+                  {
+                    "content": "enzyme",
+                    "correct": true
+                  },
+                  {
+                    "content": "anticorps",
+                    "correct": false
+                  },
+                  {
+                    "content": "élément de structure",
+                    "correct": false
+                  }
+                ],
+                "hint": "Quel rôle accélère une réaction chimique ?"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Analyser une expérience de marquage radioactif",
+          "remember": "Pour savoir **où** la cellule fabrique ses protéines, on lui donne des acides aminés **radioactifs** : leur radioactivité les rend repérables, comme des étiquettes. On prélève ensuite des cellules à des moments successifs et, par **autoradiographie**, on regarde où se trouve la radioactivité. Là où elle apparaît d'abord, des acides aminés sont utilisés pour fabriquer des protéines. En suivant la radioactivité au cours du temps, on suit le **trajet** des protéines fabriquées. Dans ce type d'expérience (résultats simplifiés), la radioactivité apparaît d'abord dans le **cytoplasme** (sur les ribosomes) et très peu dans le **noyau** : les protéines sont fabriquées dans le cytoplasme, hors du noyau.",
+          "method": [
+            "Lire le protocole : repérer ce qui est marqué et à quels moments on observe.",
+            "Relever les résultats : noter où se trouve la radioactivité à chaque moment.",
+            "Comparer les zones et les moments, puis déduire où les acides aminés sont utilisés.",
+            "Conclure : dire où les protéines sont fabriquées, en citant les résultats."
+          ],
+          "example": {
+            "statement": "Expérience fictive, résultats simplifiés. Des cellules d'une glande reçoivent des acides aminés radioactifs ; on les observe 5 minutes plus tard. Sur 100 grains de radioactivité comptés, 5 sont dans le noyau, 92 dans le cytoplasme et 3 à l'extérieur de la cellule. Où les protéines sont-elles fabriquées ?",
+            "steps": [
+              "Lire le protocole : ce sont les acides aminés qui sont marqués ; on observe 5 minutes après leur apport.",
+              "Relever les résultats : noyau 5 grains, cytoplasme 92 grains, extérieur 3 grains, sur 100.",
+              "Comparer : le cytoplasme contient presque toute la radioactivité (92 sur 100), le noyau très peu (5) ; les acides aminés sont donc utilisés surtout dans le cytoplasme.",
+              "Conclure : les protéines sont fabriquées dans le cytoplasme et non dans le noyau, puisque 92 grains sur 100 s'y trouvent (résultats simplifiés)."
+            ]
+          },
+          "pitfall": "Ne conclus pas que le noyau ne sert à rien parce qu'il est peu radioactif. Contre-exemple : le noyau contient l'ADN, qui n'est pas une chaîne d'acides aminés, donc il ne se marque pas avec eux. Peu de radioactivité dans le noyau montre seulement que les protéines n'y sont pas fabriquées. Compare toujours les zones et les moments avant de conclure.",
+          "figure": "resultats-marquage",
+          "exercise": {
+            "title": "Lire une expérience de marquage radioactif",
+            "statement": "Expérience fictive, résultats simplifiés. Des cellules d'une glande reçoivent des acides aminés radioactifs. Dans cet exercice, tu analyses les résultats avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "resultats-marquage",
+            "questions": [
+              {
+                "content": "Dans une expérience fictive, on donne à des cellules des acides aminés radioactifs. Pourquoi les rend-on radioactifs ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le protocole : on marque les acides aminés. Étape 2 — Relever : la radioactivité se détecte par autoradiographie. Étape 3 — Comparer : un acide aminé marqué peut être suivi comme avec une étiquette. Étape 4 — Conclure : le marquage sert à repérer et suivre les acides aminés.",
+                "answers": [
+                  {
+                    "content": "Pour pouvoir les repérer et les suivre dans la cellule",
+                    "correct": true
+                  },
+                  {
+                    "content": "Pour qu'ils deviennent plus nourrissants",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour qu'ils détruisent les microbes",
+                    "correct": false
+                  },
+                  {
+                    "content": "Pour qu'ils arrêtent la fabrication des protéines",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Expérience fictive, résultats simplifiés. Cinq minutes après l'apport d'acides aminés radioactifs, on compte sur 100 grains de radioactivité : 5 dans le noyau, 92 dans le cytoplasme, 3 à l'extérieur de la cellule. Quel pourcentage de la radioactivité se trouve dans le cytoplasme ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Lire le protocole : 100 grains au total, observés 5 minutes après l'apport. Étape 2 — Relever les résultats : cytoplasme = 92 grains. Étape 3 — Comparer : 92 sur 100 donne 92 pour cent. Étape 4 — Conclure : 92 pour cent de la radioactivité est dans le cytoplasme.",
+                "answers": [
+                  {
+                    "content": "92",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Expérience fictive, résultats simplifiés. À 5 minutes, sur 100 grains : noyau 5, cytoplasme 92, extérieur 3. À 60 minutes : noyau 4, cytoplasme 41, extérieur 55. Que montre cette évolution ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Lire le protocole : deux moments d'observation, 5 et 60 minutes. Étape 2 — Relever les résultats : le cytoplasme passe de 92 à 41 grains, l'extérieur de 3 à 55. Étape 3 — Comparer : ce qui disparaît du cytoplasme se retrouve à l'extérieur, alors que le noyau reste faible (5 puis 4). Étape 4 — Conclure : les protéines fabriquées dans le cytoplasme partent ensuite vers l'extérieur.",
+                "answers": [
+                  {
+                    "content": "Les protéines marquées quittent peu à peu le cytoplasme vers l'extérieur de la cellule",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les protéines marquées entrent dans le noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les acides aminés sont détruits dans le cytoplasme",
+                    "correct": false
+                  },
+                  {
+                    "content": "La radioactivité disparaît de la cellule sans raison",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Expérience fictive, résultats simplifiés. Si la radioactivité était surtout dans le noyau 5 minutes après l'apport, on conclurait que les protéines sont fabriquées dans le cytoplasme.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Relever les résultats : on regarde où est la radioactivité. Étape 3 — Comparer : si elle était surtout dans le noyau, les acides aminés y seraient utilisés. Étape 4 — Conclure : on conclurait que les protéines sont fabriquées dans le noyau, pas dans le cytoplasme. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de l'analyse d'une expérience de marquage.",
+                "question_type": "ordering",
+                "explanation": "L'ordre est celui de la méthode. Étape 1 — Lire le protocole. Étape 2 — Relever les résultats. Étape 3 — Comparer les zones et les moments. Étape 4 — Conclure en citant les résultats. On ne conclut jamais avant d'avoir relevé et comparé.",
+                "answers": [
+                  {
+                    "content": "Lire le protocole : ce qui est marqué et les moments d'observation"
+                  },
+                  {
+                    "content": "Relever les résultats : où est la radioactivité à chaque moment"
+                  },
+                  {
+                    "content": "Comparer les zones et les moments"
+                  },
+                  {
+                    "content": "Conclure en citant les résultats"
+                  }
+                ]
+              },
+              {
+                "content": "Un élève dit : « Le noyau contient très peu de radioactivité, donc il ne sert à rien. » Que lui réponds-tu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Relever les résultats : le noyau est peu radioactif. Étape 3 — Comparer : l'ADN n'est pas une chaîne d'acides aminés, donc il ne se marque pas. Étape 4 — Conclure : on peut seulement dire que les protéines n'y sont pas fabriquées. Passer de « peu radioactif » à « inutile » est le piège à éviter.",
+                "answers": [
+                  {
+                    "content": "Il a tort : cela montre seulement que les protéines n'y sont pas fabriquées ; le noyau contient l'ADN",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : un noyau peu radioactif est inutile",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : le noyau ne contient aucune molécule",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort : le noyau fabrique toutes les protéines",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire une expérience de marquage radioactif, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "On apporte aux cellules des acides aminés ___. La radioactivité apparaît d'abord dans le ___, où les protéines sont fabriquées.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Lire le protocole : les acides aminés sont rendus radioactifs. Étape 3 — Comparer : la radioactivité apparaît d'abord dans le cytoplasme. Étape 4 — Conclure : c'est dans le cytoplasme que les protéines sont fabriquées.",
+                "answers": [
+                  {
+                    "content": "radioactifs",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "radioactif",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "cytoplasme",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les acides aminés sont marqués par une radioactivité ; l'ADN, lui, reste dans le noyau."
+              },
+              {
+                "content": "Expérience fictive, résultats simplifiés. Sur 200 grains de radioactivité comptés 5 minutes après l'apport, 180 sont dans le cytoplasme. Quel pourcentage cela représente-t-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Relever les résultats : 180 grains sur 200 dans le cytoplasme. Étape 3 — Comparer : 180 sur 200 donne 90 sur 100. Étape 4 — Conclure : 90 pour cent de la radioactivité est dans le cytoplasme.",
+                "answers": [
+                  {
+                    "content": "90",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "%"
+              },
+              {
+                "content": "Si la radioactivité apparaît d'abord dans une zone de la cellule, c'est que des acides aminés y sont utilisés pour fabriquer des protéines.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : la zone où la radioactivité apparaît en premier est celle où les acides aminés marqués sont utilisés. Étape 4 — Conclure : l'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Transcrire un gène en ARN messager",
+          "remember": "L'**ADN** est la molécule qui porte l'information de la cellule : il reste dans le **noyau**. Il est fait de **nucléotides** de 4 sortes, repérés par leur base : **A, T, G, C**. Un **gène** est une portion d'ADN qui porte l'information pour fabriquer une protéine. C'est le patron du tailleur : on le garde à l'atelier et on n'en sort qu'une copie. La **transcription**, dans le noyau, copie un gène sous la forme d'un **ARN messager** (ARNm), qui peut sortir du noyau. L'ARNm est fait de nucléotides A, **U**, G, C : l'uracile U remplace T. La copie respecte la **complémentarité** : la base A de l'ADN donne U, T donne A, G donne C et C donne G.",
+          "method": [
+            "Repérer le brin d'ADN transcrit et le lire base par base, dans le sens indiqué.",
+            "Appliquer la complémentarité à chaque base : A donne U, T donne A, G donne C, C donne G.",
+            "Écrire l'ARNm obtenu, sans T, et indiquer qu'il quitte ensuite le noyau."
+          ],
+          "example": {
+            "statement": "Un gène fictif a pour brin transcrit : TAC AAA CCC TTT ATT (lu de gauche à droite). Écrire l'ARNm obtenu par transcription.",
+            "steps": [
+              "Repérer : le brin transcrit est TACAAACCCTTTATT, soit 15 bases lues de gauche à droite.",
+              "Appliquer la complémentarité : TAC donne AUG, AAA donne UUU, CCC donne GGG, TTT donne AAA et ATT donne UAA.",
+              "Écrire : l'ARNm est AUG UUU GGG AAA UAA, sans aucun T ; il quitte ensuite le noyau pour le cytoplasme."
+            ]
+          },
+          "pitfall": "N'écris pas de T dans l'ARNm, et ne recopie pas le brin d'ADN : il faut le complémenter. Contre-exemple : pour le brin ATG, l'ARNm correct est UAC (A donne U, T donne A, G donne C). Écrire AUG revient à recopier le brin en changeant seulement T en U, ce qui est faux. Dans l'ARN, U prend la place de T, mais on transcrit en complémentant : c'est la base A de l'ADN qui donne U.",
+          "figure": "adn-vers-proteine",
+          "exercise": {
+            "title": "Transcrire des gènes en ARN messager",
+            "statement": "Dans cet exercice, tu transcris des brins d'ADN en ARN messager avec la méthode de la fiche.",
+            "exercise_type": "fixation",
+            "figure": "adn-vers-proteine",
+            "questions": [
+              {
+                "content": "L'ARN messager est fait de nucléotides A, G, C et d'une base qui remplace T : la base ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : l'ADN a pour bases A, T, G, C. Étape 2 — Appliquer la complémentarité : A de l'ADN donne U dans l'ARN. Étape 3 — Écrire l'ARNm : il ne contient jamais de T, c'est la base U qui est présente. La réponse est U (uracile).",
+                "answers": [
+                  {
+                    "content": "U",
+                    "correct": true
+                  },
+                  {
+                    "content": "uracile",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le brin d'ADN transcrit d'un gène fictif commence par TAC. Quel est le début de l'ARN messager ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le brin transcrit est TAC. Étape 2 — Appliquer la complémentarité : T donne A, A donne U, C donne G. Étape 3 — Écrire : l'ARNm est AUG. UAC est une simple recopie de TAC avec U à la place de T, sans complémentarité.",
+                "answers": [
+                  {
+                    "content": "AUG",
+                    "correct": true
+                  },
+                  {
+                    "content": "TAC",
+                    "correct": false
+                  },
+                  {
+                    "content": "UAC",
+                    "correct": false
+                  },
+                  {
+                    "content": "ATG",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le brin d'ADN transcrit d'un gène fictif est CGA TTT. Quel est l'ARN messager obtenu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le brin transcrit est CGA TTT. Étape 2 — Appliquer la complémentarité : C donne G, G donne C, A donne U ; T donne A trois fois. Étape 3 — Écrire : l'ARNm est GCU AAA. GCT contient un T, ce qui est impossible dans l'ARN ; GCU UUU a oublié que T donne A.",
+                "answers": [
+                  {
+                    "content": "GCU AAA",
+                    "correct": true
+                  },
+                  {
+                    "content": "CGA UUU",
+                    "correct": false
+                  },
+                  {
+                    "content": "GCT AAA",
+                    "correct": false
+                  },
+                  {
+                    "content": "GCU UUU",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque base de l'ADN transcrit à la base de l'ARN messager qui lui correspond.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Appliquer la complémentarité : A donne U, T donne A, G donne C, C donne G. Étape 3 — Écrire : ces quatre correspondances suffisent à écrire n'importe quel ARNm.",
+                "answers": [
+                  {
+                    "content": "Base A de l'ADN",
+                    "match": "U"
+                  },
+                  {
+                    "content": "Base T de l'ADN",
+                    "match": "A"
+                  },
+                  {
+                    "content": "Base G de l'ADN",
+                    "match": "C"
+                  },
+                  {
+                    "content": "Base C de l'ADN",
+                    "match": "G"
+                  }
+                ]
+              },
+              {
+                "content": "L'ADN quitte le noyau pour aller fabriquer les protéines sur les ribosomes.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'ADN est dans le noyau. Étape 3 — Écrire et indiquer le trajet : c'est l'ARNm, copie du gène, qui quitte le noyau. L'ADN reste dans le noyau, comme le patron qui reste à l'atelier. L'affirmation est fausse.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Le brin d'ADN transcrit d'un gène fictif est ATG. Quel est l'ARN messager ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le brin transcrit est ATG. Étape 2 — Appliquer la complémentarité : A donne U, T donne A, G donne C. Étape 3 — Écrire : l'ARNm est UAC. AUG recopie le brin avec U à la place de T ; TAC contient un T ; UAG a gardé G au lieu de C, car G donne C.",
+                "answers": [
+                  {
+                    "content": "UAC",
+                    "correct": true
+                  },
+                  {
+                    "content": "AUG",
+                    "correct": false
+                  },
+                  {
+                    "content": "TAC",
+                    "correct": false
+                  },
+                  {
+                    "content": "UAG",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à transcrire un gène en ARN messager, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "La transcription se déroule dans le ___ ; elle fabrique une copie du gène appelée ARN ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le gène est dans l'ADN, donc dans le noyau. Étape 3 — Écrire et indiquer le trajet : la copie obtenue est l'ARN messager, qui quitte ensuite le noyau.",
+                "answers": [
+                  {
+                    "content": "noyau",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "messager",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "L'ADN reste au même endroit que la copie qu'on fabrique ; la copie, elle, apporte le message."
+              },
+              {
+                "content": "Le brin d'ADN transcrit est AAG. Quel est l'ARN messager obtenu ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le brin transcrit est AAG. Étape 2 — Appliquer la complémentarité : A donne U, A donne U, G donne C. Étape 3 — Écrire : l'ARNm est UUC. UUG a gardé G au lieu de C.",
+                "answers": [
+                  {
+                    "content": "UUC",
+                    "correct": true
+                  },
+                  {
+                    "content": "AAG",
+                    "correct": false
+                  },
+                  {
+                    "content": "TTC",
+                    "correct": false
+                  },
+                  {
+                    "content": "UUG",
+                    "correct": false
+                  }
+                ],
+                "hint": "Complémente base par base : A donne U, G donne C."
+              },
+              {
+                "content": "Dans l'ARN messager, la base complémentaire de la base C de l'ADN est ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Appliquer la complémentarité : C donne G. Étape 3 — Écrire : la réponse est G.",
+                "answers": [
+                  {
+                    "content": "A",
+                    "correct": false
+                  },
+                  {
+                    "content": "G",
+                    "correct": true
+                  },
+                  {
+                    "content": "T",
+                    "correct": false
+                  },
+                  {
+                    "content": "U",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Traduire un ARN messager en protéine",
+          "remember": "L'ARNm gagne le **cytoplasme** et se fixe sur un **ribosome**, l'atelier d'assemblage. Le ribosome lit l'ARNm par groupes de 3 nucléotides, les **codons**. Le **code génétique** donne l'acide aminé qui correspond à chaque codon : c'est la **traduction**. Le codon **AUG** code la méthionine et marque le début ; les codons **UAA**, **UAG** et **UGA** sont des codons **stop** : ils ne codent aucun acide aminé et terminent la chaîne. Plusieurs codons peuvent coder le même acide aminé (UUU et UUC codent la phénylalanine). Les acides aminés sont assemblés dans l'ordre des codons, comme les pièces d'un vêtement suivent le patron : la chaîne obtenue est la **protéine**. Le code est le même chez presque tous les êtres vivants.",
+          "method": [
+            "Repérer le codon AUG, puis découper l'ARNm en codons de 3 nucléotides jusqu'à la fin.",
+            "Chercher chaque codon dans le tableau du code génétique.",
+            "Écrire la suite des acides aminés, dans l'ordre, en s'arrêtant au codon stop.",
+            "Conclure : donner le nombre d'acides aminés de la protéine (le codon stop n'en compte pas)."
+          ],
+          "example": {
+            "statement": "Un ribosome lit l'ARNm AUGUUUGGGAAAUAA. Extrait du code génétique : AUG = Met, début ; UUU = Phe ; GGG = Gly ; AAA = Lys ; UAA = stop. Quelle protéine est fabriquée ?",
+            "steps": [
+              "Repérer : AUG est au début ; on découpe en codons : AUG | UUU | GGG | AAA | UAA, soit 5 codons.",
+              "Chercher : AUG = Met, UUU = Phe, GGG = Gly, AAA = Lys, UAA = stop.",
+              "Écrire : la suite est Met – Phe – Gly – Lys, et la lecture s'arrête au codon stop UAA.",
+              "Conclure : la protéine compte 4 acides aminés, alors que l'ARNm compte 5 codons, car le codon stop ne code aucun acide aminé."
+            ]
+          },
+          "pitfall": "Ne lis pas l'ARNm lettre par lettre, ne décale pas le découpage et ne compte pas le codon stop. Contre-exemple : pour AUGUUUUAA, le bon découpage est AUG | UUU | UAA, donc Met – Phe, soit 2 acides aminés et non 3. Si tu décales d'une lettre (UGU | UUU | AA), tout est faux. Le codon AUG fixe le point de départ, et le stop ne code rien.",
+          "figure": "adn-vers-proteine",
+          "exercise": {
+            "title": "Traduire des ARN messagers en protéines",
+            "statement": "Dans cet exercice, tu traduis des ARN messagers en protéines avec la méthode de la fiche. Extrait du code génétique : AUG = Méthionine (Met), début ; UUU et UUC = Phénylalanine (Phe) ; AAA et AAG = Lysine (Lys) ; GGG = Glycine (Gly) ; GCU = Alanine (Ala) ; CCU = Proline (Pro) ; UGG = Tryptophane (Trp) ; UGC = Cystéine (Cys) ; UAA, UAG et UGA = codons stop.",
+            "exercise_type": "fixation",
+            "figure": "adn-vers-proteine",
+            "questions": [
+              {
+                "content": "Le ribosome lit l'ARN messager par groupes de ___ nucléotides, appelés codons.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : on découpe l'ARNm en codons à partir de AUG. Chaque codon compte 3 nucléotides. La réponse est 3 (trois). Étape 2 — Chercher : c'est un codon entier qu'on cherche dans le tableau, jamais une lettre seule.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  },
+                  {
+                    "content": "trois",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un ribosome lit l'ARNm AUGGGGUAA. Extrait du code génétique : AUG = Met ; GGG = Gly ; UAA = stop. Quelle protéine est fabriquée ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : AUG au début, découpage AUG | GGG | UAA. Étape 2 — Chercher : AUG = Met, GGG = Gly, UAA = stop. Étape 3 — Écrire : Met – Gly, arrêt au codon stop. Étape 4 — Conclure : 2 acides aminés. « stop » n'est pas un acide aminé, donc il ne s'écrit pas dans la chaîne.",
+                "answers": [
+                  {
+                    "content": "Met – Gly",
+                    "correct": true
+                  },
+                  {
+                    "content": "Met – Gly – stop",
+                    "correct": false
+                  },
+                  {
+                    "content": "Gly – Met",
+                    "correct": false
+                  },
+                  {
+                    "content": "Met – Gly – Gly",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ribosome lit l'ARNm AUG CCU GAA UGG UGA. Extrait du code génétique : AUG = Met ; CCU = Pro ; GAA = acide glutamique (Glu) ; UGG = Trp ; UGA = stop. Combien d'acides aminés compte la protéine fabriquée ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : AUG | CCU | GAA | UGG | UGA, soit 5 codons. Étape 2 — Chercher : Met, Pro, Glu, Trp, et UGA = stop. Étape 3 — Écrire : Met – Pro – Glu – Trp. Étape 4 — Conclure : la protéine compte 4 acides aminés, car le codon stop n'en compte pas.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0
+              },
+              {
+                "content": "Un ribosome lit l'ARNm AUG AAA GCU UUC UAG. Extrait du code génétique : AUG = Met ; AAA = Lys ; GCU = Ala ; UUC = Phe ; UAG = stop. Remets dans l'ordre les acides aminés de la protéine.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : AUG | AAA | GCU | UUC | UAG. Étape 2 — Chercher : Met, Lys, Ala, Phe, stop. Étape 3 — Écrire : Met – Lys – Ala – Phe, dans l'ordre des codons, et arrêt au codon stop UAG.",
+                "answers": [
+                  {
+                    "content": "Méthionine (Met)"
+                  },
+                  {
+                    "content": "Lysine (Lys)"
+                  },
+                  {
+                    "content": "Alanine (Ala)"
+                  },
+                  {
+                    "content": "Phénylalanine (Phe)"
+                  }
+                ]
+              },
+              {
+                "content": "Les codons UUU et UUC codent tous les deux la phénylalanine : plusieurs codons peuvent donc coder le même acide aminé.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Chercher : dans le tableau, UUU = Phe et UUC = Phe. Étape 3 — Écrire : deux codons différents donnent le même acide aminé. L'affirmation est vraie ; c'est ce qui explique que certaines mutations ne changent pas la protéine.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève traduit l'ARNm AUG UUU UAA et écrit que la protéine compte 3 acides aminés. Où est son erreur ? Extrait du code génétique : AUG = Met ; UUU = Phe ; UAA = stop.",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : AUG | UUU | UAA. Étape 2 — Chercher : Met, Phe, stop. Étape 3 — Écrire : Met – Phe, arrêt au stop. Étape 4 — Conclure : 2 acides aminés. Le stop n'en compte pas, c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Il a compté le codon stop UAA, qui ne code aucun acide aminé : il y en a 2",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a oublié de compter le codon AUG",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a découpé l'ARNm en groupes de 2 nucléotides",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il n'y a pas d'erreur : un codon stop est un acide aminé",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à traduire un ARN messager, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Un ribosome doit découper l'ARNm AUGAAAGGGUGA en codons de 3 nucléotides. Combien de codons contient-il ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : AUG est au début ; l'ARNm compte 12 nucléotides. On découpe par 3 : AUG | AAA | GGG | UGA, soit 4 codons. Le dernier, UGA, est un codon stop.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "hint": "Compte les nucléotides (12), puis divise par 3."
+              },
+              {
+                "content": "Le codon AUG code la méthionine. Que marque-t-il aussi dans la lecture de l'ARNm ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche d'abord AUG, c'est lui qui fixe le point de départ du découpage en codons. Il ne marque donc pas la fin : ce sont les codons stop qui terminent la chaîne.",
+                "answers": [
+                  {
+                    "content": "Le début de la traduction",
+                    "correct": true
+                  },
+                  {
+                    "content": "La fin de la traduction",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le départ de l'ADN hors du noyau",
+                    "correct": false
+                  },
+                  {
+                    "content": "La fin du gène dans le noyau",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un ribosome lit l'ARNm AUG UUU GGG UGA. La traduction s'arrête au codon ___.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Écrire : on lit UUU (Phe), GGG (Gly) puis UGA, qui est un codon stop. La lecture s'arrête au codon stop UGA.",
+                "answers": [
+                  {
+                    "content": "UUU",
+                    "correct": false
+                  },
+                  {
+                    "content": "GGG",
+                    "correct": false
+                  },
+                  {
+                    "content": "UGA",
+                    "correct": true
+                  }
+                ],
+                "hint": "Les trois codons stop sont UAA, UAG et UGA."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Relier une mutation à une protéine modifiée",
+          "remember": "Une **mutation** est une modification rare et accidentelle de la séquence de nucléotides de l'ADN. Elle peut changer un codon de l'ARNm, donc **un acide aminé** de la protéine : la protéine change alors de forme et peut mal fonctionner. Mais le code est redondant : si le nouveau codon code le même acide aminé (UUU devient UUC, tous deux Phe), la protéine reste **identique**. Exemple : la **drépanocytose** est une maladie héréditaire due à une mutation du gène de l'**hémoglobine**, la protéine des hématies qui transporte le dioxygène. Un acide aminé de l'hémoglobine est changé et les hématies prennent une forme de faucille. La mutation d'un gène ne change donc que la protéine fabriquée à partir de ce gène.",
+          "method": [
+            "Comparer la séquence d'ADN normale et la séquence modifiée pour repérer la base changée.",
+            "Transcrire les deux séquences en ARNm avec la complémentarité.",
+            "Traduire les deux ARNm avec le tableau du code génétique.",
+            "Conclure : dire si la protéine est modifiée (un acide aminé différent) ou identique."
+          ],
+          "example": {
+            "statement": "Un gène fictif a pour brin transcrit normal TAC CGA TTT et, après une mutation, TAC GGA TTT. Extrait du code génétique : AUG = Met ; GCU = Ala ; CCU = Pro ; AAA = Lys. La protéine est-elle modifiée ?",
+            "steps": [
+              "Comparer : seule la 4e base change, C devient G, dans le deuxième triplet : CGA devient GGA.",
+              "Transcrire : la séquence normale donne AUG GCU AAA, la séquence mutée donne AUG CCU AAA.",
+              "Traduire : la séquence normale donne Met – Ala – Lys, la séquence mutée donne Met – Pro – Lys.",
+              "Conclure : un seul acide aminé est différent (Ala devient Pro), donc la protéine est modifiée."
+            ]
+          },
+          "pitfall": "Ne crois pas qu'une mutation change toujours la protéine, ni qu'elle la change entièrement. Contre-exemple : UUU devient UUC, mais les deux codent Phe, donc la protéine est identique. Inversement, un seul acide aminé changé suffit à modifier une protéine : dans la drépanocytose, un seul acide aminé de l'hémoglobine est changé et les hématies prennent une forme de faucille. Il faut toujours transcrire puis traduire avant de conclure.",
+          "figure": "mutation-hemoglobine",
+          "exercise": {
+            "title": "Relier une mutation à la protéine",
+            "statement": "Dans cet exercice, tu compares des gènes normaux et mutés et tu en déduis l'effet sur la protéine, avec la méthode de la fiche. Extrait du code génétique : AUG = Méthionine (Met), début ; UUU et UUC = Phénylalanine (Phe) ; AAA et AAG = Lysine (Lys) ; GGG = Glycine (Gly) ; GCU = Alanine (Ala) ; CCU = Proline (Pro) ; UGG = Tryptophane (Trp) ; UGC = Cystéine (Cys) ; UAA, UAG et UGA = codons stop.",
+            "exercise_type": "fixation",
+            "figure": "mutation-hemoglobine",
+            "questions": [
+              {
+                "content": "Une mutation est une modification de la séquence de nucléotides de l'ADN.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Comparer : une mutation se repère en comparant deux séquences d'ADN, la normale et la modifiée. Étape 4 — Conclure : la mutation touche l'ADN, c'est ensuite que la protéine peut changer. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un gène fictif a pour brin transcrit normal TAC AAA et, après mutation, TAC AAG. Extrait du code génétique : AUG = Met ; UUU et UUC = Phe. Que devient la protéine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer : la 6e base change, A devient G (AAA devient AAG). Étape 2 — Transcrire : AAA donne UUU, AAG donne UUC. Étape 3 — Traduire : UUU = Phe et UUC = Phe. Étape 4 — Conclure : la protéine est identique, malgré la mutation.",
+                "answers": [
+                  {
+                    "content": "Elle reste identique, car UUU et UUC codent le même acide aminé Phe",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle perd son deuxième acide aminé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle devient entièrement différente",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle n'est plus fabriquée",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un gène fictif a pour brin transcrit normal TAC ACC et, après mutation, TAC ACG. Extrait du code génétique : AUG = Met ; UGG = Trp ; UGC = Cys. Que devient la protéine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer : le premier triplet TAC reste identique, le second ACC devient ACG (une seule base change). Étape 2 — Transcrire : TAC donne AUG, ACC donne UGG, ACG donne UGC. Étape 3 — Traduire : Met – Trp (normal) et Met – Cys (muté). Étape 4 — Conclure : seul le deuxième acide aminé change, Trp devient Cys.",
+                "answers": [
+                  {
+                    "content": "Le deuxième acide aminé change : Trp devient Cys",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les deux acides aminés changent",
+                    "correct": false
+                  },
+                  {
+                    "content": "La protéine reste identique",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le premier acide aminé change : Met devient Cys",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La drépanocytose est due à une mutation du gène de l'___ : un acide aminé de cette protéine est changé.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Comparer : le gène normal et le gène muté diffèrent. Étape 4 — Conclure : dans la drépanocytose, c'est l'hémoglobine, la protéine des hématies qui transporte le dioxygène, qui est modifiée. Un seul acide aminé est changé et les hématies prennent une forme de faucille.",
+                "answers": [
+                  {
+                    "content": "hémoglobine",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles sont les deux affirmations exactes sur une mutation ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 3 — Traduire : le résultat dépend du nouveau codon. Étape 4 — Conclure : si le codon change d'acide aminé, la protéine change (Ala devient Pro) ; si le codon code le même acide aminé (UUU devient UUC), elle reste identique. « Toujours » est donc faux, et une mutation touche l'ADN.",
+                "answers": [
+                  {
+                    "content": "Elle peut changer un codon, donc un acide aminé de la protéine",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle peut ne rien changer à la protéine si le nouveau codon code le même acide aminé",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle change toujours tous les acides aminés de la protéine",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle se produit dans la protéine et non dans l'ADN",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle change toujours la protéine",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un élève affirme : « Toute mutation change la protéine. » Un gène passe de TTT à TTC dans son brin transcrit. Extrait du code génétique : AAA et AAG = Lys. Quelle est la bonne réponse ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Comparer : la 3e base du triplet change, T devient C. Étape 2 — Transcrire : TTT donne AAA, TTC donne AAG. Étape 3 — Traduire : AAA = Lys et AAG = Lys. Étape 4 — Conclure : la protéine est identique. Croire que toute mutation change la protéine est le piège à éviter.",
+                "answers": [
+                  {
+                    "content": "Il a tort : AAA et AAG codent tous deux Lys, la protéine est identique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il a raison : un nucléotide changé change toujours l'acide aminé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a raison : AAG est un codon stop",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il a tort : la mutation n'est pas dans l'ADN",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à relier une mutation à la protéine, avec la méthode de la fiche.",
+            "questions": [
+              {
+                "content": "Une mutation est un changement de la séquence de l'___ ; elle peut changer un ___ de la protéine.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Comparer : la mutation est un changement dans l'ADN. Étape 4 — Conclure : en changeant un codon, elle peut changer un acide aminé de la protéine.",
+                "answers": [
+                  {
+                    "content": "ADN",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "acide aminé",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "La mutation touche la molécule du noyau ; la protéine est une chaîne de maillons."
+              },
+              {
+                "content": "Dans la drépanocytose, les hématies prennent une forme de faucille à cause d'une hémoglobine modifiée.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : un acide aminé de l'hémoglobine est changé, la protéine est modifiée et les hématies se déforment en faucille. L'affirmation est vraie.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Après une mutation, un codon de l'ARNm passe de GCU à GCC. Extrait du code génétique : GCU et GCC codent tous deux Ala. Que devient la protéine ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Traduire : GCU = Ala et GCC = Ala. Étape 4 — Conclure : le même acide aminé est placé, la protéine est donc identique.",
+                "answers": [
+                  {
+                    "content": "Elle reste identique",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle change d'acide aminé",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle se raccourcit",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle n'est plus fabriquée",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "De la cantine à la cellule : les protéines du repas",
+          "statement": "Pendant la pause, un élève d'un lycée de Bouaké mange du poisson à la cantine. Dans cet exercice, tu suis le devenir des protéines de son repas.",
+          "exercise_type": "fixation",
+          "figure": "aliment-cellule",
+          "questions": [
+            {
+              "content": "Que deviennent les protéines du poisson pendant la digestion de l'élève ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Lire : le poisson apporte des protéines. Étape 2 — Rapprocher : la digestion coupe les chaînes en maillons. Étape 3 — Conclure : les protéines deviennent des acides aminés qui passent dans le sang. Passer telles quelles dans le sang est l'erreur du piège.",
+              "answers": [
+                {
+                  "content": "Elles sont coupées en acides aminés",
+                  "correct": true
+                },
+                {
+                  "content": "Elles passent telles quelles dans le sang",
+                  "correct": false
+                },
+                {
+                  "content": "Elles sont transformées en eau",
+                  "correct": false
+                },
+                {
+                  "content": "Elles restent intactes dans l'intestin pour toujours",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les cellules de l'élève utilisent ces acides aminés pour fabriquer leurs propres ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Lire : des acides aminés arrivent aux cellules par le sang. Étape 2 — Rapprocher : la cellule les assemble en chaînes. Étape 3 — Conclure : elle fabrique ses propres protéines, différentes de celles du poisson.",
+              "answers": [
+                {
+                  "content": "protéines",
+                  "correct": true
+                },
+                {
+                  "content": "protéine",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque protéine à son rôle.",
+              "question_type": "matching",
+              "explanation": "Étape 1 — Lire : on relève l'action de chaque protéine. Étape 2 — Rapprocher : la pepsine accélère la digestion, donc enzyme ; l'insuline agit à distance par le sang, donc hormone ; l'anticorps neutralise un microbe, donc défense ; les protéines du muscle construisent les fibres, donc structure. Étape 3 — Conclure : chaque protéine a son rôle.",
+              "answers": [
+                {
+                  "content": "La pepsine de l'estomac",
+                  "match": "Enzyme digestive"
+                },
+                {
+                  "content": "L'insuline",
+                  "match": "Hormone"
+                },
+                {
+                  "content": "Un anticorps",
+                  "match": "Défense contre les microbes"
+                },
+                {
+                  "content": "Les protéines du muscle",
+                  "match": "Structure"
+                }
+              ]
+            },
+            {
+              "content": "Les cellules fabriquent une protéine à partir d'un ARN messager de 150 codons, dont le codon stop. Combien d'acides aminés cette protéine compte-t-elle ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : 150 codons lus par le ribosome. Étape 3 — Écrire : le dernier est un codon stop, qui ne code aucun acide aminé. Étape 4 — Conclure : 150 moins 1 donne 149 acides aminés. Compter 150 serait compter le stop, c'est le piège de la traduction.",
+              "answers": [
+                {
+                  "content": "149",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Avec seulement 20 sortes d'acides aminés, les cellules peuvent fabriquer beaucoup de protéines différentes, car la nature et l'ordre des acides aminés varient.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Lire : il existe 20 sortes d'acides aminés. Étape 2 — Rapprocher : comme les lettres d'un alphabet forment beaucoup de mots, leur nature, leur nombre et leur ordre donnent des protéines différentes. Étape 3 — Conclure : l'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Où et comment une glande fabrique-t-elle sa protéine ?",
+          "statement": "Expérience fictive, résultats simplifiés. Des cellules d'une glande reçoivent des acides aminés radioactifs. On compte la radioactivité sur 100 grains. À 5 minutes : noyau 8, cytoplasme 85, extérieur de la cellule 7. À 60 minutes : noyau 6, cytoplasme 30, extérieur de la cellule 64.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Expérience fictive, résultats simplifiés. À 60 minutes, sur 100 grains de radioactivité : noyau 6, cytoplasme 30, extérieur de la cellule 64. Quel pourcentage de la radioactivité se trouve à l'extérieur de la cellule ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Lire le protocole : 100 grains comptés à 60 minutes. Étape 2 — Relever les résultats : extérieur = 64 grains. Étape 3 — Comparer : 64 sur 100 donne 64 pour cent. Étape 4 — Conclure : 64 pour cent de la radioactivité est à l'extérieur de la cellule.",
+              "answers": [
+                {
+                  "content": "64",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "%"
+            },
+            {
+              "content": "Expérience fictive, résultats simplifiés. À 5 minutes, sur 100 grains : noyau 8, cytoplasme 85, extérieur 7. Où les acides aminés sont-ils utilisés pour fabriquer la protéine ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Relever les résultats : cytoplasme 85, noyau 8, extérieur 7. Étape 3 — Comparer : la radioactivité est surtout dans le cytoplasme. Étape 4 — Conclure : c'est dans le cytoplasme que les acides aminés sont utilisés, puisque la zone la plus radioactive est celle où ils sont assemblés.",
+              "answers": [
+                {
+                  "content": "Dans le cytoplasme",
+                  "correct": true
+                },
+                {
+                  "content": "Dans le noyau",
+                  "correct": false
+                },
+                {
+                  "content": "À l'extérieur de la cellule",
+                  "correct": false
+                },
+                {
+                  "content": "Dans les trois zones à égalité",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Expérience fictive, résultats simplifiés. De 5 à 60 minutes, le cytoplasme passe de 85 à 30 grains et l'extérieur de la cellule de 7 à 64 grains. Que peut-on déduire ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Relever les résultats : le cytoplasme perd 55 grains, l'extérieur en gagne 57, le noyau reste faible. Étape 3 — Comparer : ce qui quitte le cytoplasme se retrouve à l'extérieur, comme une production envoyée hors de l'atelier. Étape 4 — Conclure : une partie des protéines fabriquées est envoyée à l'extérieur.",
+              "answers": [
+                {
+                  "content": "Une partie des protéines fabriquées dans le cytoplasme est envoyée à l'extérieur de la cellule",
+                  "correct": true
+                },
+                {
+                  "content": "Les protéines sont fabriquées à l'extérieur de la cellule",
+                  "correct": false
+                },
+                {
+                  "content": "Les acides aminés quittent la cellule sans servir",
+                  "correct": false
+                },
+                {
+                  "content": "Le noyau fabrique les protéines après 60 minutes",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Expérience fictive, résultats simplifiés. Quelles sont les deux conclusions que l'on peut tirer de ces résultats ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Relever les résultats : forte radioactivité du cytoplasme à 5 minutes, puis de l'extérieur à 60 minutes. Étape 4 — Conclure : fabrication dans le cytoplasme, puis sortie d'une partie des protéines. Le noyau est peu radioactif, ce qui montre que les protéines n'y sont pas fabriquées.",
+              "answers": [
+                {
+                  "content": "Les protéines sont fabriquées dans le cytoplasme",
+                  "correct": true
+                },
+                {
+                  "content": "Une partie des protéines fabriquées sort ensuite de la cellule",
+                  "correct": true
+                },
+                {
+                  "content": "Les protéines sont fabriquées dans le noyau",
+                  "correct": false
+                },
+                {
+                  "content": "Le noyau fabrique les acides aminés",
+                  "correct": false
+                },
+                {
+                  "content": "La radioactivité prouve que l'ADN est fait d'acides aminés",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre le trajet d'une protéine sécrétée par la glande, d'après les résultats.",
+              "question_type": "ordering",
+              "explanation": "Étape 2 — Relever les résultats : à 5 minutes la radioactivité est dans le cytoplasme, à 60 minutes elle est à l'extérieur. Étape 3 — Comparer les moments : d'abord l'arrivée des acides aminés, puis la fabrication dans le cytoplasme, puis l'envoi vers l'extérieur.",
+              "answers": [
+                {
+                  "content": "Les acides aminés arrivent dans la cellule"
+                },
+                {
+                  "content": "La protéine est fabriquée dans le cytoplasme"
+                },
+                {
+                  "content": "La protéine est envoyée à l'extérieur de la cellule"
+                }
+              ]
+            },
+            {
+              "content": "L'ADN du noyau ne se marque pas avec les acides aminés radioactifs.",
+              "question_type": "true_false",
+              "explanation": "Étape 3 — Comparer : l'ADN est fait de nucléotides, pas d'acides aminés, donc il ne se marque pas avec eux. Étape 4 — Conclure : le noyau est peu radioactif parce que les protéines n'y sont pas fabriquées, et non parce que l'ADN serait marqué. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Du gène à la protéine : un gène fictif de la glande",
+          "statement": "Le brin d'ADN transcrit d'un gène fictif de la glande est : TAC TTT CGA ACC ATC (lu de gauche à droite). Extrait du code génétique : AUG = Méthionine (Met), début ; UUU et UUC = Phénylalanine (Phe) ; AAA et AAG = Lysine (Lys) ; GGG = Glycine (Gly) ; GCU = Alanine (Ala) ; CCU = Proline (Pro) ; UGG = Tryptophane (Trp) ; UGC = Cystéine (Cys) ; UAA, UAG et UGA = codons stop.",
+          "exercise_type": "evaluation",
+          "figure": "adn-vers-proteine",
+          "questions": [
+            {
+              "content": "Le gène fictif est une portion d'ADN ; l'ADN reste toujours dans le ___ de la cellule.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Repérer : le gène fait partie de l'ADN. L'ADN ne quitte pas le noyau : c'est l'ARNm, sa copie, qui sort. La réponse est « noyau ».",
+              "answers": [
+                {
+                  "content": "noyau",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le brin d'ADN transcrit est TAC TTT CGA ACC ATC. Quel est l'ARN messager obtenu ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le brin transcrit est TAC TTT CGA ACC ATC. Étape 2 — Appliquer la complémentarité : TAC donne AUG, TTT donne AAA, CGA donne GCU, ACC donne UGG, ATC donne UAG. Étape 3 — Écrire : AUG AAA GCU UGG UAG. AUG UUU… a traité T comme U au lieu de le complémenter ; GCT contient un T, impossible dans l'ARN.",
+              "answers": [
+                {
+                  "content": "AUG AAA GCU UGG UAG",
+                  "correct": true
+                },
+                {
+                  "content": "AUG UUU GCU UGG UAG",
+                  "correct": false
+                },
+                {
+                  "content": "TAC TTT CGA ACC ATC",
+                  "correct": false
+                },
+                {
+                  "content": "AUG AAA GCT UGG UAG",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'ARNm obtenu est AUG AAA GCU UGG UAG. Extrait du code génétique : AUG = Méthionine (Met), début ; UUU et UUC = Phénylalanine (Phe) ; AAA et AAG = Lysine (Lys) ; GGG = Glycine (Gly) ; GCU = Alanine (Ala) ; CCU = Proline (Pro) ; UGG = Tryptophane (Trp) ; UGC = Cystéine (Cys) ; UAA, UAG et UGA = codons stop. Remets dans l'ordre les acides aminés de la protéine fabriquée.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Repérer : AUG | AAA | GCU | UGG | UAG. Étape 2 — Chercher : Met, Lys, Ala, Trp, et UAG = stop. Étape 3 — Écrire : Met – Lys – Ala – Trp, arrêt au codon stop.",
+              "answers": [
+                {
+                  "content": "Méthionine (Met)"
+                },
+                {
+                  "content": "Lysine (Lys)"
+                },
+                {
+                  "content": "Alanine (Ala)"
+                },
+                {
+                  "content": "Tryptophane (Trp)"
+                }
+              ]
+            },
+            {
+              "content": "L'ARNm AUG AAA GCU UGG UAG est traduit par un ribosome. UAG est un codon stop. Combien d'acides aminés compte la protéine fabriquée ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : 5 codons. Étape 2 — Chercher : le dernier, UAG, est un codon stop. Étape 3 — Écrire : Met – Lys – Ala – Trp. Étape 4 — Conclure : 4 acides aminés, car le stop n'en compte pas.",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0
+            },
+            {
+              "content": "Le brin transcrit normal est TAC TTT CGA ACC ATC. Une mutation change le troisième triplet CGA en GGA. Extrait du code génétique : AUG = Met ; AAA = Lys ; GCU = Ala ; CCU = Pro ; UGG = Trp. Que devient la protéine ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Comparer : seule la 7e base change, C devient G (CGA devient GGA). Étape 2 — Transcrire : CGA donne GCU, GGA donne CCU. Étape 3 — Traduire : Met – Lys – Ala – Trp devient Met – Lys – Pro – Trp. Étape 4 — Conclure : un seul acide aminé change, Ala devient Pro.",
+              "answers": [
+                {
+                  "content": "Le troisième acide aminé change : Ala devient Pro",
+                  "correct": true
+                },
+                {
+                  "content": "Elle reste identique",
+                  "correct": false
+                },
+                {
+                  "content": "La protéine s'arrête après la méthionine",
+                  "correct": false
+                },
+                {
+                  "content": "Tous les acides aminés changent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le gène est dans le noyau, mais les protéines sont fabriquées dans le cytoplasme. Explique en quelques phrases comment l'information du gène arrive jusqu'au ribosome.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : l'ADN, qui porte le gène, reste dans le noyau. Dans le noyau, la transcription copie le gène en ARN messager, par complémentarité des bases. L'ARNm quitte ensuite le noyau et gagne le cytoplasme. Sur un ribosome, il est traduit grâce au code génétique : chaque codon de 3 nucléotides donne un acide aminé, et la chaîne forme la protéine. Barème de 3 points : 1 point pour l'ADN qui reste dans le noyau et la transcription en ARNm ; 1 point pour la sortie de l'ARNm vers le ribosome ; 1 point pour la traduction par codons grâce au code génétique.",
+              "answers": [],
+              "points": 3,
+              "criteria": [
+                "L'ADN reste dans le noyau et le gène y est transcrit en ARN messager",
+                "L'ARN messager quitte le noyau et gagne le cytoplasme, sur un ribosome",
+                "La traduction se fait codon par codon grâce au code génétique, et donne la protéine"
+              ],
+              "starter": "L'ADN reste dans le noyau, donc…"
+            }
+          ]
+        },
+        {
+          "title": "La drépanocytose : une mutation et une protéine modifiée",
+          "statement": "Dans un centre de santé d'Abidjan, une infirmière explique à des élèves que la drépanocytose est une maladie héréditaire : l'hémoglobine des hématies est anormale parce qu'un acide aminé est changé, et les hématies prennent une forme de faucille. Pour modéliser une mutation, elle propose un gène fictif simplifié (ce n'est pas le vrai gène de l'hémoglobine). Brin transcrit normal : TAC ACC GGA. Brin transcrit muté : TAC ACG GGA. Extrait du code génétique : AUG = Méthionine (Met), début ; UUU et UUC = Phénylalanine (Phe) ; AAA et AAG = Lysine (Lys) ; GGG = Glycine (Gly) ; GCU = Alanine (Ala) ; CCU = Proline (Pro) ; UGG = Tryptophane (Trp) ; UGC = Cystéine (Cys) ; UAA, UAG et UGA = codons stop.",
+          "exercise_type": "evaluation",
+          "figure": "mutation-hemoglobine",
+          "questions": [
+            {
+              "content": "La drépanocytose est due à la modification d'un acide aminé de l'hémoglobine.",
+              "question_type": "true_false",
+              "explanation": "Étape 4 — Conclure : dans la drépanocytose, la mutation d'un gène change un acide aminé de l'hémoglobine, ce qui déforme les hématies en faucille. L'affirmation est vraie.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans le modèle, le brin transcrit normal est TAC ACC GGA et le brin muté TAC ACG GGA. Quelle est la différence entre les deux séquences d'ADN ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Comparer : TAC est identique et GGA est identique ; seul le deuxième triplet passe de ACC à ACG. Une seule base change : la dernière base de ce triplet, C, devient G.",
+              "answers": [
+                {
+                  "content": "Une seule base change : le C du deuxième triplet devient G",
+                  "correct": true
+                },
+                {
+                  "content": "Les trois triplets sont différents",
+                  "correct": false
+                },
+                {
+                  "content": "Une base a été supprimée",
+                  "correct": false
+                },
+                {
+                  "content": "Il n'y a aucune différence",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quel est l'ARN messager de la séquence normale TAC ACC GGA ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Transcrire : TAC donne AUG, ACC donne UGG, GGA donne CCU. L'ARNm normal est AUG UGG CCU. UGC correspondrait au brin muté, et un T n'existe jamais dans l'ARN.",
+              "answers": [
+                {
+                  "content": "AUG UGG CCU",
+                  "correct": true
+                },
+                {
+                  "content": "AUG UGC CCU",
+                  "correct": false
+                },
+                {
+                  "content": "AUG ACC GGA",
+                  "correct": false
+                },
+                {
+                  "content": "TAC UGG CCU",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Séquence mutée : l'ARNm AUG UGC CCU donne la chaîne Met – ___ – Pro (la séquence normale donnait Met – Trp – Pro).",
+              "question_type": "fill_blank",
+              "explanation": "Étape 3 — Traduire : le normal donne AUG UGG CCU, donc Met – Trp – Pro. Le muté donne AUG UGC CCU : AUG = Met, UGC = Cys, CCU = Pro, donc Met – Cys – Pro. Le deuxième acide aminé est la cystéine (Cys), car UGG = Trp et UGC = Cys.",
+              "answers": [
+                {
+                  "content": "Cys",
+                  "correct": true
+                },
+                {
+                  "content": "cystéine",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles sont les trois affirmations exactes sur ce modèle de mutation ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Comparer : une seule base d'ADN change. Étape 3 — Traduire : Met – Trp – Pro devient Met – Cys – Pro, donc un seul acide aminé change et la longueur reste de 3 acides aminés. Étape 4 — Conclure : trois affirmations sont exactes. Les deux autres sont fausses : il y a toujours 3 codons, et l'ARN n'a jamais de T.",
+              "answers": [
+                {
+                  "content": "Une seule base de l'ADN a changé",
+                  "correct": true
+                },
+                {
+                  "content": "Un seul acide aminé est changé dans la protéine",
+                  "correct": true
+                },
+                {
+                  "content": "Les deux protéines ont la même longueur, 3 acides aminés",
+                  "correct": true
+                },
+                {
+                  "content": "Toute la protéine est changée",
+                  "correct": false
+                },
+                {
+                  "content": "Le nombre de codons a changé",
+                  "correct": false
+                },
+                {
+                  "content": "L'ARN muté contient la base T",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe qui explique comment la mutation d'un gène peut entraîner une maladie héréditaire comme la drépanocytose.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : une mutation est un changement de la séquence de nucléotides de l'ADN, ici dans le gène de l'hémoglobine. Lors de la transcription, l'ARN messager copié est modifié : un codon change. À la traduction, un acide aminé différent est placé dans la protéine, et l'hémoglobine devient anormale. Les hématies prennent alors une forme de faucille : c'est la drépanocytose. Comme la mutation est dans l'ADN, elle peut se transmettre d'une génération à l'autre, d'où une maladie héréditaire. Barème de 4 points : 1 point pour le gène (ADN) modifié ; 1 point pour l'ARNm et le codon qui change ; 1 point pour l'acide aminé changé et la protéine anormale ; 1 point pour la conséquence sur les hématies et le caractère héréditaire.",
+              "answers": [],
+              "points": 4,
+              "criteria": [
+                "La mutation est un changement dans le gène (ADN) de l'hémoglobine",
+                "L'ARN messager copié est modifié et un codon change",
+                "Un acide aminé est changé : l'hémoglobine est anormale",
+                "Les hématies se déforment en faucille et la mutation se transmet (maladie héréditaire)"
+              ],
+              "starter": "Une mutation est un changement de l'ADN…"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

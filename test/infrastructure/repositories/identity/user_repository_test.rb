@@ -17,6 +17,21 @@ module Repositories
         end
       end
 
+      test "oldest_active_team_actor is the team member created first by created_at, not by id, ignoring other roles and anonymized accounts" do
+        assert_nil @repository.oldest_active_team_actor
+
+        created_first = create_team_member(team_role: "field", second_factor: false)
+        oldest = create_team_member(team_role: "content", second_factor: false)
+        create_student.update_columns(created_at: 30.days.ago)
+        create_team_member(second_factor: false).update_columns(created_at: 20.days.ago, anonymized_at: 5.days.ago)
+        created_first.update_columns(created_at: 2.days.ago)
+        oldest.update_columns(created_at: 10.days.ago)
+
+        actor = @repository.oldest_active_team_actor
+
+        assert_equal [ oldest.id, :team, "content" ], [ actor.user_id, actor.role, actor.team_role ]
+      end
+
       test "mark_app_opened dates the last opening from the installed app, and only on that account (ADR-0082 §4.3)" do
         student = create_student
         other = create_student

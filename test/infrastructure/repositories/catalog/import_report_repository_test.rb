@@ -16,6 +16,31 @@ module Repositories
         @repository.create(kind:, checksum_sha256: "a" * 64, imported_by_id: @member.id, at: @at).value
       end
 
+      def loaded_report(name: "chargement-automatique-x.json", checksum: "a" * 64, finished_at: @at, status: "completed", imported: 1, errors: 0)
+        create_import_report(kind: "course_tree", status:, imported_by: @member, checksum_sha256: checksum, files: [ { name:, byte_size: 1, status: "read" } ],
+                             imported_count: imported, error_count: errors, total_count: imported + errors, finished_at:)
+      end
+
+      test "last_loaded_checksum rend l'empreinte du dernier chargement réussi de ce fichier" do
+        loaded_report(checksum: "1" * 64, finished_at: @at)
+        loaded_report(checksum: "2" * 64, finished_at: @at + 1.hour)
+        loaded_report(name: "autre.json", checksum: "3" * 64, finished_at: @at + 2.hours)
+
+        assert_equal "2" * 64, @repository.last_loaded_checksum(kind: "course_tree", file_name: "chargement-automatique-x.json")
+        assert_nil @repository.last_loaded_checksum(kind: "course_tree", file_name: "inconnu.json")
+        assert_nil @repository.last_loaded_checksum(kind: "schools", file_name: "chargement-automatique-x.json")
+      end
+
+      test "last_loaded_checksum ignore un rapport terminé sans élément écrit, avec une erreur, refusé ou échoué" do
+        loaded_report(checksum: "1" * 64, finished_at: @at)
+        loaded_report(checksum: "2" * 64, finished_at: @at + 1.hour, imported: 0)
+        loaded_report(checksum: "3" * 64, finished_at: @at + 2.hours, errors: 1, imported: 0)
+        loaded_report(checksum: "4" * 64, finished_at: @at + 3.hours, status: "rejected", imported: 0)
+        loaded_report(checksum: "5" * 64, finished_at: @at + 4.hours, status: "failed", imported: 0)
+
+        assert_equal "1" * 64, @repository.last_loaded_checksum(kind: "course_tree", file_name: "chargement-automatique-x.json")
+      end
+
       test "crée un rapport en file, le retrouve par id et par public_id" do
         report = create_report
 

@@ -1,0 +1,1672 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Suites numériques",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "Tle",
+      "material_name": "Mathématiques",
+      "series_name": "D",
+      "theme": "burgundy",
+      "figures": [
+        {
+          "key": "suite-croissante-majoree",
+          "kind": "coordinate_plane",
+          "description": "Repère où l'on place les points (n ; u(n)) de la suite u(n) = 5 - 3/(n+1) pour n de 0 à 6 : (0 ; 2), (1 ; 3,5), (2 ; 4), (3 ; 4,25), (4 ; 4,4), (5 ; 4,5), (6 ; 4,57). Les points montent de plus en plus lentement sans atteindre la droite horizontale y = 5, qui est un majorant de la suite.",
+          "params": {
+            "xmin": -1,
+            "xmax": 8,
+            "ymin": 0,
+            "ymax": 6,
+            "points": [
+              {
+                "id": "u0",
+                "x": 0,
+                "y": 2.0
+              },
+              {
+                "id": "u1",
+                "x": 1,
+                "y": 3.5
+              },
+              {
+                "id": "u2",
+                "x": 2,
+                "y": 4.0
+              },
+              {
+                "id": "u3",
+                "x": 3,
+                "y": 4.25
+              },
+              {
+                "id": "u4",
+                "x": 4,
+                "y": 4.4
+              },
+              {
+                "id": "u5",
+                "x": 5,
+                "y": 4.5
+              },
+              {
+                "id": "u6",
+                "x": 6,
+                "y": 4.57
+              }
+            ],
+            "lines": [
+              {
+                "a": 0,
+                "b": 5
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "suite-vers-limite",
+          "kind": "coordinate_plane",
+          "description": "Repère où l'on place les points (n ; u(n)) de la suite u(n) = 8 + 2 x (1/2)^n pour n de 0 à 6 : (0 ; 10), (1 ; 9), (2 ; 8,5), (3 ; 8,25), (4 ; 8,125), (5 ; 8,0625), (6 ; 8,03125). Les points descendent en se rapprochant de la droite horizontale y = 8, qui est la limite de la suite.",
+          "params": {
+            "xmin": -1,
+            "xmax": 8,
+            "ymin": 6,
+            "ymax": 11,
+            "points": [
+              {
+                "id": "u0",
+                "x": 0,
+                "y": 10.0
+              },
+              {
+                "id": "u1",
+                "x": 1,
+                "y": 9.0
+              },
+              {
+                "id": "u2",
+                "x": 2,
+                "y": 8.5
+              },
+              {
+                "id": "u3",
+                "x": 3,
+                "y": 8.25
+              },
+              {
+                "id": "u4",
+                "x": 4,
+                "y": 8.125
+              },
+              {
+                "id": "u5",
+                "x": 5,
+                "y": 8.0625
+              },
+              {
+                "id": "u6",
+                "x": 6,
+                "y": 8.03125
+              }
+            ],
+            "lines": [
+              {
+                "a": 0,
+                "b": 8
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Démontrer une propriété par récurrence",
+          "remember": "Le raisonnement par récurrence démontre qu'une propriété $P(n)$ est vraie pour tous les entiers $n \\geq n_0$. Il repose sur deux conditions. **Initialisation** : $P(n_0)$ est vraie. **Hérédité** : pour tout entier $n \\geq n_0$, si $P(n)$ est vraie, alors $P(n+1)$ est vraie. Quand les deux sont démontrées, $P(n)$ est vraie pour tout $n \\geq n_0$. L'affirmation « $P(n)$ est vraie » utilisée dans l'hérédité s'appelle l'**hypothèse de récurrence** : on la suppose vraie pour un entier $n$ fixé, on ne la démontre pas.",
+          "method": [
+            "Énoncer la propriété $P(n)$ à démontrer pour tout entier $n \\geq n_0$.",
+            "Initialiser : vérifier que $P(n_0)$ est vraie en calculant au premier rang.",
+            "Hériter : supposer $P(n)$ vraie pour un entier $n \\geq n_0$ fixé, puis démontrer $P(n+1)$ en utilisant cette hypothèse.",
+            "Conclure : par récurrence, $P(n)$ est vraie pour tout entier $n \\geq n_0$."
+          ],
+          "example": {
+            "statement": "Le solde d'un compte d'épargne mobile money (en dizaines de milliers de FCFA) suit la suite $u_0 = 4$ et $u_{n+1} = \\dfrac{u_n + 6}{2}$. Démontrer que $u_n \\leq 6$ pour tout entier $n \\geq 0$.",
+            "steps": [
+              "Énoncer : $P(n)$ est la propriété « $u_n \\leq 6$ », à démontrer pour tout $n \\geq 0$.",
+              "Initialiser : $u_0 = 4 \\leq 6$, donc $P(0)$ est vraie.",
+              "Hériter : supposons $u_n \\leq 6$. Alors $u_n + 6 \\leq 12$, donc $u_{n+1} = \\dfrac{u_n + 6}{2} \\leq 6$ : $P(n+1)$ est vraie.",
+              "Conclure : par récurrence, $u_n \\leq 6$ pour tout entier $n \\geq 0$."
+            ]
+          },
+          "pitfall": "Ne pas oublier l'initialisation. Une hérédité seule ne prouve rien. Contre-exemple : $P(n)$ : « $10^n + 1$ est divisible par 9 ». L'hérédité marche : si $10^n + 1 = 9k$, alors $10^{n+1} + 1 = 10(9k - 1) + 1 = 9(10k - 1)$. Pourtant $P(0)$ est fausse ($10^0 + 1 = 2$) et $P(1)$ aussi ($11$). La propriété est fausse pour tout $n$. Vérifie toujours le premier rang, puis l'hérédité.",
+          "figure": null,
+          "exercise": {
+            "title": "Raisonner par récurrence",
+            "statement": "Dans cet exercice, tu utilises la méthode de la fiche : énoncer, initialiser, hériter, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Remets dans l'ordre les quatre étapes d'une démonstration par récurrence.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Énoncer la propriété : on ne peut rien démontrer sans savoir ce qu'est $P(n)$. Étape 2 — Initialiser : on vérifie le premier rang $n_0$. Étape 3 — Hériter : on passe de $n$ à $n+1$ avec l'hypothèse de récurrence. Étape 4 — Conclure : on ne conclut qu'après avoir démontré l'initialisation et l'hérédité. Intervertir l'initialisation et la conclusion donnerait une conclusion sans preuve.",
+                "answers": [
+                  {
+                    "content": "Énoncer la propriété $P(n)$ à démontrer pour tout $n \\geq n_0$."
+                  },
+                  {
+                    "content": "Initialiser : vérifier que $P(n_0)$ est vraie."
+                  },
+                  {
+                    "content": "Hériter : supposer $P(n)$ vraie et démontrer $P(n+1)$."
+                  },
+                  {
+                    "content": "Conclure : $P(n)$ est vraie pour tout $n \\geq n_0$."
+                  }
+                ]
+              },
+              {
+                "content": "Dans une démonstration par récurrence, que signifie l'hypothèse de récurrence ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Hériter : on suppose $P(n)$ vraie pour un $n$ fixé (c'est l'hypothèse de récurrence), puis on démontre $P(n+1)$. Supposer $P(n+1)$ revient à supposer ce qu'on veut démontrer. Vérifier quelques valeurs relève de l'étape 2 (initialisation) et ne prouve pas la propriété pour tout $n$. Dire que $P(n)$ est déjà démontrée pour tout $n$ est un cercle vicieux.",
+                "answers": [
+                  {
+                    "content": "On suppose que $P(n)$ est vraie pour un entier $n \\geq n_0$ fixé.",
+                    "correct": true
+                  },
+                  {
+                    "content": "On suppose que $P(n+1)$ est vraie pour tout entier $n$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On vérifie que $P(n)$ est vraie pour les premières valeurs de $n$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "On a déjà démontré que $P(n)$ est vraie pour tout $n$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $(u_n)$ définie par $u_0 = 2$ et $u_{n+1} = 3u_n - 1$. On veut montrer que $u_n \\geq 1$ pour tout $n$. Dans l'hérédité, on suppose $u_n \\geq 1$. On en déduit $u_{n+1} \\geq$ ___ (valeur obtenue directement).",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Énoncer : $P(n)$ : « $u_n \\geq 1$ ». Étape 2 — Initialiser : $u_0 = 2 \\geq 1$. Étape 3 — Hériter : $u_n \\geq 1$ donne $3u_n \\geq 3$ (on multiplie par $3 > 0$), puis $3u_n - 1 \\geq 2$. Donc $u_{n+1} \\geq 2 \\geq 1$ : $P(n+1)$ est vraie. Étape 4 — Conclure : $u_n \\geq 1$ pour tout $n$. La valeur cherchée est $2$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On veut démontrer par récurrence que $n^2 \\geq 2n$ pour tout entier $n \\geq 2$. Quelle est la bonne initialisation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Énoncer : $P(n)$ : « $n^2 \\geq 2n$ », pour tout $n \\geq 2$. Étape 2 — Initialiser au premier rang de la propriété, ici $n_0 = 2$ : $2^2 = 4$ et $2 \\times 2 = 4$, donc $4 \\geq 4$ est vraie. Initialiser en $0$ ou en $3$ ne correspond pas au premier rang demandé. $P(1)$ est fausse : $1 < 2$. Étapes 3 et 4 : l'hérédité puis la conclusion suivraient.",
+                "answers": [
+                  {
+                    "content": "$P(0)$ : $0 \\geq 0$, vraie.",
+                    "correct": false
+                  },
+                  {
+                    "content": "$P(2)$ : $2^2 = 4 \\geq 4$, vraie.",
+                    "correct": true
+                  },
+                  {
+                    "content": "$P(1)$ : $1 \\geq 2$, vraie.",
+                    "correct": false
+                  },
+                  {
+                    "content": "$P(3)$ : $9 \\geq 6$, vraie.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "On considère $P(n)$ : « $4^n + 1$ est divisible par 3 ». On démontre que, pour tout $n$, si $P(n)$ est vraie alors $P(n+1)$ est vraie. Que peut-on conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Initialiser : $P(0)$ donne $4^0 + 1 = 2$, qui n'est pas divisible par 3. L'initialisation échoue, donc la récurrence ne démarre pas. Étape 3 — L'hérédité est vraie ici : si $4^n + 1 = 3k$, alors $4^{n+1} + 1 = 4(3k - 1) + 1 = 3(4k - 1)$. Mais l'hérédité seule ne suffit pas. Étape 4 — On ne peut pas conclure. Au contraire $P(1)$ : $5$ et $P(2)$ : $17$ ne sont pas divisibles par 3.",
+                "answers": [
+                  {
+                    "content": "$P(n)$ est vraie pour tout entier $n \\geq 0$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Rien encore : il faut l'initialisation, et $P(0)$ est fausse car $4^0 + 1 = 2$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "$P(n)$ est vraie pour tout entier $n$ pair.",
+                    "correct": false
+                  },
+                  {
+                    "content": "$P(n)$ est vraie pour tout entier $n \\geq 1$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Soit $u_0 = 1$ et $u_{n+1} = \\dfrac{u_n + 8}{3}$. Dans l'hérédité de la démonstration de « $u_n \\leq 4$ pour tout $n$ », on suppose $u_n \\leq 4$. On en déduit $u_{n+1} \\leq$ ___ (la borne obtenue directement, sans l'arrondir).",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Énoncer : $P(n)$ : « $u_n \\leq 4$ ». Étape 2 — Initialiser : $u_0 = 1 \\leq 4$. Étape 3 — Hériter : $u_n \\leq 4$ donne $u_n + 8 \\leq 12$, puis en divisant par $3 > 0$ : $u_{n+1} = \\dfrac{u_n + 8}{3} \\leq \\dfrac{12}{3} = 4$. Étape 4 — Conclure : $u_n \\leq 4$ pour tout $n$. La valeur cherchée est $4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Une suite $(v_n)$ est définie par $v_0 = 5$ et $v_{n+1} = \\dfrac{v_n + 4}{2}$. On veut démontrer par récurrence que $v_n \\geq 4$ pour tout entier $n \\geq 0$.",
+            "questions": [
+              {
+                "content": "Initialisation : $v_0 =$ ___ , et la borne de $P(n)$ est ___ ; comme $v_0 \\geq$ cette borne, $P(0)$ est vraie.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Énoncer : $P(n)$ : « $v_n \\geq 4$ ». Étape 2 — Initialiser : l'énoncé donne $v_0 = 5$, et $5 \\geq 4$, donc $P(0)$ est vraie. Les étapes 3 et 4 (hérédité, conclusion) viennent ensuite.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Lis la valeur de $v_0$ dans l'énoncé, puis compare-la à la borne $4$."
+              },
+              {
+                "content": "Hérédité : on suppose $v_n \\geq 4$. Alors $v_n + 4 \\geq$ ___ , donc $v_{n+1} \\geq$ ___ .",
+                "question_type": "select",
+                "explanation": "Étape 3 — Hériter : de $v_n \\geq 4$ on tire $v_n + 4 \\geq 8$. En divisant par $2 > 0$, $v_{n+1} = \\dfrac{v_n + 4}{2} \\geq \\dfrac{8}{2} = 4$. La proposition $4$ pour la première case oublie d'ajouter 4 ; la proposition $8$ pour la seconde oublie de diviser par 2.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "16",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "8",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "2",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "On additionne 4 aux deux membres, puis on divise par 2."
+              },
+              {
+                "content": "Quelle est la conclusion correcte de cette démonstration ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : l'initialisation ($v_0 \\geq 4$) et l'hérédité ($v_n \\geq 4$ entraîne $v_{n+1} \\geq 4$) sont démontrées, donc $v_n \\geq 4$ pour tout $n \\geq 0$. Vérifier seulement $v_0$ ne suffit pas (étape 3 manquante), et la récurrence ne s'arrête pas à $n = 1$.",
+                "answers": [
+                  {
+                    "content": "Par récurrence, $v_n \\geq 4$ pour tout entier $n \\geq 0$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Comme $v_0 \\geq 4$, on a $v_n \\geq 4$ pour tout $n$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Par récurrence, $v_n \\geq 4$ seulement pour $n = 0$ et $n = 1$.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Suites arithmétiques et suites géométriques",
+          "remember": "**Suite arithmétique** de raison $r$ : $u_{n+1} = u_n + r$, donc $u_n = u_0 + nr$ (et $u_n = u_p + (n-p)\\,r$). **Suite géométrique** de raison $q$ : $u_{n+1} = q\\,u_n$, donc $u_n = u_0\\,q^n$ (et $u_n = u_p\\,q^{n-p}$). Somme de termes consécutifs. Arithmétique : $S = (\\text{nombre de termes}) \\times \\dfrac{\\text{premier terme} + \\text{dernier terme}}{2}$. Géométrique de raison $q \\neq 1$ : $S = \\text{premier terme} \\times \\dfrac{1 - q^{\\,\\text{nombre de termes}}}{1 - q}$. De $u_0$ à $u_n$, il y a $n + 1$ termes.",
+          "method": [
+            "Reconnaître la nature de la suite : calculer $u_{n+1} - u_n$ (constante $r$ : arithmétique) ou $\\dfrac{u_{n+1}}{u_n}$ (constante $q$ : géométrique).",
+            "Identifier le premier terme $u_0$ et la raison $r$ ou $q$.",
+            "Écrire le terme général : $u_n = u_0 + nr$ ou $u_n = u_0\\,q^n$.",
+            "Calculer le terme demandé en remplaçant $n$ par sa valeur.",
+            "Calculer la somme avec la formule adaptée, après avoir compté le nombre de termes."
+          ],
+          "example": {
+            "statement": "Dans une tontine, Kouadio verse 2 000 FCFA le premier mois (mois 0), puis 500 FCFA de plus chaque mois. Il verse $u_n$ FCFA au mois $n$. Calculer son versement du mois 11 et le total versé du mois 0 au mois 11.",
+            "steps": [
+              "Reconnaître : $u_{n+1} - u_n = 500$ est constant, donc la suite est arithmétique.",
+              "Identifier : le premier terme est $u_0 = 2000$ et la raison est $r = 500$.",
+              "Écrire : $u_n = 2000 + 500n$.",
+              "Calculer : $u_{11} = 2000 + 500 \\times 11 = 7500$ FCFA.",
+              "Calculer la somme : de $u_0$ à $u_{11}$ il y a $12$ termes, donc $S = 12 \\times \\dfrac{2000 + 7500}{2} = 12 \\times 4750 = 57\\,000$ FCFA."
+            ]
+          },
+          "pitfall": "Ne pas se tromper sur le nombre de termes : de $u_0$ à $u_n$, il y a $n + 1$ termes, pas $n$. Contre-exemple : pour $u_n = 3 + 2n$, $u_0 + u_1 + u_2 + u_3 + u_4 = 3 + 5 + 7 + 9 + 11 = 35$. La formule avec 5 termes donne $5 \\times \\dfrac{3 + 11}{2} = 35$ ; avec 4 termes on trouverait $4 \\times 7 = 28$, faux. Compte toujours : (dernier indice) − (premier indice) + 1.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer avec les suites arithmétiques et géométriques",
+            "statement": "Dans cet exercice, tu suis la méthode de la fiche : reconnaître la nature de la suite, identifier, écrire le terme général, calculer un terme puis une somme.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Les nombres $3,\\ 6,\\ 12,\\ 24$ sont les quatre premiers termes d'une suite. Quelle est sa nature ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : les différences $6 - 3 = 3$, $12 - 6 = 6$, $24 - 12 = 12$ ne sont pas constantes, donc la suite n'est pas arithmétique. Les quotients $\\dfrac{6}{3} = \\dfrac{12}{6} = \\dfrac{24}{12} = 2$ sont constants. Étape 2 — Identifier : la suite est géométrique de raison $q = 2$ et de premier terme $3$. La proposition « arithmétique de raison 3 » ne regarde que la première différence.",
+                "answers": [
+                  {
+                    "content": "Géométrique de raison $2$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Arithmétique de raison $3$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Arithmétique de raison $6$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni arithmétique ni géométrique.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces suites définies pour $n \\geq 0$, lesquelles sont arithmétiques ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Reconnaître, en calculant $u_{n+1} - u_n$. Pour $u_n = 5n - 2$ : $5(n+1) - 2 - (5n - 2) = 5$, constant : arithmétique de raison $5$. Pour $t_n = 4 - n$ : différence $-1$ : arithmétique de raison $-1$. Pour $v_n = 3 \\times 2^n$ : le quotient est constant ($2$), c'est une suite géométrique. Pour $w_n = n^2$ : la différence est $2n + 1$, elle change avec $n$.",
+                "answers": [
+                  {
+                    "content": "$u_n = 5n - 2$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$v_n = 3 \\times 2^n$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$w_n = n^2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$t_n = 4 - n$",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une suite arithmétique a pour premier terme $u_0 = 7$ et pour raison $r = 4$. Calcule $u_{10}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : la suite est arithmétique, de raison $r = 4$. Étape 2 — Identifier : $u_0 = 7$. Étape 3 — Écrire : $u_n = 7 + 4n$. Étape 4 — Calculer : $u_{10} = 7 + 4 \\times 10 = 47$.",
+                "answers": [
+                  {
+                    "content": "47",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une suite géométrique a pour premier terme $u_0 = 5$ et pour raison $q = 2$. Calcule $u_6$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : la suite est géométrique, de raison $q = 2$. Étape 2 — Identifier : $u_0 = 5$. Étape 3 — Écrire : $u_n = 5 \\times 2^n$. Étape 4 — Calculer : $u_6 = 5 \\times 2^6 = 5 \\times 64 = 320$. Piège : $(5 \\times 2)^6$ serait faux, seul $2$ est élevé à la puissance.",
+                "answers": [
+                  {
+                    "content": "320",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une épargne mobile money reçoit un dépôt de $u_n = 1000 + 250n$ FCFA au mois $n$. Calcule le total déposé du mois 0 au mois 7, en FCFA.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : $u_{n+1} - u_n = 250$, la suite est arithmétique. Étape 2 — Identifier : $u_0 = 1000$ et $r = 250$. Étape 3 — Écrire : $u_n = 1000 + 250n$. Étape 4 — Calculer le dernier terme : $u_7 = 1000 + 250 \\times 7 = 2750$. Étape 5 — Calculer la somme : du mois 0 au mois 7 il y a $8$ termes, donc $S = 8 \\times \\dfrac{1000 + 2750}{2} = 8 \\times 1875 = 15000$.",
+                "answers": [
+                  {
+                    "content": "15000",
+                    "correct": true
+                  }
+                ],
+                "unit": "FCFA"
+              },
+              {
+                "content": "Une suite géométrique a pour premier terme $u_0 = 2$ et pour raison $q = 3$. Calcule $u_0 + u_1 + u_2 + u_3 + u_4$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : suite géométrique de raison $q = 3 \\neq 1$. Étape 2 — Identifier : $u_0 = 2$. Étape 3 — Écrire : $u_n = 2 \\times 3^n$. Étape 4 — Calculer les termes : $2,\\ 6,\\ 18,\\ 54,\\ 162$. Étape 5 — Calculer la somme : de $u_0$ à $u_4$ il y a $5$ termes, donc $S = 2 \\times \\dfrac{1 - 3^5}{1 - 3} = 2 \\times \\dfrac{-242}{-2} = 242$. Contrôle : $2 + 6 + 18 + 54 + 162 = 242$.",
+                "answers": [
+                  {
+                    "content": "242",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Pour $u_n = 3 + 2n$, que vaut $u_0 + u_1 + \\dots + u_9$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : $u_{n+1} - u_n = 2$, suite arithmétique. Étape 2 — Identifier : $u_0 = 3$, $r = 2$. Étape 3 — Écrire : $u_n = 3 + 2n$. Étape 4 — Calculer : $u_9 = 3 + 18 = 21$. Étape 5 — Calculer la somme : de $u_0$ à $u_9$ il y a $10$ termes (pas $9$), donc $S = 10 \\times \\dfrac{3 + 21}{2} = 120$. La proposition $108$ compte $9$ termes ; $240$ oublie de diviser par $2$.",
+                "answers": [
+                  {
+                    "content": "$120$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$108$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$240$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Une éleveuse démarre son élevage avec 20 poulets. Chaque mois, l'effectif double. On note $p_n$ l'effectif au bout de $n$ mois, donc $p_0 = 20$.",
+            "questions": [
+              {
+                "content": "Calcule $p_3 =$ ___ et $p_5 =$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : l'effectif double, donc $p_{n+1} = 2\\,p_n$ : suite géométrique. Étape 2 — Identifier : $p_0 = 20$ et $q = 2$. Étape 3 — Écrire : $p_n = 20 \\times 2^n$. Étape 4 — Calculer : $p_3 = 20 \\times 8 = 160$ et $p_5 = 20 \\times 32 = 640$.",
+                "answers": [
+                  {
+                    "content": "160",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "640",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le terme général est $p_n = 20 \\times 2^n$."
+              },
+              {
+                "content": "Calcule $p_0 + p_1 + p_2 + p_3 + p_4$, le total des effectifs de ces 5 mois.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Reconnaître : suite géométrique de raison $q = 2 \\neq 1$. Étape 2 — Identifier : $p_0 = 20$. Étape 3 — Écrire : $p_n = 20 \\times 2^n$. Étape 4 — Calculer les termes : $20,\\ 40,\\ 80,\\ 160,\\ 320$. Étape 5 — Calculer la somme : $5$ termes, donc $S = 20 \\times \\dfrac{1 - 2^5}{1 - 2} = 20 \\times 31 = 620$.",
+                "answers": [
+                  {
+                    "content": "620",
+                    "correct": true
+                  }
+                ],
+                "hint": "Il y a 5 termes, de $p_0$ à $p_4$. Utilise $\\text{premier terme} \\times \\dfrac{1 - q^5}{1 - q}$."
+              },
+              {
+                "content": "Un autre élevage compte 50 poulets au départ et gagne 15 poulets chaque mois. Quel est l'effectif $u_8$ après 8 mois ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Reconnaître : on ajoute $15$ chaque mois, suite arithmétique de raison $15$. Étape 2 — Identifier : $u_0 = 50$. Étape 3 — Écrire : $u_n = 50 + 15n$. Étape 4 — Calculer : $u_8 = 50 + 15 \\times 8 = 170$. La proposition $120$ oublie l'effectif de départ ; $185$ calcule $u_9$.",
+                "answers": [
+                  {
+                    "content": "$170$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$120$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$185$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Sens de variation, suites majorées et minorées",
+          "remember": "Une suite $(u_n)$ est **croissante** si $u_{n+1} - u_n \\geq 0$ pour tout $n$, **décroissante** si $u_{n+1} - u_n \\leq 0$ pour tout $n$. Si tous ses termes sont strictement positifs, on peut aussi comparer $\\dfrac{u_{n+1}}{u_n}$ à $1$. Elle est **majorée** s'il existe un réel $M$ tel que $u_n \\leq M$ pour tout $n$, **minorée** s'il existe un réel $m$ tel que $u_n \\geq m$ pour tout $n$, et **bornée** si elle est majorée et minorée. Une suite croissante est minorée par son premier terme ; une suite décroissante est majorée par son premier terme. Une suite arithmétique de raison $r > 0$ est croissante ; une suite géométrique de premier terme strictement positif ($u_0 > 0$) est croissante si $q > 1$ et décroissante si $0 < q < 1$.",
+          "method": [
+            "Écrire la différence $u_{n+1} - u_n$ en remplaçant $u_n$ et $u_{n+1}$ par leurs expressions.",
+            "Simplifier cette différence et étudier son signe pour tout entier $n$.",
+            "Conclure sur le sens de variation : croissante si la différence est positive, décroissante si elle est négative.",
+            "Déterminer un majorant et un minorant (le premier terme pour une suite monotone, un signe pour l'autre), puis conclure : bornée si les deux existent."
+          ],
+          "example": {
+            "statement": "La population d'une ville, en centaines de milliers d'habitants, est modélisée par $u_n = 5 - \\dfrac{3}{n+1}$ ($n$ années après 2025). Étudier le sens de variation de $(u_n)$ et dire si elle est bornée.",
+            "steps": [
+              "Écrire : $u_{n+1} - u_n = \\left(5 - \\dfrac{3}{n+2}\\right) - \\left(5 - \\dfrac{3}{n+1}\\right)$.",
+              "Simplifier : $u_{n+1} - u_n = \\dfrac{3}{n+1} - \\dfrac{3}{n+2} = \\dfrac{3}{(n+1)(n+2)} > 0$ pour tout $n \\geq 0$.",
+              "Conclure : la différence est strictement positive, donc $(u_n)$ est croissante.",
+              "Déterminer les bornes : $\\dfrac{3}{n+1} > 0$ donc $u_n < 5$ (majorée par $5$) ; croissante donc $u_n \\geq u_0 = 2$ (minorée par $2$). Elle est bornée : $2 \\leq u_n < 5$."
+            ]
+          },
+          "pitfall": "Ne pas conclure sur le sens de variation à partir des premiers termes. Contre-exemple : pour $u_n = (n-2)^2$, on a $u_0 = 4$, $u_1 = 1$, $u_2 = 0$, $u_3 = 1$, $u_4 = 4$. Avec $u_0 > u_1$ on croirait la suite décroissante, mais elle remonte ensuite : elle n'est pas monotone. Seul le signe de $u_{n+1} - u_n$ pour tout $n$ permet de conclure. Ne confonds pas non plus croissante et non majorée : $u_n = 5 - \\dfrac{3}{n+1}$ est croissante et pourtant majorée par $5$.",
+          "figure": "suite-croissante-majoree",
+          "exercise": {
+            "title": "Étudier le sens de variation et les bornes",
+            "statement": "Dans cet exercice, tu suis la méthode de la fiche : écrire la différence, la simplifier, conclure sur le sens de variation, puis chercher des bornes.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pour $u_n = 2n^2 + n$, que vaut $u_{n+1} - u_n$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $u_{n+1} = 2(n+1)^2 + (n+1) = 2n^2 + 4n + 2 + n + 1 = 2n^2 + 5n + 3$, donc $u_{n+1} - u_n = 2n^2 + 5n + 3 - (2n^2 + n)$. Étape 2 — Simplifier : $u_{n+1} - u_n = 4n + 3$. Étape 3 — Conclure : cette différence est strictement positive pour tout $n \\geq 0$, donc la suite est croissante. La proposition $4n + 2$ oublie de remplacer $n$ par $n + 1$ dans le terme $n$ ; $2n + 1$ ne garde que $(n+1)^2 - n^2$ : il oublie le terme $2(n+1) - 2n$.",
+                "answers": [
+                  {
+                    "content": "$4n + 3$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4n + 2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$2n + 1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quel est le sens de variation de la suite $u_n = 4 \\times (0{,}5)^n$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $u_{n+1} - u_n = 4\\,(0{,}5)^{n+1} - 4\\,(0{,}5)^n$. Étape 2 — Simplifier : $= 4\\,(0{,}5)^n\\,(0{,}5 - 1) = -2\\,(0{,}5)^n < 0$ pour tout $n$. Étape 3 — Conclure : la suite est décroissante. C'est une suite géométrique de premier terme $4 > 0$ et de raison $0 < q < 1$. Elle est donc majorée par $u_0 = 4$ et minorée par $0$.",
+                "answers": [
+                  {
+                    "content": "Décroissante",
+                    "correct": true
+                  },
+                  {
+                    "content": "Croissante",
+                    "correct": false
+                  },
+                  {
+                    "content": "Constante",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ni croissante ni décroissante",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour $v_n = 4 + \\dfrac{2}{n+1}$ ($n \\geq 0$), quelles sont les deux affirmations vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Écrire : $v_{n+1} - v_n = \\dfrac{2}{n+2} - \\dfrac{2}{n+1}$. Étape 2 — Simplifier : $= \\dfrac{-2}{(n+1)(n+2)} < 0$. Étape 3 — Conclure : $(v_n)$ est décroissante. Étape 4 — Déterminer les bornes : $\\dfrac{2}{n+1} > 0$ donc $v_n > 4$ : minorée par $4$ ; décroissante donc $v_n \\leq v_0 = 6$ : majorée par $6$. Elle n'est pas majorée par $3$, puisque $v_0 = 6$.",
+                "answers": [
+                  {
+                    "content": "$(v_n)$ est décroissante.",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(v_n)$ est croissante.",
+                    "correct": false
+                  },
+                  {
+                    "content": "$(v_n)$ est minorée par $4$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "$(v_n)$ est majorée par $3$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La suite $w_n = 10 - \\dfrac{6}{n+1}$ est croissante. Elle est donc minorée par son premier terme. Calcule ce minorant $w_0$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : $w_{n+1} - w_n = \\dfrac{6}{n+1} - \\dfrac{6}{n+2} = \\dfrac{6}{(n+1)(n+2)} > 0$. Étape 2 — Simplifier : la différence est strictement positive. Étape 3 — Conclure : $(w_n)$ est croissante. Étape 4 — Déterminer le minorant : $w_n \\geq w_0 = 10 - \\dfrac{6}{1} = 4$. Elle est aussi majorée par $10$, donc bornée.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La suite $u_n = (-1)^n$ est bornée.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $u_{n+1} - u_n = (-1)^{n+1} - (-1)^n = -2\\,(-1)^n$. Étape 2 — Simplifier : ce signe alterne. Étape 3 — Conclure : la suite n'est ni croissante ni décroissante, mais cela n'empêche pas d'être bornée. Étape 4 — Déterminer les bornes : tous ses termes valent $1$ ou $-1$, donc $-1 \\leq u_n \\leq 1$ : elle est majorée par $1$ et minorée par $-1$, donc bornée.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La suite $u_n = (n-2)^2$ est décroissante, car $u_0 = 4 > u_1 = 1$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Écrire : $u_{n+1} - u_n = (n-1)^2 - (n-2)^2$. Étape 2 — Simplifier : $= 2n - 3$. Cette différence est négative pour $n = 0$ et $n = 1$, mais positive dès $n = 2$. Étape 3 — Conclure : la suite n'est pas décroissante. Elle l'est jusqu'à $u_2 = 0$, puis elle croît : $u_3 = 1$, $u_4 = 4$. Deux termes ne suffisent jamais pour conclure.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "La suite $(a_n)$ est définie, pour $n \\geq 0$, par $a_n = 2 + \\dfrac{6}{n+2}$.",
+            "questions": [
+              {
+                "content": "Calcule $a_0 =$ ___ et $a_1 =$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Écrire : on remplace $n$ par $0$ puis par $1$ dans $a_n = 2 + \\dfrac{6}{n+2}$. Étape 2 — Calculer : $a_0 = 2 + \\dfrac{6}{2} = 5$ et $a_1 = 2 + \\dfrac{6}{3} = 4$. Les premiers termes baissent, mais seul le signe de $a_{n+1} - a_n$ permet de conclure pour tout $n$.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Remplace $n$ par la valeur demandée, puis calcule la fraction."
+              },
+              {
+                "content": "Quel est le sens de variation de $(a_n)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Écrire : $a_{n+1} - a_n = \\dfrac{6}{n+3} - \\dfrac{6}{n+2}$. Étape 2 — Simplifier avec le dénominateur commun : $= \\dfrac{6(n+2) - 6(n+3)}{(n+2)(n+3)} = \\dfrac{-6}{(n+2)(n+3)} < 0$. Étape 3 — Conclure : la suite est décroissante. La proposition « croissante » vient d'une erreur de signe en soustrayant les fractions.",
+                "answers": [
+                  {
+                    "content": "Décroissante, car $a_{n+1} - a_n = -\\dfrac{6}{(n+2)(n+3)} < 0$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Croissante, car $a_{n+1} - a_n = \\dfrac{6}{(n+2)(n+3)} > 0$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Constante, car $a_n$ ne dépend que de $2$.",
+                    "correct": false
+                  }
+                ],
+                "hint": "Réduis au même dénominateur $\\dfrac{6}{n+3} - \\dfrac{6}{n+2}$ et regarde le signe du numérateur."
+              },
+              {
+                "content": "Le plus grand minorant entier de $(a_n)$ est ___ et son plus petit majorant entier est ___ .",
+                "question_type": "select",
+                "explanation": "Étape 4 — Déterminer les bornes : $\\dfrac{6}{n+2} > 0$ donc $a_n > 2$ : $2$ est un minorant, et $3$ n'en est pas un car $a_n$ passe sous $3$ dès que $\\dfrac{6}{n+2} < 1$, c'est-à-dire $n \\geq 5$. La suite étant décroissante, $a_n \\leq a_0 = 5$ : $5$ est un majorant, et c'est le plus petit entier possible car $a_0 = 5$ est atteint. Le minorant $0$ est correct mais pas le plus grand.",
+                "answers": [
+                  {
+                    "content": "0",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "2",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "3",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "8",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un minorant $m$ vérifie $a_n \\geq m$ pour tout $n$ : aucun terme ne descend sous $m$. Compare avec $a_0$ pour le majorant."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Convergence d'une suite et calcul de limites",
+          "remember": "Une suite **converge** vers un réel $\\ell$ si ses termes deviennent aussi proches de $\\ell$ que l'on veut à partir d'un certain rang ; on écrit $\\lim u_n = \\ell$. Sinon elle **diverge**. Limites usuelles : $\\lim \\dfrac{1}{n} = 0$ ; $\\lim q^n = 0$ si $-1 < q < 1$, $\\lim q^n = +\\infty$ si $q > 1$, et $q^n$ n'a pas de limite si $q \\leq -1$. Les opérations sur les limites sont celles des fonctions. **Gendarmes** : si $u_n \\leq v_n \\leq w_n$ et $\\lim u_n = \\lim w_n = \\ell$, alors $\\lim v_n = \\ell$. **Comparaison** : si $u_n \\leq v_n$ et $\\lim u_n = +\\infty$, alors $\\lim v_n = +\\infty$. **Suite monotone** : une suite croissante et majorée converge ; une suite décroissante et minorée converge.",
+          "method": [
+            "Identifier la forme de $u_n$ et repérer les termes en $q^n$ ou en $\\dfrac{1}{n}$.",
+            "Donner la limite de chaque terme avec les limites usuelles.",
+            "Lever une éventuelle forme indéterminée en factorisant le terme dominant.",
+            "Appliquer les opérations sur les limites ; si le calcul est impossible, encadrer $u_n$ (gendarmes) ou utiliser « monotone et bornée ».",
+            "Conclure : une limite réelle donne une suite convergente ; une limite infinie ou l'absence de limite donne une suite divergente."
+          ],
+          "example": {
+            "statement": "Le nombre de clients d'un service mobile money (en milliers) est modélisé par $u_n = \\dfrac{5 \\times 3^n + 2}{3^n + 1}$. Étudier la convergence de $(u_n)$.",
+            "steps": [
+              "Identifier : $u_n$ est un quotient où apparaît $3^n$, avec $3 > 1$.",
+              "Limites usuelles : $3^n \\to +\\infty$, donc numérateur et dénominateur tendent vers $+\\infty$ : forme indéterminée $\\dfrac{\\infty}{\\infty}$.",
+              "Lever l'indétermination : on factorise $3^n$, ce qui donne $u_n = \\dfrac{5 + 2\\left(\\frac{1}{3}\\right)^n}{1 + \\left(\\frac{1}{3}\\right)^n}$, avec $\\left(\\frac{1}{3}\\right)^n \\to 0$ car $-1 < \\frac{1}{3} < 1$.",
+              "Appliquer les opérations : le numérateur tend vers $5$ et le dénominateur vers $1$, donc $u_n \\to \\dfrac{5}{1} = 5$.",
+              "Conclure : la limite est le réel $5$, donc $(u_n)$ converge vers $5$."
+            ]
+          },
+          "pitfall": "Ne pas croire qu'une suite croissante et majorée par $M$ converge vers $M$. Elle converge, mais sa limite est seulement inférieure ou égale à $M$. Contre-exemple : $u_n = 2 - \\dfrac{1}{n+1}$ est croissante et majorée par $5$, mais sa limite est $2$, pas $5$. Pour trouver la limite, on la calcule. Rappel : $(-2)^n$ n'a pas de limite, car ses termes changent de signe en grandissant.",
+          "figure": null,
+          "exercise": {
+            "title": "Calculer une limite et étudier la convergence",
+            "statement": "Dans cet exercice, tu suis la méthode de la fiche : identifier la forme, donner les limites usuelles, lever l'indétermination, appliquer les opérations, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Que vaut $\\lim_{n \\to +\\infty} (0{,}8)^n$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : $(0{,}8)^n$ est de la forme $q^n$ avec $q = 0{,}8$. Étape 2 — Limite usuelle : comme $-1 < 0{,}8 < 1$, $q^n \\to 0$. Étape 5 — Conclure : la suite converge vers $0$. La proposition $+\\infty$ confond avec le cas $q > 1$ ; $0{,}8$ confond la raison avec la limite.",
+                "answers": [
+                  {
+                    "content": "$0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0{,}8$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Calcule $\\lim_{n \\to +\\infty} \\dfrac{4n + 1}{n + 3}$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : quotient de deux termes en $n$. Étape 2 — Limites usuelles : numérateur et dénominateur tendent vers $+\\infty$, forme indéterminée. Étape 3 — Lever l'indétermination en factorisant $n$ : $\\dfrac{4n + 1}{n + 3} = \\dfrac{4 + \\frac{1}{n}}{1 + \\frac{3}{n}}$. Étape 4 — Appliquer les opérations : $\\dfrac{1}{n} \\to 0$ et $\\dfrac{3}{n} \\to 0$, donc la limite est $\\dfrac{4}{1} = 4$. Étape 5 — Conclure : la suite converge vers $4$.",
+                "answers": [
+                  {
+                    "content": "4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Que vaut $\\lim_{n \\to +\\infty} \\left(2^n - 3^n\\right)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : une différence de deux termes en $q^n$ avec $q > 1$. Étape 2 — Limites usuelles : $2^n \\to +\\infty$ et $3^n \\to +\\infty$, forme indéterminée $\\infty - \\infty$. Étape 3 — Lever l'indétermination en factorisant $3^n$ : $2^n - 3^n = 3^n\\left(\\left(\\frac{2}{3}\\right)^n - 1\\right)$, avec $\\left(\\frac{2}{3}\\right)^n \\to 0$. Étape 4 — Appliquer : le facteur entre parenthèses tend vers $-1$ et $3^n \\to +\\infty$, donc le produit tend vers $-\\infty$. Étape 5 — Conclure : la suite diverge.",
+                "answers": [
+                  {
+                    "content": "$-\\infty$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Que vaut la limite de $u_n = \\dfrac{(-1)^n}{n}$ pour $n \\geq 1$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Identifier : le numérateur $(-1)^n$ vaut $1$ ou $-1$. Étape 2 — Limites usuelles : $\\dfrac{1}{n} \\to 0$. Étape 3 — Le calcul direct est impossible, on encadre. Étape 4 — Gendarmes : $-1 \\leq (-1)^n \\leq 1$ donne $-\\dfrac{1}{n} \\leq u_n \\leq \\dfrac{1}{n}$, et les deux bornes tendent vers $0$. Étape 5 — Conclure : $u_n \\to 0$, la suite converge. L'oscillation du numérateur est écrasée par le dénominateur.",
+                "answers": [
+                  {
+                    "content": "$1$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle n'a pas de limite, car $(-1)^n$ oscille.",
+                    "correct": false
+                  },
+                  {
+                    "content": "$-1$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Parmi ces suites, lesquelles sont convergentes ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Identifier chaque forme. Étape 2 — Limites usuelles. $(-0{,}9)^n \\to 0$ car $-1 < -0{,}9 < 1$ : convergente. $3 + \\dfrac{1}{n} \\to 3$ : convergente. $(1{,}2)^n \\to +\\infty$ car $1{,}2 > 1$ : divergente. $(-2)^n$ n'a pas de limite car $q \\leq -1$ : divergente. Étape 5 — Conclure : seules $(v_n)$ et $(w_n)$ convergent.",
+                "answers": [
+                  {
+                    "content": "$u_n = (1{,}2)^n$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$v_n = (-0{,}9)^n$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$w_n = 3 + \\dfrac{1}{n}$ pour $n \\geq 1$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$t_n = (-2)^n$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une suite croissante et majorée par $10$ converge vers $10$.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Utiliser « monotone et bornée » : une suite croissante et majorée converge, mais vers une limite $\\ell \\leq 10$ qu'il faut calculer. Contre-exemple : $u_n = 2 - \\dfrac{1}{n+1}$ est croissante, majorée par $10$, et converge vers $2$. Étape 5 — Conclure : l'affirmation est fausse. Un majorant n'est pas la limite.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Le taux d'un médicament dans le sang (en mg/L) est modélisé, $n$ heures après la prise, par $c_n = 3 + 12 \\times (0{,}5)^n$.",
+            "questions": [
+              {
+                "content": "Calcule $c_0 =$ ___ et $c_2 =$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $c_n = 3 + 12 \\times (0{,}5)^n$. Étape 2 — Calculer : $c_0 = 3 + 12 \\times 1 = 15$ et $c_2 = 3 + 12 \\times 0{,}25 = 3 + 3 = 6$. Le taux baisse déjà de $15$ à $6$ mg/L en deux heures.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "6",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Remplace $n$ par $0$ puis par $2$ et rappelle-toi que $(0{,}5)^0 = 1$."
+              },
+              {
+                "content": "Calcule la limite de $(c_n)$ quand $n \\to +\\infty$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Identifier : $c_n = 3 + 12\\,(0{,}5)^n$, avec un terme en $q^n$. Étape 2 — Limite usuelle : $0 < 0{,}5 < 1$ donc $(0{,}5)^n \\to 0$. Étape 4 — Appliquer : $c_n \\to 3 + 12 \\times 0 = 3$. Étape 5 — Conclure : la suite converge vers $3$ mg/L.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "hint": "$q^n \\to 0$ lorsque $-1 < q < 1$."
+              },
+              {
+                "content": "La suite $(c_n)$ est ___ et ___ par 3, donc elle converge.",
+                "question_type": "select",
+                "explanation": "Étape 4 — Utiliser « monotone et bornée ». $c_{n+1} - c_n = 12\\,(0{,}5)^n\\,(0{,}5 - 1) = -6\\,(0{,}5)^n < 0$ : la suite est décroissante. Comme $12\\,(0{,}5)^n > 0$, on a $c_n > 3$ : elle est minorée par $3$. Une suite décroissante et minorée converge. Étape 5 — Conclure : elle converge, ici vers $3$. Cette suite n'est pas majorée par $3$ : $c_0 = 15$.",
+                "answers": [
+                  {
+                    "content": "décroissante",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "croissante",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "constante",
+                    "correct": false,
+                    "blank": 0
+                  },
+                  {
+                    "content": "minorée",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "majorée",
+                    "correct": false,
+                    "blank": 1
+                  },
+                  {
+                    "content": "non majorée",
+                    "correct": false,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Étudie le signe de $c_{n+1} - c_n$, puis compare $c_n$ à 3."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Suites définies par une relation de récurrence affine",
+          "remember": "Soit $(u_n)$ définie par $u_{n+1} = a\\,u_n + b$ avec $a \\neq 0$ et $a \\neq 1$. Le réel $\\ell$ qui vérifie $\\ell = a\\ell + b$, soit $\\ell = \\dfrac{b}{1 - a}$, est le **point fixe**. La suite auxiliaire $v_n = u_n - \\ell$ est géométrique de raison $a$ : $v_{n+1} = a\\,v_n$. Donc $v_n = v_0\\,a^n$ et $u_n = \\ell + (u_0 - \\ell)\\,a^n$. Si $-1 < a < 1$, alors $a^n \\to 0$ et $u_n \\to \\ell$. **Passage à la limite** : si $u_{n+1} = f(u_n)$, si $f$ est continue et si $(u_n)$ converge vers $L$, alors $L = f(L)$.",
+          "method": [
+            "Résoudre $\\ell = a\\ell + b$ pour trouver le point fixe $\\ell$.",
+            "Poser $v_n = u_n - \\ell$ et démontrer que $(v_n)$ est géométrique de raison $a$.",
+            "Écrire $v_n = v_0\\,a^n$ après avoir calculé $v_0 = u_0 - \\ell$.",
+            "En déduire l'expression de $u_n = \\ell + v_n$.",
+            "Étudier la limite selon la valeur de $a$, puis conclure."
+          ],
+          "example": {
+            "statement": "Un patient reçoit une perfusion. Chaque heure, son organisme élimine la moitié du médicament présent, et la perfusion apporte 4 mg/L. Le taux vérifie $u_0 = 10$ et $u_{n+1} = \\dfrac{1}{2}\\,u_n + 4$. Exprimer $u_n$ et étudier sa limite.",
+            "steps": [
+              "Résoudre : $\\ell = \\dfrac{1}{2}\\,\\ell + 4$ donne $\\dfrac{1}{2}\\,\\ell = 4$, donc $\\ell = 8$.",
+              "Poser : $v_n = u_n - 8$. Alors $v_{n+1} = \\dfrac{1}{2}\\,u_n + 4 - 8 = \\dfrac{1}{2}\\,(u_n - 8) = \\dfrac{1}{2}\\,v_n$ : $(v_n)$ est géométrique de raison $\\dfrac{1}{2}$.",
+              "Écrire : $v_0 = u_0 - 8 = 2$, donc $v_n = 2 \\left(\\dfrac{1}{2}\\right)^n$.",
+              "En déduire : $u_n = 8 + 2 \\left(\\dfrac{1}{2}\\right)^n$.",
+              "Étudier la limite : $-1 < \\dfrac{1}{2} < 1$ donc $\\left(\\dfrac{1}{2}\\right)^n \\to 0$ et $u_n \\to 8$. Conclure : le taux se stabilise à 8 mg/L."
+            ]
+          },
+          "pitfall": "Ne pas poser $v_n = u_n - b$ : la suite auxiliaire se construit avec le point fixe $\\ell$, pas avec $b$. Contre-exemple : pour $u_0 = 10$, $u_{n+1} = 0{,}5\\,u_n + 4$ et $v_n = u_n - 4$, on trouve $v_{n+1} = 0{,}5\\,u_n = 0{,}5\\,(v_n + 4) = 0{,}5\\,v_n + 2$ : ce n'est pas une suite géométrique. Avec $\\ell = 8$ et $v_n = u_n - 8$, on obtient bien $v_{n+1} = 0{,}5\\,v_n$. Calcule donc toujours $\\ell = \\dfrac{b}{1 - a}$ en premier.",
+          "figure": "suite-vers-limite",
+          "exercise": {
+            "title": "Étudier une suite définie par une relation affine",
+            "statement": "Dans cet exercice, tu suis la méthode de la fiche : résoudre pour le point fixe, poser la suite auxiliaire, l'écrire, en déduire la suite, étudier la limite.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Pour la suite définie par $u_{n+1} = 3u_n - 4$, calcule le point fixe $\\ell$ qui vérifie $\\ell = 3\\ell - 4$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Résoudre : $\\ell = 3\\ell - 4$ donne $4 = 2\\ell$, donc $\\ell = 2$. Vérification : $3 \\times 2 - 4 = 2$. Étape 2 — Poser ensuite $v_n = u_n - 2$, qui sera géométrique de raison $3$.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $u_0 = 5$ et $u_{n+1} = 3u_n - 4$. On pose $v_n = u_n - 2$. Quelle est la nature de $(v_n)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Résoudre : le point fixe est $\\ell = 2$ car $2 = 3 \\times 2 - 4$. Étape 2 — Poser : $v_{n+1} = u_{n+1} - 2 = 3u_n - 4 - 2 = 3u_n - 6 = 3\\,(u_n - 2) = 3\\,v_n$. Donc $(v_n)$ est géométrique de raison $3$. Étape 3 — Son premier terme est $v_0 = 5 - 2 = 3$. La raison est le coefficient $a = 3$, pas le point fixe $2$.",
+                "answers": [
+                  {
+                    "content": "Arithmétique de raison $-2$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Géométrique de raison $3$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Géométrique de raison $2$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Arithmétique de raison $3$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Pour $u_0 = 5$ et $u_{n+1} = 3u_n - 4$, on a $u_n = 2 + 3 \\times 3^n$. Calcule $u_3$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Résoudre : $\\ell = 2$. Étape 2 — Poser : $v_n = u_n - 2$ est géométrique de raison $3$. Étape 3 — Écrire : $v_0 = 3$, donc $v_n = 3 \\times 3^n$. Étape 4 — En déduire : $u_n = 2 + 3 \\times 3^n$, donc $u_3 = 2 + 3 \\times 27 = 83$. Contrôle par la récurrence : $u_1 = 11$, $u_2 = 29$, $u_3 = 3 \\times 29 - 4 = 83$.",
+                "answers": [
+                  {
+                    "content": "83",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $w_0 = 12$ et $w_{n+1} = \\dfrac{1}{3}\\,w_n + 4$. Quelle est la limite de $(w_n)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Résoudre : $\\ell = \\dfrac{1}{3}\\,\\ell + 4$ donne $\\dfrac{2}{3}\\,\\ell = 4$, donc $\\ell = 6$. Étape 2 — Poser : $v_n = w_n - 6$ est géométrique de raison $\\dfrac{1}{3}$. Étape 3 — Écrire : $v_0 = 6$, donc $v_n = 6 \\left(\\dfrac{1}{3}\\right)^n$. Étape 4 — En déduire : $w_n = 6 + 6 \\left(\\dfrac{1}{3}\\right)^n$. Étape 5 — Limite : $\\left(\\dfrac{1}{3}\\right)^n \\to 0$, donc $w_n \\to 6$. La proposition $4$ confond avec $b$ ; $12$ avec le premier terme.",
+                "answers": [
+                  {
+                    "content": "$4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$6$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$12$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$0$",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Le solde d'une épargne (en milliers de FCFA) vérifie $u_{n+1} = 0{,}8\\,u_n + 20$. Vers quelle valeur se stabilise-t-il ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Résoudre : $\\ell = 0{,}8\\,\\ell + 20$ donne $0{,}2\\,\\ell = 20$, donc $\\ell = 100$. Étape 2 — Poser : $v_n = u_n - 100$ est géométrique de raison $0{,}8$. Étape 5 — Limite : $-1 < 0{,}8 < 1$ donc $0{,}8^n \\to 0$, et $u_n \\to 100$. Le solde se stabilise à 100 milliers de FCFA.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Soit $u_0 = 10$ et $u_{n+1} = 0{,}5\\,u_n + 4$. On pose $v_n = u_n - 4$. La suite $(v_n)$ est-elle géométrique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Résoudre : le point fixe est $\\ell = 8$, pas $4$. Étape 2 — Poser : avec $v_n = u_n - 4$, on trouve $v_{n+1} = u_{n+1} - 4 = 0{,}5\\,u_n = 0{,}5\\,(v_n + 4) = 0{,}5\\,v_n + 2$. Il reste un terme constant, donc ce n'est pas géométrique (ni arithmétique : $v_{n+1} - v_n$ dépend de $v_n$). La bonne suite auxiliaire est $v_n = u_n - 8$.",
+                "answers": [
+                  {
+                    "content": "Oui, de raison $0{,}5$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : $v_{n+1} = 0{,}5\\,v_n + 2$.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Oui, de raison $4$.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Non : $(v_n)$ est arithmétique de raison $2$.",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si la suite définie par $u_{n+1} = \\dfrac{1}{2}\\,u_n + 4$ converge vers un réel $L$, alors $L = 8$.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Résoudre : le point fixe vérifie $\\ell = \\dfrac{1}{2}\\,\\ell + 4$, d'où $\\dfrac{1}{2}\\,\\ell = 4$ et $\\ell = 8$. Étape 5 — Étudier la limite par passage à la limite : $f(x) = \\dfrac{1}{2}\\,x + 4$ est continue ; si $u_n \\to L$, alors aussi $u_{n+1} \\to L$, donc $L = \\dfrac{1}{2}\\,L + 4$, soit $L = \\ell = 8$.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "La population d'une ville (en dizaines de milliers d'habitants) vérifie $p_0 = 4$ et $p_{n+1} = \\dfrac{3}{4}\\,p_n + 2$.",
+            "questions": [
+              {
+                "content": "Le point fixe est $\\ell =$ ___ et $p_1 =$ ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Résoudre : $\\ell = \\dfrac{3}{4}\\,\\ell + 2$ donne $\\dfrac{1}{4}\\,\\ell = 2$, donc $\\ell = 8$. Calcul de $p_1$ : $p_1 = \\dfrac{3}{4} \\times 4 + 2 = 3 + 2 = 5$. Les étapes suivantes poseront $v_n = p_n - 8$.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "5",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Résous $\\ell = \\dfrac{3}{4}\\,\\ell + 2$, puis remplace $p_0$ dans la formule de récurrence."
+              },
+              {
+                "content": "On pose $v_n = p_n - 8$. Calcule $v_0$.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Résoudre : le point fixe est $\\ell = 8$. Étape 2 — Poser : $v_n = p_n - 8$ est géométrique de raison $\\dfrac{3}{4}$. Étape 3 — Écrire : $v_0 = p_0 - 8 = 4 - 8 = -4$, donc $v_n = -4 \\left(\\dfrac{3}{4}\\right)^n$.",
+                "answers": [
+                  {
+                    "content": "-4",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelle est la limite de $(p_n)$ ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Résoudre : $\\ell = 8$. Étape 2 — Poser : $v_n = p_n - 8$, géométrique de raison $\\dfrac{3}{4}$. Étape 3 — Écrire : $v_n = -4 \\left(\\dfrac{3}{4}\\right)^n$. Étape 4 — En déduire : $p_n = 8 - 4 \\left(\\dfrac{3}{4}\\right)^n$. Étape 5 — Limite : $-1 < \\dfrac{3}{4} < 1$ donc $\\left(\\dfrac{3}{4}\\right)^n \\to 0$ et $p_n \\to 8$. La proposition $2$ confond avec $b$ ; $4$ avec $p_0$.",
+                "answers": [
+                  {
+                    "content": "$2$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$8$",
+                    "correct": true
+                  },
+                  {
+                    "content": "$4$",
+                    "correct": false
+                  },
+                  {
+                    "content": "$+\\infty$",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Les dépôts d'une épargne mobile money",
+          "statement": "Aïcha épargne sur son compte mobile money. En janvier (mois 0), elle dépose 3 000 FCFA, puis chaque mois elle dépose 500 FCFA de plus que le mois précédent. On note $a_n$ le dépôt, en FCFA, du mois $n$ ; ainsi $a_0 = 3000$. Tu appliques les suites arithmétiques, le sens de variation, la limite et la récurrence.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Aïcha dépose $a_0 = 3000$ FCFA, puis $500$ FCFA de plus chaque mois. Quelle est la nature de la suite $(a_n)$ des dépôts ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Reconnaître la nature : chaque mois on ajoute $500$, donc $a_{n+1} - a_n = 500$ est constant. La suite est arithmétique de raison $r = 500$. Étape 2 — Identifier : $a_0 = 3000$. Une suite géométrique multiplierait par un nombre au lieu d'ajouter ; la raison $3000$ est le premier terme, pas la différence.",
+              "answers": [
+                {
+                  "content": "Arithmétique de raison $500$.",
+                  "correct": true
+                },
+                {
+                  "content": "Géométrique de raison $500$.",
+                  "correct": false
+                },
+                {
+                  "content": "Arithmétique de raison $3000$.",
+                  "correct": false
+                },
+                {
+                  "content": "Géométrique de raison $1{,}5$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les dépôts vérifient $a_0 = 3000$ et $a_{n+1} = a_n + 500$. Calcule le dépôt $a_9$ du mois 9, en FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Reconnaître : suite arithmétique de raison $500$. Étape 2 — Identifier : $a_0 = 3000$. Étape 3 — Écrire le terme général : $a_n = 3000 + 500n$. Étape 4 — Calculer : $a_9 = 3000 + 500 \\times 9 = 7500$ FCFA.",
+              "answers": [
+                {
+                  "content": "7500",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Les dépôts sont $a_n = 3000 + 500n$ FCFA. Calcule le total déposé du mois 0 au mois 11 (12 mois), en FCFA.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Reconnaître : suite arithmétique de raison $500$. Étape 2 — Identifier : $a_0 = 3000$. Étape 3 — Écrire : $a_n = 3000 + 500n$. Étape 4 — Calculer le dernier terme : $a_{11} = 3000 + 5500 = 8500$. Étape 5 — Calculer la somme avec la formule : de $a_0$ à $a_{11}$ il y a $12$ termes, donc $S = 12 \\times \\dfrac{3000 + 8500}{2} = 12 \\times 5750 = 69000$ FCFA. Avec $11$ termes on aurait oublié le mois 0.",
+              "answers": [
+                {
+                  "content": "69000",
+                  "correct": true
+                }
+              ],
+              "unit": "FCFA"
+            },
+            {
+              "content": "Les dépôts sont $a_n = 3000 + 500n$ FCFA. Quel est le plus petit entier $n$ tel que $a_n \\geq 10000$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire l'inéquation : $3000 + 500n \\geq 10000$. Étape 2 — Isoler $n$ : $500n \\geq 7000$, donc $n \\geq 14$. Étape 3 — Conclure : le plus petit entier est $n = 14$. Contrôle : $a_{13} = 9500 < 10000$ et $a_{14} = 10000$.",
+              "answers": [
+                {
+                  "content": "14",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les dépôts sont $a_n = 3000 + 500n$ FCFA. Quelle est la limite de $(a_n)$ quand $n \\to +\\infty$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $a_n = 3000 + 500n$ avec un terme en $n$. Étape 2 — Limite usuelle : $n \\to +\\infty$, donc $500n \\to +\\infty$. Étape 4 — Appliquer : $a_n \\to +\\infty$. Étape 5 — Conclure : la suite diverge. Elle est croissante (raison $500 > 0$) et non majorée. La proposition $3000$ confond la limite avec le premier terme.",
+              "answers": [
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$3000$",
+                  "correct": false
+                },
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$500$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour démontrer par récurrence que $a_n \\geq 3000$ pour tout $n$, on suppose dans l'hérédité que $a_n \\geq 3000$. On en déduit $a_{n+1} \\geq$ ___ (la minoration obtenue directement en ajoutant $500$ à $3000$).",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Énoncer : $P(n)$ : « $a_n \\geq 3000$ ». Étape 2 — Initialiser : $a_0 = 3000 \\geq 3000$, vraie. Étape 3 — Hériter : de $a_n \\geq 3000$ on tire $a_n + 500 \\geq 3500$, donc $a_{n+1} \\geq 3500 \\geq 3000$ : $P(n+1)$ est vraie. Étape 4 — Conclure : $a_n \\geq 3000$ pour tout $n$. La valeur cherchée est $3500$.",
+              "answers": [
+                {
+                  "content": "3500",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "L'élevage de poulets d'une coopérative",
+          "statement": "Une coopérative démarre un élevage avec 64 poulets. Grâce aux naissances, l'effectif est multiplié par $1{,}5$ chaque mois, sans vente. On note $p_n$ l'effectif au bout de $n$ mois ; ainsi $p_0 = 64$. Tu appliques les suites géométriques, la somme de termes et la limite.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "L'effectif vérifie $p_0 = 64$ et $p_{n+1} = 1{,}5\\,p_n$. Quelle est la nature de la suite $(p_n)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Reconnaître la nature : $\\dfrac{p_{n+1}}{p_n} = 1{,}5$ est constant, la suite est géométrique de raison $q = 1{,}5$. Étape 2 — Identifier : $p_0 = 64$. L'effectif est multiplié, pas augmenté d'une quantité fixe, donc elle n'est pas arithmétique.",
+              "answers": [
+                {
+                  "content": "Géométrique de raison $1{,}5$.",
+                  "correct": true
+                },
+                {
+                  "content": "Arithmétique de raison $1{,}5$.",
+                  "correct": false
+                },
+                {
+                  "content": "Géométrique de raison $64$.",
+                  "correct": false
+                },
+                {
+                  "content": "Arithmétique de raison $0{,}5$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "L'effectif vérifie $p_0 = 64$ et $p_{n+1} = 1{,}5\\,p_n$. Calcule $p_3$, l'effectif au bout de 3 mois.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Reconnaître : suite géométrique de raison $1{,}5$. Étape 2 — Identifier : $p_0 = 64$. Étape 3 — Écrire : $p_n = 64 \\times 1{,}5^n$. Étape 4 — Calculer : $p_3 = 64 \\times 3{,}375 = 216$. Contrôle terme à terme : $64 \\to 96 \\to 144 \\to 216$.",
+              "answers": [
+                {
+                  "content": "216",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'effectif est $p_n = 64 \\times 1{,}5^n$. Calcule $p_0 + p_1 + p_2 + p_3$, la somme des effectifs des mois 0 à 3.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Reconnaître : suite géométrique de raison $q = 1{,}5 \\neq 1$. Étape 2 — Identifier : $p_0 = 64$. Étape 3 — Écrire : $p_n = 64 \\times 1{,}5^n$. Étape 4 — Calculer les termes : $64,\\ 96,\\ 144,\\ 216$. Étape 5 — Calculer la somme : $4$ termes, donc $S = 64 \\times \\dfrac{1 - 1{,}5^4}{1 - 1{,}5} = 64 \\times \\dfrac{-4{,}0625}{-0{,}5} = 64 \\times 8{,}125 = 520$. Contrôle : $64 + 96 + 144 + 216 = 520$.",
+              "answers": [
+                {
+                  "content": "520",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'effectif est $p_n = 64 \\times 1{,}5^n$. La coopérative a la place pour 500 poulets. Quel est le plus petit entier $n$ tel que $p_n > 500$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire les termes successifs avec $p_{n+1} = 1{,}5\\,p_n$ : $p_3 = 216$, $p_4 = 324$, $p_5 = 486$, $p_6 = 729$. Étape 2 — Comparer à $500$ : $p_5 = 486 < 500$ et $p_6 = 729 > 500$. Étape 3 — Conclure : la suite est croissante, donc le plus petit entier est $n = 6$. Au bout de 6 mois, la capacité est dépassée.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "L'effectif est $p_n = 64 \\times 1{,}5^n$. Quelle est la limite de $(p_n)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Identifier : $p_n = 64 \\times q^n$ avec $q = 1{,}5$. Étape 2 — Limite usuelle : $q > 1$, donc $1{,}5^n \\to +\\infty$. Étape 4 — Appliquer : $p_n \\to +\\infty$ car $64 > 0$. Étape 5 — Conclure : la suite diverge. La proposition $0$ ne vaut que pour $-1 < q < 1$.",
+              "answers": [
+                {
+                  "content": "$0$",
+                  "correct": false
+                },
+                {
+                  "content": "$+\\infty$",
+                  "correct": true
+                },
+                {
+                  "content": "$64$",
+                  "correct": false
+                },
+                {
+                  "content": "$1{,}5$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Pour l'effectif $p_n = 64 \\times 1{,}5^n$, quelles sont les deux affirmations vraies ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 1 — Écrire : $p_{n+1} - p_n = 0{,}5\\,p_n > 0$. Étape 2 — Conclure sur le sens : la suite est croissante. Étape 3 — Déterminer les bornes : croissante, donc $p_n \\geq p_0 = 64$ : minorée par $64$. Elle n'est pas majorée, car $p_6 = 729$ puis $p_7 \\approx 1093$ (le modèle donne $1093{,}5$, valeur approchée du nombre de poulets) dépasse $1000$ ; sa limite est $+\\infty$, donc elle diverge.",
+              "answers": [
+                {
+                  "content": "$(p_n)$ est croissante.",
+                  "correct": true
+                },
+                {
+                  "content": "$(p_n)$ est majorée par $1000$.",
+                  "correct": false
+                },
+                {
+                  "content": "$(p_n)$ est convergente.",
+                  "correct": false
+                },
+                {
+                  "content": "$(p_n)$ est minorée par $64$.",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La population d'une ville qui se stabilise",
+          "statement": "La population d'une ville, en milliers d'habitants, est modélisée par une suite $(u_n)$, où $n$ est le nombre de décennies écoulées depuis l'an 2000. On a $u_0 = 50$ et, pour tout entier $n$, $u_{n+1} = 0{,}8\\,u_n + 20$. Tu combines récurrence, sens de variation, convergence et suite auxiliaire.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une population vérifie $u_0 = 50$ et $u_{n+1} = 0{,}8\\,u_n + 20$ (en milliers d'habitants). Calcule $u_1$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Écrire la relation de récurrence avec $n = 0$ : $u_1 = 0{,}8\\,u_0 + 20$. Étape 2 — Calculer : $u_1 = 0{,}8 \\times 50 + 20 = 40 + 20 = 60$ milliers d'habitants.",
+              "answers": [
+                {
+                  "content": "60",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une population vérifie $u_0 = 50$ et $u_{n+1} = 0{,}8\\,u_n + 20$. On démontre par récurrence que $u_n \\leq 100$. Dans l'hérédité, on suppose $u_n \\leq 100$. Alors $u_{n+1} \\leq 0{,}8 \\times 100 + 20 =$ ___ .",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Énoncer : $P(n)$ : « $u_n \\leq 100$ ». Étape 2 — Initialiser : $u_0 = 50 \\leq 100$. Étape 3 — Hériter : on multiplie $u_n \\leq 100$ par $0{,}8 > 0$, ce qui conserve le sens : $0{,}8\\,u_n \\leq 80$ ; on ajoute $20$ : $u_{n+1} \\leq 100$. Étape 4 — Conclure : $u_n \\leq 100$ pour tout $n$. La valeur cherchée est $100$.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une population vérifie $u_0 = 50$, $u_{n+1} = 0{,}8\\,u_n + 20$ et $u_n \\leq 100$ pour tout $n$. Quel est le sens de variation de $(u_n)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $u_{n+1} - u_n = 0{,}8\\,u_n + 20 - u_n$. Étape 2 — Simplifier : $= 20 - 0{,}2\\,u_n = 0{,}2\\,(100 - u_n)$. Comme $u_n \\leq 100$, cette différence est positive ou nulle. Étape 3 — Conclure : $(u_n)$ est croissante. Le coefficient $0{,}8 < 1$ ne donne pas le sens de variation d'une suite $u_{n+1} = a\\,u_n + b$ avec $b \\neq 0$ ; et $u_2 = 68 \\neq u_1 = 60$, donc la suite n'est pas constante.",
+              "answers": [
+                {
+                  "content": "Croissante, car $u_{n+1} - u_n = 0{,}2\\,(100 - u_n) \\geq 0$.",
+                  "correct": true
+                },
+                {
+                  "content": "Décroissante, car le coefficient $0{,}8$ est inférieur à $1$.",
+                  "correct": false
+                },
+                {
+                  "content": "Constante, car la population se stabilise dès $n = 1$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une population vérifie $u_0 = 50$ et $u_{n+1} = 0{,}8\\,u_n + 20$. Elle est croissante et majorée par $100$. Que peut-on en conclure ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Utiliser le théorème : toute suite croissante et majorée converge. Sa limite est un réel $L \\leq 100$, qu'il reste à calculer. Étape 5 — Conclure : $(u_n)$ converge. La proposition « vers 100 » confond majorant et limite ; la proposition « diverge vers $+\\infty$ » oublie la condition de majoration.",
+              "answers": [
+                {
+                  "content": "Elle converge, car elle est croissante et majorée (théorème de la suite monotone bornée).",
+                  "correct": true
+                },
+                {
+                  "content": "Elle converge vers $100$, car elle est majorée par $100$.",
+                  "correct": false
+                },
+                {
+                  "content": "Elle diverge vers $+\\infty$, car elle est croissante.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "La suite $u_{n+1} = 0{,}8\\,u_n + 20$ converge vers un réel $L$. En passant à la limite, $L = 0{,}8\\,L + 20$. Calcule $L$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Résoudre l'équation du point fixe : $L = 0{,}8\\,L + 20$. Étape 2 — Isoler : $0{,}2\\,L = 20$. Étape 3 — Calculer : $L = \\dfrac{20}{0{,}2} = 100$. La fonction $f(x) = 0{,}8\\,x + 20$ est continue, donc le passage à la limite est légitime. La population se stabilise à $100$ milliers d'habitants.",
+              "answers": [
+                {
+                  "content": "100",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une population vérifie $u_{n+1} = 0{,}8\\,u_n + 20$. On pose $v_n = u_n - 100$. Quelle est la nature de $(v_n)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Résoudre : le point fixe est $100$ car $100 = 0{,}8 \\times 100 + 20$. Étape 2 — Poser : $v_{n+1} = u_{n+1} - 100 = 0{,}8\\,u_n + 20 - 100 = 0{,}8\\,u_n - 80 = 0{,}8\\,(u_n - 100) = 0{,}8\\,v_n$. Donc $(v_n)$ est géométrique de raison $0{,}8$. Étape 3 — Son premier terme est $v_0 = 50 - 100 = -50$. La raison $0{,}2$ vient de $1 - 0{,}8$, et $-50$ est le premier terme.",
+              "answers": [
+                {
+                  "content": "Géométrique de raison $0{,}8$.",
+                  "correct": true
+                },
+                {
+                  "content": "Géométrique de raison $0{,}2$.",
+                  "correct": false
+                },
+                {
+                  "content": "Arithmétique de raison $20$.",
+                  "correct": false
+                },
+                {
+                  "content": "Géométrique de raison $-50$.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On a $u_n = 100 - 50\\,(0{,}8)^n$ (en milliers d'habitants). Calcule $u_2$.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 3 — Écrire : $v_n = -50\\,(0{,}8)^n$ et $u_n = 100 + v_n$. Étape 4 — En déduire et calculer : $u_2 = 100 - 50 \\times 0{,}64 = 100 - 32 = 68$. Contrôle avec la récurrence : $u_1 = 60$ et $u_2 = 0{,}8 \\times 60 + 20 = 68$.",
+              "answers": [
+                {
+                  "content": "68",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le dosage d'un médicament dans le sang",
+          "statement": "Un patient suit un traitement. Chaque jour, son organisme élimine 25 % du médicament présent dans son sang, puis on administre une nouvelle dose qui ajoute 3 mg/L. On note $c_n$ le taux de médicament, en mg/L, juste après la dose du jour $n$ ; le premier jour, $c_0 = 3$. Ainsi $c_{n+1} = 0{,}75\\,c_n + 3$. Le seuil de toxicité est de 12 mg/L et le médicament est efficace à partir de 6 mg/L. Tu modélises, démontres et interprètes, comme au baccalauréat.",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un traitement donne $c_0 = 3$ mg/L et $c_{n+1} = 0{,}75\\,c_n + 3$. Calcule $c_1$, en mg/L.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Modéliser : éliminer $25\\,\\%$ revient à multiplier par $0{,}75$, puis on ajoute $3$ : $c_{n+1} = 0{,}75\\,c_n + 3$. Étape 2 — Calculer : $c_1 = 0{,}75 \\times 3 + 3 = 2{,}25 + 3 = 5{,}25$ mg/L.",
+              "answers": [
+                {
+                  "content": "5,25",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Voici une démonstration pour $c_0 = 3$ et $c_{n+1} = 0{,}75\\,c_n + 3$. Initialisation : $c_0 = 3 \\leq 12$. Hérédité : si $c_n \\leq 12$, alors $c_{n+1} = 0{,}75\\,c_n + 3 \\leq 0{,}75 \\times 12 + 3 = 12$. Conclusion : $c_n \\leq 12$ pour tout $n$. Cette démonstration est correcte.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Énoncer : $P(n)$ : « $c_n \\leq 12$ ». Étape 2 — Initialiser : $c_0 = 3 \\leq 12$, correct. Étape 3 — Hériter : on multiplie $c_n \\leq 12$ par $0{,}75 > 0$, le sens est conservé, puis on ajoute $3$ : $c_{n+1} \\leq 9 + 3 = 12$, correct. Étape 4 — Conclure : par récurrence, $c_n \\leq 12$ pour tout $n$. Les trois parties sont présentes et justes, donc la démonstration est correcte.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le taux vérifie $c_{n+1} = 0{,}75\\,c_n + 3$ et $c_n \\leq 12$ pour tout $n$. Quel est le sens de variation de $(c_n)$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Écrire : $c_{n+1} - c_n = 0{,}75\\,c_n + 3 - c_n$. Étape 2 — Simplifier : $= 3 - 0{,}25\\,c_n = 0{,}25\\,(12 - c_n)$. Comme $c_n \\leq 12$, la différence est positive ou nulle. Étape 3 — Conclure : $(c_n)$ est croissante. Le coefficient $0{,}75 < 1$ seul ne suffit pas : le terme constant $+3$ compte. Vérification : $c_0 = 3 < c_1 = 5{,}25$.",
+              "answers": [
+                {
+                  "content": "Décroissante, car $0{,}75 < 1$.",
+                  "correct": false
+                },
+                {
+                  "content": "Croissante, car $c_{n+1} - c_n = 0{,}25\\,(12 - c_n) \\geq 0$.",
+                  "correct": true
+                },
+                {
+                  "content": "Constante, car $c_{n+1}$ ne dépend que de $c_n$.",
+                  "correct": false
+                },
+                {
+                  "content": "Ni croissante ni décroissante.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le taux vérifie $c_{n+1} = 0{,}75\\,c_n + 3$. Le point fixe $\\ell$ vérifie $\\ell = 0{,}75\\,\\ell + 3$. Calcule $\\ell$, en mg/L.",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Résoudre : $\\ell = 0{,}75\\,\\ell + 3$ donne $0{,}25\\,\\ell = 3$, donc $\\ell = \\dfrac{3}{0{,}25} = 12$. Vérification : $0{,}75 \\times 12 + 3 = 9 + 3 = 12$. Étape 2 — Poser ensuite $v_n = c_n - 12$, géométrique de raison $0{,}75$.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taux vérifie $c_0 = 3$ et $c_{n+1} = 0{,}75\\,c_n + 3$, avec point fixe $\\ell = 12$. Quelle est l'expression de $c_n$ ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Résoudre : $\\ell = 12$. Étape 2 — Poser : $v_n = c_n - 12$. Alors $v_{n+1} = 0{,}75\\,c_n + 3 - 12 = 0{,}75\\,(c_n - 12) = 0{,}75\\,v_n$ : géométrique de raison $\\dfrac{3}{4}$. Étape 3 — Écrire : $v_0 = 3 - 12 = -9$, donc $v_n = -9 \\left(\\dfrac{3}{4}\\right)^n$. Étape 4 — En déduire : $c_n = 12 - 9\\left(\\dfrac{3}{4}\\right)^n$. La proposition avec $+9$ oublie que $v_0$ est négatif ; celle avec $\\dfrac{1}{4}$ prend $1 - a$ pour la raison ; celle qui commence par $3$ utilise $b$ au lieu de $\\ell$.",
+              "answers": [
+                {
+                  "content": "$c_n = 12 - 9\\left(\\dfrac{3}{4}\\right)^n$",
+                  "correct": true
+                },
+                {
+                  "content": "$c_n = 12 + 9\\left(\\dfrac{3}{4}\\right)^n$",
+                  "correct": false
+                },
+                {
+                  "content": "$c_n = 3 + 9\\left(\\dfrac{3}{4}\\right)^n$",
+                  "correct": false
+                },
+                {
+                  "content": "$c_n = 12 - 9\\left(\\dfrac{1}{4}\\right)^n$",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le taux est $c_n = 12 - 9\\left(\\dfrac{3}{4}\\right)^n$ (mg/L). Le médicament est efficace dès que $c_n \\geq 6$. Quel est le plus petit entier $n$ tel que $c_n \\geq 6$ ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Calculer les premiers termes. Étape 2 — Pour $n = 1$ : $c_1 = 12 - 9 \\times \\dfrac{3}{4} = 12 - 6{,}75 = 5{,}25 < 6$. Étape 3 — Pour $n = 2$ : $c_2 = 12 - 9 \\times \\dfrac{9}{16} = 12 - 5{,}0625 = 6{,}9375 \\geq 6$. Étape 4 — Conclure : la suite est croissante, donc le plus petit entier est $n = 2$. Le traitement est efficace dès le troisième jour (jour 2, en comptant depuis le jour 0).",
+              "answers": [
+                {
+                  "content": "2",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Le taux est $c_n = 12 - 9\\left(\\dfrac{3}{4}\\right)^n$ (mg/L). Quelles sont les trois affirmations vraies ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 1 — Écrire : $c_{n+1} - c_n = 9\\left(\\dfrac{3}{4}\\right)^n \\left(1 - \\dfrac{3}{4}\\right) > 0$, donc la suite est croissante. Étape 2 — Déterminer les bornes : $9\\left(\\dfrac{3}{4}\\right)^n > 0$ donc $c_n < 12$ pour tout $n$ : le seuil n'est jamais atteint. Étape 3 — Limite : $-1 < \\dfrac{3}{4} < 1$ donc $\\left(\\dfrac{3}{4}\\right)^n \\to 0$ et $c_n \\to 12$. Étape 4 — Conclure : elle converge vers $12$ sans jamais l'atteindre ; les affirmations « égale 12 un jour » et « tend vers $+\\infty$ » sont fausses.",
+              "answers": [
+                {
+                  "content": "Il existe un jour $n$ où $c_n = 12$.",
+                  "correct": false
+                },
+                {
+                  "content": "$(c_n)$ est croissante.",
+                  "correct": true
+                },
+                {
+                  "content": "$(c_n)$ tend vers $+\\infty$.",
+                  "correct": false
+                },
+                {
+                  "content": "$c_n < 12$ pour tout $n$ : le seuil de toxicité n'est jamais atteint.",
+                  "correct": true
+                },
+                {
+                  "content": "$(c_n)$ converge vers $12$.",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
