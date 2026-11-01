@@ -109,9 +109,9 @@
                 ]
               },
               {
-                "content": "Dans une classe, 20 élèves ont une calculatrice et 15 élèves ont un compas. Affirmation : « Exactement 35 élèves ont au moins l'un des deux objets ». Cette affirmation est-elle exacte ?",
+                "content": "Dans une classe, 20 élèves ont une calculatrice et 15 élèves ont un compas. Affirmation : « Le nombre d'élèves qui ont au moins l'un des deux objets est forcément 35 ». Cette affirmation est-elle exacte ?",
                 "question_type": "true_false",
-                "explanation": "Étape 1 — Nommer : $C$ est l'ensemble des élèves qui ont une calculatrice ($20$), $K$ celui des élèves qui ont un compas ($15$). Étape 2 — Repérer : certains élèves peuvent avoir les deux objets : ils sont dans $C \\cap K$. Étape 3 — Appliquer : $\\text{card}(C \\cup K) = 20 + 15 - \\text{card}(C \\cap K) = 35 - \\text{card}(C \\cap K)$. Étape 4 — Vérifier : on n'obtient 35 que si personne n'a les deux objets, ce que l'énoncé ne dit pas : l'affirmation n'est pas toujours exacte. Additionner 20 + 15 sans regarder l'intersection est le piège de la fiche.",
+                "explanation": "Étape 1 — Nommer : $C$ est l'ensemble des élèves qui ont une calculatrice ($20$), $K$ celui des élèves qui ont un compas ($15$). Étape 2 — Repérer : certains élèves peuvent avoir les deux objets : ils sont dans $C \\cap K$. Étape 3 — Appliquer : $\\text{card}(C \\cup K) = 20 + 15 - \\text{card}(C \\cap K) = 35 - \\text{card}(C \\cap K)$. Étape 4 — Vérifier : on n'obtient 35 que si personne n'a les deux objets, ce que l'énoncé ne dit pas ; si 5 élèves ont les deux, on obtient $35 - 5 = 30$. Le nombre n'est donc pas forcément 35 : l'affirmation est fausse. Additionner 20 + 15 sans regarder l'intersection est le piège de la fiche.",
                 "answers": [
                   {
                     "content": "Vrai",
@@ -207,7 +207,7 @@
               {
                 "content": "Pour la fête de l'école, Awa choisit un polo parmi 4 et un short parmi 3. Combien de tenues différentes (un polo et un short) peut-elle composer ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : choisir un polo, puis un short : 2 choix successifs ; l'ordre ne change pas la tenue et il n'y a pas de répétition à gérer. Étape 2 — Compter : 4 possibilités pour le polo, 3 pour le short. Étape 3 — Multiplier : $4 \\times 3 = 12$. Étape 4 — Contrôler : 12 tenues, chacune comptée une fois (un couple polo-short). La proposition 7 additionne $4 + 3$ : c'est le piège de la fiche. 64 et 81 sont $4^3$ et $3^4$ : les choix n'ont pas le même nombre de possibilités, on ne peut pas écrire une puissance.",
+                "explanation": "Étape 1 — Décomposer : choisir un polo, puis un short : 2 choix successifs ; l'ordre ne change pas la tenue et il n'y a pas de répétition à gérer. Étape 2 — Compter : 4 possibilités pour le polo, 3 pour le short. Étape 3 — Multiplier : $4 \\times 3 = 12$. Étape 4 — Contrôler : 12 tenues, chacune comptée une fois (un couple polo-short). La proposition 7 additionne $4 + 3$ : c'est le piège de la fiche. 16 est $4^2$ : une puissance suppose le même nombre de possibilités à chaque choix, or il y a 4 polos mais seulement 3 shorts. 4 ne compte que les polos et oublie le choix du short.",
                 "answers": [
                   {
                     "content": "12",
@@ -218,11 +218,11 @@
                     "correct": false
                   },
                   {
-                    "content": "64",
+                    "content": "16",
                     "correct": false
                   },
                   {
-                    "content": "81",
+                    "content": "4",
                     "correct": false
                   }
                 ]
@@ -255,7 +255,7 @@
                 "content": "Pour un comité, on choisit un président parmi 5 garçons, puis une vice-présidente parmi 6 filles. Combien de couples (président ; vice-présidente) peut-on former ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Décomposer : 2 choix successifs : le président, puis la vice-présidente ; on forme un couple de l'ensemble $G \\times F$. Étape 2 — Compter : 5 possibilités pour le président, 6 pour la vice-présidente. Étape 3 — Multiplier : $\\text{card}(G \\times F) = 5 \\times 6 = 30$. Étape 4 — Contrôler : 30 couples, chacun compté une seule fois. Additionner 5 + 6 = 11 donnerait le nombre de personnes, pas le nombre de couples.",
+                "explanation": "Étape 1 — Décomposer : 2 choix successifs : le président, puis la vice-présidente ; on note $G$ l'ensemble des 5 garçons et $F$ celui des 6 filles ; on forme un couple de l'ensemble $G \\times F$. Étape 2 — Compter : 5 possibilités pour le président, 6 pour la vice-présidente. Étape 3 — Multiplier : $\\text{card}(G \\times F) = 5 \\times 6 = 30$. Étape 4 — Contrôler : 30 couples, chacun compté une seule fois. Additionner 5 + 6 = 11 donnerait le nombre de personnes, pas le nombre de couples.",
                 "answers": [
                   {
                     "content": "30",
@@ -316,7 +316,7 @@
               {
                 "content": "À la cantine, un menu se compose d'un plat parmi 3 et d'une boisson parmi 2. Combien de menus différents peut-on composer ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décomposer : 2 choix successifs : le plat, puis la boisson. Étape 2 — Compter : 3 possibilités pour le plat, 2 pour la boisson. Étape 3 — Multiplier : $3 \\times 2 = 6$. Étape 4 — Contrôler : 6 menus, chacun compté une fois. La proposition 5 additionne $3 + 2$ : c'est le piège de la fiche.",
+                "explanation": "Étape 1 — Décomposer : 2 choix successifs : le plat, puis la boisson. Étape 2 — Compter : 3 possibilités pour le plat, 2 pour la boisson. Étape 3 — Multiplier : $3 \\times 2 = 6$. Étape 4 — Contrôler : 6 menus, chacun compté une fois. La proposition 5 additionne $3 + 2$ : c'est le piège de la fiche. Les propositions 8 et 9 sont $2^3$ et $3^2$ : une puissance suppose le même nombre de possibilités à chaque choix, alors qu'il y a 3 plats et 2 boissons.",
                 "answers": [
                   {
                     "content": "6",
@@ -381,7 +381,7 @@
               {
                 "content": "Relie chaque situation à l'outil de dénombrement qui convient.",
                 "question_type": "matching",
-                "explanation": "Étape 1 — Vérifier : on regarde si l'ordre compte et si les éléments peuvent se répéter. Étape 2 — Identifier : on repère $n$ et $p$ dans chaque situation. Étape 3 — Écrire : le code de 3 chiffres autorise les répétitions : $10^3$, c'est une $p$-liste ; le bureau de 3 postes parmi 10 élèves distincts donne $A_{10}^3 = 10 \\times 9 \\times 8$, c'est un arrangement ; les 6 livres rangés tous ensemble donnent $A_6^6 = 6!$, c'est une permutation. Étape 4 — Calculer : $p \\leq n$ dans les deux derniers cas ($3 \\leq 10$ et $6 \\leq 6$).",
+                "explanation": "Étape 1 — Vérifier : on regarde si l'ordre compte et si les éléments peuvent se répéter. Étape 2 — Identifier : on repère $n$ et $p$ dans chaque situation. Étape 3 — Écrire : le code de 3 chiffres autorise les répétitions : $10^3$, c'est une $p$-liste ; le bureau de 3 postes parmi 10 élèves distincts donne $A_{10}^3 = 10 \\times 9 \\times 8$, c'est un arrangement ; les 6 livres rangés tous ensemble donnent $A_6^6 = 6!$, c'est une permutation. Étape 4 — Calculer : $10^3 = 1000$ codes ; $A_{10}^3 = 10 \\times 9 \\times 8 = 720$ bureaux ; $6! = 720$ rangements. On vérifie aussi $p \\leq n$ dans les deux derniers cas ($3 \\leq 10$ et $6 \\leq 6$).",
                 "answers": [
                   {
                     "content": "Choisir un code de 3 chiffres, répétitions permises",
@@ -413,7 +413,7 @@
                 "content": "Cinq élèves doivent s'asseoir sur un banc de 5 places. De combien de façons différentes peuvent-ils s'installer ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : l'ordre compte (Aya à gauche n'est pas Aya à droite) et chaque élève occupe une seule place : c'est une permutation. Étape 2 — Identifier : $n = 5$ et $p = 5$. Étape 3 — Écrire : $A_5^5 = 5! = 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$, et $p = 5 \\leq n = 5$. Écrire 5 × 5 = 25 ou 5^5 oublie que chaque élève ne s'assoit qu'une fois.",
+                "explanation": "Étape 1 — Vérifier : l'ordre compte (Aya à gauche n'est pas Aya à droite) et chaque élève occupe une seule place : c'est une permutation. Étape 2 — Identifier : $n = 5$ et $p = 5$. Étape 3 — Écrire : $A_5^5 = 5! = 5 \\times 4 \\times 3 \\times 2 \\times 1$. Étape 4 — Calculer : $5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$, et $p = 5 \\leq n = 5$. Écrire $5 \\times 5 = 25$ ou $5^5$ oublie que chaque élève ne s'assoit qu'une fois.",
                 "answers": [
                   {
                     "content": "120",
@@ -463,7 +463,7 @@
               {
                 "content": "La valeur de $0!$ est ___ .",
                 "question_type": "select",
-                "explanation": "Étape 1 — Vérifier : $0!$ est une factorielle ; la définition de la fiche donne une convention pour $0$. Étape 2 — Identifier : $n = 0$. Étape 3 — Écrire : par convention $0! = 1$, ce qui permet d'écrire $A_n^n = \\dfrac{n!}{0!} = n!$. Étape 4 — Calculer : 1 est un entier positif, et il garde la formule cohérente. Répondre 0 confond le produit vide avec zéro : un produit vide vaut 1.",
+                "explanation": "Étape 1 — Vérifier : $0!$ est une factorielle ; la définition de la fiche donne une convention pour $0$. Étape 2 — Identifier : $n = 0$. Étape 3 — Écrire : par convention $0! = 1$, ce qui permet d'écrire $A_n^n = \\dfrac{n!}{0!} = n!$. Étape 4 — Calculer : 1 est un entier positif, et il garde la formule cohérente. Répondre 2 confond avec $2! = 2$ : le nombre écrit avant le point d'exclamation n'est pas le résultat. Répondre 0 confond le produit vide avec zéro : un produit vide vaut 1.",
                 "answers": [
                   {
                     "content": "1",
@@ -485,7 +485,7 @@
             "statement": "Sept élèves se présentent à la finale de saut en longueur de l'école. On classe les trois premiers, sans ex aequo.",
             "questions": [
               {
-                "content": "Le nombre de podiums est $A_7^3 = 7 \\times$ ___ $\\times$ ___ $=$ ___ .",
+                "content": "Les facteurs s'écrivent dans l'ordre décroissant : le nombre de podiums est $A_7^3 = 7 \\times$ ___ $\\times$ ___ $=$ ___ .",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Vérifier : l'ordre compte et un élève ne peut pas être classé deux fois. Étape 2 — Identifier : $n = 7$ et $p = 3$. Étape 3 — Écrire : $A_7^3 = 7 \\times 6 \\times 5$ : les deux premières cases valent 6 et 5. Étape 4 — Calculer : $7 \\times 6 \\times 5 = 210$ : c'est la dernière case, et $3 \\leq 7$.",
@@ -524,7 +524,7 @@
               {
                 "content": "De combien de façons peut-on ranger 3 livres différents sur une étagère ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Vérifier : l'ordre des livres compte et chaque livre n'est posé qu'une fois : c'est une permutation. Étape 2 — Identifier : $n = 3$ et $p = 3$. Étape 3 — Écrire : $A_3^3 = 3! = 3 \\times 2 \\times 1$. Étape 4 — Calculer : $3 \\times 2 \\times 1 = 6$. La proposition 27 est $3^3$ : c'est le piège de la fiche (on poserait le même livre plusieurs fois).",
+                "explanation": "Étape 1 — Vérifier : l'ordre des livres compte et chaque livre n'est posé qu'une fois : c'est une permutation. Étape 2 — Identifier : $n = 3$ et $p = 3$. Étape 3 — Écrire : $A_3^3 = 3! = 3 \\times 2 \\times 1$. Étape 4 — Calculer : $3 \\times 2 \\times 1 = 6$. La proposition 3 donne seulement le nombre de livres, pas de rangements. La proposition 9 est $3 \\times 3$ : elle suppose 3 possibilités à chaque place, alors qu'il en reste une de moins à chaque fois. La proposition 27 est $3^3$ : c'est le piège de la fiche (on poserait le même livre plusieurs fois).",
                 "answers": [
                   {
                     "content": "6",
@@ -636,7 +636,7 @@
                 "content": "Trouve l'entier $n \\geq 2$ tel que $C_n^2 = 45$.",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Vérifier : $C_n^2$ compte des groupes de 2 éléments parmi $n$. Étape 2 — Identifier : $p = 2$ et $n$ est l'inconnue, avec $n \\geq 2$. Étape 3 — Écrire : $C_n^2 = \\dfrac{n(n-1)}{2}$, donc $n(n-1) = 90$, soit $n^2 - n - 90 = 0$, soit $(n-10)(n+9) = 0$. Étape 4 — Calculer : $n = 10$ ou $n = -9$ ; on garde $n = 10$ car $n \\geq 2$. Contrôle : $C_{10}^2 = \\dfrac{10 \\times 9}{2} = 45$. Oublier de diviser par 2 donnerait n(n − 1) = 45, qui n'a pas de solution entière.",
+                "explanation": "Étape 1 — Vérifier : $C_n^2$ compte des groupes de 2 éléments parmi $n$. Étape 2 — Identifier : $p = 2$ et $n$ est l'inconnue, avec $n \\geq 2$. Étape 3 — Écrire : $C_n^2 = \\dfrac{n(n-1)}{2}$, donc $n(n-1) = 90$, soit $n^2 - n - 90 = 0$, soit $(n-10)(n+9) = 0$. Étape 4 — Calculer : $n = 10$ ou $n = -9$ ; on garde $n = 10$ car $n \\geq 2$. Contrôle : $C_{10}^2 = \\dfrac{10 \\times 9}{2} = 45$. Oublier de diviser par 2 donnerait $n(n-1) = 45$, qui n'a pas de solution entière.",
                 "answers": [
                   {
                     "content": "10",
@@ -662,7 +662,7 @@
               {
                 "content": "Quelles sont les deux égalités exactes ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Vérifier : les égalités portent sur des nombres de groupes. Étape 2 — Identifier : $n = 7$ dans tous les cas. Étape 3 — Écrire : $C_7^2 = \\dfrac{7 \\times 6}{2} = 21$ et $C_7^5 = C_7^{7-5} = C_7^2 = 21$ : première égalité exacte. $C_7^1 = \\dfrac{7}{1} = 7$ : deuxième égalité exacte. Étape 4 — Calculer : $A_7^2 = 42 \\neq 21$ ; $C_7^0 = 1$ (un seul groupe vide) et non 0 ; $C_7^7 = 1$ (un seul groupe : tout l'ensemble) et non 7.",
+                "explanation": "Étape 1 — Vérifier : les égalités portent sur des nombres de groupes. Étape 2 — Identifier : $n = 7$ dans tous les cas. Étape 3 — Écrire : $C_7^2 = \\dfrac{7 \\times 6}{2} = 21$ et $C_7^5 = C_7^{7-5} = C_7^2 = 21$ : l'égalité $C_7^2 = C_7^5$ est exacte. $C_7^1 = \\dfrac{7}{1} = 7$ : l'égalité $C_7^1 = 7$ est exacte. Étape 4 — Calculer : $A_7^2 = 42 \\neq 21$ ; $C_7^0 = 1$ (un seul groupe vide) et non 0 ; $C_7^7 = 1$ (un seul groupe : tout l'ensemble) et non 7.",
                 "answers": [
                   {
                     "content": "$C_7^2 = C_7^5$",
@@ -713,7 +713,7 @@
                     "blank": 2
                   }
                 ],
-                "hint": "Le numérateur est un produit de 2 facteurs, le dénominateur est 2 !."
+                "hint": "Le numérateur est un produit de 2 facteurs, le dénominateur est $2!$."
               },
               {
                 "content": "Calcule $C_5^3$.",
@@ -752,7 +752,7 @@
           "title": "Le comité du club d'environnement",
           "exercise_type": "fixation",
           "figure": null,
-          "statement": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Il forme des comités. Dans cet exercice, tu combines les méthodes des fiches sur les combinaisons, les arrangements et les complémentaires.",
+          "statement": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Il forme des comités. Dans cet exercice, tu combines les méthodes des fiches sur les combinaisons, les arrangements, le principe multiplicatif et les complémentaires.",
           "questions": [
             {
               "content": "Le club d'environnement du lycée compte 12 élèves : 7 filles et 5 garçons. Le club forme un comité de 3 membres, sans fonction particulière. Quelle expression donne le nombre de comités possibles ?",
@@ -884,7 +884,7 @@
             {
               "content": "La salle informatique du lycée s'ouvre avec un code de 4 chiffres, chaque chiffre étant l'un des dix chiffres de 0 à 9. Combien de codes commencent par le chiffre 7 ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Décomposer : le premier chiffre est imposé (7) ; il reste 3 choix successifs, l'ordre compte, les répétitions sont permises. Étape 2 — Compter : 1 possibilité pour le premier chiffre, 10 pour chacun des trois suivants. Étape 3 — Multiplier : $1 \\times 10 \\times 10 \\times 10 = 1000$. Étape 4 — Contrôler : 1 000 codes, de 7000 à 7999. $10^4$ est le nombre total de codes, sans la contrainte. $7^4$ et $4 \\times 7$ n'ont pas de sens ici.",
+              "explanation": "Étape 1 — Décomposer : le premier chiffre est imposé (7) ; il reste 3 choix successifs, l'ordre compte, les répétitions sont permises. Étape 2 — Compter : 1 possibilité pour le premier chiffre, 10 pour chacun des trois suivants. Étape 3 — Multiplier : $1 \\times 10 \\times 10 \\times 10 = 1000$. Étape 4 — Contrôler : 1 000 codes, de 7000 à 7999. $10^4$ est le nombre total de codes, sans la contrainte. $10 \\times 9 \\times 8 = 720$ interdit les répétitions pour les trois derniers chiffres, alors qu'elles sont permises. $A_9^3 = 9 \\times 8 \\times 7 = 504$ retire le 7 des chiffres disponibles et interdit aussi les répétitions : il compte les codes commençant par 7 dont les chiffres sont tous différents.",
               "answers": [
                 {
                   "content": "$10^3 = 1000$",
@@ -895,11 +895,11 @@
                   "correct": false
                 },
                 {
-                  "content": "$7^4 = 2401$",
+                  "content": "$10 \\times 9 \\times 8 = 720$",
                   "correct": false
                 },
                 {
-                  "content": "$4 \\times 7 = 28$",
+                  "content": "$A_9^3 = 504$",
                   "correct": false
                 }
               ]
@@ -951,7 +951,7 @@
               "content": "Une classe de 1ère compte 30 élèves : 18 filles et 12 garçons. Combien d'équipes de 4 élèves sont formées uniquement de filles ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 4 filles : l'ordre ne compte pas. Étape 2 — Identifier : $n = 18$ filles et $p = 4$. Étape 3 — Écrire : $C_{18}^4 = \\dfrac{18 \\times 17 \\times 16 \\times 15}{4 \\times 3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{18 \\times 17 \\times 16 \\times 15}{24} = 17 \\times 15 \\times 12 = 3060$, car $\\dfrac{18 \\times 16}{24} = 12$.",
+              "explanation": "Étape 1 — Vérifier : on choisit un groupe de 4 filles : l'ordre ne compte pas. Étape 2 — Identifier : $n = 18$ filles et $p = 4$. Étape 3 — Écrire : $C_{18}^4 = \\dfrac{18 \\times 17 \\times 16 \\times 15}{4 \\times 3 \\times 2 \\times 1}$. Étape 4 — Calculer : $\\dfrac{18 \\times 17 \\times 16 \\times 15}{24} = 17 \\times 15 \\times 12 = 3060$, car $\\dfrac{18 \\times 16}{24} = 12$. Prendre les 30 élèves au lieu des 18 filles donnerait $C_{30}^4 = 27\\,405$ équipes quelconques.",
               "answers": [
                 {
                   "content": "3060",
@@ -1044,7 +1044,7 @@
               "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire 3 jetons en même temps. Combien de tirages sont formés de 3 jetons de la même couleur ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Vérifier : on cherche des groupes de 3 jetons : l'ordre ne compte pas. Trois jetons de la même couleur : ou rouges, ou verts, ou jaunes ; ces trois cas s'excluent (cas disjoints), donc on additionne. Étape 2 — Identifier : rouges : $n = 4$, $p = 3$ ; verts : $n = 3$, $p = 3$ ; jaunes : $n = 3$, $p = 3$. Étape 3 — Écrire : $C_4^3 + C_3^3 + C_3^3$, avec $C_4^3 = C_4^1 = 4$ et $C_3^3 = 1$. Étape 4 — Calculer : $4 + 1 + 1 = 6$ tirages. Multiplier les trois cas serait faux : on ne tire pas « rouges et verts et jaunes » à la fois, ces cas s'excluent.",
+              "explanation": "Étape 1 — Vérifier : on cherche des groupes de 3 jetons : l'ordre ne compte pas. Trois jetons de la même couleur : ou rouges, ou verts, ou jaunes ; ces trois cas s'excluent (cas disjoints), donc on additionne. Étape 2 — Identifier : rouges : $n = 4$, $p = 3$ ; verts : $n = 3$, $p = 3$ ; jaunes : $n = 3$, $p = 3$. Étape 3 — Écrire : $C_4^3 + C_3^3 + C_3^3$, avec $C_4^3 = C_4^1 = 4$ et $C_3^3 = 1$. Étape 4 — Calculer : $4 + 1 + 1 = 6$ tirages. Multiplier les trois cas ($4 \\times 1 \\times 1 = 4$) serait faux : on ne tire pas « rouges et verts et jaunes » à la fois, ces cas s'excluent.",
               "answers": [
                 {
                   "content": "6",
@@ -1091,7 +1091,7 @@
             {
               "content": "Un sac contient 10 jetons discernables : 4 rouges, 3 verts et 3 jaunes. On tire successivement 3 jetons, en remettant chaque jeton dans le sac avant le tirage suivant, et on note la liste des jetons dans l'ordre. Combien de résultats sont possibles ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Décomposer : 3 choix successifs ; l'ordre compte et, avec remise, les répétitions sont permises : c'est une $p$-liste. Étape 2 — Compter : 10 possibilités à chaque tirage. Étape 3 — Multiplier : $10 \\times 10 \\times 10 = 10^3 = 1000$. Étape 4 — Contrôler : 1 000 listes, de la plus petite à la plus grande. $A_{10}^3 = 720$ est le nombre de listes sans remise. $C_{10}^3 = 120$ ignore l'ordre. $10 \\times 3$ n'a pas de sens ici.",
+              "explanation": "Étape 1 — Décomposer : 3 choix successifs ; l'ordre compte et, avec remise, les répétitions sont permises : c'est une $p$-liste. Étape 2 — Compter : 10 possibilités à chaque tirage. Étape 3 — Multiplier : $10 \\times 10 \\times 10 = 10^3 = 1000$. Étape 4 — Contrôler : 1 000 listes ; si les jetons sont numérotés de 0 à 9, elles vont de 000 à 999. $A_{10}^3 = 720$ est le nombre de listes sans remise. $C_{10}^3 = 120$ ignore l'ordre. $10 \\times 3 = 30$ revient à additionner $10 + 10 + 10$ : les choix se multiplient, ils ne s'additionnent pas.",
               "answers": [
                 {
                   "content": "$10^3 = 1000$",
