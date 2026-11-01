@@ -1,0 +1,1370 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Orthogonalité de l'espace",
+      "subtitle": "Leçon 10 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "Mathématiques",
+      "series_name": "C",
+      "theme": "teal",
+      "figures": [],
+      "notions": [
+        {
+          "name": "Reconnaître des droites orthogonales",
+          "remember": "Deux droites de l'espace, sécantes ou non, sont **orthogonales** si les parallèles à ces droites menées par un même point sont **perpendiculaires**. Deux droites perpendiculaires (sécantes à angle droit) sont donc orthogonales, mais deux droites orthogonales ne se coupent pas toujours. Si $(d)$ et $(d')$ sont parallèles et si $(d')$ est orthogonale à $(d'')$, alors $(d)$ est orthogonale à $(d'')$.",
+          "method": [
+            "Choisir un point de la première droite et mener par ce point la parallèle à la seconde droite.",
+            "Placer les deux droites sécantes ainsi obtenues dans un même plan.",
+            "Montrer que ces deux droites sont perpendiculaires (angle droit d'une face, diagonales d'un carré ou d'un losange, réciproque de Pythagore).",
+            "Conclure : la parallèle étant perpendiculaire à la première droite, les deux droites de départ sont orthogonales."
+          ],
+          "example": {
+            "statement": "Une dalle de chantier a la forme d'un pavé droit ABCDEFGH dont la base ABCD est un carré de côté $6$ m ; la hauteur $AE$ vaut $5$ m ([AE], [BF], [CG], [DH] sont les arêtes verticales). Montrer que les droites $(EG)$ et $(BD)$ sont orthogonales.",
+            "steps": [
+              "Choisir : on prend le point $O$, centre du carré ABCD, qui est sur $(BD)$. La parallèle à $(EG)$ passant par $O$ est $(AC)$, car ACGE est un rectangle et $(EG)\\parallel(AC)$.",
+              "Placer : les droites $(AC)$ et $(BD)$ sont sécantes en $O$ et situées dans le même plan (ABCD).",
+              "Montrer : ABCD est un carré, donc ses diagonales $(AC)$ et $(BD)$ sont perpendiculaires.",
+              "Conclure : la parallèle $(AC)$ à $(EG)$ est perpendiculaire à $(BD)$, donc $(EG)$ et $(BD)$ sont orthogonales (sans être sécantes)."
+            ]
+          },
+          "pitfall": "Ne pas croire que deux droites perpendiculaires à une même troisième sont parallèles, comme dans le plan. Contre-exemple : dans un pavé droit, $(AB)\\perp(AE)$ et $(AD)\\perp(AE)$, mais $(AB)$ et $(AD)$ sont perpendiculaires entre elles, pas parallèles. Dans l'espace, vérifie toujours la position des droites avec la parallèle menée par un point.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître des droites orthogonales dans un pavé",
+            "statement": "Dans cet exercice, tu reconnais des droites orthogonales avec la méthode de la fiche. Les solides sont décrits dans les questions : fais-en un petit croquis sur ton cahier si cela t'aide.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), les droites (AB) et (CG) sont orthogonales.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir : on prend le point A de (AB) ; la parallèle à (CG) passant par A est (AE). Étape 2 — Placer : (AB) et (AE) sont sécantes en A dans le plan (ABFE). Étape 3 — Montrer : ABFE est un rectangle, donc (AB) et (AE) sont perpendiculaires. Étape 4 — Conclure : (AB) est perpendiculaire à la parallèle (AE) à (CG), donc (AB) et (CG) sont orthogonales. La réponse Faux, avec l'idée qu'elles ne se coupent pas, oublie que deux droites orthogonales n'ont pas besoin d'être sécantes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), laquelle de ces droites n'est pas orthogonale à (AB) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : on mène par A la parallèle à chaque droite proposée. Étape 2 — Placer : (BF) et (DH) donnent (AE) ; (EH) donne (AD) ; (EF) donne (AB) elle-même, car (EF) est parallèle à (AB). Étape 3 — Montrer : (AE) et (AD) sont perpendiculaires à (AB) (faces rectangulaires) ; (AB) n'est pas perpendiculaire à elle-même. Étape 4 — Conclure : (BF), (DH) et (EH) sont orthogonales à (AB), mais (EF), parallèle à (AB), ne l'est pas.",
+                "answers": [
+                  {
+                    "content": "(EF)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(BF)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(DH)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(EH)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH dont la base ABCD est un carré (EFGH est la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), quelle est la mesure, en degrés, de l'angle formé par les droites (EG) et (BD) ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : par O, centre de ABCD, la parallèle à (EG) est (AC). Étape 2 — Placer : (AC) et (BD) sont sécantes en O dans le plan (ABCD). Étape 3 — Montrer : les diagonales d'un carré sont perpendiculaires. Étape 4 — Conclure : (EG) et (BD) sont orthogonales, l'angle qu'elles forment mesure 90 degrés. La valeur 45 est l'angle entre un côté et une diagonale du carré, pas entre les deux diagonales.",
+                "answers": [
+                  {
+                    "content": "90",
+                    "correct": true
+                  }
+                ],
+                "unit": "°"
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), la parallèle à (CG) passant par A est la droite ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Choisir : on cherche la droite menée par A parallèle à (CG). Les arêtes verticales [AE], [BF], [CG], [DH] sont parallèles entre elles. Étape 2 — Placer : celle qui passe par A est (AE). Étape 3 — Montrer : cette droite est perpendiculaire à (AB) et à (AD). Étape 4 — Conclure : la parallèle à (CG) passant par A est (AE).",
+                "answers": [
+                  {
+                    "content": "(AE)",
+                    "correct": true
+                  },
+                  {
+                    "content": "AE",
+                    "correct": true
+                  },
+                  {
+                    "content": "(EA)",
+                    "correct": true
+                  },
+                  {
+                    "content": "EA",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), quelles sont les deux droites orthogonales à (AE) ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Choisir : on mène par un point de chaque droite proposée la parallèle à (AE). Étape 2 — Placer : (BF), (DH) et (CG) sont parallèles à (AE), donc ne sont pas orthogonales à (AE). Étape 3 — Montrer : (AB) est perpendiculaire à (AE) dans le rectangle ABFE ; (FG) est parallèle à (AD), donc à une droite perpendiculaire à (AE) dans le rectangle ADHE. Étape 4 — Conclure : (AB) et (FG) sont orthogonales à (AE).",
+                "answers": [
+                  {
+                    "content": "(AB)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(FG)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(BF)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(DH)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(CG)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Marie dit : « Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), (AB) et (AD) sont toutes deux perpendiculaires à (AE), donc (AB) et (AD) sont parallèles. » Que penser de cette affirmation ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : on prend le point A, commun aux trois droites. Étape 2 — Placer : (AB) et (AD) sont dans le plan (ABCD). Étape 3 — Montrer : ABCD est un rectangle, donc (AB) et (AD) sont perpendiculaires entre elles. Étape 4 — Conclure : l'affirmation est fausse. Dans l'espace, deux droites orthogonales à une même troisième ne sont pas forcément parallèles : c'est l'erreur du piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Elle est fausse : (AB) et (AD) sont perpendiculaires entre elles.",
+                    "correct": true
+                  },
+                  {
+                    "content": "Elle est vraie, comme dans un plan.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est vraie, car (AB) et (AD) sont orthogonales à la même droite.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Elle est fausse : (AB) et (AD) sont confondues.",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur les arêtes d'un pavé droit, comme celles d'un coffrage de chantier.",
+            "questions": [
+              {
+                "content": "Dans un pavé droit ABCDEFGH, les droites (AB) et (HG) sont orthogonales.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir : (HG) passe par H ; on mène par A la parallèle à (HG), c'est (AB) elle-même, car (HG) est parallèle à (AB). Étape 2 — Placer : on obtient la même droite deux fois. Étape 3 — Montrer : une droite n'est pas perpendiculaire à elle-même. Étape 4 — Conclure : (AB) et (HG) sont parallèles, donc pas orthogonales.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Compare (HG) avec la droite (DC), puis avec (AB)."
+              },
+              {
+                "content": "Dans un pavé droit, une arête donnée a ___ autres arêtes parallèles et ___ arêtes orthogonales.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : prenons l'arête [AB]. Étape 2 — Placer : les arêtes parallèles à (AB) sont [DC], [EF] et [HG], soit 3 ; les autres arêtes sont les 12 − 1 − 3 = 8. Étape 3 — Montrer : chacune de ces 8 arêtes (AD, BC, EH, FG, AE, BF, CG, DH) est perpendiculaire à (AB) ou parallèle à une arête qui l'est. Étape 4 — Conclure : 3 parallèles et 8 orthogonales.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "8",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un pavé droit a 12 arêtes en tout, en trois groupes de 4 parallèles."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Montrer qu'une droite est orthogonale à un plan",
+          "remember": "Une droite $(d)$ est **orthogonale à un plan** $(P)$ si elle est orthogonale à **toutes** les droites de $(P)$. **Critère** : si $(d)$ est orthogonale à deux droites **sécantes** de $(P)$, alors $(d)$ est orthogonale à $(P)$. Elle est alors orthogonale à toute droite de $(P)$. Deux droites orthogonales à un même plan sont parallèles.",
+          "method": [
+            "Choisir deux droites sécantes du plan.",
+            "Montrer que la droite est orthogonale à la première de ces deux droites.",
+            "Montrer que la droite est orthogonale à la seconde.",
+            "Conclure : orthogonale à deux droites sécantes du plan, la droite est orthogonale au plan, donc à toute droite de ce plan."
+          ],
+          "example": {
+            "statement": "Un pavé droit ABCDEFGH a pour base le carré ABCD ([AE], [BF], [CG], [DH] sont les arêtes verticales). Montrer que la droite $(BD)$ est orthogonale au plan $(ACGE)$.",
+            "steps": [
+              "Choisir : dans le plan (ACGE), on prend les droites $(AC)$ et $(CG)$, sécantes en $C$.",
+              "Montrer : $(BD)\\perp(AC)$, car les diagonales d'un carré sont perpendiculaires.",
+              "Montrer : $(CG)$ est perpendiculaire à $(CB)$ et à $(CD)$ (faces rectangulaires), donc orthogonale au plan (ABCD) ; or $(BD)$ est dans ce plan, donc $(BD)\\perp(CG)$.",
+              "Conclure : $(BD)$ est orthogonale aux deux droites sécantes $(AC)$ et $(CG)$ du plan (ACGE), donc $(BD)$ est orthogonale au plan (ACGE)."
+            ]
+          },
+          "pitfall": "Ne pas conclure qu'une droite est orthogonale à un plan parce qu'elle est orthogonale à **une seule** droite de ce plan. Contre-exemple : dans un pavé droit, $(BG)$ est orthogonale à $(AB)$, et $(AB)$ est dans le plan (ABCD) ; pourtant $(BG)$ n'est pas orthogonale à (ABCD), car elle est oblique par rapport à $(BC)$. Il faut **deux droites sécantes**.",
+          "figure": null,
+          "exercise": {
+            "title": "Montrer qu'une droite est orthogonale à un plan",
+            "statement": "Dans cet exercice, tu appliques le critère d'orthogonalité d'une droite et d'un plan. Les solides sont décrits dans les questions.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), la droite (AE) est orthogonale au plan (ABCD).",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir : dans le plan (ABCD), on prend (AB) et (AD), sécantes en A. Étape 2 — Montrer : ABFE est un rectangle, donc (AE) est perpendiculaire à (AB). Étape 3 — Montrer : ADHE est un rectangle, donc (AE) est perpendiculaire à (AD). Étape 4 — Conclure : (AE) est orthogonale à deux droites sécantes de (ABCD), donc orthogonale au plan (ABCD).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelle condition suffit pour qu'une droite (d) soit orthogonale à un plan (P) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : le critère demande deux droites du plan, et elles doivent se couper. Étape 2 — Montrer : (d) est orthogonale à la première. Étape 3 — Montrer : (d) est orthogonale à la seconde. Étape 4 — Conclure : (d) est orthogonale au plan. Une seule droite ne suffit pas (piège de la fiche) ; deux droites parallèles du plan donnent la même direction, donc pas assez d'information.",
+                "answers": [
+                  {
+                    "content": "(d) est orthogonale à deux droites sécantes de (P).",
+                    "correct": true
+                  },
+                  {
+                    "content": "(d) est orthogonale à une droite de (P).",
+                    "correct": false
+                  },
+                  {
+                    "content": "(d) est orthogonale à deux droites parallèles de (P).",
+                    "correct": false
+                  },
+                  {
+                    "content": "(d) ne coupe pas (P).",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), la droite (AB) est orthogonale à l'un de ces plans. Lequel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : dans le plan (ADHE), on prend (AD) et (AE), sécantes en A. Étape 2 — Montrer : (AB) est perpendiculaire à (AD) (rectangle ABCD). Étape 3 — Montrer : (AB) est perpendiculaire à (AE) (rectangle ABFE). Étape 4 — Conclure : (AB) est orthogonale à (ADHE). Les plans (ABFE) et (ABCD) contiennent (AB) ; (EFGH) est parallèle à (AB), donc (AB) n'y est pas orthogonale.",
+                "answers": [
+                  {
+                    "content": "(ADHE)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(ABFE)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(ABCD)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(EFGH)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), pour montrer que (DH) est orthogonale au plan (ABCD), on montre qu'elle est orthogonale à (DA) et à la droite ___ .",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Choisir : il faut deux droites sécantes de (ABCD) passant par D : (DA) et (DC). Étape 2 — Montrer : (DH) est perpendiculaire à (DA) (rectangle ADHE). Étape 3 — Montrer : (DH) est perpendiculaire à (DC) (rectangle CDHG). Étape 4 — Conclure : (DH) est orthogonale à (ABCD). La droite (AB), parallèle à (DC), donnerait la même direction que (DC) : il faut une droite qui coupe (DA).",
+                "answers": [
+                  {
+                    "content": "(DC)",
+                    "correct": true
+                  },
+                  {
+                    "content": "DC",
+                    "correct": true
+                  },
+                  {
+                    "content": "(CD)",
+                    "correct": true
+                  },
+                  {
+                    "content": "CD",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "On considère un pavé droit ABCDEFGH dont la base ABCD est un carré (EFGH est la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales). On sait que (BD) est orthogonale au plan (ACGE). Quelles sont les deux droites orthogonales à (BD) ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 1 — Choisir : (BD) est orthogonale au plan (ACGE). Étape 2 — Montrer : (BD) est orthogonale à toute droite de ce plan. Étape 3 — Montrer : (CG) et (AE) sont dans le plan (ACGE). Étape 4 — Conclure : (CG) et (AE) sont orthogonales à (BD). Les droites (AB) et (BC) font un angle de 45 degrés avec la diagonale (BD) ; (FH) est parallèle à (BD).",
+                "answers": [
+                  {
+                    "content": "(CG)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(AE)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(AB)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(BC)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(FH)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), on sait que (BG) est orthogonale à (AB). Que peut-on conclure sur (BG) et le plan (ABCD) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : (AB) est dans (ABCD), mais il faut une seconde droite de (ABCD) sécante avec (AB), par exemple (BC). Étape 2 — Montrer : (BG) est orthogonale à (AB). Étape 3 — Montrer : (BG) n'est pas orthogonale à (BC), car le triangle BCG est rectangle en C : l'angle en B n'est pas droit. Étape 4 — Conclure : (BG) n'est pas orthogonale à (ABCD). Une seule droite orthogonale ne suffit pas.",
+                "answers": [
+                  {
+                    "content": "On ne peut pas conclure : il manque une seconde droite sécante de (ABCD).",
+                    "correct": true
+                  },
+                  {
+                    "content": "(BG) est orthogonale à (ABCD).",
+                    "correct": false
+                  },
+                  {
+                    "content": "(BG) est parallèle à (ABCD).",
+                    "correct": false
+                  },
+                  {
+                    "content": "(BG) est contenue dans (ABCD).",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur le critère d'orthogonalité, avec un poteau et une dalle.",
+            "questions": [
+              {
+                "content": "Si une droite (d) est orthogonale à deux droites parallèles d'un plan (P), alors (d) est orthogonale à (P).",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir : deux droites parallèles de (P) n'ont qu'une seule direction. Étape 2 — Montrer : (d) est orthogonale à la première. Étape 3 — Montrer : elle l'est aussi à la seconde, mais c'est la même direction, donc aucune information nouvelle. Étape 4 — Conclure : il faut deux droites sécantes, donc l'affirmation est fausse (une droite oblique à (P) peut être orthogonale à une direction du plan).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Dans un plan, deux droites parallèles ont la même direction."
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (arêtes verticales [AE], [BF], [CG], [DH]), la droite (CG) est orthogonale à l'un de ces plans. Lequel ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : dans (ABCD), on prend (CB) et (CD), sécantes en C. Étape 2 — Montrer : (CG) est perpendiculaire à (CB) (rectangle BCGF). Étape 3 — Montrer : (CG) est perpendiculaire à (CD) (rectangle CDHG). Étape 4 — Conclure : (CG) est orthogonale à (ABCD). Les plans (BCGF) et (CDHG) contiennent (CG) ; (ABFE) lui est parallèle.",
+                "answers": [
+                  {
+                    "content": "(ABCD)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(ABFE)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(BCGF)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(CDHG)",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche le plan qui ne contient pas (CG) et que (CG) coupe à angle droit."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Montrer que deux plans sont perpendiculaires",
+          "remember": "Deux plans $(P)$ et $(Q)$ sont **perpendiculaires** si l'un d'eux contient une droite orthogonale à l'autre. Si $(P)\\perp(Q)$, toute droite de $(P)$ perpendiculaire à la droite d'intersection des deux plans est orthogonale à $(Q)$. Deux plans perpendiculaires se coupent suivant une droite.",
+          "method": [
+            "Choisir dans l'un des plans une droite qui semble orthogonale à l'autre plan.",
+            "Montrer que cette droite est orthogonale à deux droites sécantes de l'autre plan.",
+            "Appliquer la définition : un plan qui contient une droite orthogonale à un autre plan est perpendiculaire à ce plan.",
+            "Conclure en nommant les deux plans perpendiculaires."
+          ],
+          "example": {
+            "statement": "Un pavé droit ABCDEFGH a pour base le carré ABCD ([AE], [BF], [CG], [DH] sont les arêtes verticales). Montrer que les plans $(ACGE)$ et $(ABCD)$ sont perpendiculaires.",
+            "steps": [
+              "Choisir : dans le plan (ACGE), on prend la droite $(CG)$, qui semble orthogonale à (ABCD).",
+              "Montrer : $(CG)\\perp(CB)$ et $(CG)\\perp(CD)$ (faces rectangulaires), et $(CB)$, $(CD)$ sont sécantes en $C$ dans (ABCD) ; donc $(CG)$ est orthogonale à (ABCD).",
+              "Appliquer : le plan (ACGE) contient la droite $(CG)$ orthogonale au plan (ABCD).",
+              "Conclure : les plans (ACGE) et (ABCD) sont perpendiculaires."
+            ]
+          },
+          "pitfall": "Ne pas croire que deux plans perpendiculaires à un même troisième plan sont parallèles. Contre-exemple : dans un pavé droit, les plans (ABFE) et (ADHE) sont tous deux perpendiculaires à (ABCD), car ils contiennent (AE), orthogonale à (ABCD) ; pourtant ils se coupent suivant la droite (AE).",
+          "figure": null,
+          "exercise": {
+            "title": "Montrer que deux plans sont perpendiculaires",
+            "statement": "Dans cet exercice, tu montres que des plans sont perpendiculaires avec la méthode de la fiche. Les solides sont décrits dans les questions.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), les plans (ABFE) et (ABCD) sont perpendiculaires.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Choisir : dans le plan (ABFE), on prend la droite (AE). Étape 2 — Montrer : (AE) est perpendiculaire à (AB) et à (AD), sécantes en A dans (ABCD) ; donc (AE) est orthogonale à (ABCD). Étape 3 — Appliquer : (ABFE) contient une droite orthogonale à (ABCD). Étape 4 — Conclure : (ABFE) et (ABCD) sont perpendiculaires.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), lequel de ces plans n'est pas perpendiculaire au plan (ABCD) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : chaque plan (ABFE), (BCGF), (CDHG) contient une arête verticale ([AE], [BF], [CG]). Étape 2 — Montrer : une arête verticale est orthogonale à (ABCD) (deux droites sécantes de la base lui sont perpendiculaires). Étape 3 — Appliquer : ces trois plans contiennent une droite orthogonale à (ABCD). Étape 4 — Conclure : ils sont perpendiculaires à (ABCD). Le plan (EFGH) est parallèle à (ABCD), il ne lui est pas perpendiculaire.",
+                "answers": [
+                  {
+                    "content": "(EFGH)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(ABFE)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(BCGF)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(CDHG)",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), pour montrer que (BCGF) est perpendiculaire à (ABCD), on utilise la droite ___ , contenue dans (BCGF) et orthogonale à (ABCD).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Choisir : dans (BCGF), on prend une arête verticale, par exemple (BF) ou (CG). Étape 2 — Montrer : (BF) est perpendiculaire à (BA) et à (BC), sécantes en B dans (ABCD) ; donc (BF) est orthogonale à (ABCD). Étape 3 — Appliquer : (BCGF) contient (BF). Étape 4 — Conclure : (BCGF) est perpendiculaire à (ABCD). Les droites (BC) et (FG) ne conviennent pas : elles ne sont pas orthogonales à (ABCD).",
+                "answers": [
+                  {
+                    "content": "(BF)",
+                    "correct": true
+                  },
+                  {
+                    "content": "BF",
+                    "correct": true
+                  },
+                  {
+                    "content": "(CG)",
+                    "correct": true
+                  },
+                  {
+                    "content": "CG",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour montrer que deux plans sont perpendiculaires.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Choisir : on commence par repérer la droite candidate. Étape 2 — Montrer : on prouve qu'elle est orthogonale à l'autre plan avec deux droites sécantes. Étape 3 — Appliquer : on utilise la définition de plans perpendiculaires. Étape 4 — Conclure : on nomme les deux plans. Conclure avant d'avoir montré l'orthogonalité de la droite reviendrait à affirmer sans preuve.",
+                "answers": [
+                  {
+                    "content": "Choisir dans l'un des plans une droite qui semble orthogonale à l'autre plan."
+                  },
+                  {
+                    "content": "Montrer que cette droite est orthogonale à deux droites sécantes de l'autre plan."
+                  },
+                  {
+                    "content": "Appliquer la définition : un plan qui contient une droite orthogonale à un autre plan est perpendiculaire à ce plan."
+                  },
+                  {
+                    "content": "Conclure en nommant les deux plans perpendiculaires."
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), les plans (ABFE) et (ADHE) sont tous deux perpendiculaires à (ABCD). Que peut-on dire de ces deux plans ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : (AE) est dans (ABFE) et dans (ADHE). Étape 2 — Montrer : ces deux plans contiennent la droite (AE), donc ils ont un point commun, A, et même une droite commune. Étape 3 — Appliquer : deux plans qui ont une droite commune ne sont pas parallèles. Étape 4 — Conclure : ils sont sécants suivant (AE). Deux plans perpendiculaires à un même troisième ne sont pas forcément parallèles : c'est le piège de la fiche.",
+                "answers": [
+                  {
+                    "content": "Ils se coupent suivant la droite (AE).",
+                    "correct": true
+                  },
+                  {
+                    "content": "Ils sont parallèles.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils sont confondus.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Ils sont strictement parallèles à (EFGH).",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur les faces d'un pavé droit, comme celles d'un caisson en béton.",
+            "questions": [
+              {
+                "content": "Dans un pavé droit, une face est parallèle à ___ autre face et perpendiculaire à ___ autres faces.",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Choisir : prenons la face ABCD. Étape 2 — Montrer : la face EFGH, du dessus, est parallèle à ABCD ; les quatre faces latérales contiennent chacune une arête verticale orthogonale à ABCD. Étape 3 — Appliquer : un plan qui contient une droite orthogonale à un autre plan lui est perpendiculaire. Étape 4 — Conclure : 1 face parallèle et 4 faces perpendiculaires (1 + 4 + la face ABCD elle-même font bien 6 faces).",
+                "answers": [
+                  {
+                    "content": "1",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "4",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un pavé droit a 6 faces. Compte celles du dessus, du dessous et celles de côté."
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (arêtes verticales [AE], [BF], [CG], [DH]), quelle droite permet de montrer que le plan (BDHF) est perpendiculaire au plan (ABCD) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Choisir : dans le plan (BDHF), on cherche une droite orthogonale à (ABCD) : l'arête verticale (BF). Étape 2 — Montrer : (BF) est perpendiculaire à (BA) et à (BC), sécantes dans (ABCD). Étape 3 — Appliquer : (BDHF) contient (BF), orthogonale à (ABCD). Étape 4 — Conclure : (BDHF) est perpendiculaire à (ABCD). La droite (BD) est dans (ABCD) ; (FH) lui est parallèle ; (BH) est oblique.",
+                "answers": [
+                  {
+                    "content": "(BF)",
+                    "correct": true
+                  },
+                  {
+                    "content": "(BD)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(FH)",
+                    "correct": false
+                  },
+                  {
+                    "content": "(BH)",
+                    "correct": false
+                  }
+                ],
+                "hint": "Cherche l'arête verticale qui est dans le plan (BDHF)."
+              }
+            ]
+          }
+        },
+        {
+          "name": "Projeter orthogonalement un point sur un plan",
+          "remember": "Le **projeté orthogonal** d'un point $M$ sur un plan $(P)$ est le point $H$ de $(P)$ tel que la droite $(MH)$ soit orthogonale à $(P)$. Si $M$ est dans $(P)$, alors $H=M$. La **distance** de $M$ au plan $(P)$ est la longueur $MH$. Pour tout point $A$ de $(P)$ : $MA^2=MH^2+HA^2$, donc $MA\\geq MH$ : $H$ est le point du plan le plus proche de $M$.",
+          "method": [
+            "Repérer la droite passant par M et orthogonale au plan : elle coupe le plan en H, projeté orthogonal de M.",
+            "Justifier que cette droite est orthogonale au plan, avec deux droites sécantes du plan.",
+            "Choisir un point A du plan tel que le triangle MHA soit rectangle en H.",
+            "Calculer la distance avec le théorème de Pythagore, $MH^2 = MA^2 - HA^2$, puis écrire que la distance de M au plan est $MH$."
+          ],
+          "example": {
+            "statement": "Un pavé droit ABCDEFGH a pour base le carré ABCD de côté $6$ m ([AE], [BF], [CG], [DH] sont les arêtes verticales). Calculer la distance du point $B$ au plan $(ACGE)$.",
+            "steps": [
+              "Repérer : la droite $(BD)$ passe par $B$ et coupe le plan (ACGE) en $O$, centre du carré ; $O$ est le projeté orthogonal de $B$.",
+              "Justifier : $(BD)\\perp(AC)$ (diagonales d'un carré) et $(BD)\\perp(CG)$ ($(CG)$ est orthogonale à la base) ; $(AC)$ et $(CG)$ sont sécantes dans (ACGE), donc $(BD)$ est orthogonale au plan (ACGE).",
+              "Choisir : le point $A$ est dans le plan (ACGE), et le triangle $BOA$ est rectangle en $O$, avec $BA=6$ et $OA=\\frac{AC}{2}$, où $AC^2=36+36=72$, donc $OA^2=18$.",
+              "Calculer : $BO^2=BA^2-OA^2=36-18=18$, donc $BO=3\\sqrt{2}$ m. La distance de $B$ au plan (ACGE) est $3\\sqrt{2}$ m."
+            ]
+          },
+          "pitfall": "Ne pas prendre la longueur d'un segment oblique pour la distance d'un point à un plan. Contre-exemple : dans un pavé droit avec $AB=6$ et $AE=5$, la distance de $E$ au plan (ABCD) est $EA=5$, et non $EB$, car $EB^2=EA^2+AB^2=25+36=61$, donc $EB=\\sqrt{61}>5$. La distance est le plus court des segments : celui qui est **orthogonal** au plan.",
+          "figure": null,
+          "exercise": {
+            "title": "Projeter un point et calculer une distance",
+            "statement": "Dans cet exercice, tu projettes des points sur un plan et tu calcules des distances avec la méthode de la fiche. Les solides sont décrits dans les questions.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Quel est le projeté orthogonal H d'un point M sur un plan (P) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : on cherche la droite passant par M et orthogonale à (P) ; elle coupe (P) en H. Étape 2 — Justifier : H est défini par cette orthogonalité, avec deux droites sécantes de (P). Étape 3 — Choisir : tout point A de (P) donne un triangle MHA rectangle en H. Étape 4 — Calculer : MA² = MH² + HA² ≥ MH². Le projeté n'est ni un point quelconque ni un milieu : c'est le pied de la droite orthogonale à (P).",
+                "answers": [
+                  {
+                    "content": "Le point H de (P) tel que (MH) soit orthogonale à (P).",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le point H de (P) tel que (MH) soit parallèle à (P).",
+                    "correct": false
+                  },
+                  {
+                    "content": "Un point H quelconque de (P) tel que MH soit petit.",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le milieu d'un segment [MA], où A est un point quelconque de (P).",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un point M est à 13 m d'un point A d'un plan (P). Son projeté orthogonal H sur (P) est tel que HA = 5 m. Quelle est la distance de M à (P), en mètres ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : H est le projeté orthogonal de M sur (P), donc (MH) est orthogonale à (P). Étape 2 — Justifier : la droite (MH) est orthogonale à toute droite de (P), en particulier à (HA). Étape 3 — Choisir : le triangle MHA est rectangle en H, avec MA = 13 et HA = 5. Étape 4 — Calculer : MH² = MA² − HA² = 169 − 25 = 144, donc MH = 12 m. La valeur 8 vient de MA − HA, ce qui ne correspond à aucune relation de Pythagore.",
+                "answers": [
+                  {
+                    "content": "12",
+                    "correct": true
+                  }
+                ],
+                "unit": "m"
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales) avec AB = 6 m, AD = 8 m et AE = 5 m, quelle est la distance du point G au plan (ABFE) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le projeté de G sur (ABFE) est F, car (GF) est parallèle à (BC) et (BC) est perpendiculaire à (BA) et à (BF). Étape 2 — Justifier : (GF) est orthogonale à deux droites sécantes (FE) et (FB) de (ABFE), donc orthogonale à (ABFE). Étape 3 — Choisir : le projeté est F, et FG = BC. Étape 4 — Calculer : la distance est FG = BC = AD = 8 m. La valeur 6 est AB, la valeur 5 est AE, la valeur 10 est la diagonale BD de la base.",
+                "answers": [
+                  {
+                    "content": "8 m",
+                    "correct": true
+                  },
+                  {
+                    "content": "6 m",
+                    "correct": false
+                  },
+                  {
+                    "content": "5 m",
+                    "correct": false
+                  },
+                  {
+                    "content": "10 m",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un point M est à 17 m d'un point A d'un plan (P). Son projeté orthogonal H sur (P) est à 15 m de A. Quelle est la distance de M à (P), en mètres ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : H est le projeté orthogonal de M sur (P), donc (MH) est orthogonale à (P). Étape 2 — Justifier : (MH) est orthogonale à (HA), droite de (P). Étape 3 — Choisir : le triangle MHA est rectangle en H, avec MA = 17 et HA = 15. Étape 4 — Calculer : MH² = MA² − HA² = 289 − 225 = 64, donc MH = 8 m. La valeur 2 viendrait de MA − HA, qui n'a pas de sens ici.",
+                "answers": [
+                  {
+                    "content": "8",
+                    "correct": true
+                  }
+                ],
+                "unit": "m"
+              },
+              {
+                "content": "Soit H le projeté orthogonal d'un point M sur un plan (P), et A un point de (P) différent de H. Alors MA > MH.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : (MH) est orthogonale à (P). Étape 2 — Justifier : elle est donc orthogonale à (HA). Étape 3 — Choisir : le triangle MHA est rectangle en H. Étape 4 — Calculer : MA² = MH² + HA², et HA > 0 puisque A ≠ H, donc MA² > MH² et MA > MH. Le projeté est le point du plan le plus proche de M.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales) avec AB = 6 m et AE = 5 m, un élève dit que la distance de E au plan (ABCD) est EB. Quelle est la vraie distance ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le projeté orthogonal de E sur (ABCD) est A, car (EA) est orthogonale à (ABCD). Étape 2 — Justifier : (EA) est perpendiculaire à (AB) et à (AD), sécantes dans (ABCD). Étape 3 — Choisir : le triangle EAB est rectangle en A. Étape 4 — Calculer : la distance est EA = 5 m. L'élève a pris EB, avec EB² = 25 + 36 = 61 : EB est la longueur d'un segment oblique, plus grande que la distance. La valeur 11 est la somme 5 + 6, qui n'est jamais une distance ici.",
+                "answers": [
+                  {
+                    "content": "5 m",
+                    "correct": true
+                  },
+                  {
+                    "content": "√61 m",
+                    "correct": false
+                  },
+                  {
+                    "content": "6 m",
+                    "correct": false
+                  },
+                  {
+                    "content": "11 m",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur les distances à un plan, avec un poteau planté dans une dalle.",
+            "questions": [
+              {
+                "content": "Un point M a pour projeté orthogonal H sur un plan (P). On a MH = 6 et HA = 8, où A est un point de (P). Alors MA² = ___ et MA = ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : H est le projeté orthogonal de M sur (P). Étape 2 — Justifier : (MH) est orthogonale à (P), donc à (HA). Étape 3 — Choisir : le triangle MHA est rectangle en H. Étape 4 — Calculer : MA² = MH² + HA² = 36 + 64 = 100, donc MA = 10.",
+                "answers": [
+                  {
+                    "content": "100",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "10",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Triangle rectangle en H : l'hypoténuse est [MA]."
+              },
+              {
+                "content": "Soit H le projeté orthogonal d'un point M sur un plan (P), et A un point de (P) différent de H. Alors MA < MH.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : (MH) est orthogonale à (P). Étape 2 — Justifier : elle est orthogonale à (HA). Étape 3 — Choisir : le triangle MHA est rectangle en H, d'hypoténuse [MA]. Étape 4 — Calculer : MA² = MH² + HA² > MH², donc MA > MH. L'hypoténuse est le plus grand côté.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ],
+                "hint": "Dans un triangle rectangle, quel est le plus grand côté ?"
+              }
+            ]
+          }
+        },
+        {
+          "name": "Appliquer le théorème des trois perpendiculaires",
+          "remember": "**Théorème des trois perpendiculaires.** Soit $(P)$ un plan, $(d)$ une droite de $(P)$, $M$ un point hors de $(P)$ et $H$ son projeté orthogonal sur $(P)$. Soit $K$ le point de $(d)$ tel que $(HK)\\perp(d)$. Alors $(MK)\\perp(d)$. Réciproquement, si $(MK)\\perp(d)$ avec $K\\in(d)$, alors $(HK)\\perp(d)$. La **distance** du point $M$ à la droite $(d)$ est $MK$.",
+          "method": [
+            "Repérer le plan (P), la droite (d) de ce plan, le point M hors du plan et son projeté orthogonal H sur (P).",
+            "Tracer, dans le plan (P), la perpendiculaire à (d) passant par H : elle coupe (d) en K.",
+            "Appliquer le théorème des trois perpendiculaires : (MH) orthogonale à (P) et (HK) perpendiculaire à (d), donc (MK) perpendiculaire à (d).",
+            "Calculer la distance de M à (d) : c'est $MK$, avec $MK^2=MH^2+HK^2$ dans le triangle $MHK$ rectangle en $H$."
+          ],
+          "example": {
+            "statement": "Une dalle ABCD est un rectangle de $15$ m sur $20$ m ($AB=15$, $AD=20$). Un poteau vertical $[AE]$ de $9$ m est dressé en $A$, et $(AE)$ est orthogonale au plan (ABCD). Calculer la distance du point $E$ à la droite $(BD)$.",
+            "steps": [
+              "Repérer : le plan est (ABCD), la droite est $(BD)$, le point est $E$, et son projeté orthogonal sur (ABCD) est $A$ ; on a $EA=9$.",
+              "Tracer : dans le plan (ABCD), la perpendiculaire à $(BD)$ passant par $A$ coupe $(BD)$ en $K$. Dans le triangle $ABD$ rectangle en $A$ : $BD^2=225+400=625$, donc $BD=25$ ; et $AB\\times AD=BD\\times AK$ donne $AK=\\frac{300}{25}=12$.",
+              "Appliquer : $(EA)$ est orthogonale à (ABCD) et $(AK)\\perp(BD)$, donc $(EK)\\perp(BD)$.",
+              "Calculer : $EK^2=EA^2+AK^2=81+144=225$, donc $EK=15$. La distance de $E$ à $(BD)$ est $15$ m."
+            ]
+          },
+          "pitfall": "Ne pas confondre la distance d'un point à une droite avec la distance de ce point à un plan, ni avec la distance $HK$ dans le plan. Contre-exemple : avec $MH=9$ et $HK=12$, la distance de $M$ à la droite est $MK=\\sqrt{81+144}=15$, qui n'est ni $9$ ni $12$. Le segment qui donne la distance est l'**hypoténuse** $[MK]$.",
+          "figure": null,
+          "exercise": {
+            "title": "Appliquer le théorème des trois perpendiculaires",
+            "statement": "Dans cet exercice, tu appliques le théorème des trois perpendiculaires avec la méthode de la fiche. Les solides sont décrits dans les questions.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Soit (P) un plan, (d) une droite de (P), M un point hors de (P) et H son projeté orthogonal sur (P). Soit K le point de (d) tel que (HK) soit perpendiculaire à (d). Alors (MK) est perpendiculaire à (d).",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : (P), (d), M et H sont donnés, avec (MH) orthogonale à (P). Étape 2 — Tracer : K est le pied de la perpendiculaire à (d) menée de H dans (P). Étape 3 — Appliquer : c'est exactement le théorème des trois perpendiculaires, donc (MK) est perpendiculaire à (d). Étape 4 — Calculer : on peut alors écrire MK² = MH² + HK² pour la distance de M à (d).",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un point M est à 3 m d'un plan (P), son projeté orthogonal sur (P) est H. Une droite (d) de (P) est telle que le point K de (d) vérifie (HK) ⟂ (d) et HK = 4 m. Quelle est la distance de M à (d), en mètres ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : M est hors du plan (P), H est son projeté orthogonal, MH = 3. Étape 2 — Tracer : K est le pied de la perpendiculaire à (d) passant par H, avec HK = 4. Étape 3 — Appliquer : (MH) orthogonale à (P) et (HK) ⟂ (d), donc (MK) ⟂ (d). Étape 4 — Calculer : MK² = MH² + HK² = 9 + 16 = 25, donc MK = 5 m. La valeur 7 est la somme 3 + 4, qui ne correspond pas à une distance en ligne droite.",
+                "answers": [
+                  {
+                    "content": "5",
+                    "correct": true
+                  }
+                ],
+                "unit": "m"
+              },
+              {
+                "content": "Un point M est à 8 m d'un plan (P), son projeté orthogonal sur (P) est H. Le point K d'une droite (d) de (P) est tel que (HK) ⟂ (d) et MK = 17 m. Quelle est la longueur HK, en mètres ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : MH = 8, avec (MH) orthogonale à (P). Étape 2 — Tracer : K est le pied de la perpendiculaire à (d) passant par H. Étape 3 — Appliquer : (MK) ⟂ (d), et le triangle MHK est rectangle en H. Étape 4 — Calculer : HK² = MK² − MH² = 289 − 64 = 225, donc HK = 15 m. La valeur 9 vient de MK − MH, ce qui n'est pas une relation de Pythagore.",
+                "answers": [
+                  {
+                    "content": "15",
+                    "correct": true
+                  }
+                ],
+                "unit": "m"
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales) avec AB = 12 m, AD = 9 m et AE = 5 m, quelle est la distance du point E à la droite (BC) ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le plan est (ABCD), la droite est (BC), le point est E et son projeté orthogonal est A, avec EA = 5. Étape 2 — Tracer : dans le plan (ABCD), la perpendiculaire à (BC) passant par A est (AB), qui coupe (BC) en B (rectangle). Étape 3 — Appliquer : (EA) orthogonale à (ABCD) et (AB) ⟂ (BC), donc (EB) ⟂ (BC). Étape 4 — Calculer : EB² = EA² + AB² = 25 + 144 = 169, donc EB = 13 m. La valeur 5 est la distance de E au plan, la valeur 12 est AB, la valeur 17 est la somme 5 + 12.",
+                "answers": [
+                  {
+                    "content": "13 m",
+                    "correct": true
+                  },
+                  {
+                    "content": "5 m",
+                    "correct": false
+                  },
+                  {
+                    "content": "12 m",
+                    "correct": false
+                  },
+                  {
+                    "content": "17 m",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans un pavé droit ABCDEFGH (ABCD est la base rectangulaire, EFGH la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales), E est au-dessus de A. Soit K le projeté orthogonal de A sur la droite (BD) dans le plan (ABCD). Le théorème des trois perpendiculaires donne : la droite ___ est perpendiculaire à (BD).",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : le plan est (ABCD), la droite est (BD), le point est E et son projeté orthogonal est A. Étape 2 — Tracer : K est le pied de la perpendiculaire à (BD) passant par A. Étape 3 — Appliquer : (EA) est orthogonale à (ABCD) et (AK) est perpendiculaire à (BD), donc (EK) est perpendiculaire à (BD). Étape 4 — Calculer : la distance de E à (BD) est EK. La droite (EA) est orthogonale au plan (ABCD), mais elle ne donne pas la distance de E à (BD).",
+                "answers": [
+                  {
+                    "content": "(EK)",
+                    "correct": true
+                  },
+                  {
+                    "content": "EK",
+                    "correct": true
+                  },
+                  {
+                    "content": "(KE)",
+                    "correct": true
+                  },
+                  {
+                    "content": "KE",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour calculer la distance d'un point à une droite avec le théorème des trois perpendiculaires.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : on identifie le plan, la droite, le point et son projeté. Étape 2 — Tracer : on construit K, pied de la perpendiculaire à (d) menée de H. Étape 3 — Appliquer : on démontre que (MK) est perpendiculaire à (d). Étape 4 — Calculer : on obtient MK avec Pythagore. Il faut montrer que (MK) ⟂ (d) avant de dire que MK est la distance.",
+                "answers": [
+                  {
+                    "content": "Repérer le plan (P), la droite (d) de ce plan, le point M hors du plan et son projeté orthogonal H sur (P)."
+                  },
+                  {
+                    "content": "Tracer, dans le plan (P), la perpendiculaire à (d) passant par H : elle coupe (d) en K."
+                  },
+                  {
+                    "content": "Appliquer le théorème des trois perpendiculaires : (MH) orthogonale à (P) et (HK) perpendiculaire à (d), donc (MK) perpendiculaire à (d)."
+                  },
+                  {
+                    "content": "Calculer la distance de M à (d) : c'est MK, avec MK² = MH² + HK² dans le triangle MHK rectangle en H."
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur la distance d'un point à une droite, avec un hauban fixé sur une dalle.",
+            "questions": [
+              {
+                "content": "Un point M est à 6 m d'un plan (P), de projeté orthogonal H. Le point K d'une droite (d) de (P) vérifie (HK) ⟂ (d) et HK = 8 m. Quelle est la distance de M à (d), en mètres ?",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : MH = 6, avec (MH) orthogonale à (P). Étape 2 — Tracer : K est le pied de la perpendiculaire à (d) menée de H, avec HK = 8. Étape 3 — Appliquer : (MK) ⟂ (d). Étape 4 — Calculer : MK² = 36 + 64 = 100, donc MK = 10 m.",
+                "answers": [
+                  {
+                    "content": "10",
+                    "correct": true
+                  }
+                ],
+                "unit": "m",
+                "hint": "Le triangle MHK est rectangle en H."
+              },
+              {
+                "content": "Dans le triangle MHK rectangle en H, avec MH = 9 et MK = 15, on a HK² = ___ , donc HK = ___ .",
+                "question_type": "numeric",
+                "tolerance": 0,
+                "explanation": "Étape 1 — Repérer : (MH) est orthogonale au plan, H est le projeté de M. Étape 2 — Tracer : K est le pied de la perpendiculaire à (d) menée de H. Étape 3 — Appliquer : le triangle MHK est rectangle en H. Étape 4 — Calculer : HK² = MK² − MH² = 225 − 81 = 144, donc HK = 12.",
+                "answers": [
+                  {
+                    "content": "144",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "12",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Utilise HK² = MK² − MH²."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un caisson en béton sur le chantier",
+          "statement": "Un caisson en béton a la forme d'un pavé droit ABCDEFGH : ABCD est la base rectangulaire posée au sol, EFGH est la face du dessus, et [AE], [BF], [CG], [DH] sont les arêtes verticales. On donne AB = 4 dm, AD = 3 dm et AE = 12 dm.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un caisson en béton a la forme d'un pavé droit ABCDEFGH (ABCD est la base, EFGH le dessus, [AE], [BF], [CG], [DH] les arêtes verticales). Quel plan est orthogonal à la droite (CG) parmi ceux-ci ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : dans le plan (ABCD), on prend (CB) et (CD), sécantes en C. Étape 2 — Montrer : (CG) est perpendiculaire à (CB) (rectangle BCGF). Étape 3 — Montrer : (CG) est perpendiculaire à (CD) (rectangle CDHG). Étape 4 — Conclure : (CG) est orthogonale à (ABCD). Le plan (BCGF) contient (CG) ; les plans (ABFE) et (ADHE) contiennent des arêtes verticales parallèles à (CG), donc (CG) n'est pas orthogonale à eux.",
+              "answers": [
+                {
+                  "content": "(ABCD)",
+                  "correct": true
+                },
+                {
+                  "content": "(ABFE)",
+                  "correct": false
+                },
+                {
+                  "content": "(BCGF)",
+                  "correct": false
+                },
+                {
+                  "content": "(ADHE)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Un caisson est un pavé droit ABCDEFGH avec AB = 4 dm, AD = 3 dm et AE = 12 dm (arêtes verticales [AE], [BF], [CG], [DH]). Quelle est la distance du point F au plan (ABCD), en décimètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le projeté orthogonal de F sur (ABCD) est B, car (FB) est orthogonale à (ABCD). Étape 2 — Justifier : (FB) est perpendiculaire à (BA) et à (BC), sécantes dans (ABCD). Étape 3 — Choisir : le triangle FBA est rectangle en B. Étape 4 — Calculer : la distance de F à (ABCD) est FB = AE = 12 dm. Le segment [FA] est oblique, plus long que la distance.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "dm"
+            },
+            {
+              "content": "Un caisson est un pavé droit ABCDEFGH avec AB = 4 dm, AD = 3 dm et AE = 12 dm (arêtes verticales [AE], [BF], [CG], [DH]). Quelle est la distance du point G au plan (ADHE), en décimètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le projeté orthogonal de G sur (ADHE) est H, car (GH) est parallèle à (AB) et (AB) est orthogonale à (ADHE). Étape 2 — Justifier : (AB) est perpendiculaire à (AD) et à (AE), sécantes dans (ADHE) ; (GH), parallèle à (AB), l'est donc aussi. Étape 3 — Choisir : le triangle GHD est rectangle en H. Étape 4 — Calculer : la distance est GH = AB = 4 dm. La valeur 3 est AD, longueur de l'autre côté de la base, sans rapport avec la position de G par rapport à (ADHE).",
+              "answers": [
+                {
+                  "content": "4",
+                  "correct": true
+                }
+              ],
+              "unit": "dm"
+            },
+            {
+              "content": "Un caisson est un pavé droit ABCDEFGH avec AB = 4 dm et AD = 3 dm (la base ABCD est un rectangle). Quelle est la longueur de la diagonale AC, en décimètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le triangle ABC est rectangle en B dans le plan (ABCD). Étape 2 — Justifier : ABCD est un rectangle, donc (AB) est perpendiculaire à (BC). Étape 3 — Choisir : l'hypoténuse est [AC], avec AB = 4 et BC = AD = 3. Étape 4 — Calculer : AC² = 16 + 9 = 25, donc AC = 5 dm.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "dm"
+            },
+            {
+              "content": "Un caisson est un pavé droit ABCDEFGH avec AB = 4 dm, AD = 3 dm et AE = 12 dm (arêtes verticales [AE], [BF], [CG], [DH]). Quelle est la longueur de la diagonale AG, en décimètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le projeté orthogonal de G sur (ABCD) est C, car (GC) est orthogonale à (ABCD). Étape 2 — Justifier : (CG) est perpendiculaire à (CB) et à (CD), sécantes dans (ABCD). Étape 3 — Choisir : A est dans (ABCD), donc le triangle ACG est rectangle en C ; on a AC² = 16 + 9 = 25 et CG = 12. Étape 4 — Calculer : AG² = AC² + CG² = 25 + 144 = 169, donc AG = 13 dm.",
+              "answers": [
+                {
+                  "content": "13",
+                  "correct": true
+                }
+              ],
+              "unit": "dm"
+            },
+            {
+              "content": "Un caisson est un pavé droit ABCDEFGH avec AB = 4 dm, AD = 3 dm et AE = 12 dm (arêtes verticales [AE], [BF], [CG], [DH]). La distance du point G au plan (ABCD) est égale à AG.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : le projeté orthogonal de G sur (ABCD) est C. Étape 2 — Justifier : (CG) est orthogonale à (ABCD). Étape 3 — Choisir : A est un point de (ABCD) différent de C, donc le triangle ACG est rectangle en C. Étape 4 — Calculer : la distance est CG = 12 dm, alors que AG = 13 dm est la longueur d'un segment oblique, plus grande que la distance. L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "La poutre de la charpente et la dalle",
+          "statement": "Sur un chantier, une dalle rectangulaire ABCD a pour dimensions AB = 6 m et BC = 8 m. Un mur est construit sur la diagonale [AC] : ACGE est un rectangle vertical, avec [AE] et [CG] verticales de 5 m. On note K le point de [AC] tel que (BK) soit perpendiculaire à (AC).",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une dalle ABCD est un rectangle avec AB = 6 m et BC = 8 m ; ACGE est un rectangle vertical, avec [AE] et [CG] verticales. K est le pied de la perpendiculaire à (AC) passant par B dans le plan (ABCD). Pour montrer que (BK) est orthogonale au plan (ACGE), quelles droites de (ACGE) utilise-t-on ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : il faut deux droites sécantes de (ACGE) : (AC) et (CG) se coupent en C. Étape 2 — Montrer : (BK) ⟂ (AC) par construction de K. Étape 3 — Montrer : (CG) est orthogonale à (ABCD), qui contient (BK), donc (BK) ⟂ (CG). Étape 4 — Conclure : (BK) est orthogonale au plan (ACGE). Les droites (CG) et (AE) sont parallèles : elles ne suffisent pas ; (AC) seule ne suffit pas non plus.",
+              "answers": [
+                {
+                  "content": "(AC) et (CG), sécantes en C.",
+                  "correct": true
+                },
+                {
+                  "content": "(AC) et (AE) seulement si elles sont parallèles.",
+                  "correct": false
+                },
+                {
+                  "content": "(CG) et (AE), qui sont parallèles.",
+                  "correct": false
+                },
+                {
+                  "content": "(AC) seule, car (BK) est perpendiculaire à (AC).",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une dalle ABCD est un rectangle avec AB = 6 m et BC = 8 m ; (CG) est une droite verticale passant par C, orthogonale au plan (ABCD). K est un point de (AC) du plan (ABCD). Alors (CG) est orthogonale à (BK).",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Choisir : (BK) est une droite du plan (ABCD). Étape 2 — Montrer : (CG) est orthogonale à (ABCD). Étape 3 — Montrer : une droite orthogonale à un plan est orthogonale à toutes les droites de ce plan. Étape 4 — Conclure : (CG) est orthogonale à (BK).",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une dalle ABCD est un rectangle avec AB = 6 m et BC = 8 m. Quelle est la longueur de la diagonale AC, en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Choisir : le triangle ABC est rectangle en B. Étape 2 — Montrer : ABCD est un rectangle, donc (AB) est perpendiculaire à (BC). Étape 3 — Montrer : l'hypoténuse est [AC], avec AB = 6 et BC = 8. Étape 4 — Conclure : AC² = 36 + 64 = 100, donc AC = 10 m.",
+              "answers": [
+                {
+                  "content": "10",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Dans le triangle ABC rectangle en B, avec AB = 6 m, BC = 8 m et AC = 10 m, K est le pied de la hauteur issue de B sur [AC]. Quelle est la longueur BK, en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Choisir : l'aire du triangle ABC se calcule de deux façons. Étape 2 — Montrer : avec les côtés de l'angle droit, l'aire est AB × BC ÷ 2 = 24. Étape 3 — Montrer : avec la base [AC] et la hauteur [BK], l'aire est AC × BK ÷ 2 = 5 × BK. Étape 4 — Conclure : 5 × BK = 24, donc BK = 4,8 m.",
+              "answers": [
+                {
+                  "content": "4,8",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Une dalle ABCD est un rectangle avec AB = 6 m et BC = 8 m ; ACGE est un rectangle vertical, avec [CG] verticale. K est le pied de la perpendiculaire à (AC) passant par B, et BK = 4,8 m. Quelle est la distance du point B au plan (ACGE), en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Choisir : dans (ACGE), on prend (AC) et (CG), sécantes en C. Étape 2 — Montrer : (BK) ⟂ (AC) par construction de K. Étape 3 — Montrer : (CG) est orthogonale à (ABCD), donc à (BK). Étape 4 — Conclure : (BK) est orthogonale à (ACGE), K est le projeté orthogonal de B, et la distance est BK = 4,8 m. La valeur 6 est AB, un segment oblique par rapport au plan (ACGE).",
+              "answers": [
+                {
+                  "content": "4,8",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Une dalle ABCD est un rectangle avec AB = 6 m et BC = 8 m ; ACGE est un rectangle vertical, avec [AE] et [CG] verticales de 5 m. Quelle est la distance du point B au plan (ACGE) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : le plan est (ACGE), le point est B, et son projeté orthogonal est K, pied de la hauteur issue de B dans le triangle ABC. Étape 2 — Montrer : (BK) est orthogonale à (AC) et à (CG). Étape 3 — Montrer : donc (BK) est orthogonale à (ACGE). Étape 4 — Conclure : la distance est BK = AB × BC ÷ AC = 48 ÷ 10 = 4,8 m. Les valeurs 6 et 8 sont les côtés AB et BC, obliques par rapport au plan ; la valeur 5 est la hauteur du mur, sans rapport avec la position de B.",
+              "answers": [
+                {
+                  "content": "4,8 m",
+                  "correct": true
+                },
+                {
+                  "content": "6 m",
+                  "correct": false
+                },
+                {
+                  "content": "8 m",
+                  "correct": false
+                },
+                {
+                  "content": "5 m",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un abri pyramidal sur la dalle",
+          "statement": "Un abri de chantier a la forme d'une pyramide SABCD : la base ABCD est un rectangle horizontal avec AB = 3 m et BC = 4 m, et le sommet S est à la verticale du coin A, avec SA = 4 m. La droite (SA) est orthogonale au plan (ABCD).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une pyramide SABCD a pour base le rectangle ABCD (AB = 3 m, BC = 4 m) et (SA) est orthogonale au plan (ABCD). Pour montrer que (BC) est orthogonale au plan (SAB), quelles droites utilise-t-on ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Choisir : on cherche deux droites sécantes du plan (SAB) auxquelles (BC) est orthogonale à coup sûr : (AB) et (SA), sécantes en A. Étape 2 — Montrer : (BC) ⟂ (AB), car ABCD est un rectangle. Étape 3 — Montrer : (SA) est orthogonale au plan (ABCD), qui contient (BC), donc (SA) ⟂ (BC). Étape 4 — Conclure : (BC) est orthogonale à (SAB). La droite (AD) n'est pas dans (SAB) ; (SA) seule ne suffit pas ; avec (SB), on supposerait déjà ce qu'on veut démontrer.",
+              "answers": [
+                {
+                  "content": "(AB) et (SA)",
+                  "correct": true
+                },
+                {
+                  "content": "(AB) et (AD)",
+                  "correct": false
+                },
+                {
+                  "content": "(SA) seule",
+                  "correct": false
+                },
+                {
+                  "content": "(SB) et (AB)",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une pyramide SABCD a pour base le rectangle ABCD (AB = 3 m, BC = 4 m) et (SA) est orthogonale au plan (ABCD). Alors les plans (SAB) et (SBC) sont perpendiculaires.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Choisir : dans le plan (SBC), on prend la droite (BC). Étape 2 — Montrer : (BC) est orthogonale à (AB) et à (SA), sécantes en A dans (SAB), donc (BC) est orthogonale à (SAB). Étape 3 — Appliquer : le plan (SBC) contient une droite orthogonale au plan (SAB). Étape 4 — Conclure : (SAB) et (SBC) sont perpendiculaires.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une pyramide SABCD a pour base le rectangle ABCD (AB = 3 m, BC = 4 m) et (SA) est orthogonale au plan (ABCD), avec SA = 4 m. Quelle est la longueur SB, en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Choisir : le triangle SAB est dans le plan (SAB). Étape 2 — Montrer : (SA) est orthogonale à (ABCD), donc perpendiculaire à (AB) : SAB est rectangle en A. Étape 3 — Montrer : l'hypoténuse est [SB], avec SA = 4 et AB = 3. Étape 4 — Conclure : SB² = 16 + 9 = 25, donc SB = 5 m.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Une pyramide SABCD a pour base le rectangle ABCD (AB = 3 m, BC = 4 m) et (SA) est orthogonale au plan (ABCD), avec SA = 4 m. Soit H le pied de la hauteur issue de A dans le triangle SAB, rectangle en A, avec SB = 5 m. Quelle est la distance du point A au plan (SBC), en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : H est le projeté orthogonal de A sur (SBC), car (AH) ⟂ (SB) et (AH) ⟂ (BC) puisque (BC) est orthogonale à (SAB). Étape 2 — Justifier : (SB) et (BC) sont sécantes en B dans (SBC), donc (AH) est orthogonale à (SBC). Étape 3 — Choisir : l'aire du triangle SAB vaut SA × AB ÷ 2 = 6, et aussi SB × AH ÷ 2 = 2,5 × AH. Étape 4 — Calculer : AH = 6 ÷ 2,5 = 2,4 m, c'est la distance de A au plan (SBC). La valeur 3 est AB, un segment oblique.",
+              "answers": [
+                {
+                  "content": "2,4",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Une pyramide SABCD a pour base le rectangle ABCD (AB = 3 m, BC = 4 m) et (SA) est orthogonale au plan (ABCD). Démontre que la droite (BC) est orthogonale au plan (SAB).",
+              "question_type": "written",
+              "points": 3,
+              "criteria": [
+                "Choisir deux droites sécantes du plan (SAB) : (AB) et (SA)",
+                "Montrer (BC) ⟂ (AB) avec le rectangle ABCD",
+                "Montrer (BC) ⟂ (SA) car (SA) est orthogonale à (ABCD) qui contient (BC)",
+                "Conclure avec le critère d'orthogonalité droite et plan"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Choisir : (AB) et (SA) sont deux droites sécantes en A du plan (SAB). Étape 2 — Montrer : ABCD est un rectangle, donc (BC) ⟂ (AB). Étape 3 — Montrer : (SA) est orthogonale au plan (ABCD), qui contient (BC), donc (SA) ⟂ (BC). Étape 4 — Conclure : (BC) est orthogonale à deux droites sécantes de (SAB), donc (BC) est orthogonale au plan (SAB). Barème : choix des deux droites 0,5 ; chaque orthogonalité justifiée 1 ; conclusion avec le critère 0,5.",
+              "answers": [],
+              "starter": "Les droites (AB) et (SA) sont sécantes en A et situées dans le plan (SAB). D'une part…"
+            },
+            {
+              "content": "Une pyramide SABCD a pour base le rectangle ABCD, avec (SA) orthogonale au plan (ABCD). Les plans (SAB) et (SAD) sont perpendiculaires à (ABCD), donc ils sont parallèles.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Choisir : (SA) est contenue dans (SAB) et dans (SAD). Étape 2 — Montrer : (SA) est orthogonale à (ABCD), donc chacun des deux plans est perpendiculaire à (ABCD). Étape 3 — Appliquer : mais ces deux plans ont la droite (SA) en commun, donc ils ne sont pas parallèles. Étape 4 — Conclure : ils sont sécants suivant (SA). Deux plans perpendiculaires à un même troisième ne sont pas forcément parallèles.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Le mât et ses haubans sur la dalle",
+          "statement": "Sur un chantier, une dalle rectangulaire ABCD a pour dimensions AB = 20 m et AD = 15 m. Un mât vertical [AS] de 16 m est dressé au coin A, et la droite (AS) est orthogonale au plan (ABCD). Des haubans relient le sommet S aux autres coins de la dalle. On note K le point de la diagonale [BD] tel que (AK) soit perpendiculaire à (BD).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Une dalle rectangulaire ABCD a pour dimensions AB = 20 m et AD = 15 m. Quelle est la longueur de la diagonale BD, en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le triangle ABD est rectangle en A, dans le plan (ABCD). Étape 2 — Justifier : ABCD est un rectangle, donc (AB) ⟂ (AD). Étape 3 — Choisir : l'hypoténuse est [BD], avec AB = 20 et AD = 15. Étape 4 — Calculer : BD² = 400 + 225 = 625, donc BD = 25 m.",
+              "answers": [
+                {
+                  "content": "25",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Dans le triangle ABD rectangle en A, avec AB = 20 m, AD = 15 m et BD = 25 m, K est le pied de la hauteur issue de A sur [BD]. Quelle est la longueur AK, en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : on calcule l'aire du triangle ABD de deux façons. Étape 2 — Justifier : avec les côtés de l'angle droit, l'aire vaut AB × AD ÷ 2 = 150. Étape 3 — Choisir : avec la base [BD] et la hauteur [AK], l'aire vaut BD × AK ÷ 2 = 12,5 × AK. Étape 4 — Calculer : AK = 150 ÷ 12,5 = 12 m.",
+              "answers": [
+                {
+                  "content": "12",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Une dalle rectangulaire ABCD est surmontée d'un mât [AS] avec (AS) orthogonale au plan (ABCD). K est le pied de la perpendiculaire à (BD) passant par A dans le plan (ABCD). Quel théorème permet de conclure que (SK) est perpendiculaire à (BD) ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : le plan est (ABCD), la droite est (BD), le point est S et son projeté orthogonal est A. Étape 2 — Tracer : K est le pied de la perpendiculaire à (BD) menée de A. Étape 3 — Appliquer : (SA) est orthogonale à (ABCD) et (AK) ⟂ (BD), donc (SK) ⟂ (BD) : c'est le théorème des trois perpendiculaires. Étape 4 — Calculer : la distance de S à (BD) est alors SK. Thalès traite des droites parallèles ; la réciproque de Pythagore sert à prouver un angle droit à partir de longueurs.",
+              "answers": [
+                {
+                  "content": "Le théorème des trois perpendiculaires.",
+                  "correct": true
+                },
+                {
+                  "content": "Le théorème de Thalès.",
+                  "correct": false
+                },
+                {
+                  "content": "La réciproque du théorème de Pythagore.",
+                  "correct": false
+                },
+                {
+                  "content": "Le théorème de la médiane.",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une dalle rectangulaire ABCD (AB = 20 m, AD = 15 m) est surmontée d'un mât [AS] de 16 m, avec (AS) orthogonale à (ABCD). K est le pied de la perpendiculaire à (BD) passant par A, et AK = 12 m. Quelle est la distance du point S à la droite (BD), en mètres ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : le plan est (ABCD), la droite est (BD), le point est S et son projeté est A, avec SA = 16. Étape 2 — Tracer : K est le pied de la perpendiculaire à (BD) menée de A, avec AK = 12. Étape 3 — Appliquer : (SA) ⟂ (ABCD) et (AK) ⟂ (BD), donc (SK) ⟂ (BD). Étape 4 — Calculer : SK² = SA² + AK² = 256 + 144 = 400, donc SK = 20 m. La valeur 16 est la hauteur du mât, c'est-à-dire la distance de S au plan, pas à la droite (BD).",
+              "answers": [
+                {
+                  "content": "20",
+                  "correct": true
+                }
+              ],
+              "unit": "m"
+            },
+            {
+              "content": "Une dalle rectangulaire ABCD est surmontée d'un mât [AS] avec (AS) orthogonale à (ABCD). La distance du point S à la droite (BD) est égale à SA.",
+              "question_type": "true_false",
+              "explanation": "Étape 1 — Repérer : SA est la distance de S au plan (ABCD), puisque A est le projeté orthogonal de S. Étape 2 — Tracer : la distance de S à la droite (BD) est SK, où K est le pied de la perpendiculaire à (BD) menée de A. Étape 3 — Appliquer : (SK) ⟂ (BD) par le théorème des trois perpendiculaires. Étape 4 — Calculer : SK² = SA² + AK² > SA², donc SK > SA si A n'est pas sur (BD). L'affirmation est fausse.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Une dalle rectangulaire ABCD est surmontée d'un mât [AS] avec (AS) orthogonale au plan (ABCD). K est le pied de la perpendiculaire à (BD) passant par A. Démontre que (SK) est perpendiculaire à (BD).",
+              "question_type": "written",
+              "points": 4,
+              "criteria": [
+                "Repérer le plan (ABCD), la droite (BD), le point S et son projeté A",
+                "Tracer K, pied de la perpendiculaire à (BD) menée de A",
+                "Énoncer le théorème des trois perpendiculaires avec ses hypothèses",
+                "Conclure que (SK) est perpendiculaire à (BD)"
+              ],
+              "explanation": "Corrigé modèle. Étape 1 — Repérer : le plan est (ABCD), la droite est (BD), le point S est hors du plan et son projeté orthogonal est A, car (SA) est orthogonale à (ABCD). Étape 2 — Tracer : dans (ABCD), K est le point de (BD) tel que (AK) ⟂ (BD). Étape 3 — Appliquer : (SA) est orthogonale à (ABCD) et (AK) est perpendiculaire à (BD), donc, d'après le théorème des trois perpendiculaires, (SK) ⟂ (BD). Étape 4 — Conclure : (SK) est perpendiculaire à (BD). Barème : repérage 1 ; construction de K 1 ; énoncé du théorème 1 ; conclusion 1.",
+              "answers": [],
+              "starter": "Le point A est le projeté orthogonal de S sur le plan (ABCD), car…"
+            },
+            {
+              "content": "Une dalle rectangulaire ABCD (AB = 20 m, AD = 15 m) est surmontée d'un mât [AS] de 16 m, avec (AS) orthogonale à (ABCD). K est le pied de la perpendiculaire à (BD) passant par A, avec BD = 25 m et SK = 20 m, et (SK) ⟂ (BD). Quelle est l'aire du triangle SBD, en mètres carrés ?",
+              "question_type": "numeric",
+              "tolerance": 0,
+              "explanation": "Étape 1 — Repérer : dans le triangle SBD, la base est [BD] et (SK) est perpendiculaire à (BD). Étape 2 — Tracer : K est sur (BD), donc [SK] est la hauteur issue de S. Étape 3 — Appliquer : (SK) ⟂ (BD) par le théorème des trois perpendiculaires. Étape 4 — Calculer : aire = BD × SK ÷ 2 = 25 × 20 ÷ 2 = 250 m². La valeur 200 oublie la division par 2.",
+              "answers": [
+                {
+                  "content": "250",
+                  "correct": true
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
