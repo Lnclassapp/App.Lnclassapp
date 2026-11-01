@@ -73,10 +73,10 @@
                 ]
               },
               {
-                "content": "Au ludo, on lance un dé équilibré à six faces numérotées de 1 à 6. $A$ : « le résultat est pair » ; $B$ : « le résultat est un multiple de 3 ». Combien d'issues réalisent $A \\cup B$ ?",
+                "content": "Au ludo, on lance un dé équilibré à six faces numérotées de 1 à 6. $A$ : « le résultat est au plus 3 » ; $B$ : « le résultat est un multiple de 3 ». Combien d'issues réalisent $A \\cup B$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Décrire : $\\Omega = \\{1\\,;2\\,;3\\,;4\\,;5\\,;6\\}$. Étape 2 — Traduire : $A = \\{2\\,;4\\,;6\\}$ et $B = \\{3\\,;6\\}$. Étape 3 — Combiner : « $A$ ou $B$ » regroupe les issues de $A$ et de $B$ sans compter deux fois la face 6 : $A \\cup B = \\{2\\,;3\\,;4\\,;6\\}$. Étape 4 — Compter : $\\text{card}(A \\cup B) = 4$. Répondre 5 en faisant $3 + 2$ compte la face 6 deux fois.",
+                "explanation": "Étape 1 — Décrire : $\\Omega = \\{1\\,;2\\,;3\\,;4\\,;5\\,;6\\}$. Étape 2 — Traduire : $A = \\{1\\,;2\\,;3\\}$ et $B = \\{3\\,;6\\}$. Étape 3 — Combiner : « $A$ ou $B$ » regroupe les issues de $A$ et de $B$ sans compter deux fois la face 3 : $A \\cup B = \\{1\\,;2\\,;3\\,;6\\}$. Étape 4 — Compter : $\\text{card}(A \\cup B) = 4$. Répondre 5 en faisant $3 + 2$ compte la face 3 deux fois.",
                 "answers": [
                   {
                     "content": "4",
@@ -85,10 +85,10 @@
                 ]
               },
               {
-                "content": "Au ludo, on lance un dé équilibré à six faces numérotées de 1 à 6. $A$ : « le résultat est pair » ; $B$ : « le résultat est un multiple de 3 ». Combien d'issues réalisent $A \\cap B$ ?",
+                "content": "Au ludo, on lance un dé équilibré à six faces numérotées de 1 à 6. $A$ : « le résultat est au plus 3 » ; $B$ : « le résultat est un multiple de 3 ». Combien d'issues réalisent $A \\cap B$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Décrire : $\\Omega = \\{1\\,;2\\,;3\\,;4\\,;5\\,;6\\}$. Étape 2 — Traduire : $A = \\{2\\,;4\\,;6\\}$ et $B = \\{3\\,;6\\}$. Étape 3 — Combiner : « $A$ et $B$ » ne garde que les issues communes, $A \\cap B = \\{6\\}$. Étape 4 — Compter : $\\text{card}(A \\cap B) = 1$. Le résultat 2 serait la taille de $B$, pas celle de l'intersection.",
+                "explanation": "Étape 1 — Décrire : $\\Omega = \\{1\\,;2\\,;3\\,;4\\,;5\\,;6\\}$. Étape 2 — Traduire : $A = \\{1\\,;2\\,;3\\}$ et $B = \\{3\\,;6\\}$. Étape 3 — Combiner : « $A$ et $B$ » ne garde que les issues communes, $A \\cap B = \\{3\\}$. Étape 4 — Compter : $\\text{card}(A \\cap B) = 1$. Le résultat 2 serait la taille de $B$, pas celle de l'intersection.",
                 "answers": [
                   {
                     "content": "1",
@@ -99,7 +99,7 @@
               {
                 "content": "Au ludo, on lance un dé équilibré à six faces numérotées de 1 à 6. Quel est l'événement contraire de « le résultat est au moins 5 » ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Décrire : $\\Omega = \\{1\\,;2\\,;3\\,;4\\,;5\\,;6\\}$. Étape 2 — Traduire : « au moins 5 » donne $\\{5\\,;6\\}$. Étape 3 — Combiner : le contraire contient toutes les autres issues, $\\{1\\,;2\\,;3\\,;4\\}$, c'est-à-dire « au plus 4 ». Étape 4 — Compter : $2 + 4 = 6 = \\text{card}(\\Omega)$. « Au plus 5 » garde la face 5, qui réalise déjà l'événement de départ.",
+                "explanation": "Étape 1 — Décrire : $\\Omega = \\{1\\,;2\\,;3\\,;4\\,;5\\,;6\\}$. Étape 2 — Traduire : « au moins 5 » donne $\\{5\\,;6\\}$. Étape 3 — Combiner : le contraire contient toutes les autres issues, $\\{1\\,;2\\,;3\\,;4\\}$, c'est-à-dire « au plus 4 ». Étape 4 — Compter : $2 + 4 = 6 = \\text{card}(\\Omega)$. « Au plus 5 » garde la face 5, qui réalise déjà l'événement de départ. « Exactement 4 » ne désigne qu'une issue, alors que le contraire en contient quatre ; « au moins 4 » contient 5 et 6, qui réalisent déjà l'événement de départ : l'élève change le sens de l'inégalité sans décaler la borne.",
                 "answers": [
                   {
                     "content": "Le résultat est au plus 4",
@@ -224,10 +224,10 @@
             "figure": null,
             "questions": [
               {
-                "content": "Une roue de jeu de société est partagée en 10 secteurs égaux numérotés de 1 à 10 ; on la fait tourner au hasard. Calcule la probabilité de l'événement « le numéro est un multiple de 4 ».",
+                "content": "Une roue de jeu de société est partagée en 10 secteurs égaux numérotés de 1 à 10 ; on la fait tourner au hasard. Calcule la probabilité de l'événement « le numéro est un multiple de 4 » (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : 10 secteurs égaux, donc $\\text{card}(\\Omega) = 10$ et les issues sont équiprobables. Étape 2 — Déterminer : les multiples de 4 sont 4 et 8, donc 2 cas favorables. Étape 3 — Appliquer : $P = \\dfrac{2}{10}$. Étape 4 — Simplifier : $\\dfrac{2}{10} = 0{,}2 = \\dfrac{1}{5}$, compris entre 0 et 1.",
+                "explanation": "Étape 1 — Identifier : 10 secteurs égaux, donc $\\text{card}(\\Omega) = 10$ et les issues sont équiprobables. Étape 2 — Déterminer : les multiples de 4 sont 4 et 8, donc 2 cas favorables. Étape 3 — Appliquer : $P = \\dfrac{2}{10}$. Étape 4 — Simplifier : $\\dfrac{2}{10} = 0{,}2 = \\dfrac{1}{5}$, compris entre 0 et 1. Répondre $\\dfrac{4}{10}$ confond le nombre 4 de l'énoncé avec le nombre de multiples de 4, qui sont seulement deux.",
                 "answers": [
                   {
                     "content": "0,2",
@@ -236,10 +236,10 @@
                 ]
               },
               {
-                "content": "Une roue de jeu de société est partagée en 10 secteurs égaux numérotés de 1 à 10 ; on la fait tourner au hasard. Calcule la probabilité de l'événement « le numéro est supérieur à 6 ».",
+                "content": "Une roue de jeu de société est partagée en 10 secteurs égaux numérotés de 1 à 10 ; on la fait tourner au hasard. Calcule la probabilité de l'événement « le numéro est strictement supérieur à 6 » (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Identifier : 10 secteurs égaux, $\\text{card}(\\Omega) = 10$, issues équiprobables. Étape 2 — Déterminer : « supérieur à 6 » donne 7, 8, 9, 10, soit 4 cas favorables (le 6 n'en fait pas partie). Étape 3 — Appliquer : $P = \\dfrac{4}{10}$. Étape 4 — Simplifier : $0{,}4$. Répondre 0,5 compterait le 6 par erreur.",
+                "explanation": "Étape 1 — Identifier : 10 secteurs égaux, $\\text{card}(\\Omega) = 10$, issues équiprobables. Étape 2 — Déterminer : « strictement supérieur à 6 » donne 7, 8, 9, 10, soit 4 cas favorables (le 6 n'en fait pas partie). Étape 3 — Appliquer : $P = \\dfrac{4}{10}$. Étape 4 — Simplifier : $0{,}4$. Répondre 0,5 compterait le 6 par erreur.",
                 "answers": [
                   {
                     "content": "0,4",
@@ -250,14 +250,14 @@
               {
                 "content": "Une roue de jeu de société est partagée en 10 secteurs égaux numérotés de 1 à 10 ; on la fait tourner au hasard. Quelle est la probabilité de l'événement « le numéro est un nombre premier » ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $\\text{card}(\\Omega) = 10$, issues équiprobables. Étape 2 — Déterminer : les nombres premiers de 1 à 10 sont 2, 3, 5 et 7, soit 4 cas favorables. Étape 3 — Appliquer : $P = \\dfrac{4}{10}$. Étape 4 — Simplifier : $0{,}4$. Le nombre 1 n'est pas premier : l'inclure donnerait $\\dfrac{5}{10}$.",
+                "explanation": "Étape 1 — Identifier : $\\text{card}(\\Omega) = 10$, issues équiprobables. Étape 2 — Déterminer : les nombres premiers de 1 à 10 sont 2, 3, 5 et 7, soit 4 cas favorables. Étape 3 — Appliquer : $P = \\dfrac{4}{10}$. Étape 4 — Simplifier : $\\dfrac{4}{10} = \\dfrac{2}{5} = 0{,}4$, compris entre 0 et 1. Le nombre 1 n'est pas premier : l'inclure donnerait $\\dfrac{1}{2}$ ($\\dfrac{5}{10}$). $\\dfrac{3}{10}$ oublie un nombre premier (3 cas favorables au lieu de 4). $\\dfrac{1}{5}$ ($\\dfrac{2}{10}$) ne retient que deux nombres premiers sur les quatre.",
                 "answers": [
                   {
-                    "content": "$\\dfrac{4}{10}$",
+                    "content": "$\\dfrac{2}{5}$",
                     "correct": true
                   },
                   {
-                    "content": "$\\dfrac{5}{10}$",
+                    "content": "$\\dfrac{1}{2}$",
                     "correct": false
                   },
                   {
@@ -265,13 +265,13 @@
                     "correct": false
                   },
                   {
-                    "content": "$\\dfrac{2}{10}$",
+                    "content": "$\\dfrac{1}{5}$",
                     "correct": false
                   }
                 ]
               },
               {
-                "content": "Une roue truquée a trois secteurs : $P(\\text{rouge}) = 0{,}5$ et $P(\\text{vert}) = 0{,}3$. Calcule la probabilité de l'issue « bleu », sachant que ces trois issues sont les seules possibles.",
+                "content": "Une roue truquée a trois secteurs : $P(\\text{rouge}) = 0{,}5$ et $P(\\text{vert}) = 0{,}3$. Les trois issues possibles sont rouge, vert et bleu. Calcule la probabilité de l'issue « bleu » (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Identifier : l'univers est $\\{\\text{rouge}\\,;\\text{vert}\\,;\\text{bleu}\\}$ et les issues ne sont pas équiprobables (loi donnée). Étape 2 — Déterminer : la somme des probabilités des trois issues vaut 1. Étape 3 — Appliquer : $P(\\text{bleu}) = 1 - 0{,}5 - 0{,}3$. Étape 4 — Simplifier : $0{,}2$, compris entre 0 et 1. Répondre $\\dfrac{1}{3}$ supposerait l'équiprobabilité, ce qui est faux ici.",
@@ -283,7 +283,7 @@
                 ]
               },
               {
-                "content": "Une roue truquée a trois secteurs : $P(\\text{rouge}) = 0{,}5$, $P(\\text{vert}) = 0{,}3$ et $P(\\text{bleu}) = 0{,}2$. Calcule la probabilité de l'événement « la roue s'arrête sur rouge ou sur bleu ».",
+                "content": "Une roue truquée a trois secteurs : $P(\\text{rouge}) = 0{,}5$, $P(\\text{vert}) = 0{,}3$ et $P(\\text{bleu}) = 0{,}2$. Calcule la probabilité de l'événement « la roue s'arrête sur rouge ou sur bleu » (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Identifier : trois issues, loi non équiprobable. Étape 2 — Déterminer : l'événement contient les issues rouge et bleu. Étape 3 — Appliquer : on additionne les probabilités des issues de l'événement, $P = 0{,}5 + 0{,}2$. Étape 4 — Simplifier : $0{,}7$, compris entre 0 et 1. Contrôle : $1 - P(\\text{vert}) = 1 - 0{,}3 = 0{,}7$.",
@@ -334,10 +334,10 @@
                 ]
               },
               {
-                "content": "On tire un jeton au hasard dans un sac de 12 jetons numérotés de 1 à 12. Calcule la probabilité de l'événement « le numéro est supérieur à 9 ».",
+                "content": "On tire un jeton au hasard dans un sac de 12 jetons numérotés de 1 à 12. Calcule la probabilité de l'événement « le numéro est strictement supérieur à 9 » (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "hint": "« Supérieur à 9 » ne contient pas le numéro 9.",
+                "hint": "« Strictement supérieur à 9 » ne contient pas le numéro 9.",
                 "explanation": "Étape 1 — Identifier : 12 cas possibles équiprobables. Étape 2 — Déterminer : 10, 11 et 12, soit 3 cas favorables. Étape 3 — Appliquer : $P = \\dfrac{3}{12}$. Étape 4 — Simplifier : $\\dfrac{3}{12} = 0{,}25$.",
                 "answers": [
                   {
@@ -347,7 +347,7 @@
                 ]
               },
               {
-                "content": "Un dé truqué à 6 faces donne les faces 1, 2, 3, 4 et 5 avec la même probabilité 0,15 chacune. Calcule la probabilité d'obtenir la face 6.",
+                "content": "Un dé truqué à 6 faces donne les faces 1, 2, 3, 4 et 5 avec la même probabilité 0,15 chacune. Calcule la probabilité d'obtenir la face 6 (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "hint": "La somme des probabilités de toutes les issues vaut 1.",
@@ -391,7 +391,7 @@
               {
                 "content": "Sur un marché, un contrôleur choisit un étal au hasard parmi 50 : 30 vendent des légumes ($L$), 20 des fruits ($F$), 5 les deux. Quelle formule donne $P(L \\cup F)$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Traduire : « vend des légumes ou des fruits » est $L \\cup F$. Étape 2 — Choisir la formule : pour un « ou » on additionne puis on retranche l'intersection, $P(L \\cup F) = P(L) + P(F) - P(L \\cap F)$. Sans la soustraction, les 5 étals qui vendent les deux seraient comptés deux fois. Le produit $P(L) \\times P(F)$ ne donne pas une réunion.",
+                "explanation": "Étape 1 — Traduire : « vend des légumes ou des fruits » est $L \\cup F$. Étape 2 — Choisir la formule : pour un « ou » on additionne puis on retranche l'intersection, $P(L \\cup F) = P(L) + P(F) - P(L \\cap F)$. Sans la soustraction, les 5 étals qui vendent les deux seraient comptés deux fois. Le produit $P(L) \\times P(F)$ ne donne pas une réunion. $P(L) - P(F)$ soustrait au lieu d'additionner : une différence ne compte pas les étals qui vendent des légumes ou des fruits.",
                 "answers": [
                   {
                     "content": "$P(L) + P(F) - P(L \\cap F)$",
@@ -412,7 +412,7 @@
                 ]
               },
               {
-                "content": "Sur un marché, un contrôleur choisit un étal au hasard parmi 50 : 30 vendent des légumes ($L$), 20 des fruits ($F$), 5 les deux. Calcule $P(L \\cup F)$.",
+                "content": "Sur un marché, un contrôleur choisit un étal au hasard parmi 50 : 30 vendent des légumes ($L$), 20 des fruits ($F$), 5 les deux. Calcule $P(L \\cup F)$ (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Traduire : on cherche $P(L \\cup F)$. Étape 2 — Choisir la formule : $P(L \\cup F) = P(L) + P(F) - P(L \\cap F)$. Étape 3 — Calculer : $P(L) = \\dfrac{30}{50} = 0{,}6$, $P(F) = \\dfrac{20}{50} = 0{,}4$, $P(L \\cap F) = \\dfrac{5}{50} = 0{,}1$. Étape 4 — Appliquer : $0{,}6 + 0{,}4 - 0{,}1 = 0{,}9$. Répondre 1 oublie de retrancher les 5 étals comptés deux fois.",
@@ -424,10 +424,10 @@
                 ]
               },
               {
-                "content": "Sur un marché, un contrôleur choisit un étal au hasard parmi 50 : 30 vendent des légumes ($L$), 20 des fruits ($F$), 5 les deux. Calcule la probabilité que l'étal ne vende ni légumes ni fruits.",
+                "content": "Sur un marché, un contrôleur choisit un étal au hasard parmi 50 : 30 vendent des légumes ($L$), 20 des fruits ($F$), 5 les deux. Calcule la probabilité que l'étal ne vende ni légumes ni fruits (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Traduire : « ni légumes ni fruits » est le contraire de $L \\cup F$. Étape 2 — Choisir la formule : $P(\\overline{L \\cup F}) = 1 - P(L \\cup F)$. Étape 3 — Calculer : $P(L \\cup F) = 0{,}6 + 0{,}4 - 0{,}1 = 0{,}9$. Étape 4 — Appliquer : $1 - 0{,}9 = 0{,}1$, soit 5 étals sur 50.",
+                "explanation": "Étape 1 — Traduire : « ni légumes ni fruits » est le contraire de $L \\cup F$. Étape 2 — Choisir la formule : $P(\\overline{L \\cup F}) = 1 - P(L \\cup F)$. Étape 3 — Calculer : $P(L \\cup F) = 0{,}6 + 0{,}4 - 0{,}1 = 0{,}9$. Étape 4 — Appliquer : $1 - 0{,}9 = 0{,}1$, soit 5 étals sur 50. Répondre 0,9 s'arrête à $P(L \\cup F)$ sans prendre le contraire.",
                 "answers": [
                   {
                     "content": "0,1",
@@ -436,10 +436,10 @@
                 ]
               },
               {
-                "content": "Sur un marché, un contrôleur choisit un étal au hasard parmi 50 : 30 vendent des légumes ($L$), 20 des fruits ($F$), 5 les deux. Calcule la probabilité que l'étal ne vende pas de fruits.",
+                "content": "Sur un marché, un contrôleur choisit un étal au hasard parmi 50 : 30 vendent des légumes ($L$), 20 des fruits ($F$), 5 les deux. Calcule la probabilité que l'étal ne vende pas de fruits (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Traduire : « ne vend pas de fruits » est le contraire $\\overline{F}$. Étape 2 — Choisir la formule : $P(\\overline{F}) = 1 - P(F)$. Étape 3 — Calculer : $P(F) = \\dfrac{20}{50} = 0{,}4$. Étape 4 — Appliquer : $1 - 0{,}4 = 0{,}6$, soit 30 étals sur 50.",
+                "explanation": "Étape 1 — Traduire : « ne vend pas de fruits » est le contraire $\\overline{F}$. Étape 2 — Choisir la formule : $P(\\overline{F}) = 1 - P(F)$. Étape 3 — Calculer : $P(F) = \\dfrac{20}{50} = 0{,}4$. Étape 4 — Appliquer : $1 - 0{,}4 = 0{,}6$, soit 30 étals sur 50. Répondre 0,4 donne $P(F)$ lui-même au lieu de son contraire.",
                 "answers": [
                   {
                     "content": "0,6",
@@ -463,7 +463,7 @@
                 ]
               },
               {
-                "content": "Deux événements incompatibles $A$ et $B$ ont pour probabilités $P(A) = 0{,}5$ et $P(B) = 0{,}3$. Calcule $P(A \\cup B)$.",
+                "content": "Deux événements incompatibles $A$ et $B$ ont pour probabilités $P(A) = 0{,}5$ et $P(B) = 0{,}3$. Calcule $P(A \\cup B)$ (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Traduire : on cherche $P(A \\cup B)$. Étape 2 — Choisir la formule : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. Étape 3 — Calculer : $A$ et $B$ sont incompatibles, donc $P(A \\cap B) = 0$. Étape 4 — Appliquer : $0{,}5 + 0{,}3 - 0 = 0{,}8$, compris entre 0 et 1.",
@@ -477,7 +477,7 @@
               {
                 "content": "Deux événements $A$ et $B$ vérifient $P(A) = 0{,}7$, $P(B) = 0{,}6$ et $P(A \\cap B) = 0{,}4$. Que vaut $P(A \\cup B)$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Traduire : on cherche $P(A \\cup B)$. Étape 2 — Choisir la formule : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. Étape 3 — Calculer : les trois probabilités sont données. Étape 4 — Appliquer : $0{,}7 + 0{,}6 - 0{,}4 = 0{,}9$. La valeur 1,3 vient de l'oubli de $-P(A \\cap B)$ : elle dépasse 1, ce qui est impossible pour une probabilité. Le produit $0{,}7 \\times 0{,}6 = 0{,}42$ ne donne pas une réunion.",
+                "explanation": "Étape 1 — Traduire : on cherche $P(A \\cup B)$. Étape 2 — Choisir la formule : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. Étape 3 — Calculer : les trois probabilités sont données. Étape 4 — Appliquer : $0{,}7 + 0{,}6 - 0{,}4 = 0{,}9$. La valeur 1,3 vient de l'oubli de $-P(A \\cap B)$ : elle dépasse 1, ce qui est impossible pour une probabilité. Le produit $0{,}7 \\times 0{,}6 = 0{,}42$ ne donne pas une réunion. La valeur 0,5 vient de $0{,}7 - 0{,}6 + 0{,}4$ : les signes sont mélangés.",
                 "answers": [
                   {
                     "content": "0,9",
@@ -503,7 +503,7 @@
             "statement": "Dans un centre de santé de quartier, 100 patients ont été vus un lundi. 40 avaient de la fièvre (événement $F$), 30 avaient de la toux (événement $T$) et 15 avaient les deux. On choisit un patient au hasard.",
             "questions": [
               {
-                "content": "Dans un centre de santé, sur 100 patients, 40 ont de la fièvre ($F$), 30 de la toux ($T$) et 15 les deux. On complète : $P(F \\cup T) = P(F) + P(T) - P(F \\cap T) = ___ + ___ - ___$.",
+                "content": "Dans un centre de santé, sur 100 patients, 40 ont de la fièvre ($F$), 30 de la toux ($T$) et 15 les deux. On complète : $P(F \\cup T) = P(F) + P(T) - P(F \\cap T) = ___ + ___ - ___$ (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "hint": "Chaque probabilité est un nombre de patients divisé par 100.",
@@ -527,7 +527,7 @@
                 ]
               },
               {
-                "content": "Dans un centre de santé, sur 100 patients, 40 ont de la fièvre ($F$), 30 de la toux ($T$) et 15 les deux. Calcule la probabilité qu'un patient n'ait ni fièvre ni toux.",
+                "content": "Dans un centre de santé, sur 100 patients, 40 ont de la fièvre ($F$), 30 de la toux ($T$) et 15 les deux. Calcule la probabilité qu'un patient n'ait ni fièvre ni toux (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "hint": "Calcule d'abord la probabilité d'avoir de la fièvre ou de la toux.",
@@ -540,7 +540,7 @@
                 ]
               },
               {
-                "content": "Dans un centre de santé, sur 100 patients, 40 ont de la fièvre ($F$), 30 de la toux ($T$) et 15 les deux. Calcule la probabilité qu'un patient n'ait pas de fièvre.",
+                "content": "Dans un centre de santé, sur 100 patients, 40 ont de la fièvre ($F$), 30 de la toux ($T$) et 15 les deux. Calcule la probabilité qu'un patient n'ait pas de fièvre (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Traduire : « pas de fièvre » est le contraire $\\overline{F}$. Étape 2 — Choisir la formule : $P(\\overline{F}) = 1 - P(F)$. Étape 3 — Calculer : $P(F) = 0{,}4$. Étape 4 — Appliquer : $1 - 0{,}4 = 0{,}6$, soit 60 patients sur 100.",
@@ -618,7 +618,7 @@
               {
                 "content": "Une urne contient 4 boules rouges et 6 boules vertes. On tire simultanément 3 boules au hasard. Quelle est la probabilité d'obtenir 3 boules vertes ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Identifier : $\\text{card}(\\Omega) = C_{10}^3 = 120$. Étape 2 — Traduire : 3 boules parmi les 6 vertes. Étape 3 — Compter : $C_6^3 = 20$ tirages favorables. Étape 4 — Diviser : $P = \\dfrac{20}{120} = \\dfrac{1}{6}$. La valeur $\\dfrac{3}{5}$ est la proportion de boules vertes dans l'urne, pas la probabilité d'en tirer trois.",
+                "explanation": "Étape 1 — Identifier : $\\text{card}(\\Omega) = C_{10}^3 = 120$. Étape 2 — Traduire : 3 boules parmi les 6 vertes. Étape 3 — Compter : $C_6^3 = 20$ tirages favorables. Étape 4 — Diviser : $P = \\dfrac{20}{120} = \\dfrac{1}{6}$. La valeur $\\dfrac{3}{5}$ est la proportion de boules vertes dans l'urne, pas la probabilité d'en tirer trois. $\\dfrac{3}{10}$ compare le nombre de boules tirées au nombre de boules de l'urne, sans compter aucun tirage ; $\\dfrac{1}{20}$ garde les 20 tirages favorables en dénominateur et oublie les 120 tirages possibles.",
                 "answers": [
                   {
                     "content": "$\\dfrac{1}{6}$",
@@ -651,7 +651,7 @@
                 ]
               },
               {
-                "content": "Une urne contient 4 boules rouges et 6 boules vertes. On tire successivement et avec remise 2 boules. Calcule la probabilité d'obtenir 2 boules vertes.",
+                "content": "Une urne contient 4 boules rouges et 6 boules vertes. On tire successivement et avec remise 2 boules. Calcule la probabilité d'obtenir 2 boules vertes (écriture décimale).",
                 "question_type": "numeric",
                 "tolerance": 0,
                 "explanation": "Étape 1 — Identifier : tirage successif avec remise, les tirages sont des 2-listes : $\\text{card}(\\Omega) = 10^2 = 100$. Étape 2 — Traduire : « 2 vertes » signifie une boule verte au premier tirage et une au second. Étape 3 — Compter : $6 \\times 6 = 36$ tirages favorables (principe multiplicatif). Étape 4 — Diviser : $P = \\dfrac{36}{100} = 0{,}36$.",
@@ -751,7 +751,7 @@
           "figure": null,
           "questions": [
             {
-              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(A)$.",
+              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(A)$ (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (probabilité d'un événement). Étape 1 — Identifier : 20 jetons tirés au hasard, $\\text{card}(\\Omega) = 20$, issues équiprobables. Étape 2 — Déterminer : les multiples de 5 sont 5, 10, 15 et 20, donc $\\text{card}(A) = 4$. Étape 3 — Appliquer : $P(A) = \\dfrac{4}{20}$. Étape 4 — Simplifier : $0{,}2$.",
@@ -763,7 +763,7 @@
               ]
             },
             {
-              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(B)$.",
+              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(B)$ (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (probabilité d'un événement). Étape 1 — Identifier : $\\text{card}(\\Omega) = 20$, équiprobabilité. Étape 2 — Déterminer : les numéros pairs sont 2, 4, …, 20, soit 10 numéros. Étape 3 — Appliquer : $P(B) = \\dfrac{10}{20}$. Étape 4 — Simplifier : $0{,}5$.",
@@ -775,7 +775,7 @@
               ]
             },
             {
-              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(A \\cap B)$.",
+              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(A \\cap B)$ (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (probabilité d'un événement). Étape 1 — Identifier : $\\text{card}(\\Omega) = 20$. Étape 2 — Déterminer : « multiple de 5 et pair » ne garde que 10 et 20, donc $\\text{card}(A \\cap B) = 2$. Étape 3 — Appliquer : $P(A \\cap B) = \\dfrac{2}{20}$. Étape 4 — Simplifier : $0{,}1$.",
@@ -787,7 +787,7 @@
               ]
             },
             {
-              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(A \\cup B)$.",
+              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule $P(A \\cup B)$ (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (réunion). Étape 1 — Traduire : « multiple de 5 ou pair » est $A \\cup B$. Étape 2 — Choisir la formule : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. Étape 3 — Calculer : $P(A) = 0{,}2$, $P(B) = 0{,}5$, $P(A \\cap B) = 0{,}1$. Étape 4 — Appliquer : $0{,}2 + 0{,}5 - 0{,}1 = 0{,}6$. Contrôle par comptage : les 10 pairs plus les impairs 5 et 15 font 12 numéros, et $\\dfrac{12}{20} = 0{,}6$. Répondre 0,7 oublie que 10 et 20 sont comptés deux fois.",
@@ -799,7 +799,7 @@
               ]
             },
             {
-              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule la probabilité que le numéro ne soit ni un multiple de 5, ni pair.",
+              "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Calcule la probabilité que le numéro ne soit ni un multiple de 5, ni pair (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (contraire). Étape 1 — Traduire : « ni multiple de 5, ni pair » est le contraire de $A \\cup B$. Étape 2 — Choisir la formule : $P(\\overline{A \\cup B}) = 1 - P(A \\cup B)$. Étape 3 — Calculer : $P(A \\cup B) = 0{,}6$. Étape 4 — Appliquer : $1 - 0{,}6 = 0{,}4$, soit 8 numéros sur 20 (les impairs qui ne sont ni 5 ni 15).",
@@ -813,14 +813,14 @@
             {
               "content": "Au loto du quartier, on tire au hasard un jeton dans un sac de 20 jetons numérotés de 1 à 20. $A$ : « le numéro est un multiple de 5 » ; $B$ : « le numéro est pair ». Les événements $A$ et $B$ sont-ils incompatibles ?",
               "question_type": "single_choice",
-              "explanation": "Méthode (réunion). Étape 1 — Traduire : deux événements sont incompatibles si $A \\cap B = \\varnothing$. Étape 2 — Choisir la formule : on cherche des numéros communs. Étape 3 — Calculer : 10 et 20 sont pairs et multiples de 5, donc $P(A \\cap B) = 0{,}1 \\neq 0$. Étape 4 — Appliquer : $A$ et $B$ ne sont pas incompatibles. Avoir $P(A) + P(B) = 0{,}7 < 1$ n'a aucun lien avec l'incompatibilité, et $A$, $B$ ne sont pas contraires puisque $A \\cup B \\neq \\Omega$.",
+              "explanation": "Méthode (événements). Étape 1 — Décrire : $\\Omega = \\{1\\,;\\dots\\,;20\\}$, 20 issues. Étape 2 — Traduire : $A = \\{5\\,;10\\,;15\\,;20\\}$ et $B$ est l'ensemble des 10 numéros pairs ; deux événements sont incompatibles si $A \\cap B = \\varnothing$. Étape 3 — Combiner : 10 et 20 sont pairs et multiples de 5, donc $A \\cap B = \\{10\\,;20\\}$. Étape 4 — Compter : $\\text{card}(A \\cap B) = 2 \\neq 0$, donc $A$ et $B$ ne sont pas incompatibles. Avoir $\\text{card}(A) \\neq \\text{card}(B)$ (4 et 10 issues) n'a aucun lien avec l'incompatibilité : seule l'intersection compte. Avoir $P(A) + P(B) = 0{,}7 < 1$ n'a aucun lien non plus, et $A$, $B$ ne sont pas contraires puisque $A \\cup B \\neq \\Omega$.",
               "answers": [
                 {
-                  "content": "Non, car 10 et 20 réalisent à la fois A et B",
+                  "content": "Non, car 10 et 20 réalisent à la fois $A$ et $B$",
                   "correct": true
                 },
                 {
-                  "content": "Oui, car A et B n'ont pas le même nombre d'issues",
+                  "content": "Oui, car $A$ et $B$ n'ont pas le même nombre d'issues",
                   "correct": false
                 },
                 {
@@ -828,7 +828,7 @@
                   "correct": false
                 },
                 {
-                  "content": "Non, car A et B sont contraires",
+                  "content": "Non, car $A$ et $B$ sont contraires",
                   "correct": false
                 }
               ]
@@ -868,7 +868,7 @@
             {
               "content": "Au marché de Treichville, la marchande a un panier de 10 fruits : 6 oranges et 4 mangues. Un client prend 2 fruits en même temps, au hasard. Quelle est la probabilité d'obtenir 2 oranges ?",
               "question_type": "single_choice",
-              "explanation": "Méthode (tirages). Étape 1 — Identifier : $\\text{card}(\\Omega) = C_{10}^2 = 45$. Étape 2 — Traduire : 2 oranges parmi 6. Étape 3 — Compter : $C_6^2 = 15$. Étape 4 — Diviser : $P = \\dfrac{15}{45} = \\dfrac{1}{3}$. La valeur $\\dfrac{3}{5}$ est la proportion d'oranges dans le panier, pas la probabilité d'en prendre deux ; $\\dfrac{1}{6}$ vient de $\\dfrac{15}{90}$, en mélangeant tirage simultané et tirage ordonné.",
+              "explanation": "Méthode (tirages). Étape 1 — Identifier : $\\text{card}(\\Omega) = C_{10}^2 = 45$. Étape 2 — Traduire : 2 oranges parmi 6. Étape 3 — Compter : $C_6^2 = 15$. Étape 4 — Diviser : $P = \\dfrac{15}{45} = \\dfrac{1}{3}$. La valeur $\\dfrac{3}{5}$ est la proportion d'oranges dans le panier, pas la probabilité d'en prendre deux ; $\\dfrac{2}{5}$ est la proportion de mangues dans le panier ($\\dfrac{4}{10}$), un autre événement ; $\\dfrac{1}{6}$ vient de $\\dfrac{15}{90}$, en mélangeant tirage simultané et tirage ordonné.",
               "answers": [
                 {
                   "content": "$\\dfrac{1}{3}$",
@@ -903,7 +903,7 @@
             {
               "content": "Au marché de Treichville, la marchande a un panier de 10 fruits : 6 oranges et 4 mangues. Un client prend 2 fruits en même temps, au hasard. Quelle est la probabilité d'obtenir au moins une mangue ?",
               "question_type": "single_choice",
-              "explanation": "Méthode (contraire). Étape 1 — Traduire : « au moins une mangue » a pour contraire « aucune mangue », c'est-à-dire « 2 oranges ». Étape 2 — Choisir la formule : $P(\\text{au moins une mangue}) = 1 - P(2 \\text{ oranges})$. Étape 3 — Calculer : $P(2 \\text{ oranges}) = \\dfrac{15}{45} = \\dfrac{1}{3}$. Étape 4 — Appliquer : $1 - \\dfrac{1}{3} = \\dfrac{2}{3}$. La valeur $\\dfrac{1}{3}$ est la probabilité de l'événement contraire.",
+              "explanation": "Méthode (contraire). Étape 1 — Traduire : « au moins une mangue » a pour contraire « aucune mangue », c'est-à-dire « 2 oranges ». Étape 2 — Choisir la formule : $P(\\text{au moins une mangue}) = 1 - P(2 \\text{ oranges})$. Étape 3 — Calculer : $P(2 \\text{ oranges}) = \\dfrac{15}{45} = \\dfrac{1}{3}$. Étape 4 — Appliquer : $1 - \\dfrac{1}{3} = \\dfrac{2}{3}$. La valeur $\\dfrac{1}{3}$ est la probabilité de l'événement contraire ; $\\dfrac{2}{5}$ est la proportion de mangues dans le panier, pas une probabilité de tirage ; $\\dfrac{8}{15}$ est la probabilité d'obtenir exactement 1 mangue, qui oublie le cas de 2 mangues.",
               "answers": [
                 {
                   "content": "$\\dfrac{2}{3}$",
@@ -944,7 +944,7 @@
           "figure": null,
           "questions": [
             {
-              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule $P(F)$.",
+              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule $P(F)$ (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (probabilité d'un événement). Étape 1 — Identifier : 200 dossiers équiprobables. Étape 2 — Déterminer : 90 dossiers avec fièvre. Étape 3 — Appliquer : $P(F) = \\dfrac{90}{200}$. Étape 4 — Simplifier : $0{,}45$.",
@@ -956,7 +956,7 @@
               ]
             },
             {
-              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule $P(F \\cap M)$.",
+              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule $P(F \\cap M)$ (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (probabilité d'un événement). Étape 1 — Identifier : 200 dossiers équiprobables. Étape 2 — Déterminer : 40 dossiers ont à la fois fièvre et maux de tête. Étape 3 — Appliquer : $P(F \\cap M) = \\dfrac{40}{200}$. Étape 4 — Simplifier : $0{,}2$.",
@@ -968,7 +968,7 @@
               ]
             },
             {
-              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule $P(F \\cup M)$.",
+              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule $P(F \\cup M)$ (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (réunion). Étape 1 — Traduire : « fièvre ou maux de tête » est $F \\cup M$. Étape 2 — Choisir la formule : $P(F \\cup M) = P(F) + P(M) - P(F \\cap M)$. Étape 3 — Calculer : $P(F) = 0{,}45$, $P(M) = \\dfrac{70}{200} = 0{,}35$, $P(F \\cap M) = 0{,}2$. Étape 4 — Appliquer : $0{,}45 + 0{,}35 - 0{,}2 = 0{,}6$. Sans la soustraction, on trouverait 0,8, en comptant deux fois les 40 dossiers communs.",
@@ -980,7 +980,7 @@
               ]
             },
             {
-              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule la probabilité que le patient n'ait ni fièvre ni maux de tête.",
+              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule la probabilité que le patient n'ait ni fièvre ni maux de tête (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (contraire). Étape 1 — Traduire : « ni fièvre ni maux de tête » est le contraire de $F \\cup M$. Étape 2 — Choisir la formule : $1 - P(F \\cup M)$. Étape 3 — Calculer : $P(F \\cup M) = 0{,}6$. Étape 4 — Appliquer : $1 - 0{,}6 = 0{,}4$, soit 80 dossiers sur 200.",
@@ -992,7 +992,7 @@
               ]
             },
             {
-              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule la probabilité que le patient ait de la fièvre sans maux de tête.",
+              "content": "Dans un centre de santé, 200 dossiers de patients ont été classés en une semaine : 90 patients avaient de la fièvre ($F$), 70 avaient des maux de tête ($M$) et 40 avaient les deux. Partie A : on choisit un dossier au hasard. Calcule la probabilité que le patient ait de la fièvre sans maux de tête (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (probabilité d'un événement). Étape 1 — Identifier : 200 dossiers équiprobables. Étape 2 — Déterminer : parmi les 90 patients avec fièvre, 40 ont aussi des maux de tête, donc $90 - 40 = 50$ ont de la fièvre sans maux de tête. Étape 3 — Appliquer : $P = \\dfrac{50}{200}$. Étape 4 — Simplifier : $0{,}25$. Répondre 0,45 oublierait de retirer les 40 patients qui ont aussi des maux de tête.",
@@ -1030,7 +1030,7 @@
             {
               "content": "Dans la salle d'attente du centre de santé, il y a 7 patients, dont 4 ont de la fièvre. L'infirmier appelle 3 patients en même temps, au hasard. Partie B : quelle est la probabilité qu'au moins un patient appelé ait de la fièvre ?",
               "question_type": "single_choice",
-              "explanation": "Méthode (contraire). Étape 1 — Traduire : « au moins un patient avec fièvre » a pour contraire « aucun patient avec fièvre ». Étape 2 — Choisir la formule : $P = 1 - P(\\text{aucun})$. Étape 3 — Calculer : $P(\\text{aucun}) = \\dfrac{C_3^3}{C_7^3} = \\dfrac{1}{35}$. Étape 4 — Appliquer : $1 - \\dfrac{1}{35} = \\dfrac{34}{35}$. La valeur $\\dfrac{1}{35}$ est la probabilité du contraire, et $\\dfrac{4}{7}$ est la proportion de patients avec fièvre dans la salle.",
+              "explanation": "Méthode (contraire). Étape 1 — Traduire : « au moins un patient avec fièvre » a pour contraire « aucun patient avec fièvre ». Étape 2 — Choisir la formule : $P = 1 - P(\\text{aucun})$. Étape 3 — Calculer : $P(\\text{aucun}) = \\dfrac{C_3^3}{C_7^3} = \\dfrac{1}{35}$. Étape 4 — Appliquer : $1 - \\dfrac{1}{35} = \\dfrac{34}{35}$. La valeur $\\dfrac{1}{35}$ est la probabilité du contraire, $\\dfrac{4}{7}$ est la proportion de patients avec fièvre dans la salle, et $\\dfrac{18}{35}$ est la probabilité d'en avoir exactement 2, qui oublie les tirages avec 3 patients fiévreux.",
               "answers": [
                 {
                   "content": "$\\dfrac{34}{35}$",
@@ -1099,7 +1099,7 @@
               "content": "Au jeu de plateau du club de l'école, un joueur lance deux dés équilibrés à six faces, un rouge et un vert, et note le couple (résultat du rouge ; résultat du vert). $A$ : « la somme vaut 7 » ; $B$ : « au moins un des dés donne 6 ». Partie A : combien de couples réalisent $B$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Méthode (contraire). Étape 1 — Traduire : le contraire de « au moins un 6 » est « aucun 6 », c'est-à-dire un résultat parmi 1 à 5 sur chaque dé. Étape 2 — Choisir la formule : $\\text{card}(B) = 36 - \\text{card}(\\overline{B})$. Étape 3 — Calculer : $\\text{card}(\\overline{B}) = 5 \\times 5 = 25$. Étape 4 — Appliquer : $\\text{card}(B) = 36 - 25 = 11$. Répondre 12 ($6 + 6$) compte deux fois le couple $(6\\,;6)$.",
+              "explanation": "Méthode (contraire). Étape 1 — Traduire : le contraire de « au moins un 6 » est « aucun 6 », c'est-à-dire un résultat parmi 1 à 5 sur chaque dé. Étape 2 — Choisir la formule : $\\text{card}(B) = 36 - \\text{card}(\\overline{B})$ (même idée que $P(\\overline{B}) = 1 - P(B)$). Étape 3 — Calculer : $\\text{card}(\\overline{B}) = 5 \\times 5 = 25$. Étape 4 — Appliquer : $\\text{card}(B) = 36 - 25 = 11$. Répondre 12 ($6 + 6$) compte deux fois le couple $(6\\,;6)$.",
               "answers": [
                 {
                   "content": "11",
@@ -1111,7 +1111,7 @@
               "content": "Au jeu de plateau du club de l'école, un joueur lance deux dés équilibrés à six faces, un rouge et un vert, et note le couple (résultat du rouge ; résultat du vert). $A$ : « la somme vaut 7 » ; $B$ : « au moins un des dés donne 6 ». Partie A : combien de couples réalisent $A \\cap B$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Méthode (probabilité d'un événement). Étape 1 — Identifier : 36 couples équiprobables. Étape 2 — Déterminer : on cherche les couples de somme 7 qui contiennent un 6 : $(1\\,;6)$ et $(6\\,;1)$. Étape 3 — Compter : $\\text{card}(A \\cap B) = 2$.",
+              "explanation": "Méthode (événements). Étape 1 — Décrire : deux dés, $\\text{card}(\\Omega) = 36$ couples équiprobables. Étape 2 — Traduire : $A$ est l'ensemble des couples de somme 7 et $B$ celui des couples contenant au moins un 6. Étape 3 — Combiner : « $A$ et $B$ » garde les couples de somme 7 qui contiennent un 6, soit $(1\\,;6)$ et $(6\\,;1)$. Étape 4 — Compter : $\\text{card}(A \\cap B) = 2$.",
               "answers": [
                 {
                   "content": "2",
@@ -1122,7 +1122,7 @@
             {
               "content": "Au jeu de plateau du club de l'école, un joueur lance deux dés équilibrés à six faces, un rouge et un vert, et note le couple (résultat du rouge ; résultat du vert). $A$ : « la somme vaut 7 » ; $B$ : « au moins un des dés donne 6 ». Partie A : que vaut $P(A \\cup B)$ ?",
               "question_type": "single_choice",
-              "explanation": "Méthode (réunion). Étape 1 — Traduire : « somme 7 ou au moins un 6 » est $A \\cup B$. Étape 2 — Choisir la formule : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. Étape 3 — Calculer : $P(A) = \\dfrac{6}{36}$, $P(B) = \\dfrac{11}{36}$, $P(A \\cap B) = \\dfrac{2}{36}$. Étape 4 — Appliquer : $\\dfrac{6 + 11 - 2}{36} = \\dfrac{15}{36} = \\dfrac{5}{12}$. La valeur $\\dfrac{17}{36}$ oublie de retrancher l'intersection ; $\\dfrac{7}{12}$ est $1 - \\dfrac{5}{12}$, la probabilité du contraire.",
+              "explanation": "Méthode (réunion). Étape 1 — Traduire : « somme 7 ou au moins un 6 » est $A \\cup B$. Étape 2 — Choisir la formule : $P(A \\cup B) = P(A) + P(B) - P(A \\cap B)$. Étape 3 — Calculer : $P(A) = \\dfrac{6}{36}$, $P(B) = \\dfrac{11}{36}$, $P(A \\cap B) = \\dfrac{2}{36}$. Étape 4 — Appliquer : $\\dfrac{6 + 11 - 2}{36} = \\dfrac{15}{36} = \\dfrac{5}{12}$. La valeur $\\dfrac{17}{36}$ oublie de retrancher l'intersection ; $\\dfrac{7}{12}$ est $1 - \\dfrac{5}{12}$, la probabilité du contraire ; $\\dfrac{1}{3} = \\dfrac{12}{36}$ vient de $6 + 6$ couples : on prend $\\text{card}(B) = 6$, en oubliant les couples où seul le dé vert donne 6.",
               "answers": [
                 {
                   "content": "$\\dfrac{5}{12}$",
@@ -1143,20 +1143,20 @@
               ]
             },
             {
-              "content": "On lance deux dés équilibrés à six faces et on note la somme. Un élève affirme : « Il y a 11 sommes possibles (de 2 à 12), donc la probabilité d'obtenir la somme 12 est $\\dfrac{1}{11}$. » Explique son erreur et donne la bonne probabilité.",
+              "content": "On lance deux dés équilibrés à six faces, un rouge et un vert, et on note la somme. Un élève affirme : « Les sommes possibles vont de 2 à 12, soit 11 valeurs, donc la probabilité d'obtenir la somme 11 est $\\dfrac{1}{11}$. » Explique son erreur et donne la bonne probabilité.",
               "question_type": "written",
               "points": 3,
               "starter": "Les 11 sommes ne sont pas équiprobables, car…",
               "criteria": [
                 "Les sommes ne sont pas équiprobables",
                 "Les issues équiprobables sont les 36 couples de faces",
-                "Un seul couple $(6\\,;6)$ donne 12 : probabilité $\\dfrac{1}{36}$"
+                "Deux couples $(5\\,;6)$ et $(6\\,;5)$ donnent 11 : probabilité $\\dfrac{2}{36} = \\dfrac{1}{18}$"
               ],
-              "explanation": "Corrigé modèle. Étape 1 — Identifier : la formule $\\dfrac{\\text{cas favorables}}{\\text{cas possibles}}$ exige des cas équiprobables. Les 11 sommes ne le sont pas : la somme 7 s'obtient de 6 façons, la somme 12 d'une seule. Étape 2 — Déterminer : les issues équiprobables sont les $6 \\times 6 = 36$ couples de faces ; seul le couple $(6\\,;6)$ donne la somme 12. Étape 3 — Appliquer : $P(\\text{somme } 12) = \\dfrac{1}{36}$. Étape 4 — Simplifier : la fraction est déjà irréductible. Barème : 1 point pour le défaut d'équiprobabilité, 1 point pour les 36 couples, 1 point pour la valeur $\\dfrac{1}{36}$.",
+              "explanation": "Corrigé modèle. Étape 1 — Identifier : la formule $\\dfrac{\\text{cas favorables}}{\\text{cas possibles}}$ exige des cas équiprobables. Les 11 sommes ne le sont pas : la somme 7 s'obtient de 6 façons, la somme 11 de deux seulement. Étape 2 — Déterminer : les issues équiprobables sont les $6 \\times 6 = 36$ couples de faces ; seuls les couples $(5\\,;6)$ et $(6\\,;5)$ donnent la somme 11. Étape 3 — Appliquer : $P(\\text{somme } 11) = \\dfrac{2}{36}$. Étape 4 — Simplifier : $\\dfrac{2}{36} = \\dfrac{1}{18}$. Barème : 1 point pour le défaut d'équiprobabilité, 1 point pour les 36 couples, 1 point pour la valeur $\\dfrac{1}{18}$.",
               "answers": []
             },
             {
-              "content": "Au même jeu, un sac contient 3 pions bleus et 2 pions jaunes. Le joueur tire successivement et sans remise 2 pions au hasard, en notant l'ordre. Partie B : calcule la probabilité d'obtenir 2 pions bleus.",
+              "content": "Au jeu de plateau du club, un sac contient 3 pions bleus et 2 pions jaunes. Le joueur tire successivement et sans remise 2 pions au hasard, en notant l'ordre. Partie B : calcule la probabilité d'obtenir 2 pions bleus (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (tirages). Étape 1 — Identifier : tirage successif sans remise, l'ordre compte, $\\text{card}(\\Omega) = A_5^2 = 5 \\times 4 = 20$. Étape 2 — Traduire : « 2 bleus » signifie 2 pions pris dans l'ordre parmi les 3 bleus. Étape 3 — Compter : $A_3^2 = 3 \\times 2 = 6$ tirages favorables. Étape 4 — Diviser : $P = \\dfrac{6}{20} = 0{,}3$.",
@@ -1168,7 +1168,7 @@
               ]
             },
             {
-              "content": "Au même jeu, un sac contient 3 pions bleus et 2 pions jaunes. Le joueur tire successivement et sans remise 2 pions au hasard, en notant l'ordre. Partie B : calcule la probabilité d'obtenir 2 pions jaunes.",
+              "content": "Au jeu de plateau du club, un sac contient 3 pions bleus et 2 pions jaunes. Le joueur tire successivement et sans remise 2 pions au hasard, en notant l'ordre. Partie B : calcule la probabilité d'obtenir 2 pions jaunes (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (tirages). Étape 1 — Identifier : $\\text{card}(\\Omega) = A_5^2 = 20$. Étape 2 — Traduire : « 2 jaunes » signifie 2 pions pris dans l'ordre parmi les 2 jaunes. Étape 3 — Compter : $A_2^2 = 2 \\times 1 = 2$ tirages favorables. Étape 4 — Diviser : $P = \\dfrac{2}{20} = 0{,}1$.",
@@ -1180,7 +1180,7 @@
               ]
             },
             {
-              "content": "Au même jeu, un sac contient 3 pions bleus et 2 pions jaunes. Le joueur tire successivement et sans remise 2 pions au hasard, en notant l'ordre. Partie B : calcule la probabilité d'obtenir deux pions de couleurs différentes.",
+              "content": "Au jeu de plateau du club, un sac contient 3 pions bleus et 2 pions jaunes. Le joueur tire successivement et sans remise 2 pions au hasard, en notant l'ordre. Partie B : calcule la probabilité d'obtenir deux pions de couleurs différentes (écriture décimale).",
               "question_type": "numeric",
               "tolerance": 0,
               "explanation": "Méthode (contraire). Étape 1 — Traduire : « deux pions de couleurs différentes » est le contraire de « deux pions de la même couleur », c'est-à-dire de « 2 bleus ou 2 jaunes ». Étape 2 — Choisir la formule : « 2 bleus » et « 2 jaunes » sont incompatibles, donc la probabilité de la réunion est la somme, et $P = 1 - (P(2 \\text{ bleus}) + P(2 \\text{ jaunes}))$. Étape 3 — Calculer : $0{,}3 + 0{,}1 = 0{,}4$. Étape 4 — Appliquer : $1 - 0{,}4 = 0{,}6$. Contrôle par comptage : 3 × 2 tirages bleu puis jaune et 2 × 3 jaune puis bleu font 12 tirages sur 20, soit 0,6.",
