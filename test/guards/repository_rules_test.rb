@@ -64,8 +64,8 @@ class RepositoryRulesTest < Minitest::Test
   AUDIT_EXCEPTIONS = {
     # braces <= 3.0.3 (GHSA-vfj7-8cjw-p6xm), stack exhaustion on deeply nested patterns; build-time only
     # (@tailwindcss/cli -> @parcel/watcher, fast-glob -> micromatch), no patched version published on 2026-10-03 nor on
-    # 2026-10-19 (latest: 3.0.3).
-    "1240992" => Date.new(2026, 10, 31)
+    # 2026-10-19 nor on 2026-11-01 (latest: 3.0.3).
+    "1240992" => Date.new(2026, 11, 15)
   }.freeze
 
   def test_every_ignored_yarn_advisory_is_registered_with_a_review_date
