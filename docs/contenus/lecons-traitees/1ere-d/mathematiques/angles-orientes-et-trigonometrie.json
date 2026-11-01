@@ -308,7 +308,7 @@
               {
                 "content": "Quelle est la mesure principale de l'angle $\\frac{25\\pi}{6}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Convertir : l'angle est déjà en radians, de la forme $\\frac{a\\pi}{b}$ avec $a=25$ et $b=6$. Étape 2 — Repérer : $\\frac{25}{6}\\approx4{,}17$ ; en retirant $2k=4$ (donc $k=2$), on obtient $\\frac{25}{6}-4=\\frac16$, dans $]-1\\,;1]$. Étape 3 — Retrancher : $\\frac{25\\pi}{6}-4\\pi=\\frac{25\\pi-24\\pi}{6}=\\frac{\\pi}{6}$. Étape 4 — Conclure : $\\frac{\\pi}{6}\\in\\,]-\\pi\\,;\\pi]$. La proposition $\\frac{13\\pi}{6}$ n'a retiré qu'un seul tour et dépasse encore $\\pi$ ; $\\frac{7\\pi}{6}$ retire $3\\pi$, qui n'est pas un multiple de $2\\pi$.",
+                "explanation": "Étape 1 — Convertir : l'angle est déjà en radians, de la forme $\\frac{a\\pi}{b}$ avec $a=25$ et $b=6$. Étape 2 — Repérer : $\\frac{25}{6}\\approx4{,}17$ ; en retirant $2k=4$ (donc $k=2$), on obtient $\\frac{25}{6}-4=\\frac16$, dans $]-1\\,;1]$. Étape 3 — Retrancher : $\\frac{25\\pi}{6}-4\\pi=\\frac{25\\pi-24\\pi}{6}=\\frac{\\pi}{6}$. Étape 4 — Conclure : $\\frac{\\pi}{6}\\in\\,]-\\pi\\,;\\pi]$. La proposition $\\frac{13\\pi}{6}$ n'a retiré qu'un seul tour et dépasse encore $\\pi$ ; $\\frac{7\\pi}{6}$ retire $3\\pi$, qui n'est pas un multiple de $2\\pi$ ; $-\\frac{\\pi}{6}$ se trompe de signe : $\\frac{25\\pi}{6}-\\left(-\\frac{\\pi}{6}\\right)=\\frac{13\\pi}{3}$ n'est pas non plus un multiple de $2\\pi$.",
                 "answers": [
                   {
                     "content": "$\\frac{\\pi}{6}$",
@@ -432,7 +432,7 @@
               {
                 "content": "Quelle est la mesure principale de l'angle $\\frac{17\\pi}{6}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Convertir : $\\frac{17\\pi}{6}$ est déjà en radians. Étape 2 — Repérer : $\\frac{17}{6}\\approx2{,}83$ ; on retire $2$ ($k=1$) : $\\frac{17}{6}-2=\\frac56$. Étape 3 — Retrancher : $\\frac{17\\pi}{6}-2\\pi=\\frac{5\\pi}{6}$. Étape 4 — Conclure : $\\frac{5\\pi}{6}\\in\\,]-\\pi\\,;\\pi]$. La proposition $-\\frac{\\pi}{6}$ retire $3\\pi$, qui n'est pas un multiple de $2\\pi$.",
+                "explanation": "Étape 1 — Convertir : $\\frac{17\\pi}{6}$ est déjà en radians. Étape 2 — Repérer : $\\frac{17}{6}\\approx2{,}83$ ; on retire $2$ ($k=1$) : $\\frac{17}{6}-2=\\frac56$. Étape 3 — Retrancher : $\\frac{17\\pi}{6}-2\\pi=\\frac{5\\pi}{6}$. Étape 4 — Conclure : $\\frac{5\\pi}{6}\\in\\,]-\\pi\\,;\\pi]$. La proposition $-\\frac{\\pi}{6}$ retire $3\\pi$, qui n'est pas un multiple de $2\\pi$ ; $\\frac{11\\pi}{6}$ ne retire que $\\pi$ et reste hors de l'intervalle ; $-\\frac{5\\pi}{6}$ se trompe de signe.",
                 "answers": [
                   {
                     "content": "$\\frac{5\\pi}{6}$",
@@ -489,15 +489,15 @@
             "Conclure : écrire l'égalité modulo $2\\pi$ et donner la mesure principale."
           ],
           "example": {
-            "statement": "Six nacelles $A$, $B$, $C$, $D$, $E$, $F$ sont fixées à égale distance sur une grande roue de centre $O$, dans cet ordre, dans le sens direct. Donner la mesure principale de (\\overrightarrow{OB};\\overrightarrow{OF}).",
+            "statement": "Six nacelles $A$, $B$, $C$, $D$, $E$, $F$ sont fixées à égale distance sur une grande roue de centre $O$, dans cet ordre, dans le sens direct. Donner la mesure principale de $(\\overrightarrow{OB};\\overrightarrow{OF})$.",
             "steps": [
-              "Repérer : six points régulièrement répartis, donc (\\overrightarrow{OA};\\overrightarrow{OB}) $=$ (\\overrightarrow{OB};\\overrightarrow{OC}) $=\\dots=\\frac{2\\pi}{6}=\\frac{\\pi}{3}\\ [2\\pi]$.",
-              "Décomposer : par Chasles, (\\overrightarrow{OB};\\overrightarrow{OF}) $=$ (\\overrightarrow{OB};\\overrightarrow{OC}) $+$ (\\overrightarrow{OC};\\overrightarrow{OD}) $+$ (\\overrightarrow{OD};\\overrightarrow{OE}) $+$ (\\overrightarrow{OE};\\overrightarrow{OF}).",
+              "Repérer : six points régulièrement répartis, donc $(\\overrightarrow{OA};\\overrightarrow{OB}) = (\\overrightarrow{OB};\\overrightarrow{OC}) =\\dots=\\frac{2\\pi}{6}=\\frac{\\pi}{3}\\ [2\\pi]$.",
+              "Décomposer : par Chasles, $(\\overrightarrow{OB};\\overrightarrow{OF}) = (\\overrightarrow{OB};\\overrightarrow{OC}) + (\\overrightarrow{OC};\\overrightarrow{OD}) + (\\overrightarrow{OD};\\overrightarrow{OE}) + (\\overrightarrow{OE};\\overrightarrow{OF})$.",
               "Calculer : la somme vaut $4\\times\\frac{\\pi}{3}=\\frac{4\\pi}{3}$, et $\\frac{4\\pi}{3}-2\\pi=-\\frac{2\\pi}{3}$, dans $]-\\pi\\,;\\pi]$.",
-              "Conclure : (\\overrightarrow{OB};\\overrightarrow{OF}) $=-\\frac{2\\pi}{3}\\ [2\\pi]$ ; la mesure principale est $-\\frac{2\\pi}{3}$."
+              "Conclure : $(\\overrightarrow{OB};\\overrightarrow{OF}) =-\\frac{2\\pi}{3}\\ [2\\pi]$ ; la mesure principale est $-\\frac{2\\pi}{3}$."
             ]
           },
-          "pitfall": "Ne pas confondre $(\\vec u\\,;\\vec v)$ et $(\\vec v\\,;\\vec u)$ : l'ordre compte, et $(\\vec v\\,;\\vec u)=-(\\vec u\\,;\\vec v)$. Contre-exemple : sur la roue de six nacelles, (\\overrightarrow{OA};\\overrightarrow{OB}) $=\\frac{\\pi}{3}$ mais (\\overrightarrow{OB};\\overrightarrow{OA}) $=-\\frac{\\pi}{3}$. Ne pas oublier non plus que retourner un vecteur ajoute $\\pi$ : comme $\\overrightarrow{OD}=-\\overrightarrow{OA}$, on a (\\overrightarrow{OD};\\overrightarrow{OB}) $=\\frac{\\pi}{3}+\\pi=\\frac{4\\pi}{3}=-\\frac{2\\pi}{3}\\ [2\\pi]$, et non $\\frac{\\pi}{3}$.",
+          "pitfall": "Ne pas confondre $(\\vec u\\,;\\vec v)$ et $(\\vec v\\,;\\vec u)$ : l'ordre compte, et $(\\vec v\\,;\\vec u)=-(\\vec u\\,;\\vec v)$. Contre-exemple : sur la roue de six nacelles, $(\\overrightarrow{OA};\\overrightarrow{OB}) =\\frac{\\pi}{3}$ mais $(\\overrightarrow{OB};\\overrightarrow{OA}) =-\\frac{\\pi}{3}$. Ne pas oublier non plus que retourner un vecteur ajoute $\\pi$ : comme $\\overrightarrow{OD}=-\\overrightarrow{OA}$, on a $(\\overrightarrow{OD};\\overrightarrow{OB}) =\\frac{\\pi}{3}+\\pi=\\frac{4\\pi}{3}=-\\frac{2\\pi}{3}\\ [2\\pi]$, et non $\\frac{\\pi}{3}$.",
           "figure": "roue-six-nacelles",
           "exercise": {
             "title": "Calculer des angles orientés avec la relation de Chasles",
@@ -508,7 +508,7 @@
               {
                 "content": "Deux vecteurs non nuls $\\vec u$ et $\\vec v$ vérifient $(\\vec u\\,;\\vec v)=\\frac{\\pi}{5}\\ [2\\pi]$. Quelle est la mesure principale de $(\\vec v\\,;\\vec u)$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : on connaît $(\\vec u\\,;\\vec v)=\\frac{\\pi}{5}$. Étape 2 — Décomposer : par Chasles, $(\\vec u\\,;\\vec v)+(\\vec v\\,;\\vec u)=(\\vec u\\,;\\vec u)=0$, donc $(\\vec v\\,;\\vec u)=-(\\vec u\\,;\\vec v)$. Étape 3 — Calculer : $-\\frac{\\pi}{5}$, qui est déjà dans $]-\\pi\\,;\\pi]$. Étape 4 — Conclure : $(\\vec v\\,;\\vec u)=-\\frac{\\pi}{5}\\ [2\\pi]$. La proposition $\\frac{\\pi}{5}$ oublie le changement de signe ; $\\frac{4\\pi}{5}$ ajoute $\\pi$ au lieu de changer le signe.",
+                "explanation": "Étape 1 — Repérer : on connaît $(\\vec u\\,;\\vec v)=\\frac{\\pi}{5}$. Étape 2 — Décomposer : par Chasles, $(\\vec u\\,;\\vec v)+(\\vec v\\,;\\vec u)=(\\vec u\\,;\\vec u)=0$, donc $(\\vec v\\,;\\vec u)=-(\\vec u\\,;\\vec v)$. Étape 3 — Calculer : $-\\frac{\\pi}{5}$, qui est déjà dans $]-\\pi\\,;\\pi]$. Étape 4 — Conclure : $(\\vec v\\,;\\vec u)=-\\frac{\\pi}{5}\\ [2\\pi]$. La proposition $\\frac{\\pi}{5}$ oublie le changement de signe ; $\\frac{4\\pi}{5}=\\pi-\\frac{\\pi}{5}$ utilise l'angle supplémentaire au lieu de changer le signe ; $\\frac{6\\pi}{5}=\\pi+\\frac{\\pi}{5}$ ajoute $\\pi$ et dépasse $\\pi$.",
                 "answers": [
                   {
                     "content": "$-\\frac{\\pi}{5}$",
@@ -529,10 +529,10 @@
                 ]
               },
               {
-                "content": "Huit nacelles $N_0,N_1,\\dots,N_7$ sont régulièrement réparties sur une roue de centre $O$, dans cet ordre et dans le sens direct. Quelle est la mesure, en degrés, de (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{3}}) ?",
+                "content": "Huit nacelles $N_0,N_1,\\dots,N_7$ sont régulièrement réparties sur une roue de centre $O$, dans cet ordre et dans le sens direct. Quelle est la mesure, en degrés, de $(\\overrightarrow{ON_{0}};\\overrightarrow{ON_{3}})$ ?",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : huit points régulièrement répartis, donc deux rayons consécutifs font $\\frac{360^\\circ}{8}=45^\\circ$. Étape 2 — Décomposer : par Chasles, (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{3}}) $=$ (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{1}}) $+$ (\\overrightarrow{ON_{1}};\\overrightarrow{ON_{2}}) $+$ (\\overrightarrow{ON_{2}};\\overrightarrow{ON_{3}}). Étape 3 — Calculer : $3\\times45^\\circ=135^\\circ$, qui est dans l'intervalle des mesures principales ($]-180^\\circ\\,;180^\\circ]$). Étape 4 — Conclure : (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{3}}) $=135^\\circ$.",
+                "explanation": "Étape 1 — Repérer : huit points régulièrement répartis, donc deux rayons consécutifs font $\\frac{360^\\circ}{8}=45^\\circ$. Étape 2 — Décomposer : par Chasles, $(\\overrightarrow{ON_{0}};\\overrightarrow{ON_{3}}) = (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{1}}) + (\\overrightarrow{ON_{1}};\\overrightarrow{ON_{2}}) + (\\overrightarrow{ON_{2}};\\overrightarrow{ON_{3}})$. Étape 3 — Calculer : $3\\times45^\\circ=135^\\circ$, qui est dans l'intervalle des mesures principales ($]-180^\\circ\\,;180^\\circ]$). Étape 4 — Conclure : $(\\overrightarrow{ON_{0}};\\overrightarrow{ON_{3}}) =135^\\circ$.",
                 "answers": [
                   {
                     "content": "135",
@@ -544,7 +544,7 @@
               {
                 "content": "Trois vecteurs non nuls $\\vec u$, $\\vec v$, $\\vec w$ vérifient $(\\vec u\\,;\\vec v)=\\frac{2\\pi}{3}\\ [2\\pi]$ et $(\\vec v\\,;\\vec w)=\\frac{\\pi}{2}\\ [2\\pi]$. Quelle est la mesure principale de $(\\vec u\\,;\\vec w)$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $(\\vec u\\,;\\vec v)=\\frac{2\\pi}{3}$ et $(\\vec v\\,;\\vec w)=\\frac{\\pi}{2}$. Étape 2 — Décomposer : par Chasles, $(\\vec u\\,;\\vec w)=(\\vec u\\,;\\vec v)+(\\vec v\\,;\\vec w)$. Étape 3 — Calculer : $\\frac{2\\pi}{3}+\\frac{\\pi}{2}=\\frac{4\\pi+3\\pi}{6}=\\frac{7\\pi}{6}$, puis $\\frac{7\\pi}{6}-2\\pi=-\\frac{5\\pi}{6}$. Étape 4 — Conclure : la mesure principale est $-\\frac{5\\pi}{6}$. La proposition $\\frac{7\\pi}{6}$ oublie de ramener la somme dans $]-\\pi\\,;\\pi]$ ; $\\frac{\\pi}{6}$ fait une différence au lieu d'une somme.",
+                "explanation": "Étape 1 — Repérer : $(\\vec u\\,;\\vec v)=\\frac{2\\pi}{3}$ et $(\\vec v\\,;\\vec w)=\\frac{\\pi}{2}$. Étape 2 — Décomposer : par Chasles, $(\\vec u\\,;\\vec w)=(\\vec u\\,;\\vec v)+(\\vec v\\,;\\vec w)$. Étape 3 — Calculer : $\\frac{2\\pi}{3}+\\frac{\\pi}{2}=\\frac{4\\pi+3\\pi}{6}=\\frac{7\\pi}{6}$, puis $\\frac{7\\pi}{6}-2\\pi=-\\frac{5\\pi}{6}$. Étape 4 — Conclure : la mesure principale est $-\\frac{5\\pi}{6}$. La proposition $\\frac{7\\pi}{6}$ oublie de ramener la somme dans $]-\\pi\\,;\\pi]$ ; $\\frac{\\pi}{6}$ fait la différence $\\frac{2\\pi}{3}-\\frac{\\pi}{2}$ au lieu de la somme ; $-\\frac{\\pi}{6}$ fait la différence dans l'autre ordre, $\\frac{\\pi}{2}-\\frac{2\\pi}{3}$.",
                 "answers": [
                   {
                     "content": "$\\frac{7\\pi}{6}$",
@@ -605,26 +605,26 @@
               {
                 "content": "Le triangle $ABC$ est équilatéral et de sens direct. Quelles sont les deux égalités vraies ?",
                 "question_type": "multiple_correct_2",
-                "explanation": "Étape 1 — Repérer : dans un triangle équilatéral direct, (\\overrightarrow{AB};\\overrightarrow{AC}) $=\\frac{\\pi}{3}$, et le même raisonnement en $B$ et en $C$ donne (\\overrightarrow{BC};\\overrightarrow{BA}) $=\\frac{\\pi}{3}$. Étape 2 — Décomposer : (\\overrightarrow{AC};\\overrightarrow{AB}) $=-$ (\\overrightarrow{AB};\\overrightarrow{AC}) ; (\\overrightarrow{BA};\\overrightarrow{BC}) $=-$ (\\overrightarrow{BC};\\overrightarrow{BA}) ; (\\overrightarrow{AB};\\overrightarrow{BC}) $=$ (\\overrightarrow{AB};\\overrightarrow{BA}) $+$ (\\overrightarrow{BA};\\overrightarrow{BC}). Étape 3 — Calculer : (\\overrightarrow{AC};\\overrightarrow{AB}) $=-\\frac{\\pi}{3}$ ; (\\overrightarrow{BA};\\overrightarrow{BC}) $=-\\frac{\\pi}{3}$ ; (\\overrightarrow{AB};\\overrightarrow{BC}) $=\\pi-\\frac{\\pi}{3}=\\frac{2\\pi}{3}$. Étape 4 — Conclure : seules (\\overrightarrow{AB};\\overrightarrow{AC}) $=\\frac{\\pi}{3}$ et (\\overrightarrow{BC};\\overrightarrow{BA}) $=\\frac{\\pi}{3}$ sont vraies. La dernière proposition confond l'angle du triangle avec l'angle extérieur.",
+                "explanation": "Étape 1 — Repérer : dans un triangle équilatéral direct, $(\\overrightarrow{AB};\\overrightarrow{AC}) =\\frac{\\pi}{3}$, et le même raisonnement en $B$ et en $C$ donne $(\\overrightarrow{BC};\\overrightarrow{BA}) =\\frac{\\pi}{3}$. Étape 2 — Décomposer : $(\\overrightarrow{AC};\\overrightarrow{AB}) = - (\\overrightarrow{AB};\\overrightarrow{AC})$ ; $(\\overrightarrow{BA};\\overrightarrow{BC}) = - (\\overrightarrow{BC};\\overrightarrow{BA})$ ; $(\\overrightarrow{AB};\\overrightarrow{BC}) = (\\overrightarrow{AB};\\overrightarrow{BA}) + (\\overrightarrow{BA};\\overrightarrow{BC})$. Étape 3 — Calculer : $(\\overrightarrow{AC};\\overrightarrow{AB}) =-\\frac{\\pi}{3}$ ; $(\\overrightarrow{BA};\\overrightarrow{BC}) =-\\frac{\\pi}{3}$ ; $(\\overrightarrow{AB};\\overrightarrow{BC}) =\\pi-\\frac{\\pi}{3}=\\frac{2\\pi}{3}$. Étape 4 — Conclure : seules $(\\overrightarrow{AB};\\overrightarrow{AC}) =\\frac{\\pi}{3}$ et $(\\overrightarrow{BC};\\overrightarrow{BA}) =\\frac{\\pi}{3}$ sont vraies. La proposition $(\\overrightarrow{AB};\\overrightarrow{BC})=\\frac{\\pi}{3}$ confond l'angle du triangle avec l'angle extérieur, qui vaut $\\frac{2\\pi}{3}$.",
                 "answers": [
                   {
-                    "content": "(\\overrightarrow{AB};\\overrightarrow{AC}) $=\\frac{\\pi}{3}$",
+                    "content": "$(\\overrightarrow{AB};\\overrightarrow{AC}) =\\frac{\\pi}{3}$",
                     "correct": true
                   },
                   {
-                    "content": "(\\overrightarrow{BC};\\overrightarrow{BA}) $=\\frac{\\pi}{3}$",
+                    "content": "$(\\overrightarrow{BC};\\overrightarrow{BA}) =\\frac{\\pi}{3}$",
                     "correct": true
                   },
                   {
-                    "content": "(\\overrightarrow{AC};\\overrightarrow{AB}) $=\\frac{\\pi}{3}$",
+                    "content": "$(\\overrightarrow{AC};\\overrightarrow{AB}) =\\frac{\\pi}{3}$",
                     "correct": false
                   },
                   {
-                    "content": "(\\overrightarrow{BA};\\overrightarrow{BC}) $=\\frac{\\pi}{3}$",
+                    "content": "$(\\overrightarrow{BA};\\overrightarrow{BC}) =\\frac{\\pi}{3}$",
                     "correct": false
                   },
                   {
-                    "content": "(\\overrightarrow{AB};\\overrightarrow{BC}) $=\\frac{\\pi}{3}$",
+                    "content": "$(\\overrightarrow{AB};\\overrightarrow{BC}) =\\frac{\\pi}{3}$",
                     "correct": false
                   }
                 ]
@@ -635,10 +635,10 @@
             "statement": "Quatre points $A$, $B$, $C$, $D$ sont répartis à égale distance sur une roue de centre $O$, dans cet ordre et dans le sens direct.",
             "questions": [
               {
-                "content": "Deux rayons consécutifs font (\\overrightarrow{OA};\\overrightarrow{OB}) $=\\dfrac{\\pi}{a}$ avec $a=$ ___ . Par Chasles, (\\overrightarrow{OA};\\overrightarrow{OD}) $=\\dfrac{b\\pi}{2}\\ [2\\pi]$ avec $b=$ ___ .",
+                "content": "Deux rayons consécutifs font $(\\overrightarrow{OA};\\overrightarrow{OB}) =\\dfrac{\\pi}{a}$ avec $a=$ ___ . Par Chasles, $(\\overrightarrow{OA};\\overrightarrow{OD}) =\\dfrac{b\\pi}{2}\\ [2\\pi]$ avec $b=$ ___ .",
                 "question_type": "numeric",
                 "tolerance": 0,
-                "explanation": "Étape 1 — Repérer : quatre points régulièrement répartis, donc (\\overrightarrow{OA};\\overrightarrow{OB}) $=\\frac{2\\pi}{4}=\\frac{\\pi}{2}$ : $a=2$. Étape 2 — Décomposer : (\\overrightarrow{OA};\\overrightarrow{OD}) $=$ (\\overrightarrow{OA};\\overrightarrow{OB}) $+$ (\\overrightarrow{OB};\\overrightarrow{OC}) $+$ (\\overrightarrow{OC};\\overrightarrow{OD}). Étape 3 — Calculer : $3\\times\\frac{\\pi}{2}=\\frac{3\\pi}{2}$ : $b=3$. Étape 4 — Conclure : (\\overrightarrow{OA};\\overrightarrow{OD}) $=\\frac{3\\pi}{2}=-\\frac{\\pi}{2}\\ [2\\pi]$.",
+                "explanation": "Étape 1 — Repérer : quatre points régulièrement répartis, donc $(\\overrightarrow{OA};\\overrightarrow{OB}) =\\frac{2\\pi}{4}=\\frac{\\pi}{2}$ : $a=2$. Étape 2 — Décomposer : $(\\overrightarrow{OA};\\overrightarrow{OD}) = (\\overrightarrow{OA};\\overrightarrow{OB}) + (\\overrightarrow{OB};\\overrightarrow{OC}) + (\\overrightarrow{OC};\\overrightarrow{OD})$. Étape 3 — Calculer : $3\\times\\frac{\\pi}{2}=\\frac{3\\pi}{2}$ : $b=3$. Étape 4 — Conclure : $(\\overrightarrow{OA};\\overrightarrow{OD}) =\\frac{3\\pi}{2}=-\\frac{\\pi}{2}\\ [2\\pi]$.",
                 "answers": [
                   {
                     "content": "2",
@@ -654,9 +654,9 @@
                 "hint": "Quatre points se partagent un tour complet de $2\\pi$."
               },
               {
-                "content": "Quelle est la mesure principale de (\\overrightarrow{OD};\\overrightarrow{OA}) ?",
+                "content": "Quatre points $A$, $B$, $C$, $D$ sont répartis à égale distance sur une roue de centre $O$, dans cet ordre et dans le sens direct. Quelle est la mesure principale de $(\\overrightarrow{OD};\\overrightarrow{OA})$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : (\\overrightarrow{OA};\\overrightarrow{OD}) $=\\frac{3\\pi}{2}$ d'après les rayons consécutifs de $\\frac{\\pi}{2}$. Étape 2 — Décomposer : (\\overrightarrow{OD};\\overrightarrow{OA}) $=-$ (\\overrightarrow{OA};\\overrightarrow{OD}). Étape 3 — Calculer : $-\\frac{3\\pi}{2}+2\\pi=\\frac{\\pi}{2}$. Étape 4 — Conclure : la mesure principale est $\\frac{\\pi}{2}$. La proposition $-\\frac{\\pi}{2}$ se trompe de signe ; $\\frac{3\\pi}{2}$ est hors de $]-\\pi\\,;\\pi]$.",
+                "explanation": "Étape 1 — Repérer : $(\\overrightarrow{OA};\\overrightarrow{OD}) =\\frac{3\\pi}{2}$ d'après les rayons consécutifs de $\\frac{\\pi}{2}$. Étape 2 — Décomposer : $(\\overrightarrow{OD};\\overrightarrow{OA}) = - (\\overrightarrow{OA};\\overrightarrow{OD})$. Étape 3 — Calculer : $-\\frac{3\\pi}{2}+2\\pi=\\frac{\\pi}{2}$. Étape 4 — Conclure : la mesure principale est $\\frac{\\pi}{2}$. La proposition $-\\frac{\\pi}{2}$ se trompe de signe ; $\\frac{3\\pi}{2}$ est hors de $]-\\pi\\,;\\pi]$.",
                 "answers": [
                   {
                     "content": "$\\frac{\\pi}{2}$",
@@ -677,9 +677,9 @@
                 ]
               },
               {
-                "content": "Quelle est la mesure principale de (\\overrightarrow{OB};\\overrightarrow{OD}) $+$ (\\overrightarrow{OD};\\overrightarrow{OA}) ?",
+                "content": "Quatre points $A$, $B$, $C$, $D$ sont répartis à égale distance sur une roue de centre $O$, dans cet ordre et dans le sens direct. Quelle est la mesure principale de $(\\overrightarrow{OB};\\overrightarrow{OD}) + (\\overrightarrow{OD};\\overrightarrow{OA})$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : (\\overrightarrow{OB};\\overrightarrow{OD}) $=\\pi$ (deux rayons opposés) et (\\overrightarrow{OD};\\overrightarrow{OA}) $=\\frac{\\pi}{2}$. Étape 2 — Décomposer : par Chasles, la somme est (\\overrightarrow{OB};\\overrightarrow{OA}). Étape 3 — Calculer : $\\pi+\\frac{\\pi}{2}=\\frac{3\\pi}{2}$, puis $\\frac{3\\pi}{2}-2\\pi=-\\frac{\\pi}{2}$. Étape 4 — Conclure : la mesure principale est $-\\frac{\\pi}{2}$.",
+                "explanation": "Étape 1 — Repérer : $(\\overrightarrow{OB};\\overrightarrow{OD}) =\\pi$ (deux rayons opposés) et $(\\overrightarrow{OD};\\overrightarrow{OA}) =\\frac{\\pi}{2}$. Étape 2 — Décomposer : par Chasles, la somme est $(\\overrightarrow{OB};\\overrightarrow{OA})$. Étape 3 — Calculer : $\\pi+\\frac{\\pi}{2}=\\frac{3\\pi}{2}$, puis $\\frac{3\\pi}{2}-2\\pi=-\\frac{\\pi}{2}$. Étape 4 — Conclure : la mesure principale est $-\\frac{\\pi}{2}$.",
                 "answers": [
                   {
                     "content": "$-\\frac{\\pi}{2}$",
@@ -816,7 +816,7 @@
               {
                 "content": "Pour tout réel $x$, quelles sont les trois égalités vraies ?",
                 "question_type": "multiple_correct_3",
-                "explanation": "Étape 1 — Ramener : ces formules valent pour tout réel $x$. Étape 2 — Associer : on lit les angles associés $\\pi-x$, $\\frac{\\pi}{2}-x$, $-x$ et $\\pi+x$. Étape 3 — Appliquer : $\\cos(\\pi-x)=-\\cos x$ (vrai) ; $\\sin(\\pi-x)=\\sin x$ (vrai) ; $\\cos\\left(\\frac{\\pi}{2}-x\\right)=\\sin x$ (vrai) ; $\\sin(-x)=-\\sin x$ et non $\\sin x$ (faux) ; $\\cos(\\pi+x)=-\\cos x$ et non $\\cos x$ (faux). Étape 4 — Conclure : les trois égalités vraies sont les trois premières.",
+                "explanation": "Étape 1 — Ramener : ces formules valent pour tout réel $x$. Étape 2 — Associer : on lit les angles associés $\\pi-x$, $\\frac{\\pi}{2}-x$, $-x$ et $\\pi+x$. Étape 3 — Appliquer : $\\cos(\\pi-x)=-\\cos x$ (vrai) ; $\\sin(\\pi-x)=\\sin x$ (vrai) ; $\\cos\\left(\\frac{\\pi}{2}-x\\right)=\\sin x$ (vrai) ; $\\sin(-x)=-\\sin x$ et non $\\sin x$ (faux) ; $\\cos(\\pi+x)=-\\cos x$ et non $\\cos x$ (faux). Étape 4 — Conclure : les trois égalités vraies sont $\\cos(\\pi-x)=-\\cos x$, $\\sin(\\pi-x)=\\sin x$ et $\\cos\\left(\\frac{\\pi}{2}-x\\right)=\\sin x$.",
                 "answers": [
                   {
                     "content": "$\\cos(\\pi-x)=-\\cos x$",
@@ -867,7 +867,7 @@
               {
                 "content": "$\\sin\\dfrac{7\\pi}{6}=$ ___ .",
                 "question_type": "select",
-                "explanation": "Étape 1 — Ramener : $\\frac{7\\pi}{6}-2\\pi=-\\frac{5\\pi}{6}$. Étape 2 — Associer : $-\\frac{5\\pi}{6}=-\\left(\\pi-\\frac{\\pi}{6}\\right)$, avec $\\alpha=\\frac{\\pi}{6}$. Étape 3 — Appliquer : $\\sin\\left(-\\frac{5\\pi}{6}\\right)=-\\sin\\left(\\pi-\\frac{\\pi}{6}\\right)=-\\sin\\frac{\\pi}{6}$. Étape 4 — Conclure : $\\sin\\frac{\\pi}{6}=\\frac12$, donc $\\sin\\frac{7\\pi}{6}=-\\frac12$.",
+                "explanation": "Étape 1 — Ramener : on garde $\\frac{7\\pi}{6}$, car la formule de $\\pi+\\alpha$ s'applique sans réduire. Étape 2 — Associer : $\\frac{7\\pi}{6}=\\pi+\\frac{\\pi}{6}$, avec $\\alpha=\\frac{\\pi}{6}$. Étape 3 — Appliquer : $\\sin(\\pi+\\alpha)=-\\sin\\alpha$, donc $\\sin\\frac{7\\pi}{6}=-\\sin\\frac{\\pi}{6}$. Étape 4 — Conclure : $\\sin\\frac{\\pi}{6}=\\frac12$, donc $\\sin\\frac{7\\pi}{6}=-\\frac12$. La proposition $\\frac12$ oublie le signe ; $\\pm\\frac{\\sqrt3}{2}$ prennent le cosinus de $\\frac{\\pi}{6}$ au lieu de son sinus.",
                 "answers": [
                   {
                     "content": "$-\\frac12$",
@@ -943,7 +943,7 @@
               {
                 "content": "Quelle est la valeur exacte de $\\cos\\frac{\\pi}{12}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : $\\frac{\\pi}{12}=\\frac{\\pi}{3}-\\frac{\\pi}{4}$, donc on utilise $\\cos(a-b)$. Étape 2 — Transformer : $a=\\frac{\\pi}{3}$ et $b=\\frac{\\pi}{4}$, avec $\\cos a=\\frac12$, $\\sin a=\\frac{\\sqrt3}{2}$, $\\cos b=\\sin b=\\frac{\\sqrt2}{2}$. Étape 3 — Appliquer : $\\cos(a-b)=\\cos a\\cos b+\\sin a\\sin b=\\frac12\\times\\frac{\\sqrt2}{2}+\\frac{\\sqrt3}{2}\\times\\frac{\\sqrt2}{2}$. Étape 4 — Conclure : $\\frac{\\sqrt2}{4}+\\frac{\\sqrt6}{4}=\\frac{\\sqrt6+\\sqrt2}{4}$. La proposition $\\frac{\\sqrt6-\\sqrt2}{4}$ vient du mauvais signe : c'est la valeur de $\\sin\\frac{\\pi}{12}$.",
+                "explanation": "Étape 1 — Reconnaître : $\\frac{\\pi}{12}=\\frac{\\pi}{3}-\\frac{\\pi}{4}$, donc on utilise $\\cos(a-b)$. Étape 2 — Transformer : $a=\\frac{\\pi}{3}$ et $b=\\frac{\\pi}{4}$, avec $\\cos a=\\frac12$, $\\sin a=\\frac{\\sqrt3}{2}$, $\\cos b=\\sin b=\\frac{\\sqrt2}{2}$. Étape 3 — Appliquer : $\\cos(a-b)=\\cos a\\cos b+\\sin a\\sin b=\\frac12\\times\\frac{\\sqrt2}{2}+\\frac{\\sqrt3}{2}\\times\\frac{\\sqrt2}{2}$. Étape 4 — Conclure : $\\frac{\\sqrt2}{4}+\\frac{\\sqrt6}{4}=\\frac{\\sqrt6+\\sqrt2}{4}$. La proposition $\\frac{\\sqrt6-\\sqrt2}{4}$ vient du mauvais signe : c'est la valeur de $\\sin\\frac{\\pi}{12}$ ; $\\frac{\\sqrt3+1}{4}$ oublie les facteurs $\\sqrt2$ des produits ; $\\frac{\\sqrt2}{4}$ ne garde qu'un seul des deux termes.",
                 "answers": [
                   {
                     "content": "$\\frac{\\sqrt6+\\sqrt2}{4}$",
@@ -1028,7 +1028,7 @@
               {
                 "content": "On a $\\sin x=\\sin\\frac{\\pi}{5}$ si et seulement si $x=\\frac{\\pi}{5}+2k\\pi$ ou $x=$ ___ $+2k\\pi$ (avec $k\\in\\mathbb{Z}$).",
                 "question_type": "select",
-                "explanation": "Étape 1 — Reconnaître : équation de la forme $\\sin x=\\sin a$ avec $a=\\frac{\\pi}{5}$. Étape 2 — Transformer : le second membre est déjà écrit sous la forme $\\sin a$. Étape 3 — Appliquer : les solutions sont $x=a+2k\\pi$ ou $x=\\pi-a+2k\\pi$, soit $\\pi-\\frac{\\pi}{5}$. Étape 4 — Conclure : la seconde famille est $\\frac{4\\pi}{5}+2k\\pi$. La proposition $-\\frac{\\pi}{5}$ est la famille de l'équation en cosinus ; $\\frac{3\\pi}{10}$ vient de $\\frac{\\pi}{2}-a$.",
+                "explanation": "Étape 1 — Reconnaître : équation de la forme $\\sin x=\\sin a$ avec $a=\\frac{\\pi}{5}$. Étape 2 — Transformer : le second membre est déjà écrit sous la forme $\\sin a$. Étape 3 — Appliquer : les solutions sont $x=a+2k\\pi$ ou $x=\\pi-a+2k\\pi$, soit $\\pi-\\frac{\\pi}{5}$. Étape 4 — Conclure : la seconde famille est $\\frac{4\\pi}{5}+2k\\pi$. La proposition $-\\frac{\\pi}{5}$ est la famille de l'équation en cosinus ; $\\frac{3\\pi}{10}$ vient de $\\frac{\\pi}{2}-a$ ; $\\frac{6\\pi}{5}$ vient de $\\pi+a$.",
                 "answers": [
                   {
                     "content": "$\\frac{4\\pi}{5}$",
@@ -1090,7 +1090,7 @@
               {
                 "content": "Quelles sont les solutions de l'équation $\\sin x=\\frac12$ dans l'intervalle $]-\\pi\\,;\\pi]$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Reconnaître : équation de la forme $\\sin x=c$. Étape 2 — Transformer : $\\frac12=\\sin\\frac{\\pi}{6}$. Étape 3 — Appliquer : $x=\\frac{\\pi}{6}+2k\\pi$ ou $x=\\pi-\\frac{\\pi}{6}+2k\\pi=\\frac{5\\pi}{6}+2k\\pi$. Étape 4 — Conclure : avec $k=0$, les solutions de l'intervalle sont $\\frac{\\pi}{6}$ et $\\frac{5\\pi}{6}$. Les valeurs $\\pm\\frac{\\pi}{6}$ sont les solutions d'une équation en cosinus ; $\\frac{7\\pi}{6}$ est hors de l'intervalle.",
+                "explanation": "Étape 1 — Reconnaître : équation de la forme $\\sin x=c$. Étape 2 — Transformer : $\\frac12=\\sin\\frac{\\pi}{6}$. Étape 3 — Appliquer : $x=\\frac{\\pi}{6}+2k\\pi$ ou $x=\\pi-\\frac{\\pi}{6}+2k\\pi=\\frac{5\\pi}{6}+2k\\pi$. Étape 4 — Conclure : avec $k=0$, les solutions de l'intervalle sont $\\frac{\\pi}{6}$ et $\\frac{5\\pi}{6}$. Les valeurs $\\pm\\frac{\\pi}{6}$ sont les solutions d'une équation en cosinus ; $\\frac{\\pi}{3}$ et $\\frac{2\\pi}{3}$ ont pour sinus $\\frac{\\sqrt3}{2}$, pas $\\frac12$ ; $\\frac{7\\pi}{6}$ est hors de l'intervalle.",
                 "answers": [
                   {
                     "content": "$\\frac{\\pi}{6}$ et $\\frac{5\\pi}{6}$",
@@ -1164,7 +1164,7 @@
               "content": "La grande aiguille d'une horloge fait un tour complet (360°) en 60 minutes. Entre 8 h 00 et 8 h 50, de combien de degrés a-t-elle tourné (en valeur absolue) ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Convertir : 50 minutes représentent $\\frac{50}{60}=\\frac56$ de tour. Étape 2 — Repérer : on demande la valeur absolue, donc on ne tient pas compte du signe. Étape 3 — Retrancher : $\\frac56\\times360^\\circ=300^\\circ$, et $300^\\circ<360^\\circ$ : aucun tour complet à retirer. Étape 4 — Conclure : la grande aiguille a tourné de $300^\\circ$ (et non de $50^\\circ$, qui est le nombre de minutes).",
+              "explanation": "Étape 1 — Convertir : 50 minutes représentent $\\frac{50}{60}=\\frac56$ de tour, soit $\\frac56\\times360^\\circ=300^\\circ$. Cette question n'utilise que l'étape 1 (Convertir) : on demande une valeur absolue inférieure à un tour, donc il n'y a ni tour à repérer ni tour à retrancher. Conclusion : la grande aiguille a tourné de $300^\\circ$ (et non de $50^\\circ$, qui est le nombre de minutes).",
               "answers": [
                 {
                   "content": "300",
@@ -1200,7 +1200,7 @@
               "content": "La petite aiguille d'une horloge fait un tour complet (360°) en 12 heures. Entre 3 h 00 et 6 h 30, de combien de degrés a-t-elle tourné (en valeur absolue) ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Convertir : en 12 heures, la petite aiguille tourne de $360^\\circ$, donc de $\\frac{360^\\circ}{12}=30^\\circ$ par heure. Étape 2 — Repérer : de 3 h 00 à 6 h 30, il s'écoule 3,5 heures. Étape 3 — Retrancher : $3{,}5\\times30^\\circ=105^\\circ$, inférieur à $360^\\circ$ : aucun tour complet à retirer. Étape 4 — Conclure : la petite aiguille a tourné de $105^\\circ$.",
+              "explanation": "Étape 1 — Convertir : en 12 heures, la petite aiguille tourne de $360^\\circ$, donc de $\\frac{360^\\circ}{12}=30^\\circ$ par heure ; de 3 h 00 à 6 h 30, il s'écoule 3,5 heures, soit $3{,}5\\times30^\\circ=105^\\circ$. Cette question n'utilise que l'étape 1 (Convertir) : $105^\\circ<360^\\circ$, il n'y a aucun tour complet à retirer. Conclusion : la petite aiguille a tourné de $105^\\circ$.",
               "answers": [
                 {
                   "content": "105",
@@ -1271,7 +1271,7 @@
               "content": "La roue d'un gbaka a pour rayon 0,5 m et roule sans glisser : quand elle tourne de $\\alpha$ radians, le gbaka avance de $0{,}5\\times\\alpha$ mètres. Quelle est la longueur, en mètres, de l'arc de roue qui correspond à une rotation de 6 radians ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Convertir : l'angle est déjà en radians, $\\alpha=6$. Étape 2 — Repérer : la distance dépend de l'angle total ; ici 6 rad est un peu moins d'un tour ($2\\pi\\approx6{,}28$), donc aucune réduction. Étape 3 — Retrancher : rien à retrancher ; on applique $\\ell=R\\alpha$. Étape 4 — Conclure : $\\ell=0{,}5\\times6=3$ m. Le gbaka avance de 3 m.",
+              "explanation": "Étape 1 — Convertir : l'angle est déjà en radians, $\\alpha=6$. Cette question n'utilise que l'étape 1 (Convertir) : la longueur d'arc dépend de l'angle total, qu'on ne réduit pas (6 rad est un peu moins d'un tour, $2\\pi\\approx6{,}28$) ; on applique la formule $\\ell=R\\alpha$. Conclusion : $\\ell=0{,}5\\times6=3$ m. Le gbaka avance de 3 m.",
               "answers": [
                 {
                   "content": "3",
@@ -1283,7 +1283,7 @@
             {
               "content": "La roue d'un gbaka a pour rayon 0,5 m et roule sans glisser : quand elle tourne de $\\alpha$ radians, le gbaka avance de $0{,}5\\times\\alpha$ mètres. La roue tourne de $\\frac{13\\pi}{2}$ radians. Quelle distance le gbaka parcourt-il ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Convertir : l'angle est déjà en radians, $\\alpha=\\frac{13\\pi}{2}$. Étape 2 — Repérer : la distance dépend de tout l'angle parcouru (3 tours et quart), pas de sa mesure principale. Étape 3 — Retrancher : rien à retrancher ici ; on calcule $0{,}5\\times\\frac{13\\pi}{2}=\\frac{13\\pi}{4}$. Étape 4 — Conclure : le gbaka parcourt $\\frac{13\\pi}{4}$ m (environ 10,2 m). La proposition $\\frac{13\\pi}{2}$ oublie le rayon  ; $13\\pi$ divise par 0,5 au lieu de multiplier ; $\\frac{\\pi}{4}$ utilise la mesure principale $\\frac{\\pi}{2}$ au lieu de l'angle total.",
+              "explanation": "Étape 1 — Convertir : l'angle est déjà en radians, $\\alpha=\\frac{13\\pi}{2}$. Étape 2 — Repérer : la distance dépend de tout l'angle parcouru (3 tours et quart), pas de sa mesure principale. Étape 3 — Retrancher : on ne retranche aucun tour ici, la distance utilise l'angle total ; on applique $\\ell=R\\alpha$ avec $0{,}5\\times\\frac{13\\pi}{2}=\\frac{13\\pi}{4}$. Étape 4 — Conclure : le gbaka parcourt $\\frac{13\\pi}{4}$ m (environ 10,2 m). La proposition $\\frac{13\\pi}{2}$ oublie le rayon ; $13\\pi$ divise par 0,5 au lieu de multiplier ; $\\frac{\\pi}{4}$ utilise la mesure principale $\\frac{\\pi}{2}$ au lieu de l'angle total.",
               "answers": [
                 {
                   "content": "$\\frac{13\\pi}{4}$ m",
@@ -1357,7 +1357,7 @@
             {
               "content": "La roue d'un gbaka a pour rayon 0,5 m et roule sans glisser : quand elle tourne de $\\alpha$ radians, le gbaka avance de $0{,}5\\times\\alpha$ mètres. Relie chaque rotation de la roue à la distance parcourue par le gbaka.",
               "question_type": "matching",
-              "explanation": "Étape 1 — Convertir : les angles sont déjà en radians. Étape 2 — Repérer : la distance dépend de l'angle total, sans réduction. Étape 3 — Retrancher : rien à retrancher ; on calcule $0{,}5\\times\\alpha$ : $0{,}5\\times\\frac{\\pi}{2}=\\frac{\\pi}{4}$ ; $0{,}5\\times\\pi=\\frac{\\pi}{2}$ ; $0{,}5\\times2\\pi=\\pi$ ; $0{,}5\\times4\\pi=2\\pi$. Étape 4 — Conclure : les quatre distances sont $\\frac{\\pi}{4}$, $\\frac{\\pi}{2}$, $\\pi$ et $2\\pi$ mètres.",
+              "explanation": "Étape 1 — Convertir : les angles sont déjà en radians. Cette question n'utilise que l'étape 1 (Convertir) : la distance dépend de l'angle total, sans réduction ; on applique la formule $\\ell=0{,}5\\times\\alpha$ : $0{,}5\\times\\frac{\\pi}{2}=\\frac{\\pi}{4}$ ; $0{,}5\\times\\pi=\\frac{\\pi}{2}$ ; $0{,}5\\times2\\pi=\\pi$ ; $0{,}5\\times4\\pi=2\\pi$. Conclusion : les quatre distances sont $\\frac{\\pi}{4}$, $\\frac{\\pi}{2}$, $\\pi$ et $2\\pi$ mètres.",
               "answers": [
                 {
                   "content": "$\\frac{\\pi}{2}$ rad",
@@ -1437,7 +1437,7 @@
             {
               "content": "La roue d'un gbaka a pour rayon 0,6 m ; son centre est à 0,6 m du sol et elle tourne dans le sens direct. Quand elle a tourné de $x$ radians, la valve est à la hauteur $h(x)=0{,}6+0{,}6\\sin x$ mètres. On cherche $x$ dans $]-\\pi\\,;\\pi]$ tel que $h(x)=0{,}9$, ce qui donne $\\sin x=\\frac12=\\sin\\frac{\\pi}{6}$. Alors $x=\\frac{\\pi}{6}+2k\\pi$ ou $x=$ ___ $+2k\\pi$ (avec $k\\in\\mathbb{Z}$).",
               "question_type": "select",
-              "explanation": "Étape 1 — Reconnaître : $0{,}6+0{,}6\\sin x=0{,}9$ donne $\\sin x=\\frac12$, de la forme $\\sin x=\\sin a$ avec $a=\\frac{\\pi}{6}$. Étape 2 — Transformer : $\\frac12=\\sin\\frac{\\pi}{6}$ est déjà écrit. Étape 3 — Appliquer : les solutions sont $a+2k\\pi$ ou $\\pi-a+2k\\pi$, soit $\\pi-\\frac{\\pi}{6}=\\frac{5\\pi}{6}$. Étape 4 — Conclure : dans $]-\\pi\\,;\\pi]$, on garde $\\frac{\\pi}{6}$ et $\\frac{5\\pi}{6}$. La proposition $-\\frac{\\pi}{6}$ est la famille de l'équation en cosinus ; $\\frac{7\\pi}{6}$ vient de $\\pi+a$.",
+              "explanation": "Étape 1 — Reconnaître : $0{,}6+0{,}6\\sin x=0{,}9$ donne $\\sin x=\\frac12$, de la forme $\\sin x=\\sin a$ avec $a=\\frac{\\pi}{6}$. Étape 2 — Transformer : $\\frac12=\\sin\\frac{\\pi}{6}$ est déjà écrit. Étape 3 — Appliquer : les solutions sont $a+2k\\pi$ ou $\\pi-a+2k\\pi$, soit $\\pi-\\frac{\\pi}{6}=\\frac{5\\pi}{6}$. Étape 4 — Conclure : dans $]-\\pi\\,;\\pi]$, on garde $\\frac{\\pi}{6}$ et $\\frac{5\\pi}{6}$. La proposition $-\\frac{\\pi}{6}$ est la famille de l'équation en cosinus ; $\\frac{7\\pi}{6}$ vient de $\\pi+a$ ; $\\frac{\\pi}{3}$ a pour sinus $\\frac{\\sqrt3}{2}$, pas $\\frac12$.",
               "answers": [
                 {
                   "content": "$\\frac{5\\pi}{6}$",
@@ -1460,7 +1460,7 @@
             {
               "content": "On veut calculer $\\sin\\frac{5\\pi}{12}$ avec $\\frac{5\\pi}{12}=\\frac{\\pi}{4}+\\frac{\\pi}{6}$. Quelle écriture donne $\\sin\\frac{5\\pi}{12}$ par la formule d'addition ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Reconnaître : $\\frac{5\\pi}{12}=\\frac{\\pi}{4}+\\frac{\\pi}{6}$, donc on utilise $\\sin(a+b)$. Étape 2 — Transformer : $a=\\frac{\\pi}{4}$ et $b=\\frac{\\pi}{6}$. Étape 3 — Appliquer : $\\sin(a+b)=\\sin a\\cos b+\\cos a\\sin b$, soit $\\sin\\frac{\\pi}{4}\\cos\\frac{\\pi}{6}+\\cos\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}$. Étape 4 — Conclure : cette écriture donne $\\frac{\\sqrt6+\\sqrt2}{4}$. La proposition avec deux sinus et deux cosinus croisés est celle de $\\cos(a-b)$ ; celle avec le signe moins est $\\sin(a-b)$ ; la dernière est $\\cos(a+b)$.",
+              "explanation": "Étape 1 — Reconnaître : $\\frac{5\\pi}{12}=\\frac{\\pi}{4}+\\frac{\\pi}{6}$, donc on utilise $\\sin(a+b)$. Étape 2 — Transformer : $a=\\frac{\\pi}{4}$ et $b=\\frac{\\pi}{6}$. Étape 3 — Appliquer : $\\sin(a+b)=\\sin a\\cos b+\\cos a\\sin b$, soit $\\sin\\frac{\\pi}{4}\\cos\\frac{\\pi}{6}+\\cos\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}$. Étape 4 — Conclure : cette écriture donne $\\frac{\\sqrt6+\\sqrt2}{4}$. La proposition $\\sin\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}+\\cos\\frac{\\pi}{4}\\cos\\frac{\\pi}{6}$ est le développement de $\\cos(a-b)$ ; $\\sin\\frac{\\pi}{4}\\cos\\frac{\\pi}{6}-\\cos\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}$ est celui de $\\sin(a-b)$ ; $\\cos\\frac{\\pi}{4}\\cos\\frac{\\pi}{6}-\\sin\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}$ est celui de $\\cos(a+b)$.",
               "answers": [
                 {
                   "content": "$\\sin\\frac{\\pi}{4}\\cos\\frac{\\pi}{6}+\\cos\\frac{\\pi}{4}\\sin\\frac{\\pi}{6}$",
@@ -1511,10 +1511,10 @@
           "figure": null,
           "questions": [
             {
-              "content": "Douze nacelles $N_0,\\dots,N_{11}$ sont régulièrement réparties sur une roue de centre $O$, dans cet ordre et dans le sens direct. Quelle est la mesure, en degrés, de (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{4}}) ?",
+              "content": "Douze nacelles $N_0,\\dots,N_{11}$ sont régulièrement réparties sur une roue de centre $O$, dans cet ordre et dans le sens direct. Quelle est la mesure, en degrés, de $(\\overrightarrow{ON_{0}};\\overrightarrow{ON_{4}})$ ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Repérer : douze points régulièrement répartis, donc deux rayons consécutifs font $\\frac{360^\\circ}{12}=30^\\circ$. Étape 2 — Décomposer : par Chasles, (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{4}}) est la somme de quatre angles consécutifs de $30^\\circ$. Étape 3 — Calculer : $4\\times30^\\circ=120^\\circ$, dans $]-180^\\circ\\,;180^\\circ]$. Étape 4 — Conclure : (\\overrightarrow{ON_{0}};\\overrightarrow{ON_{4}}) $=120^\\circ$.",
+              "explanation": "Étape 1 — Repérer : douze points régulièrement répartis, donc deux rayons consécutifs font $\\frac{360^\\circ}{12}=30^\\circ$. Étape 2 — Décomposer : par Chasles, $(\\overrightarrow{ON_{0}};\\overrightarrow{ON_{4}})$ est la somme de quatre angles consécutifs de $30^\\circ$. Étape 3 — Calculer : $4\\times30^\\circ=120^\\circ$, dans $]-180^\\circ\\,;180^\\circ]$. Étape 4 — Conclure : $(\\overrightarrow{ON_{0}};\\overrightarrow{ON_{4}}) =120^\\circ$.",
               "answers": [
                 {
                   "content": "120",
@@ -1524,9 +1524,9 @@
               "unit": "°"
             },
             {
-              "content": "Douze nacelles $N_0,\\dots,N_{11}$ sont régulièrement réparties sur une roue de centre $O$, dans cet ordre et dans le sens direct (deux rayons consécutifs font $\\frac{\\pi}{6}$). Quelle est la mesure principale de (\\overrightarrow{ON_{5}};\\overrightarrow{ON_{11}}) ?",
+              "content": "Douze nacelles $N_0,\\dots,N_{11}$ sont régulièrement réparties sur une roue de centre $O$, dans cet ordre et dans le sens direct (deux rayons consécutifs font $\\frac{\\pi}{6}$). Quelle est la mesure principale de $(\\overrightarrow{ON_{5}};\\overrightarrow{ON_{11}})$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Repérer : deux rayons consécutifs font $\\frac{\\pi}{6}$. Étape 2 — Décomposer : de $N_5$ à $N_{11}$, il y a $11-5=6$ pas, donc (\\overrightarrow{ON_{5}};\\overrightarrow{ON_{11}}) est la somme de six angles de $\\frac{\\pi}{6}$ (Chasles). Étape 3 — Calculer : $6\\times\\frac{\\pi}{6}=\\pi$, qui est dans $]-\\pi\\,;\\pi]$ car $\\pi$ est la borne incluse. Étape 4 — Conclure : la mesure principale est $\\pi$. La proposition $-\\pi$ est hors de l'intervalle (borne exclue) ; $0$ oublie la moitié du tour ; $\\frac{\\pi}{2}$ ne compte que trois pas.",
+              "explanation": "Étape 1 — Repérer : deux rayons consécutifs font $\\frac{\\pi}{6}$. Étape 2 — Décomposer : de $N_5$ à $N_{11}$, il y a $11-5=6$ pas, donc $(\\overrightarrow{ON_{5}};\\overrightarrow{ON_{11}})$ est la somme de six angles de $\\frac{\\pi}{6}$ (Chasles). Étape 3 — Calculer : $6\\times\\frac{\\pi}{6}=\\pi$, qui est dans $]-\\pi\\,;\\pi]$ car $\\pi$ est la borne incluse. Étape 4 — Conclure : la mesure principale est $\\pi$. La proposition $-\\pi$ est hors de l'intervalle (borne exclue) ; $0$ oublie la moitié du tour ; $\\frac{\\pi}{2}$ ne compte que trois pas.",
               "answers": [
                 {
                   "content": "$\\pi$",
@@ -1560,24 +1560,24 @@
               "unit": "m"
             },
             {
-              "content": "Une grande roue de foire à Abidjan (rayon 8 m, centre à 10 m du sol) a douze nacelles $N_0,N_1,\\dots,N_{11}$ régulièrement réparties, dans cet ordre et dans le sens direct ; $N_0$ est à droite du centre $O$, à la hauteur du centre. La nacelle $N_k$ est à l'angle $x=\\frac{k\\pi}{6}$ et à la hauteur $H(x)=10+8\\sin x$ mètres. On cherche $x$ dans $]-\\pi\\,;\\pi]$ tel que $H(x)=14$, ce qui donne $\\sin x=\\frac12=\\sin\\frac{\\pi}{6}$. Alors $x=\\frac{\\pi}{6}+2k\\pi$ ou $x=$ ___ $+2k\\pi$ (avec $k\\in\\mathbb{Z}$).",
+              "content": "Une grande roue de foire à Abidjan (rayon 8 m, centre à 10 m du sol) a douze nacelles $N_0,N_1,\\dots,N_{11}$ régulièrement réparties, dans cet ordre et dans le sens direct ; $N_0$ est à droite du centre $O$, à la hauteur du centre. La nacelle $N_k$ est à l'angle $x=\\frac{k\\pi}{6}$ et son abscisse par rapport à $O$ est $8\\cos x$ mètres. On cherche $x$ dans $]-\\pi\\,;\\pi]$ tel que $8\\cos x=4$, ce qui donne $\\cos x=\\frac12=\\cos\\frac{\\pi}{3}$. Alors $x=\\frac{\\pi}{3}+2k\\pi$ ou $x=$ ___ $+2k\\pi$ (avec $k\\in\\mathbb{Z}$).",
               "question_type": "select",
-              "explanation": "Étape 1 — Reconnaître : $10+8\\sin x=14$ donne $\\sin x=\\frac12$, de la forme $\\sin x=\\sin a$ avec $a=\\frac{\\pi}{6}$. Étape 2 — Transformer : $\\frac12=\\sin\\frac{\\pi}{6}$ est déjà écrit. Étape 3 — Appliquer : les solutions sont $a+2k\\pi$ ou $\\pi-a+2k\\pi$, soit $\\pi-\\frac{\\pi}{6}=\\frac{5\\pi}{6}$. Étape 4 — Conclure : dans $]-\\pi\\,;\\pi]$, on garde $\\frac{\\pi}{6}$ ($N_1$) et $\\frac{5\\pi}{6}$ ($N_5$). La proposition $-\\frac{\\pi}{6}$ est la famille de l'équation en cosinus ; $\\frac{7\\pi}{6}$ vient de $\\pi+a$.",
+              "explanation": "Étape 1 — Reconnaître : $8\\cos x=4$ donne $\\cos x=\\frac12$, de la forme $\\cos x=\\cos a$ avec $a=\\frac{\\pi}{3}$. Étape 2 — Transformer : $\\frac12=\\cos\\frac{\\pi}{3}$ est déjà écrit. Étape 3 — Appliquer : les solutions sont $a+2k\\pi$ ou $-a+2k\\pi$, soit $-\\frac{\\pi}{3}$. Étape 4 — Conclure : dans $]-\\pi\\,;\\pi]$, on garde $\\frac{\\pi}{3}$ et $-\\frac{\\pi}{3}$. La proposition $\\frac{2\\pi}{3}$ vient de $\\pi-a$, famille de l'équation en sinus ; $\\frac{4\\pi}{3}$ vient de $\\pi+a$ ; $\\frac{\\pi}{6}$ a pour cosinus $\\frac{\\sqrt3}{2}$.",
               "answers": [
                 {
-                  "content": "$\\frac{5\\pi}{6}$",
+                  "content": "$-\\frac{\\pi}{3}$",
                   "correct": true
                 },
                 {
-                  "content": "$-\\frac{\\pi}{6}$",
+                  "content": "$\\frac{2\\pi}{3}$",
                   "correct": false
                 },
                 {
-                  "content": "$\\frac{7\\pi}{6}$",
+                  "content": "$\\frac{4\\pi}{3}$",
                   "correct": false
                 },
                 {
-                  "content": "$\\frac{\\pi}{3}$",
+                  "content": "$\\frac{\\pi}{6}$",
                   "correct": false
                 }
               ]
