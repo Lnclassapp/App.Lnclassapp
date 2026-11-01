@@ -139,6 +139,9 @@
                 "part": "ovary"
               },
               {
+                "part": "infundibulum"
+              },
+              {
                 "part": "oviduct"
               },
               {
@@ -146,6 +149,9 @@
               },
               {
                 "part": "endometrium"
+              },
+              {
+                "part": "cervix"
               },
               {
                 "part": "vagina"
@@ -374,16 +380,16 @@
           "method": [
             "Lire les lots d'animaux, l'opération faite et le résultat mesuré.",
             "Comparer chaque lot opéré au lot témoin, en calculant l'écart.",
-            "Déduire le rôle de l'organe retiré ou greffé et de la substance injectée.",
-            "Conclure sur le mode d'action : une hormone transportée par le sang."
+            "Déduire ce que fait l'organe enlevé ou greffé, puis la substance injectée.",
+            "Conclure : dire par quelle voie l'organe agit (le sang, donc une hormone)."
           ],
           "example": {
             "statement": "Résultats simplifiés d'une expérience fictive sur de jeunes rats mâles de même âge. Masse des vésicules séminales (mg) : lot témoin 300 ; lot castré 60 ; lot castré avec un testicule greffé sous la peau 280. Interpréter ces résultats.",
             "steps": [
               "Lire : trois lots, témoin à 300 mg, castré à 60 mg, castré avec greffe à 280 mg.",
               "Comparer : le lot castré a 300 − 60 = 240 mg de moins que le témoin ; le lot greffé n'a que 300 − 280 = 20 mg de moins.",
-              "Déduire : le testicule est nécessaire au développement des vésicules séminales, puisque sa suppression les fait régresser et que sa greffe les rétablit.",
-              "Conclure : le greffon sous la peau n'est relié à aucun nerf, donc il agit par le sang : c'est une hormone, la testostérone."
+              "Déduire : enlever le testicule fait chuter la masse des vésicules séminales et le greffer la rétablit ; le testicule est donc indispensable à leur développement.",
+              "Conclure : le greffon placé sous la peau n'a aucune connexion nerveuse ; il agit donc par une substance libérée dans le sang, une hormone : la testostérone."
             ]
           },
           "pitfall": "Ne conclus jamais sans comparer au lot témoin. Contre-exemple : un lot castré à 60 mg ne prouve rien tout seul ; c'est parce que le témoin vaut 300 mg que 60 mg est un effondrement. Autre erreur : croire que le greffon agit par les nerfs. Il est posé sous la peau, relié à aucun nerf, et il rétablit pourtant l'organe : l'action passe par le sang.",
@@ -565,7 +571,7 @@
             "Lire les données : l'opération réalisée et l'état de l'utérus dans chaque lot.",
             "Relier chaque structure de l'ovaire à son produit : un ovocyte ou une hormone.",
             "Déduire l'action de l'hormone sur l'organe cible en comparant au témoin.",
-            "Conclure sur les deux fonctions de l'ovaire."
+            "Conclure : énoncer les deux fonctions de l'ovaire et l'organe cible de ses hormones."
           ],
           "example": {
             "statement": "Résultats simplifiés d'une expérience fictive sur de jeunes rattes. Masse de l'utérus (mg) : lot témoin 180 ; lot ovariectomisé 30 ; lot ovariectomisé avec un ovaire greffé sous la peau 170. Le follicule mûr, lui, libère un ovocyte en s'ouvrant. Interpréter ces résultats.",
@@ -573,7 +579,7 @@
               "Lire : le témoin est à 180 mg, le lot ovariectomisé à 30 mg, le lot greffé à 170 mg.",
               "Relier : le follicule mûr libère un ovocyte (gamète) ; les follicules sécrètent aussi les œstrogènes (hormones).",
               "Déduire : sans ovaires, l'utérus perd 180 − 30 = 150 mg ; avec l'ovaire greffé, il est presque normal (170 mg) : les hormones de l'ovaire agissent sur l'utérus, organe cible.",
-              "Conclure : l'ovaire a deux fonctions, libérer des ovocytes et sécréter des hormones qui agissent sur l'utérus par le sang."
+              "Conclure : l'ovaire produit des ovocytes et sécrète des hormones ; portées par le sang, ces hormones entretiennent l'utérus, leur organe cible."
             ]
           },
           "pitfall": "Ne réduis pas l'ovaire à une fabrique d'ovocytes. Contre-exemple : après ovariectomie, l'utérus passe de 180 mg à 30 mg ; l'utérus n'a pas besoin d'ovocytes pour exister, c'est donc l'absence d'hormones qui le fait régresser. Autre confusion : les œstrogènes viennent des follicules, la progestérone vient du corps jaune.",
@@ -648,7 +654,7 @@
                 ]
               },
               {
-                "content": "Relie chaque structure de l'ovaire à ce qu'elle produit.",
+                "content": "Associe chaque partie de l'ovaire à son produit.",
                 "question_type": "matching",
                 "explanation": "Étape 2 — Relier : chaque structure a son produit. Le follicule sécrète les œstrogènes. Le corps jaune, qui se forme après l'ovulation, sécrète la progestérone. Le follicule mûr s'ouvre à l'ovulation et libère l'ovocyte.",
                 "answers": [
@@ -682,16 +688,16 @@
                 ]
               },
               {
-                "content": "Quelles sont les trois affirmations exactes sur l'ovaire ?",
+                "content": "Choisis les trois propositions justes au sujet de l'ovaire.",
                 "question_type": "multiple_correct_3",
                 "explanation": "Étape 4 — Conclure : l'ovaire libère un ovocyte, sécrète des œstrogènes (follicules) et de la progestérone (corps jaune). Les spermatozoïdes et la testostérone sont des produits du testicule.",
                 "answers": [
                   {
-                    "content": "Il libère un ovocyte à l'ovulation",
+                    "content": "À l'ovulation, il libère un ovocyte",
                     "correct": true
                   },
                   {
-                    "content": "Ses follicules sécrètent des œstrogènes",
+                    "content": "Les œstrogènes sont sécrétés par ses follicules",
                     "correct": true
                   },
                   {
@@ -703,7 +709,7 @@
                     "correct": false
                   },
                   {
-                    "content": "Il sécrète la testostérone",
+                    "content": "La testostérone est l'une de ses hormones",
                     "correct": false
                   }
                 ]
@@ -725,6 +731,11 @@
                   },
                   {
                     "content": "petit",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "léger",
                     "correct": true,
                     "blank": 1
                   }
@@ -770,7 +781,7 @@
         },
         {
           "name": "Les hormones et les caractères sexuels",
-          "remember": "Les **caractères sexuels primaires** sont les organes génitaux : gonades, voies génitales et organes externes, présents dès la naissance. Les **caractères sexuels secondaires** apparaissent à la **puberté** et ne sont pas des organes génitaux : voix, pilosité, musculature, crête et plumage du coq, cornes du bélier, mamelles. Ils sont commandés par les **hormones des gonades**. Une **hormone** est une substance fabriquée par un organe, **transportée par le sang** et qui agit à distance sur des **organes cibles**. La testostérone commande les caractères mâles ; les œstrogènes agissent sur l'utérus et les caractères femelles.",
+          "remember": "Les **caractères sexuels primaires** sont les organes génitaux : gonades, voies génitales et organes externes, présents dès la naissance. Les **caractères sexuels secondaires** apparaissent à la **puberté** et ne sont pas des organes génitaux : voix, pilosité, musculature, crête du coq, cornes du bélier, mamelles. Ils sont commandés par les **hormones des gonades**. Une **hormone** est une substance fabriquée par un organe, **transportée par le sang** et qui agit à distance sur des **organes cibles**. La testostérone commande les caractères mâles ; les œstrogènes agissent sur l'utérus et les caractères femelles.",
           "method": [
             "Lire l'énoncé : repérer le caractère étudié, l'animal et l'opération.",
             "Classer le caractère : primaire ou secondaire.",
@@ -797,14 +808,14 @@
               {
                 "content": "Quels sont les trois caractères sexuels secondaires ?",
                 "question_type": "multiple_correct_3",
-                "explanation": "Étape 2 — Classer : un caractère secondaire n'est pas un organe génital et apparaît à la puberté. C'est le cas de la crête, du plumage et des cornes. Les testicules et les ovaires sont des gonades : ce sont des caractères sexuels primaires.",
+                "explanation": "Étape 2 — Classer : un caractère secondaire n'est pas un organe génital et apparaît à la puberté. C'est le cas de la crête et des cornes. Les testicules et les ovaires sont des gonades : ce sont des caractères sexuels primaires.",
                 "answers": [
                   {
                     "content": "La crête du coq",
                     "correct": true
                   },
                   {
-                    "content": "Le plumage coloré du coq",
+                    "content": "La barbe de l'homme",
                     "correct": true
                   },
                   {
@@ -1106,7 +1117,7 @@
         },
         {
           "title": "Des rats castrés au laboratoire du lycée",
-          "statement": "Pour comprendre le rôle du testicule, des élèves de première D suivent une expérience avec quatre lots de jeunes rats mâles de même âge : un lot témoin non opéré, un lot castré, un lot castré qui reçoit des injections de testostérone et un lot castré qui reçoit des injections d'une solution sans hormone. Ils mesurent la masse des vésicules séminales. Dans cet exercice, tu interprètes ces résultats avec la méthode de la fiche.",
+          "statement": "Pour comprendre le rôle du testicule, des élèves de première D suivent une expérience avec quatre lots de jeunes rats mâles de même âge : un lot témoin non opéré, un lot castré, un lot castré qui reçoit des injections de testostérone et un lot castré qui reçoit des injections d'une solution sans hormone. Ils mesurent la masse des vésicules séminales. Dans cet exercice, tu interprètes ces résultats avec la méthode de la fiche. Résultats simplifiés d'une expérience fictive, masse des vésicules séminales : lot A témoin 250 mg ; lot B castré 50 mg ; lot C castré avec injections de testostérone 245 mg ; lot D castré avec solution sans hormone 52 mg.",
           "exercise_type": "fixation",
           "figure": null,
           "questions": [
@@ -1160,7 +1171,7 @@
               ]
             },
             {
-              "content": "Dans la même expérience, quelles sont les deux conclusions justifiées ?",
+              "content": "Dans la même expérience (témoin 250 mg, castré 50 mg, castré avec testostérone 245 mg), quelles sont les deux conclusions justifiées ?",
               "question_type": "multiple_correct_2",
               "explanation": "Étape 3 — Déduire : la castration fait chuter les vésicules (50 mg contre 250 mg), donc le testicule est nécessaire. Les injections les rétablissent (245 mg), donc la testostérone remplace le testicule. Aucun résultat n'indique que les vésicules fabriquent l'hormone, ni que les nerfs interviennent.",
               "answers": [
@@ -1216,7 +1227,7 @@
         },
         {
           "title": "La stérilisation d'une chienne et le rôle de l'ovaire",
-          "statement": "Lors d'une consultation, un vétérinaire explique à une élève de première D qu'il va stériliser une chienne en retirant ses ovaires. Pour comprendre les conséquences, l'élève étudie une expérience sur des rattes, à partir de la planche de l'appareil reproducteur femelle. Dans cet exercice, tu analyses ces résultats et tu rédiges une conclusion.",
+          "statement": "Lors d'une consultation, un vétérinaire explique à une élève de première D qu'il va stériliser une chienne en retirant ses ovaires. Pour comprendre les conséquences, l'élève étudie une expérience sur des rattes, à partir de la planche de l'appareil reproducteur femelle. Dans cet exercice, tu analyses ces résultats et tu rédiges une conclusion. Résultats simplifiés d'une expérience fictive, masse de l'utérus : lot A témoin 190 mg ; lot B ovariectomisé 35 mg ; lot C ovariectomisé avec un ovaire greffé sous la peau 180 mg ; lot D ovariectomisé avec injections d'œstrogènes 185 mg.",
           "exercise_type": "evaluation",
           "figure": "appareil-femelle",
           "questions": [
@@ -1257,12 +1268,12 @@
               ]
             },
             {
-              "content": "Dans la même expérience, quelles sont les trois conclusions justifiées ?",
+              "content": "Dans la même expérience (témoin 190 mg, ovariectomisé 35 mg, ovaire greffé sous la peau 180 mg, injections d'œstrogènes 185 mg), quelles sont les trois conclusions justifiées ?",
               "question_type": "multiple_correct_3",
               "explanation": "Étape 3 — Déduire : l'utérus chute à 35 mg sans ovaires (ovaire nécessaire) ; il remonte à 180 mg avec un ovaire greffé et à 185 mg avec des œstrogènes. Rien ne montre que l'utérus fabrique l'hormone, et un greffon sous la peau n'est relié à aucun nerf.",
               "answers": [
                 {
-                  "content": "L'ovaire est nécessaire au développement de l'utérus",
+                  "content": "Sans ovaires, l'utérus ne se développe pas normalement",
                   "correct": true
                 },
                 {
@@ -1303,7 +1314,7 @@
               ]
             },
             {
-              "content": "Le corps jaune se forme avant l'ovulation.",
+              "content": "Le corps jaune apparaît dans l'ovaire avant que l'ovocyte soit libéré.",
               "question_type": "true_false",
               "explanation": "Étape 2 — Relier : le corps jaune se forme après l'ovulation, à partir de ce qui reste du follicule qui a libéré l'ovocyte. Contre-exemple : un ovaire qui porte un follicule mûr et aucun corps jaune n'a pas encore ovulé.",
               "answers": [
@@ -1341,7 +1352,7 @@
               ]
             },
             {
-              "content": "En t'appuyant sur les quatre lots de l'expérience (témoin 190 mg, ovariectomisé 35 mg, greffe 180 mg, injections 185 mg), explique que l'ovaire agit sur l'utérus par une hormone.",
+              "content": "En t'appuyant sur les quatre lots de l'expérience (témoin 190 mg, ovariectomisé 35 mg, ovaire greffé 180 mg, injections d'œstrogènes 185 mg), explique que l'ovaire agit sur l'utérus par une hormone.",
               "question_type": "written",
               "points": 3,
               "criteria": [
@@ -1358,7 +1369,7 @@
         },
         {
           "title": "Les béliers de la ferme école",
-          "statement": "À la ferme école d'un lycée agricole, un enseignant et ses élèves de première D comparent quatre lots de jeunes béliers de même âge : un lot témoin non opéré, un lot castré, un lot castré avec un testicule greffé sous la peau, et un lot castré avec des injections quotidiennes de testostérone. Ils mesurent la longueur des cornes quelques mois plus tard. Le vétérinaire de la ferme observe aussi une coupe de testicule de coq. Dans cet exercice, tu mobilises tout le cours pour conclure sur les fonctions du testicule.",
+          "statement": "À la ferme école d'un lycée agricole, un enseignant et ses élèves de première D comparent quatre lots de jeunes béliers de même âge : un lot témoin non opéré, un lot castré, un lot castré avec un testicule greffé sous la peau, et un lot castré avec des injections quotidiennes de testostérone. Ils mesurent la longueur des cornes quelques mois plus tard. Le vétérinaire de la ferme observe aussi une coupe de testicule de coq. Dans cet exercice, tu mobilises tout le cours pour conclure sur les fonctions du testicule. Résultats simplifiés d'une expérience fictive, longueur des cornes : lot A témoin 30 cm ; lot B castré 12 cm ; lot C castré avec greffe 28 cm ; lot D castré avec injections de testostérone 29 cm.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
@@ -1412,7 +1423,7 @@
               ]
             },
             {
-              "content": "Parmi ces affirmations sur les cornes du bélier, lesquelles sont exactes ?",
+              "content": "Chez les béliers de l'expérience (castré 12 cm, castré avec testostérone 29 cm, témoin 30 cm), quelles sont les deux affirmations exactes sur les cornes ?",
               "question_type": "multiple_correct_2",
               "explanation": "Étape 2 — Classer : les cornes ne sont pas un organe génital, elles se développent à la puberté, ce sont des caractères secondaires. Étape 3 — Rapprocher : le lot castré (12 cm) et le lot injecté (29 cm) montrent que leur développement dépend de la testostérone.",
               "answers": [
