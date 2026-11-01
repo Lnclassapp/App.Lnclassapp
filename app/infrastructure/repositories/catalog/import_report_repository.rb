@@ -1,6 +1,6 @@
 # 🔌 INFRA · Repositories::Catalog::ImportReportRepository
 # Rôle : rapports d'import ; un seul en cours par type (index partiel), progression et bilan persistés
-# ADR  : 0039, 0068, 0096
+# ADR  : 0039, 0068, 0096, chargement-automatique-des-lecons-hors-production
 module Repositories
   module Catalog
     class ImportReportRepository
@@ -16,6 +16,19 @@ module Repositories
         ::Shared::Result.success(map_to_entity(record))
       rescue ActiveRecord::RecordNotUnique
         ::Shared::Result.failure(:conflict, errors: { kind: [ :already_running ] })
+      end
+
+      # Un rapport sans fichier lu, refusé d'emblée (aucun import n'a tourné) : déjà terminé, sans rien à reprendre.
+      def record_rejection(kind:, checksum_sha256:, imported_by_id:, at:, errors:)
+        record = Orm::ImportReport.create!(kind:, checksum_sha256:, imported_by_id:, status: "rejected", started_at: at, finished_at: at,
+                                           import_errors: errors.map { |error| error.to_h.transform_keys(&:to_s) }, created_at: at, updated_at: at)
+        map_to_entity(record)
+      end
+
+      # Un chargement est réussi quand le rapport est terminé sans refus ni erreur et a écrit son élément.
+      def last_loaded_checksum(kind:, file_name:)
+        Orm::ImportReport.where(kind:, status: "completed", error_count: 0).where("imported_count > 0")
+                         .where("files @> ?::jsonb", [ { name: file_name } ].to_json).order(finished_at: :desc, id: :desc).pick(:checksum_sha256)
       end
 
       def find(id:)

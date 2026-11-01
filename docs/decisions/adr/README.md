@@ -131,6 +131,7 @@ Le format de référence est [`TEMPLATE.md`](./TEMPLATE.md). Les décisions d'**
 | [0119](./0119-entrainement-de-notion-corrige-sans-trace.md) | Entraînement de notion dans la fiche, corrigé par le serveur sans trace | Accepté | 2026-10-30 | L'élève doit s'exercer dans la fiche de révision, avec une correction sur place, sans que l'exercice noté ni sa correction n'y soient exposés et sans laisser de trace. |
 | [0120](./0120-questions-a-plusieurs-cases-et-indice.md) | Questions à plusieurs cases, points répartis par case, indice enregistré | Accepté | 2026-10-30 | Les exercices des maquettes demandent plusieurs valeurs dans une même question et proposent un indice, ce que ni la fiche ni les copies notées ne savent faire. |
 | [0121](./0121-sujets-de-devoir-et-verification-sur-la-feuille.md) | Sujets de devoir, indice et copie rendue depuis la feuille | Accepté | 2026-10-30 | Les maquettes « Prépare interros » et « Prépare devoirs » demandent un sujet de devoir, un indice et une copie vérifiée sans quitter la page de la leçon, que l'application ne connaît pas |
+| [0122](./0122-chargement-automatique-des-lecons-hors-production.md) | Chargement automatique des leçons hors production | Proposé | 2026-10-31 | Faire arriver sur Develop et Staging, sans import à la main, les leçons retravaillées pour Prépare interros et Prépare devoirs, même déjà publiées. |
 <!-- index:end -->
 
 ---
