@@ -1,0 +1,1459 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "Les activités internes du globe terrestre",
+      "subtitle": "Leçon 6 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "D",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "sismogramme-station",
+          "kind": "stat_chart",
+          "description": "Sismogramme simplifié d'un séisme, une valeur toutes les 10 secondes après l'heure d'origine, de 0 à 190 s. Valeur lue : amplitude du tracé, en millimètres. L'amplitude est très faible jusqu'à 40 s, augmente un peu à 50 s (arrivée des ondes P), puis fortement à 100 s (arrivée des ondes S), et décroît ensuite lentement.",
+          "params": {
+            "chart": "line",
+            "series": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              6,
+              5,
+              4,
+              3,
+              3,
+              18,
+              25,
+              20,
+              14,
+              10,
+              7,
+              5,
+              4,
+              3,
+              2
+            ],
+            "labels": [
+              "0",
+              "10",
+              "20",
+              "30",
+              "40",
+              "50",
+              "60",
+              "70",
+              "80",
+              "90",
+              "100",
+              "110",
+              "120",
+              "130",
+              "140",
+              "150",
+              "160",
+              "170",
+              "180",
+              "190"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "schema-volcan",
+          "kind": "diagram",
+          "description": "Schéma fléché d'un volcan : le magma stocké dans la chambre magmatique monte par la cheminée jusqu'au cratère. Du cratère partent trois sortes de produits : la coulée de lave (liquide), les projections (cendres, lapilli, bombes) et les gaz.",
+          "params": {
+            "layout": "tree",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "chambre",
+                "label": "Chambre magmatique (magma)",
+                "category": 1
+              },
+              {
+                "id": "cheminee",
+                "label": "Cheminée",
+                "category": 1
+              },
+              {
+                "id": "cratere",
+                "label": "Cratère",
+                "category": 1
+              },
+              {
+                "id": "coulee",
+                "label": "Coulée de lave",
+                "category": 2
+              },
+              {
+                "id": "projections",
+                "label": "Projections (cendres, lapilli, bombes)",
+                "category": 3
+              },
+              {
+                "id": "gaz",
+                "label": "Gaz",
+                "category": 4
+              }
+            ],
+            "edges": [
+              {
+                "from": "chambre",
+                "to": "cheminee",
+                "label": "le magma monte"
+              },
+              {
+                "from": "cheminee",
+                "to": "cratere"
+              },
+              {
+                "from": "cratere",
+                "to": "coulee"
+              },
+              {
+                "from": "cratere",
+                "to": "projections"
+              },
+              {
+                "from": "cratere",
+                "to": "gaz"
+              }
+            ],
+            "legend": [
+              "Réservoir et conduit du magma",
+              "Produit liquide",
+              "Produit solide projeté",
+              "Produit gazeux"
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "rift-est-africain",
+          "kind": "map",
+          "description": "Carte de l'Afrique avec en surbrillance l'Éthiopie, le Kenya, la Tanzanie et la République démocratique du Congo, pays où se trouvent des volcans et des séismes du rift est-africain, une bande étroite nord-sud. Le reste du continent, dont la Côte d'Ivoire, est éloigné de cette bande.",
+          "params": {
+            "base": "africa",
+            "areas": [
+              {
+                "id": "eth",
+                "category": 1
+              },
+              {
+                "id": "ken",
+                "category": 1
+              },
+              {
+                "id": "tza",
+                "category": 1
+              },
+              {
+                "id": "cod",
+                "category": 1
+              }
+            ],
+            "places": [
+              {
+                "id": "addis_ababa",
+                "label": "Addis-Abeba"
+              }
+            ],
+            "routes": [],
+            "legend": [
+              "Pays du rift est-africain (volcans et séismes)"
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les séismes et les ondes sismiques",
+          "remember": "Un **séisme** est une secousse du sol due à la rupture brutale de roches en profondeur. Le **foyer** est le lieu de cette rupture ; l'**épicentre** est le point de la surface situé à la verticale du foyer. Le séisme émet des **ondes sismiques**, enregistrées par un **sismographe** : le tracé obtenu est le **sismogramme**. Les **ondes P** arrivent les premières : elles sont les plus rapides et traversent solides et liquides. Les **ondes S** arrivent ensuite : elles sont plus lentes et ne traversent pas les liquides. Plus la station est loin de l'épicentre, plus les ondes mettent de temps à l'atteindre. La distance se calcule par $d = v \\times t$.",
+          "method": [
+            "Repérer sur le sismogramme l'instant d'arrivée des ondes P (les premières) et celui des ondes S (les secondes).",
+            "Identifier la durée de trajet de chaque onde : instant d'arrivée moins heure d'origine du séisme.",
+            "Calculer la distance à l'épicentre avec $d = v \\times t$ (vitesse × durée de trajet).",
+            "Conclure : l'épicentre est sur un cercle autour de la station ; trois stations donnent son point d'intersection."
+          ],
+          "example": {
+            "statement": "Un séisme se produit à 14 h 00 min 00 s. Une station enregistre les ondes P à 14 h 00 min 50 s et les ondes S à 14 h 01 min 40 s. Résultats simplifiés : les ondes P vont à 8 km/s, les ondes S à 4 km/s. À quelle distance de la station se trouve l'épicentre ?",
+            "steps": [
+              "Repérer : les ondes P arrivent à 14 h 00 min 50 s, les ondes S à 14 h 01 min 40 s, donc les P arrivent avant les S.",
+              "Identifier : durée de trajet des P = 50 s ; durée de trajet des S = 1 min 40 s = 100 s.",
+              "Calculer : avec les P, $d = 8 \\times 50 = 400$ km ; avec les S, $d = 4 \\times 100 = 400$ km. Les deux calculs donnent le même résultat.",
+              "Conclure : l'épicentre est à 400 km de la station, quelque part sur un cercle de 400 km de rayon ; il faut deux autres stations pour le placer."
+            ]
+          },
+          "pitfall": "Ne confonds pas le **foyer** et l'**épicentre**. Contre-exemple : si les roches se rompent à 10 km de profondeur, le foyer est à 10 km sous terre, mais l'épicentre est à la surface, à la verticale : ce ne sont pas le même point. Ne dis pas non plus que les ondes S arrivent les premières : les ondes P, plus rapides, arrivent toujours avant elles.",
+          "figure": "sismogramme-station",
+          "exercise": {
+            "title": "Lire un sismogramme et situer un épicentre",
+            "statement": "Dans cet exercice, tu utilises le vocabulaire des séismes puis tu calcules des distances avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Comment appelle-t-on le point de la surface du sol situé à la verticale du foyer d'un séisme ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : le foyer est le lieu de la rupture des roches, en profondeur. Étape 4 — Conclure : le point de la surface situé à sa verticale est l'épicentre. Le foyer est la proposition tentante, mais il est sous terre ; le cratère appartient à un volcan et le sismographe est l'appareil qui enregistre.",
+                "answers": [
+                  {
+                    "content": "L'épicentre",
+                    "correct": true
+                  },
+                  {
+                    "content": "Le foyer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le cratère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le sismographe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur un sismogramme, les ondes S sont enregistrées avant les ondes P.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : on lit d'abord l'arrivée des ondes P, les premières, puis celle des ondes S, les secondes. Les ondes P sont plus rapides que les ondes S ; elles arrivent donc avant. Une onde plus ample sur le tracé n'est pas pour autant arrivée plus tôt.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Un séisme se produit à 08 h 20 min 00 s. Une station enregistre les ondes P à 08 h 20 min 25 s. Vitesse des ondes P (résultat simplifié) : 8 km/s. À quelle distance de la station se trouve l'épicentre ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : les ondes P arrivent à 08 h 20 min 25 s. Étape 2 — Identifier : durée de trajet = 25 s après l'heure d'origine. Étape 3 — Calculer : $d = 8 \\times 25 = 200$ km. Étape 4 — Conclure : l'épicentre est sur un cercle de 200 km de rayon autour de la station.",
+                "unit": "km",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "200",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une autre station enregistre les ondes S 40 s après l'heure d'origine d'un séisme. Vitesse des ondes S (résultat simplifié) : 4 km/s. Quelle est la distance entre cette station et l'épicentre ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : on lit l'arrivée des ondes S. Étape 2 — Identifier : la durée de trajet est 40 s. Étape 3 — Calculer : $d = 4 \\times 40 = 160$ km. Étape 4 — Conclure : l'épicentre est à 160 km de la station. Utiliser 8 km/s, la vitesse des ondes P, donnerait 320 km, ce qui est faux.",
+                "unit": "km",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "160",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les étapes pour situer un épicentre à partir de sismogrammes.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer les arrivées sur le sismogramme. Étape 2 — Identifier les durées de trajet. Étape 3 — Calculer la distance pour chaque station. Étape 4 — Conclure : un cercle par station, puis l'épicentre à l'intersection des cercles de trois stations.",
+                "answers": [
+                  {
+                    "content": "Repérer l'arrivée des ondes P et des ondes S sur le sismogramme"
+                  },
+                  {
+                    "content": "Identifier la durée de trajet de chaque onde"
+                  },
+                  {
+                    "content": "Calculer la distance avec d = v × t"
+                  },
+                  {
+                    "content": "Tracer un cercle autour de chaque station"
+                  },
+                  {
+                    "content": "Placer l'épicentre à l'intersection des cercles de trois stations"
+                  }
+                ]
+              },
+              {
+                "content": "Un journal écrit : « L'épicentre du séisme se trouvait à 10 km sous terre. » Cette phrase est correcte.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : une profondeur de 10 km sous terre désigne le lieu de la rupture des roches. Étape 4 — Conclure : c'est le foyer, pas l'épicentre. L'épicentre est le point de la surface situé à la verticale du foyer. C'est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur le foyer, l'épicentre et les ondes sismiques.",
+            "questions": [
+              {
+                "content": "Le ___ est le lieu de la rupture des roches, en profondeur ; l'___ est le point de la surface situé à sa verticale.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la rupture a lieu en profondeur, au foyer. Étape 4 — Conclure : le point de la surface à la verticale du foyer est l'épicentre.",
+                "answers": [
+                  {
+                    "content": "foyer",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "épicentre",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un des mots est en profondeur, l'autre en surface."
+              },
+              {
+                "content": "Relie chaque terme à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : les ondes P sont les premières, les ondes S les secondes. Le sismographe est l'appareil ; le sismogramme est le tracé qu'il fournit.",
+                "answers": [
+                  {
+                    "content": "Ondes P",
+                    "match": "Arrivent les premières et traversent solides et liquides"
+                  },
+                  {
+                    "content": "Ondes S",
+                    "match": "Arrivent ensuite et ne traversent pas les liquides"
+                  },
+                  {
+                    "content": "Sismographe",
+                    "match": "Appareil qui enregistre les ondes sismiques"
+                  },
+                  {
+                    "content": "Sismogramme",
+                    "match": "Tracé obtenu avec le sismographe"
+                  }
+                ]
+              },
+              {
+                "content": "Les ondes P (résultat simplifié : 8 km/s) arrivent à une station 15 s après un séisme. Quelle est la distance de la station à l'épicentre ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Identifier : la durée de trajet est 15 s. Étape 3 — Calculer : $d = 8 \\times 15 = 120$ km.",
+                "unit": "km",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "120",
+                    "correct": true
+                  }
+                ],
+                "hint": "d = v × t"
+              }
+            ]
+          }
+        },
+        {
+          "name": "La structure d'un volcan et ses produits",
+          "remember": "Un **volcan** est un relief construit par l'accumulation des produits des éruptions. Du **magma** (roche fondue, riche en gaz dissous) est stocké dans la **chambre magmatique**, monte par la **cheminée** et sort par le **cratère**. À la surface, le magma perd ses gaz : c'est la **lave**. Un volcan émet trois sortes de produits : des **laves** (liquides, en **coulées**), des **projections** solides (**cendres** fines, **lapilli** petits fragments, **bombes** gros blocs) et des **gaz** (vapeur d'eau, dioxyde de carbone, gaz soufrés).",
+          "method": [
+            "Observer le document (photographie, schéma, description) : repérer le relief, la sortie du magma et ce qui est émis.",
+            "Nommer chaque élément : chambre magmatique, cheminée, cratère, coulée, projections, gaz.",
+            "Classer les produits émis : liquides (laves), solides projetés (cendres, lapilli, bombes) ou gaz.",
+            "Conclure sur l'origine : le magma, stocké dans la chambre magmatique, monte par la cheminée et sort par le cratère."
+          ],
+          "example": {
+            "statement": "Sur une photographie d'une éruption à Hawaï, on voit un cratère d'où sort un liquide rouge incandescent qui s'écoule en rivière sur la pente, des fragments incandescents projetés à quelques dizaines de mètres et un panache blanc au-dessus du cratère. Décrire ce que l'on voit en suivant la méthode.",
+            "steps": [
+              "Observer : un cratère au sommet d'un relief, un liquide rouge qui s'écoule, des fragments projetés, un panache blanc.",
+              "Nommer : le liquide qui s'écoule est une coulée de lave ; le trou au sommet est le cratère ; les fragments sont des projections ; le panache contient des gaz.",
+              "Classer : la coulée est un produit liquide, les fragments sont des solides projetés, le panache est gazeux.",
+              "Conclure : ces produits viennent du magma stocké dans la chambre magmatique, monté par la cheminée et sorti par le cratère."
+            ]
+          },
+          "pitfall": "Ne confonds pas **magma** et **lave**. Le magma est la roche fondue encore sous terre (dans la chambre magmatique) avec ses gaz dissous. La lave est ce magma arrivé à la surface, après avoir perdu ses gaz. Sur une photographie, la rivière rouge qui descend la pente est de la lave ; dans la chambre, située sous le volcan, c'est du magma.",
+          "figure": "schema-volcan",
+          "exercise": {
+            "title": "Nommer les éléments et les produits d'un volcan",
+            "statement": "Dans cet exercice, tu nommes les éléments d'un volcan et tu classes ses produits avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque élément d'un volcan à son rôle.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Nommer : la chambre magmatique stocke le magma, la cheminée le conduit vers la surface, le cratère est l'ouverture, la coulée est de la lave qui s'écoule. Étape 4 — Conclure : le magma va de la chambre à la surface en passant par la cheminée.",
+                "answers": [
+                  {
+                    "content": "Chambre magmatique",
+                    "match": "Réservoir où le magma est stocké"
+                  },
+                  {
+                    "content": "Cheminée",
+                    "match": "Conduit par où le magma monte"
+                  },
+                  {
+                    "content": "Cratère",
+                    "match": "Ouverture par où sortent les produits"
+                  },
+                  {
+                    "content": "Coulée de lave",
+                    "match": "Lave liquide qui s'écoule sur les pentes"
+                  }
+                ]
+              },
+              {
+                "content": "Quels sont les trois grands types de produits émis par un volcan ?",
+                "question_type": "multiple_correct_3",
+                "explanation": "Étape 3 — Classer : un volcan émet des produits liquides (les laves), des solides projetés (cendres, lapilli, bombes) et des gaz. Les sédiments et les fossiles se forment à la surface, ils ne sont pas émis par un volcan.",
+                "answers": [
+                  {
+                    "content": "Les laves",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les projections (cendres, lapilli, bombes)",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les gaz",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les sédiments",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les fossiles",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une fumée blanche s'élève du cratère d'un volcan. On y mesure de la vapeur d'eau et du dioxyde de carbone. De quel type de produit s'agit-il ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : une fumée s'élève du cratère. Étape 3 — Classer : la vapeur d'eau et le dioxyde de carbone sont des gaz. Les laves sont liquides, les cendres et les bombes sont des solides projetés : ils ne sont pas mesurés comme des gaz.",
+                "answers": [
+                  {
+                    "content": "Des gaz",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une lave",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des cendres",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des bombes volcaniques",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Dans la chambre magmatique, la roche fondue s'appelle la lave.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Nommer : la roche fondue stockée dans la chambre magmatique s'appelle le magma. Étape 4 — Conclure : c'est quand le magma atteint la surface et perd ses gaz qu'on parle de lave. Dire « lave » pour le magma de la chambre est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La roche fondue qui s'écoule à la surface après avoir perdu ses gaz s'appelle la ___.",
+                "question_type": "select",
+                "explanation": "Étape 2 — Nommer : le magma qui arrive à la surface et perd ses gaz devient de la lave. Étape 3 — Classer : c'est un produit liquide. Une bombe est un solide projeté ; la chambre et la cheminée sont des éléments du volcan, pas des produits.",
+                "answers": [
+                  {
+                    "content": "lave",
+                    "correct": true
+                  },
+                  {
+                    "content": "chambre",
+                    "correct": false
+                  },
+                  {
+                    "content": "cheminée",
+                    "correct": false
+                  },
+                  {
+                    "content": "bombe",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre le trajet du magma jusqu'à la surface.",
+                "question_type": "ordering",
+                "explanation": "Étape 2 — Nommer : le magma est stocké dans la chambre magmatique. Étape 4 — Conclure : il monte par la cheminée, sort par le cratère, puis s'écoule en coulée de lave sur les pentes.",
+                "answers": [
+                  {
+                    "content": "Chambre magmatique"
+                  },
+                  {
+                    "content": "Cheminée"
+                  },
+                  {
+                    "content": "Cratère"
+                  },
+                  {
+                    "content": "Coulée de lave sur les pentes"
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur le magma, la lave et les produits d'un volcan.",
+            "questions": [
+              {
+                "content": "Le ___ est stocké dans la chambre magmatique ; en surface, il devient de la ___ après avoir perdu ses gaz.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Nommer : le magma est dans la chambre. Étape 4 — Conclure : en surface, après perte des gaz, c'est de la lave.",
+                "answers": [
+                  {
+                    "content": "magma",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "lave",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Un des deux mots désigne la roche fondue sous terre, l'autre en surface."
+              },
+              {
+                "content": "Parmi ces produits volcaniques, lesquels sont des projections ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Classer : les projections sont les solides projetés (cendres, lapilli, bombes). Les coulées sont des laves liquides ; la vapeur d'eau et le dioxyde de carbone sont des gaz.",
+                "answers": [
+                  {
+                    "content": "Les cendres, les lapilli et les bombes",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les coulées de lave",
+                    "correct": false
+                  },
+                  {
+                    "content": "La vapeur d'eau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le dioxyde de carbone",
+                    "correct": false
+                  }
+                ],
+                "hint": "Les projections sont solides."
+              },
+              {
+                "content": "Une coulée de lave est un produit solide projeté en l'air.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Classer : une coulée est de la lave liquide qui s'écoule sur les pentes, pas un solide projeté en l'air. Les projections sont les cendres, lapilli et bombes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les types d'éruptions volcaniques",
+          "remember": "Le type d'éruption dépend de la **fluidité de la lave** et de la facilité des gaz à s'échapper. Une éruption **effusive** vient d'une lave **fluide** : les gaz s'échappent facilement, la lave forme de longues **coulées**, il y a peu d'explosions et le volcan a des pentes douces (volcans d'Hawaï, type hawaïen). Une éruption **explosive** vient d'une lave **visqueuse** : les gaz restent piégés puis sont libérés violemment, avec des **projections** abondantes et parfois des **nuées ardentes**, mélanges brûlants de gaz et de cendres qui dévalent la pente (Montagne Pelée en Martinique, 1902, type péléen).",
+          "method": [
+            "Observer les produits émis et leur importance : coulées, projections, gaz, explosions.",
+            "Évaluer la fluidité de la lave (fluide ou visqueuse) et la facilité des gaz à s'échapper.",
+            "Associer ces caractères à un type d'éruption : effusive ou explosive.",
+            "Conclure sur la forme du volcan et sur le danger principal."
+          ],
+          "example": {
+            "statement": "Un volcan d'Hawaï est étudié (résultats simplifiés) : une lave très fluide s'écoule en longues coulées sur plusieurs kilomètres, les projections sont rares, aucune explosion violente n'est notée, et le volcan a des pentes douces. Déterminer le type d'éruption.",
+            "steps": [
+              "Observer : de longues coulées, peu de projections, aucune explosion violente.",
+              "Évaluer : la lave est très fluide, donc les gaz s'échappent facilement.",
+              "Associer : lave fluide et gaz libérés facilement correspondent à une éruption effusive.",
+              "Conclure : le volcan a des pentes douces ; le danger principal est l'avancée des coulées de lave, pas une explosion."
+            ]
+          },
+          "pitfall": "Ne conclus pas qu'une lave visqueuse est « calme » parce qu'elle coule mal. C'est l'inverse : plus la lave est visqueuse, plus elle piège les gaz, et plus l'éruption est explosive. Contre-exemple : les coulées fluides d'Hawaï avancent sans explosion, alors qu'en 1902 la Montagne Pelée (lave visqueuse) a produit une nuée ardente qui a détruit Saint-Pierre.",
+          "figure": null,
+          "exercise": {
+            "title": "Reconnaître une éruption effusive ou explosive",
+            "statement": "Dans cet exercice, tu associes les caractères d'une éruption à son type avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque description à ce qu'elle désigne.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Évaluer : une lave fluide laisse les gaz s'échapper, une lave visqueuse les piège. Étape 3 — Associer : fluide et gaz libérés donnent une éruption effusive ; visqueuse et gaz piégés donnent une éruption explosive. La nuée ardente est le mélange brûlant de gaz et de cendres des éruptions explosives.",
+                "answers": [
+                  {
+                    "content": "Lave fluide, gaz libérés facilement",
+                    "match": "Éruption effusive"
+                  },
+                  {
+                    "content": "Lave visqueuse, gaz piégés",
+                    "match": "Éruption explosive"
+                  },
+                  {
+                    "content": "Mélange brûlant de gaz et de cendres qui dévale la pente",
+                    "match": "Nuée ardente"
+                  }
+                ]
+              },
+              {
+                "content": "Un volcan émet de longues coulées de lave très fluide et presque aucune explosion. Quel type d'éruption observe-t-on ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Observer : de longues coulées, presque pas d'explosion. Étape 2 — Évaluer : la lave est fluide, les gaz s'échappent facilement. Étape 3 — Associer : c'est une éruption effusive. Une éruption explosive aurait des projections abondantes et une lave visqueuse.",
+                "answers": [
+                  {
+                    "content": "Une éruption effusive",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une éruption explosive",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune éruption : c'est seulement un séisme",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La lave d'un volcan est très visqueuse et retient ses gaz. Quelle éruption faut-il attendre ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Évaluer : une lave visqueuse retient ses gaz. Étape 3 — Associer : les gaz s'échappent d'un coup, avec des projections et parfois des nuées ardentes : l'éruption est explosive. Les longues coulées fluides sont le signe d'une lave fluide.",
+                "answers": [
+                  {
+                    "content": "Une éruption explosive",
+                    "correct": true
+                  },
+                  {
+                    "content": "Une éruption effusive avec de longues coulées fluides",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une éruption sans aucun danger",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quels caractères sont ceux d'une éruption explosive ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Évaluer : une éruption explosive vient d'une lave visqueuse qui piège les gaz. Étape 3 — Associer : ces gaz sont libérés violemment, avec des projections abondantes. Les longues coulées fluides et les pentes douces sont des caractères d'une éruption effusive.",
+                "answers": [
+                  {
+                    "content": "Une lave visqueuse",
+                    "correct": true
+                  },
+                  {
+                    "content": "Des gaz piégés puis libérés violemment",
+                    "correct": true
+                  },
+                  {
+                    "content": "De longues coulées de lave très fluide",
+                    "correct": false
+                  },
+                  {
+                    "content": "Des pentes très douces et des projections rares",
+                    "correct": false
+                  },
+                  {
+                    "content": "Une absence totale de projections",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Une lave visqueuse qui coule mal annonce une éruption calme.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Évaluer : une lave visqueuse retient ses gaz. Étape 3 — Associer : plus la lave est visqueuse, plus l'éruption est explosive. Étape 4 — Conclure : ne pas confondre « coule mal » et « calme ». C'est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "En 1902, une éruption de type explosif de la Montagne ___, en Martinique, a détruit la ville de Saint-Pierre.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Observer : une nuée ardente a dévalé la pente vers Saint-Pierre. Étape 3 — Associer : une lave visqueuse et des gaz piégés donnent une éruption explosive. Étape 4 — Conclure : il s'agit de la Montagne Pelée, aux Antilles.",
+                "answers": [
+                  {
+                    "content": "Pelée",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur la fluidité de la lave et le type d'éruption.",
+            "questions": [
+              {
+                "content": "Une lave ___ laisse les gaz s'échapper : l'éruption est effusive ; une lave ___ les retient : l'éruption est explosive.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Évaluer : la fluidité décide du dégazage. Étape 3 — Associer : fluide donne effusive, visqueuse donne explosive.",
+                "answers": [
+                  {
+                    "content": "fluide",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "visqueuse",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Une lave qui coule facilement est fluide."
+              },
+              {
+                "content": "Un volcan aux pentes douces, construit de coulées successives de lave fluide, est le plus probablement de type...",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Associer : des coulées de lave fluide et des pentes douces sont des caractères d'un volcan effusif.",
+                "answers": [
+                  {
+                    "content": "effusif",
+                    "correct": true
+                  },
+                  {
+                    "content": "explosif",
+                    "correct": false
+                  },
+                  {
+                    "content": "sans magma",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à Hawaï."
+              },
+              {
+                "content": "Une nuée ardente est un mélange brûlant de gaz et de cendres qui dévale la pente d'un volcan.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Observer : une nuée ardente dévale la pente. Étape 3 — Associer : c'est un phénomène des éruptions explosives, mélange de gaz et de cendres très chauds.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La répartition des séismes et des volcans",
+          "remember": "Les séismes et les volcans ne sont **pas répartis au hasard** : ils forment des **bandes étroites** et laissent de vastes zones sans séisme ni volcan. Exemples : la **ceinture de feu** autour de l'océan Pacifique, le **rift est-africain** (de l'Éthiopie à la Tanzanie, avec des volcans comme l'Erta Ale en Éthiopie), l'**arc des Petites Antilles** (Martinique, Guadeloupe). Ces bandes coïncident avec les **limites des plaques lithosphériques**, de grands morceaux de la lithosphère. La Côte d'Ivoire est loin de ces bandes.",
+          "method": [
+            "Localiser sur la carte, le schéma ou le tableau les séismes et les volcans cités.",
+            "Repérer les alignements (bandes étroites) et les zones sans séisme ni volcan.",
+            "Comparer avec les limites des plaques lithosphériques.",
+            "Conclure : la répartition n'est pas due au hasard, elle suit les limites des plaques."
+          ],
+          "example": {
+            "statement": "Sur une carte d'Afrique de l'Est, on place 12 volcans actifs (résultats simplifiés) : 10 sont alignés dans une bande étroite nord-sud, de l'Éthiopie à la Tanzanie, et 2 sont isolés. Cette bande correspond au rift est-africain, une limite de plaques. Que peut-on conclure ?",
+            "steps": [
+              "Localiser : 12 volcans placés sur la carte, 10 dans la bande, 2 isolés.",
+              "Repérer : 10 volcans sur 12 forment une bande étroite nord-sud, et de vastes zones alentour n'en ont aucun.",
+              "Comparer : la bande correspond au rift est-africain, qui est une limite de plaques.",
+              "Conclure : la répartition de ces volcans n'est pas due au hasard ; elle suit une limite de plaques."
+            ]
+          },
+          "pitfall": "Ne conclus pas qu'un séisme annonce toujours une éruption. Séismes et volcans se trouvent dans les mêmes bandes, mais ce sont deux phénomènes différents. Contre-exemple (résultats simplifiés) : sur 12 séismes localisés dans une bande, seuls 4 ont eu lieu près d'un volcan ; les 8 autres, sans volcan proche, n'ont déclenché aucune éruption.",
+          "figure": "rift-est-africain",
+          "exercise": {
+            "title": "Décrire la répartition des séismes et des volcans",
+            "statement": "Dans cet exercice, tu décris où se trouvent les séismes et les volcans avec les étapes de la fiche.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "On place sur une carte du monde les séismes et les volcans connus. Comment sont-ils répartis ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser : on place tous les séismes et volcans connus. Étape 2 — Repérer : ils forment des bandes étroites et laissent de vastes zones vides. Étape 4 — Conclure : la répartition n'est pas uniforme, donc elle n'est pas due au hasard.",
+                "answers": [
+                  {
+                    "content": "En bandes étroites, qui laissent de vastes zones sans séisme ni volcan",
+                    "correct": true
+                  },
+                  {
+                    "content": "Uniformément sur toute la surface du globe",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement au centre des continents",
+                    "correct": false
+                  },
+                  {
+                    "content": "Seulement au milieu des océans",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Quelles zones font partie des bandes de séismes et de volcans ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 2 — Repérer : la ceinture de feu autour du Pacifique et l'arc des Petites Antilles sont des bandes de volcans et de séismes. Étape 3 — Comparer : ces bandes suivent des limites de plaques. L'intérieur de la Côte d'Ivoire est loin de ces bandes.",
+                "answers": [
+                  {
+                    "content": "La ceinture de feu autour de l'océan Pacifique",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'arc des Petites Antilles (Martinique, Guadeloupe)",
+                    "correct": true
+                  },
+                  {
+                    "content": "L'intérieur de la Côte d'Ivoire (Bouaké, Korhogo)",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le centre d'une grande plaine loin des bords des plaques",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Sur une carte d'Afrique de l'Est, on place 20 volcans actifs (résultats simplifiés) : 16 sont alignés dans une bande étroite nord-sud. Quel pourcentage des volcans est dans cette bande ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Localiser : 20 volcans, dont 16 dans la bande. Étape 2 — Repérer : $16 \\div 20 = 0{,}8$, soit 80 %. Étape 4 — Conclure : la majorité des volcans est alignée, donc la répartition n'est pas due au hasard.",
+                "unit": "%",
+                "tolerance": 0,
+                "answers": [
+                  {
+                    "content": "80",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "La Martinique et la Guadeloupe appartiennent à un alignement de volcans appelé arc des Petites Antilles.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Localiser : la Martinique et la Guadeloupe sont deux îles des Antilles. Étape 2 — Repérer : leurs volcans, dont la Montagne Pelée, sont alignés. Étape 4 — Conclure : ils forment l'arc des Petites Antilles, une bande volcanique.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les bandes de séismes et de volcans dessinent les limites des ___ lithosphériques.",
+                "question_type": "select",
+                "explanation": "Étape 3 — Comparer : les bandes de séismes et de volcans coïncident avec les limites des plaques lithosphériques. Étape 4 — Conclure : la répartition suit ces limites. Les continents et les océans ne sont pas des plaques.",
+                "answers": [
+                  {
+                    "content": "plaques",
+                    "correct": true
+                  },
+                  {
+                    "content": "océans",
+                    "correct": false
+                  },
+                  {
+                    "content": "fleuves",
+                    "correct": false
+                  },
+                  {
+                    "content": "continents",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Si un séisme se produit près d'une ville, un volcan va forcément entrer en éruption.",
+                "question_type": "true_false",
+                "explanation": "Étape 3 — Comparer : séismes et volcans sont dans les mêmes bandes, mais ce sont deux phénomènes distincts. Étape 4 — Conclure : un séisme ne prouve pas qu'une éruption va suivre. C'est la confusion du piège.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes sur les bandes de séismes et de volcans.",
+            "questions": [
+              {
+                "content": "Les séismes et les volcans sont répartis en ___ étroites qui suivent les limites des ___ lithosphériques.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer : ils forment des bandes étroites. Étape 3 — Comparer : ces bandes suivent les limites des plaques.",
+                "answers": [
+                  {
+                    "content": "bandes",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "plaques",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les bandes dessinent les contours de grands morceaux de lithosphère."
+              },
+              {
+                "content": "Relie chaque bande de séismes et de volcans à sa localisation.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Localiser : la ceinture de feu entoure le Pacifique, le rift est-africain traverse l'Éthiopie, le Kenya et la Tanzanie, l'arc des Petites Antilles passe par la Martinique et la Guadeloupe.",
+                "answers": [
+                  {
+                    "content": "Ceinture de feu",
+                    "match": "Autour de l'océan Pacifique"
+                  },
+                  {
+                    "content": "Rift est-africain",
+                    "match": "De l'Éthiopie à la Tanzanie"
+                  },
+                  {
+                    "content": "Arc des Petites Antilles",
+                    "match": "Martinique et Guadeloupe"
+                  }
+                ]
+              },
+              {
+                "content": "Quel pays est traversé par le rift est-africain ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Localiser : le rift est-africain traverse l'Éthiopie, le Kenya et la Tanzanie. Les autres pays sont en Afrique de l'Ouest, loin de cette bande.",
+                "answers": [
+                  {
+                    "content": "Le Kenya",
+                    "correct": true
+                  },
+                  {
+                    "content": "La Côte d'Ivoire",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Ghana",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Sénégal",
+                    "correct": false
+                  }
+                ],
+                "hint": "Pense à l'Afrique de l'Est."
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un séisme enregistré près d'une mine d'Afrique de l'Est",
+          "statement": "Dans une mine d'Afrique de l'Est, une station enregistre un séisme survenu à 05 h 10 min 00 s (expérience fictive, résultats simplifiés). Le sismogramme, gradué en secondes après l'heure d'origine, montre une amplitude très faible jusqu'à 40 s, une première augmentation à 50 s, puis une augmentation beaucoup plus forte à 100 s. Les ondes P vont à 8 km/s et les ondes S à 4 km/s.",
+          "exercise_type": "fixation",
+          "figure": "sismogramme-station",
+          "questions": [
+            {
+              "content": "Sur un sismogramme gradué en secondes après l'heure d'origine, l'amplitude est très faible jusqu'à 40 s, augmente un peu à 50 s, puis fortement à 100 s. À quelles ondes correspondent ces deux augmentations ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Repérer : deux arrivées, à 50 s et à 100 s. Les ondes P sont les plus rapides : elles arrivent les premières, à 50 s. Les ondes S, plus lentes, arrivent ensuite, à 100 s. L'ampleur plus forte à 100 s ne signifie pas que ces ondes sont arrivées d'abord.",
+              "answers": [
+                {
+                  "content": "Les ondes P à 50 s, puis les ondes S à 100 s",
+                  "correct": true
+                },
+                {
+                  "content": "Les ondes S à 50 s, puis les ondes P à 100 s",
+                  "correct": false
+                },
+                {
+                  "content": "Deux séismes différents, l'un à 50 s et l'autre à 100 s",
+                  "correct": false
+                },
+                {
+                  "content": "Les ondes P à 50 s, puis un deuxième foyer à 100 s",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Les ondes P (8 km/s) arrivent 50 s après l'heure d'origine. Quelle est la distance entre la station et l'épicentre ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Identifier : la durée de trajet des P est 50 s. Étape 3 — Calculer : $d = 8 \\times 50 = 400$ km. Étape 4 — Conclure : l'épicentre est sur un cercle de 400 km de rayon autour de la station.",
+              "unit": "km",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Les ondes S (4 km/s) arrivent 100 s après l'heure d'origine. Quelle distance obtient-on avec les ondes S ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Identifier : la durée de trajet des S est 100 s. Étape 3 — Calculer : $d = 4 \\times 100 = 400$ km. On retrouve le même résultat qu'avec les P, ce qui confirme le calcul.",
+              "unit": "km",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "400",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quel est le décalage entre l'arrivée des ondes S (100 s) et celle des ondes P (50 s) ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : P à 50 s, S à 100 s. Étape 2 — Identifier : le décalage S moins P vaut $100 - 50 = 50$ s. Plus la station est éloignée de l'épicentre, plus ce décalage est grand.",
+              "unit": "s",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "50",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que faut-il pour placer précisément l'épicentre sur une carte ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 4 — Conclure : une station donne seulement un cercle de rayon d autour d'elle. Avec trois stations, les trois cercles se coupent en un point : l'épicentre. Un seul sismogramme ne suffit pas, et une source chaude ou la profondeur de la mine n'indiquent pas où est l'épicentre.",
+              "answers": [
+                {
+                  "content": "Les sismogrammes d'au moins trois stations différentes",
+                  "correct": true
+                },
+                {
+                  "content": "Un seul sismogramme, qui donne le point exact",
+                  "correct": false
+                },
+                {
+                  "content": "Une photographie de la source chaude la plus proche",
+                  "correct": false
+                },
+                {
+                  "content": "La mesure de la profondeur de la mine seulement",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Deux éruptions : Hawaï et les Antilles",
+          "statement": "Une équipe de volcanologues compare deux volcans (descriptions simplifiées, non attribuées à un organisme). Volcan A, à Hawaï : une lave très fluide s'écoule en longues coulées sur la pente, les projections sont rares. Volcan B, aux Antilles : une lave visqueuse forme un dôme, des explosions projettent des cendres et une nuée ardente dévale la pente. Une source chaude se trouve à 2 km du volcan B.",
+          "exercise_type": "fixation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Relie chaque observation à la catégorie de produit volcanique.",
+              "question_type": "matching",
+              "explanation": "Étape 3 — Classer les produits : la vapeur d'eau est un gaz ; la rivière rouge est une lave liquide ; les gros fragments projetés sont des bombes ; la poussière très fine est faite de cendres. On classe donc en liquides, solides projetés et gaz.",
+              "answers": [
+                {
+                  "content": "Fumée blanche de vapeur d'eau",
+                  "match": "Gaz"
+                },
+                {
+                  "content": "Rivière rouge incandescente sur la pente",
+                  "match": "Coulée de lave"
+                },
+                {
+                  "content": "Fragments gros comme un ballon projetés en l'air",
+                  "match": "Bombes volcaniques"
+                },
+                {
+                  "content": "Poussière grise très fine retombant sur le village",
+                  "match": "Cendres"
+                }
+              ]
+            },
+            {
+              "content": "Le volcan A émet de longues coulées de lave très fluide et peu de projections. Quel type d'éruption est-ce ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : longues coulées, projections rares. Étape 2 — Évaluer : la lave est fluide, les gaz s'échappent facilement. Étape 3 — Associer : c'est une éruption effusive. Le type explosif demande une lave visqueuse.",
+              "answers": [
+                {
+                  "content": "Une éruption effusive",
+                  "correct": true
+                },
+                {
+                  "content": "Une éruption explosive",
+                  "correct": false
+                },
+                {
+                  "content": "Une éruption sans magma",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le volcan B a une lave visqueuse, des explosions et une nuée ardente. Quel type d'éruption est-ce ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : explosions, cendres, nuée ardente. Étape 2 — Évaluer : la lave est visqueuse et retient les gaz. Étape 3 — Associer : c'est une éruption explosive.",
+              "answers": [
+                {
+                  "content": "Une éruption explosive",
+                  "correct": true
+                },
+                {
+                  "content": "Une éruption effusive",
+                  "correct": false
+                },
+                {
+                  "content": "Une éruption qui ne produit que de la lave",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quels caractères expliquent le comportement explosif du volcan B ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Étape 2 — Évaluer : une lave visqueuse retient ses gaz. Étape 3 — Associer : ces gaz sont libérés violemment, ce qui provoque projections et nuées ardentes. Une lave fluide et des gaz qui s'échappent sans effort caractérisent le volcan A.",
+              "answers": [
+                {
+                  "content": "La lave est visqueuse",
+                  "correct": true
+                },
+                {
+                  "content": "Les gaz restent piégés puis sont libérés violemment",
+                  "correct": true
+                },
+                {
+                  "content": "Une nuée ardente dévale la pente",
+                  "correct": true
+                },
+                {
+                  "content": "La lave est très fluide",
+                  "correct": false
+                },
+                {
+                  "content": "Les gaz s'échappent sans effort",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le magma qui arrive à la surface et perd ses gaz s'appelle la ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 2 — Nommer : le magma stocké dans la chambre magmatique s'appelle ainsi tant qu'il est sous terre. Étape 4 — Conclure : à la surface, après perte des gaz, on parle de lave.",
+              "answers": [
+                {
+                  "content": "lave",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "La lave du volcan A, très fluide, laisse les gaz s'échapper facilement.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Évaluer : une lave fluide laisse les gaz s'échapper facilement. Étape 3 — Associer : c'est pourquoi l'éruption du volcan A est effusive, avec de longues coulées plutôt que des explosions.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Les séismes du rift est-africain",
+          "statement": "Un géologue étudie les séismes d'Afrique de l'Est (expérience fictive, résultats simplifiés). Sur une carte, il place 30 foyers de séismes : 24 sont dans une bande étroite nord-sud, large d'une centaine de kilomètres, qui traverse l'Éthiopie, le Kenya et la Tanzanie ; 6 sont ailleurs. Dans une mine du Kenya, une station enregistre un séisme : les ondes P (8 km/s) arrivent 40 s après l'heure d'origine et les ondes S (4 km/s) 80 s après.",
+          "exercise_type": "evaluation",
+          "figure": "rift-est-africain",
+          "questions": [
+            {
+              "content": "Sur 30 foyers de séismes placés sur une carte d'Afrique de l'Est, 24 sont dans une bande étroite. Quel pourcentage des foyers est dans cette bande ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Localiser : 30 foyers, dont 24 dans la bande. Étape 2 — Repérer : $24 \\div 30 = 0{,}8$, soit 80 %. Une forte majorité des foyers est alignée dans une bande étroite.",
+              "unit": "%",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "80",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Que peut-on conclure de la répartition de ces 30 foyers ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 2 — Repérer : 80 % des foyers forment une bande étroite. Étape 4 — Conclure : la répartition n'est pas due au hasard. Elle n'est pas uniforme, et elle ne prouve pas qu'un séisme est suivi d'une éruption : ce sont des phénomènes distincts.",
+              "answers": [
+                {
+                  "content": "Elle n'est pas due au hasard : la plupart des séismes sont alignés dans une bande étroite",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est uniforme : les séismes sont répartis partout de la même façon",
+                  "correct": false
+                },
+                {
+                  "content": "Elle prouve que chaque séisme est suivi d'une éruption",
+                  "correct": false
+                },
+                {
+                  "content": "Elle ne permet aucune conclusion",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Dans la mine du Kenya, les ondes P (8 km/s) arrivent 40 s après l'heure d'origine. Quelle est la distance entre la station et l'épicentre ?",
+              "question_type": "numeric",
+              "explanation": "Étape 2 — Identifier : la durée de trajet des P est 40 s. Étape 3 — Calculer : $d = 8 \\times 40 = 320$ km. Étape 4 — Conclure : l'épicentre est sur un cercle de 320 km de rayon autour de la station.",
+              "unit": "km",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "320",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Avec les ondes S (4 km/s, arrivée 80 s après l'heure d'origine), on trouve la même distance qu'avec les ondes P.",
+              "question_type": "true_false",
+              "explanation": "Étape 2 — Identifier : la durée de trajet des S est 80 s. Étape 3 — Calculer : $d = 4 \\times 80 = 320$ km, comme avec les P (320 km). Les deux ondes partent du même foyer et font le même trajet, à des vitesses différentes.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le rift est-africain est une bande où se concentrent séismes et ___.",
+              "question_type": "select",
+              "explanation": "Étape 3 — Comparer : le rift est-africain est une limite de plaques, avec des séismes et des volcans comme l'Erta Ale en Éthiopie. Les fleuves, plaines et forêts ne se concentrent pas dans une bande de séismes.",
+              "answers": [
+                {
+                  "content": "volcans",
+                  "correct": true
+                },
+                {
+                  "content": "fleuves",
+                  "correct": false
+                },
+                {
+                  "content": "plaines",
+                  "correct": false
+                },
+                {
+                  "content": "forêts",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont justes sur la bande de foyers de séismes d'Afrique de l'Est ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Repérer : les foyers forment une bande étroite. Étape 3 — Comparer : cette bande correspond au rift est-africain, une limite de plaques. Une répartition uniforme est fausse, et un séisme n'annonce pas forcément une éruption.",
+              "answers": [
+                {
+                  "content": "Elle forme une bande étroite nord-sud",
+                  "correct": true
+                },
+                {
+                  "content": "Elle suit une limite de plaques lithosphériques",
+                  "correct": true
+                },
+                {
+                  "content": "Elle est répartie uniformément sur tout le continent",
+                  "correct": false
+                },
+                {
+                  "content": "Elle prouve que chaque séisme est suivi d'une éruption",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Séisme et éruption : un dossier sur Hawaï et la Martinique",
+          "statement": "Dossier de synthèse (descriptions simplifiées, expérience fictive). Document 1, Hawaï : une lave très fluide s'écoule en longues coulées, sans explosion violente. Document 2, Martinique, 8 mai 1902 : une éruption de la Montagne Pelée, à lave visqueuse, produit une nuée ardente qui dévale la pente vers Saint-Pierre. Document 3 : un séisme se produit à 03 h 00 min 00 s ; une station enregistre les ondes P à 03 h 00 min 20 s et les ondes S à 03 h 00 min 40 s (P : 8 km/s, S : 4 km/s).",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "questions": [
+            {
+              "content": "Un séisme se produit à 03 h 00 min 00 s ; une station enregistre les ondes P (8 km/s) à 03 h 00 min 20 s. Quelle est la distance entre la station et l'épicentre ?",
+              "question_type": "numeric",
+              "explanation": "Étape 1 — Repérer : les ondes P arrivent à 03 h 00 min 20 s. Étape 2 — Identifier : durée de trajet = 20 s. Étape 3 — Calculer : $d = 8 \\times 20 = 160$ km. Étape 4 — Conclure : l'épicentre est sur un cercle de 160 km de rayon. Avec les S : $4 \\times 40 = 160$ km, même résultat.",
+              "unit": "km",
+              "tolerance": 0,
+              "answers": [
+                {
+                  "content": "160",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Document 1 : lave très fluide, longues coulées, sans explosion violente. De quel type d'éruption s'agit-il ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Observer : longues coulées, pas d'explosion. Étape 2 — Évaluer : la lave est fluide, les gaz s'échappent. Étape 3 — Associer : c'est une éruption effusive.",
+              "answers": [
+                {
+                  "content": "D'une éruption effusive",
+                  "correct": true
+                },
+                {
+                  "content": "D'une éruption explosive",
+                  "correct": false
+                },
+                {
+                  "content": "D'un séisme volcanique",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Document 2 : quels caractères expliquent l'éruption explosive de la Montagne Pelée en 1902 ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Étape 2 — Évaluer : la lave de la Montagne Pelée est visqueuse et retient ses gaz. Étape 3 — Associer : ils sont libérés violemment, ce qui donne une éruption explosive et une nuée ardente. Une lave fluide et de longues coulées caractérisent l'éruption effusive du document 1.",
+              "answers": [
+                {
+                  "content": "Une lave visqueuse",
+                  "correct": true
+                },
+                {
+                  "content": "Des gaz piégés puis libérés violemment",
+                  "correct": true
+                },
+                {
+                  "content": "Une lave très fluide",
+                  "correct": false
+                },
+                {
+                  "content": "Des coulées longues de plusieurs kilomètres sans explosion",
+                  "correct": false
+                },
+                {
+                  "content": "Un cratère absent",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Le mélange brûlant de gaz et de cendres qui dévale la pente d'un volcan explosif s'appelle une nuée ___.",
+              "question_type": "fill_blank",
+              "explanation": "Étape 1 — Observer : le document 2 décrit un phénomène qui dévale la pente vers Saint-Pierre. Étape 3 — Associer : un mélange brûlant de gaz et de cendres, propre aux éruptions explosives, est une nuée ardente.",
+              "answers": [
+                {
+                  "content": "ardente",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour déterminer le type d'une éruption.",
+              "question_type": "ordering",
+              "explanation": "Étape 1 — Observer les produits émis. Étape 2 — Évaluer la fluidité de la lave et le dégazage. Étape 3 — Associer à un type : effusive ou explosive. Étape 4 — Conclure sur la forme du volcan et le danger principal.",
+              "answers": [
+                {
+                  "content": "Observer les produits émis"
+                },
+                {
+                  "content": "Évaluer la fluidité de la lave"
+                },
+                {
+                  "content": "Associer ces caractères à un type d'éruption"
+                },
+                {
+                  "content": "Conclure sur la forme du volcan et le danger principal"
+                }
+              ]
+            },
+            {
+              "content": "Les volcans de la Martinique et de la Guadeloupe sont alignés. Comment appelle-t-on cet alignement ?",
+              "question_type": "single_choice",
+              "explanation": "Étape 1 — Localiser : la Martinique et la Guadeloupe sont des îles des Antilles. Étape 2 — Repérer : leurs volcans forment une bande alignée. Étape 4 — Conclure : c'est l'arc des Petites Antilles, et non la ceinture de feu ni le rift est-africain, qui sont ailleurs.",
+              "answers": [
+                {
+                  "content": "L'arc des Petites Antilles",
+                  "correct": true
+                },
+                {
+                  "content": "La ceinture de feu du Pacifique",
+                  "correct": false
+                },
+                {
+                  "content": "Le rift est-africain",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Rédige un paragraphe de quatre lignes qui compare l'éruption du document 1 (Hawaï) et celle du document 2 (Montagne Pelée) : fluidité de la lave, gaz, produits et danger principal.",
+              "question_type": "written",
+              "explanation": "Corrigé modèle : À Hawaï (document 1), la lave est très fluide : les gaz s'échappent facilement et l'éruption est effusive, avec de longues coulées de lave et peu de projections ; le danger principal est l'avancée des coulées. À la Montagne Pelée (document 2), la lave est visqueuse : elle retient les gaz, qui sont libérés violemment ; l'éruption est explosive, avec projections et nuée ardente, qui dévale vite la pente et rend l'éruption très dangereuse. Le point commun : toutes deux émettent du magma devenu lave. Barème : fluidité 1 point, gaz 1 point, produits 1 point, danger principal 1 point.",
+              "points": 4,
+              "starter": "À Hawaï, la lave est fluide, alors qu'à la Montagne Pelée…",
+              "criteria": [
+                "La lave d'Hawaï est fluide et celle de la Montagne Pelée visqueuse",
+                "Les gaz s'échappent facilement à Hawaï et sont piégés à la Montagne Pelée",
+                "Coulées pour le type effusif ; projections et nuée ardente pour le type explosif",
+                "Le danger principal de chaque type est indiqué"
+              ],
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
