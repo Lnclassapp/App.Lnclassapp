@@ -155,7 +155,7 @@
               {
                 "content": "Une fonction paire $f$ a pour domaine $\\mathbb{R}\\setminus\\{-3\\,;3\\}$. Sur quel ensemble suffit-il de l'étudier ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Déterminer le domaine : il est donné, $D_f=\\mathbb{R}\\setminus\\{-3\\,;3\\}$. Étape 2 — Vérifier : il est symétrique. Étape 4 — Conclure : comme $f$ est paire, on l'étudie sur $D_f\\cap[0\\,;+\\infty[=[0\\,;3[\\,\\cup\\,]3\\,;+\\infty[$, puis on complète par symétrie par rapport à l'axe des ordonnées. $[0\\,;+\\infty[$ oublie que $3$ est interdit ; étudier tout le domaine ne profite pas de la parité.",
+                "explanation": "Étape 1 — Déterminer le domaine : il est donné, $D_f=\\mathbb{R}\\setminus\\{-3\\,;3\\}$. Étape 2 — Vérifier : il est symétrique. Étape 4 — Conclure : comme $f$ est paire, on l'étudie sur $D_f\\cap[0\\,;+\\infty[=[0\\,;3[\\,\\cup\\,]3\\,;+\\infty[$, puis on complète par symétrie par rapport à l'axe des ordonnées. $[0\\,;+\\infty[$ oublie que $3$ est interdit ; $]-\\infty\\,;0]$ est la moitié négative, qui contient $-3$, valeur interdite ; étudier tout le domaine ne profite pas de la parité.",
                 "answers": [
                   {
                     "content": "$[0\\,;3[\\,\\cup\\,]3\\,;+\\infty[$",
@@ -306,7 +306,7 @@
               {
                 "content": "Quelle est la limite de $f(x)=\\dfrac{3x+1}{x-2}$ quand $x$ tend vers $2$ par valeurs supérieures à $2$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : $2$ est une valeur interdite ; on étudie $2^+$. Étape 2 — Calculer : le numérateur tend vers $3\\times2+1=7>0$ et le dénominateur vers $0^+$, donc $\\lim f=+\\infty$. Étape 3 — Interpréter : la droite $x=2$ est asymptote verticale. $-\\infty$ viendrait de $2^-$ ; $7$ ignore le dénominateur.",
+                "explanation": "Étape 1 — Repérer : $2$ est une valeur interdite ; on étudie $2^+$. Étape 2 — Calculer : le numérateur tend vers $3\\times2+1=7>0$ et le dénominateur vers $0^+$, donc $\\lim f=+\\infty$. Étape 3 — Interpréter : la droite $x=2$ est asymptote verticale. $-\\infty$ viendrait de $2^-$ ; $7$ ignore le dénominateur ; $0$ supposerait que le numérateur tende vers $0$, alors qu'il tend vers $7$.",
                 "answers": [
                   {
                     "content": "$+\\infty$",
@@ -329,7 +329,7 @@
               {
                 "content": "Quelle est l'asymptote horizontale de la courbe de $f(x)=\\dfrac{2x+1}{x-3}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Repérer : les bornes sont $-\\infty$, $3$ et $+\\infty$. Étape 2 — Calculer : en $\\pm\\infty$, $f(x)$ a la limite de $\\dfrac{2x}{x}=2$. Étape 3 — Interpréter : limite finie $2$, donc asymptote horizontale $y=2$ (la droite $x=3$ est l'asymptote verticale). $y=3$ confond avec la valeur interdite ; $y=\\frac12$ inverse le quotient.",
+                "explanation": "Étape 1 — Repérer : les bornes sont $-\\infty$, $3$ et $+\\infty$. Étape 2 — Calculer : en $\\pm\\infty$, $f(x)$ a la limite de $\\dfrac{2x}{x}=2$. Étape 3 — Interpréter : limite finie $2$, donc asymptote horizontale $y=2$ (la droite $x=3$ est l'asymptote verticale). $y=3$ confond avec la valeur interdite ; $y=\\frac12$ inverse le quotient ; $x=2$ est une droite verticale, pas l'asymptote horizontale demandée.",
                 "answers": [
                   {
                     "content": "$y=2$",
@@ -579,7 +579,7 @@
               {
                 "content": "On a $f'(x)=6(x-2)(x+1)$. Quel est le signe de $f'(x)$ sur l'intervalle $]-1\\,;2[$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 2 — Étudier le signe : les racines de $f'$ sont $-1$ et $2$. Pour $x\\in]-1\\,;2[$ on a $x-2<0$ et $x+1>0$, donc le produit $(x-2)(x+1)$ est négatif, et $6\\times(\\text{négatif})$ aussi. Sur cet intervalle $f'$ ne s'annule pas, donc elle ne change pas de signe.",
+                "explanation": "Étape 2 — Étudier le signe : les racines de $f'$ sont $-1$ et $2$. Pour $x\\in]-1\\,;2[$ on a $x-2<0$ et $x+1>0$, donc le produit $(x-2)(x+1)$ est négatif, et $6\\times(\\text{négatif})$ aussi. Sur cet intervalle $f'$ ne s'annule pas, donc elle ne change pas de signe. « Positif » oublie que $x-2$ est négatif sur cet intervalle ; « Nul » est faux car $f'$ ne s'annule qu'en $-1$ et en $2$.",
                 "answers": [
                   {
                     "content": "Négatif",
@@ -602,7 +602,7 @@
               {
                 "content": "On a $f'(x)=6(x-2)(x+1)$ sur $\\mathbb{R}$. Quelles sont les variations de $f$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 2 — Étudier le signe : $f'>0$ sur $]-\\infty\\,;-1[$, $f'<0$ sur $]-1\\,;2[$, $f'>0$ sur $]2\\,;+\\infty[$. Étape 3 — Déduire les variations : $f$ est croissante, puis décroissante, puis croissante. La proposition inverse les signes de $f'$ ; « croissante sur $\\mathbb{R}$ » oublie les deux racines.",
+                "explanation": "Étape 2 — Étudier le signe : $f'>0$ sur $]-\\infty\\,;-1[$, $f'<0$ sur $]-1\\,;2[$, $f'>0$ sur $]2\\,;+\\infty[$. Étape 3 — Déduire les variations : $f$ est croissante, puis décroissante, puis croissante. « Décroissante sur $]-\\infty\\,;-1]$, croissante sur $[-1\\,;2]$, décroissante sur $[2\\,;+\\infty[$ » inverse les signes de $f'$ ; « Croissante sur $\\mathbb{R}$ » oublie les deux racines ; « Décroissante sur $]-\\infty\\,;-1]$, croissante sur $[-1\\,;+\\infty[$ » ignore le changement de signe de $f'$ en $2$.",
                 "answers": [
                   {
                     "content": "Croissante sur $]-\\infty\\,;-1]$, décroissante sur $[-1\\,;2]$, croissante sur $[2\\,;+\\infty[$",
@@ -683,7 +683,7 @@
               {
                 "content": "Quelle est la dérivée de $f(x)=\\dfrac{x^2}{x-1}$ sur $\\mathbb{R}\\setminus\\{1\\}$ ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 1 — Calculer la dérivée : avec $u=x^2$ et $v=x-1$, on a $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{2x(x-1)-x^2\\times1}{(x-1)^2}=\\dfrac{x^2-2x}{(x-1)^2}=\\dfrac{x(x-2)}{(x-1)^2}$. $2x$ dérive seulement le numérateur ; la deuxième proposition oublie le carré du dénominateur ; la troisième additionne $u'v$ et $uv'$ au lieu de les soustraire.",
+                "explanation": "Étape 1 — Calculer la dérivée : avec $u=x^2$ et $v=x-1$, on a $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{2x(x-1)-x^2\\times1}{(x-1)^2}=\\dfrac{x^2-2x}{(x-1)^2}=\\dfrac{x(x-2)}{(x-1)^2}$. $2x$ dérive seulement le numérateur ; $\\dfrac{x(x-2)}{x-1}$ oublie le carré du dénominateur ; $\\dfrac{3x^2-2x}{(x-1)^2}$ additionne $u'v$ et $uv'$ au lieu de les soustraire.",
                 "answers": [
                   {
                     "content": "$f'(x)=\\dfrac{x(x-2)}{(x-1)^2}$",
@@ -793,7 +793,7 @@
           "example": {
             "statement": "Tracer la courbe de $f(x)=x^3-3x^2+4$ définie sur $\\mathbb{R}$. Son tableau de variations est : $f$ croissante sur $]-\\infty\\,;0]$ de $-\\infty$ à $4$, décroissante sur $[0\\,;2]$ de $4$ à $0$, croissante sur $[2\\,;+\\infty[$ de $0$ à $+\\infty$.",
             "steps": [
-              "Rassembler : $D_f=\\mathbb{R}$ ; $f$ n'est ni paire ni impaire ($f(-1)=0$, $f(1)=2$) ; il n'y a pas d'asymptote ; les variations sont données ci-dessus.",
+              "Rassembler : $D_f=\\mathbb{R}$ ; $f$ n'est ni paire ni impaire ($f(-1)=0$, $f(1)=2$) ; il n'y a pas d'asymptote ; les variations sont données dans l'énoncé.",
               "Calculer : $f(0)=4$ donne le point $(0\\,;4)$, maximum local ; $f(x)=(x+1)(x-2)^2$, donc $f(x)=0$ pour $x=-1$ ou $x=2$, d'où les points $(-1\\,;0)$ et $(2\\,;0)$, ce dernier étant le minimum local.",
               "Déterminer : $f'(x)=3x^2-6x=3x(x-2)$, donc les tangentes en $0$ et en $2$ sont horizontales : $y=4$ et $y=0$. En $a=1$ : $f(1)=2$, $f'(1)=-3$, donc $y=-3(x-1)+2=-3x+5$.",
               "Tracer : on place $(-1\\,;0)$, $(0\\,;4)$, $(1\\,;2)$ et $(2\\,;0)$ avec leurs tangentes ; la courbe monte depuis le bas à gauche en passant par $(-1\\,;0)$ jusqu'à $(0\\,;4)$, descend par $(1\\,;2)$ jusqu'à $(2\\,;0)$, puis remonte vers le haut à droite."
@@ -899,7 +899,7 @@
               {
                 "content": "Une fonction paire $f$ vérifie $f(2)=5$. Quel autre point est sur sa courbe ?",
                 "question_type": "single_choice",
-                "explanation": "Étape 4 — Tracer, en complétant par symétrie : $f$ est paire, donc $f(-2)=f(2)=5$ et le point $(-2\\,;5)$ est sur la courbe (symétrique de $(2\\,;5)$ par rapport à l'axe des ordonnées). $(-2\\,;-5)$ serait le point d'une fonction impaire.",
+                "explanation": "Étape 4 — Tracer, en complétant par symétrie : $f$ est paire, donc $f(-2)=f(2)=5$ et le point $(-2\\,;5)$ est sur la courbe (symétrique de $(2\\,;5)$ par rapport à l'axe des ordonnées). $(-2\\,;-5)$ serait le point d'une fonction impaire ; $(5\\,;2)$ échange l'abscisse et l'ordonnée ; $(2\\,;-5)$ garde l'abscisse $2$ mais change le signe de l'ordonnée, ce que ne donne aucune parité.",
                 "answers": [
                   {
                     "content": "$(-2\\,;5)$",
@@ -941,7 +941,7 @@
               {
                 "content": "Une fonction dérivable $f$ admet un maximum local en $x=a$. La tangente à sa courbe en ce point est la droite horizontale d'équation $y=$ ___.",
                 "question_type": "select",
-                "explanation": "Étape 3 — Déterminer la tangente : en un extremum, $f'(a)=0$, donc $y=f'(a)(x-a)+f(a)=f(a)$. La hauteur de la droite est $f(a)$, pas $f'(a)$ qui vaut $0$ : c'est la confusion du piège.",
+                "explanation": "Étape 3 — Déterminer la tangente : en un extremum, $f'(a)=0$, donc $y=f'(a)(x-a)+f(a)=f(a)$. La hauteur de la droite est $f(a)$, pas $f'(a)$ qui vaut $0$ : c'est la confusion du piège. $a$ est l'abscisse du point, pas la hauteur de la droite ; $0$ ne serait la hauteur que si $f(a)=0$.",
                 "answers": [
                   {
                     "content": "$f(a)$",
@@ -1071,56 +1071,56 @@
       "exercises": [
         {
           "title": "Le rendement d'une parcelle de manioc",
-          "statement": "Sur une parcelle de manioc près de Daloa, M. Koffi mesure le rendement en fonction de la dose d'engrais. Pour une dose de $x$ dizaines de kilogrammes par hectare ($0\\leq x\\leq5$), le rendement, en centaines de kilogrammes de manioc par hectare, est $R(x)=-2x^3+15x^2-24x+20$. Dans cet exercice, tu étudies les variations de $R$ sur l'intervalle $[0\\,;5]$.",
+          "statement": "Sur une parcelle de manioc près de Daloa, M. Koffi mesure le rendement en fonction de la dose d'engrais. Pour une dose de $x$ dizaines de kilogrammes par hectare ($0\\leq x\\leq5$), le rendement, en centaines de kilogrammes de manioc par hectare, est $R(x)=-2x^3+9x^2+24x+20$. Dans cet exercice, tu étudies les variations de $R$ sur l'intervalle $[0\\,;5]$.",
           "exercise_type": "fixation",
           "figure": null,
           "questions": [
             {
-              "content": "Pour $R(x)=-2x^3+15x^2-24x+20$, calcule $R'(2)$.",
+              "content": "Pour $R(x)=-2x^3+9x^2+24x+20$, calcule $R'(2)$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Calculer la dérivée : $R'(x)=-2\\times3x^2+15\\times2x-24=-6x^2+30x-24$. On remplace ensuite $x$ par $2$ : $R'(2)=-6\\times4+30\\times2-24=-24+60-24=12$. Comme $R'(2)>0$, le rendement augmente quand la dose passe par $2$.",
+              "explanation": "Étape 1 — Calculer la dérivée : $R'(x)=-2\\times3x^2+9\\times2x+24=-6x^2+18x+24$. On remplace ensuite $x$ par $2$ : $R'(2)=-6\\times4+18\\times2+24=-24+36+24=36$. Comme $R'(2)>0$, le rendement augmente quand la dose passe par $2$.",
               "answers": [
                 {
-                  "content": "12",
+                  "content": "36",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Quelle est la dérivée factorisée de $R(x)=-2x^3+15x^2-24x+20$ ?",
+              "content": "Quelle est la dérivée factorisée de $R(x)=-2x^3+9x^2+24x+20$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Calculer la dérivée et la factoriser : $R'(x)=-6x^2+30x-24=-6(x^2-5x+4)=-6(x-1)(x-4)$, car $1\\times4=4$ et $1+4=5$. Vérification : $-6(x-1)(x-4)=-6x^2+30x-24$. $-6(x+1)(x+4)$ donne $-6x^2-30x-24$ ; $6(x-1)(x-4)$ a le mauvais signe de tête ; $-6(x-1)(x+4)$ donne $-6x^2-18x+24$.",
+              "explanation": "Étape 1 — Calculer la dérivée et la factoriser : $R'(x)=-6x^2+18x+24=-6(x^2-3x-4)=-6(x+1)(x-4)$, car $1\\times(-4)=-4$ et $1+(-4)=-3$. Vérification : $-6(x+1)(x-4)=-6x^2+18x+24$. $-6(x-1)(x+4)$ donne $-6x^2-18x+24$ ; $6(x+1)(x-4)$ a le mauvais signe de tête ; $-6(x+1)(x+4)$ donne $-6x^2-30x-24$.",
               "answers": [
                 {
-                  "content": "$R'(x)=-6(x-1)(x-4)$",
+                  "content": "$R'(x)=-6(x+1)(x-4)$",
                   "correct": true
-                },
-                {
-                  "content": "$R'(x)=-6(x+1)(x+4)$",
-                  "correct": false
-                },
-                {
-                  "content": "$R'(x)=6(x-1)(x-4)$",
-                  "correct": false
                 },
                 {
                   "content": "$R'(x)=-6(x-1)(x+4)$",
                   "correct": false
+                },
+                {
+                  "content": "$R'(x)=6(x+1)(x-4)$",
+                  "correct": false
+                },
+                {
+                  "content": "$R'(x)=-6(x+1)(x+4)$",
+                  "correct": false
                 }
               ]
             },
             {
-              "content": "On a $R'(x)=-6(x-1)(x-4)$ sur $[0\\,;5]$. Quelles sont les variations de $R$ ?",
+              "content": "On a $R'(x)=-6(x+1)(x-4)$ sur $[0\\,;5]$. Quelles sont les variations de $R$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 2 — Étudier le signe de $R'(x)$ : les racines sont $1$ et $4$. Sur $[0\\,;1[$, les deux facteurs $x-1$ et $x-4$ sont négatifs, leur produit est positif, et $-6\\times$ positif est négatif. Sur $]1\\,;4[$, le produit est négatif et $R'>0$. Sur $]4\\,;5]$, le produit est positif et $R'<0$. Étape 3 — Déduire les variations : $R$ décroît, croît, puis décroît. La première autre proposition inverse tous les signes.",
+              "explanation": "Étape 2 — Étudier le signe de $R'(x)$ : les racines sont $-1$ et $4$, mais seule $4$ est dans $[0\\,;5]$. Sur $[0\\,;4[$, $x+1>0$ et $x-4<0$, leur produit est négatif et $-6\\times$ négatif est positif, donc $R'>0$. Sur $]4\\,;5]$, le produit est positif et $R'<0$. Étape 3 — Déduire les variations : $R$ croît puis décroît. « Décroissante sur $[0\\,;4]$, croissante sur $[4\\,;5]$ » inverse tous les signes ; « Croissante sur $[0\\,;5]$ » oublie que $R'<0$ après $4$ ; « Décroissante sur $[0\\,;5]$ » oublie que $R'>0$ avant $4$.",
               "answers": [
                 {
-                  "content": "Décroissante sur $[0\\,;1]$, croissante sur $[1\\,;4]$, décroissante sur $[4\\,;5]$",
+                  "content": "Croissante sur $[0\\,;4]$, décroissante sur $[4\\,;5]$",
                   "correct": true
                 },
                 {
-                  "content": "Croissante sur $[0\\,;1]$, décroissante sur $[1\\,;4]$, croissante sur $[4\\,;5]$",
+                  "content": "Décroissante sur $[0\\,;4]$, croissante sur $[4\\,;5]$",
                   "correct": false
                 },
                 {
@@ -1128,16 +1128,16 @@
                   "correct": false
                 },
                 {
-                  "content": "Décroissante sur $[0\\,;4]$, croissante sur $[4\\,;5]$",
+                  "content": "Décroissante sur $[0\\,;5]$",
                   "correct": false
                 }
               ]
             },
             {
-              "content": "Pour $R(x)=-2x^3+15x^2-24x+20$ sur $[0\\,;5]$, avec $R$ décroissante sur $[0\\,;1]$, croissante sur $[1\\,;4]$ et décroissante sur $[4\\,;5]$, quelle dose $x$ donne le rendement maximal ?",
+              "content": "Pour $R(x)=-2x^3+9x^2+24x+20$ sur $[0\\,;5]$, avec $R$ croissante sur $[0\\,;4]$ et décroissante sur $[4\\,;5]$, quelle dose $x$ donne le rendement maximal ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 4 — Dresser le tableau : on compare les valeurs aux extrema et aux bornes. $R(0)=20$, $R(1)=-2+15-24+20=9$, $R(4)=-128+240-96+20=36$, $R(5)=-250+375-120+20=25$. Le plus grand rendement est $R(4)=36$, atteint pour $x=4$. Répondre $5$ oublie que $R$ décroît après $4$ ; répondre $0$ ou $1$ ignore les valeurs de $R$.",
+              "explanation": "Étape 4 — Dresser le tableau : on compare les valeurs aux extrema et aux bornes. $R(0)=20$, $R(4)=-128+144+96+20=132$, $R(5)=-250+225+120+20=115$. Le plus grand rendement est $R(4)=132$, atteint pour $x=4$. Répondre $5$ oublie que $R$ décroît après $4$ ; répondre $0$ ignore les valeurs de $R$.",
               "answers": [
                 {
                   "content": "4",
@@ -1146,21 +1146,21 @@
               ]
             },
             {
-              "content": "Pour $R(x)=-2x^3+15x^2-24x+20$ sur $[0\\,;5]$, avec $R$ décroissante sur $[0\\,;1]$, croissante sur $[1\\,;4]$ et décroissante sur $[4\\,;5]$, quel est le rendement minimal, en centaines de kilogrammes par hectare ?",
+              "content": "Pour $R(x)=-2x^3+9x^2+24x+20$ sur $[0\\,;5]$, avec $R$ croissante sur $[0\\,;4]$ et décroissante sur $[4\\,;5]$, quel est le rendement minimal, en centaines de kilogrammes par hectare ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 4 — Dresser le tableau : les candidats au minimum sont $R(0)=20$, $R(1)=-2+15-24+20=9$, $R(4)=36$ et $R(5)=-250+375-120+20=25$. Le plus petit est $R(1)=9$. Le rendement minimal est donc $9$ centaines de kilogrammes par hectare (soit $900$ kg), pour une dose de $1$ dizaine de kilogrammes.",
+              "explanation": "Étape 4 — Dresser le tableau : $R$ croît puis décroît, donc le minimum est à l'une des bornes. $R(0)=20$ et $R(5)=-250+225+120+20=115$. Le plus petit est $R(0)=20$. Le rendement minimal est donc $20$ centaines de kilogrammes par hectare (soit $2\\,000$ kg par hectare), obtenu sans engrais.",
               "answers": [
                 {
-                  "content": "9",
+                  "content": "20",
                   "correct": true
                 }
               ]
             },
             {
-              "content": "Avec $R(x)=-2x^3+15x^2-24x+20$, le rendement pour la dose $x=5$ est supérieur au rendement pour la dose $x=0$.",
+              "content": "Avec $R(x)=-2x^3+9x^2+24x+20$, le rendement pour la dose $x=5$ est supérieur au rendement pour la dose $x=0$.",
               "question_type": "true_false",
-              "explanation": "Étape 4 — Dresser le tableau, on y lit les valeurs : $R(0)=20$ et $R(5)=-2\\times125+15\\times25-24\\times5+20=-250+375-120+20=25$. Comme $25>20$, l'affirmation est vraie. Le raisonnement « $R$ décroît à la fin, donc $R(5)<R(0)$ » est faux : $R$ a d'abord monté jusqu'à $36$.",
+              "explanation": "Étape 4 — Dresser le tableau, on y lit les valeurs : $R(0)=20$ et $R(5)=-2\\times125+9\\times25+24\\times5+20=-250+225+120+20=115$. Comme $115>20$, l'affirmation est vraie. Le raisonnement « $R$ décroît à la fin, donc $R(5)<R(0)$ » est faux : $R$ a d'abord monté jusqu'à $132$.",
               "answers": [
                 {
                   "content": "Vrai",
@@ -1176,7 +1176,7 @@
         },
         {
           "title": "Le coût moyen d'une coopérative d'anacarde",
-          "statement": "Une coopérative de planteurs d'anacardiers de Korhogo modélise un coût moyen, en dizaines de milliers de FCFA par tonne, par la fonction $f$ définie par $f(x)=\\dfrac{2x+3}{x-1}$, où $x$ désigne un volume en dizaines de tonnes. Dans cet exercice, tu mènes une étude de $f$ avec le plan d'étude : domaine, limites, asymptotes, dérivée.",
+          "statement": "Une coopérative de planteurs d'anacardiers de Korhogo modélise un coût moyen, en dizaines de milliers de FCFA par tonne, par la fonction $f$ définie par $f(x)=\\dfrac{2x+3}{x-1}$, où $x$ désigne un volume en dizaines de tonnes ; dans ce contexte, seul $x>1$ est retenu, mais l'étude mathématique porte sur le domaine de $f$. Dans cet exercice, tu mènes une étude de $f$ avec le plan d'étude : domaine, limites, asymptotes, dérivée.",
           "exercise_type": "fixation",
           "figure": null,
           "questions": [
@@ -1207,7 +1207,7 @@
               "content": "Calcule $\\lim_{x\\to+\\infty}\\dfrac{2x+3}{x-1}$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 1 — Repérer : on cherche la limite en $+\\infty$. Étape 2 — Calculer : on garde les termes de plus haut degré, $\\dfrac{2x}{x}=2$. Étape 3 — Interpréter : la limite est finie, égale à $2$ : la droite $y=2$ est asymptote horizontale. La limite en $-\\infty$ est aussi $2$.",
+              "explanation": "Étape 1 — Repérer : on cherche la limite en $+\\infty$. Étape 2 — Calculer : on garde les termes de plus haut degré, $\\dfrac{2x}{x}=2$. Étape 3 — Interpréter : la limite est finie, égale à $2$ : la droite $y=2$ est asymptote horizontale.",
               "answers": [
                 {
                   "content": "2",
@@ -1218,7 +1218,7 @@
             {
               "content": "Quelle est la limite de $f(x)=\\dfrac{2x+3}{x-1}$ quand $x$ tend vers $1$ par valeurs supérieures à $1$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Repérer : $1$ est la valeur interdite, on étudie $1^+$. Étape 2 — Calculer : le numérateur tend vers $2\\times1+3=5>0$ et le dénominateur vers $0^+$, donc $\\lim f=+\\infty$. Étape 3 — Interpréter : la droite $x=1$ est asymptote verticale. $-\\infty$ serait la limite en $1^-$.",
+              "explanation": "Étape 1 — Repérer : $1$ est la valeur interdite, on étudie $1^+$. Étape 2 — Calculer : le numérateur tend vers $2\\times1+3=5>0$ et le dénominateur vers $0^+$, donc $\\lim f=+\\infty$. Étape 3 — Interpréter : la droite $x=1$ est asymptote verticale. $-\\infty$ serait la limite en $1^-$ ; $5$ est la limite du numérateur, qui ne donne pas celle du quotient ; $2$ est la limite en $+\\infty$, pas en $1^+$.",
               "answers": [
                 {
                   "content": "$+\\infty$",
@@ -1241,7 +1241,7 @@
             {
               "content": "Quelles sont les asymptotes de la courbe de $f(x)=\\dfrac{2x+3}{x-1}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 3 — Interpréter les limites : $\\lim_{x\\to1^+}f=+\\infty$ donne l'asymptote verticale $x=1$ ; $\\lim_{x\\to\\pm\\infty}f=2$ donne l'asymptote horizontale $y=2$. La deuxième proposition échange les deux droites ; la troisième prend le zéro du numérateur ; la quatrième oublie la limite infinie en $1$.",
+              "explanation": "Étape 3 — Interpréter les limites : $\\lim_{x\\to1^+}f=+\\infty$ donne l'asymptote verticale $x=1$ ; $\\lim_{x\\to\\pm\\infty}f=2$ donne l'asymptote horizontale $y=2$. $x=2$ et $y=1$ échange les deux droites ; $x=-\\frac32$ prend le zéro du numérateur ; « Seulement $y=2$ » oublie la limite infinie en $1$.",
               "answers": [
                 {
                   "content": "$x=1$ (verticale) et $y=2$ (horizontale)",
@@ -1264,7 +1264,7 @@
             {
               "content": "Quelle est la dérivée de $f(x)=\\dfrac{2x+3}{x-1}$ sur $\\mathbb{R}\\setminus\\{1\\}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Calculer la dérivée : avec $u=2x+3$ et $v=x-1$, $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{2(x-1)-(2x+3)}{(x-1)^2}=\\dfrac{-5}{(x-1)^2}$. La proposition $\\frac{5}{(x-1)^2}$ inverse le signe ; $2$ dérive seulement le numérateur ; la dernière oublie le carré.",
+              "explanation": "Étape 1 — Calculer la dérivée : avec $u=2x+3$ et $v=x-1$, $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{2(x-1)-(2x+3)}{(x-1)^2}=\\dfrac{-5}{(x-1)^2}$. La proposition $\\frac{5}{(x-1)^2}$ inverse le signe ; $2$ dérive seulement le numérateur ; $\\frac{-5}{x-1}$ oublie le carré du dénominateur.",
               "answers": [
                 {
                   "content": "$f'(x)=\\dfrac{-5}{(x-1)^2}$",
@@ -1300,13 +1300,13 @@
               ]
             },
             {
-              "content": "La courbe de $f(x)=\\dfrac{2x+3}{x-1}$ coupe l'axe des abscisses en un point. Donne son abscisse.",
+              "content": "Quel est le coût moyen $f(2)$ pour un volume de $x=2$ dizaines de tonnes, en dizaines de milliers de FCFA par tonne ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 2 — Calculer les points particuliers : $f(x)=0$ équivaut, pour $x\\neq1$, à $2x+3=0$, soit $x=-\\dfrac32=-1{,}5$. Ce réel est bien dans le domaine. Le point est $(-1{,}5\\,;0)$. La valeur $1$ est la valeur interdite, pas une solution.",
+              "explanation": "Étape 2 — Calculer une valeur : $f(2)=\\dfrac{2\\times2+3}{2-1}=\\dfrac71=7$. Le coût moyen est donc de $7$ dizaines de milliers de FCFA par tonne, soit $70\\,000$ FCFA, pour $20$ tonnes. Répondre $5$ ou $1$ ne retient que le numérateur ou le dénominateur.",
               "answers": [
                 {
-                  "content": "-1,5",
+                  "content": "7",
                   "correct": true
                 }
               ]
@@ -1315,15 +1315,15 @@
         },
         {
           "title": "Le coût moyen d'une plantation d'hévéa",
-          "statement": "Une plantation d'hévéas de Bongouanou vend son caoutchouc par lots. Le coût moyen de production, en dizaines de milliers de FCFA par tonne, d'un lot de $x$ tonnes ($x>1$) est $C(x)=\\dfrac{x^2-2x+5}{x-1}$. Dans cet exercice, tu étudies $C$ pas à pas. La courbe de $C$ sera tracée dans un repère à partir de ton étude ; aucune figure n'est donnée.",
+          "statement": "Une plantation d'hévéas de Bongouanou vend son caoutchouc par lots. Le coût moyen de production, en centaines de milliers de FCFA par tonne, d'un lot de $x$ tonnes ($x>1$) est $C(x)=\\dfrac{x^2-2x+5}{x-1}$. Dans cet exercice, tu étudies $C$ pas à pas. La courbe de $C$ sera tracée dans un repère à partir de ton étude ; aucune figure n'est donnée.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
             {
-              "content": "On veut écrire $C(x)=x-1+\\dfrac{b}{x-1}$ pour $x>1$. Donne la valeur de $b$.",
+              "content": "On veut écrire $C(x)=x-1+\\dfrac{k}{x-1}$ pour $x>1$. Donne la valeur de $k$.",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 4 — Chercher une asymptote oblique : on écrit $C(x)=ax+b+r(x)$. Ici $(x-1)^2=x^2-2x+1$, donc $x^2-2x+5=(x-1)^2+4$. En divisant par $x-1$ : $C(x)=x-1+\\dfrac{4}{x-1}$. Donc $b=4$. Contrôle avec $x=3$ : $C(3)=\\frac{8}{2}=4$ et $3-1+\\frac42=4$.",
+              "explanation": "Étape 4 — Chercher une asymptote oblique : on écrit $C(x)=ax+b+r(x)$. Ici $(x-1)^2=x^2-2x+1$, donc $x^2-2x+5=(x-1)^2+4$. En divisant par $x-1$ : $C(x)=x-1+\\dfrac{4}{x-1}$. Donc $k=4$. Contrôle avec $x=3$ : $C(3)=\\frac{8}{2}=4$ et $3-1+\\frac42=4$.",
               "answers": [
                 {
                   "content": "4",
@@ -1372,7 +1372,7 @@
             {
               "content": "Quelle est la limite de $C(x)=\\dfrac{x^2-2x+5}{x-1}$ quand $x$ tend vers $1$ par valeurs supérieures à $1$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Repérer : $1$ est la valeur interdite, on étudie $1^+$. Étape 2 — Calculer : le numérateur tend vers $1-2+5=4>0$ et le dénominateur vers $0^+$, donc $\\lim C=+\\infty$. Étape 3 — Interpréter : la droite $x=1$ est asymptote verticale. $4$ ignore le dénominateur ; $-\\infty$ viendrait de $1^-$.",
+              "explanation": "Étape 1 — Repérer : $1$ est la valeur interdite, on étudie $1^+$. Étape 2 — Calculer : le numérateur tend vers $1-2+5=4>0$ et le dénominateur vers $0^+$, donc $\\lim C=+\\infty$. Étape 3 — Interpréter : la droite $x=1$ est asymptote verticale. $4$ ignore le dénominateur ; $0$ oublie qu'un numérateur proche de $4$ divisé par un dénominateur proche de $0$ devient très grand ; $-\\infty$ viendrait de $1^-$.",
               "answers": [
                 {
                   "content": "$+\\infty$",
@@ -1395,7 +1395,7 @@
             {
               "content": "On donne $C'(x)=\\dfrac{(x-3)(x+1)}{(x-1)^2}$ pour $x>1$. Quelles sont les variations de $C$ sur $]1\\,;+\\infty[$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 2 — Étudier le signe de $C'(x)$ : pour $x>1$, $(x-1)^2>0$ et $x+1>0$, donc $C'(x)$ a le signe de $x-3$. Il est négatif sur $]1\\,;3[$, nul en $3$, positif sur $]3\\,;+\\infty[$. Étape 3 — Déduire les variations : $C$ décroît sur $]1\\,;3]$ puis croît sur $[3\\,;+\\infty[$. La première autre proposition inverse les signes.",
+              "explanation": "Étape 2 — Étudier le signe de $C'(x)$ : pour $x>1$, $(x-1)^2>0$ et $x+1>0$, donc $C'(x)$ a le signe de $x-3$. Il est négatif sur $]1\\,;3[$, nul en $3$, positif sur $]3\\,;+\\infty[$. Étape 3 — Déduire les variations : $C$ décroît sur $]1\\,;3]$ puis croît sur $[3\\,;+\\infty[$. « Croissante sur $]1\\,;3]$, puis décroissante sur $[3\\,;+\\infty[$ » inverse les signes ; « Croissante sur $]1\\,;+\\infty[$ » oublie que $C'<0$ avant $3$ ; « Décroissante sur $]1\\,;+\\infty[$ » oublie que $C'>0$ après $3$.",
               "answers": [
                 {
                   "content": "Décroissante sur $]1\\,;3]$, puis croissante sur $[3\\,;+\\infty[$",
@@ -1416,10 +1416,10 @@
               ]
             },
             {
-              "content": "Pour $C(x)=\\dfrac{x^2-2x+5}{x-1}$, avec $C$ décroissante sur $]1\\,;3]$ puis croissante sur $[3\\,;+\\infty[$, quel est le coût moyen minimal, en dizaines de milliers de FCFA par tonne ?",
+              "content": "Pour $C(x)=\\dfrac{x^2-2x+5}{x-1}$, avec $C$ décroissante sur $]1\\,;3]$ puis croissante sur $[3\\,;+\\infty[$, quel est le coût moyen minimal, en centaines de milliers de FCFA par tonne ?",
               "question_type": "numeric",
               "tolerance": 0,
-              "explanation": "Étape 4 — Dresser le tableau : le minimum est atteint en $x=3$, où la dérivée change de signe de $-$ à $+$. $C(3)=\\dfrac{9-6+5}{2}=\\dfrac82=4$. Le coût moyen minimal est donc $4$ dizaines de milliers de FCFA par tonne, soit $40\\,000$ FCFA, pour un lot de $3$ tonnes.",
+              "explanation": "Étape 4 — Dresser le tableau : le minimum est atteint en $x=3$, où la dérivée change de signe de $-$ à $+$. $C(3)=\\dfrac{9-6+5}{2}=\\dfrac82=4$. Le coût moyen minimal est donc $4$ centaines de milliers de FCFA par tonne, soit $400\\,000$ FCFA, pour un lot de $3$ tonnes.",
               "answers": [
                 {
                   "content": "4",
@@ -1428,9 +1428,9 @@
               ]
             },
             {
-              "content": "La courbe de $C(x)=\\dfrac{x^2-2x+5}{x-1}$ a un minimum en $x=3$ avec $C(3)=4$ et $C'(3)=0$. Quelle est l'équation de sa tangente au point d'abscisse $3$ ?",
+              "content": "La courbe de $C(x)=\\dfrac{x^2-2x+5}{x-1}$ a un minimum en $x=3$. Quelle est l'équation de sa tangente au point d'abscisse $3$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 3 — Déterminer les tangentes : $y=C'(3)(x-3)+C(3)=0\\times(x-3)+4=4$. La tangente en un extremum est horizontale, d'équation $y=C(3)$. $x=3$ est une droite verticale ; $y=3$ prend l'abscisse pour l'ordonnée ; $y=0$ prend $C'(3)$ pour $C(3)$ (piège de la fiche).",
+              "explanation": "Étape 3 — Déterminer les tangentes : en un minimum, $C'(3)=0$, et $C(3)=\\dfrac{9-6+5}{2}=4$. Donc $y=C'(3)(x-3)+C(3)=0\\times(x-3)+4=4$. La tangente en un extremum est horizontale, d'équation $y=C(3)$. $x=3$ est une droite verticale ; $y=3$ prend l'abscisse pour l'ordonnée ; $y=0$ prend $C'(3)$ pour $C(3)$ (piège de la fiche).",
               "answers": [
                 {
                   "content": "$y=4$",
@@ -1468,7 +1468,7 @@
         },
         {
           "title": "L'écart de rendement d'une parcelle de cacaoyers",
-          "statement": "Un agronome modélise l'écart de rendement d'une parcelle de cacaoyers de Gagnoa par rapport à la moyenne de la région, en centaines de kilogrammes, selon l'écart $x$ (en dizaines de jours, positif ou négatif) entre la date de taille et une date de référence. Il utilise la fonction $f$ définie sur $\\mathbb{R}$ par $f(x)=\\dfrac{4x}{x^2+1}$. Dans cet exercice, tu fais une étude complète de $f$ : domaine, parité, limites, variations et tangente. La courbe n'est pas donnée : tu la décris à partir de tes résultats.",
+          "statement": "Un agronome modélise l'écart de rendement d'une parcelle de cacaoyers de Gagnoa par rapport à la moyenne de la région, en centaines de kilogrammes par hectare, selon l'écart $x$ (en dizaines de jours, positif ou négatif) entre la date de taille et une date de référence. Il utilise la fonction $f$ définie sur $\\mathbb{R}$ par $f(x)=\\dfrac{4x}{x^2+1}$. Dans cet exercice, tu fais une étude complète de $f$ : domaine, parité, limites, variations et tangente. La courbe n'est pas donnée : tu la décris à partir de tes résultats.",
           "exercise_type": "evaluation",
           "figure": null,
           "questions": [
@@ -1525,7 +1525,7 @@
             {
               "content": "Quelle est l'asymptote horizontale de la courbe de $f(x)=\\dfrac{4x}{x^2+1}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 3 — Interpréter : $\\lim_{x\\to\\pm\\infty}f(x)=0$, limite finie, donc la droite $y=0$ est asymptote horizontale. Il n'y a pas d'asymptote verticale car le domaine est $\\mathbb{R}$. $y=4$ prend le coefficient du numérateur ; $x=0$ est l'axe des ordonnées.",
+              "explanation": "Étape 3 — Interpréter : $\\lim_{x\\to\\pm\\infty}f(x)=0$, limite finie, donc la droite $y=0$ est asymptote horizontale. Il n'y a pas d'asymptote verticale car le domaine est $\\mathbb{R}$. $y=4$ prend le coefficient du numérateur ; $x=0$ est l'axe des ordonnées ; « Elle n'en a pas » oublie que la limite finie $0$ en $\\pm\\infty$ donne une asymptote horizontale.",
               "answers": [
                 {
                   "content": "$y=0$ (l'axe des abscisses)",
@@ -1548,7 +1548,7 @@
             {
               "content": "Quelle est la dérivée de $f(x)=\\dfrac{4x}{x^2+1}$ ?",
               "question_type": "single_choice",
-              "explanation": "Étape 1 — Calculer la dérivée : avec $u=4x$ et $v=x^2+1$, $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{4(x^2+1)-4x\\times2x}{(x^2+1)^2}=\\dfrac{4-4x^2}{(x^2+1)^2}$. $\\frac4{2x}$ divise les dérivées ; la deuxième proposition additionne au lieu de soustraire ; la dernière oublie le carré du dénominateur.",
+              "explanation": "Étape 1 — Calculer la dérivée : avec $u=4x$ et $v=x^2+1$, $f'(x)=\\dfrac{u'v-uv'}{v^2}=\\dfrac{4(x^2+1)-4x\\times2x}{(x^2+1)^2}=\\dfrac{4-4x^2}{(x^2+1)^2}$. $\\frac4{2x}$ divise les dérivées ; $\\dfrac{4x^2+4+8x^2}{(x^2+1)^2}$ additionne au lieu de soustraire ; $\\dfrac{4-4x^2}{x^2+1}$ oublie le carré du dénominateur.",
               "answers": [
                 {
                   "content": "$f'(x)=\\dfrac{4-4x^2}{(x^2+1)^2}$",
