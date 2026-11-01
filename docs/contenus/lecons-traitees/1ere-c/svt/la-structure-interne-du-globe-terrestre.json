@@ -1,0 +1,1417 @@
+{
+  "format": "lnclass.course-tree",
+  "version": 3,
+  "courses": [
+    {
+      "name": "La structure interne du globe terrestre",
+      "subtitle": "Leçon 7 — progression DPFC 2026-2027",
+      "level_name": "1ère",
+      "material_name": "SVT",
+      "series_name": "C",
+      "theme": "blue",
+      "figures": [
+        {
+          "key": "methode-sismique",
+          "kind": "diagram",
+          "description": "Schéma fléché de la méthode sismique. Un séisme au foyer émet des ondes P et S. Un sismographe les enregistre sur un sismogramme, qui donne les temps d'arrivée. Avec la distance parcourue, on calcule les vitesses. Un changement brusque de vitesse révèle une discontinuité et permet de décrire la structure du globe.",
+          "params": {
+            "layout": "flow",
+            "direction": "right",
+            "nodes": [
+              {
+                "id": "foyer",
+                "label": "Séisme : ondes P et S"
+              },
+              {
+                "id": "sismo",
+                "label": "Sismographe : sismogramme"
+              },
+              {
+                "id": "temps",
+                "label": "Temps d'arrivée"
+              },
+              {
+                "id": "vit",
+                "label": "Vitesse = distance / durée"
+              },
+              {
+                "id": "disc",
+                "label": "Discontinuités"
+              },
+              {
+                "id": "struct",
+                "label": "Structure du globe"
+              }
+            ],
+            "edges": [
+              {
+                "from": "foyer",
+                "to": "sismo",
+                "label": "enregistrées"
+              },
+              {
+                "from": "sismo",
+                "to": "temps",
+                "label": "lire"
+              },
+              {
+                "from": "temps",
+                "to": "vit",
+                "label": "calculer"
+              },
+              {
+                "from": "vit",
+                "to": "disc",
+                "label": "saut de vitesse"
+              },
+              {
+                "from": "disc",
+                "to": "struct",
+                "label": "interpréter"
+              }
+            ]
+          },
+          "controls": []
+        },
+        {
+          "key": "enveloppes-du-globe",
+          "kind": "diagram",
+          "description": "Schéma fléché des enveloppes du globe, de la surface vers le centre : la croûte, le manteau, le noyau externe liquide puis la graine solide. Les flèches portent le nom de la discontinuité qui sépare deux enveloppes : Moho, Gutenberg puis Lehmann. Ce schéma remplace une coupe du globe, absente de la liste des figures.",
+          "params": {
+            "layout": "flow",
+            "direction": "down",
+            "nodes": [
+              {
+                "id": "croute",
+                "label": "Croûte"
+              },
+              {
+                "id": "manteau",
+                "label": "Manteau"
+              },
+              {
+                "id": "noyau",
+                "label": "Noyau externe (liquide)"
+              },
+              {
+                "id": "graine",
+                "label": "Graine (solide)"
+              }
+            ],
+            "edges": [
+              {
+                "from": "croute",
+                "to": "manteau",
+                "label": "Moho"
+              },
+              {
+                "from": "manteau",
+                "to": "noyau",
+                "label": "Gutenberg"
+              },
+              {
+                "from": "noyau",
+                "to": "graine",
+                "label": "Lehmann"
+              }
+            ]
+          },
+          "controls": []
+        }
+      ],
+      "notions": [
+        {
+          "name": "Les ondes sismiques P et S",
+          "figure": "methode-sismique",
+          "remember": "Un **séisme** est une rupture brutale de roches en profondeur, au **foyer**. Le point de la surface situé à la verticale du foyer est l'**épicentre**. Le séisme émet des **ondes sismiques** que le **sismographe** enregistre sur un **sismogramme**. Les **ondes P** arrivent les premières : elles sont plus rapides et traversent les solides et les liquides. Les **ondes S** arrivent ensuite : elles sont plus lentes et **ne traversent pas les liquides**. La vitesse se calcule par : vitesse = distance / durée. Un changement brusque de vitesse montre un changement de milieu.",
+          "method": [
+            "Repérer sur le sismogramme l'arrivée de chaque sorte d'onde : les P d'abord, les S ensuite.",
+            "Relever la distance parcourue et la durée du trajet de chaque onde.",
+            "Calculer la vitesse : distance divisée par durée, en gardant l'unité (km/s).",
+            "Conclure : comparer les vitesses, et interpréter une onde S absente comme un milieu liquide."
+          ],
+          "example": {
+            "statement": "Résultats simplifiés : une station est à 1 200 km de l'épicentre d'un séisme ressenti dans une mine. Les ondes P arrivent après 200 s, les ondes S après 400 s. Quelles sont leurs vitesses ?",
+            "steps": [
+              "Repérer : les P arrivent les premières (200 s), les S ensuite (400 s).",
+              "Relever : la distance parcourue est 1 200 km pour les deux ondes ; les durées sont 200 s et 400 s.",
+              "Calculer : P = 1 200 / 200 = 6 km/s ; S = 1 200 / 400 = 3 km/s.",
+              "Conclure : les P (6 km/s) sont deux fois plus rapides que les S (3 km/s), et les deux traversent ici un milieu solide."
+            ]
+          },
+          "pitfall": "Ne pas confondre une onde S **lente** et une onde S **absente**. Contre-exemple : dans la croûte, les S existent et vont à 3 km/s, donc le milieu est solide. Si aucune onde S n'est enregistrée après un trajet, c'est qu'elles ont été arrêtées par un liquide. Une vitesse faible prouve un solide ; une absence prouve un liquide.",
+          "exercise": {
+            "title": "Lire un sismogramme et calculer des vitesses",
+            "statement": "Dans cet exercice, tu utilises la méthode : repérer les ondes, relever distance et durée, calculer la vitesse, conclure.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Une station enregistre les ondes d'un séisme. Quelle onde arrive en premier ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : sur le sismogramme, les ondes P sont les premières à arriver. Les ondes S arrivent ensuite parce qu'elles sont plus lentes. L'erreur tentante est de croire que les S, plus fortes, arrivent d'abord : la force n'a rien à voir avec la vitesse.",
+                "answers": [
+                  {
+                    "content": "Les ondes P",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les ondes S",
+                    "correct": false
+                  },
+                  {
+                    "content": "Les deux arrivent en même temps",
+                    "correct": false
+                  },
+                  {
+                    "content": "Aucune : seul l'épicentre enregistre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Les ondes S se propagent dans les liquides.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : les ondes S ne se propagent pas dans un liquide ; elles sont arrêtées. Seules les ondes P traversent les solides et les liquides. C'est cette différence qui permet de repérer un milieu liquide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une onde P parcourt 900 km en 150 s (résultats simplifiés). Quelle est sa vitesse en km/s ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Relever : distance = 900 km, durée = 150 s. Étape 3 — Calculer : vitesse = distance / durée = 900 / 150 = 6 km/s. Étape 4 — Conclure : l'onde P va à 6 km/s dans ce milieu.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "km/s"
+              },
+              {
+                "content": "Une onde S parcourt 1 500 km en 500 s (résultats simplifiés). Quelle est sa vitesse en km/s ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Relever : distance = 1 500 km, durée = 500 s. Étape 3 — Calculer : vitesse = 1 500 / 500 = 3 km/s. Étape 4 — Conclure : cette onde S (3 km/s) est plus lente qu'une onde P (6 km/s dans la question précédente) ; c'est pourquoi les S arrivent après les P.",
+                "answers": [
+                  {
+                    "content": "3",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "km/s"
+              },
+              {
+                "content": "Relie chaque mot à sa définition.",
+                "question_type": "matching",
+                "explanation": "Étape 1 — Repérer : le foyer est en profondeur, l'épicentre est au-dessus, à la surface. Le sismographe est l'appareil ; le sismogramme est le graphique qu'il trace, sur lequel on lit l'arrivée des ondes P puis S.",
+                "answers": [
+                  {
+                    "content": "Foyer",
+                    "match": "Endroit en profondeur où les roches se rompent"
+                  },
+                  {
+                    "content": "Épicentre",
+                    "match": "Point de la surface à la verticale du foyer"
+                  },
+                  {
+                    "content": "Sismographe",
+                    "match": "Appareil qui enregistre les ondes sismiques"
+                  },
+                  {
+                    "content": "Sismogramme",
+                    "match": "Enregistrement des ondes sur un graphique"
+                  }
+                ]
+              },
+              {
+                "content": "Sur le sismogramme d'une station très éloignée, on ne trouve aucune onde S. Que peut-on conclure ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : des ondes S absentes ne veulent pas dire des ondes S lentes. Elles sont arrêtées par un milieu liquide placé sur leur trajet. Les S ne sont jamais plus rapides que les P, et un séisme produit toujours les deux sortes d'ondes.",
+                "answers": [
+                  {
+                    "content": "Les ondes S ont traversé un milieu liquide, où elles sont arrêtées",
+                    "correct": true
+                  },
+                  {
+                    "content": "Les ondes S sont plus rapides que les P et sont déjà passées",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le séisme n'a produit que des ondes S",
+                    "correct": false
+                  },
+                  {
+                    "content": "La station est située à l'épicentre",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à lire un sismogramme et à calculer une vitesse.",
+            "questions": [
+              {
+                "content": "Les ondes ___ arrivent en premier à la station ; les ondes ___ arrivent ensuite.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : les ondes P sont les premières, les ondes S les secondes. Étape 4 — Conclure : les P sont donc plus rapides que les S.",
+                "answers": [
+                  {
+                    "content": "P",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "S",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le nom des ondes rappelle l'ordre d'arrivée : primaires, puis secondaires."
+              },
+              {
+                "content": "L'épicentre est l'endroit en profondeur où les roches se rompent.",
+                "question_type": "true_false",
+                "explanation": "Étape 1 — Repérer : l'endroit en profondeur est le foyer. L'épicentre est le point de la surface situé à la verticale du foyer.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Une onde P parcourt 1 800 km en 300 s (résultats simplifiés). Quelle est sa vitesse en km/s ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Relever : 1 800 km en 300 s. Étape 3 — Calculer : 1 800 / 300 = 6 km/s.",
+                "answers": [
+                  {
+                    "content": "6",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "km/s"
+              },
+              {
+                "content": "Remets dans l'ordre les étapes de la méthode sismique.",
+                "question_type": "ordering",
+                "explanation": "Étape 1 — Repérer : le séisme vient d'abord, puis l'enregistrement. Étape 2 — Relever les temps d'arrivée, puis Étape 3 — Calculer les vitesses : on ne peut calculer qu'après avoir lu les durées.",
+                "answers": [
+                  {
+                    "content": "Les roches se rompent au foyer et des ondes partent"
+                  },
+                  {
+                    "content": "Le sismographe enregistre les ondes"
+                  },
+                  {
+                    "content": "On lit les temps d'arrivée sur le sismogramme"
+                  },
+                  {
+                    "content": "On calcule les vitesses avec la distance"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Les discontinuités et les enveloppes du globe",
+          "figure": "enveloppes-du-globe",
+          "remember": "Les ondes sismiques changent brusquement de vitesse à certaines profondeurs : ce sont des **discontinuités**. Le **Moho** sépare la **croûte** du **manteau** (quelques dizaines de km sous un continent, moins sous un océan). La discontinuité de **Gutenberg**, vers **2 900 km**, sépare le manteau du **noyau externe** : les ondes S disparaissent, donc le noyau externe est **liquide**. La discontinuité de **Lehmann**, vers **5 100 km**, sépare le noyau externe de la **graine** (noyau interne), **solide**. Le noyau est surtout formé de fer.",
+          "method": [
+            "Lire le profil des vitesses des ondes P et S en fonction de la profondeur.",
+            "Repérer les profondeurs où la vitesse change brusquement ou où les ondes S disparaissent.",
+            "Interpréter chaque changement : onde S arrêtée = milieu liquide ; saut de vitesse = changement de milieu.",
+            "Nommer la discontinuité d'après sa profondeur, et les deux enveloppes qu'elle sépare."
+          ],
+          "example": {
+            "statement": "Résultats simplifiés : à 2 900 km de profondeur, la vitesse des ondes P passe de 13 km/s à 8 km/s, et les ondes S ne sont plus enregistrées au-delà. Que révèle cette profondeur ?",
+            "steps": [
+              "Lire : au-dessus de 2 900 km, les P vont à 13 km/s et les S existent ; au-dessous, les P vont à 8 km/s.",
+              "Repérer : le changement est brutal à 2 900 km (13 puis 8 km/s) et les S disparaissent à cette profondeur.",
+              "Interpréter : les S sont arrêtées, donc le milieu est liquide ; les P ralentissent, donc le milieu a changé.",
+              "Nommer : c'est la discontinuité de Gutenberg, entre le manteau solide et le noyau externe liquide."
+            ]
+          },
+          "pitfall": "Ne pas confondre les discontinuités, ni croire que tout le noyau est liquide. Contre-exemple : un saut de vitesse à 30 km est le Moho et non Gutenberg ; la profondeur dit laquelle (environ 30 km, 2 900 km, 5 100 km). Et à 5 100 km, les ondes P accélèrent : le centre du globe, la graine, est solide.",
+          "exercise": {
+            "title": "Nommer les discontinuités et les enveloppes",
+            "statement": "Dans cet exercice, tu lis un profil de vitesses, tu repères les sauts, tu les interprètes et tu nommes les discontinuités.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Relie chaque discontinuité aux deux enveloppes qu'elle sépare.",
+                "question_type": "matching",
+                "explanation": "Étape 4 — Nommer : le Moho est la limite entre la croûte et le manteau. Gutenberg sépare le manteau du noyau externe, vers 2 900 km. Lehmann sépare le noyau externe de la graine, vers 5 100 km.",
+                "answers": [
+                  {
+                    "content": "Moho",
+                    "match": "Croûte et manteau"
+                  },
+                  {
+                    "content": "Gutenberg",
+                    "match": "Manteau et noyau externe"
+                  },
+                  {
+                    "content": "Lehmann",
+                    "match": "Noyau externe et graine"
+                  }
+                ]
+              },
+              {
+                "content": "À quelle profondeur, en km, se trouve la discontinuité de Gutenberg ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Repérer : c'est à environ 2 900 km que les ondes S disparaissent et que les ondes P ralentissent brutalement. Étape 4 — Nommer : c'est la discontinuité de Gutenberg, entre manteau et noyau externe.",
+                "answers": [
+                  {
+                    "content": "2900",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "km"
+              },
+              {
+                "content": "Dans un modèle simplifié, les ondes S disparaissent et les ondes P ralentissent brutalement à 2 900 km. Que peut-on dire du noyau externe ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Interpréter : des ondes S arrêtées montrent un milieu liquide ; des P qui ralentissent montrent un changement de milieu. Étape 4 — Nommer : on conclut que le noyau externe est liquide. L'erreur tentante est de croire que le noyau est solide parce que la Terre est dure en surface.",
+                "answers": [
+                  {
+                    "content": "Il est liquide",
+                    "correct": true
+                  },
+                  {
+                    "content": "Il est solide, comme le manteau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est identique au manteau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Il est vide",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La graine, au centre du globe, est solide.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : à 5 100 km, les ondes P accélèrent. Étape 3 — Interpréter : le milieu redevient rigide. Étape 4 — Nommer : la discontinuité de Lehmann sépare le noyau externe liquide de la graine solide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La discontinuité située entre la croûte et le manteau s'appelle la discontinuité de ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Repérer : un saut de vitesse des ondes P a lieu à quelques dizaines de kilomètres sous un continent. Étape 4 — Nommer : c'est le Moho, qui sépare la croûte du manteau.",
+                "answers": [
+                  {
+                    "content": "Moho",
+                    "correct": true
+                  },
+                  {
+                    "content": "Mohorovicic",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Quelles affirmations sont vraies ?",
+                "question_type": "multiple_correct_2",
+                "explanation": "Étape 4 — Nommer : Gutenberg est bien la limite manteau - noyau externe, et la croûte océanique est plus mince que la croûte continentale. Les erreurs viennent du piège : Lehmann est à 5 100 km entre noyau externe et graine, le Moho est proche de la surface, et le noyau a une partie solide, la graine.",
+                "answers": [
+                  {
+                    "content": "La discontinuité de Gutenberg sépare le manteau du noyau externe",
+                    "correct": true
+                  },
+                  {
+                    "content": "La croûte est plus mince sous les océans que sous les continents",
+                    "correct": true
+                  },
+                  {
+                    "content": "La discontinuité de Lehmann sépare la croûte du manteau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le noyau est entièrement liquide",
+                    "correct": false
+                  },
+                  {
+                    "content": "Le Moho se trouve vers 2 900 km de profondeur",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à nommer les discontinuités et les enveloppes.",
+            "questions": [
+              {
+                "content": "La discontinuité de ___ sépare le manteau du noyau externe ; celle de ___ sépare le noyau externe de la graine.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 4 — Nommer : Gutenberg est vers 2 900 km, entre le manteau et le noyau externe ; Lehmann est vers 5 100 km, entre le noyau externe et la graine.",
+                "answers": [
+                  {
+                    "content": "Gutenberg",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "Lehmann",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Les deux discontinuités profondes portent des noms de sismologues. La plus proche de la surface est la première des deux."
+              },
+              {
+                "content": "Sous un continent, à quelle profondeur approximative se trouve le Moho ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Repérer : le Moho est proche de la surface, car la croûte est une enveloppe mince. Gutenberg (2 900 km) et Lehmann (5 100 km) sont bien plus profonds.",
+                "answers": [
+                  {
+                    "content": "Quelques dizaines de kilomètres",
+                    "correct": true
+                  },
+                  {
+                    "content": "Environ 2 900 km",
+                    "correct": false
+                  },
+                  {
+                    "content": "Environ 5 100 km",
+                    "correct": false
+                  },
+                  {
+                    "content": "Moins de 1 mètre",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Remets dans l'ordre les enveloppes, de la surface vers le centre du globe.",
+                "question_type": "ordering",
+                "explanation": "Étape 4 — Nommer : en descendant, on traverse la croûte, le Moho, le manteau, Gutenberg, le noyau externe, Lehmann, puis la graine.",
+                "answers": [
+                  {
+                    "content": "Croûte"
+                  },
+                  {
+                    "content": "Manteau"
+                  },
+                  {
+                    "content": "Noyau externe"
+                  },
+                  {
+                    "content": "Graine"
+                  }
+                ]
+              },
+              {
+                "content": "Les ondes P ralentissent brutalement en entrant dans le noyau externe.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Repérer : la vitesse des P chute à 2 900 km. Étape 3 — Interpréter : c'est un changement de milieu, ici l'entrée dans un liquide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "La lithosphère et l'asthénosphère",
+          "figure": null,
+          "remember": "On peut aussi découper le globe d'après le **comportement mécanique** des roches. La **lithosphère** est formée de la croûte et de la partie supérieure du manteau (de l'ordre de 100 km d'épaisseur) : elle est **rigide et cassante**, et la plupart des foyers de séismes s'y trouvent. Dessous, l'**asthénosphère** est une partie du manteau **solide mais déformable** : les ondes sismiques y ralentissent légèrement. La croûte et le manteau se distinguent par leur **composition** ; la lithosphère et l'asthénosphère, par leur **comportement**.",
+          "method": [
+            "Repérer la profondeur étudiée et ce qu'on sait des ondes ou des séismes à cette profondeur.",
+            "Identifier le comportement : rigide et cassante (séismes) ou déformable (ondes plus lentes).",
+            "Rattacher la zone à une enveloppe de comportement : lithosphère ou asthénosphère.",
+            "Distinguer la composition : croûte ou manteau d'après le Moho, sans la confondre avec le comportement."
+          ],
+          "example": {
+            "statement": "Résultats simplifiés : sous une région, le Moho est à 35 km. Les foyers de séismes s'arrêtent à 100 km, et au-dessous les ondes ralentissent légèrement jusqu'à 250 km. Où se situe une roche à 60 km, puis une roche à 150 km ?",
+            "steps": [
+              "Repérer : deux profondeurs, 60 km et 150 km ; les foyers cessent à 100 km, les ondes ralentissent de 100 à 250 km.",
+              "Identifier le comportement : à 60 km les roches se rompent (rigide) ; à 150 km elles sont déformables, les ondes y ralentissent.",
+              "Rattacher : la roche à 60 km est dans la lithosphère, celle à 150 km dans l'asthénosphère.",
+              "Distinguer : les deux roches sont plus profondes que le Moho (35 km) ; toutes deux sont donc du manteau, l'une rigide, l'autre déformable."
+            ]
+          },
+          "pitfall": "Ne pas confondre lithosphère et croûte, ni asthénosphère et noyau liquide. Contre-exemple : une roche à 60 km sous un continent est du manteau (sous le Moho à 35 km) et pourtant elle est dans la lithosphère, car elle est rigide. L'asthénosphère est solide : le seul liquide du globe est le noyau externe.",
+          "exercise": {
+            "title": "Distinguer lithosphère et asthénosphère",
+            "statement": "Dans cet exercice, tu repères une profondeur, tu identifies le comportement, tu rattaches la zone à une enveloppe et tu distingues la composition.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "De quoi est formée la lithosphère ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Rattacher : la lithosphère comprend la croûte et le haut du manteau, tous deux rigides. Étape 4 — Distinguer la composition et le comportement : elle n'est pas limitée à la croûte, c'est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "De la croûte et de la partie supérieure du manteau",
+                    "correct": true
+                  },
+                  {
+                    "content": "De la croûte seule",
+                    "correct": false
+                  },
+                  {
+                    "content": "De tout le manteau",
+                    "correct": false
+                  },
+                  {
+                    "content": "Du noyau externe liquide",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "L'asthénosphère est un liquide.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Identifier le comportement : l'asthénosphère reste solide, mais elle est déformable. Étape 3 — Rattacher : seul le noyau externe est liquide.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              },
+              {
+                "content": "Relie chaque enveloppe à sa caractéristique.",
+                "question_type": "matching",
+                "explanation": "Étape 2 — Identifier le comportement : rigide et cassante pour la lithosphère, déformable pour l'asthénosphère. Étape 4 — Distinguer : la croûte et le manteau se définissent par leur composition et leurs limites (Moho, Gutenberg).",
+                "answers": [
+                  {
+                    "content": "Lithosphère",
+                    "match": "Rigide et cassante : on y trouve la plupart des foyers"
+                  },
+                  {
+                    "content": "Asthénosphère",
+                    "match": "Solide mais déformable : les ondes y ralentissent"
+                  },
+                  {
+                    "content": "Croûte",
+                    "match": "Enveloppe externe la plus mince"
+                  },
+                  {
+                    "content": "Manteau",
+                    "match": "Enveloppe située entre le Moho et Gutenberg"
+                  }
+                ]
+              },
+              {
+                "content": "Sous un continent, le Moho est à 35 km et la lithosphère s'arrête vers 100 km (résultats simplifiés). Où se trouve une roche située à 60 km de profondeur ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 1 — Repérer : la roche est à 60 km. Étape 4 — Distinguer : 60 km est plus profond que le Moho (35 km), donc c'est du manteau ; c'est moins profond que 100 km, donc elle est dans la lithosphère. La lithosphère contient du manteau : confondre lithosphère et croûte est l'erreur du piège.",
+                "answers": [
+                  {
+                    "content": "Dans le manteau, et dans la lithosphère",
+                    "correct": true
+                  },
+                  {
+                    "content": "Dans la croûte, et dans la lithosphère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans le manteau, et dans l'asthénosphère",
+                    "correct": false
+                  },
+                  {
+                    "content": "Dans la croûte, et dans l'asthénosphère",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La lithosphère s'arrête à 100 km et l'asthénosphère à 250 km de profondeur (résultats simplifiés). Quelle est l'épaisseur de l'asthénosphère, en km ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Repérer : début à 100 km, fin à 250 km. Étape 3 — Rattacher : la zone entre ces profondeurs est l'asthénosphère. Calcul : 250 - 100 = 150 km.",
+                "answers": [
+                  {
+                    "content": "150",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "km"
+              },
+              {
+                "content": "Les ondes sismiques ralentissent légèrement dans l'___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 1 — Repérer : la vitesse des ondes baisse un peu sous la lithosphère. Étape 3 — Rattacher : cette zone de vitesse plus faible est l'asthénosphère, plus déformable.",
+                "answers": [
+                  {
+                    "content": "asthénosphère",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à distinguer la lithosphère et l'asthénosphère.",
+            "questions": [
+              {
+                "content": "Sur quoi repose la distinction entre lithosphère et asthénosphère ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 2 — Identifier le comportement : lithosphère et asthénosphère se distinguent par le comportement (rigide ou déformable), alors que croûte et manteau se distinguent par la composition.",
+                "answers": [
+                  {
+                    "content": "Sur le comportement mécanique des roches",
+                    "correct": true
+                  },
+                  {
+                    "content": "Sur la présence de fer",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sur la distance à l'épicentre",
+                    "correct": false
+                  },
+                  {
+                    "content": "Sur la couleur des roches",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "La lithosphère est ___ et ___, alors que l'asthénosphère est solide mais déformable.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 2 — Identifier le comportement : la lithosphère est rigide et cassante, c'est pourquoi les roches s'y rompent lors d'un séisme.",
+                "answers": [
+                  {
+                    "content": "rigide",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "cassante",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Pense aux roches qui se rompent brutalement au foyer d'un séisme : la première case dit qu'elles ne se plient pas, la seconde qu'elles se brisent."
+              },
+              {
+                "content": "La croûte et la lithosphère sont la même enveloppe.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Distinguer : la lithosphère contient la croûte et aussi le haut du manteau. Elle est donc plus épaisse que la croûte.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "Le gradient géothermique",
+          "figure": null,
+          "remember": "Dans une mine ou un forage, la **température augmente avec la profondeur**. Le **gradient géothermique** est cette augmentation par unité de profondeur : dans la croûte, il est en moyenne d'environ **30 °C par km** (soit 3 °C pour 100 m). Il se calcule par : gradient = (température en profondeur - température en surface) / profondeur. Près de la surface, on peut prévoir : T = température de surface + gradient × profondeur. Cette relation **ne vaut plus** en grande profondeur, car le gradient diminue.",
+          "method": [
+            "Relever la température en surface et la température à la profondeur étudiée.",
+            "Calculer l'augmentation de température : température en profondeur moins température en surface.",
+            "Diviser cette augmentation par la profondeur pour obtenir le gradient, en °C par km.",
+            "Conclure : exprimer le gradient et, si besoin, prévoir une température proche de la surface avec T = T0 + gradient × profondeur."
+          ],
+          "example": {
+            "statement": "Résultats simplifiés : dans un forage fictif, la température est de 20 °C en surface et de 80 °C à 2 km de profondeur. Quel est le gradient ? Quelle température attend-on à 3 km ?",
+            "steps": [
+              "Relever : température en surface = 20 °C ; température à 2 km = 80 °C.",
+              "Calculer l'augmentation : 80 - 20 = 60 °C sur 2 km.",
+              "Diviser : 60 / 2 = 30 °C par km.",
+              "Conclure : le gradient est de 30 °C/km, donc à 3 km on attend T = 20 + 30 × 3 = 110 °C."
+            ]
+          },
+          "pitfall": "Ne pas prolonger le gradient jusqu'au centre du globe. Contre-exemple : à 2 900 km, 30 °C/km × 2 900 km = 87 000 °C, une valeur absurde. Le gradient moyen de 30 °C/km ne vaut que dans les premiers kilomètres ; il diminue ensuite. Pour éviter l'erreur, précise toujours jusqu'à quelle profondeur ton calcul est valable.",
+          "exercise": {
+            "title": "Calculer un gradient géothermique",
+            "statement": "Dans cet exercice, tu relèves des températures de forage, tu calcules l'augmentation, tu divises par la profondeur et tu conclus.",
+            "exercise_type": "fixation",
+            "figure": null,
+            "questions": [
+              {
+                "content": "Dans un forage fictif, la température est de 25 °C en surface et de 55 °C à 1 km de profondeur (résultats simplifiés). Quel est le gradient géothermique, en °C par km ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : 25 °C en surface, 55 °C à 1 km. Étape 2 — Calculer l'augmentation : 55 - 25 = 30 °C. Étape 3 — Diviser : 30 / 1 = 30 °C/km.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "°C/km"
+              },
+              {
+                "content": "Le gradient est de 30 °C/km et la surface est à 25 °C. Quelle est la température à 4 km de profondeur, en °C ? (valable près de la surface)",
+                "question_type": "numeric",
+                "explanation": "Étape 4 — Conclure : T = température de surface + gradient × profondeur = 25 + 30 × 4 = 25 + 120 = 145 °C. Cette prévision n'est valable que dans les premiers kilomètres.",
+                "answers": [
+                  {
+                    "content": "145",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "°C"
+              },
+              {
+                "content": "Au fond d'une mine très profonde, il fait plus chaud qu'en surface.",
+                "question_type": "true_false",
+                "explanation": "Étape 2 — Calculer l'augmentation : avec 30 °C/km, chaque kilomètre de descente ajoute environ 30 °C. Étape 4 — Conclure : la température augmente avec la profondeur, d'où la chaleur au fond des mines profondes.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": true
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Que mesure le gradient géothermique ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 3 — Diviser : on divise l'augmentation de température par la différence de profondeur. Le résultat s'exprime en °C par km. Ce n'est ni une profondeur ni une vitesse.",
+                "answers": [
+                  {
+                    "content": "L'augmentation de température par kilomètre de profondeur",
+                    "correct": true
+                  },
+                  {
+                    "content": "La profondeur atteinte par un forage",
+                    "correct": false
+                  },
+                  {
+                    "content": "La vitesse des ondes P",
+                    "correct": false
+                  },
+                  {
+                    "content": "La température en surface",
+                    "correct": false
+                  }
+                ]
+              },
+              {
+                "content": "Un forage fictif mesure 30 °C en surface et 90 °C en profondeur. Le gradient est de 30 °C/km. À quelle profondeur, en km, est la mesure de 90 °C ?",
+                "question_type": "numeric",
+                "explanation": "Étape 1 — Relever : 30 °C et 90 °C. Étape 2 — Calculer l'augmentation : 90 - 30 = 60 °C. Étape 3 — Diviser : 60 / 30 = 2 km.",
+                "answers": [
+                  {
+                    "content": "2",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "km"
+              },
+              {
+                "content": "On peut calculer la température à 2 900 km en multipliant 30 °C/km par 2 900 km.",
+                "question_type": "true_false",
+                "explanation": "Étape 4 — Conclure : ce calcul donnerait 30 × 2 900 = 87 000 °C, un résultat absurde. Le gradient diminue fortement en profondeur : la relation T = température de surface + gradient × profondeur n'est valable que près de la surface.",
+                "answers": [
+                  {
+                    "content": "Vrai",
+                    "correct": false
+                  },
+                  {
+                    "content": "Faux",
+                    "correct": true
+                  }
+                ]
+              }
+            ]
+          },
+          "practice": {
+            "statement": "Tu t'entraînes à calculer et à interpréter un gradient géothermique.",
+            "questions": [
+              {
+                "content": "Dans la croûte, le gradient géothermique moyen est d'environ ___ °C par ___.",
+                "question_type": "fill_blank",
+                "explanation": "Étape 3 — Diviser : une augmentation de 30 °C pour 1 km de profondeur, soit environ 3 °C pour 100 m, donne 30 °C par km.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true,
+                    "blank": 0
+                  },
+                  {
+                    "content": "km",
+                    "correct": true,
+                    "blank": 1
+                  },
+                  {
+                    "content": "kilomètre",
+                    "correct": true,
+                    "blank": 1
+                  }
+                ],
+                "hint": "Le nombre vaut environ 3 °C pour 100 m, donc dix fois plus pour 1 km ; la seconde case est l'unité de longueur."
+              },
+              {
+                "content": "Un forage fictif mesure 20 °C en surface et 110 °C à 3 km de profondeur. Quel est le gradient géothermique, en °C par km ?",
+                "question_type": "numeric",
+                "explanation": "Étape 2 — Calculer l'augmentation : 110 - 20 = 90 °C. Étape 3 — Diviser : 90 / 3 = 30 °C/km.",
+                "answers": [
+                  {
+                    "content": "30",
+                    "correct": true
+                  }
+                ],
+                "tolerance": 0,
+                "unit": "°C/km"
+              },
+              {
+                "content": "Pourquoi fait-il très chaud au fond d'une mine très profonde ?",
+                "question_type": "single_choice",
+                "explanation": "Étape 4 — Conclure : avec un gradient d'environ 30 °C par km, la roche et l'air sont plus chauds en profondeur. Le Soleil ne chauffe que la surface.",
+                "answers": [
+                  {
+                    "content": "Parce que la température augmente avec la profondeur",
+                    "correct": true
+                  },
+                  {
+                    "content": "Parce que l'air y est plus sec",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que les mineurs y travaillent",
+                    "correct": false
+                  },
+                  {
+                    "content": "Parce que le soleil y chauffe la roche",
+                    "correct": false
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "exercises": [
+        {
+          "title": "Un séisme ressenti dans une mine",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Dans une mine de manganèse fictive, des mineurs ressentent d'abord une petite secousse, puis une plus forte. Une station sismique est à 240 km de l'épicentre. Résultats simplifiés : les ondes P y arrivent 40 s après le séisme, les ondes S 80 s après.",
+          "questions": [
+            {
+              "content": "Une première secousse est ressentie, puis une plus forte. Quelles ondes arrivent d'abord à la station ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer sur le sismogramme l'ordre d'arrivée. Les ondes P sont les plus rapides, donc les premières ; les S, plus lentes, arrivent ensuite. Étape 4 — Conclure : P d'abord. L'erreur tentante est de croire que l'onde la plus forte est la plus rapide.",
+              "answers": [
+                {
+                  "content": "Les ondes P",
+                  "correct": true
+                },
+                {
+                  "content": "Les ondes S",
+                  "correct": false
+                },
+                {
+                  "content": "Les deux en même temps",
+                  "correct": false
+                },
+                {
+                  "content": "Les ondes P, mais après les S",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Quelle est la vitesse des ondes P, en km/s ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Relever : distance 240 km, durée 40 s. Étape 3 — Calculer : vitesse = distance / durée = 240 / 40 = 6 km/s. Étape 4 — Conclure : les P vont à 6 km/s dans ce milieu.",
+              "answers": [
+                {
+                  "content": "6",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km/s"
+            },
+            {
+              "content": "Quelle est la vitesse des ondes S, en km/s ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Relever : distance 240 km, durée 80 s. Étape 3 — Calculer : 240 / 80 = 3 km/s. Étape 4 — Conclure : les S (3 km/s) sont deux fois plus lentes que les P (6 km/s).",
+              "answers": [
+                {
+                  "content": "3",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km/s"
+            },
+            {
+              "content": "Combien de secondes séparent l'arrivée des ondes P de celle des ondes S ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Repérer les deux arrivées : P à 40 s, S à 80 s. Étape 2 — Relever l'écart : 80 - 40 = 40 s. Plus la station est loin, plus cet écart est grand.",
+              "answers": [
+                {
+                  "content": "40",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "s"
+            },
+            {
+              "content": "L'épicentre est le point de la surface situé à la verticale du foyer.",
+              "question_type": "true_false",
+              "explanation": "Méthode : le foyer est en profondeur, à l'endroit où les roches se rompent ; l'épicentre est le point de la surface à sa verticale. C'est donc l'épicentre, et non le foyer, qui est près de la surface.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": true
+                },
+                {
+                  "content": "Faux",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une station située de l'autre côté du globe n'enregistre aucune onde S après ce séisme. Qu'en déduit-on ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer qu'il n'y a pas d'onde S. Étape 4 — Conclure : une onde S absente est arrêtée par un liquide. Sur ce trajet à travers le globe, le liquide est le noyau externe. Une absence n'est pas une lenteur : c'est le piège de la notion sur les ondes.",
+              "answers": [
+                {
+                  "content": "Les ondes S ont rencontré un milieu liquide, le noyau externe",
+                  "correct": true
+                },
+                {
+                  "content": "Les ondes S ont été plus rapides que les P",
+                  "correct": false
+                },
+                {
+                  "content": "Le séisme n'a émis que des ondes P",
+                  "correct": false
+                },
+                {
+                  "content": "La station est en panne, on ne peut rien déduire",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Un forage près d'une carrière",
+          "exercise_type": "fixation",
+          "figure": null,
+          "statement": "Près d'une carrière de granite fictive, une entreprise réalise un forage de 1 500 m. Résultats simplifiés : la température est de 22 °C en surface, 37 °C à 500 m, 52 °C à 1 000 m et 67 °C à 1 500 m.",
+          "questions": [
+            {
+              "content": "Quel est le gradient géothermique mesuré dans ce forage, en °C par km ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 1 — Relever : 22 °C en surface, 52 °C à 1 000 m, soit 1 km. Étape 2 — Calculer l'augmentation : 52 - 22 = 30 °C. Étape 3 — Diviser : 30 / 1 = 30 °C/km. Étape 4 — Conclure : le gradient est de 30 °C/km, valeur moyenne de la croûte.",
+              "answers": [
+                {
+                  "content": "30",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "°C/km"
+            },
+            {
+              "content": "Avec ce gradient, quelle température attend-on à 2 km de profondeur, en °C ? (valable près de la surface)",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 4 — Conclure : T = 22 + 30 × 2 = 22 + 60 = 82 °C. Cette relation reste valable dans les premiers kilomètres seulement.",
+              "answers": [
+                {
+                  "content": "82",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "°C"
+            },
+            {
+              "content": "Dans quelle enveloppe du globe se trouve ce forage de 1 500 m ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 4 — Nommer l'enveloppe par sa profondeur. Le Moho est à plusieurs dizaines de kilomètres ; 1,5 km est très au-dessus. Le forage est donc dans la croûte.",
+              "answers": [
+                {
+                  "content": "Dans la croûte",
+                  "correct": true
+                },
+                {
+                  "content": "Dans le manteau",
+                  "correct": false
+                },
+                {
+                  "content": "Dans le noyau externe",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la graine",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "On peut supposer le même gradient de 30 °C/km jusqu'au centre du globe.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 4 — Conclure avec prudence. Sur 2 900 km, ce gradient donnerait 87 000 °C, une valeur absurde. Le gradient diminue en profondeur : on ne l'utilise que près de la surface.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Remets dans l'ordre les étapes pour calculer un gradient géothermique.",
+              "question_type": "ordering",
+              "explanation": "Méthode : on suit les étapes de la notion dans l'ordre. Étape 1 — Relever les températures. Étape 2 — Calculer l'augmentation. Étape 3 — Diviser par la profondeur. Étape 4 — Conclure. On ne peut pas diviser avant d'avoir calculé l'augmentation.",
+              "answers": [
+                {
+                  "content": "Relever la température en surface et en profondeur"
+                },
+                {
+                  "content": "Calculer l'augmentation de température"
+                },
+                {
+                  "content": "Diviser l'augmentation par la profondeur"
+                },
+                {
+                  "content": "Conclure en °C par km"
+                }
+              ]
+            },
+            {
+              "content": "Quelles conclusions sont justifiées par les mesures du forage ?",
+              "question_type": "multiple_correct_2",
+              "explanation": "Méthode : Étape 2 — Calculer l'augmentation sur chaque tranche : 37 - 22 = 15 °C, 52 - 37 = 15 °C, 67 - 52 = 15 °C. La température augmente donc de 15 °C tous les 500 m. Étape 4 — Conclure seulement ce que les données permettent : rien ne dit que le gradient reste le même jusqu'au noyau.",
+              "answers": [
+                {
+                  "content": "La température augmente avec la profondeur",
+                  "correct": true
+                },
+                {
+                  "content": "La température augmente d'environ 15 °C tous les 500 m",
+                  "correct": true
+                },
+                {
+                  "content": "La température diminue quand on descend",
+                  "correct": false
+                },
+                {
+                  "content": "La température vaut 0 °C à 1 000 m",
+                  "correct": false
+                },
+                {
+                  "content": "Le gradient est le même jusqu'au noyau",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Lire les sismogrammes d'un grand séisme",
+          "exercise_type": "evaluation",
+          "figure": "enveloppes-du-globe",
+          "statement": "Après un grand tremblement de terre, des stations du monde entier enregistrent les ondes. Résultats simplifiés : la vitesse des ondes P passe de 6 à 8 km/s à 30 km de profondeur ; elle chute de 13 à 8 km/s à 2 900 km ; elle remonte à 11 km/s à 5 100 km. Les ondes S existent jusqu'à 2 900 km et ne sont plus enregistrées au-delà.",
+          "questions": [
+            {
+              "content": "Comment s'appelle la discontinuité située à 30 km, où la vitesse des P passe de 6 à 8 km/s ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (notion sur les discontinuités) : Étape 1 — Lire le profil. Étape 2 — Repérer le saut à 30 km. Étape 4 — Nommer d'après la profondeur : un saut près de la surface sépare la croûte du manteau, c'est le Moho. Gutenberg est à 2 900 km et Lehmann à 5 100 km.",
+              "answers": [
+                {
+                  "content": "Le Moho",
+                  "correct": true
+                },
+                {
+                  "content": "La discontinuité de Gutenberg",
+                  "correct": false
+                },
+                {
+                  "content": "La discontinuité de Lehmann",
+                  "correct": false
+                },
+                {
+                  "content": "La limite lithosphère - asthénosphère",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Relie chaque profondeur à la discontinuité qui s'y trouve.",
+              "question_type": "matching",
+              "explanation": "Méthode : Étape 2 — Repérer les trois sauts de vitesse. Étape 4 — Nommer chacun d'après sa profondeur : 30 km est le Moho (croûte - manteau), 2 900 km est Gutenberg (manteau - noyau externe), 5 100 km est Lehmann (noyau externe - graine).",
+              "answers": [
+                {
+                  "content": "30 km",
+                  "match": "Moho"
+                },
+                {
+                  "content": "2 900 km",
+                  "match": "Gutenberg"
+                },
+                {
+                  "content": "5 100 km",
+                  "match": "Lehmann"
+                }
+              ]
+            },
+            {
+              "content": "Pourquoi peut-on dire que le noyau externe est liquide ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 3 — Interpréter : les ondes S sont arrêtées par un liquide, et la chute de vitesse des P marque un changement de milieu. Étape 4 — Nommer : on en déduit un noyau externe liquide. Les P accélèrent au contraire à 5 100 km, à l'entrée de la graine.",
+              "answers": [
+                {
+                  "content": "Parce que les ondes S ne sont plus enregistrées et que les ondes P ralentissent",
+                  "correct": true
+                },
+                {
+                  "content": "Parce que les ondes P y accélèrent",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que les ondes S y vont plus vite",
+                  "correct": false
+                },
+                {
+                  "content": "Parce que le noyau est plus chaud que le manteau",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Une onde P traverse la croûte de 30 km d'épaisseur à 6 km/s. Combien de secondes dure la traversée ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Relever : distance 30 km, vitesse 6 km/s. Étape 3 — Calculer : durée = distance / vitesse = 30 / 6 = 5 s. Étape 4 — Conclure : la traversée de la croûte dure 5 s.",
+              "answers": [
+                {
+                  "content": "5",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "s"
+            },
+            {
+              "content": "Une onde P traverse le noyau externe, entre 2 900 km et 5 100 km, à 8 km/s. Combien de secondes dure la traversée ?",
+              "question_type": "numeric",
+              "explanation": "Méthode : Étape 2 — Relever : épaisseur du noyau externe = 5 100 - 2 900 = 2 200 km ; vitesse 8 km/s. Étape 3 — Calculer : durée = 2 200 / 8 = 275 s. Étape 4 — Conclure : la traversée dure 275 s.",
+              "answers": [
+                {
+                  "content": "275",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "s"
+            },
+            {
+              "content": "La graine, au centre du globe, est ___, comme le montre l'accélération des ondes P à 5 100 km.",
+              "question_type": "fill_blank",
+              "explanation": "Méthode : Étape 3 — Interpréter : la vitesse des P remonte à 5 100 km, le milieu redevient rigide. Étape 4 — Nommer : la graine est solide. Le noyau externe, lui, est liquide.",
+              "answers": [
+                {
+                  "content": "solide",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Quelles affirmations sont vraies ?",
+              "question_type": "multiple_correct_3",
+              "explanation": "Méthode : Étape 4 — Nommer et vérifier chaque affirmation. Les trois vraies viennent du profil étudié. Les fausses : les S sont arrêtées dans le noyau externe liquide ; le Moho est proche de la surface (30 km ici) ; la lithosphère est rigide et appartient à la croûte et au haut du manteau.",
+              "answers": [
+                {
+                  "content": "La croûte est l'enveloppe la plus mince",
+                  "correct": true
+                },
+                {
+                  "content": "La discontinuité de Gutenberg sépare le manteau du noyau externe",
+                  "correct": true
+                },
+                {
+                  "content": "La graine est solide",
+                  "correct": true
+                },
+                {
+                  "content": "Les ondes S traversent le noyau externe",
+                  "correct": false
+                },
+                {
+                  "content": "Le Moho se trouve vers 2 900 km",
+                  "correct": false
+                },
+                {
+                  "content": "La lithosphère est identique au noyau externe",
+                  "correct": false
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "Une mine profonde et un séisme ressenti",
+          "exercise_type": "evaluation",
+          "figure": null,
+          "statement": "Une mine d'or fictive atteint 3 km de profondeur. Résultats simplifiés : la température est de 25 °C en surface et le gradient géothermique de la région est de 30 °C par km. Un séisme est ressenti dans la mine : le foyer est à 20 km de profondeur. À la station de la ville, les ondes S arrivent 30 s après les ondes P. Les ondes P vont à 6 km/s et les ondes S à 3 km/s. Sous cette région, le Moho est à 35 km et la lithosphère s'arrête vers 100 km.",
+          "questions": [
+            {
+              "content": "Quelle température attend-on au fond de la mine, en °C ?",
+              "question_type": "numeric",
+              "explanation": "Méthode (notion sur le gradient) : Étape 1 — Relever : surface 25 °C, gradient 30 °C/km, profondeur 3 km. Étape 2 — Calculer l'augmentation : 30 × 3 = 90 °C. Étape 4 — Conclure : T = 25 + 90 = 115 °C. Le calcul est valable à 3 km, près de la surface.",
+              "answers": [
+                {
+                  "content": "115",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "°C"
+            },
+            {
+              "content": "Dans quelle enveloppe (par sa composition) se situe le fond de la mine, à 3 km ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode : Étape 1 — Repérer la profondeur : 3 km. Étape 4 — Distinguer la composition : le Moho est à 35 km, donc 3 km est au-dessus, dans la croûte. L'asthénosphère est un manteau déformable situé sous 100 km.",
+              "answers": [
+                {
+                  "content": "Dans la croûte",
+                  "correct": true
+                },
+                {
+                  "content": "Dans le manteau",
+                  "correct": false
+                },
+                {
+                  "content": "Dans l'asthénosphère",
+                  "correct": false
+                },
+                {
+                  "content": "Dans le noyau externe",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "À quelle distance de la station se trouve l'épicentre, en km ? Les ondes S arrivent 30 s après les ondes P.",
+              "question_type": "numeric",
+              "explanation": "Méthode (notion sur les ondes) : Étape 3 — Calculer : si d est la distance, une onde P arrive après d / 6 s et une onde S après d / 3 s. L'écart vaut d / 3 - d / 6 = d / 6. Étape 4 — Conclure : d / 6 = 30 s, donc d = 180 km. Vérification : P : 180 / 6 = 30 s ; S : 180 / 3 = 60 s ; écart = 30 s.",
+              "answers": [
+                {
+                  "content": "180",
+                  "correct": true
+                }
+              ],
+              "tolerance": 0,
+              "unit": "km"
+            },
+            {
+              "content": "Le foyer est à 20 km de profondeur. Dans quelle enveloppe de comportement se trouve-t-il ?",
+              "question_type": "single_choice",
+              "explanation": "Méthode (notion sur la lithosphère) : Étape 1 — Repérer 20 km. Étape 2 — Identifier le comportement : les roches se rompent à cette profondeur, elles sont rigides. Étape 3 — Rattacher : 20 km est moins que 100 km, c'est la lithosphère. Étape 4 — Distinguer : c'est aussi de la croûte, puisque 20 km est au-dessus du Moho (35 km).",
+              "answers": [
+                {
+                  "content": "Dans la lithosphère, rigide et cassante",
+                  "correct": true
+                },
+                {
+                  "content": "Dans l'asthénosphère, déformable",
+                  "correct": false
+                },
+                {
+                  "content": "Dans le noyau externe, liquide",
+                  "correct": false
+                },
+                {
+                  "content": "Dans la graine, solide",
+                  "correct": false
+                }
+              ]
+            },
+            {
+              "content": "Avec un gradient de 30 °C/km, la température à 2 900 km de profondeur serait d'environ 87 000 °C : ce résultat est plausible.",
+              "question_type": "true_false",
+              "explanation": "Méthode : Étape 4 — Conclure avec prudence : le calcul 30 × 2 900 = 87 000 °C est absurde. Le gradient de 30 °C/km n'est valable que près de la surface ; en profondeur, il diminue fortement.",
+              "answers": [
+                {
+                  "content": "Vrai",
+                  "correct": false
+                },
+                {
+                  "content": "Faux",
+                  "correct": true
+                }
+              ]
+            },
+            {
+              "content": "Explique en quelques lignes comment les ondes P et S permettent de montrer que le noyau externe est liquide.",
+              "question_type": "written",
+              "points": 3,
+              "starter": "Les ondes S ne traversent pas…",
+              "criteria": [
+                "Il cite la disparition des ondes S au-delà de 2 900 km",
+                "Il explique qu'une onde S ne traverse pas un liquide",
+                "Il cite le ralentissement des ondes P",
+                "Il conclut : noyau externe liquide, limite de Gutenberg"
+              ],
+              "explanation": "Corrigé modèle : Les ondes S sont enregistrées jusqu'à 2 900 km, puis elles disparaissent. Or une onde S ne se propage pas dans un liquide. Au même endroit, les ondes P ralentissent brutalement, ce qui montre un changement de milieu. On en déduit que, sous la discontinuité de Gutenberg, le noyau externe est liquide. Barème sur 3 points : disparition des S (1 point), explication par le liquide (1 point), P qui ralentissent et conclusion (1 point). Cette réponse suit les étapes de la méthode : lire, repérer, interpréter, nommer.",
+              "answers": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
